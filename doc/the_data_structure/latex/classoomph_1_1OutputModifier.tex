@@ -1,0 +1,93 @@
+\doxysection{oomph\+::Output\+Modifier Class Reference}
+\hypertarget{classoomph_1_1OutputModifier}{}\label{classoomph_1_1OutputModifier}\index{oomph::OutputModifier@{oomph::OutputModifier}}
+
+
+A base class that contains a single virtual member function\+: The () operator that may be used to modify the output in.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
+
+Inheritance diagram for oomph\+::Output\+Modifier\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1OutputModifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OutputModifier_ab7e4b4d9e455cc93204160e70e2d50f6}{Output\+Modifier}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1OutputModifier_aa8a586ce54aeae7d1d0d5a075dd5b172}{\texorpdfstring{$\sim$}{\string~}\+Output\+Modifier}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OutputModifier_ae2d5a2d19865858377b5113ca84aa423}{operator()}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{stream}})
+\begin{DoxyCompactList}\small\item\em Function that will be called before output from an Oomph\+Output object. It returns a bool (true in this default implementation) to indicate that output should be continued. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A base class that contains a single virtual member function\+: The () operator that may be used to modify the output in. 
+
+\hypertarget{classoomph_1_1OutputModifier_autotoc_md6}{}\doxysubsection{\texorpdfstring{Oomph\+Output objects. The default implementation}{OomphOutput objects. The default implementation}}\label{classoomph_1_1OutputModifier_autotoc_md6}
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00345}{345}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OutputModifier_ab7e4b4d9e455cc93204160e70e2d50f6}\label{classoomph_1_1OutputModifier_ab7e4b4d9e455cc93204160e70e2d50f6} 
+\index{oomph::OutputModifier@{oomph::OutputModifier}!OutputModifier@{OutputModifier}}
+\index{OutputModifier@{OutputModifier}!oomph::OutputModifier@{oomph::OutputModifier}}
+\doxysubsubsection{\texorpdfstring{OutputModifier()}{OutputModifier()}}
+{\footnotesize\ttfamily oomph\+::\+Output\+Modifier\+::\+Output\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00349}{349}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+\Hypertarget{classoomph_1_1OutputModifier_aa8a586ce54aeae7d1d0d5a075dd5b172}\label{classoomph_1_1OutputModifier_aa8a586ce54aeae7d1d0d5a075dd5b172} 
+\index{oomph::OutputModifier@{oomph::OutputModifier}!````~OutputModifier@{\texorpdfstring{$\sim$}{\string~}OutputModifier}}
+\index{````~OutputModifier@{\texorpdfstring{$\sim$}{\string~}OutputModifier}!oomph::OutputModifier@{oomph::OutputModifier}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}OutputModifier()}{\string~OutputModifier()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Output\+Modifier\+::\texorpdfstring{$\sim$}{\string~}\+Output\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00352}{352}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1OutputModifier_ae2d5a2d19865858377b5113ca84aa423}\label{classoomph_1_1OutputModifier_ae2d5a2d19865858377b5113ca84aa423} 
+\index{oomph::OutputModifier@{oomph::OutputModifier}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::OutputModifier@{oomph::OutputModifier}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Output\+Modifier\+::operator() (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function that will be called before output from an Oomph\+Output object. It returns a bool (true in this default implementation) to indicate that output should be continued. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a982af85269a497f384cdff7baf9487a1}{oomph\+::\+MPIOutput\+Modifier}}.
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00357}{357}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__definitions_8h}{oomph\+\_\+definitions.\+h}}\end{DoxyCompactItemize}

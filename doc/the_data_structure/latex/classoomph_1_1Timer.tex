@@ -1,0 +1,222 @@
+\doxysection{oomph\+::Timer Class Reference}
+\hypertarget{classoomph_1_1Timer}{}\label{classoomph_1_1Timer}\index{oomph::Timer@{oomph::Timer}}
+
+
+\doxylink{classoomph_1_1Timer}{Timer}.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Timer_a8abb0baeaa25a08ac1b31c1147aac92e}{Timer}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+timer}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify number of timers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Timer_aee7db2917caed661ba067c8d10b7e033}{start}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em (Re-\/)start i-\/th timer \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Timer_afa34218cf8b9badba4f3c59ce004962b}{halt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Halt i-\/th timer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Timer_a77dfee0aa6e15ec95095f76a1f1b91c0}{cumulative\+\_\+time}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Report time accumulated by i-\/th timer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Timer_ad2980c89ce68bb41d42328e72ce96db4}{reset}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Reset i-\/th timer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Timer_aed19397ab3c3d4449cbc3119b854fbda}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset all timers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Timer_a8233e0edd4c33fece829f33aff6c8e5c}{set\+\_\+ntimers}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ntimers}})
+\begin{DoxyCompactList}\small\item\em Set number of timings that can be recorded in parallel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{clock\+\_\+t}} $>$ \mbox{\hyperlink{classoomph_1_1Timer_a66035221f55db1dc65b8fb89ed0c831d}{Timing}}
+\begin{DoxyCompactList}\small\item\em Cumulative timings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{clock\+\_\+t}} $>$ \mbox{\hyperlink{classoomph_1_1Timer_ab3e1287373e9c5ae81731dd57c5db66f}{Start\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Start times of active timers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1Timer}{Timer}. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00365}{365}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1Timer_a8abb0baeaa25a08ac1b31c1147aac92e}\label{classoomph_1_1Timer_a8abb0baeaa25a08ac1b31c1147aac92e} 
+\index{oomph::Timer@{oomph::Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily oomph\+::\+Timer\+::\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+timer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Specify number of timers. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00369}{369}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00409}{set\+\_\+ntimers()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1Timer_a77dfee0aa6e15ec95095f76a1f1b91c0}\label{classoomph_1_1Timer_a77dfee0aa6e15ec95095f76a1f1b91c0} 
+\index{oomph::Timer@{oomph::Timer}!cumulative\_time@{cumulative\_time}}
+\index{cumulative\_time@{cumulative\_time}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{cumulative\_time()}{cumulative\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Timer\+::cumulative\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Report time accumulated by i-\/th timer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00387}{387}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{Timing}}.
+
+\Hypertarget{classoomph_1_1Timer_afa34218cf8b9badba4f3c59ce004962b}\label{classoomph_1_1Timer_afa34218cf8b9badba4f3c59ce004962b} 
+\index{oomph::Timer@{oomph::Timer}!halt@{halt}}
+\index{halt@{halt}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{halt()}{halt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Timer\+::halt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Halt i-\/th timer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00381}{381}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00420}{Start\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{Timing}}.
+
+\Hypertarget{classoomph_1_1Timer_aed19397ab3c3d4449cbc3119b854fbda}\label{classoomph_1_1Timer_aed19397ab3c3d4449cbc3119b854fbda} 
+\index{oomph::Timer@{oomph::Timer}!reset@{reset}}
+\index{reset@{reset}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Timer\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset all timers. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00399}{399}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{Timing}}.
+
+\Hypertarget{classoomph_1_1Timer_ad2980c89ce68bb41d42328e72ce96db4}\label{classoomph_1_1Timer_ad2980c89ce68bb41d42328e72ce96db4} 
+\index{oomph::Timer@{oomph::Timer}!reset@{reset}}
+\index{reset@{reset}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Timer\+::reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset i-\/th timer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00393}{393}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{Timing}}.
+
+\Hypertarget{classoomph_1_1Timer_a8233e0edd4c33fece829f33aff6c8e5c}\label{classoomph_1_1Timer_a8233e0edd4c33fece829f33aff6c8e5c} 
+\index{oomph::Timer@{oomph::Timer}!set\_ntimers@{set\_ntimers}}
+\index{set\_ntimers@{set\_ntimers}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{set\_ntimers()}{set\_ntimers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Timer\+::set\+\_\+ntimers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ntimers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set number of timings that can be recorded in parallel. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00409}{409}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00420}{Start\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{Timing}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00369}{Timer()}}.
+
+\Hypertarget{classoomph_1_1Timer_aee7db2917caed661ba067c8d10b7e033}\label{classoomph_1_1Timer_aee7db2917caed661ba067c8d10b7e033} 
+\index{oomph::Timer@{oomph::Timer}!start@{start}}
+\index{start@{start}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Timer\+::start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Re-\/)start i-\/th timer 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00375}{375}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00420}{Start\+\_\+time}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1Timer_ab3e1287373e9c5ae81731dd57c5db66f}\label{classoomph_1_1Timer_ab3e1287373e9c5ae81731dd57c5db66f} 
+\index{oomph::Timer@{oomph::Timer}!Start\_time@{Start\_time}}
+\index{Start\_time@{Start\_time}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{Start\_time}{Start\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{clock\+\_\+t}}$>$ oomph\+::\+Timer\+::\+Start\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start times of active timers. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00420}{420}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00381}{halt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00409}{set\+\_\+ntimers()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00375}{start()}}.
+
+\Hypertarget{classoomph_1_1Timer_a66035221f55db1dc65b8fb89ed0c831d}\label{classoomph_1_1Timer_a66035221f55db1dc65b8fb89ed0c831d} 
+\index{oomph::Timer@{oomph::Timer}!Timing@{Timing}}
+\index{Timing@{Timing}!oomph::Timer@{oomph::Timer}}
+\doxysubsubsection{\texorpdfstring{Timing}{Timing}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{clock\+\_\+t}}$>$ oomph\+::\+Timer\+::\+Timing\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cumulative timings. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00417}{417}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00387}{cumulative\+\_\+time()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00381}{halt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00399}{reset()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00393}{reset()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00409}{set\+\_\+ntimers()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__utilities_8h}{oomph\+\_\+utilities.\+h}}\end{DoxyCompactItemize}

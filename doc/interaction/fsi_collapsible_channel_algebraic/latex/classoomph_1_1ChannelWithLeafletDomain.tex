@@ -1,0 +1,831 @@
+\doxysection{oomph\+::Channel\+With\+Leaflet\+Domain Class Reference}
+\hypertarget{classoomph_1_1ChannelWithLeafletDomain}{}\label{classoomph_1_1ChannelWithLeafletDomain}\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+
+
+Rectangular domain with a leaflet blocking the lower half.  
+
+
+
+
+{\ttfamily \#include $<$channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Channel\+With\+Leaflet\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ChannelWithLeafletDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e}{Channel\+With\+Leaflet\+Domain}} (Geom\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5b84ffb4aa9c9b53cafdd14ce1b0967e}{leaflet\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}{lleft}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}{lright}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}{hleaflet}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}{htot}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&nleft, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&nright, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny2}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510}{\texorpdfstring{$\sim$}{\string~}\+Channel\+With\+Leaflet\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}{htot}} ()
+\begin{DoxyCompactList}\small\item\em Total height of domain (width of channel) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}{hleaflet}} ()
+\begin{DoxyCompactList}\small\item\em Height of leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}{lleft}} ()
+\begin{DoxyCompactList}\small\item\em Length of domain to the left of leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}{lright}} ()
+\begin{DoxyCompactList}\small\item\em Length of domain to the right of leaflet. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a5b84ffb4aa9c9b53cafdd14ce1b0967e}{leaflet\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{imacro}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{idirect}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}})
+\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610}{macro\+\_\+bound\+\_\+\+I\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4}{macro\+\_\+bound\+\_\+\+I\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3}{macro\+\_\+bound\+\_\+\+I\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093}{macro\+\_\+bound\+\_\+\+I\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460}{macro\+\_\+bound\+\_\+\+II\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859}{macro\+\_\+bound\+\_\+\+II\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e}{macro\+\_\+bound\+\_\+\+II\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257}{macro\+\_\+bound\+\_\+\+II\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9}{macro\+\_\+bound\+\_\+\+III\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a}{macro\+\_\+bound\+\_\+\+III\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834}{macro\+\_\+bound\+\_\+\+III\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3}{macro\+\_\+bound\+\_\+\+III\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136}{macro\+\_\+bound\+\_\+\+IV\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f}{macro\+\_\+bound\+\_\+\+IV\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b}{macro\+\_\+bound\+\_\+\+IV\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c}{macro\+\_\+bound\+\_\+\+IV\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{j}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599}{slanted\+\_\+bound\+\_\+up}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68}{Lright}}
+\begin{DoxyCompactList}\small\item\em Length of the domain to the right of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd}{Lleft}}
+\begin{DoxyCompactList}\small\item\em Length of the domain to the left of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139}{Hleaflet}}
+\begin{DoxyCompactList}\small\item\em Lagrangian coordinate at end of leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98}{Htot}}
+\begin{DoxyCompactList}\small\item\em Total width of the channel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15}{Nright}}
+\begin{DoxyCompactList}\small\item\em Number of macro element columnns to the right of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532}{Nleft}}
+\begin{DoxyCompactList}\small\item\em Number of macro element columns to the left of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe}{Ny1}}
+\begin{DoxyCompactList}\small\item\em Number of macro element rows up to the end of the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752}{Ny2}}
+\begin{DoxyCompactList}\small\item\em Number of macro element rows above the leaflet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333}{X\+\_\+0}}
+\begin{DoxyCompactList}\small\item\em Center of the domain \+: origin of the leaflet, extracted from Geom\+Object and stored for fast access. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb}{Leaflet\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to leaflet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Rectangular domain with a leaflet blocking the lower half. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00040}{40}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e}\label{classoomph_1_1ChannelWithLeafletDomain_a6cca7d06136de0c76facec2a92b0939e} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!ChannelWithLeafletDomain@{ChannelWithLeafletDomain}}
+\index{ChannelWithLeafletDomain@{ChannelWithLeafletDomain}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{ChannelWithLeafletDomain()}{ChannelWithLeafletDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain (\begin{DoxyParamCaption}\item[{Geom\+Object \texorpdfstring{$\ast$}{*}}]{leaflet\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{lleft,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{lright,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{hleaflet,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{htot,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nleft,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nright,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{51}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00100}{hleaflet()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00094}{htot()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00118}{leaflet\+\_\+pt()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00106}{lleft()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00112}{lright()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{Ny2}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510}\label{classoomph_1_1ChannelWithLeafletDomain_a7f00e3d9ed53ca70519671446fe60510} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!````~ChannelWithLeafletDomain@{\texorpdfstring{$\sim$}{\string~}ChannelWithLeafletDomain}}
+\index{````~ChannelWithLeafletDomain@{\texorpdfstring{$\sim$}{\string~}ChannelWithLeafletDomain}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ChannelWithLeafletDomain()}{\string~ChannelWithLeafletDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Channel\+With\+Leaflet\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00091}{91}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1}\label{classoomph_1_1ChannelWithLeafletDomain_af70ada72d505ebea468d1000b04c20e1} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!hleaflet@{hleaflet}}
+\index{hleaflet@{hleaflet}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{hleaflet()}{hleaflet()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::hleaflet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Height of leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00100}{100}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab}\label{classoomph_1_1ChannelWithLeafletDomain_aaf195c688423473ed97af61f8a1467ab} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!htot@{htot}}
+\index{htot@{htot}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{htot()}{htot()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::htot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total height of domain (width of channel) 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00094}{94}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a5b84ffb4aa9c9b53cafdd14ce1b0967e}\label{classoomph_1_1ChannelWithLeafletDomain_a5b84ffb4aa9c9b53cafdd14ce1b0967e} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!leaflet\_pt@{leaflet\_pt}}
+\index{leaflet\_pt@{leaflet\_pt}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{leaflet\_pt()}{leaflet\_pt()}}
+{\footnotesize\ttfamily Geom\+Object \texorpdfstring{$\ast$}{*}\& oomph\+::\+Channel\+With\+Leaflet\+Domain\+::leaflet\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00118}{118}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49}\label{classoomph_1_1ChannelWithLeafletDomain_a5538092062970dbd2f02218a05639d49} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!lleft@{lleft}}
+\index{lleft@{lleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{lleft()}{lleft()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::lleft (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Length of domain to the left of leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00106}{106}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c}\label{classoomph_1_1ChannelWithLeafletDomain_aee74846110e70cd5538386e1ccb0ce7c} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!lright@{lright}}
+\index{lright@{lright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{lright()}{lright()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::lright (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Length of domain to the right of leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00112}{112}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093}\label{classoomph_1_1ChannelWithLeafletDomain_ac0bc6edb7d09bfdb310de99f846f5093} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_E@{macro\_bound\_I\_E}}
+\index{macro\_bound\_I\_E@{macro\_bound\_I\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_E()}{macro\_bound\_I\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in lower left region. Final expression of r
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{411}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00495}{macro\+\_\+bound\+\_\+\+I\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00517}{macro\+\_\+bound\+\_\+\+I\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610}\label{classoomph_1_1ChannelWithLeafletDomain_a08d97680e95f42a385a869d5c384e610} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_N@{macro\_bound\_I\_N}}
+\index{macro\_bound\_I\_N@{macro\_bound\_I\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_N()}{macro\_bound\_I\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in lower left region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00495}{495}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4}\label{classoomph_1_1ChannelWithLeafletDomain_a20898c8b6747cf01e3e92e4a5c6ff5e4} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_S@{macro\_bound\_I\_S}}
+\index{macro\_bound\_I\_S@{macro\_bound\_I\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_S()}{macro\_bound\_I\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in lower left region. Find the coordinates of the two corners of the south boundary
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00517}{517}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3}\label{classoomph_1_1ChannelWithLeafletDomain_a15e43fe342a04c8466a43112e3a48ff3} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_I\_W@{macro\_bound\_I\_W}}
+\index{macro\_bound\_I\_W@{macro\_bound\_I\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_I\_W()}{macro\_bound\_I\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in lower left region. Final expression of r
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{453}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00495}{macro\+\_\+bound\+\_\+\+I\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00517}{macro\+\_\+bound\+\_\+\+I\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257}\label{classoomph_1_1ChannelWithLeafletDomain_a9083a5ac562feb1cd33d78e6cc18b257} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_E@{macro\_bound\_II\_E}}
+\index{macro\_bound\_II\_E@{macro\_bound\_II\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_E()}{macro\_bound\_II\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in lower right region. Final expression of r
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{546}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00633}{macro\+\_\+bound\+\_\+\+II\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00655}{macro\+\_\+bound\+\_\+\+II\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460}\label{classoomph_1_1ChannelWithLeafletDomain_a1402c0d3fe42a8ffd6c9fb1d6df9d460} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_N@{macro\_bound\_II\_N}}
+\index{macro\_bound\_II\_N@{macro\_bound\_II\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_N()}{macro\_bound\_II\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in lower right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00633}{633}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859}\label{classoomph_1_1ChannelWithLeafletDomain_a565166bede89908189cc8e426a898859} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_S@{macro\_bound\_II\_S}}
+\index{macro\_bound\_II\_S@{macro\_bound\_II\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_S()}{macro\_bound\_II\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in lower right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00655}{655}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e}\label{classoomph_1_1ChannelWithLeafletDomain_afa35af75e7a60d3e5d4adf6a8097825e} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_II\_W@{macro\_bound\_II\_W}}
+\index{macro\_bound\_II\_W@{macro\_bound\_II\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_II\_W()}{macro\_bound\_II\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in lower right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{589}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00633}{macro\+\_\+bound\+\_\+\+II\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00655}{macro\+\_\+bound\+\_\+\+II\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3}\label{classoomph_1_1ChannelWithLeafletDomain_af17451c66c723d841aa6f16505c51be3} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_E@{macro\_bound\_III\_E}}
+\index{macro\_bound\_III\_E@{macro\_bound\_III\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_E()}{macro\_bound\_III\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+III\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in upper left region. Final expression of r
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{705}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{Ny2}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00793}{macro\+\_\+bound\+\_\+\+III\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00815}{macro\+\_\+bound\+\_\+\+III\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9}\label{classoomph_1_1ChannelWithLeafletDomain_a8b7f88fb218ceb09f0fde09ba22cd5b9} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_N@{macro\_bound\_III\_N}}
+\index{macro\_bound\_III\_N@{macro\_bound\_III\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_N()}{macro\_bound\_III\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+III\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in upper left region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00793}{793}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a}\label{classoomph_1_1ChannelWithLeafletDomain_aacdeafe878caadb3e6d0cf98a87df25a} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_S@{macro\_bound\_III\_S}}
+\index{macro\_bound\_III\_S@{macro\_bound\_III\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_S()}{macro\_bound\_III\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+III\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in upper left region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00815}{815}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834}\label{classoomph_1_1ChannelWithLeafletDomain_a06ccb5b6d160c3a31acf80174381a834} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_III\_W@{macro\_bound\_III\_W}}
+\index{macro\_bound\_III\_W@{macro\_bound\_III\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_III\_W()}{macro\_bound\_III\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+III\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in upper left region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{749}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{Lleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{Ny2}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00793}{macro\+\_\+bound\+\_\+\+III\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00815}{macro\+\_\+bound\+\_\+\+III\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c}\label{classoomph_1_1ChannelWithLeafletDomain_a16c8d718f5da2e6d9d73fe0455bacc0c} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_E@{macro\_bound\_IV\_E}}
+\index{macro\_bound\_IV\_E@{macro\_bound\_IV\_E}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_E()}{macro\_bound\_IV\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+IV\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for eastern boundary in upper right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{844}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{Ny2}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00932}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00954}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136}\label{classoomph_1_1ChannelWithLeafletDomain_ae8d9410d270e27677cb89c5dfe9cc136} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_N@{macro\_bound\_IV\_N}}
+\index{macro\_bound\_IV\_N@{macro\_bound\_IV\_N}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_N()}{macro\_bound\_IV\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+IV\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for northern boundary in upper right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00932}{932}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f}\label{classoomph_1_1ChannelWithLeafletDomain_a038eba8447f4d1643cd44642294bf43f} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_S@{macro\_bound\_IV\_S}}
+\index{macro\_bound\_IV\_S@{macro\_bound\_IV\_S}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_S()}{macro\_bound\_IV\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+IV\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for southern boundary in upper right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00954}{954}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b}\label{classoomph_1_1ChannelWithLeafletDomain_ab9da487d185f947a30e03b43d0fc0c9b} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_bound\_IV\_W@{macro\_bound\_IV\_W}}
+\index{macro\_bound\_IV\_W@{macro\_bound\_IV\_W}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_bound\_IV\_W()}{macro\_bound\_IV\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+IV\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Helper function for western boundary in upper right region. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{888}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{Lright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{Ny2}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00932}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00954}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+S()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd}\label{classoomph_1_1ChannelWithLeafletDomain_ae4b123847f4ab6e242a0409d72fe5cbd} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{imacro,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{idirect,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Parametrisation of macro element boundaries. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{282}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00495}{macro\+\_\+bound\+\_\+\+I\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00517}{macro\+\_\+bound\+\_\+\+I\+\_\+\+S()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00633}{macro\+\_\+bound\+\_\+\+II\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00655}{macro\+\_\+bound\+\_\+\+II\+\_\+\+S()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00793}{macro\+\_\+bound\+\_\+\+III\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00815}{macro\+\_\+bound\+\_\+\+III\+\_\+\+S()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00932}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+N()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00954}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+S()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{Nleft}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{Nright}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{Ny1}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599}\label{classoomph_1_1ChannelWithLeafletDomain_aaca0af9c2a638c80bd8af783b9972599} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!slanted\_bound\_up@{slanted\_bound\_up}}
+\index{slanted\_bound\_up@{slanted\_bound\_up}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{slanted\_bound\_up()}{slanted\_bound\_up()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::slanted\+\_\+bound\+\_\+up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function. 
+
+Describe the line between the boundary north of the domain (at x=X\+\_\+0) and the top of the wall, when zeta goes from 0 to 1. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{685}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{Hleaflet}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{Htot}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{Leaflet\+\_\+pt}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139}\label{classoomph_1_1ChannelWithLeafletDomain_a75ce3248efae5c33a9c9989b2f310139} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Hleaflet@{Hleaflet}}
+\index{Hleaflet@{Hleaflet}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Hleaflet}{Hleaflet}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Hleaflet\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lagrangian coordinate at end of leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00254}{254}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00100}{hleaflet()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98}\label{classoomph_1_1ChannelWithLeafletDomain_ad32b0daa71b42d34aec81c7e3d25cb98} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Htot@{Htot}}
+\index{Htot@{Htot}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Htot}{Htot}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Htot\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Total width of the channel. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00257}{257}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00094}{htot()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb}\label{classoomph_1_1ChannelWithLeafletDomain_a08a8eb7078cdc788dc7643e09e7405fb} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Leaflet\_pt@{Leaflet\_pt}}
+\index{Leaflet\_pt@{Leaflet\_pt}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Leaflet\_pt}{Leaflet\_pt}}
+{\footnotesize\ttfamily Geom\+Object\texorpdfstring{$\ast$}{*} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Leaflet\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00276}{276}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00118}{leaflet\+\_\+pt()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd}\label{classoomph_1_1ChannelWithLeafletDomain_a0a50a8a7b274fb1dfc6d18c79ca884cd} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Lleft@{Lleft}}
+\index{Lleft@{Lleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Lleft}{Lleft}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Lleft\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of the domain to the left of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00251}{251}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00106}{lleft()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68}\label{classoomph_1_1ChannelWithLeafletDomain_a6c1a799bbedc5f0ff08f38088eaedc68} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Lright@{Lright}}
+\index{Lright@{Lright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Lright}{Lright}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Lright\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of the domain to the right of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00248}{248}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00112}{lright()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532}\label{classoomph_1_1ChannelWithLeafletDomain_ad0abd8837f9f0924b801d2fb78c69532} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Nleft@{Nleft}}
+\index{Nleft@{Nleft}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Nleft}{Nleft}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Nleft\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element columns to the left of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00263}{263}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15}\label{classoomph_1_1ChannelWithLeafletDomain_a11aac62965f9bcb7d4c0043669b28f15} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Nright@{Nright}}
+\index{Nright@{Nright}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Nright}{Nright}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Nright\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element columnns to the right of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00260}{260}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe}\label{classoomph_1_1ChannelWithLeafletDomain_a3c6393ef6e626d7a2f2a8ea70c8addbe} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Ny1@{Ny1}}
+\index{Ny1@{Ny1}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Ny1}{Ny1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Ny1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element rows up to the end of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00266}{266}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00282}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752}\label{classoomph_1_1ChannelWithLeafletDomain_a1596a538b4263b42d20f9c098c5f2752} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!Ny2@{Ny2}}
+\index{Ny2@{Ny2}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{Ny2}{Ny2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Ny2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of macro element rows above the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00269}{269}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333}\label{classoomph_1_1ChannelWithLeafletDomain_a165703af81538c28bbbd780d65bbb333} 
+\index{oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}!X\_0@{X\_0}}
+\index{X\_0@{X\_0}!oomph::ChannelWithLeafletDomain@{oomph::ChannelWithLeafletDomain}}
+\doxysubsubsection{\texorpdfstring{X\_0}{X\_0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+X\+\_\+0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Center of the domain \+: origin of the leaflet, extracted from Geom\+Object and stored for fast access. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00273}{273}} of file \mbox{\hyperlink{channel__with__leaflet__domain_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00705}{macro\+\_\+bound\+\_\+\+III\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00749}{macro\+\_\+bound\+\_\+\+III\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00844}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00888}{macro\+\_\+bound\+\_\+\+IV\+\_\+\+W()}}, and \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{slanted\+\_\+bound\+\_\+up()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{channel__with__leaflet__domain_8h}{channel\+\_\+with\+\_\+leaflet\+\_\+domain.\+h}}\end{DoxyCompactItemize}

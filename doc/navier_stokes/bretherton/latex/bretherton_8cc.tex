@@ -1,0 +1,73 @@
+\doxysection{bretherton.\+cc File Reference}
+\hypertarget{bretherton_8cc}{}\label{bretherton_8cc}\index{bretherton.cc@{bretherton.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classBrethertonElement}{Bretherton\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em "{}\+Bretherton element"{} is a fluid element (of type ELEMENT) for which the (inflow) velocity at those nodes that are located on a specified Mesh boundary is prescribed by Dirichlet boundary conditions. The key is that prescribed velocity profile can be a function of some external Data -- this dependency must be taken into account when computing the element\textquotesingle{}s Jacobian matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01BrethertonElement_3_01SpineElement_3_01QCrouzeixRaviartElement_3_012_01_4_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Bretherton\+Element$<$ Spine\+Element$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Bretherton 2D Crouzeix\+\_\+\+Raviart spine elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01BrethertonElement_3_01SpineElement_3_01QTaylorHoodElement_3_012_01_4_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Bretherton\+Element$<$ Spine\+Element$<$ QTaylor\+Hood\+Element$<$ 2 $>$ $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Bretherton 2D Taylor Hood spine elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01BrethertonElement_3_01SpineElement_3_01QCrouzeix098df2efac952001ec21ccc10b121ae7}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Bretherton\+Element$<$ Spine\+Element$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face geometry of the the Bretherton 2D Crouzeix\+\_\+\+Raviart spine elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01BrethertonElement_3_01SpineElement_3_01QTaylorHoa5ee68c3d3e62f3e07a972f1f9faface}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Bretherton\+Element$<$ Spine\+Element$<$ QTaylor\+Hood\+Element$<$ 2 $>$ $>$ $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of face geometry of the Bretherton 2D Taylor Hood spine elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classBrethertonProblem}{Bretherton\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Bretherton problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namepspace for global parameters. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (2)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a08e9835d71b7f7194ec5475f139211be}{Global\+\_\+\+Physical\+\_\+\+Variables\+::inflow}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&veloc)
+\begin{DoxyCompactList}\small\item\em Set inflow velocity, based on spine heights at outflow and channel width at inflow. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{bretherton_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for unsteady two-\/layer fluid problem. If there are any command line arguments, we regard this as a validation run and perform only a single step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}
+\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}
+\begin{DoxyCompactList}\small\item\em Product of Reynolds and Froude number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}
+\begin{DoxyCompactList}\small\item\em Capillary number. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+H\+\_\+lo\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to film thickness at outflow on the lower wall. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a83a3a82f89784013805bd23d63faa7e3}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+H\+\_\+up\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to film thickness at outflow on the upper wall. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a84caa2a64e50ba5b390a3cd100f0f835}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Y\+\_\+lo\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to y-\/position at inflow on the lower wall. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a75878a0c79c88065fd9031f273b62698}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Y\+\_\+up\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to y-\/position at inflow on the upper wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{bretherton_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{bretherton_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{bretherton.cc@{bretherton.cc}!main@{main}}
+\index{main@{main}!bretherton.cc@{bretherton.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for unsteady two-\/layer fluid problem. If there are any command line arguments, we regard this as a validation run and perform only a single step. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton_8cc_source_l00916}{916}} of file \mbox{\hyperlink{bretherton_8cc_source}{bretherton.\+cc}}.
+
+
+
+References \mbox{\hyperlink{bretherton_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{bretherton_8cc_source_l00816}{Bretherton\+Problem$<$ ELEMENT $>$\+::parameter\+\_\+study()}}, \mbox{\hyperlink{bretherton_8cc_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{bretherton_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, and \mbox{\hyperlink{bretherton_8cc_source_l00051}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}.
+

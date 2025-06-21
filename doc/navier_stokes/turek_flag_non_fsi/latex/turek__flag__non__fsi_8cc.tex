@@ -1,0 +1,87 @@
+\doxysection{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc File Reference}
+\hypertarget{turek__flag__non__fsi_8cc}{}\label{turek__flag__non__fsi_8cc}\index{turek\_flag\_non\_fsi.cc@{turek\_flag\_non\_fsi.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFlag__definition_1_1TopOfFlag}{Flag\+\_\+definition\+::\+Top\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the upper boundary of the flag. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFlag__definition_1_1BottomOfFlag}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the lower boundary of the flag. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFlag__definition_1_1TipOfFlag}{Flag\+\_\+definition\+::\+Tip\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the tip of the flag. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Flow around a cylinder with flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global parameters. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceFlag__definition}{Flag\+\_\+definition}}
+\begin{DoxyCompactList}\small\item\em Namespace for definition of flag boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{Flag\+\_\+definition\+::upper\+\_\+tip}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Time-\/dependent vector to upper tip of the "{}flag"{}. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceFlag__definition_a15bf130714676a0df743a4eba50cb4b5}{Flag\+\_\+definition\+::lower\+\_\+tip}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Time-\/dependent vector to bottom tip of the "{}flag"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}{Flag\+\_\+definition\+::setup}} (Time \texorpdfstring{$\ast$}{*}time\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create all Geom\+Objects needed to define the cylinder and the flag. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{turek__flag__non__fsi_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code -- pass a command line argument if you want to run the code in validation mode where it only performs a few steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\+\_\+\+Parameters\+::\+Re}} =100.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285}{Flag\+\_\+definition\+::\+Period}} =10.\+0
+\begin{DoxyCompactList}\small\item\em Period of prescribed flag oscillation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{Flag\+\_\+definition\+::H}} =0.\+2
+\begin{DoxyCompactList}\small\item\em Height of flag. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{Flag\+\_\+definition\+::L}} =3.\+5
+\begin{DoxyCompactList}\small\item\em Length of flag. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Flag\+\_\+definition\+::\+Centre\+\_\+x}} =2.\+0
+\begin{DoxyCompactList}\small\item\em x position of centre of cylinder \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Flag\+\_\+definition\+::\+Centre\+\_\+y}} =2.\+0
+\begin{DoxyCompactList}\small\item\em y position of centre of cylinder \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Flag\+\_\+definition\+::\+Radius}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Radius of cylinder. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}{Flag\+\_\+definition\+::\+Amplitude}} =0.\+33
+\begin{DoxyCompactList}\small\item\em Amplitude of tip deflection. \end{DoxyCompactList}\item 
+Time \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Flag\+\_\+definition\+::\+Time\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to the global time object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1TopOfFlag}{Top\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}{Flag\+\_\+definition\+::\+Top\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the upper edge of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1BottomOfFlag}{Bottom\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}{Flag\+\_\+definition\+::\+Bottom\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the bottom edge of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1TipOfFlag}{Tip\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}{Flag\+\_\+definition\+::\+Tip\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the tip edge of the flag. \end{DoxyCompactList}\item 
+Circle \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Flag\+\_\+definition\+::\+Cylinder\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object of type Circle that defines the central cylinder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{turek__flag__non__fsi_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{turek__flag__non__fsi_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{turek\_flag\_non\_fsi.cc@{turek\_flag\_non\_fsi.cc}!main@{main}}
+\index{main@{main}!turek\_flag\_non\_fsi.cc@{turek\_flag\_non\_fsi.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code -- pass a command line argument if you want to run the code in validation mode where it only performs a few steps. 
+
+Initialise timestep
+
+Output intial guess for steady Newton solve
+
+Output steady solution = initial condition for subsequent unsteady solve
+
+Reduce the max number of adaptations for time-\/dependent simulation
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00576}{576}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00547}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00070}{Flag\+\_\+definition\+::\+Period}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00058}{Global\+\_\+\+Parameters\+::\+Re}}.
+

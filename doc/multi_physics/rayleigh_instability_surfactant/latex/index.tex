@@ -1,0 +1,459 @@
+\chapter{The Rayleigh--Plateau instability in the presence of an insoluble surfactant}
+\hypertarget{index}{}\label{index}\index{The Rayleigh--Plateau instability in the presence of an insoluble surfactant@{The Rayleigh--Plateau instability in the presence of an insoluble surfactant}}
+In this tutorial we present an example of surface-\/transport equations in a free-\/surface Navier--Stokes problem. This is a multi-\/domain, multi-\/physics problem because there is a coupling between the equations on the surface and those in the bulk. The coupling from the bulk to the surface transport arises through the surface velocity in the surface transport equation. The coupling from the surface transport to bulk arises in a more subtle manner because the surface concentration affects the surface tension. In this tutorial, we describe how to use the existing framework to create surface transport equations and how to include them in a free-\/surface problem.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example_problem}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example_problem}
+The problem to be solved is the evolution of an annular film of fluid on the inside of a solid cylinder in the presence of an insoluble surfactant on the interface\+: a modification of the classic Rayleigh--Plateau instability. For validation, we reproduce some of the results given in `A 2-\/D model of Rayleigh instability in capillary tubes -\/-\/-\/ surfactant effects' by D. Campana, J. Di Paolo \& F. A. Saita, {\itshape  Int. J. Multiphase Flow, } vol {\bfseries{ 30 }}, pp 431--454, (2004). Our formulation, however, is different from their approach as described in detail in our \href{../../../navier_stokes/surface_theory/html/index.html}{\texttt{ free-\/surface theory document. }}
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{ The unsteady axisymmetric free-\/surface Navier--Stokes equations with insoluble surfactant .}} \end{center}  Solve  \[
+Re \left[
+ St \frac{\partial u_r}{\partial t}
+ + u_r \frac{\partial u_r}{\partial r}
+ - \frac{u_\theta^2}{r}
+ + u_z \frac{\partial u_r}{\partial z}
+\right] = -\frac{\partial p}{\partial r}
++ \left[
+  \frac{\partial^2 u_r}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_r}{\partial r}
+  - \frac{u_r}{r^2}
+  + \frac{\partial^2 u_r}{\partial z^2}
+\right],
+\]  \[
+Re \left[
+  St \frac{\partial u_\theta}{\partial t}
+  + u_r \frac{\partial u_\theta}{\partial r}
+  + \frac{u_r u_\theta}{r}
+  + u_z \frac{\partial u_\theta}{\partial z}
+\right]
+= 
++ \left[
+  \frac{\partial^2 u_\theta}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_\theta}{\partial r}
+  - \frac{u_\theta}{r^2}
+  + \frac{\partial^2 u_\theta}{\partial z^2}
+\right],
+\]  \[
+Re \left[
+  St \frac{\partial u_z}{\partial t}
+  + u_r \frac{\partial u_z}{\partial r}
+  + u_z \frac{\partial u_z}{\partial z}
+\right] = -\frac{\partial p}{\partial z}
++ \left[
+  \frac{\partial^2 u_z}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_z}{\partial r}
+  + \frac{\partial^2 u_z}{\partial z^2}
+\right],
+\] and  \[
+\frac{\partial u_r}{\partial r}
++ \frac{u_r}{r}
++ \frac{\partial u_z}{\partial z} = 0
+\ \ \ \ \ \ \ \ \ \ (1)
+\] in the bulk fluid.
+
+The governing equations are subject to the no slip boundary conditions  \[
+u_r = u_\theta = u_z = 0 \ \ \ \ \ \ \ \ \ \ (2)
+\] on the outer solid boundary ( $ r = 1.0 $) and the symmetry boundary conditions  \[
+u_z = u_\theta = 0 \ \ \ \ \ \ \ \ \ \ (3)
+\] on the bottom ( $ z = 0.0 $) and top ( $ z = \pi / \alpha $) boundaries.
+
+We denote the position vector to the free surface by $ \mathbf{R} $, which is subject to the kinematic condition  \[
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
+\ \ \ \ \ \ \ \ \ \ (4)
+\] and the dynamic condition  \[
+\tau_{ij}^{[2]}n_j = \tau_{ij}^{[1]}n_j+\frac{1}{Ca}\left (\sigma \kappa n_i
++ \frac{\partial \sigma}{\partial s} t_{i} \right).
+\ \ \ \ \ \ \ \ \ \ (5)
+\] where $ \sigma = \sigma^{*} / \sigma_{ref} $ is the dimensionless surface tension relative to a reference value.
+
+An insoluble surfactant of surface concentration $ \Gamma^{*}$ is non-\/dimensionalised with respect to a reference value $ \Gamma =
+ \Gamma^{*}/\Gamma_{ref} $ and obeys the surface transport equation  \[ St \left(\frac{\partial \Gamma}{\partial t} -
+   \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} 
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) +
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} 
+   \left(\Gamma \mbox{\boldmath$U$}\right) =
+   \frac{1}{Pe_{s}}
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$}
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+   \Gamma  \] on the interface.
+
+The surface tension is a function of the surfactant concentration $
+\sigma(\Gamma)$ and a linear equation of state is chosen  \[ \sigma = 1 - \beta (\Gamma - 1).
+ \]
+
+The symmetry boundary conditions on the bottom ( $ z = 0.0 $) and top ( $ z = \pi / \alpha $) boundaries are \[ \frac{\partial \Gamma}{\partial z} = 0. \]
+
+Initially, the system is at rest and $ \Gamma =1 $. The free surface is moved into the position\+:  \[
+ \mathbf{R} = \left[1.0 - H*(1.0 + \epsilon\cos \left(\alpha z\right)
+ \right] \mbox{\boldmath$e$}_{r} \] where $ \epsilon $ is a small parameter and $ H$ is the undeformed film thickness.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+We choose parameters based on those used to compute Figures 8 and 9 in Campana et al; namely $ H = 0.2 $, $ Re = 40 $, $ St = 1$, $ Ca = H^{3} $, $ \alpha = 1.047 $, $ \epsilon = 10^{-3}$, $ \beta = 3.6 \times 10^{-3} $ and $Pe_{S} = 4032$. For these parameters, the system is unstable to the Rayleigh--Plateau instability and evolves towards a state in which the tube is completely occluded by the fluid at one end.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{trace}
+\doxyfigcaption{Time trace of the radius of the interface at z=0 showing dramatic collapse near t=80. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{evolution}
+\doxyfigcaption{Evolution of the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 showing the developing lobe. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{evo_conc}
+\doxyfigcaption{Evolution of the surfactant concentration on the interface at times t=0, 10, 20, 30, 40, 50, 60, 70, 80 accumulation in the developing lobe caused by the reduced surface area and advective flow into the lobe. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+The global parameters are simply the dimensionless parameters described above.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ The\ parameter\ values\ are\ chosen\ to\ be\ those\ used\ in\ Figures\ 8,\ 9\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ in\ Campana\ et\ al.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Film\ thickness\ parameter}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4d1da0a125f6044733e121f0f3d958ca}{Film\_Thickness}}\ =\ 0.2;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ =\ 40.0;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Womersley\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};\ \textcolor{comment}{//\ (St\ =\ 1)}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Product\ of\ Reynolds\ number\ and\ inverse\ of\ Froude\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}\ =\ 0.0;\ \textcolor{comment}{//\ (Fr\ =\ 0)}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Capillary\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}}\ =\ pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4d1da0a125f6044733e121f0f3d958ca}{Film\_Thickness}},3.0);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ External\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{P\_ext}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Direction\ of\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{G}}(3);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Wavelength\ of\ the\ domain}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}\ =\ 1.047;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Free\ surface\ cosine\ deformation\ parameter}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a28f21de3d342b1dab2fa0be362c6a944}{Epsilon}}\ =\ 1.0e-\/3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Surface\ Elasticity\ number\ (weak\ case)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a351a17b52cfcabc688393423f3de361b}{Beta}}\ =\ 3.6e-\/3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Surface\ Peclet\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a99dc85e71075cd6efb06e692d8a15bcd}{Peclet\_S}}\ =\ 4032.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Sufrace\ Peclet\ number\ multiplied\ by\ Strouhal\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_abec1e1c8c78ade3a7b2e7396321c6466}{Peclet\_St\_S}}\ =\ 1.0;\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pvd\ file\ -\/-\/\ a\ wrapper\ for\ all\ the\ different}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ vtu\ output\ files\ plus\ information\ about\ continuous\ time}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ facilitate\ animations\ in\ paraview}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4f2fe790aa186202e4e2d5f6ee21d7f4}{Pvd\_file}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code and problem class}{The driver code and problem class}}\label{index_main}
+The driver code and problem are very similar to those in the \href{../../../navier_stokes/single_layer_free_surface/html/index.html}{\texttt{ two-\/dimensional }} and \href{../../../axisym_navier_stokes/two_layer_interface_axisym/html/index.html}{\texttt{ axisymmetric }} interface-\/relaxation problems on which this driver was based. The main difference between this problem and standard free surface problems is that instead of ~\newline
+ \doxylink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}, we use the custom \doxylink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}. The symmetry boundary conditions for the surface concentration are the natural boundary conditions of our formulation, so we "{}do  nothing"{} for the additional field at the boundaries.
+
+An additional member function {\ttfamily \doxylink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{Interface\+Problem\+::compute\+\_\+total\+\_\+mass()}} is provided as a check on the implementation of the the surface transport equations. The surfactant cannot be removed from the surface, so its mass must be conserved. The function simply loops over the interface elements and sums their contribution to the total mass.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Compute\ the\ total\ mass\ of\ the\ insoluble\ surfactant}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ compute\_total\_mass()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Initialise\ to\ zero}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ mass\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ 1D\ interface\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_interface\_element\ =\ Interface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ interface\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_interface\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \ SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>*\ el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ (Interface\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Add\ contribution\ from\ each\ element}}
+\DoxyCodeLine{\ \ \ \ \ mass\ +=\ el\_pt-\/>integrate\_c();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ mass;}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ compute\_total\_mass}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element}{}\doxysection{\texorpdfstring{The Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element class}{The SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement class}}\label{index_element}
+This class is implemented in our driver code and inherits directly from \doxylink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}. The class provides storage for the required additional dimensionless groups and the nodal index where the surface concentration will be stored.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Spine-\/based\ Marangoni\ surface\ tension\ elements\ that\ add}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ linear\ dependence\ on\ concentration}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ of\ a\ surface\ chemical\ to\ the\ surface\ tension,\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ which\ decreases\ with\ increasing\ concentration.}}
+\DoxyCodeLine{\textcolor{comment}{///\ The\ non-\/dimensionalisation\ is\ the\ same\ as\ Campana\ et\ al\ (2004)}}
+\DoxyCodeLine{\textcolor{comment}{///\ but\ we\ may\ wish\ to\ revisit\ this.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement\ :\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}\ SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ an\ Elasticity\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{double}\ *Beta\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ Surface\ Peclet\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{double}\ *Peclet\_S\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ surface\ Peclect\ Strouhal\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{double}\ *Peclet\_Strouhal\_S\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Index\ at\ which\ the\ surfactant\ concentration\ is\ stored\ at\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ nodes}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ C\_index;}
+
+\end{DoxyCodeInclude}
+ Most of the functionality is already provided by the underlying {\ttfamily Fluid\+Interface\+Element} and we need simply to overload a few functions. The constructor sets default values for the physical constants and adds the additional data value to nodes on the surface. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor\ that\ passes\ the\ bulk\ element\ and\ face\ index\ down}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ the\ underlying}}
+\DoxyCodeLine{\ \ SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement*\ \textcolor{keyword}{const}\ \&element\_pt,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&face\_index)\ :\ SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (element\_pt,face\_index)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Initialise\ the\ values}}
+\DoxyCodeLine{\ \ \ Beta\_pt\ =\ \&Default\_Physical\_Constant\_Value;}
+\DoxyCodeLine{\ \ \ Peclet\_S\_pt\ =\ \&Default\_Physical\_Constant\_Value;}
+\DoxyCodeLine{\ \ \ Peclet\_Strouhal\_S\_pt\ =\ \&Default\_Physical\_Constant\_Value;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ additional\ surfactant\ terms\ to\ these\ surface\ elements}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Read\ out\ the\ number\ of\ nodes\ on\ the\ face}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//For\ some\ reason\ I\ need\ to\ specify\ the\ this\ pointer\ here(!)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\_face\ =\ this-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ additional\ data\ values\ in\ the\ face}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//There\ is\ one\ additional\ values\ at\ each\ node\ -\/-\/-\/\ the\ lagrange\ multiplier}}
+\DoxyCodeLine{\ \ \ Vector<unsigned>\ additional\_data\_values(n\_node\_face);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_node\_face;i++)\ additional\_data\_values[i]\ =\ 1;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Resize\ the\ data\ arrays\ accordingly\ }}
+\DoxyCodeLine{\ \ \ this-\/>resize\_nodes(additional\_data\_values);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ C\_index\ is\ the\ new\ final\ value}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Minor\ HACK\ HERE}}
+\DoxyCodeLine{\ \ \ C\_index\ =\ this-\/>node\_pt(0)-\/>nvalue()-\/1;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ The function {\ttfamily Fluid\+Interface\+Element\+::sigma()} is overloaded using the equation of state defined in the problem specification  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ sigma(\textcolor{keyword}{const}\ Vector<double>\ \&s)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ number\ of\ shape\ functions}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ this-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ get\ the\ shape\ fuctions\ at\ the\ local\ coordinate}}
+\DoxyCodeLine{\ \ \ Shape\ psi(n\_node);}
+\DoxyCodeLine{\ \ \ this-\/>shape(s,psi);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ interpolate\ the\ surfactant\ concentration}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ C=0.0;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l=0;l<n\_node;l++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ C\ +=\ this-\/>nodal\_value(l,C\_index)*psi(l);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ the\ Elasticity\ number}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a351a17b52cfcabc688393423f3de361b}{Beta}}\ =\ this-\/>beta();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Return\ the\ variable\ surface\ tension}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ (1.0\ -\/\ Beta*(C-\/1.0));}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ sigma}}
+
+\end{DoxyCodeInclude}
+ The majority of the work is performed in 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ add\_additional\_residual\_contributions\_interface(Vector<double>\ \&residuals,\ DenseMatrix<double>\ \&jacobian,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&flag,\textcolor{keyword}{const}\ Shape\ \&psif,\ \textcolor{keyword}{const}\ DShape\ \&dpsifds,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ DShape\ \&dpsifdS,\ \textcolor{keyword}{const}\ DShape\ \&dpsifdS\_div,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&interpolated\_x,\ \textcolor{keyword}{const}\ Vector<double>\ \&interpolated\_n,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&W,\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&J)}
+\DoxyCodeLine{\ \ \{}
+
+\end{DoxyCodeInclude}
+ which provides the additional surface transport equations. In the example code two formulations of the surface transport equations are provided the one used by Campana et al in which the curvature is computed explicitly and the formulation derived in our \href{../../../navier_stokes/surface_theory/html/index.html}{\texttt{ free-\/surface theory, }} in which the curvature is not required. The version used is determined by an internal boolean 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Flag\ to\ control\ whether\ the\ Campana\ formulation\ (false)\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ or\ our\ own\ (true)\ is\ used}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{bool}\ Integrated\_curvature\ =\ \textcolor{keyword}{true};}
+
+\end{DoxyCodeInclude}
+ The remainder of the function adds the residuals associated with the surfactant transport equations which are described in the \href{../../../navier_stokes/surface_theory/html/index.html}{\texttt{ free-\/surface theory. }} Note that an additional term arises due to the azimuthal curvature compared to the standard one-\/dimensional surface.
+
+The function {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} is also overloaded to that the effect of surfactant concentration on the bulk equations is computed by finite differences. This could be modified in the future so that the appropriate derivative terms are included in {\ttfamily add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(...)}.
+
+Finally the elements contain a function 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ integrate\_c()\ const}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ out\ how\ many\ nodes\ there\ are}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ this-\/>nnode();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ memeory\ for\ the\ shape\ functions}}
+\DoxyCodeLine{\ \ \ Shape\ psif(n\_node);}
+\DoxyCodeLine{\ \ \ DShape\ dpsifds(n\_node,1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ value\ of\ n\_intpt}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_intpt\ =\ this-\/>integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Storage\ for\ the\ local\ coordinate}}
+\DoxyCodeLine{\ \ \ Vector<double>\ s(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Storage\ for\ the\ total\ mass}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ mass\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ipt=0;ipt<n\_intpt;ipt++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Get\ the\ local\ coordinate\ at\ the\ integration\ point}}
+\DoxyCodeLine{\ \ \ \ \ s[0]\ =\ this-\/>integral\_pt()-\/>knot(ipt,0);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Get\ the\ integral\ weight}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ W\ =\ this-\/>integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Call\ the\ derivatives\ of\ the\ shape\ function}}
+\DoxyCodeLine{\ \ \ \ \ this-\/>dshape\_local\_at\_knot(ipt,psif,dpsifds);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Define\ and\ zero\ the\ tangent\ Vectors\ and\ local\ velocities}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ interpolated\_x(2,0.0);}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ interpolated\_t(2,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ interpolated\_c\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ shape\ functions\ to\ compute\ concentration\ and\ tangent}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l=0;l<n\_node;l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ interpolated\_c\ +=\ this-\/>nodal\_value(l,C\_index)*psif(l);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Calculate\ the\ tangent\ vector}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ interpolated\_x[i]\ +=\ this-\/>nodal\_position(l,i)*psif(l);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ interpolated\_t[i]\ +=\ this-\/>nodal\_position(l,i)*dpsifds(l,0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//The\ first\ positional\ coordinate\ is\ the\ radial\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ interpolated\_x[0];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Calculate\ the\ length\ of\ the\ tangent\ Vector}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ tlength\ =\ interpolated\_t[0]*interpolated\_t[0]\ +\ }
+\DoxyCodeLine{\ \ \ \ interpolated\_t[1]*interpolated\_t[1];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Jacobian\ of\ the\ line\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ J\ =\ sqrt(tlength);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ mass\ +=\ interpolated\_c*r*W*J;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ mass;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Define\ the\ default\ physical\ value\ to\ be\ one}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement<ELEMENT>::Default\_Physical\_Constant\_Value\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Inherit\ from\ the\ standard\ Horizontal\ single-\/layer\ SpineMesh}}
+\DoxyCodeLine{\textcolor{comment}{///\ and\ modify\ the\ spine\_node\_update()\ function\ so\ that\ it\ is\ appropriate}}
+\DoxyCodeLine{\textcolor{comment}{///\ for\ an\ annular\ film,\ rather\ than\ a\ fluid\ fibre.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MyHorizontalSingleLayerSpineMesh\ :\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}\ HorizontalSingleLayerSpineMesh<ELEMENT>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ x-\/direction,\ number\ of}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ elements\ in\ y-\/direction,\ radial\ extent,\ axial\ length\ ,\ and\ pointer\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ timestepper\ (defaults\ to\ Steady\ timestepper)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_a0bd73ed947e30341144d081df52332b5}{MyHorizontalSingleLayerSpineMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ }
+
+\end{DoxyCodeInclude}
+ that computes the integral of the concentration over the elemental surface, representing the total mass of surfactant within the element.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Investigate the difference between the solutions for the two formulations of the surfactant transport equations. Which conserves mass more accurately? ~\newline
+~\newline
+
+\item Investigate the influence of variations in $\beta$ and try to reproduce the results found by Campana et al.
+\item Look at the three-\/dimensional (non-\/axisymmetric) version of the code found in the same directory. Confirm that the same results are produced. Is the instability stable to non-\/axisymmetric perturbations? Use the code to investigate what happens if you make the cross-\/sectional boundary slightly elliptical rather than circular?
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/multi_physics/rayleigh_instability_surfactant}{\texttt{ demo\+\_\+drivers/multi\+\_\+physics/rayleigh\+\_\+instability\+\_\+surfactant }} \end{center}  ~\newline
+~\newline
+ which contains refineable and non-\/refineable multi-\/domain versions of the Boussinesq convection problem. ~\newline
+~\newline
+
+\item The full driver code for the problem described in this tutorial is\+:~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/multi_physics/rayleigh_instability_surfactant/rayleigh_instability_insoluble_surfactant.cc
+}{\texttt{ demo\+\_\+drivers/multi\+\_\+physics/rayleigh\+\_\+instability\+\_\+surfactant/rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc }} \end{center}  ~\newline
+~\newline
+
+\item The corresponding driver code for the non-\/refineable version of the problem is\+:~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
+}{\texttt{ demo\+\_\+drivers/multi\+\_\+physics/boussinesq\+\_\+convection/multi\+\_\+domain\+\_\+boussinesq\+\_\+convection.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,590 @@
+\doxysection{Global\+Parameters Namespace Reference}
+\hypertarget{namespaceGlobalParameters}{}\label{namespaceGlobalParameters}\index{GlobalParameters@{GlobalParameters}}
+
+
+Namespace for "{}global"{} problem parameters.  
+
+
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}{Cases}} \{ \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7}{Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{All\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc}{Barrel\+\_\+shape}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8}{T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration for the possible cases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}{get\+\_\+exact\+\_\+kappa}} ()
+\begin{DoxyCompactList}\small\item\em Exact kappa. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
+\begin{DoxyCompactList}\small\item\em Spine basis\+: The position vector to the basis of the spine as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i Spines start in the (x\+\_\+1,x\+\_\+2) plane at (x\+\_\+1,x\+\_\+2). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{spine\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
+\begin{DoxyCompactList}\small\item\em Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Setup dependent parameters and perform sanity check. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}{Controlled\+\_\+height}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Height control value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}{Alpha\+\_\+min}} = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}1.\+5
+\begin{DoxyCompactList}\small\item\em Min. spine angle against horizontal plane. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7}{Alpha\+\_\+max}} = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}0.\+5
+\begin{DoxyCompactList}\small\item\em Max. spine angle against horizontal plane. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131}{Use\+\_\+spines}} = true
+\begin{DoxyCompactList}\small\item\em Use spines (true) or not (false) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a}{Use\+\_\+height\+\_\+control}} = true
+\begin{DoxyCompactList}\small\item\em Use height control (true) or not (false)? \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201}{Case}} = \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{All\+\_\+pinned}}
+\begin{DoxyCompactList}\small\item\em What case are we considering\+: Choose one from the enumeration Cases. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}{Gamma}} = Mathematical\+Constants\+::\+Pi/4.\+0
+\begin{DoxyCompactList}\small\item\em Contact angle and its cos (dependent parameter -- is reassigned) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d}{Cos\+\_\+gamma}} =cos(\mbox{\hyperlink{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}{Gamma}})
+\begin{DoxyCompactList}\small\item\em Cos of contact angle. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41}{Kappa\+\_\+pt}} = 0
+\begin{DoxyCompactList}\small\item\em Pointer to Data object that stores the prescribed curvature. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e}{Kappa\+\_\+initial}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Initial value for kappa. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650}{Step\+\_\+sign}} = 1
+\begin{DoxyCompactList}\small\item\em Increase or decrease the value of the control parameters? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0}{Nsteps}} = 5
+\begin{DoxyCompactList}\small\item\em Number of steps. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032}{Kappa\+\_\+increment}} = -\/0.\+05
+\begin{DoxyCompactList}\small\item\em Increment for prescribed curvature. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}{Controlled\+\_\+height\+\_\+increment}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Increment for height control. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}{Control\+\_\+element}} = 0
+\begin{DoxyCompactList}\small\item\em Number of element in bulk mesh at which height control is applied. Initialise to 0 -- will be overwritte in \doxylink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()} \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}{L\+\_\+x}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length and width of the domain. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}{L\+\_\+y}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Width of domain. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9}{N\+\_\+x}} = 8
+\begin{DoxyCompactList}\small\item\em Number of elements in the mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878}{N\+\_\+y}} = 8
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa}{Beta\+\_\+min}} = Mathematical\+Constants\+::\+Pi/2.\+0
+\begin{DoxyCompactList}\small\item\em Min. second spine angle against horizontal plane. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}{Beta\+\_\+max}} = Mathematical\+Constants\+::\+Pi/2.\+0
+\begin{DoxyCompactList}\small\item\em Max. second pine angle against horizontal plane. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}{Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions}} = true
+\begin{DoxyCompactList}\small\item\em Should the spines rotate in the x and y directions (true)? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for "{}global"{} problem parameters. 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}\label{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf} 
+\index{GlobalParameters@{GlobalParameters}!Cases@{Cases}}
+\index{Cases@{Cases}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Cases}{Cases}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}{Global\+Parameters\+::\+Cases}}}
+
+
+
+Enumeration for the possible cases. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Spherical\_cap\_in\_cylinder\_pinned@{Spherical\_cap\_in\_cylinder\_pinned}!GlobalParameters@{GlobalParameters}}\index{GlobalParameters@{GlobalParameters}!Spherical\_cap\_in\_cylinder\_pinned@{Spherical\_cap\_in\_cylinder\_pinned}}}\Hypertarget{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7}\label{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7} 
+Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{All\_pinned@{All\_pinned}!GlobalParameters@{GlobalParameters}}\index{GlobalParameters@{GlobalParameters}!All\_pinned@{All\_pinned}}}\Hypertarget{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}\label{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558} 
+All\+\_\+pinned&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Barrel\_shape@{Barrel\_shape}!GlobalParameters@{GlobalParameters}}\index{GlobalParameters@{GlobalParameters}!Barrel\_shape@{Barrel\_shape}}}\Hypertarget{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc}\label{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc} 
+Barrel\+\_\+shape&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_junction\_with\_nonzero\_contact\_angle@{T\_junction\_with\_nonzero\_contact\_angle}!GlobalParameters@{GlobalParameters}}\index{GlobalParameters@{GlobalParameters}!T\_junction\_with\_nonzero\_contact\_angle@{T\_junction\_with\_nonzero\_contact\_angle}}}\Hypertarget{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8}\label{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8} 
+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00047}{47}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}\label{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593} 
+\index{GlobalParameters@{GlobalParameters}!get\_exact\_kappa@{get\_exact\_kappa}}
+\index{get\_exact\_kappa@{get\_exact\_kappa}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_kappa()}{get\_exact\_kappa()}}
+{\footnotesize\ttfamily double Global\+Parameters\+::get\+\_\+exact\+\_\+kappa (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Exact kappa. 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00054}{54}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00051}{Controlled\+\_\+height}}.
+
+
+
+Referenced by \mbox{\hyperlink{barrel_8cc_source_l00291}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}\label{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436} 
+\index{GlobalParameters@{GlobalParameters}!setup\_dependent\_parameters\_and\_sanity\_check@{setup\_dependent\_parameters\_and\_sanity\_check}}
+\index{setup\_dependent\_parameters\_and\_sanity\_check@{setup\_dependent\_parameters\_and\_sanity\_check}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{setup\_dependent\_parameters\_and\_sanity\_check()}{setup\_dependent\_parameters\_and\_sanity\_check()}}
+{\footnotesize\ttfamily void Global\+Parameters\+::setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setup dependent parameters and perform sanity check. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{127}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+References \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00048}{All\+\_\+pinned}}, \mbox{\hyperlink{barrel_8cc_source_l00099}{Alpha\+\_\+max}}, \mbox{\hyperlink{barrel_8cc_source_l00096}{Alpha\+\_\+min}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00049}{Barrel\+\_\+shape}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00054}{Case}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00091}{Control\+\_\+element}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00062}{Cos\+\_\+gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00061}{Gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00068}{Kappa\+\_\+initial}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00097}{L\+\_\+x}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00098}{L\+\_\+y}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00101}{N\+\_\+x}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00102}{N\+\_\+y}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00120}{Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00047}{Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00050}{T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}.
+
+\Hypertarget{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}\label{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f} 
+\index{GlobalParameters@{GlobalParameters}!spine\_base\_function@{spine\_base\_function}}
+\index{spine\_base\_function@{spine\_base\_function}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{spine\_base\_function()}{spine\_base\_function()}}
+{\footnotesize\ttfamily void Global\+Parameters\+::spine\+\_\+base\+\_\+function (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{spine\+\_\+B,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{dspine\+\_\+B }\end{DoxyParamCaption})}
+
+
+
+Spine basis\+: The position vector to the basis of the spine as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i Spines start in the (x\+\_\+1,x\+\_\+2) plane at (x\+\_\+1,x\+\_\+2). 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00072}{72}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+
+\Hypertarget{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}\label{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284} 
+\index{GlobalParameters@{GlobalParameters}!spine\_function@{spine\_function}}
+\index{spine\_function@{spine\_function}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{spine\_function()}{spine\_function()}}
+{\footnotesize\ttfamily void Global\+Parameters\+::spine\+\_\+function (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{spine,  }\item[{Vector$<$ Vector$<$ double $>$ $>$ \&}]{dspine }\end{DoxyParamCaption})}
+
+
+
+Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. 
+
+Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
+
+Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
+
+Spines are dependent of x\mbox{[}0\mbox{]} AND x\mbox{[}1\mbox{]} and rotate in both directions
+
+Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
+
+Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
+
+Spines are dependent of x\mbox{[}0\mbox{]} AND x\mbox{[}1\mbox{]} and rotate in both directions
+
+Spines (and derivatives) are independent of x\mbox{[}0\mbox{]} and rotate in the x\mbox{[}1\mbox{]}-\/direction
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00104}{104}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00099}{Alpha\+\_\+max}}, and \mbox{\hyperlink{barrel_8cc_source_l00096}{Alpha\+\_\+min}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7}\label{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7} 
+\index{GlobalParameters@{GlobalParameters}!Alpha\_max@{Alpha\_max}}
+\index{Alpha\_max@{Alpha\_max}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Alpha\_max}{Alpha\_max}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Alpha\+\_\+max = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}0.\+5}
+
+
+
+Max. spine angle against horizontal plane. 
+
+Max. first spine angle against horizontal plane. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00099}{99}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}, and \mbox{\hyperlink{barrel_8cc_source_l00104}{spine\+\_\+function()}}.
+
+\Hypertarget{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}\label{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f} 
+\index{GlobalParameters@{GlobalParameters}!Alpha\_min@{Alpha\_min}}
+\index{Alpha\_min@{Alpha\_min}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Alpha\_min}{Alpha\_min}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Alpha\+\_\+min = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}1.\+5}
+
+
+
+Min. spine angle against horizontal plane. 
+
+Min. first spine angle against horizontal plane. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00096}{96}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}, and \mbox{\hyperlink{barrel_8cc_source_l00104}{spine\+\_\+function()}}.
+
+\Hypertarget{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}\label{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa} 
+\index{GlobalParameters@{GlobalParameters}!Beta\_max@{Beta\_max}}
+\index{Beta\_max@{Beta\_max}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Beta\_max}{Beta\_max}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Beta\+\_\+max = Mathematical\+Constants\+::\+Pi/2.\+0}
+
+
+
+Max. second pine angle against horizontal plane. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00117}{117}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+\Hypertarget{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa}\label{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa} 
+\index{GlobalParameters@{GlobalParameters}!Beta\_min@{Beta\_min}}
+\index{Beta\_min@{Beta\_min}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Beta\_min}{Beta\_min}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Beta\+\_\+min = Mathematical\+Constants\+::\+Pi/2.\+0}
+
+
+
+Min. second spine angle against horizontal plane. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00114}{114}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+\Hypertarget{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201}\label{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201} 
+\index{GlobalParameters@{GlobalParameters}!Case@{Case}}
+\index{Case@{Case}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Case}{Case}}
+{\footnotesize\ttfamily int Global\+Parameters\+::\+Case = \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{All\+\_\+pinned}}}
+
+
+
+What case are we considering\+: Choose one from the enumeration Cases. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00054}{54}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00081}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}\label{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea} 
+\index{GlobalParameters@{GlobalParameters}!Control\_element@{Control\_element}}
+\index{Control\_element@{Control\_element}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Control\_element}{Control\_element}}
+{\footnotesize\ttfamily unsigned Global\+Parameters\+::\+Control\+\_\+element = 0}
+
+
+
+Number of element in bulk mesh at which height control is applied. Initialise to 0 -- will be overwritte in \doxylink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()} 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00091}{91}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}\label{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96} 
+\index{GlobalParameters@{GlobalParameters}!Controlled\_height@{Controlled\_height}}
+\index{Controlled\_height@{Controlled\_height}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Controlled\_height}{Controlled\_height}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Controlled\+\_\+height = 0.\+0}
+
+
+
+Height control value. 
+
+Height control value for displacement control. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00051}{51}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{barrel_8cc_source_l00054}{get\+\_\+exact\+\_\+kappa()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00393}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, \mbox{\hyperlink{barrel_8cc_source_l00321}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{barrel_8cc_source_l00180}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Young\+Laplace\+Problem()}}.
+
+\Hypertarget{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}\label{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141} 
+\index{GlobalParameters@{GlobalParameters}!Controlled\_height\_increment@{Controlled\_height\_increment}}
+\index{Controlled\_height\_increment@{Controlled\_height\_increment}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Controlled\_height\_increment}{Controlled\_height\_increment}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment = 0.\+1}
+
+
+
+Increment for height control. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00086}{86}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00393}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, and \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}.
+
+\Hypertarget{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d}\label{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d} 
+\index{GlobalParameters@{GlobalParameters}!Cos\_gamma@{Cos\_gamma}}
+\index{Cos\_gamma@{Cos\_gamma}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Cos\_gamma}{Cos\_gamma}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Cos\+\_\+gamma =cos(\mbox{\hyperlink{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}{Gamma}})}
+
+
+
+Cos of contact angle. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00062}{62}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__t__junction_8cc_source_l00167}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}\label{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317} 
+\index{GlobalParameters@{GlobalParameters}!Gamma@{Gamma}}
+\index{Gamma@{Gamma}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Gamma}{Gamma}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Gamma = Mathematical\+Constants\+::\+Pi/4.\+0}
+
+
+
+Contact angle and its cos (dependent parameter -- is reassigned) 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00061}{61}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032}\label{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032} 
+\index{GlobalParameters@{GlobalParameters}!Kappa\_increment@{Kappa\_increment}}
+\index{Kappa\_increment@{Kappa\_increment}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Kappa\_increment}{Kappa\_increment}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Kappa\+\_\+increment = -\/0.\+05}
+
+
+
+Increment for prescribed curvature. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00083}{83}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00393}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}.
+
+\Hypertarget{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e}\label{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e} 
+\index{GlobalParameters@{GlobalParameters}!Kappa\_initial@{Kappa\_initial}}
+\index{Kappa\_initial@{Kappa\_initial}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Kappa\_initial}{Kappa\_initial}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+Kappa\+\_\+initial = 0.\+0}
+
+
+
+Initial value for kappa. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00068}{68}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41}\label{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41} 
+\index{GlobalParameters@{GlobalParameters}!Kappa\_pt@{Kappa\_pt}}
+\index{Kappa\_pt@{Kappa\_pt}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Kappa\_pt}{Kappa\_pt}}
+{\footnotesize\ttfamily Data\texorpdfstring{$\ast$}{*} Global\+Parameters\+::\+Kappa\+\_\+pt = 0}
+
+
+
+Pointer to Data object that stores the prescribed curvature. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00065}{65}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00393}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}.
+
+\Hypertarget{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}\label{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6} 
+\index{GlobalParameters@{GlobalParameters}!L\_x@{L\_x}}
+\index{L\_x@{L\_x}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{L\_x}{L\_x}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+L\+\_\+x = 1.\+0}
+
+
+
+Length and width of the domain. 
+
+Length of domain. 
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00097}{97}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}\label{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e} 
+\index{GlobalParameters@{GlobalParameters}!L\_y@{L\_y}}
+\index{L\_y@{L\_y}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{L\_y}{L\_y}}
+{\footnotesize\ttfamily double Global\+Parameters\+::\+L\+\_\+y = 1.\+0}
+
+
+
+Width of domain. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00098}{98}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}, \mbox{\hyperlink{refineable__t__junction_8cc_source_l00226}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Young\+Laplace\+Problem()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9}\label{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9} 
+\index{GlobalParameters@{GlobalParameters}!N\_x@{N\_x}}
+\index{N\_x@{N\_x}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{N\_x}{N\_x}}
+{\footnotesize\ttfamily unsigned Global\+Parameters\+::\+N\+\_\+x = 8}
+
+
+
+Number of elements in the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00101}{101}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878}\label{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878} 
+\index{GlobalParameters@{GlobalParameters}!N\_y@{N\_y}}
+\index{N\_y@{N\_y}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{N\_y}{N\_y}}
+{\footnotesize\ttfamily unsigned Global\+Parameters\+::\+N\+\_\+y = 8}
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00102}{102}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0}\label{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0} 
+\index{GlobalParameters@{GlobalParameters}!Nsteps@{Nsteps}}
+\index{Nsteps@{Nsteps}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Nsteps}{Nsteps}}
+{\footnotesize\ttfamily unsigned Global\+Parameters\+::\+Nsteps = 5}
+
+
+
+Number of steps. 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00080}{80}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}, and \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00543}{run\+\_\+it()}}.
+
+\Hypertarget{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}\label{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e} 
+\index{GlobalParameters@{GlobalParameters}!Rotate\_spines\_in\_both\_directions@{Rotate\_spines\_in\_both\_directions}}
+\index{Rotate\_spines\_in\_both\_directions@{Rotate\_spines\_in\_both\_directions}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Rotate\_spines\_in\_both\_directions}{Rotate\_spines\_in\_both\_directions}}
+{\footnotesize\ttfamily bool Global\+Parameters\+::\+Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions = true}
+
+
+
+Should the spines rotate in the x and y directions (true)? 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00120}{120}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00127}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}}.
+
+\Hypertarget{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650}\label{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650} 
+\index{GlobalParameters@{GlobalParameters}!Step\_sign@{Step\_sign}}
+\index{Step\_sign@{Step\_sign}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Step\_sign}{Step\_sign}}
+{\footnotesize\ttfamily int Global\+Parameters\+::\+Step\+\_\+sign = 1}
+
+
+
+Increase or decrease the value of the control parameters? 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00077}{77}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+\Hypertarget{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a}\label{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a} 
+\index{GlobalParameters@{GlobalParameters}!Use\_height\_control@{Use\_height\_control}}
+\index{Use\_height\_control@{Use\_height\_control}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Use\_height\_control}{Use\_height\_control}}
+{\footnotesize\ttfamily bool Global\+Parameters\+::\+Use\+\_\+height\+\_\+control = true}
+
+
+
+Use height control (true) or not (false)? 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00044}{44}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00393}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}.
+
+\Hypertarget{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131}\label{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131} 
+\index{GlobalParameters@{GlobalParameters}!Use\_spines@{Use\_spines}}
+\index{Use\_spines@{Use\_spines}!GlobalParameters@{GlobalParameters}}
+\doxysubsubsection{\texorpdfstring{Use\_spines}{Use\_spines}}
+{\footnotesize\ttfamily bool Global\+Parameters\+::\+Use\+\_\+spines = true}
+
+
+
+Use spines (true) or not (false) 
+
+
+
+Definition at line \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00041}{41}} of file \mbox{\hyperlink{common__young__laplace__stuff_8h_source}{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00618}{main()}}.
+

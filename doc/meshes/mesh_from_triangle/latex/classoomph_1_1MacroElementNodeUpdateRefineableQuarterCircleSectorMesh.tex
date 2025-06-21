@@ -1,0 +1,187 @@
+\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+
+
+Macro\+Element\+Node\+Update version of \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.490353cm]{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}) and the algebraic node update functions for nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46}{\texorpdfstring{$\sim$}{\string~}\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}{node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{update\+\_\+all\+\_\+solid\+\_\+nodes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{oomph\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh_a07b183ff3e548456e67b92b6fce41cde}{Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh). Adds refinement data to elements of \doxylink{classoomph_1_1QuarterCircleSectorMesh}{Quarter\+Circle\+Sector\+Mesh}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh_abf958060ab5ea27a2ca079cba58af8f5}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a3fbcc7dd28aefc3dddda607785695afc}{Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_af3aec899bd005cacb011c13bcb6e5f22}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a7c04179cca1d5eeb0a175ce30312ddbd}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{Quarter\+Circle\+Sector\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_aed627369317c12fc9fe380cd22bb8663}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value (defined in the underlying Domain object) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed}{setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a49e72c17a9409ec4a2b7a1ebf98fb4a1}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a2cbdec5f0ee2f370c38f1fdc4e2904f8}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the geometric object that represents the curved wall (mesh boundary 1) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_ab5c1e4484c69eb78bd3323321605a93c}{Xi\+\_\+lo}}
+\begin{DoxyCompactList}\small\item\em Lower limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a149224b002f785eb357553f8210ad5d3}{Fract\+\_\+mid}}
+\begin{DoxyCompactList}\small\item\em Fraction along wall where outer ring is to be divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1fa3bfeddd4467e9fe0ec45fbfac0740}{Xi\+\_\+hi}}
+\begin{DoxyCompactList}\small\item\em Upper limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+Macro\+Element\+Node\+Update version of \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/-\/\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ -\/-\/-\/\_\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \ \ BOUNDARY\ 1}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ /}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ [2]\ \ \ \ \ \ /\ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ \ /\ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ BOUNDARY\ 2\ \ \ \ \ |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ [1]\ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ [0]\ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ \ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ /\ \(\backslash\)\ \ direction\ of}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ |\ \ \ \ N\ \ \ \ \ \ |\ \ |\ \ \ Lagrangian}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ |\ \ \ \ |\_\ E\ \ \ |\ \ |\ \ \ coordinate}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|\ \ |\ \ \ along\ wall\ GeomObject}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BOUNDARY\ 0}
+\DoxyCodeLine{}
+\DoxyCodeLine{Within\ the\ elements\ (MacroElements),\ the\ local\ coordinates}
+\DoxyCodeLine{are\ such\ that\ the\ (E)astern\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_0\ direction,\ \ \textcolor{keywordflow}{while}\ the\ (N)orther\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_1\ direction.}
+
+\end{DoxyCode}
+
+
+Domain is parametrised by three macro elements as sketched. Elements need to be derived from Macro\+Element\+Node\+Update\+Element\+Base. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00253}{253}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_ace75c8edb3d87019dc7f06152205adab} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}}
+\index{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}{MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}) and the algebraic node update functions for nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00265}{265}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00339}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a2d8953d309eba614524fce77c44c8d46} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}}
+\index{````~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}{\string~MacroElementNodeUpdateRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00306}{306}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a99403c711c3fdc2a601b478deebef9fe} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00313}{313}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed}\label{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh_a94b5efa53ac7689757dad989098df7ed} 
+\index{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}}
+\index{setup\_macro\_element\_node\_update@{setup\_macro\_element\_node\_update}!oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_macro\_element\_node\_update()}{setup\_macro\_element\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableQuarterCircleSectorMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup all the information that\textquotesingle{}s required for Macro\+Element-\/based node update\+: Tell the elements that their geometry depends on the geometric object that parametrises the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00339}{339}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00108}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00128}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Wall\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00265}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8h}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

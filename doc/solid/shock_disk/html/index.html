@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Large-amplitude shock-wave propagation in a circular disk</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: Large-amplitude shock-wave propagation in a circular disk </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Detailed documentation to be written. Here's the already fairly well documented driver code...</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">// Driver for large-displacement elasto-dynamic test problem:</span></div>
+<div class="line"><span class="comment">// Circular disk impulsively loaded by compressive load.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//My own includes</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;solid.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Need to instantiate templated mesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/quarter_circle_sector_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ConstitutiveLaw</a>* <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Constitutive_law_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Elastic modulus</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">E</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a>=0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Uniform pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">P</a> = 0.00;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constant pressure load</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">constant_pressure</a>(<span class="keyword">const</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>,<span class="keyword">const</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>,</div>
+<div class="line">                        <span class="keyword">const</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n</a>, <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dim</a> = <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>.size();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dim</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">   {</div>
+<div class="line">    <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>] = -<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">P</a>*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n</a>[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>];</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">///////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Elastic quarter circle sector mesh with functionality to</span></div>
+<div class="line"><span class="comment">/// attach traction elements to the curved surface. We &quot;upgrade&quot;</span></div>
+<div class="line"><span class="comment">/// the RefineableQuarterCircleSectorMesh to become an</span></div>
+<div class="line"><span class="comment">/// SolidMesh and equate the Eulerian and Lagrangian coordinates,</span></div>
+<div class="line"><span class="comment">/// thus making the domain represented by the mesh the stress-free </span></div>
+<div class="line"><span class="comment">/// configuration. </span></div>
+<div class="line"><span class="comment">/// \n\n</span></div>
+<div class="line"><span class="comment">/// The member function \c make_traction_element_mesh() creates</span></div>
+<div class="line"><span class="comment">/// a separate mesh of SolidTractionElements that are attached to the</span></div>
+<div class="line"><span class="comment">/// mesh&#39;s curved boundary (boundary 1). </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh</a> :</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;,</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Build mesh and copy Eulerian coords to Lagrangian</span></div>
+<div class="line"><span class="comment"> /// ones so that the initial configuration is the stress-free one.</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">GeomObject</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">wall_pt</a>,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_lo</a>,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fract_mid</a>,</div>
+<div class="line">                                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_hi</a>,</div>
+<div class="line">                                         <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">TimeStepper</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_stepper_pt</a>=</div>
+<div class="line">                                         &amp;<a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">Mesh::Default_TimeStepper</a>) :</div>
+<div class="line">  RefineableQuarterCircleSectorMesh&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">wall_pt</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_lo</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fract_mid</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_hi</a>,</div>
+<div class="line">                                             <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_stepper_pt</a>)</div>
+<div class="line">  {</div>
+<div class="line"><span class="preprocessor">#ifdef PARANOID</span><span class="comment"></span></div>
+<div class="line"><span class="comment">   /// Check that the element type is derived from the SolidFiniteElement</span></div>
+<div class="line"><span class="comment"></span>   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidFiniteElement</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>=<span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidFiniteElement</a>*<span class="keyword">&gt;</span></div>
+<div class="line">    (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">finite_element_pt</a>(0));</div>
+<div class="line">   <span class="keywordflow">if</span> (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>==0)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">throw</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">OomphLibError</a>(</div>
+<div class="line">      <span class="stringliteral">&quot;Element needs to be derived from SolidFiniteElement\n&quot;</span>,</div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">OOMPH_CURRENT_FUNCTION</a>,</div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line">    }</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Make the current configuration the undeformed one by</span></div>
+<div class="line">   <span class="comment">// setting the nodal Lagrangian coordinates to their current</span></div>
+<div class="line">   <span class="comment">// Eulerian ones</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">set_lagrangian_nodal_coordinates</a>();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function to create mesh made of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#ad9734ea7aee2141079544bb782d3ace1">make_traction_element_mesh</a>(SolidMesh*&amp; traction_mesh_pt)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Make new mesh</span></div>
+<div class="line">   traction_mesh_pt=<span class="keyword">new</span> SolidMesh;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements on boundary 1:</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>=1;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nboundary_element</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// The element itself:</span></div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">FiniteElement</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fe_pt</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">boundary_element_pt</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Find the index of the face of element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index_at_boundary</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element</span></div>
+<div class="line">     traction_mesh_pt-&gt;add_element_pt(<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a></div>
+<div class="line">                                      (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fe_pt</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index</a>));</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function to wipe and re-create mesh made of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a33ef5828fc64fcf4e50e6c38d626ffcb">remake_traction_element_mesh</a>(SolidMesh*&amp; traction_mesh_pt)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Wipe existing mesh (but don&#39;t call it&#39;s destructor as this</span></div>
+<div class="line">   <span class="comment">// would wipe all the nodes too!)</span></div>
+<div class="line">   traction_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements on boundary 1:</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>=1;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nboundary_element</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// The element itself:</span></div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">FiniteElement</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fe_pt</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">boundary_element_pt</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Find the index of the face of element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index_at_boundary</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element</span></div>
+<div class="line">     traction_mesh_pt-&gt;add_element_pt(<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a></div>
+<div class="line">                                      (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fe_pt</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">face_index</a>));</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// &quot;Shock&quot; wave propagates through an impulsively loaded</span></div>
+<div class="line"><span class="comment">/// circular disk.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classDiskShockWaveProblem.html">DiskShockWaveProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classDiskShockWaveProblem.html#ae670d0120936f410134ba3e3b61aa880">DiskShockWaveProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Run the problem; specify case_number to label output</span></div>
+<div class="line"><span class="comment"> /// directory</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#af8dc3befd3eba59b008c315bfe077340">run</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the solid mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>*&amp; <a class="code hl_function" href="classDiskShockWaveProblem.html#a7313e96ea296dbd10b47a1e00f02341e">solid_mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code hl_variable" href="classDiskShockWaveProblem.html#a6efbcb695e829d63f810a7a9bb5a81a4">Solid_mesh_pt</a>;  </div>
+<div class="line">  } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function for the mesh of surface traction elements</span></div>
+<div class="line"><span class="comment"></span> SolidMesh*&amp; <a class="code hl_function" href="classDiskShockWaveProblem.html#ab8b15ee82d66441cdffc2bab1b49ffa6">traction_mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code hl_variable" href="classDiskShockWaveProblem.html#a286fe7d51aa16f07f0444ae7c553f140">Traction_mesh_pt</a>;  </div>
+<div class="line">  } </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a7685309caac199d18f3f81468d9fcb23">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a46f6a25da58128f6abfdbbe92ea49d11">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a50ba8e9b29ff7796fa9cb7ede8598376">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adaption: Kill and then re-build the traction </span></div>
+<div class="line"><span class="comment"> /// elements on boundary 1 and re-assign the equation numbers</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#ac2a22a8399355e461d1a9ad1e5425c9a">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc displacement and velocity: label file with before and after</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a75403423b0a031adabb5b487fa88373f">doc_displ_and_veloc</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">stage</a>=0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Dump problem-specific parameters values, then dump</span></div>
+<div class="line"><span class="comment"> /// generic problem data.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a2eaf91d3e0eb5f37b9920fc3d9d54cb9">dump_it</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ofstream</a>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dump_file</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Read problem-specific parameter values, then recover</span></div>
+<div class="line"><span class="comment"> /// generic problem data.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#ae883625e9bbe6ea442413f7c970d3fb1">restart</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ifstream</a>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">restart_file</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">DocInfo</a> <a class="code hl_variable" href="classDiskShockWaveProblem.html#a8e445e31a1067ebbd3bd667cc02e8662">Doc_info</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ofstream</a> <a class="code hl_variable" href="classDiskShockWaveProblem.html#a8ec35b07dc6870e4d5b729288053c4fe">Trace_file</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Vector of pointers to nodes whose position we&#39;re tracing</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;Node*&gt;</a> <a class="code hl_variable" href="classDiskShockWaveProblem.html#a7ab6db65bbf28185b238e84bbc16c1b8">Trace_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classDiskShockWaveProblem.html#a6efbcb695e829d63f810a7a9bb5a81a4">Solid_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> SolidMesh* <a class="code hl_variable" href="classDiskShockWaveProblem.html#a286fe7d51aa16f07f0444ae7c553f140">Traction_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================== </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code hl_function" href="classDiskShockWaveProblem.html#ae670d0120936f410134ba3e3b61aa880">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::DiskShockWaveProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Allocate the timestepper</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">add_time_stepper_pt</a>(<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">TIMESTEPPER</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set coordinates and radius for the circle that defines </span></div>
+<div class="line"> <span class="comment">// the outer curvilinear boundary of the domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_c</a>=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">y_c</a>=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">r</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that specifies the fish back in the</span></div>
+<div class="line"> <span class="comment">// undeformed configuration (basically a deep copy of the previous one)</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">GeomObject</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">curved_boundary_pt</a>=<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Circle</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_c</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">y_c</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">r</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_stepper_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The curved boundary of the mesh is defined by the geometric object</span></div>
+<div class="line"> <span class="comment">// What follows are the start and end coordinates on the geometric object:</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_lo</a>=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_hi</a>=2.0*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">atan</a>(1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fraction along geometric object at which the radial dividing line</span></div>
+<div class="line"> <span class="comment">// is placed</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fract_mid</a>=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh</span></div>
+<div class="line"> solid_mesh_pt() = <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;</a>(</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">curved_boundary_pt</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_lo</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">fract_mid</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi_hi</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_stepper_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up trace nodes as the nodes on boundary 1 (=curved boundary) in </span></div>
+<div class="line"> <span class="comment">// the original mesh (they exist under any refinement!) </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>=solid_mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod1</a>=solid_mesh_pt()-&gt;nboundary_node(1);</div>
+<div class="line"> Trace_node_pt.resize(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>+<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod1</a>);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_node_pt[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>]=solid_mesh_pt()-&gt;boundary_node_pt(0,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod1</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_node_pt[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>+<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>]=solid_mesh_pt()-&gt;boundary_node_pt(1,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build traction element mesh</span></div>
+<div class="line"> solid_mesh_pt()-&gt;<a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#ad9734ea7aee2141079544bb782d3ace1">make_traction_element_mesh</a>(traction_mesh_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh is first sub-mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">add_sub_mesh</a>(solid_mesh_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Traction mesh is first sub-mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">add_sub_mesh</a>(traction_mesh_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build combined &quot;global&quot; mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">build_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator</span></div>
+<div class="line"> solid_mesh_pt()-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Z2ErrorEstimator</a>;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Fiddle with adaptivity targets and doc</span></div>
+<div class="line"> solid_mesh_pt()-&gt;max_permitted_error()=0.006; <span class="comment">//0.03;</span></div>
+<div class="line"> solid_mesh_pt()-&gt;min_permitted_error()=0.0006;<span class="comment">// 0.0006; //0.003;</span></div>
+<div class="line"> solid_mesh_pt()-&gt;doc_adaptivity_targets(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the bottom in the vertical direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_bottom</a> = solid_mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the node</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_bottom</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   solid_mesh_pt()-&gt;boundary_node_pt(0,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>)-&gt;pin_position(1);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the left edge in the horizontal direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_side</a> = solid_mesh_pt()-&gt;nboundary_node(2);</div>
+<div class="line"> <span class="comment">//Loop over the node</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_side</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   solid_mesh_pt()-&gt;boundary_node_pt(2,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>)-&gt;pin_position(0);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a> =solid_mesh_pt()-&gt;nelement();</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Set parameters and function pointers for solid elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ELEMENT</a> *<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">mesh_pt</a>()-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the constitutive law</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Switch on inertia</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;enable_inertia();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures</a>(</div>
+<div class="line">  solid_mesh_pt()-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">element_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in traction mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>=traction_mesh_pt()-&gt;nelement();</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Set function pointers for traction elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid traction element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a> *<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a> = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span></div>
+<div class="line">    (traction_mesh_pt()-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the traction function</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;traction_fct_pt() = <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">Global_Physical_Variables::constant_pressure</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Refine uniformly</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">refine_uniformly</a>();</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">refine_uniformly</a>();</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">refine_uniformly</a>();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now the non-pinned positions of the SolidNodes will have been</span></div>
+<div class="line"> <span class="comment">// determined by interpolation. This is appropriate for uniform</span></div>
+<div class="line"> <span class="comment">// refinements once the code is up and running since we can&#39;t place</span></div>
+<div class="line"> <span class="comment">// new SolidNodes at the positions determined by the MacroElement.</span></div>
+<div class="line"> <span class="comment">// However, here we want to update the nodes to fit the exact</span></div>
+<div class="line"> <span class="comment">// intitial configuration.</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Update all solid nodes based on the Mesh&#39;s Domain/MacroElement</span></div>
+<div class="line"> <span class="comment">// representation</span></div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">update_all_solid_nodes</a>=<span class="keyword">true</span>;</div>
+<div class="line"> solid_mesh_pt()-&gt;node_update(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">update_all_solid_nodes</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now set the Eulerian equal to the Lagrangian coordinates</span></div>
+<div class="line"> solid_mesh_pt()-&gt;set_lagrangian_nodal_coordinates();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Kill and then re-build the traction elements on boundary 1,</span></div>
+<div class="line"><span class="comment">/// pin redundant pressure dofs and re-assign the equation numbers.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#ac2a22a8399355e461d1a9ad1e5425c9a">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::actions_after_adapt</a>()</div>
+<div class="line">{ </div>
+<div class="line"> <span class="comment">// Wipe and re-build traction element mesh</span></div>
+<div class="line"> solid_mesh_pt()-&gt;<a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a33ef5828fc64fcf4e50e6c38d626ffcb">remake_traction_element_mesh</a>(traction_mesh_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Re-build combined &quot;global&quot; mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">rebuild_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in traction mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>=traction_mesh_pt()-&gt;nelement();</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//Loop over the elements in the traction element mesh</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid traction element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a> *<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a> = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span></div>
+<div class="line">    (traction_mesh_pt()-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the traction function</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;traction_fct_pt() = <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">Global_Physical_Variables::constant_pressure</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures</a>(</div>
+<div class="line">  solid_mesh_pt()-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">element_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Do equation numbering</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a7685309caac199d18f3f81468d9fcb23">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::doc_solution</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output shape of deformed body</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ofstream</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>;</div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>[100];</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.open(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>);</div>
+<div class="line"> solid_mesh_pt()-&gt;output(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output traction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nel</a>=traction_mesh_pt()-&gt;nelement();</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/traction%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.open(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">unit_normal</a>(2);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>(2);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_dummy</a>(2);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s_dummy</a>(1);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nel</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <span class="stringliteral">&quot;ZONE &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s_dummy</a>[0]=-1.0+2.0*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>)/<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>-1);</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>=</div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidTractionElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">       traction_mesh_pt()-&gt;finite_element_pt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>));</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;outer_unit_normal(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s_dummy</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">unit_normal</a>);</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;traction(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s_dummy</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>);</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_x(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s_dummy</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_dummy</a>);</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_dummy</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x_dummy</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">               &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">traction</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>  </div>
+<div class="line">               &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.close(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc displacement and velocity</span></div>
+<div class="line"> doc_displ_and_veloc();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get displacement as a function of the radial coordinate</span></div>
+<div class="line"> <span class="comment">// along boundary 0</span></div>
+<div class="line"> {</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of elements along boundary 0:</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nelem</a>=solid_mesh_pt()-&gt;nboundary_element(0);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Open files</span></div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/displ%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">          Doc_info.number());</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.open(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>);</div>
+<div class="line">  </div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>(2);</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>(2);</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>(2);</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>(2);</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">r_exact</a>(2);</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">v_exact</a>(2);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nelem</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>++)</div>
+<div class="line">   {</div>
+<div class="line">    <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <span class="stringliteral">&quot;ZONE &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Move along bottom edge of element</span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>[0]=-1.0+2.0*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>)/<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>-1);</div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>[1]=-1.0;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get pointer to element</span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidFiniteElement</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>=<span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">SolidFiniteElement</a>*<span class="keyword">&gt;</span></div>
+<div class="line">       (solid_mesh_pt()-&gt;boundary_element_pt(0,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>));</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Get Lagrangian coordinate</span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_xi(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get Eulerian coordinate</span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_x(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Get velocity </span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_dxdt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,1,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>);</div>
+<div class="line">  </div>
+<div class="line">      <span class="comment">// Plot radial distance and displacement</span></div>
+<div class="line">      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>[0]-<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">                &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>[0] &lt;&lt; std::endl;</div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.close(); </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Write trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_pt</a>()-&gt;time()  &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ntrace_node</a>=Trace_node_pt.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ntrace_node</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_file &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">sqrt</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">pow</a>(Trace_node_pt[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>]-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>(0),2)+</div>
+<div class="line">                      <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">pow</a>(Trace_node_pt[<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>]-&gt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>(1),2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> Trace_file &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// removed until Jacobi eigensolver is re-instated</span></div>
+<div class="line"> <span class="comment">// // Output principal stress vectors at the centre of all elements</span></div>
+<div class="line"> <span class="comment">// SolidHelpers::doc_2D_principal_stress&lt;ELEMENT&gt;(Doc_info,solid_mesh_pt());</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//  // Write restart file</span></div>
+<div class="line"><span class="comment">//  snprintf(filename, sizeof(filename), &quot;%s/restart%i.dat&quot;,Doc_info.directory().c_str(),</span></div>
+<div class="line"><span class="comment">//          Doc_info.number());</span></div>
+<div class="line"><span class="comment">//  some_file.open(filename);</span></div>
+<div class="line"><span class="comment">//  dump_it(some_file);</span></div>
+<div class="line"><span class="comment">//  some_file.close();</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Doced solution for step &quot;</span> </div>
+<div class="line">      &lt;&lt; Doc_info.number() </div>
+<div class="line">      &lt;&lt; std::endl &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc displacement and veloc in displ_and_veloc*.dat.</span></div>
+<div class="line"><span class="comment">/// The int stage defaults to 0, in which case the &#39;*&#39; in the</span></div>
+<div class="line"><span class="comment">/// filename is simply the step number specified by the Problem&#39;s</span></div>
+<div class="line"><span class="comment">/// DocInfo object. If it&#39;s +/-1, the word &quot;before&quot; and &quot;after&quot;</span></div>
+<div class="line"><span class="comment">/// get inserted. This allows checking of the veloc/displacment</span></div>
+<div class="line"><span class="comment">/// interpolation during adaptive mesh refinement.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a75403423b0a031adabb5b487fa88373f">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::doc_displ_and_veloc</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">stage</a>)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ofstream</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>;</div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open file</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">stage</a>==-1)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/displ_and_veloc_before%i.dat&quot;</span>,</div>
+<div class="line">           Doc_info.directory().c_str(),Doc_info.number());</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">stage</a>==1)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/displ_and_veloc_after%i.dat&quot;</span>,</div>
+<div class="line">           Doc_info.directory().c_str(),Doc_info.number());</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/displ_and_veloc%i.dat&quot;</span>,</div>
+<div class="line">           Doc_info.directory().c_str(),Doc_info.number());</div>
+<div class="line">  }</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.open(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>);</div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>(2),<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>(2),<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>(2),<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>(2),<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">displ</a>(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over solid elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nel</a>=solid_mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nel</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <span class="stringliteral">&quot;ZONE I=&quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a> &lt;&lt; <span class="stringliteral">&quot;, J=&quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>[0]=-1.0+2.0*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>)/<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>-1);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">      {</div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>[1]=-1.0+2.0*<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>)/<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">double</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">npts</a>-1);</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Cast to full element type</span></div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ELEMENT</a>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>=<span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(solid_mesh_pt()-&gt;</div>
+<div class="line">                                             <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">finite_element_pt</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Eulerian coordinate</span></div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_x(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>);</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Lagrangian coordinate</span></div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_xi(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>);</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Displacement</span></div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">displ</a>[0]=<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>[0]-<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>[0];</div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">displ</a>[1]=<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>[1]-<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">xi</a>[1];</div>
+<div class="line"> </div>
+<div class="line">       <span class="comment">// Velocity (1st deriv)</span></div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">el_pt</a>-&gt;interpolated_dxdt(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">s</a>,1,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>);</div>
+<div class="line"> </div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">x</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">                 &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">displ</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">displ</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>  </div>
+<div class="line">                 &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dxdt</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>  </div>
+<div class="line">                 &lt;&lt; std::endl;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">some_file</a>.close(); </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Dump the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#a2eaf91d3e0eb5f37b9920fc3d9d54cb9">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::dump_it</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ofstream</a>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dump_file</a>)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Call generic dump()</span></div>
+<div class="line"> Problem::dump(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dump_file</a>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Read solution from disk</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#ae883625e9bbe6ea442413f7c970d3fb1">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::restart</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">ifstream</a>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">restart_file</a>)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Read generic problem data</span></div>
+<div class="line"> Problem::read(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">restart_file</a>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Run the problem; specify case_number to label output directory</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDiskShockWaveProblem.html#af8dc3befd3eba59b008c315bfe077340">DiskShockWaveProblem&lt;ELEMENT,TIMESTEPPER&gt;::run</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If there&#39;s a command line argument, run the validation (i.e. do only </span></div>
+<div class="line"> <span class="comment">// 3 timesteps; otherwise do a few cycles</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nstep</a>=400;</div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">CommandLineArgs::Argc</a>!=1)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nstep</a>=3;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define output directory</span></div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dirname</a>[100];</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dirname</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dirname</a>), <span class="stringliteral">&quot;RESLT%i&quot;</span>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>);</div>
+<div class="line"> Doc_info.set_directory(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dirname</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> Doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>[100];   </div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,Doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">filename</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up trace nodes as the nodes on boundary 1 (=curved boundary) in </span></div>
+<div class="line"> <span class="comment">// the original mesh (they exist under any refinement!) </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>=solid_mesh_pt()-&gt;nboundary_node(0);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod1</a>=solid_mesh_pt()-&gt;nboundary_node(1);</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;time\&quot;&quot;</span>;</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod0</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_file &lt;&lt; <span class="stringliteral">&quot;, \&quot;radial node &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a> &lt;&lt; <span class="stringliteral">&quot;\&quot; &quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>=0;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nnod1</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   Trace_file &lt;&lt; <span class="stringliteral">&quot;, \&quot;azimuthal node &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">j</a> &lt;&lt; <span class="stringliteral">&quot;\&quot; &quot;</span>;</div>
+<div class="line">  }</div>
+<div class="line"> Trace_file &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//  // Restart?</span></div>
+<div class="line"><span class="comment">//  //---------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//  // Pointer to restart file</span></div>
+<div class="line"><span class="comment">//  ifstream* restart_file_pt=0;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//  // No restart</span></div>
+<div class="line"><span class="comment">//  //-----------</span></div>
+<div class="line"><span class="comment">//  if (CommandLineArgs::Argc==1)</span></div>
+<div class="line"><span class="comment">//   {</span></div>
+<div class="line"><span class="comment">//    cout &lt;&lt; &quot;No restart&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><span class="comment">//   }</span></div>
+<div class="line"><span class="comment">//  // Restart</span></div>
+<div class="line"><span class="comment">//  //--------</span></div>
+<div class="line"><span class="comment">//  else if (CommandLineArgs::Argc==2)</span></div>
+<div class="line"><span class="comment">//   {</span></div>
+<div class="line"><span class="comment">//    // Open restart file</span></div>
+<div class="line"><span class="comment">//    restart_file_pt=new ifstream(CommandLineArgs::Argv[1],ios_base::in);</span></div>
+<div class="line"><span class="comment">//    if (restart_file_pt!=0)</span></div>
+<div class="line"><span class="comment">//     {</span></div>
+<div class="line"><span class="comment">//      cout &lt;&lt; &quot;Have opened &quot; &lt;&lt; CommandLineArgs::Argv[1] &lt;&lt; </span></div>
+<div class="line"><span class="comment">//       &quot; for restart. &quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><span class="comment">//     }</span></div>
+<div class="line"><span class="comment">//    else</span></div>
+<div class="line"><span class="comment">//     {</span></div>
+<div class="line"><span class="comment">//      cout &lt;&lt; &quot;ERROR while trying to open &quot; &lt;&lt; CommandLineArgs::Argv[1] &lt;&lt; </span></div>
+<div class="line"><span class="comment">//       &quot; for restart.&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><span class="comment">//     }</span></div>
+<div class="line"><span class="comment">//    // Do the actual restart</span></div>
+<div class="line"><span class="comment">//    pause(&quot;need to do the actual restart&quot;);</span></div>
+<div class="line"><span class="comment">//    //problem.restart(*restart_file_pt);</span></div>
+<div class="line"><span class="comment">//   }</span></div>
+<div class="line"><span class="comment">//  // More than one restart file specified?</span></div>
+<div class="line"><span class="comment">//  else </span></div>
+<div class="line"><span class="comment">//   {</span></div>
+<div class="line"><span class="comment">//    cout &lt;&lt; &quot;Can only specify one input file &quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><span class="comment">//    cout &lt;&lt; &quot;You specified the following command line arguments: &quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><span class="comment">//    CommandLineArgs::output();</span></div>
+<div class="line"><span class="comment">//    //assert(false);</span></div>
+<div class="line"><span class="comment">//   }</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial parameter values</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a> = 0.1; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise time</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time0</a>=0.0;</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time_pt</a>()-&gt;time()=<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">time0</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial timestep</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dt</a>=0.01; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Impulsive start</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">assign_initial_values_impulsive</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dt</a>); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial state</span></div>
+<div class="line"> doc_solution();</div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// First step without adaptivity</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">unsteady_newton_solve</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dt</a>); </div>
+<div class="line"> doc_solution();</div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Timestepping loop for subsequent steps with adaptivity</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">max_adapt</a>=1;</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>=1;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>&lt;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">nstep</a>;<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">unsteady_newton_solve</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">dt</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">max_adapt</a>,<span class="keyword">false</span>);</div>
+<div class="line">   doc_solution();</div>
+<div class="line">   Doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for simple elastic problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="shock__disk_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">argc</a>, <span class="keywordtype">char</span>* <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">argv</a>[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">CommandLineArgs::setup</a>(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">argc</a>,<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">argv</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Initialise physical parameters</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a> = 1.0; <span class="comment">// ADJUST </span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a> = 0.3; <span class="comment">// ADJUST</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// &quot;Big G&quot; Linear constitutive equations:</span></div>
+<div class="line">  <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">   <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">GeneralisedHookean</a>(&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>,</div>
+<div class="line">                          &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up the problem:</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>=0;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pure displacement formulation</span></div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Running case &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a> </div>
+<div class="line">        &lt;&lt; <span class="stringliteral">&quot;: Pure displacement formulation&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">DiskShockWaveProblem&lt;RefineableQPVDElement&lt;2,3&gt;</a>, <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Newmark&lt;1&gt;</a> &gt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>.run(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>);</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>++;</div>
+<div class="line">  }</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Pressure-displacement with Crouzeix Raviart-type pressure</span></div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Running case &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a> </div>
+<div class="line">        &lt;&lt; <span class="stringliteral">&quot;: Pressure/displacement with Crouzeix-Raviart pressure&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">DiskShockWaveProblem&lt;RefineableQPVDElementWithPressure&lt;2&gt;</a>, <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Newmark&lt;1&gt;</a> &gt;</div>
+<div class="line">    <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>.run(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>);</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pressure-displacement with Taylor-Hood-type pressure</span></div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Running case &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a> </div>
+<div class="line">        &lt;&lt; <span class="stringliteral">&quot;: Pressure/displacement with Taylor-Hood pressure&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">DiskShockWaveProblem&lt;RefineableQPVDElementWithContinuousPressure&lt;2&gt;</a>, </div>
+<div class="line">    <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">Newmark&lt;1&gt;</a> &gt; <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">problem</a>.run(<a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>);</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableQuarterCircleSectorMesh.html">case_number</a>++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Clean up </span></div>
+<div class="line"> <span class="keyword">delete</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>=0;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html"><div class="ttname"><a href="classDiskShockWaveProblem.html">DiskShockWaveProblem</a></div><div class="ttdoc">&quot;Shock&quot; wave propagates through an impulsively loaded circular disk.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00207">shock_disk.cc:208</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a286fe7d51aa16f07f0444ae7c553f140"><div class="ttname"><a href="classDiskShockWaveProblem.html#a286fe7d51aa16f07f0444ae7c553f140">DiskShockWaveProblem::Traction_mesh_pt</a></div><div class="ttdeci">SolidMesh * Traction_mesh_pt</div><div class="ttdoc">Pointer to mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00270">shock_disk.cc:270</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a2eaf91d3e0eb5f37b9920fc3d9d54cb9"><div class="ttname"><a href="classDiskShockWaveProblem.html#a2eaf91d3e0eb5f37b9920fc3d9d54cb9">DiskShockWaveProblem::dump_it</a></div><div class="ttdeci">void dump_it(ofstream &amp;dump_file)</div><div class="ttdoc">Dump problem-specific parameters values, then dump generic problem data.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00690">shock_disk.cc:690</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a46f6a25da58128f6abfdbbe92ea49d11"><div class="ttname"><a href="classDiskShockWaveProblem.html#a46f6a25da58128f6abfdbbe92ea49d11">DiskShockWaveProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00235">shock_disk.cc:235</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a50ba8e9b29ff7796fa9cb7ede8598376"><div class="ttname"><a href="classDiskShockWaveProblem.html#a50ba8e9b29ff7796fa9cb7ede8598376">DiskShockWaveProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00238">shock_disk.cc:238</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a6efbcb695e829d63f810a7a9bb5a81a4"><div class="ttname"><a href="classDiskShockWaveProblem.html#a6efbcb695e829d63f810a7a9bb5a81a4">DiskShockWaveProblem::Solid_mesh_pt</a></div><div class="ttdeci">ElasticRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * Solid_mesh_pt</div><div class="ttdoc">Pointer to solid mesh.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00267">shock_disk.cc:267</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a7313e96ea296dbd10b47a1e00f02341e"><div class="ttname"><a href="classDiskShockWaveProblem.html#a7313e96ea296dbd10b47a1e00f02341e">DiskShockWaveProblem::solid_mesh_pt</a></div><div class="ttdeci">ElasticRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; *&amp; solid_mesh_pt()</div><div class="ttdoc">Access function for the solid mesh.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00220">shock_disk.cc:220</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a75403423b0a031adabb5b487fa88373f"><div class="ttname"><a href="classDiskShockWaveProblem.html#a75403423b0a031adabb5b487fa88373f">DiskShockWaveProblem::doc_displ_and_veloc</a></div><div class="ttdeci">void doc_displ_and_veloc(const int &amp;stage=0)</div><div class="ttdoc">Doc displacement and velocity: label file with before and after.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00613">shock_disk.cc:613</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a7685309caac199d18f3f81468d9fcb23"><div class="ttname"><a href="classDiskShockWaveProblem.html#a7685309caac199d18f3f81468d9fcb23">DiskShockWaveProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00474">shock_disk.cc:474</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a7ab6db65bbf28185b238e84bbc16c1b8"><div class="ttname"><a href="classDiskShockWaveProblem.html#a7ab6db65bbf28185b238e84bbc16c1b8">DiskShockWaveProblem::Trace_node_pt</a></div><div class="ttdeci">Vector&lt; Node * &gt; Trace_node_pt</div><div class="ttdoc">Vector of pointers to nodes whose position we're tracing.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00264">shock_disk.cc:264</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a8e445e31a1067ebbd3bd667cc02e8662"><div class="ttname"><a href="classDiskShockWaveProblem.html#a8e445e31a1067ebbd3bd667cc02e8662">DiskShockWaveProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00258">shock_disk.cc:258</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_a8ec35b07dc6870e4d5b729288053c4fe"><div class="ttname"><a href="classDiskShockWaveProblem.html#a8ec35b07dc6870e4d5b729288053c4fe">DiskShockWaveProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00261">shock_disk.cc:261</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_ab8b15ee82d66441cdffc2bab1b49ffa6"><div class="ttname"><a href="classDiskShockWaveProblem.html#ab8b15ee82d66441cdffc2bab1b49ffa6">DiskShockWaveProblem::traction_mesh_pt</a></div><div class="ttdeci">SolidMesh *&amp; traction_mesh_pt()</div><div class="ttdoc">Access function for the mesh of surface traction elements.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00226">shock_disk.cc:226</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_ac2a22a8399355e461d1a9ad1e5425c9a"><div class="ttname"><a href="classDiskShockWaveProblem.html#ac2a22a8399355e461d1a9ad1e5425c9a">DiskShockWaveProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adaption: Kill and then re-build the traction elements on boundary 1 and re-assign the ...</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00436">shock_disk.cc:436</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_ae670d0120936f410134ba3e3b61aa880"><div class="ttname"><a href="classDiskShockWaveProblem.html#ae670d0120936f410134ba3e3b61aa880">DiskShockWaveProblem::DiskShockWaveProblem</a></div><div class="ttdeci">DiskShockWaveProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00282">shock_disk.cc:282</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_ae883625e9bbe6ea442413f7c970d3fb1"><div class="ttname"><a href="classDiskShockWaveProblem.html#ae883625e9bbe6ea442413f7c970d3fb1">DiskShockWaveProblem::restart</a></div><div class="ttdeci">void restart(ifstream &amp;restart_file)</div><div class="ttdoc">Read problem-specific parameter values, then recover generic problem data.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00702">shock_disk.cc:702</a></div></div>
+<div class="ttc" id="aclassDiskShockWaveProblem_html_af8dc3befd3eba59b008c315bfe077340"><div class="ttname"><a href="classDiskShockWaveProblem.html#af8dc3befd3eba59b008c315bfe077340">DiskShockWaveProblem::run</a></div><div class="ttdeci">void run(const unsigned &amp;case_number)</div><div class="ttdoc">Run the problem; specify case_number to label output directory.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00714">shock_disk.cc:714</a></div></div>
+<div class="ttc" id="aclassElasticRefineableQuarterCircleSectorMesh_html"><div class="ttname"><a href="classElasticRefineableQuarterCircleSectorMesh.html">ElasticRefineableQuarterCircleSectorMesh</a></div><div class="ttdoc">Elastic quarter circle sector mesh with functionality to attach traction elements to the curved surfa...</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00100">shock_disk.cc:103</a></div></div>
+<div class="ttc" id="aclassElasticRefineableQuarterCircleSectorMesh_html_a123699deecd2a908a7a882a9d2a9f4dd"><div class="ttname"><a href="classElasticRefineableQuarterCircleSectorMesh.html#a123699deecd2a908a7a882a9d2a9f4dd">ElasticRefineableQuarterCircleSectorMesh::ElasticRefineableQuarterCircleSectorMesh</a></div><div class="ttdeci">ElasticRefineableQuarterCircleSectorMesh(GeomObject *wall_pt, const double &amp;xi_lo, const double &amp;fract_mid, const double &amp;xi_hi, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration...</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00067">shock_disk.cc:110</a></div></div>
+<div class="ttc" id="aclassElasticRefineableQuarterCircleSectorMesh_html_a33ef5828fc64fcf4e50e6c38d626ffcb"><div class="ttname"><a href="classElasticRefineableQuarterCircleSectorMesh.html#a33ef5828fc64fcf4e50e6c38d626ffcb">ElasticRefineableQuarterCircleSectorMesh::remake_traction_element_mesh</a></div><div class="ttdeci">void remake_traction_element_mesh(SolidMesh *&amp;traction_mesh_pt)</div><div class="ttdoc">Function to wipe and re-create mesh made of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00165">shock_disk.cc:165</a></div></div>
+<div class="ttc" id="aclassElasticRefineableQuarterCircleSectorMesh_html_ad9734ea7aee2141079544bb782d3ace1"><div class="ttname"><a href="classElasticRefineableQuarterCircleSectorMesh.html#ad9734ea7aee2141079544bb782d3ace1">ElasticRefineableQuarterCircleSectorMesh::make_traction_element_mesh</a></div><div class="ttdeci">void make_traction_element_mesh(SolidMesh *&amp;traction_mesh_pt)</div><div class="ttdoc">Function to create mesh made of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00140">shock_disk.cc:140</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00052">shock_disk.cc:53</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a09a019474b7405b35da2437f7779bc7e"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a09a019474b7405b35da2437f7779bc7e">Global_Physical_Variables::E</a></div><div class="ttdeci">double E</div><div class="ttdoc">Elastic modulus.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00058">shock_disk.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a19f4e20a92e7d216b4d2b00308f96917"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a19f4e20a92e7d216b4d2b00308f96917">Global_Physical_Variables::constant_pressure</a></div><div class="ttdeci">void constant_pressure(const Vector&lt; double &gt; &amp;xi, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Constant pressure load.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00067">shock_disk.cc:67</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a23c2ade6398f54040b869f7f3a2bcc4b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a23c2ade6398f54040b869f7f3a2bcc4b">Global_Physical_Variables::P</a></div><div class="ttdeci">double P</div><div class="ttdoc">Uniform pressure.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00064">shock_disk.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a2a37fb040c832ee7a086bb13bb02a100"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00055">shock_disk.cc:55</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00061">shock_disk.cc:61</a></div></div>
+<div class="ttc" id="ashock__disk_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="shock__disk_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for simple elastic problem.</div><div class="ttdef"><b>Definition</b> <a href="shock__disk_8cc_source.html#l00838">shock_disk.cc:838</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Small-amplitude non-axisymmetric oscillations of a thin-walled elastic ring</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: Small-amplitude non-axisymmetric oscillations of a thin-walled elastic ring </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Detailed documentation to be written. Here's the already fairly well documented driver code...</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">//Driver for small amplitude ring oscillations</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//OOMPH-LIB includes</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;beam.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/one_d_lagrangian_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====start_of_namespace============================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for long/short run: Default =  perform long run</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Long_run_flag</a>=1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for fixed timestep: Default = fixed timestep</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Fixed_timestep_flag</a>=1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Boolean flag to decide if to set IC for Newmark</span></div>
+<div class="line"><span class="comment"> /// directly or consistently : No Default</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Consistent_newmark_ic</a>;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">/////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==start_of_problem_class==============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Oscillating ring problem: Compare small-amplitude oscillations</span></div>
+<div class="line"><span class="comment">/// against analytical solution of the linearised equations.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticRingProblem.html">ElasticRingProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Number of elements, length of domain, flag for</span></div>
+<div class="line"><span class="comment"> /// setting Newmark IC directly or consistently</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRingProblem.html">ElasticRingProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;N, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;L);</div>
+<div class="line">                    <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Access function for the mesh</span></div>
+<div class="line"><span class="comment"></span> OneDLagrangianMesh&lt;ELEMENT&gt;* <a class="code hl_function" href="classElasticRingProblem.html#ab7e6b68cb51f8d6bc636e0f0789793ce">mesh_pt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>OneDLagrangianMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function is empty </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#ab0eb0dcecfa7e9c9e52ecf319f6e873e">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function is empty </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#aac5f3adac1e1a42492bd428eeb732a3d">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Do unsteady run</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">unsteady_run</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain (in terms of the Lagrangian coordinates)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classElasticRingProblem.html#a74aac22a4e8673b1e58c024610f8220f">Length</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// In which element are we applying displacement control?</span></div>
+<div class="line"><span class="comment"> /// (here only used for doc of radius)</span></div>
+<div class="line"><span class="comment"></span> ELEMENT* <a class="code hl_variable" href="classElasticRingProblem.html#aba78b855677ef08ea3d9678dcde8a71b">Displ_control_elem_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// At what local coordinate are we applying displacement control?</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;double&gt; <a class="code hl_variable" href="classElasticRingProblem.html#a0acfcb485441bbe0c9e4202d8a5e72d3">S_displ_control</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to geometric object that represents the undeformed shape</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code hl_variable" href="classElasticRingProblem.html#ab0f0f02cc67dcabfc38f051e3d3cebfc">Undef_geom_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to object that specifies the initial condition</span></div>
+<div class="line"><span class="comment"></span> SolidInitialCondition* <a class="code hl_variable" href="classElasticRingProblem.html#a0d314051b66afb53fa7f28c298f38206">IC_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file for recording control data</span></div>
+<div class="line"><span class="comment"></span> ofstream <a class="code hl_variable" href="classElasticRingProblem.html#a7f0f8c10b57021446e19c5833863cc7f">Trace_file</a>;</div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_constructor===============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor for elastic ring problem</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code hl_function" href="classElasticRingProblem.html#a57be33a379c1ec4418a7fb3e8db8ef2b">ElasticRingProblem&lt;ELEMENT,TIMESTEPPER&gt;::ElasticRingProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; N, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; L) </div>
+<div class="line"> : Length(L)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Allocate the timestepper -- This constructs the time object as well</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Undeformed beam is an elliptical ring </span></div>
+<div class="line"> Undef_geom_pt=<span class="keyword">new</span> Ellipse(1.0,1.0); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the (Lagrangian!) mesh</span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> OneDLagrangianMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  N,L,Undef_geom_pt,Problem::time_stepper_pt()); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Boundary condition: </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom: </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0;</div>
+<div class="line"> <span class="comment">// No vertical displacement</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1); </div>
+<div class="line"> <span class="comment">// Zero slope: Pin type 1 dof for displacement direction 0 </span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Top: </span></div>
+<div class="line"> ibound=1;</div>
+<div class="line"> <span class="comment">// No horizontal displacement</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(0); </div>
+<div class="line"> <span class="comment">// Zero slope: Pin type 1 dof for displacement direction 1</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(ibound,0)-&gt;pin_position(1,1); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Resize vector of local coordinates for control displacement</span></div>
+<div class="line"> <span class="comment">// (here only used to identify the point whose displacement we&#39;re</span></div>
+<div class="line"> <span class="comment">// tracing)</span></div>
+<div class="line"> S_displ_control.resize(1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">// -----------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nelement = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set pointer to undeformed wall shape</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;Nelement;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to proper element type</span></div>
+<div class="line">   ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Assign the undeformed surface</span></div>
+<div class="line">   elem_pt-&gt;undeformed_beam_pt() = Undef_geom_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Establish control displacment: (even though no displacement </span></div>
+<div class="line"> <span class="comment">// control is applied we still want to doc the displacement at the same point)</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Choose element: (This is the last one)</span></div>
+<div class="line"> Displ_control_elem_pt=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">  mesh_pt()-&gt;element_pt(Nelement-1));</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fix/doc the displacement in the vertical (1) direction at right end of</span></div>
+<div class="line"> <span class="comment">// the control element</span></div>
+<div class="line"> S_displ_control[0]=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;# of dofs &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Geometric object that specifies the initial conditions</span></div>
+<div class="line"> <span class="keywordtype">double</span> eps_buckl=1.0e-2;</div>
+<div class="line"> <span class="keywordtype">double</span> HoR=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(0))-&gt;h();</div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_buckl=2;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> imode=2;</div>
+<div class="line"> GeomObject* ic_geom_object_pt=</div>
+<div class="line">  <span class="keyword">new</span> PseudoBucklingRing(eps_buckl,HoR,n_buckl,imode,</div>
+<div class="line">                         Problem::time_stepper_pt()); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup object that specifies the initial conditions:</span></div>
+<div class="line"> IC_pt = <span class="keyword">new</span> SolidInitialCondition(ic_geom_object_pt);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_doc_solution================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Document solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">ElasticRingProblem&lt;ELEMENT, TIMESTEPPER&gt;::doc_solution</a>(</div>
+<div class="line"> DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Doc-ing step &quot;</span> &lt;&lt;  doc_info.number()</div>
+<div class="line">      &lt;&lt; <span class="stringliteral">&quot; for time &quot;</span> &lt;&lt; time_stepper_pt()-&gt;time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Loop over all elements to get global kinetic and potential energy</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> Nelem=mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordtype">double</span> global_kin=0;</div>
+<div class="line"> <span class="keywordtype">double</span> global_pot=0;</div>
+<div class="line"> <span class="keywordtype">double</span> pot,kin;</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;Nelem;ielem++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(ielem))-&gt;get_energy(pot,kin);</div>
+<div class="line">   global_kin+=kin;</div>
+<div class="line">   global_pot+=pot;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Control displacement for initial condition object</span></div>
+<div class="line"> Vector&lt;double&gt; xi_ctrl(1);</div>
+<div class="line"> Vector&lt;double&gt; posn_ctrl(2);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Lagrangian coordinate of control point</span></div>
+<div class="line"> xi_ctrl[0]=Displ_control_elem_pt-&gt;interpolated_xi(S_displ_control,0);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Get position</span></div>
+<div class="line"> IC_pt-&gt;geom_object_pt()-&gt;position(xi_ctrl,posn_ctrl);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file: Time, control position, energies</span></div>
+<div class="line"> Trace_file &lt;&lt; time_pt()-&gt;time()  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; Displ_control_elem_pt-&gt;interpolated_x(S_displ_control,1) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_pot  &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_kin</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_pot + global_kin </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; posn_ctrl[1]</div>
+<div class="line">            &lt;&lt; std::endl; </div>
+<div class="line">  </div>
+<div class="line">  </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/ring%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over all elements do dump out previous solutions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nsteps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> t=0;t&lt;=nsteps;t++)</div>
+<div class="line">  {     </div>
+<div class="line">   snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/ring%i-%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">           doc_info.number(),t);</div>
+<div class="line">   some_file.open(filename);</div>
+<div class="line">   <span class="keywordtype">unsigned</span> Nelem=mesh_pt()-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;Nelem;ielem++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(ielem))-&gt;</div>
+<div class="line">      output(t,some_file,npts);</div>
+<div class="line">    }</div>
+<div class="line">   some_file.close();</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Output for initial condition object</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/ic_ring%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line">  </div>
+<div class="line"> <span class="keywordtype">unsigned</span> nplot=1+(npts-1)*mesh_pt()-&gt;nelement();</div>
+<div class="line"> Vector&lt;double&gt; xi(1);</div>
+<div class="line"> Vector&lt;double&gt; posn(2);</div>
+<div class="line"> Vector&lt;double&gt; veloc(2);</div>
+<div class="line"> Vector&lt;double&gt; accel(2);</div>
+<div class="line">  </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot=0;iplot&lt;nplot;iplot++)</div>
+<div class="line">  {</div>
+<div class="line">   xi[0]=Length/double(nplot-1)*double(iplot);</div>
+<div class="line">    </div>
+<div class="line">   IC_pt-&gt;geom_object_pt()-&gt;position(xi,posn);</div>
+<div class="line">   IC_pt-&gt;geom_object_pt()-&gt;dposition_dt(xi,1,veloc);</div>
+<div class="line">   IC_pt-&gt;geom_object_pt()-&gt;dposition_dt(xi,2,accel);</div>
+<div class="line">    </div>
+<div class="line">   some_file &lt;&lt; posn[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; posn[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; xi[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; veloc[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; veloc[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; accel[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; accel[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; sqrt(pow(posn[0],2)+pow(posn[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; sqrt(pow(veloc[0],2)+pow(veloc[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; sqrt(pow(accel[0],2)+pow(accel[1],2)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">             &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> some_file.close();</div>
+<div class="line">} <span class="comment">// end of doc solution</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_unsteady_run=================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Solver loop to perform unsteady run</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">ElasticRingProblem&lt;ELEMENT,TIMESTEPPER&gt;::unsteady_run</a>()</div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Label for output</span></div>
+<div class="line"><span class="comment"></span> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Step number</span></div>
+<div class="line"> doc_info.number()=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/trace_ring.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> Trace_file &lt;&lt;  <span class="stringliteral">&quot;VARIABLES=\&quot;time\&quot;,\&quot;R&lt;sub&gt;ctrl&lt;/sub&gt;\&quot;,\&quot;E&lt;sub&gt;pot&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;E&lt;sub&gt;kin&lt;/sub&gt;\&quot;,\&quot;E&lt;sub&gt;kin&lt;/sub&gt;+E&lt;sub&gt;pot&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;&lt;sub&gt;exact&lt;/sub&gt;R&lt;sub&gt;ctrl&lt;/sub&gt;\&quot;&quot;</span> </div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=600; </div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a>==0) {nstep=10;}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial timestep</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Ratio for timestep reduction</span></div>
+<div class="line"> <span class="keywordtype">double</span> timestep_ratio=1.0;</div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a>==0) {timestep_ratio=0.995;}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of previous timesteps stored</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ndt=time_stepper_pt()-&gt;time_pt()-&gt;ndt();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup vector of &quot;previous&quot; timesteps</span></div>
+<div class="line"> Vector&lt;double&gt; dt_prev(ndt);</div>
+<div class="line"> dt_prev[0]=dt; </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=1;i&lt;ndt;i++)</div>
+<div class="line">  {</div>
+<div class="line">   dt_prev[i]=dt_prev[i-1]/timestep_ratio;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise the history of previous timesteps</span></div>
+<div class="line"> time_pt()-&gt;initialise_dt(dt_prev);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise time</span></div>
+<div class="line"> <span class="keywordtype">double</span> time0=10.0;</div>
+<div class="line"> time_pt()-&gt;time()=time0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup analytical initial condition?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Note: Time has been scaled on intrinsic timescale so</span></div>
+<div class="line">   <span class="comment">// we don&#39;t need to specify a multiplier for the inertia</span></div>
+<div class="line">   <span class="comment">// terms (the default assignment of 1.0 is OK)</span></div>
+<div class="line">   SolidMesh::Solid_IC_problem.</div>
+<div class="line">    set_newmark_initial_condition_consistently(</div>
+<div class="line">     <span class="keyword">this</span>,mesh_pt(),<span class="keyword">static_cast&lt;</span>TIMESTEPPER*<span class="keyword">&gt;</span>(time_stepper_pt()),IC_pt,dt);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   SolidMesh::Solid_IC_problem.</div>
+<div class="line">    set_newmark_initial_condition_directly(</div>
+<div class="line">     <span class="keyword">this</span>,mesh_pt(),<span class="keyword">static_cast&lt;</span>TIMESTEPPER*<span class="keyword">&gt;</span>(time_stepper_pt()),IC_pt,dt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output initial data</span></div>
+<div class="line"> doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Time integration loop</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=1;i&lt;=nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve</span></div>
+<div class="line">   unsteady_newton_solve(dt); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Reduce timestep</span></div>
+<div class="line">   <span class="keywordflow">if</span> (time_pt()-&gt;time()&lt;100.0) {dt=timestep_ratio*dt;}</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of unsteady run</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_main=====================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for ring that performs small-amplitude oscillations</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="lin__unsteady__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Convert command line arguments (if any) into flags:</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordflow">if</span> (argc==2)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Nontrivial command line input: Setup Newmark IC directly</span></div>
+<div class="line">   <span class="comment">// (rather than consistently with PVD)</span></div>
+<div class="line">   <span class="keywordflow">if</span> (atoi(argv[1])==1) </div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">true</span>;</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">false</span>;</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC directly&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Not enough command line arguments specified -- using defaults.&quot;</span> </div>
+<div class="line">        &lt;&lt; std::endl;</div>
+<div class="line">  } <span class="comment">// end of 1 argument</span></div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc==4)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Three command line arguments specified:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="comment">// Nontrivial command line input: Setup Newmark IC directly</span></div>
+<div class="line">   <span class="comment">// (rather than consistently with PVD)</span></div>
+<div class="line">   <span class="keywordflow">if</span> (atoi(argv[1])==1) </div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">true</span>;</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a>=<span class="keyword">false</span>;</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC directly&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">// Flag for long run</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a>=atoi(argv[2]);</div>
+<div class="line">   <span class="comment">// Flag for fixed timestep</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a>=atoi(argv[3]);</div>
+<div class="line">  } <span class="comment">// end of 3 arguments</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   std::string error_message =</div>
+<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments. Specify one or three.\n&quot;</span>;</div>
+<div class="line">   error_message += <span class="stringliteral">&quot;Arg1: Long_run_flag [0/1]\n&quot;</span>;</div>
+<div class="line">   error_message += <span class="stringliteral">&quot;Arg2: Impulsive_start_flag [0/1]\n&quot;</span>;</div>
+<div class="line">   error_message += <span class="stringliteral">&quot;Arg3: Restart_flag [restart_file] (optional)\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  } <span class="comment">// too many arguments</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Setting Newmark IC consistently: &quot;</span></div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a> &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Long run flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Fixed timestep flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> L = MathematicalConstants::Pi/2.0;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Number of elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nelem = 13;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRingProblem.html">ElasticRingProblem&lt;HermiteBeamElement,Newmark&lt;3&gt;</a> &gt; </div>
+<div class="line">  problem(nelem,L);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do unsteady run</span></div>
+<div class="line"> problem.unsteady_run();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="ttc" id="aclassElasticRingProblem_html"><div class="ttname"><a href="classElasticRingProblem.html">ElasticRingProblem</a></div><div class="ttdoc">Oscillating ring problem: Compare small-amplitude oscillations against analytical solution of the lin...</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00071">lin_unsteady_ring.cc:72</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a0acfcb485441bbe0c9e4202d8a5e72d3"><div class="ttname"><a href="classElasticRingProblem.html#a0acfcb485441bbe0c9e4202d8a5e72d3">ElasticRingProblem::S_displ_control</a></div><div class="ttdeci">Vector&lt; double &gt; S_displ_control</div><div class="ttdoc">At what local coordinate are we applying displacement control?</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00108">lin_unsteady_ring.cc:108</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a0d314051b66afb53fa7f28c298f38206"><div class="ttname"><a href="classElasticRingProblem.html#a0d314051b66afb53fa7f28c298f38206">ElasticRingProblem::IC_pt</a></div><div class="ttdeci">SolidInitialCondition * IC_pt</div><div class="ttdoc">Pointer to object that specifies the initial condition.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00114">lin_unsteady_ring.cc:114</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a57be33a379c1ec4418a7fb3e8db8ef2b"><div class="ttname"><a href="classElasticRingProblem.html#a57be33a379c1ec4418a7fb3e8db8ef2b">ElasticRingProblem::ElasticRingProblem</a></div><div class="ttdeci">ElasticRingProblem(const unsigned &amp;N, const double &amp;L)</div><div class="ttdoc">Constructor: Number of elements, length of domain, flag for setting Newmark IC directly or consistent...</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00127">lin_unsteady_ring.cc:128</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a74aac22a4e8673b1e58c024610f8220f"><div class="ttname"><a href="classElasticRingProblem.html#a74aac22a4e8673b1e58c024610f8220f">ElasticRingProblem::Length</a></div><div class="ttdeci">double Length</div><div class="ttdoc">Length of domain (in terms of the Lagrangian coordinates)</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00101">lin_unsteady_ring.cc:101</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a7f0f8c10b57021446e19c5833863cc7f"><div class="ttname"><a href="classElasticRingProblem.html#a7f0f8c10b57021446e19c5833863cc7f">ElasticRingProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file for recording control data.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00117">lin_unsteady_ring.cc:117</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_a9aa904e4cf82d45711f890cd8440ced9"><div class="ttname"><a href="classElasticRingProblem.html#a9aa904e4cf82d45711f890cd8440ced9">ElasticRingProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc solution.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00213">lin_unsteady_ring.cc:213</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_aac5f3adac1e1a42492bd428eeb732a3d"><div class="ttname"><a href="classElasticRingProblem.html#aac5f3adac1e1a42492bd428eeb732a3d">ElasticRingProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00090">lin_unsteady_ring.cc:90</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab0eb0dcecfa7e9c9e52ecf319f6e873e"><div class="ttname"><a href="classElasticRingProblem.html#ab0eb0dcecfa7e9c9e52ecf319f6e873e">ElasticRingProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function is empty.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00087">lin_unsteady_ring.cc:87</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab0f0f02cc67dcabfc38f051e3d3cebfc"><div class="ttname"><a href="classElasticRingProblem.html#ab0f0f02cc67dcabfc38f051e3d3cebfc">ElasticRingProblem::Undef_geom_pt</a></div><div class="ttdeci">GeomObject * Undef_geom_pt</div><div class="ttdoc">Pointer to geometric object that represents the undeformed shape.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00111">lin_unsteady_ring.cc:111</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_ab7e6b68cb51f8d6bc636e0f0789793ce"><div class="ttname"><a href="classElasticRingProblem.html#ab7e6b68cb51f8d6bc636e0f0789793ce">ElasticRingProblem::mesh_pt</a></div><div class="ttdeci">OneDLagrangianMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Access function for the mesh.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00081">lin_unsteady_ring.cc:81</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_aba78b855677ef08ea3d9678dcde8a71b"><div class="ttname"><a href="classElasticRingProblem.html#aba78b855677ef08ea3d9678dcde8a71b">ElasticRingProblem::Displ_control_elem_pt</a></div><div class="ttdeci">ELEMENT * Displ_control_elem_pt</div><div class="ttdoc">In which element are we applying displacement control? (here only used for doc of radius)</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00105">lin_unsteady_ring.cc:105</a></div></div>
+<div class="ttc" id="aclassElasticRingProblem_html_acd30c4363ffedbaadc1523aa8b85523b"><div class="ttname"><a href="classElasticRingProblem.html#acd30c4363ffedbaadc1523aa8b85523b">ElasticRingProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run()</div><div class="ttdoc">Do unsteady run.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00320">lin_unsteady_ring.cc:320</a></div></div>
+<div class="ttc" id="alin__unsteady__ring_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="lin__unsteady__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for ring that performs small-amplitude oscillations.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00412">lin_unsteady_ring.cc:412</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00045">lin_unsteady_ring.cc:46</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aae2e69454e5e73519e13dd3424d41a2c"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aae2e69454e5e73519e13dd3424d41a2c">Global_Physical_Variables::Fixed_timestep_flag</a></div><div class="ttdeci">unsigned Fixed_timestep_flag</div><div class="ttdoc">Flag for fixed timestep: Default = fixed timestep.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00052">lin_unsteady_ring.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_acb18f0e4952b6a1b0840ca94828ace3b"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#acb18f0e4952b6a1b0840ca94828ace3b">Global_Physical_Variables::Long_run_flag</a></div><div class="ttdeci">unsigned Long_run_flag</div><div class="ttdoc">Flag for long/short run: Default = perform long run.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00049">lin_unsteady_ring.cc:49</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_affe3ddb0b7c1d7dbf3955738edbda1af"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#affe3ddb0b7c1d7dbf3955738edbda1af">Global_Physical_Variables::Consistent_newmark_ic</a></div><div class="ttdeci">bool Consistent_newmark_ic</div><div class="ttdoc">Boolean flag to decide if to set IC for Newmark directly or consistently : No Default.</div><div class="ttdef"><b>Definition</b> <a href="lin__unsteady__ring_8cc_source.html#l00056">lin_unsteady_ring.cc:56</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:07:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

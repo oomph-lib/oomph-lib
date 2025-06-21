@@ -1,0 +1,256 @@
+\doxysection{Problem\+\_\+\+Parameter Namespace Reference}
+\hypertarget{namespaceProblem__Parameter}{}\label{namespaceProblem__Parameter}\index{Problem\_Parameter@{Problem\_Parameter}}
+
+
+Namespace for Problem Parameter.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}{Re}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}{Ca}} = 10.\+0
+\begin{DoxyCompactList}\small\item\em Capillary number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}} = 0.\+25
+\begin{DoxyCompactList}\small\item\em Initial radius of bubble. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Volume}} = -\/Mathematical\+Constants\+::\+Pi\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}
+\begin{DoxyCompactList}\small\item\em Volume of the bubble (negative because it\textquotesingle{}s outside the fluid!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a}{Inflow\+\_\+veloc\+\_\+magnitude}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b}{Length}} = 3.\+0
+\begin{DoxyCompactList}\small\item\em Length of the channel. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceProblem__Parameter_a810f05c8d3e3331aed75643557d1057c}{Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec}{Norm\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em File to document the norm of the solution (for validation purposes -- triangle doesn\textquotesingle{}t give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}{Viscosity\+\_\+ratio}} = 10.\+0
+\begin{DoxyCompactList}\small\item\em Viscosity ratio of the droplet to the surrounding fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for Problem Parameter. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}\label{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Ca@{Ca}}
+\index{Ca@{Ca}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Ca}{Ca}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Ca = 10.\+0}
+
+
+
+Capillary number. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00378}{378}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00619}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bubble\+In\+Channel\+Problem()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00900}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00908}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00662}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Drop\+In\+Channel\+Problem()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01303}{main()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a810f05c8d3e3331aed75643557d1057c}\label{namespaceProblem__Parameter_a810f05c8d3e3331aed75643557d1057c} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily Constitutive\+Law \texorpdfstring{$\ast$}{*} Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt =0}
+
+
+
+Constitutive law used to determine the mesh deformation. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00398}{398}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01003}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01025}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{main()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00433}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Bubble\+In\+Channel\+Problem()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00417}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Drop\+In\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}\label{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily Doc\+Info Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}
+
+
+
+Doc info object. 
+
+Doc info. 
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00372}{372}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00619}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bubble\+In\+Channel\+Problem()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01156}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01191}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00662}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Drop\+In\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a}\label{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Inflow\_veloc\_magnitude@{Inflow\_veloc\_magnitude}}
+\index{Inflow\_veloc\_magnitude@{Inflow\_veloc\_magnitude}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Inflow\_veloc\_magnitude}{Inflow\_veloc\_magnitude}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Inflow\+\_\+veloc\+\_\+magnitude = 0.\+0}
+
+
+
+Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics) 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00392}{392}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01003}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01025}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{main()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b}\label{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Length@{Length}}
+\index{Length@{Length}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Length}{Length}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Length = 3.\+0}
+
+
+
+Length of the channel. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00395}{395}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00619}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bubble\+In\+Channel\+Problem()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00662}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Drop\+In\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec}\label{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Norm\_file@{Norm\_file}}
+\index{Norm\_file@{Norm\_file}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Norm\_file}{Norm\_file}}
+{\footnotesize\ttfamily ofstream Problem\+\_\+\+Parameter\+::\+Norm\+\_\+file}
+
+
+
+File to document the norm of the solution (for validation purposes -- triangle doesn\textquotesingle{}t give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!) 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00407}{407}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01156}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01191}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{main()}}.
+
+\Hypertarget{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}\label{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Nu@{Nu}}
+\index{Nu@{Nu}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Nu =0.\+3}
+
+
+
+Pseudo-\/solid Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00381}{381}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{main()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}\label{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Radius@{Radius}}
+\index{Radius@{Radius}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Radius}{Radius}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Radius = 0.\+25}
+
+
+
+Initial radius of bubble. 
+
+Initial radius of drop. 
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00384}{384}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00619}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bubble\+In\+Channel\+Problem()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00662}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Drop\+In\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}\label{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Re@{Re}}
+\index{Re@{Re}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Re}{Re}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Re =0.\+0}
+
+
+
+Reynolds number. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00375}{375}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01003}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01025}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}\label{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily ofstream Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00401}{401}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01156}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01191}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01272}{main()}}.
+
+\Hypertarget{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}\label{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Viscosity\_ratio@{Viscosity\_ratio}}
+\index{Viscosity\_ratio@{Viscosity\_ratio}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Viscosity\_ratio}{Viscosity\_ratio}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Viscosity\+\_\+ratio = 10.\+0}
+
+
+
+Viscosity ratio of the droplet to the surrounding fluid. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00375}{375}} of file \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source}{adaptive\+\_\+drop\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l01025}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}.
+
+\Hypertarget{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}\label{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Volume@{Volume}}
+\index{Volume@{Volume}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Volume}{Volume}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Volume = -\/Mathematical\+Constants\+::\+Pi\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}}
+
+
+
+Volume of the bubble (negative because it\textquotesingle{}s outside the fluid!) 
+
+Volume of the interface (Negative because the constraint is computed from the bulk side) 
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00388}{388}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00619}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bubble\+In\+Channel\+Problem()}}, \mbox{\hyperlink{adaptive__drop__in__channel_8cc_source_l00956}{Drop\+In\+Channel\+Problem$<$ ELEMENT $>$\+::create\+\_\+volume\+\_\+constraint\+\_\+elements()}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l01156}{Bubble\+In\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+

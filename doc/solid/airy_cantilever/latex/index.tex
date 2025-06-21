@@ -1,0 +1,832 @@
+\chapter{Demo problem\+: Bending of a cantilever beam}
+\hypertarget{index}{}\label{index}\index{Demo problem: Bending of a cantilever beam@{Demo problem: Bending of a cantilever beam}}
+In this example we solve a classical solid mechanics problem, the bending of a cantilever beam, subject to a pressure loading on its upper face and/or gravity. We assume that the material behaves like a generalised Hookean solid with elastic modulus $ E^* $ and Poisson\textquotesingle{}s ratio $ \nu $ Here is a sketch\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{airy_cantilever_sketch}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+This problem is interesting because it has an (approximate) St. Venant solution for the stress field which may be constructed in terms of an Airy stress function (see, e.\+g. H. Eschenauer \& W. Schnell "{}\+Elastizitaetstheorie I"{}, BI Wissenschaftsverlag, 2nd edition, 1986).
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The following figure shows an animation of beam\textquotesingle{}s deformation in response to an increase in the uniform pressure, $ P $, at zero gravity, $ g=0 $. The colour contours represent the magnitude of the "{}horizontal"{} component of the 2nd Piola-\/\+Kirchhoff stress tensor, $ \sigma_{11} $ . Its approximately linear variation across the beam\textquotesingle{}s thickness indicates a bending-\/type stress distribution with the stress being positive (tensile) at the top and negative (compressive) at the bottom.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{beam_animation}
+\doxyfigcaption{Animation of the beam\textquotesingle{}s deformation with contours of its \`{}horizontal\textquotesingle{} stress component. }
+\end{DoxyImage}
+
+
+The next figure shows a comparison of the computational predictions for $ \sigma_{11} $ (in green), and the approximate analytical solution (in red).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{stress_comparison}
+\doxyfigcaption{Comparison of the computed distribution of the \`{}horizontal\textquotesingle{} stress (in green) against the approximate analytical solution (in red). }
+\end{DoxyImage}
+
+
+The agreement between the two solutions is excellent over most of the domain, apart from two small regions near the left end of the beam where stress singularities develop at the vertices of the domain. The singularities arise because the zero-\/tangential stress boundary condition on the top and bottom faces is inconsistent with the zero-\/displacement boundary condition on the left face. The singularities are not captured by the approximate analytical solution. {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation refines the mesh in an attempt to capture the rapid variations of the stresses in these regions.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+As usual, we define a namespace, {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}, to define the problem parameters\+: the dimensions of the cantilever beam, (a pointer to) a constitutive equation, and its parameters $ E $ and $ \nu $.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Half\ height\ of\ beam}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}}=0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ beam}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{L}}=10.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ ConstitutiveLaw*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Elastic\ modulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{E}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
+
+\end{DoxyCodeInclude}
+
+
+We refer to the document \href{../../solid_theory/html/index.html}{\texttt{ "{}\+Solid mechanics\+: Theory and implementation"{}}} for a detailed discussion of the non-\/dimensionalisation and merely recall that by setting $ E = 1$, we imply that all stresses are non-\/dimensionalised with the structure\textquotesingle{}s dimensional Young\textquotesingle{}s modulus $ E^* $. Similarly, by setting the half-\/thickness of the beam to 0.\+5, we imply that the beam\textquotesingle{}s dimensional thickness, $ 2H^*$ is used to non-\/dimensionalise all lengths.
+
+Next, we define a function that defines the constant pressure load on the upper face of the cantilever,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ pressure}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constant\ pressure\ load.\ The\ arguments\ to\ this\ function\ are\ imposed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ on\ us\ by\ the\ SolidTractionElements\ which\ allow\ the\ traction\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ depend\ on\ the\ Lagrangian\ and\ Eulerian\ coordinates\ x\ and\ xi,\ and\ on\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ outer\ unit\ normal\ to\ the\ surface.\ Here\ we\ only\ need\ the\ outer\ unit}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ normal.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{constant\_pressure}}(\textcolor{keyword}{const}\ Vector<double>\ \&xi,\ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,\ Vector<double>\ \&traction)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ dim\ =\ traction.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<dim;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ traction[i]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}}*n[i];}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ traction}}
+
+\end{DoxyCodeInclude}
+ and a gravitational body force, acting in the negative $ x_2 $ -\/direction,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dim\ gravity}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dimensional\ gravity\ as\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{gravity}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&xi,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&b)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ b[0]=0.0;}
+\DoxyCodeLine{\ \ b[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is very short. We start by building a {\ttfamily Generalised\+Hookean} constitutive equation object and store a pointer to it in the namespace {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}. Next we construct the problem object, using (a wrapped version of) {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Refineable\+QPVDElement$<$2,3$>$} -- a nine-\/node quadrilateral displacement-\/based solid mechanics element. (The wrapper is used to change the element\textquotesingle{}s output function; see \doxysectlink{index_com}{Comment\+: Customising an element\textquotesingle{}s output function}{2} for details).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ cantilever\ beam\ loaded\ by\ surface\ traction\ and/or}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{airy__cantilever_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ generalised\ Hookean\ constitutive\ equations}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCantileverProblem}{CantileverProblem<MySolidElement<RefineableQPVDElement<2,3>}}\ >\ >\ problem;}
+
+\end{DoxyCodeInclude}
+ The subsequent lines may be uncommented to experiment with different element types as suggested in the \doxysectlink{index_ex}{Exercises}{2}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Uncomment\ these\ as\ an\ exercise}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ CantileverProblem<MySolidElement<}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \ RefineableQPVDElementWithContinuousPressure<2>\ >\ >\ problem;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ CantileverProblem<MySolidElement<}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \ RefineableQPVDElementWithPressure<2>\ >\ >\ problem;}}
+
+\end{DoxyCodeInclude}
+ We initialise the load parameters and perform a parameter study in which we increment the pressure load in small steps. The gravitational body force remains switched off to allow the comparison with the analytical solution which only applies to the case with zero body force.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ values\ for\ parameter\ values}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}=0.0;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Max.\ number\ of\ adaptations\ per\ solve}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=5;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ p\_increment=1.0e-\/5;\ \ \ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ pressure\ load}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}+=p\_increment;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ Newton's\ method,\ allowing}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ up\ to\ max\_adapt\ mesh\ adaptations\ after\ every\ solve.}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ problem.\mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_class}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_class}
+The problem class contains the usual member functions, including separate access functions to the two sub-\/meshes\+: The "{}bulk"{} mesh that contains the 2D solid elements, and a separate mesh in which we store the 1D {\ttfamily Solid\+Traction\+Elements} that apply the traction boundary condition on the beam\textquotesingle{}s upper face. As usual, we remove these elements before adapting the bulk mesh and re-\/attach them afterwards, using the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class\ for\ the\ cantilever\ "{}beam"{}\ structure.}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classCantileverProblem}{CantileverProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ ElasticRefineableRectangularQuadMesh<ELEMENT>*\&\ \mbox{\hyperlink{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}{solid\_mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCantileverProblem_a263ff19e4aa0fa4391582242763f08f1}{Solid\_mesh\_pt}};\}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ to\ the\ mesh\ of\ surface\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ SolidMesh*\&\ \mbox{\hyperlink{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}{traction\_mesh\_pt}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCantileverProblem_a52485434aab5d653010c48a0b0f89088}{Traction\_mesh\_pt}};\}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();}
+
+\end{DoxyCodeInclude}
+ The creation/deletion of the {\ttfamily Solid\+Traction\+Elements} is performed by private helper functions. We also store a pointer to a node on the tip of the beam and will record its displacement as a function of the applied load in a trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pass\ pointer\ to\ traction\ function\ to\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ elements\ in\ the\ traction\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ set\_traction\_pt();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ create\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ delete\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ Trace\_file;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointers\ to\ node\ whose\ position\ we're\ tracing}}
+\DoxyCodeLine{\textcolor{comment}{}\ Node*\ Trace\_node\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ ElasticRefineableRectangularQuadMesh<ELEMENT>*\ Solid\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ SolidMesh*\ Traction\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ Doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The constructor builds the bulk mesh (the standard {\ttfamily Refineable\+Rectangular\+Quad\+Mesh} that we already used in many previous examples, upgraded to a {\ttfamily Solid\+Mesh}, via the procedure discussed in the document \href{../../solid_theory/html/index.html\#solid_mesh}{\texttt{ Solid mechanics\+: Theory and implementation}}), using the element type specified by the template parameter and the dimensions specified in the namespace {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem<ELEMENT>::CantileverProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_x=\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{Global\_Physical\_Variables::L}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_y=2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Shift\ mesh\ downwards\ so\ that\ centreline\ is\ at\ y=0:}}
+\DoxyCodeLine{\ Vector<double>\ origin(2);}
+\DoxyCodeLine{\ origin[0]=0.0;}
+\DoxyCodeLine{\ origin[1]=-\/0.5*l\_y;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ }}
+\DoxyCodeLine{\ solid\_mesh\_pt()\ =\ \textcolor{keyword}{new}\ ElasticRefineableRectangularQuadMesh<ELEMENT>(}
+\DoxyCodeLine{\ \ n\_x,n\_y,l\_x,l\_y,origin);}
+
+\end{DoxyCodeInclude}
+ We employ the {\ttfamily Z2\+Error\+Estimator} to assess the accuracy of the computed solution and to control the adaptive mesh refinement. When used with the {\ttfamily Refineable\+QPVDElements}, the {\ttfamily Z2\+Error\+Estimator} uses the components of Green\textquotesingle{}s strain tensor as "{}fluxes"{} in its "{}flux recovery procedure"{}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ solid\_mesh\_pt()-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+
+\end{DoxyCodeInclude}
+ Next, we pass the constitutive equations and the gravitational body force to the elements, select a control node, and perform one uniform mesh refinement.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ the\ physical\ properties\ to\ the\ elements\ before\ any\ refinement}}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements\ in\ the\ main\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =solid\_mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(solid\_mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>body\_force\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\_Physical\_Variables::gravity}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Choose\ a\ control\ node:\ The\ last\ node\ in\ the\ solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nnod=solid\_mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ Trace\_node\_pt=solid\_mesh\_pt()-\/>node\_pt(nnod-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Refine\ the\ mesh\ uniformly}}
+\DoxyCodeLine{\ solid\_mesh\_pt()-\/>refine\_uniformly();}
+
+\end{DoxyCodeInclude}
+ We create a new mesh for the {\ttfamily Solid\+Traction\+Elements} and build the elements using the helper function {\ttfamily create\+\_\+traction\+\_\+elements()} before adding both submeshes to the problem and combining them into a global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Construct\ the\ traction\ element\ mesh}}
+\DoxyCodeLine{\ Traction\_mesh\_pt=\textcolor{keyword}{new}\ SolidMesh;}
+\DoxyCodeLine{\ create\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pass\ pointer\ to\ traction\ function\ to\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ in\ the\ traction\ mesh}}
+\DoxyCodeLine{\ set\_traction\_pt();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh\ is\ first\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(solid\_mesh\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ traction\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(traction\_mesh\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ combined\ "{}global"{}\ mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+
+\end{DoxyCodeInclude}
+ We pin the position of all nodes on the left boundary (boundary 3) of the bulk mesh. The subsequent call to {\ttfamily PVDEquations\+Base$<$2$>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures()} is unnecessary (but harmless) for the solid elements used in this driver code since {\ttfamily Refineable\+QPVDElements} do not contain pressure degrees of freedom. It is a good idea to include this call anyway since our problem class is templated by the element type and may therefore also be used with other elements (see \doxysectlink{index_ex}{Exercises}{2} ; we refer to \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for a detailed discussion of the need to pin "{}redundant"{} pressure degrees of freedom in computations with spatial adaptivity.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ left\ boundary\ (boundary\ 3)\ in\ both\ directions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_side\ =\ mesh\_pt()-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ nodes}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_side;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ solid\_mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ solid\_mesh\_pt()-\/>boundary\_node\_pt(3,i)-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
+\DoxyCodeLine{\ \ solid\_mesh\_pt()-\/>element\_pt());}
+
+\end{DoxyCodeInclude}
+ Finally, we assign the equation numbers, create a {\ttfamily Doc\+Info} object and open a trace file in which we shall record the beam\textquotesingle{}s load/displacement characteristics.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];\ \ \ }
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},Doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(filename);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_before_adapt}{}\doxysection{\texorpdfstring{Actions before adaptation}{Actions before adaptation}}\label{index_before_adapt}
+Following our usual procedure, we delete the {\ttfamily Solid\+Traction\+Elements} before adapting the bulk mesh\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{CantileverProblem<ELEMENT>::actions\_before\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Kill\ the\ traction\ elements\ and\ wipe\ surface\ mesh}}
+\DoxyCodeLine{\ delete\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_before\_adapt}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_after_adapt}{}\doxysection{\texorpdfstring{Actions after adaptation}{Actions after adaptation}}\label{index_after_adapt}
+The {\ttfamily Solid\+Traction\+Elements} are re-\/attached after the mesh adaptation. Again, the call to {\ttfamily PVDEquations\+Base$<$2$>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures()} is not strictly necessary for the elements used in the present driver code but is included "{}for safety"{}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{CantileverProblem<ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ traction\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ boundary\ 2\ and\ add\ them\ to\ surface\ meshes}}
+\DoxyCodeLine{\ create\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
+\DoxyCodeLine{\ \ solid\_mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ pointer\ to\ prescribed\ traction\ function\ for\ traction\ elements}}
+\DoxyCodeLine{\ set\_traction\_pt();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_traction}{}\doxysection{\texorpdfstring{Setting the pointer to the traction function}{Setting the pointer to the traction function}}\label{index_set_traction}
+The helper function {\ttfamily set\+\_\+traction\+\_\+pt()} is used to pass the pointer to the traction function to the {\ttfamily Solid\+Traction\+Elements}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==================start\_of\_set\_traction\_pt==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ pointer\ to\ traction\ function\ for\ the\ relevant}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ elements\ in\ the\ traction\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}{CantileverProblem<ELEMENT>::set\_traction\_pt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ in\ the\ traction\ element\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ for\ elements\ on\ the\ top\ boundary\ (boundary\ 2)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element=traction\_mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ traction\ element}}
+\DoxyCodeLine{\ \ \ SolidTractionElement<ELEMENT>\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}SolidTractionElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (traction\_mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\_Physical\_Variables::constant\_pressure}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ set\ traction\ pt}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_create_traction}{}\doxysection{\texorpdfstring{Creating the traction elements}{Creating the traction elements}}\label{index_create_traction}
+The helper function {\ttfamily create\+\_\+traction\+\_\+elements()} is used to create the {\ttfamily Solid\+Traction\+Elements} and to store them in the appropriate sub-\/mesh.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ traction\ elements\ }}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}{CantileverProblem<ELEMENT>::create\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Traction\ elements\ are\ located\ on\ boundary\ 2:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b=2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ solid\_mesh\_pt()-\/>nboundary\_element(b);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ solid\_mesh\_pt()-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ solid\_mesh\_pt()-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ new\ element\ and\ add\ to\ mesh}}
+\DoxyCodeLine{\ \ \ Traction\_mesh\_pt-\/>add\_element\_pt(\textcolor{keyword}{new}\ SolidTractionElement<ELEMENT>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (bulk\_elem\_pt,face\_index));\ \ \ }
+\DoxyCodeLine{\ \ \}\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pass\ the\ pointer\ to\ the\ traction\ function\ to\ the\ traction\ elements}}
+\DoxyCodeLine{\ set\_traction\_pt();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_delete_traction}{}\doxysection{\texorpdfstring{Deleting the traction elements}{Deleting the traction elements}}\label{index_delete_traction}
+The helper function {\ttfamily delete\+\_\+traction\+\_\+elements()} is used to delete the {\ttfamily Solid\+Traction\+Elements}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Delete\ traction\ elements\ and\ wipe\ the\ \ traction\ meshes}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}{CantileverProblem<ELEMENT>::delete\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Traction\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ Traction\_mesh\_pt-\/>element\_pt(e);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ Traction\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ delete\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing function {\ttfamily doc\+\_\+solution()} outputs the finite-\/element solution, using the modified output function defined in the wrapper class {\ttfamily My\+Solid\+Element}, discussed below.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{CantileverProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_plot\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ and\ stress\ in\ deformed\ body}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ solid\_mesh\_pt()-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+
+\end{DoxyCodeInclude}
+ Next we output the approximate St. Venant solution at the same plot points and write the load/displacement characteristics to the trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ St.\ Venant\ solution}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Element\ dimension}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ el\_dim=2;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ Vector<double>\ s(el\_dim);}
+\DoxyCodeLine{\ Vector<double>\ x(el\_dim);}
+\DoxyCodeLine{\ Vector<double>\ xi(el\_dim);}
+\DoxyCodeLine{\ DenseMatrix<double>\ sigma(el\_dim,el\_dim);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Constants\ for\ exact\ (St.\ Venant)\ solution}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ a=-\/1.0/4.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ b=-\/3.0/8.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ c=1.0/8.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/}
+\DoxyCodeLine{\ \ pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}},3);}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ d=1.0/20.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ elements\ to\ plot\ exact\ solution\ for\ stresses}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nel=solid\_mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ element}}
+\DoxyCodeLine{\ \ \ SolidFiniteElement*\ el\_pt=\textcolor{keyword}{dynamic\_cast<}SolidFiniteElement*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ solid\_mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Tecplot\ header\ info\ }}
+\DoxyCodeLine{\ \ \ some\_file\ <<\ \textcolor{stringliteral}{"{}ZONE\ I="{}}\ <<\ n\_plot\ <<\ \textcolor{stringliteral}{"{},\ J="{}}\ <<\ n\_plot\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ plot\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_plot;l2++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ s[1]\ =\ -\/1.0\ +\ l2*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l1=0;l1<n\_plot;l1++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ s[0]\ =\ -\/1.0\ +\ l1*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ Eulerian\ and\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ \ el\_pt-\/>interpolated\_x(s,x);}
+\DoxyCodeLine{\ \ \ \ \ \ \ el\_pt-\/>interpolated\_xi(s,xi);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Output\ the\ x,y,..}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<el\_dim;i++)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{some\_file\ <<\ x[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Change\ orientation\ of\ coordinate\ system\ relative}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ to\ solution\ in\ lecture\ notes}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ xx=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{Global\_Physical\_Variables::L}}-\/xi[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ yy=xi[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Approximate\ analytical\ (St.\ Venant)\ solution}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(0,0)=c*(6.0*xx*xx*yy-\/4.0*yy*yy*yy)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ 6.0*d*yy;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(1,1)=2.0*(a+b*yy+c*yy*yy*yy);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(1,0)=2.0*(b*xx+3.0*c*xx*yy*yy);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(0,1)=sigma(1,0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ stress}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ some\_file\ <<\ sigma(0,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file:\ Load/displacement\ characteristics}}
+\DoxyCodeLine{\ Trace\_file\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ Trace\_node\_pt-\/>x(0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ Trace\_node\_pt-\/>x(1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Comments and exercises}{Comments and exercises}}\label{index_exercises}
+\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Modify the driver code so that the cantilever beam is loaded by gravity rather than a pressure load. Consult the document \href{../../solid_theory/html/index.html}{\texttt{ "{}\+Solid mechanics\+: Theory and implementation"{}}} for details on the non-\/dimensionalisation of the body force. Verify that for modest deflections and for sufficiently thin beams, the macroscopic deformation due to a gravitational load is identical to that induced by an equivalent pressure load, equivalent meaning that the total force on the beam is the same for both cases. ~\newline
+ ~\newline
+
+\item Change the element type to a {\ttfamily Refineable\+QPVDElement\+With\+Pressure$<$2$>$} and {\ttfamily Refineable\+QPVDElement\+With\+Continuous\+Pressure$<$2$>$} and compare the results. Both of these two elements are based on a pressure-\/displacement formulation, the former employing a discontinuous pressure representation (as in Crouzeix-\/\+Raviart Navier-\/\+Stokes elements), the latter employing a continuous pressure representation (as in Taylor-\/\+Hood elements). Confirm that calls to {\ttfamily PVDEquations\+Base$<$2$>$\+::pin\+\_\+redundant\+\_\+nodal\+\_\+solid\+\_\+pressures()} are essential if a continuous pressure representation is used. Explain the code\textquotesingle{}s behaviour when you comment out the calls to this function. ~\newline
+ ~\newline
+
+\item Repeat the computation without adaptivity, by using the non-\/refineable versions of the various solid mechanics elements discussed above, namely the {\ttfamily QPVDElement$<$2$>$}, {\ttfamily QPVDElement\+With\+Pressure$<$2$>$} and {\ttfamily QPVDElement\+With\+Continuous\+Pressure$<$2$>$}. This will require various changes to the code\+:
+\begin{DoxyEnumerate}
+\item You will have to create a solid mechanics version of the (non-\/refineable) {\ttfamily Rectangular\+Quad\+Mesh}. This is necessary because non-\/refineable elements cannot be used with refineable meshes. Try it to find out why! \mbox{[}Note\+: You could, of course, use the existing driver code with its refineable mesh and the refineable elements and simply not use the adaptive capabilities by omitting the {\ttfamily max\+\_\+adapt} argument when calling the Newton solver. However, the main point of this exercise is to force you to understand how to upgrade an existing {\ttfamily Mesh} to a {\ttfamily Solid\+Mesh}. It\textquotesingle{}s easy\+: Simply follow the steps used to create a refineable {\ttfamily Solid\+Mesh} from the {\ttfamily Refineable\+Rectangular\+Quad\+Mesh}, in \href{../../../../src/meshes/rectangular_quadmesh.h}{\texttt{ src/meshes/rectangular\+\_\+quadmesh.\+h}}. Instead of inheriting the mesh from the {\ttfamily Refineable\+Rectangular\+Quad\+Mesh} and the {\ttfamily Solid\+Mesh} classes, inherit from the non-\/refineable {\ttfamily Rectangular\+Quad\+Mesh} and the {\ttfamily Solid\+Mesh}.\mbox{]}
+\item You must not pass the pointer to the error estimator to the non-\/refineable mesh -- it has no use for it.
+\item You cannot call the adaptive Newton solver.
+\end{DoxyEnumerate}
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+\hypertarget{index_com}{}\doxysubsection{\texorpdfstring{Comment\+: Customising an element\textquotesingle{}s output function}{Comment: Customising an element's output function}}\label{index_com}
+In the driver code discussed above we used the "{}wrapper"{} class {\ttfamily My\+Solid\+Element} to customise the solid elements\textquotesingle{} output function so that each element outputs its shape and the three independent components of the second Piola Kirchhoff stress, $ \sigma_{11},  \sigma_{12} $ and $ \sigma_{22}. $
+
+Here is the implementation\+: The "{}wrapping"{} element inherits from the element type specified by the template parameter and calls its constructor (recall that element constructors are always argument-\/free!).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=================start\_wrapper==================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Wrapper\ class\ for\ solid\ elements\ to\ modify\ their\ output\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ functions.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MySolidElement\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ ELEMENT}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Call\ constructor\ of\ underlying\ element}}
+\DoxyCodeLine{\textcolor{comment}{}\ MySolidElement()\ :\ ELEMENT()\ \{\};}
+
+\end{DoxyCodeInclude}
+ We then overload the (virtual) output function so that the element outputs its shape, i.\+e. the $ x $ and $ y $ coordinates of its plot points, and the three independent components of the second Piola Kirchhoff stress at those points. Other than that, the element behaves exactly as the underlying "{}wrapped"{} element.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overload\ output\ function:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ output(std::ostream\ \&outfile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&n\_plot)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Element\ dimension}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ el\_dim\ =\ this-\/>dim();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ Vector<double>\ s(el\_dim);}
+\DoxyCodeLine{\ \ \ Vector<double>\ x(el\_dim);}
+\DoxyCodeLine{\ \ \ DenseMatrix<double>\ sigma(el\_dim,el\_dim);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{switch}(el\_dim)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Tecplot\ header\ info\ }}
+\DoxyCodeLine{\ \ \ \ \ outfile\ <<\ \textcolor{stringliteral}{"{}ZONE\ I="{}}\ <<\ n\_plot\ <<\ \textcolor{stringliteral}{"{},\ J="{}}\ <<\ n\_plot\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ element\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_plot;l2++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ s[1]\ =\ -\/1.0\ +\ l2*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l1=0;l1<n\_plot;l1++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ s[0]\ =\ -\/1.0\ +\ l1*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ Eulerian\ coordinates\ and\ stress}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ this-\/>interpolated\_x(s,x);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ this-\/>get\_stress(s,sigma);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Output\ the\ x,y,..}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<el\_dim;i++)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{outfile\ <<\ x[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ stress}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ outfile\ <<\ sigma(0,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ std::ostringstream\ error\_message;}
+\DoxyCodeLine{\ \ \ \ \ error\_message\ <<\ \textcolor{stringliteral}{"{}Output\ for\ dim\ !=2\ not\ implemented"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \mbox{[}{\bfseries{Note\+:}} Since this element is only defined and used in a 2D driver code, there is little point in implementing the output for 1D or 3D elements. However, paranoid as we are, we check the dimension of the element and throw an error if it is wrong.\mbox{]}
+
+Finally we declare that the {\ttfamily Face\+Geometry} of the "{}wrapped"{} element is the same as that of the underlying element. This step is required to allow the automatic construction of {\ttfamily Solid\+Traction\+Elements} in {\ttfamily create\+\_\+traction\+\_\+elements()}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_face\_geometry==============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ FaceGeometry\ of\ wrapped\ element\ is\ the\ same\ as\ the\ underlying\ element}}
+\DoxyCodeLine{\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FaceGeometry<MySolidElement<ELEMENT>\ >\ :}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ FaceGeometry<ELEMENT>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor\ [this\ was\ only\ required\ explicitly}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ from\ gcc\ 4.5.2\ onwards...]}}
+\DoxyCodeLine{\textcolor{comment}{}\ FaceGeometry()\ :\ FaceGeometry<ELEMENT>()\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/solid/airy_cantilever/
+}{\texttt{ demo\+\_\+drivers/solid/airy\+\_\+cantilever/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/solid/airy_cantilever/airy_cantilever.cc
+}{\texttt{ demo\+\_\+drivers/solid/airy\+\_\+cantilever/airy\+\_\+cantilever.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

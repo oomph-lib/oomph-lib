@@ -1,0 +1,384 @@
+\doxysection{oomph\+::Oomph\+Lib\+Preconditioner\+Epetra\+Operator Class Reference}
+\hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator}{}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator}\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+
+
+An Epetra\+\_\+\+Operator class for oomph-\/lib preconditioners. A helper class for Trilinos\+Oomph\+Lib\+Preconditioner to allow an oomph-\/lib preconditioner (i.\+e. one derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}) to be used with a trilinos solver (\doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver})  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1OomphLibPreconditionerEpetraOperator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac32c701f4fb54f65e2701b984f41ada3}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} (\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}preconditioner\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+epetra\+\_\+values}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor -\/ takes the pointer to the oomph-\/lib preconditioner and the distribution of the preconditioner Note\+: the oomph-\/lib preconditioner must be setup. If use\+\_\+eptra\+\_\+values is true then the epetra vector values is used within the vectors passed to the oomph-\/lib preconditioner. If this is true none of the vector rebuild methods can be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a42dda35e58da55e29cea6f6ecebc4119}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9acb2f803a0cec47dd802b9b5648984a}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_acfeb8c93b3361cc68def1051ccc8525a}{Set\+Use\+Transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}{Use\+Transpose}})
+\begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Set\+Use\+Transpose. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade98cb5d53423f32f31a152f9dcc2ce6}{Apply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&X, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&Y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Apply. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811acfd9ad5b70e1d30447e0742b}{Apply\+Inverse}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{epetra\+\_\+r}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{epetra\+\_\+z}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em applies the oomph-\/lib preconditioner. Converts the Epetra vector applys the preconditioner by calling the oomph-\/lib preconditioner\textquotesingle{}s preconditioner\+\_\+solve functionality. NOTE \+: the oomph-\/lib preconditioner is setup prior to being passed to this class \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22}{Norm\+Inf}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Norm\+Inf. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf}{Label}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator\+::\+Label -\/ returns a string describing the operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}{Use\+Transpose}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Use\+Transpose. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545}{Has\+Norm\+Inf}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Broken Epetra\+\_\+\+Operator member -\/ Has\+Norm\+Inf. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Comm}} \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f}{Comm}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the Epetra MPI\+\_\+\+Comm object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc}{Operator\+Domain\+Map}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator member -\/ Operator\+Domain\+Map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \& \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72}{Operator\+Range\+Map}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Epetra\+\_\+\+Operator member -\/ Operator\+Range\+Map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a19407c48b77a021c8e714232d296ecd0}{Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A pointer to the oomph-\/lib preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Mpi\+Comm}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a319c368461dabf218b9589dfc8d47f14}{Operator\+\_\+comm}}
+\begin{DoxyCompactList}\small\item\em An Epetra MPI Comm object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Serial\+Comm}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a093d431cfa9ad601e1ead0dd324b3d49}{Operator\+\_\+comm}}
+\begin{DoxyCompactList}\small\item\em An Epetra Serial Comm object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a47942736149f13371582896aedf80f24}{Use\+\_\+epetra\+\_\+values}}
+\begin{DoxyCompactList}\small\item\em Use the epetra data within the vectors passed to the oomph-\/lib preconditioner. If this is true none of the vector rebuild methods can be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_af111fc1ede49a86c5ed37ad1f5573e2e}{Operator\+\_\+map\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A pointer to an Epetra\+\_\+\+Map object -\/ describes distribution of the preconditioner, in this instance it is primarily used to prescribe the distribution of the residual and solution vector. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9f1c739fe5868b1d9dcaee080d63cb5b}{Preconditioner\+\_\+label}}
+\begin{DoxyCompactList}\small\item\em a label for the preconditioner ( for Epetra\+\_\+\+Operator\+::\+Label() ) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An Epetra\+\_\+\+Operator class for oomph-\/lib preconditioners. A helper class for Trilinos\+Oomph\+Lib\+Preconditioner to allow an oomph-\/lib preconditioner (i.\+e. one derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}) to be used with a trilinos solver (\doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}) 
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00042}{42}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac32c701f4fb54f65e2701b984f41ada3}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac32c701f4fb54f65e2701b984f41ada3} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OomphLibPreconditionerEpetraOperator@{OomphLibPreconditionerEpetraOperator}}
+\index{OomphLibPreconditionerEpetraOperator@{OomphLibPreconditionerEpetraOperator}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{OomphLibPreconditionerEpetraOperator()}{OomphLibPreconditionerEpetraOperator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}}]{preconditioner\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}}]{use\+\_\+epetra\+\_\+values = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ takes the pointer to the oomph-\/lib preconditioner and the distribution of the preconditioner Note\+: the oomph-\/lib preconditioner must be setup. If use\+\_\+eptra\+\_\+values is true then the epetra vector values is used within the vectors passed to the oomph-\/lib preconditioner. If this is true none of the vector rebuild methods can be called. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{52}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{Preconditioner\+\_\+label}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a42dda35e58da55e29cea6f6ecebc4119}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a42dda35e58da55e29cea6f6ecebc4119} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OomphLibPreconditionerEpetraOperator@{OomphLibPreconditionerEpetraOperator}}
+\index{OomphLibPreconditionerEpetraOperator@{OomphLibPreconditionerEpetraOperator}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{OomphLibPreconditionerEpetraOperator()}{OomphLibPreconditionerEpetraOperator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade98cb5d53423f32f31a152f9dcc2ce6}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ade98cb5d53423f32f31a152f9dcc2ce6} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Apply@{Apply}}
+\index{Apply@{Apply}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Apply()}{Apply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&}]{X,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&}]{Y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken Epetra\+\_\+\+Operator member -\/ Apply. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00100}{100}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811acfd9ad5b70e1d30447e0742b}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a6272811acfd9ad5b70e1d30447e0742b} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!ApplyInverse@{ApplyInverse}}
+\index{ApplyInverse@{ApplyInverse}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{ApplyInverse()}{ApplyInverse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&}]{epetra\+\_\+r,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Multi\+Vector}} \&}]{epetra\+\_\+z }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+applies the oomph-\/lib preconditioner. Converts the Epetra vector applys the preconditioner by calling the oomph-\/lib preconditioner\textquotesingle{}s preconditioner\+\_\+solve functionality. NOTE \+: the oomph-\/lib preconditioner is setup prior to being passed to this class 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{115}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00244}{Use\+\_\+epetra\+\_\+values}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_abf80be4bf09e7f17d7c9f14019a3213f} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Comm@{Comm}}
+\index{Comm@{Comm}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Comm()}{Comm()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Comm}} \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Comm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the Epetra MPI\+\_\+\+Comm object. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00211}{211}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00235}{Operator\+\_\+comm}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a584ad443e96d730d6abbcf6291298545} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!HasNormInf@{HasNormInf}}
+\index{HasNormInf@{HasNormInf}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{HasNormInf()}{HasNormInf()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Has\+Norm\+Inf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken Epetra\+\_\+\+Operator member -\/ Has\+Norm\+Inf. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00201}{201}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a82464d4b372ba6e97ecc47bb8596fbbf} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Label@{Label}}
+\index{Label@{Label}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Label()}{Label()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Epetra\+\_\+\+Operator\+::\+Label -\/ returns a string describing the operator. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00184}{184}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{Preconditioner\+\_\+label}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac08f2645cbfbaf4b566fe4089c8fae22} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!NormInf@{NormInf}}
+\index{NormInf@{NormInf}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{NormInf()}{NormInf()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Norm\+Inf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken Epetra\+\_\+\+Operator member -\/ Norm\+Inf. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00174}{174}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9acb2f803a0cec47dd802b9b5648984a}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9acb2f803a0cec47dd802b9b5648984a} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_ac52c527076aececb4df71c1e7ebdf3cc} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OperatorDomainMap@{OperatorDomainMap}}
+\index{OperatorDomainMap@{OperatorDomainMap}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{OperatorDomainMap()}{OperatorDomainMap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Domain\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Epetra\+\_\+\+Operator member -\/ Operator\+Domain\+Map. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00217}{217}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_aee7a1f7477be8cb9a59daa8f0d91ba72} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!OperatorRangeMap@{OperatorRangeMap}}
+\index{OperatorRangeMap@{OperatorRangeMap}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{OperatorRangeMap()}{OperatorRangeMap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \& oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+Range\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Epetra\+\_\+\+Operator member -\/ Operator\+Range\+Map. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00223}{223}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{Operator\+\_\+map\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_acfeb8c93b3361cc68def1051ccc8525a}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_acfeb8c93b3361cc68def1051ccc8525a} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!SetUseTranspose@{SetUseTranspose}}
+\index{SetUseTranspose@{SetUseTranspose}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{SetUseTranspose()}{SetUseTranspose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Set\+Use\+Transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}}]{Use\+Transpose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken Epetra\+\_\+\+Operator member -\/ Set\+Use\+Transpose. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00089}{89}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_aa70ab70fe3188e78fc623d3240f7af19} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!UseTranspose@{UseTranspose}}
+\index{UseTranspose@{UseTranspose}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{UseTranspose()}{UseTranspose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Use\+Transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken Epetra\+\_\+\+Operator member -\/ Use\+Transpose. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00190}{190}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a19407c48b77a021c8e714232d296ecd0}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a19407c48b77a021c8e714232d296ecd0} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Oomph\_lib\_preconditioner\_pt@{Oomph\_lib\_preconditioner\_pt}}
+\index{Oomph\_lib\_preconditioner\_pt@{Oomph\_lib\_preconditioner\_pt}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Oomph\_lib\_preconditioner\_pt}{Oomph\_lib\_preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}\texorpdfstring{$\ast$}{*} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+\_\+lib\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A pointer to the oomph-\/lib preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00231}{231}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{Apply\+Inverse()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a319c368461dabf218b9589dfc8d47f14}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a319c368461dabf218b9589dfc8d47f14} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_comm@{Operator\_comm}}
+\index{Operator\_comm@{Operator\_comm}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Operator\_comm}{Operator\_comm}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Mpi\+Comm}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+\_\+comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+An Epetra MPI Comm object. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00235}{235}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00211}{Comm()}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a093d431cfa9ad601e1ead0dd324b3d49}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a093d431cfa9ad601e1ead0dd324b3d49} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_comm@{Operator\_comm}}
+\index{Operator\_comm@{Operator\_comm}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Operator\_comm}{Operator\_comm}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Serial\+Comm}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+\_\+comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+An Epetra Serial Comm object. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00238}{238}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_af111fc1ede49a86c5ed37ad1f5573e2e}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_af111fc1ede49a86c5ed37ad1f5573e2e} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Operator\_map\_pt@{Operator\_map\_pt}}
+\index{Operator\_map\_pt@{Operator\_map\_pt}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Operator\_map\_pt}{Operator\_map\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}}\texorpdfstring{$\ast$}{*} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Operator\+\_\+map\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A pointer to an Epetra\+\_\+\+Map object -\/ describes distribution of the preconditioner, in this instance it is primarily used to prescribe the distribution of the residual and solution vector. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00250}{250}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00217}{Operator\+Domain\+Map()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00223}{Operator\+Range\+Map()}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9f1c739fe5868b1d9dcaee080d63cb5b}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a9f1c739fe5868b1d9dcaee080d63cb5b} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Preconditioner\_label@{Preconditioner\_label}}
+\index{Preconditioner\_label@{Preconditioner\_label}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_label}{Preconditioner\_label}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Preconditioner\+\_\+label\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a label for the preconditioner ( for Epetra\+\_\+\+Operator\+::\+Label() ) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00253}{253}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00184}{Label()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}.
+
+\Hypertarget{classoomph_1_1OomphLibPreconditionerEpetraOperator_a47942736149f13371582896aedf80f24}\label{classoomph_1_1OomphLibPreconditionerEpetraOperator_a47942736149f13371582896aedf80f24} 
+\index{oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}!Use\_epetra\_values@{Use\_epetra\_values}}
+\index{Use\_epetra\_values@{Use\_epetra\_values}!oomph::OomphLibPreconditionerEpetraOperator@{oomph::OomphLibPreconditionerEpetraOperator}}
+\doxysubsubsection{\texorpdfstring{Use\_epetra\_values}{Use\_epetra\_values}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Use\+\_\+epetra\+\_\+values\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Use the epetra data within the vectors passed to the oomph-\/lib preconditioner. If this is true none of the vector rebuild methods can be called. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00244}{244}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{Apply\+Inverse()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__solver_8h}{trilinos\+\_\+solver.\+h}}\end{DoxyCompactItemize}

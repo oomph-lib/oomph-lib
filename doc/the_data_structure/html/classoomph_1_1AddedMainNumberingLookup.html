@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::AddedMainNumberingLookup Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html">AddedMainNumberingLookup</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1AddedMainNumberingLookup-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::AddedMainNumberingLookup Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class to store bi-directional lookup between added matrix row/col numbers to main matrix (SumOfMatrix) row/col numbers.  
+ <a href="classoomph_1_1AddedMainNumberingLookup.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a46fceb572186ca8f41f158c9fddfc623" id="r_a46fceb572186ca8f41f158c9fddfc623"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a46fceb572186ca8f41f158c9fddfc623">AddedMainNumberingLookup</a> ()</td></tr>
+<tr class="memdesc:a46fceb572186ca8f41f158c9fddfc623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a46fceb572186ca8f41f158c9fddfc623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2697ff1ddcd2f6b0b7f22fb7cd56651b" id="r_a2697ff1ddcd2f6b0b7f22fb7cd56651b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a2697ff1ddcd2f6b0b7f22fb7cd56651b">AddedMainNumberingLookup</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dof_index</a>)</td></tr>
+<tr class="memdesc:a2697ff1ddcd2f6b0b7f22fb7cd56651b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real constructor: construct lookup from node numbers in mesh and global equation numbers. Useful for the case when the main matrix is a Jacobian and the added matrix is a contribution only on a certain mesh.  <br /></td></tr>
+<tr class="separator:a2697ff1ddcd2f6b0b7f22fb7cd56651b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643646f38ca0d58f7e1ed32c06a18aa8" id="r_a643646f38ca0d58f7e1ed32c06a18aa8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a643646f38ca0d58f7e1ed32c06a18aa8">AddedMainNumberingLookup</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">lookup_array</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">length</a>)</td></tr>
+<tr class="memdesc:a643646f38ca0d58f7e1ed32c06a18aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct lookup schemes from int array (HLib's format for this data).  <br /></td></tr>
+<tr class="separator:a643646f38ca0d58f7e1ed32c06a18aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2748af464febc0fb1150e8cc7ab0d73" id="r_ae2748af464febc0fb1150e8cc7ab0d73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#ae2748af464febc0fb1150e8cc7ab0d73">~AddedMainNumberingLookup</a> ()</td></tr>
+<tr class="memdesc:ae2748af464febc0fb1150e8cc7ab0d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:ae2748af464febc0fb1150e8cc7ab0d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3602f98bdd41d51ac36efeafdb58ceb0" id="r_a3602f98bdd41d51ac36efeafdb58ceb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a3602f98bdd41d51ac36efeafdb58ceb0">main_to_added</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">main</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a3602f98bdd41d51ac36efeafdb58ceb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a main matrix row/col number get the equivalent row/col in the added matrix. Throw an error if not found.  <br /></td></tr>
+<tr class="separator:a3602f98bdd41d51ac36efeafdb58ceb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a880b713fdcd217099c6f8bbedd133d15" id="r_a880b713fdcd217099c6f8bbedd133d15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a880b713fdcd217099c6f8bbedd133d15">unsafe_main_to_added</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">main</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a880b713fdcd217099c6f8bbedd133d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a main matrix row/col number get the equivalent row/col in the added matrix. Return -1 if not found.  <br /></td></tr>
+<tr class="separator:a880b713fdcd217099c6f8bbedd133d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65297d7f82675ef555e59a98875ead4d" id="r_a65297d7f82675ef555e59a98875ead4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a65297d7f82675ef555e59a98875ead4d">added_to_main</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">added</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a65297d7f82675ef555e59a98875ead4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a row/col number in the added matrix return the equivalent row/col number in the main matrix.  <br /></td></tr>
+<tr class="separator:a65297d7f82675ef555e59a98875ead4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0c78b4c7048915b3912af0b87f5a76" id="r_a8b0c78b4c7048915b3912af0b87f5a76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a8b0c78b4c7048915b3912af0b87f5a76">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dof_index</a>)</td></tr>
+<tr class="memdesc:a8b0c78b4c7048915b3912af0b87f5a76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the lookup schemes given a mesh and the degree of freedom to lookup main equation numbers for.  <br /></td></tr>
+<tr class="separator:a8b0c78b4c7048915b3912af0b87f5a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea76ee043104c63f3ecbd641f98ae10d" id="r_aea76ee043104c63f3ecbd641f98ae10d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#aea76ee043104c63f3ecbd641f98ae10d">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">lookup_array</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">length</a>)</td></tr>
+<tr class="memdesc:aea76ee043104c63f3ecbd641f98ae10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct lookup schemes from int array (HLib's format for this data).  <br /></td></tr>
+<tr class="separator:aea76ee043104c63f3ecbd641f98ae10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4cd3995826fd1aedc74fcf092e6c568" id="r_ab4cd3995826fd1aedc74fcf092e6c568"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#ab4cd3995826fd1aedc74fcf092e6c568">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bem_lookup</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dof_index</a>)</td></tr>
+<tr class="memdesc:ab4cd3995826fd1aedc74fcf092e6c568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct lookup using node vector.  <br /></td></tr>
+<tr class="separator:ab4cd3995826fd1aedc74fcf092e6c568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7ba1fc62b5943637f8e9f813a24e99" id="r_a9c7ba1fc62b5943637f8e9f813a24e99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a9c7ba1fc62b5943637f8e9f813a24e99">build_identity_map</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:a9c7ba1fc62b5943637f8e9f813a24e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an identity map (mostly for testing).  <br /></td></tr>
+<tr class="separator:a9c7ba1fc62b5943637f8e9f813a24e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02dcf19a1f6ec54ee41a3328d37b4ea" id="r_ac02dcf19a1f6ec54ee41a3328d37b4ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#ac02dcf19a1f6ec54ee41a3328d37b4ea">added_to_main_mapping_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac02dcf19a1f6ec54ee41a3328d37b4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const access function for mapping.  <br /></td></tr>
+<tr class="separator:ac02dcf19a1f6ec54ee41a3328d37b4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ee6affc0dbb0d20d34638468ed9310" id="r_a67ee6affc0dbb0d20d34638468ed9310"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::map&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a67ee6affc0dbb0d20d34638468ed9310">main_to_added_mapping_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a67ee6affc0dbb0d20d34638468ed9310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const access function for mapping.  <br /></td></tr>
+<tr class="separator:a67ee6affc0dbb0d20d34638468ed9310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a9fb7ccbac5f6339de912449531e69cba" id="r_a9fb7ccbac5f6339de912449531e69cba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a9fb7ccbac5f6339de912449531e69cba">construct_added_to_main_mapping</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dof_index</a>)</td></tr>
+<tr class="memdesc:a9fb7ccbac5f6339de912449531e69cba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the lookup from added matrix row/col to main matrix.  <br /></td></tr>
+<tr class="separator:a9fb7ccbac5f6339de912449531e69cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec4ec12b1dc296741d228be01deb96f" id="r_a4ec4ec12b1dc296741d228be01deb96f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a4ec4ec12b1dc296741d228be01deb96f">construct_reverse_mapping</a> ()</td></tr>
+<tr class="memdesc:a4ec4ec12b1dc296741d228be01deb96f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the main to added mapping using the added to main mapping.  <br /></td></tr>
+<tr class="separator:a4ec4ec12b1dc296741d228be01deb96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fc85fa8e77d54763c3123576b7eebc1" id="r_a7fc85fa8e77d54763c3123576b7eebc1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a7fc85fa8e77d54763c3123576b7eebc1">AddedMainNumberingLookup</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1AddedMainNumberingLookup.html">AddedMainNumberingLookup</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a7fc85fa8e77d54763c3123576b7eebc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inaccessible copy constructor.  <br /></td></tr>
+<tr class="separator:a7fc85fa8e77d54763c3123576b7eebc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9119df9d3eddd6919cfc7eda38e93b35" id="r_a9119df9d3eddd6919cfc7eda38e93b35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a9119df9d3eddd6919cfc7eda38e93b35">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1AddedMainNumberingLookup.html">AddedMainNumberingLookup</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a9119df9d3eddd6919cfc7eda38e93b35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inaccessible assignment operator.  <br /></td></tr>
+<tr class="separator:a9119df9d3eddd6919cfc7eda38e93b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a6c172dfd7d00b7af01c83e46b072955b" id="r_a6c172dfd7d00b7af01c83e46b072955b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#a6c172dfd7d00b7af01c83e46b072955b">Added_to_main_mapping</a></td></tr>
+<tr class="memdesc:a6c172dfd7d00b7af01c83e46b072955b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping from added matrix row/col numbers to main matrix row/col numbers.  <br /></td></tr>
+<tr class="separator:a6c172dfd7d00b7af01c83e46b072955b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37dc1a1c43aec35b3cdf57a6aaf838c" id="r_ac37dc1a1c43aec35b3cdf57a6aaf838c"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AddedMainNumberingLookup.html#ac37dc1a1c43aec35b3cdf57a6aaf838c">Main_to_added_mapping</a></td></tr>
+<tr class="memdesc:ac37dc1a1c43aec35b3cdf57a6aaf838c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping from main matrix row/col numbers to added matrix row/col numbers. Note that we cannot use a vector here because the main matrix rows/cols mapped onto are probably not contiguous. Access times are O(log N) so if you need to iterate over all elements then use the pointer access functions and use stl iterators properly.  <br /></td></tr>
+<tr class="separator:ac37dc1a1c43aec35b3cdf57a6aaf838c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to store bi-directional lookup between added matrix row/col numbers to main matrix (SumOfMatrix) row/col numbers. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00046">46</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a46fceb572186ca8f41f158c9fddfc623" name="a46fceb572186ca8f41f158c9fddfc623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fceb572186ca8f41f158c9fddfc623">&#9670;&#160;</a></span>AddedMainNumberingLookup() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AddedMainNumberingLookup::AddedMainNumberingLookup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00050">50</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a2697ff1ddcd2f6b0b7f22fb7cd56651b" name="a2697ff1ddcd2f6b0b7f22fb7cd56651b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2697ff1ddcd2f6b0b7f22fb7cd56651b">&#9670;&#160;</a></span>AddedMainNumberingLookup() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AddedMainNumberingLookup::AddedMainNumberingLookup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>dof_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Real constructor: construct lookup from node numbers in mesh and global equation numbers. Useful for the case when the main matrix is a Jacobian and the added matrix is a contribution only on a certain mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00056">56</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00125">build()</a>.</p>
+
+</div>
+</div>
+<a id="a643646f38ca0d58f7e1ed32c06a18aa8" name="a643646f38ca0d58f7e1ed32c06a18aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643646f38ca0d58f7e1ed32c06a18aa8">&#9670;&#160;</a></span>AddedMainNumberingLookup() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AddedMainNumberingLookup::AddedMainNumberingLookup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td>
+          <td class="paramname"><em>lookup_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct lookup schemes from int array (HLib's format for this data). </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00063">63</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00125">build()</a>.</p>
+
+</div>
+</div>
+<a id="ae2748af464febc0fb1150e8cc7ab0d73" name="ae2748af464febc0fb1150e8cc7ab0d73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2748af464febc0fb1150e8cc7ab0d73">&#9670;&#160;</a></span>~AddedMainNumberingLookup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AddedMainNumberingLookup::~AddedMainNumberingLookup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00069">69</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a7fc85fa8e77d54763c3123576b7eebc1" name="a7fc85fa8e77d54763c3123576b7eebc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc85fa8e77d54763c3123576b7eebc1">&#9670;&#160;</a></span>AddedMainNumberingLookup() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AddedMainNumberingLookup::AddedMainNumberingLookup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1AddedMainNumberingLookup.html">AddedMainNumberingLookup</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inaccessible copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a65297d7f82675ef555e59a98875ead4d" name="a65297d7f82675ef555e59a98875ead4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65297d7f82675ef555e59a98875ead4d">&#9670;&#160;</a></span>added_to_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::AddedMainNumberingLookup::added_to_main </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>added</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Given a row/col number in the added matrix return the equivalent row/col number in the main matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00118">118</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>.</p>
+
+</div>
+</div>
+<a id="ac02dcf19a1f6ec54ee41a3328d37b4ea" name="ac02dcf19a1f6ec54ee41a3328d37b4ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02dcf19a1f6ec54ee41a3328d37b4ea">&#9670;&#160;</a></span>added_to_main_mapping_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; * oomph::AddedMainNumberingLookup::added_to_main_mapping_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Const access function for mapping. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00184">184</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>.</p>
+
+</div>
+</div>
+<a id="aea76ee043104c63f3ecbd641f98ae10d" name="aea76ee043104c63f3ecbd641f98ae10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea76ee043104c63f3ecbd641f98ae10d">&#9670;&#160;</a></span>build() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td>
+          <td class="paramname"><em>lookup_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct lookup schemes from int array (HLib's format for this data). </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00133">133</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>.</p>
+
+</div>
+</div>
+<a id="a8b0c78b4c7048915b3912af0b87f5a76" name="a8b0c78b4c7048915b3912af0b87f5a76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b0c78b4c7048915b3912af0b87f5a76">&#9670;&#160;</a></span>build() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>dof_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct the lookup schemes given a mesh and the degree of freedom to lookup main equation numbers for. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00125">125</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00197">construct_added_to_main_mapping()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00063">AddedMainNumberingLookup()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00056">AddedMainNumberingLookup()</a>.</p>
+
+</div>
+</div>
+<a id="ab4cd3995826fd1aedc74fcf092e6c568" name="ab4cd3995826fd1aedc74fcf092e6c568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4cd3995826fd1aedc74fcf092e6c568">&#9670;&#160;</a></span>build() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Node.html">Node</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>bem_lookup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>dof_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct lookup using node vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00155">155</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>, <a class="el" href="elements_8h_source.html#l00691">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="a9c7ba1fc62b5943637f8e9f813a24e99" name="a9c7ba1fc62b5943637f8e9f813a24e99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c7ba1fc62b5943637f8e9f813a24e99">&#9670;&#160;</a></span>build_identity_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::build_identity_map </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an identity map (mostly for testing). </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00169">169</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>.</p>
+
+</div>
+</div>
+<a id="a9fb7ccbac5f6339de912449531e69cba" name="a9fb7ccbac5f6339de912449531e69cba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fb7ccbac5f6339de912449531e69cba">&#9670;&#160;</a></span>construct_added_to_main_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::construct_added_to_main_mapping </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>dof_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set up the lookup from added matrix row/col to main matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00197">197</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>, <a class="el" href="nodes_8h_source.html#l00367">oomph::Data::eqn_number()</a>, <a class="el" href="mesh_8h_source.html#l00604">oomph::Mesh::nnode()</a>, and <a class="el" href="mesh_8h_source.html#l00440">oomph::Mesh::node_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00125">build()</a>.</p>
+
+</div>
+</div>
+<a id="a4ec4ec12b1dc296741d228be01deb96f" name="a4ec4ec12b1dc296741d228be01deb96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec4ec12b1dc296741d228be01deb96f">&#9670;&#160;</a></span>construct_reverse_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::construct_reverse_mapping </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set up the main to added mapping using the added to main mapping. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00209">209</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00234">Added_to_main_mapping</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00241">Main_to_added_mapping</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00133">build()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00125">build()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00155">build()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00169">build_identity_map()</a>.</p>
+
+</div>
+</div>
+<a id="a3602f98bdd41d51ac36efeafdb58ceb0" name="a3602f98bdd41d51ac36efeafdb58ceb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3602f98bdd41d51ac36efeafdb58ceb0">&#9670;&#160;</a></span>main_to_added()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::AddedMainNumberingLookup::main_to_added </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>main</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Given a main matrix row/col number get the equivalent row/col in the added matrix. Throw an error if not found. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00073">73</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00199">oomph::StringConversion::to_string()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00099">unsafe_main_to_added()</a>.</p>
+
+</div>
+</div>
+<a id="a67ee6affc0dbb0d20d34638468ed9310" name="a67ee6affc0dbb0d20d34638468ed9310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ee6affc0dbb0d20d34638468ed9310">&#9670;&#160;</a></span>main_to_added_mapping_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::map&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; * oomph::AddedMainNumberingLookup::main_to_added_mapping_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Const access function for mapping. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00190">190</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00241">Main_to_added_mapping</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00099">unsafe_main_to_added()</a>.</p>
+
+</div>
+</div>
+<a id="a9119df9d3eddd6919cfc7eda38e93b35" name="a9119df9d3eddd6919cfc7eda38e93b35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9119df9d3eddd6919cfc7eda38e93b35">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::AddedMainNumberingLookup::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1AddedMainNumberingLookup.html">AddedMainNumberingLookup</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inaccessible assignment operator. </p>
+
+</div>
+</div>
+<a id="a880b713fdcd217099c6f8bbedd133d15" name="a880b713fdcd217099c6f8bbedd133d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a880b713fdcd217099c6f8bbedd133d15">&#9670;&#160;</a></span>unsafe_main_to_added()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::AddedMainNumberingLookup::unsafe_main_to_added </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>main</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Given a main matrix row/col number get the equivalent row/col in the added matrix. Return -1 if not found. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00099">99</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sum__of__matrices_8h_source.html#l00241">Main_to_added_mapping</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00190">main_to_added_mapping_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00073">main_to_added()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6c172dfd7d00b7af01c83e46b072955b" name="a6c172dfd7d00b7af01c83e46b072955b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c172dfd7d00b7af01c83e46b072955b">&#9670;&#160;</a></span>Added_to_main_mapping</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&gt; oomph::AddedMainNumberingLookup::Added_to_main_mapping</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mapping from added matrix row/col numbers to main matrix row/col numbers. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00234">234</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00118">added_to_main()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00184">added_to_main_mapping_pt()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00133">build()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00155">build()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00169">build_identity_map()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00197">construct_added_to_main_mapping()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>.</p>
+
+</div>
+</div>
+<a id="ac37dc1a1c43aec35b3cdf57a6aaf838c" name="ac37dc1a1c43aec35b3cdf57a6aaf838c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac37dc1a1c43aec35b3cdf57a6aaf838c">&#9670;&#160;</a></span>Main_to_added_mapping</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&gt; oomph::AddedMainNumberingLookup::Main_to_added_mapping</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mapping from main matrix row/col numbers to added matrix row/col numbers. Note that we cannot use a vector here because the main matrix rows/cols mapped onto are probably not contiguous. Access times are O(log N) so if you need to iterate over all elements then use the pointer access functions and use stl iterators properly. </p>
+
+<p class="definition">Definition at line <a class="el" href="sum__of__matrices_8h_source.html#l00241">241</a> of file <a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sum__of__matrices_8h_source.html#l00209">construct_reverse_mapping()</a>, <a class="el" href="sum__of__matrices_8h_source.html#l00190">main_to_added_mapping_pt()</a>, and <a class="el" href="sum__of__matrices_8h_source.html#l00099">unsafe_main_to_added()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="sum__of__matrices_8h_source.html">sum_of_matrices.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:06
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

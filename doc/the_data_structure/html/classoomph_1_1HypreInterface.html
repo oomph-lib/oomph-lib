@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HypreInterface Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HypreInterface.html">HypreInterface</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HypreInterface-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::HypreInterface Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>An interface class to the suite of Hypre solvers and preconditioners to allow use of:  
+ <a href="classoomph_1_1HypreInterface.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::HypreInterface:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1HypreInterface.png" usemap="#oomph::HypreInterface_map" alt=""/>
+  <map id="oomph::HypreInterface_map" name="oomph::HypreInterface_map">
+<area href="classoomph_1_1HyprePreconditioner.html" title="An Preconditioner class using the suite of Hypre preconditioners to allow." alt="oomph::HyprePreconditioner" shape="rect" coords="0,56,173,80"/>
+<area href="classoomph_1_1HypreSolver.html" title="An LinearSolver class using the suite of Hypre solvers to allow." alt="oomph::HypreSolver" shape="rect" coords="183,56,356,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6326c42293c21c62a189c4bfee03e2ab" id="r_a6326c42293c21c62a189c4bfee03e2ab"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2ab">Hypre_method_types</a> { <br />
+&#160;&#160;<a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805">CG</a>
+, <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45">GMRES</a>
+, <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb">BiCGStab</a>
+, <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061">BoomerAMG</a>
+, <br />
+&#160;&#160;<a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d">Euclid</a>
+, <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165">ParaSails</a>
+, <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5">None</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a6326c42293c21c62a189c4bfee03e2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated flag to define which Hypre methods are used CAREFUL: DON'T CHANGE THE ORDER OF THESE!  <a href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2ab">More...</a><br /></td></tr>
+<tr class="separator:a6326c42293c21c62a189c4bfee03e2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a411f8026204716846b34eec5a1296d28" id="r_a411f8026204716846b34eec5a1296d28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a411f8026204716846b34eec5a1296d28">HypreInterface</a> ()</td></tr>
+<tr class="memdesc:a411f8026204716846b34eec5a1296d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a411f8026204716846b34eec5a1296d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713e74ad0f84ae06be5c7daa87337ecf" id="r_a713e74ad0f84ae06be5c7daa87337ecf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a713e74ad0f84ae06be5c7daa87337ecf">~HypreInterface</a> ()</td></tr>
+<tr class="memdesc:a713e74ad0f84ae06be5c7daa87337ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a713e74ad0f84ae06be5c7daa87337ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25217cef5216d81c59a3de62062da226" id="r_a25217cef5216d81c59a3de62062da226"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a25217cef5216d81c59a3de62062da226">HypreInterface</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HypreInterface.html">HypreInterface</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a25217cef5216d81c59a3de62062da226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a25217cef5216d81c59a3de62062da226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50bd66edf8ceed2eb9514548dee84602" id="r_a50bd66edf8ceed2eb9514548dee84602"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a50bd66edf8ceed2eb9514548dee84602">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HypreInterface.html">HypreInterface</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a50bd66edf8ceed2eb9514548dee84602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a50bd66edf8ceed2eb9514548dee84602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a281c9cf1e254871a957dbf46698cd518" id="r_a281c9cf1e254871a957dbf46698cd518"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a281c9cf1e254871a957dbf46698cd518">enable_hypre_error_messages</a> ()</td></tr>
+<tr class="memdesc:a281c9cf1e254871a957dbf46698cd518"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn on the hypre error messages.  <br /></td></tr>
+<tr class="separator:a281c9cf1e254871a957dbf46698cd518"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5123a1836f5d9f68bc6736829132b5a5" id="r_a5123a1836f5d9f68bc6736829132b5a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a5123a1836f5d9f68bc6736829132b5a5">disable_hypre_error_messages</a> ()</td></tr>
+<tr class="memdesc:a5123a1836f5d9f68bc6736829132b5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn off hypre error messages.  <br /></td></tr>
+<tr class="separator:a5123a1836f5d9f68bc6736829132b5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a976554ee58a357435c047f78a1539434" id="r_a976554ee58a357435c047f78a1539434"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a976554ee58a357435c047f78a1539434">existing_solver</a> ()</td></tr>
+<tr class="memdesc:a976554ee58a357435c047f78a1539434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to return value of which solver (if any) is currently stored.  <br /></td></tr>
+<tr class="separator:a976554ee58a357435c047f78a1539434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49751f00702cd3176ee61c4b226424eb" id="r_a49751f00702cd3176ee61c4b226424eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a49751f00702cd3176ee61c4b226424eb">existing_preconditioner</a> ()</td></tr>
+<tr class="memdesc:a49751f00702cd3176ee61c4b226424eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function return value of which preconditioner (if any) is stored.  <br /></td></tr>
+<tr class="separator:a49751f00702cd3176ee61c4b226424eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a989fc83bc47f7b4fb8a753b16a26a012" id="r_a989fc83bc47f7b4fb8a753b16a26a012"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a989fc83bc47f7b4fb8a753b16a26a012">hypre_clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a989fc83bc47f7b4fb8a753b16a26a012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deletes all solver data.  <br /></td></tr>
+<tr class="separator:a989fc83bc47f7b4fb8a753b16a26a012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebc23d169937d5e6a5b492710843ae7b" id="r_aebc23d169937d5e6a5b492710843ae7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#aebc23d169937d5e6a5b492710843ae7b">hypre_matrix_setup</a> (<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix_pt)</td></tr>
+<tr class="memdesc:aebc23d169937d5e6a5b492710843ae7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function which sets values of First_global_row, Last_global_row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix_ij/Matrix_par) from the <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>.  <br /></td></tr>
+<tr class="separator:aebc23d169937d5e6a5b492710843ae7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeddc250f9c56ac94e8c013c23a69deb" id="r_afeddc250f9c56ac94e8c013c23a69deb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#afeddc250f9c56ac94e8c013c23a69deb">hypre_solver_setup</a> ()</td></tr>
+<tr class="memdesc:afeddc250f9c56ac94e8c013c23a69deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the data required for to use as an oomph-lib <a class="el" href="classoomph_1_1LinearSolver.html" title="Base class for all linear solvers. This merely defines standard interfaces for linear solvers,...">LinearSolver</a> or <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a>. This must be called after the Hypre matrix has been generated using hypre_matrix_setup(...).  <br /></td></tr>
+<tr class="separator:afeddc250f9c56ac94e8c013c23a69deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cdd3f8621333e94d8a1004611bc6793" id="r_a5cdd3f8621333e94d8a1004611bc6793"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a5cdd3f8621333e94d8a1004611bc6793">hypre_solve</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">solution</a>)</td></tr>
+<tr class="memdesc:a5cdd3f8621333e94d8a1004611bc6793"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function performs a solve if any solver exists.  <br /></td></tr>
+<tr class="separator:a5cdd3f8621333e94d8a1004611bc6793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf3a478dc337afec62a690445865980" id="r_a9bf3a478dc337afec62a690445865980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a9bf3a478dc337afec62a690445865980">doc_hypre_parameters</a> ()</td></tr>
+<tr class="memdesc:a9bf3a478dc337afec62a690445865980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc parameters used in hypre solver.  <br /></td></tr>
+<tr class="separator:a9bf3a478dc337afec62a690445865980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a011667f822e82fc40fde8ab5f2bd4d57" id="r_a011667f822e82fc40fde8ab5f2bd4d57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a011667f822e82fc40fde8ab5f2bd4d57">Output_info</a></td></tr>
+<tr class="memdesc:a011667f822e82fc40fde8ab5f2bd4d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag is true to output info and results of timings.  <br /></td></tr>
+<tr class="separator:a011667f822e82fc40fde8ab5f2bd4d57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca9f624ee43955c6607a62b50128614" id="r_abca9f624ee43955c6607a62b50128614"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#abca9f624ee43955c6607a62b50128614">Max_iter</a></td></tr>
+<tr class="memdesc:abca9f624ee43955c6607a62b50128614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of iterations used in solver.  <br /></td></tr>
+<tr class="separator:abca9f624ee43955c6607a62b50128614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32a993d324c6b198726064299a4e924" id="r_aa32a993d324c6b198726064299a4e924"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#aa32a993d324c6b198726064299a4e924">Tolerance</a></td></tr>
+<tr class="memdesc:aa32a993d324c6b198726064299a4e924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance used to terminate solver.  <br /></td></tr>
+<tr class="separator:aa32a993d324c6b198726064299a4e924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2a79282191b4430ef6631df9fc8c947" id="r_ae2a79282191b4430ef6631df9fc8c947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#ae2a79282191b4430ef6631df9fc8c947">Hypre_method</a></td></tr>
+<tr class="memdesc:ae2a79282191b4430ef6631df9fc8c947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hypre method flag. Valid values are specified in enumeration.  <br /></td></tr>
+<tr class="separator:ae2a79282191b4430ef6631df9fc8c947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5694f23f49b16ca978e6bcb629c7ab27" id="r_a5694f23f49b16ca978e6bcb629c7ab27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a5694f23f49b16ca978e6bcb629c7ab27">Internal_preconditioner</a></td></tr>
+<tr class="memdesc:a5694f23f49b16ca978e6bcb629c7ab27"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> method flag used with Hypre's PCG, <a class="el" href="classoomph_1_1GMRES.html" title="The GMRES method.">GMRES</a> and <a class="el" href="classoomph_1_1BiCGStab.html" title="The conjugate gradient method.">BiCGStab</a> in solve(...) or resolve(...). Valid values are BoomerAMG, Euclid, ParaSails or None (all enumerated above), for any other value no preconditioner is set.  <br /></td></tr>
+<tr class="separator:a5694f23f49b16ca978e6bcb629c7ab27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e2b0066abfccd0c489227c208c0f74" id="r_ad1e2b0066abfccd0c489227c208c0f74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#ad1e2b0066abfccd0c489227c208c0f74">AMG_print_level</a></td></tr>
+<tr class="memdesc:ad1e2b0066abfccd0c489227c208c0f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to set the Hypre printing level for AMG 0: no printout 1: print setup information 2: print solve information 3: print setup and solve information.  <br /></td></tr>
+<tr class="separator:ad1e2b0066abfccd0c489227c208c0f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf57ef35573b468881617d8cae4643c9" id="r_adf57ef35573b468881617d8cae4643c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#adf57ef35573b468881617d8cae4643c9">AMG_max_levels</a></td></tr>
+<tr class="memdesc:adf57ef35573b468881617d8cae4643c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of levels used in AMG.  <br /></td></tr>
+<tr class="separator:adf57ef35573b468881617d8cae4643c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3d118bd7fa11c89ec5fb39dc2f0d218" id="r_af3d118bd7fa11c89ec5fb39dc2f0d218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#af3d118bd7fa11c89ec5fb39dc2f0d218">AMG_max_row_sum</a></td></tr>
+<tr class="memdesc:af3d118bd7fa11c89ec5fb39dc2f0d218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter to identify diagonally dominant parts of the matrix in AMG.  <br /></td></tr>
+<tr class="separator:af3d118bd7fa11c89ec5fb39dc2f0d218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4bac4203fb7ec08f5a9fc7cf3f47161" id="r_aa4bac4203fb7ec08f5a9fc7cf3f47161"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#aa4bac4203fb7ec08f5a9fc7cf3f47161">AMG_using_simple_smoothing</a></td></tr>
+<tr class="memdesc:aa4bac4203fb7ec08f5a9fc7cf3f47161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to determine whether simple smoothers (determined by the AMG_simple_smoother flag) or complex smoothers (determined by the AMG_complex_smoother flag are used in AMG.  <br /></td></tr>
+<tr class="separator:aa4bac4203fb7ec08f5a9fc7cf3f47161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2671434b9202b17d9ecff0a7787f83c" id="r_ac2671434b9202b17d9ecff0a7787f83c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#ac2671434b9202b17d9ecff0a7787f83c">AMG_simple_smoother</a></td></tr>
+<tr class="memdesc:ac2671434b9202b17d9ecff0a7787f83c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple smoothing methods used in BoomerAMG. To use these methods set AMG_using_simple_smoothing to true. Here are the current options (from hypre's HYPRE_parcsr_ls.h):  <br /></td></tr>
+<tr class="separator:ac2671434b9202b17d9ecff0a7787f83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e4d8eeb1fb32cb7ada7c273edbf070e" id="r_a7e4d8eeb1fb32cb7ada7c273edbf070e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a7e4d8eeb1fb32cb7ada7c273edbf070e">AMG_complex_smoother</a></td></tr>
+<tr class="memdesc:a7e4d8eeb1fb32cb7ada7c273edbf070e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complex smoothing methods used in BoomerAMG. To use these methods set AMG_using_simple_smoothing to false Here are the current options (from hypre's HYPRE_parcsr_ls.h):  <br /></td></tr>
+<tr class="separator:a7e4d8eeb1fb32cb7ada7c273edbf070e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968f16488385d717c96993883cf4a680" id="r_a968f16488385d717c96993883cf4a680"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a968f16488385d717c96993883cf4a680">AMG_smoother_iterations</a></td></tr>
+<tr class="memdesc:a968f16488385d717c96993883cf4a680"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of smoother iterations to apply.  <br /></td></tr>
+<tr class="separator:a968f16488385d717c96993883cf4a680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf7a5f5744201ae75368c2b07f662bc" id="r_abdf7a5f5744201ae75368c2b07f662bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#abdf7a5f5744201ae75368c2b07f662bc">AMG_damping</a></td></tr>
+<tr class="memdesc:abdf7a5f5744201ae75368c2b07f662bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Damping factor for BoomerAMG smoothed Jacobi or hybrid SOR.  <br /></td></tr>
+<tr class="separator:abdf7a5f5744201ae75368c2b07f662bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e87cc2c06ff1391b293e636b19236ea" id="r_a1e87cc2c06ff1391b293e636b19236ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a1e87cc2c06ff1391b293e636b19236ea">AMG_strength</a></td></tr>
+<tr class="memdesc:a1e87cc2c06ff1391b293e636b19236ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connection strength threshold parameter for BoomerAMG.  <br /></td></tr>
+<tr class="separator:a1e87cc2c06ff1391b293e636b19236ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa7abd65dec3d2318a36d8fddb96a46" id="r_a8fa7abd65dec3d2318a36d8fddb96a46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a8fa7abd65dec3d2318a36d8fddb96a46">AMG_truncation</a></td></tr>
+<tr class="memdesc:a8fa7abd65dec3d2318a36d8fddb96a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolation truncation factor for BoomerAMG.  <br /></td></tr>
+<tr class="separator:a8fa7abd65dec3d2318a36d8fddb96a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a75db2a70cfd31653be6681abccffbf" id="r_a0a75db2a70cfd31653be6681abccffbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a0a75db2a70cfd31653be6681abccffbf">AMG_coarsening</a></td></tr>
+<tr class="memdesc:a0a75db2a70cfd31653be6681abccffbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">AMG coarsening strategy. Coarsening types include: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets - lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended)  <br /></td></tr>
+<tr class="separator:a0a75db2a70cfd31653be6681abccffbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cdba8c59c318125fbb367207f1082b6" id="r_a3cdba8c59c318125fbb367207f1082b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a3cdba8c59c318125fbb367207f1082b6">ParaSails_symmetry</a></td></tr>
+<tr class="memdesc:a3cdba8c59c318125fbb367207f1082b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">ParaSails symmetry flag, used to inform ParaSails of Symmetry of definitenss of problem and type of ParaSails preconditioner: 0 = nonsymmetric and/or indefinite problem, nonsymmetric preconditioner 1 = SPD problem, and SPD (factored preconditioner) 2 = nonsymmetric, definite problem and SDP (factored preconditoner)  <br /></td></tr>
+<tr class="separator:a3cdba8c59c318125fbb367207f1082b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313c9638a579d912e3f570b21db611f4" id="r_a313c9638a579d912e3f570b21db611f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a313c9638a579d912e3f570b21db611f4">ParaSails_nlevel</a></td></tr>
+<tr class="memdesc:a313c9638a579d912e3f570b21db611f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">ParaSails nlevel parameter.  <br /></td></tr>
+<tr class="separator:a313c9638a579d912e3f570b21db611f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8deadae96f1791b9f2552505cc68af2d" id="r_a8deadae96f1791b9f2552505cc68af2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a8deadae96f1791b9f2552505cc68af2d">ParaSails_thresh</a></td></tr>
+<tr class="memdesc:a8deadae96f1791b9f2552505cc68af2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">ParaSails thresh parameter.  <br /></td></tr>
+<tr class="separator:a8deadae96f1791b9f2552505cc68af2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ee95ad2f64b9d4fb0b0951a64c357a" id="r_a34ee95ad2f64b9d4fb0b0951a64c357a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a34ee95ad2f64b9d4fb0b0951a64c357a">ParaSails_filter</a></td></tr>
+<tr class="memdesc:a34ee95ad2f64b9d4fb0b0951a64c357a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ParaSails filter parameter.  <br /></td></tr>
+<tr class="separator:a34ee95ad2f64b9d4fb0b0951a64c357a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af91bb7e92785e510c04cdb0c11ef99cf" id="r_af91bb7e92785e510c04cdb0c11ef99cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#af91bb7e92785e510c04cdb0c11ef99cf">Euclid_droptol</a></td></tr>
+<tr class="memdesc:af91bb7e92785e510c04cdb0c11ef99cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euclid drop tolerance for ILU(k) and ILUT factorization.  <br /></td></tr>
+<tr class="separator:af91bb7e92785e510c04cdb0c11ef99cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a2f90a3e7fcdb2909d400d82b90286" id="r_a16a2f90a3e7fcdb2909d400d82b90286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a16a2f90a3e7fcdb2909d400d82b90286">Euclid_rowScale</a></td></tr>
+<tr class="memdesc:a16a2f90a3e7fcdb2909d400d82b90286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to switch on Euclid row scaling.  <br /></td></tr>
+<tr class="separator:a16a2f90a3e7fcdb2909d400d82b90286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6e93b2655b578090a5d9abb91c2e22" id="r_afe6e93b2655b578090a5d9abb91c2e22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#afe6e93b2655b578090a5d9abb91c2e22">Euclid_using_ILUT</a></td></tr>
+<tr class="memdesc:afe6e93b2655b578090a5d9abb91c2e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to determine if ILUT (if true) or ILU(k) is used in Euclid.  <br /></td></tr>
+<tr class="separator:afe6e93b2655b578090a5d9abb91c2e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1405f23d6ffdf4afe2839434a3f738e0" id="r_a1405f23d6ffdf4afe2839434a3f738e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a1405f23d6ffdf4afe2839434a3f738e0">Euclid_using_BJ</a></td></tr>
+<tr class="memdesc:a1405f23d6ffdf4afe2839434a3f738e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to determine if Block Jacobi is used instead of PILU.  <br /></td></tr>
+<tr class="separator:a1405f23d6ffdf4afe2839434a3f738e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae9320b5116bb330ddd1096d20f556e" id="r_a0ae9320b5116bb330ddd1096d20f556e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a0ae9320b5116bb330ddd1096d20f556e">Euclid_level</a></td></tr>
+<tr class="memdesc:a0ae9320b5116bb330ddd1096d20f556e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euclid level parameter for ILU(k) factorization.  <br /></td></tr>
+<tr class="separator:a0ae9320b5116bb330ddd1096d20f556e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc83c27b78ac44ccdba2a85191e474c1" id="r_adc83c27b78ac44ccdba2a85191e474c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#adc83c27b78ac44ccdba2a85191e474c1">Euclid_print_level</a></td></tr>
+<tr class="memdesc:adc83c27b78ac44ccdba2a85191e474c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to set the level of printing from Euclid when the Euclid destructor is called 0: no printing (default) 1: prints summary of runtime settings and timings 2: as 1 plus prints memory usage.  <br /></td></tr>
+<tr class="separator:adc83c27b78ac44ccdba2a85191e474c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79fa8ccf580df282a6a2955e3d5327ae" id="r_a79fa8ccf580df282a6a2955e3d5327ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a79fa8ccf580df282a6a2955e3d5327ae">AMGEuclidSmoother_use_block_jacobi</a></td></tr>
+<tr class="separator:a79fa8ccf580df282a6a2955e3d5327ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3570de904e329445f987481d61821b0f" id="r_a3570de904e329445f987481d61821b0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a3570de904e329445f987481d61821b0f">AMGEuclidSmoother_use_row_scaling</a></td></tr>
+<tr class="separator:a3570de904e329445f987481d61821b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ead069d2811580d1f7a743a0c5569b1" id="r_a4ead069d2811580d1f7a743a0c5569b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a4ead069d2811580d1f7a743a0c5569b1">AMGEuclidSmoother_use_ilut</a></td></tr>
+<tr class="separator:a4ead069d2811580d1f7a743a0c5569b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3677d64e347986f0693acb90ab9510fb" id="r_a3677d64e347986f0693acb90ab9510fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a3677d64e347986f0693acb90ab9510fb">AMGEuclidSmoother_level</a></td></tr>
+<tr class="separator:a3677d64e347986f0693acb90ab9510fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dab8a5b8cc96e3d1c38960735f3fbee" id="r_a0dab8a5b8cc96e3d1c38960735f3fbee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a0dab8a5b8cc96e3d1c38960735f3fbee">AMGEuclidSmoother_drop_tol</a></td></tr>
+<tr class="separator:a0dab8a5b8cc96e3d1c38960735f3fbee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75e69886d00203474a4eea60c751fa39" id="r_a75e69886d00203474a4eea60c751fa39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a75e69886d00203474a4eea60c751fa39">AMGEuclidSmoother_print_level</a></td></tr>
+<tr class="separator:a75e69886d00203474a4eea60c751fa39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a901fbdfa98992faf1cdae4d2d1ac9a2b" id="r_a901fbdfa98992faf1cdae4d2d1ac9a2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a901fbdfa98992faf1cdae4d2d1ac9a2b">Krylov_print_level</a></td></tr>
+<tr class="memdesc:a901fbdfa98992faf1cdae4d2d1ac9a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to set the Hypre printing level for the Krylov subspace solvers.  <br /></td></tr>
+<tr class="separator:a901fbdfa98992faf1cdae4d2d1ac9a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0570d52546893f0767060c6efcd4090" id="r_aa0570d52546893f0767060c6efcd4090"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#aa0570d52546893f0767060c6efcd4090">Hypre_error_messages</a></td></tr>
+<tr class="memdesc:aa0570d52546893f0767060c6efcd4090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to determine if non-zero values of the Hypre error flag plus Hypre error messages are output to screen at various points in the solve function, i.e. after:  <br /></td></tr>
+<tr class="separator:aa0570d52546893f0767060c6efcd4090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0117cae635c9242ccfd9ad7153511c07" id="r_a0117cae635c9242ccfd9ad7153511c07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a0117cae635c9242ccfd9ad7153511c07">Delete_input_data</a></td></tr>
+<tr class="memdesc:a0117cae635c9242ccfd9ad7153511c07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal flag which is true when hypre_setup or hypre_solve can delete input matrix.  <br /></td></tr>
+<tr class="separator:a0117cae635c9242ccfd9ad7153511c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e1fd87d247b737001fb366bf4a7081f" id="r_a3e1fd87d247b737001fb366bf4a7081f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a3e1fd87d247b737001fb366bf4a7081f">Using_distributed_rhs</a></td></tr>
+<tr class="memdesc:a3e1fd87d247b737001fb366bf4a7081f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal flag which tell the solver if the rhs <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> is distributed or not.  <br /></td></tr>
+<tr class="separator:a3e1fd87d247b737001fb366bf4a7081f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc7fe7e11b5c08cc768969b9e1f8641" id="r_a1bc7fe7e11b5c08cc768969b9e1f8641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a1bc7fe7e11b5c08cc768969b9e1f8641">Returning_distributed_solution</a></td></tr>
+<tr class="memdesc:a1bc7fe7e11b5c08cc768969b9e1f8641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal flag which tell the solver if the solution <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> to be returned is distributed or not.  <br /></td></tr>
+<tr class="separator:a1bc7fe7e11b5c08cc768969b9e1f8641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a8668ea7323b2efb227a461e80d62b044" id="r_a8668ea7323b2efb227a461e80d62b044"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a8668ea7323b2efb227a461e80d62b044">Delete_matrix</a></td></tr>
+<tr class="memdesc:a8668ea7323b2efb227a461e80d62b044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hypre copies matrix data from oomph-lib's <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true.  <br /></td></tr>
+<tr class="separator:a8668ea7323b2efb227a461e80d62b044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad94c5a5a5191a786ce63e4d2c0d4c65d" id="r_ad94c5a5a5191a786ce63e4d2c0d4c65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_IJMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#ad94c5a5a5191a786ce63e4d2c0d4c65d">Matrix_ij</a></td></tr>
+<tr class="memdesc:ad94c5a5a5191a786ce63e4d2c0d4c65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hypre_IJMatrix version of the matrix used in solve(...), resolve(...) or preconditioner_solve(...).  <br /></td></tr>
+<tr class="separator:ad94c5a5a5191a786ce63e4d2c0d4c65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a6418573f59098d6cfdaf9b36a6949d" id="r_a4a6418573f59098d6cfdaf9b36a6949d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_ParCSRMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a4a6418573f59098d6cfdaf9b36a6949d">Matrix_par</a></td></tr>
+<tr class="memdesc:a4a6418573f59098d6cfdaf9b36a6949d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hypre_ParCSRMatrix version of the matrix used in solve(...), resolve(...) or preconditioner_solve(...).  <br /></td></tr>
+<tr class="separator:a4a6418573f59098d6cfdaf9b36a6949d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b245194966a26307c86f3cf42062489" id="r_a3b245194966a26307c86f3cf42062489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_Solver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a3b245194966a26307c86f3cf42062489">Solver</a></td></tr>
+<tr class="memdesc:a3b245194966a26307c86f3cf42062489"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Hypre solver used in solve(...), resolve(...) or preconditioner_solve(...). [This is a C structure!].  <br /></td></tr>
+<tr class="separator:a3b245194966a26307c86f3cf42062489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e975bac0718a91226b20e9a819b30d" id="r_a72e975bac0718a91226b20e9a819b30d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_Solver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a72e975bac0718a91226b20e9a819b30d">Preconditioner</a></td></tr>
+<tr class="memdesc:a72e975bac0718a91226b20e9a819b30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The internal Hypre preconditioner used in conjunction with Solver. [This is a C structure!].  <br /></td></tr>
+<tr class="separator:a72e975bac0718a91226b20e9a819b30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab81e804ece2fbf658eac9c1f5c1ddc0b" id="r_ab81e804ece2fbf658eac9c1f5c1ddc0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#ab81e804ece2fbf658eac9c1f5c1ddc0b">Existing_solver</a></td></tr>
+<tr class="memdesc:ab81e804ece2fbf658eac9c1f5c1ddc0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to keep track of which solver (if any) is currently stored.  <br /></td></tr>
+<tr class="separator:ab81e804ece2fbf658eac9c1f5c1ddc0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbf32858e2c01d037c7f16de713df49e" id="r_afbf32858e2c01d037c7f16de713df49e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#afbf32858e2c01d037c7f16de713df49e">Existing_preconditioner</a></td></tr>
+<tr class="memdesc:afbf32858e2c01d037c7f16de713df49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to keep track of which preconditioner (if any) is currently stored.  <br /></td></tr>
+<tr class="separator:afbf32858e2c01d037c7f16de713df49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30dce43f55e1f40d6f5e3ec48130a127" id="r_a30dce43f55e1f40d6f5e3ec48130a127"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HypreInterface.html#a30dce43f55e1f40d6f5e3ec48130a127">Hypre_distribution_pt</a></td></tr>
+<tr class="memdesc:a30dce43f55e1f40d6f5e3ec48130a127"><td class="mdescLeft">&#160;</td><td class="mdescRight">the distribution for this helpers-  <br /></td></tr>
+<tr class="separator:a30dce43f55e1f40d6f5e3ec48130a127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An interface class to the suite of Hypre solvers and preconditioners to allow use of: </p>
+<p>BoomerAMG (AMG), <a class="el" href="classoomph_1_1CG.html" title="The conjugate gradient method.">CG</a>, <a class="el" href="classoomph_1_1GMRES.html" title="The GMRES method.">GMRES</a> or <a class="el" href="classoomph_1_1BiCGStab.html" title="The conjugate gradient method.">BiCGStab</a>, Euclid (ILU) or ParaSails (Approximate inverse)</p>
+<p>Hypre's Krylov subspace solvers (<a class="el" href="classoomph_1_1CG.html" title="The conjugate gradient method.">CG</a>, <a class="el" href="classoomph_1_1GMRES.html" title="The GMRES method.">GMRES</a> and <a class="el" href="classoomph_1_1BiCGStab.html" title="The conjugate gradient method.">BiCGStab</a>) may be preconditioned using: </p><pre class="fragment">    BoomerAMG, Euclid or ParaSails
+</pre> 
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00138">138</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a6326c42293c21c62a189c4bfee03e2ab" name="a6326c42293c21c62a189c4bfee03e2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6326c42293c21c62a189c4bfee03e2ab">&#9670;&#160;</a></span>Hypre_method_types</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">enum</a> <a class="el" href="classoomph_1_1HypreInterface.html#a6326c42293c21c62a189c4bfee03e2ab">oomph::HypreInterface::Hypre_method_types</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumerated flag to define which Hypre methods are used CAREFUL: DON'T CHANGE THE ORDER OF THESE! </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805" name="a6326c42293c21c62a189c4bfee03e2aba7adc4138b84c25731697dba47341d805"></a>CG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45" name="a6326c42293c21c62a189c4bfee03e2aba4a50dcf26660a375d89af0e317fdcc45"></a>GMRES&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb" name="a6326c42293c21c62a189c4bfee03e2aba226997dd74514b0f51fd1cdc2bb181eb"></a>BiCGStab&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061" name="a6326c42293c21c62a189c4bfee03e2abad4c3fefcba30744c942639c43a4cc061"></a>BoomerAMG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d" name="a6326c42293c21c62a189c4bfee03e2abad818656a893f66dd2da6c5afa4bc002d"></a>Euclid&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165" name="a6326c42293c21c62a189c4bfee03e2aba48b74bf516629dfb5d39c0136c09f165"></a>ParaSails&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5" name="a6326c42293c21c62a189c4bfee03e2abaa67e521db30caa2fccc6c1a8cbb06fe5"></a>None&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00286">286</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a411f8026204716846b34eec5a1296d28" name="a411f8026204716846b34eec5a1296d28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a411f8026204716846b34eec5a1296d28">&#9670;&#160;</a></span>HypreInterface() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HypreInterface::HypreInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00142">142</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8cc_source.html#l00142">oomph::HypreHelpers::AMG_coarsening</a>, <a class="el" href="hypre__solver_8h_source.html#l00459">AMG_coarsening</a>, <a class="el" href="hypre__solver_8h_source.html#l00433">AMG_complex_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00439">AMG_damping</a>, <a class="el" href="hypre__solver_8h_source.html#l00354">AMG_max_levels</a>, <a class="el" href="hypre__solver_8h_source.html#l00357">AMG_max_row_sum</a>, <a class="el" href="hypre__solver_8h_source.html#l00351">AMG_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00411">AMG_simple_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00436">AMG_smoother_iterations</a>, <a class="el" href="hypre__solver_8cc_source.html#l00126">oomph::HypreHelpers::AMG_strength</a>, <a class="el" href="hypre__solver_8h_source.html#l00442">AMG_strength</a>, <a class="el" href="hypre__solver_8cc_source.html#l00148">oomph::HypreHelpers::AMG_truncation</a>, <a class="el" href="hypre__solver_8h_source.html#l00445">AMG_truncation</a>, <a class="el" href="hypre__solver_8h_source.html#l00362">AMG_using_simple_smoothing</a>, <a class="el" href="hypre__solver_8h_source.html#l00506">AMGEuclidSmoother_drop_tol</a>, <a class="el" href="hypre__solver_8h_source.html#l00505">AMGEuclidSmoother_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00507">AMGEuclidSmoother_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00502">AMGEuclidSmoother_use_block_jacobi</a>, <a class="el" href="hypre__solver_8h_source.html#l00504">AMGEuclidSmoother_use_ilut</a>, <a class="el" href="hypre__solver_8h_source.html#l00503">AMGEuclidSmoother_use_row_scaling</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="hypre__solver_8h_source.html#l00479">Euclid_droptol</a>, <a class="el" href="hypre__solver_8h_source.html#l00491">Euclid_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00498">Euclid_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00482">Euclid_rowScale</a>, <a class="el" href="hypre__solver_8h_source.html#l00488">Euclid_using_BJ</a>, <a class="el" href="hypre__solver_8h_source.html#l00485">Euclid_using_ILUT</a>, <a class="el" href="hypre__solver_8h_source.html#l00676">Existing_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00673">Existing_solver</a>, <a class="el" href="hypre__solver_8h_source.html#l00289">GMRES</a>, <a class="el" href="hypre__solver_8h_source.html#l00679">Hypre_distribution_pt</a>, <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>, <a class="el" href="hypre__solver_8h_source.html#l00338">Hypre_method</a>, <a class="el" href="hypre__solver_8h_source.html#l00344">Internal_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00511">Krylov_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00332">Max_iter</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="hypre__solver_8h_source.html#l00294">None</a>, <a class="el" href="hypre__solver_8cc_source.html#l00120">oomph::HypreHelpers::Number_of_active_hypre_solvers</a>, <a class="el" href="hypre__solver_8h_source.html#l00329">Output_info</a>, <a class="el" href="hypre__solver_8h_source.html#l00476">ParaSails_filter</a>, <a class="el" href="hypre__solver_8h_source.html#l00470">ParaSails_nlevel</a>, <a class="el" href="hypre__solver_8h_source.html#l00467">ParaSails_symmetry</a>, <a class="el" href="hypre__solver_8h_source.html#l00473">ParaSails_thresh</a>, and <a class="el" href="hypre__solver_8h_source.html#l00335">Tolerance</a>.</p>
+
+</div>
+</div>
+<a id="a713e74ad0f84ae06be5c7daa87337ecf" name="a713e74ad0f84ae06be5c7daa87337ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a713e74ad0f84ae06be5c7daa87337ecf">&#9670;&#160;</a></span>~HypreInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HypreInterface::~HypreInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00238">238</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, <a class="el" href="hypre__solver_8h_source.html#l00679">Hypre_distribution_pt</a>, and <a class="el" href="hypre__solver_8cc_source.html#l00120">oomph::HypreHelpers::Number_of_active_hypre_solvers</a>.</p>
+
+</div>
+</div>
+<a id="a25217cef5216d81c59a3de62062da226" name="a25217cef5216d81c59a3de62062da226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25217cef5216d81c59a3de62062da226">&#9670;&#160;</a></span>HypreInterface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HypreInterface::HypreInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HypreInterface.html">HypreInterface</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5123a1836f5d9f68bc6736829132b5a5" name="a5123a1836f5d9f68bc6736829132b5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5123a1836f5d9f68bc6736829132b5a5">&#9670;&#160;</a></span>disable_hypre_error_messages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::disable_hypre_error_messages </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Turn off hypre error messages. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00279">279</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>.</p>
+
+</div>
+</div>
+<a id="a9bf3a478dc337afec62a690445865980" name="a9bf3a478dc337afec62a690445865980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bf3a478dc337afec62a690445865980">&#9670;&#160;</a></span>doc_hypre_parameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::doc_hypre_parameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Doc parameters used in hypre solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00514">514</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00459">AMG_coarsening</a>, <a class="el" href="hypre__solver_8h_source.html#l00433">AMG_complex_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00439">AMG_damping</a>, <a class="el" href="hypre__solver_8h_source.html#l00354">AMG_max_levels</a>, <a class="el" href="hypre__solver_8h_source.html#l00357">AMG_max_row_sum</a>, <a class="el" href="hypre__solver_8h_source.html#l00351">AMG_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00411">AMG_simple_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00436">AMG_smoother_iterations</a>, <a class="el" href="hypre__solver_8h_source.html#l00442">AMG_strength</a>, <a class="el" href="hypre__solver_8h_source.html#l00445">AMG_truncation</a>, <a class="el" href="hypre__solver_8h_source.html#l00362">AMG_using_simple_smoothing</a>, <a class="el" href="hypre__solver_8h_source.html#l00338">Hypre_method</a>, <a class="el" href="hypre__solver_8h_source.html#l00344">Internal_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00511">Krylov_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00332">Max_iter</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, and <a class="el" href="hypre__solver_8h_source.html#l00335">Tolerance</a>.</p>
+
+</div>
+</div>
+<a id="a281c9cf1e254871a957dbf46698cd518" name="a281c9cf1e254871a957dbf46698cd518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a281c9cf1e254871a957dbf46698cd518">&#9670;&#160;</a></span>enable_hypre_error_messages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::enable_hypre_error_messages </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Turn on the hypre error messages. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00273">273</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>.</p>
+
+</div>
+</div>
+<a id="a49751f00702cd3176ee61c4b226424eb" name="a49751f00702cd3176ee61c4b226424eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49751f00702cd3176ee61c4b226424eb">&#9670;&#160;</a></span>existing_preconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::existing_preconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function return value of which preconditioner (if any) is stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00304">304</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00676">Existing_preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="a976554ee58a357435c047f78a1539434" name="a976554ee58a357435c047f78a1539434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976554ee58a357435c047f78a1539434">&#9670;&#160;</a></span>existing_solver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::existing_solver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to return value of which solver (if any) is currently stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00298">298</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00673">Existing_solver</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01838">oomph::HyprePreconditioner::preconditioner_solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01595">oomph::HypreSolver::resolve()</a>.</p>
+
+</div>
+</div>
+<a id="a989fc83bc47f7b4fb8a753b16a26a012" name="a989fc83bc47f7b4fb8a753b16a26a012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a989fc83bc47f7b4fb8a753b16a26a012">&#9670;&#160;</a></span>hypre_clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::hypre_clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function deletes all solver data. </p>
+<p><a class="el" href="classoomph_1_1HypreInterface.html#a989fc83bc47f7b4fb8a753b16a26a012" title="Function deletes all solver data.">hypre_clean_up_memory()</a> deletes any existing Hypre solver and Hypre matrix </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8cc_source.html#l01364">1364</a> of file <a class="el" href="hypre__solver_8cc_source.html">hypre_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00291">BoomerAMG</a>, <a class="el" href="hypre__solver_8cc_source.html#l00155">oomph::HypreHelpers::check_HYPRE_error_flag()</a>, <a class="el" href="hypre__solver_8h_source.html#l00292">Euclid</a>, <a class="el" href="hypre__solver_8h_source.html#l00676">Existing_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00673">Existing_solver</a>, <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>, <a class="el" href="hypre__solver_8h_source.html#l00658">Matrix_ij</a>, <a class="el" href="hypre__solver_8h_source.html#l00294">None</a>, <a class="el" href="hypre__solver_8h_source.html#l00293">ParaSails</a>, and <a class="el" href="hypre__solver_8h_source.html#l00666">Solver</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01649">oomph::HypreSolver::clean_up_memory()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01905">oomph::HyprePreconditioner::clean_up_memory()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00238">~HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="aebc23d169937d5e6a5b492710843ae7b" name="aebc23d169937d5e6a5b492710843ae7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebc23d169937d5e6a5b492710843ae7b">&#9670;&#160;</a></span>hypre_matrix_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::hypre_matrix_setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td>
+          <td class="paramname"><em>matrix_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function which sets values of First_global_row, Last_global_row and other partitioning data and creates the distributed Hypre matrix (stored in Matrix_ij/Matrix_par) from the <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. </p>
+<p>Helper function which creates a Hypre matrix from a <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> If OOMPH-LIB has been set up for MPI use, the Hypre matrix is distributed over the available processors. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8cc_source.html#l00548">548</a> of file <a class="el" href="hypre__solver_8cc_source.html">hypre_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8cc_source.html#l00155">oomph::HypreHelpers::check_HYPRE_error_flag()</a>, <a class="el" href="matrices_8cc_source.html#l01657">oomph::CRDoubleMatrix::clear()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00278">oomph::HypreHelpers::create_HYPRE_Matrix()</a>, <a class="el" href="hypre__solver_8h_source.html#l00634">Delete_input_data</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="hypre__solver_8h.html#a3f159862f67e03500e947e98e0938171">hypre__global_error</a>, <a class="el" href="hypre__solver_8h_source.html#l00679">Hypre_distribution_pt</a>, <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>, <a class="el" href="hypre__solver_8h_source.html#l00658">Matrix_ij</a>, <a class="el" href="hypre__solver_8h_source.html#l00662">Matrix_par</a>, <a class="el" href="matrices_8h_source.html#l01002">oomph::CRDoubleMatrix::nrow()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01777">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01499">oomph::HypreSolver::solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01446">oomph::HypreSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a5cdd3f8621333e94d8a1004611bc6793" name="a5cdd3f8621333e94d8a1004611bc6793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cdd3f8621333e94d8a1004611bc6793">&#9670;&#160;</a></span>hypre_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::hypre_solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>solution</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function performs a solve if any solver exists. </p>
+<p>Helper function performs a solve if solver data has been set up using hypre_solver_setup(...). </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8cc_source.html#l01149">1149</a> of file <a class="el" href="hypre__solver_8cc_source.html">hypre_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00291">BoomerAMG</a>, <a class="el" href="hypre__solver_8cc_source.html#l00155">oomph::HypreHelpers::check_HYPRE_error_flag()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00186">oomph::HypreHelpers::create_HYPRE_Vector()</a>, <a class="el" href="hypre__solver_8h_source.html#l00292">Euclid</a>, <a class="el" href="hypre__solver_8h_source.html#l00673">Existing_solver</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00261">oomph::LinearAlgebraDistribution::first_row()</a>, <a class="el" href="hypre__solver_8h_source.html#l00679">Hypre_distribution_pt</a>, <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>, <a class="el" href="hypre__solver_8h_source.html#l00338">Hypre_method</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="hypre__solver_8h_source.html#l00662">Matrix_par</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00193">oomph::LinearAlgebraDistribution::nrow_local()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="hypre__solver_8h_source.html#l00329">Output_info</a>, <a class="el" href="hypre__solver_8h_source.html#l00293">ParaSails</a>, <a class="el" href="hypre__solver_8h_source.html#l00666">Solver</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01303">oomph::TimingHelpers::timer()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01838">oomph::HyprePreconditioner::preconditioner_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01595">oomph::HypreSolver::resolve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01499">oomph::HypreSolver::solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01446">oomph::HypreSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="afeddc250f9c56ac94e8c013c23a69deb" name="afeddc250f9c56ac94e8c013c23a69deb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeddc250f9c56ac94e8c013c23a69deb">&#9670;&#160;</a></span>hypre_solver_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::hypre_solver_setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets up the data required for to use as an oomph-lib <a class="el" href="classoomph_1_1LinearSolver.html" title="Base class for all linear solvers. This merely defines standard interfaces for linear solvers,...">LinearSolver</a> or <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a>. This must be called after the Hypre matrix has been generated using hypre_matrix_setup(...). </p>
+<p>Sets up the solver data required for use in an oomph-lib <a class="el" href="classoomph_1_1LinearSolver.html" title="Base class for all linear solvers. This merely defines standard interfaces for linear solvers,...">LinearSolver</a> or <a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a>, once the Hypre matrix has been generated using hypre_matrix_setup(...). </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8cc_source.html#l00592">592</a> of file <a class="el" href="hypre__solver_8cc_source.html">hypre_solver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="hypre__solver_8h_source.html#l00459">AMG_coarsening</a>, <a class="el" href="hypre__solver_8h_source.html#l00433">AMG_complex_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00439">AMG_damping</a>, <a class="el" href="hypre__solver_8h_source.html#l00354">AMG_max_levels</a>, <a class="el" href="hypre__solver_8h_source.html#l00357">AMG_max_row_sum</a>, <a class="el" href="hypre__solver_8h_source.html#l00351">AMG_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00411">AMG_simple_smoother</a>, <a class="el" href="hypre__solver_8h_source.html#l00436">AMG_smoother_iterations</a>, <a class="el" href="hypre__solver_8h_source.html#l00442">AMG_strength</a>, <a class="el" href="hypre__solver_8h_source.html#l00445">AMG_truncation</a>, <a class="el" href="hypre__solver_8h_source.html#l00362">AMG_using_simple_smoothing</a>, <a class="el" href="hypre__solver_8h_source.html#l00506">AMGEuclidSmoother_drop_tol</a>, <a class="el" href="hypre__solver_8h_source.html#l00505">AMGEuclidSmoother_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00507">AMGEuclidSmoother_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00502">AMGEuclidSmoother_use_block_jacobi</a>, <a class="el" href="hypre__solver_8h_source.html#l00504">AMGEuclidSmoother_use_ilut</a>, <a class="el" href="hypre__solver_8h_source.html#l00503">AMGEuclidSmoother_use_row_scaling</a>, <a class="el" href="hypre__solver_8h_source.html#l00290">BiCGStab</a>, <a class="el" href="hypre__solver_8h_source.html#l00291">BoomerAMG</a>, <a class="el" href="hypre__solver_8h_source.html#l00288">CG</a>, <a class="el" href="hypre__solver_8cc_source.html#l00155">oomph::HypreHelpers::check_HYPRE_error_flag()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00186">oomph::HypreHelpers::create_HYPRE_Vector()</a>, <a class="el" href="hypre__solver_8h_source.html#l00292">Euclid</a>, <a class="el" href="hypre__solver_8h_source.html#l00479">Euclid_droptol</a>, <a class="el" href="hypre__solver_8h_source.html#l00491">Euclid_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00498">Euclid_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00482">Euclid_rowScale</a>, <a class="el" href="hypre__solver_8cc_source.html#l00444">oomph::HypreHelpers::euclid_settings_helper()</a>, <a class="el" href="hypre__solver_8h_source.html#l00488">Euclid_using_BJ</a>, <a class="el" href="hypre__solver_8h_source.html#l00485">Euclid_using_ILUT</a>, <a class="el" href="hypre__solver_8h_source.html#l00676">Existing_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00673">Existing_solver</a>, <a class="el" href="hypre__solver_8h_source.html#l00289">GMRES</a>, <a class="el" href="hypre__solver_8h.html#a3f159862f67e03500e947e98e0938171">hypre__global_error</a>, <a class="el" href="hypre__solver_8h_source.html#l00679">Hypre_distribution_pt</a>, <a class="el" href="hypre__solver_8h_source.html#l00630">Hypre_error_messages</a>, <a class="el" href="hypre__solver_8h_source.html#l00338">Hypre_method</a>, <a class="el" href="hypre__solver_8h_source.html#l00344">Internal_preconditioner</a>, <a class="el" href="hypre__solver_8h_source.html#l00511">Krylov_print_level</a>, <a class="el" href="hypre__solver_8h_source.html#l00662">Matrix_par</a>, <a class="el" href="hypre__solver_8h_source.html#l00332">Max_iter</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="hypre__solver_8h_source.html#l00329">Output_info</a>, <a class="el" href="hypre__solver_8h_source.html#l00293">ParaSails</a>, <a class="el" href="hypre__solver_8h_source.html#l00476">ParaSails_filter</a>, <a class="el" href="hypre__solver_8h_source.html#l00470">ParaSails_nlevel</a>, <a class="el" href="hypre__solver_8h_source.html#l00467">ParaSails_symmetry</a>, <a class="el" href="hypre__solver_8h_source.html#l00473">ParaSails_thresh</a>, <a class="el" href="hypre__solver_8h_source.html#l00666">Solver</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01303">oomph::TimingHelpers::timer()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00335">Tolerance</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01777">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01499">oomph::HypreSolver::solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01446">oomph::HypreSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a50bd66edf8ceed2eb9514548dee84602" name="a50bd66edf8ceed2eb9514548dee84602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50bd66edf8ceed2eb9514548dee84602">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HypreInterface::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HypreInterface.html">HypreInterface</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0a75db2a70cfd31653be6681abccffbf" name="a0a75db2a70cfd31653be6681abccffbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a75db2a70cfd31653be6681abccffbf">&#9670;&#160;</a></span>AMG_coarsening</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_coarsening</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>AMG coarsening strategy. Coarsening types include: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets - lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00459">459</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00803">oomph::HypreSolver::amg_coarsening()</a>, <a class="el" href="hypre__solver_8h_source.html#l01209">oomph::HyprePreconditioner::amg_coarsening()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a7e4d8eeb1fb32cb7ada7c273edbf070e" name="a7e4d8eeb1fb32cb7ada7c273edbf070e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e4d8eeb1fb32cb7ada7c273edbf070e">&#9670;&#160;</a></span>AMG_complex_smoother</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_complex_smoother</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Complex smoothing methods used in BoomerAMG. To use these methods set AMG_using_simple_smoothing to false Here are the current options (from hypre's HYPRE_parcsr_ls.h): </p>
+<ul>
+<li>4 : FSAI (routines needed to set: HYPRE_BoomerAMGSetFSAIMaxSteps, HYPRE_BoomerAMGSetFSAIMaxStepSize, HYPRE_BoomerAMGSetFSAIEigMaxIters, HYPRE_BoomerAMGSetFSAIKapTolerance)</li>
+<li>5 : ParILUK (routines needed to set: HYPRE_ILUSetLevelOfFill, HYPRE_ILUSetType)</li>
+<li>6 : Schwarz (routines needed to set: HYPRE_BoomerAMGSetDomainType, HYPRE_BoomerAMGSetOverlap, HYPRE_BoomerAMGSetVariant, HYPRE_BoomerAMGSetSchwarzRlxWeight)</li>
+<li>7 : Pilut (routines needed to set: HYPRE_BoomerAMGSetDropTol, HYPRE_BoomerAMGSetMaxNzPerRow)</li>
+<li>8 : ParaSails (routines needed to set: HYPRE_BoomerAMGSetSym, HYPRE_BoomerAMGSetLevel, HYPRE_BoomerAMGSetFilter, HYPRE_BoomerAMGSetThreshold)</li>
+<li>9 : Euclid (routines needed to set: HYPRE_BoomerAMGSetEuclidFile) </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00433">433</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00785">oomph::HypreSolver::amg_complex_smoother()</a>, <a class="el" href="hypre__solver_8h_source.html#l01185">oomph::HyprePreconditioner::amg_complex_smoother()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="abdf7a5f5744201ae75368c2b07f662bc" name="abdf7a5f5744201ae75368c2b07f662bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf7a5f5744201ae75368c2b07f662bc">&#9670;&#160;</a></span>AMG_damping</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::AMG_damping</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Damping factor for BoomerAMG smoothed Jacobi or hybrid SOR. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00439">439</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00815">oomph::HypreSolver::amg_damping()</a>, <a class="el" href="hypre__solver_8h_source.html#l01221">oomph::HyprePreconditioner::amg_damping()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="adf57ef35573b468881617d8cae4643c9" name="adf57ef35573b468881617d8cae4643c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf57ef35573b468881617d8cae4643c9">&#9670;&#160;</a></span>AMG_max_levels</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_max_levels</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of levels used in AMG. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00354">354</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00809">oomph::HypreSolver::amg_max_levels()</a>, <a class="el" href="hypre__solver_8h_source.html#l01215">oomph::HyprePreconditioner::amg_max_levels()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="af3d118bd7fa11c89ec5fb39dc2f0d218" name="af3d118bd7fa11c89ec5fb39dc2f0d218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3d118bd7fa11c89ec5fb39dc2f0d218">&#9670;&#160;</a></span>AMG_max_row_sum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::AMG_max_row_sum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parameter to identify diagonally dominant parts of the matrix in AMG. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00357">357</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00827">oomph::HypreSolver::amg_max_row_sum()</a>, <a class="el" href="hypre__solver_8h_source.html#l01233">oomph::HyprePreconditioner::amg_max_row_sum()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="ad1e2b0066abfccd0c489227c208c0f74" name="ad1e2b0066abfccd0c489227c208c0f74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e2b0066abfccd0c489227c208c0f74">&#9670;&#160;</a></span>AMG_print_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_print_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to set the Hypre printing level for AMG 0: no printout 1: print setup information 2: print solve information 3: print setup and solve information. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00351">351</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00791">oomph::HypreSolver::amg_print_level()</a>, <a class="el" href="hypre__solver_8h_source.html#l01197">oomph::HyprePreconditioner::amg_print_level()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="ac2671434b9202b17d9ecff0a7787f83c" name="ac2671434b9202b17d9ecff0a7787f83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2671434b9202b17d9ecff0a7787f83c">&#9670;&#160;</a></span>AMG_simple_smoother</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_simple_smoother</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Simple smoothing methods used in BoomerAMG. To use these methods set AMG_using_simple_smoothing to true. Here are the current options (from hypre's HYPRE_parcsr_ls.h): </p>
+<p>(Optional) Defines the smoother to be used. It uses the given smoother on the fine grid, the up and the down cycle and sets the solver on the coarsest level to Gaussian elimination (9). The default is <img class="formulaInl" alt="$\ell_1$" src="form_315.png" width="11" height="13"/>-Gauss-Seidel, forward solve (13) on the down cycle and backward solve (14) on the up cycle.</p>
+<p>There are the following options for <em>relax_type:</em> </p>
+<ul>
+<li>0 : Jacobi</li>
+<li>1 : Gauss-Seidel, sequential (very slow!)</li>
+<li>2 : Gauss-Seidel, interior points in parallel, boundary sequential (slow!)</li>
+<li>3 : hybrid Gauss-Seidel or SOR, forward solve</li>
+<li>4 : hybrid Gauss-Seidel or SOR, backward solve</li>
+<li>5 : hybrid chaotic Gauss-Seidel (works only with OpenMP)</li>
+<li>6 : hybrid symmetric Gauss-Seidel or SSOR</li>
+<li>7 : Jacobi (uses Matvec)</li>
+<li>8 : <img class="formulaInl" alt="$\ell_1$" src="form_315.png" width="11" height="13"/>-scaled hybrid symmetric Gauss-Seidel</li>
+<li>9 : Gaussian elimination (only on coarsest level)</li>
+<li>10 : On-processor direct forward solve for matrices with triangular structure</li>
+<li>11 : Two Stage approximation to <a class="el" href="classoomph_1_1GS.html" title="The Gauss Seidel method.">GS</a>. Uses the strict lower part of the diagonal matrix</li>
+<li>12 : Two Stage approximation to <a class="el" href="classoomph_1_1GS.html" title="The Gauss Seidel method.">GS</a>. Uses the strict lower part of the diagonal matrix and a second iteration for additional error approximation</li>
+<li>13 : <img class="formulaInl" alt="$\ell_1$" src="form_315.png" width="11" height="13"/> Gauss-Seidel, forward solve</li>
+<li>14 : <img class="formulaInl" alt="$\ell_1$" src="form_315.png" width="11" height="13"/> Gauss-Seidel, backward solve</li>
+<li>15 : <a class="el" href="classoomph_1_1CG.html" title="The conjugate gradient method.">CG</a> (warning - not a fixed smoother - may require FGMRES)</li>
+<li>16 : Chebyshev</li>
+<li>17 : FCF-Jacobi</li>
+<li>18 : <img class="formulaInl" alt="$\ell_1$" src="form_315.png" width="11" height="13"/>-scaled jacobi</li>
+<li>19 : Gaussian elimination (old version)</li>
+<li>21 : The same as 8 except forcing serialization on CPU ( # OMP-thread = 1)</li>
+<li>29 : Direct solve: use Gaussian elimination &amp; BLAS (with pivoting) (old version)</li>
+<li>30 : Kaczmarz</li>
+<li>88: The same methods as 8 with a convergent l1-term</li>
+<li>89: Symmetric l1-hybrid Gauss-Seidel (i.e., 13 followed by 14)</li>
+<li>98 : LU with pivoting</li>
+<li>99 : LU with pivoting -199 : Matvec with the inverse </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00411">411</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00772">oomph::HypreSolver::amg_simple_smoother()</a>, <a class="el" href="hypre__solver_8h_source.html#l01172">oomph::HyprePreconditioner::amg_simple_smoother()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a968f16488385d717c96993883cf4a680" name="a968f16488385d717c96993883cf4a680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968f16488385d717c96993883cf4a680">&#9670;&#160;</a></span>AMG_smoother_iterations</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMG_smoother_iterations</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of smoother iterations to apply. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00436">436</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00797">oomph::HypreSolver::amg_smoother_iterations()</a>, <a class="el" href="hypre__solver_8h_source.html#l01203">oomph::HyprePreconditioner::amg_smoother_iterations()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a1e87cc2c06ff1391b293e636b19236ea" name="a1e87cc2c06ff1391b293e636b19236ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e87cc2c06ff1391b293e636b19236ea">&#9670;&#160;</a></span>AMG_strength</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::AMG_strength</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Connection strength threshold parameter for BoomerAMG. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00442">442</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00821">oomph::HypreSolver::amg_strength()</a>, <a class="el" href="hypre__solver_8h_source.html#l01227">oomph::HyprePreconditioner::amg_strength()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a8fa7abd65dec3d2318a36d8fddb96a46" name="a8fa7abd65dec3d2318a36d8fddb96a46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa7abd65dec3d2318a36d8fddb96a46">&#9670;&#160;</a></span>AMG_truncation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::AMG_truncation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Interpolation truncation factor for BoomerAMG. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00445">445</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00833">oomph::HypreSolver::amg_truncation()</a>, <a class="el" href="hypre__solver_8h_source.html#l01239">oomph::HyprePreconditioner::amg_truncation()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="aa4bac4203fb7ec08f5a9fc7cf3f47161" name="aa4bac4203fb7ec08f5a9fc7cf3f47161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4bac4203fb7ec08f5a9fc7cf3f47161">&#9670;&#160;</a></span>AMG_using_simple_smoothing</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::AMG_using_simple_smoothing</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to determine whether simple smoothers (determined by the AMG_simple_smoother flag) or complex smoothers (determined by the AMG_complex_smoother flag are used in AMG. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00362">362</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00779">oomph::HypreSolver::amg_using_complex_smoothing()</a>, <a class="el" href="hypre__solver_8h_source.html#l01179">oomph::HyprePreconditioner::amg_using_complex_smoothing()</a>, <a class="el" href="hypre__solver_8h_source.html#l00766">oomph::HypreSolver::amg_using_simple_smoothing()</a>, <a class="el" href="hypre__solver_8h_source.html#l01166">oomph::HyprePreconditioner::amg_using_simple_smoothing()</a>, <a class="el" href="hypre__solver_8h_source.html#l01191">oomph::HyprePreconditioner::amg_using_simple_smoothing_flag()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a0dab8a5b8cc96e3d1c38960735f3fbee" name="a0dab8a5b8cc96e3d1c38960735f3fbee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dab8a5b8cc96e3d1c38960735f3fbee">&#9670;&#160;</a></span>AMGEuclidSmoother_drop_tol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::AMGEuclidSmoother_drop_tol</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00506">506</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a3677d64e347986f0693acb90ab9510fb" name="a3677d64e347986f0693acb90ab9510fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3677d64e347986f0693acb90ab9510fb">&#9670;&#160;</a></span>AMGEuclidSmoother_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMGEuclidSmoother_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00505">505</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a75e69886d00203474a4eea60c751fa39" name="a75e69886d00203474a4eea60c751fa39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75e69886d00203474a4eea60c751fa39">&#9670;&#160;</a></span>AMGEuclidSmoother_print_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::AMGEuclidSmoother_print_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00507">507</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a79fa8ccf580df282a6a2955e3d5327ae" name="a79fa8ccf580df282a6a2955e3d5327ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fa8ccf580df282a6a2955e3d5327ae">&#9670;&#160;</a></span>AMGEuclidSmoother_use_block_jacobi</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::AMGEuclidSmoother_use_block_jacobi</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00502">502</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a4ead069d2811580d1f7a743a0c5569b1" name="a4ead069d2811580d1f7a743a0c5569b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ead069d2811580d1f7a743a0c5569b1">&#9670;&#160;</a></span>AMGEuclidSmoother_use_ilut</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::AMGEuclidSmoother_use_ilut</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00504">504</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a3570de904e329445f987481d61821b0f" name="a3570de904e329445f987481d61821b0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3570de904e329445f987481d61821b0f">&#9670;&#160;</a></span>AMGEuclidSmoother_use_row_scaling</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::AMGEuclidSmoother_use_row_scaling</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00503">503</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a0117cae635c9242ccfd9ad7153511c07" name="a0117cae635c9242ccfd9ad7153511c07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0117cae635c9242ccfd9ad7153511c07">&#9670;&#160;</a></span>Delete_input_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Delete_input_data</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal flag which is true when hypre_setup or hypre_solve can delete input matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00634">634</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00548">hypre_matrix_setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01777">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01499">oomph::HypreSolver::solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01446">oomph::HypreSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a8668ea7323b2efb227a461e80d62b044" name="a8668ea7323b2efb227a461e80d62b044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8668ea7323b2efb227a461e80d62b044">&#9670;&#160;</a></span>Delete_matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Delete_matrix</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hypre copies matrix data from oomph-lib's <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a> into its own data structures, doubling the memory requirements. As far as the Hypre solvers are concerned the oomph-lib matrix is no longer required and could be deleted to save memory. However, this will not be the expected behaviour and therefore needs to be requested explicitly by the user by changing this flag from false (its default) to true. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00654">654</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="af91bb7e92785e510c04cdb0c11ef99cf" name="af91bb7e92785e510c04cdb0c11ef99cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af91bb7e92785e510c04cdb0c11ef99cf">&#9670;&#160;</a></span>Euclid_droptol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::Euclid_droptol</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Euclid drop tolerance for ILU(k) and ILUT factorization. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00479">479</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00863">oomph::HypreSolver::euclid_droptol()</a>, <a class="el" href="hypre__solver_8h_source.html#l01281">oomph::HyprePreconditioner::euclid_droptol()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a0ae9320b5116bb330ddd1096d20f556e" name="a0ae9320b5116bb330ddd1096d20f556e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae9320b5116bb330ddd1096d20f556e">&#9670;&#160;</a></span>Euclid_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::HypreInterface::Euclid_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Euclid level parameter for ILU(k) factorization. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00491">491</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00870">oomph::HypreSolver::euclid_level()</a>, <a class="el" href="hypre__solver_8h_source.html#l01287">oomph::HyprePreconditioner::euclid_level()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="adc83c27b78ac44ccdba2a85191e474c1" name="adc83c27b78ac44ccdba2a85191e474c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc83c27b78ac44ccdba2a85191e474c1">&#9670;&#160;</a></span>Euclid_print_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Euclid_print_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to set the level of printing from Euclid when the Euclid destructor is called 0: no printing (default) 1: prints summary of runtime settings and timings 2: as 1 plus prints memory usage. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00498">498</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00920">oomph::HypreSolver::euclid_print_level()</a>, <a class="el" href="hypre__solver_8h_source.html#l01337">oomph::HyprePreconditioner::euclid_print_level()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a16a2f90a3e7fcdb2909d400d82b90286" name="a16a2f90a3e7fcdb2909d400d82b90286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16a2f90a3e7fcdb2909d400d82b90286">&#9670;&#160;</a></span>Euclid_rowScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Euclid_rowScale</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to switch on Euclid row scaling. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00482">482</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00882">oomph::HypreSolver::disable_euclid_rowScale()</a>, <a class="el" href="hypre__solver_8h_source.html#l01299">oomph::HyprePreconditioner::disable_euclid_rowScale()</a>, <a class="el" href="hypre__solver_8h_source.html#l00876">oomph::HypreSolver::enable_euclid_rowScale()</a>, <a class="el" href="hypre__solver_8h_source.html#l01293">oomph::HyprePreconditioner::enable_euclid_rowScale()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a1405f23d6ffdf4afe2839434a3f738e0" name="a1405f23d6ffdf4afe2839434a3f738e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1405f23d6ffdf4afe2839434a3f738e0">&#9670;&#160;</a></span>Euclid_using_BJ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Euclid_using_BJ</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to determine if Block Jacobi is used instead of PILU. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00488">488</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00896">oomph::HypreSolver::disable_euclid_using_BJ()</a>, <a class="el" href="hypre__solver_8h_source.html#l01313">oomph::HyprePreconditioner::disable_euclid_using_BJ()</a>, <a class="el" href="hypre__solver_8h_source.html#l00889">oomph::HypreSolver::enable_euclid_using_BJ()</a>, <a class="el" href="hypre__solver_8h_source.html#l01306">oomph::HyprePreconditioner::enable_euclid_using_BJ()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="afe6e93b2655b578090a5d9abb91c2e22" name="afe6e93b2655b578090a5d9abb91c2e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6e93b2655b578090a5d9abb91c2e22">&#9670;&#160;</a></span>Euclid_using_ILUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Euclid_using_ILUT</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to determine if ILUT (if true) or ILU(k) is used in Euclid. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00485">485</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00903">oomph::HypreSolver::euclid_using_ILUK()</a>, <a class="el" href="hypre__solver_8h_source.html#l01320">oomph::HyprePreconditioner::euclid_using_ILUK()</a>, <a class="el" href="hypre__solver_8h_source.html#l00910">oomph::HypreSolver::euclid_using_ILUT()</a>, <a class="el" href="hypre__solver_8h_source.html#l01327">oomph::HyprePreconditioner::euclid_using_ILUT()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="afbf32858e2c01d037c7f16de713df49e" name="afbf32858e2c01d037c7f16de713df49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbf32858e2c01d037c7f16de713df49e">&#9670;&#160;</a></span>Existing_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Existing_preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to keep track of which preconditioner (if any) is currently stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00676">676</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00304">existing_preconditioner()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="ab81e804ece2fbf658eac9c1f5c1ddc0b" name="ab81e804ece2fbf658eac9c1f5c1ddc0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab81e804ece2fbf658eac9c1f5c1ddc0b">&#9670;&#160;</a></span>Existing_solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Existing_solver</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to keep track of which solver (if any) is currently stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00673">673</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00298">existing_solver()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="a30dce43f55e1f40d6f5e3ec48130a127" name="a30dce43f55e1f40d6f5e3ec48130a127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30dce43f55e1f40d6f5e3ec48130a127">&#9670;&#160;</a></span>Hypre_distribution_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* oomph::HypreInterface::Hypre_distribution_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the distribution for this helpers- </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00679">679</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00548">hypre_matrix_setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00238">~HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="aa0570d52546893f0767060c6efcd4090" name="aa0570d52546893f0767060c6efcd4090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0570d52546893f0767060c6efcd4090">&#9670;&#160;</a></span>Hypre_error_messages</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Hypre_error_messages</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to determine if non-zero values of the Hypre error flag plus Hypre error messages are output to screen at various points in the solve function, i.e. after: </p>
+<ol type="1">
+<li>setting up the Hypre matrix</li>
+<li>setting up the preconditioner</li>
+<li>setting up the solver</li>
+<li>setting up the Hypre vectors</li>
+<li>solving</li>
+<li>getting the solution vector</li>
+<li>deallocation of solver data </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00630">630</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00279">disable_hypre_error_messages()</a>, <a class="el" href="hypre__solver_8h_source.html#l00273">enable_hypre_error_messages()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00548">hypre_matrix_setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>.</p>
+
+</div>
+</div>
+<a id="ae2a79282191b4430ef6631df9fc8c947" name="ae2a79282191b4430ef6631df9fc8c947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2a79282191b4430ef6631df9fc8c947">&#9670;&#160;</a></span>Hypre_method</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Hypre_method</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hypre method flag. Valid values are specified in enumeration. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00338">338</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8h_source.html#l00752">oomph::HypreSolver::hypre_method()</a>, <a class="el" href="hypre__solver_8h_source.html#l01134">oomph::HyprePreconditioner::hypre_method()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l01019">oomph::HyprePreconditioner::HyprePreconditioner()</a>, <a class="el" href="hypre__solver_8h_source.html#l01147">oomph::HyprePreconditioner::use_BoomerAMG()</a>, <a class="el" href="hypre__solver_8h_source.html#l01275">oomph::HyprePreconditioner::use_Euclid()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01245">oomph::HyprePreconditioner::use_ParaSails()</a>.</p>
+
+</div>
+</div>
+<a id="a5694f23f49b16ca978e6bcb629c7ab27" name="a5694f23f49b16ca978e6bcb629c7ab27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5694f23f49b16ca978e6bcb629c7ab27">&#9670;&#160;</a></span>Internal_preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Internal_preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th...">Preconditioner</a> method flag used with Hypre's PCG, <a class="el" href="classoomph_1_1GMRES.html" title="The GMRES method.">GMRES</a> and <a class="el" href="classoomph_1_1BiCGStab.html" title="The conjugate gradient method.">BiCGStab</a> in solve(...) or resolve(...). Valid values are BoomerAMG, Euclid, ParaSails or None (all enumerated above), for any other value no preconditioner is set. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00344">344</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l01019">oomph::HyprePreconditioner::HyprePreconditioner()</a>, <a class="el" href="hypre__solver_8h_source.html#l00759">oomph::HypreSolver::internal_preconditioner()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01141">oomph::HyprePreconditioner::internal_preconditioner()</a>.</p>
+
+</div>
+</div>
+<a id="a901fbdfa98992faf1cdae4d2d1ac9a2b" name="a901fbdfa98992faf1cdae4d2d1ac9a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a901fbdfa98992faf1cdae4d2d1ac9a2b">&#9670;&#160;</a></span>Krylov_print_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Krylov_print_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to set the Hypre printing level for the Krylov subspace solvers. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00511">511</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00926">oomph::HypreSolver::krylov_print_level()</a>.</p>
+
+</div>
+</div>
+<a id="ad94c5a5a5191a786ce63e4d2c0d4c65d" name="ad94c5a5a5191a786ce63e4d2c0d4c65d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad94c5a5a5191a786ce63e4d2c0d4c65d">&#9670;&#160;</a></span>Matrix_ij</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_IJMatrix</a> oomph::HypreInterface::Matrix_ij</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Hypre_IJMatrix version of the matrix used in solve(...), resolve(...) or preconditioner_solve(...). </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00658">658</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l00548">hypre_matrix_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a4a6418573f59098d6cfdaf9b36a6949d" name="a4a6418573f59098d6cfdaf9b36a6949d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6418573f59098d6cfdaf9b36a6949d">&#9670;&#160;</a></span>Matrix_par</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_ParCSRMatrix</a> oomph::HypreInterface::Matrix_par</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Hypre_ParCSRMatrix version of the matrix used in solve(...), resolve(...) or preconditioner_solve(...). </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00662">662</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00548">hypre_matrix_setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="abca9f624ee43955c6607a62b50128614" name="abca9f624ee43955c6607a62b50128614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abca9f624ee43955c6607a62b50128614">&#9670;&#160;</a></span>Max_iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HypreInterface::Max_iter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of iterations used in solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00332">332</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l01159">oomph::HyprePreconditioner::amg_iterations()</a>, <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l01019">oomph::HyprePreconditioner::HyprePreconditioner()</a>, <a class="el" href="hypre__solver_8h_source.html#l00740">oomph::HypreSolver::max_iter()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01153">oomph::HyprePreconditioner::set_amg_iterations()</a>.</p>
+
+</div>
+</div>
+<a id="a011667f822e82fc40fde8ab5f2bd4d57" name="a011667f822e82fc40fde8ab5f2bd4d57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a011667f822e82fc40fde8ab5f2bd4d57">&#9670;&#160;</a></span>Output_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Output_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag is true to output info and results of timings. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00329">329</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01838">oomph::HyprePreconditioner::preconditioner_solve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01595">oomph::HypreSolver::resolve()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01777">oomph::HyprePreconditioner::setup()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01499">oomph::HypreSolver::solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l01446">oomph::HypreSolver::solve()</a>.</p>
+
+</div>
+</div>
+<a id="a34ee95ad2f64b9d4fb0b0951a64c357a" name="a34ee95ad2f64b9d4fb0b0951a64c357a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ee95ad2f64b9d4fb0b0951a64c357a">&#9670;&#160;</a></span>ParaSails_filter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::ParaSails_filter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ParaSails filter parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00476">476</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l00857">oomph::HypreSolver::parasails_filter()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01269">oomph::HyprePreconditioner::parasails_filter()</a>.</p>
+
+</div>
+</div>
+<a id="a313c9638a579d912e3f570b21db611f4" name="a313c9638a579d912e3f570b21db611f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a313c9638a579d912e3f570b21db611f4">&#9670;&#160;</a></span>ParaSails_nlevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::HypreInterface::ParaSails_nlevel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ParaSails nlevel parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00470">470</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l00845">oomph::HypreSolver::parasails_nlevel()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01257">oomph::HyprePreconditioner::parasails_nlevel()</a>.</p>
+
+</div>
+</div>
+<a id="a3cdba8c59c318125fbb367207f1082b6" name="a3cdba8c59c318125fbb367207f1082b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cdba8c59c318125fbb367207f1082b6">&#9670;&#160;</a></span>ParaSails_symmetry</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::HypreInterface::ParaSails_symmetry</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ParaSails symmetry flag, used to inform ParaSails of Symmetry of definitenss of problem and type of ParaSails preconditioner: 0 = nonsymmetric and/or indefinite problem, nonsymmetric preconditioner 1 = SPD problem, and SPD (factored preconditioner) 2 = nonsymmetric, definite problem and SDP (factored preconditoner) </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00467">467</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l00839">oomph::HypreSolver::parasails_symmetry()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01251">oomph::HyprePreconditioner::parasails_symmetry()</a>.</p>
+
+</div>
+</div>
+<a id="a8deadae96f1791b9f2552505cc68af2d" name="a8deadae96f1791b9f2552505cc68af2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8deadae96f1791b9f2552505cc68af2d">&#9670;&#160;</a></span>ParaSails_thresh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::ParaSails_thresh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ParaSails thresh parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00473">473</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l00851">oomph::HypreSolver::parasails_thresh()</a>, and <a class="el" href="hypre__solver_8h_source.html#l01263">oomph::HyprePreconditioner::parasails_thresh()</a>.</p>
+
+</div>
+</div>
+<a id="a72e975bac0718a91226b20e9a819b30d" name="a72e975bac0718a91226b20e9a819b30d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e975bac0718a91226b20e9a819b30d">&#9670;&#160;</a></span>Preconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_Solver</a> oomph::HypreInterface::Preconditioner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The internal Hypre preconditioner used in conjunction with Solver. [This is a C structure!]. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00670">670</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a1bc7fe7e11b5c08cc768969b9e1f8641" name="a1bc7fe7e11b5c08cc768969b9e1f8641"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bc7fe7e11b5c08cc768969b9e1f8641">&#9670;&#160;</a></span>Returning_distributed_solution</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Returning_distributed_solution</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal flag which tell the solver if the solution <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> to be returned is distributed or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00643">643</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a3b245194966a26307c86f3cf42062489" name="a3b245194966a26307c86f3cf42062489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b245194966a26307c86f3cf42062489">&#9670;&#160;</a></span>Solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HYPRE_Solver</a> oomph::HypreInterface::Solver</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Hypre solver used in solve(...), resolve(...) or preconditioner_solve(...). [This is a C structure!]. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00666">666</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8cc_source.html#l01364">hypre_clean_up_memory()</a>, <a class="el" href="hypre__solver_8cc_source.html#l01149">hypre_solve()</a>, and <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>.</p>
+
+</div>
+</div>
+<a id="aa32a993d324c6b198726064299a4e924" name="aa32a993d324c6b198726064299a4e924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa32a993d324c6b198726064299a4e924">&#9670;&#160;</a></span>Tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::HypreInterface::Tolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance used to terminate solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00335">335</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hypre__solver_8h_source.html#l00514">doc_hypre_parameters()</a>, <a class="el" href="hypre__solver_8cc_source.html#l00592">hypre_solver_setup()</a>, <a class="el" href="hypre__solver_8h_source.html#l00142">HypreInterface()</a>, <a class="el" href="hypre__solver_8h_source.html#l01019">oomph::HyprePreconditioner::HyprePreconditioner()</a>, and <a class="el" href="hypre__solver_8h_source.html#l00746">oomph::HypreSolver::tolerance()</a>.</p>
+
+</div>
+</div>
+<a id="a3e1fd87d247b737001fb366bf4a7081f" name="a3e1fd87d247b737001fb366bf4a7081f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e1fd87d247b737001fb366bf4a7081f">&#9670;&#160;</a></span>Using_distributed_rhs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::HypreInterface::Using_distributed_rhs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal flag which tell the solver if the rhs <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> is distributed or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="hypre__solver_8h_source.html#l00639">639</a> of file <a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="hypre__solver_8h_source.html">hypre_solver.h</a></li>
+<li><a class="el" href="hypre__solver_8cc_source.html">hypre_solver.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:32
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

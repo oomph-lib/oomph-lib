@@ -1,0 +1,218 @@
+\doxysection{oomph\+::Orthpoly Namespace Reference}
+\hypertarget{namespaceoomph_1_1Orthpoly}{}\label{namespaceoomph_1_1Orthpoly}\index{oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}{gll\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculates the \doxylink{classoomph_1_1Gauss}{Gauss} Lobatto Legendre abscissas for degree p = NNode-\/1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228}{gll\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&w)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}{gl\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819}{gl\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&Nnode, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&w)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0}{legendre}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Calculates Legendre polynomial of degree p at x using the three term recurrence relation $ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ab6f2929f6ec8fde591799edaebc66380}{legendre\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{polys}})
+\begin{DoxyCompactList}\small\item\em Calculates Legendre polynomial of degree p at x using three term recursive formula. Returns all polynomials up to order p in the vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435}{dlegendre}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Calculates first derivative of Legendre polynomial of degree p at x using three term recursive formula. $ nP_{n+1}^{\textnormal{\textquotesingle}} = (2n+1)xP_{n}^{\textnormal{\textquotesingle}} - (n+1)P_{n-1}^{\textnormal{\textquotesingle}} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a560de3e87ebd12628426d853d8b4d5b3}{ddlegendre}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Calculates second derivative of Legendre polynomial of degree p at x using three term recursive formula. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_ac25d63a7188b81c1462d6cb7f9a99790}{jacobi}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&alpha, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&beta, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the Jacobi polnomials. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a47ba7dd85f8851622d734e14e883cb9a}{jacobi}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&alpha, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&beta, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{polys}})
+\begin{DoxyCompactList}\small\item\em Calculate the Jacobi polnomials all in one goe. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec}{eps}} = 1.\+0e-\/15
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1Orthpoly_a560de3e87ebd12628426d853d8b4d5b3}\label{namespaceoomph_1_1Orthpoly_a560de3e87ebd12628426d853d8b4d5b3} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!ddlegendre@{ddlegendre}}
+\index{ddlegendre@{ddlegendre}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{ddlegendre()}{ddlegendre()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Orthpoly\+::ddlegendre (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates second derivative of Legendre polynomial of degree p at x using three term recursive formula. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00144}{144}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{orthpoly_8cc_source_l00033}{gll\+\_\+nodes()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l08351}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper()}}, \mbox{\hyperlink{shape_8h_source_l01291}{oomph\+::\+One\+Dimensional\+Legendre\+DShape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+DShape()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00097}{oomph\+::\+One\+DLegendre\+DShape\+Param\+::\+One\+DLegendre\+DShape\+Param()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04051}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435}\label{namespaceoomph_1_1Orthpoly_a4062725a9af419d3c0a24927725e5435} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!dlegendre@{dlegendre}}
+\index{dlegendre@{dlegendre}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{dlegendre()}{dlegendre()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Orthpoly\+::dlegendre (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates first derivative of Legendre polynomial of degree p at x using three term recursive formula. $ nP_{n+1}^{\textnormal{\textquotesingle}} = (2n+1)xP_{n}^{\textnormal{\textquotesingle}} - (n+1)P_{n-1}^{\textnormal{\textquotesingle}} $. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00121}{121}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{orthpoly_8cc_source_l00105}{gl\+\_\+nodes()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00148}{gl\+\_\+nodes()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00033}{gll\+\_\+nodes()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l08351}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper()}}, \mbox{\hyperlink{shape_8h_source_l01291}{oomph\+::\+One\+Dimensional\+Legendre\+DShape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+DShape()}}, \mbox{\hyperlink{shape_8h_source_l01370}{oomph\+::\+One\+Dimensional\+Modal\+DShape\+::\+One\+Dimensional\+Modal\+DShape()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00097}{oomph\+::\+One\+DLegendre\+DShape\+Param\+::\+One\+DLegendre\+DShape\+Param()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04051}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13}\label{namespaceoomph_1_1Orthpoly_a97c90eff7749f215b78cf88324d77e13} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!gl\_nodes@{gl\_nodes}}
+\index{gl\_nodes@{gl\_nodes}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{gl\_nodes()}{gl\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::gl\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{Nnode,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8cc_source_l00105}{105}} of file \mbox{\hyperlink{orthpoly_8cc_source}{orthpoly.\+cc}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8h_source_l00121}{dlegendre()}}, \mbox{\hyperlink{orthpoly_8h_source_l00052}{eps}}, \mbox{\hyperlink{orthpoly_8h_source_l00057}{legendre()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}.
+
+
+
+Referenced by \mbox{\hyperlink{integral_8h_source_l01558}{oomph\+::\+Gauss\+Legendre$<$ 1, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Legendre()}}, \mbox{\hyperlink{integral_8h_source_l01617}{oomph\+::\+Gauss\+Legendre$<$ 2, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Legendre()}}, \mbox{\hyperlink{integral_8h_source_l01683}{oomph\+::\+Gauss\+Legendre$<$ 3, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Legendre()}}, and \mbox{\hyperlink{orthpoly_8cc_source_l00148}{gl\+\_\+nodes()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819}\label{namespaceoomph_1_1Orthpoly_a9b11a3992826d8daf747565d4cfcc819} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!gl\_nodes@{gl\_nodes}}
+\index{gl\_nodes@{gl\_nodes}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{gl\_nodes()}{gl\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::gl\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{Nnode,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{w }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8cc_source_l00148}{148}} of file \mbox{\hyperlink{orthpoly_8cc_source}{orthpoly.\+cc}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8h_source_l00121}{dlegendre()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00105}{gl\+\_\+nodes()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5}\label{namespaceoomph_1_1Orthpoly_ab6f86bfb7e2a8832560862c47fc60db5} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!gll\_nodes@{gll\_nodes}}
+\index{gll\_nodes@{gll\_nodes}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{gll\_nodes()}{gll\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::gll\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{Nnode,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculates the \doxylink{classoomph_1_1Gauss}{Gauss} Lobatto Legendre abscissas for degree p = NNode-\/1. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8cc_source_l00033}{33}} of file \mbox{\hyperlink{orthpoly_8cc_source}{orthpoly.\+cc}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8h_source_l00144}{ddlegendre()}}, \mbox{\hyperlink{orthpoly_8h_source_l00121}{dlegendre()}}, \mbox{\hyperlink{orthpoly_8h_source_l00052}{eps}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}.
+
+
+
+Referenced by \mbox{\hyperlink{shape_8h_source_l01241}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::calculate\+\_\+nodal\+\_\+positions()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00051}{oomph\+::\+One\+DLegendre\+Shape\+Param\+::calculate\+\_\+nodal\+\_\+positions()}}, \mbox{\hyperlink{integral_8h_source_l01354}{oomph\+::\+Gauss\+Lobatto\+Legendre$<$ 1, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Lobatto\+Legendre()}}, \mbox{\hyperlink{integral_8h_source_l01413}{oomph\+::\+Gauss\+Lobatto\+Legendre$<$ 2, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Lobatto\+Legendre()}}, \mbox{\hyperlink{integral_8h_source_l01479}{oomph\+::\+Gauss\+Lobatto\+Legendre$<$ 3, NPTS\+\_\+1\+D $>$\+::\+Gauss\+Lobatto\+Legendre()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l00135}{oomph\+::\+PRefineable\+QElement$<$ 1, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01317}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04891}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::get\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00090}{gll\+\_\+nodes()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l08351}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::oc\+\_\+hang\+\_\+helper()}}, and \mbox{\hyperlink{hp__refineable__elements_8cc_source_l04051}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::quad\+\_\+hang\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228}\label{namespaceoomph_1_1Orthpoly_a49a1cd8050963fdbf455f520e8a8b228} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!gll\_nodes@{gll\_nodes}}
+\index{gll\_nodes@{gll\_nodes}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{gll\_nodes()}{gll\_nodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::gll\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{Nnode,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{w }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8cc_source_l00090}{90}} of file \mbox{\hyperlink{orthpoly_8cc_source}{orthpoly.\+cc}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8cc_source_l00033}{gll\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{orthpoly_8h_source_l00057}{legendre()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_ac25d63a7188b81c1462d6cb7f9a99790}\label{namespaceoomph_1_1Orthpoly_ac25d63a7188b81c1462d6cb7f9a99790} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!jacobi@{jacobi}}
+\index{jacobi@{jacobi}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{jacobi()}{jacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Orthpoly\+::jacobi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the Jacobi polnomials. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00168}{168}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_a47ba7dd85f8851622d734e14e883cb9a}\label{namespaceoomph_1_1Orthpoly_a47ba7dd85f8851622d734e14e883cb9a} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!jacobi@{jacobi}}
+\index{jacobi@{jacobi}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{jacobi()}{jacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::jacobi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{polys }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the Jacobi polnomials all in one goe. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00200}{200}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0}\label{namespaceoomph_1_1Orthpoly_aa71411bff7bff140b78e33bebc5133c0} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!legendre@{legendre}}
+\index{legendre@{legendre}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{legendre()}{legendre()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Orthpoly\+::legendre (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates Legendre polynomial of degree p at x using the three term recurrence relation $ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} $. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00057}{57}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{orthpoly_8cc_source_l00105}{gl\+\_\+nodes()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00090}{gll\+\_\+nodes()}}, \mbox{\hyperlink{shape_8h_source_l01291}{oomph\+::\+One\+Dimensional\+Legendre\+DShape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+DShape()}}, \mbox{\hyperlink{shape_8h_source_l01370}{oomph\+::\+One\+Dimensional\+Modal\+DShape\+::\+One\+Dimensional\+Modal\+DShape()}}, \mbox{\hyperlink{shape_8h_source_l01352}{oomph\+::\+One\+Dimensional\+Modal\+Shape\+::\+One\+Dimensional\+Modal\+Shape()}}, and \mbox{\hyperlink{Qspectral__elements_8h_source_l00097}{oomph\+::\+One\+DLegendre\+DShape\+Param\+::\+One\+DLegendre\+DShape\+Param()}}.
+
+\Hypertarget{namespaceoomph_1_1Orthpoly_ab6f2929f6ec8fde591799edaebc66380}\label{namespaceoomph_1_1Orthpoly_ab6f2929f6ec8fde591799edaebc66380} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!legendre\_vector@{legendre\_vector}}
+\index{legendre\_vector@{legendre\_vector}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{legendre\_vector()}{legendre\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Orthpoly\+::legendre\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{polys }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates Legendre polynomial of degree p at x using three term recursive formula. Returns all polynomials up to order p in the vector. 
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00088}{88}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec}\label{namespaceoomph_1_1Orthpoly_a52ec97f3d99bf542a69568fbdddd68ec} 
+\index{oomph::Orthpoly@{oomph::Orthpoly}!eps@{eps}}
+\index{eps@{eps}!oomph::Orthpoly@{oomph::Orthpoly}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Orthpoly\+::eps = 1.\+0e-\/15}
+
+
+
+Definition at line \mbox{\hyperlink{orthpoly_8h_source_l00052}{52}} of file \mbox{\hyperlink{orthpoly_8h_source}{orthpoly.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{orthpoly_8cc_source_l00105}{gl\+\_\+nodes()}}, \mbox{\hyperlink{orthpoly_8cc_source_l00033}{gll\+\_\+nodes()}}, \mbox{\hyperlink{shape_8h_source_l01291}{oomph\+::\+One\+Dimensional\+Legendre\+DShape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+DShape()}}, \mbox{\hyperlink{shape_8h_source_l01256}{oomph\+::\+One\+Dimensional\+Legendre\+Shape$<$ NNODE\+\_\+1\+D $>$\+::\+One\+Dimensional\+Legendre\+Shape()}}, \mbox{\hyperlink{Qspectral__elements_8h_source_l00097}{oomph\+::\+One\+DLegendre\+DShape\+Param\+::\+One\+DLegendre\+DShape\+Param()}}, and \mbox{\hyperlink{Qspectral__elements_8h_source_l00067}{oomph\+::\+One\+DLegendre\+Shape\+Param\+::\+One\+DLegendre\+Shape\+Param()}}.
+

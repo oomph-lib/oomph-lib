@@ -1,0 +1,281 @@
+\doxysection{oomph\+::Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+
+
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a Casson model fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a cubic.  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a69a6c3d00d715d3793d30d588fa64227}{Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{yield\+\_\+stress\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{critical\+\_\+second\+\_\+invariant\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em "{}\+Cutoff regularised"{} Casson constitutive equation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a5fcaff96bfabae7666c4f7a91699df5b}{calculate\+\_\+cutoff\+\_\+viscosity}} ()
+\begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_af844c87f95a40d6c503bbaee6292482b}{calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+viscosity}})
+\begin{DoxyCompactList}\small\item\em Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff Hard-\/coded to a value that ensures a smooth transition. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_acbab1c4047d193a4d6136856dbd599d0}{calculate\+\_\+zero\+\_\+shear\+\_\+viscosity}} ()
+\begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at zero I2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a85c8fceda5fda7218847f277c3a2920e}{report\+\_\+cut\+\_\+off\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+invariant}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+viscosity}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zero\+\_\+shear\+\_\+viscosity}})
+\begin{DoxyCompactList}\small\item\em Report cutoff values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a95e4e6c016eb2942765f1ed4b1f4d0de}{calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&b)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a6794675f3a7e2def339b01a5f9a71447}{viscosity}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Viscosity ratio as a fct of strain rate invariant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_addb110a4246eb4e7bdcef5d017123911}{dviscosity\+\_\+dinvariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Deriv of viscosity w.\+r.\+t. strain rate invariant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a4b84eb3626aaed2f77f6dc96258f7e01}{Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_af85f107604d04e8fdaf03e8274c485e6}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a17aa5fc2eaaacf3eb7176c6f5a5a165b}{Yield\+\_\+stress\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Yield stress. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_ac003ae43c6171c85d3e75d0825f20cc9}{Critical\+\_\+second\+\_\+invariant\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$}
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a Casson model fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a cubic. 
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00889}{889}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a69a6c3d00d715d3793d30d588fa64227}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a69a6c3d00d715d3793d30d588fa64227} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!CassonTanMilRegWithBlendingConstitutiveEquation@{CassonTanMilRegWithBlendingConstitutiveEquation}}
+\index{CassonTanMilRegWithBlendingConstitutiveEquation@{CassonTanMilRegWithBlendingConstitutiveEquation}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{CassonTanMilRegWithBlendingConstitutiveEquation()}{CassonTanMilRegWithBlendingConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{yield\+\_\+stress\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{critical\+\_\+second\+\_\+invariant\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+"{}\+Cutoff regularised"{} Casson constitutive equation 
+
+get the cutoff viscosity
+
+get the zero shear viscosity
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00903}{903}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a5fcaff96bfabae7666c4f7a91699df5b}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a5fcaff96bfabae7666c4f7a91699df5b} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}}
+\index{calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_cutoff\_viscosity()}{calculate\_cutoff\_viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+cutoff\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{929}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00894}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00903}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00962}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a95e4e6c016eb2942765f1ed4b1f4d0de}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a95e4e6c016eb2942765f1ed4b1f4d0de} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_fitting\_parameters\_of\_cubic@{calculate\_fitting\_parameters\_of\_cubic}}
+\index{calculate\_fitting\_parameters\_of\_cubic@{calculate\_fitting\_parameters\_of\_cubic}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_fitting\_parameters\_of\_cubic()}{calculate\_fitting\_parameters\_of\_cubic()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{972}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00942}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00894}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01048}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01006}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_af844c87f95a40d6c503bbaee6292482b}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_af844c87f95a40d6c503bbaee6292482b} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_viscosity\_offset\_at\_zero\_shear@{calculate\_viscosity\_offset\_at\_zero\_shear}}
+\index{calculate\_viscosity\_offset\_at\_zero\_shear@{calculate\_viscosity\_offset\_at\_zero\_shear}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_viscosity\_offset\_at\_zero\_shear()}{calculate\_viscosity\_offset\_at\_zero\_shear()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff Hard-\/coded to a value that ensures a smooth transition. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00942}{942}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_acbab1c4047d193a4d6136856dbd599d0}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_acbab1c4047d193a4d6136856dbd599d0} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}}
+\index{calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_zero\_shear\_viscosity()}{calculate\_zero\_shear\_viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that calculates the viscosity at zero I2. 
+
+Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{948}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00942}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear()}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00903}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00962}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01006}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_addb110a4246eb4e7bdcef5d017123911}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_addb110a4246eb4e7bdcef5d017123911} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
+\index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Deriv of viscosity w.\+r.\+t. strain rate invariant. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01048}{1048}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00894}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a85c8fceda5fda7218847f277c3a2920e}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a85c8fceda5fda7218847f277c3a2920e} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!report\_cut\_off\_values@{report\_cut\_off\_values}}
+\index{report\_cut\_off\_values@{report\_cut\_off\_values}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{report\_cut\_off\_values()}{report\_cut\_off\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::report\+\_\+cut\+\_\+off\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+invariant,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+viscosity,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{zero\+\_\+shear\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Report cutoff values. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00962}{962}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a6794675f3a7e2def339b01a5f9a71447}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a6794675f3a7e2def339b01a5f9a71447} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::viscosity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Viscosity ratio as a fct of strain rate invariant. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01006}{1006}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00948}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00894}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_ac003ae43c6171c85d3e75d0825f20cc9}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_ac003ae43c6171c85d3e75d0825f20cc9} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}}
+\index{Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Critical\_second\_invariant\_pt}{Critical\_second\_invariant\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00898}{898}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00903}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01048}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00962}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01006}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a17aa5fc2eaaacf3eb7176c6f5a5a165b}\label{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation_a17aa5fc2eaaacf3eb7176c6f5a5a165b} 
+\index{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Yield\_stress\_pt@{Yield\_stress\_pt}}
+\index{Yield\_stress\_pt@{Yield\_stress\_pt}!oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::CassonTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Yield\_stress\_pt}{Yield\_stress\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CassonTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Yield\+\_\+stress\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Yield stress. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00894}{894}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00929}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00972}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01048}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01006}{oomph\+::\+Casson\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

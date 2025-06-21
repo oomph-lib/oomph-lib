@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableBackwardStepQuadMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html">RefineableBackwardStepQuadMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1RefineableBackwardStepQuadMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RefineableBackwardStepQuadMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Refineable backward step mesh.  
+ <a href="classoomph_1_1RefineableBackwardStepQuadMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="backward__step__mesh_8h_source.html">backward_step_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableBackwardStepQuadMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableBackwardStepQuadMesh.png" usemap="#oomph::RefineableBackwardStepQuadMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::RefineableBackwardStepQuadMesh_3C_20ELEMENT_20_3E_map" name="oomph::RefineableBackwardStepQuadMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1BackwardStepQuadMesh.html" title="Backward step mesh." alt="oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;" shape="rect" coords="0,112,340,136"/>
+<area href="classoomph_1_1RectangularQuadMesh.html" title="RectangularQuadMesh is a two-dimensional mesh of Quad elements with Nx elements in the &quot;x&quot; (horizonal..." alt="oomph::RectangularQuadMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,340,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0502cd96a9edc2789f9ddf6ec7b1d2ca" id="r_a0502cd96a9edc2789f9ddf6ec7b1d2ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html#a0502cd96a9edc2789f9ddf6ec7b1d2ca">RefineableBackwardStepQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">nx_cut_out</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ny_cut_out</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">lx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ly</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a0502cd96a9edc2789f9ddf6ec7b1d2ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pass overall number of elements in the horizontal and vertical directions, nx and ny, and the corresponding dimensions, lx and ly. nx_cut_out and ny_cut_out elements are cut out from the lower right corner to create the (reversed) backward step geometry. Timestepper defaults to Steady.  <br /></td></tr>
+<tr class="separator:a0502cd96a9edc2789f9ddf6ec7b1d2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af30cb7d5ef893e64b184d540ed415e11" id="r_af30cb7d5ef893e64b184d540ed415e11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html#af30cb7d5ef893e64b184d540ed415e11">~RefineableBackwardStepQuadMesh</a> ()</td></tr>
+<tr class="memdesc:af30cb7d5ef893e64b184d540ed415e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty.  <br /></td></tr>
+<tr class="separator:af30cb7d5ef893e64b184d540ed415e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1BackwardStepQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1BackwardStepQuadMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1BackwardStepQuadMesh.html">oomph::BackwardStepQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ae8374ae7d3646c00fec4fc9c2d604cf8 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh" id="r_ae8374ae7d3646c00fec4fc9c2d604cf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BackwardStepQuadMesh.html#ae8374ae7d3646c00fec4fc9c2d604cf8">BackwardStepQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">nx_cut_out</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ny_cut_out</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">lx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ly</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ae8374ae7d3646c00fec4fc9c2d604cf8 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pass overall number of elements in the horizontal and vertical directions, nx and ny, and the corresponding dimensions, lx and ly. nx_cut_out and ny_cut_out elements are cut out from the lower right corner to create the (reversed) backward step geometry. Timestepper defaults to Steady.  <br /></td></tr>
+<tr class="separator:ae8374ae7d3646c00fec4fc9c2d604cf8 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec4e05ad80d83327050653ebabce9564 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh" id="r_aec4e05ad80d83327050653ebabce9564"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BackwardStepQuadMesh.html#aec4e05ad80d83327050653ebabce9564">~BackwardStepQuadMesh</a> ()</td></tr>
+<tr class="memdesc:aec4e05ad80d83327050653ebabce9564 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty.  <br /></td></tr>
+<tr class="separator:aec4e05ad80d83327050653ebabce9564 inherit pub_methods_classoomph_1_1BackwardStepQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a1f906bca42da3d44765382013667e40d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1f906bca42da3d44765382013667e40d">RectangularQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">lx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ly</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady)  <br /></td></tr>
+<tr class="separator:a1f906bca42da3d44765382013667e40d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_aea506679674e4fc5c43b62a53798d0be"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aea506679674e4fc5c43b62a53798d0be">RectangularQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates.  <br /></td></tr>
+<tr class="separator:aea506679674e4fc5c43b62a53798d0be inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a40f120e00d682026e54593ca0f823535"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a40f120e00d682026e54593ca0f823535">RectangularQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">lx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ly</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">periodic_in_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple constructor: nx: number of elements in x direction; ny: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-direction. Also pass pointer to timestepper (defaults to Steady)  <br /></td></tr>
+<tr class="separator:a40f120e00d682026e54593ca0f823535 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_ac36869a7d72ec7524b18272657cb6167"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ac36869a7d72ec7524b18272657cb6167">RectangularQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">periodic_in_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-direction.  <br /></td></tr>
+<tr class="separator:ac36869a7d72ec7524b18272657cb6167 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8755801661f2cec616527ecc3a43fd60 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a8755801661f2cec616527ecc3a43fd60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:a8755801661f2cec616527ecc3a43fd60 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in x direction.  <br /></td></tr>
+<tr class="separator:a8755801661f2cec616527ecc3a43fd60 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189759f02bc92144e4abc24cb5bae5a8 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a189759f02bc92144e4abc24cb5bae5a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:a189759f02bc92144e4abc24cb5bae5a8 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of elements in y direction.  <br /></td></tr>
+<tr class="separator:a189759f02bc92144e4abc24cb5bae5a8 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_ab311c3bec7f9f721bae1f93e0798ab2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">x_min</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of x coordinate.  <br /></td></tr>
+<tr class="separator:ab311c3bec7f9f721bae1f93e0798ab2c inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a3449b36a5e4fc4728e517bd38d7b0cc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">x_max</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of x coordinate.  <br /></td></tr>
+<tr class="separator:a3449b36a5e4fc4728e517bd38d7b0cc6 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a1c493af1dae35746bed7a31e61b46c5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1c493af1dae35746bed7a31e61b46c5b">y_min</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the minimum value of y coordinate.  <br /></td></tr>
+<tr class="separator:a1c493af1dae35746bed7a31e61b46c5b inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_a7d4a00a545efc20451b00a9b8ad1e17d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a7d4a00a545efc20451b00a9b8ad1e17d">y_max</a> () <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a></td></tr>
+<tr class="memdesc:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the maximum value of y coordinate.  <br /></td></tr>
+<tr class="separator:a7d4a00a545efc20451b00a9b8ad1e17d inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_ae1e1d67808d4efb6e16a3835162a4504"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae1e1d67808d4efb6e16a3835162a4504">element_reorder</a> ()</td></tr>
+<tr class="memdesc:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder the elements: By default they are ordered in "horizontal" layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes.  <br /></td></tr>
+<tr class="separator:ae1e1d67808d4efb6e16a3835162a4504 inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_ad4c2f349cf201cb3107f0a4e5447c16f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">x_spacing_function</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xelement</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xnode</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">yelement</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ynode</a>)</td></tr>
+<tr class="memdesc:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the x-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default is to return nodes that are equally spaced in the x coodinate.  <br /></td></tr>
+<tr class="separator:ad4c2f349cf201cb3107f0a4e5447c16f inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh" id="r_ae78204de1f176cdf2e819673bd34e78a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ae78204de1f176cdf2e819673bd34e78a">y_spacing_function</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xelement</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xnode</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">yelement</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ynode</a>)</td></tr>
+<tr class="memdesc:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the y-coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "psudeo" two-dimensional coordinate system, so the range of xelement is [0,Nx-1], yelement is [0,Ny-1], and that of xnode and ynode is [0,Np-1]. The default it to return nodes that are equally spaced in the y coordinate.  <br /></td></tr>
+<tr class="separator:ae78204de1f176cdf2e819673bd34e78a inherit pub_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh" id="r_afa579b413a2d8120e8228d840cb3582c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#afa579b413a2d8120e8228d840cb3582c">build_mesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <br /></td></tr>
+<tr class="separator:afa579b413a2d8120e8228d840cb3582c inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh" id="r_aeda49fb3896e9e3aec328391b196a6bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aeda49fb3896e9e3aec328391b196a6bf">RectangularQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a8755801661f2cec616527ecc3a43fd60">nx</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a189759f02bc92144e4abc24cb5bae5a8">ny</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">xmax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymin</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ymax</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">periodic_in_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">build</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!!  <br /></td></tr>
+<tr class="separator:aeda49fb3896e9e3aec328391b196a6bf inherit pro_methods_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1RectangularQuadMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1RectangularQuadMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1RectangularQuadMesh.html">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_a1b2c0a2d1f8399713033953c72d399ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a1b2c0a2d1f8399713033953c72d399ee">Nx</a></td></tr>
+<tr class="memdesc:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nx: number of elements in x-direction.  <br /></td></tr>
+<tr class="separator:a1b2c0a2d1f8399713033953c72d399ee inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_a49a5ee7ef86ce837fb807eb6014a296d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a49a5ee7ef86ce837fb807eb6014a296d">Ny</a></td></tr>
+<tr class="memdesc:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ny: number of elements in y-direction.  <br /></td></tr>
+<tr class="separator:a49a5ee7ef86ce837fb807eb6014a296d inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_a92502c7536a6644ebffd806841cd4d98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a92502c7536a6644ebffd806841cd4d98">Np</a></td></tr>
+<tr class="memdesc:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Np: number of (linear) points in the element.  <br /></td></tr>
+<tr class="separator:a92502c7536a6644ebffd806841cd4d98 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_af3aab508d077460545031e758396514a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">Xmin</a></td></tr>
+<tr class="memdesc:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <br /></td></tr>
+<tr class="separator:af3aab508d077460545031e758396514a inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_ab8e4ddba0ce8315cf480cdd1f3447684"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">Xmax</a></td></tr>
+<tr class="memdesc:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <br /></td></tr>
+<tr class="separator:ab8e4ddba0ce8315cf480cdd1f3447684 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_ade53fec7446044418ccba9f55d692adb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#ade53fec7446044418ccba9f55d692adb">Ymin</a></td></tr>
+<tr class="memdesc:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <br /></td></tr>
+<tr class="separator:ade53fec7446044418ccba9f55d692adb inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_aacbacc3a0e6ea8508abb3140ba343ffa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#aacbacc3a0e6ea8508abb3140ba343ffa">Ymax</a></td></tr>
+<tr class="memdesc:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of y coordinate.  <br /></td></tr>
+<tr class="separator:aacbacc3a0e6ea8508abb3140ba343ffa inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh" id="r_a83dd0ace2eb47449f5e30522f71d9f59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">Xperiodic</a></td></tr>
+<tr class="memdesc:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable used to determine whether the mesh is periodic in the x-direction.  <br /></td></tr>
+<tr class="separator:a83dd0ace2eb47449f5e30522f71d9f59 inherit pro_attribs_classoomph_1_1RectangularQuadMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a>&gt;<br />
+class oomph::RefineableBackwardStepQuadMesh&lt; ELEMENT &gt;</div><p>Refineable backward step mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="backward__step__mesh_8h_source.html#l00091">91</a> of file <a class="el" href="backward__step__mesh_8h_source.html">backward_step_mesh.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0502cd96a9edc2789f9ddf6ec7b1d2ca" name="a0502cd96a9edc2789f9ddf6ec7b1d2ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0502cd96a9edc2789f9ddf6ec7b1d2ca">&#9670;&#160;</a></span>RefineableBackwardStepQuadMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html">oomph::RefineableBackwardStepQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::RefineableBackwardStepQuadMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx_cut_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny_cut_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pass overall number of elements in the horizontal and vertical directions, nx and ny, and the corresponding dimensions, lx and ly. nx_cut_out and ny_cut_out elements are cut out from the lower right corner to create the (reversed) backward step geometry. Timestepper defaults to Steady. </p>
+
+<p class="definition">Definition at line <a class="el" href="backward__step__mesh_8h_source.html#l00102">102</a> of file <a class="el" href="backward__step__mesh_8h_source.html">backward_step_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="af30cb7d5ef893e64b184d540ed415e11" name="af30cb7d5ef893e64b184d540ed415e11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30cb7d5ef893e64b184d540ed415e11">&#9670;&#160;</a></span>~RefineableBackwardStepQuadMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html">oomph::RefineableBackwardStepQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::~<a class="el" href="classoomph_1_1RefineableBackwardStepQuadMesh.html">RefineableBackwardStepQuadMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="backward__step__mesh_8h_source.html#l00123">123</a> of file <a class="el" href="backward__step__mesh_8h_source.html">backward_step_mesh.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="backward__step__mesh_8h_source.html">backward_step_mesh.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:59
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

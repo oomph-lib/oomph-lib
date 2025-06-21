@@ -1,0 +1,511 @@
+\chapter{Demo problem\+: Small-\/amplitude non-\/axisymmetric oscillations of a thin-\/walled elastic ring}
+\hypertarget{index}{}\label{index}\index{Demo problem: Small-\/amplitude non-\/axisymmetric oscillations of a thin-\/walled elastic ring@{Demo problem: Small-\/amplitude non-\/axisymmetric oscillations of a thin-\/walled elastic ring}}
+Detailed documentation to be written. Here\textquotesingle{}s the already fairly well documented driver code...
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//Driver\ for\ small\ amplitude\ ring\ oscillations}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//OOMPH-\/LIB\ includes}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}beam.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/one\_d\_lagrangian\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace============================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flag\ for\ long/short\ run:\ Default\ =\ \ perform\ long\ run}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Long\_run\_flag}}=1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flag\ for\ fixed\ timestep:\ Default\ =\ fixed\ timestep}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Fixed\_timestep\_flag}}=1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boolean\ flag\ to\ decide\ if\ to\ set\ IC\ for\ Newmark}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ directly\ or\ consistently\ :\ No\ Default}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Consistent\_newmark\_ic}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class==============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Oscillating\ ring\ problem:\ Compare\ small-\/amplitude\ oscillations}}
+\DoxyCodeLine{\textcolor{comment}{///\ against\ analytical\ solution\ of\ the\ linearised\ equations.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Number\ of\ elements,\ length\ of\ domain,\ flag\ for}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ setting\ Newmark\ IC\ directly\ or\ consistently}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&N,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&L);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ OneDLagrangianMesh<ELEMENT>*\ \mbox{\hyperlink{classElasticRingProblem_ab7e6b68cb51f8d6bc636e0f0789793ce}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ is\ empty\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_ab0eb0dcecfa7e9c9e52ecf319f6e873e}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ is\ empty\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_aac5f3adac1e1a42492bd428eeb732a3d}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Do\ unsteady\ run}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{unsteady\_run}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ (in\ terms\ of\ the\ Lagrangian\ coordinates)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRingProblem_a74aac22a4e8673b1e58c024610f8220f}{Length}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ In\ which\ element\ are\ we\ applying\ displacement\ control?}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ (here\ only\ used\ for\ doc\ of\ radius)}}
+\DoxyCodeLine{\textcolor{comment}{}\ ELEMENT*\ \mbox{\hyperlink{classElasticRingProblem_aba78b855677ef08ea3d9678dcde8a71b}{Displ\_control\_elem\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ At\ what\ local\ coordinate\ are\ we\ applying\ displacement\ control?}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{classElasticRingProblem_a0acfcb485441bbe0c9e4202d8a5e72d3}{S\_displ\_control}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ geometric\ object\ that\ represents\ the\ undeformed\ shape}}
+\DoxyCodeLine{\textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classElasticRingProblem_ab0f0f02cc67dcabfc38f051e3d3cebfc}{Undef\_geom\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ object\ that\ specifies\ the\ initial\ condition}}
+\DoxyCodeLine{\textcolor{comment}{}\ SolidInitialCondition*\ \mbox{\hyperlink{classElasticRingProblem_a0d314051b66afb53fa7f28c298f38206}{IC\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file\ for\ recording\ control\ data}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ \mbox{\hyperlink{classElasticRingProblem_a7f0f8c10b57021446e19c5833863cc7f}{Trace\_file}};}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor===============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ elastic\ ring\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::ElasticRingProblem}}}
+\DoxyCodeLine{(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ N,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ L)\ }
+\DoxyCodeLine{\ :\ Length(L)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ the\ timestepper\ -\/-\/\ This\ constructs\ the\ time\ object\ as\ well}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ TIMESTEPPER());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Undeformed\ beam\ is\ an\ elliptical\ ring\ }}
+\DoxyCodeLine{\ Undef\_geom\_pt=\textcolor{keyword}{new}\ Ellipse(1.0,1.0);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ (Lagrangian!)\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ OneDLagrangianMesh<ELEMENT>(}
+\DoxyCodeLine{\ \ N,L,Undef\_geom\_pt,Problem::time\_stepper\_pt());\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Boundary\ condition:\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Bottom:\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ibound=0;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ vertical\ displacement}}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(1);\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Zero\ slope:\ Pin\ type\ 1\ dof\ for\ displacement\ direction\ 0\ }}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(1,0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Top:\ }}
+\DoxyCodeLine{\ ibound=1;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ horizontal\ displacement}}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(0);\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Zero\ slope:\ Pin\ type\ 1\ dof\ for\ displacement\ direction\ 1}}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(1,1);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Resize\ vector\ of\ local\ coordinates\ for\ control\ displacement}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ (here\ only\ used\ to\ identify\ the\ point\ whose\ displacement\ we're}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ tracing)}}
+\DoxyCodeLine{\ S\_displ\_control.resize(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Find\ number\ of\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ Nelement\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ pointer\ to\ undeformed\ wall\ shape}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<Nelement;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ proper\ element\ type}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Assign\ the\ undeformed\ surface}}
+\DoxyCodeLine{\ \ \ elem\_pt-\/>undeformed\_beam\_pt()\ =\ Undef\_geom\_pt;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Establish\ control\ displacment:\ (even\ though\ no\ displacement\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ control\ is\ applied\ we\ still\ want\ to\ doc\ the\ displacement\ at\ the\ same\ point)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Choose\ element:\ (This\ is\ the\ last\ one)}}
+\DoxyCodeLine{\ Displ\_control\_elem\_pt=\textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ mesh\_pt()-\/>element\_pt(Nelement-\/1));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Fix/doc\ the\ displacement\ in\ the\ vertical\ (1)\ direction\ at\ right\ end\ of}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ control\ element}}
+\DoxyCodeLine{\ S\_displ\_control[0]=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ equation\ numbering}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}\#\ of\ dofs\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Geometric\ object\ that\ specifies\ the\ initial\ conditions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ eps\_buckl=1.0e-\/2;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ HoR=\textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(0))-\/>h();}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_buckl=2;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ imode=2;}
+\DoxyCodeLine{\ GeomObject*\ ic\_geom\_object\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ PseudoBucklingRing(eps\_buckl,HoR,n\_buckl,imode,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Problem::time\_stepper\_pt());\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ object\ that\ specifies\ the\ initial\ conditions:}}
+\DoxyCodeLine{\ IC\_pt\ =\ \textcolor{keyword}{new}\ SolidInitialCondition(ic\_geom\_object\_pt);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_doc\_solution================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Document\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{ElasticRingProblem<ELEMENT,\ TIMESTEPPER>::doc\_solution}}(}
+\DoxyCodeLine{\ DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Doc-\/ing\ step\ "{}}\ <<\ \ doc\_info.number()}
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ for\ time\ "{}}\ <<\ time\_stepper\_pt()-\/>time\_pt()-\/>time()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ elements\ to\ get\ global\ kinetic\ and\ potential\ energy}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ Nelem=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ global\_kin=0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ global\_pot=0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ pot,kin;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ielem=0;ielem<Nelem;ielem++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(ielem))-\/>get\_energy(pot,kin);}
+\DoxyCodeLine{\ \ \ global\_kin+=kin;}
+\DoxyCodeLine{\ \ \ global\_pot+=pot;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Control\ displacement\ for\ initial\ condition\ object}}
+\DoxyCodeLine{\ Vector<double>\ xi\_ctrl(1);}
+\DoxyCodeLine{\ Vector<double>\ posn\_ctrl(2);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Lagrangian\ coordinate\ of\ control\ point}}
+\DoxyCodeLine{\ xi\_ctrl[0]=Displ\_control\_elem\_pt-\/>interpolated\_xi(S\_displ\_control,0);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ position}}
+\DoxyCodeLine{\ IC\_pt-\/>geom\_object\_pt()-\/>position(xi\_ctrl,posn\_ctrl);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file:\ Time,\ control\ position,\ energies}}
+\DoxyCodeLine{\ Trace\_file\ <<\ time\_pt()-\/>time()\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ Displ\_control\_elem\_pt-\/>interpolated\_x(S\_displ\_control,1)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ global\_pot\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ global\_kin}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ global\_pot\ +\ global\_kin\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ posn\_ctrl[1]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/ring\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ elements\ do\ dump\ out\ previous\ solutions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nsteps=time\_stepper\_pt()-\/>nprev\_values();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ t=0;t<=nsteps;t++)}
+\DoxyCodeLine{\ \ \{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/ring\%i-\/\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ doc\_info.number(),t);}
+\DoxyCodeLine{\ \ \ some\_file.open(filename);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ Nelem=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ielem=0;ielem<Nelem;ielem++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(ielem))-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ output(t,some\_file,npts);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ some\_file.close();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ for\ initial\ condition\ object}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/ic\_ring\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nplot=1+(npts-\/1)*mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ Vector<double>\ xi(1);}
+\DoxyCodeLine{\ Vector<double>\ posn(2);}
+\DoxyCodeLine{\ Vector<double>\ veloc(2);}
+\DoxyCodeLine{\ Vector<double>\ accel(2);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ iplot=0;iplot<nplot;iplot++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ xi[0]=Length/double(nplot-\/1)*double(iplot);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ IC\_pt-\/>geom\_object\_pt()-\/>position(xi,posn);}
+\DoxyCodeLine{\ \ \ IC\_pt-\/>geom\_object\_pt()-\/>dposition\_dt(xi,1,veloc);}
+\DoxyCodeLine{\ \ \ IC\_pt-\/>geom\_object\_pt()-\/>dposition\_dt(xi,2,accel);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ some\_file\ <<\ posn[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ posn[1]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ xi[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ veloc[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ veloc[1]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ accel[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ accel[1]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sqrt(pow(posn[0],2)+pow(posn[1],2))\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sqrt(pow(veloc[0],2)+pow(veloc[1],2))\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sqrt(pow(accel[0],2)+pow(accel[1],2))\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc\ solution}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run=================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Solver\ loop\ to\ perform\ unsteady\ run}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Label\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ doc\_info;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ doc\_info.number()=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/trace\_ring.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(filename);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ Trace\_file\ <<\ \ \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}R<sub>ctrl</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>pot</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{},\(\backslash\)"{}E<sub>kin</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>kin</sub>+E<sub>pot</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{},\(\backslash\)"{}<sub>exact</sub>R<sub>ctrl</sub>\(\backslash\)"{}"{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ steps}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=600;\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\_Physical\_Variables::Long\_run\_flag}}==0)\ \{nstep=10;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ dt=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Ratio\ for\ timestep\ reduction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ timestep\_ratio=1.0;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Global\_Physical\_Variables::Fixed\_timestep\_flag}}==0)\ \{timestep\_ratio=0.995;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ previous\ timesteps\ stored}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ndt=time\_stepper\_pt()-\/>time\_pt()-\/>ndt();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ vector\ of\ "{}previous"{}\ timesteps}}
+\DoxyCodeLine{\ Vector<double>\ dt\_prev(ndt);}
+\DoxyCodeLine{\ dt\_prev[0]=dt;\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=1;i<ndt;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ dt\_prev[i]=dt\_prev[i-\/1]/timestep\_ratio;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ the\ history\ of\ previous\ timesteps}}
+\DoxyCodeLine{\ time\_pt()-\/>initialise\_dt(dt\_prev);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ time0=10.0;}
+\DoxyCodeLine{\ time\_pt()-\/>time()=time0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ analytical\ initial\ condition?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Note:\ Time\ has\ been\ scaled\ on\ intrinsic\ timescale\ so}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ we\ don't\ need\ to\ specify\ a\ multiplier\ for\ the\ inertia}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ terms\ (the\ default\ assignment\ of\ 1.0\ is\ OK)}}
+\DoxyCodeLine{\ \ \ SolidMesh::Solid\_IC\_problem.}
+\DoxyCodeLine{\ \ \ \ set\_newmark\_initial\_condition\_consistently(}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{this},mesh\_pt(),\textcolor{keyword}{static\_cast<}TIMESTEPPER*\textcolor{keyword}{>}(time\_stepper\_pt()),IC\_pt,dt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ SolidMesh::Solid\_IC\_problem.}
+\DoxyCodeLine{\ \ \ \ set\_newmark\_initial\_condition\_directly(}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{this},mesh\_pt(),\textcolor{keyword}{static\_cast<}TIMESTEPPER*\textcolor{keyword}{>}(time\_stepper\_pt()),IC\_pt,dt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ initial\ data}}
+\DoxyCodeLine{\ doc\_solution(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Time\ integration\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=1;i<=nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve}}
+\DoxyCodeLine{\ \ \ unsteady\_newton\_solve(dt);\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Reduce\ timestep}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (time\_pt()-\/>time()<100.0)\ \{dt=timestep\_ratio*dt;\}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ unsteady\ run}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=====================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ ring\ that\ performs\ small-\/amplitude\ oscillations}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{lin__unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Convert\ command\ line\ arguments\ (if\ any)\ into\ flags:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordflow}{if}\ (argc==2)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Nontrivial\ command\ line\ input:\ Setup\ Newmark\ IC\ directly}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ (rather\ than\ consistently\ with\ PVD)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (atoi(argv[1])==1)\ }
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Setting\ Newmark\ IC\ consistently"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Setting\ Newmark\ IC\ directly"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Not\ enough\ command\ line\ arguments\ specified\ -\/-\/\ using\ defaults."{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ 1\ argument}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (argc==4)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Three\ command\ line\ arguments\ specified:"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Nontrivial\ command\ line\ input:\ Setup\ Newmark\ IC\ directly}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ (rather\ than\ consistently\ with\ PVD)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (atoi(argv[1])==1)\ }
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Setting\ Newmark\ IC\ consistently"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Setting\ Newmark\ IC\ directly"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Flag\ for\ long\ run}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\_Physical\_Variables::Long\_run\_flag}}=atoi(argv[2]);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Flag\ for\ fixed\ timestep}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Global\_Physical\_Variables::Fixed\_timestep\_flag}}=atoi(argv[3]);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ 3\ arguments}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ std::string\ error\_message\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Wrong\ number\ of\ command\ line\ arguments.\ Specify\ one\ or\ three.\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ error\_message\ +=\ \textcolor{stringliteral}{"{}Arg1:\ Long\_run\_flag\ [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ error\_message\ +=\ \textcolor{stringliteral}{"{}Arg2:\ Impulsive\_start\_flag\ [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ error\_message\ +=\ \textcolor{stringliteral}{"{}Arg3:\ Restart\_flag\ [restart\_file]\ (optional)\(\backslash\)n"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_message,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ too\ many\ arguments}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Setting\ Newmark\ IC\ consistently:\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Long\ run\ flag:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\_Physical\_Variables::Long\_run\_flag}}\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Fixed\ timestep\ flag:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Global\_Physical\_Variables::Fixed\_timestep\_flag}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Length\ of\ domain}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ L\ =\ MathematicalConstants::Pi/2.0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nelem\ =\ 13;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem<HermiteBeamElement,Newmark<3>}}\ >\ }
+\DoxyCodeLine{\ \ problem(nelem,L);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ unsteady\ run}}
+\DoxyCodeLine{\ problem.unsteady\_run();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

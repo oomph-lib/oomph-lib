@@ -1,0 +1,683 @@
+\doxysection{collapsible\+\_\+channel\+\_\+mesh.\+h}
+\hypertarget{collapsible__channel__mesh_8h_source}{}\label{collapsible__channel__mesh_8h_source}\index{collapsible\_channel\_mesh.h@{collapsible\_channel\_mesh.h}}
+\mbox{\hyperlink{collapsible__channel__mesh_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00026}00026\ \textcolor{comment}{//\ Include\ guards}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_COLLAPSIBLE\_CHANNEL\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00028}00028\ \textcolor{preprocessor}{\#define\ OOMPH\_COLLAPSIBLE\_CHANNEL\_MESH\_HEADER}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00030}00030\ \textcolor{comment}{//\ Generic\ includes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}generic/refineable\_quad\_mesh.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ "{}generic/macro\_element.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}generic/domain.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}generic/quad\_mesh.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00036}00036\ \textcolor{comment}{//\ Mesh\ is\ based\ on\ simple\_rectangular\_quadmesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{simple__rectangular__quadmesh_8h}{simple\_rectangular\_quadmesh.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00039}00039\ \textcolor{comment}{//\ Include\ *.template.cc\ to\ allow\ building\ the\ templated\ member\ functions}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}generic/macro\_element\_node\_update\_element.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00042}00042\ \textcolor{comment}{//\ We\ need\ to\ include\ the\ templated\ sources\ for\ algebraic\ meshes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00043}00043\ \textcolor{comment}{//\ to\ allow\ the\ build\ of\ all\ templates.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00044}00044\ \textcolor{preprocessor}{\#include\ "{}generic/algebraic\_elements.h"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00046}00046\ \textcolor{comment}{//\ Include\ the\ headers\ file\ for\ collapsible\ channel}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00047}00047\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{collapsible__channel__domain_8h}{collapsible\_channel\_domain.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00049}00049\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00051}00051\ \ \ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00052}00052\ \textcolor{comment}{\ \ ///\ Basic\ collapsible\ channel\ mesh.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00053}00053\ \textcolor{comment}{\ \ ///\ The\ mesh\ is\ derived\ from\ the\ \(\backslash\)c\ SimpleRectangularQuadMesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00054}00054\ \textcolor{comment}{\ \ ///\ so\ it's\ node\ and\ element\ numbering\ scheme\ is\ the\ same}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00055}00055\ \textcolor{comment}{\ \ ///\ as\ in\ that\ mesh.\ Only\ the\ boundaries\ are\ numbered\ differently}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00056}00056\ \textcolor{comment}{\ \ ///\ to\ allow\ the\ easy\ identification\ of\ the\ "{}collapsible"{}\ segment.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00057}00057\ \textcolor{comment}{\ \ ///\ Boundary\ coordinates\ are\ set\ up\ for\ all\ nodes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00058}00058\ \textcolor{comment}{\ \ ///\ located\ on\ boundary\ 3\ (the\ collapsible\ segment).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00059}00059\ \textcolor{comment}{\ \ ///\ The\ curvilinear\ ("{}collapsible"{})\ segment\ is\ defined\ by}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00060}00060\ \textcolor{comment}{\ \ ///\ a\ \(\backslash\)c\ GeomObject.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00061}00061\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00062}00062\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00063}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{00063}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{SimpleRectangularQuadMesh}}<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00064}00064\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00065}00065\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ upstream/collapsible/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ \ ///\ downstream\ segment\ and\ across\ the\ channel;\ lengths\ of\ upstream/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00068}00068\ \textcolor{comment}{\ \ \ \ ///\ collapsible/downstream\ segments\ and\ width\ of\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00069}00069\ \textcolor{comment}{\ \ \ \ ///\ GeomObject\ that\ defines\ the\ collapsible\ segment\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00070}00070\ \textcolor{comment}{\ \ \ \ ///\ TimeStepper\ (defaults\ to\ the\ default\ timestepper,\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00071}00071\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00072}00072\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00073}00073\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00074}00074\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00075}00075\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00076}00076\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00077}00077\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00078}00078\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00079}00079\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00080}00080\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00081}00081\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00082}00082\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ \ ///\ destructor}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00084}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a1c9b2ab27f1fb2f764ae2dc6f9f7a429}{00084}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a1c9b2ab27f1fb2f764ae2dc6f9f7a429}{\string~CollapsibleChannelMesh}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00086}00086\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00088}00088\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ GeomObject\ representing\ wall}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00090}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{00090}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\&\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00091}00091\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00092}00092\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{Wall\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00093}00093\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00094}00094\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00095}00095\ \textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ domain}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00096}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2e5edd6f2407c49eab1dd6f0a0646457}{00096}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain}{CollapsibleChannelDomain}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2e5edd6f2407c49eab1dd6f0a0646457}{domain\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00097}00097\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00098}00098\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00100}00100\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ squashes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00102}00102\ \textcolor{comment}{\ \ \ \ ///\ the\ mesh\ near\ the\ walls.\ Default\ trivial\ mapping\ (the\ identity)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00103}00103\ \textcolor{comment}{\ \ \ \ ///\ leaves\ vertical\ nodal\ positions\ unchanged.\ Mapping\ is}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00104}00104\ \textcolor{comment}{\ \ \ \ ///\ used\ in\ underlying\ CollapsibleChannelDomain.\ Virtual}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ \ ///\ so\ we\ can\ break\ it\ in\ derived\ classes\ (e.g.\ the\ Algebraic}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ \ ///\ versions\ of\ this\ mesh\ where\ it\ doesn't\ make\ any\ sense}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ \ ///\ to\ provide\ the\ bl\_squash\_fct\ after\ the\ mesh\ has\ been\ built).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00108}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a4d6a58ac75f5949e2df55b737fc87876}{00108}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\&\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a4d6a58ac75f5949e2df55b737fc87876}{bl\_squash\_fct\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00109}00109\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00110}00110\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_ad328688647bb45bc24d724593a1e13db}{bl\_squash\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00113}00113\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00114}00114\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ squashes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ \ ///\ the\ mesh\ near\ the\ walls.\ Default\ trivial\ mapping\ (the\ identity)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ \ ///\ leaves\ vertical\ nodal\ positions\ unchanged.\ Mapping\ is}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ \ ///\ used\ in\ underlying\ CollapsibleChannelDomain.\ Const\ version.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00118}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a5c073c93cce7e6b6e9de86f36cb1e965}{00118}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a5c073c93cce7e6b6e9de86f36cb1e965}{bl\_squash\_fct\_pt}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00119}00119\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00120}00120\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_ad328688647bb45bc24d724593a1e13db}{bl\_squash\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00123}00123\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00124}00124\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ redistributes\ the}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00125}00125\ \textcolor{comment}{\ \ \ \ ///\ elements\ in\ the\ axial\ direction.\ Virtual}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00126}00126\ \textcolor{comment}{\ \ \ \ ///\ so\ we\ can\ break\ it\ in\ derived\ classes\ (e.g.\ the\ Algebraic}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00127}00127\ \textcolor{comment}{\ \ \ \ ///\ versions\ of\ this\ mesh\ where\ it\ doesn't\ make\ any\ sense}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00128}00128\ \textcolor{comment}{\ \ \ \ ///\ to\ provide\ the\ bl\_squash\_fct\ after\ the\ mesh\ has\ been\ built).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00129}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a0ff4dd0f691151b62f05d83d05e87368}{00129}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a317472dab112beac771ecf6442a465f5}{CollapsibleChannelDomain::AxialSpacingFctPt}}\&\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a0ff4dd0f691151b62f05d83d05e87368}{axial\_spacing\_fct\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00131}00131\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a0ec73a9c30b0f6f941142f48073e836a}{axial\_spacing\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00134}00134\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00135}00135\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ redistributes\ the}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00136}00136\ \textcolor{comment}{\ \ \ \ ///\ elements\ in\ the\ axial\ direction.\ Const\ version}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00137}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a8da4460f59f6d9a78dde1d4b94cc7672}{00137}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a317472dab112beac771ecf6442a465f5}{CollapsibleChannelDomain::AxialSpacingFctPt}}\&\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a8da4460f59f6d9a78dde1d4b94cc7672}{axial\_spacing\_fct\_pt}}()\textcolor{keyword}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00138}00138\ \textcolor{keyword}{\ \ \ \ \ \ const}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00139}00139\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00140}00140\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a0ec73a9c30b0f6f941142f48073e836a}{axial\_spacing\_fct\_pt}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00143}00143\ \ \ \textcolor{keyword}{protected}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00144}00144\ \textcolor{comment}{\ \ \ \ ///\ Pointer\ to\ domain}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00145}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{00145}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain}{CollapsibleChannelDomain}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00146}00146\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00147}00147\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ element\ columns\ in\ upstream\ part}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00148}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aafd1c6d21bb891f1188ba6eed1705a45}{00148}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aafd1c6d21bb891f1188ba6eed1705a45}{Nup}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00149}00149\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00150}00150\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ element\ columns\ in\ collapsible\ part}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00151}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aa59ff7af47247b2e17b13c45f83fcf86}{00151}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aa59ff7af47247b2e17b13c45f83fcf86}{Ncollapsible}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00152}00152\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00153}00153\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ element\ columns\ in\ downstream\ part}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00154}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_acd1b5ea7597a079b4321d3658f2e03f4}{00154}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_acd1b5ea7597a079b4321d3658f2e03f4}{Ndown}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00155}00155\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00156}00156\ \textcolor{comment}{\ \ \ \ ///\ Number\ of\ element\ rows\ across\ channel}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00157}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_afa8d1dceef1cafeb166794d9275a30a3}{00157}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_afa8d1dceef1cafeb166794d9275a30a3}{Ny}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00158}00158\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00159}00159\ \textcolor{comment}{\ \ \ \ ///\ Pointer\ to\ geometric\ object\ that\ represents\ the\ moving\ wall}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00160}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{00160}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{Wall\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00161}00161\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00163}00163\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00164}00164\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00165}00165\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00166}00166\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00167}00167\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00168}00168\ \ \ \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00169}00169\ \textcolor{comment}{\ \ ///\ Refineable\ collapsible\ channel\ mesh.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00170}00170\ \textcolor{comment}{\ \ ///\ The\ mesh\ is\ derived\ from\ the\ \(\backslash\)c\ SimpleRectangularQuadMesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00171}00171\ \textcolor{comment}{\ \ ///\ so\ it's\ node\ and\ element\ numbering\ scheme\ is\ the\ same}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00172}00172\ \textcolor{comment}{\ \ ///\ as\ in\ that\ mesh.\ Only\ the\ boundaries\ are\ numbered\ differently}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00173}00173\ \textcolor{comment}{\ \ ///\ to\ allow\ the\ easy\ identification\ of\ the\ "{}collapsible"{}\ segment.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00174}00174\ \textcolor{comment}{\ \ ///\ \ Boundary\ coordinates\ are\ set\ up\ for\ all\ nodes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00175}00175\ \textcolor{comment}{\ \ ///\ located\ on\ boundary\ 3\ (the\ collapsible\ segment).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00176}00176\ \textcolor{comment}{\ \ ///\ The\ curvilinear\ ("{}collapsible"{})\ segment\ is\ defined\ by}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00177}00177\ \textcolor{comment}{\ \ ///\ a\ \(\backslash\)c\ GeomObject.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00178}00178\ \textcolor{comment}{}\ \ \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00179}00179\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00180}\mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh}{00180}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh}{RefineableCollapsibleChannelMesh}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00181}00181\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00182}00182\ \ \ \ \ \ \ \textcolor{keyword}{public}\ RefineableQuadMesh<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00183}00183\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00184}00184\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00185}00185\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements,\ lengths,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00186}00186\ \textcolor{comment}{\ \ \ \ ///\ geometric\ object\ that\ describes\ the\ wall\ and\ timestepper}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00187}\mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh_a0abc3741a7b74dd543096fb303b96243}{00187}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh_a0abc3741a7b74dd543096fb303b96243}{RefineableCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00188}00188\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00189}00189\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00190}00190\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00191}00191\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00192}00192\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00193}00193\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00194}00194\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00195}00195\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00196}00196\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00197}00197\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00198}00198\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00208}00208\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00209}00209\ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ quadtree\ forest}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00210}00210\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{setup\_quadtree\_forest}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00211}00211\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00212}00212\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00213}00213\ \textcolor{comment}{\ \ \ \ ///\ Destructor(empty)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00214}\mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh_ae429201cc0fe53f5abf96b7d9564df65}{00214}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh_ae429201cc0fe53f5abf96b7d9564df65}{\string~RefineableCollapsibleChannelMesh}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00215}00215\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00217}00217\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00218}00218\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00219}00219\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00220}00220\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00221}00221\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00222}00222\ \ \ \textcolor{comment}{//=====start\_of\_mesh=======================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00223}00223\ \textcolor{comment}{\ \ ///\ Collapsible\ channel\ mesh\ with\ MacroElement-\/based\ node\ update.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00224}00224\ \textcolor{comment}{\ \ ///\ The\ collapsible\ segment\ is\ represented\ by\ the\ specified\ geometric\ object.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00225}00225\ \textcolor{comment}{\ \ ///\ Some\ or\ all\ of\ the\ geometric\ Data\ in\ that\ geometric\ object}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00226}00226\ \textcolor{comment}{\ \ ///\ may\ contain\ unknowns\ in\ the\ global\ Problem.\ The\ dependency}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00227}00227\ \textcolor{comment}{\ \ ///\ on\ these\ unknowns\ is\ taken\ into\ account\ when\ setting\ up}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00228}00228\ \textcolor{comment}{\ \ ///\ the\ Jacobian\ matrix\ of\ the\ elements.\ For\ this\ purpose,}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00229}00229\ \textcolor{comment}{\ \ ///\ the\ element\ (whose\ type\ is\ specified\ by\ the\ template\ parameter)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00230}00230\ \textcolor{comment}{\ \ ///\ must\ inherit\ from\ MacroElementNodeUpdateElementBase.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00231}00231\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00232}00232\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00233}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{00233}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{MacroElementNodeUpdateCollapsibleChannelMesh}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00234}00234\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ MacroElementNodeUpdateMesh,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00235}00235\ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00236}00236\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00237}00237\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00238}00238\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ numbers\ of\ elements\ and\ dimensions\ of\ the}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00239}00239\ \textcolor{comment}{\ \ \ \ ///\ various\ parts\ of\ the\ collapsible\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00240}00240\ \textcolor{comment}{\ \ \ \ ///\ geometric\ object\ that\ represents\ the\ wall\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00241}00241\ \textcolor{comment}{\ \ \ \ ///\ timestepper\ (defaults\ to\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00242}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh_a5b7f150c4569c8d59d8220980a84cac5}{00242}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh_a5b7f150c4569c8d59d8220980a84cac5}{MacroElementNodeUpdateCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00243}00243\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00244}00244\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00245}00245\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00246}00246\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00247}00247\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00248}00248\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00249}00249\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00250}00250\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00251}00251\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00252}00252\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00253}00253\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00263}00263\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00264}00264\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00265}00265\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00266}00266\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{MacroElementNodeUpdateElementBase}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}})\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00267}00267\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00268}00268\ \ \ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00269}00269\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}Base\ class\ for\ ELEMENT\ in\ "{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}MacroElementNodeUpdateCollapsibleChannelMesh\ needs"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}to\ be\ of\ type\ MacroElementNodeUpdateElement!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00272}00272\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}Whereas\ it\ is:\ typeid(el\_pt).name()"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{keyword}{typeid}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}}).\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{name}}()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00275}00275\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ =}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MacroElementNodeUpdateCollapsibleChannelMesh::\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00277}00277\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ +=\ \textcolor{stringliteral}{"{}MacroElementNodeUpdateCollapsibleChannelMesh()"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OomphLibError}}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}.str(),}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00282}00282\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00283}00283\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00284}00284\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00286}00286\ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ all\ the\ information\ that's\ required\ for\ MacroElement-\/based}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00287}00287\ \ \ \ \ \ \ \textcolor{comment}{//\ node\ update:\ Tell\ the\ elements\ that\ their\ geometry\ depends\ on\ the}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00288}00288\ \ \ \ \ \ \ \textcolor{comment}{//\ wall\ geometric\ object}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00289}00289\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{n\_element}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nelement}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00290}00290\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{n\_element}};\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}}++)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00291}00291\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ FiniteElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00293}00293\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{element\_pt}}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}}));}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00295}00295\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ cast\ is\ successful}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00297}00297\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{MacroElementNodeUpdateElementBase}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\_el\_pt}}\ =}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{MacroElementNodeUpdateElementBase}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00299}00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\_el\_pt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00300}00300\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Failed\ to\ upcast\ to\ MacroElementNodeUpdateElementBase\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}Element\ must\ be\ derived\ from\ "{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MacroElementNodeUpdateElementBase\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}\ <<\ \textcolor{stringliteral}{"{}but\ it\ is\ of\ type\ "{}}\ <<\ \textcolor{keyword}{typeid}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{el\_pt}}).\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{name}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ =}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}MacroElementNodeUpdateCollapsibleChannelMesh::\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ +=\ \textcolor{stringliteral}{"{}MacroElementNodeUpdateCollapsibleChannelMesh()"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OomphLibError}}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}.str(),}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00315}00315\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00316}00316\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00318}00318\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ There's\ just\ one\ GeomObject}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00319}00319\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector<GeomObject*>}}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}}(1);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00320}00320\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}}[0]\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{Wall\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Tell\ the\ element\ which\ geom\ objects\ its\ macro-\/element-\/based}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ node\ update\ depends\ on}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00324}00324\ \ \ \ \ \ \ \ \ el\_pt-\/>set\_node\_update\_info(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00325}00325\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00327}00327\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ geometric\ object(s)\ for\ the\ wall\ to\ the\ mesh's\ storage}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00328}00328\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector<GeomObject*>}}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}}(1);}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00329}00329\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}}[0]\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{Wall\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00330}00330\ \ \ \ \ \ \ MacroElementNodeUpdateMesh::set\_geom\_object\_vector\_pt(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{geom\_object\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00332}00332\ \ \ \ \ \ \ \textcolor{comment}{//\ Fill\ in\ the\ domain\ pointer\ to\ the\ mesh's\ storage\ in\ the\ base\ class}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00333}00333\ \ \ \ \ \ \ MacroElementNodeUpdateMesh::macro\_domain\_pt()\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2e5edd6f2407c49eab1dd6f0a0646457}{domain\_pt}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00335}00335\ \ \ \ \ \}\ \textcolor{comment}{//\ end\ of\ constructor}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00337}00337\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00338}00338\ \textcolor{comment}{\ \ \ \ ///\ Destructor:\ empty}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00339}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh_a284ffdb8ab08e5f817b14d69913f4496}{00339}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh_a284ffdb8ab08e5f817b14d69913f4496}{\string~MacroElementNodeUpdateCollapsibleChannelMesh}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00341}00341\ \ \ \};\ \textcolor{comment}{//\ end\ of\ mesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00343}00343\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00344}00344\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00345}00345\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00346}00346\ \textcolor{comment}{\ \ ////////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00347}00347\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00348}00348\ \ \ \textcolor{comment}{//=====start\_of\_mesh=======================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00349}00349\ \textcolor{comment}{\ \ ///\ Refineable\ collapsible\ channel\ mesh\ with\ MacroElement-\/based\ node\ update.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00350}00350\ \textcolor{comment}{\ \ ///\ The\ collapsible\ segment\ is\ represented\ by\ the\ specified\ geometric\ object.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00351}00351\ \textcolor{comment}{\ \ ///\ Some\ or\ all\ of\ the\ geometric\ Data\ in\ that\ geometric\ object}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00352}00352\ \textcolor{comment}{\ \ ///\ may\ contain\ unknowns\ in\ the\ global\ Problem.\ The\ dependency}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00353}00353\ \textcolor{comment}{\ \ ///\ on\ these\ unknowns\ is\ taken\ into\ account\ when\ setting\ up}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00354}00354\ \textcolor{comment}{\ \ ///\ the\ Jacobian\ matrix\ of\ the\ elements.\ For\ this\ purpose,}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00355}00355\ \textcolor{comment}{\ \ ///\ the\ element\ (whose\ type\ is\ specified\ by\ the\ template\ parameter)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00356}00356\ \textcolor{comment}{\ \ ///\ must\ inherit\ from\ MacroElementNodeUpdateElementBase.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00357}00357\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00358}00358\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00359}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh}{00359}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh}{MacroElementNodeUpdateRefineableCollapsibleChannelMesh}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00360}00360\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{MacroElementNodeUpdateCollapsibleChannelMesh}}<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00361}00361\ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableQuadMesh<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00362}00362\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00363}00363\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00364}00364\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ numbers\ of\ elements\ and\ dimensions\ of\ the}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00365}00365\ \textcolor{comment}{\ \ \ \ ///\ various\ parts\ of\ the\ collapsible\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00366}00366\ \textcolor{comment}{\ \ \ \ ///\ geometric\ object\ that\ represents\ the\ wall\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00367}00367\ \textcolor{comment}{\ \ \ \ ///\ timestepper\ (defaults\ to\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00368}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh_a6e3dfbb3d4dee7897d59aa10cde2dab1}{00368}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh_a6e3dfbb3d4dee7897d59aa10cde2dab1}{MacroElementNodeUpdateRefineableCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00369}00369\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00370}00370\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00371}00371\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00372}00372\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00373}00373\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00374}00374\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00375}00375\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00376}00376\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00377}00377\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00378}00378\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00379}00379\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00389}00389\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{MacroElementNodeUpdateCollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00399}00399\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00400}00400\ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ quadtree\ forest}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00401}00401\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{setup\_quadtree\_forest}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00402}00402\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00403}00403\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00404}00404\ \textcolor{comment}{\ \ \ \ ///\ Destructor:\ empty}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00405}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh_a5f0960e124d26e10cc70e2143744a07f}{00405}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh_a5f0960e124d26e10cc70e2143744a07f}{\string~MacroElementNodeUpdateRefineableCollapsibleChannelMesh}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00407}00407\ \ \ \};\ \textcolor{comment}{//\ end\ of\ mesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00409}00409\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00410}00410\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00411}00411\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00412}00412\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00413}00413\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00414}00414\ \ \ \textcolor{comment}{//========start\_of\_algebraic\_collapsible\_channel\_mesh==============}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00415}00415\ \textcolor{comment}{\ \ ///\ Collapsible\ channel\ mesh\ with\ algebraic\ node\ update}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00416}00416\ \textcolor{comment}{}\ \ \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00417}00417\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00418}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{00418}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{AlgebraicCollapsibleChannelMesh}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00419}00419\ \ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00420}00420\ \ \ \ \ \ \ \textcolor{keyword}{public}\ AlgebraicMesh}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00421}00421\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00422}00422\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00423}00423\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ upstream/collapsible/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00424}00424\ \textcolor{comment}{\ \ \ \ ///\ downstream\ segment\ and\ across\ the\ channel;\ lengths\ of\ upstream/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00425}00425\ \textcolor{comment}{\ \ \ \ ///\ collapsible/downstream\ segments\ and\ width\ of\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00426}00426\ \textcolor{comment}{\ \ \ \ ///\ GeomObject\ that\ defines\ the\ collapsible\ segment\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00427}00427\ \textcolor{comment}{\ \ \ \ ///\ TimeStepper\ (defaults\ to\ the\ default\ timestepper,\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00428}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567}{00428}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567}{AlgebraicCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00429}00429\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00430}00430\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00431}00431\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00432}00432\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00433}00433\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00434}00434\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00435}00435\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00436}00436\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00437}00437\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00438}00438\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00439}00439\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00449}00449\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00450}00450\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ geometric\ object\ to\ the\ list\ associated\ with\ this\ AlgebraicMesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00451}00451\ \ \ \ \ \ \ AlgebraicMesh::add\_geom\_object\_list\_pt(\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00453}00453\ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ algebraic\ node\ update\ operations}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00454}00454\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030}{setup\_algebraic\_node\_update}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00455}00455\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00456}00456\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00457}00457\ \textcolor{comment}{\ \ \ \ ///\ Destructor:\ empty}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00458}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed}{00458}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed}{\string~AlgebraicCollapsibleChannelMesh}}()\ \{\}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00459}00459\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00460}00460\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00461}00461\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ upstream/collapsible/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00462}00462\ \textcolor{comment}{\ \ \ \ ///\ downstream\ segment\ and\ across\ the\ channel;\ lengths\ of\ upstream/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00463}00463\ \textcolor{comment}{\ \ \ \ ///\ collapsible/downstream\ segments\ and\ width\ of\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00464}00464\ \textcolor{comment}{\ \ \ \ ///\ GeomObject\ that\ defines\ the\ collapsible\ segment\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00465}00465\ \textcolor{comment}{\ \ \ \ ///\ TimeStepper\ (defaults\ to\ the\ default\ timestepper,\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00466}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}{00466}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}{AlgebraicCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00467}00467\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00468}00468\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00469}00469\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00470}00470\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00471}00471\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00472}00472\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00473}00473\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00474}00474\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00475}00475\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00476}00476\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bl\_squash\_function\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00477}00477\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00478}00478\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00488}00488\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00489}00489\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ geometric\ object\ to\ the\ list\ associated\ with\ this\ AlgebraicMesh}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00490}00490\ \ \ \ \ \ \ AlgebraicMesh::add\_geom\_object\_list\_pt(\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00492}00492\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ boundary\ layer\ squash\ function}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00493}00493\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_ad328688647bb45bc24d724593a1e13db}{bl\_squash\_fct\_pt}}()\ =\ bl\_squash\_function\_pt;}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00495}00495\ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ MacroElement-\/based\ node\ update}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00496}00496\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh<ELEMENT>::node\_update}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00498}00498\ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ algebraic\ node\ update\ operations}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00499}00499\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030}{setup\_algebraic\_node\_update}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00500}00500\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00501}00501\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00502}00502\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ squashes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00503}00503\ \textcolor{comment}{\ \ \ \ ///\ the\ mesh\ near\ the\ walls.\ Default\ trivial\ mapping\ (the\ identity)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00504}00504\ \textcolor{comment}{\ \ \ \ ///\ leaves\ vertical\ nodal\ positions\ unchanged.\ Mapping\ is}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00505}00505\ \textcolor{comment}{\ \ \ \ ///\ used\ in\ underlying\ CollapsibleChannelDomain.\ Broken\ function}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00506}00506\ \textcolor{comment}{\ \ \ \ ///\ that\ overloads\ the\ version\ in\ the\ CollapsibleChannelMesh.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00507}00507\ \textcolor{comment}{\ \ \ \ ///\ It\ does\ not\ make\ sense\ to\ specify\ the\ function\ pointer}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00508}00508\ \textcolor{comment}{\ \ \ \ ///\ after\ the\ mesh\ has\ been\ set\ up!}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00509}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac994da2ea0b8583a8ae6db5bab8de113}{00509}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\&\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac994da2ea0b8583a8ae6db5bab8de113}{bl\_squash\_fct\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00510}00510\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00511}00511\ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00512}00512\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00513}00513\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}It\ does\ not\ make\ sense\ to\ set\ the\ bl\_squash\_fct\_pt\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00514}00514\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}outside\ the\ constructor\ as\ it's\ only\ used\ to\ set\ up\ the\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00515}00515\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}algebraic\ remesh\ data\ when\ the\ algebraic\ mesh\ is\ first\ built.\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00516}00516\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ =}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00517}00517\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}AlgebraicCollapsibleChannelMesh::bl\_squash\_fct\_pt()\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00518}00518\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00519}00519\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00520}00520\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}.str(),\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00522}00522\ \ \ \ \ \ \ \textcolor{comment}{//\ Dummy\ return}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00523}00523\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}{Dummy\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00524}00524\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00525}00525\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00526}00526\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00527}00527\ \textcolor{comment}{\ \ \ \ ///\ Function\ pointer\ for\ function\ that\ redistributes\ nodes}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00528}00528\ \textcolor{comment}{\ \ \ \ ///\ axially.\ Default\ trivial\ mapping\ (the\ identity)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00529}00529\ \textcolor{comment}{\ \ \ \ ///\ leaves\ vertical\ nodal\ positions\ unchanged.\ Mapping\ is}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00530}00530\ \textcolor{comment}{\ \ \ \ ///\ used\ in\ underlying\ CollapsibleChannelDomain.\ Broken\ function}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00531}00531\ \textcolor{comment}{\ \ \ \ ///\ that\ overloads\ the\ version\ in\ the\ CollapsibleChannelMesh.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00532}00532\ \textcolor{comment}{\ \ \ \ ///\ It\ does\ not\ make\ sense\ to\ specify\ the\ function\ pointer}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00533}00533\ \textcolor{comment}{\ \ \ \ ///\ after\ the\ mesh\ has\ been\ set\ up!}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00534}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_adc2baba06d2b00242352a7a4a16dd890}{00534}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\&\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_adc2baba06d2b00242352a7a4a16dd890}{axial\_spacing\_fct\_pt}}()}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00535}00535\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00536}00536\ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00537}00537\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00538}00538\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}It\ does\ not\ make\ sense\ to\ set\ the\ axial\_spacing\_fct\_pt\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00539}00539\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}outside\ the\ constructor\ as\ it's\ only\ used\ to\ set\ up\ the\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00540}00540\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}algebraic\ remesh\ data\ when\ the\ algebraic\ mesh\ is\ first\ built.\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00541}00541\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{function\_name}}\ =}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00542}00542\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}AlgebraicCollapsibleChannelMesh::axial\_spacing\_fct\_pt()\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00544}00544\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00545}00545\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{error\_message}}.str(),\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00547}00547\ \ \ \ \ \ \ \textcolor{comment}{//\ Dummy\ return}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00548}00548\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}{Dummy\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00549}00549\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00550}00550\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00551}00551\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00552}00552\ \textcolor{comment}{\ \ \ \ ///\ Update\ nodal\ position\ at\ time\ level\ t\ (t=0:\ present;}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00553}00553\ \textcolor{comment}{\ \ \ \ ///\ t>0:\ previous)}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00554}00554\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870}{algebraic\_node\_update}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{t}},\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{AlgebraicNode}}*\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00555}00555\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00556}00556\ \textcolor{comment}{\ \ \ \ ///\ Update\ the\ node-\/udate\ data\ after\ mesh\ adaptation.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00557}00557\ \textcolor{comment}{\ \ \ \ ///\ Empty\ -\/-\/\ no\ update\ of\ node\ update\ required\ as\ this\ is}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00558}00558\ \textcolor{comment}{\ \ \ \ ///\ non-\/refineable\ mesh.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00559}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}{00559}}\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}{update\_node\_update}}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{AlgebraicNode}}*\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\_pt}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00561}00561\ \ \ \textcolor{keyword}{protected}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00562}00562\ \textcolor{comment}{\ \ \ \ ///\ Function\ to\ setup\ the\ algebraic\ node\ update}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00563}00563\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030}{setup\_algebraic\_node\_update}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00564}00564\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00565}00565\ \textcolor{comment}{\ \ \ \ ///\ Dummy\ function\ pointer}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00566}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}{00566}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}{Dummy\_fct\_pt}};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00567}00567\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00568}00568\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00569}00569\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00570}00570\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00571}00571\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00572}00572\ \textcolor{comment}{\ \ ///////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00573}00573\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00574}00574\ \ \ \textcolor{comment}{//=====start\_of\_refineable\_algebraic\_collapsible\_channel\_mesh=====}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00575}00575\ \textcolor{comment}{\ \ ///\ Refineable\ version\ of\ the\ CollapsibleChannel\ mesh\ with}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00576}00576\ \textcolor{comment}{\ \ ///\ algebraic\ node\ update.}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00577}00577\ \textcolor{comment}{}\ \ \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00578}00578\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00579}\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh}{00579}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh}{RefineableAlgebraicCollapsibleChannelMesh}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00580}00580\ \ \ \ \ :\ \textcolor{keyword}{public}\ RefineableQuadMesh<ELEMENT>,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00581}00581\ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{AlgebraicCollapsibleChannelMesh}}<ELEMENT>}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00582}00582\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00583}00583\ \ \ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00584}00584\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ upstream/collapsible/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00585}00585\ \textcolor{comment}{\ \ \ \ ///\ downstream\ segment\ and\ across\ the\ channel;\ lengths\ of\ upstream/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00586}00586\ \textcolor{comment}{\ \ \ \ ///\ collapsible/downstream\ segments\ and\ width\ of\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00587}00587\ \textcolor{comment}{\ \ \ \ ///\ GeomObject\ that\ defines\ the\ collapsible\ segment\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00588}00588\ \textcolor{comment}{\ \ \ \ ///\ TimeStepper\ (defaults\ to\ the\ default\ timestepper,\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00589}\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_a4d55ff9ee001c13c51d3c914f5cdcce8}{00589}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_a4d55ff9ee001c13c51d3c914f5cdcce8}{RefineableAlgebraicCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00590}00590\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00591}00591\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00592}00592\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00593}00593\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00594}00594\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00595}00595\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00596}00596\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00597}00597\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00598}00598\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00599}00599\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00600}00600\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00601}00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00607}00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00608}00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00609}00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00610}00610\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{AlgebraicCollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00611}00611\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00613}00613\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00614}00614\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00617}00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00618}00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00619}00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00620}00620\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00621}00621\ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ quadtree\ forest}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00622}00622\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{setup\_quadtree\_forest}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00623}00623\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00624}00624\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00625}00625\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00626}00626\ \textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ upstream/collapsible/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00627}00627\ \textcolor{comment}{\ \ \ \ ///\ downstream\ segment\ and\ across\ the\ channel;\ lengths\ of\ upstream/}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00628}00628\ \textcolor{comment}{\ \ \ \ ///\ collapsible/downstream\ segments\ and\ width\ of\ channel,\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00629}00629\ \textcolor{comment}{\ \ \ \ ///\ GeomObject\ that\ defines\ the\ collapsible\ segment\ and\ pointer\ to}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00630}00630\ \textcolor{comment}{\ \ \ \ ///\ TimeStepper\ (defaults\ to\ the\ default\ timestepper,\ Steady).}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00631}\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_af36c924e3d8cc2a8659db4185d6612be}{00631}}\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_af36c924e3d8cc2a8659db4185d6612be}{RefineableAlgebraicCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00632}00632\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00633}00633\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00634}00634\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00635}00635\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00636}00636\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00637}00637\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00638}00638\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00639}00639\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00640}00640\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00641}00641\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{CollapsibleChannelDomain::BLSquashFctPt}}\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bl\_squash\_function\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00642}00642\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{TimeStepper}}*\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}\ =\ \&Mesh::Default\_TimeStepper)}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00643}00643\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{CollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00644}00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00645}00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00646}00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00647}00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00649}00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00650}00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00652}00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00653}00653\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{AlgebraicCollapsibleChannelMesh}}<\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}>(nup,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00654}00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ncollapsible,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00655}00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ndown,}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00656}00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00657}00657\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00659}00659\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00660}00660\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00662}00662\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bl\_squash\_function\_pt}},}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00663}00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00664}00664\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00665}00665\ \ \ \ \ \ \ \textcolor{comment}{//\ Build\ quadtree\ forest}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00666}00666\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{setup\_quadtree\_forest}}();}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00667}00667\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00668}00668\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00669}00669\ \textcolor{comment}{\ \ \ \ ///\ Update\ the\ node\ update\ data\ for\ specified\ node\ following}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00670}00670\ \textcolor{comment}{\ \ \ \ ///\ any\ mesh\ adapation}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00671}00671\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh_a4bc2b99f24e5e5dc534fe5906d4f4e6e}{update\_node\_update}}(\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{AlgebraicNode}}*\&\ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\_pt}});}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00672}00672\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00673}00673\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00674}00674\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00676}00676\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{collapsible__channel__mesh_8template_8cc}{collapsible\_channel\_mesh.template.cc}}"{}}}
+\DoxyCodeLine{\Hypertarget{collapsible__channel__mesh_8h_source_l00677}00677\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

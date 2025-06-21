@@ -1,0 +1,198 @@
+\doxysection{oomph\+::MPI\+\_\+\+Helpers Class Reference}
+\hypertarget{classoomph_1_1MPI__Helpers}{}\label{classoomph_1_1MPI__Helpers}\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+
+
+\doxylink{classoomph_1_1MPI__Helpers}{MPI\+\_\+\+Helpers} class contains static helper methods to support MPI within oomph-\/lib. The methods init(...) and \doxylink{classoomph_1_1MPI__Helpers_a471bc4697fd5edeea3fb4af1bba0e541}{finalize()} initialize and finalize MPI in oomph-\/lib and manage the oomph-\/libs global communicator \doxylink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{communicator\+\_\+pt()}. NOTE\+: This class encapsulates static helper methods and instances of it CANNOT be instantiated.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_a663a35b00078ebefdc0ea0b7190212e4}{init}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argv}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{make\+\_\+duplicate\+\_\+of\+\_\+mpi\+\_\+comm\+\_\+world}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em initialise mpi (oomph-\/libs equivalent of MPI\+\_\+\+Init(...)) Initialises MPI and creates the global oomph-\/lib communicator. If optional boolean flag is set to false, we use MPI\+\_\+\+COMM\+\_\+\+WORLD itself as oomph-\/lib\textquotesingle{}s communicator. Defaults to true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_a471bc4697fd5edeea3fb4af1bba0e541}{finalize}} ()
+\begin{DoxyCompactList}\small\item\em finalize mpi (oomph-\/lib equivalent of MPI\+\_\+\+Finalize()) Deletes the global oomph-\/lib communicator and finalizes MPI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{communicator\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em access to global communicator. This is the oomph-\/lib equivalent of MPI\+\_\+\+COMM\+\_\+\+WORLD \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}{mpi\+\_\+has\+\_\+been\+\_\+initialised}} ()
+\begin{DoxyCompactList}\small\item\em return true if MPI has been initialised \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MPI__Helpers_afb01ddfbe038936ec832cdbea6e677e8}{MPI\+\_\+\+Helpers}} ()
+\begin{DoxyCompactList}\small\item\em private default constructor definition (to prevent instances of the class being instantiated) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MPI__Helpers_acf521b68d094e6a88a8bf14f8ebe3185}{MPI\+\_\+\+Helpers}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers}{MPI\+\_\+\+Helpers}} \&)
+\begin{DoxyCompactList}\small\item\em private copy constructor definition (to prevent instances of the class being instantiated) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_aa8d80db3f7a06074ff4a92e3bb4ab91d}{MPI\+\_\+has\+\_\+been\+\_\+initialised}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Bool set to true if MPI has been initialised. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MPI__Helpers_a78e44036f7979616432483c805e2c93c}{Communicator\+\_\+pt}} = 0
+\begin{DoxyCompactList}\small\item\em the global communicator \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1MPI__Helpers}{MPI\+\_\+\+Helpers} class contains static helper methods to support MPI within oomph-\/lib. The methods init(...) and \doxylink{classoomph_1_1MPI__Helpers_a471bc4697fd5edeea3fb4af1bba0e541}{finalize()} initialize and finalize MPI in oomph-\/lib and manage the oomph-\/libs global communicator \doxylink{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}{communicator\+\_\+pt()}. NOTE\+: This class encapsulates static helper methods and instances of it CANNOT be instantiated. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00841}{841}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MPI__Helpers_afb01ddfbe038936ec832cdbea6e677e8}\label{classoomph_1_1MPI__Helpers_afb01ddfbe038936ec832cdbea6e677e8} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!MPI\_Helpers@{MPI\_Helpers}}
+\index{MPI\_Helpers@{MPI\_Helpers}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{MPI\_Helpers()}{MPI\_Helpers()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+MPI\+\_\+\+Helpers\+::\+MPI\+\_\+\+Helpers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+private default constructor definition (to prevent instances of the class being instantiated) 
+
+\Hypertarget{classoomph_1_1MPI__Helpers_acf521b68d094e6a88a8bf14f8ebe3185}\label{classoomph_1_1MPI__Helpers_acf521b68d094e6a88a8bf14f8ebe3185} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!MPI\_Helpers@{MPI\_Helpers}}
+\index{MPI\_Helpers@{MPI\_Helpers}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{MPI\_Helpers()}{MPI\_Helpers()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+MPI\+\_\+\+Helpers\+::\+MPI\+\_\+\+Helpers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MPI__Helpers}{MPI\+\_\+\+Helpers}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+private copy constructor definition (to prevent instances of the class being instantiated) 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe}\label{classoomph_1_1MPI__Helpers_ac16964b22bfd4f657490802beb600ffe} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!communicator\_pt@{communicator\_pt}}
+\index{communicator\_pt@{communicator\_pt}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{communicator\_pt()}{communicator\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+access to global communicator. This is the oomph-\/lib equivalent of MPI\+\_\+\+COMM\+\_\+\+WORLD 
+
+access to the global oomph-\/lib communicator 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l01054}{1054}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00879}{Communicator\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00876}{MPI\+\_\+has\+\_\+been\+\_\+initialised}}.
+
+
+
+Referenced by \mbox{\hyperlink{error__estimator_8cc_source_l01803}{oomph\+::\+Z2\+Error\+Estimator\+::doc\+\_\+flux()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01432}{oomph\+::\+Memory\+Usage\+::doc\+\_\+my\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01497}{oomph\+::\+Memory\+Usage\+::doc\+\_\+total\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01103}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::full\+\_\+setup()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00041}{oomph\+::\+Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper\+::get\+\_\+elastic\+\_\+preconditioner\+\_\+hypre()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00946}{oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{nodes_8h_source_l01243}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}, \mbox{\hyperlink{problem_8cc_source_l00071}{oomph\+::\+Problem\+::\+Problem()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01591}{oomph\+::\+Memory\+Usage\+::run\+\_\+continous\+\_\+top()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00752}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01078}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01649}{oomph\+::\+Memory\+Usage\+::stop\+\_\+continous\+\_\+top()}}.
+
+\Hypertarget{classoomph_1_1MPI__Helpers_a471bc4697fd5edeea3fb4af1bba0e541}\label{classoomph_1_1MPI__Helpers_a471bc4697fd5edeea3fb4af1bba0e541} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!finalize@{finalize}}
+\index{finalize@{finalize}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{finalize()}{finalize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+MPI\+\_\+\+Helpers\+::finalize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+finalize mpi (oomph-\/lib equivalent of MPI\+\_\+\+Finalize()) Deletes the global oomph-\/lib communicator and finalizes MPI. 
+
+finalize mpi 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l01040}{1040}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00879}{Communicator\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{oomph\+::\+Command\+Line\+Args\+::parse\+\_\+and\+\_\+assign()}}.
+
+\Hypertarget{classoomph_1_1MPI__Helpers_a663a35b00078ebefdc0ea0b7190212e4}\label{classoomph_1_1MPI__Helpers_a663a35b00078ebefdc0ea0b7190212e4} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!init@{init}}
+\index{init@{init}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+MPI\+\_\+\+Helpers\+::init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{make\+\_\+duplicate\+\_\+of\+\_\+mpi\+\_\+comm\+\_\+world = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+initialise mpi (oomph-\/libs equivalent of MPI\+\_\+\+Init(...)) Initialises MPI and creates the global oomph-\/lib communicator. If optional boolean flag is set to false, we use MPI\+\_\+\+COMM\+\_\+\+WORLD itself as oomph-\/lib\textquotesingle{}s communicator. Defaults to true. 
+
+Initialize mpi. If optional boolean flag is set to false, we use MPI\+\_\+\+COMM\+\_\+\+WORLD itself as oomph-\/lib\textquotesingle{}s communicator. Defaults to true. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00991}{991}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00792}{oomph\+::\+MPIOutput\+Modifier\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00879}{Communicator\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00876}{MPI\+\_\+has\+\_\+been\+\_\+initialised}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00955}{oomph\+::oomph\+\_\+mpi\+\_\+output}}, and \mbox{\hyperlink{oomph__definitions_8h_source_l00483}{oomph\+::\+Oomph\+Info\+::output\+\_\+modifier\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e}\label{classoomph_1_1MPI__Helpers_aa376d403f6bc99e8595d227135932b0e} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!mpi\_has\_been\_initialised@{mpi\_has\_been\_initialised}}
+\index{mpi\_has\_been\_initialised@{mpi\_has\_been\_initialised}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{mpi\_has\_been\_initialised()}{mpi\_has\_been\_initialised()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+return true if MPI has been initialised 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{861}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00876}{MPI\+\_\+has\+\_\+been\+\_\+initialised}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00278}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01432}{oomph\+::\+Memory\+Usage\+::doc\+\_\+my\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01497}{oomph\+::\+Memory\+Usage\+::doc\+\_\+total\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01846}{oomph\+::\+Super\+LUSolver\+::factorise()}}, \mbox{\hyperlink{error__estimator_8cc_source_l00946}{oomph\+::\+Z2\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}, \mbox{\hyperlink{problem_8cc_source_l08816}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l00071}{oomph\+::\+Problem\+::\+Problem()}}, \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01591}{oomph\+::\+Memory\+Usage\+::run\+\_\+continous\+\_\+top()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01649}{oomph\+::\+Memory\+Usage\+::stop\+\_\+continous\+\_\+top()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MPI__Helpers_a78e44036f7979616432483c805e2c93c}\label{classoomph_1_1MPI__Helpers_a78e44036f7979616432483c805e2c93c} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!Communicator\_pt@{Communicator\_pt}}
+\index{Communicator\_pt@{Communicator\_pt}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{Communicator\_pt}{Communicator\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} oomph\+::\+MPI\+\_\+\+Helpers\+::\+Communicator\+\_\+pt = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+the global communicator 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00879}{879}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l01054}{communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01040}{finalize()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00991}{init()}}.
+
+\Hypertarget{classoomph_1_1MPI__Helpers_aa8d80db3f7a06074ff4a92e3bb4ab91d}\label{classoomph_1_1MPI__Helpers_aa8d80db3f7a06074ff4a92e3bb4ab91d} 
+\index{oomph::MPI\_Helpers@{oomph::MPI\_Helpers}!MPI\_has\_been\_initialised@{MPI\_has\_been\_initialised}}
+\index{MPI\_has\_been\_initialised@{MPI\_has\_been\_initialised}!oomph::MPI\_Helpers@{oomph::MPI\_Helpers}}
+\doxysubsubsection{\texorpdfstring{MPI\_has\_been\_initialised}{MPI\_has\_been\_initialised}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+MPI\+\_\+\+Helpers\+::\+MPI\+\_\+has\+\_\+been\+\_\+initialised = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Bool set to true if MPI has been initialised. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00876}{876}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l01054}{communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00991}{init()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{mpi\+\_\+has\+\_\+been\+\_\+initialised()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__utilities_8h}{oomph\+\_\+utilities.\+h}}\item 
+\mbox{\hyperlink{oomph__utilities_8cc}{oomph\+\_\+utilities.\+cc}}\end{DoxyCompactItemize}

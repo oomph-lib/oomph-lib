@@ -1,0 +1,525 @@
+\doxysection{oomph\+::Oc\+Tree\+Root Class Reference}
+\hypertarget{classoomph_1_1OcTreeRoot}{}\label{classoomph_1_1OcTreeRoot}\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+
+
+\doxylink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root} is a \doxylink{classoomph_1_1OcTree}{Oc\+Tree} that forms the root of a (recursive) octree. The "{}root node"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \doxylink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}).  
+
+
+
+
+{\ttfamily \#include $<$octree.\+h$>$}
+
+Inheritance diagram for oomph\+::Oc\+Tree\+Root\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OcTreeRoot}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}{Oc\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for the root octree\+: Pass pointer to the \doxylink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$} that is represented by the \doxylink{classoomph_1_1OcTree}{Oc\+Tree}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336}{Oc\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d}{edge\+\_\+neighbour\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}{nedge\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Return number of edge-\/neighbouring \doxylink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root} in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317}{add\+\_\+edge\+\_\+neighbour\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oc\+\_\+tree\+\_\+root\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Add pointer to the edge-\/neighbouring \mbox{[}Oc\mbox{]}\doxylink{classoomph_1_1TreeRoot}{Tree\+Root} in the (enumerated) (edge) direction -- maintains uniqueness. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}{up\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tree\+\_\+root\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Return up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}{set\+\_\+up\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tree\+\_\+root\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dir}})
+\begin{DoxyCompactList}\small\item\em Set up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6}{right\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tree\+\_\+root\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}{set\+\_\+right\+\_\+equivalent}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tree\+\_\+root\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dir}})
+\begin{DoxyCompactList}\small\item\em The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{octree\+\_\+root\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em If octree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}faces L/\+R/\+F/\+B/\+U/D or edges DB/\+UP/...\mbox{]} in which it is found, otherwise return OMEGA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OcTree}{oomph\+::\+Oc\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1OcTree_a5c7bf77c8700898c428dacbdff6b334c}{\texorpdfstring{$\sim$}{\string~}\+Oc\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Note\+: Deleting a octree also deletes the objects associated with all non-\/leaf nodes! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTree_a2d729ac4b94328c7168bbcf423421edd}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTree_a14dba08782264f0d6008a8c1578b41e1}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OcTree_af820674d7413566c25e895cd49a5e8a2}{construct\+\_\+son}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Overload the function construct\+\_\+son to ensure that the son is a specific \doxylink{classoomph_1_1OcTree}{Oc\+Tree} and not a general \doxylink{classoomph_1_1Tree}{Tree}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OcTree_a690c4fbbca73bd48c0bc3b2913a9b39c}{gteq\+\_\+face\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{translate\+\_\+s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s\+\_\+sw}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s\+\_\+ne}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{diff\+\_\+level}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{in\+\_\+neighbouring\+\_\+tree}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Find (pointer to) `greater-\/or-\/equal-\/sized face neighbour' in given direction (L/\+R/\+U/\+D/\+F/B). Another way of interpreting this is that we\textquotesingle{}re looking for the neighbour across the present element\textquotesingle{}s face \textquotesingle{}direction\textquotesingle{}. The various arguments return additional information about the size and relative orientation of the neighbouring octree. To interpret these we use the following {\bfseries{General convention\+:}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OcTree_ab5a26409cd49a430095915c76060f476}{gteq\+\_\+true\+\_\+edge\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+root\+\_\+edge\+\_\+neighbour}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nroot\+\_\+edge\+\_\+neighbour}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{translate\+\_\+s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{diff\+\_\+level}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Find (pointer to) `greater-\/or-\/equal-\/sized true edge neighbour' in the given direction (LB,RB,DB,UB \mbox{[}the back edges\mbox{]}, LD,RD,LU,RU \mbox{[}the side edges\mbox{]}, LF,RF,DF,UF \mbox{[}the front edges\mbox{]}). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1OcTree_a68218b6e02594bef23cb141af8a19ffb}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Check all neighbours. Return success (0) if the max. distance between corresponding points in the neighbours is less than the tolerance specified in the static value \doxylink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Tree\+::\+Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Tree_ace0b4169cf94a040c280af8e14f6a283}{\texorpdfstring{$\sim$}{\string~}\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Note\+: Deleting a tree also deletes the objects associated with its non-\/leave nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_a50dce113a40c6ac422353ab149b2d4eb}{Tree}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a6bce57d784f256d8d7b8d14432a7d77a}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the pointer to the object (\doxylink{classoomph_1_1RefineableElement}{Refineable\+Element}) represented by the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a96a95bd9942e906fde87194845a1868c}{flush\+\_\+object}} ()
+\begin{DoxyCompactList}\small\item\em Flush the object represented by the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a9851a9dd06212b6891ce9a8bc832d4cf}{son\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{son\+\_\+index}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_ab7026d14ead1a8d91ce417dfd0cd9478}{set\+\_\+son\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1Tree_a9851a9dd06212b6891ce9a8bc832d4cf}{son\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Tree_a31e4123b40f6fb52d180a154c9123e85}{nsons}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of sons (zero if it\textquotesingle{}s a leaf node) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a34df656d2f298dbbdf60e7890a3dff2f}{flush\+\_\+sons}} ()
+\begin{DoxyCompactList}\small\item\em Flush the sons. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1Tree_a33b9926754cddfaafd9869af3fe266e7}{root\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return pointer to root of the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_aa4a6a5242b5969cfd8d7d37da68f3495}{root\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to root of the tree (const version) \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a975ccfd63ffa14a04f14a37b3d2ff931}{split\+\_\+if\+\_\+required}} ()
+\begin{DoxyCompactList}\small\item\em If required, split the leaf and create its sons -- criterion\+: bool \doxylink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt()}-\/\texorpdfstring{$>$}{>} to\+\_\+be\+\_\+refined() = true. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a6502324233a86eeeadba7f46505656af}{p\+\_\+refine\+\_\+if\+\_\+required}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If required, p-\/refine the leaf -- criterion\+: bool \doxylink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt()}-\/\texorpdfstring{$>$}{>} to\+\_\+be\+\_\+p\+\_\+refined() = true or bool \doxylink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt()}-\/\texorpdfstring{$>$}{>} to\+\_\+be\+\_\+p\+\_\+unrefined() = true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_af4f977931ece6b719a9e616037bb2481}{merge\+\_\+sons\+\_\+if\+\_\+required}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em If required, merge the four sons for unrefinement -- criterion\+: bool \doxylink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt()}-\/\texorpdfstring{$>$}{>} sons\+\_\+to\+\_\+be\+\_\+unrefined() = true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_aea17489589a1872db51f2b142da4c1fb}{deactivate\+\_\+object}} ()
+\begin{DoxyCompactList}\small\item\em Call the \doxylink{classoomph_1_1RefineableElement}{Refineable\+Element}\textquotesingle{}s deactivate\+\_\+element() function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a3caab39c8bee6fb65bbafed523aa6d3d}{traverse\+\_\+all}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{member\+\_\+function}})
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \doxylink{classoomph_1_1Tree}{Tree} member function member\+\_\+function() at all its "{}nodes"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_af5c67186ca9c87eef9ce7eaa0af41057}{traverse\+\_\+all}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{member\+\_\+function}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and excute void \doxylink{classoomph_1_1Tree}{Tree} member function that takes a pointer to a mesh as an argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_aef175445b09edb47624c4b88c6d548bc}{traverse\+\_\+all\+\_\+but\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{member\+\_\+function}})
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \doxylink{classoomph_1_1Tree}{Tree} member function member\+\_\+function() at all its "{}nodes"{} aparat from the leaves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a22e0e3695dd8986e439927b7657ff741}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Tree\+::\+Void\+Member\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{member\+\_\+function}})
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \doxylink{classoomph_1_1Tree}{Tree} member function member\+\_\+function() only at its leaves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a914e74ef473b7e82299ea9337d37830d}{traverse\+\_\+leaves}} (\mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Tree\+::\+Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{member\+\_\+function}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Traverse the tree and execute void \doxylink{classoomph_1_1Tree}{Tree} member function that takes a pointer to a mesh as an argument only at its leaves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_accfbeb9178ce92a8a51e3a15293a86d1}{stick\+\_\+leaves\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Traverse tree and stick pointers to leaf "{}nodes"{} (only) into \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_a2c84b4e4700a825ef0a6ca533b9ae895}{stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&)
+\begin{DoxyCompactList}\small\item\em Traverse and stick pointers to all "{}nodes"{} into \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return son type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Tree_a72000456c76880e3f78f8f8fb43d49d8}{is\+\_\+leaf}} ()
+\begin{DoxyCompactList}\small\item\em Return true if the tree is a leaf node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to father\+: NULL if it\textquotesingle{}s a root node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Tree_ac0cf27d3116db0f8d2f18b3faf09ec15}{set\+\_\+father\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the father. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Tree_ab3eba84432fcc595684ac7eb8331b8ee}{level}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the level of the \doxylink{classoomph_1_1Tree}{Tree} (root=0) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TreeRoot}{oomph\+::\+Tree\+Root}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot_a9220f966655424676f4a5710b016c23d}{Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for the (empty) root tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot_a7db9e51a9aa23d8894ad0fc573853d05}{Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeRoot_a1c486b91b11d6524a23f4ab8298f696b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TreeRoot_ae25383c6dd2ab2def3dc98bb5e279d58}{neighbour\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}})
+\begin{DoxyCompactList}\small\item\em Return the pointer to the neighbouring Tree\+Roots in specified direction. Returns NULL if there\textquotesingle{}s no neighbour in this direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TreeRoot_a7be347e54e34f924c008c302f5146064}{is\+\_\+neighbour\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}})
+\begin{DoxyCompactList}\small\item\em Return whether the neighbour in the particular direction is periodic. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeRoot_ad4a2c51b2b42261bd8dde67ca32c594c}{set\+\_\+neighbour\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}})
+\begin{DoxyCompactList}\small\item\em Set the neighbour in particular direction to be periodic. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeRoot_a9e20f4787d7b34d5f4462dea63fd0204}{set\+\_\+neighbour\+\_\+nonperiodic}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}})
+\begin{DoxyCompactList}\small\item\em Set the neighbour in particular direction to be nonperiodic. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TreeRoot_a81be1a835829a48f7f443dcc85f369b9}{nneighbour}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of neighbours. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_ae3c71331aaf452591ba6a3ab0cdbcdbc}{Edge\+\_\+neighbour\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map of pointers to the edge-\/neighbouring \mbox{[}Oc\mbox{]}Tree\+Roots\+: Edge\+\_\+neighbour\+\_\+pt\mbox{[}direction\mbox{]} is \doxylink{classoomph_1_1Vector}{Vector} to the pointers to the \mbox{[}Oc\mbox{]}\doxylink{classoomph_1_1TreeRoot}{Tree\+Root}\textquotesingle{}s edge neighbours in the (enumerated) (edge) direction. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a247955b8a3eb01e227ec2ee1f3bb96ce}{Up\+\_\+equivalent}}
+\begin{DoxyCompactList}\small\item\em Map giving the Up equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-\/front axis), say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTreeRoot_a739d09d26896cfb6924f4d023f5d791f}{Right\+\_\+equivalent}}
+\begin{DoxyCompactList}\small\item\em Map giving the Right equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our right direction is the neighbour\textquotesingle{}s right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Right\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=R (read as\+: "{}in my neighbour, my Right is its Right"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(Tree\+::\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a6b8ef236d41f52c92973682ca83679d5}{Void\+Member\+Fct\+Pt}}) ()
+\begin{DoxyCompactList}\small\item\em Function pointer to argument-\/free void \doxylink{classoomph_1_1Tree}{Tree} member function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(Tree\+::\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a498ffc10556f4335e831a06fc885a27a}{Void\+Mesh\+Pt\+Argument\+Member\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function pointer to a void \doxylink{classoomph_1_1Tree}{Tree} member function that takes a pointer to a mesh as its argument. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OcTree}{oomph\+::\+Oc\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a29d019becbc07f9ea2811a0ff0881d9a}{faces\+\_\+of\+\_\+common\+\_\+edge}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}})
+\begin{DoxyCompactList}\small\item\em Function that, given an edge, returns the two faces on which it. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTree_a5d7b0830cd9c913786e23259c69c71a0}{setup\+\_\+static\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Setup the static data, rotation and reflection schemes, etc. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTree_afd54b3cd1f4196d618e73d19bb4ba157}{doc\+\_\+face\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{forest\+\_\+nodes\+\_\+pt}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{neighbours\+\_\+file}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{neighbours\+\_\+txt\+\_\+file}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&max\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Doc/check all face neighbours of octree (nodes) contained in the \doxylink{classoomph_1_1Vector}{Vector} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OcTree_a728b0580f568f9d5fb814458b6c75fe4}{doc\+\_\+true\+\_\+edge\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{forest\+\_\+nodes\+\_\+pt}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{neighbours\+\_\+file}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{no\+\_\+true\+\_\+edge\+\_\+file}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{neighbours\+\_\+txt\+\_\+file}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&max\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Doc/check all true edge neighbours of octree (nodes) contained in the \doxylink{classoomph_1_1Vector}{Vector} forest\+\_\+node\+\_\+pt. Output into neighbours\+\_\+file which can be viewed from tecplot with Oc\+Tree\+Neighbours.\+mcr Neighbour info and errors are displayed on neighbours\+\_\+txt\+\_\+file. Finally, compute the max. error between vertices when viewed from neighhbouring element. If the two filestreams are closed, output is suppressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTree_ab03edae455d5bd788acf426ca3f87b9d}{get\+\_\+the\+\_\+other\+\_\+face}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnode1d}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}})
+\begin{DoxyCompactList}\small\item\em If an edge is bordered by the nodes whose local numbers are n1 and n2 in an element with nnode1d nodes along each coordinate direction, then this edge is shared by two faces. This function takes one of these faces as the argument {\ttfamily face} and returns the other one. ({\ttfamily face} is a direction in the set U,D,F,B,L,R). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1OcTree_af2a129b95ad303ed340bb8bd86e05384}{vertex\+\_\+to\+\_\+node\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vertex}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnode1d}})
+\begin{DoxyCompactList}\small\item\em Return the local node number of given vertex \mbox{[}LDB,RDB,...\mbox{]} in an element with nnode1d nodes in each coordinate direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTree_a43cbe5258a41168fe2d891e52ae64e6b}{node\+\_\+number\+\_\+to\+\_\+vertex}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnode1d}})
+\begin{DoxyCompactList}\small\item\em Return the vertex \mbox{[}LDB,RDB,...\mbox{]} of local (vertex) node n in an element with nnode1d nodes in each coordinate direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a25e5185f0395a19883e216fd80103cf7}{rotate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+up}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+right}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dir}})
+\begin{DoxyCompactList}\small\item\em If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\+\_\+right then the direction vector {\ttfamily dir} becomes rotate(new\+\_\+up, new\+\_\+right, dir) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1OcTree_ab65a00f8f47eb8b6da56ffa9d6ba8f36}{rotate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+up}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+right}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dir}})
+\begin{DoxyCompactList}\small\item\em If U\mbox{[}p\mbox{]} becomes new\+\_\+up and R\mbox{[}ight\mbox{]} becomes new\+\_\+right then the direction {\ttfamily dir} becomes {\ttfamily rotate(new\+\_\+up, new\+\_\+right, dir)} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Tree_a939e2d66696d9d59b47cea8c8d05957c}{max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1OcTree}{oomph\+::\+Oc\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a2e9487b716f4d583aada06a850b8eae9}{Direct\+\_\+string}}
+\begin{DoxyCompactList}\small\item\em Translate (enumerated) directions into strings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a50b5b6208e34976cb3fd50e84b5c2d05}{Reflect\+\_\+face}}
+\begin{DoxyCompactList}\small\item\em Get opposite face, e.\+g. Reflect\+\_\+face\mbox{[}L\mbox{]}=R. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_aeb757b41fc1c4b7ea697de40c19b6c36}{Reflect\+\_\+edge}}
+\begin{DoxyCompactList}\small\item\em Get opposite edge, e.\+g. Reflect\+\_\+edge\mbox{[}DB\mbox{]}=UF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_acee0e40be5a1aa25e7356e23ec327636}{Reflect\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em Get opposite vertex, e.\+g. Reflect\+\_\+vertex\mbox{[}LDB\mbox{]}=RUF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_acf182a71db90c350c3f1d334d73d103f}{Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily \doxylink{classoomph_1_1Vector}{Vector}} of vectors containing the two vertices for each edge, e.\+g. {\ttfamily Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}\mbox{[}LU\mbox{]}\mbox{[}0\mbox{]}=LUB and {\ttfamily Vertex\+\_\+at\+\_\+end\+\_\+of\+\_\+edge}\mbox{[}LU\mbox{]}\mbox{[}1\mbox{]}=LUF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1OcTree_aec83bade91057d89aa3896274cb96b7e}{Vector\+\_\+to\+\_\+direction}}
+\begin{DoxyCompactList}\small\item\em Each vector representing a direction can be translated into a direction, either a son type (vertex), a face or an edge. E.\+g. \+: Vector\+\_\+to\+\_\+direction\mbox{[}(1,-\/1,1)\mbox{]}=RDF, Vector\+\_\+to\+\_\+direction\mbox{[}(0,1,0)\mbox{]}=U. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_adf813fbb9cffe89fb51f3c8ccd3083ca}{Direction\+\_\+to\+\_\+vector}}
+\begin{DoxyCompactList}\small\item\em For each direction, i.\+e. a son\+\_\+type (vertex), a face or an edge, this defines a vector that indicates this direction. E.\+g \+: Direction\+\_\+to\+\_\+vector\mbox{[}RDB\mbox{]}=(1,-\/1,-\/1), Direction\+\_\+to\+\_\+vector\mbox{[}U\mbox{]}=(0,1,0) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} std\+::map$<$ std\+::pair$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$, std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$, std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1OcTree_a88cff579697781e1ec50c86517feec77}{Up\+\_\+and\+\_\+right\+\_\+equivalent\+\_\+for\+\_\+pairs\+\_\+of\+\_\+vertices}}
+\begin{DoxyCompactList}\small\item\em Storage for the up/right-\/equivalents corresponding to two pairs of vertices along an element edge\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1Tree_a9e532196340dcd859ff8207eea2ddbbc}{OMEGA}} = 26
+\begin{DoxyCompactList}\small\item\em Default value for an unassigned neighbour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OcTree}{oomph\+::\+Oc\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OcTree_abb830075e2f08aa68bf65a07089039ca}{Oc\+Tree}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTree_a2c0f7987566846a0451bdc1ed522a2d4}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object (a \doxylink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$}). This is protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OcTree_af79e3cbf9d0c65f9e4a01207d65d4967}{Oc\+Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son (LDB,RDB,...) it is. Protected because Oc\+Trees can only be created internally, during the split operation. Only Oc\+Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Tree_ada92f1aa44ee6ef5b52ec5ad0af00359}{Tree}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_a6e78c3a130add917de182ab5f1674531}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Default constructor for empty (root) tree\+: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree_a9d611dde1f429500330f28e56ee71883}{Tree}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Tree_aa2918f6d84795c9f366adb178e287843}{father\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1Tree_a7537f8fe7c896d2220eb2da03567b34d}{son\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Constructor for tree that has a father\+: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only Tree\+Roots can be created externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a61782afd668561ad7ab324f658ffeb6a}{Root\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the root of the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a001ce5515a3d76cdad248695e149504b}{Father\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the Father of the \doxylink{classoomph_1_1Tree}{Tree}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1Tree_ac6b9069f345b296654421604c5569af6}{Son\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to the sons of the \doxylink{classoomph_1_1Tree}{Tree}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1Tree_a9ac30decb7a63027906880620f8b98ee}{Level}}
+\begin{DoxyCompactList}\small\item\em Level of the \doxylink{classoomph_1_1Tree}{Tree} (level 0 = root) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1Tree_a83fe7895af25c9f60062c081fc51967c}{Son\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Son type (e.\+g. SW/\+SE/\+NW/\+NE in a quadtree) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Tree_a61ee20b575da510512d0e108cf7b06c6}{Object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the object represented by the tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1TreeRoot}{oomph\+::\+Tree\+Root}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TreeRoot_a8923854080ee44a2d1be477000309b13}{Neighbour\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map of pointers to the neighbouring Tree\+Roots\+: Neighbour\+\_\+pt\mbox{[}direction\mbox{]} returns the pointer to the \doxylink{classoomph_1_1TreeRoot}{Tree\+Root}\textquotesingle{}s neighbour in the (enumerated) direction. Returns NULL if there\textquotesingle{}s no neighbour in this direction. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} $>$ \mbox{\hyperlink{classoomph_1_1TreeRoot_a067533f9b739e6c185ce776ea0c98e88}{Neighbour\+\_\+periodic}}
+\begin{DoxyCompactList}\small\item\em Map of booleans used for periodic boundaries\+: Neighbour\+\_\+periodic\+\_\+direction\mbox{[}directon\mbox{]} returns true if the neighbour in that direction is actually a periodic neighbour --- shared data values, but independent position. The default return of the map is false. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1OcTree}{oomph\+::\+Oc\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OcTree_addaa397d11580ec949531c8ae9b082a5}{Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Bool indicating that static member data has been setup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Tree_aef9abebc166fa3bf81ecb59ec0d5d6b2}{Max\+\_\+neighbour\+\_\+finding\+\_\+tolerance}} = 1.\+0e-\/14
+\begin{DoxyCompactList}\small\item\em Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root} is a \doxylink{classoomph_1_1OcTree}{Oc\+Tree} that forms the root of a (recursive) octree. The "{}root node"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \doxylink{classoomph_1_1OcTreeForest}{Oc\+Tree\+Forest}). 
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00610}{610}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d}\label{classoomph_1_1OcTreeRoot_a594278fd254e72415e1523b1b8e7273d} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!OcTreeRoot@{OcTreeRoot}}
+\index{OcTreeRoot@{OcTreeRoot}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{OcTreeRoot()}{OcTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the root octree\+: Pass pointer to the \doxylink{classoomph_1_1RefineableQElement_3_013_01_4}{Refineable\+QElement$<$3$>$} that is represented by the \doxylink{classoomph_1_1OcTree}{Oc\+Tree}. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00641}{641}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00412}{oomph\+::\+Oc\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336}\label{classoomph_1_1OcTreeRoot_a3da527433d221179d7e5eed13d547336} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!OcTreeRoot@{OcTreeRoot}}
+\index{OcTreeRoot@{OcTreeRoot}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{OcTreeRoot()}{OcTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oc\+Tree\+Root\+::\+Oc\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317}\label{classoomph_1_1OcTreeRoot_a92ccf3b396de331440c5dcba2e024317} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!add\_edge\_neighbour\_pt@{add\_edge\_neighbour\_pt}}
+\index{add\_edge\_neighbour\_pt@{add\_edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{add\_edge\_neighbour\_pt()}{add\_edge\_neighbour\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oc\+Tree\+Root\+::add\+\_\+edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{oc\+\_\+tree\+\_\+root\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add pointer to the edge-\/neighbouring \mbox{[}Oc\mbox{]}\doxylink{classoomph_1_1TreeRoot}{Tree\+Root} in the (enumerated) (edge) direction -- maintains uniqueness. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00716}{716}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, and \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b}\label{classoomph_1_1OcTreeRoot_a6b6730957601b05b991ffc9972d31f8b} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!direction\_of\_neighbour@{direction\_of\_neighbour}}
+\index{direction\_of\_neighbour@{direction\_of\_neighbour}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{direction\_of\_neighbour()}{direction\_of\_neighbour()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oc\+Tree\+Root\+::direction\+\_\+of\+\_\+neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{octree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If octree\+\_\+root\+\_\+pt is a neighbour, return the direction \mbox{[}faces L/\+R/\+F/\+B/\+U/D or edges DB/\+UP/...\mbox{]} in which it is found, otherwise return OMEGA. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00814}{814}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{octree_8h_source_l00668}{edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00330}{oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8h_source_l00790}{right\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00757}{up\+\_\+equivalent()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d}\label{classoomph_1_1OcTreeRoot_af585f52c64a66a70b216cae42c19a78d} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!edge\_neighbour\_pt@{edge\_neighbour\_pt}}
+\index{edge\_neighbour\_pt@{edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{edge\_neighbour\_pt()}{edge\_neighbour\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ oomph\+::\+Oc\+Tree\+Root\+::edge\+\_\+neighbour\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of pointers to the edge-\/neighbouring Tree\+Roots in the (enumerated) (edge) direction. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00668}{668}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, and \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3}\label{classoomph_1_1OcTreeRoot_add3c1de4903d2db75d19274719912ea3} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!nedge\_neighbour@{nedge\_neighbour}}
+\index{nedge\_neighbour@{nedge\_neighbour}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{nedge\_neighbour()}{nedge\_neighbour()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Oc\+Tree\+Root\+::nedge\+\_\+neighbour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{edge\+\_\+direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return number of edge-\/neighbouring \doxylink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root} in the (enumerated) (edge) direction. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00693}{693}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, and \mbox{\hyperlink{octree_8h_source_l00616}{Edge\+\_\+neighbour\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de}\label{classoomph_1_1OcTreeRoot_a6941e4a38b81116bec7f6b6c2e8e88de} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oc\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OcTreeRoot}{Oc\+Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6}\label{classoomph_1_1OcTreeRoot_a497950cb0812be6a95be8af658a03fb6} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!right\_equivalent@{right\_equivalent}}
+\index{right\_equivalent@{right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{right\_equivalent()}{right\_equivalent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oc\+Tree\+Root\+::right\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{tree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00790}{790}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{octree_8h_source_l00635}{Right\+\_\+equivalent}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5}\label{classoomph_1_1OcTreeRoot_aa462fe159838307aee0870ad089836f5} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_right\_equivalent@{set\_right\_equivalent}}
+\index{set\_right\_equivalent@{set\_right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_right\_equivalent()}{set\_right\_equivalent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oc\+Tree\+Root\+::set\+\_\+right\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{tree\+\_\+root\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The same thing as up\+\_\+equivalent, but for the right direction\+: When viewed from the current octree neighbour, our right direction is the neighbour\textquotesingle{}s Right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00806}{806}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00635}{Right\+\_\+equivalent}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33}\label{classoomph_1_1OcTreeRoot_a91210b8fab8bb9f092518303551e0c33} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!set\_up\_equivalent@{set\_up\_equivalent}}
+\index{set\_up\_equivalent@{set\_up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{set\_up\_equivalent()}{set\_up\_equivalent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oc\+Tree\+Root\+::set\+\_\+up\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{tree\+\_\+root\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00779}{779}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00627}{Up\+\_\+equivalent}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6}\label{classoomph_1_1OcTreeRoot_a961a28583236f1b92bc35de064d2dba6} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!up\_equivalent@{up\_equivalent}}
+\index{up\_equivalent@{up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{up\_equivalent()}{up\_equivalent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Oc\+Tree\+Root\+::up\+\_\+equivalent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*}}]{tree\+\_\+root\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return up equivalent of the neighbours specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree (around the back-\/front axis) say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. Returns OMEGA if the Octree specified by the pointer argument is not a neighbour. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00757}{757}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00814}{direction\+\_\+of\+\_\+neighbour()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{octree_8h_source_l00627}{Up\+\_\+equivalent}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1OcTreeRoot_ae3c71331aaf452591ba6a3ab0cdbcdbc}\label{classoomph_1_1OcTreeRoot_ae3c71331aaf452591ba6a3ab0cdbcdbc} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Edge\_neighbour\_pt@{Edge\_neighbour\_pt}}
+\index{Edge\_neighbour\_pt@{Edge\_neighbour\_pt}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Edge\_neighbour\_pt}{Edge\_neighbour\_pt}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\texorpdfstring{$\ast$}{*}$>$ $>$ oomph\+::\+Oc\+Tree\+Root\+::\+Edge\+\_\+neighbour\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map of pointers to the edge-\/neighbouring \mbox{[}Oc\mbox{]}Tree\+Roots\+: Edge\+\_\+neighbour\+\_\+pt\mbox{[}direction\mbox{]} is \doxylink{classoomph_1_1Vector}{Vector} to the pointers to the \mbox{[}Oc\mbox{]}\doxylink{classoomph_1_1TreeRoot}{Tree\+Root}\textquotesingle{}s edge neighbours in the (enumerated) (edge) direction. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00616}{616}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8h_source_l00716}{add\+\_\+edge\+\_\+neighbour\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00668}{edge\+\_\+neighbour\+\_\+pt()}}, and \mbox{\hyperlink{octree_8h_source_l00693}{nedge\+\_\+neighbour()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a739d09d26896cfb6924f4d023f5d791f}\label{classoomph_1_1OcTreeRoot_a739d09d26896cfb6924f4d023f5d791f} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Right\_equivalent@{Right\_equivalent}}
+\index{Right\_equivalent@{Right\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Right\_equivalent}{Right\_equivalent}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Oc\+Tree\+Root\+::\+Right\+\_\+equivalent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map giving the Right equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our right direction is the neighbour\textquotesingle{}s right\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Right\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=R (read as\+: "{}in my neighbour, my Right is its Right"{}). 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00635}{635}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8h_source_l00790}{right\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00806}{set\+\_\+right\+\_\+equivalent()}}.
+
+\Hypertarget{classoomph_1_1OcTreeRoot_a247955b8a3eb01e227ec2ee1f3bb96ce}\label{classoomph_1_1OcTreeRoot_a247955b8a3eb01e227ec2ee1f3bb96ce} 
+\index{oomph::OcTreeRoot@{oomph::OcTreeRoot}!Up\_equivalent@{Up\_equivalent}}
+\index{Up\_equivalent@{Up\_equivalent}!oomph::OcTreeRoot@{oomph::OcTreeRoot}}
+\doxysubsubsection{\texorpdfstring{Up\_equivalent}{Up\_equivalent}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Oc\+Tree\+Root\+::\+Up\+\_\+equivalent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map giving the Up equivalent of the neighbour specified by pointer\+: When viewed from the current octree\textquotesingle{}s neighbour, our up direction is the neighbour\textquotesingle{}s Up\+\_\+equivalent\mbox{[}neighbour\+\_\+pt\mbox{]} direction. If there\textquotesingle{}s no rotation, this map contains the identify so that, e.\+g. {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=U (read as\+: "{}in my neighbour, my Up is its Up"{}). If the neighbour is rotated by 180 degrees relative to the current octree(around the back-\/front axis), say, we have {\ttfamily Up\+\_\+equivalent}\mbox{[}neighbour\+\_\+pt\mbox{]}=D (read as\+: "{}in my neighbour, my Up is its Down"{}); etc. 
+
+
+
+Definition at line \mbox{\hyperlink{octree_8h_source_l00627}{627}} of file \mbox{\hyperlink{octree_8h_source}{octree.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{octree_8h_source_l00779}{set\+\_\+up\+\_\+equivalent()}}, and \mbox{\hyperlink{octree_8h_source_l00757}{up\+\_\+equivalent()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{octree_8h}{octree.\+h}}\end{DoxyCompactItemize}

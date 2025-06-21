@@ -1,0 +1,843 @@
+\doxysection{oomph\+::Iterative\+Linear\+Solver Class Reference}
+\hypertarget{classoomph_1_1IterativeLinearSolver}{}\label{classoomph_1_1IterativeLinearSolver}\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+
+
+Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner.  
+
+
+
+
+{\ttfamily \#include $<$iterative\+\_\+linear\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Iterative\+Linear\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classoomph_1_1IterativeLinearSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd}{Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0}{Iterative\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5}{\texorpdfstring{$\sim$}{\string~}\+Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c}{preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access to convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access to max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{iterations}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd}{enable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511}{disable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zone\+\_\+title}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we\textquotesingle{}re running (e.\+g. what combination of linear solver and preconditioner or parameter values are used). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7}{close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Close convergence history output stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the jacobian matrix and residual vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3}{preconditioner\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the the time taken to setup the preconditioner \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307}{enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0}{disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t set up the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99}{enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af}{disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge within max\+\_\+iter (default). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b}{enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570}{disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve (i.\+e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It\textquotesingle{}s virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})=0
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual function that can be overloaded in specific linear solvers to clean up any memory that may have been allocated (e.\+g. when preparing for a re-\/solve). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997}{Doc\+\_\+convergence\+\_\+history}}
+\begin{DoxyCompactList}\small\item\em Flag indicating if the convergence history is to be documented. \end{DoxyCompactList}\item 
+std\+::ofstream \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9}{Output\+\_\+file\+\_\+stream}}
+\begin{DoxyCompactList}\small\item\em Output file stream for convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d}{Tolerance}}
+\begin{DoxyCompactList}\small\item\em Convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989}{Max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Maximum number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248}{Preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em linear solver solution time \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10}{Preconditioner\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em indicates whether the preconditioner should be setup before solve. Default = true; \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Should we throw an error instead of just returning when we hit the max iterations? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Use the iterative solver as preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a}{First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c}{Default\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Default preconditioner\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner. 
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00053}{53}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd}\label{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!IterativeLinearSolver@{IterativeLinearSolver}}
+\index{IterativeLinearSolver@{IterativeLinearSolver}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{IterativeLinearSolver()}{IterativeLinearSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Iterative\+Linear\+Solver\+::\+Iterative\+Linear\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{58}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00236}{Default\+\_\+preconditioner}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{Doc\+\_\+convergence\+\_\+history}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00270}{First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{Max\+\_\+iter}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{Preconditioner\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{Tolerance}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0}\label{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!IterativeLinearSolver@{IterativeLinearSolver}}
+\index{IterativeLinearSolver@{IterativeLinearSolver}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{IterativeLinearSolver()}{IterativeLinearSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Iterative\+Linear\+Solver\+::\+Iterative\+Linear\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5}\label{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!````~IterativeLinearSolver@{\texorpdfstring{$\sim$}{\string~}IterativeLinearSolver}}
+\index{````~IterativeLinearSolver@{\texorpdfstring{$\sim$}{\string~}IterativeLinearSolver}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IterativeLinearSolver()}{\string~IterativeLinearSolver()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Iterative\+Linear\+Solver\+::\texorpdfstring{$\sim$}{\string~}\+Iterative\+Linear\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00092}{92}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7}\label{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!close\_convergence\_history\_file\_stream@{close\_convergence\_history\_file\_stream}}
+\index{close\_convergence\_history\_file\_stream@{close\_convergence\_history\_file\_stream}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{close\_convergence\_history\_file\_stream()}{close\_convergence\_history\_file\_stream()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close convergence history output stream. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00161}{161}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{Output\+\_\+file\+\_\+stream}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511}\label{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!disable\_doc\_convergence\_history@{disable\_doc\_convergence\_history}}
+\index{disable\_doc\_convergence\_history@{disable\_doc\_convergence\_history}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_convergence\_history()}{disable\_doc\_convergence\_history()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::disable\+\_\+doc\+\_\+convergence\+\_\+history (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of the convergence history. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00128}{128}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{Doc\+\_\+convergence\+\_\+history}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af}\label{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!disable\_error\_after\_max\_iter@{disable\_error\_after\_max\_iter}}
+\index{disable\_error\_after\_max\_iter@{disable\_error\_after\_max\_iter}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_error\_after\_max\_iter()}{disable\_error\_after\_max\_iter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge within max\+\_\+iter (default). 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00204}{204}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570}\label{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!disable\_iterative\_solver\_as\_preconditioner@{disable\_iterative\_solver\_as\_preconditioner}}
+\index{disable\_iterative\_solver\_as\_preconditioner@{disable\_iterative\_solver\_as\_preconditioner}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_iterative\_solver\_as\_preconditioner()}{disable\_iterative\_solver\_as\_preconditioner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00220}{220}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0}\label{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!disable\_setup\_preconditioner\_before\_solve@{disable\_setup\_preconditioner\_before\_solve}}
+\index{disable\_setup\_preconditioner\_before\_solve@{disable\_setup\_preconditioner\_before\_solve}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_setup\_preconditioner\_before\_solve()}{disable\_setup\_preconditioner\_before\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t set up the preconditioner before the solve. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00192}{192}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd}\label{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!enable\_doc\_convergence\_history@{enable\_doc\_convergence\_history}}
+\index{enable\_doc\_convergence\_history@{enable\_doc\_convergence\_history}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_convergence\_history()}{enable\_doc\_convergence\_history()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::enable\+\_\+doc\+\_\+convergence\+\_\+history (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of the convergence history. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00122}{122}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{Doc\+\_\+convergence\+\_\+history}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99}\label{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!enable\_error\_after\_max\_iter@{enable\_error\_after\_max\_iter}}
+\index{enable\_error\_after\_max\_iter@{enable\_error\_after\_max\_iter}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_error\_after\_max\_iter()}{enable\_error\_after\_max\_iter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00198}{198}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b}\label{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!enable\_iterative\_solver\_as\_preconditioner@{enable\_iterative\_solver\_as\_preconditioner}}
+\index{enable\_iterative\_solver\_as\_preconditioner@{enable\_iterative\_solver\_as\_preconditioner}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_iterative\_solver\_as\_preconditioner()}{enable\_iterative\_solver\_as\_preconditioner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00212}{212}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307}\label{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!enable\_setup\_preconditioner\_before\_solve@{enable\_setup\_preconditioner\_before\_solve}}
+\index{enable\_setup\_preconditioner\_before\_solve@{enable\_setup\_preconditioner\_before\_solve}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_setup\_preconditioner\_before\_solve()}{enable\_setup\_preconditioner\_before\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup the preconditioner before the solve. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00186}{186}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}\label{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Iterative\+Linear\+Solver\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}{oomph\+::\+MGSolver$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1CG_a17db796814dc11cb67eac960df85d5f7}{oomph\+::\+CG$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1BiCGStab_a2550adba752e02423254dc0a6c592f7f}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1GS_ad182a2d91cb9d629cb516102f9a3c649}{oomph\+::\+GS$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_a0fe8a3e90df149b2ad6a247afe1adf2a}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$}}, \mbox{\hyperlink{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1GMRES_a879927e08b79ad4744a10b360ccd5ff3}{oomph\+::\+GMRES$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES_a0e6fb26306985fc6bde851d372b78708}{oomph\+::\+Augmented\+Problem\+GMRES}}, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}{oomph\+::\+Trilinos\+Aztec\+OOSolver}}, \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a34e565b3536b286b5544f5e30935b9e9}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a10760c61c62771773e2adc57055717aa}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$}}, \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG_ad2ae5c641eae7da8c7556b646fe38d36}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$}}, and \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{oomph\+::\+GMRESBlock\+Preconditioner}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}\label{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
+\index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+returns the time taken to assemble the jacobian matrix and residual vector 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e998c0e32140bc56d4}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00168}{168}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{Jacobian\+\_\+setup\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352}\label{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
+\index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+return the time taken to solve the linear system 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00174}{174}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{Solution\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb}\label{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!max\_iter@{max\_iter}}
+\index{max\_iter@{max\_iter}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Iterative\+Linear\+Solver\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to max. number of iterations. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00113}{113}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{Max\+\_\+iter}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f}\label{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!open\_convergence\_history\_file\_stream@{open\_convergence\_history\_file\_stream}}
+\index{open\_convergence\_history\_file\_stream@{open\_convergence\_history\_file\_stream}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{open\_convergence\_history\_file\_stream()}{open\_convergence\_history\_file\_stream()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{zone\+\_\+title = {\ttfamily "{}"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we\textquotesingle{}re running (e.\+g. what combination of linear solver and preconditioner or parameter values are used). 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00138}{138}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{Doc\+\_\+convergence\+\_\+history}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{Output\+\_\+file\+\_\+stream}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de}\label{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Iterative\+Linear\+Solver\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}\label{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!preconditioner\_pt@{preconditioner\_pt}}
+\index{preconditioner\_pt@{preconditioner\_pt}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_pt()}{preconditioner\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{95}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{Preconditioner\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{oomph\+::\+Augmented\+Problem\+GMRES\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01368}{oomph\+::\+GMRES$<$ MATRIX $>$\+::update()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02184}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::update()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c}\label{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!preconditioner\_pt@{preconditioner\_pt}}
+\index{preconditioner\_pt@{preconditioner\_pt}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_pt()}{preconditioner\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}  \& oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to preconditioner (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00101}{101}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{Preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3}\label{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!preconditioner\_setup\_time@{preconditioner\_setup\_time}}
+\index{preconditioner\_setup\_time@{preconditioner\_setup\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_setup\_time()}{preconditioner\_setup\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+returns the the time taken to setup the preconditioner 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1GS_a5ee0e379319f6919f7ac00a715be72fb}{oomph\+::\+GS$<$ MATRIX $>$}}, and \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4_af3ddbbec56c0ecc849b07bcec0c19bf4}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00180}{180}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00254}{Preconditioner\+\_\+setup\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8}\label{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!tolerance@{tolerance}}
+\index{tolerance@{tolerance}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{tolerance()}{tolerance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Iterative\+Linear\+Solver\+::tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to convergence tolerance. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00107}{107}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{Tolerance}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l00333}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::calculate\+\_\+omega()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01106}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$\+::generate\+\_\+plane\+\_\+rotation()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l02327}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::generate\+\_\+plane\+\_\+rotation()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c}\label{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Default\_preconditioner@{Default\_preconditioner}}
+\index{Default\_preconditioner@{Default\_preconditioner}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Default\_preconditioner}{Default\_preconditioner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Default\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Default preconditioner\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. 
+
+Default preconditioner for iterative solvers\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. 
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00236}{236}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997}\label{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Doc\_convergence\_history@{Doc\_convergence\_history}}
+\index{Doc\_convergence\_history@{Doc\_convergence\_history}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Doc\_convergence\_history}{Doc\_convergence\_history}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flag indicating if the convergence history is to be documented. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{228}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00128}{disable\+\_\+doc\+\_\+convergence\+\_\+history()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00122}{enable\+\_\+doc\+\_\+convergence\+\_\+history()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00138}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a}\label{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!First\_time\_solve\_when\_used\_as\_preconditioner@{First\_time\_solve\_when\_used\_as\_preconditioner}}
+\index{First\_time\_solve\_when\_used\_as\_preconditioner@{First\_time\_solve\_when\_used\_as\_preconditioner}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{First\_time\_solve\_when\_used\_as\_preconditioner}{First\_time\_solve\_when\_used\_as\_preconditioner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Iterative\+Linear\+Solver\+::\+First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00270}{270}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d}\label{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
+\index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Jacobian setup time. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00248}{248}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00168}{jacobian\+\_\+setup\+\_\+time()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989}\label{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Max\_iter@{Max\_iter}}
+\index{Max\_iter@{Max\_iter}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Max\_iter}{Max\_iter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum number of iterations. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{242}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00113}{max\+\_\+iter()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00424}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::max\+\_\+iter()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve\+\_\+using\+\_\+\+Aztec\+OO()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9}\label{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Output\_file\_stream@{Output\_file\_stream}}
+\index{Output\_file\_stream@{Output\_file\_stream}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Output\_file\_stream}{Output\_file\_stream}}
+{\footnotesize\ttfamily std\+::ofstream oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output file stream for convergence history. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{231}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00161}{close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00138}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248}\label{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Preconditioner\_pt@{Preconditioner\_pt}}
+\index{Preconditioner\_pt@{Preconditioner\_pt}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_pt}{Preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}\texorpdfstring{$\ast$}{*} oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{245}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{preconditioner\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00101}{preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10}\label{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Preconditioner\_setup\_time@{Preconditioner\_setup\_time}}
+\index{Preconditioner\_setup\_time@{Preconditioner\_setup\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_setup\_time}{Preconditioner\_setup\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxylink{classoomph_1_1Preconditioner}{Preconditioner} setup time. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00254}{254}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00180}{preconditioner\+\_\+setup\+\_\+time()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2}\label{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Setup\_preconditioner\_before\_solve@{Setup\_preconditioner\_before\_solve}}
+\index{Setup\_preconditioner\_before\_solve@{Setup\_preconditioner\_before\_solve}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Setup\_preconditioner\_before\_solve}{Setup\_preconditioner\_before\_solve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+indicates whether the preconditioner should be setup before solve. Default = true; 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{258}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00192}{disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00186}{enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5}\label{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Solution\_time@{Solution\_time}}
+\index{Solution\_time@{Solution\_time}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Solution\_time}{Solution\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+linear solver solution time 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{251}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00174}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2}\label{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Throw\_error\_after\_max\_iter@{Throw\_error\_after\_max\_iter}}
+\index{Throw\_error\_after\_max\_iter@{Throw\_error\_after\_max\_iter}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Throw\_error\_after\_max\_iter}{Throw\_error\_after\_max\_iter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Should we throw an error instead of just returning when we hit the max iterations? 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{262}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00204}{disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00198}{enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d}\label{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Tolerance@{Tolerance}}
+\index{Tolerance@{Tolerance}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Tolerance}{Tolerance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Convergence tolerance. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{239}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00116}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve\+\_\+using\+\_\+\+Aztec\+OO()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00107}{tolerance()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00436}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::tolerance()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8}\label{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8} 
+\index{oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}!Use\_iterative\_solver\_as\_preconditioner@{Use\_iterative\_solver\_as\_preconditioner}}
+\index{Use\_iterative\_solver\_as\_preconditioner@{Use\_iterative\_solver\_as\_preconditioner}!oomph::IterativeLinearSolver@{oomph::IterativeLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Use\_iterative\_solver\_as\_preconditioner}{Use\_iterative\_solver\_as\_preconditioner}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Iterative\+Linear\+Solver\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Use the iterative solver as preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{265}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l00220}{disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00212}{enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00058}{Iterative\+Linear\+Solver()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{iterative__linear__solver_8h}{iterative\+\_\+linear\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{iterative__linear__solver_8cc}{iterative\+\_\+linear\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

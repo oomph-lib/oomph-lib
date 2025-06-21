@@ -1,0 +1,400 @@
+\doxysection{oomph\+::Block\+Hopf\+Linear\+Solver Class Reference}
+\hypertarget{classoomph_1_1BlockHopfLinearSolver}{}\label{classoomph_1_1BlockHopfLinearSolver}\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+
+
+A custom linear solver class that is used to solve a block-\/factorised version of the Hopf bifurcation detection problem.  
+
+
+
+
+{\ttfamily \#include $<$assembly\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Block\+Hopf\+Linear\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1BlockHopfLinearSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_ab8257cd5a04b20ae0d5e53ee1f9e2abd}{Block\+Hopf\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a40ec63718aa9f3b8709b0d7745643347}{linear\+\_\+solver\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor, inherits the original linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a7a77bcca3b3018995f644fff39c7a957}{\texorpdfstring{$\sim$}{\string~}\+Block\+Hopf\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: clean up the allocated memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a9a7cc6bda9ab1a8baf83d5d8e1fe5eea}{solve\+\_\+for\+\_\+two\+\_\+rhs}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs2}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result2}})
+\begin{DoxyCompactList}\small\item\em Solve for two right hand sides. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em The solve function uses the block factorisation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a2c0e342f253917e987f8504b16862b2c}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em The resolve function also uses the block factorisation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a40ec63718aa9f3b8709b0d7745643347}{linear\+\_\+solver\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the original linear solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve (i.\+e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It\textquotesingle{}s virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual function that can be overloaded in specific linear solvers to clean up any memory that may have been allocated (e.\+g. when preparing for a re-\/solve). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e998c0e32140bc56d4}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the Jacobian matrix and residual vector (needs to be overloaded for each solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a2526b2121ee73c372a4f3880e174f731}{Linear\+\_\+solver\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the original linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a669990e3fce8c84545e112c4f5f3ffd0}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the problem, used in the resolve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a431b373890e0a97bf46d3f601e4df64d}{A\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the storage for the vector a. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_a9f3aabed3c101b9a9a9fb1cdce4bbbbf}{E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the storage for the vector e (0 to n-\/1) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockHopfLinearSolver_ad6a5a8e115e10632da3815aeaff6c1d0}{G\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the storage for the vector g (0 to n-\/1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A custom linear solver class that is used to solve a block-\/factorised version of the Hopf bifurcation detection problem. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00954}{954}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_ab8257cd5a04b20ae0d5e53ee1f9e2abd}\label{classoomph_1_1BlockHopfLinearSolver_ab8257cd5a04b20ae0d5e53ee1f9e2abd} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!BlockHopfLinearSolver@{BlockHopfLinearSolver}}
+\index{BlockHopfLinearSolver@{BlockHopfLinearSolver}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{BlockHopfLinearSolver()}{BlockHopfLinearSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+Block\+Hopf\+Linear\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{linear\+\_\+solver\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, inherits the original linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00973}{973}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a7a77bcca3b3018995f644fff39c7a957}\label{classoomph_1_1BlockHopfLinearSolver_a7a77bcca3b3018995f644fff39c7a957} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!````~BlockHopfLinearSolver@{\texorpdfstring{$\sim$}{\string~}BlockHopfLinearSolver}}
+\index{````~BlockHopfLinearSolver@{\texorpdfstring{$\sim$}{\string~}BlockHopfLinearSolver}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BlockHopfLinearSolver()}{\string~BlockHopfLinearSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\texorpdfstring{$\sim$}{\string~}\+Block\+Hopf\+Linear\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: clean up the allocated memory. 
+
+Clean up the memory that may have been allocated by the solver. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03601}{3601}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00963}{A\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00966}{E\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00969}{G\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a40ec63718aa9f3b8709b0d7745643347}\label{classoomph_1_1BlockHopfLinearSolver_a40ec63718aa9f3b8709b0d7745643347} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the original linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01023}{1023}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00957}{Linear\+\_\+solver\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a2c0e342f253917e987f8504b16862b2c}\label{classoomph_1_1BlockHopfLinearSolver_a2c0e342f253917e987f8504b16862b2c} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The resolve function also uses the block factorisation. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l04417}{4417}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b}\label{classoomph_1_1BlockHopfLinearSolver_ac8f7442b3bc437f8ad25308b1c84482b} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00996}{996}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f}\label{classoomph_1_1BlockHopfLinearSolver_a5074e6a65910bcbe881a3e1c71b1947f} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The linear-\/algebra-\/type solver does not make sense. The interface is deliberately broken. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l01008}{1008}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe}\label{classoomph_1_1BlockHopfLinearSolver_a5e9ff24466ec138cca8264e5befc31fe} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The solve function uses the block factorisation. 
+
+Use a block factorisation to solve the augmented system associated with a Hopf bifurcation. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{3621}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00963}{A\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01171}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01590}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00146}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01843}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{assembly__handler_8h_source_l00966}{E\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8h_source_l00137}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00969}{G\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01003}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{problem_8cc_source_l03810}{oomph\+::\+Problem\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{assembly__handler_8h_source_l00957}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00960}{Problem\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00227}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{problem_8h_source_l02529}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a9a7cc6bda9ab1a8baf83d5d8e1fe5eea}\label{classoomph_1_1BlockHopfLinearSolver_a9a7cc6bda9ab1a8baf83d5d8e1fe5eea} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!solve\_for\_two\_rhs@{solve\_for\_two\_rhs}}
+\index{solve\_for\_two\_rhs@{solve\_for\_two\_rhs}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_for\_two\_rhs()}{solve\_for\_two\_rhs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs2,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result2 }\end{DoxyParamCaption})}
+
+
+
+Solve for two right hand sides. 
+
+Solve for two right hand sides, required for (efficient) continuation because otherwise we have to store the inverse of the jacobian and the complex equivalent ... nasty. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{3966}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00963}{A\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01171}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01590}{oomph\+::\+Problem\+::assembly\+\_\+handler\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00146}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01843}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{assembly__handler_8h_source_l00966}{E\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8h_source_l00137}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00969}{G\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01003}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{problem_8cc_source_l03810}{oomph\+::\+Problem\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{assembly__handler_8h_source_l00957}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00960}{Problem\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00227}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{problem_8h_source_l02529}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a431b373890e0a97bf46d3f601e4df64d}\label{classoomph_1_1BlockHopfLinearSolver_a431b373890e0a97bf46d3f601e4df64d} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!A\_pt@{A\_pt}}
+\index{A\_pt@{A\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{A\_pt}{A\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}\texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+A\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the storage for the vector a. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00963}{963}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03601}{\texorpdfstring{$\sim$}{\string~}\+Block\+Hopf\+Linear\+Solver()}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a9f3aabed3c101b9a9a9fb1cdce4bbbbf}\label{classoomph_1_1BlockHopfLinearSolver_a9f3aabed3c101b9a9a9fb1cdce4bbbbf} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!E\_pt@{E\_pt}}
+\index{E\_pt@{E\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{E\_pt}{E\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}\texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+E\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the storage for the vector e (0 to n-\/1) 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00966}{966}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03601}{\texorpdfstring{$\sim$}{\string~}\+Block\+Hopf\+Linear\+Solver()}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_ad6a5a8e115e10632da3815aeaff6c1d0}\label{classoomph_1_1BlockHopfLinearSolver_ad6a5a8e115e10632da3815aeaff6c1d0} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!G\_pt@{G\_pt}}
+\index{G\_pt@{G\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{G\_pt}{G\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}\texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+G\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the storage for the vector g (0 to n-\/1) 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00969}{969}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{solve\+\_\+for\+\_\+two\+\_\+rhs()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03601}{\texorpdfstring{$\sim$}{\string~}\+Block\+Hopf\+Linear\+Solver()}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a2526b2121ee73c372a4f3880e174f731}\label{classoomph_1_1BlockHopfLinearSolver_a2526b2121ee73c372a4f3880e174f731} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!Linear\_solver\_pt@{Linear\_solver\_pt}}
+\index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}\texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the original linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00957}{957}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l01023}{linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+
+\Hypertarget{classoomph_1_1BlockHopfLinearSolver_a669990e3fce8c84545e112c4f5f3ffd0}\label{classoomph_1_1BlockHopfLinearSolver_a669990e3fce8c84545e112c4f5f3ffd0} 
+\index{oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::BlockHopfLinearSolver@{oomph::BlockHopfLinearSolver}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} oomph\+::\+Block\+Hopf\+Linear\+Solver\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the problem, used in the resolve. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00960}{960}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{solve()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{assembly__handler_8h}{assembly\+\_\+handler.\+h}}\item 
+\mbox{\hyperlink{assembly__handler_8cc}{assembly\+\_\+handler.\+cc}}\end{DoxyCompactItemize}

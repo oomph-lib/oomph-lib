@@ -1,0 +1,20 @@
+\doxysection{hermite\+\_\+elements.\+h File Reference}
+\hypertarget{hermite__elements_8h}{}\label{hermite__elements_8h}\index{hermite\_elements.h@{hermite\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1QHermiteElementBase}{oomph\+::\+QHermite\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Empty base class for QHermite\+Elements (created so that we can use dynamic\+\_\+cast$<$$>$() to figure out if a an element is a \doxylink{classoomph_1_1QHermiteElement}{QHermite\+Element}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QHermiteElement}{oomph\+::\+QHermite\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1QHermiteElement}{QHermite\+Element} class. Local coordinates are not assumed to be aligned with the global coordinates so the Jacobian of the mapping between local and global coordinates is a full matrix. For cases where the coordinates are aligned, you should use the derived class, \doxylink{classoomph_1_1DiagQHermiteElement}{Diag\+QHermite\+Element}, which uses a simplified mapping that makes the evaluation of derivatives of the shape functions much cheaper. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DiagQHermiteElement}{oomph\+::\+Diag\+QHermite\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em These elements are exactly the same as QHermite\+Elements, but they employ the simplifying assumption that the local and global coordinates are aligned. This makes the evaluation of the derivatives of the shape functions much cheaper. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidQHermiteElement}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidQHermiteElement}{Solid\+QHermite\+Element} elements are Hermite elements whose Jacobian matrices include derivatives w.\+r.\+t. the Eulerian positions of their nodes. They are the basis for elasticity elements. No assumptions are made about alignment of local and global coordinates. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidDiagQHermiteElement}{oomph\+::\+Solid\+Diag\+QHermite\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em Solid\+QHermite\+Elements in which we assume the local and global coordinates to be aligned so that the Jacobian of the mapping betwteen local and global coordinates is diagonal. This makes the evaluation of the derivatives of the shape functions much cheaper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

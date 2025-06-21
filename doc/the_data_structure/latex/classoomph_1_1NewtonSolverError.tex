@@ -1,0 +1,246 @@
+\doxysection{oomph\+::Newton\+Solver\+Error Class Reference}
+\hypertarget{classoomph_1_1NewtonSolverError}{}\label{classoomph_1_1NewtonSolverError}\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+
+
+A class to handle errors in the Newton solver.  
+
+
+
+
+{\ttfamily \#include $<$problem.\+h$>$}
+
+Inheritance diagram for oomph\+::Newton\+Solver\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1NewtonSolverError}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NewtonSolverError_a9bff481c8bed13d3f3de7f1d50c4d561}{Newton\+Solver\+Error}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, does nothing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242}{Newton\+Solver\+Error}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Passed\+\_\+linear\+\_\+failure}})
+\begin{DoxyCompactList}\small\item\em Constructor that passes a failure of the linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b}{Newton\+Solver\+Error}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Passed\+\_\+iterations}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Passed\+\_\+maxres}})
+\begin{DoxyCompactList}\small\item\em Constructor that passes number of iterations and residuals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9}{linear\+\_\+solver\+\_\+error}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the error in the linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58}{iterations}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max. \# of iterations performed when the Newton solver died. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2}{maxres}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max. residual when Newton solver died. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibError}{oomph\+::\+Oomph\+Lib\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibError_a2706846fffe8d60e13918daec455e780}{Oomph\+Lib\+Error}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}})
+\begin{DoxyCompactList}\small\item\em Constructor requires the error description and the function in which the error occured and the location provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db4e1e507}{disable\+\_\+error\+\_\+message}} ()
+\begin{DoxyCompactList}\small\item\em Suppress issueing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e}{Linear\+\_\+solver\+\_\+error}}
+\begin{DoxyCompactList}\small\item\em Error in the linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Max. \# of iterations performed when the Newton solver died. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065}{Maxres}}
+\begin{DoxyCompactList}\small\item\em Max. residual when Newton solver died. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibError}{oomph\+::\+Oomph\+Lib\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibError_a64f1bfd5eaaafdef448c9a9f47be85cb}{set\+\_\+stream\+\_\+pt}} (std\+::ostream \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&stream\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibError_a9c1f4842949a5938f2646428cb390124}{set\+\_\+output\+\_\+width}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the width (in characters) of the error stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b}{Oomph\+Lib\+Exception}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+type}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+stream}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+width}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{list\+\_\+trace\+\_\+back}})
+\begin{DoxyCompactList}\small\item\em Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string "{}\+WARNING"{} or "{}\+ERROR"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}{\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception}} ()  \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw}} ()
+\begin{DoxyCompactList}\small\item\em The destructor cannot throw an exception (C++ STL standard) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7}{Exception\+\_\+stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Exception stream to which we write message in destructor. \end{DoxyCompactList}\item 
+std\+::stringstream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}{Exception\+\_\+stringstream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em String stream that records the error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}{Suppress\+\_\+error\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to handle errors in the Newton solver. 
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03056}{3056}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1NewtonSolverError_a9bff481c8bed13d3f3de7f1d50c4d561}\label{classoomph_1_1NewtonSolverError_a9bff481c8bed13d3f3de7f1d50c4d561} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!NewtonSolverError@{NewtonSolverError}}
+\index{NewtonSolverError@{NewtonSolverError}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{NewtonSolverError()}{NewtonSolverError()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Newton\+Solver\+Error\+::\+Newton\+Solver\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor, does nothing. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03070}{3070}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242}\label{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!NewtonSolverError@{NewtonSolverError}}
+\index{NewtonSolverError@{NewtonSolverError}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{NewtonSolverError()}{NewtonSolverError()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Newton\+Solver\+Error\+::\+Newton\+Solver\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{Passed\+\_\+linear\+\_\+failure }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor that passes a failure of the linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03081}{3081}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b}\label{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!NewtonSolverError@{NewtonSolverError}}
+\index{NewtonSolverError@{NewtonSolverError}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{NewtonSolverError()}{NewtonSolverError()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Newton\+Solver\+Error\+::\+Newton\+Solver\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}}]{Passed\+\_\+iterations,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}}]{Passed\+\_\+maxres }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor that passes number of iterations and residuals. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03092}{3092}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58}\label{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Newton\+Solver\+Error\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max. \# of iterations performed when the Newton solver died. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03110}{3110}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l03063}{Iterations}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9}\label{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!linear\_solver\_error@{linear\_solver\_error}}
+\index{linear\_solver\_error@{linear\_solver\_error}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_error()}{linear\_solver\_error()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the error in the linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03103}{3103}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l03060}{Linear\+\_\+solver\+\_\+error}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2}\label{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!maxres@{maxres}}
+\index{maxres@{maxres}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{maxres()}{maxres()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Newton\+Solver\+Error\+::maxres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max. residual when Newton solver died. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03116}{3116}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l03066}{Maxres}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38}\label{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Newton\+Solver\+Error\+::\+Iterations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Max. \# of iterations performed when the Newton solver died. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03063}{3063}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8h_source_l03110}{iterations()}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e}\label{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Linear\_solver\_error@{Linear\_solver\_error}}
+\index{Linear\_solver\_error@{Linear\_solver\_error}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_error}{Linear\_solver\_error}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Newton\+Solver\+Error\+::\+Linear\+\_\+solver\+\_\+error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Error in the linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03060}{3060}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8h_source_l03103}{linear\+\_\+solver\+\_\+error()}}.
+
+\Hypertarget{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065}\label{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Maxres@{Maxres}}
+\index{Maxres@{Maxres}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Maxres}{Maxres}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Newton\+Solver\+Error\+::\+Maxres\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Max. residual when Newton solver died. 
+
+
+
+Definition at line \mbox{\hyperlink{problem_8h_source_l03066}{3066}} of file \mbox{\hyperlink{problem_8h_source}{problem.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8h_source_l03116}{maxres()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{problem_8h}{problem.\+h}}\end{DoxyCompactItemize}

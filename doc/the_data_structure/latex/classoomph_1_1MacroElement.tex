@@ -1,0 +1,438 @@
+\doxysection{oomph\+::Macro\+Element Class Reference}
+\hypertarget{classoomph_1_1MacroElement}{}\label{classoomph_1_1MacroElement}\index{oomph::MacroElement@{oomph::MacroElement}}
+
+
+Base class for \doxylink{classoomph_1_1MacroElement}{Macro\+Element} s that are used during mesh refinement in domains with curvlinear and/or time-\/dependent boundaries; see the description of the \doxylink{classoomph_1_1Domain}{Domain} class for more details.  
+
+
+
+
+{\ttfamily \#include $<$macro\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.338645cm]{classoomph_1_1MacroElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElement_ad94cc0ffda0d77e1778110da4aa651eb}{Macro\+Element}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}{domain\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}{macro\+\_\+element\+\_\+number}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \doxylink{classoomph_1_1Domain}{Domain} and the number of the \doxylink{classoomph_1_1MacroElement}{Macro\+Element} within that \doxylink{classoomph_1_1Domain}{Domain}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760}{Macro\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElement_ae00100790b8c6c669c4ee1c40578b7cc}{Macro\+Element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a77638b2a2f06a96f467b4e42c894d738}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElement_abdc6cb9a63b44d4da0141dde40aa6310}{\texorpdfstring{$\sim$}{\string~}\+Macro\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Plot\+: x,y (or x,y,z) at current time in tecplot format. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a5d3646716d60aedf456889768a3c2dbe}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})=0
+\begin{DoxyCompactList}\small\item\em Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{macro\+\_\+map}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}})
+\begin{DoxyCompactList}\small\item\em The mapping from local to global coordinates at the current time \+: r(s) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}{macro\+\_\+map}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}})=0
+\begin{DoxyCompactList}\small\item\em The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d}{macro\+\_\+map}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}})
+\begin{DoxyCompactList}\small\item\em Get global position r(s) at continuous time value, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})=0
+\begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_acd465f4065dee7acfbb36d307ad691f9}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em the jacobian of the mapping from the macro coordinates to the global coordinates \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a3c898b6deef9f8bfcc957313030a3e68}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{jacobian2}})
+\begin{DoxyCompactList}\small\item\em Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df20}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Assembles the jacobian of the mapping from the macro coordinates to the global coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{jacobian2}})
+\begin{DoxyCompactList}\small\item\em Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}{macro\+\_\+element\+\_\+number}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the Macro\+\_\+element\+\_\+number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the Domain\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MacroElement_a0eba5a165f20079899fb935508ab77e2}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}{Macro\+\_\+element\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em What is the number of the current macro element within its domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for \doxylink{classoomph_1_1MacroElement}{Macro\+Element} s that are used during mesh refinement in domains with curvlinear and/or time-\/dependent boundaries; see the description of the \doxylink{classoomph_1_1Domain}{Domain} class for more details. 
+
+A macro element provides a parametrisation of a sub-\/domain by providing a mapping between a set of local coordinates $ {\bf S} $ and global coordinates $ {\bf r} ({\bf S}) $ . This must be implemented in the function
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}{MacroElement::macro\_map}}(...)\ }
+
+\end{DoxyCode}
+
+
+The time-\/dependent version of the macro map returns the mapping from local to global coordinates\+: $ {\bf r} (t,{\bf S}) $ where t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep.
+
+The \doxylink{classoomph_1_1MacroElement}{Macro\+Element} s establish the current (and previous) domain shape via member function pointers to the \doxylink{classoomph_1_1Domain}{Domain} \textquotesingle{}s 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{Domain::macro\_element\_boundary}}(...)\ }
+
+\end{DoxyCode}
+ member function. 
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00072}{72}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MacroElement_ad94cc0ffda0d77e1778110da4aa651eb}\label{classoomph_1_1MacroElement_ad94cc0ffda0d77e1778110da4aa651eb} 
+\index{oomph::MacroElement@{oomph::MacroElement}!MacroElement@{MacroElement}}
+\index{MacroElement@{MacroElement}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{MacroElement()}{MacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Macro\+Element\+::\+Macro\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}}]{domain\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{macro\+\_\+element\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to \doxylink{classoomph_1_1Domain}{Domain} and the number of the \doxylink{classoomph_1_1MacroElement}{Macro\+Element} within that \doxylink{classoomph_1_1Domain}{Domain}. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00077}{77}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01199}{oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build}}.
+
+\Hypertarget{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760}\label{classoomph_1_1MacroElement_affaa1d2975bac834846195c710d86760} 
+\index{oomph::MacroElement@{oomph::MacroElement}!MacroElement@{MacroElement}}
+\index{MacroElement@{MacroElement}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{MacroElement()}{MacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Macro\+Element\+::\+Macro\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00086}{86}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+\Hypertarget{classoomph_1_1MacroElement_ae00100790b8c6c669c4ee1c40578b7cc}\label{classoomph_1_1MacroElement_ae00100790b8c6c669c4ee1c40578b7cc} 
+\index{oomph::MacroElement@{oomph::MacroElement}!MacroElement@{MacroElement}}
+\index{MacroElement@{MacroElement}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{MacroElement()}{MacroElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Macro\+Element\+::\+Macro\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1MacroElement_abdc6cb9a63b44d4da0141dde40aa6310}\label{classoomph_1_1MacroElement_abdc6cb9a63b44d4da0141dde40aa6310} 
+\index{oomph::MacroElement@{oomph::MacroElement}!````~MacroElement@{\texorpdfstring{$\sim$}{\string~}MacroElement}}
+\index{````~MacroElement@{\texorpdfstring{$\sim$}{\string~}MacroElement}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MacroElement()}{\string~MacroElement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Macro\+Element\+::\texorpdfstring{$\sim$}{\string~}\+Macro\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00101}{101}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01199}{oomph\+::\+Leak\+Check\+Names\+::\+Macro\+Element\+\_\+build}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MacroElement_acd465f4065dee7acfbb36d307ad691f9}\label{classoomph_1_1MacroElement_acd465f4065dee7acfbb36d307ad691f9} 
+\index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}}
+\index{assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{assemble\_macro\_to\_eulerian\_jacobian()}{assemble\_macro\_to\_eulerian\_jacobian()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+the jacobian of the mapping from the macro coordinates to the global coordinates 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a74aaa1b631144e956b5f61e8d0cd9f05}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00170}{170}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element_8h_source_l00205}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df20}\label{classoomph_1_1MacroElement_a5640171931fffc8add41437596d3df20} 
+\index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}}
+\index{assemble\_macro\_to\_eulerian\_jacobian@{assemble\_macro\_to\_eulerian\_jacobian}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{assemble\_macro\_to\_eulerian\_jacobian()}{assemble\_macro\_to\_eulerian\_jacobian()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assembles the jacobian of the mapping from the macro coordinates to the global coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00205}{205}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00170}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a3c898b6deef9f8bfcc957313030a3e68}\label{classoomph_1_1MacroElement_a3c898b6deef9f8bfcc957313030a3e68} 
+\index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}}
+\index{assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{assemble\_macro\_to\_eulerian\_jacobian2()}{assemble\_macro\_to\_eulerian\_jacobian2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_aef266683860031114776d25f51e8e306}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00186}{186}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element_8h_source_l00215}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8}\label{classoomph_1_1MacroElement_ae3c34b538e970d152a7f107d7ae418c8} 
+\index{oomph::MacroElement@{oomph::MacroElement}!assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}}
+\index{assemble\_macro\_to\_eulerian\_jacobian2@{assemble\_macro\_to\_eulerian\_jacobian2}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{assemble\_macro\_to\_eulerian\_jacobian2()}{assemble\_macro\_to\_eulerian\_jacobian2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00215}{215}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00186}{assemble\+\_\+macro\+\_\+to\+\_\+eulerian\+\_\+jacobian2()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45}\label{classoomph_1_1MacroElement_ab882e21d5add76995d1e896517030e45} 
+\index{oomph::MacroElement@{oomph::MacroElement}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Macro\+Element\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Domain\+\_\+pt. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00229}{229}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00236}{Domain\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445}\label{classoomph_1_1MacroElement_abeb744cd6c9bd213a1375fc8d924d445} 
+\index{oomph::MacroElement@{oomph::MacroElement}!macro\_element\_number@{macro\_element\_number}}
+\index{macro\_element\_number@{macro\_element\_number}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_number()}{macro\_element\_number()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Macro\+Element\+::macro\+\_\+element\+\_\+number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Macro\+\_\+element\+\_\+number. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00223}{223}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00239}{Macro\+\_\+element\+\_\+number}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d}\label{classoomph_1_1MacroElement_a6dd7b36601982a9ebde9d614ce62c93d} 
+\index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
+\index{macro\_map@{macro\_map}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{macro\_map()}{macro\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::macro\+\_\+map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get global position r(s) at continuous time value, t. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a204600d5c3473f95ef4bc3bffb284b5d}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00143}{143}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2}\label{classoomph_1_1MacroElement_a819b095e97c92e634d6216ddce00c8a2} 
+\index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
+\index{macro\_map@{macro\_map}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{macro\_map()}{macro\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::macro\+\_\+map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The time-\/dependent mapping from local to global coordinates\+: r(t,s). t is the discrete timelevel\+: t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_a31df4af80a110bfb00b468f5a9b3cd27}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_af78c96d14b561af4ee3b1bf6c5331766}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_ae99513e135616e45927307ccfa0f8306}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5}\label{classoomph_1_1MacroElement_a85e7842ad949bb4062a9ff302fa452e5} 
+\index{oomph::MacroElement@{oomph::MacroElement}!macro\_map@{macro\_map}}
+\index{macro\_map@{macro\_map}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{macro\_map()}{macro\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::macro\+\_\+map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The mapping from local to global coordinates at the current time \+: r(s) 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00126}{126}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00126}{macro\+\_\+map()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00040}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh()}}, \mbox{\hyperlink{full__circle__mesh_8template_8cc_source_l00042}{oomph\+::\+Full\+Circle\+Mesh$<$ ELEMENT $>$\+::\+Full\+Circle\+Mesh()}}, \mbox{\hyperlink{Qelements_8h_source_l00379}{oomph\+::\+QSolid\+Element\+Base\+::get\+\_\+x\+\_\+and\+\_\+xi()}}, \mbox{\hyperlink{Qelements_8h_source_l00274}{oomph\+::\+QElement\+Base\+::get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element()}}, \mbox{\hyperlink{Qelements_8h_source_l00249}{oomph\+::\+QElement\+Base\+::get\+\_\+x\+\_\+from\+\_\+macro\+\_\+element()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{macro\+\_\+map()}}, \mbox{\hyperlink{extruded__macro__element_8h_source_l00179}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output()}}, \mbox{\hyperlink{macro__element_8h_source_l00306}{oomph\+::\+QMacro\+Element$<$ 2 $>$\+::output()}}, \mbox{\hyperlink{macro__element_8h_source_l00400}{oomph\+::\+QMacro\+Element$<$ 3 $>$\+::output()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00056}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh()}}, and \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00041}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a77638b2a2f06a96f467b4e42c894d738}\label{classoomph_1_1MacroElement_a77638b2a2f06a96f467b4e42c894d738} 
+\index{oomph::MacroElement@{oomph::MacroElement}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MacroElement_a5d3646716d60aedf456889768a3c2dbe}\label{classoomph_1_1MacroElement_a5d3646716d60aedf456889768a3c2dbe} 
+\index{oomph::MacroElement@{oomph::MacroElement}!output@{output}}
+\index{output@{output}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Plot\+: x,y (or x,y,z) in tecplot format at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_aa583fff773011f570849856b2060918d}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_a1fe56200453a2200e5103d3fb4793e38}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_a5c1916d58b2d3142b5fa85f209e16b4c}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc}\label{classoomph_1_1MacroElement_a92030ed18caf4539c9e44e1062457edc} 
+\index{oomph::MacroElement@{oomph::MacroElement}!output@{output}}
+\index{output@{output}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Plot\+: x,y (or x,y,z) at current time in tecplot format. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00111}{111}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element_8h_source_l00111}{output()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element_8h_source_l00111}{output()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e}\label{classoomph_1_1MacroElement_a748b561313e952c9767d278d0e99be4e} 
+\index{oomph::MacroElement@{oomph::MacroElement}!output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}}
+\index{output\_macro\_element\_boundaries@{output\_macro\_element\_boundaries}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{output\_macro\_element\_boundaries()}{output\_macro\_element\_boundaries()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+::output\+\_\+macro\+\_\+element\+\_\+boundaries (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Output all macro element boundaries as tecplot zones. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1QExtrudedMacroElement_3_013_01_4_abca751a9fce97794df8787340b698009}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$}}, \mbox{\hyperlink{classoomph_1_1QMacroElement_3_012_01_4_ae717a0b0098f830a1b1a5019ce5431a8}{oomph\+::\+QMacro\+Element$<$ 2 $>$}}, and \mbox{\hyperlink{classoomph_1_1QMacroElement_3_013_01_4_aeb5d117bf346d710bd4f8fc4f04dbfd5}{oomph\+::\+QMacro\+Element$<$ 3 $>$}}.
+
+
+
+Referenced by \mbox{\hyperlink{domain_8h_source_l00197}{oomph\+::\+Domain\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MacroElement_a0eba5a165f20079899fb935508ab77e2}\label{classoomph_1_1MacroElement_a0eba5a165f20079899fb935508ab77e2} 
+\index{oomph::MacroElement@{oomph::MacroElement}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}\texorpdfstring{$\ast$}{*} oomph\+::\+Macro\+Element\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to domain. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00236}{236}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element_8h_source_l00229}{domain\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1}\label{classoomph_1_1MacroElement_a96e31a1ba7eac203a3bacb3403796ec1} 
+\index{oomph::MacroElement@{oomph::MacroElement}!Macro\_element\_number@{Macro\_element\_number}}
+\index{Macro\_element\_number@{Macro\_element\_number}!oomph::MacroElement@{oomph::MacroElement}}
+\doxysubsubsection{\texorpdfstring{Macro\_element\_number}{Macro\_element\_number}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Macro\+Element\+::\+Macro\+\_\+element\+\_\+number\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+What is the number of the current macro element within its domain. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element_8h_source_l00239}{239}} of file \mbox{\hyperlink{macro__element_8h_source}{macro\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element_8h_source_l00223}{macro\+\_\+element\+\_\+number()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{macro__element_8h}{macro\+\_\+element.\+h}}\end{DoxyCompactItemize}

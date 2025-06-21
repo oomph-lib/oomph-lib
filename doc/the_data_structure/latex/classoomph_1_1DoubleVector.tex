@@ -1,0 +1,962 @@
+\doxysection{oomph\+::Double\+Vector Class Reference}
+\hypertarget{classoomph_1_1DoubleVector}{}\label{classoomph_1_1DoubleVector}\index{oomph::DoubleVector@{oomph::DoubleVector}}
+
+
+A vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this vector can be distributed -\/ its distribution is described by the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object at Distribution\+\_\+pt. \doxylink{classoomph_1_1Data}{Data} is stored in a C-\/style pointer vector (double\texorpdfstring{$\ast$}{*})  
+
+
+
+
+{\ttfamily \#include $<$double\+\_\+vector.\+h$>$}
+
+Inheritance diagram for oomph\+::Double\+Vector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1DoubleVector}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a786d26f4034f2ae10c9d26542642661f}{Double\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for an uninitialized \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}{\texorpdfstring{$\sim$}{\string~}\+Double\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()} to delete the distribution and data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em assignment operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Just copys the argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em initialise the whole vector with value v \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}} ()
+\begin{DoxyCompactList}\small\item\em wipes the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82}{set\+\_\+external\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete\+\_\+external\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} dist\+\_\+pt argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3}{set\+\_\+external\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete\+\_\+external\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the distribution of this vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8}{redistribute}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI rebuild this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc}{operator==}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em == operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603}{operator+=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em += operator with another vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea}{operator-\/=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em -\/= operator with another vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2}{operator\texorpdfstring{$\ast$}{*}=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&d)
+\begin{DoxyCompactList}\small\item\em multiply by a double \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3}{operator/=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&d)
+\begin{DoxyCompactList}\small\item\em divide by a double \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}{max}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the maximum coefficient \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em access function to the underlying values \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}{values\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the underlying values (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the global contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4}{output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the global contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649}{output\+\_\+local\+\_\+values}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72}{output\+\_\+local\+\_\+values}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}{dot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the dot product of this vector with the vector vec. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55}{norm}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the 2 norm of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc}{norm}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the A-\/norm using the matrix at matrix\+\_\+pt \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVector_abbb699b9364ece68a4cb483291c04c25}{Values\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em the local vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a9b205077360d67c9de07e538199f335f}{Internal\+\_\+values}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\+pt) is owned by this vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab72c78c801b28fdd00391a9c266413ea}{Built}}
+\begin{DoxyCompactList}\small\item\em indicates that the vector has been built and is usable \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{out}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Ouput operator for \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this vector can be distributed -\/ its distribution is described by the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object at Distribution\+\_\+pt. \doxylink{classoomph_1_1Data}{Data} is stored in a C-\/style pointer vector (double\texorpdfstring{$\ast$}{*}) 
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00057}{57}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DoubleVector_a786d26f4034f2ae10c9d26542642661f}\label{classoomph_1_1DoubleVector_a786d26f4034f2ae10c9d26542642661f} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
+\index{DoubleVector@{DoubleVector}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{DoubleVector()}{DoubleVector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::\+Double\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for an uninitialized \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00061}{61}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}\label{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
+\index{DoubleVector@{DoubleVector}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{DoubleVector()}{DoubleVector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::\+Double\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00066}{66}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}\label{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
+\index{DoubleVector@{DoubleVector}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{DoubleVector()}{DoubleVector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::\+Double\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00076}{76}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}\label{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!````~DoubleVector@{\texorpdfstring{$\sim$}{\string~}DoubleVector}}
+\index{````~DoubleVector@{\texorpdfstring{$\sim$}{\string~}DoubleVector}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DoubleVector()}{\string~DoubleVector()}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::\texorpdfstring{$\sim$}{\string~}\+Double\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()} to delete the distribution and data. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00084}{84}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}\label{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!DoubleVector@{DoubleVector}}
+\index{DoubleVector@{DoubleVector}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{DoubleVector()}{DoubleVector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+::\+Double\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{new\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00090}{90}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}\label{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
+\index{build@{build}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{old\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Just copys the argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00035}{35}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00110}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00123}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00090}{Double\+Vector()}}, \mbox{\hyperlink{double__vector_8h_source_l00076}{Double\+Vector()}}, \mbox{\hyperlink{double__vector_8h_source_l00066}{Double\+Vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04185}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04598}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04008}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{double__vector_8h_source_l00100}{operator=()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00213}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator=()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00211}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00615}{oomph\+::\+Dummy\+Block\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00495}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00402}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l00240}{oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01362}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02161}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}\label{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
+\index{build@{build}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00110}{110}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a}\label{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
+\index{build@{build}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00123}{123}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9}\label{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
+\index{build@{build}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. 
+
+Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each row is set to v. 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00059}{59}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8}\label{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!build@{build}}
+\index{build@{build}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00091}{91}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}\label{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!built@{built}}
+\index{built@{built}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{built()}{built()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Double\+Vector\+::built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00154}{154}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04849}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{operator+=()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00211}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01838}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{preconditioner_8h_source_l00292}{oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00495}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04488}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}\label{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!clear@{clear}}
+\index{clear@{clear}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+wipes the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00142}{142}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{problem_8cc_source_l08816}{oomph\+::\+Problem\+::newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l09429}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l01048}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Subsidiary\+Block\+Preconditioner\+Old\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{linear__solver_8h_source_l00302}{oomph\+::\+Linear\+Solver\+::reset\+\_\+gradient()}}, \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}, and \mbox{\hyperlink{double__vector_8h_source_l00084}{\texorpdfstring{$\sim$}{\string~}\+Double\+Vector()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}\label{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!dot@{dot}}
+\index{dot@{dot}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Double\+Vector\+::dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{vec }\end{DoxyParamCaption}) const}
+
+
+
+compute the dot product of this vector with the vector vec. 
+
+compute the dot product of this vector with the vector vec 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00805}{805}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{norm()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}\label{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+initialise the whole vector with value v 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00123}{123}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, and \mbox{\hyperlink{biharmonic__preconditioner_8cc_source_l00243}{oomph\+::\+Biharmonic\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}\label{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$}]{v }\end{DoxyParamCaption})}
+
+
+
+initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00138}{138}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}\label{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!max@{max}}
+\index{max@{max}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Double\+Vector\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the maximum coefficient 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00604}{604}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{problem_8cc_source_l09429}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, and \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00538}{oomph\+::\+Segregatable\+FSIProblem\+::segregated\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55}\label{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!norm@{norm}}
+\index{norm@{norm}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Double\+Vector\+::norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+compute the 2 norm of this vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00867}{867}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc}\label{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!norm@{norm}}
+\index{norm@{norm}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Double\+Vector\+::norm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{matrix\+\_\+pt }\end{DoxyParamCaption}) const}
+
+
+
+compute the A-\/norm using the matrix at matrix\+\_\+pt 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00914}{914}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{oomph\+::\+CRDouble\+Matrix\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, and \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2}\label{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{d }\end{DoxyParamCaption})}
+
+
+
+multiply by a double 
+
+Multiply by double. 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00550}{550}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00573}{operator/=()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603}\label{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
++= operator with another vector 
+
++= operator 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00459}{459}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea}\label{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::operator-\/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+-\/= operator with another vector 
+
+-\/= operator 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00504}{504}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3}\label{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::operator/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{d }\end{DoxyParamCaption})}
+
+
+
+divide by a double 
+
+Divide by double. 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00573}{573}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00550}{operator\texorpdfstring{$\ast$}{*}=()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}\label{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{old\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+assignment operator 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00100}{100}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc}\label{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator==@{operator==}}
+\index{operator==@{operator==}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Double\+Vector\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+== operator 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00426}{426}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25}\label{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Double\+Vector\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}}]{i }\end{DoxyParamCaption})}
+
+
+
+\mbox{[}\mbox{]} access function to the (local) values of this vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00408}{408}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e}\label{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Double\+Vector\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}}]{i }\end{DoxyParamCaption}) const}
+
+
+
+\mbox{[}\mbox{]} access function to the (local) values of this vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00586}{586}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}\label{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output@{output}}
+\index{output@{output}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const}
+
+
+
+output the global contents of the vector 
+
+output the contents of the vector 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00653}{653}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8h_source_l00269}{output()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4}\label{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output@{output}}
+\index{output@{output}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+output the global contents of the vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00269}{269}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00653}{output()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649}\label{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values@{output\_local\_values}}
+\index{output\_local\_values@{output\_local\_values}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output\_local\_values()}{output\_local\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const}
+
+
+
+output the local contents of the vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00742}{742}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8h_source_l00283}{output\+\_\+local\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72}\label{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values@{output\_local\_values}}
+\index{output\_local\_values@{output\_local\_values}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output\_local\_values()}{output\_local\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+output the local contents of the vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00283}{283}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00742}{output\+\_\+local\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70}\label{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}}
+\index{output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output\_local\_values\_with\_offset()}{output\_local\_values\_with\_offset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const}
+
+
+
+output the local contents of the vector 
+
+output the local contents of the vector with the first row offset. 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00772}{772}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8h_source_l00298}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4}\label{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}}
+\index{output\_local\_values\_with\_offset@{output\_local\_values\_with\_offset}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{output\_local\_values\_with\_offset()}{output\_local\_values\_with\_offset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{output\+\_\+precision = {\ttfamily -\/1} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+output the local contents of the vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00298}{298}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00772}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8}\label{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!redistribute@{redistribute}}
+\index{redistribute@{redistribute}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{redistribute()}{redistribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::redistribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI rebuild this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
+
+The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI build this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00164}{164}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l09429}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82}\label{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!set\_external\_values@{set\_external\_values}}
+\index{set\_external\_values@{set\_external\_values}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{set\_external\_values()}{set\_external\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{external\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}}]{delete\+\_\+external\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} dist\+\_\+pt argument. 
+
+
+\begin{DoxyEnumerate}
+\item When a rebuild method is called new internal values are created.
+\item It is not possible to redistribute(...) a vector with external values .
+\item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00167}{167}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00326}{Built}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, and \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3}\label{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!set\_external\_values@{set\_external\_values}}
+\index{set\_external\_values@{set\_external\_values}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{set\_external\_values()}{set\_external\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{external\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}}]{delete\+\_\+external\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the distribution of this vector. 
+
+
+\begin{DoxyEnumerate}
+\item When a rebuild method is called new internal values are created.
+\item It is not possible to redistribute(...) a vector with external values .
+\item External values are only deleted by this vector if delete\+\_\+external\+\_\+values = true. 
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00191}{191}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{double__vector_8h_source_l00323}{Internal\+\_\+values}}, and \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}\label{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!values\_pt@{values\_pt}}
+\index{values\_pt@{values\_pt}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{values\_pt()}{values\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the underlying values 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00254}{254}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{block__preconditioner_8cc_source_l04598}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04008}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04849}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00504}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00764}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{problem_8cc_source_l09429}{oomph\+::\+Problem\+::newton\+\_\+solve\+\_\+continuation()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}\label{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!values\_pt@{values\_pt}}
+\index{values\_pt@{values\_pt}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{values\_pt()}{values\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+Double\+Vector\+::values\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the underlying values (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00260}{260}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00319}{Values\+\_\+pt}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f}\label{classoomph_1_1DoubleVector_ab24e12068a4b36f10e302b038eed0a1f} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Ouput operator for \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00949}{949}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DoubleVector_ab72c78c801b28fdd00391a9c266413ea}\label{classoomph_1_1DoubleVector_ab72c78c801b28fdd00391a9c266413ea} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!Built@{Built}}
+\index{Built@{Built}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{Built}{Built}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Double\+Vector\+::\+Built\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+indicates that the vector has been built and is usable 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00326}{326}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{built()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, and \mbox{\hyperlink{double__vector_8h_source_l00167}{set\+\_\+external\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_a9b205077360d67c9de07e538199f335f}\label{classoomph_1_1DoubleVector_a9b205077360d67c9de07e538199f335f} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!Internal\_values@{Internal\_values}}
+\index{Internal\_values@{Internal\_values}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{Internal\_values}{Internal\_values}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Double\+Vector\+::\+Internal\+\_\+values\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate whether the vector\textquotesingle{}s data (values\+\_\+pt) is owned by this vector. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00323}{323}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{redistribute()}}, and \mbox{\hyperlink{double__vector_8h_source_l00191}{set\+\_\+external\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1DoubleVector_abbb699b9364ece68a4cb483291c04c25}\label{classoomph_1_1DoubleVector_abbb699b9364ece68a4cb483291c04c25} 
+\index{oomph::DoubleVector@{oomph::DoubleVector}!Values\_pt@{Values\_pt}}
+\index{Values\_pt@{Values\_pt}!oomph::DoubleVector@{oomph::DoubleVector}}
+\doxysubsubsection{\texorpdfstring{Values\_pt}{Values\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Double\+Vector\+::\+Values\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the local vector 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector_8h_source_l00319}{319}} of file \mbox{\hyperlink{double__vector_8h_source}{double\+\_\+vector.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00035}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00059}{build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{build()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{clear()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{dot()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{initialise()}}, \mbox{\hyperlink{double__vector_8cc_source_l00138}{initialise()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{max()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00550}{operator\texorpdfstring{$\ast$}{*}=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{operator+=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{operator-\/=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00426}{operator==()}}, \mbox{\hyperlink{double__vector_8cc_source_l00408}{operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{double__vector_8cc_source_l00586}{operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00742}{output\+\_\+local\+\_\+values()}}, \mbox{\hyperlink{double__vector_8cc_source_l00772}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{redistribute()}}, \mbox{\hyperlink{double__vector_8h_source_l00191}{set\+\_\+external\+\_\+values()}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{values\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00260}{values\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{double__vector_8h}{double\+\_\+vector.\+h}}\item 
+\mbox{\hyperlink{double__vector_8cc}{double\+\_\+vector.\+cc}}\end{DoxyCompactItemize}

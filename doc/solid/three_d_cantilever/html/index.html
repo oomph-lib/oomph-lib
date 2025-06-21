@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Bending of a 3D non-symmetric cantilever beam made of incompressible material</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: Bending of a 3D non-symmetric cantilever beam made of incompressible material </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we demonstrate the solution of a 3D solid mechanics problem: the large-amplitude bending deformation of a non-symmetric cantilever beam made of incompressible Mooney-Rivlin material.</p>
+<p>Here is an animation of the beam's deformation. In its undeformed configuration, the beam is straight and its cross-section is given by a quarter circle. The beam is loaded by an increasing gravitational body force, acting in the negative <img class="formulaInl" alt="$ y$" src="form_0.png" width="8" height="9"/>-direction, while its left end (at <img class="formulaInl" alt="$ z=0 $" src="form_1.png" width="29" height="9"/>) is held fixed. Because of its non-symmetric cross-section, the beam's downward bending deformation is accompanied by a sideways deflection.</p>
+<div class="image">
+<img src="cantilever.gif" alt=""/>
+<div class="caption">
+Animation of the beam's bending deformation. </div></div>
+ <p>Note how the automatic mesh adaptation refines the mesh in the region of strongest bending.</p>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="mesh"></a>
+The mesh</h1>
+<p>We use multiple inheritance to upgrade the already-existing refineable "quarter tube mesh" to a solid mesh. Following a call to the constructor of the underlying meshes, we set the nodes' Lagrangian coordinates to their current Eulerian positions to make the initial configuration stress-free.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======================start_mesh=========================================</span></div>
+<div class="line"><span class="comment">/// Simple quarter tube mesh upgraded to become a solid mesh</span></div>
+<div class="line"><span class="comment">//=========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh</a> : </div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> RefineableQuarterTubeMesh&lt;ELEMENT&gt;, </div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> SolidMesh </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Constructor: </span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh</a>(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">GeomObject</a>* <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">wall_pt</a>,</div>
+<div class="line">                                  <span class="keyword">const</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>,</div>
+<div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">fract_mid</a>,</div>
+<div class="line">                                  <span class="keyword">const</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>,</div>
+<div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nlayer</a>,</div>
+<div class="line">                                  <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">TimeStepper</a>* <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">time_stepper_pt</a>=</div>
+<div class="line">                                  &amp;<a class="code hl_function" href="classRefineableElasticQuarterTubeMesh.html#a97c25a8845b2d8ab2a4aef1c0407bacd">Mesh::Default_TimeStepper</a>) :</div>
+<div class="line">  QuarterTubeMesh&lt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">wall_pt</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">fract_mid</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>,</div>
+<div class="line">                           <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nlayer</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">time_stepper_pt</a>),</div>
+<div class="line">  RefineableQuarterTubeMesh&lt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">wall_pt</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">fract_mid</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>,</div>
+<div class="line">                                     <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nlayer</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">time_stepper_pt</a>) </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Assign the Lagrangian coordinates</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">set_lagrangian_nodal_coordinates</a>();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Empty Destructor</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code hl_function" href="classRefineableElasticQuarterTubeMesh.html#a157397dff3fb4ab8b1daea787bc9f97c">~RefineableElasticQuarterTubeMesh</a>() { }</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="ttc" id="aclassRefineableElasticQuarterTubeMesh_html"><div class="ttname"><a href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh</a></div><div class="ttdoc">Simple quarter tube mesh upgraded to become a solid mesh.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00053">three_d_cantilever.cc:56</a></div></div>
+<div class="ttc" id="aclassRefineableElasticQuarterTubeMesh_html_a157397dff3fb4ab8b1daea787bc9f97c"><div class="ttname"><a href="classRefineableElasticQuarterTubeMesh.html#a157397dff3fb4ab8b1daea787bc9f97c">RefineableElasticQuarterTubeMesh::~RefineableElasticQuarterTubeMesh</a></div><div class="ttdeci">virtual ~RefineableElasticQuarterTubeMesh()</div><div class="ttdoc">Empty Destructor.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00078">three_d_cantilever.cc:78</a></div></div>
+<div class="ttc" id="aclassRefineableElasticQuarterTubeMesh_html_a97c25a8845b2d8ab2a4aef1c0407bacd"><div class="ttname"><a href="classRefineableElasticQuarterTubeMesh.html#a97c25a8845b2d8ab2a4aef1c0407bacd">RefineableElasticQuarterTubeMesh::RefineableElasticQuarterTubeMesh</a></div><div class="ttdeci">RefineableElasticQuarterTubeMesh(GeomObject *wall_pt, const Vector&lt; double &gt; &amp;xi_lo, const double &amp;fract_mid, const Vector&lt; double &gt; &amp;xi_hi, const unsigned &amp;nlayer, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00061">three_d_cantilever.cc:61</a></div></div>
+</div><!-- fragment --> <hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>As usual, we define a namespace, <code><a class="el" href="namespaceGlobal__Physical__Variables.html" title="Global variables.">Global_Physical_Variables</a></code>, to define the problem parameters: the length of the cantilever beam, <img class="formulaInl" alt="$ L $" src="form_2.png" width="9" height="10"/>, a (pointer to) a strain energy function, the constitutive parameters <img class="formulaInl" alt="$ C_1 $" src="form_3.png" width="14" height="13"/> and <img class="formulaInl" alt="$ C_2 $" src="form_4.png" width="14" height="13"/> for the Mooney-Rivlin strain energy function, and a (pointer to) a constitutive equation. Finally, we define the gravitational body force which acts in the negative <img class="formulaInl" alt="$ y$" src="form_0.png" width="8" height="9"/>-direction.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of beam</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a1b8bfc451f6b7ac89eca18f04338f47f">L</a>=10.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to strain energy function</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">StrainEnergyFunction</a>* <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Strain_energy_function_pt</a>=0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// First &quot;Mooney Rivlin&quot; coefficient </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">C1</a>=1.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Second &quot;Mooney Rivlin&quot; coefficient </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#af9defd1b5745cce50d2c386b3ac0e0ae">C2</a>=1.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ConstitutiveLaw</a>* <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Constitutive_law_pt</a>=0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim gravity</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Gravity</a>=0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dimensional gravity as body force</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a0777aef63372db7f91ad894c38159681">gravity</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">time</a>, </div>
+<div class="line">              <span class="keyword">const</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi</a>, </div>
+<div class="line">              <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a> &amp;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>)</div>
+<div class="line"> {</div>
+<div class="line">  <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>[0]=0.0;</div>
+<div class="line">  <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>[1]=-<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Gravity</a>;</div>
+<div class="line">  <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>[2]=0.0;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00125">three_d_cantilever.cc:126</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0777aef63372db7f91ad894c38159681"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0777aef63372db7f91ad894c38159681">Global_Physical_Variables::gravity</a></div><div class="ttdeci">void gravity(const double &amp;time, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;b)</div><div class="ttdoc">Non-dimensional gravity as body force.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00147">three_d_cantilever.cc:147</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a1b8bfc451f6b7ac89eca18f04338f47f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a1b8bfc451f6b7ac89eca18f04338f47f">Global_Physical_Variables::L</a></div><div class="ttdeci">double L</div><div class="ttdoc">Length of beam.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00129">three_d_cantilever.cc:129</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a2a37fb040c832ee7a086bb13bb02a100"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00141">three_d_cantilever.cc:141</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a73135f793690b4386bf83bbefc7bf310"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a></div><div class="ttdeci">StrainEnergyFunction * Strain_energy_function_pt</div><div class="ttdoc">Pointer to strain energy function.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00132">three_d_cantilever.cc:132</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a849754fa7155c1a31481674ce4845658"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a></div><div class="ttdeci">double C1</div><div class="ttdoc">First &quot;Mooney Rivlin&quot; coefficient.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00135">three_d_cantilever.cc:135</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Global_Physical_Variables::Gravity</a></div><div class="ttdeci">double Gravity</div><div class="ttdoc">Non-dim gravity.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00144">three_d_cantilever.cc:144</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_af9defd1b5745cce50d2c386b3ac0e0ae"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#af9defd1b5745cce50d2c386b3ac0e0ae">Global_Physical_Variables::C2</a></div><div class="ttdeci">double C2</div><div class="ttdoc">Second &quot;Mooney Rivlin&quot; coefficient.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00138">three_d_cantilever.cc:138</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>If the code is executed without command line arguments we perform a single simulation. We start by creating the strain energy function and pass it to the constructor of the strain-energy-based constitutive equation. We then build the problem object, using <code>oomph-lib's</code> large-displacement Taylor-Hood solid mechanics elements which are based on a continuous-pressure/displacement formulation.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for 3D cantilever beam loaded by gravity</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="three__d__cantilever_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">argc</a>, <span class="keywordtype">char</span>* <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">argv</a>[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Run main demo code if no command line arguments are specified</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">argc</a>==1)</div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Create incompressible Mooney Rivlin strain energy function</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a> = </div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">MooneyRivlin</a>(&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a849754fa7155c1a31481674ce4845658">Global_Physical_Variables::C1</a>,</div>
+<div class="line">                     &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#af9defd1b5745cce50d2c386b3ac0e0ae">Global_Physical_Variables::C2</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Define a constitutive law (based on strain energy function)</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">    <span class="keyword">new</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">IsotropicStrainEnergyFunctionConstitutiveLaw</a>(</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a73135f793690b4386bf83bbefc7bf310">Global_Physical_Variables::Strain_energy_function_pt</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set up the problem with continous pressure/displacement</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">CantileverProblem&lt;RefineableQPVDElementWithContinuousPressure&lt;3&gt;</a> &gt; <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">problem</a>;</div>
+<div class="ttc" id="athree__d__cantilever_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="three__d__cantilever_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for 3D cantilever beam loaded by gravity.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00473">three_d_cantilever.cc:473</a></div></div>
+</div><!-- fragment --><p> We document the initial configuration before starting a parameter study in which the magnitude of the gravitational body force is increased in small steps:</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">problem</a>.doc_solution();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Initial values for parameter values</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Global_Physical_Variables::Gravity</a>=0.0;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Parameter incrementation</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nstep</a>=10; </div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordtype">double</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">g_increment</a>=5.0e-4;   </div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>=0;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>&lt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nstep</a>;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Increment load</span></div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b80d3e8d63b8d0a0ed435a2dd7fe2ad">Global_Physical_Variables::Gravity</a>+=<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">g_increment</a>;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Solve the problem with Newton&#39;s method, allowing</span></div>
+<div class="line">     <span class="comment">// up to max_adapt mesh adaptations after every solve.</span></div>
+<div class="line">     <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">max_adapt</a>=1;   </div>
+<div class="line">     <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">problem</a>.newton_solve(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">max_adapt</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Doc solution</span></div>
+<div class="line">     <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">problem</a>.doc_solution();    </div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end main demo code</span></div>
+</div><!-- fragment --><p> If the code is executed with a non-zero number of command line arguments, it performs a large number of additional self tests that we will not discuss here. See the driver code <a href="../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc">three_d_cantilever.cc</a> for details.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="class"></a>
+The problem class</h1>
+<p>The problem class contains the usual member functions. No action is required before the mesh adaptation; we overload the function <code>Problem::actions_after_adapt()</code> to pin the redundant solid pressure degrees of freedom afterwards.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============begin_problem============================================ </span></div>
+<div class="line"><span class="comment">/// Problem class for the 3D cantilever &quot;beam&quot; structure.</span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classCantileverProblem.html">CantileverProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classCantileverProblem.html#abba97fc4b8402bc0363fdf16322f6572">CantileverProblem</a>(); </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#a4a70a4328d287aaa15c7811562122013">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#a293902b825898ce043ffce3f0691f5a5">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt. Empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#a50f8964219c507562945655e0ed5fc23">actions_before_adapt</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#af4d135ace3eac657b38de362e1644c75">actions_after_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line">   <a class="code hl_function" href="classRefineableElasticQuarterTubeMesh.html#a97c25a8845b2d8ab2a4aef1c0407bacd">PVDEquationsBase&lt;3&gt;::pin_redundant_nodal_solid_pressures</a>(</div>
+<div class="line">    <a class="code hl_function" href="classCantileverProblem.html#afae2bac330172d85ab316bb94a27c822">mesh_pt</a>()-&gt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">element_pt</a>());</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#a7571348f8724e71be4e67dc64cea3877">doc_solution</a>();</div>
+<div class="ttc" id="aclassCantileverProblem_html"><div class="ttname"><a href="classCantileverProblem.html">CantileverProblem</a></div><div class="ttdoc">Problem class for the 3D cantilever &quot;beam&quot; structure.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00182">three_d_cantilever.cc:183</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_a293902b825898ce043ffce3f0691f5a5"><div class="ttname"><a href="classCantileverProblem.html#a293902b825898ce043ffce3f0691f5a5">CantileverProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00194">three_d_cantilever.cc:194</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_a4a70a4328d287aaa15c7811562122013"><div class="ttname"><a href="classCantileverProblem.html#a4a70a4328d287aaa15c7811562122013">CantileverProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00191">three_d_cantilever.cc:191</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_a50f8964219c507562945655e0ed5fc23"><div class="ttname"><a href="classCantileverProblem.html#a50f8964219c507562945655e0ed5fc23">CantileverProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt. Empty.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00197">three_d_cantilever.cc:197</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_a7571348f8724e71be4e67dc64cea3877"><div class="ttname"><a href="classCantileverProblem.html#a7571348f8724e71be4e67dc64cea3877">CantileverProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00356">three_d_cantilever.cc:356</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_abba97fc4b8402bc0363fdf16322f6572"><div class="ttname"><a href="classCantileverProblem.html#abba97fc4b8402bc0363fdf16322f6572">CantileverProblem::CantileverProblem</a></div><div class="ttdeci">CantileverProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00247">three_d_cantilever.cc:247</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_af4d135ace3eac657b38de362e1644c75"><div class="ttname"><a href="classCantileverProblem.html#af4d135ace3eac657b38de362e1644c75">CantileverProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00200">three_d_cantilever.cc:200</a></div></div>
+<div class="ttc" id="aclassCantileverProblem_html_afae2bac330172d85ab316bb94a27c822"><div class="ttname"><a href="classCantileverProblem.html#afae2bac330172d85ab316bb94a27c822">CantileverProblem::mesh_pt</a></div><div class="ttdeci">RefineableElasticQuarterTubeMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Access function for the mesh.</div><div class="ttdef"><b>Definition</b> <a href="three__d__cantilever_8cc_source.html#l00213">three_d_cantilever.cc:213</a></div></div>
+</div><!-- fragment --><p> We overload the <code>Problem::mesh_pt()</code> function to return a pointer to the specific mesh used in this problem:</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Access function for the mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh&lt;ELEMENT&gt;</a>* mesh_pt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Problem::mesh_pt());</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> The private member data stores a <code>DocInfo</code> object in which we will store the name of the output directory.</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// DocInfo object for output</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">DocInfo</a> Doc_info;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We start by creating the <code>GeomObject</code> that defines the curvilinear boundary of the beam: a circular cylinder of unit radius.</p>
+<div class="fragment"><div class="line"><span class="comment">//===========start_of_constructor======================================= </span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classCantileverProblem.html#abba97fc4b8402bc0363fdf16322f6572">CantileverProblem&lt;ELEMENT&gt;::CantileverProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create geometric object that defines curvilinear boundary of</span></div>
+<div class="line"> <span class="comment">// beam: Elliptical tube with half axes = radius = 1.0</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">radius</a>=1.0;</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">GeomObject</a>* <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">wall_pt</a>=<span class="keyword">new</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">EllipticalTube</a>(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">radius</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">radius</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bounding Lagrangian coordinates</span></div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>(2);</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>[0]=0.0;</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>(2);</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>[0]= <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a1b8bfc451f6b7ac89eca18f04338f47f">Global_Physical_Variables::L</a>;</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>[1]=2.0*<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">atan</a>(1.0);</div>
+</div><!-- fragment --><p> We build the mesh, using six axial layers of elements, before creating an error estimator and specifying the error targets for the adaptive mesh refinement.</p>
+<div class="fragment"><div class="line"> <span class="comment">// # of layers</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nlayer</a>=6;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Radial divider is located half-way along the circumference</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">frac_mid</a>=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh </span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh&lt;ELEMENT&gt;</a></div>
+<div class="line">  (<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">wall_pt</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_lo</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">frac_mid</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">xi_hi</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">nlayer</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">RefineableElasticQuarterTubeMesh&lt;ELEMENT&gt;</a>* <span class="keyword">&gt;</span>(</div>
+<div class="line">  mesh_pt())-&gt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">spatial_error_estimator_pt</a>()=<span class="keyword">new</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">Z2ErrorEstimator</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line"> mesh_pt()-&gt;max_permitted_error()=0.05;</div>
+<div class="line"> mesh_pt()-&gt;min_permitted_error()=0.005;</div>
+</div><!-- fragment --><p> We complete the build of the elements by specifying the constitutive equation and the body force. We check that the element is based on a pressure/displacement formulation, and, if so, select an incompressible formulation. (This check is only required because the self-tests not shown here also include cases in which the problem is solved using a displacement-based formulation with compressible elasticity; see also the section <a class="el" href="index.html#incompr">How to enforce incompressibility</a> below).</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete build of elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_element</a>=mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>=0;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>&lt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_element</a>;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a solid element</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ELEMENT</a> *<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">el_pt</a>-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the body force</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">el_pt</a>-&gt;body_force_fct_pt() = <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a0777aef63372db7f91ad894c38159681">Global_Physical_Variables::gravity</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Material is incompressble: Use incompressible displacement/pressure</span></div>
+<div class="line">   <span class="comment">// formulation (if the element is pressure based, that is!)</span></div>
+<div class="line">   <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">PVDEquationsWithPressure&lt;3&gt;</a>* <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">cast_el_pt</a> = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">PVDEquationsWithPressure&lt;3&gt;</a>*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>));</div>
+<div class="line">   <span class="keywordflow">if</span> (<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">cast_el_pt</a>!=0)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">cast_el_pt</a>-&gt;set_incompressible();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// done build of elements</span></div>
+</div><!-- fragment --><p> We fix the position of all nodes at the left end of the beam (on boundary 0) and pin any redundant solid pressures.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the left boundary (boundary 0) in all directions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>=0; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_side</a> = mesh_pt()-&gt;nboundary_node(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the nodes</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>=0;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>&lt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_side</a>;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>)-&gt;pin_position(0);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>)-&gt;pin_position(1);</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">b</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">i</a>)-&gt;pin_position(2);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> <a class="code hl_function" href="classRefineableElasticQuarterTubeMesh.html#a97c25a8845b2d8ab2a4aef1c0407bacd">PVDEquationsBase&lt;3&gt;::pin_redundant_nodal_solid_pressures</a>(</div>
+<div class="line">  mesh_pt()-&gt;<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">element_pt</a>());</div>
+</div><!-- fragment --><p> Finally, we assign the equation numbers and define the output directory.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Assign equation numbers</span></div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">assign_eqn_numbers</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Prepare output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">//end of constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The post-processing function <code>doc_solution()</code> simply outputs the shape of the deformed beam.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==============start_doc===========================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classCantileverProblem.html#a7571348f8724e71be4e67dc64cea3877">CantileverProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">ofstream</a> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">some_file</a>;</div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">filename</a>[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_plot</a> = 5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output shape of deformed body</span></div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">snprintf</a>(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">filename</a>), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">some_file</a>.open(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">filename</a>);</div>
+<div class="line"> mesh_pt()-&gt;output(<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">some_file</a>,<a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">n_plot</a>);</div>
+<div class="line"> <a class="code hl_class" href="classRefineableElasticQuarterTubeMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment label for output files</span></div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="exercises"></a>
+Comments and exercises</h1>
+<h2><a class="anchor" id="incompr"></a>
+How to enforce incompressibility</h2>
+<p>We stress that the imposition of incompressibility must be requested explicitly via the element's member function <code>incompressible()</code>. Mathematically, incompressibility is enforced via a Lagrange multiplier which manifests itself physically as the pressure. Incompressibility can therefore only be enforced for elements that employ the pressure-displacement formulation of the principle of virtual displacements. This is why we the <code>Problem</code> constructor checked if the element is derived from the <code>PVDEquationsWithPressure</code> class before setting the element's <code>incompressible</code> flag to <code>true</code>.</p>
+<p>As usual, <code>oomph-lib</code> provides self-tests that assess if the enforcement incompressibility (or the lack thereof) is consistent:</p><ul>
+<li>The compiler will not allow the user to enforce incompressibility on elements that are based on the displacement form of the principle of virtual displacements. <br  />
+<br  />
+</li>
+<li>Certain constitutive laws, such as the Mooney-Rivlin law used in the present example require an incompressible formulation. If <code>oomph-lib</code> is compiled with the <code>PARANOID</code> flag, an error is thrown if such a constitutive law is used by an element for which incompressibility has not been requested. <br  />
+<br  />
+ <center> <b>Recall that the default setting is not to enforce incompressibility!</b> </center> <br  />
+ If the library is compiled without the <code>PARANOID</code> flag no warning will be issued but the results will be "wrong" at least in the sense that the material does not behave like an incompressible Mooney-Rivlin solid. In fact, it is likely that the Newton solver will diverge. Anyway, as we keep saying, without the <code>PARANOID</code> flag, you're on your own! <br  />
+<br  />
+</li>
+<li>Some constitutive laws can be used for compressible and incompressible behaviour. In this case it is important to set the <code>incompressible()</code> flag to the correct value. This issue is discussed in more detail in <a href="../../compressed_square/html/index.html">another tutorial.</a></li>
+</ul>
+<p>You should experiment with different combinations of constitutive laws and element types to familiarise yourself with these.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/three_d_cantilever/">demo_drivers/solid/three_d_cantilever/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc">demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:54
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

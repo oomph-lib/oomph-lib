@@ -1,0 +1,148 @@
+\_form#0=254x29:\[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\]
+\_form#1=5x6:$ c $
+\_form#2=60x14:$ U(x,y,z,t) $
+\_form#3=9x6:$ \omega $
+\_form#4=246x16:\[
+U(x,y,z,t) = Re (u(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\]
+\_form#5=49x14:$ u(x,y,z) $
+\_form#6=238x16:\[
+\nabla^2 u(x,y,z) + k^2 u(x,y,z) = 0 \ ,
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\]
+\_form#7=44x14:$ k = \omega/c $
+\_form#8=130x31:\[
+\lim_{r\to \infty} r \left(\frac{\partial u}{\partial r} - iku
+\right) =0. 
+\]
+\_form#9=40x14:$ (r,\varphi,z)
+$
+\_form#10=40x14:$ (x,y,z) $
+\_form#11=70x14:\[
+x =  r \cos(\varphi),
+\]
+\_form#12=68x14:\[
+y =  r \sin(\varphi),
+\]
+\_form#13=33x6:\[
+z = z.
+\]
+\_form#14=201x36:\[
+u(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\]
+\_form#15=44x14:$ u_N(r,z) $
+\_form#16=274x33:\[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\]
+\_form#17=11x10:$ N $
+\_form#18=10x10:$ D $
+\_form#19=15x13:$
+D_c $
+\_form#20=23x13:$
+\partial D_c $
+\_form#21=15x13:$ D_c $
+\_form#22=266x31:\[
+\frac{\partial}{\partial x_j} \to \frac{1}{s_j(x_j)} \frac{\partial}{\partial x_j} 
+ \ \ \ \ \mbox{where $j ="r","z"$} \ \ \ \ \ \ \ \ (5)
+\]
+\_form#23=26x14:$ s_r(r) $
+\_form#24=26x14:$ s_z(z) $
+\_form#25=349x30:\[
+  s_z(z)  = 
+  1 +\frac{i}{k}\ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}, \ \ \ \ \ 
+  (6)
+  \]
+\_form#26=33x13:$ Z_{PML} $
+\_form#27=54x14:\[
+   s_r(r) = 1.
+  \]
+\_form#28=54x14:\[ 
+  s_z(z) = 1,
+  \]
+\_form#29=346x30:\[
+  s_r(r) = 
+  1+\frac{i}{k} \ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|}, \ \ \ \ \ 
+  (7)
+  \]
+\_form#30=34x13:$ R_{PML} $
+\_form#31=341x30:\[
+  s_r(r)  = 
+  1 +\frac{i}{k}\ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|} \ \ \ \ \ 
+  (8)
+  \]
+\_form#32=346x30:\[
+  s_z(z) = 
+  1+\frac{i}{k} \ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}. \ \ \ \ \ 
+  (9)
+  \]
+\_form#33=96x14:\[
+  s_r(r) =   s_z(z) = 1.
+  \]
+\_form#34=26x14:$ s_{r}(r) $
+\_form#35=26x14:$ s_{z}(z) $
+\_form#36=35x14:$ \partial u/\partial
+n $
+\_form#37=49x14:$ u(\rho,\varphi,\theta) $
+\_form#38=40x14:$
+(\rho,\theta,\varphi) $
+\_form#39=428x39:\[
+u(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ (10)
+\]
+\_form#40=36x13:$a_{ln}, b_{ln} $
+\_form#41=311x18:\[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\]
+\_form#42=310x31:\[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\]
+\_form#43=205x28:\[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\]
+\_form#44=161x28:\[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\]
+\_form#45=59x14:$ P_{l}^{m}(x)=0 $
+\_form#46=33x11:$ m>l $
+\_form#47=40x14:$
+(r,\varphi,z)$
+\_form#48=78x16:\[
+\rho = \sqrt{r^2 + z^2},
+\]
+\_form#49=89x14:\[
+\theta = \arctan(r/z),
+\]
+\_form#50=36x9:\[
+\varphi = \varphi,
+\]
+\_form#51=55x14:$\varphi \in [0,2\pi] $
+\_form#52=46x14:$\theta \in [0,\pi] $
+\_form#53=29x10:$ \theta = 0 $
+\_form#54=43x14:$ \theta = \pi/2 $
+\_form#55=30x10:$ \theta = \pi $
+\_form#56=34x10:$ N = 3
+$
+\_form#57=41x11:$ k^2 = 10 $
+\_form#58=11x11:$ k^2 $

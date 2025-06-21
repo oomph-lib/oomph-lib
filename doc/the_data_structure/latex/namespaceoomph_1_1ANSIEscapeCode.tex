@@ -1,0 +1,162 @@
+\doxysection{oomph\+::ANSIEscape\+Code Namespace Reference}
+\hypertarget{namespaceoomph_1_1ANSIEscapeCode}{}\label{namespaceoomph_1_1ANSIEscapeCode}\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+
+
+Contains an enumeration of the ANSI escape codes used for colouring text (when piped to the command line). Adapted from the guide on\+: \href{https://stackoverflow.com/questions/2616906/how-do-i-output-}{\texttt{ https\+://stackoverflow.\+com/questions/2616906/how-\/do-\/i-\/output-\/}} coloured-\/text-\/to-\/a-\/linux-\/terminal?utm\+\_\+medium=organic\&utm\+\_\+source= google\+\_\+rich\+\_\+qa\&utm\+\_\+campaign=google\+\_\+rich\+\_\+qa Here, \textbackslash{}033 is the ESC character, ASCII 27. It is followed by \mbox{[}, then zero or more numbers separated by ;, and finally the letter m. The numbers describe the colour and format to switch to from that point onwards.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a745d12f5554c0048681e8d2a69e23c61}{set\+\_\+text\+\_\+effect}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text\+\_\+effect}})
+\begin{DoxyCompactList}\small\item\em Function to change text effect. NOTE\+: This assumes the user knows what they\textquotesingle{}re doing/assigning; no error checking done here... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} = "{}1"{}
+\begin{DoxyCompactList}\small\item\em Variable to decide on effects. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_abe5bd51c05cfd3d8947ffda441027a80}{Black}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};30m"{}
+\begin{DoxyCompactList}\small\item\em The code for each type of colour. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a39353277652bd9f0a9fa157de37e15b8}{Red}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};31m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a03d526a5ee2e3640be71c6e4c259a5a1}{Green}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};32m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a2726e39b9a72019d04cb0b925c4d9470}{Yellow}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};33m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_abd711ed5deff5f1ac6c8c237e7eb6054}{Blue}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};34m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a51f30d3e511d901eb04dd3298f832b1f}{Magenta}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};35m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_a5ecf74e7d179495dc56d9babc6c59cee}{Cyan}} = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};36m"{}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_acff2bddbcc5d441e9bd2047f6f994540}{Reset}} = "{}\textbackslash{}033\mbox{[}0m"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains an enumeration of the ANSI escape codes used for colouring text (when piped to the command line). Adapted from the guide on\+: \href{https://stackoverflow.com/questions/2616906/how-do-i-output-}{\texttt{ https\+://stackoverflow.\+com/questions/2616906/how-\/do-\/i-\/output-\/}} coloured-\/text-\/to-\/a-\/linux-\/terminal?utm\+\_\+medium=organic\&utm\+\_\+source= google\+\_\+rich\+\_\+qa\&utm\+\_\+campaign=google\+\_\+rich\+\_\+qa Here, \textbackslash{}033 is the ESC character, ASCII 27. It is followed by \mbox{[}, then zero or more numbers separated by ;, and finally the letter m. The numbers describe the colour and format to switch to from that point onwards. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a745d12f5554c0048681e8d2a69e23c61}\label{namespaceoomph_1_1ANSIEscapeCode_a745d12f5554c0048681e8d2a69e23c61} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!set\_text\_effect@{set\_text\_effect}}
+\index{set\_text\_effect@{set\_text\_effect}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{set\_text\_effect()}{set\_text\_effect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+ANSIEscape\+Code\+::set\+\_\+text\+\_\+effect (\begin{DoxyParamCaption}\item[{std\+::string}]{text\+\_\+effect }\end{DoxyParamCaption})}
+
+
+
+Function to change text effect. NOTE\+: This assumes the user knows what they\textquotesingle{}re doing/assigning; no error checking done here... 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00060}{60}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00067}{Text\+\_\+effect}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_abe5bd51c05cfd3d8947ffda441027a80}\label{namespaceoomph_1_1ANSIEscapeCode_abe5bd51c05cfd3d8947ffda441027a80} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Black@{Black}}
+\index{Black@{Black}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Black}{Black}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Black = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};30m"{}}
+
+
+
+The code for each type of colour. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00070}{70}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_abd711ed5deff5f1ac6c8c237e7eb6054}\label{namespaceoomph_1_1ANSIEscapeCode_abd711ed5deff5f1ac6c8c237e7eb6054} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Blue@{Blue}}
+\index{Blue@{Blue}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Blue}{Blue}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Blue = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};34m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00074}{74}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a5ecf74e7d179495dc56d9babc6c59cee}\label{namespaceoomph_1_1ANSIEscapeCode_a5ecf74e7d179495dc56d9babc6c59cee} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Cyan@{Cyan}}
+\index{Cyan@{Cyan}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Cyan}{Cyan}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Cyan = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};36m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00076}{76}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a03d526a5ee2e3640be71c6e4c259a5a1}\label{namespaceoomph_1_1ANSIEscapeCode_a03d526a5ee2e3640be71c6e4c259a5a1} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Green@{Green}}
+\index{Green@{Green}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Green}{Green}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Green = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};32m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00072}{72}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a51f30d3e511d901eb04dd3298f832b1f}\label{namespaceoomph_1_1ANSIEscapeCode_a51f30d3e511d901eb04dd3298f832b1f} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Magenta@{Magenta}}
+\index{Magenta@{Magenta}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Magenta}{Magenta}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Magenta = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};35m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00075}{75}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a39353277652bd9f0a9fa157de37e15b8}\label{namespaceoomph_1_1ANSIEscapeCode_a39353277652bd9f0a9fa157de37e15b8} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Red@{Red}}
+\index{Red@{Red}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Red}{Red}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Red = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};31m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00071}{71}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_acff2bddbcc5d441e9bd2047f6f994540}\label{namespaceoomph_1_1ANSIEscapeCode_acff2bddbcc5d441e9bd2047f6f994540} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Reset@{Reset}}
+\index{Reset@{Reset}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Reset}{Reset}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Reset = "{}\textbackslash{}033\mbox{[}0m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00077}{77}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}\label{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Text\_effect@{Text\_effect}}
+\index{Text\_effect@{Text\_effect}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Text\_effect}{Text\_effect}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Text\+\_\+effect = "{}1"{}}
+
+
+
+Variable to decide on effects. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00067}{67}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00060}{set\+\_\+text\+\_\+effect()}}.
+
+\Hypertarget{namespaceoomph_1_1ANSIEscapeCode_a2726e39b9a72019d04cb0b925c4d9470}\label{namespaceoomph_1_1ANSIEscapeCode_a2726e39b9a72019d04cb0b925c4d9470} 
+\index{oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}!Yellow@{Yellow}}
+\index{Yellow@{Yellow}!oomph::ANSIEscapeCode@{oomph::ANSIEscapeCode}}
+\doxysubsubsection{\texorpdfstring{Yellow}{Yellow}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+ANSIEscape\+Code\+::\+Yellow = "{}\textbackslash{}033\mbox{[}"{} + \mbox{\hyperlink{namespaceoomph_1_1ANSIEscapeCode_ab13ed5c495a179b685fc9324dfe42c92}{Text\+\_\+effect}} + "{};33m"{}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00073}{73}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+

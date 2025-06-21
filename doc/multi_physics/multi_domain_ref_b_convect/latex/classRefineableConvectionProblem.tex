@@ -1,0 +1,567 @@
+\doxysection{Refineable\+Convection\+Problem\texorpdfstring{$<$}{<} NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRefineableConvectionProblem}{}\label{classRefineableConvectionProblem}\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+
+
+2D Convection problem on two rectangular domains, discretised with refineable Navier-\/\+Stokes and Advection-\/\+Diffusion elements. The specific type of element is specified via the template parameters.  
+
+
+Inheritance diagram for Refineable\+Convection\+Problem\texorpdfstring{$<$}{<} NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.417722cm]{classRefineableConvectionProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{Refineable\+Convection\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Convection\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve (empty) \end{DoxyCompactList}\item 
+Refineable\+Rectangular\+Quad\+Mesh$<$ NST\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem_a94fc43968a80c57601c8a48eac41bf3b}{nst\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the NST mesh. Casts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\item 
+Refineable\+Rectangular\+Quad\+Mesh$<$ AD\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem_a28a600808065e8baff9c6a223c0dda9f}{adv\+\_\+diff\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the AD mesh. Casts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+:(empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adaptation, reset all sources, then re-\/pin a single pressure degree of freedom. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c}{enable\+\_\+imperfection}} ()
+\begin{DoxyCompactList}\small\item\em Set the boundary condition on the upper wall to be perturbed slightly to force the solution into the symmetry broken state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84}{disable\+\_\+imperfection}} ()
+\begin{DoxyCompactList}\small\item\em Set th boundary condition on the upper wall to be unperturbed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableConvectionProblem_aa3a0c85ea1db9186292d130a3ec23a2d}{Refineable\+Convection\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Convection\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_ae0e627f882cd8faa305392e615331e51}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve (empty) \end{DoxyCompactList}\item 
+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem_ab39a08708e152e4f119832dc5e1bc96c}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+:(empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adaptation, Re-\/pin a single pressure degree of freedom. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c}{enable\+\_\+imperfection}} ()
+\begin{DoxyCompactList}\small\item\em Set the boundary condition on the upper wall to be perturbed slightly to force the solution into the symmetry broken state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84}{disable\+\_\+imperfection}} ()
+\begin{DoxyCompactList}\small\item\em Set the boundary condition on the upper wall to be unperturbed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableConvectionProblem_a8f6c4ead999c108394b6c6eb121daa51}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Refineable\+Rectangular\+Quad\+Mesh$<$ NST\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem_abc03f2233894203f55be5841857d2381}{Nst\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Navier Stokes mesh. \end{DoxyCompactList}\item 
+Refineable\+Rectangular\+Quad\+Mesh$<$ AD\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem_abfa55603a761cf57cb7de38beb8fa9ac}{Adv\+\_\+diff\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Advection diffusion mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{classRefineableConvectionProblem_acf0b222e2ae8efc508536e578c3a359e}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc\+Info object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRefineableConvectionProblem_af5a23ac1fe5407159089c5909e86f026}{Imperfect}}
+\begin{DoxyCompactList}\small\item\em Is the boundary condition imperfect or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class NST\+\_\+\+ELEMENT, class AD\+\_\+\+ELEMENT$>$\newline
+class Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}
+2D Convection problem on two rectangular domains, discretised with refineable Navier-\/\+Stokes and Advection-\/\+Diffusion elements. The specific type of element is specified via the template parameters. 
+
+2D Convection problem on rectangular domain, discretised with refineable elements. The specific type of element is specified via the template parameter. 
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00080}{80}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}\label{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!RefineableConvectionProblem@{RefineableConvectionProblem}}
+\index{RefineableConvectionProblem@{RefineableConvectionProblem}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableConvectionProblem()}{RefineableConvectionProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classRefineableConvectionProblem}{\+::\+Refineable\+Convection\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for adaptive thermal convection problem. 
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00186}{186}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Direction\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{boussinesq__convection_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Inverse\+\_\+\+Prandtl}}, \mbox{\hyperlink{boussinesq__convection_8cc_source_l00051}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet}}, and \mbox{\hyperlink{boussinesq__convection_8cc_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Rayleigh}}.
+
+\Hypertarget{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943}\label{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!````~RefineableConvectionProblem@{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem}}
+\index{````~RefineableConvectionProblem@{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem()}{\string~RefineableConvectionProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00089}{89}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_aa3a0c85ea1db9186292d130a3ec23a2d}\label{classRefineableConvectionProblem_aa3a0c85ea1db9186292d130a3ec23a2d} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!RefineableConvectionProblem@{RefineableConvectionProblem}}
+\index{RefineableConvectionProblem@{RefineableConvectionProblem}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableConvectionProblem()}{RefineableConvectionProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\mbox{\hyperlink{classRefineableConvectionProblem}{\+::\+Refineable\+Convection\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\Hypertarget{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943}\label{classRefineableConvectionProblem_a43fc2693230601928578d5b0c6380943} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!````~RefineableConvectionProblem@{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem}}
+\index{````~RefineableConvectionProblem@{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableConvectionProblem()}{\string~RefineableConvectionProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00093}{93}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def}\label{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions after adaptation, reset all sources, then re-\/pin a single pressure degree of freedom. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00120}{120}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00109}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::adv\+\_\+diff\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00100}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::nst\+\_\+mesh\+\_\+pt()}}.
+
+\Hypertarget{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def}\label{classRefineableConvectionProblem_a9baa484155212df5ad2137dd5a348def} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions after adaptation, Re-\/pin a single pressure degree of freedom. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00115}{115}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{refineable__b__convection_8cc_source_l00104}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee}\label{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00095}{95}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee}\label{classRefineableConvectionProblem_a13bda5e5e75928efa88433902ccab7ee} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00099}{99}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0}\label{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before adapt\+:(empty) 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00116}{116}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0}\label{classRefineableConvectionProblem_a962499683ada1233e20055e46b15fdb0} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before adapt\+:(empty) 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00111}{111}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee}\label{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve\+: 
+
+Update the problem specs before solve\+: (Re-\/)set boundary conditions to include an imperfection (or not) depending on the control flag. 
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00364}{364}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_ae0e627f882cd8faa305392e615331e51}\label{classRefineableConvectionProblem_ae0e627f882cd8faa305392e615331e51} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve\+: 
+
+\Hypertarget{classRefineableConvectionProblem_a28a600808065e8baff9c6a223c0dda9f}\label{classRefineableConvectionProblem_a28a600808065e8baff9c6a223c0dda9f} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!adv\_diff\_mesh\_pt@{adv\_diff\_mesh\_pt}}
+\index{adv\_diff\_mesh\_pt@{adv\_diff\_mesh\_pt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{adv\_diff\_mesh\_pt()}{adv\_diff\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Refineable\+Rectangular\+Quad\+Mesh$<$ AD\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::adv\+\_\+diff\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the AD mesh. Casts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00109}{109}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00177}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Adv\+\_\+diff\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00120}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}.
+
+\Hypertarget{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84}\label{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!disable\_imperfection@{disable\_imperfection}}
+\index{disable\_imperfection@{disable\_imperfection}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_imperfection()}{disable\_imperfection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::disable\+\_\+imperfection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set th boundary condition on the upper wall to be unperturbed. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00158}{158}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00169}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Imperfect}}.
+
+\Hypertarget{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84}\label{classRefineableConvectionProblem_a816f49163ff3ceb71aec4236aac10d84} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!disable\_imperfection@{disable\_imperfection}}
+\index{disable\_imperfection@{disable\_imperfection}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_imperfection()}{disable\_imperfection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::disable\+\_\+imperfection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the boundary condition on the upper wall to be unperturbed. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00142}{142}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00169}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Imperfect}}.
+
+\Hypertarget{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b}\label{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00432}{432}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_a8f6c4ead999c108394b6c6eb121daa51}\label{classRefineableConvectionProblem_a8f6c4ead999c108394b6c6eb121daa51} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c}\label{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!enable\_imperfection@{enable\_imperfection}}
+\index{enable\_imperfection@{enable\_imperfection}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_imperfection()}{enable\_imperfection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::enable\+\_\+imperfection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the boundary condition on the upper wall to be perturbed slightly to force the solution into the symmetry broken state. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00154}{154}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00169}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Imperfect}}.
+
+\Hypertarget{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c}\label{classRefineableConvectionProblem_aa97926281f88014ad45f43972184a77c} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!enable\_imperfection@{enable\_imperfection}}
+\index{enable\_imperfection@{enable\_imperfection}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_imperfection()}{enable\_imperfection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::enable\+\_\+imperfection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the boundary condition on the upper wall to be perturbed slightly to force the solution into the symmetry broken state. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00138}{138}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00169}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Imperfect}}.
+
+\Hypertarget{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2}\label{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{139}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00100}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::nst\+\_\+mesh\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00120}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2}\label{classRefineableConvectionProblem_a3432fe8f8e4ba54d5e4c1ca7b3b233e2} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00127}{127}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{refineable__b__convection_8cc_source_l00104}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classRefineableConvectionProblem_ab39a08708e152e4f119832dc5e1bc96c}\label{classRefineableConvectionProblem_ab39a08708e152e4f119832dc5e1bc96c} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded version of the problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__b__convection_8cc_source_l00104}{104}} of file \mbox{\hyperlink{refineable__b__convection_8cc_source}{refineable\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__b__convection_8cc_source_l00115}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{refineable__b__convection_8cc_source_l00127}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classRefineableConvectionProblem_a94fc43968a80c57601c8a48eac41bf3b}\label{classRefineableConvectionProblem_a94fc43968a80c57601c8a48eac41bf3b} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!nst\_mesh\_pt@{nst\_mesh\_pt}}
+\index{nst\_mesh\_pt@{nst\_mesh\_pt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nst\_mesh\_pt()}{nst\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Refineable\+Rectangular\+Quad\+Mesh$<$ NST\+\_\+\+ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::nst\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the NST mesh. Casts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00100}{100}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00174}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Nst\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00120}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00139}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classRefineableConvectionProblem_abfa55603a761cf57cb7de38beb8fa9ac}\label{classRefineableConvectionProblem_abfa55603a761cf57cb7de38beb8fa9ac} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!Adv\_diff\_mesh\_pt@{Adv\_diff\_mesh\_pt}}
+\index{Adv\_diff\_mesh\_pt@{Adv\_diff\_mesh\_pt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Adv\_diff\_mesh\_pt}{Adv\_diff\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Refineable\+Rectangular\+Quad\+Mesh$<$AD\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Adv\+\_\+diff\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Advection diffusion mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00177}{177}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00109}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::adv\+\_\+diff\+\_\+mesh\+\_\+pt()}}.
+
+\Hypertarget{classRefineableConvectionProblem_acf0b222e2ae8efc508536e578c3a359e}\label{classRefineableConvectionProblem_acf0b222e2ae8efc508536e578c3a359e} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc\+Info object. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00166}{166}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+\Hypertarget{classRefineableConvectionProblem_af5a23ac1fe5407159089c5909e86f026}\label{classRefineableConvectionProblem_af5a23ac1fe5407159089c5909e86f026} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!Imperfect@{Imperfect}}
+\index{Imperfect@{Imperfect}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Imperfect}{Imperfect}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+bool \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Imperfect\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Is the boundary condition imperfect or not. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00169}{169}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00158}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::disable\+\_\+imperfection()}}, and \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00154}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::enable\+\_\+imperfection()}}.
+
+\Hypertarget{classRefineableConvectionProblem_abc03f2233894203f55be5841857d2381}\label{classRefineableConvectionProblem_abc03f2233894203f55be5841857d2381} 
+\index{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}!Nst\_mesh\_pt@{Nst\_mesh\_pt}}
+\index{Nst\_mesh\_pt@{Nst\_mesh\_pt}!RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$@{RefineableConvectionProblem$<$ NST\_ELEMENT, AD\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nst\_mesh\_pt}{Nst\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class NST\+\_\+\+ELEMENT , class AD\+\_\+\+ELEMENT $>$ \\
+Refineable\+Rectangular\+Quad\+Mesh$<$NST\+\_\+\+ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::\+Nst\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Navier Stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00174}{174}} of file \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_source_l00100}{Refineable\+Convection\+Problem$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$\+::nst\+\_\+mesh\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{multi__domain__ref__b__convection_8cc}{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convection.\+cc}}\item 
+\mbox{\hyperlink{refineable__b__convection_8cc}{refineable\+\_\+b\+\_\+convection.\+cc}}\end{DoxyCompactItemize}

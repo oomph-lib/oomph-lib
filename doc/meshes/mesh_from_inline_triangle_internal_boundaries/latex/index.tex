@@ -1,0 +1,592 @@
+\chapter{Creation of internal boundaries for Triangle based meshes}
+\hypertarget{index}{}\label{index}\index{Creation of internal boundaries for Triangle based meshes@{Creation of internal boundaries for Triangle based meshes}}
+In this document we show how to add internal boundaries and create connections among them in 2D unstructured meshes with {\ttfamily oomph-\/lib}. The mesh generation procedure is performed by using \href{http://www.cs.berkeley.edu/~jrs/}{\texttt{ Jonathan Shewchuk\textquotesingle{}s}} \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ Triangle}}. This tutorial complements the discussion in \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial}} where we illustrated how to build {\ttfamily oomph-\/lib} meshes using the {\ttfamily Triangle\+Mesh\+Polygon} and {\ttfamily Triangle\+Mesh\+Closed\+Curve} objects.
+
+\DoxyHorRuler{0}
+
+
+Additionally, we show via examples
+\begin{DoxyItemize}
+\item how to connect {\ttfamily Triangle\+Mesh\+Curve\+Section} objects
+\item how to add addition holes and extra regions, i.\+e. regions not defined via {\ttfamily Triangle\+Mesh\+Polygon} or {\ttfamily Triangle\+Mesh\+Closed\+Curve} objects
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_overview}{}\doxysection{\texorpdfstring{Adding internal boundaries}{Adding internal boundaries}}\label{index_overview}
+\hypertarget{index_open_curve}{}\doxysubsection{\texorpdfstring{The Triangle\+Mesh\+Open\+Curve object}{The TriangleMeshOpenCurve object}}\label{index_open_curve}
+An internal boundary is defined in {\ttfamily oomph-\/lib} by the object {\ttfamily Triangle\+Mesh\+Open\+Curve}. We can create and add as many internal boundaries as we need for defining our domain, see figure below.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{figure_extravagant}
+\doxyfigcaption{The {\ttfamily Triangle\+Mesh\+Open\+Curve} object allow us to define domains with internal boundaries. The internal boundaries are shown in red. Notice the connections of the internal boundaries with other boundaries. The connections are shown with filled small circles. }
+\end{DoxyImage}
+
+
+The {\ttfamily Triangle\+Mesh\+Open\+Curve} object allows the creation of complex internal boundaries as a combination of {\ttfamily Triangle\+Mesh\+Poly\+Line} and/or {\ttfamily Triangle\+Mesh\+Curvi\+Line} objects. In order to create a {\ttfamily Triangle\+Mesh\+Open\+Curve} it is necessary to create a {\ttfamily Vector} of {\ttfamily Triangle\+Mesh\+Curve\+Section} objects that define the {\ttfamily Triangle\+Mesh\+Open\+Curve}, see figure below.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{different_open_curves}
+\doxyfigcaption{Different types of {\ttfamily Triangle\+Mesh\+Open\+Curve}, a) A {\ttfamily Triangle\+Mesh\+Open\+Curve} defined as a combination of two {\ttfamily Triangle\+Mesh\+Poly\+Lines} (in blue) and a {\ttfamily Triangle\+Mesh\+Curvi\+Line} (in red). b) A {\ttfamily Triangle\+Mesh\+Open\+Curve} can also be defined as just one {\ttfamily Triangle\+Mesh\+Curve\+Section}, in this case a {\ttfamily Triangle\+Mesh\+Poly\+Line}. c) A {\ttfamily Triangle\+Mesh\+Open\+Curve} defined as a combination of a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a {\ttfamily Triangles\+Mesh\+Curvi\+Line}. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_connections}{}\doxysection{\texorpdfstring{Creating connections among current boundaries in the domain and with internal boundaries}{Creating connections among current boundaries in the domain and with internal boundaries}}\label{index_connections}
+Any internal boundary can be connected (via its ends) to any other boundary currently in the domain.
+
+It is important to note that there are four different types of connections\+:
+\begin{DoxyItemize}
+\item Connection between a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a {\ttfamily Triangle\+Mesh\+Poly\+Line} 
+\item Connection between a {\ttfamily Triangle\+Mesh\+Curvi\+Line} and a {\ttfamily Triangle\+Mesh\+Poly\+Line} 
+\item Connection between a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a {\ttfamily Triangle\+Mesh\+Curvi\+Line} 
+\item Connection between a {\ttfamily Triangle\+Mesh\+Curvi\+Line} and a {\ttfamily Triangle\+Mesh\+Curvi\+Line} 
+\end{DoxyItemize}
+
+The next figure shows an sketch of the different types of connections.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{connections}
+\doxyfigcaption{Different types of connections. a) Connection between a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a {\ttfamily Triangle\+Mesh\+Poly\+Line}. b) Connection between a {\ttfamily Triangle\+Mesh\+Curvi\+Line} and a {\ttfamily Triangle\+Mesh\+Poly\+Line}. c) Connection between a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a {\ttfamily Triangle\+Mesh\+Curvi\+Line}. d) Connection between a {\ttfamily Triangle\+Mesh\+Curvi\+Line} and a {\ttfamily Triangle\+Mesh\+Curvi\+Line}. }
+\end{DoxyImage}
+
+
+Connections to {\ttfamily Triangle\+Mesh\+Poly\+Line} can only be made by using existing vertices of the destination {\ttfamily Triangle\+Mesh\+Poly\+Line}. Conversely, connections to {\ttfamily Triangle\+Mesh\+Curvi\+Line} can be made by specifying the position along the {\ttfamily Triangle\+Mesh\+Curvi\+Line}. The ~\newline
+ connection point is identified by the {\ttfamily Triangle\+Mesh\+Curvi\+Line\textquotesingle{}s} intrinsic coordinates. The figure below shows the case when a connection with a {\ttfamily Triangle\+Mesh\+Poly\+Line} is possible.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{figure_poly}
+\doxyfigcaption{In order to connect a boundary to a {\ttfamily Triangle\+Mesh\+Poly\+Line} it is necessary that the destination boundary has a vertex on the connection point. a) There is no vertex for connecting to the destination {\ttfamily Triangle\+Mesh\+Poly\+Line}. b) There is a vertex in the destination {\ttfamily Triangle\+Mesh\+Poly\+Line} to receive the initial end of the source boundary. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example_poisson}{}\doxysection{\texorpdfstring{Example\+: A domain with multiple internal boundaries and connections}{Example: A domain with multiple internal boundaries and connections}}\label{index_example_poisson}
+We will show how to add internal boundaries and how to create connections among them by using the same example as in \href{../../../../doc/meshes/mesh_from_triangle/html/index.html}{\texttt{ another tutorial}}.
+
+\DoxyHorRuler{0}
+
+
+A sketch of the domain is shown on the next figure. The domain has seven boundaries, two of which define the outer boundary and the other five define internal boundaries.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sketch_domain}
+\doxyfigcaption{The sketch of the domain; note the different internal boundaries and their connection points. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_def_domain}{}\doxysubsection{\texorpdfstring{Definition of the domain/mesh}{Definition of the domain/mesh}}\label{index_def_domain}
+The following code is extracted from the Problem constructor and shows how to create the domain/mesh.\hypertarget{index_def_out}{}\doxysubsubsection{\texorpdfstring{Defining the outer boundaries}{Defining the outer boundaries}}\label{index_def_out}
+The first task is to define the outer boundary which we represent by a {\ttfamily Triangle\+Mesh\+Closed\+Curve} comprising two {\ttfamily Triangle\+Mesh\+Poly\+Lines}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Begin\ -\/\ Outer\ boundary}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ storage\ for\ the\ vertices\ coordinates\ that\ define\ each\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ num\_vertices\_b0\ =\ 4;}
+\DoxyCodeLine{\ \ Vector<Vector\ <double>\ >\ vertices(num\_vertices\_b0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[0].resize(2);}
+\DoxyCodeLine{\ \ vertices[1].resize(2);}
+\DoxyCodeLine{\ \ vertices[2].resize(2);}
+\DoxyCodeLine{\ \ vertices[3].resize(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Building\ the\ outer\ boundary\ (vertices)}}
+\DoxyCodeLine{\ \ vertices[0][0]\ =\ 0;}
+\DoxyCodeLine{\ \ vertices[0][1]\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[1][0]\ =\ 0;}
+\DoxyCodeLine{\ \ vertices[1][1]\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[2][0]\ =\ 0;}
+\DoxyCodeLine{\ \ vertices[2][1]\ =\ 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[3][0]\ =\ 3;}
+\DoxyCodeLine{\ \ vertices[3][1]\ =\ 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ outer\ boundary\ is\ represented\ by\ two\ TriangleMeshPolyLine\ objects,}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ this\ is\ the\ first\ one}}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 0;}
+\DoxyCodeLine{\ \ TriangleMeshPolyLine\ *boundary0\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertices,\ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ storage\ for\ the\ vertices\ coordinates\ that\ define\ each\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ num\_vertices\_b1\ =\ 5;}
+\DoxyCodeLine{\ \ vertices.resize(num\_vertices\_b1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[0].resize(2);}
+\DoxyCodeLine{\ \ vertices[1].resize(2);}
+\DoxyCodeLine{\ \ vertices[2].resize(2);}
+\DoxyCodeLine{\ \ vertices[3].resize(2);}
+\DoxyCodeLine{\ \ vertices[4].resize(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ More\ vertices\ for\ the\ outer\ boundary}}
+\DoxyCodeLine{\ \ vertices[0][0]\ =\ 3;}
+\DoxyCodeLine{\ \ vertices[0][1]\ =\ 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[1][0]\ =\ 3;}
+\DoxyCodeLine{\ \ vertices[1][1]\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[2][0]\ =\ 3;}
+\DoxyCodeLine{\ \ vertices[2][1]\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[3][0]\ =\ 1;}
+\DoxyCodeLine{\ \ vertices[3][1]\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[4][0]\ =\ 0;}
+\DoxyCodeLine{\ \ vertices[4][1]\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ outer\ boundary\ is\ represented\ by\ two\ TriangleMeshPolyLine\ objects,}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ this\ is\ the\ second\ one}}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 1;}
+\DoxyCodeLine{\ \ TriangleMeshPolyLine\ *boundary1\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertices,\ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ A\ vector\ for\ storing\ the\ outer\ boundary\ representation}}
+\DoxyCodeLine{\ \ Vector<TriangleMeshCurveSection*>\ outer\_boundary\_polyLines\_pt(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ outer\_boundary\_polyLines\_pt[0]\ =\ boundary0\_pt;}
+\DoxyCodeLine{\ \ outer\_boundary\_polyLines\_pt[1]\ =\ boundary1\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ TriangleMeshClosedCurve\ *outer\_boundary\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshPolygon(outer\_boundary\_polyLines\_pt);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ End\ -\/\ Outer\ boundary}}
+
+\end{DoxyCodeInclude}
+ Note that we defined additional vertices along the two boundaries to allow the creation of connections to the outer boundary, see figure below.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{outer_boundary_vertices}
+\doxyfigcaption{Vertex 1 on boundary 0 and vertices 1 and 3 on boundary 1 are created to allow the subsequent connections with internal boundaries. }
+\end{DoxyImage}
+\hypertarget{index_def_inopen}{}\doxysubsubsection{\texorpdfstring{Defining internal boundaries}{Defining internal boundaries}}\label{index_def_inopen}
+We create a {\ttfamily Vector} of five {\ttfamily Triangle\+Mesh\+Open\+Curves} which will represent the internal boundaries.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Internal\ open\ boundaries}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Total\ number\ of\ open\ curves\ in\ the\ domain}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_open\_curves\ =\ 5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ want\ internal\ open\ curves}}
+\DoxyCodeLine{\ \ Vector<TriangleMeshOpenCurve\ *>\ inner\_open\_boundaries\_pt(n\_open\_curves);}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+
+
+{\bfseries{ Simple internal boundaries without connections }}
+
+Our domain has two unconnected internal boundaries\+: a straight line, represented by a {\ttfamily Triangle\+Mesh\+Poly\+Line} and a curve line represented by a {\ttfamily Triangle\+Mesh\+Curvi\+Line}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ start\ by\ creating\ the\ internal\ boundaries}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ boundary\ 2\ is\ defined\ by\ its\ two\ vertices}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ curve\ 1}}
+\DoxyCodeLine{\ \ vertices.resize(2);}
+\DoxyCodeLine{\ \ vertices[0].resize(2);}
+\DoxyCodeLine{\ \ vertices[1].resize(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[0][0]\ =\ 0.5;}
+\DoxyCodeLine{\ \ vertices[0][1]\ =\ 2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ vertices[1][0]\ =\ 0.5;}
+\DoxyCodeLine{\ \ vertices[1][1]\ =\ 2.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 2;}
+\DoxyCodeLine{\ \ TriangleMeshPolyLine\ *boundary2\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertices,\ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Each\ internal\ open\ curve\ is\ defined\ by\ a\ vector\ of\ TriangleMeshCurveSection,}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ on\ this\ example\ we\ only\ need\ one\ curve\ section\ for\ each\ internal\ boundary}}
+\DoxyCodeLine{\ \ Vector<TriangleMeshCurveSection\ *>\ internal\_curve\_section1\_pt(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ internal\_curve\_section1\_pt[0]\ =\ boundary2\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ open\ curve\ that\ define\ this\ boundary\ is\ composed\ of\ just\ one}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ curve\ section}}
+\DoxyCodeLine{\ \ inner\_open\_boundaries\_pt[0]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_curve\_section1\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ *********************************************************************}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ define\ the\ curved\ boundary\ as\ a\ TriangleMeshCurviline}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ curve\ 2}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ x\_centre\ =\ 2.0;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y\_centre\ =\ 2.0;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ r\_circle\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Circle\ *\ boundary\_circle1\_pt\ =\ \textcolor{keyword}{new}\ Circle(x\_centre,\ y\_centre,\ r\_circle);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ segments\ used\ for\ representing\ the\ curve\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_segments\ =\ 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ s\_start\ =\ 0.0;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ s\_end\ =\ MathematicalConstants::Pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 3;}
+\DoxyCodeLine{\ \ TriangleMeshCurviLine\ *boundary3\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(boundary\_circle1\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_end,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ n\_segments,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Vector<TriangleMeshCurveSection\ *>\ internal\_curve\_section2\_pt(1);}
+\DoxyCodeLine{\ \ internal\_curve\_section2\_pt[0]\ =\ boundary3\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ open\ curve\ that\ define\ this\ boundary\ is\ composed\ of\ just\ one}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ curve\ section}}
+\DoxyCodeLine{\ \ inner\_open\_boundaries\_pt[1]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_curve\_section2\_pt);}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+
+
+{\bfseries{ Adding an internal boundary connected to an outer boundary }}
+
+We need to add three more internal boundaries which have connections with the outer boundary and with some internal boundaries; see the sketch of the domain.
+
+In order to connect an internal boundary with any other boundary in the domain it is necessary to specify the following\+:
+
+
+\begin{DoxyItemize}
+\item Is the initial or the final end of the boundary the one that we want to connect?
+\item Do we want to connect the boundary with a {\ttfamily Triangle\+Mesh\+Poly\+Line} or with a {\ttfamily Triangle\+Mesh\+Curvi\+Line}?
+\item If we want to connect with a {\ttfamily Triangle\+Mesh\+Poly\+Line} then we need to identify the corresponding vertex number to which we want to connect. If we want to connect with a {\ttfamily Triangle\+Mesh\+Curvi\+Line} we need to identify the corresponding intrinsic coordinate $ s $ on the curve for connection.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+Consider the creation of the internal boundary 4 shown on the sketch of the domain. This is an example of connecting a {\ttfamily Triangle\+Mesh\+Curvi\+Line} with a {\ttfamily Triangle\+Mesh\+Poly\+Line} (the outer boundary). In this case both ends of the {\ttfamily Triangle\+Mesh\+Curvi\+Line} are connected so we need to use the interface for connecting the initial and the final ends of the boundary to a {\ttfamily Triangle\+Mesh\+Poly\+Line}. There is only one thing left to identify, the vertex number of the destination boundary to which we want to connect. By looking at figure 1.\+5 we see that these values are vertex \#3 for the initial end and vertex \#1 for the final end. Once identified, we perform the connection as follow\+:
+
+
+\begin{DoxyItemize}
+\item Create the internal boundary as usual
+\end{DoxyItemize}
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ curve\ 3}}
+\DoxyCodeLine{\ \ x\_centre\ =\ 0.0;}
+\DoxyCodeLine{\ \ y\_centre\ =\ 0.0;}
+\DoxyCodeLine{\ \ r\_circle\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Circle\ *\ boundary\_circle2\_pt\ =\ \textcolor{keyword}{new}\ Circle(x\_centre,\ y\_centre,\ r\_circle);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ segments\ used\ for\ representing\ the\ curve\ boundary}}
+\DoxyCodeLine{\ \ n\_segments\ =\ 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ \ s\_start\ =\ 0.0;}
+\DoxyCodeLine{\ \ s\_end\ =\ MathematicalConstants::Pi\ /\ 2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ State\ the\ vertex\ number\ for\ connection\ on\ the\ destination}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ boundaries}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ vertex\_to\_connect\_initial\ =\ 3;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ vertex\_to\_connect\_final\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 4;}
+\DoxyCodeLine{\ \ TriangleMeshCurviLine\ *boundary4\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(boundary\_circle2\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_end,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ n\_segments,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ boundary\_id);}
+
+\end{DoxyCodeInclude}
+
+\begin{DoxyItemize}
+\item Specify connections using the destination boundary and the vertex number
+\end{DoxyItemize}
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ the\ outer\ boundary}}
+\DoxyCodeLine{\ \ boundary4\_pt-\/>connect\_initial\_vertex\_to\_polyline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary1\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex\_to\_connect\_initial);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ the\ outer\ boundary}}
+\DoxyCodeLine{\ \ boundary4\_pt-\/>connect\_final\_vertex\_to\_polyline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary0\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex\_to\_connect\_final);}
+
+\end{DoxyCodeInclude}
+
+\begin{DoxyItemize}
+\item Finally, create the {\ttfamily Triangle\+Mesh\+Open\+Curve} object as usual
+\end{DoxyItemize}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ open\ curve\ that\ define\ this\ boundary\ is\ composed\ of\ just\ one}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ curve\ section}}
+\DoxyCodeLine{\ \ inner\_open\_boundaries\_pt[2]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_curve\_section3\_pt);}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+
+
+{\bfseries{ Adding an internal boundary connected with another internal boundary }}
+
+Boundary 5, a straight line connected to the outer boundary and to an internal boundary (the one that we created on the previous step).
+
+The initial end of the boundary is connected to the outer boundary therefore we need to identify the vertex number to which it is connected; by looking at the sketch of the domain we see that the destination vertex number is 1. The final end is connected with a {\ttfamily Triangle\+Mesh\+Curvi\+Line} therefore we need to specify the intrinsic coordinate in the object where we want to connect (the intrinsic coordinate is the arc-\/length along the circle).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ This\ boundary\ is\ connected\ to\ the\ outer\ boundary\ on\ the\ initial\ end}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ and\ to\ an\ internal\ boundary\ on\ the\ final\ end}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ curve\ 4}}
+\DoxyCodeLine{\ \ vertices.resize(3);}
+\DoxyCodeLine{\ \ vertices[0].resize(2);}
+\DoxyCodeLine{\ \ vertices[1].resize(2);}
+\DoxyCodeLine{\ \ vertices[2].resize(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ need\ to\ specify\ the\ vertices\ for\ the\ boundary\ on\ the\ first\ end}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ connection\ method\ performs\ a\ checking\ on\ the\ matching\ of\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ vertices\ used\ for\ connection}}
+\DoxyCodeLine{\ \ vertices[0][0]\ =\ 3.0;}
+\DoxyCodeLine{\ \ vertices[0][1]\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ These\ values\ are\ necessary\ when\ we\ subsequently\ perform\ the\ connection}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ of\ the\ last\ boundary}}
+\DoxyCodeLine{\ \ vertices[1][0]\ =\ (3.0\ +\ sqrt(3.0))\ *\ 0.5;}
+\DoxyCodeLine{\ \ vertices[1][1]\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ need\ to\ specify\ the\ vertices\ for\ the\ boundary\ on\ the\ last\ end}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ connection\ method\ performs\ a\ checking\ on\ the\ matching\ of\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ vertices\ used\ for\ connection}}
+\DoxyCodeLine{\ \ vertices[2][0]\ =\ sqrt(3.0)\ *\ 0.5;}
+\DoxyCodeLine{\ \ vertices[2][1]\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ State\ the\ vertex\ number\ for\ connection\ with\ the\ destination}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ boundary}}
+\DoxyCodeLine{\ \ vertex\_to\_connect\_initial\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ State\ the\ s\ value\ for\ connection\ with\ the\ destination\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ s\_connection\_final\ =\ atan2(0.5,\ sqrt(3.0)\ *\ 0.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 5;}
+\DoxyCodeLine{\ \ TriangleMeshPolyLine\ *boundary5\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertices,\ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ the\ outer\ boundary}}
+\DoxyCodeLine{\ \ boundary5\_pt-\/>connect\_initial\_vertex\_to\_polyline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary1\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex\_to\_connect\_initial);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ an\ internal\ boundary}}
+\DoxyCodeLine{\ \ boundary5\_pt-\/>connect\_final\_vertex\_to\_curviline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary4\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_connection\_final);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Vector<TriangleMeshCurveSection\ *>\ internal\_curve\_section4\_pt(1);}
+\DoxyCodeLine{\ \ internal\_curve\_section4\_pt[0]\ =\ boundary5\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ open\ curve\ that\ define\ this\ boundary\ is\ composed\ of\ just\ one}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ curve\ section}}
+\DoxyCodeLine{\ \ inner\_open\_boundaries\_pt[3]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_curve\_section4\_pt);}
+
+\end{DoxyCodeInclude}
+ {\bfseries{ Adding an internal boundary connected with another internal boundary (the last one from our example) }}
+
+The fifth internal boundary is connected to two internal boundaries. The initial end of the new internal boundary is connected to a {\ttfamily Triangle\+Mesh\+Poly\+Line} and the final end is connected to a {\ttfamily Triangle\+Mesh\+Curvi\+Line}. The vertex number for connection with the {\ttfamily Triangle\+Mesh\+Poly\+Line} was established in the definition of the previous internal boundary, vertex \#1. The circles defining boundaries 4 and 6 meet each other at $(x, y) = (\frac{3}{4}, \frac{\sqrt(7)}{4})$ which corresponds to the intrinsic coordinate $ s = arctan(\frac{\sqrt{7}}{3}) $ on the {\ttfamily Triangle\+Mesh\+Curvi\+Line} object representing boundary 4.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ curve\ 5}}
+\DoxyCodeLine{\ \ x\_centre\ =\ 1.5;}
+\DoxyCodeLine{\ \ y\_centre\ =\ 0.0;}
+\DoxyCodeLine{\ \ r\_circle\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Circle\ *\ boundary\_circle3\_pt\ =\ \textcolor{keyword}{new}\ Circle(x\_centre,\ y\_centre,\ r\_circle);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ segments\ used\ for\ representing\ the\ curve\ boundary}}
+\DoxyCodeLine{\ \ n\_segments\ =\ 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ These\ numbers\ can\ be\ easily\ obtained\ by\ computing\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ intersection\ of\ the\ circle\ (circle3)\ and\ the\ other\ boundaries}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ (in\ this\ case,\ boundaries\ 4\ and\ 5)}}
+\DoxyCodeLine{\ \ s\_start\ =\ atan2(0.5,\ (3.0\ +\ sqrt(3.0))\ *\ 0.5\ -\/\ 1.5);}
+\DoxyCodeLine{\ \ s\_end\ =\ atan2(0.25*sqrt(7.0),\ -\/0.75);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ State\ the\ vertex\ number\ for\ connection\ on\ the\ destination}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ boundaries}}
+\DoxyCodeLine{\ \ vertex\_to\_connect\_initial\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ State\ the\ s\ value\ for\ connection\ with\ the\ destination\ boundary}}
+\DoxyCodeLine{\ \ s\_connection\_final\ =\ atan2(0.25*sqrt(7.0),\ 0.75);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ boundary\_id\ =\ 6;}
+\DoxyCodeLine{\ \ TriangleMeshCurviLine\ *boundary6\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(boundary\_circle3\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ s\_end,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ n\_segments,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ an\ internal\ boundary}}
+\DoxyCodeLine{\ \ boundary6\_pt-\/>connect\_initial\_vertex\_to\_polyline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary5\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertex\_to\_connect\_initial);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Do\ the\ connection\ with\ the\ destination\ boundary,\ in\ this\ case}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ the\ connection\ is\ done\ with\ an\ internal\ boundary}}
+\DoxyCodeLine{\ \ boundary6\_pt-\/>connect\_final\_vertex\_to\_curviline(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary4\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_connection\_final);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ Vector<TriangleMeshCurveSection\ *>\ internal\_curve\_section5\_pt(1);}
+\DoxyCodeLine{\ \ internal\_curve\_section5\_pt[0]\ =\ boundary6\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ open\ curve\ that\ define\ this\ boundary\ is\ composed\ of\ just\ one}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ curve\ section}}
+\DoxyCodeLine{\ \ inner\_open\_boundaries\_pt[4]\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_curve\_section5\_pt);}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_create_mesh}{}\doxysubsubsection{\texorpdfstring{Build the mesh}{Build the mesh}}\label{index_create_mesh}
+We build the mesh specific parameters using a {\ttfamily Triangle\+Mesh\+Parameters} object.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Create\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Use\ the\ TriangleMeshParameters\ object\ for\ helping\ on\ the\ manage\ of\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ TriangleMesh\ parameters.\ The\ only\ parameter\ that\ needs\ to\ take\ is\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ outer\ boundary.}}
+\DoxyCodeLine{\ \ TriangleMeshParameters\ triangle\_mesh\_parameters(outer\_boundary\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Specify\ the\ internal\ closed\ boundaries}}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.internal\_closed\_curve\_pt()\ =\ inner\_boundaries\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Specify\ the\ internal\ open\ boundaries}}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.internal\_open\_curves\_pt()\ =\ inner\_open\_boundaries\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ One\ can\ define\ an\ specific\ maximum\ element\ area}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ element\_area\ =\ 0.2;}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.element\_area()\ =\ element\_area;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ the\ TriangleMeshParameters\ object\ to\ the\ TriangleMesh\ one}}
+\DoxyCodeLine{\ \ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_def_extra}{}\doxysubsection{\texorpdfstring{Defining additional holes and regions}{Defining additional holes and regions}}\label{index_def_extra}
+It is possible to define holes in the domain using the methods discussed in \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial}}; where we explained how to create holes by using closed curves. Holes could also be created by specifying additional parameters on the {\ttfamily Triangle\+Mesh\+Parameters} object. The specification of regions or layers follows the same principle.\hypertarget{index_def_extra_holes}{}\doxysubsubsection{\texorpdfstring{Defining additional holes}{Defining additional holes}}\label{index_def_extra_holes}
+For defining holes it is only necessary to specify a point that lies inside a closed boundary (created by the connection of internal open boundaries). For example, the region bounded by boundaries 4, 5 and 6 can be turned into a hole by specifying the coordinate $ ( 1.5, 0.75) $, see figure below.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sketch_domain_hole}
+\doxyfigcaption{The sketch of the domain with a hole created by the connection of internal lines. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Adding\ a\ hole\ on\ the\ domain}}
+\DoxyCodeLine{\ \ Vector<Vector\ <double>\ >\ additional\_hole(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Define\ the\ coordinates\ on\ the\ domain}}
+\DoxyCodeLine{\ \ additional\_hole[0].resize(2);}
+\DoxyCodeLine{\ \ additional\_hole[0][0]\ =\ 1.5;}
+\DoxyCodeLine{\ \ additional\_hole[0][1]\ =\ 0.75;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ information\ about\ the\ additional\ holes\ coordinates}}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.extra\_holes\_coordinates()\ =\ additional\_hole;}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ the\ TriangleMeshParameters\ object\ to\ the\ TriangleMesh\ one}}
+\DoxyCodeLine{\ \ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_def_extra_regions}{}\doxysubsubsection{\texorpdfstring{Defining regions}{Defining regions}}\label{index_def_extra_regions}
+The definition of regions follows the same principle that defining holes, it means, one only need to specify the coordinates of a point that lies inside a region. If we would like to define the region showed on light grey on the figure below we use the method {\ttfamily add\+\_\+region\+\_\+coordinates} of the {\ttfamily Triangle\+Mesh\+Parameters} object. You can specify any region id for the defined region.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.50\textwidth]{sketch_domain_hole_region}
+\doxyfigcaption{The sketch of the domain with a hole and a defined region. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Adding\ a\ region\ on\ the\ domain}}
+\DoxyCodeLine{\ \ Vector<double>\ region(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Define\ the\ coordinates\ of\ the\ regions\ on\ the\ domain}}
+\DoxyCodeLine{\ \ region[0]\ =\ 0.5;}
+\DoxyCodeLine{\ \ region[1]\ =\ 0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ information\ about\ the\ defined\ regions}}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.add\_region\_coordinates(1,\ region);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Specify\ different\ target\ area\ of\ region\ 1:}}
+\DoxyCodeLine{\ \ triangle\_mesh\_parameters.set\_target\_area\_for\_region(1,0.01);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ the\ TriangleMeshParameters\ object\ to\ the\ TriangleMesh\ one}}
+\DoxyCodeLine{\ \ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
+
+\end{DoxyCodeInclude}
+ By default the complete domain belongs to region zero. Therefore, one could leave parts of the domain without a defined region or explicitly define all the regions on the domain. NOTE\+: Be sure to use the region ids when documenting the solution by its specified regions.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_ex}{}\doxysection{\texorpdfstring{Comments and exercises}{Comments and exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Create two new internal boundaries without connections, one using a {\ttfamily Triangle\+Mesh\+Poly\+Line} object and other using a {\ttfamily Triangle\+Mesh\+Curvi\+Line} object. ~\newline
+~\newline
+
+\item Define a new vertex on the new {\ttfamily Triangle\+Mesh\+Poly\+Line} and create a connection to that vertex. ~\newline
+~\newline
+
+\item Once one performs a connection to a {\ttfamily Triangle\+Mesh\+Poly\+Line} or to a {\ttfamily Triangle\+Mesh\+Curvi\+Line} there is an internal checking on the connection vertices coordinates for the {\ttfamily Triangle\+Mesh\+Poly\+Line} and on the connection intrinsic coordinate for the {\ttfamily Triangle\+Meshe\+Curviline} case, they must be close enough in order to allow the connection. The tolerance values are {\ttfamily tolerance\+\_\+for\+\_\+vertex\+\_\+connection} = $ 1.0e-14 $ for the {\ttfamily Triangle\+Mesh\+Polyline} case and {\ttfamily tolerance\+\_\+for\+\_\+zeta\+\_\+connection} = $ 1.0e-14 $ for the {\ttfamily Triangle\+Mesh\+Curviline} case. One can explicitly define the allowed tolerance by adding an extra argument when using the methods {\ttfamily connect\+\_\+initial\+\_\+vertex\+\_\+to\+\_\+polyline}, {\ttfamily connect\+\_\+final\+\_\+vertex\+\_\+to\+\_\+polyline} {\ttfamily connect\+\_\+initial\+\_\+vertex\+\_\+to\+\_\+curviline} or {\ttfamily connect\+\_\+final\+\_\+vertex\+\_\+to\+\_\+curviline}. As an exercise, use different values for the allowed connection tolerance.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_triangle/}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+internal\+\_\+boundaries/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/mesh_from_inline_triangle_internal_boundaries.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+internal\+\_\+boundaries.\+cc }} \end{center}  ~\newline
+~\newline
+
+\item The additional driver code ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/mesh_from_inline_triangle_internal_boundaries_extra.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+internal\+\_\+boundaries/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+internal\+\_\+boundaries\+\_\+extra.\+cc }} \end{center}  ~\newline
+shows how to define a hole by connecting internal boundaries.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

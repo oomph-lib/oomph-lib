@@ -1,0 +1,39 @@
+\doxysection{fpdiff.\+cc File Reference}
+\hypertarget{fpdiff_8cc}{}\label{fpdiff_8cc}\index{fpdiff.cc@{fpdiff.cc}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236}{oomph\+::\+Test\+Status}} \{ \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a8f2f0dcc08206e70ce98a3cad349b201}{oomph\+::\+Passed}} = 0
+, \mbox{\hyperlink{namespaceoomph_a8054837ca377b820becfb7d3d5182236a7f4f75eaf58c9d9f0b987b6d3a449b41}{oomph\+::\+Failed}} = 1
+ \}
+\item 
+enum class \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{oomph\+::\+Type}} \{ \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26ab2ee912b91d69b435159c7c3f6df7f5f}{oomph\+::\+Number}}
+, \mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26a27118326006d3829667a400ad23d5d98}{oomph\+::\+String}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_a171b8e2864ffbcc1dfe3b1f386ea20c7}{oomph\+::ends\+\_\+with}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&value, std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ending}})
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_a08bb0bcd17aeeb4f887b91ecfa82c94f}{oomph\+::modify\+\_\+string\+\_\+inplace}} (std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symbol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&number)
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_ae48e2a4afbd9c318400e14f5000fe2bc}{oomph\+::split\+\_\+string}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_a7ea62943887bf64e8d42559688c6db10}{oomph\+::lower}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})
+\item 
+\mbox{\hyperlink{namespaceoomph_a4ea7fbcbf52757598b180bcc68545c26}{Type}} \mbox{\hyperlink{namespaceoomph_ad63ea0fd281bfcf970f611d0a0d4d701}{oomph\+::get\+\_\+type}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{text}})
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_a46bbe9246d18deaa334e40e0ad55419e}{oomph\+::gzip\+\_\+load}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_a59cf32c51e58f7b7d05ffb75a5aa578a}{oomph\+::load\+\_\+file}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{namespaceoomph_aa93e7783f12d429c4f100c4da87f551a}{oomph\+::fpdiff}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{namespaceoomph_a103b03891c879729cbcb606f5123f6d7}{oomph\+::fpdiff}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{log\+\_\+file}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{relative\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{small}})
+\end{DoxyCompactItemize}

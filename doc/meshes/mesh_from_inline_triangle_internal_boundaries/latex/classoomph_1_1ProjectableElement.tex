@@ -1,0 +1,407 @@
+\doxysection{oomph\+::Projectable\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectableElement}{}\label{classoomph_1_1ProjectableElement}\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+
+
+Wrapper class for projectable elements. Adds "{}projectability"{} to the underlying ELEMENT.  
+
+
+
+
+{\ttfamily \#include $<$projection.\+h$>$}
+
+Inheritance diagram for oomph\+::Projectable\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.475626cm]{classoomph_1_1ProjectableElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableElement_a1892a2e757d35952be803d56078a3320}{Projectable\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1ProjectableElement_a1ff7a9207ec5e4fc2508e75064e136de}{residual\+\_\+for\+\_\+projection}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Residual for the projection step. Flag indicates if we want the Jacobian (1) or not (0). Virtual so it can be overloaded if necessary. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1ProjectableElement_aefceb50221fe76ac929d618495530adf}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&i) const
+\begin{DoxyCompactList}\small\item\em Use Eulerian coordinates for matching in locate\+\_\+zeta when doing projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_a08968691986cf6dbe45e5c20d46e46be}{enable\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Backup the element\textquotesingle{}s state and switch it to projection mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_afd30334bf9f7cf2e9d210b7705bd8572}{disable\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to restore the element to the state it was in before we entered the projection mode and switch off projection mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_ada702d9b155574b33a31c3693f268887}{set\+\_\+project\+\_\+coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Project (history values of) coordintes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_a51fefa06ef9dc90ea400a0fa1711c232}{set\+\_\+project\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Project (history values of) values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_ae1a46981a1ca1b4f9f1ef1783a168cf4}{set\+\_\+project\+\_\+lagrangian}} ()
+\begin{DoxyCompactList}\small\item\em Project (current and only values of) lagrangian coordinates. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement_a6f757b1706d43d0380fed43669a7d3da}{projected\+\_\+field}} ()
+\begin{DoxyCompactList}\small\item\em Field that is currently being projected. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement_adf007159cb16720750ca9229e29087e1}{time\+\_\+level\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Which history value are we projecting? \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement_afea89c5378c6e4ef511a775c55dd97f1}{projected\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em When projecting the history values of the nodal coordinates, this is the coordinate we\textquotesingle{}re projecting. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement_ab1998f182fbe589af7629370ade6080d}{projected\+\_\+lagrangian\+\_\+coordinate}} ()
+\begin{DoxyCompactList}\small\item\em When projecting the Lagrangian coordinates this is the coordinate that is being projected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ProjectableElementBase}{oomph\+::\+Projectable\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a7ee05f9195757b46b3693786cd260ac5}{Projectable\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Initialise data so that we don\textquotesingle{}t project but solve the "{}normal"{} equations associated with the element. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a668500db9bcaab7aa983d3c92f94e34b}{\texorpdfstring{$\sim$}{\string~}\+Projectable\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual Vector$<$ std\+::pair$<$ Data \texorpdfstring{$\ast$}{*}, unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a2292bd9c58694f89839bd7d198cfe86a}{data\+\_\+values\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which the element writer must specify the values associated with field fld. The information is returned in a vector of pairs which comprise the Data object and the value within it, that correspond to field fld. E.\+g. in Taylor Hood elements the fld-\/th velocities are stored at the fld-\/th value of the nodes; the pressures (the DIM-\/th field) are the DIM-\/th values at the vertex nodes etc. \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a44634aa4049332a580d249c25564638c}{nfields\+\_\+for\+\_\+projection}} ()=0
+\begin{DoxyCompactList}\small\item\em Number of fields of the problem, so e.\+g. for 2D Navier Stokes this would be 3 (for the two velocities and one pressure) \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac6790f394630b964663281f8740f43a5}{nhistory\+\_\+values\+\_\+for\+\_\+projection}} (const unsigned \&fld)=0
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored for fld-\/th field (includes current value!) \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab4ecd0cd24000a3ed675dc7198203c1f}{nhistory\+\_\+values\+\_\+for\+\_\+coordinate\+\_\+projection}} ()=0
+\begin{DoxyCompactList}\small\item\em Number of history values to be stored when projecting the history values of the nodal coordinates (includes current value!) \end{DoxyCompactList}\item 
+virtual unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{nvalue\+\_\+of\+\_\+field}} (const unsigned \&fld)=0
+\begin{DoxyCompactList}\small\item\em Return number of values (pinned or not) associated with field fld within the element. This must correspond to the number of shape functions returned in jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field(...). \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{local\+\_\+equation}} (const unsigned \&fld, const unsigned \&ivalue)=0
+\begin{DoxyCompactList}\small\item\em Return local equation numbers associated with value ivalue of field fld within the element. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field}} (const unsigned \&fld, const Vector$<$ double $>$ \&s, Shape \&psi)=0
+\begin{DoxyCompactList}\small\item\em Return Jacobian of mapping and the shape functions associated with field fld. The number of shape functions must match the number of values specified in nvalue\+\_\+of\+\_\+field(...). For Lagrange-\/type interpolations the shape functinos are simply the "{}normal"{} nodal shape functions; if the element contains internal Data that is not associated with shape functions, simply set the corresonding shape function to 1. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{get\+\_\+field}} (const unsigned \&time, const unsigned \&fld, const Vector$<$ double $>$ \&s)=0
+\begin{DoxyCompactList}\small\item\em Return the fld-\/th field at local coordinates s at time-\/level time (time=0\+: current value; time\texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_aeb0de899b7a5c7f498b2206ab00ef786}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Overloaded version of fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}{describe\+\_\+local\+\_\+dofs}} (std\+::ostream \&out, const std\+::string \&current\+\_\+string) const
+\begin{DoxyCompactList}\small\item\em Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Overloaded version of fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Types inherited from \mbox{\hyperlink{classoomph_1_1ProjectableElementBase}{oomph\+::\+Projectable\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4cbf0465f12a9e}{Projection\+\_\+\+Type}} \{ \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4cbf0465f12a9eab653154bbbdee655a7f9a666a971b614}{Coordinate}}
+, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4cbf0465f12a9ea9e3decdba764ce2f6c3155676d44e38e}{Lagrangian}}
+, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4cbf0465f12a9ea7923f87012a0224d8a68656e58c5474a}{Value}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerated collection to specify which projection problem is to be solved. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ProjectableElementBase}{oomph\+::\+Projectable\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa71079c0f1075ac390708063fd7d2731}{Projected\+\_\+field}}
+\begin{DoxyCompactList}\small\item\em Field that is currently being projected. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a4698e178e500468c0af8c37bd47d0bd3}{Time\+\_\+level\+\_\+for\+\_\+projection}}
+\begin{DoxyCompactList}\small\item\em Time level we are projecting (0=current values; \texorpdfstring{$>$}{>}0\+: history values) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ab712be6423145fae3c23e444187db0e2}{Projected\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em When projecting the history values of the nodal coordinates, this is the coordinate we\textquotesingle{}re projecting. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1034f9a066d1e4116f5b6acf5e5a279c}{Projected\+\_\+lagrangian}}
+\begin{DoxyCompactList}\small\item\em When projecting the Lagrangain coordinates indicate which coordiante is to be projected. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ProjectableElementBase_aa6b28955725b5626cc4cbf0465f12a9e}{Projection\+\_\+\+Type}} \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1081b0f4b3633612639f92d13a187db5}{Projection\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Variable to indicate if we\textquotesingle{}re projecting the history values of the nodal coordinates (Coordinate) the values themselves (Value), or the Lagrangian coordinates in Solid Mechanics problems (Lagrangian) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a8e6db97455edb38611347e258593f592}{Do\+\_\+projection}}
+\begin{DoxyCompactList}\small\item\em Bool to know if we do projection or not. If false (the default) we solve the element\textquotesingle{}s "{}real"{} equations rather than the projection equations. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a638bf48f5b8dd513c18413cd3878c0d1}{Backup\+\_\+ninteraction}}
+\begin{DoxyCompactList}\small\item\em Store number of "{}external"{} interactions that were assigned to the element before doing the projection. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a907f0491ccf46f64e97365afc2fcb773}{Backup\+\_\+external\+\_\+geometric\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Remember if the element includes external geometric data when used in non-\/projection mode (this is temporarily disabled during the projection) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a0f9195c254f229b178a8844f2572c7d4}{Backup\+\_\+external\+\_\+interaction\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Remember if the element includes external data when used in non-\/projection mode (this is temporarily disabled during the projection) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Projectable\+Element$<$ ELEMENT $>$}
+Wrapper class for projectable elements. Adds "{}projectability"{} to the underlying ELEMENT. 
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00180}{180}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ProjectableElement_a1892a2e757d35952be803d56078a3320}\label{classoomph_1_1ProjectableElement_a1892a2e757d35952be803d56078a3320} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!ProjectableElement@{ProjectableElement}}
+\index{ProjectableElement@{ProjectableElement}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectableElement()}{ProjectableElement()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::\+Projectable\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor \mbox{[}this was only required explicitly from gcc 4.\+5.\+2 onwards...\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00235}{235}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c}\label{classoomph_1_1ProjectableElement_a9e7e6d213f5e28d4b1e91433d4efb74c} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!describe\_local\_dofs@{describe\_local\_dofs}}
+\index{describe\_local\_dofs@{describe\_local\_dofs}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{describe\_local\_dofs()}{describe\_local\_dofs()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::describe\+\_\+local\+\_\+dofs (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const std\+::string \&}]{current\+\_\+string }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00209}{209}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_afd30334bf9f7cf2e9d210b7705bd8572}\label{classoomph_1_1ProjectableElement_afd30334bf9f7cf2e9d210b7705bd8572} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!disable\_projection@{disable\_projection}}
+\index{disable\_projection@{disable\_projection}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_projection()}{disable\_projection()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::disable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function to restore the element to the state it was in before we entered the projection mode and switch off projection mode. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00583}{583}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00098}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+external\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{projection_8h_source_l00104}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+external\+\_\+interaction\+\_\+data}}, \mbox{\hyperlink{projection_8h_source_l00093}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+ninteraction}}, and \mbox{\hyperlink{projection_8h_source_l00088}{oomph\+::\+Projectable\+Element\+Base\+::\+Do\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_a08968691986cf6dbe45e5c20d46e46be}\label{classoomph_1_1ProjectableElement_a08968691986cf6dbe45e5c20d46e46be} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!enable\_projection@{enable\_projection}}
+\index{enable\_projection@{enable\_projection}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_projection()}{enable\_projection()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::enable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Backup the element\textquotesingle{}s state and switch it to projection mode. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00548}{548}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00098}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+external\+\_\+geometric\+\_\+data}}, \mbox{\hyperlink{projection_8h_source_l00104}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+external\+\_\+interaction\+\_\+data}}, \mbox{\hyperlink{projection_8h_source_l00093}{oomph\+::\+Projectable\+Element\+Base\+::\+Backup\+\_\+ninteraction}}, and \mbox{\hyperlink{projection_8h_source_l00088}{oomph\+::\+Projectable\+Element\+Base\+::\+Do\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23}\label{classoomph_1_1ProjectableElement_a5b6894eda403bd2b9d2cf1e0314d7a23} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Overloaded version of fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00217}{217}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00088}{oomph\+::\+Projectable\+Element\+Base\+::\+Do\+\_\+projection}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_aeb0de899b7a5c7f498b2206ab00ef786}\label{classoomph_1_1ProjectableElement_aeb0de899b7a5c7f498b2206ab00ef786} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Overloaded version of fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00186}{186}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00088}{oomph\+::\+Projectable\+Element\+Base\+::\+Do\+\_\+projection}}, and \mbox{\hyperlink{projection_8h_source_l00240}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection()}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_afea89c5378c6e4ef511a775c55dd97f1}\label{classoomph_1_1ProjectableElement_afea89c5378c6e4ef511a775c55dd97f1} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!projected\_coordinate@{projected\_coordinate}}
+\index{projected\_coordinate@{projected\_coordinate}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{projected\_coordinate()}{projected\_coordinate()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::projected\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+When projecting the history values of the nodal coordinates, this is the coordinate we\textquotesingle{}re projecting. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00645}{645}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00074}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+coordinate}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_a6f757b1706d43d0380fed43669a7d3da}\label{classoomph_1_1ProjectableElement_a6f757b1706d43d0380fed43669a7d3da} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!projected\_field@{projected\_field}}
+\index{projected\_field@{projected\_field}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{projected\_field()}{projected\_field()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::projected\+\_\+field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Field that is currently being projected. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00632}{632}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00067}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+field}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_ab1998f182fbe589af7629370ade6080d}\label{classoomph_1_1ProjectableElement_ab1998f182fbe589af7629370ade6080d} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!projected\_lagrangian\_coordinate@{projected\_lagrangian\_coordinate}}
+\index{projected\_lagrangian\_coordinate@{projected\_lagrangian\_coordinate}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{projected\_lagrangian\_coordinate()}{projected\_lagrangian\_coordinate()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::projected\+\_\+lagrangian\+\_\+coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+When projecting the Lagrangian coordinates this is the coordinate that is being projected. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00652}{652}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00078}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+lagrangian}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_a1ff7a9207ec5e4fc2508e75064e136de}\label{classoomph_1_1ProjectableElement_a1ff7a9207ec5e4fc2508e75064e136de} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!residual\_for\_projection@{residual\_for\_projection}}
+\index{residual\_for\_projection@{residual\_for\_projection}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{residual\_for\_projection()}{residual\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::residual\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Residual for the projection step. Flag indicates if we want the Jacobian (1) or not (0). Virtual so it can be overloaded if necessary. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00240}{240}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00061}{oomph\+::\+Projectable\+Element\+Base\+::\+Coordinate}}, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ae4da5b565b6d333be2f5920f7be763cd}{oomph\+::\+Projectable\+Element\+Base\+::get\+\_\+field()}}, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ad45c21b58c0985d52f68ab2d79cbb488}{oomph\+::\+Projectable\+Element\+Base\+::jacobian\+\_\+and\+\_\+shape\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{projection_8h_source_l00062}{oomph\+::\+Projectable\+Element\+Base\+::\+Lagrangian}}, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_ac5c27ae929ff636dc7747fe23fd4f738}{oomph\+::\+Projectable\+Element\+Base\+::local\+\_\+equation()}}, \mbox{\hyperlink{classoomph_1_1ProjectableElementBase_a1a9a6de16f3511bca8e8be770abb9c2e}{oomph\+::\+Projectable\+Element\+Base\+::nvalue\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{projection_8h_source_l00074}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+coordinate}}, \mbox{\hyperlink{projection_8h_source_l00067}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+field}}, \mbox{\hyperlink{projection_8h_source_l00078}{oomph\+::\+Projectable\+Element\+Base\+::\+Projected\+\_\+lagrangian}}, \mbox{\hyperlink{projection_8h_source_l00083}{oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type}}, \mbox{\hyperlink{projection_8h_source_l00070}{oomph\+::\+Projectable\+Element\+Base\+::\+Time\+\_\+level\+\_\+for\+\_\+projection}}, and \mbox{\hyperlink{projection_8h_source_l00063}{oomph\+::\+Projectable\+Element\+Base\+::\+Value}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00217}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{projection_8h_source_l00186}{oomph\+::\+Projectable\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_ada702d9b155574b33a31c3693f268887}\label{classoomph_1_1ProjectableElement_ada702d9b155574b33a31c3693f268887} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!set\_project\_coordinates@{set\_project\_coordinates}}
+\index{set\_project\_coordinates@{set\_project\_coordinates}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_project\_coordinates()}{set\_project\_coordinates()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Project (history values of) coordintes. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00613}{613}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00061}{oomph\+::\+Projectable\+Element\+Base\+::\+Coordinate}}, and \mbox{\hyperlink{projection_8h_source_l00083}{oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_ae1a46981a1ca1b4f9f1ef1783a168cf4}\label{classoomph_1_1ProjectableElement_ae1a46981a1ca1b4f9f1ef1783a168cf4} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!set\_project\_lagrangian@{set\_project\_lagrangian}}
+\index{set\_project\_lagrangian@{set\_project\_lagrangian}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_project\_lagrangian()}{set\_project\_lagrangian()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+lagrangian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Project (current and only values of) lagrangian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00625}{625}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00062}{oomph\+::\+Projectable\+Element\+Base\+::\+Lagrangian}}, and \mbox{\hyperlink{projection_8h_source_l00083}{oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_a51fefa06ef9dc90ea400a0fa1711c232}\label{classoomph_1_1ProjectableElement_a51fefa06ef9dc90ea400a0fa1711c232} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!set\_project\_values@{set\_project\_values}}
+\index{set\_project\_values@{set\_project\_values}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_project\_values()}{set\_project\_values()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::set\+\_\+project\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Project (history values of) values. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00619}{619}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00083}{oomph\+::\+Projectable\+Element\+Base\+::\+Projection\+\_\+type}}, and \mbox{\hyperlink{projection_8h_source_l00063}{oomph\+::\+Projectable\+Element\+Base\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_adf007159cb16720750ca9229e29087e1}\label{classoomph_1_1ProjectableElement_adf007159cb16720750ca9229e29087e1} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!time\_level\_for\_projection@{time\_level\_for\_projection}}
+\index{time\_level\_for\_projection@{time\_level\_for\_projection}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{time\_level\_for\_projection()}{time\_level\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \& \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::time\+\_\+level\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Which history value are we projecting? 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00638}{638}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00070}{oomph\+::\+Projectable\+Element\+Base\+::\+Time\+\_\+level\+\_\+for\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectableElement_aefceb50221fe76ac929d618495530adf}\label{classoomph_1_1ProjectableElement_aefceb50221fe76ac929d618495530adf} 
+\index{oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::ProjectableElement$<$ ELEMENT $>$@{oomph::ProjectableElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ProjectableElement}{oomph\+::\+Projectable\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Use Eulerian coordinates for matching in locate\+\_\+zeta when doing projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00531}{531}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l00088}{oomph\+::\+Projectable\+Element\+Base\+::\+Do\+\_\+projection}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{projection_8h}{projection.\+h}}\end{DoxyCompactItemize}

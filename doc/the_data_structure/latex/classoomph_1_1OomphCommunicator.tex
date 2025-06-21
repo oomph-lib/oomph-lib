@@ -1,0 +1,127 @@
+\doxysection{oomph\+::Oomph\+Communicator Class Reference}
+\hypertarget{classoomph_1_1OomphCommunicator}{}\label{classoomph_1_1OomphCommunicator}\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+
+
+An oomph-\/lib wrapper to the MPI\+\_\+\+Comm communicator object. Just contains an MPI\+\_\+\+Comm object (which is a pointer) and wrappers to the MPI\+\_\+... methods.  
+
+
+
+
+{\ttfamily \#include $<$communicator.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe}{Oomph\+Communicator}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MPI\+\_\+\+Comm}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mpi\+\_\+communicator}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{owns\+\_\+mpi\+\_\+comm}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Construct a communicator from a MPI\+\_\+\+Comm object. if the bool owns\+\_\+mpi\+\_\+comm is true then this communicator is responsible for the destruction of the mpi\+\_\+communicator. The mpi comm will be freed when the destructor is called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a}{Oomph\+Communicator}} ()
+\begin{DoxyCompactList}\small\item\em Serial constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MPI\+\_\+\+Comm}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56}{Comm}}
+\begin{DoxyCompactList}\small\item\em the MPI\+\_\+\+Comm communicator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81}{Owns\+\_\+mpi\+\_\+comm}}
+\begin{DoxyCompactList}\small\item\em boolean indiacting whether this communicator owns the underlying MPI\+\_\+\+Comm -\/ if so the destructor will free the communicator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553}{Serial\+\_\+communicator}}
+\begin{DoxyCompactList}\small\item\em boolean to indicate if this communicator is for serial problems. This is true when serial codes are compiled under MPI \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An oomph-\/lib wrapper to the MPI\+\_\+\+Comm communicator object. Just contains an MPI\+\_\+\+Comm object (which is a pointer) and wrappers to the MPI\+\_\+... methods. 
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00053}{53}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe}\label{classoomph_1_1OomphCommunicator_af94e5be435b9cf1b01bed6242a5e46fe} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!OomphCommunicator@{OomphCommunicator}}
+\index{OomphCommunicator@{OomphCommunicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{OomphCommunicator()}{OomphCommunicator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Communicator\+::\+Oomph\+Communicator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MPI\+\_\+\+Comm}}}]{mpi\+\_\+communicator,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{owns\+\_\+mpi\+\_\+comm = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a communicator from a MPI\+\_\+\+Comm object. if the bool owns\+\_\+mpi\+\_\+comm is true then this communicator is responsible for the destruction of the mpi\+\_\+communicator. The mpi comm will be freed when the destructor is called. 
+
+
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00061}{61}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+References \mbox{\hyperlink{communicator_8h_source_l00355}{Comm}}, and \mbox{\hyperlink{communicator_8h_source_l00360}{Owns\+\_\+mpi\+\_\+comm}}.
+
+\Hypertarget{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a}\label{classoomph_1_1OomphCommunicator_a494598d5d4b772ad78e5d588d00d2d5a} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!OomphCommunicator@{OomphCommunicator}}
+\index{OomphCommunicator@{OomphCommunicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{OomphCommunicator()}{OomphCommunicator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Communicator\+::\+Oomph\+Communicator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Serial constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00074}{74}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56}\label{classoomph_1_1OomphCommunicator_a334dbb45abab2e123872f487883f0b56} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Comm@{Comm}}
+\index{Comm@{Comm}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Comm}{Comm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MPI\+\_\+\+Comm}} oomph\+::\+Oomph\+Communicator\+::\+Comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the MPI\+\_\+\+Comm communicator 
+
+
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00355}{355}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{communicator_8h_source_l00061}{Oomph\+Communicator()}}.
+
+\Hypertarget{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81}\label{classoomph_1_1OomphCommunicator_a8c80f30933f22b84f97fcbbee6b22e81} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Owns\_mpi\_comm@{Owns\_mpi\_comm}}
+\index{Owns\_mpi\_comm@{Owns\_mpi\_comm}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Owns\_mpi\_comm}{Owns\_mpi\_comm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Communicator\+::\+Owns\+\_\+mpi\+\_\+comm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean indiacting whether this communicator owns the underlying MPI\+\_\+\+Comm -\/ if so the destructor will free the communicator 
+
+
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00360}{360}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{communicator_8h_source_l00061}{Oomph\+Communicator()}}.
+
+\Hypertarget{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553}\label{classoomph_1_1OomphCommunicator_ab6e14f26e8effff948255e59d956d553} 
+\index{oomph::OomphCommunicator@{oomph::OomphCommunicator}!Serial\_communicator@{Serial\_communicator}}
+\index{Serial\_communicator@{Serial\_communicator}!oomph::OomphCommunicator@{oomph::OomphCommunicator}}
+\doxysubsubsection{\texorpdfstring{Serial\_communicator}{Serial\_communicator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Communicator\+::\+Serial\+\_\+communicator\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean to indicate if this communicator is for serial problems. This is true when serial codes are compiled under MPI 
+
+
+
+Definition at line \mbox{\hyperlink{communicator_8h_source_l00364}{364}} of file \mbox{\hyperlink{communicator_8h_source}{communicator.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{communicator_8h}{communicator.\+h}}\end{DoxyCompactItemize}

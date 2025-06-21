@@ -1,0 +1,81 @@
+\doxysection{oomph\+::Refineable\+Eighth\+Sphere\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableEighthSphereMesh}{}\label{classoomph_1_1RefineableEighthSphereMesh}\index{oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$@{oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$}}
+
+
+Refineable version of the eight of a sphere brick mesh. The eighth-\/sphere is located in the positive octant, centred at the origin. The mesh boundaries are numbered as follows\+:  
+
+
+
+
+{\ttfamily \#include $<$eighth\+\_\+sphere\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Eighth\+Sphere\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.692308cm]{classoomph_1_1RefineableEighthSphereMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableEighthSphereMesh_a975d12a45de7356f50bd69f3197659aa}{Refineable\+Eighth\+Sphere\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{radius}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass radius and timestepper; defaults to static default timestepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a0457fc188d930a1e8853a3f0e1effbb3}{Eighth\+Sphere\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{radius}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass radius and timestepper; defaults to static default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a425c3de92974d00dbb126f4cbbaf8e3b}{\texorpdfstring{$\sim$}{\string~}\+Eighth\+Sphere\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+Domain \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a6dbcd3a6d27416a0d9ef25cc631f6043}{Radius}}
+\begin{DoxyCompactList}\small\item\em Radius of the sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$}
+Refineable version of the eight of a sphere brick mesh. The eighth-\/sphere is located in the positive octant, centred at the origin. The mesh boundaries are numbered as follows\+: 
+
+
+\begin{DoxyItemize}
+\item Boundary 0\+: Plane x=0
+\item Boundary 1\+: Plane y=0
+\item Boundary 2\+: Plane z=0
+\item Boundary 3\+: The surface of the sphere. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00087}{87}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RefineableEighthSphereMesh_a975d12a45de7356f50bd69f3197659aa}\label{classoomph_1_1RefineableEighthSphereMesh_a975d12a45de7356f50bd69f3197659aa} 
+\index{oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$@{oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$}!RefineableEighthSphereMesh@{RefineableEighthSphereMesh}}
+\index{RefineableEighthSphereMesh@{RefineableEighthSphereMesh}!oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$@{oomph::RefineableEighthSphereMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableEighthSphereMesh()}{RefineableEighthSphereMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableEighthSphereMesh}{oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{radius,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass radius and timestepper; defaults to static default timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00093}{93}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00070}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{eighth__sphere__mesh_8h}{eighth\+\_\+sphere\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: foeppl_von_karman_volume_constraint_element.h Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d8d7b07344a308162346934a33bdd4d5.html">foeppl_von_karman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">foeppl_von_karman_volume_constraint_element.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="foeppl__von__karman__volume__constraint__element_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// Header file for FoepplvonKarman elements</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifndef OOMPH_FVK_VOLUME_CONSTRAINT_ELEMENT_HEADER</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define OOMPH_FVK_VOLUME_CONSTRAINT_ELEMENT_HEADER</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;oomph-lib-config.h&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="elements_8h.html">generic/elements.h</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;../meshes/triangle_mesh.h&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="Tfoeppl__von__karman__elements_8h.html">Tfoeppl_von_karman_elements.h</a>&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">//=============================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  /// A class which allows the user to specify a prescribed</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  /// volume (as opposed to a prescribed pressure) for in the region</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  /// bounded by the membrane.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  /// Effectively adds an equation to the system for pressure.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  /// There would usually only be a single instance of this</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  /// element in a problem.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"></span>  <span class="comment">//=============================================================</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>MESH&gt;</div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">   51</a></span>  <span class="keyword">class </span><a class="code hl_class" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code hl_class" href="classoomph_1_1GeneralisedElement.html">GeneralisedElement</a></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    /// Constructor. Takes pointer to mesh of Foeppl von Karman</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    /// elements and a vector of unsigneds which identifies the</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    /// regions within it that contribute to the controlled volume</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    /// defined as int w dA (i.e. the &quot;volume under the membrane&quot;).</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    /// The optional final argument specifies the initial value</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    /// for the pressure that is &quot;traded&quot; in exchange for the</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    /// volume constraint.</span></div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#af470df251a724f84a330e506bf9e14c3">   62</a></span><span class="comment"></span>    <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#af470df251a724f84a330e506bf9e14c3">FoepplvonKarmanVolumeConstraintElement</a>(</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MESH&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bounding_mesh_pt</a>,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;unsigned&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">contributing_region</a>,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; pressure = 0.0)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      : <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">Bounding_mesh_pt</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bounding_mesh_pt</a>),</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">contributing_region</a>),</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">Prescribed_volume_pt</a>(0)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="comment">// Create instance of pressure that is traded for volume constraint</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classoomph_1_1Data.html">Data</a>(1);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a>-&gt;<a class="code hl_function" href="classoomph_1_1Data.html#a7289ca322725c6fd493970a19474b382">set_value</a>(0, pressure);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      <span class="comment">// Add the data object as internal data for this element</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">Pressure_data_index</a> = <a class="code hl_function" href="classoomph_1_1GeneralisedElement.html#a36571ae9c4b6d2a26c36004e5be88389">add_internal_data</a>(<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">// Destructor (empty)</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a59878334d7186dbbe7fdaa609bb636b9">   79</a></span>    <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a59878334d7186dbbe7fdaa609bb636b9">~FoepplvonKarmanVolumeConstraintElement</a>() {}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    /// Broken copy constructor</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a09b00ddb2fe8161a708c8e596069de18">   82</a></span><span class="comment"></span>    <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a09b00ddb2fe8161a708c8e596069de18">FoepplvonKarmanVolumeConstraintElement</a>(</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    /// Broken assignment operator</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a5a3e791c0ae3f478ed488b0855dc4748">   86</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a5a3e791c0ae3f478ed488b0855dc4748">operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">FoepplvonKarmanVolumeConstraintElement</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">    /// Returns the volume &quot;under the elements&quot; in the constrained</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    /// regions</span></div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0323cc351bcaf25dfc1830b78601541a">   90</a></span><span class="comment"></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0323cc351bcaf25dfc1830b78601541a">get_bounded_volume</a>()</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="keywordtype">double</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bounded_volume</a> = 0.0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="comment">// Loop over the bounded regions</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_contributing_regions</a> = <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a>.size();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a> = 0; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_contributing_regions</a>; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>++)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="comment">// Loop over the elements in the bounded regions</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_inner_el</a> =</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>          <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">Bounding_mesh_pt</a>-&gt;nregion_element(<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a>[<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>]);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_inner_el</a>; <a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>++)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>          <span class="comment">// Add the contribution</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>          ELEMENT* <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">Bounding_mesh_pt</a>-&gt;region_element_pt(<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a>[<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>], <a class="code hl_variable" href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a>));</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>          <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bounded_volume</a> += <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">el_pt</a>-&gt;get_bounded_volume();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <span class="keywordflow">return</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bounded_volume</a>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"></span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">    /// Assign the equation number for the new equation</span></div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab8879fad1a0804054520a2d7a57d940b">  113</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab8879fad1a0804054520a2d7a57d940b">assign_additional_local_eqn_numbers</a>()</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a> = <a class="code hl_function" href="classoomph_1_1GeneralisedElement.html#a967d667f536c45878106b69563971f31">internal_local_eqn</a>(<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">Pressure_data_index</a>, 0);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment"></span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">    /// Fill in residual: Difference between actual and</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">    /// prescribed bounded volume.</span></div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a670a824ff37ac6b77f9230184f4bb9f4">  120</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a670a824ff37ac6b77f9230184f4bb9f4">fill_in_contribution_to_residuals</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">residuals</a>)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a> &gt;= 0)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">residuals</a>[<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a>] += -(*Prescribed_volume_pt);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
+</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"></span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    /// Fill in contribution to elemental residual and Jacobian</span></div>
+<div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3763adc00373350071bef1dea329f94d">  130</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3763adc00373350071bef1dea329f94d">fill_in_contribution_to_jacobian</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">residuals</a>,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                                          <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">DenseMatrix&lt;double&gt;</a>&amp; jacobian)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a> &gt;= 0)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="comment">// Only add contribution to residual; Jacobian (derivs w.r.t. to</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="comment">// this element&#39;s external data is handled by FvK elements)</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">residuals</a>[<a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a>] -= (*Prescribed_volume_pt);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="comment">/*  // We are in charge... */</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="comment">/*  else */</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="comment">/*   { */</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="comment">/*    // NOTE: This is very slow but keep code alive -- can be */</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="comment">/*    // recycled if/when we ever make the Jacobians in the */</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="comment">/*    // Foeppl von Karman elements analytical. */</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="comment">/*    double t_start=TimingHelpers::timer(); */</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="comment">/*    // Setup lookup scheme between local and global data */</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="comment">/*    std::map&lt;unsigned,unsigned&gt; local_external_eqn; */</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="comment">/*    unsigned next=nexternal_data(); */</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="comment">/*    for (unsigned j=0;j&lt;next;j++) */</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="comment">/*     { */</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="comment">/*      Data* data_pt=external_data_pt(j); */</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="comment">/*      unsigned nval=data_pt-&gt;nvalue(); */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="comment">/*      for (unsigned k=0;k&lt;nval;k++) */</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="comment">/*       { */</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="comment">/*        int local_eqn=external_local_eqn(j,k); */</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="comment">/*        if (local_eqn&gt;=0) */</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="comment">/*         { */</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="comment">/*          int global_eqn=data_pt-&gt;eqn_number(k); */</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="comment">/*          local_external_eqn[global_eqn]=local_eqn; */</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="comment">/*         } */</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="comment">/*       } */</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="comment">/*     } */</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="comment">/*    double t_end=TimingHelpers::timer(); */</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="comment">/*    oomph_info &lt;&lt; &quot;Time for local_external_eqn setup: &quot;  */</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="comment">/*               &lt;&lt; t_end-t_start &lt;&lt; std::endl; */</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="comment">/*    t_start=TimingHelpers::timer(); */</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="comment">/*    // Add initial contribution */</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="comment">/*    residuals[Volume_control_local_eqn] -= (*Prescribed_volume_pt); */</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="comment">/*    // Initialise total bounded volume */</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="comment">/*    double bounded_volume = 0.0; */</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="comment">/*    // Loop over the bounded regions */</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <span class="comment">/*    unsigned n_contributing_regions = Contributing_region.size(); */</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="comment">/*    for(unsigned r = 0; r &lt; n_contributing_regions; r++) */</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="comment">/*     { */</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="comment">/*      // Loop over the elements in the bounded regions */</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="comment">/*      unsigned n_inner_el =  */</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="comment">/*       Bounding_mesh_pt-&gt;nregion_element(Contributing_region[r]); */</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="comment">/*      for(unsigned e = 0; e &lt; n_inner_el; e++) */</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="comment">/*       { */</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="comment">/*        // Get element */</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="comment">/*        ELEMENT *el_pt = dynamic_cast&lt;ELEMENT*&gt; */</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="comment">/*         (Bounding_mesh_pt-&gt;region_element_pt(Contributing_region[r],e));</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="comment">/*        // Get element&#39;s contribution to bounded volume and */</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="comment">/*        // derivative w.r.t. its unknowns */</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="comment">/*        double el_bounded_volume=0.0; */</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="comment">/*        std::map&lt;unsigned,double&gt; d_bounded_volume_d_unknown; */</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="comment">/*        el_pt-&gt;fill_in_d_bounded_volume_d_unknown(el_bounded_volume,</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="comment">/*                                                  d_bounded_volume_d_unknown);</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="comment">/*        // Add contribution to bounded volume */</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="comment">/*        bounded_volume += el_bounded_volume; */</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="comment">/*        // Add contribution to Jacobian */</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="comment">/*        for (std::map&lt;unsigned,double&gt;::iterator it= */</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="comment">/*              d_bounded_volume_d_unknown.begin();it!= */</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="comment">/*              d_bounded_volume_d_unknown.end();it++) */</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="comment">/*         { */</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="comment">/*          unsigned global_eqn=(*it).first; */</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="comment">/*          unsigned local_eqn=local_external_eqn[global_eqn]; */</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="comment">/*          jacobian(Volume_control_local_eqn,local_eqn)+=(*it).second;</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="comment">/*         } */</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="comment">/*       } */</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="comment">/*     } */</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="comment">/*    // Add contribution to residuals */</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="comment">/*    residuals[Volume_control_local_eqn]+=bounded_volume; */</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="comment">/*    t_end=TimingHelpers::timer(); */</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="comment">/*    oomph_info &lt;&lt; &quot;Time for second part (actual work) of</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">         * fill...jacobian: &quot;  */</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="comment">/*               &lt;&lt; t_end-t_start &lt;&lt; std::endl; */</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="comment">/*   } */</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      }</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
+</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment"></span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">    /// Set pointer to target volume</span></div>
+<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a91f7e77ffeaf09914838d9af945c2c56">  233</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a91f7e77ffeaf09914838d9af945c2c56">set_prescribed_volume</a>(<span class="keywordtype">double</span>* volume_pt)</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>      <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">Prescribed_volume_pt</a> = volume_pt;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
+</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment"></span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">    /// Access to Data object whose single value contains the pressure</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">    /// that has been &quot;traded&quot; for the volume constraint.</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a1a312d38d59ce6e193733b2af281102a">  240</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1Data.html">Data</a>* <a class="code hl_function" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a1a312d38d59ce6e193733b2af281102a">pressure_data_pt</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      <span class="keywordflow">return</span> <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a>;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    }</div>
+</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">    /// Data object whose single value contains the pressure</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment">    /// that has been &quot;traded&quot; for the volume constraint.</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">  248</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1Data.html">Data</a>* <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">Volume_control_pressure_pt</a>;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment"></span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">    /// Unsigned indicating which internal Data object</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">    /// stores the pressure</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">  252</a></span><span class="comment"></span>    <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">Pressure_data_index</a>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="comment"></span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="comment">    /// Local equation number of volume constraint</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">  255</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">Volume_control_local_eqn</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment"></span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment">    /// Pointer to mesh of Foeppl von Karman elements that bound</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">    /// the prescribed volume; NULL if the FvK elements that contribute</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">    /// to the bounding volume are in charge of adding their own</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">    /// contribution to the volume constraint equation (and the</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">    /// associated Jacobian)</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">  262</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MESH&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">Bounding_mesh_pt</a>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment"></span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">    /// Region IDs in the bounding mesh that contribute to the</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">    /// prescribed/controlled volume</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">  266</a></span><span class="comment"></span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;unsigned&gt;</a> <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">Contributing_region</a>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment"></span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">    /// Pointer to target volume</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">  269</a></span><span class="comment"></span>    <span class="keywordtype">double</span>* <a class="code hl_variable" href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">Prescribed_volume_pt</a>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  };</div>
+</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>} <span class="comment">// namespace oomph</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aTfoeppl__von__karman__elements_8h_html"><div class="ttname"><a href="Tfoeppl__von__karman__elements_8h.html">Tfoeppl_von_karman_elements.h</a></div></div>
+<div class="ttc" id="acfortran_8h_html_a37cd013acc76697829c324bdd8562d82"><div class="ttname"><a href="cfortran_8h.html#a37cd013acc76697829c324bdd8562d82">e</a></div><div class="ttdeci">e</div><div class="ttdef"><b>Definition</b> <a href="cfortran_8h_source.html#l00571">cfortran.h:571</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html"><div class="ttname"><a href="classoomph_1_1Data.html">oomph::Data</a></div><div class="ttdoc">A class that represents a collection of data; each Data object may contain many different individual ...</div><div class="ttdef"><b>Definition</b> <a href="nodes_8h_source.html#l00085">nodes.h:86</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Data_html_a7289ca322725c6fd493970a19474b382"><div class="ttname"><a href="classoomph_1_1Data.html#a7289ca322725c6fd493970a19474b382">oomph::Data::set_value</a></div><div class="ttdeci">void set_value(const unsigned &amp;i, const double &amp;value_)</div><div class="ttdoc">Set the i-th stored data value to specified value. The only reason that we require an explicit set fu...</div><div class="ttdef"><b>Definition</b> <a href="nodes_8h_source.html#l00271">nodes.h:271</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html">oomph::FoepplvonKarmanVolumeConstraintElement</a></div><div class="ttdoc">A class which allows the user to specify a prescribed volume (as opposed to a prescribed pressure) fo...</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00051">foeppl_von_karman_volume_constraint_element.h:53</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a0323cc351bcaf25dfc1830b78601541a"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0323cc351bcaf25dfc1830b78601541a">oomph::FoepplvonKarmanVolumeConstraintElement::get_bounded_volume</a></div><div class="ttdeci">double get_bounded_volume()</div><div class="ttdoc">Returns the volume &quot;under the elements&quot; in the constrained regions.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00090">foeppl_von_karman_volume_constraint_element.h:90</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a09b00ddb2fe8161a708c8e596069de18"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a09b00ddb2fe8161a708c8e596069de18">oomph::FoepplvonKarmanVolumeConstraintElement::FoepplvonKarmanVolumeConstraintElement</a></div><div class="ttdeci">FoepplvonKarmanVolumeConstraintElement(const FoepplvonKarmanVolumeConstraintElement &amp;)=delete</div><div class="ttdoc">Broken copy constructor.</div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a0bebd0ba7ecef23139c97ed56ee83b71"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0bebd0ba7ecef23139c97ed56ee83b71">oomph::FoepplvonKarmanVolumeConstraintElement::Bounding_mesh_pt</a></div><div class="ttdeci">MESH&lt; ELEMENT &gt; * Bounding_mesh_pt</div><div class="ttdoc">Pointer to mesh of Foeppl von Karman elements that bound the prescribed volume; NULL if the FvK eleme...</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00262">foeppl_von_karman_volume_constraint_element.h:262</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a0c3ee6a6c6c4f5eb93f9540c6d400f26"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a0c3ee6a6c6c4f5eb93f9540c6d400f26">oomph::FoepplvonKarmanVolumeConstraintElement::Volume_control_local_eqn</a></div><div class="ttdeci">int Volume_control_local_eqn</div><div class="ttdoc">Local equation number of volume constraint.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00255">foeppl_von_karman_volume_constraint_element.h:255</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a15515003602f6303d5798b3553331fac"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a15515003602f6303d5798b3553331fac">oomph::FoepplvonKarmanVolumeConstraintElement::Volume_control_pressure_pt</a></div><div class="ttdeci">Data * Volume_control_pressure_pt</div><div class="ttdoc">Data object whose single value contains the pressure that has been &quot;traded&quot; for the volume constraint...</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00248">foeppl_von_karman_volume_constraint_element.h:248</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a1a312d38d59ce6e193733b2af281102a"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a1a312d38d59ce6e193733b2af281102a">oomph::FoepplvonKarmanVolumeConstraintElement::pressure_data_pt</a></div><div class="ttdeci">Data * pressure_data_pt() const</div><div class="ttdoc">Access to Data object whose single value contains the pressure that has been &quot;traded&quot; for the volume ...</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00240">foeppl_von_karman_volume_constraint_element.h:240</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a3763adc00373350071bef1dea329f94d"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3763adc00373350071bef1dea329f94d">oomph::FoepplvonKarmanVolumeConstraintElement::fill_in_contribution_to_jacobian</a></div><div class="ttdeci">void fill_in_contribution_to_jacobian(Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</div><div class="ttdoc">Fill in contribution to elemental residual and Jacobian.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00130">foeppl_von_karman_volume_constraint_element.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a3881d17c5bdda4a71815f1fedfeb4185"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a3881d17c5bdda4a71815f1fedfeb4185">oomph::FoepplvonKarmanVolumeConstraintElement::Pressure_data_index</a></div><div class="ttdeci">unsigned Pressure_data_index</div><div class="ttdoc">Unsigned indicating which internal Data object stores the pressure.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00252">foeppl_von_karman_volume_constraint_element.h:252</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a47b9920b4fe975f324d6ff0aca6d325b"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a47b9920b4fe975f324d6ff0aca6d325b">oomph::FoepplvonKarmanVolumeConstraintElement::Prescribed_volume_pt</a></div><div class="ttdeci">double * Prescribed_volume_pt</div><div class="ttdoc">Pointer to target volume.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00269">foeppl_von_karman_volume_constraint_element.h:269</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a59878334d7186dbbe7fdaa609bb636b9"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a59878334d7186dbbe7fdaa609bb636b9">oomph::FoepplvonKarmanVolumeConstraintElement::~FoepplvonKarmanVolumeConstraintElement</a></div><div class="ttdeci">~FoepplvonKarmanVolumeConstraintElement()</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00079">foeppl_von_karman_volume_constraint_element.h:79</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a5a3e791c0ae3f478ed488b0855dc4748"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a5a3e791c0ae3f478ed488b0855dc4748">oomph::FoepplvonKarmanVolumeConstraintElement::operator=</a></div><div class="ttdeci">void operator=(const FoepplvonKarmanVolumeConstraintElement &amp;)=delete</div><div class="ttdoc">Broken assignment operator.</div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a670a824ff37ac6b77f9230184f4bb9f4"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a670a824ff37ac6b77f9230184f4bb9f4">oomph::FoepplvonKarmanVolumeConstraintElement::fill_in_contribution_to_residuals</a></div><div class="ttdeci">void fill_in_contribution_to_residuals(Vector&lt; double &gt; &amp;residuals)</div><div class="ttdoc">Fill in residual: Difference between actual and prescribed bounded volume.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00120">foeppl_von_karman_volume_constraint_element.h:120</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_a91f7e77ffeaf09914838d9af945c2c56"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#a91f7e77ffeaf09914838d9af945c2c56">oomph::FoepplvonKarmanVolumeConstraintElement::set_prescribed_volume</a></div><div class="ttdeci">void set_prescribed_volume(double *volume_pt)</div><div class="ttdoc">Set pointer to target volume.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00233">foeppl_von_karman_volume_constraint_element.h:233</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_ab7504a6d7b951b3a8c0580acddd4d3b0"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab7504a6d7b951b3a8c0580acddd4d3b0">oomph::FoepplvonKarmanVolumeConstraintElement::Contributing_region</a></div><div class="ttdeci">Vector&lt; unsigned &gt; Contributing_region</div><div class="ttdoc">Region IDs in the bounding mesh that contribute to the prescribed/controlled volume.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00266">foeppl_von_karman_volume_constraint_element.h:266</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_ab8879fad1a0804054520a2d7a57d940b"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#ab8879fad1a0804054520a2d7a57d940b">oomph::FoepplvonKarmanVolumeConstraintElement::assign_additional_local_eqn_numbers</a></div><div class="ttdeci">void assign_additional_local_eqn_numbers()</div><div class="ttdoc">Assign the equation number for the new equation.</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00113">foeppl_von_karman_volume_constraint_element.h:113</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FoepplvonKarmanVolumeConstraintElement_html_af470df251a724f84a330e506bf9e14c3"><div class="ttname"><a href="classoomph_1_1FoepplvonKarmanVolumeConstraintElement.html#af470df251a724f84a330e506bf9e14c3">oomph::FoepplvonKarmanVolumeConstraintElement::FoepplvonKarmanVolumeConstraintElement</a></div><div class="ttdeci">FoepplvonKarmanVolumeConstraintElement(MESH&lt; ELEMENT &gt; *bounding_mesh_pt, const Vector&lt; unsigned &gt; &amp;contributing_region, const double &amp;pressure=0.0)</div><div class="ttdoc">Constructor. Takes pointer to mesh of Foeppl von Karman elements and a vector of unsigneds which iden...</div><div class="ttdef"><b>Definition</b> <a href="foeppl__von__karman__volume__constraint__element_8h_source.html#l00062">foeppl_von_karman_volume_constraint_element.h:62</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedElement_html"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></div><div class="ttdoc">A Generalised Element class.</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l00072">elements.h:73</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedElement_html_a36571ae9c4b6d2a26c36004e5be88389"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html#a36571ae9c4b6d2a26c36004e5be88389">oomph::GeneralisedElement::add_internal_data</a></div><div class="ttdeci">unsigned add_internal_data(Data *const &amp;data_pt, const bool &amp;fd=true)</div><div class="ttdoc">Add a (pointer to an) internal data object to the element and return the index required to obtain it ...</div><div class="ttdef"><b>Definition</b> <a href="elements_8cc_source.html#l00067">elements.cc:67</a></div></div>
+<div class="ttc" id="aclassoomph_1_1GeneralisedElement_html_a967d667f536c45878106b69563971f31"><div class="ttname"><a href="classoomph_1_1GeneralisedElement.html#a967d667f536c45878106b69563971f31">oomph::GeneralisedElement::internal_local_eqn</a></div><div class="ttdeci">int internal_local_eqn(const unsigned &amp;i, const unsigned &amp;j) const</div><div class="ttdoc">Return the local equation number corresponding to the j-th value stored at the i-th internal data.</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l00267">elements.h:267</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TAdvectionDiffusionReactionElement_html"><div class="ttname"><a href="classoomph_1_1TAdvectionDiffusionReactionElement.html">oomph::TAdvectionDiffusionReactionElement</a></div><div class="ttdoc">TAdvectionDiffusionReactionElement&lt;NREAGENT,DIM,NNODE_1D&gt; elements are isoparametric triangular DIM-d...</div><div class="ttdef"><b>Definition</b> <a href="Tadvection__diffusion__reaction__elements_8h_source.html#l00062">Tadvection_diffusion_reaction_elements.h:66</a></div></div>
+<div class="ttc" id="aelements_8h_html"><div class="ttname"><a href="elements_8h.html">elements.h</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:47
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

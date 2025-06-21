@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TwoDimensionalPMLHelper Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html">TwoDimensionalPMLHelper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">oomph::TwoDimensionalPMLHelper Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace with functions that allow the construction of PML layers on axis aligned boundaries.  
+<a href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae66c595a953e030ae366699eec3ca3ab" id="r_ae66c595a953e030ae366699eec3ca3ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ae66c595a953e030ae366699eec3ca3ab">sorter_right_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_i_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_j_pt</a>)</td></tr>
+<tr class="memdesc:ae66c595a953e030ae366699eec3ca3ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the right boundary nodes  <br /></td></tr>
+<tr class="separator:ae66c595a953e030ae366699eec3ca3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d2786e22298095bd190435d11c4f0e" id="r_a98d2786e22298095bd190435d11c4f0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a98d2786e22298095bd190435d11c4f0e">sorter_top_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_i_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_j_pt</a>)</td></tr>
+<tr class="memdesc:a98d2786e22298095bd190435d11c4f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the top boundary nodes  <br /></td></tr>
+<tr class="separator:a98d2786e22298095bd190435d11c4f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecb74c39efe7c572a9d87b2d11be3d69" id="r_aecb74c39efe7c572a9d87b2d11be3d69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#aecb74c39efe7c572a9d87b2d11be3d69">sorter_left_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_i_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_j_pt</a>)</td></tr>
+<tr class="memdesc:aecb74c39efe7c572a9d87b2d11be3d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the left boundary nodes  <br /></td></tr>
+<tr class="separator:aecb74c39efe7c572a9d87b2d11be3d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd68e9d424ff3f05266786cc6c78baa" id="r_a0bd68e9d424ff3f05266786cc6c78baa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a0bd68e9d424ff3f05266786cc6c78baa">sorter_bottom_boundary</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_i_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_j_pt</a>)</td></tr>
+<tr class="memdesc:a0bd68e9d424ff3f05266786cc6c78baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function for sorting the bottom boundary nodes  <br /></td></tr>
+<tr class="separator:a0bd68e9d424ff3f05266786cc6c78baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad119cef6cd1f7a905dade8810d4cfabd" id="r_ad119cef6cd1f7a905dade8810d4cfabd"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:ad119cef6cd1f7a905dade8810d4cfabd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ad119cef6cd1f7a905dade8810d4cfabd">create_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">right_boundary_id</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_x_right_pml</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">width_x_right_pml</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:ad119cef6cd1f7a905dade8810d4cfabd"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh,aligned with the right physical domain boundary  <br /></td></tr>
+<tr class="separator:ad119cef6cd1f7a905dade8810d4cfabd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9dbf69567d9b6b179045108e710f6fe" id="r_ae9dbf69567d9b6b179045108e710f6fe"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:ae9dbf69567d9b6b179045108e710f6fe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ae9dbf69567d9b6b179045108e710f6fe">create_top_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">top_boundary_id</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_y_top_pml</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">width_y_top_pml</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:ae9dbf69567d9b6b179045108e710f6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh, aligned with the top physical domain boundary  <br /></td></tr>
+<tr class="separator:ae9dbf69567d9b6b179045108e710f6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1a43aabe01e6d5c34541319bc899719" id="r_ad1a43aabe01e6d5c34541319bc899719"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:ad1a43aabe01e6d5c34541319bc899719"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#ad1a43aabe01e6d5c34541319bc899719">create_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">left_boundary_id</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_x_left_pml</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">width_x_left_pml</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:ad1a43aabe01e6d5c34541319bc899719"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh, aligned with the left physical domain boundary  <br /></td></tr>
+<tr class="separator:ad1a43aabe01e6d5c34541319bc899719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e031134cb7160c787acd4b8baa731d8" id="r_a6e031134cb7160c787acd4b8baa731d8"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a6e031134cb7160c787acd4b8baa731d8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a6e031134cb7160c787acd4b8baa731d8">create_bottom_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bottom_boundary_id</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_y_bottom_pml</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">width_y_bottom_pml</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a6e031134cb7160c787acd4b8baa731d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML mesh,aligned with the bottom physical domain boundary  <br /></td></tr>
+<tr class="separator:a6e031134cb7160c787acd4b8baa731d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8602fbb470d795e7c9cd9e7e2ec24f53" id="r_a8602fbb470d795e7c9cd9e7e2ec24f53"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a8602fbb470d795e7c9cd9e7e2ec24f53"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a8602fbb470d795e7c9cd9e7e2ec24f53">create_top_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_right_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_top_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">right_boundary_id</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a8602fbb470d795e7c9cd9e7e2ec24f53"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML top right corner mesh, aligned with the existing PML meshes  <br /></td></tr>
+<tr class="separator:a8602fbb470d795e7c9cd9e7e2ec24f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9c7bba7eb52d721709eff0927e31b2" id="r_adb9c7bba7eb52d721709eff0927e31b2"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:adb9c7bba7eb52d721709eff0927e31b2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#adb9c7bba7eb52d721709eff0927e31b2">create_bottom_right_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_right_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_bottom_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">right_boundary_id</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:adb9c7bba7eb52d721709eff0927e31b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML bottom right corner mesh, aligned with the existing PML meshes  <br /></td></tr>
+<tr class="separator:adb9c7bba7eb52d721709eff0927e31b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d3f0f7cf5ca6a6f132beb8470f7ad78" id="r_a6d3f0f7cf5ca6a6f132beb8470f7ad78"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a6d3f0f7cf5ca6a6f132beb8470f7ad78"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a6d3f0f7cf5ca6a6f132beb8470f7ad78">create_top_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_left_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_top_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">left_boundary_id</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a6d3f0f7cf5ca6a6f132beb8470f7ad78"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML top left corner mesh, aligned with the existing PML meshes  <br /></td></tr>
+<tr class="separator:a6d3f0f7cf5ca6a6f132beb8470f7ad78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68f929052d1bb4332d8ebb1d64bdcd08" id="r_a68f929052d1bb4332d8ebb1d64bdcd08"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a68f929052d1bb4332d8ebb1d64bdcd08"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1TwoDimensionalPMLHelper.html#a68f929052d1bb4332d8ebb1d64bdcd08">create_bottom_left_pml_mesh</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_left_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">pml_bottom_mesh_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bulk_mesh_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">left_boundary_id</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *time_stepper_pt=&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a>)</td></tr>
+<tr class="memdesc:a68f929052d1bb4332d8ebb1d64bdcd08"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Constructor" for PML bottom left corner mesh, aligned with the existing PML meshes  <br /></td></tr>
+<tr class="separator:a68f929052d1bb4332d8ebb1d64bdcd08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace with functions that allow the construction of PML layers on axis aligned boundaries. </p>
+<p>All helper routines for 2D bulk boundary mesh usage in order to generate PML meshes aligned to the main mesh. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a68f929052d1bb4332d8ebb1d64bdcd08" name="a68f929052d1bb4332d8ebb1d64bdcd08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68f929052d1bb4332d8ebb1d64bdcd08">&#9670;&#160;</a></span>create_bottom_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_bottom_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_left_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_bottom_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML bottom left corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Sort them from lowest to highest (in y coordinate) sorter_right_boundary is still functional, as the sorting is performed by the same criterion</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l02366">2366</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00039">sorter_right_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01400">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a6e031134cb7160c787acd4b8baa731d8" name="a6e031134cb7160c787acd4b8baa731d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e031134cb7160c787acd4b8baa731d8">&#9670;&#160;</a></span>create_bottom_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_bottom_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>bottom_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_y_bottom_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>width_y_bottom_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh,aligned with the bottom physical domain boundary </p>
+<p>PML layer width subtracted from the bulk mesh lower boundary coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01859">1859</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00057">sorter_bottom_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="adb9c7bba7eb52d721709eff0927e31b2" name="adb9c7bba7eb52d721709eff0927e31b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9c7bba7eb52d721709eff0927e31b2">&#9670;&#160;</a></span>create_bottom_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_bottom_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_right_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_bottom_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML bottom right corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l02102">2102</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00039">sorter_right_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01400">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="ad1a43aabe01e6d5c34541319bc899719" name="ad1a43aabe01e6d5c34541319bc899719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1a43aabe01e6d5c34541319bc899719">&#9670;&#160;</a></span>create_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_x_left_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>width_x_left_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh, aligned with the left physical domain boundary </p>
+<p>PML layer width subtracted from left bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01751">1751</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00051">sorter_left_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ad119cef6cd1f7a905dade8810d4cfabd" name="ad119cef6cd1f7a905dade8810d4cfabd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad119cef6cd1f7a905dade8810d4cfabd">&#9670;&#160;</a></span>create_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_x_right_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>width_x_right_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh,aligned with the right physical domain boundary </p>
+<p>PML layer with added to the bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01538">1538</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00039">sorter_right_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6d3f0f7cf5ca6a6f132beb8470f7ad78" name="a6d3f0f7cf5ca6a6f132beb8470f7ad78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3f0f7cf5ca6a6f132beb8470f7ad78">&#9670;&#160;</a></span>create_top_left_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_top_left_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_left_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_top_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>left_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML top left corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Sort them from lowest to highest (in y coordinate) sorter_right_boundary is still functional, as the sorting is performed by the same criterion</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l02233">2233</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00039">sorter_right_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01400">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="ae9dbf69567d9b6b179045108e710f6fe" name="ae9dbf69567d9b6b179045108e710f6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9dbf69567d9b6b179045108e710f6fe">&#9670;&#160;</a></span>create_top_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_top_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>top_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_y_top_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>width_y_top_pml</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML mesh, aligned with the top physical domain boundary </p>
+<p>PML layer width added to the bulk mesh coordinate</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01645">1645</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00045">sorter_top_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a8602fbb470d795e7c9cd9e7e2ec24f53" name="a8602fbb470d795e7c9cd9e7e2ec24f53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8602fbb470d795e7c9cd9e7e2ec24f53">&#9670;&#160;</a></span>create_top_right_pml_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ASSOCIATED_PML_QUAD_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> * oomph::TwoDimensionalPMLHelper::create_top_right_pml_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_right_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>pml_top_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&#160;</td>
+          <td class="paramname"><em>bulk_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>right_boundary_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;<a class="el" href="classoomph_1_1Mesh.html#a12243d0fee2b1fcee729ee5a4777ea10">Mesh::Default_TimeStepper</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>"Constructor" for PML top right corner mesh, aligned with the existing PML meshes </p>
+<p>Relevant boundary id's to be used in construction Parent id refers to already existing PML meshes</p>
+<p>Number of elements and boundary nodes to be acted upon during construction are extracted from the 'parent' PML meshes</p>
+<p>Specific PML sizes needed, taken directly from physical domain and existing PML meshes</p>
+<p>The enabling must be perfromed in both x- and y-directions as this is a corner PML mesh</p>
+<p>Return the finalized mesh, with PML enabled and boundary conditions added</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8h_source.html#l01967">1967</a> of file <a class="el" href="pml__meshes_8h_source.html">pml_meshes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="pml__meshes_8cc_source.html#l00039">sorter_right_boundary()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01400">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>.</p>
+
+</div>
+</div>
+<a id="a0bd68e9d424ff3f05266786cc6c78baa" name="a0bd68e9d424ff3f05266786cc6c78baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bd68e9d424ff3f05266786cc6c78baa">&#9670;&#160;</a></span>sorter_bottom_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TwoDimensionalPMLHelper::sorter_bottom_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the bottom boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00057">57</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01859">create_bottom_pml_mesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00440">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aecb74c39efe7c572a9d87b2d11be3d69" name="aecb74c39efe7c572a9d87b2d11be3d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecb74c39efe7c572a9d87b2d11be3d69">&#9670;&#160;</a></span>sorter_left_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TwoDimensionalPMLHelper::sorter_left_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the left boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00051">51</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01751">create_left_pml_mesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00440">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="ae66c595a953e030ae366699eec3ca3ab" name="ae66c595a953e030ae366699eec3ca3ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66c595a953e030ae366699eec3ca3ab">&#9670;&#160;</a></span>sorter_right_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TwoDimensionalPMLHelper::sorter_right_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the right boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00039">39</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l02366">create_bottom_left_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l02102">create_bottom_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l01538">create_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l02233">create_top_left_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l01967">create_top_right_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l00782">oomph::PMLCornerQuadMesh&lt; ELEMENT &gt;::PMLCornerQuadMesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00440">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a98d2786e22298095bd190435d11c4f0e" name="a98d2786e22298095bd190435d11c4f0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d2786e22298095bd190435d11c4f0e">&#9670;&#160;</a></span>sorter_top_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TwoDimensionalPMLHelper::sorter_top_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_i_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_j_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function for sorting the top boundary nodes </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__meshes_8cc_source.html#l00045">45</a> of file <a class="el" href="pml__meshes_8cc_source.html">pml_meshes.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__meshes_8h_source.html#l01645">create_top_pml_mesh()</a>, <a class="el" href="pml__meshes_8h_source.html#l00782">oomph::PMLCornerQuadMesh&lt; ELEMENT &gt;::PMLCornerQuadMesh()</a>, and <a class="el" href="pml__meshes_8h_source.html#l00440">oomph::PMLQuadMesh&lt; ELEMENT &gt;::PMLQuadMesh()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+//Header file for general solid mechanics elements
+
+//Include guards to prevent multiple inclusion of the header
+#ifndef OOMPH_HOMOGENISED_LINEAR_ELASTICITY_ELEMENTS_HEADER
+#define OOMPH_HOMOGENISED_LINEAR_ELASTICITY_ELEMENTS_HEADER
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+  #include <oomph-lib-config.h>
+#endif
+
+
+//OOMPH-LIB headers
+#include "generic/Qelements.h"
+#include "generic/mesh.h"
+#include "generic/block_preconditioner.h"
+#include "linear_elasticity/elasticity_tensor.h"
+
+
+namespace oomph
+{
+//=======================================================================
+/// A base class for elements that solve the equations for homogenised
+/// linear elasticity. This is a template-free base class that
+/// includes dimension-independent generic functions.
+//=======================================================================
+  class HomogenisedLinearElasticityEquationsBase : 
+   public virtual FiniteElement
+  {
+    public:
+
+   /// Function pointer to a return a pointer to an  elasticity tensor
+   typedef void (*HomLinElasticityTensorFctPt)(const Vector<double> &x,
+                                               ElasticityTensor* &E_pt);
+   
+   /// Return the index at which the i-th unknown displacement 
+   /// component is stored. The default value, i, is appropriate for
+   /// single-physics problems.
+   virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
+    {return i;}
+   
+   /// Compute vector of FE interpolated displacement u at local coordinate s
+   void interpolated_u_linear_elasticity(const Vector<double> &s, 
+                                         Vector<double>& disp) 
+    const
+    {
+     //Find number of nodes
+     unsigned n_node = nnode();
+     //Local shape function
+     Shape psi(n_node);
+     //Find values of shape function
+     shape(s,psi);
+     
+     for (unsigned i=0;i<3;i++)
+      {
+       //Index at which the nodal value is stored
+       unsigned u_nodal_index = u_index_linear_elasticity(i);
+       //Initialise value of u
+       disp[i] = 0.0;
+       //Loop over the local nodes and sum
+       for(unsigned l=0;l<n_node;l++) 
+        {
+         disp[i] += nodal_value(l,u_nodal_index)*psi[l];
+        }
+      }
+    }
+
+   /// Return FE interpolated displacement u[i] at local coordinate s
+   double interpolated_u_linear_elasticity(const Vector<double> &s, 
+                                           const unsigned &i) const
+    {
+     //Find number of nodes
+     unsigned n_node = nnode();
+     //Local shape function
+     Shape psi(n_node);
+     //Find values of shape function
+     shape(s,psi);
+     
+     //Get nodal index at which i-th velocity is stored
+     unsigned u_nodal_index = u_index_linear_elasticity(i);
+     
+     //Initialise value of u
+     double interpolated_u = 0.0;
+     //Loop over the local nodes and sum
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       interpolated_u += nodal_value(l,u_nodal_index)*psi[l];
+      }
+     
+     return(interpolated_u);
+    }
+   
+   /// Constructor: Set null pointers for constitutive law and for
+   /// isotropic growth function. Set physical parameter values to 
+   /// default values, switch off inertia and set body force to zero.
+   HomogenisedLinearElasticityEquationsBase() : Elasticity_tensor_fct_pt(0),
+    Lambda_sq_pt(&Default_lambda_sq_value), P_pt(0), M_pt(0), Unsteady(false)
+    {}
+
+   /// Access function for the pointer to the p value
+   unsigned* &p_pt() {return P_pt;}
+   
+   /// Get the value of p
+   unsigned get_p()
+   {
+    if(P_pt==0) 
+     {
+      throw OomphLibError("Integer P pointer not set\n",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      return 0;
+     }
+    else {return *P_pt;}
+   }
+
+   /// Access function for the pointer to the m value
+   unsigned* &m_pt() {return M_pt;}
+ 
+   /// Get the value of m
+   unsigned get_m()
+   {
+    if(M_pt==0) 
+     {
+      throw OomphLibError("Integer M pointer not set\n",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      return 0;
+     }
+    else {return *M_pt;}
+   }
+
+   /// Access function to set the function pointer for the elasticity tensor
+   HomLinElasticityTensorFctPt& elasticity_tensor_fct_pt() 
+    {return  Elasticity_tensor_fct_pt;}
+   
+   /// Access function to set the function pointer for the elasticity tensor
+   /// (const verstion)
+   HomLinElasticityTensorFctPt elasticity_tensor_fct_pt() const
+    {return  Elasticity_tensor_fct_pt;}
+
+   /// Function to get the specific value of elasticity tensor 
+   /// at the given position
+   inline void get_E_pt(const Vector<double> &x, ElasticityTensor*  &E_pt)
+   {
+    if(this->Elasticity_tensor_fct_pt==0)
+     {
+      throw OomphLibError("Elasticity tensor function pointer not set\n",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    else
+     {
+      (*this->Elasticity_tensor_fct_pt)(x,E_pt);
+     }
+   }
+
+   /// Access function for timescale ratio (nondim density)
+   const double& lambda_sq() const {return *Lambda_sq_pt;}
+   
+   /// Access function for pointer to timescale ratio (nondim density)
+   double* &lambda_sq_pt() {return Lambda_sq_pt;}
+   
+   /// Access function to flag that switches inertia on/off
+   bool& unsteady() {return Unsteady;}
+   
+   /// Access function to flag that switches inertia on/off (const version)
+   bool unsteady() const {return Unsteady;}
+
+   virtual FaceElement* make_face_element(const unsigned &s_fixed_index,
+                                          const int&s_limit)
+    {
+     throw OomphLibError(
+      "make_face_element not implemented",
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   
+  protected:
+   
+   /// Pointer to the elasticity tensor
+   HomLinElasticityTensorFctPt Elasticity_tensor_fct_pt;
+
+   /// Timescale ratio (non-dim. density)
+   double* Lambda_sq_pt;
+   
+   /// Pointer to the index P in the cell problem
+   unsigned *P_pt;
+   
+   /// Pointer to the index M in the cell problem
+   unsigned *M_pt;
+   
+   /// Flag that switches inertia on/off
+   bool Unsteady;
+
+   /// Static default value for timescale ratio (1.0 -- for natural scaling) 
+   static double Default_lambda_sq_value;
+   
+  };
+ 
+ 
+//=======================================================================
+/// A class for elements that solve the equations of solid mechanics, based
+/// on the principle of virtual displacements in cartesian coordinates.
+//=======================================================================
+template<unsigned DIM>
+ class HomogenisedLinearElasticityEquations : 
+   public HomogenisedLinearElasticityEquationsBase
+   {
+    public:
+    
+   ///  Constructor
+   HomogenisedLinearElasticityEquations() {}
+
+   /// Always have three displacement components
+   unsigned required_nvalue(const unsigned &n) const {return 3;}
+   
+   /// Return the residuals for the solid equations (the discretised
+   /// principle of virtual displacements)
+   void fill_in_contribution_to_residuals(Vector<double> &residuals)
+    {
+     fill_in_generic_contribution_to_residuals_linear_elasticity(
+      residuals,GeneralisedElement::Dummy_matrix,0);
+    }
+
+   /// Return the generic contribuion to the residuals and (optionally) 
+   /// the jacobian matrix depending on the flag
+   virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
+    Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+   
+   /// The jacobian is calculated by finite differences by default,
+   /// We need only to take finite differences w.r.t. positional variables
+   /// For this element
+   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                         DenseMatrix<double> &jacobian)
+    {
+     //Add the contribution to the residuals
+     this->fill_in_generic_contribution_to_residuals_linear_elasticity(
+      residuals,jacobian,1);
+    }
+
+   /// Compute contribution to the effective modulus
+   void calculate_effective_modulus(DenseMatrix<double> &H);
+   
+   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   void output(std::ostream &outfile) 
+    {
+     unsigned n_plot=5;
+     output(outfile,n_plot);
+    }
+   
+   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   void output(std::ostream &outfile, const unsigned &n_plot);
+   
+   
+   /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
+   void output(FILE* file_pt) 
+    {
+     unsigned n_plot=5;
+     output(file_pt,n_plot);
+    }
+   
+   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   void output(FILE* file_pt, const unsigned &n_plot);
+   
+  }; 
+
+
+}
+
+#endif
+
+
+
+

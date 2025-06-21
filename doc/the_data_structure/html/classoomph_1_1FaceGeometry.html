@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::FaceGeometry&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1FaceGeometry.html">FaceGeometry</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">oomph::FaceGeometry&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1FaceGeometry.html" title="FaceGeometry class definition: This policy class is used to allow construction of face elements that ...">FaceGeometry</a> class definition: This policy class is used to allow construction of face elements that solve arbitrary equations without having to tamper with the corresponding "bulk" elements. The geometrical information for the face element must be specified by each "bulk" element using an explicit specialisation of this class.  
+ <a href="classoomph_1_1FaceGeometry.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="elements_8h_source.html">elements.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::FaceGeometry&lt; ELEMENT &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1FaceGeometry.png" usemap="#oomph::FaceGeometry_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::FaceGeometry_3C_20ELEMENT_20_3E_map" name="oomph::FaceGeometry_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1AxisymmetricPoroelasticityTractionElement.html" alt="oomph::AxisymmetricPoroelasticityTractionElement&lt; POROELASTICITY_BULK_ELEMENT &gt;" shape="rect" coords="653,56,1296,80"/>
+<area href="classoomph_1_1ElementWithSpecificMovingNodes.html" alt="oomph::ElementWithSpecificMovingNodes&lt; FaceGeometry&lt; ELEMENT &gt;, SpineNode &gt;" shape="rect" coords="653,112,1296,136"/>
+<area href="classoomph_1_1Hijacked.html" alt="oomph::Hijacked&lt; FaceGeometry&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,168,1296,192"/>
+<area href="classoomph_1_1AdvectionDiffusionFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of Advection Diff..." alt="oomph::AdvectionDiffusionFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,224,1296,248"/>
+<area href="classoomph_1_1AxisymmetricLinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of axisymmetri..." alt="oomph::AxisymmetricLinearElasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,280,1296,304"/>
+<area href="classoomph_1_1AxisymmetricNavierStokesTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the axisym Navier Stokes eqn..." alt="oomph::AxisymmetricNavierStokesTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,336,1296,360"/>
+<area href="classoomph_1_1AxisymmetricPoroelasticityTractionElement.html" title="A class for elements that allow the imposition of an applied combined traction and pore fluid pressur..." alt="oomph::AxisymmetricPoroelasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,392,1296,416"/>
+<area href="classoomph_1_1AxisymmetricSolidTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the principle of virtual dis..." alt="oomph::AxisymmetricSolidTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,448,1296,472"/>
+<area href="classoomph_1_1DGEulerFaceElement.html" title="FaceElement for Discontinuous Galerkin Problems." alt="oomph::DGEulerFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,504,1296,528"/>
+<area href="classoomph_1_1DGEulerFaceReflectionElement.html" title="FaceElement for Discontinuous Galerkin Problems with reflection boundary conditions." alt="oomph::DGEulerFaceReflectionElement&lt; ELEMENT &gt;" shape="rect" coords="653,560,1296,584"/>
+<area href="classoomph_1_1DGScalarAdvectionFaceElement.html" title="FaceElement for Discontinuous Galerkin Problems." alt="oomph::DGScalarAdvectionFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,616,1296,640"/>
+<area href="classoomph_1_1DarcyFaceElement.html" title="A class for elements that allow the imposition of an applied pressure in the Darcy equations...." alt="oomph::DarcyFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,672,1296,696"/>
+<area href="classoomph_1_1DummyFaceElement.html" title="Dummy FaceElement for use with purely geometric operations such as mesh generation." alt="oomph::DummyFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,728,1296,752"/>
+<area href="classoomph_1_1ElasticAxisymmetricVolumeConstraintBoundingElement.html" title="The axisymmetric (one-dimensional) interface elements that allow imposition of a volume constraint sp..." alt="oomph::ElasticAxisymmetricVolumeConstraintBoundingElement&lt; ELEMENT &gt;" shape="rect" coords="653,784,1296,808"/>
+<area href="classoomph_1_1ElasticLineVolumeConstraintBoundingElement.html" title="The one-dimensional interface elements that allow imposition of a volume constraint specialised for t..." alt="oomph::ElasticLineVolumeConstraintBoundingElement&lt; ELEMENT &gt;" shape="rect" coords="653,840,1296,864"/>
+<area href="classoomph_1_1ElasticSurfaceVolumeConstraintBoundingElement.html" title="The Two-dimensional interface elements that allow the application of a volume constraint specialised ..." alt="oomph::ElasticSurfaceVolumeConstraintBoundingElement&lt; ELEMENT &gt;" shape="rect" coords="653,896,1296,920"/>
+<area href="classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement.html" title="A class for elements that allow the imposition of a displacement constraint for bulk solid elements v..." alt="oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;" shape="rect" coords="653,952,1296,976"/>
+<area href="classoomph_1_1FaceElementAsGeomObject.html" title="Class that is used to create FaceElement from bulk elements and to provide these FaceElement with a g..." alt="oomph::FaceElementAsGeomObject&lt; ELEMENT &gt;" shape="rect" coords="653,1008,1296,1032"/>
+<area href="classoomph_1_1FaceGeometry_3_01AlgebraicElement_3_01ELEMENT_01_4_01_4.html" title="Explicit definition of the face geometry of algebraic elements: the same as the face geometry of the ..." alt="oomph::FaceGeometry&lt; AlgebraicElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1064,1296,1088"/>
+<area href="classoomph_1_1FaceGeometry_3_01GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; GeneralisedNewtonianProjectableAxisymmetricCrouzeixRaviartElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1120,1296,1144"/>
+<area href="classoomph_1_1FaceGeometry_3_01GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; GeneralisedNewtonianProjectableAxisymmetricTaylorHoodElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1176,1296,1200"/>
+<area href="classoomph_1_1FaceGeometry_3_01Hijacked_3_01ELEMENT_01_4_01_4.html" title="Explicit definition of the face geometry of hijacked elements: the same as the face geometry of the u..." alt="oomph::FaceGeometry&lt; Hijacked&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1232,1296,1256"/>
+<area href="classoomph_1_1FaceGeometry_3_01MacroElementNodeUpdateElement_3_01ELEMENT_01_4_01_4.html" title="Explicit definition of the face geometry of MacroElementNodeUpdateElements, which is the same as the ..." alt="oomph::FaceGeometry&lt; MacroElementNodeUpdateElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1288,1296,1312"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableAdvectionDiffusionReactionElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableAdvectionDiffusionReactionElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1344,1296,1368"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableAxisymLinearElasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableAxisymLinearElasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1400,1296,1424"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableAxisymmetricCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableAxisymmetricCrouzeixRaviartElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1456,1296,1480"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableAxisymmetricPoroelasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableAxisymmetricPoroelasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1512,1296,1536"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableAxisymmetricTaylorHoodElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableAxisymmetricTaylorHoodElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1568,1296,1592"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableCrouzeixRaviartElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1624,1296,1648"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableDarcyElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableDarcyElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1680,1296,1704"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableDisplacementBasedFoepplvonKarmanElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableDisplacementBasedFoepplvonKarmanElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1736,1296,1760"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1792,1296,1816"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableFoepplvonKarmanElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableFoepplvonKarmanElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1848,1296,1872"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableFourierDecomposedHelmholtzElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableFourierDecomposedHelmholtzElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1904,1296,1928"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableGeneralisedNewtonianCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableGeneralisedNewtonianCrouzeixRaviartElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,1960,1296,1984"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableGeneralisedNewtonianTaylorHoodElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableGeneralisedNewtonianTaylorHoodElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2016,1296,2040"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableHelmholtzElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableHelmholtzElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2072,1296,2096"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableLinearElasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableLinearElasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2128,1296,2152"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePMLFourierDecomposedHelmholtzElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePMLFourierDecomposedHelmholtzElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2184,1296,2208"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePMLHelmholtzElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePMLHelmholtzElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2240,1296,2264"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePMLTimeHarmonicLinearElasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePMLTimeHarmonicLinearElasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2296,1296,2320"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePVDElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePVDElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2352,1296,2376"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePVDElementWithContinuousPressure_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePVDElementWithContinuousPressure&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2408,1296,2432"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectablePoissonElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectablePoissonElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2464,1296,2488"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableTaylorHoodElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableTaylorHoodElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2520,1296,2544"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableTaylorHoodMixedOrderSpaceTimeElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableTaylorHoodMixedOrderSpaceTimeElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2576,1296,2600"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2632,1296,2656"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableTimeHarmonicLinearElasticityElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableTimeHarmonicLinearElasticityElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2688,1296,2712"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableUnsteadyHeatElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2744,1296,2768"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatMixedOrderSpaceTimeElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableUnsteadyHeatMixedOrderSpaceTimeElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2800,1296,2824"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatSpaceTimeElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableUnsteadyHeatSpaceTimeElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2856,1296,2880"/>
+<area href="classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatSpaceTimeElement_3_01ELEMENT_01_4_01_4.html" title="Face geometry for element is the same as that for the underlying wrapped element." alt="oomph::FaceGeometry&lt; ProjectableUnsteadyHeatSpaceTimeElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2912,1296,2936"/>
+<area href="classoomph_1_1FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4.html" title="Explicit definition of the face geometry for spine elements: The same as the face geometry of the und..." alt="oomph::FaceGeometry&lt; SpineElement&lt; ELEMENT &gt; &gt;" shape="rect" coords="653,2968,1296,2992"/>
+<area href="classoomph_1_1FourierDecomposedHelmholtzBCElementBase.html" title="A class for elements that allow the approximation of the Sommerfeld radiation BC for Fourier decompos..." alt="oomph::FourierDecomposedHelmholtzBCElementBase&lt; ELEMENT &gt;" shape="rect" coords="653,3024,1296,3048"/>
+<area href="classoomph_1_1FourierDecomposedHelmholtzFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of Fourier decomp..." alt="oomph::FourierDecomposedHelmholtzFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,3080,1296,3104"/>
+<area href="classoomph_1_1FpPressureAdvDiffRobinBCElement.html" title="A class for elements that allow the imposition of Robin boundary conditions for the pressure advectio..." alt="oomph::FpPressureAdvDiffRobinBCElement&lt; ELEMENT &gt;" shape="rect" coords="653,3136,1296,3160"/>
+<area href="classoomph_1_1FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement.html" title="A class for elements that allow the imposition of Robin boundary conditions for the pressure advectio..." alt="oomph::FpPressureAdvDiffRobinBCMixedOrderSpaceTimeElement&lt; ELEMENT &gt;" shape="rect" coords="653,3192,1296,3216"/>
+<area href="classoomph_1_1FreeStandingFaceElement.html" title="Basic-ified FaceElement, without any of the functionality of of actual FaceElements – it&#39;s just a sur..." alt="oomph::FreeStandingFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,3248,1296,3272"/>
+<area href="classoomph_1_1HelmholtzBCElementBase.html" title="A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometr..." alt="oomph::HelmholtzBCElementBase&lt; ELEMENT &gt;" shape="rect" coords="653,3304,1296,3328"/>
+<area href="classoomph_1_1HelmholtzFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of Helmholtz elem..." alt="oomph::HelmholtzFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,3360,1296,3384"/>
+<area href="classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement.html" title="A class for elements that allow the imposition of a displacement constraint for &quot;bulk&quot; solid elements..." alt="oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;" shape="rect" coords="653,3416,1296,3440"/>
+<area href="classoomph_1_1ImposeImpenetrabilityElement.html" title="ImposeImpenetrabilityElement are elements that coincide with the faces of higher-dimensional &quot;bulk&quot; e..." alt="oomph::ImposeImpenetrabilityElement&lt; ELEMENT &gt;" shape="rect" coords="653,3472,1296,3496"/>
+<area href="classoomph_1_1ImposeParallelOutflowElement.html" title="ImposeParallelOutflowElement are elements that coincide with the faces of higher-dimensional &quot;bulk&quot; e..." alt="oomph::ImposeParallelOutflowElement&lt; ELEMENT &gt;" shape="rect" coords="653,3528,1296,3552"/>
+<area href="classoomph_1_1LinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of linear elas..." alt="oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,3584,1296,3608"/>
+<area href="classoomph_1_1LinearWaveFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of LinearWave ele..." alt="oomph::LinearWaveFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,3640,1296,3664"/>
+<area href="classoomph_1_1NavierStokesMixedOrderSpaceTimeTractionElement.html" title="A class for elements that allow the imposition of an applied traction to the Navier–Stokes equations ..." alt="oomph::NavierStokesMixedOrderSpaceTimeTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,3696,1296,3720"/>
+<area href="classoomph_1_1NavierStokesSurfaceDragTorqueElement.html" title="A class of elements that allow the determination of the drag and toque, relative to a given centre of..." alt="oomph::NavierStokesSurfaceDragTorqueElement&lt; ELEMENT &gt;" shape="rect" coords="653,3752,1296,3776"/>
+<area href="classoomph_1_1NavierStokesSurfacePowerElement.html" title="A class of elements that allow the determination of the power input and various other fluxes over the..." alt="oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;" shape="rect" coords="653,3808,1296,3832"/>
+<area href="classoomph_1_1NavierStokesTractionElement.html" title="A class for elements that allow the imposition of an applied traction to the Navier–Stokes equations ..." alt="oomph::NavierStokesTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,3864,1296,3888"/>
+<area href="classoomph_1_1PMLFourierDecomposedHelmholtzFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of Fourier decomp..." alt="oomph::PMLFourierDecomposedHelmholtzFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,3920,1296,3944"/>
+<area href="classoomph_1_1PMLFourierDecomposedHelmholtzPowerMonitorElement.html" title="A class for elements that allow postprocessing of the results – currently computes radiated power ove..." alt="oomph::PMLFourierDecomposedHelmholtzPowerMonitorElement&lt; ELEMENT &gt;" shape="rect" coords="653,3976,1296,4000"/>
+<area href="classoomph_1_1PMLHelmholtzFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of PMLHelmholtz e..." alt="oomph::PMLHelmholtzFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,4032,1296,4056"/>
+<area href="classoomph_1_1PMLHelmholtzPowerElement.html" title="A class for elements that allow the post-processing of radiated power and flux on the boundaries of P..." alt="oomph::PMLHelmholtzPowerElement&lt; ELEMENT &gt;" shape="rect" coords="653,4088,1296,4112"/>
+<area href="classoomph_1_1PMLTimeHarmonicLinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of time-harmon..." alt="oomph::PMLTimeHarmonicLinearElasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,4144,1296,4168"/>
+<area href="classoomph_1_1PoissonFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of Poisson elemen..." alt="oomph::PoissonFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,4200,1296,4224"/>
+<area href="classoomph_1_1PolarNavierStokesTractionElement.html" title="A class for elements that allow the imposition of an applied traction to the Navier–Stokes equations ..." alt="oomph::PolarNavierStokesTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,4256,1296,4280"/>
+<area href="classoomph_1_1PolarStressIntegralElement.html" title="A class for elements that allow the imposition of an applied traction to the Navier–Stokes equations ..." alt="oomph::PolarStressIntegralElement&lt; ELEMENT &gt;" shape="rect" coords="653,4312,1296,4336"/>
+<area href="classoomph_1_1PoroelasticityFaceElement.html" title="A class for elements that allow the imposition of an applied pressure in the Darcy equations...." alt="oomph::PoroelasticityFaceElement&lt; ELEMENT &gt;" shape="rect" coords="653,4368,1296,4392"/>
+<area href="classoomph_1_1SolidTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the principle of virtual dis..." alt="oomph::SolidTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,4424,1296,4448"/>
+<area href="classoomph_1_1SphericalAdvectionDiffusionFluxElement.html" title="A class for elements that allow the imposition of an applied Robin boundary condition on the boundari..." alt="oomph::SphericalAdvectionDiffusionFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,4480,1296,4504"/>
+<area href="classoomph_1_1SteadyAxisymAdvectionDiffusionFluxElement.html" title="A class for elements that allow the imposition of an applied Robin boundary condition on the boundari..." alt="oomph::SteadyAxisymAdvectionDiffusionFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,4536,1296,4560"/>
+<area href="classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of time-harmon..." alt="oomph::TimeHarmonicFourierDecomposedLinearElasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,4592,1296,4616"/>
+<area href="classoomph_1_1TimeHarmonicLinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of time-harmon..." alt="oomph::TimeHarmonicLinearElasticityTractionElement&lt; ELEMENT &gt;" shape="rect" coords="653,4648,1296,4672"/>
+<area href="classoomph_1_1UnsteadyHeatFluxElement.html" title="A class for elements that allow the imposition of an applied flux on the boundaries of UnsteadyHeat e..." alt="oomph::UnsteadyHeatFluxElement&lt; ELEMENT &gt;" shape="rect" coords="653,4704,1296,4728"/>
+<area href="classoomph_1_1YoungLaplaceContactAngleElement.html" title="A class for elements that allow the imposition of an contact angle bcs for Young Laplace elements...." alt="oomph::YoungLaplaceContactAngleElement&lt; ELEMENT &gt;" shape="rect" coords="653,4760,1296,4784"/>
+  </map>
+</div></div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> ELEMENT&gt;<br />
+class oomph::FaceGeometry&lt; ELEMENT &gt;</div><p><a class="el" href="classoomph_1_1FaceGeometry.html" title="FaceGeometry class definition: This policy class is used to allow construction of face elements that ...">FaceGeometry</a> class definition: This policy class is used to allow construction of face elements that solve arbitrary equations without having to tamper with the corresponding "bulk" elements. The geometrical information for the face element must be specified by each "bulk" element using an explicit specialisation of this class. </p>
+
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l05001">5001</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="elements_8h_source.html">elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:13
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

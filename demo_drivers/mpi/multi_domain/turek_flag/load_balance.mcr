@@ -1,0 +1,135 @@
+#!MC 1120
+
+$!VARSET |PNG|=0
+
+$!VarSet |dir| = 'Validation/RESLT_TUREK_LOAD_BALANCE'
+$!VarSet |postfix| = '.plt'
+$!VarSet |postfix| = '.dat'
+
+
+$!VARSET |nproc|=2
+
+$!VARSET |lostep|=0
+$!VARSET |nstep|=3
+$!VARSET |dstep|=1
+
+$!NEWLAYOUT 
+$!IF |PNG|==0
+     $!EXPORTSETUP EXPORTFORMAT = AVI
+     $!EXPORTSETUP IMAGEWIDTH = 806
+     $!EXPORTSETUP EXPORTFNAME = 'prune_and_balance.avi'
+     $!EXPORTSTART             
+       EXPORTREGION = ALLFRAMES 
+$!ENDIF             
+
+$!LOOP |nstep|
+$!VARSET |step|=(|lostep|+(|loop|-1)*|dstep|)
+$!NEWLAYOUT 
+$!DRAWGRAPHICS FALSE
+
+$!FIELDLAYERS SHOWSHADE = YES
+
+$!LOOP |nproc|
+
+$!IF |LOOP|==1
+   $!VARSET |n2_0|=1
+$!ELSE
+   $!VARSET |n2_0|=(|NUMZONES|+1)
+$!ENDIF
+
+$!VARSET |proc|=(|LOOP|-1)
+
+$!READDATASET  '"|dir|/soln|step|_on_proc|proc||postfix|" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = NO
+  INCLUDETEXT = YES
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5"'
+$!VARSET |n2|=|NUMZONES|
+$!FIELDMAP [|n2_0|-|n2|]  GROUP = 12
+$!IF |proc|==0
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = BLUE}
+$!ELSEIF |proc|==1
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = RED}
+$!ELSEIF |proc|==2
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = GREEN}
+$!ELSEIF |proc|==3
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = PURPLE}
+$!ENDIF
+$!FIELDMAP [|n2_0|-|n2|]  MESH{SHOW = NO}
+$!ACTIVEFIELDMAPS += [|n2_0|-|n2|]
+$!REDRAWALL 
+$!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{LINETHICKNESS = 0.100000000000000006}
+
+
+$!ENDLOOP
+
+
+$!LOOP |nproc|
+
+#$!IF |LOOP|==1
+#   $!VARSET |n2_0|=1
+#$!ELSE
+   $!VARSET |n2_0|=(|NUMZONES|+1)
+#$!ENDIF
+
+$!VARSET |proc|=(|LOOP|-1)
+
+$!READDATASET  '"|dir|/solid_soln|step|_on_proc|proc||postfix|" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = NO
+  INCLUDETEXT = YES
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5"'
+$!VARSET |n2|=|NUMZONES|
+$!FIELDMAP [|n2_0|-|n2|]  GROUP = 12
+$!IF |proc|==0
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = BLUE}
+$!ELSEIF |proc|==1
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = RED}
+$!ELSEIF |proc|==2
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = GREEN}
+$!ELSEIF |proc|==3
+   $!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{COLOR = PURPLE}
+$!ENDIF
+$!FIELDMAP [|n2_0|-|n2|]  MESH{SHOW = NO}
+$!FIELDMAP [|n2_0|-|n2|]  SHADE{SHOW = YES}
+$!FIELDMAP [|n2_0|-|n2|]  SHADE{COLOR = YELLOW}
+$!ACTIVEFIELDMAPS += [|n2_0|-|n2|]
+$!REDRAWALL 
+$!FIELDMAP [|n2_0|-|n2|]  EDGELAYER{LINETHICKNESS = 0.100000000000000006}
+
+
+$!ENDLOOP
+
+
+###################################################
+$!VIEW FIT
+
+$!DRAWGRAPHICS TRUE
+$!REDRAWALL
+
+
+$!IF |PNG|==1
+     $!EXPORTSETUP EXPORTFORMAT = PNG
+     $!EXPORTSETUP IMAGEWIDTH = 600
+     $!EXPORTSETUP EXPORTFNAME = 'prune_and_balance|loop|.png'
+     $!EXPORT
+       EXPORTREGION = ALLFRAMES
+$!ELSE
+     $!EXPORTNEXTFRAME
+$!ENDIF
+
+$!ENDLOOP
+
+$!IF |PNG|==0
+$!EXPORTFINISH
+$!ENDIF

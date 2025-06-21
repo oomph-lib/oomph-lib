@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Linear solvers</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Linear solvers </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The purpose of this tutorial is to show how to specify different linear solvers for <code>oomph-lib's</code> Newton solver.</p>
+<ul>
+<li><a class="el" href="index.html#overview">Overview</a></li>
+<li><a class="el" href="index.html#available_solvers">List of available linear solvers</a></li>
+<li><a class="el" href="index.html#how_to_change_linear_solver">How to change the LinearSolver</a><ul>
+<li><a class="el" href="index.html#direct">Direct solvers</a></li>
+<li><a class="el" href="index.html#iterative_linear_solvers">Iterative linear solvers and preconditioners</a></li>
+<li><a class="el" href="index.html#third_party_iterative_linear_solvers">Third-party iterative linear solvers and preconditioners</a></li>
+</ul>
+</li>
+<li><a class="el" href="index.html#specific_precond">Problem-specific preconditioners</a></li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="overview"></a>
+Overview</h1>
+<p>As discussed in the <a href="../../the_data_structure/html/index.html">bottom-up discussion of <code>oomph-lib's</code> data structure</a>, by default <code>oomph-lib's</code> Newton solver, <code>Problem::newton_solve(...)</code> solves the linear systems arising during the Newton iteration with its default linear solver, <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><code> SuperLUSolver</code></a>, a wrapper to Demmel, Eistenstat, Gilbert, Li &amp; Liu's sparse direct solver <a href="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</a></p>
+<p><code>oomph-lib</code> provides a large number of alternative linear solvers that may be used instead. All linear solvers within the library are derived from the base class <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><code> LinearSolver</code></a> which contains a single pure virtual function</p>
+ <div class="fragment"><div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> solve(Problem* <span class="keyword">const</span>&amp; problem_pt, DoubleVector&amp; result) = 0;</div>
+</div><!-- fragment --><p> whose task it is to compute the solution <img class="formulaInl" alt="$ \delta {\bf x} $" src="form_0.png" width="14" height="10"/> (returned in the vector <code>result</code>) of the linear system  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\cal J} \delta {\bf x} = -{\bf r}
+\]" src="form_1.png" width="56" height="11"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf r} $" src="form_2.png" width="8" height="6"/> and <img class="formulaInl" alt="$ {\cal J} $" src="form_3.png" width="11" height="11"/> are the global Jacobian and the residual vector, computed by the <code>Problem</code> pointed to by <code>problem_pt</code>. The <a href="../../the_data_structure/html/classoomph_1_1LinearSolver.html"><code> LinearSolver</code></a> class also defines linear-algebra-type interfaces that allow the solution of linear systems with matrices other than the <code>Problem's</code> Jacobian matrix. However, these methods may not be implemented for all linear solvers.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="available_solvers"></a>
+List of available linear solvers</h1>
+<p><code>oomph-lib's</code> linear solvers can be sub-divided into serial and parallel, and direct and iterative linear solvers. Here is a quick overview of the available linear solvers. If you are viewing this document online, the links take you directly to the solvers' class references which explain any solver-specific member functions.</p>
+<ul>
+<li><b>Serial solvers: </b> <br  />
+<br  />
+<ul>
+<li><b>Direct solvers:</b> <br  />
+<br  />
+<ul>
+<li><a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><code>SuperLUSolver</code></a>: <code>oomph-lib's</code> default linear solver, a wrapper to Demmel, Eistenstat, Gilbert, Li &amp; Liu's sparse direct solver <a href="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</a> <br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1HSL__MA42.html"><code>HSL_MA42</code></a>: A wrapper to the frontal solver MA42 from the <a href="http://www.hsl.rl.ac.uk/">HSL library.</a> This solver is available free-of-charge for UK academics. The source code can be dropped into the <code>oomph-lib</code> distribution; see the instructions in the dummy code<br  />
+<br  />
+ <center> <a href="../../../external_src/oomph_hsl/dummy_frontal.f">external_src/oomph_hsl/dummy_frontal.f</a><br  />
+<br  />
+ </center></li>
+<li><a href="../../the_data_structure/html/classoomph_1_1DenseLU.html"><code>DenseLU</code></a>: A direct solver, based on the LU decomposition of the Jacobian matrix which is stored as a dense matrix. Given that the Jacobian matrices arising from most problems are sparse, this is likely to be a very inefficient solver. It is mainly used by the derived (and even more inefficient!) solver <a href="../../the_data_structure/html/classoomph_1_1FD__LU.html"><code>FD_LU</code></a>.<br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1FD__LU.html"><code>FD_LU</code></a>: Almost certainly the world's most inefficient solver. It computes the Jacobian matrix by finite differencing the global residual vector, without taking any sparsity into account. Mainly used by developers as a last-resort sanity check. <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><b>Iterative solvers:</b> <br  />
+<br  />
+<ul>
+<li><code>oomph-lib</code> provides its own implementations of various standard iterative linear solvers. They are derived from the base class <a href="../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html"><code>IterativeLinearSolver</code></a> and are typically templated by the matrix type used store the Jacobian matrix. In most cases you will want to set the template argument <code>MATRIX</code> to <code>CRDoubleMatrix:</code> <br  />
+<br  />
+<ul>
+<li><a href="../../the_data_structure/html/classoomph_1_1GMRES.html"><code>GMRES</code></a>: A Krylov subspace solver for symmetric and non-symmetric linear systems. The memory usage increases with each iteration but the iteration can be restarted. <br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1BiCGStab.html"><code>BiCGStab</code></a>: A Krylov subspace method for symmetric and non-symmetric linear systems. The memory requirement remains constant throughout the iteration.<br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1CG.html"><code>CG</code></a>: The classical conjugate gradient method for symmetric positive definite matrices. The memory requirement remains constant throughout the iteration. <br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1GS.html"><code>GS</code></a>: Gauss-Seidel &ndash; a stationary iterative solver. <br  />
+<br  />
+</li>
+</ul>
+</li>
+<li><code>oomph-lib</code> also provides wrappers to third-party iterative linear solvers. These tend to provide their own implementations of <code>GMRES</code>, <code>BiCGStab</code>, <code>CG</code>, etc. but are not necessarily derived from <code>oomph-lib's</code> own <a href="../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html"><code>IterativeLinearSolver</code></a> base class. <br  />
+<br  />
+<ul>
+<li><a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><code>HypreSolver</code></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</a> <br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><code>TrilinosAztecOOSolver</code></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a><br  />
+<br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><b>Parallel solvers:</b> <br  />
+<br  />
+<ul>
+<li><b>Direct solvers:</b> <br  />
+<br  />
+<ul>
+<li>When <code>oomph-lib</code> is compiled with MPI support, its default linear solver <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><code>SuperLUSolver</code></a> becomes a wrapper to Demmel, Eistenstat, Gilbert, Li &amp; Liu's parallel sparse direct solver <a href="http://crd.lbl.gov/~xiaoye/SuperLU#superlu_dist">SuperLU_DIST.</a> This behaviour can be over-ruled with the member function <div class="fragment"><div class="line">SuperLUSolver::set_solver_type(...)</div>
+</div><!-- fragment --> whose argument must specify one of the three options listed in the enumeration <code>SuperLUSolver::Type</code>. This allows the serial solver <a href="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</a> to be used even if <code>oomph-lib</code> is compiled with MPI support. <br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1MumpsSolver.html"><code> MumpsSolver </code></a>: is a wrapper to the <a href="http://graal.ens-lyon.fr/MUMPS/">MUMPS </a> multifrontal solver that is available when <code>oomph-lib</code> is compiled with MPI support and support for MUMPS.</li>
+</ul>
+</li>
+<li><b>Iterative solvers:</b> <br  />
+<br  />
+<ul>
+<li><a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><code>HypreSolver</code></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</a> <br  />
+<br  />
+</li>
+<li><a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><code>TrilinosAztecOOSolver</code></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a><br  />
+<br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="how_to_change_linear_solver"></a>
+How to change the LinearSolver</h1>
+<h2><a class="anchor" id="direct"></a>
+Direct solvers</h2>
+<p>Changing <code>oomph-lib's</code> linear solver is straightforward. For instance, to change the linear solver to <code>oomph-lib's</code> <code>DenseLU</code> solver, simply create an instance of this solver and pass a pointer to it to the <code>Problem</code>. This most easily done in the <code>Problem</code> constructor:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Change solver to DenseLU</span></div>
+<div class="line"> linear_solver_pt()=<span class="keyword">new</span> DenseLU;</div>
+</div><!-- fragment --><p> In any subsequent calls to <code>oomph-lib's</code> Newton solver, <code>DenseLU</code> will now be used to solve the linear systems arising during the Newton iteration.</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="iterative_linear_solvers"></a>
+Iterative linear solvers and preconditioners</h2>
+<p>The specification of an iterative linear solver is just as easy: For instance, to specify <code>oomph-lib's</code> conjugate gradient solver <code>CG</code> (storing the Jacobian matrix in compressed row format) as the linear solver, add</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Change solver to CG</span></div>
+<div class="line"> IterativeLinearSolver* solver_pt=<span class="keyword">new</span> CG&lt;CRDoubleMatrix&gt;;</div>
+<div class="line"> linear_solver_pt()=solver_pt;</div>
+</div><!-- fragment --><p> to the problem constructor. We note that, by default, <code>oomph-lib's</code> <code>IterativeLinearSolvers</code> perform the preconditioning using the trivial "identity preconditioner". Most Krylov subspace solvers perform very poorly without some sort of preconditioning.</p>
+<p>Specific preconditioners may be implemented by deriving from the <code>Preconditioner</code> base class, by implementing its two pure virtual functions</p>
+ <div class="fragment"><div class="line"><span class="comment">    /// Apply the preconditioner. Pure virtual generic interface</span></div>
+<div class="line"><span class="comment">    /// function. This method should apply the preconditioner operator to the</span><span class="comment"></span></div>
+<div class="line"><span class="comment">    /// vector r and return the vector z.</span></div>
+<div class="line"><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> preconditioner_solve(<span class="keyword">const</span> DoubleVector&amp; r,</div>
+<div class="line">                                      DoubleVector&amp; z) = 0;</div>
+</div><!-- fragment --><p> and</p>
+ <div class="fragment"><div class="line"><span class="comment">    /// Setup the preconditioner. Pure virtual generic interface</span></div>
+<div class="line"><span class="comment">    /// function.</span></div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setup() = 0;</div>
+</div><!-- fragment --><p> Note that, by default, <code>oomph-lib's</code> <code>IterativeLinearSolvers</code> employ left preconditioning.</p>
+<p><code>oomph-lib</code> provides fully-functional implementations of several general-purpose preconditioners. For instance, the zero-fill-in incomplete LU factorisation preconditioner ILU(0) may be employed by adding the lines</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Specify preconditioner</span></div>
+<div class="line"> solver_pt-&gt;preconditioner_pt()=<span class="keyword">new</span> ILUZeroPreconditioner&lt;CRDoubleMatrix&gt;; </div>
+</div><!-- fragment --><p> to the <code>Problem</code> constructor.</p>
+<p>Of particular interest is the availability of an "exact preconditioner" <br  />
+ <a href="../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html"><code>SuperLUPreconditioner</code></a> whose use guarantees the convergence of any iterative solver within a single iteration &ndash; useful for code development.</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="third_party_iterative_linear_solvers"></a>
+Third-party iterative linear solvers and preconditioners</h2>
+<p><code>oomph-lib</code> provides wrappers to various third-party iterative linear solvers and preconditioners. We stress that these solvers are not necessarily implemented as <code>oomph-lib</code> <code>IterativeLinearSolvers</code> since their interfaces for the specification of preconditioners, etc may differ from those employed by <code>oomph-lib</code>.</p>
+<hr  />
+<h3><a class="anchor" id="trilinos"></a>
+Trilinos</h3>
+<p><code>oomph-lib</code> provides wrappers to the iterative linear solvers/preconditioners from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a> The demo code <a href="../../../demo_drivers/linear_solvers/TrilinosSolver_test.cc">TrilinosSolver_test.cc</a> demonstrates how use various combinations of solvers/preconditioners. Here is a brief overview:</p>
+<p><b>Trilinos solvers</b></p>
+<p>The wrappers to Trilinos' Krylov subspace solvers are implemented as <code>oomph-lib</code> <code>IterativeLinearSolvers</code>, allowing them to be used via the standard interfaces described above. For instance, to use <code>oomph-lib's</code> wrapper to <code>Trilinos'</code> Aztec solver, using <code>Trilinos'</code> <code>ML</code> multilevel preconditioner, set the solvers and preconditioners as usual:</p>
+ <div class="fragment"><div class="line">  <span class="comment">// Create a Trilinos Solver </span></div>
+<div class="line">  TrilinosAztecOOSolver* linear_solver_pt = <span class="keyword">new</span> TrilinosAztecOOSolver;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Create the Trilinos ML preconditioner</span></div>
+<div class="line">  TrilinosMLPreconditioner* preconditioner_pt = <span class="keyword">new</span> TrilinosMLPreconditioner;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set the preconditioner pointer</span></div>
+<div class="line">  linear_solver_pt-&gt;preconditioner_pt() = preconditioner_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Set linear solver</span></div>
+<div class="line">  problem.linear_solver_pt() = linear_solver_pt;</div>
+</div><!-- fragment --><p> The actual Krylov subspace solver used by the <code>Trilinos</code> solver is specified by passing an enumerated flag (defined as static member data in the <code>TrilinosAztecOOSolver</code> class) to the solver. For instance, <code>Trilinos'</code> CG, GMRES and BiCGStab solvers are selected with</p>
+ <div class="fragment"><div class="line">      linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::CG;</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line">      linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::GMRES;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">      linear_solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::BiCGStab;</div>
+</div><!-- fragment --><p> respectively.</p>
+<p><b>Trilinos preconditioners</b></p>
+<p><code>oomph-lib</code> provides wrappers to <code>Trilinos'</code> ML and IFPACK preconditioners that allows them to be used as <code>oomph-lib</code> <code>Preconditioners</code> that may be used with <code>oomph-lib's</code> own <code>IterativeLinearSolvers</code>. Here is an example that shows how to build an instance of <code>oomph-lib's</code> <code>GMRES</code>, preconditioned with its wrapper to <code>Trilinos'</code> <code>IFPACK</code> preconditioner:</p>
+ <div class="fragment"><div class="line">   <span class="comment">// Create oomph-lib linear solver</span></div>
+<div class="line">   IterativeLinearSolver* linear_solver_pt=<span class="keyword">new</span> GMRES&lt;CRDoubleMatrix&gt;;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Create Trilinos IFPACK preconditioner as oomph-lib Preconditioner</span></div>
+<div class="line">   Preconditioner* preconditioner_pt=<span class="keyword">new</span> TrilinosIFPACKPreconditioner;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pass pointer to preconditioner to oomph-lib IterativeLinearSolver</span></div>
+<div class="line">   linear_solver_pt-&gt;preconditioner_pt()=preconditioner_pt;</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h3><a class="anchor" id="hypre"></a>
+Hypre</h3>
+<p><code>oomph-lib</code> provides wrappers to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</a> The demo code <a href="../../../demo_drivers/linear_solvers/HypreSolver_test.cc">HypreSolver_test.cc</a> demonstrates how use various combinations of solvers/preconditioners. Here is a brief overview:</p>
+<p><b>Hypre solvers</b></p>
+<p>The wrappers to Hypre's Krylov subspace and AMG solvers are implemented as <code>oomph-lib</code> <code>LinearSolvers</code> (not <code>IterativeLinearSolvers!</code>) <br  />
+ so the interfaces for the specification of preconditioners etc. differ from those for <code>oomph-lib's</code> own <code>IterativeLinearSolvers</code>.</p>
+<p>The <code>HypreSolver</code> is set like any other <code>LinearSolver:</code> </p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create a new Hypre linear solver</span></div>
+<div class="line"> HypreSolver* hypre_linear_solver_pt = <span class="keyword">new</span> HypreSolver;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the linear solver for problem</span></div>
+<div class="line"> problem.linear_solver_pt() = hypre_linear_solver_pt;</div>
+</div><!-- fragment --><p>The actual solver used by the <code>HypreSolver</code> is specified by passing an enumerated flag (defined as static member data in the <code>HypreSolver</code> class) to the solver. For instance, <code>Hypre's</code> AMG, CG, GMRES and BiCGStab solvers are selected with</p>
+ <div class="fragment"><div class="line">     hypre_linear_solver_pt-&gt;hypre_method() = HypreSolver::BoomerAMG;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">     hypre_linear_solver_pt-&gt;hypre_method() = HypreSolver::CG;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">     hypre_linear_solver_pt-&gt;hypre_method() = HypreSolver::GMRES;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">     hypre_linear_solver_pt-&gt;hypre_method() = HypreSolver::BiCGStab;</div>
+</div><!-- fragment --><p> respectively.</p>
+<p>These Krylov subspace methods may then be preconditioned by <code>Hypre's</code> own (internal) preconditioners, again by specifying the method via an enumerated flag. So, to use no preconditioning, or to precondition with <code>BoomerAMG</code> (and AMG-based preconditioner), <code>Euclid</code> (an ILU preconditioner) or <code>ParaSails</code> (a sparse approximate inverse preconditioner), set:</p>
+<div class="fragment"><div class="line">       hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::None;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">       hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::BoomerAMG;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">       hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::Euclid;</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line">       hypre_linear_solver_pt-&gt;internal_preconditioner()=HypreSolver::ParaSails;</div>
+</div><!-- fragment --><p> respectively.</p>
+<p><b>Hypre preconditioners</b></p>
+<p><code>oomph-lib</code> provides wrappers to <code>Hypre's</code> preconditioners that allows them to be used as <code>oomph-lib</code> <code>Preconditioners</code> that may be used with <code>oomph-lib's</code> own <code>IterativeLinearSolvers</code>. Here is an example that shows how to build an instance of <code>oomph-lib's</code> <code>BiCGStab</code> and to use the <code>HyprePreconditioner</code> as the preconditioner:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Build and instance of BiCGStab and pass it to the problem</span></div>
+<div class="line"> oomph_linear_solver_pt = <span class="keyword">new</span> BiCGStab&lt;CRDoubleMatrix&gt;;</div>
+<div class="line"> </div>
+<div class="line"> problem.linear_solver_pt() = oomph_linear_solver_pt;</div>
+</div><!-- fragment --><p> Now we build an instance of a <code>HyprePreconditioner</code> </p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create a new Hypre preconditioner</span></div>
+<div class="line"> HyprePreconditioner* hypre_preconditioner_pt = <span class="keyword">new</span> HyprePreconditioner;</div>
+</div><!-- fragment --><p> and set it as the <code>Preconditioner</code> for <code>oomph-lib's</code> <code>BiCGStab</code> solver:</p>
+<div class="fragment"><div class="line">   oomph_linear_solver_pt-&gt;preconditioner_pt()=hypre_preconditioner_pt;</div>
+</div><!-- fragment --><p> The actual preconditioning methodology to be used by the <code>HyprePreconditioner</code> is again selected via enumerated flags, i.e.</p>
+<div class="fragment"><div class="line">     hypre_preconditioner_pt-&gt;hypre_method() = HyprePreconditioner::BoomerAMG;</div>
+</div><!-- fragment --><p>or</p>
+<div class="fragment"><div class="line">     hypre_preconditioner_pt-&gt;hypre_method() = HyprePreconditioner::Euclid;</div>
+</div><!-- fragment --><p> or</p>
+<div class="fragment"><div class="line">     hypre_preconditioner_pt-&gt;hypre_method() = HyprePreconditioner::ParaSails;</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="specific_precond"></a>
+Problem-specific preconditioners</h1>
+<p>In addition to "general-purpose" preconditioners like ILU, <code>oomph-lib</code> provides a number of problem-specific preconditioners which are typically based on the library's block preconditioning framework. Separate documentation is available for these:</p>
+<ul>
+<li>We provide a (very!) detailed discussion of <code>oomph-lib's</code> <a href="../../mpi/block_preconditioners/html/index.html">block preconditioning framework.</a> <br  />
+<br  />
+</li>
+<li>Another tutorial discusses <code>oomph-lib's</code> <a href="../../mpi/distributed_general_purpose_block_preconditioners/html/index.html">"general purpose" block preconditioners.</a> <br  />
+<br  />
+</li>
+<li>The NavierStokesSchurComplementPreconditioner for Navier-Stokes problems is described in its <a href="../../preconditioners/lsc_navier_stokes/html/index.html">own tutorial. </a> <br  />
+<br  />
+</li>
+<li>The FSIPreconditioner for monolithically-discretised fluid-structure interaction problems is described in its <a href="../../preconditioners/fsi/html/index.html">own tutorial</a> <br  />
+<br  />
+</li>
+<li>We provide a <a href="../../preconditioners/prescribed_displ_lagr_mult/html/index.html">preconditioner for large-displacement solid mechanics problems in which boundary displacements are prescribed.</a><br  />
+<br  />
+</li>
+<li>The previous preconditioner is mainly used as a subsidiary block preconditioner for the <a href="../../preconditioners/pseudo_solid_fsi/html/index.html">solution of fluid-structure interaction problems with (pseudo-)solid fluid mesh updates.</a> <br  />
+<br  />
+</li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

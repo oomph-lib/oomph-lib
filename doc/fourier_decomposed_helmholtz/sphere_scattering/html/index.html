@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the finite-element-based solution of the Helmholtz equation in cylindrical polar coordinates, using a Fourier-decomposition of the solution in the azimuthal direction. This is useful for solving time-harmonic wave problems in 3D axisymmetric domains, <a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">e.g</a>. the scattering of acoustic sound field from a sphere, the example we consider below.</p>
+<center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> This implementation of the equations and the documentation were developed jointly with Ahmed Wassfi (EnstaParisTech, Paris). </center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory: The Fourier-decomposed Helmholtz equation</h1>
+<p>The Helmholtz equation governs time-harmonic solutions of problems governed by the linear wave equation  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="254" height="29"/>
+</p>
+<p> where <img class="formulaInl" alt="$ c $" src="form_1.png" width="5" height="6"/> is the wavespeed. Assuming that <img class="formulaInl" alt="$ U(x,y,z,t) $" src="form_2.png" width="60" height="14"/> is time-harmonic, with frequency <img class="formulaInl" alt="$ \omega $" src="form_3.png" width="9" height="6"/>, we write the real function <img class="formulaInl" alt="$ U(x,y,z,t) $" src="form_2.png" width="60" height="14"/> as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_4.png" width="246" height="16"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\tt U}(x,y,z) $" src="form_5.png" width="48" height="14"/> is complex-valued. This transforms (1) into the Helmholtz equation  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_6.png" width="186" height="16"/>
+</p>
+<p> where  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+k = \frac{\omega}{c}
+ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_7.png" width="100" height="24"/>
+</p>
+<p> is the wave number. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.</p>
+<p>If the equation is solved in an infinite domain (<a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">e.g</a>. in scattering problems) the solution must satisfy the so-called <a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">Sommerfeld radiation condition</a> which in 3D has the form  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U}
+\right) =0. 
+\]" src="form_8.png" width="129" height="31"/>
+</p>
+<p> Mathematically, this conditions is required to ensure the uniqueness of the solution (and hence the well-posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.</p>
+<p>These equations can be solved using <code>oomph-lib's</code> cartesian Helmholtz elements, described in <br  />
+ <a href="../../../helmholtz/scattering/html/index.html">another tutorial.</a> Here we consider an alternative approach in which we solve the equations in cylindrical polar coordinates <img class="formulaInl" alt="$ (r,\varphi,z)
+$" src="form_9.png" width="40" height="14"/>, related to the cartesian coordinates <img class="formulaInl" alt="$ (x,y,z) $" src="form_10.png" width="40" height="14"/> via  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+x =  r \cos(\varphi),
+\]" src="form_11.png" width="70" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+y =  r \sin(\varphi),
+\]" src="form_12.png" width="68" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+z = z.
+\]" src="form_13.png" width="33" height="6"/>
+</p>
+<p> We then decompose the solution into its Fourier components by writing  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\tt U}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\]" src="form_14.png" width="200" height="36"/>
+</p>
+<p> Since the governing equations are linear we can compute each Fourier component <img class="formulaInl" alt="$ u_N(r,z) $" src="form_15.png" width="44" height="14"/> individually by solving  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_16.png" width="274" height="33"/>
+</p>
+<p> while specifying the Fourier wavenumber <img class="formulaInl" alt="$ N $" src="form_17.png" width="11" height="10"/> as a parameter.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="discr"></a>
+Discretisation by finite elements</h1>
+<p>The discretisation of the Fourier-decomposed Helmholtz equation itself only requires a trivial modification of its <a href="../../../helmholtz/scattering/html/index.html">cartesian counterpart</a>. Since most practical applications of the Helmholtz equation involve complex-valued solutions, we provide separate storage for the real and imaginary parts of the solution &ndash; each <code>Node</code> therefore stores two unknowns values. By default, the real and imaginary parts are stored as values 0 and 1, respectively; see the section <a class="el" href="index.html#numbering">The enumeration of the unknowns</a> for details.</p>
+<p>The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson equation:</p><ul>
+<li>Dirichlet conditions are imposed by pinning the relevant nodal values and setting them to the appropriate prescribed values.</li>
+<li>Neumann (flux) boundary conditions are imposed via <code>FaceElements</code> (here the <code>FourierDecomposedHelmholtzFluxElements</code>). <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">As usual</a> we attach these to the faces of the "bulk" elements that are subject to the Neumann boundary conditions.</li>
+</ul>
+<p>The imposition of the Sommerfeld radiation condition for problems in infinite domains is slightly more complicated. In the following discussion we will assume that the infinite domain is truncated at a spherical artificial boundary <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/> of radius <img class="formulaInl" alt="$ R. $" src="form_19.png" width="13" height="10"/> [The methodology can easily be modified to deal with other geometries but this has not been done yet &ndash; any volunteers?]. All methods exploit the fact that the relevant solution of the Helmholtz equation can be written in spherical polar coordinates <img class="formulaInl" alt="$ (\rho,\varphi,\theta) $" src="form_20.png" width="40" height="14"/> as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\tt U}(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ (6)
+\]" src="form_21.png" width="420" height="39"/>
+</p>
+<p> where the <img class="formulaInl" alt="$a_{ln}, b_{ln} $" src="form_22.png" width="36" height="13"/> are arbitrary coefficients and the functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\]" src="form_23.png" width="311" height="18"/>
+</p>
+<p> are the spherical Hankel functions of first and second kind, respectively, expressed in terms the spherical Bessel functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\]" src="form_24.png" width="310" height="31"/>
+</p>
+<p> The functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\]" src="form_25.png" width="205" height="28"/>
+</p>
+<p> are the associated Legendre functions, expressed in terms of the Legendre polynomials  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\]" src="form_26.png" width="161" height="28"/>
+</p>
+<p> This definition shows that <img class="formulaInl" alt="$ P_{l}^{m}(x)=0 $" src="form_27.png" width="59" height="14"/> for <img class="formulaInl" alt="$ m&gt;l $" src="form_28.png" width="33" height="11"/> which explains the limited range of summation indices in the second sum in (6).</p>
+<p>The relation between the cylindrical polar coordinates <img class="formulaInl" alt="$
+(r,\varphi,z)$" src="form_29.png" width="40" height="14"/> and spherical polar coordinates <img class="formulaInl" alt="$
+(\rho,\theta,\varphi) $" src="form_30.png" width="40" height="14"/> is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\rho = \sqrt{r^2 + z^2},
+\]" src="form_31.png" width="78" height="16"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\theta = \arctan(r/z),
+\]" src="form_32.png" width="89" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\varphi = \varphi,
+\]" src="form_33.png" width="36" height="9"/>
+</p>
+<p> so <img class="formulaInl" alt="$\varphi \in [0,2\pi] $" src="form_34.png" width="55" height="14"/> remains unchanged, and <br  />
+ <img class="formulaInl" alt="$\theta \in [0,\pi] $" src="form_35.png" width="46" height="14"/> sweeps from the north pole ( <img class="formulaInl" alt="$ \theta = 0 $" src="form_36.png" width="29" height="10"/>), via the equator ( <img class="formulaInl" alt="$ \theta = \pi/2 $" src="form_37.png" width="43" height="14"/> ) to the south pole ( <img class="formulaInl" alt="$ \theta = \pi $" src="form_38.png" width="30" height="10"/>).</p>
+<h2><a class="anchor" id="DtN"></a>
+The Dirichlet-to-Neumann mapping (DtN)</h2>
+<p>Assuming that the artificial outer boundary <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/>is sufficiently far from the region of interest, so that any near field effects associated with the scatterer have decayed, we have to ensure that the solution on <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/> contains only outgoing waves. For our choice of the time-dependence in (2), such waves are represented by the terms involving the spherical Hankel functions of the first kind, <img class="formulaInl" alt="$ h_l^{(1)} $" src="form_39.png" width="19" height="19"/>, in (6).</p>
+<p>The solution on (and near) <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/> is therefore given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\tt U}(\rho,\theta,\phi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho)
+\ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi).
+\]" src="form_40.png" width="293" height="39"/>
+</p>
+<p> Restricting ourselves to the single azimuthal Fourier mode <img class="formulaInl" alt="$ n=N $" src="form_41.png" width="36" height="10"/> to be determined by (5), we have  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_N(\rho,\theta)=\sum_{l=N}^{+\infty}
+a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta).
+ \ \ \ \ \ \ \ (7)
+\]" src="form_42.png" width="248" height="38"/>
+</p>
+<p> We multiply this equation by <img class="formulaInl" alt="$ P_{n}^{N}(\cos\theta)
+\sin(\theta)$" src="form_43.png" width="86" height="15"/>, integrate over <img class="formulaInl" alt="$ \theta $" src="form_44.png" width="6" height="10"/>, and exploit the orthogonality of the Legendre functions, to show that  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)}
+\frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta)
+\ \sin(\theta) \ d\theta.
+\]" src="form_45.png" width="306" height="35"/>
+</p>
+<p> Using these coefficients, we can differentiate (7) to obtain the normal derivative of the solution on the (spherical) artificial outer boundary <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/> in terms of the solution itself:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \frac{\partial u}{\partial n} \right|_{\rho=R} = 
+\left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = 
+k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)'}(kR)\ P_{n}^{N}(\cos \theta)
+\]" src="form_46.png" width="319" height="36"/>
+</p>
+<p> <a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">i.e</a>.  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\gamma(u(R,\theta))=
+k \sum_{n=N}^{\infty} h_{n}^{(1)'}(kR) \ 
+P_{n}^{N}(\cos \theta) \
+\frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!}
+\int_{0}^{\pi} u(R,\overline{\theta}) \
+P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \;
+d\overline{\theta},
+\ \ \ \ \ \ \ \ \ \  (8)
+\]" src="form_47.png" width="540" height="36"/>
+</p>
+<p> a Dirichlet-to-Neumann mapping.</p>
+<p>Equation (8) provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the <code>FourierDecomposedHelmholtzDtNBoundaryElement</code> class. Since <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> depends on the solution everywhere along the artificial boundary, the application of the Sommerfeld radiation condition via (8) introduces a non-local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> but are not associated with an element's own nodes as its external <code>Data</code>.</p>
+<p>To facilitate the setup of the interaction between the <code>FourierDecomposedHelmholtzDtNBoundaryElements</code>, <code>oomph-lib</code> provides the class <code>FourierDecomposedHelmholtzDtNMesh</code> which provides storage for (the pointers to) the <code>FourierDecomposedHelmholtzDtNBoundaryElements</code> that discretise the artificial boundary. The member function <code><a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">FourierDecomposedHelmholtzDtNMesh::setup_gamma()</a></code> pre-computes the <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> values required for the imposition of equation (8). The radius <img class="formulaInl" alt="$ R $" src="form_49.png" width="10" height="10"/> of the artificial boundary and the (finite) upper limit for the sum in (8) are specified as arguments to the constructor of the <code>FourierDecomposedHelmholtzDtNMesh</code>.</p>
+<p><b>NOTE:</b> Since <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to <code><a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">FourierDecomposedHelmholtzDtNMesh::setup_gamma()</a></code> to <code>Problem::actions_before_newton_convergence_check()</code>. [If Helmholtz's equation is solved in isolation (or within a coupled, but linear problem), Newton's method will converge in one iteration. In such cases the unnecessary recomputation of <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> after the one-and-only Newton iteration can be suppressed by setting <code>Problem::Problem_is_nonlinear</code> to <code>false</code>.]</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="scattering"></a>
+A specific example</h1>
+<p>We will now demonstrate the methodology for a specific example for which the exact solution of (5) is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} 
+h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right).
+\]" src="form_50.png" width="361" height="39"/>
+</p>
+<p> This solution corresponds to the superposition of several outgoing waves of the form (7) with coefficients <img class="formulaInl" alt="$ a_l = 1 $" src="form_51.png" width="33" height="11"/>. We solve the Helmholtz equation in the infinite region surrounding the unit sphere on whose surface we impose flux boundary conditions consistent with the derivative of the exact solution.</p>
+<p>To solve this problem numerically, we discretise the annular domain <img class="formulaInl" alt="$ 1 &lt; \sqrt{r^2 + z^2} &lt; 3 $" src="form_52.png" width="95" height="14"/> with finite elements and apply the Sommerfeld radiation condition using a Dirichlet-to-Neumann mapping on the artificial outer boundary <img class="formulaInl" alt="$ \Gamma $" src="form_18.png" width="9" height="10"/> located at <img class="formulaInl" alt="$ \sqrt{r^2 + z^2}
+= R = 3$" src="form_53.png" width="98" height="14"/>.</p>
+<p>The two plots below show a comparison between the exact and computed solutions for <img class="formulaInl" alt="$ N_{\rm terms}=6 $" src="form_54.png" width="58" height="13"/> , a Fourier wavenumber of <img class="formulaInl" alt="$ N=3 $" src="form_55.png" width="34" height="10"/> , and a (squared) Helmholtz wavenumber of <img class="formulaInl" alt="$ k^2 = 10 $" src="form_56.png" width="41" height="11"/>.</p>
+<div class="image">
+<img src="real.gif" alt=""/>
+<div class="caption">
+Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=3 and a wavenumber of k^2 = 10. </div></div>
+ <div class="image">
+<img src="imag.gif" alt=""/>
+<div class="caption">
+Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation for N=3 and a wavenumber of k^2 = 10. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<h2><a class="anchor" id="namespace"></a>
+The global namespace</h2>
+<p>As usual, we define the problem parameters in a global namespace. The main parameter are the (square of the) Helmholtz wave number, <img class="formulaInl" alt="$ k^2 $" src="form_57.png" width="11" height="11"/>, and the Fourier wavenumber, <img class="formulaInl" alt="$ N $" src="form_17.png" width="11" height="10"/>. The parameter <code>Nterms_for_DtN</code> determines how many terms are to be used in the computation of the <img class="formulaInl" alt="$ \gamma  $" src="form_58.png" width="9" height="9"/> integral in the Dirichlet-to-Neumann mapping (8); see <a class="el" href="index.html#acc">The accuracy of the boundary condition elements</a>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_namespace=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for the Fourier decomposed Helmholtz problem parameters</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceProblemParameters.html">ProblemParameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Square of the wavenumber</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a>=10.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Fourier wave number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>=3;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Number of terms in computation of DtN boundary condition</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">Nterms_for_DtN</a>=6;</div>
+<div class="ttc" id="anamespaceProblemParameters_html"><div class="ttname"><a href="namespaceProblemParameters.html">ProblemParameters</a></div><div class="ttdoc">Namespace for the Fourier decomposed Helmholtz problem parameters.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00222">sphere_scattering.cc:223</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa529b33b7feb959e0c044447bf0f6c6f"><div class="ttname"><a href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">ProblemParameters::Nterms_for_DtN</a></div><div class="ttdeci">unsigned Nterms_for_DtN</div><div class="ttdoc">Number of terms in computation of DtN boundary condition.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00231">sphere_scattering.cc:231</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa5362de1af9e257fde4317c367158a93"><div class="ttname"><a href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Square of the wavenumber.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00225">sphere_scattering.cc:225</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aaa674958a1ca6ee0b99de3377288c93f"><div class="ttname"><a href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a></div><div class="ttdeci">int N_fourier</div><div class="ttdoc">Fourier wave number.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00228">sphere_scattering.cc:228</a></div></div>
+</div><!-- fragment --><p> Next we define the coefficients</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of terms in the exact solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> N_terms=6; </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Coefficients in the exact solution</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classAnnularQuadMesh.html">Vector&lt;double&gt;</a> Coeff(N_terms,1.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Imaginary unit </span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; I(0.0,1.0); </div>
+<div class="ttc" id="aclassAnnularQuadMesh_html"><div class="ttname"><a href="classAnnularQuadMesh.html">AnnularQuadMesh</a></div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00055">sphere_scattering.cc:56</a></div></div>
+</div><!-- fragment --><p> required for the specification of the exact solution</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Exact solution as a Vector of size 2, containing real and imag parts</span></div>
+<div class="line"> <span class="keywordtype">void</span> get_exact_u(<span class="keyword">const</span> <a class="code hl_class" href="classAnnularQuadMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">x</a>, <a class="code hl_class" href="classAnnularQuadMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">u</a>)</div>
+</div><!-- fragment --><p> and its derivative,</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Get -du/dr (spherical r) for exact solution. Equal to prescribed</span></div>
+<div class="line"><span class="comment"> /// flux on inner boundary.</span></div>
+<div class="line"> <span class="keywordtype">void</span> exact_minus_dudr(<span class="keyword">const</span> <a class="code hl_class" href="classAnnularQuadMesh.html">Vector&lt;double&gt;</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">x</a>, std::complex&lt;double&gt;&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">flux</a>)</div>
+</div><!-- fragment --><p> whose listings we omit here.</p>
+<hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h2><a class="anchor" id="main"></a>
+The driver code</h2>
+<p>The driver code is very straightforward. We create the problem object, discretising the domain with 3x3-noded <code>QFourierDecomposedHelmholtzElements</code> and set up the output directory.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_main=====================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for Fourier decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="sphere__scattering_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classAnnularQuadMesh.html">argc</a>, <span class="keywordtype">char</span> **<a class="code hl_class" href="classAnnularQuadMesh.html">argv</a>)</div>
+<div class="line">{</div>
+<div class="ttc" id="asphere__scattering_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="sphere__scattering_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver code for Fourier decomposed Helmholtz problem.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00732">sphere_scattering.cc:732</a></div></div>
+<div class="line"> <span class="comment">// Create the problem with 2D nine-node elements from the</span></div>
+<div class="line"> <span class="comment">// QFourierDecomposedHelmholtzElement family. </span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzProblem&lt;QFourierDecomposedHelmholtzElement&lt;3&gt;</a> &gt; </div>
+<div class="line">  <a class="code hl_class" href="classAnnularQuadMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">DocInfo</a> <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+</div><!-- fragment --><p> We solve the problem for a range of Fourier wavenumbers and document the results.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solve for a few Fourier wavenumbers</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>=0;<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>&lt;4;</div>
+<div class="line">      <a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Step number</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number()=<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">problem</a>.newton_solve();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output the solution</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">problem</a>.doc_solution(<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="class"></a>
+The problem class</h2>
+<p>The problem class is very similar to that employed for the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">solution of the 2D Poisson equation with flux boundary conditions</a> or, of course, the 2D cartesian Helmholtz problem discussed in <a href="../../../helmholtz/scattering/html/index.html">another tutorial.</a></p>
+<p>We provide two separate meshes of <code>FaceElements:</code> one for the inner boundary where the <code>FourierDecomposedHelmholtzFluxElements</code> apply the Neumann condition, and one for the outer boundary where we apply the (approximate) Sommerfeld radiation condition. As discussed in section <a class="el" href="index.html#DtN">The Dirichlet-to-Neumann mapping (DtN)</a> , we use the function <code>actions_before_newton_convergence_check()</code> to recompute the <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> integral whenever the unknowns are updated during the Newton iteration.</p>
+ <div class="fragment"><div class="line"><span class="comment">//========= start_of_problem_class=====================================</span></div>
+<div class="line"><span class="comment">/// Problem class </span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">~FourierDecomposedHelmholtzProblem</a>(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">actions_before_newton_solve</a>(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">actions_after_newton_solve</a>(){}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">doc_solution</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">DocInfo</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>);</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Recompute gamma integral before checking Newton residuals</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">actions_before_newton_convergence_check</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_variable" href="classFourierDecomposedHelmholtzProblem.html#ab7aafa9c0ab982d9e1fdc31d802d309b">Helmholtz_outer_boundary_mesh_pt</a>-&gt;setup_gamma();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Check gamma computation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">check_gamma</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">DocInfo</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>);</div>
+<div class="line">  </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create BC elements on outer boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">create_outer_bc_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create flux elements on inner boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">create_flux_elements_on_inner_boundary</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to bulk mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classAnnularQuadMesh.html">AnnularQuadMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classFourierDecomposedHelmholtzProblem.html#ad5927e4a2156e96c55ebce044c6f9653">Bulk_mesh_pt</a>;</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to mesh containing the DtN boundary</span></div>
+<div class="line"><span class="comment"> /// condition elements</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzDtNMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classFourierDecomposedHelmholtzProblem.html#ab7aafa9c0ab982d9e1fdc31d802d309b">Helmholtz_outer_boundary_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Mesh of face elements that apply the prescribed flux</span></div>
+<div class="line"><span class="comment"> /// on the inner boundary</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classAnnularQuadMesh.html">Mesh</a>* <a class="code hl_variable" href="classFourierDecomposedHelmholtzProblem.html#a3ecc5a3fc3407de8985ed9a61402f2f0">Helmholtz_inner_boundary_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html">FourierDecomposedHelmholtzProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00379">sphere_scattering.cc:380</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a03174fa5a35b7c38f08f91bcd2a80c20"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a03174fa5a35b7c38f08f91bcd2a80c20">FourierDecomposedHelmholtzProblem::~FourierDecomposedHelmholtzProblem</a></div><div class="ttdeci">~FourierDecomposedHelmholtzProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00388">sphere_scattering.cc:388</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a359d402bb4aed7d83973248d82085efb"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">FourierDecomposedHelmholtzProblem::create_outer_bc_elements</a></div><div class="ttdeci">void create_outer_bc_elements()</div><div class="ttdoc">Create BC elements on outer boundary.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00658">sphere_scattering.cc:658</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a3ecc5a3fc3407de8985ed9a61402f2f0"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a3ecc5a3fc3407de8985ed9a61402f2f0">FourierDecomposedHelmholtzProblem::Helmholtz_inner_boundary_mesh_pt</a></div><div class="ttdeci">Mesh * Helmholtz_inner_boundary_mesh_pt</div><div class="ttdoc">Mesh of face elements that apply the prescribed flux on the inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00426">sphere_scattering.cc:426</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a5a37ba3fcf8563764f80108c9a657929"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a5a37ba3fcf8563764f80108c9a657929">FourierDecomposedHelmholtzProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00394">sphere_scattering.cc:394</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a81d64611f2de2492cec6b0621d8124b0"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a81d64611f2de2492cec6b0621d8124b0">FourierDecomposedHelmholtzProblem::create_flux_elements_on_inner_boundary</a></div><div class="ttdeci">void create_flux_elements_on_inner_boundary()</div><div class="ttdoc">Create flux elements on inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00696">sphere_scattering.cc:697</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a82ef5a969f4404fc1acb35c38c800ce6"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a82ef5a969f4404fc1acb35c38c800ce6">FourierDecomposedHelmholtzProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00391">sphere_scattering.cc:391</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_a893efb01f8f1d254315201121766d882"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">FourierDecomposedHelmholtzProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00574">sphere_scattering.cc:574</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ab368ed8fe04d4e3db67d13bab9e7b52e"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem::FourierDecomposedHelmholtzProblem</a></div><div class="ttdeci">FourierDecomposedHelmholtzProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00436">sphere_scattering.cc:437</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ab7aafa9c0ab982d9e1fdc31d802d309b"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ab7aafa9c0ab982d9e1fdc31d802d309b">FourierDecomposedHelmholtzProblem::Helmholtz_outer_boundary_mesh_pt</a></div><div class="ttdeci">FourierDecomposedHelmholtzDtNMesh&lt; ELEMENT &gt; * Helmholtz_outer_boundary_mesh_pt</div><div class="ttdoc">Pointer to mesh containing the DtN boundary condition elements.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00422">sphere_scattering.cc:422</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ac4f3f737660b11e8762a61bca999eb0f"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ac4f3f737660b11e8762a61bca999eb0f">FourierDecomposedHelmholtzProblem::check_gamma</a></div><div class="ttdeci">void check_gamma(DocInfo &amp;doc_info)</div><div class="ttdoc">Check gamma computation.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00505">sphere_scattering.cc:505</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ad5927e4a2156e96c55ebce044c6f9653"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ad5927e4a2156e96c55ebce044c6f9653">FourierDecomposedHelmholtzProblem::Bulk_mesh_pt</a></div><div class="ttdeci">AnnularQuadMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Pointer to bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00418">sphere_scattering.cc:418</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedHelmholtzProblem_html_ae80673ef299e4935ddcac177ed919da3"><div class="ttname"><a href="classFourierDecomposedHelmholtzProblem.html#ae80673ef299e4935ddcac177ed919da3">FourierDecomposedHelmholtzProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Recompute gamma integral before checking Newton residuals.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00401">sphere_scattering.cc:401</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="constr"></a>
+The problem constructor</h2>
+<p>We start by building the bulk mesh, using the <code>TwoDAnnularMesh</code>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for Fourier-decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#ab368ed8fe04d4e3db67d13bab9e7b52e">FourierDecomposedHelmholtzProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Build annular mesh</span></div>
+<div class="line">  </div>
+<div class="line"><span class="comment">// # of elements in r-direction </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">n_r</a>=10*<a class="code hl_variable" href="namespaceProblemParameters.html#a23b618b9e3a0d282fd91aa3f3f7b9254">ProblemParameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in theta-direction </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">n_theta</a>=10*<a class="code hl_variable" href="namespaceProblemParameters.html#a23b618b9e3a0d282fd91aa3f3f7b9254">ProblemParameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain boundaries in theta-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">theta_min</a>=-90.0;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">theta_max</a>=90.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain boundaries in r-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">r_min</a>=1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">r_max</a>=3.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Bulk_mesh_pt = </div>
+<div class="line">  <span class="keyword">new</span> <a class="code hl_class" href="classAnnularQuadMesh.html">AnnularQuadMesh&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">n_r</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">n_theta</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">r_min</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">r_max</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">theta_min</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">theta_max</a>);</div>
+<div class="ttc" id="anamespaceProblemParameters_html_a23b618b9e3a0d282fd91aa3f3f7b9254"><div class="ttname"><a href="namespaceProblemParameters.html#a23b618b9e3a0d282fd91aa3f3f7b9254">ProblemParameters::El_multiplier</a></div><div class="ttdeci">unsigned El_multiplier</div><div class="ttdoc">Multiplier for number of elements.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00363">sphere_scattering.cc:363</a></div></div>
+</div><!-- fragment --><p> Next we create and populate the mesh of elements containing the DtN boundary elements on the artificial outer boundary,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create mesh for DtN elements on outer boundary</span></div>
+<div class="line"> Helmholtz_outer_boundary_mesh_pt=</div>
+<div class="line">  <span class="keyword">new</span> <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzDtNMesh&lt;ELEMENT&gt;</a>(</div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">r_max</a>,<a class="code hl_variable" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f">ProblemParameters::Nterms_for_DtN</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Populate it with elements</span></div>
+<div class="line"> create_outer_bc_elements();</div>
+</div><!-- fragment --><p> and attach flux elements to the inner boundary:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create flux elements on inner boundary</span></div>
+<div class="line"> Helmholtz_inner_boundary_mesh_pt=<span class="keyword">new</span> <a class="code hl_class" href="classAnnularQuadMesh.html">Mesh</a>;</div>
+<div class="line"> create_flux_elements_on_inner_boundary();</div>
+</div><!-- fragment --><p> We combine the various meshes to a global mesh,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Add the several  sub meshes to the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">add_sub_mesh</a>(Bulk_mesh_pt); </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">add_sub_mesh</a>(Helmholtz_inner_boundary_mesh_pt); </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">add_sub_mesh</a>(Helmholtz_outer_boundary_mesh_pt); </div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Build the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">build_global_mesh</a>();</div>
+</div><!-- fragment --><p> pass the problem parameters to the bulk elements,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">n_element</a> = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">i</a>=0;<a class="code hl_class" href="classAnnularQuadMesh.html">i</a>&lt;<a class="code hl_class" href="classAnnularQuadMesh.html">n_element</a>;<a class="code hl_class" href="classAnnularQuadMesh.html">i</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">ELEMENT</a> *<a class="code hl_class" href="classAnnularQuadMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classAnnularQuadMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classAnnularQuadMesh.html">i</a>));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the k_squared pointer</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">el_pt</a>-&gt;k_squared_pt()=&amp;<a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set pointer to Fourier wave number</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">el_pt</a>-&gt;fourier_wavenumber_pt()=&amp;<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> and set up the equation numbering scheme:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">cout</a> &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classAnnularQuadMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><p> The problem is now ready to be solved.</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="create_flux"></a>
+Creating the face elements</h2>
+<p>The functions <code>create_flux_elements(...)</code> and <code>create_outer_bc_elements(...)</code> create the <code>FaceElements</code> required to apply the boundary conditions on the inner and outer boundaries of the annular computational domain. They both loop over the bulk elements that are adjacent to the appropriate mesh boundary and attach the required <code>FaceElements</code> to their faces. The newly created <code>FaceElements</code> are then added to the appropriate mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_outer_bc_elements==============================</span></div>
+<div class="line"><span class="comment">/// Create BC elements on outer boundary</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a359d402bb4aed7d83973248d82085efb">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::create_outer_bc_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Outer boundary is boundary 1:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">b</a>=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">n_element</a> = Bulk_mesh_pt-&gt;nboundary_element(<a class="code hl_class" href="classAnnularQuadMesh.html">b</a>);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">e</a>=0;<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>&lt;<a class="code hl_class" href="classAnnularQuadMesh.html">n_element</a>;<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">ELEMENT</a>* <a class="code hl_class" href="classAnnularQuadMesh.html">bulk_elem_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classAnnularQuadMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_element_pt(<a class="code hl_class" href="classAnnularQuadMesh.html">b</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b </span></div>
+<div class="line">   <span class="keywordtype">int</span> <a class="code hl_class" href="classAnnularQuadMesh.html">face_index</a> = Bulk_mesh_pt-&gt;face_index_at_boundary(<a class="code hl_class" href="classAnnularQuadMesh.html">b</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Build the corresponding DtN element</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classAnnularQuadMesh.html">flux_element_pt</a> = <span class="keyword">new</span> </div>
+<div class="line">    <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzDtNBoundaryElement&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">bulk_elem_pt</a>,</div>
+<div class="line">                                                          <a class="code hl_class" href="classAnnularQuadMesh.html">face_index</a>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the flux boundary element to the  helmholtz_outer_boundary_mesh</span></div>
+<div class="line">   Helmholtz_outer_boundary_mesh_pt-&gt;add_element_pt(<a class="code hl_class" href="classAnnularQuadMesh.html">flux_element_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set pointer to the mesh that contains all the boundary condition</span></div>
+<div class="line">   <span class="comment">// elements on this boundary</span></div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">flux_element_pt</a>-&gt;</div>
+<div class="line">    <a class="code hl_class" href="classAnnularQuadMesh.html">set_outer_boundary_mesh_pt</a>(Helmholtz_outer_boundary_mesh_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_outer_bc_elements</span></div>
+</div><!-- fragment --><p> (We omit the listing of the function <code>create_flux_elements(...)</code> because it is very similar. Feel free to inspect in the <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">source code.</a>)</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="doc"></a>
+Post-processing</h2>
+<p>The post-processing function <code>doc_solution(...)</code> plots the computed and exact solutions (real and complex parts) and assesses the error in the computed solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===============start_of_doc=============================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedHelmholtzProblem.html#a893efb01f8f1d254315201121766d882">FourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::doc_solution</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">DocInfo</a>&amp; <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">ofstream</a> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>;</div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">npts</a>=5;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">snprintf</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number());</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.open(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(<a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">npts</a>);</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">snprintf</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>), <span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number());</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.open(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(<a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">npts</a>,<a class="code hl_function" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a>); </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error and return of the square of the L2 error</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">error</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">norm</a>;</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">snprintf</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>), <span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number());</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.open(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>);</div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_error(<a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>,<a class="code hl_function" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a>,</div>
+<div class="line">                             <a class="code hl_class" href="classAnnularQuadMesh.html">error</a>,<a class="code hl_class" href="classAnnularQuadMesh.html">norm</a>); </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc L2 error and norm of solution</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;\nNorm of error   : &quot;</span> &lt;&lt; <a class="code hl_class" href="classAnnularQuadMesh.html">sqrt</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">error</a>) &lt;&lt; std::endl; </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Norm of solution: &quot;</span> &lt;&lt; <a class="code hl_class" href="classAnnularQuadMesh.html">sqrt</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">norm</a>) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="ttc" id="anamespaceProblemParameters_html_af750b29069b29bd38b5220ecf534e7f7"><div class="ttname"><a href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector of size 2, containing real and imag parts.</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00243">sphere_scattering.cc:243</a></div></div>
+</div><!-- fragment --><p> The function <code>check_gamma(...)</code> is used to check the computation of the <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> integral. If computed correctly, its values (pre-computed at the Gauss points of the <code>FourierDecomposedHelmholtzFluxElement</code>) ought to agree (well) with the derivative of the exact solution. They do; see <a class="el" href="index.html#acc">The accuracy of the boundary condition elements</a>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Check gamma computation</span></div>
+<div class="line"> check_gamma(<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>);</div>
+</div><!-- fragment --><p> Finally, we output the time-averaged power radiated over the outer boundary of the domain, defined as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }_N =  \pi R^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} -
+       Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} 
+\bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.
+\]" src="form_59.png" width="398" height="34"/>
+</p>
+<p> We refer to <a href="../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix">another tutorial</a> for the derivation which shows (in the context of an acoustic fluid-structure interaction problem) why this is a sensible definition of the radiated power.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute/output the radiated power</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">snprintf</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>), <span class="stringliteral">&quot;%s/power%i.dat&quot;</span>,<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number());</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.open(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>);</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">snprintf</a>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>), <span class="stringliteral">&quot;%s/total_power%i.dat&quot;</span>,<a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.directory().c_str(),</div>
+<div class="line">         <a class="code hl_class" href="classAnnularQuadMesh.html">doc_info</a>.number());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Accumulate contribution from elements</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classAnnularQuadMesh.html">power</a>=0.0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">nn_element</a>=Helmholtz_outer_boundary_mesh_pt-&gt;nelement(); </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classAnnularQuadMesh.html">e</a>=0;<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>&lt;<a class="code hl_class" href="classAnnularQuadMesh.html">nn_element</a>;<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzBCElementBase&lt;ELEMENT&gt;</a> *<a class="code hl_class" href="classAnnularQuadMesh.html">el_pt</a> = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classAnnularQuadMesh.html">FourierDecomposedHelmholtzBCElementBase&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Helmholtz_outer_boundary_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classAnnularQuadMesh.html">e</a>)); </div>
+<div class="line">   <a class="code hl_class" href="classAnnularQuadMesh.html">power</a> += <a class="code hl_class" href="classAnnularQuadMesh.html">el_pt</a>-&gt;global_power_contribution(<a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>);</div>
+<div class="line">  }</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output total power</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">oomph_info</a> &lt;&lt; <span class="stringliteral">&quot;Radiated power: &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code hl_class" href="classAnnularQuadMesh.html">power</a> &lt;&lt; std::endl;</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.open(<a class="code hl_class" href="classAnnularQuadMesh.html">filename</a>); </div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a> &lt;&lt; <a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">           &lt;&lt; <a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">           &lt;&lt; <a class="code hl_class" href="classAnnularQuadMesh.html">power</a> &lt;&lt; std::endl;</div>
+<div class="line"> <a class="code hl_class" href="classAnnularQuadMesh.html">some_file</a>.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="numbering"></a>
+The enumeration of the unknowns</h2>
+<p>As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since <code>oomph-lib's</code> solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via <code>Node::value(0)</code> and <code>Node::value(1)</code>. However, to facilitate the use of the elements in multi-physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function </p><div class="fragment"><div class="line">std::complex&lt;unsigned&gt; <a class="code hl_function" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">FourierDecomposedHelmholtzEquations&lt;DIM&gt;::u_index_fourier_decomposed_helmholtz</a>()</div>
+<div class="ttc" id="aclassAnnularQuadMesh_html_acf01203e48fdee730b6c194bf538177c"><div class="ttname"><a href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">AnnularQuadMesh::AnnularQuadMesh</a></div><div class="ttdeci">AnnularQuadMesh(const unsigned &amp;n_r, const unsigned &amp;n_phi, const double &amp;r_min, const double &amp;r_max, const double &amp;phi_min, const double &amp;phi_max)</div><div class="ttdef"><b>Definition</b> <a href="sphere__scattering_8cc_source.html#l00065">sphere_scattering.cc:65</a></div></div>
+</div><!-- fragment --><p> which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in <a href="../../../multi_physics/b_convection/html/index.html">the Boussinesq convection tutorial</a>.</p>
+<h3><a class="anchor" id="acc"></a>
+The accuracy of the boundary condition elements</h3>
+<p>As discussed above, the Dirichlet-to-Neumann mapping allows an "exact" implementation of the Sommerfeld radiation condition, provided the artificial outer boundary is sufficiently far from the scatterer that any near field effects have decayed. The actual accuracy of the computational results depends on various factors:</p><ul>
+<li>The number of <code>FourierDecomposedHelmholtzDtNBoundaryElement</code> along the artificial domain boundary. Since these elements are attached to the "bulk" <code>FourierDecomposedHelmholtzElements</code> it is important that the bulk mesh is sufficiently fine to resolve the relevant features of the solution throughout the domain.</li>
+<li>The number of terms included in the sum (8) &ndash; specified in the call to the constructor of the <code>FourierDecomposedHelmholtzDtNMesh</code>.</li>
+<li>The accuracy of the integration scheme used to evaluate the integral in (8).</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<h3><a class="anchor" id="lin"></a>
+Exploiting linearity</h3>
+<p>Confirm that the (costly) re-computation of the <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> integral in <code>actions_before_newton_convergence_check()</code> after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.</p>
+<h3><a class="anchor" id="acc_ex"></a>
+The accuracy of the boundary condition elements</h3>
+<ul>
+<li>Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose <code><a class="el" href="namespaceProblemParameters.html#aa529b33b7feb959e0c044447bf0f6c6f" title="Number of terms in computation of DtN boundary condition.">ProblemParameters::Nterms_for_DtN</a></code> &lt; <code>ProblemParameters::Nterms</code>. <br  />
+</li>
+<li>Explore the function <code>check_gamma()</code> and confirm that the computed value for the <img class="formulaInl" alt="$ \gamma $" src="form_48.png" width="9" height="9"/> integral provides a good approximation to the derivative of the exact solution. Here is a representative comparison obtained with the parameters used in the driver code listed above:</li>
+</ul>
+<div class="image">
+<img src="compare_gamma.gif" alt=""/>
+<div class="caption">
+Plot of the exact (dashed) and computed (solid) gamma integral for N=3 and a wavenumber of k^2 = 10. </div></div>
+ <h3><a class="anchor" id="sphere"></a>
+Scattering of a planar acoustic wave off a sound-hard sphere</h3>
+<p>Modify the driver code to compute the sound field created when a planar acoustic wave, propagating along the <img class="formulaInl" alt="$ z $" src="form_60.png" width="6" height="6"/>-axis, impinges on a sound-hard sphere. The relevant theory is described in <a href="../../../helmholtz/scattering/html/index.html#scattering">another tutorial</a>; you can use the fact that in spherical polar coordinates a planar wave of the form  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\tt U}(x,y,z) = \exp({\rm i}kz)
+\]" src="form_61.png" width="110" height="14"/>
+</p>
+<p> can be written as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\tt U}(\rho,\theta) = \sum_{l=0}^{\infty}
+(2l+1) \ {\rm i}^l \ j_l(kr) \  P_l(\cos\theta),
+\]" src="form_62.png" width="213" height="36"/>
+</p>
+<p> <a class="el" href="classAnnularQuadMesh.html#acf01203e48fdee730b6c194bf538177c">i.e</a>. the wave comprises a single azimuthal Fourier component with <img class="formulaInl" alt="$
+N=0$" src="form_63.png" width="34" height="10"/>. Note that the <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">driver code</a> already contains a namespace <code><a class="el" href="namespacePlanarWave.html" title="Namespace to test representation of planar wave in spherical polars.">PlanarWave</a></code> with several (but not all!) functions required for this task.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

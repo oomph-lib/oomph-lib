@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: A one-dimensional Poisson problem</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: A one-dimensional Poisson problem </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document, we demonstrate how a solve the 1D Poisson problem using existing objects from the <code>oomph-lib</code> library:</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>One-dimensional model Poisson problem</b> </center> Solve  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\mbox{d}^2u}{\mbox{d}x^2} = f(x),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="125" height="30"/>
+</p>
+ in a one-dimensional domain <img class="formulaInl" alt="$ x\in[0,1] $" src="form_1.png" width="48" height="14"/>, with boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u(0)=u_0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=u_1, 
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_2.png" width="229" height="14"/>
+</p>
+ where <img class="formulaInl" alt="$ u_0 $" src="form_3.png" width="14" height="9"/> and <img class="formulaInl" alt="$ u_1 $" src="form_4.png" width="13" height="9"/> are given.   </td></tr>
+</table>
+</center><p>We provide a detailed discussion of the driver code <a href="../../../../demo_drivers/poisson/one_d_poisson/one_d_poisson.cc">one_d_poisson.cc</a> which solves the problem for the specific source function  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+f(x) = \pm 30 \sin(\sqrt{30} x),  \ \ \ \  (3)
+\]" src="form_5.png" width="158" height="16"/>
+</p>
+<p> and boundary conditions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_0= 0; \ \ \  u_1 = \mp 1.
+\]" src="form_6.png" width="103" height="11"/>
+</p>
+<p> In this case, the problem has the (fish-shaped) exact solution  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u(x) = \pm \left[ \left(\sin(\sqrt{30})-1\right) x - \sin(\sqrt{30} x)\right].
+\ \ \ \ \  (4)\]" src="form_7.png" width="270" height="24"/>
+</p>
+<div class="image">
+<img src="one_d_fish.gif" alt=""/>
+<div class="caption">
+The fish-shaped solution u(x). </div></div>
+ <hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>Source functions and problem parameters generally need to be accessible to a variety of <code>oomph-lib</code> objects and we tend to define such functions/quantities in C++ namespaces. Here we use the namespace <code><a class="el" href="namespaceFishSolnOneDPoisson.html" title="Namespace for fish-shaped solution of 1D Poisson equation.">FishSolnOneDPoisson</a></code> to define the source function (3) and the exact solution (4). Both functions use the integer value <a class="el" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06" title="Sign of the source function (- gives the upper half of the fish, + the lower half)">FishSolnOneDPoisson::Sign</a>, which can be set by the "user" in the driver code.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_namespace================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for fish-shaped solution of 1D Poisson equation</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceFishSolnOneDPoisson.html">FishSolnOneDPoisson</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Sign of the source function </span></div>
+<div class="line"><span class="comment"> /// (- gives the upper half of the fish, + the lower half)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">Sign</a>=-1;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact, fish-shaped solution as a 1D vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">get_exact_u</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0] = double(<a class="code hl_variable" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">Sign</a>)*((sin(sqrt(30.0))-1.0)*x[0]-sin(sqrt(30.0)*x[0]));</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Source function required to make the fish shape an exact solution </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#afd2f5aef6b8868526dbf8e74d379697f">source_function</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; source)</div>
+<div class="line"> {</div>
+<div class="line">  source = double(<a class="code hl_variable" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">Sign</a>)*30.0*sin(sqrt(30.0)*x[0]);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="ttc" id="anamespaceFishSolnOneDPoisson_html"><div class="ttname"><a href="namespaceFishSolnOneDPoisson.html">FishSolnOneDPoisson</a></div><div class="ttdoc">Namespace for fish-shaped solution of 1D Poisson equation.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00045">one_d_poisson.cc:46</a></div></div>
+<div class="ttc" id="anamespaceFishSolnOneDPoisson_html_a108e814ef887ffcc8caa7c65a7d30f06"><div class="ttname"><a href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">FishSolnOneDPoisson::Sign</a></div><div class="ttdeci">int Sign</div><div class="ttdoc">Sign of the source function (- gives the upper half of the fish, + the lower half)</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00050">one_d_poisson.cc:50</a></div></div>
+<div class="ttc" id="anamespaceFishSolnOneDPoisson_html_a52c9346f567cb68fe20268a592deb4bc"><div class="ttname"><a href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">FishSolnOneDPoisson::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact, fish-shaped solution as a 1D vector.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00054">one_d_poisson.cc:54</a></div></div>
+<div class="ttc" id="anamespaceFishSolnOneDPoisson_html_afd2f5aef6b8868526dbf8e74d379697f"><div class="ttname"><a href="namespaceFishSolnOneDPoisson.html#afd2f5aef6b8868526dbf8e74d379697f">FishSolnOneDPoisson::source_function</a></div><div class="ttdeci">void source_function(const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Source function required to make the fish shape an exact solution.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00061">one_d_poisson.cc:61</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>In order to solve the Poisson problem with <code>oomph-lib</code>, we represent the mathematical problem defined by equations (1) and (2) in a specific <code>Problem</code> object, <code><a class="el" href="classOneDPoissonProblem.html" title="1D Poisson problem in unit interval.">OneDPoissonProblem</a></code>. <code>oomph-lib</code> provides a variety of 1D Poisson elements (1D elements with linear, quadratic and cubic representations for the unknown function) and we pass the specific element type as a template parameter to the <code>Problem</code>. In the driver code, listed below, we use the <code>QPoissonElement&lt;1,4&gt;</code>, a four-node (cubic) 1D Poisson element. We pass the number of elements in the mesh as the first argument to the <code>Problem</code> constructor and the pointer to the source function, defined in the namespace <code><a class="el" href="namespaceFishSolnOneDPoisson.html" title="Namespace for fish-shaped solution of 1D Poisson equation.">FishSolnOneDPoisson</a></code>, as the second.</p>
+<p>Once the problem has been created, we execute <code>Problem::self_test()</code>, which checks that the <code>Problem</code> has been properly set up. If this test is passed, we proceed to solve the problem: Initially, we set the sign of the source function (defined in the variable <code><a class="el" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06" title="Sign of the source function (- gives the upper half of the fish, + the lower half)">FishSolnOneDPoisson::Sign</a></code>) to -1 and solve, using <code>oomph-lib's</code> Newton solver. We write the solution to output files, using the <code><a class="el" href="classOneDPoissonProblem.html" title="1D Poisson problem in unit interval.">OneDPoissonProblem</a>'s</code> member function <code>doc_solution()</code>, discussed below. We then repeat the process, using a positive sign for the source function.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for 1D Poisson problem</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="one__d__poisson_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up the problem: </span></div>
+<div class="line"> <span class="comment">// Solve a 1D Poisson problem using a source function that generates</span></div>
+<div class="line"> <span class="comment">// a fish shaped exact solution</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element=40; <span class="comment">//Number of elements</span></div>
+<div class="line"> <a class="code hl_class" href="classOneDPoissonProblem.html">OneDPoissonProblem&lt;QPoissonElement&lt;1,4&gt;</a> &gt; <span class="comment">//Element type as template parameter</span></div>
+<div class="line">  problem(n_element,<a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#afd2f5aef6b8868526dbf8e74d379697f">FishSolnOneDPoisson::source_function</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check whether the problem can be solved</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nProblem self-test &quot;</span>;</div>
+<div class="line"> <span class="keywordflow">if</span> (problem.self_test()==0)  </div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;passed: Problem can be solved.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(<span class="stringliteral">&quot;failed!&quot;</span>,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the sign of the source function:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nSolving with negative sign:\n&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> <a class="code hl_variable" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">FishSolnOneDPoisson::Sign</a>=-1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve the problem with this Sign</span></div>
+<div class="line"> problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output solution for this case (label output files with &quot;0&quot;)</span></div>
+<div class="line"> problem.doc_solution(0);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Change the sign of the source function:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n\n\nSolving with positive sign:\n&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> <a class="code hl_variable" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06">FishSolnOneDPoisson::Sign</a>=1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Re-solve the problem with this Sign (boundary conditions get</span></div>
+<div class="line"> <span class="comment">// updated automatically when Problem::actions_before_newton_solve() is</span></div>
+<div class="line"> <span class="comment">// called.</span></div>
+<div class="line"> problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output solution for this case (label output files with &quot;1&quot;)</span></div>
+<div class="line"> problem.doc_solution(1);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html"><div class="ttname"><a href="classOneDPoissonProblem.html">OneDPoissonProblem</a></div><div class="ttdoc">1D Poisson problem in unit interval.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00078">one_d_poisson.cc:79</a></div></div>
+<div class="ttc" id="aone__d__poisson_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="one__d__poisson_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for 1D Poisson problem.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00259">one_d_poisson.cc:259</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p><code>oomph-lib</code> driver codes tend to be very compact and "high-level" because all the "hard work" is done in the <code>Problem</code> specification. For our simple Poisson problem, this step is completely straightforward:</p>
+<p>The <code><a class="el" href="classOneDPoissonProblem.html" title="1D Poisson problem in unit interval.">OneDPoissonProblem</a></code> is derived from <code>oomph-lib's</code> generic <code>Problem</code> class and, as discussed above, the specific element type is specified as a template parameter to make it easy for the "user" to change the element type in the driver code.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_problem_class============================================</span></div>
+<div class="line"><span class="comment">/// 1D Poisson problem in unit interval.</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classOneDPoissonProblem.html">OneDPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+</div><!-- fragment --><p> The <code>OneDPoissonProblemclass</code> has five member functions, only three of which are non-trivial:</p><ul>
+<li>the constructor <code><a class="el" href="classOneDPoissonProblem.html" title="1D Poisson problem in unit interval.">OneDPoissonProblem(...)</a></code> </li>
+<li>the function <code>actions_before_newton_solve()</code> </li>
+<li>the function <code>doc_solution(...)</code> </li>
+</ul>
+<p>The function <code>Problem::actions_after_newton_solve()</code> is a pure virtual member function of the <code>Problem</code> base class and must be provided. However, it is not required in the present problem so we leave it empty. Similarly, the problem destructor can remain empty as all memory de-allocation is handled in the destructor of the <code>Problem</code> base class. The Problem only stores one private data member, the pointer to the source function.</p>
+<div class="fragment"><div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements and pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classOneDPoissonProblem.html">OneDPoissonProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; n_element, </div>
+<div class="line">                    PoissonEquations&lt;1&gt;::PoissonSourceFctPt source_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classOneDPoissonProblem.html#a940fa32d7939788e27b708818fb046ec">~OneDPoissonProblem</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">delete</span> mesh_pt();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve: (Re)set boundary conditions</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOneDPoissonProblem.html#a6e42423869771fbd216326cba516a76b">actions_before_newton_solve</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOneDPoissonProblem.html#ab023d367cc68b77a7828536333c924ed">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution, pass the number of the case considered,</span></div>
+<div class="line"><span class="comment"> /// so that output files can be distinguished.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOneDPoissonProblem.html#aaf42d034e42e7615acfa262a9c56b638">doc_solution</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; label);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> PoissonEquations&lt;1&gt;::PoissonSourceFctPt <a class="code hl_variable" href="classOneDPoissonProblem.html#a5fdff4b9218f56dec7fbc282f2428eef">Source_fct_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_a5fdff4b9218f56dec7fbc282f2428eef"><div class="ttname"><a href="classOneDPoissonProblem.html#a5fdff4b9218f56dec7fbc282f2428eef">OneDPoissonProblem::Source_fct_pt</a></div><div class="ttdeci">PoissonEquations&lt; 1 &gt;::PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00106">one_d_poisson.cc:106</a></div></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_a6e42423869771fbd216326cba516a76b"><div class="ttname"><a href="classOneDPoissonProblem.html#a6e42423869771fbd216326cba516a76b">OneDPoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: (Re)set boundary conditions.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00170">one_d_poisson.cc:170</a></div></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_a940fa32d7939788e27b708818fb046ec"><div class="ttname"><a href="classOneDPoissonProblem.html#a940fa32d7939788e27b708818fb046ec">OneDPoissonProblem::~OneDPoissonProblem</a></div><div class="ttdeci">~OneDPoissonProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00088">one_d_poisson.cc:88</a></div></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_aaf42d034e42e7615acfa262a9c56b638"><div class="ttname"><a href="classOneDPoissonProblem.html#aaf42d034e42e7615acfa262a9c56b638">OneDPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(const unsigned &amp;label)</div><div class="ttdoc">Doc the solution, pass the number of the case considered, so that output files can be distinguished.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00216">one_d_poisson.cc:216</a></div></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_ab023d367cc68b77a7828536333c924ed"><div class="ttname"><a href="classOneDPoissonProblem.html#ab023d367cc68b77a7828536333c924ed">OneDPoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00097">one_d_poisson.cc:97</a></div></div>
+</div><!-- fragment --><table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><center><b><a class="anchor" id="gen_conv"></a>A general convention</b></center><p> The type <code>PoissonEquations&lt;1&gt;::PoissonSourceFctPt</code>, used to define the type of the source function pointer, is a public typedef, defined in <code>oomph-lib's</code> Poisson equation class, as follows:</p>
+<div class="fragment"><div class="line">[...]</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// \short Function pointer to source function has the form fct(x,f(x)). </span></div>
+<div class="line"><span class="comment"> /// Note that x is a Vector! </span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">typedef</span> void (*PoissonSourceFctPt)(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, <span class="keywordtype">double</span>&amp; f);</div>
+<div class="line"> </div>
+<div class="line">[...]</div>
+</div><!-- fragment --><p class="intertd">This reflects a <b>general</b> <b>convention</b> in <code>oomph-lib</code>: The function types of source functions etc. that are required by specific elements, are always declared as public types in the element classes. The logic behind this is that only the element writer/maintainer knows what type of function (i.e. the type of its arguments and its return value) a specific element requires. For instance, the source function for the Poisson equation requires the spatial coordinate <code>x</code> as input and computes the (scalar) value of the source function. Since the syntax for C++ function pointers is somewhat "non-obvious" (that's according to Bjarne Stroustrup, the designer of C++, himself!), we use typedefs to give the function pointers more intuitive names. Since the typedefs are public, they can be used anywhere in the "user's" code.</p>
+<p class="endtd">While we're at it, here's <b>another</b> <b>convention:</b> If an <code>oomph-lib</code> function has input and output arguments in its argument list, the input arguments appear first (and are usually passed as constant references), while the output arguments appear last (and are passed as references).   </p>
+</td></tr>
+</table>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>In the <code>Problem</code> constructor, we define the domain length and build a <code>Mesh</code>, using <code>oomph-lib's</code> <code>OneDMesh</code> object which is templated by the element type. The required number of elements and the domain length are passed as arguments to the <code>OneDMesh</code> constructors. The subsequent lines of code pin the nodal values at the two boundary nodes. Next we pass the source function pointer to the elements. Finally, we call the generic <code>Problem::assign_eqn_numbers()</code> routine which does precisely what it says...</p>
+<div class="fragment"><div class="line"><span class="comment">//=====start_of_constructor===============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for 1D Poisson problem in unit interval.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Discretise the 1D domain with n_element elements of type ELEMENT.</span></div>
+<div class="line"><span class="comment">/// Specify function pointer to source function. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classOneDPoissonProblem.html#ab814af5dfd3b7ae665cd20e27da5d9ae">OneDPoissonProblem&lt;ELEMENT&gt;::OneDPoissonProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; n_element,</div>
+<div class="line"> PoissonEquations&lt;1&gt;::PoissonSourceFctPt source_fct_pt) : </div>
+<div class="line"> <a class="code hl_variable" href="classOneDPoissonProblem.html#a5fdff4b9218f56dec7fbc282f2428eef">Source_fct_pt</a>(source_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> Problem::Sparse_assembly_method = Perform_assembly_using_two_arrays;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Problem::Problem_is_nonlinear = false;</span></div>
+<div class="line"> <span class="comment">// Set domain length </span></div>
+<div class="line"> <span class="keywordtype">double</span> L=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build mesh and store pointer in Problem</span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> OneDMesh&lt;ELEMENT&gt;(n_element,L);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: By default, all nodal</span></div>
+<div class="line"> <span class="comment">// values are free -- we only need to pin the ones that have </span></div>
+<div class="line"> <span class="comment">// Dirichlet conditions. </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the single nodal value at the single node on mesh </span></div>
+<div class="line"> <span class="comment">// boundary 0 (= the left domain boundary at x=0)</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(0,0)-&gt;pin(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the single nodal value at the single node on mesh </span></div>
+<div class="line"> <span class="comment">// boundary 1 (= the right domain boundary at x=1)</span></div>
+<div class="line"> mesh_pt()-&gt;boundary_node_pt(1,0)-&gt;pin(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the setup of the 1D Poisson problem:</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over elements and set pointers to source function</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT *elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   elem_pt-&gt;source_fct_pt() = <a class="code hl_variable" href="classOneDPoissonProblem.html#a5fdff4b9218f56dec7fbc282f2428eef">Source_fct_pt</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> assign_eqn_numbers();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="ttc" id="aclassOneDPoissonProblem_html_ab814af5dfd3b7ae665cd20e27da5d9ae"><div class="ttname"><a href="classOneDPoissonProblem.html#ab814af5dfd3b7ae665cd20e27da5d9ae">OneDPoissonProblem::OneDPoissonProblem</a></div><div class="ttdeci">OneDPoissonProblem(const unsigned &amp;n_element, PoissonEquations&lt; 1 &gt;::PoissonSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass number of elements and pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="one__d__poisson_8cc_source.html#l00120">one_d_poisson.cc:120</a></div></div>
+</div><!-- fragment --><p> The cast in the loop over the elements is required because <code>Mesh::element_pt(...)</code> returns a pointer to the element base class <code>GeneralisedElement</code>, which does not have an access function to the Poisson element's source function pointer.</p>
+<table class="doxtable">
+<tr>
+<td bgcolor="cornsilk"><center><b><a class="anchor" id="const_conv"></a>A general convention</b></center><p> It might seem more natural to pass essential parameters (such as the Poisson element's source function pointer) to an element when the element is created. If we made the source function pointer an argument of the element constructor, we would not have to execute this loop in the constructor.</p>
+<p class="intertd">However, <code>oomph-lib</code> employs a general <b>convention</b> that element constructors should not have any arguments. This is because elements are usually created by the <code>Mesh</code> constructor. To allow <code>Meshes</code> that were originally developed for one particular element type (e.g. a quadrilateral Poisson element) to be used with other elements of same geometry (e.g. a quadrilateral Navier-Stokes element), <code>Mesh</code> objects are usually templated by the element type. The <code>Mesh</code> constructor creates elements by calling the element's default (argument-free!) constructor. If we were to set any element-specific arguments via arguments to the element constructor it would be impossible to re-use the <code>Mesh</code> with other element types &ndash; Navier-Stokes elements, for instance, do not have a source function pointer. The actions performed in this loop are therefore fairly typical as most non-trivial elements need to be passed some additional information to become fully functional.</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before"></a>
+"Actions before solve"</h1>
+<p>The pure virtual function <code>Problem::actions_before_newton_solve()</code> must be implemented for all specific <code>Problems</code> and, as the name suggests, should perform any actions that need to be performed before the system of equations is solved. In the current problem, we use <code>Problem::actions_before_newton_solve()</code> to update the boundary conditions in response to possible changes in the sign of the source function. We use the exact solution (specified in the namespace <code><a class="el" href="namespaceFishSolnOneDPoisson.html" title="Namespace for fish-shaped solution of 1D Poisson equation.">FishSolnOneDPoisson</a></code>) to determine the boundary values that are appropriate for the sign specified in <code><a class="el" href="namespaceFishSolnOneDPoisson.html#a108e814ef887ffcc8caa7c65a7d30f06" title="Sign of the source function (- gives the upper half of the fish, + the lower half)">FishSolnOneDPoisson::Sign</a></code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_actions_before_newton_solve========================================</span></div>
+<div class="line"><span class="comment">/// Update the problem specs before solve: (Re)set boundary values</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// from the exact solution. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOneDPoissonProblem.html#a6e42423869771fbd216326cba516a76b">OneDPoissonProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign boundary values for this problem by reading them out</span></div>
+<div class="line"> <span class="comment">// from the exact solution.</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Left boundary is node 0 in the mesh:</span></div>
+<div class="line"> Node* left_node_pt=mesh_pt()-&gt;node_pt(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine the position of the boundary node (the exact solution</span></div>
+<div class="line"> <span class="comment">// requires the coordinate in a 1D vector!)</span></div>
+<div class="line"> Vector&lt;double&gt; x(1);</div>
+<div class="line"> x[0]=left_node_pt-&gt;x(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Boundary value (read in from exact solution which returns</span></div>
+<div class="line"> <span class="comment">// the solution in a 1D vector)</span></div>
+<div class="line"> Vector&lt;double&gt; u(1);</div>
+<div class="line"> <a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">FishSolnOneDPoisson::get_exact_u</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign the boundary condition to one (and only) nodal value</span></div>
+<div class="line"> left_node_pt-&gt;set_value(0,u[0]);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Right boundary is last node in the mesh:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> last_node=mesh_pt()-&gt;nnode()-1;</div>
+<div class="line"> Node* right_node_pt=mesh_pt()-&gt;node_pt(last_node);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine the position of the boundary node</span></div>
+<div class="line"> x[0]=right_node_pt-&gt;x(0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Boundary value (read in from exact solution which returns</span></div>
+<div class="line"> <span class="comment">// the solution in a 1D vector)</span></div>
+<div class="line"> <a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">FishSolnOneDPoisson::get_exact_u</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign the boundary condition to one (and only) nodal value</span></div>
+<div class="line"> right_node_pt-&gt;set_value(0,u[0]);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of actions before solve</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>The function <code>doc_solution(...)</code> writes the FE solution and the corresponding exact solution, defined in <code>FishSolnOneDPoisson::get_exact_u(...)</code> to disk. The argument <code>label</code> is used to add identifiers to the output file names. Note that all output functions are implemented in the generic <code>Mesh</code> class:</p><ul>
+<li>The function <code>Mesh::output(...)</code> executes the <code>FiniteElement::output(...)</code> function for each element in a mesh. For 1D Poisson elements, this function writes the values of <img class="formulaInl" alt="$ x $" src="form_8.png" width="8" height="6"/> and <img class="formulaInl" alt="$ u(x) $" src="form_9.png" width="24" height="14"/> at <code>npts</code> uniformly spaced points in the element to the specified file.</li>
+<li>The function <code>Mesh::output_fct(...)</code> plots the function specified by the function pointer in its last argument at the specified number of points in each of the constituent elements. This allows point-by-point comparisons between exact and FE solutions. Here we plot the exact solution at a larger number of points to ensure that the exact solution looks smooth even if only a small number of elements are used for the discretisation of the ODE.</li>
+</ul>
+<p>Finally, we call the function <code>Mesh::compute_error(...)</code> which determines the square of the L2 error, based on the difference between the exact solution (specified by a function pointer) and the FE solution. We also plot the pointwise error in the specified output file.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_doc=========================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution in tecplot format. Label files with label.</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOneDPoissonProblem.html#aaf42d034e42e7615acfa262a9c56b638">OneDPoissonProblem&lt;ELEMENT&gt;::doc_solution</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; label)</div>
+<div class="line">{ </div>
+<div class="line"> <span class="keyword">using namespace </span>StringConversion;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution with specified number of plot points per element</span></div>
+<div class="line"> ofstream solution_file((<span class="stringliteral">&quot;soln&quot;</span> + to_string(label) + <span class="stringliteral">&quot;.dat&quot;</span>).c_str());</div>
+<div class="line"> mesh_pt()-&gt;output(solution_file,npts);</div>
+<div class="line"> solution_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution at much higher resolution (so we can</span></div>
+<div class="line"> <span class="comment">// see how well the solutions agree between nodal points)</span></div>
+<div class="line"> ofstream exact_file((<span class="stringliteral">&quot;exact_soln&quot;</span> + to_string(label) + <span class="stringliteral">&quot;.dat&quot;</span>).c_str());</div>
+<div class="line"> mesh_pt()-&gt;output_fct(exact_file,20*npts,<a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">FishSolnOneDPoisson::get_exact_u</a>); </div>
+<div class="line"> exact_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc pointwise error and compute norm of error and of the solution</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> ofstream error_file((<span class="stringliteral">&quot;error&quot;</span> + to_string(label) + <span class="stringliteral">&quot;.dat&quot;</span>).c_str());</div>
+<div class="line"> mesh_pt()-&gt;compute_error(error_file,<a class="code hl_function" href="namespaceFishSolnOneDPoisson.html#a52c9346f567cb68fe20268a592deb4bc">FishSolnOneDPoisson::get_exact_u</a>,</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> error_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error norm:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error    : &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution : &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of doc</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="exercises"></a>
+Exercises</h1>
+<ol type="1">
+<li>Run the code with different numbers of elements. How does the error between the exact and the analytical solution change?</li>
+<li>Compare the error obtained with different element types &ndash; replace the four-node Poisson element, <code>QPoissonElement&lt;1,4&gt;</code>, by its lower-order counterparts <code>QPoissonElement&lt;1,3&gt;</code> and <code>QPoissonElement&lt;1,2&gt;</code>.</li>
+<li>The fish-shaped exact solution (4) is fairly smooth. Postulate a more rapidly varying "exact" solution, such as  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+   u(x) = \tanh\left[\alpha \left(x-\frac{1}{2}\right)\right]
+   \]" src="form_10.png" width="139" height="31"/>
+</p>
+ which produces a "step" at <img class="formulaInl" alt="$ x=1/2 $" src="form_11.png" width="44" height="14"/> when <img class="formulaInl" alt="$ \alpha $" src="form_12.png" width="8" height="6"/> becomes sufficiently large. Calculate the source function required for this function to be an exact solution and implement both functions in another namespace, <code>TanhSolnOneDPoisson</code>, say. Replace the reference to <code><a class="el" href="namespaceFishSolnOneDPoisson.html" title="Namespace for fish-shaped solution of 1D Poisson equation.">FishSolnOneDPoisson</a></code> by <code>TanhSolnOneDPoisson</code> and repeat the above exercises.</li>
+<li>Remove the Dirichlet boundary condition at the left end of the domain. What do you observe? [We shall return to this question in <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">another example</a> where we discuss the <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">application of Neumann-type boundary conditions</a>.]</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/poisson/one_d_poisson/">demo_drivers/poisson/one_d_poisson/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/poisson/one_d_poisson/one_d_poisson.cc">demo_drivers/poisson/one_d_poisson/one_d_poisson.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:20
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

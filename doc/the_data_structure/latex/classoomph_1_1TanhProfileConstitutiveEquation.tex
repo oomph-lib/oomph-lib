@@ -1,0 +1,200 @@
+\doxysection{oomph\+::Tanh\+Profile\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TanhProfileConstitutiveEquation}{}\label{classoomph_1_1TanhProfileConstitutiveEquation}\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+
+
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a fluid following a tanh-\/profile.  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Tanh\+Profile\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TanhProfileConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_a18cb572bab5a87ab20220ad009ba82eb}{Tanh\+Profile\+Constitutive\+Equation}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mu\+\_\+inf\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mu\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}alpha\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{critical\+\_\+second\+\_\+invariant\+\_\+pt}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_aee5659a24ab4d18f4a90661113528ca3}{viscosity}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_a5151261b6ec1c3f29f7ee085db955c2f}{dviscosity\+\_\+dinvariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a4b84eb3626aaed2f77f6dc96258f7e01}{Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_af85f107604d04e8fdaf03e8274c485e6}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_a34b319c7b3280d633f2dcaccb728498f}{Mu\+\_\+inf\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em high shear rate viscosity \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_a8b44ee78c6c9f700107300f1ac6c4652}{Mu\+\_\+0\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em zero shear rate viscosity \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_ac131ec2b2026bc93a695d5436e735e14}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em parameter controlling the steepness of the step nb -- I used 10.\+0/(\texorpdfstring{$\ast$}{*}\+Critical\+\_\+second\+\_\+invariant\+\_\+pt) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation_af08d9a939d835a33e0349def2db64f25}{Critical\+\_\+second\+\_\+invariant\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em parameter that controls the location of the step -- assumed to be always positive \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$}
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a fluid following a tanh-\/profile. 
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01145}{1145}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_a18cb572bab5a87ab20220ad009ba82eb}\label{classoomph_1_1TanhProfileConstitutiveEquation_a18cb572bab5a87ab20220ad009ba82eb} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!TanhProfileConstitutiveEquation@{TanhProfileConstitutiveEquation}}
+\index{TanhProfileConstitutiveEquation@{TanhProfileConstitutiveEquation}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{TanhProfileConstitutiveEquation()}{TanhProfileConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Tanh\+Profile\+Constitutive\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{mu\+\_\+inf\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{mu\+\_\+0\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{alpha\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{critical\+\_\+second\+\_\+invariant\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01164}{1164}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_a5151261b6ec1c3f29f7ee085db955c2f}\label{classoomph_1_1TanhProfileConstitutiveEquation_a5151261b6ec1c3f29f7ee085db955c2f} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
+\index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01193}{1193}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01161}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_aee5659a24ab4d18f4a90661113528ca3}\label{classoomph_1_1TanhProfileConstitutiveEquation_aee5659a24ab4d18f4a90661113528ca3} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::viscosity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01176}{1176}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01157}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01161}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01153}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::\+Mu\+\_\+0\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01150}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::\+Mu\+\_\+inf\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_ac131ec2b2026bc93a695d5436e735e14}\label{classoomph_1_1TanhProfileConstitutiveEquation_ac131ec2b2026bc93a695d5436e735e14} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+parameter controlling the steepness of the step nb -- I used 10.\+0/(\texorpdfstring{$\ast$}{*}\+Critical\+\_\+second\+\_\+invariant\+\_\+pt) 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01157}{1157}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01176}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_af08d9a939d835a33e0349def2db64f25}\label{classoomph_1_1TanhProfileConstitutiveEquation_af08d9a939d835a33e0349def2db64f25} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}}
+\index{Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Critical\_second\_invariant\_pt}{Critical\_second\_invariant\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+parameter that controls the location of the step -- assumed to be always positive 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01161}{1161}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01193}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01176}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_a8b44ee78c6c9f700107300f1ac6c4652}\label{classoomph_1_1TanhProfileConstitutiveEquation_a8b44ee78c6c9f700107300f1ac6c4652} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!Mu\_0\_pt@{Mu\_0\_pt}}
+\index{Mu\_0\_pt@{Mu\_0\_pt}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mu\_0\_pt}{Mu\_0\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mu\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zero shear rate viscosity 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01153}{1153}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01176}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1TanhProfileConstitutiveEquation_a34b319c7b3280d633f2dcaccb728498f}\label{classoomph_1_1TanhProfileConstitutiveEquation_a34b319c7b3280d633f2dcaccb728498f} 
+\index{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}!Mu\_inf\_pt@{Mu\_inf\_pt}}
+\index{Mu\_inf\_pt@{Mu\_inf\_pt}!oomph::TanhProfileConstitutiveEquation$<$ DIM $>$@{oomph::TanhProfileConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mu\_inf\_pt}{Mu\_inf\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TanhProfileConstitutiveEquation}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mu\+\_\+inf\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+high shear rate viscosity 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01150}{1150}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l01176}{oomph\+::\+Tanh\+Profile\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

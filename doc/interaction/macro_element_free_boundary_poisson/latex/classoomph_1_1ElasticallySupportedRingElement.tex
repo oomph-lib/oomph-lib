@@ -1,0 +1,364 @@
+\doxysection{oomph\+::Elastically\+Supported\+Ring\+Element Class Reference}
+\hypertarget{classoomph_1_1ElasticallySupportedRingElement}{}\label{classoomph_1_1ElasticallySupportedRingElement}\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+
+
+\doxylink{classoomph_1_1GeneralCircle}{General\+Circle} "{}upgraded"{} to a Generalised\+Element\+: Circular ring whose position is given by.  
+
+
+
+
+{\ttfamily \#include $<$circle\+\_\+as\+\_\+generalised\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Elastically\+Supported\+Ring\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ElasticallySupportedRingElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a7e68f18d76acb6297405ca2a38b64898}{Elastically\+Supported\+Ring\+Element}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\+\_\+c}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\+\_\+c}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Build ring from doubles that describe the geometry\+: x and y positions of centre and the radius. Initialise stiffness to 1.\+0. By default, no load is set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{virtual}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2b3fd2a41155a9d34ab0f43aa8a5deab}{\texorpdfstring{$\sim$}{\string~}\+Elastically\+Supported\+Ring\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ac1c967080f2a4e6143bcffdcdbc1d735}{set\+\_\+load\+\_\+pt}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set pointer to Data object that specifies the "{}load"{} on the \doxylink{classoomph_1_1ElasticallySupportedRingElement}{Elastically\+Supported\+Ring\+Element}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f}{load}} ()
+\begin{DoxyCompactList}\small\item\em "{}\+Load"{} acting on the ring \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_af78beb926542b46abbdd3345af8f2e9a}{k\+\_\+stiff}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the spring stiffness. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_acddd4ff64f173aa2d6c4e651c1c9c319}{pin\+\_\+yc}} ()
+\begin{DoxyCompactList}\small\item\em Pin the vertical displacement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad70712dca329430d09d1a905c1362478}{unpin\+\_\+yc}} ()
+\begin{DoxyCompactList}\small\item\em Unpin the vertical displacement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad8bf518168d68e8b016e474e76037a49}{get\+\_\+residuals}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}})
+\begin{DoxyCompactList}\small\item\em Compute element residual vector (wrapper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2418f706f5b17a64a5b01b72ccb3b95d}{get\+\_\+jacobian}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}})
+\begin{DoxyCompactList}\small\item\em Compute element residual Vector and element Jacobian matrix (wrapper) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralCircle}{oomph\+::\+General\+Circle}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralCircle_aa4847492eeebdc2033c82734d7bcf2f2}{General\+Circle}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\+\_\+c}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\+\_\+c}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass x and y-\/coords of centre and radius (all pinned) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeneralCircle_afdcca2cddb52a51abc693c7d7ba6b173}{General\+Circle}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}{geom\+\_\+data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Alternative constructor\+: Pass x and y-\/coords of centre and radius (all as part of Data) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralCircle_a4ba230f7d22d7b116603115952ca50b0}{\texorpdfstring{$\sim$}{\string~}\+General\+Circle}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up if necessary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1GeneralCircle_acc120835b4f0c69e7dce7e839db63d1d}{position}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{zeta}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}}) \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}}
+\begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1GeneralCircle_a94f7f58a7131f80a245007ff0da73f74}{position}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{t}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{zeta}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}}) \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}}
+\begin{DoxyCompactList}\small\item\em Position Vector at Lagrangian coordinate zeta at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous level). Steady object, so we simply forward the call to the steady version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\+\_\+c}} ()
+\begin{DoxyCompactList}\small\item\em Access function to x-\/coordinate of centre of circle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\+\_\+c}} ()
+\begin{DoxyCompactList}\small\item\em Access function to y-\/coordinate of centre of circle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classoomph_1_1GeneralCircle_a101fe4789526ebb17796de8219cb4c35}{R}} ()
+\begin{DoxyCompactList}\small\item\em Access function to radius of circle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeneralCircle_a7cd69f069bb8042ba972b89940ec1808}{ngeom\+\_\+data}} () \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}}
+\begin{DoxyCompactList}\small\item\em How many items of Data does the shape of the object depend on? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeneralCircle_adf90890d68bd66550926e2611f634470}{geom\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{j}})
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th Data item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{flag}})
+\begin{DoxyCompactList}\small\item\em Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\+\_\+stiff}}
+\begin{DoxyCompactList}\small\item\em Stiffness of the ring\textquotesingle{}s "{}elastic"{} support. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{External\+\_\+load\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Index of the location of the load Data in the element\textquotesingle{}s array of external data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\+\_\+geometric\+\_\+data\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Index of the location of the geometric Data in the element\textquotesingle{}s array of internal data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{bool}} \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{Load\+\_\+data\+\_\+has\+\_\+been\+\_\+set}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate that load data has been set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1GeneralCircle}{oomph\+::\+General\+Circle}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to Data items that affects the object\textquotesingle{}s shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{bool}} \mbox{\hyperlink{classoomph_1_1GeneralCircle_a6772cb425079b3afd2479663ddb0cb81}{Must\+\_\+clean\+\_\+up}}
+\begin{DoxyCompactList}\small\item\em Do I need to clean up? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1GeneralCircle}{General\+Circle} "{}upgraded"{} to a Generalised\+Element\+: Circular ring whose position is given by. 
+
+\[ x = X_c + R \cos(\zeta)  \] \[ y = Y_c + R \sin(\zeta)  \] The ring\textquotesingle{}s vertical position $ Y_c $ is determined by "{}pseudo elasticity"{}\+: \[ 0 = f_{load} - Y_c \ k_{stiff} \] This simulates the case where the centre of the ring is mounted on an elastic spring of stiffness $ k_{stiff} $ and loaded by the force $ f_{load}. $ The "{}load"{} is specified by the Data object {\ttfamily \doxylink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\+\_\+pt()}}. 
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00053}{53}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a7e68f18d76acb6297405ca2a38b64898}\label{classoomph_1_1ElasticallySupportedRingElement_a7e68f18d76acb6297405ca2a38b64898} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!ElasticallySupportedRingElement@{ElasticallySupportedRingElement}}
+\index{ElasticallySupportedRingElement@{ElasticallySupportedRingElement}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{ElasticallySupportedRingElement()}{ElasticallySupportedRingElement()}}
+{\footnotesize\ttfamily oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\+Elastically\+Supported\+Ring\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{x\+\_\+c,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{y\+\_\+c,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Build ring from doubles that describe the geometry\+: x and y positions of centre and the radius. Initialise stiffness to 1.\+0. By default, no load is set. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00062}{62}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{circle_8h_source_l00224}{oomph\+::\+General\+Circle\+::\+Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00264}{Internal\+\_\+geometric\+\_\+data\+\_\+index}}, and \mbox{\hyperlink{circle_8h_source_l00227}{oomph\+::\+General\+Circle\+::\+Must\+\_\+clean\+\_\+up}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a2b3fd2a41155a9d34ab0f43aa8a5deab}\label{classoomph_1_1ElasticallySupportedRingElement_a2b3fd2a41155a9d34ab0f43aa8a5deab} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!````~ElasticallySupportedRingElement@{\texorpdfstring{$\sim$}{\string~}ElasticallySupportedRingElement}}
+\index{````~ElasticallySupportedRingElement@{\texorpdfstring{$\sim$}{\string~}ElasticallySupportedRingElement}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ElasticallySupportedRingElement()}{\string~ElasticallySupportedRingElement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{virtual}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\texorpdfstring{$\sim$}{\string~}\+Elastically\+Supported\+Ring\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00086}{86}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}\label{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!fill\_in\_generic\_residual\_contribution@{fill\_in\_generic\_residual\_contribution}}
+\index{fill\_in\_generic\_residual\_contribution@{fill\_in\_generic\_residual\_contribution}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution()}{fill\_in\_generic\_residual\_contribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}}}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Compute element residual Vector (only if flag=0) and also the element Jacobian matrix (if flag=1) 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{195}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00260}{External\+\_\+load\+\_\+index}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00264}{Internal\+\_\+geometric\+\_\+data\+\_\+index}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00256}{K\+\_\+stiff}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00126}{load()}}, and \mbox{\hyperlink{circle_8h_source_l00208}{oomph\+::\+General\+Circle\+::y\+\_\+c()}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00177}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00165}{get\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a2418f706f5b17a64a5b01b72ccb3b95d}\label{classoomph_1_1ElasticallySupportedRingElement_a2418f706f5b17a64a5b01b72ccb3b95d} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Dense\+Matrix}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute element residual Vector and element Jacobian matrix (wrapper) 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00177}{177}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_ad8bf518168d68e8b016e474e76037a49}\label{classoomph_1_1ElasticallySupportedRingElement_ad8bf518168d68e8b016e474e76037a49} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute element residual vector (wrapper) 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00165}{165}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_af78beb926542b46abbdd3345af8f2e9a}\label{classoomph_1_1ElasticallySupportedRingElement_af78beb926542b46abbdd3345af8f2e9a} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!k\_stiff@{k\_stiff}}
+\index{k\_stiff@{k\_stiff}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{k\_stiff()}{k\_stiff()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& oomph\+::\+Elastically\+Supported\+Ring\+Element\+::k\+\_\+stiff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the spring stiffness. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00142}{142}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00256}{K\+\_\+stiff}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f}\label{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!load@{load}}
+\index{load@{load}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+"{}\+Load"{} acting on the ring 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00126}{126}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00260}{External\+\_\+load\+\_\+index}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00267}{Load\+\_\+data\+\_\+has\+\_\+been\+\_\+set}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_acddd4ff64f173aa2d6c4e651c1c9c319}\label{classoomph_1_1ElasticallySupportedRingElement_acddd4ff64f173aa2d6c4e651c1c9c319} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!pin\_yc@{pin\_yc}}
+\index{pin\_yc@{pin\_yc}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{pin\_yc()}{pin\_yc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::pin\+\_\+yc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin the vertical displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00146}{146}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00264}{Internal\+\_\+geometric\+\_\+data\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_ac1c967080f2a4e6143bcffdcdbc1d735}\label{classoomph_1_1ElasticallySupportedRingElement_ac1c967080f2a4e6143bcffdcdbc1d735} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!set\_load\_pt@{set\_load\_pt}}
+\index{set\_load\_pt@{set\_load\_pt}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{set\_load\_pt()}{set\_load\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::set\+\_\+load\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*}}]{load\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set pointer to Data object that specifies the "{}load"{} on the \doxylink{classoomph_1_1ElasticallySupportedRingElement}{Elastically\+Supported\+Ring\+Element}. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00096}{96}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00260}{External\+\_\+load\+\_\+index}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00267}{Load\+\_\+data\+\_\+has\+\_\+been\+\_\+set}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_ad70712dca329430d09d1a905c1362478}\label{classoomph_1_1ElasticallySupportedRingElement_ad70712dca329430d09d1a905c1362478} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!unpin\_yc@{unpin\_yc}}
+\index{unpin\_yc@{unpin\_yc}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{unpin\_yc()}{unpin\_yc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::unpin\+\_\+yc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unpin the vertical displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00155}{155}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00264}{Internal\+\_\+geometric\+\_\+data\+\_\+index}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}\label{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!External\_load\_index@{External\_load\_index}}
+\index{External\_load\_index@{External\_load\_index}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{External\_load\_index}{External\_load\_index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\+External\+\_\+load\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of the location of the load Data in the element\textquotesingle{}s array of external data. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00260}{260}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00126}{load()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00096}{set\+\_\+load\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}\label{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!Internal\_geometric\_data\_index@{Internal\_geometric\_data\_index}}
+\index{Internal\_geometric\_data\_index@{Internal\_geometric\_data\_index}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{Internal\_geometric\_data\_index}{Internal\_geometric\_data\_index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{unsigned}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\+Internal\+\_\+geometric\+\_\+data\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of the location of the geometric Data in the element\textquotesingle{}s array of internal data. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00264}{264}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00062}{Elastically\+Supported\+Ring\+Element()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00146}{pin\+\_\+yc()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00155}{unpin\+\_\+yc()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}\label{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!K\_stiff@{K\_stiff}}
+\index{K\_stiff@{K\_stiff}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{K\_stiff}{K\_stiff}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\+K\+\_\+stiff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stiffness of the ring\textquotesingle{}s "{}elastic"{} support. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00256}{256}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00195}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00142}{k\+\_\+stiff()}}.
+
+\Hypertarget{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}\label{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04} 
+\index{oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}!Load\_data\_has\_been\_set@{Load\_data\_has\_been\_set}}
+\index{Load\_data\_has\_been\_set@{Load\_data\_has\_been\_set}!oomph::ElasticallySupportedRingElement@{oomph::ElasticallySupportedRingElement}}
+\doxysubsubsection{\texorpdfstring{Load\_data\_has\_been\_set}{Load\_data\_has\_been\_set}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{bool}} oomph\+::\+Elastically\+Supported\+Ring\+Element\+::\+Load\+\_\+data\+\_\+has\+\_\+been\+\_\+set\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate that load data has been set. 
+
+
+
+Definition at line \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00267}{267}} of file \mbox{\hyperlink{circle__as__generalised__element_8h_source}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00126}{load()}}, and \mbox{\hyperlink{circle__as__generalised__element_8h_source_l00096}{set\+\_\+load\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{circle__as__generalised__element_8h}{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}}\end{DoxyCompactItemize}

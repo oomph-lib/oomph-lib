@@ -1,0 +1,524 @@
+\doxysection{Anasazi\+::Multi\+Vec\+Traits\texorpdfstring{$<$}{<} double, oomph\+::Double\+Multi\+Vector \texorpdfstring{$>$}{>} Class Reference}
+\hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4}{}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4}\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+
+
+Specialize the \doxylink{namespaceAnasazi}{Anasazi} traits class for the oomph-\/lib Double\+Multi\+Vector. This provides the interfaces required by the \doxylink{namespaceAnasazi}{Anasazi} eigensolvers.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+eigen\+\_\+solver.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_adba407e74e6a21e4c32c18d04b9cf9c0}{Clone}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const int numvecs)
+\begin{DoxyCompactList}\small\item\em Creates a new empty Double\+Multi\+Vector containing numvecs columns. Return a reference-\/counted pointer to the new multivector. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a14629c9edef844f6d8dfb59dc10e5c2d}{Clone\+Copy}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Creates a deep copy of the Double\+Multi\+Vector mv return Reference-\/counted pointer to the new Double\+Multi\+Vector. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a1b76b1072966856cd44947f6a44b28ed}{Clone\+Copy}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const std\+::vector$<$ int $>$ \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} and (deep) copies the contents of the vectors in index into the new vector return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a71b2edd3d45cf6b65ef25fee807e4560}{Clone\+Copy}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const Teuchos\+::\+Range1D \&index)
+\begin{DoxyCompactList}\small\item\em Deep copy of specified columns of \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad7635b267a39048a1b16c0feaaf2bdf0}{Clone\+View\+Non\+Const}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const std\+::vector$<$ int $>$ \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a06bf6627830afe4eb9259b070e92d774}{Clone\+View\+Non\+Const}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const Teuchos\+::\+Range1D \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a22604ae5c0a66752385257db914b2455}{Clone\+View}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const std\+::vector$<$ int $>$ \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (const version) \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a2aaae3982fcc934297e56ff6318c16dd}{Clone\+View}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const std\+::vector$<$ int $>$ \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (Non-\/const version for Trilinos 9 interface) NOTE\+: Not required in Trilinos 13.\+4.\+0. \end{DoxyCompactList}\item 
+static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a89f4a40b9b0b5194fce36328c5383545}{Clone\+View}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const Teuchos\+::\+Range1D \&index)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (const version) \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a0f59461c4b9163eca79807a349deb4ea}{Get\+Vec\+Length}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Obtain the global length of the vector. \end{DoxyCompactList}\item 
+static ptrdiff\+\_\+t \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aa0419f21e1304373866e5867849faffd}{Get\+Global\+Length}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Return the number of rows in the given multivector. NOTE\+: Trilinos 13.\+4.\+0 uses Get\+Global\+Length instead of Get\+Vec\+Length. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_abb5e3e3825dc16a80d83a424d154db8c}{Get\+Number\+Vecs}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Obtain the number of vectors in the multivector. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a41445251a1d0c052e1b24f4b75abbe41}{Mv\+Times\+Mat\+Add\+Mv}} (const double alpha, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const Teuchos\+::\+Serial\+Dense\+Matrix$<$ int, double $>$ \&B, const double beta, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Update {\ttfamily mv} with $ \alpha AB + \beta mv $. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aaebfcc1897c825815e9dbd4a3939cb0c}{Mv\+Add\+Mv}} (const double alpha, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const double beta, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&B, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Replace {\ttfamily mv} with $\alpha A + \beta B$. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a9e9e082eb66b9a5e31232de7df06a36d}{Mv\+Scale}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const double alpha)
+\begin{DoxyCompactList}\small\item\em Scale each element of the vectors in {\ttfamily mv} with {\ttfamily alpha}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a75e3a2b5d0d65d3d5622205cd9b2ec37}{Mv\+Scale}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const std\+::vector$<$ double $>$ \&alpha)
+\begin{DoxyCompactList}\small\item\em Scale each element of the {\ttfamily i-\/th} vector in {\ttfamily mv} with {\ttfamily alpha}\mbox{[}i\mbox{]}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a338f59059891bc045555e3283949c6fa}{Mv\+Trans\+Mv}} (const double alpha, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, Teuchos\+::\+Serial\+Dense\+Matrix$<$ int, double $>$ \&B)
+\begin{DoxyCompactList}\small\item\em Compute a dense matrix {\ttfamily B} through the matrix-\/matrix multiply $ \alpha A^Hmv $. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_acb2e5efa75fb3970e1ecf716f10b4ee5}{Mv\+Dot}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, std\+::vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $ b[i] = * A[i]^Hmv[i] $. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac6fd03656134d6fccd7113a6876ba97e}{Mv\+Norm}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, std\+::vector$<$ double $>$ \&normvec)
+\begin{DoxyCompactList}\small\item\em Compute the 2-\/norm of each individual vector of {\ttfamily mv}. Upon return, {\ttfamily normvec}\mbox{[}i\mbox{]} holds the value of $||mv_i||_2$, the {\ttfamily i-\/th} column of {\ttfamily mv}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Initialization methods}\par
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac52b7e1d688acef2afc3636e1cf7a58a}{Set\+Block}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const std\+::vector$<$ int $>$ \&index, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Copy the vectors in {\ttfamily A} to a set of vectors in {\ttfamily mv} indicated by the indices given in {\ttfamily index}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a72a2dfbb096511d602ef03d0ec29b50a}{Set\+Block}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, const Teuchos\+::\+Range1D \&index, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Deep copy of A into specified columns of mv. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af7888014d05b442a4d908974bba3d6c5}{Assign}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&A, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em mv \+:= A \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad180ce9edf949c6e2b882b11cedeff8d}{Mv\+Random}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv)
+\begin{DoxyCompactList}\small\item\em Replace the vectors in {\ttfamily mv} with random vectors. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af1301c3616281ebea692c28378dfead1}{Mv\+Init}} (\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, const double alpha=Teuchos\+::\+Scalar\+Traits$<$ double $>$\+::zero())
+\begin{DoxyCompactList}\small\item\em Replace each element of the vectors in {\ttfamily mv} with {\ttfamily alpha}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Print method}
+\begin{DoxyCompactItemize}
+\item 
+typedef Anasazi\+::details\+::\+Stub\+Tsqr\+Adapter$<$ MV $>$ \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a7061c8e783c77c300a83560bb3ff0a37}{tsqr\+\_\+adaptor\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Tsqr\+Adaptor specialization for the multivector type MV. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a52dc632ffd66eb35ad481c6d36d71960}{Mv\+Print}} (const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&mv, std\+::ostream \&os)
+\begin{DoxyCompactList}\small\item\em Print the {\ttfamily mv} multi-\/vector to the {\ttfamily os} output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Specialize the \doxylink{namespaceAnasazi}{Anasazi} traits class for the oomph-\/lib Double\+Multi\+Vector. This provides the interfaces required by the \doxylink{namespaceAnasazi}{Anasazi} eigensolvers. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00051}{51}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a7061c8e783c77c300a83560bb3ff0a37}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a7061c8e783c77c300a83560bb3ff0a37} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!tsqr\_adaptor\_type@{tsqr\_adaptor\_type}}
+\index{tsqr\_adaptor\_type@{tsqr\_adaptor\_type}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{tsqr\_adaptor\_type}{tsqr\_adaptor\_type}}
+{\footnotesize\ttfamily Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::tsqr\+\_\+adaptor\+\_\+type}
+
+
+
+Tsqr\+Adaptor specialization for the multivector type MV. 
+
+By default, we provide a "{}stub"{} implementation. It has the right methods and typedefs, but its constructors and methods all throw std\+::logic\+\_\+error. If you plan to use TSQR in \doxylink{namespaceAnasazi}{Anasazi} (e.\+g., through Tsqr\+Ortho\+Manager), and if your multivector type MV is neither Epetra\+\_\+\+Multi\+Vector nor Tpetra\+::\+Multi\+Vector, you must implement a functional TSQR adapter. Please refer to Epetra\+::\+Tsqr\+Adapter (for Epetra\+\_\+\+Multi\+Vector) or Tpetra\+::\+Tsqr\+Adaptor (for Tpetra\+::\+Multi\+Vector) for examples. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00453}{453}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af7888014d05b442a4d908974bba3d6c5}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af7888014d05b442a4d908974bba3d6c5} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!Assign@{Assign}}
+\index{Assign@{Assign}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{Assign()}{Assign()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Assign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+mv \+:= A 
+
+Assign (deep copy) A into mv. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00396}{396}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_adba407e74e6a21e4c32c18d04b9cf9c0}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_adba407e74e6a21e4c32c18d04b9cf9c0} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!Clone@{Clone}}
+\index{Clone@{Clone}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const int}]{numvecs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new empty Double\+Multi\+Vector containing numvecs columns. Return a reference-\/counted pointer to the new multivector. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00056}{56}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a14629c9edef844f6d8dfb59dc10e5c2d}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a14629c9edef844f6d8dfb59dc10e5c2d} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneCopy@{CloneCopy}}
+\index{CloneCopy@{CloneCopy}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneCopy()}{CloneCopy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+Copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a deep copy of the Double\+Multi\+Vector mv return Reference-\/counted pointer to the new Double\+Multi\+Vector. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00064}{64}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a1b76b1072966856cd44947f6a44b28ed}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a1b76b1072966856cd44947f6a44b28ed} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneCopy@{CloneCopy}}
+\index{CloneCopy@{CloneCopy}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneCopy()}{CloneCopy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+Copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const std\+::vector$<$ int $>$ \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} and (deep) copies the contents of the vectors in index into the new vector return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00074}{74}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a71b2edd3d45cf6b65ef25fee807e4560}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a71b2edd3d45cf6b65ef25fee807e4560} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneCopy@{CloneCopy}}
+\index{CloneCopy@{CloneCopy}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneCopy()}{CloneCopy()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+Copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const Teuchos\+::\+Range1D \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Deep copy of specified columns of \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00082}{82}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a22604ae5c0a66752385257db914b2455}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a22604ae5c0a66752385257db914b2455} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneView@{CloneView}}
+\index{CloneView@{CloneView}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneView()}{CloneView()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+View (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const std\+::vector$<$ int $>$ \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00113}{113}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a2aaae3982fcc934297e56ff6318c16dd}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a2aaae3982fcc934297e56ff6318c16dd} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneView@{CloneView}}
+\index{CloneView@{CloneView}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneView()}{CloneView()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const std\+::vector$<$ int $>$ \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (Non-\/const version for Trilinos 9 interface) NOTE\+: Not required in Trilinos 13.\+4.\+0. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00125}{125}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a89f4a40b9b0b5194fce36328c5383545}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a89f4a40b9b0b5194fce36328c5383545} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneView@{CloneView}}
+\index{CloneView@{CloneView}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneView()}{CloneView()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const Teuchos\+::\+Range1D \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00136}{136}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad7635b267a39048a1b16c0feaaf2bdf0}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad7635b267a39048a1b16c0feaaf2bdf0} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneViewNonConst@{CloneViewNonConst}}
+\index{CloneViewNonConst@{CloneViewNonConst}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneViewNonConst()}{CloneViewNonConst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+View\+Non\+Const (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const std\+::vector$<$ int $>$ \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00092}{92}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a06bf6627830afe4eb9259b070e92d774}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a06bf6627830afe4eb9259b070e92d774} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!CloneViewNonConst@{CloneViewNonConst}}
+\index{CloneViewNonConst@{CloneViewNonConst}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{CloneViewNonConst()}{CloneViewNonConst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static Teuchos\+::\+RCP$<$ \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$ Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Clone\+View\+Non\+Const (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const Teuchos\+::\+Range1D \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} that contains shallow copies of selected entries of the \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector} mv return Reference-\/counted pointer to the new \doxylink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00102}{102}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aa0419f21e1304373866e5867849faffd}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aa0419f21e1304373866e5867849faffd} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!GetGlobalLength@{GetGlobalLength}}
+\index{GetGlobalLength@{GetGlobalLength}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{GetGlobalLength()}{GetGlobalLength()}}
+{\footnotesize\ttfamily static ptrdiff\+\_\+t Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Get\+Global\+Length (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Return the number of rows in the given multivector. NOTE\+: Trilinos 13.\+4.\+0 uses Get\+Global\+Length instead of Get\+Vec\+Length. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00150}{150}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_abb5e3e3825dc16a80d83a424d154db8c}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_abb5e3e3825dc16a80d83a424d154db8c} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!GetNumberVecs@{GetNumberVecs}}
+\index{GetNumberVecs@{GetNumberVecs}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{GetNumberVecs()}{GetNumberVecs()}}
+{\footnotesize\ttfamily static int Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Get\+Number\+Vecs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Obtain the number of vectors in the multivector. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00156}{156}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a0f59461c4b9163eca79807a349deb4ea}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a0f59461c4b9163eca79807a349deb4ea} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!GetVecLength@{GetVecLength}}
+\index{GetVecLength@{GetVecLength}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{GetVecLength()}{GetVecLength()}}
+{\footnotesize\ttfamily static int Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Get\+Vec\+Length (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Obtain the global length of the vector. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00143}{143}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aaebfcc1897c825815e9dbd4a3939cb0c}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_aaebfcc1897c825815e9dbd4a3939cb0c} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvAddMv@{MvAddMv}}
+\index{MvAddMv@{MvAddMv}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvAddMv()}{MvAddMv()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Add\+Mv (\begin{DoxyParamCaption}\item[{const double}]{alpha,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{const double}]{beta,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{B,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Replace {\ttfamily mv} with $\alpha A + \beta B$. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00197}{197}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_acb2e5efa75fb3970e1ecf716f10b4ee5}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_acb2e5efa75fb3970e1ecf716f10b4ee5} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvDot@{MvDot}}
+\index{MvDot@{MvDot}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvDot()}{MvDot()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{std\+::vector$<$ double $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute a vector {\ttfamily b} where the components are the individual dot-\/products of the {\ttfamily i-\/th} columns of {\ttfamily A} and {\ttfamily mv}, i.\+e. $ b[i] = * A[i]^Hmv[i] $. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00310}{310}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{oomph\+::\+Double\+Multi\+Vector\+::dot()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af1301c3616281ebea692c28378dfead1}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_af1301c3616281ebea692c28378dfead1} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvInit@{MvInit}}
+\index{MvInit@{MvInit}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvInit()}{MvInit()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const double}]{alpha = {\ttfamily Teuchos\+:\+:ScalarTraits$<$double$>$\+:\+:zero()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Replace each element of the vectors in {\ttfamily mv} with {\ttfamily alpha}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00419}{419}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{oomph\+::\+Double\+Multi\+Vector\+::initialise()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac6fd03656134d6fccd7113a6876ba97e}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac6fd03656134d6fccd7113a6876ba97e} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvNorm@{MvNorm}}
+\index{MvNorm@{MvNorm}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvNorm()}{MvNorm()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Norm (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{std\+::vector$<$ double $>$ \&}]{normvec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute the 2-\/norm of each individual vector of {\ttfamily mv}. Upon return, {\ttfamily normvec}\mbox{[}i\mbox{]} holds the value of $||mv_i||_2$, the {\ttfamily i-\/th} column of {\ttfamily mv}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00322}{322}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{oomph\+::\+Double\+Multi\+Vector\+::norm()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a52dc632ffd66eb35ad481c6d36d71960}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a52dc632ffd66eb35ad481c6d36d71960} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvPrint@{MvPrint}}
+\index{MvPrint@{MvPrint}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvPrint()}{MvPrint()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Print (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Print the {\ttfamily mv} multi-\/vector to the {\ttfamily os} output stream. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00433}{433}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad180ce9edf949c6e2b882b11cedeff8d}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ad180ce9edf949c6e2b882b11cedeff8d} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvRandom@{MvRandom}}
+\index{MvRandom@{MvRandom}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvRandom()}{MvRandom()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Random (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Replace the vectors in {\ttfamily mv} with random vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00404}{404}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a9e9e082eb66b9a5e31232de7df06a36d}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a9e9e082eb66b9a5e31232de7df06a36d} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvScale@{MvScale}}
+\index{MvScale@{MvScale}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvScale()}{MvScale()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const double}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Scale each element of the vectors in {\ttfamily mv} with {\ttfamily alpha}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00216}{216}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a75e3a2b5d0d65d3d5622205cd9b2ec37}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a75e3a2b5d0d65d3d5622205cd9b2ec37} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvScale@{MvScale}}
+\index{MvScale@{MvScale}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvScale()}{MvScale()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{const std\+::vector$<$ double $>$ \&}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Scale each element of the {\ttfamily i-\/th} vector in {\ttfamily mv} with {\ttfamily alpha}\mbox{[}i\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00224}{224}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a41445251a1d0c052e1b24f4b75abbe41}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a41445251a1d0c052e1b24f4b75abbe41} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvTimesMatAddMv@{MvTimesMatAddMv}}
+\index{MvTimesMatAddMv@{MvTimesMatAddMv}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvTimesMatAddMv()}{MvTimesMatAddMv()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Times\+Mat\+Add\+Mv (\begin{DoxyParamCaption}\item[{const double}]{alpha,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{const Teuchos\+::\+Serial\+Dense\+Matrix$<$ int, double $>$ \&}]{B,  }\item[{const double}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Update {\ttfamily mv} with $ \alpha AB + \beta mv $. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00162}{162}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a338f59059891bc045555e3283949c6fa}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a338f59059891bc045555e3283949c6fa} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!MvTransMv@{MvTransMv}}
+\index{MvTransMv@{MvTransMv}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{MvTransMv()}{MvTransMv()}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Mv\+Trans\+Mv (\begin{DoxyParamCaption}\item[{const double}]{alpha,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv,  }\item[{Teuchos\+::\+Serial\+Dense\+Matrix$<$ int, double $>$ \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute a dense matrix {\ttfamily B} through the matrix-\/matrix multiply $ \alpha A^Hmv $. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00241}{241}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac52b7e1d688acef2afc3636e1cf7a58a}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_ac52b7e1d688acef2afc3636e1cf7a58a} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!SetBlock@{SetBlock}}
+\index{SetBlock@{SetBlock}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{SetBlock()}{SetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Set\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{const std\+::vector$<$ int $>$ \&}]{index,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Copy the vectors in {\ttfamily A} to a set of vectors in {\ttfamily mv} indicated by the indices given in {\ttfamily index}. 
+
+The {\ttfamily numvecs} vectors in {\ttfamily A} are copied to a subset of vectors in {\ttfamily mv} indicated by the indices given in {\ttfamily index}, i.\+e.{\ttfamily  mv\mbox{[}index\mbox{[}i\mbox{]}\mbox{]} = A\mbox{[}i\mbox{]}}. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00339}{339}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+
+\Hypertarget{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a72a2dfbb096511d602ef03d0ec29b50a}\label{classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4_a72a2dfbb096511d602ef03d0ec29b50a} 
+\index{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}!SetBlock@{SetBlock}}
+\index{SetBlock@{SetBlock}!Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$@{Anasazi::MultiVecTraits$<$ double, oomph::DoubleMultiVector $>$}}
+\doxysubsubsection{\texorpdfstring{SetBlock()}{SetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void Anasazi\+::\+Multi\+Vec\+Traits$<$ double, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} $>$\+::\+Set\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{A,  }\item[{const Teuchos\+::\+Range1D \&}]{index,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{oomph\+::\+Double\+Multi\+Vector}} \&}]{mv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Deep copy of A into specified columns of mv. 
+
+(Deeply) copy the first {\ttfamily index.\+size()} columns of {\ttfamily A} into the columns of {\ttfamily mv} specified by the given index range.
+
+Postcondition\+: {\ttfamily mv\mbox{[}i\mbox{]} = A\mbox{[}i -\/ index.\+lbound()\mbox{]}} for all {\ttfamily i} in {\ttfamily \mbox{[}index.\+lbound(), index.\+ubound()\mbox{]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & \mbox{[}in\mbox{]} Source multivector \\
+\hline
+{\em index} & \mbox{[}in\mbox{]} Inclusive index range of columns of mv; index set of the target \\
+\hline
+{\em mv} & \mbox{[}out\mbox{]} Target multivector \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00371}{371}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__eigen__solver_8h}{trilinos\+\_\+eigen\+\_\+solver.\+h}}\end{DoxyCompactItemize}

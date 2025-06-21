@@ -1,0 +1,3038 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+// Header file for elements that are used to solar/Stefan Boltzmann radiation
+// and melting processes
+
+#ifndef OOMPH_HEAT_TRANSFER_AND_MELT_ELEMENTS_HEADER
+#define OOMPH_HEAT_TRANSFER_AND_MELT_ELEMENTS_HEADER
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+  #include <oomph-lib-config.h>
+#endif
+
+//Standard libray headers
+#include <cmath>
+
+// oomph-lib includes
+#include "generic.h" // ../generic/Qelements.h"
+
+
+namespace oomph
+{
+
+// hierher 
+
+/* //=======start_namespace========================================== */
+/* /// Namespace for intersection checker */
+/* //================================================================ */
+/* namespace IntersectionChecker */
+/* { */
+
+/*  /// Check if finite-length line segments specified by end points */
+/*  /// intersect (true) or not (false). From */
+/*  /// http://paulbourke.net/geometry/lineline2d/ */
+/*  /// C++ contribution by Damian Coventry. */
+/*  bool intersects(const Vector<Vector<double> >& first_segment_vertex, */
+/*                  const Vector<Vector<double> >& second_segment_vertex, */
+/*                  const double& epsilon_parallel=1.0e-15) */
+/*  { */
+  
+/*   double denom = ((first_segment_vertex[1][1] - first_segment_vertex[0][1])* */
+/*                   (second_segment_vertex[1][0] - second_segment_vertex[0][0])) - */
+/*    ((first_segment_vertex[1][0] - first_segment_vertex[0][0])* */
+/*     (second_segment_vertex[1][1] - second_segment_vertex[0][1])); */
+  
+/*   double nume_a = ((first_segment_vertex[1][0] - first_segment_vertex[0][0])* */
+/*                    (second_segment_vertex[0][1] - first_segment_vertex[0][1])) - */
+/*    ((first_segment_vertex[1][1] - first_segment_vertex[0][1])* */
+/*     (second_segment_vertex[0][0] - first_segment_vertex[0][0])); */
+  
+/*   double nume_b = ((second_segment_vertex[1][0] - second_segment_vertex[0][0])* */
+/*                    (second_segment_vertex[0][1] - first_segment_vertex[0][1])) - */
+/*    ((second_segment_vertex[1][1] - second_segment_vertex[0][1])* */
+/*     (second_segment_vertex[0][0] - first_segment_vertex[0][0])); */
+  
+/*   if(std::fabs(denom) < epsilon_parallel) */
+/*    { */
+/*     if( (std::fabs(nume_a) < epsilon_parallel) &&  */
+/*         (std::fabs(nume_b) < epsilon_parallel) ) */
+/*      { */
+/*       return false; //COINCIDENT; */
+/*      } */
+/*     return false; //PARALLEL; */
+/*    } */
+  
+/*   double ua = nume_a / denom; */
+/*   double ub = nume_b / denom; */
+  
+/*   if( (ua >= 0.0) && (ua <= 1.0) && (ub >= 0.0) && (ub <= 1.0) ) */
+/*    { */
+/*     /\* // Get the intersection point. *\/ */
+/*     /\* intersection[0] = second_segment_vertex[0][0] +  *\/ */
+/*     /\*  ua*(second_segment_vertex[1][0] - second_segment_vertex[0][0]); *\/ */
+/*     /\* intersection[1] = second_segment_vertex[0][1] +  *\/ */
+/*     /\*  ua*(second_segment_vertex[1][1] - second_segment_vertex[0][1]); *\/ */
+    
+/*     return true; //INTERESECTING; */
+/*    } */
+  
+/*   return false; //NOT_INTERESECTING; */
+/*  } */
+
+/* } */
+
+//end hierher
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+//======================================================================
+/// Template free base class for face elements that involve 
+/// all kinds of heat transfer operation. Used to store spatial dim of
+/// problem and the index at which the temperature is stored in the bulk element
+//======================================================================
+ class TemplateFreeUnsteadyHeatBaseFaceElement 
+ {
+  
+   public:
+  
+
+  /// Function pointer to the prescribed-flux function.
+  /// Flux is allowed to depend on the spatial
+  /// position, x, the outer unit normal, n, and the continuous time. 
+  /// We also allow a dependendence on actual local "temperature", u.
+  typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
+                                                  const Vector<double>& x, 
+                                                  const Vector<double>& n,
+                                                  const double& u,  
+                                                  double& flux);
+  
+  /// Constructor
+   TemplateFreeUnsteadyHeatBaseFaceElement() : U_index_ust_heat(0), 
+   Dim(0), Flux_fct_pt(0) 
+   {}
+ 
+ /// Destrutor
+ virtual ~TemplateFreeUnsteadyHeatBaseFaceElement(){}
+ 
+ /// Access function for the prescribed-flux function pointer
+ UnsteadyHeatPrescribedFluxFctPt& flux_fct_pt() {return Flux_fct_pt;}
+ 
+  protected:
+
+ /// Function to calculate the prescribed flux at a given spatial
+ /// position, x, the outer unit normal, n, and the continuous time. 
+ /// We also allow an explicit dependendence on the integration point, ipt,
+ /// and the actual local "temperature", u, in anticipation of
+ /// Stefan Boltzmann radiation. Virtual so it can be overloaded.
+ /// Note that the potential dependence on u makes the problem 
+ /// potentially nonlinear -- Jacobian is currently worked out 
+ /// by finite differencing.
+ virtual void get_flux(const unsigned& ipt,
+                       const double& time, 
+                       const Vector<double>& x, 
+                       const Vector<double>& n,
+                       const double& u,  
+                       double& flux)
+ {
+  //If the function pointer is zero return zero
+  if(Flux_fct_pt == 0)
+   {
+    flux=0.0;
+   }
+  //Otherwise call the function
+  else
+   {
+    (*Flux_fct_pt)(time,x,n,u,flux);
+   }
+ }
+
+ /// Index at which temperature is stored
+ unsigned U_index_ust_heat;
+
+ /// The spatial dimension of the problem
+ unsigned Dim;
+
+ /// Function pointer to the (global) prescribed-flux function
+ UnsteadyHeatPrescribedFluxFctPt Flux_fct_pt;
+ 
+};
+
+
+
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+// hierher
+
+/* //======================================================================= */
+/* /// Namespace containing default function that provides zero  */
+/* /// atmospheric radiation */
+/* //======================================================================= */
+/* namespace SolarRadiationHelper */
+/*  { */
+
+/*   //======================================================================= */
+/*   /// Default analytical radiation function in terms of time, position on */
+/*   /// melting surface and its outer unit normal; returns zero. */
+/*   //======================================================================= */
+/*   void Zero_analytical_radiation_fct(const double& time, */
+/*                                      const Vector<double> &x, */
+/*                                      const Vector<double>& N, */
+/*                                      double& radiation) */
+/*   { */
+/*    radiation=0.0; */
+/*   } */
+
+
+/*   //======================================================================= */
+/*   /// Default atmospheric radiation function in terms of time */
+/*   //======================================================================= */
+/*   void Zero_atmospheric_radiation_fct(const double& time, */
+/*                                       double& solar_flux_magnitude, */
+/*                                       Vector<double> &solar_flux_unit_vector,  */
+/*                                       double& total_diffuse_radiation) */
+/*   { */
+/*    solar_flux_magnitude=0.0; */
+/*    solar_flux_unit_vector[0]= 0.0; */
+/*    solar_flux_unit_vector[1]=-1.0; */
+/*    total_diffuse_radiation=0.0; */
+/*   } */
+  
+/* } */
+
+// end hierher
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+// hierher
+
+/* //====================================================================== */
+/* /// Base class for elements that are illuminated by solar radiation */
+/* //====================================================================== */
+/* class SolarRadiationBase : public virtual FiniteElement,  */
+/*                            public virtual FaceElement */
+/* { */
+ 
+/* public: */
+
+/*  /// Constructor */
+/*  SolarRadiationBase() */
+/*   {   */
+/*    // Assign default zero analytical radiation fct... */
+/*    Analytical_radiation_fct_pt= */
+/*     &SolarRadiationHelper::Zero_analytical_radiation_fct; */
+   
+/*    // ...but don't use it */
+/*    Use_analytical_radiation_fct=false; */
+
+/*    // Don't use tanh profile to smooth solar shadows */
+/*    Smoothed_sun_shadow=false; */
+   
+/*    // Factor for tanh profile to smooth solar shadows */
+/*    Alpha_tanh_smooth_sun_shadow=100.0; */
+   
+/*    // Assign default zero atmospheric radiation fct... */
+/*    Atmospheric_radiation_fct_pt= */
+/*     &SolarRadiationHelper::Zero_atmospheric_radiation_fct; */
+   
+/*    // Make space for limiting angles for diffuse radiation */
+/*    unsigned n_intpt = integral_pt()->nweight(); */
+/*    Diffuse_limit_angles.resize(n_intpt); */
+/*    for (unsigned i=0;i<n_intpt;i++) */
+/*     { */
+/*      Diffuse_limit_angles[i].first=0.0; */
+/*      Diffuse_limit_angles[i].second=MathematicalConstants::Pi; */
+/*     } */
+/*   } */
+
+
+/*  /// Enable smoothing of shadow; optional argument provides */
+/*  /// value for tanh smoothing factor (defaults to 100) */
+/*  void enable_smoothed_sun_shadow(const double& alpha_tanh_smooth_sun_shadow= */
+/*                                  100.0) */
+/*  { */
+/*   Smoothed_sun_shadow=true; */
+/*   Alpha_tanh_smooth_sun_shadow=alpha_tanh_smooth_sun_shadow; */
+/*  } */
+
+/*  /// Disable smoothing of shadow */
+/*  void disable_smoothed_sun_shadow() */
+/*  { */
+/*   Smoothed_sun_shadow=false; */
+/*  } */
+
+/*  /// Disable smoothing of shadow */
+/*  bool smoothed_sun_shadow_is_enabled() */
+/*  { */
+/*   return Smoothed_sun_shadow; */
+/*  } */
+
+
+/*  /// Value for tanh smoothing factor (read only -- set with enable... fct; */
+/*  /// only used if enabled!) */
+/*  double alpha_tanh_smooth_sun_shadow() */
+/*  { */
+/*   return Alpha_tanh_smooth_sun_shadow; */
+/*  } */
+
+
+/*  /// Reference to the analytical radiation function pointer */
+/*  void (* &analytical_radiation_fct_pt())(const double& time, */
+/*                                           const Vector<double>& x, */
+/*                                           const Vector<double>& n, */
+/*                                           double& radiation) */
+/*   {return Analytical_radiation_fct_pt;} */
+
+
+/*  /// Reference to the atmospheric radiation function pointer */
+/*  void (* &atmospheric_radiation_fct_pt())(const double& time, */
+/*                                           double &solar_flux_magnitude, */
+/*                                           Vector<double>& */
+/*                                           solar_flux_unit_vector,  */
+/*                                           double& total_diffuse_radiation) */
+/*   {return Atmospheric_radiation_fct_pt;} */
+
+ 
+/*  /// Enable use of analytical radiation function  */
+/*  void enable_analytical_radiation_fct_pt() */
+/*   { */
+/*    Use_analytical_radiation_fct=true; */
+/*   } */
+
+/*  /// Disable use of analytical radiation function  */
+/*  void disable_analytical_radiation_fct_pt() */
+/*   { */
+/*    Use_analytical_radiation_fct=false; */
+/*   } */
+ 
+/*  /// Update limiting angles for diffuse radiation, given the */
+/*  /// pointers to nodes that make up the "upper boundary" */
+/*  /// that can potentially shield the integration points from diffuse */
+/*  /// radiation */
+/*  void update_limiting_angles(const Vector<Node*>&  */
+/*                              shielding_node_pt); */
+
+
+/*  /// Get the atmospheric radiation as fct of integration point */
+/*  /// index, time, Eulerian coordinate and outer unit normal. Virtual  */
+/*  /// so it can be overloaded in multiphysics problems */
+/*  virtual double atmospheric_radiation(const unsigned& intpt, */
+/*                                       const double& time, */
+/*                                       const Vector<double>& x, */
+/*                                       const Vector<double>& n); */
+
+
+
+/*  /// Output cone of diffuse radiation for all integration points */
+/*  void output_diffuse_radiation_cone(std::ostream &outfile, */
+/*                                     const double& radius); */
+ 
+
+/*  /// Output illumination angles for all integration points */
+/*  void output_limiting_angles(std::ostream &outfile); */
+
+
+/*  /// Output diffuse and direct radiation */
+/*  void output_atmospheric_radiation(std::ostream &outfile); */
+ 
+/* protected: */
+
+/*  /// Use tanh profile to smooth solar shadows */
+/*  bool Smoothed_sun_shadow; */
+
+/*  /// Factor for tanh profile to smooth solar shadows */
+/*  double Alpha_tanh_smooth_sun_shadow; */
+
+ 
+/*  /// Boolean to indicate the analytically prescribed radiation */
+/*  /// fct (radiation flux as fct of x,n,t) should be used */
+/*  /// rather than radiative flux based on direct and diffuse solar */
+/*  /// flux. */
+/*  bool Use_analytical_radiation_fct; */
+ 
+/*  /// Vector of pairs storing max. and minimum angle for exposure */
+/*  /// to diffuse atmospheric radiation for each integration point. */
+/*  /// Initialised to 0 and pi (full radiation from semicircle above  */
+/*  /// integration point) */
+/*  Vector<std::pair<double,double> > Diffuse_limit_angles; */
+
+/*  /// Pointer to function that specifies atmospheric */
+/*  /// radiation in terms of directional solar flux (unit vector and magnitude) */
+/*  /// and total diffusive radiation (which is later weighted by diffuse limiting */
+/*  /// angles). Input argument: time. */
+/*  void (*Atmospheric_radiation_fct_pt)(const double& time, */
+/*                                       double& solar_flux_magnitude, */
+/*                                       Vector<double> &solar_flux_unit_vector,  */
+/*                                       double& total_diffuse_radiation); */
+
+/*  /// Pointer to analytical radiation function. Arguments: */
+/*  /// Time, Eulerian coordinate and outer unit normal. Returns  */
+/*  /// heat flux. Only used for validation */
+/*  void (*Analytical_radiation_fct_pt)(const double& time, */
+/*                                      const Vector<double> &x,  */
+/*                                      const Vector<double> &n, */
+/*                                      double& radiation); */
+
+
+/*   private: */
+
+/*  /// Private helper function to check if the straight line */
+/*  /// connecting (x_prev,y_prev) and (x_next,y_next) jumps */
+/*  /// quadrants (in which case crossing_quadrants is returned as true) */
+/*  /// and what increment to the winding number this results in. */
+/*  /// Error (indicated by no_problem being false) occurs if  */
+/*  /// the line crosses the origin exactly in which case we're */
+/*  /// stuffed. Diagnostics are returned in error string. */
+/*  void check_quadrant_jump(const double& x_prev, */
+/*                           const double& y_prev, */
+/*                           const double& x_next, */
+/*                           const double& y_next, */
+/*                           bool& crossing_quadrants, */
+/*                           int& n_winding_increment, */
+/*                           std::string& error_string, */
+/*                           bool& no_problem); */
+ 
+/* }; */
+
+
+
+
+/* //===================================================================== */
+/* /// Get the atmospheric radiation as fct of integration point */
+/* /// index, time, Eulerian coordinate and outer unit normal. Virtual  */
+/* /// so it can be overloaded in multiphysics problems */
+/* //===================================================================== */
+/* double SolarRadiationBase::atmospheric_radiation(const unsigned& intpt, */
+/*                                                  const double& time, */
+/*                                                  const Vector<double>& x, */
+/*                                                  const Vector<double>& n) */
+/* { */
+/*  double radiation=0.0; */
+/*  if (Use_analytical_radiation_fct) */
+/*   { */
+/*    Analytical_radiation_fct_pt(time,x,n,radiation); */
+/*   } */
+/*  else */
+/*   { */
+/*    unsigned n_dim = this->nodal_dimension(); */
+/*    double solar_flux_magnitude=0.0; */
+/*    Vector<double> solar_flux_unit_vector(n_dim); */
+/*    double total_diffuse_radiation=0.0; */
+/*    Atmospheric_radiation_fct_pt(time,solar_flux_magnitude, */
+/*                                 solar_flux_unit_vector, */
+/*                                 total_diffuse_radiation); */
+   
+/*    // Diffuse radiation from opening angle */
+/*    //------------------------------------- */
+/*    double phi_exposed=Diffuse_limit_angles[intpt].second- */
+/*     Diffuse_limit_angles[intpt].first; */
+/*    if (phi_exposed>0.0) */
+/*     { */
+/*      radiation+=total_diffuse_radiation*phi_exposed/ */
+/*       MathematicalConstants::Pi; */
+/*     } */
+   
+/* //#ifdef PARANOID // hierher paranoidify */
+/*    if (phi_exposed>MathematicalConstants::Pi) */
+/*     { */
+/*      std::stringstream error_message; */
+/*      error_message << "Exposure angle " << phi_exposed  */
+/*                    << " greater than 180^o at ( " */
+/*                    << x[0] << " , " << x[1] << " )"; */
+/*      throw OomphLibError(error_message.str(), */
+/*                          "SolarRadiationBase::atmospheric_radiation()", */
+/*                          OOMPH_EXCEPTION_LOCATION); */
+/*     } */
+/* //#endif */
+   
+/*    // Direct radiation (with directional cosine and ignore */
+/*    //----------------------------------------------------- */
+/*    // shielded bits) */
+/*    //--------------- */
+   
+   
+/*    // Cos of angle between outer unit normal and direct solar flux */
+/*    double cos_angle=-(n[0]*solar_flux_unit_vector[0]+ */
+/*                       n[1]*solar_flux_unit_vector[1]); */
+   
+/*    // No further contributions if we're pointing away from the sun */
+/*    if (cos_angle>0.0) */
+/*     { */
+/*      // Angle that the incoming solar radiation makes  */
+/*      // with the horizontal */
+/*      double theta=atan2(solar_flux_unit_vector[0],-solar_flux_unit_vector[1]); */
+/*      double phi=0.5*MathematicalConstants::Pi+theta; */
+     
+     
+/*      // Bounding angles of visibility */
+/*      double phi_min=Diffuse_limit_angles[intpt].first; */
+/*      double phi_max=Diffuse_limit_angles[intpt].second; */
+     
+/*      // Is the sun visible? */
+/*      if (Smoothed_sun_shadow) */
+/*       { */
+/*        // Smooth shadow */
+/*        double tanh_factor= */
+/*         0.5*(-tanh(Alpha_tanh_smooth_sun_shadow*(phi-phi_max)) */
+/*              -tanh(Alpha_tanh_smooth_sun_shadow*(phi_min-phi))); */
+/*        radiation+=cos_angle*solar_flux_magnitude*tanh_factor; */
+/*       } */
+/*      else */
+/*       { */
+/*        // Hard shadow */
+/*        if (phi>phi_min) */
+/*         { */
+/*          if (phi<phi_max) */
+/*           { */
+/*            radiation+=cos_angle*solar_flux_magnitude; */
+/*           } */
+/*         } */
+/*       } */
+/*     } */
+/*   } */
+ 
+/*  return radiation; */
+/* } */
+
+
+/* //==================================================================== */
+/* /// Private helper function to check if the straight line */
+/* /// connecting (x_prev,y_prev) and (x_next,y_next) jumps */
+/* /// quadrants (in which case crossing_quadrants is returned as true) */
+/* /// and what increment to the winding number this results in. */
+/* /// Error (indicated by no_problem being false) occurs if  */
+/* /// the line crosses the origin exactly in which case we're */
+/* /// stuffed. Diagnostics are returned in error string. */
+/* //==================================================================== */
+/* void SolarRadiationBase::check_quadrant_jump(const double& x_prev, */
+/*                                              const double& y_prev, */
+/*                                              const double& x_next, */
+/*                                              const double& y_next, */
+/*                                              bool& crossing_quadrants, */
+/*                                              int& n_winding_increment, */
+/*                                              std::string& error_string, */
+/*                                              bool& no_problem) */
+/* { */
+/*  // Sanity check: We have to keep track of winding numbers */
+/*  // but we're stuffed if we our discrete increments in coordinates */
+/*  // jump diagonally across quadrants... */
+/*  std::stringstream error_message; */
+/*  no_problem=true; */
+/*  crossing_quadrants=false; */
+ 
+/*  // y coordinate of intersection with x axis */
+/*  double y_intersect=0.0; */
+/*  double denom=x_next-x_prev; */
+ 
+/*  // If denominator is zero then we're intersection exactly */
+/*  // at the sample point and we're absolutely screwed. This */
+/*  // really shouldn't happen. */
+/*  if (denom!=0.0) */
+/*   { */
+/*    y_intersect=y_prev-(y_next-y_prev)*x_prev/denom; */
+/*   } */
+/*  if ((x_prev>0.0)&&(y_prev>0.0)&&(x_next<0.0)&&(y_next<0.0)) */
+/*   { */
+/*    crossing_quadrants=true; */
+/*    error_message << "Jumped from upper right quadrant to lower left one\n"; */
+/*    oomph_info    << "Jumped from upper right quadrant to lower left one\n"; */
+/*    if (y_intersect==0.0) */
+/*     { */
+/*      error_message << "..and cannot be repaired!\n"; */
+/*      no_problem=false; */
+/*     } */
+/*    // Path crosses the positive x axis: No winding */
+/*    else if (y_intersect<0.0) */
+/*     { */
+/*      n_winding_increment=0; */
+/*     } */
+/*    // Path crosses the negative x axis from above: increase winding number */
+/*    else if (y_intersect>0.0) */
+/*     { */
+/*      n_winding_increment=1; */
+/*     } */
+/*   } */
+/*  else if ((x_prev<0.0)&&(y_prev<0.0)&&(x_next>0.0)&&(y_next>0.0)) */
+/*   { */
+/*    crossing_quadrants=true; */
+/*    error_message << "Jumped from lower left quadrant to upper right one\n"; */
+/*    oomph_info    << "Jumped from lower left quadrant to upper right one\n"; */
+/*    if (y_intersect==0.0) */
+/*     { */
+/*      error_message << "..and cannot be repaired!\n"; */
+/*      no_problem=false; */
+/*     } */
+/*    // Path crosses the positive x axis: No winding */
+/*    else if (y_intersect<0.0) */
+/*     { */
+/*      n_winding_increment=0; */
+/*     } */
+/*    // Path crosses the negative x axis from below: reduce winding number */
+/*    else if (y_intersect>0.0) */
+/*     { */
+/*      n_winding_increment=-1; */
+/*     } */
+/*   } */
+/*  else if ((x_prev<0.0)&&(y_prev>0.0)&&(x_next>0.0)&&(y_next<0.0)) */
+/*   { */
+/*    crossing_quadrants=true; */
+/*    error_message << "Jumped from upper left quadrant to lower right one\n"; */
+/*    oomph_info    << "Jumped from upper left quadrant to lower right one\n"; */
+/*    if (y_intersect==0.0) */
+/*     { */
+/*      error_message << "..and cannot be repaired!\n"; */
+/*      no_problem=false; */
+/*     } */
+/*    // Path crosses the positive x axis: No winding */
+/*    else if (y_intersect<0.0) */
+/*     { */
+/*      n_winding_increment=0; */
+/*     } */
+/*    // Path crosses the negative x axis from above: increase winding number */
+/*    else if (y_intersect>0.0) */
+/*     { */
+/*      n_winding_increment=1; */
+/*     } */
+/*   } */
+/*  else if ((x_prev>0.0)&&(y_prev<0.0)&&(x_next<0.0)&&(y_next>0.0)) */
+/*   { */
+/*    crossing_quadrants=true; */
+/*    error_message << "Jumped from lower right quadrant to upper left one\n"; */
+/*    oomph_info    << "Jumped from lower right quadrant to upper left one\n"; */
+/*    if (y_intersect==0.0) */
+/*     { */
+/*      error_message << "..and cannot be repaired!\n"; */
+/*      no_problem=false; */
+/*     } */
+/*    // Path crosses the positive x axis: No winding */
+/*    else if (y_intersect>0.0) */
+/*     { */
+/*      n_winding_increment=0; */
+/*     } */
+/*    // Path crosses the negative x axis from below: decrease winding number */
+/*    else if (y_intersect<0.0) */
+/*     { */
+/*      n_winding_increment=-1; */
+/*     } */
+/*   } */
+/* } */
+
+/* //===================================================================== */
+/* /// Update limiting angles for diffuse radiation, given the */
+/* /// Vector of pointers to nodes that make up the "upper boundary" */
+/* /// that can potentially shield the integration points from diffuse */
+/* /// radiation */
+/* //===================================================================== */
+/*  void SolarRadiationBase::update_limiting_angles(const Vector<Node*>&  */
+/*                                                  shielding_node_pt) */
+/* { */
+
+/*  // Search through all shielding nodes and find the */
+/*  // bounding ones for this element */
+/*  Node* first_vertex_node_pt=node_pt(0); */
+/*  unsigned nnod_el=nnode(); */
+/*  Node* second_vertex_node_pt=node_pt(nnod_el-1); */
+
+/*  // Find left and rightmost node of element in shielding_node_pt vector: */
+/*  unsigned j_left=0; */
+/*  bool found=false; */
+/*  unsigned nnod=shielding_node_pt.size(); */
+/*  for (unsigned j=0;j<nnod;j++) */
+/*   { */
+/*    // We come from the left so we're definitely meeting the leftmost */
+/*    // node */
+/*    if ((shielding_node_pt[j]==first_vertex_node_pt)|| */
+/*        (shielding_node_pt[j]==second_vertex_node_pt)) */
+/*     { */
+/*      j_left=j; */
+/*      found=true; */
+/*      break; */
+/*     } */
+/*   } */
+/*  unsigned j_right=j_left+1; */
+
+/*  // Did we succeed? */
+/*  if (!found) */
+/*   { */
+/*    throw OomphLibError("Failed to find leftmost node in shielding_node_pt", */
+/*                        "SolarRadiationBase::update_limiting_angles", */
+/*                        OOMPH_EXCEPTION_LOCATION); */
+/*   } */
+
+/*  //Set the value of n_intpt */
+/*  unsigned n_intpt = integral_pt()->nweight(); */
+
+/*  // Spatial dimension of the nodes */
+/*  unsigned n_dim = this->nodal_dimension(); */
+/*  Vector<double> x(n_dim); */
+/*  Vector<double> s(n_dim-1); */
+
+/*  //Loop over the integration points */
+/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
+/*   { */
+
+/*    // Local coordinate of integration point */
+/*    for (unsigned i=0;i<n_dim-1;i++) */
+/*     { */
+/*      s[i]=integral_pt()->knot(ipt,i); */
+/*     } */
+
+/*    // No recycling of shape fcts -- may as well call interpolated_x */
+/*    // directly */
+/*    this->interpolated_x(s,x); */
+
+/*    // Loop over all potential shielding nodes to the left to find */
+/*    // minimum angle */
+/*    int n_winding=0; */
+
+/*    // Initial point */
+/*    Node* nod_pt=shielding_node_pt[0]; */
+
+/*    // Coordinate relative to sampling point */
+/*    double x_prev=nod_pt->x(0)-x[0]; */
+/*    double y_prev=nod_pt->x(1)-x[1]; */
+
+/*    // Angle against x-axis relative to sampling point */
+/*    double phi_prev=atan2(y_prev,x_prev); */
+
+/*    // Current best guess for minimum angle to the left */
+/*    double phi_left=phi_prev; */
+
+/*    // Loop over all other nodes */
+/*    for (unsigned j=1;j<=j_left;j++) */
+/*     { */
+/*      Node* nod_pt=shielding_node_pt[j]; */
+/*      double x_next=nod_pt->x(0)-x[0]; */
+/*      double y_next=nod_pt->x(1)-x[1]; */
+/*      double phi_next=atan2(y_next,x_next); */
+     
+     
+/*      // Sanity check: We have to keep track of winding numbers */
+/*      // but we're stuffed if we our discrete increments in coordinates */
+/*      // jump diagonally across quadrants... */
+/*      std::string error_string; */
+/*      bool no_problem=true; */
+/*      bool crossing_quadrants=false; */
+/*      int n_winding_increment=0; */
+
+/*      // Check if we've crossed quadrants */
+/*      check_quadrant_jump(x_prev, */
+/*                          y_prev, */
+/*                          x_next, */
+/*                          y_prev, */
+/*                          crossing_quadrants, */
+/*                          n_winding_increment, */
+/*                          error_string, */
+/*                          no_problem); */
+
+/*      // Success? */
+/*      if (no_problem) */
+/*       { */
+/*        n_winding+=n_winding_increment; */
+/*       } */
+/*      // Complain bitterly */
+/*      else */
+/*       { */
+/*        std::stringstream error_message; */
+/*        error_message << error_string; */
+/*        error_message << "\n x/y_prev, x/y_next:"  */
+/*                      << x_prev << " " */
+/*                      << y_prev << " "   */
+/*                      << x_next << " "  */
+/*                      << y_next << " "<< std::endl;  */
+/*        error_message << "for point at "  */
+/*                      << x[0] << " " << x[1] << std::endl; */
+/*        error_message << "chain of shielding nodes on left:\n"; */
+/*        for (unsigned jj=1;jj<=j_left;jj++) */
+/*         { */
+/*          Node* nnod_pt=shielding_node_pt[jj]; */
+/*          error_message << nnod_pt->x(0) << " "  */
+/*                        << nnod_pt->x(1) << "\n";  */
+/*         } */
+/*        throw OomphLibError( */
+/*         error_message.str(), */
+/*         "SolarRadiationBase::update_limiting_angles()", */
+/*         OOMPH_EXCEPTION_LOCATION); */
+/*       } */
+
+/*      // If we're crossing the x axis to the left of the origin */
+/*      // without jumping across quadrants we */
+/*      // have to adjust the winding number  */
+/*      if (!crossing_quadrants) */
+/*       { */
+/*        if ((x_prev<0.0)&&(x_next<0.0)) */
+/*         { */
+/*          if ((y_prev>=0.0)&&(y_next<0.0)) */
+/*           { */
+/*            n_winding+=1; */
+/*           } */
+/*          else if ((y_prev<0.0)&&(y_next>=0.0)) */
+/*           { */
+/*            n_winding-=1; */
+/*           }        */
+/*         } */
+/*       } */
+     
+/*      // Correct angle by winding */
+/*      phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi; */
+      
+/*      // Is it smaller? */
+/*      if (phi_next<phi_left) */
+/*       { */
+/*        phi_left=phi_next; */
+/*       } */
+     
+/*      // Bump up */
+/*      x_prev=x_next; */
+/*      y_prev=y_next; */
+/*      phi_prev=phi_next; */
+/*     } */
+
+
+/*    // Loop over all potential shielding nodes to the right to find */
+/*    // maximum angle */
+/*    n_winding=0; */
+
+/*    // Initial point */
+/*    nod_pt=shielding_node_pt[j_right]; */
+
+/*    // Coordinate relative to sampling point */
+/*    x_prev=nod_pt->x(0)-x[0]; */
+/*    y_prev=nod_pt->x(1)-x[1]; */
+
+/*    // Angle against x-axis relative to sampling point */
+/*    phi_prev=atan2(y_prev,x_prev); */
+
+/*    // Current best guess for maximum angle to the right */
+/*    double phi_right=phi_prev; */
+   
+/*    // Loop over all other nodes */
+/*    for (unsigned j=j_right+1;j<nnod;j++) */
+/*     { */
+/*      Node* nod_pt=shielding_node_pt[j]; */
+/*      double x_next=nod_pt->x(0)-x[0]; */
+/*      double y_next=nod_pt->x(1)-x[1]; */
+/*      double phi_next=atan2(y_next,x_next); */
+
+/*      // Sanity check: We have to keep track of winding numbers */
+/*      // but we're stuffed if we our discrete increments in coordinates */
+/*      // jump diagonally across quadrants... */
+/*      std::string error_string; */
+/*      bool no_problem=true; */
+/*      bool crossing_quadrants=false; */
+/*      int n_winding_increment=0; */
+
+/*      // Check if we've crossed quadrants */
+/*      check_quadrant_jump(x_prev, */
+/*                          y_prev, */
+/*                          x_next, */
+/*                          y_prev, */
+/*                          crossing_quadrants, */
+/*                          n_winding_increment, */
+/*                          error_string, */
+/*                          no_problem); */
+
+/*      // Success? */
+/*      if (no_problem) */
+/*       { */
+/*        n_winding+=n_winding_increment; */
+/*       } */
+/*      // Complain bitterly */
+/*      else */
+/*       { */
+/*        std::stringstream error_message; */
+/*        error_message << error_string; */
+/*        error_message << "\n x/y_prev, x/y_next:"  */
+/*                      << x_prev << " " */
+/*                      << y_prev << " "   */
+/*                      << x_next << " "  */
+/*                      << y_next << " "<< std::endl;  */
+/*        error_message << "for point at "  */
+/*                      << x[0] << " " << x[1] << std::endl; */
+/*        error_message << "chain of shielding nodes on right:\n"; */
+/*        for (unsigned jj=j_right;jj<nnod;jj++) */
+/*         { */
+/*          Node* nnod_pt=shielding_node_pt[jj]; */
+/*          error_message << nnod_pt->x(0) << " "  */
+/*                        << nnod_pt->x(1) << "\n";  */
+/*         } */
+/*        throw OomphLibError( */
+/*         error_message.str(), */
+/*         "SolarRadiationBase::update_limiting_angles()", */
+/*         OOMPH_EXCEPTION_LOCATION); */
+/*       } */
+     
+     
+/*      // If we're crossing the x axis to the left of the origin */
+/*      // without jumping across quadrants we */
+/*      // have to adjust the winding number  */
+/*      if (!crossing_quadrants) */
+/*       { */
+/*        if ((x_prev<0.0)&&(x_next<0.0)) */
+/*         { */
+/*          if ((y_prev>=0.0)&&(y_next<0.0)) */
+/*           { */
+/*            n_winding+=1; */
+/*           } */
+/*          else if ((y_prev<0.0)&&(y_next>=0.0)) */
+/*           { */
+/*            n_winding-=1; */
+/*           }        */
+/*         } */
+/*       } */
+     
+/*      // Correct angle by winding */
+/*      phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi; */
+
+/*      // Is it bigger? */
+/*      if (phi_next>phi_right) */
+/*       { */
+/*        phi_right=phi_next; */
+/*       } */
+     
+/*      // Bump up */
+/*      x_prev=x_next; */
+/*      y_prev=y_next; */
+/*      phi_prev=phi_next; */
+/*     } */
+
+/*    Diffuse_limit_angles[ipt].first=phi_right;    */
+/*    Diffuse_limit_angles[ipt].second=phi_left;    */
+/*   } */
+/* } */
+
+
+
+/* //===================================================================== */
+/* /// Output cone of diffuse radiation for all integration points */
+/* //===================================================================== */
+/* void SolarRadiationBase::output_diffuse_radiation_cone( */
+/*  std::ostream &outfile, const double& radius) */
+/* { */
+/*  //Set the value of n_intpt */
+/*  unsigned n_intpt = integral_pt()->nweight(); */
+
+/*  // Spatial dimension of the nodes */
+/*  unsigned n_dim = this->nodal_dimension(); */
+/*  Vector<double> x(n_dim); */
+/*  Vector<double> s(n_dim-1); */
+
+/*  //Loop over the integration points */
+/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
+/*   { */
+/*    outfile << "ZONE\n"; */
+
+/*    // Local coordinate of integration point */
+/*    for (unsigned i=0;i<n_dim-1;i++) */
+/*     { */
+/*      s[i]=integral_pt()->knot(ipt,i); */
+/*     } */
+   
+/*    // No recycling of shape fcts -- may as well call interpolated_x */
+/*    // directly */
+/*    this->interpolated_x(s,x); */
+   
+/*    double phi_min=Diffuse_limit_angles[ipt].first; */
+/*    double phi_max=Diffuse_limit_angles[ipt].second; */
+   
+/*    outfile << x[0]+radius*cos(phi_min) << " "  */
+/*            << x[1]+radius*sin(phi_min) << "\n"  */
+/*            << x[0] << " "  */
+/*            << x[1] << "\n"  */
+/*            << x[0]+radius*cos(phi_max) << " "  */
+/*            << x[1]+radius*sin(phi_max) << "\n"; */
+/*   } */
+/* } */
+
+
+
+/* //===================================================================== */
+/* /// Output illumination angles for all integration points */
+/* //===================================================================== */
+/* void SolarRadiationBase::output_limiting_angles(std::ostream &outfile) */
+/* { */
+/*  //Set the value of n_intpt */
+/*  unsigned n_intpt = integral_pt()->nweight(); */
+
+/*  // Spatial dimension of the nodes */
+/*  unsigned n_dim = this->nodal_dimension(); */
+/*  Vector<double> x(n_dim); */
+/*  Vector<double> s(n_dim-1); */
+/*  Vector<double> normal(n_dim); */
+
+/*  //Loop over the integration points */
+/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
+/*   { */
+/*    outfile << "ZONE\n"; */
+
+/*    // Local coordinate of integration point */
+/*    for (unsigned i=0;i<n_dim-1;i++) */
+/*     { */
+/*      s[i]=integral_pt()->knot(ipt,i); */
+/*     } */
+   
+/*    // No recycling of shape fcts -- may as well call interpolated_x */
+/*    // directly */
+/*    this->interpolated_x(s,x); */
+   
+/*    // Get outer unit normal */
+/*    this->outer_unit_normal(s,normal); */
+
+/*    double phi_min=Diffuse_limit_angles[ipt].first; */
+/*    double phi_max=Diffuse_limit_angles[ipt].second; */
+   
+/*    outfile << x[0] << " "  */
+/*            << x[1] << " "  */
+/*            << normal[0] << " "  */
+/*            << normal[1] << " " */
+/*            << phi_min << " " */
+/*            << phi_max << "\n"; */
+    
+/*   } */
+/* } */
+
+
+
+
+/* //===================================================================== */
+/* /// Output illumination angles for all integration points */
+/* //===================================================================== */
+/* void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile) */
+/* { */
+
+/*  // Get time from first node */
+/*  double time=node_pt(0)->time_stepper_pt()->time_pt()->time(); */
+
+/*  //Set the value of n_intpt */
+/*  unsigned n_intpt = integral_pt()->nweight(); */
+ 
+/*  // Spatial dimension of the nodes */
+/*  unsigned n_dim = this->nodal_dimension(); */
+/*  Vector<double> x(n_dim); */
+/*  Vector<double> s(n_dim-1); */
+/*  Vector<double> normal(n_dim); */
+
+/*  //Loop over the integration points */
+/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
+/*   { */
+/*    outfile << "ZONE\n"; */
+
+/*    // Local coordinate of integration point */
+/*    for (unsigned i=0;i<n_dim-1;i++) */
+/*     { */
+/*      s[i]=integral_pt()->knot(ipt,i); */
+/*     } */
+   
+/*    // No recycling of shape fcts -- may as well call interpolated_x */
+/*    // directly */
+/*    this->interpolated_x(s,x); */
+   
+/*    // Get outer unit normal */
+/*    this->outer_unit_normal(s,normal); */
+
+/*    // Get radiation */
+/*    double radiation=atmospheric_radiation(ipt, */
+/*                                           time, */
+/*                                           x, */
+/*                                           normal); */
+   
+/*    // output */
+/*    outfile << x[0] << " "  */
+/*            << x[1] << " "  */
+/*            << radiation << " " */
+/*            << normal[0] << " "  */
+/*            << normal[1] << "\n"; */
+    
+/*   } */
+/* } */
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////// */
+
+
+
+/* //====================================================================== */
+/* /// Base class for elements that are illuminated by (and illuminate) */
+/* /// other Stefan Boltzmann elements */
+/* //====================================================================== */
+/* class StefanBoltzmannRadiationBase :  */
+/* public virtual FiniteElement,  */
+/*  public virtual FaceElement,  */
+/*  public virtual TemplateFreeUnsteadyHeatBaseFaceElement  */
+/* { */
+ 
+/* public: */
+
+/*  /// Constructor */
+/*  StefanBoltzmannRadiationBase() */
+/*   {      */
+/*    // Pointer to non-dim Stefan Boltzmann constant */
+/*    Sigma_pt=0; */
+   
+/*    // Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law */
+/*    Theta_0_pt=0; */
+   
+/*    // Make space for Stefan Boltzmann illumination info    */
+/*    unsigned n_intpt = integral_pt()->nweight(); */
+/*    Stefan_boltzmann_illumination_info.resize(n_intpt); */
+/*   } */
+ 
+/*  /// Pointer to non-dim Stefan Boltzmann constant */
+/*  double*& sigma_pt(){return Sigma_pt;} */
+ 
+/*  /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law */
+/*  double*& theta_0_pt(){return Theta_0_pt;} */
+
+/*  /// Non-dim Stefan Boltzmann constant (switched off by default) */
+/*  double sigma() */
+/*   { */
+/*    if (Sigma_pt==0) */
+/*     { */
+/*      return 0.0; */
+/*     } */
+/*    else */
+/*     { */
+/*      return *Sigma_pt; */
+/*     } */
+/*   } */
+
+/*  /// Non-dim zero centrigrade offset in Stefan Boltzmann law */
+/*  /// (must be set if effect is enabled i.e. if non-default */
+/*  /// non-dim Stefan Boltzmann constant has been set) */
+/*  double theta_0() */
+/*   { */
+/*    if (Sigma_pt==0) */
+/*     { */
+/*      return 0.0; */
+/*     } */
+/*    else */
+/*     { */
+/*      if (Theta_0_pt==0) */
+/*       { */
+/*        throw OomphLibError("Non-dim zero-centrigrade offset not set", */
+/*                            "StefanBoltzmannRadiationBase", */
+/*                            OOMPH_EXCEPTION_LOCATION); */
+/*       } */
+/*      else */
+/*       { */
+/*        return *Theta_0_pt; */
+/*       } */
+/*     } */
+/*   } */
+
+
+/*  /// Compute the incoming Stefan Boltzmann radiation */
+/*  /// onto integration point ipt -- input externally pre-computed */
+/*  /// Eulerian coordinate of illuminated integration point, r_illuminated,  */
+/*  /// and outer unit normal to that point, n_illuminated.  */
+/*  double incoming_stefan_boltzmann_radiation(const unsigned& ipt, */
+/*                                             const Vector<double>& r_illuminated, */
+/*                                             const Vector<double>& n_illuminated) */
+/*  { */
+/*   // Initialise flux */
+/*   double flux=0.0; */
+
+/*   /// Number of contributing elements */
+/*   unsigned n_contrib=Stefan_boltzmann_illumination_info[ipt].size(); */
+/*   for (unsigned e=0;e<n_contrib;e++) */
+/*    { */
+/*     // Pointer to contributing element */
+/*     StefanBoltzmannRadiationBase* el_pt= */
+/*      Stefan_boltzmann_illumination_info[ipt][e].first; */
+    
+/*     // Indices of integration points that contribute */
+/*     Vector<unsigned> visible_integration_points= */
+/*      Stefan_boltzmann_illumination_info[ipt][e].second; */
+    
+/*     // Add contribution */
+/*     flux+=el_pt->contribution_to_stefan_boltzmann_radiation */
+/*      (r_illuminated,n_illuminated,visible_integration_points);  */
+/*    } */
+  
+/*   return flux; */
+/*  } */
+
+
+/*  /// Compute the element's contribution to Stefan Boltzmann  */
+/*  /// radiation onto point at r_illuminated with local outer unit  */
+/*  /// normal n_illuminated, */
+/*  /// using the integration points (in current element) contained */
+/*  /// in visible_intpts_in_current_element. */
+/*  double contribution_to_stefan_boltzmann_radiation( */
+/*   const Vector<double>& r_illuminated, */
+/*   const Vector<double>& n_illuminated, */
+/*   const Vector<unsigned>& visible_intpts_in_current_element) */
+/*   { */
+/*    // Dummy file */
+/*    std::ofstream outfile; */
+/*    return contribution_to_stefan_boltzmann_radiation( */
+/*     r_illuminated, */
+/*     n_illuminated, */
+/*     visible_intpts_in_current_element, */
+/*     outfile); */
+/*   } */
+
+/*  /// Compute the element's contribution to Stefan Boltzmann  */
+/*  /// radiation onto point at r_illuminated with local outer unit  */
+/*  /// normal n_illuminated, */
+/*  /// using the integration points (in current element) contained */
+/*  /// in visible_intpts_in_current_element; output in outfile */
+/*  double contribution_to_stefan_boltzmann_radiation( */
+/*   const Vector<double>& r_illuminated, */
+/*   const Vector<double>& n_illuminated, */
+/*   const Vector<unsigned>& visible_intpts_in_current_element, */
+/*   std::ofstream& outfile); */
+   
+/*  /// Wipe illumination info */
+/*  void wipe_stefan_boltzmann_illumination_info() */
+/*  { */
+/*   unsigned nint=  Stefan_boltzmann_illumination_info.size(); */
+/*   for (unsigned ipt=0;ipt<nint;ipt++) */
+/*    { */
+/*     Stefan_boltzmann_illumination_info[ipt].clear(); */
+/*    } */
+/*  } */
+       
+/*  /// Set illumination info: For integration point, ipt, */
+/*  /// we store all pairs identifying illuminating elements */
+/*  /// (via pointer to element and indices of illuminating  */
+/*  /// integration points): */
+/*  /// Stefan_boltzmann_illumination_info[ipt].size() = number of illuminating */
+/*  ///       elements */
+/*  /// Stefan_boltzmann_illumination_info[ipt][e].first = pointer to e-th */
+/*  ///       illuminating element */
+/*  /// Stefan_boltzmann_illumination_info[ipt][e].second = vector containing */
+/*  ///       indices of integration points in e-th illuminating element  */
+/*  ///       that are visible from current element's ipt'th integration point. */
+/*  void add_stefan_boltzmann_illumination_info( */
+/*   const unsigned& ipt, */
+/*   StefanBoltzmannRadiationBase* illuminating_el_pt, */
+/*   Vector<unsigned>& illuminating_integration_point_index) */
+/*   { */
+/* #ifdef PARANOID */
+/*    unsigned n=Stefan_boltzmann_illumination_info[ipt].size(); */
+/*    for (unsigned e=0;e<n;e++) */
+/*     { */
+/*      if (Stefan_boltzmann_illumination_info[ipt][e].first==illuminating_el_pt) */
+/*       { */
+/*        throw OomphLibError( */
+/*         "Element has already been added!", */
+/*         "StefanBoltzmannRadiationBase::add_stefan_boltzmann_illumination_info()", */
+/*         OOMPH_EXCEPTION_LOCATION); */
+/*       } */
+/*     } */
+/* #endif */
+
+/*    Stefan_boltzmann_illumination_info[ipt].push_back( */
+/*     std::make_pair(illuminating_el_pt,illuminating_integration_point_index)); */
+
+/*    // Add other elements as external data */
+/*    unsigned nnod=illuminating_el_pt->nnode(); */
+/*    for (unsigned j=0;j<nnod;j++) */
+/*     { */
+/*      Node* ext_node_pt=illuminating_el_pt->node_pt(j); */
+/*      bool own=false; */
+/*      for (unsigned jj=0;jj<nnod;jj++) */
+/*       { */
+/*        if (node_pt(jj)==ext_node_pt) */
+/*         { */
+/*          own=true; */
+/*          break; */
+/*         } */
+/*       } */
+/*      if (!own) */
+/*       { */
+/*        // hierher positional data? */
+/*        add_external_data(illuminating_el_pt->node_pt(j)); */
+/*       } */
+/*     } */
+
+/*   } */
+
+/*  /// Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y */
+/*  void output_stefan_boltzmann_radiation(std::ostream &outfile); */
+
+/*  /// Output Stefan Boltzmann radiation: Plots rays from illuminated */
+/*  /// integration point to illuminating ones (and back). */
+/*  void output_stefan_boltzmann_radiation_rays(std::ostream &outfile); */
+ 
+/* protected: */
+
+/*  /// Pointer to non-dim Stefan Boltzmann constant */
+/*  double* Sigma_pt; */
+
+/*  /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law */
+/*  double* Theta_0_pt; */
+
+/*  /// Illumination info: For each integration point, ipt, */
+/*  /// we store all pairs identifying illuminating elements */
+/*  /// (via pointer to element and illumnating integration points): */
+/*  /// */
+/*  /// Stefan_boltzmann_illumination_info[ipt].size() = number of illuminating */
+/*  ///       elements */
+/*  /// Stefan_boltzmann_illumination_info[ipt][e].first = pointer to e-th */
+/*  ///       illuminating element */
+/*  /// Stefan_boltzmann_illumination_info[ipt][e].second = vector containing */
+/*  ///       index of integration points in e-th illuminating element that are */
+/*  ///       visible from current element's ipt'th integration point. */
+/*  Vector<Vector<std::pair<StefanBoltzmannRadiationBase*,Vector<unsigned> > > >  */
+/*  Stefan_boltzmann_illumination_info; */
+
+
+/* }; */
+
+
+
+/* //===================================================================== */
+/* /// Compute the element's contribution to Stefan Boltzmann radiation */
+/* /// onto point at r_illuminated with local outer unit normal n_illuminated, */
+/* /// using the integration points (in current element) contained */
+/* /// in visible_intpts_in_current_element. */
+/* //===================================================================== */
+/* double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation( */
+/*  const Vector<double>& r_illuminated, */
+/*  const Vector<double>& n_illuminated, */
+/*  const Vector<unsigned>& visible_intpts_in_current_element, */
+/*  std::ofstream &outfile) */
+/* { */
+
+/*  if (outfile.is_open()) */
+/*   { */
+/*    outfile << "ZONE\n"; */
+/*    outfile  << r_illuminated[0] << " "  */
+/*             << r_illuminated[1] << " 0 0\n";  */
+/*   } */
+
+/*  // Initialise */
+/*  double contribution=0.0; */
+ 
+/*  //Find out how many nodes there are */
+/*  unsigned n_node = nnode(); */
+
+/*  //Set up memory for the shape functions */
+/*  Shape psi(n_node); */
+/*  DShape dpsids(n_node,1);  */
+ 
+/*  // Local coordinate */
+/*  Vector<double> s(1); */
+
+/*  // Loop over contributing integration points */
+/*  unsigned nint=visible_intpts_in_current_element.size(); */
+/*  for (unsigned ii=0;ii<nint;ii++) */
+/*   { */
+/*    // Get integration point */
+/*    unsigned ipt=visible_intpts_in_current_element[ii]; */
+   
+/*    //Only need to call the local derivatives */
+/*    dshape_local_at_knot(ipt,psi,dpsids); */
+   
+/*    //Get the integral weight */
+/*    double w = integral_pt()->weight(ipt); */
+   
+/*    //Calculate the coords and tangent vector */
+/*    Vector<double> r_illuminating(2,0.0); */
+/*    Vector<double> interpolated_dxds(2,0.0); */
+/*    double interpolated_u=0; */
+   
+/*    //Loop over nodes */
+/*    for(unsigned l=0;l<n_node;l++)  */
+/*     { */
+/*      // Add to temperature  */
+/*      interpolated_u+= */
+/*       node_pt(l)->value(U_index_ust_heat)*psi[l]; */
+     
+/*      //Loop over directions */
+/*      for(unsigned i=0;i<2;i++) */
+/*       { */
+/*        r_illuminating[i] += nodal_position(l,i)*psi(l); */
+/*        interpolated_dxds[i] += nodal_position(l,i)*dpsids(l,0); */
+/*       } */
+/*     } */
+   
+/*    // Vector from illuminated to illuminated point */
+/*    Vector<double> ray(2); */
+/*    ray[0]=r_illuminating[0]-r_illuminated[0]; */
+/*    ray[1]=r_illuminating[1]-r_illuminated[1]; */
+   
+/*    // Get inverse length */
+/*    double inv_length=1.0/sqrt(ray[0]*ray[0]+ray[1]*ray[1]); */
+   
+/*    // e_phi (phi measured in mathematically negative sense */
+/*    // from vertically above illuminated point -- 'cos that's  */
+/*    // what it is in my sketch.. */
+/*    Vector<double> e_phi(2); */
+/*    e_phi[0]= inv_length*ray[1]; */
+/*    e_phi[1]=-inv_length*ray[0]; */
+   
+/*    // Angles */
+/*    double cos_phi=inv_length*(n_illuminated[0]*ray[0]+ */
+/*                               n_illuminated[1]*ray[1]); */
+   
+/*    // INTEGRAL IS: */
+/*    // \int sigma T^4 1/2 \cos \varphi d \varphi =  */
+/*    // where  */
+/*    // d\varphi=1/|{\bf R}| \partial {\bf R}/\partial s \cdot {\bf e}_\varphi ds */
+   
+/*    double integrand= */
+/*     this->sigma()*pow((interpolated_u+this->theta_0()),4)*     */
+/*     0.5*cos_phi*std::fabs(inv_length*(interpolated_dxds[0]*e_phi[0]+ */
+/*                                       interpolated_dxds[1]*e_phi[1])); */
+   
+/*    // Add it in...  */
+/*    contribution+=integrand*w; */
+   
+/*    if (outfile.is_open()) */
+/*     { */
+/*      outfile << r_illuminating[0] << " "  */
+/*              << r_illuminating[1] << " "  */
+/*              << cos_phi << " "  */
+/*              << integrand << " "  */
+/*              << "\n";  */
+/*     } */
+/*   } */
+ 
+/*  return contribution; */
+/* } */
+
+
+
+
+/* //===================================================================== */
+/* /// Output Stefan Boltzmann radiation. Plots rays from illuminated */
+/* /// integration point to illuminating ones (and back). */
+/* //===================================================================== */
+/* void StefanBoltzmannRadiationBase::output_stefan_boltzmann_radiation_rays( */
+/*  std::ostream &outfile) */
+/* { */
+
+/*  // Vector to illuminated/ing Gauss points */
+/*  Vector<double> r_illuminated(2); */
+/*  Vector<double> s_illuminated(1); */
+/*  Vector<double> unit_normal_illuminated(2);   */
+/*  Vector<double> r_illuminating(2); */
+/*  Vector<double> s_illuminating(1); */
+/*  Vector<double> unit_normal_illuminating(2); */
+ 
+/*  // Loop over integration points  */
+/*  unsigned nint=this->integral_pt()->nweight(); */
+/*  for (unsigned ipt=0;ipt<nint;ipt++) */
+/*   { */
+/*    // Local coordinate of integration point */
+/*    s_illuminated[0]=this->integral_pt()->knot(ipt,0); */
+   
+/*    // Get coordinate of illuminated integration point */
+/*    this->interpolated_x(s_illuminated,r_illuminated); */
+      
+/*    // Plot illuminted point */
+/*    outfile << "ZONE\n"; */
+/*    outfile << r_illuminated[0] << " " << r_illuminated[1] << "\n"; */
+   
+/*    // Process illuminating Gauss points; their indices are stored in */
+
+/*    // Number of illuminating elements */
+/*    unsigned n_illuminating=Stefan_boltzmann_illumination_info[ipt].size(); */
+/*    for (unsigned i2=0;i2<n_illuminating;i2++) */
+/*     { */
+/*      // Get pointer to illuminating element */
+/*      FiniteElement* el_pt= */
+/*       (//dynamic_cast<FiniteElement*>( */
+/*        Stefan_boltzmann_illumination_info[ipt][i2].first); */
+     
+/*      // Illuminating Gauss points in illuminating element */
+/*      unsigned n_pts=(Stefan_boltzmann_illumination_info[ipt][i2].second).size(); */
+/*      for (unsigned ipt2=0;ipt2<n_pts;ipt2++) */
+/*       { */
+
+/*        // Illuminating integration point */
+/*        unsigned ipt_illum= */
+/*         (Stefan_boltzmann_illumination_info[ipt][i2].second)[ipt2]; */
+       
+/*        // Get local coordinate of that integration point */
+/*        s_illuminating[0]=el_pt->integral_pt()->knot(ipt_illum,0); */
+       
+/*        // Get coordinate of illuminating integration point */
+/*        el_pt->interpolated_x(s_illuminating,r_illuminating); */
+       
+/*        // Plot ray to illuminting point and back  */
+/*        outfile << r_illuminating[0] << " " << r_illuminating[1] << "\n"; */
+/*        outfile << r_illuminated[0] << " " << r_illuminated[1] << "\n"; */
+/*       } */
+/*     } */
+/*   } */
+/* } */
+
+
+// end hierher
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A base class for face elements that involve all kinds of
+/// heat transfer. It's actually a fully functional re-implementation
+/// of the UnsteadyHeatFluxElement defined in the unsteady heat library
+/// with a slightly more general interface to the prescribed flux
+/// function (which we allow to depend on many additional (pre-computable)
+/// quantities.
+//======================================================================
+template <class ELEMENT>
+ class UnsteadyHeatBaseFaceElement : public virtual FaceGeometry<ELEMENT>, 
+ public virtual FaceElement, 
+ public virtual TemplateFreeUnsteadyHeatBaseFaceElement
+ {
+   public:
+  
+  /// Constructor
+  UnsteadyHeatBaseFaceElement(FiniteElement* const &bulk_el_pt, 
+                              const int &face_index) 
+   {
+    
+#ifdef PARANOID
+    {
+     //Check that the element is not a refineable 3d element
+     if(bulk_el_pt->dim()==3)
+      {
+       //Is it refineable
+       if(dynamic_cast<RefineableElement*>(bulk_el_pt))
+        {
+         //Issue a warning
+         std::string error_string=
+          "This face element will not work correctly if nodes are hanging.\n";
+         error_string+="Use the refineable version instead. ";
+         OomphLibWarning(error_string,
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+    
+    //Attach the geometrical information to the element. N.B. This function
+    //also assigns nbulk_value from the required_nvalue of the bulk element
+    bulk_el_pt->build_face_element(face_index,this);    
+
+    
+    // Extract the dimension of the problem from the dimension of 
+    // the first node
+    Dim = this->node_pt(0)->ndim();
+    
+    //Cast to the appropriate UnsteadyHeatEquation so that we can
+    //find the index at which the variable is stored
+    //We assume that the dimension of the full problem is the same
+    //as the dimension of the node, if this is not the case you will have
+    //to write custom elements, sorry
+    switch(Dim)
+     {
+      //One dimensional problem
+     case 1:
+     {
+      UnsteadyHeatEquations<1>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are one dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<1>\n.";
+        error_string += 
+         "If you desire this functionality, you must implement it yourself\n";
+        
+        throw OomphLibError(error_string,
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+      //Otherwise read out the value
+      else
+       {
+        //Read the index from the (cast) bulk element
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Two dimensional problem
+     case 2:
+     {
+      UnsteadyHeatEquations<2>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are two dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<2>\n.";
+        error_string += 
+         "If you desire this functionality, you must implement it yourself\n";
+        
+        throw OomphLibError(error_string,
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        //Read the index from the (cast) bulk element.
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Three dimensional problem
+     case 3:
+     {
+      UnsteadyHeatEquations<3>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are three dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<3>\n.";
+      error_string += 
+       "If you desire this functionality, you must implement it yourself\n";
+      
+      throw OomphLibError(error_string,
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        //Read the index from the (cast) bulk element.
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Any other case is an error
+     default:
+      std::ostringstream error_stream; 
+      error_stream <<  "Dimension of node is " << Dim 
+                   << ". It should be 1,2, or 3!" << std::endl;
+      
+      throw OomphLibError(error_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      break;
+     }
+    
+   }
+  
+  /// Destructor
+  virtual ~UnsteadyHeatBaseFaceElement(){}
+  
+  /// Temperature at local coordinate s
+  void interpolated_u(const Vector<double>& s, double& u)
+  {
+   u=0.0;
+   
+   //Find out how many nodes there are
+   const unsigned n_node = nnode();
+   
+   //Set up memory for the shape functions
+   Shape psif(n_node);
+   
+   // Get shape fct
+   shape(s,psif);
+   
+   //Calculate temp
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Calculate the value at the nodes
+     double u_value = raw_nodal_value(l,U_index_ust_heat);
+     u += u_value*psif[l];
+    }
+  }
+  
+  
+  /// Specify the value of nodal zeta from the face geometry:
+  /// The "global" intrinsic coordinate of the element when
+  /// viewed as part of a geometric object should be given by
+  /// the FaceElement representation, by default (needed to break
+  /// indeterminacy if bulk element is SolidElement)
+  double zeta_nodal(const unsigned &n, const unsigned &k,           
+                    const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+  
+  
+ /// Compute the element residual vector
+ inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic residuals function
+   fill_in_generic_residual_contribution_ust_heat_flux(residuals);
+  }
+
+
+ // No Jacobian because of potential of nonlinear dependence of 
+ // flux on temperature
+ /* /// Compute the element's residual vector and its Jacobian matrix */
+ /* inline void fill_in_contribution_to_jacobian(Vector<double> &residuals, */
+ /*                                              DenseMatrix<double> &jacobian) */
+ /* { */
+ /*  //Call the generic routine with the flag set to 1 */
+ /*  fill_in_generic_residual_contribution_ust_heat_flux(residuals,jacobian,1); */
+ /* } */
+ 
+ 
+ /// Output function
+ void output(std::ostream &outfile) 
+ {
+  unsigned nplot=5;
+  output(outfile,nplot);
+ }
+ 
+ /// Output function. Output "temperature", "incoming" heat flux,
+ /// and outer unit normal. n_plot is ignored because flux function may
+ /// depend explicitly on integration point!
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
+  
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
+    
+    // Outer unit normal
+    outer_unit_normal(s,unit_normal);
+    
+    //Get the incoming flux
+    double flux=0.0;
+    get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    
+    // Temperature
+    outfile << interpolated_u << " ";
+    
+    // Incoming flux
+    outfile << flux << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << unit_normal[i] << " ";
+     }
+    
+    outfile << std::endl;
+   }
+ }
+ 
+ /// C_style output function
+ void output(FILE* file_pt)
+ {FiniteElement::output(file_pt);}
+ 
+ /// C-style output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+ {FiniteElement::output(file_pt,n_plot);}
+ 
+ 
+   protected:
+ 
+ /// Function to compute the shape and test functions and to return 
+ /// the Jacobian of mapping between local and global (Eulerian)
+ /// coordinates
+ inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
+  const
+ {
+  //Find number of nodes
+  unsigned n_node = nnode();
+   
+  //Get the shape functions
+  shape(s,psi);
+   
+  //Set the test functions to be the same as the shape functions
+  for(unsigned i=0;i<n_node;i++) {test[i] = psi[i];}
+
+  //Return the value of the jacobian
+  return J_eulerian(s);
+ }
+ 
+   private:
+ 
+ /// Generic residuals function
+ void fill_in_generic_residual_contribution_ust_heat_flux(Vector<double>& 
+                                                          residuals);
+ 
+ };
+
+
+
+//===========================================================================
+/// Compute the element's residual vector. No Jacobian because
+/// we allow dependence of flux on "temperature" which introduces
+/// potential nonlinearity -- currently handled by fd-ing.
+//===========================================================================
+template<class ELEMENT>
+void UnsteadyHeatBaseFaceElement<ELEMENT>::
+fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
+{
+ //Find out how many nodes there are
+ const unsigned n_node = nnode();
+
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+ //Set up memory for the shape and test functions
+ Shape psif(n_node), testf(n_node);
+ 
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Set the Vector to hold local coordinates
+ Vector<double> s(Dim-1);
+ 
+ //Integer to store the local equation and unknowns
+ int local_eqn=0;
+
+ // Locally cache the index at which the variable is stored
+ const unsigned u_index_ust_heat = U_index_ust_heat;
+ 
+ //Loop over the integration points
+ //--------------------------------
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   //Assign values of s
+   for(unsigned i=0;i<(Dim-1);i++)
+    {
+     s[i] = integral_pt()->knot(ipt,i);
+    }
+
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Find the shape and test functions and return the Jacobian
+   //of the mapping
+   double J = shape_and_test(s,psif,testf);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Need to find position to feed into flux function
+   Vector<double> interpolated_x(Dim);
+   
+   //Initialise to zero
+   double interpolated_u=0.0;
+   for(unsigned i=0;i<Dim;i++)
+    {
+     interpolated_x[i] = 0.0;
+    }
+
+   // hierher replace in second sweep (once inline computation of
+   // n has been validated somewhere)
+
+   //Get the outer unit normal
+   Vector<double> interpolated_n(Dim);
+   this->outer_unit_normal(ipt,interpolated_n);
+   
+   //Calculate coordinate and temperature
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     double u_value = raw_nodal_value(l,u_index_ust_heat);
+     interpolated_u += u_value*psif[l];
+
+     //Loop over directions
+     for(unsigned i=0;i<Dim;i++)
+      {
+       interpolated_x[i] += nodal_position(l,i)*psif[l];
+      }
+    }
+   
+   //Get the imposed flux
+   double flux=0.0;
+   get_flux(ipt,time,interpolated_x,interpolated_n,interpolated_u,flux);
+   
+   //Now add to the appropriate equations
+   
+   //Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+     local_eqn = nodal_local_eqn(l,u_index_ust_heat);
+     /*IF it's not a boundary condition*/
+     if(local_eqn >= 0)
+      {
+       //Add the prescribed flux terms
+       residuals[local_eqn] -= flux*testf[l]*W;
+      }
+    }
+  }
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+/* // hierher */
+
+
+/* //====================================================================== */
+/* /// A class for elements that allow the imposition of solar/ */
+/* /// atmospheric heat flux on the boundaries of UnsteadyHeat elements. */
+/* /// The element geometry is obtained from the  FaceGeometry<ELEMENT>  */
+/* /// policy class. */
+/* //====================================================================== */
+/* template <class ELEMENT> */
+/* class SolarUnsteadyHeatFluxElement :  */
+/* public virtual FaceGeometry<ELEMENT>,  */
+/*  public virtual FaceElement,  */
+/*  public virtual StefanBoltzmannRadiationBase,  */
+/*  public virtual SolarRadiationBase,  */
+/*  public virtual UnsteadyHeatBaseFaceElement<ELEMENT> */
+/* { */
+ 
+/* public: */
+
+/*  /// Constructor, takes the pointer to the "bulk" element and the  */
+/*  /// index of the face to be created */
+/*  SolarUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,  */
+/*                               const int &face_index); */
+ 
+/*  /// Broken copy constructor */
+/*  SolarUnsteadyHeatFluxElement(const SolarUnsteadyHeatFluxElement& dummy)  */
+/*   {  */
+/*    BrokenCopy::broken_copy("SolarUnsteadyHeatFluxElement"); */
+/*   }  */
+ 
+/*  /// Broken assignment operator */
+/*  void operator=(const SolarUnsteadyHeatFluxElement&)  */
+/*   { */
+/*    BrokenCopy::broken_assign("SolarUnsteadyHeatFluxElement"); */
+/*   } */
+  
+/*  /// Compute the element residual vector */
+/*  inline void fill_in_contribution_to_residuals(Vector<double> &residuals) */
+/*   { */
+/*    //Call the generic residuals function with flag set to 0 */
+/*    //using a dummy matrix argument */
+/*    fill_in_generic_residual_contribution_solar_ust_heat_flux( */
+/*     residuals,GeneralisedElement::Dummy_matrix,0); */
+/*   } */
+
+
+/*  // // FD-ed now that we've made it nonlinear with Stefan Boltzmann */
+/*  // // radiation */
+/*  // /// Compute the element's residual vector and its Jacobian matrix */
+/*  // inline void fill_in_contribution_to_jacobian(Vector<double> &residuals, */
+/*  //                                          DenseMatrix<double> &jacobian) */
+/*  //  { */
+/*  //   //Call the generic routine with the flag set to 1 */
+/*  //   fill_in_generic_residual_contribution_solar_ust_heat_flux(residuals,jacobian,1); */
+/*  //  } */
+
+/*  /// Change integration scheme (overloads underlying version and */
+/*  /// and resizes lookup schemes introduced in this class. */
+/*  void set_integration_scheme(Integral* const &integral_pt) */
+/*  { */
+/*   FiniteElement::set_integration_scheme(integral_pt); */
+/*   unsigned n_intpt = integral_pt->nweight(); */
+/*   Stefan_boltzmann_illumination_info.resize(n_intpt); */
+/*   Diffuse_limit_angles.resize(n_intpt); */
+/*   for (unsigned i=0;i<n_intpt;i++) */
+/*    { */
+/*     Diffuse_limit_angles[i].first=0.0; */
+/*     Diffuse_limit_angles[i].second=MathematicalConstants::Pi; */
+/*    } */
+/*  } */
+
+
+/*  // hierher needed? */
+
+/*  /// Specify the value of nodal zeta from the face geometry: */
+/*  /// The "global" intrinsic coordinate of the element when */
+/*  /// viewed as part of a geometric object should be given by */
+/*  /// the FaceElement representation, by default (needed to break */
+/*  /// indeterminacy if bulk element is SolidElement) */
+/*  double zeta_nodal(const unsigned &n, const unsigned &k,            */
+/*                    const unsigned &i) const  */
+/*  {return FaceElement::zeta_nodal(n,k,i);}      */
+
+
+/* protected: */
+ 
+/*  /// Function to compute the shape and test functions and to return  */
+/*  /// the Jacobian of mapping between local and global (Eulerian) */
+/*  /// coordinates */
+/*  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test) */
+/*   const */
+/*   { */
+/*    //Find number of nodes */
+/*    unsigned n_node = nnode(); */
+
+/*    //Get the shape functions */
+/*    shape(s,psi); */
+
+/*    //Set the test functions to be the same as the shape functions */
+/*    for(unsigned i=0;i<n_node;i++) {test[i] = psi[i];} */
+
+/*    //Return the value of the jacobian */
+/*    return J_eulerian(s); */
+/*   } */
+
+
+
+/* private: */
+
+/*  /// Compute the element residual vector. */
+/*  /// flag=1(or 0): do (or don't) compute the Jacobian as well.  */
+/*  void fill_in_generic_residual_contribution_solar_ust_heat_flux( */
+/*   Vector<double> &residuals, DenseMatrix<double> &jacobian,  */
+/*   unsigned flag); */
+ 
+/* }; */
+
+/* ////////////////////////////////////////////////////////////////////////  */
+/* ////////////////////////////////////////////////////////////////////////  */
+/* ////////////////////////////////////////////////////////////////////////  */
+
+/* //=========================================================================== */
+/* /// Constructor, takes the pointer to the "bulk" element and the  */
+/* /// index of the face to be created. */
+/* //=========================================================================== */
+/* template<class ELEMENT> */
+/* SolarUnsteadyHeatFluxElement<ELEMENT>:: */
+/* SolarUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,  */
+/*                              const int &face_index) :  */
+/*  FaceGeometry<ELEMENT>(), FaceElement() */
+/* {  */
+ 
+/* #ifdef PARANOID */
+/*  { */
+/*   //Check that the element is not a refineable 3d element */
+/*   ELEMENT* elem_pt = new ELEMENT; */
+/*   //If it's three-d */
+/*   if(elem_pt->dim()==3) */
+/*    { */
+/*     //Is it refineable */
+/*     if(dynamic_cast<RefineableElement*>(elem_pt)) */
+/*      { */
+/*       //Issue a warning */
+/*       OomphLibWarning( */
+/*        "This flux element will not work correctly if nodes are hanging\n", */
+/*        "MyUnsteadyHeatFluxElement::Constructor", */
+/*        OOMPH_EXCEPTION_LOCATION); */
+/*      } */
+/*    } */
+/*  } */
+/* #endif */
+  
+/*  // Let the bulk element build the FaceElement, i.e. setup the pointers  */
+/*  // to its nodes (by referring to the appropriate nodes in the bulk */
+/*  // element), etc. */
+/*  bulk_el_pt->build_face_element(face_index,this); */
+
+/*  // Extract index of nodal value that stores temperature from */
+/*  // bulk elements */
+/*  this->extract_temperature_index_from_bulk_element(bulk_el_pt); */
+ 
+/* } */
+
+
+
+/* //=========================================================================== */
+/* /// Compute the element's residual vector and the (zero) Jacobian matrix. */
+/* //=========================================================================== */
+/* template<class ELEMENT> */
+/* void SolarUnsteadyHeatFluxElement<ELEMENT>:: */
+/* fill_in_generic_residual_contribution_solar_ust_heat_flux( */
+/*  Vector<double> &residuals, DenseMatrix<double> &jacobian,  */
+/*  unsigned flag) */
+/* { */
+/*  //Find out how many nodes there are */
+/*  const unsigned n_node = nnode(); */
+
+/*   //Set up memory for the shape and test functions */
+/*  Shape psif(n_node), testf(n_node); */
+ 
+/*  //Set the value of n_intpt */
+/*  const unsigned n_intpt = integral_pt()->nweight(); */
+ 
+/*  //Set the Vector to hold local coordinates */
+/*  Vector<double> s(Dim-1); */
+ 
+/*  //Integer to store the local equation numbers */
+/*  int local_eqn=0; */
+
+/*  // Locally cache the index at which the variable is stored */
+/*  const unsigned u_index_ust_heat = U_index_ust_heat; */
+ 
+/*  // Interpolated u */
+/*  double interpolated_u=0; */
+ 
+/*  //Loop over the integration points */
+/*  //-------------------------------- */
+/*  for(unsigned ipt=0;ipt<n_intpt;ipt++) */
+/*   { */
+
+/*    //Assign values of s */
+/*    for(unsigned i=0;i<(Dim-1);i++) */
+/*     { */
+/*      s[i] = integral_pt()->knot(ipt,i); */
+/*     } */
+
+/*    //Get the integral weight */
+/*    double w = integral_pt()->weight(ipt); */
+   
+/*    //Find the shape and test functions and return the Jacobian */
+/*    //of the mapping */
+/*    double J = shape_and_test(s,psif,testf); */
+   
+/*    //Premultiply the weights and the Jacobian */
+/*    double W = w*J; */
+   
+/*    // Get outer unit normal */
+/*    Vector<double> n(Dim); */
+/*    outer_unit_normal(s,n); */
+
+/*    //Need to find position to feed into flux function */
+/*    Vector<double> interpolated_x(Dim); */
+   
+/*    //Initialise to zero */
+/*    for(unsigned i=0;i<Dim;i++) */
+/*     { */
+/*      interpolated_x[i] = 0.0; */
+/*     } */
+   
+/*    //Calculate temperature position */
+/*    interpolated_u=0.0; */
+/*    for(unsigned l=0;l<n_node;l++)  */
+/*     { */
+/*      //Calculate the value at the nodes */
+/*      double u_value = raw_nodal_value(l,u_index_ust_heat); */
+/*      interpolated_u += u_value*psif[l]; */
+     
+/*      //Loop over directions */
+/*      for(unsigned i=0;i<Dim;i++) */
+/*       { */
+/*        interpolated_x[i] += nodal_position(l,i)*psif[l]; */
+/*       } */
+/*     } */
+   
+/*    //Get the solar flux */
+/*    double solar_flux=atmospheric_radiation(ipt,time(),interpolated_x,n); */
+
+/*    // Outgoing Stefan Boltzmann radiation */
+/*    double outgoing_sb_radiation= */
+/*     this->sigma()*pow((interpolated_u+this->theta_0()),4); */
+
+/*    // Incoming Stefan Boltzmann radiation */
+/*    double incoming_sb_radiation=incoming_stefan_boltzmann_radiation */
+/*     (ipt,interpolated_x,n); */
+
+/*    // Add 'em */
+/*    double flux=solar_flux+incoming_sb_radiation-outgoing_sb_radiation; */
+
+/*    //Loop over the test functions */
+/*    for(unsigned l=0;l<n_node;l++) */
+/*     { */
+/*      local_eqn = nodal_local_eqn(l,u_index_ust_heat); */
+/*      /\*IF it's not a boundary condition*\/ */
+/*      if(local_eqn >= 0) */
+/*       { */
+/*        // Add the prescribed flux terms NOTE THAT THERE'S NO BETA */
+/*        // IN HERE THE ABOVE BALANCES THE BETA * DU/DN THAT APPEARS */
+/*        // IN THE WEAK FORM OF THE EQUATIONS! */
+/*        residuals[local_eqn] -= flux*testf[l]*W; */
+       
+/*        // No Jacobian -- computed by FD anyway! */
+/*        if (flag==1) */
+/*         { */
+/*          assert(false); */
+/*         } */
+
+/*       } */
+/*     } */
+/*   } */
+/* } */
+
+
+
+// end hierher
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+
+
+
+//======================================================================
+/// A class for elements that impose Stefan (melting) condition on
+/// adjacent pseudo-solid-based unsteady heat elements.
+///
+/// The geometrical information can be read from the FaceGeometry<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class.
+//======================================================================
+template <class ELEMENT>
+ class SurfaceMeltElement : 
+public virtual FaceGeometry<ELEMENT>, 
+ public virtual SolidFaceElement, 
+ public virtual UnsteadyHeatBaseFaceElement<ELEMENT>
+  
+ {
+  
+   public:
+  
+   /// Constructor, which takes a "bulk" element and the 
+   /// value of the index and its limit
+   SurfaceMeltElement(FiniteElement* const &bulk_el_pt, 
+                      const int &face_index,
+                      const unsigned &id=0,
+                      const bool& called_from_refineable_constructor=false) : 
+  UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt,face_index)
+   { 
+    
+#ifdef PARANOID
+    {
+     //Check that the element is not a refineable 3d element
+     if (!called_from_refineable_constructor)
+      {
+       if(bulk_el_pt->dim()==3)
+        {
+         //Is it refineable
+         if(dynamic_cast<RefineableElement*>(bulk_el_pt))
+          {
+           //Issue a warning
+           std::string error_string=
+            "This face element will not work correctly if nodes are hanging.\n";
+           error_string+="Use the refineable version instead. ";
+           OomphLibWarning(error_string,
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    }
+#endif
+    
+    // Use default melt temperature
+    Melt_temperature_pt=0;
+    
+    //  Store the ID of the FaceElement -- this is used to distinguish
+    // it from any others
+    Melt_id=id;
+    
+    // We need two additional value for each FaceElement node:
+    // (1) the normal traction (Lagrange multiplier) to be 
+    // exerted onto the pseudo-solid and (2) the melt rate
+    unsigned n_nod=nnode();
+    Vector<unsigned> n_additional_values(n_nod,2);
+    
+    // Now add storage for Lagrange multipliers and set the map containing 
+    // the position of the first entry of this face element's 
+    // additional values.
+    add_additional_values(n_additional_values,id);
+    
+#ifdef PARANOID
+    // Check spatial dimension
+    if (this->Dim!=2)
+     {
+      //Issue a warning
+      throw OomphLibError(
+       "This element will almost certainly not work in non-2D problems, though it should be easy enough to upgrade... Volunteers?\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+
+    /* // hierher */
+    /* // Add positions of bulk nodes as external data */
+    /* unsigned nnod_bulk=bulk_el_pt->nnode(); */
+    /* unsigned count=0; */
+    /* for (unsigned j=0;j<nnod_bulk;j++) */
+    /*  { */
+    /*   SolidNode* bulk_nod_pt=dynamic_cast<SolidNode*>(bulk_el_pt->node_pt(j)); */
+    /*   unsigned do_it=true; */
+    /*   for (unsigned k=0;k<n_nod;k++) */
+    /*    { */
+    /*     SolidNode* nod_pt=dynamic_cast<SolidNode*>(node_pt(k)); */
+    /*     if (nod_pt==bulk_nod_pt) */
+    /*      { */
+    /*       do_it=false; */
+    /*       break; */
+    /*      } */
+    /*    } */
+    /*   if (do_it) */
+    /*    { */
+    /*     count++; */
+    /*     add_external_data(bulk_nod_pt->variable_position_pt()); */
+    /*     add_external_data(bulk_nod_pt); */
+    /*    } */
+    /*  } */
+    /* oomph_info << "Added " << count << " position data from bulk\n"; */
+
+   }
+  
+  
+  /// Get interpolated pressure (essentially a Lagrange multiplier
+  /// that enforces the imposed boundary motion)
+  double get_interpolated_lagrange_p(const Vector<double>& s)
+  {
+   // Initialise pressure
+   double p=0;
+   
+   //Find out how many nodes there are
+   unsigned n_node = nnode();
+   
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+   
+   // Evaluate shape function
+   shape(s,psi);
+   
+   // Build up Lagrange multiplier (pressure)
+   for (unsigned j=0;j<n_node;j++)
+    {
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+     
+     // Get the index of the first nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+     
+     // Pressure (Lagrange multiplier) is the first of two additional
+     // values created by this face element
+     p+=node_pt(j)->value(first_index)*psi[j];
+    }
+   return p;
+  }
+  
+  
+  /// Return the residuals
+  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   fill_in_contribution_to_residuals_surface_melt(residuals);
+  }
+  
+  
+  /// Melt temperature
+  double melt_temperature()
+  {
+   if (Melt_temperature_pt==0)
+    {
+     return 0.0;
+    }
+   else
+    {
+     return *Melt_temperature_pt;
+    }
+  }
+  
+  /// Pointer to (non-default) melt temperature
+  double*& melt_temperature_pt()
+  {
+   return Melt_temperature_pt;
+  }
+  
+  /// Switch off melting by pinning melt-rate dofs
+  void disable_melting()
+  {
+   unsigned n_node=nnode();
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // get the node pt
+     Node* nod_pt = node_pt(l);
+     
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(nod_pt);
+     
+     // Get the index of the first nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+     
+     // Pin melt rate (second additional value created by this face element)
+     nod_pt->pin(first_index+1);
+    }
+  }
+
+  
+  /// Set "Lagrange multiplier pressure" to zero (to make things
+  /// consistent with re-set Lagrangian coordinates
+  void set_lagrange_multiplier_pressure_to_zero()
+  {
+   unsigned n_node=nnode();
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // get the node pt
+     Node* nod_pt = node_pt(l);
+     
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(nod_pt);
+     
+     // Get the index of the first nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+     
+     // Lagrange multiplier is first additional value created by this 
+     // face element)
+     nod_pt->set_value(first_index,0.0);
+    }
+  }
+
+  
+  /// Specify the value of nodal zeta from the face geometry:
+  /// The "global" intrinsic coordinate of the element when
+  /// viewed as part of a geometric object should be given by
+  /// the FaceElement representation, by default (needed to break
+  /// indeterminacy if bulk element is SolidElement)
+  double zeta_nodal(const unsigned &n, const unsigned &k,           
+                    const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+  
+  
+  // /// Fill in contribution from Jacobian 
+  // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+  //                                       DenseMatrix<double> &jacobian);
+  
+
+
+ /// Melt rate at local coordinate s
+ void interpolated_melt_rate(const Vector<double>& s, double& melt_flux)
+ {
+  // Iinitialise
+  melt_flux=0.0;
+  
+  //Find out how many nodes there are
+  const unsigned n_node = nnode();
+  
+  //Set up memory for the shape functions
+  Shape psi(n_node);
+  
+  // Get shape fct
+  shape(s,psi);
+  
+  //Calculate stuff
+  for(unsigned l=0;l<n_node;l++) 
+   {
+    // get the node pt
+    Node* nod_pt = node_pt(l);
+    
+    // Cast to a boundary node
+    BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
+    
+    // Get the index of the first nodal value associated with
+    // this FaceElement
+    unsigned first_index=
+     bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+    
+    // Melt rate
+    melt_flux+=nod_pt->value(first_index+1)*psi[l];
+   }
+ }
+ 
+ /// Generalised output function to include melt information:
+ /// temperature, incoming flux, melt rate, outer unit normal
+ void output_melt(std::ostream &outfile)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
+  
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
+    
+    // Outer unit normal
+    outer_unit_normal(s,unit_normal);
+    
+    // Get melt rate
+    double interpolated_m=0.0;
+    this->interpolated_melt_rate(s,interpolated_m);
+
+    // Get "lagrange multiplier" pressure
+    double lagrange_p=get_interpolated_lagrange_p(s);
+
+    //Get the incoming flux
+    double flux=0.0;
+    this->get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    
+    // Temperature
+    outfile << interpolated_u << " ";
+    
+    // Incoming flux
+    outfile << flux << " ";
+    
+    // Melt rate
+    outfile << interpolated_m << " ";
+    
+    // Lagrange multiplier-like pressure
+    outfile << lagrange_p << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << unit_normal[i] << " ";
+     }
+    outfile << std::endl;
+   }
+ }
+ 
+   protected:
+ 
+ /// Helper function that actually calculates the residuals
+ void fill_in_contribution_to_residuals_surface_melt(
+  Vector<double> &residuals);
+ 
+ /// Id of additional unknowns (Lagrange multiplier ("pressure") and melt rate)
+ unsigned Melt_id;
+ 
+ /// Pointer to non-default melt temperature
+ double* Melt_temperature_pt;
+ 
+ }; 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+// hierher kill
+
+/* //===================================================================== */
+/* /// Output melt rate etc. */
+/* //===================================================================== */
+/* template<class ELEMENT> */
+/*  void SurfaceMeltElement<ELEMENT>::output_melt_rate(std::ostream &outfile,  */
+/*                                                     const unsigned &n_plot) */
+/*  { */
+  
+/*   // Locally cache the index at which the variable is stored */
+/*   const unsigned u_index_ust_heat = this->U_index_ust_heat; */
+  
+/*   // Get continuous time from timestepper of first node */
+/*   double time=node_pt(0)->time_stepper_pt()->time_pt()->time(); */
+  
+/*   //Find out how many nodes there are */
+/*   const unsigned n_node = nnode(); */
+  
+/*   //Set up memory for the shape functions */
+/*   Shape psi(n_node); */
+  
+/*   // Local and global coordinates */
+/*   Vector<double> s(this->Dim-1); */
+/*   Vector<double> interpolated_x(this->Dim); */
+  
+/*   // Tecplot header info */
+/*   outfile << this->tecplot_zone_string(n_plot); */
+  
+/*   // Loop over plot points */
+/*   unsigned num_plot_points=this->nplot_points(n_plot); */
+/*   for (unsigned iplot=0;iplot<num_plot_points;iplot++) */
+/*    { */
+/*     // Get local coordinates of plot point */
+/*     this->get_s_plot(iplot,n_plot,s); */
+    
+/*     // Outer unit normal */
+/*     Vector<double> unit_normal(this->Dim); */
+/*     outer_unit_normal(s,unit_normal); */
+    
+/*     //Find the shape functions */
+/*     shape(s,psi); */
+    
+/*     // Melt flux */
+/*     double melt_flux=0.0; */
+    
+/*     // Temperature */
+/*     double u=0.0; */
+    
+/*     //Initialise to zero */
+/*     for(unsigned i=0;i<this->Dim;i++) */
+/*      { */
+/*       interpolated_x[i] = 0.0; */
+/*      } */
+    
+/*     //Calculate stuff */
+/*     for(unsigned l=0;l<n_node;l++)  */
+/*      { */
+/*       // get the node pt */
+/*       Node* nod_pt = node_pt(l); */
+      
+/*       // Cast to a boundary node */
+/*       BoundaryNodeBase *bnod_pt =  */
+/*        dynamic_cast<BoundaryNodeBase*>(nod_pt); */
+      
+/*       // Get the index of the first nodal value associated with */
+/*       // this FaceElement */
+/*       unsigned first_index= */
+/*        bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id); */
+      
+/*       // Melt rate */
+/*       melt_flux+=nod_pt->value(first_index+1)*psi[l]; */
+      
+/*       // Temperature */
+/*       u+=nod_pt->value(u_index_ust_heat)*psi[l];  */
+      
+/*       //Loop over directions */
+/*       for(unsigned i=0;i<this->Dim;i++) */
+/*        { */
+/*         interpolated_x[i] += nodal_position(l,i)*psi[l]; */
+/*        } */
+/*      } */
+    
+/*     //Get the imposed flux */
+/*     double flux=0.0; */
+/*     this->get_flux(time,interpolated_x,flux,u); */
+    
+/*     //Output the x,y,.. */
+/*     for(unsigned i=0;i<this->Dim;i++)  */
+/*      { */
+/*       outfile << interpolated_x[i] << " "; */
+/*      } */
+    
+/*     // Output imposed flux and melt flux */
+/*     outfile << flux << " "; */
+/*     outfile << melt_flux << " "; */
+    
+/*     // Output normal */
+/*     for(unsigned i=0;i<this->Dim;i++)  */
+/*      { */
+/*       outfile << unit_normal[i] << " "; */
+/*      }  */
+/*     outfile << std::endl; */
+/*    } */
+  
+/*  } */
+// hierher end kill
+ 
+//=====================================================================
+/// Return the residuals for the SurfaceMeltElement equations
+//=====================================================================
+template<class ELEMENT>
+ void SurfaceMeltElement<ELEMENT>::
+ fill_in_contribution_to_residuals_surface_melt(Vector<double> &residuals)
+ {
+
+  // hierher kill oomph_info << "hierher: Number of dofs: " << ndof() << std::endl;
+
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  //Find out how many nodes there are
+  unsigned n_node = nnode();
+
+  //Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+
+  //Find out the dimension of the node
+  unsigned n_dim = this->nodal_dimension();
+
+  //Integer to hold the local equation number
+  int local_eqn=0;
+
+  /* // hierher kill */
+  /* { */
+  /*  for (unsigned j=0;j<n_node;j++) */
+  /*   { */
+  /*    SolidNode* nod_pt=dynamic_cast<SolidNode*>(node_pt(j)); */
+  /*    unsigned nval=nod_pt->nvalue(); */
+  /*    for (unsigned i=0;i<nval;i++) */
+  /*     { */
+  /*      oomph_info << "i_val, eqn_number: " << i << " "  */
+  /*                 << nod_pt->eqn_number(i) << " " */
+  /*                 << std::endl; */
+  /*     } */
+  /*    Data* data_pt=dynamic_cast<SolidNode*>(node_pt(j)) */
+  /*     ->variable_position_pt(); */
+  /*    nval=data_pt->nvalue(); */
+  /*    for (unsigned i=0;i<nval;i++) */
+  /*     { */
+  /*      oomph_info << "i_pos, eqn_number: " << i << " "  */
+  /*                 << data_pt->eqn_number(i) << " " */
+  /*                 << std::endl; */
+  /*     } */
+  /*   } */
+  /* } */
+
+  //Set up memory for the shape functions
+  //Note that in this case, the number of lagrangian coordinates is always
+  //equal to the dimension of the nodes
+  Shape psi(n_node,n_position_type);
+  DShape dpsids(n_node,n_position_type,n_dim-1); 
+
+  //Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+ 
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+   
+    //Only need to call the local derivatives
+    dshape_local_at_knot(ipt,psi,dpsids);
+    
+    //Calculate the Eulerian and Lagrangian coordinates 
+    Vector<double> interpolated_x(n_dim,0.0);
+    Vector<double> interpolated_dxdt(n_dim,0.0);
+    Vector<double> interpolated_xi(n_dim,0.0);
+    
+    // Interpolated Lagrange multiplier (pressure acting on solid
+    // to enforce melting)
+    double interpolated_lambda_p=0.0;
+      
+    // Get temperature
+    double u=0;
+
+    // Melt rate
+    double melt_rate=0.0;
+
+    //Also calculate the surface Vectors (derivatives wrt local coordinates)
+    DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
+  
+    //Calculate stuff
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      // Cast to a boundary node
+      BoundaryNodeBase *bnod_pt = 
+       dynamic_cast<BoundaryNodeBase*>(node_pt(l));
+     
+      // Get the index of the first nodal value associated with
+      // this FaceElement
+      unsigned first_index=
+       bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+     
+      // Add to Lagrange multiplier (acting as pressure on solid
+      // to enforce melting motion)
+      interpolated_lambda_p+=node_pt(l)->value(first_index)*psi[l];
+
+      // Add to melt rate
+      melt_rate+=node_pt(l)->value(first_index+1)*psi[l];
+     
+      // Add to temperature
+      u+=node_pt(l)->value(this->U_index_ust_heat)*psi[l];
+
+      //Loop over positional dofs
+      for(unsigned k=0;k<n_position_type;k++)
+       {
+        //Loop over spatial dimension
+        for(unsigned i=0;i<n_dim;i++)
+         {
+          //Calculate the Eulerian and Lagrangian positions
+          interpolated_x[i] += 
+           nodal_position_gen(l,bulk_position_type(k),i)*psi(l,k);
+
+          interpolated_dxdt[i] += 
+           this->dnodal_position_gen_dt(l,bulk_position_type(k),i)*psi(l,k);
+         
+          interpolated_xi[i] += 
+           this->lagrangian_position_gen(l,bulk_position_type(k),i)*psi(l,k);
+         
+          //Loop over LOCAL derivative directions, to calculate the tangent(s)
+          for(unsigned j=0;j<n_dim-1;j++)
+           {
+            interpolated_A(j,i) += 
+             nodal_position_gen(l,bulk_position_type(k),i)*dpsids(l,k,j);
+           }
+         }
+       }
+     }
+
+    //Now find the local deformed metric tensor from the tangent Vectors
+    DenseMatrix<double> A(n_dim-1);
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      for(unsigned j=0;j<n_dim-1;j++)
+       {
+        //Initialise surface metric tensor to zero
+        A(i,j) = 0.0;
+        //Take the dot product
+        for(unsigned k=0;k<n_dim;k++)
+         { 
+          A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+         }
+       }
+     }
+   
+    // hierher replaced this in first sweep!
+
+    //Get the outer unit normal
+    Vector<double> interpolated_normal(n_dim);
+    outer_unit_normal(ipt,interpolated_normal);
+
+    // Local coordinate of integration point
+    unsigned n_dim = this->nodal_dimension();
+    Vector<double> s(n_dim-1);
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+
+    /* // Outgoing Stefan Boltzmann radiative flux */
+    /* //========================================= */
+    /* double outgoing_stefan_boltzmann_flux=sigma()*pow((u+theta_0()),4); */
+
+    /* // Incoming Stefan Boltzmann radiation */
+    /* //==================================== */
+    /* double incoming_sb_radiation=incoming_stefan_boltzmann_radiation */
+    /*  (ipt,interpolated_x,interpolated_normal); */
+   
+    /* // Get the incoming atmospheric radiation */
+    /* //======================================== */
+    /* double incoming_atmospheric_radiation= */
+    /*  atmospheric_radiation(ipt,time(),interpolated_x, */
+    /*                        interpolated_normal); */
+
+    /* // Get net heat flux  */
+    /* //================== */
+    /* double net_heat_flux=incoming_atmospheric_radiation+ */
+    /*  incoming_sb_radiation-outgoing_stefan_boltzmann_flux; */
+
+    //Get the imposed flux
+    double flux=0.0;
+    this->get_flux(ipt,time,interpolated_x,interpolated_normal,u,flux);
+    
+
+    // Calculate the "load" -- Lagrange multiplier acts as traction to
+    //================================================================
+    // to enforce required surface displacement
+    //=========================================
+    Vector<double> traction(n_dim);
+    for (unsigned i=0;i<n_dim;i++)
+     {
+      traction[i]=-interpolated_lambda_p*interpolated_normal[i];
+     }
+
+
+    // Get normal velocity
+    double normal_veloc=0.0;
+    for (unsigned i=0;i<n_dim;i++)
+     {
+      normal_veloc+=interpolated_dxdt[i]*interpolated_normal[i];
+     }
+   
+
+    //Find the determinant of the metric tensor
+    double Adet =0.0;
+    switch(n_dim)
+     {
+     case 2:
+      Adet = A(0,0);
+      break;
+     case 3:
+      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+      break;
+     default:
+      throw 
+       OomphLibError("Wrong dimension in SurfaceMeltElement",
+                     OOMPH_CURRENT_FUNCTION,
+                     OOMPH_EXCEPTION_LOCATION);
+     }
+
+   
+    //Premultiply the weights and the square-root of the determinant of 
+    //the metric tensor
+    double W = w*sqrt(Adet);
+   
+    //Loop over the test functions, nodes of the element
+    for(unsigned l=0;l<n_node;l++)
+     {
+
+      // Contributions to bulk solid equations
+      //--------------------------------------
+      //Loop of types of dofs
+      for(unsigned k=0;k<n_position_type;k++)
+       {
+        //Loop over the displacement components
+        for(unsigned i=0;i<n_dim;i++)
+         {
+          local_eqn = this->position_local_eqn(l,bulk_position_type(k),i);
+          if(local_eqn >= 0)
+           {
+            //Add the loading terms to the residuals
+            residuals[local_eqn] -= traction[i]*psi(l,k)*W;
+           }
+         }
+       } //End of if not boundary condition
+
+     
+      // Contributions to equation that determines the Lagrange multiplier 
+      //------------------------------------------------------------------
+      // (pressure) from kinematic condition
+      //------------------------------------
+     
+      // Cast to a boundary node
+      BoundaryNodeBase *bnod_pt = 
+       dynamic_cast<BoundaryNodeBase*>(node_pt(l));
+     
+      // Get the index of the first nodal value associated with
+      // this FaceElement
+      unsigned first_index=
+       bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+      local_eqn=this->nodal_local_eqn(l,first_index);
+      if (local_eqn>=0)
+       {
+        residuals[local_eqn]+=(normal_veloc+melt_rate)*psi[l]*W;
+       }
+      
+      // Contribution to flux into bulk
+      //-------------------------------
+      local_eqn = nodal_local_eqn(l,this->U_index_ust_heat);
+      if(local_eqn >= 0)
+       {
+        //Add the prescribed flux terms
+        residuals[local_eqn] -= (flux-melt_rate)*psi[l]*W;
+       }
+
+     } //End of loop over shape functions
+   } //End of loop over integration points
+
+
+  // Collocation for melt rate:
+  //---------------------------
+ 
+  //Loop over the nodes
+  for(unsigned l=0;l<n_node;l++)
+   {
+    // get the node pt
+    Node* nod_pt = node_pt(l);
+   
+    // Cast to a boundary node
+    BoundaryNodeBase *bnod_pt =
+     dynamic_cast<BoundaryNodeBase*>(nod_pt);
+   
+    // Get the index of the first nodal value associated with
+    // this FaceElement
+    unsigned first_index=
+     bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+    
+    // Melt rate equation is second added one
+    local_eqn = nodal_local_eqn(l,first_index+1);
+    
+    /*IF it's not a boundary condition*/
+    if(local_eqn >= 0)
+     {
+      double u=nod_pt->value(this->U_index_ust_heat);
+      double melt_rate=nod_pt->value(first_index+1);
+     
+     // Piecewise linear variation
+     if ((melt_temperature()-u)>melt_rate)
+      {
+       residuals[local_eqn]+=melt_rate;
+      }
+     else
+      {
+       residuals[local_eqn]+=(melt_temperature()-u);
+      }
+     
+     }
+   }
+  
+ }
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+}
+
+#endif

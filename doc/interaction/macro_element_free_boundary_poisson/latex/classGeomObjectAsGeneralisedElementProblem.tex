@@ -1,0 +1,216 @@
+\doxysection{Geom\+Object\+As\+Generalised\+Element\+Problem Class Reference}
+\hypertarget{classGeomObjectAsGeneralisedElementProblem}{}\label{classGeomObjectAsGeneralisedElementProblem}\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+
+
+Problem to demonstrate the use of a Geom\+Object as a Generalised\+Element\+: A geometric object (a Circle) is "{}upgraded"{} to a Generalised\+Element. The position of the Circle is determined by a balance of forces, assuming that the Circle is mounted on an elastic spring of specified stiffness and loaded by a vertical "{}load"{}.  
+
+
+Inheritance diagram for Geom\+Object\+As\+Generalised\+Element\+Problem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGeomObjectAsGeneralisedElementProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}{Geom\+Object\+As\+Generalised\+Element\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}{load}} ()
+\begin{DoxyCompactList}\small\item\em Return value of the "{}load"{} on the elastically supported ring. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \& \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_af21708459753b56b407f4e70d1cfe795}{doc\+\_\+info}} ()
+\begin{DoxyCompactList}\small\item\em Access to Doc\+Info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ofstream}} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}{Load\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to data item that stores the "{}load"{} on the ring. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \mbox{\hyperlink{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Problem to demonstrate the use of a Geom\+Object as a Generalised\+Element\+: A geometric object (a Circle) is "{}upgraded"{} to a Generalised\+Element. The position of the Circle is determined by a balance of forces, assuming that the Circle is mounted on an elastic spring of specified stiffness and loaded by a vertical "{}load"{}. 
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00052}{52}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6}\label{classGeomObjectAsGeneralisedElementProblem_ad1f15fcb6c055c58d1f71b522f1f7bd6} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{GeomObjectAsGeneralisedElementProblem()}{GeomObjectAsGeneralisedElementProblem()}}
+{\footnotesize\ttfamily Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Geom\+Object\+As\+Generalised\+Element\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00098}{98}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{geom__object__element_8cc_source_l00087}{Doc\+\_\+info}}, \mbox{\hyperlink{geom__object__element_8cc_source_l00084}{Load\+\_\+pt}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00081}{Trace\+\_\+file}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473}\label{classGeomObjectAsGeneralisedElementProblem_af396d1789e2552c43e0c68561d88d473} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Geom\+Object\+As\+Generalised\+Element\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00061}{61}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931}\label{classGeomObjectAsGeneralisedElementProblem_a4ae01862ddbbeeacca1ce7a444e28931} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Geom\+Object\+As\+Generalised\+Element\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00064}{64}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_af21708459753b56b407f4e70d1cfe795}\label{classGeomObjectAsGeneralisedElementProblem_af21708459753b56b407f4e70d1cfe795} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!doc\_info@{doc\_info}}
+\index{doc\_info@{doc\_info}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{doc\_info()}{doc\_info()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \& Geom\+Object\+As\+Generalised\+Element\+Problem\+::doc\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to Doc\+Info object. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00076}{76}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+References \mbox{\hyperlink{geom__object__element_8cc_source_l00087}{Doc\+\_\+info}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35}\label{classGeomObjectAsGeneralisedElementProblem_a5092be8e6172d6c9147115bdd485db35} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} Geom\+Object\+As\+Generalised\+Element\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+Doc the solution in tecplot format. 
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00151}{151}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{geom__object__element_8cc_source_l00087}{Doc\+\_\+info}}, \mbox{\hyperlink{geom__object__element_8cc_source_l00070}{load()}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00081}{Trace\+\_\+file}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823}\label{classGeomObjectAsGeneralisedElementProblem_a47149c35c94b2ab99507a0a74fe35823} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!load@{load}}
+\index{load@{load}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \& Geom\+Object\+As\+Generalised\+Element\+Problem\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return value of the "{}load"{} on the elastically supported ring. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00070}{70}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+References \mbox{\hyperlink{geom__object__element_8cc_source_l00084}{Load\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__object__element_8cc_source_l00151}{doc\+\_\+solution()}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00208}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2}\label{classGeomObjectAsGeneralisedElementProblem_a89a7f5fa555839193166f802d6ff6be2} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00087}{87}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__object__element_8cc_source_l00076}{doc\+\_\+info()}}, \mbox{\hyperlink{geom__object__element_8cc_source_l00151}{doc\+\_\+solution()}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00098}{Geom\+Object\+As\+Generalised\+Element\+Problem()}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd}\label{classGeomObjectAsGeneralisedElementProblem_ac04469b2dbce010fff3f5b2cf5591bcd} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Load\_pt@{Load\_pt}}
+\index{Load\_pt@{Load\_pt}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Load\_pt}{Load\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}}\texorpdfstring{$\ast$}{*} Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Load\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to data item that stores the "{}load"{} on the ring. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00084}{84}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__object__element_8cc_source_l00098}{Geom\+Object\+As\+Generalised\+Element\+Problem()}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00070}{load()}}.
+
+\Hypertarget{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70}\label{classGeomObjectAsGeneralisedElementProblem_ad6261e556a52596ba8904ee902ea6d70} 
+\index{GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!GeomObjectAsGeneralisedElementProblem@{GeomObjectAsGeneralisedElementProblem}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ofstream}} Geom\+Object\+As\+Generalised\+Element\+Problem\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__object__element_8cc_source_l00081}{81}} of file \mbox{\hyperlink{geom__object__element_8cc_source}{geom\+\_\+object\+\_\+element.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__object__element_8cc_source_l00151}{doc\+\_\+solution()}}, and \mbox{\hyperlink{geom__object__element_8cc_source_l00098}{Geom\+Object\+As\+Generalised\+Element\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__object__element_8cc}{geom\+\_\+object\+\_\+element.\+cc}}\end{DoxyCompactItemize}

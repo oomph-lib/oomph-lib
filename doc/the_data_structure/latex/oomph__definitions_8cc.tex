@@ -1,0 +1,51 @@
+\doxysection{oomph\+\_\+definitions.\+cc File Reference}
+\hypertarget{oomph__definitions_8cc}{}\label{oomph__definitions_8cc}\index{oomph\_definitions.cc@{oomph\_definitions.cc}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Global__timings}{oomph\+::\+Global\+\_\+timings}}
+\begin{DoxyCompactList}\small\item\em ===================================================================== Namespace to control level of comprehensive timings \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper}{oomph\+::\+Terminate\+Helper}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for set\+\_\+terminate function -- used to spawn. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Global__output__stream}{oomph\+::\+Global\+\_\+output\+\_\+stream}}
+\begin{DoxyCompactList}\small\item\em Namespace containing an output stream that can be used for debugging. Use at your own risk -- global data is evil! \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Global__unsigned}{oomph\+::\+Global\+\_\+unsigned}}
+\begin{DoxyCompactList}\small\item\em Namespace containing a number that can be used to annotate things for debugging. Use at your own risk -- global data is evil! \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation}}
+\begin{DoxyCompactList}\small\item\em Namespace containing a vector of strings that can be used to to store global output modifiers. This is global data and you use it at your own risk! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a38ec1b047a4438b6eba8a21b669c229d}{oomph\+::\+Terminate\+Helper\+::setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup terminate helper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a2b5ff4c65cd6891d1852d18ff4b8d9ff}{oomph\+::\+Terminate\+Helper\+::suppress\+\_\+exception\+\_\+error\+\_\+messages}} ()
+\begin{DoxyCompactList}\small\item\em Flush string stream of error messages (call when error has been caught) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a9651e6be0ad4ac01e26242c1fd4a66a2}{oomph\+::\+Terminate\+Helper\+::spawn\+\_\+errors\+\_\+from\+\_\+uncaught\+\_\+errors}} ()
+\begin{DoxyCompactList}\small\item\em Function to spawn messages from uncaught errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_a20615123e22554c3c485484f4c23bfb5}{oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up function that deletes anything dynamically allocated in this namespace. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the i-\/th string or "{}"{} if the relevant string hasn\textquotesingle{}t been defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Global__timings_af25dd181537f6e338daadd0a73d269a0}{oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Global boolean to switch on comprehensive timing -- can probably be declared const false when development on hector is complete. \end{DoxyCompactList}\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_af6addb95de25061844f952c23999d2bb}{oomph\+::\+Terminate\+Helper\+::\+Error\+\_\+message\+\_\+stream\+\_\+pt}} = \&std\+::cerr
+\begin{DoxyCompactList}\small\item\em Stream to output error messages. \end{DoxyCompactList}\item 
+std\+::stringstream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TerminateHelper_ad77707e2dee91388903b687945b908ff}{oomph\+::\+Terminate\+Helper\+::\+Exception\+\_\+stringstream\+\_\+pt}} = 0
+\begin{DoxyCompactList}\small\item\em String stream that records the error message. \end{DoxyCompactList}\item 
+std\+::ofstream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1Global__output__stream_a901672f81bb0b5d8bab3196da94e8867}{oomph\+::\+Global\+\_\+output\+\_\+stream\+::\+Outfile}} = 0
+\begin{DoxyCompactList}\small\item\em Output stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Global__unsigned_aa0b4579f7ee228aaf16302f4b39e0fdf}{oomph\+::\+Global\+\_\+unsigned\+::\+Number}} = 0
+\begin{DoxyCompactList}\small\item\em The unsigned. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_a3e4fe39c6055ee6fe5c367533905591b}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::\+String}}
+\begin{DoxyCompactList}\small\item\em Storage for strings that may be used for global annotations. This is global data and you use it at your own risk! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Nullstream}{Nullstream}} \mbox{\hyperlink{namespaceoomph_a71421688cd14bcbb18a23c64b7245941}{oomph\+::oomph\+\_\+nullstream}}
+\begin{DoxyCompactList}\small\item\em Single (global) instantiation of the \doxylink{classoomph_1_1Nullstream}{Nullstream}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphInfo}{Oomph\+Info}} \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\+::oomph\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Single (global) instantiation of the \doxylink{classoomph_1_1OomphInfo}{Oomph\+Info} object -- this is used throughout the library as a "{}replacement"{} for std\+::cout. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OutputModifier}{Output\+Modifier}} \mbox{\hyperlink{namespaceoomph_acf24e85e104eb2295a9c8c6f77ada393}{oomph\+::default\+\_\+output\+\_\+modifier}}
+\begin{DoxyCompactList}\small\item\em Single global instatiation of the default output modifier. \end{DoxyCompactList}\end{DoxyCompactItemize}

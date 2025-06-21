@@ -1,0 +1,328 @@
+\doxysection{oomph\+::Hang\+Info Class Reference}
+\hypertarget{classoomph_1_1HangInfo}{}\label{classoomph_1_1HangInfo}\index{oomph::HangInfo@{oomph::HangInfo}}
+
+
+Class that contains data for hanging nodes.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo_a23d3ff929ac052ecb401e2a929e8ca64}{Hang\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, initialise vectors to have size zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo_a72416a50e81cf0646aed5501c8949bf1}{Hang\+Info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+master}})
+\begin{DoxyCompactList}\small\item\em Alternative constructor when the number of master nodes is known. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo_a12e76983eb02020a62cd49db543414a2}{\texorpdfstring{$\sim$}{\string~}\+Hang\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Delete the storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo_afc68f5d450c376dde3cf2b4e287c1e32}{Hang\+Info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HangInfo_a5fadce704a90ee904d22cf4f1e3ee585}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}{nmaster}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of master nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the i-\/th master node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1HangInfo_ac49ebdd8957a658fe4a2420108d2dcee}{master\+\_\+weight}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return weight for dofs on i-\/th master node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HangInfo_afe4042d5805342d5e12b6a28e376885a}{set\+\_\+master\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&weight)
+\begin{DoxyCompactList}\small\item\em Set the pointer to the i-\/th master node and its weight. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HangInfo_af7b5808b80bc4438726383e81a1b1e3c}{add\+\_\+master\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}{master\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&weight)
+\begin{DoxyCompactList}\small\item\em Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HangInfo_a7aaef82d109bb5daed0721402e97afe8}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Check that the argument is within the range of stored data values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HangInfo_a05e1d45e1cc741723552bb3191299fa3}{Master\+\_\+nodes\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to nodes that this hanging node depends on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HangInfo_ac9edb46a1890f19fb4dfc02c652cd398}{Master\+\_\+weights}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of weights for the dofs on the master nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1HangInfo_a9e256dac82251e6167bd7a763fe4e134}{Nmaster}}
+\begin{DoxyCompactList}\small\item\em Number of master nodes required by this hanging node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that contains data for hanging nodes. 
+
+To ensure inter-\/element continuity, the values and nodal positions of hanging nodes must be linear combinations of the values and positions on certain adjacent "{}master"{} nodes. For every hanging node $ J $ , \[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \] and \[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \], where $ {\bf U}_I $ and $ {\bf U}_I $ are Vectors containing the nodal values and positions of node $ I $ respectively; the sum is taken over the hanging node\textquotesingle{}s master nodes $ K $ and $ \omega_{JK} $ are suitable weights. This class provides storage and access functions for the pointers to the master nodes and their associated weights. 
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00741}{741}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1HangInfo_a23d3ff929ac052ecb401e2a929e8ca64}\label{classoomph_1_1HangInfo_a23d3ff929ac052ecb401e2a929e8ca64} 
+\index{oomph::HangInfo@{oomph::HangInfo}!HangInfo@{HangInfo}}
+\index{HangInfo@{HangInfo}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{HangInfo()}{HangInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Hang\+Info\+::\+Hang\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor, initialise vectors to have size zero. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00745}{745}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01200}{oomph\+::\+Leak\+Check\+Names\+::\+Hang\+Info\+\_\+build}}.
+
+\Hypertarget{classoomph_1_1HangInfo_a72416a50e81cf0646aed5501c8949bf1}\label{classoomph_1_1HangInfo_a72416a50e81cf0646aed5501c8949bf1} 
+\index{oomph::HangInfo@{oomph::HangInfo}!HangInfo@{HangInfo}}
+\index{HangInfo@{HangInfo}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{HangInfo()}{HangInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Hang\+Info\+::\+Hang\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+master }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Alternative constructor when the number of master nodes is known. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00753}{753}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01200}{oomph\+::\+Leak\+Check\+Names\+::\+Hang\+Info\+\_\+build}}, \mbox{\hyperlink{nodes_8h_source_l00839}{Master\+\_\+nodes\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00842}{Master\+\_\+weights}}.
+
+\Hypertarget{classoomph_1_1HangInfo_a12e76983eb02020a62cd49db543414a2}\label{classoomph_1_1HangInfo_a12e76983eb02020a62cd49db543414a2} 
+\index{oomph::HangInfo@{oomph::HangInfo}!````~HangInfo@{\texorpdfstring{$\sim$}{\string~}HangInfo}}
+\index{````~HangInfo@{\texorpdfstring{$\sim$}{\string~}HangInfo}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HangInfo()}{\string~HangInfo()}}
+{\footnotesize\ttfamily oomph\+::\+Hang\+Info\+::\texorpdfstring{$\sim$}{\string~}\+Hang\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Delete the storage. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00763}{763}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01200}{oomph\+::\+Leak\+Check\+Names\+::\+Hang\+Info\+\_\+build}}, \mbox{\hyperlink{nodes_8h_source_l00839}{Master\+\_\+nodes\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00842}{Master\+\_\+weights}}, and \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}.
+
+\Hypertarget{classoomph_1_1HangInfo_afc68f5d450c376dde3cf2b4e287c1e32}\label{classoomph_1_1HangInfo_afc68f5d450c376dde3cf2b4e287c1e32} 
+\index{oomph::HangInfo@{oomph::HangInfo}!HangInfo@{HangInfo}}
+\index{HangInfo@{HangInfo}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{HangInfo()}{HangInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Hang\+Info\+::\+Hang\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1HangInfo_af7b5808b80bc4438726383e81a1b1e3c}\label{classoomph_1_1HangInfo_af7b5808b80bc4438726383e81a1b1e3c} 
+\index{oomph::HangInfo@{oomph::HangInfo}!add\_master\_node\_pt@{add\_master\_node\_pt}}
+\index{add\_master\_node\_pt@{add\_master\_node\_pt}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{add\_master\_node\_pt()}{add\_master\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hang\+Info\+::add\+\_\+master\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{master\+\_\+node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{weight }\end{DoxyParamCaption})}
+
+
+
+Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01489}{1489}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00839}{Master\+\_\+nodes\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00842}{Master\+\_\+weights}}, and \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}.
+
+\Hypertarget{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c}\label{classoomph_1_1HangInfo_a7a935ae7eeca594a648ca1800444827c} 
+\index{oomph::HangInfo@{oomph::HangInfo}!master\_node\_pt@{master\_node\_pt}}
+\index{master\_node\_pt@{master\_node\_pt}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{master\_node\_pt()}{master\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}  \& oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the i-\/th master node. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00791}{791}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00839}{Master\+\_\+nodes\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}, and \mbox{\hyperlink{nodes_8cc_source_l01456}{range\+\_\+check()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00199}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata()}}, \mbox{\hyperlink{refineable__polar__navier__stokes__elements_8cc_source_l00048}{oomph\+::\+Refineable\+Polar\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution()}}, \mbox{\hyperlink{refineable__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__advection__diffusion__reaction__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react()}}, \mbox{\hyperlink{refineable__axisym__advection__diffusion__elements_8cc_source_l00037}{oomph\+::\+Refineable\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{refineable__gen__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Generalised\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__gen__axisym__advection__diffusion__elements_8cc_source_l00037}{oomph\+::\+Refineable\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__linearised__axisym__navier__stokes__elements_8cc_source_l00040}{oomph\+::\+Refineable\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{refineable__linearised__navier__stokes__elements_8cc_source_l00040}{oomph\+::\+Refineable\+Linearised\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{refineable__spherical__advection__diffusion__elements_8cc_source_l00037}{oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__spherical__navier__stokes__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Spherical\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+nst()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l01301}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+jacobian\+\_\+blocks\+\_\+analytic()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8cc_source_l00982}{oomph\+::\+Refineable\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l01557}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{nodes_8cc_source_l03588}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position()}}, \mbox{\hyperlink{nodes_8cc_source_l03621}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{nodes_8cc_source_l02528}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02560}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02592}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{nodes_8cc_source_l02624}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02063}{oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l03133}{oomph\+::\+Refineable\+FSIImpose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fsi\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00614}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{problem_8cc_source_l02664}{oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8cc_source_l02437}{oomph\+::\+Node\+::value()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_ac49ebdd8957a658fe4a2420108d2dcee}\label{classoomph_1_1HangInfo_ac49ebdd8957a658fe4a2420108d2dcee} 
+\index{oomph::HangInfo@{oomph::HangInfo}!master\_weight@{master\_weight}}
+\index{master\_weight@{master\_weight}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{master\_weight()}{master\_weight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}  \& oomph\+::\+Hang\+Info\+::master\+\_\+weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return weight for dofs on i-\/th master node. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00808}{808}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00842}{Master\+\_\+weights}}, \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}, and \mbox{\hyperlink{nodes_8cc_source_l01456}{range\+\_\+check()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00199}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata()}}, \mbox{\hyperlink{refineable__young__laplace__elements_8cc_source_l00034}{oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{refineable__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__advection__diffusion__reaction__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react()}}, \mbox{\hyperlink{refineable__gen__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Generalised\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{nodes_8cc_source_l03588}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position()}}, \mbox{\hyperlink{nodes_8cc_source_l03621}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{nodes_8cc_source_l02528}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02560}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02592}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{nodes_8cc_source_l02624}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8cc_source_l02437}{oomph\+::\+Node\+::value()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c}\label{classoomph_1_1HangInfo_aa9c1130b58db2ff6d5eee4f923ba365c} 
+\index{oomph::HangInfo@{oomph::HangInfo}!nmaster@{nmaster}}
+\index{nmaster@{nmaster}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{nmaster()}{nmaster()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hang\+Info\+::nmaster (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of master nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00785}{785}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00199}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata()}}, \mbox{\hyperlink{refineable__young__laplace__elements_8cc_source_l00034}{oomph\+::\+Refineable\+Young\+Laplace\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{refineable__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{refineable__advection__diffusion__reaction__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff\+\_\+react()}}, \mbox{\hyperlink{refineable__gen__advection__diffusion__elements_8cc_source_l00038}{oomph\+::\+Refineable\+Generalised\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{nodes_8cc_source_l03588}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position()}}, \mbox{\hyperlink{nodes_8cc_source_l03621}{oomph\+::\+Solid\+Node\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{oomph\+::\+Algebraic\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{macro__element__node__update__element_8cc_source_l00048}{oomph\+::\+Macro\+Element\+Node\+Update\+Node\+::node\+\_\+update()}}, \mbox{\hyperlink{nodes_8cc_source_l02528}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02560}{oomph\+::\+Node\+::position()}}, \mbox{\hyperlink{nodes_8cc_source_l02592}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{nodes_8cc_source_l02624}{oomph\+::\+Node\+::position\+\_\+gen()}}, \mbox{\hyperlink{problem_8cc_source_l02664}{oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8cc_source_l02437}{oomph\+::\+Node\+::value()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_a5fadce704a90ee904d22cf4f1e3ee585}\label{classoomph_1_1HangInfo_a5fadce704a90ee904d22cf4f1e3ee585} 
+\index{oomph::HangInfo@{oomph::HangInfo}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hang\+Info\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1HangInfo_a7aaef82d109bb5daed0721402e97afe8}\label{classoomph_1_1HangInfo_a7aaef82d109bb5daed0721402e97afe8} 
+\index{oomph::HangInfo@{oomph::HangInfo}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hang\+Info\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check that the argument is within the range of stored data values. 
+
+Check that the argument is within the range of stored master nodes. 
+
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01456}{1456}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{nodes_8h_source_l00845}{Nmaster}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8h_source_l00791}{master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{master\+\_\+weight()}}, and \mbox{\hyperlink{nodes_8cc_source_l01474}{set\+\_\+master\+\_\+node\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_afe4042d5805342d5e12b6a28e376885a}\label{classoomph_1_1HangInfo_afe4042d5805342d5e12b6a28e376885a} 
+\index{oomph::HangInfo@{oomph::HangInfo}!set\_master\_node\_pt@{set\_master\_node\_pt}}
+\index{set\_master\_node\_pt@{set\_master\_node\_pt}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{set\_master\_node\_pt()}{set\_master\_node\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hang\+Info\+::set\+\_\+master\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{master\+\_\+node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{weight }\end{DoxyParamCaption})}
+
+
+
+Set the pointer to the i-\/th master node and its weight. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01474}{1474}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00839}{Master\+\_\+nodes\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00842}{Master\+\_\+weights}}, and \mbox{\hyperlink{nodes_8cc_source_l01456}{range\+\_\+check()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l02664}{oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1HangInfo_a05e1d45e1cc741723552bb3191299fa3}\label{classoomph_1_1HangInfo_a05e1d45e1cc741723552bb3191299fa3} 
+\index{oomph::HangInfo@{oomph::HangInfo}!Master\_nodes\_pt@{Master\_nodes\_pt}}
+\index{Master\_nodes\_pt@{Master\_nodes\_pt}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{Master\_nodes\_pt}{Master\_nodes\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} oomph\+::\+Hang\+Info\+::\+Master\+\_\+nodes\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+C-\/style array of pointers to nodes that this hanging node depends on. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00839}{839}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8cc_source_l01489}{add\+\_\+master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00753}{Hang\+Info()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8cc_source_l01474}{set\+\_\+master\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00763}{\texorpdfstring{$\sim$}{\string~}\+Hang\+Info()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_ac9edb46a1890f19fb4dfc02c652cd398}\label{classoomph_1_1HangInfo_ac9edb46a1890f19fb4dfc02c652cd398} 
+\index{oomph::HangInfo@{oomph::HangInfo}!Master\_weights@{Master\_weights}}
+\index{Master\_weights@{Master\_weights}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{Master\_weights}{Master\_weights}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Hang\+Info\+::\+Master\+\_\+weights\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+C-\/style array of weights for the dofs on the master nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00842}{842}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8cc_source_l01489}{add\+\_\+master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00753}{Hang\+Info()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8cc_source_l01474}{set\+\_\+master\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00763}{\texorpdfstring{$\sim$}{\string~}\+Hang\+Info()}}.
+
+\Hypertarget{classoomph_1_1HangInfo_a9e256dac82251e6167bd7a763fe4e134}\label{classoomph_1_1HangInfo_a9e256dac82251e6167bd7a763fe4e134} 
+\index{oomph::HangInfo@{oomph::HangInfo}!Nmaster@{Nmaster}}
+\index{Nmaster@{Nmaster}!oomph::HangInfo@{oomph::HangInfo}}
+\doxysubsubsection{\texorpdfstring{Nmaster}{Nmaster}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hang\+Info\+::\+Nmaster\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of master nodes required by this hanging node. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00845}{845}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8cc_source_l01489}{add\+\_\+master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{nmaster()}}, \mbox{\hyperlink{nodes_8cc_source_l01456}{range\+\_\+check()}}, and \mbox{\hyperlink{nodes_8h_source_l00763}{\texorpdfstring{$\sim$}{\string~}\+Hang\+Info()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8h}{nodes.\+h}}\item 
+\mbox{\hyperlink{nodes_8cc}{nodes.\+cc}}\end{DoxyCompactItemize}

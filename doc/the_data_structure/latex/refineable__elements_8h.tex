@@ -1,0 +1,20 @@
+\doxysection{refineable\+\_\+elements.\+h File Reference}
+\hypertarget{refineable__elements_8h}{}\label{refineable__elements_8h}\index{refineable\_elements.h@{refineable\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableElement}{oomph\+::\+Refineable\+Element}}
+\begin{DoxyCompactList}\small\item\em Refineable\+Elements are Finite\+Elements that may be subdivided into children to provide a better local approximation to the solution. After non-\/uniform refinement adjacent elements need not necessarily have nodes in common. A node that does not have a counterpart in its neighbouring element is known as a hanging node and its position and any data that it stores must be constrained to ensure inter-\/element continuity. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PRefineableElement}{oomph\+::\+PRefineable\+Element}}
+\begin{DoxyCompactList}\small\item\em p-\/refineable version of \doxylink{classoomph_1_1RefineableElement}{Refineable\+Element} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NonRefineableElementWithHangingNodes}{oomph\+::\+Non\+Refineable\+Element\+With\+Hanging\+Nodes}}
+\begin{DoxyCompactList}\small\item\em A base class for elements that can have hanging nodes but are not refineable as such. This class is usually used as a base class for Face\+Elements that are attached to refineable bulk elements (and stripped out before adapting the bulk mesh, so they don\textquotesingle{}t participate in the refimenent process itself). We therefore simply break the pure virtual functions that don\textquotesingle{}t make any sense for such elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableSolidElement}{oomph\+::\+Refineable\+Solid\+Element}}
+\begin{DoxyCompactList}\small\item\em Refineable\+Solid\+Elements are Solid\+Finite\+Elements that may be subdivided into children to provide a better local approximation to the solution. The distinction is required to keep a clean separation between problems that alter nodal positions and others. A number of procedures are generic and are included in this class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NonRefineableSolidElementWithHangingNodes}{oomph\+::\+Non\+Refineable\+Solid\+Element\+With\+Hanging\+Nodes}}
+\begin{DoxyCompactList}\small\item\em A base class for Solid\+Elements that can have hanging nodes but are not refineable as such. This class is usually used as a base class for Face\+Elements that are attached to refineable bulk elements (and stripped out before adapting the bulk mesh, so they don\textquotesingle{}t participate in the refimenent process itself). We therefore simply break the pure virtual functions that don\textquotesingle{}t make any sense for such elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

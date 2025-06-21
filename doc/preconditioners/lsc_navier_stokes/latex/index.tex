@@ -1,0 +1,271 @@
+\chapter{The Least-\/\+Squares Commutator (LSC) Navier-\/\+Stokes preconditioner}
+\hypertarget{index}{}\label{index}\index{The Least-\/Squares Commutator (LSC) Navier-\/Stokes preconditioner@{The Least-\/Squares Commutator (LSC) Navier-\/Stokes preconditioner}}
+The purpose of this tutorial is to show how to use {\ttfamily oomph-\/lib\textquotesingle{}s} Least Squares Commutator (LSC) Navier-\/\+Stokes preconditioner.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+{\ttfamily oomph-\/lib} currently provides two types of (LBB-\/stable) Navier-\/\+Stokes elements\+: Taylor-\/\+Hood (Q2\+Q1) and Crouzeix-\/\+Raviart (Q2\+Q-\/1) elements. These contain two distinct types of degrees of freedom, namely the velocities and pressures.
+
+The least-\/squares commutator (LSC; formerly BFBT) Navier-\/\+Stokes preconditioner employs {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../mpi/block_preconditioners/html/index.html}{\texttt{ block-\/preconditioning framework}} to (formally) re-\/order the linear system to be solved during the Newton iteration into 2x2 blocks, corresponding to the velocity and pressure unknowns. We note that all velocity components are treated as a single block of unknowns. The linear system therefore has the following block structure  \[
+\left( 
+\begin{array}{cc}
+{\bf F} & {\bf G} \\ {\bf D} & {\bf 0} 
+\end{array} 
+\right)
+\left( 
+\begin{array}{c}
+{\bf z}_u \\ {\bf z}_p
+\end{array} 
+\right) =
+\left( 
+\begin{array}{c}
+{\bf r}_u \\ {\bf r}_p
+\end{array} 
+\right).
+\] Here $ {\bf F}$ is the momentum block, $ {\bf G} $ the discrete gradient operator, and $ {\bf D}$ the discrete divergence operator. (For unstabilised elements, we have $ {\bf D} = {\bf G}^T $ and in much of the literature the divergence matrix is denoted by $ {\bf B} $ .)
+
+An "{}exact"{} preconditioner would solve this system exactly and thus ensure the convergence of any iterative linear solver in a single iteration. However, the application of such a preconditioner would, of course, be exactly as expensive as a direct solve. The LSC/\+BFBT preconditioner replaces the exact Jacobian by a block-\/triangular approximation  \[
+\left( 
+\begin{array}{cc}
+{\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s 
+\end{array} 
+\right) 
+\left( 
+\begin{array}{c}
+{\bf z}_u \\ {\bf z}_p
+\end{array} 
+\right) =
+\left( 
+\begin{array}{c}
+{\bf r}_u \\ {\bf r}_p
+\end{array} 
+\right),
+\] where ${\bf M}_s$ is an approximation to the pressure Schur-\/complement $ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. $ This system can be solved in two steps\+:
+\begin{DoxyEnumerate}
+\item Solve the second row for $ {\bf z}_p$ via  \[ 
+   {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
+   \]
+\item Given $ {\bf z}_p $ , solve the first row for $ {\bf z}_u$ via  \[ 
+   {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)
+   \]
+\end{DoxyEnumerate}In the LSC/\+BFBT preconditioner, the action of the inverse pressure Schur complement  \[
+{\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
+\] is approximated by  \[
+{\bf z}_p = - 
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) 
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
+{\bf r}_p,
+\] where $ \widehat{\bf Q} $ is the diagonal of the velocity mass matrix. The evaluation of this expression involves two linear solves involving the matrix  \[
+{\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)
+\] which has the character of a matrix arising from the discretisation of a Poisson problem on the pressure space. We also have to evaluate matrix-\/vector products with the matrix  \[
+{\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}
+\] Details of the theory can be found in "{}\+Finite Elements and  \+Fast Iterative Solvers with Applications in Incompressible Fluid  \+Dynamics"{} by Howard C. Elman, David J. Silvester, and Andrew J. Wathen, published by Oxford University Press, 2006. ~\newline
+~\newline
+ In our implementation of the preconditioner, the linear systems can either be solved "{}exactly"{}, using {\ttfamily Super\+LU} (in its incarnation as an exact preconditioner; this is the default) or by any other {\ttfamily Preconditioner} (interpreted as an "{}inexact solver"{}) specified via the access functions 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{NavierStokesSchurComplementPreconditioner::set\_f\_preconditioner(...)}
+
+\end{DoxyCode}
+ or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{NavierStokesSchurComplementPreconditioner::set\_p\_preconditioner(...)}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{An example}{An example}}\label{index_example}
+To demonstrate how to use the preconditioner, here are the relevant extracts from the driver code \href{../../../../demo_drivers/linear_solvers/driven_cavity.cc}{\texttt{ driven\+\_\+cavity.\+cc}} -- a straightforward modification of the code for \href{../../../navier_stokes/driven_cavity/html/index.html}{\texttt{ driven-\/cavity problem discussed elsewhere.}} As explained in the \href{../../../linear_solvers/html/index.html}{\texttt{ Linear Solvers Tutorial}} switching to an iterative linear solver is typically performed in the {\ttfamily Problem} constructor and involves a few straightforward steps\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Create an instance of the Iterative\+Linear\+Solver and pass it to the Problem}} ~\newline
+~\newline
+ In our problem, we choose {\ttfamily GMRES} as the linear solver\+: ~\newline
+~\newline
+  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ oomph-\/lib\ iterative\ linear\ solver}}
+\DoxyCodeLine{\ \ \ Solver\_pt=\textcolor{keyword}{new}\ GMRES<CRDoubleMatrix>;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ linear\ solver}}
+\DoxyCodeLine{\ \ \ linear\_solver\_pt()\ =\ Solver\_pt;}
+
+\end{DoxyCodeInclude}
+ ~\newline
+~\newline
+
+\item {\bfseries{Create an instance of the Preconditioner and pass it to the Iterative\+Linear\+Solver}} ~\newline
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ preconditioner}}
+\DoxyCodeLine{\ \ \ Prec\_pt=\textcolor{keyword}{new}\ NavierStokesSchurComplementPreconditioner(\textcolor{keyword}{this});}
+\DoxyCodeLine{\ \ \ Prec\_pt-\/>set\_navier\_stokes\_mesh(this-\/>mesh\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ Solver\_pt-\/>preconditioner\_pt()=Prec\_pt;}
+
+\end{DoxyCodeInclude}
+ ~\newline
+~\newline
+
+\item {\bfseries{Customise the Preconditioner (if required)}} ~\newline
+~\newline
+ The behaviour of many preconditioners can be fine-\/tuned for specific applications. The {\ttfamily Navier\+Stokes\+LSCPreconditioner} provides the option to perform the linear solves involving the $ {\bf P} $ and $ {\bf F} $ matrices with inexact solvers (i.\+e. other preconditioners), rather than with the "{}exact preconditioner"{} {\ttfamily Super\+LUPreconditioner}. Since the matrix $ {\bf P} $ has the character of a pressure Poisson matrix, it may be solved efficiently with algebraic multigrid (AMG) -- at least for elements that employ a continuous pressure approximation; see \doxysectlink{index_comm_ex}{Further comments and exercises}{1}. In these cases an efficient inexact solver is obtained by performing just a single multigrid cycle. ~\newline
+~\newline
+ Assuming that \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ {\ttfamily Hypre}}} is available, we therefore provide the option to use the {\ttfamily Hypre} AMG solver to solve the linear systems involving the $ {\bf P}
+   $ matrix. ~\newline
+~\newline
+  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_HYPRE}}
+\DoxyCodeLine{\textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ helper\ method\ for\ the\ block\ diagonal\ F\ block\ preconditioner\ to\ allow\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ hypre\ to\ be\ used\ for\ as\ a\ subsidiary\ block\ preconditioner}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }Hypre\_Subsidiary\_Preconditioner\_Helper}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ Preconditioner*\ set\_hypre\_preconditioner()}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ HyprePreconditioner;}
+
+\end{DoxyCodeInclude}
+ ~\newline
+ We set the various solver flags to values that are appropriate for 2D Poisson problems. This is most easily done by calling a helper function, defined in the namespace {\ttfamily Hypre\+\_\+default\+\_\+settings\+:} ~\newline
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ parameters\ for\ use\ as\ preconditioner\ on\ Poisson-\/type\ problem}}
+\DoxyCodeLine{\ \ \ \ \ Hypre\_default\_settings::set\_defaults\_for\_2D\_poisson\_problem(}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{static\_cast<}HyprePreconditioner*\textcolor{keyword}{>}(P\_matrix\_preconditioner\_pt));}
+
+\end{DoxyCodeInclude}
+ ~\newline
+ Next we specify the {\ttfamily Preconditioner} as the inexact solver for the $ {\bf P}
+   $ matrix, ~\newline
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Use\ Hypre\ for\ the\ Schur\ complement\ block}}
+\DoxyCodeLine{\ \ \ \ \ Prec\_pt-\/>set\_p\_preconditioner(P\_matrix\_preconditioner\_pt);}
+
+\end{DoxyCodeInclude}
+ ~\newline
+ and suppress the on-\/screen output from Hypre. ~\newline
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Shut\ up!}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{static\_cast<}HyprePreconditioner*\textcolor{keyword}{>}(P\_matrix\_preconditioner\_pt)-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ disable\_doc\_time();}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ ~\newline
+ For modest Reynolds numbers, performing a single multigrid cycle also provides a good approximate solver for linear systems involving the momentum block, $ {\bf F}, $ so we repeat the steps just listed, using the solver flags assigned in another helper function in the namespace {\ttfamily Hypre\+\_\+default\+\_\+settings\+:} ~\newline
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ F\_matrix\_preconditioner\_pt\ =\ \textcolor{keyword}{new}\ HyprePreconditioner;}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Shut\ up!}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}HyprePreconditioner*\textcolor{keyword}{>}(F\_matrix\_preconditioner\_pt)-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ disable\_doc\_time();}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ parameters\ for\ use\ as\ preconditioner\ in\ for\ momentum\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ block\ in\ Navier-\/Stokes\ problem}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Hypre\_default\_settings::set\_defaults\_for\_navier\_stokes\_momentum\_block(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}HyprePreconditioner*\textcolor{keyword}{>}(F\_matrix\_preconditioner\_pt));}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ Hypre\ for\ momentum\ block\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ Prec\_pt-\/>set\_f\_preconditioner(F\_matrix\_preconditioner\_pt);}
+
+\end{DoxyCodeInclude}
+ The driver code contains various other preconditioning options which you should explore yourself.
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Further comments and exercises}{Further comments and exercises}}\label{index_comm_ex}
+Use the driver code \href{../../../../demo_drivers/linear_solvers/driven_cavity.cc}{\texttt{ demo\+\_\+drivers/linear\+\_\+solvers/driven\+\_\+cavity.\+cc}} to explore the behaviour of the preconditioner for the driven cavity problem. The driver code uses command line flags to specify various solver/preconditioner combinations.
+
+
+\begin{DoxyEnumerate}
+\item Show that for Taylor-\/\+Hood (Q2\+Q1) elements, the preconditioner performs extremely well, i.\+e. the solve time increases approximately linearly with the number of degrees of freedom. ~\newline
+~\newline
+
+\item Show that for Crouzeix-\/\+Raviart (Q2\+Q-\/1) elements, the use of the AMG solver for the pressure Schur complement block leads to a very poor performance. ~\newline
+~\newline
+
+\item Examine iteration numbers and CPU times for various problem sizes and show that for Taylor-\/\+Hood (Q2\+Q1) elements, the preconditioner leads to near-\/optimal behaviour in the sense that the CPU times increase approximately linearly with the number of unknowns. Determine the "{}break-\/even"{} point in the CPU times for the solution by direct and iterative solvers. {\bfseries{Hint\+:}} You may wish to use the shell script \href{../../../../demo_drivers/linear_solvers/time_driven_cavity.bash}{\texttt{ time\+\_\+driven\+\_\+cavity.\+bash}} to perform the parameter studies. ~\newline
+~\newline
+
+\end{DoxyEnumerate}
+
+For your reference, here are a few timings (total time in seconds for the Newton solver) obtained from runs at a Reynolds number of $ Re=100 $ on various uniformly refined meshes. The first column in the tables shows the total number of degrees of freedom; the subsequent columns show the solve times for different solver/preconditioner combinations. For instance, GMRES \mbox{[}Super\+LU,AMG\mbox{]} means that the linear systems were solved using the LSC preconditioner with an exact solve for the momentum block and an approximate AMG solve (a single multigrid cycle) for the pressure Schur complement block. All runs were performed with full optimisation (-\/O6) on an Intel Xeon 3.\+6\+GHz processor.
+
+{\bfseries{\begin{center}Taylor Hood\end{center} }}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ \# of dofs}&\cellcolor{\tableheadbgcolor}\textbf{ Super\+LU}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,AMG\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,AMG\mbox{]} }\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ \# of dofs}&\cellcolor{\tableheadbgcolor}\textbf{ Super\+LU}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,AMG\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,AMG\mbox{]} }\\\cline{1-6}
+\endhead
+842&0.\+38 &0.\+51 &0.\+52 &0.\+93 &0.\+91 \\\cline{1-6}
+3482&2.\+32 &2.\+56 &2.\+28 &3.\+15 &3.\+04 \\\cline{1-6}
+7922&9.\+24 &6.\+34 &6.\+3 &7.\+54 &7.\+41 \\\cline{1-6}
+14162&15.\+71 &18.\+06 &17.\+84 &13.\+8 &13.\+46 \\\cline{1-6}
+22202&36.\+88 &28.\+46 &27.\+21 &23.\+26 &23.\+29 \\\cline{1-6}
+32042&62.\+29 &37.\+27 &36.\+26 &29.\+38 &25.\+84 \\\cline{1-6}
+43682&108.\+97 &66.\+26 &57.\+7 &41.\+71 &37.\+6 \\\cline{1-6}
+\end{longtabu}
+
+
+{\bfseries{\begin{center}Crouzeix Raviart\end{center} }}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ \# of dofs}&\cellcolor{\tableheadbgcolor}\textbf{ Super\+LU}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,AMG\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,AMG\mbox{]} }\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ \# of dofs}&\cellcolor{\tableheadbgcolor}\textbf{ Super\+LU}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}Super\+LU,AMG\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,Super\+LU\mbox{]}}&\cellcolor{\tableheadbgcolor}\textbf{ GMRES \mbox{[}AMG,AMG\mbox{]} }\\\cline{1-6}
+\endhead
+1021 &0.\+29 &0.\+51 &0.\+72 &0.\+72 &0.\+99 \\\cline{1-6}
+4241 &1.\+82 &2.\+79 &4.\+83 &3.\+62 &7.\+03 \\\cline{1-6}
+9661 &7.\+06 &8.\+06 &20.\+43 &9.\+64 &27.\+33 \\\cline{1-6}
+17281 &20.\+79 &19.\+62 &67.\+62 &20.\+15 &87.\+39 \\\cline{1-6}
+27101 &55.\+43 &44.\+34 &169.\+8 &46.\+04 &227.\+11 \\\cline{1-6}
+39121 &93.\+75 &64.\+02 &277.\+29 &39.\+73 &314.\+25 \\\cline{1-6}
+53341 &108.\+96 &78.\+27 &521.\+00 &60.\+02 &596.\+27 \\\cline{1-6}
+\end{longtabu}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/linear_solvers/}{\texttt{ demo\+\_\+drivers/linear\+\_\+solvers/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/linear_solvers/driven_cavity.cc}{\texttt{ demo\+\_\+drivers/linear\+\_\+solvers/driven\+\_\+cavity.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

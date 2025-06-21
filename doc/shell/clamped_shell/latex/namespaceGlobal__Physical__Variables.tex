@@ -1,0 +1,130 @@
+\doxysection{Global\+\_\+\+Physical\+\_\+\+Variables Namespace Reference}
+\hypertarget{namespaceGlobal__Physical__Variables}{}\label{namespaceGlobal__Physical__Variables}\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+
+
+Global variables that represent physical properties.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\+\_\+pressure}} ()
+\begin{DoxyCompactList}\small\item\em Return a reference to the external pressure load on the elastic tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\+\_\+load}} (\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{xi}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{x}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{N}}, \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{load}})
+\begin{DoxyCompactList}\small\item\em Load function, normal pressure loading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Prescribed\+\_\+y}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Prescribed position of control point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement control is used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Perturbation pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global variables that represent physical properties. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}\label{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!external\_pressure@{external\_pressure}}
+\index{external\_pressure@{external\_pressure}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{external\_pressure()}{external\_pressure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::external\+\_\+pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return a reference to the external pressure load on the elastic tube. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00066}{66}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+References \mbox{\hyperlink{clamped__shell_8cc_source_l00058}{Pext\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00071}{press\+\_\+load()}}, and \mbox{\hyperlink{clamped__shell_8cc_source_l00485}{Shell\+Problem$<$ ELEMENT $>$\+::solve()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}\label{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!press\_load@{press\_load}}
+\index{press\_load@{press\_load}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{press\_load()}{press\_load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{void}} Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&}]{load }\end{DoxyParamCaption})}
+
+
+
+Load function, normal pressure loading. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00071}{71}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+References \mbox{\hyperlink{clamped__shell_8cc_source_l00066}{external\+\_\+pressure()}}, and \mbox{\hyperlink{clamped__shell_8cc_source_l00061}{Pcos}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00255}{Shell\+Problem$<$ ELEMENT $>$\+::\+Shell\+Problem()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}\label{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pcos@{Pcos}}
+\index{Pcos@{Pcos}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Pcos}{Pcos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos =1.\+0}
+
+
+
+Perturbation pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00061}{61}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00071}{press\+\_\+load()}}, and \mbox{\hyperlink{clamped__shell_8cc_source_l00485}{Shell\+Problem$<$ ELEMENT $>$\+::solve()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}\label{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pext\_data\_pt@{Pext\_data\_pt}}
+\index{Pext\_data\_pt@{Pext\_data\_pt}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Pext\_data\_pt}{Pext\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{Data}} \texorpdfstring{$\ast$}{*} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext\+\_\+data\+\_\+pt}
+
+
+
+Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement control is used. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00058}{58}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00066}{external\+\_\+pressure()}}, and \mbox{\hyperlink{clamped__shell_8cc_source_l00255}{Shell\+Problem$<$ ELEMENT $>$\+::\+Shell\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}\label{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Prescribed\_y@{Prescribed\_y}}
+\index{Prescribed\_y@{Prescribed\_y}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Prescribed\_y}{Prescribed\_y}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Prescribed\+\_\+y = 1.\+0}
+
+
+
+Prescribed position of control point. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00054}{54}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00255}{Shell\+Problem$<$ ELEMENT $>$\+::\+Shell\+Problem()}}, and \mbox{\hyperlink{clamped__shell_8cc_source_l00485}{Shell\+Problem$<$ ELEMENT $>$\+::solve()}}.
+

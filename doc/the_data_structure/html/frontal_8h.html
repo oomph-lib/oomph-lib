@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: frontal.h File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">frontal.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="frontal_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac5fa63f703da950b52ddf1a64131e691" id="r_ac5fa63f703da950b52ddf1a64131e691"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#ac5fa63f703da950b52ddf1a64131e691">PROTOCCALLSFSUB3</a> (MA42ID, ma42id, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>) PROTOCCALLSFSUB8(MA42AD</td></tr>
+<tr class="separator:ac5fa63f703da950b52ddf1a64131e691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4a7b5cdc32eaccf6aff94b23fa4d47" id="r_a0d4a7b5cdc32eaccf6aff94b23fa4d47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a0d4a7b5cdc32eaccf6aff94b23fa4d47">PROTOCCALLSFSUB9</a> (MA42JD, ma42jd, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>) PROTOCCALLSFSUB6(MA42PD</td></tr>
+<tr class="separator:a0d4a7b5cdc32eaccf6aff94b23fa4d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221a37008623dad47ba8a59b6e8ef5d6" id="r_a221a37008623dad47ba8a59b6e8ef5d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a221a37008623dad47ba8a59b6e8ef5d6">PROTOCCALLSFSUB22</a> (MA42BD, ma42bd, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>, <a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>, <a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>) PROTOCCALLSFSUB12(MA42CD</td></tr>
+<tr class="separator:a221a37008623dad47ba8a59b6e8ef5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c14bd0f45a5ce79afa80fc22358821e" id="r_a6c14bd0f45a5ce79afa80fc22358821e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a6c14bd0f45a5ce79afa80fc22358821e">PROTOCCALLSFSUB1</a> (MC63ID, mc63id, <a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>) PROTOCCALLSFSUB19(MC63AD</td></tr>
+<tr class="separator:a6c14bd0f45a5ce79afa80fc22358821e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a7240a1ac82955ffd702a4f26c4650476" id="r_a7240a1ac82955ffd702a4f26c4650476"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a7240a1ac82955ffd702a4f26c4650476">ma42ad</a></td></tr>
+<tr class="separator:a7240a1ac82955ffd702a4f26c4650476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf9af43a95c45c3d469658098dfbe1a" id="r_a4cf9af43a95c45c3d469658098dfbe1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a></td></tr>
+<tr class="separator:a4cf9af43a95c45c3d469658098dfbe1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe41f5e30c598530e46fc079718e8f83" id="r_abe41f5e30c598530e46fc079718e8f83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a></td></tr>
+<tr class="separator:abe41f5e30c598530e46fc079718e8f83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2291edc03bb9ce2e52c8b893b4281d" id="r_a3f2291edc03bb9ce2e52c8b893b4281d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a3f2291edc03bb9ce2e52c8b893b4281d">PINT</a></td></tr>
+<tr class="separator:a3f2291edc03bb9ce2e52c8b893b4281d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9660314e65b4dff75d5e5c867142f8" id="r_ada9660314e65b4dff75d5e5c867142f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#ada9660314e65b4dff75d5e5c867142f8">ma42pd</a></td></tr>
+<tr class="separator:ada9660314e65b4dff75d5e5c867142f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d5920c01f34a0ad02dd7b5269da6d79" id="r_a5d5920c01f34a0ad02dd7b5269da6d79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a5d5920c01f34a0ad02dd7b5269da6d79">ma42cd</a></td></tr>
+<tr class="separator:a5d5920c01f34a0ad02dd7b5269da6d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1420eb9ac2bfac00c22a06ce0233e46" id="r_ac1420eb9ac2bfac00c22a06ce0233e46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#ac1420eb9ac2bfac00c22a06ce0233e46">LOGICAL</a></td></tr>
+<tr class="separator:ac1420eb9ac2bfac00c22a06ce0233e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1458e66da89d78a1b4913cac29f25935" id="r_a1458e66da89d78a1b4913cac29f25935"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a></td></tr>
+<tr class="separator:a1458e66da89d78a1b4913cac29f25935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae19b22d0ea343b69f76b0a5b26c4eb97" id="r_ae19b22d0ea343b69f76b0a5b26c4eb97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a></td></tr>
+<tr class="separator:ae19b22d0ea343b69f76b0a5b26c4eb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1f7913f1e8bc292cea0f069e3e757e" id="r_a3c1f7913f1e8bc292cea0f069e3e757e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="frontal_8h.html#a3c1f7913f1e8bc292cea0f069e3e757e">mc63ad</a></td></tr>
+<tr class="separator:a3c1f7913f1e8bc292cea0f069e3e757e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6c14bd0f45a5ce79afa80fc22358821e" name="a6c14bd0f45a5ce79afa80fc22358821e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c14bd0f45a5ce79afa80fc22358821e">&#9670;&#160;</a></span>PROTOCCALLSFSUB1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB1 </td>
+          <td>(</td>
+          <td class="paramtype">MC63ID&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mc63id&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a221a37008623dad47ba8a59b6e8ef5d6" name="a221a37008623dad47ba8a59b6e8ef5d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221a37008623dad47ba8a59b6e8ef5d6">&#9670;&#160;</a></span>PROTOCCALLSFSUB22()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB22 </td>
+          <td>(</td>
+          <td class="paramtype">MA42BD&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ma42bd&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a1458e66da89d78a1b4913cac29f25935">DOUBLEVV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5fa63f703da950b52ddf1a64131e691" name="ac5fa63f703da950b52ddf1a64131e691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5fa63f703da950b52ddf1a64131e691">&#9670;&#160;</a></span>PROTOCCALLSFSUB3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB3 </td>
+          <td>(</td>
+          <td class="paramtype">MA42ID&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ma42id&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#ae19b22d0ea343b69f76b0a5b26c4eb97">DOUBLEV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d4a7b5cdc32eaccf6aff94b23fa4d47" name="a0d4a7b5cdc32eaccf6aff94b23fa4d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4a7b5cdc32eaccf6aff94b23fa4d47">&#9670;&#160;</a></span>PROTOCCALLSFSUB9()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PROTOCCALLSFSUB9 </td>
+          <td>(</td>
+          <td class="paramtype">MA42JD&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ma42jd&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#a4cf9af43a95c45c3d469658098dfbe1a">INT</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="frontal_8h.html#abe41f5e30c598530e46fc079718e8f83">INTV</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ae19b22d0ea343b69f76b0a5b26c4eb97" name="ae19b22d0ea343b69f76b0a5b26c4eb97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19b22d0ea343b69f76b0a5b26c4eb97">&#9670;&#160;</a></span>DOUBLEV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DOUBLEV</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00194">194</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a1458e66da89d78a1b4913cac29f25935" name="a1458e66da89d78a1b4913cac29f25935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1458e66da89d78a1b4913cac29f25935">&#9670;&#160;</a></span>DOUBLEVV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DOUBLEVV</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00191">191</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a4cf9af43a95c45c3d469658098dfbe1a" name="a4cf9af43a95c45c3d469658098dfbe1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf9af43a95c45c3d469658098dfbe1a">&#9670;&#160;</a></span>INT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00031">31</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="abe41f5e30c598530e46fc079718e8f83" name="abe41f5e30c598530e46fc079718e8f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe41f5e30c598530e46fc079718e8f83">&#9670;&#160;</a></span>INTV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INTV</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00031">31</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="ac1420eb9ac2bfac00c22a06ce0233e46" name="ac1420eb9ac2bfac00c22a06ce0233e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1420eb9ac2bfac00c22a06ce0233e46">&#9670;&#160;</a></span>LOGICAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LOGICAL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00188">188</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a7240a1ac82955ffd702a4f26c4650476" name="a7240a1ac82955ffd702a4f26c4650476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7240a1ac82955ffd702a4f26c4650476">&#9670;&#160;</a></span>ma42ad</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ma42ad</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00031">31</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a5d5920c01f34a0ad02dd7b5269da6d79" name="a5d5920c01f34a0ad02dd7b5269da6d79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d5920c01f34a0ad02dd7b5269da6d79">&#9670;&#160;</a></span>ma42cd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ma42cd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00187">187</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="ada9660314e65b4dff75d5e5c867142f8" name="ada9660314e65b4dff75d5e5c867142f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9660314e65b4dff75d5e5c867142f8">&#9670;&#160;</a></span>ma42pd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ma42pd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00076">76</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c1f7913f1e8bc292cea0f069e3e757e" name="a3c1f7913f1e8bc292cea0f069e3e757e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c1f7913f1e8bc292cea0f069e3e757e">&#9670;&#160;</a></span>mc63ad</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mc63ad</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00232">232</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+<a id="a3f2291edc03bb9ce2e52c8b893b4281d" name="a3f2291edc03bb9ce2e52c8b893b4281d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2291edc03bb9ce2e52c8b893b4281d">&#9670;&#160;</a></span>PINT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PINT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frontal_8h_source.html#l00031">31</a> of file <a class="el" href="frontal_8h_source.html">frontal.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

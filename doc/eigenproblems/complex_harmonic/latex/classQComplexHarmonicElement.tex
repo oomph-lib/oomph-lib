@@ -1,0 +1,181 @@
+\doxysection{QComplex\+Harmonic\+Element\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classQComplexHarmonicElement}{}\label{classQComplexHarmonicElement}\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+
+
+QComplex\+Harmonic\+Element$<$\+NNODE\+\_\+1\+D$>$ elements are 1D Elements with NNODE\+\_\+1D nodal points that are used to solve the Complex\+Harmonic eigenvalue Problem described by \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}.  
+
+
+Inheritance diagram for QComplex\+Harmonic\+Element\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classQComplexHarmonicElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQComplexHarmonicElement_a9f1e88c4b5c7031d77c6f6dd3758de2a}{QComplex\+Harmonic\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for QElement and Poisson equations. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classQComplexHarmonicElement_a3f1d68324e9d8b9e143044d716c72a87}{required\+\_\+nvalue}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. Here there are two (u and w) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}{output}} (ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function overloaded from \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQComplexHarmonicElement_a7f63f8532a6295a3ba86f94355f889b8}{output}} (ostream \&outfile, const unsigned \&Nplot)
+\begin{DoxyCompactList}\small\item\em Output function overloaded from \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classComplexHarmonicEquations_aa93feb265f731b0d82c3c1c4c29f183d}{Complex\+Harmonic\+Equations}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classComplexHarmonicEquations_af4ff638cb40e23c3574631423fd56bce}{u}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em Access function\+: First eigenfunction value at local node n Note that solving the eigenproblem does not assign values to this storage space. It is used for output purposes only. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classComplexHarmonicEquations_a9b3955ee987827d831e44eeb43dcae63}{w}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em Second eigenfunction value at local node n. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classComplexHarmonicEquations_a9185e07b984e735c1c45b6f5a6c02b5f}{output}} (ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output the eigenfunction with default number of plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classComplexHarmonicEquations_a141e0a24096323472fcd10138b6fd5fa}{output}} (ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: x,y,u or x,y,z,u at Nplot plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classComplexHarmonicEquations_a4c67a0c220f61d6c300703f29c00b1ef}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Assemble the contributions to the jacobian and mass matrices. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classComplexHarmonicEquations_a9e8774f4cf492bd267c0a170bf4f81a6}{interpolated\+\_\+u}} (const Vector$<$ double $>$ \&s) const
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classComplexHarmonicEquations_a73b34acf2038ae9c2ef3f3e61d9c1cd7}{interpolated\+\_\+w}} (const Vector$<$ double $>$ \&s) const
+\begin{DoxyCompactList}\small\item\em Return FE representation of function value w(s) at local coordinate s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classQComplexHarmonicElement_a7c97d4e8c5433a44640d30c936d69ffb}{dshape\+\_\+eulerian}} (const Vector$<$ double $>$ \&s, Shape \&psi, DShape \&dpsidx) const
+\begin{DoxyCompactList}\small\item\em Shape, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classQComplexHarmonicElement_a3f8d1d9396135d4d86f416dcf6c23904}{dshape\+\_\+eulerian\+\_\+at\+\_\+knot}} (const unsigned \&ipt, Shape \&psi, DShape \&dpsidx) const
+\begin{DoxyCompactList}\small\item\em Shape, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \mbox{\hyperlink{classComplexHarmonicEquations_a3538cae061c24db2db1fc277c0a09da4}{u\+\_\+local\+\_\+eqn}} (const unsigned \&n, const unsigned \&i)
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation number of the unknown in the problem. Default is to assume that it is the first (only) value stored at the node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned NNODE\+\_\+1D$>$\newline
+class QComplex\+Harmonic\+Element$<$ NNODE\+\_\+1\+D $>$}
+QComplex\+Harmonic\+Element$<$\+NNODE\+\_\+1\+D$>$ elements are 1D Elements with NNODE\+\_\+1D nodal points that are used to solve the Complex\+Harmonic eigenvalue Problem described by \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}. 
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00298}{298}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classQComplexHarmonicElement_a9f1e88c4b5c7031d77c6f6dd3758de2a}\label{classQComplexHarmonicElement_a9f1e88c4b5c7031d77c6f6dd3758de2a} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!QComplexHarmonicElement@{QComplexHarmonicElement}}
+\index{QComplexHarmonicElement@{QComplexHarmonicElement}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{QComplexHarmonicElement()}{QComplexHarmonicElement()}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\mbox{\hyperlink{classQComplexHarmonicElement}{\+::\+QComplex\+Harmonic\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Call constructors for QElement and Poisson equations. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00306}{306}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classQComplexHarmonicElement_a7c97d4e8c5433a44640d30c936d69ffb}\label{classQComplexHarmonicElement_a7c97d4e8c5433a44640d30c936d69ffb} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!dshape\_eulerian@{dshape\_eulerian}}
+\index{dshape\_eulerian@{dshape\_eulerian}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_eulerian()}{dshape\_eulerian()}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+eulerian (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{Shape \&}]{psi,  }\item[{DShape \&}]{dpsidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Shape, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+
+
+
+Implements \mbox{\hyperlink{classComplexHarmonicEquations_a59048c598e2fba3e11aa5985ffaf4d76}{Complex\+Harmonic\+Equations}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00325}{325}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+\Hypertarget{classQComplexHarmonicElement_a3f8d1d9396135d4d86f416dcf6c23904}\label{classQComplexHarmonicElement_a3f8d1d9396135d4d86f416dcf6c23904} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!dshape\_eulerian\_at\_knot@{dshape\_eulerian\_at\_knot}}
+\index{dshape\_eulerian\_at\_knot@{dshape\_eulerian\_at\_knot}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_eulerian\_at\_knot()}{dshape\_eulerian\_at\_knot()}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{Shape \&}]{psi,  }\item[{DShape \&}]{dpsidx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Shape, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. 
+
+
+
+Implements \mbox{\hyperlink{classComplexHarmonicEquations_a60c71828f2d4c1c2363dcb1d1f334fff}{Complex\+Harmonic\+Equations}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00333}{333}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+\Hypertarget{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}\label{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function overloaded from \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00314}{314}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+
+
+References \mbox{\hyperlink{complex__harmonic_8cc_source_l00102}{Complex\+Harmonic\+Equations\+::output()}}.
+
+\Hypertarget{classQComplexHarmonicElement_a7f63f8532a6295a3ba86f94355f889b8}\label{classQComplexHarmonicElement_a7f63f8532a6295a3ba86f94355f889b8} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!output@{output}}
+\index{output@{output}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function overloaded from \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00318}{318}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+
+
+References \mbox{\hyperlink{complex__harmonic_8cc_source_l00102}{Complex\+Harmonic\+Equations\+::output()}}.
+
+\Hypertarget{classQComplexHarmonicElement_a3f1d68324e9d8b9e143044d716c72a87}\label{classQComplexHarmonicElement_a3f1d68324e9d8b9e143044d716c72a87} 
+\index{QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!QComplexHarmonicElement$<$ NNODE\_1D $>$@{QComplexHarmonicElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}$<$ NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Required \# of `values' (pinned or dofs) at node n. Here there are two (u and w) 
+
+
+
+Definition at line \mbox{\hyperlink{complex__harmonic_8cc_source_l00311}{311}} of file \mbox{\hyperlink{complex__harmonic_8cc_source}{complex\+\_\+harmonic.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{complex__harmonic_8cc}{complex\+\_\+harmonic.\+cc}}\end{DoxyCompactItemize}

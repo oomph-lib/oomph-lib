@@ -1,0 +1,16 @@
+\doxysection{refineable\+\_\+spherical\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h File Reference}
+\hypertarget{refineable__spherical__advection__diffusion__elements_8h}{}\label{refineable__spherical__advection__diffusion__elements_8h}\index{refineable\_spherical\_advection\_diffusion\_elements.h@{refineable\_spherical\_advection\_diffusion\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Spherical\+Advection\+Diffusion\+Equations}}
+\begin{DoxyCompactList}\small\item\em A version of the Advection Diffusion in spherical coordinates equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \doxylink{classoomph_1_1RefineableSphericalAdvectionDiffusionEquations_a08a48e0e7e544ec61f4adde6c5e41211}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+spherical\+\_\+adv\+\_\+diff()} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableQSphericalAdvectionDiffusionElement}{oomph\+::\+Refineable\+QSpherical\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable version of \doxylink{classoomph_1_1QSphericalAdvectionDiffusionElement}{QSpherical\+Advection\+Diffusion\+Element}. Inherit from the standard \doxylink{classoomph_1_1QSphericalAdvectionDiffusionElement}{QSpherical\+Advection\+Diffusion\+Element} and the appropriate refineable geometric element and the refineable equations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01RefineableQSphericalAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Refineable\+QSpherical\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1RefineableQSphericalAdvectionDiffusionElement}{Refineable\+QSpherical\+Advection\+Diffusion\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

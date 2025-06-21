@@ -1,0 +1,295 @@
+\doxysection{Inclined\+Plane\+Problem\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classInclinedPlaneProblem}{}\label{classInclinedPlaneProblem}\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+
+
+Generic problem class that will form the base class for both spine and elastic mesh-\/updates of the problem. Templated by the bulk element and interface element types.  
+
+
+Inheritance diagram for Inclined\+Plane\+Problem\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classInclinedPlaneProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInclinedPlaneProblem_a52d15d242c8f17a340914996b49a32a3}{Inclined\+Plane\+Problem}} (\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}} \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}})
+\begin{DoxyCompactList}\small\item\em Generic Constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_a0e2fcfdb8230df82729ba7d728e58040}{solve\+\_\+steady}} ()
+\begin{DoxyCompactList}\small\item\em Solve the steady problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_a74bbd1ccfd3dd82c999a16924c230f51}{timestep}} (\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}} \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\+\_\+tsteps}})
+\begin{DoxyCompactList}\small\item\em Take n\+\_\+tsteps timesteps of size dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_af9cf7a9677e823c52f1646105dfa7937}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Actions before the timestep (update the time-\/dependent boundary conditions) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_a39ab8005f7603bd1f06f13d6e7a3ae64}{make\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Function to add the traction boundary elements to boundaries 3(inlet) and 1(outlet) of the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_a78d06d406af81a3dddbec0a31b65e8a4}{make\+\_\+free\+\_\+surface\+\_\+elements}} ()
+\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}{complete\+\_\+build}} ()
+\begin{DoxyCompactList}\small\item\em Complete the build of the problem setting all standard parameters and boundary conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInclinedPlaneProblem_ad89c7dc7975bf128a7c249496fabc97f}{\texorpdfstring{$\sim$}{\string~}\+Inclined\+Plane\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Generic desructor to clean up the memory allocated in the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem_a20c506fe684dc146424b8ec019239783}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bulk fluid mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem_a85bcc36a8ad4ad7aa3595585e73a3197}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh for the traction elements that are added at inlet and outlet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem_aba36d367278218bf00356c3bee0733a0}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh for the free surface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem_adefbac5880323d7de622e2ba0c526746}{Point\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh for the point elements at each end of the free surface. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classInclinedPlaneProblem_a6ad45c76bd24f63c0162313042ce2e7d}{Output\+\_\+prefix}}
+\begin{DoxyCompactList}\small\item\em Prefix for output files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}}$>$\newline
+class Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}
+Generic problem class that will form the base class for both spine and elastic mesh-\/updates of the problem. Templated by the bulk element and interface element types. 
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00138}{138}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classInclinedPlaneProblem_a52d15d242c8f17a340914996b49a32a3}\label{classInclinedPlaneProblem_a52d15d242c8f17a340914996b49a32a3} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!InclinedPlaneProblem@{InclinedPlaneProblem}}
+\index{InclinedPlaneProblem@{InclinedPlaneProblem}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{InclinedPlaneProblem()}{InclinedPlaneProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\mbox{\hyperlink{classInclinedPlaneProblem}{\+::\+Inclined\+Plane\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}} \&}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generic Constructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00161}{161}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+\Hypertarget{classInclinedPlaneProblem_ad89c7dc7975bf128a7c249496fabc97f}\label{classInclinedPlaneProblem_ad89c7dc7975bf128a7c249496fabc97f} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!````~InclinedPlaneProblem@{\texorpdfstring{$\sim$}{\string~}InclinedPlaneProblem}}
+\index{````~InclinedPlaneProblem@{\texorpdfstring{$\sim$}{\string~}InclinedPlaneProblem}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}InclinedPlaneProblem()}{\string~InclinedPlaneProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generic desructor to clean up the memory allocated in the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00385}{385}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00144}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00153}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Point\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00150}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00147}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classInclinedPlaneProblem_af9cf7a9677e823c52f1646105dfa7937}\label{classInclinedPlaneProblem_af9cf7a9677e823c52f1646105dfa7937} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before the timestep (update the time-\/dependent boundary conditions) 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00173}{173}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::K}}.
+
+\Hypertarget{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}\label{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!complete\_build@{complete\_build}}
+\index{complete\_build@{complete\_build}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_build()}{complete\_build()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::complete\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Complete the build of the problem setting all standard parameters and boundary conditions. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00300}{300}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00144}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInclinedPlaneProblem_a78d06d406af81a3dddbec0a31b65e8a4}\label{classInclinedPlaneProblem_a78d06d406af81a3dddbec0a31b65e8a4} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!make\_free\_surface\_elements@{make\_free\_surface\_elements}}
+\index{make\_free\_surface\_elements@{make\_free\_surface\_elements}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{make\_free\_surface\_elements()}{make\_free\_surface\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::make\+\_\+free\+\_\+surface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00239}{239}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00144}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00069}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00102}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Inlet\+\_\+\+Angle}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00153}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Point\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00150}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00084}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+inlet\+\_\+fct()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00091}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+outlet\+\_\+fct()}}.
+
+\Hypertarget{classInclinedPlaneProblem_a39ab8005f7603bd1f06f13d6e7a3ae64}\label{classInclinedPlaneProblem_a39ab8005f7603bd1f06f13d6e7a3ae64} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!make\_traction\_elements@{make\_traction\_elements}}
+\index{make\_traction\_elements@{make\_traction\_elements}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{make\_traction\_elements()}{make\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::make\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to add the traction boundary elements to boundaries 3(inlet) and 1(outlet) of the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00193}{193}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00144}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00115}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+inlet()}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00106}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+outlet()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00147}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInclinedPlaneProblem_a0e2fcfdb8230df82729ba7d728e58040}\label{classInclinedPlaneProblem_a0e2fcfdb8230df82729ba7d728e58040} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!solve\_steady@{solve\_steady}}
+\index{solve\_steady@{solve\_steady}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{solve\_steady()}{solve\_steady()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::solve\+\_\+steady (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Solve the steady problem. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00411}{411}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+\Hypertarget{classInclinedPlaneProblem_a74bbd1ccfd3dd82c999a16924c230f51}\label{classInclinedPlaneProblem_a74bbd1ccfd3dd82c999a16924c230f51} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{void}} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}} \&}]{dt,  }\item[{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{const}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsigned}} \&}]{n\+\_\+tsteps }\end{DoxyParamCaption})}
+
+
+
+Take n\+\_\+tsteps timesteps of size dt. 
+
+Perform n\+\_\+tsteps timesteps of size dt. 
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00443}{443}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classInclinedPlaneProblem_a20c506fe684dc146424b8ec019239783}\label{classInclinedPlaneProblem_a20c506fe684dc146424b8ec019239783} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Bulk fluid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00144}{144}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{inclined__plane_8cc_source_l00300}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::complete\+\_\+build()}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00239}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::make\+\_\+free\+\_\+surface\+\_\+elements()}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00193}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::make\+\_\+traction\+\_\+elements()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00385}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Inclined\+Plane\+Problem()}}.
+
+\Hypertarget{classInclinedPlaneProblem_a6ad45c76bd24f63c0162313042ce2e7d}\label{classInclinedPlaneProblem_a6ad45c76bd24f63c0162313042ce2e7d} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Output\_prefix@{Output\_prefix}}
+\index{Output\_prefix@{Output\_prefix}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Output\_prefix}{Output\_prefix}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+std\+::string \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Output\+\_\+prefix\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Prefix for output files. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00156}{156}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+\Hypertarget{classInclinedPlaneProblem_adefbac5880323d7de622e2ba0c526746}\label{classInclinedPlaneProblem_adefbac5880323d7de622e2ba0c526746} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Point\_mesh\_pt@{Point\_mesh\_pt}}
+\index{Point\_mesh\_pt@{Point\_mesh\_pt}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Point\_mesh\_pt}{Point\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Point\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mesh for the point elements at each end of the free surface. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00153}{153}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{inclined__plane_8cc_source_l00239}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::make\+\_\+free\+\_\+surface\+\_\+elements()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00385}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Inclined\+Plane\+Problem()}}.
+
+\Hypertarget{classInclinedPlaneProblem_aba36d367278218bf00356c3bee0733a0}\label{classInclinedPlaneProblem_aba36d367278218bf00356c3bee0733a0} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mesh for the free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00150}{150}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{inclined__plane_8cc_source_l00239}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::make\+\_\+free\+\_\+surface\+\_\+elements()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00385}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Inclined\+Plane\+Problem()}}.
+
+\Hypertarget{classInclinedPlaneProblem_a85bcc36a8ad4ad7aa3595585e73a3197}\label{classInclinedPlaneProblem_a85bcc36a8ad4ad7aa3595585e73a3197} 
+\index{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{InclinedPlaneProblem$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}} , \mbox{\hyperlink{classSpineInclinedPlaneMesh}{class}} \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}$<$ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}, \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mesh for the traction elements that are added at inlet and outlet. 
+
+
+
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00147}{147}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{inclined__plane_8cc_source_l00193}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::make\+\_\+traction\+\_\+elements()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00385}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Inclined\+Plane\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{inclined__plane_8cc}{inclined\+\_\+plane.\+cc}}\end{DoxyCompactItemize}

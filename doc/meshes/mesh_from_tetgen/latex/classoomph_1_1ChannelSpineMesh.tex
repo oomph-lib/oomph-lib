@@ -1,0 +1,852 @@
+\doxysection{oomph\+::Channel\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ChannelSpineMesh}{}\label{classoomph_1_1ChannelSpineMesh}\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+
+
+Spine mesh class derived from standard 2D mesh. The mesh contains a Straight\+Line Geom\+Object which defines the height of the left and right regions (0,2) and another Geom\+Object is passed to the constructor to define the height in the central region.  
+
+
+
+
+{\ttfamily \#include $<$channel\+\_\+spine\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Channel\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ChannelSpineMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a}{Channel\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx0}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx1}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx2}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx0}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx1}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx2}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{h}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a05972ec4beb6efcc531d299bc53f7c18}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_afb1b729691c03cef065d351094092406}{Channel\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx0}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx1}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx2}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx0}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx1}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx2}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{h}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a05972ec4beb6efcc531d299bc53f7c18}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region, a boolean flag to indicate whether or not the mesh is periodic and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12ac2996f2b7f7109b2157f757fa9df6}{left\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ac8b60dfcca90e80e0d53507a78e98eb1}{centre\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a6c4015e8eb6aa6fef40fa1f72a9638ce}{right\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to the $ i $ -\/th element in the right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a6f7b8f540855876e49b5f1c3f0214d9a}{nleft}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a422ed0d224b8da3c35732328e1aacdc0}{ncentre}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a559352375de869e889191d0e6c133031}{nright}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a89f5523009288ce87d2f0d1cbb9fb488}{nbulk}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in bulk. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{element\+\_\+reorder}} ()
+\begin{DoxyCompactList}\small\item\em Reorder the elements so we loop over them vertically first (advantageous in "{}wide"{} domains if a frontal solver is used). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific node update actions\+: along vertical spines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a16e0d4264443b1beb274753b0d6b970e}{x\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the x-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default is to return nodes that are equally spaced in the x coodinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a2f48a4572061b16949b7bfc5fa3dcd43}{left\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access function for spines in left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aadb2fdb1b639cff0e60cab8ab24c5753}{centre\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access function for spines in centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a94ab5dc9b9710be9a7b6d43519fcdf74}{right\+\_\+spine\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access function for spines in right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_af5ae7133c9939b90779f0809143676bd}{nleft\+\_\+spine}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the number of spines in the left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a85fa0910148e6aa5d8a1995ece5feeae}{ncentre\+\_\+spine}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the number of spines in the centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a48ee9b7736e6884ff41e2affd4094842}{nright\+\_\+spine}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the number of spines in the right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a05972ec4beb6efcc531d299bc53f7c18}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the Geom\+Object for upper wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_afd987ee387d1b7d41a70b52ca19ee2d6}{straight\+\_\+wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the Geom\+Object for the straight upper wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-\/direction. Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{y\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the y-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default it to return nodes that are equally spaced in the y coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}{build\+\_\+channel\+\_\+spine\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to actually build the channel-\/spine mesh (called from various constructors) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{build}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758}{Left\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8}{Centre\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20}{Right\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a283ffaeb501cec43df629d3bf06fe3d2}{Nx0}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a678cfaebcb1c7a31027188af36be9e7b}{Nx1}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a46534250de6f75890463bfddefdb39cd}{Nx2}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a3d61af363a8da156f4fe6d10e62f73c6}{Lx0}}
+\begin{DoxyCompactList}\small\item\em Length of left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a35f5d840478b2b93199a393cbdb50f2d}{Lx1}}
+\begin{DoxyCompactList}\small\item\em Length of centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a4c295478a3f79335f5d0113da220844e}{Lx2}}
+\begin{DoxyCompactList}\small\item\em Length of right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a56fbad56271c5e37cd7f1d2de7b7bb36}{Nleft\+\_\+spine}}
+\begin{DoxyCompactList}\small\item\em Number of spines in left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_af6ef1bb007083a803561e5f0062f820b}{Ncentre\+\_\+spine}}
+\begin{DoxyCompactList}\small\item\em Number of spines in centre region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a56f7259d8e5dee66a8c83ffe99526c62}{Nright\+\_\+spine}}
+\begin{DoxyCompactList}\small\item\em Number of spines in right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_adaa23badd05b69c905b444bd9141b3a7}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object for upper wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a34f4583f2aa944d5d1ff723f6a4123bf}{Straight\+\_\+wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object for the straight upper wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}{Nx}}
+\begin{DoxyCompactList}\small\item\em Nx\+: number of elements in x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}{Ny}}
+\begin{DoxyCompactList}\small\item\em Ny\+: number of elements in y-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a92502c7536a6644ebffd806841cd4d98}{Np}}
+\begin{DoxyCompactList}\small\item\em Np\+: number of (linear) points in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}{Xperiodic}}
+\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$}
+Spine mesh class derived from standard 2D mesh. The mesh contains a Straight\+Line Geom\+Object which defines the height of the left and right regions (0,2) and another Geom\+Object is passed to the constructor to define the height in the central region. 
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00042}{42}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a}\label{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!ChannelSpineMesh@{ChannelSpineMesh}}
+\index{ChannelSpineMesh@{ChannelSpineMesh}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ChannelSpineMesh()}{ChannelSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Channel\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx0,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx1,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx2,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx0,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx1,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx2,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region and pointer to timestepper (defaults to Steady timestepper) 
+
+Constructor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length and height of layer, and pointer to timestepper (defaults to Static timestepper).
+
+The mesh contains a layer of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and a surface layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00050}{50}} of file \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source}{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00153}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00318}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Straight\+\_\+wall\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_afb1b729691c03cef065d351094092406}\label{classoomph_1_1ChannelSpineMesh_afb1b729691c03cef065d351094092406} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!ChannelSpineMesh@{ChannelSpineMesh}}
+\index{ChannelSpineMesh@{ChannelSpineMesh}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ChannelSpineMesh()}{ChannelSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Channel\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx0,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx1,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx2,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx0,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx1,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx2,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction in regions 0,1 and 2, number of elements in y-\/direction, length in x direction in regions 0,1 and 2, height mesh, pointer to the Geom\+Object defining the heightof the central region, a boolean flag to indicate whether or not the mesh is periodic and pointer to timestepper (defaults to Steady timestepper) 
+
+Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length and height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Static timestepper).
+
+The mesh contains a layer of elements (of type ELEMENT) and a surface layer of corresponding Spine interface elements (of type Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$). 
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00104}{104}} of file \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source}{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00153}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00318}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Straight\+\_\+wall\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}\label{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!build\_channel\_spine\_mesh@{build\_channel\_spine\_mesh}}
+\index{build\_channel\_spine\_mesh@{build\_channel\_spine\_mesh}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_channel\_spine\_mesh()}{build\_channel\_spine\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Helper function to actually build the channel-\/spine mesh (called from various constructors) 
+
+Helper function that actually builds the channel-\/spine mesh based on the parameters set in the various constructors. 
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00153}{153}} of file \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source}{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00044}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00104}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Channel\+Spine\+Mesh()}}, and \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00050}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Channel\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_ac8b60dfcca90e80e0d53507a78e98eb1}\label{classoomph_1_1ChannelSpineMesh_ac8b60dfcca90e80e0d53507a78e98eb1} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!centre\_element\_pt@{centre\_element\_pt}}
+\index{centre\_element\_pt@{centre\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{centre\_element\_pt()}{centre\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::centre\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to the $ i $ -\/th element in the centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00088}{88}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00278}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Centre\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_aadb2fdb1b639cff0e60cab8ab24c5753}\label{classoomph_1_1ChannelSpineMesh_aadb2fdb1b639cff0e60cab8ab24c5753} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!centre\_spine\_pt@{centre\_spine\_pt}}
+\index{centre\_spine\_pt@{centre\_spine\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{centre\_spine\_pt()}{centre\_spine\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::centre\+\_\+spine\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for spines in centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00214}{214}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00309}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ncentre\+\_\+spine}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00306}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nleft\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}\label{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!element\_reorder@{element\_reorder}}
+\index{element\_reorder@{element\_reorder}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{element\_reorder()}{element\_reorder()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::element\+\_\+reorder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reorder the elements so we loop over them vertically first (advantageous in "{}wide"{} domains if a frontal solver is used). 
+
+Reorder the elements, so we loop over them vertically first (advantageous in "{}wide"{} domains if a frontal solver is used). 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00687}{687}} of file \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source}{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a12ac2996f2b7f7109b2157f757fa9df6}\label{classoomph_1_1ChannelSpineMesh_a12ac2996f2b7f7109b2157f757fa9df6} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!left\_element\_pt@{left\_element\_pt}}
+\index{left\_element\_pt@{left\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{left\_element\_pt()}{left\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::left\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to the $ i $ -\/th element in the left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00081}{81}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00275}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Left\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a2f48a4572061b16949b7bfc5fa3dcd43}\label{classoomph_1_1ChannelSpineMesh_a2f48a4572061b16949b7bfc5fa3dcd43} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!left\_spine\_pt@{left\_spine\_pt}}
+\index{left\_spine\_pt@{left\_spine\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{left\_spine\_pt()}{left\_spine\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::left\+\_\+spine\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for spines in left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00200}{200}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00306}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nleft\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a89f5523009288ce87d2f0d1cbb9fb488}\label{classoomph_1_1ChannelSpineMesh_a89f5523009288ce87d2f0d1cbb9fb488} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!nbulk@{nbulk}}
+\index{nbulk@{nbulk}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nbulk()}{nbulk()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nbulk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in bulk. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00119}{119}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00278}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Centre\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00275}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Left\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00281}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Right\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a422ed0d224b8da3c35732328e1aacdc0}\label{classoomph_1_1ChannelSpineMesh_a422ed0d224b8da3c35732328e1aacdc0} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!ncentre@{ncentre}}
+\index{ncentre@{ncentre}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ncentre()}{ncentre()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::ncentre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00107}{107}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00278}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Centre\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a85fa0910148e6aa5d8a1995ece5feeae}\label{classoomph_1_1ChannelSpineMesh_a85fa0910148e6aa5d8a1995ece5feeae} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!ncentre\_spine@{ncentre\_spine}}
+\index{ncentre\_spine@{ncentre\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ncentre\_spine()}{ncentre\_spine()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::ncentre\+\_\+spine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the number of spines in the centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00250}{250}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00309}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ncentre\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a6f7b8f540855876e49b5f1c3f0214d9a}\label{classoomph_1_1ChannelSpineMesh_a6f7b8f540855876e49b5f1c3f0214d9a} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!nleft@{nleft}}
+\index{nleft@{nleft}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nleft()}{nleft()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nleft (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00101}{101}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00275}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Left\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_af5ae7133c9939b90779f0809143676bd}\label{classoomph_1_1ChannelSpineMesh_af5ae7133c9939b90779f0809143676bd} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!nleft\_spine@{nleft\_spine}}
+\index{nleft\_spine@{nleft\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nleft\_spine()}{nleft\_spine()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nleft\+\_\+spine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the number of spines in the left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00244}{244}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00306}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nleft\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a559352375de869e889191d0e6c133031}\label{classoomph_1_1ChannelSpineMesh_a559352375de869e889191d0e6c133031} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!nright@{nright}}
+\index{nright@{nright}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nright()}{nright()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nright (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00113}{113}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00281}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Right\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a48ee9b7736e6884ff41e2affd4094842}\label{classoomph_1_1ChannelSpineMesh_a48ee9b7736e6884ff41e2affd4094842} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!nright\_spine@{nright\_spine}}
+\index{nright\_spine@{nright\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nright\_spine()}{nright\_spine()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nright\+\_\+spine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the number of spines in the right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00256}{256}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00312}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nright\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a6c4015e8eb6aa6fef40fa1f72a9638ce}\label{classoomph_1_1ChannelSpineMesh_a6c4015e8eb6aa6fef40fa1f72a9638ce} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!right\_element\_pt@{right\_element\_pt}}
+\index{right\_element\_pt@{right\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{right\_element\_pt()}{right\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::right\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to the $ i $ -\/th element in the right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00095}{95}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00281}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Right\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a94ab5dc9b9710be9a7b6d43519fcdf74}\label{classoomph_1_1ChannelSpineMesh_a94ab5dc9b9710be9a7b6d43519fcdf74} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!right\_spine\_pt@{right\_spine\_pt}}
+\index{right\_spine\_pt@{right\_spine\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{right\_spine\_pt()}{right\_spine\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::right\+\_\+spine\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for spines in right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00229}{229}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00309}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ncentre\+\_\+spine}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00306}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nleft\+\_\+spine}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00312}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nright\+\_\+spine}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d}\label{classoomph_1_1ChannelSpineMesh_aefa38017e44e64ad0cd86d87d397bf8d} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
+\index{spine\_node\_update@{spine\_node\_update}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific node update actions\+: along vertical spines. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00133}{133}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_afd987ee387d1b7d41a70b52ca19ee2d6}\label{classoomph_1_1ChannelSpineMesh_afd987ee387d1b7d41a70b52ca19ee2d6} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!straight\_wall\_pt@{straight\_wall\_pt}}
+\index{straight\_wall\_pt@{straight\_wall\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{straight\_wall\_pt()}{straight\_wall\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::straight\+\_\+wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Geom\+Object for the straight upper wall. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00268}{268}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00318}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Straight\+\_\+wall\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a05972ec4beb6efcc531d299bc53f7c18}\label{classoomph_1_1ChannelSpineMesh_a05972ec4beb6efcc531d299bc53f7c18} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!wall\_pt@{wall\_pt}}
+\index{wall\_pt@{wall\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{wall\_pt()}{wall\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Geom\+Object for upper wall. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00262}{262}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00315}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Wall\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a16e0d4264443b1beb274753b0d6b970e}\label{classoomph_1_1ChannelSpineMesh_a16e0d4264443b1beb274753b0d6b970e} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!x\_spacing\_function@{x\_spacing\_function}}
+\index{x\_spacing\_function@{x\_spacing\_function}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{x\_spacing\_function()}{x\_spacing\_function()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}}]{xelement,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}}]{xnode,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}}]{yelement,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the value of the x-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default is to return nodes that are equally spaced in the x coodinate. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{156}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__spine__mesh_8h_source_l00297}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lx0}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00300}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lx1}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00303}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lx2}}, \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00067}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Np}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00288}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nx0}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00291}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nx1}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00294}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Nx2}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00070}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmin}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8}\label{classoomph_1_1ChannelSpineMesh_a0d1acf639c1923d7a9a929a5d50d69e8} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Centre\_element\_pt@{Centre\_element\_pt}}
+\index{Centre\_element\_pt@{Centre\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Centre\_element\_pt}{Centre\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Centre\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00278}{278}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00088}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::centre\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00119}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nbulk()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00107}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::ncentre()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758}\label{classoomph_1_1ChannelSpineMesh_aaf9d30e4c32739898e35ef458e3f6758} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Left\_element\_pt@{Left\_element\_pt}}
+\index{Left\_element\_pt@{Left\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Left\_element\_pt}{Left\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Left\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00275}{275}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00081}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::left\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00119}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nbulk()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00101}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nleft()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a3d61af363a8da156f4fe6d10e62f73c6}\label{classoomph_1_1ChannelSpineMesh_a3d61af363a8da156f4fe6d10e62f73c6} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Lx0@{Lx0}}
+\index{Lx0@{Lx0}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lx0}{Lx0}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Lx0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00297}{297}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a35f5d840478b2b93199a393cbdb50f2d}\label{classoomph_1_1ChannelSpineMesh_a35f5d840478b2b93199a393cbdb50f2d} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Lx1@{Lx1}}
+\index{Lx1@{Lx1}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lx1}{Lx1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Lx1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00300}{300}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a4c295478a3f79335f5d0113da220844e}\label{classoomph_1_1ChannelSpineMesh_a4c295478a3f79335f5d0113da220844e} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Lx2@{Lx2}}
+\index{Lx2@{Lx2}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lx2}{Lx2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Lx2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00303}{303}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_af6ef1bb007083a803561e5f0062f820b}\label{classoomph_1_1ChannelSpineMesh_af6ef1bb007083a803561e5f0062f820b} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Ncentre\_spine@{Ncentre\_spine}}
+\index{Ncentre\_spine@{Ncentre\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ncentre\_spine}{Ncentre\_spine}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Ncentre\+\_\+spine\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of spines in centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00309}{309}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00214}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::centre\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00250}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::ncentre\+\_\+spine()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00229}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+spine\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a56fbad56271c5e37cd7f1d2de7b7bb36}\label{classoomph_1_1ChannelSpineMesh_a56fbad56271c5e37cd7f1d2de7b7bb36} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Nleft\_spine@{Nleft\_spine}}
+\index{Nleft\_spine@{Nleft\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nleft\_spine}{Nleft\_spine}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nleft\+\_\+spine\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of spines in left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00306}{306}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00214}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::centre\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00200}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::left\+\_\+spine\+\_\+pt()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00244}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nleft\+\_\+spine()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00229}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+spine\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a56f7259d8e5dee66a8c83ffe99526c62}\label{classoomph_1_1ChannelSpineMesh_a56f7259d8e5dee66a8c83ffe99526c62} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Nright\_spine@{Nright\_spine}}
+\index{Nright\_spine@{Nright\_spine}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nright\_spine}{Nright\_spine}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nright\+\_\+spine\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of spines in right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00312}{312}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00256}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nright\+\_\+spine()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00229}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+spine\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a283ffaeb501cec43df629d3bf06fe3d2}\label{classoomph_1_1ChannelSpineMesh_a283ffaeb501cec43df629d3bf06fe3d2} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Nx0@{Nx0}}
+\index{Nx0@{Nx0}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx0}{Nx0}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nx0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in the left region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00288}{288}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a678cfaebcb1c7a31027188af36be9e7b}\label{classoomph_1_1ChannelSpineMesh_a678cfaebcb1c7a31027188af36be9e7b} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Nx1@{Nx1}}
+\index{Nx1@{Nx1}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx1}{Nx1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nx1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in the centre region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00291}{291}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a46534250de6f75890463bfddefdb39cd}\label{classoomph_1_1ChannelSpineMesh_a46534250de6f75890463bfddefdb39cd} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Nx2@{Nx2}}
+\index{Nx2@{Nx2}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx2}{Nx2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nx2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in the right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00294}{294}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20}\label{classoomph_1_1ChannelSpineMesh_aa4471765fe56976ad91cfab075630f20} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Right\_element\_pt@{Right\_element\_pt}}
+\index{Right\_element\_pt@{Right\_element\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Right\_element\_pt}{Right\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Right\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the right region. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00281}{281}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00119}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nbulk()}}, \mbox{\hyperlink{channel__spine__mesh_8h_source_l00113}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::nright()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00095}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::right\+\_\+element\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_a34f4583f2aa944d5d1ff723f6a4123bf}\label{classoomph_1_1ChannelSpineMesh_a34f4583f2aa944d5d1ff723f6a4123bf} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Straight\_wall\_pt@{Straight\_wall\_pt}}
+\index{Straight\_wall\_pt@{Straight\_wall\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Straight\_wall\_pt}{Straight\_wall\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Straight\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Geom\+Object for the straight upper wall. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00318}{318}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00104}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Channel\+Spine\+Mesh()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00050}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Channel\+Spine\+Mesh()}}, and \mbox{\hyperlink{channel__spine__mesh_8h_source_l00268}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::straight\+\_\+wall\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1ChannelSpineMesh_adaa23badd05b69c905b444bd9141b3a7}\label{classoomph_1_1ChannelSpineMesh_adaa23badd05b69c905b444bd9141b3a7} 
+\index{oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
+\index{Wall\_pt@{Wall\_pt}!oomph::ChannelSpineMesh$<$ ELEMENT $>$@{oomph::ChannelSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh}{oomph\+::\+Channel\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Geom\+Object for upper wall. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__spine__mesh_8h_source_l00315}{315}} of file \mbox{\hyperlink{channel__spine__mesh_8h_source}{channel\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8h_source_l00262}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{channel__spine__mesh_8h}{channel\+\_\+spine\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{channel__spine__mesh_8template_8cc}{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

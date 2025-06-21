@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::BinaryTreeForest Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1BinaryTreeForest.html">BinaryTreeForest</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="classoomph_1_1BinaryTreeForest-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::BinaryTreeForest Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A <a class="el" href="classoomph_1_1BinaryTreeForest.html" title="A BinaryTreeForest consists of a collection of BinaryTreeRoots. Each member tree can have neighbours ...">BinaryTreeForest</a> consists of a collection of BinaryTreeRoots. Each member tree can have neighbours to its left and right.  
+ <a href="classoomph_1_1BinaryTreeForest.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::BinaryTreeForest:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1BinaryTreeForest.png" usemap="#oomph::BinaryTreeForest_map" alt=""/>
+  <map id="oomph::BinaryTreeForest_map" name="oomph::BinaryTreeForest_map">
+<area href="classoomph_1_1TreeForest.html" title="A TreeForest consists of a collection of TreeRoots. Each member tree can have neighbours in various e..." alt="oomph::TreeForest" shape="rect" coords="0,0,154,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0185044e57a122d19fef2a5c9256a74b" id="r_a0185044e57a122d19fef2a5c9256a74b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a0185044e57a122d19fef2a5c9256a74b">BinaryTreeForest</a> ()</td></tr>
+<tr class="memdesc:a0185044e57a122d19fef2a5c9256a74b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:a0185044e57a122d19fef2a5c9256a74b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534e8527d8701034afb5a8d6ab343de2" id="r_a534e8527d8701034afb5a8d6ab343de2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a534e8527d8701034afb5a8d6ab343de2">BinaryTreeForest</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">trees_pt</a>)</td></tr>
+<tr class="memdesc:a534e8527d8701034afb5a8d6ab343de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass vector of pointers to the roots of the constituent BinaryTrees.  <br /></td></tr>
+<tr class="separator:a534e8527d8701034afb5a8d6ab343de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb08554836a1a5187ea354d8a7108b7a" id="r_acb08554836a1a5187ea354d8a7108b7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#acb08554836a1a5187ea354d8a7108b7a">BinaryTreeForest</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1BinaryTreeForest.html">BinaryTreeForest</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:acb08554836a1a5187ea354d8a7108b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:acb08554836a1a5187ea354d8a7108b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf5abb1ccfaef5577f36d334b37e0b3" id="r_a6cf5abb1ccfaef5577f36d334b37e0b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a6cf5abb1ccfaef5577f36d334b37e0b3">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1BinaryTreeForest.html">BinaryTreeForest</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a6cf5abb1ccfaef5577f36d334b37e0b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a6cf5abb1ccfaef5577f36d334b37e0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa265e1c1c5b3be62b2f79d7c13c306" id="r_a6aa265e1c1c5b3be62b2f79d7c13c306"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a6aa265e1c1c5b3be62b2f79d7c13c306">~BinaryTreeForest</a> ()</td></tr>
+<tr class="memdesc:a6aa265e1c1c5b3be62b2f79d7c13c306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Delete the constituent binary trees (and thus the objects associated with its non-leaf nodes!)  <br /></td></tr>
+<tr class="separator:a6aa265e1c1c5b3be62b2f79d7c13c306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e99234fcdc75760e00afb7d140c74ec" id="r_a2e99234fcdc75760e00afb7d140c74ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a2e99234fcdc75760e00afb7d140c74ec">check_all_neighbours</a> (<a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info)</td></tr>
+<tr class="memdesc:a2e99234fcdc75760e00afb7d140c74ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document and check all the neighbours of all the nodes in the forest. <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a> object specifies the output directory and file numbers for the various files. If <code>doc_info.disable_doc()</code> has been called, no output is created.  <br /></td></tr>
+<tr class="separator:a2e99234fcdc75760e00afb7d140c74ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf07f826ebdb73a0270791a6f300f9e" id="r_a7cf07f826ebdb73a0270791a6f300f9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a7cf07f826ebdb73a0270791a6f300f9e">open_hanging_node_files</a> (<a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::ofstream * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_stream</a>)</td></tr>
+<tr class="memdesc:a7cf07f826ebdb73a0270791a6f300f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A line mesh cannot have hanging nodes so make this function empty.  <br /></td></tr>
+<tr class="separator:a7cf07f826ebdb73a0270791a6f300f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf3ec0bdb4c0955ca35bcc2e0874f80" id="r_a7cf3ec0bdb4c0955ca35bcc2e0874f80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a7cf3ec0bdb4c0955ca35bcc2e0874f80">self_test</a> ()</td></tr>
+<tr class="memdesc:a7cf3ec0bdb4c0955ca35bcc2e0874f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Check all neighbours. Return success (0) if the maximum distance between corresponding points in the neighbours is less than the tolerance specified in the static value <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">BinaryTree::Max_neighbour_finding_tolerance</a>.  <br /></td></tr>
+<tr class="separator:a7cf3ec0bdb4c0955ca35bcc2e0874f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TreeForest"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TreeForest')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TreeForest.html">oomph::TreeForest</a></td></tr>
+<tr class="memitem:a9d2be69c257888e0c1c79c9073c67cfa inherit pub_methods_classoomph_1_1TreeForest" id="r_a9d2be69c257888e0c1c79c9073c67cfa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a9d2be69c257888e0c1c79c9073c67cfa">TreeForest</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">trees_pt</a>)</td></tr>
+<tr class="memdesc:a9d2be69c257888e0c1c79c9073c67cfa inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> forest: Pass <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of (pointers to) constituents trees.  <br /></td></tr>
+<tr class="separator:a9d2be69c257888e0c1c79c9073c67cfa inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac05719b25a53c4f27d94ed8535bf3d6a inherit pub_methods_classoomph_1_1TreeForest" id="r_ac05719b25a53c4f27d94ed8535bf3d6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#ac05719b25a53c4f27d94ed8535bf3d6a">TreeForest</a> ()</td></tr>
+<tr class="memdesc:ac05719b25a53c4f27d94ed8535bf3d6a inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:ac05719b25a53c4f27d94ed8535bf3d6a inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2653898fb3a16a9d3cf3c7c60411a241 inherit pub_methods_classoomph_1_1TreeForest" id="r_a2653898fb3a16a9d3cf3c7c60411a241"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a2653898fb3a16a9d3cf3c7c60411a241">TreeForest</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TreeForest.html">TreeForest</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a2653898fb3a16a9d3cf3c7c60411a241 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a2653898fb3a16a9d3cf3c7c60411a241 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aec23bbfcc8a432c91873a9c019315f inherit pub_methods_classoomph_1_1TreeForest" id="r_a0aec23bbfcc8a432c91873a9c019315f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a0aec23bbfcc8a432c91873a9c019315f">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TreeForest.html">TreeForest</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a0aec23bbfcc8a432c91873a9c019315f inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a0aec23bbfcc8a432c91873a9c019315f inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc55e7734f5e2de2c6943084008b5248 inherit pub_methods_classoomph_1_1TreeForest" id="r_abc55e7734f5e2de2c6943084008b5248"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#abc55e7734f5e2de2c6943084008b5248">~TreeForest</a> ()</td></tr>
+<tr class="memdesc:abc55e7734f5e2de2c6943084008b5248 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Delete the constituent trees (and thus the objects associated with its non-leaf nodes!)  <br /></td></tr>
+<tr class="separator:abc55e7734f5e2de2c6943084008b5248 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d99d1f513a60b9bd053ff98699cbe52 inherit pub_methods_classoomph_1_1TreeForest" id="r_a6d99d1f513a60b9bd053ff98699cbe52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a6d99d1f513a60b9bd053ff98699cbe52">stick_leaves_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">forest_nodes</a>)</td></tr>
+<tr class="memdesc:a6d99d1f513a60b9bd053ff98699cbe52 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse forst and stick pointers to leaf "nodes" into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>.  <br /></td></tr>
+<tr class="separator:a6d99d1f513a60b9bd053ff98699cbe52 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40bd3735303f019892b03d6a5355c8db inherit pub_methods_classoomph_1_1TreeForest" id="r_a40bd3735303f019892b03d6a5355c8db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a40bd3735303f019892b03d6a5355c8db">stick_all_tree_nodes_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">all_forest_nodes</a>)</td></tr>
+<tr class="memdesc:a40bd3735303f019892b03d6a5355c8db inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse forest and stick pointers to all "nodes" into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>.  <br /></td></tr>
+<tr class="separator:a40bd3735303f019892b03d6a5355c8db inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace63bb552b21ba46eb5ae062826dab26 inherit pub_methods_classoomph_1_1TreeForest" id="r_ace63bb552b21ba46eb5ae062826dab26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#ace63bb552b21ba46eb5ae062826dab26">close_hanging_node_files</a> (<a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;doc_info, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::ofstream * &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_stream</a>)</td></tr>
+<tr class="memdesc:ace63bb552b21ba46eb5ae062826dab26 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close output files that will store any hanging nodes in the forest and delete any associated storage. This can be performed genercially in this base class.  <br /></td></tr>
+<tr class="separator:ace63bb552b21ba46eb5ae062826dab26 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6796a34cf1211f554a59055ff5765863 inherit pub_methods_classoomph_1_1TreeForest" id="r_a6796a34cf1211f554a59055ff5765863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a6796a34cf1211f554a59055ff5765863">ntree</a> ()</td></tr>
+<tr class="memdesc:a6796a34cf1211f554a59055ff5765863 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of trees in forest.  <br /></td></tr>
+<tr class="separator:a6796a34cf1211f554a59055ff5765863 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa58320cabce1668093eca8647d5be26 inherit pub_methods_classoomph_1_1TreeForest" id="r_aaa58320cabce1668093eca8647d5be26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#aaa58320cabce1668093eca8647d5be26">tree_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aaa58320cabce1668093eca8647d5be26 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to i-th tree in forest.  <br /></td></tr>
+<tr class="separator:aaa58320cabce1668093eca8647d5be26 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e8313e3b672bdcba26be8a02cf7615 inherit pub_methods_classoomph_1_1TreeForest" id="r_a38e8313e3b672bdcba26be8a02cf7615"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a38e8313e3b672bdcba26be8a02cf7615">flush_trees</a> ()</td></tr>
+<tr class="memdesc:a38e8313e3b672bdcba26be8a02cf7615 inherit pub_methods_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush trees from forest.  <br /></td></tr>
+<tr class="separator:a38e8313e3b672bdcba26be8a02cf7615 inherit pub_methods_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a01845fafe6ef29f11226bf11e07eec1a" id="r_a01845fafe6ef29f11226bf11e07eec1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a01845fafe6ef29f11226bf11e07eec1a">find_neighbours</a> ()</td></tr>
+<tr class="memdesc:a01845fafe6ef29f11226bf11e07eec1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct the neighbour lookup scheme.  <br /></td></tr>
+<tr class="separator:a01845fafe6ef29f11226bf11e07eec1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c7c91a50f0c679bc61fda3ae06cbef" id="r_a08c7c91a50f0c679bc61fda3ae06cbef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1BinaryTreeRoot.html">BinaryTreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a08c7c91a50f0c679bc61fda3ae06cbef">binary_tree_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a08c7c91a50f0c679bc61fda3ae06cbef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to i-th root binary tree in this forest (performs a dynamic cast from the <a class="el" href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ...">TreeRoot</a> to a <a class="el" href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s...">BinaryTreeRoot</a>).  <br /></td></tr>
+<tr class="separator:a08c7c91a50f0c679bc61fda3ae06cbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130188a77f8358f082e6b6fca5b72286" id="r_a130188a77f8358f082e6b6fca5b72286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1BinaryTreeRoot.html">BinaryTreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1BinaryTreeForest.html#a130188a77f8358f082e6b6fca5b72286">binary_neigh_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">direction</a>)</td></tr>
+<tr class="memdesc:a130188a77f8358f082e6b6fca5b72286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the number i of the root binary tree in this forest, return a pointer to its neighbour in the specified direction. NULL if neighbour doesn't exist. (This does the dynamic cast from a <a class="el" href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ...">TreeRoot</a> to a <a class="el" href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s...">BinaryTreeRoot</a> internally).  <br /></td></tr>
+<tr class="separator:a130188a77f8358f082e6b6fca5b72286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1TreeForest"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TreeForest')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TreeForest.html">oomph::TreeForest</a></td></tr>
+<tr class="memitem:a94d44c85e121758945f04aa28aa8df2a inherit pro_attribs_classoomph_1_1TreeForest" id="r_a94d44c85e121758945f04aa28aa8df2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TreeForest.html#a94d44c85e121758945f04aa28aa8df2a">Trees_pt</a></td></tr>
+<tr class="memdesc:a94d44c85e121758945f04aa28aa8df2a inherit pro_attribs_classoomph_1_1TreeForest"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> containing the pointers to the trees.  <br /></td></tr>
+<tr class="separator:a94d44c85e121758945f04aa28aa8df2a inherit pro_attribs_classoomph_1_1TreeForest"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="classoomph_1_1BinaryTreeForest.html" title="A BinaryTreeForest consists of a collection of BinaryTreeRoots. Each member tree can have neighbours ...">BinaryTreeForest</a> consists of a collection of BinaryTreeRoots. Each member tree can have neighbours to its left and right. </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00285">285</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0185044e57a122d19fef2a5c9256a74b" name="a0185044e57a122d19fef2a5c9256a74b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0185044e57a122d19fef2a5c9256a74b">&#9670;&#160;</a></span>BinaryTreeForest() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::BinaryTreeForest::BinaryTreeForest </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor (empty and broken) </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00289">289</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+
+</div>
+</div>
+<a id="a534e8527d8701034afb5a8d6ab343de2" name="a534e8527d8701034afb5a8d6ab343de2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a534e8527d8701034afb5a8d6ab343de2">&#9670;&#160;</a></span>BinaryTreeForest() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::BinaryTreeForest::BinaryTreeForest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trees_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass vector of pointers to the roots of the constituent BinaryTrees. </p>
+<p>Constructor for <a class="el" href="classoomph_1_1BinaryTreeForest.html" title="A BinaryTreeForest consists of a collection of BinaryTreeRoots. Each member tree can have neighbours ...">BinaryTreeForest</a>:</p>
+<p>Pass:</p><ul>
+<li>trees_pt[], the <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the constituent trees (<a class="el" href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s...">BinaryTreeRoot</a> objects) </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8cc_source.html#l00438">438</a> of file <a class="el" href="binary__tree_8cc_source.html">binary_tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="binary__tree_8cc_source.html#l00454">find_neighbours()</a>.</p>
+
+</div>
+</div>
+<a id="acb08554836a1a5187ea354d8a7108b7a" name="acb08554836a1a5187ea354d8a7108b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb08554836a1a5187ea354d8a7108b7a">&#9670;&#160;</a></span>BinaryTreeForest() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::BinaryTreeForest::BinaryTreeForest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1BinaryTreeForest.html">BinaryTreeForest</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a6aa265e1c1c5b3be62b2f79d7c13c306" name="a6aa265e1c1c5b3be62b2f79d7c13c306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa265e1c1c5b3be62b2f79d7c13c306">&#9670;&#160;</a></span>~BinaryTreeForest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::BinaryTreeForest::~BinaryTreeForest </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Delete the constituent binary trees (and thus the objects associated with its non-leaf nodes!) </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00310">310</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a130188a77f8358f082e6b6fca5b72286" name="a130188a77f8358f082e6b6fca5b72286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130188a77f8358f082e6b6fca5b72286">&#9670;&#160;</a></span>binary_neigh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1BinaryTreeRoot.html">BinaryTreeRoot</a> * oomph::BinaryTreeForest::binary_neigh_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Given the number i of the root binary tree in this forest, return a pointer to its neighbour in the specified direction. NULL if neighbour doesn't exist. (This does the dynamic cast from a <a class="el" href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ...">TreeRoot</a> to a <a class="el" href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s...">BinaryTreeRoot</a> internally). </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00345">345</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tree_8h_source.html#l00480">oomph::TreeForest::Trees_pt</a>.</p>
+
+</div>
+</div>
+<a id="a08c7c91a50f0c679bc61fda3ae06cbef" name="a08c7c91a50f0c679bc61fda3ae06cbef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c7c91a50f0c679bc61fda3ae06cbef">&#9670;&#160;</a></span>binary_tree_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1BinaryTreeRoot.html">BinaryTreeRoot</a> * oomph::BinaryTreeForest::binary_tree_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to i-th root binary tree in this forest (performs a dynamic cast from the <a class="el" href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ...">TreeRoot</a> to a <a class="el" href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s...">BinaryTreeRoot</a>). </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00336">336</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tree_8h_source.html#l00480">oomph::TreeForest::Trees_pt</a>.</p>
+
+</div>
+</div>
+<a id="a2e99234fcdc75760e00afb7d140c74ec" name="a2e99234fcdc75760e00afb7d140c74ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e99234fcdc75760e00afb7d140c74ec">&#9670;&#160;</a></span>check_all_neighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::BinaryTreeForest::check_all_neighbours </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Document and check all the neighbours of all the nodes in the forest. <a class="el" href="classoomph_1_1DocInfo.html" title="Information for documentation of results: Directory and file number to enable output in the form RESL...">DocInfo</a> object specifies the output directory and file numbers for the various files. If <code>doc_info.disable_doc()</code> has been called, no output is created. </p>
+<p>Document and check all the neighbours in all the nodes in the forest. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TreeForest.html#a0e6a7f821d9f14374c6d23d8766c7679">oomph::TreeForest</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8cc_source.html#l00548">548</a> of file <a class="el" href="binary__tree_8cc_source.html">binary_tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00534">oomph::DocInfo::directory()</a>, <a class="el" href="binary__tree_8cc_source.html#l00668">oomph::BinaryTree::doc_neighbours()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00558">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="tree_8h_source.html#l00255">oomph::Tree::max_neighbour_finding_tolerance()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00564">oomph::DocInfo::number()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, and <a class="el" href="tree_8cc_source.html#l00405">oomph::TreeForest::stick_all_tree_nodes_into_vector()</a>.</p>
+
+</div>
+</div>
+<a id="a01845fafe6ef29f11226bf11e07eec1a" name="a01845fafe6ef29f11226bf11e07eec1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01845fafe6ef29f11226bf11e07eec1a">&#9670;&#160;</a></span>find_neighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::BinaryTreeForest::find_neighbours </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct the neighbour lookup scheme. </p>
+<p>Set up the neighbour lookup schemes for all constituent binary trees. </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8cc_source.html#l00454">454</a> of file <a class="el" href="binary__tree_8cc_source.html">binary_tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l03844">oomph::FiniteElement::get_node_number()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02222">oomph::FiniteElement::nnode_1d()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="tree_8h_source.html#l00460">oomph::TreeForest::ntree()</a>, and <a class="el" href="tree_8h_source.html#l00480">oomph::TreeForest::Trees_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="binary__tree_8cc_source.html#l00438">BinaryTreeForest()</a>.</p>
+
+</div>
+</div>
+<a id="a7cf07f826ebdb73a0270791a6f300f9e" name="a7cf07f826ebdb73a0270791a6f300f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cf07f826ebdb73a0270791a6f300f9e">&#9670;&#160;</a></span>open_hanging_node_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::BinaryTreeForest::open_hanging_node_files </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DocInfo.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::ofstream * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>output_stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A line mesh cannot have hanging nodes so make this function empty. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TreeForest.html#a635443274eaa2fb1afa889e4e748608f">oomph::TreeForest</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8h_source.html#l00319">319</a> of file <a class="el" href="binary__tree_8h_source.html">binary_tree.h</a>.</p>
+
+</div>
+</div>
+<a id="a6cf5abb1ccfaef5577f36d334b37e0b3" name="a6cf5abb1ccfaef5577f36d334b37e0b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cf5abb1ccfaef5577f36d334b37e0b3">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::BinaryTreeForest::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1BinaryTreeForest.html">BinaryTreeForest</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a7cf3ec0bdb4c0955ca35bcc2e0874f80" name="a7cf3ec0bdb4c0955ca35bcc2e0874f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cf3ec0bdb4c0955ca35bcc2e0874f80">&#9670;&#160;</a></span>self_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::BinaryTreeForest::self_test </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Self-test: Check all neighbours. Return success (0) if the maximum distance between corresponding points in the neighbours is less than the tolerance specified in the static value <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">BinaryTree::Max_neighbour_finding_tolerance</a>. </p>
+<p>Self test: Check neighbour finding routine. For each element in the tree and for each vertex, determine the distance between the vertex and its position in the neighbour. If the difference is less than <a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2" title="Max. allowed discrepancy in neighbour finding routine (distance between points when identified from t...">Tree::Max_neighbour_finding_tolerance</a> return success (0), otherwise failure (1). </p>
+
+<p class="definition">Definition at line <a class="el" href="binary__tree_8cc_source.html#l00624">624</a> of file <a class="el" href="binary__tree_8cc_source.html">binary_tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="binary__tree_8cc_source.html#l00668">oomph::BinaryTree::doc_neighbours()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00255">oomph::Tree::max_neighbour_finding_tolerance()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8cc_source.html#l00405">oomph::TreeForest::stick_all_tree_nodes_into_vector()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="binary__tree_8h_source.html">binary_tree.h</a></li>
+<li><a class="el" href="binary__tree_8cc_source.html">binary_tree.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:27
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

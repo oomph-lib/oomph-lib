@@ -1,0 +1,462 @@
+\doxysection{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+
+
+Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the.  
+
+
+Inheritance diagram for Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.588653cm]{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0df5772b5f387b69601c892feb4f6da7}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor that passes the bulk element and face index down to the underlying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca}{alpha}} ()
+\begin{DoxyCompactList}\small\item\em Return the adsorption number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2}{k}} ()
+\begin{DoxyCompactList}\small\item\em Return the solubility nubmer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7}{alpha\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to adsorption number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7}{k\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to solubility number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricSurfactantTransportInterfaceElement}{oomph\+::\+Elastic\+Axisymmetric\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricSurfactantTransportInterfaceElement_a7e0f4dbf25bf0556a2675e599eeb6365}{Elastic\+Axisymmetric\+Surfactant\+Transport\+Interface\+Element}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{face\+\_\+index}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96}{Elastic\+Update\+Fluid\+Interface\+Element}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{id}}=0)
+\begin{DoxyCompactList}\small\item\em Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&k, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{i}}) \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em The "{}global"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Element representation, by default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}{lagrange}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n}})
+\begin{DoxyCompactList}\small\item\em Return the lagrange multiplier at local node n. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}})
+\begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Output the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{flag}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psif}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifds}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifdS}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifd\+S\+\_\+div}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{W}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{J}})
+\begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}{make\+\_\+bounding\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Create an "{}bounding"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a8934ab8e723427ed39298c592b2876a5}{Surfactant\+Transport\+Interface\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor that passes the bulk element and face index down to the underlying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aaf7988dfac3e02018c591f2f9e34f644}{set\+\_\+c\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{c\+\_\+index}})
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a79003d87401ad6106b8d10373ff12e73}{beta}} ()
+\begin{DoxyCompactList}\small\item\em Return the Elasticity number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ac945c28401b92a061e3e245e83541c55}{peclet\+\_\+s}} ()
+\begin{DoxyCompactList}\small\item\em Return the surface peclect number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_acb4ff16ed90e79ffe9e4156ef030d689}{peclet\+\_\+strouhal\+\_\+s}} ()
+\begin{DoxyCompactList}\small\item\em Return the surface peclect strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ab50173df0654ca3b389308ab6ba40e58}{beta\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to the Elasticity number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a3b1ca81ff9b154021d48ec268e0b0e01}{peclet\+\_\+s\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aa534251a5882f4a96afbb424d1d79cfb}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet x Strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a32ae151a017b122dd7a4c03511afbcc9}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}{integrate\+\_\+c}} ()
+\begin{DoxyCompactList}\small\item\em Compute the concentration intergated over the surface area. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement}{oomph\+::\+Fluid\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a4bd4a44ee08780fb8ba1be83c4353dd4}{Fluid\+Interface\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, set the default values of the booleans and pointers (null) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a3f66ffd5d9a8b9b6bd8cd54e90ce2d61}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Calculate the residuals by calling the generic residual contribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a33879379e89157fe00e733488f47f97a}{ca}} () \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em The value of the Capillary number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a18a0bc2b4416f834543920ab8f5bfbda}{ca\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to the Capillary number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a33bbfb8a887d4cbb0a6c35c0be497942}{st}} () \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em The value of the Strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a57193c38b332126d7c06befd468fbe60}{st\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em The pointer to the Strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a50a509413ea7f2a481678837846dd476}{u}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{j}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Return the i-\/th velocity component at local node j. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a8f807a6456da7785b12e45a4c17fb969}{interpolated\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Calculate the i-\/th velocity component at the local coordinate s. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7c0a2a21afce911c301c75febd3ba44c}{pext}} () \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the external pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7230ddea36eb36938d64583e5ee4b15f}{set\+\_\+external\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{external\+\_\+pressure\+\_\+data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the Data that contains the single pressure value that specifies the "{}external pressure"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a87ee1f3227c456a4c30df77c4d0bad6b}{set\+\_\+external\+\_\+pressure\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{external\+\_\+pressure\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{index\+\_\+of\+\_\+external\+\_\+pressure\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Set the Data that contains the pressure value that specifies the "{}external pressure"{} for the interface/free-\/surface. Setting this only makes sense if the interface is, in fact, a free surface (well, an interface to another inviscid fluid if you want to be picky). Second argument specifies the index of the pressure value within the Data object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_aba83fbd0679ffca4ef6aa32f7aa5d179}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a213b1a40132a9605ee8bd31c88b225e0}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{outfile}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_ad39bb9862c7f76e07d5ac006a1209cf9}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a57efd66ae07fab9e0cf98ac5f8eeb000}{output}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{file\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives}{oomph\+::\+Axisymmetric\+Derivatives}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives_a91b259ef45c7563b05bf79de4b0fe4bf}{Axisymmetric\+Derivatives}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a9be81fbc02916555947d831f776fbbad}{interpolated\+\_\+\+C\+\_\+bulk}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Get the bulk surfactant concentration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364}{dc\+\_\+bulk\+\_\+dt\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{l}}) \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em The time derivative of the bulk surface concentration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{flag}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psif}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifds}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifdS}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifd\+S\+\_\+div}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{W}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{J}})
+\begin{DoxyCompactList}\small\item\em Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psi}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsids}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a9da12df06b20e5f1ce0736acfc7e8d83}{interpolated\+\_\+C}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Get the surfactant concentration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7b5cc851b94d836a3caa2130cbf45bec}{dcdt\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{l}}) \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}}
+\begin{DoxyCompactList}\small\item\em The time derivative of the surface concentration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a1710057c610ccccc06ef41f34f086aae}{sigma}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}})
+\begin{DoxyCompactList}\small\item\em The surface tension function is linear in the concentration with constant of proportionality equal to the elasticity number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a36422cf9aa94de6f0bfa668e5d4fa900}{dsigma\+\_\+dC}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Return the derivative of sigma with respect to C For use in computing the Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_adedf33390efdf652e169f8bd38eb2350}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{flag}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psif}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifds}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifdS}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsifd\+S\+\_\+div}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{s}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{W}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{J}})
+\begin{DoxyCompactList}\small\item\em Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7c0f9b63cea887a4a65abbe9aeb3b3cf}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{mass\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement}{oomph\+::\+Fluid\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_abd4aece98dee8173c6d796e23ccf1e03}{pext\+\_\+local\+\_\+eqn}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the local equation number that corresponds to the external pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_ae4ea3a18a513bed3725fdf413cf18874}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{jacobian}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{flag}})
+\begin{DoxyCompactList}\small\item\em Helper function to calculate the residuals and (if flag==1) the Jacobian of the equations. This is implemented generically using the surface divergence information that is overloaded in each element i.\+e. axisymmetric, two-\/ or three-\/dimensional. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives}{oomph\+::\+Axisymmetric\+Derivatives}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1AxisymmetricDerivatives_a306ea6b57d09d57e87e8d74a13c2f828}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psi}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsids}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a612a704820dace49315bccfaca1d2e47}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to adsorption number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea}{K\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solubility number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf}{C\+\_\+bulk\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Storage for the index at which the bulk concentration is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a26727fb7b57f88d3e1bdf4f2dd9f3b02}{C\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Index at which the surfactant concentration is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement}{oomph\+::\+Fluid\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a6a818d9999c68641223edcad217a8c3f}{U\+\_\+index\+\_\+interface}}
+\begin{DoxyCompactList}\small\item\em Nodal index at which the i-\/th velocity component is stored. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a2d4c5b3e08177f5695fa9e76bf08b570}{External\+\_\+data\+\_\+number\+\_\+of\+\_\+external\+\_\+pressure}}
+\begin{DoxyCompactList}\small\item\em The Data that contains the external pressure is stored as external Data for the element. Which external Data item is it? (int so it can be initialised to -\/1, indicating that external pressure hasn\textquotesingle{}t been set). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a9177eb6e96e5ac13fe092596bc104910}{Pext\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the Data item that stores the external pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a2a49c97d42ce05d1876626e5918bb8eb}{Index\+\_\+of\+\_\+external\+\_\+pressure\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Which of the values in Pext\+\_\+data\+\_\+pt stores the external pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement}{oomph\+::\+Surfactant\+Transport\+Interface\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{static}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ae2c6f40fd7bc427636ac25c23d816e74}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}
+\begin{DoxyCompactList}\small\item\em Default value of the physical constants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}$>$\newline
+class Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$}
+Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the. 
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00142}{142}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0df5772b5f387b69601c892feb4f6da7}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0df5772b5f387b69601c892feb4f6da7} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}}
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement()}{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{\+::\+Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor that passes the bulk element and face index down to the underlying. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00328}{328}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00067}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
+\index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{flag,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&}]{psif,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{dpsifds,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{dpsifdS,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{dpsifd\+S\+\_\+div,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{interpolated\+\_\+n,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{W,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278bb201b861f47dc846453be4c06}{oomph\+::\+Fluid\+Interface\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{212}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+C\+\_\+index}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!alpha@{alpha}}
+\index{alpha@{alpha}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the adsorption number. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{343}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!alpha\_pt@{alpha\_pt}}
+\index{alpha\_pt@{alpha\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for pointer to adsorption number. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00349}{349}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!dc\_bulk\_dt\_surface@{dc\_bulk\_dt\_surface}}
+\index{dc\_bulk\_dt\_surface@{dc\_bulk\_dt\_surface}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{dc\_bulk\_dt\_surface()}{dc\_bulk\_dt\_surface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::dc\+\_\+bulk\+\_\+dt\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+The time derivative of the bulk surface concentration. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00185}{185}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a9be81fbc02916555947d831f776fbbad}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a9be81fbc02916555947d831f776fbbad} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!interpolated\_C\_bulk@{interpolated\_C\_bulk}}
+\index{interpolated\_C\_bulk@{interpolated\_C\_bulk}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interpolated\_C\_bulk()}{interpolated\_C\_bulk()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::interpolated\+\_\+\+C\+\_\+bulk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Get the bulk surfactant concentration. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{158}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00355}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::output()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!k@{k}}
+\index{k@{k}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{k()}{k()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::k (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the solubility nubmer. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{346}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+K\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!k\_pt@{k\_pt}}
+\index{k\_pt@{k\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{k\_pt()}{k\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::k\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for pointer to solubility number. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00352}{352}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+K\+\_\+pt}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the output function. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00355}{355}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, and \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::sigma()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a612a704820dace49315bccfaca1d2e47}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a612a704820dace49315bccfaca1d2e47} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to adsorption number. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{147}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00349}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha\+\_\+pt()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00328}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!C\_bulk\_index@{C\_bulk\_index}}
+\index{C\_bulk\_index@{C\_bulk\_index}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{C\_bulk\_index}{C\_bulk\_index}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::\+C\+\_\+bulk\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the index at which the bulk concentration is stored. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{153}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00185}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::dc\+\_\+bulk\+\_\+dt\+\_\+surface()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}.
+
+\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea} 
+\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!K\_pt@{K\_pt}}
+\index{K\_pt@{K\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{K\_pt}{K\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::\+K\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solubility number. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{149}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00352}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}\end{DoxyCompactItemize}

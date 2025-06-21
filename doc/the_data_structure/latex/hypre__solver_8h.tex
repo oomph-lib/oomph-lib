@@ -1,0 +1,57 @@
+\doxysection{hypre\+\_\+solver.\+h File Reference}
+\hypertarget{hypre__solver_8h}{}\label{hypre__solver_8h}\index{hypre\_solver.h@{hypre\_solver.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1HypreInterface}{oomph\+::\+Hypre\+Interface}}
+\begin{DoxyCompactList}\small\item\em An interface class to the suite of Hypre solvers and preconditioners to allow use of\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HypreSolver}{oomph\+::\+Hypre\+Solver}}
+\begin{DoxyCompactList}\small\item\em An \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} class using the suite of Hypre solvers to allow. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{oomph\+::\+Hypre\+Preconditioner}}
+\begin{DoxyCompactList}\small\item\em An \doxylink{classoomph_1_1Preconditioner}{Preconditioner} class using the suite of Hypre preconditioners to allow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers}{oomph\+::\+Hypre\+Helpers}}
+\begin{DoxyCompactList}\small\item\em Helper functions for use with the Hypre library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings}{oomph\+::\+Hypre\+\_\+default\+\_\+settings}}
+\begin{DoxyCompactList}\small\item\em Default settings for various uses of the HYPRE solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag}} (std\+::ostringstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{message}})
+\begin{DoxyCompactList}\small\item\em Helper function to check the Hypre error flag, return the message associated with any error, and reset the global error flag to zero. This function also returns the error value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+vec}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa56349b171f8dc464f527ab54a8b219a}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJMatrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+CSRMatrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a serial HYPRE\+\_\+\+IJMatrix and HYPRE\+\_\+\+Par\+CSRMatrix from a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} NOTE\+: dist\+\_\+pt is rebuilt to match the distribution of the hypre solver which is not necassarily the same as the oomph lib matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7}{oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+block\+\_\+jacobi}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+row\+\_\+scaling}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+ilut}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&level, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drop\+\_\+tol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{print\+\_\+level}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{euclid\+\_\+object}})
+\begin{DoxyCompactList}\small\item\em Helper function to set Euclid options using a command line like array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings_a2537d48181e8542f129522a06b457e11}{oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+momentum\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+preconditioner\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set default parameters for use as preconditioner in for momentum block in Navier-\/\+Stokes problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings_a8e616a1267ca88b82032b059ab573241}{oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+2\+D\+\_\+poisson\+\_\+problem}} (\mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+preconditioner\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set default parameters for use as preconditioner in 2D Poisson-\/type problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings_a8c726c9ee016fbf9257a9cbd667873d6}{oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+3\+D\+\_\+poisson\+\_\+problem}} (\mbox{\hyperlink{classoomph_1_1HyprePreconditioner}{Hypre\+Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+preconditioner\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set default parameters for use as preconditioner in 3D Poisson-\/type problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+hypre\+\_\+\+Error \mbox{\hyperlink{hypre__solver_8h_a3f159862f67e03500e947e98e0938171}{hypre\+\_\+\+\_\+global\+\_\+error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{hypre__solver_8h_a3f159862f67e03500e947e98e0938171}\label{hypre__solver_8h_a3f159862f67e03500e947e98e0938171} 
+\index{hypre\_solver.h@{hypre\_solver.h}!hypre\_\_global\_error@{hypre\_\_global\_error}}
+\index{hypre\_\_global\_error@{hypre\_\_global\_error}!hypre\_solver.h@{hypre\_solver.h}}
+\doxysubsubsection{\texorpdfstring{hypre\_\_global\_error}{hypre\_\_global\_error}}
+{\footnotesize\ttfamily hypre\+\_\+\+Error hypre\+\_\+\+\_\+global\+\_\+error\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup()}}.
+

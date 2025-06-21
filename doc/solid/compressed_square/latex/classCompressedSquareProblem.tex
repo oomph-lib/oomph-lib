@@ -1,0 +1,194 @@
+\doxysection{Compressed\+Square\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classCompressedSquareProblem}{}\label{classCompressedSquareProblem}\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+
+
+Problem class.  
+
+
+Inheritance diagram for Compressed\+Square\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCompressedSquareProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCompressedSquareProblem_af013df43f2a9f6ee8ff16cf59ddd9439}{Compressed\+Square\+Problem}} (const bool \&incompress)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass flag that determines if we want to use a true incompressible formulation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCompressedSquareProblem_afef46d13ff7c8b2845e96a84762077dc}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCompressedSquareProblem_aed8338e212b31c56a5df20c222385e15}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCompressedSquareProblem_a34d511f377379122d65b2a1402898f5c}{doc\+\_\+solution}} (const bool \&incompress)
+\begin{DoxyCompactList}\small\item\em Doc the solution \& exact (linear) solution for compressible or incompressible materials. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCompressedSquareProblem_a1543bb8bcba7bf3491e29d141faaf774}{run\+\_\+it}} (const int \&i\+\_\+case, const bool \&incompress)
+\begin{DoxyCompactList}\small\item\em Run the job -- doc in RESLTi\+\_\+case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofstream \mbox{\hyperlink{classCompressedSquareProblem_afc8bc8ff7811d18f8d59cd1c35e6cb00}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCompressedSquareProblem_a0af6b1044a8392a3ae3d753f4db52664}{Trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointers to node whose position we\textquotesingle{}re tracing. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classCompressedSquareProblem_a2269691c7bef351c87a4421d275fe7c3}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc\+Info object for output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Compressed\+Square\+Problem$<$ ELEMENT $>$}
+Problem class. 
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00148}{148}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCompressedSquareProblem_af013df43f2a9f6ee8ff16cf59ddd9439}\label{classCompressedSquareProblem_af013df43f2a9f6ee8ff16cf59ddd9439} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!CompressedSquareProblem@{CompressedSquareProblem}}
+\index{CompressedSquareProblem@{CompressedSquareProblem}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CompressedSquareProblem()}{CompressedSquareProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classCompressedSquareProblem}{\+::\+Compressed\+Square\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{incompress }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass flag that determines if we want to use a true incompressible formulation. 
+
+Constructor\+: Pass flag that determines if we want to enforce incompressibility. 
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00189}{189}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+References \mbox{\hyperlink{compressed__square_8cc_source_l00114}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{compressed__square_8cc_source_l00132}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCompressedSquareProblem_afef46d13ff7c8b2845e96a84762077dc}\label{classCompressedSquareProblem_afef46d13ff7c8b2845e96a84762077dc} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00158}{158}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+\Hypertarget{classCompressedSquareProblem_aed8338e212b31c56a5df20c222385e15}\label{classCompressedSquareProblem_aed8338e212b31c56a5df20c222385e15} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00161}{161}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+\Hypertarget{classCompressedSquareProblem_a34d511f377379122d65b2a1402898f5c}\label{classCompressedSquareProblem_a34d511f377379122d65b2a1402898f5c} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{const bool \&}]{incompress }\end{DoxyParamCaption})}
+
+
+
+Doc the solution \& exact (linear) solution for compressible or incompressible materials. 
+
+Doc the solution. 
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00284}{284}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+References \mbox{\hyperlink{compressed__square_8cc_source_l00129}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}, and \mbox{\hyperlink{compressed__square_8cc_source_l00117}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}.
+
+\Hypertarget{classCompressedSquareProblem_a1543bb8bcba7bf3491e29d141faaf774}\label{classCompressedSquareProblem_a1543bb8bcba7bf3491e29d141faaf774} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!run\_it@{run\_it}}
+\index{run\_it@{run\_it}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run\_it()}{run\_it()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::run\+\_\+it (\begin{DoxyParamCaption}\item[{const int \&}]{i\+\_\+case,  }\item[{const bool \&}]{incompress }\end{DoxyParamCaption})}
+
+
+
+Run the job -- doc in RESLTi\+\_\+case. 
+
+Run it. 
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00379}{379}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+References \mbox{\hyperlink{compressed__square_8cc_source_l00129}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}.
+
+
+
+Referenced by \mbox{\hyperlink{compressed__square_8cc_source_l00421}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCompressedSquareProblem_a2269691c7bef351c87a4421d275fe7c3}\label{classCompressedSquareProblem_a2269691c7bef351c87a4421d275fe7c3} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc\+Info object for output. 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00179}{179}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+\Hypertarget{classCompressedSquareProblem_afc8bc8ff7811d18f8d59cd1c35e6cb00}\label{classCompressedSquareProblem_afc8bc8ff7811d18f8d59cd1c35e6cb00} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00173}{173}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+\Hypertarget{classCompressedSquareProblem_a0af6b1044a8392a3ae3d753f4db52664}\label{classCompressedSquareProblem_a0af6b1044a8392a3ae3d753f4db52664} 
+\index{CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}!Trace\_node\_pt@{Trace\_node\_pt}}
+\index{Trace\_node\_pt@{Trace\_node\_pt}!CompressedSquareProblem$<$ ELEMENT $>$@{CompressedSquareProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_node\_pt}{Trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointers to node whose position we\textquotesingle{}re tracing. 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00176}{176}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{compressed__square_8cc}{compressed\+\_\+square.\+cc}}\end{DoxyCompactItemize}

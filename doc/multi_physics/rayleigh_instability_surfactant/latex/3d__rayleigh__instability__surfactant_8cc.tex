@@ -1,0 +1,69 @@
+\doxysection{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc File Reference}
+\hypertarget{3d__rayleigh__instability__surfactant_8cc}{}\label{3d__rayleigh__instability__surfactant_8cc}\index{3d\_rayleigh\_instability\_surfactant.cc@{3d\_rayleigh\_instability\_surfactant.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElementCmp}{Element\+Cmp}}
+\begin{DoxyCompactList}\small\item\em Function-\/type-\/object to perform comparison of elements in y-\/direction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{oomph\+::\+Annular\+Spine\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Deform the existing cubic spine mesh into a annular section with spines directed radially inwards from the wall. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Single fluid interface problem including transport of an insoluble surfactant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namepspace for global parameters, chosen from Campana et al. as in the axisymmetric problem. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{argc}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for unsteady two-\/layer fluid problem. If there are any command line arguments, we regard this as a validation run and perform only two steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4d1da0a125f6044733e121f0f3d958ca}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}} = 0.\+2
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} = 40.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}} = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}
+\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Product of Reynolds and Froude number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}} = \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{pow}}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4d1da0a125f6044733e121f0f3d958ca}{Film\+\_\+\+Thickness}},3.\+0)
+\begin{DoxyCompactList}\small\item\em Capillary number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}} = 1.\+047
+\begin{DoxyCompactList}\small\item\em Wavelength of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a28f21de3d342b1dab2fa0be362c6a944}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon}} = 1.\+0e-\/3
+\begin{DoxyCompactList}\small\item\em Free surface cosine deformation parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a351a17b52cfcabc688393423f3de361b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}} = 3.\+6\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{e}}-\/3
+\begin{DoxyCompactList}\small\item\em Surface Elasticity number (weak case) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a99dc85e71075cd6efb06e692d8a15bcd}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S}} = 4032.\+0
+\begin{DoxyCompactList}\small\item\em Surface Peclet number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_abec1e1c8c78ade3a7b2e7396321c6466}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Sufrace Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{3d__rayleigh__instability__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{3d__rayleigh__instability__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{3d\_rayleigh\_instability\_surfactant.cc@{3d\_rayleigh\_instability\_surfactant.cc}!main@{main}}
+\index{main@{main}!3d\_rayleigh\_instability\_surfactant.cc@{3d\_rayleigh\_instability\_surfactant.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for unsteady two-\/layer fluid problem. If there are any command line arguments, we regard this as a validation run and perform only two steps. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00553}{553}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}, and \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}.
+

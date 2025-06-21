@@ -1,0 +1,1033 @@
+\doxysection{oomph\+::Vorticity\+Smoother\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1VorticitySmootherElement}{}\label{classoomph_1_1VorticitySmootherElement}\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+
+
+Overloaded element that allows projection of vorticity.  
+
+
+
+
+{\ttfamily \#include $<$vorticity\+\_\+smoother.\+h$>$}
+
+Inheritance diagram for oomph\+::Vorticity\+Smoother\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1VorticitySmootherElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vort\+\_\+and\+\_\+derivs}})
+\begin{DoxyCompactList}\small\item\em Typedef for pointer to function that specifies the exact vorticity and derivatives (for validation) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a96098a22de6fbae83a65cd4ee3d53675}{Vorticity\+Smoother\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}{create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper function to create a container for the vorticity and its partial derivatives. If the user wishes to output everything then this also creates space for the velocity derivatives too. This function has been written to allow for generalisation of the storage without (hopefully!) affecting too much. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a63af4e395a5d135f0c549251337b3b8b}{vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper function that, given the local dof number of the i-\/th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1\+: this function goes hand-\/in-\/hand with \doxylink{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}{create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()} Note 2\+: i=0\+: vorticity itself; i\texorpdfstring{$>$}{>}0\+: vorticity derivatives. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a316eb18c98752216f3a20cfab7613ad0}{recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper function that, given the local dof number of the i-\/th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1\+: this function goes hand-\/in-\/hand with \doxylink{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}{create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()} Note 2\+: The input to this function is the i associated with the STORED nodal dof value. For example, if we\textquotesingle{}re only recovering the velocity derivatives then i=0 is associated with du/dx. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aa0c9c94ce5dafa63f243511be306a237}{stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Given the STORED dof number, this function returns the global recovered number. For example, if we only want to recover the velocity derivatives then the stored dof number of du/dy is 1 (as 0 is associated with du/dx). The global recovered number is 11 (as there are currently 10 vorticity derivatives that can be recovered and du/dy is the second velocity derivative we can recover). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a752d6be1a14a39f1c66ce09769bd075d}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The maximum order of vorticity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab4a59ee60f1d6591594fe9d7169f75bc}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The maximum order of velocity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aad7f79c7cf34ceeb090153881b070f1f}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. DRAIG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a019761da9b0b46ef3c4b6197b93fbfbc}{get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. DRAIG\+: Leave get\+\_\+ prefix? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a7a433092a73a9fed26330e247a415414}{nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The number of terms calculated in the vorticity recovery. Also includes the zeroth derivative, i.\+e. the vorticity itself. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_abfa785cee70e98c2e1890a1d2053abba}{nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The number of derivatives calculated in the velocity recovery. This does NOT include the zeroth derivatives as they are not "{}recovered"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a24820e11328d5c4a87eb6fc8399e2a54}{npartial\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Call the function written in \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_acf157e914f3bc7a12a37f6ab3c506804}{exact\+\_\+vorticity\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to function that specifies exact vorticity and derivatives (for validation). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_af554c9bc41710d8b042a51c19383351e}{exact\+\_\+vorticity\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to function that specifies exact vorticity and derivatives (for validation) -- const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a5297ce9dd4c4d23fa99daafc2764d7db}{smoothed\+\_\+vorticity\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Index of smoothed vorticity -- followed by derivatives. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_abec3461fcb00b7cbab8aee26f996c1ed}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of values required at local node n. In order to simplify matters, we allocate storage for pressure variables at all the nodes and then pin those that are not used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a15559517f708dbdfe51e2e94f5bca3dc}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a4f7da8484a949a875d411cca340f37e2}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values)
+\begin{DoxyCompactList}\small\item\em Get the function value u in \doxylink{classoomph_1_1Vector}{Vector}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \doxylink{classoomph_1_1Vector}{Vector} sets its own size in here. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab1ee981ddf465edc8a55bf281ce073c7}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values)
+\begin{DoxyCompactList}\small\item\em Get the function value u in \doxylink{classoomph_1_1Vector}{Vector}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \doxylink{classoomph_1_1Vector}{Vector} sets its own size in here. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_acdb04c3f47fd5de9e56a7443e7469a1f}{pin\+\_\+smoothed\+\_\+vorticity}} ()
+\begin{DoxyCompactList}\small\item\em Pin all smoothed vorticity quantities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ac0a831db4c42647732e231bbbcbe756e}{output\+\_\+analytical\+\_\+veloc\+\_\+and\+\_\+vorticity}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output exact velocity, vorticity, derivatives and indicator based on functions specified by two function pointers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aa2c5f7342ea784ae47a706524b63bafb}{output\+\_\+smoothed\+\_\+vorticity}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output the velocity, smoothed vorticity and derivatives. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a79746eb31ff493e2d43ce4465b57b22a}{nscalar\+\_\+paraview}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of scalars/fields output by this element. Re-\/implements broken virtual function in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a616f49cad0eaf25a0218730bda2f9b7f}{scalar\+\_\+value\+\_\+paraview}} (std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+out}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Write values of the i-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_af4f47bc30f0a157c2235c19243a88b0d}{scalar\+\_\+name\+\_\+paraview}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a981931bfa4139cd4d64ed427b65c95d9}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Overloaded output function\+: Output velocity, pressure and the smoothed vorticity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a84d1f43fd70f0c44c009bdb971e12cf7}{get\+\_\+raw\+\_\+velocity\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dveloc\+\_\+dx}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of velocity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ae62b043f15684347e021de18ad10060b}{get\+\_\+raw\+\_\+velocity\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dveloc\+\_\+dx}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of velocity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab2eca05bdab5e65e235f2935bd62815c}{get\+\_\+raw\+\_\+vorticity\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dx}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed vorticity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab070bf8233fe89a359e3c93a4ab1708c}{get\+\_\+raw\+\_\+vorticity\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dx}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed vorticity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aea5adb8174d61cce321050a83bb10124}{get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dxdy}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed derivative vorticity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a3d40fe93a1215c08f8524c1ff2b6e193}{get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dxdy}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dxdy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aae5d2fb00a4107e1ec729a4e804ef5b1}{get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dxdxdy}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}3\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_aea23c14dd7f145afe6a73eabf715e5df}{get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dvorticity\+\_\+dxdxdy}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}3\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3,. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a6987508c3afae70605d1bc73b27607d6}{vorticity\+\_\+error\+\_\+squared}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s contribution to the (squared) L2 norm of the difference between exact and smoothed vorticity. The input i corresponds to the i-\/th dof stored at each node (excluding the velocities and pressure). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a4bd88c454b07db0ef8b44e7912651425}{vorticity\+\_\+and\+\_\+its\+\_\+derivs}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vort\+\_\+and\+\_\+derivs}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute smoothed vorticity and its derivatives. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_afc0f746d35e11a455fe36df7be1069ec}{N\+\_\+dim}}
+\begin{DoxyCompactList}\small\item\em Number of dimensions in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a15a33ab6804cbd945f67db0cf81ff6bc}{Smoothed\+\_\+vorticity\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Index of smoothed vorticity -- followed by derivatives; in 2D this has value 3. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a7753f3129fb23347ef757af45cc7b221}{Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives}}
+\begin{DoxyCompactList}\small\item\em The current maximum order of vorticity derivatives that can be recovered. Currently, we can recover up to the third derivative\+: omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a6ca5c212c0bd7db1a492bbf255f247cc}{Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives}}
+\begin{DoxyCompactList}\small\item\em The current maximum order of velocity derivatives that can be recovered. Currently, we can recover the first derivatives\+: du/dx,du/dy,dv/dx,dv/dy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab25f6ce614cbcca04d1dc8e72baf80e6}{Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}
+\begin{DoxyCompactList}\small\item\em Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3, du/dx,du/dy,dv/dx,dv/dy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ab5cbc36edc0935a8a8bed8fe570bd403}{Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}
+\begin{DoxyCompactList}\small\item\em Maximum number of derivatives to retain in the vorticity recovery. Note, the value -\/1 means we ONLY output u,v\mbox{[},w\mbox{]},p. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a9fb49eba4ca7b0ffd94c4a728c5f9a17}{Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}
+\begin{DoxyCompactList}\small\item\em Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don\textquotesingle{}t calculate the derivatives of the velocity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_a63f838b49c19f7c3686c50b455da2e36}{Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to function that specifies exact vorticity and derivs (for validation). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT$>$\newline
+class oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$}
+Overloaded element that allows projection of vorticity. 
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00223}{223}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}\label{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!ExactVorticityFctPt@{ExactVorticityFctPt}}
+\index{ExactVorticityFctPt@{ExactVorticityFctPt}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ExactVorticityFctPt}{ExactVorticityFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Exact\+Vorticity\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vort\+\_\+and\+\_\+derivs}})}
+
+
+
+Typedef for pointer to function that specifies the exact vorticity and derivatives (for validation) 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00265}{265}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a96098a22de6fbae83a65cd4ee3d53675}\label{classoomph_1_1VorticitySmootherElement_a96098a22de6fbae83a65cd4ee3d53675} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!VorticitySmootherElement@{VorticitySmootherElement}}
+\index{VorticitySmootherElement@{VorticitySmootherElement}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{VorticitySmootherElement()}{VorticitySmootherElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{227}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01803}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01798}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}, \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers_a7a5b81f8ddddc2ac5eb888fd970f060c}{oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}\label{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!create\_container\_for\_vorticity\_and\_derivatives@{create\_container\_for\_vorticity\_and\_derivatives}}
+\index{create\_container\_for\_vorticity\_and\_derivatives@{create\_container\_for\_vorticity\_and\_derivatives}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_container\_for\_vorticity\_and\_derivatives()}{create\_container\_for\_vorticity\_and\_derivatives()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function to create a container for the vorticity and its partial derivatives. If the user wishes to output everything then this also creates space for the velocity derivatives too. This function has been written to allow for generalisation of the storage without (hopefully!) affecting too much. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{273}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01159}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00825}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+analytical\+\_\+veloc\+\_\+and\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00899}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+smoothed\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_acf157e914f3bc7a12a37f6ab3c506804}\label{classoomph_1_1VorticitySmootherElement_acf157e914f3bc7a12a37f6ab3c506804} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!exact\_vorticity\_fct\_pt@{exact\_vorticity\_fct\_pt}}
+\index{exact\_vorticity\_fct\_pt@{exact\_vorticity\_fct\_pt}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{exact\_vorticity\_fct\_pt()}{exact\_vorticity\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::exact\+\_\+vorticity\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Pointer to function that specifies exact vorticity and derivatives (for validation). 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00710}{710}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_af554c9bc41710d8b042a51c19383351e}\label{classoomph_1_1VorticitySmootherElement_af554c9bc41710d8b042a51c19383351e} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!exact\_vorticity\_fct\_pt@{exact\_vorticity\_fct\_pt}}
+\index{exact\_vorticity\_fct\_pt@{exact\_vorticity\_fct\_pt}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{exact\_vorticity\_fct\_pt()}{exact\_vorticity\_fct\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::exact\+\_\+vorticity\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: Pointer to function that specifies exact vorticity and derivatives (for validation) -- const version. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00718}{718}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab1ee981ddf465edc8a55bf281ce073c7}\label{classoomph_1_1VorticitySmootherElement_ab1ee981ddf465edc8a55bf281ce073c7} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the function value u in \doxylink{classoomph_1_1Vector}{Vector}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \doxylink{classoomph_1_1Vector}{Vector} sets its own size in here. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00765}{765}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a4f7da8484a949a875d411cca340f37e2}\label{classoomph_1_1VorticitySmootherElement_a4f7da8484a949a875d411cca340f37e2} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
+\index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the function value u in \doxylink{classoomph_1_1Vector}{Vector}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \doxylink{classoomph_1_1Vector}{Vector} sets its own size in here. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00751}{751}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00751}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00751}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab4a59ee60f1d6591594fe9d7169f75bc}\label{classoomph_1_1VorticitySmootherElement_ab4a59ee60f1d6591594fe9d7169f75bc} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_maximum\_order\_of\_recoverable\_velocity\_derivative@{get\_maximum\_order\_of\_recoverable\_velocity\_derivative}}
+\index{get\_maximum\_order\_of\_recoverable\_velocity\_derivative@{get\_maximum\_order\_of\_recoverable\_velocity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_order\_of\_recoverable\_velocity\_derivative()}{get\_maximum\_order\_of\_recoverable\_velocity\_derivative()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The maximum order of velocity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG\+: Leave get\+\_\+ prefix? 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00635}{635}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01803}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a752d6be1a14a39f1c66ce09769bd075d}\label{classoomph_1_1VorticitySmootherElement_a752d6be1a14a39f1c66ce09769bd075d} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_maximum\_order\_of\_recoverable\_vorticity\_derivative@{get\_maximum\_order\_of\_recoverable\_vorticity\_derivative}}
+\index{get\_maximum\_order\_of\_recoverable\_vorticity\_derivative@{get\_maximum\_order\_of\_recoverable\_vorticity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_order\_of\_recoverable\_vorticity\_derivative()}{get\_maximum\_order\_of\_recoverable\_vorticity\_derivative()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The maximum order of vorticity derivative that can be recovered. This is set in the constructor and should NOT be changed during the running of the code. As such, a set...() function is not provided. DRAIG\+: Leave get\+\_\+ prefix? 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00625}{625}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01798}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a019761da9b0b46ef3c4b6197b93fbfbc}\label{classoomph_1_1VorticitySmootherElement_a019761da9b0b46ef3c4b6197b93fbfbc} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_maximum\_order\_of\_velocity\_derivative@{get\_maximum\_order\_of\_velocity\_derivative}}
+\index{get\_maximum\_order\_of\_velocity\_derivative@{get\_maximum\_order\_of\_velocity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_order\_of\_velocity\_derivative()}{get\_maximum\_order\_of\_velocity\_derivative()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The maximum order of derivatives calculated in the velocity recovery. Note, this value can only be set through the namespace \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. DRAIG\+: Leave get\+\_\+ prefix? 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00655}{655}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aad7f79c7cf34ceeb090153881b070f1f}\label{classoomph_1_1VorticitySmootherElement_aad7f79c7cf34ceeb090153881b070f1f} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_maximum\_order\_of\_vorticity\_derivative@{get\_maximum\_order\_of\_vorticity\_derivative}}
+\index{get\_maximum\_order\_of\_vorticity\_derivative@{get\_maximum\_order\_of\_vorticity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_order\_of\_vorticity\_derivative()}{get\_maximum\_order\_of\_vorticity\_derivative()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The maximum order of derivatives calculated in the vorticity recovery. Note, this value can only be set through the namespace \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. DRAIG\+: Leave get\+\_\+ prefix? 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00645}{645}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ae62b043f15684347e021de18ad10060b}\label{classoomph_1_1VorticitySmootherElement_ae62b043f15684347e021de18ad10060b} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_velocity\_deriv@{get\_raw\_velocity\_deriv}}
+\index{get\_raw\_velocity\_deriv@{get\_raw\_velocity\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_velocity\_deriv()}{get\_raw\_velocity\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+velocity\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dveloc\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01276}{1276}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a84d1f43fd70f0c44c009bdb971e12cf7}\label{classoomph_1_1VorticitySmootherElement_a84d1f43fd70f0c44c009bdb971e12cf7} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_velocity\_deriv@{get\_raw\_velocity\_deriv}}
+\index{get\_raw\_velocity\_deriv@{get\_raw\_velocity\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_velocity\_deriv()}{get\_raw\_velocity\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+velocity\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dveloc\+\_\+dx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01242}{1242}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab070bf8233fe89a359e3c93a4ab1708c}\label{classoomph_1_1VorticitySmootherElement_ab070bf8233fe89a359e3c93a4ab1708c} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_deriv@{get\_raw\_vorticity\_deriv}}
+\index{get\_raw\_vorticity\_deriv@{get\_raw\_vorticity\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_deriv()}{get\_raw\_vorticity\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dvorticity\+\_\+dx,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed vorticity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01369}{1369}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab2eca05bdab5e65e235f2935bd62815c}\label{classoomph_1_1VorticitySmootherElement_ab2eca05bdab5e65e235f2935bd62815c} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_deriv@{get\_raw\_vorticity\_deriv}}
+\index{get\_raw\_vorticity\_deriv@{get\_raw\_vorticity\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_deriv()}{get\_raw\_vorticity\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dvorticity\+\_\+dx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed vorticity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01337}{1337}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a3d40fe93a1215c08f8524c1ff2b6e193}\label{classoomph_1_1VorticitySmootherElement_a3d40fe93a1215c08f8524c1ff2b6e193} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_second\_deriv@{get\_raw\_vorticity\_second\_deriv}}
+\index{get\_raw\_vorticity\_second\_deriv@{get\_raw\_vorticity\_second\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_second\_deriv()}{get\_raw\_vorticity\_second\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dvorticity\+\_\+dxdy,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dxdy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01454}{1454}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aea5adb8174d61cce321050a83bb10124}\label{classoomph_1_1VorticitySmootherElement_aea5adb8174d61cce321050a83bb10124} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_second\_deriv@{get\_raw\_vorticity\_second\_deriv}}
+\index{get\_raw\_vorticity\_second\_deriv@{get\_raw\_vorticity\_second\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_second\_deriv()}{get\_raw\_vorticity\_second\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dvorticity\+\_\+dxdy }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed derivative vorticity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01416}{1416}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aea23c14dd7f145afe6a73eabf715e5df}\label{classoomph_1_1VorticitySmootherElement_aea23c14dd7f145afe6a73eabf715e5df} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_third\_deriv@{get\_raw\_vorticity\_third\_deriv}}
+\index{get\_raw\_vorticity\_third\_deriv@{get\_raw\_vorticity\_third\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_third\_deriv()}{get\_raw\_vorticity\_third\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dvorticity\+\_\+dxdxdy,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}3\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3,. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01556}{1556}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aae5d2fb00a4107e1ec729a4e804ef5b1}\label{classoomph_1_1VorticitySmootherElement_aae5d2fb00a4107e1ec729a4e804ef5b1} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!get\_raw\_vorticity\_third\_deriv@{get\_raw\_vorticity\_third\_deriv}}
+\index{get\_raw\_vorticity\_third\_deriv@{get\_raw\_vorticity\_third\_deriv}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_raw\_vorticity\_third\_deriv()}{get\_raw\_vorticity\_third\_deriv()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dvorticity\+\_\+dxdxdy }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get raw derivative of smoothed derivative vorticity \mbox{[}0\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3, \mbox{[}1\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy, \mbox{[}2\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2, \mbox{[}3\mbox{]}\+: d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01514}{1514}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a15559517f708dbdfe51e2e94f5bca3dc}\label{classoomph_1_1VorticitySmootherElement_a15559517f708dbdfe51e2e94f5bca3dc} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
+\index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of continuously interpolated values\+: 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00741}{741}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00987}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nscalar\+\_\+paraview()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a24820e11328d5c4a87eb6fc8399e2a54}\label{classoomph_1_1VorticitySmootherElement_a24820e11328d5c4a87eb6fc8399e2a54} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!npartial\_derivative@{npartial\_derivative}}
+\index{npartial\_derivative@{npartial\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{npartial\_derivative()}{npartial\_derivative()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::npartial\+\_\+derivative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call the function written in \doxylink{namespaceoomph_1_1VorticityRecoveryHelpers}{Vorticity\+Recovery\+Helpers}. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{702}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{namespaceoomph_1_1VorticityRecoveryHelpers_a7a5b81f8ddddc2ac5eb888fd970f060c}{oomph\+::\+Vorticity\+Recovery\+Helpers\+::\+Recovery\+\_\+helper}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00683}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00663}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a79746eb31ff493e2d43ce4465b57b22a}\label{classoomph_1_1VorticitySmootherElement_a79746eb31ff493e2d43ce4465b57b22a} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!nscalar\_paraview@{nscalar\_paraview}}
+\index{nscalar\_paraview@{nscalar\_paraview}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nscalar\_paraview()}{nscalar\_paraview()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::nscalar\+\_\+paraview (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of scalars/fields output by this element. Re-\/implements broken virtual function in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00987}{987}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00741}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_abfa785cee70e98c2e1890a1d2053abba}\label{classoomph_1_1VorticitySmootherElement_abfa785cee70e98c2e1890a1d2053abba} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!nvelocity\_derivatives\_to\_recover@{nvelocity\_derivatives\_to\_recover}}
+\index{nvelocity\_derivatives\_to\_recover@{nvelocity\_derivatives\_to\_recover}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvelocity\_derivatives\_to\_recover()}{nvelocity\_derivatives\_to\_recover()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The number of derivatives calculated in the velocity recovery. This does NOT include the zeroth derivatives as they are not "{}recovered"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00683}{683}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a7a433092a73a9fed26330e247a415414}\label{classoomph_1_1VorticitySmootherElement_a7a433092a73a9fed26330e247a415414} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!nvorticity\_derivatives\_to\_recover@{nvorticity\_derivatives\_to\_recover}}
+\index{nvorticity\_derivatives\_to\_recover@{nvorticity\_derivatives\_to\_recover}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nvorticity\_derivatives\_to\_recover()}{nvorticity\_derivatives\_to\_recover()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The number of terms calculated in the vorticity recovery. Also includes the zeroth derivative, i.\+e. the vorticity itself. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00663}{663}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a981931bfa4139cd4d64ed427b65c95d9}\label{classoomph_1_1VorticitySmootherElement_a981931bfa4139cd4d64ed427b65c95d9} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded output function\+: Output velocity, pressure and the smoothed vorticity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01159}{1159}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01740}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+and\+\_\+its\+\_\+derivs()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ac0a831db4c42647732e231bbbcbe756e}\label{classoomph_1_1VorticitySmootherElement_ac0a831db4c42647732e231bbbcbe756e} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!output\_analytical\_veloc\_and\_vorticity@{output\_analytical\_veloc\_and\_vorticity}}
+\index{output\_analytical\_veloc\_and\_vorticity@{output\_analytical\_veloc\_and\_vorticity}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output\_analytical\_veloc\_and\_vorticity()}{output\_analytical\_veloc\_and\_vorticity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::output\+\_\+analytical\+\_\+veloc\+\_\+and\+\_\+vorticity (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output exact velocity, vorticity, derivatives and indicator based on functions specified by two function pointers. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00825}{825}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aa2c5f7342ea784ae47a706524b63bafb}\label{classoomph_1_1VorticitySmootherElement_aa2c5f7342ea784ae47a706524b63bafb} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!output\_smoothed\_vorticity@{output\_smoothed\_vorticity}}
+\index{output\_smoothed\_vorticity@{output\_smoothed\_vorticity}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output\_smoothed\_vorticity()}{output\_smoothed\_vorticity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::output\+\_\+smoothed\+\_\+vorticity (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output the velocity, smoothed vorticity and derivatives. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00899}{899}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01740}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+and\+\_\+its\+\_\+derivs()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_acdb04c3f47fd5de9e56a7443e7469a1f}\label{classoomph_1_1VorticitySmootherElement_acdb04c3f47fd5de9e56a7443e7469a1f} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!pin\_smoothed\_vorticity@{pin\_smoothed\_vorticity}}
+\index{pin\_smoothed\_vorticity@{pin\_smoothed\_vorticity}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_smoothed\_vorticity()}{pin\_smoothed\_vorticity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::pin\+\_\+smoothed\+\_\+vorticity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin all smoothed vorticity quantities. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00801}{801}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a316eb18c98752216f3a20cfab7613ad0}\label{classoomph_1_1VorticitySmootherElement_a316eb18c98752216f3a20cfab7613ad0} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!recovered\_dof\_to\_container\_id@{recovered\_dof\_to\_container\_id}}
+\index{recovered\_dof\_to\_container\_id@{recovered\_dof\_to\_container\_id}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{recovered\_dof\_to\_container\_id()}{recovered\_dof\_to\_container\_id()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function that, given the local dof number of the i-\/th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1\+: this function goes hand-\/in-\/hand with \doxylink{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}{create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()} Note 2\+: The input to this function is the i associated with the STORED nodal dof value. For example, if we\textquotesingle{}re only recovering the velocity derivatives then i=0 is associated with du/dx. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{460}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_abec3461fcb00b7cbab8aee26f996c1ed}\label{classoomph_1_1VorticitySmootherElement_abec3461fcb00b7cbab8aee26f996c1ed} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of values required at local node n. In order to simplify matters, we allocate storage for pressure variables at all the nodes and then pin those that are not used. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00734}{734}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_af4f47bc30f0a157c2235c19243a88b0d}\label{classoomph_1_1VorticitySmootherElement_af4f47bc30f0a157c2235c19243a88b0d} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!scalar\_name\_paraview@{scalar\_name\_paraview}}
+\index{scalar\_name\_paraview@{scalar\_name\_paraview}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{scalar\_name\_paraview()}{scalar\_name\_paraview()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+std\+::string \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Name of the i-\/th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names in specific elements. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{1064}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00987}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nscalar\+\_\+paraview()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a616f49cad0eaf25a0218730bda2f9b7f}\label{classoomph_1_1VorticitySmootherElement_a616f49cad0eaf25a0218730bda2f9b7f} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!scalar\_value\_paraview@{scalar\_value\_paraview}}
+\index{scalar\_value\_paraview@{scalar\_value\_paraview}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{scalar\_value\_paraview()}{scalar\_value\_paraview()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file\+\_\+out,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nplot }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write values of the i-\/th scalar field at the plot points. Needs to be implemented for each new specific element type. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{995}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00741}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00987}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nscalar\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01740}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+and\+\_\+its\+\_\+derivs()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a5297ce9dd4c4d23fa99daafc2764d7db}\label{classoomph_1_1VorticitySmootherElement_a5297ce9dd4c4d23fa99daafc2764d7db} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!smoothed\_vorticity\_index@{smoothed\_vorticity\_index}}
+\index{smoothed\_vorticity\_index@{smoothed\_vorticity\_index}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{smoothed\_vorticity\_index()}{smoothed\_vorticity\_index()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::smoothed\+\_\+vorticity\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index of smoothed vorticity -- followed by derivatives. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00725}{725}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_aa0c9c94ce5dafa63f243511be306a237}\label{classoomph_1_1VorticitySmootherElement_aa0c9c94ce5dafa63f243511be306a237} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!stored\_dof\_to\_recoverable\_dof@{stored\_dof\_to\_recoverable\_dof}}
+\index{stored\_dof\_to\_recoverable\_dof@{stored\_dof\_to\_recoverable\_dof}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{stored\_dof\_to\_recoverable\_dof()}{stored\_dof\_to\_recoverable\_dof()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given the STORED dof number, this function returns the global recovered number. For example, if we only want to recover the velocity derivatives then the stored dof number of du/dy is 1 (as 0 is associated with du/dx). The global recovered number is 11 (as there are currently 10 vorticity derivatives that can be recovered and du/dy is the second velocity derivative we can recover). 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{555}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01798}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a4bd88c454b07db0ef8b44e7912651425}\label{classoomph_1_1VorticitySmootherElement_a4bd88c454b07db0ef8b44e7912651425} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!vorticity\_and\_its\_derivs@{vorticity\_and\_its\_derivs}}
+\index{vorticity\_and\_its\_derivs@{vorticity\_and\_its\_derivs}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{vorticity\_and\_its\_derivs()}{vorticity\_and\_its\_derivs()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::vorticity\+\_\+and\+\_\+its\+\_\+derivs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{vort\+\_\+and\+\_\+derivs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute smoothed vorticity and its derivatives. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01740}{1740}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01159}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00899}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+smoothed\+\_\+vorticity()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a63af4e395a5d135f0c549251337b3b8b}\label{classoomph_1_1VorticitySmootherElement_a63af4e395a5d135f0c549251337b3b8b} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!vorticity\_dof\_to\_container\_id@{vorticity\_dof\_to\_container\_id}}
+\index{vorticity\_dof\_to\_container\_id@{vorticity\_dof\_to\_container\_id}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{vorticity\_dof\_to\_container\_id()}{vorticity\_dof\_to\_container\_id()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function that, given the local dof number of the i-\/th vorticity or velocity derivative, returns the index in the container that stores the corresponding value. Note 1\+: this function goes hand-\/in-\/hand with \doxylink{classoomph_1_1VorticitySmootherElement_acb746642837d93a00c1e738a971f34d3}{create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()} Note 2\+: i=0\+: vorticity itself; i\texorpdfstring{$>$}{>}0\+: vorticity derivatives. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{315}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01803}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01798}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00702}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::npartial\+\_\+derivative()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a6987508c3afae70605d1bc73b27607d6}\label{classoomph_1_1VorticitySmootherElement_a6987508c3afae70605d1bc73b27607d6} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!vorticity\_error\_squared@{vorticity\_error\_squared}}
+\index{vorticity\_error\_squared@{vorticity\_error\_squared}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{vorticity\_error\_squared()}{vorticity\_error\_squared()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element\textquotesingle{}s contribution to the (squared) L2 norm of the difference between exact and smoothed vorticity. The input i corresponds to the i-\/th dof stored at each node (excluding the velocities and pressure). 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{1628}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+References \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+N\+\_\+dim}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00683}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00663}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a63f838b49c19f7c3686c50b455da2e36}\label{classoomph_1_1VorticitySmootherElement_a63f838b49c19f7c3686c50b455da2e36} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Exact\_vorticity\_fct\_pt@{Exact\_vorticity\_fct\_pt}}
+\index{Exact\_vorticity\_fct\_pt@{Exact\_vorticity\_fct\_pt}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Exact\_vorticity\_fct\_pt}{Exact\_vorticity\_fct\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1VorticitySmootherElement_ad4ed9d81ba7718bf747e0abdd41cdaa1}{Exact\+Vorticity\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Exact\+\_\+vorticity\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to function that specifies exact vorticity and derivs (for validation). 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01823}{1823}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00710}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::exact\+\_\+vorticity\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00718}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::exact\+\_\+vorticity\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00825}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+analytical\+\_\+veloc\+\_\+and\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a6ca5c212c0bd7db1a492bbf255f247cc}\label{classoomph_1_1VorticitySmootherElement_a6ca5c212c0bd7db1a492bbf255f247cc} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Maximum\_order\_of\_recoverable\_velocity\_derivatives@{Maximum\_order\_of\_recoverable\_velocity\_derivatives}}
+\index{Maximum\_order\_of\_recoverable\_velocity\_derivatives@{Maximum\_order\_of\_recoverable\_velocity\_derivatives}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_recoverable\_velocity\_derivatives}{Maximum\_order\_of\_recoverable\_velocity\_derivatives}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivatives\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The current maximum order of velocity derivatives that can be recovered. Currently, we can recover the first derivatives\+: du/dx,du/dy,dv/dx,dv/dy. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01803}{1803}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00635}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+velocity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a7753f3129fb23347ef757af45cc7b221}\label{classoomph_1_1VorticitySmootherElement_a7753f3129fb23347ef757af45cc7b221} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Maximum\_order\_of\_recoverable\_vorticity\_derivatives@{Maximum\_order\_of\_recoverable\_vorticity\_derivatives}}
+\index{Maximum\_order\_of\_recoverable\_vorticity\_derivatives@{Maximum\_order\_of\_recoverable\_vorticity\_derivatives}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_recoverable\_vorticity\_derivatives}{Maximum\_order\_of\_recoverable\_vorticity\_derivatives}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivatives\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The current maximum order of vorticity derivatives that can be recovered. Currently, we can recover up to the third derivative\+: omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01798}{1798}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00625}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+recoverable\+\_\+vorticity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a9fb49eba4ca7b0ffd94c4a728c5f9a17}\label{classoomph_1_1VorticitySmootherElement_a9fb49eba4ca7b0ffd94c4a728c5f9a17} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Maximum\_order\_of\_velocity\_derivative@{Maximum\_order\_of\_velocity\_derivative}}
+\index{Maximum\_order\_of\_velocity\_derivative@{Maximum\_order\_of\_velocity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_velocity\_derivative}{Maximum\_order\_of\_velocity\_derivative}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximum number of derivatives to retain in the velocity recovery. Note, the value 0 means we don\textquotesingle{}t calculate the derivatives of the velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01819}{1819}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00655}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+velocity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00683}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvelocity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab5cbc36edc0935a8a8bed8fe570bd403}\label{classoomph_1_1VorticitySmootherElement_ab5cbc36edc0935a8a8bed8fe570bd403} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Maximum\_order\_of\_vorticity\_derivative@{Maximum\_order\_of\_vorticity\_derivative}}
+\index{Maximum\_order\_of\_vorticity\_derivative@{Maximum\_order\_of\_vorticity\_derivative}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Maximum\_order\_of\_vorticity\_derivative}{Maximum\_order\_of\_vorticity\_derivative}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximum number of derivatives to retain in the vorticity recovery. Note, the value -\/1 means we ONLY output u,v\mbox{[},w\mbox{]},p. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01814}{1814}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00273}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::create\+\_\+container\+\_\+for\+\_\+vorticity\+\_\+and\+\_\+derivatives()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00645}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+maximum\+\_\+order\+\_\+of\+\_\+vorticity\+\_\+derivative()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00663}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::nvorticity\+\_\+derivatives\+\_\+to\+\_\+recover()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00460}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::recovered\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00315}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+dof\+\_\+to\+\_\+container\+\_\+id()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_afc0f746d35e11a455fe36df7be1069ec}\label{classoomph_1_1VorticitySmootherElement_afc0f746d35e11a455fe36df7be1069ec} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!N\_dim@{N\_dim}}
+\index{N\_dim@{N\_dim}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{N\_dim}{N\_dim}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+N\+\_\+dim\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of dimensions in the element. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01787}{1787}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00765}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01159}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00825}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+analytical\+\_\+veloc\+\_\+and\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00899}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::output\+\_\+smoothed\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00995}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+value\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00555}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::stored\+\_\+dof\+\_\+to\+\_\+recoverable\+\_\+dof()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_ab25f6ce614cbcca04d1dc8e72baf80e6}\label{classoomph_1_1VorticitySmootherElement_ab25f6ce614cbcca04d1dc8e72baf80e6} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Number\_of\_values\_per\_field@{Number\_of\_values\_per\_field}}
+\index{Number\_of\_values\_per\_field@{Number\_of\_values\_per\_field}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Number\_of\_values\_per\_field}{Number\_of\_values\_per\_field}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Number\+\_\+of\+\_\+values\+\_\+per\+\_\+field\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of values per field; how many of the following do we want\+: u,v,p,omega,d/dx,d/dy, d\texorpdfstring{$^\wedge$}{\string^}2/dx\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}2/dxdy,d\texorpdfstring{$^\wedge$}{\string^}2/dy\texorpdfstring{$^\wedge$}{\string^}2, d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}3,d\texorpdfstring{$^\wedge$}{\string^}3/dx\texorpdfstring{$^\wedge$}{\string^}2dy,d\texorpdfstring{$^\wedge$}{\string^}3/dxdy\texorpdfstring{$^\wedge$}{\string^}2,d\texorpdfstring{$^\wedge$}{\string^}3/dy\texorpdfstring{$^\wedge$}{\string^}3, du/dx,du/dy,dv/dx,dv/dy. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01810}{1810}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l00765}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00741}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::ncont\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00801}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::pin\+\_\+smoothed\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00734}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::required\+\_\+nvalue()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+\Hypertarget{classoomph_1_1VorticitySmootherElement_a15a33ab6804cbd945f67db0cf81ff6bc}\label{classoomph_1_1VorticitySmootherElement_a15a33ab6804cbd945f67db0cf81ff6bc} 
+\index{oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}!Smoothed\_vorticity\_index@{Smoothed\_vorticity\_index}}
+\index{Smoothed\_vorticity\_index@{Smoothed\_vorticity\_index}!oomph::VorticitySmootherElement$<$ ELEMENT $>$@{oomph::VorticitySmootherElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Smoothed\_vorticity\_index}{Smoothed\_vorticity\_index}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VorticitySmootherElement}{oomph\+::\+Vorticity\+Smoother\+Element}}$<$ ELEMENT $>$\+::\+Smoothed\+\_\+vorticity\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index of smoothed vorticity -- followed by derivatives; in 2D this has value 3. 
+
+
+
+Definition at line \mbox{\hyperlink{vorticity__smoother_8h_source_l01791}{1791}} of file \mbox{\hyperlink{vorticity__smoother_8h_source}{vorticity\+\_\+smoother.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vorticity__smoother_8h_source_l01369}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01337}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01454}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01416}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+second\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01556}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01514}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::get\+\_\+raw\+\_\+vorticity\+\_\+third\+\_\+deriv()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00801}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::pin\+\_\+smoothed\+\_\+vorticity()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l00725}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::smoothed\+\_\+vorticity\+\_\+index()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01740}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+and\+\_\+its\+\_\+derivs()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01628}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::vorticity\+\_\+error\+\_\+squared()}}, and \mbox{\hyperlink{vorticity__smoother_8h_source_l00227}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::\+Vorticity\+Smoother\+Element()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{vorticity__smoother_8h}{vorticity\+\_\+smoother.\+h}}\end{DoxyCompactItemize}

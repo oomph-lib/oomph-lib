@@ -1,0 +1,234 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+
+//Include guards
+#ifndef OOMPH_SIMPLE_BLOCK_PRECONDITIONERS
+#define OOMPH_SIMPLE_BLOCK_PRECONDITIONERS
+
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+// c++ include
+#include<list>
+
+// oomph-lib includes
+#include "generic.h"
+
+namespace oomph
+{
+  
+
+//===start_of_simple_block_diagonal_preconditioner_class=======================
+/// Simple proof-of-concept block diagonal preconditioner for
+/// demo purposes. There's a much better version in src/generic!
+//=============================================================================
+ template<typename MATRIX> 
+  class SimpleBlockDiagonalPreconditioner : public BlockPreconditioner<MATRIX>
+ {
+  
+   public :
+  
+  /// Constructor for SimpleBlockDiagonalPreconditioner
+   SimpleBlockDiagonalPreconditioner() : BlockPreconditioner<MATRIX>()
+   {
+   } // end_of_constructor
+
+ 
+  /// Destructor - delete the diagonal solvers
+  ~SimpleBlockDiagonalPreconditioner()
+   {
+    // Delete diagonal preconditioners (approximate solvers)
+    unsigned n_block = Diagonal_block_preconditioner_pt.size();
+    for (unsigned i = 0 ; i < n_block; i++)
+     {
+      delete Diagonal_block_preconditioner_pt[i];
+      Diagonal_block_preconditioner_pt[i] = 0;
+     }
+   }
+     
+  /// Broken copy constructor
+  SimpleBlockDiagonalPreconditioner(const SimpleBlockDiagonalPreconditioner&) 
+  { 
+   BrokenCopy::broken_copy("SimpleBlockDiagonalPreconditioner");
+  } 
+ 
+  /// Broken assignment operator
+  void operator=(const SimpleBlockDiagonalPreconditioner&) 
+  {
+   BrokenCopy::broken_assign("SimpleBlockDiagonalPreconditioner");
+  }
+  
+  /// Apply preconditioner to r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  virtual void setup();
+  
+  /// Add a mesh 
+  void add_mesh(const Mesh* const mesh_pt)
+  {
+#ifdef PARANOID
+    // Check that the mesh pointer is not null.
+    if(mesh_pt == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "The mesh_pt is null, please point it to a mesh.\n";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Push back the mesh.
+    My_mesh_pt.push_back(mesh_pt);
+  } 
+  
+ private :
+  
+  /// Vector of preconditioner pointers for storing the 
+  /// preconditioners for each diagonal block 
+  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
+
+  /// Vector of Mesh pointers. We store it here since this
+  /// preconditioner is responsible for the DOF ordering, which is
+  /// determined by calls to BlockPreconditioner::set_mesh(...).
+  Vector<const Mesh*> My_mesh_pt;
+
+ };
+
+
+ //==start_of_setup_for_SimpleBlockDiagonalPreconditioner======================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleBlockDiagonalPreconditioner<MATRIX>::setup()
+ {
+
+  // Only set the mesh if this is a master block preconditioner.
+  // Otherwise, the DOF ordering information is given by the
+  // master block preconditioner.
+  if(this->is_master_block_preconditioner())
+  {
+    const unsigned my_nmesh = My_mesh_pt.size();
+
+#ifdef PARANOID
+    if(my_nmesh == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "There are no meshes set.\n"
+              << "Please set at least one mesh with push_back_mesh(...)";
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    // Set the nmesh in the BlockPreconditioner base class
+    this->set_nmesh(my_nmesh);
+
+    // Loop through all the meshes and set them.
+    for (unsigned mesh_i = 0; mesh_i < my_nmesh; mesh_i++) 
+    {
+      this->set_mesh(mesh_i,My_mesh_pt[mesh_i]);
+    }
+  }
+
+  // Set up the block look up scheme
+  this->block_setup();
+
+  // Number of blocks 
+  unsigned nblock_types = this->nblock_types();
+
+  // Resize the storage for the diagonal blocks
+  Diagonal_block_preconditioner_pt.resize(nblock_types);
+
+  // Create the subsidiary preconditioners
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    Diagonal_block_preconditioner_pt[i] =
+     ExactPreconditionerFactory::create_exact_preconditioner();
+   }
+
+  // Get the diagonal matrix blocks
+  Vector<CRDoubleMatrix*> block_diagonal_matrices(nblock_types);
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    // Get block
+    CRDoubleMatrix block;
+    this->get_block(i,i,block);
+    
+    // Set up preconditioner (i.e. lu-decompose the block)
+    Diagonal_block_preconditioner_pt[i]->setup(&block); 
+    
+    // Done with this block now, so can go out of scope; LU decomposition
+    // is retained in superlu
+   }
+ }
+ 
+ 
+ //=============================================================================
+ /// Preconditioner solve for the block diagonal preconditioner
+ //=============================================================================
+ template<typename MATRIX> 
+  void SimpleBlockDiagonalPreconditioner<MATRIX>::
+  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+  {
+   
+   // Get number of blocks
+   unsigned n_block = this->nblock_types();
+   
+   // Split up rhs vector into sub-vectors, re-arranged to match
+   // the matrix blocks
+   Vector<DoubleVector> block_r;
+   this->get_block_vectors(r,block_r);
+
+  // Solution of block solves
+  Vector<DoubleVector> block_z(n_block);
+  for (unsigned i = 0; i < n_block; i++)
+   {
+    Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
+                                                              block_z[i]);
+   }
+  
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vectors(block_z,z);
+  }
+ 
+
+
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+}
+#endif
+

@@ -1,0 +1,873 @@
+\mainpage Azimuthally Fourier-decomposed time-harmonic 3D acoustic fluid-structure interaction problems
+
+
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+<B>Acknowledgement:</B>
+This tutorial and the associated driver codes were developed jointly
+with David Nigro and Robert Harter (Thales Underwater Systems
+Ltd) with financial support from a KTA Secondment grant from
+University of Manchester's EPSRC-funded Knowledge Transfer Account.
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+In this document we discuss the solution of 
+time-harmonic acoustic fluid-structure interaction problems 
+in cylindrical polar coordinates, using a Fourier decomposition of the
+solution in the azimuthal direction. These equations are useful to 
+solve problems involving axisymmetric elastic bodies.
+
+ We start by reviewing the relevant theory and then 
+present the solution of a simple model problem -- the sound radiation
+from an oscillating sphere that is coated with a compressible
+elastic layer.
+ 
+This problem combines the problems discussed in the tutorials 
+illustrating
+- <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">
+the solution of the time-harmonic equations of 
+linear elasticity in cylindrical polar coordinates</a>
+.
+and
+- <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz
+equation in cylindrical polar coordinates</a>
+.
+
+[Note that this tutorial is (obviously) very similar to its
+<a href="../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">
+cartesian counterpart</a>. The considerable overlap of material is deliberate
+to make both tutorials reasonably self-contained and explicit.]
+
+
+<HR>
+<HR>  
+ 
+\section theory Theory: Time-harmonic acoustic fluid-structure interaction problems in cylindrical polar coordinates
+
+The figure below shows a sketch of a representative model problem:
+a sphere is immersed in an inviscid compressible fluid and
+performs a prescribed harmonic oscillation of radian
+frequency \f$\omega\f$. The sphere is coated with a compressible elastic 
+layer. We wish to compute the displacement field in the elastic coating
+(assumed to be described by the <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">equations of
+time-harmonic linear elasticity</a>) and the pressure distribution
+in the fluid (governed by 
+<a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz
+equation</a>). The two sets of equations interact at the interface
+between fluid and solid: the fluid pressure exerts a traction
+onto the elastic layer, while the motion of the elastic layer
+drives the fluid motion via the non-penetration condition.
+
+@I w 0.6\textwidth coated_sphere "Sketch of the model problem: Forced oscillations of a sphere (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. "
+
+\subsection fluid The fluid model: the Helmholtz equation
+We describe the behaviour of the fluid in terms of the displacement
+field, \f$ {\bf d}^*(r^*,z^*,\varphi,t^*)\f$, of the fluid particles,
+where \f$r^*, z^* \f$ and \f$ \varphi \f$ are cylindrical polar coordinates. 
+As usual, we use asterisks to distinguish dimensional quantities from 
+their non-dimensional equivalents. The fluid is inviscid
+and compressible, with a bulk modulus \f$ B \f$, such 
+that the acoustic pressure is given by 
+\f$ P^* = - B \ \nabla^{*} \cdot {\bf d}^* \f$ 
+We assume that the fluid motion is irrotational and can be described by a
+displacement potential \f$\Phi^*\f$, such that \f$ {\bf d}^*= \nabla^*
+\Phi^*. \f$  We consider steady-state time-harmonic 
+oscillations and write the displacement potential and the pressure 
+as \f$\Phi^*(r^*,z^*,\varphi,t^*) =
+\mbox{Re} \{\phi^*(r^*,z^*,\varphi) \exp(-{\rm i} \omega t^*)\} \f$ and
+\f$P^*(r^*,z^*,\varphi,t^*) = \mbox{Re}\{p^*(r^*,z^*,\varphi) 
+\exp(-{\rm i} \omega t^*)\}\f$, respectively,
+where \f$\mbox{Re}\{\ldots \}\f$ denotes the real part.
+For small disturbances, the linearised Euler equation reveals that the 
+time-harmonic pressure is related to the displacement potential
+via \f$ p^* = \rho_{\rm f} \omega^2 \phi^*\f$ where
+\f$ \rho_{\rm f}\f$ is the ambient fluid density. 
+We non-dimensionalise all lengths
+on a problem-specific lengthscale \f$ {\cal L}\f$ (e.g. the 
+outer radius of the coating layer) such that
+\f$ [r^*, z^*] = {\cal L} [r,z], \ {\bf d}^* = {\cal L} {\bf d} \f$ 
+and \f$\phi^* = {\cal L}^2 \phi\f$. 
+
+We then decompose \f$ \phi \f$ into its Fourier components by writing
+\f[
+{\phi}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} \phi_N(r,z) \exp({\rm i}
+N \varphi).
+\f]
+Since the governing equations are linear we can compute each Fourier
+component \f$ \phi_N(r,z) \f$ individually by solving
+\f[
+\nabla^2 {\phi_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) \phi_N(r,z) = 0,
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[fluid_pde]@
+\f]
+where the square of the non-dimensional wavenumber,
+\f[
+k^2 = \frac{\rho_{\rm f} (\omega {\cal L})^2}{B},
+\f]
+represents the ratio of the typical
+inertial fluid pressure induced by the wall oscillation to the
+`stiffness' of the fluid. 
+
+\subsection elastic The solid model: the time harmonic equations of linear elasticity
+
+We model the coating layer as a linearly elastic solid, described
+in terms of a displacement field 
+\f$ {\bf U}^*(r^*,z^*,\varphi,t^*)\f$, with stress tensor
+\f[
+\mbox{\boldmath$ \tau^*$}=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla^*\cdot U^*$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla^* U^*$}+
+\mbox{\boldmath$ \nabla^* U^*$}^{{\rm T}})\right),
+\f]
+where \f$E\f$ and \f$\nu\f$ are the material's Young's modulus and Poisson's
+ratio, respectively. 
+
+ As before, we assume a time-harmonic solution 
+with frequency \f$ \omega\f$ so that
+\f$ {\bf U}^*(r^*,z^*,\varphi,t^*) = {\rm Re} \{ 
+{\bf u}^*(r^*,z^*,\varphi) \exp(-{\rm i}\omega t^*)\}\f$.
+We non-dimensionalise the displacements on \f${\cal L}\f$ and the
+stress on Young's modulus, \f$E\f$, so that \f${\bf u}^* = {\cal L}
+{\bf u} \f$ and \f$ \mbox{\boldmath$ \tau^*$} = E \mbox{\boldmath$
+\tau$}\f$.  The deformation of the elastic coating is then
+governed by the time-harmonic Navier-Lame equations
+<CENTER>
+\f[
+\mbox{\boldmath$ \nabla\cdot\tau$}+\Omega^2\mbox{\boldmath$ u$} = {\bf
+0}
+\ \ \ \ \ \ \ \ \ \ @E[solid_pde]@
+\f]
+</CENTER>
+where 
+<CENTER>
+\f[
+\mbox{\boldmath$ \tau $}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla
+u$}^{{\rm T}})\right)
+\ \ \ \ \ \ \ \ \ \ @E[nondimconstitutive]@
+\f]
+</CENTER>
+is the non-dimensional stress tensor.
+The (square of the) non-dimensional wavenumber 
+\f[
+\Omega^2 = \frac{\rho_{\rm s} (\omega {\cal L})^2}{E},
+\f]
+where \f$ \rho_{\rm s}\f$ is the solid density,
+represents the ratio of the typical inertial solid pressure 
+induced by the wall oscillation to the
+stiffness of the elastic coating. We note that for a `light'
+coating we have  \f$\Omega \ll 1\f$.
+
+We then decompose \f$ {\bf u} \f$ into its Fourier components by writing
+\f[
+{\bf u}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} {\bf u}_N(r,z) \exp({\rm i}
+N \varphi).
+\f]
+This decomposition allows us to
+remove the \f$ \theta \f$-dependence from the equations by writing 
+\f$ \partial (.)/\partial\theta={\rm i} N (.) \f$.
+Since the governing equations are linear, we can solve for each
+Fourier component separately and specify the Fourier wavenumber
+\f$ N \f$ as a parameter.
+ 
+\subsection bc Boundary conditions
+The inner surface of the elastic coating, \f$ \partial D_{\rm s} \f$, 
+is subject to the prescribed
+displacement imposed by the oscillating cylinder. For instance, if the inner
+cylinder performs spherically symmetric oscillations of non-dimensional
+amplitude \f$ \epsilon\f$, we have
+\f[
+\mbox{\bf u}_0 = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} 
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[displ_bc]@
+\f]
+where 
+\f[ 
+\mbox{\bf e}_{r_{\rm sphere}}  = \frac{r}{\sqrt{r^2+z^2}} {\bf e}_r +
+\frac{z}{\sqrt{r^2+z^2}} {\bf e}_z
+\f]
+is the unit vector in the (spherically!) radial
+direction, while the other Fourier components remain zero,
+\f$ \mbox{\bf u}_j = {\bf 0} \f$ for \f$ j=\pm 1, \pm 2, ...\f$
+The fluid-loaded surface of the elastic coating, \f$ \partial D_{\rm
+f} \f$,
+is subject to the
+fluid pressure. The non-dimensional traction exerted by the
+fluid onto the solid (on the solid stress scale) is therefore given by
+\f[
+{\bf t}^{\rm [solid]} = \mbox{\boldmath$ \tau $}^{\rm [solid]} \cdot {\bf n} =
+ - \phi \  Q \ {\bf n}
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[fsi_for_solid]@
+\f]
+where the \f$ {\bf n} = n_r {\bf e}_r + n_z {\bf e}_z \f$ 
+is the outer unit normal on the solid
+boundary \f$\partial D_{\rm f}\f$ and
+\f[
+Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E}
+\f]
+is the final non-dimensional parameter in the problem. It represents the
+ratio of the typical inertial fluid pressure induced by the wall
+oscillation to the stiffness of the elastic coating. The parameter \f$Q\f$
+therefore provides a measure of the strength of the fluid-structure 
+interaction (FSI) in the sense that for \f$Q \to 0\f$ 
+the elastic coating does not `feel' the presence of the fluid.
+
+The fluid is forced by the normal displacement of the solid. Imposing
+the non-penetration condition \f$({\bf d} - {\bf u}) \cdot {\bf n} =
+0\f$ on \f$\partial
+D_{\rm f}\f$ yields a Neumann condition for the displacement
+potential,
+\f[
+\frac{\partial \phi}{\partial n} = {\bf u} \cdot  {\bf n}
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$}.
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[fsi_for_fluid]@
+\f]
+Finally, the displacement potential for the fluid must satisfy the
+Sommerfeld radiation condition
+\f[
+\lim_{r_{\rm sphere} \to \infty} r_{\rm sphere}
+\left( \frac{\partial \phi}{\partial r_{\rm sphere} } -    
+{\rm i} k \phi \right) = 0,
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[sommerfeld]@
+\f]
+where \f$ r_{\rm sphere} = \sqrt{(r^2+z^2)} \f$ is the (spherical) radius.
+The Sommerfeld radiation condition ensures that the 
+oscillating sphere does not generate any incoming waves. 
+
+Equations (@R[fsi_for_solid]@), (@R[fsi_for_fluid]@) and 
+(@R[sommerfeld]@) apply for each Fourier component
+of the solution.
+
+<HR>
+<HR>
+
+\section impl Implementation
+The implementation of the coupled problem follows the usual procedure 
+for multi-domain problems in \c oomph-lib. We discretise the
+constituent single-physics problems using the existing single-physics
+elements, here \c oomph-lib's
+- <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">Helmholtz
+elements</a>
+.
+and 
+- <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">
+  time-harmonic linear elasticity elements</a>
+.
+for the discretisation of the PDEs (@R[fluid_pde]@) and 
+(@R[solid_pde]@), respectively.
+The displacement boundary condition (@R[displ_bc]@) on the inner surface
+of the elastic coating is imposed as usual by pinning
+the relevant degrees of freedom, exactly as in a <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">single-physics
+solid mechanics problem</a>. Similarly, the 
+Sommerfeld radiation condition (@R[sommerfeld]@) on the outer boundary
+of the fluid domain can be imposed by any of the methods
+available for the solution of the single-physics
+Helmholtz equation, such as a <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">
+Dirichlet-to-Neumann mapping.</a>
+
+The boundary conditions (@R[fsi_for_solid]@) and 
+(@R[fsi_for_fluid]@) at the fluid-solid interface are 
+traction boundary conditions for the solid, and Neumann boundary
+conditions for the Helmholtz equation, respectively. In a single-physics problem
+we would impose such boundary conditions by attaching suitable \c FaceElements
+to the appropriate boundaries of the "bulk" elements, as shown in the
+sketch below: \c
+TimeHarmonicFourierDecomposedLinearElasticityTractionElement 
+could be used to
+impose a (given) traction, \f$ {\bf t}_0\f$, onto the solid;
+\c FourierDecomposedHelmholtzFluxElements could be used to 
+impose a (given) normal derivative,
+\f$ f_0\f$, on the displacement potential. Both \f$ {\bf t}_0\f$
+and \f$ f_0 \f$ would usually be specified in a user-defined namespace
+and accessed via function pointers as indicated in the right half of
+the sketch.
+
+@I w 0.6\textwidth single_physics "Sketch illustrating the imposition of flux and traction boundary conditions in single-physics problems. The continuous problems are shown on the left; the discretised ones on the right. "
+
+
+In the coupled problem, illustrated in the left half of the 
+next sketch, the traction acting on the solid becomes a function 
+of the displacement potential via the boundary condition 
+(@R[fsi_for_solid]@), while the normal derivative of the
+displacement potential is given in terms of the solid displacement via 
+equation (@R[fsi_for_fluid]@). Note that corresponding points on the
+FSI boundary \f$ \partial D_{\rm f}\f$ are 
+identified by matching values of the boundary
+coordinate \f$ \zeta \f$ which is assumed to be consistent between
+the two domains. 
+  
+The implementation of this interaction in the discretised problem 
+is illustrated in the right half of the sketch: We replace the single-physics 
+\c FourierDecomposedHelmholtzFluxElements by 
+\c FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElements,
+and the \c TimeHarmonicFourierDecomposedLinearElasticityTractionElements by
+\c FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElements.
+(Yes, we like to be verbose...).
+Both of these \c FaceElements are derived from the \c ElementWithExternalElement
+base class and can therefore store a pointer to an "external"
+element that provides the information required to impose the
+appropriate boundary condition. Thus, the \c
+ FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElements 
+store pointers to 
+the "adjacent" time-harmonic linear elasticity elements (from which
+they obtain the boundary displacement required for the imposition of
+(@R[fsi_for_fluid]@)),
+while the \c
+FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElements
+store pointers to the "adjacent" Helmholtz elements that provide the
+value of the displacement potential required for the evaluation of
+(@R[fsi_for_solid]@).
+
+
+@I w 0.6\textwidth multi_physics "Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-physics problem.  The continuous problems are shown on the left; the discretised ones on the right. "
+
+The identification of the "adjacent" bulk elements can be performed using the 
+\c Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+helper function. We note that, as suggested by the sketch above,
+this  function does not require to the two adjacent meshes
+to have a consistent discretisation -- the identification of
+adjacent elements is based entirely on the (assumed to be
+consistent) boundary coordinate \f$ \zeta \f$ in the two meshes.
+We refer to 
+<A HREF="../../../poisson/fish_poisson2/html/index.html#boundary_coords"> 
+another tutorial</a> for a discussion of how to set up (or change)
+the parametrisation of mesh boundaries by boundary coordinates.
+
+<HR>
+<HR> 
+ 
+\section results Results
+
+The animation below shows the deformation of the elastic
+coating if a non-spherically symmetric displacement 
+\f[
+\mbox{\bf u} = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} \cos (M\theta)
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[displ_bc2]@
+\f]
+(for \f$ M=4 \f$) where \f$ \theta \f$ is the zenith angle,
+is imposed on the inner boundary of the 
+coating \f$\partial D_{\rm s}\f$.
+
+@I w 0.6\textwidth anim "Animation showing the time-harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) "
+
+Here is a plot of the corresponding pressure field:
+
+@I w 0.6\textwidth potential "Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. "
+
+
+Finally, we provide some validation of the computational results by
+comparing the non-dimensional time-average radiated power
+\f[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+\f]
+(see \ref appendix for details)
+against the analytical solution for spherically symmetric forcing (\f$
+N=0, M=0 \f$) for the parameter values \f$ k^2 = 10 \f$,  
+\f$ \rho_{\rm solid}/\rho_{\rm fluid} =1.0 \f$, \f$ \nu =0.3 \f$ and 
+a non-dimensional coating thickness of \f$ h = 0.2. \f$ 
+
+
+@I w 0.6\textwidth trace "Radiated power as function of the FSI parameter Q for a spherically-symmetrically oscillating coating. Markers: computed results; continuous line: analytical result.  "
+
+
+
+@I w 0.6\textwidth comp_phi_re "Real part of the fluid displacement potential (a measure of the fluid pressure) for Q=10. Shaded: computed; spheres: exact. "
+
+@I w 0.6\textwidth comp_phi_im "Imaginary part of the fluid displacement potential (a measure of the fluid pressure) for Q=10. Shaded: computed; spheres: exact. "
+
+@I w 0.6\textwidth comp_ur_re "Real part of the radial solid displacement for Q=10. Shaded: computed; spheres: exact. "
+
+@I w 0.6\textwidth comp_ur_im "Imaginary part of the radial solid displacement for Q=10. Shaded: computed; spheres: exact. "
+
+@I w 0.6\textwidth comp_uz_re "Real part of the axial solid displacement for Q=10. Shaded: computed; spheres: exact. "
+
+@I w 0.6\textwidth comp_uz_im "Imaginary part of the axial solid displacement for Q=10. Shaded: computed; spheres: exact. "
+
+
+<HR>
+<HR>
+
+\section num_soln The numerical solution
+
+\subsection namespace The global namespace
+
+As usual we define the problem parameters in a namespace.
+(<a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#comments">Recall</a>
+that we allow the constitutive parameters to be complex-valued.)
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_namespace
+\until Nu(std::complex
+
+We wish to perform parameter studies in which we vary the FSI parameter
+\f$ Q \f$. To make this physically meaningful, we interpret 
+\f$ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E \f$ 
+as a measure of the stiffness of the elastic coating
+(so that an increase in \f$ Q \f$ corresponds to a reduction in the
+layer's elastic modulus \f$ E \f$). In that case, the frequency
+parameter \f$ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E \f$ 
+in the time-harmonic linear elasticity
+equations becomes a dependent parameter and is given
+in terms of the density ratio \f$ \rho_{\rm solid}/\rho_{\rm fluid}
+\f$ and \f$ Q \f$ by \f$ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q\f$.
+We therefore provide a helper function to update the dependent parameter
+following any change in the independent parameters.
+
+\until }
+
+We force the system by imposing a prescribed displacement
+on the inner surface of the elastic coating and allow this to vary
+in the "zenith"-direction with wavenumber \f$ M \f$:
+
+\until } 
+
+Finally, we specify the output directory and a multiplier
+for the number of elements in the meshes to aid mesh convergence
+studies.
+
+\until end_of_namespace
+
+<HR>
+<HR>
+
+\subsection main The driver code
+The driver code is very straightforward. We parse the command line
+to determine the parameters for the parameter study and build
+the problem object, using nine-noded quadrilateral elements for
+the solution of the time-harmonic elasticity and Helmholtz
+equations. 
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_main
+\until > problem
+
+We then solve the problem for various values of \f$ Q \f$, updating
+the dependent variables after every increment.
+
+\until } //end_of_main
+
+ 
+<HR>
+<HR> 
+
+\subsection class The problem class
+
+The \c Problem class is templated by the types of the
+"bulk" elements used to discretise the Fourier-decomposed 
+time-harmonic linear elasticity and Helmholtz equations,
+respectively. It contains the  usual member functions to attach 
+\c FaceElements to the bulk meshes in order to apply the
+various Neumann boundary conditions. We note that the costly 
+recomputation of the \f$ \gamma- \f$ integral in the
+Dirichlet-to-Neumann mapping before the Newton convergence check 
+(implemented in \c actions_before_newton_convergence_check())
+can be avoided by declaring the problem to be linear;
+see the discussion in the 
+<a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">
+Helmholtz tutorial</a> and \ref comm.
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_problem_class
+\until create_helmholtz_DtN_elements()
+
+The private member data includes storage for the various meshes
+and objects that are used for outputting the results.
+ 
+\until }; 
+
+
+<HR>
+<HR>
+
+\subsection constr The problem constructor
+We start by building the meshes for the elasticity and Helmholtz
+equations. Both domains are half annular regions, so the
+annular mesh (which is built from a rectangular \c QuadMesh)
+is not periodic but only occupies 180 degrees. The mesh also needs to 
+be rotated by 90 degrees to align its ends with the \f$ z- \f$ axis:
+
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_constructor
+\until phi=
+
+The solid mesh occupies the region between \f$ r = 1-h \f$ and \f$ r=1
+\f$ where \f$ h \f$ is the thickness of the elastic coating:
+
+\until H_coating,phi);
+
+
+The Helmholtz mesh occupies the region between \f$ r = 1 \f$ and \f$
+r=R_{\rm outer} \f$ where \f$ R_{\rm outer}\f$ is the outer radius of 
+the computational domain where we will apply the Sommerfeld radiation 
+condition. Note that the two meshes are not matching -- both meshes
+have 3 element layers in the radial direction but 10 and 11
+in the azimuthal direction, respectively. This is done mainly 
+to illustrate our claim that the multi-domain setup functions
+can operate with non-matching meshes.
+
+\until h_thick_helmholtz,phi);
+
+Next we create the mesh that will store the \c FaceElements that
+will apply the Sommerfeld radiation condition, using the specified
+number of Fourier terms in the Dirichlet-to-Neumann mapping;
+see the <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">Helmholtz
+tutorial</a> for details.
+ 
+\until nfourier);
+
+Next we pass the problem parameters to the bulk elements. The
+elasticity elements require a pointer to Poisson's ratio, \f$ \nu \f$, the
+azimuthal (Fourier) wavenumber \f$ N \f$, and the frequency parameter 
+\f$ \Omega^2 \f$:
+
+\until }
+
+The Helmholtz elements need a pointer to the (square of the)
+wavenumber, \f$ k^2 \f$ and the azimuthal (Fourier) wavenumber \f$ N \f$:
+
+\until }
+
+It is always a good idea to check the enumeration of the mesh
+boundaries to facilitate the application of boundary conditions:
+
+\until helmholtz_mesh_boundary.dat
+
+Next we create the meshes containing the various \c FaceElements
+used to apply to the FSI traction boundary condition
+(@R[fsi_for_solid]@), the FSI flux boundary condition (@R[fsi_for_fluid]@)
+for the Helmholtz equation, and the Sommerfeld radiation condition 
+(@R[sommerfeld]@), respectively, using helper functions discussed
+below.
+
+\until create_helmholtz_DtN_elements
+
+
+We add the various sub-meshes to the problem and build the global mesh
+
+\until build_global_mesh();
+
+The solid displacements are prescribed on the inner boundary
+(boundary 0) of the solid mesh so we pin all six values 
+(representing the real and imaginary parts of the displacements
+in the \f$ r-, z- \f$ and \f$ \varphi- \f$  directions, respectively)
+and assign the boundary values using the function \c
+Global_Parameters::solid_boundary_displacement(...).
+(The enumeration of the unknowns in the Fourier-decomposed 
+equations time-harmonic linear elasticity is discussed in 
+<a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#element_types">another tutorial</a>.)
+
+\until }
+ 
+The radial and azimuthal displacements have to vanish on the
+symmetry boundary (boundaries 1 and 3):
+
+\until done sym bc
+
+Finally, we set up the fluid-structure interaction, assign the
+equation numbers and open a trace
+file to record the radiated power as a function of the FSI
+parameter \f$ Q \f$.
+
+\until end_of_constructor
+
+
+<HR>
+<HR>
+
+
+\subsection create_flux Creating the FSI traction elements (and the FSI flux and DtN elements) 
+The function \c create_fsi_traction_elements() creates the \c FaceElements
+required to apply the FSI traction boundary condition
+(@R[fsi_for_solid]@) on the outer boundary (boundary 2) of the solid
+mesh:
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_create_fsi_traction_elements
+\until add_element_pt
+
+To function properly, the elements need to know the number of the
+bulk mesh boundary they are attached to (this allows them to
+determine the boundary coordinate \f$ \zeta \f$ required to
+set up the fluid-structure interaction; see \ref impl ), and
+the FSI parameter \f$ Q \f$.
+
+\until end_of_create_fsi_traction_elements
+
+
+[\b Note: We omit the listings of the functions
+\c create_helmholtz_fsi_flux_elements() and 
+\c create_helmholtz_DtN_elements()
+which create the \c FaceElements
+required to apply the FSI flux boundary condition
+(@R[fsi_for_fluid]@) on the inner boundary (boundary 0),
+and the Sommerfeld radiation condition (@R[sommerfeld]@) 
+on the outer boundary (boundary 2) of the Helmholtz mesh because 
+they are very similar.  Feel free to inspect the  
+<A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">
+source code.</A>]
+
+
+<HR>
+<HR>
+
+\subsection fsi Setting up the fluid-structure interaction
+The setup of the fluid-structure interaction requires 
+the identification of the "bulk" Helmholtz elements that are 
+adjacent to (the Gauss points of) the \c FaceElements 
+that impose the FSI traction boundary condition (@R[fsi_for_solid]@),
+in terms of the displacement potential \f$ \phi \f$ computed by these
+"bulk" elements. This can be done using the helper function
+\c Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+which is templated by the type of the "bulk" element and its spatial
+dimension, and takes as arguments:
+- a pointer to the \c Problem, 
+- the boundary ID of the FSI boundary in the "bulk" mesh, 
+- a pointer to that mesh,
+- a pointer to the mesh of \c FaceElements.
+.
+Nearly a one-liner (if you ignore the optional output of the
+boundary coordinate which allows us to check that the FSI boundaries
+of the fluid and solid domains have been parametrised consistently).
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_setup_interaction
+\until FSI_traction_mesh_pt);
+
+Exactly the same method can be used for the identification 
+of the "bulk" elasticity elements that are 
+adjacent to (the Gauss points of) the \c FaceElements 
+that impose the FSI flux boundary condition (@R[fsi_for_fluid]@),
+using the displacement \f$ {\bf u} \f$ computed by these
+"bulk" elements:
+
+\until }
+
+<HR>
+<HR>
+
+\subsection doc Post-processing
+The post-processing function \c doc_solution(...) computes and outputs 
+the total radiated power, and plots the computed solutions
+(real and imaginary parts) for all fields.
+
+\dontinclude fourier_decomposed_acoustic_fsi.cc
+\skipline start_of_doc_solution
+\until //end_of_doc_solution
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+\subsection comm Comments
+
+- The application of the Sommerfeld radiation condition via 
+  a Dirichlet-to-Neumann mapping is discussed in detail 
+  in <a  href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">another
+  tutorial.</a> We explain there that, because the \f$ \gamma \f$
+  integral depends on the solution, 
+  it must be recomputed whenever the unknowns are updated during
+  the Newton iteration. This is best done by adding a call to
+  \c FourierDecomposedHelmholtzDtNMesh::setup_gamma() to 
+  \c Problem::actions_before_newton_convergence_check() as done in the
+  driver code listed above.
+  However, if Helmholtz's equation is solved in isolation (or within
+  a coupled, but linear problem as in the present case ), the
+  Newton method is guaranteed to converge 
+  in one iteration. In such cases the unnecessary recomputation of 
+  \f$ \gamma \f$ after the one-and-only Newton iteration can be 
+  suppressed by setting \c Problem::Problem_is_nonlinear to 
+  \c false -- in that case, \c oomph-lib's Newton solver
+  skips the convergence check in the Newton iteration and simply
+  accepts the solution obtained after one linear solve.
+- You may have noticed that, unlike the tutorial for the
+  <a href="../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">
+  cartesian counterpart</a> of the model problem considered here, we
+  neither demonstrate how to apply the Sommerfeld radiation condition
+  by approximate/absorbing boundary conditions (ABCs), nor do we 
+  demonstrate the use of spatial adaptivity.
+  This is because the relevant elements have not (yet!) been written
+  (Any volunteers?). If you wish to enable spatial adaptivity we
+  suggest using an unstructured adaptive mesh, using the methodology 
+  demonstrated in 
+  <a  href="../../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html#DtN">another tutorial.</a>
+.
+
+ 
+<HR>
+
+\subsection ex Exercises
+- As shown in the \ref appendix, the time-averaged radiated power 
+  \f$ \overline{\cal P}\f$ depends 
+  on the derivatives of the displacement potential \f$ \phi \f$. This
+  implies that the value for \f$ \overline{\cal P}\f$ computed from the
+  finite-element solution for \f$ \phi \f$ is not
+  as accurate as the displacement potential itself. Computing
+  \f$ \overline{\cal P}\f$ to a certain tolerance (e.g. to 
+  "graphical accuracy" as in the plot shown above) therefore tends to
+  require meshes that are much finer than would be required
+  if we were only interested in \f$ \phi \f$ itself.
+  \n\n
+  Investigate the accuracy of the computational predictions for \f$
+  \overline{\cal P}\f$ by:
+  - increasing the spatial resolution e.g. by using
+    the command line flag \c --el_multiplier which controls the number
+    of elements in the mesh.
+  - reducing the outer radius of the computational domain, using
+    the command line flag \c --outer_radius, say.
+  - varying the element type, from the bi-linear 
+    \c QFourierDecomposedHelmholtzElement<2>
+    to the bi-cubic \c QFourierDecomposedHelmholtzElement<4>, say.
+  .
+ Which of these approaches gives you the "most accuracy" for a given number of
+ degrees of freedom?
+.
+
+<HR>
+<HR>
+
+
+
+\section appendix Appendix: The time-averaged radiated power
+This appendix provides a brief summary of the computation (and
+non-dimensionalisation) of the time-averaged power 
+\f$ \overline{\cal P }^* \f$ radiated across the closed surface
+\f$ \partial V \f$ (with outer unit normal  \f$ {\bf n} \f$) 
+of a fluid volume \f$ V \f$.
+In dimensional terms, \f$ \overline{\cal P }^* \f$ is given by
+\f[
+\overline{\cal P }^* = \oint_{\partial V} I^* dA^*, 
+\ \ \ \ \ \ \ \ \ \ \ @E[power]@
+\f]
+where the intensity 
+\f[
+I^* =  \frac{1}{{\cal T}} \int_0^{\cal T} 
+{\bf U}^* \cdot P^* {\bf n}  \
+dt^* 
+\f] 
+depends on the fluid velocity \f$ {\bf U}^* =
+\partial {\bf d}^*/\partial t^* = \partial/\partial t^* (\nabla^*
+\Phi^*) \f$ and the pressure \f$ P^* = \rho_{\rm f} \omega^2 \Phi^* \f$. 
+The time average is taken over the period of the oscillation,
+\f$ {\cal T} = 2\pi/\omega. \f$ Using our time-periodic ansatz 
+for the fluid displacement potential, \f$ \Phi^* = 
+Re\{ \phi^* \exp(-{\rm i}\omega t^*) \} \f$, the intensity can
+be re-written as
+\f[
+I^* = \frac{1}{2} \rho_{\rm f} \omega^3 
+\bigg( Im \{\frac{\partial \phi^*}{\partial n^*} \} Re\{\phi^* \} -
+      Re \{\frac{\partial \phi^*}{\partial n^*} \} Im\{\phi^* \} 
+\bigg).
+\f] 
+Next we express the surface integral in (@R[power]@) in
+cylindrical polar coordinates. Assuming the (axisymmetric)
+boundary of the fluid domain is parametrised (in the \f$
+(r^*,z^*)\f$ plane) as 
+\f$ r^* = R^*(s^*)\f$ and \f$ z^* = Z^*(s^*)\f$, where \f$ s^* \f$
+is some curve parameter (e.g. the arclength), we have
+\f[
+\overline{\cal P }^* = \int \int_0^{2\pi} I^*(s^*,\varphi) 
+\sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 +
+       \left(\frac{\partial Z^*}{\partial s^*}\right)^2 }
+       R^*(s^*) \ d\varphi \  ds^* 
+\f]
+The power associated with the \f$ N-\f$th azimuthal Fourier mode,
+\f$ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) \f$, is then given by
+\f[
+\overline{\cal P }^*_N = \pi \rho_{\rm f} \omega^3  \int 
+\bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} -
+       Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} 
+\bigg)
+\sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 +
+       \left(\frac{\partial Z^*}{\partial s^*}\right)^2 }
+       R^*(s^*) \  ds^*.
+\f]
+Non-dimensionalising all lengths on \f$ {\cal L}\f$ and the
+displacement potential on \f$ {\cal L}^2 \f$ then yields the
+following expression for the non-dimensional time-averaged radiated power
+\f[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+=  \pi \int 
+\bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} -
+       Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} 
+\bigg)
+\sqrt{ \left(\frac{\partial R}{\partial s}\right)^2 +
+       \left(\frac{\partial Z}{\partial s}\right)^2 }
+       R(s) \  ds.
+\f]
+This quantity is computed by \c oomph-lib on an element-by-element
+basis, using the function
+\c FourierDecomposedHelmholtzBCElementBase::global_power_contribution(...).
+
+The computation is most easily validated by comparing against
+analytical results in which the displacement potential is expressed
+in spherical polar coordinates \f$ (r_{\rm sphere}^*, \theta, \varphi)
+\f$ where \f$ r_{\rm sphere}^* = \sqrt{r^{*2} + z^{*2}} \f$ and
+\f$ \theta \f$ is the zenith angle which varies from \f$ \theta=0\f$ at
+the "North pole" to \f$ \theta=\pi \f$ at the "South pole".
+If we evaluate the surface integral in (@R[power]@) 
+on a spherical surface of dimensional radius \f$ a^* \f$, the dimensional
+time-averaged radiated power is
+\f[
+\overline{\cal P }^* = \int_0^\pi \int_0^{2\pi} I^*(r_{\rm sphere}^*=a^*,
+\theta,\varphi)\  a^{*2} \sin(\theta) \ d\varphi \ d\theta.
+\f]
+The power associated with \f$ N-\f$th azimuthal Fourier mode,
+\f$ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) \f$, is then given by
+\f[
+\overline{\cal P }^*_N = \pi a^{*2} \rho_{\rm f} \omega^3  \int_0^\pi 
+\left.\bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} -
+       Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} 
+\bigg)\right|_{r_{\rm sphere}^*=a^*}
+\sin(\theta) \ d\theta,
+\f]
+where \f$ \partial / \partial n^* = \partial / \partial r_{\rm
+sphere}^* \f$. The non-dimensional time-averaged power, evaluated
+on a sphere of non-dimensional radius \f$ a = a^*/{\cal L}\f$ is then
+given by
+\f[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+=  \pi a^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} -
+       Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} 
+\bigg)\right|_{r_{\rm sphere}=a} \sin(\theta) \ d\theta,
+\f]
+where \f$ \partial / \partial n = \partial / \partial r_{\rm
+sphere} \f$.
+
+The derivation of the analytical expression for 
+\f$ \overline{\cal P }_N \f$
+against which we validated our computational results were performed
+with maple, using the script
+<A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/exact.map">
+  demo_drivers/interaction/fourier_decomposed_acoustic_fsi/exact.map
+  </A>.
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi">
+  demo_drivers/interaction/fourier_decomposed_acoustic_fsi/
+  </A>
+  </CENTER>
+- The driver code is:
+  <CENTER>
+  <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">
+  demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc
+  </A>
+  </CENTER>
+.
+

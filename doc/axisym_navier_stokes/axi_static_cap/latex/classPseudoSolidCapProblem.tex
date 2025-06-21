@@ -1,0 +1,437 @@
+\doxysection{Pseudo\+Solid\+Cap\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classPseudoSolidCapProblem}{}\label{classPseudoSolidCapProblem}\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+
+
+A class that solves the Navier--Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary.  
+
+
+Inheritance diagram for Pseudo\+Solid\+Cap\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPseudoSolidCapProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77}{Pseudo\+Solid\+Cap\+Problem}} (const bool \&hijack\+\_\+internal)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Boolean flag indicates if volume constraint is applied by hijacking internal or external pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPseudoSolidCapProblem_aec2a79e44dfd785b2978419210b053b8}{\texorpdfstring{$\sim$}{\string~}\+Pseudo\+Solid\+Cap\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: clean up memory allocated by the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPseudoSolidCapProblem_ae86ecaf62fa0920f5d14bf82a7f83b0e}{parameter\+\_\+study}} (const string \&dir\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Peform a parameter study\+: Solve problem for a range of contact angles Pass name of output directory as a string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPseudoSolidCapProblem_ac0219ed64385dc20c4fc3c6cc217fd67}{create\+\_\+free\+\_\+surface\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create the free surface elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPseudoSolidCapProblem_a0289801610e2bc864c67d4d8557d56b1}{create\+\_\+volume\+\_\+constraint\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create the volume constraint elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPseudoSolidCapProblem_a8f28ebf09bc66142725139291b4e21a0}{create\+\_\+contact\+\_\+angle\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Create the contact angle element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classPseudoSolidCapProblem_ad29a43062d88106c495d407abeddd88d}{Ca}}
+\begin{DoxyCompactList}\small\item\em The Capillary number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classPseudoSolidCapProblem_a49945d8e5740977a72c63e333a65293f}{Volume}}
+\begin{DoxyCompactList}\small\item\em The prescribed volume of the fluid. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classPseudoSolidCapProblem_afbcfe3a5a05d191c44815681e4b621d0}{Pext}}
+\begin{DoxyCompactList}\small\item\em The external pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classPseudoSolidCapProblem_a51dfbd14a2cca78dc0efe6740337a22b}{Angle}}
+\begin{DoxyCompactList}\small\item\em The contact angle. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_ab9d26ab5daa295e7ac4cdca1802ec156}{Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_a51ac066b9117f30679fef658ff66d981}{External\+\_\+pressure\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Data object whose single value stores the external pressure. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_a073f0857df471e2f165d57828511d835}{Traded\+\_\+pressure\+\_\+data\+\_\+pt}}
+\item 
+ofstream \mbox{\hyperlink{classPseudoSolidCapProblem_a81d2d9915ba7d9a9a691ca2f2080b6b4}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_a6d4520b30d05f3dde12ea9bae9d62d0b}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the bulk mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_ab334d082c008553389374a90f732df2f}{Free\+\_\+surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the free surface mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_a3e45f375f3aa934391ca8e20e11410e4}{Free\+\_\+surface\+\_\+bounding\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the element bounding the free surface. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_aa9c678c2bfec0afcb94f356aeaa19089}{Volume\+\_\+computation\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the elements that compute the enclosed volume. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem_a27f4baf9c47cb17e15e6b7a6065fdfe0}{Volume\+\_\+constraint\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the volume constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$}
+A class that solves the Navier--Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary. 
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00512}{512}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77}\label{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!PseudoSolidCapProblem@{PseudoSolidCapProblem}}
+\index{PseudoSolidCapProblem@{PseudoSolidCapProblem}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PseudoSolidCapProblem()}{PseudoSolidCapProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classPseudoSolidCapProblem}{\+::\+Pseudo\+Solid\+Cap\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{hijack\+\_\+internal }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Boolean flag indicates if volume constraint is applied by hijacking internal or external pressure. 
+
+Constructor\+: Pass boolean flag to indicate if the volume constraint is applied by hijacking an internal pressure or the external pressure. 
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{592}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+References \mbox{\hyperlink{axi__static__cap_8cc_source_l00568}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00554}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00898}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::create\+\_\+contact\+\_\+angle\+\_\+element()}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00805}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements()}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00852}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::create\+\_\+volume\+\_\+constraint\+\_\+elements()}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00557}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+External\+\_\+pressure\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00574}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+bounding\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00571}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00056}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00548}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pext}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00562}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Traded\+\_\+pressure\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00577}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Volume\+\_\+computation\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{axi__static__cap_8cc_source_l00580}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Volume\+\_\+constraint\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{axi__static__cap_8cc_source_l00059}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Wall\+\_\+normal}}.
+
+\Hypertarget{classPseudoSolidCapProblem_aec2a79e44dfd785b2978419210b053b8}\label{classPseudoSolidCapProblem_aec2a79e44dfd785b2978419210b053b8} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!````~PseudoSolidCapProblem@{\texorpdfstring{$\sim$}{\string~}PseudoSolidCapProblem}}
+\index{````~PseudoSolidCapProblem@{\texorpdfstring{$\sim$}{\string~}PseudoSolidCapProblem}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PseudoSolidCapProblem()}{\string~PseudoSolidCapProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: clean up memory allocated by the object. 
+
+Destructor. Make sure to clean up all allocated memory, so that multiple instances of the problem don\textquotesingle{}t lead to excessive memory usage. 
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00764}{764}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPseudoSolidCapProblem_a8f28ebf09bc66142725139291b4e21a0}\label{classPseudoSolidCapProblem_a8f28ebf09bc66142725139291b4e21a0} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!create\_contact\_angle\_element@{create\_contact\_angle\_element}}
+\index{create\_contact\_angle\_element@{create\_contact\_angle\_element}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_contact\_angle\_element()}{create\_contact\_angle\_element()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+contact\+\_\+angle\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create the contact angle element. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00898}{898}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+References \mbox{\hyperlink{axi__static__cap_8cc_source_l00062}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+fct()}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_ac0219ed64385dc20c4fc3c6cc217fd67}\label{classPseudoSolidCapProblem_ac0219ed64385dc20c4fc3c6cc217fd67} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!create\_free\_surface\_elements@{create\_free\_surface\_elements}}
+\index{create\_free\_surface\_elements@{create\_free\_surface\_elements}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_free\_surface\_elements()}{create\_free\_surface\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create the free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00805}{805}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a0289801610e2bc864c67d4d8557d56b1}\label{classPseudoSolidCapProblem_a0289801610e2bc864c67d4d8557d56b1} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!create\_volume\_constraint\_elements@{create\_volume\_constraint\_elements}}
+\index{create\_volume\_constraint\_elements@{create\_volume\_constraint\_elements}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_volume\_constraint\_elements()}{create\_volume\_constraint\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+volume\+\_\+constraint\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create the volume constraint elements. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00852}{852}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f}\label{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00977}{977}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+\Hypertarget{classPseudoSolidCapProblem_ae86ecaf62fa0920f5d14bf82a7f83b0e}\label{classPseudoSolidCapProblem_ae86ecaf62fa0920f5d14bf82a7f83b0e} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!parameter\_study@{parameter\_study}}
+\index{parameter\_study@{parameter\_study}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{parameter\_study()}{parameter\_study()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::parameter\+\_\+study (\begin{DoxyParamCaption}\item[{const string \&}]{dir\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Peform a parameter study\+: Solve problem for a range of contact angles Pass name of output directory as a string. 
+
+Perform a parameter study. Pass name of output directory as a string. 
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00935}{935}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPseudoSolidCapProblem_a51dfbd14a2cca78dc0efe6740337a22b}\label{classPseudoSolidCapProblem_a51dfbd14a2cca78dc0efe6740337a22b} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Angle@{Angle}}
+\index{Angle@{Angle}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Angle}{Angle}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Angle\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The contact angle. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00551}{551}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a6d4520b30d05f3dde12ea9bae9d62d0b}\label{classPseudoSolidCapProblem_a6d4520b30d05f3dde12ea9bae9d62d0b} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00568}{568}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_ad29a43062d88106c495d407abeddd88d}\label{classPseudoSolidCapProblem_ad29a43062d88106c495d407abeddd88d} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Ca@{Ca}}
+\index{Ca@{Ca}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ca}{Ca}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Ca\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The Capillary number. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00542}{542}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+\Hypertarget{classPseudoSolidCapProblem_ab9d26ab5daa295e7ac4cdca1802ec156}\label{classPseudoSolidCapProblem_ab9d26ab5daa295e7ac4cdca1802ec156} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Constitutive\+Law\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constitutive law used to determine the mesh deformation. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00554}{554}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a51ac066b9117f30679fef658ff66d981}\label{classPseudoSolidCapProblem_a51ac066b9117f30679fef658ff66d981} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!External\_pressure\_data\_pt@{External\_pressure\_data\_pt}}
+\index{External\_pressure\_data\_pt@{External\_pressure\_data\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{External\_pressure\_data\_pt}{External\_pressure\_data\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Data\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+External\+\_\+pressure\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data object whose single value stores the external pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00557}{557}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a3e45f375f3aa934391ca8e20e11410e4}\label{classPseudoSolidCapProblem_a3e45f375f3aa934391ca8e20e11410e4} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Free\_surface\_bounding\_mesh\_pt@{Free\_surface\_bounding\_mesh\_pt}}
+\index{Free\_surface\_bounding\_mesh\_pt@{Free\_surface\_bounding\_mesh\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Free\_surface\_bounding\_mesh\_pt}{Free\_surface\_bounding\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+bounding\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the element bounding the free surface. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00574}{574}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_ab334d082c008553389374a90f732df2f}\label{classPseudoSolidCapProblem_ab334d082c008553389374a90f732df2f} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Free\_surface\_mesh\_pt@{Free\_surface\_mesh\_pt}}
+\index{Free\_surface\_mesh\_pt@{Free\_surface\_mesh\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Free\_surface\_mesh\_pt}{Free\_surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the free surface mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00571}{571}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_afbcfe3a5a05d191c44815681e4b621d0}\label{classPseudoSolidCapProblem_afbcfe3a5a05d191c44815681e4b621d0} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Pext@{Pext}}
+\index{Pext@{Pext}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Pext}{Pext}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Pext\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The external pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00548}{548}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a81d2d9915ba7d9a9a691ca2f2080b6b4}\label{classPseudoSolidCapProblem_a81d2d9915ba7d9a9a691ca2f2080b6b4} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00565}{565}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a073f0857df471e2f165d57828511d835}\label{classPseudoSolidCapProblem_a073f0857df471e2f165d57828511d835} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Traded\_pressure\_data\_pt@{Traded\_pressure\_data\_pt}}
+\index{Traded\_pressure\_data\_pt@{Traded\_pressure\_data\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traded\_pressure\_data\_pt}{Traded\_pressure\_data\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Data\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Traded\+\_\+pressure\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00562}{562}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a49945d8e5740977a72c63e333a65293f}\label{classPseudoSolidCapProblem_a49945d8e5740977a72c63e333a65293f} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Volume@{Volume}}
+\index{Volume@{Volume}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume}{Volume}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Volume\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The prescribed volume of the fluid. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00545}{545}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+\Hypertarget{classPseudoSolidCapProblem_aa9c678c2bfec0afcb94f356aeaa19089}\label{classPseudoSolidCapProblem_aa9c678c2bfec0afcb94f356aeaa19089} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Volume\_computation\_mesh\_pt@{Volume\_computation\_mesh\_pt}}
+\index{Volume\_computation\_mesh\_pt@{Volume\_computation\_mesh\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume\_computation\_mesh\_pt}{Volume\_computation\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Volume\+\_\+computation\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the elements that compute the enclosed volume. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00577}{577}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+\Hypertarget{classPseudoSolidCapProblem_a27f4baf9c47cb17e15e6b7a6065fdfe0}\label{classPseudoSolidCapProblem_a27f4baf9c47cb17e15e6b7a6065fdfe0} 
+\index{PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}!Volume\_constraint\_mesh\_pt@{Volume\_constraint\_mesh\_pt}}
+\index{Volume\_constraint\_mesh\_pt@{Volume\_constraint\_mesh\_pt}!PseudoSolidCapProblem$<$ ELEMENT $>$@{PseudoSolidCapProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume\_constraint\_mesh\_pt}{Volume\_constraint\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem}}$<$ ELEMENT $>$\+::\+Volume\+\_\+constraint\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the volume constraint. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l00580}{580}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{axi__static__cap_8cc_source_l00592}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$\+::\+Pseudo\+Solid\+Cap\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axi__static__cap_8cc}{axi\+\_\+static\+\_\+cap.\+cc}}\end{DoxyCompactItemize}

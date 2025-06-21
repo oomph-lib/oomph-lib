@@ -1,0 +1,378 @@
+\chapter{Distributed Linear Algebra Infrastructure}
+\hypertarget{index}{}\label{index}\index{Distributed Linear Algebra Infrastructure@{Distributed Linear Algebra Infrastructure}}
+In this document we provide an overview of {\ttfamily oomph-\/lib\textquotesingle{}s} distributed linear algebra framework, discussing its design and key functionality. The aim of this framework is to facilitate the parallel (distributed) execution of linear algebra type operations with little (or no) user intervention. This requires all linear algebra data and computations to be distributed over all available processes.
+
+We begin by defining the {\ttfamily Oomph\+Communicator}, a class that is fundamental ~\newline
+ to distributed computing in {\ttfamily oomph-\/lib}. Next we discuss the class {\ttfamily Linear\+Algebra\+Distribution} which specifies the distribution of the data and computations over the available processes. In Sections \doxysectlink{index_double_vector}{Double\+Vector}{1}, \doxysectlink{index_cr_double_matrix}{CRDouble\+Matrix}{1} and \doxysectlink{index_distributed_linear_algebra_object}{Distributed\+Linear\+Algebra\+Object}{1} we discuss {\ttfamily oomph-\/lib\textquotesingle{}s} distributed linear algebra objects including the key containers (matrices and vectors) and operators (solvers and preconditioners). Finally, we demonstrate how the distributed linear algebra framework is typically used in practice.
+
+The primary aim of this document is to provide an overview of the design and functionality of distributed linear algebra capabilities in {\ttfamily oomph-\/lib}, and hence we do not discuss every method of every class; we refer the reader to the class documentation for a complete specification.\hypertarget{index_oomph_communicator}{}\doxysection{\texorpdfstring{Oomph\+Communicator}{OomphCommunicator}}\label{index_oomph_communicator}
+{\ttfamily Oomph-\/lib} employs MPI for distributed memory parallelisation. Fundamental to MPI is the communicator ~\newline
+ ( {\ttfamily MPI\+\_\+\+Comm} ) which determines which processes are involved in a parallel computation. Although {\ttfamily oomph-\/lib} is implemented in C++, the C MPI bindings are utilised. {\ttfamily Oomph-\/lib} provides the class {\ttfamily Oomph\+Communicator} as an object-\/oriented wrapper for a {\ttfamily MPI\+\_\+\+Comm}.
+
+Calling {\ttfamily MPI\+\_\+\+Helpers\+::init(argc,argv)} is equivalent to calling {\ttfamily MPI\+\_\+\+Init(argc,argv)}. It initialises MPI ( i.\+e. calls {\ttfamily MPI\+\_\+\+Init(argc,argv)} ) and creates {\ttfamily oomph-\/lib\textquotesingle{}s} global communicator\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=============================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ generic\ mpi\ stuff}}
+\DoxyCodeLine{\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Initialise\ MPI}}
+\DoxyCodeLine{\ \ MPI\_Helpers::init(argc,argv);}
+
+\end{DoxyCodeInclude}
+ The newly created communicator is available via a {\ttfamily MPI\+\_\+\+Helpers} class static method\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ global\ oomph-\/lib\ communicator\ }}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ OomphCommunicator*\ \textcolor{keyword}{const}\ comm\_pt\ =\ MPI\_Helpers::communicator\_pt();}
+
+\end{DoxyCodeInclude}
+ and is equivalent to the {\ttfamily MPI\+\_\+\+COMM\+\_\+\+WORLD} communicator in that it represents all the processes that {\ttfamily oomph-\/lib} knows about. By default, this communicator contains exactly the same set of processes as {\ttfamily MPI\+\_\+\+COMM\+\_\+\+WORLD}.
+
+The {\ttfamily Oomph\+Communicator} provides a number of access functions to communicator data including the rank of the process and the number of the processes\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ rank\ and\ total\ number\ of\ processors.\ }}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ my\_rank\ =\ comm\_pt-\/>my\_rank();}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ nproc\ =\ comm\_pt-\/>nproc();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Tell\ us\ who\ you\ are...}}
+\DoxyCodeLine{\ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}I'm\ rank\ "{}}\ <<\ my\_rank\ <<\ \textcolor{stringliteral}{"{}\ on\ a\ total\ of\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ nproc\ <<\ \textcolor{stringliteral}{"{}\ processors"{}}\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+\hypertarget{index_linear_algebra_distribution}{}\doxysection{\texorpdfstring{Linear\+Algebra\+Distribution}{LinearAlgebraDistribution}}\label{index_linear_algebra_distribution}
+Distributed memory parallelisation requires data and computations to be distributed over the available processes in some way. In this document we are solely interested in distributed linear algebra. We choose to distribute the linear algebra objects row-\/wise, and constrain the distribution such that each process is associated with a single contiguous set of rows. The class {\ttfamily Linear\+Algebra\+Distribution} allows the specification of such a distribution.
+
+The distribution is defined by two integers defining the first global row and the number of local rows associated with a process. This data is sufficient to allow a mapping between a global row number and a local row number on a particular process.
+
+To construct a {\ttfamily Linear\+Algebra\+Distribution} in which 100 rows are uniformly distributed across the set of processes specified by {\ttfamily comm\+\_\+pt} we write\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ a\ uniformly\ distributed\ LinearAlgebraDistribution}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ 100\ global\ rows\ are\ uniformly\ distributed\ accross\ the\ processes\ of\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ comm\_pt}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ nrow\_global\ =\ 100;}
+\DoxyCodeLine{\ \ LinearAlgebraDistribution\ distributed\_distribution(comm\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nrow\_global);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Show\ us\ how\ many\ rows\ this\ processor\ holds}}
+\DoxyCodeLine{\ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}distributed\ distribution:\ first\_row\ and\ nrow\_local:\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ distributed\_distribution.first\_row()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ distributed\_distribution.nrow\_local()\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ In this example, if run on four processes, the first 25 rows are associated with process 0, the next 25 rows are on process 1 and so on. In general, in a uniform distribution of $n_r$ global rows over $n_p$ processes the first row on process $p=0,1,\ldots,(n_p-1)$ is $\lfloor
+\frac{pn_r}{n_p}\rfloor$. It is also possible the specify alternative user defined distributions; see the class documentation for details.
+
+An optional third ( {\ttfamily bool} ) argument (default\+: true) in the constructor indicates that we require a distributed linear algebra distribution. However, on some occasions we may want to replicate all rows of a linear algebra object on all processes. This is achieved by simply making the third argument {\ttfamily false} (non-\/distributed)\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Construct\ an\ empty\ distribution\ object\ (does\ not\ specify\ a\ distribution)}}
+\DoxyCodeLine{\ \ LinearAlgebraDistribution\ locally\_replicated\_distribution;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ a\ locally\ replicated\ distribution\ such\ that\ every\ row\ is\ available}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ on\ every\ process}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{bool}\ distributed=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ locally\_replicated\_distribution.build(comm\_pt,nrow\_global,distributed);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Show\ us\ how\ many\ rows\ this\ processor\ holds}}
+\DoxyCodeLine{\ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}locally\ replicated\ distribution:\ first\_row\ and\ nrow\_local:\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ locally\_replicated\_distribution.first\_row()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ locally\_replicated\_distribution.nrow\_local()\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ This example illustrates two other features of {\ttfamily Linear\+Algebra\+Distribution}. Firstly, the default constructor creates an empty distribution, and secondly for every (non-\/default) constructor there is an equivalent {\ttfamily build(...)} method to "{}re-\/construct"{} the object.
+
+The state of the object is accessible through a range of methods.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ number\ of\ local\ rows\ on\ this\ process}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ nrow\_local\ =\ distributed\_distribution.nrow\_local();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ first\ row\ on\ this\ process}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ first\_row\ =\ distributed\_distribution.first\_row();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ number\ of\ global\ rows}}
+\DoxyCodeLine{\ \ nrow\_global\ =\ distributed\_distribution.nrow();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Is\ this\ distributed\ (true)\ or\ locally\ replicated\ (false)}}
+\DoxyCodeLine{\ \ distributed\ =\ distributed\_distribution.distributed();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Does\ this\ object\ specify\ a\ distribution}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{bool}\ built\ =\ distributed\_distribution.built();}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily built()} method indicates if the object specifies a distribution, or is empty.\hypertarget{index_double_vector}{}\doxysection{\texorpdfstring{Double\+Vector}{DoubleVector}}\label{index_double_vector}
+The simplest distributed linear algebra object is {\ttfamily Double\+Vector}, a distributed vector of {\ttfamily doubles} developed specifically for linear algebra (It differs from a {\ttfamily Vector$<$double$>$} which simply provides a container for {\ttfamily doubles} ). For example, the following command constructs a {\ttfamily Double\+Vector} with a uniform distribution (specified by the distributed {\ttfamily Linear\+Algebra\+Distribution} defined in the previous section) and unit elements\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Construct\ a\ uniformly\ distributed\ DoubleVector\ with\ unit\ elements}}
+\DoxyCodeLine{\ \ DoubleVector\ my\_vector(distributed\_distribution,1.0);}
+
+\end{DoxyCodeInclude}
+
+
+To access the vector elements the {\ttfamily operator}\mbox{[}\mbox{]} is implemented. For example to increment every element by one\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Increment\ every\ element\ of\ my\_vector\ on\ this\ process\ by\ 1}}
+\DoxyCodeLine{\ \ nrow\_local\ =\ my\_vector.distribution\_pt()-\/>nrow\_local();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ nrow\_local;\ i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ my\_vector[i]+=1.0;}
+\DoxyCodeLine{\ \ \ \}}
+
+\end{DoxyCodeInclude}
+ It is the {\ttfamily oomph-\/lib} convention that the data in {\ttfamily Double\+Vector} (and all other distributed linear algebra object) is accessed using local indices. The following loop documents the local row number, the global row number, and the value of the elements on each process\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Document\ elements\ on\ this\ process\ in\ my\_vector}}
+\DoxyCodeLine{\ \ nrow\_local\ =\ my\_vector.distribution\_pt()-\/>nrow\_local();}
+\DoxyCodeLine{\ \ first\_row\ =\ my\_vector.distribution\_pt()-\/>first\_row();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ nrow\_local;\ i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}local\ row\ "{}}\ <<\ i\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ is\ global\ row\ "{}}\ <<\ first\_row+i\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ and\ has\ value\ "{}}\ <<\ my\_vector[i]\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \ \}}
+
+\end{DoxyCodeInclude}
+ To change the distribution of a {\ttfamily Double\+Vector} while retaining the data, we provide the {\ttfamily redistribute(...)} method. For example to change {\ttfamily my\+\_\+vector} from uniformly distributed to locally replicated\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Redistribute\ my\_vector\ such\ that\ it\ is\ locally\ replicated\ on\ all\ processes}}
+\DoxyCodeLine{\ \ my\_vector.redistribute(\&locally\_replicated\_distribution);}
+
+\end{DoxyCodeInclude}
+ Just like the {\ttfamily Linear\+Algebra\+Distribution}, we provide {\ttfamily build()} methods that mirror the behaviour of all non-\/default constructors. For example to revert {\ttfamily my\+\_\+vector} to a uniform distribution with unit elements\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ (Re)build\ my\_vector\ such\ that\ it\ is\ uniformly\ distributed\ over\ all}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ processes}}
+\DoxyCodeLine{\ \ my\_vector.build(distributed\_distribution,1.0);}
+
+\end{DoxyCodeInclude}
+ It is important to differentiate between {\ttfamily build(...)} and {\ttfamily redistribute(...)}; calling {\ttfamily build(...)} deletes the existing data, effectively re-\/constructing the object, whereas {\ttfamily redistribute(...)} retains the vector\textquotesingle{}s data.
+
+Like the {\ttfamily Linear\+Algebra\+Distribution}, a {\ttfamily Double\+Vector} need not contain any data. To generate an object in this state, we could instantiate an object using the default constructor or call the {\ttfamily clear()} method\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Construct\ an\ empty\ DoubleVector}}
+\DoxyCodeLine{\ \ DoubleVector\ another\_vector;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Clear\ all\ data\ from\ an\ existing\ DoubleVector}}
+\DoxyCodeLine{\ \ my\_vector.clear();}
+
+\end{DoxyCodeInclude}
+ Again the {\ttfamily built()} method returns the state of the object and indicates if it contains any data.\hypertarget{index_cr_double_matrix}{}\doxysection{\texorpdfstring{CRDouble\+Matrix}{CRDoubleMatrix}}\label{index_cr_double_matrix}
+{\ttfamily CRDouble\+Matrix} is the only distributed matrix in {\ttfamily oomph-\/lib}. It employs sparse compressed row storage to store {\ttfamily double} coefficients.
+
+A {\ttfamily CRDouble\+Matrix} has three fundamental states\+:
+
+
+\begin{DoxyItemize}
+\item A {\ttfamily CRDouble\+Matrix} can have no distribution or coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} are both {\ttfamily false}.
+\item A (built) distribution but no coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} is {\ttfamily true} but {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} is still {\ttfamily false}.
+\item A (built) distribution and coefficients in which case {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}distribution\+\_\+built()} and {\ttfamily my\+\_\+matrix-\/\texorpdfstring{$>$}{>}built()} are both {\ttfamily true}. ~\newline
+
+\end{DoxyItemize}
+
+For example, to construct an empty matrix we call\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Construct\ an\ empty\ CRDoubleMatrix}}
+\DoxyCodeLine{\ \ CRDoubleMatrix\ my\_matrix;}
+
+\end{DoxyCodeInclude}
+ To specify the distribution as defined by the {\ttfamily Linear\+Algebra\+Distribution} {\ttfamily distributed\+\_\+distribution} we write\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Specify\ that\ the\ rows\ be\ uniformly\ distributed}}
+\DoxyCodeLine{\ \ my\_matrix.build(\&distributed\_distribution);}
+
+\end{DoxyCodeInclude}
+ The distribution has now been specified but the coefficients have not. Like the {\ttfamily Double\+Vector}, rows are indexed locally and hence the coefficients rows must be indexed locally. For example, to populate {\ttfamily my\+\_\+matrix} as a square identity matrix, we write\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Vector\ of\ coefficient\ of\ value\ 1.0}}
+\DoxyCodeLine{\ \ Vector<double>\ values(nrow\_local,1.0);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Column\ indices\ corresponding\ to\ values}}
+\DoxyCodeLine{\ \ Vector<int>\ column\_indices(nrow\_local);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Index\ of\ vectors\ values\ and\ column\_indices\ where\ the\ i-\/th\ row\ starts}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ (each\ row\ contains\ one\ coefficient)}}
+\DoxyCodeLine{\ \ Vector<int>\ row\_start(nrow\_local+1);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ populate\ column\_indices\ and\ row\_start}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ nrow\_local;\ ++i)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ column\_indices[i]=first\_row+nrow\_local;}
+\DoxyCodeLine{\ \ \ \ row\_start[i]=i;}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ row\_start[nrow\_local]=nrow\_local;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ the\ (square)\ matrix}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ ncol\ =\ nrow\_global;}
+\DoxyCodeLine{\ \ my\_matrix.build(ncol,values,column\_indices,row\_start);}
+
+\end{DoxyCodeInclude}
+ We note that the column indices are global because only the rows are distributed. The assembly of a {\ttfamily CRDouble\+Matrix} is now complete.
+
+We constructed the matrix in two stages by first specifying the distribution and then specifying the coefficients. However it is possible to perform this operation in just one step, by using the appropriate constructor or {\ttfamily build(...)} method, for example\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ CRDoubleMatrix\ my\_matrix2(\&distributed\_distribution,ncol,values,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ column\_indices,row\_start);}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_distributed_linear_algebra_object}{}\doxysection{\texorpdfstring{Distributed\+Linear\+Algebra\+Object}{DistributedLinearAlgebraObject}}\label{index_distributed_linear_algebra_object}
+In this section we introduce the class {\ttfamily Distributed\+Linear\+Algebra\+Object}, a base class for all distributed linear algebra objects. This class encapsulates a {\ttfamily Linear\+Algebra\+Distribution}, provides (protected) access to derived classes to update ( {\ttfamily build\+\_\+distribution(...)} ) and clear ( {\ttfamily clear()} ) the stored distribution. Secondly, it provides methods to simplify access to commonly used {\ttfamily Linear\+Algebra\+Distribution} data. For example, because a {\ttfamily CRDouble\+Matrix} is a {\ttfamily Distributed\+Linear\+Algebra\+Object},
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ first\ (global)\ row\ of\ my\_matrix\ on\ this\ process}}
+\DoxyCodeLine{\ \ first\_row\ =\ \ my\_matrix2.distribution\_pt()-\/>first\_row();}
+
+\end{DoxyCodeInclude}
+ can be replaced with
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ first\ (global)\ row\ of\ my\_matrix\ on\ this\ process}}
+\DoxyCodeLine{\ \ first\_row\ =\ \ my\_matrix2.first\_row();}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily Distributed\+Linear\+Algebra\+Objects} can be divided into two types\+: containers and operators. We have already reviewed the containers {\ttfamily Double\+Vector} and {\ttfamily CRDouble\+Matrix}. A wide range of operator classes have been implemented in {\ttfamily oomph-\/lib} to operate on these containers. In particular, all {\ttfamily Linear\+Solvers}, {\ttfamily Iterative\+Linear\+Solvers} and {\ttfamily Preconditioners} (discussed in the \href{../../../linear_solvers/html/index.html}{\texttt{ Linear Solvers Tutorial}}) are {\ttfamily Distributed\+Linear\+Algebra\+Objects}. We finish this section by reviewing the key linear algebra operators\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Super\+LUSolver} is a {\ttfamily Linear\+Solver} wrapper to both the \href{http://crd.lbl.gov/~xiaoye/SuperLU/\#superlu}{\texttt{ {\ttfamily Super\+LU}}} direct solver and the \href{http://crd.lbl.gov/~xiaoye/SuperLU/\#superlu_dist}{\texttt{ {\ttfamily Super\+LU Dist}}} distributed direct solver. By default, whenever possible this class will automatically perform distributed solves.
+\item {\ttfamily Trilinos\+Aztec\+OOSolver} is an {\ttfamily Iterative\+Linear\+Solver} wrapper to the \href{http://trilinos.sandia.gov/packages/aztecoo}{\texttt{ {\ttfamily Trilinos Aztec\+OO}}} package implementation of distributed Krylov methods including CG, GMRES and Bi\+CGStab.
+\item {\ttfamily Trilinos\+MLPreconditioner} is a wrapper to the distributed \href{http://trilinos.sandia.gov/packages/ml}{\texttt{ Trilinos ML AMG preconditioners}}.
+\item {\ttfamily Trilinos\+IFPACKPreconditioner} is a wrapper to the distributed \href{http://trilinos.sandia.gov/packages/ifpack}{\texttt{ Trilinos IFPACK preconditioners}}.
+\item {\ttfamily Hypre\+Preconditioner} is a wrapper to the distributed \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ {\ttfamily Hypre Scalable Linear Solvers}}} package, of particular interest is the classical AMG implementation {\ttfamily Boomer\+AMG}.
+\item {\ttfamily Matrix\+Vector\+Product} is a wrapper to the \href{http://trilinos.sandia.gov/packages/epetra/}{\texttt{ {\ttfamily Trilinos Epetra}}} distributed matrix-\/vector product implementation.
+\end{DoxyItemize}\hypertarget{index_distributed_linear_algebra_in_practice}{}\doxysection{\texorpdfstring{Distributed Linear Algebra In Practice}{Distributed Linear Algebra In Practice}}\label{index_distributed_linear_algebra_in_practice}
+Having discussed {\ttfamily oomph-\/lib\textquotesingle{}s} linear algebra infrastructure, we finally remark that {\ttfamily oomph-\/lib} is implemented such that linear algebra in {\ttfamily oomph-\/lib} is automatically distributed if executed under MPI on multiple processes. Specifically, a user should not need to specify either a {\ttfamily Linear\+Algebra\+Distribution} or a {\ttfamily Oomph\+Communicator}, unless they wish to customise some aspect of the parallelisation.
+
+All functionality is designed such that if a user does not specify a {\ttfamily Linear\+Algebra\+Distribution}, then as much data and computation as possible will be uniformly distributed over all available processes.
+
+As an example, we consider the {\ttfamily Problem} method {\ttfamily get\+\_\+jacobian(...)}. If the user does not specify a return distribution for the Jacobian and residuals, then {\ttfamily oomph-\/lib} will uniformly distribute both containers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ a\ problem:\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ a\ 1D\ Poisson\ problem\ using\ a\ source\ function\ that\ generates}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ a\ fish\ shaped\ exact\ solution}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_element=40;\ }
+\DoxyCodeLine{\ \ OneDPoissonProblem<QPoissonElement<1,4>\ >\ }
+\DoxyCodeLine{\ \ \ problem(n\_element,FishSolnOneDPoisson::source\_function);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ residual\ and\ Jacobian,\ by\ default\ both\ are\ uniformly\ distributed}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ over\ all\ available\ processes}}
+\DoxyCodeLine{\ \ my\_vector.clear();}
+\DoxyCodeLine{\ \ my\_matrix.clear();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ Jacobian}}
+\DoxyCodeLine{\ \ problem.get\_jacobian(my\_vector,my\_matrix);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ oomph\_info\ }
+\DoxyCodeLine{\ \ \ <<\ \textcolor{stringliteral}{"{}Uniformly\ distributed\ residual\ vector:\ first\_row\ and\ nrow\_local:\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ my\_vector.first\_row()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ my\_vector.nrow\_local()\ <<\ std::endl}
+\DoxyCodeLine{\ \ \ <<\ \textcolor{stringliteral}{"{}Uniformly\ distributed\ jacobian\ matrix:\ first\_row,\ nrow\_local\ and\ nnz:\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ my\_matrix.first\_row()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ my\_matrix.nrow\_local()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ my\_matrix.nnz()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ On the other hand, a user can specify a return distribution by setting the distribution of the matrix and vector prior to calling {\ttfamily get\+\_\+jacobian(...)}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Request\ locally\ replicated\ residual\ and\ Jacobian\ from\ the\ problem}}
+\DoxyCodeLine{\ \ distributed=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ LinearAlgebraDistribution\ locally\_replicated\_distribution\_for\_jac(}
+\DoxyCodeLine{\ \ \ comm\_pt,problem.ndof(),distributed);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Show\ us\ how\ many\ rows\ this\ processor\ holds}}
+\DoxyCodeLine{\ \ oomph\_info\ }
+\DoxyCodeLine{\ \ \ <<\ \textcolor{stringliteral}{"{}locally\ replicated\ distribution\_for\_jac:\ first\_row\ and\ nrow\_local:\ "{}}}
+\DoxyCodeLine{\ \ \ <<\ locally\_replicated\_distribution\_for\_jac.first\_row()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ <<\ locally\_replicated\_distribution\_for\_jac.nrow\_local()\ }
+\DoxyCodeLine{\ \ \ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+
+
+We finally remark that because all linear algebra operations are automatically distributed, to parallelise {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solve phase, the user need only run their executable under MPI on multiple processes.\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/self_test/mpi/generic_mpi/}{\texttt{ demo\+\_\+drivers/self\+\_\+test/mpi/generic\+\_\+mpi }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/self_test/mpi/generic_mpi/generic_mpi_test.cc}{\texttt{ demo\+\_\+drivers/self\+\_\+test/mpi/generic\+\_\+mpi/generic\+\_\+mpi\+\_\+test.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

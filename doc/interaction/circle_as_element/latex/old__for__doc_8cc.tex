@@ -1,0 +1,86 @@
+\doxysection{old\+\_\+for\+\_\+doc.\+cc File Reference}
+\hypertarget{old__for__doc_8cc}{}\label{old__for__doc_8cc}\index{old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable Poisson problem in deformable fish-\/shaped domain. Template parameter identify the elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{namespaceConstSourceForPoisson_a40ef79083874b58ed42b4df2ca0f4c10}{Const\+Source\+For\+Poisson\+::get\+\_\+source}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{x}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{source}})
+\begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a}{demo\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ }\\\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{string}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{directory\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve coupled "{}elastic"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} \mbox{\hyperlink{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{argc}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for "{}elastic"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and reduce the targets for the mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b}\label{old__for__doc_8cc_a28565f965d7ffb7f92f3773a6333023b} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}}
+\index{demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_elastic\_fish\_poisson()}{demo\_elastic\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} demo\+\_\+elastic\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{string}} \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve coupled "{}elastic"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{old__for__doc_8cc_source_l00446}{446}} of file \mbox{\hyperlink{old__for__doc_8cc_source}{old\+\_\+for\+\_\+doc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{old__for__doc_8cc_source_l00383}{demo\+\_\+fish\+\_\+poisson()}}.
+
+\Hypertarget{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a}\label{old__for__doc_8cc_abb923e967929c29b3a4fa1693604952a} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!demo\_fish\_poisson@{demo\_fish\_poisson}}
+\index{demo\_fish\_poisson@{demo\_fish\_poisson}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{demo\_fish\_poisson()}{demo\_fish\_poisson()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void demo\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{old__for__doc_8cc_source_l00383}{383}} of file \mbox{\hyperlink{old__for__doc_8cc_source}{old\+\_\+for\+\_\+doc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{old__for__doc_8cc_source_l00383}{demo\+\_\+fish\+\_\+poisson()}}.
+
+
+
+Referenced by \mbox{\hyperlink{old__for__doc_8cc_source_l00446}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{old__for__doc_8cc_source_l00383}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{old__for__doc_8cc_source_l00485}{main()}}, \mbox{\hyperlink{old__for__doc_8cc_source_l00180}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}, and \mbox{\hyperlink{old__for__doc_8cc_source_l00130}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::y\+\_\+c()}}.
+
+\Hypertarget{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{old__for__doc_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{old\_for\_doc.cc@{old\_for\_doc.cc}!main@{main}}
+\index{main@{main}!old\_for\_doc.cc@{old\_for\_doc.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}}}]{argc,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for "{}elastic"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and reduce the targets for the mesh adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{old__for__doc_8cc_source_l00485}{485}} of file \mbox{\hyperlink{old__for__doc_8cc_source}{old\+\_\+for\+\_\+doc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{old__for__doc_8cc_source_l00383}{demo\+\_\+fish\+\_\+poisson()}}.
+

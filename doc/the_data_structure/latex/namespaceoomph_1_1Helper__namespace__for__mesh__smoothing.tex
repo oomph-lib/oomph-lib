@@ -1,0 +1,130 @@
+\doxysection{oomph\+::Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing Namespace Reference}
+\hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing}{}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing}\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+
+
+Helper namespace.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor}{Isotropic\+Elasticity\+Tensor}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc}{Isotropic\+\_\+elasticity\+\_\+tensor}} (\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}})
+\begin{DoxyCompactList}\small\item\em The elasticity tensor (for smoothing by linear elasticity) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio (for smoothing by linear or nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Young\textquotesingle{}s modulus (for smoothing by linear or nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{Constitutive\+\_\+law\+\_\+pt}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}, \&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}})
+\begin{DoxyCompactList}\small\item\em Create constitutive law (for smoothing by nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a1becf6969521c3750d1267dd619a2d41}{Scale}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Scale for displacement of quadratic boundary (0.\+0\+: simplex; 1.\+0\+: quadratic) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_aba8998d13da8e9dc69ad0a2e2d59f215}{Scale\+\_\+increment}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Increment for scale factor for displacement of quadratic boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper namespace. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!Isotropic\_elasticity\_tensor@{Isotropic\_elasticity\_tensor}}
+\index{Isotropic\_elasticity\_tensor@{Isotropic\_elasticity\_tensor}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{Isotropic\_elasticity\_tensor()}{Isotropic\_elasticity\_tensor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor}{Isotropic\+Elasticity\+Tensor}} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Isotropic\+\_\+elasticity\+\_\+tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}}]{ }\end{DoxyParamCaption})}
+
+
+
+The elasticity tensor (for smoothing by linear elasticity) 
+
+
+
+Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00529}{oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}\texorpdfstring{$\ast$}{*} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}, \&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}})}
+
+
+
+Create constitutive law (for smoothing by nonlinear elasticity) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{55}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!E@{E}}
+\index{E@{E}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::E = 1.\+0}
+
+
+
+Young\textquotesingle{}s modulus (for smoothing by linear or nonlinear elasticity) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00049}{49}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!Nu@{Nu}}
+\index{Nu@{Nu}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Nu = 0.\+3}
+
+
+
+Poisson\textquotesingle{}s ratio (for smoothing by linear or nonlinear elasticity) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00046}{46}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a1becf6969521c3750d1267dd619a2d41}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a1becf6969521c3750d1267dd619a2d41} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!Scale@{Scale}}
+\index{Scale@{Scale}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{Scale}{Scale}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale = 0.\+1}
+
+
+
+Scale for displacement of quadratic boundary (0.\+0\+: simplex; 1.\+0\+: quadratic) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00059}{59}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+
+\Hypertarget{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_aba8998d13da8e9dc69ad0a2e2d59f215}\label{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_aba8998d13da8e9dc69ad0a2e2d59f215} 
+\index{oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}!Scale\_increment@{Scale\_increment}}
+\index{Scale\_increment@{Scale\_increment}!oomph::Helper\_namespace\_for\_mesh\_smoothing@{oomph::Helper\_namespace\_for\_mesh\_smoothing}}
+\doxysubsubsection{\texorpdfstring{Scale\_increment}{Scale\_increment}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale\+\_\+increment = 0.\+1}
+
+
+
+Increment for scale factor for displacement of quadratic boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__smooth_8h_source_l00062}{62}} of file \mbox{\hyperlink{mesh__smooth_8h_source}{mesh\+\_\+smooth.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00141}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::operator()()}}.
+

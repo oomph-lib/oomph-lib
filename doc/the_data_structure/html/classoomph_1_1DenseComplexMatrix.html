@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DenseComplexMatrix Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DenseComplexMatrix.html">DenseComplexMatrix</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1DenseComplexMatrix-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::DenseComplexMatrix Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class.  
+ <a href="classoomph_1_1DenseComplexMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DenseComplexMatrix:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DenseComplexMatrix.png" usemap="#oomph::DenseComplexMatrix_map" alt=""/>
+  <map id="oomph::DenseComplexMatrix_map" name="oomph::DenseComplexMatrix_map">
+<area href="classoomph_1_1ComplexMatrixBase.html" title="Abstract base class for matrices of complex doubles – adds abstract interfaces for solving,..." alt="oomph::ComplexMatrixBase" shape="rect" coords="0,56,478,80"/>
+<area href="classoomph_1_1DenseMatrix.html" alt="oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;" shape="rect" coords="488,56,966,80"/>
+<area href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type..." alt="oomph::Matrix&lt; T, MATRIX_TYPE &gt;" shape="rect" coords="488,0,966,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad199664c8603ef3da91c76c3347d84d4" id="r_ad199664c8603ef3da91c76c3347d84d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#ad199664c8603ef3da91c76c3347d84d4">DenseComplexMatrix</a> ()</td></tr>
+<tr class="memdesc:ad199664c8603ef3da91c76c3347d84d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, simply assign the lengths N and M to 0.  <br /></td></tr>
+<tr class="separator:ad199664c8603ef3da91c76c3347d84d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac716f53db14021238edef4e385f6b319" id="r_ac716f53db14021238edef4e385f6b319"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#ac716f53db14021238edef4e385f6b319">DenseComplexMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:ac716f53db14021238edef4e385f6b319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a square n by n matrix.  <br /></td></tr>
+<tr class="separator:ac716f53db14021238edef4e385f6b319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17bdf75fb6cec1bbae74a0abac8e69a" id="r_ab17bdf75fb6cec1bbae74a0abac8e69a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#ab17bdf75fb6cec1bbae74a0abac8e69a">DenseComplexMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:ab17bdf75fb6cec1bbae74a0abac8e69a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns.  <br /></td></tr>
+<tr class="separator:ab17bdf75fb6cec1bbae74a0abac8e69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88144ac8dc64438f77b2aec56b283e87" id="r_a88144ac8dc64438f77b2aec56b283e87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a88144ac8dc64438f77b2aec56b283e87">DenseComplexMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_val</a>)</td></tr>
+<tr class="memdesc:a88144ac8dc64438f77b2aec56b283e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns, with initial value initial_val.  <br /></td></tr>
+<tr class="separator:a88144ac8dc64438f77b2aec56b283e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae57e49bd8bd12fa20ec0fe14ef4ffe5" id="r_aae57e49bd8bd12fa20ec0fe14ef4ffe5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#aae57e49bd8bd12fa20ec0fe14ef4ffe5">DenseComplexMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseComplexMatrix.html">DenseComplexMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:aae57e49bd8bd12fa20ec0fe14ef4ffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:aae57e49bd8bd12fa20ec0fe14ef4ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac210414e7780ba8da7fbb0676002168f" id="r_ac210414e7780ba8da7fbb0676002168f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#ac210414e7780ba8da7fbb0676002168f">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseComplexMatrix.html">DenseComplexMatrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ac210414e7780ba8da7fbb0676002168f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ac210414e7780ba8da7fbb0676002168f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea9edba37ef5fd679d17f22eaeb85369" id="r_aea9edba37ef5fd679d17f22eaeb85369"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#aea9edba37ef5fd679d17f22eaeb85369">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aea9edba37ef5fd679d17f22eaeb85369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <br /></td></tr>
+<tr class="separator:aea9edba37ef5fd679d17f22eaeb85369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4101f581e470c940bf7daf12ec1b234f" id="r_a4101f581e470c940bf7daf12ec1b234f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a4101f581e470c940bf7daf12ec1b234f">ncol</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4101f581e470c940bf7daf12ec1b234f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <br /></td></tr>
+<tr class="separator:a4101f581e470c940bf7daf12ec1b234f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2ba6bbaa9f0e17b7711b5168fbae72" id="r_acc2ba6bbaa9f0e17b7711b5168fbae72"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#acc2ba6bbaa9f0e17b7711b5168fbae72">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:acc2ba6bbaa9f0e17b7711b5168fbae72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the const version of the round-bracket access operator for read-only access.  <br /></td></tr>
+<tr class="separator:acc2ba6bbaa9f0e17b7711b5168fbae72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d6b3f5cf4471460313bb160f18da801" id="r_a7d6b3f5cf4471460313bb160f18da801"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a7d6b3f5cf4471460313bb160f18da801">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a7d6b3f5cf4471460313bb160f18da801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the non-const version of the round-bracket access operator for read-write access.  <br /></td></tr>
+<tr class="separator:a7d6b3f5cf4471460313bb160f18da801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157f9dac417c294a9082efeffc123f2d" id="r_a157f9dac417c294a9082efeffc123f2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a157f9dac417c294a9082efeffc123f2d">~DenseComplexMatrix</a> ()</td></tr>
+<tr class="memdesc:a157f9dac417c294a9082efeffc123f2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete the storage for Index vector and LU storage (if any)  <br /></td></tr>
+<tr class="separator:a157f9dac417c294a9082efeffc123f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8503c0e46409613c58261ce6136f88b9" id="r_a8503c0e46409613c58261ce6136f88b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a8503c0e46409613c58261ce6136f88b9">ludecompose</a> ()</td></tr>
+<tr class="memdesc:a8503c0e46409613c58261ce6136f88b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the LU decomposition. For this storage scheme the matrix storage will be over-writeen by its LU decomposition.  <br /></td></tr>
+<tr class="separator:a8503c0e46409613c58261ce6136f88b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd909e71bdcae1059eb8779de72a99d" id="r_abcd909e71bdcae1059eb8779de72a99d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#abcd909e71bdcae1059eb8779de72a99d">lubksub</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:abcd909e71bdcae1059eb8779de72a99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector.  <br /></td></tr>
+<tr class="separator:abcd909e71bdcae1059eb8779de72a99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76146afe81a055af475a107231468afb" id="r_a76146afe81a055af475a107231468afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a76146afe81a055af475a107231468afb">residual</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;residual)</td></tr>
+<tr class="memdesc:a76146afe81a055af475a107231468afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual of Ax=b, ie r=b-Ax for the "solution" x.  <br /></td></tr>
+<tr class="separator:a76146afe81a055af475a107231468afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcc47dd450a1ab37d2790b5d0279cadf" id="r_afcc47dd450a1ab37d2790b5d0279cadf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#afcc47dd450a1ab37d2790b5d0279cadf">multiply</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>)</td></tr>
+<tr class="memdesc:afcc47dd450a1ab37d2790b5d0279cadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <br /></td></tr>
+<tr class="separator:afcc47dd450a1ab37d2790b5d0279cadf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf8f0589e011bf720791058711fa952" id="r_aaaf8f0589e011bf720791058711fa952"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#aaaf8f0589e011bf720791058711fa952">multiply_transpose</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>)</td></tr>
+<tr class="memdesc:aaaf8f0589e011bf720791058711fa952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <br /></td></tr>
+<tr class="separator:aaaf8f0589e011bf720791058711fa952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1ComplexMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ComplexMatrixBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ComplexMatrixBase.html">oomph::ComplexMatrixBase</a></td></tr>
+<tr class="memitem:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_aecfeaf77e3e03743b0b87f677470c56d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#aecfeaf77e3e03743b0b87f677470c56d">ComplexMatrixBase</a> ()</td></tr>
+<tr class="memdesc:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor.  <br /></td></tr>
+<tr class="separator:aecfeaf77e3e03743b0b87f677470c56d inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afef97b50ab313dab3856f0f2c57189c2 inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_afef97b50ab313dab3856f0f2c57189c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#afef97b50ab313dab3856f0f2c57189c2">ComplexMatrixBase</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ComplexMatrixBase.html">ComplexMatrixBase</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afef97b50ab313dab3856f0f2c57189c2 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:afef97b50ab313dab3856f0f2c57189c2 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e79b343642010a1a6ba3ce90fdd52fa inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_a9e79b343642010a1a6ba3ce90fdd52fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a9e79b343642010a1a6ba3ce90fdd52fa">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ComplexMatrixBase.html">ComplexMatrixBase</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a9e79b343642010a1a6ba3ce90fdd52fa inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a9e79b343642010a1a6ba3ce90fdd52fa inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_a5b6bb3011ea7b08dead73e943fd74b15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a5b6bb3011ea7b08dead73e943fd74b15">~ComplexMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual (empty) destructor  <br /></td></tr>
+<tr class="separator:a5b6bb3011ea7b08dead73e943fd74b15 inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_a131e601fd0e82e811b26a3c11a455d0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a131e601fd0e82e811b26a3c11a455d0e">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <br /></td></tr>
+<tr class="separator:a131e601fd0e82e811b26a3c11a455d0e inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_a223cef84c48a2aa9fb387ed4ffaaf48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#a223cef84c48a2aa9fb387ed4ffaaf48a">solve</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>)</td></tr>
+<tr class="memdesc:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <br /></td></tr>
+<tr class="separator:a223cef84c48a2aa9fb387ed4ffaaf48a inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase" id="r_ab5ad285a4cb503c9c962ff7e8d89857f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ComplexMatrixBase.html#ab5ad285a4cb503c9c962ff7e8d89857f">max_residual</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <br /></td></tr>
+<tr class="separator:ab5ad285a4cb503c9c962ff7e8d89857f inherit pub_methods_classoomph_1_1ComplexMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DenseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DenseMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;</a></td></tr>
+<tr class="memitem:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix" id="r_aecfca835918b50b607e080fc706b6fcf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aecfca835918b50b607e080fc706b6fcf">DenseMatrix</a> ()</td></tr>
+<tr class="memdesc:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor, simply assign the lengths N and M to 0.  <br /></td></tr>
+<tr class="separator:aecfca835918b50b607e080fc706b6fcf inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a1d8bf7ffb6cc91b882be17b25ff6d452"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a1d8bf7ffb6cc91b882be17b25ff6d452">DenseMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_matrix</a>)</td></tr>
+<tr class="memdesc:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor: Deep copy!  <br /></td></tr>
+<tr class="separator:a1d8bf7ffb6cc91b882be17b25ff6d452 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a2291404def276dcee1a6099d054d44d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a2291404def276dcee1a6099d054d44d6">DenseMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a square n by n matrix.  <br /></td></tr>
+<tr class="separator:a2291404def276dcee1a6099d054d44d6 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a5afcfd56a9720541e67a6e8d002016d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a5afcfd56a9720541e67a6e8d002016d4">DenseMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns.  <br /></td></tr>
+<tr class="separator:a5afcfd56a9720541e67a6e8d002016d4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a7b599610bd78a7818b2e4d0835b27e3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a7b599610bd78a7818b2e4d0835b27e3a">DenseMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_val</a>)</td></tr>
+<tr class="memdesc:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to build a matrix with n rows and m columns, with initial value initial_val.  <br /></td></tr>
+<tr class="separator:a7b599610bd78a7818b2e4d0835b27e3a inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01b02acc166aa69ec0a7d9153076b5f4 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a01b02acc166aa69ec0a7d9153076b5f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a01b02acc166aa69ec0a7d9153076b5f4">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_matrix</a>)</td></tr>
+<tr class="memdesc:a01b02acc166aa69ec0a7d9153076b5f4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment.  <br /></td></tr>
+<tr class="separator:a01b02acc166aa69ec0a7d9153076b5f4 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a727aed44cb4b695daa4120178517c03d inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a727aed44cb4b695daa4120178517c03d"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a727aed44cb4b695daa4120178517c03d">entry</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a727aed44cb4b695daa4120178517c03d inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">The access function that will be called by the read-write round-bracket operator.  <br /></td></tr>
+<tr class="separator:a727aed44cb4b695daa4120178517c03d inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a0b03682b4c7d8f820599bd2681a01ee0"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a0b03682b4c7d8f820599bd2681a01ee0">get_entry</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">The access function the will be called by the read-only (const version) round-bracket operator.  <br /></td></tr>
+<tr class="separator:a0b03682b4c7d8f820599bd2681a01ee0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a673e04c72174ec084e56ad5f53ba51da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a673e04c72174ec084e56ad5f53ba51da">~DenseMatrix</a> ()</td></tr>
+<tr class="memdesc:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, clean up the matrix data.  <br /></td></tr>
+<tr class="separator:a673e04c72174ec084e56ad5f53ba51da inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a1b425094510d833ffe91920747a0a962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a1b425094510d833ffe91920747a0a962">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <br /></td></tr>
+<tr class="separator:a1b425094510d833ffe91920747a0a962 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a9937181f1cb4cfaed7aaf3b483c42456"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a9937181f1cb4cfaed7aaf3b483c42456">ncol</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <br /></td></tr>
+<tr class="separator:a9937181f1cb4cfaed7aaf3b483c42456 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec1ef741b1c5048a12ba9a540c2719c inherit pub_methods_classoomph_1_1DenseMatrix" id="r_adec1ef741b1c5048a12ba9a540c2719c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#adec1ef741b1c5048a12ba9a540c2719c">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:adec1ef741b1c5048a12ba9a540c2719c inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a square nxn matrix; any values already present will be transfered.  <br /></td></tr>
+<tr class="separator:adec1ef741b1c5048a12ba9a540c2719c inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a0f01dd97b1c71868371f93259efc26b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a0f01dd97b1c71868371f93259efc26b0">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a non-square n x m matrix; any values already present will be transfered.  <br /></td></tr>
+<tr class="separator:a0f01dd97b1c71868371f93259efc26b0 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_aeb6daf6539fee8d3d6f7a81306798b10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aeb6daf6539fee8d3d6f7a81306798b10">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>)</td></tr>
+<tr class="memdesc:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a non-square n x m matrix and initialize the new values to initial_value.  <br /></td></tr>
+<tr class="separator:aeb6daf6539fee8d3d6f7a81306798b10 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix" id="r_aafcfbb0309fdcbd84f8654fe1b5601fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aafcfbb0309fdcbd84f8654fe1b5601fd">initialise</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">val</a>)</td></tr>
+<tr class="memdesc:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize all values in the matrix to val.  <br /></td></tr>
+<tr class="separator:aafcfbb0309fdcbd84f8654fe1b5601fd inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a03e20626e889a1ab4582614f55784165"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a03e20626e889a1ab4582614f55784165">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row to the stream outfile.  <br /></td></tr>
+<tr class="separator:a03e20626e889a1ab4582614f55784165 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a4ab60b1e7db98bcb5b75b080266e452e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a4ab60b1e7db98bcb5b75b080266e452e">output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row to a file. Specify filename.  <br /></td></tr>
+<tr class="separator:a4ab60b1e7db98bcb5b75b080266e452e inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a440b549690cfc07c85f395eb06951321"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a440b549690cfc07c85f395eb06951321">indexed_output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j)  <br /></td></tr>
+<tr class="separator:a440b549690cfc07c85f395eb06951321 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a5730d359fa98ea501ab7115147a4bd87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a5730d359fa98ea501ab7115147a4bd87">indexed_output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to a file as i,j,a(i,j). Specify filename.  <br /></td></tr>
+<tr class="separator:a5730d359fa98ea501ab7115147a4bd87 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_aa02dc7c9b2f4e1cc1204cc8281f030f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aa02dc7c9b2f4e1cc1204cc8281f030f9">output_bottom_right_zero_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:aa02dc7c9b2f4e1cc1204cc8281f030f9 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix" id="r_a6e9084acc11e036d4c5f7e5322d12034"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a6e9084acc11e036d4c5f7e5322d12034">sparse_indexed_output_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <br /></td></tr>
+<tr class="separator:a6e9084acc11e036d4c5f7e5322d12034 inherit pub_methods_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix" id="r_ab414a0bf8e2658fc30d2c516f3bf4837"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ab414a0bf8e2658fc30d2c516f3bf4837">Matrix</a> ()</td></tr>
+<tr class="memdesc:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor  <br /></td></tr>
+<tr class="separator:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix" id="r_ac40b846daa81698ea61aba9dfb1ae361"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac40b846daa81698ea61aba9dfb1ae361">Matrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix" id="r_a81c8f71e6eae8ebf79aa206666e666b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a81c8f71e6eae8ebf79aa206666e666b4">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix" id="r_a3bc2eeb0940268de5252a9234d126f11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a3bc2eeb0940268de5252a9234d126f11">~Matrix</a> ()</td></tr>
+<tr class="memdesc:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual (empty) destructor.  <br /></td></tr>
+<tr class="separator:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix" id="r_a26f23d2b331cb7f533fd8585f1ef8d28"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a26f23d2b331cb7f533fd8585f1ef8d28">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read only (we're not providing a general interface for component-wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX_TYPE template parameter to call the get_entry() function which must be defined in all derived classes that are to be fully instantiated.  <br /></td></tr>
+<tr class="separator:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix" id="r_a0f6a65782771830fd4fa1a16284c6bc9"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a0f6a65782771830fd4fa1a16284c6bc9">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read-write access. The function uses the MATRIX_TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular <a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> does not allow write access, the function should break with an error message.  <br /></td></tr>
+<tr class="separator:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix" id="r_a4f97fa3c94e6fd664e46acb8873a80f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a4f97fa3c94e6fd664e46acb8873a80f8">sparse_indexed_output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix" id="r_ac7473fb07d4db925b4cf3a22131b561a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac7473fb07d4db925b4cf3a22131b561a">sparse_indexed_output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aae7ac20408c4459c59c505f1d40caa80" id="r_aae7ac20408c4459c59c505f1d40caa80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#aae7ac20408c4459c59c505f1d40caa80">delete_lu_factors</a> ()</td></tr>
+<tr class="memdesc:aae7ac20408c4459c59c505f1d40caa80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that deletes the storage for the LU_factors, if it is not the same as the matrix storage.  <br /></td></tr>
+<tr class="separator:aae7ac20408c4459c59c505f1d40caa80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a477e3c52ed0b3bca35213d12f615050d" id="r_a477e3c52ed0b3bca35213d12f615050d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a477e3c52ed0b3bca35213d12f615050d">Index</a></td></tr>
+<tr class="memdesc:a477e3c52ed0b3bca35213d12f615050d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to storage for the index of permutations in the LU solve.  <br /></td></tr>
+<tr class="separator:a477e3c52ed0b3bca35213d12f615050d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae14fa899e9257ee36e4d251502886f25" id="r_ae14fa899e9257ee36e4d251502886f25"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#ae14fa899e9257ee36e4d251502886f25">LU_factors</a></td></tr>
+<tr class="memdesc:ae14fa899e9257ee36e4d251502886f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to storage for the LU decomposition.  <br /></td></tr>
+<tr class="separator:ae14fa899e9257ee36e4d251502886f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae372ffdc13620ac561baf9a8d0cbf0" id="r_a0ae372ffdc13620ac561baf9a8d0cbf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseComplexMatrix.html#a0ae372ffdc13620ac561baf9a8d0cbf0">Overwrite_matrix_storage</a></td></tr>
+<tr class="memdesc:a0ae372ffdc13620ac561baf9a8d0cbf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag used to decided whether the LU decomposition is stored separately, or not.  <br /></td></tr>
+<tr class="separator:a0ae372ffdc13620ac561baf9a8d0cbf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix" id="r_a2fed2ea1840638eb0ddaa2d4ab1da82f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a2fed2ea1840638eb0ddaa2d4ab1da82f">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html" title="An OomphLibError object which should be thrown when an run-time error is encountered....">OomphLibError</a></code>.  <br /></td></tr>
+<tr class="separator:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1DenseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1DenseMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1DenseMatrix.html">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;</a></td></tr>
+<tr class="memitem:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix" id="r_a92a2eea603a42e22fd4d3ea0a258e6f8"><td class="memItemLeft" align="right" valign="top">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a92a2eea603a42e22fd4d3ea0a258e6f8">Matrixdata</a></td></tr>
+<tr class="memdesc:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal representation of matrix as a pointer to data.  <br /></td></tr>
+<tr class="separator:a92a2eea603a42e22fd4d3ea0a258e6f8 inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix" id="r_a23cb539be0b4ef0381b9f18e8e50f75e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#a23cb539be0b4ef0381b9f18e8e50f75e">N</a></td></tr>
+<tr class="memdesc:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows.  <br /></td></tr>
+<tr class="separator:a23cb539be0b4ef0381b9f18e8e50f75e inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix" id="r_aa36631ee95fe55afe697377b03d05d6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DenseMatrix.html#aa36631ee95fe55afe697377b03d05d6a">M</a></td></tr>
+<tr class="memdesc:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns.  <br /></td></tr>
+<tr class="separator:aa36631ee95fe55afe697377b03d05d6a inherit pro_attribs_classoomph_1_1DenseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class of matrices containing double complex, and stored as a <a class="el" href="classoomph_1_1DenseMatrix.html" title="Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorte...">DenseMatrix</a>&lt;complex&lt;double&gt; &gt;, but with solving functionality inherited from the abstract ComplexMatrix class. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00153">153</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad199664c8603ef3da91c76c3347d84d4" name="ad199664c8603ef3da91c76c3347d84d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad199664c8603ef3da91c76c3347d84d4">&#9670;&#160;</a></span>DenseComplexMatrix() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor, simply assign the lengths N and M to 0. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00173">173</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="ac716f53db14021238edef4e385f6b319" name="ac716f53db14021238edef4e385f6b319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac716f53db14021238edef4e385f6b319">&#9670;&#160;</a></span>DenseComplexMatrix() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor to build a square n by n matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00182">182</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="ab17bdf75fb6cec1bbae74a0abac8e69a" name="ab17bdf75fb6cec1bbae74a0abac8e69a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17bdf75fb6cec1bbae74a0abac8e69a">&#9670;&#160;</a></span>DenseComplexMatrix() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor to build a matrix with n rows and m columns. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00191">191</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a88144ac8dc64438f77b2aec56b283e87" name="a88144ac8dc64438f77b2aec56b283e87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88144ac8dc64438f77b2aec56b283e87">&#9670;&#160;</a></span>DenseComplexMatrix() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>initial_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor to build a matrix with n rows and m columns, with initial value initial_val. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00201">201</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="aae57e49bd8bd12fa20ec0fe14ef4ffe5" name="aae57e49bd8bd12fa20ec0fe14ef4ffe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae57e49bd8bd12fa20ec0fe14ef4ffe5">&#9670;&#160;</a></span>DenseComplexMatrix() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseComplexMatrix.html">DenseComplexMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a157f9dac417c294a9082efeffc123f2d" name="a157f9dac417c294a9082efeffc123f2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a157f9dac417c294a9082efeffc123f2d">&#9670;&#160;</a></span>~DenseComplexMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DenseComplexMatrix::~DenseComplexMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor, delete the storage for Index vector and LU storage (if any) </p>
+<p>Destructor clean up the LU factors that have been allocated. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00105">105</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00158">Index</a>, and <a class="el" href="complex__matrices_8h_source.html#l00161">LU_factors</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aae7ac20408c4459c59c505f1d40caa80" name="aae7ac20408c4459c59c505f1d40caa80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7ac20408c4459c59c505f1d40caa80">&#9670;&#160;</a></span>delete_lu_factors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::delete_lu_factors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that deletes the storage for the LU_factors, if it is not the same as the matrix storage. </p>
+<p>Delete the storage that has been allocated for the LU factors, if the matrix data is not itself being overwritten. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00088">88</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00161">LU_factors</a>, and <a class="el" href="complex__matrices_8h_source.html#l00165">Overwrite_matrix_storage</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00122">ludecompose()</a>.</p>
+
+</div>
+</div>
+<a id="abcd909e71bdcae1059eb8779de72a99d" name="abcd909e71bdcae1059eb8779de72a99d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcd909e71bdcae1059eb8779de72a99d">&#9670;&#160;</a></span>lubksub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::lubksub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the LU back substitution. Note that the rhs will be overwritten with the solution vector. </p>
+<p>Back substitute an LU decomposed matrix. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aa0e444d60d4ec9e35a6903ab88baaf62">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00377">377</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00158">Index</a>, <a class="el" href="complex__matrices_8h_source.html#l00161">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00395">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00392">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="a8503c0e46409613c58261ce6136f88b9" name="a8503c0e46409613c58261ce6136f88b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8503c0e46409613c58261ce6136f88b9">&#9670;&#160;</a></span>ludecompose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::DenseComplexMatrix::ludecompose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the LU decomposition. For this storage scheme the matrix storage will be over-writeen by its LU decomposition. </p>
+<p>LU decompose a matrix, over-writing it and recording the pivots numbers in the Index vector. Returns the sign of the determinant. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a11e1beeb7767e9bc5e511c17f80f097f">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00122">122</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, <a class="el" href="matrices_8h_source.html#l00447">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="complex__matrices_8h_source.html#l00158">Index</a>, <a class="el" href="fpdiff_8cc_source.html#l00123">oomph::lower()</a>, <a class="el" href="complex__matrices_8h_source.html#l00161">LU_factors</a>, <a class="el" href="matrices_8h_source.html#l00395">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00389">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00392">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="complex__matrices_8h_source.html#l00165">Overwrite_matrix_storage</a>.</p>
+
+</div>
+</div>
+<a id="afcc47dd450a1ab37d2790b5d0279cadf" name="afcc47dd450a1ab37d2790b5d0279cadf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcc47dd450a1ab37d2790b5d0279cadf">&#9670;&#160;</a></span>multiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the matrix by the vector x: soln=Ax. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a730c106643464a29ebf0660a6921ebaa">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00510">510</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00395">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00389">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00392">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="aaaf8f0589e011bf720791058711fa952" name="aaaf8f0589e011bf720791058711fa952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf8f0589e011bf720791058711fa952">&#9670;&#160;</a></span>multiply_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::multiply_transpose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a90c7832bad84aad3d0f437925efb089a">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l01078">1078</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00395">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00389">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00392">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="a4101f581e470c940bf7daf12ec1b234f" name="a4101f581e470c940bf7daf12ec1b234f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4101f581e470c940bf7daf12ec1b234f">&#9670;&#160;</a></span>ncol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::DenseComplexMatrix::ncol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of columns of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a849b63e50dad36ca8b20b7bdefd34b8d">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00225">225</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00225">ncol()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00225">ncol()</a>.</p>
+
+</div>
+</div>
+<a id="aea9edba37ef5fd679d17f22eaeb85369" name="aea9edba37ef5fd679d17f22eaeb85369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea9edba37ef5fd679d17f22eaeb85369">&#9670;&#160;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::DenseComplexMatrix::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of rows of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00219">219</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__matrices_8h_source.html#l00219">nrow()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8h_source.html#l00219">nrow()</a>.</p>
+
+</div>
+</div>
+<a id="a7d6b3f5cf4471460313bb160f18da801" name="a7d6b3f5cf4471460313bb160f18da801"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d6b3f5cf4471460313bb160f18da801">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp; oomph::DenseComplexMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the non-const version of the round-bracket access operator for read-write access. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00240">240</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00447">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="acc2ba6bbaa9f0e17b7711b5168fbae72" name="acc2ba6bbaa9f0e17b7711b5168fbae72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2ba6bbaa9f0e17b7711b5168fbae72">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; oomph::DenseComplexMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the const version of the round-bracket access operator for read-only access. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#a2140730b879cfc6ea58bba5a34e6c197">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00232">232</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00457">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ac210414e7780ba8da7fbb0676002168f" name="ac210414e7780ba8da7fbb0676002168f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac210414e7780ba8da7fbb0676002168f">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseComplexMatrix.html">DenseComplexMatrix</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a76146afe81a055af475a107231468afb" name="a76146afe81a055af475a107231468afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76146afe81a055af475a107231468afb">&#9670;&#160;</a></span>residual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DenseComplexMatrix::residual </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residual</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find the residual of Ax=b, ie r=b-Ax for the "solution" x. </p>
+<p>Find the residual of Ax=b, i.e. r=b-Ax. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ComplexMatrixBase.html#aec72875402b9ba387e0724d6c2597430">oomph::ComplexMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8cc_source.html#l00453">453</a> of file <a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00395">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l00389">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::Matrixdata</a>, <a class="el" href="matrices_8h_source.html#l00392">oomph::DenseMatrix&lt; std::complex&lt; double &gt; &gt;::N</a>, <a class="el" href="complex__matrices_8cc_source.html#l00453">residual()</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00453">residual()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a477e3c52ed0b3bca35213d12f615050d" name="a477e3c52ed0b3bca35213d12f615050d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a477e3c52ed0b3bca35213d12f615050d">&#9670;&#160;</a></span>Index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&gt;* oomph::DenseComplexMatrix::Index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to storage for the index of permutations in the LU solve. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00158">158</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00377">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00122">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00105">~DenseComplexMatrix()</a>.</p>
+
+</div>
+</div>
+<a id="ae14fa899e9257ee36e4d251502886f25" name="ae14fa899e9257ee36e4d251502886f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae14fa899e9257ee36e4d251502886f25">&#9670;&#160;</a></span>LU_factors</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&gt;* oomph::DenseComplexMatrix::LU_factors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to storage for the LU decomposition. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00161">161</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00377">lubksub()</a>, <a class="el" href="complex__matrices_8cc_source.html#l00122">ludecompose()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00105">~DenseComplexMatrix()</a>.</p>
+
+</div>
+</div>
+<a id="a0ae372ffdc13620ac561baf9a8d0cbf0" name="a0ae372ffdc13620ac561baf9a8d0cbf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae372ffdc13620ac561baf9a8d0cbf0">&#9670;&#160;</a></span>Overwrite_matrix_storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::DenseComplexMatrix::Overwrite_matrix_storage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag used to decided whether the LU decomposition is stored separately, or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__matrices_8h_source.html#l00165">165</a> of file <a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__matrices_8cc_source.html#l00088">delete_lu_factors()</a>, and <a class="el" href="complex__matrices_8cc_source.html#l00122">ludecompose()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="complex__matrices_8h_source.html">complex_matrices.h</a></li>
+<li><a class="el" href="complex__matrices_8cc_source.html">complex_matrices.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:48
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

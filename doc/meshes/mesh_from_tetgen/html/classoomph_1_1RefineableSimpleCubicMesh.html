@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableSimpleCubicMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableSimpleCubicMesh.html">RefineableSimpleCubicMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1RefineableSimpleCubicMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RefineableSimpleCubicMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Refineable version of simple cubic 3D Brick mesh class.  
+ <a href="classoomph_1_1RefineableSimpleCubicMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="simple__cubic__mesh_8h_source.html">simple_cubic_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableSimpleCubicMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableSimpleCubicMesh.png" usemap="#oomph::RefineableSimpleCubicMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::RefineableSimpleCubicMesh_3C_20ELEMENT_20_3E_map" name="oomph::RefineableSimpleCubicMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1SimpleCubicMesh.html" title="Simple cubic 3D Brick mesh class." alt="oomph::SimpleCubicMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,298,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a71fab83f3bdc3f0cf7676afb5e313d10" id="r_a71fab83f3bdc3f0cf7676afb5e313d10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableSimpleCubicMesh.html#a71fab83f3bdc3f0cf7676afb5e313d10">RefineableSimpleCubicMesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a1a147873325b08e1715828d500cd4d95">nx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a860fc1de52fdb189cbc64b0ca13efc20">ny</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a30a7daf6d2841672f4d7e32041e81957">nz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">lx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ly</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">lz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a71fab83f3bdc3f0cf7676afb5e313d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady.  <br /></td></tr>
+<tr class="separator:a71fab83f3bdc3f0cf7676afb5e313d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a058dc3781f5bf9b5580380e1161ad7d5" id="r_a058dc3781f5bf9b5580380e1161ad7d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableSimpleCubicMesh.html#a058dc3781f5bf9b5580380e1161ad7d5">RefineableSimpleCubicMesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a1a147873325b08e1715828d500cd4d95">nx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a860fc1de52fdb189cbc64b0ca13efc20">ny</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a30a7daf6d2841672f4d7e32041e81957">nz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">xmin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">xmax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ymin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ymax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zmin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zmax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a058dc3781f5bf9b5580380e1161ad7d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction.  <br /></td></tr>
+<tr class="separator:a058dc3781f5bf9b5580380e1161ad7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh" id="r_a6732b9fc1cd2e98929158fc300b5b0c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a6732b9fc1cd2e98929158fc300b5b0c7">SimpleCubicMesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a1a147873325b08e1715828d500cd4d95">nx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a860fc1de52fdb189cbc64b0ca13efc20">ny</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a30a7daf6d2841672f4d7e32041e81957">nz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">lx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ly</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">lz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady.  <br /></td></tr>
+<tr class="separator:a6732b9fc1cd2e98929158fc300b5b0c7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh" id="r_a22d32a0d85ab3ec9ac3e52cad0bb81d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a22d32a0d85ab3ec9ac3e52cad0bb81d7">SimpleCubicMesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a1a147873325b08e1715828d500cd4d95">nx</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a860fc1de52fdb189cbc64b0ca13efc20">ny</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleCubicMesh.html#a30a7daf6d2841672f4d7e32041e81957">nz</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">xmin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">xmax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ymin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">ymax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zmin</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zmax</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction.  <br /></td></tr>
+<tr class="separator:a22d32a0d85ab3ec9ac3e52cad0bb81d7 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a147873325b08e1715828d500cd4d95 inherit pub_methods_classoomph_1_1SimpleCubicMesh" id="r_a1a147873325b08e1715828d500cd4d95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a1a147873325b08e1715828d500cd4d95">nx</a> () <a class="el" href="classoomph_1_1TetgenMesh.html">const</a></td></tr>
+<tr class="memdesc:a1a147873325b08e1715828d500cd4d95 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in x directions.  <br /></td></tr>
+<tr class="separator:a1a147873325b08e1715828d500cd4d95 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a860fc1de52fdb189cbc64b0ca13efc20 inherit pub_methods_classoomph_1_1SimpleCubicMesh" id="r_a860fc1de52fdb189cbc64b0ca13efc20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a860fc1de52fdb189cbc64b0ca13efc20">ny</a> () <a class="el" href="classoomph_1_1TetgenMesh.html">const</a></td></tr>
+<tr class="memdesc:a860fc1de52fdb189cbc64b0ca13efc20 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in y directions.  <br /></td></tr>
+<tr class="separator:a860fc1de52fdb189cbc64b0ca13efc20 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a7daf6d2841672f4d7e32041e81957 inherit pub_methods_classoomph_1_1SimpleCubicMesh" id="r_a30a7daf6d2841672f4d7e32041e81957"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a30a7daf6d2841672f4d7e32041e81957">nz</a> () <a class="el" href="classoomph_1_1TetgenMesh.html">const</a></td></tr>
+<tr class="memdesc:a30a7daf6d2841672f4d7e32041e81957 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in y directions.  <br /></td></tr>
+<tr class="separator:a30a7daf6d2841672f4d7e32041e81957 inherit pub_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh" id="r_aea141bf600aaed7c7c9ccfa3f4f1edfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aea141bf600aaed7c7c9ccfa3f4f1edfc">build_mesh</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function: contains all the hard work.  <br /></td></tr>
+<tr class="separator:aea141bf600aaed7c7c9ccfa3f4f1edfc inherit pro_methods_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1SimpleCubicMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1SimpleCubicMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1SimpleCubicMesh.html">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_aad51fb31a4f31f2681740793a07594e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aad51fb31a4f31f2681740793a07594e9">Nx</a></td></tr>
+<tr class="memdesc:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in x direction.  <br /></td></tr>
+<tr class="separator:aad51fb31a4f31f2681740793a07594e9 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_a084445d7cbea1c3d1d67739934bbd6ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a084445d7cbea1c3d1d67739934bbd6ec">Ny</a></td></tr>
+<tr class="memdesc:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in y direction.  <br /></td></tr>
+<tr class="separator:a084445d7cbea1c3d1d67739934bbd6ec inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_a370e4597208fa51bca60750ae1e5acd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a370e4597208fa51bca60750ae1e5acd4">Nz</a></td></tr>
+<tr class="memdesc:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in y direction.  <br /></td></tr>
+<tr class="separator:a370e4597208fa51bca60750ae1e5acd4 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_ad04c180e97b51e795d79759916006d0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad04c180e97b51e795d79759916006d0f">Xmin</a></td></tr>
+<tr class="memdesc:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of x coordinate.  <br /></td></tr>
+<tr class="separator:ad04c180e97b51e795d79759916006d0f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_afdfcb28e93c910a57b9c6ab116f5fd2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#afdfcb28e93c910a57b9c6ab116f5fd2f">Xmax</a></td></tr>
+<tr class="memdesc:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of x coordinate.  <br /></td></tr>
+<tr class="separator:afdfcb28e93c910a57b9c6ab116f5fd2f inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_a7a004fc52edde081924073c49b0dd853"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a7a004fc52edde081924073c49b0dd853">Ymin</a></td></tr>
+<tr class="memdesc:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <br /></td></tr>
+<tr class="separator:a7a004fc52edde081924073c49b0dd853 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_a7933aa6e3d1755d6a5fbcc2a16af79a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#a7933aa6e3d1755d6a5fbcc2a16af79a7">Ymax</a></td></tr>
+<tr class="memdesc:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of y coordinate.  <br /></td></tr>
+<tr class="separator:a7933aa6e3d1755d6a5fbcc2a16af79a7 inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_af01c08e1e33360eaa2102d0bebb11bcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#af01c08e1e33360eaa2102d0bebb11bcd">Zmin</a></td></tr>
+<tr class="memdesc:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value of z coordinate.  <br /></td></tr>
+<tr class="separator:af01c08e1e33360eaa2102d0bebb11bcd inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh" id="r_aec11ab3ae84b1ba658024d833b7eafbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SimpleCubicMesh.html#aec11ab3ae84b1ba658024d833b7eafbf">Zmax</a></td></tr>
+<tr class="memdesc:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum value of z coordinate.  <br /></td></tr>
+<tr class="separator:aec11ab3ae84b1ba658024d833b7eafbf inherit pro_attribs_classoomph_1_1SimpleCubicMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1TetgenMesh.html">class</a> <a class="el" href="classoomph_1_1TetgenMesh.html">ELEMENT</a>&gt;<br />
+class oomph::RefineableSimpleCubicMesh&lt; ELEMENT &gt;</div><p>Refineable version of simple cubic 3D Brick mesh class. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__cubic__mesh_8h_source.html#l00165">165</a> of file <a class="el" href="simple__cubic__mesh_8h_source.html">simple_cubic_mesh.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a71fab83f3bdc3f0cf7676afb5e313d10" name="a71fab83f3bdc3f0cf7676afb5e313d10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71fab83f3bdc3f0cf7676afb5e313d10">&#9670;&#160;</a></span>RefineableSimpleCubicMesh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TetgenMesh.html">class</a> <a class="el" href="classoomph_1_1TetgenMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableSimpleCubicMesh.html">oomph::RefineableSimpleCubicMesh</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">ELEMENT</a> &gt;::RefineableSimpleCubicMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__cubic__mesh_8h_source.html#l00172">172</a> of file <a class="el" href="simple__cubic__mesh_8h_source.html">simple_cubic_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a058dc3781f5bf9b5580380e1161ad7d5" name="a058dc3781f5bf9b5580380e1161ad7d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a058dc3781f5bf9b5580380e1161ad7d5">&#9670;&#160;</a></span>RefineableSimpleCubicMesh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TetgenMesh.html">class</a> <a class="el" href="classoomph_1_1TetgenMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableSimpleCubicMesh.html">oomph::RefineableSimpleCubicMesh</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">ELEMENT</a> &gt;::RefineableSimpleCubicMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ymin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ymax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="simple__cubic__mesh_8h_source.html#l00191">191</a> of file <a class="el" href="simple__cubic__mesh_8h_source.html">simple_cubic_mesh.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="simple__cubic__mesh_8h_source.html">simple_cubic_mesh.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

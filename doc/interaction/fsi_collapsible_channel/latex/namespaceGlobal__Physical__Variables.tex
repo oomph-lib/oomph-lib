@@ -1,0 +1,242 @@
+\doxysection{Global\+\_\+\+Physical\+\_\+\+Variables Namespace Reference}
+\hypertarget{namespaceGlobal__Physical__Variables}{}\label{namespaceGlobal__Physical__Variables}\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+
+
+Namespace for phyical parameters.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{prescribed\+\_\+traction}} (\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{x}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{n}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{traction}})
+\begin{DoxyCompactList}\small\item\em Traction applied on the fluid at the left (inflow) boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{load}} (\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{xi}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{x}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{N}}, \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Re\+St}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}{P\+\_\+up}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Default pressure on the left boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}} =1.\+0e-\/2
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional wall thickness. As in Jensen \& Heil (2003) paper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}{Sigma0}} =1.\+0e3
+\begin{DoxyCompactList}\small\item\em 2nd Piola Kirchhoff pre-\/stress. As in Jensen \& Heil (2003) paper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{P\+\_\+ext}} =0.\+0
+\begin{DoxyCompactList}\small\item\em External pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} =1.\+0e-\/5
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\+\_\+sq}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid mass density. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for phyical parameters. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}\label{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!load@{load}}
+\index{load@{load}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{void}} Global\+\_\+\+Physical\+\_\+\+Variables\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{209}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00204}{P\+\_\+ext}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}\label{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!prescribed\_traction@{prescribed\_traction}}
+\index{prescribed\_traction@{prescribed\_traction}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{prescribed\_traction()}{prescribed\_traction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{void}} Global\+\_\+\+Physical\+\_\+\+Variables\+::prescribed\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} \&}]{t,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classElasticCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Traction applied on the fluid at the left (inflow) boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00186}{186}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00183}{P\+\_\+up}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00897}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}\label{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!H@{H}}
+\index{H@{H}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::H =1.\+0e-\/2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Non-\/dimensional wall thickness. As in Jensen \& Heil (2003) paper. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00198}{198}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}\label{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Lambda\_sq@{Lambda\_sq}}
+\index{Lambda\_sq@{Lambda\_sq}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Lambda\_sq}{Lambda\_sq}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq =0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pseudo-\/solid mass density. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00225}{225}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}\label{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu =0.\+1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pseudo-\/solid Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00228}{228}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}\label{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_ext@{P\_ext}}
+\index{P\_ext@{P\_ext}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{P\_ext}{P\_ext}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext =0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+External pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00204}{204}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00668}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00059}{Elastic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00059}{Elastic\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00811}{main()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}\label{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_up@{P\_up}}
+\index{P\_up@{P\_up}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{P\_up}{P\_up}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up =0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default pressure on the left boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00183}{183}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00059}{Elastic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00059}{Elastic\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00811}{main()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00186}{prescribed\+\_\+traction()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}\label{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Q@{Q}}
+\index{Q@{Q}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::Q =1.\+0e-\/5\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00221}{221}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}\label{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Re@{Re}}
+\index{Re@{Re}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Re}{Re}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re =50.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Reynolds number. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00177}{177}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}\label{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!ReSt@{ReSt}}
+\index{ReSt@{ReSt}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{ReSt}{ReSt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St =50.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Womersley = Reynolds times Strouhal. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00180}{180}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}\label{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2} 
+\index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Sigma0@{Sigma0}}
+\index{Sigma0@{Sigma0}!Global\_Physical\_Variables@{Global\_Physical\_Variables}}
+\doxysubsubsection{\texorpdfstring{Sigma0}{Sigma0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticCollapsibleChannelMesh}{double}} Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0 =1.\+0e3\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+2nd Piola Kirchhoff pre-\/stress. As in Jensen \& Heil (2003) paper. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00201}{201}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
+

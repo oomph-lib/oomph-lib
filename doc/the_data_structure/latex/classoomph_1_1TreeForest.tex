@@ -1,0 +1,332 @@
+\doxysection{oomph\+::Tree\+Forest Class Reference}
+\hypertarget{classoomph_1_1TreeForest}{}\label{classoomph_1_1TreeForest}\index{oomph::TreeForest@{oomph::TreeForest}}
+
+
+A \doxylink{classoomph_1_1TreeForest}{Tree\+Forest} consists of a collection of Tree\+Roots. Each member tree can have neighbours in various enumerated directions (e.\+g. S/\+W/\+N/E for a \doxylink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}) and the orientation of their compasses can differ, allowing for complex, unstructured meshes.  
+
+
+
+
+{\ttfamily \#include $<$tree.\+h$>$}
+
+Inheritance diagram for oomph\+::Tree\+Forest\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TreeForest}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TreeForest_a9d2be69c257888e0c1c79c9073c67cfa}{Tree\+Forest}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{trees\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classoomph_1_1Tree}{Tree} forest\+: Pass \doxylink{classoomph_1_1Vector}{Vector} of (pointers to) constituents trees. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeForest_ac05719b25a53c4f27d94ed8535bf3d6a}{Tree\+Forest}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty and broken) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeForest_a2653898fb3a16a9d3cf3c7c60411a241}{Tree\+Forest}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a0aec23bbfcc8a432c91873a9c019315f}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TreeForest_abc55e7734f5e2de2c6943084008b5248}{\texorpdfstring{$\sim$}{\string~}\+Tree\+Forest}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Delete the constituent trees (and thus the objects associated with its non-\/leaf nodes!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a6d99d1f513a60b9bd053ff98699cbe52}{stick\+\_\+leaves\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{forest\+\_\+nodes}})
+\begin{DoxyCompactList}\small\item\em Traverse forst and stick pointers to leaf "{}nodes"{} into \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a40bd3735303f019892b03d6a5355c8db}{stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{all\+\_\+forest\+\_\+nodes}})
+\begin{DoxyCompactList}\small\item\em Traverse forest and stick pointers to all "{}nodes"{} into \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d8766c7679}{check\+\_\+all\+\_\+neighbours}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)=0
+\begin{DoxyCompactList}\small\item\em Document/check the neighbours of all the nodes in the forest. This must be overloaded for different types of forest. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e748608f}{open\+\_\+hanging\+\_\+node\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+stream}})=0
+\begin{DoxyCompactList}\small\item\em Open output files that will store any hanging nodes in the forest. Return a vector of the output streams. This is included in the tree structure, so that we can use generic routines for mesh adaptation in two and three dimensions. The need for pointers to the output streams is because one cannot copy a stream! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_ace63bb552b21ba46eb5ae062826dab26}{close\+\_\+hanging\+\_\+node\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+stream}})
+\begin{DoxyCompactList}\small\item\em Close output files that will store any hanging nodes in the forest and delete any associated storage. This can be performed genercially in this base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TreeForest_a6796a34cf1211f554a59055ff5765863}{ntree}} ()
+\begin{DoxyCompactList}\small\item\em Number of trees in forest. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TreeForest_aaa58320cabce1668093eca8647d5be26}{tree\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to i-\/th tree in forest. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TreeForest_a38e8313e3b672bdcba26be8a02cf7615}{flush\+\_\+trees}} ()
+\begin{DoxyCompactList}\small\item\em Flush trees from forest. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TreeForest_a94d44c85e121758945f04aa28aa8df2a}{Trees\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} containing the pointers to the trees. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \doxylink{classoomph_1_1TreeForest}{Tree\+Forest} consists of a collection of Tree\+Roots. Each member tree can have neighbours in various enumerated directions (e.\+g. S/\+W/\+N/E for a \doxylink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}) and the orientation of their compasses can differ, allowing for complex, unstructured meshes. 
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00408}{408}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TreeForest_a9d2be69c257888e0c1c79c9073c67cfa}\label{classoomph_1_1TreeForest_a9d2be69c257888e0c1c79c9073c67cfa} 
+\index{oomph::TreeForest@{oomph::TreeForest}!TreeForest@{TreeForest}}
+\index{TreeForest@{TreeForest}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{TreeForest()}{TreeForest()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Forest\+::\+Tree\+Forest (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} $>$ \&}]{trees\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{classoomph_1_1Tree}{Tree} forest\+: Pass \doxylink{classoomph_1_1Vector}{Vector} of (pointers to) constituents trees. 
+
+Constructor for \doxylink{classoomph_1_1TreeForest}{Tree\+Forest}\+:
+
+Pass\+:
+\begin{DoxyItemize}
+\item trees\+\_\+pt\mbox{[}\mbox{]}, the \doxylink{classoomph_1_1Vector}{Vector} of pointers to the constituent trees (\doxylink{classoomph_1_1TreeRoot}{Tree\+Root} objects)
+\end{DoxyItemize}
+
+Note that the pointers to the neighbour\textquotesingle{}s of each tree must have been allocated before the constructor is called, otherwise the relative rotation scheme will not be constructed correctly. 
+
+Definition at line \mbox{\hyperlink{tree_8cc_source_l00359}{359}} of file \mbox{\hyperlink{tree_8cc_source}{tree.\+cc}}.
+
+\Hypertarget{classoomph_1_1TreeForest_ac05719b25a53c4f27d94ed8535bf3d6a}\label{classoomph_1_1TreeForest_ac05719b25a53c4f27d94ed8535bf3d6a} 
+\index{oomph::TreeForest@{oomph::TreeForest}!TreeForest@{TreeForest}}
+\index{TreeForest@{TreeForest}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{TreeForest()}{TreeForest()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Forest\+::\+Tree\+Forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty and broken) 
+
+
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00416}{416}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a2653898fb3a16a9d3cf3c7c60411a241}\label{classoomph_1_1TreeForest_a2653898fb3a16a9d3cf3c7c60411a241} 
+\index{oomph::TreeForest@{oomph::TreeForest}!TreeForest@{TreeForest}}
+\index{TreeForest@{TreeForest}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{TreeForest()}{TreeForest()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Forest\+::\+Tree\+Forest (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1TreeForest_abc55e7734f5e2de2c6943084008b5248}\label{classoomph_1_1TreeForest_abc55e7734f5e2de2c6943084008b5248} 
+\index{oomph::TreeForest@{oomph::TreeForest}!````~TreeForest@{\texorpdfstring{$\sim$}{\string~}TreeForest}}
+\index{````~TreeForest@{\texorpdfstring{$\sim$}{\string~}TreeForest}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TreeForest()}{\string~TreeForest()}}
+{\footnotesize\ttfamily oomph\+::\+Tree\+Forest\+::\texorpdfstring{$\sim$}{\string~}\+Tree\+Forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor\+: Delete the constituent trees (and thus the objects associated with its non-\/leaf nodes!) 
+
+Kill tree forest\+: Delete the constituent trees. 
+
+Definition at line \mbox{\hyperlink{tree_8cc_source_l00364}{364}} of file \mbox{\hyperlink{tree_8cc_source}{tree.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tree_8h_source_l00480}{Trees\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d8766c7679}\label{classoomph_1_1TreeForest_a0e6a7f821d9f14374c6d23d8766c7679} 
+\index{oomph::TreeForest@{oomph::TreeForest}!check\_all\_neighbours@{check\_all\_neighbours}}
+\index{check\_all\_neighbours@{check\_all\_neighbours}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{check\_all\_neighbours()}{check\_all\_neighbours()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Document/check the neighbours of all the nodes in the forest. This must be overloaded for different types of forest. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a2e99234fcdc75760e00afb7d140c74ec}{oomph\+::\+Binary\+Tree\+Forest}}, \mbox{\hyperlink{classoomph_1_1OcTreeForest_a762eaa5790197e03146d42957c03b33e}{oomph\+::\+Oc\+Tree\+Forest}}, and \mbox{\hyperlink{classoomph_1_1QuadTreeForest_a7ae708ced04343303be644f87cb1c169}{oomph\+::\+Quad\+Tree\+Forest}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, and \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_ace63bb552b21ba46eb5ae062826dab26}\label{classoomph_1_1TreeForest_ace63bb552b21ba46eb5ae062826dab26} 
+\index{oomph::TreeForest@{oomph::TreeForest}!close\_hanging\_node\_files@{close\_hanging\_node\_files}}
+\index{close\_hanging\_node\_files@{close\_hanging\_node\_files}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{close\_hanging\_node\_files()}{close\_hanging\_node\_files()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::close\+\_\+hanging\+\_\+node\+\_\+files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream \texorpdfstring{$\ast$}{*} $>$ \&}]{output\+\_\+stream }\end{DoxyParamCaption})}
+
+
+
+Close output files that will store any hanging nodes in the forest and delete any associated storage. This can be performed genercially in this base class. 
+
+Close the hanging node output files and delete storage allocated at the pointers. This can be done generically at the base level. 
+
+Definition at line \mbox{\hyperlink{tree_8cc_source_l00432}{432}} of file \mbox{\hyperlink{tree_8cc_source}{tree.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00558}{oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, and \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a38e8313e3b672bdcba26be8a02cf7615}\label{classoomph_1_1TreeForest_a38e8313e3b672bdcba26be8a02cf7615} 
+\index{oomph::TreeForest@{oomph::TreeForest}!flush\_trees@{flush\_trees}}
+\index{flush\_trees@{flush\_trees}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{flush\_trees()}{flush\_trees()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::flush\+\_\+trees (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush trees from forest. 
+
+
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00472}{472}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+
+
+References \mbox{\hyperlink{tree_8h_source_l00480}{Trees\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__brick__mesh_8h_source_l00086}{oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+octree\+\_\+forest()}}, and \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00086}{oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+quadtree\+\_\+forest()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a6796a34cf1211f554a59055ff5765863}\label{classoomph_1_1TreeForest_a6796a34cf1211f554a59055ff5765863} 
+\index{oomph::TreeForest@{oomph::TreeForest}!ntree@{ntree}}
+\index{ntree@{ntree}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{ntree()}{ntree()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tree\+Forest\+::ntree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of trees in forest. 
+
+
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00460}{460}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tree_8h_source_l00480}{Trees\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{quadtree_8cc_source_l01067}{oomph\+::\+Quad\+Tree\+Forest\+::construct\+\_\+north\+\_\+equivalents()}}, \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00454}{oomph\+::\+Binary\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04913}{oomph\+::\+Oc\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l00891}{oomph\+::\+Quad\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00830}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$\+::p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00814}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$\+::split\+\_\+elements\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{tree_8cc_source_l00405}{stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}, and \mbox{\hyperlink{tree_8cc_source_l00379}{stick\+\_\+leaves\+\_\+into\+\_\+vector()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e748608f}\label{classoomph_1_1TreeForest_a635443274eaa2fb1afa889e4e748608f} 
+\index{oomph::TreeForest@{oomph::TreeForest}!open\_hanging\_node\_files@{open\_hanging\_node\_files}}
+\index{open\_hanging\_node\_files@{open\_hanging\_node\_files}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{open\_hanging\_node\_files()}{open\_hanging\_node\_files()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::open\+\_\+hanging\+\_\+node\+\_\+files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::ofstream \texorpdfstring{$\ast$}{*} $>$ \&}]{output\+\_\+stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Open output files that will store any hanging nodes in the forest. Return a vector of the output streams. This is included in the tree structure, so that we can use generic routines for mesh adaptation in two and three dimensions. The need for pointers to the output streams is because one cannot copy a stream! 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1BinaryTreeForest_a7cf07f826ebdb73a0270791a6f300f9e}{oomph\+::\+Binary\+Tree\+Forest}}, \mbox{\hyperlink{classoomph_1_1OcTreeForest_a34523b415aa855786831bca37f48d4cb}{oomph\+::\+Oc\+Tree\+Forest}}, and \mbox{\hyperlink{classoomph_1_1QuadTreeForest_acaf91cedf80490c307b9a4aff411439a}{oomph\+::\+Quad\+Tree\+Forest}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, and \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a0aec23bbfcc8a432c91873a9c019315f}\label{classoomph_1_1TreeForest_a0aec23bbfcc8a432c91873a9c019315f} 
+\index{oomph::TreeForest@{oomph::TreeForest}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TreeForest}{Tree\+Forest}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1TreeForest_a40bd3735303f019892b03d6a5355c8db}\label{classoomph_1_1TreeForest_a40bd3735303f019892b03d6a5355c8db} 
+\index{oomph::TreeForest@{oomph::TreeForest}!stick\_all\_tree\_nodes\_into\_vector@{stick\_all\_tree\_nodes\_into\_vector}}
+\index{stick\_all\_tree\_nodes\_into\_vector@{stick\_all\_tree\_nodes\_into\_vector}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{stick\_all\_tree\_nodes\_into\_vector()}{stick\_all\_tree\_nodes\_into\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&}]{all\+\_\+forest\+\_\+nodes }\end{DoxyParamCaption})}
+
+
+
+Traverse forest and stick pointers to all "{}nodes"{} into \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Traverse \doxylink{classoomph_1_1TreeForest}{Tree\+Forest}\+: Preorder traverse and stick pointers to all nodes into \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Definition at line \mbox{\hyperlink{tree_8cc_source_l00405}{405}} of file \mbox{\hyperlink{tree_8cc_source}{tree.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00129}{oomph\+::\+Tree\+::nsons()}}, \mbox{\hyperlink{tree_8h_source_l00460}{ntree()}}, \mbox{\hyperlink{tree_8h_source_l00103}{oomph\+::\+Tree\+::son\+\_\+pt()}}, \mbox{\hyperlink{tree_8cc_source_l00277}{oomph\+::\+Tree\+::stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}, and \mbox{\hyperlink{tree_8h_source_l00466}{tree\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00548}{oomph\+::\+Binary\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l05749}{oomph\+::\+Oc\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l01245}{oomph\+::\+Quad\+Tree\+Forest\+::check\+\_\+all\+\_\+neighbours()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00111}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+elements\+\_\+at\+\_\+refinement\+\_\+level()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00048}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::get\+\_\+refinement\+\_\+pattern()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00624}{oomph\+::\+Binary\+Tree\+Forest\+::self\+\_\+test()}}, \mbox{\hyperlink{octree_8cc_source_l05678}{oomph\+::\+Oc\+Tree\+Forest\+::self\+\_\+test()}}, \mbox{\hyperlink{quadtree_8cc_source_l01357}{oomph\+::\+Quad\+Tree\+Forest\+::self\+\_\+test()}}, \mbox{\hyperlink{refineable__brick__mesh_8h_source_l00086}{oomph\+::\+Refineable\+Brick\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+octree\+\_\+forest()}}, and \mbox{\hyperlink{refineable__quad__mesh_8h_source_l00086}{oomph\+::\+Refineable\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+quadtree\+\_\+forest()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_a6d99d1f513a60b9bd053ff98699cbe52}\label{classoomph_1_1TreeForest_a6d99d1f513a60b9bd053ff98699cbe52} 
+\index{oomph::TreeForest@{oomph::TreeForest}!stick\_leaves\_into\_vector@{stick\_leaves\_into\_vector}}
+\index{stick\_leaves\_into\_vector@{stick\_leaves\_into\_vector}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{stick\_leaves\_into\_vector()}{stick\_leaves\_into\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tree\+Forest\+::stick\+\_\+leaves\+\_\+into\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Tree}{Tree}} \texorpdfstring{$\ast$}{*} $>$ \&}]{forest\+\_\+nodes }\end{DoxyParamCaption})}
+
+
+
+Traverse forst and stick pointers to leaf "{}nodes"{} into \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Traverse \doxylink{classoomph_1_1TreeForest}{Tree\+Forest}\+: Preorder traverse and stick pointers to leaf nodes (only) into \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Definition at line \mbox{\hyperlink{tree_8cc_source_l00379}{379}} of file \mbox{\hyperlink{tree_8cc_source}{tree.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{tree_8h_source_l00129}{oomph\+::\+Tree\+::nsons()}}, \mbox{\hyperlink{tree_8h_source_l00460}{ntree()}}, \mbox{\hyperlink{tree_8h_source_l00103}{oomph\+::\+Tree\+::son\+\_\+pt()}}, \mbox{\hyperlink{tree_8cc_source_l00255}{oomph\+::\+Tree\+::stick\+\_\+leaves\+\_\+into\+\_\+vector()}}, and \mbox{\hyperlink{tree_8h_source_l00466}{tree\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, and \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1TreeForest_aaa58320cabce1668093eca8647d5be26}\label{classoomph_1_1TreeForest_aaa58320cabce1668093eca8647d5be26} 
+\index{oomph::TreeForest@{oomph::TreeForest}!tree\_pt@{tree\_pt}}
+\index{tree\_pt@{tree\_pt}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{tree\_pt()}{tree\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}} \texorpdfstring{$\ast$}{*} oomph\+::\+Tree\+Forest\+::tree\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to i-\/th tree in forest. 
+
+
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00466}{466}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tree_8h_source_l00480}{Trees\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00830}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$\+::p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00814}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$\+::split\+\_\+elements\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{tree_8cc_source_l00405}{stick\+\_\+all\+\_\+tree\+\_\+nodes\+\_\+into\+\_\+vector()}}, and \mbox{\hyperlink{tree_8cc_source_l00379}{stick\+\_\+leaves\+\_\+into\+\_\+vector()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TreeForest_a94d44c85e121758945f04aa28aa8df2a}\label{classoomph_1_1TreeForest_a94d44c85e121758945f04aa28aa8df2a} 
+\index{oomph::TreeForest@{oomph::TreeForest}!Trees\_pt@{Trees\_pt}}
+\index{Trees\_pt@{Trees\_pt}!oomph::TreeForest@{oomph::TreeForest}}
+\doxysubsubsection{\texorpdfstring{Trees\_pt}{Trees\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TreeRoot}{Tree\+Root}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Tree\+Forest\+::\+Trees\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} containing the pointers to the trees. 
+
+
+
+Definition at line \mbox{\hyperlink{tree_8h_source_l00480}{480}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{binary__tree_8h_source_l00345}{oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+neigh\+\_\+pt()}}, \mbox{\hyperlink{binary__tree_8h_source_l00336}{oomph\+::\+Binary\+Tree\+Forest\+::binary\+\_\+tree\+\_\+pt()}}, \mbox{\hyperlink{octree_8cc_source_l05255}{oomph\+::\+Oc\+Tree\+Forest\+::construct\+\_\+up\+\_\+right\+\_\+equivalents()}}, \mbox{\hyperlink{binary__tree_8cc_source_l00454}{oomph\+::\+Binary\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{octree_8cc_source_l04913}{oomph\+::\+Oc\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{quadtree_8cc_source_l00891}{oomph\+::\+Quad\+Tree\+Forest\+::find\+\_\+neighbours()}}, \mbox{\hyperlink{tree_8h_source_l00472}{flush\+\_\+trees()}}, \mbox{\hyperlink{tree_8h_source_l00460}{ntree()}}, \mbox{\hyperlink{octree_8h_source_l01002}{oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+edge\+\_\+neigh\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00982}{oomph\+::\+Oc\+Tree\+Forest\+::oc\+\_\+face\+\_\+neigh\+\_\+pt()}}, \mbox{\hyperlink{octree_8h_source_l00973}{oomph\+::\+Oc\+Tree\+Forest\+::octree\+\_\+pt()}}, \mbox{\hyperlink{quadtree_8h_source_l00471}{oomph\+::\+Quad\+Tree\+Forest\+::quad\+\_\+neigh\+\_\+pt()}}, \mbox{\hyperlink{quadtree_8h_source_l00462}{oomph\+::\+Quad\+Tree\+Forest\+::quadtree\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00466}{tree\+\_\+pt()}}, and \mbox{\hyperlink{tree_8cc_source_l00364}{\texorpdfstring{$\sim$}{\string~}\+Tree\+Forest()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tree_8h}{tree.\+h}}\item 
+\mbox{\hyperlink{tree_8cc}{tree.\+cc}}\end{DoxyCompactItemize}

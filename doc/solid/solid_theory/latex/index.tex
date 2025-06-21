@@ -1,0 +1,701 @@
+\chapter{Solid mechanics\+: Theory and implementation}
+\hypertarget{index}{}\label{index}\index{Solid mechanics: Theory and implementation@{Solid mechanics: Theory and implementation}}
+This document provides the theoretical background to {\ttfamily oomph-\/lib\textquotesingle{}s} solid mechanics capabilities. We start with a review of the relevant theory to establish the overall framework and notation, and then discuss the implementation of the methodology in {\ttfamily oomph-\/lib}.
+
+Here is an overview of the structure of this document\+:
+\begin{DoxyItemize}
+\item \doxysectlink{index_theory}{Theory}{1}
+\begin{DoxyItemize}
+\item \doxysectlink{index_solids_lagrange}{Solid mechanics problems -- Lagrangian coordinates}{2}
+\item \doxysectlink{index_geometry}{The geometry}{2}
+\item \doxysectlink{index_equilibrium}{Equilibrium and the Principle of Virtual Displacements}{2}
+\item \doxysectlink{index_elastic_constitutive}{Constitutive Equations for Purely Elastic Behaviour}{2}
+\item \doxysectlink{index_non-dim_solid}{Non-\/dimensionalisation}{2}
+\item \doxysectlink{index_two_d_solid}{2D problems\+: Plane strain.}{2}
+\item \doxysectlink{index_isotropic_growth}{Isotropic growth.}{2}
+\item \doxysectlink{index_CartesianLagrangian}{Specialisation to a Cartesian basis and finite element discretisation}{2}
+\end{DoxyItemize}
+\item \doxysectlink{index_solid_implementation}{Implementation}{1}
+\begin{DoxyItemize}
+\item \doxysectlink{index_solid_node}{The Solid\+Node class}{2}
+\item \doxysectlink{index_solid_fe}{The Solid\+Finite\+Element class}{2}
+\item \doxysectlink{index_solid_mesh}{The Solid\+Mesh class}{2}
+\item \doxysectlink{index_solid_traction}{The Solid\+Traction\+Element class}{2}
+\end{DoxyItemize}
+\item \doxysectlink{index_Solid_IC}{Timestepping and the generation of initial conditions for solid mechanics problems}{1}
+\end{DoxyItemize}If you\textquotesingle{}re not keen on theory, you may prefer to start by exploring the solid mechanics tutorials in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../example_code_list/html/index.html\#solid}{\texttt{ list of example driver codes.}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+\DoxyHorRuler{0}
+\hypertarget{index_solids_lagrange}{}\doxysubsection{\texorpdfstring{Solid mechanics problems – Lagrangian coordinates}{Solid mechanics problems – Lagrangian coordinates}}\label{index_solids_lagrange}
+All problems discussed so far were formulated in an Eulerian frame, i.\+e. we assumed all unknowns to be functions of the spatially-\/fixed, Eulerian coordinates, $x_i \ (i=1,...,3)$, and of time, $ t $. Many problems in solid mechanics are formulated more conveniently in terms of body-\/attached, Lagrangian coordinates. In this section we will briefly review the essential concepts of nonlinear continuum mechanics and present the principle of virtual displacements which forms the basis for all large-\/displacement solid mechanics computations in {\ttfamily oomph-\/lib}.
+
+Throughout this section we will use the summation convention that repeated indices are to be summed over the range of the three spatial coordinates and all free indices range from 1 to 3. We will retain the summation signs for all other sums, such as sums over the nodes etc.
+
+\DoxyHorRuler{0}
+\hypertarget{index_geometry}{}\doxysubsection{\texorpdfstring{The geometry}{The geometry}}\label{index_geometry}
+The figure below introduces the essential geometrical concepts\+: We employ a set of Lagrangian coordinates, $ \xi^i$, to parametrise the (Eulerian) position vector to material points in the body\textquotesingle{}s undeformed position\+:  \[
+{\bf r} = {\bf r}(\xi^i).
+\] The specific choice of the Lagrangian coordinates is irrelevant for the subsequent development. For analytical studies, it is advantageous to choose a body-\/fitted Lagrangian coordinate system (as shown in the sketch) because this allows boundary conditions to be applied on iso-\/levels of the coordinates; in computational studies, it is usually preferable to use a coordinate system in which the governing equations are as compact as possible. A Cartesian coordinate system is best suited for this purpose.
+
+We denote the tangent vectors to the coordinate lines $ \xi^i = const.$ in the undeformed configuration by  \[
+{\bf g}_i = \frac{\partial {\bf r}}{\partial \xi^i},
+\] and define the components of the covariant metric tensor via the inner products  \[
+g_{ij} = {\bf g}_i \cdot {\bf g}_j.
+\] This tensor defines the "{}metric"{} because the (square of the) infinitesimal length, $ ds $, of a line element with coordinate increments $ d\xi^i$ is given by  \[
+(ds)^2 = g_{ij} \  d\xi^i d\xi^j.
+\] The volume of the infinitesimal parallelepiped formed by the coordinate increments $ d\xi^i$ is given by  \[
+dv = \sqrt{g} \ d\xi^1 d\xi^2 d\xi^3,
+\] where  \[
+g = \det g_{ij}. 
+\]  
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{Lagrangian_coord}
+\doxyfigcaption{2D sketch of the Lagrangian coordinates. The Lagrangian coordinates parametrise the position vector to material points in the body. As the body deforms, the Lagrangian coordinates remain attached to the same material points and the coordinate lines become distorted. The change in the length of infinitesimal material line elements provides an objective measure of the body\textquotesingle{}s deformation. }
+\end{DoxyImage}
+
+
+As the body deforms, the Lagrangian coordinates remain "{}attached"{} to the same material points. The body\textquotesingle{}s deformation can therefore be described by the vector field that specifies the position vectors to material particles in the deformed configuration,  \[
+{\bf R} = {\bf R}(\xi^i).
+\] As in the undeformed coordinate system, we form the tangent vectors to the deformed coordinate lines $ \xi^i = const.$ and denote them by  \[
+{\bf G}_i = \frac{\partial {\bf R}}{\partial \xi^i}.
+\] The inner product of these vectors defines the metric tensor in the deformed configuration  \[
+G_{ij} = {\bf G}_i \cdot {\bf G}_j
+        = \frac{\partial {\bf R}}{\partial \xi^i} \cdot  
+          \frac{\partial {\bf R}}{\partial \xi^j},
+\] and we have equivalent relations for the lengths of line elements,  \[
+(dS)^2 = G_{ij} \  d\xi^i d\xi^j,
+\] and the volume of infinitesimal parallelepipeds,  \[
+dV = \sqrt{G} \ d\xi^1 d\xi^2 d\xi^3,
+\] where  \[
+G = \det G_{ij}. 
+\] Since the metric tensors $ G_{ij }$ and $ g_{ij }$ provide a measure of the length of material line elements in the deformed and undeformed configurations, respectively, their difference  \[
+\gamma_{ij} =  \frac{1}{2} (G_{ij} - g_{ij}),  
+\] provides an objective measure of the strain and is known as the Green strain tensor.
+
+\DoxyHorRuler{0}
+\hypertarget{index_equilibrium}{}\doxysubsection{\texorpdfstring{Equilibrium and the Principle of Virtual Displacements}{Equilibrium and the Principle of Virtual Displacements}}\label{index_equilibrium}
+Let us now assume that the body is subjected to
+\begin{DoxyItemize}
+\item an applied surface traction $ {\bf T}   $ -- a force per unit deformed surface area, applied on (part of) the body\textquotesingle{}s deformed surface area $ A_{tract} \subset \partial V$,
+\item a body force $ {\bf f} $ -- a force per unit volume of the undeformed (!) body \mbox{[}This can easily be expressed in terms of a force per unit deformed volume, $ {\bf F }$, by invoking conservation of mass, which shows that $ {\bf f } = \sqrt{G/g} \ {\bf F }$.\mbox{]},
+\end{DoxyItemize}and its displacements are prescribed on the remaining part of the boundary, $ A_{displ}  \subset \partial V $ (where $ A_{tract} \cap A_{displ}=0 $ and $A_{tract} \cup A_{displ}
+= \partial V$ ), {\itshape  i.\+e. }  \[
+{\bf R}(\xi^k) = {\bf R}^{(BC)}(\xi^k) 
+\mbox{ \ \ \ \ on \ \ \ $ A_{displ},$ }
+  \ \ \ \ \ \ \ \ (1)
+\] for given $ {\bf R}^{(BC)}(\xi^k) $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{Solid_boundary_conds}
+\doxyfigcaption{Sketch of the boundary conditions\+: The surface of the body is either subject to a prescribed traction or its displacement is prescribed. }
+\end{DoxyImage}
+
+
+The deformation is governed by the principle of virtual displacements  \[
+\int \left\{ \sigma^{ij}  \ \delta \gamma_{ij} -  \left( {\bf f} - 
+ \rho \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot 
+ \delta {\bf R} \right\} \ dv -
+  \oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0,
+  \ \ \ \ \ \ \ \ (2)
+ \] where $ \sigma^{ij} = \sigma^{ji}$ is the (symmetric) second Piola-\/\+Kirchhoff stress tensor, $ \rho $ is the density of the undeformed body, and $ \delta (.) $ represents the variation of $ (.)$. See, e.\+g., Green, A.\+E. \& Zerna, W. "{}\+Theoretical Elasticity"{}, Dover (1992); or Wempner, G. "{}\+Mechanics of Solids with Applications   to Thin Bodies"{}, Kluwer (1982) for more details.
+
+Upon choosing the particles\textquotesingle{} position vector in the deformed configuration, ${\bf R}(\xi^j)$, as the unknown, the variation of the strain tensor becomes  \[
+ \delta \gamma_{ij} = \frac{1}{2} \left( 
+         \frac{\partial {\bf R}}{\partial \xi^i} \cdot  
+         \delta \ \frac{\partial {\bf R}}{\partial \xi^j} +
+         \frac{\partial {\bf R}}{\partial \xi^j} \cdot  
+         \delta \ \frac{\partial {\bf R}}{\partial \xi^i}
+       \right),
+ \] and we have  \[
+  \delta {\bf R}  = {\bf 0} \mbox{ \ \ \ \ on \ \ \ $ A_{displ}.$ }
+  \ \ \ \ \ \ \ \ (3)
+ \] The 2nd Piola Kirchhoff stress tensor is symmetric, therefore we can write the variation of the strain energy in (2) as  \[
+ \int  \sigma^{ij}  \ \delta \gamma_{ij} \ dv = 
+ \int \sigma^{ij}  \ \frac{\partial {\bf R}}{\partial \xi^i} \cdot  
+          \delta \ \frac{\partial {\bf R}}{\partial \xi^j} \ dv
+  \] and obtain the displacement form of the principle of virtual displacements\+:  \[
+ \int \left\{ \sigma^{ij} \ \frac{\partial {\bf R}}{\partial \xi^i} \cdot  
+          \delta \ \frac{\partial {\bf R}}{\partial \xi^j} 
+      - \left( {\bf f} - 
+  \rho \frac{\partial^2 {\bf R}}{\partial t^2} \right) \cdot 
+ \delta {\bf R} \right\} \ dv 
+ - \oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0.
+ \] This must be augmented by a constitutive equation which determines the stress as a function of the body\textquotesingle{}s deformation, (and possibly the history of its deformation). Here we will only consider elastic behaviour, where the stress is only a function of the strain.
+
+\DoxyHorRuler{0}
+\hypertarget{index_elastic_constitutive}{}\doxysubsection{\texorpdfstring{Constitutive Equations for Purely Elastic Behaviour}{Constitutive Equations for Purely Elastic Behaviour}}\label{index_elastic_constitutive}
+For purely elastic behaviour, the stress is only a function of the instantaneous, local strain and the constitutive equation has the form  \[
+\sigma^{ij} =  \sigma^{ij} (\gamma_{kl}).
+\]
+
+The functional form of the constitutive equation is different for compressible/incompressible/near-\/incompressible behaviour\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Compressible}} {\bfseries{Behaviour\+:}} ~\newline
+ If the material is compressible, the stress can be computed directly from the deformed and undeformed metric tensors,  \[
+  \sigma^{ij} = \sigma^{ij}(\gamma_{kl}) =  
+  \sigma^{ij}\bigg( \frac{1}{2} (G_{kl} - g_{kl})\bigg).
+  \]
+\item {\bfseries{Incompressible}} {\bfseries{Behaviour\+:}} ~\newline
+ If the material is incompressible, its deformation is constrained by the condition that  \[
+   \det G_{ij} - \det g_{ij}= 0, 
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) 
+   \] which ensures that the volume of infinitesimal material elements remains constant during the deformation. This condition is typically enforced by a Lagrange multiplier which plays the role of a pressure. In such cases, the stress tensor has the form  \[
+   \sigma^{ij} = -p G^{ij} + 
+   \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5)  
+   \] where only the deviatoric part of the stress tensor, $ \overline{\sigma}^{ij}, $ depends directly on the strain. The pressure $ p $ must be determined independently by enforcing the incompressibility constraint (4). Given the deformed and undeformed metric tensors, the computation of the stress tensor $ \sigma^{ij} $ for an incompressible material therefore requires the computation of the following quantities\+:
+\begin{DoxyItemize}
+\item The deviatoric stress $ \overline{\sigma}^{ij} $
+\item The contravariant deformed metric tensor $ G^{ij} $
+\item The determinant of the deformed metric tensor $ \det G_{ij} $ which is required in equation (4) whose solution determines the pressure.
+\end{DoxyItemize}
+\item {\bfseries{Nearly}} {\bfseries{Incompressible}} {\bfseries{Behaviour\+:}} ~\newline
+ If the material is nearly incompressible, it is advantageous to split the stress into its deviatoric and hydrostatic parts by writing the constitutive law in the form  \[
+   \sigma^{ij} = -p G^{ij} + 
+   \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6)
+   \] where the deviatoric part of the stress tensor, $ \overline{\sigma}^{ij}, $ depends on the strain. This form of the constitutive law is identical to that of the incompressible case and it involves a pressure $ p $ which must be determined from an additional equation. In the incompressible case, this equation was given by the incompressibility constraint (4). Here, we must augment the constitutive law for the deviatoric stress by an additional equation for the pressure. Generally this takes the form  \[
+   p = - \kappa \ d,
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7)
+   \] where $ \kappa $ is the "{}bulk modulus"{}, a material property that must be specified by the constitutive law. ~\newline
+ $ d $ is the (generalised) dilatation, i.\+e. the relative change in the volume of an infinitesimal material element (or some suitable generalised quantity that is related to it). As the material approaches incompressibility, $ \kappa \to \infty$, so that infinitely large pressures would be required to achieve any change in volume. To facilitate the implementation of (7) as the equation for the pressure, we re-\/write it in the form  \[
+   p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0,
+   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8) 
+   \] which only involves quantities that remain finite as we approach true incompressibility. ~\newline
+ Given the deformed and undeformed metric tensors, the computation of the stress tensor $ \sigma^{ij} $ for a nearly incompressible material therefore requires the computation of the following quantities\+:
+\begin{DoxyItemize}
+\item The deviatoric stress $ \overline{\sigma}^{ij} $
+\item The contravariant deformed metric tensor $ G^{ij} $
+\item The generalised dilatation $ d $
+\item The inverse of the bulk modulus $ \kappa $
+\end{DoxyItemize}The abstract base class {\ttfamily Constitutive\+Law} provides interfaces for the computation of the stress in all three forms.
+\end{DoxyEnumerate}\hypertarget{index_strain-energy}{}\doxysubsubsection{\texorpdfstring{Strain-\/energy functions}{Strain-energy functions}}\label{index_strain-energy}
+A hyperelastic material is one for which the stress can be derived from a potential function $ W(\gamma_{ij})$, known as the strain-\/energy function, and  \[
+ \sigma^{ij} = \frac{\partial W}{\partial
+ \gamma_{ij}}.
+\] A strain-\/energy function exists if the elastic deformations are reversible and isothermal, or reversible and isentropic. If the material is homogeneous and isotropic then the strain-\/energy function depends only on the three strain invariants\+:  \[
+ I_{1} = g^{ij} G_{ij},\quad I_{2} = G^{ij} g_{ij} I_{3},\quad
+ I_{3} = G/g
+\] and can be written $W(I_{1},I_{2},I_{3})$. It may be shown, see Green \& Zerna, that \[ \sigma^{ij} = \Phi g^{ij} + \Psi B^{ij} + p G^{ij},\] where  \[ \Phi = 2\, \frac{\partial W}{\partial
+I_{1}},\quad
+ \Psi = 2\, \frac{\partial W}{\partial I_{2}},\quad
+ p = 2 I_{3} \frac{\partial W}{\partial I_{3}} \quad\mbox{and}\quad
+B^{ij} = I_{1} g^{ij} - g^{ir}g^{js}G_{rs}
+\]
+
+The abstract base class {\ttfamily Strain\+Energy\+Function} provides the interfaces $
+ W(\gamma_{ij}) $ and $ W(I_{1},I_{2},I_{3}) $ and should be used as the base class for all strain-\/energy functions. A class {\ttfamily Strain\+Energy\+Function\+Constitutive\+Law} that inherits from {\ttfamily Constitutive\+Law} uses a specified strain-\/energy function to compute the appropriate stresses.
+
+\DoxyHorRuler{0}
+\hypertarget{index_non-dim_solid}{}\doxysubsection{\texorpdfstring{Non-\/dimensionalisation}{Non-dimensionalisation}}\label{index_non-dim_solid}
+The principle of virtual displacements (2) is written in dimensional form. We generally prefer to work with non-\/dimensional quantities and will now discuss the non-\/dimensionalisation used in the actual implementation of the equations in {\ttfamily oomph-\/lib}. For this purpose we first re-\/write equation (2) as  \[
+\int_{v} \left\{ \sigma^{*ij} \ \delta \gamma_{ij} -  \left( {\bf f}^* - 
+ \rho \frac{\partial^2 {\bf R}^*}{\partial t^{*2}} \right) \cdot 
+ \delta {\bf R}^* \right\} \ dv^* 
+ - \oint_{A_{tract}} {\bf T}^* \cdot \delta {\bf R}^* \ dA^* =0,
+  \ \ \ \ \ \ \ \ (9)
+ \] where we have used asterisks to label those dimensional quantities that will have non-\/dimensional equivalents. (Some quantities, such as the strain, are already dimensionless, while others, such as the density will not have any non-\/dimensional counterparts. We do not introduce modifiers for these).
+
+We now non-\/dimensionalise all lengths with a problem-\/specific length-\/scale, $ {\cal L}$, given e.\+g. the length of the solid body, so that  \[
+\xi^{*i} = {\cal L} \ \xi^{i}, \ \ \  {\bf R}^* = {\cal L} \ {\bf R}, 
+\ \ \ dA^* = {\cal L}^2 \ dA, \mbox{ \ \ and \ \ } 
+dv^* = {\cal L}^3 \ dv.\ \ \ 
+\] We use a characteristic stiffness, $ {\cal S}$, (e.\+g. the material\textquotesingle{}s Young\textquotesingle{}s modulus $ E $) to non-\/dimensionalise the stress and the loads as  \[
+\sigma^{*ij} = {\cal S} \ \sigma^{ij}, \ \ \  {\bf T}^* = {\cal S}\
+{\bf T}, \mbox{ \ \ and \ \ } {\bf f}^* = {\cal S} / {\cal L} \
+{\bf f},
+\] and we non-\/dimensionalise time with a problem-\/specific timescale $ {\cal T}$ (e.\+g. the period of some external forcing), so that  \[
+t^* = {\cal T} t.
+\] This transforms (9) into  \[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf f} - 
+ \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^{2}} \right) \cdot 
+ \delta {\bf R} \right\} \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0,
+  \ \ \ \ \ \ \ \ (10)
+ \] where  \[
+\Lambda = \frac{{\cal L}}{\cal T} \sqrt{\frac{\rho}{\cal S}}
+\] is the ratio of system\textquotesingle{}s "{}intrinsic"{} timescale, $T_{intrinsic} = {\cal L} \sqrt{\rho /{\cal S}},$ to the time, ${\cal T}$, used in the non-\/dimensionalisation of the equations. If a given problem has no externally imposed timescale (e.\+g. in the free vibrations of an elastic body) $T_{intrinsic}$ (or some suitable problem-\/dependent multiple thereof) provides a natural timescale for the non-\/dimensionalisation. Therefore we use $ \Lambda=1 $ as the default value in all solid mechanics equations. If preferred, computations can, of course, be performed with dimensional units, provided all quantities are expressed in consistent units (e.\+g. from the SI system). In this case $ \Lambda^2 $ represents the dimensional density of the material.
+
+We adopt a similar approach for non-\/dimensionalisation of the constitutive equations. Typically, the constitutive parameters (e.\+g. Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio for a Hookean constitutive equation) are passed to the {\ttfamily Constitutive\+Law} as arguments to its constructor. Where possible, we select one of these parameters as the reference stress $ {\cal S} $ and give it a default value of 1.\+0. Hence, if a Hookean constitutive law is instantiated with just one argument (the Poisson ratio $
+\nu $), the stress is assumed to have been scaled on Young\textquotesingle{}s modulus. If two arguments are provided, the second argument should be interpreted as the ratio of the material\textquotesingle{}s Young\textquotesingle{}s modulus to the reference stress $ {\cal S} $ used in the non-\/dimensionalisation of the equations.
+
+\DoxyHorRuler{0}
+\hypertarget{index_two_d_solid}{}\doxysubsection{\texorpdfstring{2\+D problems\+: Plane strain.}{2D problems: Plane strain.}}\label{index_two_d_solid}
+Many solid mechanics problems can be regarded as two-\/dimensional in the sense that the quantities of interest only depend on two spatial coordinates. In such problems it is important to consider what constraints the system is subjected to in the third direction --- clearly all real solid bodies are three-\/dimensional! In plane strain problems, the displacements of material points are assumed to be parallel to the 2D plane spanned by the coordinates $x_1
+$ and $ x_2$, so that any displacements normal to this plane are suppressed. In this case, significant transverse stresses can develop. Conversely, in plane stress problems, it is assumed that no stresses develop in the transverse direction; in this case we must allow material particles to be displaced transversely. Since we have formulated our problem in terms of positions (i.\+e. in terms of the displacement of material points), our formulation naturally produces a {\bfseries{plane strain}} problem if we reduce the equations to two dimensions\+: We assume that the transverse displacement vanishes, while the remaining (in-\/plane) displacements are only functions of the in-\/plane coordinates, $ x_1$ and $ x_2$.
+
+It is important to remember that the 2D version of all equations must produce plane-\/strain behaviour when new, strain-\/energy-\/based constitutive equation classes are formulated; when implementing such strain-\/energy functions, recall that any invariants of metric tensors etc. are the invariants of the full 3D quantities which are not necessarily the same as those of the corresponding 2D quantities.
+
+\DoxyHorRuler{0}
+\hypertarget{index_isotropic_growth}{}\doxysubsection{\texorpdfstring{Isotropic growth.}{Isotropic growth.}}\label{index_isotropic_growth}
+Many biological tissues undergo growth processes. For instance, the cells that make up a solid tumour divide regularly and as a result the total mass of the tumour increases. If the growth occurs non-\/uniformly so that certain parts of the tumour grow faster than others, regions that grow more slowly restrain the expansion of their neighbours. This process can induce significant growth stresses. The scenario is similar (but not identical) to that of thermal growth in which a non-\/uniform temperature distribution in a body creates thermal stresses. (The important difference between these two cases is that in the latter process mass is conserved -- thermal expansion only leads to an increase in the volume occupied by the material, whereas biological growth via cell division increases the mass of the tumour).
+
+It is easy to incorporate such growth processes into our theoretical framework. The general idea is sketched in the following figures\+:
+
+\begin{center} \begin{center}{\bfseries{State 0\+:}}\end{center}  \begin{center}  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_0}}
+\end{DoxyImageNoCaption}
+ Undeformed, ungrown and stress-\/free reference configuration. \end{center}  \end{center} 
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\begin{center}{\bfseries{(Hypothetical) state U1\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_U1}}
+\end{DoxyImageNoCaption}
+
+
+The individual infinitesimal material elements have expanded (or contracted) isotropically and the elements are in a stress-\/free state. The isotropic growth is spatially uniform -- all elements have expanded (or contracted) by the same amount.  &\begin{center}{\bfseries{(Hypothetical) state N1\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_N1}}
+\end{DoxyImageNoCaption}
+
+
+All infinitesimal material elements have expanded (or contracted) isotropically and the elements are in a stress-\/free state. The isotropic growth is spatially non-\/uniform, so individual elements have grown (or contracted) by different amounts.   \\\cline{1-2}
+\end{longtabu}
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\begin{center}{\bfseries{State U2\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_U2}}
+\end{DoxyImageNoCaption}
+ Since the isotropically-\/grown infinitesimal material elements have grown (or contracted) by the same amount, they can be (re-\/)assembled to form a continuous, stress-\/free body.  &\begin{center}{\bfseries{State N2\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_N2}}
+\end{DoxyImageNoCaption}
+ Since the individual material elements have grown (or contracted) by different amounts they can (in general) not be (re-\/)assembled to form a continuous body without undergoing some deformation. The deformation of the material elements (relative to their stress-\/free shape in the hypothetical, stress-\/free state N1) induces internal stresses -- the so-\/called growth-\/stresses.   \\\cline{1-2}
+\end{longtabu}
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\begin{center}{\bfseries{State UE\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_UE}}
+\end{DoxyImageNoCaption}
+ When subjected to external tractions and to body forces, the uniformly-\/grown material elements deform. Their deformation (relative to their stress-\/free shape in state U1 (or, equivalently, U2), generates internal stresses which
+\begin{DoxyItemize}
+\item balance the applied loads,
+\item keep all infinitesimal material elements in local equilibrium.  
+\end{DoxyItemize}&\begin{center}{\bfseries{State NE\+:}}\end{center} 
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.35\textwidth]{Isotropic_growth_NE}}
+\end{DoxyImageNoCaption}
+ When subjected to external tractions and to body forces, the material elements deform further. Their deformation (relative to their stress-\/free shape in state N1), generates internal stresses which
+\begin{DoxyItemize}
+\item balance the applied loads,
+\item keep the material elements in local equilibrium.   
+\end{DoxyItemize}\\\cline{1-2}
+\end{longtabu}
+
+
+We start our analysis with the stress-\/free (and "{}ungrown"{}) reference configuration "{}0"{} at the top of the diagram, and initially follow the deformation shown in the left half of the sketch. In a first step, each infinitesimal material element in the body is subjected to the same isotropic growth which changes its mass from $\mbox{d}M$ to $ \Gamma \ \mbox{d}M $. Assuming that the growth process does not change the density of the material, $ \Gamma$ also specifies the volumetric growth of the material. All material elements grow by the same amount, therefore the individual elements can be (re-\/)assembled to form a continuous body (state U2). In this state, the body is stress-\/free and, compared to the reference configuration "{}0"{}, all lengths have increased by a factor of $\Gamma^{1/d}$ where $ d $ is the body\textquotesingle{}s spatial dimension (i.\+e. $d=2$ in the sketch above). The covariant basis vectors in this uniformly-\/grown, stress-\/free configuration are therefore given by  \[
+\widetilde{\bf g}_i = \Gamma^{1/d} \ {\bf g}_i,
+\] the metric tensor is given by  \[
+\widetilde{g_{ij}} = \Gamma^{2/d} \ g_{ij},
+\] and the volume of an infinitesimal material element has increased from  \[
+dv = \sqrt{g}  \ d\xi^1 ... \ d\xi^D
+\] to  \[
+\widetilde{dv} = \Gamma \sqrt{g} \ d\xi^1 ... \ d\xi^D 
+\ \ \ \ \ \ \ \ \ \ \ \ (11)
+\] We now subject the stress-\/free, uniformly-\/grown body to external loads and determine its deformation, using the principle of virtual displacements. Since the uniformly grown state "{}\+U2"{} is stress-\/free, we may regard it as the reference state for the subsequent deformation. The strain tensor that describes the deformation from the stress-\/free (and uniformly-\/grown) state "{}\+U2"{} to the final equilibrium configuration "{}\+UE"{} must therefore be defined as  \[
+\gamma_{ij} = \frac{1}{2} \left(G_{ij} - \widetilde{g_{ij}}\right)
+ = \frac{1}{2} \left(G_{ij} - \Gamma^{2/D} \ g_{ij} \right)
+\ \ \ \ \ \ \ \ \ \ \ \ (12)
+\] Equations (11) and (12) allow us to express the principle of virtual displacements in terms of
+\begin{DoxyItemize}
+\item the metric of the undeformed (and un-\/grown) reference state "{}0"{},
+\item the volumetric growth $ \Gamma $, and
+\item quantities associated with the final deformed configuration "{}\+UE"{}\+:
+\end{DoxyItemize}\[
+\int_{v} \left\{ \sigma^{ij} \ \delta \gamma_{ij} - \left( {\bf f} - 
+ \Lambda^2 \frac{\partial^2 {\bf R}}{\partial t^{2}} \right) \cdot 
+ \delta {\bf R} \right\} \ \Gamma \ dv 
+ -\oint_{A_{tract}} {\bf T} \cdot \delta {\bf R} \ dA =0,
+  \ \ \ \ \ \ \ \ (13)
+\] Note that this equation does not contain any references to quantities in the intermediate states "{}\+U1"{} and "{}\+U2"{}.
+
+We will now consider the case of spatially non-\/uniform growth, illustrated in the right half of the sketch. If the isotropic growth is spatially non-\/uniform, $ \Gamma = \Gamma(\xi^i)$, the growth will try to expand all infinitesimal material elements isotropically -- but each one by a different amount as illustrated by the hypothetical state N1 in which each material element has expanded to its stress-\/free state in which its metric tensor is given by  \[
+\widetilde{g_{ij}} = \Gamma(\xi^k) \ g_{ij}.
+\] Material elements will only be stress-\/free if the strain  \[
+\gamma_{ij} = \frac{1}{2} \left(G_{ij} - \widetilde{g_{ij}}\right)
+ = \frac{1}{2} \left(G_{ij} - \Gamma^{2/D}(\xi^k) \ g_{ij} \right)
+\ \ \ \ \ \ \ \ \ \ \ \ (14)
+\] relative to their isotropically grown shape in state N1 is zero. In general, the displacements induced by such an isotropic expansion will be incompatible and it would be impossible to (re-\/)assemble the individually grown material elements to a continuous body unless the material elements undergo some deformation. The elements\textquotesingle{} deformation relative to their stress-\/free shape in N1 will generate internal "{}growth-\/stresses"{} (stage N2). When subjected to external loads and body forces the body will undergo further deformations until the the stress (generated by the particles\textquotesingle{} total deformation relative to their stress-\/free state N1) balances the applied loads.
+
+It is important to realise that, as in the case of spatially uniform growth, the strain defined by (12) is an intrinsic quantity that provides a measure of each particles\textquotesingle{} {\itshape local} deformation relative to its stress-\/free shape in N1. The intermediate (and in the current case hypothetical), isotropically grown state N1 does not appear in the analysis -- it only serves to define the stress-\/free shape for each infinitesimal material element. Equation (13) therefore remains valid.
+
+\DoxyHorRuler{0}
+\hypertarget{index_CartesianLagrangian}{}\doxysubsection{\texorpdfstring{Specialisation to a Cartesian basis and finite element discretisation}{Specialisation to a Cartesian basis and finite element discretisation}}\label{index_CartesianLagrangian}
+If the problem does not have any symmetries (e.\+g. axisymmetry) whose exploitation would reduce the spatial dimension of the problem, the most compact form of the equations is obtained by resolving all vectors into a fixed Cartesian basis so that the undeformed position vector is given by  \[
+{\bf r}(\xi^j) = r_i(\xi^j) \ {\bf e}_i,
+ \ \ \ \ \ \ \ \ (15)
+\] where the $ {\bf e}_i $ are the basis vectors in the direction of the Cartesian Eulerian coordinate axes.
+
+Similarly, we write  \[
+{\bf f} = f_i \ {\bf e}_i,
+\]  \[
+{\bf T} = T_i \ {\bf e}_i,
+\] and  \[
+{\bf R}^{(BC)} = R^{(BC)}_i \ {\bf e}_i.
+\]
+
+We use the Eulerian coordinates in the undeformed configuration as the Lagrangian coordinates so that  \[
+r_i(\xi^j) = \xi^i. \ \ \ \ \ \ \ \ (16)
+\] With this choice, the tangent vectors to the undeformed coordinate lines are the Cartesian basis vectors  \[
+{\bf g}_i =  {\bf e}_i, 
+\] and the undeformed metric tensor is the Kronecker delta (the unit matrix)  \[
+g_{ij} = \delta_{ij}.
+\] We now expand the (unknown) deformed position vector in the same basis,  \[
+{\bf R}(\xi^j) = R_i(\xi^j) \ {\bf e}_i,
+\] and derive a finite element approximation for this vector field from the principle of virtual displacements. For this purpose we decompose the undeformed body into a number of finite elements, using the standard mesh generation process described previously. This establishes the Eulerian position $ X_{ij}^{(0)} \
+(j=1,...,N) $ of the $ N $ nodes in the body\textquotesingle{}s undeformed configuration. Since the Eulerian coordinates of material points in the undeformed configuration coincide with their Lagrangian coordinates (see (16)), a finite-\/element representation of the Lagrangian coordinates is established by writing  \[
+\xi^i = \sum_{j=1}^{N} \Xi_{ij} \ \psi_j,
+\] where $ \Xi_{ij} = X_{ij}^{(0)} $ is the $i$-\/th Lagrangian coordinate of global node $j$, and the $\psi_j$ are the global finite-\/element shape functions. In practice, the $\psi_j$ are, of course, represented by local shape functions, $\psi_j(s_k)$, so that the Lagrangian coordinate at local coordinate $ s_k $ in element $ e $ is given by  \[
+\xi^i(s_k) = \sum_{j=1}^{n} \Xi_{i{\cal J}(j,e)} \ \psi_j(s_k)
+\] where we use the same notation as in the \href{../../../intro/html/index.html}{\texttt{ Introduction to the Finite Element Method}} document.
+
+We employ the same basis functions to represent the components of the unknown vector field $ {\bf R}(\xi^j)$, by writing  \[
+R_i(\xi^k) = \sum_{j=1}^{n} X_{ij} \ \psi_j(\xi^k),
+\ \ \ \ \ \ \ \   (17)
+\] and treat the (Eulerian) nodal positions $ X_{ij} $ as the unknowns. With this discretisation, the variations in $ {\bf R}(\xi^j) $ correspond to variations in the nodal positions $ X_{ij} $ so that  \[
+\delta {\bf R} =   \sum_{j=1}^{N} \delta X_{ij} \ \psi_j \ {\bf e}_i
+\]  \[
+\delta \frac{\partial {\bf R}}{\partial \xi^k} = 
+\sum_{j=1}^{N} \delta X_{ij} \ 
+\frac{\partial \psi_j}{\partial \xi^k} \ {\bf e}_i,
+\]  \[
+\mbox{ etc. }
+\] The principle of virtual displacement (13) therefore becomes  \[\sum_{m=1}^{N}
+ \left\{
+  \int \left[ \sigma^{ij} \ 
+  \left(\sum_{l=1}^N X_{kl} \frac{\partial \psi_l}{\partial \xi^i} \right)
+       \frac{\partial \psi_m}{\partial \xi^j} \
+      - \left( f_k - 
+  \Lambda^2 \left(\sum_{l=1}^N
+    \frac{\partial^2 X_{kl}}{\partial t^2} \psi_l \right) \right) 
+ \psi_m \right] \ \Gamma \ dv 
+ - \oint_{A_{tract}} T_k \ \psi_m \ dA \right\} 
+ \delta X_{km}  =0. \ \ \ \  (18)
+ \] \mbox{[}Note that summation convention enforces the summation over the index $ k $.\mbox{]} The displacement boundary condition (1) determines the positions of all nodes that are located on the boundary $A_{displ}$,  \[
+ X_{ij} = R^{(BC)}_i(\Xi_{lj}) \mbox{ \ \ \ if node $j$ is 
+ located on $A_{displ},$}
+\] and equation (3) requires their variations to vanish,  \[
+ \delta X_{ij} = 0 \mbox{ \ \ \ if node $j$ is located on $A_{displ}.$}
+\] The variations of all other nodal positions are arbitrary (and independent of each other), therefore the terms in the curly brackets in (18) must vanish individually. This provides one (discrete) equation for each unknown $ X_{km} $ ,  \[ f_{km} = 
+  \int \left[ \sigma^{ij} \  
+  \left(\sum_{k=1}^N X_{kl} \frac{\partial \psi_l}{\partial \xi^i} \right)
+       \frac{\partial \psi_m}{\partial \xi^j} \
+      - \left( f_k - 
+  \Lambda^2 \left(\sum_{k=1}^N
+    \frac{\partial^2 X_{kl}}{\partial t^2} \psi_l \right) \right) 
+ \psi_m \right] \ \Gamma \ dv \
+ - \oint_{A_{tract}} T_k \ \psi_m \ dA 
+  =0. \ \ \ \ \  \ \ \ \ (19)
+ \] These equations can again be assembled in an element-\/by-\/element fashion.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_solid_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_solid_implementation}
+We will now discuss how the discrete equations (19) are implemented in {\ttfamily oomph-\/lib}. To facilitate the analysis of multi-\/physics problems, we introduce generalisations of the {\ttfamily Node}, {\ttfamily Finite\+Element} and {\ttfamily Mesh} classes which provide separate storage (and access functions) for all solid mechanics data. The resulting {\ttfamily Solid\+Finite\+Elements} can be used as stand-\/alone elements for the simulation of pure solid mechanics problems. More importantly, however, the design makes it easy to employ multiple inheritance to create more complex elements that solve the equations of solid mechanics together with any other field equations. For instance, if we combine a {\ttfamily Finite\+Element} that solves the unsteady heat equation with a {\ttfamily Solid\+Finite\+Element} that describes the elastic deformations, we obtain an element that can be used to simulate unsteady heat conduction in an elastic body that is subject to large-\/amplitude deformations, say. This is illustrated in one of {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../multi_physics/thermo/html/index.html}{\texttt{ multi-\/physics example codes.}}
+
+\DoxyHorRuler{0}
+\hypertarget{index_solid_node}{}\doxysubsection{\texorpdfstring{The Solid\+Node class}{The SolidNode class}}\label{index_solid_node}
+The {\ttfamily Solid\+Node} class is derived from the {\ttfamily Node} class and implements the additional functionality required for solid mechanics problems. The key new feature is that each {\ttfamily Node} must store its (fixed) Lagrangian coordinate $ \Xi_{ij}$, while its Eulerian position $ X_{ij}$ must be regarded as an unknown. This requires the following changes to member functions of the {\ttfamily Node} class\+:
+
+
+\begin{DoxyItemize}
+\item The function {\ttfamily Node\+::x(...)} returns the Eulerian coordinates of the {\ttfamily Node}. Internally, this function accesses the nodal coordinates via pointers to double precision numbers. In solid mechanics problems we must be able to regard the nodal positions as unknowns. In {\ttfamily Solid\+Nodes} the nodal positions are therefore stored as values of a (member) {\ttfamily Data} object created during construction of the {\ttfamily Solid\+Node}. (As usual, the values can be either unknown or pinned, and can have time histories). The function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidNode::position\_eqn\_number(...)}
+
+\end{DoxyCode}
+ gives access to the global equation number for each nodal coordinate and, following our usual convention, the function returns the static integer {\ttfamily Data\+::\+Is\+\_\+pinned} (which is set to -\/1) if a coordinate is pinned.
+\item We introduce a new member function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidNode::xi(...)}
+
+\end{DoxyCode}
+ which returns the (fixed) Lagrangian coordinates of the node.
+\item The function has the usual extensions to generalised coordinates 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidNode::xi\_gen(...)}
+
+\end{DoxyCode}
+ which is required for Hermite elements and any other elements that use generalised nodal coordinates to interpolate the element\textquotesingle{}s geometry.
+\item Similar to the {\ttfamily Data} member function {\ttfamily Data\+::pin(...)} which can be used to pin specific nodal values, we provide the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidNode:pin\_position(...)}
+
+\end{DoxyCode}
+ which allows pinning of selected nodal coordinates.
+\item Dynamic problems require the evaluation of time-\/derivatives of the nodal positions, such as $ \partial^2 X_{ij}/\partial t^2$, see (19). These time-\/derivatives are evaluated by the {\ttfamily Time\+Stepper} of the positional {\ttfamily Data}. By default, we use the same {\ttfamily Time\+Stepper} for the nodal {\ttfamily Data} and for the nodal positions. In multi-\/physics problems this may not be appropriate, however. Consider, for instance, solving an unsteady heat equation in a dynamically deforming, elastic body. In this problem the 2nd time-\/derivatives of the nodal position might be evaluated by a {\ttfamily Newmark} scheme, acting on the history values of the nodal positions, whereas the time-\/derivatives of the temperature might be determined by a {\ttfamily BDF} scheme, operating on the history values of the nodal {\ttfamily Data}. In such cases, the default assignment for the two timesteppers can be overwritten with the access functions 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Node::position\_time\_stepper\_pt()}
+
+\end{DoxyCode}
+ and 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Node::time\_stepper\_pt()}
+
+\end{DoxyCode}
+ where the latter is inherited from {\ttfamily Data\+::time\+\_\+stepper\+\_\+pt()}.
+\item Our implementation is based on the displacement form of the principle of virtual displacements in which the position vector $ {\bf R}(\xi^i) $ in the deformed configuration is regarded as the unknown vector field. Equation (17) defines the representation of this vector field within each finite element in terms of the nodal coordinates. Some constitutive equations require the representation of additional (non-\/positional) variables. For instance, for incompressible (or nearly incompressible) materials, the stress $ \sigma^{ij} $ contains a contribution from the (scalar) pressure field $ p $; see the discussion of the constitutive equations above. If we choose a continuous representation for the pressure in which its value is interpolated between nodal values (as in Taylor-\/\+Hood-\/type elements), the nodal pressure values are stored in the "{}normal"{} nodal {\ttfamily Data}. Similarly, the elements\textquotesingle{} internal {\ttfamily Data} is used to store any discontinuous solid pressures.
+\item Finally, {\ttfamily Solid\+Nodes} overload the function {\ttfamily Data\+::assign\+\_\+eqn\+\_\+numbers()} with 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidNode::assign\_eqn\_numbers()}
+
+\end{DoxyCode}
+ which creates global equation numbers for all (non-\/pinned) positional values, and then deals with the "{}normal"{} nodal {\ttfamily Data} by calling {\ttfamily Data\+::assign\+\_\+eqn\+\_\+numbers()}.
+\end{DoxyItemize}\DoxyHorRuler{0}
+\hypertarget{index_solid_fe}{}\doxysubsection{\texorpdfstring{The Solid\+Finite\+Element class}{The SolidFiniteElement class}}\label{index_solid_fe}
+The class {\ttfamily Solid\+Finite\+Element} is derived from {\ttfamily Finite\+Element} and implements the additional functionality required for solid mechanics problems. Again, most of the additional (or revised) functionality is related to the presence of the two coordinate systems which requires the following changes to {\ttfamily Finite\+Element} member functions\+:
+\begin{DoxyItemize}
+\item The nodes of {\ttfamily Solid\+Finite\+Elements} are {\ttfamily Solid\+Nodes}, therefore we overload the function {\ttfamily Finite\+Elements\+::construct\+\_\+node(...)} to ensure that a {\ttfamily Solid\+Node} with the appropriate amount of storage is built. As in the case of {\ttfamily Finite\+Elements}, the required spatial dimension of the elements\textquotesingle{} constituent nodes, their number of nodal values etc. are specified via the {\ttfamily Finite\+Element\textquotesingle{}s} (pure) virtual member functions {\ttfamily Finite\+Element\+::required\+\_\+ndim(...)}, {\ttfamily Finite\+Element\+::required\+\_\+nvalue(...)}, etc, which must be implemented for all specific elements that are derived from the {\ttfamily Solid\+Finite\+Element} base class. As discussed above, the constructor of the {\ttfamily Solid\+Nodes} requires additional parameters, such as the number of Lagrangian coordinates. These must be specified by implementing {\ttfamily Solid\+Finite\+Element\+::required\+\_\+nlagrangian(...)} and similar other functions. As in the case of {\ttfamily Finite\+Elements}, many of these functions are already implemented as virtual (rather than pure virtual) functions which provide sensible default values. Such functions must be overloaded in specific derived elements if the default assignments are not appropriate.
+\item The interpolation of the Eulerian coordinates, implemented in {\ttfamily Finite\+Element\+::interpolated\+\_\+x(...)}, can remain unchanged because {\ttfamily Node\+::x(...)} always returns the Eulerian nodal positions. {\ttfamily Solid\+Finite\+Elements} provide additional functions, such as 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidFiniteElement::interpolated\_xi(...)}
+
+\end{DoxyCode}
+ which determines the interpolated Lagrangian coordinates at a specified local coordinate within the element, or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidFiniteElement::raw\_lagrangian\_position(...)}
+
+\end{DoxyCode}
+ and 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidFiniteElement::lagrangian\_position(...)}
+
+\end{DoxyCode}
+ which provides a wrapper for the nodal values of the Lagrangian coordinates. (The "{}raw"{} version of the function returns the Lagrangian coordinates stored at the {\ttfamily Solid\+Node}; the second version automatically computes the suitably constrained Lagrangian coordinates if the {\ttfamily Solid\+Node} is hanging.)
+\item The displacement form of the principle of virtual displacements (19) contains derivatives of the shape functions with respect to the Lagrangian (rather than the Eulerian) coordinates. Their computation is implemented in 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidFiniteElement::dshape\_lagrangian(...)}
+
+\end{DoxyCode}
+
+\item We have now created storage and access functions for the {\ttfamily Data} that represents the nodal positions. We must ensure that these {\ttfamily Data} items are included in the various equation numbering schemes. For this purpose we provide the function {\ttfamily Solid\+Finite\+Element\+::assign\+\_\+solid\+\_\+local\+\_\+eqn\+\_\+numbers()} which sets up the local equation numbering scheme for all solid {\ttfamily Data} associated with an element. This function is called when the Solid\+Finite\+Element\textquotesingle{}s local equation numbers are generated.
+\item We\textquotesingle{}re done! {\ttfamily Solid\+Finite\+Elements} now form a suitable basis for all elements whose deformation is determined by the equations of solid mechanics (or some variant thereof). To implement a specific solid mechanics element, we must represent its geometry, its state of stress, etc., in terms of the {\ttfamily Solid\+Finite\+Element\textquotesingle{}s} positional and non-\/positional {\ttfamily Data}. This requires the specification of the shape functions and the functions that compute the element\textquotesingle{}s Jacobian matrix and its residual vector -- the latter implementing the element\textquotesingle{}s contribution to the global residual vector defined by the discretised principle of virtual displacements, (19). As for "{}normal"{} {\ttfamily Finite\+Elements} it is sensible to construct specific {\ttfamily Solid\+Finite\+Elements} in a hierarchy which separates between the implementation of the governing equations and the representation of the element geometry. For instance, the {\ttfamily Solid\+QElement} family represents the generalisation of the {\ttfamily QElement} family to {\ttfamily Solid\+Finite\+Elements}, while {\ttfamily PVDEquations} implement the principle of virtual displacements (19). The two are combined by multiple inheritance to form the {\ttfamily QPVDElement} class.
+\item The computation of the element\textquotesingle{}s Jacobian matrix requires the evaluation of the derivatives of the discrete residuals (19) with respect to the unknown nodal positions, and with respect to any additional unknown solid mechanics variables (e.\+g. pressures). The derivatives with respect to the nodal positions result in fairly complex algebraic expressions and it is sometimes more efficient to evaluate these entries by finite differencing. By default, the derivatives are evaluated analytically using carefully optimised assembly loops, but a finite-\/difference-\/base evaluation can be activated instead; see the detailed description of the {\ttfamily PVDEquations} and the {\ttfamily PVDEquations\+With\+Pressure} classes.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_solid_mesh}{}\doxysubsection{\texorpdfstring{The Solid\+Mesh class}{The SolidMesh class}}\label{index_solid_mesh}
+The {\ttfamily Solid\+Mesh} class is a generalisation of the {\ttfamily Mesh} class whose key additional features are\+:
+\begin{DoxyItemize}
+\item It overloads the {\ttfamily Mesh\+::node\+\_\+pt(...)} function with 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidMesh::node\_pt(...)}
+
+\end{DoxyCode}
+ which returns a pointer to an {\ttfamily Solid\+Node}, rather than a "{}normal"{} {\ttfamily Node}. Equivalent access functions are implemented for all other {\ttfamily Mesh} member functions that return pointers to {\ttfamily Nodes}.
+\item We provide the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidMesh::set\_lagrangian\_nodal\_coordinates()}
+
+\end{DoxyCode}
+ which assigns the current Eulerian coordinates of all {\ttfamily Nodes} to their Lagrangian coordinates, thus turning the current configuration into the stress-\/free reference configuration. This function greatly facilitates the construction of {\ttfamily Solid\+Meshes} via inheritance from existing {\ttfamily Meshes}. If, for instance, {\ttfamily Some\+Mesh} is an existing, fully functional {\ttfamily Mesh}, the corresponding {\ttfamily Solid\+Mesh} can be constructed with a few lines of code, as in this example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ SolidMesh\ version\ of\ SomeMesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\ \textcolor{keyword}{class\ }SomeSolidMesh\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SomeMesh<ELEMENT>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Constructor:\ Call\ the\ constructor\ to\ the\ underlying\ Mesh}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ then\ assign\ the\ Lagrangian\ coordinates\ -\/-\/\ for\ the}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ PARANOID\ user,\ check\ that\ the\ element\ specified}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ in\ the\ template\ argument\ is\ derived\ from\ an\ }}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ SolidFiniteElement}}
+\DoxyCodeLine{\ \ \ \ SomeSolidMesh()\ :\ SomeMesh()}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \#ifdef\ PARANOID}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ that\ the\ element\ type\ is\ derived\ from}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ the\ SolidFiniteElement\ class}}
+\DoxyCodeLine{\ \ \ \ SolidFiniteElement*\ el\_pt=\textcolor{keyword}{dynamic\_cast<}SolidFiniteElement*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ (finite\_element\_pt(0));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (el\_pt==0)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Element\ must\ be\ derived\ from\ SolidFiniteElement\ "{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \ \ abort();}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \#endif}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Eulerian\ ones}}
+\DoxyCodeLine{\ \ \ \ set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_solid_traction}{}\doxysubsection{\texorpdfstring{The Solid\+Traction\+Element class}{The SolidTractionElement class}}\label{index_solid_traction}
+To evaluate the load terms  \[
+\oint_{A_{tract}} T_k \ \psi_m \ dA 
+\] in the discretised form of the variational principle (19) we employ the same strategy as for most other Neumann-\/type boundary conditions and attach so-\/called {\ttfamily Solid\+Traction\+Elements} to the appropriate faces of higher-\/dimensional "{}bulk"{} solid mechanics elements. Our default implementation allows the load (specified by the "{}user"{} via a function pointer that is passed to the {\ttfamily Solid\+Traction\+Elements}) to depend on the Eulerian and Lagrangian coordinates, and on the outer unit normal to the solid. This interface should be sufficiently general for most cases of interest. If additional dependencies are required, it is easy to create new {\ttfamily Solid\+Traction\+Elements}. The use of the {\ttfamily Solid\+Traction\+Elements} is demonstrated in several \href{../../../example_code_list/html/index.html\#solid}{\texttt{ solid mechanics tutorials.}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_Solid_IC}{}\doxysection{\texorpdfstring{Timestepping and the generation of initial conditions for solid mechanics problems}{Timestepping and the generation of initial conditions for solid mechanics problems}}\label{index_Solid_IC}
+In time-\/dependent problems, the boundary value problem defined by the variational principle (10) must be augmented by suitable initial conditions which specify the state of the system at time $ t=t_0. $ The initial conditions specify the initial shape of the solid body,  \[
+{\bf R}(\xi^i,t=t_0) =  {\bf R}^{(IC)}(\xi^i),
+\ \ \ \ \ \ \ \ \ \ \ \ \ (20)
+\] and its initial velocity,  \[
+\left. \frac{\partial {\bf R}(\xi^i,t)}{\partial t} \right|_{t=t_0} = 
+{\bf V}^{(IC)}(\xi^i),
+\ \ \ \ \ \ \ \ \ \ \ \ (21)
+\] where $ {\bf R}^{(IC)}(\xi^i) $ and $ {\bf V}^{(IC)}(\xi^i) $ are given. The accelerations $ \partial^2 {\bf R}/\partial t^2
+$ at $t=t_0$ follow from the solution of (10) and can therefore not be enforced, unless we wish to initialise the time-\/stepping procedure with a known exact solution $ {\bf R}^{(exact)}(\xi^i,t) $. (Only!) in this case are we allowed to assign an initial value for the acceleration via  \[
+\left. \frac{\partial^2 {\bf R}(\xi^i,t)}{\partial t^2} \right|_{t=t_0} = 
+{\bf A}^{(IC)}(\xi^i) \equiv
+\left. \frac{\partial^2 {\bf R}^{(exact)}(\xi^i,t)}{\partial t^2} 
+\right|_{t=t_0}.
+\ \ \ \ \ \ \ \ \ \ \ \ (22)
+\] We will assume that time-\/stepping is performed with the {\ttfamily Newmark} method which is our default timestepper for hyperbolic problems. In this case the time-\/derivatives of the nodal positions in (10) are replaced by an approximation which involves the current and three "{}history values"{} of the nodal positions. To start the time-\/integration, we must assign suitable values to these quantities to ensure that the initial state of the system is represented correctly.
+
+To assign the initial values for the nodal positions, we (temporarily) remove all boundary conditions for the nodal positions and determine their initial values by solving equation (20) in its weak form,  \[
+f_{il}^{(0)} = \int \left( \sum_{j=1}^N X_{ij}^{(0)} \psi_j(\xi^k) 
+- R^{(IC)}_i(\xi^k)
+\right) \psi_l(\xi^k) \ dv = 0
+\mbox{ \ \ \ \ for \ \ \ $l=1,...,N; \ \ i=1,..,3$}
+\ \ \ \ \ \ \ \ \ \ \ \ \ (23)
+\] where $ R^{(IC)}_i $ is the $i$-\/th component of ${\bf R}^{(IC)}.$ Equation (23) provides $ 3 \times N$ equations for the $ 3 \times N $ components of the initial nodal positions, $ X_{ij}^{(0)} $ (where $i=1,...3; \ j=1,...,N)$. To determine the initial nodal velocities, we repeat the same procedure with the prescribed velocities and solve  \[
+f_{il}^{(1)} = \int \left( \sum_{j=1}^N X_{ij}^{(1)} \psi_j(\xi^k) 
+- V^{(IC)}_i(\xi^k)
+\right) \psi_l(\xi^k) \ dv = 0
+\mbox{ \ \ \ \ for \ \ \ $l=1,...,N;  \ \ i=1,..,3$}
+\ \ \ \ \ \ \ \ \ \ \ \ \ (24)
+\] for the initial nodal velocities, $ X_{ij}^{(1)} $ (where $i=1,...3; \ j=1,...,N)$. Finally, assuming that we have an exact solution for the accelerations, we solve  \[
+f_{il}^{(2)} = \int \left( \sum_{j=1}^N X_{ij}^{(2)} \psi_j(\xi^k) 
+- A^{(IC)}_i(\xi^k)
+\right) \psi_l(\xi^k) \ dv = 0
+\mbox{ \ \ \ \ for \ \ \ $l=1,...,N; \ \ i=1,..,3$}
+\ \ \ \ \ \ \ \ \ \ \ \ \ (25)
+\] for the initial nodal accelerations, $ X_{ij}^{(2)} $ (where $i=1,...3; \ j=1,...,N)$. Having determined the nodal positions and their first and second time-\/derivatives at $ t=t_0 $, we can use the functions {\ttfamily Newmark\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage1(...)} and {\ttfamily Newmark\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(...)} to compute the positional history values which ensure that the Newmark approximations for the initial velocity and acceleration are correct. This procedure is fully implemented in the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidMesh::Solid\_IC\_problem.set\_newmark\_initial\_condition\_directly(...)}
+
+\end{DoxyCode}
+ whose arguments are\+:
+\begin{DoxyItemize}
+\item The pointer to the problem being solved. This is needed because the solution of equations (23) -\/ (25) requires a temporary change to the boundary conditions and to the equation numbering scheme. Once the history values have been assigned, the original boundary conditions are restored and the equation numbers are re-\/generated by executing {\ttfamily Problem\+::assign\+\_\+eqn\+\_\+numbers()}.
+\item A pointer to the {\ttfamily Solid\+Mesh} on which the initial conditions are assigned.
+\item A pointer to the {\ttfamily Time\+Stepper} (which has to be a member of the {\ttfamily Newmark} family).
+\item A pointer to the "{}\+Elastic initial condition"{} object (discussed below).
+\item The initial timestep.
+\end{DoxyItemize}
+
+Here is a brief outline of the implementation\+: All {\ttfamily Solid\+Finite\+Elements} store a pointer to a {\ttfamily Solid\+Initial\+Condition} object. By default this pointer is set to NULL, indicating that {\ttfamily Finite\+Element\+::get\+\_\+residual(...)} should compute the residuals of the "{}normal"{} governing equations. {\ttfamily Solid\+Finite\+Elements} whose initial conditions are to be set with the above function, must re-\/direct the computation of the residual to 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SolidFiniteElement:get\_residuals\_for\_solid\_ic(...)}
+
+\end{DoxyCode}
+ whenever the pointer to the {\ttfamily Solid\+Initial\+Condition} is non-\/\+NULL, as illustrated in this code fragment\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//\ Compute\ the\ residuals\ for\ the\ elasticity\ equations.}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{unsigned}\ DIM>}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ SolidEquations<DIM>::get\_residuals(Vector<double>\ \&residuals)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Simply\ set\ up\ initial\ condition?}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (Solid\_ic\_pt!=0)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ get\_residuals\_for\_solid\_ic(residuals);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ residuals\ for\ principle\ of\ virtual\ displacements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+
+
+The {\ttfamily Solid\+Initial\+Condition} object stores a (pointer to a) {\ttfamily Geom\+Object} and a flag that indicates which time-\/derivative (0th, 1st or 2nd) of the {\ttfamily Geom\+Object\textquotesingle{}s} position vector is to be assigned to the nodal coordinates. Based on the value of this flag, the function {\ttfamily Solid\+Finite\+Element\+::get\+\_\+residuals\+\_\+for\+\_\+solid\+\_\+ic(...)}, is able to compute the residuals corresponding to equations (23), (24) or (25).
+
+This all sounds very complicated (and it is!) but luckily all the hard work has already been done and the relevant procedures are fully implemented. Hence, the actual assignment of the initial conditions is as simple as this\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Created\ a\ Problem}}
+\DoxyCodeLine{Problem*\ problem\_pt\ =\ \textcolor{keyword}{new}\ SomeProblem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Created\ an\ SolidMesh\ }}
+\DoxyCodeLine{SolidMesh*\ solid\_mesh\_pt\ =\ \textcolor{keyword}{new}\ SomeSolidMesh;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Created\ a\ Newmark\ timestepper}}
+\DoxyCodeLine{TimeStepper*\ time\_stepper\_pt=\textcolor{keyword}{new}\ Newmark<1>;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{[...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ the\ GeomObject\ whose\ time-\/dependent\ deformation\ }}
+\DoxyCodeLine{\textcolor{comment}{//\ specifies\ the\ initial\ conditions\ for\ our\ solid\ body:}}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ position\ vector\ and\ its\ time-\/derivatives}}
+\DoxyCodeLine{\textcolor{comment}{//\ are\ accessible\ via\ the\ GeomObject's\ member\ function}}
+\DoxyCodeLine{\textcolor{comment}{//\ GeomObject::dposition\_dt(...).}}
+\DoxyCodeLine{GeomObject*\ geom\_obj\_pt=\textcolor{keyword}{new}\ SomeGeomObject;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Setup\ object\ that\ specifies\ the\ initial\ conditions:}}
+\DoxyCodeLine{SolidInitialCondition*\ ic\_pt\ =\ \textcolor{keyword}{new}\ SolidInitialCondition(geom\_obj\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Choose\ the\ initial\ timestep}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ dt=0.01;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Assign\ the\ initial\ conditions:}}
+\DoxyCodeLine{SolidMesh::Solid\_IC\_problem.set\_newmark\_initial\_condition\_directly(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ problem\_pt,solid\_mesh\_pt,time\_stepper\_pt,IC\_pt,dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Done!}}
+\DoxyCodeLine{}
+\DoxyCodeLine{[...]}
+
+\end{DoxyCode}
+
+
+If we do not know an exact solution to our problem (and in most cases we obviously won\textquotesingle{}t...), we can only use the procedure described above to determine the initial nodal positions and velocities. In that case we solve the equations (19) for the remaining "{}history value"{}. Since the equations (19) are linear in the accelerations, this is a linear problem whose Jacobian matrix is proportional to the mass matrix  \[
+M_{ij} = \int {\cal M} \ \psi_i \ \psi_j \ dv. 
+\ \ \ \ \ \ \ (26)
+\] The procedure which determines the initial "{}history values"{} from the given initial positions and velocities while ensuring consistency with the governing equation at $ t = t_0$ is implemented in {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+IC\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which takes the same arguments as the function that assigns the acceleration directly, but also requires a function pointer to a "{}multiplier"{} $  {\cal M} $. If there is no growth, i.\+e. if $\Lambda=1$ in (19), the multiplier is given by the timescale ratio $\Lambda^2$; if the body is subjected to uniform isotropic growth, $\Gamma \ne 1$, the multiplier is equal to $\Gamma \Lambda^2$. If the wrong multiplier is specified (or if it is omitted, in which case the default value of 1.\+0 is used) the residuals (19) will be nonzero (or at least larger than the tolerance specified in {\ttfamily Solid\+ICProblem}). In this case a warning is issued and the code execution terminates. This behaviour can be suppressed by increasing the tolerance suitably, but you do this at your own risk!
+
+{\bfseries{Important\+:}} The above procedures can only handle the assignment of initial conditions in problems that are formulated in terms of displacements and do {\bfseries{not}} involve any additional variables such as solid pressures. We do not believe that it is possible to implement the assignment of initial conditions for such problems without additional knowledge about the precise form of the constitutive equations. Therefore we provide a virtual function {\ttfamily Solid\+Finite\+Element\+::has\+\_\+internal\+\_\+solid\+\_\+data()} whose role it is to return a bool that indicates if a specific {\ttfamily Solid\+Finite\+Element} stores such data. By default, the function returns {\ttfamily false} and should be overloaded in derived elements which involve unknowns that do not represent nodal positions. If the function returns {\ttfamily true} for any element that is used during the automatic assignment of initial conditions the code execution stops with an appropriate warning message.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

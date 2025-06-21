@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::PseudoElasticPreconditioner Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html">PseudoElasticPreconditioner</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="classoomph_1_1PseudoElasticPreconditioner-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::PseudoElasticPreconditioner Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A subsidiary preconditioner for the pseudo-elastic FSI preconditioner. Also a stand-alone preconditioner for the problem of non-linear elasticity subject to prescribed displacement by Lagrange multiplier. <b>Enumeration</b> of Elastic DOF types in the Pseudo-Elastic Elements The method get_dof_types_for_unknowns() must be implemented such that DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 DOF types and the following labelling must be implemented: 0 - x displacement (without lagr mult traction) 1 - y displacement (without lagr mult traction) 2 - z displacement (without lagr mult traction) 4 - x displacement (with lagr mult traction) 5 - y displacement (with lagr mult traction) 6 - z displacement (with lagr mult traction)  
+ <a href="classoomph_1_1PseudoElasticPreconditioner.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::PseudoElasticPreconditioner:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1PseudoElasticPreconditioner.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:acde733e1a111a961d1e714add4e8015d" id="r_acde733e1a111a961d1e714add4e8015d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">Elastic_preconditioner_type</a> { <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015da277774b20738300271de0fa42391a951">Exact_block_preconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015da048620d7667a53bcfb11513dea9b2977">Block_diagonal_preconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015dabf00157409786d29ec7122bb86a5e8fe">Block_lower_triangular_preconditioner</a>
+, <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015daed4f4716017bc0f8d0c40ed7aaab735e">Block_upper_triangular_preconditioner</a>
+ }</td></tr>
+<tr class="memdesc:acde733e1a111a961d1e714add4e8015d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The augmented elasticity system can be preconditioned in one of four ways. 0 - Exact preconditioner 1 - Block diagonal preconditioning 2 - Block upper triangular preconditioner 3 - Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition.  <a href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">More...</a><br /></td></tr>
+<tr class="separator:acde733e1a111a961d1e714add4e8015d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb3ff30f6ce6c9f9650090bd432d7a6a" id="r_aeb3ff30f6ce6c9f9650090bd432d7a6a"><td class="memItemLeft" align="right" valign="top">typedef Preconditioner *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a>) ()</td></tr>
+<tr class="memdesc:aeb3ff30f6ce6c9f9650090bd432d7a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This preconditioner includes the option to use subsidiary operators other than ExactPreconditioner for this problem. This is the typedef of a function that should return an instance of a subsidiary preconditioning operator. This preconditioner is responsible for the destruction of the subsidiary preconditioners.  <br /></td></tr>
+<tr class="separator:aeb3ff30f6ce6c9f9650090bd432d7a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab2638e8ccceed850b8eb581fc1309ff0" id="r_ab2638e8ccceed850b8eb581fc1309ff0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ab2638e8ccceed850b8eb581fc1309ff0">PseudoElasticPreconditioner</a> ()</td></tr>
+<tr class="memdesc:ab2638e8ccceed850b8eb581fc1309ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default (and only) constructor.  <br /></td></tr>
+<tr class="separator:ab2638e8ccceed850b8eb581fc1309ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9366f2553545b09995e40ad8fa4ed91c" id="r_a9366f2553545b09995e40ad8fa4ed91c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a9366f2553545b09995e40ad8fa4ed91c">~PseudoElasticPreconditioner</a> ()</td></tr>
+<tr class="memdesc:a9366f2553545b09995e40ad8fa4ed91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">destructor  <br /></td></tr>
+<tr class="separator:a9366f2553545b09995e40ad8fa4ed91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae485d6e8d9addf8dc16482e9bcfe5bb8" id="r_ae485d6e8d9addf8dc16482e9bcfe5bb8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ae485d6e8d9addf8dc16482e9bcfe5bb8">PseudoElasticPreconditioner</a> (const <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html">PseudoElasticPreconditioner</a> &amp;)=delete</td></tr>
+<tr class="memdesc:ae485d6e8d9addf8dc16482e9bcfe5bb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ae485d6e8d9addf8dc16482e9bcfe5bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69909eef3e1530ca7faf48c653ec7327" id="r_a69909eef3e1530ca7faf48c653ec7327"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a69909eef3e1530ca7faf48c653ec7327">setup</a> ()</td></tr>
+<tr class="memdesc:a69909eef3e1530ca7faf48c653ec7327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a69909eef3e1530ca7faf48c653ec7327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2533d2574d2c7d6613fda72b96a5f885" id="r_a2533d2574d2c7d6613fda72b96a5f885"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a2533d2574d2c7d6613fda72b96a5f885">preconditioner_solve</a> (const DoubleVector &amp;r, DoubleVector &amp;z)</td></tr>
+<tr class="memdesc:a2533d2574d2c7d6613fda72b96a5f885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the preconditioner. Method implemented in two other methods (elastic and lagrange multiplier subsidiary preocnditioner) for the <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html" title="Preconditioner for FSI problems with pseudo-elastic fluid node updates. Note: NavierStokesSchurComple...">PseudoElasticFSIPreconditioner</a>.  <br /></td></tr>
+<tr class="separator:a2533d2574d2c7d6613fda72b96a5f885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae115b58574a36c2c8fecb2524afa54f1" id="r_ae115b58574a36c2c8fecb2524afa54f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ae115b58574a36c2c8fecb2524afa54f1">set_elastic_mesh</a> (Mesh *mesh_pt)</td></tr>
+<tr class="memdesc:ae115b58574a36c2c8fecb2524afa54f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to mesh containing the block-preconditionable elastic elements.  <br /></td></tr>
+<tr class="separator:ae115b58574a36c2c8fecb2524afa54f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6030c2461383ee1a0b8ac6ed56b0daf6" id="r_a6030c2461383ee1a0b8ac6ed56b0daf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a6030c2461383ee1a0b8ac6ed56b0daf6">set_lagrange_multiplier_mesh</a> (Mesh *mesh_pt)</td></tr>
+<tr class="memdesc:a6030c2461383ee1a0b8ac6ed56b0daf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to mesh containing the block-preconditionable lagrange multiplier elements.  <br /></td></tr>
+<tr class="separator:a6030c2461383ee1a0b8ac6ed56b0daf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917caf20e03fc8bdb45336206ce5365e" id="r_a917caf20e03fc8bdb45336206ce5365e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a917caf20e03fc8bdb45336206ce5365e">enable_inf_norm_of_s_scaling</a> ()</td></tr>
+<tr class="memdesc:a917caf20e03fc8bdb45336206ce5365e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to use the inf norm of S as scaling.  <br /></td></tr>
+<tr class="separator:a917caf20e03fc8bdb45336206ce5365e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a038e7d2eaea4346c3ea6ba2b34ae824c" id="r_a038e7d2eaea4346c3ea6ba2b34ae824c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a038e7d2eaea4346c3ea6ba2b34ae824c">disable_inf_norm_of_s_scaling</a> ()</td></tr>
+<tr class="memdesc:a038e7d2eaea4346c3ea6ba2b34ae824c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to use no scaling.  <br /></td></tr>
+<tr class="separator:a038e7d2eaea4346c3ea6ba2b34ae824c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64865a85f35ae9385f9f8d68e75595e0" id="r_a64865a85f35ae9385f9f8d68e75595e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a64865a85f35ae9385f9f8d68e75595e0">set_lagrange_multiplier_subsidiary_preconditioner</a> (<a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a> prec_fn)</td></tr>
+<tr class="memdesc:a64865a85f35ae9385f9f8d68e75595e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">By default the Lagrange multiplier subsidiary systems are preconditioner with ExactPreconditioner. For a different preconditioner, pass a function to this method returning a different subsidiary operator.  <br /></td></tr>
+<tr class="separator:a64865a85f35ae9385f9f8d68e75595e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c75fe5786d64a042056df16a062c055" id="r_a8c75fe5786d64a042056df16a062c055"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a8c75fe5786d64a042056df16a062c055">set_elastic_subsidiary_preconditioner</a> (<a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a> prec_fn)</td></tr>
+<tr class="memdesc:a8c75fe5786d64a042056df16a062c055"><td class="mdescLeft">&#160;</td><td class="mdescRight">By default the elastic subsidiary systems are preconditioner with ExactPreconditioner. For a different preconditioner, pass a function to this method returning a different subsidiary operator.  <br /></td></tr>
+<tr class="separator:a8c75fe5786d64a042056df16a062c055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc791ac1aaf4f3797d3981a737393ecf" id="r_afc791ac1aaf4f3797d3981a737393ecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">Elastic_preconditioner_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#afc791ac1aaf4f3797d3981a737393ecf">elastic_preconditioner_type</a> ()</td></tr>
+<tr class="memdesc:afc791ac1aaf4f3797d3981a737393ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the type of preconditioner applied to the elastic: 0 - Exact preconditioner 1 - Block diagonal preconditioning 2 - Block upper triangular preconditioner 3 - Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition.  <br /></td></tr>
+<tr class="separator:afc791ac1aaf4f3797d3981a737393ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc9487ec16eea12912b2f3a023b4129" id="r_adcc9487ec16eea12912b2f3a023b4129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#adcc9487ec16eea12912b2f3a023b4129">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:adcc9487ec16eea12912b2f3a023b4129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the memory.  <br /></td></tr>
+<tr class="separator:adcc9487ec16eea12912b2f3a023b4129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a9398dd60b00bc611a5b03e859256b410" id="r_a9398dd60b00bc611a5b03e859256b410"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a9398dd60b00bc611a5b03e859256b410">elastic_preconditioner_solve</a> (const DoubleVector &amp;r, DoubleVector &amp;z)</td></tr>
+<tr class="memdesc:a9398dd60b00bc611a5b03e859256b410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the elastic subsidiary preconditioner.  <br /></td></tr>
+<tr class="separator:a9398dd60b00bc611a5b03e859256b410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071ddbc46bb55f2c11fe0dfe9b69bb4a" id="r_a071ddbc46bb55f2c11fe0dfe9b69bb4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a071ddbc46bb55f2c11fe0dfe9b69bb4a">lagrange_multiplier_preconditioner_solve</a> (const DoubleVector &amp;r, DoubleVector &amp;z)</td></tr>
+<tr class="memdesc:a071ddbc46bb55f2c11fe0dfe9b69bb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the lagrange multiplier subsidiary preconditioner.  <br /></td></tr>
+<tr class="separator:a071ddbc46bb55f2c11fe0dfe9b69bb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3e2302245fa432f49e3f979cbfe6b3a2" id="r_a3e2302245fa432f49e3f979cbfe6b3a2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a3e2302245fa432f49e3f979cbfe6b3a2">Scaling</a></td></tr>
+<tr class="memdesc:a3e2302245fa432f49e3f979cbfe6b3a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scaling. Defaults to infinity norm of S.  <br /></td></tr>
+<tr class="separator:a3e2302245fa432f49e3f979cbfe6b3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca651eb7983c61cdaea734b19f2ac25" id="r_a3ca651eb7983c61cdaea734b19f2ac25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a3ca651eb7983c61cdaea734b19f2ac25">Use_inf_norm_of_s_scaling</a></td></tr>
+<tr class="memdesc:a3ca651eb7983c61cdaea734b19f2ac25"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating whether the inf-norm of S should be used as scaling. Default = true;  <br /></td></tr>
+<tr class="separator:a3ca651eb7983c61cdaea734b19f2ac25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb84100d37f174e683b2d7a0dd688584" id="r_abb84100d37f174e683b2d7a0dd688584"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">Elastic_preconditioner_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#abb84100d37f174e683b2d7a0dd688584">E_preconditioner_type</a></td></tr>
+<tr class="memdesc:abb84100d37f174e683b2d7a0dd688584"><td class="mdescLeft">&#160;</td><td class="mdescRight">An unsigned indicating which method should be used for preconditioning the solid component.  <br /></td></tr>
+<tr class="separator:abb84100d37f174e683b2d7a0dd688584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef0a56e6011e3a7f1c3a2ce171949077" id="r_aef0a56e6011e3a7f1c3a2ce171949077"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aef0a56e6011e3a7f1c3a2ce171949077">Dim</a></td></tr>
+<tr class="memdesc:aef0a56e6011e3a7f1c3a2ce171949077"><td class="mdescLeft">&#160;</td><td class="mdescRight">the dimension of the problem  <br /></td></tr>
+<tr class="separator:aef0a56e6011e3a7f1c3a2ce171949077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5cbfeac8ef38461d7816ca01dbd9eb3" id="r_ae5cbfeac8ef38461d7816ca01dbd9eb3"><td class="memItemLeft" align="right" valign="top">Preconditioner *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#ae5cbfeac8ef38461d7816ca01dbd9eb3">Elastic_preconditioner_pt</a></td></tr>
+<tr class="memdesc:ae5cbfeac8ef38461d7816ca01dbd9eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">storage for the preconditioner for the solid system  <br /></td></tr>
+<tr class="separator:ae5cbfeac8ef38461d7816ca01dbd9eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a705470f8265f77b11eb5a5096a9fe59d" id="r_a705470f8265f77b11eb5a5096a9fe59d"><td class="memItemLeft" align="right" valign="top">Vector&lt; Preconditioner * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a705470f8265f77b11eb5a5096a9fe59d">Lagrange_multiplier_preconditioner_pt</a></td></tr>
+<tr class="memdesc:a705470f8265f77b11eb5a5096a9fe59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">lagrange multiplier preconditioner pt  <br /></td></tr>
+<tr class="separator:a705470f8265f77b11eb5a5096a9fe59d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0206c1e2da88da8948f2d560e8376aa3" id="r_a0206c1e2da88da8948f2d560e8376aa3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a0206c1e2da88da8948f2d560e8376aa3">Lagrange_multiplier_subsidiary_preconditioner_function_pt</a></td></tr>
+<tr class="memdesc:a0206c1e2da88da8948f2d560e8376aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Lagrange multiplier subsidiary preconditioner function pointer.  <br /></td></tr>
+<tr class="separator:a0206c1e2da88da8948f2d560e8376aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3ca9f5ccba13b8a2038afb386f73b2d" id="r_aa3ca9f5ccba13b8a2038afb386f73b2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aa3ca9f5ccba13b8a2038afb386f73b2d">Elastic_subsidiary_preconditioner_function_pt</a></td></tr>
+<tr class="memdesc:aa3ca9f5ccba13b8a2038afb386f73b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The solid subsidiary preconditioner function pointer.  <br /></td></tr>
+<tr class="separator:aa3ca9f5ccba13b8a2038afb386f73b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba765545c62b9dc52f7c2ea25ea13177" id="r_aba765545c62b9dc52f7c2ea25ea13177"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aba765545c62b9dc52f7c2ea25ea13177">Elastic_mesh_pt</a></td></tr>
+<tr class="memdesc:aba765545c62b9dc52f7c2ea25ea13177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the mesh containing the solid elements.  <br /></td></tr>
+<tr class="separator:aba765545c62b9dc52f7c2ea25ea13177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d167073db4ade6ba70f036c4ab926dd" id="r_a9d167073db4ade6ba70f036c4ab926dd"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#a9d167073db4ade6ba70f036c4ab926dd">Lagrange_multiplier_mesh_pt</a></td></tr>
+<tr class="memdesc:a9d167073db4ade6ba70f036c4ab926dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the mesh containing the Lagrange multiplier elements.  <br /></td></tr>
+<tr class="separator:a9d167073db4ade6ba70f036c4ab926dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aaaea2b4795566f81945597254305249d" id="r_aaaea2b4795566f81945597254305249d"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aaaea2b4795566f81945597254305249d">PseudoElasticFSIPreconditioner</a></td></tr>
+<tr class="memdesc:aaaea2b4795566f81945597254305249d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html" title="Preconditioner for FSI problems with pseudo-elastic fluid node updates. Note: NavierStokesSchurComple...">PseudoElasticFSIPreconditioner</a> is a friend to access the private *_preconditioner_solve(...) method.  <br /></td></tr>
+<tr class="separator:aaaea2b4795566f81945597254305249d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A subsidiary preconditioner for the pseudo-elastic FSI preconditioner. Also a stand-alone preconditioner for the problem of non-linear elasticity subject to prescribed displacement by Lagrange multiplier. <b>Enumeration</b> of Elastic DOF types in the Pseudo-Elastic Elements The method get_dof_types_for_unknowns() must be implemented such that DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 DOF types and the following labelling must be implemented: 0 - x displacement (without lagr mult traction) 1 - y displacement (without lagr mult traction) 2 - z displacement (without lagr mult traction) 4 - x displacement (with lagr mult traction) 5 - y displacement (with lagr mult traction) 6 - z displacement (with lagr mult traction) </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00099">99</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aeb3ff30f6ce6c9f9650090bd432d7a6a" name="aeb3ff30f6ce6c9f9650090bd432d7a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb3ff30f6ce6c9f9650090bd432d7a6a">&#9670;&#160;</a></span>SubsidiaryPreconditionerFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Preconditioner *(* oomph::PseudoElasticPreconditioner::SubsidiaryPreconditionerFctPt) ()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This preconditioner includes the option to use subsidiary operators other than ExactPreconditioner for this problem. This is the typedef of a function that should return an instance of a subsidiary preconditioning operator. This preconditioner is responsible for the destruction of the subsidiary preconditioners. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00111">111</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="acde733e1a111a961d1e714add4e8015d" name="acde733e1a111a961d1e714add4e8015d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acde733e1a111a961d1e714add4e8015d">&#9670;&#160;</a></span>Elastic_preconditioner_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">oomph::PseudoElasticPreconditioner::Elastic_preconditioner_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The augmented elasticity system can be preconditioned in one of four ways. 0 - Exact preconditioner 1 - Block diagonal preconditioning 2 - Block upper triangular preconditioner 3 - Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="acde733e1a111a961d1e714add4e8015da277774b20738300271de0fa42391a951" name="acde733e1a111a961d1e714add4e8015da277774b20738300271de0fa42391a951"></a>Exact_block_preconditioner&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acde733e1a111a961d1e714add4e8015da048620d7667a53bcfb11513dea9b2977" name="acde733e1a111a961d1e714add4e8015da048620d7667a53bcfb11513dea9b2977"></a>Block_diagonal_preconditioner&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acde733e1a111a961d1e714add4e8015dabf00157409786d29ec7122bb86a5e8fe" name="acde733e1a111a961d1e714add4e8015dabf00157409786d29ec7122bb86a5e8fe"></a>Block_lower_triangular_preconditioner&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acde733e1a111a961d1e714add4e8015daed4f4716017bc0f8d0c40ed7aaab735e" name="acde733e1a111a961d1e714add4e8015daed4f4716017bc0f8d0c40ed7aaab735e"></a>Block_upper_triangular_preconditioner&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00121">121</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab2638e8ccceed850b8eb581fc1309ff0" name="ab2638e8ccceed850b8eb581fc1309ff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2638e8ccceed850b8eb581fc1309ff0">&#9670;&#160;</a></span>PseudoElasticPreconditioner() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoElasticPreconditioner::PseudoElasticPreconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default (and only) constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">130</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00254">E_preconditioner_type</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00273">Elastic_mesh_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00260">Elastic_preconditioner_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00270">Elastic_subsidiary_preconditioner_function_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00123">Exact_block_preconditioner</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00276">Lagrange_multiplier_mesh_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00267">Lagrange_multiplier_subsidiary_preconditioner_function_pt</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00250">Use_inf_norm_of_s_scaling</a>.</p>
+
+</div>
+</div>
+<a id="a9366f2553545b09995e40ad8fa4ed91c" name="a9366f2553545b09995e40ad8fa4ed91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9366f2553545b09995e40ad8fa4ed91c">&#9670;&#160;</a></span>~PseudoElasticPreconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual oomph::PseudoElasticPreconditioner::~PseudoElasticPreconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>destructor </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00147">147</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00528">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="ae485d6e8d9addf8dc16482e9bcfe5bb8" name="ae485d6e8d9addf8dc16482e9bcfe5bb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae485d6e8d9addf8dc16482e9bcfe5bb8">&#9670;&#160;</a></span>PseudoElasticPreconditioner() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoElasticPreconditioner::PseudoElasticPreconditioner </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html">PseudoElasticPreconditioner</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adcc9487ec16eea12912b2f3a023b4129" name="adcc9487ec16eea12912b2f3a023b4129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc9487ec16eea12912b2f3a023b4129">&#9670;&#160;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the memory. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00528">528</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00260">Elastic_preconditioner_pt</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00263">Lagrange_multiplier_preconditioner_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00034">oomph::PseudoElasticFSIPreconditioner::clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00147">~PseudoElasticPreconditioner()</a>.</p>
+
+</div>
+</div>
+<a id="a038e7d2eaea4346c3ea6ba2b34ae824c" name="a038e7d2eaea4346c3ea6ba2b34ae824c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a038e7d2eaea4346c3ea6ba2b34ae824c">&#9670;&#160;</a></span>disable_inf_norm_of_s_scaling()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::disable_inf_norm_of_s_scaling </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call to use no scaling. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00197">197</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00250">Use_inf_norm_of_s_scaling</a>.</p>
+
+</div>
+</div>
+<a id="a9398dd60b00bc611a5b03e859256b410" name="a9398dd60b00bc611a5b03e859256b410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9398dd60b00bc611a5b03e859256b410">&#9670;&#160;</a></span>elastic_preconditioner_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::elastic_preconditioner_solve </td>
+          <td>(</td>
+          <td class="paramtype">const DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply the elastic subsidiary preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00494">494</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00260">Elastic_preconditioner_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00280">oomph::PseudoElasticFSIPreconditioner::preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00170">preconditioner_solve()</a>.</p>
+
+</div>
+</div>
+<a id="afc791ac1aaf4f3797d3981a737393ecf" name="afc791ac1aaf4f3797d3981a737393ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc791ac1aaf4f3797d3981a737393ecf">&#9670;&#160;</a></span>elastic_preconditioner_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">Elastic_preconditioner_type</a> &amp; oomph::PseudoElasticPreconditioner::elastic_preconditioner_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the type of preconditioner applied to the elastic: 0 - Exact preconditioner 1 - Block diagonal preconditioning 2 - Block upper triangular preconditioner 3 - Block lower triangular preconditioner We group together the different components of the displacement vector field for the block decomposition. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00229">229</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00254">E_preconditioner_type</a>.</p>
+
+</div>
+</div>
+<a id="a917caf20e03fc8bdb45336206ce5365e" name="a917caf20e03fc8bdb45336206ce5365e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917caf20e03fc8bdb45336206ce5365e">&#9670;&#160;</a></span>enable_inf_norm_of_s_scaling()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::enable_inf_norm_of_s_scaling </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call to use the inf norm of S as scaling. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00191">191</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00250">Use_inf_norm_of_s_scaling</a>.</p>
+
+</div>
+</div>
+<a id="a071ddbc46bb55f2c11fe0dfe9b69bb4a" name="a071ddbc46bb55f2c11fe0dfe9b69bb4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071ddbc46bb55f2c11fe0dfe9b69bb4a">&#9670;&#160;</a></span>lagrange_multiplier_preconditioner_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::lagrange_multiplier_preconditioner_solve </td>
+          <td>(</td>
+          <td class="paramtype">const DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply the lagrange multiplier subsidiary preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00504">504</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00257">Dim</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00263">Lagrange_multiplier_preconditioner_pt</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00246">Scaling</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00280">oomph::PseudoElasticFSIPreconditioner::preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00170">preconditioner_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a2533d2574d2c7d6613fda72b96a5f885" name="a2533d2574d2c7d6613fda72b96a5f885"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2533d2574d2c7d6613fda72b96a5f885">&#9670;&#160;</a></span>preconditioner_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::preconditioner_solve </td>
+          <td>(</td>
+          <td class="paramtype">const DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DoubleVector &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply the preconditioner. Method implemented in two other methods (elastic and lagrange multiplier subsidiary preocnditioner) for the <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html" title="Preconditioner for FSI problems with pseudo-elastic fluid node updates. Note: NavierStokesSchurComple...">PseudoElasticFSIPreconditioner</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00170">170</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00494">elastic_preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00504">lagrange_multiplier_preconditioner_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ae115b58574a36c2c8fecb2524afa54f1" name="ae115b58574a36c2c8fecb2524afa54f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae115b58574a36c2c8fecb2524afa54f1">&#9670;&#160;</a></span>set_elastic_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::set_elastic_mesh </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to mesh containing the block-preconditionable elastic elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00178">178</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00273">Elastic_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00052">oomph::PseudoElasticFSIPreconditioner::setup()</a>.</p>
+
+</div>
+</div>
+<a id="a8c75fe5786d64a042056df16a062c055" name="a8c75fe5786d64a042056df16a062c055"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c75fe5786d64a042056df16a062c055">&#9670;&#160;</a></span>set_elastic_subsidiary_preconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::set_elastic_subsidiary_preconditioner </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a>&#160;</td>
+          <td class="paramname"><em>prec_fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>By default the elastic subsidiary systems are preconditioner with ExactPreconditioner. For a different preconditioner, pass a function to this method returning a different subsidiary operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00216">216</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00270">Elastic_subsidiary_preconditioner_function_pt</a>.</p>
+
+</div>
+</div>
+<a id="a6030c2461383ee1a0b8ac6ed56b0daf6" name="a6030c2461383ee1a0b8ac6ed56b0daf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6030c2461383ee1a0b8ac6ed56b0daf6">&#9670;&#160;</a></span>set_lagrange_multiplier_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::set_lagrange_multiplier_mesh </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to mesh containing the block-preconditionable lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00185">185</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00276">Lagrange_multiplier_mesh_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00052">oomph::PseudoElasticFSIPreconditioner::setup()</a>.</p>
+
+</div>
+</div>
+<a id="a64865a85f35ae9385f9f8d68e75595e0" name="a64865a85f35ae9385f9f8d68e75595e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64865a85f35ae9385f9f8d68e75595e0">&#9670;&#160;</a></span>set_lagrange_multiplier_subsidiary_preconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::set_lagrange_multiplier_subsidiary_preconditioner </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a>&#160;</td>
+          <td class="paramname"><em>prec_fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>By default the Lagrange multiplier subsidiary systems are preconditioner with ExactPreconditioner. For a different preconditioner, pass a function to this method returning a different subsidiary operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00206">206</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00267">Lagrange_multiplier_subsidiary_preconditioner_function_pt</a>.</p>
+
+</div>
+</div>
+<a id="a69909eef3e1530ca7faf48c653ec7327" name="a69909eef3e1530ca7faf48c653ec7327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69909eef3e1530ca7faf48c653ec7327">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::PseudoElasticPreconditioner::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+<p>Setup method for the <a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html" title="A subsidiary preconditioner for the pseudo-elastic FSI preconditioner. Also a stand-alone preconditio...">PseudoElasticPreconditioner</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">114</a> of file <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00124">Block_diagonal_preconditioner</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00125">Block_lower_triangular_preconditioner</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00126">Block_upper_triangular_preconditioner</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00528">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00257">Dim</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00254">E_preconditioner_type</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00273">Elastic_mesh_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00260">Elastic_preconditioner_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00270">Elastic_subsidiary_preconditioner_function_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00123">Exact_block_preconditioner</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00276">Lagrange_multiplier_mesh_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00263">Lagrange_multiplier_preconditioner_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00267">Lagrange_multiplier_subsidiary_preconditioner_function_pt</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00246">Scaling</a>, and <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00250">Use_inf_norm_of_s_scaling</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="aaaea2b4795566f81945597254305249d" name="aaaea2b4795566f81945597254305249d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaea2b4795566f81945597254305249d">&#9670;&#160;</a></span>PseudoElasticFSIPreconditioner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html">PseudoElasticFSIPreconditioner</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1PseudoElasticFSIPreconditioner.html" title="Preconditioner for FSI problems with pseudo-elastic fluid node updates. Note: NavierStokesSchurComple...">PseudoElasticFSIPreconditioner</a> is a friend to access the private *_preconditioner_solve(...) method. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00103">103</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aef0a56e6011e3a7f1c3a2ce171949077" name="aef0a56e6011e3a7f1c3a2ce171949077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef0a56e6011e3a7f1c3a2ce171949077">&#9670;&#160;</a></span>Dim</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned oomph::PseudoElasticPreconditioner::Dim</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the dimension of the problem </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00257">257</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00504">lagrange_multiplier_preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="abb84100d37f174e683b2d7a0dd688584" name="abb84100d37f174e683b2d7a0dd688584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb84100d37f174e683b2d7a0dd688584">&#9670;&#160;</a></span>E_preconditioner_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#acde733e1a111a961d1e714add4e8015d">Elastic_preconditioner_type</a> oomph::PseudoElasticPreconditioner::E_preconditioner_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An unsigned indicating which method should be used for preconditioning the solid component. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00254">254</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00229">elastic_preconditioner_type()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="aba765545c62b9dc52f7c2ea25ea13177" name="aba765545c62b9dc52f7c2ea25ea13177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba765545c62b9dc52f7c2ea25ea13177">&#9670;&#160;</a></span>Elastic_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* oomph::PseudoElasticPreconditioner::Elastic_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the mesh containing the solid elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00273">273</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00178">set_elastic_mesh()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="ae5cbfeac8ef38461d7816ca01dbd9eb3" name="ae5cbfeac8ef38461d7816ca01dbd9eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5cbfeac8ef38461d7816ca01dbd9eb3">&#9670;&#160;</a></span>Elastic_preconditioner_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Preconditioner* oomph::PseudoElasticPreconditioner::Elastic_preconditioner_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>storage for the preconditioner for the solid system </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00260">260</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00528">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00494">elastic_preconditioner_solve()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="aa3ca9f5ccba13b8a2038afb386f73b2d" name="aa3ca9f5ccba13b8a2038afb386f73b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3ca9f5ccba13b8a2038afb386f73b2d">&#9670;&#160;</a></span>Elastic_subsidiary_preconditioner_function_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a> oomph::PseudoElasticPreconditioner::Elastic_subsidiary_preconditioner_function_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The solid subsidiary preconditioner function pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00270">270</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00216">set_elastic_subsidiary_preconditioner()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a9d167073db4ade6ba70f036c4ab926dd" name="a9d167073db4ade6ba70f036c4ab926dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d167073db4ade6ba70f036c4ab926dd">&#9670;&#160;</a></span>Lagrange_multiplier_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* oomph::PseudoElasticPreconditioner::Lagrange_multiplier_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the mesh containing the Lagrange multiplier elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00276">276</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00185">set_lagrange_multiplier_mesh()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a705470f8265f77b11eb5a5096a9fe59d" name="a705470f8265f77b11eb5a5096a9fe59d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a705470f8265f77b11eb5a5096a9fe59d">&#9670;&#160;</a></span>Lagrange_multiplier_preconditioner_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;Preconditioner*&gt; oomph::PseudoElasticPreconditioner::Lagrange_multiplier_preconditioner_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>lagrange multiplier preconditioner pt </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00263">263</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00528">clean_up_memory()</a>, <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00504">lagrange_multiplier_preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a0206c1e2da88da8948f2d560e8376aa3" name="a0206c1e2da88da8948f2d560e8376aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0206c1e2da88da8948f2d560e8376aa3">&#9670;&#160;</a></span>Lagrange_multiplier_subsidiary_preconditioner_function_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1PseudoElasticPreconditioner.html#aeb3ff30f6ce6c9f9650090bd432d7a6a">SubsidiaryPreconditionerFctPt</a> oomph::PseudoElasticPreconditioner::Lagrange_multiplier_subsidiary_preconditioner_function_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Lagrange multiplier subsidiary preconditioner function pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00267">267</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00206">set_lagrange_multiplier_subsidiary_preconditioner()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a3e2302245fa432f49e3f979cbfe6b3a2" name="a3e2302245fa432f49e3f979cbfe6b3a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2302245fa432f49e3f979cbfe6b3a2">&#9670;&#160;</a></span>Scaling</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double oomph::PseudoElasticPreconditioner::Scaling</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The scaling. Defaults to infinity norm of S. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00246">246</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00504">lagrange_multiplier_preconditioner_solve()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a3ca651eb7983c61cdaea734b19f2ac25" name="a3ca651eb7983c61cdaea734b19f2ac25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ca651eb7983c61cdaea734b19f2ac25">&#9670;&#160;</a></span>Use_inf_norm_of_s_scaling</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool oomph::PseudoElasticPreconditioner::Use_inf_norm_of_s_scaling</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>boolean indicating whether the inf-norm of S should be used as scaling. Default = true; </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00250">250</a> of file <a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00197">disable_inf_norm_of_s_scaling()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00191">enable_inf_norm_of_s_scaling()</a>, <a class="el" href="pseudo__elastic__preconditioner_8h_source.html#l00130">PseudoElasticPreconditioner()</a>, and <a class="el" href="pseudo__elastic__preconditioner_8cc_source.html#l00114">setup()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="pseudo__elastic__preconditioner_8h_source.html">pseudo_elastic_preconditioner.h</a></li>
+<li><a class="el" href="pseudo__elastic__preconditioner_8cc_source.html">pseudo_elastic_preconditioner.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Problem_Parameter Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Problem_Parameter Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for Problem Parameter.  
+<a href="namespaceProblem__Parameter.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1dd3c6bcf97360c8fe0d288ca7610351" id="r_a1dd3c6bcf97360c8fe0d288ca7610351"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a1dd3c6bcf97360c8fe0d288ca7610351">Doc_info</a></td></tr>
+<tr class="memdesc:a1dd3c6bcf97360c8fe0d288ca7610351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc info object.  <br /></td></tr>
+<tr class="separator:a1dd3c6bcf97360c8fe0d288ca7610351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc656299287d4d9a8374c2c501750b4f" id="r_acc656299287d4d9a8374c2c501750b4f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#acc656299287d4d9a8374c2c501750b4f">Re</a> =0.0</td></tr>
+<tr class="memdesc:acc656299287d4d9a8374c2c501750b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <br /></td></tr>
+<tr class="separator:acc656299287d4d9a8374c2c501750b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6194d2571881779c678fbabc1503d47" id="r_af6194d2571881779c678fbabc1503d47"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">Ca</a> = 10.0</td></tr>
+<tr class="memdesc:af6194d2571881779c678fbabc1503d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capillary number.  <br /></td></tr>
+<tr class="separator:af6194d2571881779c678fbabc1503d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec2e733c8f2d3c18ebc702b3f80cc17" id="r_abec2e733c8f2d3c18ebc702b3f80cc17"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#abec2e733c8f2d3c18ebc702b3f80cc17">Nu</a> =0.3</td></tr>
+<tr class="memdesc:abec2e733c8f2d3c18ebc702b3f80cc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <br /></td></tr>
+<tr class="separator:abec2e733c8f2d3c18ebc702b3f80cc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903237528f0e9bb92debcc8842576cca" id="r_a903237528f0e9bb92debcc8842576cca"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Radius</a> = 0.25</td></tr>
+<tr class="memdesc:a903237528f0e9bb92debcc8842576cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial radius of bubble.  <br /></td></tr>
+<tr class="separator:a903237528f0e9bb92debcc8842576cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8e0a2d1ec39a8dd7357a43bcc5f20e" id="r_aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#aad8e0a2d1ec39a8dd7357a43bcc5f20e">Volume</a> = -MathematicalConstants::Pi*<a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Radius</a>*<a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Radius</a></td></tr>
+<tr class="memdesc:aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume of the bubble (negative because it's outside the fluid!)  <br /></td></tr>
+<tr class="separator:aad8e0a2d1ec39a8dd7357a43bcc5f20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7792613e563a733ad88b8e15d126fc3a" id="r_a7792613e563a733ad88b8e15d126fc3a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a7792613e563a733ad88b8e15d126fc3a">Inflow_veloc_magnitude</a> = 0.0</td></tr>
+<tr class="memdesc:a7792613e563a733ad88b8e15d126fc3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics)  <br /></td></tr>
+<tr class="separator:a7792613e563a733ad88b8e15d126fc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b67840fea463f29b53d12f7bd7cb34b" id="r_a7b67840fea463f29b53d12f7bd7cb34b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a7b67840fea463f29b53d12f7bd7cb34b">Length</a> = 3.0</td></tr>
+<tr class="memdesc:a7b67840fea463f29b53d12f7bd7cb34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the channel.  <br /></td></tr>
+<tr class="separator:a7b67840fea463f29b53d12f7bd7cb34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810f05c8d3e3331aed75643557d1057c" id="r_a810f05c8d3e3331aed75643557d1057c"><td class="memItemLeft" align="right" valign="top">ConstitutiveLaw *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a810f05c8d3e3331aed75643557d1057c">Constitutive_law_pt</a> =0</td></tr>
+<tr class="memdesc:a810f05c8d3e3331aed75643557d1057c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constitutive law used to determine the mesh deformation.  <br /></td></tr>
+<tr class="separator:a810f05c8d3e3331aed75643557d1057c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55310be5f2dfcb5fcfe35d71f9c16e06" id="r_a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a55310be5f2dfcb5fcfe35d71f9c16e06">Trace_file</a></td></tr>
+<tr class="memdesc:a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <br /></td></tr>
+<tr class="separator:a55310be5f2dfcb5fcfe35d71f9c16e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a388e06a5e637b21378ab1832e5564bec" id="r_a388e06a5e637b21378ab1832e5564bec"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#a388e06a5e637b21378ab1832e5564bec">Norm_file</a></td></tr>
+<tr class="memdesc:a388e06a5e637b21378ab1832e5564bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to document the norm of the solution (for validation purposes &ndash; triangle doesn't give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!)  <br /></td></tr>
+<tr class="separator:a388e06a5e637b21378ab1832e5564bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdb95f68bd3c77e4c12001a29bd26e31" id="r_afdb95f68bd3c77e4c12001a29bd26e31"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceProblem__Parameter.html#afdb95f68bd3c77e4c12001a29bd26e31">Viscosity_ratio</a> = 10.0</td></tr>
+<tr class="memdesc:afdb95f68bd3c77e4c12001a29bd26e31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Viscosity ratio of the droplet to the surrounding fluid.  <br /></td></tr>
+<tr class="separator:afdb95f68bd3c77e4c12001a29bd26e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for Problem Parameter. </p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="af6194d2571881779c678fbabc1503d47" name="af6194d2571881779c678fbabc1503d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6194d2571881779c678fbabc1503d47">&#9670;&#160;</a></span>Ca</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Ca = 10.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Capillary number. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00378">378</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00619">BubbleInChannelProblem&lt; ELEMENT &gt;::BubbleInChannelProblem()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00900">BubbleInChannelProblem&lt; ELEMENT &gt;::create_free_surface_elements()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00908">DropInChannelProblem&lt; ELEMENT &gt;::create_free_surface_elements()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00662">DropInChannelProblem&lt; ELEMENT &gt;::DropInChannelProblem()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01303">main()</a>.</p>
+
+</div>
+</div>
+<a id="a810f05c8d3e3331aed75643557d1057c" name="a810f05c8d3e3331aed75643557d1057c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810f05c8d3e3331aed75643557d1057c">&#9670;&#160;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConstitutiveLaw * Problem_Parameter::Constitutive_law_pt =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constitutive law used to determine the mesh deformation. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00398">398</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01003">BubbleInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01025">DropInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">main()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00433">BubbleInChannelProblem&lt; ELEMENT &gt;::~BubbleInChannelProblem()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00417">DropInChannelProblem&lt; ELEMENT &gt;::~DropInChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a1dd3c6bcf97360c8fe0d288ca7610351" name="a1dd3c6bcf97360c8fe0d288ca7610351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd3c6bcf97360c8fe0d288ca7610351">&#9670;&#160;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo Problem_Parameter::Doc_info</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc info object. </p>
+<p>Doc info. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00372">372</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00619">BubbleInChannelProblem&lt; ELEMENT &gt;::BubbleInChannelProblem()</a>, <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01156">BubbleInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01191">DropInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00662">DropInChannelProblem&lt; ELEMENT &gt;::DropInChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a7792613e563a733ad88b8e15d126fc3a" name="a7792613e563a733ad88b8e15d126fc3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7792613e563a733ad88b8e15d126fc3a">&#9670;&#160;</a></span>Inflow_veloc_magnitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Inflow_veloc_magnitude = 0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scaling factor for inflow velocity (allows it to be switched off to do hydrostatics) </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00392">392</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01003">BubbleInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01025">DropInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">main()</a>.</p>
+
+</div>
+</div>
+<a id="a7b67840fea463f29b53d12f7bd7cb34b" name="a7b67840fea463f29b53d12f7bd7cb34b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b67840fea463f29b53d12f7bd7cb34b">&#9670;&#160;</a></span>Length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Length = 3.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Length of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00395">395</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00619">BubbleInChannelProblem&lt; ELEMENT &gt;::BubbleInChannelProblem()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00662">DropInChannelProblem&lt; ELEMENT &gt;::DropInChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a388e06a5e637b21378ab1832e5564bec" name="a388e06a5e637b21378ab1832e5564bec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388e06a5e637b21378ab1832e5564bec">&#9670;&#160;</a></span>Norm_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream Problem_Parameter::Norm_file</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>File to document the norm of the solution (for validation purposes &ndash; triangle doesn't give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!) </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00407">407</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01156">BubbleInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01191">DropInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">main()</a>.</p>
+
+</div>
+</div>
+<a id="abec2e733c8f2d3c18ebc702b3f80cc17" name="abec2e733c8f2d3c18ebc702b3f80cc17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec2e733c8f2d3c18ebc702b3f80cc17">&#9670;&#160;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Nu =0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00381">381</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">main()</a>.</p>
+
+</div>
+</div>
+<a id="a903237528f0e9bb92debcc8842576cca" name="a903237528f0e9bb92debcc8842576cca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a903237528f0e9bb92debcc8842576cca">&#9670;&#160;</a></span>Radius</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Radius = 0.25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initial radius of bubble. </p>
+<p>Initial radius of drop. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00384">384</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00619">BubbleInChannelProblem&lt; ELEMENT &gt;::BubbleInChannelProblem()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00662">DropInChannelProblem&lt; ELEMENT &gt;::DropInChannelProblem()</a>.</p>
+
+</div>
+</div>
+<a id="acc656299287d4d9a8374c2c501750b4f" name="acc656299287d4d9a8374c2c501750b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc656299287d4d9a8374c2c501750b4f">&#9670;&#160;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Re =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reynolds number. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00375">375</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01003">BubbleInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>, and <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01025">DropInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>.</p>
+
+</div>
+</div>
+<a id="a55310be5f2dfcb5fcfe35d71f9c16e06" name="a55310be5f2dfcb5fcfe35d71f9c16e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55310be5f2dfcb5fcfe35d71f9c16e06">&#9670;&#160;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream Problem_Parameter::Trace_file</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00401">401</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01156">BubbleInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01191">DropInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01272">main()</a>.</p>
+
+</div>
+</div>
+<a id="afdb95f68bd3c77e4c12001a29bd26e31" name="afdb95f68bd3c77e4c12001a29bd26e31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdb95f68bd3c77e4c12001a29bd26e31">&#9670;&#160;</a></span>Viscosity_ratio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Viscosity_ratio = 10.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Viscosity ratio of the droplet to the surrounding fluid. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00375">375</a> of file <a class="el" href="adaptive__drop__in__channel_8cc_source.html">adaptive_drop_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l01025">DropInChannelProblem&lt; ELEMENT &gt;::complete_problem_setup()</a>.</p>
+
+</div>
+</div>
+<a id="aad8e0a2d1ec39a8dd7357a43bcc5f20e" name="aad8e0a2d1ec39a8dd7357a43bcc5f20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad8e0a2d1ec39a8dd7357a43bcc5f20e">&#9670;&#160;</a></span>Volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Problem_Parameter::Volume = -MathematicalConstants::Pi*<a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Radius</a>*<a class="el" href="namespaceProblem__Parameter.html#a903237528f0e9bb92debcc8842576cca">Radius</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Volume of the bubble (negative because it's outside the fluid!) </p>
+<p>Volume of the interface (Negative because the constraint is computed from the bulk side) </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00388">388</a> of file <a class="el" href="adaptive__bubble__in__channel_8cc_source.html">adaptive_bubble_in_channel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l00619">BubbleInChannelProblem&lt; ELEMENT &gt;::BubbleInChannelProblem()</a>, <a class="el" href="adaptive__drop__in__channel_8cc_source.html#l00956">DropInChannelProblem&lt; ELEMENT &gt;::create_volume_constraint_elements()</a>, and <a class="el" href="adaptive__bubble__in__channel_8cc_source.html#l01156">BubbleInChannelProblem&lt; ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

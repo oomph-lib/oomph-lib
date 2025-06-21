@@ -1,0 +1,292 @@
+\chapter{Example problem\+: The deformation of an elastic strip by a periodic traction -- this time with spatial adaptivity}
+\hypertarget{index}{}\label{index}\index{Example problem: The deformation of an elastic strip by a periodic traction -- this time with spatial adaptivity@{Example problem: The deformation of an elastic strip by a periodic traction -- this time with spatial adaptivity}}
+In this tutorial we re-\/visit a linear elasticity problem that we already discussed in detail in \href{../../periodic_load/html/index.html}{\texttt{ another tutorial}}\+: The deformation of an elastic strip loaded by a periodic surface traction. We demonstrate how to solve the problem with spatial adaptivity and explain how to apply periodic boundary conditions in such problems.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+We consider the same problem that we discussed in \href{../../periodic_load/html/index.html}{\texttt{ another tutorial\+:}}
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{The problem.}} \end{center}   
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{attempt3}
+\doxyfigcaption{Infinitely long strip loaded by a periodic traction. }
+\end{DoxyImage}
+ Solve  \[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the domain $ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} $, subject to the Dirichlet boundary conditions  \[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\] on the bottom boundary, the Neumann (traction) boundary conditions  \[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (3)
+\] on the top boundary, and symmetry conditions at $ x_1 = 0 $ and $ x_1 = L_x$,  \[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\ \ \ \ \ \ \ \ \ \ (4)
+\]   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+As before, we only discretise the domain over one period of the applied spatially-\/periodic traction and apply symmetry conditions at the left and right domain boundaries. Here we compute the solution with spatial adaptivity.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows a vector plot of the displacement field near the upper domain boundary. As already observed in the \href{../../periodic_load/html/index.html}{\texttt{ computations with a spatially uniform discretisation,}} the displacements decay rapidly with distance from the loaded surface. {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation therefore chooses a much finer discretisation near the upper domain boundary than in the interior, leading to a significant reduction in the number of unknowns in the problem.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{displ}
+\doxyfigcaption{Plot of displacement field, computed with spatial adaptivity. Note that the mesh is much finer near the top boundary where the displacement (gradients) are large. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+Most of the driver code is identical to that discussed in the \href{../../periodic_load/html/index.html}{\texttt{ tutorial in which we solved the problem without spatial adaptivity}}. We will therefore only discuss the parts of the code that require significant changes.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is very similar to that used in the non-\/refineable version of the problem. As usual, we detach the face elements that apply the traction boundary condition before adapting the bulk mesh and then re-\/attach them afterwards. This is done by the functions {\ttfamily delete\+\_\+traction\+\_\+elements()} and {\ttfamily assign\+\_\+traction\+\_\+elements()} which are called from {\ttfamily actions\+\_\+before\+\_\+adapt()} and {\ttfamily actions\+\_\+after\+\_\+adapt()}, respectively.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Periodic\ loading\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRefineablePeriodicLoadProblem}{RefineablePeriodicLoadProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ x\ and\ y\ directions\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ lengths.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem}{RefineablePeriodicLoadProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&ly);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_aece9eef8c0bf14527ea1fb6902820cb4}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a5b1bd71066266f1eb1cc36d524d57894}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_aae144ae04342a103a870d9dfbf29c188}{actions\_before\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Kill\ the\ traction\ elements\ and\ wipe\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a491998bff6616edaa5e29bf155d0284b}{delete\_traction\_elements}}();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \ \ rebuild\_global\_mesh();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_ad4fdb5d3805ea8dec6cedf515e5a73d7}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ traction\ elements}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a0de046a3d8a5d88f01d782fdc1be82a0}{assign\_traction\_elements}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \ \ rebuild\_global\_mesh();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_ac10c477b8edd2d0b7d3a69e65184356a}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Allocate\ traction\ elements\ on\ the\ top\ surface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a0de046a3d8a5d88f01d782fdc1be82a0}{assign\_traction\_elements}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Kill\ traction\ elements\ on\ the\ top\ surface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a491998bff6616edaa5e29bf155d0284b}{delete\_traction\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a760d47dad3385febb9bd893afda424c2}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ traction\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a760d47dad3385febb9bd893afda424c2}{Surface\_mesh\_pt}}-\/>element\_pt(e);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a760d47dad3385febb9bd893afda424c2}{Surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ (refineable!)\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ TreeBasedRefineableMeshBase*\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a98440a404cb3de29aad5a93f768889cd}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classRefineablePeriodicLoadProblem_a760d47dad3385febb9bd893afda424c2}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor – applying periodic boundary condition in spatially adaptive computations.}{The problem constructor – applying periodic boundary condition in spatially adaptive computations.}}\label{index_constructor}
+A key feature of this problem is the presence of the periodic boundary conditions (4) which require that the displacement field at the left boundary is the same as that on the right one. As discussed in \href{../../../navier_stokes/rayleigh_channel/html/index.html\#periodic}{\texttt{ another tutorial,}} such constraints can be imposed by the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{BoundaryNode::make\_periodic(...).}
+
+\end{DoxyCode}
+ Once this function is called for a {\ttfamily Boundary\+Node}, the {\ttfamily Boundary\+Node} shares its {\ttfamily Data} with the {\ttfamily Node} specified as the argument to that function. This "{}wraps the solution around the domain"{}.
+
+In spatially adaptive computations a complication arises because the non-\/uniform refinement of a mesh creates so-\/called hanging nodes, i.\+e. nodes in a refined element that have no counterpart in an adjacent less-\/refined element. Within {\ttfamily oomph-\/lib}, such hanging nodes ~\newline
+ are automatically constrained to maintain the inter-\/element continuity of the solution. The automatic detection of hanging nodes requires the identification of the elements\textquotesingle{} neighbours. This task is performed by neighbour finding routines that operate on a tree-\/(forest-\/)based representation of a mesh\textquotesingle{}s refinement pattern; see the discussion in ~\newline
+ \href{../../../the_data_structure/html/index.html\#QuadTreeInMeshes}{\texttt{ the tutorial explaining {\ttfamily oomph-\/lib\textquotesingle{}s} overall data structure.}} The representation of the initial, unrefined mesh as a {\ttfamily Tree\+Forest}, required by these routines, is typically generated in the mesh constructor, using the function {\ttfamily Tree\+Based\+Refineable\+Mesh\+Base\+::setup\+\_\+tree\+\_\+forest()}. In the 4x4 mesh shown below this function would establish that within the {\ttfamily Forest} representing this mesh, the {\ttfamily Tree} associated with element 11 has three neighbours\+: Element 16 in the northern (N) direction; element 10 in the western (W) direction; element 7 in the southern (S) direction. There is no neighbour in the eastern (E) direction. If element 11 is refined but its neighbours are not, the hanging nodes on the edges with elements 7, 10 and 16 are automatically detected and constrained, maintaining the continuity of the solution across the element boundaries.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{wrapped_forest}
+\doxyfigcaption{Sketch illustrating neighbour finding in problems with periodic boundary conditions. }
+\end{DoxyImage}
+
+
+If periodic boundary conditions are applied, the "{}wrapping around"{} of the domain (indicated by the red line) means that element 8 must be regarded as the (periodic) eastern (E) neighbour of element 11. This information must be passed to the root of the {\ttfamily Tree} associated with element 11, using the functions {\ttfamily Tree\+Root\+::neighbour\+\_\+pt(...)} and {\ttfamily Tree\+Root\+::neighbour\+\_\+periodic(...)}.
+
+This is illustrated in the following code segment which shows the revised version of the problem constructor. We start by building the refineable mesh and set the spatial error estimator.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ constructor:\ Pass\ number\ of\ elements\ in\ the\ coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ directions\ and\ the\ domain\ sizes.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineablePeriodicLoadProblem_ae950fdcf80e684eddb29358e1f9a3412}{RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem}}}
+\DoxyCodeLine{(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ ly)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ mesh\ }}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ RefineableRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create/set\ error\ estimator}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+
+\end{DoxyCodeInclude}
+ Next we declare all nodes on boundary 1 (the right boundary) to be periodic counterparts of the corresponding nodes on boundary 3 (the left boundary). (Here we exploit that within this particular mesh the boundary nodes on the left and right boundaries are enumerated consistently from top to bottom; this is not guaranteed to be the case -- for a general mesh you will have to establish which node corresponds to which; see \doxysectlink{index_comments}{Comments and Exercises}{1} .)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Make\ the\ mesh\ periodic\ in\ the\ x-\/direction\ by\ setting\ the\ nodes\ on}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ right\ boundary\ (boundary\ 1)\ to\ be\ the\ periodic\ counterparts\ of}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ those\ on\ the\ left\ one\ (boundary\ 3).}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,n)}
+\DoxyCodeLine{\ \ \ \ -\/>make\_periodic(Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,n));}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We obtain the tree roots associated with the elements on the left and right boundaries, again exploiting the specific enumeration of the elements (from bottom left to top right, as in the sketch shown above).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ establish\ the\ new\ neighbours\ (created\ by\ "{}wrapping\ around"{}}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ domain)\ in\ the\ TreeForst\ representation\ of\ the\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ pointers\ to\ tree\ roots\ associated\ with\ elements\ on\ the\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ left\ and\ right\ boundaries}}
+\DoxyCodeLine{\ \ Vector<TreeRoot*>\ left\_root\_pt(ny);}
+\DoxyCodeLine{\ \ Vector<TreeRoot*>\ right\_root\_pt(ny);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<ny;i++)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ left\_root\_pt[i]\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(i*nx))-\/>}
+\DoxyCodeLine{\ \ \ \ \ tree\_pt()-\/>root\_pt();}
+\DoxyCodeLine{\ \ \ \ right\_root\_pt[i]\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(nx-\/1+i*nx))-\/>}
+\DoxyCodeLine{\ \ \ \ \ tree\_pt()-\/>root\_pt();}
+\DoxyCodeLine{\ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Using this information it is easy to establish the (periodic) connections between the trees\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Switch\ on\ QuadTreeNames\ for\ enumeration\ of\ directions}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{using\ namespace\ }QuadTreeNames;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ the\ neighbour\ and\ periodicity}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<ny;i++)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ western\ neighbours\ of\ the\ elements\ on\ the\ left}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ boundary\ are\ those\ on\ the\ right}}
+\DoxyCodeLine{\ \ \ \ left\_root\_pt[i]-\/>neighbour\_pt(W)\ =\ right\_root\_pt[i];}
+\DoxyCodeLine{\ \ \ \ left\_root\_pt[i]-\/>set\_neighbour\_periodic(W);\ }
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ eastern\ neighbours\ of\ the\ elements\ on\ the\ right}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ boundary\ are\ those\ on\ the\ left}}
+\DoxyCodeLine{\ \ \ \ right\_root\_pt[i]-\/>neighbour\_pt(E)\ =\ left\_root\_pt[i];}
+\DoxyCodeLine{\ \ \ \ right\_root\_pt[i]-\/>set\_neighbour\_periodic(E);\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \}\ \textcolor{comment}{//\ done}}
+
+\end{DoxyCodeInclude}
+ The rest of the problem constructor is identical to that in its non-\/refineable counterpart and is therefore omitted here.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_nondim}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_nondim}
+When setting up periodic boundary conditions, it is obviously important to correctly identify the corresponding nodes and elements on the mesh boundaries. The enumeration of these nodes and elements is typically performed in the mesh constructor. If you are unsure what conventions have been used (and are too lazy to read the source code), recall that you can use the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Mesh::boundary\_node\_pt(b,j)}
+
+\end{DoxyCode}
+ to obtain a pointer to the {\ttfamily j} -\/th node on the {\ttfamily Mesh\textquotesingle{}s} {\ttfamily b} -\/th boundary and ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Mesh::boundary\_element\_pt(b,j)}
+
+\end{DoxyCode}
+ to obtain a pointer to the {\ttfamily j} -\/th element on the {\ttfamily Mesh\textquotesingle{}s} {\ttfamily b} -\/th boundary.\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Modify the problem constructor to check that the vertical coordinate of each periodic node matches that of its non-\/periodic counterpart.
+\item Confirm that the computed solution has a small discontinuity across the periodic boundary when you
+\begin{DoxyEnumerate}
+\item comment out the assignment of the periodic tree neighbours
+\item force the refinement of a single element next to the left boundary, say.
+\end{DoxyEnumerate}The relevant code is for the latter task is, in fact, already implemented in the problem constructor because the driver code acts as a self-\/test for this functionality.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ selective\ refinement\ of\ one\ element\ so\ that\ we\ can\ test}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ whether\ periodic\ hanging\ nodes\ work:\ Choose\ a\ single\ element\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ (the\ zero-\/th\ one)\ as\ the\ to-\/be-\/refined\ element.}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ creates\ a\ hanging\ node\ on\ the\ periodic\ boundary}}
+\DoxyCodeLine{\ Vector<unsigned>\ refine\_pattern(1,0);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>refine\_selected\_elements(refine\_pattern);}
+
+\end{DoxyCodeInclude}
+ {\bfseries{Note\+:}} To facilitate the visualisation of the discontinuity it is helpful to perform this test with the bilinear {\ttfamily Refineable\+QLinear\+Elasticity\+Element$<$2,2$>$}, with a shallower domain (e.\+g. $ L_y = 0.5 $ ), and without any further spatial refinement (set {\ttfamily max\+\_\+adapt=0} in {\ttfamily \doxylink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main()}} ).
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/linear_elasticity/periodic_load/}{\texttt{ demo\+\_\+drivers/linear\+\_\+elasticity/periodic\+\_\+load/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc}{\texttt{ demo\+\_\+drivers/linear\+\_\+elasticity/periodic\+\_\+load/refineable\+\_\+periodic\+\_\+load.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

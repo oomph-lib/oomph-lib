@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Propagation of a droplet in a channel - mesh generation and adaptation for free surface problems</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Propagation of a droplet in a channel - mesh generation and adaptation for free surface problems </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we demonstrate another adaptive solution of free surface problems on unstructured meshes, using the example of a droplet propagating along a straight channel. The problem is extremely similar to <a href="../../adaptive_bubble_in_channel/html/index.html">the propagation of a bubble in a channel tutorial </a>. Thus, we shall only discuss the differences from that tutorial. The key physical difference is that instead of the uniform pressure state in an inviscid bubble, the droplet consists of a viscous fluid that can support internal stress variations.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We illustrate the solution of the unsteady 2D Navier-Stokes equations by considering the propagation of a single droplet along a straight channel as shown in the sketch below. The non-dimensionalisation is the same as in the <a href="../../adaptive_bubble_in_channel/html/index.html">bubble tutorial, </a> and we choose the viscosity and density of the surrounding liquid to be the reference values.</p>
+<div class="image">
+<img src="problem.gif" alt=""/>
+<div class="caption">
+The problem setup. </div></div>
+ <p>The governing equations and boundary conditions are the same as those in the <br  />
+ <a href="../../adaptive_bubble_in_channel/html/index.html">bubble tutorial. </a> The only difference is that the Navier&ndash;Stokes equations must also be solved within the droplet. In fact, this is a two-fluid problem, a class of problems that is first introduced in <a href="../../two_layer_interface/html/index.html">another tutorial. </a></p>
+<hr  />
+<p>The constraint that the droplet volume remains constant must be enforced explicitly in the static case, as in the bubble problem. In the time-simulations, however, a constant drop volume is implicitly enforced by the continuity equation. For the bubble, the continuity equation is not solved within the interior, which is why the volume constraint must always be explicitly enforced in that case.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="implementation"></a>
+Implementation</h1>
+<p>We use the same method as in the <a href="../../adaptive_bubble_in_channel/html/index.html">bubble problem, </a> an ALE-based finite-element method with <a href="../../single_layer_free_surface/html/index.html#kinematic_condition_implementation">a pseudo-elastic node-update procedure</a>. In this case, there is a pressure jump across the interface between the fluids, which means that we use triangular Crouzeix&ndash;Raviart elements rather than the continuous-pressure Taylor&ndash;Hood elements. Again, we impose the kinematic and dynamic boundary conditions with <code>FaceElements</code>. The volume constraint for the static problem is also imposed in a similar way: we attach <code>LineVolumeConstraintBoundingSolidElements</code> to the droplet surface and create an additional <code>VolumeConstraintElement</code>. Here, a pressure degree of freedom within the droplet is hijacked, see <a href="../../static_two_layer/html/index.html">another tutorial, </a> to be used as the unknown associated with the volume constraint. Once the static initial problem has been solved, the "volume constraint" elements are deleted and the pressure degree of freedom is unhijacked.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>We perform the simulation in a two-stage procedure. We start by performing a steady solve with the inflow switched off. This deforms the droplet into its steady state (approximately) circular configuration with the required volume. The actual time-dependent simulation is then performed with an impulsive start from this configuration.</p>
+<p>The figure below shows the location of the droplet and mesh (upper figure) and a contour plot of the pressure distribution with overlaid velocity vectors of the difference between the background Poiseuille flow and the velocity field (lower figure). The figure is a snapshot for the parameters <img class="formulaInl" alt="$ Re = ReSt =
+0.0 $" src="form_0.png" width="93" height="10"/>, <img class="formulaInl" alt="$ Ca = 10.0 $" src="form_1.png" width="55" height="10"/> and a droplet that is ten times as viscous as the surrounding liquid.</p>
+<div class="image">
+<img src="drop_snapshot.gif" alt=""/>
+<div class="caption">
+Snapshot of the flow field (velocity vectors and pressure contours) for a propagating droplet. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="parameters"></a>
+Global parameters</h1>
+<p>The namespace containing the dimensionless parameters contains an additional viscosity ratio parameter, compared to that in the <a href="../../adaptive_bubble_in_channel/html/index.html">bubble problem </a>.</p>
+ <div class="fragment"><div class="line"><span class="comment">  /// Viscosity ratio of the droplet to the surrounding fluid</span></div>
+<div class="line">  <span class="keywordtype">double</span> Viscosity_ratio = 10.0;</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The first difference from the bubble problem is that the steady solver does not converge when <img class="formulaInl" alt="$ Ca = 10 $" src="form_2.png" width="45" height="10"/>. Instead, we start with <img class="formulaInl" alt="$
+Ca = 1 $" src="form_3.png" width="39" height="10"/>, solve the steady problem, set <img class="formulaInl" alt="$ Ca=10$" src="form_4.png" width="45" height="10"/> and then resolve.</p>
+<div class="fragment"><div class="line"> problem.steady_newton_solve(1); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set the Capillary number to 10 and resolve</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">Problem_Parameter::Ca</a> = 10.0;</div>
+<div class="line"> problem.steady_newton_solve();</div>
+<div class="ttc" id="anamespaceProblem__Parameter_html_af6194d2571881779c678fbabc1503d47"><div class="ttname"><a href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">Problem_Parameter::Ca</a></div><div class="ttdeci">double Ca</div><div class="ttdoc">Capillary number.</div><div class="ttdef"><b>Definition</b> <a href="adaptive__bubble__in__channel_8cc_source.html#l00378">adaptive_bubble_in_channel.cc:378</a></div></div>
+</div><!-- fragment --><p> After documenting the solution, we remove the (explicit) volume constraint and then the remainder of the code is identical to that in the <a href="../../adaptive_bubble_in_channel/html/index.html">bubble tutorial. </a></p>
+<div class="fragment"><div class="line"> <span class="comment">// Switch off volume constraint</span></div>
+<div class="line"> problem.remove_volume_constraint();</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>Other than trivial name changes from "bubble" to "drop", there are a few significant changes between this problem and that in the <br  />
+ <a href="../../adaptive_bubble_in_channel/html/index.html">bubble tutorial. </a> There is an additional boolean <code>Use_volume_constraint</code> and an additional function <code>remove_volume_constraint()</code>, which are used to manage the switch from the explicit enforcement of the volume constraint in the static case to the implicit enforcement in the time simulations. The other key difference is that we use <code>Triangle's</code> <a href="../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html#def_extra_regions">region attributes </a> to distinguish the elements inside the droplet from those outside. The default behaviour is that all elements are in region 0, but we label those element within the drop as region 1.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The construction of the mesh proceeds in exactly the same way as in <a href="../../adaptive_bubble_in_channel/html/index.html">bubble tutorial, </a> except that we add a region tag "1" to label the elements within the droplet (so we specify a coordinate within the drop) and we must tell <code>Triangle</code> to use the assigned attributes.  </p><div class="fragment"><div class="line"> <span class="comment">// Define the region</span></div>
+<div class="line"> triangle_mesh_parameters.add_region_coordinates(1, drop_center);</div>
+</div><!-- fragment --><p> The remainder of the constructor is the same as the other tutorial.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem_setup"></a>
+Problem setup</h1>
+<p>When the bulk elements are made fully functional, we add the pointer to the viscosity ratio to all elements in the drop (region 1).</p>
+<div class="fragment"><div class="line">   <span class="comment">//For the elements within the droplet (region 1),</span></div>
+<div class="line">   <span class="comment">//set the viscosity ratio</span></div>
+<div class="line">   n_element = Fluid_mesh_pt-&gt;nregion_element(1);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">     ELEMENT* el_pt = </div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Fluid_mesh_pt-&gt;region_element_pt(1,e));</div>
+<div class="line">     </div>
+<div class="line">     el_pt-&gt;viscosity_ratio_pt() = &amp;<a class="code hl_variable" href="namespaceProblem__Parameter.html#afdb95f68bd3c77e4c12001a29bd26e31">Problem_Parameter::Viscosity_ratio</a>;</div>
+<div class="line">    }</div>
+<div class="ttc" id="anamespaceProblem__Parameter_html_afdb95f68bd3c77e4c12001a29bd26e31"><div class="ttname"><a href="namespaceProblem__Parameter.html#afdb95f68bd3c77e4c12001a29bd26e31">Problem_Parameter::Viscosity_ratio</a></div><div class="ttdeci">double Viscosity_ratio</div><div class="ttdoc">Viscosity ratio of the droplet to the surrounding fluid.</div><div class="ttdef"><b>Definition</b> <a href="adaptive__drop__in__channel_8cc_source.html#l00375">adaptive_drop_in_channel.cc:375</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="face_elements"></a>
+Generation of face elements</h1>
+<p>As usual we impose the kinematic and dynamic boundary condition at the interface by attaching <code>FaceElements</code> to the relevant boundaries of the bulk elements. However, we must be careful to add only a <b>single</b> layer of elements. If we use the standard "boundary element" functions then we will be creating face elements on both sides of the internal boundary. Instead, we use the elements adjacent to the boundary within region 0, which ensures that only a single layer of interface elements are added.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_free_surface_elements===============</span></div>
+<div class="line"><span class="comment">/// Create elements that impose the kinematic and dynamic bcs</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// for the pseudo-solid fluid mesh</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDropInChannelProblem.html#a73b989e3bedbd3630f576b0dba0f724f">DropInChannelProblem&lt;ELEMENT&gt;::create_free_surface_elements</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the free surface boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nb=Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=First_drop_boundary_id;b&lt;nb;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Note: region is important</span></div>
+<div class="line">   <span class="comment">// How many bulk fluid elements are adjacent to boundary b in region 0?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Fluid_mesh_pt-&gt;nboundary_element_in_region(b,0);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the bulk fluid elements adjacent to boundary b?</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to the bulk fluid element that is </span></div>
+<div class="line">     <span class="comment">// adjacent to boundary b in region 0</span></div>
+<div class="line">     ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Fluid_mesh_pt-&gt;boundary_element_in_region_pt(b,0,e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Find the index of the face of element e along boundary b in region 0</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = Fluid_mesh_pt-&gt;face_index_at_boundary_in_region(b,0,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element</span></div>
+<div class="line">     ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;* el_pt =</div>
+<div class="line">      <span class="keyword">new</span> ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;(</div>
+<div class="line">       bulk_elem_pt,face_index);   </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Add it to the mesh</span></div>
+<div class="line">     Free_surface_mesh_pt-&gt;add_element_pt(el_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Add the appropriate boundary number</span></div>
+<div class="line">     el_pt-&gt;set_boundary_number_in_bulk_mesh(b);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Specify the capillary number</span></div>
+<div class="line">     el_pt-&gt;ca_pt() = &amp;<a class="code hl_variable" href="namespaceProblem__Parameter.html#af6194d2571881779c678fbabc1503d47">Problem_Parameter::Ca</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// end of create_free_surface_elements</span></div>
+<div class="ttc" id="aclassDropInChannelProblem_html_a73b989e3bedbd3630f576b0dba0f724f"><div class="ttname"><a href="classDropInChannelProblem.html#a73b989e3bedbd3630f576b0dba0f724f">DropInChannelProblem::create_free_surface_elements</a></div><div class="ttdeci">void create_free_surface_elements()</div><div class="ttdoc">Create free surface elements.</div><div class="ttdef"><b>Definition</b> <a href="adaptive__drop__in__channel_8cc_source.html#l00908">adaptive_drop_in_channel.cc:908</a></div></div>
+</div><!-- fragment --><p> The volume constraint elements are only created if the boolean flag <code>Use_volume_constraint</code> is true (the default on construction of the problem). We hijack the pressure degree of freedom associated with the first element in region 1 and then the construction of the elements again uses the regions to ensure that a single layer of elements is created.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_create_volume_constraint_elements=================</span></div>
+<div class="line"><span class="comment">/// Create elements that impose volume constraint on the drop</span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classDropInChannelProblem.html#a53b96cd50b4e6c9bee294b8fb7dd51bd">DropInChannelProblem&lt;ELEMENT&gt;::create_volume_constraint_elements</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do we need it?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (!Use_volume_constraint) <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store pointer to element whose pressure we&#39;re trading/hi-jacking:</span></div>
+<div class="line"> <span class="comment">// Element 0 in region 1</span></div>
+<div class="line"> Hijacked_element_pt= <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">  Fluid_mesh_pt-&gt;region_element_pt(1,0));</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the global pressure data by hijacking one of the pressure values</span></div>
+<div class="line"> <span class="comment">// from inside the droplet</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> index_of_traded_pressure=0;</div>
+<div class="line"> Drop_pressure_data_pt=Hijacked_element_pt-&gt;</div>
+<div class="line">  hijack_internal_value(0,index_of_traded_pressure);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build volume constraint element -- pass traded pressure to it</span></div>
+<div class="line"> Vol_constraint_el_pt= </div>
+<div class="line">  <span class="keyword">new</span> VolumeConstraintElement(&amp;<a class="code hl_variable" href="namespaceProblem__Parameter.html#aad8e0a2d1ec39a8dd7357a43bcc5f20e">Problem_Parameter::Volume</a>,</div>
+<div class="line">                              Drop_pressure_data_pt,</div>
+<div class="line">                              index_of_traded_pressure);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Provide a reasonable initial guess for drop pressure (hydrostatics):</span></div>
+<div class="line"> Drop_pressure_data_pt-&gt;set_value(index_of_traded_pressure,</div>
+<div class="line">                                    Initial_value_for_drop_pressure);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add volume constraint element to the mesh</span></div>
+<div class="line"> Volume_constraint_mesh_pt-&gt;add_element_pt(Vol_constraint_el_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the free surface boundaries</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nb=Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=First_drop_boundary_id;b&lt;nb;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Note region is important</span></div>
+<div class="line">   <span class="comment">// How many bulk fluid elements are adjacent to boundary b in region 0?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Fluid_mesh_pt-&gt;nboundary_element_in_region(b,0);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the bulk fluid elements adjacent to boundary b?</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to the bulk fluid element that is </span></div>
+<div class="line">     <span class="comment">// adjacent to boundary b in region 0?</span></div>
+<div class="line">     ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Fluid_mesh_pt-&gt;boundary_element_in_region_pt(b,0,e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Find the index of the face of element e along boundary b in region 0</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = Fluid_mesh_pt-&gt;face_index_at_boundary_in_region(b,0,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create new element</span></div>
+<div class="line">     ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;* el_pt =</div>
+<div class="line">      <span class="keyword">new</span> ElasticLineVolumeConstraintBoundingElement&lt;ELEMENT&gt;(</div>
+<div class="line">       bulk_elem_pt,face_index);   </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Set the &quot;master&quot; volume constraint element</span></div>
+<div class="line">     el_pt-&gt;set_volume_constraint_element(Vol_constraint_el_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Add it to the mesh</span></div>
+<div class="line">     Volume_constraint_mesh_pt-&gt;add_element_pt(el_pt);     </div>
+<div class="line">    } </div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// end of create_volume_constraint_elements</span></div>
+<div class="ttc" id="aclassDropInChannelProblem_html_a53b96cd50b4e6c9bee294b8fb7dd51bd"><div class="ttname"><a href="classDropInChannelProblem.html#a53b96cd50b4e6c9bee294b8fb7dd51bd">DropInChannelProblem::create_volume_constraint_elements</a></div><div class="ttdeci">void create_volume_constraint_elements()</div><div class="ttdoc">Create elements that impose volume constraint on the drop.</div><div class="ttdef"><b>Definition</b> <a href="adaptive__drop__in__channel_8cc_source.html#l00956">adaptive_drop_in_channel.cc:956</a></div></div>
+<div class="ttc" id="anamespaceProblem__Parameter_html_aad8e0a2d1ec39a8dd7357a43bcc5f20e"><div class="ttname"><a href="namespaceProblem__Parameter.html#aad8e0a2d1ec39a8dd7357a43bcc5f20e">Problem_Parameter::Volume</a></div><div class="ttdeci">double Volume</div><div class="ttdoc">Volume of the bubble (negative because it's outside the fluid!)</div><div class="ttdef"><b>Definition</b> <a href="adaptive__bubble__in__channel_8cc_source.html#l00388">adaptive_bubble_in_channel.cc:388</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="remove"></a>
+Removal of the volume constraint</h1>
+<p>The function <code>remove_volume_constraint()</code>, resets the boolean flag to false, clears the hijacked data, deletes the volume constraint elements and mesh and then removes the volume constraint mesh from the problem's list of sub meshes, before reassigning the equation numbers.</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Change the boundary conditions to remove the volume constraint</span></div>
+<div class="line"> <span class="keywordtype">void</span> remove_volume_constraint()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Ignore all volume constraint stuff from here onwards</span></div>
+<div class="line">   Use_volume_constraint=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Unhijack the data in the internal element</span></div>
+<div class="line">   Hijacked_element_pt-&gt;unhijack_all_data();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Delete the volume constraint elements</span></div>
+<div class="line">   delete_volume_constraint_elements();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Internal pressure is gone -- null it out</span></div>
+<div class="line">   Drop_pressure_data_pt=0;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Kill the mesh too</span></div>
+<div class="line">   <span class="keyword">delete</span> Volume_constraint_mesh_pt;</div>
+<div class="line">   Volume_constraint_mesh_pt=0;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Remove the sub meshes</span></div>
+<div class="line">   this-&gt;flush_sub_meshes();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Add Fluid_mesh_pt sub meshes</span></div>
+<div class="line">   this-&gt;add_sub_mesh(Fluid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Add Free_surface sub meshes</span></div>
+<div class="line">   this-&gt;add_sub_mesh(this-&gt;Free_surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Rebuild the global mesh</span></div>
+<div class="line">   this-&gt;rebuild_global_mesh();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Renumber the equations</span></div>
+<div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;Removed volume constraint to obtain &quot;</span></div>
+<div class="line">             &lt;&lt; this-&gt;assign_eqn_numbers() &lt;&lt; <span class="stringliteral">&quot; new equation numbers\n&quot;</span>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<p>The computation of the initial static solution means that we must still include the calls to the <code>create_volume_constraint_elements()</code> and <code>delete_volume_constraint_elements()</code> in <code>actions_before_adapt()</code> and <code>actions_after_adapt()</code>. We have chosen to have the functions return immediately if the volume constraint is not being enforced, rather than using <code>if</code> blocks within the <code>actions_before/after_adapt</code>() functions.</p>
+<hr  />
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Explore what happens as the viscosity ratio is varied. Are the results as you expect? Does the solution tend to a steadily propagating state? Does the solution approach the bubble solution as this viscosity ratio tends to zero? (Is this a sensible limit to take?) <br  />
+<br  />
+</li>
+<li>How could you modify the code to compute the steadily-propagating solutions directly, rather than using time simulation? <br  />
+<br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/">demo_drivers/navier_stokes/unstructured_adaptive_fs/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+ <center> <a href="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_drop_in_channel.cc">demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_drop_in_channel.cc</a> </center> .</li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

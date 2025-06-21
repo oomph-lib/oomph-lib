@@ -1,0 +1,53 @@
+\doxysection{clamped\+\_\+shell.\+cc File Reference}
+\hypertarget{clamped__shell_8cc}{}\label{clamped__shell_8cc}\index{clamped\_shell.cc@{clamped\_shell.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classShellMesh}{Shell\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A 2D Mesh class. The tube wall is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic Rectangular\+Quad\+Mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ ELEMENT $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables that represent physical properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{Global\+\_\+\+Physical\+\_\+\+Variables\+::external\+\_\+pressure}} ()
+\begin{DoxyCompactList}\small\item\em Return a reference to the external pressure load on the elastic tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load}} (\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{xi}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{x}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{N}}, \mbox{\hyperlink{classShellMesh}{Vector}}$<$ \mbox{\hyperlink{classShellMesh}{double}} $>$ \&\mbox{\hyperlink{classShellMesh}{load}})
+\begin{DoxyCompactList}\small\item\em Load function, normal pressure loading. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{int}} \mbox{\hyperlink{clamped__shell_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Prescribed\+\_\+y}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Prescribed position of control point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to pressure load (stored in Data so it can become an unknown in the problem when displacement control is used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Perturbation pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{clamped__shell_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{clamped__shell_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{clamped\_shell.cc@{clamped\_shell.cc}!main@{main}}
+\index{main@{main}!clamped\_shell.cc@{clamped\_shell.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classShellMesh}{int}} main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver. 
+
+
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00540}{540}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+References \mbox{\hyperlink{clamped__shell_8cc_source_l00124}{Shell\+Mesh$<$ ELEMENT $>$\+::\+Shell\+Mesh()}}.
+

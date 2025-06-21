@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Gauss&lt; 1, 3 &gt; Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html">Gauss&lt; 1, 3 &gt;</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1Gauss_3_011_00_013_01_4-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::Gauss&lt; 1, 3 &gt; Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>1D Gaussian integration class. Three integration points. This integration scheme can integrate up to fifth-order polynomials exactly and is therefore a suitable "full" integration scheme for quadratic (three-node) elements in which the highest-order polynomial is fourth order.  
+ <a href="classoomph_1_1Gauss_3_011_00_013_01_4.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="integral_8h_source.html">integral.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::Gauss&lt; 1, 3 &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1Gauss_3_011_00_013_01_4.png" usemap="#oomph::Gauss_3C_201_2C_203_20_3E_map" alt=""/>
+  <map id="oomph::Gauss_3C_201_2C_203_20_3E_map" name="oomph::Gauss_3C_201_2C_203_20_3E_map">
+<area href="classoomph_1_1Integral.html" title="Generic class for numerical integration schemes:" alt="oomph::Integral" shape="rect" coords="0,0,137,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aab9cc062b967a5ecdd8672b0b1a76786" id="r_aab9cc062b967a5ecdd8672b0b1a76786"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#aab9cc062b967a5ecdd8672b0b1a76786">Gauss</a> ()</td></tr>
+<tr class="memdesc:aab9cc062b967a5ecdd8672b0b1a76786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty)  <br /></td></tr>
+<tr class="separator:aab9cc062b967a5ecdd8672b0b1a76786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af520b090e7f6c3fdf2ac326ed6371382" id="r_af520b090e7f6c3fdf2ac326ed6371382"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#af520b090e7f6c3fdf2ac326ed6371382">Gauss</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Gauss.html">Gauss</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:af520b090e7f6c3fdf2ac326ed6371382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:af520b090e7f6c3fdf2ac326ed6371382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd0f8da5880f6e80f7de3f16e9af50fb" id="r_abd0f8da5880f6e80f7de3f16e9af50fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#abd0f8da5880f6e80f7de3f16e9af50fb">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Gauss.html">Gauss</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:abd0f8da5880f6e80f7de3f16e9af50fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:abd0f8da5880f6e80f7de3f16e9af50fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8521ff77bcac8afc612779aed48f3bd4" id="r_a8521ff77bcac8afc612779aed48f3bd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a8521ff77bcac8afc612779aed48f3bd4">nweight</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8521ff77bcac8afc612779aed48f3bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of integration points of the scheme.  <br /></td></tr>
+<tr class="separator:a8521ff77bcac8afc612779aed48f3bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51a037fb3812b418ff85d382ef1db1fa" id="r_a51a037fb3812b418ff85d382ef1db1fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a51a037fb3812b418ff85d382ef1db1fa">knot</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a51a037fb3812b418ff85d382ef1db1fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return coordinate s[j] (j=0) of integration point i.  <br /></td></tr>
+<tr class="separator:a51a037fb3812b418ff85d382ef1db1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3487f0b3416c7f8b6e81b4c86af53c05" id="r_a3487f0b3416c7f8b6e81b4c86af53c05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a3487f0b3416c7f8b6e81b4c86af53c05">weight</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a3487f0b3416c7f8b6e81b4c86af53c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return weight of integration point i.  <br /></td></tr>
+<tr class="separator:a3487f0b3416c7f8b6e81b4c86af53c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Integral"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Integral')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Integral.html">oomph::Integral</a></td></tr>
+<tr class="memitem:a68e50805e1859191361da2be4e89b9a8 inherit pub_methods_classoomph_1_1Integral" id="r_a68e50805e1859191361da2be4e89b9a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Integral.html#a68e50805e1859191361da2be4e89b9a8">Integral</a> ()</td></tr>
+<tr class="memdesc:a68e50805e1859191361da2be4e89b9a8 inherit pub_methods_classoomph_1_1Integral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty)  <br /></td></tr>
+<tr class="separator:a68e50805e1859191361da2be4e89b9a8 inherit pub_methods_classoomph_1_1Integral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2834c14eed14ab19d0ee182af599a86c inherit pub_methods_classoomph_1_1Integral" id="r_a2834c14eed14ab19d0ee182af599a86c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Integral.html#a2834c14eed14ab19d0ee182af599a86c">Integral</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Integral.html">Integral</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a2834c14eed14ab19d0ee182af599a86c inherit pub_methods_classoomph_1_1Integral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a2834c14eed14ab19d0ee182af599a86c inherit pub_methods_classoomph_1_1Integral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae018673975ff5d9ecdac2052887884fd inherit pub_methods_classoomph_1_1Integral" id="r_ae018673975ff5d9ecdac2052887884fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Integral.html#ae018673975ff5d9ecdac2052887884fd">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Integral.html">Integral</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ae018673975ff5d9ecdac2052887884fd inherit pub_methods_classoomph_1_1Integral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ae018673975ff5d9ecdac2052887884fd inherit pub_methods_classoomph_1_1Integral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61b5870e0953a50d0c678ef59eefe147 inherit pub_methods_classoomph_1_1Integral" id="r_a61b5870e0953a50d0c678ef59eefe147"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Integral.html#a61b5870e0953a50d0c678ef59eefe147">~Integral</a> ()</td></tr>
+<tr class="memdesc:a61b5870e0953a50d0c678ef59eefe147 inherit pub_methods_classoomph_1_1Integral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor (empty)  <br /></td></tr>
+<tr class="separator:a61b5870e0953a50d0c678ef59eefe147 inherit pub_methods_classoomph_1_1Integral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750f52bb0121c183d02822a623ec708d inherit pub_methods_classoomph_1_1Integral" id="r_a750f52bb0121c183d02822a623ec708d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Integral.html#a750f52bb0121c183d02822a623ec708d">knot</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a750f52bb0121c183d02822a623ec708d inherit pub_methods_classoomph_1_1Integral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local coordinates of i-th intergration point. Broken virtual.  <br /></td></tr>
+<tr class="separator:a750f52bb0121c183d02822a623ec708d inherit pub_methods_classoomph_1_1Integral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a303e40987dc6ba6449d7e43949055402" id="r_a303e40987dc6ba6449d7e43949055402"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a303e40987dc6ba6449d7e43949055402">Npts</a> = 3</td></tr>
+<tr class="memdesc:a303e40987dc6ba6449d7e43949055402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of integration points in the scheme.  <br /></td></tr>
+<tr class="separator:a303e40987dc6ba6449d7e43949055402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a1e6a0f0cb9b93070d255a90db54e7" id="r_a73a1e6a0f0cb9b93070d255a90db54e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a73a1e6a0f0cb9b93070d255a90db54e7">Knot</a> [3][1]</td></tr>
+<tr class="memdesc:a73a1e6a0f0cb9b93070d255a90db54e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array to hold weights and knot points (defined in cc file)  <br /></td></tr>
+<tr class="separator:a73a1e6a0f0cb9b93070d255a90db54e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2693359d8c45ff049ee0b68fc67a3199" id="r_a2693359d8c45ff049ee0b68fc67a3199"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Gauss_3_011_00_013_01_4.html#a2693359d8c45ff049ee0b68fc67a3199">Weight</a> [3] = {(5.0 / 9.0), (8.0 / 9.0), (5.0 / 9.0)}</td></tr>
+<tr class="separator:a2693359d8c45ff049ee0b68fc67a3199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>1D Gaussian integration class. Three integration points. This integration scheme can integrate up to fifth-order polynomials exactly and is therefore a suitable "full" integration scheme for quadratic (three-node) elements in which the highest-order polynomial is fourth order. </p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00204">204</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aab9cc062b967a5ecdd8672b0b1a76786" name="aab9cc062b967a5ecdd8672b0b1a76786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab9cc062b967a5ecdd8672b0b1a76786">&#9670;&#160;</a></span>Gauss() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::Gauss </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00214">214</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+</div>
+</div>
+<a id="af520b090e7f6c3fdf2ac326ed6371382" name="af520b090e7f6c3fdf2ac326ed6371382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af520b090e7f6c3fdf2ac326ed6371382">&#9670;&#160;</a></span>Gauss() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::Gauss </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Gauss.html">Gauss</a>&lt; 1, 3 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a51a037fb3812b418ff85d382ef1db1fa" name="a51a037fb3812b418ff85d382ef1db1fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a037fb3812b418ff85d382ef1db1fa">&#9670;&#160;</a></span>knot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::knot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return coordinate s[j] (j=0) of integration point i. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00229">229</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a8521ff77bcac8afc612779aed48f3bd4" name="a8521ff77bcac8afc612779aed48f3bd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8521ff77bcac8afc612779aed48f3bd4">&#9670;&#160;</a></span>nweight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::nweight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of integration points of the scheme. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00223">223</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+</div>
+</div>
+<a id="abd0f8da5880f6e80f7de3f16e9af50fb" name="abd0f8da5880f6e80f7de3f16e9af50fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd0f8da5880f6e80f7de3f16e9af50fb">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Gauss.html">Gauss</a>&lt; 1, 3 &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a3487f0b3416c7f8b6e81b4c86af53c05" name="a3487f0b3416c7f8b6e81b4c86af53c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3487f0b3416c7f8b6e81b4c86af53c05">&#9670;&#160;</a></span>weight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::weight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return weight of integration point i. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00235">235</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a73a1e6a0f0cb9b93070d255a90db54e7" name="a73a1e6a0f0cb9b93070d255a90db54e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a1e6a0f0cb9b93070d255a90db54e7">&#9670;&#160;</a></span>Knot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::Knot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {-0.774596669241483}, {0.0}, {0.774596669241483}}</div>
+</div><!-- fragment -->
+<p>Array to hold weights and knot points (defined in cc file) </p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00210">210</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+</div>
+</div>
+<a id="a303e40987dc6ba6449d7e43949055402" name="a303e40987dc6ba6449d7e43949055402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a303e40987dc6ba6449d7e43949055402">&#9670;&#160;</a></span>Npts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::Npts = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of integration points in the scheme. </p>
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00208">208</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+</div>
+</div>
+<a id="a2693359d8c45ff049ee0b68fc67a3199" name="a2693359d8c45ff049ee0b68fc67a3199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2693359d8c45ff049ee0b68fc67a3199">&#9670;&#160;</a></span>Weight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1Gauss.html">oomph::Gauss</a>&lt; 1, 3 &gt;::Weight = {(5.0 / 9.0), (8.0 / 9.0), (5.0 / 9.0)}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="integral_8h_source.html#l00210">210</a> of file <a class="el" href="integral_8h_source.html">integral.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="integral_8h_source.html">integral.h</a></li>
+<li><a class="el" href="integral_8cc_source.html">integral.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:08
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

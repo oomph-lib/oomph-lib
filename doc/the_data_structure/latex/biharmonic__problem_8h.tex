@@ -1,0 +1,16 @@
+\doxysection{biharmonic\+\_\+problem.\+h File Reference}
+\hypertarget{biharmonic__problem_8h}{}\label{biharmonic__problem_8h}\index{biharmonic\_problem.h@{biharmonic\_problem.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em Biharmonic Plate \doxylink{classoomph_1_1Problem}{Problem} Class -\/ for problems where the load can be assumed to be acting normal to the surface of the plate and the deflections are small relative to the thickness of the plate. Developed for the topologically rectangular Hermite Element \doxylink{classoomph_1_1Mesh}{Mesh}. Contains functions allowing the following boundary conditions to be applied (on a given edge)\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em Biharmonic Fluid \doxylink{classoomph_1_1Problem}{Problem} Class -\/ describes stokes flow in 2D. Developed for the topologically rectangular Hermite Element \doxylink{classoomph_1_1Mesh}{Mesh}. Contains functions allowing the following boundary conditions to be applied (on a given edge)\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{oomph\+::\+Biharmonic\+Fluid\+Boundary\+Element}}
+\begin{DoxyCompactList}\small\item\em Point equation element used to impose the traction free edge (i.\+e. du/dn = 0) on the boundary when dt/ds\+\_\+n != 0. The following equation is implemented \+: du/ds\+\_\+n = dt/ds\+\_\+n \texorpdfstring{$\ast$}{*} ds\+\_\+t/dt \texorpdfstring{$\ast$}{*} du/dt. The bulk biharmonic elements on the boundary must be hijackable and the du/ds\+\_\+n and d2u/ds\+\_\+nds\+\_\+t boundary DOFs hijacked when these elements are applied. At any node where dt/ds\+\_\+n = 0 we can impose du/ds\+\_\+n = 0 and d2u/ds\+\_\+nds\+\_\+t = 0 using pinning -\/ see \doxylink{classoomph_1_1BiharmonicFluidProblem_a1cc57555bbd0ceef1d93010c133ac597}{Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

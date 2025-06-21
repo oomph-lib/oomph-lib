@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Segregated solvers for fluid-structure-interaction problems: Revisiting the flow in a 2D collapsible channel</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Segregated solvers for fluid-structure-interaction problems: Revisiting the flow in a 2D collapsible channel </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the implementation of segregated solution strategies for multi-physics problems, in particular fluid-structure interaction, within <code>oomph-lib</code>. The method illustrated by revisiting the fluid-structure interaction problem of <a href="../../fsi_collapsible_channel/html/index.html">finite-Reynolds-number flow in a 2D collapsible channel;</a> an example discussed in detail in </p><center> <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, M., Hazel, A.L. &amp; Boyle, J. (2008): Solvers for large-displacement fluid-structure interaction problems: Segregated vs. monolithic approaches. Computational Mechanics.</a> </center><p>where we compare the relative performance of segregated and monolithic solvers. Since the paper comes to the conclusion that, despite various claims in the literature, segregated solvers are not necessarily more efficient than fully-coupled monolithic schemes (of the type employed in <code>oomph-lib</code>) you should also consult the <a href="../../../preconditioners/fsi/html/index.html">related tutorial on the monolithic solution of the problem with <code>oomph-lib's</code> FSI preconditioner.</a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem</h1>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Flow in a 2D collapsible channel </b> </center><p class="intertd">The figure below shows a sketch of the problem: Flow is driven by a prescribed Poiseuille flow <img class="formulaInl" alt="$U^{*}_{p}$" src="form_0.png" width="15" height="15"/> through a 2D channel of width <img class="formulaInl" alt="$ H^* $" src="form_1.png" width="16" height="10"/> and total length <img class="formulaInl" alt="$ L^*_{total} = L^*_{up} + L^*_{collapsible} + L^*_{down}. $" src="form_2.png" width="189" height="15"/> The upstream and downstream lengths of the channel are rigid, whereas the upper wall in the central section is an elastic membrane whose shape is parametrised by a Lagrangian coordinate, <img class="formulaInl" alt="$ \xi^* $" src="form_3.png" width="11" height="13"/> , so that the position vector to the moving wall is given by <img class="formulaInl" alt="$ {\bf R}_w^*(\xi^*,t^*) $" src="form_4.png" width="56" height="14"/> . The wall is loaded by the external pressure <img class="formulaInl" alt="$ p_{ext}^* $" src="form_5.png" width="21" height="14"/> and by the traction that the viscous fluid exerts on it.</p>
+<div class="image">
+<img src="collapsible_channel_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p class="intertd">The non-dimensionalisation and governing equations have already been discussed in the <a href="../../fsi_collapsible_channel/html/index.html">previous (monolithic) example. </a> The problem is not quite the same, however, because the upstream boundary condition is now one of prescribed flow, rather than prescribed pressure:</p><ul>
+<li>Prescribed inflow,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  {\bf u}(x_1,x_2) = {\bf u}_{p}(x_1,x_2) =   
+  6 \ x_2 \  (1-x_2) \ {\bf e}_1.
+  \ \ \ \ \ \ \ \ \ \ (1)
+  \]" src="form_6.png" width="284" height="14"/>
+</p>
+ at <img class="formulaInl" alt="$ x_{1}=0$" src="form_7.png" width="36" height="11"/>.</li>
+</ul>
+<p>All other boundary conditions remain the same.</p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<br  />
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="reslt"></a>
+Results</h1>
+<p>The behaviour of the system under the prescribed-inflow boundary conditions is somewhat different to its behaviour when the pressure drop is prescribed. In the first instance, we consider steady states, in which all time-derivatives are neglected. The figure below shows steady flows at a Reynolds number of <img class="formulaInl" alt="$ Re=500 $" src="form_8.png" width="50" height="10"/> and two values of the fluid-structure-interaction parameter, <img class="formulaInl" alt="$ Q =
+10^{-4} $" src="form_9.png" width="51" height="14"/> (upper) and <img class="formulaInl" alt="$ Q = 10^{-2}$" src="form_10.png" width="51" height="14"/> (lower). For low values of <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/>, corresponding to weak fluid-structure interaction, the deformation of the wall is approximately symmetric, being dominated by the external pressure. As <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/> increases, the influence of fluid traction can been seen in the asymmetric deformation of the elastic wall. The viscous pressure drop along the tube leads to higher pressure upstream (causing an outward deformation) and lower pressures downstream (causing an inward deflection).</p>
+<div class="image">
+<img src="steady_flows.gif" alt=""/>
+<div class="caption">
+Steady flows at Re=500 and Q=10e-4 (upper), Q=10e-2 (lower). </div></div>
+ <p>The overall behaviour of the system can be characterised by steady load-displacement curves in which the vertical position of a control point on the elastic section of the channel wall is plotted as a function of the external pressure.</p>
+<div class="image">
+<img src="steady_trace.gif" alt=""/>
+<div class="caption">
+Load-displacement curve: the vertical position of a control point on the elastic wall (located at 50, 50, 60 and 70 percent of its length for Q = 0, 10e-4, 10e-3 and 10e-2, respectively) as a function of the external pressure. </div></div>
+ <p>At low <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/>, the displacement is directly proportional to the external pressure. As <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/> increases the curves shift to the right because a large external pressure is required to keep the wall in its undeformed position; <br  />
+ a consequence of the increased viscous pressure drop <em>and</em> the boundary condition that <img class="formulaInl" alt="$p=0$" src="form_12.png" width="30" height="11"/> at the outlet. A second consequence of increasing <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/> is that (at finite Reynolds number) a smaller increase in external pressure is required to achieve a given degree of collapse. This is because the Bernoulli effect reduces the fluid pressure in the region that is most strongly collapsed and therefore increases the compressive load on the wall. For <img class="formulaInl" alt="$Q = 10^{-2}$" src="form_13.png" width="51" height="14"/> two limit points develop on the load-displacement curve, indicating that the wall "snaps through" into a collapsed buckled configuration when <img class="formulaInl" alt="$p_{ext}$" src="form_14.png" width="21" height="9"/> becomes sufficiently large. The appearance of the limit points means that it is no longer possible to perform the steady parameter study by slowly increasing <img class="formulaInl" alt="$p_{ext}: $" src="form_15.png" width="29" height="9"/> At sufficiently large values of <img class="formulaInl" alt="$Q$" src="form_11.png" width="10" height="13"/> the displacement of the control point is not a single-valued function of the external pressure <img class="formulaInl" alt="$ p_{ext}$" src="form_16.png" width="21" height="9"/>. However, the application of "displacement control", described in the tutorial discussing the <a href="../../../beam/steady_ring/html/index.html">large-displacement post-buckling of an elastic ring</a> is sufficient to circumvent this difficulty: We treat the external pressure as an unknown and control the channel's collapse by prescribing the vertical position of the control point, <img class="formulaInl" alt="$ x_2^{[ctrl]}.$" src="form_17.png" width="34" height="18"/> This resolves the problem because the curve <img class="formulaInl" alt="$ p_{ext}(x_2^{[ctrl]})$" src="form_18.png" width="61" height="18"/> is single-valued, allowing us to perform the parameter study by slowly increasing the wall collapse by reducing <img class="formulaInl" alt="$ x_2^{[ctrl]}$" src="form_19.png" width="29" height="18"/>, computing the pressure required to achieve this deformation as part of the solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="overview"></a>
+Overview: Segregated solution strategies with oomph-lib</h1>
+<p>The general methodology for setting up fluid-structure-interaction problems is discussed in <a href="../../fsi_collapsible_channel/html/index.html#overview">another tutorial; </a> and we shall assume that the standard monolithic problem has already been written. In the present example, the monolithic problem class <code><a class="el" href="classFSICollapsibleChannelProblem.html" title="Problem class.">FSICollapsibleChannelProblem</a></code> is specified in the header file <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_problem.h">fsi_chan_problem.h</a></p>
+<p>Having specified the monolithic (fully-coupled) discretisation, our segregated solution strategy proceeds by alternating between fluid and solid solves: Initially, the degrees of freedom associated with the (pure) solid mechanics problem are "pinned" and the global assembly procedure is modified to omit the corresponding solid elements. The Newton solver will, therefore, solve the fluid equations with a "frozen" wall shape. Next, the degrees of freedom associated with the (pure) fluid mechanics problem are pinned and the original boundary conditions for the solid mechanics problem are re-assigned. The assembly procedure is now modified so that only solid elements contribute to the global system. The Newton solver will then solve for a new wall shape corresponding to the tractions exerted by the given flow field. At this point we allow for under-relaxation, i.e. we provide the option to increment the solid mechanics degrees of freedom by a fraction of the change computed by the Newton solver. These two steps are repeated in a fixed-point iteration which continues until a given convergence criterion is satisfied, or a maximum number of iterations is exceeded. We note that different linear solvers/preconditioners may be specified for solution of the linear systems arising during the Newton iteration for the isolated "fluid" and "solid" problems, allowing the re-use of optimal solution methods for individual sub-problems. This is generally perceived to be one of the key advantages of segregated solvers.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="how_its_done"></a>
+Brief discussion of the implementation</h1>
+<h2><a class="anchor" id="seg_problem"></a>
+The SegregatableFSIProblem</h2>
+<p><b>a. Overall structure</b></p>
+<p>The <a href="../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html"><code>SegregatableFSIProblem</code> </a> class is used to implement our segregated solution strategy within <code>oomph-lib</code>. The most important problem-specific task is to divide all the problem data into distinct fluid and solid degrees of freedom and to partition the monolithic mesh into a mesh of fluid elements and a mesh of solid elements. The problem-specific partitioning should be implemented in the (pure) virtual member function </p><div class="fragment"><div class="line"><span class="comment">/// Identify fluid and solid data</span></div>
+<div class="line"><span class="keyword">virtual</span> <span class="keywordtype">void</span> identify_fluid_and_solid_dofs(Vector&lt;Data*&gt;&amp; fluid_data_pt,</div>
+<div class="line">                                           Vector&lt;Data*&gt;&amp; solid_data_pt,</div>
+<div class="line">                                           Mesh*&amp; fluid_mesh_pt,</div>
+<div class="line">                                           Mesh*&amp; solid_mesh_pt)=0;</div>
+</div><!-- fragment --><p> which returns vectors of fluid and solid data and the meshes of fluid and solid elements. This virtual function is called within the member function </p><div class="fragment"><div class="line"><span class="comment">/// \short Set up segregated solver. The optional boolean argument</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// defaults to true and causes the identify_fluid_and_solid_dofs(...)</span></div>
+<div class="line"><span class="comment">/// to be called again. This is required, e.g. if any of the</span></div>
+<div class="line"><span class="comment">/// meshes were adapted since the previous call to the segregated solver.</span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">void</span> setup_segregated_solver(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;full_setup_of_fluid_and_solid_dofs=<span class="keyword">true</span>)</div>
+</div><!-- fragment --><p> which <em>must</em> be called immediately before every segregated solve. The optional boolean flag may be set to <code>false</code> if the solid and fluid meshes have not changed between solves (i.e. if no spatial adaptation was performed since the last call to the segregated solver). The <code>setup_segregated_solver(...)</code> function must still be called, however, in order that data associated with convergence acceleration techniques is reset to its default values.</p>
+<p><b>b. The segregated solvers</b></p>
+<p>The class inherits from the standard <code>Problem</code> class, which provides the standard (monolithic) <code>newton_solve()</code> and related functions. Thus any <code>SegregatedFSIProblem</code> can be solved "monolithically" as normal and, moreover, it is straightforward to ensure that exactly the same system is being solved when comparing monolithic and segregated solutions. The segregated solution strategy is implemented in the analogous member functions:</p><ul>
+<li>The equivalent of the monolithic <code>Problem::newton_solve()</code> is <div class="fragment"><div class="line">SegregatedFSIProblem::segregated_solve();</div>
+</div><!-- fragment --></li>
+<li>The equivalent of the monolithic <code>Problem::steady_newton_solve()</code> is <div class="fragment"><div class="line">SegregatedFSIProblem::steady_segregated_solve();</div>
+</div><!-- fragment --></li>
+<li>Finally, the equivalent of <code>Problem::unsteady_newton_solve(dt)</code> is <div class="fragment"><div class="line">PicardConvergenceData unsteady_segregated_solve(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dt);</div>
+</div><!-- fragment --></li>
+</ul>
+<p>All three functions return an instance of a <code>PicardConvergenceData</code> object which stores the convergence statistics of the segregated solve.</p>
+<p>In addition, the virtual member functions </p><div class="fragment"><div class="line">SegregatedFSIProblem::actions_before_segregated_solve() </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">SegregatedFSIProblem::actions_after_segregated_solve() </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">SegregatedFSIProblem::actions_before_segregated_convergence_check() </div>
+</div><!-- fragment --><p> are provided to allow the user to specify any actions, such as initialisation of counters, mesh updates, output, etc, that should be performed before or after each complete segregated solve. Note that the <code>Problem</code> member functions </p><div class="fragment"><div class="line">Problem::actions_before_newton_solve() </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">Problem::actions_after_newton_solve() </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">Problem::actions_before_newton_convergence_check() </div>
+</div><!-- fragment --><p> are called as usual during the Newton solve of each sub-problem and may be used for fine-grained operations that should be performed before or after each fluid or solid solve. For this purpose, the <code>SegregatedFSIProblem</code> provides a flag, <code>int</code> <code>SegregatedFSIProblem::Solve_type</code> that indicates which (sub-)solve is currently being performed. The flag can take the (enumerated) values <code>SegregatedFSIProblem::Full_solve</code>, <code>SegregatedFSIProblem::Fluid_solve</code> and <code>SegregatedFSIProblem::Solid_solve</code>, allowing the user to perform specific actions during the distinct sub-solves.</p>
+<p><b>c. Choosing the convergence criterion</b></p>
+<p>Other public member functions provided by the <code>SegregatedFSIProblem</code> class are used to specify the convergence criterion for the global fixed-point iteration: </p><div class="fragment"><div class="line"><span class="comment">/// Base convergence based on max. global residual</span></div>
+<div class="line"><span class="keywordtype">void</span> assess_convergence_based_on_max_global_residual(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;tol)</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">/// Base convergence on maximum absolute change of solid degrees of freedom</span></div>
+<div class="line"><span class="keywordtype">void</span> assess_convergence_based_on_absolute_solid_change(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;tol)</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">/// Base convergence on maximum relative change of solid degrees of freedom</span></div>
+<div class="line"><span class="keywordtype">void</span> assess_convergence_based_on_relative_solid_change(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;tol)</div>
+</div><!-- fragment --><p> If a tolerance is not specified the default <code>Problem::Newton_solver_tolerance</code> is used.</p>
+<p><b>d. Under-relaxation</b></p>
+<p>Finally, there are several member functions that are used to specify the convergence-acceleration techniques:</p><ol type="1">
+<li><b>Static under-relaxation:</b> <br  />
+<br  />
+ <div class="fragment"><div class="line"><span class="comment">//Use under-relaxation for solid degrees of freedom and specify </span></div>
+<div class="line"><span class="comment">//the optional under-relaxation parameter. The default of 1.0 </span></div>
+<div class="line"><span class="comment">//corresponds to no under-relaxation.</span></div>
+<div class="line"><span class="keywordtype">void</span> use_under_relaxation (<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;omega=1.0)</div>
+</div><!-- fragment --> If this function is called, under-relaxation is performed after the solid sub-solve, i.e. each solid degree of freedom, <img class="formulaInl" alt="$ s $" src="form_20.png" width="5" height="6"/>, say is updated via  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+    s = s_{new} + (1-\omega) (s_{old} - s_{new})
+    \]" src="form_21.png" width="171" height="14"/>
+</p>
+ where <img class="formulaInl" alt="$ s_{new} $" src="form_22.png" width="24" height="9"/> is the new value computed by the Newton solver and <img class="formulaInl" alt="$ s_{old} $" src="form_23.png" width="19" height="9"/> is its previous value.</li>
+<li><b>Adaptive under-relaxation:</b> <br  />
+<br  />
+ <div class="fragment"><div class="line"><span class="comment">//Boolean flag that controls whether Irons &amp; Tuck extrapolation</span></div>
+<div class="line"><span class="comment">//is used to dynamically modify the under-relaxation parameter for</span></div>
+<div class="line"><span class="comment">//the under-relaxation of the solid degrees of freedom.</span></div>
+<div class="line"><span class="keywordtype">void</span> enable_irons_and_tuck_extrapolation ()</div>
+</div><!-- fragment --> If this function is called (and if under-relaxation is enabled) the under-relaxation parameter <img class="formulaInl" alt="$ \omega $" src="form_24.png" width="9" height="6"/> is adjusted throughout the fixed-point iteration, using Irons &amp; Tucks convergence acceleration procedure; see Irons, B.M. &amp; Tuck, R.C. "A version of the Aitken accelerator for computer iteration". International Journal of Numerical Methods in Engineering <b>1</b>, 275-277 (1969).</li>
+<li><b>Pointwise Aitken-acceleration:</b> <br  />
+<br  />
+ <div class="fragment"><div class="line"><span class="comment">//Set a boolean flag that controls whether pointwise Aitken</span></div>
+<div class="line"><span class="comment">//extrapolation is used. The optional argument specifies the Picard</span></div>
+<div class="line"><span class="comment">//Iteration after which the extrapolation is to be used for the first</span></div>
+<div class="line"><span class="comment">//time. The default value is zero.</span></div>
+<div class="line"><span class="keywordtype">void</span> enable_pointwise_aitken (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pointwise_aitken_start)</div>
+</div><!-- fragment --> If this function is called, the classical Aitken extrapolation is used to accelerate the convergence of (individual) solid degrees of freedom after every three iterations.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="channel_seg_problem"></a>
+The SegregatedFSICollapsibleChannelProblem</h1>
+<p>We shall now briefly discuss the application of the segregated solver for the collapsible channel problem. The <code><a class="el" href="classSegregatedFSICollapsibleChannelProblem.html" title="Problem class – add segregated solver capability to an existing problem.">SegregatedFSICollapsibleChannelProblem</a></code> is defined in the driver code <code><a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a> </code> and inherits from the "monolithic" <code><a class="el" href="classFSICollapsibleChannelProblem.html" title="Problem class.">FSICollapsibleChannelProblem</a></code> and also from the <a href="../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html"><code>SegregatableFSIProblem</code> </a> class. The code <code> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a> </code> is specifically designed for ease of exposition and does not contain any timing statements or documentation of convergence histories. The alternative driver code <code> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc">fsi_chan_seg_driver.cc</a></code> contains complete timing and documentation statements and is the code that was used by <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, Hazel &amp; Boyle (2008). </a></p>
+<p>The simplified <code><a class="el" href="classSegregatedFSICollapsibleChannelProblem.html" title="Problem class – add segregated solver capability to an existing problem.">SegregatedFSICollapsibleChannelProblem</a></code> class contains six member functions</p><ul>
+<li>The constructor</li>
+<li>The destructor</li>
+<li><code>void</code> <code>identify_fluid_and_solid_dofs(...)</code> </li>
+<li><code>void</code> <code>actions_before_newton_convergence_check()</code> </li>
+<li><code>void</code> <code>actions_before_segregated_convergence_check()</code> </li>
+<li><code>void</code> <code>steady_run()</code> </li>
+<li><code>void</code> <code>doc_solution(DocInfo&amp; doc_info)</code> </li>
+</ul>
+<p>The <code>doc_solution(...)</code> function simply writes the bulk (fluid) elements and wall (solid) elements to two separate files and the destructor is empty. We discuss the other four member functions below.</p>
+<hr  />
+<h2><a class="anchor" id="constructor"></a>
+The constructor</h2>
+<p>The constructor calls the constructor of the underlying "monolithic" problem and then selects the convergence criterion and convergence-acceleration technique based on the values of control flags defined in the namespace <code><a class="el" href="namespaceFlags.html" title="Extend namespace for control flags.">Flags</a></code>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_constructor======================================</span></div>
+<div class="line"><span class="comment">/// Constructor for the collapsible channel problem</span></div>
+<div class="line"><span class="comment">//===============================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classSegregatedFSICollapsibleChannelProblem.html#ac762b472c2baafa23dae6b9ce38f31da">SegregatedFSICollapsibleChannelProblem&lt; ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classSegregatedFSICollapsibleChannelProblem.html#ac762b472c2baafa23dae6b9ce38f31da">SegregatedFSICollapsibleChannelProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; nup, </div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ncollapsible,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ndown,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ny,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lup,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; lcollapsible, </div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ldown,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; displ_control,</div>
+<div class="line">                                       <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; steady_flag) :</div>
+<div class="line"> <a class="code hl_class" href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a>&lt;ELEMENT&gt;(nup, </div>
+<div class="line">                                       ncollapsible,</div>
+<div class="line">                                       ndown,</div>
+<div class="line">                                       ny,</div>
+<div class="line">                                       lup,</div>
+<div class="line">                                       lcollapsible, </div>
+<div class="line">                                       ldown,</div>
+<div class="line">                                       ly,</div>
+<div class="line">                                       displ_control,</div>
+<div class="line">                                       steady_flag) </div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Choose convergence criterion based on Flag::Convergence criterion</span></div>
+<div class="line"> <span class="comment">// with tolerance given by Flag::Convergence_tolerance</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceFlags.html#aba930ff1e462e642a27904df95baab7c">Flags::Convergence_criterion</a>==0)</div>
+<div class="line">  {</div>
+<div class="line">   assess_convergence_based_on_max_global_residual(</div>
+<div class="line">    <a class="code hl_variable" href="namespaceFlags.html#a5550ee43b27fd03898a6718246b44e4a">Flags::Convergence_tolerance</a>);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceFlags.html#aba930ff1e462e642a27904df95baab7c">Flags::Convergence_criterion</a>==1)</div>
+<div class="line">  {</div>
+<div class="line">   assess_convergence_based_on_absolute_solid_change(</div>
+<div class="line">    <a class="code hl_variable" href="namespaceFlags.html#a5550ee43b27fd03898a6718246b44e4a">Flags::Convergence_tolerance</a>);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceFlags.html#aba930ff1e462e642a27904df95baab7c">Flags::Convergence_criterion</a>==2)</div>
+<div class="line">  {</div>
+<div class="line">   assess_convergence_based_on_relative_solid_change(</div>
+<div class="line">    <a class="code hl_variable" href="namespaceFlags.html#a5550ee43b27fd03898a6718246b44e4a">Flags::Convergence_tolerance</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Select a convergence-acceleration technique based on control flags</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointwise Aitken extrapolation</span></div>
+<div class="line"> <span class="keywordflow">if</span>(<a class="code hl_variable" href="namespaceFlags.html#aabfbfdb3e91e4df3fc2ec6e2a2e3567d">Flags::Use_pointwise_aitken</a>)</div>
+<div class="line">  {</div>
+<div class="line">   this-&gt;enable_pointwise_aitken();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   this-&gt;disable_pointwise_aitken();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Under-relaxation</span></div>
+<div class="line"> this-&gt;enable_under_relaxation(<a class="code hl_variable" href="namespaceFlags.html#a6c3895aecba834ceda5fe1c3ecb13bba">Flags::Omega_under_relax</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Irons and Tuck&#39;s extrapolation</span></div>
+<div class="line"> <span class="keywordflow">if</span>(<a class="code hl_variable" href="namespaceFlags.html#a9d92a2ec6ebd4e2ea66605c063e53915">Flags::Use_irons_and_tuck_extrapolation</a>)</div>
+<div class="line">  {</div>
+<div class="line">   this-&gt;enable_irons_and_tuck_extrapolation();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   this-&gt;disable_irons_and_tuck_extrapolation();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_constructor</span></div>
+<div class="ttc" id="aclassFSICollapsibleChannelProblem_html"><div class="ttname"><a href="classFSICollapsibleChannelProblem.html">FSICollapsibleChannelProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition</b> <a href="fsi__chan__problem_8h_source.html#l00314">fsi_chan_problem.h:315</a></div></div>
+<div class="ttc" id="aclassSegregatedFSICollapsibleChannelProblem_html_ac762b472c2baafa23dae6b9ce38f31da"><div class="ttname"><a href="classSegregatedFSICollapsibleChannelProblem.html#ac762b472c2baafa23dae6b9ce38f31da">SegregatedFSICollapsibleChannelProblem::SegregatedFSICollapsibleChannelProblem</a></div><div class="ttdeci">SegregatedFSICollapsibleChannelProblem(const unsigned &amp;nup, const unsigned &amp;ncollapsible, const unsigned &amp;ndown, const unsigned &amp;ny, const double &amp;lup, const double &amp;lcollapsible, const double &amp;ldown, const double &amp;ly, const bool &amp;displ_control, const bool &amp;steady_flag)</div><div class="ttdoc">Constructor: The arguments are the same as the original (non-segregated) problem, namely,...</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00167">simple_segregated_driver.cc:168</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_a5550ee43b27fd03898a6718246b44e4a"><div class="ttname"><a href="namespaceFlags.html#a5550ee43b27fd03898a6718246b44e4a">Flags::Convergence_tolerance</a></div><div class="ttdeci">double Convergence_tolerance</div><div class="ttdoc">Convergence tolerance.</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00069">simple_segregated_driver.cc:69</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_a6c3895aecba834ceda5fe1c3ecb13bba"><div class="ttname"><a href="namespaceFlags.html#a6c3895aecba834ceda5fe1c3ecb13bba">Flags::Omega_under_relax</a></div><div class="ttdeci">double Omega_under_relax</div><div class="ttdoc">Under-relaxation parameter (1.0: no under-relaxation; 0.0: freeze)</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00060">simple_segregated_driver.cc:60</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_a9d92a2ec6ebd4e2ea66605c063e53915"><div class="ttname"><a href="namespaceFlags.html#a9d92a2ec6ebd4e2ea66605c063e53915">Flags::Use_irons_and_tuck_extrapolation</a></div><div class="ttdeci">unsigned Use_irons_and_tuck_extrapolation</div><div class="ttdoc">Use Irons and Tuck extrapolation (1) or not (0)</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00063">simple_segregated_driver.cc:63</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_aabfbfdb3e91e4df3fc2ec6e2a2e3567d"><div class="ttname"><a href="namespaceFlags.html#aabfbfdb3e91e4df3fc2ec6e2a2e3567d">Flags::Use_pointwise_aitken</a></div><div class="ttdeci">unsigned Use_pointwise_aitken</div><div class="ttdoc">Use pointwise Aitken extrapolation (1) or not (0)</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00057">simple_segregated_driver.cc:57</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_aba930ff1e462e642a27904df95baab7c"><div class="ttname"><a href="namespaceFlags.html#aba930ff1e462e642a27904df95baab7c">Flags::Convergence_criterion</a></div><div class="ttdeci">unsigned Convergence_criterion</div><div class="ttdoc">Convergence criterion: 0: global resmax; 1: abs. change; 2: rel. change.</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00066">simple_segregated_driver.cc:66</a></div></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="identify"></a>
+Identifying the fluid and solid degrees of freedom</h2>
+<p>The underlying monolithic problem provides pointers to the fluid and solid (sub-)meshes via the member data </p><div class="fragment"><div class="line">AlgebraicCollapsibleChannelMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">OneDLagrangianMesh&lt;FSIHermiteBeamElement&gt;* Wall_mesh_pt; </div>
+</div><!-- fragment --><p> which are accessible via the member functions <br  />
+ <code><a class="el" href="classFSICollapsibleChannelProblem.html#ae9ad9667460168fa74f8ec8e3ab9e988" title="Access function for the specific bulk (fluid) mesh.">SegregatedFSICollapsibleChannelProblem::bulk_mesh_pt()</a></code> and <code><a class="el" href="classFSICollapsibleChannelProblem.html#aec24d3eb06747f8429cf14857aed29a1" title="Access function for the wall mesh.">SegregatedFSICollapsibleChannelProblem::wall_mesh_pt()</a></code>, and so the identification of fluid and solid degrees of freedom is reasonably straightforward. The only complication arises because we may, or may not, be using displacement control which introduces a further element into the global mesh. Displacement control affects the solid problem suggesting that the (variable) external pressure should be regarded as a solid degrees of freedom and the <code>DisplacementControlElement</code> should be included in the solid mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_identify_fluid_and_solid======================================</span></div>
+<div class="line"><span class="comment">/// Identify the fluid and solid Data and the meshes that</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// contain only elements that are involved in the respective sub-problems. </span></div>
+<div class="line"><span class="comment">/// This implements a pure virtual function in the </span></div>
+<div class="line"><span class="comment">/// SegregatableFSIProblem base class.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classSegregatedFSICollapsibleChannelProblem.html#a7b277b9583bb10e72655010dc653023e">SegregatedFSICollapsibleChannelProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classSegregatedFSICollapsibleChannelProblem.html#a7b277b9583bb10e72655010dc653023e">identify_fluid_and_solid_dofs</a>(Vector&lt;Data*&gt;&amp; fluid_data_pt,</div>
+<div class="line">                              Vector&lt;Data*&gt;&amp; solid_data_pt,</div>
+<div class="line">                              Mesh*&amp; fluid_mesh_pt,</div>
+<div class="line">                              Mesh*&amp; solid_mesh_pt)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//FLUID DATA: </span></div>
+<div class="line"> <span class="comment">//All fluid elements are stored in the Mesh addressed by bulk_mesh_pt() </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Reset the storage</span></div>
+<div class="line"> fluid_data_pt.clear();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of fluid elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_fluid_elem=this-&gt;bulk_mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="comment">//Loop over fluid elements and add internal data to fluid_data_ptt</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_fluid_elem;e++)</div>
+<div class="line">  {</div>
+<div class="line">   GeneralisedElement* el_pt=this-&gt;bulk_mesh_pt()-&gt;element_pt(e);</div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_internal=el_pt-&gt;ninternal_data();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_internal;i++)</div>
+<div class="line">    {</div>
+<div class="line">     fluid_data_pt.push_back(el_pt-&gt;internal_data_pt(i));</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in fluid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_fluid_node=this-&gt;bulk_mesh_pt()-&gt;nnode();</div>
+<div class="line"> <span class="comment">//Loop over nodes and add the nodal data to fluid_data_pt</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_fluid_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   fluid_data_pt.push_back(this-&gt;bulk_mesh_pt()-&gt;node_pt(n));</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// The bulk_mesh_pt() is a mesh that contains only fluid elements</span></div>
+<div class="line"> fluid_mesh_pt = this-&gt;bulk_mesh_pt(); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//SOLID DATA</span></div>
+<div class="line"> <span class="comment">//All solid elements are stored in the Mesh addressed by wall_mesh_pt()</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Reset the storage</span></div>
+<div class="line"> solid_data_pt.clear();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in the solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_solid_node=this-&gt;wall_mesh_pt()-&gt;nnode();</div>
+<div class="line"> <span class="comment">//Loop over nodes and add nodal position data to solid_data_pt</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_solid_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   solid_data_pt.push_back(</div>
+<div class="line">    this-&gt;wall_mesh_pt()-&gt;node_pt(n)-&gt;variable_position_pt());</div>
+<div class="line">  }</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">//If we are using displacement control then the displacement control element</span></div>
+<div class="line"> <span class="comment">//and external pressure degree of freedom should be treated as part</span></div>
+<div class="line"> <span class="comment">//of the solid problem</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//We will assemble a single solid mesh from a vector of pointers to meshes</span></div>
+<div class="line"> Vector&lt;Mesh*&gt; s_mesh_pt(1);</div>
+<div class="line"> <span class="comment">//The wall_mesh_pt() contains all solid elements and is the first</span></div>
+<div class="line"> <span class="comment">//entry in our vector</span></div>
+<div class="line"> s_mesh_pt[0]=this-&gt;wall_mesh_pt();</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">//If we are using displacement control</span></div>
+<div class="line"> <span class="keywordflow">if</span> (this-&gt;Displ_control)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Add the external pressure data to solid_data_pt</span></div>
+<div class="line">   solid_data_pt.push_back(<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ad31ed4ea9a7fce4c20c2230d26047f6f">Global_Physical_Variables::P_ext_data_pt</a>);</div>
+<div class="line">   <span class="comment">//Add a pointer to a Mesh containing the displacement control element</span></div>
+<div class="line">   <span class="comment">//to the vector of pointers to meshes</span></div>
+<div class="line">   s_mesh_pt.push_back(this-&gt;Displ_control_mesh_pt);</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build &quot;combined&quot; mesh from our vector of solid meshes</span></div>
+<div class="line"> solid_mesh_pt = <span class="keyword">new</span> Mesh(s_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_identify_fluid_and_solid</span></div>
+<div class="ttc" id="aclassSegregatedFSICollapsibleChannelProblem_html_a7b277b9583bb10e72655010dc653023e"><div class="ttname"><a href="classSegregatedFSICollapsibleChannelProblem.html#a7b277b9583bb10e72655010dc653023e">SegregatedFSICollapsibleChannelProblem::identify_fluid_and_solid_dofs</a></div><div class="ttdeci">void identify_fluid_and_solid_dofs(Vector&lt; Data * &gt; &amp;fluid_data_pt, Vector&lt; Data * &gt; &amp;solid_data_pt, Mesh *&amp;fluid_mesh_pt, Mesh *&amp;solid_mesh_pt)</div><div class="ttdoc">Identify the fluid and solid Data and meshes that contain only elements involved in the respective su...</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00243">simple_segregated_driver.cc:244</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ad31ed4ea9a7fce4c20c2230d26047f6f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ad31ed4ea9a7fce4c20c2230d26047f6f">Global_Physical_Variables::P_ext_data_pt</a></div><div class="ttdeci">Data * P_ext_data_pt</div><div class="ttdoc">Pointer to Data object that stores external pressure.</div><div class="ttdef"><b>Definition</b> <a href="fsi__chan__problem_8h_source.html#l00048">fsi_chan_problem.h:48</a></div></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="actions"></a>
+Actions before convergence checks</h2>
+<p>During a monolithic solve the function <code>actions_before_newton_convergence_check()</code> must update the nodal positions in the bulk (fluid) mesh. In principle, it should remain empty during a segregated solve, but we found it beneficial to update the bulk mesh, and hence the fluid load on the wall, during the solution of the solid problem.</p>
+<p>The function <code>actions_before_segregated_convergence_check()</code> contains an update of the nodal positions in the bulk mesh in order that the segregated solution is self-consistent.</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Update nodal positions in the fluid mesh in</span></div>
+<div class="line"><span class="comment"> /// response to changes in the wall displacement field after every</span><span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Newton step in a monolithic or segregated solid solve. Note</span></div>
+<div class="line"><span class="comment"> /// the use of the (protected) flag Solve_type, which can take the</span></div>
+<div class="line"><span class="comment"> /// values Full_solve, Fluid_solve or Solid_solve. This flag is used</span></div>
+<div class="line"><span class="comment"> /// to allow specification of different actions depending on the</span></div>
+<div class="line"><span class="comment"> /// precise solve taking place.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_convergence_check()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//For a &quot;true&quot; segregated solver, we would not do this in fluid or solid</span></div>
+<div class="line">   <span class="comment">//solves, but adding the bulk node update to the solid solve phase aids</span></div>
+<div class="line">   <span class="comment">//convergence and makes it possible for larger values of Q. Of course,</span></div>
+<div class="line">   <span class="comment">//there is a small cost associated with doing this.</span></div>
+<div class="line">   <span class="keywordflow">if</span>(Solve_type!=Fluid_solve) {this-&gt;Bulk_mesh_pt-&gt;node_update();}</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update nodal positions in the fluid mesh</span></div>
+<div class="line"><span class="comment"> /// in response to any changes in the wall displacement field after every </span></div>
+<div class="line"><span class="comment"> /// segregated solve. This is not strictly necessary because we</span></div>
+<div class="line"><span class="comment"> /// do the solid solve last, which performs its own node update before the </span></div>
+<div class="line"><span class="comment"> /// convergence check of the sub problem. It remains here because if we</span></div>
+<div class="line"><span class="comment"> /// were solving in a completely segregated fashion a node update would be </span></div>
+<div class="line"><span class="comment"> /// required for the fluid mesh in the final converged solution to be</span></div>
+<div class="line"><span class="comment"> /// consistent with the solid positions.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_segregated_convergence_check()</div>
+<div class="line">  { </div>
+<div class="line">   this-&gt;Bulk_mesh_pt-&gt;node_update();</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// end_of_convergence_checks</span></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="steady"></a>
+Solving a steady problem</h2>
+<p>The function <code>steady_run()</code> conducts a simple parameter study in which the external pressure (or prescribed displacement) is varied. After specification of the initial conditions, parameter increments and output directories, the parameter study is straightforward  </p><div class="fragment"><div class="line"> <span class="comment">// Parameter study (loop over the number of steps)</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;<a class="code hl_variable" href="namespaceFlags.html#a8a6ffdb261330ef89965624209ab7b00">Flags::Nsteps</a>;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Setup segregated solver </span></div>
+<div class="line">   <span class="comment">//(Default behaviour will identify the fluid and solid dofs and</span></div>
+<div class="line">   <span class="comment">// allocate memory, etc every time. This is a bit inefficient in </span></div>
+<div class="line">   <span class="comment">// this case, but it is safe and will always work)</span></div>
+<div class="line">   setup_segregated_solver();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// SEGREGATED SOLVER</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_variable" href="namespaceFlags.html#a2cdfa6b776b959a060a1f2e8d4918789">Flags::Use_segregated_solver</a>)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the maximum number of Picard steps</span></div>
+<div class="line">     Max_picard =50;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Solve ignoring return type (convergence data)</span></div>
+<div class="line">     (void)steady_segregated_solve();</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">// NEWTON SOLVER</span></div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Explit call to the steady Newton solve.</span></div>
+<div class="line">     steady_newton_solve();</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Output the solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Increase the Step number</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Adjust control parameters</span></div>
+<div class="line">   <span class="comment">//If displacment control increment position</span></div>
+<div class="line">   <span class="keywordflow">if</span> (this-&gt;Displ_control)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#afd29cc714595594020831c7c54387883">Global_Physical_Variables::Yprescr</a>+=delta_y;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">//Otherwise increment external pressure</span></div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">double</span> old_p=<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ad31ed4ea9a7fce4c20c2230d26047f6f">Global_Physical_Variables::P_ext_data_pt</a>-&gt;value(0);</div>
+<div class="line">     <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ad31ed4ea9a7fce4c20c2230d26047f6f">Global_Physical_Variables::P_ext_data_pt</a>-&gt;set_value(0,old_p+delta_p);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of parameter study</span></div>
+<div class="ttc" id="anamespaceFlags_html_a2cdfa6b776b959a060a1f2e8d4918789"><div class="ttname"><a href="namespaceFlags.html#a2cdfa6b776b959a060a1f2e8d4918789">Flags::Use_segregated_solver</a></div><div class="ttdeci">unsigned Use_segregated_solver</div><div class="ttdoc">Use Newton solver (0) or segregated solver (1)?</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00054">simple_segregated_driver.cc:54</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_a8a6ffdb261330ef89965624209ab7b00"><div class="ttname"><a href="namespaceFlags.html#a8a6ffdb261330ef89965624209ab7b00">Flags::Nsteps</a></div><div class="ttdeci">unsigned Nsteps</div><div class="ttdoc">Number of steps in parameter study.</div><div class="ttdef"><b>Definition</b> <a href="fsi__chan__problem_8h_source.html#l00245">fsi_chan_problem.h:245</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_afd29cc714595594020831c7c54387883"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#afd29cc714595594020831c7c54387883">Global_Physical_Variables::Yprescr</a></div><div class="ttdeci">double Yprescr</div><div class="ttdoc">Current prescribed vertical position of control point (only used for displacement control)</div><div class="ttdef"><b>Definition</b> <a href="fsi__chan__problem_8h_source.html#l00066">fsi_chan_problem.h:66</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>Having written our <code><a class="el" href="classSegregatedFSICollapsibleChannelProblem.html" title="Problem class – add segregated solver capability to an existing problem.">SegregatedFSICollapsibleChannelProblem</a></code>, the driver code is extremely simple. We specify number of elements and dimensions of our computational domain, construct the problem and perform a steady parameter study.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_main====================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for a segregated collapsible channel problem with FSI.</span></div>
+<div class="line"><span class="comment">//=============================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="simple__segregated__driver_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of elements in the domain</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nup=4*<a class="code hl_variable" href="namespaceFlags.html#a7c2437aa0b6a4f27df951f1cbcef7337">Flags::Resolution_factor</a>;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ncollapsible=20*<a class="code hl_variable" href="namespaceFlags.html#a7c2437aa0b6a4f27df951f1cbcef7337">Flags::Resolution_factor</a>;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ndown=40*<a class="code hl_variable" href="namespaceFlags.html#a7c2437aa0b6a4f27df951f1cbcef7337">Flags::Resolution_factor</a>;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=4*<a class="code hl_variable" href="namespaceFlags.html#a7c2437aa0b6a4f27df951f1cbcef7337">Flags::Resolution_factor</a>;</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Geometry of the domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> lup=1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> lcollapsible=5.0;</div>
+<div class="line"> <span class="keywordtype">double</span> ldown=10.0;</div>
+<div class="line"> <span class="keywordtype">double</span> ly=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Steady run by default</span></div>
+<div class="line"> <span class="keywordtype">bool</span> steady_flag=<span class="keyword">true</span>;</div>
+<div class="line"> <span class="comment">// with displacement control</span></div>
+<div class="line"> <span class="keywordtype">bool</span> displ_control=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the problem with QTaylorHoodElements</span></div>
+<div class="line"> <a class="code hl_class" href="classSegregatedFSICollapsibleChannelProblem.html">SegregatedFSICollapsibleChannelProblem</a></div>
+<div class="line">  &lt;AlgebraicElement&lt;QTaylorHoodElement&lt;2&gt; &gt; &gt; </div>
+<div class="line">  problem(nup, ncollapsible, ndown, ny, </div>
+<div class="line">          lup, lcollapsible, ldown, ly, displ_control,</div>
+<div class="line">          steady_flag);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Perform a steady run</span></div>
+<div class="line"> problem.steady_run();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">//end of main</span></div>
+<div class="ttc" id="aclassSegregatedFSICollapsibleChannelProblem_html"><div class="ttname"><a href="classSegregatedFSICollapsibleChannelProblem.html">SegregatedFSICollapsibleChannelProblem</a></div><div class="ttdoc">Problem class – add segregated solver capability to an existing problem.</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00086">simple_segregated_driver.cc:89</a></div></div>
+<div class="ttc" id="anamespaceFlags_html_a7c2437aa0b6a4f27df951f1cbcef7337"><div class="ttname"><a href="namespaceFlags.html#a7c2437aa0b6a4f27df951f1cbcef7337">Flags::Resolution_factor</a></div><div class="ttdeci">unsigned Resolution_factor</div><div class="ttdoc">Resolution factor (multiplier for number of elements across channel)</div><div class="ttdef"><b>Definition</b> <a href="fsi__chan__problem_8h_source.html#l00236">fsi_chan_problem.h:236</a></div></div>
+<div class="ttc" id="asimple__segregated__driver_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="simple__segregated__driver_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code for a segregated collapsible channel problem with FSI.</div><div class="ttdef"><b>Definition</b> <a href="simple__segregated__driver_8cc_source.html#l00445">simple_segregated_driver.cc:445</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments_and_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comments"></a>
+Comments</h2>
+<ul>
+<li><b>(In-)efficiency of <code>setup_segregated_solver()</b></code> <br  />
+<br  />
+ In our simple example code, we did not employ spatial adaptivity. It is not necessary, therefore, to (re-)identify the fluid and solid degrees of freedom before each solve, the default (safe) behaviour of <code>setup_segregated_solver()</code>. Nonetheless, data associated with the techniques used to accelerate the convergence of the Picard iterations must be reset before each segregated solve. In the more complex driver code, a boolean flag <code>bool</code> <code>full_setup</code> is used as an argument to <code>setup_segregated_solver()</code> which modifies the behaviour, as indicated below. <div class="fragment"><div class="line"><span class="comment">// Boolean flag used to specify whether a full setup of solid and fluid dofs</span></div>
+<div class="line"><span class="comment">// is required</span></div>
+<div class="line"><span class="keywordtype">bool</span> full_setup = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Parameter study</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;<a class="code hl_variable" href="namespaceFlags.html#a8a6ffdb261330ef89965624209ab7b00">Flags::Nsteps</a>;istep++)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Setup segregated solver</span></div>
+<div class="line">  setup_segregated_solver(full_setup);</div>
+<div class="line"> </div>
+<div class="line">   [...]</div>
+<div class="line"> </div>
+<div class="line">  steady_segregated_solve()</div>
+<div class="line"> </div>
+<div class="line">   [...] </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//We no longer need a full setup of the dofs</span></div>
+<div class="line">  full_setup = <span class="keyword">false</span>;</div>
+<div class="line"> }</div>
+</div><!-- fragment --> . <br  />
+</li>
+</ul>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Modify the control flags in <code><a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a></code> to verify that the monolithic solution is the same (to within finite precision) as the segregated solution.</li>
+<li>Modify the control flags in <code><a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a></code> to investigate the influence of the convergence acceleration techniques and convergence criterion on the segregated solution. Which combination of parameters gives convergence in the fewest Picard iterations?</li>
+<li>Investigate the behaviour of the system if the fluid (bulk) mesh is <em>not</em> updated after each Newton step in the solution of the solid problem. Can you obtain converged solutions?</li>
+<li>Write your own <code>SegregatedFSICollapsibleChannelFlow::unsteady_run()</code> member function that computes the time evolution of the system after a perturbation to the external pressure. Compare your answer with the equivalent member function in the much more comprehensive driver code <code><a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc">fsi_chan_seg_driver.cc</a></code> that was used in <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, Hazel &amp; Boyle (2008). </a> . <br  />
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/">demo_drivers/interaction/fsi_channel_seg_and_precond/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:54
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

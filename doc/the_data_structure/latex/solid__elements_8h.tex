@@ -1,0 +1,93 @@
+\doxysection{solid\+\_\+elements.\+h File Reference}
+\hypertarget{solid__elements_8h}{}\label{solid__elements_8h}\index{solid\_elements.h@{solid\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PVDEquationsBase}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A base class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in Cartesian coordinates. Combines a few generic functions that are shared by \doxylink{classoomph_1_1PVDEquations}{PVDEquations} and \doxylink{classoomph_1_1PVDEquationsWithPressure}{PVDEquations\+With\+Pressure}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PVDEquations}{oomph\+::\+PVDEquations$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in cartesian coordinates. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+QElements for the interpolation of the variable positions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElement_3_012_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 2D \doxylink{classoomph_1_1QPVDElement}{QPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement$<$ 2, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D \doxylink{classoomph_1_1QPVDElement}{QPVDElement}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElement_3_013_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement$<$ 3, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1QPVDElement}{QPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElement_3_013_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement$<$ 3, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1QPVDElement}{QPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HermitePVDElement}{oomph\+::\+Hermite\+PVDElement$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the principle of virtual diplacements using Hermite interpolation for the variable positions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectablePVDElement}{oomph\+::\+Projectable\+PVDElement$<$ PVD\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em PVDElement\+With\+Continuous\+Pressure upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePVDElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+PVDElement$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePVDElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+PVDElement$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements, with a contitutive equation that involves a pressure. This formulation is required in the case of incompressible materials, in which the additional constraint that volume must be conserved is applied. In this case, the Incompressible flag must be set to true. If the Incompressible flag is not set to true, we use the nearly-\/incompressible formulation of the constitutive equations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure}{oomph\+::\+QPVDElement\+With\+Pressure$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the equations of solid mechanics, using the principle of virtual displacements, with quadratic interpolation for the positions and a discontinuous linear solid pressure. This is analogous to the \doxylink{classoomph_1_1QCrouzeixRaviartElement}{QCrouzeix\+Raviart\+Element} element for fluids. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElementWithPressure_3_012_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement\+With\+Pressure$<$ 2 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of 2D \doxylink{classoomph_1_1QPVDElementWithPressure}{QPVDElement\+With\+Pressure}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElementWithPressure_3_012_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement\+With\+Pressure$<$ 2 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of 2D \doxylink{classoomph_1_1QPVDElementWithPressure}{QPVDElement\+With\+Pressure}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElementWithPressure_3_013_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement\+With\+Pressure$<$ 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of 3D \doxylink{classoomph_1_1QPVDElementWithPressure}{QPVDElement\+With\+Pressure}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElementWithPressure_3_013_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement\+With\+Pressure$<$ 3 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of 3D \doxylink{classoomph_1_1QPVDElementWithPressure}{QPVDElement\+With\+Pressure}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QPVDElementWithContinuousPressure}{oomph\+::\+QPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the equations of solid mechanics, based on the discretised principle of virtual displacements, using quadratic interpolation for the positions and continuous linear solid pressure. This is analagous to the \doxylink{classoomph_1_1QTaylorHoodElement}{QTaylor\+Hood\+Element} fluid element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElementWithContinuousPressure_3_012_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 2 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} for 2D \doxylink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElementWithContinuousPressure_3_012_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 2 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} for 2D \doxylink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPVDElementWithContinuousPressure_3_013_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} for 3D \doxylink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QPVDElementWithContinuousPressure_3_013_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} for 3D \doxylink{classoomph_1_1QPVDElementWithContinuousPressure}{QPVDElement\+With\+Continuous\+Pressure} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TPVDElement}{oomph\+::\+TPVDElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+TElements for the interpolation of the variable positions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDElement_3_012_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDElement$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 2D \doxylink{classoomph_1_1TPVDElement}{TPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TPVDElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ TPVDElement$<$ 2, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D \doxylink{classoomph_1_1TPVDElement}{TPVDElement}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDElement_3_013_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDElement$<$ 3, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1TPVDElement}{TPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TPVDElement_3_013_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ TPVDElement$<$ 3, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1TPVDElement}{TPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TPVDBubbleEnrichedElement}{oomph\+::\+TPVDBubble\+Enriched\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+TBubble\+Enriched\+Elements for the interpolation of the variable positions. These elements are typically required when using pseudo-\/elasticity to move internal mesh nodes and TCrouzeix\+Raviart\+Fluid elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDBubble\+Enriched\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 2D \doxylink{classoomph_1_1TPVDBubbleEnrichedElement}{TPVDBubble\+Enriched\+Element} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TPVDBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ TPVDBubble\+Enriched\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D \doxylink{classoomph_1_1TPVDBubbleEnrichedElement}{TPVDBubble\+Enriched\+Element}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDBubble\+Enriched\+Element$<$ 3, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1TPVDBubbleEnrichedElement}{TPVDBubble\+Enriched\+Element} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01TPVDBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ TPVDBubble\+Enriched\+Element$<$ 3, NNODE\+\_\+1\+D $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of a 3D \doxylink{classoomph_1_1TPVDElement}{TPVDElement} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TPVDElementWithContinuousPressure}{oomph\+::\+TPVDElement\+With\+Continuous\+Pressure$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em An Element that solves the solid mechanics equations in an (near) incompressible formulation with quadratic interpolation for velocities and positions and continous linear pressure interpolation. This is equivalent to the \doxylink{classoomph_1_1TTaylorHoodElement}{TTaylor\+Hood\+Element} element for fluids. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDElementWithContinuousPressure_3_012_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDElement\+With\+Continuous\+Pressure$<$ 2 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 2D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TPVDElementWithContinuousPressure_3_013_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 3D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectablePVDElementWithContinuousPressure}{oomph\+::\+Projectable\+PVDElement\+With\+Continuous\+Pressure$<$ PVD\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em PVDElement\+With\+Continuous\+Pressure upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePVDElementWithContinuousPressure_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+PVDElement\+With\+Continuous\+Pressure$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePVDElementWithContinuousPressure_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+PVDElement\+With\+Continuous\+Pressure$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1SolidHelpers}{oomph\+::\+Solid\+Helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace for solid mechanics helper functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1SolidHelpers_a3d907f48fd1b520813a79785442a3e1a}{oomph\+::\+Solid\+Helpers\+::doc\+\_\+2\+D\+\_\+principal\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} \texorpdfstring{$\ast$}{*}mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Document the principal stresses in a 2D \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} pointed to by {\ttfamily mesh\+\_\+pt}, in the directory specified by the \doxylink{classoomph_1_1DocInfo}{Doc\+Info} object, in a format that can be processed with tecplot macro. \end{DoxyCompactList}\end{DoxyCompactItemize}

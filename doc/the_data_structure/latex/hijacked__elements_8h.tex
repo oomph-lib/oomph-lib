@@ -1,0 +1,20 @@
+\doxysection{hijacked\+\_\+elements.\+h File Reference}
+\hypertarget{hijacked__elements_8h}{}\label{hijacked__elements_8h}\index{hijacked\_elements.h@{hijacked\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1HijackedElementBase}{oomph\+::\+Hijacked\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Hijacked}{Hijacked} elements are elements in which one or more \doxylink{classoomph_1_1Data}{Data} values that affect the element\textquotesingle{}s residuals, are determined by another element -- the data values are then said to have been hijacked by another element. The main functionality added by the \doxylink{classoomph_1_1Hijacked}{Hijacked} element class is that it wipes out those entries in the element\textquotesingle{}s residual vector and those rows in the element\textquotesingle{}s Jacobian matrix that are determined by the "{}other"{} elements that have hijacked the values. Note that for continuation in homotopy parameters, it may be desriable to multiply the residuals and corresponding jacobian entries by a "{}homotopy parameter"{}. The value of this parameter can be set by assigning \doxylink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt()} which has a default value of zero. Note\+: it would be possible to extend the functionality so that different residuals are multiplied by different values, but will this ever be required? \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01Hijacked_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Hijacked$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of hijacked elements\+: the same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01Hijacked_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Hijacked$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of hijacked elements\+: the same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01Hijacked_3_01FaceGeometry_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Hijacked$<$ Face\+Geometry$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of hijacked elements\+: the same as the face geometry of the underlying element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

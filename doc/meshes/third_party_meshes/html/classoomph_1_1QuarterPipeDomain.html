@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::QuarterPipeDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1QuarterPipeDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::QuarterPipeDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Domain representing a quarter pipe.  
+ <a href="classoomph_1_1QuarterPipeDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::QuarterPipeDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1QuarterPipeDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a540d441b38146aacb12938d5f885789c" id="r_a540d441b38146aacb12938d5f885789c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">typedef</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a540d441b38146aacb12938d5f885789c">AxialSpacingFctPt</a>) (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi</a>)</td></tr>
+<tr class="memdesc:a540d441b38146aacb12938d5f885789c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for function pointer for function that implements axial spacing of macro elements.  <br /></td></tr>
+<tr class="separator:a540d441b38146aacb12938d5f885789c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:afb9763dac929fd4371a6ef860d9a5caf" id="r_afb9763dac929fd4371a6ef860d9a5caf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#afb9763dac929fd4371a6ef860d9a5caf">QuarterPipeDomain</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ntheta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">nr</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;nz, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">length</a>)</td></tr>
+<tr class="memdesc:afb9763dac929fd4371a6ef860d9a5caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass number of elements in various directions, the inner and outer radius and the length of the tube.  <br /></td></tr>
+<tr class="separator:afb9763dac929fd4371a6ef860d9a5caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df039e22204accd7a8da75b1e08616e" id="r_a7df039e22204accd7a8da75b1e08616e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a7df039e22204accd7a8da75b1e08616e">QuarterPipeDomain</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> &amp;)=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">delete</a></td></tr>
+<tr class="memdesc:a7df039e22204accd7a8da75b1e08616e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7df039e22204accd7a8da75b1e08616e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf2b6f249e0f742f09bbbee1fdd9dd0" id="r_aadf2b6f249e0f742f09bbbee1fdd9dd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aadf2b6f249e0f742f09bbbee1fdd9dd0">operator=</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> &amp;)=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">delete</a></td></tr>
+<tr class="memdesc:aadf2b6f249e0f742f09bbbee1fdd9dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:aadf2b6f249e0f742f09bbbee1fdd9dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872560e53bf73ef0bd1b69f2a40612c8" id="r_a872560e53bf73ef0bd1b69f2a40612c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a872560e53bf73ef0bd1b69f2a40612c8">~QuarterPipeDomain</a> ()</td></tr>
+<tr class="memdesc:a872560e53bf73ef0bd1b69f2a40612c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor:  <br /></td></tr>
+<tr class="separator:a872560e53bf73ef0bd1b69f2a40612c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba699b5121d1300b96b00056cf64ddbe" id="r_aba699b5121d1300b96b00056cf64ddbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a540d441b38146aacb12938d5f885789c">AxialSpacingFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aba699b5121d1300b96b00056cf64ddbe">axial_spacing_fct_pt</a> ()</td></tr>
+<tr class="memdesc:aba699b5121d1300b96b00056cf64ddbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that implements axial spacing of macro elements.  <br /></td></tr>
+<tr class="separator:aba699b5121d1300b96b00056cf64ddbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035e27884c0fa1bc31d1d9bed28c37bd" id="r_a035e27884c0fa1bc31d1d9bed28c37bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a035e27884c0fa1bc31d1d9bed28c37bd">axial_spacing_fct</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi</a>)</td></tr>
+<tr class="memdesc:a035e27884c0fa1bc31d1d9bed28c37bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that implements axial spacing of macro elements.  <br /></td></tr>
+<tr class="separator:a035e27884c0fa1bc31d1d9bed28c37bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8cc6433c58dcfb265335744ed8a330a" id="r_ae8cc6433c58dcfb265335744ed8a330a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#ae8cc6433c58dcfb265335744ed8a330a">macro_element_boundary</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">i_macro</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">i_direct</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:ae8cc6433c58dcfb265335744ed8a330a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector representation of the i_macro-th macro element boundary i_direct (U/D/L/R/F/B) at time level t (t=0: present; t&gt;0: previous): f(s).  <br /></td></tr>
+<tr class="separator:ae8cc6433c58dcfb265335744ed8a330a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5c023c7a9d6e43d123566bc2f7bb21f0" id="r_a5c023c7a9d6e43d123566bc2f7bb21f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a5c023c7a9d6e43d123566bc2f7bb21f0">r_U</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:a5c023c7a9d6e43d123566bc2f7bb21f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:a5c023c7a9d6e43d123566bc2f7bb21f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c58b76f546300c308d6e1f303a3433" id="r_a21c58b76f546300c308d6e1f303a3433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a21c58b76f546300c308d6e1f303a3433">r_L</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:a21c58b76f546300c308d6e1f303a3433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:a21c58b76f546300c308d6e1f303a3433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6e4d3fbb8afb4ad2597601f1a46afd" id="r_aeb6e4d3fbb8afb4ad2597601f1a46afd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aeb6e4d3fbb8afb4ad2597601f1a46afd">r_D</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:aeb6e4d3fbb8afb4ad2597601f1a46afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:aeb6e4d3fbb8afb4ad2597601f1a46afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab6f3fd79bc6dea1eb267f3b55630a2b" id="r_aab6f3fd79bc6dea1eb267f3b55630a2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aab6f3fd79bc6dea1eb267f3b55630a2b">r_R</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:aab6f3fd79bc6dea1eb267f3b55630a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:aab6f3fd79bc6dea1eb267f3b55630a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85aaa5d1217c49e2144bbfd37dbad0fd" id="r_a85aaa5d1217c49e2144bbfd37dbad0fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a85aaa5d1217c49e2144bbfd37dbad0fd">r_F</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:a85aaa5d1217c49e2144bbfd37dbad0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:a85aaa5d1217c49e2144bbfd37dbad0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1af5e7f1bc6e88ff8e9ee59e965630" id="r_aba1af5e7f1bc6e88ff8e9ee59e965630"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aba1af5e7f1bc6e88ff8e9ee59e965630">r_B</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">rmax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">thetamax</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmin</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zmax</a>)</td></tr>
+<tr class="memdesc:aba1af5e7f1bc6e88ff8e9ee59e965630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>.  <br /></td></tr>
+<tr class="separator:aba1af5e7f1bc6e88ff8e9ee59e965630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a3b79d0bf40336f7961a8b2bb58080dba" id="r_a3b79d0bf40336f7961a8b2bb58080dba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">static</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a3b79d0bf40336f7961a8b2bb58080dba">default_axial_spacing_fct</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi</a>)</td></tr>
+<tr class="memdesc:a3b79d0bf40336f7961a8b2bb58080dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default for function that implements axial spacing of macro elements.  <br /></td></tr>
+<tr class="separator:a3b79d0bf40336f7961a8b2bb58080dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aeb912b40da8cd2883768fe2ca989e640" id="r_aeb912b40da8cd2883768fe2ca989e640"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aeb912b40da8cd2883768fe2ca989e640">Ntheta</a></td></tr>
+<tr class="memdesc:aeb912b40da8cd2883768fe2ca989e640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements azimuthal direction.  <br /></td></tr>
+<tr class="separator:aeb912b40da8cd2883768fe2ca989e640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18ac22546af74ac9b76a870d3f5abe3d" id="r_a18ac22546af74ac9b76a870d3f5abe3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a18ac22546af74ac9b76a870d3f5abe3d">Nr</a></td></tr>
+<tr class="memdesc:a18ac22546af74ac9b76a870d3f5abe3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements radial direction.  <br /></td></tr>
+<tr class="separator:a18ac22546af74ac9b76a870d3f5abe3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1bf3900c3537c44942e3fee0c3d24e" id="r_aab1bf3900c3537c44942e3fee0c3d24e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#aab1bf3900c3537c44942e3fee0c3d24e">Nz</a></td></tr>
+<tr class="memdesc:aab1bf3900c3537c44942e3fee0c3d24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements axial direction.  <br /></td></tr>
+<tr class="separator:aab1bf3900c3537c44942e3fee0c3d24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71370e6c78fd37aa59e7a52d62d1cbe" id="r_ac71370e6c78fd37aa59e7a52d62d1cbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#ac71370e6c78fd37aa59e7a52d62d1cbe">Rmin</a></td></tr>
+<tr class="memdesc:ac71370e6c78fd37aa59e7a52d62d1cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inner radius.  <br /></td></tr>
+<tr class="separator:ac71370e6c78fd37aa59e7a52d62d1cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e2252883456cd65902663fda09296d5" id="r_a5e2252883456cd65902663fda09296d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a5e2252883456cd65902663fda09296d5">Rmax</a></td></tr>
+<tr class="memdesc:a5e2252883456cd65902663fda09296d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outer radius.  <br /></td></tr>
+<tr class="separator:a5e2252883456cd65902663fda09296d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0798f3962e840bdb3d31e4e0dada055d" id="r_a0798f3962e840bdb3d31e4e0dada055d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a0798f3962e840bdb3d31e4e0dada055d">Length</a></td></tr>
+<tr class="memdesc:a0798f3962e840bdb3d31e4e0dada055d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length.  <br /></td></tr>
+<tr class="separator:a0798f3962e840bdb3d31e4e0dada055d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad2a4e638bb58eda89a19eaf5e18969" id="r_adad2a4e638bb58eda89a19eaf5e18969"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#adad2a4e638bb58eda89a19eaf5e18969">Outer_boundary_cross_section_pt</a></td></tr>
+<tr class="memdesc:adad2a4e638bb58eda89a19eaf5e18969"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geom object representing the outer boundary of the cross section.  <br /></td></tr>
+<tr class="separator:adad2a4e638bb58eda89a19eaf5e18969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2760038e136d58a41dcbcd045bd13ae4" id="r_a2760038e136d58a41dcbcd045bd13ae4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a2760038e136d58a41dcbcd045bd13ae4">Inner_boundary_cross_section_pt</a></td></tr>
+<tr class="memdesc:a2760038e136d58a41dcbcd045bd13ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geom object representing the inner boundary of the cross section.  <br /></td></tr>
+<tr class="separator:a2760038e136d58a41dcbcd045bd13ae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada15e8a576d3715e8ed88ea9bef5508a" id="r_ada15e8a576d3715e8ed88ea9bef5508a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a540d441b38146aacb12938d5f885789c">AxialSpacingFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#ada15e8a576d3715e8ed88ea9bef5508a">Axial_spacing_fct_pt</a></td></tr>
+<tr class="memdesc:ada15e8a576d3715e8ed88ea9bef5508a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that implements axial spacing of macro elements.  <br /></td></tr>
+<tr class="separator:ada15e8a576d3715e8ed88ea9bef5508a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Domain representing a quarter pipe. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00040">40</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a540d441b38146aacb12938d5f885789c" name="a540d441b38146aacb12938d5f885789c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a540d441b38146aacb12938d5f885789c">&#9670;&#160;</a></span>AxialSpacingFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">typedef</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>(* oomph::QuarterPipeDomain::AxialSpacingFctPt) (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef for function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00093">93</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="afb9763dac929fd4371a6ef860d9a5caf" name="afb9763dac929fd4371a6ef860d9a5caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9763dac929fd4371a6ef860d9a5caf">&#9670;&#160;</a></span>QuarterPipeDomain() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterPipeDomain::QuarterPipeDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ntheta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass number of elements in various directions, the inner and outer radius and the length of the tube. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00045">45</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>.</p>
+
+</div>
+</div>
+<a id="a7df039e22204accd7a8da75b1e08616e" name="a7df039e22204accd7a8da75b1e08616e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df039e22204accd7a8da75b1e08616e">&#9670;&#160;</a></span>QuarterPipeDomain() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterPipeDomain::QuarterPipeDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a872560e53bf73ef0bd1b69f2a40612c8" name="a872560e53bf73ef0bd1b69f2a40612c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872560e53bf73ef0bd1b69f2a40612c8">&#9670;&#160;</a></span>~QuarterPipeDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterPipeDomain::~QuarterPipeDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00084">84</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a035e27884c0fa1bc31d1d9bed28c37bd" name="a035e27884c0fa1bc31d1d9bed28c37bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a035e27884c0fa1bc31d1d9bed28c37bd">&#9670;&#160;</a></span>axial_spacing_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterPipeDomain::axial_spacing_fct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00104">104</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00147">Axial_spacing_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aba699b5121d1300b96b00056cf64ddbe" name="aba699b5121d1300b96b00056cf64ddbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba699b5121d1300b96b00056cf64ddbe">&#9670;&#160;</a></span>axial_spacing_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a540d441b38146aacb12938d5f885789c">AxialSpacingFctPt</a> &amp; oomph::QuarterPipeDomain::axial_spacing_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00097">97</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00147">Axial_spacing_fct_pt</a>.</p>
+
+</div>
+</div>
+<a id="a3b79d0bf40336f7961a8b2bb58080dba" name="a3b79d0bf40336f7961a8b2bb58080dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b79d0bf40336f7961a8b2bb58080dba">&#9670;&#160;</a></span>default_axial_spacing_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">static</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterPipeDomain::default_axial_spacing_fct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00151">151</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8cc6433c58dcfb265335744ed8a330a" name="ae8cc6433c58dcfb265335744ed8a330a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8cc6433c58dcfb265335744ed8a330a">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vector representation of the i_macro-th macro element boundary i_direct (U/D/L/R/F/B) at time level t (t=0: present; t&gt;0: previous): f(s). </p>
+<p>Vector representation of the imacro-th macro element boundary idirect (U/D/L/R/F/B) at time level t: f(s) </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">229</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00104">axial_spacing_fct()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00135">Length</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00123">Nr</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00120">Ntheta</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00126">Nz</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">r_B()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">r_D()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">r_L()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">r_R()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">r_U()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+</div>
+</div>
+<a id="aadf2b6f249e0f742f09bbbee1fdd9dd0" name="aadf2b6f249e0f742f09bbbee1fdd9dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadf2b6f249e0f742f09bbbee1fdd9dd0">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterPipeDomain.html">QuarterPipeDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="aba1af5e7f1bc6e88ff8e9ee59e965630" name="aba1af5e7f1bc6e88ff8e9ee59e965630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1af5e7f1bc6e88ff8e9ee59e965630">&#9670;&#160;</a></span>r_B()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_B </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Back face of a macro element <img class="formulaInl" alt="$ s \in [-1,1]*[-1,1] $" src="form_14.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">483</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aeb6e4d3fbb8afb4ad2597601f1a46afd" name="aeb6e4d3fbb8afb4ad2597601f1a46afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6e4d3fbb8afb4ad2597601f1a46afd">&#9670;&#160;</a></span>r_D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_D </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Left face of a macro element <img class="formulaInl" alt="$s \in [-1,1]*[-1,1] $" src="form_15.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">383</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a85aaa5d1217c49e2144bbfd37dbad0fd" name="a85aaa5d1217c49e2144bbfd37dbad0fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85aaa5d1217c49e2144bbfd37dbad0fd">&#9670;&#160;</a></span>r_F()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_F </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Front face of a macro element <img class="formulaInl" alt="$ s \in [-1,1]*[-1,1] $" src="form_14.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">449</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a21c58b76f546300c308d6e1f303a3433" name="a21c58b76f546300c308d6e1f303a3433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c58b76f546300c308d6e1f303a3433">&#9670;&#160;</a></span>r_L()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_L </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Left face of a macro element <img class="formulaInl" alt="$ s \in [-1,1]*[-1,1] $" src="form_14.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">301</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aab6f3fd79bc6dea1eb267f3b55630a2b" name="aab6f3fd79bc6dea1eb267f3b55630a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6f3fd79bc6dea1eb267f3b55630a2b">&#9670;&#160;</a></span>r_R()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_R </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Right face of a macro element <img class="formulaInl" alt="$ s \in [-1,1]*[-1,1] $" src="form_14.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">342</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a5c023c7a9d6e43d123566bc2f7bb21f0" name="a5c023c7a9d6e43d123566bc2f7bb21f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c023c7a9d6e43d123566bc2f7bb21f0">&#9670;&#160;</a></span>r_U()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterPipeDomain::r_U </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>rmax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>thetamax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>zmax</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of macro element zeta <img class="formulaInl" alt="$ \in [-1,1]x[-1,1] $" src="form_16.png" width="88" height="14"/>. </p>
+<p>Right face of a macro element <img class="formulaInl" alt="$ s \in [-1,1]*[-1,1] $" src="form_14.png" width="101" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">416</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">Inner_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">Outer_boundary_cross_section_pt</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">Rmax</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">Rmin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ada15e8a576d3715e8ed88ea9bef5508a" name="ada15e8a576d3715e8ed88ea9bef5508a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada15e8a576d3715e8ed88ea9bef5508a">&#9670;&#160;</a></span>Axial_spacing_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterPipeDomain.html#a540d441b38146aacb12938d5f885789c">AxialSpacingFctPt</a> oomph::QuarterPipeDomain::Axial_spacing_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that implements axial spacing of macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00147">147</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00104">axial_spacing_fct()</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00097">axial_spacing_fct_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a2760038e136d58a41dcbcd045bd13ae4" name="a2760038e136d58a41dcbcd045bd13ae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2760038e136d58a41dcbcd045bd13ae4">&#9670;&#160;</a></span>Inner_boundary_cross_section_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a>* oomph::QuarterPipeDomain::Inner_boundary_cross_section_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Geom object representing the inner boundary of the cross section. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00143">143</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00045">QuarterPipeDomain()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">r_B()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">r_D()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">r_L()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">r_R()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">r_U()</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00084">~QuarterPipeDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a0798f3962e840bdb3d31e4e0dada055d" name="a0798f3962e840bdb3d31e4e0dada055d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0798f3962e840bdb3d31e4e0dada055d">&#9670;&#160;</a></span>Length</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterPipeDomain::Length</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00135">135</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a18ac22546af74ac9b76a870d3f5abe3d" name="a18ac22546af74ac9b76a870d3f5abe3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18ac22546af74ac9b76a870d3f5abe3d">&#9670;&#160;</a></span>Nr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> oomph::QuarterPipeDomain::Nr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements radial direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00123">123</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aeb912b40da8cd2883768fe2ca989e640" name="aeb912b40da8cd2883768fe2ca989e640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb912b40da8cd2883768fe2ca989e640">&#9670;&#160;</a></span>Ntheta</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> oomph::QuarterPipeDomain::Ntheta</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements azimuthal direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00120">120</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aab1bf3900c3537c44942e3fee0c3d24e" name="aab1bf3900c3537c44942e3fee0c3d24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab1bf3900c3537c44942e3fee0c3d24e">&#9670;&#160;</a></span>Nz</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> oomph::QuarterPipeDomain::Nz</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of elements axial direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00126">126</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="adad2a4e638bb58eda89a19eaf5e18969" name="adad2a4e638bb58eda89a19eaf5e18969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad2a4e638bb58eda89a19eaf5e18969">&#9670;&#160;</a></span>Outer_boundary_cross_section_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a>* oomph::QuarterPipeDomain::Outer_boundary_cross_section_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Geom object representing the outer boundary of the cross section. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00139">139</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00045">QuarterPipeDomain()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">r_B()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">r_D()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">r_L()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">r_R()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">r_U()</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00084">~QuarterPipeDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a5e2252883456cd65902663fda09296d5" name="a5e2252883456cd65902663fda09296d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e2252883456cd65902663fda09296d5">&#9670;&#160;</a></span>Rmax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterPipeDomain::Rmax</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Outer radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00132">132</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">r_B()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">r_D()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">r_L()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">r_R()</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">r_U()</a>.</p>
+
+</div>
+</div>
+<a id="ac71370e6c78fd37aa59e7a52d62d1cbe" name="ac71370e6c78fd37aa59e7a52d62d1cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71370e6c78fd37aa59e7a52d62d1cbe">&#9670;&#160;</a></span>Rmin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterPipeDomain::Rmin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inner radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__pipe__domain_8h_source.html#l00129">129</a> of file <a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__pipe__domain_8h_source.html#l00229">macro_element_boundary()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">r_B()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">r_D()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">r_L()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">r_R()</a>, and <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">r_U()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="quarter__pipe__domain_8h_source.html">quarter_pipe_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

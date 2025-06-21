@@ -1,0 +1,73 @@
+\doxysection{cylinder.\+cc File Reference}
+\hypertarget{cylinder_8cc}{}\label{cylinder_8cc}\index{cylinder.cc@{cylinder.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{Fourier\+Decomposed\+Time\+Harmonic\+Linear\+Elasticity\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Class to validate time harmonic linear elasticity (Fourier decomposed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Global\+\_\+\+Parameters\+::\+Nu}} (0.\+3, 0.\+05)
+\begin{DoxyCompactList}\small\item\em Define Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{Global\+\_\+\+Parameters\+::E}} (1.\+0, 0.\+01)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_aa7f960ed4311ccf6e3dbf9371f13876a}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (10.\+0, 5.\+0)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional square angular frequency of time-\/harmonic motion. \end{DoxyCompactList}\item 
+const std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a2ceef30cf51dfd432bafde39945a4e45}{Global\+\_\+\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Define the imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a579fa434bf9ee57e66d4bd42b208fc23}{Global\+\_\+\+Parameters\+::boundary\+\_\+traction}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function at r=rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a8d30973505eeb753023936398bce5bcc}{Global\+\_\+\+Parameters\+::body\+\_\+force}} (const Vector$<$ double $>$ \&x, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The body force function; returns vector of complex doubles in the order (b\+\_\+r, b\+\_\+z, b\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\+\_\+\+Parameters\+::exact\+\_\+solution}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em The exact solution in a flat-\/packed vector\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a2ecf9fe185c1e5b5cae06a6ed0a3b5a2}{Global\+\_\+\+Parameters\+::lambda}} = \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{E}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Nu}}/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Nu}})/(1.\+0-\/2.\+0\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Nu}})
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a49a27047b96fb3d9ec374f7649e46d89}{Global\+\_\+\+Parameters\+::mu}} = \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{E}}/2.\+0/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Nu}})
+\item 
+int \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9e7}{Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber}} = 3
+\begin{DoxyCompactList}\small\item\em Define Fourier wavenumber. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Global\+\_\+\+Parameters\+::\+Lr}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in r direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Global\+\_\+\+Parameters\+::\+Lz}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in z-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ad454d80ae621f272dd1d7932249545a5}{Global\+\_\+\+Parameters\+::rmin}} = 0.\+1
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ac6a17dbcf1b8f1136a1ec5c07efef708}{Global\+\_\+\+Parameters\+::zmin}} = 0.\+3
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a5d7fb394c980bb4bf2a52158f9d7cc50}{Global\+\_\+\+Parameters\+::rmax}} = \mbox{\hyperlink{namespaceGlobal__Parameters_ad454d80ae621f272dd1d7932249545a5}{rmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a8ee2afb91b9b105939f19a0efa8e1441}{Global\+\_\+\+Parameters\+::zmax}} = \mbox{\hyperlink{namespaceGlobal__Parameters_ac6a17dbcf1b8f1136a1ec5c07efef708}{zmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{cylinder.cc@{cylinder.cc}!main@{main}}
+\index{main@{main}!cylinder.cc@{cylinder.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00360}{360}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00062}{Global\+\_\+\+Parameters\+::\+Lr}}, \mbox{\hyperlink{cylinder_8cc_source_l00065}{Global\+\_\+\+Parameters\+::\+Lz}}, \mbox{\hyperlink{cylinder_8cc_source_l00070}{Global\+\_\+\+Parameters\+::rmax}}, \mbox{\hyperlink{cylinder_8cc_source_l00068}{Global\+\_\+\+Parameters\+::rmin}}, \mbox{\hyperlink{cylinder_8cc_source_l00071}{Global\+\_\+\+Parameters\+::zmax}}, and \mbox{\hyperlink{cylinder_8cc_source_l00069}{Global\+\_\+\+Parameters\+::zmin}}.
+

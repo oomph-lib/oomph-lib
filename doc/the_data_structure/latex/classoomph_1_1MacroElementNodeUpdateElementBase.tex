@@ -1,0 +1,204 @@
+\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Element\+Base Class Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase}{}\label{classoomph_1_1MacroElementNodeUpdateElementBase}\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+
+
+Base class for elements that allow Macro\+Element-\/based node update.  
+
+
+
+
+{\ttfamily \#include $<$macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MacroElementNodeUpdateElementBase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a5d9b3d1502a5c082e345fb3dcee1eaa2}{Macro\+Element\+Node\+Update\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_adf3213ab423d8a35cfc211c66191ab77}{Macro\+Element\+Node\+Update\+Element\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_aca2af33d8ecc94be60ab8988e8e9594d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a2d32df96459ec2729db7a33e3504a4e2}{\texorpdfstring{$\sim$}{\string~}\+Macro\+Element\+Node\+Update\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_aa2408d8463e8cecc2ad12a93e10390b1}{set\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}{geom\+\_\+object\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Set node update information\+: Pass the vector of (pointers to) the geometric objects that affect the node update. This gets passed on to all nodes in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a31a4ae979b76ca288513570e66dcec52}{ngeom\+\_\+object}} ()
+\begin{DoxyCompactList}\small\item\em Number of geometric objects involved in node update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}{geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of (pointers to) geometric objects involved in node update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a83a3ea89249a7892a46808552f5302d6}{geom\+\_\+object\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th geometric object involved in node update function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase_a5781fd69b72b1c4c6618fe549b4ed81b}{Geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of geometric objects that are involved in the node update operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for elements that allow Macro\+Element-\/based node update. 
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00196}{196}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_a5d9b3d1502a5c082e345fb3dcee1eaa2}\label{classoomph_1_1MacroElementNodeUpdateElementBase_a5d9b3d1502a5c082e345fb3dcee1eaa2} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!MacroElementNodeUpdateElementBase@{MacroElementNodeUpdateElementBase}}
+\index{MacroElementNodeUpdateElementBase@{MacroElementNodeUpdateElementBase}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateElementBase()}{MacroElementNodeUpdateElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Macro\+Element\+Node\+Update\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00200}{200}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_adf3213ab423d8a35cfc211c66191ab77}\label{classoomph_1_1MacroElementNodeUpdateElementBase_adf3213ab423d8a35cfc211c66191ab77} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!MacroElementNodeUpdateElementBase@{MacroElementNodeUpdateElementBase}}
+\index{MacroElementNodeUpdateElementBase@{MacroElementNodeUpdateElementBase}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateElementBase()}{MacroElementNodeUpdateElementBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Macro\+Element\+Node\+Update\+Element\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_a2d32df96459ec2729db7a33e3504a4e2}\label{classoomph_1_1MacroElementNodeUpdateElementBase_a2d32df96459ec2729db7a33e3504a4e2} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!````~MacroElementNodeUpdateElementBase@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateElementBase}}
+\index{````~MacroElementNodeUpdateElementBase@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateElementBase}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateElementBase()}{\string~MacroElementNodeUpdateElementBase()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Macro\+Element\+Node\+Update\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00210}{210}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b}\label{classoomph_1_1MacroElementNodeUpdateElementBase_afcffd290cc0292a571e7a443bc23728b} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!geom\_object\_pt@{geom\_object\_pt}}
+\index{geom\_object\_pt@{geom\_object\_pt}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of (pointers to) geometric objects involved in node update function. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{227}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{Geom\+\_\+object\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_a83a3ea89249a7892a46808552f5302d6}\label{classoomph_1_1MacroElementNodeUpdateElementBase_a83a3ea89249a7892a46808552f5302d6} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!geom\_object\_pt@{geom\_object\_pt}}
+\index{geom\_object\_pt@{geom\_object\_pt}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th geometric object involved in node update function. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00234}{234}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{Geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_a31a4ae979b76ca288513570e66dcec52}\label{classoomph_1_1MacroElementNodeUpdateElementBase_a31a4ae979b76ca288513570e66dcec52} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!ngeom\_object@{ngeom\_object}}
+\index{ngeom\_object@{ngeom\_object}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of geometric objects involved in node update function. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00220}{220}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+References \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{Geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_aca2af33d8ecc94be60ab8988e8e9594d}\label{classoomph_1_1MacroElementNodeUpdateElementBase_aca2af33d8ecc94be60ab8988e8e9594d} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_aa2408d8463e8cecc2ad12a93e10390b1}\label{classoomph_1_1MacroElementNodeUpdateElementBase_aa2408d8463e8cecc2ad12a93e10390b1} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!set\_node\_update\_info@{set\_node\_update\_info}}
+\index{set\_node\_update\_info@{set\_node\_update\_info}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_node\_update\_info()}{set\_node\_update\_info()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::set\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&}]{geom\+\_\+object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Set node update information\+: Pass the vector of (pointers to) the geometric objects that affect the node update. This gets passed on to all nodes in the element. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement_a9a9671e70a90435f36a971495ba342cf}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateElementBase_a5781fd69b72b1c4c6618fe549b4ed81b}\label{classoomph_1_1MacroElementNodeUpdateElementBase_a5781fd69b72b1c4c6618fe549b4ed81b} 
+\index{oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}!Geom\_object\_pt@{Geom\_object\_pt}}
+\index{Geom\_object\_pt@{Geom\_object\_pt}!oomph::MacroElementNodeUpdateElementBase@{oomph::MacroElementNodeUpdateElementBase}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_pt}{Geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base\+::\+Geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of geometric objects that are involved in the node update operation. 
+
+
+
+Definition at line \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00243}{243}} of file \mbox{\hyperlink{macro__element__node__update__element_8h_source}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00227}{geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00234}{geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00220}{ngeom\+\_\+object()}}, \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00330}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::rebuild\+\_\+from\+\_\+sons()}}, and \mbox{\hyperlink{macro__element__node__update__element_8h_source_l00297}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$\+::set\+\_\+node\+\_\+update\+\_\+info()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{macro__element__node__update__element_8h}{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h}}\end{DoxyCompactItemize}

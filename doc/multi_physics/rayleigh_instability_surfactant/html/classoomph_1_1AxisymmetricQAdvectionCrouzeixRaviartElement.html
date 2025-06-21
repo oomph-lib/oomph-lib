@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::AxisymmetricQAdvectionCrouzeixRaviartElement Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html">AxisymmetricQAdvectionCrouzeixRaviartElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::AxisymmetricQAdvectionCrouzeixRaviartElement Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class that solves the Boussinesq approximation of the Navier&ndash;Stokes and energy equations by coupling two pre-existing classes. The QAdvectionDiffusionReactionElement with bi-quadratic interpolation for the scalar variables (temperature and concentration) and QCrouzeixRaviartElement which solves the Navier&ndash;Stokes equations using bi-quadratic interpolation for the velocities and a discontinuous bi-linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function AdvectionDiffusionReactionEquations&lt;2,DIM&gt;::u_index_adv_diff_react() to indicate that the temperature is stored at the DIM-th position not the 0-th. We do not need to overload the corresponding function in the NavierStokesEquations&lt;DIM&gt; class because the velocities are stored first.  
+ <a href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::AxisymmetricQAdvectionCrouzeixRaviartElement:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af4d272a08506d3a47aff330fb57948bb" id="r_af4d272a08506d3a47aff330fb57948bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#af4d272a08506d3a47aff330fb57948bb">AxisymmetricQAdvectionCrouzeixRaviartElement</a> ()</td></tr>
+<tr class="memdesc:af4d272a08506d3a47aff330fb57948bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.0.  <br /></td></tr>
+<tr class="separator:af4d272a08506d3a47aff330fb57948bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f287fb65ae8fa74e83d664585473a6f" id="r_a3f287fb65ae8fa74e83d664585473a6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a3f287fb65ae8fa74e83d664585473a6f">required_nvalue</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n</a>) <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:a3f287fb65ae8fa74e83d664585473a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. Note that this step is generic for any multi-physics element of this type.  <br /></td></tr>
+<tr class="separator:a3f287fb65ae8fa74e83d664585473a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e076f86d043ccd40e033af12bd150b" id="r_a76e076f86d043ccd40e033af12bd150b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a76e076f86d043ccd40e033af12bd150b">disable_ALE</a> ()</td></tr>
+<tr class="memdesc:a76e076f86d043ccd40e033af12bd150b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for disable ALE.  <br /></td></tr>
+<tr class="separator:a76e076f86d043ccd40e033af12bd150b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab217eb1240bf8cf33910565aed05c7dd" id="r_ab217eb1240bf8cf33910565aed05c7dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#ab217eb1240bf8cf33910565aed05c7dd">enable_ALE</a> ()</td></tr>
+<tr class="memdesc:ab217eb1240bf8cf33910565aed05c7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for enable ALE.  <br /></td></tr>
+<tr class="separator:ab217eb1240bf8cf33910565aed05c7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9076e11220b7139f35651d99b1544d3" id="r_af9076e11220b7139f35651d99b1544d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#af9076e11220b7139f35651d99b1544d3">nscalar_paraview</a> () <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:af9076e11220b7139f35651d99b1544d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of scalars/fields output by this element. Reimplements broken virtual function in base class.  <br /></td></tr>
+<tr class="separator:af9076e11220b7139f35651d99b1544d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008a0cbad9479faefd5be4fc1d0e932a" id="r_a008a0cbad9479faefd5be4fc1d0e932a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a008a0cbad9479faefd5be4fc1d0e932a">scalar_value_paraview</a> (std::ofstream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">file_out</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">i</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">nplot</a>) <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:a008a0cbad9479faefd5be4fc1d0e932a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write values of the i-th scalar field at the plot points. Needs to be implemented for each new specific element type.  <br /></td></tr>
+<tr class="separator:a008a0cbad9479faefd5be4fc1d0e932a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbdaca9b4a33c99be092098e5aabce45" id="r_adbdaca9b4a33c99be092098e5aabce45"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#adbdaca9b4a33c99be092098e5aabce45">scalar_name_paraview</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">i</a>) <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="separator:adbdaca9b4a33c99be092098e5aabce45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157b747b92a9437b8bc599343bacc779" id="r_a157b747b92a9437b8bc599343bacc779"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a157b747b92a9437b8bc599343bacc779">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>)</td></tr>
+<tr class="memdesc:a157b747b92a9437b8bc599343bacc779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the standard output function with the broken default.  <br /></td></tr>
+<tr class="separator:a157b747b92a9437b8bc599343bacc779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4988d5a8f363cb7c7a6d019f1fe7b72b" id="r_a4988d5a8f363cb7c7a6d019f1fe7b72b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a4988d5a8f363cb7c7a6d019f1fe7b72b">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">nplot</a>)</td></tr>
+<tr class="memdesc:a4988d5a8f363cb7c7a6d019f1fe7b72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: <br  />
+ Output x, y, u, v, p, theta at Nplot^DIM plot points.  <br /></td></tr>
+<tr class="separator:a4988d5a8f363cb7c7a6d019f1fe7b72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade2a7eba4740381ed2935149933b9efe" id="r_ade2a7eba4740381ed2935149933b9efe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#ade2a7eba4740381ed2935149933b9efe">output</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">file_pt</a>)</td></tr>
+<tr class="memdesc:ade2a7eba4740381ed2935149933b9efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:ade2a7eba4740381ed2935149933b9efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af682c147c15f87aecbbe7ed556f51ed8" id="r_af682c147c15f87aecbbe7ed556f51ed8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#af682c147c15f87aecbbe7ed556f51ed8">output</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">file_pt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n_plot</a>)</td></tr>
+<tr class="memdesc:af682c147c15f87aecbbe7ed556f51ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:af682c147c15f87aecbbe7ed556f51ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18775406e3d1e0cb6bc1583af85c26fe" id="r_a18775406e3d1e0cb6bc1583af85c26fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a18775406e3d1e0cb6bc1583af85c26fe">output_fct</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Nplot</a>, FiniteElement::SteadyExactSolutionFctPt <a class="el" href="classoomph_1_1AnnularSpineMesh.html">exact_soln_pt</a>)</td></tr>
+<tr class="memdesc:a18775406e3d1e0cb6bc1583af85c26fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for an exact solution: Broken default.  <br /></td></tr>
+<tr class="separator:a18775406e3d1e0cb6bc1583af85c26fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ab78e3429b2fd6ce55cd2392d99a270" id="r_a1ab78e3429b2fd6ce55cd2392d99a270"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a1ab78e3429b2fd6ce55cd2392d99a270">output_fct</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Nplot</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">time</a>, FiniteElement::UnsteadyExactSolutionFctPt <a class="el" href="classoomph_1_1AnnularSpineMesh.html">exact_soln_pt</a>)</td></tr>
+<tr class="memdesc:a1ab78e3429b2fd6ce55cd2392d99a270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for a time-dependent exact solution: Broken default.  <br /></td></tr>
+<tr class="separator:a1ab78e3429b2fd6ce55cd2392d99a270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a78a6fac9d174eef5c29328f1a212c8" id="r_a7a78a6fac9d174eef5c29328f1a212c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a7a78a6fac9d174eef5c29328f1a212c8">u_index_axi_adv_diff</a> () <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:a7a78a6fac9d174eef5c29328f1a212c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the index at which the temperature and solute concentration variables are stored.  <br /></td></tr>
+<tr class="separator:a7a78a6fac9d174eef5c29328f1a212c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56ff55d63b4461f18dbee517b69cf58" id="r_ac56ff55d63b4461f18dbee517b69cf58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#ac56ff55d63b4461f18dbee517b69cf58">compute_norm</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">norm</a>)</td></tr>
+<tr class="separator:ac56ff55d63b4461f18dbee517b69cf58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396031ab3a4a50d6a9f3b8a465ecba3a" id="r_a396031ab3a4a50d6a9f3b8a465ecba3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a396031ab3a4a50d6a9f3b8a465ecba3a">compute_error</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, FiniteElement::UnsteadyExactSolutionFctPt <a class="el" href="classoomph_1_1AnnularSpineMesh.html">exact_soln_pt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">time</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">error</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">norm</a>)</td></tr>
+<tr class="memdesc:a396031ab3a4a50d6a9f3b8a465ecba3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default.  <br /></td></tr>
+<tr class="separator:a396031ab3a4a50d6a9f3b8a465ecba3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a888aea94c99e6b764c028e39eef7c389" id="r_a888aea94c99e6b764c028e39eef7c389"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a888aea94c99e6b764c028e39eef7c389">compute_error</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, FiniteElement::SteadyExactSolutionFctPt <a class="el" href="classoomph_1_1AnnularSpineMesh.html">exact_soln_pt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">error</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">norm</a>)</td></tr>
+<tr class="memdesc:a888aea94c99e6b764c028e39eef7c389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default.  <br /></td></tr>
+<tr class="separator:a888aea94c99e6b764c028e39eef7c389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a820f9ee2e2033c005154c75cfe999d66" id="r_a820f9ee2e2033c005154c75cfe999d66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a820f9ee2e2033c005154c75cfe999d66">get_wind_axi_adv_diff</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">ipt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">s</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">x</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">wind</a>) <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:a820f9ee2e2033c005154c75cfe999d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity.  <br /></td></tr>
+<tr class="separator:a820f9ee2e2033c005154c75cfe999d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74e05eb28d4674c636827d450c7e03f9" id="r_a74e05eb28d4674c636827d450c7e03f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a74e05eb28d4674c636827d450c7e03f9">fill_in_contribution_to_residuals</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>)</td></tr>
+<tr class="memdesc:a74e05eb28d4674c636827d450c7e03f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the element's contribution to the residual vector. Recall that fill_in_* functions MUST NOT initialise the entries in the vector to zero. This allows us to call the fill_in_* functions of the constituent single-physics elements sequentially, without wiping out any previously computed entries.  <br /></td></tr>
+<tr class="separator:a74e05eb28d4674c636827d450c7e03f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c5d3e012d9a8ca36e4e54fd26197b8" id="r_a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a89c5d3e012d9a8ca36e4e54fd26197b8">fill_in_contribution_to_jacobian</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>)</td></tr>
+<tr class="memdesc:a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing.  <br /></td></tr>
+<tr class="separator:a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad2c85645b11da350f13cf1087f5b46a" id="r_aad2c85645b11da350f13cf1087f5b46a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#aad2c85645b11da350f13cf1087f5b46a">fill_in_off_diagonal_jacobian_blocks_by_fd</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>)</td></tr>
+<tr class="memdesc:aad2c85645b11da350f13cf1087f5b46a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to get the off-diagonal blocks of the Jacobian matrix by finite differences.  <br /></td></tr>
+<tr class="separator:aad2c85645b11da350f13cf1087f5b46a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c5d3e012d9a8ca36e4e54fd26197b8" id="r_a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a89c5d3e012d9a8ca36e4e54fd26197b8">fill_in_contribution_to_jacobian</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>)</td></tr>
+<tr class="memdesc:a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual Vector and the Jacobian matrix. Use finite-differencing only for the off-diagonal blocks.  <br /></td></tr>
+<tr class="separator:a89c5d3e012d9a8ca36e4e54fd26197b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b312d9e599923029c0c3f1362488ea4" id="r_a4b312d9e599923029c0c3f1362488ea4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement.html#a4b312d9e599923029c0c3f1362488ea4">fill_in_contribution_to_jacobian_and_mass_matrix</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">mass_matrix</a>)</td></tr>
+<tr class="memdesc:a4b312d9e599923029c0c3f1362488ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residuals vector, jacobian matrix and mass matrix.  <br /></td></tr>
+<tr class="separator:a4b312d9e599923029c0c3f1362488ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that solves the Boussinesq approximation of the Navier&ndash;Stokes and energy equations by coupling two pre-existing classes. The QAdvectionDiffusionReactionElement with bi-quadratic interpolation for the scalar variables (temperature and concentration) and QCrouzeixRaviartElement which solves the Navier&ndash;Stokes equations using bi-quadratic interpolation for the velocities and a discontinuous bi-linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function AdvectionDiffusionReactionEquations&lt;2,DIM&gt;::u_index_adv_diff_react() to indicate that the temperature is stored at the DIM-th position not the 0-th. We do not need to overload the corresponding function in the NavierStokesEquations&lt;DIM&gt; class because the velocities are stored first. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00057">57</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af4d272a08506d3a47aff330fb57948bb" name="af4d272a08506d3a47aff330fb57948bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d272a08506d3a47aff330fb57948bb">&#9670;&#160;</a></span>AxisymmetricQAdvectionCrouzeixRaviartElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::AxisymmetricQAdvectionCrouzeixRaviartElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to point to the default value of 0.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00067">67</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a888aea94c99e6b764c028e39eef7c389" name="a888aea94c99e6b764c028e39eef7c389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a888aea94c99e6b764c028e39eef7c389">&#9670;&#160;</a></span>compute_error() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00221">221</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a396031ab3a4a50d6a9f3b8a465ecba3a" name="a396031ab3a4a50d6a9f3b8a465ecba3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a396031ab3a4a50d6a9f3b8a465ecba3a">&#9670;&#160;</a></span>compute_error() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00209">209</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ac56ff55d63b4461f18dbee517b69cf58" name="ac56ff55d63b4461f18dbee517b69cf58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac56ff55d63b4461f18dbee517b69cf58">&#9670;&#160;</a></span>compute_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::compute_norm </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>norm</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00200">200</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a76e076f86d043ccd40e033af12bd150b" name="a76e076f86d043ccd40e033af12bd150b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e076f86d043ccd40e033af12bd150b">&#9670;&#160;</a></span>disable_ALE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::disable_ALE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for disable ALE. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00080">80</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ab217eb1240bf8cf33910565aed05c7dd" name="ab217eb1240bf8cf33910565aed05c7dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab217eb1240bf8cf33910565aed05c7dd">&#9670;&#160;</a></span>enable_ALE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::enable_ALE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for enable ALE. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00088">88</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a89c5d3e012d9a8ca36e4e54fd26197b8" name="a89c5d3e012d9a8ca36e4e54fd26197b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c5d3e012d9a8ca36e4e54fd26197b8">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00257">257</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a89c5d3e012d9a8ca36e4e54fd26197b8" name="a89c5d3e012d9a8ca36e4e54fd26197b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c5d3e012d9a8ca36e4e54fd26197b8">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual Vector and the Jacobian matrix. Use finite-differencing only for the off-diagonal blocks. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00355">355</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00268">fill_in_off_diagonal_jacobian_blocks_by_fd()</a>.</p>
+
+</div>
+</div>
+<a id="a4b312d9e599923029c0c3f1362488ea4" name="a4b312d9e599923029c0c3f1362488ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b312d9e599923029c0c3f1362488ea4">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00377">377</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00268">fill_in_off_diagonal_jacobian_blocks_by_fd()</a>.</p>
+
+</div>
+</div>
+<a id="a74e05eb28d4674c636827d450c7e03f9" name="a74e05eb28d4674c636827d450c7e03f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74e05eb28d4674c636827d450c7e03f9">&#9670;&#160;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the element's contribution to the residual vector. Recall that fill_in_* functions MUST NOT initialise the entries in the vector to zero. This allows us to call the fill_in_* functions of the constituent single-physics elements sequentially, without wiping out any previously computed entries. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00242">242</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="aad2c85645b11da350f13cf1087f5b46a" name="aad2c85645b11da350f13cf1087f5b46a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad2c85645b11da350f13cf1087f5b46a">&#9670;&#160;</a></span>fill_in_off_diagonal_jacobian_blocks_by_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::fill_in_off_diagonal_jacobian_blocks_by_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to get the off-diagonal blocks of the Jacobian matrix by finite differences. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00268">268</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00196">u_index_axi_adv_diff()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00355">fill_in_contribution_to_jacobian()</a>, and <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00377">fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a820f9ee2e2033c005154c75cfe999d66" name="a820f9ee2e2033c005154c75cfe999d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a820f9ee2e2033c005154c75cfe999d66">&#9670;&#160;</a></span>get_wind_axi_adv_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::get_wind_axi_adv_diff </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>wind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00229">229</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="af9076e11220b7139f35651d99b1544d3" name="af9076e11220b7139f35651d99b1544d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9076e11220b7139f35651d99b1544d3">&#9670;&#160;</a></span>nscalar_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::nscalar_paraview </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of scalars/fields output by this element. Reimplements broken virtual function in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00098">98</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ade2a7eba4740381ed2935149933b9efe" name="ade2a7eba4740381ed2935149933b9efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade2a7eba4740381ed2935149933b9efe">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00168">168</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="af682c147c15f87aecbbe7ed556f51ed8" name="af682c147c15f87aecbbe7ed556f51ed8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af682c147c15f87aecbbe7ed556f51ed8">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00172">172</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a157b747b92a9437b8bc599343bacc779" name="a157b747b92a9437b8bc599343bacc779"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a157b747b92a9437b8bc599343bacc779">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the standard output function with the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00124">124</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a4988d5a8f363cb7c7a6d019f1fe7b72b" name="a4988d5a8f363cb7c7a6d019f1fe7b72b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4988d5a8f363cb7c7a6d019f1fe7b72b">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: <br  />
+ Output x, y, u, v, p, theta at Nplot^DIM plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00129">129</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a1ab78e3429b2fd6ce55cd2392d99a270" name="a1ab78e3429b2fd6ce55cd2392d99a270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ab78e3429b2fd6ce55cd2392d99a270">&#9670;&#160;</a></span>output_fct() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for a time-dependent exact solution: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00184">184</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a18775406e3d1e0cb6bc1583af85c26fe" name="a18775406e3d1e0cb6bc1583af85c26fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18775406e3d1e0cb6bc1583af85c26fe">&#9670;&#160;</a></span>output_fct() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for an exact solution: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00176">176</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a3f287fb65ae8fa74e83d664585473a6f" name="a3f287fb65ae8fa74e83d664585473a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f287fb65ae8fa74e83d664585473a6f">&#9670;&#160;</a></span>required_nvalue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::required_nvalue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. Note that this step is generic for any multi-physics element of this type. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00075">75</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="adbdaca9b4a33c99be092098e5aabce45" name="adbdaca9b4a33c99be092098e5aabce45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbdaca9b4a33c99be092098e5aabce45">&#9670;&#160;</a></span>scalar_name_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::scalar_name_paraview </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00115">115</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a008a0cbad9479faefd5be4fc1d0e932a" name="a008a0cbad9479faefd5be4fc1d0e932a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008a0cbad9479faefd5be4fc1d0e932a">&#9670;&#160;</a></span>scalar_value_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::scalar_value_paraview </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>file_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write values of the i-th scalar field at the plot points. Needs to be implemented for each new specific element type. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00106">106</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a78a6fac9d174eef5c29328f1a212c8" name="a7a78a6fac9d174eef5c29328f1a212c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a78a6fac9d174eef5c29328f1a212c8">&#9670;&#160;</a></span>u_index_axi_adv_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> oomph::AxisymmetricQAdvectionCrouzeixRaviartElement::u_index_axi_adv_diff </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the index at which the temperature and solute concentration variables are stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00196">196</a> of file <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html#l00268">fill_in_off_diagonal_jacobian_blocks_by_fd()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="axisymmetric__advection__navier__stokes__elements_8h_source.html">axisymmetric_advection_navier_stokes_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

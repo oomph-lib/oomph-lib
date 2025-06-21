@@ -1,0 +1,98 @@
+\doxysection{oomph\+::One\+DLegendre\+DShape\+Param Class Reference}
+\hypertarget{classoomph_1_1OneDLegendreDShapeParam}{}\label{classoomph_1_1OneDLegendreDShapeParam}\index{oomph::OneDLegendreDShapeParam@{oomph::OneDLegendreDShapeParam}}
+
+
+{\ttfamily \#include $<$Qspectral\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::One\+DLegendre\+DShape\+Param\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1OneDLegendreDShapeParam}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OneDLegendreDShapeParam_a5846c7ee2a20a714b74520922bef2e02}{One\+DLegendre\+DShape\+Param}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&order, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Shape_aedb62dd7998071721057eab955ecc1f9}{Shape}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&N)
+\begin{DoxyCompactList}\small\item\em Constructor for a single-\/index set of shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_ad892f46ca3265ba654bb4df164890505}{Shape}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&M)
+\begin{DoxyCompactList}\small\item\em Constructor for a two-\/index set of shape functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_aecba4a024c9c1595f253dd6ce48613c9}{Shape}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_af6d7a3572de5743ca382d275711a814e}{Shape}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ just assigns a null pointers and zero index sizes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_aa9d3d4203abf1e39fc3db2732355c801}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&shape)
+\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_ae56db76f6d0b46acb57869896dc9be20}{operator=}} (\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shape\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The assignment operator does a shallow copy (resets the pointer to the data) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Shape_af6e38eb7b8c072b0acac31c61f11cc27}{\texorpdfstring{$\sim$}{\string~}\+Shape}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, clear up the memory allocated by the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_a701caf3197248f0e4f598ede06f0d4ec}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&M=1)
+\begin{DoxyCompactList}\small\item\em Change the size of the storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a6738e5f9e1c1355c82a6a8ec1caedd63}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Overload the bracket operator to provide access to values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a06e98287258052bf7dbb108a57b4b7d0}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the bracket operator (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a56a487536cc828673c4a985ff0210103}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator to provide access to values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a394e184140b968f3c3dbd7d78aa1bf69}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a9f013add08e787d28cced6df34f0ed43}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator, allowing for two indices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Shape_a0dc1638fe2f7499087ba9046d390ef91}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the round bracket operator, allowing for two indices (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_a374bd15fa30336247543459231f82af0}{nindex1}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 1 of the shape function object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_ae5be285b7233935366b561646a085463}{nindex2}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 2 of the shape function object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Shape_af24aed6aba597ff8cd52d201be5a414a}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Private function that checks whether the index is in range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Shape}{oomph\+::\+Shape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Shape_ae045962e578d675877663404b177d301}{Psi}}
+\begin{DoxyCompactList}\small\item\em Pointer that addresses the storage that will be used to read and set the shape functions. The shape functions are packed into a flat array of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Shape_a32c202fd82d361e354d7cf19615f162f}{Allocated\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em Pointer that addresses the storage allocated by the object on construction. This will be the same as Psi if the object is not copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_a63638007c6e3b84b57a023432c43ceb1}{Index1}}
+\begin{DoxyCompactList}\small\item\em Size of the first index of the shape function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Shape_aae154e349eaa0a2f4b415c2bdaef0708}{Index2}}
+\begin{DoxyCompactList}\small\item\em Size of the second index of the shape function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{Qspectral__elements_8h_source_l00093}{93}} of file \mbox{\hyperlink{Qspectral__elements_8h_source}{Qspectral\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OneDLegendreDShapeParam_a5846c7ee2a20a714b74520922bef2e02}\label{classoomph_1_1OneDLegendreDShapeParam_a5846c7ee2a20a714b74520922bef2e02} 
+\index{oomph::OneDLegendreDShapeParam@{oomph::OneDLegendreDShapeParam}!OneDLegendreDShapeParam@{OneDLegendreDShapeParam}}
+\index{OneDLegendreDShapeParam@{OneDLegendreDShapeParam}!oomph::OneDLegendreDShapeParam@{oomph::OneDLegendreDShapeParam}}
+\doxysubsubsection{\texorpdfstring{OneDLegendreDShapeParam()}{OneDLegendreDShapeParam()}}
+{\footnotesize\ttfamily oomph\+::\+One\+DLegendre\+DShape\+Param\+::\+One\+DLegendre\+DShape\+Param (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{order,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{Qspectral__elements_8h_source_l00097}{97}} of file \mbox{\hyperlink{Qspectral__elements_8h_source}{Qspectral\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8h_source_l00144}{oomph\+::\+Orthpoly\+::ddlegendre()}}, \mbox{\hyperlink{orthpoly_8h_source_l00121}{oomph\+::\+Orthpoly\+::dlegendre()}}, \mbox{\hyperlink{orthpoly_8h_source_l00052}{oomph\+::\+Orthpoly\+::eps}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{orthpoly_8h_source_l00057}{oomph\+::\+Orthpoly\+::legendre()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{Qspectral__elements_8h_source_l00048}{oomph\+::\+One\+DLegendre\+Shape\+Param\+::z}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Qspectral__elements_8h}{Qspectral\+\_\+elements.\+h}}\end{DoxyCompactItemize}

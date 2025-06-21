@@ -1,0 +1,50 @@
+\doxysection{navier\+\_\+stokes\+\_\+elements.\+h File Reference}
+\hypertarget{navier__stokes__elements_8h}{}\label{navier__stokes__elements_8h}\index{navier\_stokes\_elements.h@{navier\_stokes\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase}{oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base}}
+\begin{DoxyCompactList}\small\item\em Helper class for elements that impose Robin boundary conditions on pressure advection diffusion problem required by Fp preconditioner (class used to get around some templating issues) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElement}{oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of Robin boundary conditions for the pressure advection diffusion problem in the Fp preconditioner. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base}}
+\begin{DoxyCompactList}\small\item\em Template-\/free base class for Navier-\/\+Stokes equations to avoid casting problems. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the cartesian Navier--Stokes equations, templated by the dimension DIM. This contains the generic maths -- any concrete implementation must be derived from this. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement}{oomph\+::\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block preconditioning framework. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QCrouzeixRaviartElement_3_012_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 2D Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QCrouzeixRaviartElement_3_013_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 3D Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QCrouzeixRaviartElement_3_012_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QCrouzeixRaviartElement_3_013_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QCrouzeix\+Raviart\+Element$<$ 3 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 3D Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement}{oomph\+::\+QTaylor\+Hood\+Element$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continuous linear pressure interpolation. They can be used within oomph-\/lib\textquotesingle{}s block-\/preconditioning framework. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QTaylorHoodElement_3_012_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QTaylor\+Hood\+Element$<$ 2 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 2D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QTaylorHoodElement_3_013_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QTaylor\+Hood\+Element$<$ 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the 3D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QTaylorHoodElement_3_012_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QTaylor\+Hood\+Element$<$ 2 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 2D Taylor Hoodelements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01QTaylorHoodElement_3_013_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ QTaylor\+Hood\+Element$<$ 3 $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} of the 3D Taylor\+\_\+\+Hood elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectableTaylorHoodElement}{oomph\+::\+Projectable\+Taylor\+Hood\+Element$<$ TAYLOR\+\_\+\+HOOD\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Taylor Hood upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableTaylorHoodElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+Taylor\+Hood\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableTaylorHoodElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Taylor\+Hood\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectableCrouzeixRaviartElement}{oomph\+::\+Projectable\+Crouzeix\+Raviart\+Element$<$ CROUZEIX\+\_\+\+RAVIART\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Crouzeix Raviart upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+Crouzeix\+Raviart\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableCrouzeixRaviartElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Crouzeix\+Raviart\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

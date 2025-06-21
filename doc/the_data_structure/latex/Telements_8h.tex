@@ -1,0 +1,88 @@
+\doxysection{Telements.\+h File Reference}
+\hypertarget{Telements_8h}{}\label{Telements_8h}\index{Telements.h@{Telements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TFace}{oomph\+::\+TFace}}
+\begin{DoxyCompactList}\small\item\em Triangular Face class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape}{oomph\+::\+TElement\+Shape$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em A class for those member functions that must be fully specialised for the Telements. The fact that member functions of partially specialised classes cannot necessarily be fully specialised means that we must either fully specialise every class, or use this base class to fully specialize only those functions that are required. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_012_01_4}{oomph\+::\+TElement\+Shape$<$ 1, 2 $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1TElementShape}{TElement\+Shape} inline functions\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_013_01_4}{oomph\+::\+TElement\+Shape$<$ 1, 3 $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_011_00_014_01_4}{oomph\+::\+TElement\+Shape$<$ 1, 4 $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_012_00_012_01_4}{oomph\+::\+TElement\+Shape$<$ 2, 2 $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_012_00_013_01_4}{oomph\+::\+TElement\+Shape$<$ 2, 3 $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_012_00_014_01_4}{oomph\+::\+TElement\+Shape$<$ 2, 4 $>$}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElementShape}{oomph\+::\+TBubble\+Enriched\+Element\+Shape$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em A class for those member functions that must be fully specialised for Telements that are enriched by bubbble functions. The fact that member functions of partially specialised classes cannot necessarily be fully specialised means that we must either fully specialise every class, or use this base class to fully specialize only those functions that are required. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElementShape_3_012_00_013_01_4}{oomph\+::\+TBubble\+Enriched\+Element\+Shape$<$ 2, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Specific Enriched \doxylink{classoomph_1_1TElementShape}{TElement\+Shape} inline functions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementGeometricBase}{oomph\+::\+TElement\+Geometric\+Base}}
+\begin{DoxyCompactList}\small\item\em Empty base class for Telements (created so that we can use dynamic\+\_\+cast$<$$>$() to figure out if a an element is a Telement (from a purely geometric point of view). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementBase}{oomph\+::\+TElement\+Base}}
+\begin{DoxyCompactList}\small\item\em Empty base class for Telements (created so that we can use dynamic\+\_\+cast$<$$>$() to figure out if a an element is a Telement). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElement}{oomph\+::\+TElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1TElement}{TElement} class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElement_3_011_00_01NNODE__1D_01_4}{oomph\+::\+TElement$<$ 1, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1TElement}{TElement} class specialised to one spatial dimensions Ordering of nodes is 0 at local coordinate s\mbox{[}0\mbox{]} = 0, 1 at local coordinate s\mbox{[}0\mbox{]} = 1 and then filling in the intermediate values from s\mbox{[}0\mbox{]}=0 to 1. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4}{oomph\+::\+TElement$<$ 2, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1TElement}{TElement} class specialised to two spatial dimensions Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_013_00_012_01_4}{oomph\+::\+TElement\+Shape$<$ 3, 2 $>$}}
+\begin{DoxyCompactList}\small\item\em Return local coordinates of node j. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElementShape_3_013_00_013_01_4}{oomph\+::\+TElement\+Shape$<$ 3, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Return local coordinates of node j. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElementShape_3_013_00_013_01_4}{oomph\+::\+TBubble\+Enriched\+Element\+Shape$<$ 3, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Standard quadratic shape functions enriched by the addition of three cubic "{}face"{} bubbles and quartic "{}volume"{} bubble, which consists of adding a node at the centroid of each face and a single node at the centroid of the tetrahedron. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TElement_3_013_00_01NNODE__1D_01_4}{oomph\+::\+TElement$<$ 3, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1TElement}{TElement} class specialised to three spatial dimensions (tet) Ordering of nodes inverted from Zienkiewizc sketches\+: When looking into the tet from vertex node 0. The vertex nodes on the opposite face are 1 -\/ 2 -\/ 3 in anticlockwise direction. Other nodes filled in edge by edge, then the face ones, then the internal ones. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1TElement}{TElement} class for which the shape functions have been enriched by a single bubble function of the next order. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{oomph\+::\+TBubble\+Enriched\+Gauss$<$ DIM, NPTS\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em Define integration schemes that are required to exactly integrate the mass matrices of the bubble-\/enriched elements. The enrichement increases the polynomial order which means that higher-\/order \doxylink{classoomph_1_1Gauss}{Gauss} rules must be used. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss_3_012_00_013_01_4}{oomph\+::\+TBubble\+Enriched\+Gauss$<$ 2, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Specialisation for two-\/dimensional elements, in which the highest order polynomial is cubic, so we need the integration scheme for the unenriched cubic element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss_3_013_00_013_01_4}{oomph\+::\+TBubble\+Enriched\+Gauss$<$ 3, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Specialisation for three-\/dimensional elements, in which the highest order polynomial is quartic, so we need the integration scheme for the unenriched quartic element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}{oomph\+::\+TBubble\+Enriched\+Element$<$ DIM, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Enriched \doxylink{classoomph_1_1TElement}{TElement} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \doxylink{classoomph_1_1TElement}{TElement$<$2,3$>$}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TSolidElementBase}{oomph\+::\+TSolid\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for Solid Telements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTElement}{oomph\+::\+Solid\+TElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement} elements are triangular/tet elements whose derivatives also include those based upon the lagrangian positions of the nodes. They are the basis for solid mechanics elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTElement_3_011_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+TElement$<$ 1, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement} elements, specialised to one spatial dimension. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTElement_3_012_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+TElement$<$ 2, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement} elements, specialised to two spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTElement_3_013_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+TElement$<$ 3, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement} elements, specialised to three spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTBubbleEnrichedElement}{oomph\+::\+Solid\+TBubble\+Enriched\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidTBubbleEnrichedElement}{Solid\+TBubble\+Enriched\+Element} elements are the enriched version of the Solid\+TElements. They will simply inherit from the appropriate \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement} and TBubbl\+Enriched\+Element. They are the basis for solid mechanics elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidTBubbleEnrichedElement_3_01DIM_00_013_01_4}{oomph\+::\+Solid\+TBubble\+Enriched\+Element$<$ DIM, 3 $>$}}
+\begin{DoxyCompactList}\small\item\em Specify the \doxylink{classoomph_1_1SolidTBubbleEnrichedElement}{Solid\+TBubble\+Enriched\+Element} corresponding to the quadratic triangle. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TElement$<$ DIM, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1TElement}{TElement} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TElement_3_011_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TElement$<$ 1, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 1D \doxylink{classoomph_1_1TElement}{TElement} elements\+: Point elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TBubble\+Enriched\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 2D \doxylink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element} elements is exactly the same as for the corresponding \doxylink{classoomph_1_1TElement}{TElement}. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ TBubble\+Enriched\+Element$<$ 3, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 3D \doxylink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element} elements is the 2D \doxylink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SolidTElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Solid\+TElement$<$ DIM, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1TElement}{TElement} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SolidTElement_3_011_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Solid\+TElement$<$ 1, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 1D \doxylink{classoomph_1_1TElement}{TElement} elements\+: Point elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Solid\+TBubble\+Enriched\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 2D \doxylink{classoomph_1_1SolidTBubbleEnrichedElement}{Solid\+TBubble\+Enriched\+Element} elements is exactly the same as for the corresponding 2D \doxylink{classoomph_1_1SolidTElement}{Solid\+TElement}. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Solid\+TBubble\+Enriched\+Element$<$ 3, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the 3D \doxylink{classoomph_1_1SolidTBubbleEnrichedElement}{Solid\+TBubble\+Enriched\+Element} elements is the 2D \doxylink{classoomph_1_1SolidTBubbleEnrichedElement}{Solid\+TBubble\+Enriched\+Element}. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

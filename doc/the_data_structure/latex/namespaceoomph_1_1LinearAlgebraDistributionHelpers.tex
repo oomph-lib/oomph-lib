@@ -1,0 +1,46 @@
+\doxysection{oomph\+::Linear\+Algebra\+Distribution\+Helpers Namespace Reference}
+\hypertarget{namespaceoomph_1_1LinearAlgebraDistributionHelpers}{}\label{namespaceoomph_1_1LinearAlgebraDistributionHelpers}\index{oomph::LinearAlgebraDistributionHelpers@{oomph::LinearAlgebraDistributionHelpers}}
+
+
+Namespace for helper functions for Linear\+Algebra\+Distributions.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}{concatenate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{in\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{out\+\_\+distribution}})
+\begin{DoxyCompactList}\small\item\em Takes a vector of \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} objects and concatenates them such that the nrow\+\_\+local of the out\+\_\+distribution is the sum of the nrow\+\_\+local of all the in\+\_\+distributions and the number of global rows of the out\+\_\+distribution is the sum of the number of global rows of all the in\+\_\+distributions. This results in a permutation of the rows in the out\+\_\+distribution. Think of this in terms of Double\+Vectors, if we have Double\+Vectors with distributions A and B, distributed across two processors (p0 and p1), A\+: \mbox{[}a0\mbox{]} (on p0) B\+: \mbox{[}b0\mbox{]} (on p0) \mbox{[}a1\mbox{]} (on p1) \mbox{[}b1\mbox{]} (on P1),. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for helper functions for Linear\+Algebra\+Distributions. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2}\label{namespaceoomph_1_1LinearAlgebraDistributionHelpers_af11187289196182ce650da88cfe37fc2} 
+\index{oomph::LinearAlgebraDistributionHelpers@{oomph::LinearAlgebraDistributionHelpers}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!oomph::LinearAlgebraDistributionHelpers@{oomph::LinearAlgebraDistributionHelpers}}
+\doxysubsubsection{\texorpdfstring{concatenate()}{concatenate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} $>$ \&}]{in\+\_\+distribution\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{out\+\_\+distribution }\end{DoxyParamCaption})}
+
+
+
+Takes a vector of \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} objects and concatenates them such that the nrow\+\_\+local of the out\+\_\+distribution is the sum of the nrow\+\_\+local of all the in\+\_\+distributions and the number of global rows of the out\+\_\+distribution is the sum of the number of global rows of all the in\+\_\+distributions. This results in a permutation of the rows in the out\+\_\+distribution. Think of this in terms of Double\+Vectors, if we have Double\+Vectors with distributions A and B, distributed across two processors (p0 and p1), A\+: \mbox{[}a0\mbox{]} (on p0) B\+: \mbox{[}b0\mbox{]} (on p0) \mbox{[}a1\mbox{]} (on p1) \mbox{[}b1\mbox{]} (on P1),. 
+
+then the out\+\_\+distribution is \mbox{[}a0 (on p0) b0\mbox{]} (on p0) \mbox{[}a1 (on p1) b1\mbox{]} (on p1),
+
+as opposed to \mbox{[}a0 (on p0) a1\mbox{]} (on p0) \mbox{[}b0 (on p1) b1\mbox{]} (on p1).
+
+Note (1)\+: The out\+\_\+distribution may not be uniformly distributed even if the in\+\_\+distributions are uniform distributions. Try this out with two distributions of global rows 3 and 5, uniformly distributed across two processors. Compare this against a distribution of global row 8 distributed across two processors.
+
+Note (2)\+: There is no equivalent function which takes a \doxylink{classoomph_1_1Vector}{Vector} of \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} objects (as opposed to pointers), there should not be one since we do not want to invoke the assignment operator when creating the \doxylink{classoomph_1_1Vector}{Vector} of \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} objects. 
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{367}} of file \mbox{\hyperlink{linear__algebra__distribution_8cc_source}{linear\+\_\+algebra\+\_\+distribution.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l01856}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{matrices_8cc_source_l05223}{oomph\+::\+CRDouble\+Matrix\+Helpers\+::concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}, and \mbox{\hyperlink{double__vector_8cc_source_l02075}{oomph\+::\+Double\+Vector\+Helpers\+::split\+\_\+without\+\_\+communication()}}.
+

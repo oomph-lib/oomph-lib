@@ -1,0 +1,230 @@
+\doxysection{oomph\+::TBubble\+Enriched\+Element\texorpdfstring{$<$}{<} DIM, 3 \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}{}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+
+
+Enriched \doxylink{classoomph_1_1TElement}{TElement} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \doxylink{classoomph_1_1TElement}{TElement$<$2,3$>$}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element.  
+
+
+
+
+{\ttfamily \#include $<$Telements.\+h$>$}
+
+Inheritance diagram for oomph\+::TBubble\+Enriched\+Element\texorpdfstring{$<$}{<} DIM, 3 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.481482cm]{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_ad7b4bb73defa6c522acf3f08c4b73027}{TBubble\+Enriched\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2}{TBubble\+Enriched\+Element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}{\texorpdfstring{$\sim$}{\string~}\+TBubble\+Enriched\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}{shape}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Calculate the geometric shape functions at local coordinate s. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}{dshape\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsids}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af362359deb0709dc5d42b29eaf776152}{d2shape\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsids}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d2psids}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return local coordinates of node j. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3297077e3bd4514380233784ce6d4a19}{build\+\_\+face\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} \texorpdfstring{$\ast$}{*}face\+\_\+element\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \doxylink{classoomph_1_1FaceElement}{Face\+Element}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TElement}{oomph\+::\+TElement$<$ DIM, 3 $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TElement_a0354111d57d638dd0a6a7d5117ea6c65}{Node\+\_\+on\+\_\+face}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Assign the nodal translation schemes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TElement_ac9ed69a82aedafa0264d180cd38c79bf}{Node\+\_\+on\+\_\+face}} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TElement_aa7521a81494a40dcd5fc9191a95e16c2}{Node\+\_\+on\+\_\+face}} \mbox{[}3\mbox{]}\mbox{[}4\mbox{]}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TElement_ab91f3b9a90093e78f61d3126daea5ccc}{Node\+\_\+on\+\_\+face}} \mbox{[}4\mbox{]}\mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Assign the nodal translation scheme for linear elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TElement_a45a4ea8124f968528ee2a734fe496e46}{Node\+\_\+on\+\_\+face}} \mbox{[}4\mbox{]}\mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em Assign the nodal translation scheme for quadratic elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{TBubble\+Enriched\+Gauss}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}{Default\+\_\+enriched\+\_\+integration\+\_\+scheme}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3b07ec8fd22312d11af3fc8b61609b93}{Central\+\_\+node\+\_\+on\+\_\+face}} \mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}+1\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+TBubble\+Enriched\+Element$<$ DIM, 3 $>$}
+Enriched \doxylink{classoomph_1_1TElement}{TElement} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \doxylink{classoomph_1_1TElement}{TElement$<$2,3$>$}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element. 
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03621}{3621}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_ad7b4bb73defa6c522acf3f08c4b73027}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_ad7b4bb73defa6c522acf3f08c4b73027} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!TBubbleEnrichedElement@{TBubbleEnrichedElement}}
+\index{TBubbleEnrichedElement@{TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{TBubbleEnrichedElement()}{TBubbleEnrichedElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::\+TBubble\+Enriched\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03634}{3634}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!TBubbleEnrichedElement@{TBubbleEnrichedElement}}
+\index{TBubbleEnrichedElement@{TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{TBubbleEnrichedElement()}{TBubbleEnrichedElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::\+TBubble\+Enriched\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!````~TBubbleEnrichedElement@{\texorpdfstring{$\sim$}{\string~}TBubbleEnrichedElement}}
+\index{````~TBubbleEnrichedElement@{\texorpdfstring{$\sim$}{\string~}TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TBubbleEnrichedElement()}{\string~TBubbleEnrichedElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Destructor 
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03652}{3652}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3297077e3bd4514380233784ce6d4a19}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3297077e3bd4514380233784ce6d4a19} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!build\_face\_element@{build\_face\_element}}
+\index{build\_face\_element@{build\_face\_element}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} \texorpdfstring{$\ast$}{*}}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Build the lower-\/dimensional \doxylink{classoomph_1_1FaceElement}{Face\+Element}. 
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af362359deb0709dc5d42b29eaf776152}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af362359deb0709dc5d42b29eaf776152} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!d2shape\_local@{d2shape\_local}}
+\index{d2shape\_local@{d2shape\_local}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $. 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03675}{3675}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!dshape\_local@{dshape\_local}}
+\index{dshape\_local@{dshape\_local}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_local()}{dshape\_local()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03662}{3662}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
+\index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return local coordinates of node j. 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03685}{3685}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!shape@{shape}}
+\index{shape@{shape}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the geometric shape functions at local coordinate s. 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03655}{3655}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3b07ec8fd22312d11af3fc8b61609b93}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3b07ec8fd22312d11af3fc8b61609b93} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!Central\_node\_on\_face@{Central\_node\_on\_face}}
+\index{Central\_node\_on\_face@{Central\_node\_on\_face}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{Central\_node\_on\_face}{Central\_node\_on\_face}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::\+Central\+\_\+node\+\_\+on\+\_\+face\mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}+1\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03630}{3630}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6} 
+\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!Default\_enriched\_integration\_scheme@{Default\_enriched\_integration\_scheme}}
+\index{Default\_enriched\_integration\_scheme@{Default\_enriched\_integration\_scheme}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+\doxysubsubsection{\texorpdfstring{Default\_enriched\_integration\_scheme}{Default\_enriched\_integration\_scheme}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{TBubble\+Enriched\+Gauss}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}}, 3 $>$\+::\+Default\+\_\+enriched\+\_\+integration\+\_\+scheme\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03627}{3627}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Telements_8h}{Telements.\+h}}\item 
+\mbox{\hyperlink{Telements_8cc}{Telements.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\doxysection{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc File Reference}
+\hypertarget{elastic__two__layer__interface__axisym_8cc}{}\label{elastic__two__layer__interface__axisym_8cc}\index{elastic\_two\_layer\_interface\_axisym.cc@{elastic\_two\_layer\_interface\_axisym.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Refineable\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Axisymmetric two fluid interface problem in a rectangular domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for physical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argc}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for axisymmetric two fluid interface problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4b6ef72bd221361c37f5b9a4a6899afc}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Womersley number (Reynolds x Strouhal) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Product of Reynolds number and inverse of Froude number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_adb51428300a01b19395c43c0d3586d6f}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc. is based on viscosity in lower fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80a34b6dfb7e1501966b8d6c7501e718}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Ratio of density in upper fluid to density in lower fluid. Reynolds number etc. is based on density in lower fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}} = 0.\+01
+\begin{DoxyCompactList}\small\item\em Capillary number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{elastic__two__layer__interface__axisym_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{elastic__two__layer__interface__axisym_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{elastic\_two\_layer\_interface\_axisym.cc@{elastic\_two\_layer\_interface\_axisym.cc}!main@{main}}
+\index{main@{main}!elastic\_two\_layer\_interface\_axisym.cc@{elastic\_two\_layer\_interface\_axisym.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for axisymmetric two fluid interface problem. 
+
+Maximum time
+
+Duration of timestep
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00835}{835}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00116}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00069}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}}.
+

@@ -1,0 +1,272 @@
+\chapter{Demo problem\+: A one-\/dimensional eigenproblem with complex eigenvalues}
+\hypertarget{index}{}\label{index}\index{Demo problem: A one-\/dimensional eigenproblem with complex eigenvalues@{Demo problem: A one-\/dimensional eigenproblem with complex eigenvalues}}
+In this document, we demonstrate how to solve a 1D eigenproblem (eigenvalues of the shifted 1D Laplace operator in a bounded domain) by creating custom elements. The tutorial is related to the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}, which you should read first. The fundamental difference in this case, is that we treat the eigenproblem as two coupled first-\/order equations which ensures that many of the eigenvalues are complex. \begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{One-\/dimensional model eigenvalue problem with complex eigenvalues}} \end{center}  Solve  \[
+\frac{\partial u}{\partial
+x} = (\lambda - \mu) w, \quad  \frac{\partial w}{\partial x} = \lambda u
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the domain $D =\left\{ x_1 \in 
+[0,1] \right\}$, with homogeneous Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D}=0. 
+\ \ \ \ \ \ \ \ \ \ (2)
+\]   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+We shall treat $ \lambda$ as an eigenvalue (unknown), but the other parameter $ \mu $ is a {\bfseries{shift}}, which is used to modify the spectrum of the operator. The two first-\/order equations may be combined into a single second-\/order equation  \[ \frac{\partial^{2} u}{\partial x^{2}} = (\lambda - \mu)
+ \frac{\partial w}{\partial x} = (\lambda - \mu) \lambda u \quad
+ \Rightarrow\quad  \frac{\partial^{2} u}{\partial x^{2}} +
+ (\mu - \lambda) \lambda u = 0, \] which is exactly the same equation as the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}, but with a redefinition of the eigenvalues. Hence, the exact solutions are given by the countably infinite set\+:  \[
+   u_{n} = \sin (\Lambda_{n} x_{1}), \ \ \ \ \ \ \
+   \Lambda_{n} = n \pi = \sqrt{\lambda_{n}(\mu - \lambda_{n})},
+\] which yields  \[ \lambda_{n} = \frac{\mu}{2} \pm \sqrt{\mu^{2}/4 -
+ n^{2}\pi^{2}}. 
+ \ \ \ \ \ \ \ \ \ \ (3) \] If the shift $\mu = 0$, then the eigenvalues are all imaginary and consist of the complex conjugate pairs given by $
+ \lambda{n} = \pm n \pi\, \mbox{i} $.
+
+If $ \mu^{2}/4 >
+ \pi^{2}$ $ \Rightarrow $ $ \mu > 2\pi $, then the first complex conjugate pair of imaginary eigenvalues becomes two distinct real eigenvalues because the term under the square root in (3) becomes positive. As $ \mu $ increases further subsequent complex eigenvalues merge to be real. Thus, we can control the spectrum by modifying the parameter $ \mu $.
+
+We now provide a detailed discussion of the driver code \href{../../../../demo_drivers/eigenproblems/harmonic/complex_harmonic.cc}{\texttt{ complex\+\_\+harmonic.\+cc}} which solves the problem for the first four eigenvalues, when $ \mu = 6.5 > 2\pi. $
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Overview of the theory}{Overview of the theory}}\label{index_theory}
+\hypertarget{index_weak}{}\doxysubsection{\texorpdfstring{Weak formulation of the problem}{Weak formulation of the problem}}\label{index_weak}
+If we wish to solve the problem (1) using finite elements, we simply multiply each equation by a test function, but do not integrate by parts. We shall use the same test functions for each variable and thus our governing equations become  \[ \int_{D} \frac{\partial u}{\partial x} \phi^{(test)} \,\mbox{d} x = 
+ (\lambda -\mu) \int_{D} w\, \phi^{(test)}\,\mbox{d} x, \quad\quad
+ \int_{D} \frac{\partial w}{\partial x} \phi^{(test)} \,\mbox{d} x = 
+ \lambda  \int_{D} u\, \phi^{(test)}\,\mbox{d} x, \quad
+ \]
+
+If we expand $ u(x) = U_{j} \psi_{j}(x) $ and $ w(x) = W_{j}
+\psi_{j}(x) $ in terms of known basis functions $ \psi_{j} $ and use the same basis functions as our test functions (Galerkin method), then the weak form becomes  \[ \int_{D} \frac{\partial \psi_{j}}{\partial x} \psi_{i}
+\,\mbox{d} x U_{j} = (\lambda - \mu)  \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x W_{j},\quad\quad
+ \int_{D} \frac{\partial \psi_{j}}{\partial x} \psi_{i}
+\,\mbox{d} x W_{j} = \lambda \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x U_{j}.
+ \] Thus, in order to form the discrete eigenproblem $  J_{ij} v_{j} = \lambda M_{ij} v_{j} $, we choose to order the unknowns in the form $ v = [ U | W ]^{T} $, leading to the block Jacobian and mass matrices  \[ J = \left[\begin{array}{c|c}
+         0 &  A  \\\hline
+         A & \mu B \end{array}\right],\quad
+ M = \left[\begin{array}{c|c}
+         B &  0  \\\hline
+         0 & B \end{array}\right], \] where  \[ A_{ij} =  \int_{D} \frac{\partial \psi_{j}}{\partial x} \psi_{i}
+\,\mbox{d} x , \quad\quad  B_{ij} =  \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x. \]
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_impl}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_impl}
+The implementation closely follows that in the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}, and so we shall concentrate on the differences from that problem.\hypertarget{index_equations}{}\doxysubsection{\texorpdfstring{Creating the elements}{Creating the elements}}\label{index_equations}
+For generality, we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined above in the class {\ttfamily \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}} that inherits from {\ttfamily Finite\+Element}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ A\ class\ for\ all\ elements\ that\ solve\ the\ eigenvalue\ problem}}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)f[\ \ \(\backslash\)frac\{\(\backslash\)partial\ w\}\{\(\backslash\)partial\ x\}\ \ =\ \(\backslash\)lambda\ u\ \(\backslash\)f]}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)f[\ \(\backslash\)frac\{\(\backslash\)partial\ u\}\{\(\backslash\)partial\ x\}\ =\ (\(\backslash\)lambda\ -\/\ \(\backslash\)mu)\ w\ \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{///\ This\ class\ \ contains\ the\ generic\ maths.\ Shape\ functions,\ geometric}}
+\DoxyCodeLine{\textcolor{comment}{///\ mapping\ etc.\ must\ get\ implemented\ in\ derived\ class.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ FiniteElement}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Empty\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classComplexHarmonicEquations_aa93feb265f731b0d82c3c1c4c29f183d}{ComplexHarmonicEquations}}()\ \{\}}
+
+\end{DoxyCodeInclude}
+ The unknowns that represent the discretised eigenfunction are assumed to be stored at the nodes, but there are now two unknowns\+: $u$ is assumed to be the first and $w$ is the second.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function:\ First\ eigenfunction\ value\ at\ local\ node\ n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Note\ that\ solving\ the\ eigenproblem\ does\ not\ assign\ values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ this\ storage\ space.\ It\ is\ used\ for\ output\ purposes\ only.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ u(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ nodal\_value(n,0);\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Second\ eigenfunction\ value\ at\ local\ node\ n}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ w(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ nodal\_value(n,1);\}}
+
+\end{DoxyCodeInclude}
+ As before, the key function is {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix} which implements the calculation of the equations.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix(}
+\DoxyCodeLine{\ \ Vector<double>\ \&residuals,}
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&jacobian,\ DenseMatrix<double>\ \&mass\_matrix)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ out\ how\ many\ nodes\ there\ are}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ nnode();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ memory\ for\ the\ shape\ functions\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \ Shape\ psi(n\_node);}
+\DoxyCodeLine{\ \ \ DShape\ dpsidx(n\_node,1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ number\ of\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_intpt\ =\ integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Integers\ to\ store\ the\ local\ equation\ and\ unknown\ numbers}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ local\_eqn=0,\ local\_unknown=0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ipt=0;ipt<n\_intpt;ipt++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Get\ the\ integral\ weight}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ w\ =\ integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Call\ the\ derivatives\ of\ the\ shape\ and\ test\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ dshape\_eulerian\_at\_knot(ipt,psi,dpsidx);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Premultiply\ the\ weights\ and\ the\ Jacobian}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ W\ =\ w*J;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Assemble\ the\ contributions\ to\ the\ mass\ matrix}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ test\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l=0;l<n\_node;l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ local\ equation\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ local\_eqn\ =\ u\_local\_eqn(l,0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//If\ it's\ not\ a\ boundary\ condition}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ shape\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_node;l2++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ u\_local\_eqn(l2,0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ corresponds\ to\ the\ top\ left\ B\ block}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ mass\_matrix(local\_eqn,\ local\_unknown)\ +=\ psi(l2)*psi(l)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ u\_local\_eqn(l2,1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ corresponds\ to\ the\ top\ right\ A\ block}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=\ dpsidx(l2,0)*psi(l)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ local\ equation\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ local\_eqn\ =\ u\_local\_eqn(l,1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//IF\ it's\ not\ a\ boundary\ condition}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ shape\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_node;l2++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ u\_local\_eqn(l2,0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ corresponds\ to\ the\ lower\ left\ A\ block}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=\ dpsidx(l2,0)*psi(l)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ u\_local\_eqn(l2,1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ corresponds\ to\ the\ lower\ right\ B\ block}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ mass\_matrix(local\_eqn,\ local\_unknown)\ +=\ psi(l2)*psi(l)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ corresponds\ to\ the\ lower\ right\ \(\backslash\)mu\ B\ block}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceEigenproblemShift_a82e816b5ecba937123c65c5bd953a2fb}{EigenproblemShift::Mu}}*psi(l2)*psi(l)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//end\_of\_fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
+
+\end{DoxyCodeInclude}
+ Note that the {\bfseries{shift}} $\mu$ is implemented in a global namespace as {\ttfamily \doxylink{namespaceEigenproblemShift_a82e816b5ecba937123c65c5bd953a2fb}{Eigenproblem\+Shift\+::\+Mu}}.
+
+The shape functions are specified in the {\ttfamily \doxylink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}} class that inherits from our standard one-\/dimensional Lagrange elements {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} as well as {\ttfamily \doxylink{classHarmonicEquations}{Harmonic\+Equations}}. The number of unknowns (two) is specified and the output functions and shape functions are overloaded as required\+: the output functions are specified in the {\ttfamily \doxylink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}} class, whereas the shape functions are provided by the {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} class.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classQComplexHarmonicElement}{QComplexHarmonicElement}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QElement<1,NNODE\_1D>,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Call\ constructors\ for\ QElement\ and\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson\ equations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classQComplexHarmonicElement_a9f1e88c4b5c7031d77c6f6dd3758de2a}{QComplexHarmonicElement}}()\ :\ QElement<1,NNODE\_1D>(),\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \ Required\ \ \#\ of\ \`{}values'\ (pinned\ or\ dofs)\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ at\ node\ n.\ Here\ there\ are\ two\ (u\ and\ w)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classQComplexHarmonicElement_a3f1d68324e9d8b9e143044d716c72a87}{required\_nvalue}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&n)\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ 2;\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ function\ overloaded\ from\ ComplexHarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}{output}}(ostream\ \&outfile)\ }
+\DoxyCodeLine{\ \ \{\mbox{\hyperlink{classComplexHarmonicEquations_a9185e07b984e735c1c45b6f5a6c02b5f}{ComplexHarmonicEquations::output}}(outfile);\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \ Output\ function\ overloaded\ from\ ComplexHarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}{output}}(ostream\ \&outfile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&Nplot)\ }
+\DoxyCodeLine{\ \ \{\mbox{\hyperlink{classComplexHarmonicEquations_a9185e07b984e735c1c45b6f5a6c02b5f}{ComplexHarmonicEquations::output}}(outfile,Nplot);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{protected}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Shape,\ test\ functions\ \&\ derivs.\ w.r.t.\ to\ global\ coords.\ Return\ Jacobian.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classQComplexHarmonicElement_a7c97d4e8c5433a44640d30c936d69ffb}{dshape\_eulerian}}(\textcolor{keyword}{const}\ Vector<double>\ \&s,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DShape\ \&dpsidx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ QElement<1,NNODE\_1D>::dshape\_eulerian(s,psi,dpsidx);\}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Shape,\ test\ functions\ \&\ derivs.\ w.r.t.\ to\ global\ coords.\ at}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ integration\ point\ ipt.\ Return\ Jacobian.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classQComplexHarmonicElement_a3f8d1d9396135d4d86f416dcf6c23904}{dshape\_eulerian\_at\_knot}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DShape\ \&dpsidx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ QElement<1,NNODE\_1D>::dshape\_eulerian\_at\_knot(ipt,psi,dpsidx);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//end\_of\_QComplexHarmonic\_class\_definition}}
+
+\end{DoxyCodeInclude}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is identical to that of the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily \doxylink{classComplexHarmonicProblem}{Complex\+Harmonic\+Problem}} is derived from {\ttfamily oomph-\/lib\textquotesingle{}s} generic {\ttfamily Problem} class and the specific element type and eigensolver are specified as template parameters to make it easy for the "{}user"{} to change either of these from the driver code. Once again, it is very similar to the {\ttfamily \doxylink{classHarmonicProblem}{Harmonic\+Problem}} class in the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}. The only member function with any differences is the {\ttfamily solve(...)} function, which requests 7 rather than 4 eigenvalues to be computed and outputs the eigenfunction associated with eigenvalue of smallest magnitude (which is real).
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Comments and exercises}{Comments and exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Modify the code to compute a different number of eigenvalues. What is the maximum number of eigenvalues that could be computed?
+\item Confirm that the eigenvalues agree with the analytic result and that a transition from real to complex values occurs when $ \mu
+   = 2\pi $.
+\item Explain why there are always two eigenvalues with the values $\lambda = \mu$. What are the corresponding eigenfunctions?
+\item When the output is a complex conjugate pair of eigenvalues, the two associated eigenvectors are the real and imaginary parts of the eigenvector corresponding to the first eigenvalue. The complex conjugate eigenvalue has a complex conjugate eigenvector (can you prove this?), so no more information is required. Modify the output function to examine the real and imaginary parts of a complex eigenvalue. Are the results what you expect?
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/eigenproblems/harmonic/}{\texttt{ demo\+\_\+drivers/eigenproblems/harmonic/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc}{\texttt{ demo\+\_\+drivers/eigenproblems/harmonic/harmonic.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

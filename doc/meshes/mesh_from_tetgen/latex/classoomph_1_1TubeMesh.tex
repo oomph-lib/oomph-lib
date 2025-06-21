@@ -1,0 +1,205 @@
+\doxysection{oomph\+::Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TubeMesh}{}\label{classoomph_1_1TubeMesh}\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+
+
+3D tube mesh class. The domain is specified by the Geom\+Object that identifies the entire volume. Non-\/refineable base version!  
+
+
+
+
+{\ttfamily \#include $<$tube\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1TubeMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TubeMesh_a6c2aaa81de6298a3f3a7bf1ae4d2b11d}{Tube\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centreline\+\_\+limits}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{theta\+\_\+positions}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{radius\+\_\+box}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the volume, start and end coordinates for the centreline on the geometric object. Values of theta at which dividing lines are to be placed, fractions of the radius for the central box at the dividing lines, the number of layers and the timestepper. Timestepper defaults to Steady dummy timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}{\texorpdfstring{$\sim$}{\string~}\+Tube\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TubeMesh_aed076003bfd280bd2949c0e74885f34c}{volume\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh_a7cc74f03a77148a57557cc90f315358d}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh_ac2094b74a3c489cddb9e1ebe3ec34358}{domain\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to underlying domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2}{Volume\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the geometric object that represents the curved wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$}
+3D tube mesh class. The domain is specified by the Geom\+Object that identifies the entire volume. Non-\/refineable base version! 
+
+The mesh boundaries are numbered as follows\+:
+\begin{DoxyItemize}
+\item Boundary 0\+: "{}\+Inflow"{} cross section; located along the line parametrised by $ \xi_0 =  \xi_0^{lo} $.
+\item Boundary 1\+: The outer wall, represetned by $\xi_2 = 1$.
+\item Boundary 2\+: The out flow, represented by $\xi_0 = \xi_0^{hi}$. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00055}{55}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TubeMesh_a6c2aaa81de6298a3f3a7bf1ae4d2b11d}\label{classoomph_1_1TubeMesh_a6c2aaa81de6298a3f3a7bf1ae4d2b11d} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!TubeMesh@{TubeMesh}}
+\index{TubeMesh@{TubeMesh}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TubeMesh()}{TubeMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Tube\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{centreline\+\_\+limits,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{theta\+\_\+positions,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{radius\+\_\+box,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nlayer,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to geometric object that specifies the volume, start and end coordinates for the centreline on the geometric object. Values of theta at which dividing lines are to be placed, fractions of the radius for the central box at the dividing lines, the number of layers and the timestepper. Timestepper defaults to Steady dummy timestepper. 
+
+Constructor for deformable quarter tube mesh class. The domain is specified by the Geom\+Object that identifies the entire volume. 
+
+Definition at line \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00041}{41}} of file \mbox{\hyperlink{tube__mesh_8template_8cc_source}{tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tube__mesh_8h_source_l00098}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, and \mbox{\hyperlink{tube__mesh_8h_source_l00079}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::volume\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51}\label{classoomph_1_1TubeMesh_af77e5d5022c77c3bf7340387258b2d51} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!````~TubeMesh@{\texorpdfstring{$\sim$}{\string~}TubeMesh}}
+\index{````~TubeMesh@{\texorpdfstring{$\sim$}{\string~}TubeMesh}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TubeMesh()}{\string~TubeMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1TubeMesh}{Tube\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00073}{73}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tube__mesh_8h_source_l00098}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TubeMesh_a7cc74f03a77148a57557cc90f315358d}\label{classoomph_1_1TubeMesh_a7cc74f03a77148a57557cc90f315358d} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to domain. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00085}{85}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tube__mesh_8h_source_l00098}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TubeMesh_ac2094b74a3c489cddb9e1ebe3ec34358}\label{classoomph_1_1TubeMesh_ac2094b74a3c489cddb9e1ebe3ec34358} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to underlying domain. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00091}{91}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tube__mesh_8h_source_l00098}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TubeMesh_aed076003bfd280bd2949c0e74885f34c}\label{classoomph_1_1TubeMesh_aed076003bfd280bd2949c0e74885f34c} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!volume\_pt@{volume\_pt}}
+\index{volume\_pt@{volume\_pt}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{volume\_pt()}{volume\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::volume\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Geom\+Object representing wall. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00079}{79}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tube__mesh_8h_source_l00101}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Volume\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00041}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f}\label{classoomph_1_1TubeMesh_aa40f91e3d55b4ab61304d0b8eca3859f} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to domain. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00098}{98}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__mesh_8h_source_l00085}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, \mbox{\hyperlink{tube__mesh_8h_source_l00091}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, \mbox{\hyperlink{tube__mesh_8h_source_l00135}{oomph\+::\+Refineable\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tube\+Mesh()}}, \mbox{\hyperlink{tube__mesh_8template_8cc_source_l00041}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Tube\+Mesh()}}, and \mbox{\hyperlink{tube__mesh_8h_source_l00073}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Tube\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2}\label{classoomph_1_1TubeMesh_a3b89c07eff15d0eb9d5fe9e0c93f8ec2} 
+\index{oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}!Volume\_pt@{Volume\_pt}}
+\index{Volume\_pt@{Volume\_pt}!oomph::TubeMesh$<$ ELEMENT $>$@{oomph::TubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume\_pt}{Volume\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeMesh}{oomph\+::\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Volume\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the geometric object that represents the curved wall. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__mesh_8h_source_l00101}{101}} of file \mbox{\hyperlink{tube__mesh_8h_source}{tube\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__mesh_8h_source_l00079}{oomph\+::\+Tube\+Mesh$<$ ELEMENT $>$\+::volume\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tube__mesh_8h}{tube\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{tube__mesh_8template_8cc}{tube\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

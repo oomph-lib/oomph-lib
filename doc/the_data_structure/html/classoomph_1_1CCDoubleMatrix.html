@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::CCDoubleMatrix Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1CCDoubleMatrix-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::CCDoubleMatrix Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for compressed column matrices that store doubles.  
+ <a href="classoomph_1_1CCDoubleMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="matrices_8h_source.html">matrices.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::CCDoubleMatrix:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1CCDoubleMatrix.png" usemap="#oomph::CCDoubleMatrix_map" alt=""/>
+  <map id="oomph::CCDoubleMatrix_map" name="oomph::CCDoubleMatrix_map">
+<area href="classoomph_1_1DoubleMatrixBase.html" title="Abstract base class for matrices of doubles – adds abstract interfaces for solving,..." alt="oomph::DoubleMatrixBase" shape="rect" coords="0,112,316,136"/>
+<area href="classoomph_1_1CCMatrix.html" alt="oomph::CCMatrix&lt; double &gt;" shape="rect" coords="326,112,642,136"/>
+<area href="classoomph_1_1SparseMatrix.html" title="Class for sparse matrices, that store only the non-zero values in a linear array in memory...." alt="oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;" shape="rect" coords="326,56,642,80"/>
+<area href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type..." alt="oomph::Matrix&lt; T, MATRIX_TYPE &gt;" shape="rect" coords="326,0,642,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abc80ef8ffa3a961daf6759bb2c574239" id="r_abc80ef8ffa3a961daf6759bb2c574239"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#abc80ef8ffa3a961daf6759bb2c574239">CCDoubleMatrix</a> ()</td></tr>
+<tr class="memdesc:abc80ef8ffa3a961daf6759bb2c574239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:abc80ef8ffa3a961daf6759bb2c574239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad98b162e3cc1aac48e9f5e1e06e262a5" id="r_ad98b162e3cc1aac48e9f5e1e06e262a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#ad98b162e3cc1aac48e9f5e1e06e262a5">CCDoubleMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SparseMatrix.html#a7a5b585410f9b23da6f269faa4a1db72">value</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">row_index_</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">column_start_</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:ad98b162e3cc1aac48e9f5e1e06e262a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length.  <br /></td></tr>
+<tr class="separator:ad98b162e3cc1aac48e9f5e1e06e262a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957569463e2ccab8b45d303d36b4d477" id="r_a957569463e2ccab8b45d303d36b4d477"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a957569463e2ccab8b45d303d36b4d477">CCDoubleMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a957569463e2ccab8b45d303d36b4d477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a957569463e2ccab8b45d303d36b4d477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e8e217e54cd435769ac7d88f3e95af" id="r_a38e8e217e54cd435769ac7d88f3e95af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a38e8e217e54cd435769ac7d88f3e95af">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a38e8e217e54cd435769ac7d88f3e95af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a38e8e217e54cd435769ac7d88f3e95af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89019bdd7b9a64a2f32cd4efa07fe45c" id="r_a89019bdd7b9a64a2f32cd4efa07fe45c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a89019bdd7b9a64a2f32cd4efa07fe45c">~CCDoubleMatrix</a> ()</td></tr>
+<tr class="memdesc:a89019bdd7b9a64a2f32cd4efa07fe45c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Kill the LU factors if they have been setup.  <br /></td></tr>
+<tr class="separator:a89019bdd7b9a64a2f32cd4efa07fe45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab541153fa5ab2c1bc18e5339bacadfb9" id="r_ab541153fa5ab2c1bc18e5339bacadfb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#ab541153fa5ab2c1bc18e5339bacadfb9">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab541153fa5ab2c1bc18e5339bacadfb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <br /></td></tr>
+<tr class="separator:ab541153fa5ab2c1bc18e5339bacadfb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38cc544ab30f9318161763e13c20957" id="r_aa38cc544ab30f9318161763e13c20957"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#aa38cc544ab30f9318161763e13c20957">ncol</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa38cc544ab30f9318161763e13c20957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <br /></td></tr>
+<tr class="separator:aa38cc544ab30f9318161763e13c20957"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd1f3dfa66ed45be1ced60d2835634c" id="r_a2fd1f3dfa66ed45be1ced60d2835634c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a2fd1f3dfa66ed45be1ced60d2835634c">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a2fd1f3dfa66ed45be1ced60d2835634c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round-bracket access operator to provide read-only (const) access to the data.  <br /></td></tr>
+<tr class="separator:a2fd1f3dfa66ed45be1ced60d2835634c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7c9b4e04b877b3ef40be905829eb41" id="r_acb7c9b4e04b877b3ef40be905829eb41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#acb7c9b4e04b877b3ef40be905829eb41">ludecompose</a> ()</td></tr>
+<tr class="memdesc:acb7c9b4e04b877b3ef40be905829eb41"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU decomposition using SuperLU.  <br /></td></tr>
+<tr class="separator:acb7c9b4e04b877b3ef40be905829eb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59fbc30e6a856794cd2678856c8aea6d" id="r_a59fbc30e6a856794cd2678856c8aea6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a59fbc30e6a856794cd2678856c8aea6d">lubksub</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:a59fbc30e6a856794cd2678856c8aea6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">LU back solve for given RHS.  <br /></td></tr>
+<tr class="separator:a59fbc30e6a856794cd2678856c8aea6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add24c25e344b84fb5b732e294af5e8b2" id="r_add24c25e344b84fb5b732e294af5e8b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#add24c25e344b84fb5b732e294af5e8b2">multiply</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:add24c25e344b84fb5b732e294af5e8b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the matrix by the vector x: soln=Ax.  <br /></td></tr>
+<tr class="separator:add24c25e344b84fb5b732e294af5e8b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582352912b0a7e097f9ac31c5054beed" id="r_a582352912b0a7e097f9ac31c5054beed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a582352912b0a7e097f9ac31c5054beed">multiply_transpose</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a582352912b0a7e097f9ac31c5054beed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply the transposed matrix by the vector x: soln=A^T x.  <br /></td></tr>
+<tr class="separator:a582352912b0a7e097f9ac31c5054beed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6834fcfc28dca27243ec53ea48d34be" id="r_ae6834fcfc28dca27243ec53ea48d34be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#ae6834fcfc28dca27243ec53ea48d34be">multiply</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix_in</a>, <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">result</a>)</td></tr>
+<tr class="memdesc:ae6834fcfc28dca27243ec53ea48d34be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to multiply this matrix by the <a class="el" href="classoomph_1_1CCDoubleMatrix.html" title="A class for compressed column matrices that store doubles.">CCDoubleMatrix</a> matrix_in The multiplication method used can be selected using the flag Matrix_matrix_multiply_method. By default Method 2 is used. Method 1: First runs through this matrix and matrix_in to find the storage requirements for result - arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2: Grows storage for values and column indices of result 'on the fly' using an array of maps. Faster but more memory intensive. Method 3: Grows storage for values and column indices of result 'on the fly' using a vector of vectors. Not particularly impressive on the platforms we tried...  <br /></td></tr>
+<tr class="separator:ae6834fcfc28dca27243ec53ea48d34be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600a58c92baf401a534598cedcfd3415" id="r_a600a58c92baf401a534598cedcfd3415"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a600a58c92baf401a534598cedcfd3415">matrix_reduction</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;alpha, <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">reduced_matrix</a>)</td></tr>
+<tr class="memdesc:a600a58c92baf401a534598cedcfd3415"><td class="mdescLeft">&#160;</td><td class="mdescRight">For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced_matrix. Note: Diagonal entries are retained regardless of their size.  <br /></td></tr>
+<tr class="separator:a600a58c92baf401a534598cedcfd3415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3aada5f3737a9ffd2261c718964852" id="r_a7e3aada5f3737a9ffd2261c718964852"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#a7e3aada5f3737a9ffd2261c718964852">matrix_matrix_multiply_method</a> ()</td></tr>
+<tr class="memdesc:a7e3aada5f3737a9ffd2261c718964852"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to Matrix_matrix_multiply_method, the flag which determines the matrix matrix multiplication method used. Method 1: First runs through this matrix and matrix_in to find the storage requirements for result - arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2: Grows storage for values and column indices of result 'on the fly' using an array of maps. Faster but more memory intensive. Method 3: Grows storage for values and column indices of result 'on the fly' using a vector of vectors. Not particularly impressive on the platforms we tried...  <br /></td></tr>
+<tr class="separator:a7e3aada5f3737a9ffd2261c718964852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DoubleMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DoubleMatrixBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DoubleMatrixBase.html">oomph::DoubleMatrixBase</a></td></tr>
+<tr class="memitem:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a9ab2dcaf990403cd43d4b952f7dbaa1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a9ab2dcaf990403cd43d4b952f7dbaa1c">DoubleMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor.  <br /></td></tr>
+<tr class="separator:a9ab2dcaf990403cd43d4b952f7dbaa1c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449fe88a14eed90f8820a75f53883c66 inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a449fe88a14eed90f8820a75f53883c66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a449fe88a14eed90f8820a75f53883c66">DoubleMatrixBase</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a449fe88a14eed90f8820a75f53883c66 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a449fe88a14eed90f8820a75f53883c66 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc390458d9899179f84488f6a94b261d inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_abc390458d9899179f84488f6a94b261d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#abc390458d9899179f84488f6a94b261d">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:abc390458d9899179f84488f6a94b261d inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:abc390458d9899179f84488f6a94b261d inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a82ece2e3cfc355bb68ba78a2ed9dae9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a82ece2e3cfc355bb68ba78a2ed9dae9f">~DoubleMatrixBase</a> ()</td></tr>
+<tr class="memdesc:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual (empty) destructor  <br /></td></tr>
+<tr class="separator:a82ece2e3cfc355bb68ba78a2ed9dae9f inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2ef063bc84bee59fec7a933093ac8f7 inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_aa2ef063bc84bee59fec7a933093ac8f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#aa2ef063bc84bee59fec7a933093ac8f7">linear_solver_pt</a> ()</td></tr>
+<tr class="memdesc:aa2ef063bc84bee59fec7a933093ac8f7 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object.  <br /></td></tr>
+<tr class="separator:aa2ef063bc84bee59fec7a933093ac8f7 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e6ef5e74c6c260919d3bf0420c7a68 inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a48e6ef5e74c6c260919d3bf0420c7a68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a48e6ef5e74c6c260919d3bf0420c7a68">linear_solver_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a48e6ef5e74c6c260919d3bf0420c7a68 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object (const version)  <br /></td></tr>
+<tr class="separator:a48e6ef5e74c6c260919d3bf0420c7a68 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a4d445c4a1204da569f40ec1bdace9ef3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a4d445c4a1204da569f40ec1bdace9ef3">solve</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <br /></td></tr>
+<tr class="separator:a4d445c4a1204da569f40ec1bdace9ef3 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_ac35083cf8225822363c25b921b4ca1ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#ac35083cf8225822363c25b921b4ca1ce">solve</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>)</td></tr>
+<tr class="memdesc:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <br /></td></tr>
+<tr class="separator:ac35083cf8225822363c25b921b4ca1ce inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_ae9098f3e129833a6b1cb5fe6ebdd9835"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#ae9098f3e129833a6b1cb5fe6ebdd9835">solve</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-written.  <br /></td></tr>
+<tr class="separator:ae9098f3e129833a6b1cb5fe6ebdd9835 inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a8d9fb5fddec05a0b6e35cff23c79255c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a8d9fb5fddec05a0b6e35cff23c79255c">solve</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">soln</a>)</td></tr>
+<tr class="memdesc:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten.  <br /></td></tr>
+<tr class="separator:a8d9fb5fddec05a0b6e35cff23c79255c inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a971bdc2d9297fc582af8467178f4e00e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a971bdc2d9297fc582af8467178f4e00e">residual</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;b, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">residual_</a>)</td></tr>
+<tr class="memdesc:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the residual, i.e. r=b-Ax the residual.  <br /></td></tr>
+<tr class="separator:a971bdc2d9297fc582af8467178f4e00e inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase" id="r_a69a001b704e1d67277170ff7c0e4f6af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a69a001b704e1d67277170ff7c0e4f6af">max_residual</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">rhs</a>)</td></tr>
+<tr class="memdesc:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the maximum residual r=b-Ax &ndash; generic version, can be overloaded for specific derived classes where the max. can be determined "on the fly".  <br /></td></tr>
+<tr class="separator:a69a001b704e1d67277170ff7c0e4f6af inherit pub_methods_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1CCMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1CCMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1CCMatrix.html">oomph::CCMatrix&lt; double &gt;</a></td></tr>
+<tr class="memitem:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix" id="r_a16be0ba4cd8d9d5422de26513bab3b41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a16be0ba4cd8d9d5422de26513bab3b41">CCMatrix</a> ()</td></tr>
+<tr class="memdesc:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a16be0ba4cd8d9d5422de26513bab3b41 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix" id="r_a4d8bf86e2cb87a710fb5485ac5904274"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a4d8bf86e2cb87a710fb5485ac5904274">CCMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;value, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">row_index_</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">column_start_</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length.  <br /></td></tr>
+<tr class="separator:a4d8bf86e2cb87a710fb5485ac5904274 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix" id="r_a815c8a3473ce3b8fe70c682e7591a33d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a815c8a3473ce3b8fe70c682e7591a33d">CCMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCMatrix.html">CCMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_matrix</a>)</td></tr>
+<tr class="memdesc:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:a815c8a3473ce3b8fe70c682e7591a33d inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c3f775aeac6b548370e14dbe875d6a inherit pub_methods_classoomph_1_1CCMatrix" id="r_aa1c3f775aeac6b548370e14dbe875d6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#aa1c3f775aeac6b548370e14dbe875d6a">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCMatrix.html">CCMatrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:aa1c3f775aeac6b548370e14dbe875d6a inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:aa1c3f775aeac6b548370e14dbe875d6a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix" id="r_a5f6e403c6f6478abe752ca515d3120d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a5f6e403c6f6478abe752ca515d3120d9">~CCMatrix</a> ()</td></tr>
+<tr class="memdesc:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete any allocated memory.  <br /></td></tr>
+<tr class="separator:a5f6e403c6f6478abe752ca515d3120d9 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix" id="r_a9b40b8a395a94be77939308cc413828a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a9b40b8a395a94be77939308cc413828a">get_entry</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function that will be called by the read-only round-bracket operator (const)  <br /></td></tr>
+<tr class="separator:a9b40b8a395a94be77939308cc413828a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30fb5552543c8d2f0626578ee2f9a5ae inherit pub_methods_classoomph_1_1CCMatrix" id="r_a30fb5552543c8d2f0626578ee2f9a5ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a30fb5552543c8d2f0626578ee2f9a5ae">entry</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a30fb5552543c8d2f0626578ee2f9a5ae inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-write access is not permitted for these matrices and is deliberately broken.  <br /></td></tr>
+<tr class="separator:a30fb5552543c8d2f0626578ee2f9a5ae inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cf931b97d5e6f57ae6dd7d03727dbdd inherit pub_methods_classoomph_1_1CCMatrix" id="r_a9cf931b97d5e6f57ae6dd7d03727dbdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a9cf931b97d5e6f57ae6dd7d03727dbdd">column_start</a> ()</td></tr>
+<tr class="memdesc:a9cf931b97d5e6f57ae6dd7d03727dbdd inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style column_start array.  <br /></td></tr>
+<tr class="separator:a9cf931b97d5e6f57ae6dd7d03727dbdd inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8fc61adedf5d658d6efa374ff3a4530 inherit pub_methods_classoomph_1_1CCMatrix" id="r_ae8fc61adedf5d658d6efa374ff3a4530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ae8fc61adedf5d658d6efa374ff3a4530">column_start</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae8fc61adedf5d658d6efa374ff3a4530 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style column_start array (const version)  <br /></td></tr>
+<tr class="separator:ae8fc61adedf5d658d6efa374ff3a4530 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae72bd1ac1b78c2433197587b499a0d62 inherit pub_methods_classoomph_1_1CCMatrix" id="r_ae72bd1ac1b78c2433197587b499a0d62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ae72bd1ac1b78c2433197587b499a0d62">row_index</a> ()</td></tr>
+<tr class="memdesc:ae72bd1ac1b78c2433197587b499a0d62 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style row index array.  <br /></td></tr>
+<tr class="separator:ae72bd1ac1b78c2433197587b499a0d62 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad16551df5f9bb8469ea096acf56ba3b7 inherit pub_methods_classoomph_1_1CCMatrix" id="r_ad16551df5f9bb8469ea096acf56ba3b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ad16551df5f9bb8469ea096acf56ba3b7">row_index</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ad16551df5f9bb8469ea096acf56ba3b7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style row index array (const version)  <br /></td></tr>
+<tr class="separator:ad16551df5f9bb8469ea096acf56ba3b7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix" id="r_ac3b138b2ed470866999f2a92f3e1f239"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#ac3b138b2ed470866999f2a92f3e1f239">output_bottom_right_zero_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:ac3b138b2ed470866999f2a92f3e1f239 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix" id="r_a1f6e451f0688c392e45bc03bf20fdda7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a1f6e451f0688c392e45bc03bf20fdda7">sparse_indexed_output_helper</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only.  <br /></td></tr>
+<tr class="separator:a1f6e451f0688c392e45bc03bf20fdda7 inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix" id="r_af3f7a40493a8576558e211c681b1ca3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#af3f7a40493a8576558e211c681b1ca3c">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wipe matrix data and set all values to 0.  <br /></td></tr>
+<tr class="separator:af3f7a40493a8576558e211c681b1ca3c inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix" id="r_aa08192365e3c87357d1f7ca8131f03de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#aa08192365e3c87357d1f7ca8131f03de">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;value, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;row_index, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;column_start, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length.  <br /></td></tr>
+<tr class="separator:aa08192365e3c87357d1f7ca8131f03de inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix" id="r_a57eddb79a6a3af698a1c92196482335a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a57eddb79a6a3af698a1c92196482335a">build_without_copy</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *value, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *row_index, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *column_start, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;nnz, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to build matrix from pointers to arrays which hold the column starts, row indices and non-zero values. The final parameters specifies the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments!  <br /></td></tr>
+<tr class="separator:a57eddb79a6a3af698a1c92196482335a inherit pub_methods_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a9aff0ae09aadbc704580726a53fe51c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a9aff0ae09aadbc704580726a53fe51c5">SparseMatrix</a> ()</td></tr>
+<tr class="memdesc:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a9aff0ae09aadbc704580726a53fe51c5 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a9e4062d0e4f877537d195aada71d854d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a9e4062d0e4f877537d195aada71d854d">SparseMatrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1SparseMatrix.html">SparseMatrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_matrix</a>)</td></tr>
+<tr class="memdesc:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:a9e4062d0e4f877537d195aada71d854d inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8646d89594b246a394c89d4be134c423 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a8646d89594b246a394c89d4be134c423"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a8646d89594b246a394c89d4be134c423">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1SparseMatrix.html">SparseMatrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a8646d89594b246a394c89d4be134c423 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a8646d89594b246a394c89d4be134c423 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix" id="r_aa938bb1200e49f080b980fe7248f589e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#aa938bb1200e49f080b980fe7248f589e">~SparseMatrix</a> ()</td></tr>
+<tr class="memdesc:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete the memory associated with the values.  <br /></td></tr>
+<tr class="separator:aa938bb1200e49f080b980fe7248f589e inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5b585410f9b23da6f269faa4a1db72 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a7a5b585410f9b23da6f269faa4a1db72"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a7a5b585410f9b23da6f269faa4a1db72">value</a> ()</td></tr>
+<tr class="memdesc:a7a5b585410f9b23da6f269faa4a1db72 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style value array.  <br /></td></tr>
+<tr class="separator:a7a5b585410f9b23da6f269faa4a1db72 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3284bc630be1707c08c81aa25d9a836 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_af3284bc630be1707c08c81aa25d9a836"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#af3284bc630be1707c08c81aa25d9a836">value</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:af3284bc630be1707c08c81aa25d9a836 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to C-style value array (const version)  <br /></td></tr>
+<tr class="separator:af3284bc630be1707c08c81aa25d9a836 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a21e22f93a942583ca83cea18c23bdd11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a21e22f93a942583ca83cea18c23bdd11">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows of the matrix.  <br /></td></tr>
+<tr class="separator:a21e22f93a942583ca83cea18c23bdd11 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a4db71b6d794cfcee1624c15c09d62d7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a4db71b6d794cfcee1624c15c09d62d7f">ncol</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of columns of the matrix.  <br /></td></tr>
+<tr class="separator:a4db71b6d794cfcee1624c15c09d62d7f inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix" id="r_a8b8010edcc0869283621e72a9bbc51e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a8b8010edcc0869283621e72a9bbc51e3">nnz</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of nonzero entries.  <br /></td></tr>
+<tr class="separator:a8b8010edcc0869283621e72a9bbc51e3 inherit pub_methods_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix" id="r_ab414a0bf8e2658fc30d2c516f3bf4837"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ab414a0bf8e2658fc30d2c516f3bf4837">Matrix</a> ()</td></tr>
+<tr class="memdesc:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) constructor  <br /></td></tr>
+<tr class="separator:ab414a0bf8e2658fc30d2c516f3bf4837 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix" id="r_ac40b846daa81698ea61aba9dfb1ae361"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac40b846daa81698ea61aba9dfb1ae361">Matrix</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ac40b846daa81698ea61aba9dfb1ae361 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix" id="r_a81c8f71e6eae8ebf79aa206666e666b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a81c8f71e6eae8ebf79aa206666e666b4">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Matrix.html">Matrix</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a81c8f71e6eae8ebf79aa206666e666b4 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix" id="r_a3bc2eeb0940268de5252a9234d126f11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a3bc2eeb0940268de5252a9234d126f11">~Matrix</a> ()</td></tr>
+<tr class="memdesc:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual (empty) destructor.  <br /></td></tr>
+<tr class="separator:a3bc2eeb0940268de5252a9234d126f11 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix" id="r_a26f23d2b331cb7f533fd8585f1ef8d28"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a26f23d2b331cb7f533fd8585f1ef8d28">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read only (we're not providing a general interface for component-wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX_TYPE template parameter to call the get_entry() function which must be defined in all derived classes that are to be fully instantiated.  <br /></td></tr>
+<tr class="separator:a26f23d2b331cb7f533fd8585f1ef8d28 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix" id="r_a0f6a65782771830fd4fa1a16284c6bc9"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a0f6a65782771830fd4fa1a16284c6bc9">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round brackets to give access as a(i,j) for read-write access. The function uses the MATRIX_TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular <a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> does not allow write access, the function should break with an error message.  <br /></td></tr>
+<tr class="separator:a0f6a65782771830fd4fa1a16284c6bc9 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix" id="r_ace9b59cbe514c77f0b3816b144c740f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ace9b59cbe514c77f0b3816b144c740f6">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function to print a matrix row-by-row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices.  <br /></td></tr>
+<tr class="separator:ace9b59cbe514c77f0b3816b144c740f6 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix" id="r_a4f97fa3c94e6fd664e46acb8873a80f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a4f97fa3c94e6fd664e46acb8873a80f8">sparse_indexed_output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:a4f97fa3c94e6fd664e46acb8873a80f8 inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix" id="r_ac7473fb07d4db925b4cf3a22131b561a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#ac7473fb07d4db925b4cf3a22131b561a">sparse_indexed_output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">precision</a>=0, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_bottom_right_zero</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "bottom right" entry regardless of it being zero or not (this allows automatic detection of matrix size in e.g. matlab, python).  <br /></td></tr>
+<tr class="separator:ac7473fb07d4db925b4cf3a22131b561a inherit pub_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afb1660974c8f6218c2a000c2d6c6d267" id="r_afb1660974c8f6218c2a000c2d6c6d267"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCDoubleMatrix.html#afb1660974c8f6218c2a000c2d6c6d267">Matrix_matrix_multiply_method</a></td></tr>
+<tr class="memdesc:afb1660974c8f6218c2a000c2d6c6d267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to determine which matrix-matrix multiplication method is used.  <br /></td></tr>
+<tr class="separator:afb1660974c8f6218c2a000c2d6c6d267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1Matrix"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Matrix')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Matrix.html">oomph::Matrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix" id="r_a2fed2ea1840638eb0ddaa2d4ab1da82f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Matrix.html#a2fed2ea1840638eb0ddaa2d4ab1da82f">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html" title="An OomphLibError object which should be thrown when an run-time error is encountered....">OomphLibError</a></code>.  <br /></td></tr>
+<tr class="separator:a2fed2ea1840638eb0ddaa2d4ab1da82f inherit pro_methods_classoomph_1_1Matrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1DoubleMatrixBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1DoubleMatrixBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1DoubleMatrixBase.html">oomph::DoubleMatrixBase</a></td></tr>
+<tr class="memitem:a86f0315e581cd5b41b75867383aa3760 inherit pro_attribs_classoomph_1_1DoubleMatrixBase" id="r_a86f0315e581cd5b41b75867383aa3760"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a86f0315e581cd5b41b75867383aa3760">Linear_solver_pt</a></td></tr>
+<tr class="separator:a86f0315e581cd5b41b75867383aa3760 inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef2e36e4e5907af2738934f131e8dcf inherit pro_attribs_classoomph_1_1DoubleMatrixBase" id="r_a6ef2e36e4e5907af2738934f131e8dcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMatrixBase.html#a6ef2e36e4e5907af2738934f131e8dcf">Default_linear_solver_pt</a></td></tr>
+<tr class="separator:a6ef2e36e4e5907af2738934f131e8dcf inherit pro_attribs_classoomph_1_1DoubleMatrixBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1CCMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1CCMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1CCMatrix.html">oomph::CCMatrix&lt; double &gt;</a></td></tr>
+<tr class="memitem:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix" id="r_a7dba85934f3059d0163dda06f94ddf9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a7dba85934f3059d0163dda06f94ddf9b">Row_index</a></td></tr>
+<tr class="memdesc:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Row index.  <br /></td></tr>
+<tr class="separator:a7dba85934f3059d0163dda06f94ddf9b inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix" id="r_a6a38ae2bd1a69905375585d5b24c6136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CCMatrix.html#a6a38ae2bd1a69905375585d5b24c6136">Column_start</a></td></tr>
+<tr class="memdesc:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start index for column.  <br /></td></tr>
+<tr class="separator:a6a38ae2bd1a69905375585d5b24c6136 inherit pro_attribs_classoomph_1_1CCMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix" id="r_a55b53c70fe3906a65d0f84c429e963b1"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a55b53c70fe3906a65d0f84c429e963b1">Value</a></td></tr>
+<tr class="memdesc:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal representation of the matrix values, a pointer.  <br /></td></tr>
+<tr class="separator:a55b53c70fe3906a65d0f84c429e963b1 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix" id="r_a8f15f962605f52fc75e8679efc6c8677"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a8f15f962605f52fc75e8679efc6c8677">N</a></td></tr>
+<tr class="memdesc:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows.  <br /></td></tr>
+<tr class="separator:a8f15f962605f52fc75e8679efc6c8677 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix" id="r_ae558ff039363bd2aa163525442090508"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#ae558ff039363bd2aa163525442090508">M</a></td></tr>
+<tr class="memdesc:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns.  <br /></td></tr>
+<tr class="separator:ae558ff039363bd2aa163525442090508 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix" id="r_a1459cbaeec275fe95ba45f7d843b26a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a1459cbaeec275fe95ba45f7d843b26a5">Nnz</a></td></tr>
+<tr class="memdesc:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of non-zero values (i.e. size of Value array)  <br /></td></tr>
+<tr class="separator:a1459cbaeec275fe95ba45f7d843b26a5 inherit pro_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_attribs_classoomph_1_1SparseMatrix"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classoomph_1_1SparseMatrix')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classoomph_1_1SparseMatrix.html">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;</a></td></tr>
+<tr class="memitem:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix" id="r_a71a5ae159c26f93c314c839f4db6eaaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SparseMatrix.html#a71a5ae159c26f93c314c839f4db6eaaf">Zero</a> = T(0)</td></tr>
+<tr class="memdesc:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy zero.  <br /></td></tr>
+<tr class="separator:a71a5ae159c26f93c314c839f4db6eaaf inherit pro_static_attribs_classoomph_1_1SparseMatrix"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for compressed column matrices that store doubles. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02790">2790</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abc80ef8ffa3a961daf6759bb2c574239" name="abc80ef8ffa3a961daf6759bb2c574239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc80ef8ffa3a961daf6759bb2c574239">&#9670;&#160;</a></span>CCDoubleMatrix() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCDoubleMatrix::CCDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+<p>Default constructor, set the default linear solver and matrix-matrix multiplication method. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00572">572</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00267">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, <a class="el" href="matrices_8h_source.html#l00264">oomph::DoubleMatrixBase::Linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l02893">Matrix_matrix_multiply_method</a>.</p>
+
+</div>
+</div>
+<a id="ad98b162e3cc1aac48e9f5e1e06e262a5" name="ad98b162e3cc1aac48e9f5e1e06e262a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98b162e3cc1aac48e9f5e1e06e262a5">&#9670;&#160;</a></span>CCDoubleMatrix() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCDoubleMatrix::CCDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>row_index_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>column_start_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00585">585</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00267">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>, <a class="el" href="matrices_8h_source.html#l00264">oomph::DoubleMatrixBase::Linear_solver_pt</a>, and <a class="el" href="matrices_8h_source.html#l02893">Matrix_matrix_multiply_method</a>.</p>
+
+</div>
+</div>
+<a id="a957569463e2ccab8b45d303d36b4d477" name="a957569463e2ccab8b45d303d36b4d477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957569463e2ccab8b45d303d36b4d477">&#9670;&#160;</a></span>CCDoubleMatrix() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCDoubleMatrix::CCDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a89019bdd7b9a64a2f32cd4efa07fe45c" name="a89019bdd7b9a64a2f32cd4efa07fe45c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89019bdd7b9a64a2f32cd4efa07fe45c">&#9670;&#160;</a></span>~CCDoubleMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::CCDoubleMatrix::~CCDoubleMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Kill the LU factors if they have been setup. </p>
+<p>Destructor: delete the default linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00597">597</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00267">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a59fbc30e6a856794cd2678856c8aea6d" name="a59fbc30e6a856794cd2678856c8aea6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59fbc30e6a856794cd2678856c8aea6d">&#9670;&#160;</a></span>lubksub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::lubksub </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU back solve for given RHS. </p>
+<p>Do the backsubstitution. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00614">614</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00267">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="acb7c9b4e04b877b3ef40be905829eb41" name="acb7c9b4e04b877b3ef40be905829eb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb7c9b4e04b877b3ef40be905829eb41">&#9670;&#160;</a></span>ludecompose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::ludecompose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>LU decomposition using SuperLU. </p>
+<p>Perform LU decomposition. Return the sign of the determinant. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00606">606</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l00267">oomph::DoubleMatrixBase::Default_linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a7e3aada5f3737a9ffd2261c718964852" name="a7e3aada5f3737a9ffd2261c718964852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e3aada5f3737a9ffd2261c718964852">&#9670;&#160;</a></span>matrix_matrix_multiply_method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp; oomph::CCDoubleMatrix::matrix_matrix_multiply_method </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to Matrix_matrix_multiply_method, the flag which determines the matrix matrix multiplication method used. Method 1: First runs through this matrix and matrix_in to find the storage requirements for result - arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2: Grows storage for values and column indices of result 'on the fly' using an array of maps. Faster but more memory intensive. Method 3: Grows storage for values and column indices of result 'on the fly' using a vector of vectors. Not particularly impressive on the platforms we tried... </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02886">2886</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02893">Matrix_matrix_multiply_method</a>.</p>
+
+</div>
+</div>
+<a id="a600a58c92baf401a534598cedcfd3415" name="a600a58c92baf401a534598cedcfd3415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600a58c92baf401a534598cedcfd3415">&#9670;&#160;</a></span>matrix_reduction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::matrix_reduction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>reduced_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced_matrix. Note: Diagonal entries are retained regardless of their size. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l01149">1149</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l03247">oomph::CCMatrix&lt; double &gt;::build()</a>, <a class="el" href="matrices_8h_source.html#l02779">oomph::CCMatrix&lt; double &gt;::Column_start</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02823">ncol()</a>, <a class="el" href="matrices_8h_source.html#l02817">nrow()</a>, <a class="el" href="matrices_8h_source.html#l02776">oomph::CCMatrix&lt; double &gt;::Row_index</a>, and <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>.</p>
+
+</div>
+</div>
+<a id="ae6834fcfc28dca27243ec53ea48d34be" name="ae6834fcfc28dca27243ec53ea48d34be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6834fcfc28dca27243ec53ea48d34be">&#9670;&#160;</a></span>multiply() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>matrix_in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to multiply this matrix by the <a class="el" href="classoomph_1_1CCDoubleMatrix.html" title="A class for compressed column matrices that store doubles.">CCDoubleMatrix</a> matrix_in The multiplication method used can be selected using the flag Matrix_matrix_multiply_method. By default Method 2 is used. Method 1: First runs through this matrix and matrix_in to find the storage requirements for result - arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2: Grows storage for values and column indices of result 'on the fly' using an array of maps. Faster but more memory intensive. Method 3: Grows storage for values and column indices of result 'on the fly' using a vector of vectors. Not particularly impressive on the platforms we tried... </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00821">821</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02692">oomph::CCMatrix&lt; double &gt;::column_start()</a>, <a class="el" href="matrices_8h_source.html#l02779">oomph::CCMatrix&lt; double &gt;::Column_start</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00571">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02893">Matrix_matrix_multiply_method</a>, <a class="el" href="matrices_8h_source.html#l00568">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02823">ncol()</a>, <a class="el" href="matrices_8h_source.html#l00574">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Nnz</a>, <a class="el" href="matrices_8h_source.html#l02817">nrow()</a>, <a class="el" href="matrices_8h_source.html#l02704">oomph::CCMatrix&lt; double &gt;::row_index()</a>, <a class="el" href="matrices_8h_source.html#l02776">oomph::CCMatrix&lt; double &gt;::Row_index</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>, and <a class="el" href="matrices_8h_source.html#l00616">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::value()</a>.</p>
+
+</div>
+</div>
+<a id="add24c25e344b84fb5b732e294af5e8b2" name="add24c25e344b84fb5b732e294af5e8b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add24c25e344b84fb5b732e294af5e8b2">&#9670;&#160;</a></span>multiply() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the matrix by the vector x: soln=Ax. </p>
+<p>Multiply the matrix by the vector x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a78204eab557e0dc99618e41a28a5c092">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00622">622</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02779">oomph::CCMatrix&lt; double &gt;::Column_start</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00568">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02823">ncol()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02776">oomph::CCMatrix&lt; double &gt;::Row_index</a>, <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a582352912b0a7e097f9ac31c5054beed" name="a582352912b0a7e097f9ac31c5054beed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582352912b0a7e097f9ac31c5054beed">&#9670;&#160;</a></span>multiply_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::multiply_transpose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>soln</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply the transposed matrix by the vector x: soln=A^T x. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a843d44405b70da1d96b43218a21e6ffc">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8cc_source.html#l00715">715</a> of file <a class="el" href="matrices_8cc_source.html">matrices.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02779">oomph::CCMatrix&lt; double &gt;::Column_start</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l00568">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::N</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="matrices_8h_source.html#l02817">nrow()</a>, <a class="el" href="matrices_8h_source.html#l02776">oomph::CCMatrix&lt; double &gt;::Row_index</a>, <a class="el" href="matrices_8h_source.html#l00565">oomph::SparseMatrix&lt; T, MATRIX_TYPE &gt;::Value</a>, and <a class="el" href="double__vector_8h_source.html#l00254">oomph::DoubleVector::values_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aa38cc544ab30f9318161763e13c20957" name="aa38cc544ab30f9318161763e13c20957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38cc544ab30f9318161763e13c20957">&#9670;&#160;</a></span>ncol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::CCDoubleMatrix::ncol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of columns of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a253feffbf1db1976cdd86c6134c50abe">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02823">2823</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classoomph_1_1Matrix.html#ad1af46b34096c348272b0dfacb5ce6a9">oomph::Matrix&lt; T, MATRIX_TYPE &gt;::ncol()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l01149">matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">multiply()</a>, and <a class="el" href="matrices_8cc_source.html#l00622">multiply()</a>.</p>
+
+</div>
+</div>
+<a id="ab541153fa5ab2c1bc18e5339bacadfb9" name="ab541153fa5ab2c1bc18e5339bacadfb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab541153fa5ab2c1bc18e5339bacadfb9">&#9670;&#160;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::CCDoubleMatrix::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of rows of the matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#acdcd6e1ea2bf2380f1a2fa32c7829cb5">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02817">2817</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classoomph_1_1Matrix.html#ac366ca5324d3e00e23d9800f3d5f4d5f">oomph::Matrix&lt; T, MATRIX_TYPE &gt;::nrow()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l01149">matrix_reduction()</a>, <a class="el" href="matrices_8cc_source.html#l00821">multiply()</a>, and <a class="el" href="matrices_8cc_source.html#l00715">multiply_transpose()</a>.</p>
+
+</div>
+</div>
+<a id="a2fd1f3dfa66ed45be1ced60d2835634c" name="a2fd1f3dfa66ed45be1ced60d2835634c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fd1f3dfa66ed45be1ced60d2835634c">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::CCDoubleMatrix::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the round-bracket access operator to provide read-only (const) access to the data. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1DoubleMatrixBase.html#a20b85f0286f80464f42f0846fede2d77">oomph::DoubleMatrixBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02830">2830</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02654">oomph::CCMatrix&lt; T &gt;::get_entry()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a38e8e217e54cd435769ac7d88f3e95af" name="a38e8e217e54cd435769ac7d88f3e95af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e8e217e54cd435769ac7d88f3e95af">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::CCDoubleMatrix::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afb1660974c8f6218c2a000c2d6c6d267" name="afb1660974c8f6218c2a000c2d6c6d267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1660974c8f6218c2a000c2d6c6d267">&#9670;&#160;</a></span>Matrix_matrix_multiply_method</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::CCDoubleMatrix::Matrix_matrix_multiply_method</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag to determine which matrix-matrix multiplication method is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02893">2893</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8cc_source.html#l00572">CCDoubleMatrix()</a>, <a class="el" href="matrices_8cc_source.html#l00585">CCDoubleMatrix()</a>, <a class="el" href="matrices_8h_source.html#l02886">matrix_matrix_multiply_method()</a>, and <a class="el" href="matrices_8cc_source.html#l00821">multiply()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="matrices_8h_source.html">matrices.h</a></li>
+<li><a class="el" href="matrices_8cc_source.html">matrices.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:39
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

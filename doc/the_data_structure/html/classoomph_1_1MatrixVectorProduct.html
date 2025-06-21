@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MatrixVectorProduct Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1MatrixVectorProduct-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::MatrixVectorProduct Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> vector product helper class - primarily a wrapper to Trilinos's Epetra matrix vector product methods. This allows the epetra matrix to be assembled once and the matrix vector product to be performed many times.  
+ <a href="classoomph_1_1MatrixVectorProduct.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::MatrixVectorProduct:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1MatrixVectorProduct.png" usemap="#oomph::MatrixVectorProduct_map" alt=""/>
+  <map id="oomph::MatrixVectorProduct_map" name="oomph::MatrixVectorProduct_map">
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,243,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af0c48ee8ae2ae94b5f3f38a8071c22f9" id="r_af0c48ee8ae2ae94b5f3f38a8071c22f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#af0c48ee8ae2ae94b5f3f38a8071c22f9">MatrixVectorProduct</a> ()</td></tr>
+<tr class="memdesc:af0c48ee8ae2ae94b5f3f38a8071c22f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:af0c48ee8ae2ae94b5f3f38a8071c22f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b93b64514a6902bfd490299bd8587a0" id="r_a2b93b64514a6902bfd490299bd8587a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a2b93b64514a6902bfd490299bd8587a0">MatrixVectorProduct</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a2b93b64514a6902bfd490299bd8587a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a2b93b64514a6902bfd490299bd8587a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc8c0a45a060c3c6a4a5ca40a306a319" id="r_afc8c0a45a060c3c6a4a5ca40a306a319"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#afc8c0a45a060c3c6a4a5ca40a306a319">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afc8c0a45a060c3c6a4a5ca40a306a319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:afc8c0a45a060c3c6a4a5ca40a306a319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add19a8ea5d1901423e334587446f55db" id="r_add19a8ea5d1901423e334587446f55db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#add19a8ea5d1901423e334587446f55db">~MatrixVectorProduct</a> ()</td></tr>
+<tr class="memdesc:add19a8ea5d1901423e334587446f55db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:add19a8ea5d1901423e334587446f55db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f61122d228e81ccff144b1298ccbd36" id="r_a2f61122d228e81ccff144b1298ccbd36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a2f61122d228e81ccff144b1298ccbd36">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a2f61122d228e81ccff144b1298ccbd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the memory  <br /></td></tr>
+<tr class="separator:a2f61122d228e81ccff144b1298ccbd36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec74f9bdb65ee7ce86590e26a705f3e9" id="r_aec74f9bdb65ee7ce86590e26a705f3e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#aec74f9bdb65ee7ce86590e26a705f3e9">setup</a> (<a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *matrix_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">col_dist_pt</a>=0)</td></tr>
+<tr class="memdesc:aec74f9bdb65ee7ce86590e26a705f3e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the matrix vector product operator. WARNING: This class is wrapper to Trilinos Epetra matrix vector multiply methods, if Trilinos is not installed then this class will function as expected, but there will be no computational speed gain. By default the Epetra_CrsMatrix::multiply(...) are employed. The optional argument col_dist_pt is the distribution of: x if using multiply(...) or y if using multiply_transpose(...) where this is A x = y. By default, this is assumed to the uniformly distributed based on matrix_pt-&gt;<a class="el" href="classoomph_1_1MatrixVectorProduct.html#ab11a0763e2cc2ed4e74b06eea664b60e" title="Access function to the number of columns.">ncol()</a>.  <br /></td></tr>
+<tr class="separator:aec74f9bdb65ee7ce86590e26a705f3e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29ba50f1a77bf0e316c3417bcff71ee" id="r_ac29ba50f1a77bf0e316c3417bcff71ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#ac29ba50f1a77bf0e316c3417bcff71ee">multiply</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;y) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac29ba50f1a77bf0e316c3417bcff71ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the operator to the vector x and return the result in the vector y.  <br /></td></tr>
+<tr class="separator:ac29ba50f1a77bf0e316c3417bcff71ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b7670797fe289ea814968f2f9469fd5" id="r_a2b7670797fe289ea814968f2f9469fd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a2b7670797fe289ea814968f2f9469fd5">multiply_transpose</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;y) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a2b7670797fe289ea814968f2f9469fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the transpose of the operator to the vector x and return the result in the vector y.  <br /></td></tr>
+<tr class="separator:a2b7670797fe289ea814968f2f9469fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11a0763e2cc2ed4e74b06eea664b60e" id="r_ab11a0763e2cc2ed4e74b06eea664b60e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#ab11a0763e2cc2ed4e74b06eea664b60e">ncol</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab11a0763e2cc2ed4e74b06eea664b60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the number of columns.  <br /></td></tr>
+<tr class="separator:ab11a0763e2cc2ed4e74b06eea664b60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac9492d59cff9d9b0098712ae72989cd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7522391265c46e6c748fd660eae66f5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7522391265c46e6c748fd660eae66f5e">DistributableLinearAlgebraObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ada5f539f36451c06e69de79bb129521b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ada5f539f36451c06e69de79bb129521b">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4038de53b5737dc625411e7848d21dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_abfa9cf25494c796d62b15bad586fab47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#abfa9cf25494c796d62b15bad586fab47">distribution_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <br /></td></tr>
+<tr class="separator:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7569556f14fd68b28508920e89bd5eee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a9bd7e1d242c69a28da85a804a7717fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a21e966b025edec79067b41d7f1f25220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ab00a3919b8634c698749f14a4d92947d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a5505731e7e73d7e4251c67c7adec6bf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a8c35baa65e335043f62954c92c090a5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the communicator_pt is null then the distribution is not setup then false is returned, otherwise return true  <br /></td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac5340bac40b9559b0378037b57005203"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_adad20ac61a61d907f823da7694b50616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a431b4a1aec80593b729aef89d26dd408" id="r_a431b4a1aec80593b729aef89d26dd408"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a431b4a1aec80593b729aef89d26dd408">trilinos_multiply_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;y) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a431b4a1aec80593b729aef89d26dd408"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function for multiply(...)  <br /></td></tr>
+<tr class="separator:a431b4a1aec80593b729aef89d26dd408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192d6aba55af4354c22bc44ab9c9b064" id="r_a192d6aba55af4354c22bc44ab9c9b064"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a192d6aba55af4354c22bc44ab9c9b064">trilinos_multiply_transpose_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;x, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;y) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a192d6aba55af4354c22bc44ab9c9b064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function for multiply_transpose(...)  <br /></td></tr>
+<tr class="separator:a192d6aba55af4354c22bc44ab9c9b064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a14264b497811bc0d959be7f3022cd4d2" id="r_a14264b497811bc0d959be7f3022cd4d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Epetra_CrsMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a14264b497811bc0d959be7f3022cd4d2">Epetra_matrix_pt</a></td></tr>
+<tr class="memdesc:a14264b497811bc0d959be7f3022cd4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Epetra version of the matrix.  <br /></td></tr>
+<tr class="separator:a14264b497811bc0d959be7f3022cd4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad912d5eeef011117feef7af1cabeb631" id="r_ad912d5eeef011117feef7af1cabeb631"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#ad912d5eeef011117feef7af1cabeb631">Using_trilinos</a></td></tr>
+<tr class="memdesc:ad912d5eeef011117feef7af1cabeb631"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean indicating whether we are using trilinos to perform matvec  <br /></td></tr>
+<tr class="separator:ad912d5eeef011117feef7af1cabeb631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3932cd524581a670528ee807bf28ff1a" id="r_a3932cd524581a670528ee807bf28ff1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a3932cd524581a670528ee807bf28ff1a">Oomph_matrix_pt</a></td></tr>
+<tr class="memdesc:a3932cd524581a670528ee807bf28ff1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">an oomph-lib matrix  <br /></td></tr>
+<tr class="separator:a3932cd524581a670528ee807bf28ff1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986b1f7596b96329644f082b3303e28a" id="r_a986b1f7596b96329644f082b3303e28a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#a986b1f7596b96329644f082b3303e28a">Column_distribution_pt</a></td></tr>
+<tr class="memdesc:a986b1f7596b96329644f082b3303e28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distribution of: x if using multiply(...) or y if using multiply_transpose(...) where this is A x = y.  <br /></td></tr>
+<tr class="separator:a986b1f7596b96329644f082b3303e28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade21a9a8255e6adab4ff367d3716f851" id="r_ade21a9a8255e6adab4ff367d3716f851"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixVectorProduct.html#ade21a9a8255e6adab4ff367d3716f851">Ncol</a></td></tr>
+<tr class="memdesc:ade21a9a8255e6adab4ff367d3716f851"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of columns of the matrix  <br /></td></tr>
+<tr class="separator:ade21a9a8255e6adab4ff367d3716f851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a30742aa2ac9abcfa037179f2d28ff43a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classoomph_1_1Matrix.html" title="Abstract base class for matrices, templated by the type of object that is stored in them and the type...">Matrix</a> vector product helper class - primarily a wrapper to Trilinos's Epetra matrix vector product methods. This allows the epetra matrix to be assembled once and the matrix vector product to be performed many times. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00049">49</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af0c48ee8ae2ae94b5f3f38a8071c22f9" name="af0c48ee8ae2ae94b5f3f38a8071c22f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0c48ee8ae2ae94b5f3f38a8071c22f9">&#9670;&#160;</a></span>MatrixVectorProduct() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MatrixVectorProduct::MatrixVectorProduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00053">53</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrix__vector__product_8h_source.html#l00136">Column_distribution_pt</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00124">Epetra_matrix_pt</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00132">Oomph_matrix_pt</a>.</p>
+
+</div>
+</div>
+<a id="a2b93b64514a6902bfd490299bd8587a0" name="a2b93b64514a6902bfd490299bd8587a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b93b64514a6902bfd490299bd8587a0">&#9670;&#160;</a></span>MatrixVectorProduct() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MatrixVectorProduct::MatrixVectorProduct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="add19a8ea5d1901423e334587446f55db" name="add19a8ea5d1901423e334587446f55db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add19a8ea5d1901423e334587446f55db">&#9670;&#160;</a></span>~MatrixVectorProduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MatrixVectorProduct::~MatrixVectorProduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00070">70</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrix__vector__product_8h_source.html#l00076">clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2f61122d228e81ccff144b1298ccbd36" name="a2f61122d228e81ccff144b1298ccbd36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f61122d228e81ccff144b1298ccbd36">&#9670;&#160;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clear the memory </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00076">76</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrix__vector__product_8h_source.html#l00136">Column_distribution_pt</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00124">Epetra_matrix_pt</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00132">Oomph_matrix_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00034">oomph::PseudoElasticFSIPreconditioner::clean_up_memory()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00070">~MatrixVectorProduct()</a>.</p>
+
+</div>
+</div>
+<a id="ac29ba50f1a77bf0e316c3417bcff71ee" name="ac29ba50f1a77bf0e316c3417bcff71ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac29ba50f1a77bf0e316c3417bcff71ee">&#9670;&#160;</a></span>multiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply the operator to the vector x and return the result in the vector y. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8cc_source.html#l00108">108</a> of file <a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00136">Column_distribution_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01782">oomph::CRDoubleMatrix::multiply()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00132">Oomph_matrix_pt</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00242">trilinos_multiply_helper()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00129">Using_trilinos</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fsi__preconditioners_8h_source.html#l00374">oomph::FSIPreconditioner::preconditioner_solve()</a>, <a class="el" href="pseudo__elastic__fsi__preconditioner_8cc_source.html#l00280">oomph::PseudoElasticFSIPreconditioner::preconditioner_solve()</a>, <a class="el" href="navier__stokes__preconditioners_8cc_source.html#l00660">oomph::NavierStokesSchurComplementPreconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00495">oomph::PressureBasedSolidLSCPreconditioner::preconditioner_solve()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00402">oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner::preconditioner_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a2b7670797fe289ea814968f2f9469fd5" name="a2b7670797fe289ea814968f2f9469fd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b7670797fe289ea814968f2f9469fd5">&#9670;&#160;</a></span>multiply_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::multiply_transpose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply the transpose of the operator to the vector x and return the result in the vector y. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8cc_source.html#l00177">177</a> of file <a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00136">Column_distribution_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="matrices_8cc_source.html#l01882">oomph::CRDoubleMatrix::multiply_transpose()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00132">Oomph_matrix_pt</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00287">trilinos_multiply_transpose_helper()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00129">Using_trilinos</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="navier__stokes__preconditioners_8cc_source.html#l00660">oomph::NavierStokesSchurComplementPreconditioner::preconditioner_solve()</a>, <a class="el" href="solid__preconditioners_8cc_source.html#l00495">oomph::PressureBasedSolidLSCPreconditioner::preconditioner_solve()</a>, and <a class="el" href="general__purpose__space__time__subsidiary__block__preconditioner_8cc_source.html#l00402">oomph::SpaceTimeNavierStokesSubsidiaryPreconditioner::preconditioner_solve()</a>.</p>
+
+</div>
+</div>
+<a id="ab11a0763e2cc2ed4e74b06eea664b60e" name="ab11a0763e2cc2ed4e74b06eea664b60e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11a0763e2cc2ed4e74b06eea664b60e">&#9670;&#160;</a></span>ncol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp; oomph::MatrixVectorProduct::ncol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to the number of columns. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00109">109</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrix__vector__product_8h_source.html#l00139">Ncol</a>.</p>
+
+</div>
+</div>
+<a id="afc8c0a45a060c3c6a4a5ca40a306a319" name="afc8c0a45a060c3c6a4a5ca40a306a319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc8c0a45a060c3c6a4a5ca40a306a319">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixVectorProduct.html">MatrixVectorProduct</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="aec74f9bdb65ee7ce86590e26a705f3e9" name="aec74f9bdb65ee7ce86590e26a705f3e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec74f9bdb65ee7ce86590e26a705f3e9">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> *&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td>
+          <td class="paramname"><em>col_dist_pt</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup the matrix vector product operator. WARNING: This class is wrapper to Trilinos Epetra matrix vector multiply methods, if Trilinos is not installed then this class will function as expected, but there will be no computational speed gain. By default the Epetra_CrsMatrix::multiply(...) are employed. The optional argument col_dist_pt is the distribution of: x if using multiply(...) or y if using multiply_transpose(...) where this is A x = y. By default, this is assumed to the uniformly distributed based on matrix_pt-&gt;<a class="el" href="classoomph_1_1MatrixVectorProduct.html#ab11a0763e2cc2ed4e74b06eea664b60e" title="Access function to the number of columns.">ncol()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8cc_source.html#l00041">41</a> of file <a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00076">clean_up_memory()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00136">Column_distribution_pt</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00289">oomph::TrilinosEpetraHelpers::create_distributed_epetra_matrix()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00124">Epetra_matrix_pt</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="matrices_8h_source.html#l01008">oomph::CRDoubleMatrix::ncol()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00139">Ncol</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00132">Oomph_matrix_pt</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01303">oomph::TimingHelpers::timer()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00129">Using_trilinos</a>.</p>
+
+</div>
+</div>
+<a id="a431b4a1aec80593b729aef89d26dd408" name="a431b4a1aec80593b729aef89d26dd408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431b4a1aec80593b729aef89d26dd408">&#9670;&#160;</a></span>trilinos_multiply_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::trilinos_multiply_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function for multiply(...) </p>
+<p>Apply the operator to the vector x and return the result in the vector y (helper function) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8cc_source.html#l00242">242</a> of file <a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__helpers_8cc_source.html#l00180">oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00041">oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00124">Epetra_matrix_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8cc_source.html#l00108">multiply()</a>.</p>
+
+</div>
+</div>
+<a id="a192d6aba55af4354c22bc44ab9c9b064" name="a192d6aba55af4354c22bc44ab9c9b064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192d6aba55af4354c22bc44ab9c9b064">&#9670;&#160;</a></span>trilinos_multiply_transpose_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MatrixVectorProduct::trilinos_multiply_transpose_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function for multiply_transpose(...) </p>
+<p>Apply the transpose of the operator to the vector x and return the result in the vector y (helper function) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8cc_source.html#l00287">287</a> of file <a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__helpers_8cc_source.html#l00180">oomph::TrilinosEpetraHelpers::copy_to_oomphlib_vector()</a>, <a class="el" href="trilinos__helpers_8cc_source.html#l00041">oomph::TrilinosEpetraHelpers::create_distributed_epetra_vector()</a>, and <a class="el" href="matrix__vector__product_8h_source.html#l00124">Epetra_matrix_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8cc_source.html#l00177">multiply_transpose()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a986b1f7596b96329644f082b3303e28a" name="a986b1f7596b96329644f082b3303e28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a986b1f7596b96329644f082b3303e28a">&#9670;&#160;</a></span>Column_distribution_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a>* oomph::MatrixVectorProduct::Column_distribution_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The distribution of: x if using multiply(...) or y if using multiply_transpose(...) where this is A x = y. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00136">136</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8h_source.html#l00076">clean_up_memory()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00053">MatrixVectorProduct()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00108">multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00177">multiply_transpose()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a14264b497811bc0d959be7f3022cd4d2" name="a14264b497811bc0d959be7f3022cd4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14264b497811bc0d959be7f3022cd4d2">&#9670;&#160;</a></span>Epetra_matrix_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Epetra_CrsMatrix</a>* oomph::MatrixVectorProduct::Epetra_matrix_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Epetra version of the matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00124">124</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8h_source.html#l00076">clean_up_memory()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00053">MatrixVectorProduct()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00242">trilinos_multiply_helper()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00287">trilinos_multiply_transpose_helper()</a>.</p>
+
+</div>
+</div>
+<a id="ade21a9a8255e6adab4ff367d3716f851" name="ade21a9a8255e6adab4ff367d3716f851"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade21a9a8255e6adab4ff367d3716f851">&#9670;&#160;</a></span>Ncol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::MatrixVectorProduct::Ncol</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>number of columns of the matrix </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00139">139</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8h_source.html#l00109">ncol()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>.</p>
+
+</div>
+</div>
+<a id="a3932cd524581a670528ee807bf28ff1a" name="a3932cd524581a670528ee807bf28ff1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3932cd524581a670528ee807bf28ff1a">&#9670;&#160;</a></span>Oomph_matrix_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a>* oomph::MatrixVectorProduct::Oomph_matrix_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>an oomph-lib matrix </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00132">132</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8h_source.html#l00076">clean_up_memory()</a>, <a class="el" href="matrix__vector__product_8h_source.html#l00053">MatrixVectorProduct()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00108">multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00177">multiply_transpose()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>.</p>
+
+</div>
+</div>
+<a id="ad912d5eeef011117feef7af1cabeb631" name="ad912d5eeef011117feef7af1cabeb631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad912d5eeef011117feef7af1cabeb631">&#9670;&#160;</a></span>Using_trilinos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MatrixVectorProduct::Using_trilinos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>boolean indicating whether we are using trilinos to perform matvec </p>
+
+<p class="definition">Definition at line <a class="el" href="matrix__vector__product_8h_source.html#l00129">129</a> of file <a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrix__vector__product_8cc_source.html#l00108">multiply()</a>, <a class="el" href="matrix__vector__product_8cc_source.html#l00177">multiply_transpose()</a>, and <a class="el" href="matrix__vector__product_8cc_source.html#l00041">setup()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="matrix__vector__product_8h_source.html">matrix_vector_product.h</a></li>
+<li><a class="el" href="matrix__vector__product_8cc_source.html">matrix_vector_product.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:55
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

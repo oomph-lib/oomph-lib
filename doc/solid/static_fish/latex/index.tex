@@ -1,0 +1,443 @@
+\chapter{Demo problem\+: Boundary-\/driven elastic deformation of a fish-\/shaped domain}
+\hypertarget{index}{}\label{index}\index{Demo problem: Boundary-\/driven elastic deformation of a fish-\/shaped domain@{Demo problem: Boundary-\/driven elastic deformation of a fish-\/shaped domain}}
+Detailed documentation to be written. Here\textquotesingle{}s a plot of the result and the already fairly well documented driver code...
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{static_fish}
+\doxyfigcaption{Boundary-\/driven elastic deformation of a fish-\/shaped domain. }
+\end{DoxyImage}
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//\ Driver\ for\ elastic\ deformation\ of\ a\ fish-\/shaped\ domain\ with}}
+\DoxyCodeLine{\textcolor{comment}{//\ adaptivity\ -\/-\/\ deformation\ is\ driven\ by\ displacement\ of}}
+\DoxyCodeLine{\textcolor{comment}{//\ GeomObject-\/based\ boundary!}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ Generic\ oomph-\/lib\ headers}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Solid\ mechanics}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}solid.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ fish\ mesh\ }}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/fish\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Refineable\ fish\ mesh\ upgraded\ to\ become\ a\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableFishMesh<ELEMENT>,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Build\ underlying\ adaptive\ fish\ mesh\ and\ then\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ set\ current\ Eulerian\ coordinates\ to\ be\ the\ Lagrangian\ ones.}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pass\ pointer\ to\ geometric\ objects\ that\ specify\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ fish's\ back\ in\ the\ "{}current"{}\ and\ "{}undeformed"{}\ configurations,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ pointer\ to\ timestepper\ (defaults\ to\ Static)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{comment}{//\ Note:\ FishMesh\ is\ virtual\ base\ and\ its\ constructor\ is\ automatically}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ called\ first!\ -\/-\/>\ this\ is\ where\ we\ need\ to\ build\ the\ mesh;}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ constructors\ of\ the\ derived\ meshes\ don't\ call\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ base\ constructor\ again\ and\ simply\ add\ the\ extra\ functionality.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}(\mbox{\hyperlink{classElasticFishMesh}{GeomObject}}*\ \mbox{\hyperlink{classElasticFishMesh}{back\_pt}},\ \mbox{\hyperlink{classElasticFishMesh}{GeomObject}}*\ \mbox{\hyperlink{classElasticFishMesh}{undeformed\_back\_pt}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticFishMesh}{time\_stepper\_pt}}=\&\mbox{\hyperlink{classElasticFishMesh_a76c4d63d48b9ee48c3742e55057cfba0}{Mesh::Default\_TimeStepper}})\ :\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticFishMesh}{FishMesh}}<\mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticFishMesh}{back\_pt}},\mbox{\hyperlink{classElasticFishMesh}{time\_stepper\_pt}}),\ }
+\DoxyCodeLine{\ \ RefineableFishMesh<\mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticFishMesh}{back\_pt}},\mbox{\hyperlink{classElasticFishMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Mesh\ has\ been\ built,\ adaptivity\ etc\ has\ been\ set\ up\ -\/-\/>\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ assign\ the\ Lagrangian\ coordinates\ so\ that\ the\ current}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ configuration\ becomes\ the\ stress-\/free\ initial\ configuration\ }}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ "{}undeformed"{}\ domain:\ This\ is\ a\ "{}deep"{}\ copy\ of\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Domain\ that\ we\ used\ to\ create\ set\ the\ Eulerian\ coordinates}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ in\ the\ initial\ mesh\ -\/-\/\ the\ original\ domain\ (accessible\ via\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ the\ private\ member\ data\ Domain\_pt)\ will\ be\ used\ to\ update}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ the\ position\ of\ the\ boundary\ nodes;\ the\ copy\ that\ we're}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ creating\ here\ will\ be\ used\ to\ determine\ the\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ of\ any\ newly\ created\ SolidNodes\ during\ mesh\ refinement}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticFishMesh}{xi\_nose}}\ =\ this-\/>\mbox{\hyperlink{classElasticFishMesh}{Domain\_pt}}-\/>xi\_nose();\ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticFishMesh}{xi\_tail}}\ =\ this-\/>\mbox{\hyperlink{classElasticFishMesh}{Domain\_pt}}-\/>xi\_tail();}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{FishDomain}}(\mbox{\hyperlink{classElasticFishMesh}{undeformed\_back\_pt}},\mbox{\hyperlink{classElasticFishMesh}{xi\_nose}},\mbox{\hyperlink{classElasticFishMesh}{xi\_tail}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements\ and\ set\ the\ undeformed\ macro\ element\ pointer}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{n\_element}}=this-\/>\mbox{\hyperlink{classElasticFishMesh}{nelement}}();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{e}}=0;\mbox{\hyperlink{classElasticFishMesh}{e}}<\mbox{\hyperlink{classElasticFishMesh}{n\_element}};\mbox{\hyperlink{classElasticFishMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ full\ element\ type\ }}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticFishMesh}{el\_pt}}=\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}*\textcolor{keyword}{>}(this-\/>\mbox{\hyperlink{classElasticFishMesh}{element\_pt}}(\mbox{\hyperlink{classElasticFishMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ macro\ element\ so\ the\ curvlinear\ boundaries}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ of\ the\ undeformed\ mesh/domain\ get\ picked\ up\ during\ adaptive}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ mesh\ refinement}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{el\_pt}}-\/>set\_undeformed\_macro\_elem\_pt(}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}}-\/>macro\_element\_pt(\mbox{\hyperlink{classElasticFishMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Use\ MacroElement\ representation\ for\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Lagrangian\ coordinates\ of\ newly\ created\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{el\_pt}}-\/>enable\_use\_of\_undeformed\_macro\_element\_for\_new\_lagrangian\_coords();}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor:\ Kill\ "{}undeformed"{}\ Domain}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}{\string~ElasticFishMesh}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ "{}undeformed"{}\ Domain\ -\/-\/\ used\ to\ determine\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Lagrangian\ coordinates\ of\ any\ newly\ created\ SolidNodes\ during}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Mesh\ refinement}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticFishMesh}{Domain}}*\ \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ strain\ energy\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticFishMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticFishMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Elastic\ modulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{E}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ "{}Mooney\ Rivlin"{}\ coefficient\ for\ generalised\ Mooney\ Rivlin\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Body\ force\ vector:\ Vertically\ downwards\ with\ magnitude\ Gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a313e702a9e8fdec808702c9bbf38b192}{body\_force}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticFishMesh}{t}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticFishMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticFishMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticFishMesh}{b}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticFishMesh}{b}}[0]=0.0;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticFishMesh}{b}}[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Boundary-\/driven\ elastic\ deformation\ of\ fish-\/shaped\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticFishProblem}{ElasticFishProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticFishProblem_adf9fdb0b94ac76b7fdb34bc7fa809a41}{ElasticFishProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ simulation.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_aaaf23036d8f282cff88e497ad214237f}{run}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}*\ \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{\textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_a5cd7dbd2bc99ccf850c1a58d0b401979}{doc\_solution}}(\mbox{\hyperlink{classElasticFishMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_a41badf8aa60bf52d888338039168fcb3}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve:\ We're\ dealing\ with\ a\ static\ problem\ so}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ nodal\ positions\ before\ the\ next\ solve\ merely\ serve\ as}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ initial\ conditions.\ For\ meshes\ that\ are\ very\ strongly\ refined}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ near\ the\ boundary,\ the\ update\ of\ the\ displacement\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ conditions\ (which\ only\ moves\ the\ SolidNodes\ *on*\ the\ boundary),}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ can\ lead\ to\ strongly\ distorted\ meshes.\ This\ can\ cause\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Newton\ method\ to\ fail\ -\/-\/>\ the\ overall\ method\ is\ actually\ more\ robust}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ if\ we\ use\ the\ nodal\ positions\ as\ determined\ by\ the\ Domain/MacroElement-\/}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ based\ mesh\ update\ as\ initial\ guesses.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_a7c22fcff8d94166797e87d70017540d6}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classElasticFishMesh}{update\_all\_solid\_nodes}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}()-\/>node\_update(\mbox{\hyperlink{classElasticFishMesh}{update\_all\_solid\_nodes}});}
+\DoxyCodeLine{\ \ \}\ \ \ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ adapt:\ Pin\ all\ redundant\ pressure\ nodes\ (if\ required)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_ae54b974caafe717309ce7abc5e7f824d}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh_a76c4d63d48b9ee48c3742e55057cfba0}{PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}()-\/>\mbox{\hyperlink{classElasticFishMesh}{element\_pt}}());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Geometric\ object\ that\ represents\ the\ deformable\ fish\ back}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{Circle}}*\ \mbox{\hyperlink{classElasticFishProblem_a1a026c063e41c004f656988d6bfd541b}{Fish\_back\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classElasticFishProblem_adf9fdb0b94ac76b7fdb34bc7fa809a41}{ElasticFishProblem<ELEMENT>::ElasticFishProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ coordinates\ and\ radius\ for\ the\ circle\ that\ will\ become\ the\ fish\ back}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticFishMesh}{x\_c}}=0.5;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticFishMesh}{y\_c}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticFishMesh}{r\_back}}=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ geometric\ object\ that\ will\ become\ the\ deformable\ fish\ back}}
+\DoxyCodeLine{\ \textcolor{comment}{//GeomObject*\ fish\_back\_pt=new\ ElasticFishBackElement(x\_c,y\_c,r\_back);}}
+\DoxyCodeLine{\ Fish\_back\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{Circle}}(\mbox{\hyperlink{classElasticFishMesh}{x\_c}},\mbox{\hyperlink{classElasticFishMesh}{y\_c}},\mbox{\hyperlink{classElasticFishMesh}{r\_back}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ geometric\ object\ that\ specifies\ the\ fish\ back\ in\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ undeformed\ configuration\ (basically\ a\ deep\ copy\ of\ the\ previous\ one)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{GeomObject}}*\ \mbox{\hyperlink{classElasticFishMesh}{undeformed\_fish\_back\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{Circle}}(\mbox{\hyperlink{classElasticFishMesh}{x\_c}},\mbox{\hyperlink{classElasticFishMesh}{y\_c}},\mbox{\hyperlink{classElasticFishMesh}{r\_back}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ fish\ mesh\ with\ geometric\ objects\ that\ specify\ the\ deformable}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ undeformed\ fish\ back\ }}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}(Fish\_back\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{undeformed\_fish\_back\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{Z2ErrorEstimator}}*\ \mbox{\hyperlink{classElasticFishMesh}{error\_estimator\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{\ mesh\_pt()-\/>spatial\_error\_estimator\_pt()=\mbox{\hyperlink{classElasticFishMesh}{error\_estimator\_pt}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Change/doc\ targets\ for\ mesh\ adaptation}}
+\DoxyCodeLine{\ mesh\_pt()-\/>max\_permitted\_error()=0.05;}
+\DoxyCodeLine{\ mesh\_pt()-\/>min\_permitted\_error()=0.005;}
+\DoxyCodeLine{\ mesh\_pt()-\/>doc\_adaptivity\_targets(\mbox{\hyperlink{classElasticFishMesh}{cout}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ all\ nodal\ positions\ apart\ from\ those\ on\ the\ tail}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{num\_bound}}\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{ibound}}=0;\mbox{\hyperlink{classElasticFishMesh}{ibound}}<\mbox{\hyperlink{classElasticFishMesh}{num\_bound}};\mbox{\hyperlink{classElasticFishMesh}{ibound}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticFishMesh}{ibound}}!=2)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{num\_nod}}=mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{classElasticFishMesh}{ibound}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{inod}}=0;\mbox{\hyperlink{classElasticFishMesh}{inod}}<\mbox{\hyperlink{classElasticFishMesh}{num\_nod}};\mbox{\hyperlink{classElasticFishMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{i}}=0;\mbox{\hyperlink{classElasticFishMesh}{i}}<2;\mbox{\hyperlink{classElasticFishMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classElasticFishMesh}{ibound}},\mbox{\hyperlink{classElasticFishMesh}{inod}})-\/>pin\_position(\mbox{\hyperlink{classElasticFishMesh}{i}});\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements\ in\ the\ mesh\ to\ set\ parameters/function\ pointers}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \ \mbox{\hyperlink{classElasticFishMesh}{n\_element}}\ =mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{i}}=0;\mbox{\hyperlink{classElasticFishMesh}{i}}<\mbox{\hyperlink{classElasticFishMesh}{n\_element}};\mbox{\hyperlink{classElasticFishMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}\ *\mbox{\hyperlink{classElasticFishMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticFishMesh}{ELEMENT}}*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{classElasticFishMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{el\_pt}}-\/>body\_force\_fct\_pt()=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a313e702a9e8fdec808702c9bbf38b192}{Global\_Physical\_Variables::body\_force}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh_a76c4d63d48b9ee48c3742e55057cfba0}{PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ mesh\_pt()-\/>\mbox{\hyperlink{classElasticFishMesh}{element\_pt}}());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{cout}}\ <<\ \mbox{\hyperlink{classElasticFishMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Refine\ the\ problem\ uniformly\ (this\ automatically\ passes\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ function\ pointers/parameters\ to\ the\ finer\ elements}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{refine\_uniformly}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ non-\/pinned\ positions\ of\ the\ newly\ SolidNodes\ will\ have\ been}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ determined\ by\ interpolation.\ Update\ all\ solid\ nodes\ based\ on\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ Mesh's\ Domain/MacroElement\ representation.}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classElasticFishMesh}{update\_all\_solid\_nodes}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ mesh\_pt()-\/>node\_update(\mbox{\hyperlink{classElasticFishMesh}{update\_all\_solid\_nodes}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ set\ the\ Eulerian\ equal\ to\ the\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ mesh\_pt()-\/>set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_a5cd7dbd2bc99ccf850c1a58d0b401979}{ElasticFishProblem<ELEMENT>::doc\_solution}}(\mbox{\hyperlink{classElasticFishMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{ofstream}}\ \mbox{\hyperlink{classElasticFishMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticFishMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{npts}}\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ deformed\ body}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{snprintf}}(\mbox{\hyperlink{classElasticFishMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticFishMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},\mbox{\hyperlink{classElasticFishMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticFishMesh}{filename}});}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(\mbox{\hyperlink{classElasticFishMesh}{some\_file}},\mbox{\hyperlink{classElasticFishMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ removed\ until\ Jacobi\ eigensolver\ is\ re-\/instated}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ //\ Output\ principal\ stress\ vectors\ at\ the\ centre\ of\ all\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ SolidHelpers::doc\_2D\_principal\_stress<ELEMENT>(doc\_info,mesh\_pt());}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Run\ the\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticFishProblem_aaaf23036d8f282cff88e497ad214237f}{ElasticFishProblem<ELEMENT>::run}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{DocInfo}}\ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}}.number()=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ parameter\ values}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Gravity:}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}=0.1;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{nstep}}=5;\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticFishMesh}{i}}=0;\mbox{\hyperlink{classElasticFishMesh}{i}}<\mbox{\hyperlink{classElasticFishMesh}{nstep}};\mbox{\hyperlink{classElasticFishMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Solve\ the\ problem\ with\ Newton's\ method,\ allowing\ for\ up\ to\ 5\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//rounds\ of\ adaptation}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{newton\_solve}}(5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(\mbox{\hyperlink{classElasticFishMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticFishMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ width}}
+\DoxyCodeLine{\ \ \ Fish\_back\_pt-\/>y\_c()+=0.03;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ simple\ elastic\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{static__fish_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Initialise\ physical\ parameters}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}}\ \ =\ 2.1;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}}\ =\ 0.4;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}}\ =\ 1.3;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ strain\ energy\ function:\ Generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{GeneralisedMooneyRivlin}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ (based\ on\ strain\ energy\ function)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticFishMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishProblem<RefineableQPVDElement<2,3>}}\ >\ \mbox{\hyperlink{classElasticFishMesh}{problem}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticFishMesh}{problem}}.run();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

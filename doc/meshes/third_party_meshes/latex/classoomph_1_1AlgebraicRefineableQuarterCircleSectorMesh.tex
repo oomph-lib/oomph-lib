@@ -1,0 +1,415 @@
+\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+
+
+Algebraic version of \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.839080cm]{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a4245d6f0499af21053a0381bc69de271}{Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}) and the algebraic update functions for nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7}{node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{update\+\_\+all\+\_\+solid\+\_\+nodes}}=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the node update info for specified algebraic node following any spatial mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh}{oomph\+::\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh_a07b183ff3e548456e67b92b6fce41cde}{Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh). Adds refinement data to elements of \doxylink{classoomph_1_1QuarterCircleSectorMesh}{Quarter\+Circle\+Sector\+Mesh}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableQuarterCircleSectorMesh_abf958060ab5ea27a2ca079cba58af8f5}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a3fbcc7dd28aefc3dddda607785695afc}{Quarter\+Circle\+Sector\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_af3aec899bd005cacb011c13bcb6e5f22}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a7c04179cca1d5eeb0a175ce30312ddbd}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{Quarter\+Circle\+Sector\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_aed627369317c12fc9fe380cd22bb8663}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value (defined in the underlying Domain object) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a070fa32a21fc9ed7e0ea2e4ee49bb226}{Central\+\_\+box}}
+, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a04eaf51389d87a087fa1e9b2b2bd0315}{Lower\+\_\+right\+\_\+box}}
+, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a5ff22a2cd960ec680a42f181d6cbdfb0}{Upper\+\_\+left\+\_\+box}}
+ \}
+\begin{DoxyCompactList}\small\item\em Remesh function ids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}{node\+\_\+update\+\_\+in\+\_\+central\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the central box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}{node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the lower right box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}{node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the upper left box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Setup algebraic update operation for all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update algebraic node update function for nodes in lower right box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update algebraic node update function for nodes in upper left box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aed38fed1e464c86e3dedd377e2459de7}{Lambda\+\_\+x}}
+\begin{DoxyCompactList}\small\item\em Fractional width of central box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}{Lambda\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Fractional height of central box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a49e72c17a9409ec4a2b7a1ebf98fb4a1}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a2cbdec5f0ee2f370c38f1fdc4e2904f8}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the geometric object that represents the curved wall (mesh boundary 1) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_ab5c1e4484c69eb78bd3323321605a93c}{Xi\+\_\+lo}}
+\begin{DoxyCompactList}\small\item\em Lower limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a149224b002f785eb357553f8210ad5d3}{Fract\+\_\+mid}}
+\begin{DoxyCompactList}\small\item\em Fraction along wall where outer ring is to be divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1fa3bfeddd4467e9fe0ec45fbfac0740}{Xi\+\_\+hi}}
+\begin{DoxyCompactList}\small\item\em Upper limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+Algebraic version of \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/-\/\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ -\/-\/-\/\_\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \ \ BOUNDARY\ 1}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ /}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ [2]\ \ \ \ \ \ /\ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ \ /\ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ BOUNDARY\ 2\ \ \ \ \ |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ [1]\ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ [0]\ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ \ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ /\ \(\backslash\)\ \ direction\ of}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ |\ \ \ \ N\ \ \ \ \ \ |\ \ |\ \ \ Lagrangian}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ |\ \ \ \ |\_\ E\ \ \ |\ \ |\ \ \ coordinate}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|\ \ |\ \ \ along\ wall\ GeomObject}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BOUNDARY\ 0}
+\DoxyCodeLine{}
+\DoxyCodeLine{Within\ the\ elements\ (MacroElements),\ the\ local\ coordinates}
+\DoxyCodeLine{are\ such\ that\ the\ (E)astern\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_0\ direction,\ \ \textcolor{keywordflow}{while}\ the\ (N)orther\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_1\ direction.}
+
+\end{DoxyCode}
+
+
+Domain is parametrised by three macro elements as sketched. Elements need to be derived from Algebraic\+Element\+Base. In addition to all the refinement procedures available for \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh} which forms the basis for this mesh, we implement algebraic node update functions for the nodes. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00433}{433}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{anonymous}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{enum}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Remesh function ids. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Central\_box@{Central\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Central\_box@{Central\_box}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a070fa32a21fc9ed7e0ea2e4ee49bb226}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a070fa32a21fc9ed7e0ea2e4ee49bb226} 
+Central\+\_\+box&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lower\_right\_box@{Lower\_right\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Lower\_right\_box@{Lower\_right\_box}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a04eaf51389d87a087fa1e9b2b2bd0315}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a04eaf51389d87a087fa1e9b2b2bd0315} 
+Lower\+\_\+right\+\_\+box&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Upper\_left\_box@{Upper\_left\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Upper\_left\_box@{Upper\_left\_box}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a5ff22a2cd960ec680a42f181d6cbdfb0}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a85eef4c11c2a88ba4bb5f99bc8406e67a5ff22a2cd960ec680a42f181d6cbdfb0} 
+Upper\+\_\+left\+\_\+box&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00617}{617}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a4245d6f0499af21053a0381bc69de271}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a4245d6f0499af21053a0381bc69de271} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!AlgebraicRefineableQuarterCircleSectorMesh@{AlgebraicRefineableQuarterCircleSectorMesh}}
+\index{AlgebraicRefineableQuarterCircleSectorMesh@{AlgebraicRefineableQuarterCircleSectorMesh}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicRefineableQuarterCircleSectorMesh()}{AlgebraicRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object, start and end coordinates on the geometric object and the fraction along which the dividing line is to be placed when updating the nodal positions, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Setup the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterCircleSectorMesh}{Refineable\+Quarter\+Circle\+Sector\+Mesh}) and the algebraic update functions for nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00445}{445}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00544}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00102}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ac591df8f18ad687e1dc9b70b731c2de1} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!algebraic\_node\_update@{algebraic\_node\_update}}
+\index{algebraic\_node\_update@{algebraic\_node\_update}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{algebraic\_node\_update()}{algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00521}{521}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00619}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00620}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00834}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00921}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00621}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a32a096b894031167a90bafdab167ffc7} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00495}{495}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a89dc4a592e3f188f9bfbffd5c7fdbbcc} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_central\_box@{node\_update\_in\_central\_box}}
+\index{node\_update\_in\_central\_box@{node\_update\_in\_central\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_in\_central\_box()}{node\_update\_in\_central\_box()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the central box. 
+
+Algebraic update function\+: Update in central box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00834}{834}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00521}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a9a7d3e4a2126346cdae3bde51eff7b36} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_lower\_right\_box@{node\_update\_in\_lower\_right\_box}}
+\index{node\_update\_in\_lower\_right\_box@{node\_update\_in\_lower\_right\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_in\_lower\_right\_box()}{node\_update\_in\_lower\_right\_box()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the lower right box. 
+
+Algebraic update function\+: Update in lower right box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00921}{921}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00521}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aeb36f6747d14cd68d4857169fa0f22d1} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!node\_update\_in\_upper\_left\_box@{node\_update\_in\_upper\_left\_box}}
+\index{node\_update\_in\_upper\_left\_box@{node\_update\_in\_upper\_left\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_in\_upper\_left\_box()}{node\_update\_in\_upper\_left\_box()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the upper left box. 
+
+Algebraic update function\+: Update in upper left box according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{1029}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00521}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a68d9738e3d3eedc4d2dd8e1b7fb09d8c} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00485}{485}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a3eb269dc5c26355a808d1c5035190017} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
+\index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Setup algebraic update operation for all nodes. 
+
+Setup algebraic update operation, based on individual blocks. Mesh is suspended from the `wall' Geom\+Object pointed to by wall\+\_\+pt. The lower right corner of the mesh is located at the wall\textquotesingle{}s coordinate xi\+\_\+lo, the upper left corner at xi\+\_\+hi; The dividing line between the two blocks at the outer ring is located at the fraction fract\+\_\+mid between these two coordinates. Node updating strategy\+:
+
+
+\begin{DoxyItemize}
+\item the shape of the central box remains rectangular; the position of its top right corner is located at a fixed fraction of the width and height of the domain. Nodes in this region are located at fixed horizontal and vertical fractions of the box.
+\item Nodes in the two outer "{}ring"{} elements (bottom right and top left) are located on straight lines running from the edges of the central box to the outer wall. 
+\end{DoxyItemize}Pointer to algebraic element in central box
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00544}{544}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00445}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a08abc1bf64e0637fc87c36638c41b846} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the node update info for specified algebraic node following any spatial mesh adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00566}{566}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00619}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+box}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00620}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+box}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00621}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+box}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a77154a45d65fa66d220bad2a3e860c8e} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_lower\_right\_box@{update\_node\_update\_in\_lower\_right\_box}}
+\index{update\_node\_update\_in\_lower\_right\_box@{update\_node\_update\_in\_lower\_right\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update\_in\_lower\_right\_box()}{update\_node\_update\_in\_lower\_right\_box()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update algebraic node update function for nodes in lower right box. 
+
+Update algebraic update function for nodes in lower right box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{1138}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00566}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_ab1e4847ffef953e66aafff14f35b7141} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_upper\_left\_box@{update\_node\_update\_in\_upper\_left\_box}}
+\index{update\_node\_update\_in\_upper\_left\_box@{update\_node\_update\_in\_upper\_left\_box}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update\_in\_upper\_left\_box()}{update\_node\_update\_in\_upper\_left\_box()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update algebraic node update function for nodes in upper left box. 
+
+Update algebraic update function for nodes in upper left box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{1234}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00566}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aed38fed1e464c86e3dedd377e2459de7}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_aed38fed1e464c86e3dedd377e2459de7} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Lambda\_x@{Lambda\_x}}
+\index{Lambda\_x@{Lambda\_x}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lambda\_x}{Lambda\_x}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Lambda\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fractional width of central box. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00625}{625}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f}\label{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh_a2690e44e43dd4ed1e45b02f4b71ae43f} 
+\index{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
+\index{Lambda\_y@{Lambda\_y}!oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lambda\_y}{Lambda\_y}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterCircleSectorMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Lambda\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fractional height of central box. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00628}{628}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8h}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

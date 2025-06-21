@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HermiteQuadMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HermiteQuadMesh.html">HermiteQuadMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HermiteQuadMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::HermiteQuadMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain. The geometry of the problem must be prescribed using the <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html" title="Topologically Rectangular Domain - a domain dexcribing a topologically rectangular problem - primaril...">TopologicallyRectangularDomain</a>. Non uniform node spacing can be prescribed using a function pointer.  
+ <a href="classoomph_1_1HermiteQuadMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::HermiteQuadMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1HermiteQuadMesh.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:abebf4806b300591f976398404ed0ef3f" id="r_abebf4806b300591f976398404ed0ef3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">typedef</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#abebf4806b300591f976398404ed0ef3f">MeshSpacingFnPtr</a>) (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">m_uniform_spacing</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">m_non_uniform_spacing</a>)</td></tr>
+<tr class="memdesc:abebf4806b300591f976398404ed0ef3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh Spacing Function Pointer - an optional function pointer to prescibe the node spacing in a non-uniformly spaced mesh - takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-uniformly spaced mesh.  <br /></td></tr>
+<tr class="separator:abebf4806b300591f976398404ed0ef3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aea2e2144668d092f4e358f195bbc74e7" id="r_aea2e2144668d092f4e358f195bbc74e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#aea2e2144668d092f4e358f195bbc74e7">HermiteQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;nx, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;ny, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">domain</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">periodic_in_x</a>=<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">false</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:aea2e2144668d092f4e358f195bbc74e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh Constructor (for a uniformly spaced mesh). Takes the following arguments : nx : number of elements in x direction; ny : number of elements in y direction; domain : topologically rectangular domain; periodic_in_x : flag specifying if the mesh is periodic in the x direction (default = false); time_stepper_pt : pointer to the time stepper (default = no timestepper);.  <br /></td></tr>
+<tr class="separator:aea2e2144668d092f4e358f195bbc74e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae28d471336aebafc5fe5e9f303ab0ad8" id="r_ae28d471336aebafc5fe5e9f303ab0ad8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#ae28d471336aebafc5fe5e9f303ab0ad8">HermiteQuadMesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;nx, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;ny, <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">domain</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html#abebf4806b300591f976398404ed0ef3f">MeshSpacingFnPtr</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">spacing_fn</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">periodic_in_x</a>=<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">false</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ae28d471336aebafc5fe5e9f303ab0ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mesh Constructor (for a non-uniformly spaced mesh). Takes the following arguments : nx : number of elements in x direction; ny : number of elements in y direction; domain : topologically rectangular domain; spacing_fn : spacing function prescribing a non-uniformly spaced mesh periodic_in_x : flag specifying if the mesh is periodic in the x direction (default = false); time_stepper_pt : pointer to the time stepper (default = notimestepper);.  <br /></td></tr>
+<tr class="separator:ae28d471336aebafc5fe5e9f303ab0ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f14d729df268911cd3943efc125492" id="r_a81f14d729df268911cd3943efc125492"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a81f14d729df268911cd3943efc125492">~HermiteQuadMesh</a> ()</td></tr>
+<tr class="memdesc:a81f14d729df268911cd3943efc125492"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - does nothing - handled in mesh base class.  <br /></td></tr>
+<tr class="separator:a81f14d729df268911cd3943efc125492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433b92da06ab05477a823c7724e1ca8b" id="r_a433b92da06ab05477a823c7724e1ca8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a433b92da06ab05477a823c7724e1ca8b">nelement_in_dim</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">d</a>)</td></tr>
+<tr class="memdesc:a433b92da06ab05477a823c7724e1ca8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for number of elements in mesh in each dimension.  <br /></td></tr>
+<tr class="separator:a433b92da06ab05477a823c7724e1ca8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a745a06530e60580e95826bedcf2e3e01" id="r_a745a06530e60580e95826bedcf2e3e01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a745a06530e60580e95826bedcf2e3e01">macro_coordinate_position</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_y</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">macro_element_position</a>)</td></tr>
+<tr class="memdesc:a745a06530e60580e95826bedcf2e3e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the macro element position of the node that is the x-th node along from the LHS and the y-th node up from the lower edge  <br /></td></tr>
+<tr class="separator:a745a06530e60580e95826bedcf2e3e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaac1dedc4a2e578b73b0d849c9a68e8" id="r_abaac1dedc4a2e578b73b0d849c9a68e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#abaac1dedc4a2e578b73b0d849c9a68e8">set_position_of_node</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_y</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Node</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:abaac1dedc4a2e578b73b0d849c9a68e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the generalised position of the node (i.e. - x_i, dx_i/ds_0, dx_i/ds_1 &amp; d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined.  <br /></td></tr>
+<tr class="separator:abaac1dedc4a2e578b73b0d849c9a68e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735fd20f847ac98c5bd5db5196ff3ea4" id="r_a735fd20f847ac98c5bd5db5196ff3ea4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a735fd20f847ac98c5bd5db5196ff3ea4">set_position_of_boundary_node</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_y</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">BoundaryNode</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Node</a> &gt; *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a735fd20f847ac98c5bd5db5196ff3ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the generalised position of the node (i.e. - x_i, dx_i/ds_0, dx_i/ds_1 &amp; d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. Also sets coordinates on boundary vector for the node to be the generalised position of the node in macro element coordinates  <br /></td></tr>
+<tr class="separator:a735fd20f847ac98c5bd5db5196ff3ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d8992ae7fa8b46b568d156306d3c89" id="r_a17d8992ae7fa8b46b568d156306d3c89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a17d8992ae7fa8b46b568d156306d3c89">generalised_macro_element_position_of_node</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_x</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">node_num_y</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">m_gen</a>)</td></tr>
+<tr class="memdesc:a17d8992ae7fa8b46b568d156306d3c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the generalised position of the node at position (node_num_x, node_num_y) in the macro element coordinate scheme. index 0 of m_gen : 0 - m_i 1 - dm_i/ds_0 2 - dm_i/ds_1 3 - d2m_i/ds_0ds_1 (where i is index 1 of m_gen)  <br /></td></tr>
+<tr class="separator:a17d8992ae7fa8b46b568d156306d3c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af72fd9b700fdee643ce6d6259c0e8e6f" id="r_af72fd9b700fdee643ce6d6259c0e8e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#af72fd9b700fdee643ce6d6259c0e8e6f">build_mesh</a> (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:af72fd9b700fdee643ce6d6259c0e8e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic mesh construction function to build the mesh.  <br /></td></tr>
+<tr class="separator:af72fd9b700fdee643ce6d6259c0e8e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eefe872b5bf8a06174b536d9727ea44" id="r_a6eefe872b5bf8a06174b536d9727ea44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a6eefe872b5bf8a06174b536d9727ea44">setup_boundary_element_info</a> ()</td></tr>
+<tr class="memdesc:a6eefe872b5bf8a06174b536d9727ea44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup lookup schemes which establish whic elements are located next to mesh's boundaries (wrapper to suppress doc). Specific version for <a class="el" href="classoomph_1_1HermiteQuadMesh.html" title="A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain....">HermiteQuadMesh</a> to ensure that the order of the elements in Boundary_element_pt matches the actual order along the boundary. This is required when hijacking the BiharmonicElement to apply the BiharmonicFluidBoundaryElement in BiharmonicFluidProblem::impose_traction_free_edge(...)  <br /></td></tr>
+<tr class="separator:a6eefe872b5bf8a06174b536d9727ea44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e4cd3df0828e87a762c61b09121e1c0" id="r_a0e4cd3df0828e87a762c61b09121e1c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a0e4cd3df0828e87a762c61b09121e1c0">setup_boundary_element_info</a> (std::ostream &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">outfile</a>)</td></tr>
+<tr class="memdesc:a0e4cd3df0828e87a762c61b09121e1c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup lookup schemes which establish which elements are located next to which boundaries (Doc to outfile if it's open). Specific version for <a class="el" href="classoomph_1_1HermiteQuadMesh.html" title="A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain....">HermiteQuadMesh</a> to ensure that the order of the elements in Boundary_element_pt matches the actual order along the boundary. This is required when hijacking the BiharmonicElement to apply the BiharmonicFluidBoundaryElement in BiharmonicFluidProblem::impose_traction_free_edge(...)  <br /></td></tr>
+<tr class="separator:a0e4cd3df0828e87a762c61b09121e1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0d02ca1a2769955ce57f09616195bd27" id="r_a0d02ca1a2769955ce57f09616195bd27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a0d02ca1a2769955ce57f09616195bd27">Nelement</a></td></tr>
+<tr class="memdesc:a0d02ca1a2769955ce57f09616195bd27"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of elements in each coordinate direction  <br /></td></tr>
+<tr class="separator:a0d02ca1a2769955ce57f09616195bd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c2c974dc0d2e599b6bbe3921c5bb77" id="r_af1c2c974dc0d2e599b6bbe3921c5bb77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#af1c2c974dc0d2e599b6bbe3921c5bb77">Xperiodic</a></td></tr>
+<tr class="memdesc:af1c2c974dc0d2e599b6bbe3921c5bb77"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean variable to determine whether the mesh is periodic in the x-direction  <br /></td></tr>
+<tr class="separator:af1c2c974dc0d2e599b6bbe3921c5bb77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6bae1864691e8fe94d7c61995ae560a" id="r_af6bae1864691e8fe94d7c61995ae560a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#af6bae1864691e8fe94d7c61995ae560a">Domain_pt</a></td></tr>
+<tr class="memdesc:af6bae1864691e8fe94d7c61995ae560a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the topologically rectangular domain which prescribes the problem domain.  <br /></td></tr>
+<tr class="separator:af6bae1864691e8fe94d7c61995ae560a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b3cc55576538fc29e6975def870536f" id="r_a3b3cc55576538fc29e6975def870536f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#abebf4806b300591f976398404ed0ef3f">MeshSpacingFnPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#a3b3cc55576538fc29e6975def870536f">Node_spacing_fn</a></td></tr>
+<tr class="memdesc:a3b3cc55576538fc29e6975def870536f"><td class="mdescLeft">&#160;</td><td class="mdescRight">non uniform mesh spacing function pointer  <br /></td></tr>
+<tr class="separator:a3b3cc55576538fc29e6975def870536f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a>&gt;<br />
+class oomph::HermiteQuadMesh&lt; ELEMENT &gt;</div><p>A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain. The geometry of the problem must be prescribed using the <a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html" title="Topologically Rectangular Domain - a domain dexcribing a topologically rectangular problem - primaril...">TopologicallyRectangularDomain</a>. Non uniform node spacing can be prescribed using a function pointer. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00053">53</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="abebf4806b300591f976398404ed0ef3f" name="abebf4806b300591f976398404ed0ef3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abebf4806b300591f976398404ed0ef3f">&#9670;&#160;</a></span>MeshSpacingFnPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">typedef</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a>(* <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::MeshSpacingFnPtr) (<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">m_uniform_spacing</a>, <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">m_non_uniform_spacing</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mesh Spacing Function Pointer - an optional function pointer to prescibe the node spacing in a non-uniformly spaced mesh - takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-uniformly spaced mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00060">60</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aea2e2144668d092f4e358f195bbc74e7" name="aea2e2144668d092f4e358f195bbc74e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea2e2144668d092f4e358f195bbc74e7">&#9670;&#160;</a></span>HermiteQuadMesh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::HermiteQuadMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> *&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>periodic_in_x</em> = <code><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">false</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh Constructor (for a uniformly spaced mesh). Takes the following arguments : nx : number of elements in x direction; ny : number of elements in y direction; domain : topologically rectangular domain; periodic_in_x : flag specifying if the mesh is periodic in the x direction (default = false); time_stepper_pt : pointer to the time stepper (default = no timestepper);. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">74</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00599">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00238">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00230">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Nelement</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00241">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Node_spacing_fn</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00234">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Xperiodic</a>.</p>
+
+</div>
+</div>
+<a id="ae28d471336aebafc5fe5e9f303ab0ad8" name="ae28d471336aebafc5fe5e9f303ab0ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae28d471336aebafc5fe5e9f303ab0ad8">&#9670;&#160;</a></span>HermiteQuadMesh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::HermiteQuadMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a> *&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html#abebf4806b300591f976398404ed0ef3f">MeshSpacingFnPtr</a>&#160;</td>
+          <td class="paramname"><em>spacing_fn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>periodic_in_x</em> = <code><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">false</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mesh Constructor (for a non-uniformly spaced mesh). Takes the following arguments : nx : number of elements in x direction; ny : number of elements in y direction; domain : topologically rectangular domain; spacing_fn : spacing function prescribing a non-uniformly spaced mesh periodic_in_x : flag specifying if the mesh is periodic in the x direction (default = false); time_stepper_pt : pointer to the time stepper (default = notimestepper);. </p>
+<p>build the mesh</p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">115</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00599">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00238">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Domain_pt</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00230">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Nelement</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00241">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Node_spacing_fn</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00234">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Xperiodic</a>.</p>
+
+</div>
+</div>
+<a id="a81f14d729df268911cd3943efc125492" name="a81f14d729df268911cd3943efc125492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f14d729df268911cd3943efc125492">&#9670;&#160;</a></span>~HermiteQuadMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::~<a class="el" href="classoomph_1_1HermiteQuadMesh.html">HermiteQuadMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor - does nothing - handled in mesh base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00144">144</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af72fd9b700fdee643ce6d6259c0e8e6f" name="af72fd9b700fdee643ce6d6259c0e8e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af72fd9b700fdee643ce6d6259c0e8e6f">&#9670;&#160;</a></span>build_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::build_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generic mesh construction function to build the mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00599">599</a> of file <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8h_source.html#l00145">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a17d8992ae7fa8b46b568d156306d3c89" name="a17d8992ae7fa8b46b568d156306d3c89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d8992ae7fa8b46b568d156306d3c89">&#9670;&#160;</a></span>generalised_macro_element_position_of_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::generalised_macro_element_position_of_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>m_gen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>computes the generalised position of the node at position (node_num_x, node_num_y) in the macro element coordinate scheme. index 0 of m_gen : 0 - m_i 1 - dm_i/ds_0 2 - dm_i/ds_1 3 - d2m_i/ds_0ds_1 (where i is index 1 of m_gen) </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00197">197</a> of file <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="a745a06530e60580e95826bedcf2e3e01" name="a745a06530e60580e95826bedcf2e3e01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745a06530e60580e95826bedcf2e3e01">&#9670;&#160;</a></span>macro_coordinate_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::macro_coordinate_position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>macro_element_position</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the macro element position of the node that is the x-th node along from the LHS and the y-th node up from the lower edge </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00155">155</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00230">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Nelement</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00241">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Node_spacing_fn</a>.</p>
+
+</div>
+</div>
+<a id="a433b92da06ab05477a823c7724e1ca8b" name="a433b92da06ab05477a823c7724e1ca8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a433b92da06ab05477a823c7724e1ca8b">&#9670;&#160;</a></span>nelement_in_dim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp; <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::nelement_in_dim </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for number of elements in mesh in each dimension. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00147">147</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00230">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::Nelement</a>.</p>
+
+</div>
+</div>
+<a id="a735fd20f847ac98c5bd5db5196ff3ea4" name="a735fd20f847ac98c5bd5db5196ff3ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735fd20f847ac98c5bd5db5196ff3ea4">&#9670;&#160;</a></span>set_position_of_boundary_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::set_position_of_boundary_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">BoundaryNode</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Node</a> &gt; *&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>sets the generalised position of the node (i.e. - x_i, dx_i/ds_0, dx_i/ds_1 &amp; d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. Also sets coordinates on boundary vector for the node to be the generalised position of the node in macro element coordinates </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00115">115</a> of file <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8h_source.html#l00145">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="abaac1dedc4a2e578b73b0d849c9a68e8" name="abaac1dedc4a2e578b73b0d849c9a68e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaac1dedc4a2e578b73b0d849c9a68e8">&#9670;&#160;</a></span>set_position_of_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::set_position_of_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">const</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_num_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>sets the generalised position of the node (i.e. - x_i, dx_i/ds_0, dx_i/ds_1 &amp; d2x_i/ds_0ds_1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00049">49</a> of file <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="collapsible__channel__mesh_8h_source.html#l00145">oomph::CollapsibleChannelMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="a6eefe872b5bf8a06174b536d9727ea44" name="a6eefe872b5bf8a06174b536d9727ea44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eefe872b5bf8a06174b536d9727ea44">&#9670;&#160;</a></span>setup_boundary_element_info() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">virtual</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::setup_boundary_element_info </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup lookup schemes which establish whic elements are located next to mesh's boundaries (wrapper to suppress doc). Specific version for <a class="el" href="classoomph_1_1HermiteQuadMesh.html" title="A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain....">HermiteQuadMesh</a> to ensure that the order of the elements in Boundary_element_pt matches the actual order along the boundary. This is required when hijacking the BiharmonicElement to apply the BiharmonicFluidBoundaryElement in BiharmonicFluidProblem::impose_traction_free_edge(...) </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00212">212</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00212">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::setup_boundary_element_info()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00212">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::setup_boundary_element_info()</a>.</p>
+
+</div>
+</div>
+<a id="a0e4cd3df0828e87a762c61b09121e1c0" name="a0e4cd3df0828e87a762c61b09121e1c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e4cd3df0828e87a762c61b09121e1c0">&#9670;&#160;</a></span>setup_boundary_element_info() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">void</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::setup_boundary_element_info </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup lookup schemes which establish which elements are located next to which boundaries (Doc to outfile if it's open). Specific version for <a class="el" href="classoomph_1_1HermiteQuadMesh.html" title="A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain....">HermiteQuadMesh</a> to ensure that the order of the elements in Boundary_element_pt matches the actual order along the boundary. This is required when hijacking the BiharmonicElement to apply the BiharmonicFluidBoundaryElement in BiharmonicFluidProblem::impose_traction_free_edge(...) </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l01250">1250</a> of file <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af6bae1864691e8fe94d7c61995ae560a" name="af6bae1864691e8fe94d7c61995ae560a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6bae1864691e8fe94d7c61995ae560a">&#9670;&#160;</a></span>Domain_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html">TopologicallyRectangularDomain</a>* <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::Domain_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the topologically rectangular domain which prescribes the problem domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00238">238</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a0d02ca1a2769955ce57f09616195bd27" name="a0d02ca1a2769955ce57f09616195bd27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d02ca1a2769955ce57f09616195bd27">&#9670;&#160;</a></span>Nelement</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">unsigned</a>&gt; <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::Nelement</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>number of elements in each coordinate direction </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00230">230</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00155">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::macro_coordinate_position()</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00147">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::nelement_in_dim()</a>.</p>
+
+</div>
+</div>
+<a id="a3b3cc55576538fc29e6975def870536f" name="a3b3cc55576538fc29e6975def870536f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b3cc55576538fc29e6975def870536f">&#9670;&#160;</a></span>Node_spacing_fn</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1HermiteQuadMesh.html#abebf4806b300591f976398404ed0ef3f">MeshSpacingFnPtr</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::Node_spacing_fn</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>non uniform mesh spacing function pointer </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00241">241</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00155">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::macro_coordinate_position()</a>.</p>
+
+</div>
+</div>
+<a id="af1c2c974dc0d2e599b6bbe3921c5bb77" name="af1c2c974dc0d2e599b6bbe3921c5bb77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c2c974dc0d2e599b6bbe3921c5bb77">&#9670;&#160;</a></span>Xperiodic</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">class</a> <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">bool</a> <a class="el" href="classoomph_1_1HermiteQuadMesh.html">oomph::HermiteQuadMesh</a>&lt; <a class="el" href="classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh.html">ELEMENT</a> &gt;::Xperiodic</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>boolean variable to determine whether the mesh is periodic in the x-direction </p>
+
+<p class="definition">Definition at line <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00234">234</a> of file <a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00074">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>, and <a class="el" href="hermite__element__quad__mesh_8h_source.html#l00115">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::HermiteQuadMesh()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="hermite__element__quad__mesh_8h_source.html">hermite_element_quad_mesh.h</a></li>
+<li><a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html">hermite_element_quad_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

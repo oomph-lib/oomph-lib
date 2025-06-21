@@ -1,0 +1,175 @@
+\doxysection{Rectangular\+Driven\+Cavity\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRectangularDrivenCavityProblem}{}\label{classRectangularDrivenCavityProblem}\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+
+
+Driven cavity problem in rectangular domain.  
+
+
+Inheritance diagram for Rectangular\+Driven\+Cavity\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRectangularDrivenCavityProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRectangularDrivenCavityProblem_ad7382f68a780f86ea5f0e9b7d4d119ec}{Rectangular\+Driven\+Cavity\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRectangularDrivenCavityProblem_a0233981e33e2bd9db424b19e51a0faef}{\texorpdfstring{$\sim$}{\string~}\+Rectangular\+Driven\+Cavity\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem_abfe87f7dec89dcf897f4df475685e039}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem_ab60d1a663d82616c27b9d11bc46c05a4}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. Re-\/set velocity boundary conditions just to be on the safe side... \end{DoxyCompactList}\item 
+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRectangularDrivenCavityProblem_a8ec8787540381698d45c5d46cf2dd7c9}{mesh\+\_\+pt}} ()
+\item 
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$}
+Driven cavity problem in rectangular domain. 
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00063}{63}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRectangularDrivenCavityProblem_ad7382f68a780f86ea5f0e9b7d4d119ec}\label{classRectangularDrivenCavityProblem_ad7382f68a780f86ea5f0e9b7d4d119ec} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!RectangularDrivenCavityProblem@{RectangularDrivenCavityProblem}}
+\index{RectangularDrivenCavityProblem@{RectangularDrivenCavityProblem}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RectangularDrivenCavityProblem()}{RectangularDrivenCavityProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classRectangularDrivenCavityProblem}{\+::\+Rectangular\+Driven\+Cavity\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for Rectangular\+Driven\+Cavity problem. 
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00141}{141}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+References \mbox{\hyperlink{driven__cavity_8cc_source_l00047}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}.
+
+\Hypertarget{classRectangularDrivenCavityProblem_a0233981e33e2bd9db424b19e51a0faef}\label{classRectangularDrivenCavityProblem_a0233981e33e2bd9db424b19e51a0faef} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!````~RectangularDrivenCavityProblem@{\texorpdfstring{$\sim$}{\string~}RectangularDrivenCavityProblem}}
+\index{````~RectangularDrivenCavityProblem@{\texorpdfstring{$\sim$}{\string~}RectangularDrivenCavityProblem}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RectangularDrivenCavityProblem()}{\string~RectangularDrivenCavityProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00073}{73}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRectangularDrivenCavityProblem_abfe87f7dec89dcf897f4df475685e039}\label{classRectangularDrivenCavityProblem_abfe87f7dec89dcf897f4df475685e039} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00086}{86}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+\Hypertarget{classRectangularDrivenCavityProblem_ab60d1a663d82616c27b9d11bc46c05a4}\label{classRectangularDrivenCavityProblem_ab60d1a663d82616c27b9d11bc46c05a4} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve. Re-\/set velocity boundary conditions just to be on the safe side... 
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00091}{91}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+References \mbox{\hyperlink{driven__cavity_8cc_source_l00122}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}\label{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00207}{207}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{driven__cavity_8cc_source_l00242}{main()}}.
+
+\Hypertarget{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3}\label{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00076}{76}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+References \mbox{\hyperlink{driven__cavity_8cc_source_l00076}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{driven__cavity_8cc_source_l00122}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{driven__cavity_8cc_source_l00076}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classRectangularDrivenCavityProblem_a8ec8787540381698d45c5d46cf2dd7c9}\label{classRectangularDrivenCavityProblem_a8ec8787540381698d45c5d46cf2dd7c9} 
+\index{RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!RectangularDrivenCavityProblem$<$ ELEMENT $>$@{RectangularDrivenCavityProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRectangularDrivenCavityProblem}{Rectangular\+Driven\+Cavity\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{driven__cavity_8cc_source_l00122}{122}} of file \mbox{\hyperlink{driven__cavity_8cc_source}{driven\+\_\+cavity.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{driven__cavity_8cc_source_l00091}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{driven__cavity_8cc_source_l00076}{Rectangular\+Driven\+Cavity\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{driven__cavity_8cc}{driven\+\_\+cavity.\+cc}}\end{DoxyCompactItemize}

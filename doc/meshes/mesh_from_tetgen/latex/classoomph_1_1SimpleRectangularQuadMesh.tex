@@ -1,0 +1,182 @@
+\doxysection{oomph\+::Simple\+Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SimpleRectangularQuadMesh}{}\label{classoomph_1_1SimpleRectangularQuadMesh}\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+
+
+Simple rectangular 2D Quad mesh class. Nx \+: number of elements in the x direction.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+rectangular\+\_\+quadmesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Simple\+Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.501916cm]{classoomph_1_1SimpleRectangularQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407}{Simple\+Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&Nx, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&Ny, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&Lx, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&Ly, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions. Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_ab6ec406039698222f051d4ec977f1788}{NX}}
+\begin{DoxyCompactList}\small\item\em Number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a6db96125790b46858fb00eef46bf7201}{NY}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}
+Simple rectangular 2D Quad mesh class. Nx \+: number of elements in the x direction. 
+
+Ny \+: number of elements in the y direction
+
+Lx \+: length in the x direction
+
+Ly \+: length in the y direction
+
+Ordering of elements\+: \textquotesingle{}Lower left\textquotesingle{} to \textquotesingle{}lower right\textquotesingle{} then \textquotesingle{}upwards\textquotesingle{}
+
+Timestepper defaults to Steady. 
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00057}{57}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407}\label{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407} 
+\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}!SimpleRectangularQuadMesh@{SimpleRectangularQuadMesh}}
+\index{SimpleRectangularQuadMesh@{SimpleRectangularQuadMesh}!oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleRectangularQuadMesh()}{SimpleRectangularQuadMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Simple\+Rectangular\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{Nx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{Ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{Lx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{Ly,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions. Timestepper defaults to Steady. 
+
+Constructor for 2D Quad mesh class\+:
+
+Nx \+: number of elements in the x direction
+
+Ny \+: number of elements in the y direction
+
+Lx \+: length in the x direction
+
+Ly \+: length in the y direction
+
+Ordering of elements\+: \textquotesingle{}Lower left\textquotesingle{} to \textquotesingle{}lower right\textquotesingle{} then \textquotesingle{}upwards\textquotesingle{}
+
+Timestepper defaults to Steady. 
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8template_8cc_source_l00053}{53}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8template_8cc_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}\label{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7} 
+\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}!nx@{nx}}
+\index{nx@{nx}!oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nx()}{nx()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in x directions. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00071}{71}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00084}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+NX}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00043}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+FSIDriven\+Cavity\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}\label{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9} 
+\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}!ny@{ny}}
+\index{ny@{ny}!oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ny()}{ny()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::ny (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in y directions. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00077}{77}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00087}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+NY}}.
+
+
+
+Referenced by \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00045}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Collapsible\+Channel\+Mesh()}}, and \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00043}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+FSIDriven\+Cavity\+Mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1SimpleRectangularQuadMesh_ab6ec406039698222f051d4ec977f1788}\label{classoomph_1_1SimpleRectangularQuadMesh_ab6ec406039698222f051d4ec977f1788} 
+\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}!NX@{NX}}
+\index{NX@{NX}!oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{NX}{NX}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+NX\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements in x direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00084}{84}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00071}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}.
+
+\Hypertarget{classoomph_1_1SimpleRectangularQuadMesh_a6db96125790b46858fb00eef46bf7201}\label{classoomph_1_1SimpleRectangularQuadMesh_a6db96125790b46858fb00eef46bf7201} 
+\index{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}!NY@{NY}}
+\index{NY@{NY}!oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$@{oomph::SimpleRectangularQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{NY}{NY}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+NY\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements in y direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00087}{87}} of file \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__rectangular__quadmesh_8h_source_l00077}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{simple__rectangular__quadmesh_8h}{simple\+\_\+rectangular\+\_\+quadmesh.\+h}}\item 
+\mbox{\hyperlink{simple__rectangular__quadmesh_8template_8cc}{simple\+\_\+rectangular\+\_\+quadmesh.\+template.\+cc}}\end{DoxyCompactItemize}

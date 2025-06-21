@@ -1,0 +1,160 @@
+\doxysection{superlu\+\_\+dist.\+c File Reference}
+\hypertarget{superlu__dist_8c}{}\label{superlu__dist_8c}\index{superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsuperlu__dist__data}{superlu\+\_\+dist\+\_\+data}}
+\item 
+struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}} \{ \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}{SETUP\+\_\+\+PHASE}} = 1
+, \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}{SOLVE\+\_\+\+PHASE}} = 2
+, \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}{CLEAN\+\_\+\+UP\+\_\+\+PHASE}} = 3
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b}{get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} ()
+\item 
+double \mbox{\hyperlink{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}{get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} ()
+\item 
+void \mbox{\hyperlink{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} (double \texorpdfstring{$\ast$}{*}lu\+\_\+factor\+\_\+memory, double \texorpdfstring{$\ast$}{*}total\+\_\+memory)
+\item 
+void \mbox{\hyperlink{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}{superlu\+\_\+cr\+\_\+to\+\_\+cc}} (int nrow, int ncol, int nnz, double \texorpdfstring{$\ast$}{*}cr\+\_\+values, int \texorpdfstring{$\ast$}{*}cr\+\_\+index, int \texorpdfstring{$\ast$}{*}cr\+\_\+start, double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cc\+\_\+values, int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cc\+\_\+index, int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cc\+\_\+start)
+\item 
+void \mbox{\hyperlink{superlu__dist_8c_abed14a95611831a19ffd921de0d4a89d}{superlu\+\_\+dist\+\_\+distributed\+\_\+matrix}} (\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}} opt\+\_\+flag, int allow\+\_\+permutations, int n, int nnz\+\_\+local, int nrow\+\_\+local, int first\+\_\+row, double \texorpdfstring{$\ast$}{*}values, int \texorpdfstring{$\ast$}{*}col\+\_\+index, int \texorpdfstring{$\ast$}{*}row\+\_\+start, double \texorpdfstring{$\ast$}{*}b, int nprow, int npcol, int doc, void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}data, int \texorpdfstring{$\ast$}{*}info, MPI\+\_\+\+Comm comm)
+\item 
+void \mbox{\hyperlink{superlu__dist_8c_a95c6e8a7870a4921759e90111073ccb8}{superlu\+\_\+dist\+\_\+global\+\_\+matrix}} (\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}} opt\+\_\+flag, int allow\+\_\+permutations, int n\+\_\+in, int nnz\+\_\+in, double \texorpdfstring{$\ast$}{*}values, int \texorpdfstring{$\ast$}{*}row\+\_\+index, int \texorpdfstring{$\ast$}{*}col\+\_\+start, double \texorpdfstring{$\ast$}{*}b, int nprow, int npcol, int doc, void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}data, int \texorpdfstring{$\ast$}{*}info, MPI\+\_\+\+Comm comm)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}} \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}\label{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717} 
+\index{superlu\_dist.c@{superlu\_dist.c}!opt\_flag\_t@{opt\_flag\_t}}
+\index{opt\_flag\_t@{opt\_flag\_t}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{opt\_flag\_t}{opt\_flag\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SETUP\_PHASE@{SETUP\_PHASE}!superlu\_dist.c@{superlu\_dist.c}}\index{superlu\_dist.c@{superlu\_dist.c}!SETUP\_PHASE@{SETUP\_PHASE}}}\Hypertarget{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01}\label{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717afb68f5a0b256c63becd6e904931eca01} 
+SETUP\+\_\+\+PHASE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOLVE\_PHASE@{SOLVE\_PHASE}!superlu\_dist.c@{superlu\_dist.c}}\index{superlu\_dist.c@{superlu\_dist.c}!SOLVE\_PHASE@{SOLVE\_PHASE}}}\Hypertarget{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344}\label{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717a75e77c74fdd1d9c8af353f0f85333344} 
+SOLVE\+\_\+\+PHASE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLEAN\_UP\_PHASE@{CLEAN\_UP\_PHASE}!superlu\_dist.c@{superlu\_dist.c}}\index{superlu\_dist.c@{superlu\_dist.c}!CLEAN\_UP\_PHASE@{CLEAN\_UP\_PHASE}}}\Hypertarget{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292}\label{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717af5e7b766a74f0440f531ea53a614b292} 
+CLEAN\+\_\+\+UP\+\_\+\+PHASE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00127}{127}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b}\label{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b} 
+\index{superlu\_dist.c@{superlu\_dist.c}!get\_lu\_factor\_memory\_usage\_in\_bytes\_dist@{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist}}
+\index{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist@{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist()}{get\_lu\_factor\_memory\_usage\_in\_bytes\_dist()}}
+{\footnotesize\ttfamily double get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00060}{60}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+References \mbox{\hyperlink{superlu_8c_source_l00039}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu_8c_source_l00042}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
+
+\Hypertarget{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}\label{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9} 
+\index{superlu\_dist.c@{superlu\_dist.c}!get\_memory\_usage\_in\_bytes\_dist@{get\_memory\_usage\_in\_bytes\_dist}}
+\index{get\_memory\_usage\_in\_bytes\_dist@{get\_memory\_usage\_in\_bytes\_dist}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{get\_memory\_usage\_in\_bytes\_dist()}{get\_memory\_usage\_in\_bytes\_dist()}}
+{\footnotesize\ttfamily void get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist (\begin{DoxyParamCaption}\item[{double \texorpdfstring{$\ast$}{*}}]{lu\+\_\+factor\+\_\+memory,  }\item[{double \texorpdfstring{$\ast$}{*}}]{total\+\_\+memory }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00092}{92}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+References \mbox{\hyperlink{superlu_8c_source_l00039}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
+
+\Hypertarget{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}\label{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3} 
+\index{superlu\_dist.c@{superlu\_dist.c}!get\_total\_memory\_usage\_in\_bytes\_dist@{get\_total\_memory\_usage\_in\_bytes\_dist}}
+\index{get\_total\_memory\_usage\_in\_bytes\_dist@{get\_total\_memory\_usage\_in\_bytes\_dist}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{get\_total\_memory\_usage\_in\_bytes\_dist()}{get\_total\_memory\_usage\_in\_bytes\_dist()}}
+{\footnotesize\ttfamily double get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00076}{76}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+References \mbox{\hyperlink{superlu_8c_source_l00039}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu_8c_source_l00042}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
+
+\Hypertarget{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}\label{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e} 
+\index{superlu\_dist.c@{superlu\_dist.c}!superlu\_cr\_to\_cc@{superlu\_cr\_to\_cc}}
+\index{superlu\_cr\_to\_cc@{superlu\_cr\_to\_cc}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{superlu\_cr\_to\_cc()}{superlu\_cr\_to\_cc()}}
+{\footnotesize\ttfamily void superlu\+\_\+cr\+\_\+to\+\_\+cc (\begin{DoxyParamCaption}\item[{int}]{nrow,  }\item[{int}]{ncol,  }\item[{int}]{nnz,  }\item[{double \texorpdfstring{$\ast$}{*}}]{cr\+\_\+values,  }\item[{int \texorpdfstring{$\ast$}{*}}]{cr\+\_\+index,  }\item[{int \texorpdfstring{$\ast$}{*}}]{cr\+\_\+start,  }\item[{double \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cc\+\_\+values,  }\item[{int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cc\+\_\+index,  }\item[{int \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cc\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00103}{103}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+\Hypertarget{superlu__dist_8c_abed14a95611831a19ffd921de0d4a89d}\label{superlu__dist_8c_abed14a95611831a19ffd921de0d4a89d} 
+\index{superlu\_dist.c@{superlu\_dist.c}!superlu\_dist\_distributed\_matrix@{superlu\_dist\_distributed\_matrix}}
+\index{superlu\_dist\_distributed\_matrix@{superlu\_dist\_distributed\_matrix}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{superlu\_dist\_distributed\_matrix()}{superlu\_dist\_distributed\_matrix()}}
+{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+distributed\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}}}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n,  }\item[{int}]{nnz\+\_\+local,  }\item[{int}]{nrow\+\_\+local,  }\item[{int}]{first\+\_\+row,  }\item[{double \texorpdfstring{$\ast$}{*}}]{values,  }\item[{int \texorpdfstring{$\ast$}{*}}]{col\+\_\+index,  }\item[{int \texorpdfstring{$\ast$}{*}}]{row\+\_\+start,  }\item[{double \texorpdfstring{$\ast$}{*}}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{data,  }\item[{int \texorpdfstring{$\ast$}{*}}]{info,  }\item[{MPI\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00167}{167}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+References \mbox{\hyperlink{superlu__dist_8c_source_l00033}{superlu\+\_\+dist\+\_\+data\+::A}}, \mbox{\hyperlink{superlu__dist_8c_source_l00040}{superlu\+\_\+dist\+\_\+data\+::anorm}}, \mbox{\hyperlink{superlu__dist_8c_source_l00131}{CLEAN\+\_\+\+UP\+\_\+\+PHASE}}, \mbox{\hyperlink{superlu__dist_8c_source_l00039}{superlu\+\_\+dist\+\_\+data\+::colequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00032}{superlu\+\_\+dist\+\_\+data\+::grid}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{superlu__dist_8c_source_l00035}{superlu\+\_\+dist\+\_\+data\+::\+LUstruct}}, \mbox{\hyperlink{superlu__dist_8c_source_l00037}{superlu\+\_\+dist\+\_\+data\+::options}}, \mbox{\hyperlink{superlu__dist_8c_source_l00038}{superlu\+\_\+dist\+\_\+data\+::rowequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00034}{superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct}}, \mbox{\hyperlink{superlu__dist_8c_source_l00129}{SETUP\+\_\+\+PHASE}}, \mbox{\hyperlink{superlu__dist_8c_source_l00130}{SOLVE\+\_\+\+PHASE}}, \mbox{\hyperlink{superlu__dist_8c_source_l00036}{superlu\+\_\+dist\+\_\+data\+::\+SOLVEstruct}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{superlu__dist_8c_a95c6e8a7870a4921759e90111073ccb8}\label{superlu__dist_8c_a95c6e8a7870a4921759e90111073ccb8} 
+\index{superlu\_dist.c@{superlu\_dist.c}!superlu\_dist\_global\_matrix@{superlu\_dist\_global\_matrix}}
+\index{superlu\_dist\_global\_matrix@{superlu\_dist\_global\_matrix}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{superlu\_dist\_global\_matrix()}{superlu\_dist\_global\_matrix()}}
+{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+global\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{superlu__dist_8c_a2e99ebd047fcb97025b881c12e90e717}{opt\+\_\+flag\+\_\+t}}}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n\+\_\+in,  }\item[{int}]{nnz\+\_\+in,  }\item[{double \texorpdfstring{$\ast$}{*}}]{values,  }\item[{int \texorpdfstring{$\ast$}{*}}]{row\+\_\+index,  }\item[{int \texorpdfstring{$\ast$}{*}}]{col\+\_\+start,  }\item[{double \texorpdfstring{$\ast$}{*}}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{data,  }\item[{int \texorpdfstring{$\ast$}{*}}]{info,  }\item[{MPI\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00561}{561}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
+
+
+
+References \mbox{\hyperlink{superlu__dist_8c_source_l00033}{superlu\+\_\+dist\+\_\+data\+::A}}, \mbox{\hyperlink{superlu__dist_8c_source_l00040}{superlu\+\_\+dist\+\_\+data\+::anorm}}, \mbox{\hyperlink{superlu__dist_8c_source_l00131}{CLEAN\+\_\+\+UP\+\_\+\+PHASE}}, \mbox{\hyperlink{superlu__dist_8c_source_l00039}{superlu\+\_\+dist\+\_\+data\+::colequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00032}{superlu\+\_\+dist\+\_\+data\+::grid}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{superlu__dist_8c_source_l00035}{superlu\+\_\+dist\+\_\+data\+::\+LUstruct}}, \mbox{\hyperlink{superlu__dist_8c_source_l00037}{superlu\+\_\+dist\+\_\+data\+::options}}, \mbox{\hyperlink{superlu__dist_8c_source_l00038}{superlu\+\_\+dist\+\_\+data\+::rowequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00034}{superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct}}, \mbox{\hyperlink{superlu__dist_8c_source_l00129}{SETUP\+\_\+\+PHASE}}, \mbox{\hyperlink{superlu__dist_8c_source_l00130}{SOLVE\+\_\+\+PHASE}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}\label{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f} 
+\index{superlu\_dist.c@{superlu\_dist.c}!symbolic\_memory\_statistics\_storage@{symbolic\_memory\_statistics\_storage}}
+\index{symbolic\_memory\_statistics\_storage@{symbolic\_memory\_statistics\_storage}!superlu\_dist.c@{superlu\_dist.c}}
+\doxysubsubsection{\texorpdfstring{symbolic\_memory\_statistics\_storage}{symbolic\_memory\_statistics\_storage}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Storage}} symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}
+
+
+
+Referenced by \mbox{\hyperlink{superlu__dist_8c_source_l00060}{get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00092}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, and \mbox{\hyperlink{superlu__dist_8c_source_l00076}{get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}.
+

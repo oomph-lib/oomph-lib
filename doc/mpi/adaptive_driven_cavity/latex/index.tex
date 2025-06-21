@@ -1,0 +1,301 @@
+\chapter{Parallel solution of the adaptive driven cavity problem}
+\hypertarget{index}{}\label{index}\index{Parallel solution of the adaptive driven cavity problem@{Parallel solution of the adaptive driven cavity problem}}
+This document concerns the parallel solution of the \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ adaptive driven cavity problem}}. It is the first in a \href{../../../example_code_list/html/index.html\#distributed}{\texttt{ series of tutorials}} that discuss how to modify serial driver codes to distribute the {\ttfamily Problem} object across multiple processors.
+
+Most of the driver code is identical to its serial counterpart and we only discuss the changes required to distribute the problem. Please refer to \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for a more detailed discussion of the problem and its (serial) implementation.
+
+\DoxyHorRuler{0}
+\hypertarget{index_main_body}{}\doxysection{\texorpdfstring{The main function}{The main function}}\label{index_main_body}
+As described in the \href{../../general_mpi/html/index.html}{\texttt{ parallel processing document }} all parallel driver codes must initialise and shutdown oomph-\/lib\textquotesingle{}s MPI routines by calling {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}. The functions {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()} call their MPI counterparts, {\ttfamily MPI\+\_\+\+Init(...)} and {\ttfamily MPI\+\_\+\+Finalize()}, which must {\bfseries{not}} be called again.
+
+In our demo driver codes, we surround all parallel sections of code with {\ttfamily \#ifdefs} to ensure that the code remains functional if compiled without parallel support (in which case the macro {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} is undefined), for example.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ RefineableDrivenCavity\ test\ problem\ }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ MPI}}
+\DoxyCodeLine{\ MPI\_Helpers::init(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ In order to distribute the problem over multiple processors a single call to the function {\ttfamily Problem\+::distribute()} is all that is required. Thus, a minimally-\/changed serial driver code would be 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{DocInfo\ doc\_info;}
+\DoxyCodeLine{doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Set\ max.\ number\ of\ black-\/box\ adaptation}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Solve\ problem\ with\ Taylor\ Hood\ elements}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Build\ problem}}
+\DoxyCodeLine{\ RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2>\ >\ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Distribute\ the\ problem\ (only\ change\ from\ serial\ version)}}
+\DoxyCodeLine{\ problem.distribute();\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Solve\ the\ problem\ with\ automatic\ adaptation}}
+\DoxyCodeLine{\ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Finally, we must call {\ttfamily MPI\+\_\+finalize()} before the end of the main function  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Finalise\ MPI}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ MPI\_Helpers::finalize();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+
+\end{DoxyCodeInclude}
+ The actual driver code is slightly more complicated that the version shown above because it also acts as a self-\/test. The distribution of individual elements over the processors is determined by {\ttfamily METIS} and we have found that {\ttfamily METIS} occasionally gives slightly different results on different machines. To ensure reproducible results when acting as a self-\/test, the code (like all our parallel test codes) reads a predetermined element distribution from the disk; see \href{\#distribution}{\texttt{ below }} for more details.
+
+\DoxyHorRuler{0}
+\hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{Changes to the problem class}{Changes to the problem class}}\label{index_problem_class}
+A particular feature of the \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ driven cavity problem}} is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed. In the serial driver code, we arbitrarily pinned the first pressure degree of freedom in the "{}first"{} element in the mesh. Once the problem is distributed this element will only be available to particular processors and the pressure degree of freedom must be pinned on each one. Consequently we re-\/write the {\ttfamily actions\+\_\+after\+\_\+adapt()} function as follows\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ After\ adaptation:\ Unpin\ pressure\ and\ pin\ redundant\ pressure\ dofs.}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_after\_adapt()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Unpin\ all\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ \ \ unpin\_all\_pressure\_dofs(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ redundant\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ \ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Now\ set\ the\ first\ pressure\ dof\ in\ the\ first\ element\ to\ 0.0}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_element=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ If\ the\ lower\ left\ node\ of\ this\ element\ is\ (0,0),\ then\ fix\ the\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ pressure\ dof\ in\ this\ element\ to\ zero}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (mesh\_pt()-\/>finite\_element\_pt(e)-\/>node\_pt(0)-\/>x(0)==0.0\ \&\&\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ mesh\_pt()-\/>finite\_element\_pt(e)-\/>node\_pt(0)-\/>x(1)==0.0)\ \textcolor{comment}{//\ 2d\ problem}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}I'm\ fixing\ the\ pressure\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Fix\ the\ pressure\ in\ element\ e\ at\ pdof=0\ to\ 0.0}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ pdof=0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ fix\_pressure(e,pdof,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+ This change ensures that every processor that holds the element containing the node at position (0,0) (i.\+e. the first element) fixes the pressure for that element. The floating-\/point comparison does not cause any problems in this case because the {\ttfamily Node\textquotesingle{}s} position is explicitly set to "{}exactly"{} (0.\+0,0.\+0) in the Mesh constructor and never changes.
+
+It is not necessary to change the corresponding statements in the problem constructor because the problem distribution occurs after the problem has been constructed. In fact, the problem constructor is unchanged from the serial version.
+
+\DoxyHorRuler{0}
+\hypertarget{index_doc_solution}{}\doxysection{\texorpdfstring{Changes to doc\+\_\+solution}{Changes to doc\_solution}}\label{index_doc_solution}
+The {\ttfamily doc\+\_\+solution()} routine requires a slight modification to ensure that the output from different processors can be distinguished; this is achieved by including the current processor number in the filename of the solution\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ RefineableDrivenCavityProblem<ELEMENT>::doc\_solution(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ current\ process\ rank}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{int}\ my\_rank=this-\/>communicator\_pt()-\/>my\_rank();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number(),my\_rank);}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+
+
+The figure below shows the mesh after the final solution of this problem, distributed across two processors, with the two colours indicating which processor the elements belong to.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{partition}
+\doxyfigcaption{Plot illustrating the distribution of the mesh for the adaptive driven cavity }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_distribution}{}\doxysection{\texorpdfstring{Customising the distribution}{Customising the distribution}}\label{index_distribution}
+The actual driver code demonstrates two of the different options available for the {\ttfamily Problem\+::distribute()} function, selected by the presence or absence of command line arguments.\hypertarget{index_no_disk}{}\doxysubsection{\texorpdfstring{Option I\+: Distributing a problem using METIS and documenting its distribution}{Option I: Distributing a problem using METIS and documenting its distribution}}\label{index_no_disk}
+If no command line arguments are specified we determine the problem distribution using {\ttfamily METIS}, and write the distribution to a file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Are\ there\ command-\/line\ arguments?}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc==1)}
+\DoxyCodeLine{\ \ \ \{}
+
+\end{DoxyCodeInclude}
+ The distribution is represented by a vector of unsigneds whose values indicate the processor on which the corresponding element is stored.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Provide\ storage\ for\ each\ element's\ partition\ number}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_element=problem.mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \ \ \ Vector<unsigned>\ out\_element\_partition(n\_element);}
+
+\end{DoxyCodeInclude}
+ We distribute the problem with a call to {\ttfamily Problem\+::distribute(...)}, using the boolean flag to request that the relevant statistics are displayed on screen. The distribution chosen for the elements is returned in the vector created earlier.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Distribute\ the\ problem}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ report\_stats=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ out\_element\_partition=problem.distribute(report\_stats);}
+
+\end{DoxyCodeInclude}
+ We document the distribution by writing the distribution vector to a file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Write\ partition\ to\ disk}}
+\DoxyCodeLine{\ \ \ \ std::ofstream\ output\_file;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ \ \ \ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}out\_adaptive\_cavity\_1\_partition.dat"{}});}
+\DoxyCodeLine{\ \ \ \ output\_file.open(filename);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ output\_file\ <<\ out\_element\_partition[e]\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we perform an optional self-\/test of the halo-\/haloed lookup schemes.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ halo\ schemes\ (optional)}}
+\DoxyCodeLine{\ \ \ \ problem.check\_halo\_schemes(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+\hypertarget{index_from_disk}{}\doxysubsection{\texorpdfstring{Option II\+: Using a pre-\/determined distribution}{Option II: Using a pre-determined distribution}}\label{index_from_disk}
+If command line arguments are specified (typically when the code is run in validation mode) we read the distribution from disk, using a file that was written using the procedure shown above. (This is useful because in our experience {\ttfamily METIS} may produce slightly different distribution on different machines. This would cause the self-\/tests to fail even though the computed results would be correct).
+
+We start by creating a {\ttfamily Doc\+Info} object that specifies the directory in which the problem distribution will be documented and by reading in the vector that represents the distribution
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Validation\ run\ -\/\ read\ in\ partition\ from\ file}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ DocInfo\ object\ specifies\ directory\ in\ which\ we\ document}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ the\ distribution}}
+\DoxyCodeLine{\ \ \ \ DocInfo\ mesh\_doc\_info;}
+\DoxyCodeLine{\ \ \ \ mesh\_doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH\_MESH"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ storage\ for\ pre-\/determined\ partitioning}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_element=problem.mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \ \ \ Vector<unsigned>\ element\_partition(n\_element);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Read\ in\ partitioning\ from\ disk}}
+\DoxyCodeLine{\ \ \ \ std::ifstream\ input\_file;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ \ \ \ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}adaptive\_cavity\_1\_partition.dat"{}});}
+\DoxyCodeLine{\ \ \ \ input\_file.open(filename);}
+\DoxyCodeLine{\ \ \ \ std::string\ input\_string;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ getline(input\_file,input\_string,\textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{\ \ \ \ \ \ element\_partition[e]=atoi(input\_string.c\_str());}
+\DoxyCodeLine{\ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ We pass the distribution vector to {\ttfamily Problem\+::distribute(...)} and thus bypass the partitioning by {\ttfamily METIS}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Now\ perform\ the\ distribution\ and\ document\ it}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ report\_stats=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ problem.distribute(element\_partition,mesh\_doc\_info,report\_stats);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ We note that it is possible to document a mesh\textquotesingle{}s distribution at any point, using the {\ttfamily Mesh\+::doc\+\_\+mesh\+\_\+distribution(...)} function, as indicated here
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ solve\ with\ adaptation}}
+\DoxyCodeLine{\ \ \ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \ \ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ mesh\_doc\_info.number()=1;}
+\DoxyCodeLine{\ \ \ \ problem.mesh\_pt()-\/>doc\_mesh\_distribution(mesh\_doc\_info);}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ Taylor\ Hood\ elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+The driver code from which this example is taken also solves the same distributed problem using Crouzeix-\/\+Raviart elements. The fully modified parallel driver code can be found at
+
+\begin{center} \href{../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc}{\texttt{ demo\+\_\+drivers/mpi/distribution/adaptive\+\_\+driven\+\_\+cavity/adaptive\+\_\+driven\+\_\+cavity.\+cc }} \end{center} 
+
+For further examples of using the {\ttfamily distribute()} function for both two-\/dimensional and three-\/dimensional single-\/domain problems, see the directory
+
+\begin{center} \href{../../../../demo_drivers/mpi/distribution/}{\texttt{ demo\+\_\+drivers/mpi/distribution/ }} \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

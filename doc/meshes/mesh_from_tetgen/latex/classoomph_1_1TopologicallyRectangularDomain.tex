@@ -1,0 +1,837 @@
+\doxysection{oomph\+::Topologically\+Rectangular\+Domain Class Reference}
+\hypertarget{classoomph_1_1TopologicallyRectangularDomain}{}\label{classoomph_1_1TopologicallyRectangularDomain}\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+
+
+Topologically Rectangular Domain -\/ a domain dexcribing a topologically rectangular problem -\/ primarily contains functions to access the position of the global boundary relative to the macro element boundary, as well as first and second derivates of the global boundary wrt the macro element boundary NOTE \+: suitable for Hermite\+Element\+Quad\+Mesh.  
+
+
+
+
+{\ttfamily \#include $<$topologically\+\_\+rectangular\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Topologically\+Rectangular\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TopologicallyRectangularDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{r}})
+\begin{DoxyCompactList}\small\item\em boundary function pointer -\/ for a given boundary takes the macro element coordinate position on that boundary and for that position returns the global coordinates (x) coordinates, or derivatives -\/ dx\+\_\+i/dm\+\_\+t or second derivatives d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_acd15ad13385a5077c83f73008638f4fe}{Topologically\+Rectangular\+Domain}} (\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{north\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{east\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{south\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{west\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor -\/ domain boundaries are described with four boundary function pointers describing the topology of the north, east, south, and west boundaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a2b21567d1c94ec14df12c9390a9dd195}{Topologically\+Rectangular\+Domain}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{l\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&l\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Constructor -\/ takes length of domain in x and y direction as arguements. Assumes domain is rectangular, and the south west (lower left) corner is at 0,0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a6b00e4df8a228538f9beac85e2927033}{Topologically\+Rectangular\+Domain}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&x\+\_\+min, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&x\+\_\+max, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&y\+\_\+min, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&y\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Constructor -\/ takes the minimum and maximum coordinates of the of an assumed rectanguler domain in the x and y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4aad0e9e8117cfe93f6de03aac46cbec}{Topologically\+Rectangular\+Domain}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a286e5f048a71a5b26778d0cd5a2a7689}{operator=}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_aa7b1e4911a2b0ac8f599819faa2c9b27}{\texorpdfstring{$\sim$}{\string~}\+Topologically\+Rectangular\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ empty; clean up done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a86e606d9635f02462fd4f1ef07cd09d4}{set\+\_\+boundary\+\_\+derivative\+\_\+functions}} (\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d\+\_\+north\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d\+\_\+east\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d\+\_\+south\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d\+\_\+west\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em allows the boundary derivate function pointers to be set. To compute the derivatives of the problem domain global coordinates (x\+\_\+i) wrt the macro element coordinates (m\+\_\+i), dx\+\_\+i/dm\+\_\+t is required along the domain boundaries (where dm\+\_\+t is the macro element coordinate tangential to the domain boundary). The derivatives dx\+\_\+i/dm\+\_\+t can either be prescribed with function pointers, or if the function pointers are not provided then dx\+\_\+i/dm\+\_\+t is computed with finite differencing. Note -\/ these functions are only required for domains contructed with boundary function pointers \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a69d21da2d4dff225943aab99fb4f1f10}{set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions}} (\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2\+\_\+north\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2\+\_\+east\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2\+\_\+south\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2\+\_\+west\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em allows the boundary second derivate function pointers to be set. To compute the second derivatives of the problem domain global coordinates (x\+\_\+i) wrt the macro element coordinates (m\+\_\+i), d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 is required along the domain boundaries (where dm\+\_\+t is the macro element coordinate tangential to the domain boundary). The derivatives d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 can either be prescribed with function pointers, or if the function pointers are not provided then dx\+\_\+i/dm\+\_\+t is computed with finite differencing. Note -\/ these functions are only required for domains contructed with boundary function pointers \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em returns the global coordinate position (f) of macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a218b22a016e2f330d6b90354597d9786}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em returns the derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a0b882a9e660cab447c6be8cbeb8c9c18}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em returns the second derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a6adb9d87f5dcedd2ede5a8da494930e5}{r\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the north boundary and returns the global coordinate position along that boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a02ac630af43ddea871e5d9cf543d783b}{r\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the east boundary and returns the global coordinate position along that boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a76ea308be7a90143fe728fc4799d584b}{r\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the south boundary and returns the global coordinate position along that boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_aa56f73a53b028997929605e71eab6e2d}{r\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the west boundary and returns the global coordinate position along that boundary access down boundary function pointer \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ad37cd9d2ee8eb90125d66be63d5b97c7}{dr\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dr}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the north boundary and returns the derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a22b9364ef22563bea32aad2ff9e6851f}{dr\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dr}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the E boundary and returns the derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a24a20bc9749166ca61bd4373bc381680}{dr\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dr}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the south boundary and returns the derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a91b92399343513aed5cfa65a8377b01a}{dr\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dr}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the W boundary and returns the derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a6cc86191b0085c8d7b3f05985cf647c8}{d2r\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2r}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the north boundary and returns the second derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ab40347c05811cfa8a76394204fd0611a}{d2r\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2r}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the east boundary and returns the second derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ae3bc22aeb952c657f3b3672068243197}{d2r\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2r}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the south boundary and returns the second derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b8105bb7da4e1a14a75c05a}{d2r\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{d2r}})
+\begin{DoxyCompactList}\small\item\em takes the macro element coordinate position along the west boundary and returns the second derivates of the global coordinates with respect to the boundary \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the north boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the east boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the north boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the west boundary of this topologically rectangular domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_afda00e0273ae8dacbd3626bfd363fcc3}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a535ff2d7f9561425d9fd4b0d57bbc769}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_aeaea9592b94d26a6a23f4f425ee7cd37}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8e3abcbc75bab984017cb974d81db41e}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a18674c5ad527a43b1fd3e3bdc15fff8f}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a412d6225a5a6c3c55835e295e736d1c0}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a71020e52d5dd8cc0be51b9b466a294dc}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a55aaf2cfce3da535d9dd9ac5e990be3b}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a2e58acf65777d33e580b4953b7753b45}{x\+\_\+south\+\_\+west}}
+\begin{DoxyCompactList}\small\item\em coordinate position of south west corner of domain (only used if boundary functions are not used) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_aea8383a0d263080b49c3cbaee4af7833}{x\+\_\+north\+\_\+east}}
+\begin{DoxyCompactList}\small\item\em coordinate position of north east corner of domain (only used if boundary functions are not used) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Topologically Rectangular Domain -\/ a domain dexcribing a topologically rectangular problem -\/ primarily contains functions to access the position of the global boundary relative to the macro element boundary, as well as first and second derivates of the global boundary wrt the macro element boundary NOTE \+: suitable for Hermite\+Element\+Quad\+Mesh. 
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00047}{47}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}\label{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!BoundaryFctPt@{BoundaryFctPt}}
+\index{BoundaryFctPt@{BoundaryFctPt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{BoundaryFctPt}{BoundaryFctPt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}}(\texorpdfstring{$\ast$}{*} oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Boundary\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{r}})}
+
+
+
+boundary function pointer -\/ for a given boundary takes the macro element coordinate position on that boundary and for that position returns the global coordinates (x) coordinates, or derivatives -\/ dx\+\_\+i/dm\+\_\+t or second derivatives d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00054}{54}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_acd15ad13385a5077c83f73008638f4fe}\label{classoomph_1_1TopologicallyRectangularDomain_acd15ad13385a5077c83f73008638f4fe} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
+\index{TopologicallyRectangularDomain@{TopologicallyRectangularDomain}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{TopologicallyRectangularDomain()}{TopologicallyRectangularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{north\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{east\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{south\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{west\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ domain boundaries are described with four boundary function pointers describing the topology of the north, east, south, and west boundaries. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{275}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a2b21567d1c94ec14df12c9390a9dd195}\label{classoomph_1_1TopologicallyRectangularDomain_a2b21567d1c94ec14df12c9390a9dd195} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
+\index{TopologicallyRectangularDomain@{TopologicallyRectangularDomain}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{TopologicallyRectangularDomain()}{TopologicallyRectangularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{l\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{l\+\_\+y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ takes length of domain in x and y direction as arguements. Assumes domain is rectangular, and the south west (lower left) corner is at 0,0. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{391}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6b00e4df8a228538f9beac85e2927033}\label{classoomph_1_1TopologicallyRectangularDomain_a6b00e4df8a228538f9beac85e2927033} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
+\index{TopologicallyRectangularDomain@{TopologicallyRectangularDomain}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{TopologicallyRectangularDomain()}{TopologicallyRectangularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{x\+\_\+min,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{x\+\_\+max,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{y\+\_\+min,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{y\+\_\+max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ takes the minimum and maximum coordinates of the of an assumed rectanguler domain in the x and y direction. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{435}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a4aad0e9e8117cfe93f6de03aac46cbec}\label{classoomph_1_1TopologicallyRectangularDomain_a4aad0e9e8117cfe93f6de03aac46cbec} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!TopologicallyRectangularDomain@{TopologicallyRectangularDomain}}
+\index{TopologicallyRectangularDomain@{TopologicallyRectangularDomain}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{TopologicallyRectangularDomain()}{TopologicallyRectangularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Topologically\+Rectangular\+Domain\+::\+Topologically\+Rectangular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aa7b1e4911a2b0ac8f599819faa2c9b27}\label{classoomph_1_1TopologicallyRectangularDomain_aa7b1e4911a2b0ac8f599819faa2c9b27} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!````~TopologicallyRectangularDomain@{\texorpdfstring{$\sim$}{\string~}TopologicallyRectangularDomain}}
+\index{````~TopologicallyRectangularDomain@{\texorpdfstring{$\sim$}{\string~}TopologicallyRectangularDomain}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TopologicallyRectangularDomain()}{\string~TopologicallyRectangularDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Topologically\+Rectangular\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Topologically\+Rectangular\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor -\/ empty; clean up done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00087}{87}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a0b882a9e660cab447c6be8cbeb8c9c18}\label{classoomph_1_1TopologicallyRectangularDomain_a0b882a9e660cab447c6be8cbeb8c9c18} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2macro\_element\_boundary@{d2macro\_element\_boundary}}
+\index{d2macro\_element\_boundary@{d2macro\_element\_boundary}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2macro\_element\_boundary()}{d2macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the second derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00601}{601}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00911}{d2r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00858}{d2r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00964}{d2r\+\_\+\+S()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l01017}{d2r\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ab40347c05811cfa8a76394204fd0611a}\label{classoomph_1_1TopologicallyRectangularDomain_ab40347c05811cfa8a76394204fd0611a} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_E@{d2r\_E}}
+\index{d2r\_E@{d2r\_E}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2r\_E()}{d2r\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2r\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{d2r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the east boundary and returns the second derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00911}{911}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00601}{d2macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6cc86191b0085c8d7b3f05985cf647c8}\label{classoomph_1_1TopologicallyRectangularDomain_a6cc86191b0085c8d7b3f05985cf647c8} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_N@{d2r\_N}}
+\index{d2r\_N@{d2r\_N}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2r\_N()}{d2r\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2r\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{d2r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the north boundary and returns the second derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00858}{858}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00601}{d2macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ae3bc22aeb952c657f3b3672068243197}\label{classoomph_1_1TopologicallyRectangularDomain_ae3bc22aeb952c657f3b3672068243197} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_S@{d2r\_S}}
+\index{d2r\_S@{d2r\_S}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2r\_S()}{d2r\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2r\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{d2r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the south boundary and returns the second derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00964}{964}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00601}{d2macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b8105bb7da4e1a14a75c05a}\label{classoomph_1_1TopologicallyRectangularDomain_a4522f1751b8105bb7da4e1a14a75c05a} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2r\_W@{d2r\_W}}
+\index{d2r\_W@{d2r\_W}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2r\_W()}{d2r\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2r\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{d2r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the west boundary and returns the second derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l01017}{1017}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00601}{d2macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a218b22a016e2f330d6b90354597d9786}\label{classoomph_1_1TopologicallyRectangularDomain_a218b22a016e2f330d6b90354597d9786} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dmacro\_element\_boundary@{dmacro\_element\_boundary}}
+\index{dmacro\_element\_boundary@{dmacro\_element\_boundary}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dmacro\_element\_boundary()}{dmacro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::dmacro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the derivates of the global coordinate position (f) wrt to the macro element coordinate at macro macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00565}{565}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{dr\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{dr\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{dr\+\_\+\+S()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{dr\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a22b9364ef22563bea32aad2ff9e6851f}\label{classoomph_1_1TopologicallyRectangularDomain_a22b9364ef22563bea32aad2ff9e6851f} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_E@{dr\_E}}
+\index{dr\_E@{dr\_E}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dr\_E()}{dr\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::dr\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{dr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the E boundary and returns the derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{750}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00565}{dmacro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ad37cd9d2ee8eb90125d66be63d5b97c7}\label{classoomph_1_1TopologicallyRectangularDomain_ad37cd9d2ee8eb90125d66be63d5b97c7} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_N@{dr\_N}}
+\index{dr\_N@{dr\_N}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dr\_N()}{dr\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::dr\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{dr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the north boundary and returns the derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{714}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00565}{dmacro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a24a20bc9749166ca61bd4373bc381680}\label{classoomph_1_1TopologicallyRectangularDomain_a24a20bc9749166ca61bd4373bc381680} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_S@{dr\_S}}
+\index{dr\_S@{dr\_S}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dr\_S()}{dr\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::dr\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{dr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the south boundary and returns the derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{786}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00565}{dmacro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a91b92399343513aed5cfa65a8377b01a}\label{classoomph_1_1TopologicallyRectangularDomain_a91b92399343513aed5cfa65a8377b01a} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dr\_W@{dr\_W}}
+\index{dr\_W@{dr\_W}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dr\_W()}{dr\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::dr\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{dr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the W boundary and returns the derivates of the global coordinates with respect to the boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{822}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00565}{dmacro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf}\label{classoomph_1_1TopologicallyRectangularDomain_a4de4d505233303cee0690ee87e45b4cf} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the global coordinate position (f) of macro element position s on boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time t (no time dependence) 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00529}{529}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00655}{r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00636}{r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00674}{r\+\_\+\+S()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00694}{r\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a286e5f048a71a5b26778d0cd5a2a7689}\label{classoomph_1_1TopologicallyRectangularDomain_a286e5f048a71a5b26778d0cd5a2a7689} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a02ac630af43ddea871e5d9cf543d783b}\label{classoomph_1_1TopologicallyRectangularDomain_a02ac630af43ddea871e5d9cf543d783b} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_E@{r\_E}}
+\index{r\_E@{r\_E}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{r\_E()}{r\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::r\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the east boundary and returns the global coordinate position along that boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00655}{655}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00529}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a6adb9d87f5dcedd2ede5a8da494930e5}\label{classoomph_1_1TopologicallyRectangularDomain_a6adb9d87f5dcedd2ede5a8da494930e5} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_N@{r\_N}}
+\index{r\_N@{r\_N}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{r\_N()}{r\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::r\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the north boundary and returns the global coordinate position along that boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00636}{636}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00529}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a76ea308be7a90143fe728fc4799d584b}\label{classoomph_1_1TopologicallyRectangularDomain_a76ea308be7a90143fe728fc4799d584b} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_S@{r\_S}}
+\index{r\_S@{r\_S}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{r\_S()}{r\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::r\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the south boundary and returns the global coordinate position along that boundary 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00674}{674}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{South\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00529}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aa56f73a53b028997929605e71eab6e2d}\label{classoomph_1_1TopologicallyRectangularDomain_aa56f73a53b028997929605e71eab6e2d} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!r\_W@{r\_W}}
+\index{r\_W@{r\_W}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{r\_W()}{r\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::r\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+takes the macro element coordinate position along the west boundary and returns the global coordinate position along that boundary access down boundary function pointer 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00694}{694}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{West\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{x\+\_\+north\+\_\+east}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{x\+\_\+south\+\_\+west}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00529}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a86e606d9635f02462fd4f1ef07cd09d4}\label{classoomph_1_1TopologicallyRectangularDomain_a86e606d9635f02462fd4f1ef07cd09d4} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!set\_boundary\_derivative\_functions@{set\_boundary\_derivative\_functions}}
+\index{set\_boundary\_derivative\_functions@{set\_boundary\_derivative\_functions}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_derivative\_functions()}{set\_boundary\_derivative\_functions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::set\+\_\+boundary\+\_\+derivative\+\_\+functions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d\+\_\+north\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d\+\_\+east\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d\+\_\+south\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d\+\_\+west\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+allows the boundary derivate function pointers to be set. To compute the derivatives of the problem domain global coordinates (x\+\_\+i) wrt the macro element coordinates (m\+\_\+i), dx\+\_\+i/dm\+\_\+t is required along the domain boundaries (where dm\+\_\+t is the macro element coordinate tangential to the domain boundary). The derivatives dx\+\_\+i/dm\+\_\+t can either be prescribed with function pointers, or if the function pointers are not provided then dx\+\_\+i/dm\+\_\+t is computed with finite differencing. Note -\/ these functions are only required for domains contructed with boundary function pointers 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00487}{487}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{d\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{d\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{d\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{d\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a69d21da2d4dff225943aab99fb4f1f10}\label{classoomph_1_1TopologicallyRectangularDomain_a69d21da2d4dff225943aab99fb4f1f10} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!set\_boundary\_second\_derivative\_functions@{set\_boundary\_second\_derivative\_functions}}
+\index{set\_boundary\_second\_derivative\_functions@{set\_boundary\_second\_derivative\_functions}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_second\_derivative\_functions()}{set\_boundary\_second\_derivative\_functions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Topologically\+Rectangular\+Domain\+::set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d2\+\_\+north\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d2\+\_\+east\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d2\+\_\+south\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}}}]{d2\+\_\+west\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+allows the boundary second derivate function pointers to be set. To compute the second derivatives of the problem domain global coordinates (x\+\_\+i) wrt the macro element coordinates (m\+\_\+i), d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 is required along the domain boundaries (where dm\+\_\+t is the macro element coordinate tangential to the domain boundary). The derivatives d2x\+\_\+i/dm\+\_\+t\texorpdfstring{$^\wedge$}{\string^}2 can either be prescribed with function pointers, or if the function pointers are not provided then dx\+\_\+i/dm\+\_\+t is computed with finite differencing. Note -\/ these functions are only required for domains contructed with boundary function pointers 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00512}{512}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a412d6225a5a6c3c55835e295e736d1c0}\label{classoomph_1_1TopologicallyRectangularDomain_a412d6225a5a6c3c55835e295e736d1c0} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2East\_boundary\_fn\_pt@{d2East\_boundary\_fn\_pt}}
+\index{d2East\_boundary\_fn\_pt@{d2East\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2East\_boundary\_fn\_pt}{d2East\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2\+East\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00188}{188}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00911}{d2r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00513}{set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a18674c5ad527a43b1fd3e3bdc15fff8f}\label{classoomph_1_1TopologicallyRectangularDomain_a18674c5ad527a43b1fd3e3bdc15fff8f} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2North\_boundary\_fn\_pt@{d2North\_boundary\_fn\_pt}}
+\index{d2North\_boundary\_fn\_pt@{d2North\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2North\_boundary\_fn\_pt}{d2North\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2\+North\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00183}{183}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00858}{d2r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00513}{set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a71020e52d5dd8cc0be51b9b466a294dc}\label{classoomph_1_1TopologicallyRectangularDomain_a71020e52d5dd8cc0be51b9b466a294dc} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2South\_boundary\_fn\_pt@{d2South\_boundary\_fn\_pt}}
+\index{d2South\_boundary\_fn\_pt@{d2South\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2South\_boundary\_fn\_pt}{d2South\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2\+South\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00193}{193}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00964}{d2r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00513}{set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a55aaf2cfce3da535d9dd9ac5e990be3b}\label{classoomph_1_1TopologicallyRectangularDomain_a55aaf2cfce3da535d9dd9ac5e990be3b} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!d2West\_boundary\_fn\_pt@{d2West\_boundary\_fn\_pt}}
+\index{d2West\_boundary\_fn\_pt@{d2West\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{d2West\_boundary\_fn\_pt}{d2West\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d2\+West\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the second derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00198}{198}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l01017}{d2r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00513}{set\+\_\+boundary\+\_\+second\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a535ff2d7f9561425d9fd4b0d57bbc769}\label{classoomph_1_1TopologicallyRectangularDomain_a535ff2d7f9561425d9fd4b0d57bbc769} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dEast\_boundary\_fn\_pt@{dEast\_boundary\_fn\_pt}}
+\index{dEast\_boundary\_fn\_pt@{dEast\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dEast\_boundary\_fn\_pt}{dEast\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d\+East\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the east boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00169}{169}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00911}{d2r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{dr\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00487}{set\+\_\+boundary\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_afda00e0273ae8dacbd3626bfd363fcc3}\label{classoomph_1_1TopologicallyRectangularDomain_afda00e0273ae8dacbd3626bfd363fcc3} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dNorth\_boundary\_fn\_pt@{dNorth\_boundary\_fn\_pt}}
+\index{dNorth\_boundary\_fn\_pt@{dNorth\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dNorth\_boundary\_fn\_pt}{dNorth\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d\+North\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the north boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00165}{165}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00858}{d2r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{dr\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00487}{set\+\_\+boundary\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aeaea9592b94d26a6a23f4f425ee7cd37}\label{classoomph_1_1TopologicallyRectangularDomain_aeaea9592b94d26a6a23f4f425ee7cd37} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dSouth\_boundary\_fn\_pt@{dSouth\_boundary\_fn\_pt}}
+\index{dSouth\_boundary\_fn\_pt@{dSouth\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dSouth\_boundary\_fn\_pt}{dSouth\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d\+South\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the south boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00173}{173}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00964}{d2r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{dr\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00487}{set\+\_\+boundary\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a8e3abcbc75bab984017cb974d81db41e}\label{classoomph_1_1TopologicallyRectangularDomain_a8e3abcbc75bab984017cb974d81db41e} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!dWest\_boundary\_fn\_pt@{dWest\_boundary\_fn\_pt}}
+\index{dWest\_boundary\_fn\_pt@{dWest\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{dWest\_boundary\_fn\_pt}{dWest\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::d\+West\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the derivates of global coordinates wrt to the macro element coordinate tangential to the west boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00177}{177}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l01017}{d2r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{dr\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00487}{set\+\_\+boundary\+\_\+derivative\+\_\+functions()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4}\label{classoomph_1_1TopologicallyRectangularDomain_ac6f1166ec8fd2e62704512bfb612dfb4} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!East\_boundary\_fn\_pt@{East\_boundary\_fn\_pt}}
+\index{East\_boundary\_fn\_pt@{East\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{East\_boundary\_fn\_pt}{East\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::\+East\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the east boundary of this topologically rectangular domain. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00152}{152}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00911}{d2r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{dr\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00655}{r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2}\label{classoomph_1_1TopologicallyRectangularDomain_a78adac085b81bd6efed96c43f9c1f8a2} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!North\_boundary\_fn\_pt@{North\_boundary\_fn\_pt}}
+\index{North\_boundary\_fn\_pt@{North\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{North\_boundary\_fn\_pt}{North\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::\+North\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the north boundary of this topologically rectangular domain. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00148}{148}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00858}{d2r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{dr\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00636}{r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248}\label{classoomph_1_1TopologicallyRectangularDomain_a48aa6d308f504b63b6f080ed486a1248} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!South\_boundary\_fn\_pt@{South\_boundary\_fn\_pt}}
+\index{South\_boundary\_fn\_pt@{South\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{South\_boundary\_fn\_pt}{South\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::\+South\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the north boundary of this topologically rectangular domain. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00156}{156}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00964}{d2r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{dr\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00674}{r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9}\label{classoomph_1_1TopologicallyRectangularDomain_ab565242c7de0d10b36ec0a2e7a219bf9} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!West\_boundary\_fn\_pt@{West\_boundary\_fn\_pt}}
+\index{West\_boundary\_fn\_pt@{West\_boundary\_fn\_pt}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{West\_boundary\_fn\_pt}{West\_boundary\_fn\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain_a8b2e24f5500d86c93aef509c5410e7cc}{Boundary\+Fct\+Pt}} oomph\+::\+Topologically\+Rectangular\+Domain\+::\+West\+\_\+boundary\+\_\+fn\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer to prescribe the west boundary of this topologically rectangular domain. 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00160}{160}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l01017}{d2r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{dr\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00694}{r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00275}{Topologically\+Rectangular\+Domain()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_aea8383a0d263080b49c3cbaee4af7833}\label{classoomph_1_1TopologicallyRectangularDomain_aea8383a0d263080b49c3cbaee4af7833} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!x\_north\_east@{x\_north\_east}}
+\index{x\_north\_east@{x\_north\_east}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{x\_north\_east}{x\_north\_east}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}}$>$ oomph\+::\+Topologically\+Rectangular\+Domain\+::x\+\_\+north\+\_\+east\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+coordinate position of north east corner of domain (only used if boundary functions are not used) 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00207}{207}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{dr\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{dr\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{dr\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{dr\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00655}{r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00636}{r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00674}{r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00694}{r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+\Hypertarget{classoomph_1_1TopologicallyRectangularDomain_a2e58acf65777d33e580b4953b7753b45}\label{classoomph_1_1TopologicallyRectangularDomain_a2e58acf65777d33e580b4953b7753b45} 
+\index{oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}!x\_south\_west@{x\_south\_west}}
+\index{x\_south\_west@{x\_south\_west}!oomph::TopologicallyRectangularDomain@{oomph::TopologicallyRectangularDomain}}
+\doxysubsubsection{\texorpdfstring{x\_south\_west}{x\_south\_west}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}}$>$ oomph\+::\+Topologically\+Rectangular\+Domain\+::x\+\_\+south\+\_\+west\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+coordinate position of south west corner of domain (only used if boundary functions are not used) 
+
+
+
+Definition at line \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00203}{203}} of file \mbox{\hyperlink{topologically__rectangular__domain_8h_source}{topologically\+\_\+rectangular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00750}{dr\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00714}{dr\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00786}{dr\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00822}{dr\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00655}{r\+\_\+\+E()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00636}{r\+\_\+\+N()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00674}{r\+\_\+\+S()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00694}{r\+\_\+\+W()}}, \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00391}{Topologically\+Rectangular\+Domain()}}, and \mbox{\hyperlink{topologically__rectangular__domain_8h_source_l00435}{Topologically\+Rectangular\+Domain()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{topologically__rectangular__domain_8h}{topologically\+\_\+rectangular\+\_\+domain.\+h}}\end{DoxyCompactItemize}

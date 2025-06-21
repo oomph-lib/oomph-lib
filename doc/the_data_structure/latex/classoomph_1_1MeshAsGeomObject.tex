@@ -1,0 +1,574 @@
+\doxysection{oomph\+::Mesh\+As\+Geom\+Object Class Reference}
+\hypertarget{classoomph_1_1MeshAsGeomObject}{}\label{classoomph_1_1MeshAsGeomObject}\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+
+
+This class provides a \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representation of a given finite element mesh. The Lagrangian coordinate is taken to be the dimension of the (first) element in the mesh and the Eulerian coordinate is taken to be the dimension of the (first) node in the mesh. If there are no elements or nodes the appropriate dimensions will be set to zero. The constituent elements of the mesh must have their own \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representations, so they must be Finite\+Elements, and they become sub-\/objects in this compound \doxylink{classoomph_1_1GeomObject}{Geom\+Object}.  
+
+
+
+
+{\ttfamily \#include $<$mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h$>$}
+
+Inheritance diagram for oomph\+::Mesh\+As\+Geom\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MeshAsGeomObject}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a383d5ffb3cdde540a9db380d683f0673}{sample\+\_\+point\+\_\+container\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to the sample point container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a6fdba809aab96efeca9bcfac5cbdfd69}{finite\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})
+\begin{DoxyCompactList}\small\item\em Return pointer to e-\/th finite element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a101ce7b988c8fdada2c73bfb1f426141}{sample\+\_\+point\+\_\+container\+\_\+version}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Which sample point container is used in locate zeta? (uses enum Sample\+\_\+\+Point\+\_\+\+Container\+\_\+\+Type) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a331c1f9615df15f8fbde2f0eaa2a19d5}{nelement}} ()
+\begin{DoxyCompactList}\small\item\em Number of elements in the underlying mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a7d232452ef38433a589d030cc8bb4f06}{Mesh\+As\+Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a99a84495095584f4715898f436ad897a}{Mesh\+As\+Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a0488e25a39e03033a3ffff3018295205}{Mesh\+As\+Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a895085ac382bddf1127b4076be12c5fb}{\texorpdfstring{$\sim$}{\string~}\+Mesh\+As\+Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a8e5a3653530819a92ada6fe536b3acfa}{Mesh\+As\+Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a38cdb4de0e89837e38661e0817fab060}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a47d0c877a05e1d84703052431396cd0c}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a2295105be2e8e5b2527f23b0b93fa5cd}{geom\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a8a9fecb98d4e0a151e3b9e58aa433be9}{locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Find the sub geometric object and local coordinate therein that corresponds to the intrinsic coordinate zeta. If sub\+\_\+geom\+\_\+object\+\_\+pt=0 on return from this function, none of the constituent sub-\/objects contain the required coordinate. Following from the general interface to this function in Geom\+Objects, setting the optional bool argument to true means that each time the sub-\/object\textquotesingle{}s locate\+\_\+zeta function is called, the coordinate argument "{}s"{} is used as the initial guess. However, this doesn\textquotesingle{}t make sense here and the argument is ignored (though a warning is issued when the code is compiled in PARANOID setting) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the position as a function of the intrinsic coordinate zeta. This provides an (expensive!) default implementation in which we loop over all the constituent sub-\/objects and check if they contain zeta and then evaluate their \doxylink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{position()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. This provides an (expensive!) default implementation in which we loop over all the constituent sub-\/objects and check if they contain zeta and then evaluate their \doxylink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{position()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aed3e9376f6042fed597098c0017a2131}{dposition}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&xi, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdxi}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the derivative of the position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_aff5bdabab387795b74ea1df0ab4ef1a6}{Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass dimension of geometric object (\# of Eulerian coords = \# of Lagrangian coords; no time history available/needed) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates. No time history available/needed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a75a091c285c27b4efc14c5afed4d3b31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates and pointer to time-\/stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the Geom\+Data varies with time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_afcff7382d77b6c995d2b43f14392047e}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a561d2439cbab0ca9ec8c15b3d4cda00d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeomObject_ab784d34d63bd852ee30fc03684717410}{\texorpdfstring{$\sim$}{\string~}\+Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Lagrangian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}{set\+\_\+nlagrangian\+\_\+and\+\_\+ndim}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}})
+\begin{DoxyCompactList}\small\item\em Set \# of Lagrangian and Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a8ca52ab6f4609144b7057961bd318fdc}{time\+\_\+stepper\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. Const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_af5736db11f3a40daa1a9b3d4859ca061}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdt}})
+\begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em 2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583}{interpolated\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A geometric object may be composed of many sub-\/objects each with their own local coordinate. This function returns the "{}global"{} intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.\+e. the intrinsic coordinate of the sub-\/\+Geom\+Object. In simple (non-\/compound) Geom\+Objects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived \doxylink{classoomph_1_1GeomObject}{Geom\+Object} where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a1d0d14e9a1acf2b865df676fd354444f}{build\+\_\+it}} (\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to actually build the thing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_af99c1c7301530bc8123a1ac7f9739f22}{Geom\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to \doxylink{classoomph_1_1Data}{Data} items that affects the object\textquotesingle{}s shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a47ec1120aff1d0981ad2217c78056d19}{Sub\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Internal storage for the elements that constitute the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a1bfccdbb639a9c946a3978a02fbe0585}{Sample\+\_\+point\+\_\+container\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the sample point container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a4400446d8dd7ef4d1d6be3ee7491a04f}{Communicator\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aba2f3c5644e8625d4bd7503c781e2d54}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a059e99eff4df393b35ae0473788322d6}{Sample\+\_\+point\+\_\+container\+\_\+version}}
+\begin{DoxyCompactList}\small\item\em Which version of the sample point container are we using? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a11d8ac51be65ee822a6c782c5e079a2c}{NLagrangian}}
+\begin{DoxyCompactList}\small\item\em Number of Lagrangian (intrinsic) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a6351e2d8fbd54ff23498eb6f77c905cc}{Ndim}}
+\begin{DoxyCompactList}\small\item\em Number of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a158a36e0dbcaf236ffc351b76faaed53}{Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Timestepper (used to handle access to geometry at previous timesteps) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class provides a \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representation of a given finite element mesh. The Lagrangian coordinate is taken to be the dimension of the (first) element in the mesh and the Eulerian coordinate is taken to be the dimension of the (first) node in the mesh. If there are no elements or nodes the appropriate dimensions will be set to zero. The constituent elements of the mesh must have their own \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representations, so they must be Finite\+Elements, and they become sub-\/objects in this compound \doxylink{classoomph_1_1GeomObject}{Geom\+Object}. 
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00092}{92}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a7d232452ef38433a589d030cc8bb4f06}\label{classoomph_1_1MeshAsGeomObject_a7d232452ef38433a589d030cc8bb4f06} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!MeshAsGeomObject@{MeshAsGeomObject}}
+\index{MeshAsGeomObject@{MeshAsGeomObject}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{MeshAsGeomObject()}{MeshAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Mesh\+As\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00314}{314}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8cc_source_l00064}{oomph\+::\+Mesh\+As\+Geom\+Object\+\_\+\+Helper\+::create\+\_\+sample\+\_\+point\+\_\+container\+\_\+parameters()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a99a84495095584f4715898f436ad897a}\label{classoomph_1_1MeshAsGeomObject_a99a84495095584f4715898f436ad897a} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!MeshAsGeomObject@{MeshAsGeomObject}}
+\index{MeshAsGeomObject@{MeshAsGeomObject}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{MeshAsGeomObject()}{MeshAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Mesh\+As\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \texorpdfstring{$\ast$}{*}}]{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00328}{328}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a0488e25a39e03033a3ffff3018295205}\label{classoomph_1_1MeshAsGeomObject_a0488e25a39e03033a3ffff3018295205} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!MeshAsGeomObject@{MeshAsGeomObject}}
+\index{MeshAsGeomObject@{MeshAsGeomObject}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{MeshAsGeomObject()}{MeshAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Mesh\+As\+Geom\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00336}{336}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a895085ac382bddf1127b4076be12c5fb}\label{classoomph_1_1MeshAsGeomObject_a895085ac382bddf1127b4076be12c5fb} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!````~MeshAsGeomObject@{\texorpdfstring{$\sim$}{\string~}MeshAsGeomObject}}
+\index{````~MeshAsGeomObject@{\texorpdfstring{$\sim$}{\string~}MeshAsGeomObject}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MeshAsGeomObject()}{\string~MeshAsGeomObject()}}
+{\footnotesize\ttfamily oomph\+::\+Mesh\+As\+Geom\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Mesh\+As\+Geom\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00339}{339}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00270}{Sample\+\_\+point\+\_\+container\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a8e5a3653530819a92ada6fe536b3acfa}\label{classoomph_1_1MeshAsGeomObject_a8e5a3653530819a92ada6fe536b3acfa} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!MeshAsGeomObject@{MeshAsGeomObject}}
+\index{MeshAsGeomObject@{MeshAsGeomObject}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{MeshAsGeomObject()}{MeshAsGeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Mesh\+As\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a1d0d14e9a1acf2b865df676fd354444f}\label{classoomph_1_1MeshAsGeomObject_a1d0d14e9a1acf2b865df676fd354444f} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!build\_it@{build\_it}}
+\index{build\_it@{build\_it}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{build\_it()}{build\_it()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::build\+\_\+it (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \texorpdfstring{$\ast$}{*}}]{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to actually build the thing. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{96}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l01608}{oomph\+::\+Mesh\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00275}{Communicator\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00477}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00264}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00358}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l01596}{oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00280}{Mesh\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02664}{oomph\+::\+Finite\+Element\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00351}{ngeom\+\_\+data()}}, \mbox{\hyperlink{mesh_8h_source_l00604}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00440}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00270}{Sample\+\_\+point\+\_\+container\+\_\+pt}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00284}{Sample\+\_\+point\+\_\+container\+\_\+version}}, \mbox{\hyperlink{geom__objects_8h_source_l00183}{oomph\+::\+Geom\+Object\+::set\+\_\+nlagrangian\+\_\+and\+\_\+ndim()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00267}{Sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00045}{oomph\+::\+Use\+CGALSample\+Point\+Container}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00042}{oomph\+::\+Use\+Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{sample__point__parameters_8h_source_l00041}{oomph\+::\+Use\+Refineable\+Bin\+Array}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00314}{Mesh\+As\+Geom\+Object()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00328}{Mesh\+As\+Geom\+Object()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_aed3e9376f6042fed597098c0017a2131}\label{classoomph_1_1MeshAsGeomObject_aed3e9376f6042fed597098c0017a2131} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!dposition@{dposition}}
+\index{dposition@{dposition}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{dposition()}{dposition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::dposition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdxi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the derivative of the position. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00443}{443}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a6fdba809aab96efeca9bcfac5cbdfd69}\label{classoomph_1_1MeshAsGeomObject_a6fdba809aab96efeca9bcfac5cbdfd69} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!finite\_element\_pt@{finite\_element\_pt}}
+\index{finite\_element\_pt@{finite\_element\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{finite\_element\_pt()}{finite\_element\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::finite\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to e-\/th finite element. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00294}{294}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00267}{Sub\+\_\+geom\+\_\+object\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a2295105be2e8e5b2527f23b0b93fa5cd}\label{classoomph_1_1MeshAsGeomObject_a2295105be2e8e5b2527f23b0b93fa5cd} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!geom\_data\_pt@{geom\_data\_pt}}
+\index{geom\_data\_pt@{geom\_data\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00358}{358}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00264}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a8a9fecb98d4e0a151e3b9e58aa433be9}\label{classoomph_1_1MeshAsGeomObject_a8a9fecb98d4e0a151e3b9e58aa433be9} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!locate\_zeta@{locate\_zeta}}
+\index{locate\_zeta@{locate\_zeta}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{locate\_zeta()}{locate\_zeta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&}]{sub\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Find the sub geometric object and local coordinate therein that corresponds to the intrinsic coordinate zeta. If sub\+\_\+geom\+\_\+object\+\_\+pt=0 on return from this function, none of the constituent sub-\/objects contain the required coordinate. Following from the general interface to this function in Geom\+Objects, setting the optional bool argument to true means that each time the sub-\/object\textquotesingle{}s locate\+\_\+zeta function is called, the coordinate argument "{}s"{} is used as the initial guess. However, this doesn\textquotesingle{}t make sense here and the argument is ignored (though a warning is issued when the code is compiled in PARANOID setting) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{373}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}{Sample\+Point\+Container\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00270}{Sample\+\_\+point\+\_\+container\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00409}{position()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a331c1f9615df15f8fbde2f0eaa2a19d5}\label{classoomph_1_1MeshAsGeomObject_a331c1f9615df15f8fbde2f0eaa2a19d5} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!nelement@{nelement}}
+\index{nelement@{nelement}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{nelement()}{nelement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mesh\+As\+Geom\+Object\+::nelement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in the underlying mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00308}{308}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00267}{Sub\+\_\+geom\+\_\+object\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a47d0c877a05e1d84703052431396cd0c}\label{classoomph_1_1MeshAsGeomObject_a47d0c877a05e1d84703052431396cd0c} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mesh\+As\+Geom\+Object\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00351}{351}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00264}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a38cdb4de0e89837e38661e0817fab060}\label{classoomph_1_1MeshAsGeomObject_a38cdb4de0e89837e38661e0817fab060} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4}\label{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!position@{position}}
+\index{position@{position}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. This provides an (expensive!) default implementation in which we loop over all the constituent sub-\/objects and check if they contain zeta and then evaluate their \doxylink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{position()} function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00409}{409}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{locate\+\_\+zeta()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00280}{Mesh\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{mesh_8cc_source_l02027}{oomph\+::\+Mesh\+::output()}}, \mbox{\hyperlink{elements_8h_source_l02680}{oomph\+::\+Finite\+Element\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}\label{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!position@{position}}
+\index{position@{position}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mesh\+As\+Geom\+Object\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the position as a function of the intrinsic coordinate zeta. This provides an (expensive!) default implementation in which we loop over all the constituent sub-\/objects and check if they contain zeta and then evaluate their \doxylink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{position()} function. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00397}{397}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00397}{position()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00397}{position()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a383d5ffb3cdde540a9db380d683f0673}\label{classoomph_1_1MeshAsGeomObject_a383d5ffb3cdde540a9db380d683f0673} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!sample\_point\_container\_pt@{sample\_point\_container\_pt}}
+\index{sample\_point\_container\_pt@{sample\_point\_container\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{sample\_point\_container\_pt()}{sample\_point\_container\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} \texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::sample\+\_\+point\+\_\+container\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the sample point container. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00288}{288}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00270}{Sample\+\_\+point\+\_\+container\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a101ce7b988c8fdada2c73bfb1f426141}\label{classoomph_1_1MeshAsGeomObject_a101ce7b988c8fdada2c73bfb1f426141} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!sample\_point\_container\_version@{sample\_point\_container\_version}}
+\index{sample\_point\_container\_version@{sample\_point\_container\_version}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{sample\_point\_container\_version()}{sample\_point\_container\_version()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mesh\+As\+Geom\+Object\+::sample\+\_\+point\+\_\+container\+\_\+version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Which sample point container is used in locate zeta? (uses enum Sample\+\_\+\+Point\+\_\+\+Container\+\_\+\+Type) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00302}{302}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00284}{Sample\+\_\+point\+\_\+container\+\_\+version}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a4400446d8dd7ef4d1d6be3ee7491a04f}\label{classoomph_1_1MeshAsGeomObject_a4400446d8dd7ef4d1d6be3ee7491a04f} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Communicator\_pt@{Communicator\_pt}}
+\index{Communicator\_pt@{Communicator\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Communicator\_pt}{Communicator\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}}\texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Communicator\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Communicator. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00275}{275}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_af99c1c7301530bc8123a1ac7f9739f22}\label{classoomph_1_1MeshAsGeomObject_af99c1c7301530bc8123a1ac7f9739f22} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Geom\_data\_pt@{Geom\_data\_pt}}
+\index{Geom\_data\_pt@{Geom\_data\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Geom\_data\_pt}{Geom\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Geom\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of pointers to \doxylink{classoomph_1_1Data}{Data} items that affects the object\textquotesingle{}s shape. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00264}{264}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00358}{geom\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00351}{ngeom\+\_\+data()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_aba2f3c5644e8625d4bd7503c781e2d54}\label{classoomph_1_1MeshAsGeomObject_aba2f3c5644e8625d4bd7503c781e2d54} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Mesh\_pt@{Mesh\_pt}}
+\index{Mesh\_pt@{Mesh\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Mesh\_pt}{Mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00280}{280}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00409}{position()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a1bfccdbb639a9c946a3978a02fbe0585}\label{classoomph_1_1MeshAsGeomObject_a1bfccdbb639a9c946a3978a02fbe0585} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Sample\_point\_container\_pt@{Sample\_point\_container\_pt}}
+\index{Sample\_point\_container\_pt@{Sample\_point\_container\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Sample\_point\_container\_pt}{Sample\_point\_container\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}\texorpdfstring{$\ast$}{*} oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Sample\+\_\+point\+\_\+container\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the sample point container. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00270}{270}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{locate\+\_\+zeta()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00288}{sample\+\_\+point\+\_\+container\+\_\+pt()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00339}{\texorpdfstring{$\sim$}{\string~}\+Mesh\+As\+Geom\+Object()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a059e99eff4df393b35ae0473788322d6}\label{classoomph_1_1MeshAsGeomObject_a059e99eff4df393b35ae0473788322d6} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Sample\_point\_container\_version@{Sample\_point\_container\_version}}
+\index{Sample\_point\_container\_version@{Sample\_point\_container\_version}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Sample\_point\_container\_version}{Sample\_point\_container\_version}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Sample\+\_\+point\+\_\+container\+\_\+version\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Which version of the sample point container are we using? 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00284}{284}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00302}{sample\+\_\+point\+\_\+container\+\_\+version()}}.
+
+\Hypertarget{classoomph_1_1MeshAsGeomObject_a47ec1120aff1d0981ad2217c78056d19}\label{classoomph_1_1MeshAsGeomObject_a47ec1120aff1d0981ad2217c78056d19} 
+\index{oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}!Sub\_geom\_object\_pt@{Sub\_geom\_object\_pt}}
+\index{Sub\_geom\_object\_pt@{Sub\_geom\_object\_pt}!oomph::MeshAsGeomObject@{oomph::MeshAsGeomObject}}
+\doxysubsubsection{\texorpdfstring{Sub\_geom\_object\_pt}{Sub\_geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Mesh\+As\+Geom\+Object\+::\+Sub\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Internal storage for the elements that constitute the object. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00267}{267}} of file \mbox{\hyperlink{mesh__as__geometric__object_8h_source}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{build\+\_\+it()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00294}{finite\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00308}{nelement()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh__as__geometric__object_8h}{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h}}\end{DoxyCompactItemize}

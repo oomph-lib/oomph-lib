@@ -1,0 +1,540 @@
+\doxysection{oomph\+::Quarter\+Pipe\+Domain Class Reference}
+\hypertarget{classoomph_1_1QuarterPipeDomain}{}\label{classoomph_1_1QuarterPipeDomain}\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+
+
+Domain representing a quarter pipe.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+pipe\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Quarter\+Pipe\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1QuarterPipeDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}{Axial\+Spacing\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi}})
+\begin{DoxyCompactList}\small\item\em Typedef for function pointer for function that implements axial spacing of macro elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_afb9763dac929fd4371a6ef860d9a5caf}{Quarter\+Pipe\+Domain}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ntheta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{nr}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&nz, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{length}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in various directions, the inner and outer radius and the length of the tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a7df039e22204accd7a8da75b1e08616e}{Quarter\+Pipe\+Domain}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain}{Quarter\+Pipe\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aadf2b6f249e0f742f09bbbee1fdd9dd0}{operator=}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain}{Quarter\+Pipe\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a872560e53bf73ef0bd1b69f2a40612c8}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Pipe\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}{Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aba699b5121d1300b96b00056cf64ddbe}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that implements axial spacing of macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a035e27884c0fa1bc31d1d9bed28c37bd}{axial\+\_\+spacing\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi}})
+\begin{DoxyCompactList}\small\item\em Function that implements axial spacing of macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_ae8cc6433c58dcfb265335744ed8a330a}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{s}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (U/\+D/\+L/\+R/\+F/B) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a5c023c7a9d6e43d123566bc2f7bb21f0}{r\+\_\+U}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a21c58b76f546300c308d6e1f303a3433}{r\+\_\+L}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aeb6e4d3fbb8afb4ad2597601f1a46afd}{r\+\_\+D}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aab6f3fd79bc6dea1eb267f3b55630a2b}{r\+\_\+R}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a85aaa5d1217c49e2144bbfd37dbad0fd}{r\+\_\+F}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aba1af5e7f1bc6e88ff8e9ee59e965630}{r\+\_\+B}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{f}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{rmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{thetamax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zmax}})
+\begin{DoxyCompactList}\small\item\em Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{static}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a3b79d0bf40336f7961a8b2bb58080dba}{default\+\_\+axial\+\_\+spacing\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi}})
+\begin{DoxyCompactList}\small\item\em Default for function that implements axial spacing of macro elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aeb912b40da8cd2883768fe2ca989e640}{Ntheta}}
+\begin{DoxyCompactList}\small\item\em Number of elements azimuthal direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a18ac22546af74ac9b76a870d3f5abe3d}{Nr}}
+\begin{DoxyCompactList}\small\item\em Number of elements radial direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_aab1bf3900c3537c44942e3fee0c3d24e}{Nz}}
+\begin{DoxyCompactList}\small\item\em Number of elements axial direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_ac71370e6c78fd37aa59e7a52d62d1cbe}{Rmin}}
+\begin{DoxyCompactList}\small\item\em Inner radius. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a5e2252883456cd65902663fda09296d5}{Rmax}}
+\begin{DoxyCompactList}\small\item\em Outer radius. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a0798f3962e840bdb3d31e4e0dada055d}{Length}}
+\begin{DoxyCompactList}\small\item\em Length. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_adad2a4e638bb58eda89a19eaf5e18969}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Geom object representing the outer boundary of the cross section. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a2760038e136d58a41dcbcd045bd13ae4}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Geom object representing the inner boundary of the cross section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}{Axial\+Spacing\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_ada15e8a576d3715e8ed88ea9bef5508a}{Axial\+\_\+spacing\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer for function that implements axial spacing of macro elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Domain representing a quarter pipe. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00040}{40}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}\label{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!AxialSpacingFctPt@{AxialSpacingFctPt}}
+\index{AxialSpacingFctPt@{AxialSpacingFctPt}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{AxialSpacingFctPt}{AxialSpacingFctPt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}}(\texorpdfstring{$\ast$}{*} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Axial\+Spacing\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi}})}
+
+
+
+Typedef for function pointer for function that implements axial spacing of macro elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00093}{93}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1QuarterPipeDomain_afb9763dac929fd4371a6ef860d9a5caf}\label{classoomph_1_1QuarterPipeDomain_afb9763dac929fd4371a6ef860d9a5caf} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!QuarterPipeDomain@{QuarterPipeDomain}}
+\index{QuarterPipeDomain@{QuarterPipeDomain}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{QuarterPipeDomain()}{QuarterPipeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Pipe\+Domain\+::\+Quarter\+Pipe\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ntheta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nr,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in various directions, the inner and outer radius and the length of the tube. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00045}{45}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a7df039e22204accd7a8da75b1e08616e}\label{classoomph_1_1QuarterPipeDomain_a7df039e22204accd7a8da75b1e08616e} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!QuarterPipeDomain@{QuarterPipeDomain}}
+\index{QuarterPipeDomain@{QuarterPipeDomain}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{QuarterPipeDomain()}{QuarterPipeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Pipe\+Domain\+::\+Quarter\+Pipe\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain}{Quarter\+Pipe\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a872560e53bf73ef0bd1b69f2a40612c8}\label{classoomph_1_1QuarterPipeDomain_a872560e53bf73ef0bd1b69f2a40612c8} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!````~QuarterPipeDomain@{\texorpdfstring{$\sim$}{\string~}QuarterPipeDomain}}
+\index{````~QuarterPipeDomain@{\texorpdfstring{$\sim$}{\string~}QuarterPipeDomain}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QuarterPipeDomain()}{\string~QuarterPipeDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Pipe\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Quarter\+Pipe\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00084}{84}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a035e27884c0fa1bc31d1d9bed28c37bd}\label{classoomph_1_1QuarterPipeDomain_a035e27884c0fa1bc31d1d9bed28c37bd} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!axial\_spacing\_fct@{axial\_spacing\_fct}}
+\index{axial\_spacing\_fct@{axial\_spacing\_fct}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{axial\_spacing\_fct()}{axial\_spacing\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Quarter\+Pipe\+Domain\+::axial\+\_\+spacing\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{xi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that implements axial spacing of macro elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00104}{104}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00147}{Axial\+\_\+spacing\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aba699b5121d1300b96b00056cf64ddbe}\label{classoomph_1_1QuarterPipeDomain_aba699b5121d1300b96b00056cf64ddbe} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
+\index{axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{axial\_spacing\_fct\_pt()}{axial\_spacing\_fct\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}{Axial\+Spacing\+Fct\+Pt}} \& oomph\+::\+Quarter\+Pipe\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function pointer for function that implements axial spacing of macro elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00097}{97}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00147}{Axial\+\_\+spacing\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a3b79d0bf40336f7961a8b2bb58080dba}\label{classoomph_1_1QuarterPipeDomain_a3b79d0bf40336f7961a8b2bb58080dba} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!default\_axial\_spacing\_fct@{default\_axial\_spacing\_fct}}
+\index{default\_axial\_spacing\_fct@{default\_axial\_spacing\_fct}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{default\_axial\_spacing\_fct()}{default\_axial\_spacing\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{static}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Quarter\+Pipe\+Domain\+::default\+\_\+axial\+\_\+spacing\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{xi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default for function that implements axial spacing of macro elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00151}{151}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_ae8cc6433c58dcfb265335744ed8a330a}\label{classoomph_1_1QuarterPipeDomain_ae8cc6433c58dcfb265335744ed8a330a} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (U/\+D/\+L/\+R/\+F/B) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
+
+Vector representation of the imacro-\/th macro element boundary idirect (U/\+D/\+L/\+R/\+F/B) at time level t\+: f(s) 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{229}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00104}{axial\+\_\+spacing\+\_\+fct()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00135}{Length}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00123}{Nr}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00120}{Ntheta}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00126}{Nz}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{r\+\_\+\+D()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{r\+\_\+\+L()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{r\+\_\+\+R()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{r\+\_\+\+U()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aadf2b6f249e0f742f09bbbee1fdd9dd0}\label{classoomph_1_1QuarterPipeDomain_aadf2b6f249e0f742f09bbbee1fdd9dd0} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain}{Quarter\+Pipe\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aba1af5e7f1bc6e88ff8e9ee59e965630}\label{classoomph_1_1QuarterPipeDomain_aba1af5e7f1bc6e88ff8e9ee59e965630} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_B@{r\_B}}
+\index{r\_B@{r\_B}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_B()}{r\_B()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+B (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Back face of a macro element $ s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{483}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aeb6e4d3fbb8afb4ad2597601f1a46afd}\label{classoomph_1_1QuarterPipeDomain_aeb6e4d3fbb8afb4ad2597601f1a46afd} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_D@{r\_D}}
+\index{r\_D@{r\_D}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_D()}{r\_D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Left face of a macro element $s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{383}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a85aaa5d1217c49e2144bbfd37dbad0fd}\label{classoomph_1_1QuarterPipeDomain_a85aaa5d1217c49e2144bbfd37dbad0fd} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_F@{r\_F}}
+\index{r\_F@{r\_F}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_F()}{r\_F()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Front face of a macro element $ s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{449}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a21c58b76f546300c308d6e1f303a3433}\label{classoomph_1_1QuarterPipeDomain_a21c58b76f546300c308d6e1f303a3433} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_L@{r\_L}}
+\index{r\_L@{r\_L}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_L()}{r\_L()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+L (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Left face of a macro element $ s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{301}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aab6f3fd79bc6dea1eb267f3b55630a2b}\label{classoomph_1_1QuarterPipeDomain_aab6f3fd79bc6dea1eb267f3b55630a2b} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_R@{r\_R}}
+\index{r\_R@{r\_R}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_R()}{r\_R()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+R (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Right face of a macro element $ s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{342}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a5c023c7a9d6e43d123566bc2f7bb21f0}\label{classoomph_1_1QuarterPipeDomain_a5c023c7a9d6e43d123566bc2f7bb21f0} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!r\_U@{r\_U}}
+\index{r\_U@{r\_U}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{r\_U()}{r\_U()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+U (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{f,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{rmax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{thetamax,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{zmax }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of macro element zeta $ \in [-1,1]x[-1,1] $. 
+
+Right face of a macro element $ s \in [-1,1]*[-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{416}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{Rmax}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{Rmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1QuarterPipeDomain_ada15e8a576d3715e8ed88ea9bef5508a}\label{classoomph_1_1QuarterPipeDomain_ada15e8a576d3715e8ed88ea9bef5508a} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Axial\_spacing\_fct\_pt@{Axial\_spacing\_fct\_pt}}
+\index{Axial\_spacing\_fct\_pt@{Axial\_spacing\_fct\_pt}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Axial\_spacing\_fct\_pt}{Axial\_spacing\_fct\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain_a540d441b38146aacb12938d5f885789c}{Axial\+Spacing\+Fct\+Pt}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Axial\+\_\+spacing\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer for function that implements axial spacing of macro elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00147}{147}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00104}{axial\+\_\+spacing\+\_\+fct()}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00097}{axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a2760038e136d58a41dcbcd045bd13ae4}\label{classoomph_1_1QuarterPipeDomain_a2760038e136d58a41dcbcd045bd13ae4} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Inner\_boundary\_cross\_section\_pt@{Inner\_boundary\_cross\_section\_pt}}
+\index{Inner\_boundary\_cross\_section\_pt@{Inner\_boundary\_cross\_section\_pt}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Inner\_boundary\_cross\_section\_pt}{Inner\_boundary\_cross\_section\_pt}}
+{\footnotesize\ttfamily Geom\+Object\texorpdfstring{$\ast$}{*} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Inner\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Geom object representing the inner boundary of the cross section. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00143}{143}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00045}{Quarter\+Pipe\+Domain()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{r\+\_\+\+D()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{r\+\_\+\+L()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{r\+\_\+\+R()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{r\+\_\+\+U()}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00084}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Pipe\+Domain()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a0798f3962e840bdb3d31e4e0dada055d}\label{classoomph_1_1QuarterPipeDomain_a0798f3962e840bdb3d31e4e0dada055d} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Length@{Length}}
+\index{Length@{Length}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Length}{Length}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Length\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Length. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00135}{135}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a18ac22546af74ac9b76a870d3f5abe3d}\label{classoomph_1_1QuarterPipeDomain_a18ac22546af74ac9b76a870d3f5abe3d} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Nr@{Nr}}
+\index{Nr@{Nr}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Nr}{Nr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Nr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements radial direction. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00123}{123}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aeb912b40da8cd2883768fe2ca989e640}\label{classoomph_1_1QuarterPipeDomain_aeb912b40da8cd2883768fe2ca989e640} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Ntheta@{Ntheta}}
+\index{Ntheta@{Ntheta}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Ntheta}{Ntheta}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Ntheta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements azimuthal direction. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00120}{120}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_aab1bf3900c3537c44942e3fee0c3d24e}\label{classoomph_1_1QuarterPipeDomain_aab1bf3900c3537c44942e3fee0c3d24e} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Nz@{Nz}}
+\index{Nz@{Nz}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Nz}{Nz}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Nz\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of elements axial direction. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00126}{126}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_adad2a4e638bb58eda89a19eaf5e18969}\label{classoomph_1_1QuarterPipeDomain_adad2a4e638bb58eda89a19eaf5e18969} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Outer\_boundary\_cross\_section\_pt@{Outer\_boundary\_cross\_section\_pt}}
+\index{Outer\_boundary\_cross\_section\_pt@{Outer\_boundary\_cross\_section\_pt}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Outer\_boundary\_cross\_section\_pt}{Outer\_boundary\_cross\_section\_pt}}
+{\footnotesize\ttfamily Geom\+Object\texorpdfstring{$\ast$}{*} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Outer\+\_\+boundary\+\_\+cross\+\_\+section\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Geom object representing the outer boundary of the cross section. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00139}{139}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00045}{Quarter\+Pipe\+Domain()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{r\+\_\+\+D()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{r\+\_\+\+L()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{r\+\_\+\+R()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{r\+\_\+\+U()}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00084}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Pipe\+Domain()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_a5e2252883456cd65902663fda09296d5}\label{classoomph_1_1QuarterPipeDomain_a5e2252883456cd65902663fda09296d5} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Rmax@{Rmax}}
+\index{Rmax@{Rmax}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Rmax}{Rmax}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Rmax\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Outer radius. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00132}{132}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{r\+\_\+\+D()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{r\+\_\+\+L()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{r\+\_\+\+R()}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{r\+\_\+\+U()}}.
+
+\Hypertarget{classoomph_1_1QuarterPipeDomain_ac71370e6c78fd37aa59e7a52d62d1cbe}\label{classoomph_1_1QuarterPipeDomain_ac71370e6c78fd37aa59e7a52d62d1cbe} 
+\index{oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}!Rmin@{Rmin}}
+\index{Rmin@{Rmin}!oomph::QuarterPipeDomain@{oomph::QuarterPipeDomain}}
+\doxysubsubsection{\texorpdfstring{Rmin}{Rmin}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} oomph\+::\+Quarter\+Pipe\+Domain\+::\+Rmin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Inner radius. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00129}{129}} of file \mbox{\hyperlink{quarter__pipe__domain_8h_source}{quarter\+\_\+pipe\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00229}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{r\+\_\+\+D()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{r\+\_\+\+L()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{r\+\_\+\+R()}}, and \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{r\+\_\+\+U()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__pipe__domain_8h}{quarter\+\_\+pipe\+\_\+domain.\+h}}\end{DoxyCompactItemize}

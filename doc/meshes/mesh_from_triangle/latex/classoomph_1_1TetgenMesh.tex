@@ -1,0 +1,441 @@
+\doxysection{oomph\+::Tetgen\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TetgenMesh}{}\label{classoomph_1_1TetgenMesh}\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+
+
+Unstructured tet mesh based on output from Tetgen\+: \href{http://wias-berlin.de/software/tetgen/}{\texttt{ http\+://wias-\/berlin.\+de/software/tetgen/}}.  
+
+
+
+
+{\ttfamily \#include $<$tetgen\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Tetgen\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.708609cm]{classoomph_1_1TetgenMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}{Tetgen\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a10976b817c361f04da4ce996bd019c02}{Tetgen\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{face\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_ace863f736d0dfa0a059b28959fced51d}{Tetgen\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgen\+\_\+data}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor with tetgenio data structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a867b3f70bd0f5063901720d04f28e95e}{Tetgen\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{face\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{split\+\_\+corner\+\_\+elements}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. Setting the boolean flag to true splits "{}corner"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "{}worse"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such "{}corner"{} elements can overconstrain the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a0fa783641ea515a942941425c468df01}{Tetgen\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgen\+\_\+data}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{split\+\_\+corner\+\_\+elements}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor with tetgen data structure Setting the boolean flag to true splits "{}corner"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "{}worse"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such "{}corner"{} elements can overconstrain the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a5bb8cf6353e81ff354a91f5622dece25}{Tetgen\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Closed\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*} $>$ \&internal\+\_\+surface\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&element\+\_\+volume, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{split\+\_\+corner\+\_\+elements}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nullptr}})
+\begin{DoxyCompactList}\small\item\em Build mesh, based on a Tetgen\+Mesh\+Facted\+Closed\+Surface that specifies the outer boundary of the domain and any number of internal boundaries, specified by Tet\+Mesh\+Faceted\+Surfaces. Also specify target size for uniform element size. Optionally specify the target element volume in each region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_ab08c5b23d5b384729a3674d78f9f63bf}{build\+\_\+tetgenio}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*} $>$ \&internal\+\_\+surface\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgen\+\_\+io}})
+\begin{DoxyCompactList}\small\item\em Build tetgenio object from the Tet\+Mesh\+Faceted\+Surfaces. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh_a9a83c64b6481463161f6eb87f347ee9e}{\texorpdfstring{$\sim$}{\string~}\+Tetgen\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a9c0441ea7404e7ea404979955ffbb5dd}{set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{preserve\+\_\+existing\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Overload set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper so that the stored time stepper now corresponds to the new timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_aeab19209f141e65511a52f195d89d6ac}{tetgenio\+\_\+exists}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Boolen defining whether tetgenio object has been built or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TetgenMesh_a4f80936c6c66947f304286605b2046ba}{tetgenio\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access to the triangulateio representation of the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a8758320eb646d20b578414c35145f0d7}{set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh_a4f80936c6c66947f304286605b2046ba}{tetgenio\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the tetgen pointer by a deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4}{deep\+\_\+copy\+\_\+of\+\_\+tetgenio}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{input\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{output\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Transfer tetgenio data from the input to the output The output is assumed to have been constructed and "{}empty"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a3b0d214cb14243f7ecc2c82e6641930b}{build\+\_\+from\+\_\+scaffold}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}})
+\begin{DoxyCompactList}\small\item\em Build mesh from scaffold. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}{setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{faceted\+\_\+surface\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Function to setup the reverse look-\/up schemes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tetgen\+Scaffold\+Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}{Tmp\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Temporary scaffold mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_ab9aa31216620790d084d133b8781be37}{Tetgenio\+\_\+exists}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether a tetgenio representation of the mesh exists. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a508672e33aa773da58c834a526cb5c59}{Tetgenio\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Tetgen representation of mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh_a94c4ac3940ecfdd87679167d300ce75d}{Use\+\_\+attributes}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$}
+Unstructured tet mesh based on output from Tetgen\+: \href{http://wias-berlin.de/software/tetgen/}{\texttt{ http\+://wias-\/berlin.\+de/software/tetgen/}}. 
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00050}{50}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531}\label{classoomph_1_1TetgenMesh_a2d2c7796e578f9fed1faf17569893531} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{54}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a10976b817c361f04da4ce996bd019c02}\label{classoomph_1_1TetgenMesh_a10976b817c361f04da4ce996bd019c02} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{node\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{element\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{face\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with the input files. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00061}{61}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_ace863f736d0dfa0a059b28959fced51d}\label{classoomph_1_1TetgenMesh_ace863f736d0dfa0a059b28959fced51d} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&}]{tetgen\+\_\+data,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with tetgenio data structure. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{99}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a867b3f70bd0f5063901720d04f28e95e}\label{classoomph_1_1TetgenMesh_a867b3f70bd0f5063901720d04f28e95e} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{node\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{element\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{face\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{split\+\_\+corner\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with the input files. Setting the boolean flag to true splits "{}corner"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "{}worse"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such "{}corner"{} elements can overconstrain the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{146}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a0fa783641ea515a942941425c468df01}\label{classoomph_1_1TetgenMesh_a0fa783641ea515a942941425c468df01} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&}]{tetgen\+\_\+data,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{split\+\_\+corner\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with tetgen data structure Setting the boolean flag to true splits "{}corner"{} elements, i.\+e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "{}worse"{} shape than their fathers. However, this step avoids otherwise-\/hard-\/to-\/diagnose problems in fluids problems where the application of boundary conditions at such "{}corner"{} elements can overconstrain the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{202}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a5bb8cf6353e81ff354a91f5622dece25}\label{classoomph_1_1TetgenMesh_a5bb8cf6353e81ff354a91f5622dece25} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!TetgenMesh@{TetgenMesh}}
+\index{TetgenMesh@{TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TetgenMesh()}{TetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgen\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Closed\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*} $>$ \&}]{internal\+\_\+surface\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{element\+\_\+volume,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{split\+\_\+corner\+\_\+elements = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nullptr}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh, based on a Tetgen\+Mesh\+Facted\+Closed\+Surface that specifies the outer boundary of the domain and any number of internal boundaries, specified by Tet\+Mesh\+Faceted\+Surfaces. Also specify target size for uniform element size. Optionally specify the target element volume in each region. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{252}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00436}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+tetgenio()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a9a83c64b6481463161f6eb87f347ee9e}\label{classoomph_1_1TetgenMesh_a9a83c64b6481463161f6eb87f347ee9e} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!````~TetgenMesh@{\texorpdfstring{$\sim$}{\string~}TetgenMesh}}
+\index{````~TetgenMesh@{\texorpdfstring{$\sim$}{\string~}TetgenMesh}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TetgenMesh()}{\string~TetgenMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00688}{688}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TetgenMesh_a3b0d214cb14243f7ecc2c82e6641930b}\label{classoomph_1_1TetgenMesh_a3b0d214cb14243f7ecc2c82e6641930b} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!build\_from\_scaffold@{build\_from\_scaffold}}
+\index{build\_from\_scaffold@{build\_from\_scaffold}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_from\_scaffold()}{build\_from\_scaffold()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::build\+\_\+from\+\_\+scaffold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Build mesh from scaffold. 
+
+Build unstructured tet mesh based on output from scaffold. 
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{48}} of file \mbox{\hyperlink{tetgen__mesh_8template_8cc_source}{tetgen\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{triangle__mesh_8h_source_l01334}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8h_source_l00081}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00061}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_ab08c5b23d5b384729a3674d78f9f63bf}\label{classoomph_1_1TetgenMesh_ab08c5b23d5b384729a3674d78f9f63bf} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!build\_tetgenio@{build\_tetgenio}}
+\index{build\_tetgenio@{build\_tetgenio}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_tetgenio()}{build\_tetgenio()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::build\+\_\+tetgenio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*} $>$ \&}]{internal\+\_\+surface\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \&}]{tetgen\+\_\+io }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build tetgenio object from the Tet\+Mesh\+Faceted\+Surfaces. 
+
+ALH\+: This may not be needed
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00436}{436}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4}\label{classoomph_1_1TetgenMesh_a93e764a63a21a93d4a2548058eb1a7c4} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!deep\_copy\_of\_tetgenio@{deep\_copy\_of\_tetgenio}}
+\index{deep\_copy\_of\_tetgenio@{deep\_copy\_of\_tetgenio}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{deep\_copy\_of\_tetgenio()}{deep\_copy\_of\_tetgenio()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::deep\+\_\+copy\+\_\+of\+\_\+tetgenio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{input\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\&}]{output\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Transfer tetgenio data from the input to the output The output is assumed to have been constructed and "{}empty"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00854}{854}} of file \mbox{\hyperlink{tetgen__mesh_8template_8cc_source}{tetgen\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8h_source_l00081}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00718}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a8758320eb646d20b578414c35145f0d7}\label{classoomph_1_1TetgenMesh_a8758320eb646d20b578414c35145f0d7} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!set\_deep\_copy\_tetgenio\_pt@{set\_deep\_copy\_tetgenio\_pt}}
+\index{set\_deep\_copy\_tetgenio\_pt@{set\_deep\_copy\_tetgenio\_pt}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_deep\_copy\_tetgenio\_pt()}{set\_deep\_copy\_tetgenio\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{tetgenio\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the tetgen pointer by a deep copy. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00718}{718}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00854}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::deep\+\_\+copy\+\_\+of\+\_\+tetgenio()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a9c0441ea7404e7ea404979955ffbb5dd}\label{classoomph_1_1TetgenMesh_a9c0441ea7404e7ea404979955ffbb5dd} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}}
+\index{set\_mesh\_level\_time\_stepper@{set\_mesh\_level\_time\_stepper}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_mesh\_level\_time\_stepper()}{set\_mesh\_level\_time\_stepper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{preserve\+\_\+existing\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload set\+\_\+mesh\+\_\+level\+\_\+time\+\_\+stepper so that the stored time stepper now corresponds to the new timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00699}{699}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910}\label{classoomph_1_1TetgenMesh_a685e57d2adeb2a378ffc7e244e38c910} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!setup\_reverse\_lookup\_schemes\_for\_faceted\_surface@{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface}}
+\index{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface@{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface()}{setup\_reverse\_lookup\_schemes\_for\_faceted\_surface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tet\+Mesh\+Faceted\+Surface}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \&}]{faceted\+\_\+surface\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Function to setup the reverse look-\/up schemes. 
+
+Helper function to set up the reverse look up scheme for facets. This is used to set up boundary coordinates. 
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00818}{818}} of file \mbox{\hyperlink{tetgen__mesh_8template_8cc_source}{tetgen\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_aeab19209f141e65511a52f195d89d6ac}\label{classoomph_1_1TetgenMesh_aeab19209f141e65511a52f195d89d6ac} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!tetgenio\_exists@{tetgenio\_exists}}
+\index{tetgenio\_exists@{tetgenio\_exists}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{tetgenio\_exists()}{tetgenio\_exists()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::tetgenio\+\_\+exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Boolen defining whether tetgenio object has been built or not. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00706}{706}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a4f80936c6c66947f304286605b2046ba}\label{classoomph_1_1TetgenMesh_a4f80936c6c66947f304286605b2046ba} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!tetgenio\_pt@{tetgenio\_pt}}
+\index{tetgenio\_pt@{tetgenio\_pt}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{tetgenio\_pt()}{tetgenio\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::tetgenio\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to the triangulateio representation of the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00712}{712}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TetgenMesh_ab9aa31216620790d084d133b8781be37}\label{classoomph_1_1TetgenMesh_ab9aa31216620790d084d133b8781be37} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!Tetgenio\_exists@{Tetgenio\_exists}}
+\index{Tetgenio\_exists@{Tetgenio\_exists}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Tetgenio\_exists}{Tetgenio\_exists}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgenio\+\_\+exists\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean to indicate whether a tetgenio representation of the mesh exists. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00749}{749}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8h_source_l00081}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00718}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00706}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::tetgenio\+\_\+exists()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00688}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a508672e33aa773da58c834a526cb5c59}\label{classoomph_1_1TetgenMesh_a508672e33aa773da58c834a526cb5c59} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!Tetgenio\_pt@{Tetgenio\_pt}}
+\index{Tetgenio\_pt@{Tetgenio\_pt}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Tetgenio\_pt}{Tetgenio\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tetgenio}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tetgenio\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Tetgen representation of mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00752}{752}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8h_source_l00081}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00718}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::set\+\_\+deep\+\_\+copy\+\_\+tetgenio\+\_\+pt()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00712}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::tetgenio\+\_\+pt()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00688}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2}\label{classoomph_1_1TetgenMesh_ac11e90fcf927bbf8317800db7723bad2} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!Tmp\_mesh\_pt@{Tmp\_mesh\_pt}}
+\index{Tmp\_mesh\_pt@{Tmp\_mesh\_pt}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Tmp\_mesh\_pt}{Tmp\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Tetgen\+Scaffold\+Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Tmp\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Temporary scaffold mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00745}{745}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8h_source_l00081}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00061}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TetgenMesh_a94c4ac3940ecfdd87679167d300ce75d}\label{classoomph_1_1TetgenMesh_a94c4ac3940ecfdd87679167d300ce75d} 
+\index{oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}!Use\_attributes@{Use\_attributes}}
+\index{Use\_attributes@{Use\_attributes}!oomph::TetgenMesh$<$ ELEMENT $>$@{oomph::TetgenMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Use\_attributes}{Use\_attributes}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{oomph\+::\+Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Use\+\_\+attributes\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) 
+
+
+
+Definition at line \mbox{\hyperlink{tetgen__mesh_8h_source_l00756}{756}} of file \mbox{\hyperlink{tetgen__mesh_8h_source}{tetgen\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tetgen__mesh_8h_source_l00146}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00061}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00202}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, \mbox{\hyperlink{tetgen__mesh_8h_source_l00099}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{tetgen__mesh_8h_source_l00252}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tetgen__mesh_8h}{tetgen\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{tetgen__mesh_8template_8cc}{tetgen\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

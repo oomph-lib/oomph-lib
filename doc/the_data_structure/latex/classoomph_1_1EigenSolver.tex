@@ -1,0 +1,233 @@
+\doxysection{oomph\+::Eigen\+Solver Class Reference}
+\hypertarget{classoomph_1_1EigenSolver}{}\label{classoomph_1_1EigenSolver}\index{oomph::EigenSolver@{oomph::EigenSolver}}
+
+
+Base class for all Eigen\+Problem solves. This simply defines standard interfaces so that different solvers can be used easily.  
+
+
+
+
+{\ttfamily \#include $<$eigen\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Eigen\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1EigenSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EigenSolver_a677b40c853c649f87b52815a6fadb2c6}{Eigen\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}{Eigen\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1EigenSolver}{Eigen\+Solver}} \&)
+\begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}{\texorpdfstring{$\sim$}{\string~}\+Eigen\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a3ee4360a4ceb78eebf5d4740d056e37d}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+eval}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+real}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+imag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\+\_\+adjoint\+\_\+problem}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex, and the eigenvalues can be Na\+Ns or Infs. This function is therefore merely provided as a convenience, to be used if the user is confident that Na\+Ns don\textquotesingle{}t arise (e.\+g. in Arnoldi based solvers where typically only a small number of (finite) eigenvalues are computed), or if the users is happy to deal with Na\+Ns in the subsequent post-\/processing. Function is virtual so it can be overloaded for Arnoldi type solvers that compute the (finite) eigenvalues directly At least n\+\_\+eval eigenvalues are computed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a45497b2b9ca94c6fd5ec2836bb3bc08b}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+eval}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&alpha, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&beta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+real}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+imag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\+\_\+adjoint\+\_\+problem}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})=0
+\begin{DoxyCompactList}\small\item\em Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). At least n\+\_\+eval eigenvalues are computed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}{set\+\_\+shift}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shift\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Set the value of the (real) shift. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}{get\+\_\+shift}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the (real) shift (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de95a1}{Sigma\+\_\+real}}
+\begin{DoxyCompactList}\small\item\em Double value that represents the real part of the shift in shifted eigensolvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for all Eigen\+Problem solves. This simply defines standard interfaces so that different solvers can be used easily. 
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00060}{60}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1EigenSolver_a677b40c853c649f87b52815a6fadb2c6}\label{classoomph_1_1EigenSolver_a677b40c853c649f87b52815a6fadb2c6} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!EigenSolver@{EigenSolver}}
+\index{EigenSolver@{EigenSolver}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{EigenSolver()}{EigenSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Eigen\+Solver\+::\+Eigen\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00069}{69}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}\label{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!EigenSolver@{EigenSolver}}
+\index{EigenSolver@{EigenSolver}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{EigenSolver()}{EigenSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Eigen\+Solver\+::\+Eigen\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1EigenSolver}{Eigen\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00072}{72}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}\label{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!````~EigenSolver@{\texorpdfstring{$\sim$}{\string~}EigenSolver}}
+\index{````~EigenSolver@{\texorpdfstring{$\sim$}{\string~}EigenSolver}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EigenSolver()}{\string~EigenSolver()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Eigen\+Solver\+::\texorpdfstring{$\sim$}{\string~}\+Eigen\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00075}{75}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}\label{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!get\_shift@{get\_shift}}
+\index{get\_shift@{get\_shift}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{get\_shift()}{get\_shift()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Eigen\+Solver\+::get\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the (real) shift (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00144}{144}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{eigen__solver_8h_source_l00065}{Sigma\+\_\+real}}.
+
+\Hypertarget{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}\label{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!set\_shift@{set\_shift}}
+\index{set\_shift@{set\_shift}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{set\_shift()}{set\_shift()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Eigen\+Solver\+::set\+\_\+shift (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{shift\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the value of the (real) shift. 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00138}{138}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{eigen__solver_8h_source_l00065}{Sigma\+\_\+real}}.
+
+\Hypertarget{classoomph_1_1EigenSolver_a45497b2b9ca94c6fd5ec2836bb3bc08b}\label{classoomph_1_1EigenSolver_a45497b2b9ca94c6fd5ec2836bb3bc08b} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem@{solve\_eigenproblem}}
+\index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{do\+\_\+adjoint\+\_\+problem = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). At least n\+\_\+eval eigenvalues are computed. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1ANASAZI_a4958cbb97c74b86f2bc0c50c9c4d9d0f}{oomph\+::\+ANASAZI}}, and \mbox{\hyperlink{classoomph_1_1LAPACK__QZ_acafb0b0ad23899c6587b8a12897919b2}{oomph\+::\+LAPACK\+\_\+\+QZ}}.
+
+\Hypertarget{classoomph_1_1EigenSolver_a3ee4360a4ceb78eebf5d4740d056e37d}\label{classoomph_1_1EigenSolver_a3ee4360a4ceb78eebf5d4740d056e37d} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!solve\_eigenproblem@{solve\_eigenproblem}}
+\index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{do\+\_\+adjoint\+\_\+problem = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex, and the eigenvalues can be Na\+Ns or Infs. This function is therefore merely provided as a convenience, to be used if the user is confident that Na\+Ns don\textquotesingle{}t arise (e.\+g. in Arnoldi based solvers where typically only a small number of (finite) eigenvalues are computed), or if the users is happy to deal with Na\+Ns in the subsequent post-\/processing. Function is virtual so it can be overloaded for Arnoldi type solvers that compute the (finite) eigenvalues directly At least n\+\_\+eval eigenvalues are computed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ANASAZI_a442d849223a2714072a189610647fd4b}{oomph\+::\+ANASAZI}}.
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00089}{89}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{eigen__solver_8h_source_l00089}{solve\+\_\+eigenproblem()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l08376}{oomph\+::\+Problem\+::solve\+\_\+adjoint\+\_\+eigenproblem()}}, \mbox{\hyperlink{problem_8cc_source_l08245}{oomph\+::\+Problem\+::solve\+\_\+eigenproblem()}}, \mbox{\hyperlink{problem_8cc_source_l08312}{oomph\+::\+Problem\+::solve\+\_\+eigenproblem()}}, and \mbox{\hyperlink{eigen__solver_8h_source_l00089}{solve\+\_\+eigenproblem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de95a1}\label{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de95a1} 
+\index{oomph::EigenSolver@{oomph::EigenSolver}!Sigma\_real@{Sigma\_real}}
+\index{Sigma\_real@{Sigma\_real}!oomph::EigenSolver@{oomph::EigenSolver}}
+\doxysubsubsection{\texorpdfstring{Sigma\_real}{Sigma\_real}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Eigen\+Solver\+::\+Sigma\+\_\+real\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Double value that represents the real part of the shift in shifted eigensolvers. 
+
+
+
+Definition at line \mbox{\hyperlink{eigen__solver_8h_source_l00065}{65}} of file \mbox{\hyperlink{eigen__solver_8h_source}{eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{eigen__solver_8cc_source_l00401}{oomph\+::\+LAPACK\+\_\+\+QZ\+::find\+\_\+eigenvalues()}}, \mbox{\hyperlink{eigen__solver_8h_source_l00144}{get\+\_\+shift()}}, \mbox{\hyperlink{eigen__solver_8h_source_l00138}{set\+\_\+shift()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00815}{oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem()}}, and \mbox{\hyperlink{eigen__solver_8cc_source_l00065}{oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{eigen__solver_8h}{eigen\+\_\+solver.\+h}}\end{DoxyCompactItemize}

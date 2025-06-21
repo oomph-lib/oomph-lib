@@ -1,0 +1,20 @@
+\doxysection{complex\+\_\+smoother.\+h File Reference}
+\hypertarget{complex__smoother_8h}{}\label{complex__smoother_8h}\index{complex\_smoother.h@{complex\_smoother.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother}{oomph\+::\+Helmholtz\+Smoother}}
+\begin{DoxyCompactList}\small\item\em Helmholtz smoother class\+: The smoother class is designed for the Helmholtz equation to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Damped Jacobi "{}solver"{} templated by matrix type. The "{}solver"{} exists in many different incarnations\+: It\textquotesingle{}s an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}, and a \doxylink{classoomph_1_1Smoother}{Smoother}, all of which use the same basic iteration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ComplexGMRES}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1GMRES}{GMRES} method rewritten for complex matrices. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzGMRESMG}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1GMRES}{GMRES} method for the Helmholtz solver. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzFGMRESMG}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The FGMRES method, i.\+e. the flexible variant of the \doxylink{classoomph_1_1GMRES}{GMRES} method which allows for nonconstant preconditioners \mbox{[}see Saad Y, "{}\+Iterative methods for sparse linear systems"{}, p.\+287\mbox{]}. Note, FGMRES can only cater to right preconditioning; if the user tries to switch to left preconditioning they will be notified of this. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

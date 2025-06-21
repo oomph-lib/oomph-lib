@@ -1,0 +1,1021 @@
+\doxysection{tet\+\_\+mesh.\+cc}
+\hypertarget{tet__mesh_8cc_source}{}\label{tet__mesh_8cc_source}\index{tet\_mesh.cc@{tet\_mesh.cc}}
+\mbox{\hyperlink{tet__mesh_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00027}00027\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{map__matrix_8h}{map\_matrix.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tet__mesh_8h}{tet\_mesh.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Telements_8h}{Telements.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00034}00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00036}00036\ \ \ \textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00037}00037\ \textcolor{comment}{\ \ ///\ Constructor\ for\ a\ FacetedSurface\ created\ from\ a\ list\ of\ nodes}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00038}00038\ \textcolor{comment}{\ \ ///\ and\ connectivity\ information.\ This\ is\ used\ in\ remeshing}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00039}00039\ \textcolor{comment}{}\ \ \textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00040}\mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a7b391693935d08cc63a41d6accbabd57}{00040}}\ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a7b391693935d08cc63a41d6accbabd57}{TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh}}(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00041}00041\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<Node*>}}\ \textcolor{keyword}{const}\&\ vertex\_node\_pt,}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}<\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<unsigned>}}>\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_connectivity}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<unsigned>}}\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_boundary\_id}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00044}00044\ \ \ \ \ :\ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface}{TetMeshFacetedClosedSurface}}()}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00045}00045\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ vertices}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex}}\ =\ vertex\_node\_pt.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex}};\ ++\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00051}00051\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{TetMeshVertex}}(vertex\_node\_pt[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00054}00054\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ facets}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_facet}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_connectivity}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_facet}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ f\ =\ 0;\ f\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_facet}};\ ++f)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00058}00058\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00059}00059\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex\_on\_facet}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_connectivity}}[f].\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00060}00060\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{TetMeshFacet}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex\_on\_facet}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00061}00061\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex\_on\_facet}};\ ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00062}00062\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f]-\/>set\_vertex\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_connectivity}}[f][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00064}00064\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00065}00065\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ in\ the\ boundary\ id}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00066}00066\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f]-\/>set\_one\_based\_boundary\_id(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_boundary\_id}}[f]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00068}00068\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00070}00070\ \ \ \textcolor{comment}{//=================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00071}00071\ \textcolor{comment}{\ \ ///\ Destructor.\ Delete\ allocated\ memory}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00072}00072\ \textcolor{comment}{}\ \ \textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00073}\mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a25c25f16a18e2ff4551a4683fbdb3686}{00073}}\ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a25c25f16a18e2ff4551a4683fbdb3686}{TetMeshFacetedClosedSurfaceForRemesh::\string~TetMeshFacetedClosedSurfaceForRemesh}}()}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00074}00074\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00075}00075\ \ \ \ \ \textcolor{comment}{//\ Delete\ the\ facets\ and\ the\ vertices}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_facet}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}{nfacet}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ f\ =\ 0;\ f\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_facet}};\ f++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00079}00079\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\_pt}}[f];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00081}00081\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aae77dfb3a856e3840564e21716f4c3b1}{nvertex}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_vertex}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00084}00084\ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00086}00086\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00089}00089\ \ \ \textcolor{comment}{//================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00090}00090\ \textcolor{comment}{\ \ ///\ Global\ static\ data\ that\ specifies\ the\ permitted}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00091}00091\ \textcolor{comment}{\ \ ///\ error\ in\ the\ setup\ of\ the\ boundary\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00092}00092\ \textcolor{comment}{}\ \ \textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00093}00093\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a8ec167eda551633acb8896cb0e87be40}{TetMeshBase::Tolerance\_for\_boundary\_finding}}\ =\ 1.0e-\/5;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00096}00096\ \ \ \textcolor{comment}{//================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00097}00097\ \textcolor{comment}{\ \ ///\ Setup\ lookup\ schemes\ which\ establish\ which\ elements\ are\ located}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00098}00098\ \textcolor{comment}{\ \ ///\ next\ to\ which\ boundaries\ (Doc\ to\ outfile\ if\ it's\ open).}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00099}00099\ \textcolor{comment}{}\ \ \textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00100}\mbox{\hyperlink{classoomph_1_1TetMeshBase_a5982b96584e7f60eeb62f51153ef29f4}{00100}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac372c93f2834c864f7376f1aceda718f}{TetMeshBase::setup\_boundary\_element\_info}}(std::ostream\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00101}00101\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ Should\ we\ document\ the\ output\ here}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00103}00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ doc\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}})\ doc\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00107}00107\ \ \ \ \ \textcolor{comment}{//\ Number\ of\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00108}00108\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a84543564d6babe4faacbb9d87043fc19}{nboundary}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00110}00110\ \ \ \ \ \textcolor{comment}{//\ Wipe/allocate\ storage\ for\ arrays}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00111}00111\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a266ac14a3e884f978c8605f7b5786e81}{Boundary\_element\_pt}}.clear();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00112}00112\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a62adbe45fe65ff9cd329bb45d197347c}{Face\_index\_at\_boundary}}.clear();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00113}00113\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a266ac14a3e884f978c8605f7b5786e81}{Boundary\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00114}00114\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a62adbe45fe65ff9cd329bb45d197347c}{Face\_index\_at\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a37f6d27447f643a74694012b09350ce9}{Lookup\_for\_elements\_next\_boundary\_is\_setup}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00117}00117\ \ \ \ \ \textcolor{comment}{//\ Temporary\ vector\ of\ vectors\ of\ pointers\ to\ elements\ on\ the\ boundaries:}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00118}00118\ \ \ \ \ \textcolor{comment}{//\ This\ is\ a\ vector\ to\ ensure\ UNIQUE\ ordering\ in\ all\ processors}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00119}00119\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<Vector<FiniteElement*>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00120}00120\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00122}00122\ \ \ \ \ \textcolor{comment}{//\ Matrix\ map\ for\ working\ out\ the\ fixed\ face\ for\ elements\ on\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00123}00123\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MapMatrixMixed<unsigned,\ FiniteElement*,\ int>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\_identifier}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00125}00125\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ elements}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00126}00126\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00127}00127\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_af01dfefb66c15579b540be62999d93ee}{nelement}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ vector\ of\ boundaries\ that\ the}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00131}00131\ \ \ \ \ \textcolor{comment}{//\ node\ lives\ on}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00132}00132\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::set<unsigned>}}*>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}(4,\ 0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}};\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00135}00135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00136}00136\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ element}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00137}00137\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00139}00139\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (doc)\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ \textcolor{stringliteral}{"{}Element:\ "{}}\ <<\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00141}00141\ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ include\ 3D\ elements!\ Some\ meshes\ contain\ interface\ elements\ too.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00142}00142\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a5f8fe59f06da1da9f6b7bbcbdb90ef93}{dim}}()\ ==\ 3)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00143}00143\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ element's\ nodes\ and\ find\ out\ which\ boundaries\ they're}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ on}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ need\ only\ loop\ over\ the\ corner\ nodes}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 4;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00149}00149\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>\mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\_boundaries\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00151}00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ the\ common\ boundaries\ of\ each\ face}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00154}00154\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<std::set<unsigned>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}(4);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ Face\ indices\ defined\ in\ Telements.h}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ 3\ connnects\ points\ 0,\ 1\ and\ 2}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2])}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00160}00160\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[3],\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[3].begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00176}00176\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ 2\ connects\ points\ 0,\ 1\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3])}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00180}00180\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[2],\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[2].begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00196}00196\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ 1\ connects\ points\ 0,\ 2\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3])}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00200}00200\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[0]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[1],\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[1].begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00216}00216\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Face\ 0\ connects\ points\ 1,\ 2\ and\ 3}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]\ \&\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3])}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00220}00220\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ std::set<unsigned>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[1]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[2]-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux}}.end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[3]-\/>end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ std::insert\_iterator<std::set<unsigned>>(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[0],\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[0].begin()));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00236}00236\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00239}00239\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ now\ know\ whether\ any\ faces\ lay\ on\ the\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 4;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00241}00241\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ How\ many\ boundaries\ are\ there}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ number\ of\ the\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ boundary\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ the\ members\ of\ the\ set\ and\ add\ to\ the\ count}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ set\ the\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::set<unsigned>::iterator\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].end();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ boundary\ =\ *\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we're\ on\ more\ than\ one\ boundary,\ this\ is\ weird,\ so\ die}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ >\ 1)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_a52d2a58a6a31c10ccb05d8997ef73e4a}{output}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Face\ "{}}\ <<\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <<\ \textcolor{stringliteral}{"{}\ is\ on\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ boundaries.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}This\ is\ rather\ strange.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Your\ mesh\ may\ be\ too\ coarse\ or\ your\ tet\ mesh\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}may\ be\ screwed\ up.\ I'm\ skipping\ the\ automated\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}setup\ of\ the\ elements\ next\ to\ the\ boundaries\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}lookup\ schemes.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{OomphLibWarning}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\_stream}}.str(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ we\ have\ a\ boundary\ then\ add\ this\ to\ the\ appropriate\ set}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (boundary\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Does\ the\ pointer\ already\ exits\ in\ the\ vector}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>::iterator}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{b\_el\_it}}\ =\ std::find(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(boundary)]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(boundary)]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ insert\ if\ we\ have\ not\ found\ it\ (i.e.\ got\ to\ the\ end)}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{b\_el\_it}}\ ==}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(boundary)]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(boundary)]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{push\_back}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Also\ set\ the\ fixed\ face}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\_identifier}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(boundary),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}})\ =\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00298}00298\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ we\ set\ the\ pointers\ to\ the\ boundary\ sets\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 4;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00302}00302\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00304}00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00305}00305\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00306}00306\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00307}00307\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00308}00308\ \ \ \ \ \textcolor{comment}{//\ Now\ copy\ everything\ across\ into\ permanent\ arrays}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00309}00309\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00311}00311\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00312}00312\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00313}00313\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00314}00314\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00315}00315\ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ elements\ on\ this\ boundary\ (currently\ stored\ in\ a\ set)}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00316}00316\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00318}00318\ \ \ \ \ \ \ \textcolor{comment}{//\ Allocate\ storage\ for\ the\ coordinate\ identifiers}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00319}00319\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a62adbe45fe65ff9cd329bb45d197347c}{Face\_index\_at\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00321}00321\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e\_count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00322}00322\ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>::iterator}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{IT}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00323}00323\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{IT}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\_of\_boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].end();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00326}00326\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00327}00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Recover\ pointer\ to\ element}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00328}00328\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}\ =\ *\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00330}00330\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ permanent\ storage}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00331}00331\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a266ac14a3e884f978c8605f7b5786e81}{Boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00333}00333\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a62adbe45fe65ff9cd329bb45d197347c}{Face\_index\_at\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e\_count}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\_identifier}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ counter}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00336}00336\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e\_count}}++;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00337}00337\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00338}00338\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00339}00339\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00341}00341\ \ \ \ \ \textcolor{comment}{//\ Doc?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00342}00342\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00343}00343\ \ \ \ \ \textcolor{keywordflow}{if}\ (doc)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00344}00344\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00345}00345\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00346}00346\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}};\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00347}00347\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00348}00348\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a266ac14a3e884f978c8605f7b5786e81}{Boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}].\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00349}00349\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ \textcolor{stringliteral}{"{}Boundary:\ "{}}\ <<\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <<\ \textcolor{stringliteral}{"{}\ is\ adjacent\ to\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ <<\ \textcolor{stringliteral}{"{}\ elements"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ on\ given\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}};\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00354}00354\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a266ac14a3e884f978c8605f7b5786e81}{Boundary\_element\_pt}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}\ <<\ \textcolor{stringliteral}{"{}Boundary\ element:"{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ Face\ index\ of\ boundary\ is\ "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1Mesh_a62adbe45fe65ff9cd329bb45d197347c}{Face\_index\_at\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}][\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}]\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00359}00359\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00360}00360\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00361}00361\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00364}00364\ \ \ \ \ \textcolor{comment}{//\ Lookup\ scheme\ has\ now\ been\ setup\ yet}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00365}00365\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Mesh_a37f6d27447f643a74694012b09350ce9}{Lookup\_for\_elements\_next\_boundary\_is\_setup}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00366}00366\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00368}00368\ \ \ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00369}00369\ \textcolor{comment}{\ \ ///\ Clear\ and\ regenerate\ the\ lookup\ schemes\ for\ bulk\ elements\ and\ their}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00370}00370\ \textcolor{comment}{\ \ ///\ corresponding\ face\ indices\ which\ are\ adjacent\ to\ mesh\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00371}00371\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00372}\mbox{\hyperlink{classoomph_1_1TetMeshBase_ad4b7631fb804a634726484f5f2fbec9d}{00372}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad4b7631fb804a634726484f5f2fbec9d}{TetMeshBase::regenerate\_region\_boundary\_lookups}}()}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00373}00373\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00374}00374\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}{Face\_index\_region\_at\_boundary}}.clear();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00375}00375\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}{Boundary\_region\_element\_pt}}.clear();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00377}00377\ \ \ \ \ \textcolor{comment}{//\ cache\ number\ of\ boundaries\ and\ regions}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00378}00378\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a84543564d6babe4faacbb9d87043fc19}{nboundary}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00379}00379\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a3d4d45ac64c6ee59cadf3a08d62a76f2}{nregion}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.size();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00381}00381\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}{Face\_index\_region\_at\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00382}00382\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}{Boundary\_region\_element\_pt}}.resize(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00384}00384\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b\ =\ 0;\ b\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nbound}};\ b++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00385}00385\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00386}00386\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ next\ to\ that\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00387}00387\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a68e04b3b70cff70d53d75f66661555e8}{nboundary\_element}}(b);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00388}00388\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}};\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00389}00389\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00390}00390\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a6dcf10c6fff9d13b309549ba73e10069}{boundary\_element\_pt}}(b,\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00391}00391\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ now\ search\ for\ it\ in\ each\ region}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}\ <\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a3d4d45ac64c6ee59cadf3a08d62a76f2}{nregion}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00394}00394\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}}\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>::iterator}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ std::find(\mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ we\ find\ this\ element\ in\ the\ current\ region,\ then\ update\ our}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ lookups}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r\_index}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a725ae2c7208dc0315225aaf331536b4e}{Boundary\_region\_element\_pt}}[b][\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}}].push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ face\_index\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a6095e417593de6136d248ab08823f453}{face\_index\_at\_boundary}}(b,\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ac639f2e3ebc323a48006017a147c33f1}{Face\_index\_region\_at\_boundary}}[b][\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}}].push\_back(face\_index);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00411}00411\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00412}00412\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00413}00413\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00414}00414\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00416}00416\ \ \ \textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00417}00417\ \textcolor{comment}{\ \ ///\ Add\ an\ element\ to\ a\ particular\ region;\ this\ helper\ checks\ if\ the}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00418}00418\ \textcolor{comment}{\ \ ///\ specified\ element\ and\ region\ ID\ already\ exist,\ so\ can\ be\ used\ to\ move}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00419}00419\ \textcolor{comment}{\ \ ///\ an\ existing\ element\ to\ an\ existing\ region,\ to\ add\ an\ existing\ element}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00420}00420\ \textcolor{comment}{\ \ ///\ to\ a\ new\ region,\ or\ to\ add\ a\ new\ element\ to\ a\ new\ region}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00421}00421\ \textcolor{comment}{}\ \ \textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00422}\mbox{\hyperlink{classoomph_1_1TetMeshBase_ab740b7f7e7bd7672d40ae57e2172c12d}{00422}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ab740b7f7e7bd7672d40ae57e2172c12d}{TetMeshBase::add\_element\_in\_region\_pt}}(\mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_pt}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00423}00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00424}00424\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00425}00425\ \ \ \ \ \textcolor{comment}{//\ number\ of\ regions}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00426}00426\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a3d4d45ac64c6ee59cadf3a08d62a76f2}{nregion}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}.\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00428}00428\ \ \ \ \ \textcolor{comment}{//\ the\ index\ of\ the\ requested\ region\ in\ our\ vector\ of\ region\ IDs;}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00429}00429\ \ \ \ \ \textcolor{comment}{//\ this\ is\ either\ the\ index\ of\ an\ existing\ region,\ or\ the\ index\ of}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00430}00430\ \ \ \ \ \textcolor{comment}{//\ a\ new\ region\ which\ is\ to\ be\ added}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00431}00431\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_index}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00432}00432\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00433}00433\ \ \ \ \ \textcolor{comment}{//\ look\ for\ this\ region\ in\ our\ current\ list}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00434}00434\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>::iterator}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_it}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00435}00435\ \ \ \ \ \ \ std::find(\mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.begin(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.end(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00439}00439\ \ \ \ \ \textcolor{comment}{//\ did\ we\ find\ it?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00440}00440\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.end())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00441}00441\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00442}00442\ \ \ \ \ \ \ \textcolor{comment}{//\ if\ so\ get\ the\ vector\ index}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00443}00443\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_index}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_it}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.begin();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00444}00444\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00445}00445\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00446}00446\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00447}00447\ \ \ \ \ \ \ \textcolor{comment}{//\ otherwise\ we're\ making\ a\ new\ one;\ the\ index\ is\ the}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00448}00448\ \ \ \ \ \ \ \textcolor{comment}{//\ current\ size\ of\ the\ vector,\ and\ then\ we'll\ add\ the\ ID\ to\ the\ end}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00449}00449\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_index}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.size();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00450}00450\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a27ed0a5a15bb0eb66646ff6f55363a6a}{Region\_attribute}}.push\_back(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_id}}));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00451}00451\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00453}00453\ \ \ \ \ \textcolor{comment}{//\ is\ this\ an\ element\ already\ in\ the\ mesh?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00454}00454\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::find(this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_aca12acfe655a4d5c4a4eab4a7b970812}{Element\_pt}}.begin(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{this}}-\/>Element\_pt.end(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_pt}})\ ==}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00455}00455\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{this}}-\/>Element\_pt.end())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00456}00456\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00457}00457\ \ \ \ \ \ \ \textcolor{comment}{//\ if\ it\ isn't,\ then\ we'll\ first\ add\ it}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00458}00458\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_aafc35b5df26c448b5d5ab26a793eee35}{add\_element\_pt}}(elem\_pt);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00459}00459\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00460}00460\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00461}00461\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00462}00462\ \ \ \ \ \ \ \textcolor{comment}{//\ if\ this\ element\ already\ exists\ then\ we'll\ search\ for\ it}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00463}00463\ \ \ \ \ \ \ \textcolor{comment}{//\ in\ the\ region\ element\ list\ -\/\ regions\ can't\ overlap,\ so\ we}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00464}00464\ \ \ \ \ \ \ \textcolor{comment}{//\ must\ remove\ this\ element\ from\ its\ original\ region\ in\ addition\ to}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00465}00465\ \ \ \ \ \ \ \textcolor{comment}{//\ adding\ it\ to\ the\ newly\ requested\ region}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00467}00467\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{original\_region\_index}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00468}00468\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00469}00469\ \ \ \ \ \ \ \textcolor{comment}{//\ has\ this\ element\ already\ been\ assigned\ to\ a\ region?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00470}00470\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ found\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00472}00472\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Vector}{Vector<FiniteElement*>::iterator}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_element\_it}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00473}00473\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00474}00474\ \ \ \ \ \ \ \textcolor{comment}{//\ loop\ over\ the\ regions\ and\ look\ for\ this\ original\ corner\ element\ to}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00475}00475\ \ \ \ \ \ \ \textcolor{comment}{//\ find\ out\ which\ region\ it\ used\ to\ be\ in,\ so\ we\ can\ add\ the\ new\ elements}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00476}00476\ \ \ \ \ \ \ \textcolor{comment}{//\ to\ the\ same\ region.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00477}00477\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}\ <\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a3d4d45ac64c6ee59cadf3a08d62a76f2}{nregion}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00478}00478\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00479}00479\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ each\ region,\ search\ the\ vector\ of\ elements\ in\ this\ region\ for}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00480}00480\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ original\ corner\ element}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00481}00481\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_element\_it}}\ =\ std::find(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{begin}}(),\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00484}00484\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ the\ iterator\ hasn't\ reached\ the\ end\ then\ we've\ found\ it}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00485}00485\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_element\_it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}].\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{end}}())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00486}00486\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ save\ the\ region\ index\ we're\ at}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{original\_region\_index}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ update\ the\ paranoid\ flag}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ found\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00492}00492\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ regions\ can't\ overlap,\ so\ once\ we've\ found\ one\ we're\ done}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00495}00495\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00496}00496\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00497}00497\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00498}00498\ \ \ \ \ \ \ \textcolor{comment}{//\ if\ it\ was\ previously\ assigned\ to\ a\ region,\ then\ remove\ it}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00499}00499\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (found)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00500}00500\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00501}00501\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ update\ the\ basic\ region\ lookup.\ The\ iterator\ will\ still}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00502}00502\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ point\ to\ the\ original\ corner\ element\ in\ the\ lookup,\ so\ we\ can}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00503}00503\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ delete\ this\ easily}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00504}00504\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{original\_region\_index}}].erase(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_element\_it}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00505}00505\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00506}00506\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00507}00507\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00508}00508\ \ \ \ \ \textcolor{comment}{//\ if\ we're\ adding\ a\ new\ region\ then\ the\ new\ index\ will\ be}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00509}00509\ \ \ \ \ \textcolor{comment}{//\ equal\ to\ the\ length\ of\ the\ current\ vector\ of\ region\ elements}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00510}00510\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_index}}\ ==\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a3d4d45ac64c6ee59cadf3a08d62a76f2}{nregion}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00511}00511\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00512}00512\ \ \ \ \ \ \ \textcolor{comment}{//\ add\ the\ new\ element\ as\ a\ new\ entry}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00513}00513\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<FiniteElement*>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_vector}}(1,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00514}00514\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}.push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_vector}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00515}00515\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00516}00516\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00517}00517\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00518}00518\ \ \ \ \ \ \ \textcolor{comment}{//\ otherwise\ just\ add\ the\ element\ to\ an\ existing\ vector}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00519}00519\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_ad6f68657b2b392f77853af7e147cb23f}{Region\_element\_pt}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\_index}}].push\_back(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\_pt}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00520}00520\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00521}00521\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00523}00523\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00524}00524\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00525}00525\ \textcolor{comment}{\ \ ///\ Assess\ mesh\ quality:\ Ratio\ of\ max.\ edge\ length\ to\ min.\ height,}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00526}00526\ \textcolor{comment}{\ \ ///\ so\ if\ it's\ very\ large\ it's\ BAAAAAD.}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00527}00527\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00528}\mbox{\hyperlink{classoomph_1_1TetMeshBase_aa8b4e18d5f358a5bc64151861d990ca3}{00528}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_aa8b4e18d5f358a5bc64151861d990ca3}{TetMeshBase::assess\_mesh\_quality}}(std::ofstream\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00529}00529\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00530}00530\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<Vector<double>}}>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}(6);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00531}00531\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ 6;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00532}00532\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00533}00533\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(3);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00534}00534\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00535}00535\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_af01dfefb66c15579b540be62999d93ee}{nelement}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00536}00536\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ nel;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00537}00537\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00538}00538\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00539}00539\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00540}00540\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00541}00541\ \ \ \ \ \ \ \ \ edge[0][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00542}00542\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[1][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00543}00543\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[2][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00544}00544\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[3][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(0)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00545}00545\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[4][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(1)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00546}00546\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[5][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(2)-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00547}00547\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00549}00549\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_length}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00550}00550\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ 6;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00551}00551\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00552}00552\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00553}00553\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00554}00554\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00555}00555\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}\ +=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00556}00556\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00557}00557\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00558}00558\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}\ >\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_length}})\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_length}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00559}00559\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00561}00561\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00562}00562\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_height}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DBL\_MAX}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00563}00563\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ 4;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00564}00564\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00565}00565\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}(3);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00566}00566\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00567}00567\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00568}00568\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00569}00569\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00570}00570\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00571}00571\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00572}00572\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}\ =\ 5;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00576}00576\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00582}00582\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00585}00585\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00586}00586\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00587}00587\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00588}00588\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00592}00592\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00593}00593\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00596}00596\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00597}00597\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}never\ get\ here\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{abort}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00599}00599\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00601}00601\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][1]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][2]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][2]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][1];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00602}00602\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[1]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][2]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][0]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][2];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00603}00603\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[2]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][0]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e0}}][1]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e1}}][0];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00604}00604\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[0]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[1]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[1]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[2]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[2];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00606}00606\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\_norm}}\ =\ 1.0\ /\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sqrt}}(norm);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00607}00607\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[0]\ *=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\_norm}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00608}00608\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[1]\ *=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\_norm}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00609}00609\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[2]\ *=\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\_norm}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00610}00610\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00611}00611\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ height\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fabs}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}][0]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}][1]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[1]\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00612}00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{edge}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e2}}][2]\ *\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normal}}[2]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00613}00613\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00614}00614\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (height\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_height}})\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_height}}\ =\ height;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00615}00615\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00616}00616\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00617}00617\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aspect\_ratio}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\_length}}\ /\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{min\_height}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00618}00618\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00619}00619\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}\ <<\ \textcolor{stringliteral}{"{}ZONE\ N=4,\ E=1,\ F=FEPOINT,\ ET=TETRAHEDRON\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00620}00620\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ 4;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00621}00621\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00622}00622\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00623}00623\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00624}00624\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fe\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})-\/>\mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00625}00625\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00626}00626\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aspect\_ratio}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00627}00627\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00628}00628\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}\ <<\ \textcolor{stringliteral}{"{}1\ 2\ 3\ 4"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00629}00629\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00630}00630\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00631}00631\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00632}00632\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00633}00633\ \ \ \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00634}00634\ \textcolor{comment}{\ \ ///\ Move\ the\ nodes\ on\ boundaries\ with\ associated\ Geometric\ Objects\ (if\ any)}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00635}00635\ \textcolor{comment}{\ \ ///\ so\ that\ they\ exactly\ coincide\ with\ the\ geometric\ object.\ This\ requires}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00636}00636\ \textcolor{comment}{\ \ ///\ that\ the\ boundary\ coordinates\ are\ set\ up\ consistently}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00637}00637\ \textcolor{comment}{}\ \ \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00638}\mbox{\hyperlink{classoomph_1_1TetMeshBase_a1670b81c0ed5509661c179d9e46bdd1c}{00638}}\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a1670b81c0ed5509661c179d9e46bdd1c}{TetMeshBase::snap\_nodes\_onto\_geometric\_objects}}()}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00639}00639\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00640}00640\ \ \ \ \ \textcolor{comment}{//\ Backup\ in\ case\ elements\ get\ inverted}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00641}00641\ \ \ \ \ std::map<Node*,\ Vector<double>>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\_nodal\_posn}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00642}00642\ \ \ \ \ std::map<Node*,\ Vector<double>>\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\_nodal\_posn}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00643}00643\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a945e7823d1a2af243b5b7f7866aaff5e}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00644}00644\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00645}00645\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00646}00646\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a69d22c2070f1649c4cb2607f26070d7c}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00647}00647\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ x(3);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00648}00648\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a0e8b458bf2047}{position}}(x);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00649}00649\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\_nodal\_posn}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}]\ =\ x;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00650}00650\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00651}00651\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00652}00652\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00653}00653\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_bound}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a84543564d6babe4faacbb9d87043fc19}{nboundary}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00654}00654\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b\ =\ 0;\ b\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_bound}};\ b++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00655}00655\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00656}00656\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00657}00657\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00658}00658\ \ \ \ \ \ \ \textcolor{comment}{//\ Accumulate\ reason\ for\ not\ snapping}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00659}00659\ \ \ \ \ \ \ std::stringstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00660}00660\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}Can't\ snap\ nodes\ on\ boundary\ "{}}\ <<\ b}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00661}00661\ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ onto\ geom\ object\ because:\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00663}00663\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{TetMeshFacetedSurface}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00664}00664\ \ \ \ \ \ \ std::map<unsigned,\ TetMeshFacetedSurface*>::iterator\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00665}00665\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a6ac02bd3a8ba954a82e14fe3d120c62b}{Tet\_mesh\_faceted\_surface\_pt}}.find(b);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00666}00666\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{it}}\ !=\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_a6ac02bd3a8ba954a82e14fe3d120c62b}{Tet\_mesh\_faceted\_surface\_pt}}.end())}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00667}00667\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00668}00668\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}\ =\ (*it).second;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00669}00669\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00670}00670\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00671}00671\ \ \ \ \ \ \ \textcolor{comment}{//\ Facet\ associated\ with\ this\ boundary?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00672}00672\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00673}00673\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00674}00674\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ no\ facets\ asssociated\ with\ boundary\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00675}00675\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00676}00676\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00677}00677\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00678}00678\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ geom\ object\ associated\ with\ facet}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00679}00679\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GeomObject}{GeomObject}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{geom\_obj\_pt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00680}00680\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00681}00681\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00682}00682\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{geom\_obj\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>geom\_object\_with\_boundaries\_pt();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00683}00683\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{geom\_obj\_pt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00684}00684\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00685}00685\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ no\ geom\ object\ associated\ with\ boundary\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00686}00686\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00687}00687\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00688}00688\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00689}00689\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00690}00690\ \ \ \ \ \ \ \textcolor{comment}{//\ Triangular\ facet?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00691}00691\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b].size()\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00692}00692\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00693}00693\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ facet\ has\ to\ be\ triangular\ and\ vertex\ coordinates\ have\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ to\ have\ been\ set\ up\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00695}00695\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00696}00696\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00697}00697\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00698}00698\ \ \ \ \ \ \ \textcolor{comment}{//\ We\ need\ boundary\ coordinates!}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00699}00699\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classoomph_1_1Mesh_ad1b124a959628aba00162b89617b3a62}{boundary\_coordinate\_exists}}(b))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00700}00700\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00701}00701\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ no\ boundary\ coordinates\ were\ set\ up\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00702}00702\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00703}00703\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00704}00704\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00705}00705\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00706}00706\ \ \ \ \ \ \ \textcolor{comment}{//\ Which\ facet\ is\ associated\ with\ this\ boundary?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00707}00707\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00708}00708\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{TetMeshFacet}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00709}00709\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00710}00710\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00711}00711\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nf}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>nfacet();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00712}00712\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ f\ =\ 0;\ f\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nf}};\ f++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00713}00713\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>one\_based\_facet\_boundary\_id(f)\ -\/\ 1)\ ==\ b)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}}\ =\ f;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00718}00718\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00719}00719\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00720}00720\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>facet\_pt(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00721}00721\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00722}00722\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00723}00723\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Three\ vertices?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00724}00724\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nv}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>nvertex();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00725}00725\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nv}}\ !=\ 3)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00726}00726\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00727}00727\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ number\ of\ facet\ vertices\ is\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nv}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ rather\ than\ 3\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00729}00729\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00730}00730\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00731}00731\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00732}00732\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Have\ we\ set\ up\ zeta\ coordinates\ in\ geometric\ object?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00733}00733\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(0)-\/>zeta\_in\_geom\_object().\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}()\ !=\ 2)\ ||}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00734}00734\ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(1)-\/>zeta\_in\_geom\_object().\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}()\ !=\ 2)\ ||}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00735}00735\ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(2)-\/>zeta\_in\_geom\_object().\mbox{\hyperlink{classoomph_1_1FiniteElement_a4986a443968d3741fde4d6c6012cd586}{size}}()\ !=\ 2))}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00736}00736\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00737}00737\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/\ no\ boundary\ coordinates\ were\ set\ up\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00739}00739\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00740}00740\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00741}00741\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00742}00742\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00743}00743\ \ \ \ \ \ \ \textcolor{comment}{//\ Are\ we\ ready\ to\ go?}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00744}00744\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\_it}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00745}00745\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00746}00746\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tell\_us\_why}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00747}00747\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tell\_us\_why}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00748}00748\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00749}00749\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reason}}.str()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00750}00750\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00751}00751\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00752}00752\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00753}00753\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00754}00754\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setup\ area\ coordinantes\ in\ triangular\ facet}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00755}00755\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][0][0];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00756}00756\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y1}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][0][1];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00757}00757\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00758}00758\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][1][0];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00759}00759\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y2}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][1][1];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00760}00760\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00761}00761\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][2][0];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00762}00762\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}}\ =\ \mbox{\hyperlink{classoomph_1_1TetMeshBase_acc7c8edda4f0f95cd8894620379905d5}{Triangular\_facet\_vertex\_boundary\_coordinate}}[b][2][1];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00763}00763\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00764}00764\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{detT}}\ =\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y2}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}})\ +\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y1}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00765}00765\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00766}00766\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00767}00767\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Boundary\ coordinate\ (cartesian\ coordinates\ inside\ facet)}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00768}00768\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00769}00769\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00770}00770\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ on\ that\ boundary}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00771}00771\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_boundary\_node}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a034677ceb48c67769acb83f304c84f7d}{nboundary\_node}}(b);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00772}00772\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_boundary\_node}};\ ++\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00773}00773\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00774}00774\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ boundary\ node\ and\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00775}00775\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}\ =\ this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_afc4d1204afc31b9ec88fe82d8fc01625}{boundary\_node\_pt}}(b,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00776}00776\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>get\_coordinates\_on\_boundary(b,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00777}00777\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00778}00778\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ we\ have\ zeta,\ the\ cartesian\ boundary\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00779}00779\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ in\ the\ (assumed\ to\ be\ triangular)\ boundary\ facet;\ let's}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00780}00780\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ work\ out\ the\ area\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00781}00781\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notation\ as\ in}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00782}00782\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ https://en.wikipedia.org/wiki/Barycentric\_coordinate\_system}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00783}00783\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00784}00784\ \ \ \ \ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y2}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}})\ +\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x2}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}}))\ /\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{detT}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00786}00786\ \ \ \ \ \ \ \ \ \ \ \ \ ((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y1}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}})\ +\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x1}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x3}})\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{y3}}))\ /\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{detT}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00787}00787\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s2}}\ =\ 1.0\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}}\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00788}00788\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00789}00789\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_in\_geom\_obj}}(2,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00790}00790\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{position\_from\_geom\_obj}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00791}00791\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00792}00792\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vertex\ zeta\ coordinates}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00793}00793\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_0}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00794}00794\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_0}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(0)-\/>zeta\_in\_geom\_object();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00796}00796\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_1}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00797}00797\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_1}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(1)-\/>zeta\_in\_geom\_object();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00798}00798\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00799}00799\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_2}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00800}00800\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_2}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(2)-\/>zeta\_in\_geom\_object();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00802}00802\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00803}00803\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00804}00804\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00805}00805\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compute\ zeta\ values\ of\ the\ vertices\ from\ parametrisation\ of}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00806}00806\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ boundaries}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00807}00807\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tol}}\ =\ 1.0e-\/12;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00808}00808\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00809}00809\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}(2);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00810}00810\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ <\ 3;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00811}00811\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00812}00812\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{f\_pt}}-\/>vertex\_pt(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})-\/>zeta\_in\_geom\_object();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00813}00813\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ <\ 2;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00814}00814\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00815}00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00816}00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00817}00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00818}00818\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00819}00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00820}00820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta01(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00822}00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 0.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00823}00823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00824}00824\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00825}00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00826}00826\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta20(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00827}00827\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00828}00828\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00829}00829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00830}00830\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00831}00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00832}00832\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00833}00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00834}00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00835}00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta01(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00836}00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00837}00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00838}00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00839}00839\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00840}00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta12(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00841}00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 0.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00843}00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00844}00844\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00845}00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00846}00846\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00847}00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00848}00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00849}00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta12(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00850}00850\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00851}00851\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00852}00852\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00853}00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00854}00854\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta20(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00855}00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 0.0,\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00856}00856\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00857}00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00858}00858\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00859}00859\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00860}00860\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00861}00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sqrt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pow}}((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}}[0]),\ 2)\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00862}00862\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pow}}((\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}}[1]),\ 2));}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00863}00863\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error}}\ >\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tol}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00864}00864\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00865}00865\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ostringstream\ error\_message;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00866}00866\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_message}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00867}00867\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Error\ in\ parametrisation\ of\ boundary\ coordinates\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00868}00868\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}for\ vertex\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}\ <<\ \textcolor{stringliteral}{"{}\ [alt="{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{alt}}\ <<\ \textcolor{stringliteral}{"{}]\ in\ facet\ "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00869}00869\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}}\ <<\ \textcolor{stringliteral}{"{}\ :\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00870}00870\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}zeta\_vertex\ =\ [\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00871}00871\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_vertex}}[1]\ <<\ \textcolor{stringliteral}{"{}\ ]\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00872}00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}zeta\_from\_boundary\ \ \ \ \ \ =\ [\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}}[0]}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00873}00873\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_from\_boundary}}[1]\ <<\ \textcolor{stringliteral}{"{}\ ]\ \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00874}00874\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00875}00875\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00876}00876\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00877}00877\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00878}00878\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00879}00879\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00880}00880\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00881}00881\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00882}00882\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00883}00883\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00884}00884\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compute\ zeta\ values\ of\ the\ interpolation\ parameters}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00885}00885\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_a}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00886}00886\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_b}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00887}00887\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_c}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00888}00888\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_d}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00889}00889\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_e}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00890}00890\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_f}}(3,\ 0.0);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00891}00891\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta01(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_a}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00892}00892\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta01(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00893}00893\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_d}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00894}00894\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00895}00895\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta12(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s2}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_c}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00896}00896\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta12(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00897}00897\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_f}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00898}00898\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00899}00899\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta20(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00900}00900\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ 1.0\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s2}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_b}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00901}00901\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{faceted\_surface\_pt}}-\/>boundary\_zeta20(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\_id\_of\_boundary}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00902}00902\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00903}00903\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Transfinite\ mapping}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00904}00904\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_in\_geom\_obj}}[0]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_a}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_b}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_0}}[0])\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00905}00905\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_c}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_d}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_1}}[0])\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00906}00906\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s2}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_e}}[0]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_f}}[0]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_2}}[0]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00907}00907\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_in\_geom\_obj}}[1]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s0}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_a}}[1]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_b}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_0}}[1])\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00908}00908\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s1}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_c}}[1]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_d}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_1}}[1])\ +}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00909}00909\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s2}}\ *\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_e}}[1]\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_f}}[1]\ -\/\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_2}}[1]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00910}00910\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00911}00911\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_tvalues}}\ =}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00912}00912\ \ \ \ \ \ \ \ \ \ \ \ \ 1\ +\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>position\_time\_stepper\_pt()-\/>nprev\_values();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00913}00913\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\_tvalues}};\ ++\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00914}00914\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00915}00915\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ position\ according\ to\ the\ underlying\ geometric\ object}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00916}00916\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{geom\_obj\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a0e8b458bf2047}{position}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\_in\_geom\_obj}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{position\_from\_geom\_obj}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00917}00917\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00918}00918\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ node}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00919}00919\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00920}00920\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00921}00921\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{position\_from\_geom\_obj}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00922}00922\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00923}00923\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00924}00924\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00925}00925\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00926}00926\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00927}00927\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00928}00928\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ any\ element\ is\ inverted}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00929}00929\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_element\_is\_inverted}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00930}00930\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00931}00931\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_af01dfefb66c15579b540be62999d93ee}{nelement}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00932}00932\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nel}};\ \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00933}00933\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00934}00934\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1FiniteElement}{FiniteElement}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00935}00935\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{passed}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00936}00936\ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9d44b28a6aa0152ffb6b187befe35bf9}{check\_J\_eulerian\_at\_knots}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{passed}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00937}00937\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{passed}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00938}00938\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00939}00939\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_element\_is\_inverted}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00940}00940\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}[100];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00941}00941\ \ \ \ \ \ \ \ \ std::ofstream\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00942}00942\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{snprintf}}(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00943}00943\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}),\ \textcolor{stringliteral}{"{}overly\_distorted\_element\%i.dat"{}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00944}00944\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}.open(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00945}00945\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod\_1d}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_ab65c7a94dda80c1876a09ac12be4e39c}{nnode\_1d}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00946}00946\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_a52d2a58a6a31c10ccb05d8997ef73e4a}{output}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod\_1d}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00947}00947\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}.close();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00948}00948\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00949}00949\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ to\ old\ nodal\ position}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00950}00950\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a6219ed269a6d89b5aa14659cce48905a}{nnode}}();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00951}00951\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00952}00952\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00953}00953\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00954}00954\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x\_current}}(3);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00955}00955\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a0e8b458bf2047}{position}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x\_current}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00956}00956\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\_nodal\_posn}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}]\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x\_current}};}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00957}00957\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Vector<double>}}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\_x}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\_nodal\_posn}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}]);}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00958}00958\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00959}00959\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00960}00960\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\_x}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00961}00961\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00962}00962\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00963}00963\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00964}00964\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Plot}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00965}00965\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{snprintf}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00966}00966\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}),}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00967}00967\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}orig\_overly\_distorted\_element\%i.dat"{}},}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00968}00968\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00969}00969\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}.open(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00970}00970\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement_a52d2a58a6a31c10ccb05d8997ef73e4a}{output}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod\_1d}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00971}00971\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_file}}.close();}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00972}00972\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00973}00973\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00974}00974\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ =\ 0;\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}\ <\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nnod}};\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00975}00975\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00976}00976\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1Node}{Node}}*\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{el\_pt}}-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00977}00977\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ =\ 0;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}\ <\ 3;\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00978}00978\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00979}00979\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})\ =\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\_nodal\_posn}}[\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\_pt}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00980}00980\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00981}00981\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00982}00982\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00983}00983\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bump}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00984}00984\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}++;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00985}00985\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00986}00986\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00987}00987\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{some\_element\_is\_inverted}})}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00988}00988\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00989}00989\ \ \ \ \ \ \ std::ostringstream\ error\_message;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00990}00990\ \ \ \ \ \ \ error\_message}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00991}00991\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}A\ number\ of\ elements,\ namely:\ "{}}\ <<\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{count}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00992}00992\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ are\ inverted\ after\ snapping.\ Their\ shapes\ are\ in\ "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00993}00993\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ overly\_distorted\_element*.dat\ and\ "{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00994}00994\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}orig\_overly\_distorted\_element*.dat"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00995}00995\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Next\ person\ to\ get\ this\ error:\ Please\ implement\ a\ straightforward\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00996}00996\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}variant\ of\ one\ of\ the\ functors\ in\ src/mesh\_smoothing\ to\ switch\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00997}00997\ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}to\ harmonic\ mapping\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00998}00998\ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l00999}00999\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01000}01000\ \ \ \ \ \ \ \ \ error\_message.str(),\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_CURRENT\_FUNCTION}},\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01001}01001\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01002}01002\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01003}01003\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01004}01004\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}No\ elements\ are\ inverted\ after\ snapping.\ Yay!"{}}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01005}01005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01006}01006\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01007}01007\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01008}01008\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01009}01009\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01010}01010\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01011}01011\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01012}01012\ \textcolor{comment}{\ \ /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01013}01013\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01014}01014\ }
+\DoxyCodeLine{\Hypertarget{tet__mesh_8cc_source_l01015}01015\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+
+\end{DoxyCode}

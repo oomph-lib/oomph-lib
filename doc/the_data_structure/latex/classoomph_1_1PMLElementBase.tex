@@ -1,0 +1,223 @@
+\doxysection{oomph\+::PMLElement\+Base\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PMLElementBase}{}\label{classoomph_1_1PMLElementBase}\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+
+
+Base class for elements with pml capabilities.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
+
+Inheritance diagram for oomph\+::PMLElement\+Base\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.655226cm]{classoomph_1_1PMLElementBase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47}{PMLElement\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a}{\texorpdfstring{$\sim$}{\string~}\+PMLElement\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664}{disable\+\_\+pml}} ()
+\begin{DoxyCompactList}\small\item\em Disable pml. Ensures the PML-\/ification in all directions has been deactivated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1}{enable\+\_\+pml}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{direction}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interface\+\_\+border\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outer\+\_\+domain\+\_\+border\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Enable pml. Specify the coordinate direction along which pml boundary is constant, as well as the coordinate along the dimension for the interface between the physical and artificial domains and the coordinate for the outer boundary. All of these are used to adjust the perfectly matched layer mechanism. Needs to be called separately for each pml-\/ified direction (if needed -- e.\+g. in corner elements) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90}{values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{values\+\_\+to\+\_\+pin}})=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which we have to specify the values to be pinned (and set to zero) on the outer edge of the pml layer. This is usually all of the nodal values (values 0 and 1 (real and imag part) for Helmholtz; values 0,1,2 and 3 (real and imag part of x-\/ and y-\/displacement for 2D time-\/harmonic linear elasticity; etc.). \doxylink{classoomph_1_1Vector}{Vector} must be resized internally! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989}{Pml\+\_\+is\+\_\+enabled}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating if element is used in pml mode. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73}{Pml\+\_\+direction\+\_\+active}}
+\begin{DoxyCompactList}\small\item\em Coordinate direction along which pml boundary is constant; alternatively\+: coordinate direction in which coordinate stretching is performed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f}{Pml\+\_\+inner\+\_\+boundary}}
+\begin{DoxyCompactList}\small\item\em Coordinate of inner pml boundary (Storage is provided for any coordinate direction; only the entries for "{}active"{} directions is used.) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288}{Pml\+\_\+outer\+\_\+boundary}}
+\begin{DoxyCompactList}\small\item\em Coordinate of outer pml boundary (Storage is provided for any coordinate direction; only the entries for "{}active"{} directions is used.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+PMLElement\+Base$<$ DIM $>$}
+Base class for elements with pml capabilities. 
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00058}{58}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47}\label{classoomph_1_1PMLElementBase_ad29eae1793cca20aafa774086da1fc47} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!PMLElementBase@{PMLElementBase}}
+\index{PMLElementBase@{PMLElementBase}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{PMLElementBase()}{PMLElementBase()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+PMLElement\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00062}{62}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a}\label{classoomph_1_1PMLElementBase_a2a9399aa63600f5276e865dde49f164a} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!````~PMLElementBase@{\texorpdfstring{$\sim$}{\string~}PMLElementBase}}
+\index{````~PMLElementBase@{\texorpdfstring{$\sim$}{\string~}PMLElementBase}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PMLElementBase()}{\string~PMLElementBase()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1PMLElementBase}{PMLElement\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00071}{71}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664}\label{classoomph_1_1PMLElementBase_a42fdef3b3171d372e2b2dc792e8be664} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!disable\_pml@{disable\_pml}}
+\index{disable\_pml@{disable\_pml}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_pml()}{disable\_pml()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::disable\+\_\+pml (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable pml. Ensures the PML-\/ification in all directions has been deactivated. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00075}{75}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__meshes_8h_source_l00123}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+direction\+\_\+active}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00118}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+is\+\_\+enabled}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1}\label{classoomph_1_1PMLElementBase_a31614b65c2824c9acfce1835174098e1} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!enable\_pml@{enable\_pml}}
+\index{enable\_pml@{enable\_pml}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_pml()}{enable\_pml()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::enable\+\_\+pml (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{direction,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{interface\+\_\+border\+\_\+value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{outer\+\_\+domain\+\_\+border\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable pml. Specify the coordinate direction along which pml boundary is constant, as well as the coordinate along the dimension for the interface between the physical and artificial domains and the coordinate for the outer boundary. All of these are used to adjust the perfectly matched layer mechanism. Needs to be called separately for each pml-\/ified direction (if needed -- e.\+g. in corner elements) 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00096}{96}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__meshes_8h_source_l00123}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+direction\+\_\+active}}, \mbox{\hyperlink{pml__meshes_8h_source_l00128}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+inner\+\_\+boundary}}, \mbox{\hyperlink{pml__meshes_8h_source_l00118}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+is\+\_\+enabled}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00133}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::\+Pml\+\_\+outer\+\_\+boundary}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90}\label{classoomph_1_1PMLElementBase_ad63639f1966cd3191fad69852732fd90} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}}
+\index{values\_to\_be\_pinned\_on\_outer\_pml\_boundary@{values\_to\_be\_pinned\_on\_outer\_pml\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{values\_to\_be\_pinned\_on\_outer\_pml\_boundary()}{values\_to\_be\_pinned\_on\_outer\_pml\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::values\+\_\+to\+\_\+be\+\_\+pinned\+\_\+on\+\_\+outer\+\_\+pml\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{values\+\_\+to\+\_\+pin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual function in which we have to specify the values to be pinned (and set to zero) on the outer edge of the pml layer. This is usually all of the nodal values (values 0 and 1 (real and imag part) for Helmholtz; values 0,1,2 and 3 (real and imag part of x-\/ and y-\/displacement for 2D time-\/harmonic linear elasticity; etc.). \doxylink{classoomph_1_1Vector}{Vector} must be resized internally! 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations_abde2883fb3855ca2e65cdef97176e017}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations}}, \mbox{\hyperlink{classoomph_1_1PMLHelmholtzEquations_a08c72ef039f4dd155df7bc660554c666}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicLinearElasticityEquationsBase_a6cf2e81c08597a2bd242941846cafa77}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73}\label{classoomph_1_1PMLElementBase_a5e460c58f3fe82696004d21e3f713d73} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_direction\_active@{Pml\_direction\_active}}
+\index{Pml\_direction\_active@{Pml\_direction\_active}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_direction\_active}{Pml\_direction\_active}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+std\+::vector$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pml\+\_\+direction\+\_\+active\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate direction along which pml boundary is constant; alternatively\+: coordinate direction in which coordinate stretching is performed. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00123}{123}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00546}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__meshes_8h_source_l00075}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::disable\+\_\+pml()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00096}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::enable\+\_\+pml()}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f}\label{classoomph_1_1PMLElementBase_a952ab0485b0834249e5eac1e8448f43f} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_inner\_boundary@{Pml\_inner\_boundary}}
+\index{Pml\_inner\_boundary@{Pml\_inner\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_inner\_boundary}{Pml\_inner\_boundary}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pml\+\_\+inner\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate of inner pml boundary (Storage is provided for any coordinate direction; only the entries for "{}active"{} directions is used.) 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00128}{128}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00546}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00096}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::enable\+\_\+pml()}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989}\label{classoomph_1_1PMLElementBase_a0b0e980998764978801a1f0463a31989} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_is\_enabled@{Pml\_is\_enabled}}
+\index{Pml\_is\_enabled@{Pml\_is\_enabled}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_is\_enabled}{Pml\_is\_enabled}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pml\+\_\+is\+\_\+enabled\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean indicating if element is used in pml mode. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00118}{118}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00546}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__meshes_8h_source_l00075}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::disable\+\_\+pml()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00096}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::enable\+\_\+pml()}}.
+
+\Hypertarget{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288}\label{classoomph_1_1PMLElementBase_a7f3365fcb393848b926a836e10a3a288} 
+\index{oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}!Pml\_outer\_boundary@{Pml\_outer\_boundary}}
+\index{Pml\_outer\_boundary@{Pml\_outer\_boundary}!oomph::PMLElementBase$<$ DIM $>$@{oomph::PMLElementBase$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pml\_outer\_boundary}{Pml\_outer\_boundary}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ \mbox{\hyperlink{classoomph_1_1PMLElementBase}{oomph\+::\+PMLElement\+Base}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pml\+\_\+outer\+\_\+boundary\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate of outer pml boundary (Storage is provided for any coordinate direction; only the entries for "{}active"{} directions is used.) 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00133}{133}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00331}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, \mbox{\hyperlink{pml__helmholtz__elements_8h_source_l00546}{oomph\+::\+PMLHelmholtz\+Equations$<$ DIM $>$\+::compute\+\_\+pml\+\_\+coefficients()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00096}{oomph\+::\+PMLElement\+Base$<$ DIM $>$\+::enable\+\_\+pml()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__meshes_8h}{pml\+\_\+meshes.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,224 @@
+\doxysection{oomph\+::Triangle\+Mesh\+Open\+Curve Class Reference}
+\hypertarget{classoomph_1_1TriangleMeshOpenCurve}{}\label{classoomph_1_1TriangleMeshOpenCurve}\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+
+
+Base class defining an open curve for the Triangle mesh generation Basically used to define internal boundaries on the mesh.  
+
+
+
+
+{\ttfamily \#include $<$unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h$>$}
+
+Inheritance diagram for oomph\+::Triangle\+Mesh\+Open\+Curve\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TriangleMeshOpenCurve}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05}{Triangle\+Mesh\+Open\+Curve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a5117e31d2e1e658154e58b371db37001}{curve\+\_\+section\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177}{\texorpdfstring{$\sim$}{\string~}\+Triangle\+Mesh\+Open\+Curve}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261}{nvertices}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8}{nsegments}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Total number of segments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+sample}}=50)
+\begin{DoxyCompactList}\small\item\em Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_aae9df6355a21855958a13dc4f85f7e9b}{polyline\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve_a2932653965d28a6508741ea94fe6ae3d}{polyline\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent polyline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve}{oomph\+::\+Triangle\+Mesh\+Curve}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a7cdea154c00eeb59e0bd06589796ba28}{Triangle\+Mesh\+Curve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a5117e31d2e1e658154e58b371db37001}{curve\+\_\+section\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_aa7fc18e6612c6f82775c3320175acb45}{\texorpdfstring{$\sim$}{\string~}\+Triangle\+Mesh\+Curve}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_ad5094b69c9f72db4b079d71c3c9f1ea8}{max\+\_\+boundary\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Return max boundary id of associated curves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_af0b316414dd4a848b8bdfe314e5200ea}{ncurve\+\_\+section}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of constituent curves. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_aa5ff31ffc3b930d6e342d3f73d37f5c9}{enable\+\_\+polyline\+\_\+refinement}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&tolerance=0.\+08)
+\begin{DoxyCompactList}\small\item\em Enable refinement of polylines to create a better representation of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation of the optional argument which specifies the refinement tolerance. It defaults to 0.\+08 and the smaller the number the finer the surface representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a161683c0c65fa9be9495f1b22a7a2500}{set\+\_\+polyline\+\_\+refinement\+\_\+tolerance}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&tolerance)
+\begin{DoxyCompactList}\small\item\em Set tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation of the refinement tolerance. (The smaller the number the finer the surface representation). If set to a negative value, we\textquotesingle{}re switching off refinement -- equivalent to calling \doxylink{classoomph_1_1TriangleMeshCurve_a840a3a0c871907660d4ebe571cf36960}{disable\+\_\+polyline\+\_\+refinement()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_acca896e38e84ed0f7431f21572880781}{polyline\+\_\+refinement\+\_\+tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Get tolerance for refinement of polylines to create a better representation of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation. If it\textquotesingle{}s negative refinement is disabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a840a3a0c871907660d4ebe571cf36960}{disable\+\_\+polyline\+\_\+refinement}} ()
+\begin{DoxyCompactList}\small\item\em Disable refinement of polylines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_ad43caa6186da5d77772dc43521d2fad5}{enable\+\_\+polyline\+\_\+unrefinement}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&tolerance=0.\+04)
+\begin{DoxyCompactList}\small\item\em Enable unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.\+04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a2174126b383c657bf7c7bc24028844bd}{set\+\_\+polyline\+\_\+unrefinement\+\_\+tolerance}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&tolerance)
+\begin{DoxyCompactList}\small\item\em Set tolerance for unrefinement of polylines to avoid unnecessarily large numbers of elements on of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation of the optional argument which specifies the unrefinement tolerance. It defaults to 0.\+04 and the larger the number the more agressive we are when removing unnecessary vertices on gently curved polylines. If set to a negative value, we\textquotesingle{}re switching off unrefinement -- equivalent to calling \doxylink{classoomph_1_1TriangleMeshCurve_a43036d1d42da58555ebe9b9ad2036a9c}{disable\+\_\+polyline\+\_\+unrefinement()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a9c134821bab203824f06994db321a840}{polyline\+\_\+unrefinement\+\_\+tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Get tolerance for unrefinement of polylines to create a better representation of curvilinear boundaries (e.\+g. in free-\/surface problems). See tutorial for interpretation. If it\textquotesingle{}s negative unrefinement is disabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a43036d1d42da58555ebe9b9ad2036a9c}{disable\+\_\+polyline\+\_\+unrefinement}} ()
+\begin{DoxyCompactList}\small\item\em Disable unrefinement of polylines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a5117e31d2e1e658154e58b371db37001}{curve\+\_\+section\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent curve section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_aed6d972fa047028a7ba713e3d472ae20}{curve\+\_\+section\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th constituent curve section. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve}{oomph\+::\+Triangle\+Mesh\+Curve}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a5834ebf68c639d6d2b2b8260da5270fe}{Curve\+\_\+section\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of curve sections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class defining an open curve for the Triangle mesh generation Basically used to define internal boundaries on the mesh. 
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01641}{1641}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05}\label{classoomph_1_1TriangleMeshOpenCurve_a3ea62c84cdd6e4adac871af928b0aa05} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!TriangleMeshOpenCurve@{TriangleMeshOpenCurve}}
+\index{TriangleMeshOpenCurve@{TriangleMeshOpenCurve}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{TriangleMeshOpenCurve()}{TriangleMeshOpenCurve()}}
+{\footnotesize\ttfamily oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::\+Triangle\+Mesh\+Open\+Curve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{Triangle\+Mesh\+Curve\+Section}} \texorpdfstring{$\ast$}{*} $>$ \&}]{curve\+\_\+section\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Class defining an open curve for the Triangle mesh generation. 
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01836}{1836}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l01103}{oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons\+::\+Tolerable\+\_\+error}}.
+
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177}\label{classoomph_1_1TriangleMeshOpenCurve_a70a3975f694fcf8bc7c2187ee40da177} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!````~TriangleMeshOpenCurve@{\texorpdfstring{$\sim$}{\string~}TriangleMeshOpenCurve}}
+\index{````~TriangleMeshOpenCurve@{\texorpdfstring{$\sim$}{\string~}TriangleMeshOpenCurve}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TriangleMeshOpenCurve()}{\string~TriangleMeshOpenCurve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::\texorpdfstring{$\sim$}{\string~}\+Triangle\+Mesh\+Open\+Curve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01649}{1649}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8}\label{classoomph_1_1TriangleMeshOpenCurve_a639fc3a8b9860c98abc7c2d09f6917d8} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!nsegments@{nsegments}}
+\index{nsegments@{nsegments}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{nsegments()}{nsegments()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::nsegments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Total number of segments. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_abb1f60baf8d94f54f409ae51417e2568}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01667}{1667}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01172}{oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section()}}.
+
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261}\label{classoomph_1_1TriangleMeshOpenCurve_ac9671f91a0433ec5cab5a3b7dac45261} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!nvertices@{nvertices}}
+\index{nvertices@{nvertices}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{nvertices()}{nvertices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::nvertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of vertices. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_acf002aab11af44361b39729d067efbe2}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01652}{1652}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01172}{oomph\+::\+Triangle\+Mesh\+Curve\+::ncurve\+\_\+section()}}.
+
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458}\label{classoomph_1_1TriangleMeshOpenCurve_adfffbe10445328b0b021b82443ff8458} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!output@{output}}
+\index{output@{output}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+sample = {\ttfamily 50} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output each sub-\/boundary at n\+\_\+sample (default\+: 50) points. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve_a7d40afc7e879fde0319b153a141915df}{oomph\+::\+Triangle\+Mesh\+Curve}}.
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01679}{1679}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00096}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::output()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_a2932653965d28a6508741ea94fe6ae3d}\label{classoomph_1_1TriangleMeshOpenCurve_a2932653965d28a6508741ea94fe6ae3d} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} \texorpdfstring{$\ast$}{*} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01711}{1711}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1TriangleMeshOpenCurve_aae9df6355a21855958a13dc4f85f7e9b}\label{classoomph_1_1TriangleMeshOpenCurve_aae9df6355a21855958a13dc4f85f7e9b} 
+\index{oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}!polyline\_pt@{polyline\_pt}}
+\index{polyline\_pt@{polyline\_pt}!oomph::TriangleMeshOpenCurve@{oomph::TriangleMeshOpenCurve}}
+\doxysubsubsection{\texorpdfstring{polyline\_pt()}{polyline\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{Triangle\+Mesh\+Poly\+Line}} \texorpdfstring{$\ast$}{*} oomph\+::\+Triangle\+Mesh\+Open\+Curve\+::polyline\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th constituent polyline. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01689}{1689}} of file \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l01321}{oomph\+::\+Triangle\+Mesh\+Curve\+::\+Curve\+\_\+section\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h}}\item 
+\mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc}{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+cc}}\end{DoxyCompactItemize}

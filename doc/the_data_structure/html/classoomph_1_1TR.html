@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TR Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TR.html">TR</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1TR-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::TR Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Trapezoid rule time stepping scheme.  
+ <a href="classoomph_1_1TR.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::TR:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1TR.png" usemap="#oomph::TR_map" alt=""/>
+  <map id="oomph::TR_map" name="oomph::TR_map">
+<area href="classoomph_1_1TimeStepper.html" title="Base class for time-stepping schemes. Timestepper provides an approximation of the temporal derivativ..." alt="oomph::TimeStepper" shape="rect" coords="0,0,125,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac83377c97c81b2fa5afbf12c56bbb52f" id="r_ac83377c97c81b2fa5afbf12c56bbb52f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ac83377c97c81b2fa5afbf12c56bbb52f">TR</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">adaptive</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>)</td></tr>
+<tr class="memdesc:ac83377c97c81b2fa5afbf12c56bbb52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, storage for two history derivatives (one for <a class="el" href="classoomph_1_1TR.html" title="Trapezoid rule time stepping scheme.">TR</a> and one for the predictor step), one history value, present value and predicted value.  <br /></td></tr>
+<tr class="separator:ac83377c97c81b2fa5afbf12c56bbb52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fe5f88519d9b3645ab99520dc4ea5d" id="r_a42fe5f88519d9b3645ab99520dc4ea5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a42fe5f88519d9b3645ab99520dc4ea5d">~TR</a> ()</td></tr>
+<tr class="memdesc:a42fe5f88519d9b3645ab99520dc4ea5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a42fe5f88519d9b3645ab99520dc4ea5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a007e98e499c2440b05947b626d610425" id="r_a007e98e499c2440b05947b626d610425"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a007e98e499c2440b05947b626d610425">order</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a007e98e499c2440b05947b626d610425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the actual order of the scheme.  <br /></td></tr>
+<tr class="separator:a007e98e499c2440b05947b626d610425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7d2aa82b6a509ce9adc039ca46bacf" id="r_afa7d2aa82b6a509ce9adc039ca46bacf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#afa7d2aa82b6a509ce9adc039ca46bacf">set_weights</a> ()</td></tr>
+<tr class="memdesc:afa7d2aa82b6a509ce9adc039ca46bacf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weights.  <br /></td></tr>
+<tr class="separator:afa7d2aa82b6a509ce9adc039ca46bacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c84561d7019ca2e610ea8f93be7a73" id="r_aa9c84561d7019ca2e610ea8f93be7a73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#aa9c84561d7019ca2e610ea8f93be7a73">set_error_weights</a> ()</td></tr>
+<tr class="memdesc:aa9c84561d7019ca2e610ea8f93be7a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the weights for the error computation, (currently empty &ndash; overwrite for specific scheme)  <br /></td></tr>
+<tr class="separator:aa9c84561d7019ca2e610ea8f93be7a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef78c8db06cbf63829040190dfda04da" id="r_aef78c8db06cbf63829040190dfda04da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#aef78c8db06cbf63829040190dfda04da">set_predictor_weights</a> ()</td></tr>
+<tr class="memdesc:aef78c8db06cbf63829040190dfda04da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to set the predictor weights.  <br /></td></tr>
+<tr class="separator:aef78c8db06cbf63829040190dfda04da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9b61bc12fc5657d4d5a0797b0097d38" id="r_ac9b61bc12fc5657d4d5a0797b0097d38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ac9b61bc12fc5657d4d5a0797b0097d38">nprev_values</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac9b61bc12fc5657d4d5a0797b0097d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of previous values available.  <br /></td></tr>
+<tr class="separator:ac9b61bc12fc5657d4d5a0797b0097d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6ad058fc43a89a8e06f671688d438e" id="r_abe6ad058fc43a89a8e06f671688d438e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#abe6ad058fc43a89a8e06f671688d438e">derivative_index</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abe6ad058fc43a89a8e06f671688d438e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Location in data of derivatives.  <br /></td></tr>
+<tr class="separator:abe6ad058fc43a89a8e06f671688d438e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4416216c3319f42bd7805e136326f8f8" id="r_a4416216c3319f42bd7805e136326f8f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a4416216c3319f42bd7805e136326f8f8">predicted_value_index</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4416216c3319f42bd7805e136326f8f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Location of predicted value.  <br /></td></tr>
+<tr class="separator:a4416216c3319f42bd7805e136326f8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41d1d10629140a3a18da92701d3b5a5" id="r_ac41d1d10629140a3a18da92701d3b5a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ac41d1d10629140a3a18da92701d3b5a5">ndt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac41d1d10629140a3a18da92701d3b5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of timestep increments that need to be stored by the scheme.  <br /></td></tr>
+<tr class="separator:ac41d1d10629140a3a18da92701d3b5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa73845654866b5cf65ee801f67baa6b3" id="r_aa73845654866b5cf65ee801f67baa6b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#aa73845654866b5cf65ee801f67baa6b3">assign_initial_values_impulsive</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>)</td></tr>
+<tr class="memdesc:aa73845654866b5cf65ee801f67baa6b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the time-history for the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values, corresponding to an impulsive start.  <br /></td></tr>
+<tr class="separator:aa73845654866b5cf65ee801f67baa6b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46878c5cd5b9d20afb2f5d9ab7a7df26" id="r_a46878c5cd5b9d20afb2f5d9ab7a7df26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a46878c5cd5b9d20afb2f5d9ab7a7df26">assign_initial_positions_impulsive</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt)</td></tr>
+<tr class="memdesc:a46878c5cd5b9d20afb2f5d9ab7a7df26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the time-history for the nodal positions corresponding to an impulsive start.  <br /></td></tr>
+<tr class="separator:a46878c5cd5b9d20afb2f5d9ab7a7df26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a606637401e9ed5ca030fa7b28d89a" id="r_ae6a606637401e9ed5ca030fa7b28d89a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ae6a606637401e9ed5ca030fa7b28d89a">actions_after_timestep</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="memdesc:ae6a606637401e9ed5ca030fa7b28d89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for any actions that need to be performed after a time step.  <br /></td></tr>
+<tr class="separator:ae6a606637401e9ed5ca030fa7b28d89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ba8454bc4fcc3ad3c95550663df388" id="r_aa8ba8454bc4fcc3ad3c95550663df388"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#aa8ba8454bc4fcc3ad3c95550663df388">actions_before_timestep</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="memdesc:aa8ba8454bc4fcc3ad3c95550663df388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for any actions that need to be performed before a time step.  <br /></td></tr>
+<tr class="separator:aa8ba8454bc4fcc3ad3c95550663df388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde5c3804dd51162f11c50dacb65b315" id="r_abde5c3804dd51162f11c50dacb65b315"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#abde5c3804dd51162f11c50dacb65b315">setup_initial_derivative</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="separator:abde5c3804dd51162f11c50dacb65b315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8cc75e39263619c073076ae5bbab36" id="r_a4f8cc75e39263619c073076ae5bbab36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a4f8cc75e39263619c073076ae5bbab36">shift_time_values</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>)</td></tr>
+<tr class="memdesc:a4f8cc75e39263619c073076ae5bbab36"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>'s time history so that we can advance to the next timestep.  <br /></td></tr>
+<tr class="separator:a4f8cc75e39263619c073076ae5bbab36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ab8859ae1a87f14687dcec94f68e03" id="r_a15ab8859ae1a87f14687dcec94f68e03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a15ab8859ae1a87f14687dcec94f68e03">shift_time_positions</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt)</td></tr>
+<tr class="memdesc:a15ab8859ae1a87f14687dcec94f68e03"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function advances the time history of the positions at a node.  <br /></td></tr>
+<tr class="separator:a15ab8859ae1a87f14687dcec94f68e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef44b410f646c0f94eb2f5a2d80bb03" id="r_a5ef44b410f646c0f94eb2f5a2d80bb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a5ef44b410f646c0f94eb2f5a2d80bb03">calculate_predicted_positions</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt)</td></tr>
+<tr class="memdesc:a5ef44b410f646c0f94eb2f5a2d80bb03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate predicted positions at a node.  <br /></td></tr>
+<tr class="separator:a5ef44b410f646c0f94eb2f5a2d80bb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a345daded718d96bb4b7d4cd2996892c8" id="r_a345daded718d96bb4b7d4cd2996892c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a345daded718d96bb4b7d4cd2996892c8">calculate_predicted_values</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>)</td></tr>
+<tr class="memdesc:a345daded718d96bb4b7d4cd2996892c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate predicted data values in a <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object.  <br /></td></tr>
+<tr class="separator:a345daded718d96bb4b7d4cd2996892c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae77caf45f731bfc2cd5212f5934918d7" id="r_ae77caf45f731bfc2cd5212f5934918d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ae77caf45f731bfc2cd5212f5934918d7">temporal_error_in_position</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:ae77caf45f731bfc2cd5212f5934918d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the error in the position i at a node.  <br /></td></tr>
+<tr class="separator:ae77caf45f731bfc2cd5212f5934918d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbaa1753914d49942f07b601563c2cec" id="r_afbaa1753914d49942f07b601563c2cec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#afbaa1753914d49942f07b601563c2cec">temporal_error_in_value</a> (<a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:afbaa1753914d49942f07b601563c2cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the error in the value i in a <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> structure.  <br /></td></tr>
+<tr class="separator:afbaa1753914d49942f07b601563c2cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TimeStepper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TimeStepper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TimeStepper.html">oomph::TimeStepper</a></td></tr>
+<tr class="memitem:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a8a4f14d18d49b82f0a6ad1c279485cd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a8a4f14d18d49b82f0a6ad1c279485cd9">TimeStepper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">tstorage</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">max_deriv</a>)</td></tr>
+<tr class="memdesc:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass the amount of storage required by timestepper (present value + history values) and the order of highest time-derivative.  <br /></td></tr>
+<tr class="separator:a8a4f14d18d49b82f0a6ad1c279485cd9 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a67f21ad40e01e35dd4cbb218aecbf596"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a67f21ad40e01e35dd4cbb218aecbf596">TimeStepper</a> ()</td></tr>
+<tr class="memdesc:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken empty constructor.  <br /></td></tr>
+<tr class="separator:a67f21ad40e01e35dd4cbb218aecbf596 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035589314a3bdbe215ba002fd4f49f62 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a035589314a3bdbe215ba002fd4f49f62"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a035589314a3bdbe215ba002fd4f49f62">TimeStepper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a035589314a3bdbe215ba002fd4f49f62 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a035589314a3bdbe215ba002fd4f49f62 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddf0fae6331efde51deb853866bdeed inherit pub_methods_classoomph_1_1TimeStepper" id="r_a6ddf0fae6331efde51deb853866bdeed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a6ddf0fae6331efde51deb853866bdeed">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a6ddf0fae6331efde51deb853866bdeed inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a6ddf0fae6331efde51deb853866bdeed inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper" id="r_a171b5bbc223c889474ee38fd02eefc4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a171b5bbc223c889474ee38fd02eefc4d">~TimeStepper</a> ()</td></tr>
+<tr class="memdesc:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual destructor  <br /></td></tr>
+<tr class="separator:a171b5bbc223c889474ee38fd02eefc4d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper" id="r_aa02483da1254fab8f268d70bb3ef2289"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#aa02483da1254fab8f268d70bb3ef2289">highest_derivative</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Highest order derivative that the scheme can compute.  <br /></td></tr>
+<tr class="separator:aa02483da1254fab8f268d70bb3ef2289 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a69b6874b36b2f594cbee45719d4c7b inherit pub_methods_classoomph_1_1TimeStepper" id="r_a5a69b6874b36b2f594cbee45719d4c7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a5a69b6874b36b2f594cbee45719d4c7b">time</a> ()</td></tr>
+<tr class="memdesc:a5a69b6874b36b2f594cbee45719d4c7b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current value of continous time.  <br /></td></tr>
+<tr class="separator:a5a69b6874b36b2f594cbee45719d4c7b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper" id="r_ab0fe7c6da82843fbaf406a29f5aaa78b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab0fe7c6da82843fbaf406a29f5aaa78b">time</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return current value of continous time.  <br /></td></tr>
+<tr class="separator:ab0fe7c6da82843fbaf406a29f5aaa78b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fcbef20161383c516ecdba4cf782106 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a5fcbef20161383c516ecdba4cf782106"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a5fcbef20161383c516ecdba4cf782106">nprev_values_for_value_at_evaluation_time</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5fcbef20161383c516ecdba4cf782106 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of previous values needed to calculate the value at the current time. i.e. how many previous values must we loop over to calculate the values at the evaluation time. For most methods this is 1, i.e. just use the value at t_{n+1}. See midpoint method for a counter-example.  <br /></td></tr>
+<tr class="separator:a5fcbef20161383c516ecdba4cf782106 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a81ea0ff2e66cef5e0184b616c608e418"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a81ea0ff2e66cef5e0184b616c608e418">make_steady</a> ()</td></tr>
+<tr class="memdesc:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to make the time stepper temporarily steady. This is trivially achieved by setting all the weights to zero.  <br /></td></tr>
+<tr class="separator:a81ea0ff2e66cef5e0184b616c608e418 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper" id="r_ad341ba9e80265e1c26c1cda0f40c8292"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ad341ba9e80265e1c26c1cda0f40c8292">is_steady</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if a timestepper has been made steady (possibly temporarily to switch off time-dependence)  <br /></td></tr>
+<tr class="separator:ad341ba9e80265e1c26c1cda0f40c8292 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper" id="r_abf0f84ac9e7c1266dea9bd9e479fb2bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#abf0f84ac9e7c1266dea9bd9e479fb2bf">predict_by_explicit_step</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag: is adaptivity done by taking a separate step using an <a class="el" href="classoomph_1_1ExplicitTimeStepper.html" title="A Base class for explicit timesteppers.">ExplicitTimeStepper</a> object?  <br /></td></tr>
+<tr class="separator:abf0f84ac9e7c1266dea9bd9e479fb2bf inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1214f9edca10512e1f3b857cff4e0797 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a1214f9edca10512e1f3b857cff4e0797"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a1214f9edca10512e1f3b857cff4e0797">explicit_predictor_pt</a> ()</td></tr>
+<tr class="memdesc:a1214f9edca10512e1f3b857cff4e0797 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pointer to the explicit timestepper to use as a predictor in adaptivity if Predict_by_explicit_step is set.  <br /></td></tr>
+<tr class="separator:a1214f9edca10512e1f3b857cff4e0797 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb7d9405e9b8cfbd108082faa0c74e4 inherit pub_methods_classoomph_1_1TimeStepper" id="r_affb7d9405e9b8cfbd108082faa0c74e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#affb7d9405e9b8cfbd108082faa0c74e4">set_predictor_pt</a> (<a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">_pred_pt</a>)</td></tr>
+<tr class="memdesc:affb7d9405e9b8cfbd108082faa0c74e4 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pointer to the explicit timestepper to use as a predictor in adaptivity if Predict_by_explicit_step is set.  <br /></td></tr>
+<tr class="separator:affb7d9405e9b8cfbd108082faa0c74e4 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9813c8ea8ad981f0db9a467302b9cd0 inherit pub_methods_classoomph_1_1TimeStepper" id="r_ab9813c8ea8ad981f0db9a467302b9cd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab9813c8ea8ad981f0db9a467302b9cd0">update_predicted_time</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_time</a>)</td></tr>
+<tr class="memdesc:ab9813c8ea8ad981f0db9a467302b9cd0 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time that the current predictions apply for, only needed for paranoid checks when doing Predict_by_explicit_step.  <br /></td></tr>
+<tr class="separator:ab9813c8ea8ad981f0db9a467302b9cd0 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper" id="r_a385e522bb6b5c6109e20e860b70e9b6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a385e522bb6b5c6109e20e860b70e9b6b">check_predicted_values_up_to_date</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that the predicted values are the ones we want.  <br /></td></tr>
+<tr class="separator:a385e522bb6b5c6109e20e860b70e9b6b inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a31e756a339277e21f74b21a5d61c9841"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a31e756a339277e21f74b21a5d61c9841">predictor_storage_index</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the time-index in each <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> where predicted values are stored if the timestepper is adaptive.  <br /></td></tr>
+<tr class="separator:a31e756a339277e21f74b21a5d61c9841 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a365cc834ec75291eba462f671ec997e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a365cc834ec75291eba462f671ec997e1">enable_warning_in_assign_initial_data_values</a> ()</td></tr>
+<tr class="memdesc:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the output of warnings due to possible fct pointer vector size mismatch in assign_initial_data_values (Default)  <br /></td></tr>
+<tr class="separator:a365cc834ec75291eba462f671ec997e1 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper" id="r_a7f97ab9e4d8d4269cf75bf79b72da5bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a7f97ab9e4d8d4269cf75bf79b72da5bc">disable_warning_in_assign_initial_data_values</a> ()</td></tr>
+<tr class="memdesc:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable the output of warnings due to possible fct pointer vector size mismatch in assign_initial_data_values.  <br /></td></tr>
+<tr class="separator:a7f97ab9e4d8d4269cf75bf79b72da5bc inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac59f0fb50e6ca3622c03cd9b4d29ee8c inherit pub_methods_classoomph_1_1TimeStepper" id="r_ac59f0fb50e6ca3622c03cd9b4d29ee8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ac59f0fb50e6ca3622c03cd9b4d29ee8c">weights_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac59f0fb50e6ca3622c03cd9b4d29ee8c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a (const) pointer to the weights.  <br /></td></tr>
+<tr class="separator:ac59f0fb50e6ca3622c03cd9b4d29ee8c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper" id="r_aada05f89e86aae352bd5b32bfb173b18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#aada05f89e86aae352bd5b32bfb173b18">undo_make_steady</a> ()</td></tr>
+<tr class="memdesc:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the is_steady status of a specific <a class="el" href="classoomph_1_1TimeStepper.html" title="Base class for time-stepping schemes. Timestepper provides an approximation of the temporal derivativ...">TimeStepper</a> to its default and re-assign the weights.  <br /></td></tr>
+<tr class="separator:aada05f89e86aae352bd5b32bfb173b18 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper" id="r_acbd69b35e54efa29b219bbb56ba49260"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#acbd69b35e54efa29b219bbb56ba49260">type</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return string that indicates the type of the timestepper (e.g. "BDF", "Newmark", etc.)  <br /></td></tr>
+<tr class="separator:acbd69b35e54efa29b219bbb56ba49260 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper" id="r_a802c8b2a2e1933e4e8da30c6d10d1f9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a802c8b2a2e1933e4e8da30c6d10d1f9c">time_derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">deriv</a>)</td></tr>
+<tr class="memdesc:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of all values in <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and return in <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> deriv[].  <br /></td></tr>
+<tr class="separator:a802c8b2a2e1933e4e8da30c6d10d1f9c inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper" id="r_ab88e09cb347f024c07d7341ee6ba7389"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ab88e09cb347f024c07d7341ee6ba7389">time_derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">data_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>.  <br /></td></tr>
+<tr class="separator:ab88e09cb347f024c07d7341ee6ba7389 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a3adfcfcf4ba99366d1475df8b4722082"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3adfcfcf4ba99366d1475df8b4722082">time_derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">deriv</a>)</td></tr>
+<tr class="memdesc:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of all values in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> and return in <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> deriv[] (this can't be simply combined with time_derivative(.., <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, ...) because of differences with haning nodes).  <br /></td></tr>
+<tr class="separator:a3adfcfcf4ba99366d1475df8b4722082 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper" id="r_af02a53d7047869cbf0d563272b4de908"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af02a53d7047869cbf0d563272b4de908">time_derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;node_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate i-th derivative of j-th value in <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a>. Note the use of the node's value() function so that hanging nodes are taken into account (this is why the functions for <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> and <a class="el" href="classoomph_1_1Node.html" title="Nodes are derived from Data, but, in addition, have a definite (Eulerian) position in a space of a gi...">Node</a> cannot be combined through simple polymorphism: value is not virtual).  <br /></td></tr>
+<tr class="separator:af02a53d7047869cbf0d563272b4de908 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73981d5a68161d7b317bebb4ee04adb inherit pub_methods_classoomph_1_1TimeStepper" id="r_ac73981d5a68161d7b317bebb4ee04adb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#ac73981d5a68161d7b317bebb4ee04adb">time_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac73981d5a68161d7b317bebb4ee04adb inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (const version)  <br /></td></tr>
+<tr class="separator:ac73981d5a68161d7b317bebb4ee04adb inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f1c63c2e8adf1137264a78871772986 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a5f1c63c2e8adf1137264a78871772986"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a5f1c63c2e8adf1137264a78871772986">time_pt</a> ()</td></tr>
+<tr class="memdesc:a5f1c63c2e8adf1137264a78871772986 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to time (can't have a paranoid test for null pointers because this is used as a set function).  <br /></td></tr>
+<tr class="separator:a5f1c63c2e8adf1137264a78871772986 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper" id="r_a4cb0aecb044b77ba0553cdd54b586d8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a4cb0aecb044b77ba0553cdd54b586d8a">weight</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for j-th weight for the i-th derivative.  <br /></td></tr>
+<tr class="separator:a4cb0aecb044b77ba0553cdd54b586d8a inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper" id="r_a3939b77ec3578e4bd5b453c85649d631"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a3939b77ec3578e4bd5b453c85649d631">ntstorage</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of doubles required to represent history (one for steady)  <br /></td></tr>
+<tr class="separator:a3939b77ec3578e4bd5b453c85649d631 inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper" id="r_a6168cca9a2a3c7bfd50c8797aed72d2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a6168cca9a2a3c7bfd50c8797aed72d2d">adaptive_flag</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to indicate whether the scheme is adaptive (false by default)  <br /></td></tr>
+<tr class="separator:a6168cca9a2a3c7bfd50c8797aed72d2d inherit pub_methods_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ae665d492f58240c9786f719f6baa2ddf" id="r_ae665d492f58240c9786f719f6baa2ddf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#ae665d492f58240c9786f719f6baa2ddf">Initial_derivative_set</a></td></tr>
+<tr class="separator:ae665d492f58240c9786f719f6baa2ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b60f7e2fc8d15a3e6ed4ea29d59ffdd" id="r_a3b60f7e2fc8d15a3e6ed4ea29d59ffdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a3b60f7e2fc8d15a3e6ed4ea29d59ffdd">Shift_f</a></td></tr>
+<tr class="separator:a3b60f7e2fc8d15a3e6ed4ea29d59ffdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af5d1c0fa0936afa6b1a1e8cd1208fd9e" id="r_af5d1c0fa0936afa6b1a1e8cd1208fd9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#af5d1c0fa0936afa6b1a1e8cd1208fd9e">TR</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TR.html">TR</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:af5d1c0fa0936afa6b1a1e8cd1208fd9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:af5d1c0fa0936afa6b1a1e8cd1208fd9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5561af3ca9f8ca2708f0220c1d8dc6a8" id="r_a5561af3ca9f8ca2708f0220c1d8dc6a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a5561af3ca9f8ca2708f0220c1d8dc6a8">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TR.html">TR</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a5561af3ca9f8ca2708f0220c1d8dc6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a5561af3ca9f8ca2708f0220c1d8dc6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a32b1f670090854c3e28611ee5b3cf220" id="r_a32b1f670090854c3e28611ee5b3cf220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a32b1f670090854c3e28611ee5b3cf220">Predictor_weight</a></td></tr>
+<tr class="memdesc:a32b1f670090854c3e28611ee5b3cf220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private data for the predictor weights.  <br /></td></tr>
+<tr class="separator:a32b1f670090854c3e28611ee5b3cf220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dbcb466fcff21c9780c0cf1b8971bc4" id="r_a5dbcb466fcff21c9780c0cf1b8971bc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TR.html#a5dbcb466fcff21c9780c0cf1b8971bc4">Error_weight</a></td></tr>
+<tr class="memdesc:a5dbcb466fcff21c9780c0cf1b8971bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private data for the error weight.  <br /></td></tr>
+<tr class="separator:a5dbcb466fcff21c9780c0cf1b8971bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1TimeStepper"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TimeStepper')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TimeStepper.html">oomph::TimeStepper</a></td></tr>
+<tr class="memitem:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a38740bc33e75ecfd61746ff43be54358"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Time.html">Time</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a38740bc33e75ecfd61746ff43be54358">Time_pt</a></td></tr>
+<tr class="memdesc:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to discrete time storage scheme.  <br /></td></tr>
+<tr class="separator:a38740bc33e75ecfd61746ff43be54358 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a0dbf867c7f0e06f790a470d547b6b3f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a0dbf867c7f0e06f790a470d547b6b3f2">Weight</a></td></tr>
+<tr class="memdesc:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the weights associated with the timestepper.  <br /></td></tr>
+<tr class="separator:a0dbf867c7f0e06f790a470d547b6b3f2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a39dfe6cf216263d547c430d6f7a67530"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a39dfe6cf216263d547c430d6f7a67530">Type</a></td></tr>
+<tr class="memdesc:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">String that indicates the type of the timestepper (e.g. "BDF", "Newmark", etc.)  <br /></td></tr>
+<tr class="separator:a39dfe6cf216263d547c430d6f7a67530 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper" id="r_afe6d4d7cf3e0b2a186694f24c8cf016f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#afe6d4d7cf3e0b2a186694f24c8cf016f">Adaptive_Flag</a></td></tr>
+<tr class="memdesc:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean variable to indicate whether the timestepping scheme can be adaptive.  <br /></td></tr>
+<tr class="separator:afe6d4d7cf3e0b2a186694f24c8cf016f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a5a23db485d16d7f9598c011850d0563f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a5a23db485d16d7f9598c011850d0563f">Is_steady</a></td></tr>
+<tr class="memdesc:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool to indicate if the timestepper is steady, i.e. its time-derivatives evaluate to zero. This status may be achieved temporarily by calling <a class="el" href="classoomph_1_1TimeStepper.html#a81ea0ff2e66cef5e0184b616c608e418" title="Function to make the time stepper temporarily steady. This is trivially achieved by setting all the w...">make_steady()</a>. It can be reset to the appropriate default by the function <a class="el" href="classoomph_1_1TimeStepper.html#aada05f89e86aae352bd5b32bfb173b18" title="Reset the is_steady status of a specific TimeStepper to its default and re-assign the weights.">undo_make_steady()</a>.  <br /></td></tr>
+<tr class="separator:a5a23db485d16d7f9598c011850d0563f inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a1a8928784f3903a8f0f3f5e2400fa430"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a1a8928784f3903a8f0f3f5e2400fa430">Shut_up_in_assign_initial_data_values</a></td></tr>
+<tr class="memdesc:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate if the timestepper will output warnings when setting possibly an incorrect number of initial data values from function pointers.  <br /></td></tr>
+<tr class="separator:a1a8928784f3903a8f0f3f5e2400fa430 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a30f71fb3ee14db4dd9d9d2cef1189ddc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a30f71fb3ee14db4dd9d9d2cef1189ddc">Predict_by_explicit_step</a></td></tr>
+<tr class="memdesc:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag: is adaptivity done by taking a separate step using an <a class="el" href="classoomph_1_1ExplicitTimeStepper.html" title="A Base class for explicit timesteppers.">ExplicitTimeStepper</a> object?  <br /></td></tr>
+<tr class="separator:a30f71fb3ee14db4dd9d9d2cef1189ddc inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f408e1a313ae5b1806c3a306d720a2 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_a41f408e1a313ae5b1806c3a306d720a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExplicitTimeStepper.html">ExplicitTimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#a41f408e1a313ae5b1806c3a306d720a2">Explicit_predictor_pt</a></td></tr>
+<tr class="memdesc:a41f408e1a313ae5b1806c3a306d720a2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to explicit time stepper to use as predictor if Predict_by_explicit_step is set. ??ds merge the two? predict by explicit if pointer is set?  <br /></td></tr>
+<tr class="separator:a41f408e1a313ae5b1806c3a306d720a2 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41318cc5f48050e143182f59a06e5d6 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_af41318cc5f48050e143182f59a06e5d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af41318cc5f48050e143182f59a06e5d6">Predicted_time</a></td></tr>
+<tr class="memdesc:af41318cc5f48050e143182f59a06e5d6 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store the time that the predicted values currently stored are at, to compare for paranoid checks.  <br /></td></tr>
+<tr class="separator:af41318cc5f48050e143182f59a06e5d6 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper" id="r_af91eb510f32a9d072399f37389853174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeStepper.html#af91eb510f32a9d072399f37389853174">Predictor_storage_index</a></td></tr>
+<tr class="memdesc:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time-index in each <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object where predicted values are stored. -1 if not set.  <br /></td></tr>
+<tr class="separator:af91eb510f32a9d072399f37389853174 inherit pro_attribs_classoomph_1_1TimeStepper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Trapezoid rule time stepping scheme. </p>
+<p>This method requires a value of dy/dt at the initial time. The implementation of this calculation is exactly the same as is used for explicit time stepping.</p>
+<p>The function <a class="el" href="classoomph_1_1TR.html#abde5c3804dd51162f11c50dacb65b315">setup_initial_derivative(Problem* problem_pt)</a> should be called after the initial conditions have been set, but before beginning time stepping, to compute this initial value of dy/dt.</p>
+<p>Warning: moving nodes not implemented (I have no test case). </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00045">45</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac83377c97c81b2fa5afbf12c56bbb52f" name="ac83377c97c81b2fa5afbf12c56bbb52f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac83377c97c81b2fa5afbf12c56bbb52f">&#9670;&#160;</a></span>TR() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TR::TR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>adaptive</em> = <code><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, storage for two history derivatives (one for <a class="el" href="classoomph_1_1TR.html" title="Trapezoid rule time stepping scheme.">TR</a> and one for the predictor step), one history value, present value and predicted value. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00063">63</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00245">oomph::TimeStepper::Adaptive_Flag</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>, and <a class="el" href="timesteppers_8h_source.html#l00237">oomph::TimeStepper::Weight</a>.</p>
+
+</div>
+</div>
+<a id="a42fe5f88519d9b3645ab99520dc4ea5d" name="a42fe5f88519d9b3645ab99520dc4ea5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42fe5f88519d9b3645ab99520dc4ea5d">&#9670;&#160;</a></span>~TR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::TR::~TR </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00080">80</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="af5d1c0fa0936afa6b1a1e8cd1208fd9e" name="af5d1c0fa0936afa6b1a1e8cd1208fd9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5d1c0fa0936afa6b1a1e8cd1208fd9e">&#9670;&#160;</a></span>TR() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TR::TR </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TR.html">TR</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae6a606637401e9ed5ca030fa7b28d89a" name="ae6a606637401e9ed5ca030fa7b28d89a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a606637401e9ed5ca030fa7b28d89a">&#9670;&#160;</a></span>actions_after_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::actions_after_timestep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Interface for any actions that need to be performed after a time step. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a3a0fabf83f9bdc89800cd3501df2c586">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00171">171</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>.</p>
+
+</div>
+</div>
+<a id="aa8ba8454bc4fcc3ad3c95550663df388" name="aa8ba8454bc4fcc3ad3c95550663df388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ba8454bc4fcc3ad3c95550663df388">&#9670;&#160;</a></span>actions_before_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::actions_before_timestep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Interface for any actions that need to be performed before a time step. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a36cbcee0c1127085ba3aa2331bfc0f74">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00177">177</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>.</p>
+
+</div>
+</div>
+<a id="a46878c5cd5b9d20afb2f5d9ab7a7df26" name="a46878c5cd5b9d20afb2f5d9ab7a7df26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46878c5cd5b9d20afb2f5d9ab7a7df26">&#9670;&#160;</a></span>assign_initial_positions_impulsive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::assign_initial_positions_impulsive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise the time-history for the nodal positions corresponding to an impulsive start. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#ab66972f0eaf3ba34645793e23e46afd5">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00164">164</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="aa73845654866b5cf65ee801f67baa6b3" name="aa73845654866b5cf65ee801f67baa6b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa73845654866b5cf65ee801f67baa6b3">&#9670;&#160;</a></span>assign_initial_values_impulsive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::assign_initial_values_impulsive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>data_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise the time-history for the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values, corresponding to an impulsive start. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a7e894df13c88c96dd8eced2700228225">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00155">155</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a5ef44b410f646c0f94eb2f5a2d80bb03" name="a5ef44b410f646c0f94eb2f5a2d80bb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ef44b410f646c0f94eb2f5a2d80bb03">&#9670;&#160;</a></span>calculate_predicted_positions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::calculate_predicted_positions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to calculate predicted positions at a node. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2e7fafceb9330ac971078cf9dc248701">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00264">264</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l01054">oomph::Node::ndim()</a>, <a class="el" href="nodes_8h_source.html#l01113">oomph::Node::position_is_a_copy()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+
+</div>
+</div>
+<a id="a345daded718d96bb4b7d4cd2996892c8" name="a345daded718d96bb4b7d4cd2996892c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a345daded718d96bb4b7d4cd2996892c8">&#9670;&#160;</a></span>calculate_predicted_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::calculate_predicted_values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>data_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to calculate predicted data values in a <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> object. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a159d508b1ae643fe31b55da9ee789dbf">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00290">290</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>.</p>
+
+</div>
+</div>
+<a id="abe6ad058fc43a89a8e06f671688d438e" name="abe6ad058fc43a89a8e06f671688d438e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6ad058fc43a89a8e06f671688d438e">&#9670;&#160;</a></span>derivative_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TR::derivative_index </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Location in data of derivatives. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00128">128</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00105">set_predictor_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00089">set_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00210">shift_time_values()</a>.</p>
+
+</div>
+</div>
+<a id="ac41d1d10629140a3a18da92701d3b5a5" name="ac41d1d10629140a3a18da92701d3b5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41d1d10629140a3a18da92701d3b5a5">&#9670;&#160;</a></span>ndt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TR::ndt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of timestep increments that need to be stored by the scheme. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a00e57b6436cff4fc82af481b81a78a1a">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00148">148</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="ac9b61bc12fc5657d4d5a0797b0097d38" name="ac9b61bc12fc5657d4d5a0797b0097d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b61bc12fc5657d4d5a0797b0097d38">&#9670;&#160;</a></span>nprev_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TR::nprev_values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of previous values available. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00122">122</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a5561af3ca9f8ca2708f0220c1d8dc6a8" name="a5561af3ca9f8ca2708f0220c1d8dc6a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5561af3ca9f8ca2708f0220c1d8dc6a8">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TR.html">TR</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a007e98e499c2440b05947b626d610425" name="a007e98e499c2440b05947b626d610425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007e98e499c2440b05947b626d610425">&#9670;&#160;</a></span>order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TR::order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the actual order of the scheme. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a251e5d4b37381e582b7cf4c554e2e724">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00083">83</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a4416216c3319f42bd7805e136326f8f8" name="a4416216c3319f42bd7805e136326f8f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4416216c3319f42bd7805e136326f8f8">&#9670;&#160;</a></span>predicted_value_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TR::predicted_value_index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Location of predicted value. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00142">142</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00264">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00290">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00315">temporal_error_in_position()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00322">temporal_error_in_value()</a>.</p>
+
+</div>
+</div>
+<a id="aa9c84561d7019ca2e610ea8f93be7a73" name="aa9c84561d7019ca2e610ea8f93be7a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c84561d7019ca2e610ea8f93be7a73">&#9670;&#160;</a></span>set_error_weights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::set_error_weights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the weights for the error computation, (currently empty &ndash; overwrite for specific scheme) </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#aee0c1da870a603e64efebb51dfc96a3d">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00097">97</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00234">oomph::TimeStepper::Time_pt</a>.</p>
+
+</div>
+</div>
+<a id="aef78c8db06cbf63829040190dfda04da" name="aef78c8db06cbf63829040190dfda04da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef78c8db06cbf63829040190dfda04da">&#9670;&#160;</a></span>set_predictor_weights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::set_predictor_weights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function to set the predictor weights. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a2dfb949155ba433066fd69dc427ba1ce">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00105">105</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00331">Predictor_weight</a>, and <a class="el" href="timesteppers_8h_source.html#l00234">oomph::TimeStepper::Time_pt</a>.</p>
+
+</div>
+</div>
+<a id="afa7d2aa82b6a509ce9adc039ca46bacf" name="afa7d2aa82b6a509ce9adc039ca46bacf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7d2aa82b6a509ce9adc039ca46bacf">&#9670;&#160;</a></span>set_weights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::set_weights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the weights. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00089">89</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="timesteppers_8h_source.html#l00234">oomph::TimeStepper::Time_pt</a>, and <a class="el" href="timesteppers_8h_source.html#l00237">oomph::TimeStepper::Weight</a>.</p>
+
+</div>
+</div>
+<a id="abde5c3804dd51162f11c50dacb65b315" name="abde5c3804dd51162f11c50dacb65b315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde5c3804dd51162f11c50dacb65b315">&#9670;&#160;</a></span>setup_initial_derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::setup_initial_derivative </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00189">189</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="problem_8cc_source.html#l03780">oomph::Problem::get_dvaluesdt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00251">Initial_derivative_set</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="problem_8cc_source.html#l03507">oomph::Problem::set_dofs()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>.</p>
+
+</div>
+</div>
+<a id="a15ab8859ae1a87f14687dcec94f68e03" name="a15ab8859ae1a87f14687dcec94f68e03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ab8859ae1a87f14687dcec94f68e03">&#9670;&#160;</a></span>shift_time_positions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::shift_time_positions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function advances the time history of the positions at a node. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a518b1bee5dc3aae8c5ef13560d1954ac">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00257">257</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+</div>
+</div>
+<a id="a4f8cc75e39263619c073076ae5bbab36" name="a4f8cc75e39263619c073076ae5bbab36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8cc75e39263619c073076ae5bbab36">&#9670;&#160;</a></span>shift_time_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TR::shift_time_values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>data_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function updates the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>'s time history so that we can advance to the next timestep. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1TimeStepper.html#a010a3b03a23a1c48dd8ca10641427255">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00210">210</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00128">derivative_index()</a>, <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00253">Shift_f</a>, and <a class="el" href="timesteppers_8h_source.html#l00572">oomph::TimeStepper::time_pt()</a>.</p>
+
+</div>
+</div>
+<a id="ae77caf45f731bfc2cd5212f5934918d7" name="ae77caf45f731bfc2cd5212f5934918d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae77caf45f731bfc2cd5212f5934918d7">&#9670;&#160;</a></span>temporal_error_in_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::TR::temporal_error_in_position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the error in the position i at a node. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#ac463807aff4bcbedd6e8a463c7390536">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00315">315</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+
+</div>
+</div>
+<a id="afbaa1753914d49942f07b601563c2cec" name="afbaa1753914d49942f07b601563c2cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbaa1753914d49942f07b601563c2cec">&#9670;&#160;</a></span>temporal_error_in_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::TR::temporal_error_in_value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Data.html">Data</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>data_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the error in the value i in a <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> structure. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeStepper.html#a27f66759f6d9b2040d26918adb998c78">oomph::TimeStepper</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00322">322</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trapezoid__rule_8h_source.html#l00334">Error_weight</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00142">predicted_value_index()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5dbcb466fcff21c9780c0cf1b8971bc4" name="a5dbcb466fcff21c9780c0cf1b8971bc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dbcb466fcff21c9780c0cf1b8971bc4">&#9670;&#160;</a></span>Error_weight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::TR::Error_weight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private data for the error weight. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00334">334</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00097">set_error_weights()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00315">temporal_error_in_position()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00322">temporal_error_in_value()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
+
+</div>
+</div>
+<a id="ae665d492f58240c9786f719f6baa2ddf" name="ae665d492f58240c9786f719f6baa2ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae665d492f58240c9786f719f6baa2ddf">&#9670;&#160;</a></span>Initial_derivative_set</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TR::Initial_derivative_set</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00251">251</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00177">actions_before_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
+
+</div>
+</div>
+<a id="a32b1f670090854c3e28611ee5b3cf220" name="a32b1f670090854c3e28611ee5b3cf220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32b1f670090854c3e28611ee5b3cf220">&#9670;&#160;</a></span>Predictor_weight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&gt; oomph::TR::Predictor_weight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private data for the predictor weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00331">331</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00264">calculate_predicted_positions()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00290">calculate_predicted_values()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00105">set_predictor_weights()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
+
+</div>
+</div>
+<a id="a3b60f7e2fc8d15a3e6ed4ea29d59ffdd" name="a3b60f7e2fc8d15a3e6ed4ea29d59ffdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b60f7e2fc8d15a3e6ed4ea29d59ffdd">&#9670;&#160;</a></span>Shift_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::TR::Shift_f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trapezoid__rule_8h_source.html#l00253">253</a> of file <a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trapezoid__rule_8h_source.html#l00171">actions_after_timestep()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00189">setup_initial_derivative()</a>, <a class="el" href="trapezoid__rule_8h_source.html#l00210">shift_time_values()</a>, and <a class="el" href="trapezoid__rule_8h_source.html#l00063">TR()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="trapezoid__rule_8h_source.html">trapezoid_rule.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:08
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

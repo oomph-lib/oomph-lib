@@ -1,0 +1,271 @@
+\doxysection{Axisym\+Oscillating\+Disk Class Reference}
+\hypertarget{classAxisymOscillatingDisk}{}\label{classAxisymOscillatingDisk}\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+
+
+Axisymmetrially oscillating disk with displacement field according to linear elasticity.  
+
+
+Inheritance diagram for Axisym\+Oscillating\+Disk\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAxisymOscillatingDisk}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d}{Axisym\+Oscillating\+Disk}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: 2 Lagrangian coordinate, 2 Eulerian coords. Pass amplitude of oscillation, Poisson ratio nu, and pointer to global timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAxisymOscillatingDisk_ab79de13fa0dcfac5d04d6ff371241c5d}{\texorpdfstring{$\sim$}{\string~}\+Axisym\+Oscillating\+Disk}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}{position}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}}) \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate xi at present time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}{veloc}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&veloc)
+\begin{DoxyCompactList}\small\item\em Parametrised velocity on object at current time\+: veloc = d r(xi)/dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}{accel}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&accel)
+\begin{DoxyCompactList}\small\item\em Parametrised acceleration on object at current time\+: accel = d\texorpdfstring{$^\wedge$}{\string^}2 r(xi)/dt\texorpdfstring{$^\wedge$}{\string^}2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classAxisymOscillatingDisk_a47de8f45fc7006ccadb1300fefe54dfe}{dposition\+\_\+dt}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{drdt}})
+\begin{DoxyCompactList}\small\item\em Parametrised j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{static}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classAxisymOscillatingDisk_ae6a90b479781b587bb8905e7bf2bba3b}{residual\+\_\+for\+\_\+dispersion}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{residual}})
+\begin{DoxyCompactList}\small\item\em Residual of dispersion relation for use in black-\/box Newton method which requires global (or static) functions. Poisson\textquotesingle{}s ratio is passed as parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407}{Ampl}}
+\begin{DoxyCompactList}\small\item\em Amplitude of oscillation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1}{T}}
+\begin{DoxyCompactList}\small\item\em Period of oscillation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{classAxisymOscillatingDisk_abe977725f5fc04c5bfa8466ecdef0956}{Nu}}
+\begin{DoxyCompactList}\small\item\em Poisson ratio nu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{classAxisymOscillatingDisk_ab0ae3a1a7324dd0ccce15fd84471e3d1}{Omega}}
+\begin{DoxyCompactList}\small\item\em Eigenfrequency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Axisymmetrially oscillating disk with displacement field according to linear elasticity. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00084}{84}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d}\label{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{AxisymOscillatingDisk()}{AxisymOscillatingDisk()}}
+{\footnotesize\ttfamily Axisym\+Oscillating\+Disk\+::\+Axisym\+Oscillating\+Disk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&}]{ampl,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&}]{nu,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 2 Lagrangian coordinate, 2 Eulerian coords. Pass amplitude of oscillation, Poisson ratio nu, and pointer to global timestepper. 
+
+Constructor\+: 2 Lagrangian coordinates, 2 Eulerian coords. Pass amplitude of oscillation, Poisson ratio nu, and pointer to global timestepper. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00173}{173}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00158}{Nu}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{Omega}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00323}{residual\+\_\+for\+\_\+dispersion()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00155}{T}}.
+
+\Hypertarget{classAxisymOscillatingDisk_ab79de13fa0dcfac5d04d6ff371241c5d}\label{classAxisymOscillatingDisk_ab79de13fa0dcfac5d04d6ff371241c5d} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!````~AxisymOscillatingDisk@{\texorpdfstring{$\sim$}{\string~}AxisymOscillatingDisk}}
+\index{````~AxisymOscillatingDisk@{\texorpdfstring{$\sim$}{\string~}AxisymOscillatingDisk}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AxisymOscillatingDisk()}{\string~AxisymOscillatingDisk()}}
+{\footnotesize\ttfamily Axisym\+Oscillating\+Disk\+::\texorpdfstring{$\sim$}{\string~}\+Axisym\+Oscillating\+Disk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00096}{96}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}\label{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!accel@{accel}}
+\index{accel@{accel}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{accel()}{accel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} Axisym\+Oscillating\+Disk\+::accel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{accel }\end{DoxyParamCaption})}
+
+
+
+Parametrised acceleration on object at current time\+: accel = d\texorpdfstring{$^\wedge$}{\string^}2 r(xi)/dt\texorpdfstring{$^\wedge$}{\string^}2. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{283}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00152}{Ampl}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{Omega}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00155}{T}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00111}{dposition\+\_\+dt()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_a47de8f45fc7006ccadb1300fefe54dfe}\label{classAxisymOscillatingDisk_a47de8f45fc7006ccadb1300fefe54dfe} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!dposition\_dt@{dposition\_dt}}
+\index{dposition\_dt@{dposition\_dt}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{dposition\_dt()}{dposition\_dt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} Axisym\+Oscillating\+Disk\+::dposition\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{drdt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00111}{111}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00206}{position()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}\label{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!position@{position}}
+\index{position@{position}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} Axisym\+Oscillating\+Disk\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const}
+
+
+
+Position vector at Lagrangian coordinate xi at present time. 
+
+Position Vector at Lagrangian coordinate xi at present time. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00206}{206}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00152}{Ampl}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{Omega}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00155}{T}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00111}{dposition\+\_\+dt()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_ae6a90b479781b587bb8905e7bf2bba3b}\label{classAxisymOscillatingDisk_ae6a90b479781b587bb8905e7bf2bba3b} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!residual\_for\_dispersion@{residual\_for\_dispersion}}
+\index{residual\_for\_dispersion@{residual\_for\_dispersion}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{residual\_for\_dispersion()}{residual\_for\_dispersion()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} Axisym\+Oscillating\+Disk\+::residual\+\_\+for\+\_\+dispersion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{param,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{omega,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Residual of dispersion relation for use in black-\/box Newton method which requires global (or static) functions. Poisson\textquotesingle{}s ratio is passed as parameter. 
+
+Residual of dispersion relation for use in black box Newton method which requires global (or static) functions. Poisson\textquotesingle{}s ratio is passed as parameter. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00323}{323}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00173}{Axisym\+Oscillating\+Disk()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}\label{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!veloc@{veloc}}
+\index{veloc@{veloc}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{veloc()}{veloc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} Axisym\+Oscillating\+Disk\+::veloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&}]{veloc }\end{DoxyParamCaption})}
+
+
+
+Parametrised velocity on object at current time\+: veloc = d r(xi)/dt. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{244}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00152}{Ampl}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{Omega}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00155}{T}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00111}{dposition\+\_\+dt()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407}\label{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!Ampl@{Ampl}}
+\index{Ampl@{Ampl}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{Ampl}{Ampl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} Axisym\+Oscillating\+Disk\+::\+Ampl\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Amplitude of oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00152}{152}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00206}{position()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_abe977725f5fc04c5bfa8466ecdef0956}\label{classAxisymOscillatingDisk_abe977725f5fc04c5bfa8466ecdef0956} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!Nu@{Nu}}
+\index{Nu@{Nu}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} Axisym\+Oscillating\+Disk\+::\+Nu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Poisson ratio nu. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00158}{158}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00173}{Axisym\+Oscillating\+Disk()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_ab0ae3a1a7324dd0ccce15fd84471e3d1}\label{classAxisymOscillatingDisk_ab0ae3a1a7324dd0ccce15fd84471e3d1} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!Omega@{Omega}}
+\index{Omega@{Omega}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{Omega}{Omega}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} Axisym\+Oscillating\+Disk\+::\+Omega\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Eigenfrequency. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{161}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00173}{Axisym\+Oscillating\+Disk()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00206}{position()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+\Hypertarget{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1}\label{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1} 
+\index{AxisymOscillatingDisk@{AxisymOscillatingDisk}!T@{T}}
+\index{T@{T}!AxisymOscillatingDisk@{AxisymOscillatingDisk}}
+\doxysubsubsection{\texorpdfstring{T}{T}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} Axisym\+Oscillating\+Disk\+::T\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Period of oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00155}{155}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00283}{accel()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00173}{Axisym\+Oscillating\+Disk()}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00206}{position()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00244}{veloc()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{disk__oscillation_8cc}{disk\+\_\+oscillation.\+cc}}\end{DoxyCompactItemize}

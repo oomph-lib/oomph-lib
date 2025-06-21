@@ -1,0 +1,753 @@
+\chapter{The axisymmetric equations of linear elasticity}
+\hypertarget{index}{}\label{index}\index{The axisymmetric equations of linear elasticity@{The axisymmetric equations of linear elasticity}}
+The aim of this tutorial is to demonstrate the solution of the axisymmetric equations of linear elasticity in cylindrical polar coordinates.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} ~\newline
+~\newline
+This implementation of the equations and the documentation were developed jointly with Matthew Russell with financial support to Chris Bertram from the Chiari and Syringomyelia Foundation. \end{center}    \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+Consider a three-\/dimensional, axisymmetric body (of density $ \rho
+$, Young\textquotesingle{}s modulus $ E $, and Poisson\textquotesingle{}s ratio $ \nu $), occupying the region $ D $ whose boundary is $ \partial D $. Using cylindrical coordinates $
+(r^*,\theta,z^*) $, the equations of linear elasticity can be written as  \[
+\nabla^* \cdot \bm{\tau}^* + \rho \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*}
+{\partial {t^*}^2},
+\] where $\nabla^* = \left(\frac{\partial}{\partial r^*},
+\frac{1}{r^*}\frac{\partial}
+{\partial \theta},\frac{\partial}{\partial z^*}\right)$, $ \bm{\tau}^*(r^*,z^*,t^*) $ is the stress tensor, $\mathbf{F}^*(r^*,z^*,t^*)$ is the body force and $ \mathbf{u^*}(r^*,z^*,t^*) $ is the displacement field.
+
+Note that, despite the fact that none of the above physical quantities depend on the azimuthal angle $ \theta $, each can have a non-\/zero $ \theta $ component. Also note that variables written with a superscript asterisk are dimensional, and their non-\/dimensional counterparts will be written without an asterisk. (The coordinate $ \theta $ is, by definition, non-\/dimensional, so it will always be written without an asterisk.)
+
+A boundary traction $ \hat{\bm{\tau}}^* $ and boundary displacement $
+\hat{\mathbf{u}}^* $ are imposed along the boundaries $ \partial
+D_\mathrm{n} $ and $ \partial D_\mathrm{d} $ respectively, where $
+\partial D = \partial D_\mathrm{d} \cup \partial D_\mathrm{n} $ so that  \[
+\mathbf{u}^* = \hat{\mathbf{u}}^*\text{ on }\partial D_\mathrm{d},
+\qquad
+\bm{\tau}^*\cdot\mathbf{n} = \hat{\bm{\tau}}^*\text{ on }\partial
+D_\mathrm{n},
+\] where $ \mathbf{n} $ is the outer unit normal vector.
+
+The constitutive equations relating the stresses to the displacements are  \[
+\bm{\tau}^* =
+\frac{E}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla^*\cdot\mathbf{u}^*\right)
+\mathbf{I} + \frac{1}{2}\left(\nabla^*\mathbf{u}^* +
+\left(\nabla^*\mathbf{u}^*\right)^\mathrm{T}\right)\right),
+\] where $ \mathbf{I} $ is the identity tensor and superscript $ \mathrm{T} $ denotes the transpose. In cylindrical coordinates, the matrix representation of the tensor $ \nabla^*\mathbf{u}^* $ is  \[
+\nabla^*\mathbf{u}^* =
+\begin{pmatrix}
+\dfrac{\strut \partial u_r^*}{\strut \partial r^*} &
+-\dfrac{\strut u_\theta^*}{\strut r^*} & \dfrac{\strut \partial
+u_r^*}{\strut \partial z^*}\\
+\dfrac{\strut \partial u_\theta^*}{\strut \partial r^*} &
+\dfrac{\strut u_r^*}{\strut r^*} & \dfrac{\strut \partial
+u_\theta^*}{\strut \partial z^*}\\
+\dfrac{\strut \partial u_z^*}{\strut \partial r^*} & 0
+& \dfrac{\strut \partial u_z^*}{\strut \partial z^*}
+\end{pmatrix}
+\] and $ \nabla^*\cdot \mathbf{u}^* $ is equal to the trace of this matrix.
+
+We non-\/dimensionalise the equations, using a problem specific reference length, $ \mathcal{L} $, and a timescale $ \mathcal{T} $, and use Young\textquotesingle{}s modulus to non-\/dimensionalise the body force and the stress tensor\+:  \[
+\bm{\tau}^* = E \bm{\tau}, \qquad
+r^* = \mathcal{L}r, \qquad
+z^* = \mathcal{L}z
+\]  \[
+\mathbf{u}^* = \mathcal{L} \mathbf{u} \qquad
+\mathbf{F}^* = \frac{E}{\rho \mathcal{L}}\mathbf{F},
+\qquad
+t^* = \mathcal{T}t.
+\]
+
+The non-\/dimensional form of the axisymmetric linear elasticity equations is then given by  \[
+\nabla\cdot \bm{\tau} + \mathbf{F} = \Lambda^2\frac{\partial^2\mathbf{u}}
+{\partial t^2},\qquad\qquad (1)
+\] where $ \nabla = \left(\frac{\partial}{\partial r},
+\frac{1}{r}\frac{\partial}
+{\partial \theta},\frac{\partial}{\partial z}\right) $,  \[
+\bm{\tau} =
+\frac{1}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla\cdot\mathbf{u}\right)
+\mathbf{I} + \frac{1}{2}\left(\nabla\mathbf{u} +
+\left(\nabla\mathbf{u}\right)^\mathrm{T}\right)\right),\qquad\qquad
+(2)
+\] and the non-\/dimensional parameter  \[
+\Lambda = \frac{\mathcal{L}}{\mathcal{T}}\sqrt{\frac{\rho}{E}}
+\] is the ratio of the elastic body\textquotesingle{}s intrinsic timescale, $ \mathcal{L} \sqrt{\frac{\rho}{E}} $, to the problem-\/specific timescale, $ \mathcal{T} $, that we use for time-\/dependent problems. The boundary conditions are  \[
+\mathbf{u} = \hat{\mathbf{u}}\text{ on } \partial D_\mathrm{d}\qquad
+\bm{\tau}\cdot\mathbf{n} = \hat{\bm{\tau}}\text{ on } \partial D_\mathrm{n}.
+\] We must also specify initial conditions\+:  \[
+\left.\mathbf{u}\right|_{t=t_0} = \mathbf{u}^0,\qquad
+\left.\frac{\partial\mathbf{u}}{\partial t}\right|_{t=t_0} =
+\mathbf{v}^0.\qquad\qquad (3)
+\]
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element_types}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_element_types}
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the axisymmetric linear elasticity equations (1) combined with the constitutive equations (2) are implemented in the {\ttfamily Axisymmetric\+Linear\+Elasticity\+Equations} class. This class implements the equations in a way which is general with respect to the specific element geometry. To obtain a fully functioning element class, we must combine the equations class with a specific geometric element class, as discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide}}. For example, we will combine the {\ttfamily Axisymmetric\+Linear\+Elasticity\+Equations} class with {\ttfamily QElement$<$2,3$>$} elements, which are 9-\/node quadrilateral elements, in our example problem. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by  \[
+x_i = \sum_{j=1}^{N^{(E)}} X_{ij}^{(E)}\psi_j,\qquad i = 1,2,
+\] where $ x_1 = r, x_2 = z $; $ N^{(E)} $ is the number of nodes in the element. $ X_{ij}^{(E)} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th node in the element and the $ \psi_j $ are the element\textquotesingle{}s shape functions, which are specific to each type of geometric element.
+
+We store the three components of the displacement vector as nodal data in the order $ u_r, u_z, u_\theta $ and use the shape functions to interpolate the displacements as  \[
+u_i = \sum_{j=1}^{N^{(E)}}U_{ij}^{(E)}\psi_{ij},\qquad i = 1,\dotsc,3,
+\] where $ U_{ij} $ is the $ i $-\/th displacement component at the $ j
+$-\/th node in the element, i.\+e., $ u_1=u_r, u_2=u_z,u_3=u_\theta $.
+
+The solution of time dependent problems requires the specification of a {\ttfamily Time\+Stepper} that is capable of approximating second time derivatives. In the example problem below we use the Newmark timestepper.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_test}{}\doxysection{\texorpdfstring{The test problem}{The test problem}}\label{index_test}
+As a test problem we consider forced oscillations of the circular cylinder shown in the sketch below\+:  
+\begin{DoxyImage}
+\includegraphics[width=0.35\textwidth]{geom}
+\doxyfigcaption{Azimuthal cross-\/section of the geometry. }
+\end{DoxyImage}
+
+
+It is difficult to find non-\/trivial exact solutions of the governing equations (1), (2), so we manufacture a time-\/harmonic solution\+:
+
+\[
+\mathbf{u} =
+\begin{pmatrix}
+u_r\\
+u_\theta\\
+u_z
+\end{pmatrix} =
+\cos(t)
+\begin{pmatrix}
+r^3\cos(z)\\
+r^3z^3\\
+r^3\sin(z)
+\end{pmatrix}.\qquad\qquad (4)
+\] This is an exact solution if we set the body force to  \[
+\mathbf{F} = 
+\cos(t)
+\begin{pmatrix}
+-r\cos(z)\left\{\left(8+3r\right)\lambda +
+\left(16 - r\left(r-3\right)\right)\mu + r^2\Lambda^2\right\}\\
+-r\left\{8z^3\mu + r^2\left(z^3\Lambda^2 + 6\mu z\right)\right\}\\
+r\sin(z)\left\{- 9\mu + 4r\left(\lambda + \mu\right) +
+r^2\left(\lambda + 2\mu -
+\Lambda^2\right)\right\}
+\end{pmatrix},\qquad\qquad (5)
+\] where $ \lambda = \nu/((1+\nu)(1-2\nu)) $ and $ \mu = 1/(2(1+\nu)) $ are the nondimensional Lam\'{e} parameters. We impose the displacement along the boundaries $ r=r_\mathrm{max},
+z=z_\mathrm{min}, z=z_\mathrm{max} $ according to (4), and impose the traction  \[
+\hat{\bm{\tau}}_3 = \bm{\tau}(r_\mathrm{min},z,t) =
+\cos(\omega t)
+\begin{pmatrix}
+-\cos(z)r_\mathrm{min}^2\left(6\mu +
+\lambda\left(4+r_\mathrm{min}\right)\right)\\
+-2\mu r_\mathrm{min}^2z^3\\
+-\mu r_\mathrm{min}^2\sin(z)\left(3-r_\mathrm{min}\right)
+\end{pmatrix},\qquad\qquad (6)
+\] along the boundary $ r = r_\mathrm{min} $.
+
+The problem we are solving then consists of equations (1), (2) along with the body force, (5) and boundary traction (6). The initial conditions for the problem are the exact displacement, velocity (and acceleration; see below) according to the solution (4).\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The animation below shows the time dependent deformation of the cylinder in the $ r $-\/ $ z $ plane, while the colour contours indicate the azimuthal displacement component. The animation is for $ t \in [0,2\pi] $, since the time scale is nondimensionalised on the reciprocal of the angular frequency of the oscillations.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{a}
+\doxyfigcaption{Animation (HTML only) of the resulting displacement field. }
+\end{DoxyImage}
+ The next three figures show plots of the radial, axial and azimuthal displacements as functions of $ (r,z) $ at $ t = 2.64 $. Note the excellent agreement between the numerical and exact solutions.  
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{u_r}
+\doxyfigcaption{Comparison between exact and FE solutions for the r-\/component of displacement at t = 2.64 }
+\end{DoxyImage}
+  
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{u_z}
+\doxyfigcaption{Comparison between exact and FE solutions for the z-\/component of displacement at t = 2.64 }
+\end{DoxyImage}
+  
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{u_theta}
+\doxyfigcaption{Comparison between exact and FE solutions for the theta-\/component of displacement at t = 2.64 }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_global_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global_namespace}
+As usual, we define all non-\/dimensional parameters in a namespace. In this namespace, we also define the body force, the traction to be applied on the boundary $ r=r_\mathrm{min} $, and the exact solution. Note that, consistent with the enumeration of the unknowns, discussed above, the order of the components in the functions that specify the body force and the surface traction is $ (r,z,\theta) $.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_Global\_Parameters\_namespace===============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ global\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Define\ Poisson's\ ratio\ Nu}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}\ =\ 0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Define\ the\ non-\/dimensional\ Young's\ modulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Lame\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}*\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}/(1.0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})/(1.0-\/2.0*\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}/2.0/(1.0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ the\ frequency\ of\ the\ time\ dependence}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}\ =\ 0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ elements\ in\ r-\/direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Nr}}\ =\ 5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ elements\ in\ z-\/direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a1f35a0690c7745167a7178fb71f92e6e}{Nz}}\ =\ 10;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ in\ r\ direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ in\ z-\/direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}}\ =\ 2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ up\ min\ r\ coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Rmin}}\ =\ 0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ up\ min\ z\ coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Zmin}}\ =\ 0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ up\ max\ r\ coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a06f5ea713550f61da323eafb91fceedd}{Rmax}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Rmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ up\ max\ z\ coordinate}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a36b7b169826f906d1d8d1a3aa4347d80}{Zmax}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Zmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ traction\ function\ at\ r=Rmin:\ (t\_r,\ t\_z,\ t\_theta)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a61ef31c4db13380658f6d5ea47c3369d}{boundary\_traction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&result)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ result[0]\ =\ cos(time)*(-\/6.0*pow(x[0],2)*\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*cos(x[1])-\/}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}}*(4.0*pow(x[0],2)+pow(x[0],3))*cos(x[1]));}
+\DoxyCodeLine{\ \ result[1]\ =\ cos(time)*(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*(3.0*pow(x[0],2)-\/pow(x[0],3))*sin(x[1]));}
+\DoxyCodeLine{\ \ result[2]\ =\ cos(time)*(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*pow(x[0],2)*(2*pow(x[1],3)));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ body\ force\ function;\ returns\ vector\ of\ doubles}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ in\ the\ order\ (b\_r,\ b\_z,\ b\_theta)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a6459755c5d38e277ceddbf317c4ed179}{body\_force}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&result)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ result[0]\ =\ cos(time)*(}
+\DoxyCodeLine{\ \ \ x[0]*(-\/cos(x[1])*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}}*(8.0+3.0*x[0])-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*(-\/16.0+x[0]*(x[0]-\/3.0))+pow(x[0],2)*\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}})));}
+\DoxyCodeLine{\ \ result[1]\ =\ cos(time)*(}
+\DoxyCodeLine{\ \ \ x[0]*sin(x[1])*(\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*(-\/9.0)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4.0*x[0]*(\mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}})+pow(x[0],2)*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}}+2.0*\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}-\/\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}})));}
+\DoxyCodeLine{\ \ result[2]\ =\ cos(time)*(}
+\DoxyCodeLine{\ \ \ -\/x[0]*(8.0*\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*pow(x[1],3)+pow(x[0],2)*(pow(x[1],3)*\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}+6.0*\mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}}*x[1])));}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ body\ force}}
+
+\end{DoxyCodeInclude}
+ In addition, the namespace includes the necessary machinery for providing the time dependent equations with their initial data from the exact solution. There are 9 functions, one for each of the components of displacement, velocity and acceleration, and a helper function. For brevity, we list only one of these functions; the others are similar.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Calculate\ the\ time\ dependent\ form\ of\ the\ r-\/component\ of\ displacement}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338}{u\_r}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&time,\ \textcolor{keyword}{const}\ Vector<double>\ \&x)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Vector<double>\ displ(3);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a42f4ce30b09a582bb2d85ddb6f087f80}{exact\_solution\_th}}(x,displ);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ cos(time)*displ[0];}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_u\_r}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by creating a {\ttfamily Doc\+Info} object that will be used to output the solution, and then build the problem.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ }}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Time\ dependent\ problem\ instance}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{AxisymmetricLinearElasticityProblem}}}
+\DoxyCodeLine{\ \ <QAxisymmetricLinearElasticityElement<3>,\ Newmark<1>\ >\ problem;}
+
+\end{DoxyCodeInclude}
+ Next we set up a timestepper and assign the initial conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ initial\ time\ to\ t=0}}
+\DoxyCodeLine{\ problem.time\_pt()-\/>time()=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ and\ initialise\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ dt=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ we're\ validating,\ use\ a\ larger\ timestep\ so\ that\ we\ can\ do\ fewer\ steps}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ before\ reaching\ interesting\ behaviour}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ dt=0.1;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \textcolor{comment}{//\ Otherwise\ use\ a\ small\ timestep}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ dt=0.01;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ problem.time\_pt()-\/>initialise\_dt(dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ initial\ conditions}}
+\DoxyCodeLine{\ problem.set\_initial\_conditions();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ the\ initial\ conditions\ and\ increment\ the\ doc\_info\ number}}
+\DoxyCodeLine{\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ doc\_info.number()++;}
+
+\end{DoxyCodeInclude}
+ We calculate the number of timesteps to perform -\/ if we are validating, just do small number of timesteps; otherwise do a full period the time-\/harmonic oscillation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Find\ the\ number\ of\ timesteps\ to\ perform}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ we're\ validating,\ only\ do\ a\ few\ timesteps;\ otherwise\ do\ a\ whole\ period}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ nstep=5;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \textcolor{comment}{//\ Otherwise\ calculate\ based\ on\ timestep}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ for\ one\ full\ period}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ t\_max=2*MathematicalConstants::Pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ nstep=unsigned(t\_max/dt);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\_of\_calculate\_number\_of\_timesteps}}
+
+\end{DoxyCodeInclude}
+ Finally we perform a time dependent simulation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ the\ timestepping}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ istep=0;istep<nstep;istep++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ for\ this\ timestep}}
+\DoxyCodeLine{\ \ \ problem.unsteady\_newton\_solve(dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ the\ solution\ and\ increment\ doc\_info\ number}}
+\DoxyCodeLine{\ \ \ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is very simple, and similarly to other problems with Neumann conditions, there are separate meshes for the "{}bulk"{} elements and the "{}face"{} elements that apply the traction boundary conditions. The function {\ttfamily assign\+\_\+traction\+\_\+elements()} attaches the traction elements to the appropriate bulk elements.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Class\ to\ validate\ time\ harmonic\ linear\ elasticity\ (Fourier\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ decomposed)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{AxisymmetricLinearElasticityProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ r\ and\ z\ directions,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ boundary\ locations\ and\ whether\ we\ are\ doing\ an\ impulsive\ start\ or\ not}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}{AxisymmetricLinearElasticityProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a25da062bc76af5ef30619a3f3ff3718f}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_af9b01e082da514668a89df9213afbbd5}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ implicit\ timestep}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6ea18ecd60fd5878522ae6024cb57dee}{actions\_before\_implicit\_timestep}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Just\ need\ to\ update\ the\ boundary\ conditions}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ad6419d0572a6e869a5b9ba3c5aac3144}{set\_boundary\_conditions}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ the\ initial\ conditions,\ either\ for\ an\ impulsive\ start\ or}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ with\ history\ values\ for\ the\ time\ stepper}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{set\_initial\_conditions}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ the\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ad6419d0572a6e869a5b9ba3c5aac3144}{set\_boundary\_conditions}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Allocate\ traction\ elements\ on\ the\ bottom\ surface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{assign\_traction\_elements}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a49f2e786217cf28ebed1d828a4b06147}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a62a8248651ee5b17b5168fe9158039dc}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The problem constructor creates the mesh objects (which in turn create the elements), pins the appropriate boundary nodes and assigns the boundary conditions according to the functions defined in the {\ttfamily \doxylink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}} namespace.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ constructor:\ Pass\ number\ of\ elements\ in\ coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ directions\ and\ size\ of\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}{AxisymmetricLinearElasticityProblem<ELEMENT,\ TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}{AxisymmetricLinearElasticityProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ the\ timestepper}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ TIMESTEPPER());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Global\_Parameters::Nr}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a1f35a0690c7745167a7178fb71f92e6e}{Global\_Parameters::Nz}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Global\_Parameters::Rmin}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a06f5ea713550f61da323eafb91fceedd}{Global\_Parameters::Rmax}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Global\_Parameters::Zmin}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a36b7b169826f906d1d8d1a3aa4347d80}{Global\_Parameters::Zmax}},}
+\DoxyCodeLine{\ \ \ time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Create\ the\ surface\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\ Surface\_mesh\_pt=\textcolor{keyword}{new}\ Mesh;}
+\DoxyCodeLine{\ assign\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ boundary\ conditions}}
+\DoxyCodeLine{\ set\_boundary\_conditions();}
+
+\end{DoxyCodeInclude}
+ Then the physical parameters are set for each element in the bulk mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_el\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_el;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ a\ bulk\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>body\_force\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a6459755c5d38e277ceddbf317c4ed179}{Global\_Parameters::body\_force}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ Poisson's\ ratio}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>nu\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ non-\/dim\ Young's\ modulus}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>youngs\_modulus\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{Global\_Parameters::E}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ Lambda\ parameter}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>lambda\_sq\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Global\_Parameters::Omega\_sq}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\textcolor{comment}{//\ end\_loop\_over\_elements}}
+
+\end{DoxyCodeInclude}
+ We then loop over the traction elements and set the applied traction.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ traction\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_traction\ =\ \ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_traction;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ a\ surface\ element}}
+\DoxyCodeLine{\ \ \ AxisymmetricLinearElasticityTractionElement<ELEMENT>*}
+\DoxyCodeLine{\ \ \ \ el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}AxisymmetricLinearElasticityTractionElement}
+\DoxyCodeLine{\ \ \ \ <ELEMENT\textcolor{keyword}{>}*\ >(Surface\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ applied\ traction}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a61ef31c4db13380658f6d5ea47c3369d}{Global\_Parameters::boundary\_traction}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}\textcolor{comment}{//\ end\_loop\_over\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+ Finally, we add the two meshes as sub-\/meshes, build a global mesh from these and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ submeshes\ to\ the\ problem}}
+\DoxyCodeLine{\ add\_sub\_mesh(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ add\_sub\_mesh(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ build\ the\ global\ mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ \textcolor{stringliteral}{"{}\ equations\ assigned"{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_traction_elements}{}\doxysection{\texorpdfstring{The traction elements}{The traction elements}}\label{index_traction_elements}
+We create the face elements that apply the traction to the boundary $ r=r_\mathrm{min} $.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_traction===============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Make\ traction\ elements\ along\ the\ boundary\ r=Rmin}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{AxisymmetricLinearElasticityProblem<ELEMENT,\ TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{assign\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ bound,\ n\_neigh;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ next\ to\ boundary\ 3}}
+\DoxyCodeLine{\ bound=3;}
+\DoxyCodeLine{\ n\_neigh\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(bound);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ loop\ over\ bulk\ elements\ and\ create\ the\ face\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_neigh;n++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ the\ face\ element}}
+\DoxyCodeLine{\ \ \ FiniteElement\ *traction\_element\_pt\ }
+\DoxyCodeLine{\ \ \ \ =\ \textcolor{keyword}{new}\ AxisymmetricLinearElasticityTractionElement<ELEMENT>}
+\DoxyCodeLine{\ \ \ \ (Bulk\_mesh\_pt-\/>boundary\_element\_pt(bound,n),}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(bound,n));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Add\ to\ mesh}}
+\DoxyCodeLine{\ \ \ Surface\_mesh\_pt-\/>add\_element\_pt(traction\_element\_pt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ assign\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_initial_data}{}\doxysection{\texorpdfstring{Initial data}{Initial data}}\label{index_initial_data}
+The time integration in this problem is performed using the Newmark scheme which, in addition to the standard initial conditions (3), requires an initial value for the acceleration. Since we will be solving a test case in which the exact solution is known, we can use the exact solution to provide the complete set of initial data required. For the details of the Newmark scheme, see the tutorial on the \href{../../../linear_wave/two_d_linear_wave/html/index.html}{\texttt{ linear wave equation}}.
+
+If we\textquotesingle{}re doing an impulsive start, set the displacement, velocity and acceleration to zero, and fill in the time history to be consistent with this.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_set\_initial\_conditions=================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ the\ initial\ conditions\ (history\ values)}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{AxisymmetricLinearElasticityProblem<ELEMENT,\ TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{set\_initial\_conditions}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Upcast\ the\ timestepper\ to\ the\ specific\ type\ we\ have}}
+\DoxyCodeLine{\ TIMESTEPPER*\ timestepper\_pt\ =}
+\DoxyCodeLine{\ \ \textcolor{keyword}{dynamic\_cast<}TIMESTEPPER*\textcolor{keyword}{>}(time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ By\ default\ do\ a\ non-\/impulsive\ start\ and\ provide\ initial\ conditions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ impulsive\_start=\textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(impulsive\_start)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Number\ of\ nodes\ in\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ inod=0;inod<n\_node;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt\ =\ Bulk\_mesh\_pt-\/>node\_pt(inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ nodal\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ x[0]\ =\ nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]\ =\ nod\_pt-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ zero\ solution\ at\ t=0}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(0,0);}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(1,0);}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(2,0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ impulsive\ initial\ values\ in\ the\ timestepper}}
+\DoxyCodeLine{\ \ \ \ \ timestepper\_pt-\/>assign\_initial\_values\_impulsive(nod\_pt);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_impulsive\_start}}
+
+\end{DoxyCodeInclude}
+ If we are not doing an impulsive start, we must provide the timestepper with time history values for the displacement, velocity and acceleration. Each component of the these vectors is represented by a function pointer, and in this case, the function pointers return values based on the exact solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \textcolor{comment}{//\ Smooth\ start}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Storage\ for\ pointers\ to\ the\ functions\ defining\ the\ displacement,}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ velocity\ and\ acceleration\ components}}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>}
+\DoxyCodeLine{\ \ \ \ initial\_value\_fct(3);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>}
+\DoxyCodeLine{\ \ \ \ initial\_veloc\_fct(3);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>}
+\DoxyCodeLine{\ \ \ \ initial\_accel\_fct(3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ displacement\ function\ pointers}}
+\DoxyCodeLine{\ \ \ initial\_value\_fct[0]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338}{Global\_Parameters::u\_r}};}
+\DoxyCodeLine{\ \ \ initial\_value\_fct[1]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_adc24d54054d6868dfb4bf3eedb2b062d}{Global\_Parameters::u\_z}};}
+\DoxyCodeLine{\ \ \ initial\_value\_fct[2]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_aed85254e9565e5e25dbe336a799bf6b5}{Global\_Parameters::u\_theta}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ velocity\ function\ pointers}}
+\DoxyCodeLine{\ \ \ initial\_veloc\_fct[0]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_aa587494218fe51b7d23a58009bf370f6}{Global\_Parameters::d\_u\_r\_dt}};}
+\DoxyCodeLine{\ \ \ initial\_veloc\_fct[1]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_adc07c67f4203664ac0c23c4ff9d4dac1}{Global\_Parameters::d\_u\_z\_dt}};}
+\DoxyCodeLine{\ \ \ initial\_veloc\_fct[2]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_a87fd49f1b07cd74a364cf1373890864e}{Global\_Parameters::d\_u\_theta\_dt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ acceleration\ function\ pointers}}
+\DoxyCodeLine{\ \ \ initial\_accel\_fct[0]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_a37715fdf266bd7d91b44ad779e20a11a}{Global\_Parameters::d2\_u\_r\_dt2}};}
+\DoxyCodeLine{\ \ \ initial\_accel\_fct[1]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_a2167fee22e8f4d63a51a39ace1e3a743}{Global\_Parameters::d2\_u\_z\_dt2}};}
+\DoxyCodeLine{\ \ \ initial\_accel\_fct[2]=\&\mbox{\hyperlink{namespaceGlobal__Parameters_a902b0bba2b1393518a914330f30ee4c9}{Global\_Parameters::d2\_u\_theta\_dt2}};}
+
+\end{DoxyCodeInclude}
+ Then we loop over all nodes in the bulk mesh and set the initial data values from the exact solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Number\ of\ nodes\ in\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ inod=0;inod<n\_node;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt\ =\ Bulk\_mesh\_pt-\/>node\_pt(inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ history\ values}}
+\DoxyCodeLine{\ \ \ \ \ timestepper\_pt-\/>assign\_initial\_data\_values(nod\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_value\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_veloc\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_accel\_fct);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ end\_of\_loop\_over\_nodes}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+This member function documents the computed solution to file and calculates the error between the computed solution and the exact solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{AxisymmetricLinearElasticityProblem<ELEMENT,\ TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=10;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,time\_pt()-\/>time(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712}{Global\_Parameters::exact\_solution}});}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ error=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ norm=0.0;}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>compute\_error(some\_file,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712}{Global\_Parameters::exact\_solution}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_pt()-\/>time(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error,norm);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error\ norm:}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNorm\ of\ error:\ \ \ \ "{}}\ <<\ sqrt(error)\ <<\ std::endl;\ }
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ solution:\ "{}}\ <<\ sqrt(norm)\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ std::endl;}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution\ \ \ }}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments}{Comments}}\label{index_comments}
+
+\begin{DoxyItemize}
+\item Given that we non-\/dimensionalised all stresses on Young\textquotesingle{}s modulus it seems odd that we provide the option to specify a non-\/dimensional Young\textquotesingle{}s modulus via the member function {\ttfamily Axisymmetric\+Linear\+Elasticity\+::youngs\+\_\+modulus\+\_\+pt()}. The explanation for this is that this function specifies the ratio of the material\textquotesingle{}s actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used in the non-\/dimensionalisation of the equations. The capability to specify such ratios is important in problems where the elastic body is made of multiple materials with different constitutive properties. If the body is made of a single, homogeneous material, the specification of the non-\/dimensional Young\textquotesingle{}s modulus is not required -- it defaults to 1.\+0.
+\end{DoxyItemize}\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyItemize}
+\item Try setting the boolean flag {\ttfamily impulsive\+\_\+start} to {\ttfamily true} in the {\ttfamily \doxylink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{Axisymmetric\+Linear\+Elasticity\+Problem\+::set\+\_\+initial\+\_\+conditions}} function and compare the system\textquotesingle{}s evolution to that obtained when a "{}smooth"{} start from the exact solution is performed.
+\item Omit the specification of the Young\textquotesingle{}s modulus and verify that the default value gives the same solution.
+\item Confirm that the assignment of the history values for the Newmark timestepper in {\ttfamily \doxylink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{Axisymmetric\+Linear\+Elasticity\+Problem\+::set\+\_\+initial\+\_\+conditions}} sets the correct initial values for the displacement, velocity and acceleration. (Hint\+: the relevant code is already contained in the driver code, but was omitted in the code listings shown above.)
+\end{DoxyItemize}\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/axisym_linear_elasticity/cylinder/}{\texttt{ demo\+\_\+drivers/axisym\+\_\+linear\+\_\+elasticity/cylinder/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/axisym_linear_elasticity/cylinder/cylinder.cc}{\texttt{ demo\+\_\+drivers/axisym\+\_\+linear\+\_\+elasticity/cylinder/cylinder.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

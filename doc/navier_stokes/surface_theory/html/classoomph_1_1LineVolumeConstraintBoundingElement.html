@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::LineVolumeConstraintBoundingElement Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1LineVolumeConstraintBoundingElement.html">LineVolumeConstraintBoundingElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classoomph_1_1LineVolumeConstraintBoundingElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::LineVolumeConstraintBoundingElement Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>One-dimensional interface elements that allow the application of a volume constraint on the region bounded by these elements. The volume is computed by integrating x.n around the boundary of the domain and then dividing by two. The sign is chosen so that the volume will be positive when the elements surround a fluid domain.  
+ <a href="classoomph_1_1LineVolumeConstraintBoundingElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::LineVolumeConstraintBoundingElement:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1LineVolumeConstraintBoundingElement.png" usemap="#oomph::LineVolumeConstraintBoundingElement_map" alt=""/>
+  <map id="oomph::LineVolumeConstraintBoundingElement_map" name="oomph::LineVolumeConstraintBoundingElement_map">
+<area href="classoomph_1_1VolumeConstraintBoundingElement.html" title="Base class for interface elements that allow the application of a volume constraint on the region bou..." alt="oomph::VolumeConstraintBoundingElement" shape="rect" coords="202,56,596,80"/>
+<area href="classoomph_1_1ElasticLineVolumeConstraintBoundingElement.html" title="The one-dimensional interface elements that allow imposition of a volume constraint specialised for t..." alt="oomph::ElasticLineVolumeConstraintBoundingElement&lt; ELEMENT &gt;" shape="rect" coords="0,168,394,192"/>
+<area href="classoomph_1_1SpineLineVolumeConstraintBoundingElement.html" title="The one-dimensional interface elements that allow imposition of a volume constraint specialised for t..." alt="oomph::SpineLineVolumeConstraintBoundingElement&lt; ELEMENT &gt;" shape="rect" coords="404,168,798,192"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a39baabe26bcf3958b80fe3dd5430c347" id="r_a39baabe26bcf3958b80fe3dd5430c347"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LineVolumeConstraintBoundingElement.html#a39baabe26bcf3958b80fe3dd5430c347">LineVolumeConstraintBoundingElement</a> ()</td></tr>
+<tr class="memdesc:a39baabe26bcf3958b80fe3dd5430c347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Contructor.  <br /></td></tr>
+<tr class="separator:a39baabe26bcf3958b80fe3dd5430c347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a905d0b20f7f9a009d07c7d4506b404ed" id="r_a905d0b20f7f9a009d07c7d4506b404ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LineVolumeConstraintBoundingElement.html#a905d0b20f7f9a009d07c7d4506b404ed">~LineVolumeConstraintBoundingElement</a> ()</td></tr>
+<tr class="memdesc:a905d0b20f7f9a009d07c7d4506b404ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:a905d0b20f7f9a009d07c7d4506b404ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099357dfeca3c4e1d84b0979cd495da9" id="r_a099357dfeca3c4e1d84b0979cd495da9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LineVolumeConstraintBoundingElement.html#a099357dfeca3c4e1d84b0979cd495da9">contribution_to_enclosed_volume</a> ()</td></tr>
+<tr class="memdesc:a099357dfeca3c4e1d84b0979cd495da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return this element's contribution to the total volume enclosed.  <br /></td></tr>
+<tr class="separator:a099357dfeca3c4e1d84b0979cd495da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1VolumeConstraintBoundingElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html">oomph::VolumeConstraintBoundingElement</a></td></tr>
+<tr class="memitem:a423139995a5543fda59d36cf230edb44 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement" id="r_a423139995a5543fda59d36cf230edb44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a423139995a5543fda59d36cf230edb44">VolumeConstraintBoundingElement</a> ()</td></tr>
+<tr class="memdesc:a423139995a5543fda59d36cf230edb44 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor initialise the boolean flag We expect the traded pressure data to be stored externally.  <br /></td></tr>
+<tr class="separator:a423139995a5543fda59d36cf230edb44 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a54150611ce06f05ea47ba99cf9e132 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement" id="r_a6a54150611ce06f05ea47ba99cf9e132"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a6a54150611ce06f05ea47ba99cf9e132">~VolumeConstraintBoundingElement</a> ()</td></tr>
+<tr class="memdesc:a6a54150611ce06f05ea47ba99cf9e132 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:a6a54150611ce06f05ea47ba99cf9e132 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae62125450a5d203bc6d26b0d24be22 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement" id="r_a0ae62125450a5d203bc6d26b0d24be22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a0ae62125450a5d203bc6d26b0d24be22">fill_in_contribution_to_residuals</a> (<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">residuals</a>)</td></tr>
+<tr class="memdesc:a0ae62125450a5d203bc6d26b0d24be22 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to residuals and Jacobian.  <br /></td></tr>
+<tr class="separator:a0ae62125450a5d203bc6d26b0d24be22 inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310fbaeb9a024406e4f769886e9f902a inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement" id="r_a310fbaeb9a024406e4f769886e9f902a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a310fbaeb9a024406e4f769886e9f902a">set_volume_constraint_element</a> (<a class="el" href="classoomph_1_1VolumeConstraintElement.html">VolumeConstraintElement</a> *<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">const</a> &amp;<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">vol_constraint_el_pt</a>, <a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">const</a> <a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">bool</a> &amp;<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">check_nodal_data</a>=<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">true</a>)</td></tr>
+<tr class="memdesc:a310fbaeb9a024406e4f769886e9f902a inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the "master" volume constraint element The setup here is a bit more complicated than one might expect because if an internal pressure on a boundary is hijacked in TaylorHood elements then that the "traded" value may already be stored as nodal data in this element. This causes no problems apart from when running with PARANOID in which case the resulting repeated local equation numbers are spotted and an error is thrown. The check is a finite amount of work and so can be avoided if the boolean flag check_nodal_data is set to false.  <br /></td></tr>
+<tr class="separator:a310fbaeb9a024406e4f769886e9f902a inherit pub_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a03145a064e559d786f730c85000f9fb4" id="r_a03145a064e559d786f730c85000f9fb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LineVolumeConstraintBoundingElement.html#a03145a064e559d786f730c85000f9fb4">fill_in_generic_residual_contribution_volume_constraint</a> (<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">residuals</a>)</td></tr>
+<tr class="memdesc:a03145a064e559d786f730c85000f9fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated <a class="el" href="classoomph_1_1VolumeConstraintElement.html" title="A class that is used to implement the constraint that the fluid volume in a region bounded by associa...">VolumeConstraintElement</a>). This is specific for 1D line elements that bound 2D cartesian fluid elements.  <br /></td></tr>
+<tr class="separator:a03145a064e559d786f730c85000f9fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1VolumeConstraintBoundingElement"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1VolumeConstraintBoundingElement')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html">oomph::VolumeConstraintBoundingElement</a></td></tr>
+<tr class="memitem:ae5262edeb9cd3bcbc1ae4265b08c7f07 inherit pro_methods_classoomph_1_1VolumeConstraintBoundingElement" id="r_ae5262edeb9cd3bcbc1ae4265b08c7f07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#ae5262edeb9cd3bcbc1ae4265b08c7f07">ptraded_local_eqn</a> ()</td></tr>
+<tr class="memdesc:ae5262edeb9cd3bcbc1ae4265b08c7f07 inherit pro_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The local eqn number for the traded pressure.  <br /></td></tr>
+<tr class="separator:ae5262edeb9cd3bcbc1ae4265b08c7f07 inherit pro_methods_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1VolumeConstraintBoundingElement')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html">oomph::VolumeConstraintBoundingElement</a></td></tr>
+<tr class="memitem:afd35462188f27b6851416ab49ec5df5a inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement" id="r_afd35462188f27b6851416ab49ec5df5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#afd35462188f27b6851416ab49ec5df5a">Data_number_of_traded_pressure</a></td></tr>
+<tr class="memdesc:afd35462188f27b6851416ab49ec5df5a inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Data that contains the traded pressure is usually stored as external Data for this element, but may also be nodal Data Which Data item is it?  <br /></td></tr>
+<tr class="separator:afd35462188f27b6851416ab49ec5df5a inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f5ebebeaf633515951a2d08060ec15 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement" id="r_a40f5ebebeaf633515951a2d08060ec15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a40f5ebebeaf633515951a2d08060ec15">Index_of_traded_pressure_value</a></td></tr>
+<tr class="memdesc:a40f5ebebeaf633515951a2d08060ec15 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the value in traded pressure data that corresponds to the traded pressure.  <br /></td></tr>
+<tr class="separator:a40f5ebebeaf633515951a2d08060ec15 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f9aa94f106fd443fa690851a0268720 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement" id="r_a8f9aa94f106fd443fa690851a0268720"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a8f9aa94f106fd443fa690851a0268720">Traded_pressure_stored_at_node</a></td></tr>
+<tr class="memdesc:a8f9aa94f106fd443fa690851a0268720 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether the traded pressure is stored externally or at a node (this can happen in Taylor-Hood elements)  <br /></td></tr>
+<tr class="separator:a8f9aa94f106fd443fa690851a0268720 inherit pro_attribs_classoomph_1_1VolumeConstraintBoundingElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>One-dimensional interface elements that allow the application of a volume constraint on the region bounded by these elements. The volume is computed by integrating x.n around the boundary of the domain and then dividing by two. The sign is chosen so that the volume will be positive when the elements surround a fluid domain. </p>
+<p>These elements must be used together with the associated <a class="el" href="classoomph_1_1VolumeConstraintElement.html" title="A class that is used to implement the constraint that the fluid volume in a region bounded by associa...">VolumeConstraintElement</a>, which stores the value of the target volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00330">330</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a39baabe26bcf3958b80fe3dd5430c347" name="a39baabe26bcf3958b80fe3dd5430c347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39baabe26bcf3958b80fe3dd5430c347">&#9670;&#160;</a></span>LineVolumeConstraintBoundingElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::LineVolumeConstraintBoundingElement::LineVolumeConstraintBoundingElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Contructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00343">343</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a905d0b20f7f9a009d07c7d4506b404ed" name="a905d0b20f7f9a009d07c7d4506b404ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a905d0b20f7f9a009d07c7d4506b404ed">&#9670;&#160;</a></span>~LineVolumeConstraintBoundingElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::LineVolumeConstraintBoundingElement::~LineVolumeConstraintBoundingElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8h_source.html#l00346">346</a> of file <a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a099357dfeca3c4e1d84b0979cd495da9" name="a099357dfeca3c4e1d84b0979cd495da9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099357dfeca3c4e1d84b0979cd495da9">&#9670;&#160;</a></span>contribution_to_enclosed_volume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">double</a> oomph::LineVolumeConstraintBoundingElement::contribution_to_enclosed_volume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return this element's contribution to the total volume enclosed. </p>
+
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00189">189</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
+
+</div>
+</div>
+<a id="a03145a064e559d786f730c85000f9fb4" name="a03145a064e559d786f730c85000f9fb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03145a064e559d786f730c85000f9fb4">&#9670;&#160;</a></span>fill_in_generic_residual_contribution_volume_constraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">void</a> oomph::LineVolumeConstraintBoundingElement::fill_in_generic_residual_contribution_volume_constraint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">Vector</a>&lt; <a class="el" href="classoomph_1_1FluidInterfaceAdditionalValues.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated <a class="el" href="classoomph_1_1VolumeConstraintElement.html" title="A class that is used to implement the constraint that the fluid volume in a region bounded by associa...">VolumeConstraintElement</a>). This is specific for 1D line elements that bound 2D cartesian fluid elements. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1VolumeConstraintBoundingElement.html#a717f1085709bd8820b8043ff94ecb0c5">oomph::VolumeConstraintBoundingElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constrained__volume__elements_8cc_source.html#l00114">114</a> of file <a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="constrained__volume__elements_8h_source.html#l00213">oomph::VolumeConstraintBoundingElement::ptraded_local_eqn()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constrained__volume__elements_8h_source.html#l00388">oomph::ElasticLineVolumeConstraintBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="constrained__volume__elements_8h_source.html#l00442">oomph::SpineLineVolumeConstraintBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="constrained__volume__elements_8h_source.html">constrained_volume_elements.h</a></li>
+<li><a class="el" href="constrained__volume__elements_8cc_source.html">constrained_volume_elements.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

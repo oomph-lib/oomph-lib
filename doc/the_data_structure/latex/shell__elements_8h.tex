@@ -1,0 +1,24 @@
+\doxysection{shell\+\_\+elements.\+h File Reference}
+\hypertarget{shell__elements_8h}{}\label{shell__elements_8h}\index{shell\_elements.h@{shell\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solves the equations of Kirchhoff Love shell thin-\/shell theory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HermiteShellElement}{oomph\+::\+Hermite\+Shell\+Element}}
+\begin{DoxyCompactList}\small\item\em An element that solves the Kirchhoff-\/\+Love shell theory equations using Hermite interpolation (displacements and slopes are interpolated separately. The local and global (Lagrangian) coordinates are not assumed to be aligned. N.\+B. It will be DOG SLOW. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DiagHermiteShellElement}{oomph\+::\+Diag\+Hermite\+Shell\+Element}}
+\begin{DoxyCompactList}\small\item\em An element that solves the Kirchhoff-\/\+Love shell theory equations using Hermite interpolation (displacements and slopes are interpolated separately. The local and global (Lagrangian) coordinates are assumed to be aligned so that the Jacobian of the mapping between these coordinates is diagonal. This significantly simplifies (and speeds up) the computation of the derivatives of the shape functions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01HermiteShellElement_01_4}{oomph\+::\+Face\+Geometry$<$ Hermite\+Shell\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the Hermite\+Shell elements\+: 1D \doxylink{classoomph_1_1SolidQHermiteElement}{Solid\+QHermite\+Element}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FSIDiagHermiteShellElement}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element}}
+\begin{DoxyCompactList}\small\item\em Diag Hermite Kirchhoff Love shell "{}upgraded"{} to a \doxylink{classoomph_1_1FSIWallElement}{FSIWall\+Element} (and thus, by inheritance, a \doxylink{classoomph_1_1GeomObject}{Geom\+Object}), so it can be used in FSI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ClampedHermiteShellBoundaryConditionElement}{oomph\+::\+Clamped\+Hermite\+Shell\+Boundary\+Condition\+Element}}
+\begin{DoxyCompactList}\small\item\em Element that allows the imposition of boundary conditions for a shell that is clamped to a 2D plane that is specified by its normal. Constraint is applied by a Lagrange multiplier. ~\newline
+{\bfseries{Note}} {\bfseries{1}}\+: Note that the introduction of the Lagrange multiplier adds two additional values (relative to the number of values before the addition of the \doxylink{classoomph_1_1FaceElement}{Face\+Element}) to the nodes. This ensures that nodes that are shared by adjacent Face\+Elements are not resized repeatedly but also means that this won\textquotesingle{}t work if two "{}edges"{} of the shell (that share a node) are subject to different constraints, each applied with its own independent Lagrange multiplier. In such cases a modified version of this class must be written. ~\newline
+ {\bfseries{Note}} {\bfseries{2}}\+: The \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} for a \doxylink{classoomph_1_1HermiteShellElement}{Hermite\+Shell\+Element} is the 1D two-\/node element \doxylink{classoomph_1_1SolidQHermiteElement}{Solid\+QHermite\+Element$<$1$>$} which has four shape functions (two nodes, two types -- representing the shape functions that interpolate the value and the derivative). These are the "{}correct"{} shape functions for the interpolation of the Lagrange multiplier and the isoparametric representation of the geometry. However, when applying the contribution from the constraint equation to the bulk equations, we have to take all four types of dof into account so the element has to reset the number of positional dofs to four. To avoid any clashes we overload (the relevant subset of) the access functions to the shape functions and their derivatives and set the shape functions associated with the spurious positional dofs to zero. This is a bit hacky but the only way (?) this can be done... \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

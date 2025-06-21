@@ -1,0 +1,762 @@
+\chapter{Boussinesq Convection\+: Combining the Navier--Stokes and Advection--Diffusion equations}
+\hypertarget{index}{}\label{index}\index{Boussinesq Convection: Combining the Navier--Stokes and Advection--Diffusion equations@{Boussinesq Convection: Combining the Navier--Stokes and Advection--Diffusion equations}}
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{symm_broken}
+\doxyfigcaption{Steady Convection Rolls\+: contours of temperature and the vector velocity field for a two-\/dimensional domain heated from below at Ra = 1800 }
+\end{DoxyImage}
+
+
+We study convection of an incompressible Newtonian fluid heated from below in a two-\/dimensional domain of height $ H $\+: the B\'{e}nard problem. The lower wall is maintained at a temperature $ \theta_{bottom} $ and the upper wall is maintained at a temperature $ \theta_{top} $, where $ \theta_{bottom} >
+ \theta_{top} $ . The governing equations are the (2D) Navier--Stokes equations under the Boussinesq approximation, in which all variations in physical properties with temperature are neglected, apart from that of the density in the gravitational-\/body-\/force term in the momentum equations. This "{}buoyancy"{} term is given by \[ \Delta\rho G^{*}_{i}, \] where $ \Delta\rho $ is the variation in density and $ G^{*}_{i} $ is the $ i $ -\/th component of the gravitational body force. Under the additional assumption that variations in temperature are small, we can use the linear relationship \[ \Delta\rho = -\alpha\rho_{0}(\theta^{*} - \theta_{0}), \] where $ \alpha $ is the coefficient of thermal expansion of the fluid, $ \theta^{*} $ is the (dimensional) temperature and $ \rho_{0} $ is the density at the reference temperature $ \theta_{0} $ .
+
+The equations governing the fluid motion are thus the Navier--Stokes equations with the inclusion of the additional buoyancy term. In Cartesian coordinates, we have \begin{center}  \[ \rho_{0} \left (\frac{\partial u^{*}_i}{\partial t^{*}} + 
+u^{*}_j \frac{\partial u^{*}_i}{\partial x^{*}_j} \right) =
+- \frac{\partial p^{*}}{\partial x^{*}_i} +  \left[\rho_{0} - 
+  \alpha\rho_{0}(\theta^{*}
+ - \theta_{0})\right] G^{*}_i + \mu_{0}
+\frac{\partial }{\partial x^{*}_j} \left[
+\frac{\partial u^{*}_i}{\partial x^{*}_j} +  
+\frac{\partial u^{*}_j}{\partial x^{*}_i} \right],
+\] \end{center}  and \begin{center}  \[
+\frac{\partial u^{*}_i}{\partial x^{*}_i} = 0.
+\] \end{center}  Here, $ u^{*}_{i} $ is the $ i $ -\/th (dimensional) velocity component and $ x^{*}_{i} $ is the position in the $i$-\/th coordinate direction; $ \mu_{0} $ is the dynamic viscosity of the fluid at the reference temperature and $ t^{*} $ is the dimensional time.
+
+The equation that governs the evolution of the temperature field is the advection-\/diffusion equation where the "{}wind"{} is the fluid velocity. Thus, \begin{center}  \[ \frac{\partial \theta^{*}}{\partial t^{*}} +
+u^{*}_{j}\frac{\partial \theta^{*}}{\partial x^{*}_{j}} = 
+\kappa\frac{\partial}{\partial x^{*}_{j}}\left(\frac{\partial
+\theta^{*}}{\partial
+x^{*}_{j}}\right),\] \end{center}  where $ \kappa $ is the (constant) thermal diffusivity of the fluid.
+
+We choose the height of the domain, $ H $, as the length scale and let the characteristic thermal diffusion speed over that length, $ \kappa/H $, be the velocity scale, so that the P\'{e}clet number, $ Pe =
+UH/\kappa = 1 $ . The fluid pressure is non-\/dimensionalised on the viscous scale, $ \mu_{0} \kappa/H^{2} $ , and the hydrostatic pressure gradient is included explicitly, so that we work with the dimensionless excess pressure. The temperature is non-\/dimensionalised so that it is -\/0.\+5 at the upper (cooled) wall and 0.\+5 at the bottom (heated) wall and the reference temperature is then $ \theta_{0} = (\theta_{top} +
+\theta_{bottom})/2 $. Finally, the timescale is chosen to be the thermal diffusion timescale, $ \kappa/H^{2} $ . Hence  \[ x^{*}_{i} = x_{i} H, \quad u^{*}_{i} =  u_{i} \kappa/H, \quad
+    p^{*} = -\rho_{0} g H x_{2} + \frac{\mu_{0}\kappa}{H^{2}}p,\quad
+    \theta^{*} = \theta_{0} 
+   + \theta(\theta_{bottom} - \theta_{top}),
+    \quad t^{*} = \frac{\kappa}{H^{2}}t. \]
+
+The governing equations become \begin{center}  \[ Pr^{-1}\left(\frac{\partial u_i}{\partial t} + 
+ u_j \frac{\partial u_i}{\partial x_j} \right) =
+- \frac{\partial p}{\partial x_i}  - Ra \theta G_i +
+\frac{\partial }{\partial x_j} \left[
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right],
+\]  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] and  \[ \frac{\partial \theta}{\partial t} +
+u_{j}\frac{\partial \theta}{\partial x_{j}} = 
+\frac{\partial}{\partial x_{j}}\left(\frac{\partial \theta}{\partial
+x_{j}}\right),\]. \end{center}  The appropriate dimensionless numbers are the Prandtl number $ Pr = \frac{\nu}{\kappa} $, and the Rayleigh number,  $ Ra = \frac{\alpha (\theta_{bottom} - \theta_{top})g
+H^{3}}{\nu\kappa} $ ; $ g $ is the acceleration due to gravity and $ \nu = \mu_{0}/\rho_{0} $ is the kinematic viscosity of the fluid.
+
+We consider the solution of this coupled set of equations in a two-\/dimensional domain $ 0 \leq x_{1} \leq 3 $ , $ 0 \leq x_{2} \leq
+ 1 $ . The boundary conditions are no-\/slip at the top and bottom walls \[ u_{1} = u_{2} = 0 \quad\mbox{on } x_{2} = 0, 1; \] constant temperature at the top and bottom walls (heated from below)  \[ \theta = 0.5 \quad\mbox{on } x_{2}=0 \quad\mbox{and}\quad
+     \theta = -0.5 \quad\mbox{on } x_{2} = 1; \] and symmetry boundary conditions at the sides\+:  \[ u_{1} = 0,\quad \frac{\partial u_{2}}{\partial x_{1}} = 0,
+ \quad  \mbox{ and }
+    \frac{\partial \theta}{\partial x_{1}} = 0 \quad\mbox{on } x_{1} =
+ 0,3. \] We assume that gravity acts vertically downward so that $ G_{1} =
+ 0 $ and $ G_{2} = -1 $ .
+
+There is a trivial steady-\/state solution that consists of a linearly-\/varying temperature field balanced by a quadratic pressure field\+:  \[ u_{1} = u_{2} = 0, \quad \theta = 0.5 - x_2, \quad p = P_{0} + 0.5
+ \ Ra
+ \ x_{2} \left(1 - x_{2}\right). \]
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{base_flow}
+\doxyfigcaption{The base flow\+: no flow and a linear temperature distribution }
+\end{DoxyImage}
+
+
+A linear stability analysis shows that this solution becomes unstable via an up-\/down, symmetry-\/breaking, pitchfork bifurcation at a critical Rayleigh number of $ Ra_{crit} \approx 1708 $ with a critical wavenumber of $ k \approx 3.11, $ see for example Hydrodynamic and Hydromagnetic Stability by S. Chandrasekhar OUP (1961). Thus, for $ Ra > 1708 $ there are three possible steady solutions, the (unstable) trivial steady state and two (stable) symmetry-\/broken states. In principle, all three states can be computed directly by solving the steady equations. However, we typically find that if the steady computation is started with a zero initial guess for the velocity and temperature, the Newton method converges to the trivial state. In order to demonstrate that this state is indeed unstable we therefore apply a time-\/dependent, mass-\/conserving perturbation to the vertical velocity at the upper wall and time-\/march the system while rapidly reducing the size of the perturbation. The system then evolves towards the nontrivial steady state as shown in the \href{../figures/convect.avi}{\texttt{ animation}} from which the plots shown above were extracted. (In the \href{../../refine_b_convect/html/index.html}{\texttt{ next tutorial where we discuss the adaptive solution of this problem}} we shall demonstrate an alternative technique for obtaining this solutions).
+
+Note that by choosing our domain of a particular size and applying symmetry conditions at the sidewalls we are only able to realise a discrete set of wavelengths (those that exactly fit into the box). At the chosen Rayleigh number, 1800, only one of these modes is unstable; that of wavelength 2.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+The problem contains three global parameters, the P\'{e}clet number, the Prandtl number and the Rayleigh number which we define in a namespace, as usual. In fact, $ 1/Pr $ is the natural dimensionless grouping, and so we use the inverse Prandtl number as our variable.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======start\_of\_namespace============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ the\ physical\ parameters\ in\ the\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Peclet\ number\ (identically\ one\ from\ our\ non-\/dimensionalisation)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad4cdf142ba50635d62ac4c614f445af7}{Peclet}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 1/Prandtl\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87796c9f402e6f90c07cf5ba0db4367e}{Inverse\_Prandtl}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Rayleigh\ number,\ set\ to\ be\ greater\ than\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ threshold\ for\ linear\ instability}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a637fd2a6a7c5b34ed3288300d8bf84b7}{Rayleigh}}\ =\ 1800.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Gravity\ vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Direction\_of\_gravity}}(2);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+In the driver code we set the direction of gravity and construct our problem, using the new \doxysectlink{index_element}{Buoyant\+QCrouzeix\+Raviart\+Element}{1}, a multi-\/physics element, created by combining the {\ttfamily QCrouzeix\+Raviart} Navier-\/\+Stokes elements with the {\ttfamily QAdvection\+Diffusion} elements via multiple inheritance. (Details of the element\textquotesingle{}s implementation are discussed in the section \doxysectlink{index_element}{Creating the new Buoyant\+QCrouzeix\+Raviart\+Element class}{1} below.)
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ 2D\ Boussinesq\ convection\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{multi__domain__ref__b__convection_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ direction\ of\ gravity}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\_Physical\_Variables::Direction\_of\_gravity}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\_Physical\_Variables::Direction\_of\_gravity}}[1]\ =\ -\/1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Construct\ our\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classConvectionProblem}{ConvectionProblem<BuoyantQCrouzeixRaviartElement<2>}}\ >\ problem;}
+
+\end{DoxyCodeInclude}
+ We assign the boundary conditions at the time $ t=0 $ and initially perform a single steady solve to obtain the trivial (and temporally unstable) trivial solution; see the section \doxysectlink{index_comments}{Comments}{2} for a more detailed discussion of the {\ttfamily Problem\+::steady\+\_\+newton\+\_\+solve()} function.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Apply\ the\ boundary\ condition\ at\ time\ zero}}
+\DoxyCodeLine{\ problem.\mbox{\hyperlink{classConvectionProblem_a605543718d51f7a77f75a46b48b543d7}{set\_boundary\_conditions}}(0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Perform\ a\ single\ steady\ Newton\ solve}}
+\DoxyCodeLine{\ problem.steady\_newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Document\ the\ solution}}
+\DoxyCodeLine{\ problem.\mbox{\hyperlink{classConvectionProblem_ab7d9e5ac641ca08dd8b04c5eec179593}{doc\_solution}}();}
+
+\end{DoxyCodeInclude}
+ The result of this calculation is the trivial symmetric base flow. We next timestep the system using the (unstable) steady solution as the initial condition. As time increases, the flow evolves to one of the stable asymmetric solutions, as shown in the \href{../figures/convect.avi}{\texttt{ animation of the results.}} As usual, we only perform a few timesteps when the code is used as a self-\/test, i.\+e. if any command-\/line parameters are passed to the driver code.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ dt\ =\ 0.1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Initialise\ the\ value\ of\ the\ timestep\ and\ set\ an\ impulsive\ start}}
+\DoxyCodeLine{\ problem.assign\_initial\_values\_impulsive(dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ number\ of\ timesteps\ to\ our\ default\ value}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_steps\ =\ 200;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//If\ we\ have\ a\ command\ line\ argument,\ perform\ fewer\ steps\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//(used\ for\ self-\/test\ runs)}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(argc\ >\ 1)\ \{n\_steps\ =\ 5;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Perform\ n\_steps\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_steps;++i)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ problem.unsteady\_newton\_solve(dt);}
+\DoxyCodeLine{\ \ \ problem.\mbox{\hyperlink{classConvectionProblem_ab7d9e5ac641ca08dd8b04c5eec179593}{doc\_solution}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class contains five non-\/trivial functions\+: the constructor, the {\ttfamily fix\+\_\+pressure(...)} function, as well as the functions {\ttfamily set\+\_\+boundary\+\_\+conditions(...)}, {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep(...)} and {\ttfamily doc\+\_\+solution(...)}, all discussed below.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_const}{}\doxysubsection{\texorpdfstring{The constructor}{The constructor}}\label{index_const}
+We pass the element type as a template parameter to the problem constructor, which has no arguments. The constructor creates a {\ttfamily BFD$<$2$>$} timestepper and builds a {\ttfamily Rectangular\+Quad\+Mesh} of $ 8\times 8 $ elements.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ convection\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classConvectionProblem_a0c68c4c4b67d9fc8c9900fc895eed973}{ConvectionProblem<ELEMENT>::ConvectionProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ a\ timestepper}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ BDF<2>);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=8;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=8;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_x=3.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_y=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ a\ standard\ rectangular\ quadmesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(n\_x,n\_y,l\_x,l\_y,time\_stepper\_pt());}
+
+\end{DoxyCodeInclude}
+ Next, the boundary constraints are imposed. We pin all velocities and the temperature on the top and bottom walls and pin only the horizontal velocity on the sidewalls. Since the domain is enclosed, the pressure is only determined up the an arbitrary constant. We resolve this ambiguity by pinning a single pressure value, using the {\ttfamily fix\+\_\+pressure(...)} function.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ only\ need\ to\ pin\ the\ ones\ that\ have\ Dirichlet\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ conditions\ here}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ maximum\ index\ to\ be\ pinned\ (all\ values\ by\ default)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ val\_max=3;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//If\ we\ are\ on\ the\ side-\/walls,\ the\ v-\/velocity\ and\ temperature}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//satisfy\ natural\ boundary\ conditions,\ so\ we\ only\ pin\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//first\ value}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}((ibound==1)\ ||\ (ibound==3))\ \{val\_max=1;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ number\ of\ nodes\ on\ the\ boundry}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ desired\ values\ stored\ at\ the\ nodes\ and\ pin}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ j=0;j<val\_max;j++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(j);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Pin\ the\ zero-\/th\ pressure\ dof\ in\ element\ 0\ and\ set\ its\ value\ to}}
+\DoxyCodeLine{\ \textcolor{comment}{//zero:}}
+\DoxyCodeLine{\ fix\_pressure(0,0,0.0);}
+
+\end{DoxyCodeInclude}
+ We complete the build of the elements by setting the pointers to the physical parameters and finally assign the equation numbers
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralsedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Peclet\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>pe\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad4cdf142ba50635d62ac4c614f445af7}{Global\_Physical\_Variables::Peclet}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Peclet\ number\ multiplied\ by\ the\ Strouhal\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>pe\_st\_pt()\ =\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad4cdf142ba50635d62ac4c614f445af7}{Global\_Physical\_Variables::Peclet}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Reynolds\ number\ (1/Pr\ in\ our\ non-\/dimensionalisation)}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87796c9f402e6f90c07cf5ba0db4367e}{Global\_Physical\_Variables::Inverse\_Prandtl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ ReSt\ (also\ 1/Pr\ in\ our\ non-\/dimensionalisation)}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87796c9f402e6f90c07cf5ba0db4367e}{Global\_Physical\_Variables::Inverse\_Prandtl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Rayleigh\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>ra\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a637fd2a6a7c5b34ed3288300d8bf84b7}{Global\_Physical\_Variables::Rayleigh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ Gravity\ vector}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\_Physical\_Variables::Direction\_of\_gravity}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ mesh\ is\ fixed,\ so\ we\ can\ disable\ ALE}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>disable\_ALE();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_bound}{}\doxysubsection{\texorpdfstring{The function set\+\_\+boundary\+\_\+conditions(...)}{The function set\_boundary\_conditions(...)}}\label{index_set_bound}
+In order to examine the stability of the symmetric state, we impose a time-\/dependent boundary condition that transiently perturbs the vertical velocity field at the upper boundary. Our boundary condition is \[ u_{2}\big|_{x_2=1} = \epsilon \ t \ \mbox{e}^{-t} \sin(2\pi x_{1}/3), \] where $ \epsilon \ll 1 $ . The perturbation is zero at $ t=0 $ , tends to zero as $ t\to\infty $ , and is mass conserving. This is implemented in the function below
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_set\_boundary\_conditions================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ the\ boundary\ conditions\ as\ a\ function\ of\ continuous\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ time}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===========================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classConvectionProblem_a605543718d51f7a77f75a46b48b543d7}{ConvectionProblem<ELEMENT>::set\_boundary\_conditions}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&time)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes\ on\ boundary\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ number\ of\ velocity\ components}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ vel\_max=2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//If\ we\ are\ on\ the\ side\ walls\ we\ only\ set\ the\ x-\/velocity.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}((ibound==1)\ ||\ (ibound==3))\ \{vel\_max\ =\ 1;\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ pinned\ velocities\ to\ zero}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ j=0;j<vel\_max;j++)\ \{nod\_pt-\/>set\_value(j,0.0);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//If\ we\ are\ on\ the\ top\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(ibound==2)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ temperature\ to\ -\/0.5\ (cooled)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ nod\_pt-\/>set\_value(2,-\/0.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Add\ small\ velocity\ imperfection\ if\ desired}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ epsilon\ =\ 0.01;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Read\ out\ the\ x\ position}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ nod\_pt-\/>x(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ a\ sinusoidal\ perturbation\ in\ the\ vertical\ velocity}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//This\ perturbation\ is\ mass\ conserving}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ sin(2.0*MathematicalConstants::Pi*x/3.0)*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ epsilon*time*exp(-\/time);}
+\DoxyCodeLine{\ \ \ \ \ \ \ nod\_pt-\/>set\_value(1,value);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//If\ we\ are\ on\ the\ bottom\ boundary,\ set\ the\ temperature}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//to\ 0.5\ (heated)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(ibound==0)\ \{nod\_pt-\/>set\_value(2,0.5);\}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_set\_boundary\_conditions}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_fix_p}{}\doxysubsection{\texorpdfstring{The function fix\+\_\+pressure(...)}{The function fix\_pressure(...)}}\label{index_fix_p}
+This function is a simple wrapper to the element\textquotesingle{}s {\ttfamily fix\+\_\+pressure(...)} function.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fix\ pressure\ in\ element\ e\ at\ pressure\ dof\ pdof\ and\ set\ to\ pvalue}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ fix\_pressure(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&e,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&pdof,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&pvalue)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ specific\ element\ and\ fix\ pressure}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{\ \ \ \ fix\_pressure(pdof,pvalue);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_fix\_pressure}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_actions_bef}{}\doxysubsection{\texorpdfstring{The function actions\+\_\+before\+\_\+implicit\+\_\+timestep()}{The function actions\_before\_implicit\_timestep()}}\label{index_actions_bef}
+This function is used to ensure that the time-\/dependent boundary conditions are set to the correct value before solving the problem at the next time level.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ the\ timestep\ (update\ the\ the\ time-\/dependent\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ boundary\ conditions)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_before\_implicit\_timestep()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ set\_boundary\_conditions(time\_pt()-\/>time());}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysubsection{\texorpdfstring{The function doc\+\_\+solution(...)}{The function doc\_solution(...)}}\label{index_doc}
+This function writes the complete velocity, pressure and temperature fields to a file in the output directory.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_doc\_solution=======================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classConvectionProblem_ab7d9e5ac641ca08dd8b04c5eec179593}{ConvectionProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Declare\ an\ output\ stream\ and\ filename}}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points:\ npts\ x\ npts}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element}{}\doxysection{\texorpdfstring{Creating the new Buoyant\+QCrouzeix\+Raviart\+Element class}{Creating the new BuoyantQCrouzeixRaviartElement class}}\label{index_element}
+The sketch below illustrates how the new multi-\/physics {\ttfamily Buoyant\+QCrouzeix\+Raviart\+Element} is constructed by multiple inheritance from the two existing single-\/physics elements\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{multi_physics}
+\doxyfigcaption{Sketch illustrating the construction of the Buoyant\+QCrouzeix\+Raviart\+Element by multiple inheritance. }
+\end{DoxyImage}
+
+
+
+\begin{DoxyItemize}
+\item The nine-\/noded two-\/dimensional {\ttfamily QCrouzeix\+Raviart\+Element} is based on a nine-\/node quadrilateral geometric {\ttfamily Finite\+Element} from the {\ttfamily QElement} family. All of its {\ttfamily Nodes} store two values, the horizontal and vertical velocity, respectively. The element also stores internal {\ttfamily Data} which represents the (discontinuous) pressure degrees of freedom; in the sketch this {\ttfamily Data} is represented by the dashed box. ~\newline
+~\newline
+
+\item The two-\/dimensional {\ttfamily QAdvection\+Diffusion\+Element} is based on the same geometric {\ttfamily Finite\+Element} and stores one value (the temperature, $ \theta $ ) at each {\ttfamily Node}.
+\end{DoxyItemize}Both elements are fully-\/functional and provide their contributions to the global system of nonlinear algebraic equations that is solved by Newton\textquotesingle{}s method via the two member functions {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)} and ~\newline
+ {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)}.
+\begin{DoxyItemize}
+\item The {\ttfamily QAdvection\+Diffusion\+Element\textquotesingle{}s} member function {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)} computes the element\textquotesingle{}s contribution to the global residual vector for a given "{}wind"{}. The "{}wind"{} is specified by its virtual member function {\ttfamily get\+\_\+wind\+\_\+adv\+\_\+diff(...)} and in the \href{../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html}{\texttt{ single-\/physics advection diffusion problems studied so far}}, the "{}wind"{} tended to specified {\itshape a} {\itshape priori} by the user. The element\textquotesingle{}s ~\newline
+ member function {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} computes the elemental Jacobian matrix, i.\+e. the derivatives of the elemental residual vector with respect to its unknown nodal values (the temperatures). ~\newline
+~\newline
+
+\item Similarly, the {\ttfamily QCrouzeix\+Raviart\+Element\textquotesingle{}s} member function {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)} computes the element\textquotesingle{}s contribution to the global residual vector for a given body force. The body force is specified by its virtual member function {\ttfamily get\+\_\+body\+\_\+force\+\_\+nst(...)} and in the \href{../../../navier_stokes/circular_driven_cavity/html/index.html}{\texttt{ single-\/physics Navier-\/\+Stokes problems studied so far}}, the body force tended to specified {\itshape a} {\itshape priori} by the user. The element\textquotesingle{}s member function {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} computes the elemental Jacobian matrix, i.\+e. the derivatives of the elemental residual vector with respect to its unknown nodal and internal values (the velocities and the pressure).
+\end{DoxyItemize}
+
+When combining the two single-\/physics elements to a multi-\/physics element, we have to take the interaction between the constituent equations into account\+: In the coupled problem the "{}wind"{} in the advection-\/diffusion equations is given by the Navier-\/\+Stokes velocities, while the body force in the Navier-\/\+Stokes equations is a function of the temperature. When implementing these interactions we wish to recycle as much of the elements\textquotesingle{} existing functionality as possible. This may be achieved by the following straightforward steps\+:
+\begin{DoxyEnumerate}
+\item Construct the combined multi-\/physics element by multiple inheritance. ~\newline
+~\newline
+
+\item Overload the {\ttfamily Finite\+Element\+::required\+\_\+nvalue(...)} function to ensure that each {\ttfamily Node} provides a sufficient amount of storage for the (larger) number of nodal values required in the multi-\/physics problem. ~\newline
+~\newline
+
+\item Overload the constituent element\textquotesingle{}s member functions that indicate which nodal value corresponds to which type of degree of freedom. For instance, in the single-\/physics advection-\/diffusion problem, the temperature is stored at the zero-\/th nodal value whereas in the combined multi-\/physics element, the temperature is stored as the second value, as shown in the above sketch. ~\newline
+~\newline
+
+\item Provide a final overload for the element\textquotesingle{}s {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)} and {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} functions. ~\newline
+ The former simply concatenates the residual vectors computed by the constituent single-\/physics elements. The latter function is easiest to implement by finite differencing the combined element\textquotesingle{}s residual vector. \mbox{[}A more efficient approach (in terms of cpu time, not necessarily terms of development time!) is to recycle the diagonal blocks computed by the constituent elements\textquotesingle{}s {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} functions and to use finite-\/differencing only for the off-\/diagonal (interaction) blocks; see the section \doxysectlink{index_comments}{Comments}{2} a more detailed discussion of this technique.\mbox{]} ~\newline
+~\newline
+
+\end{DoxyEnumerate}That\textquotesingle{}s all! Here is the implementation\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//======================class\ definition==============================}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ A\ class\ that\ solves\ the\ Boussinesq\ approximation\ of\ the\ Navier-\/-\/Stokes}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ and\ energy\ equations\ by\ coupling\ two\ pre-\/existing\ classes.}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ The\ QAdvectionDiffusionElement\ with\ bi-\/quadratic\ interpolation\ for\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ scalar\ variable\ (temperature)\ and}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ QCrouzeixRaviartElement\ which\ solves\ the\ Navier-\/-\/Stokes\ equations}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ using\ bi-\/quadratic\ interpolation\ for\ the\ velocities\ and\ a\ discontinuous}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ bi-\/linear\ interpolation\ for\ the\ pressure.\ Note\ that\ we\ are\ free\ to}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ choose\ the\ order\ in\ which\ we\ store\ the\ variables\ at\ the\ nodes.\ In\ this}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ case\ we\ choose\ to\ store\ the\ variables\ in\ the\ order\ fluid\ velocities}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ followed\ by\ temperature.\ We\ must,\ therefore,\ overload\ the\ function}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ AdvectionDiffusionEquations<DIM>::u\_index\_adv\_diff()\ to\ indicate\ that}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ the\ temperature\ is\ stored\ at\ the\ DIM-\/th\ position\ not\ the\ 0-\/th.\ We\ do\ not}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ need\ to\ overload\ the\ corresponding\ function\ in\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ NavierStokesEquations<DIM>\ class\ because\ the\ velocities\ are\ stored}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ first.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM>}
+\DoxyCodeLine{\ \ \textcolor{keyword}{class\ }BuoyantQCrouzeixRaviartElement}
+\DoxyCodeLine{\ \ \ \ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QAdvectionDiffusionElement<DIM,\ 3>,}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QCrouzeixRaviartElement<DIM>}
+
+\end{DoxyCodeInclude}
+ The class contains a single new physical parameter, the Rayleigh number, as usual referenced by a pointer to a double precision datum,
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Pointer\ to\ a\ private\ data\ member,\ the\ Rayleigh\ number}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}*\ Ra\_pt;}
+
+\end{DoxyCodeInclude}
+ with suitable access functions.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Access\ function\ for\ the\ Rayleigh\ number\ (const\ version)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ ra()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ *Ra\_pt;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Access\ function\ for\ the\ pointer\ to\ the\ Rayleigh\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{double}*\&\ ra\_pt()}
+
+\end{DoxyCodeInclude}
+ The constructor calls the constructors of the component classes ({\ttfamily QCrouzeix\+Raviart\+Element} and {\ttfamily QAdvection\+Diffusion\+Element}) and initialises the value of the Rayleigh number to zero, via a static default parameter value.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Constructor:\ call\ the\ underlying\ constructors\ and}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ initialise\ the\ pointer\ to\ the\ Rayleigh\ number\ to\ point}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ to\ the\ default\ value\ of\ 0.0.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ BuoyantQCrouzeixRaviartElement()}
+\DoxyCodeLine{\ \ \ \ \ \ :\ QAdvectionDiffusionElement<DIM,\ 3>(),\ QCrouzeixRaviartElement<DIM>()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ Ra\_pt\ =\ \&\mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{Default\_Physical\_Constant\_Value}};}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ We must overload the function {\ttfamily Finite\+Element\+::required\+\_\+nvalue()} because the new element will store {\ttfamily DIM+1} unknowns at each node\+: {\ttfamily DIM} fluid velocity components and the value of the temperature, as shown in the sketch above.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ The\ required\ number\ of\ values\ stored\ at\ the\ nodes\ is\ the\ sum\ of}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ the\ required\ values\ of\ the\ two\ single-\/physics\ \ elements.\ Note\ that\ this}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ step\ is\ generic\ for\ any\ multi-\/physics\ element\ of\ this\ type.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{unsigned}\ required\_nvalue(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ (QAdvectionDiffusionElement<DIM,\ 3>::required\_nvalue(n)\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ QCrouzeixRaviartElement<DIM>::required\_nvalue(n));}
+
+\end{DoxyCodeInclude}
+ In the standard single-\/physics advection-\/diffusion elements the temperature is the only value stored at the nodes and is stored as {\ttfamily value(0)}. Similarly, in the single-\/physics Navier--Stokes elements, the fluid velocities are stored in the first {\ttfamily DIM} nodal values. In our new multi-\/physics element, we must decide where to store the different variables and then inform the single-\/physics elements of our choice. As indicated in the above sketch, we choose to store the temperature {\bfseries{after}} the fluid velocities, so that it is {\ttfamily value(\+DIM)}. The recommended mechanism for communicating the location of the variables to the single-\/physics elements is to use an index function. Hence, single-\/physics elements that are to be the components of multi-\/physics elements must have an index function for their variables. For instance, the function {\ttfamily u\+\_\+index\+\_\+adv\+\_\+diff(...)} is used in the {\ttfamily Advection\+Diffusion\+Equations} class to read out the position (index) at which the advected variable (the temperature) is stored. That function is now overloaded in our multi-\/physics element\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Overload\ the\ index\ at\ which\ the\ temperature}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ variable\ is\ stored.\ We\ choose\ to\ store\ it\ after\ the\ fluid\ velocities.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ u\_index\_adv\_diff()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ DIM;}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ We need not overload the index function for the fluid velocities because they remain stored in the first {\ttfamily DIM} positions at the node.
+
+The coupling between the two sets of single-\/physics equations is achieved by overloading the two functions {\ttfamily get\+\_\+wind\+\_\+adv\+\_\+diff()}, used in the advection-\/diffusion equations and {\ttfamily get\+\_\+body\+\_\+force\+\_\+nst()}, used in the Navier--Stokes equations
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Overload\ the\ wind\ function\ in\ the\ advection-\/diffusion\ equations.}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ This\ provides\ the\ coupling\ from\ the\ Navier-\/-\/Stokes\ equations\ to\ the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ advection-\/diffusion\ equations\ because\ the\ wind\ is\ the\ fluid\ velocity.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ get\_wind\_adv\_diff(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ wind)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ wind\ function\ is\ simply\ the\ velocity\ at\ the\ points}}
+\DoxyCodeLine{\ \ \ \ \ \ this-\/>interpolated\_u\_nst(s,\ wind);}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Overload\ the\ body\ force\ in\ the\ Navier-\/Stokes\ equations}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ This\ provides\ the\ coupling\ from\ the\ advection-\/diffusion\ equations}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ to\ the\ Navier-\/-\/Stokes\ equations,\ the\ body\ force\ is\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ temperature\ multiplied\ by\ the\ Rayleigh\ number\ acting\ in\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ direction\ opposite\ to\ gravity.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ get\_body\_force\_nst(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ result)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ temperature}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ interpolated\_t\ =\ this-\/>interpolated\_u\_adv\_diff(s);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ vector\ that\ indicates\ the\ direction\ of\ gravity\ from}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ the\ Navier-\/Stokes\ equations}}
+\DoxyCodeLine{\ \ \ \ \ \ Vector<double>\ gravity(NavierStokesEquations<DIM>::g());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Temperature-\/dependent\ body\ force:}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ DIM;\ i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ result[i]\ =\ -\/gravity[i]\ *\ interpolated\_t\ *\ ra();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ The elemental residual vector is composed of the residuals from the two single-\/physics elements and we simply call the underlying functions for each element in turn.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Calculate\ the\ element's\ contribution\ to\ the\ residual\ vector.}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Recall\ that\ fill\_in\_*\ functions\ MUST\ NOT\ initialise\ the\ entries}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ in\ the\ vector\ to\ zero.\ This\ allows\ us\ to\ call\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ fill\_in\_*\ functions\ of\ the\ constituent\ single-\/physics\ elements}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ sequentially,\ without\ wiping\ out\ any\ previously\ computed\ entries.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_residuals(Vector<double>\&\ residuals)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Fill\ in\ the\ residuals\ of\ the\ Navier-\/Stokes\ equations}}
+\DoxyCodeLine{\ \ \ \ \ \ NavierStokesEquations<DIM>::fill\_in\_contribution\_to\_residuals(residuals);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Fill\ in\ the\ residuals\ of\ the\ advection-\/diffusion\ eqautions}}
+\DoxyCodeLine{\ \ \ \ \ \ AdvectionDiffusionEquations<DIM>::fill\_in\_contribution\_to\_residuals(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ residuals);}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we compute the Jacobian matrix by finite-\/differencing the element\textquotesingle{}s combined residual vector, using the default implementation of the {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} function in the {\ttfamily Finite\+Element} base class\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Compute\ the\ element's\ residual\ vector\ and\ the\ Jacobian\ matrix.}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Jacobian\ is\ computed\ by\ finite-\/differencing.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_jacobian(Vector<double>\&\ residuals,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DenseMatrix<double>\&\ jacobian)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ This\ function\ computes\ the\ Jacobian\ by\ finite-\/differencing}}
+\DoxyCodeLine{\ \ \ \ \ \ FiniteElement::fill\_in\_contribution\_to\_jacobian(residuals,\ jacobian);}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we overload the output function to print the fluid velocities, the fluid pressure and the temperature.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Start\ of\ output\ function}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ output(std::ostream\&\ outfile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nplot)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ vector\ of\ local\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ Vector<double>\ s(DIM);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Tecplot\ header\ info}}
+\DoxyCodeLine{\ \ \ \ \ \ outfile\ <<\ this-\/>tecplot\_zone\_string(nplot);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ plot\ points}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_plot\_points\ =\ this-\/>nplot\_points(nplot);}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ iplot\ =\ 0;\ iplot\ <\ num\_plot\_points;\ iplot++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ local\ coordinates\ of\ plot\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ this-\/>get\_s\_plot(iplot,\ nplot,\ s);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ the\ position\ of\ the\ plot\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ DIM;\ i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ outfile\ <<\ this-\/>interpolated\_x(s,\ i)\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ the\ fluid\ velocities\ at\ the\ plot\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ DIM;\ i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ outfile\ <<\ this-\/>interpolated\_u\_nst(s,\ i)\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ the\ fluid\ pressure\ at\ the\ plot\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ outfile\ <<\ this-\/>interpolated\_p\_nst(s)\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ the\ temperature\ (the\ advected\ variable)\ at\ the\ plot\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ outfile\ <<\ this-\/>interpolated\_u\_adv\_diff(s)\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ outfile\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Write\ tecplot\ footer\ (e.g.\ FE\ connectivity\ lists)}}
+\DoxyCodeLine{\ \ \ \ \ \ this-\/>write\_tecplot\_zone\_footer(outfile,\ nplot);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ output\ function}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_comm_and_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_and_ex}
+\hypertarget{index_comments}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_comments}
+
+\begin{DoxyItemize}
+\item {\bfseries{The {\ttfamily steady\+\_\+newton\+\_\+solve()}function\+:}} ~\newline
+~\newline
+ In most previous examples we have encountered two main interfaces to {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver\+: ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item The function {\ttfamily Problem\+::newton\+\_\+solve()} employs Newton\textquotesingle{}s method to solve the system of nonlinear algebraic equations arising from the {\ttfamily Problem\textquotesingle{}s} discretisation. The current {\ttfamily Data} values are used as the initial guess for the Newton iteration. On return from this function, all unknown {\ttfamily Data} values will have been assigned their correct values so that the solution of the problem may be plotted by calls to the elements\textquotesingle{} {\ttfamily output} functions. We tended to use this function to solve steady problems. ~\newline
+~\newline
+
+\item Given the solution at time $ t = t_{\mbox{orig}} $ , the unsteady Newton solver {\ttfamily  Problem\+::unsteady\+\_\+newton\+\_\+solve(dt,...) } increments time by {\ttfamily dt}, shifts the "{}history"{} values and then computes the solution at the advanced time, $ t =
+    t_{\mbox{orig}} $ + {\ttfamily dt}. On return from this function, all unknown {\ttfamily Data} values (and the corresponding "{}history"{} values) will have been assigned their correct values so that the solution at time $ t =
+    t_{\mbox{orig}} $ + {\ttfamily dt} may be plotted by calls to the elements\textquotesingle{} {\ttfamily output} functions. We tended to use this function for unsteady problems. ~\newline
+~\newline
+
+\end{DoxyItemize}Inspection of the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function shows that this function is, in fact, a wrapper around {\ttfamily Problem\+::newton\+\_\+solve()}, and that the latter function solves the discretised equations {\itshape including any terms that arise from an implicit time-\/discretisation}. The only purpose of the wrapper function is to shift the history values before taking the next timestep. This raises the question how to compute steady solutions (i.\+e. solutions obtained by setting the time-\/derivatives in the governing equation to zero) of a {\ttfamily Problem} that was discretised in a form that allows for timestepping, as in the problem studied here. This is the role of the function {\ttfamily Problem\+::steady\+\_\+newton\+\_\+solve()}\+: The function performs the following steps\+: ~\newline
+~\newline
+
+\begin{DoxyEnumerate}
+\item Disable all {\ttfamily Time\+Steppers} in the {\ttfamily Problem} by calling their {\ttfamily Time\+Stepper\+::make\+\_\+steady()} member function. ~\newline
+~\newline
+
+\item Call the {\ttfamily Problem\+::newton\+\_\+solve()} function to compute the solution of the discretised problem with all time-\/derivatives set to zero. ~\newline
+~\newline
+
+\item Re-\/activate all {\ttfamily Time\+Steppers} (unless they were already in "{}steady"{} mode when the function was called). ~\newline
+~\newline
+
+\item Call the function {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} to ensure that the "{}history"{} values used by the (now re-\/activated) {\ttfamily Time\+Steppers} are consistent with an impulsive start from the steady solution just computed. ~\newline
+~\newline
+
+\end{DoxyEnumerate}On return from this function, all unknown {\ttfamily Data} values (and the corresponding "{}history"{} values) will have been assigned their correct values so that the solution just computed is a steady solution to the full unsteady equations. ~\newline
+~\newline
+
+\item {\bfseries{\label{index_opt}%
+\Hypertarget{index_opt}%
+Optimising the implementation of multi-\/physics interactions\+:}} ~\newline
+~\newline
+ The combined multi-\/physics element discussed above was implemented with just a few straightforward lines of code. The ease of implementation comes at a price, however, and more efficient implementations (in terms of CPU time) are possible\+: ~\newline
+~\newline
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Using finite-\/differencing only for the off-\/diagonal terms in the Jacobian matrix\+:}} ~\newline
+~\newline
+ While the use of finite-\/differencing in the setup of the Jacobian matrix is convenient, it does not exploit the fact that the constituent single-\/physics elements already provide analytical (and hence cheaper-\/to-\/compute) expressions for the two diagonal blocks in the coupled Jacobian matrix (i.\+e. the derivatives of the fluid residuals with respect to the fluid variables, and the derivatives of the advection diffusion residuals with respect to the temperature degrees of freedom). It is possible to recycle these entries and to use finite-\/differencing only to compute the off-\/diagonal interaction blocks (i.\+e. the derivatives of the Navier-\/\+Stokes residuals with respect to the temperature degrees of freedom, and the derivatives of the advection-\/diffusion residuals with respect to the velocities). In fact, the source code for the {\ttfamily Buoyant\+QCrouzeix\+Raviart\+Element} includes such an implementation. The full finite-\/difference-\/based computation discussed above is used if the code is compiled with the compiler flag {\ttfamily USE\+\_\+\+FD\+\_\+\+JACOBIAN\+\_\+\+FOR\+\_\+\+BUOYANT\+\_\+\+Q\+\_\+\+ELEMENT}. Finite-\/differences are used for the off-\/diagonal blocks only when the compiler flag {\ttfamily USE\+\_\+\+OFF\+\_\+\+DIAGONAL\+\_\+\+FD\+\_\+\+JACOBIAN\+\_\+\+FOR\+\_\+\+BUOYANT\+\_\+\+Q\+\_\+\+ELEMENT} is passed. When comparing the two versions of the code, we found the run times for the full finite-\/difference-\/based version to be approximately 3-\/7\% higher, depending on the spatial resolution used. The implementation of the more efficient version is still straightforward and can be found in the source code \href{../../../../demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc}{\texttt{ boussinesq\+\_\+convection.\+cc. }} ~\newline
+~\newline
+
+\item {\bfseries{Using an analytic Jacobian matrix\+:}} ~\newline
+~\newline
+ As discussed above, the re-\/use of the analytic expressions for the diagonal blocks of the coupled Jacobian matrix is straightforward. For a yet more efficient computation we can assemble analytic expressions for the off-\/diagonal interaction blocks; although this does require knowledge of precisely how the governing equations were implemented in the single-\/physics elements. Once again, the source code for the {\ttfamily Buoyant\+QCrouzeix\+Raviart\+Element} includes such an implementation and, moreover, it is the default behaviour. We found the assembly time for the analytic coupled Jacobian to be approximately 15\% of the finite-\/difference based versions. The implementation is reasonably straightforward and can be found in the source code \href{../../../../demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc}{\texttt{ boussinesq\+\_\+convection.\+cc. }} ~\newline
+~\newline
+
+\item {\bfseries{Complete re-\/implementation of the coupled element\+:}} ~\newline
+~\newline
+ Although recycling the analytically computed diagonal blocks in the Jacobian matrix leads to a modest speedup, and the use of analytic off-\/diagonal blocks to a further speedup, the computation of the coupled residual vector and Jacobian matrix are still somewhat inefficient. This is because the contributions from the Navier-\/\+Stokes and advection-\/diffusion equations are computed in two separate integration loops; and, if computed, the assembly of the analytic off-\/diagonal terms requires a third integration loop. The only solution to this problem would be to fully merge the source codes for two elements to create a customised element. In the present problem this would not be too difficult, particularly since the derivatives of the Navier-\/\+Stokes residuals with respect to the temperature, and the derivatives of the advection-\/diffusion residuals with respect to the velocities are easy to calculate. However, a reimplementation in this form would break the modularity of the library as any subsequent changes/improvements to the Navier-\/\+Stokes elements, say, would have to be added manually to the coupled element. If maximum speed is absolutely essential in your application, you may still wish to choose this option. The existing Navier-\/\+Stokes and advection diffusion elements provide the required building blocks for your custom-\/written coupled element. ~\newline
+~\newline
+
+\end{DoxyEnumerate}
+\end{DoxyItemize}\DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Confirm that the system is stable, i.\+e. returns to the trivial state, when $ Ra = 1700 $ .
+\item How does the time-\/evolution of the system change when no-\/slip boundary conditions for the fluid velocity are applied on the side boundaries (a rigid box model)?
+\item Re-\/write the multi-\/physics elements so that the temperature is stored {\bfseries{before}} the fluid velocities. Confirm that the solution is unchanged in this case.
+\item Assess the computational cost of the finite-\/difference based setup of the elements\textquotesingle{} Jacobian matrices by comparing the run times of the two versions of the code.
+\item Try using {\ttfamily QTaylor\+Hood\+Elements} as the "{}fluid"{} element part of the multi-\/physics elements. N.\+B. in this case, the temperature {\bfseries{must}} be stored as the first variable at the nodes because we assume that it is always stored at the same location in every node.
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/
+}{\texttt{ demo\+\_\+drivers/multi\+\_\+physics/boussinesq\+\_\+convection/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
+}{\texttt{ demo\+\_\+drivers/multi\+\_\+physics/boussinesq\+\_\+convection/boussinesq\+\_\+convection.\+cc }} \end{center}  ~\newline
+
+\item The source code for the elements is in\+: ~\newline
+~\newline
+\begin{center} \href{../../../../src/multi_physics/boussinesq_elements.h}{\texttt{ src/multi\+\_\+physics/boussinesq\+\_\+elements.\+h}} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

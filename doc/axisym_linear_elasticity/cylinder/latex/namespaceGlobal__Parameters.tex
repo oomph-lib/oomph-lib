@@ -1,0 +1,578 @@
+\doxysection{Global\+\_\+\+Parameters Namespace Reference}
+\hypertarget{namespaceGlobal__Parameters}{}\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
+
+
+Namespace for global parameters.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a61ef31c4db13380658f6d5ea47c3369d}{boundary\+\_\+traction}} (const double \&time, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function at r=Rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a6459755c5d38e277ceddbf317c4ed179}{body\+\_\+force}} (const double \&time, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The body force function; returns vector of doubles in the order (b\+\_\+r, b\+\_\+z, b\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a42f4ce30b09a582bb2d85ddb6f087f80}{exact\+\_\+solution\+\_\+th}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Helper function -\/ spatial components of the exact solution in a vector. This is necessary because we need to multiply this by different things to obtain the velocity and acceleration 0\+: u\+\_\+r, 1\+: u\+\_\+z, 2\+: u\+\_\+theta. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338}{u\+\_\+r}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the r-\/component of displacement. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_adc24d54054d6868dfb4bf3eedb2b062d}{u\+\_\+z}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the z-\/component of displacement. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_aed85254e9565e5e25dbe336a799bf6b5}{u\+\_\+theta}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the theta-\/component of displacement. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_aa587494218fe51b7d23a58009bf370f6}{d\+\_\+u\+\_\+r\+\_\+dt}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the r-\/component of velocity. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_adc07c67f4203664ac0c23c4ff9d4dac1}{d\+\_\+u\+\_\+z\+\_\+dt}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the z-\/component of velocity. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a87fd49f1b07cd74a364cf1373890864e}{d\+\_\+u\+\_\+theta\+\_\+dt}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the theta-\/component of velocity. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a37715fdf266bd7d91b44ad779e20a11a}{d2\+\_\+u\+\_\+r\+\_\+dt2}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the r-\/component of acceleration. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a2167fee22e8f4d63a51a39ace1e3a743}{d2\+\_\+u\+\_\+z\+\_\+dt2}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the z-\/component of acceleration. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a902b0bba2b1393518a914330f30ee4c9}{d2\+\_\+u\+\_\+theta\+\_\+dt2}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the theta-\/component of acceleration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712}{exact\+\_\+solution}} (const double \&time, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em The exact solution in a vector\+: 0\+: u\+\_\+r, 1\+: u\+\_\+z, 2\+: u\+\_\+theta and their 1st and 2nd derivs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Define Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}{Lambda}} = \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})/(1.\+0-\/2.\+0\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\begin{DoxyCompactList}\small\item\em Lame parameters. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}{Mu}} = \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}/2.\+0/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\+\_\+sq}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Square of the frequency of the time dependence. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Nr}} = 5
+\begin{DoxyCompactList}\small\item\em Number of elements in r-\/direction. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a1f35a0690c7745167a7178fb71f92e6e}{Nz}} = 10
+\begin{DoxyCompactList}\small\item\em Number of elements in z-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in r direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in z-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Rmin}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Set up min r coordinate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Zmin}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Set up min z coordinate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a06f5ea713550f61da323eafb91fceedd}{Rmax}} = \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Rmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}}
+\begin{DoxyCompactList}\small\item\em Set up max r coordinate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a36b7b169826f906d1d8d1a3aa4347d80}{Zmax}} = \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Zmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}}
+\begin{DoxyCompactList}\small\item\em Set up max z coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for global parameters. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobal__Parameters_a6459755c5d38e277ceddbf317c4ed179}\label{namespaceGlobal__Parameters_a6459755c5d38e277ceddbf317c4ed179} 
+\index{Global\_Parameters@{Global\_Parameters}!body\_force@{body\_force}}
+\index{body\_force@{body\_force}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{body\_force()}{body\_force()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::body\+\_\+force (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{result }\end{DoxyParamCaption})}
+
+
+
+The body force function; returns vector of doubles in the order (b\+\_\+r, b\+\_\+z, b\+\_\+theta) 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00096}{96}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00052}{Lambda}}, \mbox{\hyperlink{cylinder_8cc_source_l00053}{Mu}}, and \mbox{\hyperlink{cylinder_8cc_source_l00056}{Omega\+\_\+sq}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a61ef31c4db13380658f6d5ea47c3369d}\label{namespaceGlobal__Parameters_a61ef31c4db13380658f6d5ea47c3369d} 
+\index{Global\_Parameters@{Global\_Parameters}!boundary\_traction@{boundary\_traction}}
+\index{boundary\_traction@{boundary\_traction}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{boundary\_traction()}{boundary\_traction()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::boundary\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{n,  }\item[{Vector$<$ double $>$ \&}]{result }\end{DoxyParamCaption})}
+
+
+
+The traction function at r=Rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00083}{83}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00052}{Lambda}}, and \mbox{\hyperlink{cylinder_8cc_source_l00053}{Mu}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a37715fdf266bd7d91b44ad779e20a11a}\label{namespaceGlobal__Parameters_a37715fdf266bd7d91b44ad779e20a11a} 
+\index{Global\_Parameters@{Global\_Parameters}!d2\_u\_r\_dt2@{d2\_u\_r\_dt2}}
+\index{d2\_u\_r\_dt2@{d2\_u\_r\_dt2}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d2\_u\_r\_dt2()}{d2\_u\_r\_dt2()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+r\+\_\+dt2 (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the r-\/component of acceleration. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00178}{178}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a902b0bba2b1393518a914330f30ee4c9}\label{namespaceGlobal__Parameters_a902b0bba2b1393518a914330f30ee4c9} 
+\index{Global\_Parameters@{Global\_Parameters}!d2\_u\_theta\_dt2@{d2\_u\_theta\_dt2}}
+\index{d2\_u\_theta\_dt2@{d2\_u\_theta\_dt2}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d2\_u\_theta\_dt2()}{d2\_u\_theta\_dt2()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+theta\+\_\+dt2 (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the theta-\/component of acceleration. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00194}{194}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a2167fee22e8f4d63a51a39ace1e3a743}\label{namespaceGlobal__Parameters_a2167fee22e8f4d63a51a39ace1e3a743} 
+\index{Global\_Parameters@{Global\_Parameters}!d2\_u\_z\_dt2@{d2\_u\_z\_dt2}}
+\index{d2\_u\_z\_dt2@{d2\_u\_z\_dt2}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d2\_u\_z\_dt2()}{d2\_u\_z\_dt2()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+z\+\_\+dt2 (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the z-\/component of acceleration. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00186}{186}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_aa587494218fe51b7d23a58009bf370f6}\label{namespaceGlobal__Parameters_aa587494218fe51b7d23a58009bf370f6} 
+\index{Global\_Parameters@{Global\_Parameters}!d\_u\_r\_dt@{d\_u\_r\_dt}}
+\index{d\_u\_r\_dt@{d\_u\_r\_dt}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d\_u\_r\_dt()}{d\_u\_r\_dt()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+r\+\_\+dt (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the r-\/component of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00154}{154}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a87fd49f1b07cd74a364cf1373890864e}\label{namespaceGlobal__Parameters_a87fd49f1b07cd74a364cf1373890864e} 
+\index{Global\_Parameters@{Global\_Parameters}!d\_u\_theta\_dt@{d\_u\_theta\_dt}}
+\index{d\_u\_theta\_dt@{d\_u\_theta\_dt}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d\_u\_theta\_dt()}{d\_u\_theta\_dt()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+theta\+\_\+dt (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the theta-\/component of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00170}{170}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_adc07c67f4203664ac0c23c4ff9d4dac1}\label{namespaceGlobal__Parameters_adc07c67f4203664ac0c23c4ff9d4dac1} 
+\index{Global\_Parameters@{Global\_Parameters}!d\_u\_z\_dt@{d\_u\_z\_dt}}
+\index{d\_u\_z\_dt@{d\_u\_z\_dt}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{d\_u\_z\_dt()}{d\_u\_z\_dt()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+z\+\_\+dt (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the z-\/component of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00162}{162}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712}\label{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712} 
+\index{Global\_Parameters@{Global\_Parameters}!exact\_solution@{exact\_solution}}
+\index{exact\_solution@{exact\_solution}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{exact\_solution()}{exact\_solution()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::exact\+\_\+solution (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+The exact solution in a vector\+: 0\+: u\+\_\+r, 1\+: u\+\_\+z, 2\+: u\+\_\+theta and their 1st and 2nd derivs. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00203}{203}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00178}{d2\+\_\+u\+\_\+r\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00194}{d2\+\_\+u\+\_\+theta\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00186}{d2\+\_\+u\+\_\+z\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00154}{d\+\_\+u\+\_\+r\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00170}{d\+\_\+u\+\_\+theta\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00162}{d\+\_\+u\+\_\+z\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00130}{u\+\_\+r()}}, \mbox{\hyperlink{cylinder_8cc_source_l00146}{u\+\_\+theta()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00138}{u\+\_\+z()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00664}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a42f4ce30b09a582bb2d85ddb6f087f80}\label{namespaceGlobal__Parameters_a42f4ce30b09a582bb2d85ddb6f087f80} 
+\index{Global\_Parameters@{Global\_Parameters}!exact\_solution\_th@{exact\_solution\_th}}
+\index{exact\_solution\_th@{exact\_solution\_th}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{exact\_solution\_th()}{exact\_solution\_th()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::exact\+\_\+solution\+\_\+th (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Helper function -\/ spatial components of the exact solution in a vector. This is necessary because we need to multiply this by different things to obtain the velocity and acceleration 0\+: u\+\_\+r, 1\+: u\+\_\+z, 2\+: u\+\_\+theta. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00116}{116}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00178}{d2\+\_\+u\+\_\+r\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00194}{d2\+\_\+u\+\_\+theta\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00186}{d2\+\_\+u\+\_\+z\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00154}{d\+\_\+u\+\_\+r\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00170}{d\+\_\+u\+\_\+theta\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00162}{d\+\_\+u\+\_\+z\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00130}{u\+\_\+r()}}, \mbox{\hyperlink{cylinder_8cc_source_l00146}{u\+\_\+theta()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00138}{u\+\_\+z()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338}\label{namespaceGlobal__Parameters_ae600c7d1b0928a5cb532fa3a93bab338} 
+\index{Global\_Parameters@{Global\_Parameters}!u\_r@{u\_r}}
+\index{u\_r@{u\_r}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{u\_r()}{u\_r()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::u\+\_\+r (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the r-\/component of displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00130}{130}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_aed85254e9565e5e25dbe336a799bf6b5}\label{namespaceGlobal__Parameters_aed85254e9565e5e25dbe336a799bf6b5} 
+\index{Global\_Parameters@{Global\_Parameters}!u\_theta@{u\_theta}}
+\index{u\_theta@{u\_theta}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{u\_theta()}{u\_theta()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::u\+\_\+theta (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the theta-\/component of displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00146}{146}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_adc24d54054d6868dfb4bf3eedb2b062d}\label{namespaceGlobal__Parameters_adc24d54054d6868dfb4bf3eedb2b062d} 
+\index{Global\_Parameters@{Global\_Parameters}!u\_z@{u\_z}}
+\index{u\_z@{u\_z}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{u\_z()}{u\_z()}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::u\+\_\+z (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Calculate the time dependent form of the z-\/component of displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00138}{138}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00116}{exact\+\_\+solution\+\_\+th()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00203}{exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}\label{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0} 
+\index{Global\_Parameters@{Global\_Parameters}!E@{E}}
+\index{E@{E}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{E}{E}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::E = 1.\+0}
+
+
+
+Define the non-\/dimensional Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00049}{49}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae}\label{namespaceGlobal__Parameters_ae2f84a82174136947cce7a0d137097ae} 
+\index{Global\_Parameters@{Global\_Parameters}!Lambda@{Lambda}}
+\index{Lambda@{Lambda}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Lambda}{Lambda}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Lambda = \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})/(1.\+0-\/2.\+0\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})}
+
+
+
+Lame parameters. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00052}{52}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00096}{body\+\_\+force()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00083}{boundary\+\_\+traction()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}\label{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e} 
+\index{Global\_Parameters@{Global\_Parameters}!Lr@{Lr}}
+\index{Lr@{Lr}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Lr}{Lr}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Lr = 1.\+0}
+
+
+
+Length of domain in r direction. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00065}{65}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}\label{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1} 
+\index{Global\_Parameters@{Global\_Parameters}!Lz@{Lz}}
+\index{Lz@{Lz}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Lz}{Lz}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Lz = 2.\+0}
+
+
+
+Length of domain in z-\/direction. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00068}{68}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103}\label{namespaceGlobal__Parameters_a490d7680a7de63058a9c921e2705a103} 
+\index{Global\_Parameters@{Global\_Parameters}!Mu@{Mu}}
+\index{Mu@{Mu}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Mu}{Mu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Mu = \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{E}}/2.\+0/(1.\+0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00053}{53}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00096}{body\+\_\+force()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00083}{boundary\+\_\+traction()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}\label{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e} 
+\index{Global\_Parameters@{Global\_Parameters}!Nr@{Nr}}
+\index{Nr@{Nr}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nr}{Nr}}
+{\footnotesize\ttfamily unsigned Global\+\_\+\+Parameters\+::\+Nr = 5}
+
+
+
+Number of elements in r-\/direction. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00059}{59}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661} 
+\index{Global\_Parameters@{Global\_Parameters}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Nu = 0.\+3}
+
+
+
+Define Poisson\textquotesingle{}s ratio Nu. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00046}{46}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a1f35a0690c7745167a7178fb71f92e6e}\label{namespaceGlobal__Parameters_a1f35a0690c7745167a7178fb71f92e6e} 
+\index{Global\_Parameters@{Global\_Parameters}!Nz@{Nz}}
+\index{Nz@{Nz}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nz}{Nz}}
+{\footnotesize\ttfamily unsigned Global\+\_\+\+Parameters\+::\+Nz = 10}
+
+
+
+Number of elements in z-\/direction. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00062}{62}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}\label{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324} 
+\index{Global\_Parameters@{Global\_Parameters}!Omega\_sq@{Omega\_sq}}
+\index{Omega\_sq@{Omega\_sq}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Omega\_sq}{Omega\_sq}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq = 0.\+5}
+
+
+
+Square of the frequency of the time dependence. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00056}{56}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00096}{body\+\_\+force()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a06f5ea713550f61da323eafb91fceedd}\label{namespaceGlobal__Parameters_a06f5ea713550f61da323eafb91fceedd} 
+\index{Global\_Parameters@{Global\_Parameters}!Rmax@{Rmax}}
+\index{Rmax@{Rmax}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Rmax}{Rmax}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Rmax = \mbox{\hyperlink{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}{Rmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a444f5c911c8805ad2ba45ed8b1b8904e}{Lr}}}
+
+
+
+Set up max r coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00077}{77}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf}\label{namespaceGlobal__Parameters_ab0e73c8b2e1105b14203856b81efa8cf} 
+\index{Global\_Parameters@{Global\_Parameters}!Rmin@{Rmin}}
+\index{Rmin@{Rmin}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Rmin}{Rmin}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Rmin = 0.\+1}
+
+
+
+Set up min r coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00071}{71}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a36b7b169826f906d1d8d1a3aa4347d80}\label{namespaceGlobal__Parameters_a36b7b169826f906d1d8d1a3aa4347d80} 
+\index{Global\_Parameters@{Global\_Parameters}!Zmax@{Zmax}}
+\index{Zmax@{Zmax}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Zmax}{Zmax}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Zmax = \mbox{\hyperlink{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}{Zmin}}+\mbox{\hyperlink{namespaceGlobal__Parameters_a2bcf0bd846d839f1e3bb04a6c0a612c1}{Lz}}}
+
+
+
+Set up max z coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00080}{80}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f}\label{namespaceGlobal__Parameters_a1813b913bc85d4ce15ea68226ba6c63f} 
+\index{Global\_Parameters@{Global\_Parameters}!Zmin@{Zmin}}
+\index{Zmin@{Zmin}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Zmin}{Zmin}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Zmin = 0.\+3}
+
+
+
+Set up min z coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00074}{74}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00277}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Axisymmetric\+Linear\+Elasticity\+Problem()}}.
+

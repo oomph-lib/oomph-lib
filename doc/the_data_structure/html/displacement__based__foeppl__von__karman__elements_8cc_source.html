@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: displacement_based_foeppl_von_karman_elements.cc Source File</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d8d7b07344a308162346934a33bdd4d5.html">foeppl_von_karman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">displacement_based_foeppl_von_karman_elements.cc</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="displacement__based__foeppl__von__karman__elements_8cc.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// LIC// ====================================================================</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// LIC// This file forms part of oomph-lib, the object-oriented,</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// LIC// multi-physics finite-element library, available</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// LIC// 02110-1301  USA.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// LIC//</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// LIC//====================================================================</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// Non-inline functions for FoepplvonKarman displacement elements</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="displacement__based__foeppl__von__karman__elements_8h.html">displacement_based_foeppl_von_karman_elements.h</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceoomph.html">oomph</a></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">// Foeppl von Karman displacement equations static data</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"></span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  /// Default value for Poisson&#39;s ratio</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span>  <span class="keywordtype">double</span> <a class="code hl_variable" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#adf6cf725968deb5c555c1276cc51d83a">DisplacementBasedFoepplvonKarmanEquations::Default_Nu_Value</a> = 0.5;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  /// Default value physical constants</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span>  <span class="keywordtype">double</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_variable" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#afbcb94cced9726c21000fd66088469d7">DisplacementBasedFoepplvonKarmanEquations::Default_Physical_Constant_Value</a> =</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      0.0;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  /// Self-test:  Return 0 for OK</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a3e1ad8befd0561258f86c8e97da30744">   48</a></span>  <span class="keywordtype">unsigned</span> <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a3e1ad8befd0561258f86c8e97da30744">DisplacementBasedFoepplvonKarmanEquations::self_test</a>()</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">bool</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">passed</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// Check lower-level stuff</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">FiniteElement::self_test</a>() != 0)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">passed</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// Return verdict</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">passed</a>)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  /// Output function:</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">  ///   x,y,w</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a675597ddd788e92dd6fb8d3bfed01c5b">   76</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a7e806927a451e21dc0b2f10cf98a5941">DisplacementBasedFoepplvonKarmanEquations::output</a>(std::ostream&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                                                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// Vector of local coordinates</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="comment">// Vector of Eulerian coordinates</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> x(2);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="comment">// Sigma_{\alpha \beta}</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">DenseMatrix&lt;double&gt;</a> sigma(2, 2);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// E_{\alpha \beta}</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">DenseMatrix&lt;double&gt;</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">strain</a>(2, 2);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="comment">// Tecplot header info</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">// Loop over plot points</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">nplot_points</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> = 0; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a>; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>++)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      <span class="comment">// Get local coordinates of plot point</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">get_s_plot</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      <span class="comment">// Get the Eulerian coordinates</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, 0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// w</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, 1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Laplacian W</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, 2) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Ux</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, 3) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// Uy</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      <span class="comment">//      outfile &lt;&lt; std::endl; // New line</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="comment">// Get the stresses at local coordinate s</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      this-&gt;<a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a4382eef3eb303d5429d6b3edd1d1c6c5">get_stress_and_strain_for_output</a>(s, sigma, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">strain</a>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      <span class="comment">// Output stress</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; sigma(0, 0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// sigma_xx</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; sigma(0, 1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// sigma_xy</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; sigma(1, 1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// sigma_yy</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      <span class="comment">// Output strain</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">strain</a>(0, 0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// E_xx</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">strain</a>(0, 1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// E_xy</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">strain</a>(1, 1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// E_yy</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="comment">// Write tecplot footer (e.g. FE connectivity lists)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_function" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  }</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">  /// C-style output function:</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">  ///   x,y,w</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">  /// nplot points in each coordinate direction</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#ad5c7fa0d55e2eb85d1f305b05be86a97">  140</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a7e806927a451e21dc0b2f10cf98a5941">DisplacementBasedFoepplvonKarmanEquations::output</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">FILE</a>* <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">file_pt</a>,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                                                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="comment">// Vector of local coordinates</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="comment">// Tecplot header info</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">fprintf</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">file_pt</a>, <span class="stringliteral">&quot;%s&quot;</span>, <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>).<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">c_str</a>());</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="comment">// Loop over plot points</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">nplot_points</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> = 0; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a>; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>++)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      <span class="comment">// Get local coordinates of plot point</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">get_s_plot</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">fprintf</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">file_pt</a>, <span class="stringliteral">&quot;%g &quot;</span>, <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>));</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>      }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">fprintf</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">file_pt</a>, <span class="stringliteral">&quot;%g \n&quot;</span>, <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>));</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="comment">// Write tecplot footer (e.g. FE connectivity lists)</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_function" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">file_pt</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  }</div>
+</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">  /// Output exact solution</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">  /// Solution is provided via function pointer.</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">  /// Plot at a given number of plot points.</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">  ///   x,y,w_exact</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a43085c764ddc4c1b4676b3e89754f87a">  176</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a43085c764ddc4c1b4676b3e89754f87a">DisplacementBasedFoepplvonKarmanEquations::output_fct</a>(</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    std::ostream&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>,</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>,</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln_pt</a>)</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="comment">// Vector of local coordinates</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="comment">// Vector for coordintes</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> x(2);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="comment">// Tecplot header info</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">tecplot_zone_string</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="comment">// Exact solution Vector (here a scalar)</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="comment">// Vector&lt;double&gt; exact_soln(1);</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>(3);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="comment">// Loop over plot points</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">nplot_points</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> = 0; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">num_plot_points</a>; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>++)</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      <span class="comment">// Get local coordinates of plot point</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">get_s_plot</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iplot</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>, <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      <span class="comment">// Get x position as Vector</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      <span class="comment">// Get exact solution at this point</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      (*exact_soln_pt)(x, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="comment">// Output x,y,w_exact</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>      {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[2] &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="comment">// Write tecplot footer (e.g. FE connectivity lists)</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <a class="code hl_function" href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">write_tecplot_zone_footer</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  }</div>
+</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <span class="comment">//======================================================================</span><span class="comment"></span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">  /// Validate against exact solution</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">  /// Solution is provided via function pointer.</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">  /// Plot error at a given number of plot points.</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">  ///</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment"></span>  <span class="comment">//======================================================================</span></div>
+<div class="foldopen" id="foldopen00229" data-start="{" data-end="}">
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno"><a class="line" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a25b1af4abda24f9e3ab73f04c0ded37c">  229</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a25b1af4abda24f9e3ab73f04c0ded37c">DisplacementBasedFoepplvonKarmanEquations::compute_error</a>(</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    std::ostream&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>,</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_typedef" href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">FiniteElement::SteadyExactSolutionFctPt</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln_pt</a>,</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">error</a>,</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordtype">double</span>&amp; norm)</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="comment">// Initialise</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">error</a> = 0.0;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    norm = 0.0;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="comment">// Vector of local coordinates</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>(2);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="comment">// Vector for coordintes</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> x(2);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="comment">// Find out how many nodes there are in the element</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_node</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">nnode</a>();</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_class" href="classoomph_1_1Shape.html">Shape</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">psi</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_node</a>);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="comment">// Set the value of n_intpt</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_intpt</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a1a4723c4ee3fe4c6404203bb987f804e">integral_pt</a>()-&gt;<a class="code hl_function" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">nweight</a>();</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="comment">// Tecplot</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <span class="stringliteral">&quot;ZONE&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    <span class="comment">// Exact solution vector</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>(3);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="comment">// Loop over the integration points</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ipt</a> = 0; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ipt</a> &lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_intpt</a>; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ipt</a>++)</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      <span class="comment">// Assign values of s</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a1a4723c4ee3fe4c6404203bb987f804e">integral_pt</a>()-&gt;<a class="code hl_function" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">knot</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ipt</a>, <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      }</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <span class="comment">// Get the integral weight</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      <span class="keywordtype">double</span> w = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a1a4723c4ee3fe4c6404203bb987f804e">integral_pt</a>()-&gt;<a class="code hl_function" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">weight</a>(<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ipt</a>);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      <span class="comment">// Get jacobian of mapping</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <span class="keywordtype">double</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">J</a> = <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a089e58d5ad9b8efee637221b0e264563">J_eulerian</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="comment">// Premultiply the weights and the Jacobian</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>      <span class="keywordtype">double</span> W = w * <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">J</a>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      <span class="comment">// Get x position as Vector</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      <a class="code hl_function" href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">interpolated_x</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, x);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      <span class="comment">// Get FE function value</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      <span class="keywordtype">double</span> <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">w_fe</a> = <a class="code hl_function" href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">interpolated_w_fvk</a>(<a class="code hl_variable" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      <span class="comment">// Get exact solution at this point</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      (*exact_soln_pt)(x, <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      <span class="comment">// Output x,y,error</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> = 0; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a> &lt; 2; <a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>++)</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; x[<a class="code hl_variable" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] - <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">w_fe</a> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>      <span class="comment">// Add to error and norm</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      norm += <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] * <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] * W;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">error</a> += (<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] - <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">w_fe</a>) * (<a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">exact_soln</a>[0] - <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">w_fe</a>) * W;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    }</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  }</div>
+</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>} <span class="comment">// namespace oomph</span></div>
+<div class="ttc" id="acfortran_8h_html_ab7123126e4885ef647dd9c6e3807a21c"><div class="ttname"><a href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a></div><div class="ttdeci">static char t char * s</div><div class="ttdef"><b>Definition</b> <a href="cfortran_8h_source.html#l00568">cfortran.h:568</a></div></div>
+<div class="ttc" id="acfortran_8h_html_adb50e893b86b3e55e751a42eab3cba82"><div class="ttname"><a href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a></div><div class="ttdeci">cstr elem_len * i</div><div class="ttdef"><b>Definition</b> <a href="cfortran_8h_source.html#l00603">cfortran.h:603</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_a25b1af4abda24f9e3ab73f04c0ded37c"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a25b1af4abda24f9e3ab73f04c0ded37c">oomph::DisplacementBasedFoepplvonKarmanEquations::compute_error</a></div><div class="ttdeci">void compute_error(std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</div><div class="ttdoc">Get error against and norm of exact solution.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8cc_source.html#l00229">displacement_based_foeppl_von_karman_elements.cc:229</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_a3e1ad8befd0561258f86c8e97da30744"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a3e1ad8befd0561258f86c8e97da30744">oomph::DisplacementBasedFoepplvonKarmanEquations::self_test</a></div><div class="ttdeci">unsigned self_test()</div><div class="ttdoc">Self-test: Return 0 for OK.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8cc_source.html#l00048">displacement_based_foeppl_von_karman_elements.cc:48</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_a43085c764ddc4c1b4676b3e89754f87a"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a43085c764ddc4c1b4676b3e89754f87a">oomph::DisplacementBasedFoepplvonKarmanEquations::output_fct</a></div><div class="ttdeci">void output_fct(std::ostream &amp;outfile, const unsigned &amp;n_plot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</div><div class="ttdoc">Output exact soln: x,y,w_exact at n_plot^DIM plot points.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8cc_source.html#l00176">displacement_based_foeppl_von_karman_elements.cc:176</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_a4382eef3eb303d5429d6b3edd1d1c6c5"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a4382eef3eb303d5429d6b3edd1d1c6c5">oomph::DisplacementBasedFoepplvonKarmanEquations::get_stress_and_strain_for_output</a></div><div class="ttdeci">void get_stress_and_strain_for_output(const Vector&lt; double &gt; &amp;s, DenseMatrix&lt; double &gt; &amp;sigma, DenseMatrix&lt; double &gt; &amp;strain)</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8h_source.html#l00371">displacement_based_foeppl_von_karman_elements.h:371</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_a7e806927a451e21dc0b2f10cf98a5941"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#a7e806927a451e21dc0b2f10cf98a5941">oomph::DisplacementBasedFoepplvonKarmanEquations::output</a></div><div class="ttdeci">void output(std::ostream &amp;outfile)</div><div class="ttdoc">Output with default number of plot points.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8h_source.html#l00130">displacement_based_foeppl_von_karman_elements.h:130</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_aac329f225fd5f309b23da3299fefdec1"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#aac329f225fd5f309b23da3299fefdec1">oomph::DisplacementBasedFoepplvonKarmanEquations::interpolated_w_fvk</a></div><div class="ttdeci">double interpolated_w_fvk(const Vector&lt; double &gt; &amp;s, unsigned index=0) const</div><div class="ttdoc">Return FE representation of function value w_fvk(s) at local coordinate s (by default - if index &gt; 0,...</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8h_source.html#l00658">displacement_based_foeppl_von_karman_elements.h:658</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_adf6cf725968deb5c555c1276cc51d83a"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#adf6cf725968deb5c555c1276cc51d83a">oomph::DisplacementBasedFoepplvonKarmanEquations::Default_Nu_Value</a></div><div class="ttdeci">static double Default_Nu_Value</div><div class="ttdoc">Default value for Poisson's ratio.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8h_source.html#l00756">displacement_based_foeppl_von_karman_elements.h:756</a></div></div>
+<div class="ttc" id="aclassoomph_1_1DisplacementBasedFoepplvonKarmanEquations_html_afbcb94cced9726c21000fd66088469d7"><div class="ttname"><a href="classoomph_1_1DisplacementBasedFoepplvonKarmanEquations.html#afbcb94cced9726c21000fd66088469d7">oomph::DisplacementBasedFoepplvonKarmanEquations::Default_Physical_Constant_Value</a></div><div class="ttdeci">static double Default_Physical_Constant_Value</div><div class="ttdoc">Default value for physical constants.</div><div class="ttdef"><b>Definition</b> <a href="displacement__based__foeppl__von__karman__elements_8h_source.html#l00759">displacement_based_foeppl_von_karman_elements.h:759</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a089e58d5ad9b8efee637221b0e264563"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a089e58d5ad9b8efee637221b0e264563">oomph::FiniteElement::J_eulerian</a></div><div class="ttdeci">virtual double J_eulerian(const Vector&lt; double &gt; &amp;s) const</div><div class="ttdoc">Return the Jacobian of mapping from local to global coordinates at local position s.</div><div class="ttdef"><b>Definition</b> <a href="elements_8cc_source.html#l04133">elements.cc:4133</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a1a4723c4ee3fe4c6404203bb987f804e"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a1a4723c4ee3fe4c6404203bb987f804e">oomph::FiniteElement::integral_pt</a></div><div class="ttdeci">Integral *const &amp; integral_pt() const</div><div class="ttdoc">Return the pointer to the integration scheme (const version)</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l01967">elements.h:1967</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a3193df31f9ce38e0609d17a8ffb386c6"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a3193df31f9ce38e0609d17a8ffb386c6">oomph::FiniteElement::tecplot_zone_string</a></div><div class="ttdeci">virtual std::string tecplot_zone_string(const unsigned &amp;nplot) const</div><div class="ttdoc">Return string for tecplot zone header (when plotting nplot points in each &quot;coordinate direction&quot;)</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l03165">elements.h:3165</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a5a9c1ead9819cd17603096e63087020f"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a5a9c1ead9819cd17603096e63087020f">oomph::FiniteElement::interpolated_x</a></div><div class="ttdeci">virtual double interpolated_x(const Vector&lt; double &gt; &amp;s, const unsigned &amp;i) const</div><div class="ttdoc">Return FE interpolated coordinate x[i] at local coordinate s.</div><div class="ttdef"><b>Definition</b> <a href="elements_8cc_source.html#l03992">elements.cc:3992</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a6219ed269a6d89b5aa14659cce48905a"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a6219ed269a6d89b5aa14659cce48905a">oomph::FiniteElement::nnode</a></div><div class="ttdeci">unsigned nnode() const</div><div class="ttdoc">Return the number of nodes.</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l02214">elements.h:2214</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a690fd33af26cc3e84f39bba6d5a85202"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a690fd33af26cc3e84f39bba6d5a85202">oomph::FiniteElement::SteadyExactSolutionFctPt</a></div><div class="ttdeci">void(* SteadyExactSolutionFctPt)(const Vector&lt; double &gt; &amp;, Vector&lt; double &gt; &amp;)</div><div class="ttdoc">Function pointer for function that computes vector-valued steady &quot;exact solution&quot;  as .</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l01763">elements.h:1763</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a82da844fd3ebb2005842464cdc148a03"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a82da844fd3ebb2005842464cdc148a03">oomph::FiniteElement::get_s_plot</a></div><div class="ttdeci">virtual void get_s_plot(const unsigned &amp;i, const unsigned &amp;nplot, Vector&lt; double &gt; &amp;s, const bool &amp;shifted_to_interior=false) const</div><div class="ttdoc">Get cector of local coordinates of plot point i (when plotting nplot points in each &quot;coordinate direc...</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l03152">elements.h:3152</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_a8ed563c7ff0cfd8bafdbb0132b388106"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#a8ed563c7ff0cfd8bafdbb0132b388106">oomph::FiniteElement::nplot_points</a></div><div class="ttdeci">virtual unsigned nplot_points(const unsigned &amp;nplot) const</div><div class="ttdoc">Return total number of plot points (when plotting nplot points in each &quot;coordinate direction&quot;)</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l03190">elements.h:3190</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_ac3987a5ead7dc20c63d86b333466e2b5"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#ac3987a5ead7dc20c63d86b333466e2b5">oomph::FiniteElement::write_tecplot_zone_footer</a></div><div class="ttdeci">virtual void write_tecplot_zone_footer(std::ostream &amp;outfile, const unsigned &amp;nplot) const</div><div class="ttdoc">Add tecplot zone &quot;footer&quot; to output stream (when plotting nplot points in each &quot;coordinate direction&quot;...</div><div class="ttdef"><b>Definition</b> <a href="elements_8h_source.html#l03178">elements.h:3178</a></div></div>
+<div class="ttc" id="aclassoomph_1_1FiniteElement_html_af94c5a5e22175d5420b33b3b79e46ed3"><div class="ttname"><a href="classoomph_1_1FiniteElement.html#af94c5a5e22175d5420b33b3b79e46ed3">oomph::FiniteElement::self_test</a></div><div class="ttdeci">virtual unsigned self_test()</div><div class="ttdoc">Self-test: Check inversion of element &amp; do self-test for GeneralisedElement. Return 0 if OK.</div><div class="ttdef"><b>Definition</b> <a href="elements_8cc_source.html#l04470">elements.cc:4470</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Integral_html_a1a2122f99a87c18649bafdd9ed739758"><div class="ttname"><a href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot</a></div><div class="ttdeci">virtual double knot(const unsigned &amp;i, const unsigned &amp;j) const =0</div><div class="ttdoc">Return local coordinate s[j] of i-th integration point.</div></div>
+<div class="ttc" id="aclassoomph_1_1Integral_html_a1a270de9d99a1fcf1d25a6c1017f65fa"><div class="ttname"><a href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight</a></div><div class="ttdeci">virtual unsigned nweight() const =0</div><div class="ttdoc">Return the number of integration points of the scheme.</div></div>
+<div class="ttc" id="aclassoomph_1_1Integral_html_ac65335e2aab120b285b3d6c294507b06"><div class="ttname"><a href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight</a></div><div class="ttdeci">virtual double weight(const unsigned &amp;i) const =0</div><div class="ttdoc">Return weight of i-th integration point.</div></div>
+<div class="ttc" id="aclassoomph_1_1Shape_html"><div class="ttname"><a href="classoomph_1_1Shape.html">oomph::Shape</a></div><div class="ttdoc">A Class for shape functions. In simple cases, the shape functions have only one index that can be tho...</div><div class="ttdef"><b>Definition</b> <a href="shape_8h_source.html#l00075">shape.h:76</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TAdvectionDiffusionReactionElement_html"><div class="ttname"><a href="classoomph_1_1TAdvectionDiffusionReactionElement.html">oomph::TAdvectionDiffusionReactionElement</a></div><div class="ttdoc">TAdvectionDiffusionReactionElement&lt;NREAGENT,DIM,NNODE_1D&gt; elements are isoparametric triangular DIM-d...</div><div class="ttdef"><b>Definition</b> <a href="Tadvection__diffusion__reaction__elements_8h_source.html#l00062">Tadvection_diffusion_reaction_elements.h:66</a></div></div>
+<div class="ttc" id="adisplacement__based__foeppl__von__karman__elements_8h_html"><div class="ttname"><a href="displacement__based__foeppl__von__karman__elements_8h.html">displacement_based_foeppl_von_karman_elements.h</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdoc">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1).</div><div class="ttdef"><b>Definition</b> <a href="advection__diffusion__elements_8cc_source.html#l00029">advection_diffusion_elements.cc:30</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:47
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

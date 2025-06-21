@@ -1,0 +1,166 @@
+\doxysection{Global\+\_\+\+Parameters Namespace Reference}
+\hypertarget{namespaceGlobal__Parameters}{}\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
+
+
+Namespace for physical parameters.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobal__Parameters_a655abf819eb3045dac883f2b7073ba22}{is\+\_\+on\+\_\+fsi\+\_\+boundary}} (Node \texorpdfstring{$\ast$}{*}nod\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Boolean to identify if node is on fsi boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Re}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}} =0.\+0
+\begin{DoxyCompactList}\small\item\em FSI parameter. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Constitutive law for the solid (and pseudo-\/solid) mechanics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for physical parameters. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}\label{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e} 
+\index{Global\_Parameters@{Global\_Parameters}!gravity@{gravity}}
+\index{gravity@{gravity}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{gravity()}{gravity()}}
+{\footnotesize\ttfamily void Global\+\_\+\+Parameters\+::gravity (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Non-\/dimensional gravity as body force. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00055}{55}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00052}{Gravity}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00335}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Unstructured\+FSIProblem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a655abf819eb3045dac883f2b7073ba22}\label{namespaceGlobal__Parameters_a655abf819eb3045dac883f2b7073ba22} 
+\index{Global\_Parameters@{Global\_Parameters}!is\_on\_fsi\_boundary@{is\_on\_fsi\_boundary}}
+\index{is\_on\_fsi\_boundary@{is\_on\_fsi\_boundary}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{is\_on\_fsi\_boundary()}{is\_on\_fsi\_boundary()}}
+{\footnotesize\ttfamily bool Global\+\_\+\+Parameters\+::is\+\_\+on\+\_\+fsi\+\_\+boundary (\begin{DoxyParamCaption}\item[{Node \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Boolean to identify if node is on fsi boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00070}{70}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00185}{Fluid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Fluid\+Triangle\+Mesh()}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00119}{My\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+My\+Solid\+Triangle\+Mesh()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}\label{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2} 
+\index{Global\_Parameters@{Global\_Parameters}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily Constitutive\+Law\texorpdfstring{$\ast$}{*} Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt =0}
+
+
+
+Constitutive law for the solid (and pseudo-\/solid) mechanics. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00067}{67}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{main()}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00335}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Unstructured\+FSIProblem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}\label{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c} 
+\index{Global\_Parameters@{Global\_Parameters}!Gravity@{Gravity}}
+\index{Gravity@{Gravity}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Gravity}{Gravity}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Gravity =0.\+0}
+
+
+
+Non-\/dim gravity. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00052}{52}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00055}{gravity()}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{main()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661} 
+\index{Global\_Parameters@{Global\_Parameters}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Nu =0.\+3}
+
+
+
+Pseudo-\/solid Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00064}{64}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{main()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}\label{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1} 
+\index{Global\_Parameters@{Global\_Parameters}!Q@{Q}}
+\index{Q@{Q}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::Q =0.\+0}
+
+
+
+FSI parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00049}{49}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00638}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::create\+\_\+fsi\+\_\+traction\+\_\+elements()}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{main()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}\label{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06} 
+\index{Global\_Parameters@{Global\_Parameters}!Re@{Re}}
+\index{Re@{Re}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Re}{Re}}
+{\footnotesize\ttfamily double Global\+\_\+\+Parameters\+::\+Re =0.\+0}
+
+
+
+Reynolds number. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00046}{46}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{main()}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00335}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::\+Unstructured\+FSIProblem()}}.
+

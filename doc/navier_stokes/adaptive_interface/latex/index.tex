@@ -1,0 +1,1301 @@
+\chapter{Example problem\+: A rigid cylinder rotating in a viscous fluid beneath a free surface.}
+\hypertarget{index}{}\label{index}\index{Example problem: A rigid cylinder rotating in a viscous fluid beneath a free surface.@{Example problem: A rigid cylinder rotating in a viscous fluid beneath a free surface.}}
+Detailed documentation to be written. Here\textquotesingle{}s the driver code...
+
+(This problem is solved using spatially adaptive elements with a pseudo-\/elastic remesh strategy)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//A\ driver\ program\ to\ solve\ the\ problem\ of\ a\ cylinder\ rotating\ near\ a\ free}}
+\DoxyCodeLine{\textcolor{comment}{//surface}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}navier\_stokes.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}solid.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}fluid\_interface.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pseudo-\/solid\ Poisson\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Direction\ of\ the\ wall\ normal\ vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ that\ specifies\ the\ wall\ unit\ normal}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{wall\_unit\_normal\_fct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{x}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{normal}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{normal}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//My\ own\ Ellipse\ class}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}\ :\ \textcolor{keyword}{public}\ GeomObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{//Internal\ data\ to\ store\ the\ centre\ and\ semi-\/axes}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ *\mbox{\hyperlink{classGeneralEllipse_a94a4648c20c4a51e2e9599634e32f9f1}{centre\_x\_pt}},\ *\mbox{\hyperlink{classGeneralEllipse_a64b87c57aa9b725a9099fb64aa2586dd}{centre\_y\_pt}},\ *\mbox{\hyperlink{classGeneralEllipse_ab7accdeac49aacf9f6a1b2fc935e9692}{a\_pt}},\ *\mbox{\hyperlink{classGeneralEllipse_ae9fda2830674311985eaf2fddeeec1e3}{b\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Constructor}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&centre\_x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&centre\_y,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{a}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}})}
+\DoxyCodeLine{\ \ :\ GeomObject(1,2),\ \mbox{\hyperlink{classGeneralEllipse_a94a4648c20c4a51e2e9599634e32f9f1}{centre\_x\_pt}}(0),\ \mbox{\hyperlink{classGeneralEllipse_a64b87c57aa9b725a9099fb64aa2586dd}{centre\_y\_pt}}(0),\ \mbox{\hyperlink{classGeneralEllipse_ab7accdeac49aacf9f6a1b2fc935e9692}{a\_pt}}(0),\ \mbox{\hyperlink{classGeneralEllipse_ae9fda2830674311985eaf2fddeeec1e3}{b\_pt}}(0)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classGeneralEllipse_a94a4648c20c4a51e2e9599634e32f9f1}{centre\_x\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}}(centre\_x);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classGeneralEllipse_a64b87c57aa9b725a9099fb64aa2586dd}{centre\_y\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}}(centre\_y);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classGeneralEllipse_ab7accdeac49aacf9f6a1b2fc935e9692}{a\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{a}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classGeneralEllipse_ae9fda2830674311985eaf2fddeeec1e3}{b\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Destructor}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classGeneralEllipse_a3ac5c17cf8c4998f1b74913860cb3bb9}{\string~GeneralEllipse}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classGeneralEllipse_a94a4648c20c4a51e2e9599634e32f9f1}{centre\_x\_pt}};}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classGeneralEllipse_a64b87c57aa9b725a9099fb64aa2586dd}{centre\_y\_pt}};}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classGeneralEllipse_ab7accdeac49aacf9f6a1b2fc935e9692}{a\_pt}};}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classGeneralEllipse_ae9fda2830674311985eaf2fddeeec1e3}{b\_pt}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Return\ the\ position}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGeneralEllipse_a85e975c70441a9c9c711b5e27d124bff}{position}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}[0]\ =\ *\mbox{\hyperlink{classGeneralEllipse_a94a4648c20c4a51e2e9599634e32f9f1}{centre\_x\_pt}}\ +\ *\mbox{\hyperlink{classGeneralEllipse_ab7accdeac49aacf9f6a1b2fc935e9692}{a\_pt}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{cos}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}[1]\ =\ *\mbox{\hyperlink{classGeneralEllipse_a64b87c57aa9b725a9099fb64aa2586dd}{centre\_y\_pt}}\ +\ *\mbox{\hyperlink{classGeneralEllipse_ae9fda2830674311985eaf2fddeeec1e3}{b\_pt}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{sin}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//A\ Domain}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}\ :\ \textcolor{keyword}{public}\ Domain}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a0b5aefe768267a1dff936ab491bee938}{centre\_x}},\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_ac461297e0b08287a1909f245569c77f0}{centre\_y}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a27c21e714221edda1d21995f941e74e3}{Lower\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a04206f6c72189356d5eecf32b81595f4}{Lower\_right}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}}[2];}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62}{Upper\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a87b1a618cc0116816b5460f00f3875a6}{Upper\_right}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}}[2];}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a389bb3200199cf6098461f884e1b4d09}{Lower\_centre\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a1f1363c5343672e04be3b9f3285b0a25}{Lower\_centre\_right}}[2];}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a231d89466e433b65d0a6fd74b29b4609}{Upper\_centre\_left}}[2],\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a21972e49d0da0a5c1cbb89422b8bcfc3}{Upper\_centre\_right}}[2];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Geometric\ object\ that\ represents\ the\ rotating\ cylinder}}
+\DoxyCodeLine{\textcolor{comment}{}\ GeomObject*\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Constructor,\ pass\ the\ length\ and\ height\ of\ the\ domain}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Length,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&Height)}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a0b5aefe768267a1dff936ab491bee938}{centre\_x}}\ =\ Length/2.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_ac461297e0b08287a1909f245569c77f0}{centre\_y}}\ =\ Height/2.0;\ \textcolor{comment}{//3.0*Height/4.0;}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Create\ a\ new\ ellipse\ object\ to\ represent\ the\ rotating\ cylinder}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a0b5aefe768267a1dff936ab491bee938}{centre\_x}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_ac461297e0b08287a1909f245569c77f0}{centre\_y}},0.2*Height,0.2*Height);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ some\ basic\ coordinates}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a27c21e714221edda1d21995f941e74e3}{Lower\_left}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a27c21e714221edda1d21995f941e74e3}{Lower\_left}}[1]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62}{Upper\_left}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62}{Upper\_left}}[1]\ =\ Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a04206f6c72189356d5eecf32b81595f4}{Lower\_right}}[0]\ =\ Length;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a04206f6c72189356d5eecf32b81595f4}{Lower\_right}}[1]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a87b1a618cc0116816b5460f00f3875a6}{Upper\_right}}[0]\ =\ Length;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a87b1a618cc0116816b5460f00f3875a6}{Upper\_right}}[1]\ =\ Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Let's\ just\ do\ some\ mid\ coordinates}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}}[0]\ =\ Length/10.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}}[1]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}}[0]\ =\ Length/10.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}}[1]\ =\ Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}(1),\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}(2);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ -\/3.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a389bb3200199cf6098461f884e1b4d09}{Lower\_centre\_left}}[0]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[0];}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a389bb3200199cf6098461f884e1b4d09}{Lower\_centre\_left}}[1]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[1];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ 3.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a231d89466e433b65d0a6fd74b29b4609}{Upper\_centre\_left}}[0]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[0];}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a231d89466e433b65d0a6fd74b29b4609}{Upper\_centre\_left}}[1]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}}[0]\ =\ 9.0*Length/10.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}}[1]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}}[0]\ =\ 9.0*Length/10.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}}[1]\ =\ Height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ -\/1.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a1f1363c5343672e04be3b9f3285b0a25}{Lower\_centre\_right}}[0]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[0];}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a1f1363c5343672e04be3b9f3285b0a25}{Lower\_centre\_right}}[1]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[1];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ 1.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a21972e49d0da0a5c1cbb89422b8bcfc3}{Upper\_centre\_right}}[0]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[0];}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a21972e49d0da0a5c1cbb89422b8bcfc3}{Upper\_centre\_right}}[1]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[1];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//There\ are\ six\ macro\ elements}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Macro\_element\_pt}}.resize(6);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ macro\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<6;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Macro\_element\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}]=\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{QMacroElement<2>}}(\textcolor{keyword}{this},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}});\}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Destructor:\ Empty;\ cleanup\ done\ in\ base\ class}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa204e83ef6332f121123465f4167d341}{\string~CylinderAndInterfaceDomain}}()\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Private\ little\ interpolation\ problem}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Left}}[2],\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Right}}[2],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}},\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<2;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}]\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Left}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}]\ +\ (\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Right}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}]\ -\/\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Left}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}])*0.5*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}+1.0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Sort\ out\ the\ vector\ representation\ of\ the\ i-\/th\ macro\ element}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain_a6afdef0d863b2833884aed2f571eeb79}{macro\_element\_boundary}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{m}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{QuadTreeNames}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ WARN\_ABOUT\_SUBTLY\_CHANGED\_OOMPH\_INTERFACES}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Warn\ about\ time\ argument\ being\ moved\ to\ the\ front}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibWarning}}(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Order\ of\ function\ arguments\ has\ changed\ between\ versions\ 0.8\ and\ 0.85"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}CylinderAndInterfaceDomain::macro\_element\_boundary(...)"{}},}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}(1);\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Switch\ on\ the\ macro\ element}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{m}})}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Macro\ element\ 0,\ is\ the\ left-\/hand\ film}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62}{Upper\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a27c21e714221edda1d21995f941e74e3}{Lower\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a27c21e714221edda1d21995f941e74e3}{Lower\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62}{Upper\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Macro\ element\ 1,\ is\ immediately\ left\ of\ the\ cylinder}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a231d89466e433b65d0a6fd74b29b4609}{Upper\_centre\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a389bb3200199cf6098461f884e1b4d09}{Lower\_centre\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ 5.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)\ -\/\ 2.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)*0.5*(1.0+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Macro\ element\ 2,\ is\ immediately\ above\ the\ cylinder}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ 3.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)\ -\/\ 2.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)*0.5*(1.0+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a231d89466e433b65d0a6fd74b29b4609}{Upper\_centre\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a01c924b854c98cb5a45ba2d1af43aa46}{Upper\_mid\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a21972e49d0da0a5c1cbb89422b8bcfc3}{Upper\_centre\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Macro\ element\ 3,\ is\ immediately\ right\ of\ the\ cylinder}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a21972e49d0da0a5c1cbb89422b8bcfc3}{Upper\_centre\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a1f1363c5343672e04be3b9f3285b0a25}{Lower\_centre\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ -\/\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)\ +\ 2.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)*0.5*(1.0+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Macro\ element\ 4,\ is\ immediately\ below\ cylinder}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//linear\_interpolate(Lower\_centre\_left,Lower\_centre\_right,s[0],f);}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}}[0]\ =\ -\/3.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)\ +\ 2.0*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan}}(1.0)*0.5*(1.0+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_aa0afda5d24ea33ff58957731e5b7dfd7}{Cylinder\_pt}}-\/>position(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{xi}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a5285785212f1cbcfb3910e87421d831c}{Lower\_mid\_left}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a389bb3200199cf6098461f884e1b4d09}{Lower\_centre\_left}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a1f1363c5343672e04be3b9f3285b0a25}{Lower\_centre\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Macro\ element\ 5,\ is\ right\ film}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{case}\ 5:}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{N}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a87b1a618cc0116816b5460f00f3875a6}{Upper\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{S}}:\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a04206f6c72189356d5eecf32b81595f4}{Lower\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{W}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a390ef76333ff22e7331b37ac7d5412bb}{Lower\_mid\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_afb8019b28889f581f79541d571fb6386}{Upper\_mid\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{E}}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceDomain_acab40651417c703e6b3dc592198c7497}{linear\_interpolate}}(\mbox{\hyperlink{classCylinderAndInterfaceDomain_a04206f6c72189356d5eecf32b81595f4}{Lower\_right}},\mbox{\hyperlink{classCylinderAndInterfaceDomain_a87b1a618cc0116816b5460f00f3875a6}{Upper\_right}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0],\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{f}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Direction\ is\ incorrect:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{direction}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ostringstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Wrong\ domain\ number:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{m}}<<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Now\ I\ need\ to\ actually\ create\ a\ Mesh}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_a5ad81e65a9e9fb4c709a0c84f38216b1}{Height}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \textcolor{comment}{//Pointer\ to\ the\ domain}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}*\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aa7b43c0cab4ffc92bb47813a8e255374}{Domain\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Access\ function\ to\ the\ domain}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}*\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aff1ea3970c93a046d9c02a47eeeca639}{domain\_pt}}()\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aa7b43c0cab4ffc92bb47813a8e255374}{Domain\_pt}};\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Constructor,\ }}
+\DoxyCodeLine{\ \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{TimeStepper}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{time\_stepper\_pt}})\ :\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_a5ad81e65a9e9fb4c709a0c84f38216b1}{Height}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ domain}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aa7b43c0cab4ffc92bb47813a8e255374}{Domain\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classCylinderAndInterfaceDomain}{CylinderAndInterfaceDomain}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Initialise\ the\ node\ counter}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{node\_count}}=0;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Vectors\ Used\ to\ get\ data\ from\ domains}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}(2),\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}(2);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Setup\ temporary\ storage\ for\ the\ Node}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<Node\ *>}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ blindly\ loop\ over\ the\ macro\ elements\ and\ associate\ and\ finite}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//element\ with\ each}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nmacro\_element}}\ =\ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aa7b43c0cab4ffc92bb47813a8e255374}{Domain\_pt}}-\/>nmacro\_element();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nmacro\_element}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Create\ the\ FiniteElement\ and\ add\ to\ the\ Element\_pt\ Vector}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Element\_pt}}.push\_back(\textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Read\ out\ the\ number\ of\ linear\ points\ in\ the\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}))-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{nnode\_1d}}();}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ nodes\ in\ the\ column}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l1}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l1}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l1}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ nodes\ in\ the\ row}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l2}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l2}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l2}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Allocate\ the\ memory\ for\ the\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}.push\_back(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}})-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{construct\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l1}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l2}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{time\_stepper\_pt}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Read\ out\ the\ position\ of\ the\ node\ from\ the\ macro\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[0]\ =\ -\/1.0\ +\ 2.0*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}})\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l2}}/(\textcolor{keywordtype}{double})(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}}[1]\ =\ -\/1.0\ +\ 2.0*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{double}})\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{l1}}/(\textcolor{keywordtype}{double})(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCylinderAndInterfaceMesh_aa7b43c0cab4ffc92bb47813a8e255374}{Domain\_pt}}-\/>macro\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}})-\/>macro\_map(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{s}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ position\ of\ the\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{node\_count}}]-\/>x(0)\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{node\_count}}]-\/>x(1)\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}[1];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Increment\ the\ node\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{node\_count}}++;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//End\ of\ loop\ over\ macro\ elements}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ the\ elements\ have\ been\ created,\ but\ there\ will\ be\ nodes\ in\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//common,\ need\ to\ loop\ over\ the\ common\ edges\ and\ sort\ it,\ by\ reassigning}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//pointers\ and\ the\ deleting\ excess\ nodes}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Read\ out\ the\ number\ of\ linear\ points\ in\ the\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(0))-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{nnode\_1d}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Elements\ 0\ and\ 1}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 1\ to\ be\ the\ same\ as\ in\ element\ 0}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(1)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(0)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 1\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Elements\ 1\ and\ 2}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 2\ to\ be\ the\ same\ as\ in\ element\ 1}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(2)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(1)-\/>node\_pt((\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1-\/\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 2\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[2*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[2*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Elements\ 1\ and\ 4}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 4\ to\ be\ the\ same\ as\ in\ element\ 1}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(4)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(1)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 2\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[4*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[4*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Element\ 2\ and\ 3}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 3\ to\ be\ the\ same\ as\ in\ element\ 2}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(3)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(2)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 3\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[3*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[3*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Element\ 4\ and\ 3}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 3\ to\ be\ the\ same\ as\ in\ element\ 4}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(3)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(4)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 3\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[3*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[3*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//DelaunayEdge\ between\ Element\ 3\ and\ 5}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ nodes\ in\ element\ 5\ to\ be\ the\ same\ as\ in\ element\ 3}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(5)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}})}
+\DoxyCodeLine{\ \ \ \ \ \ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(3)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Remove\ the\ nodes\ in\ element\ 5\ from\ the\ temporaray\ node\ list}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[5*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}];}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[5*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ set\ the\ actual\ true\ nodes}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{node\_count}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]!=0)\ \{\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node\_pt}}.push\_back(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Tmp\_node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]);\}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Finally\ set\ the\ nodes\ on\ the\ boundaries}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{set\_nboundary}}(5);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Left\ hand\ side}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(0)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(3,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Right\ hand\ side}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(5)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(1,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//LH\ part\ of\ lower\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(0)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(0,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//First\ part\ of\ upper\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(0)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(2,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//First\ part\ of\ hole\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(4)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=1;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Middle\ of\ lower\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(4)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(0,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Middle\ of\ upper\ boundary\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(2)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(2,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Next\ part\ of\ hole}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(3)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=1;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Final\ part\ of\ lower\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(5)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(0,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Middle\ of\ upper\ boundary\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(5)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(2,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Next\ part\ of\ hole}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(2)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=1;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Final\ part\ of\ hole}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{finite\_element\_pt}}(1)-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}*(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}-\/1)+\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Np}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_boundary\_node}}(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_node\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ loop\ over\ all\ the\ nodes\ and\ set\ their\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{nnode}}();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Cast\ node\ to\ an\ elastic\ node}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{SolidNode}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}\ =\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{SolidNode}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Node\_pt}}[\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}]);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<2;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>xi(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}})\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>x(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}});\}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Now\ let's\ do\ the\ adaptive\ mesh}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh}}\ :}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}<ELEMENT>,\ \textcolor{keyword}{public}\ RefineableQuadMesh<ELEMENT>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{TimeStepper}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{time\_stepper\_pt}})\ :}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classCylinderAndInterfaceMesh}{CylinderAndInterfaceMesh}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}>(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{time\_stepper\_pt}})\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Nodal\ positions\ etc.\ were\ created\ in\ constructor\ for}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cylinder...<...>.\ Need\ to\ setup\ adaptive\ information.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements\ and\ set\ macro\ element\ pointer}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<6;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{element\_pt}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}))-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{set\_macro\_elem\_pt}}(this-\/>Domain\_pt-\/>macro\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Setup\ quadtree\ forest\ for\ mesh\ refinement}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{setup\_quadtree\_forest}}();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Setup\ the\ boundary\ element\ info}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{setup\_boundary\_element\_info}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor:\ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_ad661ea3bc9100aaac36bc10aab9b2648}{\string~RefineableCylinderAndInterfaceMesh}}()\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_acfa616d36346f557244146d4b2db9197}{Length}},\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3521efd0bfad036e20a6a8ba7e4547f4}{Height}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Constitutive\ law\ used\ to\ determine\ the\ mesh\ deformation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ConstitutiveLaw}}\ *\mbox{\hyperlink{classRefineableRotatingCylinderProblem_a4e832fa2d6e1faafd39425d132d732e2}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Data}}*\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a712d1cdcab28b62e1df830ffe1818009}{Traded\_pressure\_data\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3a7fe3dd801eb1ef71dcf8e4c6a237ef}{Re}},\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a2e47341fa1a71da29907ead94aeb5ec2}{Ca}},\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_acf70c93c4b4db46c1809f6b9f68214ee}{ReInvFr}},\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a253a0d7954a3527bf1410f01080e5c70}{Bo}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aaf1d39e57b4fc4d470b69f01121d93a3}{Omega}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aa476013effb3f9a45cf1e1e2198aad14}{Volume}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a54c8bf3a55597f50087c82ed5f955f5b}{Angle}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a270f2243978a54c8d787cc912168bb90}{G}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ flag\ to\ indicate\ if\ you\ want}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ a\ constant\ source\ function\ or\ the\ tanh\ profile.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af559552a0c8cba56b883cd8b5b283b7f}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a382bc388316b410c45f337558b5ad577}{actions\_before\_newton\_solve}}()\ \{\mbox{\hyperlink{classRefineableRotatingCylinderProblem_acd510f2c06fa3f38d2911781656dbf20}{set\_boundary\_conditions}}();\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Strip\ off\ the\ interface\ before\ adaptation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a705922ef2d96697ea5a110a412db5287}{actions\_before\_adapt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classRefineableRotatingCylinderProblem_a37cc1af7c83c5c1b7ae57f7f434be2f1}{delete\_volume\_constraint\_elements}}();}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classRefineableRotatingCylinderProblem_ada026864153cf9954011bcea592cc5b7}{delete\_free\_surface\_elements}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af914476e487ad5ed623384adb7c68c66}{actions\_after\_adapt}}()\ \{\mbox{\hyperlink{classRefineableRotatingCylinderProblem_a417d18c2584ed1ea38daefe5dd68b4a4}{finish\_problem\_setup}}();\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{rebuild\_global\_mesh}}();\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Complete\ problem\ setup:\ Setup\ element-\/specific\ things\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ (source\ fct\ pointers\ etc.)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a417d18c2584ed1ea38daefe5dd68b4a4}{finish\_problem\_setup}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Access\ function\ for\ the\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh<ELEMENT>}}*\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Access\ function\ for\ surface\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}}*\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Access\ function\ for\ point\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}}*\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af438026e310576c522706dbff92ee750}{Point\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ volume\ constraint\ mesh\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}}*\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_acd510f2c06fa3f38d2911781656dbf20}{set\_boundary\_conditions}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a664bfd373351a401619b06c3494fdcdc}{solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ the\ volume\ constraint\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a2de094b437cba9e9b71dca0afe587d65}{create\_volume\_constraint\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ single\ volume\ constraint\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{VolumeConstraintElement}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{vol\_constraint\_element}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{VolumeConstraintElement}}(\&\mbox{\hyperlink{classRefineableRotatingCylinderProblem_aa476013effb3f9a45cf1e1e2198aad14}{Volume}},\mbox{\hyperlink{classRefineableRotatingCylinderProblem_a712d1cdcab28b62e1df830ffe1818009}{Traded\_pressure\_data\_pt}},0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}}-\/>add\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{vol\_constraint\_element}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ all\ boundaries\ (or\ just\ 1\ and\ 2\ why?)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}}<4;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ How\ many\ bulk\ fluid\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_element}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>nboundary\_element(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ fluid\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_element}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ fluid\ element\ that\ is\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>boundary\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{face\_index}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{b}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineVolumeConstraintBoundingElement<ELEMENT>}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{el\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineVolumeConstraintBoundingElement<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{bulk\_elem\_pt}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{face\_index}});\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ "{}master"{}\ volume\ control\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{el\_pt}}-\/>set\_volume\_constraint\_element(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{vol\_constraint\_element}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}}-\/>add\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{el\_pt}});\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a37cc1af7c83c5c1b7ae57f7f434be2f1}{delete\_volume\_constraint\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_element}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_element}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a3bb79346179cb5ef1dad280530ea24e8}{Volume\_constraint\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a57623d36f2c97d300215c00ac917d449}{create\_free\_surface\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ number\ of\ elements\ adjacent\ to\ upper\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_boundary\_element}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>nboundary\_element(2);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ boundary\ elements\ do\ no\ necessarily\ come\ in\ order,\ so\ we\ will}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//need\ to\ detect\ the\ element\ adjacent\ to\ boundary\ 1.}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ index\ of\ that\ element\ in\ our\ array\ will\ be\ stored\ in\ this\ variable}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//(initialised\ to\ a\ negative\ and\ therefore\ invalid\ number)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{final\_element\_index}}=-\/1;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ elements\ adjacent\ to\ the\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_boundary\_element}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Create\ the\ free\ surface\ element\ (on\ face\ 2)}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{FiniteElement}}\ *\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{free\_surface\_element\_pt}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}}
+\DoxyCodeLine{\ \ \ \ \ \ (\mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>boundary\_element\_pt(2,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_aeb99a895bfdcceea6d13b41df7a59545}{Bulk\_mesh\_pt}}-\/>face\_index\_at\_boundary(2,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Push\ it\ back\ onto\ the\ stack}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>add\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{free\_surface\_element\_pt}});\ \ \ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Check\ whether\ the\ element\ is\ on\ the\ boundary\ 1}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_node}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{free\_surface\_element\_pt}}-\/>nnode();}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Only\ need\ to\ check\ the\ end\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}((\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{free\_surface\_element\_pt}}-\/>node\_pt(0)-\/>is\_on\_boundary(1))\ ||}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{free\_surface\_element\_pt}}-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n\_node}}-\/1)-\/>is\_on\_boundary(1)))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{final\_element\_index}}=\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{oomph\_info}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}}\ <<\ \textcolor{stringliteral}{"{}\ free\ surface\ elements\ assigned"{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{final\_element\_index}}\ ==\ -\/1)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OomphLibError}}(\textcolor{stringliteral}{"{}No\ Surface\ Element\ adjacent\ to\ boundary\ 1\(\backslash\)n"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Make\ the\ edge\ point}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{FiniteElement}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{point\_element\_pt}}=\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ (\mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{final\_element\_index}}))}
+\DoxyCodeLine{\ \ \ \ \ -\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{make\_bounding\_element}}(1);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Add\ it\ to\ the\ stack}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af438026e310576c522706dbff92ee750}{Point\_mesh\_pt}}-\/>add\_element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{point\_element\_pt}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Function\ to\ delete\ the\ free\ surface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_ada026864153cf9954011bcea592cc5b7}{delete\_free\_surface\_elements}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ number\ of\ traction\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree\_surface}}\ =\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ traction\ elements\ are\ ALWAYS?\ stored\ at\ the\ end}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//So\ delete\ and\ remove\ them,\ add\ one\ to\ get\ rid\ of\ the\ constraint}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree\_surface}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a48cc95921f8a03c220609d9666bcf406}{Surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af438026e310576c522706dbff92ee750}{Point\_mesh\_pt}}-\/>element\_pt(0);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_af438026e310576c522706dbff92ee750}{Point\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ adaptive\ Poisson\ problem\ in\ deformable\ fish-\/shaped}}
+\DoxyCodeLine{\textcolor{comment}{///\ domain.\ Pass\ bool\ to\ indicate\ if\ we\ want\ a\ constant\ source}}
+\DoxyCodeLine{\textcolor{comment}{///\ function\ or\ the\ one\ that\ produces\ a\ tanh\ step.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineableRotatingCylinderProblem_aa597c4240ce9affbd7540998167c8f21}{RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}})\ :\ Length(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}}),\ Height(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Re(0.0),\ Ca(0.001),\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReInvFr(0.0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bo(0.0),\ Omega(1.0),\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Volume(12.0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Angle(1.57)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}.resize(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}[0]\ =\ 1.0;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\_Physical\_Variables::Wall\_normal}}[1]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ G.resize(2);}
+\DoxyCodeLine{\ G[0]\ =\ 0.0;\ G[1]\ =\ -\/1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ the\ initial\ value\ of\ the\ ReInvFr\ =\ Bo/Ca}}
+\DoxyCodeLine{\textcolor{comment}{}\ ReInvFr\ =\ Bo/Ca;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Build\ a\ linear\ solver:\ Use\ HSL's\ MA42\ frontal\ solver}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{comment}{//linear\_solver\_pt()\ =\ new\ HSL\_MA42;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ constituive\ law}}
+\DoxyCodeLine{\ Constitutive\_law\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Switch\ off\ full\ doc\ for\ frontal\ solver}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{comment}{//static\_cast<HSL\_MA42*>(linear\_solver\_pt())-\/>disable\_doc\_stats();}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ the\ timestepper\ (no\ timedependence)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Steady<0>}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt=\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableCylinderAndInterfaceMesh<ELEMENT>}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{length}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{height}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Problem::time\_stepper\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Z2ErrorEstimator}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_estimator\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{error\_estimator\_pt}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Refine\ the\ problem\ a\ couple\ of\ times}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{update\_all\_solid\_nodes}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>refine\_uniformly();}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>node\_update(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{update\_all\_solid\_nodes}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>refine\_uniformly();}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>node\_update(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{update\_all\_solid\_nodes}});}
+\DoxyCodeLine{\ \textcolor{comment}{//Bulk\_mesh\_pt-\/>refine\_uniformly();}}
+\DoxyCodeLine{\ \textcolor{comment}{//refine\_uniformly();}}
+\DoxyCodeLine{\ \textcolor{comment}{//refine\_uniformly();}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ elements\ and\ unset\ macro\ element\ pointer}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nelement}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nelement}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{e}}))-\/>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{set\_macro\_elem\_pt}}(0);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//The\ external\ pressure\ is\ a\ piece\ of\ global\ data}}
+\DoxyCodeLine{\ Traded\_pressure\_data\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Data}}(1);}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_global\_data}}(Traded\_pressure\_data\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}};}
+\DoxyCodeLine{\ Point\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}};}
+\DoxyCodeLine{\ Volume\_constraint\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Mesh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ finish\_problem\_setup();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_sub\_mesh}}(Point\_mesh\_pt);}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{add\_sub\_mesh}}(Volume\_constraint\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{oomph\_info}}\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{assign\_eqn\_numbers}}()\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Complete\ build\ of\ Poisson\ problem:}}
+\DoxyCodeLine{\textcolor{comment}{///\ Loop\ over\ elements\ and\ setup\ pointers\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a417d18c2584ed1ea38daefe5dd68b4a4}{RefineableRotatingCylinderProblem<ELEMENT>::finish\_problem\_setup}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ sort\ out\ the\ free\ surface}}
+\DoxyCodeLine{\ this-\/>create\_free\_surface\_elements();}
+\DoxyCodeLine{\ \textcolor{comment}{//Create\ the\ volume\ constraint\ elements}}
+\DoxyCodeLine{\ this-\/>create\_volume\_constraint\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Pin\ bottom\ and\ cylinder}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_bound}}\ =\ Bulk\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_bound}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}}+=4)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ibound}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Pin\ u\ and\ v\ on\ LHS}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin(1);}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Pin\ u\ and\ v\ on\ RHS}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{FluidInterfaceBoundingElement}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ (Point\_mesh\_pt-\/>element\_pt(0))-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{set\_contact\_angle}}(\&Angle);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{FluidInterfaceBoundingElement}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ (Point\_mesh\_pt-\/>element\_pt(0))-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ca\_pt}}()\ =\ \&Ca;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{FluidInterfaceBoundingElement}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ (Point\_mesh\_pt-\/>element\_pt(0))-\/>}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{wall\_unit\_normal\_fct\_pt}}()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{Global\_Physical\_Variables::wall\_unit\_normal\_fct}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Pin\ one\ pressure}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(0))-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{fix\_pressure}}(0,0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Loop\ over\ the\ lower\ boundary\ and\ pin\ nodal\ positions\ in\ both\ directions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Loop\ over\ the\ RHS\ side\ and\ pin\ in\ x\ and\ y}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,inod)-\/>pin\_position(1);}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ LHS\ side\ and\ pin\ in\ x}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,inod)-\/>pin\_position(1);}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ cylinder\ and\ pin\ nodal\ positions\ in\ both\ directions}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}}=\ Bulk\_mesh\_pt-\/>nboundary\_node(4);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{num\_nod}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{inod}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Find\ number\ of\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfluid}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{comment}{//Find\ the\ number\ of\ free\ surface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfluid}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ FiniteElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}\ *\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}));}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>re\_pt()\ =\ \&Re;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>re\_invfr\_pt()\ =\ \&ReInvFr;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>g\_pt()\ =\ \&G;}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Assign\ the\ mesh\ deformation\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>constitutive\_law\_pt()\ =\ Constitutive\_law\_pt;}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ the\ free\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ FiniteElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}\ *\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ \ (Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Set\ the\ Capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>ca\_pt()\ =\ \&Ca;}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Pass\ the\ Data\ item\ that\ contains\ the\ external\ pressure}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>set\_external\_pressure\_data(this-\/>\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{global\_data\_pt}}(0));}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_acd510f2c06fa3f38d2911781656dbf20}{RefineableRotatingCylinderProblem<ELEMENT>::set\_boundary\_conditions}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Only\ bother\ to\ set\ non-\/zero\ velocity\ on\ the\ cylinder}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(4);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ x\ and\ y}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{x}}\ =\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})-\/>x(0);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{y}}\ =\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ find\ the\ vector\ distance\ to\ the\ centre}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_x}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{x}}\ -\/\ Bulk\_mesh\_pt-\/>\mbox{\hyperlink{classCylinderAndInterfaceMesh_aff1ea3970c93a046d9c02a47eeeca639}{domain\_pt}}()-\/>\mbox{\hyperlink{classCylinderAndInterfaceDomain_a0b5aefe768267a1dff936ab491bee938}{centre\_x}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_y}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{y}}\ -\/\ Bulk\_mesh\_pt-\/>\mbox{\hyperlink{classCylinderAndInterfaceMesh_aff1ea3970c93a046d9c02a47eeeca639}{domain\_pt}}()-\/>\mbox{\hyperlink{classCylinderAndInterfaceDomain_ac461297e0b08287a1909f245569c77f0}{centre\_y}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Calculate\ the\ angle\ and\ radius}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{sqrt}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_x}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_x}}\ +\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_y}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_y}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{theta}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{atan2}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_y}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{len\_x}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ set\ the\ velocities}}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})-\/>set\_value(0,-\/Omega*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{sin}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{theta}}));}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(4,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}})-\/>set\_value(1,\ Omega*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{r}}*\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{cos}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{theta}}));}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableRotatingCylinderProblem_a664bfd373351a401619b06c3494fdcdc}{RefineableRotatingCylinderProblem<ELEMENT>::solve}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Newton\_solver\_tolerance}}\ =\ 1.0e-\/8;}
+\DoxyCodeLine{\ \textcolor{comment}{//Document\ the\ solution}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ofstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filenamee}}(\textcolor{stringliteral}{"{}input.dat"{}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filenamee}},5);}
+\DoxyCodeLine{\ Surface\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filenamee}},5);}
+\DoxyCodeLine{\ \textcolor{comment}{//Point\_mesh\_pt-\/>output(filenamee,5);}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filenamee}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Solve\ the\ initial\ value\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{newton\_solve}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ofstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}}(\textcolor{stringliteral}{"{}first.dat"{}});\ }
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}},5);\ }
+\DoxyCodeLine{\ Surface\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}},5);\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Point\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Initialise\ the\ value\ of\ the\ arc-\/length}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ds}}=0.001;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::ofstream}}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{trace}}(\textcolor{stringliteral}{"{}trace.dat"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{trace}}\ <<\ Ca\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ ReInvFr\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1)\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ bool\ flag=true,\ fflag=true;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<2;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}}<5)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Decrease\ the\ contact\ angle}}
+\DoxyCodeLine{\ \ \ \ \ Angle\ -\/=\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{newton\_solve}}(2);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//newton\_solve();}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//do\ an\ arc-\/length\ continuation\ step\ in\ Ca}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ds}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{arc\_length\_step\_solve}}(\&Ca,\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ds}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ \ if(flag)}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ //Do\ an\ arc-\/length\ continuation\ step\ in\ ReInvFr}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ ds\ =\ arc\_length\_step\_solve(\&ReInvFr,ds);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ else}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \{}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ //Reset\ arc-\/length\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ if(fflag)\ \{reset\_arc\_length\_parameters();\ fflag=false;\}}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ ds\ =\ 0.001;}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ //Now\ do\ it\ in\ Ca}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ ds\ =\ arc\_length\_step\_solve(\&Ca,ds);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ if(Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1)\ <\ 4.0)}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \{flag=false;\}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{trace}}\ <<\ Ca\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ ReInvFr\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ Angle\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1)\ <<\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh_a2f42954cee8f7ba47d87f842dbdc4cc2}{std::endl}};\ \ \ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{file}}[100];}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{snprintf}}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{file}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{file}}),\ \textcolor{stringliteral}{"{}step\%i.dat"{}},\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{i}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}}.open(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{file}});}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}},5);}
+\DoxyCodeLine{\ \ \ Surface\_mesh\_pt-\/>output(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}},5);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Point\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{filename}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ reset\ the\ values\ of\ the\ lagrange\ multipliers\ and\ the\ xi's}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//An\ updated\ lagrangian\ approach}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ loop\ over\ all\ the\ nodes\ and\ set\ their\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Cast\ node\ to\ an\ elastic\ node}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{SolidNode}}*\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}\ =\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}<2;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}++)\ \{\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>xi(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}})\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>x(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}});\}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ number\ of\ free\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ free\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nfree}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ FiniteElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}\ *\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ (Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{n}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}}\ =\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>nnode();}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Reset\ the\ lagrange\ multipliers}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}=0;\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}<\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{Nnode}};\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}}++)\ \{\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{temp\_pt}}-\/>lagrange(\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{j}})\ =\ 0.0;\}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Document\ the\ solution}}
+\DoxyCodeLine{\ \textcolor{comment}{//filename.open("{}output.dat"{});}}
+\DoxyCodeLine{\ \textcolor{comment}{//Bulk\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{\ \textcolor{comment}{//filename.close();}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{trace}}.close();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{adaptive__interface_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableRotatingCylinderProblem}{RefineableRotatingCylinderProblem}}}
+\DoxyCodeLine{\ \ \ \ <\mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineablePseudoSolidNodeUpdateElement<RefineableQCrouzeixRaviartElement<2>}},}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{RefineableQPVDElementWithContinuousPressure<2>}}\ >\ >\ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{problem}}(3.0,4.0);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//ofstream\ filename("{}mesh.dat"{});}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//problem.Bulk\_mesh\_pt-\/>output(filename,5);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableCylinderAndInterfaceMesh}{problem}}.solve();}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

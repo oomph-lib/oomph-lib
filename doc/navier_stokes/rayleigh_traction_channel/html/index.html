@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Unsteady flow in a 2D channel, driven by an applied traction</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Unsteady flow in a 2D channel, driven by an applied traction </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we consider a variation of the unsteady 2D channel flow problem considered elsewhere. In the <a href="../../rayleigh_channel/html/index.html">previous example</a> the flow was driven by the imposed wall motion. Here we shall consider the case in which the flow is driven by an applied traction <img class="formulaInl" alt="$ {\bf t}^{[prescribed]}$" src="form_0.png" width="58" height="13"/> which balances the fluid stress so that  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+t_i^{[prescribed]} = \tau_{ij} \ n_j = 
+\left( -p\ \delta_{ij} + 
+\left(\frac{\partial u_i}{\partial x_j} + 
+\frac{\partial u_j}{\partial x_i}\right)\right) n_j
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_1.png" width="340" height="31"/>
+</p>
+<p> along the upper, horizontal boundary of the channel. Here <img class="formulaInl" alt="$ n_j $" src="form_2.png" width="13" height="10"/> is the outward unit normal, <img class="formulaInl" alt="$ \delta_{ij} $" src="form_3.png" width="13" height="14"/> is the Kronecker delta and <img class="formulaInl" alt="$ \tau_{ij} $" src="form_4.png" width="14" height="10"/> the stress tensor. <code>oomph-lib</code> provides traction elements that can be applied along a domain boundary to (weakly) impose the above boundary condition. The traction elements are used in the same way as flux-elements in the <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">Poisson </a> and <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">unsteady heat</a> examples. The section <a class="el" href="index.html#comments">Comments and Exercises</a> at the end of this documents provides more detail on the underlying theory and its implementation in <code>oomph-lib</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We consider the unsteady finite-Reynolds-number flow in a 2D channel that is driven by an applied traction along its upper boundary.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Unsteady flow in a 2D channel, driven by an applied traction.</b> </center><p> Here is a sketch of the problem:</p>
+<div class="image">
+<img src="rayleigh_traction_channel.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p class="intertd">The flow is governed by the 2D unsteady Navier-Stokes equations,</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right),
+ \ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_5.png" width="351" height="31"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0,
+\]" src="form_6.png" width="48" height="29"/>
+</p>
+<p> in the square domain  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}.
+\]" src="form_7.png" width="216" height="31"/>
+</p>
+<p> We apply the Dirichlet (no-slip) boundary condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_8.png" width="155" height="15"/>
+</p>
+<p> on the lower, stationary wall, <img class="formulaInl" alt="$ \partial D_{lower} = 
+\big\{(x_1,x_2) \ | \ x_2=0 \big\} $" src="form_9.png" width="161" height="16"/> and the traction  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mathbf{t}^{[prescribed]}= (\tau(t), 0)
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_10.png" width="175" height="16"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \tau(t)$" src="form_11.png" width="21" height="14"/> is a given function, on the upper boundary, <img class="formulaInl" alt="$ \partial D_{upper} = \big\{(x_1,x_2) \ | \ x_2=1 \big\} $" src="form_12.png" width="163" height="16"/> . As in the <a href="../../rayleigh_channel/html/index.html">previous example</a> we apply periodic boundary conditions on the "left" and "right" boundaries:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}.
+\ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_13.png" width="150" height="15"/>
+</p>
+<p> Initial conditions for the velocities are given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2),
+\]" src="form_14.png" width="164" height="14"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2)$" src="form_15.png" width="61" height="14"/> is given.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><h2><a class="anchor" id="solution"></a>
+An exact, parallel-flow solution</h2>
+<p>We choose the prescribed traction <img class="formulaInl" alt="$ {\bf t}^{[prescribed]} =
+(\tau(t), 0) $" src="form_16.png" width="118" height="16"/> such that the parallel-flow solution  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and
+\ \ \ \ }
+p_{exact}(x_1,x_2,t) = 0,
+\]" src="form_17.png" width="331" height="14"/>
+</p>
+<p> derived in the <a href="../../rayleigh_channel/html/index.html">previous example</a> remains valid. For this purpose we set  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau(t) = \left. \frac{\partial U(x_2,t)}{\partial x_2}\right|_{x_2=1},
+\]" src="form_18.png" width="125" height="34"/>
+</p>
+<p> where  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U(x_2,t) = Re\left\{\frac{e^{i\omega
+t}}{e^{i\lambda}-e^{-i\lambda}}\left(e^{i\lambda y}-e^{-i\lambda y}
+\right)\right\}
+\]" src="form_19.png" width="230" height="33"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lambda = i\sqrt{i\omega Re\, St}.
+\]" src="form_20.png" width="84" height="14"/>
+</p>
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The two animations below show the computed solutions obtained from a spatial discretisation with Taylor-Hood and Crouzeix-Raviart elements, respectively. In both cases we set <img class="formulaInl" alt="$ \omega=2\pi, \ Re =
+ReSt = 10 $" src="form_21.png" width="139" height="13"/> and specified the exact, time-periodic solution as the initial condition, i.e. <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) = {\bf
+u}_{exact}(x_1,x_2,t=0)$" src="form_22.png" width="184" height="14"/> . The computed solutions agree extremely well with the exact solution throughout the simulation.</p>
+<div class="image">
+<img src="velocity_vectors_CR.gif" alt=""/>
+<div class="caption">
+Plot of the velocity field computed with 2D Crouzeix-Raviart elements, starting from the exact, time-periodic solution. </div></div>
+ <div class="image">
+<img src="velocity_vectors_TH.gif" alt=""/>
+<div class="caption">
+Plot of the velocity field computed with 2D Taylor-Hood elements, starting from the exact, time-periodic solution. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+The global parameters</h1>
+<p>As usual, we use a namespace to define the problem parameters, the Reynolds number, <img class="formulaInl" alt="$ Re$" src="form_23.png" width="15" height="10"/>, and the Womersley number, <img class="formulaInl" alt="$ Re\, St$" src="form_24.png" width="30" height="10"/> . We also provide two flags that indicate the length of the run (to allow a short run to be performed when the code is run as a self-test), and the initial condition (allowing a start from <img class="formulaInl" alt="$ {\bf u}_{exact}$" src="form_25.png" width="31" height="9"/> or an impulsive start in which the fluid is initially at rest).</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_namespace=================================================</span></div>
+<div class="line"><span class="comment">/// Namepspace for global parameters</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Womersley = Reynolds times Strouhal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">ReSt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for long/short run: Default =  perform long run</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Long_run_flag</a>=1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for impulsive start: Default = start from exact</span></div>
+<div class="line"><span class="comment"> /// time-periodic solution. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Impulsive_start_flag</a>=0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Namepspace for global parameters.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00042">rayleigh_traction_channel.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a457472b8222bb6bb0d97b2aed78d1ef4"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a></div><div class="ttdeci">unsigned Long_run_flag</div><div class="ttdoc">Flag for long/short run: Default = perform long run.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00051">rayleigh_traction_channel.cc:51</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7a59a32365e87566069e458dc83bd18a"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley = Reynolds times Strouhal.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00048">rayleigh_traction_channel.cc:48</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a9d72e94a9305c6a310940a6a427ebe06"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00045">rayleigh_traction_channel.cc:45</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aec41eb8da4929003e5d78ef4b43c0ed9"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a></div><div class="ttdeci">unsigned Impulsive_start_flag</div><div class="ttdoc">Flag for impulsive start: Default = start from exact time-periodic solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00055">rayleigh_traction_channel.cc:55</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="exact"></a>
+The exact solution</h1>
+<p>We use a second namespace to define the time-periodic, parallel flow <img class="formulaInl" alt="$ {\bf u}_{exact}$" src="form_25.png" width="31" height="9"/>, and the traction <img class="formulaInl" alt="$ {\bf t}^{[prescribed]}$" src="form_0.png" width="58" height="13"/> required to make <img class="formulaInl" alt="$ {\bf u}_{exact}$" src="form_25.png" width="31" height="9"/> a solution of the problem.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_exact_solution=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for exact solution</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceExactSoln.html">ExactSoln</a></div>
+<div class="line">{</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Exact solution of the problem as a vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> y=x[1];</div>
+<div class="line">  <span class="comment">// I=sqrt(-1)</span></div>
+<div class="line">  complex&lt;double&gt; I(0.0,1.0);</div>
+<div class="line">  <span class="comment">// omega</span></div>
+<div class="line">  <span class="keywordtype">double</span> omega=2.0*MathematicalConstants::Pi;</div>
+<div class="line">  <span class="comment">// lambda</span></div>
+<div class="line">  complex&lt;double&gt; lambda(0.0,omega*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>);</div>
+<div class="line">  lambda = I*sqrt(lambda);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Solution</span></div>
+<div class="line">  complex&lt;double&gt; sol(</div>
+<div class="line">   exp(complex&lt;double&gt;(0.0,omega*t)) * </div>
+<div class="line">   (exp(lambda*complex&lt;double&gt;(0.0,y))-exp(lambda*complex&lt;double&gt;(0.0,-y)))</div>
+<div class="line">   /(exp(I*lambda)-exp(-I*lambda)) );</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Extract real part and stick into vector</span></div>
+<div class="line">  u.resize(2);</div>
+<div class="line">  u[0]=real(sol);</div>
+<div class="line">  u[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Traction required at the top boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceExactSoln.html#a2a77269d59d7cf56364f0c3b5ae13b41">prescribed_traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t,</div>
+<div class="line">                          <span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                          <span class="keyword">const</span> Vector&lt;double&gt; &amp;n,</div>
+<div class="line">                          Vector&lt;double&gt;&amp; traction)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> y=x[1];</div>
+<div class="line">  <span class="comment">// I=sqrt(-1)</span></div>
+<div class="line">  complex&lt;double&gt; I(0.0,1.0);</div>
+<div class="line">  <span class="comment">// omega</span></div>
+<div class="line">  <span class="keywordtype">double</span> omega=2.0*MathematicalConstants::Pi;</div>
+<div class="line">  <span class="comment">// lambda</span></div>
+<div class="line">  complex&lt;double&gt; lambda(0.0,omega*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>);</div>
+<div class="line">  lambda = I*sqrt(lambda);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Solution</span></div>
+<div class="line">  complex&lt;double&gt; sol(</div>
+<div class="line">   exp(complex&lt;double&gt;(0.0,omega*t)) * </div>
+<div class="line">   (exp(lambda*complex&lt;double&gt;(0.0,y))+exp(lambda*complex&lt;double&gt;(0.0,-y)))</div>
+<div class="line">   *I*lambda/(exp(I*lambda)-exp(-I*lambda)) );</div>
+<div class="line">   </div>
+<div class="line">  <span class="comment">//Extract real part and stick into vector</span></div>
+<div class="line">  traction.resize(2);</div>
+<div class="line">  traction[0]=real(sol);</div>
+<div class="line">  traction[1]=0.0;</div>
+<div class="line"> } </div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// end of exact_solution</span></div>
+<div class="ttc" id="anamespaceExactSoln_html"><div class="ttname"><a href="namespaceExactSoln.html">ExactSoln</a></div><div class="ttdoc">Namespace for exact solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00063">rayleigh_traction_channel.cc:64</a></div></div>
+<div class="ttc" id="anamespaceExactSoln_html_a2598550281dd62f4160edb3d0b2e5432"><div class="ttname"><a href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;t, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution of the problem as a vector.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00067">rayleigh_traction_channel.cc:67</a></div></div>
+<div class="ttc" id="anamespaceExactSoln_html_a2a77269d59d7cf56364f0c3b5ae13b41"><div class="ttname"><a href="namespaceExactSoln.html#a2a77269d59d7cf56364f0c3b5ae13b41">ExactSoln::prescribed_traction</a></div><div class="ttdeci">void prescribed_traction(const double &amp;t, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;traction)</div><div class="ttdoc">Traction required at the top boundary.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00092">rayleigh_traction_channel.cc:92</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>As in the <a href="../../rayleigh_channel/html/index.html">previous example</a> we use optional command line arguments to specify which mode the code is run in: Either as a short or a long run (indicated by the first command line argument being 0 or 1, respectively), and with initial conditions corresponding to an impulsive start or a start from the time-periodic exact solution (indicated by the second command line argument being 1 or 0, respectively). If no command line arguments are specified the code is run in the default mode, specified by parameter values assigned in the namespace <code><a class="el" href="namespaceGlobal__Parameters.html" title="Namepspace for global parameters.">Global_Parameters</a></code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for Rayleigh-type problem</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="rayleigh__traction__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Convert command line arguments (if any) into flags:</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordflow">if</span> (argc==1)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;No command line arguments specified -- using defaults.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc==3)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Two command line arguments specified:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="comment">// Flag for long run</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a>=atoi(argv[1]);<span class="comment"></span></div>
+<div class="line"><span class="comment">   /// Flag for impulsive start</span></div>
+<div class="line"><span class="comment"></span>   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a>=atoi(argv[2]);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   std::string error_message = </div>
+<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments. Specify none or two.\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Arg1: Long_run_flag [0/1]\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Arg2: Impulsive_start_flag [0/1]\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Long run flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Impulsive start flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a> &lt;&lt; std::endl;</div>
+<div class="ttc" id="arayleigh__traction__channel_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="rayleigh__traction__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for Rayleigh-type problem.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00537">rayleigh_traction_channel.cc:537</a></div></div>
+</div><!-- fragment --><p> Next we set the physical and mesh parameters.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set physical parameters:</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Womersly number = Reynolds number (St = 1)</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a> = 10.0;</div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a> = <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Horizontal length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> lx = 1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Vertical length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> ly = 1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=10;</div>
+</div><!-- fragment --><p> Finally we set up <code>DocInfo</code> objects and solve for both Taylor-Hood elements and Crouzeix-Raviart elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Crouzeix-Raviart elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set up doc info</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_CR&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code hl_class" href="classRayleighTractionProblem.html">RayleighTractionProblem&lt;QCrouzeixRaviartElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; </div>
+<div class="line">   problem(nx,ny,lx,ly);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  problem.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Taylor-Hood elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set up doc info</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code hl_class" href="classRayleighTractionProblem.html">RayleighTractionProblem&lt;QTaylorHoodElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; </div>
+<div class="line">   problem(nx,ny,lx,ly);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  problem.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html"><div class="ttname"><a href="classRayleighTractionProblem.html">RayleighTractionProblem</a></div><div class="ttdoc">Rayleigh-type problem: 2D channel flow driven by traction bc.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00125">rayleigh_traction_channel.cc:126</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class remains similar to that in the <a href="../../rayleigh_channel/html/index.html">previous example</a>. Since we are no longer driving the flow by prescribing a time-periodic tangential velocity at the upper wall, the function <code>actions_before_implicit_timestep()</code> can remain empty.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Rayleigh-type problem: 2D channel flow driven by traction bc</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRayleighTractionProblem.html">RayleighTractionProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in x and y directions and </span></div>
+<div class="line"><span class="comment"> /// lengths</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRayleighTractionProblem.html">RayleighTractionProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">                 <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update before solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#ad8f0e846280b0dd56f90c6d40808d3ea">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#ad85c20559eec76d54ebf666f62507d2e">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before timestep (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#aea3e470265c0e98a8b5bdabedd28eb82">actions_before_implicit_timestep</a>() {}</div>
+<div class="line">   <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Run an unsteady simulation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#a50871474406082ae1c1a1694e69e094b">unsteady_run</a>(DocInfo&amp; doc_info); </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#a451af703b4a6de97b060884ca71c3ef8">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set initial condition (incl previous timesteps) according</span></div>
+<div class="line"><span class="comment"> /// to specified function. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#ad6394f146505e00aeba2fc37f2c75488">set_initial_condition</a>();</div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_a451af703b4a6de97b060884ca71c3ef8"><div class="ttname"><a href="classRayleighTractionProblem.html#a451af703b4a6de97b060884ca71c3ef8">RayleighTractionProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00339">rayleigh_traction_channel.cc:339</a></div></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_a50871474406082ae1c1a1694e69e094b"><div class="ttname"><a href="classRayleighTractionProblem.html#a50871474406082ae1c1a1694e69e094b">RayleighTractionProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(DocInfo &amp;doc_info)</div><div class="ttdoc">Run an unsteady simulation.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00458">rayleigh_traction_channel.cc:458</a></div></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_ad6394f146505e00aeba2fc37f2c75488"><div class="ttname"><a href="classRayleighTractionProblem.html#ad6394f146505e00aeba2fc37f2c75488">RayleighTractionProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00272">rayleigh_traction_channel.cc:272</a></div></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_ad85c20559eec76d54ebf666f62507d2e"><div class="ttname"><a href="classRayleighTractionProblem.html#ad85c20559eec76d54ebf666f62507d2e">RayleighTractionProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00138">rayleigh_traction_channel.cc:138</a></div></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_ad8f0e846280b0dd56f90c6d40808d3ea"><div class="ttname"><a href="classRayleighTractionProblem.html#ad8f0e846280b0dd56f90c6d40808d3ea">RayleighTractionProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00135">rayleigh_traction_channel.cc:135</a></div></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_aea3e470265c0e98a8b5bdabedd28eb82"><div class="ttname"><a href="classRayleighTractionProblem.html#aea3e470265c0e98a8b5bdabedd28eb82">RayleighTractionProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Actions before timestep (empty)</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00141">rayleigh_traction_channel.cc:141</a></div></div>
+</div><!-- fragment --><p> The function <code>create_traction_elements(...)</code> (discussed in more detail below) creates the traction elements and "attaches" them to the specified boundary of the "bulk" mesh.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create traction elements on boundary b of the Mesh pointed</span></div>
+<div class="line"><span class="comment"> /// to by bulk_mesh_pt and add them to the Mesh object pointed to by </span></div>
+<div class="line"><span class="comment"> /// surface_mesh_pt</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_traction_elements(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b, </div>
+<div class="line">                               Mesh* <span class="keyword">const</span> &amp;bulk_mesh_pt,</div>
+<div class="line">                               Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt);</div>
+</div><!-- fragment --><p> The traction boundary condition sets the pressure so the function <code>fix_pressure(...)</code> used in the <a href="../../rayleigh_channel/html/index.html">previous example</a> is no longer required. The problem's private member data contains pointers to the bulk and surface meshes and the output stream that we use to record the time-trace of the solution.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> RectangularQuadMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;surface&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* Surface_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem_class</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We start by building the timestepper, determining its type from the class's second template argument, and pass a pointer to it to the Problem, using the function <code>Problem::add_time_stepper_pt(...)</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Problem constructor</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code hl_function" href="classRayleighTractionProblem.html#a6be21517d8294957f768184a2d51844a">RayleighTractionProblem&lt;ELEMENT,TIMESTEPPER&gt;::RayleighTractionProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Allocate the timestepper</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER); </div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_a6be21517d8294957f768184a2d51844a"><div class="ttname"><a href="classRayleighTractionProblem.html#a6be21517d8294957f768184a2d51844a">RayleighTractionProblem::RayleighTractionProblem</a></div><div class="ttdeci">RayleighTractionProblem(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor: Pass number of elements in x and y directions and lengths.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00179">rayleigh_traction_channel.cc:180</a></div></div>
+</div><!-- fragment --><p> Next we build the periodic bulk mesh,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh with periodic boundary conditions in x direction</span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic_in_x=<span class="keyword">true</span>;</div>
+<div class="line"> Bulk_mesh_pt = </div>
+<div class="line">  <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly,periodic_in_x,</div>
+<div class="line">                                   time_stepper_pt());</div>
+</div><!-- fragment --><p> and the surface mesh,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create &quot;surface mesh&quot; that will contain only the prescribed-traction </span></div>
+<div class="line"> <span class="comment">// elements. The constructor just creates the mesh without</span></div>
+<div class="line"> <span class="comment">// giving it any elements, nodes, etc.</span></div>
+<div class="line"> Surface_mesh_pt = <span class="keyword">new</span> Mesh;</div>
+</div><!-- fragment --><p> and use the function <code>create_traction_elements(...)</code> to populate it with traction elements that attach themselves to the specified boundary (2) of the bulk mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create prescribed-traction elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 2, but add them to a separate mesh.</span></div>
+<div class="line"> create_traction_elements(2,Bulk_mesh_pt,Surface_mesh_pt);</div>
+</div><!-- fragment --><p> We add both sub-meshes to the <code>Problem</code>, using the function <code>Problem::add_sub_mesh(...)</code> and use the function <code>Problem::build_global_mesh()</code> to combine the sub-meshes into the <code>Problem's</code> single, global mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine all submeshes into a single Mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p> We apply Dirichlet boundary conditions where required: No-slip on the stationary, lower wall, at <img class="formulaInl" alt="$ x_2=0 $" src="form_26.png" width="36" height="11"/>, parallel outflow on the left and right boundaries, at <img class="formulaInl" alt="$ x_1=0 $" src="form_27.png" width="36" height="11"/> and <img class="formulaInl" alt="$ x_1=1 $" src="form_28.png" width="36" height="11"/>. No velocity boundary conditions are applied at the "upper" boundary, at <img class="formulaInl" alt="$ x_2=1 $" src="form_29.png" width="36" height="11"/>, where the traction boundary condition is applied.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound=Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=Bulk_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// No slip on bottom</span></div>
+<div class="line">     <span class="comment">// (DO NOT PIN TOP BOUNDARY, SINCE TRACTION DEFINES ITS VELOCITY!)</span></div>
+<div class="line">     <span class="keywordflow">if</span> (ibound==0)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">      }</div>
+<div class="line">     <span class="comment">// Horizontal outflow on the left (and right -- right bc not</span></div>
+<div class="line">     <span class="comment">// strictly necessary because of symmetry)</span></div>
+<div class="line">     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((ibound==1) || (ibound==3))</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p> Next we pass the pointers to the Reynolds and Strouhal numbers, <img class="formulaInl" alt="$ Re $" src="form_30.png" width="15" height="10"/>, <img class="formulaInl" alt="$ Re\, St $" src="form_31.png" width="30" height="10"/>, to the bulk elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_el = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a fluid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a>;</div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> Finally we pass pointers to the applied traction function to the traction elements and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the flux elements to pass pointer to prescribed traction function</span></div>
+<div class="line"> <span class="comment">// and pointer to global time object</span></div>
+<div class="line"> n_el=Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to traction element</span></div>
+<div class="line">   NavierStokesTractionElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span> NavierStokesTractionElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed traction function</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = </div>
+<div class="line">    &amp;<a class="code hl_function" href="namespaceExactSoln.html#a2a77269d59d7cf56364f0c3b5ae13b41">ExactSoln::prescribed_traction</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assgn equation numbers</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="traction"></a>
+Create traction elements</h1>
+<p>The creation of the traction elements is performed exactly as in the <a href="../../../poisson/two_d_poisson_flux_bc2/html/index.html">Poisson </a> and <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">unsteady heat</a> problems with flux boundary conditions, discussed earlier. We obtain pointers to the "bulk" elements that are adjacent to the specified boundary of the bulk mesh from the function <code>Mesh::boundary_element_pt(...)</code>, determine which of the elements' local coordinate(s) are constant along that boundary, and pass these parameters to the constructors of the traction elements which "attach" themselves to the appropriate face of the "bulk" element. Finally, we store the pointers to the newly created traction elements in the surface mesh.</p>
+<div class="fragment"><div class="line"><span class="comment">//============start_of_create_traction_elements==========================</span></div>
+<div class="line"><span class="comment">/// Create Navier-Stokes traction elements on the b-th boundary of the</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Mesh object pointed to by bulk_mesh_pt and add the elements to the </span></div>
+<div class="line"><span class="comment">/// Mesh object pointeed to by surface_mesh_pt.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighTractionProblem.html#a3a94c245abf443c436eb8a94be19a9f9">RayleighTractionProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classRayleighTractionProblem.html#a3a94c245abf443c436eb8a94be19a9f9">create_traction_elements</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b, Mesh* <span class="keyword">const</span> &amp;bulk_mesh_pt,</div>
+<div class="line">                         Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//What is the index of the face of element e along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build the corresponding prescribed-flux element</span></div>
+<div class="line">   NavierStokesTractionElement&lt;ELEMENT&gt;* flux_element_pt = <span class="keyword">new</span> </div>
+<div class="line">    NavierStokesTractionElement&lt;ELEMENT&gt;(bulk_elem_pt,face_index);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the prescribed-flux element to the surface mesh</span></div>
+<div class="line">   surface_mesh_pt-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of loop over bulk elements adjacent to boundary b</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create_traction_elements</span></div>
+<div class="ttc" id="aclassRayleighTractionProblem_html_a3a94c245abf443c436eb8a94be19a9f9"><div class="ttname"><a href="classRayleighTractionProblem.html#a3a94c245abf443c436eb8a94be19a9f9">RayleighTractionProblem::create_traction_elements</a></div><div class="ttdeci">void create_traction_elements(const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Create traction elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the Mes...</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__traction__channel_8cc_source.html#l00424">rayleigh_traction_channel.cc:425</a></div></div>
+</div><!-- fragment --><p>\ </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Initial conditions</h1>
+<p>The function <code>set_initial_conditions(...)</code> remains the same as in the <a href="../../rayleigh_channel/html/index.html#IC">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post processing</h1>
+<p>The function <code>doc_solution(...)</code> remains the same as in the <a href="../../rayleigh_channel/html/index.html#doc">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_run"></a>
+The timestepping loop</h1>
+<p>The function <code>unsteady_run(...)</code> remains the same as in the <a href="../../rayleigh_channel/html/index.html#unsteady_run">previous example</a>, except that the default number of timesteps is increased to 500.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="traction_theory"></a>
+How do the traction elements work?</h2>
+<p>The finite element solution of the Navier-Stokes equations is based on their weak form, obtained by weighting the stress-divergence form of the momentum equations  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+\frac{\partial \tau_{ij}}{\partial x_j},
+ \ \ \ \ \ \ \ \ \ \ (6)
+\]" src="form_32.png" width="224" height="31"/>
+</p>
+<p> with the global test functions <img class="formulaInl" alt="$ \psi_l $" src="form_33.png" width="13" height="13"/>, and integrating by parts to obtain the discrete residuals  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+f_{il} = 
+\int_D \left[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right)  \ \psi_l +
+ \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j}   \right] \, dV -
+\int_{\partial D}  \tau_{ij} \ n_j \ \psi_l \ dS = 0.
+ \ \ \ \ \ \ \ \ \ \ (7)
+\]" src="form_34.png" width="441" height="31"/>
+</p>
+<p> The volume integral in this residual is computed by the "bulk" Navier-Stokes elements. <a href="../../../intro/html/index.html#galerkin">Recall</a> that in the residual for the <img class="formulaInl" alt="$ i $" src="form_35.png" width="5" height="9"/> -th momentum equation, the global test functions <img class="formulaInl" alt="$ \psi_l $" src="form_33.png" width="13" height="13"/> vanish on those parts of the domain boundary <img class="formulaInl" alt="$ \partial D$" src="form_36.png" width="18" height="10"/> where the <img class="formulaInl" alt="$ i $" src="form_35.png" width="5" height="9"/> -th velocity component is prescribed by Dirichlet boundary conditions. On such boundaries, the surface integral in (7) vanishes because <img class="formulaInl" alt="$ \psi_l=0. $" src="form_37.png" width="39" height="13"/> If the velocity on a certain part of the domain boundary, <img class="formulaInl" alt="$ \partial D_{natural} \subset \partial D$" src="form_38.png" width="88" height="13"/>, is not prescribed by Dirichlet boundary conditions and the surface integral over <img class="formulaInl" alt="$ \partial D_{natural} $" src="form_39.png" width="53" height="13"/> is not added to the discrete residual, the velocity degrees of freedom on those boundaries are regarded as unknowns and the "traction-free" (or natural) boundary condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij} \ n_j = 0 \mbox{ \ \ \ on \ \  $\partial D_{natural}$}
+\]" src="form_40.png" width="149" height="14"/>
+</p>
+<p> is "implied". Finally, traction boundary conditions of the form (1) may be applied along a part, <img class="formulaInl" alt="$ \partial D_{traction} \subset \partial D$" src="form_41.png" width="89" height="13"/>, of the domain boundary. The surface integral along this part of the domain boundary is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\int_{\partial D_{traction} }  \tau_{ij} \ n_j \ \psi_l \ dS = 
+\int_{\partial D_{traction} }  t_i^{[prescribed]} \ \psi_l \ dS,
+ \ \ \ \ \ \ \ \ \ \ (8)
+\]" src="form_42.png" width="351" height="31"/>
+</p>
+<p> where <img class="formulaInl" alt="$ t_i^{[prescribed]}  $" src="form_43.png" width="58" height="19"/> is given, and it is this contribution that the traction elements add to the residual of the momentum equations.</p>
+<hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Pin the vertical velocity along the upper boundary, <img class="formulaInl" alt="$ x_2 = 1$" src="form_44.png" width="36" height="11"/>, and compare the results against those obtained with the original version of the code. How does the change affect the velocity field? Why is pressure likely to change?</li>
+<li>Pin the horizontal velocity along the upper boundary, <img class="formulaInl" alt="$ x_2 = 1$" src="form_44.png" width="36" height="11"/>, and start the simulation with an impulsive start. Compare the results against those obtained with the original version of the code and explain your findings, referring to the theory provided in the section <a class="el" href="index.html#traction_theory">How do the traction elements work?</a> .</li>
+<li>Run the code with an impulsive start and confirm that it takes longer for the solution to approach the time-periodic solution than in the <a href="../../rayleigh_channel/html/index.html">previous case</a> where the flow was driven by the wall motion. [Here are some animations of the velocity fields obtained following an impulsive start, for a discretisation with <a href="../figures/velocity_vectors_TH.avi">Taylor-Hood elements</a> and <a href="../figures/velocity_vectors_CR.avi">Crouzeix-Raviart elements</a>.]</li>
+<li>Investigate the effects of applying a non-zero value for <img class="formulaInl" alt="$ t_2
+   $" src="form_45.png" width="10" height="11"/> on the top boundary.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/">demo_drivers/navier_stokes/rayleigh_traction_channel/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.cc">demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

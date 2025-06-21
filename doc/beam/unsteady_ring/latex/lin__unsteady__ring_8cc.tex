@@ -1,0 +1,47 @@
+\doxysection{lin\+\_\+unsteady\+\_\+ring.\+cc File Reference}
+\hypertarget{lin__unsteady__ring_8cc}{}\label{lin__unsteady__ring_8cc}\index{lin\_unsteady\_ring.cc@{lin\_unsteady\_ring.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticRingProblem}{Elastic\+Ring\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Oscillating ring problem\+: Compare small-\/amplitude oscillations against analytical solution of the linearised equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for physical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{lin__unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for ring that performs small-\/amplitude oscillations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Long\+\_\+run\+\_\+flag}} =1
+\begin{DoxyCompactList}\small\item\em Flag for long/short run\+: Default = perform long run. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Fixed\+\_\+timestep\+\_\+flag}} =1
+\begin{DoxyCompactList}\small\item\em Flag for fixed timestep\+: Default = fixed timestep. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Consistent\+\_\+newmark\+\_\+ic}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to decide if to set IC for Newmark directly or consistently \+: No Default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{lin__unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{lin__unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{lin\_unsteady\_ring.cc@{lin\_unsteady\_ring.cc}!main@{main}}
+\index{main@{main}!lin\_unsteady\_ring.cc@{lin\_unsteady\_ring.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for ring that performs small-\/amplitude oscillations. 
+
+Convert command line arguments (if any) into flags\+:
+
+Definition at line \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00412}{412}} of file \mbox{\hyperlink{lin__unsteady__ring_8cc_source}{lin\+\_\+unsteady\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00056}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Consistent\+\_\+newmark\+\_\+ic}}, \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Fixed\+\_\+timestep\+\_\+flag}}, \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00049}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Long\+\_\+run\+\_\+flag}}, and \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00320}{Elastic\+Ring\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run()}}.
+

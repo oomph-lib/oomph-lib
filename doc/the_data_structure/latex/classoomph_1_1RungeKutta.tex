@@ -1,0 +1,174 @@
+\doxysection{oomph\+::Runge\+Kutta\texorpdfstring{$<$}{<} ORDER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RungeKutta}{}\label{classoomph_1_1RungeKutta}\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+
+
+=========================================================== Standard Runge Kutta Timestepping  
+
+
+
+
+{\ttfamily \#include $<$explicit\+\_\+timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Runge\+Kutta\texorpdfstring{$<$}{<} ORDER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1RungeKutta}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017}{Runge\+Kutta}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, set the type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RungeKutta_a0400233d72c77ad154c394478a0cdabb}{Runge\+Kutta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta_a0ae4a1e57762c3742a4461ee0b64b64c}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt)
+\begin{DoxyCompactList}\small\item\em Function that is used to advance time in the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt)
+\begin{DoxyCompactList}\small\item\em Explicit specialisation for fourth-\/order RK scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt)
+\begin{DoxyCompactList}\small\item\em Explicit specialisation for second-\/order RK scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{oomph\+::\+Explicit\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a4b54826f4098eae55da1ee7fd51b634d}{Explicit\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a1e71c44aeb2699d63ba6300b212ad609}{Explicit\+Time\+Stepper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_aeb7796f8074f510f630a7a73dca98886}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a51f659328a57063563b7344c8b9d7737}{\texorpdfstring{$\sim$}{\string~}\+Explicit\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor --- no memory is allocated in this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{oomph\+::\+Explicit\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_aa923e120e84dc7cec56d2a50f5b33421}{Type}}
+\begin{DoxyCompactList}\small\item\em String that indicates the type of the timestepper (e.\+g. "{}\+Runge\+Kutta"{}, etc.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} ORDER$>$\newline
+class oomph\+::\+Runge\+Kutta$<$ ORDER $>$}
+=========================================================== Standard Runge Kutta Timestepping 
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8h_source_l00186}{186}} of file \mbox{\hyperlink{explicit__timesteppers_8h_source}{explicit\+\_\+timesteppers.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017}\label{classoomph_1_1RungeKutta_a31a3f1886f1243e7a7b9fb10f999a017} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!RungeKutta@{RungeKutta}}
+\index{RungeKutta@{RungeKutta}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{RungeKutta()}{RungeKutta()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} ORDER$>$ \\
+\mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$\+::\+Runge\+Kutta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, set the type. 
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8h_source_l00190}{190}} of file \mbox{\hyperlink{explicit__timesteppers_8h_source}{explicit\+\_\+timesteppers.\+h}}.
+
+\Hypertarget{classoomph_1_1RungeKutta_a0400233d72c77ad154c394478a0cdabb}\label{classoomph_1_1RungeKutta_a0400233d72c77ad154c394478a0cdabb} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!RungeKutta@{RungeKutta}}
+\index{RungeKutta@{RungeKutta}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{RungeKutta()}{RungeKutta()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} ORDER$>$ \\
+\mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$\+::\+Runge\+Kutta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RungeKutta_a0ae4a1e57762c3742a4461ee0b64b64c}\label{classoomph_1_1RungeKutta_a0ae4a1e57762c3742a4461ee0b64b64c} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} ORDER$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736}\label{classoomph_1_1RungeKutta_a22ceced74a6c8d7725c915ba8ff8a736} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ 4 $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Explicit specialisation for fourth-\/order RK scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00203}{203}} of file \mbox{\hyperlink{explicit__timesteppers_8cc_source}{explicit\+\_\+timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{explicit__timesteppers_8h_source_l00108}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00116}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00102}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::add\+\_\+to\+\_\+dofs()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00060}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dofs()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00041}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dvaluesdt()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00095}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::set\+\_\+dofs()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00132}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::time()}}.
+
+\Hypertarget{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2}\label{classoomph_1_1RungeKutta_ac989c64573eb79b5d064f7af9bf1ffd2} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ 2 $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Explicit specialisation for second-\/order RK scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00279}{279}} of file \mbox{\hyperlink{explicit__timesteppers_8cc_source}{explicit\+\_\+timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{explicit__timesteppers_8h_source_l00108}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00116}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00102}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::add\+\_\+to\+\_\+dofs()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00060}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dofs()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00041}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dvaluesdt()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00095}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::set\+\_\+dofs()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00132}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::time()}}.
+
+\Hypertarget{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f}\label{classoomph_1_1RungeKutta_a53a492b4190ccd3dfc0b4af35b2c240f} 
+\index{oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::RungeKutta$<$ ORDER $>$@{oomph::RungeKutta$<$ ORDER $>$}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} ORDER$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ORDER}} $>$\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function that is used to advance time in the object. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00190}{190}} of file \mbox{\hyperlink{explicit__timesteppers_8cc_source}{explicit\+\_\+timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{explicit__timesteppers_8h}{explicit\+\_\+timesteppers.\+h}}\item 
+\mbox{\hyperlink{explicit__timesteppers_8cc}{explicit\+\_\+timesteppers.\+cc}}\end{DoxyCompactItemize}

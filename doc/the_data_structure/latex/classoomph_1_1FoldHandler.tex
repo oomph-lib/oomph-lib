@@ -1,0 +1,645 @@
+\doxysection{oomph\+::Fold\+Handler Class Reference}
+\hypertarget{classoomph_1_1FoldHandler}{}\label{classoomph_1_1FoldHandler}\index{oomph::FoldHandler@{oomph::FoldHandler}}
+
+
+A class that is used to assemble the augmented system that defines a fold (saddle-\/node) or limit point. The "{}standard"{} problem must be a function of a global paramter $\lambda$, and a solution is $R(u,\lambda) = 0 $ , where $ u $ are the unknowns in the problem. A limit point is formally specified by the augmented system of size $ 2N+1 $.  
+
+
+
+
+{\ttfamily \#include $<$assembly\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Fold\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FoldHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FoldHandler_add39896d007559f4fb801f1c95e4ab16}{Fold\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: initialise the fold handler, by setting initial guesses for Y, Phi and calculating count. If the system changes, a new fold handler must be constructed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FoldHandler_ac50106424b3fa4e3346231ec41b7a89f}{Fold\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector}})
+\begin{DoxyCompactList}\small\item\em Constructor in which initial eigenvector can be passed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FoldHandler_a0e39e588b48269e4f7272b78fa4b99a7}{Fold\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{normalisation}})
+\begin{DoxyCompactList}\small\item\em Constructor in which initial eigenvector and normalisation can be passed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FoldHandler_ab582d9ac969e0f7779a285d21a6d8e45}{\texorpdfstring{$\sim$}{\string~}\+Fold\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, return the problem to its original state before the augmented system was added. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FoldHandler_af8e766d1faa7867a0161329566865867}{ndof}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Get the number of elemental degrees of freedom. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ieqn\+\_\+local}})
+\begin{DoxyCompactList}\small\item\em Get the global equation number of the local unknown. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}})
+\begin{DoxyCompactList}\small\item\em Get the residuals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix "{}d equation / d variable"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a674cf9fe7c065e54c95813c2baeea84c}{get\+\_\+djacobian\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djac\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6c}{get\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&C, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{product}})
+\begin{DoxyCompactList}\small\item\em Overload the hessian vector product function so that it breaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba}{bifurcation\+\_\+type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indicate that we are tracking a fold bifurcation by returning 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9}{bifurcation\+\_\+parameter\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenfunction}})
+\begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a7718a18444f6e328953dd5d5e73802f8}{solve\+\_\+augmented\+\_\+block\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Set to solve the augmented block system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_abf0c7293014112731f0482e464f4daa3}{solve\+\_\+block\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Set to solve the block system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a506c9a7bb372c6d8799c6dabc9448f46}{solve\+\_\+full\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Solve non-\/block system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{oomph\+::\+Assembly\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AssemblyHandler_af3ab79744dce0b50370defdbf7981691}{Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_abfd15243fce76ce8f1ea0248c700a3f4}{dof\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&dof)
+\begin{DoxyCompactList}\small\item\em Return vector of dofs at time level t in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_afe6002d5703a93b3b147de79508c5719}{dof\+\_\+pt\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Return vector of pointers to dofs in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab61559fc5df46871c1eebd103f7bf08b}{local\+\_\+problem\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the t-\/th level of storage associated with the i-\/th (local) dof stored in the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})
+\begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}{get\+\_\+inner\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product}})
+\begin{DoxyCompactList}\small\item\em Compute the inner products of the given vector of pairs of history values over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}{get\+\_\+inner\+\_\+product\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Compute the vectors that when taken as a dot product with other history values give the inner product over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d997dd1a78ed26c2b99fce}{synchronise}} ()
+\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}{\texorpdfstring{$\sim$}{\string~}\+Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eab20273d36c24fa39780d04503ff186c5}{Full\+\_\+augmented}}
+, \mbox{\hyperlink{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3ea28dfb90a98027e2204ea1872c498454c}{Block\+\_\+J}}
+, \mbox{\hyperlink{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eaf82a4e892f7e8ed53e41dc82acbc92cd}{Block\+\_\+augmented\+\_\+J}}
+ \}
+\begin{DoxyCompactList}\small\item\em A little private enum to determine whether we are solving the block system or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a76ecb78ebc1d48e5511b70660953f02d}{Solve\+\_\+which\+\_\+system}}
+\begin{DoxyCompactList}\small\item\em Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-\/augmented jacobian system (1), a system in which the jacobian is augmented by 1 row and column to ensure that it is non-\/singular (2). See the enum above. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FoldHandler_a2bd14323ca059b1aaef045cb9cc4013b}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}{Ndof}}
+\begin{DoxyCompactList}\small\item\em Store the number of degrees of freedom in the non-\/augmented problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}{Phi}}
+\begin{DoxyCompactList}\small\item\em A constant vector used to ensure that the null vector is not trivial. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}{Y}}
+\begin{DoxyCompactList}\small\item\em Storage for the null vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1FoldHandler_a302fed88ed8dad865616a3d050d385ad}{Count}}
+\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314}{Parameter\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the pointer to the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1FoldHandler_a29d9c39e6a14d2a4cc4e0d7c716579fe}{Augmented\+Block\+Fold\+Linear\+Solver}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is used to assemble the augmented system that defines a fold (saddle-\/node) or limit point. The "{}standard"{} problem must be a function of a global paramter $\lambda$, and a solution is $R(u,\lambda) = 0 $ , where $ u $ are the unknowns in the problem. A limit point is formally specified by the augmented system of size $ 2N+1 $. 
+
+\[ R(u,\lambda) = 0, \] \[ Jy = 0, \] \[\phi\cdot y = 1. \] In the above $ J $ is the usual Jacobian matrix, $ dR/du $, and $ \phi $ is a constant vector that is chosen to ensure that the null vector, $ y $, is not trivial. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00472}{472}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3e}\label{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3e} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{anonymous}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A little private enum to determine whether we are solving the block system or not. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Full\_augmented@{Full\_augmented}!oomph::FoldHandler@{oomph::FoldHandler}}\index{oomph::FoldHandler@{oomph::FoldHandler}!Full\_augmented@{Full\_augmented}}}\Hypertarget{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eab20273d36c24fa39780d04503ff186c5}\label{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eab20273d36c24fa39780d04503ff186c5} 
+Full\+\_\+augmented&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block\_J@{Block\_J}!oomph::FoldHandler@{oomph::FoldHandler}}\index{oomph::FoldHandler@{oomph::FoldHandler}!Block\_J@{Block\_J}}}\Hypertarget{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3ea28dfb90a98027e2204ea1872c498454c}\label{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3ea28dfb90a98027e2204ea1872c498454c} 
+Block\+\_\+J&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block\_augmented\_J@{Block\_augmented\_J}!oomph::FoldHandler@{oomph::FoldHandler}}\index{oomph::FoldHandler@{oomph::FoldHandler}!Block\_augmented\_J@{Block\_augmented\_J}}}\Hypertarget{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eaf82a4e892f7e8ed53e41dc82acbc92cd}\label{classoomph_1_1FoldHandler_a860a661fa02e4f000292fa19ea94df3eaf82a4e892f7e8ed53e41dc82acbc92cd} 
+Block\+\_\+augmented\+\_\+J&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00478}{478}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FoldHandler_add39896d007559f4fb801f1c95e4ab16}\label{classoomph_1_1FoldHandler_add39896d007559f4fb801f1c95e4ab16} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!FoldHandler@{FoldHandler}}
+\index{FoldHandler@{FoldHandler}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{FoldHandler()}{FoldHandler()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Fold\+Handler\+::\+Fold\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: initialise the fold handler, by setting initial guesses for Y, Phi and calculating count. If the system changes, a new fold handler must be constructed. 
+
+Constructor\+: Initialise the fold handler, by setting initial guesses for Y, Phi and calculating Count. If the system changes, a new handler must be constructed. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{864}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{linear__solver_8h_source_l00146}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00137}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8cc_source_l07878}{oomph\+::\+Problem\+::get\+\_\+derivative\+\_\+wrt\+\_\+global\+\_\+parameter()}}, \mbox{\hyperlink{linear__solver_8h_source_l00130}{oomph\+::\+Linear\+Solver\+::is\+\_\+resolve\+\_\+enabled()}}, \mbox{\hyperlink{problem_8h_source_l01486}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00227}{oomph\+::\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ac50106424b3fa4e3346231ec41b7a89f}\label{classoomph_1_1FoldHandler_ac50106424b3fa4e3346231ec41b7a89f} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!FoldHandler@{FoldHandler}}
+\index{FoldHandler@{FoldHandler}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{FoldHandler()}{FoldHandler()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Fold\+Handler\+::\+Fold\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{eigenvector }\end{DoxyParamCaption})}
+
+
+
+Constructor in which initial eigenvector can be passed. 
+
+Constructor in which the eigenvector is passed as an initial guess. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{970}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a0e39e588b48269e4f7272b78fa4b99a7}\label{classoomph_1_1FoldHandler_a0e39e588b48269e4f7272b78fa4b99a7} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!FoldHandler@{FoldHandler}}
+\index{FoldHandler@{FoldHandler}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{FoldHandler()}{FoldHandler()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Fold\+Handler\+::\+Fold\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{eigenvector,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{normalisation }\end{DoxyParamCaption})}
+
+
+
+Constructor in which initial eigenvector and normalisation can be passed. 
+
+Constructor in which the eigenvector and normalisation vector are passed as an initial guess. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{1036}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ab582d9ac969e0f7779a285d21a6d8e45}\label{classoomph_1_1FoldHandler_ab582d9ac969e0f7779a285d21a6d8e45} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!````~FoldHandler@{\texorpdfstring{$\sim$}{\string~}FoldHandler}}
+\index{````~FoldHandler@{\texorpdfstring{$\sim$}{\string~}FoldHandler}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FoldHandler()}{\string~FoldHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Fold\+Handler\+::\texorpdfstring{$\sim$}{\string~}\+Fold\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, return the problem to its original state before the augmented system was added. 
+
+Destructor return the problem to its original (non-\/augmented) state. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{1573}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01486}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9}\label{classoomph_1_1FoldHandler_a0263094e2237dff2f5f677ddcee717d9} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}}
+\index{bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{bifurcation\_parameter\_pt()}{bifurcation\_parameter\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+Fold\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a pointer to the bifurcation parameter in bifurcation tracking problems. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d36a4a2a8a64dab7fe2b}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00584}{584}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba}\label{classoomph_1_1FoldHandler_adb2878f53be92ea2be6cc012cbfc27ba} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!bifurcation\_type@{bifurcation\_type}}
+\index{bifurcation\_type@{bifurcation\_type}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{bifurcation\_type()}{bifurcation\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Fold\+Handler\+::bifurcation\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Indicate that we are tracking a fold bifurcation by returning 1. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4f6cee12006790c11dae}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00577}{577}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead}\label{classoomph_1_1FoldHandler_a30f2973860c13a183d5647a63b0c2ead} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+Fold\+Handler\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the global equation number of the local unknown. 
+
+Return the global equation number associated with local equation number ieqn\+\_\+local. We choose to number the unknowns according to the augmented system. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559cde803d1ba2195b5290}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{1138}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, and \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a674cf9fe7c065e54c95813c2baeea84c}\label{classoomph_1_1FoldHandler_a674cf9fe7c065e54c95813c2baeea84c} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
+\index{get\_djacobian\_dparameter@{get\_djacobian\_dparameter}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_djacobian\_dparameter()}{get\_djacobian\_dparameter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+djacobian\+\_\+dparameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dres\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{djac\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. 
+
+Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks because it should not be required. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342806c167c5d53f014803}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01512}{1512}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6}\label{classoomph_1_1FoldHandler_ad98b98488b683fa3ad9497b662e6e5b6} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
+\index{get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_dresiduals\_dparameter()}{get\_dresiduals\_dparameter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+dresiduals\+\_\+dparameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dres\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. 
+
+Formulate the derivatives of the augmented system with respect to a parameter. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0ad82f98e694eecf270bb}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{1442}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l01033}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01021}{oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c}\label{classoomph_1_1FoldHandler_aca97058722ccc1482ae8180ea8dde74c} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_eigenfunction@{get\_eigenfunction}}
+\index{get\_eigenfunction@{get\_eigenfunction}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_eigenfunction()}{get\_eigenfunction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+eigenfunction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenfunction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d0eb7ceb393e3ae9594f}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{1555}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6c}\label{classoomph_1_1FoldHandler_aa633b80f1ebdb322350c6832fe6c2b6c} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_hessian\_vector\_products@{get\_hessian\_vector\_products}}
+\index{get\_hessian\_vector\_products@{get\_hessian\_vector\_products}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_hessian\_vector\_products()}{get\_hessian\_vector\_products()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+hessian\+\_\+vector\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{Y,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{C,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the hessian vector product function so that it breaks. 
+
+Overload the hessian vector product function so that it breaks because it should not be required. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d23522bb660c4c5207f03}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01533}{1533}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542}\label{classoomph_1_1FoldHandler_ad1bec54a2e0c5bd483ff0bf633bd6542} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the elemental Jacobian matrix "{}d equation / d variable"{}. 
+
+Calculate the elemental Jacobian matrix "{}d equation / d variable"{} for the augmented system. ALICE
+
+ALICE
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{1244}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01171}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01068}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00977}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd}\label{classoomph_1_1FoldHandler_abfbec6da3dffeaf3b4df0ee4955101fd} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the residuals. 
+
+Formulate the augmented system. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{1171}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00509}{Count}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00977}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l00967}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00501}{Phi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_af8e766d1faa7867a0161329566865867}\label{classoomph_1_1FoldHandler_af8e766d1faa7867a0161329566865867} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!ndof@{ndof}}
+\index{ndof@{ndof}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Fold\+Handler\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the number of elemental degrees of freedom. 
+
+The number of unknowns is 2n+1. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{1105}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a7718a18444f6e328953dd5d5e73802f8}\label{classoomph_1_1FoldHandler_a7718a18444f6e328953dd5d5e73802f8} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_augmented\_block\_system@{solve\_augmented\_block\_system}}
+\index{solve\_augmented\_block\_system@{solve\_augmented\_block\_system}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_augmented\_block\_system()}{solve\_augmented\_block\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set to solve the augmented block system. 
+
+Set to solve the augmented-\/by-\/one block system. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{1600}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00482}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_abf0c7293014112731f0482e464f4daa3}\label{classoomph_1_1FoldHandler_abf0c7293014112731f0482e464f4daa3} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_block\_system@{solve\_block\_system}}
+\index{solve\_block\_system@{solve\_block\_system}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_block\_system()}{solve\_block\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::solve\+\_\+block\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set to solve the block system. 
+
+Set to solve the block system. The boolean flag specifies whether the block decomposition should use exactly the same jacobian. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{1629}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a506c9a7bb372c6d8799c6dabc9448f46}\label{classoomph_1_1FoldHandler_a506c9a7bb372c6d8799c6dabc9448f46} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!solve\_full\_system@{solve\_full\_system}}
+\index{solve\_full\_system@{solve\_full\_system}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_full\_system()}{solve\_full\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Solve non-\/block system. 
+
+Set to Solve non-\/block system. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{1649}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00481}{Block\+\_\+J}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00480}{Full\+\_\+augmented}}, \mbox{\hyperlink{assembly__handler_8h_source_l00497}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00512}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00493}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00490}{Solve\+\_\+which\+\_\+system}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00504}{Y}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1FoldHandler_a29d9c39e6a14d2a4cc4e0d7c716579fe}\label{classoomph_1_1FoldHandler_a29d9c39e6a14d2a4cc4e0d7c716579fe} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!AugmentedBlockFoldLinearSolver@{AugmentedBlockFoldLinearSolver}}
+\index{AugmentedBlockFoldLinearSolver@{AugmentedBlockFoldLinearSolver}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{AugmentedBlockFoldLinearSolver}{AugmentedBlockFoldLinearSolver}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{friend}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1AugmentedBlockFoldLinearSolver}{Augmented\+Block\+Fold\+Linear\+Solver}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00474}{474}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FoldHandler_a302fed88ed8dad865616a3d050d385ad}\label{classoomph_1_1FoldHandler_a302fed88ed8dad865616a3d050d385ad} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Count@{Count}}
+\index{Count@{Count}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Fold\+Handler\+::\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00509}{509}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56}\label{classoomph_1_1FoldHandler_aa3f143846245ecea5967ba7c79bedf56} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Ndof@{Ndof}}
+\index{Ndof@{Ndof}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Ndof}{Ndof}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Fold\+Handler\+::\+Ndof\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store the number of degrees of freedom in the non-\/augmented problem. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00497}{497}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01138}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{\texorpdfstring{$\sim$}{\string~}\+Fold\+Handler()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314}\label{classoomph_1_1FoldHandler_ae32fb6242e77a273f82de2c491d36314} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Parameter\_pt@{Parameter\_pt}}
+\index{Parameter\_pt@{Parameter\_pt}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Parameter\_pt}{Parameter\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Fold\+Handler\+::\+Parameter\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the pointer to the parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00512}{512}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00584}{bifurcation\+\_\+parameter\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8}\label{classoomph_1_1FoldHandler_a7b6ebf95bb87aab0c3df7daf841af3a8} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Phi@{Phi}}
+\index{Phi@{Phi}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Phi}{Phi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Fold\+Handler\+::\+Phi\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A constant vector used to ensure that the null vector is not trivial. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00501}{501}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a2bd14323ca059b1aaef045cb9cc4013b}\label{classoomph_1_1FoldHandler_a2bd14323ca059b1aaef045cb9cc4013b} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} oomph\+::\+Fold\+Handler\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00493}{493}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01573}{\texorpdfstring{$\sim$}{\string~}\+Fold\+Handler()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_a76ecb78ebc1d48e5511b70660953f02d}\label{classoomph_1_1FoldHandler_a76ecb78ebc1d48e5511b70660953f02d} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Solve\_which\_system@{Solve\_which\_system}}
+\index{Solve\_which\_system@{Solve\_which\_system}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Solve\_which\_system}{Solve\_which\_system}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Fold\+Handler\+::\+Solve\+\_\+which\+\_\+system\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-\/augmented jacobian system (1), a system in which the jacobian is augmented by 1 row and column to ensure that it is non-\/singular (2). See the enum above. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00490}{490}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01105}{ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01600}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01629}{solve\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+
+\Hypertarget{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e}\label{classoomph_1_1FoldHandler_ac8697e5d9484fc0488d4c16b822c792e} 
+\index{oomph::FoldHandler@{oomph::FoldHandler}!Y@{Y}}
+\index{Y@{Y}!oomph::FoldHandler@{oomph::FoldHandler}}
+\doxysubsubsection{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Fold\+Handler\+::Y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the null vector. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00504}{504}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l00864}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00970}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01036}{Fold\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01442}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01555}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01244}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01171}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l01649}{solve\+\_\+full\+\_\+system()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{assembly__handler_8h}{assembly\+\_\+handler.\+h}}\item 
+\mbox{\hyperlink{assembly__handler_8cc}{assembly\+\_\+handler.\+cc}}\end{DoxyCompactItemize}

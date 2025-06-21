@@ -1,0 +1,762 @@
+\chapter{Example problem\+: Steady 2D finite-\/\+Reynolds-\/number flow in a channel of non-\/uniform width -- An introduction to Spine meshes.}
+\hypertarget{index}{}\label{index}\index{Example problem: Steady 2D finite-\/Reynolds-\/number flow in a channel of non-\/uniform width -- An introduction to Spine meshes.@{Example problem: Steady 2D finite-\/Reynolds-\/number flow in a channel of non-\/uniform width -- An introduction to Spine meshes.}}
+Many previous examples demonstrated {\ttfamily oomph-\/lib\textquotesingle{}s} ability to solve problems on domains with moving, curvilinear boundaries. These examples had the following common features\+:
+\begin{DoxyItemize}
+\item The motion of the curvilinear domain boundaries was prescribed.
+\item The domain was discretised by {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based meshes. Recall that in such meshes the function {\ttfamily \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{Mesh\+::node\+\_\+update()}} updates the position of {\itshape all} of its constituent nodes in response to changes in the shape/position of the geometric objects that define its curvilinear boundaries. The update of the nodal positions is performed on an element-\/by-\/element basis and each element determines the new positions of its nodes by referring to the {\ttfamily Macro\+Element} representation of the domain.
+\item The governing equations were implemented in their Arbitrary Eulerian Lagrangian (ALE) form, in which the mesh velocity is determined from the "{}history values"{} of the nodal positions.
+\end{DoxyItemize}We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution. This situation arises, \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{e.\+g}., in free-\/surface fluid flow problems and in fluid-\/structure interaction problems. We shall explain why {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based node update strategies are unlikely to be efficient for such problems and then introduce the "{}\+Method of Spines"{} as one of a number of sparse (and therefore more efficient) node-\/update strategies available in {\ttfamily oomph-\/lib}.
+
+\DoxyHorRuler{0}
+\hypertarget{index_why_sparse}{}\doxysection{\texorpdfstring{Why we need sparse node updates}{Why we need sparse node updates}}\label{index_why_sparse}
+The sketch below shows a free-\/surface fluids problem in which the "{}height"{} of the fluid domain (parametrised by the scalar function $ x_2 = h(x_1) $) is unknown. The lower half of the sketch shows a body-\/fitted finite-\/element mesh (the nodes and elements are shown in dark blue) that discretises the fluid domain.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{film_sketch}
+\doxyfigcaption{Sketch of a free-\/surface fluid problem. }
+\end{DoxyImage}
+
+
+Assume now that we have some discrete representation of the unknown free surface so that $ h(x_1) $ is approximated by a function that involves a finite number of discrete unknowns $ H_i \  (i=1,...,N_H)$ . In principle, this allows us to represent the unknown boundary by a {\ttfamily Geom\+Object} in which the unknowns $ H_i \  (i=1,...,N_H)$ play the role of "{}geometric \textbackslash{}c Data"{}, \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{i.\+e}. {\ttfamily Data} whose values determine the shape of the geometric object. Once the curvilinear boundary is represented by a {\ttfamily Geom\+Object}, the update of the nodal positions in the "{}bulk"{} mesh could be performed by the {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based methods referred to above.
+
+How exactly the unknowns $ H_i \  (i=1,...,N_H)$ are determined is irrelevant for the purpose of this discussion ( in free surface flow problems, the relevant equation is the kinematic free-\/surface condition discussed in \href{../../../navier_stokes/single_layer_free_surface/html/index.html\#kinematic_condition_theory}{\texttt{ another tutorial}}) -- we simply assume that there {\itshape are} some equations that determine their values. The feature we wish to focus on here is that the solution of the problem by Newton\textquotesingle{}s method requires the computation of the derivatives of {\itshape all} discrete residuals with respect to {\itshape all} unknowns in the problem. {\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements compute the element residual vectors (the residuals of the discretised momentum and continuity equations, evaluated for the current values of the unknowns), and the derivatives of these residuals with respect to the elements\textquotesingle{} velocity and pressure degrees of freedom. Clearly, the entries in the element\textquotesingle{}s residual vector also depend on the position of the element\textquotesingle{}s constituent nodes, which, in a free-\/boundary problem, are determined (via the node update function) by the unknowns $ H_i \  (i=1,...,N_H)$ that discretise the position of the free surface.
+
+The main purpose of this example is to demonstrate the use (and the creation) of so-\/called "{}spine meshes"{}. Such meshes are similar to the {\ttfamily Macro\+Element} / {\ttfamily Domain} -\/ based meshes employed in many previous examples, in that they allow the nodal positions to be updated in response to changes in the shape of their (curvilinear) domain boundaries. The key feature of "{}spine meshes"{} is that the node update can be performed on a node-\/by-\/node basis -- this an important requirement for the efficient solution of free-\/boundary and fluid-\/structure interaction problems in which the position of the nodes in the "{}bulk mesh"{} is determined by the (unknown) position of the domain boundary. The efficient evaluation of the so-\/called "{}shape derivatives"{} (the derivatives of the residuals of the equations discretised by the elements in the "{}bulk mesh"{} with respect to the unknowns that determine the position of the domain boundary)
+
+The idea behind spine-\/based node updates is illustrated in the sketch below. Assume that the position of the domain boundary is parametrised by a scalar function, so that, for instance, $ x_2 = h(x_1)$, where $ h(x_1)$ may have to be determined as part of the solution (\doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{e.\+g}. in free-\/surface fluids problems -- the origin of the "{}\+Method of Spines"{}).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{spine_sketch}
+\doxyfigcaption{Sketch of the Method of Spines. }
+\end{DoxyImage}
+
+
+Further, assume that the mesh topology is such that the mesh\textquotesingle{}s $ N_{node} $ nodes are distributed along $ N_{spine} $ lines that are (topologically) orthogonal to the free boundary. We refer to these lines as the "{}spines"{} and denote the "{}height"{} of the domain, measured along spine $ s $ by $ H_s \ (s=1,...,N_{spine}) $. We associate each node with a particular spine (so that node $ j $ is located on spine $ s_j$) and locate it along a fixed fraction $ \omega_j $ along "{}its"{} spine. The position of node $ j $ may therefore be written as  \[
+{\bf x}_j =  {\bf B}_{s_j} + \omega_j \, H_{s_j}  \,
+{\bf S}_{s_j} \ \ \ \ \ \ \ \ \ \ \ \ \  (1)
+\] where $ {\bf B}_s $ is the vector to the "{}base"{} of spine $ s $, and $ {\bf S}_s $ the unit vector along that spine.
+
+A key feature of this method is that
+
+Determining the nodal positions via the "{}\+Method of Spines"{} equation (1)
+
+Spine-\/based node updates This document has two main parts\+:
+\begin{DoxyItemize}
+\item In \doxysectlink{index_part1}{Part 1\+: Flow through a channel of non-\/uniform width}{1} we demonstrate how to use a {\ttfamily Spine\+Mesh} 
+\item In \doxysectlink{index_part2}{Part 2\+: How to create a Spine\+Mesh}{1} we explain the general "{}philosophy"{} behind spine-\/based node-\/updates and demonstrate their implementation.
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_part1}{}\doxysection{\texorpdfstring{Part 1\+: Flow through a channel of non-\/uniform width}{Part 1: Flow through a channel of non-uniform width}}\label{index_part1}
+\hypertarget{index_example}{}\doxysubsection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+We shall illustrate the use of {\ttfamily Spine\+Meshes} by considering the problem of steady 2D flow through a channel of non-\/uniform width.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{The steady 2D Navier-\/\+Stokes equations in a channel of non-\/uniform width.}} \end{center}  Solve  \[
+Re \ u_j\frac{\partial u_i}{\partial x_j}
+= - \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +
+\frac{\partial u_j}{\partial x_i} \right),
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] in the region $ D = \left\{(x_1,x_2) \ \bigg| \ x_1 \in [0,L],
+x_2 \in [0,h(x_1)] \right\} $, where  \[
+h(x_1) = \left\{
+\begin{array}{cl}
+H & 0 \leq x_1 \leq L_1 \\
+H + A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) & L_1 \leq x_1 \leq L_2 \\
+H & L_2 \leq x_1 \leq L
+\end{array} \right.
+\] shown in this sketch  
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{channel_sketch}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+subject to the no-\/slip Dirichlet boundary conditions on the top and bottom rigid walls  \[
+\left. \mathbf{u}\right|_{\partial D_{wall}}=(0,0),
+\] parallel, parabolic inflow on the left inflow boundary, $ \partial D_{inflow} = \{ (x_1,x_2) \ |  \ x_1=0 \}$ ,  \[
+\left. \mathbf{u}\right|_{\partial D_{inflow}}
+=\left(x_2\left(H-x_2\right),0\right),
+\] and axially traction-\/free, parallel outflow on the outflow boundary, $ \partial D_{outflow} = \{ (x_1,x_2) \ | \ x_1=L \}$ ,  \[
+\left. u_2\right|_{\partial D_{outflow}}=0.
+\]   \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figures below show the results (carpet plots of the two velocity components and the pressure, and a contour plot of the pressure distribution with superimposed streamlines), obtained from computations with Taylor-\/\+Hood and Crouzeix-\/\+Raviart elements for a channel of length $ L = 2.7$ , height $ H=1.0 $ , with deflection amplitude $ A = 0.4 $, and a Reynolds number of $ Re=100$.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{TH}
+\doxyfigcaption{Plot of results computed with 2D Taylor-\/\+Hood elements. }
+\end{DoxyImage}
+  
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{CR}
+\doxyfigcaption{Plot of results computed with 2D Crouzeix-\/\+Raviart elements. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters}{Global parameters}}\label{index_namespace}
+The Reynolds number is the only parameter in this problem. As usual, we define and initialise it in a namespace\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=100;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by creating a {\ttfamily Doc\+Info} object to define the output directory.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ channel\ flow\ problem\ with\ spine\ mesh.}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{simple__spine__channel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleSpineMesh}{DocInfo}}\ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}}.number()=0;}
+
+\end{DoxyCodeInclude}
+ When using spines, we must use elements augmented by the {\ttfamily Spine\+Element$<$\+ELEMENT$>$} class. This class, adds the functionality to be updated using the method of spines (\doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{i.\+e} storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using {\ttfamily Spine\+Element$<$\+Tayloor\+Hood\+Element$<$2$>$$>$}.
+
+We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then repeat for Spine-\/\+Crouzeix-\/\+Raviart elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ problem\ with\ Taylor\ Hood\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{ChannelSpineFlowProblem<SpineElement<QTaylorHoodElement<2>}}\ >\ >}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ automatic\ adaptation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ Taylor\ Hood\ elements}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ problem\ with\ Crouzeix\ Raviart\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{ChannelSpineFlowProblem<SpineElement<QCrouzeixRaviartElement<2>}}\ >\ >}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ automatic\ adaptation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ Crouzeix\ Raviart\ elements}}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class for this example is very similar to our previous \href{../../driven_cavity/html/index.html\#problem}{\texttt{ steady Navier-\/\+Stokes examples }}. We store the height of the channel as private data, this is because we need it to set the inflow boundary condition.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Channel\ flow\ through\ a\ non-\/uniform\ channel\ whose\ geometry\ is\ defined\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ by\ a\ spine\ mesh.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classChannelSpineFlowProblem}{ChannelSpineFlowProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classChannelSpineFlowProblem_a23f1b987e3395b1d101eaf3f3b5c94b2}{ChannelSpineFlowProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor:\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classChannelSpineFlowProblem_abdf2cc520915167d8718499459df348b}{\string~ChannelSpineFlowProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve.\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ velocity\ boundary\ conditions\ just\ to\ be\ on\ the\ safe\ side...}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChannelSpineFlowProblem_aaf6dd8a8a472ccd938df579aba61ec97}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Update\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classChannelSpineFlowProblem_a6f3a60eb5d2f2a0eccb9b40848d4387d}{mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_actions\_before\_newton\_solve}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChannelSpineFlowProblem_a419a80ef3d19438f193bd7843f72446a}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChannelSpineFlowProblem_a101bdeee56502231945cbac272ca21f6}{doc\_solution}}(\mbox{\hyperlink{classSimpleSpineMesh}{DocInfo}}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{doc\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Width\ of\ channel}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classChannelSpineFlowProblem_a6ac51c3c9d400869e694fe00452e293f}{Ly}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+ Note that the absence of boundary conditions on the right boundary (1), causes a zero traction condition to be applied there. This implies that we should not fix a pressure degree of freedom.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We begin by setting all the mesh parameters, and building it.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ ChannelSpineFlow\ problem\ }}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classChannelSpineFlowProblem_a23f1b987e3395b1d101eaf3f3b5c94b2}{ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction\ in\ left\ region\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx0}}=3;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction\ in\ centre\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx1}}=12;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction\ in\ right\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Nx2}}=8;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{Ny}}=10;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction\ in\ left\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx0}}=0.5;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction\ in\ centre\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx1}}=0.7;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction\ in\ right\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx2}}=1.5;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ Ly=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ geometric\ object\ that\ represents\ the\ sinusoidal\ bump\ on}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ upper\ wall:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ 40\%\ indendentation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{amplitude\_upper}}\ =\ -\/0.4*Ly;}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Minimum\ and\ maximum\ coordinates\ of\ bump}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{zeta\_min}}=\mbox{\hyperlink{classSimpleSpineMesh}{Lx0}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{zeta\_max}}=\mbox{\hyperlink{classSimpleSpineMesh}{Lx0}}+\mbox{\hyperlink{classSimpleSpineMesh}{Lx1}};}
+\DoxyCodeLine{\ GeomObject*\ \mbox{\hyperlink{classSimpleSpineMesh}{UpperWall}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleSpineMesh}{SinusoidalWall}}(Ly,\mbox{\hyperlink{classSimpleSpineMesh}{amplitude\_upper}},\mbox{\hyperlink{classSimpleSpineMesh}{zeta\_min}},\mbox{\hyperlink{classSimpleSpineMesh}{zeta\_max}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh\ -\/-\/\ pass\ pointer\ to\ geometric\ object}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ that\ represents\ the\ sinusoidal\ bump\ on\ the\ upper\ wall}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleSpineMesh}{ChannelSpineMesh<ELEMENT>}}(\mbox{\hyperlink{classSimpleSpineMesh}{Nx0}},\mbox{\hyperlink{classSimpleSpineMesh}{Nx1}},\mbox{\hyperlink{classSimpleSpineMesh}{Nx2}},\mbox{\hyperlink{classSimpleSpineMesh}{Ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Lx0}},\mbox{\hyperlink{classSimpleSpineMesh}{Lx1}},\mbox{\hyperlink{classSimpleSpineMesh}{Lx2}},Ly,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{UpperWall}});}
+
+\end{DoxyCodeInclude}
+ We then pin the velocities on the left, top and bottom boundaries (3,2 and 0).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here:\ All\ boundaries\ are\ Dirichlet\ boundaries,\ except\ on\ boundary\ 1}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{num\_bound}}\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{ibound}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}<\mbox{\hyperlink{classSimpleSpineMesh}{num\_bound}};\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}}=\ mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{inod}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{inod}}<\mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}};\mbox{\hyperlink{classSimpleSpineMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}!=1)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ values\ (u\ and\ v\ velocities)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{i}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{i}}<2;\mbox{\hyperlink{classSimpleSpineMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>pin(\mbox{\hyperlink{classSimpleSpineMesh}{i}});\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Parallel\ outflow\ ==>\ no-\/slip}}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>pin(1);\ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+
+\end{DoxyCodeInclude}
+ Finally, we pass a pointer to the Reynolds number to each element and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ slip\ on\ stationary\ upper\ and\ lower\ walls\ (boundaries\ 0\ and\ 2)\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ parallel\ outflow\ (boundary\ 1)\ }}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{ibound}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}<\mbox{\hyperlink{classSimpleSpineMesh}{num\_bound}}-\/1;\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}}=\ mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{inod}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{inod}}<\mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}};\mbox{\hyperlink{classSimpleSpineMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSimpleSpineMesh}{ibound}}!=1)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{i}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{i}}<2;\mbox{\hyperlink{classSimpleSpineMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>set\_value(\mbox{\hyperlink{classSimpleSpineMesh}{i}},0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>set\_value(1,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ parabolic\ inflow\ along\ boundary\ 3:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{ibound}}=3;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}}=\ mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{inod}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{inod}}<\mbox{\hyperlink{classSimpleSpineMesh}{num\_nod}};\mbox{\hyperlink{classSimpleSpineMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{y}}=mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>x(1);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Parallel,\ parabolic\ inflow}}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>set\_value(0,\mbox{\hyperlink{classSimpleSpineMesh}{y}}*(Ly-\/\mbox{\hyperlink{classSimpleSpineMesh}{y}}));}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{ibound}},\mbox{\hyperlink{classSimpleSpineMesh}{inod}})-\/>set\_value(1,0.0);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Find\ number\ of\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_element}}\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor:\ Pass\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ pointer\ to\ Reynolds\ number}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}=0;\mbox{\hyperlink{classSimpleSpineMesh}{e}}<\mbox{\hyperlink{classSimpleSpineMesh}{n\_element}};\mbox{\hyperlink{classSimpleSpineMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{ELEMENT}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSimpleSpineMesh}{ELEMENT}}*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{el\_pt}}-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleSpineMesh}{cout}}\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classSimpleSpineMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_part2}{}\doxysection{\texorpdfstring{Part 2\+: How to create a Spine\+Mesh}{Part 2: How to create a SpineMesh}}\label{index_part2}
+Spine-\/based meshes have their origin in free-\/surface fluid-\/mechanics problems where they were first (?) introduced by Kistler \& Scriven in their paper
+
+\begin{center} Kistler, \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{S.\+F}. \& Scriven, L.\+E. {\ttfamily Coating Flows.\textquotesingle{}\textquotesingle{} In\+: }Computational Analysis of Polymer Processing,\textquotesingle{}\textquotesingle{} Pearson, J.\+R.\+A. \& Richardson, \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{S.\+M}. (eds.); Applied Science Publishers, London (1983). \end{center} 
+
+{\ttfamily oomph-\/lib\textquotesingle{}s} Spine\+Meshes provide a generalisation of their node-\/update techniques.
+
+In the past when solving a problem in a domain with curved boundaries, we have made a specific Mesh for the domain, and use a geometric object to define its curved wall(s).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{mesh}
+\doxyfigcaption{Diagram of a Channel\+Spine\+Mesh, going through the process of updating its central nodes, where the heights have been changed. }
+\end{DoxyImage}
+
+
+To generalise this approach {\ttfamily oomph-\/lib} makes use of spines.
+\begin{DoxyItemize}
+\item A {\ttfamily Spine} is most easily visualised a line of a certain height, in one coordinate direction.
+\item A {\ttfamily Spine\+Node} is a {\ttfamily Node} located at a certain fraction along a {\ttfamily Spine}.
+\item A {\ttfamily Spine\+Mesh} is a {\ttfamily Mesh} which will update using spines.
+\item A {\ttfamily Spine\+Element$<$\+ELEMENT$>$} takes a "{}normal"{} element and adds the functionality to work with spines.
+\end{DoxyItemize}The creation of a {\ttfamily Spine\+Mesh} is discussed in detail below \doxysectlink{index_spine_mesh}{Making a Spine\+Mesh}{2}. While the picture above demonstrates the ability of Spine\+Node to individually update using the function {\ttfamily spine\+\_\+node\+\_\+update(spine\+\_\+node\+\_\+pt)}.\hypertarget{index_spine_mesh}{}\doxysubsection{\texorpdfstring{Making a Spine\+Mesh}{Making a SpineMesh}}\label{index_spine_mesh}
+In this example we use a {\ttfamily Spine\+Mesh} to model the domain. This mesh constitutes three regions\+: left (0), centre (1) and right (2), the left and right regions have a constant height, while in the centre region the height varies. These heights are defined by two geometric objects, a \href{../../../the_data_structure/html/classoomph_1_1StraightLine.html}{\texttt{ straight line }} and a deflected line respectively. We will discuss the necessary steps taken to create this mesh (the complete documentation for this specific mesh can be found \href{../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html}{\texttt{ here }}).
+
+To begin, we create a new class templated by a element and inheriting from {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$} and {\ttfamily Spine\+Mesh}. The latter adds the functionality needed for using Spines.
+
+ 
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update(\+Spine\+Node\texorpdfstring{$\ast$}{*} spine\+\_\+node\+\_\+pt)}, this will describe the operations performed when updating every Spine\+Node in the mesh. First we find the Spine\+Nodes fraction along the spine.
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ We then get the local coordinate on the geometric object that defines the upper wall.
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.
+
+
+\begin{DoxyCodeInclude}{0}
+
+\end{DoxyCodeInclude}
+ All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, copies these values to their storage in the mesh.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{ChannelSpineMesh<ELEMENT>::ChannelSpineMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{nx0}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{nx1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{nx2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{lx0}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{lx1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{lx2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSimpleSpineMesh}{h}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GeomObject*\ \mbox{\hyperlink{classSimpleSpineMesh}{wall\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{TimeStepper}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \ \ :\ \mbox{\hyperlink{classSimpleSpineMesh}{RectangularQuadMesh}}<\mbox{\hyperlink{classSimpleSpineMesh}{ELEMENT}}>(\mbox{\hyperlink{classSimpleSpineMesh}{nx0}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{nx1}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{nx2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{lx0}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{lx1}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{lx2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0.0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{h}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{false}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{false}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nx0}}(\mbox{\hyperlink{classSimpleSpineMesh}{nx0}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nx1}}(\mbox{\hyperlink{classSimpleSpineMesh}{nx1}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nx2}}(\mbox{\hyperlink{classSimpleSpineMesh}{nx2}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Lx0}}(\mbox{\hyperlink{classSimpleSpineMesh}{lx0}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Lx1}}(\mbox{\hyperlink{classSimpleSpineMesh}{lx1}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Lx2}}(\mbox{\hyperlink{classSimpleSpineMesh}{lx2}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Wall\_pt}}(\mbox{\hyperlink{classSimpleSpineMesh}{wall\_pt}})}
+
+\end{DoxyCodeInclude}
+ We then assign all the parameters for the {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, create the geometric object for the uniform wall and call the function {\ttfamily build\+\_\+channel\+\_\+spine\+\_\+mesh(...)} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mesh\ can\ only\ be\ built\ with\ 2D\ Qelements.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{MeshChecker::assert\_geometric\_element<QElementGeometricBase,\ ELEMENT>}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mesh\ can\ only\ be\ built\ with\ spine\ elements}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{MeshChecker::assert\_geometric\_element<SpineFiniteElement,\ ELEMENT>}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ We've\ called\ the\ "{}generic"{}\ constructor\ for\ the\ RectangularQuadMesh}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ which\ doesn't\ do\ much...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Build\ the\ straight\ line\ object}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Straight\_wall\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleSpineMesh}{StraightLine}}(\mbox{\hyperlink{classSimpleSpineMesh}{h}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Now\ build\ the\ mesh:}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{build\_channel\_spine\_mesh}}(\mbox{\hyperlink{classSimpleSpineMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ When we call the function {\ttfamily build\+\_\+channel\+\_\+spine\+\_\+mesh(...)}, it calls its counterpart in the {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, then store the numbers of elements in each direction in each region (and all at once).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh}}(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{TimeStepper}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Build\ the\ underlying\ quad\ mesh:}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{RectangularQuadMesh<ELEMENT>::build\_mesh}}(\mbox{\hyperlink{classSimpleSpineMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Read\ out\ the\ number\ of\ elements\ in\ the\ x-\/direction\ and\ y-\/direction}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ and\ in\ each\ of\ the\ left,\ centre\ and\ right\ regions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}}\ =\ this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{Nx}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}}\ =\ this-\/>Ny;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ =\ this-\/>Nx0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}}\ =\ this-\/>Nx1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x2}}\ =\ this-\/>Nx2;}
+
+\end{DoxyCodeInclude}
+ We then allocate memory for the elements and spines in each region in each region.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ up\ the\ pointers\ to\ elements\ in\ the\ left\ region}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{nleft}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}};}
+\DoxyCodeLine{\ \ \ \ ;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Left\_element\_pt}}.reserve(\mbox{\hyperlink{classSimpleSpineMesh}{nleft}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{ncentre}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}};}
+\DoxyCodeLine{\ \ \ \ ;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Centre\_element\_pt}}.reserve(\mbox{\hyperlink{classSimpleSpineMesh}{ncentre}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{nright}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x2}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}};}
+\DoxyCodeLine{\ \ \ \ ;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Right\_element\_pt}}.reserve(\mbox{\hyperlink{classSimpleSpineMesh}{nright}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{irow}}\ =\ 0;\ \mbox{\hyperlink{classSimpleSpineMesh}{irow}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}};\ \mbox{\hyperlink{classSimpleSpineMesh}{irow}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}};\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Left\_element\_pt}}.push\_back(this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classSimpleSpineMesh}{irow}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}};\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Centre\_element\_pt}}.push\_back(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classSimpleSpineMesh}{irow}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}}\ +\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{e}})));}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ =\ 0;\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x2}};\ \mbox{\hyperlink{classSimpleSpineMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Right\_element\_pt}}.push\_back(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classSimpleSpineMesh}{irow}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}}\ +\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{e}})));}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ that\ we\ have\ the\ correct\ number\ of\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSimpleSpineMesh}{nelement}}()\ !=\ \mbox{\hyperlink{classSimpleSpineMesh}{nleft}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{ncentre}}\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{nright}})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classSimpleSpineMesh}{OomphLibError}}(\textcolor{stringliteral}{"{}Incorrect\ number\ of\ element\ pointers!"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Allocate\ memory\ for\ the\ spines\ and\ fractions\ along\ spines}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Read\ out\ number\ of\ linear\ points\ in\ the\ element}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSimpleSpineMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classSimpleSpineMesh}{finite\_element\_pt}}(0))-\/>\mbox{\hyperlink{classSimpleSpineMesh}{nnode\_1d}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{nspine}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Allocate\ store\ for\ the\ spines:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>\mbox{\hyperlink{classSimpleSpineMesh}{Xperiodic}})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nspine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Spine\_pt}}.reserve(\mbox{\hyperlink{classSimpleSpineMesh}{nspine}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ spines\ in\ each\ region}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ NOTE\ that\ boundary\ spines\ are\ in\ both\ regions}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nleft\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Ncentre\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nright\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x2}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nspine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Spine\_pt}}.reserve(\mbox{\hyperlink{classSimpleSpineMesh}{nspine}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ spines\ in\ each\ region}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ NOTE\ that\ boundary\ spines\ are\ in\ both\ regions}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nleft\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Ncentre\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x1}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Nright\_spine}}\ =\ (\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1)\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x2}}\ +\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ end\ Allocating\ memory}}
+
+\end{DoxyCodeInclude}
+ Now we allocate storage for the parameters used to build the spines.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ set\ up\ the\ vectors\ of\ geometric\ data\ \&\ objects\ for\ building\ spines}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Vector<double>}}\ \mbox{\hyperlink{classSimpleSpineMesh}{r\_wall}}(2),\ \mbox{\hyperlink{classSimpleSpineMesh}{zeta}}(1),\ \mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}}(1);}
+\DoxyCodeLine{\ \ \ \ GeomObject*\ \mbox{\hyperlink{classSimpleSpineMesh}{geometric\_object\_pt}}\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ LEFT\ REGION}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ===========}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ SPINES\ IN\ LEFT\ REGION}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ up\ zeta\ increments}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{zeta\_lo}}\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleSpineMesh}{dzeta}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{Lx0}}\ /\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x0}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialise\ number\ of\ elements\ in\ previous\ regions:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_prev\_elements}}\ =\ 0;}
+
+\end{DoxyCodeInclude}
+ Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the {\ttfamily Spine\+\_\+pt}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ FIRST\ SPINE}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Element\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Node\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Assign\ the\ new\ spine\ with\ unit\ length}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Spine}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{new\_spine\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleSpineMesh}{Spine}}(1.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{new\_spine\_pt}}-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Spine\_pt}}.push\_back(\mbox{\hyperlink{classSimpleSpineMesh}{new\_spine\_pt}});}
+
+\end{DoxyCodeInclude}
+ We then set the {\ttfamily spine\+\_\+pt()} of the first node to the Spine we just created, assign the nodes {\ttfamily fraction()} to zero and define the node as part of this mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{SpineNode}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{element\_node\_pt}}(0,\ 0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_pt()\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{new\_spine\_pt}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ the\ fraction}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>fraction()\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Pointer\ to\ the\ mesh\ that\ implements\ the\ update\ fct}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_mesh\_pt()\ =\ \textcolor{keyword}{this};}
+
+\end{DoxyCodeInclude}
+ We then mark the node as part of the left (0) region.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ update\ fct\ id}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>node\_update\_fct\_id()\ =\ 0;}
+
+\end{DoxyCodeInclude}
+ When we built the Spine, we set its height to \doxylink{classSimpleSpineMesh_a69815e3a950e6e5ede2f85004796dadb}{1.\+0}. We now need to assign its height from the {\ttfamily Straight\+\_\+wall\+\_\+pt} and assign all the information needed to update the mesh to the Spine.
+
+First we set the value of $\zeta$ and get the geometric object and the local coordinate.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Provide\ spine\ with\ additional\ storage\ for\ wall\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ and\ wall\ geom\ object:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ Lagrangian\ coordinate\ in\ the\ Lower\ Wall}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{zeta}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ geometric\ object\ and\ local\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Straight\_wall\_pt}}-\/>locate\_zeta(\mbox{\hyperlink{classSimpleSpineMesh}{zeta}},\ \mbox{\hyperlink{classSimpleSpineMesh}{geometric\_object\_pt}},\ \mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}});}
+
+\end{DoxyCodeInclude}
+ Then we store these geometric parameters in the Spine.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ local\ coordinate\ is\ a\ geometric\ parameter}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ This\ needs\ to\ be\ set\ (rather\ than\ added)\ because\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ same\ spine\ may\ be\ visited\ more\ than\ once}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Vector<double>}}\ \mbox{\hyperlink{classSimpleSpineMesh}{parameters}}(1,\ \mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}}[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_pt()-\/>set\_geom\_parameter(\mbox{\hyperlink{classSimpleSpineMesh}{parameters}});}
+
+\end{DoxyCodeInclude}
+ We then set the height of the Spine according to the geometric object.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ position\ of\ wall}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Straight\_wall\_pt}}-\/>position(\mbox{\hyperlink{classSimpleSpineMesh}{s\_wall}},\ \mbox{\hyperlink{classSimpleSpineMesh}{r\_wall}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Adjust\ spine\ height}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_pt()-\/>height()\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{r\_wall}}[1];}
+
+\end{DoxyCodeInclude}
+ Finally we set the Spines\textquotesingle{} pointer to the geometric object.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ sub\ geom\ object\ is\ one\ (and\ only)\ geom\ object}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ for\ spine:}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{Vector<GeomObject*>}}\ \mbox{\hyperlink{classSimpleSpineMesh}{geom\_object\_pt}}(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{geom\_object\_pt}}[0]\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{geometric\_object\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Pass\ geom\ object(s)\ to\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_pt()-\/>set\_geom\_object\_pt(\mbox{\hyperlink{classSimpleSpineMesh}{geom\_object\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ vertically\ along\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSimpleSpineMesh}{i}}\ =\ 0;\ \mbox{\hyperlink{classSimpleSpineMesh}{i}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_y}};\ \mbox{\hyperlink{classSimpleSpineMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ vertical\ nodes,\ apart\ from\ the\ first}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleSpineMesh}{l1}}\ =\ 1;\ \mbox{\hyperlink{classSimpleSpineMesh}{l1}}\ <\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_p}};\ \mbox{\hyperlink{classSimpleSpineMesh}{l1}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{SpineNode}}*\ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{element\_node\_pt}}(\mbox{\hyperlink{classSimpleSpineMesh}{i}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_x}},\ \mbox{\hyperlink{classSimpleSpineMesh}{l1}}\ *\ \mbox{\hyperlink{classSimpleSpineMesh}{n\_p}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_pt()\ =\ \mbox{\hyperlink{classSimpleSpineMesh}{new\_spine\_pt}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ fraction}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>fraction()\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classSimpleSpineMesh}{double}}(\mbox{\hyperlink{classSimpleSpineMesh}{i}})\ +\ \mbox{\hyperlink{classSimpleSpineMesh}{double}}(\mbox{\hyperlink{classSimpleSpineMesh}{l1}})\ /\ \mbox{\hyperlink{classSimpleSpineMesh}{double}}(\mbox{\hyperlink{classSimpleSpineMesh}{n\_p}}\ -\/\ 1))\ /\ \textcolor{keywordtype}{double}(\mbox{\hyperlink{classSimpleSpineMesh}{n\_y}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ the\ mesh\ that\ implements\ the\ update\ fct}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>spine\_mesh\_pt()\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ update\ fct\ id}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleSpineMesh}{nod\_pt}}-\/>node\_update\_fct\_id()\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ elements}}
+
+\end{DoxyCodeInclude}
+ We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.
+
+We then repeat this process for the centre and right regions, using the correct geometric objects to define the upper wall, which can be examined in detail \href{../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html}{\texttt{ here }}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Investigate what happens when a pressure degree of freedom is fixed.
+\item Try creating a new geometric object, which creates a triangular indentation in the central region of the upper wall as shown.
+\end{DoxyEnumerate}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{Exercise}
+\doxyfigcaption{Plot of the solution to the problem specified in the above exercise computed with 3x3 Taylor-\/\+Hood elements and Re=100. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

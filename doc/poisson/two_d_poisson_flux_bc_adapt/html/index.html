@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Adaptive solution of the 2D Poisson equation with flux boundary conditions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Adaptive solution of the 2D Poisson equation with flux boundary conditions </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the adaptive solution of a 2D Poisson problem with Neumann boundary conditions. </p><center> <table class="doxtable">
+<tr>
+<td><center> <b>Two-dimensional model Poisson problem with Neumann boundary conditions</b> </center> Solve  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="170" height="38"/>
+</p>
+ in the rectangular domain <img class="formulaInl" alt="$D = \left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\} $" src="form_1.png" width="160" height="14"/>. The domain boundary <img class="formulaInl" alt="$ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} $" src="form_2.png" width="173" height="13"/>, where <img class="formulaInl" alt="$ \partial D_{Neumann} 
+= \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} $" src="form_3.png" width="235" height="14"/>. On <img class="formulaInl" alt="$ \partial D_{Dirichlet}$" src="form_4.png" width="60" height="13"/> we apply the Dirichlet boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. u\right|_{\partial D_{Dirichlet}}=u_0,
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_5.png" width="156" height="15"/>
+</p>
+ where the function <img class="formulaInl" alt="$ u_0 $" src="form_6.png" width="14" height="9"/> is given. On <img class="formulaInl" alt="$ \partial D_{Neumann}$" src="form_7.png" width="64" height="13"/> we apply the Neumann conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = 
+\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}
+=g_0,
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_8.png" width="269" height="34"/>
+</p>
+ where the function <img class="formulaInl" alt="$ g_0 $" src="form_9.png" width="13" height="9"/> is given.   </td></tr>
+</table>
+<br  />
+ </center><p> <br  />
+</p>
+<p>In two previous examples we demonstrated two approaches for the <em>non-adaptive</em> solution of this problem. In both cases we created a "bulk" mesh of <code>QPoissonElements</code> and applied the flux boundary conditions by "attaching" <code>PoissonFluxElements</code> to the appropriate boundaries of the "bulk" Poisson elements. In the <a href="../../two_d_poisson_flux_bc/html/index.html">first implementation</a> we simply added the pointers to the flux elements to the bulk mesh; in the <a href="../../two_d_poisson_flux_bc2/html/index.html">second implementation</a> we stored the surface and bulk elements in separate meshes and combined them to a single global mesh. We will now demonstrate that the second approach greatly facilitates the automatic problem adaptation. We use the mesh adaptation procedures of the <code>RefineableQuadMesh</code> class to adapt the bulk mesh, driven by the spatial error estimates in that mesh. The flux elements are neither involved in nor adapted by the refinement process of the bulk mesh. We therefore use the function <code>Problem::actions_before_adapt()</code> to delete the flux elements before the adaptation, and <code>Problem::actions_after_adapt()</code> to re-attach them once the bulk mesh has been adapted.</p>
+<p>As in the <a href="../../two_d_poisson_flux_bc2/html/index.html">previous example</a> we choose a source function and boundary conditions for which the function  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  (4)
+\]" src="form_10.png" width="274" height="14"/>
+</p>
+<p> is the exact solution of the problem.</p>
+<div class="image">
+<img src="rotate.gif" alt=""/>
+<div class="caption">
+Plot of the solution obtained with automatic mesh adaptation </div></div>
+ <p>Since many functions in the driver code are identical to that in the non-adaptive version, discussed in the <a href="../../two_d_poisson_flux_bc2/html/index.html">previous example</a>, we only list those functions that differ. Please consult the source code <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc">two_d_poisson_flux_bc_adapt.cc </a> for full details of the implementation.</p>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<h1><a class="anchor" id="global"></a>
+Global parameters and functions</h1>
+<p>The specification of the source function and the exact solution in the namespace <code><a class="el" href="namespaceTanhSolnForPoisson.html" title="Namespace for exact solution for Poisson equation with &quot;sharp step&quot;.">TanhSolnForPoisson</a></code> is identical to that in the single-mesh version discussed in the <a href="../../two_d_poisson_flux_bc/html/index.html">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The main code is virtually identical to that in the <a href="../../two_d_poisson_flux_bc2/html/index.html">previous non-adaptive example </a>. The only change is the provision of an argument to the Newton solver</p>
+ <div class="fragment"><div class="line">   <span class="comment">// Solve the problem</span></div>
+<div class="line">   <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">problem</a>.newton_solve(3);</div>
+<div class="ttc" id="aclassSimpleRefineableRectangularQuadMesh_html"><div class="ttname"><a href="classSimpleRefineableRectangularQuadMesh.html">SimpleRefineableRectangularQuadMesh</a></div><div class="ttdoc">Refineable equivalent of the SimpleRectangularQuadMesh. Refinement is performed by the QuadTree-based...</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00058">two_d_poisson_flux_bc_adapt.cc:61</a></div></div>
+</div><!-- fragment --><p> which indicates that the problem should be adapted up to three times.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very similar to that in the <a href="../../two_d_poisson_flux_bc2/html/index.html#problem">non-adaptive implementation</a>: The only difference is the provision of the functions <code>actions_before_adapt()</code>, <code>actions_after_adapt()</code>, <code>set_prescribed_flux_pt()</code>, and <code>delete_flux_elements(...)</code> which we discuss in more detail below.</p>
+ <div class="fragment"><div class="line"><span class="comment">//========= start_of_problem_class=====================================</span></div>
+<div class="line"><span class="comment">/// 2D Poisson problem on rectangular domain, discretised with</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// 2D QPoisson elements. Flux boundary conditions are applied</span></div>
+<div class="line"><span class="comment">/// along boundary 1 (the boundary where x=L). The specific type of </span></div>
+<div class="line"><span class="comment">/// element is specified via the template parameter.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt; </div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRefineableTwoMeshFluxPoissonProblem.html">RefineableTwoMeshFluxPoissonProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableTwoMeshFluxPoissonProblem.html">RefineableTwoMeshFluxPoissonProblem</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">PoissonEquations&lt;2&gt;::PoissonSourceFctPt</a> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">source_fct_pt</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a6b1f154c77ea0c415bf171764d34302f">~RefineableTwoMeshFluxPoissonProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ad9d4a3b5856839fa95f60968fabe3493">doc_solution</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">DocInfo</a>&amp; <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">doc_info</a>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve: Reset boundary conditions</span></div>
+<div class="line"><span class="comment"> /// to the values from the exact solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a209506229c491a8cec4e1dce387e18c3">actions_before_newton_solve</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ab8b04db3dab6297f609a9a028b1c4473">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a10d2a67a5ac599161ddcf876b31334f6">actions_before_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a0140155529861f5e63ab32feece3c9b6">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create Poisson flux elements on boundary b of the Mesh pointed</span></div>
+<div class="line"><span class="comment"> /// to by bulk_mesh_pt and add them to the Mesh object pointed to by </span></div>
+<div class="line"><span class="comment"> /// surface_mesh_pt</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ac2eaf11cfc4dda41f97cacc2a1a1f86e">create_flux_elements</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>, <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>* <span class="keyword">const</span> &amp;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">bulk_mesh_pt</a>,</div>
+<div class="line">                           <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>* <span class="keyword">const</span> &amp;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Delete Poisson flux elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ab35087cadc6dbc7a602441b9a986d650">delete_flux_elements</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>* <span class="keyword">const</span> &amp;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set pointer to prescribed-flux function for all</span></div>
+<div class="line"><span class="comment"> /// elements in the surface mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#aa0aeec40bbdb0649e309e51ad96e5da7">set_prescribed_flux_pt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">SimpleRefineableRectangularQuadMesh&lt;ELEMENT&gt;</a>* <a class="code hl_variable" href="classRefineableTwoMeshFluxPoissonProblem.html#a35746600caac7fd5b1a2ccec6beff8d6">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;surface&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>* <a class="code hl_variable" href="classRefineableTwoMeshFluxPoissonProblem.html#a1ad7c5a406b267f2d79c52b3d347971d">Surface_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">PoissonEquations&lt;2&gt;::PoissonSourceFctPt</a> <a class="code hl_variable" href="classRefineableTwoMeshFluxPoissonProblem.html#a0f3434b437ca4b5e6a97ecae9e826477">Source_fct_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html">RefineableTwoMeshFluxPoissonProblem</a></div><div class="ttdoc">2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. Flux boundary condit...</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00141">two_d_poisson_flux_bc_adapt.cc:142</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a0140155529861f5e63ab32feece3c9b6"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a0140155529861f5e63ab32feece3c9b6">RefineableTwoMeshFluxPoissonProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00354">two_d_poisson_flux_bc_adapt.cc:354</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a0f3434b437ca4b5e6a97ecae9e826477"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a0f3434b437ca4b5e6a97ecae9e826477">RefineableTwoMeshFluxPoissonProblem::Source_fct_pt</a></div><div class="ttdeci">PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00192">two_d_poisson_flux_bc_adapt.cc:192</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a10d2a67a5ac599161ddcf876b31334f6"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a10d2a67a5ac599161ddcf876b31334f6">RefineableTwoMeshFluxPoissonProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00338">two_d_poisson_flux_bc_adapt.cc:338</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a1ad7c5a406b267f2d79c52b3d347971d"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a1ad7c5a406b267f2d79c52b3d347971d">RefineableTwoMeshFluxPoissonProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the &quot;surface&quot; mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00189">two_d_poisson_flux_bc_adapt.cc:189</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a209506229c491a8cec4e1dce387e18c3"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a209506229c491a8cec4e1dce387e18c3">RefineableTwoMeshFluxPoissonProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve: Reset boundary conditions to the values from the exact solutio...</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00296">two_d_poisson_flux_bc_adapt.cc:296</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a35746600caac7fd5b1a2ccec6beff8d6"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a35746600caac7fd5b1a2ccec6beff8d6">RefineableTwoMeshFluxPoissonProblem::Bulk_mesh_pt</a></div><div class="ttdeci">SimpleRefineableRectangularQuadMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the &quot;bulk&quot; mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00186">two_d_poisson_flux_bc_adapt.cc:186</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a6b1f154c77ea0c415bf171764d34302f"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a6b1f154c77ea0c415bf171764d34302f">RefineableTwoMeshFluxPoissonProblem::~RefineableTwoMeshFluxPoissonProblem</a></div><div class="ttdeci">~RefineableTwoMeshFluxPoissonProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00150">two_d_poisson_flux_bc_adapt.cc:150</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_aa0aeec40bbdb0649e309e51ad96e5da7"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#aa0aeec40bbdb0649e309e51ad96e5da7">RefineableTwoMeshFluxPoissonProblem::set_prescribed_flux_pt</a></div><div class="ttdeci">void set_prescribed_flux_pt()</div><div class="ttdoc">Set pointer to prescribed-flux function for all elements in the surface mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00384">two_d_poisson_flux_bc_adapt.cc:384</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_ab35087cadc6dbc7a602441b9a986d650"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#ab35087cadc6dbc7a602441b9a986d650">RefineableTwoMeshFluxPoissonProblem::delete_flux_elements</a></div><div class="ttdeci">void delete_flux_elements(Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Delete Poisson flux elements and wipe the surface mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00504">two_d_poisson_flux_bc_adapt.cc:505</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_ab8b04db3dab6297f609a9a028b1c4473"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#ab8b04db3dab6297f609a9a028b1c4473">RefineableTwoMeshFluxPoissonProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00164">two_d_poisson_flux_bc_adapt.cc:164</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_ac2eaf11cfc4dda41f97cacc2a1a1f86e"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#ac2eaf11cfc4dda41f97cacc2a1a1f86e">RefineableTwoMeshFluxPoissonProblem::create_flux_elements</a></div><div class="ttdeci">void create_flux_elements(const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Create Poisson flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them to the...</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00470">two_d_poisson_flux_bc_adapt.cc:471</a></div></div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_ad9d4a3b5856839fa95f60968fabe3493"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#ad9d4a3b5856839fa95f60968fabe3493">RefineableTwoMeshFluxPoissonProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00409">two_d_poisson_flux_bc_adapt.cc:409</a></div></div>
+</div><!-- fragment --><p> [See the discussion of the <a href="../../one_d_poisson/html/index.html">1D Poisson problem</a> for a more detailed discussion of the function type <a class="el" href="classSimpleRefineableRectangularQuadMesh.html#ae0eab85a2c97fce00d7c82a613378e79" title="Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions....">PoissonEquations&lt;2&gt;::PoissonSourceFctPt</a>.]</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We create the bulk mesh and surface mesh as <a href="../../two_d_poisson_flux_bc2/html/index.html#constructor">before</a>. Next we create the spatial error estimator and pass it to the bulk mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for Poisson problem: Pass pointer to source function.</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a6568980564c4e39544b1c2bcb71cf3b6">RefineableTwoMeshFluxPoissonProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a6568980564c4e39544b1c2bcb71cf3b6">RefineableTwoMeshFluxPoissonProblem</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">PoissonEquations&lt;2&gt;::PoissonSourceFctPt</a> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">source_fct_pt</a>)</div>
+<div class="line"> :  Source_fct_pt(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">source_fct_pt</a>)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup &quot;bulk&quot; mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_x</a>=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_y</a>=4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">l_x</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">l_y</a>=2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build &quot;bulk&quot; mesh</span></div>
+<div class="line"> Bulk_mesh_pt=<span class="keyword">new</span> </div>
+<div class="line">  <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">SimpleRefineableRectangularQuadMesh&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_x</a>,<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_y</a>,<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">l_x</a>,<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">l_y</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Z2ErrorEstimator</a>;</div>
+<div class="ttc" id="aclassRefineableTwoMeshFluxPoissonProblem_html_a6568980564c4e39544b1c2bcb71cf3b6"><div class="ttname"><a href="classRefineableTwoMeshFluxPoissonProblem.html#a6568980564c4e39544b1c2bcb71cf3b6">RefineableTwoMeshFluxPoissonProblem::RefineableTwoMeshFluxPoissonProblem</a></div><div class="ttdeci">RefineableTwoMeshFluxPoissonProblem(PoissonEquations&lt; 2 &gt;::PoissonSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="two__d__poisson__flux__bc__adapt_8cc_source.html#l00203">two_d_poisson_flux_bc_adapt.cc:204</a></div></div>
+</div><!-- fragment --><p> Apart from this, the problem is constructed as in the <a href="../../two_d_poisson_flux_bc2/html/index.html#constructor">non-adaptive previous example.</a></p>
+<div class="fragment"><div class="line">  </div>
+<div class="line"> <span class="comment">// Create &quot;surface mesh&quot; that will contain only the prescribed-flux </span></div>
+<div class="line"> <span class="comment">// elements. The constructor just creates the mesh without</span></div>
+<div class="line"> <span class="comment">// giving it any elements, nodes, etc.</span></div>
+<div class="line"> Surface_mesh_pt = <span class="keyword">new</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create prescribed-flux elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 1, but add them to a separate mesh.</span></div>
+<div class="line"> <span class="comment">// Note that this is exactly the same function as used in the </span></div>
+<div class="line"> <span class="comment">// single mesh version of the problem, we merely pass different Mesh pointers.</span></div>
+<div class="line"> create_flux_elements(1,Bulk_mesh_pt,Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">add_sub_mesh</a>(Bulk_mesh_pt);</div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">add_sub_mesh</a>(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">build_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_bound</a> = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>=0;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>&lt;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_bound</a>;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Leave nodes on boundary 1 free</span></div>
+<div class="line">   <span class="keywordflow">if</span> (<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>!=1)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nboundary_node(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n</a>=0;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n</a>&lt;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_node</a>;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n</a>++)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">b</a>,<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n</a>)-&gt;pin(0); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the Poisson bulk elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor: Pass pointer to </span></div>
+<div class="line"> <span class="comment">// source function</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_element</a> = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>=0;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>&lt;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_element</a>;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to Poisson bulk element</span></div>
+<div class="line">   <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">ELEMENT</a> *<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">el_pt</a>-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set pointer to prescribed flux function for flux elements</span></div>
+<div class="line"> set_prescribed_flux_pt();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">cout</a> &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="before_adapt"></a>
+Actions before adaptation</h1>
+<p>The mesh adaptation is driven by the error estimates in the bulk elements and only performed for that mesh. The flux elements must therefore be removed before adaptation. We do this by calling the function <code>delete_flux_elements(...)</code>, and then rebuilding the <code>Problem's</code> global mesh.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_before_adapt======================</span></div>
+<div class="line"><span class="comment">/// Actions before adapt: Wipe the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a10d2a67a5ac599161ddcf876b31334f6">RefineableTwoMeshFluxPoissonProblem&lt;ELEMENT&gt;::actions_before_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Kill the flux elements and wipe surface mesh</span></div>
+<div class="line"> delete_flux_elements(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">rebuild_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_before_adapt</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="after_adapt"></a>
+Actions after adapt</h1>
+<p>After the (bulk-)mesh has been adapted, the flux elements must be re-attached. This is done by calling the function <code>create_flux_elements(...)</code>, followed by a rebuild of the <code>Problem's</code> global mesh. Finally, we set the function pointer to the prescribed flux function for each flux element.</p>
+<div class="fragment"><div class="line"><span class="comment">//=====================start_of_actions_after_adapt=======================</span></div>
+<div class="line"><span class="comment">///  Actions after adapt: Rebuild the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#a0140155529861f5e63ab32feece3c9b6">RefineableTwoMeshFluxPoissonProblem&lt;ELEMENT&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create prescribed-flux elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 1 and add them to surfac mesh</span></div>
+<div class="line"> create_flux_elements(1,Bulk_mesh_pt,Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">rebuild_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set pointer to prescribed flux function for flux elements</span></div>
+<div class="line"> set_prescribed_flux_pt();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc refinement levels in bulk mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">min_refinement_level</a>;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">max_refinement_level</a>;</div>
+<div class="line"> Bulk_mesh_pt-&gt;get_refinement_levels(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">min_refinement_level</a>,</div>
+<div class="line">                                     <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">max_refinement_level</a>); </div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Min/max. refinement levels in bulk mesh: &quot;</span> </div>
+<div class="line">      &lt;&lt; <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">min_refinement_level</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">      &lt;&lt; <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">max_refinement_level</a> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end of actions_after_adapt</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="delete_flux"></a>
+Delete flux elements</h1>
+<p>This function loops over all the flux elements (<a class="el" href="classSimpleRefineableRectangularQuadMesh.html#ae0eab85a2c97fce00d7c82a613378e79" title="Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions....">i.e</a>. those in the surface mesh) and deletes them and their storage.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_delete_flux_elements==============================</span></div>
+<div class="line"><span class="comment">/// Delete Poisson Flux Elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ab35087cadc6dbc7a602441b9a986d650">RefineableTwoMeshFluxPoissonProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classRefineableTwoMeshFluxPoissonProblem.html#ab35087cadc6dbc7a602441b9a986d650">delete_flux_elements</a>(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">Mesh</a>* <span class="keyword">const</span> &amp;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_element</a> = <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the surface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>=0;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>&lt;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">n_element</a>;<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill surface element</span></div>
+<div class="line">   <span class="keyword">delete</span> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>-&gt;element_pt(<a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">e</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleRefineableRectangularQuadMesh.html">surface_mesh_pt</a>-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of delete_flux_elements</span></div>
+</div><!-- fragment --><p> <b>IMPORTANT:</b> Note how the elements are first deleted "manually" and then "flushed" from the surface mesh, using the function <code><a class="el" href="classSimpleRefineableRectangularQuadMesh.html#ae0eab85a2c97fce00d7c82a613378e79" title="Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions....">Mesh::flush_element_and_node_storage()</a></code>. This is necessary because deleting the surface mesh directly (by <code>delete</code> <code>surface_mesh_pt</code>;) would also delete its constituent <code>Nodes</code> which are shared with the bulk mesh and must therefore be retained!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before"></a>
+Actions before solve</h1>
+<p>This remains as <a href="../../two_d_poisson_flux_bc2/html/index.html#actions_before">before. </a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>This remains as <a href="../../two_d_poisson_flux_bc2/html/index.html#doc">before. </a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="create_flux"></a>
+Create flux elements</h1>
+<p>This remains as <a href="../../two_d_poisson_flux_bc2/html/index.html">before. </a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/">demo_drivers/poisson/two_d_poisson_flux_bc_adapt/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc">demo_drivers/poisson/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:58
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+\doxysection{pressure\+\_\+loaded\+\_\+cylinder.\+cc File Reference}
+\hypertarget{pressure__loaded__cylinder_8cc}{}\label{pressure__loaded__cylinder_8cc}\index{pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{Fourier\+Decomposed\+Time\+Harmonic\+Linear\+Elasticity\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Class to validate time harmonic linear elasticity (Fourier decomposed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Global\+\_\+\+Parameters\+::\+Nu}} (0.\+3, 0.\+05)
+\begin{DoxyCompactList}\small\item\em Define Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{Global\+\_\+\+Parameters\+::E}} (1.\+0, 0.\+01)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a33b4f449ae83e34500d729bf701b837d}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (10.\+0, 0.\+0)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional square angular frequency of time-\/harmonic motion. \end{DoxyCompactList}\item 
+const std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a2ceef30cf51dfd432bafde39945a4e45}{Global\+\_\+\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Define the imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a579fa434bf9ee57e66d4bd42b208fc23}{Global\+\_\+\+Parameters\+::boundary\+\_\+traction}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function at r=rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\+\_\+\+Parameters\+::P}} =1.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{pressure__loaded__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}!main@{main}}
+\index{main@{main}!pressure\_loaded\_cylinder.cc@{pressure\_loaded\_cylinder.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{pressure__loaded__cylinder_8cc_source_l00451}{451}} of file \mbox{\hyperlink{pressure__loaded__cylinder_8cc_source}{pressure\+\_\+loaded\+\_\+cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00062}{Global\+\_\+\+Parameters\+::\+Lr}}, \mbox{\hyperlink{cylinder_8cc_source_l00065}{Global\+\_\+\+Parameters\+::\+Lz}}, \mbox{\hyperlink{cylinder_8cc_source_l00070}{Global\+\_\+\+Parameters\+::rmax}}, \mbox{\hyperlink{cylinder_8cc_source_l00068}{Global\+\_\+\+Parameters\+::rmin}}, \mbox{\hyperlink{cylinder_8cc_source_l00071}{Global\+\_\+\+Parameters\+::zmax}}, and \mbox{\hyperlink{cylinder_8cc_source_l00069}{Global\+\_\+\+Parameters\+::zmin}}.
+

@@ -1,0 +1,1392 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+//Header file for MultiPoisson elements
+#ifndef OOMPH_MULTI_POISSON_ELEMENTS_HEADER
+#define OOMPH_MULTI_POISSON_ELEMENTS_HEADER
+
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+#include <sstream>
+
+// OOMPH-LIB headers
+#include "generic/projection.h"
+#include "generic/nodes.h"
+#include "generic/Qelements.h"
+#include "generic/oomph_utilities.h"
+
+
+namespace oomph
+{
+
+  //=============================================================
+  /// A class for all isoparametric elements that solve the
+  /// MultiPoisson equations
+  /// \f[
+  /// (i+1) ( \frac{\partial^2 u_i}{\partial x_j^2}
+  /// + \beta \sum_{k=0}^{k<N} u_k )  = f_i(x_j) \ \ \ \ i=0,...,N-1
+  /// \f]
+  /// This contains the generic maths. Shape functions, geometric
+  /// mapping etc. must get implemented in derived class.
+  /// [Mathematical disclaimer: These are totally and utterly
+  /// invented equations; merely for the purpose of testing out
+  /// the block preconditioning framework. "multi helmholtz" would
+  /// probably be a better name...]
+  //=============================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  class MultiPoissonEquations : public virtual FiniteElement
+  {
+  public:
+    /// Function pointer to source function fct(x,f(x)) --
+    /// x is a Vector!
+    typedef void (*MultiPoissonSourceFctPt)(const Vector<double>& x,
+                                            Vector<double>& f);
+
+
+    /// Constructor (must initialise the Source_fct_pt to null)
+    MultiPoissonEquations() : Source_fct_pt(0), Beta_pt(0) {}
+
+    /// Broken copy constructor
+    MultiPoissonEquations(const MultiPoissonEquations& dummy)
+    {
+      BrokenCopy::broken_copy("MultiPoissonEquations");
+    }
+
+    /// Return the index at which the unknown value
+    /// is stored. The default value, i, is appropriate for single-physics
+    /// problems, when there is only one variable, the value that satisfies
+    /// the multi_poisson equation.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknown is always stored at the same index at each node.
+    virtual inline unsigned u_index_multi_poisson(const unsigned& i) const
+    {
+      return i;
+    }
+
+
+    /// returns the number of DOF types associated with this element:
+    /// The number of fields
+    unsigned ndof_types() const
+    {
+      return NFIELDS;
+    }
+
+    /// Create a list of pairs for all unknowns in this element,
+    /// so that the first entry in each pair contains the global equation
+    /// number of the unknown, while the second one contains the number
+    /// of the "DOF" that this unknown is associated with.
+    /// (Function can obviously only be called if the equation numbering
+    /// scheme has been set up.)
+    void get_dof_numbers_for_unknowns(
+      std::list<std::pair<unsigned long, unsigned>>& block_lookup_list) const
+    {
+      // temporary pair (used to store block lookup prior to being added to list
+      std::pair<unsigned, unsigned> block_lookup;
+
+      // number of nodes
+      const unsigned n_node = this->nnode();
+
+      // Integer storage for local unknown
+      int local_unknown = 0;
+
+      // Loop over the nodes
+      for (unsigned n = 0; n < n_node; n++)
+      {
+        // Loop over fields
+        for (unsigned i = 0; i < NFIELDS; i++)
+        {
+          // Index at which the multi_poisson unknown is stored
+          unsigned u_nodal_index = u_index_multi_poisson(i);
+
+          // Get the local equation
+          local_unknown = nodal_local_eqn(n, u_nodal_index);
+
+          // ignore pinned values
+          if (local_unknown >= 0)
+          {
+            // store block lookup in temporary pair: First entry in pair
+            // is global equation number; second entry is block type
+            block_lookup.first = this->eqn_number(local_unknown);
+            block_lookup.second = i;
+
+            // add to list
+            block_lookup_list.push_front(block_lookup);
+          }
+        }
+      }
+    }
+
+
+    /// Number of scalars/fields output by this element. Reimplements
+    /// broken virtual function in base class.
+    unsigned nscalar_paraview() const
+    {
+      return NFIELDS;
+    }
+
+    /// Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
+    {
+#ifdef PARANOID
+      if (i >= NFIELDS)
+      {
+        std::stringstream error_stream;
+        error_stream << "MultiPoisson elements only stores " << NFIELDS
+                     << " fields so i " << i << " is illegal." << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      unsigned local_loop = this->nplot_points_paraview(nplot);
+      for (unsigned j = 0; j < local_loop; j++)
+      {
+        // Get the local coordinate of the required plot point
+        Vector<double> s(DIM);
+        this->get_s_plot(j, nplot, s);
+
+        file_out << this->interpolated_u_multi_poisson(i, s) << std::endl;
+      }
+    }
+
+    /// Name of the i-th scalar field. Default implementation
+    /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+    /// overloaded with more meaningful names in specific elements.
+    std::string scalar_name_paraview(const unsigned& i) const
+    {
+#ifdef PARANOID
+      if (i >= NFIELDS)
+      {
+        std::stringstream error_stream;
+        error_stream << "MultiPoisson elements only stores " << NFIELDS
+                     << " fields so i " << i << " is illegal." << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      return "MultiPoisson solution" + StringConversion::to_string(i);
+    }
+
+    /// Output with default number of plot points
+    void output(std::ostream& outfile)
+    {
+      const unsigned n_plot = 5;
+      output(outfile, n_plot);
+    }
+
+    /// Output FE representation of soln: x,y,u or x,y,z,u at
+    /// n_plot^DIM plot points
+    void output(std::ostream& outfile, const unsigned& n_plot);
+
+    /// C_style output with default number of plot points
+    void output(FILE* file_pt)
+    {
+      const unsigned n_plot = 5;
+      output(file_pt, n_plot);
+    }
+
+    /// C-style output FE representation of soln: x,y,u or x,y,z,u at
+    /// n_plot^DIM plot points
+    void output(FILE* file_pt, const unsigned& n_plot);
+
+    /// Output exact soln: x,y,u_exact or x,y,z,u_exact at n_plot^DIM plot
+    /// points
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+    /// Output exact soln: x,y,u_exact or x,y,z,u_exact at
+    /// n_plot^DIM plot points (dummy time-dependent version to
+    /// keep intel compiler happy)
+    virtual void output_fct(
+      std::ostream& outfile,
+      const unsigned& n_plot,
+      const double& time,
+      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+    {
+      throw OomphLibError(
+        "There is no time-dependent output_fct() for MultiPoisson elements ",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+    }
+
+
+    /// Get error against and norm of exact solution
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
+
+
+    /// Dummy, time dependent error checker
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm)
+    {
+      throw OomphLibError(
+        "There is no time-dependent compute_error() for MultiPoisson elements",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+    }
+
+    /// Access function: Pointer to interaction parameter beta
+    double*& beta_pt()
+    {
+      return Beta_pt;
+    }
+
+    /// Access function: Pointer to source function
+    MultiPoissonSourceFctPt& source_fct_pt()
+    {
+      return Source_fct_pt;
+    }
+
+    /// Access function: Pointer to source function. Const version
+    MultiPoissonSourceFctPt source_fct_pt() const
+    {
+      return Source_fct_pt;
+    }
+
+    /// Get source term at (Eulerian) position x. This function is
+    /// virtual to allow overloading in multi-physics problems where
+    /// the strength of the source function might be determined by
+    /// another system of equations.
+    inline virtual void get_source_multi_poisson(const unsigned& ipt,
+                                                 const Vector<double>& x,
+                                                 Vector<double>& source) const
+    {
+      // If no source function has been set, return zero
+      if (Source_fct_pt == 0)
+      {
+        for (unsigned i = 0; i < NFIELDS; i++)
+        {
+          source[i] = 0.0;
+        }
+      }
+      else
+      {
+        // Get source strength
+        (*Source_fct_pt)(x, source);
+      }
+    }
+
+
+    /// Get flux: flux[i] = du/dx_i
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
+    {
+      abort();
+
+      /* //Find out how many nodes there are in the element */
+      /* const unsigned n_node = nnode(); */
+
+      /* //Get the index at which the unknown is stored */
+      /* const unsigned u_nodal_index = u_index_multi_poisson(); */
+
+      /* //Set up memory for the shape and test functions */
+      /* Shape psi(n_node); */
+      /* DShape dpsidx(n_node,DIM); */
+
+      /* //Call the derivatives of the shape and test functions */
+      /* dshape_eulerian(s,psi,dpsidx); */
+
+      /* //Initialise to zero */
+      /* for(unsigned j=0;j<DIM;j++) */
+      /*  { */
+      /*   flux[j] = 0.0; */
+      /*  } */
+
+      /* // Loop over nodes */
+      /* for(unsigned l=0;l<n_node;l++)  */
+      /*  { */
+      /*   //Loop over derivative directions */
+      /*   for(unsigned j=0;j<DIM;j++) */
+      /*    {                                */
+      /*     flux[j] += this->nodal_value(l,u_nodal_index)*dpsidx(l,j); */
+      /*    } */
+      /*  } */
+    }
+
+
+    /// Add the element's contribution to its residual vector (wrapper)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      // using a dummy matrix argument
+      fill_in_generic_residual_contribution_multi_poisson(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    }
+
+
+    /// Add the element's contribution to its residual vector and
+    /// element Jacobian matrix (wrapper)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_multi_poisson(
+        residuals, jacobian, 1);
+    }
+
+
+    /// Return FE representation of i-th function value u_multi_poisson(s)
+    /// at local coordinate s
+    inline double interpolated_u_multi_poisson(const unsigned& i,
+                                               const Vector<double>& s) const
+    {
+      // Find number of nodes
+      const unsigned n_node = nnode();
+
+      // Get the index at which the multi_poisson unknown is stored
+      const unsigned u_nodal_index = u_index_multi_poisson(i);
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      shape(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        interpolated_u += this->nodal_value(l, u_nodal_index) * psi[l];
+      }
+
+      return (interpolated_u);
+    }
+
+
+    /// Self-test: Return 0 for OK
+    unsigned self_test();
+
+
+  protected:
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// local coord. s; return  Jacobian of mapping
+    virtual double dshape_and_dtest_eulerian_multi_poisson(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return  Jacobian of mapping
+    virtual double dshape_and_dtest_eulerian_at_knot_multi_poisson(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return Jacobian of mapping (J). Also compute
+    /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+    virtual double dshape_and_dtest_eulerian_at_knot_multi_poisson(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const = 0;
+
+    /// Compute element residual Vector only (if flag=and/or element
+    /// Jacobian matrix
+    virtual void fill_in_generic_residual_contribution_multi_poisson(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
+
+    /// Pointer to source function:
+    MultiPoissonSourceFctPt Source_fct_pt;
+
+    /// Pointer to interaction parameter Beta
+    double* Beta_pt;
+  };
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  //======================================================================
+  /// QMultiPoissonElement elements are linear/quadrilateral/brick-shaped
+  /// MultiPoisson elements with isoparametric interpolation for the function.
+  //======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  class QMultiPoissonElement
+    : public virtual QElement<DIM, NNODE_1D>,
+      public virtual MultiPoissonEquations<DIM, NFIELDS>
+  {
+  private:
+    /// Static int that holds the number of variables at
+    /// nodes: always the same
+    static const unsigned Initial_Nvalue;
+
+  public:
+    /// Constructor: Call constructors for QElement and
+    /// MultiPoisson equations
+    QMultiPoissonElement()
+      : QElement<DIM, NNODE_1D>(), MultiPoissonEquations<DIM, NFIELDS>()
+    {
+    }
+
+    /// Broken copy constructor
+    QMultiPoissonElement(
+      const QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>& dummy)
+    {
+      BrokenCopy::broken_copy("QMultiPoissonElement");
+    }
+
+    ///  Required  # of `values' (pinned or dofs)
+    /// at node n
+    inline unsigned required_nvalue(const unsigned& n) const
+    {
+      return Initial_Nvalue;
+    }
+
+    /// Output function:
+    ///  x,y,u   or    x,y,z,u
+    void output(std::ostream& outfile)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output(outfile);
+    }
+
+
+    ///  Output function:
+    ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output(outfile, n_plot);
+    }
+
+
+    /// C-style output function:
+    ///  x,y,u   or    x,y,z,u
+    void output(FILE* file_pt)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output(file_pt);
+    }
+
+
+    ///  C-style output function:
+    ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output(file_pt, n_plot);
+    }
+
+
+    /// Output function for an exact solution:
+    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output_fct(
+        outfile, n_plot, exact_soln_pt);
+    }
+
+
+    /// Output function for a time-dependent exact solution.
+    ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+    /// (Calls the steady version)
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+    {
+      MultiPoissonEquations<DIM, NFIELDS>::output_fct(
+        outfile, n_plot, time, exact_soln_pt);
+    }
+
+
+  protected:
+    /// Shape, test functions & derivs. w.r.t. to global coords. Return
+    /// Jacobian.
+    inline double dshape_and_dtest_eulerian_multi_poisson(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+
+    /// Shape, test functions & derivs. w.r.t. to global coords. at
+    /// integration point ipt. Return Jacobian.
+    inline double dshape_and_dtest_eulerian_at_knot_multi_poisson(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return Jacobian of mapping (J). Also compute
+    /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+    inline double dshape_and_dtest_eulerian_at_knot_multi_poisson(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const;
+  };
+
+
+  // Inline functions:
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. global coordinates and return Jacobian of mapping.
+  ///
+  /// Galerkin: Test functions = shape functions
+  //======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  double QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>::
+    dshape_and_dtest_eulerian_multi_poisson(const Vector<double>& s,
+                                            Shape& psi,
+                                            DShape& dpsidx,
+                                            Shape& test,
+                                            DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    const double J = this->dshape_eulerian(s, psi, dpsidx);
+
+    // Set the test functions equal to the shape functions
+    test = psi;
+    dtestdx = dpsidx;
+
+    // Return the jacobian
+    return J;
+  }
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. global coordinates and return Jacobian of mapping.
+  ///
+  /// Galerkin: Test functions = shape functions
+  //======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  double QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>::
+    dshape_and_dtest_eulerian_at_knot_multi_poisson(const unsigned& ipt,
+                                                    Shape& psi,
+                                                    DShape& dpsidx,
+                                                    Shape& test,
+                                                    DShape& dtestdx) const
+  {
+    // Call the geometrical shape functions and derivatives
+    const double J = this->dshape_eulerian_at_knot(ipt, psi, dpsidx);
+
+    // Set the pointers of the test functions
+    test = psi;
+    dtestdx = dpsidx;
+
+    // Return the jacobian
+    return J;
+  }
+
+
+  //======================================================================
+  /// Define the shape functions (psi) and test functions (test) and
+  /// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+  /// and return Jacobian of mapping (J). Additionally compute the
+  /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+  ///
+  /// Galerkin: Test functions = shape functions
+  //======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  double QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>::
+    dshape_and_dtest_eulerian_at_knot_multi_poisson(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      RankFourTensor<double>& d_dpsidx_dX,
+      Shape& test,
+      DShape& dtestdx,
+      RankFourTensor<double>& d_dtestdx_dX,
+      DenseMatrix<double>& djacobian_dX) const
+  {
+    // Call the geometrical shape functions and derivatives
+    const double J = this->dshape_eulerian_at_knot(
+      ipt, psi, dpsidx, djacobian_dX, d_dpsidx_dX);
+
+    // Set the pointers of the test functions
+    test = psi;
+    dtestdx = dpsidx;
+    d_dtestdx_dX = d_dpsidx_dX;
+
+    // Return the jacobian
+    return J;
+  }
+
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// Face geometry for the QMultiPoissonElement elements: The spatial
+  /// dimension of the face elements is one lower than that of the
+  /// bulk element but they have the same number of points
+  /// along their 1D edges.
+  //=======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  class FaceGeometry<QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>>
+    : public virtual QElement<DIM - 1, NNODE_1D>
+  {
+  public:
+    /// Constructor: Call the constructor for the
+    /// appropriate lower-dimensional QElement
+    FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
+  };
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// Face geometry for the 1D QMultiPoissonElement elements: Point elements
+  //=======================================================================
+  template<unsigned NNODE_1D, unsigned NFIELDS>
+  class FaceGeometry<QMultiPoissonElement<1, NNODE_1D, NFIELDS>>
+    : public virtual PointElement
+  {
+  public:
+    /// Constructor: Call the constructor for the
+    /// appropriate lower-dimensional QElement
+    FaceGeometry() : PointElement() {}
+  };
+
+
+  // hierher re-enable at some point?
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+
+  /* //========================================================== */
+  /* /// MultiPoisson upgraded to become projectable */
+  /* //========================================================== */
+  /*  template<class POISSON_ELEMENT> */
+  /*  class ProjectableMultiPoissonElement :  */
+  /*   public virtual ProjectableElement<POISSON_ELEMENT> */
+  /*  { */
+
+  /*  public: */
+
+  /*   /// Specify the values associated with field fld.  */
+  /*   /// The information is returned in a vector of pairs which comprise  */
+  /*   /// the Data object and the value within it, that correspond to field
+   * fld.  */
+  /*   Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned&
+   * fld) */
+  /*    {  */
+
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+
+  /*     // Create the vector */
+  /*     unsigned nnod=this->nnode(); */
+  /*     Vector<std::pair<Data*,unsigned> > data_values(nnod); */
+
+  /*     // Loop over all nodes */
+  /*     for (unsigned j=0;j<nnod;j++) */
+  /*      { */
+  /*       // Add the data value associated field: The node itself */
+  /*       data_values[j]=std::make_pair(this->node_pt(j),fld); */
+  /*      } */
+
+  /*     // Return the vector */
+  /*     return data_values; */
+  /*    } */
+
+  /*   /// Number of fields to be projected: Just one */
+  /*   unsigned nfields_for_projection() */
+  /*    { */
+  /*     return 1; */
+  /*    } */
+
+  /*   /// Number of history values to be stored for fld-th field */
+  /*   /// (includes current value!) */
+  /*   unsigned nhistory_values_for_projection(const unsigned &fld) */
+  /*   { */
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+  /*    return this->node_pt(0)->ntstorage();    */
+  /*   } */
+
+  /*   ///Number of positional history values */
+  /*   /// (Note: count includes current value!) */
+  /*   unsigned nhistory_values_for_coordinate_projection() */
+  /*    { */
+  /*     return this->node_pt(0)->position_time_stepper_pt()->ntstorage(); */
+  /*    } */
+
+  /*   /// Return Jacobian of mapping and shape functions of field fld */
+  /*   /// at local coordinate s */
+  /*   double jacobian_and_shape_of_field(const unsigned &fld,  */
+  /*                                      const Vector<double> &s,  */
+  /*                                      Shape &psi) */
+  /*    { */
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+  /*     unsigned n_dim=this->dim(); */
+  /*     unsigned n_node=this->nnode(); */
+  /*     Shape test(n_node);  */
+  /*     DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim); */
+  /*     double J=this->dshape_and_dtest_eulerian_multi_poisson(s,psi,dpsidx, */
+  /*                                                      test,dtestdx); */
+  /*     return J; */
+  /*    } */
+
+
+  /*   /// Return interpolated field fld at local coordinate s, at time level */
+  /*   /// t (t=0: present; t>0: history values) */
+  /*   double get_field(const unsigned &t,  */
+  /*                    const unsigned &fld, */
+  /*                    const Vector<double>& s) */
+  /*    { */
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+  /*     //Find the index at which the variable is stored */
+  /*     unsigned u_nodal_index = this->u_index_multi_poisson(); */
+
+  /*       //Local shape function */
+  /*     unsigned n_node=this->nnode(); */
+  /*     Shape psi(n_node); */
+
+  /*     //Find values of shape function */
+  /*     this->shape(s,psi); */
+
+  /*     //Initialise value of u */
+  /*     double interpolated_u = 0.0; */
+
+  /*     //Sum over the local nodes */
+  /*     for(unsigned l=0;l<n_node;l++)  */
+  /*      { */
+  /*       interpolated_u += this->nodal_value(l,u_nodal_index)*psi[l]; */
+  /*      } */
+  /*     return interpolated_u;      */
+  /*    } */
+
+
+  /*   ///Return number of values in field fld: One per node */
+  /*   unsigned nvalue_of_field(const unsigned &fld) */
+  /*    { */
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+  /*     return this->nnode(); */
+  /*    } */
+
+
+  /*   ///Return local equation number of value j in field fld. */
+  /*   int local_equation(const unsigned &fld, */
+  /*                      const unsigned &j) */
+  /*    { */
+  /* #ifdef PARANOID */
+  /*     if (fld!=0) */
+  /*      { */
+  /*       std::stringstream error_stream; */
+  /*       error_stream  */
+  /*        << "MultiPoisson elements only store a single field so fld must be 0
+   * rather" */
+  /*        << " than " << fld << std::endl; */
+  /*       throw OomphLibError( */
+  /*        error_stream.str(), */
+  /*        OOMPH_CURRENT_FUNCTION, */
+  /*        OOMPH_EXCEPTION_LOCATION); */
+  /*      } */
+  /* #endif */
+  /*     const unsigned u_nodal_index = this->u_index_multi_poisson(); */
+  /*     return this->nodal_local_eqn(j,u_nodal_index);      */
+  /*    } */
+
+  /*  }; */
+
+
+  /* //=======================================================================
+   */
+  /* /// Face geometry for element is the same as that for the underlying */
+  /* /// wrapped element */
+  /* //=======================================================================
+   */
+  /*  template<class ELEMENT> */
+  /*  class FaceGeometry<ProjectableMultiPoissonElement<ELEMENT> >  */
+  /*   : public virtual FaceGeometry<ELEMENT> */
+  /*  { */
+  /*  public: */
+  /*   FaceGeometry() : FaceGeometry<ELEMENT>() {} */
+  /*  }; */
+
+
+  /* //=======================================================================
+   */
+  /* /// Face geometry of the Face Geometry for element is the same as  */
+  /* /// that for the underlying wrapped element */
+  /* //=======================================================================
+   */
+  /*  template<class ELEMENT> */
+  /*  class FaceGeometry<FaceGeometry<ProjectableMultiPoissonElement<ELEMENT> >
+   * > */
+  /*   : public virtual FaceGeometry<FaceGeometry<ELEMENT> > */
+  /*  { */
+  /*  public: */
+  /*   FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {} */
+  /*  }; */
+
+
+} // namespace oomph
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//  cc code included too since it's all templated
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+namespace oomph
+{
+
+
+  //======================================================================
+  /// Set the data for the number of Variables at each node, always one
+  /// in every case
+  //======================================================================
+  template<unsigned DIM, unsigned NNODE_1D, unsigned NFIELDS>
+  const unsigned QMultiPoissonElement<DIM, NNODE_1D, NFIELDS>::Initial_Nvalue =
+    NFIELDS;
+
+
+  //======================================================================
+  /// Compute element residual Vector and/or element Jacobian matrix
+  ///
+  /// flag=1: compute both
+  /// flag=0: compute only residual Vector
+  ///
+  /// Pure version without hanging nodes
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  void MultiPoissonEquations<DIM, NFIELDS>::
+    fill_in_generic_residual_contribution_multi_poisson(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag)
+  {
+    // Find out how many nodes there are
+    const unsigned n_node = nnode();
+
+    // Set up memory for the shape and test functions
+    Shape psi(n_node), test(n_node);
+    DShape dpsidx(n_node, DIM), dtestdx(n_node, DIM);
+
+    // Set the value of n_intpt
+    const unsigned n_intpt = integral_pt()->nweight();
+
+    // Integers to store the local equation and unknown numbers
+    int local_eqn = 0, local_unknown = 0;
+
+    // Loop over the integration points
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+    {
+      // Get the integral weight
+      double w = integral_pt()->weight(ipt);
+
+      // Call the derivatives of the shape and test functions
+      double J = dshape_and_dtest_eulerian_at_knot_multi_poisson(
+        ipt, psi, dpsidx, test, dtestdx);
+
+      // Premultiply the weights and the Jacobian
+      double W = w * J;
+
+      // Calculate local values of unknown
+      // Allocate and initialise to zero
+      Vector<double> interpolated_u(NFIELDS, 0.0);
+      Vector<double> interpolated_x(DIM, 0.0);
+      Vector<Vector<double>> interpolated_dudx(NFIELDS);
+
+
+      // Calculate function value and derivatives:
+      //-----------------------------------------
+      for (unsigned i = 0; i < NFIELDS; i++)
+      {
+        interpolated_dudx[i].resize(DIM);
+        for (unsigned ii = 0; ii < DIM; ii++)
+        {
+          interpolated_dudx[i][ii] = 0.0;
+        }
+      }
+      // Loop over nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over directions for coordinates
+        for (unsigned j = 0; j < DIM; j++)
+        {
+          interpolated_x[j] += raw_nodal_position(l, j) * psi(l);
+        }
+
+        // Loop over fields
+        for (unsigned i = 0; i < NFIELDS; i++)
+        {
+          // Index at which the multi_poisson unknown is stored
+          unsigned u_nodal_index = u_index_multi_poisson(i);
+
+          // Get the nodal value of the multi_poisson unknown
+          double u_value = raw_nodal_value(l, u_nodal_index);
+          interpolated_u[i] += u_value * psi(l);
+
+          // Loop over directions for derivs
+          for (unsigned j = 0; j < DIM; j++)
+          {
+            interpolated_dudx[i][j] += u_value * dpsidx(l, j);
+          }
+        }
+      }
+
+      // Get source function
+      //-------------------
+      Vector<double> source(NFIELDS);
+      get_source_multi_poisson(ipt, interpolated_x, source);
+
+
+      // Get interaction parameter
+#ifdef PARANOID
+      if (Beta_pt == 0)
+      {
+        throw OomphLibError("Beta_pt hasn't been set!",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      const double beta_local = *Beta_pt;
+
+
+      // Assemble residuals and Jacobian
+      //--------------------------------
+
+      // Loop over the test functions
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        for (unsigned i = 0; i < NFIELDS; i++)
+        {
+          // Index at which the multi_poisson unknown is stored
+          unsigned u_nodal_index = u_index_multi_poisson(i);
+
+          // Get the local equation
+          local_eqn = nodal_local_eqn(l, u_nodal_index);
+
+          // IF it's not a boundary condition
+          if (local_eqn >= 0)
+          {
+            // Add body force/source term here
+            residuals[local_eqn] += source[i] * test(l) * W;
+
+            // The Poisson bit itself
+            for (unsigned k = 0; k < DIM; k++)
+            {
+              residuals[local_eqn] +=
+                double(i + 1) * interpolated_dudx[i][k] * dtestdx(l, k) * W;
+            }
+
+            // The interaction bit:
+            for (unsigned k = 0; k < NFIELDS; k++)
+            {
+              residuals[local_eqn] -=
+                double(i + 1) * beta_local * interpolated_u[k] * test(l) * W;
+            }
+
+            // Calculate the jacobian
+            //-----------------------
+            if (flag)
+            {
+              // Loop over the velocity shape functions again
+              for (unsigned l2 = 0; l2 < n_node; l2++)
+              {
+                for (unsigned i2 = 0; i2 < NFIELDS; i2++)
+                {
+                  // Index at which the multi_poisson unknown is stored
+                  unsigned u_nodal_index2 = u_index_multi_poisson(i2);
+
+                  local_unknown = nodal_local_eqn(l2, u_nodal_index2);
+                  // If at a non-zero degree of freedom add in the entry
+                  if (local_unknown >= 0)
+                  {
+                    // The Poisson bit
+                    if (i == i2)
+                    {
+                      for (unsigned ii = 0; ii < DIM; ii++)
+                      {
+                        jacobian(local_eqn, local_unknown) +=
+                          double(i + 1) * dpsidx(l2, ii) * dtestdx(l, ii) * W;
+                      }
+                    }
+                    jacobian(local_eqn, local_unknown) -=
+                      double(i + 1) * beta_local * psi(l2) * test(l) * W;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    } // End of loop over integration points
+  }
+
+
+  //======================================================================
+  /// Self-test:  Return 0 for OK
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  unsigned MultiPoissonEquations<DIM, NFIELDS>::self_test()
+  {
+    bool passed = true;
+
+    // Check lower-level stuff
+    if (FiniteElement::self_test() != 0)
+    {
+      passed = false;
+    }
+
+    // Return verdict
+    if (passed)
+    {
+      return 0;
+    }
+    else
+    {
+      return 1;
+    }
+  }
+
+
+  //======================================================================
+  /// Output function:
+  ///
+  ///   x,y,u   or    x,y,z,u
+  ///
+  /// nplot points in each coordinate direction
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  void MultiPoissonEquations<DIM, NFIELDS>::output(std::ostream& outfile,
+                                                   const unsigned& nplot)
+  {
+    // Vector of local coordinates
+    Vector<double> s(DIM);
+
+    // Tecplot header info
+    outfile << tecplot_zone_string(nplot);
+
+    // Loop over plot points
+    unsigned num_plot_points = nplot_points(nplot);
+    for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+    {
+      // Get local coordinates of plot point
+      get_s_plot(iplot, nplot, s);
+
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        outfile << interpolated_x(s, i) << " ";
+      }
+      for (unsigned i = 0; i < NFIELDS; i++)
+      {
+        outfile << interpolated_u_multi_poisson(i, s) << " ";
+      }
+      outfile << std::endl;
+    }
+
+    // Write tecplot footer (e.g. FE connectivity lists)
+    write_tecplot_zone_footer(outfile, nplot);
+  }
+
+
+  //======================================================================
+  /// C-style output function:
+  ///
+  ///   x,y,u   or    x,y,z,u
+  ///
+  /// nplot points in each coordinate direction
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  void MultiPoissonEquations<DIM, NFIELDS>::output(FILE* file_pt,
+                                                   const unsigned& nplot)
+  {
+    // Vector of local coordinates
+    Vector<double> s(DIM);
+
+    // Tecplot header info
+    fprintf(file_pt, "%s", tecplot_zone_string(nplot).c_str());
+
+    // Loop over plot points
+    unsigned num_plot_points = nplot_points(nplot);
+    for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+    {
+      // Get local coordinates of plot point
+      get_s_plot(iplot, nplot, s);
+
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        fprintf(file_pt, "%g ", interpolated_x(s, i));
+      }
+      for (unsigned i = 0; i < NFIELDS; i++)
+      {
+        fprintf(file_pt, "%g ", interpolated_u_multi_poisson(i, s));
+      }
+      fprintf(file_pt, "\n");
+    }
+
+    // Write tecplot footer (e.g. FE connectivity lists)
+    write_tecplot_zone_footer(file_pt, nplot);
+  }
+
+
+  //======================================================================
+  /// Output exact solution
+  ///
+  /// Solution is provided via function pointer.
+  /// Plot at a given number of plot points.
+  ///
+  ///   x,y,u_exact    or    x,y,z,u_exact
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  void MultiPoissonEquations<DIM, NFIELDS>::output_fct(
+    std::ostream& outfile,
+    const unsigned& nplot,
+    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+  {
+    // Vector of local coordinates
+    Vector<double> s(DIM);
+
+    // Vector for coordintes
+    Vector<double> x(DIM);
+
+    // Tecplot header info
+    outfile << tecplot_zone_string(nplot);
+
+    // Exact solution Vector
+    Vector<double> exact_soln(NFIELDS);
+
+    // Loop over plot points
+    unsigned num_plot_points = nplot_points(nplot);
+    for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+    {
+      // Get local coordinates of plot point
+      get_s_plot(iplot, nplot, s);
+
+      // Get x position as Vector
+      interpolated_x(s, x);
+
+      // Get exact solution at this point
+      (*exact_soln_pt)(x, exact_soln);
+
+      // Output x,y,...,u_exact
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        outfile << x[i] << " ";
+      }
+      for (unsigned i = 0; i < NFIELDS; i++)
+      {
+        outfile << exact_soln[i] << " ";
+      }
+      outfile << std::endl;
+    }
+
+    // Write tecplot footer (e.g. FE connectivity lists)
+    write_tecplot_zone_footer(outfile, nplot);
+  }
+
+
+  //======================================================================
+  /// Validate against exact solution
+  ///
+  /// Solution is provided via function pointer.
+  /// Plot error at a given number of plot points.
+  ///
+  //======================================================================
+  template<unsigned DIM, unsigned NFIELDS>
+  void MultiPoissonEquations<DIM, NFIELDS>::compute_error(
+    std::ostream& outfile,
+    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+    double& error,
+    double& norm)
+  {
+    // Initialise
+    error = 0.0;
+    norm = 0.0;
+
+    // Vector of local coordinates
+    Vector<double> s(DIM);
+
+    // Vector for coordintes
+    Vector<double> x(DIM);
+
+    // Find out how many nodes there are in the element
+    unsigned n_node = nnode();
+
+    Shape psi(n_node);
+
+    // Set the value of n_intpt
+    unsigned n_intpt = integral_pt()->nweight();
+
+    // Tecplot
+    outfile << "ZONE" << std::endl;
+
+    // Exact solution Vector (here a scalar)
+    Vector<double> exact_soln(NFIELDS);
+
+    // Loop over the integration points
+    for (unsigned ipt = 0; ipt < n_intpt; ipt++)
+    {
+      // Assign values of s
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        s[i] = integral_pt()->knot(ipt, i);
+      }
+
+      // Get the integral weight
+      double w = integral_pt()->weight(ipt);
+
+      // Get jacobian of mapping
+      double J = J_eulerian(s);
+
+      // Premultiply the weights and the Jacobian
+      double W = w * J;
+
+      // Get x position as Vector
+      interpolated_x(s, x);
+
+
+      // Output x,y,...
+      for (unsigned i = 0; i < DIM; i++)
+      {
+        outfile << x[i] << " ";
+      }
+
+      // Get exact solution at this point
+      (*exact_soln_pt)(x, exact_soln);
+
+      for (unsigned i = 0; i < NFIELDS; i++)
+      {
+        // Get FE function value
+        double u_fe = interpolated_u_multi_poisson(i, s);
+        outfile << exact_soln[i] << " " << exact_soln[i] - u_fe << " ";
+
+        // Add to error and norm
+        norm += exact_soln[i] * exact_soln[i] * W;
+        error += (exact_soln[i] - u_fe) * (exact_soln[i] - u_fe) * W;
+      }
+      outfile << std::endl;
+    }
+  }
+
+
+} // namespace oomph
+
+
+#endif

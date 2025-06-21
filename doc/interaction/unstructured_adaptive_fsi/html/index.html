@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: 2D FSI on unstructured meshes with adaptivity</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: 2D FSI on unstructured meshes with adaptivity </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This tutorial demonstrates the use of unstructured meshes in 2D fluid-structure interaction problems with adaptivity. The formulation is extremely similar to that used in <a href="../../../interaction/unstructured_fsi/html/index.html">unstructured fsi without adaptivity, </a> but the geometry of the problem is closely related to the <a href="../../fsi_channel_with_leaflet/html/index.html">flow in a channel with a leaflet using structured adaptivity. </a></p>
+<p>The solid mechanics problem is exactly the same as that described in the <a href="../../../solid/unstructured_adaptive_solid/html/index.html">unstructured solid mechanics with adaptivity tutorial. </a> The fluid mechanics problem is new, but is a simple extension of the previous problems. The key realisation is that the unstructured refinement can take place independently for the fluid and solid domains provided that the common boundary between them has a common parametrisation. Moreover, the common boundary <b>must</b> have the same parametrisation in order for the fluid-structure interaction to be set up in the first place. Thus, setting up unstructured adaptivity for fsi problems is no more difficult than setting up the original unstructured problem using <code>oomph-lib's</code> <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">inline unstructured mesh generation </a> procedures.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="the_problem"></a>
+The problem</h1>
+<p>The figure below shows a sketch of the problem. A 2D channel is partly obstructed by an elastic bar and has an imposed parabolic inlet velocity profile.</p>
+<div class="image">
+<img src="fsi_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem showing fluid and solid boundary </div></div>
+ <p>The non-dimension formulation is the same as described in <a href="../../unstructured_fsi/html/index.html">the related non-adaptive problem. </a> The fluid structure interaction parameter <img class="formulaInl" alt="$Q $" src="form_0.png" width="10" height="13"/> is the ratio of viscous fluid stress to the reference stress (Young's modulus) of the solid. <br  />
+</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows streamlines and pressure contours for the steady solution when <img class="formulaInl" alt="$Q = 3\times 10^{-4} $" src="form_1.png" width="74" height="14"/> and <img class="formulaInl" alt="$ Re = 0 $" src="form_2.png" width="38" height="10"/></p>
+<div class="image">
+<img src="res.gif" alt=""/>
+<div class="caption">
+The flow field (streamlines and pressure contours) and the deformation of the elastic obstacle. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="overview_implementation"></a>
+Overview of the implementation</h1>
+<p>The implementation is exactly the same as described in the <a href="../../unstructured_fsi/html/index.html">non-adaptive unstructured mesh fluid-structure interaction problem. </a> The only difference is that the meshes are constructed using <code>oomph-lib's</code> <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">inline mesh generation procedures. </a></p>
+<p>For simplicity the common boundaries between the fluid and solid mesh are assigned the same boundary ids, but this is not necessary. The boundary ids for each domain are shown in the sketch above.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Problem Parameters</h1>
+<p>The various problem parameters are defined in a global namespace. We define the Reynolds number, <img class="formulaInl" alt="$ Re $" src="form_3.png" width="15" height="10"/>, and the FSI interaction parameter <img class="formulaInl" alt="$ Q $" src="form_4.png" width="10" height="13"/>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a> = 0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// FSI parameter</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a66cb7ecda9ba0cd72367dd697f154545">Q</a> = 0.0;</div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00080">unstructured_adaptive_2d_fsi.cc:81</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a66cb7ecda9ba0cd72367dd697f154545"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a66cb7ecda9ba0cd72367dd697f154545">Global_Physical_Variables::Q</a></div><div class="ttdeci">double Q</div><div class="ttdoc">FSI parameter.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00086">unstructured_adaptive_2d_fsi.cc:86</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00083">unstructured_adaptive_2d_fsi.cc:83</a></div></div>
+</div><!-- fragment --><p> We specify the Poisson ratio of the solid and provide a pointer to the constitutive equation for the solid.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Nu=0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* Constitutive_law_pt=0;</div>
+</div><!-- fragment --><p> The Poisson's ratio and pointer to a constitutive law for the mesh deformation is specified separately.</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Mesh poisson ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Mesh_Nu = 0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to constitutive law for the mesh</span></div>
+<div class="line"><span class="comment"></span> ConstitutiveLaw* Mesh_constitutive_law_pt=0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end namespace</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We set an output directory, trace file and instantiate the constitutive laws for the real and mesh solid mechanics computations with the appropriate Poisson ratios:</p>
+ <div class="fragment"><div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create a trace file</span></div>
+<div class="line"> std::ofstream trace(<span class="stringliteral">&quot;RESLT/trace.dat&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create generalised Hookean constitutive equations</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create generalised Hookean constitutive equations for the mesh as well</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aac1b52d0b82bc48d24dfcb031d9dc25f">Global_Physical_Variables::Mesh_constitutive_law_pt</a> = </div>
+<div class="line">  <span class="keyword">new</span> GeneralisedHookean(&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a0f1535b448627cbfa0acfb742120d96f">Global_Physical_Variables::Mesh_Nu</a>);</div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a0f1535b448627cbfa0acfb742120d96f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a0f1535b448627cbfa0acfb742120d96f">Global_Physical_Variables::Mesh_Nu</a></div><div class="ttdeci">double Mesh_Nu</div><div class="ttdoc">Mesh poisson ratio.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00095">unstructured_adaptive_2d_fsi.cc:95</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a2a37fb040c832ee7a086bb13bb02a100"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00092">unstructured_adaptive_2d_fsi.cc:92</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00089">unstructured_adaptive_2d_fsi.cc:89</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aac1b52d0b82bc48d24dfcb031d9dc25f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aac1b52d0b82bc48d24dfcb031d9dc25f">Global_Physical_Variables::Mesh_constitutive_law_pt</a></div><div class="ttdeci">ConstitutiveLaw * Mesh_constitutive_law_pt</div><div class="ttdoc">Pointer to constitutive law for the mesh.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00098">unstructured_adaptive_2d_fsi.cc:98</a></div></div>
+</div><!-- fragment --><p> We then create the <code>Problem</code> object and output the initial guess for the solution</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a>&lt;</div>
+<div class="line"> ProjectableTaylorHoodElement&lt;</div>
+<div class="line"> PseudoSolidNodeUpdateElement&lt;TTaylorHoodElement&lt;2&gt;, TPVDElement&lt;2,3&gt; &gt; &gt;, </div>
+<div class="line">  ProjectablePVDElement&lt;TPVDElement&lt;2,3&gt; &gt; &gt; problem;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Output initial configuration</span></div>
+<div class="line">problem.<a class="code hl_function" href="classUnstructuredFSIProblem.html#a15f581318b505de07f50bd570da8c8d0">doc_solution</a>(doc_info);</div>
+<div class="line">doc_info.number()++;</div>
+<div class="ttc" id="aclassUnstructuredFSIProblem_html"><div class="ttname"><a href="classUnstructuredFSIProblem.html">UnstructuredFSIProblem</a></div><div class="ttdoc">Unstructured FSI problem.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00108">unstructured_adaptive_2d_fsi.cc:109</a></div></div>
+<div class="ttc" id="aclassUnstructuredFSIProblem_html_a15f581318b505de07f50bd570da8c8d0"><div class="ttname"><a href="classUnstructuredFSIProblem.html#a15f581318b505de07f50bd570da8c8d0">UnstructuredFSIProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00887">unstructured_adaptive_2d_fsi.cc:888</a></div></div>
+</div><!-- fragment --><p> Initially <img class="formulaInl" alt="$ Q=0 $" src="form_5.png" width="33" height="13"/> and <img class="formulaInl" alt="$ Re=0 $" src="form_6.png" width="38" height="10"/>, so the solid should remain undeformed and the fluid problem is linear. We expect to obtain the solution in one Newton iteration and so we perform one steady solve with the default mesh and output the result. We also output the strain energy of the solid and dissipation of the fluid as global measures of the solution that can be used for validation. (The unstructured meshes generated are not guaranteed to be exactly the same on different computers.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment">// Solve the problem</span></div>
+<div class="line">problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Output solution</span></div>
+<div class="line">problem.doc_solution(doc_info);</div>
+<div class="line">doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Calculate the strain energy of the solid and dissipation in the</span></div>
+<div class="line"><span class="comment">//fluid as global output measures of the solution for validation purposes</span></div>
+<div class="line">problem.output_strain_and_dissipation(trace);</div>
+</div><!-- fragment --><p>Finally, we perform a parameter study by increasing <img class="formulaInl" alt="$ Q $" src="form_4.png" width="10" height="13"/>, computing the result with one round of adaptivity and then writing the results to output files.</p>
+<div class="fragment"><div class="line"><span class="comment">//Now Crank up interaction</span></div>
+<div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_step;i++)</div>
+<div class="line"> {</div>
+<div class="line">  <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a66cb7ecda9ba0cd72367dd697f154545">Global_Physical_Variables::Q</a> += 1.0e-4;</div>
+<div class="line">  problem.newton_solve(1);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Reset the lagrangian nodal coordinates in the fluid mesh</span></div>
+<div class="line">  <span class="comment">//(Obviously we shouldn&#39;t do this in the solid mesh)</span></div>
+<div class="line">  problem.Fluid_mesh_pt-&gt;set_lagrangian_nodal_coordinates();</div>
+<div class="line">  <span class="comment">//Output solution</span></div>
+<div class="line">  problem.doc_solution(doc_info);</div>
+<div class="line">  doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Calculate the strain energy of the solid and dissipation in the</span></div>
+<div class="line">  <span class="comment">//fluid as global output measures of the solution for validation purposes</span></div>
+<div class="line">  problem.output_strain_and_dissipation(trace);</div>
+<div class="line"> }</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="class"></a>
+The Problem class</h1>
+<p>The <code>Problem</code> class has a constructor, destructor and a post-processing member function. The class also includes the standard member functions <code>actions_before_adapt()</code> and <code>actions_after_adapt()</code>. There are private member functions that create and destroy the required <code>FSISolidTractionElements</code> that apply the load from the fluid on the solid and the <code>ImposeDisplacementByLagrangeMultiplierElements</code> that are used to (weakly) align the boundary of the fluid mesh with the solid domain. There are also private member functions to compute the fluid dissipation, solid strain energy and a public member function that outputs the computed strain and dissipation to a specified trace file.</p>
+<p>The class provided storage for pointers to the Solid Mesh, the Fluid Mesh and vectors of pointers to meshes of <code>FaceElements</code> on the boundaries over which the interaction takes place. There is also storage for the <code>GeomObject</code> incarnations of fsi boundaries of the solid mesh and polygonal representations of the boundaries of the fluid and solid meshes.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The Problem constructor</h1>
+<p>We start by building the solid mesh, an associated error estimator and then writing the boundaries and mesh to output files. These steps are exactly the same as in the <a href="../../../solid/unstructured_adaptive_solid/html/index.html">unstructured adaptive solid mechanics tutorial. </a></p>
+ <div class="fragment"><div class="line"><span class="comment">//===============start_constructor========================================</span></div>
+<div class="line"><span class="comment">/// Constructor for unstructured solid problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FLUID_ELEMENT, <span class="keyword">class</span> SOLID_ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classUnstructuredFSIProblem.html#a6a31fd839e0215ef1312942cf7284bd2">UnstructuredFSIProblem&lt;FLUID_ELEMENT, SOLID_ELEMENT&gt;::UnstructuredFSIProblem</a>() </div>
+<div class="line">{  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Some geometric parameters</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_inlet = 0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> channel_height = 1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> channel_length = 4.0;</div>
+<div class="line"> <span class="keywordtype">double</span> x_leaflet = 1.0;</div>
+<div class="line"> <span class="keywordtype">double</span> leaflet_width = 0.2;</div>
+<div class="line"> <span class="keywordtype">double</span> leaflet_height = 0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid Mesh</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary segments for outer boundary, consisting of</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// four separeate polyline segments</span></div>
+<div class="line"> <span class="comment">//---------------------------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; solid_boundary_segment_pt(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialize boundary segment</span></div>
+<div class="line"> Vector&lt;Vector&lt;double&gt; &gt; bound_seg(2);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++) {bound_seg[i].resize(2);}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// First boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_leaflet - 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[0][1]=0.0;</div>
+<div class="line"> bound_seg[1][0]=x_leaflet - 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[1][1]=leaflet_height;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 1st boundary id</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> bound_id = 0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 1st boundary segment</span></div>
+<div class="line"> solid_boundary_segment_pt[0] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Second boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_leaflet - 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[0][1]=leaflet_height;</div>
+<div class="line"> bound_seg[1][0]=x_leaflet + 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[1][1]=leaflet_height;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 2nd boundary id</span></div>
+<div class="line"> bound_id = 1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 2nd boundary segment</span></div>
+<div class="line"> solid_boundary_segment_pt[1] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Third boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_leaflet + 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[0][1]=leaflet_height;</div>
+<div class="line"> bound_seg[1][0]=x_leaflet + 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[1][1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 3rd boundary id</span></div>
+<div class="line"> bound_id = 2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 3rd boundary segment</span></div>
+<div class="line"> solid_boundary_segment_pt[2] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fourth boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_leaflet + 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[0][1]=0.0;</div>
+<div class="line"> bound_seg[1][0]=x_leaflet - 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[1][1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 4th boundary id</span></div>
+<div class="line"> bound_id = 3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 4th boundary segment</span></div>
+<div class="line"> solid_boundary_segment_pt[3] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Create the triangle mesh polygon for outer boundary using boundary segment</span></div>
+<div class="line"> Solid_outer_boundary_polyline_pt = </div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolygon(solid_boundary_segment_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// There are no holes</span></div>
+<div class="line"> <span class="comment">//-------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build the mesh, based on the boundaries specified by</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// polygons just created</span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> <span class="keywordtype">double</span> uniform_element_area= leaflet_width*leaflet_height/20.0;</div>
+<div class="line"> </div>
+<div class="line"> TriangleMeshClosedCurve* solid_closed_curve_pt=</div>
+<div class="line">  Solid_outer_boundary_polyline_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the TriangleMeshParameters object for gathering all</span></div>
+<div class="line"> <span class="comment">// the necessary arguments for the TriangleMesh object</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters_solid(</div>
+<div class="line">   solid_closed_curve_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define the maximum element area</span></div>
+<div class="line"> triangle_mesh_parameters_solid.element_area() =</div>
+<div class="line">   uniform_element_area;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the mesh</span></div>
+<div class="line"> Solid_mesh_pt =</div>
+<div class="line">   <span class="keyword">new</span> RefineableSolidTriangleMesh&lt;SOLID_ELEMENT&gt;(</div>
+<div class="line">     triangle_mesh_parameters_solid);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator for bulk mesh</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Solid_mesh_pt-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set targets for spatial adaptivity</span></div>
+<div class="line"> Solid_mesh_pt-&gt;max_permitted_error()=0.0001;</div>
+<div class="line"> Solid_mesh_pt-&gt;min_permitted_error()=0.001; </div>
+<div class="line"> Solid_mesh_pt-&gt;max_element_size()=0.2;</div>
+<div class="line"> Solid_mesh_pt-&gt;min_element_size()=0.001; </div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Output boundary and mesh</span></div>
+<div class="line"> this-&gt;Solid_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;solid_boundaries.dat&quot;</span>);</div>
+<div class="line"> this-&gt;Solid_mesh_pt-&gt;output(<span class="stringliteral">&quot;solid_mesh.dat&quot;</span>);</div>
+<div class="ttc" id="aclassUnstructuredFSIProblem_html_a6a31fd839e0215ef1312942cf7284bd2"><div class="ttname"><a href="classUnstructuredFSIProblem.html#a6a31fd839e0215ef1312942cf7284bd2">UnstructuredFSIProblem::UnstructuredFSIProblem</a></div><div class="ttdeci">UnstructuredFSIProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="unstructured__adaptive__2d__fsi_8cc_source.html#l00496">unstructured_adaptive_2d_fsi.cc:496</a></div></div>
+</div><!-- fragment --><p> We next apply the boundary conditions to the solid mesh, by pinning the positions of the nodes on the lower boundary (boundary 3)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Pin both positions at lower boundary (boundary 3)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=3;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod= Solid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {  </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Get node</span></div>
+<div class="line">   SolidNode* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Pin both directions</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">    {</div>
+<div class="line">     nod_pt-&gt;pin_position(i);</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end_solid_boundary_conditions</span></div>
+</div><!-- fragment --><p> and complete the build of the solid elements by passing the pointer to the constitutive law to all elements in the solid mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   SOLID_ELEMENT *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>SOLID_ELEMENT*<span class="keyword">&gt;</span>(Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> The next task is to build the fluid mesh, which uses three of the boundary segments already constructed for the solid mesh for the common boundaries</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fluid Mesh</span></div>
+<div class="line"> <span class="comment">//--------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary segments for outer boundary, consisting of</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// four separeate polyline segments</span></div>
+<div class="line"> <span class="comment">//---------------------------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; fluid_boundary_segment_pt(8);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//The first three boundaries should be in common with the solid</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;3;b++)</div>
+<div class="line">  {</div>
+<div class="line">   fluid_boundary_segment_pt[b] = solid_boundary_segment_pt[b];</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> before constructing the remaining boundaries, building the mesh, an associated error estimator and writing the boundaries and mesh to output files.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Now fill in the rest </span></div>
+<div class="line"> <span class="comment">// Fourth boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_leaflet + 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[0][1]=0.0;</div>
+<div class="line"> bound_seg[1][0]=x_inlet + channel_length;</div>
+<div class="line"> bound_seg[1][1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 4th boundary id</span></div>
+<div class="line"> bound_id = 3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 4th boundary segment</span></div>
+<div class="line"> fluid_boundary_segment_pt[3] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fifth boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_inlet + channel_length;</div>
+<div class="line"> bound_seg[0][1]=0.0;</div>
+<div class="line"> bound_seg[1][0]=x_inlet + channel_length;</div>
+<div class="line"> bound_seg[1][1]=channel_height;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 5th boundary id</span></div>
+<div class="line"> bound_id = 4;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 4th boundary segment</span></div>
+<div class="line"> fluid_boundary_segment_pt[4] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Sixth boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_inlet + channel_length;</div>
+<div class="line"> bound_seg[0][1]=channel_height;</div>
+<div class="line"> bound_seg[1][0]=x_inlet;</div>
+<div class="line"> bound_seg[1][1]=channel_height;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 6th boundary id</span></div>
+<div class="line"> bound_id = 5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 6th boundary segment</span></div>
+<div class="line"> fluid_boundary_segment_pt[5] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Seventh boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_inlet;</div>
+<div class="line"> bound_seg[0][1]=channel_height;</div>
+<div class="line"> bound_seg[1][0]=x_inlet;</div>
+<div class="line"> bound_seg[1][1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 7th boundary id</span></div>
+<div class="line"> bound_id = 6;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 7th boundary segment</span></div>
+<div class="line"> fluid_boundary_segment_pt[6] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Eighth boundary segment</span></div>
+<div class="line"> bound_seg[0][0]=x_inlet;</div>
+<div class="line"> bound_seg[0][1]=0.0;</div>
+<div class="line"> bound_seg[1][0]=x_leaflet - 0.5*leaflet_width;</div>
+<div class="line"> bound_seg[1][1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify 8th boundary id</span></div>
+<div class="line"> bound_id = 7;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the 8th boundary segment</span></div>
+<div class="line"> fluid_boundary_segment_pt[7] = <span class="keyword">new</span> TriangleMeshPolyLine(bound_seg,bound_id);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Create the triangle mesh polygon for outer boundary using boundary segment</span></div>
+<div class="line"> Fluid_outer_boundary_polyline_pt = </div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolygon(fluid_boundary_segment_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// There are no holes</span></div>
+<div class="line"> <span class="comment">//-------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build the mesh, based on the boundaries specified by</span></div>
+<div class="line"> <span class="comment">//---------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// polygons just created</span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> uniform_element_area= channel_length*channel_height/40.0;;</div>
+<div class="line"> </div>
+<div class="line"> TriangleMeshClosedCurve* fluid_closed_curve_pt=</div>
+<div class="line">  Fluid_outer_boundary_polyline_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use the TriangleMeshParameters object for gathering all</span></div>
+<div class="line"> <span class="comment">// the necessary arguments for the TriangleMesh object</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters_fluid(</div>
+<div class="line">   fluid_closed_curve_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define the maximum element area</span></div>
+<div class="line"> triangle_mesh_parameters_fluid.element_area() =</div>
+<div class="line">   uniform_element_area;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the mesh</span></div>
+<div class="line"> Fluid_mesh_pt =</div>
+<div class="line">   <span class="keyword">new</span> RefineableSolidTriangleMesh&lt;FLUID_ELEMENT&gt;(</div>
+<div class="line">     triangle_mesh_parameters_fluid);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator for bulk mesh</span></div>
+<div class="line"> Z2ErrorEstimator* fluid_error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Fluid_mesh_pt-&gt;spatial_error_estimator_pt()=fluid_error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set targets for spatial adaptivity</span></div>
+<div class="line"> Fluid_mesh_pt-&gt;max_permitted_error()=0.0001;</div>
+<div class="line"> Fluid_mesh_pt-&gt;min_permitted_error()=0.001; </div>
+<div class="line"> Fluid_mesh_pt-&gt;max_element_size()=0.2;</div>
+<div class="line"> Fluid_mesh_pt-&gt;min_element_size()=0.001; </div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Output boundary and mesh</span></div>
+<div class="line"> this-&gt;Fluid_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;fluid_boundaries.dat&quot;</span>);</div>
+<div class="line"> this-&gt;Fluid_mesh_pt-&gt;output(<span class="stringliteral">&quot;fluid_mesh.dat&quot;</span>);</div>
+</div><!-- fragment --><p> We then apply boundary conditions to the fluid mesh by pinning velocity everywhere apart from at the outflow (boundary 4) and pinning all nodal positions on all boundaries that are not in contact with the solid.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for fluid problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default </span></div>
+<div class="line"> <span class="comment">// --- just pin the ones that have Dirichlet conditions here. </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Pin velocity everywhere apart from parallel outflow (boundary 4)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nbound=Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;nbound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=Fluid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Pin velocity everywhere apart from outlet where we</span></div>
+<div class="line">     <span class="comment">// have parallel outflow</span></div>
+<div class="line">     <span class="keywordflow">if</span> (ibound!=4)</div>
+<div class="line">      {</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">      }</div>
+<div class="line">     Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1); </div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin pseudo-solid positions everywhere apart from boundaries 0, 1, 2 </span></div>
+<div class="line">     <span class="comment">// the fsi boundaries</span></div>
+<div class="line">     <span class="keywordflow">if</span>(ibound &gt; 2)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="comment">// Pin the node</span></div>
+<div class="line">         SolidNode* nod_pt=Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">         nod_pt-&gt;pin_position(i);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p> We next complete the build of the fluid elements by passing the Reynolds number and mesh constitutive law to all fluid elements</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of the fluid elements so they are fully functional</span></div>
+<div class="line"> n_element = Fluid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   FLUID_ELEMENT* el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>FLUID_ELEMENT*<span class="keyword">&gt;</span>(Fluid_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law for pseudo-elastic mesh deformation</span></div>
+<div class="line">   el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aac1b52d0b82bc48d24dfcb031d9dc25f">Global_Physical_Variables::Mesh_constitutive_law_pt</a>;</div>
+<div class="line">   </div>
+<div class="line">  } <span class="comment">// end loop over elements</span></div>
+</div><!-- fragment --><p> and then set the Dirichlet boundary conditions for the fluid velocity on the inlet and channel walls.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Apply fluid boundary conditions: Poiseuille at inflow</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;n_boundary;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_nod= Fluid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Parabolic inflow at the left boundary (boundary 6)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(ibound==6)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="keywordtype">double</span> y=Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;x(1);</div>
+<div class="line">       <span class="keywordtype">double</span> veloc = y*(1.0-y);</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,veloc);</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);</div>
+<div class="line">      }</div>
+<div class="line">     <span class="comment">// Zero flow elsewhere</span></div>
+<div class="line">     <span class="keywordflow">else</span> </div>
+<div class="line">      {</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,0.0);</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end Poiseuille</span></div>
+</div><!-- fragment --><p> We then build three meshes of traction elements corresponding to the solid boundaries 0,1 and 2 that bound the fluid</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Make traction mesh </span></div>
+<div class="line"> <span class="comment">//(This must be done first because the resulting meshes are used</span></div>
+<div class="line"> <span class="comment">// as the geometric objects that set the boundary locations of the fluid</span></div>
+<div class="line"> <span class="comment">// mesh, as enforced by the Lagrange multipliers)</span></div>
+<div class="line"> Traction_mesh_pt.resize(3);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> m=0;m&lt;3;m++) {Traction_mesh_pt[m] = <span class="keyword">new</span> SolidMesh;}</div>
+<div class="line"> this-&gt;create_fsi_traction_elements();</div>
+</div><!-- fragment --><p> and three analogous meshes of Lagrange multiplier elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Make the Lagrange multiplier mesh</span></div>
+<div class="line"> Lagrange_multiplier_mesh_pt.resize(3);</div>
+<div class="line"> Solid_fsi_boundary_pt.resize(3);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> m=0;m&lt;3;m++) {Lagrange_multiplier_mesh_pt[m] = <span class="keyword">new</span> SolidMesh;}</div>
+<div class="line"> this-&gt;create_lagrange_multiplier_elements();</div>
+</div><!-- fragment --><p> The order matters because the Lagrange multiplier elements need pointers to the <code>GeomObject</code> incarnation of the <code>FSITractionElements</code>. Thus the traction elements must be created first.</p>
+<p>We then combine all the sub meshes into a global mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Add sub meshes</span></div>
+<div class="line"> add_sub_mesh(Fluid_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> m=0;m&lt;3;m++)</div>
+<div class="line">  {</div>
+<div class="line">   add_sub_mesh(Traction_mesh_pt[m]);</div>
+<div class="line">   add_sub_mesh(Lagrange_multiplier_mesh_pt[m]);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build global mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p> Finally, we setup the fluid-structure interaction for all three boundaries 0, 1 and 2 and then assign the equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup FSI</span></div>
+<div class="line"> <span class="comment">//----------</span></div>
+<div class="line"> <span class="comment">// Work out which fluid dofs affect the residuals of the wall elements:</span></div>
+<div class="line"> <span class="comment">// We pass the boundary between the fluid and solid meshes and </span></div>
+<div class="line"> <span class="comment">// pointers to the meshes. The interaction boundary are boundaries 0, 1 and 2</span></div>
+<div class="line"> <span class="comment">// of the 2D fluid mesh.</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;3;b++)</div>
+<div class="line">  {</div>
+<div class="line">   FSI_functions::setup_fluid_load_info_for_solid_elements&lt;FLUID_ELEMENT,2&gt;</div>
+<div class="line">    (<span class="keyword">this</span>,b,Fluid_mesh_pt,Traction_mesh_pt[b]);</div>
+<div class="line">  }</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_before"></a>
+Actions before adaptation</h1>
+<p>Before any adaptation takes place all surface meshes are deleted and the global mesh is rebuilt.</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Actions before adapt</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_before_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Delete the boundary meshes</span></div>
+<div class="line">   this-&gt;delete_lagrange_multiplier_elements();</div>
+<div class="line">   this-&gt;delete_fsi_traction_elements();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Rebuild the global mesh</span></div>
+<div class="line">   this-&gt;rebuild_global_mesh();</div>
+<div class="line">  }</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="actions_after"></a>
+Actions after adaptation</h1>
+<p>The adaptation is performed separately on the fluid and solid meshes and the order does not matter. In fact, the first mesh to be refined will be the first that is added as a sub mesh (in this case the fluid mesh). After adaptation of all meshes, we first reset the Lagrangian coordinates of the Fluid mesh to ensure that the mesh deformation is as robust as possible.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Ensure that the lagrangian coordinates of the mesh are set to be</span></div>
+<div class="line">   <span class="comment">//the same as the eulerian</span></div>
+<div class="line">   Fluid_mesh_pt-&gt;set_lagrangian_nodal_coordinates();</div>
+</div><!-- fragment --><p> Note that we <b> must </b> not reset the Lagrangian coordinates of the solid mesh because that would change the undeformed configuration of the solid.</p>
+<p>We then reapply the solid boundary conditions and pass the constitutive law to the solid elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">   <span class="comment">//Apply boundary conditions again</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Pin both positions at lower boundary (boundary 3)</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> ibound=3;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Solid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {  </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Get node</span></div>
+<div class="line">     SolidNode* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin both directions</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       nod_pt-&gt;pin_position(i);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Cast to a solid element</span></div>
+<div class="line">     SOLID_ELEMENT *el_pt = </div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span>SOLID_ELEMENT*<span class="keyword">&gt;</span>(Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Set the constitutive law</span></div>
+<div class="line">     el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">      <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a2a37fb040c832ee7a086bb13bb02a100">Global_Physical_Variables::Constitutive_law_pt</a>;</div>
+<div class="line">    } <span class="comment">// end complete solid build</span></div>
+</div><!-- fragment --><p>Next, the fluid boundary conditions are reapplied and the Reynolds number and mesh constitutive law are passed to all fluid elements.,</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the boundary conditions for fluid problem: All nodes are</span></div>
+<div class="line">   <span class="comment">// free by default </span></div>
+<div class="line">   <span class="comment">// --- just pin the ones that have Dirichlet conditions here. </span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Pin velocity everywhere apart from parallel outflow (boundary 4)</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> nbound=Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;nbound;ibound++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> num_nod=Fluid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Pin velocity everywhere apart from outlet where we</span></div>
+<div class="line">       <span class="comment">// have parallel outflow</span></div>
+<div class="line">       <span class="keywordflow">if</span> (ibound!=4)</div>
+<div class="line">        {</div>
+<div class="line">         Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0); </div>
+<div class="line">        }</div>
+<div class="line">       Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1); </div>
+<div class="line">       </div>
+<div class="line">       <span class="comment">// Pin pseudo-solid positions everywhere apart from boundaries 0, 1, 2 </span></div>
+<div class="line">       <span class="comment">// the fsi boundaries</span></div>
+<div class="line">       <span class="keywordflow">if</span>(ibound &gt; 2)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">          {</div>
+<div class="line">           <span class="comment">// Pin the node</span></div>
+<div class="line">           SolidNode* nod_pt=Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">           nod_pt-&gt;pin_position(i);</div>
+<div class="line">          }</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">// end loop over boundaries</span></div>
+<div class="line">   </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Complete the build of the fluid elements so they are fully functional</span></div>
+<div class="line">   n_element = Fluid_mesh_pt-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">     FLUID_ELEMENT* el_pt = </div>
+<div class="line">      <span class="keyword">dynamic_cast&lt;</span>FLUID_ELEMENT*<span class="keyword">&gt;</span>(Fluid_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">     el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Set the constitutive law for pseudo-elastic mesh deformation</span></div>
+<div class="line">     el_pt-&gt;constitutive_law_pt() =</div>
+<div class="line">      <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aac1b52d0b82bc48d24dfcb031d9dc25f">Global_Physical_Variables::Mesh_constitutive_law_pt</a>;</div>
+<div class="line">     </div>
+<div class="line">    } <span class="comment">// end loop over elements</span></div>
+<div class="line">   </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Apply fluid boundary conditions: Poiseuille at inflow</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_boundary = Fluid_mesh_pt-&gt;nboundary();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;n_boundary;ibound++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_nod= Fluid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Parabolic inflow at the left boundary (boundary 6)</span></div>
+<div class="line">       <span class="keywordflow">if</span>(ibound==6)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="keywordtype">double</span> y=Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;x(1);</div>
+<div class="line">         <span class="keywordtype">double</span> veloc = y*(1.0-y);</div>
+<div class="line">         Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,veloc);</div>
+<div class="line">         Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);</div>
+<div class="line">        }</div>
+<div class="line">       <span class="comment">// Zero flow elsewhere</span></div>
+<div class="line">       <span class="keywordflow">else</span> </div>
+<div class="line">        {</div>
+<div class="line">         Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,0.0);</div>
+<div class="line">         Fluid_mesh_pt-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">// end Poiseuille</span></div>
+</div><!-- fragment --><p> We then create the traction and Lagrange multiplier elements and rebuild the global mesh. Again the traction elements must be created first because they are used by the Lagrange multiplier elements.</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">//Recreate the boundary elements</span></div>
+<div class="line">   this-&gt;create_fsi_traction_elements();</div>
+<div class="line">   this-&gt;create_lagrange_multiplier_elements();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Rebuild the global mesh</span></div>
+<div class="line">   this-&gt;rebuild_global_mesh();</div>
+</div><!-- fragment --><p> Finally, we setup the FSI on the three boundaries that are in common between the fluid and the solid.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup FSI (again)</span></div>
+<div class="line"> <span class="comment">//------------------</span></div>
+<div class="line"> <span class="comment">// Work out which fluid dofs affect the residuals of the wall elements:</span></div>
+<div class="line"> <span class="comment">// We pass the boundary between the fluid and solid meshes and </span></div>
+<div class="line"> <span class="comment">// pointers to the meshes. The interaction boundary are boundaries 0, 1 and 2</span></div>
+<div class="line"> <span class="comment">// of the 2D fluid mesh.</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;3;b++)</div>
+<div class="line">  {</div>
+<div class="line">   FSI_functions::setup_fluid_load_info_for_solid_elements&lt;FLUID_ELEMENT,2&gt;</div>
+<div class="line">    (<span class="keyword">this</span>,b,Fluid_mesh_pt,Traction_mesh_pt[b]);</div>
+<div class="line">  }</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="fsi_traction"></a>
+Creating and destroying the FSI traction and Lagrange multiplier elements</h1>
+<p>These functions are exactly the same (apart from the obvious changes in boundary id) as those described in the <a href="../../unstructured_fsi/html/index.html">non-adaptive unstructured fsi tutorial. </a> and are not repeated here.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="doc_solution"></a>
+Post-processing</h1>
+<p>The post-processing routine simply executes the output functions for the fluid and solid meshes and writes the results into separate files. Again this is exactly the same as in the <a href="../../unstructured_fsi/html/index.html">non-adaptive </a> case.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<p>The majority of comments in the <a href="../../unstructured_fsi/html/index.html">non-adaptive unstructured FSI tutorial </a> also apply here. As mentioned above, the reason why the methodology works so straightforwardly is because the parametrisation of common boundaries must be the same in the fluid and solid meshes. If not, setting up the fluid-structure interaction will not work even before any adaptation takes place. Thus, provided that your unstructured FSI problem has been correctly set up in the case without adaptivity, adding adaptivity is completely straightforward.</p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Confirm that the order in which the sub-meshes are added does not affect the results. <br  />
+</li>
+<li>Investigate the behaviour of the system under increasing Reynolds number.</li>
+<li>Compare the results of the present (two-d elastic) problem to that of the <a href="../../fsi_channel_with_leaflet/html/index.html">(one-d) beam immersed within a channel. </a> Do the results agree as the thickness of the two-d elastic bar decreases?</li>
+<li>Modify your driver to perform unsteady runs and again compare your results to the one-dimensional beam code. <hr  />
+ <hr  />
+</li>
+</ol>
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/unstructured_adaptive_fsi">demo_drivers/interaction/unstructured_adaptive_fsi </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/unstructured_adaptive_fsi/unstructured_adaptive_2d_fsi.cc">demo_drivers/interaction/unstructured_adaptive_fsi/unstructured_adaptive_2d_fsi.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:09:49
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

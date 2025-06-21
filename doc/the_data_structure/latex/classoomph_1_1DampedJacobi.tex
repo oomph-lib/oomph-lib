@@ -1,0 +1,659 @@
+\doxysection{oomph\+::Damped\+Jacobi\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1DampedJacobi}{}\label{classoomph_1_1DampedJacobi}\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+
+
+Damped Jacobi "{}solver"{} templated by matrix type. The "{}solver"{} exists in many different incarnations\+: It\textquotesingle{}s an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}, and a \doxylink{classoomph_1_1Smoother}{Smoother}, all of which use the same basic iteration.  
+
+
+
+
+{\ttfamily \#include $<$iterative\+\_\+linear\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Damped\+Jacobi\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1DampedJacobi}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DampedJacobi_aac608c2e9bd7a78eb8a9a2e70119fad6}{Damped\+Jacobi}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&omega=2.\+0/3.\+0)
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DampedJacobi_a0ff17366e055670b3857d4443facf4a6}{\texorpdfstring{$\sim$}{\string~}\+Damped\+Jacobi}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DampedJacobi_a02ae8ed028832610de00f1d252064cb0}{Damped\+Jacobi}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{Damped\+Jacobi}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a4d0af182c44af837cea3225d61466d50}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{Damped\+Jacobi}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a959c1fcafae700e8735f7100fd3670f1}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a8f136ac45998419c70708166b16a66e1}{smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Setup\+: Pass pointer to the matrix and store in cast form. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a5aa970c787a03bcd3127389617c64629}{extract\+\_\+diagonal\+\_\+entries}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function to extract the diagonal entries from the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_af1e5baec4c87874bbd2a2834810f92ba}{smoother\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em The smoother\+\_\+solve function performs fixed number of iterations on the system A\texorpdfstring{$\ast$}{*}result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_ace422835d94b7d465d08cc1f4df192ea}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Use damped Jacobi iteration as an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}\+: This obtains the Jacobian matrix J and the residual vector r (needed for the Newton method) from the problem\textquotesingle{}s get\+\_\+jacobian function and returns the result of Jx=r. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_afe13701a3101a01ae59334d688004a99}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a571fae40f40b528e76a0636f140010e7}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013}{iterations}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Smoother}{oomph\+::\+Smoother}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Smoother_ae5c884d6c74054c5fdfe8a691293e3be}{Smoother}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Smoother_a225c288501a99fff61317957ea6adefa}{\texorpdfstring{$\sim$}{\string~}\+Smoother}} ()
+\begin{DoxyCompactList}\small\item\em Virtual empty destructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Smoother_a26a3dba61218b77cf65775475dc8751d}{check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dof}})
+\begin{DoxyCompactList}\small\item\em Self-\/test to check that all the dimensions of the inputs to solve helper are consistent and everything that needs to be built, is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd}{Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0}{Iterative\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5}{\texorpdfstring{$\sim$}{\string~}\+Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c}{preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access to convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access to max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd}{enable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511}{disable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zone\+\_\+title}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we\textquotesingle{}re running (e.\+g. what combination of linear solver and preconditioner or parameter values are used). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7}{close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Close convergence history output stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the jacobian matrix and residual vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3}{preconditioner\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the the time taken to setup the preconditioner \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307}{enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0}{disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t set up the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99}{enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af}{disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge within max\+\_\+iter (default). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b}{enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570}{disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve (i.\+e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It\textquotesingle{}s virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a8293439927a99030a1508f268be8a876}{solve\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em This is where the actual work is done -- different implementations for different matrix types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DampedJacobi_ad436c17f8b797ac05913955cac2df1d9}{Matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1DampedJacobi_ac6474b25f5a309a19b417166951dfd31}{Matrix\+\_\+diagonal}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} containing the diagonal entries of A. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a096e652907b8451205f909e0277de284}{Resolving}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a3f7d560d4c9566fe223de13a777f305d}{Matrix\+\_\+can\+\_\+be\+\_\+deleted}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a432acfaf14b05f8c5b25e62aede36f3c}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DampedJacobi_a7d53a703568479f387f19a5e40837889}{Omega}}
+\begin{DoxyCompactList}\small\item\em Damping factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Smoother}{oomph\+::\+Smoother}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Smoother_aa789c91e11408d9ffd94c237e4a729b7}{Use\+\_\+as\+\_\+smoother}}
+\begin{DoxyCompactList}\small\item\em When a derived class object is being used as a smoother in the MG solver (or elsewhere) the residual norm does not need to be calculated because we\textquotesingle{}re simply performing a fixed number of (smoothing) iterations. This boolean is used as a flag to indicate that the \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver} (which this class is by inheritance) is supposed to act in this way. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997}{Doc\+\_\+convergence\+\_\+history}}
+\begin{DoxyCompactList}\small\item\em Flag indicating if the convergence history is to be documented. \end{DoxyCompactList}\item 
+std\+::ofstream \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9}{Output\+\_\+file\+\_\+stream}}
+\begin{DoxyCompactList}\small\item\em Output file stream for convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d}{Tolerance}}
+\begin{DoxyCompactList}\small\item\em Convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989}{Max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Maximum number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248}{Preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em linear solver solution time \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10}{Preconditioner\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em indicates whether the preconditioner should be setup before solve. Default = true; \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Should we throw an error instead of just returning when we hit the max iterations? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Use the iterative solver as preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a}{First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c}{Default\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Default preconditioner\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}}$>$\newline
+class oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$}
+Damped Jacobi "{}solver"{} templated by matrix type. The "{}solver"{} exists in many different incarnations\+: It\textquotesingle{}s an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}, and a \doxylink{classoomph_1_1Smoother}{Smoother}, all of which use the same basic iteration. 
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01001}{1001}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DampedJacobi_aac608c2e9bd7a78eb8a9a2e70119fad6}\label{classoomph_1_1DampedJacobi_aac608c2e9bd7a78eb8a9a2e70119fad6} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!DampedJacobi@{DampedJacobi}}
+\index{DampedJacobi@{DampedJacobi}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{DampedJacobi()}{DampedJacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Damped\+Jacobi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{omega = {\ttfamily 2.0~/~3.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01005}{1005}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01213}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Omega}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a0ff17366e055670b3857d4443facf4a6}\label{classoomph_1_1DampedJacobi_a0ff17366e055670b3857d4443facf4a6} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!````~DampedJacobi@{\texorpdfstring{$\sim$}{\string~}DampedJacobi}}
+\index{````~DampedJacobi@{\texorpdfstring{$\sim$}{\string~}DampedJacobi}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DampedJacobi()}{\string~DampedJacobi()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1DampedJacobi}{Damped\+Jacobi}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01012}{1012}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01025}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a02ae8ed028832610de00f1d252064cb0}\label{classoomph_1_1DampedJacobi_a02ae8ed028832610de00f1d252064cb0} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!DampedJacobi@{DampedJacobi}}
+\index{DampedJacobi@{DampedJacobi}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{DampedJacobi()}{DampedJacobi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Damped\+Jacobi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DampedJacobi_a959c1fcafae700e8735f7100fd3670f1}\label{classoomph_1_1DampedJacobi_a959c1fcafae700e8735f7100fd3670f1} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Cleanup data that\textquotesingle{}s stored for resolve (if any has been stored) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01025}{1025}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01207}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01012}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\texorpdfstring{$\sim$}{\string~}\+Damped\+Jacobi()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a5aa970c787a03bcd3127389617c64629}\label{classoomph_1_1DampedJacobi_a5aa970c787a03bcd3127389617c64629} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!extract\_diagonal\_entries@{extract\_diagonal\_entries}}
+\index{extract\_diagonal\_entries@{extract\_diagonal\_entries}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{extract\_diagonal\_entries()}{extract\_diagonal\_entries()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::extract\+\_\+diagonal\+\_\+entries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to extract the diagonal entries from the matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01054}{1054}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01199}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+diagonal}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01040}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::smoother\+\_\+setup()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013}\label{classoomph_1_1DampedJacobi_aa72fe9dcf19728a8b5a75f0cadb36013} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01182}{1182}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01210}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Iterations}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a4d0af182c44af837cea3225d61466d50}\label{classoomph_1_1DampedJacobi_a4d0af182c44af837cea3225d61466d50} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1DampedJacobi_a571fae40f40b528e76a0636f140010e7}\label{classoomph_1_1DampedJacobi_a571fae40f40b528e76a0636f140010e7} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::resolve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Re-\/solve the system defined by the last assembled Jacobian and the rhs vector specified here. Solution is returned in the vector result. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01160}{1160}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01203}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Resolving}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01858}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a8f136ac45998419c70708166b16a66e1}\label{classoomph_1_1DampedJacobi_a8f136ac45998419c70708166b16a66e1} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!smoother\_setup@{smoother\_setup}}
+\index{smoother\_setup@{smoother\_setup}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{smoother\_setup()}{smoother\_setup()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Setup\+: Pass pointer to the matrix and store in cast form. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Smoother_a6eb7009ab3bebcccc83062cbe980bf91}{oomph\+::\+Smoother}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01040}{1040}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01054}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::extract\+\_\+diagonal\+\_\+entries()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01207}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_af1e5baec4c87874bbd2a2834810f92ba}\label{classoomph_1_1DampedJacobi_af1e5baec4c87874bbd2a2834810f92ba} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!smoother\_solve@{smoother\_solve}}
+\index{smoother\_solve@{smoother\_solve}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{smoother\_solve()}{smoother\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::smoother\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The smoother\+\_\+solve function performs fixed number of iterations on the system A\texorpdfstring{$\ast$}{*}result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver} class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Smoother_a94899c8d7bf84c068cda8d312d195bfe}{oomph\+::\+Smoother}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01113}{1113}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00585}{oomph\+::\+Smoother\+::\+Use\+\_\+as\+\_\+smoother}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_afe13701a3101a01ae59334d688004a99}\label{classoomph_1_1DampedJacobi_afe13701a3101a01ae59334d688004a99} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{1130}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01054}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::extract\+\_\+diagonal\+\_\+entries()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01207}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01203}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Resolving}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00585}{oomph\+::\+Smoother\+::\+Use\+\_\+as\+\_\+smoother}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_ace422835d94b7d465d08cc1f4df192ea}\label{classoomph_1_1DampedJacobi_ace422835d94b7d465d08cc1f4df192ea} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Use damped Jacobi iteration as an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}\+: This obtains the Jacobian matrix J and the residual vector r (needed for the Newton method) from the problem\textquotesingle{}s get\+\_\+jacobian function and returns the result of Jx=r. 
+
+Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. 
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01858}{1858}} of file \mbox{\hyperlink{iterative__linear__solver_8cc_source}{iterative\+\_\+linear\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l03935}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01160}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::resolve()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a8293439927a99030a1508f268be8a876}\label{classoomph_1_1DampedJacobi_a8293439927a99030a1508f268be8a876} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!solve\_helper@{solve\_helper}}
+\index{solve\_helper@{solve\_helper}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{solve\_helper()}{solve\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::solve\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This is where the actual work is done -- different implementations for different matrix types. 
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. 
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{1922}} of file \mbox{\hyperlink{iterative__linear__solver_8cc_source}{iterative\+\_\+linear\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{matrices_8h_source_l00326}{oomph\+::\+Double\+Matrix\+Base\+::residual()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01113}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::smoother\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DampedJacobi_a432acfaf14b05f8c5b25e62aede36f3c}\label{classoomph_1_1DampedJacobi_a432acfaf14b05f8c5b25e62aede36f3c} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Iterations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations taken. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01210}{1210}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01182}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::iterations()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a3f7d560d4c9566fe223de13a777f305d}\label{classoomph_1_1DampedJacobi_a3f7d560d4c9566fe223de13a777f305d} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}}
+\index{Matrix\_can\_be\_deleted@{Matrix\_can\_be\_deleted}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_can\_be\_deleted}{Matrix\_can\_be\_deleted}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Matrix\+\_\+can\+\_\+be\+\_\+deleted\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the matrix pointed to be Matrix\+\_\+pt can be deleted. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01207}{1207}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01025}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01040}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::smoother\+\_\+setup()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_ac6474b25f5a309a19b417166951dfd31}\label{classoomph_1_1DampedJacobi_ac6474b25f5a309a19b417166951dfd31} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Matrix\_diagonal@{Matrix\_diagonal}}
+\index{Matrix\_diagonal@{Matrix\_diagonal}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_diagonal}{Matrix\_diagonal}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Matrix\+\_\+diagonal\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} containing the diagonal entries of A. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01199}{1199}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01054}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::extract\+\_\+diagonal\+\_\+entries()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_ad436c17f8b797ac05913955cac2df1d9}\label{classoomph_1_1DampedJacobi_ad436c17f8b797ac05913955cac2df1d9} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Matrix\_pt@{Matrix\_pt}}
+\index{Matrix\_pt@{Matrix\_pt}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_pt}{Matrix\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01196}{1196}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01025}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01054}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::extract\+\_\+diagonal\+\_\+entries()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01160}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::resolve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01040}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::smoother\+\_\+setup()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01113}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::smoother\+\_\+solve()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a7d53a703568479f387f19a5e40837889}\label{classoomph_1_1DampedJacobi_a7d53a703568479f387f19a5e40837889} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Omega@{Omega}}
+\index{Omega@{Omega}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Omega}{Omega}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Omega\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Damping factor. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01213}{1213}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01005}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::\+Damped\+Jacobi()}}.
+
+\Hypertarget{classoomph_1_1DampedJacobi_a096e652907b8451205f909e0277de284}\label{classoomph_1_1DampedJacobi_a096e652907b8451205f909e0277de284} 
+\index{oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}!Resolving@{Resolving}}
+\index{Resolving@{Resolving}!oomph::DampedJacobi$<$ MATRIX $>$@{oomph::DampedJacobi$<$ MATRIX $>$}}
+\doxysubsubsection{\texorpdfstring{Resolving}{Resolving}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typename}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX}} $>$\+::\+Resolving\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if the solve is done in re-\/solve mode, bypassing setup of matrix and preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{iterative__linear__solver_8h_source_l01203}{1203}} of file \mbox{\hyperlink{iterative__linear__solver_8h_source}{iterative\+\_\+linear\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8h_source_l01160}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::resolve()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{iterative__linear__solver_8h}{iterative\+\_\+linear\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{iterative__linear__solver_8cc}{iterative\+\_\+linear\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

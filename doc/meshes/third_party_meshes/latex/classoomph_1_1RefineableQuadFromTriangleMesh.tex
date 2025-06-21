@@ -1,0 +1,170 @@
+\doxysection{oomph\+::Refineable\+Quad\+From\+Triangle\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh}{}\label{classoomph_1_1RefineableQuadFromTriangleMesh}\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+
+
+Unstructured refineable \doxylink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Quad\+From\+Triangle\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.018018cm]{classoomph_1_1RefineableQuadFromTriangleMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a76122fefb9de7f79d3f8093f730c3dd4}{Refineable\+Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{triangle\+\_\+mesh\+\_\+parameters}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Build mesh, based on the specifications on \doxylink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a73e88bb8c1cc8464f079e928e89a4a14}{refine\+\_\+uniformly}} ()
+\begin{DoxyCompactList}\small\item\em Refine mesh uniformly. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_ab78f50c13f9ccf7d1f359bc443fe2a9d}{refine\+\_\+uniformly}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Refine mesh uniformly and doc process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_a7d2efa292dd5dd4930e661fd32e42eec}{adapt}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{elem\+\_\+error}})
+\begin{DoxyCompactList}\small\item\em Overload the adapt function (to ensure nodes are snapped to the boundary) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e}{Refineable\+Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{poly\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Build mesh, based on the polyfiles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Quad\+From\+Triangle\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_af94e552be1bd35ec03eed1bcfcbc40af}{Quad\+From\+Triangle\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{poly\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{false}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries}}=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{true}})
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{triangle\+\_\+mesh\+\_\+parameters}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Build mesh, based on the specifications on \doxylink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}. All the actual work is done in Unstructured\+Two\+DMesh\+Geometry\+Base. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1}{generic\+\_\+constructor}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{internal\+\_\+polygon\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Triangle\+Mesh\+Open\+Curve}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{open\+\_\+polylines\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&element\+\_\+area, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ $>$ \&extra\+\_\+holes\+\_\+coordinates, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ $>$ \&regions\+\_\+coordinates, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{regions\+\_\+areas}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{use\+\_\+attributes}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&refine\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{refine\+\_\+internal\+\_\+boundary}})
+\begin{DoxyCompactList}\small\item\em A general-\/purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_af681a42982dd2684f05f522f1b3508ab}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{dummy}})=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a7ce803f87a4ee0188cb6780bef97ca28}{operator=}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}} \&)=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_aa8737e7a7e845cab4fb6fd82c8f3506d}{\texorpdfstring{$\sim$}{\string~}\+Quad\+From\+Triangle\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ae4146d9e92cce365c292f92fcdc88c47}{build\+\_\+from\+\_\+scaffold}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Triangle\+Scaffold\+Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{tmp\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{use\+\_\+attributes}})
+\begin{DoxyCompactList}\small\item\em Build the quad mesh from the given scaffold mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a4a4b155283407ae37a804d258ac8c6dd}{Time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Timestepper used to build elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1}{Use\+\_\+attributes}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$}
+Unstructured refineable \doxylink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}. 
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00578}{578}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_a76122fefb9de7f79d3f8093f730c3dd4}\label{classoomph_1_1RefineableQuadFromTriangleMesh_a76122fefb9de7f79d3f8093f730c3dd4} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!RefineableQuadFromTriangleMesh@{RefineableQuadFromTriangleMesh}}
+\index{RefineableQuadFromTriangleMesh@{RefineableQuadFromTriangleMesh}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableQuadFromTriangleMesh()}{RefineableQuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Refineable\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}} \&}]{triangle\+\_\+mesh\+\_\+parameters,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh, based on the specifications on \doxylink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00587}{587}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e}\label{classoomph_1_1RefineableQuadFromTriangleMesh_aa2607a703a228947cc65d9edf0ca8b0e} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!RefineableQuadFromTriangleMesh@{RefineableQuadFromTriangleMesh}}
+\index{RefineableQuadFromTriangleMesh@{RefineableQuadFromTriangleMesh}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableQuadFromTriangleMesh()}{RefineableQuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Refineable\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&}]{node\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&}]{element\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} std\+::string \&}]{poly\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh, based on the polyfiles. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00624}{624}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59}\label{classoomph_1_1RefineableQuadFromTriangleMesh_aaa5c1de240765e38b30f2a10613faf59} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!````~RefineableQuadFromTriangleMesh@{\texorpdfstring{$\sim$}{\string~}RefineableQuadFromTriangleMesh}}
+\index{````~RefineableQuadFromTriangleMesh@{\texorpdfstring{$\sim$}{\string~}RefineableQuadFromTriangleMesh}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableQuadFromTriangleMesh()}{\string~RefineableQuadFromTriangleMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{Refineable\+Quad\+From\+Triangle\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00636}{636}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_a7d2efa292dd5dd4930e661fd32e42eec}\label{classoomph_1_1RefineableQuadFromTriangleMesh_a7d2efa292dd5dd4930e661fd32e42eec} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!adapt@{adapt}}
+\index{adapt@{adapt}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{adapt()}{adapt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::adapt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{elem\+\_\+error }\end{DoxyParamCaption})}
+
+
+
+Overload the adapt function (to ensure nodes are snapped to the boundary) 
+
+Adapt problem based on specified elemental error estimates. 
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source_l01019}{1019}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_a73e88bb8c1cc8464f079e928e89a4a14}\label{classoomph_1_1RefineableQuadFromTriangleMesh_a73e88bb8c1cc8464f079e928e89a4a14} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!refine\_uniformly@{refine\_uniformly}}
+\index{refine\_uniformly@{refine\_uniformly}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{refine\_uniformly()}{refine\_uniformly()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::refine\+\_\+uniformly (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Refine mesh uniformly. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00598}{598}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1RefineableQuadFromTriangleMesh_ab78f50c13f9ccf7d1f359bc443fe2a9d}\label{classoomph_1_1RefineableQuadFromTriangleMesh_ab78f50c13f9ccf7d1f359bc443fe2a9d} 
+\index{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}!refine\_uniformly@{refine\_uniformly}}
+\index{refine\_uniformly@{refine\_uniformly}!oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::RefineableQuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{refine\_uniformly()}{refine\_uniformly()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableQuadFromTriangleMesh}{oomph\+::\+Refineable\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::refine\+\_\+uniformly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Refine mesh uniformly and doc process. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00607}{607}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quad__from__triangle__mesh_8h}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

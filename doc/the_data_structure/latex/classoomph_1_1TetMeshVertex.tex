@@ -1,0 +1,263 @@
+\doxysection{oomph\+::Tet\+Mesh\+Vertex Class Reference}
+\hypertarget{classoomph_1_1TetMeshVertex}{}\label{classoomph_1_1TetMeshVertex}\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+
+
+Vertex for Tet mesh generation. Can lie on multiple boundaries (identified via one-\/based enumeration!) and can have intrinisic coordinates in a \doxylink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}.  
+
+
+
+
+{\ttfamily \#include $<$tet\+\_\+mesh.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af76c065906c82fa548ce145b6d34e7e1}{Tet\+Mesh\+Vertex}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass coordinates (length 3!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{Tet\+Mesh\+Vertex}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34}{set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}})
+\begin{DoxyCompactList}\small\item\em Set intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d}{zeta\+\_\+in\+\_\+geom\+\_\+object}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object} (returns zero sized vector if no such coordinates have been specified) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th coordinate \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a844ff66de0e3ed28b3ad186c81e6d0c7}{one\+\_\+based\+\_\+boundary\+\_\+id}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em First (of possibly multiple) one-\/based boundary id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary IDs this vertex lives on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}{X}}
+\begin{DoxyCompactList}\small\item\em Coordinate vector. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a7bbd3bde4360f101314b6059abeecd8b}{One\+\_\+based\+\_\+boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary IDs this vertex lives on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}
+\begin{DoxyCompactList}\small\item\em Intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object} (zero sized if there isn\textquotesingle{}t one. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TetMeshVertex_ae3c796a1351f1249d195202d011532ce}{Tet\+Mesh\+Facet}}
+\begin{DoxyCompactList}\small\item\em Only friends can set boundary ID -- the facet is my only friend! \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Vertex for Tet mesh generation. Can lie on multiple boundaries (identified via one-\/based enumeration!) and can have intrinisic coordinates in a \doxylink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}. 
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00049}{49}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TetMeshVertex_af76c065906c82fa548ce145b6d34e7e1}\label{classoomph_1_1TetMeshVertex_af76c065906c82fa548ce145b6d34e7e1} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!TetMeshVertex@{TetMeshVertex}}
+\index{TetMeshVertex@{TetMeshVertex}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{TetMeshVertex()}{TetMeshVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass coordinates (length 3!) 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00056}{56}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00124}{x()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}\label{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!TetMeshVertex@{TetMeshVertex}}
+\index{TetMeshVertex@{TetMeshVertex}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{TetMeshVertex()}{TetMeshVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00072}{72}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TetMeshVertex_a844ff66de0e3ed28b3ad186c81e6d0c7}\label{classoomph_1_1TetMeshVertex_a844ff66de0e3ed28b3ad186c81e6d0c7} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!one\_based\_boundary\_id@{one\_based\_boundary\_id}}
+\index{one\_based\_boundary\_id@{one\_based\_boundary\_id}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{one\_based\_boundary\_id()}{one\_based\_boundary\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Vertex\+::one\+\_\+based\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+First (of possibly multiple) one-\/based boundary id. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00130}{130}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00150}{One\+\_\+based\+\_\+boundary\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618}\label{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!set\_one\_based\_boundary\_id@{set\_one\_based\_boundary\_id}}
+\index{set\_one\_based\_boundary\_id@{set\_one\_based\_boundary\_id}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{set\_one\_based\_boundary\_id()}{set\_one\_based\_boundary\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Vertex\+::set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set of (one-\/based!) boundary IDs this vertex lives on. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00141}{141}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00150}{One\+\_\+based\+\_\+boundary\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34}\label{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!set\_zeta\_in\_geom\_object@{set\_zeta\_in\_geom\_object}}
+\index{set\_zeta\_in\_geom\_object@{set\_zeta\_in\_geom\_object}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{set\_zeta\_in\_geom\_object()}{set\_zeta\_in\_geom\_object()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Vertex\+::set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object}. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00097}{97}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00154}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}\label{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!x@{x}}
+\index{x@{x}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{x()}{x()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Tet\+Mesh\+Vertex\+::x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+i-\/th coordinate 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00124}{124}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00056}{Tet\+Mesh\+Vertex()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d}\label{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!zeta\_in\_geom\_object@{zeta\_in\_geom\_object}}
+\index{zeta\_in\_geom\_object@{zeta\_in\_geom\_object}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{zeta\_in\_geom\_object()}{zeta\_in\_geom\_object()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Tet\+Mesh\+Vertex\+::zeta\+\_\+in\+\_\+geom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object} (returns zero sized vector if no such coordinates have been specified) 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00118}{118}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00154}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1TetMeshVertex_ae3c796a1351f1249d195202d011532ce}\label{classoomph_1_1TetMeshVertex_ae3c796a1351f1249d195202d011532ce} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!TetMeshFacet@{TetMeshFacet}}
+\index{TetMeshFacet@{TetMeshFacet}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{TetMeshFacet}{TetMeshFacet}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{friend}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Only friends can set boundary ID -- the facet is my only friend! 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TetMeshVertex_a7bbd3bde4360f101314b6059abeecd8b}\label{classoomph_1_1TetMeshVertex_a7bbd3bde4360f101314b6059abeecd8b} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!One\_based\_boundary\_id@{One\_based\_boundary\_id}}
+\index{One\_based\_boundary\_id@{One\_based\_boundary\_id}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{One\_based\_boundary\_id}{One\_based\_boundary\_id}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Tet\+Mesh\+Vertex\+::\+One\+\_\+based\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set of (one-\/based!) boundary IDs this vertex lives on. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00150}{150}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00130}{one\+\_\+based\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00141}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id()}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}\label{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!X@{X}}
+\index{X@{X}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{X}{X}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Tet\+Mesh\+Vertex\+::X\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Coordinate vector. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00147}{147}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00056}{Tet\+Mesh\+Vertex()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00072}{Tet\+Mesh\+Vertex()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00124}{x()}}.
+
+\Hypertarget{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2}\label{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2} 
+\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!Zeta\_in\_geom\_object@{Zeta\_in\_geom\_object}}
+\index{Zeta\_in\_geom\_object@{Zeta\_in\_geom\_object}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
+\doxysubsubsection{\texorpdfstring{Zeta\_in\_geom\_object}{Zeta\_in\_geom\_object}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Tet\+Mesh\+Vertex\+::\+Zeta\+\_\+in\+\_\+geom\+\_\+object\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Intrinisic coordinates in \doxylink{classoomph_1_1GeomObject}{Geom\+Object} (zero sized if there isn\textquotesingle{}t one. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00154}{154}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00097}{set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00118}{zeta\+\_\+in\+\_\+geom\+\_\+object()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tet__mesh_8h}{tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

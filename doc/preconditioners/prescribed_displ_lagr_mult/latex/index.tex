@@ -1,0 +1,563 @@
+\chapter{Demo problem\+: A preconditioner for the solution of (pseudo-\/)solid mechanics problems with prescribed boundary motions}
+\hypertarget{index}{}\label{index}\index{Demo problem: A preconditioner for the solution of (pseudo-\/)solid mechanics problems with prescribed boundary motions@{Demo problem: A preconditioner for the solution of (pseudo-\/)solid mechanics problems with prescribed boundary motions}}
+In this tutorial we \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ re-\/visit }} the solution of solid mechanics problems in which the deformation of the domain boundary is prescribed and enforced by Lagrange multipliers. This functionality is required, e.\+g., when using (pseudo-\/)solid mechanics to update the shape of the fluid mesh in large-\/displacement fluid-\/structure interaction problems.
+
+Here we focus on the efficient solution of the governing equations by GMRES, using the problem-\/specific block-\/preconditioner developed in \begin{center} Muddle, R.\+L., Mihajlovic, M. \& Heil, M. (2012) An efficient preconditioner for monolithically-\/coupled large-\/displacement fluid-\/structure interaction problems with pseudo-\/solid mesh updates. {\itshape Journal of Computational Physics} {\bfseries{231}}, 7315-\/7334. DOI\+: \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ 10.\+1016/j.jcp.\+2012.\+07.\+001}} \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_model}{}\doxysection{\texorpdfstring{Theory\+: Problem formulation, the resulting linear system and the preconditioner}{Theory: Problem formulation, the resulting linear system and the preconditioner}}\label{index_model}
+We refer to \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}} for a detailed description of the problem setup and its discretisation. Briefly, we consider the deformation of an elastic solid body whose shape is parametrised by Lagrangian coordinates $ \xi^i $. A part of the body\textquotesingle{}s boundary, $ \partial D_{prescr}$, (which is parametrised by the boundary coordinate $ \zeta$) is displaced to a new position given by $ {\bf R}_{prescr}(\zeta) $ while the other boundaries are held in a fixed position (as in the sketch below) or are subject to traction boundary conditions.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sketch}
+\doxyfigcaption{Sketch of the typical problem. }
+\end{DoxyImage}
+
+
+We discretise the problem using {\ttfamily Solid\+Elements} in the bulk of the domain and employ lower-\/dimensional {\ttfamily Face\+Elements} to impose the displacement constraint along $ \partial D_{prescr}$. The problem therefore contains the following types of discrete unknowns\+:
+\begin{DoxyItemize}
+\item The nodal positions (which are stored as positional {\ttfamily Data} at each {\ttfamily Solid\+Node}). ~\newline
+~\newline
+
+\item The nodal values representing the components of the (vector-\/valued) Lagrange multipliers. These only exist for the nodes on $ \partial D_{prescr}$. (The nodes are re-\/sized to accommodate the additional unknowns when the {\ttfamily Face\+Elements} are attached to the bulk elements.)
+\end{DoxyItemize}The preconditioner requires a further sub-\/division of these degrees of freedom into the following categories\+:
+\begin{DoxyItemize}
+\item the x-\/coordinates of the unconstrained nodes
+\item the y-\/coordinates of the unconstrained nodes
+\item \mbox{[}the z-\/coordinates of the unconstrained nodes (only in 3D)\mbox{]}
+\item the x-\/coordinates of the constrained nodes
+\item the y-\/coordinates of the constrained nodes
+\item \mbox{[}the z-\/coordinates of the constrained nodes (only in 3D)\mbox{]}
+\item the x-\/component of the Lagrange multiplier at the constrained nodes
+\item the y-\/component of the Lagrange multiplier at the constrained nodes
+\item \mbox{[}the z-\/component of the Lagrange multiplier at the constrained nodes (only in 3D)\mbox{]}.
+\end{DoxyItemize}For a 2D problem, the linear system to be solved in the course of the Newton iteration can then be (formally) re-\/ordered into the following block structure\+:  \[
+\left[
+\begin{array}{cccc|cc}
+{ E_{\rm xx}}&{ E_{\rm x\bar{\rm
+      x}}}&{ E_{\rm xy}}&{ E_{\rm x\bar{\rm y}}}&&\\
+{ E_{\bar{\rm x}\rm x}}&{ E_{\bar{\rm
+      x}\bar{\rm x}}}&{ E_{\bar{\rm x}\rm
+    y}}&{ E_{\bar{\rm x}\bar{\rm y}}}&{ M_{\rm
+    x}}&\\
+{ E_{\rm yx}}&{ E_{\rm y\bar{\rm
+      x}}}&{ E_{\rm yy}}&{ E_{\rm y\bar{\rm y}}}&&\\
+{ E_{\bar{\rm y}\rm x}}&{ E_{\bar{\rm
+      y}\bar{\rm x}}}&{ E_{\bar{\rm y}\rm y}}&{ 
+  E_{\bar{\rm y}\bar{\rm y}}}&&{ M_{\rm y}}\\
+\hline
+&{ M_{\rm x}}&&&\\
+&&&{ M_{\rm y}}&&
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\Delta \mathbf{X}_{\rm x}\\
+\Delta \mathbf{\overline{X}}_{\rm x}\\
+\Delta \mathbf{X}_{\rm y}\\
+\Delta \mathbf{\overline{X}}_{\rm y}\\
+\Delta \mathbf{L}_{\rm x}\\
+\Delta \mathbf{L}_{\rm y}
+\end{array}
+\right]
+ =
+-
+\left[
+\begin{array}{c}
+\mathbf{r}_{\rm x}\\
+\mathbf{r}_{\bar{\rm x}}\\
+\mathbf{r}_{\rm y}\\
+\mathbf{r}_{\bar{\rm y}}\\
+\mathbf{r}_{\rm l_x}\\
+\mathbf{r}_{\rm l_y}
+\end{array}
+\right].
+\ \ \ \ \ \   (1)
+\] Here the vectors ${\bf X}_{\rm x}$, ${\bf X}_{\rm y}$, ${\bf L}_{\rm x}$ and ${\bf
+  L}_{\rm y}$ contain the $x$ and $y$ components of the unknown nodal positions and Lagrange multipliers, respectively. The overbars identify the unknown nodal positions that are constrained by the Lagrange multiplier. The matrices $M_{\rm x}$ and $M_{\rm y}$ are mass matrices whose entries are formed from products of the basis functions,  $[M_{{\rm x}}]_{ij}=[M_{{\rm y}}]_{ij} = 
+\int_{\partial D_{\rm prescr}} {\psi_i} \ {\psi_j} \ dS $.
+
+\href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012) }} show that  \[
+{\cal P}_{\rm PS}=\left[
+\begin{array}{cccc|cc}
+E_{\rm xx}&E_{\rm x\bar{\rm x}}&E_{\rm xy}&E_{\rm x\bar{\rm
+    y}}&&\\ E_{\bar{\rm x}\rm x}&E_{\bar{\rm x}\bar{\rm x}}+\sigma
+I&E_{\bar{\rm x}\rm y}&E_{\bar{\rm x}\bar{\rm y}}&&\\ E_{\rm
+  yx}&E_{\rm y\bar{\rm x}}&E_{\rm yy}&E_{\rm y\bar{\rm
+    y}}&&\\ E_{\bar{\rm y}\rm x}&E_{\bar{\rm y}\bar{\rm
+    x}}&E_{\bar{\rm y}\rm y}&E_{\bar{\rm y}\bar{\rm y}}+\sigma
+I&&\\ \hline
+&&&&\frac{1}{\sigma}M_{\rm x}^2&\\ &&&&&\frac{1}{\sigma}M_{\rm y}^2\\
+\end{array}
+\right]
+\ \ \ \ \ \   (2)
+\] is an optimal preconditioner for the linear system (1) if we set $ \sigma=\|E\|_{\infty} $ where $ E $ is the compound 4x4 top-\/left block  \[
+E =
+\left[
+\begin{array}{cccc}
+E_{\rm xx}&E_{\rm x\bar{\rm x}}&E_{\rm xy}&E_{\rm x\bar{\rm y}}\\ 
+E_{\bar{\rm x}\rm x}&E_{\bar{\rm x}\bar{\rm x}}
+&E_{\bar{\rm x}\rm y}&E_{\bar{\rm x}\bar{\rm y}} \\
+ E_{\rm yx}&E_{\rm y\bar{\rm x}}&E_{\rm yy}&E_{\rm y\bar{\rm y}}\\ 
+E_{\bar{\rm y}\rm x}&E_{\bar{\rm y}\bar{\rm x}}&
+E_{\bar{\rm y}\rm y}&E_{\bar{\rm y}\bar{\rm y}}
+\end{array}
+\right]
+\] in the Jacobian matrix.
+
+The application of the preconditioner (i.\+e. the solution of linear systems of the form $ {\cal P}_{\rm PS} \ {\bf x} =
+{\bf y} $ for $ {\bf x} $) requires three linear solves\+: One involving the compound 4x4 top-\/left block in $ {\cal P}_{\rm PS} $,  \[
+E_{\rm PS}=
+\left[
+\begin{array}{cccc}
+E_{\rm xx}&E_{\rm x\bar{\rm x}}&E_{\rm xy}&E_{\rm x\bar{\rm y}}\\ 
+E_{\bar{\rm x}\rm x}&E_{\bar{\rm x}\bar{\rm x}}+\sigma
+I&E_{\bar{\rm x}\rm y}&E_{\bar{\rm x}\bar{\rm y}} \\
+ E_{\rm yx}&E_{\rm y\bar{\rm x}}&E_{\rm yy}&E_{\rm y\bar{\rm y}}\\ 
+E_{\bar{\rm y}\rm x}&E_{\bar{\rm y}\bar{\rm x}}&
+E_{\bar{\rm y}\rm y}&E_{\bar{\rm y}\bar{\rm y}}+\sigma I
+\end{array}
+\right]
+\] and two involving the two squared mass matrices, $ M_{\rm x}^2 $ and $ M_{\rm y}^2 $.
+
+Numerical experiments in \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012) }} show that an efficient implementation of the preconditioner is obtained by replacing the $ E_{\rm PS} $ block in the preconditioner $ {\cal P}_{\rm PS} $ by its upper block-\/triangular approximation, corresponding to the preconditioner  \[
+\widetilde{\cal P}_{\rm PS}=\left[
+\begin{array}{cccc|cc}
+E_{xx}&E_{x\bar{x}}&E_{xy}&E_{x\bar{y}}&&\\ E_{\bar{x}x}&E_{\bar{x}\bar{x}}+\sigma
+I&E_{\bar{x}y}&E_{\bar{x}\bar{y}}&&\\ &&E_{yy}&E_{y\bar{y}}&&\\ &&E_{\bar{y}y}&E_{\bar{y}\bar{y}}+\sigma
+I&&\\ \hline
+&&&&\frac{1}{\sigma}M_x^2&\\ &&&&&\frac{1}{\sigma}M_y^2\\
+\end{array}
+\right].
+\ \ \ \ \ \   (3)
+\] Furthermore, a fully optimal preconditioner (in which the solve times scale linearly with the number of unknowns) can be obtained by\+:
+\begin{DoxyItemize}
+\item approximately solving the subsidiary linear systems involving the diagonal blocks  \[
+  \left[
+  \begin{array}{cc}
+  E_{xx}&E_{x\bar{x}}\\ E_{\bar{x}x}&E_{\bar{x}\bar{x}}+\sigma I\\
+  \end{array}
+  \right]
+  \mbox{\ \ \ \ and\ \ \ \ \ }
+  \left[
+  \begin{array}{cc}
+  E_{yy}&E_{y\bar{y}}\\ E_{\bar{y}y}&E_{\bar{y}\bar{y}}+\sigma I\\
+  \end{array}
+  \right]
+  \] in (3) by performing a fixed number of algebraic multigrid (AMG) cycles,
+\end{DoxyItemize}and by
+\begin{DoxyItemize}
+\item approximately solving the subsidiary linear systems involving $ M_{\rm x}^2 $ and $ M_{\rm y}^2 $ by two consecutive linear solves involving the mass matrices themselves. Following Wathen \mbox{[}A. Wathen, "{}\+Realistic eigenvalue bounds for the Galerkin mass matrix"{}, IMA Journal of Numerical Analysis 7 (1987) 449-\/457\mbox{]}, \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012) }} suggest employing CG, preconditioned by diagonal scaling, as the solver for these systems. This solver converges so rapidly that a fixed number of four CG iterations suffices to compute the solution to sufficient accuracy so that $ \widetilde{\cal P}_{\rm PS} $ can be treated as a constant preconditioner.
+\end{DoxyItemize}With these approximations, the computational cost of one application of $ \widetilde{\cal P}_{\rm PS} $ is linear in the number of unknowns. The optimality of the preconditioner can therefore be assessed by demonstrating that the number of GMRES iterations remains constant under mesh refinement.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implementation}{}\doxysection{\texorpdfstring{Implementation and use of the preconditioner}{Implementation and use of the preconditioner}}\label{index_implementation}
+The preconditioner described above is implemented within {\ttfamily oomph-\/lib\textquotesingle{}s} (parallel) block preconditioning framework which is described in \href{../../../mpi/block_preconditioners/html/index.html}{\texttt{ another tutorial}}. For the purpose of the implementation, we decompose the preconditioning matrix into the 2x2 main blocks indicated by the vertical and horizontal lines in (2) and (3).
+
+The application of the preconditioner requires the classification of the unknowns into the six (in 2D) different "{}dof types"{} discussed above. This is done on an element-\/by-\/element basis (since only the elements "{}know"{} what their nodal degrees of freedom correspond to) by implementing/overloading the functions
+\begin{DoxyItemize}
+\item {\ttfamily Generalised\+Element\+::ndof\+\_\+types(...)} which returns the number of dof types classified by that element.
+\item {\ttfamily Generalised\+Element\+::get\+\_\+block\+\_\+numbers\+\_\+for\+\_\+unknowns(...)} which associates each degree of freedom (identified by its global equation number) with the dof type within its block. ~\newline
+~\newline
+
+\end{DoxyItemize}For a 2D problem the enumeration of the dofs is chosen as follows. The {\ttfamily Solid\+Elements} classify only the nodal positions and sub-\/divide them into those that are constrained and not constrained by the displacement boundary condition so that within that block
+\begin{DoxyItemize}
+\item dof type 0 corresponds to the unconstrained x-\/nodal coordinates,
+\item dof type 1 corresponds to the unconstrained y-\/nodal coordinates,
+\item dof type 2 corresponds to the constrained x-\/nodal coordinates,
+\item dof type 3 corresponds to the constrained y-\/nodal coordinates.
+\end{DoxyItemize}The {\ttfamily Face\+Elements} that apply the displacement constraint classify the Lagrange multipliers so that within that block
+\begin{DoxyItemize}
+\item dof type 0 corresponds to the x-\/component of the Lagrange multiplier,
+\item dof type 1 corresponds to the y-\/component of the Lagrange multiplier,
+\end{DoxyItemize}with the obvious generalisation to 3D.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+We examine the performance of the preconditioner in the test problem discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}\+: The upper surface of a unit square is subjected to a prescribed displacement that is imposed by Lagrange multipliers. The first of the two tables below shows the GMRES iteration counts (averaged over all linear solves performed in the course of all Newton iterations) as a function of the mesh refinement (represented by the total number of unknowns) for different implementations of the preconditioner.
+\begin{DoxyItemize}
+\item {\bfseries{"{}\+Super\+LU"{}}} corresponds to the exact implementation of the preconditioner $ E_{\rm PS} $ in which the linear systems involving the matrix $ E_{\rm PS} $ and the two squared mass matrices, $ M_{\rm x}^2 $ and $ M_{\rm y}^2 $, are solved by Super\+LU.
+\item {\bfseries{"{}\+Upper triangular E"{}}} corresponds to the case in which $ E_{\rm PS} $ is replaced by its upper block-\/triangular approximation (corresponding to $ \tilde{\cal P}_{\rm PS} $) but the four linear solves (two involving the diagonal blocks of $ E_{\rm PS} $; two involving the squared mass matrices, $ M_{\rm x}^2 $ and $ M_{\rm y}^2 $), are performed by Super\+LU.
+\item {\bfseries{"{}\+Upper triangular E; Hypre/\+CG"{}}} are the results obtained when using the same block approximation of the preconditioner, but using two AMG cycles (performed with Hypre) for the approximate solution of the diagonal blocks of $ E_{\rm PS} $, and diagonally preconditioned CG as the approximate solver for the mass matrices.
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \begin{center}\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+{\ttfamily n\+\_\+dof}  &798  &3198  &12798  &51198  &204798   \\\cline{1-6}
+Super\+LU  &8.\+1  &8.\+1  &8.\+3  &8.\+3  &8.\+3   \\\cline{1-6}
+Upper triangular E &24.\+9  &26.\+9  &28.\+4  &28.\+7  &28.\+9   \\\cline{1-6}
+Upper triangular E; Hypre/\+CG &24.\+9  &26.\+9  &28.\+4  &28.\+8  &29.\+1   \\\cline{1-6}
+\end{longtabu}
+\end{center}  \begin{center} {\bfseries{Table 1\+:}} Average GMRES iteration counts as a function of the mesh refinement (indicated by the number of unknowns, {\ttfamily n\+\_\+dof}) for different implementations of the preconditioner. \end{center}  \DoxyHorRuler{0}
+
+
+As expected, the GMRES iteration counts are small and mesh independent for the exact implementation of the preconditioner. Replacing the (costly) exact solves by (faster) approximate solves leads to a modest increase in the (absolute) number of GMRES iterations, while retaining their virtual mesh independence under sufficiently strong mesh refinement.
+
+The benefit of switching to the approximate solves becomes apparent in the next table which shows the average cpu times required for the solution of the linear systems by GMRES. For sufficiently fine discretisations the larger number of GMRES iterations for the inexact solves is more than compensated for by the much lower cost of the preconditioning operations. The final implementation yields cpu times that are proportional to the number of unknowns -- the hallmark of an optimal solver.
+
+\DoxyHorRuler{0}
+ \begin{center}\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+{\ttfamily n\+\_\+dof}  &798  &3198  &12798  &51198  &204798   \\\cline{1-6}
+Super\+LU  &0.\+140409  &0.\+720991  &4.\+47518  &35.\+1349  &336.\+517   \\\cline{1-6}
+Upper triangular E &0.\+160478  &0.\+737302  &3.\+80428  &22.\+6697  &170.\+048   \\\cline{1-6}
+Upper triangular E; Hypre/\+CG &0.\+225759  &0.\+895603  &3.\+61778  &15.\+8982  &64.\+4825   \\\cline{1-6}
+\end{longtabu}
+\end{center}  \begin{center} {\bfseries{Table 2\+:}} Average GMRES solve times \mbox{[}sec\mbox{]} as a function of the mesh refinement (indicated by the number of unknowns, {\ttfamily n\+\_\+dof}) for different implementations of the preconditioner. \end{center}  \DoxyHorRuler{0}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_modifications}{}\doxysection{\texorpdfstring{Modifications to the driver code}{Modifications to the driver code}}\label{index_modifications}
+Most of the driver code is unchanged from the implementation discussed in the ~\newline
+ \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ original tutorial.}} We therefore only discuss the modifications required to employ preconditioned GMRES as the linear solver for the Newton method.
+
+\DoxyHorRuler{0}
+\hypertarget{index_reclass}{}\doxysubsection{\texorpdfstring{(\+Re-\/)classification of the dof types}{(Re-)classification of the dof types}}\label{index_reclass}
+As discussed above (and in the more detailed \href{../../../mpi/block_preconditioners/html/index.html}{\texttt{ block-\/preconditioning tutorial}}, the classification of the degrees of freedom into different "{}dof types"{} has to be performed by the elements. Our implementation of the pseudo-\/elastic preconditioner treats the solver for the linear system involving $ E_{\rm PS} $ as a subsidiary preconditioner. {\ttfamily oomph-\/lib\textquotesingle{}s} existing solid mechanics elements already provide dof classification for the nodal positions according to the coordinate directions (so for a 2D displacement-\/based solid element the call to {\ttfamily ndof\+\_\+types()} will return 2 -- the x and y nodal positions). If these elements are to be used with our preconditioner, this classification must be over-\/written to distinguish between constrained and unconstrained nodal positions. This is done most easily by providing a wrapper class (templated by the type of the underlying solid element) in the driver code to re-\/implement (overload) the relevant functions\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============start\_wrapper==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Pseudo-\/Elastic\ Solid\ element\ class\ to\ overload\ the\ block\ preconditioner}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ methods\ ndof\_types()\ and\ get\_dof\_numbers\_for\_unknowns()\ to\ differentiate}}
+\DoxyCodeLine{\textcolor{comment}{///\ between\ DOFs\ subject\ to\ Lagrange\ multiplier\ and\ those\ that\ are\ not.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }PseudoElasticBulkElement\ :\ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ ELEMENT}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ PseudoElasticBulkElement()\ :\ ELEMENT()\ \{\}}
+
+\end{DoxyCodeInclude}
+ The member function {\ttfamily ndof\+\_\+types()} returns the number of dof types associated with (and classified by) this element\+: twice the number of spatial dimensions (for the constrained and unconstrained nodal positions).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Returns\ the\ number\ of\ DOF\ types\ associated\ with\ this\ element:\ Twice}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ number\ of\ spatial\ dimensions\ (for\ the\ constrained\ and\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ unconstrained\ nodal\ positions).}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ ndof\_types()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ 2*ELEMENT::dim();}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ The member function {\ttfamily get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} returns a list of pairs, associating each (global) unknown (stored as the first entry in the pair) with the dof type within its block (stored as the second entry in the pair). We distinguish between constrained and unconstrained nodes by checking if the node has been resized to accommodate storage for the Lagrange multipliers. \mbox{[}Recall that {\ttfamily Finite\+Element\+::required\+\_\+nvalue(j)} returns the number of nodal values at local node {\ttfamily j}, required by the element itself (recall that for "{}pure"{} solid mechanics elements this number is zero because the nodal coordinates are stored as a separate {\ttfamily Data} item); {\ttfamily Node\+::nvalue()} returns the number of values actually stored at a {\ttfamily Node} -- if this exceeds the value returned by {\ttfamily Finite\+Element\+::required\+\_\+nvalue(j)}, node {\ttfamily j} must have been resized when the {\ttfamily Face\+Element} applying the displacement constraint by Lagrange multipliers was attached.\mbox{]}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ a\ list\ of\ pairs\ for\ all\ unknowns\ in\ this\ element,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ so\ that\ the\ first\ entry\ in\ each\ pair\ contains\ the\ global\ equation}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ number\ of\ the\ unknown,\ while\ the\ second\ one\ contains\ the\ number}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ of\ the\ "{}DOF"{}\ that\ this\ unknown\ is\ associated\ with.}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ (Function\ can\ obviously\ only\ be\ called\ if\ the\ equation\ numbering}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ scheme\ has\ been\ set\ up.)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ E.g.\ in\ a\ 3D\ problem\ there\ are\ 6\ types\ of\ DOF:\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 0\ -\/\ x\ displacement\ (without\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 1\ -\/\ y\ displacement\ (without\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 2\ -\/\ z\ displacement\ (without\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 4\ -\/\ x\ displacement\ (with\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 5\ -\/\ y\ displacement\ (with\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 6\ -\/\ z\ displacement\ (with\ lagr\ mult\ traction)\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ get\_dof\_numbers\_for\_unknowns(}
+\DoxyCodeLine{\ \ \ \ std::list<std::pair<unsigned\ long,unsigned>\ >\&\ dof\_lookup\_list)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ temporary\ pair\ (used\ to\ store\ dof\ lookup\ prior\ to\ being\ added\ to\ list}}
+\DoxyCodeLine{\ \ \ std::pair<unsigned,unsigned>\ dof\_lookup;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ number\ of\ nodes}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ this-\/>nnode();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ the\ number\ of\ position\ dofs\ and\ dimensions\ at\ the\ node}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_position\_type\ =\ ELEMENT::nnodal\_position\_type();}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ nodal\_dim\ =\ ELEMENT::nodal\_dimension();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Integer\ storage\ for\ local\ unknown}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ local\_unknown=0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ nodes}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ offset\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>node\_pt(n)-\/>nvalue()\ !=\ this-\/>required\_nvalue(n))}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ offset\ =\ ELEMENT::dim();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ position\ dofs}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ k=0;k<n\_position\_type;k++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ dimension}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nodal\_dim;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ variable\ is\ unpinned}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ local\_unknown\ =\ ELEMENT::position\_local\_eqn(n,k,i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ store\ dof\ lookup\ in\ temporary\ pair:\ First\ entry\ in\ pair}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ global\ equation\ number;\ second\ entry\ is\ dof\ type}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ dof\_lookup.first\ =\ this-\/>eqn\_number(local\_unknown);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ dof\_lookup.second\ =\ offset+i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ to\ list}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ dof\_lookup\_list.push\_front(dof\_lookup);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+
+
+The {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} which we use to impose the displacement constraint already label the x-\/ and y-\/ \mbox{[}and, in 3D, z-\/\mbox{]}component of the Lagrange multipliers as dof types 0, 1 \mbox{[}and 2\mbox{]}, as required by our preconditioner. Therefore no modification is required.
+
+\DoxyHorRuler{0}
+\hypertarget{index_driver}{}\doxysubsection{\texorpdfstring{Modifications to the main code}{Modifications to the main code}}\label{index_driver}
+The main code only requires minor changes, all associated with the specification of different solver options. Since we provide the option to use Hypre and Trilinos solvers, we need to activate MPI if {\ttfamily oomph-\/lib} has been compiled with MPI support (even if the code is run in serial)\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{prescribed__displ__lagr__mult_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_MPI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ up\ mpi\ if\ oomph-\/lib\ has\ been\ compiled\ with\ parallel\ support}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ because\ parallel\ versions\ of\ trilinos\ and\ hypre\ which\ are\ then\ called}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ by\ default)\ need\ it.}}
+\DoxyCodeLine{\ MPI\_Helpers::init(argc,argv,\textcolor{keyword}{false});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ Next we define and process the possible command line flags which are used to select solver options and to specify the spatial resolution (in terms of of the number of elements in the x-\/ and y-\/directions. The {\ttfamily -\/-\/no\+\_\+adapt} flag suppresses the spatial adaptivity to facilitate systematic mesh refinement studies.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ along\ axes}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nel\_1d=5;}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/nel\_1d"{}},\&nel\_1d);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Suppress\ adaptation\ (for\ study\ of\ iteration\ count\ vs\ uniform\ mesh\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ refinement,\ say)}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/no\_adapt"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ block\ upper\ triangular\ preconditioner\ for\ elasticity\ block}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/block\_upper\_for\_elastic\_block"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ Hypre\ as\ subsidiary\ preconditioner\ (inexact\ solver)\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ linear\ (sub-\/)systems\ to\ be\ solved\ in\ the\ elastic\ block?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/hypre\_for\_elastic\_blocks"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ Trilinos\ CG\ as\ subsidiary\ preconditioner\ (inexact\ solver)\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ linear\ (sub-\/)systems\ to\ be\ solved\ in\ the\ Lagrange\ multiplier\ block?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag}
+\DoxyCodeLine{\ \ (\textcolor{stringliteral}{"{}-\/-\/trilinos\_cg\_for\_lagrange\_multiplier\_blocks"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ diagonal\ scaling\ as\ subsidiary\ preconditioner\ (inexact\ solver)\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ linear\ (sub-\/)systems\ to\ be\ solved\ in\ the\ elastic\ block?}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ [only\ used\ for\ exercise]}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag}
+\DoxyCodeLine{\ \ (\textcolor{stringliteral}{"{}-\/-\/diagonal\_scaling\_for\_elastic\_blocks"{}});}
+
+\end{DoxyCodeInclude}
+ We then assign the command line flags that were specified and document the ones that were recognised before building the problem, specifying the "{}wrapped"{} version of the {\ttfamily Refineable\+QPVDElement} as the template parameter.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem\ with\ specified\ number\ of\ elements\ along\ axes.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem}{PrescribedBoundaryDisplacementProblem}}<}
+\DoxyCodeLine{\ \ PseudoElasticBulkElement<RefineableQPVDElement<2,3>\ >\ >\ problem(nel\_1d);}
+
+\end{DoxyCodeInclude}
+ The rest of the main code is identical to the original version discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}} and is therefore omitted here.
+
+\DoxyHorRuler{0}
+\hypertarget{index_constr}{}\doxysubsection{\texorpdfstring{Modifications to the problem constructor}{Modifications to the problem constructor}}\label{index_constr}
+The majority of the problem constructor is unchanged from the original version of the code. Having created the bulk mesh (and stored a pointer to it in the private member {\ttfamily Solid\+\_\+mesh\+\_\+pt}) and the mesh of Lagrange multiplier elements (with a pointer stored in {\ttfamily Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}), we specify a GMRES as the linear solver (using Trilinos\textquotesingle{} version of it, if available)\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ linear\ solver}}
+\DoxyCodeLine{\ IterativeLinearSolver*\ solver\_pt=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ we\ have\ trilinos,\ use\ it}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_TRILINOS}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ solver}}
+\DoxyCodeLine{\ solver\_pt\ =\ \textcolor{keyword}{new}\ TrilinosAztecOOSolver;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ GMRES}}
+\DoxyCodeLine{\ \textcolor{keyword}{dynamic\_cast<}TrilinosAztecOOSolver*\textcolor{keyword}{>}(solver\_pt)-\/>solver\_type()\ }
+\DoxyCodeLine{\ \ =\ TrilinosAztecOOSolver::GMRES;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ oomph-\/lib's\ own\ GMRES}}
+\DoxyCodeLine{\ solver\_pt\ =\ \textcolor{keyword}{new}\ GMRES<CRDoubleMatrix>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ solver}}
+\DoxyCodeLine{\ linear\_solver\_pt()\ =\ solver\_pt;}
+
+\end{DoxyCodeInclude}
+ Next, we create an instance of our preconditioner, specify the meshes that contain the "{}bulk"{} solid and Lagrange multiplier elements, respectively, and pass the preconditioner to the iterative linear solver.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ preconditioner}}
+\DoxyCodeLine{\ PseudoElasticPreconditioner\ *\ prec\_pt\ =\ \textcolor{keyword}{new}\ PseudoElasticPreconditioner;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ solid\ and\ lagrange\ multiplier\ meshes}}
+\DoxyCodeLine{\ prec\_pt-\/>set\_elastic\_mesh(Solid\_mesh\_pt);}
+\DoxyCodeLine{\ prec\_pt-\/>set\_lagrange\_multiplier\_mesh(Lagrange\_multiplier\_mesh\_pt);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ preconditioner}}
+\DoxyCodeLine{\ solver\_pt-\/>preconditioner\_pt()\ =\ prec\_pt;}
+
+\end{DoxyCodeInclude}
+ By default the preconditioner performs the preconditioning operations as described above, and performs the block solves in (2) exactly, using Super\+LU.
+
+The use of different blocked approximations to $ E_{\rm PS} $ is controlled via the {\ttfamily elastic\+\_\+preconditioner\+\_\+type()} function. It is possible to specify the block approximation in terms of the (self-\/explanatory) enumeration
+\begin{DoxyItemize}
+\item {\ttfamily Pseudo\+Elastic\+Preconditioner\+::\+Exact\+\_\+block\+\_\+preconditioner} \mbox{[}the default\mbox{]}
+\item {\ttfamily Pseudo\+Elastic\+Preconditioner\+::\+Block\+\_\+diagonal\+\_\+preconditioner} 
+\item {\ttfamily Pseudo\+Elastic\+Preconditioner\+::\+Block\+\_\+upper\+\_\+triangular\+\_\+preconditioner} 
+\item {\ttfamily Pseudo\+Elastic\+Preconditioner\+::\+Block\+\_\+lower\+\_\+triangular\+\_\+preconditioner} 
+\end{DoxyItemize}So, to choose an upper block-\/triangular approximation for $ E_{\rm PS} $ we write 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ upper\ block\ triangular\ preconditioner\ for\ elastic\ block?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set}
+\DoxyCodeLine{\ \ \ \ \ (\textcolor{stringliteral}{"{}-\/-\/block\_upper\_for\_elastic\_block"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ prec\_pt-\/>elastic\_preconditioner\_type()=}
+\DoxyCodeLine{\ \ \ \ PseudoElasticPreconditioner::Block\_upper\_triangular\_preconditioner;}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ By default the linear systems involving the diagonal blocks of $ E_{\rm PS} $ are performed by Super\+LU. The function {\ttfamily set\+\_\+elastic\+\_\+subsidiary\+\_\+preconditioner(...)} allows the specification of another (approximate) solver (or subsidiary preconditioner, in the terminology of {\ttfamily oomph-\/lib\textquotesingle{}s} block preconditioning framework). The argument to this function is a pointer to a global function that returns an instance of the required solver. A function that creates an instantiation of Hypre\textquotesingle{}s AMG solver (with suitable settings) is already implemented in the {\ttfamily Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper} helper namespace and can be activated as follows\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_HYPRE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ Hypre\ as\ subsidiary\ preconditioner\ (inexact\ solver)\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ linear\ (sub-\/)systems\ to\ be\ solved\ in\ the\ elastic\ block?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set}
+\DoxyCodeLine{\ \ \ \ \ (\textcolor{stringliteral}{"{}-\/-\/hypre\_for\_elastic\_blocks"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ prec\_pt-\/>set\_elastic\_subsidiary\_preconditioner}
+\DoxyCodeLine{\ \ \ \ (Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper::}
+\DoxyCodeLine{\ \ \ \ \ get\_elastic\_preconditioner\_hypre);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ (\href{../../../../doc/mpi/distributed_general_purpose_block_preconditioners/html/index.html\#application}{\texttt{ Recall}} that subsidiary preconditioners are deleted automatically by the master preconditioner when they are no longer required.)
+
+A similar construction is used to specify alternative (approximate) solvers for the linear systems involving the mass matrices. To perform the solves with Trilinos\textquotesingle{} CG solver (and diagonal scaling) we state\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OOMPH\_HAS\_TRILINOS}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ Trilinos\ CG\ as\ subsidiary\ preconditioner\ (inexact\ solver)\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ linear\ (sub-\/)systems\ to\ be\ solved\ in\ the\ Lagrange\ multiplier\ block?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set}
+\DoxyCodeLine{\ \ \ \ \ (\textcolor{stringliteral}{"{}-\/-\/trilinos\_cg\_for\_lagrange\_multiplier\_blocks"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ prec\_pt-\/>set\_lagrange\_multiplier\_subsidiary\_preconditioner}
+\DoxyCodeLine{\ \ \ \ (Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper::}
+\DoxyCodeLine{\ \ \ \ \ get\_lagrange\_multiplier\_preconditioner);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ That\textquotesingle{}s it!
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_and_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_and_ex}
+\hypertarget{index_comm}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_comm}
+
+\begin{DoxyItemize}
+\item The machinery described here may seem rather heavy for a rather obscure problem. As mentioned at the beginning of this tutorial, the main purpose of this preconditioner is to act as a building block for our preconditioner for large-\/displacement FSI problems in which the ALE node update of the fluid mesh in response to the deformation of the fluid-\/loaded solid is handled by (pseudo-\/)elasticity. We refer to \href{../../pseudo_solid_fsi/html/index.html}{\texttt{ another tutorial}} for details. ~\newline
+~\newline
+
+\item Further details of the theory, such as the proof of the optimality of the preconditioner, can be found in ~\newline
+ \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012).}}
+\end{DoxyItemize}\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Experiment with alternative subsidiary preconditioners (inexact solvers) for the solution of the $ E_{\rm PS}$ block. For instance, set the argument to {\ttfamily Pseudo\+Elastic\+Preconditioner\+::elastic\+\_\+preconditioner\+\_\+type()} to {\ttfamily Pseudo\+Elastic\+Preconditioner\+::\+Block\+\_\+diagonal\+\_\+preconditioner}. With this setting, the solution of the linear systems involving $ E_{\rm PS}$ is performed using the block-\/diagonal approximation of $ E_{\rm PS}$. This saves one matrix-\/vector product with the off-\/diagonal blocks per iteration but ~\newline
+ significantly increases the GMRES iteration counts. \mbox{[}Don\textquotesingle{}t take our word for it -- try it!\mbox{]} ~\newline
+~\newline
+
+\item Specify "{}your own"{} subsidiary preconditioner (inexact solver) by writing a global function (well, you should obviously hide it in a namespace -- remember that global data and functions are evil!) that creates an instance of that preconditioner. Pass a function pointer to this function to {\ttfamily Pseudo\+Elastic\+Preconditioner\+::set\+\_\+elastic\+\_\+subsidiary\+\_\+preconditioner()}. \mbox{[}Hint\+: The driver code already contains the relevant source lines (omitted in the code listings above) to illustrate how to solve the linear systems with a diagonal preconditioner. This leads to a fairly catastrophic deterioration of the GMRES iteration counts -- the point of the exercise is to demonstrate how to implement such alternative (and hopefully better!) subsidiary preconditioners "{}from scratch"{}.\mbox{]} ~\newline
+~\newline
+
+\item Inspect (and experiment with) our settings for Hypre\textquotesingle{}s AMG solver -- defined in the {\ttfamily Pseudo\+\_\+\+Elastic\+\_\+\+Preconditioner\+\_\+\+Subsidiary\+\_\+\+Operator\+\_\+\+Helper} namespace in ~\newline
+~\newline
+ \begin{center} {\ttfamily  \href{../../../../src/multi_physics/pseudo_elastic_preconditioner.h}{\texttt{ src/multi\+\_\+physics/pseudo\+\_\+elastic\+\_\+preconditioner.\+h}} ~\newline
+ } ~\newline
+~\newline
+ and ~\newline
+~\newline
+ {\ttfamily  \href{../../../../src/multi_physics/pseudo_elastic_preconditioner.cc}{\texttt{ src/multi\+\_\+physics/pseudo\+\_\+elastic\+\_\+preconditioner.\+cc}} } \end{center} 
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/prescribed_displ_lagr_mult}{\texttt{ demo\+\_\+drivers/solid/prescribed\+\_\+displ\+\_\+lagr\+\_\+mult }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond.cc}{\texttt{ demo\+\_\+drivers/solid/prescribed\+\_\+displ\+\_\+lagr\+\_\+mult/prescribed\+\_\+displ\+\_\+lagr\+\_\+mult\+\_\+precond.\+cc}} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

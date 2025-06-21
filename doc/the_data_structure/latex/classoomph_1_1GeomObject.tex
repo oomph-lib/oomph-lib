@@ -1,0 +1,592 @@
+\doxysection{oomph\+::Geom\+Object Class Reference}
+\hypertarget{classoomph_1_1GeomObject}{}\label{classoomph_1_1GeomObject}\index{oomph::GeomObject@{oomph::GeomObject}}
+
+
+A geometric object is an object that provides a parametrised description of its shape via the function Geom\+Object\+::position(...).  
+
+
+
+
+{\ttfamily \#include $<$geom\+\_\+objects.\+h$>$}
+
+Inheritance diagram for oomph\+::Geom\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10.000000cm]{classoomph_1_1GeomObject}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_aff5bdabab387795b74ea1df0ab4ef1a6}{Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass dimension of geometric object (\# of Eulerian coords = \# of Lagrangian coords; no time history available/needed) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates. No time history available/needed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a75a091c285c27b4efc14c5afed4d3b31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates and pointer to time-\/stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the Geom\+Data varies with time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_afcff7382d77b6c995d2b43f14392047e}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a561d2439cbab0ca9ec8c15b3d4cda00d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeomObject_ab784d34d63bd852ee30fc03684717410}{\texorpdfstring{$\sim$}{\string~}\+Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Lagrangian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}{set\+\_\+nlagrangian\+\_\+and\+\_\+ndim}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}})
+\begin{DoxyCompactList}\small\item\em Set \# of Lagrangian and Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a8ca52ab6f4609144b7057961bd318fdc}{time\+\_\+stepper\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. Const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? This is implemented as a broken virtual function. You must overload this for Geom\+Objects that contain geometric \doxylink{classoomph_1_1Data}{Data}, i.\+e. Geom\+Objects whose shape depends on \doxylink{classoomph_1_1Data}{Data} that may contain unknowns in the overall \doxylink{classoomph_1_1Problem}{Problem}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{geom\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. This is implemented as a broken virtual function. You must overload this for Geom\+Objects that contain geometric \doxylink{classoomph_1_1Data}{Data}, i.\+e. Geom\+Objects whose shape depends on \doxylink{classoomph_1_1Data}{Data} that may contain unknowns in the overall \doxylink{classoomph_1_1Problem}{Problem}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Parametrised position on object at current time\+: r(zeta). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Works for t=0 but needs to be overloaded if genuine time-\/dependence is required. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_af5736db11f3a40daa1a9b3d4859ca061}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdt}})
+\begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}{dposition}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em 2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}{locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em A geometric object may be composed of may sub-\/objects (e.\+g. a finite-\/element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-\/object and local coordinate within that sub-\/object at a given intrinsic coordinate, zeta. Note that only one sub-\/object can "{}cover"{} any given intrinsic position. If the position is at an "{}interface"{} between sub-\/objects, either one can be returned. The default implementation merely returns, the pointer to the "{}entire"{} \doxylink{classoomph_1_1GeomObject}{Geom\+Object} and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583}{interpolated\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A geometric object may be composed of many sub-\/objects each with their own local coordinate. This function returns the "{}global"{} intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.\+e. the intrinsic coordinate of the sub-\/\+Geom\+Object. In simple (non-\/compound) Geom\+Objects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived \doxylink{classoomph_1_1GeomObject}{Geom\+Object} where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a11d8ac51be65ee822a6c782c5e079a2c}{NLagrangian}}
+\begin{DoxyCompactList}\small\item\em Number of Lagrangian (intrinsic) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a6351e2d8fbd54ff23498eb6f77c905cc}{Ndim}}
+\begin{DoxyCompactList}\small\item\em Number of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a158a36e0dbcaf236ffc351b76faaed53}{Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Timestepper (used to handle access to geometry at previous timesteps) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A geometric object is an object that provides a parametrised description of its shape via the function Geom\+Object\+::position(...). 
+
+The minimum functionality is\+: The geometric object has a number of Lagrangian (intrinsic) coordinates that parametrise the (Eulerian) position vector, whose dimension might differ from the number of Lagrangian (intrinsic) coordinates (e.\+g. for shell-\/like objects).
+
+We might also need the derivatives of the position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to the Lagrangian (intrinsic) coordinates and interfaces for this functionality are provided. \mbox{[}Note\+: For some geometric objects it might be too tedious to work out the derivatives and they might not be needed anyway. In other cases we might always need the position vector and all derivatives at the same time. We provide suitable interfaces for these cases in virtual but broken (rather than pure virtual) form so the user can (but doesn\textquotesingle{}t have to) provide the required versions by overloading.\mbox{]}
+
+The shape of a geometric object is usually determined by a number of parameters whose value might have to be determined as part of the overall solution (e.\+g. for geometric objects that represent elastic walls). The geometric object therefore has a vector of (pointers to) geometric \doxylink{classoomph_1_1Data}{Data}, which can be free/pinned and have a time history, etc. This makes it possible to `upgrade' Geom\+Objects to Generalised\+Elements -- in this case the geometric \doxylink{classoomph_1_1Data}{Data} plays the role of internal \doxylink{classoomph_1_1Data}{Data} in the \doxylink{classoomph_1_1GeneralisedElement}{Generalised\+Element}. Conversely, Finite\+Elements, in which a geometry (spatial coordinate) has been defined, inherit from Geom\+Objects, which is particularly useful in FSI computations\+: Meshing of moving domains is typically performed by representing the domain as an object of type \doxylink{classoomph_1_1Domain}{Domain} and, by default, \doxylink{classoomph_1_1Domain}{Domain} boundaries are represented by Geom\+Objects. In FSI computations, the boundary of the fluid domain is represented by a number of solid mechanics elements. These elements are, in fact, Geom\+Objects via inheritance so that the we can use the standard interfaces of the \doxylink{classoomph_1_1GeomObject}{Geom\+Object} class for mesh generation. An example is the class {\ttfamily \doxylink{classoomph_1_1FSIHermiteBeamElement}{FSIHermite\+Beam\+Element}} which is derived from the class {\ttfamily \doxylink{classoomph_1_1HermiteBeamElement}{Hermite\+Beam\+Element}} (a `normal' beam element) and the {\ttfamily \doxylink{classoomph_1_1GeomObject}{Geom\+Object}} class.
+
+The shape of a geometric object can have an explicit time-\/dependence, for instance in cases where a domain boundary is performing prescribed motions. We provide access to the `global' time by giving the object a pointer to a timestepping scheme. \mbox{[}Note that, within the overall FE code, time is only ever evaluated at discrete instants (which are accessible via the timestepper), never in continuous form\mbox{]}. The timestepper is also needed to evaluate time-\/derivatives if the geometric \doxylink{classoomph_1_1Data}{Data} carries a time history. 
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00100}{100}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1GeomObject_aff5bdabab387795b74ea1df0ab4ef1a6}\label{classoomph_1_1GeomObject_aff5bdabab387795b74ea1df0ab4ef1a6} 
+\index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
+\index{GeomObject@{GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{GeomObject()}{GeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily oomph\+::\+Geom\+Object\+::\+Geom\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00104}{104}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}\label{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31} 
+\index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
+\index{GeomObject@{GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{GeomObject()}{GeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily oomph\+::\+Geom\+Object\+::\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass dimension of geometric object (\# of Eulerian coords = \# of Lagrangian coords; no time history available/needed) 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00108}{108}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}\label{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da} 
+\index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
+\index{GeomObject@{GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{GeomObject()}{GeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily oomph\+::\+Geom\+Object\+::\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nlagrangian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: pass \# of Eulerian and Lagrangian coordinates. No time history available/needed. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00116}{116}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00177}{ndim()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00171}{nlagrangian()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a75a091c285c27b4efc14c5afed4d3b31}\label{classoomph_1_1GeomObject_a75a091c285c27b4efc14c5afed4d3b31} 
+\index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
+\index{GeomObject@{GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{GeomObject()}{GeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily oomph\+::\+Geom\+Object\+::\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nlagrangian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndim,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: pass \# of Eulerian and Lagrangian coordinates and pointer to time-\/stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the Geom\+Data varies with time. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00139}{139}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00177}{ndim()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00171}{nlagrangian()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_afcff7382d77b6c995d2b43f14392047e}\label{classoomph_1_1GeomObject_afcff7382d77b6c995d2b43f14392047e} 
+\index{oomph::GeomObject@{oomph::GeomObject}!GeomObject@{GeomObject}}
+\index{GeomObject@{GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{GeomObject()}{GeomObject()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily oomph\+::\+Geom\+Object\+::\+Geom\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1GeomObject_ab784d34d63bd852ee30fc03684717410}\label{classoomph_1_1GeomObject_ab784d34d63bd852ee30fc03684717410} 
+\index{oomph::GeomObject@{oomph::GeomObject}!````~GeomObject@{\texorpdfstring{$\sim$}{\string~}GeomObject}}
+\index{````~GeomObject@{\texorpdfstring{$\sim$}{\string~}GeomObject}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GeomObject()}{\string~GeomObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Geom\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Geom\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+(Empty) destructor 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00168}{168}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}\label{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c} 
+\index{oomph::GeomObject@{oomph::GeomObject}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1StraightLine_ad4a437deb740dcc4c55b69e52e98d2d5}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a19b6cecd9fcbcad1830a8a3c1e133672}{oomph\+::\+Ellipse}}, and \mbox{\hyperlink{classoomph_1_1EllipticalTube_a8b64fd523511735679b5820c5fb687cf}{oomph\+::\+Elliptical\+Tube}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00341}{341}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00126}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::assign\+\_\+undeformed\+\_\+positions()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00275}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00357}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+shell()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00777}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+energy()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00588}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+energy()}}, and \mbox{\hyperlink{shell__elements_8cc_source_l00154}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+strain\+\_\+and\+\_\+bend()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}\label{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81} 
+\index{oomph::GeomObject@{oomph::GeomObject}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a5cf7ea86ce09f7371e03fea52395cf3b}{oomph\+::\+Ellipse}}, and \mbox{\hyperlink{classoomph_1_1EllipticalTube_a2fe694a504750371d3ef98a20b92e6a5}{oomph\+::\+Elliptical\+Tube}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00357}{357}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}\label{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75} 
+\index{oomph::GeomObject@{oomph::GeomObject}!dposition@{dposition}}
+\index{dposition@{dposition}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{dposition()}{dposition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::dposition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aed3e9376f6042fed597098c0017a2131}{oomph\+::\+Mesh\+As\+Geom\+Object}}, \mbox{\hyperlink{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1}{oomph\+::\+Straight\+Line}}, and \mbox{\hyperlink{classoomph_1_1Ellipse_af8caf51de734dff257fa3dbde14fa167}{oomph\+::\+Ellipse}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00327}{327}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}\label{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974} 
+\index{oomph::GeomObject@{oomph::GeomObject}!dposition\_dt@{dposition\_dt}}
+\index{dposition\_dt@{dposition\_dt}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{dposition\_dt()}{dposition\_dt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::dposition\+\_\+dt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a83bf7fe6d4d9dc08400aa853198c716d}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aa11d7bbd2d01a646200e8719e61ad09a}{oomph\+::\+Pseudo\+Buckling\+Ring}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a3b25cfe303aa51f26bd27312abccbba4}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a1444cb95e415d363c6a7a35332f15730}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00292}{292}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8cc_source_l07407}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+jacobian\+\_\+for\+\_\+solid\+\_\+ic()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}\label{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132} 
+\index{oomph::GeomObject@{oomph::GeomObject}!geom\_data\_pt@{geom\_data\_pt}}
+\index{geom\_data\_pt@{geom\_data\_pt}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} oomph\+::\+Geom\+Object\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. This is implemented as a broken virtual function. You must overload this for Geom\+Objects that contain geometric \doxylink{classoomph_1_1Data}{Data}, i.\+e. Geom\+Objects whose shape depends on \doxylink{classoomph_1_1Data}{Data} that may contain unknowns in the overall \doxylink{classoomph_1_1Problem}{Problem}. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a5bcf4b1b4e1d3126583096ee7e2b216d}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a31f59d300e5bb25a671608faf9e22c12}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a0cb5fd3657899de308ea878948e63a52}{oomph\+::\+Solid\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_a1b84f8caed1def4d7e7bb4b415f59cb7}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_ac293fd6830b55de7ad39df03ec3add2b}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1Circle_ad7543151dd46f8db57bec8c4d97044a6}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a2295105be2e8e5b2527f23b0b93fa5cd}{oomph\+::\+Mesh\+As\+Geom\+Object}}, \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_aed7e4e24a81d91f21bc972da131d1407}{oomph\+::\+Pseudo\+Buckling\+Ring}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a3f20de56e3a920644b01dac184f67ef1}{oomph\+::\+Refineable\+Solid\+Element}}, and \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a70a80642abccb05334b4863024dbc3e5}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00233}{233}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l01209}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583}\label{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583} 
+\index{oomph::GeomObject@{oomph::GeomObject}!interpolated\_zeta@{interpolated\_zeta}}
+\index{interpolated\_zeta@{interpolated\_zeta}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{interpolated\_zeta()}{interpolated\_zeta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::interpolated\+\_\+zeta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+A geometric object may be composed of many sub-\/objects each with their own local coordinate. This function returns the "{}global"{} intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.\+e. the intrinsic coordinate of the sub-\/\+Geom\+Object. In simple (non-\/compound) Geom\+Objects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived \doxylink{classoomph_1_1GeomObject}{Geom\+Object} where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FiniteElement_a4407a4f0fb5bf5b883530742ee3153df}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00404}{404}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}\label{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3} 
+\index{oomph::GeomObject@{oomph::GeomObject}!locate\_zeta@{locate\_zeta}}
+\index{locate\_zeta@{locate\_zeta}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{locate\_zeta()}{locate\_zeta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&}]{sub\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+A geometric object may be composed of may sub-\/objects (e.\+g. a finite-\/element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-\/object and local coordinate within that sub-\/object at a given intrinsic coordinate, zeta. Note that only one sub-\/object can "{}cover"{} any given intrinsic position. If the position is at an "{}interface"{} between sub-\/objects, either one can be returned. The default implementation merely returns, the pointer to the "{}entire"{} \doxylink{classoomph_1_1GeomObject}{Geom\+Object} and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement_ae56f8245dbbb641c98d326780ff9400d}{oomph\+::\+FSIHermite\+Beam\+Element}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a4dc20a17b1d0e255f917895975cbd15d}{oomph\+::\+Finite\+Element}}, and \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a8a9fecb98d4e0a151e3b9e58aa433be9}{oomph\+::\+Mesh\+As\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00381}{381}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l01209}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8cc_source_l00626}{oomph\+::\+Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00435}{oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc_source_l01841}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{fish__mesh_8h_source_l00417}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00385}{oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}\label{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df} 
+\index{oomph::GeomObject@{oomph::GeomObject}!ndim@{ndim}}
+\index{ndim@{ndim}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{ndim()}{ndim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Geom\+Object\+::ndim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to \# of Eulerian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00177}{177}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00431}{Ndim}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__smooth_8h_source_l00395}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{problem_8cc_source_l13744}{oomph\+::\+Problem\+::adapt()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{elements_8cc_source_l00696}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00416}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::backup()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{hermite__elements_8cc_source_l00278}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00119}{oomph\+::\+QSpectral\+Element$<$ 1, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00305}{oomph\+::\+QSpectral\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00538}{oomph\+::\+QSpectral\+Element$<$ 3, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{mesh_8h_source_l00760}{oomph\+::\+Mesh\+::check\+\_\+for\+\_\+repeated\+\_\+nodes()}}, \mbox{\hyperlink{mesh_8cc_source_l06881}{oomph\+::\+Mesh\+::check\+\_\+halo\+\_\+schemes()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8template_8cc_source_l00251}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01451}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l01297}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27906}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{nodes_8cc_source_l01916}{oomph\+::\+Node\+::copy()}}, \mbox{\hyperlink{mesh_8cc_source_l09190}{oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage()}}, \mbox{\hyperlink{mesh_8cc_source_l04959}{oomph\+::\+Mesh\+::distribute()}}, \mbox{\hyperlink{fsi_8h_source_l00724}{oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi()}}, \mbox{\hyperlink{mesh_8cc_source_l06470}{oomph\+::\+Mesh\+::doc\+\_\+mesh\+\_\+distribution()}}, \mbox{\hyperlink{mesh_8h_source_l02080}{oomph\+::\+Mesh\+::doc\+\_\+shared\+\_\+nodes()}}, \mbox{\hyperlink{beam__elements_8cc_source_l01199}{oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01332}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00093}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::drag\+\_\+force()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00275}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, \mbox{\hyperlink{geom__objects_8h_source_l00116}{Geom\+Object()}}, \mbox{\hyperlink{geom__objects_8h_source_l00139}{Geom\+Object()}}, \mbox{\hyperlink{problem_8cc_source_l19357}{oomph\+::\+Problem\+::get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing()}}, \mbox{\hyperlink{navier__stokes__surface__drag__torque__elements_8h_source_l00087}{oomph\+::\+Navier\+Stokes\+Surface\+Drag\+Torque\+Element$<$ ELEMENT $>$\+::get\+\_\+drag\+\_\+and\+\_\+torque()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00777}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+energy()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00588}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+energy()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00571}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+kinetic\+\_\+energy\+\_\+flux()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00184}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+non\+\_\+unit\+\_\+tangent()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00077}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+normal()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00226}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00385}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+rate\+\_\+of\+\_\+traction\+\_\+work\+\_\+components()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00657}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00435}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00753}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l18330}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l26811}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00712}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux()}}, \mbox{\hyperlink{mesh_8h_source_l02926}{oomph\+::\+Node\+Ordering\+::node\+\_\+global\+\_\+position\+\_\+comparison()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00653}{oomph\+::\+Algebraic\+Mesh\+::node\+\_\+update()}}, \mbox{\hyperlink{mesh_8cc_source_l00287}{oomph\+::\+Mesh\+::node\+\_\+update()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00950}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+central\+\_\+region()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00868}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+body()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00834}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00923}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+fin()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00921}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01039}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00529}{oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00664}{oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$\+::operator()()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00982}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}, \mbox{\hyperlink{elements_8h_source_l05046}{oomph\+::\+Dummy\+Face\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00825}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}, \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__traction__elements_8h_source_l00214}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{time__harmonic__linear__elasticity__traction__elements_8h_source_l00214}{oomph\+::\+Time\+Harmonic\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l08020}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::output\+\_\+boundary\+\_\+coordinates()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01990}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::p\+\_\+refine()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l06104}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::p\+\_\+refine()}}, \mbox{\hyperlink{tree_8template_8cc_source_l00148}{oomph\+::\+Tree\+::p\+\_\+refine\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{nodes_8cc_source_l00672}{oomph\+::\+Data\+::read()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l03207}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l07633}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{refineable__brick__spectral__element_8h_source_l00079}{oomph\+::\+Refineable\+QSpectral\+Element$<$ 3 $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{refineable__quad__spectral__element_8h_source_l00079}{oomph\+::\+Refineable\+QSpectral\+Element$<$ 2 $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{problem_8cc_source_l02664}{oomph\+::\+Problem\+::remove\+\_\+duplicate\+\_\+data()}}, \mbox{\hyperlink{mesh__smooth_8h_source_l00435}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$\+::reset()}}, \mbox{\hyperlink{mesh_8cc_source_l04426}{oomph\+::\+Mesh\+::resize\+\_\+halo\+\_\+nodes()}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00261}{oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+positions()}}, \mbox{\hyperlink{problem_8cc_source_l04295}{oomph\+::\+Problem\+::set\+\_\+pinned\+\_\+values\+\_\+to\+\_\+zero()}}, \mbox{\hyperlink{tree_8template_8cc_source_l00060}{oomph\+::\+Tree\+::split\+\_\+if\+\_\+required()}}, \mbox{\hyperlink{womersley__elements_8h_source_l01616}{oomph\+::\+Womersley\+Mesh$<$ WOMERSLEY\+\_\+\+ELEMENT $>$\+::\+Womersley\+Mesh()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00091}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}\label{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251} 
+\index{oomph::GeomObject@{oomph::GeomObject}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Geom\+Object\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? This is implemented as a broken virtual function. You must overload this for Geom\+Objects that contain geometric \doxylink{classoomph_1_1Data}{Data}, i.\+e. Geom\+Objects whose shape depends on \doxylink{classoomph_1_1Data}{Data} that may contain unknowns in the overall \doxylink{classoomph_1_1Problem}{Problem}. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_ad3b508a8c906a3e175f9c058a0103023}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1ElementWithMovingNodes_acd9274afc02b66bb15b368e359c40a6f}{oomph\+::\+Element\+With\+Moving\+Nodes}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_ae09e3e0c01b6143d511f2626d2ee535c}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1SolidFiniteElement_a73f387da7f31f233b79c2526e8cbc896}{oomph\+::\+Solid\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1FaceElementAsGeomObject_aa4c65d845266c0fc60bbd0d75d2951bb}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a7b89731ed0bbe563d323d0eb5e1e708c}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1Circle_a69d37777c2d4e7e13431a1a1e7f31ad5}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1EllipticalTube_ad137810aac62250463273656db192ed7}{oomph\+::\+Elliptical\+Tube}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_a47d0c877a05e1d84703052431396cd0c}{oomph\+::\+Mesh\+As\+Geom\+Object}}, \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a9e03780134886a9a2a19358519eca3be}{oomph\+::\+Pseudo\+Buckling\+Ring}}, \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a690e24cdbd9308da1b9e705fd0340de8}{oomph\+::\+Refineable\+Solid\+Element}}, and \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a4c5bf4b09a19ea70edf9ec68b41bfd2a}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00209}{209}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l01209}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+shape\+\_\+geom\+\_\+object\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}\label{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c} 
+\index{oomph::GeomObject@{oomph::GeomObject}!nlagrangian@{nlagrangian}}
+\index{nlagrangian@{nlagrangian}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{nlagrangian()}{nlagrangian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Geom\+Object\+::nlagrangian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to \# of Lagrangian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00171}{171}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00428}{NLagrangian}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__mesh_8cc_source_l00924}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::adapt\+\_\+mesh()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{nodes_8cc_source_l03435}{oomph\+::\+Solid\+Node\+::copy()}}, \mbox{\hyperlink{mesh_8cc_source_l09190}{oomph\+::\+Mesh\+::delete\+\_\+all\+\_\+external\+\_\+storage()}}, \mbox{\hyperlink{beam__elements_8cc_source_l01199}{oomph\+::\+FSIHermite\+Beam\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{shell__elements_8cc_source_l01332}{oomph\+::\+FSIDiag\+Hermite\+Shell\+Element\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{error__estimator_8h_source_l00438}{oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00275}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+beam()}}, \mbox{\hyperlink{geom__objects_8h_source_l00116}{Geom\+Object()}}, \mbox{\hyperlink{geom__objects_8h_source_l00139}{Geom\+Object()}}, \mbox{\hyperlink{shell__elements_8cc_source_l00777}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::get\+\_\+energy()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00588}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+energy()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00184}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+non\+\_\+unit\+\_\+tangent()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00077}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations\+::get\+\_\+normal()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00657}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00868}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+body()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00923}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+fin()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00982}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}, \mbox{\hyperlink{hermite__elements_8cc_source_l01134}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l01853}{oomph\+::\+Solid\+QElement$<$ 1, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l02015}{oomph\+::\+Solid\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l02189}{oomph\+::\+Solid\+QElement$<$ 3, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{hermite__elements_8cc_source_l01178}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{beam__elements_8cc_source_l00825}{oomph\+::\+Hermite\+Beam\+Element\+::output()}}, \mbox{\hyperlink{hermite__elements_8cc_source_l01083}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l01813}{oomph\+::\+Solid\+QElement$<$ 1, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l01971}{oomph\+::\+Solid\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{Qelements_8h_source_l02140}{oomph\+::\+Solid\+QElement$<$ 3, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{refineable__mesh_8cc_source_l04435}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::p\+\_\+adapt\+\_\+mesh()}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00409}{oomph\+::\+Mesh\+As\+Geom\+Object\+::position()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l01023}{oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::pre\+\_\+compute\+\_\+d2shape\+\_\+lagrangian\+\_\+at\+\_\+knots()}}, \mbox{\hyperlink{stored__shape__function__elements_8cc_source_l00960}{oomph\+::\+Storable\+Shape\+Solid\+Element\+Base\+::pre\+\_\+compute\+\_\+dshape\+\_\+lagrangian\+\_\+at\+\_\+knots()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00091}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::zeta\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a561d2439cbab0ca9ec8c15b3d4cda00d}\label{classoomph_1_1GeomObject_a561d2439cbab0ca9ec8c15b3d4cda00d} 
+\index{oomph::GeomObject@{oomph::GeomObject}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1GeomObject_af5736db11f3a40daa1a9b3d4859ca061}\label{classoomph_1_1GeomObject_af5736db11f3a40daa1a9b3d4859ca061} 
+\index{oomph::GeomObject@{oomph::GeomObject}!position@{position}}
+\index{position@{position}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00276}{276}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}\label{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa} 
+\index{oomph::GeomObject@{oomph::GeomObject}!position@{position}}
+\index{position@{position}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Works for t=0 but needs to be overloaded if genuine time-\/dependence is required. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_aca95759d96758c7a4fc81dece7768e9d}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_ad1bd014b31d75703384be201ab65e80f}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}, \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9c86ac02c60541d451ceb50eb49914ed}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad1c757b3ea99bfac2521244a977728ed}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}{oomph\+::\+Warped\+Circular\+Disk}}, \mbox{\hyperlink{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_a862ce1f7d6ac7b2c5deb613b49caa30f}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1Circle_a3d318d67e50a29d7d8916cacc741435b}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1EllipticalTube_a01c6372a901d28892cab9e43ba8b3530}{oomph\+::\+Elliptical\+Tube}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_aab712c9f8a51d997c13c00eb1afaf9f4}{oomph\+::\+Mesh\+As\+Geom\+Object}}, and \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a027211cc7067efa849e605b456cb5462}{oomph\+::\+Pseudo\+Buckling\+Ring}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00259}{259}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{position()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}\label{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065} 
+\index{oomph::GeomObject@{oomph::GeomObject}!position@{position}}
+\index{position@{position}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Parametrised position on object at current time\+: r(zeta). 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_ab1b3d09214a0985a331564135fe14053}{oomph\+::\+Young\+Laplace\+Equations}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement_a14f5acb186ecd1168dfa08dcf242c538}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}, \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon_a29e3518f6fcdaeead14ae41f11e6fb5d}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}, \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a9fc819d4f7a036a45bd62a484c9749d7}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a1d33f53e2b2813fba8a0e8b458bf2047}{oomph\+::\+Finite\+Element}}, \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb}{oomph\+::\+Warped\+Circular\+Disk}}, \mbox{\hyperlink{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884}{oomph\+::\+Straight\+Line}}, \mbox{\hyperlink{classoomph_1_1Ellipse_abf6972409206084dd1f517a535fb1b52}{oomph\+::\+Ellipse}}, \mbox{\hyperlink{classoomph_1_1Circle_a9a527de1361e8cb4c8445e3dd58e66f8}{oomph\+::\+Circle}}, \mbox{\hyperlink{classoomph_1_1EllipticalTube_af7a879adbdba6f7fc1a1dd9c0b9378f6}{oomph\+::\+Elliptical\+Tube}}, \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject_ad071793f5cee36eef0e56dbeeebf4c24}{oomph\+::\+Mesh\+As\+Geom\+Object}}, and \mbox{\hyperlink{classoomph_1_1PseudoBucklingRing_a1cd6c36f2f84385b6485933b18cbbe43}{oomph\+::\+Pseudo\+Buckling\+Ring}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00368}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00051}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::\+Channel\+With\+Leaflet\+Domain()}}, \mbox{\hyperlink{geom__objects_8h_source_l00292}{dposition\+\_\+dt()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00045}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l01676}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00779}{oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::final\+\_\+vertex\+\_\+coordinate()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00771}{oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::initial\+\_\+vertex\+\_\+coordinate()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00411}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00453}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+I\+\_\+\+W()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00546}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+\+E()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00589}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::macro\+\_\+bound\+\_\+\+II\+\_\+\+W()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00131}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{oomph\+::\+Full\+Circle\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{tube__domain_8h_source_l00166}{oomph\+::\+Tube\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{rectangle__with__hole__domain_8h_source_l00117}{oomph\+::\+Rectangle\+With\+Hole\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00521}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8cc_source_l00448}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+\+I()}}, \mbox{\hyperlink{channel__with__leaflet__mesh_8template_8cc_source_l00489}{oomph\+::\+Algebraic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+\+II()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l01404}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::output()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l00742}{oomph\+::\+Triangle\+Mesh\+Curvi\+Line\+::output()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00194}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00259}{position()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8h_source_l00186}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::position()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00080}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::position\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00088}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00043}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain\+::project\+\_\+point\+\_\+on\+\_\+cylinder\+\_\+to\+\_\+annular\+\_\+boundary()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00483}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+B()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00812}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00744}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00847}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+F()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00723}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+R()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00775}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+U()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00633}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+B()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00560}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+D()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00671}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+F()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00484}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+L()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00515}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+R()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00528}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00591}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+centr\+\_\+\+U()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00546}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00383}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+D()}}, \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00727}{oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+E\+\_\+collapsible()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00449}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+F()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00301}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+L()}}, \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00762}{oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+N\+\_\+collapsible()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00342}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+R()}}, \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00798}{oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+S\+\_\+collapsible()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00965}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+B()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l01001}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+F()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00884}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+L()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+S()}}, \mbox{\hyperlink{quarter__tube__domain_8h_source_l00943}{oomph\+::\+Quarter\+Tube\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+U()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+\+W()}}, \mbox{\hyperlink{quarter__pipe__domain_8h_source_l00416}{oomph\+::\+Quarter\+Pipe\+Domain\+::r\+\_\+\+U()}}, \mbox{\hyperlink{fish__domain_8h_source_l00557}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+E()}}, \mbox{\hyperlink{fish__domain_8h_source_l00541}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00580}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00599}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+body\+\_\+\+W()}}, \mbox{\hyperlink{fish__domain_8h_source_l00472}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+N()}}, \mbox{\hyperlink{fish__domain_8h_source_l00512}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+S()}}, \mbox{\hyperlink{fish__domain_8h_source_l00495}{oomph\+::\+Fish\+Domain\+::r\+\_\+upper\+\_\+fin\+\_\+\+W()}}, \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00692}{oomph\+::\+Collapsible\+Channel\+Domain\+::r\+\_\+\+W\+\_\+collapsible()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l02063}{oomph\+::\+Refineable\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+displ\+\_\+lagr\+\_\+multiplier()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8h_source_l03851}{oomph\+::\+Unstructured\+Two\+DMesh\+Geometry\+Base\+::setup\+\_\+boundary\+\_\+coordinates()}}, \mbox{\hyperlink{channel__with__leaflet__domain_8h_source_l00685}{oomph\+::\+Channel\+With\+Leaflet\+Domain\+::slanted\+\_\+bound\+\_\+up()}}, \mbox{\hyperlink{unstructured__two__d__mesh__geometry__base_8cc_source_l04020}{oomph\+::\+Unstructured\+Two\+DMesh\+Geometry\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l01517}{oomph\+::\+Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element$<$ ELEMENT $>$\+::square\+\_\+of\+\_\+l2\+\_\+norm\+\_\+of\+\_\+error()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}\label{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e} 
+\index{oomph::GeomObject@{oomph::GeomObject}!set\_nlagrangian\_and\_ndim@{set\_nlagrangian\_and\_ndim}}
+\index{set\_nlagrangian\_and\_ndim@{set\_nlagrangian\_and\_ndim}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{set\_nlagrangian\_and\_ndim()}{set\_nlagrangian\_and\_ndim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Geom\+Object\+::set\+\_\+nlagrangian\+\_\+and\+\_\+ndim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+lagrangian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set \# of Lagrangian and Eulerian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00183}{183}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00431}{Ndim}}, and \mbox{\hyperlink{geom__objects_8h_source_l00428}{NLagrangian}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00096}{oomph\+::\+Mesh\+As\+Geom\+Object\+::build\+\_\+it()}}, \mbox{\hyperlink{face__element__as__geometric__object_8h_source_l00072}{oomph\+::\+Face\+Element\+As\+Geom\+Object$<$ ELEMENT $>$\+::\+Face\+Element\+As\+Geom\+Object()}}, and \mbox{\hyperlink{fsi_8cc_source_l00121}{oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}\label{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de} 
+\index{oomph::GeomObject@{oomph::GeomObject}!time\_stepper\_pt@{time\_stepper\_pt}}
+\index{time\_stepper\_pt@{time\_stepper\_pt}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{time\_stepper\_pt()}{time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for pointer to time stepper\+: Null if object is not time-\/dependent. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00192}{192}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00435}{Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, \mbox{\hyperlink{mesh_8cc_source_l02288}{oomph\+::\+Mesh\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()}}, \mbox{\hyperlink{problem_8cc_source_l11575}{oomph\+::\+Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()}}, \mbox{\hyperlink{face__mesh__project_8h_source_l00230}{oomph\+::\+Backup\+Mesh\+For\+Projection$<$ GEOMETRIC\+\_\+\+ELEMENT $>$\+::\+Backup\+Mesh\+For\+Projection()}}, \mbox{\hyperlink{refineable__brick__element_8cc_source_l01293}{oomph\+::\+Refineable\+QElement$<$ 3 $>$\+::build()}}, \mbox{\hyperlink{refineable__line__element_8cc_source_l00212}{oomph\+::\+Refineable\+QElement$<$ 1 $>$\+::build()}}, \mbox{\hyperlink{refineable__quad__element_8cc_source_l00642}{oomph\+::\+Refineable\+QElement$<$ 2 $>$\+::build()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00153}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh()}}, \mbox{\hyperlink{geompack__mesh_8template_8cc_source_l00043}{oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{simple__cubic__tet__mesh_8template_8cc_source_l00047}{oomph\+::\+Simple\+Cubic\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l00047}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source_l00072}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l04807}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00082}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00599}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{one__d__mesh_8template_8cc_source_l00038}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00044}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{simple__cubic__mesh_8template_8cc_source_l00043}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{single__layer__spine__mesh_8template_8cc_source_l00113}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00266}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{mesh_8cc_source_l02366}{oomph\+::\+Mesh\+::calculate\+\_\+predictions()}}, \mbox{\hyperlink{problem_8cc_source_l11732}{oomph\+::\+Problem\+::calculate\+\_\+predictions()}}, \mbox{\hyperlink{geom__objects_8h_source_l00915}{oomph\+::\+Circle\+::\+Circle()}}, \mbox{\hyperlink{geom__objects_8h_source_l00964}{oomph\+::\+Circle\+::\+Circle()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00463}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02556}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l03850}{oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{dg__elements_8h_source_l00291}{oomph\+::\+DGElement\+::construct\+\_\+boundary\+\_\+nodes\+\_\+and\+\_\+faces()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l19416}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l27906}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::construct\+\_\+new\+\_\+node\+\_\+load\+\_\+balance\+\_\+helper()}}, \mbox{\hyperlink{element__with__moving__nodes_8h_source_l00435}{oomph\+::\+Element\+With\+Specific\+Moving\+Nodes$<$ ELEMENT, NODE\+\_\+\+TYPE $>$\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02526}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l03813}{oomph\+::\+Solid\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{dg__elements_8h_source_l00335}{oomph\+::\+DGElement\+::construct\+\_\+nodes\+\_\+and\+\_\+faces()}}, \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc_source_l00045}{oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::\+Cylinder\+With\+Flag\+Mesh()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l00912}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::d2u\+\_\+dt2()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00605}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00067}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::d2u\+\_\+dt2\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00112}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::d2u\+\_\+dt2\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00068}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::d2u\+\_\+dt2\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00113}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react()}}, \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00141}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::dc\+\_\+dt\+\_\+adv\+\_\+diff\+\_\+react()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00067}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dcdt\+\_\+surface()}}, \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00647}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l00942}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+edge\+\_\+dt()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00635}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::dq\+\_\+edge\+\_\+dt()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l00970}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::dq\+\_\+internal\+\_\+dt()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00663}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::dq\+\_\+internal\+\_\+dt()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l00882}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::du\+\_\+dt()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00575}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::du\+\_\+dt()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00098}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{axisym__advection__diffusion__elements_8h_source_l00106}{oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l00531}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l00570}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__linear__elasticity__elements_8h_source_l00100}{oomph\+::\+Axisymmetric\+Linear\+Elasticity\+Equations\+Base\+::du\+\_\+dt\+\_\+axisymmetric\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{gen__advection__diffusion__elements_8h_source_l00105}{oomph\+::\+Generalised\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+cons\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{gen__axisym__advection__diffusion__elements_8h_source_l00117}{oomph\+::\+Generalised\+Axisym\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{flux__transport__elements_8cc_source_l00276}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+flux\+\_\+transport()}}, \mbox{\hyperlink{linear__wave__elements_8h_source_l00084}{oomph\+::\+Linear\+Wave\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+lin\+\_\+wave()}}, \mbox{\hyperlink{linearised__axisym__navier__stokes__elements_8h_source_l00319}{oomph\+::\+Linearised\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{linearised__navier__stokes__elements_8h_source_l00387}{oomph\+::\+Linearised\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+linearised\+\_\+nst()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l00594}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+nst()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l00880}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+nst()}}, \mbox{\hyperlink{polar__navier__stokes__elements_8h_source_l00401}{oomph\+::\+Polar\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+pnst()}}, \mbox{\hyperlink{spherical__advection__diffusion__elements_8h_source_l00099}{oomph\+::\+Spherical\+Advection\+Diffusion\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+adv\+\_\+diff()}}, \mbox{\hyperlink{spherical__navier__stokes__elements_8h_source_l00395}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+spherical\+\_\+nst()}}, \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00119}{oomph\+::\+Unsteady\+Heat\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+ust\+\_\+heat()}}, \mbox{\hyperlink{womersley__elements_8h_source_l00253}{oomph\+::\+Womersley\+Equations$<$ DIM $>$\+::du\+\_\+dt\+\_\+womersley()}}, \mbox{\hyperlink{segregated__fsi__solver_8cc_source_l00039}{oomph\+::\+Segregatable\+FSIProblem\+::extrapolate\+\_\+solid\+\_\+data()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l00977}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l01175}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::extrapolated\+\_\+strain\+\_\+rate()}}, \mbox{\hyperlink{ode__elements_8h_source_l00082}{oomph\+::\+ODEElement\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{fish__mesh_8template_8cc_source_l00040}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Fish\+Mesh()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8cc_source_l02131}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{generalised__newtonian__refineable__navier__stokes__elements_8cc_source_l01025}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00657}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00435}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00753}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{elements_8h_source_l01908}{oomph\+::\+Finite\+Element\+::get\+\_\+x()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00266}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::initialise()}}, \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00121}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::output\+\_\+centre\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l00327}{oomph\+::\+PRefineable\+QElement$<$ 1, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::p\+\_\+refine()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01990}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::p\+\_\+refine()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l06104}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::p\+\_\+refine()}}, \mbox{\hyperlink{geom__objects_8h_source_l00536}{oomph\+::\+Straight\+Line\+::position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00756}{oomph\+::\+Ellipse\+::position()}}, \mbox{\hyperlink{geom__objects_8h_source_l01040}{oomph\+::\+Circle\+::position()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l01757}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l05860}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::pre\+\_\+build()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00116}{oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00165}{oomph\+::\+Pseudo\+Buckling\+Ring\+::\+Pseudo\+Buckling\+Ring()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l00946}{oomph\+::\+PRefineable\+QElement$<$ 1, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l03207}{oomph\+::\+PRefineable\+QElement$<$ 2, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{hp__refineable__elements_8cc_source_l07633}{oomph\+::\+PRefineable\+QElement$<$ 3, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$\+::rebuild\+\_\+from\+\_\+sons()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00917}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01400}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00221}{oomph\+::\+Continuation\+Storage\+Scheme\+::set\+\_\+consistent\+\_\+pinned\+\_\+values()}}, \mbox{\hyperlink{elastic__problems_8h_source_l00393}{oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently()}}, \mbox{\hyperlink{elastic__problems_8h_source_l00242}{oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+directly()}}, \mbox{\hyperlink{axisym__poroelasticity__elements_8h_source_l01000}{oomph\+::\+Axisymmetric\+Poroelasticity\+Equations\+::set\+\_\+q\+\_\+internal\+\_\+timestepper()}}, \mbox{\hyperlink{poroelasticity__elements_8h_source_l00693}{oomph\+::\+Poroelasticity\+Equations$<$ DIM $>$\+::set\+\_\+q\+\_\+internal\+\_\+timestepper()}}, \mbox{\hyperlink{elastic__problems_8cc_source_l00522}{oomph\+::\+Solid\+ICProblem\+::set\+\_\+static\+\_\+initial\+\_\+condition()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00283}{oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+timestepper\+\_\+weights()}}, \mbox{\hyperlink{mesh_8cc_source_l02326}{oomph\+::\+Mesh\+::shift\+\_\+time\+\_\+values()}}, \mbox{\hyperlink{problem_8cc_source_l11710}{oomph\+::\+Problem\+::shift\+\_\+time\+\_\+values()}}, \mbox{\hyperlink{womersley__elements_8h_source_l01311}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$\+::shift\+\_\+time\+\_\+values()}}, \mbox{\hyperlink{simple__rectangular__quadmesh_8template_8cc_source_l00053}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Simple\+Rectangular\+Quad\+Mesh()}}, and \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source_l00047}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Xda\+Tet\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a8ca52ab6f4609144b7057961bd318fdc}\label{classoomph_1_1GeomObject_a8ca52ab6f4609144b7057961bd318fdc} 
+\index{oomph::GeomObject@{oomph::GeomObject}!time\_stepper\_pt@{time\_stepper\_pt}}
+\index{time\_stepper\_pt@{time\_stepper\_pt}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{time\_stepper\_pt()}{time\_stepper\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for pointer to time stepper\+: Null if object is not time-\/dependent. Const version. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00199}{199}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00435}{Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1GeomObject_a158a36e0dbcaf236ffc351b76faaed53}\label{classoomph_1_1GeomObject_a158a36e0dbcaf236ffc351b76faaed53} 
+\index{oomph::GeomObject@{oomph::GeomObject}!Geom\_object\_time\_stepper\_pt@{Geom\_object\_time\_stepper\_pt}}
+\index{Geom\_object\_time\_stepper\_pt@{Geom\_object\_time\_stepper\_pt}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_time\_stepper\_pt}{Geom\_object\_time\_stepper\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}}\texorpdfstring{$\ast$}{*} oomph\+::\+Geom\+Object\+::\+Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Timestepper (used to handle access to geometry at previous timesteps) 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00435}{435}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{oomph\+::\+Pseudo\+Buckling\+Ring\+::accel()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00452}{oomph\+::\+Pseudo\+Buckling\+Ring\+::position()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{oomph\+::\+Pseudo\+Buckling\+Ring\+::position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00199}{time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{oomph\+::\+Pseudo\+Buckling\+Ring\+::veloc()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a6351e2d8fbd54ff23498eb6f77c905cc}\label{classoomph_1_1GeomObject_a6351e2d8fbd54ff23498eb6f77c905cc} 
+\index{oomph::GeomObject@{oomph::GeomObject}!Ndim@{Ndim}}
+\index{Ndim@{Ndim}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{Ndim}{Ndim}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Geom\+Object\+::\+Ndim\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of Eulerian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00431}{431}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00416}{oomph\+::\+Pseudo\+Buckling\+Ring\+::accel()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{ndim()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00452}{oomph\+::\+Pseudo\+Buckling\+Ring\+::position()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00344}{oomph\+::\+Pseudo\+Buckling\+Ring\+::position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00183}{set\+\_\+nlagrangian\+\_\+and\+\_\+ndim()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00381}{oomph\+::\+Pseudo\+Buckling\+Ring\+::veloc()}}.
+
+\Hypertarget{classoomph_1_1GeomObject_a11d8ac51be65ee822a6c782c5e079a2c}\label{classoomph_1_1GeomObject_a11d8ac51be65ee822a6c782c5e079a2c} 
+\index{oomph::GeomObject@{oomph::GeomObject}!NLagrangian@{NLagrangian}}
+\index{NLagrangian@{NLagrangian}!oomph::GeomObject@{oomph::GeomObject}}
+\doxysubsubsection{\texorpdfstring{NLagrangian}{NLagrangian}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Geom\+Object\+::\+NLagrangian\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of Lagrangian (intrinsic) coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00428}{428}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00171}{nlagrangian()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00183}{set\+\_\+nlagrangian\+\_\+and\+\_\+ndim()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__objects_8h}{geom\+\_\+objects.\+h}}\end{DoxyCompactItemize}

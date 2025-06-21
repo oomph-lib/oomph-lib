@@ -1,0 +1,28 @@
+\doxysection{iterative\+\_\+linear\+\_\+solver.\+h File Reference}
+\hypertarget{iterative__linear__solver_8h}{}\label{iterative__linear__solver_8h}\index{iterative\_linear\_solver.h@{iterative\_linear\_solver.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}
+\begin{DoxyCompactList}\small\item\em Base class for all linear iterative solvers. This merely defines standard interfaces for linear iterative solvers, so that different solvers can be used in a clean and transparent manner. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1CG}{oomph\+::\+CG$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The conjugate gradient method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BiCGStab}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The conjugate gradient method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Smoother}{oomph\+::\+Smoother}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Smoother}{Smoother} class\+: The smoother class is designed for to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GS}{oomph\+::\+GS$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1Gauss}{Gauss} Seidel method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GS_3_01CRDoubleMatrix_01_4}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit template specialisation of the \doxylink{classoomph_1_1Gauss}{Gauss} Seidel method for compressed row format matrices. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DampedJacobi}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Damped Jacobi "{}solver"{} templated by matrix type. The "{}solver"{} exists in many different incarnations\+: It\textquotesingle{}s an \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}, and a \doxylink{classoomph_1_1Smoother}{Smoother}, all of which use the same basic iteration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GMRES}{oomph\+::\+GMRES$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1GMRES}{GMRES} method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AugmentedProblemGMRES}{oomph\+::\+Augmented\+Problem\+GMRES}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1GMRES}{GMRES} method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

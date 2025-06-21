@@ -1,0 +1,159 @@
+\doxysection{oomph\+::Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh Class Reference}
+\hypertarget{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh}{}\label{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh}\index{oomph::TetMeshFacetedClosedSurfaceForRemesh@{oomph::TetMeshFacetedClosedSurfaceForRemesh}}
+
+
+{\ttfamily \#include $<$tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a7b391693935d08cc63a41d6accbabd57}{Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&vertex\+\_\+node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\+\_\+connectivity}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\+\_\+boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Constructor for a Faceted\+Surface created from a list of nodes and connectivity information. This is used in remeshing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a25c25f16a18e2ff4551a4683fbdb3686}{\texorpdfstring{$\sim$}{\string~}\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Delete allocated memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface}{oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a03485a256274531a3391fb0f86fa34ca}{Tet\+Mesh\+Faceted\+Closed\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a5f1a8d02dedbefb9291d5480c146709d}{\texorpdfstring{$\sim$}{\string~}\+Tet\+Mesh\+Faceted\+Closed\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a3f8352fb0df78c37dafeaa94e0ccdce4}{enable\+\_\+faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh}} ()
+\begin{DoxyCompactList}\small\item\em Declare closed surface to represent hole for gmsh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_ac3fff849d4767b73c731c48afd058c0c}{disable\+\_\+faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh}} ()
+\begin{DoxyCompactList}\small\item\em Declare closed surface NOT to represent hole for gmsh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a470786aabd08b8c38fe50877109b6557}{faceted\+\_\+volume\+\_\+represents\+\_\+hole\+\_\+for\+\_\+gmsh}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Does closed surface represent hole for gmsh? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_af4059f73788573034d52393b116ca4ef}{internal\+\_\+point\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i=th coordinate of the j-\/th internal point for tetgen \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_ae6c1653b9aeef81ae12735e02a1f938d}{set\+\_\+hole\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hole\+\_\+point}})
+\begin{DoxyCompactList}\small\item\em Specify coordinate of hole for tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_ac60fa3591df9cdcfc07521410e986130}{set\+\_\+region\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{region\+\_\+point}})
+\begin{DoxyCompactList}\small\item\em Specify a region; pass (zero-\/based) region ID and coordinate of point in region for tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a69fbedd3beddfc55c8bcb7f0e186ec38}{ninternal\+\_\+point\+\_\+for\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Number of internal points (identifying either regions or holes) for tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \& \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a9d3210460d57dec2f4763acb9bd44b53}{region\+\_\+id\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the (zero-\/based) region ID of j-\/th internal point for tetgen. Negative if it\textquotesingle{}s actually a hole. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_aa37311d590909afc7d0ddb867fadfbbf}{internal\+\_\+point\+\_\+identifies\+\_\+hole\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Is j-\/th internal point for tetgen associated with a hole? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedClosedSurface_a9152e115fcf854c5974995fd4abc7aa0}{internal\+\_\+point\+\_\+identifies\+\_\+region\+\_\+for\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Is j-\/th internal point for tetgen associated with a region? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ab11f1e6e44a264849600909929c2067f}{Tet\+Mesh\+Faceted\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_addb5688daf76ee730092f428162f9056}{\texorpdfstring{$\sim$}{\string~}\+Tet\+Mesh\+Faceted\+Surface}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aae77dfb3a856e3840564e21716f4c3b1}{nvertex}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6036f2a5e11bea9d72f9bba9a89faec7}{nfacet}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of facets. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a86b099447be23301fdfd4abdeee75560}{one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em One-\/based boundary id of j-\/th facet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_afa2552d4a9b397c635a8c427333c4bf5}{one\+\_\+based\+\_\+vertex\+\_\+boundary\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em First (of possibly multiple) one-\/based boundary id of j-\/th vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aad7ab6940be9b8ed2e73d80c238c5128}{vertex\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th coordinate of j-\/th vertex \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a03f007362dac8406ad9b7337f1887c9d}{nvertex\+\_\+on\+\_\+facet}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of vertices defining the j-\/th facet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7f324fe118cd60222d64c5485c74f2a1}{boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundary can be split in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa4f46a7206332d355efb1de439bc08af}{enable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundaries can be split in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a4dde957835b3b2410f629cd72119a5af}{disable\+\_\+boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}} ()
+\begin{DoxyCompactList}\small\item\em Test whether boundaries can be split in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a03ee576b3a3127a722f47905f05034da}{facet\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to j-\/th facet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a181d96997b273b165d67ea5aa9dfaff4}{vertex\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to j-\/th vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa91cc535194a675b82d9360a1c7e11d9}{geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access to \doxylink{classoomph_1_1GeomObject}{Geom\+Object} with boundaries associated with this surface (Null if there isn\textquotesingle{}t one!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ad8d350cfdd9f7c4dde06749a5387b13e}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ac10b05cafa5f6b6cee9cd47b3be9e033}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a705aa5605d47402f3e71919b6f67d12a}{output\+\_\+paraview}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Outputs the faceted surface into a specified file in the Paraview format for viewing in Paraview. Make sure to output the file with a .vtu extension. (Not particularly optimised) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6b9bea286a5bda40134749a7da3cfbd4}{output\+\_\+paraview}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Outputs the faceted surface into a file with the specified name in the Paraview format. (Not particularly optimised) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5882667d66ad8460782b9fa36f39f485}{boundary\+\_\+zeta01}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+boundary}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}})
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \doxylink{classoomph_1_1GeomObject}{Geom\+Object} along the boundary connecting vertices 0 and 1 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 0; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9926d92fc773853a9afb}{boundary\+\_\+zeta12}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+boundary}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}})
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \doxylink{classoomph_1_1GeomObject}{Geom\+Object} along the boundary connecting vertices 1 and 2 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 1; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_aa9c92e3c5ba628cdcc91086c9cb38c22}{boundary\+\_\+zeta20}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{facet\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta\+\_\+boundary}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}})
+\begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \doxylink{classoomph_1_1GeomObject}{Geom\+Object} along the boundary connecting vertices 2 and 0 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 2; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6ed1b3038fb88005c2c637543fd20433}{vertex\+\_\+index\+\_\+in\+\_\+tetgen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&f)
+\begin{DoxyCompactList}\small\item\em Facet connectivity\+: vertex\+\_\+index\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. Bit of an obscure functionality that\textquotesingle{}s only needed for setup tetgen\+\_\+io. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5a755b2062fa4ed18f3bdd18236b0f72}{Vertex\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} pointers to vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshFacet}{Tet\+Mesh\+Facet}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a84ddd979ab9031b80c6328b150669986}{Facet\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to facets. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a0d42b95b2097482d25a727a0f6fd7605}{Boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether extra vertices can be added on the boundary in tetgen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}{Facet\+\_\+vertex\+\_\+index\+\_\+in\+\_\+tetgen}}
+\begin{DoxyCompactList}\small\item\em Facet connectivity\+: Facet\+\_\+vertex\+\_\+index\mbox{[}f\mbox{]}\mbox{[}j\mbox{]} is the index of the j-\/th vertex (in the Vertex\+\_\+pt vector) in facet f. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6d5836261116c9fc17afa725fcd63bd1}{Geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1GeomObject}{Geom\+Object} with boundaries associated with this surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00818}{818}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a7b391693935d08cc63a41d6accbabd57}\label{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a7b391693935d08cc63a41d6accbabd57} 
+\index{oomph::TetMeshFacetedClosedSurfaceForRemesh@{oomph::TetMeshFacetedClosedSurfaceForRemesh}!TetMeshFacetedClosedSurfaceForRemesh@{TetMeshFacetedClosedSurfaceForRemesh}}
+\index{TetMeshFacetedClosedSurfaceForRemesh@{TetMeshFacetedClosedSurfaceForRemesh}!oomph::TetMeshFacetedClosedSurfaceForRemesh@{oomph::TetMeshFacetedClosedSurfaceForRemesh}}
+\doxysubsubsection{\texorpdfstring{TetMeshFacetedClosedSurfaceForRemesh()}{TetMeshFacetedClosedSurfaceForRemesh()}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{vertex\+\_\+node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{facet\+\_\+connectivity,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{facet\+\_\+boundary\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Constructor for a Faceted\+Surface created from a list of nodes and connectivity information. This is used in remeshing. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8cc_source_l00040}{40}} of file \mbox{\hyperlink{tet__mesh_8cc_source}{tet\+\_\+mesh.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00672}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Facet\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00669}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Vertex\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a25c25f16a18e2ff4551a4683fbdb3686}\label{classoomph_1_1TetMeshFacetedClosedSurfaceForRemesh_a25c25f16a18e2ff4551a4683fbdb3686} 
+\index{oomph::TetMeshFacetedClosedSurfaceForRemesh@{oomph::TetMeshFacetedClosedSurfaceForRemesh}!````~TetMeshFacetedClosedSurfaceForRemesh@{\texorpdfstring{$\sim$}{\string~}TetMeshFacetedClosedSurfaceForRemesh}}
+\index{````~TetMeshFacetedClosedSurfaceForRemesh@{\texorpdfstring{$\sim$}{\string~}TetMeshFacetedClosedSurfaceForRemesh}!oomph::TetMeshFacetedClosedSurfaceForRemesh@{oomph::TetMeshFacetedClosedSurfaceForRemesh}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TetMeshFacetedClosedSurfaceForRemesh()}{\string~TetMeshFacetedClosedSurfaceForRemesh()}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\texorpdfstring{$\sim$}{\string~}\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. Delete allocated memory. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8cc_source_l00073}{73}} of file \mbox{\hyperlink{tet__mesh_8cc_source}{tet\+\_\+mesh.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00672}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Facet\+\_\+pt}}, \mbox{\hyperlink{tet__mesh_8h_source_l00325}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nfacet()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00319}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::nvertex()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00669}{oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::\+Vertex\+\_\+pt}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tet__mesh_8h}{tet\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{tet__mesh_8cc}{tet\+\_\+mesh.\+cc}}\end{DoxyCompactItemize}

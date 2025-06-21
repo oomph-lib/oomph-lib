@@ -1,0 +1,327 @@
+\doxysection{oomph\+::Deviatoric\+Isotropic\+Elasticity\+Tensor Class Reference}
+\hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor}{}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor}\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+
+
+An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations.  
+
+
+
+
+{\ttfamily \#include $<$elasticity\+\_\+tensor.\+h$>$}
+
+Inheritance diagram for oomph\+::Deviatoric\+Isotropic\+Elasticity\+Tensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1DeviatoricIsotropicElasticityTensor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a1b4b704637b2e90c96d3b53b3c865ec8}{Deviatoric\+Isotropic\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. For use with incompressibility. Requires no parameters since Poisson\textquotesingle{}s ratio is fixed at 0.\+5 and lambda is set to a dummy value of 0 (since it would be infinite) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a4f3edce9cd91008468599fb24b950707}{Deviatoric\+Isotropic\+Elasticity\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&nu, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&E)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a09fec2c25d55c5603723f2ab2531f78a}{Deviatoric\+Isotropic\+Elasticity\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&nu)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_aeed1da3ce892934b38ce4fda23c7f21c}{Deviatoric\+Isotropic\+Elasticity\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{lame}})
+\begin{DoxyCompactList}\small\item\em Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab9861d265cbc24c5fa6b55f0613ead8b}{independent\+\_\+component}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}{lambda}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Accessor function for the first lame parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}{mu}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Accessor function for the second lame parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ElasticityTensor}{oomph\+::\+Elasticity\+Tensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a33d3d0462cfe9c230444ceb27db744d8}{\texorpdfstring{$\sim$}{\string~}\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a60e0ebb9f03c21d11aa874dfdf5437ae}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the appropriate independent component via the index translation scheme (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_ab68e4386f02f9e39095d879e4ec96df5}{set\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&value)
+\begin{DoxyCompactList}\small\item\em Allow the values to be set (virtual function that must be overloaded if values can be set directly. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a33d3d0462cfe9c230444ceb27db744d8}{\texorpdfstring{$\sim$}{\string~}\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a60e0ebb9f03c21d11aa874dfdf5437ae}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the appropriate independent component via the index translation scheme (const version). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}{set\+\_\+lame\+\_\+coefficients}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}{lambda}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}{mu}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a3ddaeb8b6b4c01c3227d09962e495060}{C}} \mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0a05cc242a795eb8fbcfa51474aaf318}{Lambda}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_aafe9bd480de84c98cfe1528ff7a3c528}{Mu}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DeviatoricIsotropicElasticityTensor_a073434d42a9e9f9520abe64c3e720337}{Static\+Index}} \mbox{[}21\mbox{]}
+\begin{DoxyCompactList}\small\item\em Translation scheme for the deviatoric isotropic elasticity tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ElasticityTensor}{oomph\+::\+Elasticity\+Tensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_ace883403848c5a394cf9cb07861361d1}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper range checking function (Note that this only captures over-\/runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ElasticityTensor_a94feb893f8c4180307e18aa341c046b1}{Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_ace883403848c5a394cf9cb07861361d1}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper range checking function (Note that this only captures over-\/runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ElasticityTensor_a94feb893f8c4180307e18aa341c046b1}{Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ElasticityTensor}{oomph\+::\+Elasticity\+Tensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a6be831fdf71155ccbab14287d30587f1}{Index}} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Translation table from the four indices to the corresponding independent component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations. 
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00223}{223}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a1b4b704637b2e90c96d3b53b3c865ec8}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a1b4b704637b2e90c96d3b53b3c865ec8} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
+\index{DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{DeviatoricIsotropicElasticityTensor()}{DeviatoricIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. For use with incompressibility. Requires no parameters since Poisson\textquotesingle{}s ratio is fixed at 0.\+5 and lambda is set to a dummy value of 0 (since it would be infinite) 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{242}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a4f3edce9cd91008468599fb24b950707}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a4f3edce9cd91008468599fb24b950707} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
+\index{DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{DeviatoricIsotropicElasticityTensor()}{DeviatoricIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{257}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a09fec2c25d55c5603723f2ab2531f78a}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a09fec2c25d55c5603723f2ab2531f78a} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
+\index{DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{DeviatoricIsotropicElasticityTensor()}{DeviatoricIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{270}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_aeed1da3ce892934b38ce4fda23c7f21c}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_aeed1da3ce892934b38ce4fda23c7f21c} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}}
+\index{DeviatoricIsotropicElasticityTensor@{DeviatoricIsotropicElasticityTensor}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{DeviatoricIsotropicElasticityTensor()}{DeviatoricIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{lame }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructur. Passing in the values of the two lame coefficients directly (interpreted as the ratios of these quantities to a reference stiffness used to non-\/dimensionalised. 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00285}{285}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab9861d265cbc24c5fa6b55f0613ead8b}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_ab9861d265cbc24c5fa6b55f0613ead8b} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!independent\_component@{independent\_component}}
+\index{independent\_component@{independent\_component}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the independent coefficient function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ElasticityTensor_a84b2a9b7a447cf88b2d6b98b5e6e7bd5}{oomph\+::\+Elasticity\+Tensor}}.
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{294}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00236}{Static\+Index}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a7f65bc2a74886ab32316708af84d4b67} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!lambda@{lambda}}
+\index{lambda@{lambda}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{lambda()}{lambda()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::lambda (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor function for the first lame parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{300}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{Lambda}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a40f828fa68cbacfaa4abad018dd96bce} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!mu@{mu}}
+\index{mu@{mu}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{mu()}{mu()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::mu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor function for the second lame parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{306}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{Mu}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0f1da5acf9260a1827c15593a0cdec2d} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
+\index{set\_lame\_coefficients@{set\_lame\_coefficients}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{set\_lame\_coefficients()}{set\_lame\_coefficients()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::set\+\_\+lame\+\_\+coefficients (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{lambda,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{mu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{313}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{C}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{Lambda}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{Mu}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00285}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a3ddaeb8b6b4c01c3227d09962e495060}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a3ddaeb8b6b4c01c3227d09962e495060} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!C@{C}}
+\index{C@{C}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::C\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00226}{226}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00242}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00270}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00257}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00285}{Deviatoric\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{independent\+\_\+component()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0a05cc242a795eb8fbcfa51474aaf318}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a0a05cc242a795eb8fbcfa51474aaf318} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!Lambda@{Lambda}}
+\index{Lambda@{Lambda}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{Lambda}{Lambda}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Lambda\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00229}{229}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00300}{lambda()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_aafe9bd480de84c98cfe1528ff7a3c528}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_aafe9bd480de84c98cfe1528ff7a3c528} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!Mu@{Mu}}
+\index{Mu@{Mu}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{Mu}{Mu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Mu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00232}{232}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00306}{mu()}}, and \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00313}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1DeviatoricIsotropicElasticityTensor_a073434d42a9e9f9520abe64c3e720337}\label{classoomph_1_1DeviatoricIsotropicElasticityTensor_a073434d42a9e9f9520abe64c3e720337} 
+\index{oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}!StaticIndex@{StaticIndex}}
+\index{StaticIndex@{StaticIndex}!oomph::DeviatoricIsotropicElasticityTensor@{oomph::DeviatoricIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{StaticIndex}{StaticIndex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Deviatoric\+Isotropic\+Elasticity\+Tensor\+::\+Static\+Index\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ 1,\ 0,\ 0,\ 2,\ 0,\ 1,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 2,\ 0,\ 0,\ 0,\ 0,\ 0,\ 2,\ 0,\ 1\}}
+
+\end{DoxyCode}
+
+
+Translation scheme for the deviatoric isotropic elasticity tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00236}{236}} of file \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source}{poroelasticity/elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h_source_l00294}{independent\+\_\+component()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{poroelasticity_2elasticity__tensor_8h}{poroelasticity/elasticity\+\_\+tensor.\+h}}\item 
+\mbox{\hyperlink{poroelasticity_2elasticity__tensor_8cc}{poroelasticity/elasticity\+\_\+tensor.\+cc}}\end{DoxyCompactItemize}

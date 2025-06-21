@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MeshExtrusionHelpers::ExtrusionHelper Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1MeshExtrusionHelpers.html">MeshExtrusionHelpers</a></li><li class="navelem"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html">ExtrusionHelper</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::MeshExtrusionHelpers::ExtrusionHelper Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class to contain any helpers for the mesh extrusion. At the moment this only used to decide on whether or not to doc the mesh setup time.  
+ <a href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab3b7c1a1c0dbec93327ad904517ba970" id="r_ab3b7c1a1c0dbec93327ad904517ba970"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#ab3b7c1a1c0dbec93327ad904517ba970">ExtrusionHelper</a> ()</td></tr>
+<tr class="memdesc:ab3b7c1a1c0dbec93327ad904517ba970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor (empty)  <br /></td></tr>
+<tr class="separator:ab3b7c1a1c0dbec93327ad904517ba970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2956d80cbc7155e9b14717170f87a08" id="r_ab2956d80cbc7155e9b14717170f87a08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#ab2956d80cbc7155e9b14717170f87a08">doc_mesh_setup_time</a> ()</td></tr>
+<tr class="memdesc:ab2956d80cbc7155e9b14717170f87a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the Doc_mesh_setup_time flag.  <br /></td></tr>
+<tr class="separator:ab2956d80cbc7155e9b14717170f87a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaf3f16391688d492aab43e2cb68a58a" id="r_abaf3f16391688d492aab43e2cb68a58a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#abaf3f16391688d492aab43e2cb68a58a">enable_doc_mesh_setup_time</a> ()</td></tr>
+<tr class="memdesc:abaf3f16391688d492aab43e2cb68a58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable doc-ing of the mesh setup.  <br /></td></tr>
+<tr class="separator:abaf3f16391688d492aab43e2cb68a58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0efc70ed9ae5842138d407bd4419446" id="r_ab0efc70ed9ae5842138d407bd4419446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#ab0efc70ed9ae5842138d407bd4419446">disable_doc_mesh_setup_time</a> ()</td></tr>
+<tr class="memdesc:ab0efc70ed9ae5842138d407bd4419446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable doc-ing of the mesh setup.  <br /></td></tr>
+<tr class="separator:ab0efc70ed9ae5842138d407bd4419446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a970573bbc7dfc4cd9158b5502e183a30" id="r_a970573bbc7dfc4cd9158b5502e183a30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MeshExtrusionHelpers_1_1ExtrusionHelper.html#a970573bbc7dfc4cd9158b5502e183a30">Doc_mesh_setup_time</a></td></tr>
+<tr class="memdesc:a970573bbc7dfc4cd9158b5502e183a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether or not to doc the progress.  <br /></td></tr>
+<tr class="separator:a970573bbc7dfc4cd9158b5502e183a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class to contain any helpers for the mesh extrusion. At the moment this only used to decide on whether or not to doc the mesh setup time. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00057">57</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab3b7c1a1c0dbec93327ad904517ba970" name="ab3b7c1a1c0dbec93327ad904517ba970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3b7c1a1c0dbec93327ad904517ba970">&#9670;&#160;</a></span>ExtrusionHelper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MeshExtrusionHelpers::ExtrusionHelper::ExtrusionHelper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00061">61</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab0efc70ed9ae5842138d407bd4419446" name="ab0efc70ed9ae5842138d407bd4419446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0efc70ed9ae5842138d407bd4419446">&#9670;&#160;</a></span>disable_doc_mesh_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MeshExtrusionHelpers::ExtrusionHelper::disable_doc_mesh_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable doc-ing of the mesh setup. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00078">78</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00086">Doc_mesh_setup_time</a>.</p>
+
+</div>
+</div>
+<a id="ab2956d80cbc7155e9b14717170f87a08" name="ab2956d80cbc7155e9b14717170f87a08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2956d80cbc7155e9b14717170f87a08">&#9670;&#160;</a></span>doc_mesh_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MeshExtrusionHelpers::ExtrusionHelper::doc_mesh_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the value of the Doc_mesh_setup_time flag. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00064">64</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00086">Doc_mesh_setup_time</a>.</p>
+
+</div>
+</div>
+<a id="abaf3f16391688d492aab43e2cb68a58a" name="abaf3f16391688d492aab43e2cb68a58a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaf3f16391688d492aab43e2cb68a58a">&#9670;&#160;</a></span>enable_doc_mesh_setup_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MeshExtrusionHelpers::ExtrusionHelper::enable_doc_mesh_setup_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable doc-ing of the mesh setup. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00071">71</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00086">Doc_mesh_setup_time</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a970573bbc7dfc4cd9158b5502e183a30" name="a970573bbc7dfc4cd9158b5502e183a30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a970573bbc7dfc4cd9158b5502e183a30">&#9670;&#160;</a></span>Doc_mesh_setup_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MeshExtrusionHelpers::ExtrusionHelper::Doc_mesh_setup_time</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate whether or not to doc the progress. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00086">86</a> of file <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00078">disable_doc_mesh_setup_time()</a>, <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00064">doc_mesh_setup_time()</a>, and <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html#l00071">enable_doc_mesh_setup_time()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source.html">extruded_cube_mesh_from_quad_mesh_with_macro_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,437 @@
+\mainpage Demo problem: How to create simple refineable meshes
+
+In a <A HREF="../../../poisson/fish_poisson/html/index.html">
+previous example</A> we gave an overview of \c oomph-lib's powerful
+mesh adaptation capabilities and demonstrated the use of 
+the functions
+- \c Problem::refine_uniformly() which performs automatic,
+  uniform refinement of a given (refineable) mesh.
+- \c Problem::adapt() which performs automatic mesh 
+  adaptation (local refinement or unrefinement), based on
+  error estimates that are computed (automatically) by a chosen 
+  error estimator. 
+- \c Problem::newton_solve(...) -- a black-box adaptive Newton
+  solver that automatically adapts the mesh and recomputes
+  the solution until it satisfies the prescribed error bounds.
+. 
+Provided the problem has been discretised with suitable "refineable mesh" 
+and "refineable element" objects from \c oomph-lib's mesh and 
+finite element libraries, none of these functions require any 
+intervention by the user. Most of \c oomph-lib
+finite elements are already available in "refineable" and "non-refineable"
+forms. For instance, the \c RefineableQPoissonElement that 
+we used in the <A HREF="../../../poisson/fish_poisson/html/index.html">
+previous example</A> is the refineable equivalent of the 2D \c QPoissonElement.
+<A HREF="../../../to_be_written/html/index.html">
+Another document</A> describes how to create new
+refineable elements. Here we shall discuss how to "upgrade" existing
+meshes to \c RefineableMeshes, i.e. meshes that can be used with 
+\c oomph-lib's mesh adaptation routines. 
+
+
+
+The minimum functionality that must be provided
+by such meshes is specified by the pure virtual functions
+in the abstract base class \c RefineableMesh and all refineable
+Meshes should be derived from this class.
+Here is a graphical representation of the typical inheritance structure 
+for refineable meshes, illustrated for 2D quad meshes:
+
+@I w 0.75\textwidth refineable_mesh_inheritance "Typical inheritance structure for refineable meshes, illustrated for 2D quad meshes. "
+
+
+The diagram contains two fully-functional meshes:
+- The \c SomeMesh is some basic, non-refineable mesh that 
+  is derived directly from the generic \c Mesh base class.
+  Typically, it provides a coarse discretisation of a 2D domain 
+  with 2D elements from the \c QElement family. Its constructor
+  creates the mesh's nodes and elements and initialises the various
+  boundary lookup schemes. (Consult the 
+  <A HREF="../../../quick_guide/html/index.html#mesh">
+  "How to build a mesh"</A> section
+  of the <A HREF="../../../quick_guide/html/index.html">Quick Guide</A> for
+  details of the generic mesh generation process.)
+- The \c RefineableSomeMesh is the refineable equivalent of the 
+  basic \c SomeMesh. It inherits the original mesh layout from the
+  \c SomeMesh class. Refineability is added by inheriting from the \c
+  RefineableQuadMesh class; this class implements the
+  mesh adaptation procedures, specified as pure virtual functions in
+  the \c RefineableMesh class, for 2D quad meshes, employing 
+  \c QuadTree - based refinement techniques.
+.
+
+Equivalent inheritance structures can be/are implemented for meshes with
+different element topologies: For instance, the \c RefineableBrickMesh
+class is the 3D equivalent of the \c RefineableQuadMesh class:
+It performs the mesh adaptation for 3D brick meshes 
+by \c OcTree - based refinement techniques. 
+
+ Typically, most of the "hard work" involved in the mesh adaptation
+process is implemented in the intermediate classes (such as \c
+RefineableQuadMesh or \c RefineableBrickMesh). Upgrading
+an existing mesh to a refineable version therefore usually requires
+very little effort. We demonstrate this by re-visiting the
+ 2D Poisson problem that we analysed in an 
+<A  HREF="../../../poisson/two_d_poisson/html/index.html"> earlier example:
+</A>
+
+<CENTER>
+<TABLE>
+<TR>
+<TD> 
+<CENTER>
+<B>Two-dimensional model Poisson problem</B>
+</CENTER> 
+Solve
+\f[
+\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
+ \ \ \ \ \ \ \ \ \ \ @E[2DPoisson]@
+\f]
+in the rectangular domain \f$D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}\f$, 
+with Dirichlet boundary conditions
+\f[
+\left. u\right|_{\partial D}=u_0 
+\ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
+\f]
+where 
+\f[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2))
+\ \ \ \ \ \ \ \ \  @E[ExactSoln]@
+\f]
+and
+\f[
+f(x_1,x_2) = \sum_{i=1}^2 \frac{\partial^2 u_0}{\partial x_i^2}
+\ \ \ \ \ \ \ \ \  @E[SourceFct]@
+\f]
+so that \f$u_0(x_1,x_2) \f$ represents the exact solution of the
+problem.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+Recall that for large values of \f$ \alpha \f$ the solution approaches
+a step function 
+\f[
+u_{step}(x_1,x_2) = \left\{
+\begin{array}{rl}
+-1 & \mbox {for $x_2 < x_1 \ \tan\Phi$} \\
+1 & \mbox {for $x_2 > x_1 \ \tan\Phi$} 
+\end{array}
+ \right.
+\f]
+Accurate numerical solution can therefore only be obtained if the
+mesh is refined -- ideally only in the vicinity of the "step": 
+
+@I w 0.75\textwidth TanhPoissonAdaptive "Plot of the solution with adaptive mesh refinement "
+
+We shall discuss the driver code  
+<A HREF="../../../../demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc">
+two_d_poisson_adapt.cc</A> which solves the above problem with adaptive mesh 
+refinement. Its key feature is the creation of the refineable mesh
+\c SimpleRefineableRectangularQuadMesh -- the refineable equivalent of the
+\c SimpleRectangularQuadMesh used in the  
+<A HREF="../../../poisson/two_d_poisson/html/index.html">earlier example.</A> 
+<HR>   
+<HR>
+  
+
+\section refineable Creating the refineable mesh
+
+\c QuadTree-based mesh refinement, as implemented in the 
+\c RefineableQuadMesh class, requires the coarse 
+initial mesh to be represented by a \c QuadTreeForest:
+Each element in the mesh must be associated with a \c QuadTree,
+and the relative orientation of the various \c QuadTrees relative
+to each other must be established. This can be done automatically
+by calling the function \c RefineableQuadMesh::setup_quadtree_forest().
+The \c SimpleRefineableRectangularQuadMesh class is therefore very
+compact. The mesh is derived from the \c SimpleRectangularQuadMesh 
+and the \c Refineable1QuadMesh classes, both of which are templated 
+by the element type: 
+
+\dontinclude two_d_poisson_adapt.cc
+\skipline start_of_mesh
+\until RefineableQuadMesh<ELEMENT>
+
+The mesh constructor first calls  the constructor of the
+underlying  \c SimpleRectangularQuadMesh to create the nodes and elements,
+and to set up the various boundary lookup schemes. The call to 
+\c RefineableQuadMesh::setup_quadtree_forest() creates the 
+\c QuadTreeForest representation of the mesh. That's all!
+
+\skipline public:
+\until end of constructor
+
+The destructor can remain empty, as all memory de-allocation is
+handled in the mesh base classes.
+
+
+\skipline Destructor
+\until ~SimpleRefineableRectangularQuadMesh
+
+<HR>
+<HR>
+
+
+\section global Global parameters and functions
+The specification of the source function and the exact solution
+in the namespace \c TanhSolnForPoisson is identical to that
+in the non-refineable version discussed in the
+<A HREF="../../../poisson/two_d_poisson/html/index.html">
+previous example</A>. 
+ 
+
+
+<HR>
+<HR>
+
+\section main The driver code
+
+The driver code is very similar to that in the 
+<A HREF="../../../poisson/two_d_poisson/html/index.html">non-refineable
+version</A>. We simply change the mesh from the \c
+SimpleRectangularQuadMesh to its refineable equivalent, and
+discretise the problem with nine-node \c RefineableQPoissonElements
+instead of nine-node 2D \c QPoissonElements. We choose a large value
+of \f$ \alpha = 50\f$ for the "steepness" parameter and solve
+the problem with the "black-box" Newton solver, allowing for up to 
+four adaptive refinements: 
+
+\dontinclude two_d_poisson_adapt.cc
+\skipline start_of_main
+\until end of main
+
+
+<HR>
+<HR>
+
+\section problem The problem class
+The problem class definition is virtually identical to that in the 
+<A HREF="../../../poisson/two_d_poisson/html/index.html">non-refineable
+version</A>. The only new function is an overloaded version of
+the \c Problem::mesh_pt() function which returns a pointer to the 
+generic \c Mesh object. Our version returns a pointer to 
+the specific mesh, to avoid the use of explicit casts in 
+the rest of the code. 
+
+\dontinclude two_d_poisson_adapt.cc
+\skipline start_of_problem_class
+\until end of problem
+
+[See the discussion of the 
+<A HREF="../../one_d_poisson/html/index.html">
+1D Poisson problem</A> for a more detailed discussion of the
+function type PoissonEquations<2>::PoissonSourceFctPt.]
+
+<HR>
+<HR>
+
+\section constructor The Problem constructor
+
+The problem constructor is virtually identical to that in the 
+<A HREF="../../../poisson/two_d_poisson/html/index.html">non-refineable
+version</A>. The only change required is the specification of
+an error estimator for the mesh adaptations: We create an
+instance of the \c Z2ErrorEstimator and pass a pointer to it
+to the mesh. 
+
+
+
+\skipline start_of_constructor
+\until end of constructor
+
+
+<HR>
+<HR>
+
+\section actions_before "Actions before solve" 
+
+This function is identical to that in the 
+<A HREF="../../../poisson/two_d_poisson/html/index.html">non-refineable
+version</A>.
+
+
+<HR>
+<HR>
+
+
+\section doc Post-processing
+The function \c doc_solution(...) is identical to that in the 
+<A HREF="../../../poisson/two_d_poisson/html/index.html">non-refineable
+version</A>.
+
+<HR>
+<HR>
+
+
+\section exercises Comments
+
+Since most of the "hard work" involved in the mesh adaptation is
+hidden from "user" we briefly comment on various steps involved
+in the mesh adaptation process and highlight certain important 
+implications. 
+
+\subsection splitting The refinement pattern
+
+The \c QuadTree - based mesh adaption routines, implemented in
+the \c RefineableQuadMesh class, split elements into four 
+"son elements" if the error estimate exceeds the acceptable maximum. 
+By default, the position of any newly created nodes
+is determined from the geometric mapping of the "father" element. For
+instance, when a four-node quad "father" element is split into four
+"sons", five new nodes are created and they are located at 
+\f$ (s_0,s_1) = (0,-1), \ (1,0), \ (0,1), \ (-1,0) \f$ and 
+\f$ (0,0)\f$ in the father element's local coordinate system. 
+This procedure is adequate for problems in which
+the coarse initial mesh provides a perfect representation of the 
+domain (e.g. polygonal domains). If the domain has curvilinear boundaries,
+successive mesh refinements must generate a more and more
+accurate representation of these boundaries. This requires
+slight changes to the mesh adaptation procedures. We will discuss
+these in <A HREF="../../../poisson/fish_poisson2/html/index.html">
+another example</A>.
+
+The splitting of "father" elements into four equal-sized "sons"
+maintains the aspect ratio of the elements during the mesh
+adaptation. The good news is that mesh adaption will 
+not cause a deterioration in the element quality. The bad news is
+that poorly designed coarse meshes cannot be improved by 
+mesh adaptation. It is therefore worthwhile
+to invest some time into the initial mesh design. For complicated
+domains, it may be sensible to perform the initial mesh generation
+with a dedicated, third-party mesh generator.
+(We provide <A HREF="../../../meshes/third_party_meshes/html/index.html">
+another example</A> to illustrate how to build \c oomph-lib meshes
+based on the output from a third-party mesh generator.)
+
+
+\subsection hang Hanging nodes
+
+The local splitting of elements can create so-called "hanging
+nodes" -- nodes on element edges that are not shared by
+any adjacent elements. The nodal values and coordinates at such
+nodes must be constrained to ensure the inter-element continuity 
+of the solution. Specifically, the nodal values and coordinates
+at hanging nodes must be suitable linear combinations of the 
+values at a number of "master nodes". (In the first instance, 
+the master nodes are the nodes on the adjacent element's edge that 
+\e are shared by adjacent elements. If there are multiple levels of
+refinement, such nodes can themselves be hanging; the ultimate set 
+of master nodes is therefore be determined recursively.)
+
+  The setup of the hanging node constraints is handled automatically 
+by the mesh adaptation routines and the technical details are
+therefore of little relevance to the general user. 
+(The <A HREF="../../../the_data_structure/html/index.html">
+"bottom up" discussion of the data structure</A> provides details
+if you are interested.) One aspect of the way in which hanging
+nodes are handled in \c oomph-lib is important, however. Up to now
+we have accessed nodal values either via the function
+
+\code
+Node::set_value(...)
+\endcode
+
+which sets the values stored at a \c Node, or the pointer-based
+access function 
+
+\code
+Node::value_pt(...)
+\endcode
+
+which returns a pointer to these values.
+
+What happens when a node is hanging, i.e. if
+\c Node::is_hanging() returns \c true? 
+
+<TABLE>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER><B>A convention</B></CENTER>
+The functions
+ 
+\code
+Node::set_value(...)
+\endcode
+
+and 
+
+\code
+Node::value_pt(...)
+\endcode
+
+always refer to the nodal values stored at the \c Node itself.
+
+\b Important: If a node is hanging, 
+the value pointed to by \c Node::value_pt(...) is <B>not</B> 
+kept up to date! 
+
+The correctly constrained nodal value must be 
+computed "on the fly", using the list of master nodes and their 
+respective weights,
+stored in the node's \c HangingInfo object. This is done 
+automatically by the function 
+ 
+\code
+Node::value(...)
+\endcode
+
+which returns the appropriate value for hanging \e and non-hanging nodes:
+For non-hanging nodes it returns the value pointed to by
+\c Node::value_pt(...); for hanging nodes, it computes the
+correctly constrained values. When developing new
+elements or writing new post-processing routines, the user should
+therefore always refer to nodal values with the \c Node::value(...)
+function to ensure that the code works correctly in the presence
+of hanging nodes. 
+
+
+We provide equivalent functions to access the nodal positions:
+The function
+
+\code
+Node::x(...)
+\endcode
+
+returns the values of (Eulerian) coordinates stored at the node. These
+values can be out of date if the node is hanging. The function
+
+\code
+Node::position(...)
+\endcode
+
+should be used to determine a node's Eulerian position -- this
+function is the equivalent of \c Node::value(...) and determines
+the nodal coordinates of hanging nodes "on the fly", using
+the node's list of master nodes and weights.
+
+Finally, we note that while the nodal values and coordinates stored
+at a node might be out of date \e while a node is hanging, the
+values are automatically assigned up-to-date values when 
+subsequent mesh adaptations change a node's status from 
+hanging to non-hanging. 
+
+
+</TD>
+</TR>
+</TABLE>
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/poisson/two_d_poisson_adapt/">
+demo_drivers/poisson/two_d_poisson_adapt/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc">
+demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc
+</A>
+</CENTER>
+.

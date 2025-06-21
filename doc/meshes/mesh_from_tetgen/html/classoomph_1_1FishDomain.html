@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::FishDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1FishDomain.html">FishDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1FishDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::FishDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fish shaped domain, represented by four MacroElements. Shape is parametrised by GeomObject that represents the fish's back.  
+ <a href="classoomph_1_1FishDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::FishDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1FishDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a96f1e192900962ee55d063577822cd12" id="r_a96f1e192900962ee55d063577822cd12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a96f1e192900962ee55d063577822cd12">FishDomain</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1TetgenMesh.html">back_pt</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1FishDomain.html#a35a6dd2a8c0555586b5131a4bb28d649">xi_nose</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1FishDomain.html#afbea554d73dacc45b9c5fbb032ff3ec1">xi_tail</a>)</td></tr>
+<tr class="memdesc:a96f1e192900962ee55d063577822cd12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to GeomObject that represents the (upper) curved boundary of the fish's body, and the start and end values of the Lagrangian coordinates along the GeomObject.  <br /></td></tr>
+<tr class="separator:a96f1e192900962ee55d063577822cd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c117cc5ff5f3243228d6a5b9ec75f28" id="r_a7c117cc5ff5f3243228d6a5b9ec75f28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a7c117cc5ff5f3243228d6a5b9ec75f28">FishDomain</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1FishDomain.html">FishDomain</a> &amp;)=<a class="el" href="classoomph_1_1TetgenMesh.html">delete</a></td></tr>
+<tr class="memdesc:a7c117cc5ff5f3243228d6a5b9ec75f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7c117cc5ff5f3243228d6a5b9ec75f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0bd6adcbe5bb5b2479a92a33a1f6c1" id="r_a3d0bd6adcbe5bb5b2479a92a33a1f6c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a3d0bd6adcbe5bb5b2479a92a33a1f6c1">operator=</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1FishDomain.html">FishDomain</a> &amp;)=<a class="el" href="classoomph_1_1TetgenMesh.html">delete</a></td></tr>
+<tr class="memdesc:a3d0bd6adcbe5bb5b2479a92a33a1f6c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a3d0bd6adcbe5bb5b2479a92a33a1f6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab51c01c611efba9f940409e5154c9cd0" id="r_ab51c01c611efba9f940409e5154c9cd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#ab51c01c611efba9f940409e5154c9cd0">~FishDomain</a> ()</td></tr>
+<tr class="memdesc:ab51c01c611efba9f940409e5154c9cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="classoomph_1_1FishDomain.html" title="Fish shaped domain, represented by four MacroElements. Shape is parametrised by GeomObject that repre...">FishDomain</a>: Empty; cleanup done in base class.  <br /></td></tr>
+<tr class="separator:ab51c01c611efba9f940409e5154c9cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae30b2566729bf9c70f5bf447c2da01ce" id="r_ae30b2566729bf9c70f5bf447c2da01ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#ae30b2566729bf9c70f5bf447c2da01ce">x_fin</a> ()</td></tr>
+<tr class="memdesc:ae30b2566729bf9c70f5bf447c2da01ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-position of fin tip  <br /></td></tr>
+<tr class="separator:ae30b2566729bf9c70f5bf447c2da01ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e03aa4bbafb15e381681dc785813bf2" id="r_a7e03aa4bbafb15e381681dc785813bf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a7e03aa4bbafb15e381681dc785813bf2">y_fin</a> ()</td></tr>
+<tr class="memdesc:a7e03aa4bbafb15e381681dc785813bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">y-position of fin tip  <br /></td></tr>
+<tr class="separator:a7e03aa4bbafb15e381681dc785813bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96565a2b7f7f8b07c1018d43c83b96ff" id="r_a96565a2b7f7f8b07c1018d43c83b96ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a96565a2b7f7f8b07c1018d43c83b96ff">x_mouth</a> ()</td></tr>
+<tr class="memdesc:a96565a2b7f7f8b07c1018d43c83b96ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-position of mouth  <br /></td></tr>
+<tr class="separator:a96565a2b7f7f8b07c1018d43c83b96ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35a6dd2a8c0555586b5131a4bb28d649" id="r_a35a6dd2a8c0555586b5131a4bb28d649"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a35a6dd2a8c0555586b5131a4bb28d649">xi_nose</a> ()</td></tr>
+<tr class="memdesc:a35a6dd2a8c0555586b5131a4bb28d649"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start coordinate on wall (near nose)  <br /></td></tr>
+<tr class="separator:a35a6dd2a8c0555586b5131a4bb28d649"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbea554d73dacc45b9c5fbb032ff3ec1" id="r_afbea554d73dacc45b9c5fbb032ff3ec1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#afbea554d73dacc45b9c5fbb032ff3ec1">xi_tail</a> ()</td></tr>
+<tr class="memdesc:afbea554d73dacc45b9c5fbb032ff3ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">End coordinate on wall (near tail)  <br /></td></tr>
+<tr class="separator:afbea554d73dacc45b9c5fbb032ff3ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383b0fb396d605932ba6fb0779dacbf9" id="r_a383b0fb396d605932ba6fb0779dacbf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a383b0fb396d605932ba6fb0779dacbf9">macro_element_boundary</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">i_macro</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">i_direct</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">r</a>)</td></tr>
+<tr class="memdesc:a383b0fb396d605932ba6fb0779dacbf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector representation of the i_macro-th macro element boundary i_direct (N/S/W/E) at the discrete time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_4.png" width="41" height="14"/> Note that the local coordinate <b>zeta</b> is a 1D Vector rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the Domain base class.  <br /></td></tr>
+<tr class="separator:a383b0fb396d605932ba6fb0779dacbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a45f1d71d2cf6f4102486b04362ba8b0b" id="r_a45f1d71d2cf6f4102486b04362ba8b0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a45f1d71d2cf6f4102486b04362ba8b0b">r_upper_body_N</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a45f1d71d2cf6f4102486b04362ba8b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a45f1d71d2cf6f4102486b04362ba8b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0fadb2212e194bfe9f2ff7f0c892c22" id="r_ac0fadb2212e194bfe9f2ff7f0c892c22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#ac0fadb2212e194bfe9f2ff7f0c892c22">r_upper_body_W</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:ac0fadb2212e194bfe9f2ff7f0c892c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:ac0fadb2212e194bfe9f2ff7f0c892c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af30cc8b5bc73f1d2e71099c19b2a0d98" id="r_af30cc8b5bc73f1d2e71099c19b2a0d98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#af30cc8b5bc73f1d2e71099c19b2a0d98">r_upper_body_S</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:af30cc8b5bc73f1d2e71099c19b2a0d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:af30cc8b5bc73f1d2e71099c19b2a0d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47bdf57eebfa025628e70da2a1ab9e19" id="r_a47bdf57eebfa025628e70da2a1ab9e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a47bdf57eebfa025628e70da2a1ab9e19">r_upper_body_E</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a47bdf57eebfa025628e70da2a1ab9e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a47bdf57eebfa025628e70da2a1ab9e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b0cc31071869ef0e4b4794fe5a46d2f" id="r_a6b0cc31071869ef0e4b4794fe5a46d2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a6b0cc31071869ef0e4b4794fe5a46d2f">r_upper_fin_N</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a6b0cc31071869ef0e4b4794fe5a46d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a6b0cc31071869ef0e4b4794fe5a46d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750c0daa893d08038a52fbf20a4b23b8" id="r_a750c0daa893d08038a52fbf20a4b23b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a750c0daa893d08038a52fbf20a4b23b8">r_upper_fin_W</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a750c0daa893d08038a52fbf20a4b23b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a750c0daa893d08038a52fbf20a4b23b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd62f651648d85a79e04ced3193c3a2a" id="r_acd62f651648d85a79e04ced3193c3a2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#acd62f651648d85a79e04ced3193c3a2a">r_upper_fin_S</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:acd62f651648d85a79e04ced3193c3a2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:acd62f651648d85a79e04ced3193c3a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a063912bd40138bb84b3cdfc23133eff2" id="r_a063912bd40138bb84b3cdfc23133eff2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a063912bd40138bb84b3cdfc23133eff2">r_upper_fin_E</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a063912bd40138bb84b3cdfc23133eff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a063912bd40138bb84b3cdfc23133eff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75131ac72e23d5b1d701b588c0596b5d" id="r_a75131ac72e23d5b1d701b588c0596b5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a75131ac72e23d5b1d701b588c0596b5d">r_lower_body_N</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a75131ac72e23d5b1d701b588c0596b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a75131ac72e23d5b1d701b588c0596b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4466e68eb38c1e931743db93af2e9ba9" id="r_a4466e68eb38c1e931743db93af2e9ba9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a4466e68eb38c1e931743db93af2e9ba9">r_lower_body_W</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a4466e68eb38c1e931743db93af2e9ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a4466e68eb38c1e931743db93af2e9ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa33b19ceef5cd574ee0a6756bcfc6da7" id="r_aa33b19ceef5cd574ee0a6756bcfc6da7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#aa33b19ceef5cd574ee0a6756bcfc6da7">r_lower_body_S</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:aa33b19ceef5cd574ee0a6756bcfc6da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Southern boundary of lower body macro element zeta <img class="formulaInl" alt="$\in [-1,1] $" src="form_9.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:aa33b19ceef5cd574ee0a6756bcfc6da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb85a2acd9cf3cd8fae60fd9e487bd1c" id="r_abb85a2acd9cf3cd8fae60fd9e487bd1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#abb85a2acd9cf3cd8fae60fd9e487bd1c">r_lower_body_E</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:abb85a2acd9cf3cd8fae60fd9e487bd1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:abb85a2acd9cf3cd8fae60fd9e487bd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d45dba13043b2b6df831848da665f21" id="r_a6d45dba13043b2b6df831848da665f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a6d45dba13043b2b6df831848da665f21">r_lower_fin_N</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a6d45dba13043b2b6df831848da665f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a6d45dba13043b2b6df831848da665f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf5f3eb1842dc9d7e3f51d4b727632f9" id="r_aaf5f3eb1842dc9d7e3f51d4b727632f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#aaf5f3eb1842dc9d7e3f51d4b727632f9">r_lower_fin_W</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:aaf5f3eb1842dc9d7e3f51d4b727632f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:aaf5f3eb1842dc9d7e3f51d4b727632f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2110fb0b776654460d6a3477fbc4979d" id="r_a2110fb0b776654460d6a3477fbc4979d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a2110fb0b776654460d6a3477fbc4979d">r_lower_fin_S</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a2110fb0b776654460d6a3477fbc4979d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a2110fb0b776654460d6a3477fbc4979d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a956dcbb87e9b37a0b965fcddb9911de3" id="r_a956dcbb87e9b37a0b965fcddb9911de3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a956dcbb87e9b37a0b965fcddb9911de3">r_lower_fin_E</a> (<a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">t</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">zeta</a>, <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TetgenMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a956dcbb87e9b37a0b965fcddb9911de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a956dcbb87e9b37a0b965fcddb9911de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af85c4be86bb87528939778e3f63a40a5" id="r_af85c4be86bb87528939778e3f63a40a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#af85c4be86bb87528939778e3f63a40a5">Xi_nose</a></td></tr>
+<tr class="memdesc:af85c4be86bb87528939778e3f63a40a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Nose" limit for the (1D) coordinates along the wall  <br /></td></tr>
+<tr class="separator:af85c4be86bb87528939778e3f63a40a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38633d4f3e2777be9544b907d1de5870" id="r_a38633d4f3e2777be9544b907d1de5870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a38633d4f3e2777be9544b907d1de5870">Xi_tail</a></td></tr>
+<tr class="memdesc:a38633d4f3e2777be9544b907d1de5870"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Tail" limit for the (1D) coordinates along the wall  <br /></td></tr>
+<tr class="separator:a38633d4f3e2777be9544b907d1de5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af27c51fe0272df3dec2ad93c5c231d59" id="r_af27c51fe0272df3dec2ad93c5c231d59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#af27c51fe0272df3dec2ad93c5c231d59">X_fin</a></td></tr>
+<tr class="memdesc:af27c51fe0272df3dec2ad93c5c231d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">X coordinate of fin tip.  <br /></td></tr>
+<tr class="separator:af27c51fe0272df3dec2ad93c5c231d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a162b4a35d8d0e986d254651571844253" id="r_a162b4a35d8d0e986d254651571844253"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#a162b4a35d8d0e986d254651571844253">Y_fin</a></td></tr>
+<tr class="memdesc:a162b4a35d8d0e986d254651571844253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y coordinate of fin tip.  <br /></td></tr>
+<tr class="separator:a162b4a35d8d0e986d254651571844253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa25f3280c2453dd725d59f23a478ee11" id="r_aa25f3280c2453dd725d59f23a478ee11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#aa25f3280c2453dd725d59f23a478ee11">X_mouth</a></td></tr>
+<tr class="memdesc:aa25f3280c2453dd725d59f23a478ee11"><td class="mdescLeft">&#160;</td><td class="mdescRight">X coordinate of corner of mouth.  <br /></td></tr>
+<tr class="separator:aa25f3280c2453dd725d59f23a478ee11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae943e7fe48ce09dded2d5351ab980f93" id="r_ae943e7fe48ce09dded2d5351ab980f93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TetgenMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FishDomain.html#ae943e7fe48ce09dded2d5351ab980f93">Back_pt</a></td></tr>
+<tr class="memdesc:ae943e7fe48ce09dded2d5351ab980f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the fish's back.  <br /></td></tr>
+<tr class="separator:ae943e7fe48ce09dded2d5351ab980f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Fish shaped domain, represented by four MacroElements. Shape is parametrised by GeomObject that represents the fish's back. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00042">42</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a96f1e192900962ee55d063577822cd12" name="a96f1e192900962ee55d063577822cd12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f1e192900962ee55d063577822cd12">&#9670;&#160;</a></span>FishDomain() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::FishDomain::FishDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>back_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi_nose</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi_tail</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to GeomObject that represents the (upper) curved boundary of the fish's body, and the start and end values of the Lagrangian coordinates along the GeomObject. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00048">48</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00131">X_fin</a>, <a class="el" href="fish__domain_8h_source.html#l00137">X_mouth</a>, and <a class="el" href="fish__domain_8h_source.html#l00134">Y_fin</a>.</p>
+
+</div>
+</div>
+<a id="a7c117cc5ff5f3243228d6a5b9ec75f28" name="a7c117cc5ff5f3243228d6a5b9ec75f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c117cc5ff5f3243228d6a5b9ec75f28">&#9670;&#160;</a></span>FishDomain() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::FishDomain::FishDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1FishDomain.html">FishDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="ab51c01c611efba9f940409e5154c9cd0" name="ab51c01c611efba9f940409e5154c9cd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab51c01c611efba9f940409e5154c9cd0">&#9670;&#160;</a></span>~FishDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">virtual</a> oomph::FishDomain::~FishDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor for <a class="el" href="classoomph_1_1FishDomain.html" title="Fish shaped domain, represented by four MacroElements. Shape is parametrised by GeomObject that repre...">FishDomain</a>: Empty; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00078">78</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a383b0fb396d605932ba6fb0779dacbf9" name="a383b0fb396d605932ba6fb0779dacbf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383b0fb396d605932ba6fb0779dacbf9">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vector representation of the i_macro-th macro element boundary i_direct (N/S/W/E) at the discrete time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_4.png" width="41" height="14"/> Note that the local coordinate <b>zeta</b> is a 1D Vector rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the Domain base class. </p>
+<p>Vector representation of the imacro-th macro element boundary idirect (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): <img class="formulaInl" alt="$ {\bf r}({\bf zeta}) $" src="form_4.png" width="41" height="14"/> Note that the local coordinate <b>zeta</b> is a 1D Vector rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the Domain base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00305">305</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00223">r_lower_body_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00184">r_lower_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00211">r_lower_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00197">r_lower_body_W()</a>, <a class="el" href="fish__domain_8h_source.html#l00277">r_lower_fin_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00238">r_lower_fin_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00265">r_lower_fin_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00251">r_lower_fin_W()</a>, <a class="el" href="fish__domain_8h_source.html#l00557">r_upper_body_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00541">r_upper_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00580">r_upper_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00599">r_upper_body_W()</a>, <a class="el" href="fish__domain_8h_source.html#l00529">r_upper_fin_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00512">r_upper_fin_S()</a>, and <a class="el" href="fish__domain_8h_source.html#l00495">r_upper_fin_W()</a>.</p>
+
+</div>
+</div>
+<a id="a3d0bd6adcbe5bb5b2479a92a33a1f6c1" name="a3d0bd6adcbe5bb5b2479a92a33a1f6c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d0bd6adcbe5bb5b2479a92a33a1f6c1">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1FishDomain.html">FishDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="abb85a2acd9cf3cd8fae60fd9e487bd1c" name="abb85a2acd9cf3cd8fae60fd9e487bd1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb85a2acd9cf3cd8fae60fd9e487bd1c">&#9670;&#160;</a></span>r_lower_body_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_body_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00223">223</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00557">r_upper_body_E()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a75131ac72e23d5b1d701b588c0596b5d" name="a75131ac72e23d5b1d701b588c0596b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75131ac72e23d5b1d701b588c0596b5d">&#9670;&#160;</a></span>r_lower_body_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_body_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00184">184</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00580">r_upper_body_S()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aa33b19ceef5cd574ee0a6756bcfc6da7" name="aa33b19ceef5cd574ee0a6756bcfc6da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa33b19ceef5cd574ee0a6756bcfc6da7">&#9670;&#160;</a></span>r_lower_body_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_body_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Southern boundary of lower body macro element zeta <img class="formulaInl" alt="$\in [-1,1] $" src="form_9.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00211">211</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00541">r_upper_body_N()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a4466e68eb38c1e931743db93af2e9ba9" name="a4466e68eb38c1e931743db93af2e9ba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4466e68eb38c1e931743db93af2e9ba9">&#9670;&#160;</a></span>r_lower_body_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_body_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00197">197</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00599">r_upper_body_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a956dcbb87e9b37a0b965fcddb9911de3" name="a956dcbb87e9b37a0b965fcddb9911de3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956dcbb87e9b37a0b965fcddb9911de3">&#9670;&#160;</a></span>r_lower_fin_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_fin_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00277">277</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00529">r_upper_fin_E()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6d45dba13043b2b6df831848da665f21" name="a6d45dba13043b2b6df831848da665f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d45dba13043b2b6df831848da665f21">&#9670;&#160;</a></span>r_lower_fin_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_fin_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00238">238</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00512">r_upper_fin_S()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a2110fb0b776654460d6a3477fbc4979d" name="a2110fb0b776654460d6a3477fbc4979d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2110fb0b776654460d6a3477fbc4979d">&#9670;&#160;</a></span>r_lower_fin_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_fin_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00265">265</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aaf5f3eb1842dc9d7e3f51d4b727632f9" name="aaf5f3eb1842dc9d7e3f51d4b727632f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf5f3eb1842dc9d7e3f51d4b727632f9">&#9670;&#160;</a></span>r_lower_fin_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_lower_fin_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of lower fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00251">251</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00495">r_upper_fin_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a47bdf57eebfa025628e70da2a1ab9e19" name="a47bdf57eebfa025628e70da2a1ab9e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47bdf57eebfa025628e70da2a1ab9e19">&#9670;&#160;</a></span>r_upper_body_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_body_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Eastern edge of upper body macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00557">557</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, and <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00223">r_lower_body_E()</a>.</p>
+
+</div>
+</div>
+<a id="a45f1d71d2cf6f4102486b04362ba8b0b" name="a45f1d71d2cf6f4102486b04362ba8b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f1d71d2cf6f4102486b04362ba8b0b">&#9670;&#160;</a></span>r_upper_body_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_body_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Northern edge of upper body macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00541">541</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, <a class="el" href="fish__domain_8h_source.html#l00125">Xi_nose</a>, and <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00211">r_lower_body_S()</a>.</p>
+
+</div>
+</div>
+<a id="af30cc8b5bc73f1d2e71099c19b2a0d98" name="af30cc8b5bc73f1d2e71099c19b2a0d98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30cc8b5bc73f1d2e71099c19b2a0d98">&#9670;&#160;</a></span>r_upper_body_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_body_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Southern edge of upper body macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00580">580</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, <a class="el" href="fish__domain_8h_source.html#l00137">X_mouth</a>, and <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00184">r_lower_body_N()</a>.</p>
+
+</div>
+</div>
+<a id="ac0fadb2212e194bfe9f2ff7f0c892c22" name="ac0fadb2212e194bfe9f2ff7f0c892c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0fadb2212e194bfe9f2ff7f0c892c22">&#9670;&#160;</a></span>r_upper_body_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_body_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper body macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Western edge of upper body macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00599">599</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, <a class="el" href="fish__domain_8h_source.html#l00137">X_mouth</a>, and <a class="el" href="fish__domain_8h_source.html#l00125">Xi_nose</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00197">r_lower_body_W()</a>.</p>
+
+</div>
+</div>
+<a id="a063912bd40138bb84b3cdfc23133eff2" name="a063912bd40138bb84b3cdfc23133eff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a063912bd40138bb84b3cdfc23133eff2">&#9670;&#160;</a></span>r_upper_fin_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_fin_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Eastern edge of upper fin macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00529">529</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00131">X_fin</a>, and <a class="el" href="fish__domain_8h_source.html#l00134">Y_fin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00277">r_lower_fin_E()</a>.</p>
+
+</div>
+</div>
+<a id="a6b0cc31071869ef0e4b4794fe5a46d2f" name="a6b0cc31071869ef0e4b4794fe5a46d2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b0cc31071869ef0e4b4794fe5a46d2f">&#9670;&#160;</a></span>r_upper_fin_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_fin_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Northern edge of upper fin macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00472">472</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, <a class="el" href="fish__domain_8h_source.html#l00131">X_fin</a>, <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>, and <a class="el" href="fish__domain_8h_source.html#l00134">Y_fin</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00265">r_lower_fin_S()</a>.</p>
+
+</div>
+</div>
+<a id="acd62f651648d85a79e04ced3193c3a2a" name="acd62f651648d85a79e04ced3193c3a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd62f651648d85a79e04ced3193c3a2a">&#9670;&#160;</a></span>r_upper_fin_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_fin_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Southern edge of upper fin macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00512">512</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, and <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00238">r_lower_fin_N()</a>.</p>
+
+</div>
+</div>
+<a id="a750c0daa893d08038a52fbf20a4b23b8" name="a750c0daa893d08038a52fbf20a4b23b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750c0daa893d08038a52fbf20a4b23b8">&#9670;&#160;</a></span>r_upper_fin_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">void</a> oomph::FishDomain::r_upper_fin_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">const</a> <a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TetgenMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of upper fin macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_8.png" width="45" height="14"/>. </p>
+<p>Western edge of upper fin macro element; <img class="formulaInl" alt="$ \zeta \in [-1,1] $" src="form_5.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00495">495</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00140">Back_pt</a>, and <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00305">macro_element_boundary()</a>, and <a class="el" href="fish__domain_8h_source.html#l00251">r_lower_fin_W()</a>.</p>
+
+</div>
+</div>
+<a id="ae30b2566729bf9c70f5bf447c2da01ce" name="ae30b2566729bf9c70f5bf447c2da01ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30b2566729bf9c70f5bf447c2da01ce">&#9670;&#160;</a></span>x_fin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp; oomph::FishDomain::x_fin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-position of fin tip </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00081">81</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00131">X_fin</a>.</p>
+
+</div>
+</div>
+<a id="a96565a2b7f7f8b07c1018d43c83b96ff" name="a96565a2b7f7f8b07c1018d43c83b96ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96565a2b7f7f8b07c1018d43c83b96ff">&#9670;&#160;</a></span>x_mouth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp; oomph::FishDomain::x_mouth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-position of mouth </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00093">93</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00137">X_mouth</a>.</p>
+
+</div>
+</div>
+<a id="a35a6dd2a8c0555586b5131a4bb28d649" name="a35a6dd2a8c0555586b5131a4bb28d649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35a6dd2a8c0555586b5131a4bb28d649">&#9670;&#160;</a></span>xi_nose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp; oomph::FishDomain::xi_nose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start coordinate on wall (near nose) </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00099">99</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00125">Xi_nose</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__mesh_8h_source.html#l00417">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::update_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="afbea554d73dacc45b9c5fbb032ff3ec1" name="afbea554d73dacc45b9c5fbb032ff3ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbea554d73dacc45b9c5fbb032ff3ec1">&#9670;&#160;</a></span>xi_tail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp; oomph::FishDomain::xi_tail </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>End coordinate on wall (near tail) </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00105">105</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00128">Xi_tail</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__mesh_8h_source.html#l00417">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::update_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a7e03aa4bbafb15e381681dc785813bf2" name="a7e03aa4bbafb15e381681dc785813bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e03aa4bbafb15e381681dc785813bf2">&#9670;&#160;</a></span>y_fin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> &amp; oomph::FishDomain::y_fin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>y-position of fin tip </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00087">87</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fish__domain_8h_source.html#l00134">Y_fin</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae943e7fe48ce09dded2d5351ab980f93" name="ae943e7fe48ce09dded2d5351ab980f93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae943e7fe48ce09dded2d5351ab980f93">&#9670;&#160;</a></span>Back_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">GeomObject</a>* oomph::FishDomain::Back_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the fish's back. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00140">140</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00557">r_upper_body_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00541">r_upper_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00580">r_upper_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00599">r_upper_body_W()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00512">r_upper_fin_S()</a>, and <a class="el" href="fish__domain_8h_source.html#l00495">r_upper_fin_W()</a>.</p>
+
+</div>
+</div>
+<a id="af27c51fe0272df3dec2ad93c5c231d59" name="af27c51fe0272df3dec2ad93c5c231d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27c51fe0272df3dec2ad93c5c231d59">&#9670;&#160;</a></span>X_fin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> oomph::FishDomain::X_fin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>X coordinate of fin tip. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00131">131</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00048">FishDomain()</a>, <a class="el" href="fish__domain_8h_source.html#l00529">r_upper_fin_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>, and <a class="el" href="fish__domain_8h_source.html#l00081">x_fin()</a>.</p>
+
+</div>
+</div>
+<a id="aa25f3280c2453dd725d59f23a478ee11" name="aa25f3280c2453dd725d59f23a478ee11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa25f3280c2453dd725d59f23a478ee11">&#9670;&#160;</a></span>X_mouth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> oomph::FishDomain::X_mouth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>X coordinate of corner of mouth. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00137">137</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00048">FishDomain()</a>, <a class="el" href="fish__domain_8h_source.html#l00580">r_upper_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00599">r_upper_body_W()</a>, and <a class="el" href="fish__domain_8h_source.html#l00093">x_mouth()</a>.</p>
+
+</div>
+</div>
+<a id="af85c4be86bb87528939778e3f63a40a5" name="af85c4be86bb87528939778e3f63a40a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af85c4be86bb87528939778e3f63a40a5">&#9670;&#160;</a></span>Xi_nose</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> oomph::FishDomain::Xi_nose</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Nose" limit for the (1D) coordinates along the wall </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00125">125</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00541">r_upper_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00599">r_upper_body_W()</a>, and <a class="el" href="fish__domain_8h_source.html#l00099">xi_nose()</a>.</p>
+
+</div>
+</div>
+<a id="a38633d4f3e2777be9544b907d1de5870" name="a38633d4f3e2777be9544b907d1de5870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38633d4f3e2777be9544b907d1de5870">&#9670;&#160;</a></span>Xi_tail</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> oomph::FishDomain::Xi_tail</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>"Tail" limit for the (1D) coordinates along the wall </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00128">128</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00557">r_upper_body_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00541">r_upper_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00580">r_upper_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00512">r_upper_fin_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00495">r_upper_fin_W()</a>, and <a class="el" href="fish__domain_8h_source.html#l00105">xi_tail()</a>.</p>
+
+</div>
+</div>
+<a id="a162b4a35d8d0e986d254651571844253" name="a162b4a35d8d0e986d254651571844253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a162b4a35d8d0e986d254651571844253">&#9670;&#160;</a></span>Y_fin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TetgenMesh.html">double</a> oomph::FishDomain::Y_fin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Y coordinate of fin tip. </p>
+
+<p class="definition">Definition at line <a class="el" href="fish__domain_8h_source.html#l00134">134</a> of file <a class="el" href="fish__domain_8h_source.html">fish_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fish__domain_8h_source.html#l00048">FishDomain()</a>, <a class="el" href="fish__domain_8h_source.html#l00529">r_upper_fin_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">r_upper_fin_N()</a>, and <a class="el" href="fish__domain_8h_source.html#l00087">y_fin()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="fish__domain_8h_source.html">fish_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

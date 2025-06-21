@@ -1,0 +1,109 @@
+\doxysection{oomph\+::Rectangle\+With\+Hole\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RectangleWithHoleMesh}{}\label{classoomph_1_1RectangleWithHoleMesh}\index{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}}
+
+
+Domain-\/based mesh for rectangular mesh with circular hole.  
+
+
+
+
+{\ttfamily \#include $<$rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Rectangle\+With\+Hole\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1RectangleWithHoleMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh_aa5080c0cbd60211cafda6f8d77326eae}{Rectangle\+With\+Hole\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}cylinder\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that represents the cylinder, the length and height of the domain. The Geom\+Object must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain}{Rectangle\+With\+Hole\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh_afba3aff6ac8249027a54c316f5798516}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain}{Rectangle\+With\+Hole\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh_a04b200644403da650d38e707285e2b53}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$}
+Domain-\/based mesh for rectangular mesh with circular hole. 
+
+Definition at line \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00047}{47}} of file \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source}{rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleMesh_aa5080c0cbd60211cafda6f8d77326eae}\label{classoomph_1_1RectangleWithHoleMesh_aa5080c0cbd60211cafda6f8d77326eae} 
+\index{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}!RectangleWithHoleMesh@{RectangleWithHoleMesh}}
+\index{RectangleWithHoleMesh@{RectangleWithHoleMesh}!oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RectangleWithHoleMesh()}{RectangleWithHoleMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh}{oomph\+::\+Rectangle\+With\+Hole\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Rectangle\+With\+Hole\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{cylinder\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object that represents the cylinder, the length and height of the domain. The Geom\+Object must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to Steady default timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00056}{56}} of file \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source}{rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00238}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleMesh_afba3aff6ac8249027a54c316f5798516}\label{classoomph_1_1RectangleWithHoleMesh_afba3aff6ac8249027a54c316f5798516} 
+\index{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain}{Rectangle\+With\+Hole\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh}{oomph\+::\+Rectangle\+With\+Hole\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00231}{231}} of file \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source}{rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00238}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleMesh_a04b200644403da650d38e707285e2b53}\label{classoomph_1_1RectangleWithHoleMesh_a04b200644403da650d38e707285e2b53} 
+\index{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::RectangleWithHoleMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleDomain}{Rectangle\+With\+Hole\+Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleMesh}{oomph\+::\+Rectangle\+With\+Hole\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00238}{238}} of file \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source}{rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00231}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00056}{oomph\+::\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Rectangle\+With\+Hole\+Mesh()}}, and \mbox{\hyperlink{rectangle__with__hole__mesh_8h_source_l00261}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rectangle__with__hole__mesh_8h}{rectangle\+\_\+with\+\_\+hole\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

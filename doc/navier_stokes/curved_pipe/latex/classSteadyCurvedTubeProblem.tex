@@ -1,0 +1,206 @@
+\doxysection{Steady\+Curved\+Tube\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classSteadyCurvedTubeProblem}{}\label{classSteadyCurvedTubeProblem}\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+
+
+Entry flow problem in tapered tube domain.  
+
+
+Inheritance diagram for Steady\+Curved\+Tube\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSteadyCurvedTubeProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSteadyCurvedTubeProblem_ac276276fa87e57ff486e3af24b72e38b}{Steady\+Curved\+Tube\+Problem}} (Doc\+Info \&doc\+\_\+info, const double \&min\+\_\+error\+\_\+target, const double \&max\+\_\+error\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass Doc\+Info object and target errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSteadyCurvedTubeProblem_a1adfde23500217008be5445934830115}{\texorpdfstring{$\sim$}{\string~}\+Steady\+Curved\+Tube\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem_a536ebee9cdb86bb1533531c85e5fd125}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em After adaptation\+: Pin redudant pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Refineable\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overload generic access function by one that returns a pointer to the specific mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{classSteadyCurvedTubeProblem_a1a48437e34e38bf6d96aef540fda70b6}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyCurvedTubeProblem_a06fa168a75e0ce3b0cd0eccacf226a6c}{Volume\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that specifies the domain volume. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$}
+Entry flow problem in tapered tube domain. 
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00099}{99}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classSteadyCurvedTubeProblem_ac276276fa87e57ff486e3af24b72e38b}\label{classSteadyCurvedTubeProblem_ac276276fa87e57ff486e3af24b72e38b} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!SteadyCurvedTubeProblem@{SteadyCurvedTubeProblem}}
+\index{SteadyCurvedTubeProblem@{SteadyCurvedTubeProblem}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SteadyCurvedTubeProblem()}{SteadyCurvedTubeProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classSteadyCurvedTubeProblem}{\+::\+Steady\+Curved\+Tube\+Problem}} (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{const double \&}]{min\+\_\+error\+\_\+target,  }\item[{const double \&}]{max\+\_\+error\+\_\+target }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass Doc\+Info object and target errors. 
+
+Constructor\+: Pass Doc\+Info object and error targets. 
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00149}{149}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{curved__pipe_8cc_source_l00091}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Delta}}, \mbox{\hyperlink{curved__pipe_8cc_source_l00127}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{curved__pipe_8cc_source_l00088}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, and \mbox{\hyperlink{curved__pipe_8cc_source_l00138}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::\+Volume\+\_\+pt}}.
+
+\Hypertarget{classSteadyCurvedTubeProblem_a1adfde23500217008be5445934830115}\label{classSteadyCurvedTubeProblem_a1adfde23500217008be5445934830115} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!````~SteadyCurvedTubeProblem@{\texorpdfstring{$\sim$}{\string~}SteadyCurvedTubeProblem}}
+\index{````~SteadyCurvedTubeProblem@{\texorpdfstring{$\sim$}{\string~}SteadyCurvedTubeProblem}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SteadyCurvedTubeProblem()}{\string~SteadyCurvedTubeProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00109}{109}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSteadyCurvedTubeProblem_a536ebee9cdb86bb1533531c85e5fd125}\label{classSteadyCurvedTubeProblem_a536ebee9cdb86bb1533531c85e5fd125} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+After adaptation\+: Pin redudant pressure dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00115}{115}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{curved__pipe_8cc_source_l00127}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac}\label{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve. 
+
+Set the inflow boundary conditions. 
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00256}{256}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{curved__pipe_8cc_source_l00091}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Delta}}.
+
+\Hypertarget{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7}\label{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00284}{284}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{curved__pipe_8cc_source_l00088}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}.
+
+
+
+Referenced by \mbox{\hyperlink{curved__pipe_8cc_source_l00318}{main()}}.
+
+\Hypertarget{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}\label{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload generic access function by one that returns a pointer to the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00127}{127}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{curved__pipe_8cc_source_l00115}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{curved__pipe_8cc_source_l00149}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::\+Steady\+Curved\+Tube\+Problem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classSteadyCurvedTubeProblem_a1a48437e34e38bf6d96aef540fda70b6}\label{classSteadyCurvedTubeProblem_a1a48437e34e38bf6d96aef540fda70b6} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00135}{135}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+\Hypertarget{classSteadyCurvedTubeProblem_a06fa168a75e0ce3b0cd0eccacf226a6c}\label{classSteadyCurvedTubeProblem_a06fa168a75e0ce3b0cd0eccacf226a6c} 
+\index{SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}!Volume\_pt@{Volume\_pt}}
+\index{Volume\_pt@{Volume\_pt}!SteadyCurvedTubeProblem$<$ ELEMENT $>$@{SteadyCurvedTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume\_pt}{Volume\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyCurvedTubeProblem}{Steady\+Curved\+Tube\+Problem}}$<$ ELEMENT $>$\+::\+Volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Geom\+Object that specifies the domain volume. 
+
+
+
+Definition at line \mbox{\hyperlink{curved__pipe_8cc_source_l00138}{138}} of file \mbox{\hyperlink{curved__pipe_8cc_source}{curved\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{curved__pipe_8cc_source_l00149}{Steady\+Curved\+Tube\+Problem$<$ ELEMENT $>$\+::\+Steady\+Curved\+Tube\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{curved__pipe_8cc}{curved\+\_\+pipe.\+cc}}\end{DoxyCompactItemize}

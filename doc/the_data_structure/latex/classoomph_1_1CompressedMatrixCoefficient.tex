@@ -1,0 +1,278 @@
+\doxysection{oomph\+::Compressed\+Matrix\+Coefficient Class Reference}
+\hypertarget{classoomph_1_1CompressedMatrixCoefficient}{}\label{classoomph_1_1CompressedMatrixCoefficient}\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+
+
+Class for a compressed-\/matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDouble\+Matrices to allow the coefficients in each compressed column \mbox{[}row\mbox{]} to be sorted by their row \mbox{[}column\mbox{]} index.  
+
+
+
+
+{\ttfamily \#include $<$general\+\_\+purpose\+\_\+preconditioners.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a7cbfc9de624baabd04b3501d9970bfb2}{Compressed\+Matrix\+Coefficient}} ()
+\begin{DoxyCompactList}\small\item\em Constructor (no arguments) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}{Compressed\+Matrix\+Coefficient}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}{index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}{value}})
+\begin{DoxyCompactList}\small\item\em Constructor (takes the index and value as arguments) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c}{\texorpdfstring{$\sim$}{\string~}\+Compressed\+Matrix\+Coefficient}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (does nothing) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_aa45c925ae1a3a0620475b60f64b6cf68}{Compressed\+Matrix\+Coefficient}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&a)
+\begin{DoxyCompactList}\small\item\em Copy Constructor. Not Broken. Required for STL sort function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c61acc13f68e865af3}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&a)
+\begin{DoxyCompactList}\small\item\em Assignment Operator. Not Broken. Required for STL sort function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3}{operator$<$}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&a) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Less Than Operator (for the STL sort function) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}{index}} ()
+\begin{DoxyCompactList}\small\item\em access function for the coefficient\textquotesingle{}s (row or column) index \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}{value}} ()
+\begin{DoxyCompactList}\small\item\em access function for the coefficient value \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da}{index}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for the coefficient\textquotesingle{}s (row or column\+\_\+ index (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a8659b8a8c7cb778d337cf58c38a1d24a}{value}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the coefficient\textquotesingle{}s value (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_ac39f53e43e7edaa4ba58274e0ed939c4}{Index}}
+\begin{DoxyCompactList}\small\item\em the row or column index of the compressed-\/matrix coefficient \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c135197f049bbcec71fa6b}{Value}}
+\begin{DoxyCompactList}\small\item\em the value of the compressed-\/matrix coefficient \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for a compressed-\/matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDouble\+Matrices to allow the coefficients in each compressed column \mbox{[}row\mbox{]} to be sorted by their row \mbox{[}column\mbox{]} index. 
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00184}{184}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a7cbfc9de624baabd04b3501d9970bfb2}\label{classoomph_1_1CompressedMatrixCoefficient_a7cbfc9de624baabd04b3501d9970bfb2} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!CompressedMatrixCoefficient@{CompressedMatrixCoefficient}}
+\index{CompressedMatrixCoefficient@{CompressedMatrixCoefficient}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{CompressedMatrixCoefficient()}{CompressedMatrixCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Compressed\+Matrix\+Coefficient\+::\+Compressed\+Matrix\+Coefficient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (no arguments) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00188}{188}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13}\label{classoomph_1_1CompressedMatrixCoefficient_a80eba1cc000e17b7de0a24dbae74cb13} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!CompressedMatrixCoefficient@{CompressedMatrixCoefficient}}
+\index{CompressedMatrixCoefficient@{CompressedMatrixCoefficient}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{CompressedMatrixCoefficient()}{CompressedMatrixCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Compressed\+Matrix\+Coefficient\+::\+Compressed\+Matrix\+Coefficient (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor (takes the index and value as arguments) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{191}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c}\label{classoomph_1_1CompressedMatrixCoefficient_a1d77f4d596e5263c1fe235dae6a9081c} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!````~CompressedMatrixCoefficient@{\texorpdfstring{$\sim$}{\string~}CompressedMatrixCoefficient}}
+\index{````~CompressedMatrixCoefficient@{\texorpdfstring{$\sim$}{\string~}CompressedMatrixCoefficient}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CompressedMatrixCoefficient()}{\string~CompressedMatrixCoefficient()}}
+{\footnotesize\ttfamily oomph\+::\+Compressed\+Matrix\+Coefficient\+::\texorpdfstring{$\sim$}{\string~}\+Compressed\+Matrix\+Coefficient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (does nothing) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00199}{199}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_aa45c925ae1a3a0620475b60f64b6cf68}\label{classoomph_1_1CompressedMatrixCoefficient_aa45c925ae1a3a0620475b60f64b6cf68} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!CompressedMatrixCoefficient@{CompressedMatrixCoefficient}}
+\index{CompressedMatrixCoefficient@{CompressedMatrixCoefficient}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{CompressedMatrixCoefficient()}{CompressedMatrixCoefficient()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Compressed\+Matrix\+Coefficient\+::\+Compressed\+Matrix\+Coefficient (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy Constructor. Not Broken. Required for STL sort function. 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{202}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e}\label{classoomph_1_1CompressedMatrixCoefficient_a2f994cd41042cc2b7c4ea64c7e1e395e} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!index@{index}}
+\index{index@{index}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Compressed\+Matrix\+Coefficient\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the coefficient\textquotesingle{}s (row or column) index 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{222}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{operator$<$()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da}\label{classoomph_1_1CompressedMatrixCoefficient_acd77daf8774a403432fe019da052c6da} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!index@{index}}
+\index{index@{index}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the coefficient\textquotesingle{}s (row or column\+\_\+ index (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00235}{235}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3}\label{classoomph_1_1CompressedMatrixCoefficient_a69f893759bb296dd6fb862b7d3e2fce3} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&}]{a }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Less Than Operator (for the STL sort function) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{216}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c61acc13f68e865af3}\label{classoomph_1_1CompressedMatrixCoefficient_ab58ad8da0c00b3c61acc13f68e865af3} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{Compressed\+Matrix\+Coefficient}} \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment Operator. Not Broken. Required for STL sort function. 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{209}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{Index}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761}\label{classoomph_1_1CompressedMatrixCoefficient_aaeda8610cd964c7e0d521ce48d527761} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!value@{value}}
+\index{value@{value}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Compressed\+Matrix\+Coefficient\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the coefficient value 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{228}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a8659b8a8c7cb778d337cf58c38a1d24a}\label{classoomph_1_1CompressedMatrixCoefficient_a8659b8a8c7cb778d337cf58c38a1d24a} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!value@{value}}
+\index{value@{value}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the coefficient\textquotesingle{}s value (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00241}{241}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{Value}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_ac39f53e43e7edaa4ba58274e0ed939c4}\label{classoomph_1_1CompressedMatrixCoefficient_ac39f53e43e7edaa4ba58274e0ed939c4} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!Index@{Index}}
+\index{Index@{Index}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{Index}{Index}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::\+Index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the row or column index of the compressed-\/matrix coefficient 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00248}{248}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00222}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00235}{index()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00216}{operator$<$()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}.
+
+\Hypertarget{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c135197f049bbcec71fa6b}\label{classoomph_1_1CompressedMatrixCoefficient_a8873cbcd41c135197f049bbcec71fa6b} 
+\index{oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}!Value@{Value}}
+\index{Value@{Value}!oomph::CompressedMatrixCoefficient@{oomph::CompressedMatrixCoefficient}}
+\doxysubsubsection{\texorpdfstring{Value}{Value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Compressed\+Matrix\+Coefficient\+::\+Value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the value of the compressed-\/matrix coefficient 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00251}{251}} of file \mbox{\hyperlink{general__purpose__preconditioners_8h_source}{general\+\_\+purpose\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00202}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00191}{Compressed\+Matrix\+Coefficient()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00209}{operator=()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00228}{value()}}, and \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00241}{value()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{general__purpose__preconditioners_8h}{general\+\_\+purpose\+\_\+preconditioners.\+h}}\end{DoxyCompactItemize}

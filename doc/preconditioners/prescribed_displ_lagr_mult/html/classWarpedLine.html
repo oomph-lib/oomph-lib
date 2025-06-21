@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: WarpedLine Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classWarpedLine-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">WarpedLine Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Warped line in 2D space.  
+ <a href="classWarpedLine.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for WarpedLine:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classWarpedLine.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9d80dca2c907b426f7130579c94f3310" id="r_a9d80dca2c907b426f7130579c94f3310"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a> (const double &amp;<a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a>)</td></tr>
+<tr class="memdesc:a9d80dca2c907b426f7130579c94f3310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Specify amplitude of deflection from straight horizontal line.  <br /></td></tr>
+<tr class="separator:a9d80dca2c907b426f7130579c94f3310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a7426303864ea2d34aeba0a3f6324f" id="r_a53a7426303864ea2d34aeba0a3f6324f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a53a7426303864ea2d34aeba0a3f6324f">WarpedLine</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a53a7426303864ea2d34aeba0a3f6324f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a53a7426303864ea2d34aeba0a3f6324f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ee796906c0caa7e94f277f6fc499e1" id="r_ae2ee796906c0caa7e94f277f6fc499e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">operator=</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;)</td></tr>
+<tr class="memdesc:ae2ee796906c0caa7e94f277f6fc499e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ae2ee796906c0caa7e94f277f6fc499e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb07fb7f06d42e2008afe65d8750cad" id="r_a4cb07fb7f06d42e2008afe65d8750cad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">~WarpedLine</a> ()</td></tr>
+<tr class="memdesc:a4cb07fb7f06d42e2008afe65d8750cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:a4cb07fb7f06d42e2008afe65d8750cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeef89818148ee3a305c561e91c8851d" id="r_aaeef89818148ee3a305c561e91c8851d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:aaeef89818148ee3a305c561e91c8851d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position vector at Lagrangian coordinate zeta.  <br /></td></tr>
+<tr class="separator:aaeef89818148ee3a305c561e91c8851d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415d50f6bb49bd903015b51c66e93cd2" id="r_a415d50f6bb49bd903015b51c66e93cd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a415d50f6bb49bd903015b51c66e93cd2">position</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a415d50f6bb49bd903015b51c66e93cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version.  <br /></td></tr>
+<tr class="separator:a415d50f6bb49bd903015b51c66e93cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea69e0dccb0af23ffeb8cd98c0aa6853" id="r_aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a> ()</td></tr>
+<tr class="memdesc:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to amplitude.  <br /></td></tr>
+<tr class="separator:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4157cd4ff2e80f33b106b7ed4e4d804" id="r_aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aa4157cd4ff2e80f33b106b7ed4e4d804">ngeom_data</a> () const</td></tr>
+<tr class="memdesc:aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of Data does the shape of the object depend on? None.  <br /></td></tr>
+<tr class="separator:aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d80dca2c907b426f7130579c94f3310" id="r_a9d80dca2c907b426f7130579c94f3310"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a> (const double &amp;<a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a>)</td></tr>
+<tr class="memdesc:a9d80dca2c907b426f7130579c94f3310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Specify amplitude of deflection from straight horizontal line.  <br /></td></tr>
+<tr class="separator:a9d80dca2c907b426f7130579c94f3310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a7426303864ea2d34aeba0a3f6324f" id="r_a53a7426303864ea2d34aeba0a3f6324f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a53a7426303864ea2d34aeba0a3f6324f">WarpedLine</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a53a7426303864ea2d34aeba0a3f6324f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a53a7426303864ea2d34aeba0a3f6324f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ee796906c0caa7e94f277f6fc499e1" id="r_ae2ee796906c0caa7e94f277f6fc499e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">operator=</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;)</td></tr>
+<tr class="memdesc:ae2ee796906c0caa7e94f277f6fc499e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ae2ee796906c0caa7e94f277f6fc499e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb07fb7f06d42e2008afe65d8750cad" id="r_a4cb07fb7f06d42e2008afe65d8750cad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">~WarpedLine</a> ()</td></tr>
+<tr class="memdesc:a4cb07fb7f06d42e2008afe65d8750cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:a4cb07fb7f06d42e2008afe65d8750cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeef89818148ee3a305c561e91c8851d" id="r_aaeef89818148ee3a305c561e91c8851d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:aaeef89818148ee3a305c561e91c8851d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position vector at Lagrangian coordinate zeta.  <br /></td></tr>
+<tr class="separator:aaeef89818148ee3a305c561e91c8851d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415d50f6bb49bd903015b51c66e93cd2" id="r_a415d50f6bb49bd903015b51c66e93cd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a415d50f6bb49bd903015b51c66e93cd2">position</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a415d50f6bb49bd903015b51c66e93cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version.  <br /></td></tr>
+<tr class="separator:a415d50f6bb49bd903015b51c66e93cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea69e0dccb0af23ffeb8cd98c0aa6853" id="r_aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a> ()</td></tr>
+<tr class="memdesc:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to amplitude.  <br /></td></tr>
+<tr class="separator:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d80dca2c907b426f7130579c94f3310" id="r_a9d80dca2c907b426f7130579c94f3310"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a> (const double &amp;<a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a>)</td></tr>
+<tr class="memdesc:a9d80dca2c907b426f7130579c94f3310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Specify amplitude of deflection from straight horizontal line.  <br /></td></tr>
+<tr class="separator:a9d80dca2c907b426f7130579c94f3310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a7426303864ea2d34aeba0a3f6324f" id="r_a53a7426303864ea2d34aeba0a3f6324f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a53a7426303864ea2d34aeba0a3f6324f">WarpedLine</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;dummy)</td></tr>
+<tr class="memdesc:a53a7426303864ea2d34aeba0a3f6324f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a53a7426303864ea2d34aeba0a3f6324f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ee796906c0caa7e94f277f6fc499e1" id="r_ae2ee796906c0caa7e94f277f6fc499e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">operator=</a> (const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;)</td></tr>
+<tr class="memdesc:ae2ee796906c0caa7e94f277f6fc499e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ae2ee796906c0caa7e94f277f6fc499e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cb07fb7f06d42e2008afe65d8750cad" id="r_a4cb07fb7f06d42e2008afe65d8750cad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">~WarpedLine</a> ()</td></tr>
+<tr class="memdesc:a4cb07fb7f06d42e2008afe65d8750cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:a4cb07fb7f06d42e2008afe65d8750cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeef89818148ee3a305c561e91c8851d" id="r_aaeef89818148ee3a305c561e91c8851d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">position</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:aaeef89818148ee3a305c561e91c8851d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position vector at Lagrangian coordinate zeta.  <br /></td></tr>
+<tr class="separator:aaeef89818148ee3a305c561e91c8851d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415d50f6bb49bd903015b51c66e93cd2" id="r_a415d50f6bb49bd903015b51c66e93cd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#a415d50f6bb49bd903015b51c66e93cd2">position</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;zeta, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a415d50f6bb49bd903015b51c66e93cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version.  <br /></td></tr>
+<tr class="separator:a415d50f6bb49bd903015b51c66e93cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea69e0dccb0af23ffeb8cd98c0aa6853" id="r_aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">ampl</a> ()</td></tr>
+<tr class="memdesc:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to amplitude.  <br /></td></tr>
+<tr class="separator:aea69e0dccb0af23ffeb8cd98c0aa6853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4157cd4ff2e80f33b106b7ed4e4d804" id="r_aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#aa4157cd4ff2e80f33b106b7ed4e4d804">ngeom_data</a> () const</td></tr>
+<tr class="memdesc:aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of Data does the shape of the object depend on? None.  <br /></td></tr>
+<tr class="separator:aa4157cd4ff2e80f33b106b7ed4e4d804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac44286e84ff213e67e0f247d00ad50af" id="r_ac44286e84ff213e67e0f247d00ad50af"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">Ampl</a></td></tr>
+<tr class="memdesc:ac44286e84ff213e67e0f247d00ad50af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Amplitude of perturbation.  <br /></td></tr>
+<tr class="separator:ac44286e84ff213e67e0f247d00ad50af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Warped line in 2D space. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00066">66</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9d80dca2c907b426f7130579c94f3310" name="a9d80dca2c907b426f7130579c94f3310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d80dca2c907b426f7130579c94f3310">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ampl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Specify amplitude of deflection from straight horizontal line. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00072">72</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00111">ampl()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="a53a7426303864ea2d34aeba0a3f6324f" name="a53a7426303864ea2d34aeba0a3f6324f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a7426303864ea2d34aeba0a3f6324f">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00078">78</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4cb07fb7f06d42e2008afe65d8750cad" name="a4cb07fb7f06d42e2008afe65d8750cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cb07fb7f06d42e2008afe65d8750cad">&#9670;&#160;</a></span>~WarpedLine() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::~WarpedLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00091">91</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9d80dca2c907b426f7130579c94f3310" name="a9d80dca2c907b426f7130579c94f3310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d80dca2c907b426f7130579c94f3310">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ampl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Specify amplitude of deflection from straight horizontal line. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00051">51</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00111">ampl()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="a53a7426303864ea2d34aeba0a3f6324f" name="a53a7426303864ea2d34aeba0a3f6324f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a7426303864ea2d34aeba0a3f6324f">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00057">57</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4cb07fb7f06d42e2008afe65d8750cad" name="a4cb07fb7f06d42e2008afe65d8750cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cb07fb7f06d42e2008afe65d8750cad">&#9670;&#160;</a></span>~WarpedLine() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::~WarpedLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00070">70</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9d80dca2c907b426f7130579c94f3310" name="a9d80dca2c907b426f7130579c94f3310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d80dca2c907b426f7130579c94f3310">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>ampl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Specify amplitude of deflection from straight horizontal line. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00219">219</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00111">ampl()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="a53a7426303864ea2d34aeba0a3f6324f" name="a53a7426303864ea2d34aeba0a3f6324f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a7426303864ea2d34aeba0a3f6324f">&#9670;&#160;</a></span>WarpedLine() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::WarpedLine </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00225">225</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4cb07fb7f06d42e2008afe65d8750cad" name="a4cb07fb7f06d42e2008afe65d8750cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cb07fb7f06d42e2008afe65d8750cad">&#9670;&#160;</a></span>~WarpedLine() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WarpedLine::~WarpedLine </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00238">238</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aea69e0dccb0af23ffeb8cd98c0aa6853" name="aea69e0dccb0af23ffeb8cd98c0aa6853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea69e0dccb0af23ffeb8cd98c0aa6853">&#9670;&#160;</a></span>ampl() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double &amp; WarpedLine::ampl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00111">111</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00484">main()</a>, <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00711">main()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00072">WarpedLine()</a>.</p>
+
+</div>
+</div>
+<a id="aea69e0dccb0af23ffeb8cd98c0aa6853" name="aea69e0dccb0af23ffeb8cd98c0aa6853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea69e0dccb0af23ffeb8cd98c0aa6853">&#9670;&#160;</a></span>ampl() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double &amp; WarpedLine::ampl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00090">90</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="aea69e0dccb0af23ffeb8cd98c0aa6853" name="aea69e0dccb0af23ffeb8cd98c0aa6853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea69e0dccb0af23ffeb8cd98c0aa6853">&#9670;&#160;</a></span>ampl() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double &amp; WarpedLine::ampl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00258">258</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="aa4157cd4ff2e80f33b106b7ed4e4d804" name="aa4157cd4ff2e80f33b106b7ed4e4d804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4157cd4ff2e80f33b106b7ed4e4d804">&#9670;&#160;</a></span>ngeom_data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned WarpedLine::ngeom_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How many items of Data does the shape of the object depend on? None. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00115">115</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa4157cd4ff2e80f33b106b7ed4e4d804" name="aa4157cd4ff2e80f33b106b7ed4e4d804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4157cd4ff2e80f33b106b7ed4e4d804">&#9670;&#160;</a></span>ngeom_data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned WarpedLine::ngeom_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How many items of Data does the shape of the object depend on? None. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00262">262</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae2ee796906c0caa7e94f277f6fc499e1" name="ae2ee796906c0caa7e94f277f6fc499e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ee796906c0caa7e94f277f6fc499e1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00084">84</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae2ee796906c0caa7e94f277f6fc499e1" name="ae2ee796906c0caa7e94f277f6fc499e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ee796906c0caa7e94f277f6fc499e1">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00063">63</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae2ee796906c0caa7e94f277f6fc499e1" name="ae2ee796906c0caa7e94f277f6fc499e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ee796906c0caa7e94f277f6fc499e1">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classWarpedLine.html">WarpedLine</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00231">231</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+</div>
+</div>
+<a id="a415d50f6bb49bd903015b51c66e93cd2" name="a415d50f6bb49bd903015b51c66e93cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415d50f6bb49bd903015b51c66e93cd2">&#9670;&#160;</a></span>position() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00104">104</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00094">position()</a>.</p>
+
+</div>
+</div>
+<a id="a415d50f6bb49bd903015b51c66e93cd2" name="a415d50f6bb49bd903015b51c66e93cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415d50f6bb49bd903015b51c66e93cd2">&#9670;&#160;</a></span>position() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00083">83</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00094">position()</a>.</p>
+
+</div>
+</div>
+<a id="a415d50f6bb49bd903015b51c66e93cd2" name="a415d50f6bb49bd903015b51c66e93cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415d50f6bb49bd903015b51c66e93cd2">&#9670;&#160;</a></span>position() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Forward to steady version. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00251">251</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00094">position()</a>.</p>
+
+</div>
+</div>
+<a id="aaeef89818148ee3a305c561e91c8851d" name="aaeef89818148ee3a305c561e91c8851d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeef89818148ee3a305c561e91c8851d">&#9670;&#160;</a></span>position() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position vector at Lagrangian coordinate zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00094">94</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00143">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;::actions_before_newton_solve()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00104">position()</a>.</p>
+
+</div>
+</div>
+<a id="aaeef89818148ee3a305c561e91c8851d" name="aaeef89818148ee3a305c561e91c8851d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeef89818148ee3a305c561e91c8851d">&#9670;&#160;</a></span>position() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position vector at Lagrangian coordinate zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html#l00073">73</a> of file <a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<a id="aaeef89818148ee3a305c561e91c8851d" name="aaeef89818148ee3a305c561e91c8851d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeef89818148ee3a305c561e91c8851d">&#9670;&#160;</a></span>position() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WarpedLine::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position vector at Lagrangian coordinate zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html#l00241">241</a> of file <a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">Ampl</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac44286e84ff213e67e0f247d00ad50af" name="ac44286e84ff213e67e0f247d00ad50af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac44286e84ff213e67e0f247d00ad50af">&#9670;&#160;</a></span>Ampl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double WarpedLine::Ampl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Amplitude of perturbation. </p>
+
+<p class="definition">Definition at line <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00123">123</a> of file <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00111">ampl()</a>, <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00094">position()</a>, and <a class="el" href="prescribed__displ__lagr__mult_8cc_source.html#l00072">WarpedLine()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="prescribed__displ__lagr__mult_8cc_source.html">prescribed_displ_lagr_mult.cc</a></li>
+<li><a class="el" href="prescribed__displ__lagr__mult2_8cc_source.html">prescribed_displ_lagr_mult2.cc</a></li>
+<li><a class="el" href="prescribed__displ__lagr__mult__precond_8cc_source.html">prescribed_displ_lagr_mult_precond.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

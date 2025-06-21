@@ -1,0 +1,61 @@
+\doxysection{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc File Reference}
+\hypertarget{rayleigh__instability__soluble__surfactant_8cc}{}\label{rayleigh__instability__soluble__surfactant_8cc}\index{rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Single fluid interface problem including transport of an insoluble surfactant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namepspace for global parameters, chosen from Campana et al. as in the axisymmetric problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{argc}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for single fluid axisymmetric horizontal interface problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a012c14d34c5c0e65d114711c34a4361e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+absorption}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Alpha for absorption kinetics. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9da8be10d9e20eb0329af7fd8d6e0e98}{Global\+\_\+\+Physical\+\_\+\+Variables\+::K}} = 0.\+01
+\begin{DoxyCompactList}\small\item\em K parameter that describes solubility number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af252119266d6a28d2111d9d52bf59e87}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe}} = 10000.\+0
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d381c0d7044e78db412ca695e1edca0}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe\+St}} = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af252119266d6a28d2111d9d52bf59e87}{Pe}}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66121b333d26605f8f30ad916d8082f0}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pe\+\_\+reference\+\_\+scale}} =1.\+0
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5fdab26ae05957e84318279a47f71bde}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Diff}} = 1.\+0/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af252119266d6a28d2111d9d52bf59e87}{Pe}}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{rayleigh__instability__soluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}!main@{main}}
+\index{main@{main}!rayleigh\_instability\_soluble\_surfactant.cc@{rayleigh\_instability\_soluble\_surfactant.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for single fluid axisymmetric horizontal interface problem. 
+
+Maximum time
+
+Duration of timestep
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00943}{943}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, and \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}.
+

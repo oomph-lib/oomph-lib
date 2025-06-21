@@ -1,0 +1,57 @@
+\doxysection{static\+\_\+fish.\+cc File Reference}
+\hypertarget{static__fish_8cc}{}\label{static__fish_8cc}\index{static\_fish.cc@{static\_fish.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable fish mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classElasticFishProblem}{Elastic\+Fish\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Boundary-\/driven elastic deformation of fish-\/shaped domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticFishMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a313e702a9e8fdec808702c9bbf38b192}{Global\+\_\+\+Physical\+\_\+\+Variables\+::body\+\_\+force}} (\mbox{\hyperlink{classElasticFishMesh}{const}} \mbox{\hyperlink{classElasticFishMesh}{double}} \&\mbox{\hyperlink{classElasticFishMesh}{t}}, \mbox{\hyperlink{classElasticFishMesh}{const}} \mbox{\hyperlink{classElasticFishMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticFishMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticFishMesh}{xi}}, \mbox{\hyperlink{classElasticFishMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticFishMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticFishMesh}{b}})
+\begin{DoxyCompactList}\small\item\em Body force vector\+: Vertically downwards with magnitude Gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{int}} \mbox{\hyperlink{static__fish_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver for simple elastic problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticFishMesh}{Strain\+Energy\+Function}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Body force. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{static__fish_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{static__fish_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{static\_fish.cc@{static\_fish.cc}!main@{main}}
+\index{main@{main}!static\_fish.cc@{static\_fish.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticFishMesh}{int}} main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver for simple elastic problem. 
+
+
+
+Definition at line \mbox{\hyperlink{static__fish_8cc_source_l00392}{392}} of file \mbox{\hyperlink{static__fish_8cc_source}{static\+\_\+fish.\+cc}}.
+
+
+
+References \mbox{\hyperlink{static__fish_8cc_source_l00154}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{static__fish_8cc_source_l00145}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{static__fish_8cc_source_l00148}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{static__fish_8cc_source_l00151}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{static__fish_8cc_source_l00142}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

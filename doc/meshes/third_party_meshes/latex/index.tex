@@ -1,0 +1,112 @@
+\chapter{Existing (unstructured) meshes\+: Wrappers to third-\/party mesh generators}
+\hypertarget{index}{}\label{index}\index{Existing (unstructured) meshes: Wrappers to third-\/party mesh generators@{Existing (unstructured) meshes: Wrappers to third-\/party mesh generators}}
+{\ttfamily oomph-\/lib} does not provide its own unstructured mesh generator but has several mesh classes that generate unstructured meshes from the output of third-\/party unstructured mesh generators.
+
+{\bfseries{Notes\+:}}
+\begin{DoxyEnumerate}
+\item The unstructured tet and triangle meshes listed below can {\bfseries{not}} be used with {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation or node-\/update procedures. A suitably fine mesh has to be generated offline by the third-\/party mesh generator. If required, node-\/updates (in response to changes in the domain boundaries) have to be performed manually. ~\newline
+~\newline
+
+\item For some element types, the mesh generation process is not particularly efficient (yet!). A suitable warning message is issued in such cases. ~\newline
+~\newline
+
+\item Since the third-\/party mesh generators tend to triangulate the domain with simplex elements, curvilinear boundaries are not resolved more accurately by using higher-\/order elements unless some post-\/processing is performed. ~\newline
+~\newline
+
+\item The meshes have not been tested as extensively as {\ttfamily oomph-\/lib\textquotesingle{}s} structured meshes, described \href{../../mesh_list/html/index.html}{\texttt{ elsewhere.}} ~\newline
+~\newline
+. ~\newline
+
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh_list}{}\doxysection{\texorpdfstring{Mesh list}{Mesh list}}\label{index_mesh_list}
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+{\bfseries{Mesh}}  &{\bfseries{Representative Mesh plot}}   \\\cline{1-2}
+\href{../../mesh_from_triangle/html/index.html}{\texttt{ {\bfseries{ Triangle\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item This class creates {\ttfamily oomph-\/lib} meshes based on the output from \href{http://www.cs.cmu.edu/~jrs}{\texttt{ J.\+R.\+Shewchuk\textquotesingle{}s}} Delaunay mesh generator \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle}}}
+\item The mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily TElement$<$2,\+NNODE\+\_\+1\+D$>$}.
+\end{DoxyItemize}{\bfseries{Example driver codes\+:}} ~\newline
+
+\begin{DoxyItemize}
+\item The use of \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle}}} and the {\ttfamily Triangle\+Mesh} class are explained in a \href{../../mesh_from_triangle/html/index.html}{\texttt{ separate tutorial.}} ~\newline
+~\newline
+
+\item In \href{../../mesh_from_xfig/html/index.html}{\texttt{ another tutorial}} we demonstrate how the code \href{../../../../demo_drivers/meshing/mesh_from_xfig_triangle/fig2poly.cc}{\texttt{ fig2poly.\+cc}} may be used to generate input files for \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle}}} based on the output from the open-\/source drawing program \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig.}}
+\end{DoxyItemize}& 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.75\textwidth]{oomph_mesh}}
+\end{DoxyImageNoCaption}
+   \\\cline{1-2}
+\href{../../mesh_from_tetgen/html/index.html}{\texttt{ {\bfseries{ Tetgen\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item This class creates {\ttfamily oomph-\/lib} meshes based on the output from \href{http://www.wias-berlin.de/~si }{\texttt{ Hang Si\textquotesingle{}s}} open-\/source mesh generator \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }}.
+\item The mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily TElement$<$3,\+NNODE\+\_\+1\+D$>$}.
+\end{DoxyItemize}{\bfseries{Example driver codes\+:}} ~\newline
+
+\begin{DoxyItemize}
+\item The use of \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }} and the {\ttfamily Tetgen\+Mesh} class are explained in a \href{../../mesh_from_tetgen/html/index.html}{\texttt{ separate tutorial.}}
+\end{DoxyItemize}& 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.75\textwidth]{tetgen_mesh}}
+\end{DoxyImageNoCaption}
+   \\\cline{1-2}
+\href{../../mesh_from_vmtk/html/index.html}{\texttt{ {\bfseries{ Generating meshes from medical scans with VMTK }}}} ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item We provide the option to generate tetgen-\/based meshes for physiological fluid-\/structure interaction problems, using the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit (VMTK).}}
+\end{DoxyItemize}{\bfseries{Example driver codes and tutorials\+:}} ~\newline
+
+\begin{DoxyItemize}
+\item We provide a \href{../../mesh_from_vmtk/html/index.html}{\texttt{ separate tutorial}} that shows how to generate {\ttfamily oomph-\/lib} meshes from medical images.
+\item The methodology is used in the following driver codes\+: ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item \href{../../../solid/vmtk_solid/html/index.html}{\texttt{ The inflation of a blood vessel.}} ~\newline
+~\newline
+
+\item \href{../../../navier_stokes/vmtk_fluid/html/index.html}{\texttt{ Finite Reynolds number flow through a (rigid) iliac bifurcation.}} ~\newline
+~\newline
+
+\item \href{../../../interaction/vmtk_fsi/html/index.html}{\texttt{ Finite Reynolds number flow through an elastic iliac bifurcation.}} ~\newline
+~\newline
+
+\end{DoxyItemize}
+\end{DoxyItemize}& 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.75\textwidth]{iliac}}
+\end{DoxyImageNoCaption}
+   \\\cline{1-2}
+\href{../../mesh_from_geompack/html/index.html}{\texttt{ {\bfseries{ Geompack\+Quad\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item This class creates {\ttfamily oomph-\/lib} meshes based on the output from Barry Joe\textquotesingle{}s mesh generator \href{http://members.shaw.ca/bjoe/}{\texttt{ {\ttfamily Geompack++}, }} available as freeware at \href{http://members.shaw.ca/bjoe/}{\texttt{ http\+://members.\+shaw.\+ca/bjoe/.}}
+\item The mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,2$>$}.
+\end{DoxyItemize}{\bfseries{Example driver codes\+:}} ~\newline
+
+\begin{DoxyItemize}
+\item The use of \href{http://members.shaw.ca/bjoe/}{\texttt{ {\ttfamily Geompack++} }} and the {\ttfamily Geompack\+Quad\+Mesh} class are explained in a \href{../../mesh_from_geompack/html/index.html}{\texttt{ separate tutorial.}}
+\end{DoxyItemize}& 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.75\textwidth]{geompack_mesh}}
+\end{DoxyImageNoCaption}
+   \\\cline{1-2}
+\end{longtabu}
+\end{center}  ~\newline
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

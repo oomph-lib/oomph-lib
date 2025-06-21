@@ -1,0 +1,240 @@
+\doxysection{oomph\+::Annular\+Domain Class Reference}
+\hypertarget{classoomph_1_1AnnularDomain}{}\label{classoomph_1_1AnnularDomain}\index{oomph::AnnularDomain@{oomph::AnnularDomain}}
+
+
+Annular domain.  
+
+
+
+
+{\ttfamily \#include $<$annular\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Annular\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1AnnularDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularDomain_aa0b4ad9d8e63de8aa0dc2d462a016143}{Annular\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{azimuthal\+\_\+fraction}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ntheta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nr}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{a}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{h}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{phi}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify azimuthal fraction (1.\+0 is 360 degrees) number of macro elements in azimuthal and radial direction, inner radius and thickness. Rotate mesh by angle phi. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularDomain_a15806cf56620b06eddfaf3708fcb22a2}{Annular\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularDomain}{Annular\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_afbfd776654eb37e3e0b48cf1d1c3efa1}{operator=}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularDomain}{Annular\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularDomain_a99ee51c9e5fd12fdd123ede8da09c483}{\texorpdfstring{$\sim$}{\string~}\+Annular\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_ade8cfa0e6f2d41e7d3877250321bfff3}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_ac6ea648ff2b80c412c6aec3a071945af}{Azimuthal\+\_\+fraction}}
+\begin{DoxyCompactList}\small\item\em Azimuthal fraction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_a41bead396f1b49783caf334e56a6eb23}{Inner\+\_\+radius}}
+\begin{DoxyCompactList}\small\item\em Inner radius. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_a34008644354ffc3e7f48505557d95755}{Thickness}}
+\begin{DoxyCompactList}\small\item\em Thickness. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_a42f197d2b806a961395f905d947b3e6e}{Ntheta}}
+\begin{DoxyCompactList}\small\item\em Number of macro elements in azimuthal direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0cbd02650762aa5b6baf32936e553b64}{Nr}}
+\begin{DoxyCompactList}\small\item\em Number of macro elements in radial direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}{Phi}}
+\begin{DoxyCompactList}\small\item\em Rotation angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Annular domain. 
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00039}{39}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AnnularDomain_aa0b4ad9d8e63de8aa0dc2d462a016143}\label{classoomph_1_1AnnularDomain_aa0b4ad9d8e63de8aa0dc2d462a016143} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!AnnularDomain@{AnnularDomain}}
+\index{AnnularDomain@{AnnularDomain}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{AnnularDomain()}{AnnularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Annular\+Domain\+::\+Annular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{azimuthal\+\_\+fraction,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{ntheta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nr,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{phi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Specify azimuthal fraction (1.\+0 is 360 degrees) number of macro elements in azimuthal and radial direction, inner radius and thickness. Rotate mesh by angle phi. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00045}{45}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a15806cf56620b06eddfaf3708fcb22a2}\label{classoomph_1_1AnnularDomain_a15806cf56620b06eddfaf3708fcb22a2} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!AnnularDomain@{AnnularDomain}}
+\index{AnnularDomain@{AnnularDomain}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{AnnularDomain()}{AnnularDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Annular\+Domain\+::\+Annular\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularDomain}{Annular\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1AnnularDomain_a99ee51c9e5fd12fdd123ede8da09c483}\label{classoomph_1_1AnnularDomain_a99ee51c9e5fd12fdd123ede8da09c483} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!````~AnnularDomain@{\texorpdfstring{$\sim$}{\string~}AnnularDomain}}
+\index{````~AnnularDomain@{\texorpdfstring{$\sim$}{\string~}AnnularDomain}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AnnularDomain()}{\string~AnnularDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Annular\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Annular\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00075}{75}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AnnularDomain_ade8cfa0e6f2d41e7d3877250321bfff3}\label{classoomph_1_1AnnularDomain_ade8cfa0e6f2d41e7d3877250321bfff3} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Annular\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
+
+Vector representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) 
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00118}{118}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{annular__domain_8h_source_l00090}{Azimuthal\+\_\+fraction}}, \mbox{\hyperlink{annular__domain_8h_source_l00093}{Inner\+\_\+radius}}, \mbox{\hyperlink{annular__domain_8h_source_l00102}{Nr}}, \mbox{\hyperlink{annular__domain_8h_source_l00099}{Ntheta}}, \mbox{\hyperlink{annular__domain_8h_source_l00105}{Phi}}, and \mbox{\hyperlink{annular__domain_8h_source_l00096}{Thickness}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_afbfd776654eb37e3e0b48cf1d1c3efa1}\label{classoomph_1_1AnnularDomain_afbfd776654eb37e3e0b48cf1d1c3efa1} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Annular\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularDomain}{Annular\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1AnnularDomain_ac6ea648ff2b80c412c6aec3a071945af}\label{classoomph_1_1AnnularDomain_ac6ea648ff2b80c412c6aec3a071945af} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Azimuthal\_fraction@{Azimuthal\_fraction}}
+\index{Azimuthal\_fraction@{Azimuthal\_fraction}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Azimuthal\_fraction}{Azimuthal\_fraction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Annular\+Domain\+::\+Azimuthal\+\_\+fraction\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Azimuthal fraction. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00090}{90}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a41bead396f1b49783caf334e56a6eb23}\label{classoomph_1_1AnnularDomain_a41bead396f1b49783caf334e56a6eb23} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Inner\_radius@{Inner\_radius}}
+\index{Inner\_radius@{Inner\_radius}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Inner\_radius}{Inner\_radius}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Annular\+Domain\+::\+Inner\+\_\+radius\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Inner radius. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00093}{93}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a0cbd02650762aa5b6baf32936e553b64}\label{classoomph_1_1AnnularDomain_a0cbd02650762aa5b6baf32936e553b64} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Nr@{Nr}}
+\index{Nr@{Nr}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Nr}{Nr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} oomph\+::\+Annular\+Domain\+::\+Nr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of macro elements in radial direction. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00102}{102}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a42f197d2b806a961395f905d947b3e6e}\label{classoomph_1_1AnnularDomain_a42f197d2b806a961395f905d947b3e6e} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Ntheta@{Ntheta}}
+\index{Ntheta@{Ntheta}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Ntheta}{Ntheta}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} oomph\+::\+Annular\+Domain\+::\+Ntheta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of macro elements in azimuthal direction. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00099}{99}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040}\label{classoomph_1_1AnnularDomain_a0280549bd7a88cabb84a7223ed114040} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Phi@{Phi}}
+\index{Phi@{Phi}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Phi}{Phi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Annular\+Domain\+::\+Phi\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rotation angle. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00105}{105}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1AnnularDomain_a34008644354ffc3e7f48505557d95755}\label{classoomph_1_1AnnularDomain_a34008644354ffc3e7f48505557d95755} 
+\index{oomph::AnnularDomain@{oomph::AnnularDomain}!Thickness@{Thickness}}
+\index{Thickness@{Thickness}!oomph::AnnularDomain@{oomph::AnnularDomain}}
+\doxysubsubsection{\texorpdfstring{Thickness}{Thickness}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Annular\+Domain\+::\+Thickness\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Thickness. 
+
+
+
+Definition at line \mbox{\hyperlink{annular__domain_8h_source_l00096}{96}} of file \mbox{\hyperlink{annular__domain_8h_source}{annular\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{annular__domain_8h_source_l00118}{macro\+\_\+element\+\_\+boundary()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{annular__domain_8h}{annular\+\_\+domain.\+h}}\end{DoxyCompactItemize}

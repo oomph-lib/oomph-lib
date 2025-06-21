@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This is a slightly more advanced example in which we demonstrate the use of spatial adaptivity in time-dependent problems. We discuss the implementation of the spatially adaptive version of <code>oomph-lib's</code> unsteady Newton solver, <code>Problem::unsteady_newton_solve(...)</code>, and explain why the assignment of initial conditions should be performed by overloading the <code>Problem::set_initial_condition()</code> function. We also discuss briefly how <code>oomph-lib's</code> generic dump and restart functions deal with adaptive meshes.</p>
+<p>For this purpose consider the following problem:</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The two-dimensional unsteady heat equation with flux boundary conditions in a quarter circle domain</b> </center> Solve  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
+= \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="216" height="38"/>
+</p>
+ in the quarter-circle domain <img class="formulaInl" alt="$ D $" src="form_1.png" width="10" height="10"/>, bounded by the coordinate axes and the unit circle, subject to Neumann boundary conditions,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}=
+- \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}=
+g_0, 
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_2.png" width="280" height="34"/>
+</p>
+ along the horizontal domain boundary <img class="formulaInl" alt="$ \partial D_{Neumann} = 
+\{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} $" src="form_3.png" width="231" height="14"/>, and to Dirichlet boundary conditions,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. u\right|_{\partial D_{Dirichlet}}=h_0, 
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_4.png" width="156" height="15"/>
+</p>
+ elsewhere. <div class="image">
+<img src="domain.gif" alt=""/>
+<div class="caption">
+Sketch of the domain and the boundary conditions. </div></div>
+  The initial conditions are given by  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u(x_1,x_2,t=0)=k_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_5.png" width="213" height="14"/>
+</p>
+ where the functions <img class="formulaInl" alt="$ f, g_0, \ h_0$" src="form_6.png" width="45" height="13"/> and <img class="formulaInl" alt="$ k_0$" src="form_7.png" width="11" height="13"/> are given.   </td></tr>
+</table>
+<br  />
+ </center><p>We choose the functions <img class="formulaInl" alt="$ f, g_0, \ h_0$" src="form_6.png" width="45" height="13"/> and <img class="formulaInl" alt="$ k_0$" src="form_7.png" width="11" height="13"/> so that  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_0(x_1,x_2,t) = \tanh\bigg[1-\alpha\bigg(\tan\Phi
+\big(x_1-\beta\tanh[ \gamma\cos\left(2\pi
+t\right)]\big)- x_2\bigg)\bigg]
+ \ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_8.png" width="421" height="31"/>
+</p>
+<p> is the exact solution.</p>
+<p>The solution represents the "usual" tanh profile, whose steepness is controlled by the parameter <img class="formulaInl" alt="$ \alpha $" src="form_9.png" width="8" height="6"/> so that for <img class="formulaInl" alt="$ \alpha
+\gg 1 $" src="form_10.png" width="33" height="10"/> the solution approaches a step. The step is oriented at an angle <img class="formulaInl" alt="$ \Phi $" src="form_11.png" width="9" height="10"/> against the <img class="formulaInl" alt="$ x_1-$" src="form_12.png" width="23" height="9"/> axis and its position varies periodically. The parameter <img class="formulaInl" alt="$ \beta $" src="form_13.png" width="9" height="13"/> controls the amplitude of the step's lateral displacement, while <img class="formulaInl" alt="$ \gamma $" src="form_14.png" width="9" height="9"/> determines the rate at which its position changes. For <img class="formulaInl" alt="$ \gamma \gg 1 $" src="form_15.png" width="34" height="11"/> , the step remains stationary for most of the period and then translates rapidly parallel to the <img class="formulaInl" alt="$ x_1- $" src="form_16.png" width="23" height="9"/> axis, making this a very challenging problem.</p>
+<p>The figure below shows a snapshot of the <a href="../figures/step_soln.avi">animated solution</a>, obtained from the spatially adaptive simulation discussed below, for the parameter values <img class="formulaInl" alt="$ \alpha=10, \ 
+\Phi=45^o, \ \beta=0.3, \ \gamma=5. $" src="form_17.png" width="183" height="13"/></p>
+<div class="image">
+<img src="step_soln.gif" alt=""/>
+<div class="caption">
+Snapshot of the solution. </div></div>
+ <p>The mesh adaptation in response to the translation of the step can be seen more clearly in this contour plot, taken from <a href="../figures/unsteady_heat_contour.avi">another animation of the solution</a>.</p>
+<div class="image">
+<img src="unsteady_heat_contour.gif" alt=""/>
+<div class="caption">
+Contour plot of the solution. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="spatial_adapt"></a>
+Background: Spatial adaptivity in time-dependent problems</h1>
+<p>Enabling spatial adaptivity in time-dependent problems involves essentially the same steps as for steady problems:</p><ul>
+<li>The domain must be discretised with a mesh that is derived from the <code>RefineableMesh</code> base class.</li>
+<li>An <code>ErrorEstimator</code> object must be created and passed to the mesh.</li>
+<li>The empty virtual functions <code>Problem::actions_before_adapt()</code> and <code>Problem::actions_after_adapt()</code> may be overloaded to perform any actions that are required before or after the mesh adaptation, such as the deletion or recreation of any <code>FaceElements</code> that apply flux boundary conditions.</li>
+</ul>
+<p>Once these steps have been performed, a spatially adaptive solution can be computed with a three-argument version of <code>oomph-lib's</code> unsteady Newton solver <code>Problem::unsteady_newton_solve(...)</code>:</p>
+<div class="fragment"><div class="line">Problem::unsteady_newton_solve(dt,max_adapt,first)</div>
+</div><!-- fragment --><p>The arguments to this function are as follows:</p><ul>
+<li>The <code>double</code> <code>dt</code> specifies the (fixed) timestep.</li>
+<li>The <code>unsigned</code> <code>max_adapt</code> specifies the maximum number of spatial adaptations allowed.</li>
+<li>The <code>bool</code> <code>first</code> indicates if the first timestep is performed. This argument is required to allow the automatic re-assignment of the initial conditions following any mesh adaptations during the computation of the first timestep.</li>
+</ul>
+<p>Given these arguments, the unsteady Newton solver solves the non-linear system of spatially and temporally discretised equations to advance the solution from time <img class="formulaInl" alt="$ t $" src="form_18.png" width="5" height="9"/> to <img class="formulaInl" alt="$ t + dt $" src="form_19.png" width="31" height="11"/> . Once the solution at time <img class="formulaInl" alt="$ t + dt $" src="form_19.png" width="31" height="11"/> has been obtained, error estimates are computed for all elements. If any elemental error estimates are outside the target range, the solution is rejected and the mesh is adapted. In the course of mesh adaptation the existing solution (the nodal values <em>and</em> the history values) at time <img class="formulaInl" alt="$ t $" src="form_18.png" width="5" height="9"/> are interpolated onto the new mesh before recomputing the solution. This process is repeated until the error estimates are within the target range, or until the maximum number of adaptations, specified by the parameter <code>max_adapt</code>, is exceeded, just as in the steady case.</p>
+<p>Here is an illustration of the procedure for a 1D problem:</p>
+<div class="image">
+<img src="adapted.gif" alt=""/>
+<div class="caption">
+Sketch of the mesh adaptation for time-dependent problems. </div></div>
+ <p>This procedure is the obvious generalisation of the procedure for steady problems. However, in time-dependent problems two additional issues arise:</p><ol type="1">
+<li>In a steady problem the interpolation of the solution onto the adapted mesh (step 4 in the above sketch) merely serves to provide an initial guess for the solution on the refined mesh. It is irrelevant if the interpolation from the coarse mesh provides a poor approximation of the actual solution as the solution is completely recomputed anyway. <br  />
+<br  />
+ In an unsteady problem, we also have to interpolate the history values (the solution at previous timesteps in a BDF scheme) onto the adapted mesh. Their values are <em>not</em> changed when the solution is advanced from time <img class="formulaInl" alt="$ t $" src="form_18.png" width="5" height="9"/> to <img class="formulaInl" alt="$ t+ dt. $" src="form_20.png" width="35" height="11"/> In time-dependent problems, the benefit of repeated mesh adaptations (i.e. <code>max_adapt</code> &gt; 1) is therefore limited by the fact that mesh refinement cannot improve their accuracy &ndash; the history values are always given by the (possibly poor) approximations obtained by interpolation from the coarser mesh employed at the previous timestep. We therefore recommend limiting the number of spatial adaptations to <code>max_adapt</code> = 1. We stress that, in practice, this is not a serious restriction because the time-integration procedure will only provide (temporally) accurate results if the timestep <code>dt</code> is so small that the solution at time <img class="formulaInl" alt="$ t $" src="form_18.png" width="5" height="9"/> only differs slightly from that at time <img class="formulaInl" alt="$ t + dt $" src="form_19.png" width="31" height="11"/> . One level of mesh adaptation per timestep should therefore be sufficient to adapt the mesh in response to these changes.</li>
+<li>The only exception to this recommendation arises during the computation of the first timestep, illustrated in the following sketch: <div class="image">
+<img src="adapted_ic1.gif" alt=""/>
+<div class="caption">
+Sketch of the mesh adaptation during the computation of the first timestep. </div></div>
+  When computing the first timestep, the solution on the initial mesh will have been created by assigning the nodal values according to the analytical initial condition (4). If the initial mesh is very coarse (as it should be), the finite-element representation of the initial condition is likely to be very poor, as shown in the above sketch. Clearly, the interpolation from the coarse onto the fine mesh cannot recover any small-scale features in the initial condition that were missed by its representation on the coarse mesh. It is therefore better to re-assign the initial condition (the values <em>and</em> the history values!) on the adapted mesh, as shown in this sketch: <div class="image">
+<img src="adapted_ic2.gif" alt=""/>
+<div class="caption">
+Sketch of the modified mesh adaptation during the computation of the first timestep. </div></div>
+  With this procedure, repeated mesh adaptations will improve the accuracy of the solution, therefore much larger values of <code>max_adapt</code> can (and should!) be specified when the first timestep is computed. The unsteady Newton solver <code>Problem::unsteady_newton_solve(...)</code> performs the revised procedure if the boolean argument <code>first</code> is set <code>true</code>. In that case, the values and history values on the adapted mesh are (re-)assigned by calling the function <div class="fragment"><div class="line">Problem::set_initial_condition()</div>
+</div><!-- fragment --> which is defined as an empty virtual function in the <code>Problem</code> base class. You should overload it in your derived <code>Problem</code> to ensure that your specific initial conditions are assigned by the mesh adaptation procedures. [In fact, the function <code>Problem::set_initial_condition()</code> is not quite empty &ndash; not re-setting the initial condition when performing mesh adaptations during the first timestep of a time-dependent simulation seems "so 
+   wrong" that the function issues a warning message. Although the overloading of this function is not strictly necessary if the initial conditions can be represented exactly by the interpolation from the coarse mesh onto the fine mesh, we consider it good practice to do so, for reasons discussed in <a href="../../../axisym_navier_stokes/spin_up/html/index.html#good_practice_ics">another tutorial</a>.]</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="overview"></a>
+Overview of the driver code</h1>
+<p>Equipped with this background information, the driver code for our example problem is easy to understand, if somewhat lengthy. [Using an example with Dirichlet boundary conditions along the entire domain boundary would have shortened the code significantly but we deliberately chose an example with Neumann boundary conditions to demonstrate that the functions <code>Problem::actions_before_adapt()</code> and <code>Problem::actions_after_adapt()</code> may be used exactly as in the steady computations.] We will not discuss the methodology for applying flux-type boundary conditions in problems with spatial adaptivity in detail, but refer to the discussion provided in the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">earlier steady example.</a></p>
+<p>Overall, the code is a straightforward combination of the driver code for the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">steady Poisson problem with flux boundary conditions and spatial adaptivity</a> and the driver code for the <a href="../../two_d_unsteady_heat/html/index.html">unsteady heat equation without spatial adaptivity. </a></p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we store the problem parameters in a namespace, <code><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html" title="Namespace for exact solution of unsteady heat equation with sharp step.">TanhSolnForUnsteadyHeat</a></code>, in which we also specify the source function, the prescribed flux along the Neumann boundary and the exact solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="ellipse"></a>
+Representing the curvilinear domain boundary by a  GeomObject</h1>
+<p>As discussed <a href="../../../poisson/fish_poisson2/html/index.html">elsewhere,</a> <code>oomph-lib's</code> mesh adaptation procedures require curvilinear domain boundaries to be represented by <code>GeomObjects</code> which describe the object's shape via their member function <code>GeomObject::position(...)</code>. This function exists in two versions:</p><ul>
+<li>The two-argument version, <code>GeomObject::position(xi,r)</code> computes the position vector, <code>r</code>, to the point on/in the <code>GeomObject</code>, parametrised by the vector of intrinsic coordinates, <code>xi</code>.</li>
+<li>The three-argument version <code>GeomObject::position(t,xi,r)</code>, where <code>t</code> is an <code>unsigned</code>, computes the position vector at the <code>t</code> - th previous timestep.</li>
+</ul>
+<p>In the current problem, the domain boundary is stationary, therefore the steady and unsteady versions of the function are identical. Here is the complete source code for the <code><a class="el" href="classMyUnitCircle.html" title="Unit circle as GeomObject.">MyUnitCircle</a></code> object which we will use to represent the curvilinear domain boundary:</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_MyUnitCircle====================================</span></div>
+<div class="line"><span class="comment">/// Unit circle as GeomObject</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// \f[ x = \cos(\xi)  \f]</span></div>
+<div class="line"><span class="comment">/// \f[ y = \sin(\xi)  \f]</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classMyUnitCircle.html">MyUnitCircle</a> : <span class="keyword">public</span> GeomObject</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: The circle is a 1D object</span></div>
+<div class="line"><span class="comment"> /// (i.e. it&#39;s parametrised by one intrinsic coordinate) in 2D space.</span></div>
+<div class="line"><span class="comment"> /// Pass these arguments to the constructor of the GeomObject base class.</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classMyUnitCircle.html#a056add64776e52a8ea2ba2e9d6d0e32d">MyUnitCircle</a>() : GeomObject(1,2) {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">virtual</span> <a class="code hl_function" href="classMyUnitCircle.html#ae6b321a25ef6f6b12d7c9a225f91140d">~MyUnitCircle</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Current position vector to material point at </span></div>
+<div class="line"><span class="comment"> /// Lagrangian coordinate xi </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMyUnitCircle.html#ab60b73d1c28b013c40dd2aaa98072261">position</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; xi, Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Position vector</span></div>
+<div class="line">   r[0] = cos(xi[0]);</div>
+<div class="line">   r[1] = sin(xi[0]);</div>
+<div class="line">  } <span class="comment">// end of position(...)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Parametrised position on object: r(xi). Evaluated at</span></div>
+<div class="line"><span class="comment"> /// previous time level. t=0: current time; t&gt;0: previous</span></div>
+<div class="line"><span class="comment"> /// time level. Circle is fixed -- simply call the steady version.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classMyUnitCircle.html#ab60b73d1c28b013c40dd2aaa98072261">position</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; xi,</div>
+<div class="line">               Vector&lt;double&gt;&amp; r)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// Call steady version </span></div>
+<div class="line">   <a class="code hl_function" href="classMyUnitCircle.html#ab60b73d1c28b013c40dd2aaa98072261">position</a>(xi,r);</div>
+<div class="line">  } <span class="comment">// end of position(...)</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of MyUnitCircle</span></div>
+<div class="ttc" id="aclassMyUnitCircle_html"><div class="ttname"><a href="classMyUnitCircle.html">MyUnitCircle</a></div><div class="ttdoc">Unit circle as GeomObject.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00053">two_d_unsteady_heat_adapt.cc:54</a></div></div>
+<div class="ttc" id="aclassMyUnitCircle_html_a056add64776e52a8ea2ba2e9d6d0e32d"><div class="ttname"><a href="classMyUnitCircle.html#a056add64776e52a8ea2ba2e9d6d0e32d">MyUnitCircle::MyUnitCircle</a></div><div class="ttdeci">MyUnitCircle()</div><div class="ttdoc">Constructor: The circle is a 1D object (i.e. it's parametrised by one intrinsic coordinate) in 2D spa...</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00061">two_d_unsteady_heat_adapt.cc:61</a></div></div>
+<div class="ttc" id="aclassMyUnitCircle_html_ab60b73d1c28b013c40dd2aaa98072261"><div class="ttname"><a href="classMyUnitCircle.html#ab60b73d1c28b013c40dd2aaa98072261">MyUnitCircle::position</a></div><div class="ttdeci">void position(const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</div><div class="ttdoc">Current position vector to material point at Lagrangian coordinate xi.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00068">two_d_unsteady_heat_adapt.cc:68</a></div></div>
+<div class="ttc" id="aclassMyUnitCircle_html_ae6b321a25ef6f6b12d7c9a225f91140d"><div class="ttname"><a href="classMyUnitCircle.html#ae6b321a25ef6f6b12d7c9a225f91140d">MyUnitCircle::~MyUnitCircle</a></div><div class="ttdeci">virtual ~MyUnitCircle()</div><div class="ttdoc">Destructor: Empty.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00064">two_d_unsteady_heat_adapt.cc:64</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The main function</h1>
+<p>As before, we use command line arguments to (optionally) specify a restart file. We store the command line arguments in the namespace <code>CommandLineArgs</code> and build the <code>Problem</code> object, passing the pointer to the source function. Next we specify the time-interval for the simulation and set the error targets for the spatial adaptation.</p>
+ <div class="fragment"><div class="line"><span class="comment">//======start_of_main=====================================================</span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve an unsteady heat problem</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// with mesh adaptation. Command line arguments specify </span></div>
+<div class="line"><span class="comment">/// the name of the restart file. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="two__d__unsteady__heat__adapt_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build problem</span></div>
+<div class="line"> <a class="code hl_class" href="classRefineableUnsteadyHeatProblem.html">RefineableUnsteadyHeatProblem&lt;RefineableQUnsteadyHeatElement&lt;2,3&gt;</a> &gt;</div>
+<div class="line">  problem(&amp;<a class="code hl_function" href="namespaceTanhSolnForUnsteadyHeat.html#aea922a29dfeeb80ef4768def0d6fbde4">TanhSolnForUnsteadyHeat::get_source</a>);</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Specify duration of the simulation</span></div>
+<div class="line"> <span class="comment">//double t_max=3.0;</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set targets for spatial adaptivity</span></div>
+<div class="line"> problem.bulk_mesh_pt()-&gt;max_permitted_error()=0.001;</div>
+<div class="line"> problem.bulk_mesh_pt()-&gt;min_permitted_error()=0.0001;</div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html">RefineableUnsteadyHeatProblem</a></div><div class="ttdoc">Unsteady heat problem in quarter circle domain.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00187">two_d_unsteady_heat_adapt.cc:188</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_aea922a29dfeeb80ef4768def0d6fbde4"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#aea922a29dfeeb80ef4768def0d6fbde4">TanhSolnForUnsteadyHeat::get_source</a></div><div class="ttdeci">void get_source(const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;source)</div><div class="ttdoc">Source function to make it an exact solution.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">two_d_unsteady_heat_adapt.cc:140</a></div></div>
+<div class="ttc" id="atwo__d__unsteady__heat__adapt_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="two__d__unsteady__heat__adapt_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Demonstrate how to solve an unsteady heat problem with mesh adaptation. Command line arguments specif...</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00884">two_d_unsteady_heat_adapt.cc:884</a></div></div>
+</div><!-- fragment --><p> We create and initialise the boolean flag that indicates if the first timestep is computed, and choose a large initial value for the number of permitted mesh adaptations. We then assign the initial conditions on the coarse initial mesh and retrieve the timestep (chosen when the initial conditions are assigned in <code>set_initial_condition()</code> ) from the problem's <code>Time</code> object.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set IC</span></div>
+<div class="line"> problem.set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial timestep: Use the one used when setting up the initial</span></div>
+<div class="line"> <span class="comment">// condition</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=problem.time_pt()-&gt;dt();</div>
+</div><!-- fragment --><p> If the simulation has been restarted, the first timestep is not the step at which the initial condition has to be assigned, therefore we reset the <code>first</code> and <code>max_adapt</code> parameters to their appropriate values. If the run is not restarted, the problem will have been built with a very coarse initial mesh (comprising just three elements). We don't need an error estimator to tell us that this is too coarse to represent the solution accurately and apply two levels of uniform refinement before solving the problem. Note that we refine the entire problem, not just the mesh to ensure that <code>Problem::actions_before_adapt()</code> and <code>Problem::actions_after_adapt()</code> are executed and the equation numbering scheme is re-generated. <code>Problem::refine_uniformly()</code> also interpolates the solution from the coarse initial mesh onto the refined mesh but, as discussed above, this will lead to a very poor representation of the initial condition. Therefore we re-assign the initial condition on the refined mesh and document the finite-element representation of the initial condition.</p>
+<div class="fragment"><div class="line"> <span class="comment">// If restart: The first step isn&#39;t really the first step,</span></div>
+<div class="line"> <span class="comment">// i.e. initial condition should not be re-set when </span></div>
+<div class="line"> <span class="comment">// adaptive refinement has been performed. Also, limit</span></div>
+<div class="line"> <span class="comment">// the max. number of refinements per timestep to the</span></div>
+<div class="line"> <span class="comment">// normal value straightaway.</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==2)</div>
+<div class="line">  {</div>
+<div class="line">   first=<span class="keyword">false</span>;</div>
+<div class="line">   max_adapt=1;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// If no restart, refine mesh uniformly before we get started</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   problem.refine_uniformly();</div>
+<div class="line">   problem.refine_uniformly();</div>
+<div class="line">   <span class="comment">// Solution is automatically interpolated from the coarse initial mesh</span></div>
+<div class="line">   <span class="comment">// onto the refined mesh but this provides a very poor representation</span></div>
+<div class="line">   <span class="comment">// of the intial condition: Re-assign the initial conditions</span></div>
+<div class="line">   problem.set_initial_condition();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output FE representation of the initial condition</span></div>
+<div class="line"> problem.doc_solution();</div>
+</div><!-- fragment --><p> The time-stepping loop itself is very similar to that used in the <a href="../../two_d_unsteady_heat/html/index.html">example without spatial adaptivity</a>. Here we call the three-argument version of the unsteady Newton solver <code>Problem::unsteady_newton_solve(...)</code> and re-set the parameters <code>max_adapt</code> and <code>first</code> to their appropriate values once the first step has been performed.</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Find number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep = 6; <span class="comment">// unsigned(t_max/dt);</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> istep=0;istep&lt;nstep;istep++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Take timestep </span></div>
+<div class="line">   problem.unsteady_newton_solve(dt,max_adapt,first);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Now we&#39;ve done the first timestep -- don&#39;t re-set the IC</span></div>
+<div class="line">   <span class="comment">// in subsequent steps</span></div>
+<div class="line">   first=<span class="keyword">false</span>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Reduce the number of spatial adaptations to one per </span></div>
+<div class="line">   <span class="comment">// timestep</span></div>
+<div class="line">   max_adapt=1;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Output solution</span></div>
+<div class="line">   problem.doc_solution();</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of main</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>As discussed above, the problem class mainly contains verbatim copies of the member functions in the corresponding <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">steady </a> and <a href="../../two_d_unsteady_heat/html/index.html">unsteady</a> problems:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====start_of_problem_class=========================================</span></div>
+<div class="line"><span class="comment">/// Unsteady heat problem in quarter circle domain.</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRefineableUnsteadyHeatProblem.html">RefineableUnsteadyHeatProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass pointer to source function</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineableUnsteadyHeatProblem.html">RefineableUnsteadyHeatProblem</a>(UnsteadyHeatEquations&lt;2&gt;::</div>
+<div class="line">                             UnsteadyHeatSourceFctPt source_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor: Close trace file</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a975e00f5e87d77b4e1bf4d50482dea2b">~RefineableUnsteadyHeatProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#ada522772b79e92a75edf3724d0a273da">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#aac1935e15c67b196e6db97dd058511b5">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after timestep (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#aa740f2eb1b3909100a04709b401c0b41">actions_after_implicit_timestep</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before next timestep: </span></div>
+<div class="line"><span class="comment"> /// Set Dirchlet boundary conditions from exact solution.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#ac754f1313cd6d684c149443beb5bcf9e">actions_before_implicit_timestep</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a4419fcea0ccbf0509f1d5dd37d8301de">actions_before_adapt</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of prescribed flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a1f8a9e91269440c799a2075f989d62b1">actions_after_adapt</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set initial condition (incl previous timesteps) according</span></div>
+<div class="line"><span class="comment"> /// to specified function. Note that his overloads the virtual</span></div>
+<div class="line"><span class="comment"> /// function in the Problem base class and is therefore executed </span></div>
+<div class="line"><span class="comment"> /// automatically to re-assign the initial conditions during the </span></div>
+<div class="line"><span class="comment"> /// spatially adaptive solution at the first timestep.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a30e2e1d62b059982f7014b74f4fe2be9">set_initial_condition</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create UnsteadyHeat flux elements on boundary b of the Mesh pointed</span></div>
+<div class="line"><span class="comment"> /// to by bulk_mesh_pt and add them to the Mesh object pointed to by </span></div>
+<div class="line"><span class="comment"> /// surface_mesh_pt</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a65601ec64c73ac578b43f4af04c46569">create_flux_elements</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;b, Mesh* <span class="keyword">const</span> &amp;<a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a49ee185e10fdab1851a67150cbb0710a">bulk_mesh_pt</a>,</div>
+<div class="line">                           Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Delete UnsteadyHeat flux elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#ad2e53af5c385e44e33e400b430b610e8">delete_flux_elements</a>(Mesh* <span class="keyword">const</span> &amp;surface_mesh_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a77d590171785b6b5f4070af9401c0e37">doc_solution</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Dump problem data to allow for later restart</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a1fb939c3f9c258fd49328bb1516ced98">dump_it</a>(ofstream&amp; dump_file);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Read problem data for restart</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#af36fa71e72852367411e21b50b179625">restart</a>(ifstream&amp; restart_file);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to bulk mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;* <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a49ee185e10fdab1851a67150cbb0710a">bulk_mesh_pt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#afade341e03a4c97e62444c80adc9552f">Bulk_mesh_pt</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to GeomObject that specifies the domain bondary</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a368512778fbfd59e918104340466b1df">Boundary_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to source function</span></div>
+<div class="line"><span class="comment"></span> UnsteadyHeatEquations&lt;2&gt;::UnsteadyHeatSourceFctPt <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a99eb5a2cd4b680b4f83e739bd4e16639">Source_fct_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;* <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#afade341e03a4c97e62444c80adc9552f">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the &quot;surface&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a2febbb317a74e427bf6304235d779fe6">Surface_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to central node (exists at all refinement levels) for doc</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a7ff1982af5819bab492c693178be0c24">Doc_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc info object</span></div>
+<div class="line"><span class="comment"></span> DocInfo <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a9ea9d79a57cb16a6292a637965767f7e">Doc_info</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream <a class="code hl_variable" href="classRefineableUnsteadyHeatProblem.html#a8f62ba78fb856d2e07b00254ca7a0e6a">Trace_file</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem_class</span></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a1f8a9e91269440c799a2075f989d62b1"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a1f8a9e91269440c799a2075f989d62b1">RefineableUnsteadyHeatProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00496">two_d_unsteady_heat_adapt.cc:496</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a1fb939c3f9c258fd49328bb1516ced98"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a1fb939c3f9c258fd49328bb1516ced98">RefineableUnsteadyHeatProblem::dump_it</a></div><div class="ttdeci">void dump_it(ofstream &amp;dump_file)</div><div class="ttdoc">Dump problem data to allow for later restart.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00854">two_d_unsteady_heat_adapt.cc:854</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a2febbb317a74e427bf6304235d779fe6"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a2febbb317a74e427bf6304235d779fe6">RefineableUnsteadyHeatProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the &quot;surface&quot; mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00262">two_d_unsteady_heat_adapt.cc:262</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a30e2e1d62b059982f7014b74f4fe2be9"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a30e2e1d62b059982f7014b74f4fe2be9">RefineableUnsteadyHeatProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function. Note that his overlo...</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00526">two_d_unsteady_heat_adapt.cc:526</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a368512778fbfd59e918104340466b1df"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a368512778fbfd59e918104340466b1df">RefineableUnsteadyHeatProblem::Boundary_pt</a></div><div class="ttdeci">GeomObject * Boundary_pt</div><div class="ttdoc">Pointer to GeomObject that specifies the domain bondary.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00253">two_d_unsteady_heat_adapt.cc:253</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a4419fcea0ccbf0509f1d5dd37d8301de"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a4419fcea0ccbf0509f1d5dd37d8301de">RefineableUnsteadyHeatProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of prescribed flux elements.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00480">two_d_unsteady_heat_adapt.cc:480</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a49ee185e10fdab1851a67150cbb0710a"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a49ee185e10fdab1851a67150cbb0710a">RefineableUnsteadyHeatProblem::bulk_mesh_pt</a></div><div class="ttdeci">RefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * bulk_mesh_pt()</div><div class="ttdoc">Pointer to bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00244">two_d_unsteady_heat_adapt.cc:244</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a65601ec64c73ac578b43f4af04c46569"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a65601ec64c73ac578b43f4af04c46569">RefineableUnsteadyHeatProblem::create_flux_elements</a></div><div class="ttdeci">void create_flux_elements(const unsigned &amp;b, Mesh *const &amp;bulk_mesh_pt, Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Create UnsteadyHeat flux elements on boundary b of the Mesh pointed to by bulk_mesh_pt and add them t...</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00798">two_d_unsteady_heat_adapt.cc:799</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a77d590171785b6b5f4070af9401c0e37"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a77d590171785b6b5f4070af9401c0e37">RefineableUnsteadyHeatProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00658">two_d_unsteady_heat_adapt.cc:658</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a7ff1982af5819bab492c693178be0c24"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a7ff1982af5819bab492c693178be0c24">RefineableUnsteadyHeatProblem::Doc_node_pt</a></div><div class="ttdeci">Node * Doc_node_pt</div><div class="ttdoc">Pointer to central node (exists at all refinement levels) for doc.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00265">two_d_unsteady_heat_adapt.cc:265</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a8f62ba78fb856d2e07b00254ca7a0e6a"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a8f62ba78fb856d2e07b00254ca7a0e6a">RefineableUnsteadyHeatProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00271">two_d_unsteady_heat_adapt.cc:271</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a975e00f5e87d77b4e1bf4d50482dea2b"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a975e00f5e87d77b4e1bf4d50482dea2b">RefineableUnsteadyHeatProblem::~RefineableUnsteadyHeatProblem</a></div><div class="ttdeci">~RefineableUnsteadyHeatProblem()</div><div class="ttdoc">Destructor: Close trace file.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00435">two_d_unsteady_heat_adapt.cc:435</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a99eb5a2cd4b680b4f83e739bd4e16639"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a99eb5a2cd4b680b4f83e739bd4e16639">RefineableUnsteadyHeatProblem::Source_fct_pt</a></div><div class="ttdeci">UnsteadyHeatEquations&lt; 2 &gt;::UnsteadyHeatSourceFctPt Source_fct_pt</div><div class="ttdoc">Pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00256">two_d_unsteady_heat_adapt.cc:256</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a9ea9d79a57cb16a6292a637965767f7e"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a9ea9d79a57cb16a6292a637965767f7e">RefineableUnsteadyHeatProblem::Doc_info</a></div><div class="ttdeci">DocInfo Doc_info</div><div class="ttdoc">Doc info object.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00268">two_d_unsteady_heat_adapt.cc:268</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_aa740f2eb1b3909100a04709b401c0b41"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#aa740f2eb1b3909100a04709b401c0b41">RefineableUnsteadyHeatProblem::actions_after_implicit_timestep</a></div><div class="ttdeci">void actions_after_implicit_timestep()</div><div class="ttdoc">Update the problem specs after timestep (empty)</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00206">two_d_unsteady_heat_adapt.cc:206</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_aac1935e15c67b196e6db97dd058511b5"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#aac1935e15c67b196e6db97dd058511b5">RefineableUnsteadyHeatProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00203">two_d_unsteady_heat_adapt.cc:203</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_ac754f1313cd6d684c149443beb5bcf9e"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#ac754f1313cd6d684c149443beb5bcf9e">RefineableUnsteadyHeatProblem::actions_before_implicit_timestep</a></div><div class="ttdeci">void actions_before_implicit_timestep()</div><div class="ttdoc">Update the problem specs before next timestep: Set Dirchlet boundary conditions from exact solution.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00447">two_d_unsteady_heat_adapt.cc:447</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_ad2e53af5c385e44e33e400b430b610e8"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#ad2e53af5c385e44e33e400b430b610e8">RefineableUnsteadyHeatProblem::delete_flux_elements</a></div><div class="ttdeci">void delete_flux_elements(Mesh *const &amp;surface_mesh_pt)</div><div class="ttdoc">Delete UnsteadyHeat flux elements and wipe the surface mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00831">two_d_unsteady_heat_adapt.cc:832</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_ada522772b79e92a75edf3724d0a273da"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#ada522772b79e92a75edf3724d0a273da">RefineableUnsteadyHeatProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem specs after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00200">two_d_unsteady_heat_adapt.cc:200</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_af36fa71e72852367411e21b50b179625"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#af36fa71e72852367411e21b50b179625">RefineableUnsteadyHeatProblem::restart</a></div><div class="ttdeci">void restart(ifstream &amp;restart_file)</div><div class="ttdoc">Read problem data for restart.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00865">two_d_unsteady_heat_adapt.cc:865</a></div></div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_afade341e03a4c97e62444c80adc9552f"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#afade341e03a4c97e62444c80adc9552f">RefineableUnsteadyHeatProblem::Bulk_mesh_pt</a></div><div class="ttdeci">RefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the &quot;bulk&quot; mesh.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00259">two_d_unsteady_heat_adapt.cc:259</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The problem constructor combines the constructors of the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">steady </a> and <a href="../../two_d_unsteady_heat/html/index.html">unsteady</a> problems. We start by creating a <code>DocInfo</code> object to control the output, set the parameters for the exact solution and create the <code>TimeStepper:</code> </p>
+<div class="fragment"><div class="line"><span class="comment">//========start_of_constructor============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for UnsteadyHeat problem in quarter circle domain.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Pass pointer to source function.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a894f3bd6c1c23c307a736de6898e4e98">RefineableUnsteadyHeatProblem&lt;ELEMENT&gt;::RefineableUnsteadyHeatProblem</a>(</div>
+<div class="line">   UnsteadyHeatEquations&lt;2&gt;::UnsteadyHeatSourceFctPt source_fct_pt) : </div>
+<div class="line">         Source_fct_pt(source_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup labels for output</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> Doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output number</span></div>
+<div class="line"> Doc_info.number()=0; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,Doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;time t\&quot;,\&quot;u&lt;SUB&gt;FE&lt;/SUB&gt;\&quot;,\&quot;u&lt;SUB&gt;exact&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;A\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;X&lt;SUB&gt;step&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;N&lt;SUB&gt;element&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;N&lt;SUB&gt;refined&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;N&lt;SUB&gt;unrefined&lt;/SUB&gt;\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;norm of error\&quot;,&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\&quot;norm of solution\&quot;&quot;</span></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup parameters for tanh solution</span></div>
+<div class="line"> <span class="comment">// ----------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Steepness of step</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceTanhSolnForUnsteadyHeat.html#a4c75d9887d6f25405bbead696a94db63">TanhSolnForUnsteadyHeat::Alpha</a>=10.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Orientation of step</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceTanhSolnForUnsteadyHeat.html#af8d2e06630e8a3f71d1f8dbeecf8a964">TanhSolnForUnsteadyHeat::TanPhi</a>=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Amplitude for movement of step</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceTanhSolnForUnsteadyHeat.html#a66f6116310a5f9f96c2d3bf28250a92b">TanhSolnForUnsteadyHeat::Beta</a>=0.3; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parameter for time-dependence of step movement</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceTanhSolnForUnsteadyHeat.html#a5bb742b074ab5f3f65286b1cff1f1512">TanhSolnForUnsteadyHeat::Gamma</a>=5.0;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Allocate the timestepper -- This constructs the time object as well</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> BDF&lt;2&gt;());</div>
+<div class="ttc" id="aclassRefineableUnsteadyHeatProblem_html_a894f3bd6c1c23c307a736de6898e4e98"><div class="ttname"><a href="classRefineableUnsteadyHeatProblem.html#a894f3bd6c1c23c307a736de6898e4e98">RefineableUnsteadyHeatProblem::RefineableUnsteadyHeatProblem</a></div><div class="ttdeci">RefineableUnsteadyHeatProblem(UnsteadyHeatEquations&lt; 2 &gt;::UnsteadyHeatSourceFctPt source_fct_pt)</div><div class="ttdoc">Constructor: Pass pointer to source function.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">two_d_unsteady_heat_adapt.cc:280</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_a4c75d9887d6f25405bbead696a94db63"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#a4c75d9887d6f25405bbead696a94db63">TanhSolnForUnsteadyHeat::Alpha</a></div><div class="ttdeci">double Alpha</div><div class="ttdoc">Parameter for steepness of step.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">two_d_unsteady_heat_adapt.cc:103</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_a5bb742b074ab5f3f65286b1cff1f1512"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#a5bb742b074ab5f3f65286b1cff1f1512">TanhSolnForUnsteadyHeat::Gamma</a></div><div class="ttdeci">double Gamma</div><div class="ttdoc">Parameter for timescale of step translation.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">two_d_unsteady_heat_adapt.cc:109</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_a66f6116310a5f9f96c2d3bf28250a92b"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#a66f6116310a5f9f96c2d3bf28250a92b">TanhSolnForUnsteadyHeat::Beta</a></div><div class="ttdeci">double Beta</div><div class="ttdoc">Parameter for amplitude of step translation.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">two_d_unsteady_heat_adapt.cc:106</a></div></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_af8d2e06630e8a3f71d1f8dbeecf8a964"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#af8d2e06630e8a3f71d1f8dbeecf8a964">TanhSolnForUnsteadyHeat::TanPhi</a></div><div class="ttdeci">double TanPhi</div><div class="ttdoc">Parameter for angle of step.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">two_d_unsteady_heat_adapt.cc:112</a></div></div>
+</div><!-- fragment --><p>We create the <code>GeomObject</code> that describes the curvilinear domain boundary and pass it to the mesh constructor:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that forms the curvilinear domain boundary:</span></div>
+<div class="line"> <span class="comment">// a unit circle </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create GeomObject</span></div>
+<div class="line"> Boundary_pt=<span class="keyword">new</span> <a class="code hl_class" href="classMyUnitCircle.html">MyUnitCircle</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start and end coordinates of curvilinear domain boundary on circle</span></div>
+<div class="line"> <span class="keywordtype">double</span> xi_lo=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> xi_hi=MathematicalConstants::Pi/2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now create the bulk mesh. Separating line between the two </span></div>
+<div class="line"> <span class="comment">// elements next to the curvilinear boundary is located half-way</span></div>
+<div class="line"> <span class="comment">// along the boundary.</span></div>
+<div class="line"> <span class="keywordtype">double</span> fract_mid=0.5;</div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  Boundary_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());</div>
+</div><!-- fragment --><p> Next, we create the surface mesh that contains the prescribed flux elements and combine the two submeshes to the <code>Problem's</code> global mesh. We create an instance of the <code>Z2ErrorEstimator</code> and pass it to the bulk mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create the surface mesh as an empty mesh</span></div>
+<div class="line"> Surface_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create prescribed-flux elements from all elements that are </span></div>
+<div class="line"> <span class="comment">// adjacent to boundary 0 (the horizontal lower boundary), and add them </span></div>
+<div class="line"> <span class="comment">// to the (so far empty) surface mesh.</span></div>
+<div class="line"> create_flux_elements(0,Bulk_mesh_pt,Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine all submeshes into a single global Mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator for bulk mesh</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+</div><!-- fragment --><p> We pin the nodal values on the Dirichlet boundaries and select the central node in the unrefined three-element mesh as the control node at which the solution is documented in the trace file.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_bound = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> b=0;b&lt;n_bound;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Leave nodes on boundary 0 free -- this is where we apply the flux</span></div>
+<div class="line">   <span class="comment">// boundary condition</span></div>
+<div class="line">   <span class="keywordflow">if</span> (b!=0)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">      {</div>
+<div class="line">       Bulk_mesh_pt-&gt;boundary_node_pt(b,n)-&gt;pin(0); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Extract pointer to the central node (this exists at all refinement levels)</span></div>
+<div class="line"> <span class="comment">// for doc of solution</span></div>
+<div class="line"> FiniteElement* el0_pt=Bulk_mesh_pt-&gt;finite_element_pt(0);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnod=el0_pt-&gt;nnode();</div>
+<div class="line"> Doc_node_pt=el0_pt-&gt;node_pt(nnod-1);</div>
+</div><!-- fragment --><p> Finally, we complete the build of all elements by passing the relevant function pointers to the elements, and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the source function pointer</span></div>
+<div class="line">   el_pt-&gt;source_fct_pt() = Source_fct_pt;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the flux elements to pass pointer to prescribed flux function</span></div>
+<div class="line"> n_element=Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to UnsteadyHeat flux element</span></div>
+<div class="line">   UnsteadyHeatFluxElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>UnsteadyHeatFluxElement&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed flux function</span></div>
+<div class="line">   el_pt-&gt;flux_fct_pt() = </div>
+<div class="line">    &amp;<a class="code hl_function" href="namespaceTanhSolnForUnsteadyHeat.html#af4d78d73bd9981a5a9ecacecfd0e9cb8">TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do equation numbering</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="ttc" id="anamespaceTanhSolnForUnsteadyHeat_html_af4d78d73bd9981a5a9ecacecfd0e9cb8"><div class="ttname"><a href="namespaceTanhSolnForUnsteadyHeat.html#af4d78d73bd9981a5a9ecacecfd0e9cb8">TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary</a></div><div class="ttdeci">void prescribed_flux_on_fixed_y_boundary(const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;flux)</div><div class="ttdoc">Flux required by the exact solution on a boundary on which y is fixed.</div><div class="ttdef"><b>Definition</b> <a href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">two_d_unsteady_heat_adapt.cc:157</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="old_functions"></a>
+Other member functions</h1>
+<p>The remaining member functions</p><ul>
+<li><code>actions_after_newton_solve()</code> </li>
+<li><code>actions_before_newton_solve()</code> </li>
+<li><code>actions_after_implicit_timestep()</code> </li>
+<li><code>actions_before_implicit_timestep()</code> </li>
+<li><code>actions_before_adapt()</code> </li>
+<li><code>actions_after_adapt()</code> </li>
+<li><code>set_initial_condition()</code> </li>
+<li><code>create_flux_elements(...)</code> </li>
+<li><code>delete_flux_elements(...)</code> </li>
+<li><code>doc_solution()</code> </li>
+<li><code>dump_it(...)</code> </li>
+<li><code>restart(...)</code> </li>
+</ul>
+<p>are identical (or at least extremely similar) to those in previous examples, so we do not list them here. You can examine the functions in detail in the source code <a href="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/two_d_unsteady_heat_adapt.cc">two_d_unsteady_heat_adapt.cc</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="restart"></a>
+Dump/restart with spatial adaptivity</h1>
+<p>It is worth examining the dump and restart functions, however, as they demonstrate that the generic versions defined in the <code>Problem</code> base class can also deal with adaptive problems &ndash; a non-trivial task!</p>
+<div class="fragment"><div class="line"><span class="comment">//=======start_of_dump_it=================================================</span></div>
+<div class="line"><span class="comment">/// Dump the solution to disk</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#a1fb939c3f9c258fd49328bb1516ced98">RefineableUnsteadyHeatProblem&lt;ELEMENT&gt;::dump_it</a>(ofstream&amp; dump_file)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Dump the refinement pattern and the generic problem data</span></div>
+<div class="line"> Problem::dump(dump_file);</div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">// end of dump_it</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//=========start_of_restart===============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Read solution from disk</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRefineableUnsteadyHeatProblem.html#af36fa71e72852367411e21b50b179625">RefineableUnsteadyHeatProblem&lt;ELEMENT&gt;::restart</a>(ifstream&amp; restart_file)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Refine the mesh and read in the generic problem data</span></div>
+<div class="line"> Problem::read(restart_file);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of restart</span></div>
+</div><!-- fragment --><p> Since details of their implementation are hidden from the user, we briefly comment on the various tasks performed by these functions. The main task of the <code>Problem::read(...)</code> function is to read values (and history values) of all <code>Data</code> objects from a file and to assign these values to the appropriate <code>Data</code> (and <code>Node</code>) objects in the <code>Problem</code>. This assumes that the <code>Problem's</code> constituent <code>Meshes</code>, elements, <code>Nodes</code> and <code>Data</code> objects have been created, and that the <code>Problem's</code> various pointer-based lookup schemes access them in the order they were in when the <code>Problem</code> was dumped to the restart file. In a non-adaptive computation, the number of elements and the number of <code>Data</code> objects remain constant throughout the simulation and the <code>Problem::read(...)</code> function can be called as soon as the <code>Problem</code> has been built &ndash; usually by its constructor. (The <code>Problem</code> constructor always builds and enumerates its constituent objects in the same order.)</p>
+<p>In a simulation with spatial adaptivity the number of elements, <code>Nodes</code> and <code>Data</code> objects varies throughout the computation. It is therefore necessary to re-generate the <code>Problem's</code> refinement pattern before the <code>Data</code> values can be read from the restart file. This is achieved (internally) by calling the function <code>RefineableMesh::dump_refinement(...)</code> for all refineable meshes before the <code>Data</code> is dumped. This function writes the <code>Mesh's</code> refinement pattern to the restart file, using a format that can be read by the corresponding member function <code>RefineableMesh::refine(...)</code> which adapts an unrefined mesh so that its topology and the order of its <code>Nodes</code> and elements is recreated.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and exercises</h1>
+<p>The plots below show the time history of various parameters.</p><ul>
+<li>The upper graph compares the solution at the control node (red line) against the exact solution (green line).</li>
+<li>The middle graph shows the position of the step by plotting its intercept with the <img class="formulaInl" alt="$ x_1- $" src="form_16.png" width="23" height="9"/> axis as a function of time, and the error of the solution.</li>
+<li>The lower graph illustrates the evolution of the adaptive spatial refinement process: The green line illustrates the total number of elements; the blue and red lines show the number of elements that are refined and unrefined at each timestep.</li>
+</ul>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Time history of the solution. </div></div>
+ <p>The plots illustrate clearly how the mesh is adapted as the step moves through the domain &ndash; the peaks in the number of refined/unrefined elements per timestep coincide with the periods during which the step moves very rapidly. The increase in the error during these phases is mainly due to the temporal error &ndash; the <a href="../figures/step_soln.avi">animation</a> shows that the computed solution lags behind the exact one. We will address this by adding adaptive time-stepping in <a href="../../two_d_unsteady_heat_2adapt/html/index.html">another example.</a></p>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Confirm that the error during the periods of rapid change in the solution is due to the temporal error by repeating the simulation with a smaller/larger timestep and/or a time-stepping scheme with higher/lower order (e.g. BDF&lt;1&gt; or BDF&lt;4&gt;).</li>
+<li>Assess the importance of re-assigning the initial conditions when spatial adaptations are performed during the computation of the first timestep.<ol type="a">
+<li>Compare the finite-element representation of the initial condition(contained in the file <code>RESLT/soln0.dat</code>) against that obtained when the re-assignment of the initial conditions after the two calls to <code>problem.refine_uniformly()</code> in the <code>main</code> function is suppressed.</li>
+<li>Comment out the calls to <code>problem.refine_uniformly()</code> and set <code>first=false</code> throughout the <code>main</code> function and compare the computed results against those obtained with <br  />
+ the correct procedure.</li>
+</ol>
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="
+../../../../
+demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/
+">demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/ </a> </center></li>
+<li>The driver code is: <center> <a href="
+../../../../
+demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/two_d_unsteady_heat_adapt.cc
+">demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/two_d_unsteady_heat_adapt.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:20:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

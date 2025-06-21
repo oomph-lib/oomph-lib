@@ -1,0 +1,53 @@
+\doxysection{disk\+\_\+oscillation.\+cc File Reference}
+\hypertarget{disk__oscillation_8cc}{}\label{disk__oscillation_8cc}\index{disk\_oscillation.cc@{disk\_oscillation.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classAxisymOscillatingDisk}{Axisym\+Oscillating\+Disk}}
+\begin{DoxyCompactList}\small\item\em Axisymmetrially oscillating disk with displacement field according to linear elasticity. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Elastic quarter circle sector mesh\+: We "{}upgrade"{} the Refineable\+Quarter\+Circle\+Sector\+Mesh to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class to simulate small-\/amplitude oscillations of a circular disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{Global\+\_\+\+Physical\+\_\+\+Variables\+::multiplier}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}})
+\begin{DoxyCompactList}\small\item\em Multiplier for inertia terms (needed for consistent assignment of initial conditions in Newmark scheme) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} \mbox{\hyperlink{disk__oscillation_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for disk oscillation problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}} =(1.\+0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})/((1.\+0+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})\texorpdfstring{$\ast$}{*}(1.\+0-\/2.\+0\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}))
+\begin{DoxyCompactList}\small\item\em Timescale ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{disk__oscillation_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{disk__oscillation_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{disk\_oscillation.cc@{disk\_oscillation.cc}!main@{main}}
+\index{main@{main}!disk\_oscillation.cc@{disk\_oscillation.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for disk oscillation problem. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00815}{815}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00059}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{disk__oscillation_8cc_source_l00369}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}.
+

@@ -1,0 +1,18 @@
+\doxysection{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h File Reference}
+\hypertarget{navier__stokes__flux__control__elements_8h}{}\label{navier__stokes__flux__control__elements_8h}\index{navier\_stokes\_flux\_control\_elements.h@{navier\_stokes\_flux\_control\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlElementBase}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em A template free base class for an element to imposes an applied boundary pressure to the Navier-\/\+Stokes equations in order to control a volume flux when used in conjunction with a \doxylink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element} or \doxylink{classoomph_1_1NetFluxControlElementForWomersleyPressureControl}{Net\+Flux\+Control\+Element\+For\+Womersley\+Pressure\+Control}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{oomph\+::\+Net\+Flux\+Control\+Element}}
+\begin{DoxyCompactList}\small\item\em A class for an element that controls the net fluid flux across a boundary by the imposition of an unknown applied pressure to the Navier-\/\+Stokes equations. This element is used with a mesh of \doxylink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element} elements which are attached to the boundary. Note\+: \doxylink{classoomph_1_1NetFluxControlElement_a7b7d3a32fcad5b06fe6a49f05f2c01a9}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()} does not calculate Jacobian contributions for this element as they are calculated by Navier\+Stokes\+Flux\+Control\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class of element to impose an applied boundary pressure to Navier-\/\+Stokes elements to control to control a volume flux. A mesh of these elements are used in conjunction with a \doxylink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}. The template arguement ELEMENT is a Navier-\/\+Stokes "{}bulk"{} element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class of element to impose an applied boundary pressure to Navier-\/\+Stokes elements to control to control a volume flux. A mesh of these elements are used in conjunction with a \doxylink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}. The template arguement ELEMENT is a Navier-\/\+Stokes "{}bulk"{} element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

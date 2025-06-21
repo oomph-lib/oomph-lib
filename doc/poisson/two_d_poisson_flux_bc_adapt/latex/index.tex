@@ -1,0 +1,351 @@
+\chapter{Example problem\+: Adaptive solution of the 2D Poisson equation with flux boundary conditions}
+\hypertarget{index}{}\label{index}\index{Example problem: Adaptive solution of the 2D Poisson equation with flux boundary conditions@{Example problem: Adaptive solution of the 2D Poisson equation with flux boundary conditions}}
+In this document we discuss the adaptive solution of a 2D Poisson problem with Neumann boundary conditions. \begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Two-\/dimensional model Poisson problem with Neumann boundary conditions}} \end{center}  Solve  \[
+\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the rectangular domain $D = \left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\} $. The domain boundary $ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} $, where $ \partial D_{Neumann} 
+= \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} $. On $ \partial D_{Dirichlet}$ we apply the Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D_{Dirichlet}}=u_0,
+\ \ \ \ \ \ \ \ \ \ (2)
+\] where the function $ u_0 $ is given. On $ \partial D_{Neumann}$ we apply the Neumann conditions  \[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = 
+\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}
+=g_0,
+\ \ \ \ \ \ \ \ \ \ (3)
+\] where the function $ g_0 $ is given.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center}  ~\newline
+
+
+In two previous examples we demonstrated two approaches for the {\itshape non-\/adaptive} solution of this problem. In both cases we created a "{}bulk"{} mesh of {\ttfamily QPoisson\+Elements} and applied the flux boundary conditions by "{}attaching"{} {\ttfamily Poisson\+Flux\+Elements} to the appropriate boundaries of the "{}bulk"{} Poisson elements. In the \href{../../two_d_poisson_flux_bc/html/index.html}{\texttt{ first implementation}} we simply added the pointers to the flux elements to the bulk mesh; in the \href{../../two_d_poisson_flux_bc2/html/index.html}{\texttt{ second implementation}} we stored the surface and bulk elements in separate meshes and combined them to a single global mesh. We will now demonstrate that the second approach greatly facilitates the automatic problem adaptation. We use the mesh adaptation procedures of the {\ttfamily Refineable\+Quad\+Mesh} class to adapt the bulk mesh, driven by the spatial error estimates in that mesh. The flux elements are neither involved in nor adapted by the refinement process of the bulk mesh. We therefore use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} to delete the flux elements before the adaptation, and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} to re-\/attach them once the bulk mesh has been adapted.
+
+As in the \href{../../two_d_poisson_flux_bc2/html/index.html}{\texttt{ previous example}} we choose a source function and boundary conditions for which the function  \[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  (4)
+\] is the exact solution of the problem.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{rotate}
+\doxyfigcaption{Plot of the solution obtained with automatic mesh adaptation }
+\end{DoxyImage}
+
+
+Since many functions in the driver code are identical to that in the non-\/adaptive version, discussed in the \href{../../two_d_poisson_flux_bc2/html/index.html}{\texttt{ previous example}}, we only list those functions that differ. Please consult the source code \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc}{\texttt{ two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc }} for full details of the implementation.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+The specification of the source function and the exact solution in the namespace {\ttfamily \doxylink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}} is identical to that in the single-\/mesh version discussed in the \href{../../two_d_poisson_flux_bc/html/index.html}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The main code is virtually identical to that in the \href{../../two_d_poisson_flux_bc2/html/index.html}{\texttt{ previous non-\/adaptive example }}. The only change is the provision of an argument to the Newton solver
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{problem}}.newton\_solve(3);}
+
+\end{DoxyCodeInclude}
+ which indicates that the problem should be adapted up to three times.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is very similar to that in the \href{../../two_d_poisson_flux_bc2/html/index.html\#problem}{\texttt{ non-\/adaptive implementation}}\+: The only difference is the provision of the functions {\ttfamily actions\+\_\+before\+\_\+adapt()}, {\ttfamily actions\+\_\+after\+\_\+adapt()}, {\ttfamily set\+\_\+prescribed\+\_\+flux\+\_\+pt()}, and {\ttfamily delete\+\_\+flux\+\_\+elements(...)} which we discuss in more detail below.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=========\ start\_of\_problem\_class=====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ 2D\ Poisson\ problem\ on\ rectangular\ domain,\ discretised\ with}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ 2D\ QPoisson\ elements.\ Flux\ boundary\ conditions\ are\ applied}}
+\DoxyCodeLine{\textcolor{comment}{///\ along\ boundary\ 1\ (the\ boundary\ where\ x=L).\ The\ specific\ type\ of\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ element\ is\ specified\ via\ the\ template\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{RefineableTwoMeshFluxPoissonProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{RefineableTwoMeshFluxPoissonProblem}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{PoissonEquations<2>::PoissonSourceFctPt}}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source\_fct\_pt}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a6b1f154c77ea0c415bf171764d34302f}{\string~RefineableTwoMeshFluxPoissonProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution.\ DocInfo\ object\ stores\ flags/labels\ for\ where\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ output\ gets\ written\ to}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ad9d4a3b5856839fa95f60968fabe3493}{doc\_solution}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve:\ Reset\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ the\ values\ from\ the\ exact\ solution.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a209506229c491a8cec4e1dce387e18c3}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab8b04db3dab6297f609a9a028b1c4473}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a10d2a67a5ac599161ddcf876b31334f6}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a0140155529861f5e63ab32feece3c9b6}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ Poisson\ flux\ elements\ on\ boundary\ b\ of\ the\ Mesh\ pointed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ by\ bulk\_mesh\_pt\ and\ add\ them\ to\ the\ Mesh\ object\ pointed\ to\ by\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ surface\_mesh\_pt}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ac2eaf11cfc4dda41f97cacc2a1a1f86e}{create\_flux\_elements}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}},\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}}*\ \textcolor{keyword}{const}\ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{bulk\_mesh\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}}*\ \textcolor{keyword}{const}\ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ Poisson\ flux\ elements\ and\ wipe\ the\ surface\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab35087cadc6dbc7a602441b9a986d650}{delete\_flux\_elements}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}}*\ \textcolor{keyword}{const}\ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ pointer\ to\ prescribed-\/flux\ function\ for\ all}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ elements\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_aa0aeec40bbdb0649e309e51ad96e5da7}{set\_prescribed\_flux\_pt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}*\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a35746600caac7fd5b1a2ccec6beff8d6}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}surface"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}}*\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a1ad7c5a406b267f2d79c52b3d347971d}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{PoissonEquations<2>::PoissonSourceFctPt}}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a0f3434b437ca4b5e6a97ecae9e826477}{Source\_fct\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+
+\end{DoxyCodeInclude}
+ \mbox{[}See the discussion of the \href{../../one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type \doxylink{classSimpleRefineableRectangularQuadMesh_ae0eab85a2c97fce00d7c82a613378e79}{Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt}.\mbox{]}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+We create the bulk mesh and surface mesh as \href{../../two_d_poisson_flux_bc2/html/index.html\#constructor}{\texttt{ before}}. Next we create the spatial error estimator and pass it to the bulk mesh.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ Poisson\ problem:\ Pass\ pointer\ to\ source\ function.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a6568980564c4e39544b1c2bcb71cf3b6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a6568980564c4e39544b1c2bcb71cf3b6}{RefineableTwoMeshFluxPoissonProblem}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{PoissonEquations<2>::PoissonSourceFctPt}}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source\_fct\_pt}})}
+\DoxyCodeLine{\ :\ \ Source\_fct\_pt(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source\_fct\_pt}})}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_x}}=4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_y}}=4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{l\_x}}=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{l\_y}}=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt=\textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_x}},\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_y}},\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{l\_x}},\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{l\_y}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create/set\ error\ estimator}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Z2ErrorEstimator}};}
+
+\end{DoxyCodeInclude}
+ Apart from this, the problem is constructed as in the \href{../../two_d_poisson_flux_bc2/html/index.html\#constructor}{\texttt{ non-\/adaptive previous example.}}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ "{}surface\ mesh"{}\ that\ will\ contain\ only\ the\ prescribed-\/flux\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ elements.\ The\ constructor\ just\ creates\ the\ mesh\ without}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ giving\ it\ any\ elements,\ nodes,\ etc.}}
+\DoxyCodeLine{\ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ prescribed-\/flux\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ boundary\ 1,\ but\ add\ them\ to\ a\ separate\ mesh.}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Note\ that\ this\ is\ exactly\ the\ same\ function\ as\ used\ in\ the\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ single\ mesh\ version\ of\ the\ problem,\ we\ merely\ pass\ different\ Mesh\ pointers.}}
+\DoxyCodeLine{\ create\_flux\_elements(1,Bulk\_mesh\_pt,Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ two\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_bound}}\ =\ Bulk\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}}=0;\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}}<\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_bound}};\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Leave\ nodes\ on\ boundary\ 1\ free}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}}!=1)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n}}=0;\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n}}<\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_node}};\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{b}},\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n}})-\/>pin(0);\ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ Poisson\ bulk\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor:\ Pass\ pointer\ to\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ source\ function}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}=0;\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}<\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_element}};\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ Poisson\ bulk\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}}\ *\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{el\_pt}}-\/>source\_fct\_pt()\ =\ Source\_fct\_pt;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ pointer\ to\ prescribed\ flux\ function\ for\ flux\ elements}}
+\DoxyCodeLine{\ set\_prescribed\_flux\_pt();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{cout}}\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_before_adapt}{}\doxysection{\texorpdfstring{Actions before adaptation}{Actions before adaptation}}\label{index_before_adapt}
+The mesh adaptation is driven by the error estimates in the bulk elements and only performed for that mesh. The flux elements must therefore be removed before adaptation. We do this by calling the function {\ttfamily delete\+\_\+flux\+\_\+elements(...)}, and then rebuilding the {\ttfamily Problem\textquotesingle{}s} global mesh.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a10d2a67a5ac599161ddcf876b31334f6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::actions\_before\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Kill\ the\ flux\ elements\ and\ wipe\ surface\ mesh}}
+\DoxyCodeLine{\ delete\_flux\_elements(Surface\_mesh\_pt);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_before\_adapt}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_after_adapt}{}\doxysection{\texorpdfstring{Actions after adapt}{Actions after adapt}}\label{index_after_adapt}
+After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attached. This is done by calling the function {\ttfamily create\+\_\+flux\+\_\+elements(...)}, followed by a rebuild of the {\ttfamily Problem\textquotesingle{}s} global mesh. Finally, we set the function pointer to the prescribed flux function for each flux element.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_a0140155529861f5e63ab32feece3c9b6}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ prescribed-\/flux\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ boundary\ 1\ and\ add\ them\ to\ surfac\ mesh}}
+\DoxyCodeLine{\ create\_flux\_elements(1,Bulk\_mesh\_pt,Surface\_mesh\_pt);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ pointer\ to\ prescribed\ flux\ function\ for\ flux\ elements}}
+\DoxyCodeLine{\ set\_prescribed\_flux\_pt();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ refinement\ levels\ in\ bulk\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{min\_refinement\_level}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{max\_refinement\_level}};}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>get\_refinement\_levels(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{min\_refinement\_level}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{max\_refinement\_level}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}Min/max.\ refinement\ levels\ in\ bulk\ mesh:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{min\_refinement\_level}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{max\_refinement\_level}}\ <<\ std::endl;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_delete_flux}{}\doxysection{\texorpdfstring{Delete flux elements}{Delete flux elements}}\label{index_delete_flux}
+This function loops over all the flux elements (\doxylink{classSimpleRefineableRectangularQuadMesh_ae0eab85a2c97fce00d7c82a613378e79}{i.\+e}. those in the surface mesh) and deletes them and their storage.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_flux\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Delete\ Poisson\ Flux\ Elements\ and\ wipe\ the\ surface\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab35087cadc6dbc7a602441b9a986d650}{RefineableTwoMeshFluxPoissonProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem_ab35087cadc6dbc7a602441b9a986d650}{delete\_flux\_elements}}(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Mesh}}*\ \textcolor{keyword}{const}\ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_element}}\ =\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}=0;\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}<\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{n\_element}};\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{e}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{surface\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ delete\_flux\_elements}}
+
+\end{DoxyCodeInclude}
+ {\bfseries{IMPORTANT\+:}} Note how the elements are first deleted "{}manually"{} and then "{}flushed"{} from the surface mesh, using the function {\ttfamily \doxylink{classSimpleRefineableRectangularQuadMesh_ae0eab85a2c97fce00d7c82a613378e79}{Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage()}}. This is necessary because deleting the surface mesh directly (by {\ttfamily delete} {\ttfamily surface\+\_\+mesh\+\_\+pt};) would also delete its constituent {\ttfamily Nodes} which are shared with the bulk mesh and must therefore be retained!
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_actions_before}{}\doxysection{\texorpdfstring{Actions before solve}{Actions before solve}}\label{index_actions_before}
+This remains as \href{../../two_d_poisson_flux_bc2/html/index.html\#actions_before}{\texttt{ before. }}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+This remains as \href{../../two_d_poisson_flux_bc2/html/index.html\#doc}{\texttt{ before. }}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_create_flux}{}\doxysection{\texorpdfstring{Create flux elements}{Create flux elements}}\label{index_create_flux}
+This remains as \href{../../two_d_poisson_flux_bc2/html/index.html}{\texttt{ before. }}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/}{\texttt{ demo\+\_\+drivers/poisson/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc}{\texttt{ demo\+\_\+drivers/poisson/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

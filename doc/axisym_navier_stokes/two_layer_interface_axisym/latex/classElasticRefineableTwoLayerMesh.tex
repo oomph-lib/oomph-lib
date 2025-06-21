@@ -1,0 +1,54 @@
+\doxysection{Elastic\+Refineable\+Two\+Layer\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classElasticRefineableTwoLayerMesh}{}\label{classElasticRefineableTwoLayerMesh}\index{ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$@{ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$}}
+
+
+Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Refineable\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers.  
+
+
+Inheritance diagram for Elastic\+Refineable\+Two\+Layer\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classElasticRefineableTwoLayerMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a868e53937a6cd94e2ff252fe2002a216}{Elastic\+Refineable\+Two\+Layer\+Mesh}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny2}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{lx}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$}
+Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Refineable\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00106}{106}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticRefineableTwoLayerMesh_a868e53937a6cd94e2ff252fe2002a216}\label{classElasticRefineableTwoLayerMesh_a868e53937a6cd94e2ff252fe2002a216} 
+\index{ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$@{ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$}!ElasticRefineableTwoLayerMesh@{ElasticRefineableTwoLayerMesh}}
+\index{ElasticRefineableTwoLayerMesh@{ElasticRefineableTwoLayerMesh}!ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$@{ElasticRefineableTwoLayerMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticRefineableTwoLayerMesh()}{ElasticRefineableTwoLayerMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{ny2,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{h1,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{h2,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, and pointer to timestepper (defaults to Steady timestepper) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00116}{116}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00537}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00662}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00260}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00835}{main()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}\end{DoxyCompactItemize}

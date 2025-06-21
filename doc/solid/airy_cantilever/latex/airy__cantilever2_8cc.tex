@@ -1,0 +1,57 @@
+\doxysection{airy\+\_\+cantilever2.\+cc File Reference}
+\hypertarget{airy__cantilever2_8cc}{}\label{airy__cantilever2_8cc}\index{airy\_cantilever2.cc@{airy\_cantilever2.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MySolidElement}{oomph\+::\+My\+Solid\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Wrapper class for solid elements to modify their output functions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01MySolidElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ My\+Solid\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class for the cantilever "{}beam"{} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{airy__cantilever2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver for cantilever beam loaded by surface traction and/or gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Strain\+Energy\+Function \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}} =1.\+3
+\begin{DoxyCompactList}\small\item\em "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{airy__cantilever2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{airy__cantilever2_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{airy\_cantilever2.cc@{airy\_cantilever2.cc}!main@{main}}
+\index{main@{main}!airy\_cantilever2.cc@{airy\_cantilever2.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver for cantilever beam loaded by surface traction and/or gravity. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00757}{757}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever2_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{airy__cantilever2_8cc_source_l00161}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00161}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00164}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{airy__cantilever2_8cc_source_l00672}{Cantilever\+Problem$<$ ELEMENT $>$\+::run\+\_\+it()}}, and \mbox{\hyperlink{airy__cantilever2_8cc_source_l00155}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

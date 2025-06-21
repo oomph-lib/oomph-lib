@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">RefineableBuoyantQCrouzeixRaviartElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A RefineableElement class that solves the Boussinesq approximation of the Navier&ndash;Stokes and energy equations by coupling two pre-existing classes. The RefineableQAdvectionDiffusionElement with bi-quadratic interpolation for the scalar variable (temperature) and RefineableQCrouzeixRaviartElement which solves the Navier&ndash;Stokes equations using bi-quadratic interpolation for the velocities and a discontinuous bi-linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function AdvectionDiffusionEquations&lt;DIM&gt;::u_index_adv_diff() to indicate that the temperature is stored at the DIM-th position not the 0-th. We do not need to overload the corresponding function in the NavierStokesEquations&lt;DIM&gt; class because the velocities are stored first. Finally, we choose to use the flux-recovery calculation from the fluid velocities to provide the error used in the mesh adaptation.  
+ <a href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a180c3373158434bc08fc69cc0f4392f9" id="r_a180c3373158434bc08fc69cc0f4392f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a180c3373158434bc08fc69cc0f4392f9">RefineableBuoyantQCrouzeixRaviartElement</a> ()</td></tr>
+<tr class="memdesc:a180c3373158434bc08fc69cc0f4392f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to address the default value of 0.0.  <br /></td></tr>
+<tr class="separator:a180c3373158434bc08fc69cc0f4392f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664008af1b7a6444cee34bd4f506c318" id="r_a664008af1b7a6444cee34bd4f506c318"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a664008af1b7a6444cee34bd4f506c318">required_nvalue</a> (const unsigned &amp;n) const</td></tr>
+<tr class="memdesc:a664008af1b7a6444cee34bd4f506c318"><td class="mdescLeft">&#160;</td><td class="mdescRight">The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. This step is generic for any composed element of this type.  <br /></td></tr>
+<tr class="separator:a664008af1b7a6444cee34bd4f506c318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5873f594fd21c17ba01594d868f39c11" id="r_a5873f594fd21c17ba01594d868f39c11"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a5873f594fd21c17ba01594d868f39c11">ra</a> () const</td></tr>
+<tr class="memdesc:a5873f594fd21c17ba01594d868f39c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the Rayleigh number (const version)  <br /></td></tr>
+<tr class="separator:a5873f594fd21c17ba01594d868f39c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17c9cfc829f8a8a0dd81e4c47a94376" id="r_ab17c9cfc829f8a8a0dd81e4c47a94376"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ab17c9cfc829f8a8a0dd81e4c47a94376">ra_pt</a> ()</td></tr>
+<tr class="memdesc:ab17c9cfc829f8a8a0dd81e4c47a94376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the pointer to the Rayleigh number.  <br /></td></tr>
+<tr class="separator:ab17c9cfc829f8a8a0dd81e4c47a94376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fdb84a7d69740668514e0dae2d07f7e" id="r_a7fdb84a7d69740668514e0dae2d07f7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a7fdb84a7d69740668514e0dae2d07f7e">disable_ALE</a> ()</td></tr>
+<tr class="memdesc:a7fdb84a7d69740668514e0dae2d07f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for disable ALE.  <br /></td></tr>
+<tr class="separator:a7fdb84a7d69740668514e0dae2d07f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7006ef1edd1ac4a178e38945fae581ee" id="r_a7006ef1edd1ac4a178e38945fae581ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a7006ef1edd1ac4a178e38945fae581ee">enable_ALE</a> ()</td></tr>
+<tr class="memdesc:a7006ef1edd1ac4a178e38945fae581ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Final override for enable ALE.  <br /></td></tr>
+<tr class="separator:a7006ef1edd1ac4a178e38945fae581ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2167093a1902a2ed4c79d45eff457ca8" id="r_a2167093a1902a2ed4c79d45eff457ca8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a2167093a1902a2ed4c79d45eff457ca8">nscalar_paraview</a> () const</td></tr>
+<tr class="memdesc:a2167093a1902a2ed4c79d45eff457ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of scalars/fields output by this element. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy.  <br /></td></tr>
+<tr class="separator:a2167093a1902a2ed4c79d45eff457ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8ee12b27daa327e97fbacc89c341c6" id="r_a9a8ee12b27daa327e97fbacc89c341c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a9a8ee12b27daa327e97fbacc89c341c6">scalar_value_paraview</a> (std::ofstream &amp;file_out, const unsigned &amp;i, const unsigned &amp;nplot) const</td></tr>
+<tr class="memdesc:a9a8ee12b27daa327e97fbacc89c341c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write values of the i-th scalar field at the plot points. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy.  <br /></td></tr>
+<tr class="separator:a9a8ee12b27daa327e97fbacc89c341c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9b9687a5a15a0089431ad1b143356e5" id="r_ae9b9687a5a15a0089431ad1b143356e5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ae9b9687a5a15a0089431ad1b143356e5">scalar_name_paraview</a> (const unsigned &amp;i) const</td></tr>
+<tr class="memdesc:ae9b9687a5a15a0089431ad1b143356e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the i-th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names.  <br /></td></tr>
+<tr class="separator:ae9b9687a5a15a0089431ad1b143356e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbe05b977edbfec7752ed417b90e09fa" id="r_abbe05b977edbfec7752ed417b90e09fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#abbe05b977edbfec7752ed417b90e09fa">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:abbe05b977edbfec7752ed417b90e09fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the standard output function with the broken default.  <br /></td></tr>
+<tr class="separator:abbe05b977edbfec7752ed417b90e09fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36bc6dc9052947f0932a605dd4d0e8f0" id="r_a36bc6dc9052947f0932a605dd4d0e8f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a36bc6dc9052947f0932a605dd4d0e8f0">output</a> (std::ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:a36bc6dc9052947f0932a605dd4d0e8f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: x,y,u or x,y,z,u at Nplot^DIM plot points.  <br /></td></tr>
+<tr class="separator:a36bc6dc9052947f0932a605dd4d0e8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90579086f991da7fbaf7d92b29abf994" id="r_a90579086f991da7fbaf7d92b29abf994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a90579086f991da7fbaf7d92b29abf994">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a90579086f991da7fbaf7d92b29abf994"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:a90579086f991da7fbaf7d92b29abf994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a650e1b0428cd160c72dbc3deda287b26" id="r_a650e1b0428cd160c72dbc3deda287b26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a650e1b0428cd160c72dbc3deda287b26">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a650e1b0428cd160c72dbc3deda287b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:a650e1b0428cd160c72dbc3deda287b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9feaf2d6003f2328741de2987fd0d1" id="r_a9f9feaf2d6003f2328741de2987fd0d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a9f9feaf2d6003f2328741de2987fd0d1">output_fct</a> (std::ostream &amp;outfile, const unsigned &amp;Nplot, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:a9f9feaf2d6003f2328741de2987fd0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for an exact solution: Broken default.  <br /></td></tr>
+<tr class="separator:a9f9feaf2d6003f2328741de2987fd0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1eaab23a14039a18701b5666629b5bc" id="r_aa1eaab23a14039a18701b5666629b5bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#aa1eaab23a14039a18701b5666629b5bc">output_fct</a> (std::ostream &amp;outfile, const unsigned &amp;Nplot, const double &amp;time, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)</td></tr>
+<tr class="memdesc:aa1eaab23a14039a18701b5666629b5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function for a time-dependent exact solution. Broken default.  <br /></td></tr>
+<tr class="separator:aa1eaab23a14039a18701b5666629b5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a973ee5e4d7425db2e7f9a259bab46" id="r_ac6a973ee5e4d7425db2e7f9a259bab46"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ac6a973ee5e4d7425db2e7f9a259bab46">u_index_adv_diff</a> () const</td></tr>
+<tr class="memdesc:ac6a973ee5e4d7425db2e7f9a259bab46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the index at which the temperature variable is stored. We choose to store is after the fluid velocities.  <br /></td></tr>
+<tr class="separator:ac6a973ee5e4d7425db2e7f9a259bab46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a868eb9a7f06469da529dbbc5b1efe34e" id="r_a868eb9a7f06469da529dbbc5b1efe34e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a868eb9a7f06469da529dbbc5b1efe34e">nvertex_node</a> () const</td></tr>
+<tr class="memdesc:a868eb9a7f06469da529dbbc5b1efe34e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertex nodes in the element is obtained from the geometric element.  <br /></td></tr>
+<tr class="separator:a868eb9a7f06469da529dbbc5b1efe34e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae65592457a3a48365e0200325c5bbbbc" id="r_ae65592457a3a48365e0200325c5bbbbc"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ae65592457a3a48365e0200325c5bbbbc">vertex_node_pt</a> (const unsigned &amp;j) const</td></tr>
+<tr class="memdesc:ae65592457a3a48365e0200325c5bbbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the j-th vertex node in the element, Call the geometric element's function.  <br /></td></tr>
+<tr class="separator:ae65592457a3a48365e0200325c5bbbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f094a1c3080905d0e90f5ac6ebd1b6" id="r_a98f094a1c3080905d0e90f5ac6ebd1b6"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a98f094a1c3080905d0e90f5ac6ebd1b6">ncont_interpolated_values</a> () const</td></tr>
+<tr class="memdesc:a98f094a1c3080905d0e90f5ac6ebd1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The total number of continously interpolated values is DIM+1 (DIM fluid velocities and one temperature).  <br /></td></tr>
+<tr class="separator:a98f094a1c3080905d0e90f5ac6ebd1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89e116d612b3530edd2b0666d25cf01" id="r_aa89e116d612b3530edd2b0666d25cf01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#aa89e116d612b3530edd2b0666d25cf01">get_interpolated_values</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;values)</td></tr>
+<tr class="memdesc:aa89e116d612b3530edd2b0666d25cf01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the continuously interpolated values at the local coordinate s. We choose to put the fluid velocities first, followed by the temperature.  <br /></td></tr>
+<tr class="separator:aa89e116d612b3530edd2b0666d25cf01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af178c04f0e6ee09a5d05574fcd68ac41" id="r_af178c04f0e6ee09a5d05574fcd68ac41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#af178c04f0e6ee09a5d05574fcd68ac41">get_interpolated_values</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;values)</td></tr>
+<tr class="memdesc:af178c04f0e6ee09a5d05574fcd68ac41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all continuously interpolated values at the local coordinate s at time level t (t=0: present; t&gt;0: previous). We choose to put the fluid velocities first, followed by the temperature.  <br /></td></tr>
+<tr class="separator:af178c04f0e6ee09a5d05574fcd68ac41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a823598e014557e7d2ef2d533972d1" id="r_ab0a823598e014557e7d2ef2d533972d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ab0a823598e014557e7d2ef2d533972d1">further_setup_hanging_nodes</a> ()</td></tr>
+<tr class="memdesc:ab0a823598e014557e7d2ef2d533972d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The additional hanging node information must be set up for both single-physics elements.  <br /></td></tr>
+<tr class="separator:ab0a823598e014557e7d2ef2d533972d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00e5ff46d718e47374a3d1dc282f419c" id="r_a00e5ff46d718e47374a3d1dc282f419c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a00e5ff46d718e47374a3d1dc282f419c">rebuild_from_sons</a> (Mesh *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:a00e5ff46d718e47374a3d1dc282f419c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the rebuild_from_sons functions for each of the constituent multi-physics elements.  <br /></td></tr>
+<tr class="separator:a00e5ff46d718e47374a3d1dc282f419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d622f02595901b5f3ad830de915471" id="r_a60d622f02595901b5f3ad830de915471"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a60d622f02595901b5f3ad830de915471">further_build</a> ()</td></tr>
+<tr class="memdesc:a60d622f02595901b5f3ad830de915471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the underlying single-physics element's <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a60d622f02595901b5f3ad830de915471" title="Call the underlying single-physics element&#39;s further_build() functions and make sure that the pointer...">further_build()</a> functions and make sure that the pointer to the Rayleigh number is passed to the sons.  <br /></td></tr>
+<tr class="separator:a60d622f02595901b5f3ad830de915471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18e7035500add323a8d5ce921c9c1b8a" id="r_a18e7035500add323a8d5ce921c9c1b8a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a18e7035500add323a8d5ce921c9c1b8a">nrecovery_order</a> ()</td></tr>
+<tr class="memdesc:a18e7035500add323a8d5ce921c9c1b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The recovery order is that of the NavierStokes elements.  <br /></td></tr>
+<tr class="separator:a18e7035500add323a8d5ce921c9c1b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a630b9aa6c5cf924d32996e89ed230175" id="r_a630b9aa6c5cf924d32996e89ed230175"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a630b9aa6c5cf924d32996e89ed230175">num_Z2_flux_terms</a> ()</td></tr>
+<tr class="memdesc:a630b9aa6c5cf924d32996e89ed230175"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of Z2 flux terms is the same as that in the fluid element plus that in the advection-diffusion element.  <br /></td></tr>
+<tr class="separator:a630b9aa6c5cf924d32996e89ed230175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b78fb6b311b89cff1b57fcaacd924d7" id="r_a1b78fb6b311b89cff1b57fcaacd924d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a1b78fb6b311b89cff1b57fcaacd924d7">get_Z2_flux</a> (const Vector&lt; double &gt; &amp;s, Vector&lt; double &gt; &amp;flux)</td></tr>
+<tr class="memdesc:a1b78fb6b311b89cff1b57fcaacd924d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Z2 flux by concatenating the fluxes from the fluid and the advection diffusion elements.  <br /></td></tr>
+<tr class="separator:a1b78fb6b311b89cff1b57fcaacd924d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395397240c5745ad7ed66ce6f66b5d99" id="r_a395397240c5745ad7ed66ce6f66b5d99"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a395397240c5745ad7ed66ce6f66b5d99">ncompound_fluxes</a> ()</td></tr>
+<tr class="memdesc:a395397240c5745ad7ed66ce6f66b5d99"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of compound fluxes is two (one for the fluid and one for the temperature)  <br /></td></tr>
+<tr class="separator:a395397240c5745ad7ed66ce6f66b5d99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b5c8d8df0dc6d7af67570c609f591b" id="r_ac8b5c8d8df0dc6d7af67570c609f591b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ac8b5c8d8df0dc6d7af67570c609f591b">get_Z2_compound_flux_indices</a> (Vector&lt; unsigned &gt; &amp;flux_index)</td></tr>
+<tr class="memdesc:ac8b5c8d8df0dc6d7af67570c609f591b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in which flux components are associated with the fluid measure and which are associated with the temperature measure.  <br /></td></tr>
+<tr class="separator:ac8b5c8d8df0dc6d7af67570c609f591b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad239e9a0ebe88136d68e1521fc51e0bb" id="r_ad239e9a0ebe88136d68e1521fc51e0bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ad239e9a0ebe88136d68e1521fc51e0bb">compute_error</a> (std::ostream &amp;outfile, FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt, const double &amp;time, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:ad239e9a0ebe88136d68e1521fc51e0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default.  <br /></td></tr>
+<tr class="separator:ad239e9a0ebe88136d68e1521fc51e0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a078039343f5f9bb467a1183f725d1873" id="r_a078039343f5f9bb467a1183f725d1873"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a078039343f5f9bb467a1183f725d1873">compute_error</a> (std::ostream &amp;outfile, FiniteElement::SteadyExactSolutionFctPt exact_soln_pt, double &amp;error, double &amp;norm)</td></tr>
+<tr class="memdesc:a078039343f5f9bb467a1183f725d1873"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default.  <br /></td></tr>
+<tr class="separator:a078039343f5f9bb467a1183f725d1873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a093f484b86df6e7cb59d4cc9e605fb51" id="r_a093f484b86df6e7cb59d4cc9e605fb51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a093f484b86df6e7cb59d4cc9e605fb51">get_wind_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind) const</td></tr>
+<tr class="memdesc:a093f484b86df6e7cb59d4cc9e605fb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity.  <br /></td></tr>
+<tr class="separator:a093f484b86df6e7cb59d4cc9e605fb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69fb9113989d692dd55eb1983cdbc93b" id="r_a69fb9113989d692dd55eb1983cdbc93b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a69fb9113989d692dd55eb1983cdbc93b">get_body_force_nst</a> (const double &amp;time, const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a69fb9113989d692dd55eb1983cdbc93b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the body force in the navier-stokes equations This provides the coupling from the advection-diffusion equations to the Navier&ndash;Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity.  <br /></td></tr>
+<tr class="separator:a69fb9113989d692dd55eb1983cdbc93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a102b3aeb79d9af430b9ce0a7c8d5bd33" id="r_a102b3aeb79d9af430b9ce0a7c8d5bd33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a102b3aeb79d9af430b9ce0a7c8d5bd33">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:a102b3aeb79d9af430b9ce0a7c8d5bd33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the constituent elements' contribution to the residual vector.  <br /></td></tr>
+<tr class="separator:a102b3aeb79d9af430b9ce0a7c8d5bd33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d05a727999c7f102f3fe2bacce38f6b" id="r_a0d05a727999c7f102f3fe2bacce38f6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a0d05a727999c7f102f3fe2bacce38f6b">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a0d05a727999c7f102f3fe2bacce38f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual Vector and the jacobian matrix using full finite differences, the default implementation.  <br /></td></tr>
+<tr class="separator:a0d05a727999c7f102f3fe2bacce38f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f1e2dbdf7a8ebaa964d421aee453ee" id="r_a06f1e2dbdf7a8ebaa964d421aee453ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a06f1e2dbdf7a8ebaa964d421aee453ee">fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a06f1e2dbdf7a8ebaa964d421aee453ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residuals vector, jacobian matrix and mass matrix.  <br /></td></tr>
+<tr class="separator:a06f1e2dbdf7a8ebaa964d421aee453ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe93946149c696f273be12540099d1a" id="r_a6fe93946149c696f273be12540099d1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a6fe93946149c696f273be12540099d1a">fill_in_off_diagonal_jacobian_blocks_analytic</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a6fe93946149c696f273be12540099d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the contribution of the off-diagonal blocks analytically.  <br /></td></tr>
+<tr class="separator:a6fe93946149c696f273be12540099d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae308bf4efa0180a3bd8915ecfa857187" id="r_ae308bf4efa0180a3bd8915ecfa857187"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#ae308bf4efa0180a3bd8915ecfa857187">Default_Physical_Constant_Value</a></td></tr>
+<tr class="memdesc:ae308bf4efa0180a3bd8915ecfa857187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default value of the Rayleigh number to be zero.  <br /></td></tr>
+<tr class="separator:ae308bf4efa0180a3bd8915ecfa857187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abebe067a6aadeb95479bd1d1495004df" id="r_abebe067a6aadeb95479bd1d1495004df"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#abebe067a6aadeb95479bd1d1495004df">Default_Physical_Constant_Value</a></td></tr>
+<tr class="separator:abebe067a6aadeb95479bd1d1495004df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a65ce0c55087be240fc183e08def8b07b" id="r_a65ce0c55087be240fc183e08def8b07b"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a65ce0c55087be240fc183e08def8b07b">Ra_pt</a></td></tr>
+<tr class="memdesc:a65ce0c55087be240fc183e08def8b07b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a new physical variable, the Rayleigh number.  <br /></td></tr>
+<tr class="separator:a65ce0c55087be240fc183e08def8b07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a33bf1cb8ad42fc6418e71acabbe1925e" id="r_a33bf1cb8ad42fc6418e71acabbe1925e"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a33bf1cb8ad42fc6418e71acabbe1925e">Default_Physical_Constant_Value</a></td></tr>
+<tr class="memdesc:a33bf1cb8ad42fc6418e71acabbe1925e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The static default value of the Rayleigh number.  <br /></td></tr>
+<tr class="separator:a33bf1cb8ad42fc6418e71acabbe1925e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;unsigned DIM&gt;<br />
+class oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;</div><p>A RefineableElement class that solves the Boussinesq approximation of the Navier&ndash;Stokes and energy equations by coupling two pre-existing classes. The RefineableQAdvectionDiffusionElement with bi-quadratic interpolation for the scalar variable (temperature) and RefineableQCrouzeixRaviartElement which solves the Navier&ndash;Stokes equations using bi-quadratic interpolation for the velocities and a discontinuous bi-linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function AdvectionDiffusionEquations&lt;DIM&gt;::u_index_adv_diff() to indicate that the temperature is stored at the DIM-th position not the 0-th. We do not need to overload the corresponding function in the NavierStokesEquations&lt;DIM&gt; class because the velocities are stored first. Finally, we choose to use the flux-recovery calculation from the fluid velocities to provide the error used in the mesh adaptation. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00800">800</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a180c3373158434bc08fc69cc0f4392f9" name="a180c3373158434bc08fc69cc0f4392f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a180c3373158434bc08fc69cc0f4392f9">&#9670;&#160;</a></span>RefineableBuoyantQCrouzeixRaviartElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::RefineableBuoyantQCrouzeixRaviartElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: call the underlying constructors and initialise the pointer to the Rayleigh number to address the default value of 0.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00815">815</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00809">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::Default_Physical_Constant_Value</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l00806">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::Ra_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a078039343f5f9bb467a1183f725d1873" name="a078039343f5f9bb467a1183f725d1873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a078039343f5f9bb467a1183f725d1873">&#9670;&#160;</a></span>compute_error() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01205">1205</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ad239e9a0ebe88136d68e1521fc51e0bb" name="ad239e9a0ebe88136d68e1521fc51e0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad239e9a0ebe88136d68e1521fc51e0bb">&#9670;&#160;</a></span>compute_error() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::compute_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>error</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>norm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Overload to broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01191">1191</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ae308bf4efa0180a3bd8915ecfa857187" name="ae308bf4efa0180a3bd8915ecfa857187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae308bf4efa0180a3bd8915ecfa857187">&#9670;&#160;</a></span>Default_Physical_Constant_Value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; 2 &gt;::Default_Physical_Constant_Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the default value of the Rayleigh number to be zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01589">1589</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="abebe067a6aadeb95479bd1d1495004df" name="abebe067a6aadeb95479bd1d1495004df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abebe067a6aadeb95479bd1d1495004df">&#9670;&#160;</a></span>Default_Physical_Constant_Value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; 3 &gt;::Default_Physical_Constant_Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01593">1593</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a7fdb84a7d69740668514e0dae2d07f7e" name="a7fdb84a7d69740668514e0dae2d07f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fdb84a7d69740668514e0dae2d07f7e">&#9670;&#160;</a></span>disable_ALE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::disable_ALE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for disable ALE. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00845">845</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a7006ef1edd1ac4a178e38945fae581ee" name="a7006ef1edd1ac4a178e38945fae581ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7006ef1edd1ac4a178e38945fae581ee">&#9670;&#160;</a></span>enable_ALE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::enable_ALE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Final override for enable ALE. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00853">853</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a0d05a727999c7f102f3fe2bacce38f6b" name="a0d05a727999c7f102f3fe2bacce38f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d05a727999c7f102f3fe2bacce38f6b">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual Vector and the jacobian matrix using full finite differences, the default implementation. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01266">1266</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l01266">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l01301">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01266">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a06f1e2dbdf7a8ebaa964d421aee453ee" name="a06f1e2dbdf7a8ebaa964d421aee453ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f1e2dbdf7a8ebaa964d421aee453ee">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01289">1289</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a102b3aeb79d9af430b9ce0a7c8d5bd33" name="a102b3aeb79d9af430b9ce0a7c8d5bd33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a102b3aeb79d9af430b9ce0a7c8d5bd33">&#9670;&#160;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in the constituent elements' contribution to the residual vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01252">1252</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l01252">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01252">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a6fe93946149c696f273be12540099d1a" name="a6fe93946149c696f273be12540099d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe93946149c696f273be12540099d1a">&#9670;&#160;</a></span>fill_in_off_diagonal_jacobian_blocks_analytic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the contribution of the off-diagonal blocks analytically. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01301">1301</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00832">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::ra()</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l00977">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::u_index_adv_diff()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01266">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a60d622f02595901b5f3ad830de915471" name="a60d622f02595901b5f3ad830de915471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60d622f02595901b5f3ad830de915471">&#9670;&#160;</a></span>further_build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::further_build </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call the underlying single-physics element's <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html#a60d622f02595901b5f3ad830de915471" title="Call the underlying single-physics element&#39;s further_build() functions and make sure that the pointer...">further_build()</a> functions and make sure that the pointer to the Rayleigh number is passed to the sons. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01091">1091</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00838">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::ra_pt()</a>.</p>
+
+</div>
+</div>
+<a id="ab0a823598e014557e7d2ef2d533972d1" name="ab0a823598e014557e7d2ef2d533972d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0a823598e014557e7d2ef2d533972d1">&#9670;&#160;</a></span>further_setup_hanging_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::further_setup_hanging_nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The additional hanging node information must be set up for both single-physics elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01071">1071</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l01071">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::further_setup_hanging_nodes()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01071">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::further_setup_hanging_nodes()</a>.</p>
+
+</div>
+</div>
+<a id="a69fb9113989d692dd55eb1983cdbc93b" name="a69fb9113989d692dd55eb1983cdbc93b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fb9113989d692dd55eb1983cdbc93b">&#9670;&#160;</a></span>get_body_force_nst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_body_force_nst </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the body force in the navier-stokes equations This provides the coupling from the advection-diffusion equations to the Navier&ndash;Stokes equations, the body force is the temperature multiplied by the Rayleigh number acting in the direction opposite to gravity. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01231">1231</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00832">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::ra()</a>.</p>
+
+</div>
+</div>
+<a id="af178c04f0e6ee09a5d05574fcd68ac41" name="af178c04f0e6ee09a5d05574fcd68ac41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af178c04f0e6ee09a5d05574fcd68ac41">&#9670;&#160;</a></span>get_interpolated_values() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_interpolated_values </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get all continuously interpolated values at the local coordinate s at time level t (t=0: present; t&gt;0: previous). We choose to put the fluid velocities first, followed by the temperature. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01039">1039</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="aa89e116d612b3530edd2b0666d25cf01" name="aa89e116d612b3530edd2b0666d25cf01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89e116d612b3530edd2b0666d25cf01">&#9670;&#160;</a></span>get_interpolated_values() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_interpolated_values </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the continuously interpolated values at the local coordinate s. We choose to put the fluid velocities first, followed by the temperature. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01007">1007</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a093f484b86df6e7cb59d4cc9e605fb51" name="a093f484b86df6e7cb59d4cc9e605fb51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093f484b86df6e7cb59d4cc9e605fb51">&#9670;&#160;</a></span>get_wind_adv_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_wind_adv_diff </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>wind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01216">1216</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ac8b5c8d8df0dc6d7af67570c609f591b" name="ac8b5c8d8df0dc6d7af67570c609f591b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8b5c8d8df0dc6d7af67570c609f591b">&#9670;&#160;</a></span>get_Z2_compound_flux_indices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_Z2_compound_flux_indices </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>flux_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in which flux components are associated with the fluid measure and which are associated with the temperature measure. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01160">1160</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a1b78fb6b311b89cff1b57fcaacd924d7" name="a1b78fb6b311b89cff1b57fcaacd924d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b78fb6b311b89cff1b57fcaacd924d7">&#9670;&#160;</a></span>get_Z2_flux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::get_Z2_flux </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>flux</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Z2 flux by concatenating the fluxes from the fluid and the advection diffusion elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01126">1126</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a395397240c5745ad7ed66ce6f66b5d99" name="a395397240c5745ad7ed66ce6f66b5d99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395397240c5745ad7ed66ce6f66b5d99">&#9670;&#160;</a></span>ncompound_fluxes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::ncompound_fluxes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of compound fluxes is two (one for the fluid and one for the temperature) </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01153">1153</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a98f094a1c3080905d0e90f5ac6ebd1b6" name="a98f094a1c3080905d0e90f5ac6ebd1b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f094a1c3080905d0e90f5ac6ebd1b6">&#9670;&#160;</a></span>ncont_interpolated_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::ncont_interpolated_values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The total number of continously interpolated values is DIM+1 (DIM fluid velocities and one temperature). </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00998">998</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a18e7035500add323a8d5ce921c9c1b8a" name="a18e7035500add323a8d5ce921c9c1b8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18e7035500add323a8d5ce921c9c1b8a">&#9670;&#160;</a></span>nrecovery_order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::nrecovery_order </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The recovery order is that of the NavierStokes elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01109">1109</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a2167093a1902a2ed4c79d45eff457ca8" name="a2167093a1902a2ed4c79d45eff457ca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2167093a1902a2ed4c79d45eff457ca8">&#9670;&#160;</a></span>nscalar_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::nscalar_paraview </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of scalars/fields output by this element. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00864">864</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a630b9aa6c5cf924d32996e89ed230175" name="a630b9aa6c5cf924d32996e89ed230175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a630b9aa6c5cf924d32996e89ed230175">&#9670;&#160;</a></span>num_Z2_flux_terms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::num_Z2_flux_terms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of Z2 flux terms is the same as that in the fluid element plus that in the advection-diffusion element. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01116">1116</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a868eb9a7f06469da529dbbc5b1efe34e" name="a868eb9a7f06469da529dbbc5b1efe34e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a868eb9a7f06469da529dbbc5b1efe34e">&#9670;&#160;</a></span>nvertex_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::nvertex_node </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of vertex nodes in the element is obtained from the geometric element. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00984">984</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a90579086f991da7fbaf7d92b29abf994" name="a90579086f991da7fbaf7d92b29abf994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90579086f991da7fbaf7d92b29abf994">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00945">945</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a650e1b0428cd160c72dbc3deda287b26" name="a650e1b0428cd160c72dbc3deda287b26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a650e1b0428cd160c72dbc3deda287b26">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00951">951</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="abbe05b977edbfec7752ed417b90e09fa" name="abbe05b977edbfec7752ed417b90e09fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe05b977edbfec7752ed417b90e09fa">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the standard output function with the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00898">898</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a36bc6dc9052947f0932a605dd4d0e8f0" name="a36bc6dc9052947f0932a605dd4d0e8f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36bc6dc9052947f0932a605dd4d0e8f0">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: x,y,u or x,y,z,u at Nplot^DIM plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00905">905</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="aa1eaab23a14039a18701b5666629b5bc" name="aa1eaab23a14039a18701b5666629b5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1eaab23a14039a18701b5666629b5bc">&#9670;&#160;</a></span>output_fct() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::UnsteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for a time-dependent exact solution. Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00967">967</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9f9feaf2d6003f2328741de2987fd0d1" name="a9f9feaf2d6003f2328741de2987fd0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9feaf2d6003f2328741de2987fd0d1">&#9670;&#160;</a></span>output_fct() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::output_fct </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>Nplot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FiniteElement::SteadyExactSolutionFctPt&#160;</td>
+          <td class="paramname"><em>exact_soln_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function for an exact solution: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00957">957</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a5873f594fd21c17ba01594d868f39c11" name="a5873f594fd21c17ba01594d868f39c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5873f594fd21c17ba01594d868f39c11">&#9670;&#160;</a></span>ra()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double &amp; <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::ra </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the Rayleigh number (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00832">832</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00806">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::Ra_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01301">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l01231">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::get_body_force_nst()</a>.</p>
+
+</div>
+</div>
+<a id="ab17c9cfc829f8a8a0dd81e4c47a94376" name="ab17c9cfc829f8a8a0dd81e4c47a94376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17c9cfc829f8a8a0dd81e4c47a94376">&#9670;&#160;</a></span>ra_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double *&amp; <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::ra_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the pointer to the Rayleigh number. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00838">838</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="boussinesq__elements_8h_source.html#l00806">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::Ra_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01091">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::further_build()</a>.</p>
+
+</div>
+</div>
+<a id="a00e5ff46d718e47374a3d1dc282f419c" name="a00e5ff46d718e47374a3d1dc282f419c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00e5ff46d718e47374a3d1dc282f419c">&#9670;&#160;</a></span>rebuild_from_sons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::rebuild_from_sons </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call the rebuild_from_sons functions for each of the constituent multi-physics elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l01081">1081</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a664008af1b7a6444cee34bd4f506c318" name="a664008af1b7a6444cee34bd4f506c318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664008af1b7a6444cee34bd4f506c318">&#9670;&#160;</a></span>required_nvalue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::required_nvalue </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The required number of values stored at the nodes is the sum of the required values of the two single-physics elements. This step is generic for any composed element of this type. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00825">825</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ae9b9687a5a15a0089431ad1b143356e5" name="ae9b9687a5a15a0089431ad1b143356e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b9687a5a15a0089431ad1b143356e5">&#9670;&#160;</a></span>scalar_name_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::scalar_name_paraview </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name of the i-th scalar field. Default implementation returns V1 for the first one, V2 for the second etc. Can (should!) be overloaded with more meaningful names. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00892">892</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9a8ee12b27daa327e97fbacc89c341c6" name="a9a8ee12b27daa327e97fbacc89c341c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a8ee12b27daa327e97fbacc89c341c6">&#9670;&#160;</a></span>scalar_value_paraview()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::scalar_value_paraview </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>file_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write values of the i-th scalar field at the plot points. Broken virtual. Needs to be implemented for each new specific element type. Temporary dummy. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00878">878</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ac6a973ee5e4d7425db2e7f9a259bab46" name="ac6a973ee5e4d7425db2e7f9a259bab46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6a973ee5e4d7425db2e7f9a259bab46">&#9670;&#160;</a></span>u_index_adv_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::u_index_adv_diff </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the index at which the temperature variable is stored. We choose to store is after the fluid velocities. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00977">977</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l01301">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>.</p>
+
+</div>
+</div>
+<a id="ae65592457a3a48365e0200325c5bbbbc" name="ae65592457a3a48365e0200325c5bbbbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae65592457a3a48365e0200325c5bbbbc">&#9670;&#160;</a></span>vertex_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node * <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::vertex_node_pt </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the j-th vertex node in the element, Call the geometric element's function. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00991">991</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a33bf1cb8ad42fc6418e71acabbe1925e" name="a33bf1cb8ad42fc6418e71acabbe1925e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bf1cb8ad42fc6418e71acabbe1925e">&#9670;&#160;</a></span>Default_Physical_Constant_Value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::Default_Physical_Constant_Value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The static default value of the Rayleigh number. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00809">809</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l00815">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::RefineableBuoyantQCrouzeixRaviartElement()</a>.</p>
+
+</div>
+</div>
+<a id="a65ce0c55087be240fc183e08def8b07b" name="a65ce0c55087be240fc183e08def8b07b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ce0c55087be240fc183e08def8b07b">&#9670;&#160;</a></span>Ra_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;unsigned DIM&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement.html">oomph::RefineableBuoyantQCrouzeixRaviartElement</a>&lt; DIM &gt;::Ra_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a new physical variable, the Rayleigh number. </p>
+
+<p class="definition">Definition at line <a class="el" href="boussinesq__elements_8h_source.html#l00806">806</a> of file <a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="boussinesq__elements_8h_source.html#l00832">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::ra()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l00838">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::ra_pt()</a>, and <a class="el" href="boussinesq__elements_8h_source.html#l00815">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::RefineableBuoyantQCrouzeixRaviartElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="boussinesq__elements_8h_source.html">boussinesq_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

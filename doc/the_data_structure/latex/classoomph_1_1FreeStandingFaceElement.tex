@@ -1,0 +1,172 @@
+\doxysection{oomph\+::Free\+Standing\+Face\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1FreeStandingFaceElement}{}\label{classoomph_1_1FreeStandingFaceElement}\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+
+
+Basic-\/ified \doxylink{classoomph_1_1FaceElement}{Face\+Element}, without any of the functionality of of actual Face\+Elements -- it\textquotesingle{}s just a surface element of the same geometric type as the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} associated with bulk element specified by the template parameter. The element can be used to represent boundaries without actually being attached to a bulk element. Used mainly during unstructured mesh generation.  
+
+
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Free\+Standing\+Face\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FreeStandingFaceElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a9d87193db8d21a358eb6a0aa9881b90a}{Free\+Standing\+Face\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d}{boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for the boundary number in bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db}{set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Set function for the boundary number in bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em In a \doxylink{classoomph_1_1FaceElement}{Face\+Element}, the "{}global"{} intrinsic coordinate of the element along the boundary, when viewed as part of a compound geometric object is specified using the boundary coordinate defined by the mesh. Note\+: Boundary coordinates will have been set up when creating the underlying mesh, and their values will have been stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a8326eccc4018fcc1df6729a439549aa3}{Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em The boundary number in the bulk mesh to which this element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7}{Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}
+\begin{DoxyCompactList}\small\item\em Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with PARANOID switched on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT$>$\newline
+class oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$}
+Basic-\/ified \doxylink{classoomph_1_1FaceElement}{Face\+Element}, without any of the functionality of of actual Face\+Elements -- it\textquotesingle{}s just a surface element of the same geometric type as the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} associated with bulk element specified by the template parameter. The element can be used to represent boundaries without actually being attached to a bulk element. Used mainly during unstructured mesh generation. 
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05122}{5122}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_a9d87193db8d21a358eb6a0aa9881b90a}\label{classoomph_1_1FreeStandingFaceElement_a9d87193db8d21a358eb6a0aa9881b90a} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!FreeStandingFaceElement@{FreeStandingFaceElement}}
+\index{FreeStandingFaceElement@{FreeStandingFaceElement}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FreeStandingFaceElement()}{FreeStandingFaceElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::\+Free\+Standing\+Face\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05126}{5126}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l05181}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d}\label{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!boundary\_number\_in\_bulk\_mesh@{boundary\_number\_in\_bulk\_mesh}}
+\index{boundary\_number\_in\_bulk\_mesh@{boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_number\_in\_bulk\_mesh()}{boundary\_number\_in\_bulk\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the boundary number in bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05136}{5136}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l05175}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}.
+
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db}\label{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!set\_boundary\_number\_in\_bulk\_mesh@{set\_boundary\_number\_in\_bulk\_mesh}}
+\index{set\_boundary\_number\_in\_bulk\_mesh@{set\_boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_number\_in\_bulk\_mesh()}{set\_boundary\_number\_in\_bulk\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set function for the boundary number in bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05143}{5143}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l05175}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}, and \mbox{\hyperlink{elements_8h_source_l05181}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}.
+
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}\label{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+In a \doxylink{classoomph_1_1FaceElement}{Face\+Element}, the "{}global"{} intrinsic coordinate of the element along the boundary, when viewed as part of a compound geometric object is specified using the boundary coordinate defined by the mesh. Note\+: Boundary coordinates will have been set up when creating the underlying mesh, and their values will have been stored at the nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05158}{5158}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l05175}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_a8326eccc4018fcc1df6729a439549aa3}\label{classoomph_1_1FreeStandingFaceElement_a8326eccc4018fcc1df6729a439549aa3} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!Boundary\_number\_in\_bulk\_mesh@{Boundary\_number\_in\_bulk\_mesh}}
+\index{Boundary\_number\_in\_bulk\_mesh@{Boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_number\_in\_bulk\_mesh}{Boundary\_number\_in\_bulk\_mesh}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The boundary number in the bulk mesh to which this element is attached. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05175}{5175}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8h_source_l05136}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, \mbox{\hyperlink{elements_8h_source_l05143}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, and \mbox{\hyperlink{elements_8h_source_l05158}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::zeta\+\_\+nodal()}}.
+
+\Hypertarget{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7}\label{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7} 
+\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!Boundary\_number\_in\_bulk\_mesh\_has\_been\_set@{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}}
+\index{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set@{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with PARANOID switched on. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05181}{5181}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8h_source_l05126}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Free\+Standing\+Face\+Element()}}, and \mbox{\hyperlink{elements_8h_source_l05143}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

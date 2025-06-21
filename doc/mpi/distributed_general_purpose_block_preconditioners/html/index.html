@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: General-Purpose Block Preconditioners</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">General-Purpose Block Preconditioners </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we will demonstrate how to use the general-purpose block preconditioners implemented in <code>oomph-lib</code>. This tutorial follows from the <a href="../../../mpi/block_preconditioners/html/index.html">Block Preconditioners</a> tutorial, which provides an overview of <code>oomph-lib's</code> generic block preconditioning framework.</p>
+<p>We use the <code>Problem</code> described in the <a href="../../../solid/airy_cantilever/html/index.html">Bending of a Cantilever Beam</a> tutorial to illustrate the key concepts.</p>
+<h1><a class="anchor" id="introduction"></a>
+Introduction</h1>
+<p>In this section we define the four (distributed) general purpose block preconditioning methodologies. To recap, all <code>oomph-lib</code> problems are solved in a Newton iteration which requires the repeated solution of linear systems of the form  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+J\delta {\bf x}=-{\bf r}
+\]" src="form_0.png" width="54" height="10"/>
+</p>
+<p> where <img class="formulaInl" alt="$J$" src="form_1.png" width="8" height="10"/> is the Jacobian matrix, <img class="formulaInl" alt="$\bf r$" src="form_2.png" width="8" height="6"/> is the vector of residuals and <img class="formulaInl" alt="$\bf \delta x$" src="form_3.png" width="14" height="10"/> is the Newton correction. We divide the DOFs in the two-dimensional cantilever problem into two subsets corresponding to the <img class="formulaInl" alt="$x$" src="form_4.png" width="8" height="6"/> and <img class="formulaInl" alt="$y$" src="form_5.png" width="8" height="9"/> nodal positions.</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left[
+\begin{array}{cc}
+J_{xx}&amp;J_{xy}\\
+J_{yx}&amp;J_{yy}
+\end{array}
+\right].
+\left[
+\begin{array}{c}
+\bf \delta x \\
+\bf \delta y \\
+\end{array}
+\right]
+=
+-\left[
+\begin{array}{c}
+\bf r_x \\
+\bf r_y \\
+\end{array}
+\right]
+\]" src="form_6.png" width="184" height="31"/>
+</p>
+<p>Utilising this partitioning we will describe four (distributed) general purpose block preconditioning methodologies. (Left) preconditioning represents a transformation of the original linear system to</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P^{-1}J\;{\bf \delta x}=-P^{-1}{\bf r}
+\]" src="form_7.png" width="104" height="13"/>
+</p>
+<p>with the aim of accelerating the convergence of Krylov subspace iterative methods such as GMRES or CG. The application of the preconditioner requires the solution of</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P{\bf z}={\bf w}
+\]" src="form_8.png" width="44" height="10"/>
+</p>
+<p>for <img class="formulaInl" alt="$\bf z$" src="form_9.png" width="8" height="6"/> at each Krylov iteration.</p>
+<h2><a class="anchor" id="block_diagonal"></a>
+Block Diagonal Preconditioning</h2>
+<p>We drop the off-diagonal blocks to form the block diagonal preconditioner</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{BD}=\left[
+\begin{array}{cc}
+J_{xx}&amp;\\
+&amp;J_{yy}
+\end{array}
+\right].
+\]" src="form_10.png" width="121" height="31"/>
+</p>
+<p>the application of this preconditioner requires the solution of the subsidiary systems <img class="formulaInl" alt="$J_{xx}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$J_{yy}$" src="form_12.png" width="18" height="14"/>.</p>
+<h2><a class="anchor" id="two_level_block_diagonal"></a>
+Block Diagonal Preconditioning with Two-Level Parallelisation</h2>
+<p>The two-subsidiary systems in the block diagonal preconditioner (involving <img class="formulaInl" alt="$J_{xx}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$J_{yy}$" src="form_12.png" width="18" height="14"/>) can be solved in any order. In a parallel computation we can either solve the two systems one after the other using the full set of processes for the solution of each linear system. An alternative is to solve all the subsidiary systems simultaneously, using only a subset of processes for each system. We refer to this technique as two-level parallelisation and note that this approach is particularly useful if the linear solvers do not have good parallel scaling properties.</p>
+<h2><a class="anchor" id="upper_block_triangular"></a>
+Upper Block Triangular Preconditioning</h2>
+<p>An alternative to block diagonal preconditioning is block triangular preconditioning in which only off diagonal blocks on one side of the diagonal are dropped. For example, in the block-upper triangular preconditioner</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{BUT}=\left[
+\begin{array}{cc}
+J_{xx}&amp;J_{xy}\\
+&amp;J_{yy}
+\end{array}
+\right]
+\]" src="form_13.png" width="121" height="31"/>
+</p>
+<p>the block below the diagonal ( <img class="formulaInl" alt="$J_{yx}$" src="form_14.png" width="18" height="14"/>) has been dropped. In addition to the two subsidiary solves for <img class="formulaInl" alt="$J_{xx}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$J_{yy}$" src="form_12.png" width="18" height="14"/> this preconditioner requires a matrix-vector product involving <img class="formulaInl" alt="$J_{xy}$" src="form_15.png" width="18" height="14"/>.</p>
+<h2><a class="anchor" id="lower_block_triangular"></a>
+Lower Block Triangular Preconditioning</h2>
+<p>Similarly we can define a lower triangular block preconditioner</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{BLT}=\left[
+\begin{array}{cc}
+J_{xx}&amp;\\
+J_{yx}&amp;J_{yy}
+\end{array}
+\right].
+\]" src="form_16.png" width="128" height="31"/>
+</p>
+<h1><a class="anchor" id="application"></a>
+Application</h1>
+<p>In this section we demonstrate the use of <code>oomph-lib's</code> general-purpose block preconditioners. All general-purpose block preconditioners are derived from the base class <code>GeneralPurposeBlockPreconditioner</code> (which is itself derived from the <code>BlockPreconditioner</code> class).</p>
+<p>By default all general purpose block preconditioners use <code>SuperLUPreconditioner</code> as the preconditioner for the subsidiary systems ( <img class="formulaInl" alt="$J_{xx}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$J_{yy}$" src="form_12.png" width="18" height="14"/> in the <a class="el" href="index.html#introduction">Introduction</a>). <code>SuperLUPreconditioner</code> is a wrapper to both the <a href="http://crd.lbl.gov/~xiaoye/SuperLU/#superlu"><code>SuperLU</code></a> direct solver and the <a href="http://crd.lbl.gov/~xiaoye/SuperLU/#superlu_dist"><code>SuperLU Dist</code></a> distributed direct solver. Often we seek to replace this direct solver preconditioning with an inexact solver to make the preconditioner more efficient. To use an alternative subsidiary preconditioner we must define a function to return new instances of the chosen type of preconditioner (inexact solver). For example  </p><div class="fragment"><div class="line"><span class="comment">//=hypre_helper=================================================================</span></div>
+<div class="line"><span class="comment">/// The function get_hypre_preconditioner() returns an instance of </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// HyprePreconditioner to be used as a subsidiary preconditioner in a</span></div>
+<div class="line"><span class="comment">/// GeneralPurposeBlockPreconditioner</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==============================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span>Hypre_Subsidiary_Preconditioner_Helper</div>
+<div class="line">{</div>
+<div class="line"> Preconditioner* get_hypre_preconditioner()</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordflow">return</span> <span class="keyword">new</span> HyprePreconditioner; </div>
+<div class="line"> }</div>
+<div class="line">} <span class="comment">// end_of_hypre_helper</span></div>
+</div><!-- fragment --><p> would return instances of <code>HyprePreconditioner</code>, a wrapper to the distributed <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html"><code>Hypre BoomerAMG</code></a> implementation of classical AMG. Later we will pass a pointer to this function to the block preconditioner to enable the use of <code>HyprePreconditioner</code> as a subsidiary preconditioner. Note that the function only creates the subsidiary preconditioner &ndash; it will be deleted automatically by the master preconditioner when it is no longer required.</p>
+<p>The rest of the section is concerned with the main function, and in particular setting up the preconditioner for use.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for cantilever beam loaded by surface traction and/or</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// gravity</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+</div><!-- fragment --><p> Given an instance of the problem,</p>
+ <div class="fragment"><div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> CantileverProblem&lt;MySolidElement&lt;RefineableQPVDElement&lt;2,3&gt; &gt; &gt; problem;</div>
+</div><!-- fragment --><p> we specify GMRES as the linear solver. If available, we use the <code>TrilinosAztecOOSolver</code> wrapper to the <a href="http://trilinos.sandia.gov/packages/aztecoo/"><code>Trilinos AztecOO</code></a> implementation of GMRES. (This is the only distributed implementation of GMRES in <code>oomph-lib</code>.)</p>
+ <div class="fragment"><div class="line"> <span class="comment">// use trilinos gmres if available</span></div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_TRILINOS</span></div>
+<div class="line"> TrilinosAztecOOSolver* solver_pt = <span class="keyword">new</span> TrilinosAztecOOSolver;</div>
+<div class="line"> solver_pt-&gt;solver_type() = TrilinosAztecOOSolver::GMRES;</div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> GMRES&lt;CRDoubleMatrix&gt;* solver_pt = <span class="keyword">new</span> GMRES&lt;CRDoubleMatrix&gt;;</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> <code>GeneralPurposeBlockPreconditioner</code> is the base class for all general purpose block preconditioners.</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Pointer to general purpose block preconditioner base class</span></div>
+<div class="line"> GeneralPurposeBlockPreconditioner&lt;CRDoubleMatrix&gt;* prec_pt = 0;</div>
+</div><!-- fragment --><p> We introduced four general purpose block preconditioning methodologies in the <a class="el" href="index.html#introduction">Introduction</a>. The next step is to construct one of these preconditioners.</p><ul>
+<li><b>Block</b> <b>Diagonal</b> <b>Preconditioning</b>. This is implemented in the class <code>BlockDiagonalPreconditioner</code>.  <div class="fragment"><div class="line">   <span class="comment">// Standard Block Diagonal</span></div>
+<div class="line">   prec_pt = <span class="keyword">new</span> BlockDiagonalPreconditioner&lt;CRDoubleMatrix&gt;;</div>
+</div><!-- fragment --></li>
+<li><b>Enabling</b> <b>Two-<b>Level</b> <b>Block</b> <b>Diagonal</b> <b>Preconditioning</b>.</b> By default two-level preconditioning is disabled and hence <code>enable_two_level_parallelisation()</code> must have been called. Once this is done, each subsidiary system will be solved on an (as near to) equal size subset of processes.  <div class="fragment"><div class="line">   <span class="comment">// Two Level Block Diagonal</span></div>
+<div class="line">   prec_pt = <span class="keyword">new</span> BlockDiagonalPreconditioner&lt;CRDoubleMatrix&gt;;</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>BlockDiagonalPreconditioner&lt;CRDoubleMatrix&gt;* <span class="keyword">&gt;</span></div>
+<div class="line">    (prec_pt)-&gt;enable_two_level_parallelisation();</div>
+</div><!-- fragment --></li>
+<li><b>Block</b> <b>Upper</b> <b>Triangular</b> <b>Preconditioning</b>. Both block triangular preconditioners are implemented in the class <code>BlockTriangularPreconditioner</code>. By default this employs the upper-triangular version of the preconditioner.  <div class="fragment"><div class="line">   <span class="comment">// Block Upper Triangular</span></div>
+<div class="line">   prec_pt = <span class="keyword">new</span> BlockTriangularPreconditioner&lt;CRDoubleMatrix&gt;;</div>
+</div><!-- fragment --></li>
+<li><b>Block</b> <b>Lower</b> <b>Triangular</b> <b>Preconditioning</b>. The lower triangular version of the preconditioner can be selected with a call to the method <code>lower_triangular()</code>.  <div class="fragment"><div class="line">   <span class="comment">// Block Lower Triangular</span></div>
+<div class="line">   prec_pt = <span class="keyword">new</span> BlockTriangularPreconditioner&lt;CRDoubleMatrix&gt;;</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>BlockTriangularPreconditioner&lt;CRDoubleMatrix&gt;* <span class="keyword">&gt;</span></div>
+<div class="line">    (prec_pt)-&gt;lower_triangular();</div>
+</div><!-- fragment --></li>
+</ul>
+<p>Having chosen a preconditioner structure, the next stage is to choose the preconditioner for the subsidiary systems ( <img class="formulaInl" alt="$J_{xx}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$J_{yy}$" src="form_12.png" width="18" height="14"/> in the <a class="el" href="index.html#introduction">Introduction</a> ). By default this is <code>SuperLUPreconditioner</code>, but we wish to use <code>HyprePreconditioner</code> so we pass the previously specified function <code>Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner()</code> to the preconditioner.</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Specify Hypre as the subsidiary block preconditioner</span></div>
+<div class="line"> prec_pt-&gt;set_subsidiary_preconditioner_function</div>
+<div class="line">   (Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner);</div>
+</div><!-- fragment --><p> The same subsidiary preconditioner is used for all subsidiary systems in a general purpose block preconditioner.</p>
+<p>As discussed in the <a href="../../../mpi/block_preconditioners/html/index.html">Block Preconditioners</a> tutorial, the classification of the DOFs is implemented at an elemental level so we pass a pointer to the mesh containing the elements to the preconditioner. (Note that this problem contains two meshes, one containing the bulk elements and one containing the FaceElements that apply the traction boundary condition. Since the latter do not introduce any new DOFs, all the DOFs are classified by the bulk elements. Therefore, we do not need to pass the traction element mesh to the block preconditioner.)</p>
+ <div class="fragment"><div class="line"> <span class="comment">// The preconditioner only requires the bulk mesh since its</span></div>
+<div class="line"> <span class="comment">// elements are capable of classifying all degrees of freedom</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// prec_pt is a GeneralPurposeBlockPreconditioner, so we call the function</span></div>
+<div class="line"> <span class="comment">// add_mesh(...). </span></div>
+<div class="line"> prec_pt-&gt;add_mesh(problem.solid_mesh_pt());</div>
+</div><!-- fragment --><p> Finally, we pass the preconditioner to the solver</p>
+ <div class="fragment"><div class="line"> <span class="comment">// pass the preconditioner to the solver</span></div>
+<div class="line"> solver_pt-&gt;preconditioner_pt() = prec_pt;</div>
+</div><!-- fragment --><p> and solve the problem:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// solve the problem</span></div>
+<div class="line"> problem.newton_solve();</div>
+</div><!-- fragment --> <h1><a class="anchor" id="Parallelisation"></a>
+Parallelisation</h1>
+<p>Given that <code>BlockPreconditioner</code>, <code>TrilinosAztecOOSolver</code>, <code>SuperLUPreconditioner</code>, <code>HyprePreconditioner</code> and <code>MatrixVectorProduct</code> are all automatically distributed, all that is required for a distributed solution is to run the executable under MPI with multiple processes.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for the driver code are in <center> <a href="../../../../demo_drivers/mpi/solvers/">demo_drivers/mpi/solvers/ </a> </center> <br  />
+</li>
+<li>The driver code is <center> <a href="../../../../demo_drivers/mpi/solvers/airy_cantilever.cc">demo_drivers/mpi/solvers/airy_cantilever.cc </a> </center> <br  />
+</li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:04
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

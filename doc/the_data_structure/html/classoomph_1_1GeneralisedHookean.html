@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::GeneralisedHookean Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1GeneralisedHookean.html">GeneralisedHookean</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1GeneralisedHookean-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::GeneralisedHookean Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for a "non-rational" extension of classical linear elasticity to large displacements:  
+ <a href="classoomph_1_1GeneralisedHookean.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::GeneralisedHookean:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1GeneralisedHookean.png" usemap="#oomph::GeneralisedHookean_map" alt=""/>
+  <map id="oomph::GeneralisedHookean_map" name="oomph::GeneralisedHookean_map">
+<area href="classoomph_1_1ConstitutiveLaw.html" title="A class for constitutive laws for elements that solve the equations of solid mechanics based upon the..." alt="oomph::ConstitutiveLaw" shape="rect" coords="0,0,173,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae345f3619a2826b4547f7cb42a052ca6" id="r_ae345f3619a2826b4547f7cb42a052ca6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#ae345f3619a2826b4547f7cb42a052ca6">GeneralisedHookean</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *nu_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">e_pt</a>)</td></tr>
+<tr class="memdesc:ae345f3619a2826b4547f7cb42a052ca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor takes the pointers to values of material parameters: Poisson's ratio and Young's modulus.  <br /></td></tr>
+<tr class="separator:ae345f3619a2826b4547f7cb42a052ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470dde76fd6603da69bf4b6f12c50917" id="r_a470dde76fd6603da69bf4b6f12c50917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a470dde76fd6603da69bf4b6f12c50917">GeneralisedHookean</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *nu_pt)</td></tr>
+<tr class="memdesc:a470dde76fd6603da69bf4b6f12c50917"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor takes the pointers to value of Poisson's ratio . Young's modulus is set to E=1.0, implying that all stresses have been non-dimensionalised on on it.  <br /></td></tr>
+<tr class="separator:a470dde76fd6603da69bf4b6f12c50917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18794fa4b1750aafa2369b2a412a1228" id="r_a18794fa4b1750aafa2369b2a412a1228"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a18794fa4b1750aafa2369b2a412a1228">~GeneralisedHookean</a> ()</td></tr>
+<tr class="memdesc:a18794fa4b1750aafa2369b2a412a1228"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a18794fa4b1750aafa2369b2a412a1228"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5beca3e59f04d109c394bf9fd24bb7c1" id="r_a5beca3e59f04d109c394bf9fd24bb7c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1">calculate_second_piola_kirchhoff_stress</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;sigma)</td></tr>
+<tr class="memdesc:a5beca3e59f04d109c394bf9fd24bb7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor.  <br /></td></tr>
+<tr class="separator:a5beca3e59f04d109c394bf9fd24bb7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a641d0893e485df52b48b15e189a850ed" id="r_a641d0893e485df52b48b15e189a850ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a641d0893e485df52b48b15e189a850ed">calculate_second_piola_kirchhoff_stress</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">sigma_dev</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G_contra</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Gdet</a>)</td></tr>
+<tr class="memdesc:a641d0893e485df52b48b15e189a850ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_125.png" width="18" height="13"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_119.png" width="15" height="11"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  $" src="form_126.png" width="99" height="15"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_123.png" width="8" height="9"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_127.png" width="111" height="14"/>.  <br /></td></tr>
+<tr class="separator:a641d0893e485df52b48b15e189a850ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad19b5e80755f5d8e5513c4199f62fe03" id="r_ad19b5e80755f5d8e5513c4199f62fe03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#ad19b5e80755f5d8e5513c4199f62fe03">calculate_second_piola_kirchhoff_stress</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">sigma_dev</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Gcontra</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">gen_dil</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">inv_kappa</a>)</td></tr>
+<tr class="memdesc:ad19b5e80755f5d8e5513c4199f62fe03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_120.png" width="9" height="13"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_121.png" width="8" height="6"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  $" src="form_122.png" width="99" height="15"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_123.png" width="8" height="9"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_124.png" width="65" height="14"/>.  <br /></td></tr>
+<tr class="separator:ad19b5e80755f5d8e5513c4199f62fe03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed467d8b7c838cb7fed8c861aa652e9" id="r_a9ed467d8b7c838cb7fed8c861aa652e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a9ed467d8b7c838cb7fed8c861aa652e9">requires_incompressibility_constraint</a> ()</td></tr>
+<tr class="memdesc:a9ed467d8b7c838cb7fed8c861aa652e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False.  <br /></td></tr>
+<tr class="separator:a9ed467d8b7c838cb7fed8c861aa652e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1ConstitutiveLaw"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1ConstitutiveLaw')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1ConstitutiveLaw.html">oomph::ConstitutiveLaw</a></td></tr>
+<tr class="memitem:a864c36413e8ea31e63552f3db3b97a2f inherit pub_methods_classoomph_1_1ConstitutiveLaw" id="r_a864c36413e8ea31e63552f3db3b97a2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a864c36413e8ea31e63552f3db3b97a2f">ConstitutiveLaw</a> ()</td></tr>
+<tr class="memdesc:a864c36413e8ea31e63552f3db3b97a2f inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:a864c36413e8ea31e63552f3db3b97a2f inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa75b88c826723ba090ace39c26da0ae6 inherit pub_methods_classoomph_1_1ConstitutiveLaw" id="r_aa75b88c826723ba090ace39c26da0ae6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#aa75b88c826723ba090ace39c26da0ae6">~ConstitutiveLaw</a> ()</td></tr>
+<tr class="memdesc:aa75b88c826723ba090ace39c26da0ae6 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <br /></td></tr>
+<tr class="separator:aa75b88c826723ba090ace39c26da0ae6 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6076752384082cfa3de3e0cf17daa9aa inherit pub_methods_classoomph_1_1ConstitutiveLaw" id="r_a6076752384082cfa3de3e0cf17daa9aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a6076752384082cfa3de3e0cf17daa9aa">calculate_d_second_piola_kirchhoff_stress_dG</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;sigma, <a class="el" href="classoomph_1_1RankFourTensor.html">RankFourTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_sigma_dG</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">symmetrize_tensor</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>)</td></tr>
+<tr class="memdesc:a6076752384082cfa3de3e0cf17daa9aa inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor with respect to the deformed metric tensor. Arguments are the covariant undeformed and deformed metric tensor, the current value of the stress tensor and the rank four tensor in which to return the derivatives of the stress tensor The default implementation uses finite differences, but can be overloaded for constitutive laws in which an analytic formulation is possible. If the boolean flag symmetrize_tensor is false, only the "upper  triangular" entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations.  <br /></td></tr>
+<tr class="separator:a6076752384082cfa3de3e0cf17daa9aa inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af13f9d05db09870d1b90b7ef389bdb71 inherit pub_methods_classoomph_1_1ConstitutiveLaw" id="r_af13f9d05db09870d1b90b7ef389bdb71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#af13f9d05db09870d1b90b7ef389bdb71">calculate_d_second_piola_kirchhoff_stress_dG</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;sigma, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">detG</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;interpolated_solid_p, <a class="el" href="classoomph_1_1RankFourTensor.html">RankFourTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_sigma_dG</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_detG_dG</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">symmetrize_tensor</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>)</td></tr>
+<tr class="memdesc:af13f9d05db09870d1b90b7ef389bdb71 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_119.png" width="15" height="11"/>. with respect to the deformed metric tensor. Also return the derivatives of the determinant of the deformed metric tensor with respect to the deformed metric tensor. This form is appropriate for truly-incompressible materials. The default implementation uses finite differences for the derivatives that depend on the constitutive law, but not for the derivatives of the determinant, which are generic. / If the boolean flag symmetrize_tensor is false, only the "upper  triangular" entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations.  <br /></td></tr>
+<tr class="separator:af13f9d05db09870d1b90b7ef389bdb71 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a4f1bcac8d308d9ad0013ddf5def505 inherit pub_methods_classoomph_1_1ConstitutiveLaw" id="r_a8a4f1bcac8d308d9ad0013ddf5def505"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a8a4f1bcac8d308d9ad0013ddf5def505">calculate_d_second_piola_kirchhoff_stress_dG</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;sigma, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">gen_dil</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">inv_kappa</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;interpolated_solid_p, <a class="el" href="classoomph_1_1RankFourTensor.html">RankFourTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_sigma_dG</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_gen_dil_dG</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">symmetrize_tensor</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>)</td></tr>
+<tr class="memdesc:a8a4f1bcac8d308d9ad0013ddf5def505 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the contravariant 2nd Piola Kirchoff stress tensor with respect to the deformed metric tensor. Also return the derivatives of the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_120.png" width="9" height="13"/> with respect to the deformed metric tensor. This form is appropriate for near-incompressible materials. The default implementation uses finite differences. If the boolean flag symmetrize_tensor is false, only the "upper  triangular" entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations.  <br /></td></tr>
+<tr class="separator:a8a4f1bcac8d308d9ad0013ddf5def505 inherit pub_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad719ee5ed6d1bcacb18fec3339ae98de" id="r_ad719ee5ed6d1bcacb18fec3339ae98de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#ad719ee5ed6d1bcacb18fec3339ae98de">Nu_pt</a></td></tr>
+<tr class="memdesc:ad719ee5ed6d1bcacb18fec3339ae98de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson ratio.  <br /></td></tr>
+<tr class="separator:ad719ee5ed6d1bcacb18fec3339ae98de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a68b35f227848a065a7a844766b4eeb" id="r_a7a68b35f227848a065a7a844766b4eeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a7a68b35f227848a065a7a844766b4eeb">E_pt</a></td></tr>
+<tr class="memdesc:a7a68b35f227848a065a7a844766b4eeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Young's modulus.  <br /></td></tr>
+<tr class="separator:a7a68b35f227848a065a7a844766b4eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d4ef7498c2efd5bf30fa0ecd0d7dd5" id="r_a21d4ef7498c2efd5bf30fa0ecd0d7dd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedHookean.html#a21d4ef7498c2efd5bf30fa0ecd0d7dd5">Must_delete_e</a></td></tr>
+<tr class="memdesc:a21d4ef7498c2efd5bf30fa0ecd0d7dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate if storage for elastic modulus must be deleted in destructor.  <br /></td></tr>
+<tr class="separator:a21d4ef7498c2efd5bf30fa0ecd0d7dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1ConstitutiveLaw"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1ConstitutiveLaw')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1ConstitutiveLaw.html">oomph::ConstitutiveLaw</a></td></tr>
+<tr class="memitem:a73f01e1459e7ba998ef78f7ece6baa37 inherit pro_methods_classoomph_1_1ConstitutiveLaw" id="r_a73f01e1459e7ba998ef78f7ece6baa37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a73f01e1459e7ba998ef78f7ece6baa37">is_matrix_square</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;M)</td></tr>
+<tr class="memdesc:a73f01e1459e7ba998ef78f7ece6baa37 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether a matrix is square.  <br /></td></tr>
+<tr class="separator:a73f01e1459e7ba998ef78f7ece6baa37 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a89bb96a9b922294509923563a13063 inherit pro_methods_classoomph_1_1ConstitutiveLaw" id="r_a8a89bb96a9b922294509923563a13063"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a8a89bb96a9b922294509923563a13063">are_matrices_of_equal_dimensions</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">M1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">M2</a>)</td></tr>
+<tr class="memdesc:a8a89bb96a9b922294509923563a13063 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether two matrices are of equal dimensions.  <br /></td></tr>
+<tr class="separator:a8a89bb96a9b922294509923563a13063 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01763658a56a962460a80607653a33b4 inherit pro_methods_classoomph_1_1ConstitutiveLaw" id="r_a01763658a56a962460a80607653a33b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a01763658a56a962460a80607653a33b4">error_checking_in_input</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;g, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">G</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;sigma)</td></tr>
+<tr class="memdesc:a01763658a56a962460a80607653a33b4 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for errors in the input, i.e. check that the dimensions of the arrays are all consistent.  <br /></td></tr>
+<tr class="separator:a01763658a56a962460a80607653a33b4 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c188df10b08b340b923c3a733c0d178 inherit pro_methods_classoomph_1_1ConstitutiveLaw" id="r_a5c188df10b08b340b923c3a733c0d178"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a5c188df10b08b340b923c3a733c0d178">calculate_contravariant</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Gcov</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Gcontra</a>)</td></tr>
+<tr class="memdesc:a5c188df10b08b340b923c3a733c0d178 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate a contravariant tensor from a covariant tensor, and return the determinant of the covariant tensor.  <br /></td></tr>
+<tr class="separator:a5c188df10b08b340b923c3a733c0d178 inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dda64e60ed8128cb4603041dc66036f inherit pro_methods_classoomph_1_1ConstitutiveLaw" id="r_a6dda64e60ed8128cb4603041dc66036f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ConstitutiveLaw.html#a6dda64e60ed8128cb4603041dc66036f">calculate_d_contravariant_dG</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Gcov</a>, <a class="el" href="classoomph_1_1RankFourTensor.html">RankFourTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dGcontra_dG</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">d_detG_dG</a>)</td></tr>
+<tr class="memdesc:a6dda64e60ed8128cb4603041dc66036f inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivatives of the contravariant tensor and the derivatives of the determinant of the covariant tensor with respect to the components of the covariant tensor.  <br /></td></tr>
+<tr class="separator:a6dda64e60ed8128cb4603041dc66036f inherit pro_methods_classoomph_1_1ConstitutiveLaw"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for a "non-rational" extension of classical linear elasticity to large displacements: </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \]" src="form_148.png" width="75" height="15"/>
+</p>
+<p> where </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl} + \frac{1}{2} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \]" src="form_149.png" width="318" height="31"/>
+</p>
+<p> For small strains <img class="formulaInl" alt="$ (| G_{ij} - g_{ij} | \ll 1)$" src="form_150.png" width="90" height="14"/> this approaches the version appropriate for linear elasticity, obtained by replacing <img class="formulaInl" alt="$ G^{ij}$" src="form_151.png" width="18" height="11"/> with <img class="formulaInl" alt="$ g^{ij}$" src="form_152.png" width="15" height="14"/>.</p>
+<p>We provide three versions of <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code>:</p><ol type="1">
+<li>If <img class="formulaInl" alt="$ \nu \ne 1/2 $" src="form_153.png" width="43" height="14"/> (and not close to <img class="formulaInl" alt="$ 1/2 $" src="form_154.png" width="19" height="14"/>), the constitutive law can be used directly in the above form, using the deformed and undeformed metric tensors as input.</li>
+<li><p class="startli">If the material is incompressible ( <img class="formulaInl" alt="$ \nu = 1/2 $" src="form_155.png" width="43" height="14"/>), the first term in the above expression for <img class="formulaInl" alt="$ E^{ijkl} $" src="form_156.png" width="26" height="11"/> is singular. We re-write the constitutive equation for this case as</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \]" src="form_157.png" width="216" height="28"/>
+</p>
+<p> where the pressure <img class="formulaInl" alt="$ p $" src="form_123.png" width="8" height="9"/> needs to be determined independently via the incompressibility constraint. In this case, the stress returned by <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code> contains only the deviatoric part of the 2nd Piola Kirchhoff stress,</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \]" src="form_158.png" width="171" height="28"/>
+</p>
+<p> The function also returns the contravariant metric tensor <img class="formulaInl" alt="$ G^{ij}$" src="form_151.png" width="18" height="11"/> (since it is needed to form the complete stress tensor), and the determinant of the deformed covariant metric tensor <img class="formulaInl" alt="$ {\tt detG} = \det G_{ij} $" src="form_159.png" width="79" height="14"/> (since it is needed in the equation that enforces the incompressibility).</p>
+</li>
+<li><p class="startli">If <img class="formulaInl" alt="$ \nu \approx 1/2 $" src="form_160.png" width="43" height="14"/>, the original form of the constitutive equation could be used, but the resulting equations tend to be ill-conditioned since they contain the product of the large "bulk modulus"</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \]" src="form_161.png" width="109" height="30"/>
+</p>
+<p> and the small "generalised dilatation"</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \]" src="form_162.png" width="111" height="26"/>
+</p>
+<p> [ <img class="formulaInl" alt="$ d $" src="form_145.png" width="6" height="10"/> represents the actual dilatation in the small strain limit; for large deformations it doesn't have any sensible interpretation (or does it?). It is simply the term that needs to go to zero as <img class="formulaInl" alt="$ \kappa \to \infty$" src="form_146.png" width="39" height="8"/>.] In this case, the stress returned by <code><a class="el" href="classoomph_1_1GeneralisedHookean.html#a5beca3e59f04d109c394bf9fd24bb7c1" title="Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed...">calculate_second_piola_kirchhoff_stress()</a></code> contains only the deviatoric part of the 2nd Piola Kirchhoff stress,</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \]" src="form_158.png" width="171" height="28"/>
+</p>
+<p> The function also returns the contravariant metric tensor <img class="formulaInl" alt="$ G^{ij}$" src="form_151.png" width="18" height="11"/> (since it is needed to form the complete stress tensor), the inverse of the bulk modulus, and the generalised dilatation (since they are needed in the equation that determines the pressure). </p>
+</li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00698">698</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae345f3619a2826b4547f7cb42a052ca6" name="ae345f3619a2826b4547f7cb42a052ca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae345f3619a2826b4547f7cb42a052ca6">&#9670;&#160;</a></span>GeneralisedHookean() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeneralisedHookean::GeneralisedHookean </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>nu_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>e_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The constructor takes the pointers to values of material parameters: Poisson's ratio and Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00703">703</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a470dde76fd6603da69bf4b6f12c50917" name="a470dde76fd6603da69bf4b6f12c50917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a470dde76fd6603da69bf4b6f12c50917">&#9670;&#160;</a></span>GeneralisedHookean() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeneralisedHookean::GeneralisedHookean </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>nu_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The constructor takes the pointers to value of Poisson's ratio . Young's modulus is set to E=1.0, implying that all stresses have been non-dimensionalised on on it. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00712">712</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a18794fa4b1750aafa2369b2a412a1228" name="a18794fa4b1750aafa2369b2a412a1228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18794fa4b1750aafa2369b2a412a1228">&#9670;&#160;</a></span>~GeneralisedHookean()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::GeneralisedHookean::~GeneralisedHookean </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00722">722</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00783">E_pt</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00787">Must_delete_e</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5beca3e59f04d109c394bf9fd24bb7c1" name="a5beca3e59f04d109c394bf9fd24bb7c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5beca3e59f04d109c394bf9fd24bb7c1">&#9670;&#160;</a></span>calculate_second_piola_kirchhoff_stress() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeneralisedHookean::calculate_second_piola_kirchhoff_stress </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sigma</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. </p>
+<p>Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed (stress-free) and deformed metric tensors, g and G, and the matrix in which to return the stress tensor. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a93527d910de908035feb8f41b0401065">oomph::ConstitutiveLaw</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00682">682</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00113">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00071">oomph::ConstitutiveLaw::error_checking_in_input()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>.</p>
+
+</div>
+</div>
+<a id="a641d0893e485df52b48b15e189a850ed" name="a641d0893e485df52b48b15e189a850ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a641d0893e485df52b48b15e189a850ed">&#9670;&#160;</a></span>calculate_second_piola_kirchhoff_stress() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeneralisedHookean::calculate_second_piola_kirchhoff_stress </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sigma_dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>G_contra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>Gdet</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the deviatoric part <img class="formulaInl" alt="$ \overline{ \sigma^{ij}}$" src="form_125.png" width="18" height="13"/> of the contravariant 2nd Piola Kirchhoff stress tensor <img class="formulaInl" alt="$ \sigma^{ij}$" src="form_119.png" width="15" height="11"/>. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  $" src="form_126.png" width="99" height="15"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_123.png" width="8" height="9"/> is determined by <img class="formulaInl" alt="$ \det G_{ij} - \det g_{ij} = 0 $" src="form_127.png" width="111" height="14"/>. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ConstitutiveLaw.html#ac8178b1b7cd7e6a64942dba9e0997b30">oomph::ConstitutiveLaw</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00811">811</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00113">oomph::ConstitutiveLaw::calculate_contravariant()</a>, <a class="el" href="constitutive__laws_8cc_source.html#l00071">oomph::ConstitutiveLaw::error_checking_in_input()</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="ad19b5e80755f5d8e5513c4199f62fe03" name="ad19b5e80755f5d8e5513c4199f62fe03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad19b5e80755f5d8e5513c4199f62fe03">&#9670;&#160;</a></span>calculate_second_piola_kirchhoff_stress() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeneralisedHookean::calculate_second_piola_kirchhoff_stress </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sigma_dev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Gcontra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>gen_dil</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>inv_kappa</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, <img class="formulaInl" alt="$ d, $" src="form_120.png" width="9" height="13"/> and the inverse of the bulk modulus <img class="formulaInl" alt="$ \kappa$" src="form_121.png" width="8" height="6"/>. This form is appropriate for near-incompressible materials for which <img class="formulaInl" alt="$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  $" src="form_122.png" width="99" height="15"/> where the "pressure" <img class="formulaInl" alt="$ p $" src="form_123.png" width="8" height="9"/> is determined from <img class="formulaInl" alt="$ p / \kappa - d =0 $" src="form_124.png" width="65" height="14"/>. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a26f34355b626bebcad8f498fa5271d20">oomph::ConstitutiveLaw</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8cc_source.html#l00765">765</a> of file <a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8cc_source.html#l00682">calculate_second_piola_kirchhoff_stress()</a>, <a class="el" href="constitutive__laws_8h_source.html#l00783">E_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00780">Nu_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9ed467d8b7c838cb7fed8c861aa652e9" name="a9ed467d8b7c838cb7fed8c861aa652e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed467d8b7c838cb7fed8c861aa652e9">&#9670;&#160;</a></span>requires_incompressibility_constraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::GeneralisedHookean::requires_incompressibility_constraint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1ConstitutiveLaw.html#a446452158a8ae9fbc3dde4277155f824">oomph::ConstitutiveLaw</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00773">773</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7a68b35f227848a065a7a844766b4eeb" name="a7a68b35f227848a065a7a844766b4eeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a68b35f227848a065a7a844766b4eeb">&#9670;&#160;</a></span>E_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::GeneralisedHookean::E_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00783">783</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00722">~GeneralisedHookean()</a>.</p>
+
+</div>
+</div>
+<a id="a21d4ef7498c2efd5bf30fa0ecd0d7dd5" name="a21d4ef7498c2efd5bf30fa0ecd0d7dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21d4ef7498c2efd5bf30fa0ecd0d7dd5">&#9670;&#160;</a></span>Must_delete_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::GeneralisedHookean::Must_delete_e</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag to indicate if storage for elastic modulus must be deleted in destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00787">787</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00722">~GeneralisedHookean()</a>.</p>
+
+</div>
+</div>
+<a id="ad719ee5ed6d1bcacb18fec3339ae98de" name="ad719ee5ed6d1bcacb18fec3339ae98de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad719ee5ed6d1bcacb18fec3339ae98de">&#9670;&#160;</a></span>Nu_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::GeneralisedHookean::Nu_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00780">780</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8cc_source.html#l00765">calculate_second_piola_kirchhoff_stress()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a></li>
+<li><a class="el" href="constitutive__laws_8cc_source.html">constitutive_laws.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

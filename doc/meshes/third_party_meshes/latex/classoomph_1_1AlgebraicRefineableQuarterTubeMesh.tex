@@ -1,0 +1,446 @@
+\doxysection{oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+
+
+Algebraic\+Mesh version of \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+tube\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Refineable\+Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.056933cm]{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ad8ff9f32d4d180d815da65ddc3c4b90a}{Algebraic\+Refineable\+Quarter\+Tube\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{centre\+\_\+box\+\_\+size}}=1.\+0, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object, start and end coordinates of the geometric object and the fraction along the 2nd Lagrangian coordinate at which the dividing line between region 1 and region 2 is to be placed, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Sets up the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Broken version of the \doxylink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain} function Function is broken because axial spacing isn\textquotesingle{}t implemented yet for the Algebraic version of the \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}. Note\+: this function must be used BEFORE algebraic\+\_\+node\+\_\+update(...) is called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d}{node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{update\+\_\+all\+\_\+solid\+\_\+nodes}}=\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the node update info for specified algebraic node following any spatial mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh}{oomph\+::\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh_a8aaace5bc465614ace0a9117b3ee169c}{Refineable\+Quarter\+Tube\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor for adaptive deformable quarter tube mesh class. The domain is specified by the Geom\+Object that identifies boundary 3. Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Steady dummy timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableQuarterTubeMesh_a229ad0335ba60176c578897b558790eb}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Quarter\+Tube\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a4dfb9a85b3c07d8bafa0f916c445c18a}{Quarter\+Tube\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Steady dummy timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Tube\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ab9214139f27adc4cb6096ad9463c2c53}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_a3d8c15c17d9912d8c519c028437c0b2c}{Quarter\+Tube\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ac71d6fc73082531c0a4dd51795615372}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value (defined in the underlying Domain object) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a842435a25ef82c9d2cbac5bdcfcb857f}{domain\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to underlying domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579}{Central\+\_\+region}}
+, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3}{Lower\+\_\+right\+\_\+region}}
+, \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab}{Upper\+\_\+left\+\_\+region}}
+ \}
+\begin{DoxyCompactList}\small\item\em Remesh function ids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a064653020f5d2a0c7de789283dac305c}{node\+\_\+update\+\_\+central\+\_\+region}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the central region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a52fb1161ebff25b5c638ac35cb541817}{node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the lower-\/right region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac82a39ccaed8016a9b1e841d91658a75}{node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Algebraic update function for a node that is located in the upper-\/left region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Setup algebraic update operation for all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ae2014e91ad7f5a226b35aa96964f4bf1}{update\+\_\+node\+\_\+update\+\_\+in\+\_\+region}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{node\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{int}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{region\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Update algebraic node update function for nodes in the region defined by region\+\_\+id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a6006bcac5688f832ff2b6cbaae65102a}{Centre\+\_\+box\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Size of centre box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}{Lambda\+\_\+x}}
+\begin{DoxyCompactList}\small\item\em Fractional width of central region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}{Lambda\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Fractional height of central region. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a250577dc1d699b4035a42ddabd84c121}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a961bf18652514913c6a63c4850088e8b}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the geometric object that represents the curved wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a323243990ecc860e5083d205c1ab247c}{Xi\+\_\+lo}}
+\begin{DoxyCompactList}\small\item\em Lower limits for the coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ac7422bd566e566fd901bbbc98d8cb3b7}{Fract\+\_\+mid}}
+\begin{DoxyCompactList}\small\item\em Fraction along wall where outer ring is to be divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_aabb226a0b0208c579f426e58d944685c}{Xi\+\_\+hi}}
+\begin{DoxyCompactList}\small\item\em Upper limits for the coordinates along the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}
+Algebraic\+Mesh version of \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}. 
+
+Algebraic 3D quarter tube mesh class.
+
+The mesh boundaries are numbered as follows\+:
+\begin{DoxyItemize}
+\item Boundary 0\+: "{}\+Inflow"{} cross section; located along the line parametrised by $ \xi_0 =  \xi_0^{lo} $ on the geometric object that specifies the wall.
+\item Boundary 1\+: Plane x=0
+\item Boundary 2\+: Plane y=0
+\item Boundary 3\+: The curved wall -\/ specified by the Geom\+Object passed to the mesh constructor.
+\item Boundary 4\+: "{}\+Outflow"{} cross section; located along the line parametrised by $ \xi_0 =  \xi_0^{hi} $ on the geometric object that specifies the wall. Algebraic version of \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}
+\end{DoxyItemize}
+
+Cross section through mesh looking along tube......... \begin{DoxyVerb}                 ---___
+                |      ---____
+                |              -   BOUNDARY 3
+                |                /
+                |  [Region 2]   /  |
+                |              /     |
+                | N           /        |
+                | |_ E       /          |
+  BOUNDARY 1    |------------            |
+                |            |            |
+                | [Region 0] | [Region 1] |  ^
+                |            |            | / \  direction of
+                | N          |    N       |  |   2nd Lagrangian
+                | |_ E       |    |_ E    |  |   coordinate
+                |____________|____________|  |   along wall GeomObject
+
+                      BOUNDARY 2
+\end{DoxyVerb}
+ The Domain is built of slices each consisting of three Macro\+Elements as sketched. The local coordinates are such that the (E)astern direction coincides with the positive s\+\_\+0 direction, while the (N)orther direction coincides with the positive s\+\_\+1 direction. The positive s\+\_\+2 direction points down the tube.
+
+Elements need to be derived from Algebraic\+Element\+Base. In addition to the refinement procedures available for the \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh} which forms the basis for this mesh, three algebraic node update functions are implemented for the nodes in the three regions defined by the Domain Macro\+Elements. Note\+: it is assumed the cross section down the tube is uniform when \doxylink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}{setup\+\_\+algebraic\+\_\+node\+\_\+update()} is called. 
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00430}{430}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{anonymous}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{enum}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Remesh function ids. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Central\_region@{Central\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Central\_region@{Central\_region}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579} 
+Central\+\_\+region&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lower\_right\_region@{Lower\_right\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lower\_right\_region@{Lower\_right\_region}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3} 
+Lower\+\_\+right\+\_\+region&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Upper\_left\_region@{Upper\_left\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Upper\_left\_region@{Upper\_left\_region}}}\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab} 
+Upper\+\_\+left\+\_\+region&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00608}{608}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ad8ff9f32d4d180d815da65ddc3c4b90a}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ad8ff9f32d4d180d815da65ddc3c4b90a} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!AlgebraicRefineableQuarterTubeMesh@{AlgebraicRefineableQuarterTubeMesh}}
+\index{AlgebraicRefineableQuarterTubeMesh@{AlgebraicRefineableQuarterTubeMesh}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicRefineableQuarterTubeMesh()}{AlgebraicRefineableQuarterTubeMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{nlayer,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}}]{centre\+\_\+box\+\_\+size = {\ttfamily 1.0},  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to geometric object, start and end coordinates of the geometric object and the fraction along the 2nd Lagrangian coordinate at which the dividing line between region 1 and region 2 is to be placed, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Sets up the refineable mesh (by calling the constructor for the underlying \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}). 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00442}{442}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00519}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00649}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00085}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af98a0aaff29c54ffa35f72f7dcf6b8c7} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!algebraic\_node\_update@{algebraic\_node\_update}}
+\index{algebraic\_node\_update@{algebraic\_node\_update}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{algebraic\_node\_update()}{algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implement the algebraic node update function for a node at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: Update with the node\textquotesingle{}s first (default) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00545}{545}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00610}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Central\+\_\+region}}, \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00611}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+right\+\_\+region}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00950}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+central\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01039}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}, and \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00612}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+left\+\_\+region}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
+\index{axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{axial\_spacing\_fct\_pt()}{axial\_spacing\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Broken version of the \doxylink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain} function Function is broken because axial spacing isn\textquotesingle{}t implemented yet for the Algebraic version of the \doxylink{classoomph_1_1RefineableQuarterTubeMesh}{Refineable\+Quarter\+Tube\+Mesh}. Note\+: this function must be used BEFORE algebraic\+\_\+node\+\_\+update(...) is called. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ab4c35233e74407691a0d22549034ecb9}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00499}{499}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__tube__domain_8h_source_l00116}{oomph\+::\+Quarter\+Tube\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00120}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_af521c0a76cf0bd14692979bd7747507d} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{bool}} \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Update current nodal positions via algebraic node update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00519}{519}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00442}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a064653020f5d2a0c7de789283dac305c}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a064653020f5d2a0c7de789283dac305c} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_central\_region@{node\_update\_central\_region}}
+\index{node\_update\_central\_region@{node\_update\_central\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_central\_region()}{node\_update\_central\_region()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+central\+\_\+region (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the central region. 
+
+Algebraic update function\+: Update in central region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00950}{950}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00545}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a52fb1161ebff25b5c638ac35cb541817}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a52fb1161ebff25b5c638ac35cb541817} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_lower\_right\_region@{node\_update\_lower\_right\_region}}
+\index{node\_update\_lower\_right\_region@{node\_update\_lower\_right\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_lower\_right\_region()}{node\_update\_lower\_right\_region()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the lower-\/right region. 
+
+Algebraic update function\+: Update in lower-\/right region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01039}{1039}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00545}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac82a39ccaed8016a9b1e841d91658a75}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac82a39ccaed8016a9b1e841d91658a75} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!node\_update\_upper\_left\_region@{node\_update\_upper\_left\_region}}
+\index{node\_update\_upper\_left\_region@{node\_update\_upper\_left\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update\_upper\_left\_region()}{node\_update\_upper\_left\_region()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Algebraic update function for a node that is located in the upper-\/left region. 
+
+Algebraic update function\+: Update in upper left region according to wall shape at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{1156}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00545}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a1ad71be8274f4073b7e18cb53d574f10} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Run self-\/test for algebraic mesh -- return 0/1 for OK/failure. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00489}{489}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a2d0312615834a2aec8d0d6d4e2c846ef} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
+\index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Setup algebraic update operation for all nodes. 
+
+Setup algebraic node update data, based on 3 regions, each undergoing a different node update strategy. These regions are defined by the three Macro\+Elements in each of the nlayer slices of the \doxylink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain} used to build the mesh. The Mesh is suspended from the `wall' Geom\+Object pointed to by wall\+\_\+pt. The lower right edge of the mesh is located at the wall\textquotesingle{}s coordinate xi\mbox{[}1\mbox{]}==xi\+\_\+lo\mbox{[}1\mbox{]}, the upper left edge at xi\mbox{[}1\mbox{]}=xi\+\_\+hi\mbox{[}1\mbox{]}, i.\+e. a view looking down the tube length. The dividing line between the two outer regions is located at the fraction fract\+\_\+mid between these two coordinates. Node updating strategy\+:
+
+
+\begin{DoxyItemize}
+\item the starting cross sectional shape along the tube length is assumed to be uniform
+\item the cross sectional shape of the central region remains rectangular; the position of its top right corner is located at a fixed fraction of the starting width and height of the domain measured at xi\mbox{[}1\mbox{]}==xi\+\_\+lo\mbox{[}1\mbox{]} and xi\mbox{[}1\mbox{]}==xi\+\_\+hi\mbox{[}1\mbox{]} respectively. Nodes in this region are located at fixed horizontal and vertical fractions of the region.
+\item Nodes in the two outer regions (bottom right and top left) are located on straight lines running from the edges of the central region to the outer wall. 
+\end{DoxyItemize}Pointer to first algebraic element in central region
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00649}{649}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00442}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a7ed9f4ce0442a6f962a1561318542a67} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the node update info for specified algebraic node following any spatial mesh adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00589}{589}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ae2014e91ad7f5a226b35aa96964f4bf1}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ae2014e91ad7f5a226b35aa96964f4bf1} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!update\_node\_update\_in\_region@{update\_node\_update\_in\_region}}
+\index{update\_node\_update\_in\_region@{update\_node\_update\_in\_region}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update\_in\_region()}{update\_node\_update\_in\_region()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{int}} \&}]{region\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update algebraic node update function for nodes in the region defined by region\+\_\+id. 
+
+Update algebraic update function for nodes in region defined by region\+\_\+id. 
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{1275}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00589}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a6006bcac5688f832ff2b6cbaae65102a}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a6006bcac5688f832ff2b6cbaae65102a} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Centre\_box\_size@{Centre\_box\_size}}
+\index{Centre\_box\_size@{Centre\_box\_size}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Centre\_box\_size}{Centre\_box\_size}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Centre\+\_\+box\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Size of centre box. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00605}{605}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a5bb15683ec46078f9e3ab6d9caba54cf} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_x@{Lambda\_x}}
+\index{Lambda\_x@{Lambda\_x}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lambda\_x}{Lambda\_x}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Lambda\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fractional width of central region. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00616}{616}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47}\label{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a8e3b05ebb0b69e3ca3cbedb39b5b8e47} 
+\index{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}!Lambda\_y@{Lambda\_y}}
+\index{Lambda\_y@{Lambda\_y}!oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$@{oomph::AlgebraicRefineableQuarterTubeMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lambda\_y}{Lambda\_y}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Lambda\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fractional height of central region. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00619}{619}} of file \mbox{\hyperlink{quarter__tube__mesh_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__tube__mesh_8h}{quarter\+\_\+tube\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{quarter__tube__mesh_8template_8cc}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

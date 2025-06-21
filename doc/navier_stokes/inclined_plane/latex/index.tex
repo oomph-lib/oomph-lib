@@ -1,0 +1,850 @@
+\chapter{Demo problem\+: Flow of a fluid film down an inclined plane}
+\hypertarget{index}{}\label{index}\index{Demo problem: Flow of a fluid film down an inclined plane@{Demo problem: Flow of a fluid film down an inclined plane}}
+The two-\/dimensional flow of a free surface down an inclined plane is a simple exact solution of the Navier--Stokes equations. We describe two different ways of solving the problem using either spines or a pseudo-\/elastic method to define the bulk mesh motion. Reassuringly, the results are the same irrespective of the method chosen.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_form}{}\doxysection{\texorpdfstring{Problem formulation}{Problem formulation}}\label{index_form}
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sketch}
+\doxyfigcaption{A film of incompressible viscous fluid of a given thickness flows down a plane inclined at a prescribed angle to the gravitational field. }
+\end{DoxyImage}
+
+
+Formulating the problem in coordinates tangential ( $x^{*}$) and normal ( $y^{*}$) to the plane and assuming that the flow is steady and only in the tangential direction, but independent of the tangential coordinate, reduces the momentum equations to
+
+\begin{center}  \[ \frac{\partial p^*}{\partial x^*}  = \rho \,g \sin\alpha +
+\mu\,\frac{\partial^{2} u^*}{\partial y^{*2}}, \] \[ \frac{\partial p^*}{\partial y^*} = -\rho \,g \cos\alpha, \] \end{center}  where $u^*$ is the velocity component tangential to the plane and $p^*$ is the fluid pressure. Note that the continuity equation is automatically satisfied.
+
+We non-\/dimensionalise using the only length-\/scale in the problem $H$, choosing the viscous scale for the pressure and choosing a reference velocity scale $U$\+:  \[ x^{*} = H x,\qquad y^{*} = H y,\qquad u^* = U u,\qquad p^* = \mu
+U/H,\] and the governing equations become \begin{center}  \[ \frac{\partial p}{\partial x}  = \frac{\rho \,g H^{2}}{\mu U} \sin\alpha +
+    \frac{\partial^{2} u}{\partial y^{2}} = \frac{Re}{Fr} \sin \alpha + 
+    \frac{\partial^{2} u}{\partial y^{2}}, \]  \[ \frac{\partial p}{\partial y} = -\frac{\rho \,g H^{2}}{\mu U} 
+    \cos\alpha = - \frac{Re}{Fr} \cos\alpha. \] \end{center}  The dimensionless grouping $ \rho g H^{2} / (\mu U) $ represents the ratio of gravitational forces to viscous forces and we choose to identify it as a Reynolds number $ Re = \rho U H / \mu$ divided by a Froude number $ Fr = U^{2} / (g H)$.
+
+We proceed by assuming that the flow is driven entirely by the gravitational body force and that there is no additional tangential pressure gradient. Then, integrating the tangential momentum balance twice and using the boundary conditions of no-\/slip at the plane ( $y=0$)and that the free surface ( $y=1$) is tangentially stress-\/free gives \[ u =  \frac{1}{2}\frac{Re}{Fr}\sin\alpha \left(2 y - y^{2}\right). \] Integrating the normal momentum balance and setting the reference external pressure to be zero at the free surface gives \[ p = \frac{Re}{Fr}\cos\alpha (1 - y).\]
+
+Finally, we specify a "{}natural"{} velocity scale by setting $Re/Fr =
+2$, corresponding to the velocity of the free-\/surface for a vertical film ( $\alpha = \pi/2$).
+
+We shall assess the stability of the flat-\/film solution by applying a small, short-\/duration perturbation to the wall velocity and evolving the system in time. If the interface is stable, the perturbation should decay, if not it should grow. A linear stability analysis for this problem was performed by Benjamin (1957) and Yih (1963), who both found that for long waves in the absence of surface tension, the interface was unstable when \[ Re > \frac{5}{4} \sin\alpha. \] (If you read the papers you will see that the Reynolds number was defined such that the average fluid downslope velocity was one; to convert to our Reynolds number, we must multiply by 3/2.)
+
+The figure below shows the time evolution of the interface on a slope of $ \pi/4 $ for Reynolds numbers of zero (red line) and $ 4 \sin\alpha $ (green line). The perturbation wavenumber is $ K = 0.1 $ and the interface rapidly develops waves that grow as they are convected downslope for the higher Reynolds number, but decay when $
+Re = 0 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{animated_surface}
+\doxyfigcaption{Time evolution (or static snapshot at t = 7.5) of the interface shape for Re = 0 (Red) and 4 sin(alpha) (Green). }
+\end{DoxyImage}
+
+
+The decay rate of the interfacial perturbation at $ Re = 0 $ is slow, but can be seen in the next figure, which shows the height of the interface at the downstream end of the domain plotted against time. The domain is chosen so that it will contain three waves and the decay or growth of successive crests and troughs can be seen.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{time_trace}
+\doxyfigcaption{Time history of the interface position at the downstream end of the computational domain. }
+\end{DoxyImage}
+\hypertarget{index_bound}{}\doxysubsection{\texorpdfstring{A note on the boundary conditions}{A note on the boundary conditions}}\label{index_bound}
+Resolving the above analytic solution in a finite computational domain requires some thought about boundary conditions. We are only ever free to set one pressure value and setting the external pressure to zero fixes the pressure within the fluid. The boundary conditions at the plane are those of no-\/slip and at the free-\/surface the usual dynamic and kinematic conditions apply. Nonetheless, we have a number of possibilities for the boundary conditions at the "{}artificial"{} upstream and downstream computational boundaries.
+\begin{DoxyItemize}
+\item Prescribe periodic boundary conditions.
+\item Prescribe the velocity profile as a Dirichlet condition at both ends.
+\item Prescribe the appropriate hydrostatic pressure gradient and zero normal velocity.
+\end{DoxyItemize}
+
+We have chosen the last option, in which case the hydrostatic pressure gradient must be consistent with the external pressure. In other words, the pressure must be zero at the free surface ( $y=0$). Changing the external pressure would correspond to changing the film thickness, so the external pressure is directly responsible for enforcing a specific volume constraint, unless $\alpha = \pi/2$. When $\alpha = \pi/2$ there is no variation in hydrostatic pressure through the film and its thickness is not specified by the external pressure.
+
+We must also worry about the boundary conditions on the free surface itself and we choose to impose a contact angle condition of $ \pi/2 $ at the upstream end, which ensures that the film remains flat. At the downstream end, we add a line tension term that arises from use of the surface divergence theorem to integrate the contribution of the dynamic boundary condition. This term can be used to enforce contact angle conditions in a weak formulation, but here we simply add the term using the angle calculated from the current position of the free surface.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+The global parameters are the Reynolds number, the dimensionless grouping $Re/Fr$, the angle of inclination of the slope $\alpha$, the direction of the gravity vector $G$ and the capillary number $Ca$, which only influences the dynamics.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number,\ based\ on\ the\ average\ velocity\ within\ the\ fluid\ film}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ product\ of\ Reynolds\ number\ and\ inverse\ Froude\ number\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ is\ set\ to\ two\ in\ this\ problem,\ which\ gives\ the\ free\ surface\ velocity}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ be\ sin(alpha).\ [Set\ to\ three\ in\ order\ to\ get\ the\ same\ scale\ as\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ used\ by\ Yih,\ Benjamin,\ etc]}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}=2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Angle\ of\ incline\ of\ the\ slope\ (45\ degrees)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}\ =\ 1.0*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{atan}}(1.0);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ Vector\ direction\ of\ gravity,\ set\ in\ main()}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}(2,0.0);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ Capillary\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}}=\ 1.0;}
+
+\end{DoxyCodeInclude}
+ The hydrostatic pressure field is specified as an applied traction. At the outlet (inlet), the outer unit normal is in the positive (negative) $x$ direction and so the required traction is given by $-p$ ( $p$),  \[ \mbox{\boldmath$t$}|_{\mbox{outlet}} = (- (Re/Fr)\cos\alpha (1 -
+ y), 0), \qquad 
+ \mbox{\boldmath$t$}|_{\mbox{inlet}} = ((Re/Fr)\cos\alpha (1 -
+ y), 0).\] These tractions are specified by the two different functions 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ that\ prescribes\ the\ hydrostatic\ pressure\ field\ at\ the\ outlet}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{hydrostatic\_pressure\_outlet}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}}[0]\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0\ -\/\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}}[1]\ =\ 0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ that\ prescribes\ hydrostatic\ pressure\ field\ at\ the\ inlet}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{hydrostatic\_pressure\_inlet}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}}[0]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0\ -\/\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{traction}}[1]\ =\ 0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \textcolor{comment}{//end\ of\ traction\ functions}}
+
+\end{DoxyCodeInclude}
+ Note that {\ttfamily G} \mbox{[} {\ttfamily 1} \mbox{]} is the component of the gravitational body force in the vertical direction, so $ G[1] = - \cos\alpha$. ~\newline
+
+
+We must also specify the direction of the normals (directed out of the fluid) to the notional walls that form the inlet and outlet and a contact angle of $ \pi /2 $ that will be used as a boundary condition on the free surface at the upstream end of the domain. In this case the normal to the inlet is in the negative x-\/direction and the normal to the outlet is in the positive x-\/direction. The actual value of the {\ttfamily Wall\+\_\+normal} vector is set in {\ttfamily \doxylink{inclined__plane_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main()}} 
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Direction\ of\ the\ wall\ normal\ vector\ (at\ the\ inlet)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ that\ specifies\ the\ wall\ unit\ normal\ at\ the\ inlet}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{wall\_unit\_normal\_inlet\_fct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ that\ specified\ the\ wall\ unit\ normal\ at\ the\ outlet}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{wall\_unit\_normal\_outlet\_fct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{x}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ the\ normal}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}}\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
+\DoxyCodeLine{\ \ \textcolor{comment}{//and\ flip\ the\ sign}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_dim}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}}.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_dim}};++\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}})\ \{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{normal}}[\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}]\ *=\ -\/1.0;\}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ contact\ angle\ that\ is\ imposed\ at\ the\ inlet\ (pi)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1c3587461447262715bd444ac91a29c9}{Inlet\_Angle}}\ =\ 2.0*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{atan}}(1.0);}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by specifying the constitutive law used to define the mesh motion when pseudo-\/elastic deformation is used. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//start\ of\ main}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{inclined__plane_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{argc}},\ \textcolor{keywordtype}{char}\ **\mbox{\hyperlink{classSpineInclinedPlaneMesh}{argv}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ constitutive\ law\ for\ the\ mesh\ deformation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}\ \ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+
+\end{DoxyCodeInclude}
+ Next, the type of fluid element is chosen according to specified compiler flags 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ CR\_ELEMENT}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ FLUID\_ELEMENT\ QCrouzeixRaviartElement<2>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ FLUID\_ELEMENT\ QTaylorHoodElement<2>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif\ }}
+
+\end{DoxyCodeInclude}
+ We then initialise the physical parameters, the Reynolds number and the direction of the gravitational body force, both based on the angle of inclination $\alpha$. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Initialise\ physical\ parameters}}
+\DoxyCodeLine{\ \textcolor{comment}{//Scale\ Reynolds\ number\ to\ be\ independent\ of\ alpha.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ =\ 4.0/\mbox{\hyperlink{classSpineInclinedPlaneMesh}{sin}}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ direction\ of\ gravity}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[0]\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{sin}}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]\ =\ -\/\mbox{\hyperlink{classSpineInclinedPlaneMesh}{cos}}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+
+\end{DoxyCodeInclude}
+ We also set the direction of the notional wall normal vector. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//The\ wall\ normal\ to\ the\ inlet\ is\ in\ the\ negative\ x\ direction}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}}.resize(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}}[0]\ =\ -\/1.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}}[1]\ =\ 0.0;}
+
+\end{DoxyCodeInclude}
+ We now create the spine version of the problem, solve the steady problem, assign initial conditions by assuming that the problem has been at the steady state for all previous times, and then evolve the system in time. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Spine\ problem}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Create\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineInclinedPlaneProblem<SpineElement<FLUID\_ELEMENT\ >}},\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{BDF<2>}}\ >\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Solve\ the\ steady\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.solve\_steady();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Prepare\ the\ problem\ for\ timestepping\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//(assume\ that\ it's\ been\ at\ the\ flat-\/film\ solution\ for\ all\ previous\ time)}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}}\ =\ 0.1;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.assign\_initial\_values\_impulsive(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Timestep\ it\ }}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.timestep(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}},2);}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//End\ of\ spine\ problem}}
+
+\end{DoxyCodeInclude}
+ Finally, exactly the same procedure is performed for the elastic problem 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Elastic\ problem}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Create\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticInclinedPlaneProblem}{ElasticInclinedPlaneProblem}}<}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{PseudoSolidNodeUpdateElement<FLUID\_ELEMENT,QPVDElement<2,3>}}\ >,\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{BDF<2>}}\ >\ }
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Solve\ the\ steady\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.solve\_steady();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Prepare\ the\ problem\ for\ timestepping\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//(assume\ that\ it's\ been\ at\ the\ flat-\/film\ solution\ for\ all\ previous\ time)}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}}\ =\ 0.1;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.assign\_initial\_values\_impulsive(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Timestep\ it}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{problem}}.timestep(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}},2);}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//End\ of\ elastic\ problem}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh classes}{The mesh classes}}\label{index_mesh}
+The base mesh class is the {\ttfamily Simple\+Rectangular\+Quad\+Mesh\+:} boundary 0 will be the wall; boundary 2 will be the free surface; and the remaining boundaries will be the inlet (3) and outlet (1). Below we shall demonstrate how to convert an existing mesh into a {\ttfamily Spine\+Mesh} and {\ttfamily Elastic\+Mesh} suitable for free-\/surface problems.\hypertarget{index_spine_mesh}{}\doxysubsection{\texorpdfstring{Creating the spine mesh}{Creating the spine mesh}}\label{index_spine_mesh}
+The {\ttfamily \doxylink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Plane\+Mesh}} inherits from the generic {\ttfamily Simple\+Rectangular\+Quad\+Mesh} and adds vertical spines to the Nodes within the mesh in the constructor. Note that the resulting mesh is essentially the same as the {\ttfamily Single\+Layer\+Spine\+Mesh}, but has a somewhat simpler interface.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ a\ spine\ mesh\ for\ the\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineInclinedPlaneMesh}}\ :\ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ SimpleRectangularQuadMesh<ELEMENT>,}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ SpineMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineInclinedPlaneMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{lx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ly}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{TimeStepper}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_stepper\_pt}})\ :}
+\DoxyCodeLine{\ \ SimpleRectangularQuadMesh<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}>}
+\DoxyCodeLine{\ (\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{lx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ly}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_stepper\_pt}}),\ SpineMesh()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ number\ of\ linear\ points\ in\ the\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}}\ =\ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{finite\_element\_pt}}(0))-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nnode\_1d}}();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Reserve\ storage\ for\ the\ number\ of\ spines}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\_pt}}.reserve((\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}}-\/1)*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}}\ +\ 1);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ single\ pointer\ to\ a\ spine}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{new\_spine\_pt}}=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ loop\ over\ the\ elements\ horizontally}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//In\ most\ elements,\ we\ don't\ assign\ a\ spine\ to\ the\ last\ column,}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//beacuse\ that\ will\ be\ done\ by\ the\ next\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_pmax}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}}-\/1;}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//In\ the\ last\ element,\ however,\ we\ must\ assign\ the\ final\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}==\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}}-\/1)\ \{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_pmax}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}};\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ all\ nodes\ horizontally}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{l2}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l2}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_pmax}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l2}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Create\ a\ new\ spine\ with\ unit\ height\ and\ add\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{new\_spine\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine}}(1.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\_pt}}.push\_back(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{new\_spine\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineNode}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}=\mbox{\hyperlink{classSpineInclinedPlaneMesh}{element\_node\_pt}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l2}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ pointer\ to\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>spine\_pt()\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{new\_spine\_pt}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ fraction}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>fraction()\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ the\ mesh\ that\ implements\ the\ update\ fct}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>spine\_mesh\_pt()\ =\ \textcolor{keyword}{this};\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Loop\ vertically\ along\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ elements\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ vertical\ nodes,\ apart\ from\ the\ first}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{l1}}=1;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l1}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l1}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineNode}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}=\mbox{\hyperlink{classSpineInclinedPlaneMesh}{element\_node\_pt}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}}+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l1}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}}+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l2}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ pointer\ to\ the\ spine}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>spine\_pt()\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{new\_spine\_pt}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ fraction}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>fraction()=(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{i}})+\mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{l1}})/\mbox{\hyperlink{classSpineInclinedPlaneMesh}{double}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_p}}-\/1))/\textcolor{keywordtype}{double}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ the\ mesh\ that\ implements\ the\ update\ fct}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>spine\_mesh\_pt()\ =\ \textcolor{keyword}{this};\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//End\ of\ horizontal\ loop\ over\ elements\ \ }}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+In addition, a {\ttfamily spine\+\_\+node\+\_\+update()} function must be provided that determines how the {\ttfamily Nodes} move as functions of the {\ttfamily Spines}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ General\ node\ update\ function\ implements\ pure\ virtual\ function\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ defined\ in\ SpineMesh\ base\ class\ and\ performs\ specific\ node\ update}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ actions:\ \ along\ vertical\ spines}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ spine\_node\_update(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineNode}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{spine\_node\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ fraction\ along\ the\ spine}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{W}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{spine\_node\_pt}}-\/>fraction();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ spine\ height}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{H}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{spine\_node\_pt}}-\/>h();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ value\ of\ y}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{spine\_node\_pt}}-\/>x(1)\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{W}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{H}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_elastic_mesh}{}\doxysubsection{\texorpdfstring{Creating the Elastic\+Mesh}{Creating the ElasticMesh}}\label{index_elastic_mesh}
+The {\ttfamily \doxylink{classElasticInclinedPlaneMesh}{Elastic\+Inclined\+Plane\+Mesh}} inherits from the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} and the undeformed (reference) configuration is set to be the current position of the {\ttfamily Nodes}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ an\ Elastic\ mesh\ for\ the\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticInclinedPlaneMesh}{ElasticInclinedPlaneMesh}}\ :\ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ SimpleRectangularQuadMesh<ELEMENT>,}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ SolidMesh}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Public\ functions}}
+\DoxyCodeLine{\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticInclinedPlaneMesh}{ElasticInclinedPlaneMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{lx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ly}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{TimeStepper}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_stepper\_pt}})\ :}
+\DoxyCodeLine{\ \ SimpleRectangularQuadMesh<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}>(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{lx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ly}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_stepper\_pt}}),\ SolidMesh()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Make\ the\ current\ configuration\ the\ undeformed\ one}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+Note that the specification of the Elastic\+Mesh is much simpler than that of a Spine\+Mesh because no decision needs to be taken about how to describe the motion using Spines.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem classes}{The problem classes}}\label{index_problem}
+\hypertarget{index_generic_prob}{}\doxysubsection{\texorpdfstring{The generic problem}{The generic problem}}\label{index_generic_prob}
+For ease of exposition, all generic functionality is included in the {\ttfamily \doxylink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}} class, which is templated by the bulk {\ttfamily ELEMENT} and the {\ttfamily INTERFACE\+\_\+\+ELEMENT}. The class includes storage for the different sub-\/meshes\+: Bulk, the Traction elements associated with the inlet and outlet, the (free) Surface elements and the point elements associated with the ends of the interface. In addition, a string {\ttfamily Output\+\_\+prefix} is used to distinguish between the output files from different formulations.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Generic\ problem\ class\ that\ will\ form\ the\ base\ class\ for\ both\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ spine\ and\ elastic\ mesh-\/updates\ of\ the\ problem.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Templated\ by\ the\ bulk\ element\ and\ interface\ element\ types}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ INTERFACE\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classInclinedPlaneProblem}{InclinedPlaneProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{protected}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Bulk\ fluid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}*\ \mbox{\hyperlink{classInclinedPlaneProblem_a20c506fe684dc146424b8ec019239783}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Mesh\ for\ the\ traction\ elements\ that\ are\ added\ at\ inlet\ and\ outlet}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}*\ \mbox{\hyperlink{classInclinedPlaneProblem_a85bcc36a8ad4ad7aa3595585e73a3197}{Traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Mesh\ for\ the\ free\ surface\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}*\ \mbox{\hyperlink{classInclinedPlaneProblem_aba36d367278218bf00356c3bee0733a0}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Mesh\ for\ the\ point\ elements\ at\ each\ end\ of\ the\ free\ surface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}}*\ \mbox{\hyperlink{classInclinedPlaneProblem_adefbac5880323d7de622e2ba0c526746}{Point\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Prefix\ for\ output\ files}}
+\DoxyCodeLine{\textcolor{comment}{}\ std::string\ \mbox{\hyperlink{classInclinedPlaneProblem_a6ad45c76bd24f63c0162313042ce2e7d}{Output\_prefix}};}
+
+\end{DoxyCodeInclude}
+ The time-\/dependent perturbation is introduced in the function {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()}, which sets the vertical velocity on the wall (boundary 0) \[ v = \epsilon \sin(K x) t \mbox{e}^{-t} \] 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_before\_implicit\_timestep()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Read\ out\ the\ current\ time}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time}}\ =\ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_pt}}()-\/>time();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ add\ a\ temporary\ sinusoidal\ suction\ and\ blowing\ to\ the\ base}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Amplitude\ of\ the\ perturbation}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{epsilon}}\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ nodes\ on\ the\ base}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ this-\/>Bulk\_mesh\_pt-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Node}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}\ =\ this-\/>Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{arg}}\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9da8be10d9e20eb0329af7fd8d6e0e98}{Global\_Physical\_Variables::K}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{value}}\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{sin}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{arg}})*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{epsilon}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{time}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{exp}}(-\/\mbox{\hyperlink{classSpineInclinedPlaneMesh}{time}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nod\_pt}}-\/>set\_value(1,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{value}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\_of\_actions\_before\_implicit\_timestep}}
+
+\end{DoxyCodeInclude}
+ The function {\ttfamily make\+\_\+traction\+\_\+elements()} creates {\ttfamily Navier\+Stokes\+Traction\+Element} s adjacent to the mesh boundaries 3 (the inlet) and 1 (the inlet). These elements are added to the {\ttfamily Mesh} {\ttfamily Traction\+\_\+mesh\+\_\+pt}, which is itself constructed in the function and pointers to the appropriate traction functions are assigned. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ to\ add\ the\ traction\ boundary\ elements\ to\ boundaries}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 3(inlet)\ and\ 1(outlet)\ of\ the\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ make\_traction\_elements()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ a\ new\ (empty\ mesh)}}
+\DoxyCodeLine{\ \ \ Traction\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}};}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Inlet\ boundary\ conditions\ (boundary\ 3)}}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}}\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Find\ the\ number\ of\ elements\ adjacent\ to\ mesh\ boundary}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ these\ elements\ and\ create\ the\ traction\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{NavierStokesTractionElement<ELEMENT>}}\ *\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{NavierStokesTractionElement<ELEMENT>}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ (Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Add\ the\ elements\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ Traction\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}-\/>traction\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{Global\_Physical\_Variables::hydrostatic\_pressure\_inlet}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Outlet\ boundary\ conditions\ (boundary\ 1)}}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}}=1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Find\ the\ number\ of\ elements\ adjacent\ to\ mesh\ boundary}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ these\ elements\ and\ create\ the\ traction\ elements}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{NavierStokesTractionElement<ELEMENT>}}\ *\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{NavierStokesTractionElement<ELEMENT>}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ (Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Add\ the\ elements\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ Traction\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}-\/>traction\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{Global\_Physical\_Variables::hydrostatic\_pressure\_outlet}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ make\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+ The function {\ttfamily make\+\_\+free\+\_\+surface\+\_\+elements()} creates the appropriate {\ttfamily INTERFACE\+\_\+\+ELEMENTs} adjacent to the free surface (boundary 2), sets the capillary number and also creates free-\/surface boundary elements at the left-\/ and right-\/hand ends of the interface. If these "{}point"{} elements are not included then the surface tension is not applied correctly at the edges of the domain. The contact angle is set to be the value {\ttfamily Inlet\+\_\+\+Angle} at the left-\/hand edge of the domain. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Make\ the\ free\ surface\ elements\ on\ the\ top\ surface}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ make\_free\_surface\_elements()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ (empty)\ meshes}}
+\DoxyCodeLine{\ \ \ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}};}
+\DoxyCodeLine{\ \ \ Point\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Mesh}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//The\ free\ surface\ is\ on\ the\ boundary\ 2}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}}\ =\ 2;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}});}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ elements\ and\ create\ the\ appropriate\ interface\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\_ELEMENT}}\ *\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{INTERFACE\_ELEMENT}}}
+\DoxyCodeLine{\ \ \ \ \ \ (Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{b}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Add\ elements\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Surface\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Assign\ the\ capillary\ number\ to\ the\ free\ surface}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}-\/>ca\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Make\ a\ point\ element\ from\ left-\/hand\ side\ of\ the\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//first\ surface\ element\ (note\ that\ this\ relies\ on\ knowledge\ of\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//the\ element\ order\ within\ the\ mesh)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}==0)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{FluidInterfaceBoundingElement}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}-\/>make\_bounding\_element(-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Add\ element\ to\ the\ point\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Point\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}-\/>ca\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ wall\ normal}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}-\/>wall\_unit\_normal\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{Global\_Physical\_Variables::wall\_unit\_normal\_inlet\_fct}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ contact\ angle\ (using\ the\ strong\ version\ of\ the\ constraint)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}-\/>set\_contact\_angle(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1c3587461447262715bd444ac91a29c9}{Global\_Physical\_Variables::Inlet\_Angle}});}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Make\ another\ point\ element\ from\ the\ right-\/hand\ side\ of\ the\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//last\ surface\ element\ (note\ that\ this\ relies\ on\ knowledge\ of\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//the\ element\ order\ within\ the\ mesh)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}==\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_boundary\_element}}-\/1)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{FluidInterfaceBoundingElement}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{surface\_element\_pt}}-\/>make\_bounding\_element(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Add\ element\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Point\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}-\/>ca\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ function\ that\ specifies\ the\ wall\ normal}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{point\_element\_pt}}-\/>wall\_unit\_normal\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{Global\_Physical\_Variables::wall\_unit\_normal\_outlet\_fct}};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ make\_free\_surface\_elements}}
+
+\end{DoxyCodeInclude}
+
+
+The function {\ttfamily complete\+\_\+build()} assigns physical parameters to the fluid elements, sets the boundary conditions and assigns equation numbers.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ complete\_build()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Complete\ the\ build\ of\ the\ fluid\ elements\ by\ passing\ physical\ parameters}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ number\ of\ bulk\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ all\ the\ fluid\ elements\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_element}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Cast\ to\ a\ fluid\ element}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}\ *\mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//The\ Strouhal\ number\ is\ 1,\ so\ ReSt\ =\ Re}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number\ /\ Froude\ number}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>re\_invfr\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}};}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ direction\ of\ gravity}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Set\ the\ boundary\ conditions\ for\ this\ problem-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Determine\ whether\ we\ are\ solving\ an\ elastic\ problem\ or\ not}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{elastic}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>node\_pt(0)))\ \{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{elastic}}=\textcolor{keyword}{true};\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ the\ bottom\ of\ the\ mesh\ (the\ wall\ of\ the\ channel)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Pin\ the\ u-\/\ and\ v-\/\ velocities}}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}})-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}})-\/>pin(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//If\ we\ are\ formulating\ the\ elastic\ problem\ pin\ both\ positions}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//of\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{elastic}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{pin\_position}}(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{pin\_position}}(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ the\ inlet\ and\ set\ the\ Dirichlet\ condition}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//of\ no\ vertical\ velocity}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}})-\/>pin(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//If\ elastic\ pin\ horizontal\ position\ of\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{elastic}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>boundary\_node\_pt(3,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{pin\_position}}(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Loop\ over\ the\ outlet\ and\ set\ the\ Dirichlet\ condition}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//of\ no\ vertical\ velocity}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}})-\/>pin(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//If\ elastic\ pin\ horizontal\ position}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{elastic}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ -\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{pin\_position}}(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ std::cout\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{assign\_eqn\_numbers}}()\ <<\ \textcolor{stringliteral}{"{}\ in\ the\ main\ problem"{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ complete\_build}}
+
+\end{DoxyCodeInclude}
+ Note that boundary conditions for the nodal positions in the pseudo-\/elastic formulation are specified by testing whether the {\ttfamily Nodes} are {\ttfamily Solid\+Nodes}. In this case, the {\ttfamily Nodes} on the inlet and outlet boundaries are constrained to remain at the same horizontal position and the {\ttfamily Nodes} on the plane wall are fixed.
+
+The function {\ttfamily solve\+\_\+steady()} initialises the velocity of at all {\ttfamily Nodes} to the flat-\/film solution, solves the steady equations and writes the solution to a file. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInclinedPlaneProblem_a0e2fcfdb8230df82729ba7d728e58040}{InclinedPlaneProblem<ELEMENT,INTERFACE\_ELEMENT>::solve\_steady}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Load\ the\ namespace}}
+\DoxyCodeLine{\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Initially\ set\ all\ nodes\ to\ the\ Nusselt\ flat-\/film\ solution}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{y}}\ =\ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}})-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Top\ row}}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}})-\/>set\_value(0,0.5*ReInvFr*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{sin}}(Alpha)*(2.0*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{y}}\ -\/\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{y}}*\mbox{\hyperlink{classSpineInclinedPlaneMesh}{y}}));}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Do\ one\ steady\ solve}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{steady\_newton\_solve}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ the\ full\ flow\ field}}
+\DoxyCodeLine{\ std::string\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}\ =\ Output\_prefix;;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.append(\textcolor{stringliteral}{"{}\_output.dat"{}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ofstream}}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.c\_str());}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}},5);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}.close();}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ solve\_steady}}
+
+\end{DoxyCodeInclude}
+ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps writing vertical positions and the time to a trace file and writing the complete flow field to disk after a given number of timesteps. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{timestep(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_tsteps}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Need\ to\ use\ the\ Global\ variables\ here}}
+\DoxyCodeLine{\ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Open\ an\ output\ file}}
+\DoxyCodeLine{\ std::string\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}\ =\ Output\_prefix;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.append(\textcolor{stringliteral}{"{}\_time\_trace.dat"{}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ofstream}}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{trace}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.c\_str());\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Counter\ that\ will\ be\ used\ to\ output\ the\ full\ flowfield}}
+\DoxyCodeLine{\ \textcolor{comment}{//at\ certain\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{counter}}=0;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Initial\ output\ of\ the\ time\ and\ the\ value\ of\ the\ vertical\ position\ at\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//left\ and\ right-\/hand\ end\ of\ the\ free\ surface}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{trace}}\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_pt}}()-\/>time()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>value(1)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ \ Bulk\_mesh\_pt-\/>}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{boundary\_node\_pt}}(2,\ Bulk\_mesh\_pt-\/>nboundary\_node(2)-\/1)-\/>x(1)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ desired\ number\ of\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}=1;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}<=\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_tsteps}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Increase\ the\ counter}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{counter}}++;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{cout}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/TIMESTEP\ "{}}\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}<<\ \textcolor{stringliteral}{"{}\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Take\ a\ timestep\ of\ size\ dt}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{unsteady\_newton\_solve}}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{dt}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Uncomment\ to\ get\ full\ solution\ output}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{counter}}==2)\ \textcolor{comment}{//Change\ this\ number\ to\ get\ output\ every\ n\ steps}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ std::ofstream\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}};}
+\DoxyCodeLine{\ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}\ <<\ Output\_prefix\ <<\ \textcolor{stringliteral}{"{}\_step"{}}\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ <<\ \textcolor{stringliteral}{"{}\_"{}}\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}\ <<\ \textcolor{stringliteral}{"{}.dat"{}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}.open(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.str().c\_str());}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}},5);}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}.close();}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{counter}}=0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Always\ output\ the\ interface}}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ std::ofstream\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}};}
+\DoxyCodeLine{\ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}\ <<\ Output\_prefix\ <<\ \textcolor{stringliteral}{"{}\_interface\_"{}}\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ <<\ \textcolor{stringliteral}{"{}\_"{}}\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{t}}\ <<\ \textcolor{stringliteral}{"{}.dat"{}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}.open(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{filename}}.str().c\_str());}
+\DoxyCodeLine{\ \ \ \ \ Surface\_mesh\_pt-\/>output(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}},5);}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{file}}.close();}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ the\ time\ and\ value\ of\ the\ vertical\ position\ of\ the\ free\ surface}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//at\ the\ left-\/\ and\ right-\/hand\ ends}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{trace}}\ <<\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{time\_pt}}()-\/>time()\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ }
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{boundary\_node\_pt}}(2,Bulk\_mesh\_pt-\/>nboundary\_node(2)-\/1)-\/>x(1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ timestep}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_spine_prob}{}\doxysubsection{\texorpdfstring{The spine-\/based formulation}{The spine-based formulation}}\label{index_spine_prob}
+The class {\ttfamily \doxylink{classSpineInclinedPlaneProblem}{Spine\+Inclined\+Plane\+Problem}} inherits from the generic {\ttfamily \doxylink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}} class and requires only minor modification. The constructor sets the string {\ttfamily Output\+\_\+prefix}, builds a timestepper, builds the specific {\ttfamily Spine\+Mesh}, creates the appropriate {\ttfamily Face\+Elements}, adds all sub-\/meshes to the {\ttfamily Problem}, builds the global mesh and then calls {\ttfamily \doxylink{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}{Inclined\+Plane\+Problem\+::complete\+\_\+build()}}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \mbox{\hyperlink{classSpineInclinedPlaneProblem}{SpineInclinedPlaneProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}}):\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classInclinedPlaneProblem}{InclinedPlaneProblem}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineLineFluidInterfaceElement}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}>\ >}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}})\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ name}}
+\DoxyCodeLine{\ \ \ this-\/>Output\_prefix\ =\ \textcolor{stringliteral}{"{}spine"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ our\ one\ and\ only\ timestepper,\ with\ adaptive\ timestepping}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{TIMESTEPPER}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ this-\/>Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SpineInclinedPlaneMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}},1.0,this-\/>time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ traction\ elements}}
+\DoxyCodeLine{\ \ \ this-\/>make\_traction\_elements();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ free\ surface\ elements}}
+\DoxyCodeLine{\ \ \ this-\/>make\_free\_surface\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ all\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Traction\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Surface\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Point\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ global\ mesh}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Complete\ the\ build\ of\ the\ problem}}
+\DoxyCodeLine{\ \ \ this-\/>complete\_build();}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ In a spine-\/based formulation, the nodal positions must be updated after every Newton step, which is achieved by overloading the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Spine\ heights/lengths\ are\ unknowns\ in\ the\ problem\ so\ their}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ values\ get\ corrected\ during\ each\ Newton\ step.\ However,}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ changing\ their\ value\ does\ not\ automatically\ change\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ nodal\ positions,\ so\ we\ need\ to\ update\ all\ of\ them}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ actions\_before\_newton\_convergence\_check()}
+\DoxyCodeLine{\ \ \{this-\/>Bulk\_mesh\_pt-\/>node\_update();\}}
+
+\end{DoxyCodeInclude}
+ We also specify a destructor to clean up memory allocated by the class.\hypertarget{index_elastic_probe}{}\doxysubsection{\texorpdfstring{The pseudo-\/solid-\/based formulation}{The pseudo-solid-based formulation}}\label{index_elastic_probe}
+The class {\ttfamily \doxylink{classElasticInclinedPlaneProblem}{Elastic\+Inclined\+Plane\+Problem}} inherits from the generic {\ttfamily \doxylink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}} class and also requires only minor modification. The constructor sets the string {\ttfamily Output\+\_\+prefix}, builds a timestepper, builds the specific {\ttfamily Solid\+Mesh}, sets the constitutive law for the bulk elements, creates the appropriate {\ttfamily Face\+Elements}, adds all sub-\/meshes to the {\ttfamily Problem}, builds the global mesh and then calls {\ttfamily \doxylink{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}{Inclined\+Plane\+Problem\+::complete\+\_\+build()}} 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticInclinedPlaneProblem}{ElasticInclinedPlaneProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}})\ :}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classInclinedPlaneProblem}{InclinedPlaneProblem}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ElasticLineFluidInterfaceElement}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}>\ >}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}})\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ name}}
+\DoxyCodeLine{\ \ \ this-\/>Output\_prefix\ =\ \textcolor{stringliteral}{"{}elastic"{}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ our\ one\ and\ only\ timestepper,\ with\ adaptive\ timestepping}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{TIMESTEPPER}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \ \ this-\/>Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ElasticInclinedPlaneMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{nx}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ny}},\mbox{\hyperlink{classSpineInclinedPlaneMesh}{length}},1.0,this-\/>time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ consititutive\ law\ for\ the\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_element}}\ =\ this-\/>Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ all\ the\ fluid\ elements\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_element}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Cast\ to\ a\ fluid\ element}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}\ *\mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ this-\/>Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ constitutive\ law\ }}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>constitutive\_law\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ traction\ elements}}
+\DoxyCodeLine{\ \ \ this-\/>make\_traction\_elements();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ free\ surface\ element}}
+\DoxyCodeLine{\ \ \ this-\/>make\_free\_surface\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ all\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Traction\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Surface\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{add\_sub\_mesh}}(this-\/>Point\_mesh\_pt);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Create\ the\ global\ mesh}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classSpineInclinedPlaneMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Complete\ the\ rest\ of\ the\ build}}
+\DoxyCodeLine{\ \ \ this-\/>complete\_build();}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ In a pseudo-\/solid formulation, it is advantageous to reset the undeformed configuration after every timestep (an updated Lagrangian formulation). Hence, the {\ttfamily Problem\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep()} function is overloaded 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_after\_implicit\_timestep()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ loop\ over\ all\ the\ nodes\ and\ reset\ their\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}}\ =\ this-\/>Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}<\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n\_node}};\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Cast\ node\ to\ an\ elastic\ node}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classSpineInclinedPlaneMesh}{SolidNode}}*\textcolor{keyword}{>}(this-\/>Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{n}}));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}=0;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}<2;\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}}++)\ \{\mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>xi(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}})\ =\ \mbox{\hyperlink{classSpineInclinedPlaneMesh}{temp\_pt}}-\/>x(\mbox{\hyperlink{classSpineInclinedPlaneMesh}{j}});\}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ actions\_after\_implicit\_timestep}}
+
+\end{DoxyCodeInclude}
+ We also specify a destructor to clean up memory allocated by the class.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Confirm that the steady solution agrees with the exact solution.
+\item Investigate what happens when the angle is varied. What happens when the angle is set to zero? What happens when the angle is set to $\pi/2$?
+\item What happens if the hydrostatic pressure boundary conditions are not applied?
+\item How does the stability of the system to the perturbation change with angle, $ Ca $ and $ K $? Are the results in agreement with the theoretical predictions?
+\item Are the results independent of the length of the domain?
+\item Compare the spine-\/based and pseudo-\/elastic-\/based formulations? What is the same and what is different? Which method do you prefer? \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+
+\end{DoxyEnumerate}\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/navier_stokes/inclined_plane/}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/inclined\+\_\+plane/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/navier_stokes/inclined_plane/inclined_plane.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/inclined\+\_\+plane/inclined\+\_\+plane.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

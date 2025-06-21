@@ -1,0 +1,326 @@
+\doxysection{oomph\+::Two\+Dimensional\+PMLHelper Namespace Reference}
+\hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper}{}\label{namespaceoomph_1_1TwoDimensionalPMLHelper}\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+
+
+Namespace with functions that allow the construction of PML layers on axis aligned boundaries.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ae66c595a953e030ae366699eec3ca3ab}{sorter\+\_\+right\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+i\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+j\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em helper function for sorting the right boundary nodes \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a98d2786e22298095bd190435d11c4f0e}{sorter\+\_\+top\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+i\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+j\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em helper function for sorting the top boundary nodes \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_aecb74c39efe7c572a9d87b2d11be3d69}{sorter\+\_\+left\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+i\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+j\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em helper function for sorting the left boundary nodes \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a0bd68e9d424ff3f05266786cc6c78baa}{sorter\+\_\+bottom\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+i\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+j\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em helper function for sorting the bottom boundary nodes \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ad119cef6cd1f7a905dade8810d4cfabd}{create\+\_\+right\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{right\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+x\+\_\+right\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{width\+\_\+x\+\_\+right\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML mesh,aligned with the right physical domain boundary \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ae9dbf69567d9b6b179045108e710f6fe}{create\+\_\+top\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{top\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+y\+\_\+top\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{width\+\_\+y\+\_\+top\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML mesh, aligned with the top physical domain boundary \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_ad1a43aabe01e6d5c34541319bc899719}{create\+\_\+left\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{left\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+x\+\_\+left\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{width\+\_\+x\+\_\+left\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML mesh, aligned with the left physical domain boundary \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a6e031134cb7160c787acd4b8baa731d8}{create\+\_\+bottom\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bottom\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+y\+\_\+bottom\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{width\+\_\+y\+\_\+bottom\+\_\+pml}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML mesh,aligned with the bottom physical domain boundary \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a8602fbb470d795e7c9cd9e7e2ec24f53}{create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+right\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+top\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{right\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML top right corner mesh, aligned with the existing PML meshes \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_adb9c7bba7eb52d721709eff0927e31b2}{create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+right\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+bottom\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{right\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML bottom right corner mesh, aligned with the existing PML meshes \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a6d3f0f7cf5ca6a6f132beb8470f7ad78}{create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+left\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+top\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{left\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML top left corner mesh, aligned with the existing PML meshes \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TwoDimensionalPMLHelper_a68f929052d1bb4332d8ebb1d64bdcd08}{create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+left\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+bottom\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{left\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em "{}\+Constructor"{} for PML bottom left corner mesh, aligned with the existing PML meshes \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace with functions that allow the construction of PML layers on axis aligned boundaries. 
+
+All helper routines for 2D bulk boundary mesh usage in order to generate PML meshes aligned to the main mesh. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a68f929052d1bb4332d8ebb1d64bdcd08}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a68f929052d1bb4332d8ebb1d64bdcd08} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_bottom\_left\_pml\_mesh@{create\_bottom\_left\_pml\_mesh}}
+\index{create\_bottom\_left\_pml\_mesh@{create\_bottom\_left\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_bottom\_left\_pml\_mesh()}{create\_bottom\_left\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+left\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+bottom\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{left\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML bottom left corner mesh, aligned with the existing PML meshes 
+
+Relevant boundary id\textquotesingle{}s to be used in construction Parent id refers to already existing PML meshes
+
+Sort them from lowest to highest (in y coordinate) sorter\+\_\+right\+\_\+boundary is still functional, as the sorting is performed by the same criterion
+
+Number of elements and boundary nodes to be acted upon during construction are extracted from the \textquotesingle{}parent\textquotesingle{} PML meshes
+
+Specific PML sizes needed, taken directly from physical domain and existing PML meshes
+
+The enabling must be perfromed in both x-\/ and y-\/directions as this is a corner PML mesh
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l02366}{2366}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{sorter\+\_\+right\+\_\+boundary()}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01400}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a6e031134cb7160c787acd4b8baa731d8}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a6e031134cb7160c787acd4b8baa731d8} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_bottom\_pml\_mesh@{create\_bottom\_pml\_mesh}}
+\index{create\_bottom\_pml\_mesh@{create\_bottom\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_bottom\_pml\_mesh()}{create\_bottom\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+bottom\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{bottom\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+y\+\_\+bottom\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{width\+\_\+y\+\_\+bottom\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML mesh,aligned with the bottom physical domain boundary 
+
+PML layer width subtracted from the bulk mesh lower boundary coordinate
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l01859}{1859}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00057}{sorter\+\_\+bottom\+\_\+boundary()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_adb9c7bba7eb52d721709eff0927e31b2}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_adb9c7bba7eb52d721709eff0927e31b2} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_bottom\_right\_pml\_mesh@{create\_bottom\_right\_pml\_mesh}}
+\index{create\_bottom\_right\_pml\_mesh@{create\_bottom\_right\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_bottom\_right\_pml\_mesh()}{create\_bottom\_right\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+right\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+bottom\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{right\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML bottom right corner mesh, aligned with the existing PML meshes 
+
+Relevant boundary id\textquotesingle{}s to be used in construction Parent id refers to already existing PML meshes
+
+Number of elements and boundary nodes to be acted upon during construction are extracted from the \textquotesingle{}parent\textquotesingle{} PML meshes
+
+Specific PML sizes needed, taken directly from physical domain and existing PML meshes
+
+The enabling must be perfromed in both x-\/ and y-\/directions as this is a corner PML mesh
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l02102}{2102}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{sorter\+\_\+right\+\_\+boundary()}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01400}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_ad1a43aabe01e6d5c34541319bc899719}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_ad1a43aabe01e6d5c34541319bc899719} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_left\_pml\_mesh@{create\_left\_pml\_mesh}}
+\index{create\_left\_pml\_mesh@{create\_left\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_left\_pml\_mesh()}{create\_left\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+left\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{left\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+x\+\_\+left\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{width\+\_\+x\+\_\+left\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML mesh, aligned with the left physical domain boundary 
+
+PML layer width subtracted from left bulk mesh coordinate
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l01751}{1751}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00051}{sorter\+\_\+left\+\_\+boundary()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_ad119cef6cd1f7a905dade8810d4cfabd}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_ad119cef6cd1f7a905dade8810d4cfabd} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_right\_pml\_mesh@{create\_right\_pml\_mesh}}
+\index{create\_right\_pml\_mesh@{create\_right\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_right\_pml\_mesh()}{create\_right\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+right\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{right\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+x\+\_\+right\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{width\+\_\+x\+\_\+right\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML mesh,aligned with the right physical domain boundary 
+
+PML layer with added to the bulk mesh coordinate
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l01538}{1538}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{sorter\+\_\+right\+\_\+boundary()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a6d3f0f7cf5ca6a6f132beb8470f7ad78}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a6d3f0f7cf5ca6a6f132beb8470f7ad78} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_top\_left\_pml\_mesh@{create\_top\_left\_pml\_mesh}}
+\index{create\_top\_left\_pml\_mesh@{create\_top\_left\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_top\_left\_pml\_mesh()}{create\_top\_left\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+left\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+top\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{left\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML top left corner mesh, aligned with the existing PML meshes 
+
+Relevant boundary id\textquotesingle{}s to be used in construction Parent id refers to already existing PML meshes
+
+Sort them from lowest to highest (in y coordinate) sorter\+\_\+right\+\_\+boundary is still functional, as the sorting is performed by the same criterion
+
+Number of elements and boundary nodes to be acted upon during construction are extracted from the \textquotesingle{}parent\textquotesingle{} PML meshes
+
+Specific PML sizes needed, taken directly from physical domain and existing PML meshes
+
+The enabling must be perfromed in both x-\/ and y-\/directions as this is a corner PML mesh
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l02233}{2233}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{sorter\+\_\+right\+\_\+boundary()}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01400}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_ae9dbf69567d9b6b179045108e710f6fe}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_ae9dbf69567d9b6b179045108e710f6fe} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_top\_pml\_mesh@{create\_top\_pml\_mesh}}
+\index{create\_top\_pml\_mesh@{create\_top\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_top\_pml\_mesh()}{create\_top\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+top\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{top\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+y\+\_\+top\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{width\+\_\+y\+\_\+top\+\_\+pml,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML mesh, aligned with the top physical domain boundary 
+
+PML layer width added to the bulk mesh coordinate
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l01645}{1645}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00045}{sorter\+\_\+top\+\_\+boundary()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a8602fbb470d795e7c9cd9e7e2ec24f53}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a8602fbb470d795e7c9cd9e7e2ec24f53} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!create\_top\_right\_pml\_mesh@{create\_top\_right\_pml\_mesh}}
+\index{create\_top\_right\_pml\_mesh@{create\_top\_right\_pml\_mesh}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{create\_top\_right\_pml\_mesh()}{create\_top\_right\_pml\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ASSOCIATED\+\_\+\+PML\+\_\+\+QUAD\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+right\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{pml\+\_\+top\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{right\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
+
+"{}\+Constructor"{} for PML top right corner mesh, aligned with the existing PML meshes 
+
+Relevant boundary id\textquotesingle{}s to be used in construction Parent id refers to already existing PML meshes
+
+Number of elements and boundary nodes to be acted upon during construction are extracted from the \textquotesingle{}parent\textquotesingle{} PML meshes
+
+Specific PML sizes needed, taken directly from physical domain and existing PML meshes
+
+The enabling must be perfromed in both x-\/ and y-\/directions as this is a corner PML mesh
+
+Return the finalized mesh, with PML enabled and boundary conditions added
+
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l01967}{1967}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{sorter\+\_\+right\+\_\+boundary()}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01400}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a0bd68e9d424ff3f05266786cc6c78baa}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a0bd68e9d424ff3f05266786cc6c78baa} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!sorter\_bottom\_boundary@{sorter\_bottom\_boundary}}
+\index{sorter\_bottom\_boundary@{sorter\_bottom\_boundary}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{sorter\_bottom\_boundary()}{sorter\_bottom\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+bottom\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+i\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+j\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+helper function for sorting the bottom boundary nodes 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8cc_source_l00057}{57}} of file \mbox{\hyperlink{pml__meshes_8cc_source}{pml\+\_\+meshes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l01859}{create\+\_\+bottom\+\_\+pml\+\_\+mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00440}{oomph\+::\+PMLQuad\+Mesh$<$ ELEMENT $>$\+::\+PMLQuad\+Mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_aecb74c39efe7c572a9d87b2d11be3d69}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_aecb74c39efe7c572a9d87b2d11be3d69} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!sorter\_left\_boundary@{sorter\_left\_boundary}}
+\index{sorter\_left\_boundary@{sorter\_left\_boundary}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{sorter\_left\_boundary()}{sorter\_left\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+left\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+i\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+j\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+helper function for sorting the left boundary nodes 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8cc_source_l00051}{51}} of file \mbox{\hyperlink{pml__meshes_8cc_source}{pml\+\_\+meshes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l01751}{create\+\_\+left\+\_\+pml\+\_\+mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00440}{oomph\+::\+PMLQuad\+Mesh$<$ ELEMENT $>$\+::\+PMLQuad\+Mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_ae66c595a953e030ae366699eec3ca3ab}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_ae66c595a953e030ae366699eec3ca3ab} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!sorter\_right\_boundary@{sorter\_right\_boundary}}
+\index{sorter\_right\_boundary@{sorter\_right\_boundary}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{sorter\_right\_boundary()}{sorter\_right\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+right\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+i\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+j\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+helper function for sorting the right boundary nodes 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{39}} of file \mbox{\hyperlink{pml__meshes_8cc_source}{pml\+\_\+meshes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l02366}{create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l02102}{create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l01538}{create\+\_\+right\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l02233}{create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l01967}{create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l00782}{oomph\+::\+PMLCorner\+Quad\+Mesh$<$ ELEMENT $>$\+::\+PMLCorner\+Quad\+Mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00440}{oomph\+::\+PMLQuad\+Mesh$<$ ELEMENT $>$\+::\+PMLQuad\+Mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1TwoDimensionalPMLHelper_a98d2786e22298095bd190435d11c4f0e}\label{namespaceoomph_1_1TwoDimensionalPMLHelper_a98d2786e22298095bd190435d11c4f0e} 
+\index{oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}!sorter\_top\_boundary@{sorter\_top\_boundary}}
+\index{sorter\_top\_boundary@{sorter\_top\_boundary}!oomph::TwoDimensionalPMLHelper@{oomph::TwoDimensionalPMLHelper}}
+\doxysubsubsection{\texorpdfstring{sorter\_top\_boundary()}{sorter\_top\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+top\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+i\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+j\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+helper function for sorting the top boundary nodes 
+
+
+
+Definition at line \mbox{\hyperlink{pml__meshes_8cc_source_l00045}{45}} of file \mbox{\hyperlink{pml__meshes_8cc_source}{pml\+\_\+meshes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l01645}{create\+\_\+top\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l00782}{oomph\+::\+PMLCorner\+Quad\+Mesh$<$ ELEMENT $>$\+::\+PMLCorner\+Quad\+Mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00440}{oomph\+::\+PMLQuad\+Mesh$<$ ELEMENT $>$\+::\+PMLQuad\+Mesh()}}.
+

@@ -1,0 +1,53 @@
+\doxysection{simple\+\_\+segregated\+\_\+driver.\+cc File Reference}
+\hypertarget{simple__segregated__driver_8cc}{}\label{simple__segregated__driver_8cc}\index{simple\_segregated\_driver.cc@{simple\_segregated\_driver.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class -- add segregated solver capability to an existing problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceFlags}{Flags}}
+\begin{DoxyCompactList}\small\item\em Extend namespace for control flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{simple__segregated__driver_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver code for a segregated collapsible channel problem with FSI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{namespaceFlags_a2cdfa6b776b959a060a1f2e8d4918789}{Flags\+::\+Use\+\_\+segregated\+\_\+solver}} =1
+\begin{DoxyCompactList}\small\item\em Use Newton solver (0) or segregated solver (1)? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_aabfbfdb3e91e4df3fc2ec6e2a2e3567d}{Flags\+::\+Use\+\_\+pointwise\+\_\+aitken}} =0
+\begin{DoxyCompactList}\small\item\em Use pointwise Aitken extrapolation (1) or not (0) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlags_a6c3895aecba834ceda5fe1c3ecb13bba}{Flags\+::\+Omega\+\_\+under\+\_\+relax}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Under-\/relaxation parameter (1.\+0\+: no under-\/relaxation; 0.\+0\+: freeze) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_a9d92a2ec6ebd4e2ea66605c063e53915}{Flags\+::\+Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}} =0
+\begin{DoxyCompactList}\small\item\em Use Irons and Tuck extrapolation (1) or not (0) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_aba930ff1e462e642a27904df95baab7c}{Flags\+::\+Convergence\+\_\+criterion}} =0
+\begin{DoxyCompactList}\small\item\em Convergence criterion\+: 0\+: global resmax; 1\+: abs. change; 2\+: rel. change. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlags_a5550ee43b27fd03898a6718246b44e4a}{Flags\+::\+Convergence\+\_\+tolerance}} =1.\+0e-\/10
+\begin{DoxyCompactList}\small\item\em Convergence tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{simple__segregated__driver_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{simple__segregated__driver_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{simple\_segregated\_driver.cc@{simple\_segregated\_driver.cc}!main@{main}}
+\index{main@{main}!simple\_segregated\_driver.cc@{simple\_segregated\_driver.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver code for a segregated collapsible channel problem with FSI. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00445}{445}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00236}{Flags\+::\+Resolution\+\_\+factor}}.
+

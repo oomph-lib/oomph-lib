@@ -1,0 +1,852 @@
+\chapter{Inline mesh generation and adaptation based on Triangle}
+\hypertarget{index}{}\label{index}\index{Inline mesh generation and adaptation based on Triangle@{Inline mesh generation and adaptation based on Triangle}}
+In this document we demonstrate how to generate unstructured 2D meshes for {\ttfamily oomph-\/lib}, using \href{http://www.cs.berkeley.edu/~jrs/}{\texttt{ Jonathan Shewchuk\textquotesingle{}s}} \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ Triangle}} library from within an {\ttfamily oomph-\/lib} driver code. This complements the discussion in \href{../../../../doc/meshes/mesh_from_triangle/html/index.html}{\texttt{ another tutorial}} where we illustrated how to build {\ttfamily oomph-\/lib} meshes using the output generated when \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle} }} is used to create the mesh externally.
+
+In addition, we demonstrate
+\begin{DoxyItemize}
+\item how to create meshes with polygonal or curvilinear boundaries
+\end{DoxyItemize}and
+\begin{DoxyItemize}
+\item how to adapt (re-\/generate) these meshes based on spatial error estimates.
+\end{DoxyItemize}Here we restrict ourselves to the solution of problems in fixed domains. Other tutorials discuss more advanced applications involving moving meshes, e.\+g.
+\begin{DoxyItemize}
+\item \href{../../../../doc/navier_stokes/jeffery_orbit/html/index.html}{\texttt{ The motion of an ellipse in a shear flow}} ~\newline
+~\newline
+
+\item \href{../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html}{\texttt{ The propagation of a bubble in a channel -- mesh generation and adaptation for free-\/surface flows.}} ~\newline
+~\newline
+
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_overview}{}\doxysection{\texorpdfstring{Overview of mesh generation procedures}{Overview of mesh generation procedures}}\label{index_overview}
+\hypertarget{index_polygonal}{}\doxysubsection{\texorpdfstring{Meshes with polygonal boundaries}{Meshes with polygonal boundaries}}\label{index_polygonal}
+If the domain has polygonal outer (and possibly internal) boundaries, the mesh generation process follows a similar pattern to that required in the external use of \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle} }}, but using {\ttfamily oomph-\/lib} classes to represent the required data. We define the polygonal boundaries using {\ttfamily Triangle\+Mesh\+Poly\+Lines}, which represent distinct mesh boundaries and are defined by a series of vertex coordinates. Multiple {\ttfamily Triangle\+Mesh\+Poly\+Lines} can be combined to define (closed) {\ttfamily Triangle\+Mesh\+Polygons}. These are then used to create an unstructured mesh with a pre-\/determined target area for all elements, via an interface to \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle} }}.
+
+One particular feature of {\ttfamily oomph-\/lib\textquotesingle{}s} interface to \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ {\ttfamily Triangle} }} is that each closed {\ttfamily Triangle\+Mesh\+Polygon} must contain at least two distinct {\ttfamily Triangle\+Mesh\+Poly\+Lines}, each with its own boundary ID. This is because every {\ttfamily Node} can only have a single-\/valued boundary coordinate but if the boundary is closed there would be a discontinuity in the coordinate value. (For example, a standard representation would have $ \zeta = [0,2\pi] $ , but the node at $\zeta=0$ should also have $ \zeta=2\pi $ and this is not possible.) The sketch below shows a representative domain as well as two legal and one illegal representations of the domain boundaries. Note that the boundaries can be enumerated in an arbitrary fashion.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{polygonal_mesh}
+\doxyfigcaption{Sketch of a polygonal domain (top) and two legal (bottom left and middle) and one illegal (bottom right) representations of the boundaries in terms of Triangle\+Mesh\+Poly\+Lines. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_curvilinear}{}\doxysubsection{\texorpdfstring{Meshes with curvilinear boundaries}{Meshes with curvilinear boundaries}}\label{index_curvilinear}
+It is also possible to discretise domains with curvilinear boundaries as shown in the sketch below. Assuming that each curvilinear boundary is represented by a {\ttfamily Geom\+Object} that specifies the position vector $ {\bf R}(\zeta) $ to a point on the curvilinear boundary as a function of some surface coordinate $ \zeta $, we split each closed boundary into (at least) two distinct {\ttfamily Triangle\+Mesh\+Curvi\+Lines} -- the curvilinear equivalents of {\ttfamily Triangle\+Mesh\+Poly\+Lines}. Each {\ttfamily Triangle\+Mesh\+Curvi\+Line} is constructed from a pointer to the {\ttfamily Geom\+Object} and the start and end values of the boundary coordinate $
+\zeta $ along the relevant part of the curvilinear boundary. The {\ttfamily Triangle\+Mesh\+Curvi\+Lines} are then combined to a {\ttfamily Triangle\+Mesh\+Closed\+Curve} -- the general closed curve.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{curvilinear_mesh}
+\doxyfigcaption{Sketch of a domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. }
+\end{DoxyImage}
+
+
+The mesh is then created in a two-\/stage process\+: All {\ttfamily Triangle\+Mesh\+Curvi\+Lines} are sampled at a certain number of points (specified by the user in the constructor) to create the vertices for a polyline representation of the boundary. This polygonal representation of the boundaries is used by {\ttfamily Triangle} to generate the mesh. Finally, nodes on curvilinear boundaries are "{}snapped"{} onto the actual curvilinear boundary.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_adapt}{}\doxysection{\texorpdfstring{Overview of mesh adaptation methodology}{Overview of mesh adaptation methodology}}\label{index_adapt}
+The methodology employed to adapt {\ttfamily oomph-\/lib\textquotesingle{}s} unstructured meshes differs from that used for structured meshes. Specifically, rather than sub-\/dividing elements in which the error estimate exceeds a threshold and merging elements in which the solution is "{}too accurate"{}, we completely re-\/generate the mesh and project the solution from the old to the new mesh. This is because we originally developed the underlying methodology to solve free-\/boundary problems in which the domain undergoes such large deformations that re-\/meshing is required. The ability to adjust the element sizes guided by spatial error estimates when re-\/meshing the domain is a simple fringe benefit.
+
+A number of issues are important\+:
+\begin{DoxyItemize}
+\item To facilitate mesh adaptation in free-\/boundary problems, we re-\/generate the polygonal representation of the boundary, using the vertex nodes of the elements on the boundary to re-\/define the polygon. The number of vertices in the polygons that define the mesh boundaries will therefore generally change during the mesh adaptation process. This is discussed in more detail in \href{../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html\#adapt}{\texttt{ another tutorial.}}~\newline
+~\newline
+
+\item The mesh (and thus its constituent elements) are completely re-\/generated when the mesh is adapted, and so it is necessary to "{}complete   the build"{} of all elements after each mesh adaptation. For instance, pointers to problem parameters (Reynolds numbers, source functions, etc) must be re-\/set after the adaptation since they cannot (easily) be passed from the old to the new mesh. ~\newline
+~\newline
+
+\item When projecting the solution from the old to the new mesh, we project ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item all unknowns and their associated history values (if any) ~\newline
+~\newline
+
+\item the history values of the nodal positions. This is important for moving mesh problems where the mesh velocity is required to evaluate the ALE time-\/derivatives.
+\end{DoxyItemize}~\newline
+~\newline
+
+\item The ability to automatically project the solution from the old to the new mesh requires the elements, of type {\ttfamily ELEMENT}, say, to be wrapped in the templated {\ttfamily Projectable\+Element$<$\+ELEMENT$>$} class. This class requires the specification of various element characteristics (such as the number of fields to be projected, the number of history values, etc) in the form of virtual functions. This is much more straightforward than upgrading an existing element to become a refineable element for use in an adaptive computation on a structured mesh because the "{}mesh adaptation by mesh re-\/generation"{} avoids the creation of hanging nodes. See the section \doxysectlink{index_wrapper}{Upgrading elements to become "{}projectable"{}}{2} for a slightly more detailed discussion of this aspect. ~\newline
+ ~\newline
+~\newline
+
+\item Note that we do {\bfseries{not}} apply any boundary conditions during the projection of these fields. This decision was not taken out of laziness but because the interfaces required to specify which boundary conditions to enforce and which ones to relax during the projection were too unwieldy. It is therefore {\bfseries{important}} to re-\/apply boundary conditions and boundary values after each adaptation. ~\newline
+~\newline
+
+\end{DoxyItemize}We recommend using the {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} function to re-\/assign boundary conditions and to complete the build of all elements after the adaptation.
+
+Apart from these issues, the user interfaces to the mesh adaptation functions are exactly the same as for structured meshes. Specifically, it is possible to specify maximum and minimum element sizes and target values for the error such that the mesh is refined in regions where the error estimate is {\ttfamily too large\textquotesingle{}\textquotesingle{} and unrefined where it is }too small\textquotesingle{}\textquotesingle{}.
+
+Typically, the most computationally expensive stage of the mesh regeneration procedure is the multi-\/domain setup procedure which identifies corresponding points in the old and new meshes. In "{}cheap"{} problems, such as the Poisson problem discussed below, the cost of the mesh regeneration can exceed the cost of the subsequent solve, but in most "{}hard"{} problems (such as the ones listed at the beginning of this tutorial) the cost of the mesh regeneration is modest (and, in the case of large-\/displacement free-\/boundary problems, unavoidable anyway).
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{An example\+: The adaptive solution of Poisson\textquotesingle{}s equations on an unstructured mesh}{An example: The adaptive solution of Poisson's equations on an unstructured mesh}}\label{index_example}
+As an example we consider the adaptive solution of Poisson\textquotesingle{}s equation  \[
+\frac{\partial^2 u}{\partial x_i^2} = f(x_1,x_2)
+\] in a circular domain that contains an elliptical and a polygonal hole. As in many previous examples, we apply Dirichlet boundary conditions on all domain boundaries and choose the boundary values and the source function $ f(x_1,x_2) $ such that the exact solution of the problem is given by  \[
+u(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\] which approaches a step function, oriented at an angle $ \Phi $ within the $ (x_1,x_2) $ plane, as $ \alpha $ becomes large. The figure below shows contour plots of the solution for $ \alpha = 5 $ for various angles $ \Phi $. It illustrates how the mesh adaptation adjusts the mesh such the smallest elements are located in the region where the solution undergoes rapid change.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{solution}
+\doxyfigcaption{Contour plot of the solution. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+Following our usual practice, we use a namespace to define the source function and the exact solution.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_namespace=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ exact\ solution\ for\ Poisson\ equation\ with\ "{}sharp\ step"{}\ }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ steepness\ of\ "{}step"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}=5.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ angle\ Phi\ of\ "{}step"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ Vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{get\_exact\_u}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]=tanh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Source\ function\ required\ to\ make\ the\ solution\ above\ an\ exact\ solution\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{get\_source}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ \textcolor{keywordtype}{double}\&\ source)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ source\ =\ 2.0*tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]))*}
+\DoxyCodeLine{\ \ \ (1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}+2.0*tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]))*}
+\DoxyCodeLine{\ \ \ (1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Zero\ function\ -\/-\/\ used\ to\ compute\ norm\ of\ the\ computed\ solution\ by\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ computing\ the\ norm\ of\ the\ error\ when\ compared\ against\ this.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a5cd8441c6e87d4bc153697eff13513dd}{zero}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by processing command line arguments which allow us to run the code in self-\/test mode and build the problem with "{}projectable"{} six-\/noded triangular Poisson elements.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ demo\ of\ inline\ triangle\ mesh\ generation}}
+\DoxyCodeLine{\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classUnstructuredPoissonProblem}{UnstructuredPoissonProblem<ProjectablePoissonElement<TPoissonElement<2,3>}}\ >\ >}
+\DoxyCodeLine{\ \ problem;}
+
+\end{DoxyCodeInclude}
+
+
+We then perform a parameter study, solving the problem for various orientations of the "{}step"{} and allowing a certain number of spatial adaptations per solve. (If the code is run in self-\/test mode, we perform fewer steps and allow for less adaptation to speed up the computation.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ orientation\ of\ step}}
+\DoxyCodeLine{\ \textcolor{comment}{//==============================}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=5;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ nstep=2;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ with\ spatial\ adaptation}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//==============================}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ max\_adapt=1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ the\ solution}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//=================}}
+\DoxyCodeLine{\ \ \ std::stringstream\ comment\_stream;}
+\DoxyCodeLine{\ \ \ comment\_stream\ <<\ \textcolor{stringliteral}{"{}Solution\ for\ tan(phi)\ =\ "{}}\ <<\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}};\ }
+\DoxyCodeLine{\ \ \ problem.\mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{doc\_solution}}(comment\_stream.str());}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Rotate\ orientation\ of\ solution}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}+=0.5;}
+\DoxyCodeLine{\ \ \}\ \ \ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//End\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class contains the usual member functions. As discussed above, the boundary conditions and the source function have to be re-\/specified after every mesh adaptation since the adapted mesh contains completely new elements. This is done in the function {\ttfamily complete\+\_\+problem\+\_\+setup()}, discussed below, which is called from the Problem constructor and from {\ttfamily actions\+\_\+after\+\_\+adapt()}. We re-\/assign the Dirichlet boundary conditions in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+solve()}, using a second helper function {\ttfamily apply\+\_\+boundary\+\_\+conditions()}\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Class\ definition}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classUnstructuredPoissonProblem}{UnstructuredPoissonProblem}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a26e7610a714aea17c9278beec4842371}{UnstructuredPoissonProblem}}();}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_aeae85592e36ba7be6b4891fb49d2197b}{\string~UnstructuredPoissonProblem}}()\{\};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt.\ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_ac9627efd3c311156e5347ed37d4ea4b0}{actions\_before\_adapt}}()\ \{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Setup\ the\ problem\ again\ -\/-\/\ remember\ that\ the\ mesh\ has\ been}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ completely\ rebuilt\ and\ its\ element's\ don't\ have\ any}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ pointers\ to\ source\ fcts\ etc.\ yet}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a6f3e089824cfbb4f458efd8c8ffd376d}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a822bd18e50ebeefd6d1c196fad7c0bf1}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve:\ Re-\/apply\ boundary\ conditons}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a2ab9d23c0e6e6631ffe1a761f6bdf026}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{apply\_boundary\_conditions}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{doc\_solution}}(\textcolor{keyword}{const}\ std::string\&\ comment=\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ info\ object\ for\ labeling\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a5c4c29b1c95cd63055e5aced124ca708}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Helper\ function\ to\ apply\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{apply\_boundary\_conditions}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Helper\ function\ to\ (re-\/)set\ boundary\ condition}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ complete\ the\ build\ of\ \ all\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{complete\_problem\_setup}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointers\ to\ specific\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RefineableTriangleMesh<ELEMENT>*\ \mbox{\hyperlink{classUnstructuredPoissonProblem_af95c713f5db16c288e307768b6bf9bb8}{My\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file\ to\ document\ norm\ of\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ \mbox{\hyperlink{classUnstructuredPoissonProblem_ac7fdb8fb9a886ced0ee7244890406d90}{Trace\_file}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+Most of the problem constructor is concerned with the specification of the mesh boundaries. We start by generating a {\ttfamily Geom\+Object} that describes the circular outer boundary of the domain.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classUnstructuredPoissonProblem_a26e7610a714aea17c9278beec4842371}{UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem}}()}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Intrinsic\ coordinate\ along\ GeomObject}}
+\DoxyCodeLine{\ Vector<double>\ zeta(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Position\ vector\ on\ GeomObject}}
+\DoxyCodeLine{\ Vector<double>\ posn(2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Ellipse\ defining\ the\ outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ x\_center\ =\ 0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ y\_center\ =\ 0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ A\ =\ 1.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ B\ =\ 1.0;}
+\DoxyCodeLine{\ Ellipse\ *\ outer\_boundary\_ellipse\_pt\ =\ \textcolor{keyword}{new}\ Ellipse(A,B);}
+
+\end{DoxyCodeInclude}
+ This {\ttfamily Geom\+Object} is now used to describe the outer boundary in terms of a {\ttfamily Triangle\+Mesh\+Closed\+Curve} object, a base class which can represent polygonal and curvilinear boundaries. We start by providing a pointer to this (yet-\/to-\/be-\/built) object.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pointer\ to\ the\ closed\ curve\ that\ defines\ the\ outer\ boundary}}
+\DoxyCodeLine{\ TriangleMeshClosedCurve*\ closed\_curve\_pt=0;}
+
+\end{DoxyCodeInclude}
+
+
+As discussed above, the closed outer boundary must be broken up into (at least) two distinct sub-\/boundaries to allow {\ttfamily oomph-\/lib} to automatically refine and setup boundary coordinates. We therefore create two {\ttfamily Triangle\+Mesh\+Curvi\+Lines}, specifying
+\begin{DoxyItemize}
+\item the {\ttfamily Geom\+Object} that provides the exact curvilinear representation of the boundary, ~\newline
+~\newline
+
+\item the start and end coordinates of the boundary on that {\ttfamily Geom\+Object}, ~\newline
+~\newline
+
+\item the number of straight-\/line segments used to represent this boundary during the initial phase of the mesh generation process. Recall that nodes on this boundary are "{}snapped"{} onto the exact curvilinear boundary after the initial mesh is generated -- the number of segments should therefore be sufficiently large to ensure that the "{}snapping"{} does not distort the elements next to the boundary too much. See \doxysectlink{index_how_many_segments}{How many vertices should I use to sample my curvilinear boundary?}{2} for a more detailed discussion of this issue.
+\end{DoxyItemize}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Provide\ storage\ for\ pointers\ to\ the\ two\ parts\ of\ the\ curvilinear\ boundary}}
+\DoxyCodeLine{\ \ \ Vector<TriangleMeshCurveSection*>\ outer\_curvilinear\_boundary\_pt(2);}
+
+\end{DoxyCodeInclude}
+ We choose five boundary segments for the first {\ttfamily Triangle\+Mesh\+Curvi\+Line} which represents the upper half of the boundary which we label as boundary 0,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ First\ bit}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ zeta\_start=0.0;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ zeta\_end=MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ nsegment=5;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ boundary\_id=0;}
+\DoxyCodeLine{\ \ \ outer\_curvilinear\_boundary\_pt[0]=\textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ \ outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
+
+\end{DoxyCodeInclude}
+ and eight segments for the lower half which we label as boundary 1\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Second\ bit}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ zeta\_start=MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \ zeta\_end=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \ nsegment=8;}
+\DoxyCodeLine{\ \ \ boundary\_id=1;}
+\DoxyCodeLine{\ \ \ outer\_curvilinear\_boundary\_pt[1]=\textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ \ outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
+
+\end{DoxyCodeInclude}
+ We then combine the two {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to a {\ttfamily Triangle\+Mesh\+Closed\+Curve} which describes the outer boundary.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Combine\ to\ curvilinear\ boundary\ and\ define\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ outer\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ closed\_curve\_pt=}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{new}\ TriangleMeshClosedCurve(outer\_curvilinear\_boundary\_pt);}
+
+\end{DoxyCodeInclude}
+ Next we deal with the two inner (hole) boundaries
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ build\ the\ holes}}
+\DoxyCodeLine{\ \textcolor{comment}{//====================}}
+\DoxyCodeLine{\ Vector<TriangleMeshClosedCurve*>\ hole\_pt(2);}
+
+\end{DoxyCodeInclude}
+ The first hole is a polygon whose 12 vertices we distribute along a circle of radius $ 0.1 $ , centred at $ (x_1,x_2)=(0,0.5). $ As above, we break the closed boundary into two distinct sub-\/boundaries -- this time represented by {\ttfamily Triangle\+Mesh\+Poly\+Lines\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ polygonal\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//=====================}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ first\ hole:\ A\ circle}}
+\DoxyCodeLine{\ x\_center\ =\ 0.0;}
+\DoxyCodeLine{\ y\_center\ =\ 0.5;}
+\DoxyCodeLine{\ A\ =\ 0.1;}
+\DoxyCodeLine{\ B\ =\ 0.1;}
+\DoxyCodeLine{\ Ellipse*\ polygon\_ellipse\_pt=\textcolor{keyword}{new}\ Ellipse(A,B);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ segments\ defining\ upper\ and\ lower\ half\ of\ the\ hole}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_seg\ =\ 6;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ unit\_zeta\ =\ MathematicalConstants::Pi/double(n\_seg);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ hole\ is\ bounded\ by\ two\ distinct\ boundaries,\ each}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ represented\ by\ its\ own\ polyline}}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ hole\_polyline\_pt(2);}
+
+\end{DoxyCodeInclude}
+ We create the vertex coordinates for the upper half of the polygonal hole,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ First\ boundary\ of\ polygonal\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Vertex\ coordinates}}
+\DoxyCodeLine{\ Vector<Vector<double>\ >\ bound\_hole(n\_seg+1);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ipoint=0;\ ipoint<n\_seg+1;ipoint++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Resize\ the\ vector\ }}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint].resize(2);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ the\ coordinates}}
+\DoxyCodeLine{\ \ \ zeta[0]=unit\_zeta*double(ipoint);}
+\DoxyCodeLine{\ \ \ polygon\_ellipse\_pt-\/>position(zeta,posn);}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint][0]=posn[0]+x\_center;}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint][1]=posn[1]+y\_center;}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ and build the {\ttfamily Triangle\+Mesh\+Poly\+Line}, specifying a boundary ID\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ hole\ boundary\ id}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ boundary\_id=2;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 1st\ hole\ polyline}}
+\DoxyCodeLine{\ hole\_polyline\_pt[0]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(bound\_hole,boundary\_id);}
+
+\end{DoxyCodeInclude}
+ We repeat the exercise for the lower half which we turn into boundary 4\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Second\ boundary\ of\ polygonal\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ipoint=0;\ ipoint<n\_seg+1;ipoint++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Resize\ the\ vector\ }}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint].resize(2);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ the\ coordinates}}
+\DoxyCodeLine{\ \ \ zeta[0]=(unit\_zeta*double(ipoint))+MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \ polygon\_ellipse\_pt-\/>position(zeta,posn);}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint][0]=posn[0]+x\_center;}
+\DoxyCodeLine{\ \ \ bound\_hole[ipoint][1]=posn[1]+y\_center;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ hole\ boundary\ id}}
+\DoxyCodeLine{\ boundary\_id=3;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 2nd\ hole\ polyline}}
+\DoxyCodeLine{\ hole\_polyline\_pt[1]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(bound\_hole,boundary\_id);}
+
+\end{DoxyCodeInclude}
+ Finally, we build the polygonal hole itself, specifying its constituent {\ttfamily Triangle\+Mesh\+Poly\+Lines} and the coordinate of a point inside the hole, which is required by {\ttfamily Triangle\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ polygonal\ hole\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Inner\ hole\ center\ coordinates}}
+\DoxyCodeLine{\ Vector<double>\ hole\_center(2);}
+\DoxyCodeLine{\ hole\_center[0]=x\_center;}
+\DoxyCodeLine{\ hole\_center[1]=y\_center;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ hole\_pt[0]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolygon(hole\_polyline\_pt,\ hole\_center);}
+
+\end{DoxyCodeInclude}
+ The construction of the second, curvilinear internal boundary (an ellipse centred at the origin) is virtually identical to the steps taken for the construction of the outer boundary, apart from the fact that, as an internal boundary, it again requires the specification of a point inside the hole.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ curvilinear\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//======================}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ second\ hole:\ Another\ ellipse}}
+\DoxyCodeLine{\ A\ =\ 0.2;}
+\DoxyCodeLine{\ B\ =\ 0.1;}
+\DoxyCodeLine{\ Ellipse*\ ellipse\_pt=\textcolor{keyword}{new}\ Ellipse(A,B);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ two\ parts\ of\ the\ curvilinear\ boundary}}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ curvilinear\_boundary\_pt(2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ First\ part\ of\ curvilinear\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ zeta\_start=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ zeta\_end=MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nsegment=10;}
+\DoxyCodeLine{\ boundary\_id=4;}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt[0]=\textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ ellipse\_pt,zeta\_start,zeta\_end,\ }
+\DoxyCodeLine{\ \ nsegment,boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Second\ part\ of\ curvilinear\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ zeta\_start=MathematicalConstants::Pi;}
+\DoxyCodeLine{\ zeta\_end=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ nsegment=15;}
+\DoxyCodeLine{\ boundary\_id=5;}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt[1]=\textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ ellipse\_pt,zeta\_start,zeta\_end,\ }
+\DoxyCodeLine{\ \ nsegment,boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ to\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Vector<double>\ hole\_coords(2);}
+\DoxyCodeLine{\ hole\_coords[0]=0.0;}
+\DoxyCodeLine{\ hole\_coords[1]=0.0;}
+\DoxyCodeLine{\ Vector<TriangleMeshClosedCurve*>\ curvilinear\_hole\_pt(1);}
+\DoxyCodeLine{\ hole\_pt[1]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshClosedCurve(curvilinear\_boundary\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hole\_coords);}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_build_mesh}{}\doxysubsection{\texorpdfstring{Construct the mesh}{Construct the mesh}}\label{index_build_mesh}
+To facilitate the construction of the mesh {\ttfamily Triangle\+Mesh} object we use the object {\ttfamily Triangle\+Mesh\+Parameters}. The only necessary argument for creating this object is the outer boundary. The definition of holes, internal boundaries and regions is explained in \href{../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html}{\texttt{ another tutorial}}. The object can also be used to control whether additional refinement may be performed on the mesh boundaries. The default behaviour is that such refinement will occur so that the highest quality mesh is obtained. In some cases, e.\+g. periodic boundary conditions, you may wish to ensure that each input boundary segment corresponds to a single element edge in the final mesh. This can be achieved for the outer boundary by calling {\ttfamily Triangle\+Mesh\+Parameters\+::disable\+\_\+boundary\+\_\+refinement()}. However, Triangle will still add additional points to any internal boundaries unless the additional function {\ttfamily Triangle\+Mesh\+Parameters\+::disable\+\_\+internal\+\_\+boundary\+\_\+refinement()} is also called. The functions {\ttfamily Triangle\+Mesh\+Parameters\+::enable\+\_\+boundary\+\_\+refinement()} and {\ttfamily Triangle\+Mesh\+Parameters\+::enable\+\_\+internal\+\_\+boundary\+\_\+refinement()} can be used to return to the default behaviour. Note that it is not currently possible to suppress refinement on the internal boundaries, but refine the outer boundary.
+
+We can specify a target for the element sizes and pass it to the {\ttfamily Triangle\+Mesh\+Parameters} object as showed next\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ build\ the\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//===================}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ TriangleMeshParameters\ object\ for\ helping\ on\ the\ manage\ of\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ TriangleMesh\ parameters}}
+\DoxyCodeLine{\ TriangleMeshParameters\ triangle\_mesh\_parameters(closed\_curve\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ closed\ curve\ using\ the\ TriangleMeshParameters\ object}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.internal\_closed\_curve\_pt()\ =\ hole\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ maximum\ area\ element}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ uniform\_element\_area=0.2;}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.element\_area()\ =\ uniform\_element\_area;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ mesh}}
+\DoxyCodeLine{\ My\_mesh\_pt=\textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ RefineableTriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ as\ the\ problem's\ one\ and\ only\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=My\_mesh\_pt;}
+
+\end{DoxyCodeInclude}
+ We specify a spatial error estimator and limit the maximum and minimum element sizes,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator\ for\ bulk\ mesh}}
+\DoxyCodeLine{\ Z2ErrorEstimator*\ error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ element\ size\ limits}}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>max\_element\_size()=0.2;}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>min\_element\_size()=0.002;\ }
+
+\end{DoxyCodeInclude}
+ before completing the problem setup (see below) and assigning the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ boundary\ condition\ and\ complete\ the\ build\ of\ all\ elements}}
+\DoxyCodeLine{\ complete\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}RESLT/trace.dat"{}});}
+\DoxyCodeLine{\ Trace\_file.open(filename);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ oomph\_info\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ this-\/>assign\_eqn\_numbers()\ <<\ std::endl;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_complete}{}\doxysection{\texorpdfstring{Completing the problem setup}{Completing the problem setup}}\label{index_complete}
+As discussed above, the helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} starts by (re-\/)applying the boundary conditions by pinning the nodal values on all mesh boundaries,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_complete======================================================}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ boundary\ condition\ exactly,\ and\ complete\ the\ build\ of\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ all\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{UnstructuredPoissonProblem<ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nbound=My\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<nbound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=My\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=My\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ one-\/and-\/only\ unknown\ value}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \}\ \ \ }
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+
+\end{DoxyCodeInclude}
+ specifies the source function pointer for all elements,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ My\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(My\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>source\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{TanhSolnForPoisson::get\_source}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ and then re-\/sets the boundary values\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Re-\/apply\ Dirichlet\ boundary\ conditions\ (projection\ ignores}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ boundary\ conditions!)}}
+\DoxyCodeLine{\ apply\_boundary\_conditions();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_bc}{}\doxysection{\texorpdfstring{Assigning the boundary values}{Assigning the boundary values}}\label{index_bc}
+The function {\ttfamily apply\+\_\+boundary\+\_\+conditions()} does exactly what is says\+: It loops over all boundary nodes and assigns the value according the exact solution specified in the namespace {\ttfamily \doxylink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_apply\_bc=====================================================}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Helper\ function\ to\ apply\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{UnstructuredPoissonProblem<ELEMENT>::apply\_boundary\_conditions}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ boundary\ nodes}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nbound=this-\/>My\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<nbound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=this-\/>My\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=this-\/>My\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Extract\ nodal\ coordinates\ from\ node:}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Compute\ the\ value\ of\ the\ exact\ solution\ at\ the\ nodal\ point}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ u(1);}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}}(x,u);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ value\ to\ the\ one\ (and\ only)\ nodal\ value\ at\ this\ node}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(0,u[0]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ set\ bc}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+We compare the computed solution against the exact solution\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{UnstructuredPoissonProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\&\ comment)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts;}
+\DoxyCodeLine{\ npts=5;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}RESLT/soln\%i.dat"{}},Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ this-\/>My\_mesh\_pt-\/>output(some\_file,npts);\ }
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}TEXT\ X\ =\ 22,\ Y\ =\ 92,\ CS=FRAME\ T\ =\ \(\backslash\)"{}"{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ <<\ comment\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}RESLT/exact\_soln\%i.dat"{}},Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}});\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ boundaries}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}RESLT/boundaries\%i.dat"{}},Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>output\_boundaries(some\_file);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error\ and\ return\ of\ the\ square\ of\ the\ L2\ error}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ error,norm,dummy\_error,zero\_norm;}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}RESLT/error\%i.dat"{}},Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ My\_mesh\_pt-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error,norm);\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ My\_mesh\_pt-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_a5cd8441c6e87d4bc153697eff13513dd}{TanhSolnForPoisson::zero}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dummy\_error,zero\_norm);\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ L2\ error\ and\ norm\ of\ solution}}
+\DoxyCodeLine{\ oomph\_info\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNorm\ of\ error\ \ \ :\ "{}}\ <<\ sqrt(error)\ <<\ std::endl;\ }
+\DoxyCodeLine{\ oomph\_info\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ exact\ solution:\ "{}}\ <<\ sqrt(norm)\ <<\ std::endl;}
+\DoxyCodeLine{\ oomph\_info\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ computed\ solution:\ "{}}\ <<\ sqrt(dummy\_error)\ <<\ std::endl;}
+\DoxyCodeLine{\ Trace\_file\ <<\ sqrt(norm)\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ sqrt(dummy\_error)\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ the\ doc\_info\ number}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_wrapper}{}\doxysubsection{\texorpdfstring{Upgrading elements to become "{}projectable"{}}{Upgrading elements to become "projectable"}}\label{index_wrapper}
+As discussed above, a key step in the "{}mesh-\/adaptation-\/by-\/mesh-\/regeneration"{} procedure is the projection of the solution from the old to the new mesh. The ability to perform this projection fully-\/automatically during the mesh adaptation requires the elements to be "{}wrapped"{} in the templated {\ttfamily Projectable\+Element$<$\+ELEMENT$>$} class. This class is derived from the {\ttfamily Projectable\+Element\+Base} base class which specifies a number of pure virtual functions that must be specified for each specific element type. For the Poisson problem considered here these functions are already provided in the {\ttfamily Projectable\+Poisson\+Element$<$\+ELEMENT$>$} class. Similar wrappers exist for many other equations. If you want to "{}upgrade"{} your own elements to become projectable, inspect the prototypes for the relevant pure virtual functions which are defined in
+
+\begin{center} \href{../../../../src/generic/projection.h}{\texttt{ src/generic/projection.\+h }} \end{center} 
+
+while the specific implementation for the projectable Poisson elements is provided in
+
+\begin{center} \href{../../../../src/poisson/poisson_elements.h}{\texttt{ src/poisson/poisson\+\_\+elements.\+h }} \end{center} 
+
+Of course, you can avoid the additional work by dispensing with adaptivity and simply generating a sufficiently fine (uniform) mesh. This is illustrated in the alternative driver code \begin{center} \href{../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+no\+\_\+adapt.\+cc }} \end{center} 
+
+\DoxyHorRuler{0}
+\hypertarget{index_how_many_segments}{}\doxysubsection{\texorpdfstring{How many vertices should I use to sample my curvilinear boundary?}{How many vertices should I use to sample my curvilinear boundary?}}\label{index_how_many_segments}
+As discussed above, meshes with curvilinear boundaries are created in a two-\/stage process. Initially, Triangle generates a mesh with polygonal boundaries using a user-\/specified number of vertices that are evenly distributed along the relevant {\ttfamily Geom\+Object}. The nodes on that boundary are then "{}snapped"{} onto the actual curvilinear boundary in a post-\/processing step. The decision of how many vertices to choose involves a compromise between two conflicting demands\+:
+\begin{DoxyItemize}
+\item The number of boundary nodes created by Triangle will be at least as big as the number of vertices specified. Triangle may add additional boundary nodes to generate a mesh of sufficient quality but it will not remove any vertices. Using a very large number of vertices can therefore lead to unnecessarily fine meshes. ~\newline
+~\newline
+
+\item If the number of vertices is too small, the polygonal representation of the domain boundary may be a poor approximation to the actual curvilinear boundary. Elements near such boundaries may become (too) strongly distorted when nodes are "{}snapped"{} onto the curvilinear boundary. This often manifests itself in inverted elements. (An element is considered inverted if the Jacobian of the mapping between local and global coordinates becomes non-\/positive anywhere. Note that negative Jacobians may occur in the interior of elements (e.\+g. at their Gauss points) even if a plot of the element, based on its nodal positions, still looks "{}\+OK"{}).
+\end{DoxyItemize}\DoxyHorRuler{0}
+\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Change the outer curvilinear boundary to a polygonal boundary (you can cheat -- the relevant code is already contained in the driver code but it\textquotesingle{}s "{}hidden"{} with {\ttfamily ifdefs}; this code also documents the re-\/distribution of straight-\/line segments between different polylines, a capability that is important in certain free-\/boundary problems). ~\newline
+~\newline
+
+\item Vary the number of vertices used for the initial polygonal representation of the curvilinear hole to establish what number is required to avoid the inversion of elements during the "{}snap-\/nodes-\/to-\/the-\/curvilinear-\/boundary"{} phase. ~\newline
+~\newline
+
+\item Create "{}projectable"{} advection diffusion elements to solve the the advection diffusion problem discussed in \href{../../../../doc/advection_diffusion/two_d_adv_diff_adapt/html/index.html}{\texttt{ another tutorial,}} using spatial adaptation on an unstructured mesh. ~\newline
+~\newline
+
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_triangle/}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle/mesh\+\_\+from\+\_\+inline\+\_\+triangle.\+cc }} \end{center}  ~\newline
+~\newline
+
+\item The additional driver code ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+inline\+\_\+triangle/mesh\+\_\+from\+\_\+inline\+\_\+triangle\+\_\+no\+\_\+adapt.\+cc }} \end{center}  ~\newline
+shows how to generate non-\/refineable triangle meshes inline. This code does not require any modifications to existing triangular elements.
+\end{DoxyItemize}\hypertarget{index_curve_sections}{}\doxysection{\texorpdfstring{Appendix A\+: Generalization for polylines and curvilines}{Appendix A: Generalization for polylines and curvilines}}\label{index_curve_sections}
+The objects, {\ttfamily Triangle\+Mesh\+Poly\+Line} and {\ttfamily Triangle\+Mesh\+Curvi\+Line} inherit the properties of a more general representation called {\ttfamily Triangle\+Mesh\+Curve\+Section}. This allows one to define more general boundaries as a combination of {\ttfamily Triangle\+Mesh\+Poly\+Lines} and {\ttfamily Triangle\+Mesh\+Curvi\+Lines}. Therefore, if we want to define a more general closed curve use the {\ttfamily Triangle\+Mesh\+Closed\+Curve} object. You may notice the use of this object through the example code when defining the outer boundary.
+
+For the interested reader, the class diagram showing the hierarchy of the mentioned objects is showed on the next figure.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{class_diagram}
+\doxyfigcaption{The hierarchy of the {\ttfamily Triangle\+Mesh} objects. }
+\end{DoxyImage}
+
+
+Note the {\ttfamily Triangle\+Mesh\+Open\+Curve} object, which allows to define internal boundaries on the domain, explained on \href{../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html}{\texttt{ another tutorial}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

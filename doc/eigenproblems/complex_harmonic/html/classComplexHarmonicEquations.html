@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: ComplexHarmonicEquations Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="classComplexHarmonicEquations-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">ComplexHarmonicEquations Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for all elements that solve the eigenvalue problem.  
+ <a href="classComplexHarmonicEquations.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ComplexHarmonicEquations:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classComplexHarmonicEquations.png" usemap="#ComplexHarmonicEquations_map" alt=""/>
+  <map id="ComplexHarmonicEquations_map" name="ComplexHarmonicEquations_map">
+<area href="classQComplexHarmonicElement.html" title="QComplexHarmonicElement&lt;NNODE_1D&gt; elements are 1D Elements with NNODE_1D nodal points that are used t..." alt="QComplexHarmonicElement&lt; NNODE_1D &gt;" shape="rect" coords="0,112,260,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa93feb265f731b0d82c3c1c4c29f183d" id="r_aa93feb265f731b0d82c3c1c4c29f183d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#aa93feb265f731b0d82c3c1c4c29f183d">ComplexHarmonicEquations</a> ()</td></tr>
+<tr class="memdesc:aa93feb265f731b0d82c3c1c4c29f183d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <br /></td></tr>
+<tr class="separator:aa93feb265f731b0d82c3c1c4c29f183d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ff638cb40e23c3574631423fd56bce" id="r_af4ff638cb40e23c3574631423fd56bce"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#af4ff638cb40e23c3574631423fd56bce">u</a> (const unsigned &amp;n) const</td></tr>
+<tr class="memdesc:af4ff638cb40e23c3574631423fd56bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function: First eigenfunction value at local node n Note that solving the eigenproblem does not assign values to this storage space. It is used for output purposes only.  <br /></td></tr>
+<tr class="separator:af4ff638cb40e23c3574631423fd56bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3955ee987827d831e44eeb43dcae63" id="r_a9b3955ee987827d831e44eeb43dcae63"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a9b3955ee987827d831e44eeb43dcae63">w</a> (const unsigned &amp;n) const</td></tr>
+<tr class="memdesc:a9b3955ee987827d831e44eeb43dcae63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second eigenfunction value at local node n.  <br /></td></tr>
+<tr class="separator:a9b3955ee987827d831e44eeb43dcae63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9185e07b984e735c1c45b6f5a6c02b5f" id="r_a9185e07b984e735c1c45b6f5a6c02b5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a9185e07b984e735c1c45b6f5a6c02b5f">output</a> (ostream &amp;outfile)</td></tr>
+<tr class="memdesc:a9185e07b984e735c1c45b6f5a6c02b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the eigenfunction with default number of plot points.  <br /></td></tr>
+<tr class="separator:a9185e07b984e735c1c45b6f5a6c02b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141e0a24096323472fcd10138b6fd5fa" id="r_a141e0a24096323472fcd10138b6fd5fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a141e0a24096323472fcd10138b6fd5fa">output</a> (ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:a141e0a24096323472fcd10138b6fd5fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output FE representation of soln: x,y,u or x,y,z,u at Nplot plot points.  <br /></td></tr>
+<tr class="separator:a141e0a24096323472fcd10138b6fd5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c67a0c220f61d6c300703f29c00b1ef" id="r_a4c67a0c220f61d6c300703f29c00b1ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a4c67a0c220f61d6c300703f29c00b1ef">fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a4c67a0c220f61d6c300703f29c00b1ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the contributions to the jacobian and mass matrices.  <br /></td></tr>
+<tr class="separator:a4c67a0c220f61d6c300703f29c00b1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8774f4cf492bd267c0a170bf4f81a6" id="r_a9e8774f4cf492bd267c0a170bf4f81a6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a9e8774f4cf492bd267c0a170bf4f81a6">interpolated_u</a> (const Vector&lt; double &gt; &amp;s) const</td></tr>
+<tr class="memdesc:a9e8774f4cf492bd267c0a170bf4f81a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of function value u(s) at local coordinate s.  <br /></td></tr>
+<tr class="separator:a9e8774f4cf492bd267c0a170bf4f81a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b34acf2038ae9c2ef3f3e61d9c1cd7" id="r_a73b34acf2038ae9c2ef3f3e61d9c1cd7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a73b34acf2038ae9c2ef3f3e61d9c1cd7">interpolated_w</a> (const Vector&lt; double &gt; &amp;s) const</td></tr>
+<tr class="memdesc:a73b34acf2038ae9c2ef3f3e61d9c1cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of function value w(s) at local coordinate s.  <br /></td></tr>
+<tr class="separator:a73b34acf2038ae9c2ef3f3e61d9c1cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a59048c598e2fba3e11aa5985ffaf4d76" id="r_a59048c598e2fba3e11aa5985ffaf4d76"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a59048c598e2fba3e11aa5985ffaf4d76">dshape_eulerian</a> (const Vector&lt; double &gt; &amp;s, Shape &amp;psi, DShape &amp;dpsidx) const =0</td></tr>
+<tr class="memdesc:a59048c598e2fba3e11aa5985ffaf4d76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at local coord. s; return Jacobian of mapping.  <br /></td></tr>
+<tr class="separator:a59048c598e2fba3e11aa5985ffaf4d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c71828f2d4c1c2363dcb1d1f334fff" id="r_a60c71828f2d4c1c2363dcb1d1f334fff"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a60c71828f2d4c1c2363dcb1d1f334fff">dshape_eulerian_at_knot</a> (const unsigned &amp;ipt, Shape &amp;psi, DShape &amp;dpsidx) const =0</td></tr>
+<tr class="memdesc:a60c71828f2d4c1c2363dcb1d1f334fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape/test functions and derivs w.r.t. to global coords at integration point ipt; return Jacobian of mapping.  <br /></td></tr>
+<tr class="separator:a60c71828f2d4c1c2363dcb1d1f334fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3538cae061c24db2db1fc277c0a09da4" id="r_a3538cae061c24db2db1fc277c0a09da4"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplexHarmonicEquations.html#a3538cae061c24db2db1fc277c0a09da4">u_local_eqn</a> (const unsigned &amp;n, const unsigned &amp;i)</td></tr>
+<tr class="memdesc:a3538cae061c24db2db1fc277c0a09da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function that returns the local equation number of the unknown in the problem. Default is to assume that it is the first (only) value stored at the node.  <br /></td></tr>
+<tr class="separator:a3538cae061c24db2db1fc277c0a09da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for all elements that solve the eigenvalue problem. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[  \frac{\partial w}{\partial x}  = \lambda u \]" src="form_28.png" width="50" height="28"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \frac{\partial u}{\partial x} = (\lambda - \mu) w \]" src="form_29.png" width="83" height="28"/>
+</p>
+<p> This class contains the generic maths. Shape functions, geometric mapping etc. must get implemented in derived class. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00084">84</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa93feb265f731b0d82c3c1c4c29f183d" name="aa93feb265f731b0d82c3c1c4c29f183d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93feb265f731b0d82c3c1c4c29f183d">&#9670;&#160;</a></span>ComplexHarmonicEquations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ComplexHarmonicEquations::ComplexHarmonicEquations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00089">89</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a59048c598e2fba3e11aa5985ffaf4d76" name="a59048c598e2fba3e11aa5985ffaf4d76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59048c598e2fba3e11aa5985ffaf4d76">&#9670;&#160;</a></span>dshape_eulerian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double ComplexHarmonicEquations::dshape_eulerian </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DShape &amp;&#160;</td>
+          <td class="paramname"><em>dpsidx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shape/test functions and derivs w.r.t. to global coords at local coord. s; return Jacobian of mapping. </p>
+
+<p>Implemented in <a class="el" href="classQComplexHarmonicElement.html#a7c97d4e8c5433a44640d30c936d69ffb">QComplexHarmonicElement&lt; NNODE_1D &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a60c71828f2d4c1c2363dcb1d1f334fff" name="a60c71828f2d4c1c2363dcb1d1f334fff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c71828f2d4c1c2363dcb1d1f334fff">&#9670;&#160;</a></span>dshape_eulerian_at_knot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double ComplexHarmonicEquations::dshape_eulerian_at_knot </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shape &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DShape &amp;&#160;</td>
+          <td class="paramname"><em>dpsidx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shape/test functions and derivs w.r.t. to global coords at integration point ipt; return Jacobian of mapping. </p>
+
+<p>Implemented in <a class="el" href="classQComplexHarmonicElement.html#a3f8d1d9396135d4d86f416dcf6c23904">QComplexHarmonicElement&lt; NNODE_1D &gt;</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00134">fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a4c67a0c220f61d6c300703f29c00b1ef" name="a4c67a0c220f61d6c300703f29c00b1ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c67a0c220f61d6c300703f29c00b1ef">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ComplexHarmonicEquations::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assemble the contributions to the jacobian and mass matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00134">134</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="classComplexHarmonicEquations.html#a60c71828f2d4c1c2363dcb1d1f334fff">dshape_eulerian_at_knot()</a>, <a class="el" href="complex__harmonic_8cc_source.html#l00046">EigenproblemShift::Mu</a>, <a class="el" href="complex__harmonic_8cc_source.html#l00283">u_local_eqn()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00098">w()</a>.</p>
+
+</div>
+</div>
+<a id="a9e8774f4cf492bd267c0a170bf4f81a6" name="a9e8774f4cf492bd267c0a170bf4f81a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e8774f4cf492bd267c0a170bf4f81a6">&#9670;&#160;</a></span>interpolated_u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ComplexHarmonicEquations::interpolated_u </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return FE representation of function value u(s) at local coordinate s. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00224">224</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__harmonic_8cc_source.html#l00224">interpolated_u()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00094">u()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00224">interpolated_u()</a>, <a class="el" href="complex__harmonic_8cc_source.html#l00245">interpolated_w()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00110">output()</a>.</p>
+
+</div>
+</div>
+<a id="a73b34acf2038ae9c2ef3f3e61d9c1cd7" name="a73b34acf2038ae9c2ef3f3e61d9c1cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73b34acf2038ae9c2ef3f3e61d9c1cd7">&#9670;&#160;</a></span>interpolated_w()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ComplexHarmonicEquations::interpolated_w </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return FE representation of function value w(s) at local coordinate s. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00245">245</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__harmonic_8cc_source.html#l00224">interpolated_u()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00098">w()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00110">output()</a>.</p>
+
+</div>
+</div>
+<a id="a9185e07b984e735c1c45b6f5a6c02b5f" name="a9185e07b984e735c1c45b6f5a6c02b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9185e07b984e735c1c45b6f5a6c02b5f">&#9670;&#160;</a></span>output() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ComplexHarmonicEquations::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output the eigenfunction with default number of plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00102">102</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__harmonic_8cc_source.html#l00102">output()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00102">output()</a>, <a class="el" href="complex__harmonic_8cc_source.html#l00314">QComplexHarmonicElement&lt; NNODE_1D &gt;::output()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00318">QComplexHarmonicElement&lt; NNODE_1D &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a141e0a24096323472fcd10138b6fd5fa" name="a141e0a24096323472fcd10138b6fd5fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141e0a24096323472fcd10138b6fd5fa">&#9670;&#160;</a></span>output() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ComplexHarmonicEquations::output </td>
+          <td>(</td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output FE representation of soln: x,y,u or x,y,z,u at Nplot plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00110">110</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="complex__harmonic_8cc_source.html#l00224">interpolated_u()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00245">interpolated_w()</a>.</p>
+
+</div>
+</div>
+<a id="af4ff638cb40e23c3574631423fd56bce" name="af4ff638cb40e23c3574631423fd56bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4ff638cb40e23c3574631423fd56bce">&#9670;&#160;</a></span>u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double ComplexHarmonicEquations::u </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function: First eigenfunction value at local node n Note that solving the eigenproblem does not assign values to this storage space. It is used for output purposes only. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00094">94</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00224">interpolated_u()</a>.</p>
+
+</div>
+</div>
+<a id="a3538cae061c24db2db1fc277c0a09da4" name="a3538cae061c24db2db1fc277c0a09da4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3538cae061c24db2db1fc277c0a09da4">&#9670;&#160;</a></span>u_local_eqn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int ComplexHarmonicEquations::u_local_eqn </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function that returns the local equation number of the unknown in the problem. Default is to assume that it is the first (only) value stored at the node. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00283">283</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00134">fill_in_contribution_to_jacobian_and_mass_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a9b3955ee987827d831e44eeb43dcae63" name="a9b3955ee987827d831e44eeb43dcae63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b3955ee987827d831e44eeb43dcae63">&#9670;&#160;</a></span>w()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double ComplexHarmonicEquations::w </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Second eigenfunction value at local node n. </p>
+
+<p class="definition">Definition at line <a class="el" href="complex__harmonic_8cc_source.html#l00098">98</a> of file <a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="complex__harmonic_8cc_source.html#l00134">fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="complex__harmonic_8cc_source.html#l00245">interpolated_w()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="complex__harmonic_8cc_source.html">complex_harmonic.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:07:34
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

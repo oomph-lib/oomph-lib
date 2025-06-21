@@ -1,0 +1,193 @@
+\doxysection{oomph\+::Brick\+From\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BrickFromTetMesh}{}\label{classoomph_1_1BrickFromTetMesh}\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+
+
+Brick mesh built by brickifying an existing tet mesh -- each tet gets split into four bricks. Can only be built with quadratic (27 node) elements.  
+
+
+
+
+{\ttfamily \#include $<$brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Brick\+From\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.651917cm]{classoomph_1_1BrickFromTetMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_abed00a445cc3c6b6cc00d32e0db4a366}{Brick\+From\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass xda file name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_af05fe6ff520986d7794c467fc1885f92}{Brick\+From\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{face\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{split\+\_\+corner\+\_\+elements}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the files required for the tetgen mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350}{Brick\+From\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+tet\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass xda file name. This returns a pointer to the internally built \doxylink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh} for external use. Note that YOU are responsible for deleting this mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_aa733549ba2a9bb78bd95ba671d5c4d69}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Access functions to the Vector of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tet\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Build fct\+: Pass pointer to existing tet mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tet\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Build fct\+: Pass pointer to existing tet mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh_a0f6a4b80993ee015038c36ff1aa5556f}{Boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Vector of vectors containing the boundary IDs of the overall boundary specified in the xda file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$}
+Brick mesh built by brickifying an existing tet mesh -- each tet gets split into four bricks. Can only be built with quadratic (27 node) elements. 
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00058}{58}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1BrickFromTetMesh_abed00a445cc3c6b6cc00d32e0db4a366}\label{classoomph_1_1BrickFromTetMesh_abed00a445cc3c6b6cc00d32e0db4a366} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!BrickFromTetMesh@{BrickFromTetMesh}}
+\index{BrickFromTetMesh@{BrickFromTetMesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{BrickFromTetMesh()}{BrickFromTetMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Brick\+From\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass xda file name. 
+
+
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00062}{62}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1BrickFromTetMesh_af05fe6ff520986d7794c467fc1885f92}\label{classoomph_1_1BrickFromTetMesh_af05fe6ff520986d7794c467fc1885f92} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!BrickFromTetMesh@{BrickFromTetMesh}}
+\index{BrickFromTetMesh@{BrickFromTetMesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{BrickFromTetMesh()}{BrickFromTetMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Brick\+From\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{node\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{element\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \&}]{face\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{split\+\_\+corner\+\_\+elements,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the files required for the tetgen mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00081}{81}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350}\label{classoomph_1_1BrickFromTetMesh_a49d6a583221a04f2997dae4509592350} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!BrickFromTetMesh@{BrickFromTetMesh}}
+\index{BrickFromTetMesh@{BrickFromTetMesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{BrickFromTetMesh()}{BrickFromTetMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Brick\+From\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}\&}]{xda\+\_\+tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass xda file name. This returns a pointer to the internally built \doxylink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh} for external use. Note that YOU are responsible for deleting this mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00112}{112}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117}\label{classoomph_1_1BrickFromTetMesh_afd36d1606f796e926c61b1112b3b6117} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Build fct\+: Pass pointer to existing tet mesh. 
+
+Build fct\+: Pass pointer to existing tet mesh and timestepper Specialisation for \doxylink{classoomph_1_1TetgenMesh}{Tetgen\+Mesh}\texorpdfstring{$<$}{<}TElement$<$3,3$>$ \texorpdfstring{$>$}{>} 
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l04807}{4807}} of file \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb}\label{classoomph_1_1BrickFromTetMesh_a9b81e29d3b000f02764bf367fa762bfb} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{TElement}}$<$ 3, 3 $>$ $>$ \texorpdfstring{$\ast$}{*}}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Build fct\+: Pass pointer to existing tet mesh. 
+
+Build fct\+: Pass pointer to existing tet mesh and timestepper Specialisation for \doxylink{classoomph_1_1XdaTetMesh}{Xda\+Tet\+Mesh}\texorpdfstring{$<$}{<}TElement$<$3,3$>$ \texorpdfstring{$>$}{>} 
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00040}{40}} of file \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00081}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Brick\+From\+Tet\+Mesh()}}, \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00062}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Brick\+From\+Tet\+Mesh()}}, and \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00112}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Brick\+From\+Tet\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrickFromTetMesh_aa733549ba2a9bb78bd95ba671d5c4d69}\label{classoomph_1_1BrickFromTetMesh_aa733549ba2a9bb78bd95ba671d5c4d69} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}}
+\index{oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{oomph\_lib\_boundary\_ids()}{oomph\_lib\_boundary\_ids()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{xda\+\_\+boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions to the Vector of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. 
+
+
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00132}{132}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00148}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1BrickFromTetMesh_a0f6a4b80993ee015038c36ff1aa5556f}\label{classoomph_1_1BrickFromTetMesh_a0f6a4b80993ee015038c36ff1aa5556f} 
+\index{oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}!Boundary\_id@{Boundary\_id}}
+\index{Boundary\_id@{Boundary\_id}!oomph::BrickFromTetMesh$<$ ELEMENT $>$@{oomph::BrickFromTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_id}{Boundary\_id}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}}$>$ $>$ \mbox{\hyperlink{classoomph_1_1BrickFromTetMesh}{oomph\+::\+Brick\+From\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of vectors containing the boundary IDs of the overall boundary specified in the xda file. 
+
+
+
+Definition at line \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00148}{148}} of file \mbox{\hyperlink{brick__from__tet__mesh_8h_source}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{brick__from__tet__mesh_8h_source_l00132}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{brick__from__tet__mesh_8h}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{brick__from__tet__mesh_8template_8cc}{brick\+\_\+from\+\_\+tet\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

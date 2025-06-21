@@ -1,0 +1,216 @@
+#!MC 1000
+
+##################################################
+# RUN AUTOMATICALLY (1) OR NOT (0)
+##################################################
+$!VARSET |RUN_AUTOMATICALLY|=1
+
+
+##################################################
+# OUTPUT TO PNG (1) OR AVI (0)
+##################################################
+$!VARSET |PNG|=1
+
+#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
+$!VARSET  |lostep|=0
+#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
+$!VARSET  |dlstep|=1
+
+$!IF |RUN_AUTOMATICALLY|==0
+   $!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
+$!ELSE
+   $!VARSET  |nstep|=21
+$!ENDIF
+
+
+$!LOOP |nstep|
+$!VarSet |nnstep| = |LOOP|
+$!VarSet |nnstep| -= 1
+$!VarSet |iistep| = |dlstep|
+$!VarSet |iistep| *= |nnstep|
+$!VarSet |iistep| += |lostep|
+$!NEWLAYOUT 
+$!DRAWGRAPHICS FALSE
+$!VARSET |istep|=|iistep|
+$!READDATASET '"RESLT/soln|istep|.dat " '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  INITIALPLOTTYPE = CARTESIAN3D
+$!FRAMELAYOUT SHOWBORDER = NO
+#$!LIMITS  MAXPREPLOTZONES = 10000
+$!FIELDLAYERS SHOWMESH = NO
+#$!FIELDLAYERS SHOWBOUNDARY = NO
+$!FIELD [1-|NUMZONES|]  BOUNDARY{COLOR = BLUE}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{LINETHICKNESS = 0.01}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{SHOW = NO}
+$!FIELDLAYERS SHOWSHADE = YES
+$!FIELD [1-|NUMZONES|]  SHADE{COLOR = CYAN}
+$!FIELDLAYERS USETRANSLUCENCY = YES
+$!GLOBALTHREEDVECTOR UVAR = 7
+$!GLOBALTHREEDVECTOR VVAR = 8
+$!GLOBALTHREEDVECTOR WVAR = 9
+$!RESETVECTORLENGTH 
+$!FIELDLAYERS SHOWVECTOR = NO
+$!FIELD [1-|NUMZONES|]  VECTOR{COLOR = RED}
+$!THREEDAXIS XDETAIL{VARNUM = 1}
+$!THREEDAXIS YDETAIL{VARNUM = 2}
+$!THREEDAXIS ZDETAIL{VARNUM = 3}
+
+
+
+$!THREEDAXIS XDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS XDETAIL{TITLE{TEXT = 'X'}}
+$!THREEDAXIS YDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS YDETAIL{TITLE{TEXT = 'Y'}}
+$!THREEDAXIS ZDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS ZDETAIL{TITLE{TEXT = 'Z'}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8}}}
+$!THREEDAXIS ZDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8}}}
+#$!THREEDAXIS ZDETAIL{TITLE{TEXTSHAPE{FONT = TIMES}}}
+#$!THREEDAXIS ZDETAIL{TICKS{TEXTSHAPE{HEIGHT = 3}}}
+
+
+
+
+$!THREEDAXIS FRAMEAXIS{SHOW = NO}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 7}}}
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 15}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 7}}}
+$!THREEDAXIS YDETAIL{TITLE{OFFSET = 15}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 7}}}
+$!THREEDAXIS ZDETAIL{TITLE{OFFSET = 15}}
+
+
+
+
+
+
+
+
+$!VarSet |oldnumzones| = (|NUMZONES|+1)
+$!FIELD [1-|NUMZONES|]  POINTS{IJKSKIP{I = 4}}
+$!FIELD [1-|NUMZONES|]  POINTS{IJKSKIP{J = 4}}
+$!FIELD [1-|NUMZONES|]  POINTS{IJKSKIP{K = 4}}
+$!CREATERECTANGULARZONE
+  IMAX = 20
+  JMAX = 20
+  KMAX = 20
+  X1 = 0
+  Y1 = 0
+  Z1 = -1
+  X2 = 1.0
+  Y2 = 1.0
+  Z2 = 0
+  XVAR = 1
+  YVAR = 2
+  ZVAR = 3
+$!FIELD [|NUMZONES|]  BOUNDARY{SHOW = YES}
+$!FIELD [|NUMZONES|]  BOUNDARY{COLOR = BLUE}
+$!FIELD [|NUMZONES|]  BOUNDARY{LINETHICKNESS = 0.4}
+#$!FIELD [|NUMZONES|]  SHADE{COLOR = GREEN}
+$!VarSet |oldnumzones| -= 1
+$!FIELD [1-|oldnumzones|]  SURFACEEFFECTS{USETRANSLUCENCY = NO}
+
+$!CREATERECTANGULARZONE
+  IMAX = 20
+  JMAX = 20
+  KMAX = 20
+  X1 = -1
+  Y1 = -1
+  Z1 = -1
+  X2 = 2
+  Y2 = 2
+  Z2 = 3
+  XVAR = 1
+  YVAR = 2
+  ZVAR = 3
+$!RESET3DAXES
+
+#----------------------------------------------------------------
+# Resize the axis ranges so everything fits
+#----------------------------------------------------------------
+$!THREEDAXIS ZDETAIL
+	{
+	GRSPACING = 1
+	RANGEMIN = -1 
+	RANGEMAX = 3
+	}
+$!THREEDAXIS PRESERVEAXISSCALE = YES
+$!VIEW AXISFIT
+ AXIS = 'X'
+ AXISNUM = 1
+$!VIEW AXISFIT
+ AXIS = 'Y'
+ AXISNUM = 1
+$!VIEW AXISFIT
+ AXIS = 'Z'
+ AXISNUM = 1
+
+
+
+
+
+
+
+
+
+
+$!VIEW FIT
+$!ACTIVEFIELDZONES -= [|NUMZONES|]
+
+$!PAPER SHOWPAPER=YES
+$!DRAWGRAPHICS TRUE
+$!REDRAWALL
+
+
+
+
+##########################################################
+# OUTPUT
+##########################################################
+$!IF |PNG|==1
+
+        $!EXPORTSETUP EXPORTFORMAT = PNG
+        $!EXPORTSETUP IMAGEWIDTH = 600
+        $!EXPORTSETUP EXPORTFNAME = 'meniscus|LOOP|.png'
+        $!EXPORT
+          EXPORTREGION = ALLFRAMES
+
+$!ELSE
+
+        $!IF |LOOP|>1
+                $!EXPORTNEXTFRAME
+        $!ELSE
+
+                $!EXPORTSETUP
+                 EXPORTFORMAT = AVI
+                 EXPORTFNAME = "meniscus.avi"
+                $!EXPORTSETUP IMAGEWIDTH = 829
+                $!EXPORTSTART
+                  EXPORTREGION = ALLFRAMES
+       $!ENDIF
+
+$!ENDIF
+
+
+
+##########################################################
+# END OF LOOP OVER STEPS
+##########################################################
+$!ENDLOOP
+
+
+
+
+$!IF |PNG|==0
+        $!EXPORTFINISH
+$!ENDIF
+
+$!IF |RUN_AUTOMATICALLY|==1
+#   $!QUIT
+$!ENDIF

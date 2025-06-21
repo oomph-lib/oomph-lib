@@ -1,0 +1,618 @@
+\chapter{Example problem\+: Unsteady flow in a 2D channel, driven by an applied traction}
+\hypertarget{index}{}\label{index}\index{Example problem: Unsteady flow in a 2D channel, driven by an applied traction@{Example problem: Unsteady flow in a 2D channel, driven by an applied traction}}
+In this example we consider a variation of the unsteady 2D channel flow problem considered elsewhere. In the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} the flow was driven by the imposed wall motion. Here we shall consider the case in which the flow is driven by an applied traction $ {\bf t}^{[prescribed]}$ which balances the fluid stress so that  \[
+t_i^{[prescribed]} = \tau_{ij} \ n_j = 
+\left( -p\ \delta_{ij} + 
+\left(\frac{\partial u_i}{\partial x_j} + 
+\frac{\partial u_j}{\partial x_i}\right)\right) n_j
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] along the upper, horizontal boundary of the channel. Here $ n_j $ is the outward unit normal, $ \delta_{ij} $ is the Kronecker delta and $ \tau_{ij} $ the stress tensor. {\ttfamily oomph-\/lib} provides traction elements that can be applied along a domain boundary to (weakly) impose the above boundary condition. The traction elements are used in the same way as flux-\/elements in the \href{../../../poisson/two_d_poisson_flux_bc/html/index.html}{\texttt{ Poisson }} and \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ unsteady heat}} examples. The section \doxysectlink{index_comments}{Comments and Exercises}{1} at the end of this documents provides more detail on the underlying theory and its implementation in {\ttfamily oomph-\/lib}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+We consider the unsteady finite-\/\+Reynolds-\/number flow in a 2D channel that is driven by an applied traction along its upper boundary.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Unsteady flow in a 2D channel, driven by an applied traction.}} \end{center}  Here is a sketch of the problem\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{rayleigh_traction_channel}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+The flow is governed by the 2D unsteady Navier-\/\+Stokes equations,
+
+\[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right),
+ \ \ \ \ \ \ \ \ \ \ (2)
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] in the square domain  \[
+D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}.
+\] We apply the Dirichlet (no-\/slip) boundary condition  \[
+\left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\] on the lower, stationary wall, $ \partial D_{lower} = 
+\big\{(x_1,x_2) \ | \ x_2=0 \big\} $ and the traction  \[
+\mathbf{t}^{[prescribed]}= (\tau(t), 0)
+\ \ \ \ \ \ \ \ \ \ (4)
+\] where $ \tau(t)$ is a given function, on the upper boundary, $ \partial D_{upper} = \big\{(x_1,x_2) \ | \ x_2=1 \big\} $ . As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} we apply periodic boundary conditions on the "{}left"{} and "{}right"{} boundaries\+:  \[
+\left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}.
+\ \ \ \ \ \ \ \ \ \ (5)
+\] Initial conditions for the velocities are given by  \[
+{\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2),
+\] where $ {\bf u}_{IC}(x_1,x_2)$ is given.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} \hypertarget{index_solution}{}\doxysubsection{\texorpdfstring{An exact, parallel-\/flow solution}{An exact, parallel-flow solution}}\label{index_solution}
+We choose the prescribed traction $ {\bf t}^{[prescribed]} =
+(\tau(t), 0) $ such that the parallel-\/flow solution  \[
+{\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and
+\ \ \ \ }
+p_{exact}(x_1,x_2,t) = 0,
+\] derived in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} remains valid. For this purpose we set  \[
+\tau(t) = \left. \frac{\partial U(x_2,t)}{\partial x_2}\right|_{x_2=1},
+\] where  \[
+U(x_2,t) = Re\left\{\frac{e^{i\omega
+t}}{e^{i\lambda}-e^{-i\lambda}}\left(e^{i\lambda y}-e^{-i\lambda y}
+\right)\right\}
+\] and  \[
+\lambda = i\sqrt{i\omega Re\, St}.
+\] \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The two animations below show the computed solutions obtained from a spatial discretisation with Taylor-\/\+Hood and Crouzeix-\/\+Raviart elements, respectively. In both cases we set $ \omega=2\pi, \ Re =
+ReSt = 10 $ and specified the exact, time-\/periodic solution as the initial condition, i.\+e. $ {\bf u}_{IC}(x_1,x_2) = {\bf
+u}_{exact}(x_1,x_2,t=0)$ . The computed solutions agree extremely well with the exact solution throughout the simulation.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{velocity_vectors_CR}
+\doxyfigcaption{Plot of the velocity field computed with 2D Crouzeix-\/\+Raviart elements, starting from the exact, time-\/periodic solution. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{velocity_vectors_TH}
+\doxyfigcaption{Plot of the velocity field computed with 2D Taylor-\/\+Hood elements, starting from the exact, time-\/periodic solution. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{The global parameters}{The global parameters}}\label{index_namespace}
+As usual, we use a namespace to define the problem parameters, the Reynolds number, $ Re$, and the Womersley number, $ Re\, St$ . We also provide two flags that indicate the length of the run (to allow a short run to be performed when the code is run as a self-\/test), and the initial condition (allowing a start from $ {\bf u}_{exact}$ or an impulsive start in which the fluid is initially at rest).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namepspace\ for\ global\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Re}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Womersley\ =\ Reynolds\ times\ Strouhal}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{ReSt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flag\ for\ long/short\ run:\ Default\ =\ \ perform\ long\ run}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Long\_run\_flag}}=1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flag\ for\ impulsive\ start:\ Default\ =\ start\ from\ exact}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ time-\/periodic\ solution.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Impulsive\_start\_flag}}=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exact}{}\doxysection{\texorpdfstring{The exact solution}{The exact solution}}\label{index_exact}
+We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}_{exact}$, and the traction $ {\bf t}^{[prescribed]}$ required to make $ {\bf u}_{exact}$ a solution of the problem.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_exact\_solution=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceExactSoln}{ExactSoln}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ of\ the\ problem\ as\ a\ vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{get\_exact\_u}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t,\ \textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y=x[1];}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ I=sqrt(-\/1)}}
+\DoxyCodeLine{\ \ complex<double>\ I(0.0,1.0);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ omega}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ omega=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ lambda}}
+\DoxyCodeLine{\ \ complex<double>\ lambda(0.0,omega*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
+\DoxyCodeLine{\ \ lambda\ =\ I*sqrt(lambda);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solution}}
+\DoxyCodeLine{\ \ complex<double>\ sol(}
+\DoxyCodeLine{\ \ \ exp(complex<double>(0.0,omega*t))\ *\ }
+\DoxyCodeLine{\ \ \ (exp(lambda*complex<double>(0.0,y))-\/exp(lambda*complex<double>(0.0,-\/y)))}
+\DoxyCodeLine{\ \ \ /(exp(I*lambda)-\/exp(-\/I*lambda))\ );}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Extract\ real\ part\ and\ stick\ into\ vector}}
+\DoxyCodeLine{\ \ u.resize(2);}
+\DoxyCodeLine{\ \ u[0]=real(sol);}
+\DoxyCodeLine{\ \ u[1]=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Traction\ required\ at\ the\ top\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceExactSoln_a2a77269d59d7cf56364f0c3b5ae13b41}{prescribed\_traction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ traction)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y=x[1];}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ I=sqrt(-\/1)}}
+\DoxyCodeLine{\ \ complex<double>\ I(0.0,1.0);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ omega}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ omega=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ lambda}}
+\DoxyCodeLine{\ \ complex<double>\ lambda(0.0,omega*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
+\DoxyCodeLine{\ \ lambda\ =\ I*sqrt(lambda);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solution}}
+\DoxyCodeLine{\ \ complex<double>\ sol(}
+\DoxyCodeLine{\ \ \ exp(complex<double>(0.0,omega*t))\ *\ }
+\DoxyCodeLine{\ \ \ (exp(lambda*complex<double>(0.0,y))+exp(lambda*complex<double>(0.0,-\/y)))}
+\DoxyCodeLine{\ \ \ *I*lambda/(exp(I*lambda)-\/exp(-\/I*lambda))\ );}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Extract\ real\ part\ and\ stick\ into\ vector}}
+\DoxyCodeLine{\ \ traction.resize(2);}
+\DoxyCodeLine{\ \ traction[0]=real(sol);}
+\DoxyCodeLine{\ \ traction[1]=0.0;}
+\DoxyCodeLine{\ \}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ end\ of\ exact\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} we use optional command line arguments to specify which mode the code is run in\+: Either as a short or a long run (indicated by the first command line argument being 0 or 1, respectively), and with initial conditions corresponding to an impulsive start or a start from the time-\/periodic exact solution (indicated by the second command line argument being 1 or 0, respectively). If no command line arguments are specified the code is run in the default mode, specified by parameter values assigned in the namespace {\ttfamily \doxylink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ Rayleigh-\/type\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{rayleigh__traction__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Convert\ command\ line\ arguments\ (if\ any)\ into\ flags:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordflow}{if}\ (argc==1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}No\ command\ line\ arguments\ specified\ -\/-\/\ using\ defaults."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (argc==3)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Two\ command\ line\ arguments\ specified:"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Flag\ for\ long\ run}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}}=atoi(argv[1]);\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Flag\ for\ impulsive\ start}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Global\_Parameters::Impulsive\_start\_flag}}=atoi(argv[2]);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ std::string\ error\_message\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Wrong\ number\ of\ command\ line\ arguments.\ Specify\ none\ or\ two.\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ error\_message\ +=}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Arg1:\ Long\_run\_flag\ [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ error\_message\ +=}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}Arg2:\ Impulsive\_start\_flag\ [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_message,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Long\ run\ flag:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}}\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Impulsive\ start\ flag:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Global\_Parameters::Impulsive\_start\_flag}}\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ Next we set the physical and mesh parameters.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ physical\ parameters:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Womersly\ number\ =\ Reynolds\ number\ (St\ =\ 1)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}}\ =\ 10.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\_Parameters::Re}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Horizontal\ length\ of\ domain}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ lx\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Vertical\ length\ of\ domain}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ ly\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ny=10;}
+
+\end{DoxyCodeInclude}
+ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Hood elements and Crouzeix-\/\+Raviart elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ with\ Crouzeix-\/Raviart\ elements}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ \ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ \ doc\_info.number()=0;}
+\DoxyCodeLine{\ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem<QCrouzeixRaviartElement<2>}},BDF<2>\ >\ }
+\DoxyCodeLine{\ \ \ problem(nx,ny,lx,ly);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Run\ the\ unsteady\ simulation}}
+\DoxyCodeLine{\ \ problem.unsteady\_run(doc\_info);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ with\ Taylor-\/Hood\ elements}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ \ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ \ doc\_info.number()=0;}
+\DoxyCodeLine{\ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem<QTaylorHoodElement<2>}},BDF<2>\ >\ }
+\DoxyCodeLine{\ \ \ problem(nx,ny,lx,ly);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Run\ the\ unsteady\ simulation}}
+\DoxyCodeLine{\ \ problem.unsteady\_run(doc\_info);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class remains similar to that in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}}. Since we are no longer driving the flow by prescribing a time-\/periodic tangential velocity at the upper wall, the function {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()} can remain empty.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Rayleigh-\/type\ problem:\ 2D\ channel\ flow\ driven\ by\ traction\ bc}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ x\ and\ y\ directions\ and\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ lengths}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&ly);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_ad8f0e846280b0dd56f90c6d40808d3ea}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_ad85c20559eec76d54ebf666f62507d2e}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ timestep\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_aea3e470265c0e98a8b5bdabedd28eb82}{actions\_before\_implicit\_timestep}}()\ \{\}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ an\ unsteady\ simulation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_a50871474406082ae1c1a1694e69e094b}{unsteady\_run}}(DocInfo\&\ doc\_info);\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_a451af703b4a6de97b060884ca71c3ef8}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ initial\ condition\ (incl\ previous\ timesteps)\ according}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ specified\ function.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_ad6394f146505e00aeba2fc37f2c75488}{set\_initial\_condition}}();}
+
+\end{DoxyCodeInclude}
+ The function {\ttfamily create\+\_\+traction\+\_\+elements(...)} (discussed in more detail below) creates the traction elements and "{}attaches"{} them to the specified boundary of the "{}bulk"{} mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ traction\ elements\ on\ boundary\ b\ of\ the\ Mesh\ pointed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ by\ bulk\_mesh\_pt\ and\ add\ them\ to\ the\ Mesh\ object\ pointed\ to\ by\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ surface\_mesh\_pt}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ create\_traction\_elements(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&b,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mesh*\ \textcolor{keyword}{const}\ \&bulk\_mesh\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mesh*\ \textcolor{keyword}{const}\ \&surface\_mesh\_pt);}
+
+\end{DoxyCodeInclude}
+ The traction boundary condition sets the pressure so the function {\ttfamily fix\+\_\+pressure(...)} used in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} is no longer required. The problem\textquotesingle{}s private member data contains pointers to the bulk and surface meshes and the output stream that we use to record the time-\/trace of the solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RectangularQuadMesh<ELEMENT>*\ Bulk\_mesh\_pt;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}surface"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ Surface\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ Trace\_file;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\_class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We start by building the timestepper, determining its type from the class\textquotesingle{}s second template argument, and pass a pointer to it to the Problem, using the function {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ constructor}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem}}}
+\DoxyCodeLine{(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ ly)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ the\ timestepper}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ TIMESTEPPER);\ }
+
+\end{DoxyCodeInclude}
+ Next we build the periodic bulk mesh,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ with\ periodic\ boundary\ conditions\ in\ x\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ periodic\_in\_x=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic\_in\_x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_stepper\_pt());}
+
+\end{DoxyCodeInclude}
+ and the surface mesh,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ "{}surface\ mesh"{}\ that\ will\ contain\ only\ the\ prescribed-\/traction\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ elements.\ The\ constructor\ just\ creates\ the\ mesh\ without}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ giving\ it\ any\ elements,\ nodes,\ etc.}}
+\DoxyCodeLine{\ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ Mesh;}
+
+\end{DoxyCodeInclude}
+ and use the function {\ttfamily create\+\_\+traction\+\_\+elements(...)} to populate it with traction elements that attach themselves to the specified boundary (2) of the bulk mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ prescribed-\/traction\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ boundary\ 2,\ but\ add\ them\ to\ a\ separate\ mesh.}}
+\DoxyCodeLine{\ create\_traction\_elements(2,Bulk\_mesh\_pt,Surface\_mesh\_pt);}
+
+\end{DoxyCodeInclude}
+ We add both sub-\/meshes to the {\ttfamily Problem}, using the function {\ttfamily Problem\+::add\+\_\+sub\+\_\+mesh(...)} and use the function {\ttfamily Problem\+::build\+\_\+global\+\_\+mesh()} to combine the sub-\/meshes into the {\ttfamily Problem\textquotesingle{}s} single, global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ two\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ add\_sub\_mesh(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ add\_sub\_mesh(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ all\ submeshes\ into\ a\ single\ Mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+
+\end{DoxyCodeInclude}
+ We apply Dirichlet boundary conditions where required\+: No-\/slip on the stationary, lower wall, at $ x_2=0 $, parallel outflow on the left and right boundaries, at $ x_1=0 $ and $ x_1=1 $. No velocity boundary conditions are applied at the "{}upper"{} boundary, at $ x_2=1 $, where the traction boundary condition is applied.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound=Bulk\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=Bulk\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ No\ slip\ on\ bottom}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ (DO\ NOT\ PIN\ TOP\ BOUNDARY,\ SINCE\ TRACTION\ DEFINES\ ITS\ VELOCITY!)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (ibound==0)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Horizontal\ outflow\ on\ the\ left\ (and\ right\ -\/-\/\ right\ bc\ not}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ strictly\ necessary\ because\ of\ symmetry)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((ibound==1)\ ||\ (ibound==3))}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+
+\end{DoxyCodeInclude}
+ Next we pass the pointers to the Reynolds and Strouhal numbers, $ Re $, $ Re\, St $, to the bulk elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_el\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_el;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ fluid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number,\ etc}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\_Parameters::Re}};}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally we pass pointers to the applied traction function to the traction elements and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ flux\ elements\ to\ pass\ pointer\ to\ prescribed\ traction\ function}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ pointer\ to\ global\ time\ object}}
+\DoxyCodeLine{\ n\_el=Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_el;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ traction\ element}}
+\DoxyCodeLine{\ \ \ NavierStokesTractionElement<ELEMENT>\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\ NavierStokesTractionElement<ELEMENT>*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ Surface\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ prescribed\ traction\ function}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \&\mbox{\hyperlink{namespaceExactSoln_a2a77269d59d7cf56364f0c3b5ae13b41}{ExactSoln::prescribed\_traction}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assgn\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_traction}{}\doxysection{\texorpdfstring{Create traction elements}{Create traction elements}}\label{index_traction}
+The creation of the traction elements is performed exactly as in the \href{../../../poisson/two_d_poisson_flux_bc2/html/index.html}{\texttt{ Poisson }} and \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ unsteady heat}} problems with flux boundary conditions, discussed earlier. We obtain pointers to the "{}bulk"{} elements that are adjacent to the specified boundary of the bulk mesh from the function {\ttfamily Mesh\+::boundary\+\_\+element\+\_\+pt(...)}, determine which of the elements\textquotesingle{} local coordinate(s) are constant along that boundary, and pass these parameters to the constructors of the traction elements which "{}attach"{} themselves to the appropriate face of the "{}bulk"{} element. Finally, we store the pointers to the newly created traction elements in the surface mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==========================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ Navier-\/Stokes\ traction\ elements\ on\ the\ b-\/th\ boundary\ of\ the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Mesh\ object\ pointed\ to\ by\ bulk\_mesh\_pt\ and\ add\ the\ elements\ to\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Mesh\ object\ pointeed\ to\ by\ surface\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}{create\_traction\_elements}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&b,\ Mesh*\ \textcolor{keyword}{const}\ \&bulk\_mesh\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Mesh*\ \textcolor{keyword}{const}\ \&surface\_mesh\_pt)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ bulk\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ bulk\_mesh\_pt-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//What\ is\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ bulk\_mesh\_pt-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ corresponding\ prescribed-\/flux\ element}}
+\DoxyCodeLine{\ \ \ NavierStokesTractionElement<ELEMENT>*\ flux\_element\_pt\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \ \ NavierStokesTractionElement<ELEMENT>(bulk\_elem\_pt,face\_index);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ prescribed-\/flux\ element\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ surface\_mesh\_pt-\/>add\_element\_pt(flux\_element\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ loop\ over\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+\textbackslash{} \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_IC}{}\doxysection{\texorpdfstring{Initial conditions}{Initial conditions}}\label{index_IC}
+The function {\ttfamily set\+\_\+initial\+\_\+conditions(...)} remains the same as in the \href{../../rayleigh_channel/html/index.html\#IC}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post processing}{Post processing}}\label{index_doc}
+The function {\ttfamily doc\+\_\+solution(...)} remains the same as in the \href{../../rayleigh_channel/html/index.html\#doc}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_unsteady_run}{}\doxysection{\texorpdfstring{The timestepping loop}{The timestepping loop}}\label{index_unsteady_run}
+The function {\ttfamily unsteady\+\_\+run(...)} remains the same as in the \href{../../rayleigh_channel/html/index.html\#unsteady_run}{\texttt{ previous example}}, except that the default number of timesteps is increased to 500.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_traction_theory}{}\doxysubsection{\texorpdfstring{How do the traction elements work?}{How do the traction elements work?}}\label{index_traction_theory}
+The finite element solution of the Navier-\/\+Stokes equations is based on their weak form, obtained by weighting the stress-\/divergence form of the momentum equations  \[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+\frac{\partial \tau_{ij}}{\partial x_j},
+ \ \ \ \ \ \ \ \ \ \ (6)
+\] with the global test functions $ \psi_l $, and integrating by parts to obtain the discrete residuals  \[
+f_{il} = 
+\int_D \left[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j}\right)  \ \psi_l +
+ \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j}   \right] \, dV -
+\int_{\partial D}  \tau_{ij} \ n_j \ \psi_l \ dS = 0.
+ \ \ \ \ \ \ \ \ \ \ (7)
+\] The volume integral in this residual is computed by the "{}bulk"{} Navier-\/\+Stokes elements. \href{../../../intro/html/index.html\#galerkin}{\texttt{ Recall}} that in the residual for the $ i $ -\/th momentum equation, the global test functions $ \psi_l $ vanish on those parts of the domain boundary $ \partial D$ where the $ i $ -\/th velocity component is prescribed by Dirichlet boundary conditions. On such boundaries, the surface integral in (7) vanishes because $ \psi_l=0. $ If the velocity on a certain part of the domain boundary, $ \partial D_{natural} \subset \partial D$, is not prescribed by Dirichlet boundary conditions and the surface integral over $ \partial D_{natural} $ is not added to the discrete residual, the velocity degrees of freedom on those boundaries are regarded as unknowns and the "{}traction-\/free"{} (or natural) boundary condition  \[
+\tau_{ij} \ n_j = 0 \mbox{ \ \ \ on \ \  $\partial D_{natural}$}
+\] is "{}implied"{}. Finally, traction boundary conditions of the form (1) may be applied along a part, $ \partial D_{traction} \subset \partial D$, of the domain boundary. The surface integral along this part of the domain boundary is given by  \[
+\int_{\partial D_{traction} }  \tau_{ij} \ n_j \ \psi_l \ dS = 
+\int_{\partial D_{traction} }  t_i^{[prescribed]} \ \psi_l \ dS,
+ \ \ \ \ \ \ \ \ \ \ (8)
+\] where $ t_i^{[prescribed]}  $ is given, and it is this contribution that the traction elements add to the residual of the momentum equations.
+
+\DoxyHorRuler{0}
+\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Pin the vertical velocity along the upper boundary, $ x_2 = 1$, and compare the results against those obtained with the original version of the code. How does the change affect the velocity field? Why is pressure likely to change?
+\item Pin the horizontal velocity along the upper boundary, $ x_2 = 1$, and start the simulation with an impulsive start. Compare the results against those obtained with the original version of the code and explain your findings, referring to the theory provided in the section \doxysectlink{index_traction_theory}{How do the traction elements work?}{2} .
+\item Run the code with an impulsive start and confirm that it takes longer for the solution to approach the time-\/periodic solution than in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous case}} where the flow was driven by the wall motion. \mbox{[}Here are some animations of the velocity fields obtained following an impulsive start, for a discretisation with \href{../figures/velocity_vectors_TH.avi}{\texttt{ Taylor-\/\+Hood elements}} and \href{../figures/velocity_vectors_CR.avi}{\texttt{ Crouzeix-\/\+Raviart elements}}.\mbox{]}
+\item Investigate the effects of applying a non-\/zero value for $ t_2
+   $ on the top boundary.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/rayleigh\+\_\+traction\+\_\+channel/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/rayleigh_traction_channel/rayleigh_traction_channel.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/rayleigh\+\_\+traction\+\_\+channel/rayleigh\+\_\+traction\+\_\+channel.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

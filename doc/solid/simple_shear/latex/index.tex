@@ -1,0 +1,441 @@
+\chapter{Demo problem\+: Large-\/amplitude shear deformation of a 3D elastic solid}
+\hypertarget{index}{}\label{index}\index{Demo problem: Large-\/amplitude shear deformation of a 3D elastic solid@{Demo problem: Large-\/amplitude shear deformation of a 3D elastic solid}}
+Detailed documentation to be written. Here\textquotesingle{}s the already fairly well documented driver code...
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//\ Driver\ for\ elastic\ deformation\ of\ a\ cuboidal\ domain}}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ deformation\ is\ a\ simple\ shear\ in\ the\ x-\/z\ plane\ driven\ by}}
+\DoxyCodeLine{\textcolor{comment}{//\ motion\ of\ the\ top\ boundary,\ for\ exact\ solution\ see\ Green\ \&\ Zerna}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ Generic\ oomph-\/lib\ headers}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Solid\ mechanics}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}solid.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ mesh\ }}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/simple\_cubic\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Simple\ cubic\ mesh\ upgraded\ to\ become\ a\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SimpleCubicMesh<ELEMENT>,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nz,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&b,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&c,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TimeStepper*\ time\_stepper\_pt=\&Mesh::Default\_TimeStepper)\ :}
+\DoxyCodeLine{\ \ SimpleCubicMesh<ELEMENT>(nx,ny,nz,-\/a,a,-\/b,b,-\/c,c,time\_stepper\_pt)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Assign\ the\ initial\ lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Empty\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classElasticCubicMesh_a64cc078916561417462636f399a71e88}{\string~ElasticCubicMesh}}()\ \{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ strain\ energy\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ StrainEnergyFunction*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6838abf46c7850f1ee0b3452d6d2498}{Strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ ConstitutiveLaw*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Elastic\ modulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{E}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ "{}Mooney\ Rivlin"{}\ coefficient\ for\ generalised\ Mooney\ Rivlin\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Body\ force\ vector:\ Vertically\ downwards\ with\ magnitude\ Gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a055c27a8d2375f73e74970a8ea1dee21}{body\_force}}(\textcolor{keyword}{const}\ Vector<double>\&\ xi,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ b)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ b[0]=0.0;}
+\DoxyCodeLine{\ \ b[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Boundary-\/driven\ elastic\ deformation\ of\ fish-\/shaped\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}{Shear}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\_incompressible}}(ELEMENT\ *el\_pt,\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ simulation.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}{run}}(\textcolor{keyword}{const}\ std::string\ \&dirname);}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}*\ \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{\textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve:\ We're\ dealing\ with\ a\ static\ problem\ so}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ nodal\ positions\ before\ the\ next\ solve\ merely\ serve\ as}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ initial\ conditions.\ For\ meshes\ that\ are\ very\ strongly\ refined}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ near\ the\ boundary,\ the\ update\ of\ the\ displacement\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ conditions\ (which\ only\ moves\ the\ SolidNodes\ *on*\ the\ boundary),}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ can\ lead\ to\ strongly\ distorted\ meshes.\ This\ can\ cause\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Newton\ method\ to\ fail\ -\/-\/>\ the\ overall\ method\ is\ actually\ more\ robust}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ if\ we\ use\ the\ nodal\ positions\ as\ determined\ by\ the\ Domain/MacroElement-\/}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ based\ mesh\ update\ as\ initial\ guesses.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\_boundary\_conditions}}();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{bool}\ update\_all\_solid\_nodes=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{\ \ \}\ \ \ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Shear\ the\ top}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\_boundary\_conditions}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ ibound\ =\ 5;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ SolidNode\ *solid\_nod\_pt\ =\ \textcolor{keyword}{static\_cast<}SolidNode*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ solid\_nod\_pt-\/>x(0)\ =\ solid\_nod\_pt-\/>xi(0)\ +\ \mbox{\hyperlink{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}{Shear}}*}
+\DoxyCodeLine{\ \ \ \ \ \ solid\_nod\_pt-\/>xi(2);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}{SimpleShearProblem<ELEMENT>::SimpleShearProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible)\ }
+\DoxyCodeLine{\ :\ Shear(0.0)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ a\ =\ 1.0,\ b\ =\ 1.0,\ c\ =\ 1.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx\ =\ 5,\ ny\ =\ 5,\ nz\ =\ 5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticCubicMesh}{ElasticCubicMesh<ELEMENT>}}(nx,ny,nz,a,b,c);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ all\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=0;b<6;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ nodes\ in\ the\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Pin\ all\ nodes\ in\ the\ y\ and\ z\ directions\ to\ keep\ the\ motion\ in\ plane}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=1;i<3;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin\_position(i);\ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//On\ the\ top\ and\ bottom\ pin\ the\ positions\ in\ x}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}((b==0)\ ||\ (b==5))}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements\ in\ the\ mesh\ to\ set\ parameters/function\ pointers}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \ n\_element\ =mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ set\_incompressible(el\_pt,incompressible);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//el\_pt-\/>body\_force\_fct\_pt()=Global\_Physical\_Variables::body\_force;}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \textcolor{comment}{//PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ mesh\_pt()-\/>element\_pt());}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;}
+\DoxyCodeLine{\}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}{SimpleShearProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ deformed\ body}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/stress\%i.dat"{}},\ doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ the\ appropriate\ stress\ at\ the\ centre\ of\ each\ element}}
+\DoxyCodeLine{\ Vector<double>\ s(3,0.0);}
+\DoxyCodeLine{\ Vector<double>\ x(3);}
+\DoxyCodeLine{\ DenseMatrix<double>\ sigma(3,3);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ el\_pt-\/>interpolated\_x(s,x);}
+\DoxyCodeLine{\ \ \ el\_pt-\/>get\_stress(s,sigma);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<3;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ some\_file\ <<\ x[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<3;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ j=0;j<3;j++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ some\_file\ <<\ sigma(i,j)\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ some\_file\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Run\ the\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}{SimpleShearProblem<ELEMENT>::run}}(\textcolor{keyword}{const}\ std::string\ \&dirname)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(dirname);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ doc\_info.number()=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ parameter\ values}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Gravity:}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}=0.1;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=2;\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Solve\ the\ problem\ with\ Newton's\ method,\ allowing\ for\ up\ to\ 5\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//rounds\ of\ adaptation}}
+\DoxyCodeLine{\ \ \ newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Increase\ the\ shear}}
+\DoxyCodeLine{\ \ \ Shear\ +=\ 0.5;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElement<3,3>}}\ >::set\_incompressible(}
+\DoxyCodeLine{\ QPVDElement<3,3>\ *el\_pt,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Does\ nothing}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElementWithPressure<3>}}\ >::set\_incompressible(}
+\DoxyCodeLine{\ QPVDElementWithPressure<3>\ *el\_pt,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(incompressible)\ \{el\_pt-\/>\mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\_incompressible}}();\}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \{el\_pt-\/>set\_compressible();\}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElementWithContinuousPressure<3>}}\ >::}
+\DoxyCodeLine{set\_incompressible(}
+\DoxyCodeLine{\ QPVDElementWithContinuousPressure<3>\ *el\_pt,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&incompressible)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(incompressible)\ \{el\_pt-\/>\mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\_incompressible}}();\}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ \{el\_pt-\/>set\_compressible();\}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ simple\ elastic\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{refineable__simple__shear_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Initialise\ physical\ parameters}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}}\ \ =\ 2.1;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}}\ =\ 0.4;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}}\ =\ 1.3;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ strain\ energy\ function:\ Generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6838abf46c7850f1ee0b3452d6d2498}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ GeneralisedMooneyRivlin(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ (based\ on\ strain\ energy\ function)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ IsotropicStrainEnergyFunctionConstitutiveLaw(}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6838abf46c7850f1ee0b3452d6d2498}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElement<3,3>}}\ >\ problem(\textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ problem.run(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Discontinuous\ pressure}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElementWithPressure<3>}}\ >\ problem(\textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ problem.run(\textcolor{stringliteral}{"{}RESLT\_pres"{}});}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{/*\{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ //Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\textcolor{comment}{\ \ SimpleShearProblem<QPVDElementWithPressure<3>\ >\ problem(true);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ problem.run("{}RESLT\_pres\_incomp"{});}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \}*/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSimpleShearProblem}{SimpleShearProblem<QPVDElementWithContinuousPressure<3>}}\ >\ problem(\textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ problem.run(\textcolor{stringliteral}{"{}RESLT\_cont\_pres"{}});}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{/*\{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ //Set\ up\ the\ problem\ with\ pure\ displacement\ formulation}}
+\DoxyCodeLine{\textcolor{comment}{\ \ SimpleShearProblem<QPVDElementWithContinuousPressure<3>\ >\ problem(true);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ problem.run("{}RESLT\_cont\_pres\_incomp"{});}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \}*/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

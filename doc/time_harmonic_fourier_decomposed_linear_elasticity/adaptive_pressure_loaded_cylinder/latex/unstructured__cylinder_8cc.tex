@@ -1,0 +1,52 @@
+\doxysection{unstructured\+\_\+cylinder.\+cc File Reference}
+\hypertarget{unstructured__cylinder_8cc}{}\label{unstructured__cylinder_8cc}\index{unstructured\_cylinder.cc@{unstructured\_cylinder.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{Fourier\+Decomposed\+Time\+Harmonic\+Linear\+Elasticity\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Class to validate time harmonic linear elasticity (Fourier decomposed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a5978c2a1498ec7775b228a11a3912209}{Global\+\_\+\+Parameters\+::\+Nu}} (0.\+3, 0.\+05)
+\begin{DoxyCompactList}\small\item\em Define Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ac74d762d76b56416281173421b018460}{Global\+\_\+\+Parameters\+::E}} (1.\+0, 0.\+01)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_aa7f960ed4311ccf6e3dbf9371f13876a}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (10.\+0, 5.\+0)
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional square angular frequency of time-\/harmonic motion. \end{DoxyCompactList}\item 
+const std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a2ceef30cf51dfd432bafde39945a4e45}{Global\+\_\+\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Define the imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a579fa434bf9ee57e66d4bd42b208fc23}{Global\+\_\+\+Parameters\+::boundary\+\_\+traction}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function at r=rmin\+: (t\+\_\+r, t\+\_\+z, t\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a8d30973505eeb753023936398bce5bcc}{Global\+\_\+\+Parameters\+::body\+\_\+force}} (const Vector$<$ double $>$ \&x, Vector$<$ std\+::complex$<$ double $>$ $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The body force function; returns vector of complex doubles in the order (b\+\_\+r, b\+\_\+z, b\+\_\+theta) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\+\_\+\+Parameters\+::exact\+\_\+solution}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em The exact solution in a flat-\/packed vector\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{unstructured__cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{unstructured\_cylinder.cc@{unstructured\_cylinder.cc}!main@{main}}
+\index{main@{main}!unstructured\_cylinder.cc@{unstructured\_cylinder.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__cylinder_8cc_source_l00517}{517}} of file \mbox{\hyperlink{unstructured__cylinder_8cc_source}{unstructured\+\_\+cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00070}{Global\+\_\+\+Parameters\+::rmax}}, \mbox{\hyperlink{cylinder_8cc_source_l00068}{Global\+\_\+\+Parameters\+::rmin}}, \mbox{\hyperlink{cylinder_8cc_source_l00071}{Global\+\_\+\+Parameters\+::zmax}}, and \mbox{\hyperlink{cylinder_8cc_source_l00069}{Global\+\_\+\+Parameters\+::zmin}}.
+

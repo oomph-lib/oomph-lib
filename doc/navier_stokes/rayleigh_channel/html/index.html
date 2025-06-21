@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Flow in a 2D channel with an oscillating wall</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Flow in a 2D channel with an oscillating wall </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we consider our first time-dependent Navier-Stokes problem and demonstrate how to apply periodic boundary conditions.</p>
+<hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We consider finite-Reynolds-number flow in a 2D channel that is driven by the oscillatory tangential motion of the "upper" wall:</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>Unsteady flow in a 2D channel with an oscillating wall.</b> </center><p> Here is a sketch of the problem:</p>
+<div class="image">
+<img src="rayleigh_channel.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p class="endtd">The flow is governed by the 2D unsteady Navier-Stokes equations,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\left(St\frac{\partial u_i}{\partial t} +  
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right)
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="346" height="31"/>
+</p>
+<p> and the continuity equation  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0
+ \ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_1.png" width="100" height="29"/>
+</p>
+<p> in the domain  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}.
+\]" src="form_2.png" width="216" height="31"/>
+</p>
+<p> We apply the Dirichlet (no-slip) boundary condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_3.png" width="155" height="15"/>
+</p>
+<p> on the lower, stationary wall, <img class="formulaInl" alt="$ \partial D_{lower} = 
+\big\{(x_1,x_2) \ | \ x_2=0 \big\} $" src="form_4.png" width="161" height="16"/> , apply the Dirichlet (no-slip) conditions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D{upper}}=(\sin\left(\omega t\right),0),
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_5.png" width="195" height="16"/>
+</p>
+<p> on the upper, moving wall , <img class="formulaInl" alt="$ \partial D_{upper} = 
+\big\{(x_1,x_2) \ | \ x_2=1 \big\} $" src="form_6.png" width="163" height="16"/> , and apply periodic boundary condition on the "left" and "right" boundaries:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}.
+\ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_7.png" width="150" height="15"/>
+</p>
+<p> Initial conditions for the velocities are given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2),
+\]" src="form_8.png" width="164" height="14"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2)$" src="form_9.png" width="61" height="14"/> is given.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><hr  />
+<h2><a class="anchor" id="solution"></a>
+The exact solution</h2>
+<p>The above problem has an exact, time-periodic parallel flow solution of the form  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and
+\ \ \ \ }
+p_{exact}(x_1,x_2,t) = 0,
+\]" src="form_10.png" width="331" height="14"/>
+</p>
+<p> where <img class="formulaInl" alt="$ U(x_2,t) $" src="form_11.png" width="41" height="14"/> is governed by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\, St\frac{\partial U}{\partial t} = 
+\frac{\partial^2 U}{\partial x_2^2},
+\]" src="form_12.png" width="96" height="33"/>
+</p>
+<p> subject to the boundary conditions <img class="formulaInl" alt="$ U(x_2=0,t)=0$" src="form_13.png" width="88" height="14"/> and <img class="formulaInl" alt="$ U(x_2=1,t)=\sin(\omega t)$" src="form_14.png" width="119" height="14"/> . The solution is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U(x_2,t) = Re\left\{\frac{e^{i\omega t}}{e^{i\lambda}-e^{-i\lambda}}
+\left(e^{i\lambda y}-e^{-i\lambda y}\right)\right\}, 
+\]" src="form_15.png" width="236" height="33"/>
+</p>
+<p> where  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lambda = i\sqrt{i\omega Re\, St}.
+\]" src="form_16.png" width="84" height="14"/>
+</p>
+<hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The two animations below show the computed solutions obtained from a spatial discretisation with Taylor-Hood and Crouzeix-Raviart elements, respectively. In both cases we set <img class="formulaInl" alt="$ \omega=2\pi, \ Re =
+ReSt = 10 $" src="form_17.png" width="139" height="13"/> and specified the exact, time-periodic solution as the initial condition, i.e. <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) = {\bf
+u}_{exact}(x_1,x_2,t=0)$" src="form_18.png" width="184" height="14"/> . The computed solutions agree extremely well with the exact solution throughout the simulation.</p>
+<div class="image">
+<img src="velocity_vectors_CR.gif" alt=""/>
+<div class="caption">
+Plot of the velocity field computed with 2D Crouzeix-Raviart elements, starting form the exact, time-periodic solution. </div></div>
+ <div class="image">
+<img src="velocity_vectors_TH.gif" alt=""/>
+<div class="caption">
+Plot of the velocity field computed with 2D Taylor-Hood elements, starting form the exact, time-periodic solution. </div></div>
+ <p>If the simulation is started from other initial conditions, i.e. <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) \ne {\bf u}_{exact}(x_1,x_2,t=0)$" src="form_19.png" width="184" height="14"/> , the velocity field initially differs noticeably from the time-periodic solution <img class="formulaInl" alt="$ {\bf u}_{exact}(x_1,x_2,t)$" src="form_20.png" width="83" height="14"/> but following the decay of initial transients we have  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lim_{t\to \infty} {\bf u}(x_1,x_2,t) = {\bf u}_{exact}(x_1,x_2,t).
+\]" src="form_21.png" width="188" height="18"/>
+</p>
+<p> This is illustrated in the following plot which shows the evolution of the L2-"error" between the computed and the time-periodic solutions for two different initial conditions. The red line was obtained from a simulation in which <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) = {\bf u}_{exact}(x_1,x_2,t=0)$" src="form_22.png" width="184" height="14"/> ; the blue line was obtained from a computation in which the simulation was started by an "impulsive start", <img class="formulaInl" alt="$ {\bf u}_{IC}(x_1,x_2) = {\bf
+0}$" src="form_23.png" width="85" height="14"/> .</p>
+<div class="image">
+<img src="error.gif" alt=""/>
+<div class="caption">
+Plot of the L2-'errors' between the computed and time-periodic solution for two different initial conditions. </div></div>
+ <p>The animations of the simulations for the "impulsive start" (for <a href="../figures/velocity_vectors_TH.avi">Taylor-Hood</a> and <a href="../figures/velocity_vectors_CR.avi">Crouzeix-Raviart elements</a>) show how the velocity profile approaches the time-periodic solution as the simulation progresses.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+The global parameters</h1>
+<p>As usual, we use a namespace to define the problem parameters, the Reynolds number, <img class="formulaInl" alt="$ Re$" src="form_24.png" width="15" height="10"/> , and the Womersley number, <img class="formulaInl" alt="$ Re\, St$" src="form_25.png" width="30" height="10"/> . We also provide two flags that indicate the length of the run (to allow a short run to be performed when the code is run as a self-test), and the initial condition (allowing a start from <img class="formulaInl" alt="$ {\bf u}_{exact}$" src="form_26.png" width="31" height="9"/> or an impulsive start in which the fluid is initially at rest).</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_namespace=================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for global parameters</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Re</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Womersley = Reynolds times Strouhal</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">ReSt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for long/short run: Default =  perform long run</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Long_run_flag</a>=1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Flag for impulsive start: Default = start from exact</span></div>
+<div class="line"><span class="comment"> /// time-periodic solution. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Impulsive_start_flag</a>=0;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Namespace for global parameters.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00043">rayleigh_channel.cc:44</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a457472b8222bb6bb0d97b2aed78d1ef4"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a></div><div class="ttdeci">unsigned Long_run_flag</div><div class="ttdoc">Flag for long/short run: Default = perform long run.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00052">rayleigh_channel.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7a59a32365e87566069e458dc83bd18a"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley = Reynolds times Strouhal.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00049">rayleigh_channel.cc:49</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a9d72e94a9305c6a310940a6a427ebe06"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00046">rayleigh_channel.cc:46</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aec41eb8da4929003e5d78ef4b43c0ed9"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a></div><div class="ttdeci">unsigned Impulsive_start_flag</div><div class="ttdoc">Flag for impulsive start: Default = start from exact time-periodic solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00056">rayleigh_channel.cc:56</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="exact"></a>
+The exact solution</h1>
+<p>We use another namespace to define the exact, time-periodic parallel-flow solution:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_exact_solution=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for exact solution</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceExactSoln.html">ExactSoln</a></div>
+<div class="line">{</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Exact solution of the problem as a vector</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t, <span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">double</span> y=x[1];</div>
+<div class="line">  <span class="comment">// I=sqrt(-1)</span></div>
+<div class="line">  complex&lt;double&gt; I(0.0,1.0);</div>
+<div class="line">  <span class="comment">// omega</span></div>
+<div class="line">  <span class="keywordtype">double</span> omega=2.0*MathematicalConstants::Pi;</div>
+<div class="line">  <span class="comment">// lambda</span></div>
+<div class="line">  complex&lt;double&gt; lambda(0.0,omega*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>);</div>
+<div class="line">  lambda = I*sqrt(lambda);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Solution</span></div>
+<div class="line">  complex&lt;double&gt; sol(</div>
+<div class="line">   exp(complex&lt;double&gt;(0.0,omega*t)) * </div>
+<div class="line">   (exp(lambda*complex&lt;double&gt;(0.0,y))-exp(lambda*complex&lt;double&gt;(0.0,-y)))</div>
+<div class="line">   /(exp(I*lambda)-exp(-I*lambda)) );</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Assign real solution</span></div>
+<div class="line">  u.resize(2);</div>
+<div class="line">  u[0]=real(sol);</div>
+<div class="line">  u[1]=0.0;</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exact solution of the problem as a scalar</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">get_exact_u</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; y,<span class="keywordtype">double</span>&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// I=sqrt(-1)</span></div>
+<div class="line">  complex&lt;double&gt; I(0.0,1.0);</div>
+<div class="line">  <span class="comment">// omega</span></div>
+<div class="line">  <span class="keywordtype">double</span> omega=2.0*MathematicalConstants::Pi;</div>
+<div class="line">  <span class="comment">// lambda</span></div>
+<div class="line">  complex&lt;double&gt; lambda(0.0,omega*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>);</div>
+<div class="line">  lambda = I*sqrt(lambda);</div>
+<div class="line">  <span class="comment">// Solution</span></div>
+<div class="line">  complex&lt;double&gt; sol(</div>
+<div class="line">   exp(complex&lt;double&gt;(0.0,omega*t)) * </div>
+<div class="line">   (exp(lambda*complex&lt;double&gt;(0.0,y))-exp(lambda*complex&lt;double&gt;(0.0,-y)))</div>
+<div class="line">   /(exp(I*lambda)-exp(-I*lambda)) );</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Assign real solution</span></div>
+<div class="line">  u=real(sol);</div>
+<div class="line"> </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of exact_solution</span></div>
+<div class="ttc" id="anamespaceExactSoln_html"><div class="ttname"><a href="namespaceExactSoln.html">ExactSoln</a></div><div class="ttdoc">Namespace for exact solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00064">rayleigh_channel.cc:65</a></div></div>
+<div class="ttc" id="anamespaceExactSoln_html_a2598550281dd62f4160edb3d0b2e5432"><div class="ttname"><a href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const double &amp;t, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution of the problem as a vector.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00068">rayleigh_channel.cc:68</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We use optional command line arguments to specify which mode the code is run in: Either as a short or a long run (indicated by the first command line argument being 0 or 1, respectively), and with initial conditions corresponding to an impulsive start or a start from the time-periodic exact solution (indicated by the second command line argument being 1 or 0, respectively). If no command line arguments are specified the code is run in the default mode, specified by the parameter values assigned in the namespace <code><a class="el" href="namespaceGlobal__Parameters.html" title="Namespace for global parameters.">Global_Parameters</a></code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for Rayleigh channel problem</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="rayleigh__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Convert command line arguments (if any) into flags:</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordflow">if</span> (argc==1)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;No command line arguments specified -- using defaults.&quot;</span> </div>
+<div class="line">        &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc==3)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Two command line arguments specified:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="comment">// Flag for long run</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a>=atoi(argv[1]);<span class="comment"></span></div>
+<div class="line"><span class="comment">   /// Flag for impulsive start</span></div>
+<div class="line"><span class="comment"></span>   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a>=atoi(argv[2]);</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   std::string error_message = </div>
+<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments. Specify none or two.\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Arg1: Long_run_flag [0/1]\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Arg2: Impulsive_start_flag [0/1]\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Long run flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a> &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Impulsive start flag: &quot;</span> </div>
+<div class="line">      &lt;&lt;  <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a> &lt;&lt; std::endl;</div>
+<div class="ttc" id="arayleigh__channel_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="rayleigh__channel_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for Rayleigh channel problem.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00496">rayleigh_channel.cc:496</a></div></div>
+</div><!-- fragment --><p> Next we set the physical and mesh parameters.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set physical parameters:</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Womersley number = Reynolds number (St = 1)</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a> = 10.0;</div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a> = <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Horizontal length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> lx = 1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Vertical length of domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> ly = 1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=10;</div>
+</div><!-- fragment --><p> Finally we set up <code>DocInfo</code> objects and solve for both Taylor-Hood elements and Crouzeix-Raviart elements.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Crouzeix-Raviart elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set up doc info</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_CR&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code hl_class" href="classRayleighProblem.html">RayleighProblem&lt;QCrouzeixRaviartElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; problem(nx,ny,lx,ly);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  problem.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve with Taylor-Hood elements</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set up doc info</span></div>
+<div class="line">  DocInfo doc_info;</div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set up problem</span></div>
+<div class="line">  <a class="code hl_class" href="classRayleighProblem.html">RayleighProblem&lt;QTaylorHoodElement&lt;2&gt;</a>,BDF&lt;2&gt; &gt; problem(nx,ny,lx,ly);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line">  problem.unsteady_run(doc_info);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of main</span></div>
+<div class="ttc" id="aclassRayleighProblem_html"><div class="ttname"><a href="classRayleighProblem.html">RayleighProblem</a></div><div class="ttdoc">Rayleigh-type problem: 2D channel whose upper wall oscillates periodically.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00120">rayleigh_channel.cc:121</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very similar to that used in the <a href="../../driven_cavity/html/index.html">driven cavity example</a>. We specify the type of the element and the type of the timestepper (assumed to be a member of the BDF family) as template parameters and pass the mesh parameters to the problem constructor.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Rayleigh-type problem: 2D channel whose upper</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// wall oscillates periodically.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRayleighProblem.html">RayleighProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in x and y directions and </span></div>
+<div class="line"><span class="comment"> /// lengths</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRayleighProblem.html">RayleighProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">                 <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+</div><!-- fragment --><p> No action is needed before or after solving, but we update the time-dependent boundary conditions at the upper wall before each timestep, using <code>Problem::actions_before_implicit_timestep()</code>. The boundary values are obtained from the exact solution, defined in the namespace <code><a class="el" href="namespaceExactSoln.html" title="Namespace for exact solution.">ExactSoln</a></code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Update before solve is empty</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_before_newton_solve() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve() {}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Actions before timestep: Update no slip on upper oscillating wall</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_before_implicit_timestep()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// No slip on upper boundary</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> ibound=2;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get exact solution</span></div>
+<div class="line">     <span class="keywordtype">double</span> y=mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(1);</div>
+<div class="line">     <span class="keywordtype">double</span> time=time_pt()-&gt;time();</div>
+<div class="line">     <span class="keywordtype">double</span> soln;</div>
+<div class="line">     <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a>(time,y,soln);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Assign exact solution to boundary</span></div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(0,soln);</div>
+<div class="line">     mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;set_value(1,0.0);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end of actions_before_implicit_timestep</span></div>
+</div><!-- fragment --><p> The function <code>unsteady_run(...)</code>, discussed below, performs the timestepping and documents the solution in the directory specified in the <code>DocInfo</code> object.</p>
+<div class="fragment"><div class="line">   <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Run an unsteady simulation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> unsteady_run(DocInfo&amp; doc_info); </div>
+</div><!-- fragment --><p> We define the function <code>doc_solution(...)</code> which documents the results, and provide functions to set the initial conditions and to fix a pressure value. The problem's only member data contains an output stream in which we record the time-trace of the solution.</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set initial condition (incl previous timesteps) according</span></div>
+<div class="line"><span class="comment"> /// to specified function. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> fix_pressure(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;e, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;pdof, </div>
+<div class="line">                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;pvalue)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to proper element and fix pressure</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e))-&gt;</div>
+<div class="line">                          fix_pressure(pdof,pvalue);</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem_class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We start by building the timestepper, determining its type from the class's second template argument, and pass a pointer to it to the Problem, using the function <code>Problem::add_time_stepper_pt(...)</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Problem constructor</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code hl_function" href="classRayleighProblem.html#a53aeda7918553889b3fa0dd70cdb30f1">RayleighProblem&lt;ELEMENT,TIMESTEPPER&gt;::RayleighProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Allocate the timestepper</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> TIMESTEPPER); </div>
+<div class="ttc" id="aclassRayleighProblem_html_a53aeda7918553889b3fa0dd70cdb30f1"><div class="ttname"><a href="classRayleighProblem.html#a53aeda7918553889b3fa0dd70cdb30f1">RayleighProblem::RayleighProblem</a></div><div class="ttdeci">RayleighProblem(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor: Pass number of elements in x and y directions and lengths.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00187">rayleigh_channel.cc:188</a></div></div>
+</div><!-- fragment --><p> Next we build the mesh and pass an additional boolean flag to the constructor to indicate that periodic boundary conditions are to be applied in the <img class="formulaInl" alt="$ x_1$" src="form_27.png" width="13" height="9"/> -direction. We will discuss the implementation of this feature in more detail in <a href="#periodic">below</a>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh with periodic boundary conditions in x direction</span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic_in_x=<span class="keyword">true</span>;</div>
+<div class="line"> Problem::mesh_pt() = </div>
+<div class="line">  <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly,periodic_in_x,</div>
+<div class="line">                                   time_stepper_pt());</div>
+</div><!-- fragment --><p> We pin both velocity components on the top and bottom boundaries (i.e. at <img class="formulaInl" alt="$ x_2=0$" src="form_28.png" width="36" height="11"/> and <img class="formulaInl" alt="$ x_2=1$" src="form_29.png" width="36" height="11"/> , respectively), and pin the vertical velocity on the left and right boundaries (i.e. at <img class="formulaInl" alt="$ x_1=0 $" src="form_30.png" width="36" height="11"/> and <img class="formulaInl" alt="$ x_1=1
+$" src="form_31.png" width="36" height="11"/> , respectively) to enforce horizontal outflow through the periodic boundaries.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound=mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// No slip on top and bottom</span></div>
+<div class="line">     <span class="keywordflow">if</span> ((ibound==0)||(ibound==2))</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">      }</div>
+<div class="line">     <span class="comment">// Horizontal outflow on the left (and right -- right bc not</span></div>
+<div class="line">     <span class="comment">// strictly necessary because of symmetry)</span></div>
+<div class="line">     <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((ibound==1)||(ibound==3))</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p> Finally we pass the pointers to the Reynolds and Strouhal numbers, <img class="formulaInl" alt="$ Re $" src="form_32.png" width="15" height="10"/> and <img class="formulaInl" alt="$ Re\, St $" src="form_33.png" width="30" height="10"/> , to the elements. Since no traction boundary conditions are applied anywhere, the pressure is only determined up to an arbitrary constant. To ensure a unique solution we pin a single pressure value before setting up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_el = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a fluid element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a9d72e94a9305c6a310940a6a427ebe06">Global_Parameters::Re</a>;</div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7a59a32365e87566069e458dc83bd18a">Global_Parameters::ReSt</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now pin the pressure in first element at value 0 to 0.0</span></div>
+<div class="line"> fix_pressure(0,0,0.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assgn equation numbers</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="IC"></a>
+Initial conditions</h1>
+<p>The application of initial conditions for vector-valued problems is performed by the same procedure that we described for <a href="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#IC">scalar problems</a>, except that we now have to assign "history
+values" for multiple nodal values. For timesteppers from the BDF family, the "history values" represent the solution at previous timesteps. We check that the timestepper is of the appropriate type, <br  />
+ loop over previous time levels, determine the velocity at those times and assign them to the "history values" of the velocities. No initial conditions are required for the pressure. Note that we also have to assign "history values" for the nodal positions since <code>oomph-lib's</code> Navier-Stokes elements discretise the momentum equations in their ALE form. This aspect was explained in more detail in our discussion of the solution of the <a href="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#IC">unsteady heat equation</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//======================start_of_set_initial_condition====================</span></div>
+<div class="line"><span class="comment">/// Set initial condition: Assign previous and current values</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// from exact solution.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighProblem.html#a5c54c02c45c656cabbe8f8808e2cfd6b">RayleighProblem&lt;ELEMENT,TIMESTEPPER&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check that timestepper is from the BDF family</span></div>
+<div class="line"> <span class="keywordflow">if</span> (time_stepper_pt()-&gt;type()!=<span class="stringliteral">&quot;BDF&quot;</span>)</div>
+<div class="line">  {</div>
+<div class="line">   std::ostringstream error_stream;</div>
+<div class="line">   error_stream &lt;&lt; <span class="stringliteral">&quot;Timestepper has to be from the BDF family!\n&quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;You have specified a timestepper from the &quot;</span></div>
+<div class="line">                &lt;&lt; time_stepper_pt()-&gt;type() &lt;&lt; <span class="stringliteral">&quot; family&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Backup time in global Time object</span></div>
+<div class="line"> <span class="keywordtype">double</span> backed_up_time=time_pt()-&gt;time();</div>
+<div class="line">         </div>
+<div class="line"> <span class="comment">// Past history needs to be established for t=time0-deltat, ...</span></div>
+<div class="line"> <span class="comment">// Then provide current values (at t=time0) which will also form</span></div>
+<div class="line"> <span class="comment">// the initial guess for the first solve at t=time0+deltat</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vector of exact solution value</span></div>
+<div class="line"> Vector&lt;double&gt; soln(2);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod = mesh_pt()-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set continuous times at previous timesteps:</span></div>
+<div class="line"> <span class="comment">// How many previous timesteps does the timestepper use?</span></div>
+<div class="line"> <span class="keywordtype">int</span> nprev_steps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"> Vector&lt;double&gt; prev_time(nprev_steps+1);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> t=nprev_steps;t&gt;=0;t--)</div>
+<div class="line">  {</div>
+<div class="line">   prev_time[t]=time_pt()-&gt;time(<span class="keywordtype">unsigned</span>(t));</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over current &amp; previous timesteps</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> t=nprev_steps;t&gt;=0;t--)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Continuous time</span></div>
+<div class="line">   <span class="keywordtype">double</span> time=prev_time[t];</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; time &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;num_nod;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">     x[0]=mesh_pt()-&gt;node_pt(n)-&gt;x(0);</div>
+<div class="line">     x[1]=mesh_pt()-&gt;node_pt(n)-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get exact solution at previous time</span></div>
+<div class="line">     <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a>(time,x,soln);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Assign solution</span></div>
+<div class="line">     mesh_pt()-&gt;node_pt(n)-&gt;set_value(t,0,soln[0]);</div>
+<div class="line">     mesh_pt()-&gt;node_pt(n)-&gt;set_value(t,1,soln[1]);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over coordinate directions: Mesh doesn&#39;t move, so </span></div>
+<div class="line">     <span class="comment">// previous position = present position</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;node_pt(n)-&gt;x(t,i)=x[i];</div>
+<div class="line">      }</div>
+<div class="line">    } </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Reset backed up time for global timestepper</span></div>
+<div class="line"> time_pt()-&gt;time()=backed_up_time;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of set_initial_condition</span></div>
+<div class="ttc" id="aclassRayleighProblem_html_a5c54c02c45c656cabbe8f8808e2cfd6b"><div class="ttname"><a href="classRayleighProblem.html#a5c54c02c45c656cabbe8f8808e2cfd6b">RayleighProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00253">rayleigh_channel.cc:253</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post processing</h1>
+<p>The function <code>doc_solution(...)</code> is similar to those used in the <a href="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#doc">unsteady heat examples</a>. We plot the computed solution, the time-periodic exact solution and the difference between the two, and record various parameters in the trace file. The plot of the computed solution contains tecplot instructions that generate a blue line in the top-left corner of the plot to indicate how time progresses during the simulation. The trace file contains a record of</p><ul>
+<li>the value of the continuous time, <img class="formulaInl" alt="$ t $" src="form_34.png" width="5" height="9"/> ,</li>
+<li>the coordinates of a control node, <img class="formulaInl" alt="$ (x_1^{[c]},x_2^{[c]})$" src="form_35.png" width="50" height="18"/> ,</li>
+<li>the computed velocity at the control node, <img class="formulaInl" alt="$( u_1^{[c]},u_2^{[c]})$" src="form_36.png" width="50" height="18"/> ,</li>
+<li>the time-periodic solution, evaluated at the control node, <img class="formulaInl" alt="$ (u_1^{[c,exact]},u_2^{[c,exact]})$" src="form_37.png" width="104" height="18"/> ,</li>
+<li>the difference between the computed velocities and the time-periodic solution at the control node,</li>
+<li>the L2 norm of the "error" between the computed and time-periodic solution for the velocity, and</li>
+<li>the L2 norm of the time-periodic solution for the velocity.</li>
+</ul>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighProblem.html#aca1b0f4134bc745c75ae524450e97109">RayleighProblem&lt;ELEMENT,TIMESTEPPER&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write file as a tecplot text object</span></div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\&quot;time = &quot;</span> </div>
+<div class="line">           &lt;&lt; time_pt()-&gt;time() &lt;&lt; <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"> <span class="comment">// ...and draw a horizontal line whose length is proportional</span></div>
+<div class="line"> <span class="comment">// to the elapsed time</span></div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;1&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot;2&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; <span class="stringliteral">&quot; 0 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> some_file &lt;&lt; time_pt()-&gt;time()*20.0 &lt;&lt; <span class="stringliteral">&quot; 0&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_fct(some_file,npts,time_pt()-&gt;time(),</div>
+<div class="line">                       <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="comment">//----------</span></div>
+<div class="line"> <span class="keywordtype">double</span> error,norm;</div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/error%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;compute_error(some_file,</div>
+<div class="line">                          <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a>,</div>
+<div class="line">                          time_pt()-&gt;time(),</div>
+<div class="line">                          error,norm); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc solution and error</span></div>
+<div class="line"> <span class="comment">//-----------------------</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;error: &quot;</span> &lt;&lt; error &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;norm : &quot;</span> &lt;&lt; norm &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get time, position and exact soln at control node </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_control=37;</div>
+<div class="line"> Vector&lt;double&gt; x(2), u(2);</div>
+<div class="line"> <span class="keywordtype">double</span> time=time_pt()-&gt;time();</div>
+<div class="line"> Node* node_pt=</div>
+<div class="line">  <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(n_control))-&gt;node_pt(1);</div>
+<div class="line"> x[0] = node_pt-&gt;x(0);</div>
+<div class="line"> x[1] = node_pt-&gt;x(1);</div>
+<div class="line"> <a class="code hl_function" href="namespaceExactSoln.html#a2598550281dd62f4160edb3d0b2e5432">ExactSoln::get_exact_u</a>(time,x,u);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; time &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; x[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; x[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; node_pt-&gt;value(0) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; node_pt-&gt;value(1) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; u[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; u[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; abs(u[0]-node_pt-&gt;value(0)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; abs(u[1]-node_pt-&gt;value(1)) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; error &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; norm &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution   </span></div>
+<div class="ttc" id="aclassRayleighProblem_html_aca1b0f4134bc745c75ae524450e97109"><div class="ttname"><a href="classRayleighProblem.html#aca1b0f4134bc745c75ae524450e97109">RayleighProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00332">rayleigh_channel.cc:332</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_run"></a>
+The timestepping loop</h1>
+<p>The function <code>unsteady_run(...)</code> is used to perform the timestepping procedure. We start by opening the trace file and write a suitable header for the visualisation with tecplot.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_unsteady_run=====================================================</span></div>
+<div class="line"><span class="comment">/// Unsteady run...</span></div>
+<div class="line"><span class="comment">//=============================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT,<span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classRayleighProblem.html#a7404085b8be8865ffc07fd4133e40151">RayleighProblem&lt;ELEMENT,TIMESTEPPER&gt;::unsteady_run</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write tecplot header for trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;time&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,      &quot;</span> </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;x&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,         &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;y&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,         &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;u_1&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,       &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;u_2&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,       &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;u_exact_1&quot;</span> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;u_exact_2&quot;</span> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;error_1&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,   &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;error_2&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,   &quot;</span> </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;L2 error&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,  &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;L2 norm&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,   &quot;</span> &lt;&lt; std::endl;</div>
+<div class="ttc" id="aclassRayleighProblem_html_a7404085b8be8865ffc07fd4133e40151"><div class="ttname"><a href="classRayleighProblem.html#a7404085b8be8865ffc07fd4133e40151">RayleighProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(DocInfo &amp;doc_info)</div><div class="ttdoc">Run an unsteady simulation.</div><div class="ttdef"><b>Definition</b> <a href="rayleigh__channel_8cc_source.html#l00417">rayleigh_channel.cc:417</a></div></div>
+</div><!-- fragment --><p> Next, we choose a value for the timestep and set up the initial conditions, either for an impulsive start...</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Set value of dt</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt = 0.025;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Parameters.html#aec41eb8da4929003e5d78ef4b43c0ed9">Global_Parameters::Impulsive_start_flag</a>==1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Initialise all history values for an impulsive start</span></div>
+<div class="line">   assign_initial_values_impulsive(dt);</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;IC = impulsive start&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> ...or for a "smooth" start from the time-periodic exact solution:</p>
+<div class="fragment"><div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Initialise timestep</span></div>
+<div class="line">   initialise_dt(dt);</div>
+<div class="line">   <span class="comment">// Set initial conditions.</span></div>
+<div class="line">   set_initial_condition();</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;IC = exact solution&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  } </div>
+</div><!-- fragment --><p> We choose the number of timesteps to be computed and document the initial conditions.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Now do many timesteps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntsteps=80;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If validation run only do 5 timesteps</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a457472b8222bb6bb0d97b2aed78d1ef4">Global_Parameters::Long_run_flag</a>==0)</div>
+<div class="line">  { </div>
+<div class="line">   ntsteps=5; </div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;validation run&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial condition</span></div>
+<div class="line"> doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// increment counter</span></div>
+<div class="line"> doc_info.number()++;</div>
+</div><!-- fragment --><p> Finally, perform the actual timestepping and document the solution after every timestep.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the timesteps</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> t=1;t&lt;=ntsteps;t++)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;TIMESTEP &quot;</span> &lt;&lt; t &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Take one fixed timestep</span></div>
+<div class="line">   unsteady_newton_solve(dt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Output the time</span></div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;Time is now &quot;</span> &lt;&lt; time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// increment counter</span></div>
+<div class="line">   doc_info.number()++;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of unsteady run</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="periodic"></a>
+Periodic boundaries</h2>
+<p>A key feature of the current problem is the presence of periodic boundary conditions. The application of the periodic boundary condition is performed "inside" the mesh constructor and details of the implementation were therefore "hidden". We will now discuss the steps required to apply periodic boundary conditions and explain why it is easier to apply periodic boundary conditions in the mesh constructor rather than in the "driver code".</p>
+<p>Periodic boundary conditions arise in problems that are periodic in one of their coordinate directions. It is important to realise that, even though the solution at the corresponding nodes on the two periodic domain boundaries (the left and the right boundary in the above example) are the same, one of their nodal coordinates differs. For instance, in the above example, each of the nodes on the left boundary has the same velocity values and the same <img class="formulaInl" alt="$ x_2$" src="form_38.png" width="13" height="9"/> -coordinate as its corresponding (periodic) node on the right boundary. However, the <img class="formulaInl" alt="$ x_1 $" src="form_39.png" width="13" height="9"/> -coordinate of the nodes on the left boundary is <img class="formulaInl" alt="$ x_1=0$" src="form_40.png" width="36" height="11"/> , whereas that of the (periodic) nodes on the right boundary is <img class="formulaInl" alt="$ x_1=1$" src="form_41.png" width="36" height="11"/> . It is therefore not possible to regard the nodes as identical.</p>
+<p>In <code>oomph-lib</code> we create periodic nodes by allowing two (or more) nodes to access some of the same internal data. One of the nodes should be regarded as the original and the other(s) are set to be its "periodic counterpart(s)" and hence access its internal data. The "periodic counterpart(s)" are created by calling the member function </p><div class="fragment"><div class="line">BoundaryNode::make_periodic(Node *<span class="keyword">const</span>&amp; node_pt)</div>
+</div><!-- fragment --><p> where the pointer to the original node is passed as the argument. Note that the required functionality imposes a slight storage overhead and so in <code>oomph-lib</code> we only allow BoundaryNodes to be made periodic.</p>
+<p>Here is a sketch of a 2D rectangular quad mesh. If this mesh is to be used in a problem with periodic boundary conditions in the horizontal direction (as in the above example), the pointer to node 3 on boundary 3 would have to be used when node 3 on boundary 1 is made periodic, etc. The appropriate commands are </p><div class="fragment"><div class="line"><span class="comment">//Get pointers to the two nodes that are to be &quot;connected&quot; via</span></div>
+<div class="line"><span class="comment">//a periodic boundary</span></div>
+<div class="line">Node* original_node_pt = mesh_pt()-&gt;boundary_node_pt(3,3);</div>
+<div class="line">Node* periodic_node_pt = mesh_pt()-&gt;boundary_node_pt(1,3);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Make the periodic_node_pt periodic the data from the original_node_pt</span></div>
+<div class="line">periodic_node_pt-&gt;make_periodic(original_node_pt);</div>
+</div><!-- fragment --><div class="image">
+<img src="periodic_mesh.gif" alt=""/>
+<div class="caption">
+Figure of a mesh that is periodic in the horizontal direction. </div></div>
+ <p>Although it is possible to make nodes periodic at any time, it is usually easier to determine which nodes should be "connected" during mesh construction. We therefore strongly recommend to implement periodic boundary conditions inside the mesh constructor. The <a href="../../../../src/meshes/rectangular_quadmesh.template.cc">source code</a> for the constructor of the</p>
+<div class="fragment"><div class="line">RectangularQuadMesh&lt;ELEMENT&gt;</div>
+</div><!-- fragment --><p>that we used in the above problem, illustrates a possible implementation.</p>
+<h2><a class="anchor" id="periodic_adapt"></a>
+Periodic boundaries in spatially adaptive computations</h2>
+<p>We note that the application of periodic boundary conditions in spatially adaptive computations is slightly more complicated because of the possible presence of hanging nodes on the periodic boundaries. We refer to <a href="../../../linear_elasticity/refineable_periodic_load/html/index.html">another tutorial</a> for a discussion of this aspect.</p>
+<hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Show that in the present problem the time-periodic solution can also be obtained without applying periodic boundary conditions. Show this mathematically and "by trial and error" (i.e. by changing the boolean flag that is passed to the mesh constructor). Explain why the number of unknowns increases when no periodic boundary conditions are applied.</li>
+<li>Confirm that the assignment of "history values" for the nodal positions in <code>set_initial_conditions()</code> is essential.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/rayleigh_channel/">demo_drivers/navier_stokes/rayleigh_channel/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/rayleigh_channel/rayleigh_channel.cc">demo_drivers/navier_stokes/rayleigh_channel/rayleigh_channel.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

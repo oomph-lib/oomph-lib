@@ -1,0 +1,53 @@
+\doxysection{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG.\+cc File Reference}
+\hypertarget{two__d__adv__diff__SUPG_8cc}{}\label{two__d__adv__diff__SUPG_8cc}\index{two\_d\_adv\_diff\_SUPG.cc@{two\_d\_adv\_diff\_SUPG.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvection\+Diffusion\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Advection\+Diffusion problem on rectangular domain, discretised with refineable 2D QAdvection\+Diffusion elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalPhysicalParameters}{Global\+Physical\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters\+: Unforced problem with boundary values corresponding to a steep tanh step profile oriented at 45 degrees across the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a6e1db5726436a705e9d400fedf914cef}{Global\+Physical\+Parameters\+::get\+\_\+boundary\+\_\+values}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Some "{}solution"{} for assignment of boundary values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{Global\+Physical\+Parameters\+::source\+\_\+function}} (const Vector$<$ double $>$ \&x\+\_\+vect, double \&source)
+\begin{DoxyCompactList}\small\item\em Zero source function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{Global\+Physical\+Parameters\+::wind\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind)
+\begin{DoxyCompactList}\small\item\em Wind. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Advection\+Diffusion problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobalPhysicalParameters_ab7011a8f93f2cbd3d45af00151aee3b2}{Global\+Physical\+Parameters\+::\+Peclet}} =200.\+0
+\begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalPhysicalParameters_aec7a344b74b10d835b331ef0dc6601da}{Global\+Physical\+Parameters\+::\+Alpha}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of step in boundary values. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalPhysicalParameters_af9a5a947d725f1f088db6a6423f2f3ef}{Global\+Physical\+Parameters\+::\+Tan\+Phi}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle of step in boundary values\+: 45 degrees. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{two__d__adv__diff__SUPG_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{two__d__adv__diff__SUPG_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{two\_d\_adv\_diff\_SUPG.cc@{two\_d\_adv\_diff\_SUPG.cc}!main@{main}}
+\index{main@{main}!two\_d\_adv\_diff\_SUPG.cc@{two\_d\_adv\_diff\_SUPG.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Advection\+Diffusion problem. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_source_l00317}{317}} of file \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_source_l00294}{SUPGAdvection\+Diffusion\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_source_l00067}{Global\+Physical\+Parameters\+::source\+\_\+function()}}, and \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_source_l00073}{Global\+Physical\+Parameters\+::wind\+\_\+function()}}.
+

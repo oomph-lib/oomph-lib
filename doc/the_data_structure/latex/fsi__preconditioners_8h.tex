@@ -1,0 +1,14 @@
+\doxysection{fsi\+\_\+preconditioners.\+h File Reference}
+\hypertarget{fsi__preconditioners_8h}{}\label{fsi__preconditioners_8h}\index{fsi\_preconditioners.h@{fsi\_preconditioners.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1FSIPreconditioner}{oomph\+::\+FSIPreconditioner}}
+\begin{DoxyCompactList}\small\item\em FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner} is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an "{}exact"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SimpleFSIPreconditioner}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Blocks are then re-\/assembled into one global matrix and solved with a direct solver (Super\+LU in its incarnation as an exact preconditioner). By default we retain the fluid on solid off diagonal blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

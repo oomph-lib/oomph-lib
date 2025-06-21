@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: CylinderAndInterfaceDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classCylinderAndInterfaceDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">CylinderAndInterfaceDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for CylinderAndInterfaceDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classCylinderAndInterfaceDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2025ff5337b4cb7889c26109857ed521" id="r_a2025ff5337b4cb7889c26109857ed521"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a2025ff5337b4cb7889c26109857ed521">CylinderAndInterfaceDomain</a> (<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;Length, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;Height)</td></tr>
+<tr class="separator:a2025ff5337b4cb7889c26109857ed521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa204e83ef6332f121123465f4167d341" id="r_aa204e83ef6332f121123465f4167d341"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#aa204e83ef6332f121123465f4167d341">~CylinderAndInterfaceDomain</a> ()</td></tr>
+<tr class="separator:aa204e83ef6332f121123465f4167d341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab40651417c703e6b3dc592198c7497" id="r_acab40651417c703e6b3dc592198c7497"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#acab40651417c703e6b3dc592198c7497">linear_interpolate</a> (<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Left</a>[2], <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Right</a>[2], <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">s</a>, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">f</a>)</td></tr>
+<tr class="separator:acab40651417c703e6b3dc592198c7497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6afdef0d863b2833884aed2f571eeb79" id="r_a6afdef0d863b2833884aed2f571eeb79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a6afdef0d863b2833884aed2f571eeb79">macro_element_boundary</a> (<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">time</a>, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">m</a>, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">direction</a>, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">s</a>, <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;<a class="el" href="classRefineableCylinderAndInterfaceMesh.html">f</a>)</td></tr>
+<tr class="separator:a6afdef0d863b2833884aed2f571eeb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0b5aefe768267a1dff936ab491bee938" id="r_a0b5aefe768267a1dff936ab491bee938"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a0b5aefe768267a1dff936ab491bee938">centre_x</a></td></tr>
+<tr class="separator:a0b5aefe768267a1dff936ab491bee938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac461297e0b08287a1909f245569c77f0" id="r_ac461297e0b08287a1909f245569c77f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#ac461297e0b08287a1909f245569c77f0">centre_y</a></td></tr>
+<tr class="separator:ac461297e0b08287a1909f245569c77f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a27c21e714221edda1d21995f941e74e3" id="r_a27c21e714221edda1d21995f941e74e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a27c21e714221edda1d21995f941e74e3">Lower_left</a> [2]</td></tr>
+<tr class="separator:a27c21e714221edda1d21995f941e74e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04206f6c72189356d5eecf32b81595f4" id="r_a04206f6c72189356d5eecf32b81595f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a04206f6c72189356d5eecf32b81595f4">Lower_right</a> [2]</td></tr>
+<tr class="separator:a04206f6c72189356d5eecf32b81595f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5285785212f1cbcfb3910e87421d831c" id="r_a5285785212f1cbcfb3910e87421d831c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a5285785212f1cbcfb3910e87421d831c">Lower_mid_left</a> [2]</td></tr>
+<tr class="separator:a5285785212f1cbcfb3910e87421d831c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a390ef76333ff22e7331b37ac7d5412bb" id="r_a390ef76333ff22e7331b37ac7d5412bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a390ef76333ff22e7331b37ac7d5412bb">Lower_mid_right</a> [2]</td></tr>
+<tr class="separator:a390ef76333ff22e7331b37ac7d5412bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad3d09d983dfcd5cc2a2b4c0d3d8b62" id="r_a2ad3d09d983dfcd5cc2a2b4c0d3d8b62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a2ad3d09d983dfcd5cc2a2b4c0d3d8b62">Upper_left</a> [2]</td></tr>
+<tr class="separator:a2ad3d09d983dfcd5cc2a2b4c0d3d8b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b1a618cc0116816b5460f00f3875a6" id="r_a87b1a618cc0116816b5460f00f3875a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a87b1a618cc0116816b5460f00f3875a6">Upper_right</a> [2]</td></tr>
+<tr class="separator:a87b1a618cc0116816b5460f00f3875a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c924b854c98cb5a45ba2d1af43aa46" id="r_a01c924b854c98cb5a45ba2d1af43aa46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a01c924b854c98cb5a45ba2d1af43aa46">Upper_mid_left</a> [2]</td></tr>
+<tr class="separator:a01c924b854c98cb5a45ba2d1af43aa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb8019b28889f581f79541d571fb6386" id="r_afb8019b28889f581f79541d571fb6386"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#afb8019b28889f581f79541d571fb6386">Upper_mid_right</a> [2]</td></tr>
+<tr class="separator:afb8019b28889f581f79541d571fb6386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389bb3200199cf6098461f884e1b4d09" id="r_a389bb3200199cf6098461f884e1b4d09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a389bb3200199cf6098461f884e1b4d09">Lower_centre_left</a> [2]</td></tr>
+<tr class="separator:a389bb3200199cf6098461f884e1b4d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f1363c5343672e04be3b9f3285b0a25" id="r_a1f1363c5343672e04be3b9f3285b0a25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a1f1363c5343672e04be3b9f3285b0a25">Lower_centre_right</a> [2]</td></tr>
+<tr class="separator:a1f1363c5343672e04be3b9f3285b0a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a231d89466e433b65d0a6fd74b29b4609" id="r_a231d89466e433b65d0a6fd74b29b4609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a231d89466e433b65d0a6fd74b29b4609">Upper_centre_left</a> [2]</td></tr>
+<tr class="separator:a231d89466e433b65d0a6fd74b29b4609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21972e49d0da0a5c1cbb89422b8bcfc3" id="r_a21972e49d0da0a5c1cbb89422b8bcfc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#a21972e49d0da0a5c1cbb89422b8bcfc3">Upper_centre_right</a> [2]</td></tr>
+<tr class="separator:a21972e49d0da0a5c1cbb89422b8bcfc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0afda5d24ea33ff58957731e5b7dfd7" id="r_aa0afda5d24ea33ff58957731e5b7dfd7"><td class="memItemLeft" align="right" valign="top">GeomObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCylinderAndInterfaceDomain.html#aa0afda5d24ea33ff58957731e5b7dfd7">Cylinder_pt</a></td></tr>
+<tr class="memdesc:aa0afda5d24ea33ff58957731e5b7dfd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geometric object that represents the rotating cylinder.  <br /></td></tr>
+<tr class="separator:aa0afda5d24ea33ff58957731e5b7dfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00098">98</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2025ff5337b4cb7889c26109857ed521" name="a2025ff5337b4cb7889c26109857ed521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2025ff5337b4cb7889c26109857ed521">&#9670;&#160;</a></span>CylinderAndInterfaceDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CylinderAndInterfaceDomain::CylinderAndInterfaceDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>Length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>Height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00117">117</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__interface_8cc_source.html#l00101">centre_x</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00101">centre_y</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00112">Cylinder_pt</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00107">Lower_centre_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00107">Lower_centre_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_mid_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_mid_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00108">Upper_centre_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00108">Upper_centre_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_mid_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_mid_right</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_right</a>.</p>
+
+</div>
+</div>
+<a id="aa204e83ef6332f121123465f4167d341" name="aa204e83ef6332f121123465f4167d341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa204e83ef6332f121123465f4167d341">&#9670;&#160;</a></span>~CylinderAndInterfaceDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CylinderAndInterfaceDomain::~CylinderAndInterfaceDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00189">189</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="acab40651417c703e6b3dc592198c7497" name="acab40651417c703e6b3dc592198c7497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab40651417c703e6b3dc592198c7497">&#9670;&#160;</a></span>linear_interpolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">void</a> CylinderAndInterfaceDomain::linear_interpolate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td>
+          <td class="paramname"><em>Left</em>[2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a>&#160;</td>
+          <td class="paramname"><em>Right</em>[2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00192">192</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6afdef0d863b2833884aed2f571eeb79" name="a6afdef0d863b2833884aed2f571eeb79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6afdef0d863b2833884aed2f571eeb79">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">void</a> CylinderAndInterfaceDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">const</a> <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">Vector</a>&lt; <a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00204">204</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="adaptive__interface_8cc_source.html#l00112">Cylinder_pt</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00192">linear_interpolate()</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00107">Lower_centre_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00107">Lower_centre_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_mid_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_mid_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00105">Lower_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00108">Upper_centre_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00108">Upper_centre_right</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_mid_left</a>, <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_mid_right</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00106">Upper_right</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0b5aefe768267a1dff936ab491bee938" name="a0b5aefe768267a1dff936ab491bee938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b5aefe768267a1dff936ab491bee938">&#9670;&#160;</a></span>centre_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::centre_x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00101">101</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l01137">RefineableRotatingCylinderProblem&lt; ELEMENT &gt;::set_boundary_conditions()</a>.</p>
+
+</div>
+</div>
+<a id="ac461297e0b08287a1909f245569c77f0" name="ac461297e0b08287a1909f245569c77f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac461297e0b08287a1909f245569c77f0">&#9670;&#160;</a></span>centre_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::centre_y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00101">101</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l01137">RefineableRotatingCylinderProblem&lt; ELEMENT &gt;::set_boundary_conditions()</a>.</p>
+
+</div>
+</div>
+<a id="aa0afda5d24ea33ff58957731e5b7dfd7" name="aa0afda5d24ea33ff58957731e5b7dfd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0afda5d24ea33ff58957731e5b7dfd7">&#9670;&#160;</a></span>Cylinder_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GeomObject* CylinderAndInterfaceDomain::Cylinder_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Geometric object that represents the rotating cylinder. </p>
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00112">112</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a389bb3200199cf6098461f884e1b4d09" name="a389bb3200199cf6098461f884e1b4d09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a389bb3200199cf6098461f884e1b4d09">&#9670;&#160;</a></span>Lower_centre_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_centre_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00107">107</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1f1363c5343672e04be3b9f3285b0a25" name="a1f1363c5343672e04be3b9f3285b0a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f1363c5343672e04be3b9f3285b0a25">&#9670;&#160;</a></span>Lower_centre_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_centre_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00107">107</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a27c21e714221edda1d21995f941e74e3" name="a27c21e714221edda1d21995f941e74e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27c21e714221edda1d21995f941e74e3">&#9670;&#160;</a></span>Lower_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00105">105</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a5285785212f1cbcfb3910e87421d831c" name="a5285785212f1cbcfb3910e87421d831c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5285785212f1cbcfb3910e87421d831c">&#9670;&#160;</a></span>Lower_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_mid_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00105">105</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a390ef76333ff22e7331b37ac7d5412bb" name="a390ef76333ff22e7331b37ac7d5412bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a390ef76333ff22e7331b37ac7d5412bb">&#9670;&#160;</a></span>Lower_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_mid_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00105">105</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a04206f6c72189356d5eecf32b81595f4" name="a04206f6c72189356d5eecf32b81595f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04206f6c72189356d5eecf32b81595f4">&#9670;&#160;</a></span>Lower_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Lower_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00105">105</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a231d89466e433b65d0a6fd74b29b4609" name="a231d89466e433b65d0a6fd74b29b4609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a231d89466e433b65d0a6fd74b29b4609">&#9670;&#160;</a></span>Upper_centre_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_centre_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00108">108</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a21972e49d0da0a5c1cbb89422b8bcfc3" name="a21972e49d0da0a5c1cbb89422b8bcfc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21972e49d0da0a5c1cbb89422b8bcfc3">&#9670;&#160;</a></span>Upper_centre_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_centre_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00108">108</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a2ad3d09d983dfcd5cc2a2b4c0d3d8b62" name="a2ad3d09d983dfcd5cc2a2b4c0d3d8b62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad3d09d983dfcd5cc2a2b4c0d3d8b62">&#9670;&#160;</a></span>Upper_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00106">106</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a01c924b854c98cb5a45ba2d1af43aa46" name="a01c924b854c98cb5a45ba2d1af43aa46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01c924b854c98cb5a45ba2d1af43aa46">&#9670;&#160;</a></span>Upper_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_mid_left[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00106">106</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="afb8019b28889f581f79541d571fb6386" name="afb8019b28889f581f79541d571fb6386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb8019b28889f581f79541d571fb6386">&#9670;&#160;</a></span>Upper_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_mid_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00106">106</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a87b1a618cc0116816b5460f00f3875a6" name="a87b1a618cc0116816b5460f00f3875a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b1a618cc0116816b5460f00f3875a6">&#9670;&#160;</a></span>Upper_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableCylinderAndInterfaceMesh.html">double</a> CylinderAndInterfaceDomain::Upper_right[2]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="adaptive__interface_8cc_source.html#l00106">106</a> of file <a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="adaptive__interface_8cc_source.html#l00117">CylinderAndInterfaceDomain()</a>, and <a class="el" href="adaptive__interface_8cc_source.html#l00204">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="adaptive__interface_8cc_source.html">adaptive_interface.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:52
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

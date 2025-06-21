@@ -1,0 +1,16 @@
+\doxysection{tree.\+h File Reference}
+\hypertarget{tree_8h}{}\label{tree_8h}\index{tree.h@{tree.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Tree}{oomph\+::\+Tree}}
+\begin{DoxyCompactList}\small\item\em A generalised tree base class that abstracts the common functionality between the quad-\/ and octrees used in mesh adaptation in two and three dimensions, respectively. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TreeRoot}{oomph\+::\+Tree\+Root}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1TreeRoot}{Tree\+Root} is a \doxylink{classoomph_1_1Tree}{Tree} that forms the root of a (recursive) tree. The "{}root node"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \doxylink{classoomph_1_1TreeForest}{Tree\+Forest}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TreeForest}{oomph\+::\+Tree\+Forest}}
+\begin{DoxyCompactList}\small\item\em A \doxylink{classoomph_1_1TreeForest}{Tree\+Forest} consists of a collection of Tree\+Roots. Each member tree can have neighbours in various enumerated directions (e.\+g. S/\+W/\+N/E for a \doxylink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}) and the orientation of their compasses can differ, allowing for complex, unstructured meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

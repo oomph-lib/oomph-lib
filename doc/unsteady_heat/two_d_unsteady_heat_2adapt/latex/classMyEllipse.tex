@@ -1,0 +1,234 @@
+\doxysection{My\+Ellipse Class Reference}
+\hypertarget{classMyEllipse}{}\label{classMyEllipse}\index{MyEllipse@{MyEllipse}}
+
+
+Oscillating ellipse.  
+
+
+Inheritance diagram for My\+Ellipse\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMyEllipse}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMyEllipse_aaa00984813af171e611e420eb3433653}{My\+Ellipse}} (const double \&a, const double \&b, const double \&a\+\_\+hat, const double \&b\+\_\+hat, const double \&period, Time \texorpdfstring{$\ast$}{*}time\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass half axes, amplitudes of their variation, period of oscillation and pointer to time object. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}{\texorpdfstring{$\sim$}{\string~}\+My\+Ellipse}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Current position vector to material point at Lagrangian coordinate xi. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyEllipse_a93f75bf33969037e35d779738a8493f5}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classMyEllipse_aa2a0efd0a39f9d4fc307a6ff011682ed}{A}}
+\begin{DoxyCompactList}\small\item\em x-\/half axis \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classMyEllipse_a8f991996b9040fe94b942eab7e51f0af}{B}}
+\begin{DoxyCompactList}\small\item\em y-\/half axis \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd}{A\+\_\+hat}}
+\begin{DoxyCompactList}\small\item\em Amplitude of variation in x-\/half axis. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classMyEllipse_a39d06488447d80f16b80ed8915edf3e3}{B\+\_\+hat}}
+\begin{DoxyCompactList}\small\item\em Amplitude of variation in y-\/half axis. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f}{T}}
+\begin{DoxyCompactList}\small\item\em Period of oscillation. \end{DoxyCompactList}\item 
+Time \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}{Time\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to time object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Oscillating ellipse. 
+
+\[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi)  \] \[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi)  \] 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00049}{49}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMyEllipse_aaa00984813af171e611e420eb3433653}\label{classMyEllipse_aaa00984813af171e611e420eb3433653} 
+\index{MyEllipse@{MyEllipse}!MyEllipse@{MyEllipse}}
+\index{MyEllipse@{MyEllipse}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{MyEllipse()}{MyEllipse()}}
+{\footnotesize\ttfamily My\+Ellipse\+::\+My\+Ellipse (\begin{DoxyParamCaption}\item[{const double \&}]{a,  }\item[{const double \&}]{b,  }\item[{const double \&}]{a\+\_\+hat,  }\item[{const double \&}]{b\+\_\+hat,  }\item[{const double \&}]{period,  }\item[{Time \texorpdfstring{$\ast$}{*}}]{time\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass half axes, amplitudes of their variation, period of oscillation and pointer to time object. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00056}{56}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+\Hypertarget{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}\label{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05} 
+\index{MyEllipse@{MyEllipse}!````~MyEllipse@{\texorpdfstring{$\sim$}{\string~}MyEllipse}}
+\index{````~MyEllipse@{\texorpdfstring{$\sim$}{\string~}MyEllipse}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MyEllipse()}{\string~MyEllipse()}}
+{\footnotesize\ttfamily virtual My\+Ellipse\+::\texorpdfstring{$\sim$}{\string~}\+My\+Ellipse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00063}{63}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMyEllipse_a93f75bf33969037e35d779738a8493f5}\label{classMyEllipse_a93f75bf33969037e35d779738a8493f5} 
+\index{MyEllipse@{MyEllipse}!position@{position}}
+\index{position@{position}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void My\+Ellipse\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{83}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00099}{A}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00105}{A\+\_\+hat}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00102}{B}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00108}{B\+\_\+hat}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00111}{T}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00114}{Time\+\_\+pt}}.
+
+\Hypertarget{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}\label{classMyEllipse_a7b139a2f4564005773c83325f2414e3e} 
+\index{MyEllipse@{MyEllipse}!position@{position}}
+\index{position@{position}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void My\+Ellipse\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Current position vector to material point at Lagrangian coordinate xi. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{67}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00099}{A}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00105}{A\+\_\+hat}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00102}{B}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00108}{B\+\_\+hat}}, \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00111}{T}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00114}{Time\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classMyEllipse_aa2a0efd0a39f9d4fc307a6ff011682ed}\label{classMyEllipse_aa2a0efd0a39f9d4fc307a6ff011682ed} 
+\index{MyEllipse@{MyEllipse}!A@{A}}
+\index{A@{A}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily double My\+Ellipse\+::A\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+x-\/half axis 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00099}{99}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+\Hypertarget{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd}\label{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd} 
+\index{MyEllipse@{MyEllipse}!A\_hat@{A\_hat}}
+\index{A\_hat@{A\_hat}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{A\_hat}{A\_hat}}
+{\footnotesize\ttfamily double My\+Ellipse\+::\+A\+\_\+hat\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Amplitude of variation in x-\/half axis. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00105}{105}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+\Hypertarget{classMyEllipse_a8f991996b9040fe94b942eab7e51f0af}\label{classMyEllipse_a8f991996b9040fe94b942eab7e51f0af} 
+\index{MyEllipse@{MyEllipse}!B@{B}}
+\index{B@{B}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily double My\+Ellipse\+::B\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+y-\/half axis 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00102}{102}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+\Hypertarget{classMyEllipse_a39d06488447d80f16b80ed8915edf3e3}\label{classMyEllipse_a39d06488447d80f16b80ed8915edf3e3} 
+\index{MyEllipse@{MyEllipse}!B\_hat@{B\_hat}}
+\index{B\_hat@{B\_hat}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{B\_hat}{B\_hat}}
+{\footnotesize\ttfamily double My\+Ellipse\+::\+B\+\_\+hat\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Amplitude of variation in y-\/half axis. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00108}{108}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+\Hypertarget{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f}\label{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f} 
+\index{MyEllipse@{MyEllipse}!T@{T}}
+\index{T@{T}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{T}{T}}
+{\footnotesize\ttfamily double My\+Ellipse\+::T\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Period of oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00111}{111}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+\Hypertarget{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}\label{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953} 
+\index{MyEllipse@{MyEllipse}!Time\_pt@{Time\_pt}}
+\index{Time\_pt@{Time\_pt}!MyEllipse@{MyEllipse}}
+\doxysubsubsection{\texorpdfstring{Time\_pt}{Time\_pt}}
+{\footnotesize\ttfamily Time\texorpdfstring{$\ast$}{*} My\+Ellipse\+::\+Time\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to time object. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00114}{114}} of file \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00083}{position()}}, and \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc_source_l00067}{position()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__unsteady__heat__2adapt_8cc}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt.\+cc}}\end{DoxyCompactItemize}

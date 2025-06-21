@@ -1,0 +1,44 @@
+\doxysection{elastic\+\_\+poisson.\+cc File Reference}
+\hypertarget{elastic__poisson_8cc}{}\label{elastic__poisson_8cc}\index{elastic\_poisson.cc@{elastic\_poisson.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable fish mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Solve Poisson equation on deforming fish-\/shaped domain. Mesh update via pseudo-\/elasticity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{namespaceConstSourceForPoisson_a40ef79083874b58ed42b4df2ca0f4c10}{Const\+Source\+For\+Poisson\+::get\+\_\+source}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{const}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} $>$ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{x}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{double}} \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{source}})
+\begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} \mbox{\hyperlink{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{argc}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for simple elastic problem. If there are any command line arguments, we regard this as a validation run and perform only a single step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{elastic\_poisson.cc@{elastic\_poisson.cc}!main@{main}}
+\index{main@{main}!elastic\_poisson.cc@{elastic\_poisson.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{int}}}]{argc,  }\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for simple elastic problem. If there are any command line arguments, we regard this as a validation run and perform only a single step. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00463}{463}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00161}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00417}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::run()}}.
+

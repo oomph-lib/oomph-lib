@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>actions_after_adapt()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#aae7225db18ad5c8429c0eb96fa37b585">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_after_newton_solve()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#a53e7d18d9d748388160d6c4106f1d493">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_before_adapt()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#a2e9f335e8680b0f2338b579e37e9d38a">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_before_newton_solve()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#ad2184bb8d7391da21bec62d4aacf5c20">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>Ampl&#160;:&#160;<a class="el" href="classWarpedLine.html#ac44286e84ff213e67e0f247d00ad50af">WarpedLine</a></li>
+<li>ampl()&#160;:&#160;<a class="el" href="classWarpedLine.html#aea69e0dccb0af23ffeb8cd98c0aa6853">WarpedLine</a></li>
+</ul>
+
+
+<h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
+<li>create_lagrange_multiplier_elements()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#adf4798f13809f5b2f2be6e3d63421edc">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>delete_lagrange_multiplier_elements()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#a0204ae947ffd18ed3d7690395901a1e8">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>Doc_info&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#aef72ea29567df89d82fe93235f1907f8">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>doc_solution()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#abc58821d6b49cd9773dcd90b240aab6e">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>FaceGeometry()&#160;:&#160;<a class="el" href="classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4.html#a3f79ef40a41543c9d96ef84aecc202f3">oomph::FaceGeometry&lt; PseudoElasticBulkElement&lt; ELEMENT &gt; &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
+<li>get_dof_numbers_for_unknowns()&#160;:&#160;<a class="el" href="classoomph_1_1PseudoElasticBulkElement.html#a8f1dc2011100324953293470a18f3080">oomph::PseudoElasticBulkElement&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
+<li>Lagrange_multiplier_mesh_pt&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#abb87cb0933297f449af7ceac7fe2bd77">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>ndof_types()&#160;:&#160;<a class="el" href="classoomph_1_1PseudoElasticBulkElement.html#a18674d52b96db8800d31e89ffd465175">oomph::PseudoElasticBulkElement&lt; ELEMENT &gt;</a></li>
+<li>ngeom_data()&#160;:&#160;<a class="el" href="classWarpedLine.html#aa4157cd4ff2e80f33b106b7ed4e4d804">WarpedLine</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>operator()()&#160;:&#160;<a class="el" href="classFiniteElementComp.html#a23bc6293da4cbec67f9e43653778440f">FiniteElementComp</a></li>
+<li>operator=()&#160;:&#160;<a class="el" href="classWarpedLine.html#ae2ee796906c0caa7e94f277f6fc499e1">WarpedLine</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>position()&#160;:&#160;<a class="el" href="classWarpedLine.html#aaeef89818148ee3a305c561e91c8851d">WarpedLine</a></li>
+<li>PrescribedBoundaryDisplacementProblem()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#ac0c8b47eeb75ba2c618757e6b56e62dc">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>PseudoElasticBulkElement()&#160;:&#160;<a class="el" href="classoomph_1_1PseudoElasticBulkElement.html#a38c03edd9639522e713ef9bf679d7e5a">oomph::PseudoElasticBulkElement&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>solid_mesh_pt()&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#a4fd215944a513b61ff9e9ea328abfa67">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+<li>Solid_mesh_pt&#160;:&#160;<a class="el" href="classPrescribedBoundaryDisplacementProblem.html#a6d2cdbd9ae1077c80831d938bdb72a61">PrescribedBoundaryDisplacementProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
+<li>WarpedLine()&#160;:&#160;<a class="el" href="classWarpedLine.html#a9d80dca2c907b426f7130579c94f3310">WarpedLine</a></li>
+</ul>
+
+
+<h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
+<li>~WarpedLine()&#160;:&#160;<a class="el" href="classWarpedLine.html#a4cb07fb7f06d42e2008afe65d8750cad">WarpedLine</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+\doxysection{implicit\+\_\+midpoint\+\_\+rule.\+h File Reference}
+\hypertarget{implicit__midpoint__rule_8h}{}\label{implicit__midpoint__rule_8h}\index{implicit\_midpoint\_rule.h@{implicit\_midpoint\_rule.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1IMRBase}{oomph\+::\+IMRBase}}
+\begin{DoxyCompactList}\small\item\em Implicit midpoint rule base class for the two implementations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1IMR}{oomph\+::\+IMR}}
+\begin{DoxyCompactList}\small\item\em The "{}real"{} implementation of the implicit midpoint rule. Implemented by calculation of residuals etc. at half step. This requires non-\/trivial modifications to the element\textquotesingle{}s residual and Jacobian calculation functions to interpolate values to the midpoint. As such \doxylink{classoomph_1_1IMRByBDF}{IMRBy\+BDF} should be preferred. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1IMRByBDF}{oomph\+::\+IMRBy\+BDF}}
+\begin{DoxyCompactList}\small\item\em Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \doxylink{classoomph_1_1BDF}{BDF} methods work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

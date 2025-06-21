@@ -1,0 +1,16 @@
+\doxysection{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h File Reference}
+\hypertarget{geom__obj__with__boundary_8h}{}\label{geom__obj__with__boundary_8h}\index{geom\_obj\_with\_boundary.h@{geom\_obj\_with\_boundary.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries}}
+\begin{DoxyCompactList}\small\item\em Base class for upgraded disk-\/like \doxylink{classoomph_1_1GeomObject}{Geom\+Object} (i.\+e. 2D surface in 3D space) with specification of boundaries. The \doxylink{classoomph_1_1GeomObject}{Geom\+Object}\textquotesingle{}s position(...) function computes the 3D (Eulerian) position vector r as a function of the 2D intrinsic (Lagrangian) coordinates, zeta, without reference to any boundaries. This class specifies the boundaries by specifying a mapping from a 1D intrinsic boundary coordinate, zeta\+\_\+bound, to the 2D intrinsic (Lagrangian) coordinates, zeta. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{oomph\+::\+Warped\+Circular\+Disk}}
+\begin{DoxyCompactList}\small\item\em Warped disk in 3d\+: zeta\mbox{[}0\mbox{]}=x; zeta\mbox{[}1\mbox{]}=y (so it doesn\textquotesingle{}t have coordinate singularities), with specification of two boundaries (b=0,1) that turn the whole thing into a circular disk. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1WarpedCircularDiskWithAnnularInternalBoundary}{oomph\+::\+Warped\+Circular\+Disk\+With\+Annular\+Internal\+Boundary}}
+\begin{DoxyCompactList}\small\item\em Warped disk in 3d\+: zeta\mbox{[}0\mbox{]}=x; zeta\mbox{[}1\mbox{]}=y (so it doesn\textquotesingle{}t have coordinate singularities), with specification of two boundaries (b=0,1) that turn the whole thing into a circular disk. In addition has two internal boundaries (b=2,3), a distance h\+\_\+annulus from the outer edge. Annual (outer) region is region 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

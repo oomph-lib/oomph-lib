@@ -1,0 +1,259 @@
+\doxysection{oomph\+::Quad\+From\+Triangle\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1QuadFromTriangleMesh}{}\label{classoomph_1_1QuadFromTriangleMesh}\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+
+
+Quad mesh built on top of triangle scaffold mesh coming from the triangle mesh generator Triangle. \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ http\+://www.\+cs.\+cmu.\+edu/\texorpdfstring{$\sim$}{\string~}quake/triangle.\+html}}.  
+
+
+
+
+{\ttfamily \#include $<$quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Quad\+From\+Triangle\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.027027cm]{classoomph_1_1QuadFromTriangleMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_af94e552be1bd35ec03eed1bcfcbc40af}{Quad\+From\+Triangle\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{poly\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\+\_\+attributes}}=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{false}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries}}=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{true}})
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{triangle\+\_\+mesh\+\_\+parameters}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Build mesh, based on the specifications on \doxylink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}. All the actual work is done in Unstructured\+Two\+DMesh\+Geometry\+Base. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1}{generic\+\_\+constructor}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&outer\+\_\+boundary\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{internal\+\_\+polygon\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Open\+Curve}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{open\+\_\+polylines\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&element\+\_\+area, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ $>$ \&extra\+\_\+holes\+\_\+coordinates, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ $>$ \&regions\+\_\+coordinates, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{regions\+\_\+areas}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\+\_\+attributes}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&refine\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{refine\+\_\+internal\+\_\+boundary}})
+\begin{DoxyCompactList}\small\item\em A general-\/purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_af681a42982dd2684f05f522f1b3508ab}{Quad\+From\+Triangle\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{dummy}})=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a7ce803f87a4ee0188cb6780bef97ca28}{operator=}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}} \&)=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_aa8737e7a7e845cab4fb6fd82c8f3506d}{\texorpdfstring{$\sim$}{\string~}\+Quad\+From\+Triangle\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ae4146d9e92cce365c292f92fcdc88c47}{build\+\_\+from\+\_\+scaffold}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Scaffold\+Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{tmp\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{use\+\_\+attributes}})
+\begin{DoxyCompactList}\small\item\em Build the quad mesh from the given scaffold mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_a4a4b155283407ae37a804d258ac8c6dd}{Time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Timestepper used to build elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1}{Use\+\_\+attributes}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$}
+Quad mesh built on top of triangle scaffold mesh coming from the triangle mesh generator Triangle. \href{http://www.cs.cmu.edu/~quake/triangle.html}{\texttt{ http\+://www.\+cs.\+cmu.\+edu/\texorpdfstring{$\sim$}{\string~}quake/triangle.\+html}}. 
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00070}{70}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_af94e552be1bd35ec03eed1bcfcbc40af}\label{classoomph_1_1QuadFromTriangleMesh_af94e552be1bd35ec03eed1bcfcbc40af} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
+\index{QuadFromTriangleMesh@{QuadFromTriangleMesh}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuadFromTriangleMesh()}{QuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00075}{75}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98}\label{classoomph_1_1QuadFromTriangleMesh_ab6fd5b49a1c1a4b29fc000953b732b98} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
+\index{QuadFromTriangleMesh@{QuadFromTriangleMesh}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuadFromTriangleMesh()}{QuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&}]{node\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&}]{element\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \&}]{poly\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{use\+\_\+attributes = {\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{false}}},  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{allow\+\_\+automatic\+\_\+creation\+\_\+of\+\_\+vertices\+\_\+on\+\_\+boundaries = {\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{true}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with the input files. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00088}{88}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source_l00072}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00561}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Time\+\_\+stepper\+\_\+pt}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00565}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51}\label{classoomph_1_1QuadFromTriangleMesh_a78f9c12882d4554e4484255640b6bf51} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
+\index{QuadFromTriangleMesh@{QuadFromTriangleMesh}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuadFromTriangleMesh()}{QuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}} \&}]{triangle\+\_\+mesh\+\_\+parameters,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Build mesh, based on the specifications on \doxylink{classoomph_1_1TriangleMeshParameters}{Triangle\+Mesh\+Parameters}. All the actual work is done in Unstructured\+Two\+DMesh\+Geometry\+Base. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00133}{133}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00368}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor()}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00561}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Time\+\_\+stepper\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_af681a42982dd2684f05f522f1b3508ab}\label{classoomph_1_1QuadFromTriangleMesh_af681a42982dd2684f05f522f1b3508ab} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!QuadFromTriangleMesh@{QuadFromTriangleMesh}}
+\index{QuadFromTriangleMesh@{QuadFromTriangleMesh}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuadFromTriangleMesh()}{QuadFromTriangleMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Quad\+From\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_aa8737e7a7e845cab4fb6fd82c8f3506d}\label{classoomph_1_1QuadFromTriangleMesh_aa8737e7a7e845cab4fb6fd82c8f3506d} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!````~QuadFromTriangleMesh@{\texorpdfstring{$\sim$}{\string~}QuadFromTriangleMesh}}
+\index{````~QuadFromTriangleMesh@{\texorpdfstring{$\sim$}{\string~}QuadFromTriangleMesh}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QuadFromTriangleMesh()}{\string~QuadFromTriangleMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00524}{524}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_ae4146d9e92cce365c292f92fcdc88c47}\label{classoomph_1_1QuadFromTriangleMesh_ae4146d9e92cce365c292f92fcdc88c47} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!build\_from\_scaffold@{build\_from\_scaffold}}
+\index{build\_from\_scaffold@{build\_from\_scaffold}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_from\_scaffold()}{build\_from\_scaffold()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::build\+\_\+from\+\_\+scaffold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Scaffold\+Mesh}} \texorpdfstring{$\ast$}{*}}]{tmp\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{use\+\_\+attributes }\end{DoxyParamCaption})}
+
+
+
+Build the quad mesh from the given scaffold mesh. 
+
+Build the full mesh with the help of the scaffold mesh coming from the triangle mesh generator, Triangle. To build this quad element based mesh we make use of the fact that a triangle element can be split as shown in the diagram below\+:
+
+\begin{DoxyVerb}             N2
+            | |                 N0 : 1st scaffold element node
+           |   |                N1 : 2nd scaffold element node
+          |     |               N2 : 3rd scaffold element node
+         |       |
+      C |   Q_2   | B           Edge 0 : N0 --> N1
+       | |       | |            Edge 1 : N1 --> N2
+      |   |     |   |           Edge 2 : N2 --> N0
+     |     |   |     |
+    |       | |       |         A : Midpoint of edge 0
+   |   Q_0   |   Q_1   |        B : Midpoint of edge 1
+  |          |          |       C : Midpoint of edge 2
+ |           |           |
+N0 __________|__________ N1
+             A
+\end{DoxyVerb}
+ The intersection of all three quad elements is the centroid. Using this splitting, the subsequent mesh will consist of quadrilaterals whose shape which depend on the structure of the underlying mesh. 
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source_l00072}{72}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+Referenced by \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00368}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor()}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00088}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Quad\+From\+Triangle\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1}\label{classoomph_1_1QuadFromTriangleMesh_acc09586ae510ea1a6bd021bdc0424cc1} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!generic\_constructor@{generic\_constructor}}
+\index{generic\_constructor@{generic\_constructor}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{generic\_constructor()}{generic\_constructor()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::generic\+\_\+constructor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \&}]{internal\+\_\+polygon\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Triangle\+Mesh\+Open\+Curve}} \texorpdfstring{$\ast$}{*} $>$ \&}]{open\+\_\+polylines\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{element\+\_\+area,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ $>$ \&}]{extra\+\_\+holes\+\_\+coordinates,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ $>$ \&}]{regions\+\_\+coordinates,  }\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{regions\+\_\+areas,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{use\+\_\+attributes,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{refine\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&}]{refine\+\_\+internal\+\_\+boundary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A general-\/purpose construction function that builds the mesh once the different specific constructors have assembled the appropriate information. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00368}{368}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc_source_l00072}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00561}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{namespaceoomph_a3af531b221ad8fe56e4f9e3364435b87}{oomph\+::triangulate()}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00565}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Use\+\_\+attributes}}.
+
+
+
+Referenced by \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00133}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Quad\+From\+Triangle\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_a7ce803f87a4ee0188cb6780bef97ca28}\label{classoomph_1_1QuadFromTriangleMesh_a7ce803f87a4ee0188cb6780bef97ca28} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_a4a4b155283407ae37a804d258ac8c6dd}\label{classoomph_1_1QuadFromTriangleMesh_a4a4b155283407ae37a804d258ac8c6dd} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!Time\_stepper\_pt@{Time\_stepper\_pt}}
+\index{Time\_stepper\_pt@{Time\_stepper\_pt}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Time\_stepper\_pt}{Time\_stepper\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Time\+\_\+stepper\+\_\+pt}
+
+
+
+Timestepper used to build elements. 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00561}{561}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00368}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor()}}, \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00088}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Quad\+From\+Triangle\+Mesh()}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00133}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Quad\+From\+Triangle\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1}\label{classoomph_1_1QuadFromTriangleMesh_ac654f77f031a4126e6e2707d1fa7dad1} 
+\index{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}!Use\_attributes@{Use\_attributes}}
+\index{Use\_attributes@{Use\_attributes}!oomph::QuadFromTriangleMesh$<$ ELEMENT $>$@{oomph::QuadFromTriangleMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Use\_attributes}{Use\_attributes}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \mbox{\hyperlink{classoomph_1_1QuadFromTriangleMesh}{oomph\+::\+Quad\+From\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Use\+\_\+attributes}
+
+
+
+Boolean flag to indicate whether to use attributes or not (required for multidomain meshes) 
+
+
+
+Definition at line \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00565}{565}} of file \mbox{\hyperlink{quad__from__triangle__mesh_8h_source}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00368}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::generic\+\_\+constructor()}}, and \mbox{\hyperlink{quad__from__triangle__mesh_8h_source_l00088}{oomph\+::\+Quad\+From\+Triangle\+Mesh$<$ ELEMENT $>$\+::\+Quad\+From\+Triangle\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quad__from__triangle__mesh_8h}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{quad__from__triangle__mesh_8template_8cc}{quad\+\_\+from\+\_\+triangle\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

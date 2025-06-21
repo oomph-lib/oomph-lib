@@ -1,0 +1,409 @@
+\doxysection{Undeformed\+Wall Class Reference}
+\hypertarget{classUndeformedWall}{}\label{classUndeformedWall}\index{UndeformedWall@{UndeformedWall}}
+
+
+Undeformed wall is a steady, straight 1D line in 2D space.  
+
+
+Inheritance diagram for Undeformed\+Wall\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUndeformedWall}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{x0}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}{d2position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{x0}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{x0}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{x0}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{r}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}{X0}}
+\begin{DoxyCompactList}\small\item\em x position of the undeformed beam\textquotesingle{}s left end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}{H}}
+\begin{DoxyCompactList}\small\item\em Height of the undeformed wall above y=0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Undeformed wall is a steady, straight 1D line in 2D space. 
+
+\[ x = X_0 + \zeta \] \[ y = H \] 
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00096}{96}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a} 
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{UndeformedWall()}{UndeformedWall()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Undeformed\+Wall\+::\+Undeformed\+Wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{x0,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: arguments are the starting point and the height above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{103}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a} 
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{UndeformedWall()}{UndeformedWall()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Undeformed\+Wall\+::\+Undeformed\+Wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{x0,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: arguments are the starting point and the height above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00102}{102}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a} 
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{UndeformedWall()}{UndeformedWall()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Undeformed\+Wall\+::\+Undeformed\+Wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{x0,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: arguments are the starting point and the height above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00142}{142}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a} 
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{UndeformedWall()}{UndeformedWall()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Undeformed\+Wall\+::\+Undeformed\+Wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{x0,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: arguments are the starting point and the height above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00147}{147}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}\label{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{136}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00135}{135}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00175}{175}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00180}{180}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00122}{122}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
+
+\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00121}{121}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
+
+\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00161}{161}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
+
+\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00166}{166}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
+
+\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{111}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00122}{position()}}.
+
+\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00110}{110}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00150}{150}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00155}{155}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}\label{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef} 
+\index{UndeformedWall@{UndeformedWall}!H@{H}}
+\index{H@{H}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} Undeformed\+Wall\+::H\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of the undeformed wall above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{161}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{d2position()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{Undeformed\+Wall()}}.
+
+\Hypertarget{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}\label{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b} 
+\index{UndeformedWall@{UndeformedWall}!X0@{X0}}
+\index{X0@{X0}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{X0}{X0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} Undeformed\+Wall\+::\+X0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x position of the undeformed beam\textquotesingle{}s left end. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{158}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{d2position()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{Undeformed\+Wall()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__collapsible__channel_8cc}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}\item 
+\mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}\item 
+\mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}\item 
+\mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}\end{DoxyCompactItemize}

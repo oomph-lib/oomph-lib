@@ -1,0 +1,230 @@
+\doxysection{Two\+Mesh\+Flux\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classTwoMeshFluxPoissonProblem}{}\label{classTwoMeshFluxPoissonProblem}\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+
+
+2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter.  
+
+
+Inheritance diagram for Two\+Mesh\+Flux\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTwoMeshFluxPoissonProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTwoMeshFluxPoissonProblem_ace5a47aa61da5fd2a8761a16ffb3711c}{Two\+Mesh\+Flux\+Poisson\+Problem}} (Poisson\+Equations$<$ 2 $>$\+::\+Poisson\+Source\+Fct\+Pt source\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to source function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a03e83ef12db3bf5a1e015c3c3b11337c}{\texorpdfstring{$\sim$}{\string~}\+Two\+Mesh\+Flux\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a6320ad6d71f24a2d7e03a7bb7e691b31}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a520768a954d00d3972115ccf0b304854}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a9b3da753ba1d924b920e2e67779e7453}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a6729e6d9cf920e0880603fa9920ab28c}{create\+\_\+flux\+\_\+elements}} (const unsigned \&b, Mesh \texorpdfstring{$\ast$}{*}const \&bulk\+\_\+mesh\+\_\+pt, Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create Poisson flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_abd0718261b6c8586d5de35cfef2292d8}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a96b1ff6102eceb5ce432ac9197f68283}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}surface"{} mesh. \end{DoxyCompactList}\item 
+Poisson\+Equations$<$ 2 $>$\+::\+Poisson\+Source\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxPoissonProblem_a56a27b0dbf0f5975a4b9d37f3985c364}{Source\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to source function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$}
+2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00090}{90}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classTwoMeshFluxPoissonProblem_ace5a47aa61da5fd2a8761a16ffb3711c}\label{classTwoMeshFluxPoissonProblem_ace5a47aa61da5fd2a8761a16ffb3711c} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!TwoMeshFluxPoissonProblem@{TwoMeshFluxPoissonProblem}}
+\index{TwoMeshFluxPoissonProblem@{TwoMeshFluxPoissonProblem}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoMeshFluxPoissonProblem()}{TwoMeshFluxPoissonProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{\+::\+Two\+Mesh\+Flux\+Poisson\+Problem}} (\begin{DoxyParamCaption}\item[{Poisson\+Equations$<$ 2 $>$\+::\+Poisson\+Source\+Fct\+Pt}]{source\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to source function. 
+
+Constructor for Poisson problem\+: Pass pointer to source function. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00139}{139}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00122}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00333}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements()}}, \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00070}{Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary()}}, \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00128}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00125}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a03e83ef12db3bf5a1e015c3c3b11337c}\label{classTwoMeshFluxPoissonProblem_a03e83ef12db3bf5a1e015c3c3b11337c} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!````~TwoMeshFluxPoissonProblem@{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxPoissonProblem}}
+\index{````~TwoMeshFluxPoissonProblem@{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxPoissonProblem}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxPoissonProblem()}{\string~TwoMeshFluxPoissonProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00099}{99}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTwoMeshFluxPoissonProblem_a9b3da753ba1d924b920e2e67779e7453}\label{classTwoMeshFluxPoissonProblem_a9b3da753ba1d924b920e2e67779e7453} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00113}{113}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a520768a954d00d3972115ccf0b304854}\label{classTwoMeshFluxPoissonProblem_a520768a954d00d3972115ccf0b304854} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00239}{239}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00055}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a6729e6d9cf920e0880603fa9920ab28c}\label{classTwoMeshFluxPoissonProblem_a6729e6d9cf920e0880603fa9920ab28c} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!create\_flux\_elements@{create\_flux\_elements}}
+\index{create\_flux\_elements@{create\_flux\_elements}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_flux\_elements()}{create\_flux\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create Poisson flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
+
+Create Poisson Flux Elements on the b-\/th boundary of the Mesh object pointed to by bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointeed to by surface\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00332}{332}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00140}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Poisson\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a6320ad6d71f24a2d7e03a7bb7e691b31}\label{classTwoMeshFluxPoissonProblem_a6320ad6d71f24a2d7e03a7bb7e691b31} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. 
+
+Doc the solution\+: doc\+\_\+info contains labels/output directory etc. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00281}{281}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00055}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00365}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classTwoMeshFluxPoissonProblem_abd0718261b6c8586d5de35cfef2292d8}\label{classTwoMeshFluxPoissonProblem_abd0718261b6c8586d5de35cfef2292d8} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Simple\+Rectangular\+Quad\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00122}{122}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00140}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Poisson\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a56a27b0dbf0f5975a4b9d37f3985c364}\label{classTwoMeshFluxPoissonProblem_a56a27b0dbf0f5975a4b9d37f3985c364} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
+\index{Source\_fct\_pt@{Source\_fct\_pt}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Source\_fct\_pt}{Source\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to source function. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00128}{128}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00140}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Poisson\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxPoissonProblem_a96b1ff6102eceb5ce432ac9197f68283}\label{classTwoMeshFluxPoissonProblem_a96b1ff6102eceb5ce432ac9197f68283} 
+\index{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!TwoMeshFluxPoissonProblem$<$ ELEMENT $>$@{TwoMeshFluxPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxPoissonProblem}{Two\+Mesh\+Flux\+Poisson\+Problem}}$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}surface"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00125}{125}} of file \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__flux__bc2_8cc_source_l00140}{Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Poisson\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__poisson__flux__bc2_8cc}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc2.\+cc}}\end{DoxyCompactItemize}

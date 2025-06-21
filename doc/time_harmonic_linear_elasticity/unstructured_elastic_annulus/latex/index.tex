@@ -1,0 +1,1004 @@
+\chapter{The adaptive solution of the equations of time-\/harmonic linear elasticity on unstructured meshes}
+\hypertarget{index}{}\label{index}\index{The adaptive solution of the equations of time-\/harmonic linear elasticity on unstructured meshes@{The adaptive solution of the equations of time-\/harmonic linear elasticity on unstructured meshes}}
+The aim of this tutorial is to demonstrate the adaptive solution of the time-\/harmonic equations of linear elasticity in cartesian coordinates on unstructured meshes.
+
+The driver code is very similar to the one presented in \href{../../elastic_annulus/html/index.html}{\texttt{ another tutorial}} and we only discuss the changes necessary to deal with the generation of the unstructured mesh and the assignment of different material properties to different parts of the domain.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_test}{}\doxysection{\texorpdfstring{A test problem\+: Time-\/harmonic oscillations of an elastic annulus reinforced by a T-\/rib}{A test problem: Time-harmonic oscillations of an elastic annulus reinforced by a T-rib}}\label{index_test}
+The sketch below shows the problem setup\+: A 2D elastic annulus which is reinforced with two T-\/ribs is subjected to a time-\/periodic pressure load of magnitude  \[
+{\bf t} = P ( \exp(\alpha(\varphi-\pi/4)^2)  + \exp(\alpha(\varphi-3\pi/4)^2) )
+\] (where $ \varphi $ is the polar angle) along its outer edge. The parameter $ \alpha $ controls the "{}sharpness"{} of the pressure load. For $ \alpha=0 $ we obtain a uniform, axisymmetric load; the sketch below shows the pressure distribution (red vectors indicating the traction) for $ \alpha = 1. $
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{setup}
+\doxyfigcaption{Sketch of the problem setup. }
+\end{DoxyImage}
+
+
+The structure is symmetric and we only discretise the right half ( $ x_1 > 0 $) of the domain and apply symmetry conditions (zero horizontal displacement) on the $ x_2-$ axis.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows an animation of the structure\textquotesingle{}s time-\/harmonic oscillation. The blue shaded region shows the shape of the oscillating structure while the pink region shows its initial configuration. The left half of the plot is used to show the (mirror image of the) adaptive unstructured mesh on which the solution was computed\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{all}
+\doxyfigcaption{Animation of the time-\/harmonic deformation. }
+\end{DoxyImage}
+
+
+This looks very pretty and shows that we can compute in non-\/trivial geometries but should you believe the results? Here\textquotesingle{}s an attempt to convince you\+: If we make the rib much softer than the annulus, the rib will not offer much structural resistance and the annular region will deform as if the rib was not present. If we then set $ \alpha = 0 $ we apply an axisymmetric forcing onto the structure and would expect the resulting displacement field (at least in the annular region) to be axisymmetric. For this case it is easy to find an analytical solution to the problem. The next two figures show a comparison between the analytical (green spheres) and computed solutions (shaded) for the real part of the horizontal and vertical displacements, respectively.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{validate_real}
+\doxyfigcaption{Real part of the horizontal displacement, computed (shaded) and exact (spheres). }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{validate_imag}
+\doxyfigcaption{Real part of the vertical displacement, computed (shaded) and exact (spheres). }
+\end{DoxyImage}
+
+
+Convinced?
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_num}{}\doxysection{\texorpdfstring{The numerical solution}{The numerical solution}}\label{index_num}
+The driver code for this problem is very similar to the one discussed in \href{../../elastic_annulus/html/index.html}{\texttt{ another tutorial}}. Running {\ttfamily sdiff} on the two driver codes \begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus/time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc }} \end{center}  and \begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/unstructured_time_harmonic_elastic_annulus.cc}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus/unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc }} \end{center}  shows you the differences, the most important of which are\+:
+\begin{DoxyItemize}
+\item The provision of multiple elasticity tensors and frequency parameters for the two different regions (the rib and the annulus). ~\newline
+~\newline
+
+\item The provision of a helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} which rebuilds the elements (by passing the problem parameters to the elements) following the unstructured mesh adaptation. (The need/rationale for such a function is discussed in \href{../../../meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial.}}) ~\newline
+~\newline
+
+\item The mesh generation -- the specification of the curvilinear boundaries and the geometry of the rib is somewhat tedious. We refer to \href{../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html}{\texttt{ another tutorial}} for a discussion of how to define the internal mesh boundary that separates the two regions (the rib and the annular region) so that we can assign different material properties to them. ~\newline
+~\newline
+. ~\newline
+ All of this is reasonably straightforward and provides a powerful code that automatically adapts the mesh while respecting the curvilinear boundaries of the domain. Have a look through the driver code and play with it.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_code}{}\doxysection{\texorpdfstring{Code listing}{Code listing}}\label{index_code}
+Here\textquotesingle{}s a listing of the complete driver code\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//\ Time-\/harmonic\ deformation\ of\ an\ T-\/rib\ reinforced\ elastic\ annulus\ subject\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{//\ a\ nonuniform\ pressure\ load.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Oomph-\/lib\ includes}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}time\_harmonic\_linear\_elasticity.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//The\ meshes}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/triangle\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//\ Straight\ line\ as\ geometric\ object}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Straight\ 1D\ line\ in\ 2D\ space\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\ :\ \textcolor{keyword}{public}\ GeomObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ \ Pass\ start\ and\ end\ points}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const}\ Vector<double>\&\ r\_start,\ \textcolor{keyword}{const}\ Vector<double>\&\ r\_end)\ }
+\DoxyCodeLine{\ \ :\ \ GeomObject(1,2),\ \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}(r\_start),\ \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}(r\_end)}
+\DoxyCodeLine{\ \ \{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Broken\ copy\ constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&\ dummy)\ }
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ BrokenCopy::broken\_copy(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Broken\ assignment\ operator}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMyStraightLine_a926ab921fec52ded94509efce06b66a7}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}\&)\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ BrokenCopy::broken\_assign(\textcolor{stringliteral}{"{}MyStraightLine"{}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor:\ \ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMyStraightLine_ae2f9a5860652a726b2f4dc94d1332ef1}{\string~MyStraightLine}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Position\ Vector\ at\ Lagrangian\ coordinate\ zeta\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMyStraightLine_ae3ee51a7b81acc2ef652bec4ee955d2f}{position}}(\textcolor{keyword}{const}\ Vector<double>\&\ zeta,\ Vector<double>\&\ r)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Position\ Vector}}
+\DoxyCodeLine{\ \ \ r[0]\ =\ \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[0]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[0])*zeta[0];}
+\DoxyCodeLine{\ \ \ r[1]\ =\ \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1]+(\mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}}[1]-\/\mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}}[1])*zeta[0];}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Start\ point\ of\ line}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{classMyStraightLine_a0f66636dd5d1e7ff6ec93acf90879f0c}{R\_start}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ End\ point\ of\ line}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{classMyStraightLine_afa466e12301ccea99a02fe1bde615691}{R\_end}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ non-\/dim\ frequency\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}=10.0;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ non-\/dim\ frequency\ for\ the\ two\ regions}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Omega\_sq\_region}}(2,\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ elasticity\ tensors\ for\ the\ two\ regions}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<TimeHarmonicIsotropicElasticityTensor*>\ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{E\_pt}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Thickness\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{H\_annulus}}=0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\ =\ 0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Peakiness\ parameter\ for\ pressure\ load}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Alpha}}=200.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constant\ pressure\ load\ (real\ and\ imag\ part)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{pressure\_load}}(\textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<std::complex<double>\ >\&traction)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ phi=atan2(x[1],x[0]);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ magnitude=exp(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Alpha}}*pow(phi-\/0.25*MathematicalConstants::Pi,2));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ dim\ =\ traction.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<dim;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ traction[i]\ =\ complex<double>(-\/magnitude*\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i],magnitude*\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i]);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\_of\_pressure\_load}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ directory}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Annular\ disk}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRingWithTRibProblem}{RingWithTRibProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRingWithTRibProblem_ad0313aac3c0cdb87e753ba474a4e334f}{RingWithTRibProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a5d9f7b05cc71c02275f6c3c1a465fd20}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_aa74a20d5bd6d7f16eb00080734dde0d1}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a7a170199d58390ae43a044294bfc7ac5}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a8749aaf1e46d802c210b51e07093505b}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a43b70b125f467aa5bb9c74d08f193aa5}{doc\_solution}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_ac4445c7a9fbfdcb69063d36fe0fe08c3}{create\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_aa85169a96623cb39f18111ee436f5b9d}{delete\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Helper\ function\ to\ complete\ problem\ setup}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a7aa8c978ec6ff0a9823ef895b263fb41}{complete\_problem\_setup}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ refineable\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RefineableTriangleMesh<ELASTICITY\_ELEMENT>*\ \mbox{\hyperlink{classRingWithTRibProblem_a89da884cecc2d8984168817de7b1927e}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ TriangleMesh<ELASTICITY\_ELEMENT>*\ \mbox{\hyperlink{classRingWithTRibProblem_a89da884cecc2d8984168817de7b1927e}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classRingWithTRibProblem_abf11b5c5d0c63c91ca7b248c18acad5b}{Traction\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ \mbox{\hyperlink{classRingWithTRibProblem_a086bb927e3091b5d38e193b2ccb84e3b}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ upper\ symmetry\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRingWithTRibProblem_ad15da3f1436b47c6cd7a79962aaa895d}{Upper\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ lower\ symmetry\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRingWithTRibProblem_a93f5abb451b85f65316b930802c727f8}{Lower\_symmetry\_boundary\_id}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRingWithTRibProblem_a88918269cac403640e2659d48210d03c}{Outer\_boundary\_id}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classRingWithTRibProblem_ad0313aac3c0cdb87e753ba474a4e334f}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::RingWithTRibProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ and\ end\ coordinates}}
+\DoxyCodeLine{\ Vector<double>\ r\_start(2);}
+\DoxyCodeLine{\ Vector<double>\ r\_end(2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ radius\ of\ hull}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ r\_outer\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Inner\ radius\ of\ hull}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ r\_inner\ =\ r\_outer-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{Global\_Parameters::H\_annulus}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Thickness\ of\ rib}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ rib\_thick=0.05;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Depth\ of\ rib}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ rib\_depth=0.2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Total\ width\ of\ T}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ t\_width=0.2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Thickness\ of\ T}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ t\_thick=0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Half-\/opening\ angle\ of\ rib}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ half\_phi\_rib=asin(0.5*rib\_thick/r\_inner);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pointer\ to\ the\ closed\ curve\ that\ defines\ the\ outer\ boundary}}
+\DoxyCodeLine{\ TriangleMeshClosedCurve*\ closed\_curve\_pt=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Provide\ storage\ for\ pointers\ to\ the\ parts\ of\ the\ curvilinear\ boundary}}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ curvilinear\_boundary\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Ellipse*\ outer\_boundary\_circle\_pt\ =\ \textcolor{keyword}{new}\ Ellipse(r\_outer,r\_outer);}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ zeta\_start=-\/0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ zeta\_end=0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nsegment=50;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ outer\_boundary\_circle\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Remember\ it}}
+\DoxyCodeLine{\ Outer\_boundary\_id=boundary\_id;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Upper\ straight\ line\ segment\ on\ symmetry\ axis}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=0.0;}
+\DoxyCodeLine{\ r\_start[1]=r\_outer;}
+\DoxyCodeLine{\ r\_end[0]=0.0;}
+\DoxyCodeLine{\ r\_end[1]=r\_inner;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ upper\_sym\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ upper\_sym\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Remember\ it}}
+\DoxyCodeLine{\ Upper\_symmetry\_boundary\_id=boundary\_id;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Upper\ part\ of\ inner\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Ellipse*\ upper\_inner\_boundary\_pt\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ Ellipse(r\_inner,r\_inner);}
+\DoxyCodeLine{\ zeta\_start=0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ zeta\_end=half\_phi\_rib;}
+\DoxyCodeLine{\ nsegment=20;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ upper\_inner\_boundary\_pt,}
+\DoxyCodeLine{\ \ \ zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Upper\ half\ of\ inward\ rib}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_inner*cos(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_start[1]=r\_inner*sin(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0]-\/rib\_depth;}
+\DoxyCodeLine{\ r\_end[1]=r\_start[1];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ upper\_inward\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ TriangleMeshCurviLine*\ upper\_inward\_rib\_curviline\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ upper\_inward\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(upper\_inward\_rib\_curviline\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Vertical\ upper\ bit\ of\ T}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0];}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0];}
+\DoxyCodeLine{\ r\_end[1]=r\_start[1]+0.5*(t\_width-\/rib\_thick);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ vertical\_upper\_t\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ vertical\_upper\_t\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Horizontal\ upper\ bit\ of\ T}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/==-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0];}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0]-\/t\_thick;}
+\DoxyCodeLine{\ r\_end[1]=r\_start[1];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ horizontal\_upper\_t\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ horizontal\_upper\_t\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Vertical\ end\ of\ rib\ end}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0];}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0];}
+\DoxyCodeLine{\ r\_end[1]=-\/r\_start[1];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ inner\_vertical\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ inner\_vertical\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Horizontal\ lower\ bit\ of\ T}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/==-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0];}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0]+t\_thick;}
+\DoxyCodeLine{\ r\_end[1]=r\_start[1];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ horizontal\_lower\_t\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ horizontal\_lower\_t\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Vertical\ lower\ bit\ of\ T}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0];}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ r\_end[0]=r\_start[0];}
+\DoxyCodeLine{\ r\_end[1]=r\_start[1]+0.5*(t\_width-\/rib\_thick);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ vertical\_lower\_t\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ vertical\_lower\_t\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Lower\ half\ of\ inward\ rib}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_end[0]=r\_inner*cos(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_end[1]=-\/r\_inner*sin(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_start[0]=r\_end[0]-\/rib\_depth;}
+\DoxyCodeLine{\ r\_start[1]=r\_end[1];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ lower\_inward\_rib\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ TriangleMeshCurviLine*\ lower\_inward\_rib\_curviline\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ lower\_inward\_rib\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(lower\_inward\_rib\_curviline\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Lower\ part\ of\ inner\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Ellipse*\ lower\_inner\_boundary\_circle\_pt\ =\ \textcolor{keyword}{new}\ Ellipse(r\_inner,r\_inner);}
+\DoxyCodeLine{\ zeta\_start=-\/half\_phi\_rib;}
+\DoxyCodeLine{\ zeta\_end=-\/0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ nsegment=20;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ lower\_inner\_boundary\_circle\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Lower\ straight\ line\ segment\ on\ symmetry\ axis}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ r\_start[0]=0.0;}
+\DoxyCodeLine{\ r\_start[1]=-\/r\_inner;}
+\DoxyCodeLine{\ r\_end[0]=0.0;}
+\DoxyCodeLine{\ r\_end[1]=-\/r\_outer;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}*\ lower\_sym\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMyStraightLine}{MyStraightLine}}(r\_start,r\_end);}
+\DoxyCodeLine{\ zeta\_start=0.0;}
+\DoxyCodeLine{\ zeta\_end=1.0;}
+\DoxyCodeLine{\ nsegment=1;}
+\DoxyCodeLine{\ boundary\_id=curvilinear\_boundary\_pt.size();}
+\DoxyCodeLine{\ curvilinear\_boundary\_pt.push\_back(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(}
+\DoxyCodeLine{\ \ \ lower\_sym\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id));}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Remember\ it}}
+\DoxyCodeLine{\ Lower\_symmetry\_boundary\_id=boundary\_id;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ to\ curvilinear\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ closed\_curve\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshClosedCurve(curvilinear\_boundary\_pt);\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Vertical\ dividing\ line\ across\ base\ of\ T-\/rib}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ internal\_polyline\_pt(1);}
+\DoxyCodeLine{\ r\_start[0]=r\_inner*cos(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_start[1]=r\_inner*sin(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_end[0]=r\_inner*cos(half\_phi\_rib);}
+\DoxyCodeLine{\ r\_end[1]=-\/r\_inner*sin(half\_phi\_rib);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ Vector<Vector<double>\ >\ boundary\_vertices(2);}
+\DoxyCodeLine{\ boundary\_vertices[0]=r\_start;}
+\DoxyCodeLine{\ boundary\_vertices[1]=r\_end;}
+\DoxyCodeLine{\ boundary\_id=100;}
+\DoxyCodeLine{\ TriangleMeshPolyLine*\ rib\_divider\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshPolyLine(boundary\_vertices,boundary\_id);\ }
+\DoxyCodeLine{\ internal\_polyline\_pt[0]=rib\_divider\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Make\ connection}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ s\_connect=0.0;}
+\DoxyCodeLine{\ internal\_polyline\_pt[0]-\/>connect\_initial\_vertex\_to\_curviline(}
+\DoxyCodeLine{\ \ upper\_inward\_rib\_curviline\_pt,s\_connect);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Make\ connection}}
+\DoxyCodeLine{\ s\_connect=1.0;}
+\DoxyCodeLine{\ internal\_polyline\_pt[0]-\/>connect\_final\_vertex\_to\_curviline(}
+\DoxyCodeLine{\ \ lower\_inward\_rib\_curviline\_pt,s\_connect);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ open\ curve\ that\ defines\ internal\ bondary}}
+\DoxyCodeLine{\ Vector<TriangleMeshOpenCurve*>\ inner\_boundary\_pt;}
+\DoxyCodeLine{\ inner\_boundary\_pt.push\_back(\textcolor{keyword}{new}\ TriangleMeshOpenCurve(internal\_polyline\_pt));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ coordinates\ of\ a\ point\ inside\ the\ rib}}
+\DoxyCodeLine{\ Vector<double>\ rib\_center(2);}
+\DoxyCodeLine{\ rib\_center[0]=r\_inner-\/rib\_depth;}
+\DoxyCodeLine{\ rib\_center[1]=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ build\ the\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//===================}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ TriangleMeshParameters\ object\ for\ helping\ on\ the\ manage\ of\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ TriangleMesh\ parameters.\ The\ only\ parameter\ that\ needs\ to\ take\ is\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ outer\ boundary.}}
+\DoxyCodeLine{\ TriangleMeshParameters\ triangle\_mesh\_parameters(closed\_curve\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Target\ area}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.element\_area()=0.2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ internal\ open\ boundary}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.internal\_open\_curves\_pt()=inner\_boundary\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ the\ region}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.add\_region\_coordinates(1,rib\_center);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ mesh}}
+\DoxyCodeLine{\ Solid\_mesh\_pt=\textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ RefineableTriangleMesh<ELASTICITY\_ELEMENT>(triangle\_mesh\_parameters);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ mesh}}
+\DoxyCodeLine{\ Solid\_mesh\_pt=\textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ TriangleMesh<ELASTICITY\_ELEMENT>(triangle\_mesh\_parameters);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Let's\ have\ a\ look\ where\ the\ boundaries\ are}}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}solid\_mesh.dat"{}});}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}solid\_mesh\_boundary.dat"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Construct\ the\ traction\ element\ mesh}}
+\DoxyCodeLine{\ Traction\_mesh\_pt=\textcolor{keyword}{new}\ Mesh;}
+\DoxyCodeLine{\ create\_traction\_elements();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh\ is\ first\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(Solid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ traction\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(Traction\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ combined\ "{}global"{}\ mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ elasticity\ tensors}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}.resize(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[0]=\textcolor{keyword}{new}\ TimeHarmonicIsotropicElasticityTensor(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[1]=\textcolor{keyword}{new}\ TimeHarmonicIsotropicElasticityTensor(}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ problem\ setup}}
+\DoxyCodeLine{\ complete\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_constructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_complete\_problem\_setup====================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Complete\ problem\ setup}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a7aa8c978ec6ff0a9823ef895b263fb41}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Min\ element\ size\ allowed\ during\ adaptation}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ Solid\_mesh\_pt-\/>min\_element\_size()=1.0e-\/5;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ the\ physical\ properties\ to\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nreg=Solid\_mesh\_pt-\/>nregion();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ r=0;r<nreg;r++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ nel=Solid\_mesh\_pt-\/>nregion\_element(r);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \ \ ELASTICITY\_ELEMENT\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELASTICITY\_ELEMENT*\textcolor{keyword}{>}(Solid\_mesh\_pt-\/>region\_element\_pt(r,e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>elasticity\_tensor\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[r];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Square\ of\ non-\/dim\ frequency}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>omega\_sq\_pt()=\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\_Parameters::Omega\_sq\_region}}[r];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ boundary\ conditions:}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ real\ and\ imag\ part\ of\ horizontal\ displacement\ components\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ on\ vertical\ boundaries}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Loop\ over\ the\ nodes\ to\ pin\ and\ assign\ boundary\ displacements\ on\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//solid\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Solid\_mesh\_pt-\/>nboundary\_node(Upper\_symmetry\_boundary\_id);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_node;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ Node*\ nod\_pt=Solid\_mesh\_pt-\/>boundary\_node\_pt(Upper\_symmetry\_boundary\_id,i);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Real\ part\ of\ x-\/displacement\ }}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>set\_value(0,0.0);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Imag\ part\ of\ x-\/displacement}}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>pin(2);}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>set\_value(2,0.0);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Loop\ over\ the\ nodes\ to\ pin\ and\ assign\ boundary\ displacements\ on\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//solid\ boundary}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Solid\_mesh\_pt-\/>nboundary\_node(Lower\_symmetry\_boundary\_id);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_node;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ Node*\ nod\_pt=Solid\_mesh\_pt-\/>boundary\_node\_pt(Lower\_symmetry\_boundary\_id,i);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Real\ part\ of\ x-\/displacement\ }}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>set\_value(0,0.0);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Imag\ part\ of\ x-\/displacement}}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>pin(2);}
+\DoxyCodeLine{\ \ \ \ nod\_pt-\/>set\_value(2,0.0);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a7a170199d58390ae43a044294bfc7ac5}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::actions\_before\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Kill\ the\ traction\ elements\ and\ wipe\ surface\ mesh}}
+\DoxyCodeLine{\ delete\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_before\_adapt}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a8749aaf1e46d802c210b51e07093505b}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ traction\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ FSI\ boundaries\ and\ add\ them\ to\ surface\ meshes}}
+\DoxyCodeLine{\ create\_traction\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ problem\ setup}}
+\DoxyCodeLine{\ complete\_problem\_setup();\ \ \ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_after\_adapt}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ traction\ elements\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_ac4445c7a9fbfdcb69063d36fe0fe08c3}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::create\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b=Outer\_boundary\_id;}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Solid\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ ELASTICITY\_ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELASTICITY\_ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ Solid\_mesh\_pt-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ Solid\_mesh\_pt-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ element}}
+\DoxyCodeLine{\ \ \ \ TimeHarmonicLinearElasticityTractionElement<ELASTICITY\_ELEMENT>*\ el\_pt=}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{new}\ TimeHarmonicLinearElasticityTractionElement<ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\ \ \ \ \ (bulk\_elem\_pt,face\_index);\ \ \ }
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Add\ to\ mesh}}
+\DoxyCodeLine{\ \ \ \ Traction\_mesh\_pt-\/>add\_element\_pt(el\_pt);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Associate\ element\ with\ bulk\ boundary\ (to\ allow\ it\ to\ access}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ the\ boundary\ coordinates\ in\ the\ bulk\ mesh)}}
+\DoxyCodeLine{\ \ \ \ el\_pt-\/>set\_boundary\_number\_in\_bulk\_mesh(b);\ }
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{Global\_Parameters::pressure\_load}};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_create\_traction\_elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==============================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Delete\ traction\ elements\ and\ wipe\ the\ \ traction\ meshes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_aa85169a96623cb39f18111ee436f5b9d}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::delete\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ surface\ elements\ are\ in\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Traction\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ Traction\_mesh\_pt-\/>element\_pt(e);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ Traction\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ delete\_traction\_elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRingWithTRibProblem_a43b70b125f467aa5bb9c74d08f193aa5}{RingWithTRibProblem<ELASTICITY\_ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_plot=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ displacement\ field}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/elast\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ traction\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/traction\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Traction\_mesh\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ regions}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nreg=Solid\_mesh\_pt-\/>nregion();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ r=0;r<nreg;r++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/region\%i\_\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ r,Doc\_info.number());\ \ \ }
+\DoxyCodeLine{\ \ \ some\_file.open(filename);\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ nel=Solid\_mesh\_pt-\/>nregion\_element(r);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ FiniteElement*\ el\_pt=Solid\_mesh\_pt-\/>region\_element\_pt(r,e);}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ some\_file.close();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ norm\ of\ solution\ (to\ allow\ validation\ of\ solution\ even}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ if\ triangle\ generates\ a\ slightly\ different\ mesh)}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/norm\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());\ \ \ }
+\DoxyCodeLine{\ some\_file.open(filename);\ \ \ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ norm=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nel=Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ el\_norm=0.0;}
+\DoxyCodeLine{\ \ \ Solid\_mesh\_pt-\/>compute\_norm(el\_norm);}
+\DoxyCodeLine{\ \ \ norm+=el\_norm;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ some\_file\ <<\ norm\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ annular\ disk\ loaded\ by\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified\ }}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Max.\ number\ of\ adaptations}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/max\_adapt"{}},\&max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Peakiness\ parameter\ for\ loading}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/alpha"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Global\_Parameters::Alpha}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation\ run?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRingWithTRibProblem}{RingWithTRibProblem}}<ProjectableTimeHarmonicLinearElasticityElement}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <TTimeHarmonicLinearElasticityElement<2,3>\ >\ >}
+\DoxyCodeLine{\ \ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRingWithTRibProblem}{RingWithTRibProblem<TTimeHarmonicLinearElasticityElement<2,3>}}\ >\ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ values\ for\ parameter\ values}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}=0.1;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=2;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ Newton's\ method,\ allowing}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ up\ to\ max\_adapt\ mesh\ adaptations\ after\ every\ solve.}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ using\ Newton's\ method}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ problem.\mbox{\hyperlink{classRingWithTRibProblem_a43b70b125f467aa5bb9c74d08f193aa5}{doc\_solution}}();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Now\ reduce\ the\ stiffness\ of\ the\ rib\ and\ set\ its\ inertia\ to}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ zero,\ then\ re-\/solve.\ Resulting\ displacement\ field\ should}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ be\ approximately\ axisymmetric\ in\ the\ annular\ region.}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\_Parameters::E\_pt}}[1]-\/>update\_constitutive\_parameters(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}},1.0e-\/10);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\_Parameters::Omega\_sq\_region}}[1]=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/unstructured_time_harmonic_elastic_annulus.cc}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus/unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

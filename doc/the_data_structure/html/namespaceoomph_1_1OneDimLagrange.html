@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::OneDimLagrange Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html">OneDimLagrange</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">oomph::OneDimLagrange Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a117f8b892dc89989ecdad99ff261e120" id="r_a117f8b892dc89989ecdad99ff261e120"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </td></tr>
+<tr class="memitem:a117f8b892dc89989ecdad99ff261e120"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120">shape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *Psi)</td></tr>
+<tr class="memdesc:a117f8b892dc89989ecdad99ff261e120"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordinate s are returned in the array Psi.  <br /></td></tr>
+<tr class="separator:a117f8b892dc89989ecdad99ff261e120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66e48b956c460371ac77032c1efcd72" id="r_af66e48b956c460371ac77032c1efcd72"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </td></tr>
+<tr class="memitem:af66e48b956c460371ac77032c1efcd72"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#af66e48b956c460371ac77032c1efcd72">dshape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:af66e48b956c460371ac77032c1efcd72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi.  <br /></td></tr>
+<tr class="separator:af66e48b956c460371ac77032c1efcd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9515ce1aa8ef987244c379655c41fa01" id="r_a9515ce1aa8ef987244c379655c41fa01"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </td></tr>
+<tr class="memitem:a9515ce1aa8ef987244c379655c41fa01"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a9515ce1aa8ef987244c379655c41fa01">d2shape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:a9515ce1aa8ef987244c379655c41fa01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi.  <br /></td></tr>
+<tr class="separator:a9515ce1aa8ef987244c379655c41fa01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7f5263cb672ddfef50bdd3462ada19" id="r_aec7f5263cb672ddfef50bdd3462ada19"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:aec7f5263cb672ddfef50bdd3462ada19"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aec7f5263cb672ddfef50bdd3462ada19">shape&lt; 2 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *Psi)</td></tr>
+<tr class="memdesc:aec7f5263cb672ddfef50bdd3462ada19"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to linear order (2 Nodes)  <br /></td></tr>
+<tr class="separator:aec7f5263cb672ddfef50bdd3462ada19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a956411abc42594a039c368e4ef69f48e" id="r_a956411abc42594a039c368e4ef69f48e"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a956411abc42594a039c368e4ef69f48e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a956411abc42594a039c368e4ef69f48e">dshape&lt; 2 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:a956411abc42594a039c368e4ef69f48e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to linear order (2 Nodes)  <br /></td></tr>
+<tr class="separator:a956411abc42594a039c368e4ef69f48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee22e982dfd4a46e5b0b7fd9f627498" id="r_a2ee22e982dfd4a46e5b0b7fd9f627498"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a2ee22e982dfd4a46e5b0b7fd9f627498"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a2ee22e982dfd4a46e5b0b7fd9f627498">d2shape&lt; 2 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:a2ee22e982dfd4a46e5b0b7fd9f627498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes)  <br /></td></tr>
+<tr class="separator:a2ee22e982dfd4a46e5b0b7fd9f627498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccbf08730b769433dd95c7c564fa28a" id="r_acccbf08730b769433dd95c7c564fa28a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:acccbf08730b769433dd95c7c564fa28a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#acccbf08730b769433dd95c7c564fa28a">shape&lt; 3 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *Psi)</td></tr>
+<tr class="memdesc:acccbf08730b769433dd95c7c564fa28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to quadratic order (3 Nodes)  <br /></td></tr>
+<tr class="separator:acccbf08730b769433dd95c7c564fa28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1810613afa59bde79eecb02996caa3" id="r_a5c1810613afa59bde79eecb02996caa3"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a5c1810613afa59bde79eecb02996caa3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a5c1810613afa59bde79eecb02996caa3">dshape&lt; 3 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:a5c1810613afa59bde79eecb02996caa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to quadratic order (3 Nodes)  <br /></td></tr>
+<tr class="separator:a5c1810613afa59bde79eecb02996caa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed8561ccff2c23c63807c8c1b62d1a8" id="r_a9ed8561ccff2c23c63807c8c1b62d1a8"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a9ed8561ccff2c23c63807c8c1b62d1a8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a9ed8561ccff2c23c63807c8c1b62d1a8">d2shape&lt; 3 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:a9ed8561ccff2c23c63807c8c1b62d1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Derivatives of 1D shape functions, specialised to quadratic order (3 Nodes)  <br /></td></tr>
+<tr class="separator:a9ed8561ccff2c23c63807c8c1b62d1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead7e479371c7eb764b8f4ad68986ade" id="r_aead7e479371c7eb764b8f4ad68986ade"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:aead7e479371c7eb764b8f4ad68986ade"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aead7e479371c7eb764b8f4ad68986ade">shape&lt; 4 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *Psi)</td></tr>
+<tr class="memdesc:aead7e479371c7eb764b8f4ad68986ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D shape functions specialised to cubic order (4 Nodes)  <br /></td></tr>
+<tr class="separator:aead7e479371c7eb764b8f4ad68986ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae4d85c677e27103cc7163b298cd4cba" id="r_aae4d85c677e27103cc7163b298cd4cba"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:aae4d85c677e27103cc7163b298cd4cba"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aae4d85c677e27103cc7163b298cd4cba">dshape&lt; 4 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:aae4d85c677e27103cc7163b298cd4cba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivatives of 1D shape functions specialised to cubic order (4 Nodes)  <br /></td></tr>
+<tr class="separator:aae4d85c677e27103cc7163b298cd4cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79886f1732f57679a30e9632c50a09a" id="r_aa79886f1732f57679a30e9632c50a09a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:aa79886f1732f57679a30e9632c50a09a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1OneDimLagrange.html#aa79886f1732f57679a30e9632c50a09a">d2shape&lt; 4 &gt;</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *DPsi)</td></tr>
+<tr class="memdesc:aa79886f1732f57679a30e9632c50a09a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second Derivatives of 1D shape functions specialised to cubic order (4 Nodes)  <br /></td></tr>
+<tr class="separator:aa79886f1732f57679a30e9632c50a09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9515ce1aa8ef987244c379655c41fa01" name="a9515ce1aa8ef987244c379655c41fa01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9515ce1aa8ef987244c379655c41fa01">&#9670;&#160;</a></span>d2shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::OneDimLagrange::d2shape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00593">593</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a2ee22e982dfd4a46e5b0b7fd9f627498" name="a2ee22e982dfd4a46e5b0b7fd9f627498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee22e982dfd4a46e5b0b7fd9f627498">&#9670;&#160;</a></span>d2shape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a9515ce1aa8ef987244c379655c41fa01">oomph::OneDimLagrange::d2shape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00625">625</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a9ed8561ccff2c23c63807c8c1b62d1a8" name="a9ed8561ccff2c23c63807c8c1b62d1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed8561ccff2c23c63807c8c1b62d1a8">&#9670;&#160;</a></span>d2shape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a9515ce1aa8ef987244c379655c41fa01">oomph::OneDimLagrange::d2shape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Second Derivatives of 1D shape functions, specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00656">656</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="aa79886f1732f57679a30e9632c50a09a" name="aa79886f1732f57679a30e9632c50a09a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa79886f1732f57679a30e9632c50a09a">&#9670;&#160;</a></span>d2shape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a9515ce1aa8ef987244c379655c41fa01">oomph::OneDimLagrange::d2shape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Second Derivatives of 1D shape functions specialised to cubic order (4 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00700">700</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="af66e48b956c460371ac77032c1efcd72" name="af66e48b956c460371ac77032c1efcd72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af66e48b956c460371ac77032c1efcd72">&#9670;&#160;</a></span>dshape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::OneDimLagrange::dshape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00578">578</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a956411abc42594a039c368e4ef69f48e" name="a956411abc42594a039c368e4ef69f48e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956411abc42594a039c368e4ef69f48e">&#9670;&#160;</a></span>dshape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#af66e48b956c460371ac77032c1efcd72">oomph::OneDimLagrange::dshape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00616">616</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="generalised__newtonian__navier__stokes__elements_8h_source.html#l02099">oomph::GeneralisedNewtonianQTaylorHoodElement&lt; DIM &gt;::dpshape_and_dptest_eulerian_nst()</a>, <a class="el" href="navier__stokes__elements_8h_source.html#l02565">oomph::QTaylorHoodElement&lt; DIM &gt;::dpshape_and_dptest_eulerian_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02733">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dpshape_eulerian()</a>, and <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02821">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dptest_eulerian()</a>.</p>
+
+</div>
+</div>
+<a id="a5c1810613afa59bde79eecb02996caa3" name="a5c1810613afa59bde79eecb02996caa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c1810613afa59bde79eecb02996caa3">&#9670;&#160;</a></span>dshape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#af66e48b956c460371ac77032c1efcd72">oomph::OneDimLagrange::dshape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00645">645</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02510">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dshape_local_u_nst()</a>, and <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02572">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dtest_local_u_nst()</a>.</p>
+
+</div>
+</div>
+<a id="aae4d85c677e27103cc7163b298cd4cba" name="aae4d85c677e27103cc7163b298cd4cba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae4d85c677e27103cc7163b298cd4cba">&#9670;&#160;</a></span>dshape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#af66e48b956c460371ac77032c1efcd72">oomph::OneDimLagrange::dshape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>DPsi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivatives of 1D shape functions specialised to cubic order (4 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00684">684</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+<a id="a117f8b892dc89989ecdad99ff261e120" name="a117f8b892dc89989ecdad99ff261e120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a117f8b892dc89989ecdad99ff261e120">&#9670;&#160;</a></span>shape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> NNODE_1D&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::OneDimLagrange::shape </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordinate s are returned in the array Psi. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00564">564</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="aec7f5263cb672ddfef50bdd3462ada19" name="aec7f5263cb672ddfef50bdd3462ada19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec7f5263cb672ddfef50bdd3462ada19">&#9670;&#160;</a></span>shape&lt; 2 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120">oomph::OneDimLagrange::shape</a>&lt; 2 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to linear order (2 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00608">608</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="generalised__newtonian__navier__stokes__elements_8h_source.html#l02099">oomph::GeneralisedNewtonianQTaylorHoodElement&lt; DIM &gt;::dpshape_and_dptest_eulerian_nst()</a>, <a class="el" href="navier__stokes__elements_8h_source.html#l02565">oomph::QTaylorHoodElement&lt; DIM &gt;::dpshape_and_dptest_eulerian_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02733">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dpshape_eulerian()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02821">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dptest_eulerian()</a>, <a class="el" href="axisym__navier__stokes__elements_8h_source.html#l01780">oomph::AxisymmetricQTaylorHoodElement::pshape_axi_nst()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8h_source.html#l01867">oomph::GeneralisedNewtonianAxisymmetricQTaylorHoodElement::pshape_axi_nst()</a>, <a class="el" href="linearised__axisym__navier__stokes__elements_8h_source.html#l00974">oomph::LinearisedAxisymmetricQTaylorHoodElement::pshape_linearised_axi_nst()</a>, <a class="el" href="linearised__navier__stokes__elements_8h_source.html#l01129">oomph::LinearisedQTaylorHoodElement::pshape_linearised_nst()</a>, <a class="el" href="generalised__newtonian__navier__stokes__elements_8h_source.html#l02258">oomph::GeneralisedNewtonianQTaylorHoodElement&lt; DIM &gt;::pshape_nst()</a>, <a class="el" href="navier__stokes__elements_8h_source.html#l02723">oomph::QTaylorHoodElement&lt; DIM &gt;::pshape_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02975">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::pshape_nst()</a>, <a class="el" href="polar__navier__stokes__elements_8h_source.html#l01210">oomph::PolarTaylorHoodElement::pshape_pnst()</a>, <a class="el" href="spherical__navier__stokes__elements_8h_source.html#l01301">oomph::QSphericalTaylorHoodElement::pshape_spherical_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l03022">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::ptest_nst()</a>, and <a class="el" href="solid__elements_8h_source.html#l01636">oomph::QPVDElementWithContinuousPressure&lt; DIM &gt;::solid_pshape()</a>.</p>
+
+</div>
+</div>
+<a id="acccbf08730b769433dd95c7c564fa28a" name="acccbf08730b769433dd95c7c564fa28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acccbf08730b769433dd95c7c564fa28a">&#9670;&#160;</a></span>shape&lt; 3 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120">oomph::OneDimLagrange::shape</a>&lt; 3 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to quadratic order (3 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00635">635</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02510">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dshape_local_u_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02572">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::dtest_local_u_nst()</a>, <a class="el" href="mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source.html#l00200">oomph::NavierStokesMixedOrderSpaceTimeTractionElement&lt; ELEMENT &gt;::shape_and_test_at_knot()</a>, and <a class="el" href="mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source.html#l02464">oomph::QTaylorHoodMixedOrderSpaceTimeElement&lt; DIM &gt;::shape_u_nst()</a>.</p>
+
+</div>
+</div>
+<a id="aead7e479371c7eb764b8f4ad68986ade" name="aead7e479371c7eb764b8f4ad68986ade"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead7e479371c7eb764b8f4ad68986ade">&#9670;&#160;</a></span>shape&lt; 4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="namespaceoomph_1_1OneDimLagrange.html#a117f8b892dc89989ecdad99ff261e120">oomph::OneDimLagrange::shape</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>Psi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1D shape functions specialised to cubic order (4 Nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00665">665</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

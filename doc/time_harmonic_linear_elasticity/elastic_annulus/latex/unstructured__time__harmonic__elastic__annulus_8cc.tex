@@ -1,0 +1,51 @@
+\doxysection{unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc File Reference}
+\hypertarget{unstructured__time__harmonic__elastic__annulus_8cc}{}\label{unstructured__time__harmonic__elastic__annulus_8cc}\index{unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMyStraightLine}{My\+Straight\+Line}}
+\begin{DoxyCompactList}\small\item\em Straight 1D line in 2D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classRingWithTRibProblem}{Ring\+With\+TRib\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Annular disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq\+\_\+region}} (2, \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\+\_\+sq}})
+\begin{DoxyCompactList}\small\item\em Square of non-\/dim frequency for the two regions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{Global\+\_\+\+Parameters\+::pressure\+\_\+load}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load (real and imag part) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver for annular disk loaded by pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ Time\+Harmonic\+Isotropic\+Elasticity\+Tensor \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a73c731fa617a9d92851e4195493262e7}{Global\+\_\+\+Parameters\+::\+E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The elasticity tensors for the two regions. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Global\+\_\+\+Parameters\+::\+Alpha}} =200.\+0
+\begin{DoxyCompactList}\small\item\em Peakiness parameter for pressure load. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}!main@{main}}
+\index{main@{main}!unstructured\_time\_harmonic\_elastic\_annulus.cc@{unstructured\_time\_harmonic\_elastic\_annulus.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver for annular disk loaded by pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_source_l00820}{820}} of file \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_source}{unstructured\+\_\+time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_source_l00127}{Global\+\_\+\+Parameters\+::\+Alpha}}, \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_source_l00753}{Ring\+With\+TRib\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{unstructured__time__harmonic__elastic__annulus_8cc_source_l00118}{Global\+\_\+\+Parameters\+::\+E\+\_\+pt}}, \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00053}{Global\+\_\+\+Parameters\+::\+Nu}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a4c035035889b93588b44f7778bb27ef9}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq\+\_\+region()}}, and \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00081}{Global\+\_\+\+Parameters\+::P}}.
+

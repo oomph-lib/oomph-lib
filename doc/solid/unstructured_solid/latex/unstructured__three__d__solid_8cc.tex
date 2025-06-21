@@ -1,0 +1,55 @@
+\doxysection{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc File Reference}
+\hypertarget{unstructured__three__d__solid_8cc}{}\label{unstructured__three__d__solid_8cc}\index{unstructured\_three\_d\_solid.cc@{unstructured\_three\_d\_solid.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticTetMesh}{Elastic\+Tet\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Triangle-\/based mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTetMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (\mbox{\hyperlink{classElasticTetMesh}{const}} \mbox{\hyperlink{classElasticTetMesh}{double}} \&\mbox{\hyperlink{classElasticTetMesh}{time}}, \mbox{\hyperlink{classElasticTetMesh}{const}} \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{xi}}, \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{b}})
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTetMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (\mbox{\hyperlink{classElasticTetMesh}{const}} \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{xi}}, \mbox{\hyperlink{classElasticTetMesh}{const}} \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{x}}, \mbox{\hyperlink{classElasticTetMesh}{const}} \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{n}}, \mbox{\hyperlink{classElasticTetMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticTetMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticTetMesh}{traction}})
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTetMesh}{int}} \mbox{\hyperlink{unstructured__three__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticTetMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTetMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTetMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticTetMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__three__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{unstructured__three__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{unstructured\_three\_d\_solid.cc@{unstructured\_three\_d\_solid.cc}!main@{main}}
+\index{main@{main}!unstructured\_three\_d\_solid.cc@{unstructured\_three\_d\_solid.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticTetMesh}{int}} main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00347}{347}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00116}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00122}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}, \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00119}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00135}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+

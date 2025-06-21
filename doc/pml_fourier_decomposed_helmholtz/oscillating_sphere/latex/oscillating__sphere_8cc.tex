@@ -1,0 +1,81 @@
+\doxysection{oscillating\+\_\+sphere.\+cc File Reference}
+\hypertarget{oscillating__sphere_8cc}{}\label{oscillating__sphere_8cc}\index{oscillating\_sphere.cc@{oscillating\_sphere.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PMLHelmholtzPointSourceElement}{oomph\+::\+PMLHelmholtz\+Point\+Source\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Class to impose point source to (wrapped) Helmholtz element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ PMLHelmholtz\+Point\+Source\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ PMLHelmholtz\+Point\+Source\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01PMLHelmholtzPointSourceElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+PMLLayer\+Element$<$ PMLHelmholtz\+Point\+Source\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Policy class defining the elements to be used in the actual PML layers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01ProjectablePMLFourierDecomposedHelmholtzElement_3_01PMLHelmhol501eda982a3f215f8f7e3f1aeb4ca527}{oomph\+::\+PMLLayer\+Element$<$ Projectable\+PMLFourier\+Decomposed\+Helmholtz\+Element$<$ PMLHelmholtz\+Point\+Source\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Policy class defining the elements to be used in the actual PML layers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceProblemParameters}{Problem\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for the Fourier decomposed Helmholtz problem parameters. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Problem\+Parameters\+::\+Coeff}} (\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Coefficients in the exact solution. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{Problem\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{Problem\+Parameters\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{Problem\+Parameters\+::exact\+\_\+minus\+\_\+dudr}} (const Vector$<$ double $>$ \&x, std\+::complex$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get -\/du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary. \end{DoxyCompactList}\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceProblemParameters_a95ca6575d3ac2ec3d2efd3132ff2b5c4}{Problem\+Parameters\+::\+Magnitude}} (100.\+0, 100.\+0)
+\begin{DoxyCompactList}\small\item\em Point source magnitude (Complex) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{oscillating__sphere_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code for Pml Fourier decomposed Helmholtz problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespaceProblemParameters_a9df0f1728e8e7e53dcca84385ae9a031}{Problem\+Parameters\+::\+Directory}} ="{}RESLT"{}
+\begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{Problem\+Parameters\+::\+K\+\_\+squared}} = 10.\+0
+\begin{DoxyCompactList}\small\item\em Frequency. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblemParameters_ad56d4d5946cbe68de28413e4f8aa4d42}{Problem\+Parameters\+::\+PML\+\_\+thickness}} =4.\+0
+\begin{DoxyCompactList}\small\item\em Default physical PML thickness. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceProblemParameters_aef2e7cb819b8c5012a0f2db03892ee87}{Problem\+Parameters\+::\+Nel\+\_\+pml}} =15
+\begin{DoxyCompactList}\small\item\em Default number of elements within PMLs. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblemParameters_aafe26abadfce87800a6a4676f0476956}{Problem\+Parameters\+::\+Element\+\_\+area}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Target area for initial mesh. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{Problem\+Parameters\+::\+N\+\_\+fourier}} =0
+\begin{DoxyCompactList}\small\item\em The default Fourier wave number. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{Problem\+Parameters\+::\+N\+\_\+terms}} =6
+\begin{DoxyCompactList}\small\item\em Number of terms in the exact solution. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblemParameters_a42c148c7f3bed95827acf8d86c2c6089}{Problem\+Parameters\+::\+R\+\_\+source}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Radial position of point source. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblemParameters_a346993de7a274e1828af3f8fc8ca8b13}{Problem\+Parameters\+::\+Z\+\_\+source}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Axial position of point source. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{oscillating__sphere_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{oscillating__sphere_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{oscillating\_sphere.cc@{oscillating\_sphere.cc}!main@{main}}
+\index{main@{main}!oscillating\_sphere.cc@{oscillating\_sphere.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for Pml Fourier decomposed Helmholtz problem. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{1184}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00059}{Problem\+Parameters\+::\+Directory}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00975}{PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00071}{Problem\+Parameters\+::\+Element\+\_\+area}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{Problem\+Parameters\+::\+K\+\_\+squared}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{Problem\+Parameters\+::\+N\+\_\+fourier}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00068}{Problem\+Parameters\+::\+Nel\+\_\+pml}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00065}{Problem\+Parameters\+::\+PML\+\_\+thickness}}.
+

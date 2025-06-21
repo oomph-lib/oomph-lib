@@ -1,0 +1,321 @@
+\doxysection{oomph\+::Extruded\+Domain Class Reference}
+\hypertarget{classoomph_1_1ExtrudedDomain}{}\label{classoomph_1_1ExtrudedDomain}\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+
+
+Base class for Extruded\+Domains with curvilinear and/or time-\/dependent boundaries. \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} boundaries are typically represented by Geom\+Objects and the \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} itself is decomposed into a number of Extruded\+Macro\+Elements. Any instantiation of a specific \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} needs to implement the pure virtual member function.  
+
+
+
+
+{\ttfamily \#include $<$extruded\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Extruded\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ExtrudedDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a3aec641345ecc5502afbb29feb2b0006}{Extruded\+Domain}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}domain\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+extruded\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{extrusion\+\_\+length}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a8895282a7ebc08be6473062fbc5c9c60}{Extruded\+Domain}} (\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}domain\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+extruded\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{t\+\_\+min}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{t\+\_\+max}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7}{\texorpdfstring{$\sim$}{\string~}\+Extruded\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; the extruded macro elements will be deleted in \doxylink{classoomph_1_1Domain}{Domain}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342}{Extruded\+Domain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c}{macro\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access to i-\/th extruded macro element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff}{nmacro\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Number of macro elements in domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). NOTE\+: Some extra care has to be taken here to translate the \doxylink{classoomph_1_1OcTree}{Oc\+Tree} enumeration to the \doxylink{classoomph_1_1QuadTree}{Quad\+Tree} enumeration (in the appropriate manner) so that the original \doxylink{classoomph_1_1Domain}{Domain} object can be used to calculate the global coordinate associated with the provided local coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Domain}{oomph\+::\+Domain}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Domain_a091982333107142c3ac71a02fbdb6ac8}{Domain}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Domain_ad3ae60cfff2bc9595d942c6891aefb8a}{Domain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a33de7a18dd8ff992dc7faf068197ff50}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Domain_afd6c101003640d74becabcd8f1dcbc67}{\texorpdfstring{$\sim$}{\string~}\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the \doxylink{classoomph_1_1Domain}{Domain} to generically kill any Macro\+Elements left over in the \doxylink{classoomph_1_1MacroElement}{Macro\+Element} container (if it hasn\textquotesingle{}t already been done in the derived class) to avoid memory leaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access to i-\/th macro element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Domain_a3ed63583615d0e8471d95ba13ccc0aff}{nmacro\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Number of macro elements in domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a7b0c50db44e3bc3c8ae1a0d34ac835c8}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ab7ccc375ba2e46ffb11e4e2c5c485578}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a10142c029e8a57c5470d22701518e9d1}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a9d293b736e74bfeace64c1c8858add8a}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ac663be35932981a1c02b3ed930ec2eda}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a59dfe3a2cff10aa2e12f86dba9584f15}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ae573c54363a8e9d33951e59208a9bc39}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_af4de3686bcfbf5a8e98b92a071607e0f}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a6973f0ef86b83c6cadcd722374c62270}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_afeeb40f9179abe710f14effbe4db42a1}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a645d0e40b2e378eca3b6230741b21169}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary seocond derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a837d82e917451ca9adc755aa99ad99a2}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_abdc23c046616ea3335e9c34b7386d86e}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the \doxylink{classoomph_1_1Domain}{Domain}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a413f4a9c0ed71a03fbafdc813ee23ddb}{N\+\_\+extruded\+\_\+element}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_ada72a38780f4b85e5f9dda48082cf633}{T\+\_\+min}}
+\begin{DoxyCompactList}\small\item\em The minimum t-\/value (defaults to 0.\+0 if not specified) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a22bebc406919888b8524f039a8cb784b}{T\+\_\+max}}
+\begin{DoxyCompactList}\small\item\em The maximum t-\/value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Domain}{oomph\+::\+Domain}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1Domain_a3a54693bb493f31acccadc62468dd7ae}{Macro\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to macro elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for Extruded\+Domains with curvilinear and/or time-\/dependent boundaries. \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} boundaries are typically represented by Geom\+Objects and the \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} itself is decomposed into a number of Extruded\+Macro\+Elements. Any instantiation of a specific \doxylink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain} needs to implement the pure virtual member function. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{ExtrudedDomain::macro\_element\_boundary}}(...)\ }
+
+\end{DoxyCode}
+ which returns a \doxylink{classoomph_1_1Vector}{Vector} representation of each of the Extruded\+Macro\+Elements\textquotesingle{} boundaries, parametrised by the coordinate(s) along this boundary. The Extruded\+Macro\+Elements obtain their boundary positions via member function pointers to {\ttfamily Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(...)}. 
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00057}{57}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ExtrudedDomain_a3aec641345ecc5502afbb29feb2b0006}\label{classoomph_1_1ExtrudedDomain_a3aec641345ecc5502afbb29feb2b0006} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!ExtrudedDomain@{ExtrudedDomain}}
+\index{ExtrudedDomain@{ExtrudedDomain}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{ExtrudedDomain()}{ExtrudedDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}}]{domain\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+extruded\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{extrusion\+\_\+length }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{35}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, and \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a8895282a7ebc08be6473062fbc5c9c60}\label{classoomph_1_1ExtrudedDomain_a8895282a7ebc08be6473062fbc5c9c60} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!ExtrudedDomain@{ExtrudedDomain}}
+\index{ExtrudedDomain@{ExtrudedDomain}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{ExtrudedDomain()}{ExtrudedDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \texorpdfstring{$\ast$}{*}}]{domain\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+extruded\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{t\+\_\+min,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{t\+\_\+max }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00062}{62}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, and \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7}\label{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!````~ExtrudedDomain@{\texorpdfstring{$\sim$}{\string~}ExtrudedDomain}}
+\index{````~ExtrudedDomain@{\texorpdfstring{$\sim$}{\string~}ExtrudedDomain}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ExtrudedDomain()}{\string~ExtrudedDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Extruded\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; the extruded macro elements will be deleted in \doxylink{classoomph_1_1Domain}{Domain}. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00072}{72}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342}\label{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!ExtrudedDomain@{ExtrudedDomain}}
+\index{ExtrudedDomain@{ExtrudedDomain}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{ExtrudedDomain()}{ExtrudedDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}\label{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). NOTE\+: Some extra care has to be taken here to translate the \doxylink{classoomph_1_1OcTree}{Oc\+Tree} enumeration to the \doxylink{classoomph_1_1QuadTree}{Quad\+Tree} enumeration (in the appropriate manner) so that the original \doxylink{classoomph_1_1Domain}{Domain} object can be used to calculate the global coordinate associated with the provided local coordinates. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain}}.
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{144}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00069}{oomph\+::\+Oc\+Tree\+Names\+::L}}, \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{domain_8h_source_l00116}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00129}{macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}, \mbox{\hyperlink{octree_8h_source_l00070}{oomph\+::\+Oc\+Tree\+Names\+::R}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{extruded__domain_8h_source_l00110}{T\+\_\+max}}, \mbox{\hyperlink{extruded__domain_8h_source_l00107}{T\+\_\+min}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, and \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c}\label{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!macro\_element\_pt@{macro\_element\_pt}}
+\index{macro\_element\_pt@{macro\_element\_pt}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_pt()}{macro\_element\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} \texorpdfstring{$\ast$}{*} oomph\+::\+Extruded\+Domain\+::macro\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})}
+
+
+
+Access to i-\/th extruded macro element. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00129}{129}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff}\label{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!nmacro\_element@{nmacro\_element}}
+\index{nmacro\_element@{nmacro\_element}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{nmacro\_element()}{nmacro\_element()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Extruded\+Domain\+::nmacro\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Number of macro elements in domain. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00120}{120}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d}\label{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Extruded\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ExtrudedDomain_abdc23c046616ea3335e9c34b7386d86e}\label{classoomph_1_1ExtrudedDomain_abdc23c046616ea3335e9c34b7386d86e} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}\texorpdfstring{$\ast$}{*} oomph\+::\+Extruded\+Domain\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the \doxylink{classoomph_1_1Domain}{Domain}. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00101}{101}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{Extruded\+Domain()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00062}{Extruded\+Domain()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a413f4a9c0ed71a03fbafdc813ee23ddb}\label{classoomph_1_1ExtrudedDomain_a413f4a9c0ed71a03fbafdc813ee23ddb} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!N\_extruded\_element@{N\_extruded\_element}}
+\index{N\_extruded\_element@{N\_extruded\_element}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{N\_extruded\_element}{N\_extruded\_element}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Extruded\+Domain\+::\+N\+\_\+extruded\+\_\+element\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00104}{104}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{Extruded\+Domain()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00062}{Extruded\+Domain()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_a22bebc406919888b8524f039a8cb784b}\label{classoomph_1_1ExtrudedDomain_a22bebc406919888b8524f039a8cb784b} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!T\_max@{T\_max}}
+\index{T\_max@{T\_max}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{T\_max}{T\_max}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Extruded\+Domain\+::\+T\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The maximum t-\/value. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00110}{110}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1ExtrudedDomain_ada72a38780f4b85e5f9dda48082cf633}\label{classoomph_1_1ExtrudedDomain_ada72a38780f4b85e5f9dda48082cf633} 
+\index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!T\_min@{T\_min}}
+\index{T\_min@{T\_min}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
+\doxysubsubsection{\texorpdfstring{T\_min}{T\_min}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Extruded\+Domain\+::\+T\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The minimum t-\/value (defaults to 0.\+0 if not specified) 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00107}{107}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00144}{macro\+\_\+element\+\_\+boundary()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{extruded__domain_8h}{extruded\+\_\+domain.\+h}}\item 
+\mbox{\hyperlink{extruded__domain_8cc}{extruded\+\_\+domain.\+cc}}\end{DoxyCompactItemize}

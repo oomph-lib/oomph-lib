@@ -1,0 +1,49 @@
+\doxysection{boussinesq\+\_\+convection.\+cc File Reference}
+\hypertarget{boussinesq__convection_8cc}{}\label{boussinesq__convection_8cc}\index{boussinesq\_convection.cc@{boussinesq\_convection.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classConvectionProblem}{Convection\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Convection problem on rectangular domain, discretised with refineable elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for the physical parameters in the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Direction\+\_\+of\+\_\+gravity}} (2)
+\begin{DoxyCompactList}\small\item\em Gravity vector. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{boussinesq__convection_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Boussinesq convection problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad4cdf142ba50635d62ac4c614f445af7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Peclet number (identically one from our non-\/dimensionalisation) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87796c9f402e6f90c07cf5ba0db4367e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Inverse\+\_\+\+Prandtl}} =1.\+0
+\begin{DoxyCompactList}\small\item\em 1/\+Prandtl number \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a637fd2a6a7c5b34ed3288300d8bf84b7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Rayleigh}} = 1800.\+0
+\begin{DoxyCompactList}\small\item\em Rayleigh number, set to be greater than the threshold for linear instability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{boussinesq__convection_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{boussinesq__convection_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{boussinesq\_convection.cc@{boussinesq\_convection.cc}!main@{main}}
+\index{main@{main}!boussinesq\_convection.cc@{boussinesq\_convection.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Boussinesq convection problem. 
+
+
+
+Definition at line \mbox{\hyperlink{boussinesq__convection_8cc_source_l00314}{314}} of file \mbox{\hyperlink{boussinesq__convection_8cc_source}{boussinesq\+\_\+convection.\+cc}}.
+
+
+
+References \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Direction\+\_\+of\+\_\+gravity()}}, \mbox{\hyperlink{boussinesq__convection_8cc_source_l00290}{Convection\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{boussinesq__convection_8cc_source_l00237}{Convection\+Problem$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+conditions()}}.
+

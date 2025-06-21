@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::GeomObject Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1GeomObject-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::GeomObject Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A geometric object is an object that provides a parametrised description of its shape via the function GeomObject::position(...).  
+ <a href="classoomph_1_1GeomObject.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::GeomObject:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1GeomObject.png" usemap="#oomph::GeomObject_map" alt=""/>
+  <map id="oomph::GeomObject_map" name="oomph::GeomObject_map">
+<area href="classoomph_1_1Circle.html" title="Circle in 2D space." alt="oomph::Circle" shape="rect" coords="269,56,528,80"/>
+<area href="classoomph_1_1DiskLikeGeomObjectWithBoundaries.html" title="Base class for upgraded disk-like GeomObject (i.e. 2D surface in 3D space) with specification of boun..." alt="oomph::DiskLikeGeomObjectWithBoundaries" shape="rect" coords="269,112,528,136"/>
+<area href="classoomph_1_1Ellipse.html" title="Steady ellipse with half axes A and B as geometric object:" alt="oomph::Ellipse" shape="rect" coords="269,168,528,192"/>
+<area href="classoomph_1_1EllipticalTube.html" title="Elliptical tube with half axes a and b." alt="oomph::EllipticalTube" shape="rect" coords="269,224,528,248"/>
+<area href="classoomph_1_1FiniteElement.html" title="A general Finite Element class." alt="oomph::FiniteElement" shape="rect" coords="269,280,528,304"/>
+<area href="classoomph_1_1ImmersedRigidBodyElement.html" title="Class that solves the equations of motion for a general two-dimensional rigid body subject to a parti..." alt="oomph::ImmersedRigidBodyElement" shape="rect" coords="269,336,528,360"/>
+<area href="classoomph_1_1MeshAsGeomObject.html" title="This class provides a GeomObject representation of a given finite element mesh. The Lagrangian coordi..." alt="oomph::MeshAsGeomObject" shape="rect" coords="269,392,528,416"/>
+<area href="classoomph_1_1PseudoBucklingRing.html" title="Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring." alt="oomph::PseudoBucklingRing" shape="rect" coords="269,448,528,472"/>
+<area href="classoomph_1_1StraightLine.html" title="Steady, straight 1D line in 2D space." alt="oomph::StraightLine" shape="rect" coords="269,504,528,528"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aff5bdabab387795b74ea1df0ab4ef1a6" id="r_aff5bdabab387795b74ea1df0ab4ef1a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#aff5bdabab387795b74ea1df0ab4ef1a6">GeomObject</a> ()</td></tr>
+<tr class="memdesc:aff5bdabab387795b74ea1df0ab4ef1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:aff5bdabab387795b74ea1df0ab4ef1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56cd9cb7bb39ff2c30fb56039be83d31" id="r_a56cd9cb7bb39ff2c30fb56039be83d31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a56cd9cb7bb39ff2c30fb56039be83d31">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>)</td></tr>
+<tr class="memdesc:a56cd9cb7bb39ff2c30fb56039be83d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass dimension of geometric object (# of Eulerian coords = # of Lagrangian coords; no time history available/needed)  <br /></td></tr>
+<tr class="separator:a56cd9cb7bb39ff2c30fb56039be83d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fcf14b1bf5d2bc26f64156baecb7da" id="r_ae3fcf14b1bf5d2bc26f64156baecb7da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ae3fcf14b1bf5d2bc26f64156baecb7da">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>)</td></tr>
+<tr class="memdesc:ae3fcf14b1bf5d2bc26f64156baecb7da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: pass # of Eulerian and Lagrangian coordinates. No time history available/needed.  <br /></td></tr>
+<tr class="separator:ae3fcf14b1bf5d2bc26f64156baecb7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a091c285c27b4efc14c5afed4d3b31" id="r_a75a091c285c27b4efc14c5afed4d3b31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a75a091c285c27b4efc14c5afed4d3b31">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:a75a091c285c27b4efc14c5afed4d3b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: pass # of Eulerian and Lagrangian coordinates and pointer to time-stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the GeomData varies with time.  <br /></td></tr>
+<tr class="separator:a75a091c285c27b4efc14c5afed4d3b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcff7382d77b6c995d2b43f14392047e" id="r_afcff7382d77b6c995d2b43f14392047e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#afcff7382d77b6c995d2b43f14392047e">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afcff7382d77b6c995d2b43f14392047e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:afcff7382d77b6c995d2b43f14392047e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561d2439cbab0ca9ec8c15b3d4cda00d" id="r_a561d2439cbab0ca9ec8c15b3d4cda00d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a561d2439cbab0ca9ec8c15b3d4cda00d">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a561d2439cbab0ca9ec8c15b3d4cda00d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a561d2439cbab0ca9ec8c15b3d4cda00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab784d34d63bd852ee30fc03684717410" id="r_ab784d34d63bd852ee30fc03684717410"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ab784d34d63bd852ee30fc03684717410">~GeomObject</a> ()</td></tr>
+<tr class="memdesc:ab784d34d63bd852ee30fc03684717410"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) destructor  <br /></td></tr>
+<tr class="separator:ab784d34d63bd852ee30fc03684717410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8974ee138b0f879c459340a9f05e06c" id="r_ae8974ee138b0f879c459340a9f05e06c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae8974ee138b0f879c459340a9f05e06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to # of Lagrangian coordinates.  <br /></td></tr>
+<tr class="separator:ae8974ee138b0f879c459340a9f05e06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0305c3102fa6f5042461afb600a082df" id="r_a0305c3102fa6f5042461afb600a082df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0305c3102fa6f5042461afb600a082df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to # of Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a0305c3102fa6f5042461afb600a082df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375ecd197d0aff695825ad33a35e0d7e" id="r_a375ecd197d0aff695825ad33a35e0d7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a375ecd197d0aff695825ad33a35e0d7e">set_nlagrangian_and_ndim</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_lagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_dim</a>)</td></tr>
+<tr class="memdesc:a375ecd197d0aff695825ad33a35e0d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set # of Lagrangian and Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a375ecd197d0aff695825ad33a35e0d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc851a3b50103b6c9f68efe86e709de" id="r_a0fc851a3b50103b6c9f68efe86e709de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a> ()</td></tr>
+<tr class="memdesc:a0fc851a3b50103b6c9f68efe86e709de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to time stepper: Null if object is not time-dependent.  <br /></td></tr>
+<tr class="separator:a0fc851a3b50103b6c9f68efe86e709de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca52ab6f4609144b7057961bd318fdc" id="r_a8ca52ab6f4609144b7057961bd318fdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a8ca52ab6f4609144b7057961bd318fdc">time_stepper_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8ca52ab6f4609144b7057961bd318fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to time stepper: Null if object is not time-dependent. Const version.  <br /></td></tr>
+<tr class="separator:a8ca52ab6f4609144b7057961bd318fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d325347e19964e127fe124df56f251" id="r_a19d325347e19964e127fe124df56f251"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a19d325347e19964e127fe124df56f251">ngeom_data</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a19d325347e19964e127fe124df56f251"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> does the shape of the object depend on? This is implemented as a broken virtual function. You must overload this for GeomObjects that contain geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, i.e. GeomObjects whose shape depends on <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that may contain unknowns in the overall <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>.  <br /></td></tr>
+<tr class="separator:a19d325347e19964e127fe124df56f251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512b6e559414821452836a387cb34132" id="r_a512b6e559414821452836a387cb34132"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a512b6e559414821452836a387cb34132">geom_data_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a512b6e559414821452836a387cb34132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the j-th <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item that the object's shape depends on. This is implemented as a broken virtual function. You must overload this for GeomObjects that contain geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, i.e. GeomObjects whose shape depends on <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that may contain unknowns in the overall <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>.  <br /></td></tr>
+<tr class="separator:a512b6e559414821452836a387cb34132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d04c9d4667817f3ef24bb660fd56065" id="r_a0d04c9d4667817f3ef24bb660fd56065"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> =0</td></tr>
+<tr class="memdesc:a0d04c9d4667817f3ef24bb660fd56065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object at current time: r(zeta).  <br /></td></tr>
+<tr class="separator:a0d04c9d4667817f3ef24bb660fd56065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad44a736d23dcd63af163a7d80b5c4dfa" id="r_ad44a736d23dcd63af163a7d80b5c4dfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ad44a736d23dcd63af163a7d80b5c4dfa">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ad44a736d23dcd63af163a7d80b5c4dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Works for t=0 but needs to be overloaded if genuine time-dependence is required.  <br /></td></tr>
+<tr class="separator:ad44a736d23dcd63af163a7d80b5c4dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5736db11f3a40daa1a9b3d4859ca061" id="r_af5736db11f3a40daa1a9b3d4859ca061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#af5736db11f3a40daa1a9b3d4859ca061">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:af5736db11f3a40daa1a9b3d4859ca061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at the continuous time value, t.  <br /></td></tr>
+<tr class="separator:af5736db11f3a40daa1a9b3d4859ca061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa46469e491d25eda8dbe213f07152974" id="r_aa46469e491d25eda8dbe213f07152974"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#aa46469e491d25eda8dbe213f07152974">dposition_dt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdt</a>)</td></tr>
+<tr class="memdesc:aa46469e491d25eda8dbe213f07152974"><td class="mdescLeft">&#160;</td><td class="mdescRight">j-th time-derivative on object at current time: <img class="formulaInl" alt="$ \frac{d^{j} r(\zeta)}{dt^j} $" src="form_45.png" width="30" height="20"/>.  <br /></td></tr>
+<tr class="separator:aa46469e491d25eda8dbe213f07152974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91cd59efcb15971a293914b7b9bd7f75" id="r_a91cd59efcb15971a293914b7b9bd7f75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a91cd59efcb15971a293914b7b9bd7f75">dposition</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a91cd59efcb15971a293914b7b9bd7f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a91cd59efcb15971a293914b7b9bd7f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08472dbe196123490ea109762cefd00c" id="r_a08472dbe196123490ea109762cefd00c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a08472dbe196123490ea109762cefd00c">d2position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ddrdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a08472dbe196123490ea109762cefd00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a08472dbe196123490ea109762cefd00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdbd372e26d4486026c06dcfdaafe81" id="r_a4fdbd372e26d4486026c06dcfdaafe81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a4fdbd372e26d4486026c06dcfdaafe81">d2position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdzeta</a>, <a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ddrdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4fdbd372e26d4486026c06dcfdaafe81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posn <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a4fdbd372e26d4486026c06dcfdaafe81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ee9f98bcfd0c5e1f07a459777663d3" id="r_a78ee9f98bcfd0c5e1f07a459777663d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a78ee9f98bcfd0c5e1f07a459777663d3">locate_zeta</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">sub_geom_object_pt</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">use_coordinate_as_initial_guess</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>)</td></tr>
+<tr class="memdesc:a78ee9f98bcfd0c5e1f07a459777663d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A geometric object may be composed of may sub-objects (e.g. a finite-element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-object and local coordinate within that sub-object at a given intrinsic coordinate, zeta. Note that only one sub-object can "cover" any given intrinsic position. If the position is at an "interface" between sub-objects, either one can be returned. The default implementation merely returns, the pointer to the "entire" <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess.  <br /></td></tr>
+<tr class="separator:a78ee9f98bcfd0c5e1f07a459777663d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5530baea63e377937920d2dcf0d583" id="r_a1c5530baea63e377937920d2dcf0d583"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a1c5530baea63e377937920d2dcf0d583">interpolated_zeta</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1c5530baea63e377937920d2dcf0d583"><td class="mdescLeft">&#160;</td><td class="mdescRight">A geometric object may be composed of many sub-objects each with their own local coordinate. This function returns the "global" intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.e. the intrinsic coordinate of the sub-GeomObject. In simple (non-compound) GeomObjects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode.  <br /></td></tr>
+<tr class="separator:a1c5530baea63e377937920d2dcf0d583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a11d8ac51be65ee822a6c782c5e079a2c" id="r_a11d8ac51be65ee822a6c782c5e079a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a11d8ac51be65ee822a6c782c5e079a2c">NLagrangian</a></td></tr>
+<tr class="memdesc:a11d8ac51be65ee822a6c782c5e079a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Lagrangian (intrinsic) coordinates.  <br /></td></tr>
+<tr class="separator:a11d8ac51be65ee822a6c782c5e079a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6351e2d8fbd54ff23498eb6f77c905cc" id="r_a6351e2d8fbd54ff23498eb6f77c905cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a6351e2d8fbd54ff23498eb6f77c905cc">Ndim</a></td></tr>
+<tr class="memdesc:a6351e2d8fbd54ff23498eb6f77c905cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a6351e2d8fbd54ff23498eb6f77c905cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158a36e0dbcaf236ffc351b76faaed53" id="r_a158a36e0dbcaf236ffc351b76faaed53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a158a36e0dbcaf236ffc351b76faaed53">Geom_object_time_stepper_pt</a></td></tr>
+<tr class="memdesc:a158a36e0dbcaf236ffc351b76faaed53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestepper (used to handle access to geometry at previous timesteps)  <br /></td></tr>
+<tr class="separator:a158a36e0dbcaf236ffc351b76faaed53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A geometric object is an object that provides a parametrised description of its shape via the function GeomObject::position(...). </p>
+<p>The minimum functionality is: The geometric object has a number of Lagrangian (intrinsic) coordinates that parametrise the (Eulerian) position vector, whose dimension might differ from the number of Lagrangian (intrinsic) coordinates (e.g. for shell-like objects).</p>
+<p>We might also need the derivatives of the position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to the Lagrangian (intrinsic) coordinates and interfaces for this functionality are provided. [Note: For some geometric objects it might be too tedious to work out the derivatives and they might not be needed anyway. In other cases we might always need the position vector and all derivatives at the same time. We provide suitable interfaces for these cases in virtual but broken (rather than pure virtual) form so the user can (but doesn't have to) provide the required versions by overloading.]</p>
+<p>The shape of a geometric object is usually determined by a number of parameters whose value might have to be determined as part of the overall solution (e.g. for geometric objects that represent elastic walls). The geometric object therefore has a vector of (pointers to) geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, which can be free/pinned and have a time history, etc. This makes it possible to &lsquo;upgrade&rsquo; GeomObjects to GeneralisedElements &ndash; in this case the geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> plays the role of internal <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> in the <a class="el" href="classoomph_1_1GeneralisedElement.html" title="A Generalised Element class.">GeneralisedElement</a>. Conversely, FiniteElements, in which a geometry (spatial coordinate) has been defined, inherit from GeomObjects, which is particularly useful in FSI computations: Meshing of moving domains is typically performed by representing the domain as an object of type <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> and, by default, <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> boundaries are represented by GeomObjects. In FSI computations, the boundary of the fluid domain is represented by a number of solid mechanics elements. These elements are, in fact, GeomObjects via inheritance so that the we can use the standard interfaces of the <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> class for mesh generation. An example is the class <code><a class="el" href="classoomph_1_1FSIHermiteBeamElement.html" title="Hermite Kirchhoff Love beam &quot;upgraded&quot; to a FSIWallElement (and thus, by inheritance,...">FSIHermiteBeamElement</a></code> which is derived from the class <code><a class="el" href="classoomph_1_1HermiteBeamElement.html" title="Hermite Kirchhoff Love beam. Implements KirchhoffLoveBeamEquations using 2-node Hermite elements as t...">HermiteBeamElement</a></code> (a &lsquo;normal&rsquo; beam element) and the <code><a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a></code> class.</p>
+<p>The shape of a geometric object can have an explicit time-dependence, for instance in cases where a domain boundary is performing prescribed motions. We provide access to the &lsquo;global&rsquo; time by giving the object a pointer to a timestepping scheme. [Note that, within the overall FE code, time is only ever evaluated at discrete instants (which are accessible via the timestepper), never in continuous form]. The timestepper is also needed to evaluate time-derivatives if the geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> carries a time history. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00100">100</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aff5bdabab387795b74ea1df0ab4ef1a6" name="aff5bdabab387795b74ea1df0ab4ef1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5bdabab387795b74ea1df0ab4ef1a6">&#9670;&#160;</a></span>GeomObject() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeomObject::GeomObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00104">104</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<a id="a56cd9cb7bb39ff2c30fb56039be83d31" name="a56cd9cb7bb39ff2c30fb56039be83d31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56cd9cb7bb39ff2c30fb56039be83d31">&#9670;&#160;</a></span>GeomObject() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeomObject::GeomObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ndim</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass dimension of geometric object (# of Eulerian coords = # of Lagrangian coords; no time history available/needed) </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00108">108</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<a id="ae3fcf14b1bf5d2bc26f64156baecb7da" name="ae3fcf14b1bf5d2bc26f64156baecb7da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3fcf14b1bf5d2bc26f64156baecb7da">&#9670;&#160;</a></span>GeomObject() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeomObject::GeomObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nlagrangian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ndim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: pass # of Eulerian and Lagrangian coordinates. No time history available/needed. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00116">116</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00177">ndim()</a>, and <a class="el" href="geom__objects_8h_source.html#l00171">nlagrangian()</a>.</p>
+
+</div>
+</div>
+<a id="a75a091c285c27b4efc14c5afed4d3b31" name="a75a091c285c27b4efc14c5afed4d3b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a091c285c27b4efc14c5afed4d3b31">&#9670;&#160;</a></span>GeomObject() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeomObject::GeomObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nlagrangian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ndim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: pass # of Eulerian and Lagrangian coordinates and pointer to time-stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the GeomData varies with time. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00139">139</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00177">ndim()</a>, and <a class="el" href="geom__objects_8h_source.html#l00171">nlagrangian()</a>.</p>
+
+</div>
+</div>
+<a id="afcff7382d77b6c995d2b43f14392047e" name="afcff7382d77b6c995d2b43f14392047e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcff7382d77b6c995d2b43f14392047e">&#9670;&#160;</a></span>GeomObject() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeomObject::GeomObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="ab784d34d63bd852ee30fc03684717410" name="ab784d34d63bd852ee30fc03684717410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab784d34d63bd852ee30fc03684717410">&#9670;&#160;</a></span>~GeomObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::GeomObject::~GeomObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>(Empty) destructor </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00168">168</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a08472dbe196123490ea109762cefd00c" name="a08472dbe196123490ea109762cefd00c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08472dbe196123490ea109762cefd00c">&#9670;&#160;</a></span>d2position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::d2position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2nd derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1StraightLine.html#ad4a437deb740dcc4c55b69e52e98d2d5">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#a19b6cecd9fcbcad1830a8a3c1e133672">oomph::Ellipse</a>, and <a class="el" href="classoomph_1_1EllipticalTube.html#a8b64fd523511735679b5820c5fb687cf">oomph::EllipticalTube</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00341">341</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="circular__shell__mesh_8template_8cc_source.html#l00126">oomph::CircularCylindricalShellMesh&lt; ELEMENT &gt;::assign_undeformed_positions()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, and <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>.</p>
+
+</div>
+</div>
+<a id="a4fdbd372e26d4486026c06dcfdaafe81" name="a4fdbd372e26d4486026c06dcfdaafe81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fdbd372e26d4486026c06dcfdaafe81">&#9670;&#160;</a></span>d2position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::d2position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ddrdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Posn <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1StraightLine.html#aa7469f6d75ced06789bb094eef5a9c64">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#a5cf7ea86ce09f7371e03fea52395cf3b">oomph::Ellipse</a>, and <a class="el" href="classoomph_1_1EllipticalTube.html#a2fe694a504750371d3ef98a20b92e6a5">oomph::EllipticalTube</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00357">357</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<a id="a91cd59efcb15971a293914b7b9bd7f75" name="a91cd59efcb15971a293914b7b9bd7f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91cd59efcb15971a293914b7b9bd7f75">&#9670;&#160;</a></span>dposition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::dposition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdzeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). Evaluated at current time. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1MeshAsGeomObject.html#aed3e9376f6042fed597098c0017a2131">oomph::MeshAsGeomObject</a>, <a class="el" href="classoomph_1_1StraightLine.html#a306df01816b5d015d18208c1a9ce1af1">oomph::StraightLine</a>, and <a class="el" href="classoomph_1_1Ellipse.html#af8caf51de734dff257fa3dbde14fa167">oomph::Ellipse</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00327">327</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<a id="aa46469e491d25eda8dbe213f07152974" name="aa46469e491d25eda8dbe213f07152974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa46469e491d25eda8dbe213f07152974">&#9670;&#160;</a></span>dposition_dt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::dposition_dt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>j-th time-derivative on object at current time: <img class="formulaInl" alt="$ \frac{d^{j} r(\zeta)}{dt^j} $" src="form_45.png" width="30" height="20"/>. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#a83bf7fe6d4d9dc08400aa853198c716d">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1PseudoBucklingRing.html#aa11d7bbd2d01a646200e8719e61ad09a">oomph::PseudoBucklingRing</a>, <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#a3b25cfe303aa51f26bd27312abccbba4">oomph::ImmersedRigidBodyElement</a>, and <a class="el" href="classoomph_1_1FiniteElement.html#a1444cb95e415d363c6a7a35332f15730">oomph::FiniteElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00292">292</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">position()</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07407">oomph::SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic()</a>.</p>
+
+</div>
+</div>
+<a id="a512b6e559414821452836a387cb34132" name="a512b6e559414821452836a387cb34132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a512b6e559414821452836a387cb34132">&#9670;&#160;</a></span>geom_data_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Data.html">Data</a> * oomph::GeomObject::geom_data_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to the j-th <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item that the object's shape depends on. This is implemented as a broken virtual function. You must overload this for GeomObjects that contain geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, i.e. GeomObjects whose shape depends on <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that may contain unknowns in the overall <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#a5bcf4b1b4e1d3126583096ee7e2b216d">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a31f59d300e5bb25a671608faf9e22c12">oomph::FiniteElement</a>, <a class="el" href="classoomph_1_1SolidFiniteElement.html#a0cb5fd3657899de308ea878948e63a52">oomph::SolidFiniteElement</a>, <a class="el" href="classoomph_1_1FaceElementAsGeomObject.html#a1b84f8caed1def4d7e7bb4b415f59cb7">oomph::FaceElementAsGeomObject&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1StraightLine.html#a15de05e466111a2031579d2ecbeb32e2">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#ac293fd6830b55de7ad39df03ec3add2b">oomph::Ellipse</a>, <a class="el" href="classoomph_1_1Circle.html#ad7543151dd46f8db57bec8c4d97044a6">oomph::Circle</a>, <a class="el" href="classoomph_1_1MeshAsGeomObject.html#a2295105be2e8e5b2527f23b0b93fa5cd">oomph::MeshAsGeomObject</a>, <a class="el" href="classoomph_1_1PseudoBucklingRing.html#aed7e4e24a81d91f21bc972da131d1407">oomph::PseudoBucklingRing</a>, <a class="el" href="classoomph_1_1RefineableSolidElement.html#a3f20de56e3a920644b01dac184f67ef1">oomph::RefineableSolidElement</a>, and <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#a70a80642abccb05334b4863024dbc3e5">oomph::ImmersedRigidBodyElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00233">233</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="solid__traction__elements_8h_source.html#l01209">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::set_boundary_shape_geom_object_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a1c5530baea63e377937920d2dcf0d583" name="a1c5530baea63e377937920d2dcf0d583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c5530baea63e377937920d2dcf0d583">&#9670;&#160;</a></span>interpolated_zeta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::interpolated_zeta </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A geometric object may be composed of many sub-objects each with their own local coordinate. This function returns the "global" intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.e. the intrinsic coordinate of the sub-GeomObject. In simple (non-compound) GeomObjects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FiniteElement.html#a4407a4f0fb5bf5b883530742ee3153df">oomph::FiniteElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00404">404</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="a78ee9f98bcfd0c5e1f07a459777663d3" name="a78ee9f98bcfd0c5e1f07a459777663d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78ee9f98bcfd0c5e1f07a459777663d3">&#9670;&#160;</a></span>locate_zeta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::locate_zeta </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;&#160;</td>
+          <td class="paramname"><em>sub_geom_object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>use_coordinate_as_initial_guess</em> = <code><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A geometric object may be composed of may sub-objects (e.g. a finite-element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-object and local coordinate within that sub-object at a given intrinsic coordinate, zeta. Note that only one sub-object can "cover" any given intrinsic position. If the position is at an "interface" between sub-objects, either one can be returned. The default implementation merely returns, the pointer to the "entire" <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FSIHermiteBeamElement.html#ae56f8245dbbb641c98d326780ff9400d">oomph::FSIHermiteBeamElement</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a4dc20a17b1d0e255f917895975cbd15d">oomph::FiniteElement</a>, and <a class="el" href="classoomph_1_1MeshAsGeomObject.html#a8a9fecb98d4e0a151e3b9e58aa433be9">oomph::MeshAsGeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00381">381</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00060">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01209">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::set_boundary_shape_geom_object_pt()</a>, <a class="el" href="channel__with__leaflet__mesh_8template_8cc_source.html#l00626">oomph::RefineableAlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt;::update_node_update()</a>, <a class="el" href="collapsible__channel__mesh_8template_8cc_source.html#l00435">oomph::RefineableAlgebraicCollapsibleChannelMesh&lt; ELEMENT &gt;::update_node_update()</a>, <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html#l01841">oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;::update_node_update()</a>, <a class="el" href="fish__mesh_8h_source.html#l00417">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::update_node_update()</a>, and <a class="el" href="fsi__driven__cavity__mesh_8template_8cc_source.html#l00385">oomph::RefineableAlgebraicFSIDrivenCavityMesh&lt; ELEMENT &gt;::update_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a0305c3102fa6f5042461afb600a082df" name="a0305c3102fa6f5042461afb600a082df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0305c3102fa6f5042461afb600a082df">&#9670;&#160;</a></span>ndim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::GeomObject::ndim </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to # of Eulerian coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00177">177</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00431">Ndim</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mesh__smooth_8h_source.html#l00395">oomph::NonLinearElasticitySmoothMesh&lt; ELEMENT &gt;::actions_before_newton_solve()</a>, <a class="el" href="problem_8cc_source.html#l13744">oomph::Problem::adapt()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="elements_8cc_source.html#l00696">oomph::GeneralisedElement::assign_local_eqn_numbers()</a>, <a class="el" href="mesh__smooth_8h_source.html#l00416">oomph::NonLinearElasticitySmoothMesh&lt; ELEMENT &gt;::backup()</a>, <a class="el" href="face__mesh__project_8h_source.html#l00230">oomph::BackupMeshForProjection&lt; GEOMETRIC_ELEMENT &gt;::BackupMeshForProjection()</a>, <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="hermite__elements_8cc_source.html#l00278">oomph::QHermiteElement&lt; DIM &gt;::build_face_element()</a>, <a class="el" href="Qspectral__elements_8cc_source.html#l00119">oomph::QSpectralElement&lt; 1, NNODE_1D &gt;::build_face_element()</a>, <a class="el" href="Qspectral__elements_8cc_source.html#l00305">oomph::QSpectralElement&lt; 2, NNODE_1D &gt;::build_face_element()</a>, <a class="el" href="Qspectral__elements_8cc_source.html#l00538">oomph::QSpectralElement&lt; 3, NNODE_1D &gt;::build_face_element()</a>, <a class="el" href="mesh_8h_source.html#l00760">oomph::Mesh::check_for_repeated_nodes()</a>, <a class="el" href="mesh_8cc_source.html#l06881">oomph::Mesh::check_halo_schemes()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l02078">oomph::Multi_domain_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="missing__masters_8template_8cc_source.html#l00251">oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01451">oomph::Multi_domain_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l01297">oomph::Missing_masters_functions::construct_new_external_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l19416">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l27906">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_node_load_balance_helper()</a>, <a class="el" href="nodes_8cc_source.html#l01916">oomph::Node::copy()</a>, <a class="el" href="mesh_8cc_source.html#l09190">oomph::Mesh::delete_all_external_storage()</a>, <a class="el" href="mesh_8cc_source.html#l04959">oomph::Mesh::distribute()</a>, <a class="el" href="fsi_8h_source.html#l00724">oomph::FSI_functions::doc_fsi()</a>, <a class="el" href="mesh_8cc_source.html#l06470">oomph::Mesh::doc_mesh_distribution()</a>, <a class="el" href="mesh_8h_source.html#l02080">oomph::Mesh::doc_shared_nodes()</a>, <a class="el" href="beam__elements_8cc_source.html#l01199">oomph::FSIHermiteBeamElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="shell__elements_8cc_source.html#l01332">oomph::FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="navier__stokes__surface__power__elements_8h_source.html#l00093">oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;::drag_force()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="geom__objects_8h_source.html#l00116">GeomObject()</a>, <a class="el" href="geom__objects_8h_source.html#l00139">GeomObject()</a>, <a class="el" href="problem_8cc_source.html#l19357">oomph::Problem::get_data_to_be_sent_during_load_balancing()</a>, <a class="el" href="navier__stokes__surface__drag__torque__elements_8h_source.html#l00087">oomph::NavierStokesSurfaceDragTorqueElement&lt; ELEMENT &gt;::get_drag_and_torque()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="navier__stokes__surface__power__elements_8h_source.html#l00571">oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;::get_kinetic_energy_flux()</a>, <a class="el" href="beam__elements_8cc_source.html#l00184">oomph::KirchhoffLoveBeamEquations::get_non_unit_tangent()</a>, <a class="el" href="beam__elements_8cc_source.html#l00077">oomph::KirchhoffLoveBeamEquations::get_normal()</a>, <a class="el" href="navier__stokes__surface__power__elements_8h_source.html#l00226">oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;::get_rate_of_traction_work()</a>, <a class="el" href="navier__stokes__surface__power__elements_8h_source.html#l00385">oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;::get_rate_of_traction_work_components()</a>, <a class="el" href="missing__masters_8cc_source.html#l00657">oomph::Missing_masters_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01009">oomph::Multi_domain_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00435">oomph::Missing_masters_functions::get_required_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l00753">oomph::Multi_domain_functions::get_required_nodal_information_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l18330">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::get_required_nodal_information_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l26811">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::get_required_nodal_information_load_balance_helper()</a>, <a class="el" href="navier__stokes__surface__power__elements_8h_source.html#l00712">oomph::NavierStokesSurfacePowerElement&lt; ELEMENT &gt;::get_volume_flux()</a>, <a class="el" href="mesh_8h_source.html#l02926">oomph::NodeOrdering::node_global_position_comparison()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00653">oomph::AlgebraicMesh::node_update()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00950">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_central_region()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00868">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::node_update_in_body()</a>, <a class="el" href="quarter__circle__sector__mesh_8template_8cc_source.html#l00834">oomph::AlgebraicRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;::node_update_in_central_box()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00923">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::node_update_in_fin()</a>, <a class="el" href="quarter__circle__sector__mesh_8template_8cc_source.html#l00921">oomph::AlgebraicRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;::node_update_in_lower_right_box()</a>, <a class="el" href="quarter__circle__sector__mesh_8template_8cc_source.html#l01029">oomph::AlgebraicRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt;::node_update_in_upper_left_box()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01039">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_lower_right_region()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01156">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_upper_left_region()</a>, <a class="el" href="mesh__smooth_8h_source.html#l00529">oomph::LinearElasticitySmoothMesh&lt; LINEAR_ELASTICITY_ELEMENT &gt;::operator()()</a>, <a class="el" href="mesh__smooth_8h_source.html#l00664">oomph::PoissonSmoothMesh&lt; POISSON_ELEMENT &gt;::operator()()</a>, <a class="el" href="beam__elements_8cc_source.html#l00982">oomph::HermiteBeamElement::output()</a>, <a class="el" href="elements_8h_source.html#l05046">oomph::DummyFaceElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>, <a class="el" href="pml__time__harmonic__linear__elasticity__traction__elements_8h_source.html#l00214">oomph::PMLTimeHarmonicLinearElasticityTractionElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="time__harmonic__linear__elasticity__traction__elements_8h_source.html#l00214">oomph::TimeHarmonicLinearElasticityTractionElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l08020">oomph::TriangleMesh&lt; ELEMENT &gt;::output_boundary_coordinates()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04435">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01990">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l06104">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="tree_8template_8cc_source.html#l00148">oomph::Tree::p_refine_if_required()</a>, <a class="el" href="projection_8h_source.html#l00748">oomph::ProjectionProblem&lt; PROJECTABLE_ELEMENT &gt;::project()</a>, <a class="el" href="nodes_8cc_source.html#l00672">oomph::Data::read()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03207">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l07633">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="refineable__brick__spectral__element_8h_source.html#l00079">oomph::RefineableQSpectralElement&lt; 3 &gt;::rebuild_from_sons()</a>, <a class="el" href="refineable__quad__spectral__element_8h_source.html#l00079">oomph::RefineableQSpectralElement&lt; 2 &gt;::rebuild_from_sons()</a>, <a class="el" href="problem_8cc_source.html#l02664">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="mesh__smooth_8h_source.html#l00435">oomph::NonLinearElasticitySmoothMesh&lt; ELEMENT &gt;::reset()</a>, <a class="el" href="mesh_8cc_source.html#l04426">oomph::Mesh::resize_halo_nodes()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00261">oomph::ContinuationStorageScheme::set_consistent_pinned_positions()</a>, <a class="el" href="problem_8cc_source.html#l04295">oomph::Problem::set_pinned_values_to_zero()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">oomph::Tree::split_if_required()</a>, <a class="el" href="womersley__elements_8h_source.html#l01616">oomph::WomersleyMesh&lt; WOMERSLEY_ELEMENT &gt;::WomersleyMesh()</a>, and <a class="el" href="geom__obj__with__boundary_8h_source.html#l00091">oomph::DiskLikeGeomObjectWithBoundaries::zeta_on_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a19d325347e19964e127fe124df56f251" name="a19d325347e19964e127fe124df56f251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d325347e19964e127fe124df56f251">&#9670;&#160;</a></span>ngeom_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::GeomObject::ngeom_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How many items of <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> does the shape of the object depend on? This is implemented as a broken virtual function. You must overload this for GeomObjects that contain geometric <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>, i.e. GeomObjects whose shape depends on <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> that may contain unknowns in the overall <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#ad3b508a8c906a3e175f9c058a0103023">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ElementWithMovingNodes.html#acd9274afc02b66bb15b368e359c40a6f">oomph::ElementWithMovingNodes</a>, <a class="el" href="classoomph_1_1FiniteElement.html#ae09e3e0c01b6143d511f2626d2ee535c">oomph::FiniteElement</a>, <a class="el" href="classoomph_1_1SolidFiniteElement.html#a73f387da7f31f233b79c2526e8cbc896">oomph::SolidFiniteElement</a>, <a class="el" href="classoomph_1_1FaceElementAsGeomObject.html#aa4c65d845266c0fc60bbd0d75d2951bb">oomph::FaceElementAsGeomObject&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1StraightLine.html#abcc547cb889a1447cac0827698d5c8ca">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#a7b89731ed0bbe563d323d0eb5e1e708c">oomph::Ellipse</a>, <a class="el" href="classoomph_1_1Circle.html#a69d37777c2d4e7e13431a1a1e7f31ad5">oomph::Circle</a>, <a class="el" href="classoomph_1_1EllipticalTube.html#ad137810aac62250463273656db192ed7">oomph::EllipticalTube</a>, <a class="el" href="classoomph_1_1MeshAsGeomObject.html#a47d0c877a05e1d84703052431396cd0c">oomph::MeshAsGeomObject</a>, <a class="el" href="classoomph_1_1PseudoBucklingRing.html#a9e03780134886a9a2a19358519eca3be">oomph::PseudoBucklingRing</a>, <a class="el" href="classoomph_1_1RefineableSolidElement.html#a690e24cdbd9308da1b9e705fd0340de8">oomph::RefineableSolidElement</a>, and <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#a4c5bf4b09a19ea70edf9ec68b41bfd2a">oomph::ImmersedRigidBodyElement</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00209">209</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="solid__traction__elements_8h_source.html#l01209">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::set_boundary_shape_geom_object_pt()</a>.</p>
+
+</div>
+</div>
+<a id="ae8974ee138b0f879c459340a9f05e06c" name="ae8974ee138b0f879c459340a9f05e06c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8974ee138b0f879c459340a9f05e06c">&#9670;&#160;</a></span>nlagrangian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::GeomObject::nlagrangian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to # of Lagrangian coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00171">171</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00428">NLagrangian</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="multi__domain_8template_8cc_source.html#l00531">oomph::Multi_domain_functions::aux_setup_multi_domain_interaction()</a>, <a class="el" href="nodes_8cc_source.html#l03435">oomph::SolidNode::copy()</a>, <a class="el" href="mesh_8cc_source.html#l09190">oomph::Mesh::delete_all_external_storage()</a>, <a class="el" href="beam__elements_8cc_source.html#l01199">oomph::FSIHermiteBeamElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="shell__elements_8cc_source.html#l01332">oomph::FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="error__estimator_8h_source.html#l00438">oomph::DummyErrorEstimator::DummyErrorEstimator()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="geom__objects_8h_source.html#l00116">GeomObject()</a>, <a class="el" href="geom__objects_8h_source.html#l00139">GeomObject()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00184">oomph::KirchhoffLoveBeamEquations::get_non_unit_tangent()</a>, <a class="el" href="beam__elements_8cc_source.html#l00077">oomph::KirchhoffLoveBeamEquations::get_normal()</a>, <a class="el" href="missing__masters_8cc_source.html#l00657">oomph::Missing_masters_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01009">oomph::Multi_domain_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00868">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::node_update_in_body()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00923">oomph::AlgebraicFishMesh&lt; ELEMENT &gt;::node_update_in_fin()</a>, <a class="el" href="beam__elements_8cc_source.html#l00982">oomph::HermiteBeamElement::output()</a>, <a class="el" href="hermite__elements_8cc_source.html#l01134">oomph::SolidQHermiteElement&lt; DIM &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l01853">oomph::SolidQElement&lt; 1, NNODE_1D &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l02015">oomph::SolidQElement&lt; 2, NNODE_1D &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l02189">oomph::SolidQElement&lt; 3, NNODE_1D &gt;::output()</a>, <a class="el" href="hermite__elements_8cc_source.html#l01178">oomph::SolidQHermiteElement&lt; DIM &gt;::output()</a>, <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>, <a class="el" href="hermite__elements_8cc_source.html#l01083">oomph::SolidQHermiteElement&lt; DIM &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l01813">oomph::SolidQElement&lt; 1, NNODE_1D &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l01971">oomph::SolidQElement&lt; 2, NNODE_1D &gt;::output()</a>, <a class="el" href="Qelements_8h_source.html#l02140">oomph::SolidQElement&lt; 3, NNODE_1D &gt;::output()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04435">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="mesh__as__geometric__object_8h_source.html#l00409">oomph::MeshAsGeomObject::position()</a>, <a class="el" href="stored__shape__function__elements_8cc_source.html#l01023">oomph::StorableShapeSolidElementBase::pre_compute_d2shape_lagrangian_at_knots()</a>, <a class="el" href="stored__shape__function__elements_8cc_source.html#l00960">oomph::StorableShapeSolidElementBase::pre_compute_dshape_lagrangian_at_knots()</a>, and <a class="el" href="geom__obj__with__boundary_8h_source.html#l00091">oomph::DiskLikeGeomObjectWithBoundaries::zeta_on_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a561d2439cbab0ca9ec8c15b3d4cda00d" name="a561d2439cbab0ca9ec8c15b3d4cda00d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a561d2439cbab0ca9ec8c15b3d4cda00d">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="af5736db11f3a40daa1a9b3d4859ca061" name="af5736db11f3a40daa1a9b3d4859ca061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5736db11f3a40daa1a9b3d4859ca061">&#9670;&#160;</a></span>position() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at the continuous time value, t. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00276">276</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+</div>
+</div>
+<a id="ad44a736d23dcd63af163a7d80b5c4dfa" name="ad44a736d23dcd63af163a7d80b5c4dfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad44a736d23dcd63af163a7d80b5c4dfa">&#9670;&#160;</a></span>position() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(zeta). Evaluated at previous timestep. t=0: current time; t&gt;0: previous timestep. Works for t=0 but needs to be overloaded if genuine time-dependence is required. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#aca95759d96758c7a4fc81dece7768e9d">oomph::ImmersedRigidBodyElement</a>, <a class="el" href="classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon.html#ad1bd014b31d75703384be201ab65e80f">oomph::ImmersedRigidBodyTriangleMeshPolygon</a>, <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#a9c86ac02c60541d451ceb50eb49914ed">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1FiniteElement.html#ad1c757b3ea99bfac2521244a977728ed">oomph::FiniteElement</a>, <a class="el" href="classoomph_1_1WarpedCircularDisk.html#afcc9e5e2c88d05b61006bd432e3aa31b">oomph::WarpedCircularDisk</a>, <a class="el" href="classoomph_1_1StraightLine.html#adfa84ac4d8342089f0f69eb2efe1108f">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#a862ce1f7d6ac7b2c5deb613b49caa30f">oomph::Ellipse</a>, <a class="el" href="classoomph_1_1Circle.html#a3d318d67e50a29d7d8916cacc741435b">oomph::Circle</a>, <a class="el" href="classoomph_1_1EllipticalTube.html#a01c6372a901d28892cab9e43ba8b3530">oomph::EllipticalTube</a>, <a class="el" href="classoomph_1_1MeshAsGeomObject.html#aab712c9f8a51d997c13c00eb1afaf9f4">oomph::MeshAsGeomObject</a>, and <a class="el" href="classoomph_1_1PseudoBucklingRing.html#a027211cc7067efa849e605b456cb5462">oomph::PseudoBucklingRing</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00259">259</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">position()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+</div>
+</div>
+<a id="a0d04c9d4667817f3ef24bb660fd56065" name="a0d04c9d4667817f3ef24bb660fd56065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d04c9d4667817f3ef24bb660fd56065">&#9670;&#160;</a></span>position() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object at current time: r(zeta). </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1YoungLaplaceEquations.html#ab1b3d09214a0985a331564135fe14053">oomph::YoungLaplaceEquations</a>, <a class="el" href="classoomph_1_1ImmersedRigidBodyElement.html#a14f5acb186ecd1168dfa08dcf242c538">oomph::ImmersedRigidBodyElement</a>, <a class="el" href="classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon.html#a29e3518f6fcdaeead14ae41f11e6fb5d">oomph::ImmersedRigidBodyTriangleMeshPolygon</a>, <a class="el" href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#a9fc819d4f7a036a45bd62a484c9749d7">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a1d33f53e2b2813fba8a0e8b458bf2047">oomph::FiniteElement</a>, <a class="el" href="classoomph_1_1WarpedCircularDisk.html#a270669e4e5424db18ad657f3876ed6bb">oomph::WarpedCircularDisk</a>, <a class="el" href="classoomph_1_1StraightLine.html#a96aedd167e5529eb7db60a63efad5884">oomph::StraightLine</a>, <a class="el" href="classoomph_1_1Ellipse.html#abf6972409206084dd1f517a535fb1b52">oomph::Ellipse</a>, <a class="el" href="classoomph_1_1Circle.html#a9a527de1361e8cb4c8445e3dd58e66f8">oomph::Circle</a>, <a class="el" href="classoomph_1_1EllipticalTube.html#af7a879adbdba6f7fc1a1dd9c0b9378f6">oomph::EllipticalTube</a>, <a class="el" href="classoomph_1_1MeshAsGeomObject.html#ad071793f5cee36eef0e56dbeeebf4c24">oomph::MeshAsGeomObject</a>, and <a class="el" href="classoomph_1_1PseudoBucklingRing.html#a1cd6c36f2f84385b6485933b18cbbe43">oomph::PseudoBucklingRing</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__mesh_8h_source.html#l00368">oomph::AlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt;::AlgebraicChannelWithLeafletMesh()</a>, <a class="el" href="bretherton__spine__mesh_8template_8cc_source.html#l00060">oomph::BrethertonSpineMesh&lt; ELEMENT, INTERFACE_ELEMENT &gt;::BrethertonSpineMesh()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">oomph::ChannelWithLeafletDomain::ChannelWithLeafletDomain()</a>, <a class="el" href="geom__objects_8h_source.html#l00292">dposition_dt()</a>, <a class="el" href="immersed__rigid__body__elements_8cc_source.html#l00045">oomph::ImmersedRigidBodyElement::dposition_dt()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01676">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00779">oomph::TriangleMeshCurviLine::final_vertex_coordinate()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00771">oomph::TriangleMeshCurviLine::initial_vertex_coordinate()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">oomph::ChannelWithLeafletDomain::macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">oomph::ChannelWithLeafletDomain::macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">oomph::ChannelWithLeafletDomain::macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">oomph::ChannelWithLeafletDomain::macro_bound_II_W()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00131">oomph::RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary()</a>, <a class="el" href="full__circle__domain_8h_source.html#l00155">oomph::FullCircleDomain::macro_element_boundary()</a>, <a class="el" href="tube__domain_8h_source.html#l00166">oomph::TubeDomain::macro_element_boundary()</a>, <a class="el" href="cylinder__with__flag__domain_8h_source.html#l00385">oomph::CylinderWithFlagDomain::macro_element_boundary()</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">oomph::RectangleWithHoleDomain::macro_element_boundary()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00521">oomph::RectangleWithHoleAndAnnularRegionDomain::macro_element_boundary()</a>, <a class="el" href="channel__with__leaflet__mesh_8template_8cc_source.html#l00448">oomph::AlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt;::node_update_I()</a>, <a class="el" href="channel__with__leaflet__mesh_8template_8cc_source.html#l00489">oomph::AlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt;::node_update_II()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01404">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::output()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l00742">oomph::TriangleMeshCurviLine::output()</a>, <a class="el" href="immersed__rigid__body__elements_8h_source.html#l00194">oomph::ImmersedRigidBodyElement::position()</a>, <a class="el" href="geom__objects_8h_source.html#l00259">position()</a>, <a class="el" href="immersed__rigid__body__elements_8h_source.html#l00186">oomph::ImmersedRigidBodyElement::position()</a>, <a class="el" href="geom__obj__with__boundary_8h_source.html#l00080">oomph::DiskLikeGeomObjectWithBoundaries::position_on_boundary()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00088">oomph::RectangleWithHoleAndAnnularRegionDomain::project_point_on_cylinder_to_annular_boundary()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00043">oomph::RectangleWithHoleAndAnnularRegionDomain::project_point_on_cylinder_to_annular_boundary()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00483">oomph::QuarterPipeDomain::r_B()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00812">oomph::QuarterTubeDomain::r_bot_right_B()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00744">oomph::QuarterTubeDomain::r_bot_right_D()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">oomph::QuarterCircleSectorDomain::r_bot_right_E()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00847">oomph::QuarterTubeDomain::r_bot_right_F()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00723">oomph::QuarterTubeDomain::r_bot_right_R()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">oomph::QuarterCircleSectorDomain::r_bot_right_S()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00775">oomph::QuarterTubeDomain::r_bot_right_U()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">oomph::QuarterCircleSectorDomain::r_bot_right_W()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00633">oomph::QuarterTubeDomain::r_centr_B()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00560">oomph::QuarterTubeDomain::r_centr_D()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00671">oomph::QuarterTubeDomain::r_centr_F()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00484">oomph::QuarterTubeDomain::r_centr_L()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00515">oomph::QuarterTubeDomain::r_centr_R()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00528">oomph::QuarterCircleSectorDomain::r_centr_S()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00591">oomph::QuarterTubeDomain::r_centr_U()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00546">oomph::QuarterCircleSectorDomain::r_centr_W()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00383">oomph::QuarterPipeDomain::r_D()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00727">oomph::CollapsibleChannelDomain::r_E_collapsible()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00449">oomph::QuarterPipeDomain::r_F()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00301">oomph::QuarterPipeDomain::r_L()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00762">oomph::CollapsibleChannelDomain::r_N_collapsible()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00342">oomph::QuarterPipeDomain::r_R()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00798">oomph::CollapsibleChannelDomain::r_S_collapsible()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00965">oomph::QuarterTubeDomain::r_top_left_B()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">oomph::QuarterCircleSectorDomain::r_top_left_E()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l01001">oomph::QuarterTubeDomain::r_top_left_F()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00884">oomph::QuarterTubeDomain::r_top_left_L()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">oomph::QuarterCircleSectorDomain::r_top_left_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">oomph::QuarterCircleSectorDomain::r_top_left_S()</a>, <a class="el" href="quarter__tube__domain_8h_source.html#l00943">oomph::QuarterTubeDomain::r_top_left_U()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">oomph::QuarterCircleSectorDomain::r_top_left_W()</a>, <a class="el" href="quarter__pipe__domain_8h_source.html#l00416">oomph::QuarterPipeDomain::r_U()</a>, <a class="el" href="fish__domain_8h_source.html#l00557">oomph::FishDomain::r_upper_body_E()</a>, <a class="el" href="fish__domain_8h_source.html#l00541">oomph::FishDomain::r_upper_body_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00580">oomph::FishDomain::r_upper_body_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00599">oomph::FishDomain::r_upper_body_W()</a>, <a class="el" href="fish__domain_8h_source.html#l00472">oomph::FishDomain::r_upper_fin_N()</a>, <a class="el" href="fish__domain_8h_source.html#l00512">oomph::FishDomain::r_upper_fin_S()</a>, <a class="el" href="fish__domain_8h_source.html#l00495">oomph::FishDomain::r_upper_fin_W()</a>, <a class="el" href="collapsible__channel__domain_8h_source.html#l00692">oomph::CollapsibleChannelDomain::r_W_collapsible()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8h_source.html#l03851">oomph::UnstructuredTwoDMeshGeometryBase::setup_boundary_coordinates()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">oomph::ChannelWithLeafletDomain::slanted_bound_up()</a>, <a class="el" href="unstructured__two__d__mesh__geometry__base_8cc_source.html#l04020">oomph::UnstructuredTwoDMeshGeometryBase::snap_nodes_onto_geometric_objects()</a>, and <a class="el" href="solid__traction__elements_8h_source.html#l01517">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::square_of_l2_norm_of_error()</a>.</p>
+
+</div>
+</div>
+<a id="a375ecd197d0aff695825ad33a35e0d7e" name="a375ecd197d0aff695825ad33a35e0d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a375ecd197d0aff695825ad33a35e0d7e">&#9670;&#160;</a></span>set_nlagrangian_and_ndim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeomObject::set_nlagrangian_and_ndim </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_lagrangian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_dim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set # of Lagrangian and Eulerian coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00183">183</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00431">Ndim</a>, and <a class="el" href="geom__objects_8h_source.html#l00428">NLagrangian</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mesh__as__geometric__object_8h_source.html#l00096">oomph::MeshAsGeomObject::build_it()</a>, <a class="el" href="face__element__as__geometric__object_8h_source.html#l00072">oomph::FaceElementAsGeomObject&lt; ELEMENT &gt;::FaceElementAsGeomObject()</a>, and <a class="el" href="fsi_8cc_source.html#l00121">oomph::FSIWallElement::setup_fsi_wall_element()</a>.</p>
+
+</div>
+</div>
+<a id="a0fc851a3b50103b6c9f68efe86e709de" name="a0fc851a3b50103b6c9f68efe86e709de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fc851a3b50103b6c9f68efe86e709de">&#9670;&#160;</a></span>time_stepper_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&amp; oomph::GeomObject::time_stepper_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for pointer to time stepper: Null if object is not time-dependent. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00192">192</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00435">Geom_object_time_stepper_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="periodic__orbit__handler_8h_source.html#l01044">oomph::PeriodicOrbitAssemblyHandler&lt; NNODE_1D &gt;::adapt_temporal_mesh()</a>, <a class="el" href="surfactant__transport__elements_8cc_source.html#l00121">oomph::SurfactantTransportInterfaceElement::add_additional_residual_contributions_interface()</a>, <a class="el" href="mesh_8cc_source.html#l02288">oomph::Mesh::assign_initial_values_impulsive()</a>, <a class="el" href="problem_8cc_source.html#l11575">oomph::Problem::assign_initial_values_impulsive()</a>, <a class="el" href="face__mesh__project_8h_source.html#l00230">oomph::BackupMeshForProjection&lt; GEOMETRIC_ELEMENT &gt;::BackupMeshForProjection()</a>, <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00212">oomph::RefineableQElement&lt; 1 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="channel__spine__mesh_8template_8cc_source.html#l00153">oomph::ChannelSpineMesh&lt; ELEMENT &gt;::build_channel_spine_mesh()</a>, <a class="el" href="geompack__mesh_8template_8cc_source.html#l00043">oomph::GeompackQuadMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="simple__cubic__tet__mesh_8template_8cc_source.html#l00047">oomph::SimpleCubicTetMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l00047">oomph::TriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="quad__from__triangle__mesh_8template_8cc_source.html#l00072">oomph::QuadFromTriangleMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source.html#l00099">oomph::ExtrudedCubeMeshFromQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l04807">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00082">oomph::FishMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="hermite__element__quad__mesh_8template_8cc_source.html#l00599">oomph::HermiteQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="one__d__mesh_8template_8cc_source.html#l00038">oomph::OneDMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="rectangular__quadmesh_8template_8cc_source.html#l00044">oomph::RectangularQuadMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="simple__cubic__mesh_8template_8cc_source.html#l00043">oomph::SimpleCubicMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="brick__from__tet__mesh_8template_8cc_source.html#l00040">oomph::BrickFromTetMesh&lt; ELEMENT &gt;::build_mesh()</a>, <a class="el" href="single__layer__spine__mesh_8template_8cc_source.html#l00113">oomph::SingleLayerSpineMesh&lt; ELEMENT &gt;::build_single_layer_mesh()</a>, <a class="el" href="two__layer__spine__mesh_8template_8cc_source.html#l00266">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;::build_two_layer_mesh()</a>, <a class="el" href="mesh_8cc_source.html#l02366">oomph::Mesh::calculate_predictions()</a>, <a class="el" href="problem_8cc_source.html#l11732">oomph::Problem::calculate_predictions()</a>, <a class="el" href="geom__objects_8h_source.html#l00915">oomph::Circle::Circle()</a>, <a class="el" href="geom__objects_8h_source.html#l00964">oomph::Circle::Circle()</a>, <a class="el" href="element__with__moving__nodes_8h_source.html#l00463">oomph::ElementWithSpecificMovingNodes&lt; ELEMENT, NODE_TYPE &gt;::construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l02556">oomph::FiniteElement::construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l03850">oomph::SolidFiniteElement::construct_boundary_node()</a>, <a class="el" href="dg__elements_8h_source.html#l00291">oomph::DGElement::construct_boundary_nodes_and_faces()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l19416">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_halo_node_helper()</a>, <a class="el" href="triangle__mesh_8template_8cc_source.html#l27906">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;::construct_new_node_load_balance_helper()</a>, <a class="el" href="element__with__moving__nodes_8h_source.html#l00435">oomph::ElementWithSpecificMovingNodes&lt; ELEMENT, NODE_TYPE &gt;::construct_node()</a>, <a class="el" href="elements_8h_source.html#l02526">oomph::FiniteElement::construct_node()</a>, <a class="el" href="elements_8h_source.html#l03813">oomph::SolidFiniteElement::construct_node()</a>, <a class="el" href="dg__elements_8h_source.html#l00335">oomph::DGElement::construct_nodes_and_faces()</a>, <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html#l00045">oomph::CylinderWithFlagMesh&lt; ELEMENT &gt;::CylinderWithFlagMesh()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l00912">oomph::AxisymmetricPoroelasticityEquations::d2u_dt2()</a>, <a class="el" href="poroelasticity__elements_8h_source.html#l00605">oomph::PoroelasticityEquations&lt; DIM &gt;::d2u_dt2()</a>, <a class="el" href="axisym__linear__elasticity__elements_8h_source.html#l00067">oomph::AxisymmetricLinearElasticityEquationsBase::d2u_dt2_axisymmetric_linear_elasticity()</a>, <a class="el" href="linear__wave__elements_8h_source.html#l00112">oomph::LinearWaveEquations&lt; DIM &gt;::d2u_dt2_lin_wave()</a>, <a class="el" href="linear__elasticity__elements_8h_source.html#l00068">oomph::LinearElasticityEquationsBase&lt; DIM &gt;::d2u_dt2_linear_elasticity()</a>, <a class="el" href="advection__diffusion__reaction__elements_8h_source.html#l00113">oomph::AdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::dc_dt_adv_diff_react()</a>, <a class="el" href="advection__diffusion__reaction__elements_8h_source.html#l00141">oomph::AdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::dc_dt_adv_diff_react()</a>, <a class="el" href="surfactant__transport__elements_8cc_source.html#l00067">oomph::SurfactantTransportInterfaceElement::dcdt_surface()</a>, <a class="el" href="axisym__fvk__elements_8h_source.html#l00647">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::dposition_dt()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l00942">oomph::AxisymmetricPoroelasticityEquations::dq_edge_dt()</a>, <a class="el" href="poroelasticity__elements_8h_source.html#l00635">oomph::PoroelasticityEquations&lt; DIM &gt;::dq_edge_dt()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l00970">oomph::AxisymmetricPoroelasticityEquations::dq_internal_dt()</a>, <a class="el" href="poroelasticity__elements_8h_source.html#l00663">oomph::PoroelasticityEquations&lt; DIM &gt;::dq_internal_dt()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l00882">oomph::AxisymmetricPoroelasticityEquations::du_dt()</a>, <a class="el" href="poroelasticity__elements_8h_source.html#l00575">oomph::PoroelasticityEquations&lt; DIM &gt;::du_dt()</a>, <a class="el" href="advection__diffusion__elements_8h_source.html#l00098">oomph::AdvectionDiffusionEquations&lt; DIM &gt;::du_dt_adv_diff()</a>, <a class="el" href="axisym__advection__diffusion__elements_8h_source.html#l00106">oomph::AxisymAdvectionDiffusionEquations::du_dt_axi_adv_diff()</a>, <a class="el" href="axisym__navier__stokes__elements_8h_source.html#l00531">oomph::AxisymmetricNavierStokesEquations::du_dt_axi_nst()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8h_source.html#l00570">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::du_dt_axi_nst()</a>, <a class="el" href="axisym__linear__elasticity__elements_8h_source.html#l00100">oomph::AxisymmetricLinearElasticityEquationsBase::du_dt_axisymmetric_linear_elasticity()</a>, <a class="el" href="gen__advection__diffusion__elements_8h_source.html#l00105">oomph::GeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::du_dt_cons_adv_diff()</a>, <a class="el" href="gen__axisym__advection__diffusion__elements_8h_source.html#l00117">oomph::GeneralisedAxisymAdvectionDiffusionEquations::du_dt_cons_axisym_adv_diff()</a>, <a class="el" href="flux__transport__elements_8cc_source.html#l00276">oomph::FluxTransportEquations&lt; DIM &gt;::du_dt_flux_transport()</a>, <a class="el" href="linear__wave__elements_8h_source.html#l00084">oomph::LinearWaveEquations&lt; DIM &gt;::du_dt_lin_wave()</a>, <a class="el" href="linearised__axisym__navier__stokes__elements_8h_source.html#l00319">oomph::LinearisedAxisymmetricNavierStokesEquations::du_dt_linearised_axi_nst()</a>, <a class="el" href="linearised__navier__stokes__elements_8h_source.html#l00387">oomph::LinearisedNavierStokesEquations::du_dt_linearised_nst()</a>, <a class="el" href="generalised__newtonian__navier__stokes__elements_8h_source.html#l00594">oomph::GeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::du_dt_nst()</a>, <a class="el" href="navier__stokes__elements_8h_source.html#l00880">oomph::NavierStokesEquations&lt; DIM &gt;::du_dt_nst()</a>, <a class="el" href="polar__navier__stokes__elements_8h_source.html#l00401">oomph::PolarNavierStokesEquations::du_dt_pnst()</a>, <a class="el" href="spherical__advection__diffusion__elements_8h_source.html#l00099">oomph::SphericalAdvectionDiffusionEquations::du_dt_spherical_adv_diff()</a>, <a class="el" href="spherical__navier__stokes__elements_8h_source.html#l00395">oomph::SphericalNavierStokesEquations::du_dt_spherical_nst()</a>, <a class="el" href="unsteady__heat__elements_8h_source.html#l00119">oomph::UnsteadyHeatEquations&lt; DIM &gt;::du_dt_ust_heat()</a>, <a class="el" href="womersley__elements_8h_source.html#l00253">oomph::WomersleyEquations&lt; DIM &gt;::du_dt_womersley()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">oomph::SegregatableFSIProblem::extrapolate_solid_data()</a>, <a class="el" href="generalised__newtonian__axisym__navier__stokes__elements_8cc_source.html#l00977">oomph::GeneralisedNewtonianAxisymmetricNavierStokesEquations::extrapolated_strain_rate()</a>, <a class="el" href="generalised__newtonian__navier__stokes__elements_8cc_source.html#l01175">oomph::GeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::extrapolated_strain_rate()</a>, <a class="el" href="ode__elements_8h_source.html#l00082">oomph::ODEElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="fish__mesh_8template_8cc_source.html#l00040">oomph::FishMesh&lt; ELEMENT &gt;::FishMesh()</a>, <a class="el" href="generalised__newtonian__navier__stokes__elements_8cc_source.html#l02131">oomph::GeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__navier__stokes__elements_8cc_source.html#l01025">oomph::RefineableGeneralisedNewtonianNavierStokesEquations&lt; DIM &gt;::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="missing__masters_8cc_source.html#l00657">oomph::Missing_masters_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l01009">oomph::Multi_domain_functions::get_required_master_nodal_information_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00435">oomph::Missing_masters_functions::get_required_nodal_information_helper()</a>, <a class="el" href="multi__domain_8cc_source.html#l00753">oomph::Multi_domain_functions::get_required_nodal_information_helper()</a>, <a class="el" href="elements_8h_source.html#l01908">oomph::FiniteElement::get_x()</a>, <a class="el" href="immersed__rigid__body__elements_8cc_source.html#l00266">oomph::ImmersedRigidBodyElement::initialise()</a>, <a class="el" href="immersed__rigid__body__elements_8cc_source.html#l00121">oomph::ImmersedRigidBodyElement::output_centre_of_gravity()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l00327">oomph::PRefineableQElement&lt; 1, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01990">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l06104">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="geom__objects_8h_source.html#l00536">oomph::StraightLine::position()</a>, <a class="el" href="geom__objects_8h_source.html#l00756">oomph::Ellipse::position()</a>, <a class="el" href="geom__objects_8h_source.html#l01040">oomph::Circle::position()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01757">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::pre_build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l05860">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::pre_build()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">oomph::PseudoBucklingRing::PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">oomph::PseudoBucklingRing::PseudoBucklingRing()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l00946">oomph::PRefineableQElement&lt; 1, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03207">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l07633">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l00917">oomph::RectangleWithHoleAndAnnularRegionMesh&lt; ELEMENT &gt;::RectangleWithHoleAndAnnularRegionMesh()</a>, <a class="el" href="rectangle__with__moving__cylinder__mesh_8template_8cc_source.html#l01400">oomph::RefineableQuadMeshWithMovingCylinder&lt; ELEMENT &gt;::RefineableQuadMeshWithMovingCylinder()</a>, <a class="el" href="generalised__timesteppers_8h_source.html#l00221">oomph::ContinuationStorageScheme::set_consistent_pinned_values()</a>, <a class="el" href="elastic__problems_8h_source.html#l00393">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, <a class="el" href="elastic__problems_8h_source.html#l00242">oomph::SolidICProblem::set_newmark_initial_condition_directly()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01000">oomph::AxisymmetricPoroelasticityEquations::set_q_internal_timestepper()</a>, <a class="el" href="poroelasticity__elements_8h_source.html#l00693">oomph::PoroelasticityEquations&lt; DIM &gt;::set_q_internal_timestepper()</a>, <a class="el" href="elastic__problems_8cc_source.html#l00522">oomph::SolidICProblem::set_static_initial_condition()</a>, <a class="el" href="periodic__orbit__handler_8h_source.html#l00283">oomph::PeriodicOrbitEquations::set_timestepper_weights()</a>, <a class="el" href="mesh_8cc_source.html#l02326">oomph::Mesh::shift_time_values()</a>, <a class="el" href="problem_8cc_source.html#l11710">oomph::Problem::shift_time_values()</a>, <a class="el" href="womersley__elements_8h_source.html#l01311">oomph::WomersleyImpedanceTubeBase&lt; ELEMENT, DIM &gt;::shift_time_values()</a>, <a class="el" href="simple__rectangular__quadmesh_8template_8cc_source.html#l00053">oomph::SimpleRectangularQuadMesh&lt; ELEMENT &gt;::SimpleRectangularQuadMesh()</a>, and <a class="el" href="xda__tet__mesh_8template_8cc_source.html#l00047">oomph::XdaTetMesh&lt; ELEMENT &gt;::XdaTetMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a8ca52ab6f4609144b7057961bd318fdc" name="a8ca52ab6f4609144b7057961bd318fdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ca52ab6f4609144b7057961bd318fdc">&#9670;&#160;</a></span>time_stepper_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> * oomph::GeomObject::time_stepper_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for pointer to time stepper: Null if object is not time-dependent. Const version. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00199">199</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">References <a class="el" href="geom__objects_8h_source.html#l00435">Geom_object_time_stepper_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a158a36e0dbcaf236ffc351b76faaed53" name="a158a36e0dbcaf236ffc351b76faaed53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a158a36e0dbcaf236ffc351b76faaed53">&#9670;&#160;</a></span>Geom_object_time_stepper_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a>* oomph::GeomObject::Geom_object_time_stepper_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Timestepper (used to handle access to geometry at previous timesteps) </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00435">435</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">oomph::PseudoBucklingRing::accel()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00452">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="geom__objects_8h_source.html#l00192">time_stepper_pt()</a>, <a class="el" href="geom__objects_8h_source.html#l00199">time_stepper_pt()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">oomph::PseudoBucklingRing::veloc()</a>.</p>
+
+</div>
+</div>
+<a id="a6351e2d8fbd54ff23498eb6f77c905cc" name="a6351e2d8fbd54ff23498eb6f77c905cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6351e2d8fbd54ff23498eb6f77c905cc">&#9670;&#160;</a></span>Ndim</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::GeomObject::Ndim</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of Eulerian coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00431">431</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">oomph::PseudoBucklingRing::accel()</a>, <a class="el" href="geom__objects_8h_source.html#l00177">ndim()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00452">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">oomph::PseudoBucklingRing::position()</a>, <a class="el" href="geom__objects_8h_source.html#l00183">set_nlagrangian_and_ndim()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">oomph::PseudoBucklingRing::veloc()</a>.</p>
+
+</div>
+</div>
+<a id="a11d8ac51be65ee822a6c782c5e079a2c" name="a11d8ac51be65ee822a6c782c5e079a2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d8ac51be65ee822a6c782c5e079a2c">&#9670;&#160;</a></span>NLagrangian</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::GeomObject::NLagrangian</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of Lagrangian (intrinsic) coordinates. </p>
+
+<p class="definition">Definition at line <a class="el" href="geom__objects_8h_source.html#l00428">428</a> of file <a class="el" href="geom__objects_8h_source.html">geom_objects.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="geom__objects_8h_source.html#l00171">nlagrangian()</a>, and <a class="el" href="geom__objects_8h_source.html#l00183">set_nlagrangian_and_ndim()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="geom__objects_8h_source.html">geom_objects.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classRefineableAdvectionDiffusionProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>2D AdvectionDiffusion problem on rectangular domain, discretised with refineable 2D QAdvectionDiffusion elements. The specific type of element is specified via the template parameter.  
+ <a href="classRefineableAdvectionDiffusionProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classRefineableAdvectionDiffusionProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a515147bf0907ad339811955edb89817c" id="r_a515147bf0907ad339811955edb89817c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a515147bf0907ad339811955edb89817c">RefineableAdvectionDiffusionProblem</a> (AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt source_fct_pt, AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt wind_fct_pt)</td></tr>
+<tr class="memdesc:a515147bf0907ad339811955edb89817c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to source and wind functions.  <br /></td></tr>
+<tr class="separator:a515147bf0907ad339811955edb89817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae746646f6c255dca13e5abe9fcf85fe3" id="r_ae746646f6c255dca13e5abe9fcf85fe3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#ae746646f6c255dca13e5abe9fcf85fe3">~RefineableAdvectionDiffusionProblem</a> ()</td></tr>
+<tr class="memdesc:ae746646f6c255dca13e5abe9fcf85fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. Empty.  <br /></td></tr>
+<tr class="separator:ae746646f6c255dca13e5abe9fcf85fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbcaa45fd7e932f335cc07a83b4d3e2" id="r_a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a7cbcaa45fd7e932f335cc07a83b4d3e2">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Reset boundary conditions to the values from the tanh solution.  <br /></td></tr>
+<tr class="separator:a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a949296e60bc661fbd523974055a93f8b" id="r_a949296e60bc661fbd523974055a93f8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a949296e60bc661fbd523974055a93f8b">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a949296e60bc661fbd523974055a93f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve (empty)  <br /></td></tr>
+<tr class="separator:a949296e60bc661fbd523974055a93f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3470a408c458e5500ac614b8f0e65634" id="r_a3470a408c458e5500ac614b8f0e65634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a3470a408c458e5500ac614b8f0e65634">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a3470a408c458e5500ac614b8f0e65634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before adapt: Document the solution.  <br /></td></tr>
+<tr class="separator:a3470a408c458e5500ac614b8f0e65634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735d7fdd587d4730ffe1113b11ca3b56" id="r_a735d7fdd587d4730ffe1113b11ca3b56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a735d7fdd587d4730ffe1113b11ca3b56">doc_solution</a> ()</td></tr>
+<tr class="memdesc:a735d7fdd587d4730ffe1113b11ca3b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <br /></td></tr>
+<tr class="separator:a735d7fdd587d4730ffe1113b11ca3b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f5a735394a1359c63cb4eaf98dd9e87" id="r_a9f5a735394a1359c63cb4eaf98dd9e87"><td class="memItemLeft" align="right" valign="top">RefineableRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a9f5a735394a1359c63cb4eaf98dd9e87">mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a9f5a735394a1359c63cb4eaf98dd9e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type.  <br /></td></tr>
+<tr class="separator:a9f5a735394a1359c63cb4eaf98dd9e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a515147bf0907ad339811955edb89817c" id="r_a515147bf0907ad339811955edb89817c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a515147bf0907ad339811955edb89817c">RefineableAdvectionDiffusionProblem</a> (AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt source_fct_pt, AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt wind_fct_pt)</td></tr>
+<tr class="memdesc:a515147bf0907ad339811955edb89817c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to source function.  <br /></td></tr>
+<tr class="separator:a515147bf0907ad339811955edb89817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae746646f6c255dca13e5abe9fcf85fe3" id="r_ae746646f6c255dca13e5abe9fcf85fe3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#ae746646f6c255dca13e5abe9fcf85fe3">~RefineableAdvectionDiffusionProblem</a> ()</td></tr>
+<tr class="memdesc:ae746646f6c255dca13e5abe9fcf85fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:ae746646f6c255dca13e5abe9fcf85fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbcaa45fd7e932f335cc07a83b4d3e2" id="r_a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a7cbcaa45fd7e932f335cc07a83b4d3e2">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve: Reset boundary conditions to the values from the exact solution.  <br /></td></tr>
+<tr class="separator:a7cbcaa45fd7e932f335cc07a83b4d3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a949296e60bc661fbd523974055a93f8b" id="r_a949296e60bc661fbd523974055a93f8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a949296e60bc661fbd523974055a93f8b">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a949296e60bc661fbd523974055a93f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve (empty)  <br /></td></tr>
+<tr class="separator:a949296e60bc661fbd523974055a93f8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50af5d1ac7092f299967c962b15c5a0c" id="r_a50af5d1ac7092f299967c962b15c5a0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a50af5d1ac7092f299967c962b15c5a0c">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a50af5d1ac7092f299967c962b15c5a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.  <br /></td></tr>
+<tr class="separator:a50af5d1ac7092f299967c962b15c5a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f5a735394a1359c63cb4eaf98dd9e87" id="r_a9f5a735394a1359c63cb4eaf98dd9e87"><td class="memItemLeft" align="right" valign="top">RefineableRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a9f5a735394a1359c63cb4eaf98dd9e87">mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a9f5a735394a1359c63cb4eaf98dd9e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type.  <br /></td></tr>
+<tr class="separator:a9f5a735394a1359c63cb4eaf98dd9e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a42bd65f40095a70a103ee900e7614b19" id="r_a42bd65f40095a70a103ee900e7614b19"><td class="memItemLeft" align="right" valign="top">DocInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a42bd65f40095a70a103ee900e7614b19">Doc_info</a></td></tr>
+<tr class="memdesc:a42bd65f40095a70a103ee900e7614b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">DocInfo object.  <br /></td></tr>
+<tr class="separator:a42bd65f40095a70a103ee900e7614b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa313562d365965e24282c2e11a8ec6" id="r_a8fa313562d365965e24282c2e11a8ec6"><td class="memItemLeft" align="right" valign="top">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#a8fa313562d365965e24282c2e11a8ec6">Source_fct_pt</a></td></tr>
+<tr class="memdesc:a8fa313562d365965e24282c2e11a8ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to source function.  <br /></td></tr>
+<tr class="separator:a8fa313562d365965e24282c2e11a8ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52483c93bacbb9521aaaf52680be996" id="r_ab52483c93bacbb9521aaaf52680be996"><td class="memItemLeft" align="right" valign="top">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRefineableAdvectionDiffusionProblem.html#ab52483c93bacbb9521aaaf52680be996">Wind_fct_pt</a></td></tr>
+<tr class="memdesc:ab52483c93bacbb9521aaaf52680be996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to wind function.  <br /></td></tr>
+<tr class="separator:ab52483c93bacbb9521aaaf52680be996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELEMENT&gt;<br />
+class RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;</div><p>2D AdvectionDiffusion problem on rectangular domain, discretised with refineable 2D QAdvectionDiffusion elements. The specific type of element is specified via the template parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00102">102</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a515147bf0907ad339811955edb89817c" name="a515147bf0907ad339811955edb89817c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515147bf0907ad339811955edb89817c">&#9670;&#160;</a></span>RefineableAdvectionDiffusionProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;<a class="el" href="classRefineableAdvectionDiffusionProblem.html">::RefineableAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt&#160;</td>
+          <td class="paramname"><em>source_fct_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt&#160;</td>
+          <td class="paramname"><em>wind_fct_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to source and wind functions. </p>
+<p>Constructor for AdvectionDiffusion problem: Pass pointer to source function. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00164">164</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00147">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::Doc_info</a>, <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00138">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::mesh_pt()</a>, <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00050">TanhSolnForAdvectionDiffusion::Peclet</a>, <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00150">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::Source_fct_pt</a>, and <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00153">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::Wind_fct_pt</a>.</p>
+
+</div>
+</div>
+<a id="ae746646f6c255dca13e5abe9fcf85fe3" name="ae746646f6c255dca13e5abe9fcf85fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae746646f6c255dca13e5abe9fcf85fe3">&#9670;&#160;</a></span>~RefineableAdvectionDiffusionProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00113">113</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+</div>
+</div>
+<a id="a515147bf0907ad339811955edb89817c" name="a515147bf0907ad339811955edb89817c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515147bf0907ad339811955edb89817c">&#9670;&#160;</a></span>RefineableAdvectionDiffusionProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;<a class="el" href="classRefineableAdvectionDiffusionProblem.html">::RefineableAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt&#160;</td>
+          <td class="paramname"><em>source_fct_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt&#160;</td>
+          <td class="paramname"><em>wind_fct_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to source function. </p>
+
+</div>
+</div>
+<a id="ae746646f6c255dca13e5abe9fcf85fe3" name="ae746646f6c255dca13e5abe9fcf85fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae746646f6c255dca13e5abe9fcf85fe3">&#9670;&#160;</a></span>~RefineableAdvectionDiffusionProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html#l00107">107</a> of file <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html">two_d_adv_diff_adapt2.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a949296e60bc661fbd523974055a93f8b" name="a949296e60bc661fbd523974055a93f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949296e60bc661fbd523974055a93f8b">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00120">120</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+</div>
+</div>
+<a id="a949296e60bc661fbd523974055a93f8b" name="a949296e60bc661fbd523974055a93f8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949296e60bc661fbd523974055a93f8b">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html#l00114">114</a> of file <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html">two_d_adv_diff_adapt2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a3470a408c458e5500ac614b8f0e65634" name="a3470a408c458e5500ac614b8f0e65634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3470a408c458e5500ac614b8f0e65634">&#9670;&#160;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before adapt: Document the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00123">123</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00147">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::Doc_info</a>, and <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00277">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="a7cbcaa45fd7e932f335cc07a83b4d3e2" name="a7cbcaa45fd7e932f335cc07a83b4d3e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbcaa45fd7e932f335cc07a83b4d3e2">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Reset boundary conditions to the values from the tanh solution. </p>
+<p>Update the problem specs before solve: (Re-)set boundary conditions to the values from the exact solution.</p>
+<p>Update the problem specs before solve: (Re-)set boundary conditions to the values from the tanh solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00239">239</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00059">TanhSolnForAdvectionDiffusion::get_exact_u()</a>.</p>
+
+</div>
+</div>
+<a id="a7cbcaa45fd7e932f335cc07a83b4d3e2" name="a7cbcaa45fd7e932f335cc07a83b4d3e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbcaa45fd7e932f335cc07a83b4d3e2">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve: Reset boundary conditions to the values from the exact solution. </p>
+
+</div>
+</div>
+<a id="a735d7fdd587d4730ffe1113b11ca3b56" name="a735d7fdd587d4730ffe1113b11ca3b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735d7fdd587d4730ffe1113b11ca3b56">&#9670;&#160;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00277">277</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00059">TanhSolnForAdvectionDiffusion::get_exact_u()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00123">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::actions_before_adapt()</a>, and <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00322">main()</a>.</p>
+
+</div>
+</div>
+<a id="a50af5d1ac7092f299967c962b15c5a0c" name="a50af5d1ac7092f299967c962b15c5a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50af5d1ac7092f299967c962b15c5a0c">&#9670;&#160;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to. </p>
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html#l00254">254</a> of file <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html">two_d_adv_diff_adapt2.cc</a>.</p>
+
+</div>
+</div>
+<a id="a9f5a735394a1359c63cb4eaf98dd9e87" name="a9f5a735394a1359c63cb4eaf98dd9e87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f5a735394a1359c63cb4eaf98dd9e87">&#9670;&#160;</a></span>mesh_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableRectangularQuadMesh&lt; ELEMENT &gt; * <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00138">138</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html#l00277">main()</a>, and <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00164">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::RefineableAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a9f5a735394a1359c63cb4eaf98dd9e87" name="a9f5a735394a1359c63cb4eaf98dd9e87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f5a735394a1359c63cb4eaf98dd9e87">&#9670;&#160;</a></span>mesh_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableRectangularQuadMesh&lt; ELEMENT &gt; * <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overloaded version of the problem's access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html#l00123">123</a> of file <a class="el" href="two__d__adv__diff__adapt2_8cc_source.html">two_d_adv_diff_adapt2.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a42bd65f40095a70a103ee900e7614b19" name="a42bd65f40095a70a103ee900e7614b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42bd65f40095a70a103ee900e7614b19">&#9670;&#160;</a></span>Doc_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DocInfo <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Doc_info</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DocInfo object. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00147">147</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00123">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::actions_before_adapt()</a>, and <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00164">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::RefineableAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a8fa313562d365965e24282c2e11a8ec6" name="a8fa313562d365965e24282c2e11a8ec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa313562d365965e24282c2e11a8ec6">&#9670;&#160;</a></span>Source_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionSourceFctPt <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Source_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to source function. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00150">150</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00164">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::RefineableAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab52483c93bacbb9521aaaf52680be996" name="ab52483c93bacbb9521aaaf52680be996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52483c93bacbb9521aaaf52680be996">&#9670;&#160;</a></span>Wind_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AdvectionDiffusionEquations&lt; 2 &gt;::AdvectionDiffusionWindFctPt <a class="el" href="classRefineableAdvectionDiffusionProblem.html">RefineableAdvectionDiffusionProblem</a>&lt; ELEMENT &gt;::Wind_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to wind function. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00153">153</a> of file <a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__adv__diff__adapt_8cc_source.html#l00164">RefineableAdvectionDiffusionProblem&lt; ELEMENT &gt;::RefineableAdvectionDiffusionProblem()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="two__d__adv__diff__adapt_8cc_source.html">two_d_adv_diff_adapt.cc</a></li>
+<li><a class="el" href="two__d__adv__diff__adapt2_8cc_source.html">two_d_adv_diff_adapt2.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:06:03
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

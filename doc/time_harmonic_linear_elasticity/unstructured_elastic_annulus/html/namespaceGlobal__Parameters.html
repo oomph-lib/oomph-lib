@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Parameters Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Global_Parameters Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Global variables.  
+<a href="namespaceGlobal__Parameters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aeeb26e11ef275bdfce14710e00290bb6" id="r_aeeb26e11ef275bdfce14710e00290bb6"><td class="memItemLeft" align="right" valign="top">TimeHarmonicIsotropicElasticityTensor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">E</a> (<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)</td></tr>
+<tr class="memdesc:aeeb26e11ef275bdfce14710e00290bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The elasticity tensor.  <br /></td></tr>
+<tr class="separator:aeeb26e11ef275bdfce14710e00290bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95af753fa152ac6013bc4f640816f7ce" id="r_a95af753fa152ac6013bc4f640816f7ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a95af753fa152ac6013bc4f640816f7ce">solid_boundary_displacement</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a95af753fa152ac6013bc4f640816f7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Real-valued, radial displacement field on inner boundary.  <br /></td></tr>
+<tr class="separator:a95af753fa152ac6013bc4f640816f7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8363ab9f8687e9f7802f801f6dcab6e6" id="r_a8363ab9f8687e9f7802f801f6dcab6e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a8363ab9f8687e9f7802f801f6dcab6e6">constant_pressure</a> (const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; std::complex&lt; double &gt; &gt; &amp;traction)</td></tr>
+<tr class="memdesc:a8363ab9f8687e9f7802f801f6dcab6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant pressure load (real and imag part)  <br /></td></tr>
+<tr class="separator:a8363ab9f8687e9f7802f801f6dcab6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c78ffbd213fe1293eef5d048abcc5a" id="r_a51c78ffbd213fe1293eef5d048abcc5a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a51c78ffbd213fe1293eef5d048abcc5a">BesselY</a> (const double &amp;n, const double &amp;x)</td></tr>
+<tr class="memdesc:a51c78ffbd213fe1293eef5d048abcc5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to evaluate Y_n(x) from bloody maple output.  <br /></td></tr>
+<tr class="separator:a51c78ffbd213fe1293eef5d048abcc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dda8c7600df01ddcd31b966230c5ba" id="r_aa3dda8c7600df01ddcd31b966230c5ba"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aa3dda8c7600df01ddcd31b966230c5ba">BesselJ</a> (const double &amp;n, const double &amp;x)</td></tr>
+<tr class="memdesc:aa3dda8c7600df01ddcd31b966230c5ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to evaluate J_n(x) from bloody maple output.  <br /></td></tr>
+<tr class="separator:aa3dda8c7600df01ddcd31b966230c5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97162dba4bd29a15067b9c9bbe53c754" id="r_a97162dba4bd29a15067b9c9bbe53c754"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a97162dba4bd29a15067b9c9bbe53c754">exact_u</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a97162dba4bd29a15067b9c9bbe53c754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution as a Vector.  <br /></td></tr>
+<tr class="separator:a97162dba4bd29a15067b9c9bbe53c754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c035035889b93588b44f7778bb27ef9" id="r_a4c035035889b93588b44f7778bb27ef9"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a4c035035889b93588b44f7778bb27ef9">Omega_sq_region</a> (2, <a class="el" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>)</td></tr>
+<tr class="memdesc:a4c035035889b93588b44f7778bb27ef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of non-dim frequency for the two regions.  <br /></td></tr>
+<tr class="separator:a4c035035889b93588b44f7778bb27ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddb3a77481b907fbb34f2e8d0a6eb9f" id="r_a0ddb3a77481b907fbb34f2e8d0a6eb9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a0ddb3a77481b907fbb34f2e8d0a6eb9f">pressure_load</a> (const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; std::complex&lt; double &gt; &gt; &amp;traction)</td></tr>
+<tr class="memdesc:a0ddb3a77481b907fbb34f2e8d0a6eb9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant pressure load (real and imag part)  <br /></td></tr>
+<tr class="separator:a0ddb3a77481b907fbb34f2e8d0a6eb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661" id="r_a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> = 0.3</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e1e178dfb7f5e35b452599bd4c4324" id="r_af9e1e178dfb7f5e35b452599bd4c4324"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a> =100.0</td></tr>
+<tr class="memdesc:af9e1e178dfb7f5e35b452599bd4c4324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of non-dim frequency.  <br /></td></tr>
+<tr class="separator:af9e1e178dfb7f5e35b452599bd4c4324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b73c5ead1114ae88bbd4cb0eb54f078" id="r_a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a0b73c5ead1114ae88bbd4cb0eb54f078">H_annulus</a> =0.5</td></tr>
+<tr class="memdesc:a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thickness of annulus.  <br /></td></tr>
+<tr class="separator:a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0138eb659958d7d7d1afd12577becf82" id="r_a0138eb659958d7d7d1afd12577becf82"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a0138eb659958d7d7d1afd12577becf82">Displacement_amplitude</a> =0.1</td></tr>
+<tr class="memdesc:a0138eb659958d7d7d1afd12577becf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displacement amplitude on inner radius.  <br /></td></tr>
+<tr class="separator:a0138eb659958d7d7d1afd12577becf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31fb55c20db4aa0127aafa20f0d76731" id="r_a31fb55c20db4aa0127aafa20f0d76731"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a> = 0.0</td></tr>
+<tr class="memdesc:a31fb55c20db4aa0127aafa20f0d76731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform pressure.  <br /></td></tr>
+<tr class="separator:a31fb55c20db4aa0127aafa20f0d76731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301ab922df72030c660b21328d6caf76" id="r_a301ab922df72030c660b21328d6caf76"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Directory</a> =&quot;RESLT&quot;</td></tr>
+<tr class="memdesc:a301ab922df72030c660b21328d6caf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output directory.  <br /></td></tr>
+<tr class="separator:a301ab922df72030c660b21328d6caf76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f67286edeb13ef67687fd483e105b5e" id="r_a1f67286edeb13ef67687fd483e105b5e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a1f67286edeb13ef67687fd483e105b5e">Ntheta</a> =20</td></tr>
+<tr class="memdesc:a1f67286edeb13ef67687fd483e105b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in azimuthal direction.  <br /></td></tr>
+<tr class="separator:a1f67286edeb13ef67687fd483e105b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebb1e39d849d32cebdc9be13026606e" id="r_aeebb1e39d849d32cebdc9be13026606e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Nr</a> =10</td></tr>
+<tr class="memdesc:aeebb1e39d849d32cebdc9be13026606e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in radial direction.  <br /></td></tr>
+<tr class="separator:aeebb1e39d849d32cebdc9be13026606e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c731fa617a9d92851e4195493262e7" id="r_a73c731fa617a9d92851e4195493262e7"><td class="memItemLeft" align="right" valign="top">Vector&lt; TimeHarmonicIsotropicElasticityTensor * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a73c731fa617a9d92851e4195493262e7">E_pt</a></td></tr>
+<tr class="memdesc:a73c731fa617a9d92851e4195493262e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The elasticity tensors for the two regions.  <br /></td></tr>
+<tr class="separator:a73c731fa617a9d92851e4195493262e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe27ad463a1fb23cb99d029a9fac731" id="r_afbe27ad463a1fb23cb99d029a9fac731"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#afbe27ad463a1fb23cb99d029a9fac731">Alpha</a> =200.0</td></tr>
+<tr class="memdesc:afbe27ad463a1fb23cb99d029a9fac731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peakiness parameter for pressure load.  <br /></td></tr>
+<tr class="separator:afbe27ad463a1fb23cb99d029a9fac731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Global variables. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aa3dda8c7600df01ddcd31b966230c5ba" name="aa3dda8c7600df01ddcd31b966230c5ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3dda8c7600df01ddcd31b966230c5ba">&#9670;&#160;</a></span>BesselJ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::BesselJ </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to evaluate J_n(x) from bloody maple output. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00130">130</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>.</p>
+
+</div>
+</div>
+<a id="a51c78ffbd213fe1293eef5d048abcc5a" name="a51c78ffbd213fe1293eef5d048abcc5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c78ffbd213fe1293eef5d048abcc5a">&#9670;&#160;</a></span>BesselY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::BesselY </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to evaluate Y_n(x) from bloody maple output. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00106">106</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>.</p>
+
+</div>
+</div>
+<a id="a8363ab9f8687e9f7802f801f6dcab6e6" name="a8363ab9f8687e9f7802f801f6dcab6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8363ab9f8687e9f7802f801f6dcab6e6">&#9670;&#160;</a></span>constant_pressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Parameters::constant_pressure </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>traction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constant pressure load (real and imag part) </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00084">84</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00081">P</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00522">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::create_traction_elements()</a>.</p>
+
+</div>
+</div>
+<a id="aeeb26e11ef275bdfce14710e00290bb6" name="aeeb26e11ef275bdfce14710e00290bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb26e11ef275bdfce14710e00290bb6">&#9670;&#160;</a></span>E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TimeHarmonicIsotropicElasticityTensor Global_Parameters::E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The elasticity tensor. </p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a97162dba4bd29a15067b9c9bbe53c754" name="a97162dba4bd29a15067b9c9bbe53c754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97162dba4bd29a15067b9c9bbe53c754">&#9670;&#160;</a></span>exact_u()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Parameters::exact_u </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exact solution as a Vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">153</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00130">BesselJ()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00106">BesselY()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00065">Displacement_amplitude</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00062">H_annulus</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00053">Nu</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00056">Omega_sq</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00081">P</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00602">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<a id="a4c035035889b93588b44f7778bb27ef9" name="a4c035035889b93588b44f7778bb27ef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c035035889b93588b44f7778bb27ef9">&#9670;&#160;</a></span>Omega_sq_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt; double &gt; Global_Parameters::Omega_sq_region </td>
+          <td>(</td>
+          <td class="paramtype">2&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Square of non-dim frequency for the two regions. </p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00566">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::complete_problem_setup()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00820">main()</a>.</p>
+
+</div>
+</div>
+<a id="a0ddb3a77481b907fbb34f2e8d0a6eb9f" name="a0ddb3a77481b907fbb34f2e8d0a6eb9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddb3a77481b907fbb34f2e8d0a6eb9f">&#9670;&#160;</a></span>pressure_load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Parameters::pressure_load </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; std::complex&lt; double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>traction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constant pressure load (real and imag part) </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00130">130</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00127">Alpha</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00081">P</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00683">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::create_traction_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a95af753fa152ac6013bc4f640816f7ce" name="a95af753fa152ac6013bc4f640816f7ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95af753fa152ac6013bc4f640816f7ce">&#9670;&#160;</a></span>solid_boundary_displacement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Global_Parameters::solid_boundary_displacement </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Real-valued, radial displacement field on inner boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00068">68</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00065">Displacement_amplitude</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="afbe27ad463a1fb23cb99d029a9fac731" name="afbe27ad463a1fb23cb99d029a9fac731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe27ad463a1fb23cb99d029a9fac731">&#9670;&#160;</a></span>Alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Alpha =200.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Peakiness parameter for pressure load. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00127">127</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00820">main()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00130">pressure_load()</a>.</p>
+
+</div>
+</div>
+<a id="a301ab922df72030c660b21328d6caf76" name="a301ab922df72030c660b21328d6caf76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a301ab922df72030c660b21328d6caf76">&#9670;&#160;</a></span>Directory</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Global_Parameters::Directory =&quot;RESLT&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Output directory. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00097">97</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::RingWithTRibProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0138eb659958d7d7d1afd12577becf82" name="a0138eb659958d7d7d1afd12577becf82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0138eb659958d7d7d1afd12577becf82">&#9670;&#160;</a></span>Displacement_amplitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Displacement_amplitude =0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Displacement amplitude on inner radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00065">65</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00068">solid_boundary_displacement()</a>.</p>
+
+</div>
+</div>
+<a id="a73c731fa617a9d92851e4195493262e7" name="a73c731fa617a9d92851e4195493262e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73c731fa617a9d92851e4195493262e7">&#9670;&#160;</a></span>E_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;TimeHarmonicIsotropicElasticityTensor*&gt; Global_Parameters::E_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The elasticity tensors for the two regions. </p>
+
+<p class="definition">Definition at line <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00118">118</a> of file <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html">unstructured_time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00566">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::complete_problem_setup()</a>, <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00820">main()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::RingWithTRibProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0b73c5ead1114ae88bbd4cb0eb54f078" name="a0b73c5ead1114ae88bbd4cb0eb54f078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b73c5ead1114ae88bbd4cb0eb54f078">&#9670;&#160;</a></span>H_annulus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::H_annulus =0.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Thickness of annulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00062">62</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::RingWithTRibProblem()</a>.</p>
+
+</div>
+</div>
+<a id="aeebb1e39d849d32cebdc9be13026606e" name="aeebb1e39d849d32cebdc9be13026606e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeebb1e39d849d32cebdc9be13026606e">&#9670;&#160;</a></span>Nr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Nr =10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of elements in radial direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00103">103</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00646">main()</a>.</p>
+
+</div>
+</div>
+<a id="a1f67286edeb13ef67687fd483e105b5e" name="a1f67286edeb13ef67687fd483e105b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f67286edeb13ef67687fd483e105b5e">&#9670;&#160;</a></span>Ntheta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Global_Parameters::Ntheta =20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of elements in azimuthal direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00100">100</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00646">main()</a>.</p>
+
+</div>
+</div>
+<a id="a20fccdcfa2c15ad8b951b9ada3bb1661" name="a20fccdcfa2c15ad8b951b9ada3bb1661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20fccdcfa2c15ad8b951b9ada3bb1661">&#9670;&#160;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Nu = 0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Poisson's ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00053">53</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>, <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00820">main()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00223">RingWithTRibProblem&lt; ELASTICITY_ELEMENT &gt;::RingWithTRibProblem()</a>.</p>
+
+</div>
+</div>
+<a id="af9e1e178dfb7f5e35b452599bd4c4324" name="af9e1e178dfb7f5e35b452599bd4c4324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e1e178dfb7f5e35b452599bd4c4324">&#9670;&#160;</a></span>Omega_sq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::Omega_sq =100.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Square of non-dim frequency. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00056">56</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00356">AnnularDiskProblem&lt; ELASTICITY_ELEMENT &gt;::AnnularDiskProblem()</a>, and <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>.</p>
+
+</div>
+</div>
+<a id="a31fb55c20db4aa0127aafa20f0d76731" name="a31fb55c20db4aa0127aafa20f0d76731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31fb55c20db4aa0127aafa20f0d76731">&#9670;&#160;</a></span>P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Parameters::P = 0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uniform pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00081">81</a> of file <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html">time_harmonic_elastic_annulus.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00084">constant_pressure()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00153">exact_u()</a>, <a class="el" href="time__harmonic__elastic__annulus_8cc_source.html#l00646">main()</a>, and <a class="el" href="unstructured__time__harmonic__elastic__annulus_8cc_source.html#l00130">pressure_load()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:19:34
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

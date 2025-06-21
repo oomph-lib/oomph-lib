@@ -1,0 +1,54 @@
+\doxysection{unstructured\+\_\+sphere\+\_\+scattering.\+cc File Reference}
+\hypertarget{unstructured__sphere__scattering_8cc}{}\label{unstructured__sphere__scattering_8cc}\index{unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{Fourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacePlanarWave}{Planar\+Wave}}
+\begin{DoxyCompactList}\small\item\em Namespace to test representation of planar wave in spherical polars. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceProblemParameters}{Problem\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for the Fourier decomposed Helmholtz problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{Planar\+Wave\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{void}} \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{Planar\+Wave\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classAnnularQuadMesh}{const}} \mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{x}}, \mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{u}})
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{void}} \mbox{\hyperlink{namespacePlanarWave_afe1e9812d1b1dc40a89f7a1f18d1165f}{Planar\+Wave\+::plot}} ()
+\begin{DoxyCompactList}\small\item\em Plot. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Problem\+Parameters\+::\+Coeff}} (\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\+\_\+terms}}, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Coefficients in the exact solution. \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{Problem\+Parameters\+::I}} (0.\+0, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{void}} \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{Problem\+Parameters\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classAnnularQuadMesh}{const}} \mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{x}}, \mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{u}})
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector of size 2, containing real and imag parts. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{void}} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{Problem\+Parameters\+::exact\+\_\+minus\+\_\+dudr}} (\mbox{\hyperlink{classAnnularQuadMesh}{const}} \mbox{\hyperlink{classAnnularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{x}}, std\+::complex$<$ \mbox{\hyperlink{classAnnularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classAnnularQuadMesh}{flux}})
+\begin{DoxyCompactList}\small\item\em Get -\/du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAnnularQuadMesh}{int}} \mbox{\hyperlink{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (\mbox{\hyperlink{classAnnularQuadMesh}{int}} \mbox{\hyperlink{classAnnularQuadMesh}{argc}}, \mbox{\hyperlink{classAnnularQuadMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classAnnularQuadMesh}{argv}})
+\begin{DoxyCompactList}\small\item\em Driver code for Fourier decomposed Helmholtz problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}!main@{main}}
+\index{main@{main}!unstructured\_sphere\_scattering.cc@{unstructured\_sphere\_scattering.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAnnularQuadMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAnnularQuadMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classAnnularQuadMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for Fourier decomposed Helmholtz problem. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__sphere__scattering_8cc_source_l00881}{881}} of file \mbox{\hyperlink{unstructured__sphere__scattering_8cc_source}{unstructured\+\_\+sphere\+\_\+scattering.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sphere__scattering_8cc_source_l00065}{Annular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Annular\+Quad\+Mesh()}}, and \mbox{\hyperlink{sphere__scattering_8cc_source_l00228}{Problem\+Parameters\+::\+N\+\_\+fourier}}.
+

@@ -1,0 +1,29 @@
+\doxysection{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h File Reference}
+\hypertarget{general__purpose__block__preconditioners_8h}{}\label{general__purpose__block__preconditioners_8h}\index{general\_purpose\_block\_preconditioners.h@{general\_purpose\_block\_preconditioners.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for general purpose block preconditioners. Deals with setting subsidiary preconditioners and dof to block maps. Subsidiary preconditioners can be set in two ways\+: 1) A pointer to a subsidiary preconditioner for block i can be passed to set\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt(prec, i). 2) A default subsidiary preconditioner can be set up by providing a function pointer to a function which creates a preconditioner. During \doxylink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()} all unset subsidiary preconditioner pointers will be filled in using this function. By default this uses Super\+LU. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Block diagonal preconditioner. By default Super\+LU is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BlockTriangularPreconditioner}{oomph\+::\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em General purpose block triangular preconditioner By default this is Upper triangular. By default Exact\+Preconditioner is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ExactBlockPreconditioner}{oomph\+::\+Exact\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Exact block preconditioner -\/ block preconditioner assembled from all blocks associated with the preconditioner and solved by Super\+LU. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Block "{}anti-\/diagonal"{} preconditioner, i.\+e. same as block diagonal but along the other diagonal of the matrix (top-\/right to bottom-\/left). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DummyBlockPreconditioner}{oomph\+::\+Dummy\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} that doesn\textquotesingle{}t actually do any preconditioning, it just allows access to the Jacobian blocks. This is pretty hacky but oh well.. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions}{oomph\+::\+Preconditioner\+Creation\+Functions}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions_abdfb6f82139ceea5428704d15664a2c5}{oomph\+::\+Preconditioner\+Creation\+Functions\+::create\+\_\+exact\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to create an exact preconditioner (for use as the default subsididary preconditioner creator in General\+Purpose\+Block\+Preconditioners). \end{DoxyCompactList}\end{DoxyCompactItemize}

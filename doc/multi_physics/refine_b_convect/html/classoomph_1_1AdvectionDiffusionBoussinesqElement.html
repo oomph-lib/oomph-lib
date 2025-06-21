@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">AdvectionDiffusionBoussinesqElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1AdvectionDiffusionBoussinesqElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Build <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html" title="Build AdvectionDiffusionBoussinesqElement that inherits from ElementWithExternalElement so that it ca...">AdvectionDiffusionBoussinesqElement</a> that inherits from ElementWithExternalElement so that it can "communicate" with the Navier Stokes element.  
+ <a href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1AdvectionDiffusionBoussinesqElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a733c18518938e3b85e06de5a618cd49f" id="r_a733c18518938e3b85e06de5a618cd49f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#a733c18518938e3b85e06de5a618cd49f">AdvectionDiffusionBoussinesqElement</a> ()</td></tr>
+<tr class="memdesc:a733c18518938e3b85e06de5a618cd49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: call the underlying constructors.  <br /></td></tr>
+<tr class="separator:a733c18518938e3b85e06de5a618cd49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ec5858acc0a562cee7bccedfecb252" id="r_a86ec5858acc0a562cee7bccedfecb252"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#a86ec5858acc0a562cee7bccedfecb252">get_wind_adv_diff</a> (const unsigned &amp;ipt, const Vector&lt; double &gt; &amp;s, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;wind) const</td></tr>
+<tr class="memdesc:a86ec5858acc0a562cee7bccedfecb252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity, obtained from the source element in the other mesh.  <br /></td></tr>
+<tr class="separator:a86ec5858acc0a562cee7bccedfecb252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb2b136650ecca8fd47eb4278616d29" id="r_afcb2b136650ecca8fd47eb4278616d29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#afcb2b136650ecca8fd47eb4278616d29">output</a> (std::ostream &amp;outfile, const unsigned &amp;nplot)</td></tr>
+<tr class="memdesc:afcb2b136650ecca8fd47eb4278616d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: Output x, y, theta at Nplot^DIM plot points.  <br /></td></tr>
+<tr class="separator:afcb2b136650ecca8fd47eb4278616d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc615c265bef2c3f5c30c6be95c0f50d" id="r_acc615c265bef2c3f5c30c6be95c0f50d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#acc615c265bef2c3f5c30c6be95c0f50d">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:acc615c265bef2c3f5c30c6be95c0f50d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the standard output function with the broken default.  <br /></td></tr>
+<tr class="separator:acc615c265bef2c3f5c30c6be95c0f50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd60fca6201bc2cd80ff39303323053" id="r_adbd60fca6201bc2cd80ff39303323053"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#adbd60fca6201bc2cd80ff39303323053">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:adbd60fca6201bc2cd80ff39303323053"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:adbd60fca6201bc2cd80ff39303323053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe60877f205b36d76a87695afb28caa" id="r_adbe60877f205b36d76a87695afb28caa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#adbe60877f205b36d76a87695afb28caa">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:adbe60877f205b36d76a87695afb28caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function: Broken default.  <br /></td></tr>
+<tr class="separator:adbe60877f205b36d76a87695afb28caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ea74af5d011a3866999c3760621edf" id="r_a89ea74af5d011a3866999c3760621edf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#a89ea74af5d011a3866999c3760621edf">get_dwind_adv_diff_dexternal_element_data</a> (const unsigned &amp;ipt, const unsigned &amp;i, Vector&lt; double &gt; &amp;result, Vector&lt; unsigned &gt; &amp;global_eqn_number)</td></tr>
+<tr class="memdesc:a89ea74af5d011a3866999c3760621edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the derivatives of the wind with respect to the external unknowns.  <br /></td></tr>
+<tr class="separator:a89ea74af5d011a3866999c3760621edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc63db5ad4e397df7809447ee3ca56ac" id="r_afc63db5ad4e397df7809447ee3ca56ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#afc63db5ad4e397df7809447ee3ca56ac">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:afc63db5ad4e397df7809447ee3ca56ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing.  <br /></td></tr>
+<tr class="separator:afc63db5ad4e397df7809447ee3ca56ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375fb98e225dbd5ac716ed3f68831069" id="r_a375fb98e225dbd5ac716ed3f68831069"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#a375fb98e225dbd5ac716ed3f68831069">fill_in_contribution_to_jacobian_and_mass_matrix</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian, DenseMatrix&lt; double &gt; &amp;mass_matrix)</td></tr>
+<tr class="memdesc:a375fb98e225dbd5ac716ed3f68831069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the element's contribution to its residuals vector, jacobian matrix and mass matrix.  <br /></td></tr>
+<tr class="separator:a375fb98e225dbd5ac716ed3f68831069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e859b487d8398ae696de72104c76271" id="r_a9e859b487d8398ae696de72104c76271"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html#a9e859b487d8398ae696de72104c76271">fill_in_off_diagonal_block_analytic</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a9e859b487d8398ae696de72104c76271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the contribution of the external degrees of freedom (velocities) on the AdvectionDiffusion equations.  <br /></td></tr>
+<tr class="separator:a9e859b487d8398ae696de72104c76271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class AD_ELEMENT, class NST_ELEMENT&gt;<br />
+class oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;</div><p>Build <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html" title="Build AdvectionDiffusionBoussinesqElement that inherits from ElementWithExternalElement so that it ca...">AdvectionDiffusionBoussinesqElement</a> that inherits from ElementWithExternalElement so that it can "communicate" with the Navier Stokes element. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01070">1070</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a733c18518938e3b85e06de5a618cd49f" name="a733c18518938e3b85e06de5a618cd49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a733c18518938e3b85e06de5a618cd49f">&#9670;&#160;</a></span>AdvectionDiffusionBoussinesqElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::AdvectionDiffusionBoussinesqElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: call the underlying constructors. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01076">1076</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afc63db5ad4e397df7809447ee3ca56ac" name="afc63db5ad4e397df7809447ee3ca56ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc63db5ad4e397df7809447ee3ca56ac">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's residual vector and the Jacobian matrix. Jacobian is computed by finite-differencing. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01169">1169</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+
+</div>
+</div>
+<a id="a375fb98e225dbd5ac716ed3f68831069" name="a375fb98e225dbd5ac716ed3f68831069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a375fb98e225dbd5ac716ed3f68831069">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian_and_mass_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian_and_mass_matrix </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mass_matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add the element's contribution to its residuals vector, jacobian matrix and mass matrix. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01191">1191</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a9e859b487d8398ae696de72104c76271" name="a9e859b487d8398ae696de72104c76271"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e859b487d8398ae696de72104c76271">&#9670;&#160;</a></span>fill_in_off_diagonal_block_analytic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the contribution of the external degrees of freedom (velocities) on the AdvectionDiffusion equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">1206</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01344">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::get_dwind_adv_diff_dexternal_element_data()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01169">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a89ea74af5d011a3866999c3760621edf" name="a89ea74af5d011a3866999c3760621edf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89ea74af5d011a3866999c3760621edf">&#9670;&#160;</a></span>get_dwind_adv_diff_dexternal_element_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::get_dwind_adv_diff_dexternal_element_data </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>global_eqn_number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fill in the derivatives of the wind with respect to the external unknowns. </p>
+<p>Fill in the derivatives of the wind with respect to the external unknowns in the advection-diffusion equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01343">1343</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01206">oomph::AdvectionDiffusionBoussinesqElement&lt; AD_ELEMENT, NST_ELEMENT &gt;::fill_in_off_diagonal_block_analytic()</a>.</p>
+
+</div>
+</div>
+<a id="a86ec5858acc0a562cee7bccedfecb252" name="a86ec5858acc0a562cee7bccedfecb252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ec5858acc0a562cee7bccedfecb252">&#9670;&#160;</a></span>get_wind_adv_diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::get_wind_adv_diff </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>ipt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>wind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity, obtained from the source element in the other mesh. </p>
+<p>Overload the wind function in the advection-diffusion equations. This provides the coupling from the Navier&ndash;Stokes equations to the advection-diffusion equations because the wind is the fluid velocity, obtained from the source elements in the other mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01320">1320</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="adbd60fca6201bc2cd80ff39303323053" name="adbd60fca6201bc2cd80ff39303323053"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd60fca6201bc2cd80ff39303323053">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01146">1146</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="adbe60877f205b36d76a87695afb28caa" name="adbe60877f205b36d76a87695afb28caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe60877f205b36d76a87695afb28caa">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function: Broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01152">1152</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="acc615c265bef2c3f5c30c6be95c0f50d" name="acc615c265bef2c3f5c30c6be95c0f50d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc615c265bef2c3f5c30c6be95c0f50d">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the standard output function with the broken default. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01140">1140</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="afcb2b136650ecca8fd47eb4278616d29" name="afcb2b136650ecca8fd47eb4278616d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb2b136650ecca8fd47eb4278616d29">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class AD_ELEMENT , class NST_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1AdvectionDiffusionBoussinesqElement.html">oomph::AdvectionDiffusionBoussinesqElement</a>&lt; AD_ELEMENT, NST_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nplot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: Output x, y, theta at Nplot^DIM plot points. </p>
+
+<p class="definition">Definition at line <a class="el" href="multi__domain__boussinesq__elements_8h_source.html#l01104">1104</a> of file <a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="multi__domain__boussinesq__elements_8h_source.html">multi_domain_boussinesq_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

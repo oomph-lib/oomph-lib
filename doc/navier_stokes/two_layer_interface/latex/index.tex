@@ -1,0 +1,976 @@
+\chapter{Demo problem\+: Relaxation oscillations of an interface between two viscous fluids}
+\hypertarget{index}{}\label{index}\index{Demo problem: Relaxation oscillations of an interface between two viscous fluids@{Demo problem: Relaxation oscillations of an interface between two viscous fluids}}
+In the \href{../../single_layer_free_surface/html/index.html}{\texttt{ previous example}} we considered a two-\/dimensional free surface Navier--Stokes problem. The free surface was deformed to a prescribed shape and then allowed to relax. In this example we consider the relaxation of an interface between two viscous fluids.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_implementation}
+The extension from a single fluid problem to one involving two fluids separated by an interface is very straightforward. As {\ttfamily oomph-\/lib\textquotesingle{}s} Navier--Stokes elements are based on the Arbitrary Lagrangian Eulerian form of the equations, and can therefore be used to solve problems in moving domains, we can discretise the domain using a rectangular mesh containing an additional boundary corresponding to the position of the interface. The construction of such a mesh is described \href{\#mesh}{\texttt{ below}}. We also require a method of distinguishing between (and assigning) the physical properties of the two fluid layers.\hypertarget{index_interface_eqns}{}\doxysubsection{\texorpdfstring{Boundary conditions at the interface}{Boundary conditions at the interface}}\label{index_interface_eqns}
+A discussion of the theory and implementation of the boundary conditions at a free surface is given in the \href{../../single_layer_free_surface/html/index.html\#free_surface_eqns}{\texttt{ previous example}}, where we showed that the dynamic boundary condition is given by  \[
+\tau_{ij}^{[2]} \, n_j^{[1]} =
+\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.
+\] Here $ \tau_{ij}^{[1]} $ and $ \tau_{ij}^{[2]} $ are the stress tensors in the `lower' and `upper' fluids respectively, $
+n_j^{[1]} $ is the unit normal pointing out of the `lower' fluid and $ Ca $ is the Capillary number.
+
+The interface conditions in this two-\/fluid example are implemented in an almost identical way to the \href{../../single_layer_free_surface/html/index.html\#implementation}{\texttt{ single layer case}}. We employ the same pseudo-\/solid node-\/update strategy, where the interior mesh is treated as a fictitious elastic solid and thus the (unknown) nodal positions can be determined by solving a solid mechanics problem. The deformation of the free surface boundary itself is imposed by introducing a a field of Lagrange multipliers at the interface, and the equation associated with these additional unknowns is the kinematic condition. In the \href{../../single_layer_free_surface/html/index.html\#implementation}{\texttt{ single layer case}} this equation is discretised by attaching {\ttfamily Face\+Elements} to the boundaries of the `bulk' elements that are adjacent to the free surface. In this two-\/layer example we attach the same {\ttfamily Face\+Elements} to only those `bulk' elements which are in the `lower' fluid (and have boundaries adjacent to the interface). These same {\ttfamily Face\+Elements} are also responsible for adding the surface tension contributions to the momentum equations that arise through the application of the dynamic boundary condition. We note that since we are solving the Navier--Stokes equations on either side of the interface we do not specify an external pressure, a step that was necessary in the \href{../../single_layer_free_surface/html/index.html\#implementation}{\texttt{ single layer case}}.
+
+The other difference between this problem and the \href{../../single_layer_free_surface/html/index.html}{\texttt{ previous example}} is that we shall be solving this one using spatial adaptivity. We refer to \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ another tutorial}} for a discussion of how to apply boundary conditions in such problems.\hypertarget{index_dens_visc_ratios}{}\doxysubsection{\texorpdfstring{Distinguishing between the two fluids}{Distinguishing between the two fluids}}\label{index_dens_visc_ratios}
+In a problem containing a single fluid, the definitions of the Reynolds number, Strouhal number, Capillary number and so on are based on the physical properties of that fluid, as well as the geometry of the problem and typical timescales. In our \href{../../driven_cavity/html/index.html}{\texttt{ discussion of the non-\/dimensionalisation of the Navier--Stokes equations}} we describe how the various dimensionless parameters are defined in terms of a reference density, $ \rho_{ext} $, and a reference viscosity, $ \mu_{ext} $. We can then define two dimensionless ratios, $ R_\rho $ and $ R_\mu $, which describe a particular fluid\textquotesingle{}s density $ \rho $ and kinematic viscosity $ \mu $ relative to these reference quantities\+:  \[
+R_\rho = \frac{\rho}{\rho_{ref}} 
+\qquad ; \qquad 
+R_\mu = \frac{\mu}{\mu_{ref}}.
+\] {\ttfamily oomph-\/lib\textquotesingle{}s} implementation of the Navier--Stokes equations contains these ratios in the appropriate terms. They default to one but can be set to other values via the member functions {\ttfamily density\+\_\+ratio\+\_\+pt()} and {\ttfamily viscosity\+\_\+ratio\+\_\+pt()} in each element.
+
+It is convenient to choose one of the fluids in this problem to be the `reference fluid' on which the dimensionless parameters are based. We choose the lower fluid (fluid 1), and hence the density $ \rho^{[1]} $ and viscosity $ \mu^{[1]} $ of this fluid are identically equal to $ \rho_{ref} $ and $ \mu_{ref}
+$ (and thus $ R_\rho^{[1]} = R_\mu^{[1]} = 1 $). We can now control the relative density and viscosity of the upper fluid to the lower fluid using the ratios $ R_\rho^{[2]} = \rho^{[2]}/\rho_{ref}
+$ and $ R_\mu^{[2]} = \mu^{[2]}/\mu_{ref} $ respectively. For simplicity we will from now on refer to $ R_\rho^{[2]} $ simply as $ R_\rho $ and to $ R_\mu^{[2]} $ as $ R_\mu $.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example_problem}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example_problem}
+We will illustrate the solution of the unsteady two-\/dimensional Navier--Stokes equations using the example of a distorted interface between two viscous fluids which is allowed to relax. The domain is periodic in the $ x_1 $ direction.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{ The 2D unsteady Navier--Stokes equations either side of a distorted interface.}} \end{center}  Solve  \[
+Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right]
+\ \ \ \ \ \ \ \ \ \ (1)
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ (2)
+\] in the `lower' fluid, and  \[
+R_\rho Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + R_\rho \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[R_\mu \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right) \right]
+\ \ \ \ \ \ \ \ \ \ (3)
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ (4)
+\] in the `upper' fluid. Gravity acts in the negative $ x_2 $ direction and so $ G_1 = 0 $ and $ G_2 = 1 $. The governing equations are subject to the no slip boundary conditions  \[
+u_1 = u_2 = 0 \ \ \ \ \ \ \ \ \ \ (5)
+\] on the top ( $ x_2 = 2.0 $) and bottom ( $ x_2 = 0.0 $) solid boundaries and the symmetry boundary conditions  \[
+u_1 = 0 \ \ \ \ \ \ \ \ \ \ (6)
+\] on the left ( $ x_1 = 0.0 $) and right ( $ x_1 = 1.0 $) boundaries.
+
+We denote the position vector to the interface between the two fluids by $ \mathbf{R} $, which is subject to the kinematic condition  \[
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
+\ \ \ \ \ \ \ \ \ \ (7)
+\] and the dynamic condition  \[
+\tau_{ij}^{[2]} \, n_j^{[1]} =
+\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.
+\ \ \ \ \ \ \ \ \ \ (8)
+\] The stress tensor in the `lower' fluid is defined as  \[
+\tau_{ij}^{[1]} = -p^{[1]} \, \delta_{ij} + \left(\frac{\partial u^{[1]}_i}{\partial x_j}
++ \frac{\partial u^{[1]}_j}{\partial x_i}\right),
+\ \ \ \ \ \ \ \ \ \ (9)
+\] and that in the `upper' fluid is defined as  \[
+\tau_{ij}^{[2]} = -p^{[2]} \, \delta_{ij} + R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}
++ \frac{\partial u^{[2]}_j}{\partial x_i}\right).
+\ \ \ \ \ \ \ \ \ \ (10)
+\]
+
+The initial shape of the interface is defined by  \[
+ \mathbf{R} = x_1 \, \mathbf{i} + \left[ 1.0 + 
+ \epsilon\cos\left( 2 n \pi x_1 \right)\right] \, \mathbf{j},
+\ \ \ \ \ \ \ \ \ \ (11)
+\] where $ \epsilon $ is the amplitude of the initial deflection and $ n $ is an integer.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows a contour plot of the pressure distribution taken from \href{../figures/two_layer_interface.avi}{\texttt{ an animation of the flow field}}, for the parameters $ Re = Re \, St = Re/Fr = 5.0 $, $ R_\rho =
+0.5 $, $ R_\mu = 0.1 $ and $ Ca = 0.01 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{two_layer_interface}
+\doxyfigcaption{Pressure contour plot for the relaxing interface problem. }
+\end{DoxyImage}
+
+
+The restoring forces of surface tension and gravitational acceleration act to revert the interface to its undeformed flat state. The interface oscillates up and down, but the motion is damped as the energy in the system is dissipated through viscous forces. Eventually the interface settles down to its equilibrium position, as can be seen in the following time-\/trace of the height of the interface at the left-\/hand edge of the domain ( $ x_1 = 0 $).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.95\textwidth]{two_layer_interface_trace}
+\doxyfigcaption{Time-\/trace of the height of the interface at the point x\+\_\+1 = 0. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_validation}{}\doxysection{\texorpdfstring{Validation}{Validation}}\label{index_validation}
+The free surface boundary conditions for the Cartesian Navier--Stokes equations have been validated against an analytical test case, and we present the results in the figure below. For sufficiently small amplitudes, $ \epsilon \ll 1 $, we can linearise the governing equations and obtain a dispersion relation $ \lambda(k) $, the derivation of which is discussed in the \href{../../single_layer_free_surface/html/index.html\#validation}{\texttt{ previous tutorial}}. The only difference in this two layer case is that the linear system which needs to be solved contains nine unknowns rather than five, since the two fluids have different properties. The real and imaginary parts of $ \lambda $ correspond to the growth rate and the frequency of the oscillating interface respectively, and can be compared to numerical results computed for given values of the wavenumber $ k $. We choose an initial deflection amplitude of $ \epsilon = 0.01 $ and determine the growth rate and frequency of the oscillation from a time-\/trace of the left-\/hand edge of the interface.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.95\textwidth]{two_layer_interface_code_validation}
+\doxyfigcaption{Validation of the code (points) by comparison with an analytical dispersion relation (lines). }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As in the \href{../../single_layer_free_surface/html/index.html\#namespace}{\texttt{ previous example}}, we use a namespace to define the dimensionless parameters $ Re $, $ St $, $ Re/Fr $ and $ Ca $. The pseudo-\/solid mesh is governed by a generalised Hookean constitutive law which requires the definition of the Poisson ratio, $ \nu $, and we create a vector $ G $ which will define the direction in which gravity acts. Because this is a two-\/fluid problem, we also need to define the density ratio $ R_{\rho} = \rho^{[2]}/\rho^{[1]} $ and viscosity ratio $ R_{\mu} = \mu^{[2]}/\mu^{[1]} $ of the two fluids.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ =\ 5.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Strouhal\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4b6ef72bd221361c37f5b9a4a6899afc}{St}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Womersley\ number\ (Reynolds\ x\ Strouhal)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}\ =\ 5.0;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Product\ of\ Reynolds\ number\ and\ inverse\ of\ Froude\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}\ =\ 5.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Ratio\ of\ viscosity\ in\ upper\ fluid\ to\ viscosity\ in\ lower}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ fluid.\ Reynolds\ number\ etc.\ is\ based\ on\ viscosity\ in\ lower\ fluid.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_adb51428300a01b19395c43c0d3586d6f}{Viscosity\_Ratio}}\ =\ 0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Ratio\ of\ density\ in\ upper\ fluid\ to\ density\ in\ lower}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ fluid.\ Reynolds\ number\ etc.\ is\ based\ on\ density\ in\ lower\ fluid.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80a34b6dfb7e1501966b8d6c7501e718}{Density\_Ratio}}\ =\ 0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Capillary\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}}\ =\ 0.01;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Direction\ of\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{G}}(2);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pseudo-\/solid\ Poisson\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}\ =\ 0.1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is very similar to the \href{../../single_layer_free_surface/html/index.html\#main}{\texttt{ previous example}}. We define a command line flag which allows us to run a `validation' version of the code (for {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/testing routines) and check that the non-\/dimensional quantities provided in the {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}} namespace are self-\/consistent.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ two-\/dimensional\ two\ fluid\ interface\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{elastic__two__layer__interface_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argv}}[])\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argc}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argv}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Are\ we\ performing\ a\ validation\ run?}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{CommandLineArgs::specify\_command\_line\_flag}}(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{CommandLineArgs::parse\_and\_assign}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{CommandLineArgs::doc\_specified\_flags}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ that\ definition\ of\ Womersley\ number\ is\ consistent\ with\ those}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ of\ the\ Reynolds\ and\ Strouhal\ numbers}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}}\ !=}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4b6ef72bd221361c37f5b9a4a6899afc}{Global\_Physical\_Variables::St}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ std::ostringstream\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{error\_stream}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}Definition\ of\ Global\_Physical\_Variables::ReSt\ is\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}inconsistant\ with\ those\(\backslash\)n"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}of\ Global\_Physical\_Variables::Re\ and\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Global\_Physical\_Variables::St."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{OomphLibError}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{error\_stream}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{OOMPH\_CURRENT\_FUNCTION}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Next we specify the duration of the simulation and the size of the timestep. If we are running the code as a self-\/test, we set the length of the simulation such that only two timesteps are taken. The direction in which gravity acts is defined to be vertically downwards.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Maximum\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\_max}}\ =\ 0.6;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Duration\ of\ timestep}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}}\ =\ 0.0025;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ we\ are\ doing\ validation\ run,\ use\ smaller\ number\ of\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\_max}}\ =\ 0.005;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ direction\ of\ gravity\ (vertically\ downwards)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[1]\ =\ -\/1.0;}
+
+\end{DoxyCodeInclude}
+ Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily Refineable\+QCrouzeix\+Raviart\+Elements} and the {\ttfamily BDF$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ the\ elastic\ test\ problem\ with\ QCrouzeixRaviartElements,}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ using\ the\ BDF<2>\ timestepper}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classInterfaceProblem}{InterfaceProblem}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{RefineablePseudoSolidNodeUpdateElement}}<}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{RefineableQCrouzeixRaviartElement<2>}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{RefineableQPVDElement<2,3>}}\ >,\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{BDF<2>}}\ >}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{problem}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Run\ the\ unsteady\ simulation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{problem}}.unsteady\_run(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\_max}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh class}{The mesh class}}\label{index_mesh}
+In the \href{../../single_layer_free_surface/html/index.html\#main}{\texttt{ previous example}} we employed {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Elastic\+Rectangular\+Quad\+Mesh}. If we wanted to solve the same single-\/layer problem but with spatial adaptivity we would simply use that mesh\textquotesingle{}s refineable counterpart, the {\ttfamily Elastic\+Refineable\+Rectangular\+Quad\+Mesh}. For this two-\/layer problem, however, it is convenient to define a new mesh class which contains an additional `boundary' which corresponds to the interface between the two fluids. We start by defining the new class (which is templated by the element type) and inheriting from {\ttfamily Elastic\+Refineable\+Rectangular\+Quad\+Mesh}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_specific\_mesh\_class==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Two\ layer\ mesh\ which\ employs\ a\ pseudo-\/solid\ node-\/update\ strategy.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ This\ class\ is\ essentially\ a\ wrapper\ to\ an\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ ElasticRefineableRectangularQuadMesh,\ with\ an\ additional\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{///\ to\ represent\ the\ interface\ between\ the\ two\ fluid\ layers.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticRefineableTwoLayerMesh}}\ :}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ ElasticRefineableRectangularQuadMesh<ELEMENT>}
+\DoxyCodeLine{\{}
+
+\end{DoxyCodeInclude}
+ Next we define the mesh\textquotesingle{}s constructor. We pass it the usual parameters, including a boolean flag which indicates whether or not the mesh is periodic in the $ x $ direction.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ x-\/direction,\ number\ of}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ elements\ in\ y-\/direction\ in\ bottom\ and\ top\ layer,\ respectively,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ axial\ length\ and\ height\ of\ top\ and\ bottom\ layers,\ a\ boolean}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ flag\ to\ make\ the\ mesh\ periodic\ in\ the\ x-\/direction,\ and\ pointer\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ timestepper\ (defaults\ to\ Steady\ timestepper)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticRefineableTwoLayerMesh}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny2}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{lx}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{periodic\_in\_x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\_stepper\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{Mesh::Default\_TimeStepper}})}
+\DoxyCodeLine{\ \ :\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{RectangularQuadMesh}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny2}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{lx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{periodic\_in\_x}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticRectangularQuadMesh}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny2}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{lx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{periodic\_in\_x}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ \ \ ElasticRefineableRectangularQuadMesh<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny2}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{lx}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{periodic\_in\_x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+
+\end{DoxyCodeInclude}
+ We have so far created an {\ttfamily Elastic\+Refineable\+Rectangular\+Quad\+Mesh}, which has four boundaries corresponding to the edges of our problem\textquotesingle{}s domain. We wish to define a fifth boundary which corresponds to the interface position. First we set the number of boundaries to five and then convert all the {\ttfamily Nodes} which lie on the interface into {\ttfamily Boundary\+Nodes}. These are then added to the fifth boundary.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ number\ of\ boundaries\ to\ 5}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{set\_nboundary}}(5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ horizontal\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ element\ in\ lower\ fluid\ adjacent\ to\ interface}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{FiniteElement}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}\ =\ this-\/>\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{finite\_element\_pt}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nx}}*(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ny1}}-\/1)+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ in\ this\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>nnode();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ last\ three\ nodes\ in\ this\ element\ are\ those\ on\ the\ interface.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ these\ nodes\ and\ convert\ them\ to\ boundary\ nodes.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}<3;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Node}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nod\_pt}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}-\/3+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{convert\_to\_boundary\_node}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nod\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{add\_boundary\_node}}(4,\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{nod\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ horizontal\ elements}}
+
+\end{DoxyCodeInclude}
+ All that remains is to set up the boundary element information. This is required so that we can easily have access to the bulk elements either side of this new boundary.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ up\ the\ boundary\ element\ information}}
+\DoxyCodeLine{\ \ \ this-\/>\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{setup\_boundary\_element\_info}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ End\ of\ specific\ mesh\ class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem_class}
+This is very similar to the problem class in the \href{../../single_layer_free_surface/html/index.html\#problem_class}{\texttt{ previous example}}, with a few modifications. Because we shall use spatial adaptivity when solving this problem, we define the following two functions, which will be called before and after mesh adaptation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Strip\ off\ the\ interface\ elements\ before\ adapting\ the\ bulk\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_before\_adapt();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Rebuild\ the\ mesh\ of\ interface\ elements\ after\ adapting\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ actions\_after\_adapt();}
+
+\end{DoxyCodeInclude}
+ These two functions will employ two helper functions which are responsible for the creation and deletion of the interface elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ the\ 1d\ interface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ create\_interface\_elements();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ the\ 1d\ interface\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ delete\_interface\_elements();}
+
+\end{DoxyCodeInclude}
+ The final modification to the problem class is the addition of a helper function which pins a pressure value in a specified element and assigns a specific value.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fix\ pressure\ in\ element\ e\ at\ pressure\ dof\ pdof\ and\ set\ to\ pvalue}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ fix\_pressure(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pdof}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pvalue}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Fix\ the\ pressure\ at\ that\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}*\textcolor{keyword}{>}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{mesh\_pt}}()-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}))-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fix\_pressure(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pdof}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pvalue}});}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The constructor starts by building the timestepper and setting the dimensions of the mesh. The number of elements in the $ x_1 $ and $ x_2 $ directions in both fluid layers are specified.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ two\ fluid\ interface\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}{InterfaceProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allocate\ the\ timestepper\ (this\ constructs\ the\ time\ object\ as\ well)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ number\ of\ elements\ in\ x\ direction}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_x}}\ =\ 3;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ number\ of\ elements\ in\ y\ direction\ in\ lower\ fluid\ (fluid\ 1)}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y1}}\ =\ 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ number\ of\ elements\ in\ y\ direction\ in\ upper\ fluid\ (fluid\ 2)}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y2}}\ =\ 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ width\ of\ domain\ and\ store\ as\ class\ member\ data}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{l\_x}}\ =\ 1.0;}
+\DoxyCodeLine{\ this-\/>Lx\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{l\_x}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ height\ of\ lower\ fluid\ layer}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ height\ of\ upper\ fluid\ layer}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}}\ =\ 1.0;}
+
+\end{DoxyCodeInclude}
+ Next we build the bulk mesh, create an error estimator for the problem and set the maximum refinement level.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ the\ "{}bulk"{}\ mesh\ (the\ "{}true"{}\ boolean\ flag\ tells}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ mesh\ constructor\ that\ the\ domain\ is\ periodic\ in\ x)}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticRefineableTwoLayerMesh<ELEMENT>}}}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_x}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y1}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y2}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{l\_x}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}},\textcolor{keyword}{true},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{time\_stepper\_pt}}());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ and\ set\ the\ error\ estimator\ for\ spatial\ adaptivity}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ maximum\ refinement\ level\ for\ the\ mesh\ to\ 4}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>max\_refinement\_level()\ =\ 4;}
+
+\end{DoxyCodeInclude}
+ An empty surface mesh is created and then populated with a call to {\ttfamily create\+\_\+interface\+\_\+elements()}. The bulk and surface meshes are then combined to form the global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ "{}surface"{}\ mesh\ that\ will\ contain\ only\ the\ interface}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ elements.\ The\ constructor\ just\ creates\ the\ mesh\ without\ giving}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ it\ any\ elements,\ nodes,\ etc.}}
+\DoxyCodeLine{\ Surface\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Mesh}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ interface\ elements\ at\ the\ boundary\ between\ the\ two\ fluids,}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ add\ them\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\ create\_interface\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ two\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{add\_sub\_mesh}}(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ all\ sub-\/meshes\ into\ a\ single\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{build\_global\_mesh}}();}
+
+\end{DoxyCodeInclude}
+ On the top and bottom boundaries ( $ y = 2.0 $ and $ y = 0.0 $) we apply the no-\/slip condition by pinning both velocity components. On the left and right symmetry boundaries ( $ x = 0.0 $ and $ x =
+1.0 $) we pin the $ x $ component of the velocity but leave the $ y $ component unconstrained. We pin the vertical displacement of the nodes on the solid boundaries (since these must remain stationary) and pin the horizontal displacement of all nodes in the mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ All\ values\ are\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Dirichlet\ conditions\ here}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_boundary}}\ =\ Bulk\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_boundary}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_node(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Fluid\ boundary\ conditions:}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ x-\/component\ of\ velocity\ (no\ slip/penetration)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ on\ all\ boundaries\ other\ than\ the\ interface\ (b=4)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}!=4)\ \{\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>pin(0);\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ y-\/component\ of\ velocity\ on\ both\ solid\ boundaries\ (no\ penetration)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}==0\ ||\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}==2)\ \{\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>pin(1);\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Solid\ boundary\ conditions:}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ vertical\ mesh\ position\ on\ both\ solid\ boundaries\ (no\ penetration)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}==0\ ||\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}}==2)\ \{\ Bulk\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{b}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>pin\_position(1);\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ mesh\ boundaries}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ horizontal\ position\ of\ all\ nodes}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}++)\ \{\ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>pin\_position(0);\ \}}
+
+\end{DoxyCodeInclude}
+ Next we create a generalised Hookean constitutive equation for the pseudo-\/solid mesh. This constitutive equation is discussed in \href{../../../solid/disk_compression/html/index.html\#hooke}{\texttt{ another tutorial}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ for\ the\ solid\ equations:\ generalised\ Hookean}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Constitutive\_law\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+
+\end{DoxyCodeInclude}
+ We loop over the bulk elements in the lower fluid and pass them pointers to the Reynolds and Womersley numbers, $ Re $ and $
+Re\, St $, the product of the Reynolds number and the inverse of the Froude number, $ Re/Fr $, the direction of gravity, $ G $, the constitutive law and the global time object, created when we called {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)} above. Note that we do not assign pointers for the viscosity and density ratios, $ R_\mu $ and $
+R_\rho $, since these take the default value in the lower fluid.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Compute\ number\ of\ bulk\ elements\ in\ lower/upper\ fluids}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_lower}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_x}}*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y1}};}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_upper}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_x}}*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_y2}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ bulk\ elements\ in\ lower\ fluid}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_lower}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}\ *\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Womersley\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ product\ of\ the\ Reynolds\ number\ and\ the\ inverse\ of\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Froude\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_invfr\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\_Physical\_Variables::ReInvFr}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ direction\ of\ gravity}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =\ \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ bulk\ elements\ in\ lower\ fluid}}
+
+\end{DoxyCodeInclude}
+ We then do the same for the bulk elements in the upper fluid, and this time we do assign pointers for the viscosity and density ratios.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ bulk\ elements\ in\ upper\ fluid}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_lower}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_lower}}+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_upper}});\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}\ *\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Womersley\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ product\ of\ the\ Reynolds\ number\ and\ the\ inverse\ of\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Froude\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>re\_invfr\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\_Physical\_Variables::ReInvFr}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ viscosity\ ratio}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>viscosity\_ratio\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_adb51428300a01b19395c43c0d3586d6f}{Global\_Physical\_Variables::Viscosity\_Ratio}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ density\ ratio}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>density\_ratio\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80a34b6dfb7e1501966b8d6c7501e718}{Global\_Physical\_Variables::Density\_Ratio}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ direction\ of\ gravity}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =\ \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ bulk\ elements\ in\ upper\ fluid}}
+
+\end{DoxyCodeInclude}
+ We then pin one pressure degree of freedom.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ pressure\ in\ the\ first\ element\ at\ 'node'\ 0\ to\ 0.0}}
+\DoxyCodeLine{\ fix\_pressure(0,0,0.0);}
+
+\end{DoxyCodeInclude}
+ At this point we set up the boundary conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Apply\ the\ boundary\ conditions}}
+\DoxyCodeLine{\ set\_boundary\_conditions();}
+
+\end{DoxyCodeInclude}
+ Finally, we set up the equation numbering scheme.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_initial_condition}{}\doxysection{\texorpdfstring{Initial conditions}{Initial conditions}}\label{index_set_initial_condition}
+The {\ttfamily set\+\_\+initial\+\_\+conditions()} function is identical to that in the \href{../../single_layer_free_surface/html/index.html\#set_initial_condition}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_boundary_conditions}{}\doxysection{\texorpdfstring{Boundary conditions}{Boundary conditions}}\label{index_set_boundary_conditions}
+The {\ttfamily set\+\_\+boundary\+\_\+conditions()} function is very similar to that in the \href{../../single_layer_free_surface/html/index.html\#set_boundary_conditions}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_before_adapt}{}\doxysection{\texorpdfstring{Actions before adaptation}{Actions before adaptation}}\label{index_before_adapt}
+The mesh adaptation is driven by the error estimates in the bulk elements and only performed for that mesh. The interface elements must therefore be removed before adaptation. We do this by calling the function {\ttfamily delete\+\_\+interface\+\_\+elements()}, and then rebuilding the {\ttfamily Problem\textquotesingle{}s} global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_actions\_before\_adapt=========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Strip\ off\ the\ interface\ elements\ before\ adapting\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}{InterfaceProblem<ELEMENT,TIMESTEPPER>::actions\_before\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Delete\ the\ interface\ elements\ and\ wipe\ the\ surface\ mesh}}
+\DoxyCodeLine{\ delete\_interface\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ actions\_before\_adapt}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_after_adapt}{}\doxysection{\texorpdfstring{Actions after adapt}{Actions after adapt}}\label{index_after_adapt}
+After the bulk mesh has been adapted we must create new interface elements and rebuild the problem\textquotesingle{}s global mesh. Any newly-\/created boundary nodes will automatically have the appropriate boundary conditions applied; however, we must remember to pin the horizontal displacement of all nodes throughout the bulk of the domain.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_actions\_after\_adapt==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Rebuild\ the\ mesh\ of\ interface\ elements\ after\ adapting\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_a1c8a5dee970dccc3f1da993cf531872d}{InterfaceProblem<ELEMENT,TIMESTEPPER>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ interface\ elements}}
+\DoxyCodeLine{\ this-\/>create\_interface\_elements();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ horizontal\ displacement\ of\ all\ nodes}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}++)\ \{\ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>pin\_position(0);\ \}}
+
+\end{DoxyCodeInclude}
+ To ensure that precisely one fluid pressure degree of freedom is pinned, we unpin all pressure degrees of freedom, pin any redundant nodal pressures which have arisen following mesh adaptation and call {\ttfamily fix\+\_\+pressure(...)}. We also pin any redundant solid pressures before re-\/setting the boundary conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Unpin\ all\ fluid\ pressure\ dofs}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{RefineableNavierStokesEquations<2>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{\ \ unpin\_all\_pressure\_dofs}}(Bulk\_mesh\_pt-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ redudant\ fluid\ pressure\ dofs}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{RefineableNavierStokesEquations<2>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{\ \ pin\_redundant\_nodal\_pressures}}(Bulk\_mesh\_pt-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ set\ the\ pressure\ in\ the\ first\ element\ at\ 'node'\ 0\ to\ 0.0}}
+\DoxyCodeLine{\ fix\_pressure(0,0,0.0);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Reset\ the\ boundary\ conditions}}
+\DoxyCodeLine{\ set\_boundary\_conditions();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_create_interface_elements}{}\doxysection{\texorpdfstring{Create interface elements}{Create interface elements}}\label{index_create_interface_elements}
+This function is used to `attach' interface elements to the upper face of those bulk elements in the lower fluid which are adjacent to the interface. Firstly, we loop over all bulk elements (in either fluid) which are adjacent to the interface.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_create\_interface\_elements====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ interface\ elements\ between\ the\ two\ fluids\ in\ the\ mesh}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ pointed\ to\ by\ Bulk\_mesh\_pt\ and\ add\ the\ elements\ to\ the\ Mesh\ object}}
+\DoxyCodeLine{\textcolor{comment}{///\ pointed\ to\ by\ Surface\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}{InterfaceProblem<ELEMENT,TIMESTEPPER>::create\_interface\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ bulk\ elements\ adjacent\ to\ interface\ (boundary\ 4)}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_element}}\ =\ this-\/>Bulk\_mesh\_pt-\/>nboundary\_element(4);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ those\ elements\ adjacent\ to\ the\ interface}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_element}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ the\ interface}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ this-\/>Bulk\_mesh\_pt-\/>boundary\_element\_pt(4,\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}));}
+
+\end{DoxyCodeInclude}
+ In order to determine whether the bulk element we are currently looking at is in the upper or lower fluid, we check to see whether that element\textquotesingle{}s {\ttfamily viscosity\+\_\+ratio\+\_\+pt} is pointing to the address of {\ttfamily \doxylink{namespaceGlobal__Physical__Variables_adb51428300a01b19395c43c0d3586d6f}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}. If it is, then that bulk element is in the upper fluid, and we ignore it. Otherwise, we determine the face of the bulk element that corresponds to the interface and create an interface element on that face. The newly-\/created element is then added to the surface mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ We\ only\ want\ to\ attach\ interface\ elements\ to\ the\ bulk\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ which\ are\ BELOW\ the\ interface,\ and\ so\ we\ filter\ out\ those\ above\ by}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ referring\ to\ the\ viscosity\_ratio\_pt}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{bulk\_elem\_pt}}-\/>viscosity\_ratio\_pt()}
+\DoxyCodeLine{\ \ \ \ \ \ !=\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_adb51428300a01b19395c43c0d3586d6f}{Global\_Physical\_Variables::Viscosity\_Ratio}})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Find\ index\ of\ the\ face\ of\ element\ e\ that\ corresponds\ to\ the\ interface}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{face\_index}}\ =\ this-\/>Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(4,\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ the\ interface\ element}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{FiniteElement}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{interface\_element\_element\_pt}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{bulk\_elem\_pt}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{face\_index}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ the\ interface\ element\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ this-\/>Surface\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{interface\_element\_element\_pt}});}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we pass the Strouhal and Capillary numbers to the interface elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ 1D\ interface\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_interface\_element}}\ =\ this-\/>Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ interface\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_interface\_element}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}*\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ElasticLineFluidInterfaceElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Strouhal\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4b6ef72bd221361c37f5b9a4a6899afc}{Global\_Physical\_Variables::St}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Capillary\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{el\_pt}}-\/>ca\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ interface\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ create\_interface\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_delete_interface_elements}{}\doxysection{\texorpdfstring{Delete interface elements}{Delete interface elements}}\label{index_delete_interface_elements}
+This function loops over all the interface elements (\doxylink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{i.\+e}. those in the surface mesh) and deletes them and their storage.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_delete\_interface\_elements====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Delete\ the\ interface\ elements\ and\ wipe\ the\ surface\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}{InterfaceProblem<ELEMENT,TIMESTEPPER>::delete\_interface\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ interface\ elements}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_interface\_element}}\ =\ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ interface\ elements\ and\ delete}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_interface\_element}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ Surface\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ Surface\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ delete\_interface\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_deform_free_surface}{}\doxysection{\texorpdfstring{Prescribing the initial free surface position}{Prescribing the initial free surface position}}\label{index_deform_free_surface}
+At the beginning of the simulation the interface is deformed by a prescribed function (11), implemented in the function {\ttfamily deform\+\_\+free\+\_\+surface(...)}, which cycles through the bulk mesh\textquotesingle{}s {\ttfamily Nodes} and modifies their positions such that the nodes on the free surface follow the prescribed interface shape and the bulk nodes retain their fractional position between the solid boundaries and the (now deformed) interface.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Deform\ the\ mesh/free\ surface\ to\ a\ prescribed\ function}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\_free\_surface}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}},\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_periods}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ in\ the\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}}\ =\ Bulk\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}<\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_node}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ eulerian\ position\ of\ node}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{current\_x\_pos}}\ =\ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>x(0);}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{current\_y\_pos}}\ =\ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>x(1);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ new\ vertical\ position\ of\ node}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{new\_y\_pos}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{current\_y\_pos}}}
+\DoxyCodeLine{\ \ \ \ +\ (1.0-\/\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{fabs}}(1.0-\/\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{current\_y\_pos}}))*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}}}
+\DoxyCodeLine{\ \ \ \ *(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{cos}}(2.0*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_periods}}*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh_a4f6c6b4214a7a99e94e24906d033f8f7}{MathematicalConstants::Pi}}*\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{current\_x\_pos}}/Lx));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ new\ position}}
+\DoxyCodeLine{\ \ \ Bulk\_mesh\_pt-\/>node\_pt(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n}})-\/>x(1)\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{new\_y\_pos}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ deform\_free\_surface}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+This function is identical to that in the \href{../../single_layer_free_surface/html/index.html\#doc}{\texttt{ previous example}}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_unsteady_run}{}\doxysection{\texorpdfstring{The timestepping loop}{The timestepping loop}}\label{index_unsteady_run}
+The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepping procedure, and is very similar to that in the \href{../../single_layer_free_surface/html/index.html\#unsteady_run}{\texttt{ previous example}}. The only changes arise due to this problem being solved with spatial adaptivity. We start by deforming the interface in the manner specified by equation (11).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_unsteady\_run=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Perform\ run\ up\ to\ specified\ time\ t\_max\ with\ given\ timestep\ dt}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\_max}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ value\ of\ epsilon}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}}\ =\ 0.1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ number\ of\ periods\ for\ cosine\ term}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_periods}}\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Deform\ the\ mesh/free\ surface}}
+\DoxyCodeLine{\ deform\_free\_surface(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_periods}});}
+
+\end{DoxyCodeInclude}
+ We then create a {\ttfamily Doc\+Info} object to store the output directory and the label for the output files.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ DocInfo\ object}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{DocInfo}}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ counter\ for\ solutions}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}}.number()=0;}
+
+\end{DoxyCodeInclude}
+ Next we open and initialise the trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{filename}}[100];\ \ \ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}}.directory().c\_str());}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Trace\_file}}.open(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{filename}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ trace\ file}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Trace\_file}}\ <<\ \textcolor{stringliteral}{"{}time,\ interface\ height"{}}\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep $ dt $ must be passed to the problem\textquotesingle{}s timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem. Next we assign the initial conditions by calling {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()}, which was discussed \href{\#set_initial_condition}{\texttt{ above}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ timestep}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{initialise\_dt}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ initial\ condition}}
+\DoxyCodeLine{\ set\_initial\_condition();}
+
+\end{DoxyCodeInclude}
+ We limit number of spatial adaptations per timestep to two and refine the problem uniformly twice, before documenting the initial conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Maximum\ number\ of\ spatial\ adaptations\ per\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{max\_adapt}}\ =\ 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Call\ refine\_uniformly\ twice}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{i}}<2;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{i}}++)\ \{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{refine\_uniformly}}();\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ initial\ solution}}
+\DoxyCodeLine{\ doc\_solution(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ counter\ for\ solutions}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}}.number()++;}
+
+\end{DoxyCodeInclude}
+ Finally, we determine the number of timesteps to be performed and perform the actual timestepping loop. For each timestep the function {\ttfamily unsteady\+\_\+newton\+\_\+solve(dt,max\+\_\+adapt,first\+\_\+timestep)} is called and the solution documented. The boolean flag {\ttfamily first\+\_\+timestep} is used to instruct the code to re-\/assign the initial conditions after every mesh adaptation. After the first timestep, the maximum number of adaptations for all timesteps is reset to one. We refer to \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html\#spatial_adapt}{\texttt{ another example}} for a discussion of why this is recommended.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_timestep}}\ =\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\_max}}/\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Are\ we\ on\ the\ first\ timestep?\ At\ this\ point,\ yes!}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{first\_timestep}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t}}=1;\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t}}<=\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_timestep}};\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Output\ current\ timestep\ to\ screen}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nTimestep\ "{}}\ <<\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t}}\ <<\ \textcolor{stringliteral}{"{}\ of\ "{}}\ <<\ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\_timestep}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Take\ one\ fixed\ timestep\ with\ spatial\ adaptivity}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsteady\_newton\_solve}}(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{max\_adapt}},\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{first\_timestep}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ No\ longer\ on\ first\ timestep,\ so\ set\ first\_timestep\ flag\ to\ false}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{first\_timestep}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Reset\ maximum\ number\ of\ adaptations\ for\ all\ future\ timesteps}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{max\_adapt}}\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ timestepping\ loop}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ unsteady\_run}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments}{Comments}}\label{index_comments}
+
+\begin{DoxyItemize}
+\item Since the problem discussed in this example has the fluid velocity prescribed along the entire domain boundary, the fluid pressure is only determined up to an arbitrary constant and hence we fix the pressure at a single point in the domain. However, it is worth noting that in the case of Crouzeix--Raviart elements being used in a problem with spatial adaptivity the notion of a fixed pressure is slightly subtle. In this example we fix the first pressure value of the first element in the mesh to zero, which in the case of Crouzeix--Raviart elements means that we fix the average value of the pressure to zero in this element. Were this element to be refined, however, we would then be imposing a zero pressure elsewhere in the domain, causing the entire pressure field to `jump' from one timestep to the next. Since the problem is incompressible this would not affect the computed velocity fields, but could lead to some confusion when studying the time evolution of the pressure field.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyItemize}
+\item In the \href{../../single_layer_free_surface/html/index.html}{\texttt{ single-\/layer example}} we chose to discretise the problem using Crouzeix--Raviart elements, but we could also have chosen to use Taylor--Hood elements. Why can we not use Taylor--Hood elements to solve this two-\/layer problem?
+\item What happens if we do not call {\ttfamily setup\+\_\+boundary\+\_\+element\+\_\+info()} in the \href{\#mesh}{\texttt{ mesh constructor}}? Why is this?
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/two_layer_interface/}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/two\+\_\+layer\+\_\+interface/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/two\+\_\+layer\+\_\+interface/elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

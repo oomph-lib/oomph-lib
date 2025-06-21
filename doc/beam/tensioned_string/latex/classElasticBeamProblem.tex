@@ -1,0 +1,196 @@
+\doxysection{Elastic\+Beam\+Problem Class Reference}
+\hypertarget{classElasticBeamProblem}{}\label{classElasticBeamProblem}\index{ElasticBeamProblem@{ElasticBeamProblem}}
+
+
+Beam problem object.  
+
+
+Inheritance diagram for Elastic\+Beam\+Problem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classElasticBeamProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea}{Elastic\+Beam\+Problem}} (const unsigned \&n\+\_\+elem, const double \&length)
+\begin{DoxyCompactList}\small\item\em Constructor\+: The arguments are the number of elements, the length of domain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{parameter\+\_\+study}} ()
+\begin{DoxyCompactList}\small\item\em Conduct a parameter study. \end{DoxyCompactList}\item 
+One\+DLagrangian\+Mesh$<$ Hermite\+Beam\+Element $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return pointer to the mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classElasticBeamProblem_a30dde8d0101a3d3994965d6e560cb585}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em No actions need to be performed after a solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classElasticBeamProblem_a5b534c11d9b1d54123bf587aad5f98f6}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em No actions need to be performed before a solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the node whose displacement is documented. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}{Length}}
+\begin{DoxyCompactList}\small\item\em Length of domain (in terms of the Lagrangian coordinates) \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}{Undef\+\_\+beam\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the beam\textquotesingle{}s undeformed shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Beam problem object. 
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00063}{63}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea}\label{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!ElasticBeamProblem@{ElasticBeamProblem}}
+\index{ElasticBeamProblem@{ElasticBeamProblem}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{ElasticBeamProblem()}{ElasticBeamProblem()}}
+{\footnotesize\ttfamily Elastic\+Beam\+Problem\+::\+Elastic\+Beam\+Problem (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+elem,  }\item[{const double \&}]{length }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: The arguments are the number of elements, the length of domain. 
+
+Constructor for elastic beam problem. 
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00102}{102}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string_8cc_source_l00088}{Doc\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00043}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables\+::load()}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00075}{mesh\+\_\+pt()}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00046}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0}}, and \mbox{\hyperlink{tensioned__string_8cc_source_l00094}{Undef\+\_\+beam\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classElasticBeamProblem_a30dde8d0101a3d3994965d6e560cb585}\label{classElasticBeamProblem_a30dde8d0101a3d3994965d6e560cb585} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily void Elastic\+Beam\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+No actions need to be performed after a solve. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00080}{80}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+\Hypertarget{classElasticBeamProblem_a5b534c11d9b1d54123bf587aad5f98f6}\label{classElasticBeamProblem_a5b534c11d9b1d54123bf587aad5f98f6} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily void Elastic\+Beam\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+No actions need to be performed before a solve. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00083}{83}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+\Hypertarget{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}\label{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily One\+DLagrangian\+Mesh$<$ Hermite\+Beam\+Element $>$ \texorpdfstring{$\ast$}{*} Elastic\+Beam\+Problem\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00075}{75}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string_8cc_source_l00102}{Elastic\+Beam\+Problem()}}, and \mbox{\hyperlink{tensioned__string_8cc_source_l00172}{parameter\+\_\+study()}}.
+
+\Hypertarget{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}\label{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!parameter\_study@{parameter\_study}}
+\index{parameter\_study@{parameter\_study}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{parameter\_study()}{parameter\_study()}}
+{\footnotesize\ttfamily void Elastic\+Beam\+Problem\+::parameter\+\_\+study (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Conduct a parameter study. 
+
+Solver loop to perform parameter study. 
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00172}{172}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tensioned__string_8cc_source_l00088}{Doc\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00043}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00091}{Length}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00075}{mesh\+\_\+pt()}}, \mbox{\hyperlink{tensioned__string_8cc_source_l00049}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext}}, and \mbox{\hyperlink{tensioned__string_8cc_source_l00046}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string_8cc_source_l00257}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}\label{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!Doc\_node\_pt@{Doc\_node\_pt}}
+\index{Doc\_node\_pt@{Doc\_node\_pt}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{Doc\_node\_pt}{Doc\_node\_pt}}
+{\footnotesize\ttfamily Node\texorpdfstring{$\ast$}{*} Elastic\+Beam\+Problem\+::\+Doc\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the node whose displacement is documented. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00088}{88}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string_8cc_source_l00102}{Elastic\+Beam\+Problem()}}, and \mbox{\hyperlink{tensioned__string_8cc_source_l00172}{parameter\+\_\+study()}}.
+
+\Hypertarget{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096}\label{classElasticBeamProblem_aa68b1c77e0aa1571fe956d62bd8cf096} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!Length@{Length}}
+\index{Length@{Length}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{Length}{Length}}
+{\footnotesize\ttfamily double Elastic\+Beam\+Problem\+::\+Length\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Length of domain (in terms of the Lagrangian coordinates) 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00091}{91}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string_8cc_source_l00172}{parameter\+\_\+study()}}.
+
+\Hypertarget{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa}\label{classElasticBeamProblem_a134a789cae77ab61a3e32bd93b28e1fa} 
+\index{ElasticBeamProblem@{ElasticBeamProblem}!Undef\_beam\_pt@{Undef\_beam\_pt}}
+\index{Undef\_beam\_pt@{Undef\_beam\_pt}!ElasticBeamProblem@{ElasticBeamProblem}}
+\doxysubsubsection{\texorpdfstring{Undef\_beam\_pt}{Undef\_beam\_pt}}
+{\footnotesize\ttfamily Geom\+Object\texorpdfstring{$\ast$}{*} Elastic\+Beam\+Problem\+::\+Undef\+\_\+beam\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the beam\textquotesingle{}s undeformed shape. 
+
+
+
+Definition at line \mbox{\hyperlink{tensioned__string_8cc_source_l00094}{94}} of file \mbox{\hyperlink{tensioned__string_8cc_source}{tensioned\+\_\+string.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{tensioned__string_8cc_source_l00102}{Elastic\+Beam\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tensioned__string_8cc}{tensioned\+\_\+string.\+cc}}\end{DoxyCompactItemize}

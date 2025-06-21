@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for elements that allow the imposition of an applied traction in the equations of time-harmonic linear elasticity from a Helmholtz potential (interpreted as a displacement potential for the fluid in a quasi-steady, linearised FSI problem.) The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and and thus, we can be generic enough without the need to have a separate equations class.  
+ <a href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aebbd02ebb45634d3e853669d7b37b6f3" id="r_aebbd02ebb45634d3e853669d7b37b6f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#aebbd02ebb45634d3e853669d7b37b6f3">FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a> (FiniteElement *const &amp;element_pt, const int &amp;face_index)</td></tr>
+<tr class="memdesc:aebbd02ebb45634d3e853669d7b37b6f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, which takes a "bulk" element and the value of the index and its limit.  <br /></td></tr>
+<tr class="separator:aebbd02ebb45634d3e853669d7b37b6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf7b85b20e0a028a0179a64ad97acf1e" id="r_abf7b85b20e0a028a0179a64ad97acf1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#abf7b85b20e0a028a0179a64ad97acf1e">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:abf7b85b20e0a028a0179a64ad97acf1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the residuals.  <br /></td></tr>
+<tr class="separator:abf7b85b20e0a028a0179a64ad97acf1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f6369682a12573e07f07651ffb2a5f" id="r_ac5f6369682a12573e07f07651ffb2a5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#ac5f6369682a12573e07f07651ffb2a5f">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:ac5f6369682a12573e07f07651ffb2a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution from Jacobian.  <br /></td></tr>
+<tr class="separator:ac5f6369682a12573e07f07651ffb2a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5e2609a64b96b72a546f18fc2c8ee8e" id="r_ad5e2609a64b96b72a546f18fc2c8ee8e"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#ad5e2609a64b96b72a546f18fc2c8ee8e">q</a> () const</td></tr>
+<tr class="memdesc:ad5e2609a64b96b72a546f18fc2c8ee8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_57.png" width="79" height="15"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E.  <br /></td></tr>
+<tr class="separator:ad5e2609a64b96b72a546f18fc2c8ee8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f0738200c4dc78e1acdae971dcdfcf" id="r_a52f0738200c4dc78e1acdae971dcdfcf"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a52f0738200c4dc78e1acdae971dcdfcf">q_pt</a> ()</td></tr>
+<tr class="memdesc:a52f0738200c4dc78e1acdae971dcdfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations.  <br /></td></tr>
+<tr class="separator:a52f0738200c4dc78e1acdae971dcdfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1db6d117e79ceb536932adf64ea4752" id="r_af1db6d117e79ceb536932adf64ea4752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#af1db6d117e79ceb536932adf64ea4752">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:af1db6d117e79ceb536932adf64ea4752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function.  <br /></td></tr>
+<tr class="separator:af1db6d117e79ceb536932adf64ea4752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c55e922cbc2a9f901356a47f696c0d6" id="r_a2c55e922cbc2a9f901356a47f696c0d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a2c55e922cbc2a9f901356a47f696c0d6">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a2c55e922cbc2a9f901356a47f696c0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: Plot traction etc at Gauss points nplot is ignored.  <br /></td></tr>
+<tr class="separator:a2c55e922cbc2a9f901356a47f696c0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a147a337796e4e10c43a956a85b441a5e" id="r_a147a337796e4e10c43a956a85b441a5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a147a337796e4e10c43a956a85b441a5e">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a147a337796e4e10c43a956a85b441a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">C_style output function.  <br /></td></tr>
+<tr class="separator:a147a337796e4e10c43a956a85b441a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2383a2f19b7e45177f0a44f5d68fc2e9" id="r_a2383a2f19b7e45177f0a44f5d68fc2e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a2383a2f19b7e45177f0a44f5d68fc2e9">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a2383a2f19b7e45177f0a44f5d68fc2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function.  <br /></td></tr>
+<tr class="separator:a2383a2f19b7e45177f0a44f5d68fc2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:abae27d4531220695eeb385c51ca0f82f" id="r_abae27d4531220695eeb385c51ca0f82f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#abae27d4531220695eeb385c51ca0f82f">fill_in_contribution_to_residuals_helmholtz_traction</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:abae27d4531220695eeb385c51ca0f82f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that actually calculates the residuals.  <br /></td></tr>
+<tr class="separator:abae27d4531220695eeb385c51ca0f82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae9ffef6c7b99dcac84a59345b88e2938" id="r_ae9ffef6c7b99dcac84a59345b88e2938"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#ae9ffef6c7b99dcac84a59345b88e2938">Q_pt</a></td></tr>
+<tr class="memdesc:ae9ffef6c7b99dcac84a59345b88e2938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_56.png" width="10" height="13"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses.  <br /></td></tr>
+<tr class="separator:ae9ffef6c7b99dcac84a59345b88e2938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662382c12e52846a2407ef5ec948d92b" id="r_a662382c12e52846a2407ef5ec948d92b"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::complex&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a662382c12e52846a2407ef5ec948d92b">U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction</a></td></tr>
+<tr class="memdesc:a662382c12e52846a2407ef5ec948d92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index at which the i-th displacement component is stored.  <br /></td></tr>
+<tr class="separator:a662382c12e52846a2407ef5ec948d92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a6a24eef8286abb640d8edf3fa0f71e2c" id="r_a6a24eef8286abb640d8edf3fa0f71e2c"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html#a6a24eef8286abb640d8edf3fa0f71e2c">Default_Q_Value</a> = 1.0</td></tr>
+<tr class="memdesc:a6a24eef8286abb640d8edf3fa0f71e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0)  <br /></td></tr>
+<tr class="separator:a6a24eef8286abb640d8edf3fa0f71e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT&gt;<br />
+class oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;</div><p>A class for elements that allow the imposition of an applied traction in the equations of time-harmonic linear elasticity from a Helmholtz potential (interpreted as a displacement potential for the fluid in a quasi-steady, linearised FSI problem.) The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and and thus, we can be generic enough without the need to have a separate equations class. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00047">47</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aebbd02ebb45634d3e853669d7b37b6f3" name="aebbd02ebb45634d3e853669d7b37b6f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebbd02ebb45634d3e853669d7b37b6f3">&#9670;&#160;</a></span>FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement </td>
+          <td>(</td>
+          <td class="paramtype">FiniteElement *const &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, which takes a "bulk" element and the value of the index and its limit. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00076">76</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac5f6369682a12573e07f07651ffb2a5f" name="ac5f6369682a12573e07f07651ffb2a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f6369682a12573e07f07651ffb2a5f">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in contribution from Jacobian. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00143">143</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00270">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+
+</div>
+</div>
+<a id="abf7b85b20e0a028a0179a64ad97acf1e" name="abf7b85b20e0a028a0179a64ad97acf1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf7b85b20e0a028a0179a64ad97acf1e">&#9670;&#160;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00136">136</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00270">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+
+</div>
+</div>
+<a id="abae27d4531220695eeb385c51ca0f82f" name="abae27d4531220695eeb385c51ca0f82f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae27d4531220695eeb385c51ca0f82f">&#9670;&#160;</a></span>fill_in_contribution_to_residuals_helmholtz_traction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function that actually calculates the residuals. </p>
+<p>Return the residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00269">269</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00143">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00136">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a147a337796e4e10c43a956a85b441a5e" name="a147a337796e4e10c43a956a85b441a5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a147a337796e4e10c43a956a85b441a5e">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C_style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00235">235</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a2383a2f19b7e45177f0a44f5d68fc2e9" name="a2383a2f19b7e45177f0a44f5d68fc2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2383a2f19b7e45177f0a44f5d68fc2e9">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00241">241</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="af1db6d117e79ceb536932adf64ea4752" name="af1db6d117e79ceb536932adf64ea4752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1db6d117e79ceb536932adf64ea4752">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function. </p>
+<p>Dummy</p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00172">172</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00172">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00172">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a2c55e922cbc2a9f901356a47f696c0d6" name="a2c55e922cbc2a9f901356a47f696c0d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c55e922cbc2a9f901356a47f696c0d6">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: Plot traction etc at Gauss points nplot is ignored. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00181">181</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00158">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>.</p>
+
+</div>
+</div>
+<a id="ad5e2609a64b96b72a546f18fc2c8ee8e" name="ad5e2609a64b96b72a546f18fc2c8ee8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5e2609a64b96b72a546f18fc2c8ee8e">&#9670;&#160;</a></span>q()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double &amp; <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_57.png" width="79" height="15"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00158">158</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00181">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a52f0738200c4dc78e1acdae971dcdfcf" name="a52f0738200c4dc78e1acdae971dcdfcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52f0738200c4dc78e1acdae971dcdfcf">&#9670;&#160;</a></span>q_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double *&amp; <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00165">165</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6a24eef8286abb640d8edf3fa0f71e2c" name="a6a24eef8286abb640d8edf3fa0f71e2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a24eef8286abb640d8edf3fa0f71e2c">&#9670;&#160;</a></span>Default_Q_Value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Default_Q_Value = 1.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0) </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">60</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="ae9ffef6c7b99dcac84a59345b88e2938" name="ae9ffef6c7b99dcac84a59345b88e2938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9ffef6c7b99dcac84a59345b88e2938">&#9670;&#160;</a></span>Q_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_56.png" width="10" height="13"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">56</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00158">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>, and <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00165">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a662382c12e52846a2407ef5ec948d92b" name="a662382c12e52846a2407ef5ec948d92b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662382c12e52846a2407ef5ec948d92b">&#9670;&#160;</a></span>U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;std::complex&lt;unsigned&gt; &gt; <a class="el" href="classoomph_1_1FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement.html">oomph::FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index at which the i-th displacement component is stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">64</a> of file <a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="fourier__decomposed__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

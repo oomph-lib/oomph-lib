@@ -1,0 +1,25 @@
+\doxysection{linear\+\_\+solver.\+h File Reference}
+\hypertarget{linear__solver_8h}{}\label{linear__solver_8h}\index{linear\_solver.h@{linear\_solver.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}
+\begin{DoxyCompactList}\small\item\em Base class for all linear solvers. This merely defines standard interfaces for linear solvers, so that different solvers can be used in a clean and transparent manner. Note that Linear\+Solvers are primarily used to solve the linear systems arising in oomph-\/lib\textquotesingle{}s Newton iteration. Their primary solve function therefore takes a pointer to the associated problem, construct its Jacobian matrix and residual vector, and return the solution of the linear system formed by the Jacobian and the residual vector. We also provide broken virtual interfaces to a linear-\/algebra-\/type solve function in which the matrix and the rhs can be specified, but this are not guaranteed to implemented for all linear solvers (e.\+g. for frontal solvers). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DenseLU}{oomph\+::\+Dense\+LU}}
+\begin{DoxyCompactList}\small\item\em Dense LU decomposition-\/based solve of full assembled linear system. VERY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \doxylink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix} is not distributable) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FD__LU}{oomph\+::\+FD\+\_\+\+LU}}
+\begin{DoxyCompactList}\small\item\em Dense LU decomposition-\/based solve of linear system assembled via finite differencing of the residuals \doxylink{classoomph_1_1Vector}{Vector}. Even more inefficient than \doxylink{classoomph_1_1DenseLU}{Dense\+LU} but excellent sanity check! \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{oomph\+::\+Super\+LUSolver}}
+\begin{DoxyCompactList}\small\item\em Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/\texorpdfstring{$\sim$}{\string~}xiaoye/\+Super\+LU/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1ExactPreconditionerFactory}{oomph\+::\+Exact\+Preconditioner\+Factory}}
+\begin{DoxyCompactList}\small\item\em Namespace containing functions required to create exact preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1ExactPreconditionerFactory_a0716f90f38753dbb0c2307f2da0376ca}{oomph\+::\+Exact\+Preconditioner\+Factory\+::create\+\_\+exact\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Factory function to create suitable exact preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}

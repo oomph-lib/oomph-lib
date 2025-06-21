@@ -1,0 +1,379 @@
+\doxysection{oomph\+::Vector\+Matrix\texorpdfstring{$<$}{<} VALUE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1VectorMatrix}{}\label{classoomph_1_1VectorMatrix}\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+
+
+\doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} is a generalised, STL-\/map-\/based, matrix based on a \doxylink{classoomph_1_1Vector}{Vector} of Vectors.  
+
+
+
+
+{\ttfamily \#include $<$vector\+\_\+matrix.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1VectorMatrix_ab66eeed5c6d2f9a333890eaaf86def83}{Vector\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ constructs an empty matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VectorMatrix_a9e3f4fa81b91d802885c22a0595754c8}{Vector\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}})
+\begin{DoxyCompactList}\small\item\em Constructor -\/ constructs an n by m matrix with value val. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VectorMatrix_afb605d9b666be1184a9b39fddee6faec}{Vector\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Constructor -\/ constructs an n by m matrix, the value is defined by the default initialisation of VALUE\+\_\+\+TYPE. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6dd82be}{\texorpdfstring{$\sim$}{\string~}\+Vector\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the number of rows. This is the outer \doxylink{classoomph_1_1Vector}{Vector} size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()} is 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the i-\/th inner vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the i-\/th inner vector const version \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the outer vector. Calling Vector\+::clear() will invoke the destructor of all the inner Vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a8e7bc2b06afb92f161e35f1a180c2320}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}())
+\begin{DoxyCompactList}\small\item\em Resize the existing \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix}. WARNING\+: This invokes the resize function in std\+::vector, as such, only new values are assigned, old values as kept. e.\+g. if vec = \mbox{[}2,2,2\mbox{]}, then vec.\+resize(5,3) gives vec = \mbox{[}2, 2, 2, 3, 3\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a4accbf71003ea0fe306689e6e68317cb}{assign}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}})
+\begin{DoxyCompactList}\small\item\em Any elements held in the container before the call are destroyed and replaced by newly constructed elements (no assignments of elements take place). This causes an automatic reallocation of the allocated storage space if -\/and only if-\/ the new vector size surpasses the current vector capacity. This invokes std\+::assign on both the outer vector and the inner vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a0ab8c441cec95ba8322fc4ad9b97a288}{build\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Builds an n by m \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} with default VALUE\+\_\+\+TYPE. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc8014}{build\+\_\+vectors\+\_\+and\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}})
+\begin{DoxyCompactList}\small\item\em Build an m by n \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} with VALUE\+\_\+\+TYPE val. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1VectorMatrix_a3c91bd42a753ee7e82b9ba72f3288226}{Vector\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Here\textquotesingle{}s the generalised matrix structure\+: A \doxylink{classoomph_1_1Vector}{Vector} of \doxylink{classoomph_1_1Vector}{Vector} to templated by VALUE\+\_\+\+TYPE. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}$>$\newline
+class oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$}
+\doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} is a generalised, STL-\/map-\/based, matrix based on a \doxylink{classoomph_1_1Vector}{Vector} of Vectors. 
+
+Example of usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Assume\ we\ have\ a\ Vector\ of\ pointers\ to\ objects:}}
+\DoxyCodeLine{VectorMatrix<int>\ vector\_matrix(4,5,-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ is\ a\ 4\ by\ 5\ matrix\ with\ all\ entries\ set\ to\ -\/1.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout\ <<\ vector\_matrix[3][3]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <<\ vector\_matrix.nrow()\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <<\ vector\_matrix.col()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:}}
+\DoxyCodeLine{\textcolor{comment}{//\ -\/1\ 4\ 5}}
+\DoxyCodeLine{}
+\DoxyCodeLine{vector\_matrix[3][3]\ =\ 42;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout\ <<\ vector\_matrix[3][3]\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <<\ vector\_matrix.nrow()\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <<\ vector\_matrix.col()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:}}
+\DoxyCodeLine{\textcolor{comment}{//\ 42\ 4\ 5}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00078}{78}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1VectorMatrix_ab66eeed5c6d2f9a333890eaaf86def83}\label{classoomph_1_1VectorMatrix_ab66eeed5c6d2f9a333890eaaf86def83} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!VectorMatrix@{VectorMatrix}}
+\index{VectorMatrix@{VectorMatrix}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{VectorMatrix()}{VectorMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Vector\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor -\/ constructs an empty matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00082}{82}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a9e3f4fa81b91d802885c22a0595754c8}\label{classoomph_1_1VectorMatrix_a9e3f4fa81b91d802885c22a0595754c8} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!VectorMatrix@{VectorMatrix}}
+\index{VectorMatrix@{VectorMatrix}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{VectorMatrix()}{VectorMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Vector\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ constructs an n by m matrix with value val. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00088}{88}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00240}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_afb605d9b666be1184a9b39fddee6faec}\label{classoomph_1_1VectorMatrix_afb605d9b666be1184a9b39fddee6faec} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!VectorMatrix@{VectorMatrix}}
+\index{VectorMatrix@{VectorMatrix}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{VectorMatrix()}{VectorMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Vector\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -\/ constructs an n by m matrix, the value is defined by the default initialisation of VALUE\+\_\+\+TYPE. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00095}{95}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00234}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6dd82be}\label{classoomph_1_1VectorMatrix_a61ef8bc51fd59119d84ce281d6dd82be} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!````~VectorMatrix@{\texorpdfstring{$\sim$}{\string~}VectorMatrix}}
+\index{````~VectorMatrix@{\texorpdfstring{$\sim$}{\string~}VectorMatrix}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}VectorMatrix()}{\string~VectorMatrix()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Default virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00101}{101}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00201}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1VectorMatrix_a4accbf71003ea0fe306689e6e68317cb}\label{classoomph_1_1VectorMatrix_a4accbf71003ea0fe306689e6e68317cb} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!assign@{assign}}
+\index{assign@{assign}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{assign()}{assign()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Any elements held in the container before the call are destroyed and replaced by newly constructed elements (no assignments of elements take place). This causes an automatic reallocation of the allocated storage space if -\/and only if-\/ the new vector size surpasses the current vector capacity. This invokes std\+::assign on both the outer vector and the inner vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00226}{226}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a0ab8c441cec95ba8322fc4ad9b97a288}\label{classoomph_1_1VectorMatrix_a0ab8c441cec95ba8322fc4ad9b97a288} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!build\_vectors@{build\_vectors}}
+\index{build\_vectors@{build\_vectors}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{build\_vectors()}{build\_vectors()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::build\+\_\+vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Builds an n by m \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} with default VALUE\+\_\+\+TYPE. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00234}{234}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00095}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc8014}\label{classoomph_1_1VectorMatrix_a23f3efbe283e626a815be17878dc8014} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!build\_vectors\_and\_value@{build\_vectors\_and\_value}}
+\index{build\_vectors\_and\_value@{build\_vectors\_and\_value}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{build\_vectors\_and\_value()}{build\_vectors\_and\_value()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Build an m by n \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} with VALUE\+\_\+\+TYPE val. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00240}{240}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00088}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468}\label{classoomph_1_1VectorMatrix_aa0f9cfd913d27cfb1e20e27a892d5468} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!clear@{clear}}
+\index{clear@{clear}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the outer vector. Calling Vector\+::clear() will invoke the destructor of all the inner Vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00201}{201}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00101}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\texorpdfstring{$\sim$}{\string~}\+Vector\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463}\label{classoomph_1_1VectorMatrix_a6f59576c296539356370814fc658f463} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+return the number of columns. This is the size of the first inner vectors, or returns 0 if the outer vector is of size 0 (this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}{nrow()} is 0). 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00146}{146}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{vector__matrix_8h_source_l00107}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386}\label{classoomph_1_1VectorMatrix_a9beb051515fea3a264843aae9783e386} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns the number of rows. This is the outer \doxylink{classoomph_1_1Vector}{Vector} size. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00107}{107}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00146}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol()}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b}\label{classoomph_1_1VectorMatrix_aaa28d9c626fc77381259560cc936294b} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}}}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{[}\mbox{]} access function to the i-\/th inner vector. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00187}{187}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73}\label{classoomph_1_1VectorMatrix_a472e27d3b998c6ee2412c3585f064e73} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \& \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{[}\mbox{]} access function to the i-\/th inner vector const version 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00193}{193}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1VectorMatrix_a8e7bc2b06afb92f161e35f1a180c2320}\label{classoomph_1_1VectorMatrix_a8e7bc2b06afb92f161e35f1a180c2320} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}}]{val = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize the existing \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix}. WARNING\+: This invokes the resize function in std\+::vector, as such, only new values are assigned, old values as kept. e.\+g. if vec = \mbox{[}2,2,2\mbox{]}, then vec.\+resize(5,3) gives vec = \mbox{[}2, 2, 2, 3, 3\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00211}{211}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00249}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+\_\+matrix}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1VectorMatrix_a3c91bd42a753ee7e82b9ba72f3288226}\label{classoomph_1_1VectorMatrix_a3c91bd42a753ee7e82b9ba72f3288226} 
+\index{oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}!Vector\_matrix@{Vector\_matrix}}
+\index{Vector\_matrix@{Vector\_matrix}!oomph::VectorMatrix$<$ VALUE\_TYPE $>$@{oomph::VectorMatrix$<$ VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{Vector\_matrix}{Vector\_matrix}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}$>$ $>$ \mbox{\hyperlink{classoomph_1_1VectorMatrix}{oomph\+::\+Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Vector\+\_\+matrix\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Here\textquotesingle{}s the generalised matrix structure\+: A \doxylink{classoomph_1_1Vector}{Vector} of \doxylink{classoomph_1_1Vector}{Vector} to templated by VALUE\+\_\+\+TYPE. 
+
+
+
+Definition at line \mbox{\hyperlink{vector__matrix_8h_source_l00249}{249}} of file \mbox{\hyperlink{vector__matrix_8h_source}{vector\+\_\+matrix.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{vector__matrix_8h_source_l00226}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::assign()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00234}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00240}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::build\+\_\+vectors\+\_\+and\+\_\+value()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00201}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::clear()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00146}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::ncol()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00107}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::nrow()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00187}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00193}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{vector__matrix_8h_source_l00211}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::resize()}}, and \mbox{\hyperlink{vector__matrix_8h_source_l00082}{oomph\+::\+Vector\+Matrix$<$ VALUE\+\_\+\+TYPE $>$\+::\+Vector\+Matrix()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{vector__matrix_8h}{vector\+\_\+matrix.\+h}}\end{DoxyCompactItemize}

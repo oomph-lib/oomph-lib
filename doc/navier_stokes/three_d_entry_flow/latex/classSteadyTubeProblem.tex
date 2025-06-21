@@ -1,0 +1,202 @@
+\doxysection{Steady\+Tube\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classSteadyTubeProblem}{}\label{classSteadyTubeProblem}\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+
+
+Entry flow problem in tapered tube domain.  
+
+
+Inheritance diagram for Steady\+Tube\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSteadyTubeProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSteadyTubeProblem_a333c59fbeb36a2a5cbb170fc34783ec4}{Steady\+Tube\+Problem}} (Doc\+Info \&doc\+\_\+info, const double \&min\+\_\+error\+\_\+target, const double \&max\+\_\+error\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass Doc\+Info object and target errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSteadyTubeProblem_a1564d3faf03e6724565097e730d099d5}{\texorpdfstring{$\sim$}{\string~}\+Steady\+Tube\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyTubeProblem_a5c5277cac2a887dc6c85892e9f851f97}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyTubeProblem_ae598a2a0ec9bbfb563a1c78aa159561f}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em After adaptation\+: Pin redudant pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSteadyTubeProblem_ae384d816cf88c86e9f18549701d791f8}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Refineable\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyTubeProblem_a093c5a35079b437c36bc1c85e5a2ff8e}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overload generic access function by one that returns a pointer to the specific mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Doc\+Info \mbox{\hyperlink{classSteadyTubeProblem_a2d535b7b21eb6383b9f3c9f4c3ce4510}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyTubeProblem_aedad3a2d2afd1f1c306dae289b3c2baf}{Volume\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that specifies the domain volume. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Steady\+Tube\+Problem$<$ ELEMENT $>$}
+Entry flow problem in tapered tube domain. 
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00094}{94}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classSteadyTubeProblem_a333c59fbeb36a2a5cbb170fc34783ec4}\label{classSteadyTubeProblem_a333c59fbeb36a2a5cbb170fc34783ec4} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!SteadyTubeProblem@{SteadyTubeProblem}}
+\index{SteadyTubeProblem@{SteadyTubeProblem}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SteadyTubeProblem()}{SteadyTubeProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classSteadyTubeProblem}{\+::\+Steady\+Tube\+Problem}} (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{const double \&}]{min\+\_\+error\+\_\+target,  }\item[{const double \&}]{max\+\_\+error\+\_\+target }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass Doc\+Info object and target errors. 
+
+Constructor\+: Pass Doc\+Info object and error targets. 
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00144}{144}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+References \mbox{\hyperlink{full__tube_8cc_source_l00122}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{full__tube_8cc_source_l00085}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, and \mbox{\hyperlink{full__tube_8cc_source_l00133}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::\+Volume\+\_\+pt}}.
+
+\Hypertarget{classSteadyTubeProblem_a1564d3faf03e6724565097e730d099d5}\label{classSteadyTubeProblem_a1564d3faf03e6724565097e730d099d5} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!````~SteadyTubeProblem@{\texorpdfstring{$\sim$}{\string~}SteadyTubeProblem}}
+\index{````~SteadyTubeProblem@{\texorpdfstring{$\sim$}{\string~}SteadyTubeProblem}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SteadyTubeProblem()}{\string~SteadyTubeProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00104}{104}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSteadyTubeProblem_ae598a2a0ec9bbfb563a1c78aa159561f}\label{classSteadyTubeProblem_ae598a2a0ec9bbfb563a1c78aa159561f} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+After adaptation\+: Pin redudant pressure dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00110}{110}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+References \mbox{\hyperlink{full__tube_8cc_source_l00122}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classSteadyTubeProblem_a5c5277cac2a887dc6c85892e9f851f97}\label{classSteadyTubeProblem_a5c5277cac2a887dc6c85892e9f851f97} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve. 
+
+Set the inflow boundary conditions. 
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00251}{251}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+\Hypertarget{classSteadyTubeProblem_ae384d816cf88c86e9f18549701d791f8}\label{classSteadyTubeProblem_ae384d816cf88c86e9f18549701d791f8} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00278}{278}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+References \mbox{\hyperlink{full__tube_8cc_source_l00085}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__tube_8cc_source_l00310}{main()}}.
+
+\Hypertarget{classSteadyTubeProblem_a093c5a35079b437c36bc1c85e5a2ff8e}\label{classSteadyTubeProblem_a093c5a35079b437c36bc1c85e5a2ff8e} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload generic access function by one that returns a pointer to the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00122}{122}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__tube_8cc_source_l00110}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{full__tube_8cc_source_l00144}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::\+Steady\+Tube\+Problem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classSteadyTubeProblem_a2d535b7b21eb6383b9f3c9f4c3ce4510}\label{classSteadyTubeProblem_a2d535b7b21eb6383b9f3c9f4c3ce4510} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00130}{130}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+\Hypertarget{classSteadyTubeProblem_aedad3a2d2afd1f1c306dae289b3c2baf}\label{classSteadyTubeProblem_aedad3a2d2afd1f1c306dae289b3c2baf} 
+\index{SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}!Volume\_pt@{Volume\_pt}}
+\index{Volume\_pt@{Volume\_pt}!SteadyTubeProblem$<$ ELEMENT $>$@{SteadyTubeProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Volume\_pt}{Volume\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSteadyTubeProblem}{Steady\+Tube\+Problem}}$<$ ELEMENT $>$\+::\+Volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Geom\+Object that specifies the domain volume. 
+
+
+
+Definition at line \mbox{\hyperlink{full__tube_8cc_source_l00133}{133}} of file \mbox{\hyperlink{full__tube_8cc_source}{full\+\_\+tube.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__tube_8cc_source_l00144}{Steady\+Tube\+Problem$<$ ELEMENT $>$\+::\+Steady\+Tube\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{full__tube_8cc}{full\+\_\+tube.\+cc}}\end{DoxyCompactItemize}

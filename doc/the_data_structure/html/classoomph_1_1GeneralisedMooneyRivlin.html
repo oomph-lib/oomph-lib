@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::GeneralisedMooneyRivlin Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html">GeneralisedMooneyRivlin</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1GeneralisedMooneyRivlin-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::GeneralisedMooneyRivlin Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Generalisation of Mooney Rivlin constitutive law to compressible media as suggested on p. 553 of Fung, Y.C. &amp; Tong, P. "Classical and
+Computational Solid Mechanics" World Scientific (2001). Input parameters are Young's modulus E, Poisson ratio nu and the Mooney-Rivlin constant C1. In the small-deformation-limit the behaviour becomes equivalent to that of linear elasticity with the same E and nu.  
+ <a href="classoomph_1_1GeneralisedMooneyRivlin.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::GeneralisedMooneyRivlin:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1GeneralisedMooneyRivlin.png" usemap="#oomph::GeneralisedMooneyRivlin_map" alt=""/>
+  <map id="oomph::GeneralisedMooneyRivlin_map" name="oomph::GeneralisedMooneyRivlin_map">
+<area href="classoomph_1_1StrainEnergyFunction.html" title="Base class for strain energy functions to be used in solid mechanics computations." alt="oomph::StrainEnergyFunction" shape="rect" coords="0,0,200,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a04bdac757114843e1b758b64a552c23b" id="r_a04bdac757114843e1b758b64a552c23b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a04bdac757114843e1b758b64a552c23b">GeneralisedMooneyRivlin</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *nu_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">c1_pt</a>)</td></tr>
+<tr class="memdesc:a04bdac757114843e1b758b64a552c23b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor takes the pointers to the constitutive parameters: Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set to 1, implying that it has been used to scale the stresses.  <br /></td></tr>
+<tr class="separator:a04bdac757114843e1b758b64a552c23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c709851b0ed6e9a975d69c1b2146429" id="r_a4c709851b0ed6e9a975d69c1b2146429"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a4c709851b0ed6e9a975d69c1b2146429">GeneralisedMooneyRivlin</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *nu_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">c1_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">e_pt</a>)</td></tr>
+<tr class="memdesc:a4c709851b0ed6e9a975d69c1b2146429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor takes the pointers to the constitutive parameters: Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus.  <br /></td></tr>
+<tr class="separator:a4c709851b0ed6e9a975d69c1b2146429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a855599e1cbdfbb9eb5aad3c5931e4f03" id="r_a855599e1cbdfbb9eb5aad3c5931e4f03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a855599e1cbdfbb9eb5aad3c5931e4f03">~GeneralisedMooneyRivlin</a> ()</td></tr>
+<tr class="memdesc:a855599e1cbdfbb9eb5aad3c5931e4f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a855599e1cbdfbb9eb5aad3c5931e4f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ff4fa7c19304c98f9a0017c22747a9" id="r_a91ff4fa7c19304c98f9a0017c22747a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a91ff4fa7c19304c98f9a0017c22747a9">W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;gamma)</td></tr>
+<tr class="memdesc:a91ff4fa7c19304c98f9a0017c22747a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the strain energy in terms of strain tensor.  <br /></td></tr>
+<tr class="separator:a91ff4fa7c19304c98f9a0017c22747a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2edff387e97632febd90938b27a30a14" id="r_a2edff387e97632febd90938b27a30a14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2edff387e97632febd90938b27a30a14">W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;I)</td></tr>
+<tr class="memdesc:a2edff387e97632febd90938b27a30a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the strain energy in terms of the strain invariants.  <br /></td></tr>
+<tr class="separator:a2edff387e97632febd90938b27a30a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0ca6d085deb4758119ff68222a27a8b" id="r_aa0ca6d085deb4758119ff68222a27a8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#aa0ca6d085deb4758119ff68222a27a8b">derivatives</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;I, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dWdI</a>)</td></tr>
+<tr class="memdesc:aa0ca6d085deb4758119ff68222a27a8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the derivatives of the strain energy function with respect to the strain invariants.  <br /></td></tr>
+<tr class="separator:aa0ca6d085deb4758119ff68222a27a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b41a132a90707ee2901787d398f45f8" id="r_a2b41a132a90707ee2901787d398f45f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a2b41a132a90707ee2901787d398f45f8">requires_incompressibility_constraint</a> ()</td></tr>
+<tr class="memdesc:a2b41a132a90707ee2901787d398f45f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False.  <br /></td></tr>
+<tr class="separator:a2b41a132a90707ee2901787d398f45f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1StrainEnergyFunction"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1StrainEnergyFunction')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1StrainEnergyFunction.html">oomph::StrainEnergyFunction</a></td></tr>
+<tr class="memitem:a027b9babcedcefb3fd06a6deace8f6b6 inherit pub_methods_classoomph_1_1StrainEnergyFunction" id="r_a027b9babcedcefb3fd06a6deace8f6b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1StrainEnergyFunction.html#a027b9babcedcefb3fd06a6deace8f6b6">StrainEnergyFunction</a> ()</td></tr>
+<tr class="memdesc:a027b9babcedcefb3fd06a6deace8f6b6 inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor takes no arguments.  <br /></td></tr>
+<tr class="separator:a027b9babcedcefb3fd06a6deace8f6b6 inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a755d306f96fc59147c6cb148456e364e inherit pub_methods_classoomph_1_1StrainEnergyFunction" id="r_a755d306f96fc59147c6cb148456e364e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1StrainEnergyFunction.html#a755d306f96fc59147c6cb148456e364e">~StrainEnergyFunction</a> ()</td></tr>
+<tr class="memdesc:a755d306f96fc59147c6cb148456e364e inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <br /></td></tr>
+<tr class="separator:a755d306f96fc59147c6cb148456e364e inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a467a3b01986940aba8c8aff2715bf086 inherit pub_methods_classoomph_1_1StrainEnergyFunction" id="r_a467a3b01986940aba8c8aff2715bf086"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1StrainEnergyFunction.html#a467a3b01986940aba8c8aff2715bf086">derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;gamma, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dWdgamma</a>)</td></tr>
+<tr class="memdesc:a467a3b01986940aba8c8aff2715bf086 inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the derivatives of the strain energy function with respect to the components of the strain tensor (default is to use finite differences).  <br /></td></tr>
+<tr class="separator:a467a3b01986940aba8c8aff2715bf086 inherit pub_methods_classoomph_1_1StrainEnergyFunction"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae66d1130fccc98fc68d810f1f3e6b281" id="r_ae66d1130fccc98fc68d810f1f3e6b281"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#ae66d1130fccc98fc68d810f1f3e6b281">Nu_pt</a></td></tr>
+<tr class="memdesc:ae66d1130fccc98fc68d810f1f3e6b281"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <br /></td></tr>
+<tr class="separator:ae66d1130fccc98fc68d810f1f3e6b281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb4709747e2855ddaa8b455d50d0174" id="r_aebb4709747e2855ddaa8b455d50d0174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#aebb4709747e2855ddaa8b455d50d0174">C1_pt</a></td></tr>
+<tr class="memdesc:aebb4709747e2855ddaa8b455d50d0174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mooney-Rivlin parameter.  <br /></td></tr>
+<tr class="separator:aebb4709747e2855ddaa8b455d50d0174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4844de8de168e51c24c5508ef195ae7a" id="r_a4844de8de168e51c24c5508ef195ae7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a4844de8de168e51c24c5508ef195ae7a">E_pt</a></td></tr>
+<tr class="memdesc:a4844de8de168e51c24c5508ef195ae7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Young's modulus.  <br /></td></tr>
+<tr class="separator:a4844de8de168e51c24c5508ef195ae7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d89cd3412cac1adb945713168a5c86" id="r_a38d89cd3412cac1adb945713168a5c86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedMooneyRivlin.html#a38d89cd3412cac1adb945713168a5c86">Must_delete_e</a></td></tr>
+<tr class="memdesc:a38d89cd3412cac1adb945713168a5c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate if storage for elastic modulus must be deleted in destructor.  <br /></td></tr>
+<tr class="separator:a38d89cd3412cac1adb945713168a5c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Generalisation of Mooney Rivlin constitutive law to compressible media as suggested on p. 553 of Fung, Y.C. &amp; Tong, P. "Classical and
+Computational Solid Mechanics" World Scientific (2001). Input parameters are Young's modulus E, Poisson ratio nu and the Mooney-Rivlin constant C1. In the small-deformation-limit the behaviour becomes equivalent to that of linear elasticity with the same E and nu. </p>
+<p>Note that there's a factor of 2 difference between C1 and the Mooney Rivlin C1! </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00214">214</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a04bdac757114843e1b758b64a552c23b" name="a04bdac757114843e1b758b64a552c23b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04bdac757114843e1b758b64a552c23b">&#9670;&#160;</a></span>GeneralisedMooneyRivlin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeneralisedMooneyRivlin::GeneralisedMooneyRivlin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>nu_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>c1_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor takes the pointers to the constitutive parameters: Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set to 1, implying that it has been used to scale the stresses. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00220">220</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a4c709851b0ed6e9a975d69c1b2146429" name="a4c709851b0ed6e9a975d69c1b2146429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c709851b0ed6e9a975d69c1b2146429">&#9670;&#160;</a></span>GeneralisedMooneyRivlin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::GeneralisedMooneyRivlin::GeneralisedMooneyRivlin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>nu_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>c1_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td>
+          <td class="paramname"><em>e_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor takes the pointers to the constitutive parameters: Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00231">231</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a855599e1cbdfbb9eb5aad3c5931e4f03" name="a855599e1cbdfbb9eb5aad3c5931e4f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a855599e1cbdfbb9eb5aad3c5931e4f03">&#9670;&#160;</a></span>~GeneralisedMooneyRivlin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::GeneralisedMooneyRivlin::~GeneralisedMooneyRivlin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00242">242</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00295">E_pt</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00299">Must_delete_e</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa0ca6d085deb4758119ff68222a27a8b" name="aa0ca6d085deb4758119ff68222a27a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ca6d085deb4758119ff68222a27a8b">&#9670;&#160;</a></span>derivatives()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::GeneralisedMooneyRivlin::derivatives </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dWdI</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the derivatives of the strain energy function with respect to the strain invariants. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1StrainEnergyFunction.html#a81ca7bb14cce217ffac9d308dba39756">oomph::StrainEnergyFunction</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00267">267</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b41a132a90707ee2901787d398f45f8" name="a2b41a132a90707ee2901787d398f45f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b41a132a90707ee2901787d398f45f8">&#9670;&#160;</a></span>requires_incompressibility_constraint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::GeneralisedMooneyRivlin::requires_incompressibility_constraint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual function in which the user must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1StrainEnergyFunction.html#a312fe03c070f5c45a99ae4e186936147">oomph::StrainEnergyFunction</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00282">282</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+</div>
+</div>
+<a id="a91ff4fa7c19304c98f9a0017c22747a9" name="a91ff4fa7c19304c98f9a0017c22747a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ff4fa7c19304c98f9a0017c22747a9">&#9670;&#160;</a></span>W() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::GeneralisedMooneyRivlin::W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gamma</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the strain energy in terms of strain tensor. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1StrainEnergyFunction.html#a76cadaefaa89b93793c893f1302bd68a">oomph::StrainEnergyFunction</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00248">248</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00058">oomph::StrainEnergyFunction::W()</a>.</p>
+
+</div>
+</div>
+<a id="a2edff387e97632febd90938b27a30a14" name="a2edff387e97632febd90938b27a30a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2edff387e97632febd90938b27a30a14">&#9670;&#160;</a></span>W() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::GeneralisedMooneyRivlin::W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>I</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the strain energy in terms of the strain invariants. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1StrainEnergyFunction.html#a99df34610d4542568f65c568ae3a908f">oomph::StrainEnergyFunction</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00255">255</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">References <a class="el" href="constitutive__laws_8h_source.html#l00292">C1_pt</a>, and <a class="el" href="constitutive__laws_8h_source.html#l00289">Nu_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aebb4709747e2855ddaa8b455d50d0174" name="aebb4709747e2855ddaa8b455d50d0174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb4709747e2855ddaa8b455d50d0174">&#9670;&#160;</a></span>C1_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::GeneralisedMooneyRivlin::C1_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Mooney-Rivlin parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00292">292</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00255">W()</a>.</p>
+
+</div>
+</div>
+<a id="a4844de8de168e51c24c5508ef195ae7a" name="a4844de8de168e51c24c5508ef195ae7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4844de8de168e51c24c5508ef195ae7a">&#9670;&#160;</a></span>E_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::GeneralisedMooneyRivlin::E_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00295">295</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00242">~GeneralisedMooneyRivlin()</a>.</p>
+
+</div>
+</div>
+<a id="a38d89cd3412cac1adb945713168a5c86" name="a38d89cd3412cac1adb945713168a5c86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d89cd3412cac1adb945713168a5c86">&#9670;&#160;</a></span>Must_delete_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::GeneralisedMooneyRivlin::Must_delete_e</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag to indicate if storage for elastic modulus must be deleted in destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00299">299</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00242">~GeneralisedMooneyRivlin()</a>.</p>
+
+</div>
+</div>
+<a id="ae66d1130fccc98fc68d810f1f3e6b281" name="ae66d1130fccc98fc68d810f1f3e6b281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66d1130fccc98fc68d810f1f3e6b281">&#9670;&#160;</a></span>Nu_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::GeneralisedMooneyRivlin::Nu_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Poisson's ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="constitutive__laws_8h_source.html#l00289">289</a> of file <a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="constitutive__laws_8h_source.html#l00255">W()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="constitutive__laws_8h_source.html">constitutive_laws.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:14
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

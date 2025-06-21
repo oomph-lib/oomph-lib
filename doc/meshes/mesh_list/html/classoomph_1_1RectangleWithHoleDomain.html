@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RectangleWithHoleDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html">RectangleWithHoleDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RectangleWithHoleDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RectangleWithHoleDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Rectangular domain with circular whole.  
+ <a href="classoomph_1_1RectangleWithHoleDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RectangleWithHoleDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RectangleWithHoleDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3c685f6d35bb842d50062ccaa63a5486" id="r_a3c685f6d35bb842d50062ccaa63a5486"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a3c685f6d35bb842d50062ccaa63a5486">RectangleWithHoleDomain</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *cylinder_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">length</a>)</td></tr>
+<tr class="memdesc:a3c685f6d35bb842d50062ccaa63a5486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass pointer to geometric object that represents the cylinder, the length of the (square) domain. The GeomObject must be parametrised such that <img class="formulaInl" alt="$\zeta \in [0,2\pi]$" src="form_19.png" width="53" height="14"/> sweeps around the circumference in anticlockwise direction.  <br /></td></tr>
+<tr class="separator:a3c685f6d35bb842d50062ccaa63a5486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adae7fabe3167ec35c1c0d4af813a4dca" id="r_adae7fabe3167ec35c1c0d4af813a4dca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#adae7fabe3167ec35c1c0d4af813a4dca">~RectangleWithHoleDomain</a> ()</td></tr>
+<tr class="memdesc:adae7fabe3167ec35c1c0d4af813a4dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty; cleanup done in base class.  <br /></td></tr>
+<tr class="separator:adae7fabe3167ec35c1c0d4af813a4dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9548ab705821b22c43850b658a893fd8" id="r_a9548ab705821b22c43850b658a893fd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a9548ab705821b22c43850b658a893fd8">linear_interpolate</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">left</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">right</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a9548ab705821b22c43850b658a893fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to interpolate linearly between the "right" and "left" points; <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png" width="55" height="14"/>.  <br /></td></tr>
+<tr class="separator:a9548ab705821b22c43850b658a893fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514085f80059aa9f0cc3334a3cb408c1" id="r_a514085f80059aa9f0cc3334a3cb408c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a514085f80059aa9f0cc3334a3cb408c1">macro_element_boundary</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">m</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">direction</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a514085f80059aa9f0cc3334a3cb408c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specfied discrete time level (time=0: present; time&gt;0: previous)  <br /></td></tr>
+<tr class="separator:a514085f80059aa9f0cc3334a3cb408c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a6926164244a3726aa904023c014e2cf0" id="r_a6926164244a3726aa904023c014e2cf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a6926164244a3726aa904023c014e2cf0">Lower_left</a></td></tr>
+<tr class="memdesc:a6926164244a3726aa904023c014e2cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower left corner of rectangle.  <br /></td></tr>
+<tr class="separator:a6926164244a3726aa904023c014e2cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71febd980c61d0c2ba0a76eca053a97" id="r_ab71febd980c61d0c2ba0a76eca053a97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#ab71febd980c61d0c2ba0a76eca053a97">Lower_right</a></td></tr>
+<tr class="memdesc:ab71febd980c61d0c2ba0a76eca053a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower right corner of rectangle.  <br /></td></tr>
+<tr class="separator:ab71febd980c61d0c2ba0a76eca053a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa643600f8269e6037a76832dd0fba0f9" id="r_aa643600f8269e6037a76832dd0fba0f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#aa643600f8269e6037a76832dd0fba0f9">Lower_mid_left</a></td></tr>
+<tr class="memdesc:aa643600f8269e6037a76832dd0fba0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets lower boundary on left.  <br /></td></tr>
+<tr class="separator:aa643600f8269e6037a76832dd0fba0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef86489e71e2f67eec783b460694be2" id="r_a9ef86489e71e2f67eec783b460694be2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a9ef86489e71e2f67eec783b460694be2">Lower_mid_right</a></td></tr>
+<tr class="memdesc:a9ef86489e71e2f67eec783b460694be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets lower boundary on right.  <br /></td></tr>
+<tr class="separator:a9ef86489e71e2f67eec783b460694be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e5a29a907836dace560edd72a70917d" id="r_a0e5a29a907836dace560edd72a70917d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a0e5a29a907836dace560edd72a70917d">Upper_left</a></td></tr>
+<tr class="memdesc:a0e5a29a907836dace560edd72a70917d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper left corner of rectangle.  <br /></td></tr>
+<tr class="separator:a0e5a29a907836dace560edd72a70917d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bc6d59a004c8fe1b634b43b6665c9b9" id="r_a3bc6d59a004c8fe1b634b43b6665c9b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a3bc6d59a004c8fe1b634b43b6665c9b9">Upper_right</a></td></tr>
+<tr class="memdesc:a3bc6d59a004c8fe1b634b43b6665c9b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper right corner of rectangle.  <br /></td></tr>
+<tr class="separator:a3bc6d59a004c8fe1b634b43b6665c9b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a025fb05e2f6905e62459ecd45ed389e2" id="r_a025fb05e2f6905e62459ecd45ed389e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a025fb05e2f6905e62459ecd45ed389e2">Upper_mid_left</a></td></tr>
+<tr class="memdesc:a025fb05e2f6905e62459ecd45ed389e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets upper boundary on left.  <br /></td></tr>
+<tr class="separator:a025fb05e2f6905e62459ecd45ed389e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38db31456f7dd847e13d03d96fc99aa" id="r_aa38db31456f7dd847e13d03d96fc99aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#aa38db31456f7dd847e13d03d96fc99aa">Upper_mid_right</a></td></tr>
+<tr class="memdesc:aa38db31456f7dd847e13d03d96fc99aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the "radial" line from circle meets upper boundary on right.  <br /></td></tr>
+<tr class="separator:aa38db31456f7dd847e13d03d96fc99aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca65e1f063e65c4254a594db66fabf8" id="r_a4ca65e1f063e65c4254a594db66fabf8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RectangleWithHoleDomain.html#a4ca65e1f063e65c4254a594db66fabf8">Cylinder_pt</a></td></tr>
+<tr class="memdesc:a4ca65e1f063e65c4254a594db66fabf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object that represents the central cylinder.  <br /></td></tr>
+<tr class="separator:a4ca65e1f063e65c4254a594db66fabf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rectangular domain with circular whole. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00040">40</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3c685f6d35bb842d50062ccaa63a5486" name="a3c685f6d35bb842d50062ccaa63a5486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c685f6d35bb842d50062ccaa63a5486">&#9670;&#160;</a></span>RectangleWithHoleDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RectangleWithHoleDomain::RectangleWithHoleDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>cylinder_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Pass pointer to geometric object that represents the cylinder, the length of the (square) domain. The GeomObject must be parametrised such that <img class="formulaInl" alt="$\zeta \in [0,2\pi]$" src="form_19.png" width="53" height="14"/> sweeps around the circumference in anticlockwise direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">48</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00306">Lower_left</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00312">Lower_mid_left</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00315">Lower_mid_right</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00309">Lower_right</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00318">Upper_left</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00324">Upper_mid_left</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00327">Upper_mid_right</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00321">Upper_right</a>.</p>
+
+</div>
+</div>
+<a id="adae7fabe3167ec35c1c0d4af813a4dca" name="adae7fabe3167ec35c1c0d4af813a4dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adae7fabe3167ec35c1c0d4af813a4dca">&#9670;&#160;</a></span>~RectangleWithHoleDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::RectangleWithHoleDomain::~RectangleWithHoleDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00097">97</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9548ab705821b22c43850b658a893fd8" name="a9548ab705821b22c43850b658a893fd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9548ab705821b22c43850b658a893fd8">&#9670;&#160;</a></span>linear_interpolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::RectangleWithHoleDomain::linear_interpolate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt;&#160;</td>
+          <td class="paramname"><em>right</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to interpolate linearly between the "right" and "left" points; <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00101">101</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a514085f80059aa9f0cc3334a3cb408c1" name="a514085f80059aa9f0cc3334a3cb408c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514085f80059aa9f0cc3334a3cb408c1">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::RectangleWithHoleDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrisation of macro element boundaries: f(s) is the position vector to macro-element m's boundary in the specified direction [N/S/E/W] at the specfied discrete time level (time=0: present; time&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">117</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00330">Cylinder_pt</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00101">linear_interpolate()</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00312">Lower_mid_left</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00315">Lower_mid_right</a>, <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00324">Upper_mid_left</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00327">Upper_mid_right</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4ca65e1f063e65c4254a594db66fabf8" name="a4ca65e1f063e65c4254a594db66fabf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca65e1f063e65c4254a594db66fabf8">&#9670;&#160;</a></span>Cylinder_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a>* oomph::RectangleWithHoleDomain::Cylinder_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object that represents the central cylinder. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00330">330</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a6926164244a3726aa904023c014e2cf0" name="a6926164244a3726aa904023c014e2cf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6926164244a3726aa904023c014e2cf0">&#9670;&#160;</a></span>Lower_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Lower_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lower left corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00306">306</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aa643600f8269e6037a76832dd0fba0f9" name="aa643600f8269e6037a76832dd0fba0f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa643600f8269e6037a76832dd0fba0f9">&#9670;&#160;</a></span>Lower_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Lower_mid_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets lower boundary on left. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00312">312</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a9ef86489e71e2f67eec783b460694be2" name="a9ef86489e71e2f67eec783b460694be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ef86489e71e2f67eec783b460694be2">&#9670;&#160;</a></span>Lower_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Lower_mid_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets lower boundary on right. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00315">315</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="ab71febd980c61d0c2ba0a76eca053a97" name="ab71febd980c61d0c2ba0a76eca053a97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71febd980c61d0c2ba0a76eca053a97">&#9670;&#160;</a></span>Lower_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Lower_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lower right corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00309">309</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a0e5a29a907836dace560edd72a70917d" name="a0e5a29a907836dace560edd72a70917d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5a29a907836dace560edd72a70917d">&#9670;&#160;</a></span>Upper_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Upper_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Upper left corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00318">318</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a025fb05e2f6905e62459ecd45ed389e2" name="a025fb05e2f6905e62459ecd45ed389e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a025fb05e2f6905e62459ecd45ed389e2">&#9670;&#160;</a></span>Upper_mid_left</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Upper_mid_left</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets upper boundary on left. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00324">324</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aa38db31456f7dd847e13d03d96fc99aa" name="aa38db31456f7dd847e13d03d96fc99aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38db31456f7dd847e13d03d96fc99aa">&#9670;&#160;</a></span>Upper_mid_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Upper_mid_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Where the "radial" line from circle meets upper boundary on right. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00327">327</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00117">macro_element_boundary()</a>, and <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a3bc6d59a004c8fe1b634b43b6665c9b9" name="a3bc6d59a004c8fe1b634b43b6665c9b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc6d59a004c8fe1b634b43b6665c9b9">&#9670;&#160;</a></span>Upper_right</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&gt; oomph::RectangleWithHoleDomain::Upper_right</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Upper right corner of rectangle. </p>
+
+<p class="definition">Definition at line <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00321">321</a> of file <a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="rectangle__with__hole__domain_8h_source.html#l00048">RectangleWithHoleDomain()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="rectangle__with__hole__domain_8h_source.html">rectangle_with_hole_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:42
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

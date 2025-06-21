@@ -1,0 +1,223 @@
+\doxysection{Entry\+Flow\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classEntryFlowProblem}{}\label{classEntryFlowProblem}\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+
+
+Entry flow problem in quarter tube domain.  
+
+
+Inheritance diagram for Entry\+Flow\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classEntryFlowProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEntryFlowProblem_a0d527811321d270d769224dcbac8d240}{Entry\+Flow\+Problem}} (Doc\+Info \&doc\+\_\+info, const double \&min\+\_\+error\+\_\+target, const double \&max\+\_\+error\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass Doc\+Info object and target errors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEntryFlowProblem_a22d76abde64459f167067c1d2cb5c1e2}{\texorpdfstring{$\sim$}{\string~}\+Entry\+Flow\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEntryFlowProblem_a034e6085f31de2c44419090b64d503db}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution after solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEntryFlowProblem_ae4dde95573350d8fdb19463849991130}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEntryFlowProblem_ae472a4319c372d33ee22dac8fb32d9a2}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em After adaptation\+: Pin redudant pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEntryFlowProblem_a8ba37cd2a4af4356e4182929027d7828}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEntryFlowProblem_a88e43e57e9816f022ea9bccbbef9500d}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overload generic access function by one that returns a pointer to the specific mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classEntryFlowProblem_a4b69957951a6367b12bf02c1a8d9ad2a}{Alpha}}
+\begin{DoxyCompactList}\small\item\em Exponent for bluntness of velocity profile. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classEntryFlowProblem_abf50dd060db0e4c31628cfd228e096b8}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Entry\+Flow\+Problem$<$ ELEMENT $>$}
+Entry flow problem in quarter tube domain. 
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00053}{53}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classEntryFlowProblem_a0d527811321d270d769224dcbac8d240}\label{classEntryFlowProblem_a0d527811321d270d769224dcbac8d240} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!EntryFlowProblem@{EntryFlowProblem}}
+\index{EntryFlowProblem@{EntryFlowProblem}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{EntryFlowProblem()}{EntryFlowProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classEntryFlowProblem}{\+::\+Entry\+Flow\+Problem}} (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{const double \&}]{min\+\_\+error\+\_\+target,  }\item[{const double \&}]{max\+\_\+error\+\_\+target }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass Doc\+Info object and target errors. 
+
+Constructor\+: Pass Doc\+Info object and error targets. 
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00113}{113}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+References \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00099}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::\+Alpha}}, \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00091}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{full__tube_8cc_source_l00085}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}.
+
+\Hypertarget{classEntryFlowProblem_a22d76abde64459f167067c1d2cb5c1e2}\label{classEntryFlowProblem_a22d76abde64459f167067c1d2cb5c1e2} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!````~EntryFlowProblem@{\texorpdfstring{$\sim$}{\string~}EntryFlowProblem}}
+\index{````~EntryFlowProblem@{\texorpdfstring{$\sim$}{\string~}EntryFlowProblem}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EntryFlowProblem()}{\string~EntryFlowProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00063}{63}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classEntryFlowProblem_ae472a4319c372d33ee22dac8fb32d9a2}\label{classEntryFlowProblem_ae472a4319c372d33ee22dac8fb32d9a2} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+After adaptation\+: Pin redudant pressure dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00079}{79}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+References \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00091}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classEntryFlowProblem_a034e6085f31de2c44419090b64d503db}\label{classEntryFlowProblem_a034e6085f31de2c44419090b64d503db} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Doc the solution after solve. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00066}{66}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+References \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00102}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info}}, and \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00271}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{classEntryFlowProblem_ae4dde95573350d8fdb19463849991130}\label{classEntryFlowProblem_ae4dde95573350d8fdb19463849991130} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve. 
+
+Set the inflow boundary conditions. 
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00243}{243}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+\Hypertarget{classEntryFlowProblem_a8ba37cd2a4af4356e4182929027d7828}\label{classEntryFlowProblem_a8ba37cd2a4af4356e4182929027d7828} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00271}{271}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00066}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00303}{main()}}.
+
+\Hypertarget{classEntryFlowProblem_a88e43e57e9816f022ea9bccbbef9500d}\label{classEntryFlowProblem_a88e43e57e9816f022ea9bccbbef9500d} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload generic access function by one that returns a pointer to the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00091}{91}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00079}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00113}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::\+Entry\+Flow\+Problem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classEntryFlowProblem_a4b69957951a6367b12bf02c1a8d9ad2a}\label{classEntryFlowProblem_a4b69957951a6367b12bf02c1a8d9ad2a} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!Alpha@{Alpha}}
+\index{Alpha@{Alpha}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+int \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::\+Alpha\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Exponent for bluntness of velocity profile. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00099}{99}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00113}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::\+Entry\+Flow\+Problem()}}.
+
+\Hypertarget{classEntryFlowProblem_abf50dd060db0e4c31628cfd228e096b8}\label{classEntryFlowProblem_abf50dd060db0e4c31628cfd228e096b8} 
+\index{EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!EntryFlowProblem$<$ ELEMENT $>$@{EntryFlowProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classEntryFlowProblem}{Entry\+Flow\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00102}{102}} of file \mbox{\hyperlink{three__d__entry__flow_8cc_source}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{three__d__entry__flow_8cc_source_l00066}{Entry\+Flow\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{three__d__entry__flow_8cc}{three\+\_\+d\+\_\+entry\+\_\+flow.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,82 @@
+# Maple script to check if we really understand what the output
+# from the vector-based Bessel function computation means...
+
+interface(echo=0);
+
+x_min:=0.5;
+x_max:=5.0;
+
+nplot:=100;
+
+fd := fopen("besselJ_from_maple.dat", WRITE);
+
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(BesselJ(j+1/2,x),j=0..3));
+
+end do;
+
+
+fclose(fd);
+
+
+
+fd := fopen("besselY_from_maple.dat", WRITE);
+
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(BesselY(j+1/2,x),j=0..3));
+
+end do;
+
+
+fclose(fd);
+
+
+
+fd := fopen("dbesselJ_from_maple.dat", WRITE);
+
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(subs(xi=x,diff(BesselJ(j+1/2,xi),xi)),j=0..3));
+
+end do;
+
+
+fclose(fd);
+
+
+
+fd := fopen("dbesselY_from_maple.dat", WRITE);
+
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(subs(xi=x,diff(BesselY(j+1/2,xi),xi)),j=0..3));
+
+end do;
+
+
+fclose(fd);
+
+
+
+fd := fopen("legendre_from_maple.dat", WRITE);
+with(orthopoly):
+x_min:=0.0;
+x_max:=1.0;
+n:=3;
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(P(j,x),j=0..3));
+    print(x,seq(P(j,x),j=0..n));
+
+end do;
+
+
+fclose(fd);
+

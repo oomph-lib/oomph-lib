@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Mesh generation based on Geompack++</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Mesh generation based on Geompack++ </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we demonstrate how to generate quadrilateral <code>oomph-lib</code> meshes, based on the output from Barry Joe's mesh generator <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code>, </a> available as freeware at <a href="http://members.shaw.ca/bjoe/">http://members.shaw.ca/bjoe/.</a> The mesh generation is performed in a two-stage process. First we use <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> to generate the mesh "offline". Then we process the output files generated by <br  />
+ <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> to generate an <code>oomph-lib</code> mesh.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="geompack_use"></a>
+Example of the use of Geompack++</h1>
+<p>The documents <code>meshoper.pdf</code> and <code>regmesh.pdf</code> distributed with <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> contain a comprehensive User's Guide for the code and its many options. <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> is a very sophisticated mesh generator and can be used to create 2D and 3D meshes with a wide variety of element types. Here we only discuss how to use <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> to generate 2D quadrilateral meshes. [The development of of <code>oomph-lib</code> meshes that process <a href="http://members.shaw.ca/bjoe/"><code>Geompack++'s</code> </a> output for other element types should be straightforward but is still on our "To Do" list &ndash; any volunteers?]</p>
+<p><a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> creates quadrilateral meshes, based on the information about the mesh boundaries (nodes and curves) provided in two input files, <code>filename.rg2</code> and <code>filename.cs2</code>, say. An output file, <code>filename.1.mh2</code> is created. It contains the information about the mesh boundaries, the nodal positions and the element connectivity lists.</p>
+<hr  />
+<h2><a class="anchor" id="geomview"></a>
+How to visualise a mesh generated by Geompack++</h2>
+<p>To visualise the mesh, the program <code>Geomview</code> is available. (<code>Geomview</code> can be downloaded from the <a href="http://www.geomview.org/"><code>Geomview</code> home page </a>.) The <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> output file cannot be processed directly by <a href="http://www.geomview.org/"><code>Geomview</code> </a> but a simple program that converts the file <code>filename.mh2</code> to a format that is readable by <a href="http://www.geomview.org/"><code>Geomview</code> </a> is <a href="../../../../demo_drivers/meshing/mesh_from_geompack/convert_geom_file.cc">available.</a></p>
+<hr  />
+<h2><a class="anchor" id="example"></a>
+The example: A rectangle with a hole</h2>
+<p>As an example we demonstrate how to use <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> to generate a mesh for the rectangular domain with a hole shown in the figure below. The domain is defined by eight nodes and eight curves (straight lines) which connect the nodes and define two boundaries. <br  />
+ The boundary numbers shown in the sketch correspond to those in the <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> input region file <a href="../../../../demo_drivers/meshing/mesh_from_geompack/box_hole.rg2">box_hole.rg2 </a> and in the curve input file <a href="../../../../demo_drivers/meshing/mesh_from_geompack/box_hole.cs2">box_hole.cs2.</a> In the corresponding <code>oomph-lib</code> mesh, the boundaries are numbered from zero.</p>
+<div class="image">
+<img src="box_hole_2.gif" alt=""/>
+<div class="caption">
+A rectangular domain with a hole. </div></div>
+ <p>The desired mesh characteristics are defined in the file <a href="../../../../demo_drivers/meshing/mesh_from_geompack/box_hole.m2">box_hole.m2</a> which specifies that the final mesh should contain approximately 200 elements. When processed with the command </p><div class="fragment"><div class="line">./geompack++ box_hole.m2 error.log</div>
+</div><!-- fragment --><p> <a href="http://members.shaw.ca/bjoe/"><code>Geompack++ </code></a> creates the output file <a href="../../../../demo_drivers/meshing/mesh_from_geompack/box_hole.mh2">box_hole.mh2.</a></p>
+<p>Here is a sketch of the resulting discretisation, as displayed by <code>geomview</code> :</p>
+<div class="image">
+<img src="geomview_box_screenshot.gif" alt=""/>
+<div class="caption">
+Screenshot of geomview, showing the discretisation of the rectangular domain with a hole. </div></div>
+ <hr  />
+<h1><a class="anchor" id="oomph_use"></a>
+Creating an oomph-lib mesh based on output files generated by Geompack++</h1>
+<p><code>oomph-lib</code> provides a mesh, <code>GeompackQuadMesh</code>, that uses the output from <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> to generate an <code>oomph-lib</code> Mesh containing <code>QElement&lt;2,2&gt;</code> four-node quadrilateral elements. The relevant interface is:</p>
+ <div class="fragment"><div class="line">  <span class="comment">//=========start_of_geompackquadmesh_class================================</span></div>
+<div class="line"><span class="comment">  /// Quadrilateral mesh generator; Uses input from Geompack++.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">  /// See: http://members.shaw.ca/bjoe/</span></div>
+<div class="line"><span class="comment">  /// Currently only for four-noded quads -- extension to higher-order</span></div>
+<div class="line"><span class="comment">  /// quads should be trivial (see the corresponding classes for</span></div>
+<div class="line"><span class="comment">  /// triangular meshes).</span></div>
+<div class="line"><span class="comment"></span>  <span class="comment">//========================================================================</span></div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">  <span class="keyword">class </span>GeompackQuadMesh : <span class="keyword">public</span> Mesh</div>
+<div class="line">  {</div>
+<div class="line">  <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><span class="comment">    /// Constructor with the input files</span></div>
+<div class="line"><span class="comment"></span>    GeompackQuadMesh(<span class="keyword">const</span> std::string&amp; mesh_file_name,</div>
+<div class="line">                     <span class="keyword">const</span> std::string&amp; curve_file_name,</div>
+<div class="line">                     TimeStepper* time_stepper_pt = &amp;Mesh::Default_TimeStepper)</div>
+</div><!-- fragment --><p> The driver code <a href="../../../../demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc">mesh_from_geompack_poisson.cc</a> demonstrates the use of this mesh for the solution of a 2D Poisson problem in the "rectangular domain with a hole", described in the previous section.</p>
+<p>The code expects the names of <code>*</code>.<code>mh2</code> and *.<code>cs2</code> files generated by <a href="http://members.shaw.ca/bjoe/"><code>Geompack++</code> </a> as command line arguments and stores them in the namespace <code>CommandLineArgs</code> </p>
+ <div class="fragment"><div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="convert__geom__file_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="ttc" id="aconvert__geom__file_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="convert__geom__file_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition</b> <a href="convert__geom__file_8cc_source.html#l00036">convert_geom_file.cc:36</a></div></div>
+<div class="line">{</div>
+<div class="line"><span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check number of command line arguments: Need exactly two.</span></div>
+<div class="line"> <span class="keywordflow">if</span> (argc!=3)</div>
+<div class="line">  {</div>
+<div class="line">   std::string error_message =</div>
+<div class="line">    <span class="stringliteral">&quot;Wrong number of command line arguments.\n&quot;</span>;</div>
+<div class="line">   error_message +=</div>
+<div class="line">    <span class="stringliteral">&quot;Must specify the following file names  \n&quot;</span>;</div>
+<div class="line">   error_message += </div>
+<div class="line">    <span class="stringliteral">&quot;filename.mh2 then filename.cs2\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">throw</span> OomphLibError(error_message,</div>
+<div class="line">                       OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                       OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> The names of these files are then passed to the mesh constructor. Since the rest of the <a href="../../../../demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc">driver code </a> is identical to that in the <a href="../../../../doc/poisson/two_d_poisson/html/index.html">corresponding example with a structured mesh</a>, we do not provide a detailed code listing but simply show the plot of the computed results, together with the tanh-shaped exact solution of the problem:</p>
+<div class="image">
+<img src="validate.gif" alt=""/>
+<div class="caption">
+Computed and exact solutions. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_geompack/">demo_drivers/meshing/mesh_from_geompack/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc">demo_drivers/meshing/mesh_from_geompack/mesh_from_geompack_poisson.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

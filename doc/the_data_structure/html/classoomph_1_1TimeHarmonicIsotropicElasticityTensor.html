@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TimeHarmonicIsotropicElasticityTensor Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html">TimeHarmonicIsotropicElasticityTensor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::TimeHarmonicIsotropicElasticityTensor Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>An isotropic elasticity tensor defined in terms of Young's modulus and Poisson's ratio. The elasticity tensor is assumed to be non-dimensionalised on some reference value for Young's modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young's modulus to the Young's modulus used to non-dimensionalise the stresses/tractions in the governing equations.  
+ <a href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::TimeHarmonicIsotropicElasticityTensor:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.png" usemap="#oomph::TimeHarmonicIsotropicElasticityTensor_map" alt=""/>
+  <map id="oomph::TimeHarmonicIsotropicElasticityTensor_map" name="oomph::TimeHarmonicIsotropicElasticityTensor_map">
+<area href="classoomph_1_1TimeHarmonicElasticityTensor.html" title="A base class that represents the fourth-rank elasticity tensor  defined such that." alt="oomph::TimeHarmonicElasticityTensor" shape="rect" coords="0,0,272,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a877c58bd18dbe1485fbb07ce0e3e2b38" id="r_a877c58bd18dbe1485fbb07ce0e3e2b38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a877c58bd18dbe1485fbb07ce0e3e2b38">TimeHarmonicIsotropicElasticityTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;nu, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;E)</td></tr>
+<tr class="memdesc:a877c58bd18dbe1485fbb07ce0e3e2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Passing in the values of the Poisson's ratio and Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations).  <br /></td></tr>
+<tr class="separator:a877c58bd18dbe1485fbb07ce0e3e2b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3e2187be7b2934ff064b3fbf040f6f" id="r_a3d3e2187be7b2934ff064b3fbf040f6f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a3d3e2187be7b2934ff064b3fbf040f6f">TimeHarmonicIsotropicElasticityTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;nu)</td></tr>
+<tr class="memdesc:a3d3e2187be7b2934ff064b3fbf040f6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Passing in the value of the Poisson's ratio. Stresses and tractions in the governing equations are assumed to have been non-dimensionalised on Young's modulus.  <br /></td></tr>
+<tr class="separator:a3d3e2187be7b2934ff064b3fbf040f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607f47914b93b3dba5d3696862e0ba20" id="r_a607f47914b93b3dba5d3696862e0ba20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a607f47914b93b3dba5d3696862e0ba20">update_constitutive_parameters</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;nu, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;E=1.0)</td></tr>
+<tr class="memdesc:a607f47914b93b3dba5d3696862e0ba20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update parameters: Specify values of the Poisson's ratio and (optionally) Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations).  <br /></td></tr>
+<tr class="separator:a607f47914b93b3dba5d3696862e0ba20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e7e1a4c9ad0563378e613adce3c635" id="r_a23e7e1a4c9ad0563378e613adce3c635"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a23e7e1a4c9ad0563378e613adce3c635">independent_component</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a23e7e1a4c9ad0563378e613adce3c635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the independent coefficient function.  <br /></td></tr>
+<tr class="separator:a23e7e1a4c9ad0563378e613adce3c635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TimeHarmonicElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html">oomph::TimeHarmonicElasticityTensor</a></td></tr>
+<tr class="memitem:aa1813e96fe387cfb05ae97892a1fdd84 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor" id="r_aa1813e96fe387cfb05ae97892a1fdd84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html#aa1813e96fe387cfb05ae97892a1fdd84">~TimeHarmonicElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:aa1813e96fe387cfb05ae97892a1fdd84 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual Destructor.  <br /></td></tr>
+<tr class="separator:aa1813e96fe387cfb05ae97892a1fdd84 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9af7ee0d97cb9308092795098b775b11 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor" id="r_a9af7ee0d97cb9308092795098b775b11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a9af7ee0d97cb9308092795098b775b11">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">l</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9af7ee0d97cb9308092795098b775b11 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the appropriate independent component via the index translation scheme (const version).  <br /></td></tr>
+<tr class="separator:a9af7ee0d97cb9308092795098b775b11 inherit pub_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a96e8a8cb8cc50a09f2e5d1e39defc1a8" id="r_a96e8a8cb8cc50a09f2e5d1e39defc1a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a96e8a8cb8cc50a09f2e5d1e39defc1a8">set_lame_coefficients</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;lambda, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;mu)</td></tr>
+<tr class="separator:a96e8a8cb8cc50a09f2e5d1e39defc1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afa7b0b518e23a6cc069b1618033b4947" id="r_afa7b0b518e23a6cc069b1618033b4947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#afa7b0b518e23a6cc069b1618033b4947">C</a> [4]</td></tr>
+<tr class="separator:afa7b0b518e23a6cc069b1618033b4947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a28d880860aa3de7cfc6ebc07ec0a5ee9" id="r_a28d880860aa3de7cfc6ebc07ec0a5ee9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicIsotropicElasticityTensor.html#a28d880860aa3de7cfc6ebc07ec0a5ee9">StaticIndex</a> [21]</td></tr>
+<tr class="memdesc:a28d880860aa3de7cfc6ebc07ec0a5ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translation scheme for the isotropic elasticity tensor.  <br /></td></tr>
+<tr class="separator:a28d880860aa3de7cfc6ebc07ec0a5ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1TimeHarmonicElasticityTensor')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html">oomph::TimeHarmonicElasticityTensor</a></td></tr>
+<tr class="memitem:a825792d8631abc2a23ed5f12c445384c inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor" id="r_a825792d8631abc2a23ed5f12c445384c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a825792d8631abc2a23ed5f12c445384c">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">l</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a825792d8631abc2a23ed5f12c445384c inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper range checking function (Note that this only captures over-runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...)  <br /></td></tr>
+<tr class="separator:a825792d8631abc2a23ed5f12c445384c inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0ac894717da5725d03a4d18594ef7b inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor" id="r_a1d0ac894717da5725d03a4d18594ef7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a1d0ac894717da5725d03a4d18594ef7b">TimeHarmonicElasticityTensor</a> ()</td></tr>
+<tr class="memdesc:a1d0ac894717da5725d03a4d18594ef7b inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor.  <br /></td></tr>
+<tr class="separator:a1d0ac894717da5725d03a4d18594ef7b inherit pro_methods_classoomph_1_1TimeHarmonicElasticityTensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An isotropic elasticity tensor defined in terms of Young's modulus and Poisson's ratio. The elasticity tensor is assumed to be non-dimensionalised on some reference value for Young's modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young's modulus to the Young's modulus used to non-dimensionalise the stresses/tractions in the governing equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00145">145</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a877c58bd18dbe1485fbb07ce0e3e2b38" name="a877c58bd18dbe1485fbb07ce0e3e2b38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a877c58bd18dbe1485fbb07ce0e3e2b38">&#9670;&#160;</a></span>TimeHarmonicIsotropicElasticityTensor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TimeHarmonicIsotropicElasticityTensor::TimeHarmonicIsotropicElasticityTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>E</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Passing in the values of the Poisson's ratio and Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations). </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00161">161</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00211">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<a id="a3d3e2187be7b2934ff064b3fbf040f6f" name="a3d3e2187be7b2934ff064b3fbf040f6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3e2187be7b2934ff064b3fbf040f6f">&#9670;&#160;</a></span>TimeHarmonicIsotropicElasticityTensor() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::TimeHarmonicIsotropicElasticityTensor::TimeHarmonicIsotropicElasticityTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>nu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Passing in the value of the Poisson's ratio. Stresses and tractions in the governing equations are assumed to have been non-dimensionalised on Young's modulus. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00174">174</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00211">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a23e7e1a4c9ad0563378e613adce3c635" name="a23e7e1a4c9ad0563378e613adce3c635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23e7e1a4c9ad0563378e613adce3c635">&#9670;&#160;</a></span>independent_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::TimeHarmonicIsotropicElasticityTensor::independent_component </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the independent coefficient function. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1TimeHarmonicElasticityTensor.html#a23ac2beedc3d47b22876faaacc0e27a0">oomph::TimeHarmonicElasticityTensor</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00203">203</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00153">StaticIndex</a>.</p>
+
+</div>
+</div>
+<a id="a96e8a8cb8cc50a09f2e5d1e39defc1a8" name="a96e8a8cb8cc50a09f2e5d1e39defc1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e8a8cb8cc50a09f2e5d1e39defc1a8">&#9670;&#160;</a></span>set_lame_coefficients()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TimeHarmonicIsotropicElasticityTensor::set_lame_coefficients </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>mu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00211">211</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00174">TimeHarmonicIsotropicElasticityTensor()</a>, <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00161">TimeHarmonicIsotropicElasticityTensor()</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00192">update_constitutive_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="a607f47914b93b3dba5d3696862e0ba20" name="a607f47914b93b3dba5d3696862e0ba20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a607f47914b93b3dba5d3696862e0ba20">&#9670;&#160;</a></span>update_constitutive_parameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::TimeHarmonicIsotropicElasticityTensor::update_constitutive_parameters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>E</em> = <code>1.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update parameters: Specify values of the Poisson's ratio and (optionally) Young's modulus (interpreted as the ratio of the actual Young's modulus to the Young's modulus (or other reference stiffness) used to non-dimensionalise stresses and tractions in the governing equations). </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00192">192</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">C</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00211">set_lame_coefficients()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afa7b0b518e23a6cc069b1618033b4947" name="afa7b0b518e23a6cc069b1618033b4947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7b0b518e23a6cc069b1618033b4947">&#9670;&#160;</a></span>C</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::TimeHarmonicIsotropicElasticityTensor::C[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00149">149</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00203">independent_component()</a>, <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00211">set_lame_coefficients()</a>, <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00174">TimeHarmonicIsotropicElasticityTensor()</a>, <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00161">TimeHarmonicIsotropicElasticityTensor()</a>, and <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00192">update_constitutive_parameters()</a>.</p>
+
+</div>
+</div>
+<a id="a28d880860aa3de7cfc6ebc07ec0a5ee9" name="a28d880860aa3de7cfc6ebc07ec0a5ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28d880860aa3de7cfc6ebc07ec0a5ee9">&#9670;&#160;</a></span>StaticIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::TimeHarmonicIsotropicElasticityTensor::StaticIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    1, 0, 2, 3, 0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 2, 3, 0, 1}</div>
+</div><!-- fragment -->
+<p>Translation scheme for the isotropic elasticity tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00153">153</a> of file <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="time__harmonic__elasticity__tensor_8h_source.html#l00203">independent_component()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="time__harmonic__elasticity__tensor_8h_source.html">time_harmonic_elasticity_tensor.h</a></li>
+<li><a class="el" href="time__harmonic__elasticity__tensor_8cc_source.html">time_harmonic_elasticity_tensor.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

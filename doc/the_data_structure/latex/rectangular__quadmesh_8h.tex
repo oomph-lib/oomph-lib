@@ -1,0 +1,18 @@
+\doxysection{rectangular\+\_\+quadmesh.\+h File Reference}
+\hypertarget{rectangular__quadmesh_8h}{}\label{rectangular__quadmesh_8h}\index{rectangular\_quadmesh.h@{rectangular\_quadmesh.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh} is a two-\/dimensional mesh of Quad elements with Nx elements in the "{}x"{} (horizonal) direction and Ny elements in the "{}y"{} (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-\/left-\/hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableRectangularQuadMesh}{oomph\+::\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable version of the \doxylink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}\+: A two-\/dimensional mesh of Quad elements with Nx elements in the "{}x"{} (horizonal) direction and Ny elements in the "{}y"{} (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-\/left-\/hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ElasticRectangularQuadMesh}{oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Elastic quad mesh with functionality to attach traction elements to the specified boundaries. We "{}upgrade"{} the \doxylink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh} to become an \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ElasticRefineableRectangularQuadMesh}{oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Elastic refineable quad mesh with functionality to attach traction elements to the specified boundaries. We "{}upgrade"{} the \doxylink{classoomph_1_1RefineableRectangularQuadMesh}{Refineable\+Rectangular\+Quad\+Mesh} to become an \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. We also move the mesh "{}down"{} by half the the "{}height"{} so x=0 is located on the centreline -- appropriate for the beam-\/type problems for which this mesh was developed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

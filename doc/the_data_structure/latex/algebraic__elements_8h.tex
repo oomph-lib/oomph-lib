@@ -1,0 +1,22 @@
+\doxysection{algebraic\+\_\+elements.\+h File Reference}
+\hypertarget{algebraic__elements_8h}{}\label{algebraic__elements_8h}\index{algebraic\_elements.h@{algebraic\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{oomph\+::\+Algebraic\+Node}}
+\begin{DoxyCompactList}\small\item\em Algebraic nodes are nodes with an algebraic positional update function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AlgebraicElementBase}{oomph\+::\+Algebraic\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for algebraic elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AlgebraicElement}{oomph\+::\+Algebraic\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Algebraic elements are elements that have Algebraic\+Nodes whose position is determined by the geometric \doxylink{classoomph_1_1Data}{Data} in the Geom\+Objects that are involved in their node update functions. Algebraic Elements include the derivatives w.\+r.\+t. any unknowns that are stored in this geometric \doxylink{classoomph_1_1Data}{Data} into the element\textquotesingle{}s Jacobian matrix. Otherwise they behave exactly like the templace element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01AlgebraicElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Algebraic\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of algebraic elements\+: the same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{oomph\+::\+Algebraic\+Mesh}}
+\begin{DoxyCompactList}\small\item\em Algebraic meshes contain Algebraic\+Elements and Algebraic\+Nodes. They implement the node update functions that are used by the Algebraic\+Nodes to update their positions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh}{oomph\+::\+Dummy\+Algebraic\+Mesh}}
+\begin{DoxyCompactList}\small\item\em Dummy algebraic mesh -- used for default assignements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

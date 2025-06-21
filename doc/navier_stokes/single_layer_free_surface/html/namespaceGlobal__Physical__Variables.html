@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Physical_Variables Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Global_Physical_Variables Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for physical parameters.  
+<a href="namespaceGlobal__Physical__Variables.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a37a6f46efcb35b4bd12c73f19d741020" id="r_a37a6f46efcb35b4bd12c73f19d741020"><td class="memItemLeft" align="right" valign="top">Vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">G</a> (2)</td></tr>
+<tr class="memdesc:a37a6f46efcb35b4bd12c73f19d741020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direction of gravity.  <br /></td></tr>
+<tr class="separator:a37a6f46efcb35b4bd12c73f19d741020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab814e627d2eb5bc50318879d19ab16b9" id="r_ab814e627d2eb5bc50318879d19ab16b9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a> = 5.0</td></tr>
+<tr class="memdesc:ab814e627d2eb5bc50318879d19ab16b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number.  <br /></td></tr>
+<tr class="separator:ab814e627d2eb5bc50318879d19ab16b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b6ef72bd221361c37f5b9a4a6899afc" id="r_a4b6ef72bd221361c37f5b9a4a6899afc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">St</a> = 1.0</td></tr>
+<tr class="memdesc:a4b6ef72bd221361c37f5b9a4a6899afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strouhal number.  <br /></td></tr>
+<tr class="separator:a4b6ef72bd221361c37f5b9a4a6899afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085ee4bf968ffdd01a41b8c41864f907" id="r_a085ee4bf968ffdd01a41b8c41864f907"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a></td></tr>
+<tr class="memdesc:a085ee4bf968ffdd01a41b8c41864f907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Womersley number (Reynolds x Strouhal, computed automatically)  <br /></td></tr>
+<tr class="separator:a085ee4bf968ffdd01a41b8c41864f907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6286f02b476912dd7550eced538331a" id="r_aa6286f02b476912dd7550eced538331a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">ReInvFr</a> = 5.0</td></tr>
+<tr class="memdesc:aa6286f02b476912dd7550eced538331a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Product of Reynolds number and inverse of Froude number.  <br /></td></tr>
+<tr class="separator:aa6286f02b476912dd7550eced538331a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b32b93d2e546f9375ec418474107838" id="r_a8b32b93d2e546f9375ec418474107838"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Ca</a> = 0.01</td></tr>
+<tr class="memdesc:a8b32b93d2e546f9375ec418474107838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capillary number.  <br /></td></tr>
+<tr class="separator:a8b32b93d2e546f9375ec418474107838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3962c36313826b19f216f6bbbdd6a477" id="r_a3962c36313826b19f216f6bbbdd6a477"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a> = 0.1</td></tr>
+<tr class="memdesc:a3962c36313826b19f216f6bbbdd6a477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pseudo-solid Poisson ratio.  <br /></td></tr>
+<tr class="separator:a3962c36313826b19f216f6bbbdd6a477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for physical parameters. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a37a6f46efcb35b4bd12c73f19d741020" name="a37a6f46efcb35b4bd12c73f19d741020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a6f46efcb35b4bd12c73f19d741020">&#9670;&#160;</a></span>G()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt; double &gt; Global_Physical_Variables::G </td>
+          <td>(</td>
+          <td class="paramtype">2&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Direction of gravity. </p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>, and <a class="el" href="elastic__single__layer_8cc_source.html#l00557">main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a8b32b93d2e546f9375ec418474107838" name="a8b32b93d2e546f9375ec418474107838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b32b93d2e546f9375ec418474107838">&#9670;&#160;</a></span>Ca</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Ca = 0.01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Capillary number. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00071">71</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3962c36313826b19f216f6bbbdd6a477" name="a3962c36313826b19f216f6bbbdd6a477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3962c36313826b19f216f6bbbdd6a477">&#9670;&#160;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Nu = 0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pseudo-solid Poisson ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00077">77</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab814e627d2eb5bc50318879d19ab16b9" name="ab814e627d2eb5bc50318879d19ab16b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab814e627d2eb5bc50318879d19ab16b9">&#9670;&#160;</a></span>Re</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::Re = 5.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reynolds number. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00059">59</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>, and <a class="el" href="elastic__single__layer_8cc_source.html#l00557">main()</a>.</p>
+
+</div>
+</div>
+<a id="aa6286f02b476912dd7550eced538331a" name="aa6286f02b476912dd7550eced538331a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6286f02b476912dd7550eced538331a">&#9670;&#160;</a></span>ReInvFr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::ReInvFr = 5.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Product of Reynolds number and inverse of Froude number. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00068">68</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a085ee4bf968ffdd01a41b8c41864f907" name="a085ee4bf968ffdd01a41b8c41864f907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a085ee4bf968ffdd01a41b8c41864f907">&#9670;&#160;</a></span>ReSt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::ReSt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Womersley number (Reynolds x Strouhal, computed automatically) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00065">65</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>, and <a class="el" href="elastic__single__layer_8cc_source.html#l00557">main()</a>.</p>
+
+</div>
+</div>
+<a id="a4b6ef72bd221361c37f5b9a4a6899afc" name="a4b6ef72bd221361c37f5b9a4a6899afc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b6ef72bd221361c37f5b9a4a6899afc">&#9670;&#160;</a></span>St</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Global_Physical_Variables::St = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Strouhal number. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__single__layer_8cc_source.html#l00062">62</a> of file <a class="el" href="elastic__single__layer_8cc_source.html">elastic_single_layer.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__single__layer_8cc_source.html#l00160">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>, and <a class="el" href="elastic__single__layer_8cc_source.html#l00557">main()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:21
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

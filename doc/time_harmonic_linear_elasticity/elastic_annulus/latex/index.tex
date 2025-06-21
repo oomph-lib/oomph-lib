@@ -1,0 +1,647 @@
+\chapter{The equations of time-\/harmonic linear elasticity}
+\hypertarget{index}{}\label{index}\index{The equations of time-\/harmonic linear elasticity@{The equations of time-\/harmonic linear elasticity}}
+The aim of this tutorial is to demonstrate the solution of the time-\/harmonic equations of linear elasticity in cartesian coordinates. These equations are useful to describe forced, time-\/harmonic oscillations of elastic bodies.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} ~\newline
+~\newline
+The implementation of the equations and the documentation were developed jointly with David Nigro. \end{center}    \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+Consider a linearly elastic body (of density $ \rho $, Young\textquotesingle{}s modulus $ E $ and Poisson\textquotesingle{}s ratio $ \nu $), occupying the region $ D $ whose boundary is $ \partial D $. Assuming that the body performs time-\/harmonic oscillations of frequency of $ \omega $ its motion is governed by the equations of time-\/harmonic linear elasticity \begin{center}  \[
+\pmb{\nabla}^*\cdot\pmb{\tau}^*+
+\rho \mathbf{F}^*=-\rho\omega^2 \mathbf{u}^*,
+\] \end{center}  where the $ x_{i}^* $ are the cartesian coordinates, and the time-\/periodic stresses, body force and displacements are given by  $ {\rm Re}\{\pmb{\tau^*}(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $,  $ {\rm Re}\{\mathbf{F}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $ and $ {\rm Re}\{\mathbf{u}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $ respectively. Note that, as usual, the superscript asterisk notation is used to distinguish dimensional quantities from their non-\/dimensional counterparts where required.
+
+The body is subject to imposed time-\/harmonic displacements  $  {\rm Re}\{\mathbf{\hat{u}}^* {\rm e}^{-{\rm i}\omega
+t^*}\} $ along $ \partial D_d $, and to an imposed time-\/harmonic traction  $  {\rm Re}\{ \pmb{\hat{\tau}}^* {\rm e}^{-{\rm i}\omega
+t^*}\} $ along $ \partial D_n $ where $ \partial D=\partial D_d\cup\partial D_n $. This requires that \begin{center}  \[
+\mathbf{u}^*=\mathbf{\hat{u}}^*\,\,\textrm{on $
+\partial D_d $ },\quad
+\pmb{\tau}^* \cdot 
+{\mathbf{n}}=\pmb{\hat{\tau}}^*\,\,\textrm{on $
+\partial D_n $ }
+\] \end{center}  where $ {\bf n} $ is the outer unit normal on the boundary.
+
+The stresses and displacements are related by the constitutive equations \begin{center}  \[
+\pmb{\tau}^*=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}^*\cdot\mathbf{u}^*)\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}^*\mathbf{u}^*+\pmb{\nabla}^*\mathbf{u}^{*{\rm T}})\right),
+\] \end{center}  where $ \pmb{\nabla}^*\mathbf{u}^{*{\rm T}}
+$ represents the transpose of $ \pmb{\nabla}^*\mathbf{u}^*
+$.
+
+We non-\/dimensionalise the equations, using a problem specific reference length, $ {\cal L} $, and a timescale $ \displaystyle {\cal T}=\frac{1}{\omega} $, and use Young\textquotesingle{}s modulus to non-\/dimensionalise the body force and the stress tensor\+: \begin{center}  \[
+\pmb{\tau}^* = E \, \pmb{\tau}, \qquad
+x_{i}^* = {\cal L}\, x_{i}
+\]  \[
+\mathbf{u}^* = {\cal L}\, \mathbf{u}, \qquad
+\mathbf{F}^* = \frac{E}{\rho \cal L} \, \mathbf{F},
+\qquad
+t^* = {\cal T}\, t.
+\] \end{center} 
+
+The non-\/dimensional form of the equations is then given by \begin{center}  \[
+\pmb{\nabla}\cdot\pmb{\tau}+\mathbf{F}=-\Omega^2\mathbf{u},
+\ \ \ \ \ \ \ \ \ \ (1)
+\] \end{center}  with the non-\/dimensional constitutive relation, \begin{center}  \[
+\pmb{\tau}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}\mathbf{u}+\pmb{\nabla}\mathbf{u}^{{\rm T}})\right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\] \end{center}  The non-\/dimensional parameter \begin{center}  \[
+\Omega = {\cal L}\omega \sqrt{\frac{\rho}{E}}
+\] \end{center}  is the ratio of the elastic body\textquotesingle{}s intrinsic timescale, $\displaystyle {\cal L} \sqrt{\frac{\rho}{E}}$, to the problem-\/specific timescale, $ \displaystyle {\cal T}=\frac{1}{\omega} $, that we used to non-\/dimensionalise time. $ \Omega $ can be interpreted as a non-\/dimensional version of the excitation frequency; alternatively/equivalently $ \Omega^2 $ may be interpreted as a non-\/dimensional density. The boundary conditions are \begin{center}  \[
+\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad
+\pmb{\tau} \cdot 
+{\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.
+\] \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element_types}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_element_types}
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$\+DIM$>$} equations class, where the template parameter {\ttfamily DIM} indicates the spatial dimension. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center}  \[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2,
+\] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij}
+$ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+
+All the constitutive parameters are real. The two components of the displacement field have a real and imaginary part. We store the four real-\/valued nodal unknowns in the order  $ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Im}\{u_y\}
+$ and use the shape functions to interpolate the displacements as \begin{center}  \[
+u_i^{(n)} = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,...4,
+\] \end{center}  where $  U^{(E)}_{ij} $ is the $ i $-\/th displacement component (enumerated as described above) at the $ j $-\/th {\ttfamily Node} in the element.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_test}{}\doxysection{\texorpdfstring{A test problem\+: Oscillations of an elastic annulus}{A test problem: Oscillations of an elastic annulus}}\label{index_test}
+We consider the time-\/harmonic axisymmetric deformation of a 2D annular elastic body that occupies the region $ r_{\rm min}\leq
+r\leq r_{\rm max}, 0\leq\theta\leq 2\pi $, shown in the left half of the sketch below. We impose a constant-\/amplitude axisymmetric displacement $ {\mathbf{u}}(r_{\rm min},\theta)=
+u_0 (1-{\rm i}) {\mathbf{e}}_r$ on the inner boundary and a constant-\/amplitude pressure load $ \pmb{\hat{\tau}} = -P_0 {\mathbf{e}}_r $ on the outer boundary. ( $ {\mathbf{e}}_r $ is the unit vector in the radial direction).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{sketch}
+\doxyfigcaption{Sketch of the test problems. }
+\end{DoxyImage}
+
+
+It is easy to find an analytical solution of this problem by working in polar coordinates and exploiting the axisymmetry of the solution by writing the displacement as $ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_r $. The radial displacement $ U(r) $ is then governed by \begin{center}  \[
+\frac{d}{d r}\left(\frac{U}{r}+\frac{dU}{dr}\right) + k^2 U=0,
+\] \end{center}  where $ \displaystyle k^2= \frac{\Omega^2}{\lambda+2\mu}$ and \begin{center}  \[
+\lambda = \frac{\nu}{(1+\nu)(1-2\nu)} \qquad \textrm{and} 
+\qquad \mu = \frac{1}{2(1+\nu)}
+\] \end{center}  are the non-\/dimensional Lame parameters. The solution of this equation is given by\+: \begin{center}  \[
+U(r) = aJ_1(kr)+bY_1(kr).
+\] \end{center}  where $ J_1 $ and $ Y_1 $ are Bessel functions of the first and second kind, respectively. The amplitudes $ a $ and $ b $ can be found using the boundary conditions on $ r_{\rm min} $ and $ r_{\rm max} $. In the driver code discussed below, the (lengthy) expressions for $ a $ and $ b $ in terms of the problem parameters can be found in the {\ttfamily  Global\+Parameters\+::exact\+\_\+u() } function.
+
+We note that even though a relatively simple analytical solution (in polar coordinates!) exists for this problem, it is a non-\/trivial test case for our code which solves the governing equations in cartesian coordinates. However, to show that we can also compute non-\/trivial solutions, we also consider the case where the annular region has a "{}gap"{} and therefore occupies only a fraction (90\%) of the circumference. This creates two additional boundaries (the radial lines bounding the "{}gap"{} and we subject these to the same pressure that acts on the outer boundary, as shown in the right half of the sketch above.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figures below show "{}carpet plots"{} of the real and imaginary parts of the exact (green) and computed (red) horizontal displacement ( $ u_1 $ -- the plots for $ u_2 $ obviously look very similar) for the continuous coating and $ \Omega^2=10 $, $ \nu=0.3 $, $ P_0 = 0.3 $, $ r_{\rm min}=1$ and $ r_{\rm max}=1.5 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{re_ux}
+\doxyfigcaption{Real part of the horizontal displacement. Green\+: exact; red\+: computed. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{im_ux}
+\doxyfigcaption{Imaginary part of the horizontal displacement. Green\+: exact; red\+: computed. }
+\end{DoxyImage}
+
+
+To demonstrate that the resulting displacement field is indeed axisymmetric, here is a plot of the real part of the radial displacement, $ ( Re(u_1)^2 + Re(u_2)^2 )^{1/2} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{re_ur}
+\doxyfigcaption{Real part of the radial displacement. Green\+: exact; red\+: computed. }
+\end{DoxyImage}
+
+
+Finally, here is a plot of the real part of the horizontal displacement for the case when there is a 10\% "{}gap"{} in the annular region. The presence of the gap clearly breaks the axisymmetry of the solution and creates waves that propagate in all directions\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{re_ux_hole}
+\doxyfigcaption{Real part of the horizontal displacement for an incomplete annular region. }
+\end{DoxyImage}
+
+
+Unsurprisingly, we are not aware of an analytical solution for this problem.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As usual, we define all non-\/dimensional parameters in a namespace where we also define the displacement to be applied on the inner boundary, the traction (pressure) to be applied on the outer boundary, and the exact solution (which we don\textquotesingle{}t list here because it is very lengthy).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}\ =\ 0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ non-\/dim\ frequency}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}=100.0;}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ elasticity\ tensor}}
+\DoxyCodeLine{\textcolor{comment}{}\ TimeHarmonicIsotropicElasticityTensor\ \mbox{\hyperlink{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}{E}}(\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Thickness\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{H\_annulus}}=0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Displacement\ amplitude\ on\ inner\ radius}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0138eb659958d7d7d1afd12577becf82}{Displacement\_amplitude}}=0.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Real-\/valued,\ radial\ displacement\ field\ on\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a95af753fa152ac6013bc4f640816f7ce}{solid\_boundary\_displacement}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ Vector<double>\ normal(2);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ norm=sqrt(x[0]*x[0]+x[1]*x[1]);}
+\DoxyCodeLine{\ \ normal[0]=x[0]/norm;}
+\DoxyCodeLine{\ \ normal[1]=x[1]/norm;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ u[0]=\mbox{\hyperlink{namespaceGlobal__Parameters_a0138eb659958d7d7d1afd12577becf82}{Displacement\_amplitude}}*normal[0];}
+\DoxyCodeLine{\ \ u[1]=\mbox{\hyperlink{namespaceGlobal__Parameters_a0138eb659958d7d7d1afd12577becf82}{Displacement\_amplitude}}*normal[1];}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constant\ pressure\ load\ (real\ and\ imag\ part)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a8363ab9f8687e9f7802f801f6dcab6e6}{constant\_pressure}}(\textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<std::complex<double>\ >\&traction)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ dim\ =\ traction.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<dim;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ traction[i]\ =\ complex<double>(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i],\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i]);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\_of\_pressure\_load}}
+
+\end{DoxyCodeInclude}
+ We also define the output directory and the number of elements in the mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ directory}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ elements\ in\ azimuthal\ direction\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Ntheta}}=20;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ elements\ in\ radial\ direction\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Nr}}=10;}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by defining command line arguments which specify the number of elements in the mesh and indicate the presence or absence of the "{}gap"{} in the coating.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ annular\ disk\ loaded\ by\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ azimuthal\ direction}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{"{}-\/-\/ntheta"{}},}
+\DoxyCodeLine{\ \ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Global\_Parameters::Ntheta}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ radial\ direction}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{"{}-\/-\/nr"{}},}
+\DoxyCodeLine{\ \ \&\mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Global\_Parameters::Nr}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ have\ a\ gap\ in\ the\ annulus?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}});}
+
+\end{DoxyCodeInclude}
+ The code performs a parameter study in which we compute the solution for a range of pressures. We specify the pressure increment and the number of steps to be performed, parse the command line arguments and document them.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ P\ increment}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ p\_increment=0.1;}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/p\_increment"{}},\&p\_increment);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ steps}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=3;\ }
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/nstep"{}},\&nstep);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+
+\end{DoxyCodeInclude}
+ Next, we create the problem (discretising the domain with nine-\/noded quadrilateral elements), 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularDiskProblem}{AnnularDiskProblem<RefineableQTimeHarmonicLinearElasticityElement<2,3>}}\ >}
+
+\end{DoxyCodeInclude}
+ and perform the parameter study\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ values\ for\ parameter\ values}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}=0.0;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ using\ Newton's\ method}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve();}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ problem.doc\_solution();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ pressure}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}+=p\_increment;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily Problem} class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the "{}bulk"{} elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function {\ttfamily create\+\_\+traction\+\_\+elements()}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Annular\ disk}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classAnnularDiskProblem}{AnnularDiskProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}{AnnularDiskProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAnnularDiskProblem_a35d3a481c66849a57b9797c2338b8fc2}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ doc\_solution();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ create\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ delete\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ solid\ mesh}}
+\DoxyCodeLine{\ Mesh*\ Solid\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\ Mesh*\ Traction\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ Doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We begin by building the "{}bulk"{} solid mesh, specifying the presence of the gap (and its width) if necessary. If there is no gap, the mesh is periodic; see \doxysectlink{index_comments}{Comments}{2} for a more detailed discussion of how the mesh for this problem is constructed.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::AnnularDiskProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ mesh\ is\ periodic\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ periodic=\textcolor{keyword}{true};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Azimuthal\ fraction\ of\ elastic\ coating}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ azimuthal\_fraction\_of\_coating=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Innermost\ radius\ for\ solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ a=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Gap\ in\ annulus?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ periodic=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ azimuthal\_fraction\_of\_coating=0.9;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ solid\ mesh}}
+\DoxyCodeLine{\ Solid\_mesh\_pt\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ RefineableTwoDAnnularMesh<ELASTICITY\_ELEMENT>(}
+\DoxyCodeLine{\ \ \ periodic,azimuthal\_fraction\_of\_coating,}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Global\_Parameters::Ntheta}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Global\_Parameters::Nr}},a,}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{Global\_Parameters::H\_annulus}});}
+
+\end{DoxyCodeInclude}
+ It is always a good idea to have a look at the mesh and its boundary enumeration\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Let's\ have\ a\ look\ where\ the\ boundaries\ are}}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}solid\_mesh.dat"{}});}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}solid\_mesh\_boundary.dat"{}});}
+
+\end{DoxyCodeInclude}
+ We loop over the elements and specify the relevant physical parameters via the pointer to the tensor of constitutive parameters and the (square of the) non-\/dimensional frequency, 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ the\ physical\ properties\ to\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements\ in\ the\ main\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ ELASTICITY\_ELEMENT\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELASTICITY\_ELEMENT*\textcolor{keyword}{>}(Solid\_mesh\_pt-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>elasticity\_tensor\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}{Global\_Parameters::E}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Square\ of\ non-\/dim\ frequency}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>omega\_sq\_pt()=\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Global\_Parameters::Omega\_sq}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Next we create the mesh that contains the Face\+Elements that apply the traction boundary conditions, and combine all meshes into a global mesh\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Construct\ the\ traction\ element\ mesh}}
+\DoxyCodeLine{\ Traction\_mesh\_pt=\textcolor{keyword}{new}\ Mesh;}
+\DoxyCodeLine{\ create\_traction\_elements();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh\ is\ first\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(Solid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ traction\ sub-\/mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(Traction\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ combined\ "{}global"{}\ mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+
+\end{DoxyCodeInclude}
+ We apply the displacement boundary conditions by pinning the real and imaginary part of the two displacement components at all nodes on boundary 0. We then impose a purely radial displacement on the real and imaginary parts of the displacement field, using the function defined in the {\ttfamily \doxylink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}} namespace\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ boundary\ conditions:}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ real\ and\ imag\ part\ of\ both\ displacement\ components\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ on\ the\ inner\ (boundary\ 0)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b\_inner=0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Solid\_mesh\_pt-\/>nboundary\_node(b\_inner);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ nodes\ to\ pin\ and\ assign\ boundary\ displacements\ on\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//solid\ boundary}}
+\DoxyCodeLine{\ Vector<double>\ u(2);}
+\DoxyCodeLine{\ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_node;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Node*\ nod\_pt=Solid\_mesh\_pt-\/>boundary\_node\_pt(b\_inner,i);}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(0);}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(1);}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(2);}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(3);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Assign\ displacements}}
+\DoxyCodeLine{\ \ \ x[0]=nod\_pt-\/>x(0);\ \ \ }
+\DoxyCodeLine{\ \ \ x[1]=nod\_pt-\/>x(1);\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a95af753fa152ac6013bc4f640816f7ce}{Global\_Parameters::solid\_boundary\_displacement}}(x,u);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Real\ part\ of\ x-\/displacement}}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>set\_value(0,u[0]);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Real\ part\ of\ y-\/displacement}}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>set\_value(1,u[1]);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Imag\ part\ of\ x-\/displacement}}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>set\_value(2,-\/u[0]);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Imag\ part\ of\ y-\/displacement}}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>set\_value(3,-\/u[1]);}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally we assign the equation numbers and specify the output directory\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_traction_elements}{}\doxysection{\texorpdfstring{The traction elements}{The traction elements}}\label{index_traction_elements}
+We create the face elements that apply the traction on the outer boundary (boundary 2). If there is a gap in the annular region we also apply the pressure loading on boundaries 1 and 3.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ traction\ elements\ }}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::create\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Load\ outer\ surface\ (2)\ and\ both\ "{}ends"{}\ (1\ and\ 3)\ if\ there's\ a\ gap}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b\_lo=1;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b\_hi=3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...otherwise\ load\ only\ the\ outside\ (2)}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}}))}
+\DoxyCodeLine{\ \ \{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ b\_lo=2;}
+\DoxyCodeLine{\ \ \ b\_hi=2;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b=b\_lo;b<=b\_hi;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Solid\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ ELASTICITY\_ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELASTICITY\_ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ Solid\_mesh\_pt-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ Solid\_mesh\_pt-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ element}}
+\DoxyCodeLine{\ \ \ \ \ TimeHarmonicLinearElasticityTractionElement<ELASTICITY\_ELEMENT>*\ el\_pt=}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ TimeHarmonicLinearElasticityTractionElement<ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\ \ \ \ \ \ (bulk\_elem\_pt,face\_index);\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ to\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Traction\_mesh\_pt-\/>add\_element\_pt(el\_pt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Associate\ element\ with\ bulk\ boundary\ (to\ allow\ it\ to\ access}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ the\ boundary\ coordinates\ in\ the\ bulk\ mesh)}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>set\_boundary\_number\_in\_bulk\_mesh(b);\ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a8363ab9f8687e9f7802f801f6dcab6e6}{Global\_Parameters::constant\_pressure}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_create\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+As expected, this member function documents the computed solution.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_plot=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ displacement\ field}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/elast\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ traction\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/traction\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Traction\_mesh\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output\_fct(some\_file,n\_plot,\mbox{\hyperlink{namespaceGlobal__Parameters_a97162dba4bd29a15067b9c9bbe53c754}{Global\_Parameters::exact\_u}});\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_conclusion}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_conclusion}
+\hypertarget{index_comments}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_comments}
+
+\begin{DoxyItemize}
+\item We did not discuss the mesh generation in detail here\+: The mesh is created by straightforward overloading of {\ttfamily oomph-\/lib\textquotesingle{}s} existing rectangular quad mesh -- the constructor simply adjusts the nodal positions (exactly as suggested in the \href{../../../quick_guide/html/index.html\#distorted_mesh}{\texttt{ "{}\+Not-\/so-\/quick"{} guide}}.) A little bit of extra work is required to enforce periodicity on the mesh for the case without a gap in the annular region because two of the boundaries in the original mesh then overlap. How this is dealt with is discussed in \href{../../../navier_stokes/rayleigh_channel/html/index.html\#periodic}{\texttt{ another tutorial.}} ~\newline
+~\newline
+
+\item If you inspect the \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc}{\texttt{ driver code}} you will notice that it also contains relevant code to perform spatially adaptive simulations of the problem -- the adaptive version of the code is selected with {\ttfamily \#ifdefs}. Dealing with the periodic boundary conditions for spatially adaptive meshes requires a few additional steps, but they are also discussed \href{../../../linear_elasticity/refineable_periodic_load/html/index.html\#constructor}{\texttt{ elsewhere,}} so we won\textquotesingle{}t discuss them here.
+\end{DoxyItemize}\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyItemize}
+\item Change the parameter study performed by the driver code such that the loop varies the frequency parameter $ \Omega^2 $. Assess the effect of an increase in $ \Omega^2 $ on the accuracy of the solution by comparing the computed results against the exact solution at fixed spatial resolution. ~\newline
+~\newline
+
+\item Explore the use of spatial adaptivity in the problem ~\newline
+~\newline
+
+\begin{DoxyItemize}
+\item for the same parameter study suggested in the previous exercise (increase in $ \Omega^2 $ )
+\end{DoxyItemize}and
+\begin{DoxyItemize}
+\item for the problem with the "{}gap"{} in the annular region.
+\end{DoxyItemize}~\newline
+~\newline
+
+\item Modify the code to exploit at least some of the problem\textquotesingle{}s symmetry, e.\+g. by solving the problem for the continuous annulus in a quarter of the original domain, $ x_1, x_2 \ge 0 $, say, using appropriate symmetry boundary conditions along the coordinate axes.
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc}{\texttt{ demo\+\_\+drivers/time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/elastic\+\_\+annulus/time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,301 @@
+\doxysection{oomph\+::Map\+Matrix\texorpdfstring{$<$}{<} KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MapMatrix}{}\label{classoomph_1_1MapMatrix}\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+
+
+\doxylink{classoomph_1_1MapMatrix}{Map\+Matrix} is a generalised, STL-\/map-\/based, sparse(-\/ish) matrix class.  
+
+
+
+
+{\ttfamily \#include $<$map\+\_\+matrix.\+h$>$}
+
+Inheritance diagram for oomph\+::Map\+Matrix\texorpdfstring{$<$}{<} KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MapMatrix}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \mbox{\hyperlink{classoomph_1_1MapMatrix_ae979d651e6b4b3d97dea33292418ebaa}{Inner\+Map}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}{Inner\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}{Const\+Inner\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MapMatrix_a02c51d583eeb0e5bc325c1c8be4043da}{Outer\+Map}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}{Outer\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}{Const\+Outer\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE, KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a58406e7750878e6eebecd73c1266268a}{Inner\+Map\+Mixed}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+Mixed\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a88516855a59e81851521a52d5355e9c9}{Inner\+Mixed\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+Mixed\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a0599160ea5bf25e9666f6825af3ed480}{Const\+Inner\+Mixed\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_af5c496215f2a807e5a130a684d1811df}{Outer\+Map\+Mixed}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+Mixed\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ae9b361be3e0ce68e8f6618b95cbad231}{Outer\+Mixed\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+Mixed\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_aae407586fb40aaf48fd20a0678adb591}{Const\+Outer\+Mixed\+It}}
+\begin{DoxyCompactList}\small\item\em Typedef to keep the code more readable const version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c}{Map\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default (empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231}{Map\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{map\+\_\+mat}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrix_ad219187f3d797e4c166bd9c9e67b929d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE, KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a51d284e72805320fe36239f5d33e2973}{Map\+Matrix\+Mixed}} ()
+\begin{DoxyCompactList}\small\item\em Default (empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ae510212b296340607ddce4083b3ed36a}{Map\+Matrix\+Mixed}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{Map\+Matrix\+Mixed}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{map\+\_\+mat}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a0a7dca8c9abdbf2933f31e95f588faf6}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{Map\+Matrix\+Mixed}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a2cd31cfd9771420625c92fc2a3a53210}{copy\+\_\+column}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{copied\+\_\+map}})
+\begin{DoxyCompactList}\small\item\em Copy a single column into its own map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a7cf0f3eb68c457db64d4bd8213594618}{\texorpdfstring{$\sim$}{\string~}\+Map\+Matrix\+Mixed}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ab061e2b557441b3b2a9fee98fe105af2}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Wipe all entries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \& \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a00484c1f232697e008b77ef57239e137}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Return (reference to) entry. Careful\+: If the entry does not exist then it is created and set to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_aee00d676e6d7833a9b2399bf919bb58a}{get}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get an element corresponding to the key (i,j) Searches the container for an element with a key equivalent to (i,j) and returns the element if found, otherwise the default 0 value for the value type is returned. The container is not modified. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_aa250e1584c330b589b2153dd5e170d31}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}})
+\begin{DoxyCompactList}\small\item\em Dump all non-\/`zero' entries to file. Output is in the format `i', `j', `entry\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}'. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a24bcb7415eaecc66e0649122ba748e5c}{nnz}} ()
+\begin{DoxyCompactList}\small\item\em Work out number of non-\/`zero' entries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a578320f7979e3f69578e8fb8a42c3ee6}{nnz}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Work out number of non-\/`zero' entries, const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_af26d8be251e0d02354d242f84622c1ff}{size}} ()
+\begin{DoxyCompactList}\small\item\em Work out total number of entries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ae3f2f66dd90a57957c732a9ef1dd5197}{size}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Work out total number of entries const version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE, KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_a1fe030cd6f8c6b1a66ca2289af74b57f}{entry\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Return pointer to entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1MapMatrixMixed}{oomph\+::\+Map\+Matrix\+Mixed$<$ KEY\+\_\+\+TYPE, KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MapMatrixMixed_ac47a4fa20db4474d62742d3f7e318b98}{Row\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Here\textquotesingle{}s the generalised matrix structure\+: A map of pointers to the maps that hold the entries in each row. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}$>$\newline
+class oomph\+::\+Map\+Matrix$<$ KEY\+\_\+\+TYPE, VALUE\+\_\+\+TYPE $>$}
+\doxylink{classoomph_1_1MapMatrix}{Map\+Matrix} is a generalised, STL-\/map-\/based, sparse(-\/ish) matrix class. 
+
+The matrix is indexed by indices of type KEY\+\_\+\+TYPE and has entries of type VALUE\+\_\+\+TYPE. It is a specialisation of the class \doxylink{classoomph_1_1MapMatrixMixed}{Map\+Matrix\+Mixed}. Please implement future functions in that class.
+
+Careful\+: If a zero entry is referenced then it is created in memory. Therefore this isn\textquotesingle{}t really a practical sparse matrix scheme. Do not loop over `all' possible indices as even looking at them will inflate the matrix until it occupies as much space as a full one -- use (modification of) output routine to retrieve all nonzero entries.
+
+However, this is not a serious restriction, as the main purpose of this class is to allow non-\/integer indices.
+
+Example of usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assume\ we\ have\ a\ Vector\ of\ pointers\ to\ objects:}}
+\DoxyCodeLine{\ Vector<Rubbish*>\ object\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ objects}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{int}\ nentry=object\_pt.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ pointers\ to\ the\ objects\ as\ indices}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ in\ a\ MapMatrix\ whose\ entries\ are\ of\ type\ int}}
+\DoxyCodeLine{\ MapMatrix<Rubbish*,int>\ like\_a\_matrix;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}=1;\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}<nentry;\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j=1;j<nentry;j++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ number=100*\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}+j;}
+\DoxyCodeLine{\ \ \ \ \ like\_a\_matrix(object\_pt[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}],object\_pt[j])=number;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Matrix\ has\ nnz()\ "{}}\ <<\ like\_a\_matrix.nnz()\ <<}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ and\ size()\ "{}}\ <<\ like\_a\_matrix.size()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n\ Here\ are\ the\ nonzero\ entries:\ i,\ j,\ a(i,j)\(\backslash\)n"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ like\_a\_matrix.output(\mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Can\ be\ used\ like\ a\ normal\ matrix:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Add\ to\ existing\ entry}}
+\DoxyCodeLine{\ like\_a\_matrix(object\_pt[1],object\_pt[2])+=13;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ to\ non-\/existing\ entry}}
+\DoxyCodeLine{\ Rubbish*\ temp\_pt=\textcolor{keyword}{new}\ Rubbish(20);}
+\DoxyCodeLine{\ like\_a\_matrix(object\_pt[1],temp\_pt)+=13;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n\ Here\ are\ the\ nonzero\ entries:\ i,\ j,\ a(i,j)\(\backslash\)n"{}};}
+\DoxyCodeLine{like\_a\_matrix.output(\mbox{\hyperlink{namespaceoomph_aec474227917784dc0a255faf289cfc16}{oomph\_info}});}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00507}{507}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9}\label{classoomph_1_1MapMatrix_ac3738b797386c7ad5dbe170d3558ace9} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!ConstInnerIt@{ConstInnerIt}}
+\index{ConstInnerIt@{ConstInnerIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ConstInnerIt}{ConstInnerIt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Const\+Inner\+It}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00520}{520}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3}\label{classoomph_1_1MapMatrix_a795543d1b91f719b845b7588f7644eb3} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!ConstOuterIt@{ConstOuterIt}}
+\index{ConstOuterIt@{ConstOuterIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ConstOuterIt}{ConstOuterIt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+::const\+\_\+iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Const\+Outer\+It}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00529}{529}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608}\label{classoomph_1_1MapMatrix_a23ece77bd36f3cdecf83c5ef7d490608} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!InnerIt@{InnerIt}}
+\index{InnerIt@{InnerIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{InnerIt}{InnerIt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Inner\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Inner\+It}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00517}{517}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_ae979d651e6b4b3d97dea33292418ebaa}\label{classoomph_1_1MapMatrix_ae979d651e6b4b3d97dea33292418ebaa} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!InnerMap@{InnerMap}}
+\index{InnerMap@{InnerMap}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{InnerMap}{InnerMap}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}$>$ \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Inner\+Map}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00514}{514}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216}\label{classoomph_1_1MapMatrix_a96c70b7ef6e89440c40648a6be9e4216} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!OuterIt@{OuterIt}}
+\index{OuterIt@{OuterIt}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{OuterIt}{OuterIt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Outer\+Map\+::iterator \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Outer\+It}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00526}{526}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_a02c51d583eeb0e5bc325c1c8be4043da}\label{classoomph_1_1MapMatrix_a02c51d583eeb0e5bc325c1c8be4043da} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!OuterMap@{OuterMap}}
+\index{OuterMap@{OuterMap}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{OuterMap}{OuterMap}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}}$>$\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Outer\+Map}
+
+
+
+Typedef to keep the code more readable. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00523}{523}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c}\label{classoomph_1_1MapMatrix_a52ace9b2ef78f96cebbe3b6e2173a87c} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!MapMatrix@{MapMatrix}}
+\index{MapMatrix@{MapMatrix}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{MapMatrix()}{MapMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Map\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (empty) constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00511}{511}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+\Hypertarget{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231}\label{classoomph_1_1MapMatrix_ac58797d44964ccff957077b74076c231} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!MapMatrix@{MapMatrix}}
+\index{MapMatrix@{MapMatrix}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{MapMatrix()}{MapMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::\+Map\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \&}]{map\+\_\+mat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{map__matrix_8h_source_l00532}{532}} of file \mbox{\hyperlink{map__matrix_8h_source}{map\+\_\+matrix.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MapMatrix_ad219187f3d797e4c166bd9c9e67b929d}\label{classoomph_1_1MapMatrix_ad219187f3d797e4c166bd9c9e67b929d} 
+\index{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$@{oomph::MapMatrix$<$ KEY\_TYPE, VALUE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MapMatrix}{oomph\+::\+Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{KEY\+\_\+\+TYPE}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{VALUE\+\_\+\+TYPE}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{map__matrix_8h}{map\+\_\+matrix.\+h}}\end{DoxyCompactItemize}

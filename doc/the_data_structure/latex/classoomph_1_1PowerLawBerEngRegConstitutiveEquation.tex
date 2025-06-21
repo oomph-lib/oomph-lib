@@ -1,0 +1,135 @@
+\doxysection{oomph\+::Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}{}\label{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}\index{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}}
+
+
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a power-\/law fluid regularised according to Bercovier and Engelman (1980) to allow for n \texorpdfstring{$<$}{<} 1.  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af60b42c2f688e029aaaf7011aefda323}{Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{power\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reg\+\_\+par\+\_\+pt}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_a9f98f9120f7fe2aa6813098a946459de}{viscosity}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a4b84eb3626aaed2f77f6dc96258f7e01}{Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_af85f107604d04e8fdaf03e8274c485e6}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{dviscosity\+\_\+dinvariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})=0
+\begin{DoxyCompactList}\small\item\em Function returning the derivative of the viscosity w.\+r.\+t. the second invariant of the rate of strain tensor For Newtonian behaviour this returns 0.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_ac69a79185f6ca3b4e467a5fd2489914f}{Power\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em power law index n \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af8832a1d0907a61e327f4335e28b95dd}{Regularisation\+\_\+parameter\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em regularisation parameter e \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ DIM $>$}
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a power-\/law fluid regularised according to Bercovier and Engelman (1980) to allow for n \texorpdfstring{$<$}{<} 1. 
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00105}{105}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af60b42c2f688e029aaaf7011aefda323}\label{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af60b42c2f688e029aaaf7011aefda323} 
+\index{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}!PowerLawBerEngRegConstitutiveEquation@{PowerLawBerEngRegConstitutiveEquation}}
+\index{PowerLawBerEngRegConstitutiveEquation@{PowerLawBerEngRegConstitutiveEquation}!oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{PowerLawBerEngRegConstitutiveEquation()}{PowerLawBerEngRegConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{power\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{reg\+\_\+par\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00117}{117}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_a9f98f9120f7fe2aa6813098a946459de}\label{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_a9f98f9120f7fe2aa6813098a946459de} 
+\index{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::viscosity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function implementing the constitutive model Input\+: second invariant of the rate of strain Output\+: the viscosity For Newtonian behaviour this returns 1. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00124}{124}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00110}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ DIM $>$\+::\+Power\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00113}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ DIM $>$\+::\+Regularisation\+\_\+parameter\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_ac69a79185f6ca3b4e467a5fd2489914f}\label{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_ac69a79185f6ca3b4e467a5fd2489914f} 
+\index{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}!Power\_pt@{Power\_pt}}
+\index{Power\_pt@{Power\_pt}!oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Power\_pt}{Power\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Power\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+power law index n 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00110}{110}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00124}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af8832a1d0907a61e327f4335e28b95dd}\label{classoomph_1_1PowerLawBerEngRegConstitutiveEquation_af8832a1d0907a61e327f4335e28b95dd} 
+\index{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}!Regularisation\_parameter\_pt@{Regularisation\_parameter\_pt}}
+\index{Regularisation\_parameter\_pt@{Regularisation\_parameter\_pt}!oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$@{oomph::PowerLawBerEngRegConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Regularisation\_parameter\_pt}{Regularisation\_parameter\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PowerLawBerEngRegConstitutiveEquation}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Regularisation\+\_\+parameter\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+regularisation parameter e \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00113}{113}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00124}{oomph\+::\+Power\+Law\+Ber\+Eng\+Reg\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,490 @@
+\doxysection{PMLFourier\+Decomposed\+Helmholtz\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classPMLFourierDecomposedHelmholtzProblem}{}\label{classPMLFourierDecomposedHelmholtzProblem}\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+
+
+Problem class.  
+
+
+Inheritance diagram for PMLFourier\+Decomposed\+Helmholtz\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPMLFourierDecomposedHelmholtzProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a5764db8312a28a3e1eaac2cc61813f83}{PMLFourier\+Decomposed\+Helmholtz\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_abc35779657bcdd622d09464c225b079a}{\texorpdfstring{$\sim$}{\string~}\+PMLFourier\+Decomposed\+Helmholtz\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_af87810cbe164981cc14ee779793a69fb}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a013d95d489b85e326a71bb744af4a40f}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afcdfaf86efc75fbea14f6ade9eeb7f9c}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ae562dddf5c60793371b594bff5047f91}{create\+\_\+pml\+\_\+meshes}} ()
+\begin{DoxyCompactList}\small\item\em Create PML meshes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a83e0aa333ec3b25f1afccc3bc0a529ad}{create\+\_\+power\+\_\+monitor\+\_\+mesh}} ()
+\begin{DoxyCompactList}\small\item\em Create mesh of face elements that monitor the radiated power. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ae4b1cacec10553bdb6781b65ed73abce}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ad19bce2b8cb30bdeffd656fdc4014c0c}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_aca49343d9672607fdc3ab5f6ed4e9d24}{complete\+\_\+problem\+\_\+setup}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_afd6e3401bdbd1d3deb3271553fbe1d3a}{create\+\_\+flux\+\_\+elements\+\_\+on\+\_\+inner\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Create flux elements on inner boundary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a4a9b767ba4beb7ab5db9c98fc46c49b2}{delete\+\_\+face\+\_\+elements}} (Mesh \texorpdfstring{$\ast$}{*}const \&boundary\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Delete boundary face elements and wipe the surface mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ad7680c25a32087cb6da96d4bcedf1b23}{apply\+\_\+zero\+\_\+dirichlet\+\_\+boundary\+\_\+conditions}} ()
+\item 
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a7d416452acc602776de2072a7c0e1249}{setup\+\_\+point\+\_\+source}} ()
+\begin{DoxyCompactList}\small\item\em Set point source. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a9ffebfa69944e405eb28a4b2bd03336e}{Power\+\_\+monitor\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh that stores the power monitor elements. \end{DoxyCompactList}\item 
+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ad20477e869fb9ce66891389c0d501449}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the refineable "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh\+As\+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a32f6694310ffd9c0962a7ee8c114dbf5}{Mesh\+\_\+as\+\_\+geom\+\_\+obj\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh as geometric object representation of bulk mesh. \end{DoxyCompactList}\item 
+Triangle\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a583fb8d30b3a225fe77f684532efd66f}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a7d3c418942daf7ba2363b8a91172512e}{Helmholtz\+\_\+inner\+\_\+boundary\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh of Face\+Elements that apply the flux bc on the inner boundary. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a2bde26fe496f63d29e48e9b5dffc8757}{PML\+\_\+right\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the right PML mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a4fe4cd439faae2086ab1ed786cbc610a}{PML\+\_\+top\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the top PML mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_ad7611d07d182b33a5e2f848bc4ff5572}{PML\+\_\+bottom\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the bottom PML mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_af0787c8610bbae59be3d061e57072c11}{PML\+\_\+top\+\_\+right\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the top right corner PML mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a8c3d30400cb9e4a709e1f8f8ee66785a}{PML\+\_\+bottom\+\_\+right\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the bottom right corner PML mesh. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem_a9810d1dd58cec1f8b1cfc54ea37a7efd}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class PMLFourier\+Decomposed\+Helmholtz\+Problem$<$ ELEMENT $>$}
+Problem class. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00429}{429}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a5764db8312a28a3e1eaac2cc61813f83}\label{classPMLFourierDecomposedHelmholtzProblem_a5764db8312a28a3e1eaac2cc61813f83} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PMLFourierDecomposedHelmholtzProblem@{PMLFourierDecomposedHelmholtzProblem}}
+\index{PMLFourierDecomposedHelmholtzProblem@{PMLFourierDecomposedHelmholtzProblem}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PMLFourierDecomposedHelmholtzProblem()}{PMLFourierDecomposedHelmholtzProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{\+::\+PMLFourier\+Decomposed\+Helmholtz\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for Pml Fourier-\/decomposed Helmholtz problem. Setup "{}bulk"{} mesh
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00789}{789}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00059}{Problem\+Parameters\+::\+Directory}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00071}{Problem\+Parameters\+::\+Element\+\_\+area}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{Problem\+Parameters\+::\+K\+\_\+squared}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_abc35779657bcdd622d09464c225b079a}\label{classPMLFourierDecomposedHelmholtzProblem_abc35779657bcdd622d09464c225b079a} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!````~PMLFourierDecomposedHelmholtzProblem@{\texorpdfstring{$\sim$}{\string~}PMLFourierDecomposedHelmholtzProblem}}
+\index{````~PMLFourierDecomposedHelmholtzProblem@{\texorpdfstring{$\sim$}{\string~}PMLFourierDecomposedHelmholtzProblem}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PMLFourierDecomposedHelmholtzProblem()}{\string~PMLFourierDecomposedHelmholtzProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00438}{438}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ad19bce2b8cb30bdeffd656fdc4014c0c}\label{classPMLFourierDecomposedHelmholtzProblem_ad19bce2b8cb30bdeffd656fdc4014c0c} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions after adapt\+: Rebuild the mesh of prescribed flux elements. 
+
+Actions after adapt\+: Rebuild the face element meshes. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00618}{618}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a013d95d489b85e326a71bb744af4a40f}\label{classPMLFourierDecomposedHelmholtzProblem_a013d95d489b85e326a71bb744af4a40f} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00444}{444}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ae4b1cacec10553bdb6781b65ed73abce}\label{classPMLFourierDecomposedHelmholtzProblem_ae4b1cacec10553bdb6781b65ed73abce} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions before adapt\+: Wipe the mesh of prescribed flux elements. 
+
+Actions before adapt\+: Wipe the mesh of face elements. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00580}{580}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_af87810cbe164981cc14ee779793a69fb}\label{classPMLFourierDecomposedHelmholtzProblem_af87810cbe164981cc14ee779793a69fb} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00441}{441}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ad7680c25a32087cb6da96d4bcedf1b23}\label{classPMLFourierDecomposedHelmholtzProblem_ad7680c25a32087cb6da96d4bcedf1b23} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!apply\_zero\_dirichlet\_boundary\_conditions@{apply\_zero\_dirichlet\_boundary\_conditions}}
+\index{apply\_zero\_dirichlet\_boundary\_conditions@{apply\_zero\_dirichlet\_boundary\_conditions}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_zero\_dirichlet\_boundary\_conditions()}{apply\_zero\_dirichlet\_boundary\_conditions()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::apply\+\_\+zero\+\_\+dirichlet\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00731}{731}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_aca49343d9672607fdc3ab5f6ed4e9d24}\label{classPMLFourierDecomposedHelmholtzProblem_aca49343d9672607fdc3ab5f6ed4e9d24} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!complete\_problem\_setup@{complete\_problem\_setup}}
+\index{complete\_problem\_setup@{complete\_problem\_setup}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_problem\_setup()}{complete\_problem\_setup()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00648}{648}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00062}{Problem\+Parameters\+::\+K\+\_\+squared}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{Problem\+Parameters\+::\+N\+\_\+fourier}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_afd6e3401bdbd1d3deb3271553fbe1d3a}\label{classPMLFourierDecomposedHelmholtzProblem_afd6e3401bdbd1d3deb3271553fbe1d3a} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!create\_flux\_elements\_on\_inner\_boundary@{create\_flux\_elements\_on\_inner\_boundary}}
+\index{create\_flux\_elements\_on\_inner\_boundary@{create\_flux\_elements\_on\_inner\_boundary}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_flux\_elements\_on\_inner\_boundary()}{create\_flux\_elements\_on\_inner\_boundary()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements\+\_\+on\+\_\+inner\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create flux elements on inner boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l01071}{1071}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00147}{Problem\+Parameters\+::exact\+\_\+minus\+\_\+dudr()}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ae562dddf5c60793371b594bff5047f91}\label{classPMLFourierDecomposedHelmholtzProblem_ae562dddf5c60793371b594bff5047f91} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!create\_pml\_meshes@{create\_pml\_meshes}}
+\index{create\_pml\_meshes@{create\_pml\_meshes}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_pml\_meshes()}{create\_pml\_meshes()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+pml\+\_\+meshes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create PML meshes. 
+
+Create PML meshes and add them to the problem\textquotesingle{}s sub-\/meshes. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l01110}{1110}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00068}{Problem\+Parameters\+::\+Nel\+\_\+pml}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00065}{Problem\+Parameters\+::\+PML\+\_\+thickness}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a83e0aa333ec3b25f1afccc3bc0a529ad}\label{classPMLFourierDecomposedHelmholtzProblem_a83e0aa333ec3b25f1afccc3bc0a529ad} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!create\_power\_monitor\_mesh@{create\_power\_monitor\_mesh}}
+\index{create\_power\_monitor\_mesh@{create\_power\_monitor\_mesh}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_power\_monitor\_mesh()}{create\_power\_monitor\_mesh()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+power\+\_\+monitor\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Create mesh of face elements that monitor the radiated power. 
+
+Create BC elements on outer boundary. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00543}{543}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a4a9b767ba4beb7ab5db9c98fc46c49b2}\label{classPMLFourierDecomposedHelmholtzProblem_a4a9b767ba4beb7ab5db9c98fc46c49b2} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!delete\_face\_elements@{delete\_face\_elements}}
+\index{delete\_face\_elements@{delete\_face\_elements}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_face\_elements()}{delete\_face\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+face\+\_\+elements (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{boundary\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Delete boundary face elements and wipe the surface mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00476}{476}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_afcdfaf86efc75fbea14f6ade9eeb7f9c}\label{classPMLFourierDecomposedHelmholtzProblem_afcdfaf86efc75fbea14f6ade9eeb7f9c} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. 
+
+Doc the solution\+: doc\+\_\+info contains labels/output directory etc. 
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00974}{974}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oscillating__sphere_8cc_source_l00086}{Problem\+Parameters\+::get\+\_\+exact\+\_\+u()}}.
+
+
+
+Referenced by \mbox{\hyperlink{oscillating__sphere_8cc_source_l01184}{main()}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a7d416452acc602776de2072a7c0e1249}\label{classPMLFourierDecomposedHelmholtzProblem_a7d416452acc602776de2072a7c0e1249} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!setup\_point\_source@{setup\_point\_source}}
+\index{setup\_point\_source@{setup\_point\_source}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_point\_source()}{setup\_point\_source()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::setup\+\_\+point\+\_\+source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set point source. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00689}{689}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+References \mbox{\hyperlink{namespaceProblemParameters_a95ca6575d3ac2ec3d2efd3132ff2b5c4}{Problem\+Parameters\+::\+Magnitude()}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00074}{Problem\+Parameters\+::\+N\+\_\+fourier}}, \mbox{\hyperlink{oscillating__sphere_8cc_source_l00206}{Problem\+Parameters\+::\+R\+\_\+source}}, and \mbox{\hyperlink{oscillating__sphere_8cc_source_l00209}{Problem\+Parameters\+::\+Z\+\_\+source}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ad20477e869fb9ce66891389c0d501449}\label{classPMLFourierDecomposedHelmholtzProblem_ad20477e869fb9ce66891389c0d501449} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Triangle\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the refineable "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00503}{503}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a583fb8d30b3a225fe77f684532efd66f}\label{classPMLFourierDecomposedHelmholtzProblem_a583fb8d30b3a225fe77f684532efd66f} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Triangle\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00511}{511}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a7d3c418942daf7ba2363b8a91172512e}\label{classPMLFourierDecomposedHelmholtzProblem_a7d3c418942daf7ba2363b8a91172512e} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Helmholtz\_inner\_boundary\_mesh\_pt@{Helmholtz\_inner\_boundary\_mesh\_pt}}
+\index{Helmholtz\_inner\_boundary\_mesh\_pt@{Helmholtz\_inner\_boundary\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Helmholtz\_inner\_boundary\_mesh\_pt}{Helmholtz\_inner\_boundary\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Helmholtz\+\_\+inner\+\_\+boundary\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mesh of Face\+Elements that apply the flux bc on the inner boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00516}{516}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a32f6694310ffd9c0962a7ee8c114dbf5}\label{classPMLFourierDecomposedHelmholtzProblem_a32f6694310ffd9c0962a7ee8c114dbf5} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Mesh\_as\_geom\_obj\_pt@{Mesh\_as\_geom\_obj\_pt}}
+\index{Mesh\_as\_geom\_obj\_pt@{Mesh\_as\_geom\_obj\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Mesh\_as\_geom\_obj\_pt}{Mesh\_as\_geom\_obj\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\+As\+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Mesh\+\_\+as\+\_\+geom\+\_\+obj\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mesh as geometric object representation of bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00506}{506}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_ad7611d07d182b33a5e2f848bc4ff5572}\label{classPMLFourierDecomposedHelmholtzProblem_ad7611d07d182b33a5e2f848bc4ff5572} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PML\_bottom\_mesh\_pt@{PML\_bottom\_mesh\_pt}}
+\index{PML\_bottom\_mesh\_pt@{PML\_bottom\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PML\_bottom\_mesh\_pt}{PML\_bottom\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+PML\+\_\+bottom\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the bottom PML mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00525}{525}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a8c3d30400cb9e4a709e1f8f8ee66785a}\label{classPMLFourierDecomposedHelmholtzProblem_a8c3d30400cb9e4a709e1f8f8ee66785a} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PML\_bottom\_right\_mesh\_pt@{PML\_bottom\_right\_mesh\_pt}}
+\index{PML\_bottom\_right\_mesh\_pt@{PML\_bottom\_right\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PML\_bottom\_right\_mesh\_pt}{PML\_bottom\_right\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+PML\+\_\+bottom\+\_\+right\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the bottom right corner PML mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00531}{531}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a2bde26fe496f63d29e48e9b5dffc8757}\label{classPMLFourierDecomposedHelmholtzProblem_a2bde26fe496f63d29e48e9b5dffc8757} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PML\_right\_mesh\_pt@{PML\_right\_mesh\_pt}}
+\index{PML\_right\_mesh\_pt@{PML\_right\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PML\_right\_mesh\_pt}{PML\_right\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+PML\+\_\+right\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the right PML mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00519}{519}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a4fe4cd439faae2086ab1ed786cbc610a}\label{classPMLFourierDecomposedHelmholtzProblem_a4fe4cd439faae2086ab1ed786cbc610a} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PML\_top\_mesh\_pt@{PML\_top\_mesh\_pt}}
+\index{PML\_top\_mesh\_pt@{PML\_top\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PML\_top\_mesh\_pt}{PML\_top\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+PML\+\_\+top\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the top PML mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00522}{522}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_af0787c8610bbae59be3d061e57072c11}\label{classPMLFourierDecomposedHelmholtzProblem_af0787c8610bbae59be3d061e57072c11} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!PML\_top\_right\_mesh\_pt@{PML\_top\_right\_mesh\_pt}}
+\index{PML\_top\_right\_mesh\_pt@{PML\_top\_right\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PML\_top\_right\_mesh\_pt}{PML\_top\_right\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+PML\+\_\+top\+\_\+right\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the top right corner PML mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00528}{528}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a9ffebfa69944e405eb28a4b2bd03336e}\label{classPMLFourierDecomposedHelmholtzProblem_a9ffebfa69944e405eb28a4b2bd03336e} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Power\_monitor\_mesh\_pt@{Power\_monitor\_mesh\_pt}}
+\index{Power\_monitor\_mesh\_pt@{Power\_monitor\_mesh\_pt}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Power\_monitor\_mesh\_pt}{Power\_monitor\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Power\+\_\+monitor\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh that stores the power monitor elements. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00494}{494}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+\Hypertarget{classPMLFourierDecomposedHelmholtzProblem_a9810d1dd58cec1f8b1cfc54ea37a7efd}\label{classPMLFourierDecomposedHelmholtzProblem_a9810d1dd58cec1f8b1cfc54ea37a7efd} 
+\index{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$@{PMLFourierDecomposedHelmholtzProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classPMLFourierDecomposedHelmholtzProblem}{PMLFourier\+Decomposed\+Helmholtz\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{oscillating__sphere_8cc_source_l00534}{534}} of file \mbox{\hyperlink{oscillating__sphere_8cc_source}{oscillating\+\_\+sphere.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oscillating__sphere_8cc}{oscillating\+\_\+sphere.\+cc}}\end{DoxyCompactItemize}

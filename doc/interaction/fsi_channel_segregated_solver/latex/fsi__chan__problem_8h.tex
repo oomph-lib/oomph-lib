@@ -1,0 +1,68 @@
+\doxysection{fsi\+\_\+chan\+\_\+problem.\+h File Reference}
+\hypertarget{fsi__chan__problem_8h}{}\label{fsi__chan__problem_8h}\index{fsi\_chan\_problem.h@{fsi\_chan\_problem.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classUndeformedWall}{Undeformed\+Wall}}
+\begin{DoxyCompactList}\small\item\em Undeformed wall is a steady, straight 1D line in 2D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceBL__Squash}{BL\+\_\+\+Squash}}
+\begin{DoxyCompactList}\small\item\em Namespace to define the mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceFlags}{Flags}}
+\begin{DoxyCompactList}\small\item\em Extend namespace for control flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{Global\+\_\+\+Physical\+\_\+\+Variables\+::load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{BL\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
+\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceFlags_aa7e90522c3f7fbac06fa93f61d88bbd8}{Flags\+::doc\+\_\+flags}} ()
+\begin{DoxyCompactList}\small\item\em Doc flags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} =250.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}} =250.\+0
+\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}} =1.\+0e-\/2
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional wall thickness. As in Heil (2004) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0}} =1.\+0e3
+\begin{DoxyCompactList}\small\item\em 2nd Piola Kirchhoff pre-\/stress. As in Heil (2004) paper. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Data object that stores external pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae6b6b04387b165c0da5160865170c0e7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmin}} =1.\+5
+\begin{DoxyCompactList}\small\item\em Min. pressure. Only used in steady runs during parameter incrementation. Use 1.\+5 for values of Re to span the range in Heil (2004) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3e094a3c45284edb77a880f49c93f94b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax}} =2.\+0
+\begin{DoxyCompactList}\small\item\em Max. pressure. Only used in steady runs during parameter incrementation. Use 2.\+0 for Re=250; 3.\+7 for Re=0 to span the range in Heil (2004) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa1a76edebe4c23344938421cd68f0a8b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+step}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Jump in pressure after a restart -- used to give a steady solution a kick before starting a time-\/dependent run. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afd29cc714595594020831c7c54387883}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Current prescribed vertical position of control point (only used for displacement control) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad6b457166fefe63a8341e9d0faefe892}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr\+\_\+min}} =0.\+6
+\begin{DoxyCompactList}\small\item\em Min. of prescribed vertical position of conrol point (only used during parameter study with displacement control). 0.\+6 corresponds to the value in Heil (2004) paper for static runs. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}} =1.\+0e-\/2
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. As in Heil (2004) paper. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceBL__Squash_a3c4183891049bca81f3a011db24fc579}{BL\+\_\+\+Squash\+::\+Delta}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Boundary layer width. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceBL__Squash_af84bda39008884cd2b01e630957573df}{BL\+\_\+\+Squash\+::\+Fract\+\_\+in\+\_\+\+BL}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Fraction of points in boundary layer. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_a7c2437aa0b6a4f27df951f1cbcef7337}{Flags\+::\+Resolution\+\_\+factor}} =1
+\begin{DoxyCompactList}\small\item\em Resolution factor (multiplier for number of elements across channel) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_adf4a2f4076156f633f45155a2d9f67a0}{Flags\+::\+Use\+\_\+displ\+\_\+control}} =1
+\begin{DoxyCompactList}\small\item\em Use displacement control (1) or not (0) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_a94cadbe3202fa6f29b6aa5e7b491a9ae}{Flags\+::\+Steady\+\_\+flag}} =1
+\begin{DoxyCompactList}\small\item\em Steady run (1) or unsteady run (0) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceFlags_a8a6ffdb261330ef89965624209ab7b00}{Flags\+::\+Nsteps}} =5
+\begin{DoxyCompactList}\small\item\em Number of steps in parameter study. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{namespaceFlags_a4401f7e5174d2dc44ec0e7a0d94869af}{Flags\+::\+Run\+\_\+identifier\+\_\+string}} ="{}"{}
+\begin{DoxyCompactList}\small\item\em String to identify the run type in trace file. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{namespaceFlags_a3657ad4e287c8756f096b2abe1277cf3}{Flags\+::\+Restart\+\_\+file\+\_\+name}} ="{}"{}
+\begin{DoxyCompactList}\small\item\em Name of restart file. \end{DoxyCompactList}\end{DoxyCompactItemize}

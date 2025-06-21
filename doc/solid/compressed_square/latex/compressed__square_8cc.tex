@@ -1,0 +1,59 @@
+\doxysection{compressed\+\_\+square.\+cc File Reference}
+\hypertarget{compressed__square_8cc}{}\label{compressed__square_8cc}\index{compressed\_square.cc@{compressed\_square.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MySolidElement}{oomph\+::\+My\+Solid\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Wrapper class for solid element to modify the output. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classCompressedSquareProblem}{Compressed\+Square\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{compressed__square_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver for compressed square. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+45
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio for Hooke\textquotesingle{}s law. \end{DoxyCompactList}\item 
+Strain\+Energy\+Function \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em First "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}} =1.\+3
+\begin{DoxyCompactList}\small\item\em Second "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{compressed__square_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{compressed__square_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{compressed\_square.cc@{compressed\_square.cc}!main@{main}}
+\index{main@{main}!compressed\_square.cc@{compressed\_square.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver for compressed square. 
+
+
+
+Definition at line \mbox{\hyperlink{compressed__square_8cc_source_l00421}{421}} of file \mbox{\hyperlink{compressed__square_8cc_source}{compressed\+\_\+square.\+cc}}.
+
+
+
+References \mbox{\hyperlink{compressed__square_8cc_source_l00123}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{compressed__square_8cc_source_l00126}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}}, \mbox{\hyperlink{compressed__square_8cc_source_l00114}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{compressed__square_8cc_source_l00117}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{compressed__square_8cc_source_l00379}{Compressed\+Square\+Problem$<$ ELEMENT $>$\+::run\+\_\+it()}}, and \mbox{\hyperlink{compressed__square_8cc_source_l00120}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

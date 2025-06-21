@@ -1,0 +1,734 @@
+\chapter{Demo problem\+: Flow past a cylinder with a waving flag}
+\hypertarget{index}{}\label{index}\index{Demo problem: Flow past a cylinder with a waving flag@{Demo problem: Flow past a cylinder with a waving flag}}
+In this example we consider the flow in a 2D channel that contains a cylinder with a waving "{}flag"{}. This is a "{}warm-\/up problem"{} for the solution of Turek \& Hron\textquotesingle{}s FSI benchmark problem discussed in \href{../../../interaction/turek_flag/html/index.html}{\texttt{ another tutorial.}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_the_problem}{}\doxysection{\texorpdfstring{The Problem}{The Problem}}\label{index_the_problem}
+The figure below shows a sketch of the problem\+: A 2D channel of height $ H^*$ and length $ L^* $ contains a cylinder of diameter $ d^* $, centred at $ (X^*_c, Y^*_c) $ to which a "{}flag"{} of thickness $ H^*_{flag}$ and length $ L^*_{flag} $ is attached. We assume that the flag performs time-\/periodic oscillations with period $ T^*. $ Steady Poiseuille flow with average velocity $ U^* $ is imposed at the left end of the channel while we assume the outflow to be parallel and axially traction-\/free.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{turek_flag_non_fsi_dim}
+\doxyfigcaption{Sketch of the problem in dimensional variables. }
+\end{DoxyImage}
+
+
+We non-\/dimensionalise all length and coordinates on the diameter of the cylinder, $ d^* $, time on the natural timescale of the flow, $ d^*/U^* $, the velocities on the mean velocity, $ U^* $, and the pressure on the viscous scale. The problem is then governed by the non-\/dimensional Navier-\/\+Stokes equations  \[
+Re \left( St \frac{\partial u_i}{\partial t} + 
+u_j \frac{\partial u_i}{\partial x_j} \right) =
+- \frac{\partial p}{\partial x_i}  +
+\frac{\partial }{\partial x_j} \left[ \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right) \right],
+\] where $ Re = \rho U^* H_0^* / \mu $ and $ St = 1 $, and \begin{center}  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] \end{center}  subject to parabolic inflow \begin{center}  \[
+{\bf u} = 6 x_2 (1-x_2) {\bf e}_1
+\] \end{center}  at the inflow cross-\/section; parallel, axially-\/traction-\/free outflow at the outlet; and no-\/slip on the stationary channel walls and the surface of the cylinder, $ {\bf u} = {\bf 0} $. The no-\/slip condition on the moving flag is \begin{center}  \[
+{\bf u} = \frac{\partial {\bf R}_w(\xi_{[top,tip,bottom]},t)}{\partial t}
+\] \end{center}  where $ \xi_{[top,tip,bottom]} $ are Lagrangian coordinates parametrising the three faces of the flag. The flag performs oscillations with non-\/dimensional period $ T = T^* U^* / H^*_{tot} $. Here is a sketch of the non-\/dimensional version of the problem\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{turek_flag_non_fsi}
+\doxyfigcaption{Sketch of the problem in dimensionless variables, showing the Lagrangian coordinates that parametrise the three faces of the flag. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows a snapshot of the flow field ~\newline
+ (pressure contours and instantaneous streamlines) for a Reynolds number of $ Re=100 $ and an oscillation period of $ T= 10 $, as well as the corresponding fluid mesh. Note how {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation has refined the mesh in the high-\/shear regions near the front of the cylinder and at the trailing edge of the flag.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{flow_cropped}
+\doxyfigcaption{Mesh (top) and flow field (bottom). }
+\end{DoxyImage}
+
+
+The corresponding \href{../figures/turek_flag_non_fsi.avi}{\texttt{ animation}} illustrates the algebraic node update strategy (implemented with an {\ttfamily Algebraic\+Mesh}, discussed in more detail in \href{../../algebraic_collapsible_channel/html/index.html}{\texttt{ another tutorial}}) and the evolution of the flow field. Note that the instantaneous streamlines intersect the (impermeable) flag because the flag is not stationary.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_parameters}{}\doxysection{\texorpdfstring{The global parameters}{The global parameters}}\label{index_parameters}
+As usual we use a namespace to define the (single) global parameter, the Reynolds number.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//====start\_of\_global\_parameters==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Re}}=100.0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_leaflet}{}\doxysection{\texorpdfstring{Specification of the flag geometry}{Specification of the flag geometry}}\label{index_leaflet}
+We specify the flag geometry and its time-\/dependent motion by representing its three faces by {\ttfamily Geom\+Objects}, each parametrised by its own Lagrangian coordinate, as shown in the sketch above. The geometry of the cylinder is represented by one of {\ttfamily oomph-\/lib\textquotesingle{}s} generic {\ttfamily Geom\+Objects}, the {\ttfamily Circle}.
+
+We enclose the relevant data in its own namespace and start by defining the period of the oscillation, and the geometric parameters controlling the flag\textquotesingle{}s initial shape and its subsequent motion.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//====start\_of\_flag\_definition===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ definition\ of\ flag\ boundaries}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceFlag__definition}{Flag\_definition}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Period\ of\ prescribed\ flag\ oscillation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285}{Period}}=10.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Height\ of\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}}=0.2;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}}=3.5;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ x\ position\ of\ centre\ of\ cylinder}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Centre\_x}}=2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ y\ position\ of\ centre\ of\ cylinder}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Centre\_y}}=2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Radius\ of\ cylinder}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Radius}}=0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Amplitude\ of\ tip\ deflection}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}{Amplitude}}=0.33;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ global\ time\ object}}
+\DoxyCodeLine{\textcolor{comment}{}\ Time*\ \mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}=0;}
+
+\end{DoxyCodeInclude}
+ We choose the motion of the flag such that it vaguely resembles that expected in the corresponding FSI problem\+: We subject the flag\textquotesingle{}s upper and lower faces to purely vertical displacements that deform them into a fraction of a sine wave, while keeping the face at the tip of the flag straight and vertical. We implement this by prescribing the time-\/dependent motion of the two vertices at the tip of the flag with two functions\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Time-\/dependent\ vector\ to\ upper\ tip\ of\ the\ "{}flag"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{upper\_tip}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ tmp\_ampl=\mbox{\hyperlink{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}{Amplitude}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (t<=0.0)\ tmp\_ampl=0.0;}
+\DoxyCodeLine{\ \ \ Vector<double>\ uppertip(2);}
+\DoxyCodeLine{\ \ \ uppertip[0]=\ \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Centre\_x}}+\mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Radius}}*sqrt(1.0-\/H*H/(4.0*Radius*Radius))+\mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}};}
+\DoxyCodeLine{\ \ \ uppertip[1]=\ \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Centre\_y}}+0.5*\mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}}-\/}
+\DoxyCodeLine{\ \ \ \ tmp\_ampl*sin(2.0*MathematicalConstants::Pi*t/Period);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ uppertip;}
+\DoxyCodeLine{\ \ \}\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Time-\/dependent\ vector\ to\ bottom\ tip\ of\ the\ "{}flag"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceFlag__definition_a15bf130714676a0df743a4eba50cb4b5}{lower\_tip}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ tmp\_ampl=\mbox{\hyperlink{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}{Amplitude}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (t<=0.0)\ tmp\_ampl=0.0;}
+\DoxyCodeLine{\ \ \ Vector<double>\ lowertip(2);}
+\DoxyCodeLine{\ \ \ lowertip[0]=\ \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Centre\_x}}+\mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Radius}}*sqrt(1.0-\/H*H/(4.0*Radius*Radius))+\mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}};}
+\DoxyCodeLine{\ \ \ lowertip[1]=\ \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Centre\_y}}-\/0.5*\mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}}-\/}
+\DoxyCodeLine{\ \ \ \ tmp\_ampl*sin(2.0*MathematicalConstants::Pi*t/Period);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ lowertip;}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ bottom\ tip}}
+
+\end{DoxyCodeInclude}
+ This information is then used in three custom-\/written {\ttfamily Geom\+Object} that define the time-\/dependent shape of the three faces. Here is the one describing the shape of the upper face\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/start\_of\_top\_of\_flag-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ GeomObject\ that\ defines\ the\ upper\ boundary\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keyword}{class\ }TopOfFlag\ :\ \textcolor{keyword}{public}\ GeomObject}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Constructor:\ It's\ a\ 1D\ object\ in\ 2D\ space\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \ TopOfFlag()\ :\ GeomObject(1,2)\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \string~TopOfFlag()\{\}}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Return\ the\ position\ along\ the\ top\ of\ the\ flag\ (xi[0]\ varies\ }}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ between\ 0\ and\ Lx)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ position(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,\textcolor{keyword}{const}\ Vector<double>\ \&xi,\ Vector<double>\ \&r)\textcolor{keyword}{}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Compute\ position\ of\ fixed\ point\ on\ the\ cylinder}}
+\DoxyCodeLine{\ \ \ \ Vector<double>\ point\_on\_circle(2);\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ point\_on\_circle[0]=\mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Centre\_x}}+\mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Radius}}*sqrt(1.0-\/H*H/(4.0*Radius*Radius));}
+\DoxyCodeLine{\ \ \ \ point\_on\_circle[1]=\mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Centre\_y}}+\mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}}/2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ r[0]\ =\ point\_on\_circle[0]+xi[0]/\mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}}*(\mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{upper\_tip}}(\mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}-\/>time(t))[0]-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point\_on\_circle[0]);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ r[1]\ =\ point\_on\_circle[1]+xi[0]/\mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}}*(\mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{upper\_tip}}(\mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}-\/>time(t))[1]-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point\_on\_circle[1])+}
+\DoxyCodeLine{\ \ \ \ \ 1.0/3.0*sin((r[0]-\/point\_on\_circle[0])/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{upper\_tip}}(\mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}-\/>time(t))[0]-\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point\_on\_circle[0])*MathematicalConstants::Pi)}
+\DoxyCodeLine{\ \ \ \ \ *sin(2.0*\ MathematicalConstants::Pi*\mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}-\/>time(t)/Period);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Current\ position}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ position(\textcolor{keyword}{const}\ Vector<double>\ \&xi,\ Vector<double>\ \&r)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ position(0,xi,r);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Number\ of\ geometric\ Data\ in\ GeomObject:\ None.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{unsigned}\ ngeom\_data()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ 0;\}\ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \mbox{[}We omit the definition of the other two {\ttfamily Geom\+Objects}, {\ttfamily Bottom\+Of\+Flag} and {\ttfamily Tip\+Of\+Flag} in in the interest of brevity. Their definitions can be found in the \href{
+../../../../demo_drivers/navier_stokes/turek_flag_non_fsi/turek_flag_non_fsi.cc
+}{\texttt{ source code}}.\mbox{]} We provide storage for the pointers to the four {\ttfamily Geom\+Objects} required for the representation of the flag,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ GeomObject\ that\ bounds\ the\ upper\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\ TopOfFlag*\ \mbox{\hyperlink{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}{Top\_flag\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ GeomObject\ that\ bounds\ the\ bottom\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ BottomOfFlag*\ \mbox{\hyperlink{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}{Bottom\_flag\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ GeomObject\ that\ bounds\ the\ tip\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ TipOfFlag*\ \mbox{\hyperlink{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}{Tip\_flag\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ GeomObject\ of\ type\ Circle\ that\ defines\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ central\ cylinder.}}
+\DoxyCodeLine{\textcolor{comment}{}\ Circle*\ \mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Cylinder\_pt}}=0;}
+
+\end{DoxyCodeInclude}
+ and provide a setup function that generates the {\ttfamily Geom\+Objects} and stores the pointer to the global {\ttfamily Time} object that will be created by the {\ttfamily Problem\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ all\ GeomObjects\ needed\ to\ define\ the\ cylinder\ and\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}{setup}}(Time*\ time\_pt)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assign\ pointer\ to\ global\ time\ object}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}=time\_pt;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ GeomObject\ of\ type\ Circle\ that\ defines\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ central\ cylinder.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Cylinder\_pt}}=\textcolor{keyword}{new}\ Circle(Centre\_x,Centre\_y,Radius);}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Create\ GeomObject\ that\ bounds\ the\ upper\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}{Top\_flag\_pt}}=\textcolor{keyword}{new}\ TopOfFlag;}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Create\ GeomObject\ that\ bounds\ the\ bottom\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}{Bottom\_flag\_pt}}=\textcolor{keyword}{new}\ BottomOfFlag;}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Create\ GeomObject\ that\ bounds\ the\ tip\ edge\ of\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}{Tip\_flag\_pt}}=\textcolor{keyword}{new}\ TipOfFlag;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace\ that\ specifies\ the\ flag}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_mesh}
+The figure below shows a sketch of the (unrefined) mesh and the enumeration of its boundaries. Various different implementations of the mesh exist, allowing the user to perform the node-\/update in response to the motion of the flag by a {\ttfamily Domain/\+Macro\+Element} -\/ based procedure, or by using an algebraic node update. In either case, only the nodes in the elements that are shaded in yellow (or refined elements that are generated from these) participate in the node-\/update.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{cylinder_with_flag_mesh}
+\doxyfigcaption{The (unrefined) mesh. Only nodes in the yellow regions participate in the node-\/update. }
+\end{DoxyImage}
+
+
+The node update strategy is illustrated in the \href{../figures/turek_flag_non_fsi.avi}{\texttt{ animation}} of the flow field and the mesh motion.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code has the usual structure for a time-\/dependent problem\+: We store the command line arguments, create a {\ttfamily Doc\+Info} object, and assign the parameters that specify the dimensions of the channel.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ -\/-\/\ pass\ a\ command\ line\ argument\ if\ you\ want\ to\ run}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ the\ code\ in\ validation\ mode\ where\ it\ only\ performs\ a\ few\ steps}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{turek__flag__non__fsi_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;\ }
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ doc\_info.number()=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Length\ and\ height\ of\ domain}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ length=25.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ height=4.1;}
+
+\end{DoxyCodeInclude}
+ We build the problem using a mesh in which the node update is performed by the {\ttfamily Algebraic\+Mesh} class. (The driver code also provides the option to use a {\ttfamily Domain/\+Macro\+Element} -\/ based node update -- this option is chosen via suitable \#ifdefs; see the \href{
+../../../../demo_drivers/navier_stokes/turek_flag_non_fsi/turek_flag_non_fsi.cc
+}{\texttt{ source code}} for details).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ Problem\ with\ AlgebraicMesh-\/based\ node\ update}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classTurekNonFSIProblem}{TurekNonFSIProblem}}}
+\DoxyCodeLine{\ \ <AlgebraicElement<RefineableQCrouzeixRaviartElement<2>\ >\ >\ }
+\DoxyCodeLine{\ \ problem(length,\ height);}
+
+\end{DoxyCodeInclude}
+ Next we set up the time-\/stepping (as usual, fewer timesteps are performed during a validation run which is identified by a non-\/zero number of command line arguments)\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Number\ of\ timesteps\ per\ period}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nsteps\_per\_period=40;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ periods}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nperiod=3;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ timesteps\ \ (reduced\ for\ validation)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=nsteps\_per\_period*nperiod;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc>1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ nstep=2;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Also\ reduce\ the\ Reynolds\ number\ to\ reduce\ the\ mesh\ refinement}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\_Parameters::Re}}=10.0;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Timestep:\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ dt=\mbox{\hyperlink{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285}{Flag\_definition::Period}}/double(nsteps\_per\_period);}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Initialise\ timestep\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ problem.initialise\_dt(dt);}
+
+\end{DoxyCodeInclude}
+
+
+We start the simulation with a steady solve, allowing up to three levels of adaptive refinement (fewer if we are performing a validation run)\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ adaptively\ with\ up\ to\ max\_adapt\ rounds\ of\ refinement\ (fewer\ if\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ run\ during\ self-\/test)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc>1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ max\_adapt=1;}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ intial\ guess\ for\ steady\ Newton\ solve}}
+\DoxyCodeLine{\textcolor{comment}{}\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ doc\_info.number()++;}
+
+\end{DoxyCodeInclude}
+ Finally, we enter the proper timestepping loop, allowing one spatial adaptation per timestep and suppressing the re-\/assignment of initial conditions following an adaptation by setting the parameter {\ttfamily first} to false. (See the discussion of timestepping with automatic mesh adaptation in \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ another tutorial}}.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ steady\ solve\ first\ -\/-\/\ this\ also\ sets\ the\ history\ values}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ to\ those\ corresponding\ to\ an\ impulsive\ start\ from\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ steady\ solution}}
+\DoxyCodeLine{\ problem.steady\_newton\_solve(max\_adapt);}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ steady\ solution\ =\ initial\ condition\ for\ subsequent\ unsteady\ solve}}
+\DoxyCodeLine{\textcolor{comment}{}\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ doc\_info.number()++;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reduce\ the\ max\ number\ of\ adaptations\ for\ time-\/dependent\ simulation}}
+\DoxyCodeLine{\textcolor{comment}{}\ max\_adapt=1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ We\ don't\ want\ to\ re-\/assign\ the\ initial\ condition\ after\ the\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adaptation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ first=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ Timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ istep=0;istep<nstep;istep++)}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ problem.unsteady\_newton\_solve(dt,max\_adapt,first);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Output\ the\ solution}}
+\DoxyCodeLine{\ \ \ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The Problem class}{The Problem class}}\label{index_problem}
+The problem class provides an access function to the mesh (note the use of \#ifdefs to choose the correct one), and defines the interfaces for the usual member functions, either empty or explained in more detail below.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======\ start\_of\_problem\_class=====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Flow\ around\ a\ cylinder\ with\ flag}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classTurekNonFSIProblem}{TurekNonFSIProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ length\ and\ height\ of\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classTurekNonFSIProblem}{TurekNonFSIProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&length,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&height);}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a161cfe46817a5129dcc33c7ce3a17173}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_ae5881b3424aee1ba7b947fff96493d2f}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ After\ adaptation:\ Unpin\ pressures\ and\ pin\ redudant\ pressure\ dofs.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a88ed5ef8b1be34f5176c29ffec20eedd}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ velocity\ boundary\ condition\ on\ the\ flag}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a29725cde9071c3a83792469787ea6c7d}{actions\_before\_implicit\_timestep}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ USE\_MACRO\_ELEMENTS}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ specific\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RefineableCylinderWithFlagMesh<ELEMENT>*\ \mbox{\hyperlink{classTurekNonFSIProblem_af0ad929ee6b152a3a3d188acb9ce5468}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}RefineableCylinderWithFlagMesh<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ specific\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>*\ \mbox{\hyperlink{classTurekNonFSIProblem_af0ad929ee6b152a3a3d188acb9ce5468}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a2f129e4eba71784a58b27d846fdc2a61}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Height\ of\ channel}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classTurekNonFSIProblem_a7e85e76876a9b1136cc340b0bb25e299}{Height}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\textcolor{comment}{//end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The initial assignment of zero velocity and pressure provides a very poor initial guess for the preliminary steady Newton solve. We therefore increase the maximum residuals and iteration counts allowed in the Newton iteration before creating the timestepper and setting up the {\ttfamily Geom\+Objects} required to parametrise the flag\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ Pass\ length\ and\ height\ of\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classTurekNonFSIProblem_aacb3214544ef81c2f8b49777457e8be6}{TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&length,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&height)\ :\ Height(height)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Bump\ up\ Newton\ solver\ parameters\ to\ allow\ for\ crappy\ initial\ guesses}}
+\DoxyCodeLine{\ Max\_residuals=100.0;;}
+\DoxyCodeLine{\ Max\_newton\_iterations=50;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allocate\ the\ timestepper}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ BDF<2>);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ flag/cylinder\ geometry}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}{Flag\_definition::setup}}(time\_pt());}
+
+\end{DoxyCodeInclude}
+ Next we build the mesh, passing the pointers to the various {\ttfamily Geom\+Objects} and the geometric parameters to its constructor.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ mesh\ (with\ AlgebraicMesh-\/based\ node\ update)}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\textcolor{keyword}{new}\ RefineableAlgebraicCylinderWithFlagMesh<ELEMENT>}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Flag\_definition::Cylinder\_pt}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}{Flag\_definition::Top\_flag\_pt}},\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}{Flag\_definition::Bottom\_flag\_pt}},\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}{Flag\_definition::Tip\_flag\_pt}},}
+\DoxyCodeLine{\ \ \ length,\ height,\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{Flag\_definition::L}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{Flag\_definition::H}},\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Flag\_definition::Centre\_x}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Flag\_definition::Centre\_y}},}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Flag\_definition::Radius}},}
+\DoxyCodeLine{\ \ \ time\_stepper\_pt());}
+
+\end{DoxyCodeInclude}
+ We perform two rounds of uniform refinement (the Newton solver does not converge on coarser meshes) before creating an error estimator for the subsequent automatic mesh adaptation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Refine\ uniformly}}
+\DoxyCodeLine{\ mesh\_pt()-\/>refine\_uniformly();}
+\DoxyCodeLine{\ mesh\_pt()-\/>refine\_uniformly();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ Z2ErrorEstimator*\ error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{\ mesh\_pt()-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+
+\end{DoxyCodeInclude}
+ Both velocity components are imposed by Dirichlet conditions (either via a no-\/slip condition or via the imposed inflow profile) on all boundaries, apart from the outflow cross-\/section (mesh boundary 1), where the axial velocity is unknown.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Pin\ both\ velocities\ at\ all\ boundaries\ apart\ from\ outflow}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Parallel,\ axially\ traction\ free\ outflow\ at\ downstream\ end}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (ibound\ !=\ 1)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ done\ bc}}
+
+\end{DoxyCodeInclude}
+ Next we complete the build of the elements, passing the relevant pointers to physical parameters,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pass\ pointer\ to\ Reynolds\ number\ to\ elements}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ nelem=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nelem;e++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\_Parameters::Re}};\ \ \ }
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Set\ the\ Womersley\ number\ (assuming\ St=1)}}
+\DoxyCodeLine{\ \ \ \ el\_pt-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\_Parameters::Re}};}
+\DoxyCodeLine{\ \ \ \}}
+
+\end{DoxyCodeInclude}
+ and impose the steady Poiseuille profile at the inlet (mesh boundary 3).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Setup\ Poiseuille\ flow\ along\ boundary\ 3}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ ibound=3;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ ycoord\ =\ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ Poiseuille\ velocity}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ uy\ =\ 6.0*ycoord/Height*(1.0-\/ycoord/Height);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
+\DoxyCodeLine{\ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);}
+\DoxyCodeLine{\ \ \ \}\ \ \ }
+
+\end{DoxyCodeInclude}
+ Finally, we pin the redundant pressure degrees of freedom (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details), and assign the equations numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ \ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assign\ equations\ numbers}}
+\DoxyCodeLine{\ \ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ endl;\ \ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_after_adapt}{}\doxysection{\texorpdfstring{Actions before adapt}{Actions before adapt}}\label{index_after_adapt}
+After each adaptation, we unpin and re-\/pin all redundant pressures degrees of freedom (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details). Since the inflow profile is parabolic, it is interpolated correctly from "{}father"{} to "{}son"{} elements during mesh refinement so no further action is required.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====actions\_after\_adapt================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ after\ adapt}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a88ed5ef8b1be34f5176c29ffec20eedd}{TurekNonFSIProblem<ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Unpin\ all\ pressure\ dofs}}
+\DoxyCodeLine{\ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ unpin\_all\_pressure\_dofs(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ redundant\ pressure\ dofs}}
+\DoxyCodeLine{\ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_timestep}{}\doxysection{\texorpdfstring{Actions before the timestep}{Actions before the timestep}}\label{index_timestep}
+Before each timestep we update the nodal positions in the mesh and re-\/apply the no-\/slip condition at the nodes on mesh boundaries 5 -\/ 7.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//====\ start\_of\_actions\_before\_implicit\_timestep==========================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ implicit\ timestep:\ Update\ velocity\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a29725cde9071c3a83792469787ea6c7d}{TurekNonFSIProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Update\ the\ domain\ shape}}
+\DoxyCodeLine{\ mesh\_pt()-\/>node\_update();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Moving\ leaflet:\ No\ slip;\ this\ implies\ that\ the\ velocity\ needs}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ to\ be\ updated\ in\ response\ to\ flag\ motion}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\ \textcolor{keywordtype}{unsigned}\ ibound=5;ibound<8;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Which\ node\ are\ we\ dealing\ with?}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ node\_pt=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Apply\ no\ slip}}
+\DoxyCodeLine{\ \ \ \ \ FSI\_functions::apply\_no\_slip\_on\_moving\_wall(node\_pt);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_actions\_before\_implicit\_timestep}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post Processing}{Post Processing}}\label{index_doc}
+The function doc\+\_\+solution(...) documents the results.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTurekNonFSIProblem_a2f129e4eba71784a58b27d846fdc2a61}{TurekNonFSIProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts;}
+\DoxyCodeLine{\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_ex_com}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_ex_com}
+
+\begin{DoxyItemize}
+\item Compare the results obtained when the node update is performed with the algebraic or the {\ttfamily Macro\+Element/\+Domain-\/based} node update. ({\ttfamily oomph-\/lib\textquotesingle{}s} build machinery will automatically generate both versions of the code, using the {\ttfamily -\/DUSE\+\_\+\+MACRO\+\_\+\+ELEMENTS} compilation flag).
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_ackn}{}\doxysection{\texorpdfstring{Acknowledgements}{Acknowledgements}}\label{index_ackn}
+
+\begin{DoxyItemize}
+\item This code was originally developed by Stefan Kollmannsberger and his students Iason Papaioannou and ~\newline
+ Orkun Oezkan Doenmez. It was completed by Floraine Cordier.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/navier_stokes/turek_flag_non_fsi/
+}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/turek\+\_\+flag\+\_\+non\+\_\+fsi/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{
+../../../../
+demo_drivers/navier_stokes/turek_flag_non_fsi/turek_flag_non_fsi.cc
+}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/turek\+\_\+flag\+\_\+non\+\_\+fsi/turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc }} \end{center} 
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

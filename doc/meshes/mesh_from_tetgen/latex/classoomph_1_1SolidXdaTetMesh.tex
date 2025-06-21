@@ -1,0 +1,84 @@
+\doxysection{oomph\+::Solid\+Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SolidXdaTetMesh}{}\label{classoomph_1_1SolidXdaTetMesh}\index{oomph::SolidXdaTetMesh$<$ ELEMENT $>$@{oomph::SolidXdaTetMesh$<$ ELEMENT $>$}}
+
+
+Xda-\/based tet mesh upgraded to become a solid mesh.  
+
+
+
+
+{\ttfamily \#include $<$xda\+\_\+tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1SolidXdaTetMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidXdaTetMesh_a1242b23a2df9f424ec17aa2059ba116d}{Solid\+Xda\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xda\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor. Boundary coordinates are setup automatically. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1SolidXdaTetMesh_a9425d53bae183deb23fb3a1019a48ca8}{\texorpdfstring{$\sim$}{\string~}\+Solid\+Xda\+Tet\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1XdaTetMesh_a4cea32a11d0899ac230de66899e503d1}{Xda\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xda\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for FSI problems. In this case; the vector containing the oomph-\/lib boundary IDs of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815}{setup\+\_\+boundary\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{switch\+\_\+normal}})
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}{setup\+\_\+boundary\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{b}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{switch\+\_\+normal}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). Doc faces in output file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c99dd5}{nxda\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the number of distinct boundaries specified in the original xda enumeration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xda\+\_\+boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Access functions to the Vector of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Solid\+Xda\+Tet\+Mesh$<$ ELEMENT $>$}
+Xda-\/based tet mesh upgraded to become a solid mesh. 
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00123}{123}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SolidXdaTetMesh_a1242b23a2df9f424ec17aa2059ba116d}\label{classoomph_1_1SolidXdaTetMesh_a1242b23a2df9f424ec17aa2059ba116d} 
+\index{oomph::SolidXdaTetMesh$<$ ELEMENT $>$@{oomph::SolidXdaTetMesh$<$ ELEMENT $>$}!SolidXdaTetMesh@{SolidXdaTetMesh}}
+\index{SolidXdaTetMesh@{SolidXdaTetMesh}!oomph::SolidXdaTetMesh$<$ ELEMENT $>$@{oomph::SolidXdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SolidXdaTetMesh()}{SolidXdaTetMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidXdaTetMesh}{oomph\+::\+Solid\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Solid\+Xda\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Boundary coordinates are setup automatically. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00129}{129}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SolidXdaTetMesh_a9425d53bae183deb23fb3a1019a48ca8}\label{classoomph_1_1SolidXdaTetMesh_a9425d53bae183deb23fb3a1019a48ca8} 
+\index{oomph::SolidXdaTetMesh$<$ ELEMENT $>$@{oomph::SolidXdaTetMesh$<$ ELEMENT $>$}!````~SolidXdaTetMesh@{\texorpdfstring{$\sim$}{\string~}SolidXdaTetMesh}}
+\index{````~SolidXdaTetMesh@{\texorpdfstring{$\sim$}{\string~}SolidXdaTetMesh}!oomph::SolidXdaTetMesh$<$ ELEMENT $>$@{oomph::SolidXdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SolidXdaTetMesh()}{\string~SolidXdaTetMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1SolidXdaTetMesh}{oomph\+::\+Solid\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1SolidXdaTetMesh}{Solid\+Xda\+Tet\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00138}{138}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{xda__tet__mesh_8h}{xda\+\_\+tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

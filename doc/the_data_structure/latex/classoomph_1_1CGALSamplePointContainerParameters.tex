@@ -1,0 +1,128 @@
+\doxysection{oomph\+::CGALSample\+Point\+Container\+Parameters Class Reference}
+\hypertarget{classoomph_1_1CGALSamplePointContainerParameters}{}\label{classoomph_1_1CGALSamplePointContainerParameters}\index{oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}}
+
+
+Helper object for dealing with the parameters used for the \doxylink{classCGALSamplePointContainer}{CGALSample\+Point\+Container} objects.  
+
+
+
+
+{\ttfamily \#include $<$sample\+\_\+point\+\_\+parameters.\+h$>$}
+
+Inheritance diagram for oomph\+::CGALSample\+Point\+Container\+Parameters\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1CGALSamplePointContainerParameters}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters_ab8dea419a55474ba42a15992c479804e}{CGALSample\+Point\+Container\+Parameters}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a0f12913d8b02fc753d38236f617fb580}{mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters_aeb5ebc7518686e3e562966f75a5229d4}{CGALSample\+Point\+Container\+Parameters}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters}{CGALSample\+Point\+Container\+Parameters}} \&data)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters_a4de8be59f619f8b8829e560f1d9b3b81}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters}{CGALSample\+Point\+Container\+Parameters}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{oomph\+::\+Sample\+Point\+Container\+Parameters}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a75f2c45f283b863afc5f66f9bc7f51a4}{Sample\+Point\+Container\+Parameters}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&data)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a84b692f4cd648e4d0d6ab12f74ac08e1}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a5e0ced492320cc06615bcb1782b7bb22}{\texorpdfstring{$\sim$}{\string~}\+Sample\+Point\+Container\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a0f12913d8b02fc753d38236f617fb580}{mesh\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_af06dd7ae3244007652cde7648a2eef54}{min\+\_\+and\+\_\+max\+\_\+coordinates}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ac062f8bbf2b30f7662be20b9ed2dcb26}{min\+\_\+and\+\_\+max\+\_\+coordinates}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. Const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a710a6a32b2518b202a38fde405cdf7e5}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em "{}\+Measure of"{} number of sample points generated in each element const version \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a38d9adb69c397b83f8bec913c4936f7d}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em "{}\+Measure of"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a946a3657f6c50f2e14dccf421ed5e178}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Use eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta())? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a8aa712173bb8242b17e49df97c0072e3}{enable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Enable use of eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta()) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a9c59f44fa07b7f79e8b854d5b918e3bd}{disable\+\_\+use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Disable use of eulerian coordinates (via interpolated\+\_\+x) during setup (otherwise use interpolated\+\_\+zeta()) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a436175c53c2801c510673146cdb75761}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? (MPI only) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a6585db241b22e087222ca3b09e99b663}{enable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} ()
+\begin{DoxyCompactList}\small\item\em Enable Ignore halo elements? (MPI only) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ae1520f275ffb0941541aa51c89f3eeec}{disable\+\_\+ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} ()
+\begin{DoxyCompactList}\small\item\em Disable Ignore halo elements? (MPI only) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{oomph\+::\+Sample\+Point\+Container\+Parameters}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ad8a463ddc961e51f6f77b4e8f678b962}{Default\+\_\+nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} = 5
+\begin{DoxyCompactList}\small\item\em Default for "{}measure of"{} number of sample points per element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{oomph\+::\+Sample\+Point\+Container\+Parameters}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a9047299fdfac8074a9996267d66e901e}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a980161906be89a1cf50835fe45949cfe}{Min\+\_\+and\+\_\+max\+\_\+coordinates}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_a68141123ff5252ad3dd1a8a5279282c4}{Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em "{}\+Measure of"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ab8757aae90e85b2a860fd07acd19a92a}{Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Use Eulerian coordinates to setup bin (i.\+e. use interpolated\+\_\+x() rather than interpolated\+\_\+zeta() when setting up and searching sample point container) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters_ad6ba2b667c746fc6c66830e4f3dc3f70}{Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? Accepting halo elements can drastically reduce the number of external halo elements in multidomain problems -- currently not aware of any problems with doing this therefore set to false by default but retention of this flag allows easy return to previous implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper object for dealing with the parameters used for the \doxylink{classCGALSamplePointContainer}{CGALSample\+Point\+Container} objects. 
+
+Definition at line \mbox{\hyperlink{sample__point__parameters_8h_source_l00231}{231}} of file \mbox{\hyperlink{sample__point__parameters_8h_source}{sample\+\_\+point\+\_\+parameters.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CGALSamplePointContainerParameters_ab8dea419a55474ba42a15992c479804e}\label{classoomph_1_1CGALSamplePointContainerParameters_ab8dea419a55474ba42a15992c479804e} 
+\index{oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}!CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}}
+\index{CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}!oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{CGALSamplePointContainerParameters()}{CGALSamplePointContainerParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+CGALSample\+Point\+Container\+Parameters\+::\+CGALSample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__parameters_8h_source_l00236}{236}} of file \mbox{\hyperlink{sample__point__parameters_8h_source}{sample\+\_\+point\+\_\+parameters.\+h}}.
+
+\Hypertarget{classoomph_1_1CGALSamplePointContainerParameters_aeb5ebc7518686e3e562966f75a5229d4}\label{classoomph_1_1CGALSamplePointContainerParameters_aeb5ebc7518686e3e562966f75a5229d4} 
+\index{oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}!CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}}
+\index{CGALSamplePointContainerParameters@{CGALSamplePointContainerParameters}!oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{CGALSamplePointContainerParameters()}{CGALSamplePointContainerParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+CGALSample\+Point\+Container\+Parameters\+::\+CGALSample\+Point\+Container\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters}{CGALSample\+Point\+Container\+Parameters}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CGALSamplePointContainerParameters_a4de8be59f619f8b8829e560f1d9b3b81}\label{classoomph_1_1CGALSamplePointContainerParameters_a4de8be59f619f8b8829e560f1d9b3b81} 
+\index{oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CGALSamplePointContainerParameters@{oomph::CGALSamplePointContainerParameters}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CGALSample\+Point\+Container\+Parameters\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CGALSamplePointContainerParameters}{CGALSample\+Point\+Container\+Parameters}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sample__point__parameters_8h}{sample\+\_\+point\+\_\+parameters.\+h}}\end{DoxyCompactItemize}

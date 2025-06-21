@@ -1,0 +1,28 @@
+\doxysection{axisym\+\_\+poroelasticity\+\_\+face\+\_\+elements.\+h File Reference}
+\hypertarget{axisym__poroelasticity__face__elements_8h}{}\label{axisym__poroelasticity__face__elements_8h}\index{axisym\_poroelasticity\_face\_elements.h@{axisym\_poroelasticity\_face\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1AxisymmetricPoroelasticityTractionElement}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of an applied combined traction and pore fluid pressure in the axisym poroelasticity equations. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FSILinearisedAxisymPoroelasticTractionElement}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of an applied combined traction and pore fluid pressure in the poroelasticity equations. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace containing the zero pressure function for Darcy pressure elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_ac1b72b45f96c640e7ddc520ca5c2b251}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero traction) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a8f4239ad8976b18eb097acb4b6446a6d}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero pressure) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a3f8d9dbd05b5f4e7cc89157083db2ef0}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Allow\+\_\+gap\+\_\+in\+\_\+\+FSI}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Public boolean to allow gap between poro-\/elastic and Navier Stokes element in FSI computations. Useful in hybrid linear/nonlinear geometry runs where this will happen. \end{DoxyCompactList}\end{DoxyCompactItemize}

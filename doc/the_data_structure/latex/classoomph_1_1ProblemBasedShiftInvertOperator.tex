@@ -1,0 +1,167 @@
+\doxysection{oomph\+::Problem\+Based\+Shift\+Invert\+Operator Class Reference}
+\hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator}{}\label{classoomph_1_1ProblemBasedShiftInvertOperator}\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+
+
+Class for the shift invert operation.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+eigen\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Problem\+Based\+Shift\+Invert\+Operator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ProblemBasedShiftInvertOperator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a2a25d70c81543acf3c97ae7fbe32648e}{Problem\+Based\+Shift\+Invert\+Operator}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&linear\+\_\+solver\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&sigma=0.\+0)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a1f209382d6023466da7e978ce16f1c09}{apply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The apply interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DoubleMultiVectorOperator}{oomph\+::\+Double\+Multi\+Vector\+Operator}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMultiVectorOperator_a21b0b94da2dc0b7303e3d8cb58fb8acb}{Double\+Multi\+Vector\+Operator}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DoubleMultiVectorOperator_a4c3c0579a42bd89650c9701d3a07f31b}{\texorpdfstring{$\sim$}{\string~}\+Double\+Multi\+Vector\+Operator}} ()
+\begin{DoxyCompactList}\small\item\em virtual destructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_acff2c7d822f6af10080863f8c9461071}{Problem\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_ab3e4e60c51ea08ac19adf60ed57e95b7}{Linear\+\_\+solver\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a1348c664118ba4fbd87158e2d5d2caef}{Sigma}}
+\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_abd17d0eac10c19fa6a687fb28f80a3fb}{M\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProblemBasedShiftInvertOperator_a58f8942b2daecd973333d2dc21c3a387}{Asigma\+M\+\_\+pt}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for the shift invert operation. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00512}{512}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_a2a25d70c81543acf3c97ae7fbe32648e}\label{classoomph_1_1ProblemBasedShiftInvertOperator_a2a25d70c81543acf3c97ae7fbe32648e} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!ProblemBasedShiftInvertOperator@{ProblemBasedShiftInvertOperator}}
+\index{ProblemBasedShiftInvertOperator@{ProblemBasedShiftInvertOperator}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{ProblemBasedShiftInvertOperator()}{ProblemBasedShiftInvertOperator()}}
+{\footnotesize\ttfamily oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Problem\+Based\+Shift\+Invert\+Operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{linear\+\_\+solver\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{sigma = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00528}{528}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{Asigma\+M\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00118}{oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{problem_8cc_source_l08442}{oomph\+::\+Problem\+::get\+\_\+eigenproblem\+\_\+matrices()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00519}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{M\+\_\+pt}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00522}{Sigma}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_a1f209382d6023466da7e978ce16f1c09}\label{classoomph_1_1ProblemBasedShiftInvertOperator_a1f209382d6023466da7e978ce16f1c09} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!apply@{apply}}
+\index{apply@{apply}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMultiVector}{Double\+Multi\+Vector}} \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The apply interface. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMultiVectorOperator_a58ada02505907b7b51e336ee1d79031c}{oomph\+::\+Double\+Multi\+Vector\+Operator}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{550}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{Asigma\+M\+\_\+pt}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00692}{oomph\+::\+Double\+Multi\+Vector\+::doublevector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00137}{oomph\+::\+Linear\+Solver\+::enable\+\_\+resolve()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00519}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{M\+\_\+pt}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00211}{oomph\+::\+Double\+Multi\+Vector\+::nvector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00227}{oomph\+::\+Linear\+Solver\+::resolve()}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_a58f8942b2daecd973333d2dc21c3a387}\label{classoomph_1_1ProblemBasedShiftInvertOperator_a58f8942b2daecd973333d2dc21c3a387} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!AsigmaM\_pt@{AsigmaM\_pt}}
+\index{AsigmaM\_pt@{AsigmaM\_pt}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{AsigmaM\_pt}{AsigmaM\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Asigma\+M\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{525}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{apply()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00528}{Problem\+Based\+Shift\+Invert\+Operator()}}.
+
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_ab3e4e60c51ea08ac19adf60ed57e95b7}\label{classoomph_1_1ProblemBasedShiftInvertOperator_ab3e4e60c51ea08ac19adf60ed57e95b7} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!Linear\_solver\_pt@{Linear\_solver\_pt}}
+\index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}\texorpdfstring{$\ast$}{*} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00519}{519}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{apply()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00528}{Problem\+Based\+Shift\+Invert\+Operator()}}.
+
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_abd17d0eac10c19fa6a687fb28f80a3fb}\label{classoomph_1_1ProblemBasedShiftInvertOperator_abd17d0eac10c19fa6a687fb28f80a3fb} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!M\_pt@{M\_pt}}
+\index{M\_pt@{M\_pt}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{M\_pt}{M\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}\texorpdfstring{$\ast$}{*} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+M\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00525}{525}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{apply()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00528}{Problem\+Based\+Shift\+Invert\+Operator()}}.
+
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_acff2c7d822f6af10080863f8c9461071}\label{classoomph_1_1ProblemBasedShiftInvertOperator_acff2c7d822f6af10080863f8c9461071} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00516}{516}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ProblemBasedShiftInvertOperator_a1348c664118ba4fbd87158e2d5d2caef}\label{classoomph_1_1ProblemBasedShiftInvertOperator_a1348c664118ba4fbd87158e2d5d2caef} 
+\index{oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}!Sigma@{Sigma}}
+\index{Sigma@{Sigma}!oomph::ProblemBasedShiftInvertOperator@{oomph::ProblemBasedShiftInvertOperator}}
+\doxysubsubsection{\texorpdfstring{Sigma}{Sigma}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Sigma\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00522}{522}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00528}{Problem\+Based\+Shift\+Invert\+Operator()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__eigen__solver_8h}{trilinos\+\_\+eigen\+\_\+solver.\+h}}\end{DoxyCompactItemize}

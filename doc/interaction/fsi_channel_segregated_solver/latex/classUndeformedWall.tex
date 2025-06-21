@@ -1,0 +1,170 @@
+\doxysection{Undeformed\+Wall Class Reference}
+\hypertarget{classUndeformedWall}{}\label{classUndeformedWall}\index{UndeformedWall@{UndeformedWall}}
+
+
+Undeformed wall is a steady, straight 1D line in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$fsi\+\_\+chan\+\_\+problem.\+h$>$}
+
+Inheritance diagram for Undeformed\+Wall\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUndeformedWall}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (const double \&x0, const double \&h)
+\begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}{X0}}
+\begin{DoxyCompactList}\small\item\em x position of the undeformed beam\textquotesingle{}s left end. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}{H}}
+\begin{DoxyCompactList}\small\item\em Height of the undeformed wall above y=0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Undeformed wall is a steady, straight 1D line in 2D space. 
+
+\[ x = X_0 + \zeta \] \[ y = H \] 
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00155}{155}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a} 
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{UndeformedWall()}{UndeformedWall()}}
+{\footnotesize\ttfamily Undeformed\+Wall\+::\+Undeformed\+Wall (\begin{DoxyParamCaption}\item[{const double \&}]{x0,  }\item[{const double \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: arguments are the starting point and the height above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{162}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}}
+{\footnotesize\ttfamily virtual void Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{195}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+
+\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00181}{181}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}.
+
+\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3} 
+\index{UndeformedWall@{UndeformedWall}!position@{position}}
+\index{position@{position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Undeformed\+Wall\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{170}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{H}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{X0}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00181}{position()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}\label{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef} 
+\index{UndeformedWall@{UndeformedWall}!H@{H}}
+\index{H@{H}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily double Undeformed\+Wall\+::H\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of the undeformed wall above y=0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00220}{220}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{d2position()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{Undeformed\+Wall()}}.
+
+\Hypertarget{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}\label{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b} 
+\index{UndeformedWall@{UndeformedWall}!X0@{X0}}
+\index{X0@{X0}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{X0}{X0}}
+{\footnotesize\ttfamily double Undeformed\+Wall\+::\+X0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x position of the undeformed beam\textquotesingle{}s left end. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00217}{217}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00195}{d2position()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00170}{position()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00162}{Undeformed\+Wall()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__chan__problem_8h}{fsi\+\_\+chan\+\_\+problem.\+h}}\end{DoxyCompactItemize}

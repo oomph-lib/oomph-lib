@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: A preconditioner for the solution of (pseudo-)solid mechanics problems with prescribed boundary motions</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: A preconditioner for the solution of (pseudo-)solid mechanics problems with prescribed boundary motions </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">re-visit </a> the solution of solid mechanics problems in which the deformation of the domain boundary is prescribed and enforced by Lagrange multipliers. This functionality is required, e.g., when using (pseudo-)solid mechanics to update the shape of the fluid mesh in large-displacement fluid-structure interaction problems.</p>
+<p>Here we focus on the efficient solution of the governing equations by GMRES, using the problem-specific block-preconditioner developed in </p><center> Muddle, R.L., Mihajlovic, M. &amp; Heil, M. (2012) An efficient preconditioner for monolithically-coupled large-displacement fluid-structure interaction problems with pseudo-solid mesh updates. <em>Journal of Computational Physics</em> <b>231</b>, 7315-7334. DOI: <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">10.1016/j.jcp.2012.07.001</a> </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="model"></a>
+Theory: Problem formulation, the resulting linear system and the preconditioner</h1>
+<p>We refer to <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">another tutorial</a> for a detailed description of the problem setup and its discretisation. Briefly, we consider the deformation of an elastic solid body whose shape is parametrised by Lagrangian coordinates <img class="formulaInl" alt="$ \xi^i $" src="form_0.png" width="10" height="14"/>. A part of the body's boundary, <img class="formulaInl" alt="$ \partial D_{prescr}$" src="form_1.png" width="46" height="14"/>, (which is parametrised by the boundary coordinate <img class="formulaInl" alt="$ \zeta$" src="form_2.png" width="6" height="13"/>) is displaced to a new position given by <img class="formulaInl" alt="$ {\bf R}_{prescr}(\zeta) $" src="form_3.png" width="56" height="14"/> while the other boundaries are held in a fixed position (as in the sketch below) or are subject to traction boundary conditions.</p>
+<div class="image">
+<img src="sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the typical problem. </div></div>
+ <p>We discretise the problem using <code>SolidElements</code> in the bulk of the domain and employ lower-dimensional <code>FaceElements</code> to impose the displacement constraint along <img class="formulaInl" alt="$ \partial D_{prescr}$" src="form_1.png" width="46" height="14"/>. The problem therefore contains the following types of discrete unknowns:</p><ul>
+<li>The nodal positions (which are stored as positional <code>Data</code> at each <code>SolidNode</code>). <br  />
+<br  />
+</li>
+<li>The nodal values representing the components of the (vector-valued) Lagrange multipliers. These only exist for the nodes on <img class="formulaInl" alt="$ \partial D_{prescr}$" src="form_1.png" width="46" height="14"/>. (The nodes are re-sized to accommodate the additional unknowns when the <code>FaceElements</code> are attached to the bulk elements.)</li>
+</ul>
+<p>The preconditioner requires a further sub-division of these degrees of freedom into the following categories:</p><ul>
+<li>the x-coordinates of the unconstrained nodes</li>
+<li>the y-coordinates of the unconstrained nodes</li>
+<li>[the z-coordinates of the unconstrained nodes (only in 3D)]</li>
+<li>the x-coordinates of the constrained nodes</li>
+<li>the y-coordinates of the constrained nodes</li>
+<li>[the z-coordinates of the constrained nodes (only in 3D)]</li>
+<li>the x-component of the Lagrange multiplier at the constrained nodes</li>
+<li>the y-component of the Lagrange multiplier at the constrained nodes</li>
+<li>[the z-component of the Lagrange multiplier at the constrained nodes (only in 3D)].</li>
+</ul>
+<p>For a 2D problem, the linear system to be solved in the course of the Newton iteration can then be (formally) re-ordered into the following block structure:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left[
+\begin{array}{cccc|cc}
+{ E_{\rm xx}}&amp;{ E_{\rm x\bar{\rm
+      x}}}&amp;{ E_{\rm xy}}&amp;{ E_{\rm x\bar{\rm y}}}&amp;&amp;\\
+{ E_{\bar{\rm x}\rm x}}&amp;{ E_{\bar{\rm
+      x}\bar{\rm x}}}&amp;{ E_{\bar{\rm x}\rm
+    y}}&amp;{ E_{\bar{\rm x}\bar{\rm y}}}&amp;{ M_{\rm
+    x}}&amp;\\
+{ E_{\rm yx}}&amp;{ E_{\rm y\bar{\rm
+      x}}}&amp;{ E_{\rm yy}}&amp;{ E_{\rm y\bar{\rm y}}}&amp;&amp;\\
+{ E_{\bar{\rm y}\rm x}}&amp;{ E_{\bar{\rm
+      y}\bar{\rm x}}}&amp;{ E_{\bar{\rm y}\rm y}}&amp;{ 
+  E_{\bar{\rm y}\bar{\rm y}}}&amp;&amp;{ M_{\rm y}}\\
+\hline
+&amp;{ M_{\rm x}}&amp;&amp;&amp;\\
+&amp;&amp;&amp;{ M_{\rm y}}&amp;&amp;
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\Delta \mathbf{X}_{\rm x}\\
+\Delta \mathbf{\overline{X}}_{\rm x}\\
+\Delta \mathbf{X}_{\rm y}\\
+\Delta \mathbf{\overline{X}}_{\rm y}\\
+\Delta \mathbf{L}_{\rm x}\\
+\Delta \mathbf{L}_{\rm y}
+\end{array}
+\right]
+ =
+-
+\left[
+\begin{array}{c}
+\mathbf{r}_{\rm x}\\
+\mathbf{r}_{\bar{\rm x}}\\
+\mathbf{r}_{\rm y}\\
+\mathbf{r}_{\bar{\rm y}}\\
+\mathbf{r}_{\rm l_x}\\
+\mathbf{r}_{\rm l_y}
+\end{array}
+\right].
+\ \ \ \ \ \   (1)
+\]" src="form_4.png" width="381" height="93"/>
+</p>
+<p> Here the vectors <img class="formulaInl" alt="${\bf X}_{\rm x}$" src="form_5.png" width="18" height="13"/>, <img class="formulaInl" alt="${\bf X}_{\rm y}$" src="form_6.png" width="18" height="14"/>, <img class="formulaInl" alt="${\bf L}_{\rm x}$" src="form_7.png" width="15" height="13"/> and <img class="formulaInl" alt="${\bf
+  L}_{\rm y}$" src="form_8.png" width="15" height="14"/> contain the <img class="formulaInl" alt="$x$" src="form_9.png" width="8" height="6"/> and <img class="formulaInl" alt="$y$" src="form_10.png" width="8" height="9"/> components of the unknown nodal positions and Lagrange multipliers, respectively. The overbars identify the unknown nodal positions that are constrained by the Lagrange multiplier. The matrices <img class="formulaInl" alt="$M_{\rm x}$" src="form_11.png" width="18" height="13"/> and <img class="formulaInl" alt="$M_{\rm y}$" src="form_12.png" width="18" height="14"/> are mass matrices whose entries are formed from products of the basis functions,  <img class="formulaInl" alt="$[M_{{\rm x}}]_{ij}=[M_{{\rm y}}]_{ij} = 
+\int_{\partial D_{\rm prescr}} {\psi_i} \ {\psi_j} \ dS $" src="form_13.png" width="195" height="19"/>.</p>
+<p><a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">Muddle, Mihajlovic &amp; Heil (2012) </a> show that  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\cal P}_{\rm PS}=\left[
+\begin{array}{cccc|cc}
+E_{\rm xx}&amp;E_{\rm x\bar{\rm x}}&amp;E_{\rm xy}&amp;E_{\rm x\bar{\rm
+    y}}&amp;&amp;\\ E_{\bar{\rm x}\rm x}&amp;E_{\bar{\rm x}\bar{\rm x}}+\sigma
+I&amp;E_{\bar{\rm x}\rm y}&amp;E_{\bar{\rm x}\bar{\rm y}}&amp;&amp;\\ E_{\rm
+  yx}&amp;E_{\rm y\bar{\rm x}}&amp;E_{\rm yy}&amp;E_{\rm y\bar{\rm
+    y}}&amp;&amp;\\ E_{\bar{\rm y}\rm x}&amp;E_{\bar{\rm y}\bar{\rm
+    x}}&amp;E_{\bar{\rm y}\rm y}&amp;E_{\bar{\rm y}\bar{\rm y}}+\sigma
+I&amp;&amp;\\ \hline
+&amp;&amp;&amp;&amp;\frac{1}{\sigma}M_{\rm x}^2&amp;\\ &amp;&amp;&amp;&amp;&amp;\frac{1}{\sigma}M_{\rm y}^2\\
+\end{array}
+\right]
+\ \ \ \ \ \   (2)
+\]" src="form_14.png" width="369" height="93"/>
+</p>
+<p> is an optimal preconditioner for the linear system (1) if we set <img class="formulaInl" alt="$ \sigma=\|E\|_{\infty} $" src="form_15.png" width="56" height="14"/> where <img class="formulaInl" alt="$ E $" src="form_16.png" width="10" height="10"/> is the compound 4x4 top-left block  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+E =
+\left[
+\begin{array}{cccc}
+E_{\rm xx}&amp;E_{\rm x\bar{\rm x}}&amp;E_{\rm xy}&amp;E_{\rm x\bar{\rm y}}\\ 
+E_{\bar{\rm x}\rm x}&amp;E_{\bar{\rm x}\bar{\rm x}}
+&amp;E_{\bar{\rm x}\rm y}&amp;E_{\bar{\rm x}\bar{\rm y}} \\
+ E_{\rm yx}&amp;E_{\rm y\bar{\rm x}}&amp;E_{\rm yy}&amp;E_{\rm y\bar{\rm y}}\\ 
+E_{\bar{\rm y}\rm x}&amp;E_{\bar{\rm y}\bar{\rm x}}&amp;
+E_{\bar{\rm y}\rm y}&amp;E_{\bar{\rm y}\bar{\rm y}}
+\end{array}
+\right]
+\]" src="form_17.png" width="171" height="61"/>
+</p>
+<p> in the Jacobian matrix.</p>
+<p>The application of the preconditioner (i.e. the solution of linear systems of the form <img class="formulaInl" alt="$ {\cal P}_{\rm PS} \ {\bf x} =
+{\bf y} $" src="form_18.png" width="59" height="13"/> for <img class="formulaInl" alt="$ {\bf x} $" src="form_19.png" width="9" height="6"/>) requires three linear solves: One involving the compound 4x4 top-left block in <img class="formulaInl" alt="$ {\cal P}_{\rm PS} $" src="form_20.png" width="21" height="13"/>,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+E_{\rm PS}=
+\left[
+\begin{array}{cccc}
+E_{\rm xx}&amp;E_{\rm x\bar{\rm x}}&amp;E_{\rm xy}&amp;E_{\rm x\bar{\rm y}}\\ 
+E_{\bar{\rm x}\rm x}&amp;E_{\bar{\rm x}\bar{\rm x}}+\sigma
+I&amp;E_{\bar{\rm x}\rm y}&amp;E_{\bar{\rm x}\bar{\rm y}} \\
+ E_{\rm yx}&amp;E_{\rm y\bar{\rm x}}&amp;E_{\rm yy}&amp;E_{\rm y\bar{\rm y}}\\ 
+E_{\bar{\rm y}\rm x}&amp;E_{\bar{\rm y}\bar{\rm x}}&amp;
+E_{\bar{\rm y}\rm y}&amp;E_{\bar{\rm y}\bar{\rm y}}+\sigma I
+\end{array}
+\right]
+\]" src="form_21.png" width="243" height="61"/>
+</p>
+<p> and two involving the two squared mass matrices, <img class="formulaInl" alt="$ M_{\rm x}^2 $" src="form_22.png" width="19" height="15"/> and <img class="formulaInl" alt="$ M_{\rm y}^2 $" src="form_23.png" width="19" height="16"/>.</p>
+<p>Numerical experiments in <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">Muddle, Mihajlovic &amp; Heil (2012) </a> show that an efficient implementation of the preconditioner is obtained by replacing the <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> block in the preconditioner <img class="formulaInl" alt="$ {\cal P}_{\rm PS} $" src="form_20.png" width="21" height="13"/> by its upper block-triangular approximation, corresponding to the preconditioner  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\widetilde{\cal P}_{\rm PS}=\left[
+\begin{array}{cccc|cc}
+E_{xx}&amp;E_{x\bar{x}}&amp;E_{xy}&amp;E_{x\bar{y}}&amp;&amp;\\ E_{\bar{x}x}&amp;E_{\bar{x}\bar{x}}+\sigma
+I&amp;E_{\bar{x}y}&amp;E_{\bar{x}\bar{y}}&amp;&amp;\\ &amp;&amp;E_{yy}&amp;E_{y\bar{y}}&amp;&amp;\\ &amp;&amp;E_{\bar{y}y}&amp;E_{\bar{y}\bar{y}}+\sigma
+I&amp;&amp;\\ \hline
+&amp;&amp;&amp;&amp;\frac{1}{\sigma}M_x^2&amp;\\ &amp;&amp;&amp;&amp;&amp;\frac{1}{\sigma}M_y^2\\
+\end{array}
+\right].
+\ \ \ \ \ \   (3)
+\]" src="form_25.png" width="374" height="93"/>
+</p>
+<p> Furthermore, a fully optimal preconditioner (in which the solve times scale linearly with the number of unknowns) can be obtained by:</p><ul>
+<li>approximately solving the subsidiary linear systems involving the diagonal blocks  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  \left[
+  \begin{array}{cc}
+  E_{xx}&amp;E_{x\bar{x}}\\ E_{\bar{x}x}&amp;E_{\bar{x}\bar{x}}+\sigma I\\
+  \end{array}
+  \right]
+  \mbox{\ \ \ \ and\ \ \ \ \ }
+  \left[
+  \begin{array}{cc}
+  E_{yy}&amp;E_{y\bar{y}}\\ E_{\bar{y}y}&amp;E_{\bar{y}\bar{y}}+\sigma I\\
+  \end{array}
+  \right]
+  \]" src="form_26.png" width="274" height="31"/>
+</p>
+ in (3) by performing a fixed number of algebraic multigrid (AMG) cycles,</li>
+</ul>
+<p>and by</p><ul>
+<li>approximately solving the subsidiary linear systems involving <img class="formulaInl" alt="$ M_{\rm x}^2 $" src="form_22.png" width="19" height="15"/> and <img class="formulaInl" alt="$ M_{\rm y}^2 $" src="form_23.png" width="19" height="16"/> by two consecutive linear solves involving the mass matrices themselves. Following Wathen [A. Wathen, "Realistic eigenvalue bounds for the Galerkin mass matrix", IMA Journal of Numerical Analysis 7 (1987) 449-457], <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">Muddle, Mihajlovic &amp; Heil (2012) </a> suggest employing CG, preconditioned by diagonal scaling, as the solver for these systems. This solver converges so rapidly that a fixed number of four CG iterations suffices to compute the solution to sufficient accuracy so that <img class="formulaInl" alt="$ \widetilde{\cal P}_{\rm PS} $" src="form_27.png" width="21" height="15"/> can be treated as a constant preconditioner.</li>
+</ul>
+<p>With these approximations, the computational cost of one application of <img class="formulaInl" alt="$ \widetilde{\cal P}_{\rm PS} $" src="form_27.png" width="21" height="15"/> is linear in the number of unknowns. The optimality of the preconditioner can therefore be assessed by demonstrating that the number of GMRES iterations remains constant under mesh refinement.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="implementation"></a>
+Implementation and use of the preconditioner</h1>
+<p>The preconditioner described above is implemented within <code>oomph-lib's</code> (parallel) block preconditioning framework which is described in <a href="../../../mpi/block_preconditioners/html/index.html">another tutorial</a>. For the purpose of the implementation, we decompose the preconditioning matrix into the 2x2 main blocks indicated by the vertical and horizontal lines in (2) and (3).</p>
+<p>The application of the preconditioner requires the classification of the unknowns into the six (in 2D) different "dof types" discussed above. This is done on an element-by-element basis (since only the elements "know" what their nodal degrees of freedom correspond to) by implementing/overloading the functions</p><ul>
+<li><code>GeneralisedElement::ndof_types(...)</code> which returns the number of dof types classified by that element.</li>
+<li><code>GeneralisedElement::get_block_numbers_for_unknowns(...)</code> which associates each degree of freedom (identified by its global equation number) with the dof type within its block. <br  />
+<br  />
+</li>
+</ul>
+<p>For a 2D problem the enumeration of the dofs is chosen as follows. The <code>SolidElements</code> classify only the nodal positions and sub-divide them into those that are constrained and not constrained by the displacement boundary condition so that within that block</p><ul>
+<li>dof type 0 corresponds to the unconstrained x-nodal coordinates,</li>
+<li>dof type 1 corresponds to the unconstrained y-nodal coordinates,</li>
+<li>dof type 2 corresponds to the constrained x-nodal coordinates,</li>
+<li>dof type 3 corresponds to the constrained y-nodal coordinates.</li>
+</ul>
+<p>The <code>FaceElements</code> that apply the displacement constraint classify the Lagrange multipliers so that within that block</p><ul>
+<li>dof type 0 corresponds to the x-component of the Lagrange multiplier,</li>
+<li>dof type 1 corresponds to the y-component of the Lagrange multiplier,</li>
+</ul>
+<p>with the obvious generalisation to 3D.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>We examine the performance of the preconditioner in the test problem discussed in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">another tutorial</a>: The upper surface of a unit square is subjected to a prescribed displacement that is imposed by Lagrange multipliers. The first of the two tables below shows the GMRES iteration counts (averaged over all linear solves performed in the course of all Newton iterations) as a function of the mesh refinement (represented by the total number of unknowns) for different implementations of the preconditioner.</p><ul>
+<li><b>"SuperLU"</b> corresponds to the exact implementation of the preconditioner <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> in which the linear systems involving the matrix <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> and the two squared mass matrices, <img class="formulaInl" alt="$ M_{\rm x}^2 $" src="form_22.png" width="19" height="15"/> and <img class="formulaInl" alt="$ M_{\rm y}^2 $" src="form_23.png" width="19" height="16"/>, are solved by SuperLU.</li>
+<li><b>"Upper triangular E"</b> corresponds to the case in which <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> is replaced by its upper block-triangular approximation (corresponding to <img class="formulaInl" alt="$ \tilde{\cal P}_{\rm PS} $" src="form_28.png" width="21" height="15"/>) but the four linear solves (two involving the diagonal blocks of <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/>; two involving the squared mass matrices, <img class="formulaInl" alt="$ M_{\rm x}^2 $" src="form_22.png" width="19" height="15"/> and <img class="formulaInl" alt="$ M_{\rm y}^2 $" src="form_23.png" width="19" height="16"/>), are performed by SuperLU.</li>
+<li><b>"Upper triangular E; Hypre/CG"</b> are the results obtained when using the same block approximation of the preconditioner, but using two AMG cycles (performed with Hypre) for the approximate solution of the diagonal blocks of <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/>, and diagonally preconditioned CG as the approximate solver for the mass matrices.</li>
+</ul>
+<hr  />
+ <center><table class="doxtable">
+<tr>
+<td><code>n_dof</code>  </td><td>798  </td><td>3198  </td><td>12798  </td><td>51198  </td><td>204798   </td></tr>
+<tr>
+<td>SuperLU  </td><td>8.1  </td><td>8.1  </td><td>8.3  </td><td>8.3  </td><td>8.3   </td></tr>
+<tr>
+<td>Upper triangular E </td><td>24.9  </td><td>26.9  </td><td>28.4  </td><td>28.7  </td><td>28.9   </td></tr>
+<tr>
+<td>Upper triangular E; Hypre/CG </td><td>24.9  </td><td>26.9  </td><td>28.4  </td><td>28.8  </td><td>29.1   </td></tr>
+</table>
+</center> <center> <b>Table 1:</b> Average GMRES iteration counts as a function of the mesh refinement (indicated by the number of unknowns, <code>n_dof</code>) for different implementations of the preconditioner. </center> <hr  />
+<p>As expected, the GMRES iteration counts are small and mesh independent for the exact implementation of the preconditioner. Replacing the (costly) exact solves by (faster) approximate solves leads to a modest increase in the (absolute) number of GMRES iterations, while retaining their virtual mesh independence under sufficiently strong mesh refinement.</p>
+<p>The benefit of switching to the approximate solves becomes apparent in the next table which shows the average cpu times required for the solution of the linear systems by GMRES. For sufficiently fine discretisations the larger number of GMRES iterations for the inexact solves is more than compensated for by the much lower cost of the preconditioning operations. The final implementation yields cpu times that are proportional to the number of unknowns &ndash; the hallmark of an optimal solver.</p>
+<hr  />
+ <center><table class="doxtable">
+<tr>
+<td><code>n_dof</code>  </td><td>798  </td><td>3198  </td><td>12798  </td><td>51198  </td><td>204798   </td></tr>
+<tr>
+<td>SuperLU  </td><td>0.140409  </td><td>0.720991  </td><td>4.47518  </td><td>35.1349  </td><td>336.517   </td></tr>
+<tr>
+<td>Upper triangular E </td><td>0.160478  </td><td>0.737302  </td><td>3.80428  </td><td>22.6697  </td><td>170.048   </td></tr>
+<tr>
+<td>Upper triangular E; Hypre/CG </td><td>0.225759  </td><td>0.895603  </td><td>3.61778  </td><td>15.8982  </td><td>64.4825   </td></tr>
+</table>
+</center> <center> <b>Table 2:</b> Average GMRES solve times [sec] as a function of the mesh refinement (indicated by the number of unknowns, <code>n_dof</code>) for different implementations of the preconditioner. </center> <hr  />
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="modifications"></a>
+Modifications to the driver code</h1>
+<p>Most of the driver code is unchanged from the implementation discussed in the <br  />
+ <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">original tutorial.</a> We therefore only discuss the modifications required to employ preconditioned GMRES as the linear solver for the Newton method.</p>
+<hr  />
+<h2><a class="anchor" id="reclass"></a>
+(Re-)classification of the dof types</h2>
+<p>As discussed above (and in the more detailed <a href="../../../mpi/block_preconditioners/html/index.html">block-preconditioning tutorial</a>, the classification of the degrees of freedom into different "dof types" has to be performed by the elements. Our implementation of the pseudo-elastic preconditioner treats the solver for the linear system involving <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> as a subsidiary preconditioner. <code>oomph-lib's</code> existing solid mechanics elements already provide dof classification for the nodal positions according to the coordinate directions (so for a 2D displacement-based solid element the call to <code>ndof_types()</code> will return 2 &ndash; the x and y nodal positions). If these elements are to be used with our preconditioner, this classification must be over-written to distinguish between constrained and unconstrained nodal positions. This is done most easily by providing a wrapper class (templated by the type of the underlying solid element) in the driver code to re-implement (overload) the relevant functions:</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============start_wrapper==================================================</span></div>
+<div class="line"><span class="comment">/// Pseudo-Elastic Solid element class to overload the block preconditioner</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// methods ndof_types() and get_dof_numbers_for_unknowns() to differentiate</span></div>
+<div class="line"><span class="comment">/// between DOFs subject to Lagrange multiplier and those that are not.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span>PseudoElasticBulkElement : </div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> ELEMENT</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> PseudoElasticBulkElement() : ELEMENT() {}</div>
+</div><!-- fragment --><p> The member function <code>ndof_types()</code> returns the number of dof types associated with (and classified by) this element: twice the number of spatial dimensions (for the constrained and unconstrained nodal positions).</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Returns the number of DOF types associated with this element: Twice</span></div>
+<div class="line"><span class="comment"> /// the number of spatial dimensions (for the constrained and </span></div>
+<div class="line"><span class="comment"> /// unconstrained nodal positions).</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> ndof_types()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="keywordflow">return</span> 2*ELEMENT::dim();</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> The member function <code>get_dof_numbers_for_unknowns()</code> returns a list of pairs, associating each (global) unknown (stored as the first entry in the pair) with the dof type within its block (stored as the second entry in the pair). We distinguish between constrained and unconstrained nodes by checking if the node has been resized to accommodate storage for the Lagrange multipliers. [Recall that <code>FiniteElement::required_nvalue(j)</code> returns the number of nodal values at local node <code>j</code>, required by the element itself (recall that for "pure" solid mechanics elements this number is zero because the nodal coordinates are stored as a separate <code>Data</code> item); <code>Node::nvalue()</code> returns the number of values actually stored at a <code>Node</code> &ndash; if this exceeds the value returned by <code>FiniteElement::required_nvalue(j)</code>, node <code>j</code> must have been resized when the <code>FaceElement</code> applying the displacement constraint by Lagrange multipliers was attached.]</p>
+<div class="fragment"><div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Create a list of pairs for all unknowns in this element,</span></div>
+<div class="line"><span class="comment"> /// so that the first entry in each pair contains the global equation</span></div>
+<div class="line"><span class="comment"> /// number of the unknown, while the second one contains the number</span></div>
+<div class="line"><span class="comment"> /// of the &quot;DOF&quot; that this unknown is associated with.</span></div>
+<div class="line"><span class="comment"> /// (Function can obviously only be called if the equation numbering</span></div>
+<div class="line"><span class="comment"> /// scheme has been set up.)\n</span></div>
+<div class="line"><span class="comment"> /// E.g. in a 3D problem there are 6 types of DOF:\n</span></div>
+<div class="line"><span class="comment"> /// 0 - x displacement (without lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"> /// 1 - y displacement (without lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"> /// 2 - z displacement (without lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"> /// 4 - x displacement (with lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"> /// 5 - y displacement (with lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"> /// 6 - z displacement (with lagr mult traction)\n</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> get_dof_numbers_for_unknowns(</div>
+<div class="line">    std::list&lt;std::pair&lt;unsigned long,unsigned&gt; &gt;&amp; dof_lookup_list)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">  </span>{</div>
+<div class="line">   <span class="comment">// temporary pair (used to store dof lookup prior to being added to list</span></div>
+<div class="line">   std::pair&lt;unsigned,unsigned&gt; dof_lookup;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// number of nodes</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_node = this-&gt;nnode();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Get the number of position dofs and dimensions at the node</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_position_type = ELEMENT::nnodal_position_type();</div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> nodal_dim = ELEMENT::nodal_dimension();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Integer storage for local unknown</span></div>
+<div class="line">   <span class="keywordtype">int</span> local_unknown=0;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Loop over the nodes</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordtype">unsigned</span> offset = 0;</div>
+<div class="line">     <span class="keywordflow">if</span> (this-&gt;node_pt(n)-&gt;nvalue() != this-&gt;required_nvalue(n))</div>
+<div class="line">      {</div>
+<div class="line">       offset = ELEMENT::dim();</div>
+<div class="line">      }</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Loop over position dofs</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> k=0;k&lt;n_position_type;k++)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">//Loop over dimension</span></div>
+<div class="line">       <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nodal_dim;i++)</div>
+<div class="line">        {</div>
+<div class="line">         <span class="comment">//If the variable is unpinned</span></div>
+<div class="line">         local_unknown = ELEMENT::position_local_eqn(n,k,i);</div>
+<div class="line">         <span class="keywordflow">if</span> (local_unknown &gt;= 0)</div>
+<div class="line">          {</div>
+<div class="line">           <span class="comment">// store dof lookup in temporary pair: First entry in pair</span></div>
+<div class="line">           <span class="comment">// is global equation number; second entry is dof type</span></div>
+<div class="line">           dof_lookup.first = this-&gt;eqn_number(local_unknown);</div>
+<div class="line">           dof_lookup.second = offset+i;</div>
+<div class="line">           </div>
+<div class="line">           <span class="comment">// add to list</span></div>
+<div class="line">           dof_lookup_list.push_front(dof_lookup);</div>
+<div class="line">          }</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>The <code>ImposeDisplacementByLagrangeMultiplierElements</code> which we use to impose the displacement constraint already label the x- and y- [and, in 3D, z-]component of the Lagrange multipliers as dof types 0, 1 [and 2], as required by our preconditioner. Therefore no modification is required.</p>
+<hr  />
+<h2><a class="anchor" id="driver"></a>
+Modifications to the main code</h2>
+<p>The main code only requires minor changes, all associated with the specification of different solver options. Since we provide the option to use Hypre and Trilinos solvers, we need to activate MPI if <code>oomph-lib</code> has been compiled with MPI support (even if the code is run in serial):</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver code</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="prescribed__displ__lagr__mult_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Start up mpi if oomph-lib has been compiled with parallel support</span></div>
+<div class="line"> <span class="comment">// because parallel versions of trilinos and hypre which are then called</span></div>
+<div class="line"> <span class="comment">// by default) need it.</span></div>
+<div class="line"> MPI_Helpers::init(argc,argv,<span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aprescribed__displ__lagr__mult_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="prescribed__displ__lagr__mult_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver code.</div><div class="ttdef"><b>Definition</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00484">prescribed_displ_lagr_mult.cc:484</a></div></div>
+</div><!-- fragment --><p> Next we define and process the possible command line flags which are used to select solver options and to specify the spatial resolution (in terms of of the number of elements in the x- and y-directions. The <code>--no_adapt</code> flag suppresses the spatial adaptivity to facilitate systematic mesh refinement studies.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements along axes</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nel_1d=5;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--nel_1d&quot;</span>,&amp;nel_1d);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Suppress adaptation (for study of iteration count vs uniform mesh </span></div>
+<div class="line"> <span class="comment">// refinement, say)</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--no_adapt&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use block upper triangular preconditioner for elasticity block</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--block_upper_for_elastic_block&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use Hypre as subsidiary preconditioner (inexact solver) for</span></div>
+<div class="line"> <span class="comment">// linear (sub-)systems to be solved in the elastic block?</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--hypre_for_elastic_blocks&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use Trilinos CG as subsidiary preconditioner (inexact solver) for</span></div>
+<div class="line"> <span class="comment">// linear (sub-)systems to be solved in the Lagrange multiplier block?</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag</div>
+<div class="line">  (<span class="stringliteral">&quot;--trilinos_cg_for_lagrange_multiplier_blocks&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use diagonal scaling as subsidiary preconditioner (inexact solver) for</span></div>
+<div class="line"> <span class="comment">// linear (sub-)systems to be solved in the elastic block?</span></div>
+<div class="line"> <span class="comment">// [only used for exercise]</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag</div>
+<div class="line">  (<span class="stringliteral">&quot;--diagonal_scaling_for_elastic_blocks&quot;</span>);</div>
+</div><!-- fragment --><p> We then assign the command line flags that were specified and document the ones that were recognised before building the problem, specifying the "wrapped" version of the <code>RefineableQPVDElement</code> as the template parameter.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Set up the problem with specified number of elements along axes.</span></div>
+<div class="line"> <a class="code hl_class" href="classPrescribedBoundaryDisplacementProblem.html">PrescribedBoundaryDisplacementProblem</a>&lt;</div>
+<div class="line">  PseudoElasticBulkElement&lt;RefineableQPVDElement&lt;2,3&gt; &gt; &gt; problem(nel_1d);</div>
+<div class="ttc" id="aclassPrescribedBoundaryDisplacementProblem_html"><div class="ttname"><a href="classPrescribedBoundaryDisplacementProblem.html">PrescribedBoundaryDisplacementProblem</a></div><div class="ttdoc">Problem class for deformation of elastic block by prescribed boundary motion.</div><div class="ttdef"><b>Definition</b> <a href="prescribed__displ__lagr__mult_8cc_source.html#l00158">prescribed_displ_lagr_mult.cc:159</a></div></div>
+</div><!-- fragment --><p> The rest of the main code is identical to the original version discussed in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">another tutorial</a> and is therefore omitted here.</p>
+<hr  />
+<h2><a class="anchor" id="constr"></a>
+Modifications to the problem constructor</h2>
+<p>The majority of the problem constructor is unchanged from the original version of the code. Having created the bulk mesh (and stored a pointer to it in the private member <code>Solid_mesh_pt</code>) and the mesh of Lagrange multiplier elements (with a pointer stored in <code>Lagrange_multiplier_mesh_pt</code>), we specify a GMRES as the linear solver (using Trilinos' version of it, if available):</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create the linear solver</span></div>
+<div class="line"> IterativeLinearSolver* solver_pt=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If we have trilinos, use it</span></div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_TRILINOS</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create solver</span></div>
+<div class="line"> solver_pt = <span class="keyword">new</span> TrilinosAztecOOSolver;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use GMRES</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>TrilinosAztecOOSolver*<span class="keyword">&gt;</span>(solver_pt)-&gt;solver_type() </div>
+<div class="line">  = TrilinosAztecOOSolver::GMRES;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use oomph-lib&#39;s own GMRES</span></div>
+<div class="line"> solver_pt = <span class="keyword">new</span> GMRES&lt;CRDoubleMatrix&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set solver</span></div>
+<div class="line"> linear_solver_pt() = solver_pt;</div>
+</div><!-- fragment --><p> Next, we create an instance of our preconditioner, specify the meshes that contain the "bulk" solid and Lagrange multiplier elements, respectively, and pass the preconditioner to the iterative linear solver.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create the preconditioner</span></div>
+<div class="line"> PseudoElasticPreconditioner * prec_pt = <span class="keyword">new</span> PseudoElasticPreconditioner;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set solid and lagrange multiplier meshes</span></div>
+<div class="line"> prec_pt-&gt;set_elastic_mesh(Solid_mesh_pt);</div>
+<div class="line"> prec_pt-&gt;set_lagrange_multiplier_mesh(Lagrange_multiplier_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the preconditioner</span></div>
+<div class="line"> solver_pt-&gt;preconditioner_pt() = prec_pt;</div>
+</div><!-- fragment --><p> By default the preconditioner performs the preconditioning operations as described above, and performs the block solves in (2) exactly, using SuperLU.</p>
+<p>The use of different blocked approximations to <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> is controlled via the <code>elastic_preconditioner_type()</code> function. It is possible to specify the block approximation in terms of the (self-explanatory) enumeration</p><ul>
+<li><code>PseudoElasticPreconditioner::Exact_block_preconditioner</code> [the default]</li>
+<li><code>PseudoElasticPreconditioner::Block_diagonal_preconditioner</code> </li>
+<li><code>PseudoElasticPreconditioner::Block_upper_triangular_preconditioner</code> </li>
+<li><code>PseudoElasticPreconditioner::Block_lower_triangular_preconditioner</code> </li>
+</ul>
+<p>So, to choose an upper block-triangular approximation for <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> we write </p><div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Use upper block triangular preconditioner for elastic block?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::command_line_flag_has_been_set</div>
+<div class="line">     (<span class="stringliteral">&quot;--block_upper_for_elastic_block&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   prec_pt-&gt;elastic_preconditioner_type()=</div>
+<div class="line">    PseudoElasticPreconditioner::Block_upper_triangular_preconditioner;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> By default the linear systems involving the diagonal blocks of <img class="formulaInl" alt="$ E_{\rm PS} $" src="form_24.png" width="21" height="13"/> are performed by SuperLU. The function <code>set_elastic_subsidiary_preconditioner(...)</code> allows the specification of another (approximate) solver (or subsidiary preconditioner, in the terminology of <code>oomph-lib's</code> block preconditioning framework). The argument to this function is a pointer to a global function that returns an instance of the required solver. A function that creates an instantiation of Hypre's AMG solver (with suitable settings) is already implemented in the <code>Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper</code> helper namespace and can be activated as follows:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_HYPRE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use Hypre as subsidiary preconditioner (inexact solver) for</span></div>
+<div class="line"> <span class="comment">// linear (sub-)systems to be solved in the elastic block?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::command_line_flag_has_been_set</div>
+<div class="line">     (<span class="stringliteral">&quot;--hypre_for_elastic_blocks&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   prec_pt-&gt;set_elastic_subsidiary_preconditioner</div>
+<div class="line">    (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper::</div>
+<div class="line">     get_elastic_preconditioner_hypre);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> (<a href="../../../../doc/mpi/distributed_general_purpose_block_preconditioners/html/index.html#application">Recall</a> that subsidiary preconditioners are deleted automatically by the master preconditioner when they are no longer required.)</p>
+<p>A similar construction is used to specify alternative (approximate) solvers for the linear systems involving the mass matrices. To perform the solves with Trilinos' CG solver (and diagonal scaling) we state:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_TRILINOS</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Use Trilinos CG as subsidiary preconditioner (inexact solver) for</span></div>
+<div class="line"> <span class="comment">// linear (sub-)systems to be solved in the Lagrange multiplier block?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::command_line_flag_has_been_set</div>
+<div class="line">     (<span class="stringliteral">&quot;--trilinos_cg_for_lagrange_multiplier_blocks&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   prec_pt-&gt;set_lagrange_multiplier_subsidiary_preconditioner</div>
+<div class="line">    (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper::</div>
+<div class="line">     get_lagrange_multiplier_preconditioner);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> That's it!</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_and_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Comments</h2>
+<ul>
+<li>The machinery described here may seem rather heavy for a rather obscure problem. As mentioned at the beginning of this tutorial, the main purpose of this preconditioner is to act as a building block for our preconditioner for large-displacement FSI problems in which the ALE node update of the fluid mesh in response to the deformation of the fluid-loaded solid is handled by (pseudo-)elasticity. We refer to <a href="../../pseudo_solid_fsi/html/index.html">another tutorial</a> for details. <br  />
+<br  />
+</li>
+<li>Further details of the theory, such as the proof of the optimality of the preconditioner, can be found in <br  />
+ <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">Muddle, Mihajlovic &amp; Heil (2012).</a></li>
+</ul>
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ol type="1">
+<li>Experiment with alternative subsidiary preconditioners (inexact solvers) for the solution of the <img class="formulaInl" alt="$ E_{\rm PS}$" src="form_29.png" width="21" height="13"/> block. For instance, set the argument to <code>PseudoElasticPreconditioner::elastic_preconditioner_type()</code> to <code>PseudoElasticPreconditioner::Block_diagonal_preconditioner</code>. With this setting, the solution of the linear systems involving <img class="formulaInl" alt="$ E_{\rm PS}$" src="form_29.png" width="21" height="13"/> is performed using the block-diagonal approximation of <img class="formulaInl" alt="$ E_{\rm PS}$" src="form_29.png" width="21" height="13"/>. This saves one matrix-vector product with the off-diagonal blocks per iteration but <br  />
+ significantly increases the GMRES iteration counts. [Don't take our word for it &ndash; try it!] <br  />
+<br  />
+</li>
+<li>Specify "your own" subsidiary preconditioner (inexact solver) by writing a global function (well, you should obviously hide it in a namespace &ndash; remember that global data and functions are evil!) that creates an instance of that preconditioner. Pass a function pointer to this function to <code>PseudoElasticPreconditioner::set_elastic_subsidiary_preconditioner()</code>. [Hint: The driver code already contains the relevant source lines (omitted in the code listings above) to illustrate how to solve the linear systems with a diagonal preconditioner. This leads to a fairly catastrophic deterioration of the GMRES iteration counts &ndash; the point of the exercise is to demonstrate how to implement such alternative (and hopefully better!) subsidiary preconditioners "from scratch".] <br  />
+<br  />
+</li>
+<li>Inspect (and experiment with) our settings for Hypre's AMG solver &ndash; defined in the <code>Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper</code> namespace in <br  />
+<br  />
+ <center> <code> <a href="../../../../src/multi_physics/pseudo_elastic_preconditioner.h">src/multi_physics/pseudo_elastic_preconditioner.h</a> <br  />
+ </code> <br  />
+<br  />
+ and <br  />
+<br  />
+ <code> <a href="../../../../src/multi_physics/pseudo_elastic_preconditioner.cc">src/multi_physics/pseudo_elastic_preconditioner.cc</a> </code> </center></li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult">demo_drivers/solid/prescribed_displ_lagr_mult </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond.cc">demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond.cc</a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:22
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

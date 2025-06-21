@@ -1,0 +1,435 @@
+\chapter{Example problem\+: Steady flow in a curved tube}
+\hypertarget{index}{}\label{index}\index{Example problem: Steady flow in a curved tube@{Example problem: Steady flow in a curved tube}}
+The problem of steady flow in a curved tube is considered with a prescribed Poiseuille flow at the inlet and a traction-\/free outlet condition. It is not clear that the latter is appropriate, but the main aim of this example is to check that the {\ttfamily Tube\+Mesh} works correctly.
+
+A detailed comparison between the flow field and the Dean solution should be performed for validation purposes, but the qualitative features seem reasonable.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{curve_geom}
+\doxyfigcaption{Sketch of the problem with pressure contours. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{curve_sec}
+\doxyfigcaption{Contours of axial velocity and secondary streamlines. }
+\end{DoxyImage}
+
+
+Detailed documentation to be written. Here\textquotesingle{}s the driver code...
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ a\ 3D\ navier\ stokes\ steady\ entry\ flow\ problem\ in\ a\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ uniformly\ curved\ tube}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{//Generic\ routines}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}navier\_stokes.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ mesh}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/tube\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_MyCurvedCylinder===================================}}
+\DoxyCodeLine{\textcolor{comment}{//A\ geometric\ object\ that\ represents\ the\ geometry\ of\ the\ domain}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classMyCurvedCylinder}{MyCurvedCylinder}}\ :\ \textcolor{keyword}{public}\ GeomObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor\ that\ takes\ the\ radius\ and\ curvature\ of\ the\ tube}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ as\ its\ arguments}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMyCurvedCylinder}{MyCurvedCylinder}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&radius,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&delta)\ :}
+\DoxyCodeLine{\ \ GeomObject(3,3),\ \mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}(radius),\ \mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}}(delta)\ \{\ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual}\mbox{\hyperlink{classMyCurvedCylinder_af474ed1dc8e4a1d433d4f1e77712b0a3}{\string~MyCurvedCylinder}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Lagrangian\ coordinate\ xi}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}}\ (\textcolor{keyword}{const}\ Vector<double>\&\ xi,\ Vector<double>\&\ r)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{}\{}
+\DoxyCodeLine{\ r[0]\ =\ (1.0/\mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}})*cos(xi[0])\ +\ xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*cos(xi[0])*cos(xi[1]);}
+\DoxyCodeLine{\ r[1]\ =\ (1.0/\mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}})*sin(xi[0])\ +\ xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*sin(xi[0])*cos(xi[1]);}
+\DoxyCodeLine{\ r[2]\ =\ -\/xi[2]*\mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}}*sin(xi[1]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Return\ the\ position\ of\ the\ tube\ as\ a\ function\ of\ time\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ (doesn't\ move\ as\ a\ function\ of\ time)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ xi,\ Vector<double>\&\ r)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMyCurvedCylinder_a6b0a9178fef82a1279efded76a611692}{position}}(xi,r);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Storage\ for\ the\ radius\ of\ the\ tube}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classMyCurvedCylinder_aaf7aa0ded93fced8b112d61e634a9df2}{Radius}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Storage\ for\ the\ curvature\ of\ the\ tube}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classMyCurvedCylinder_abacb5dddfb1971d098b2c07608fdaf50}{Delta}};}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=50;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ desired\ curvature\ of\ the\ pipe}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Delta}}=0.1;}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_problem\_class=============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Entry\ flow\ problem\ in\ tapered\ tube\ domain}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ DocInfo\ object\ and\ target\ errors}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem}}(DocInfo\&\ doc\_info,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ min\_error\_target,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ max\_error\_target);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a1adfde23500217008be5445934830115}{\string~SteadyCurvedTubeProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ After\ adaptation:\ Pin\ redudant\ pressure\ dofs.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a536ebee9cdb86bb1533531c85e5fd125}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableNavierStokesEquations<3>::}
+\DoxyCodeLine{\ \ \ \ pin\_redundant\_nodal\_pressures(\mbox{\hyperlink{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}{mesh\_pt}}()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overload\ generic\ access\ function\ by\ one\ that\ returns}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ a\ pointer\ to\ the\ specific\ \ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ RefineableTubeMesh<ELEMENT>*\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a79b8c2c0e3945aa6a9b69dfd55e456e1}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}RefineableTubeMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ info\ object}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a1a48437e34e38bf6d96aef540fda70b6}{Doc\_info}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ GeomObject\ that\ specifies\ the\ domain\ volume}}
+\DoxyCodeLine{\textcolor{comment}{}\ GeomObject\ *\mbox{\hyperlink{classSteadyCurvedTubeProblem_a06fa168a75e0ce3b0cd0eccacf226a6c}{Volume\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_constructor===================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ Pass\ DocInfo\ object\ and\ error\ targets}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classSteadyCurvedTubeProblem_ac276276fa87e57ff486e3af24b72e38b}{SteadyCurvedTubeProblem<ELEMENT>::SteadyCurvedTubeProblem}}(DocInfo\&\ doc\_info,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ min\_error\_target,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ max\_error\_target)\ }
+\DoxyCodeLine{\ :\ Doc\_info(doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ mesh:}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ GeomObject\ that\ specifies\ the\ domain\ geometry}}
+\DoxyCodeLine{\ \textcolor{comment}{//The\ radius\ of\ the\ tube\ is\ one\ and\ the\ curvature\ is\ specified\ by}}
+\DoxyCodeLine{\ \textcolor{comment}{//the\ global\ variable\ Delta.}}
+\DoxyCodeLine{\ Volume\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classMyCurvedCylinder}{MyCurvedCylinder}}(1.0,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Global\_Physical\_Variables::Delta}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Define\ pi\ }}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ pi\ =\ MathematicalConstants::Pi;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ centerline\ coordinates\ spanning\ the\ mesh}}
+\DoxyCodeLine{\ Vector<double>\ centreline\_limits(2);}
+\DoxyCodeLine{\ centreline\_limits[0]\ =\ 0.0;}
+\DoxyCodeLine{\ centreline\_limits[1]\ =\ pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ positions\ of\ the\ angles\ that\ divide\ the\ outer\ ring}}
+\DoxyCodeLine{\ \textcolor{comment}{//These\ must\ be\ in\ the\ range\ -\/pi,pi,\ ordered\ from\ smallest\ to}}
+\DoxyCodeLine{\ \textcolor{comment}{//largest}}
+\DoxyCodeLine{\ Vector<double>\ theta\_positions(4);}
+\DoxyCodeLine{\ theta\_positions[0]\ =\ -\/0.75*pi;}
+\DoxyCodeLine{\ theta\_positions[1]\ =\ -\/0.25*pi;}
+\DoxyCodeLine{\ theta\_positions[2]\ =\ 0.25*pi;}
+\DoxyCodeLine{\ theta\_positions[3]\ =\ 0.75*pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Define\ the\ radial\ fraction\ of\ the\ central\ box\ (always\ halfway}}
+\DoxyCodeLine{\ \textcolor{comment}{//along\ the\ radius)}}
+\DoxyCodeLine{\ Vector<double>\ radial\_frac(4,0.5);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ layers\ in\ the\ initial\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nlayer=6;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\ \textcolor{keyword}{new}\ RefineableTubeMesh<ELEMENT>(Volume\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ centreline\_limits,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ theta\_positions,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ radial\_frac,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nlayer);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator\ }}
+\DoxyCodeLine{\ Z2ErrorEstimator*\ error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{\ mesh\_pt()-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Error\ targets\ for\ adaptive\ refinement}}
+\DoxyCodeLine{\ mesh\_pt()-\/>max\_permitted\_error()=max\_error\_target;\ }
+\DoxyCodeLine{\ mesh\_pt()-\/>min\_permitted\_error()=min\_error\_target;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodal\ values\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//Choose\ the\ conventional\ form\ by\ setting\ gamma\ to\ zero}}
+\DoxyCodeLine{\ \textcolor{comment}{//The\ boundary\ conditions\ will\ be\ pseudo-\/traction\ free\ (d/dn\ =\ 0)}}
+\DoxyCodeLine{\ ELEMENT::Gamma[0]\ =\ 0.0;}
+\DoxyCodeLine{\ ELEMENT::Gamma[1]\ =\ 0.0;}
+\DoxyCodeLine{\ ELEMENT::Gamma[2]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Boundary\ 0\ is\ the\ inlet\ symmetry\ boundary:\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Boundary\ 1\ is\ the\ tube\ wall}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ all\ values}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}((ibound==0)\ ||\ (ibound==1))}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number,\ etc}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ RefineableNavierStokesEquations<3>::}
+\DoxyCodeLine{\ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Attach\ the\ boundary\ conditions\ to\ the\ mesh}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_constructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_actions\_before\_newton\_solve===================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ the\ inflow\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a90f3197b2cd58a6d24d7064018db3bac}{SteadyCurvedTubeProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ (Re-\/)assign\ velocity\ profile\ at\ inflow\ values}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ibound=0;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Recover\ coordinates\ of\ tube\ relative\ to\ centre\ position}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ x=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>x(0)\ -\/\ }
+\DoxyCodeLine{\ \ \ \ 1.0/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_add290b9e4a9c0e4c18a13faa7e29d857}{Global\_Physical\_Variables::Delta}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ z=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>x(2);}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Calculate\ the\ radius}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ r=sqrt(x*x+z*z);\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Poiseuille-\/type\ profile\ for\ axial\ velocity\ (component\ 1\ at\ the\ inlet)}}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>}
+\DoxyCodeLine{\ \ \ \ set\_value(1,(1.0-\/pow(r,2.0)));}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_actions\_before\_newton\_solve}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_doc\_solution==================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSteadyCurvedTubeProblem_a544bdf06e254393094a39561944af6b7}{SteadyCurvedTubeProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ file\ stream}}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts;}
+\DoxyCodeLine{\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Need\ high\ precision\ for\ large\ radii\ of\ curvature}}
+\DoxyCodeLine{\ \textcolor{comment}{//some\_file.precision(10);}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ labelled\ by\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\_Re\%g.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}});}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=start\_of\_main=======================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ 3D\ entry\ flow\ into\ a\ curved\ tube.\ If\ there\ are}}
+\DoxyCodeLine{\textcolor{comment}{///\ any\ command\ line\ arguments,\ we\ regard\ this\ as\ a\ validation\ run}}
+\DoxyCodeLine{\textcolor{comment}{///\ and\ perform\ only\ a\ single\ adaptation}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{curved__pipe_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allow\ (up\ to)\ two\ rounds\ of\ fully\ automatic\ adapation\ in\ response\ to\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ error\ estimate}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ max\_error\_target,min\_error\_target;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ max\ number\ of\ adaptations\ in\ black-\/box\ Newton\ solver\ and}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ error\ targets\ for\ adaptation}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc==1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Up\ to\ two\ adaptations}}
+\DoxyCodeLine{\ \ \ max\_adapt=2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Error\ targets\ for\ adaptive\ refinement}}
+\DoxyCodeLine{\ \ \ max\_error\_target=0.001;}
+\DoxyCodeLine{\ \ \ min\_error\_target=0.00001;}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation\ run:\ Only\ one\ adaptation.\ Relax\ error\ targets}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ for\ faster\ solution}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Validation\ run:\ Just\ one\ round\ of\ adaptation}}
+\DoxyCodeLine{\ \ \ max\_adapt=1;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Error\ targets\ for\ adaptive\ refinement}}
+\DoxyCodeLine{\ \ \ max\_error\_target=0.02;}
+\DoxyCodeLine{\ \ \ min\_error\_target=0.002;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ end\ max\_adapt\ setup}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ Taylor-\/Hood\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ doc\_info.number()=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem<RefineableQTaylorHoodElement<3>}}\ >\ }
+\DoxyCodeLine{\ \ \ problem(doc\_info,min\_error\_target,max\_error\_target);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Doing\ Taylor-\/Hood\ elements\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ }}
+\DoxyCodeLine{\ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Doc\ solution\ after\ solving}}
+\DoxyCodeLine{\ \ problem.doc\_solution();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ Crouzeix-\/Raviart\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ doc\_info.number()=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSteadyCurvedTubeProblem}{SteadyCurvedTubeProblem<RefineableQCrouzeixRaviartElement<3>}}\ >\ }
+\DoxyCodeLine{\ \ \ problem(doc\_info,min\_error\_target,max\_error\_target);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ cout\ <<\ \textcolor{stringliteral}{"{}\ Doing\ Crouzeix-\/Raviart\ elements\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ }}
+\DoxyCodeLine{\ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Doc\ solution\ after\ solving}}
+\DoxyCodeLine{\ \ problem.doc\_solution();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

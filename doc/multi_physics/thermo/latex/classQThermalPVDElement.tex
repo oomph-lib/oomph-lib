@@ -1,0 +1,392 @@
+\doxysection{QThermal\+PVDElement\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classQThermalPVDElement}{}\label{classQThermalPVDElement}\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+
+
+A class that solves the equations of steady thermoelasticity by combining the Unsteady\+Heat and PVD equations into a single element. A temperature-\/dependent growth term is added to the PVD equations by overloading the member function get\+\_\+istotropic\+\_\+growth()  
+
+
+Inheritance diagram for QThermal\+PVDElement\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQThermalPVDElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQThermalPVDElement_a24d60d6461b169603388f263cbdccd75}{QThermal\+PVDElement}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: call the underlying constructors and initialise the pointer to Alpha to point to the default value of 1.\+0. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classQThermalPVDElement_a55025994fc3d2799fde6f9c1142340af}{required\+\_\+nvalue}} (const unsigned \&n) const
+\begin{DoxyCompactList}\small\item\em The required number of values stored at the nodes is the sum of the required values of the two single-\/physics elements. Note that this step is generic for any multi-\/physics element of this type. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classQThermalPVDElement_a0f7eb960519ec1bf7263da9a90f1f29a}{alpha}} () const
+\begin{DoxyCompactList}\small\item\em Access function for the thermal expansion coefficient (const version) \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classQThermalPVDElement_af4cf775ecf7d0f26c30b1e522fb89a0f}{alpha\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the pointer to the thermal expansion coefficientr. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}{output}} (ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the standard output function with the broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a9d00cc21789124a37dffc9fdf2f011cd}{output}} (ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: ~\newline
+ Output x, y, u, v, p, theta at Nplot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_af290922dfcefef30dc03fca2a2cb4fbf}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a649062cd4f15d8f14a2755786dd466dc}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_accda081c3fb783b2c24715ec0c8e8e19}{output\+\_\+fct}} (ostream \&outfile, const unsigned \&Nplot, Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a0bb6609214fc7991950848806f9fb742}{output\+\_\+fct}} (ostream \&outfile, const unsigned \&Nplot, const double \&time, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a7824ab9fd50480c1eb8b20e57620afe5}{compute\+\_\+norm}} (double \&el\+\_\+norm)
+\begin{DoxyCompactList}\small\item\em Compute norm of solution\+: use the version in the unsteady heat class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a64e5047e9a054544b61a6e8cf5534364}{compute\+\_\+error}} (ostream \&outfile, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
+\begin{DoxyCompactList}\small\item\em Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_abbfb260a0c8dbf1dbfa797f15d98e0af}{compute\+\_\+error}} (ostream \&outfile, Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
+\begin{DoxyCompactList}\small\item\em Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a25774a0b8d2a7ec688e91420527cc5c4}{get\+\_\+isotropic\+\_\+growth}} (const unsigned \&ipt, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&xi, double \&gamma) const
+\begin{DoxyCompactList}\small\item\em Overload the growth function in the advection-\/diffusion equations. to be temperature-\/dependent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_ab26361e4164834860ec74603276b0207}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Calculate the contribution to the residual vector. We assume that the vector has been initialised to zero before this function is called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQThermalPVDElement_a6fe89466bee5ebcf16a14a68550ff447}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual Vector and the jacobian matrix We assume that the residuals vector and jacobian matrix have been initialised to zero before calling this function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classQThermalPVDElement_a9a9cb4c621700b1b84d2200bd94d5511}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}
+\begin{DoxyCompactList}\small\item\em Set the default physical value to be one. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a private data member, the thermal expansion coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classQThermalPVDElement_ad0722326e8c25746f63b35a46cac5886}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}
+\begin{DoxyCompactList}\small\item\em The static default value of Alpha. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class QThermal\+PVDElement$<$ DIM $>$}
+A class that solves the equations of steady thermoelasticity by combining the Unsteady\+Heat and PVD equations into a single element. A temperature-\/dependent growth term is added to the PVD equations by overloading the member function get\+\_\+istotropic\+\_\+growth() 
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00052}{52}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classQThermalPVDElement_a24d60d6461b169603388f263cbdccd75}\label{classQThermalPVDElement_a24d60d6461b169603388f263cbdccd75} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!QThermalPVDElement@{QThermalPVDElement}}
+\index{QThermalPVDElement@{QThermalPVDElement}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{QThermalPVDElement()}{QThermalPVDElement()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\mbox{\hyperlink{classQThermalPVDElement}{\+::\+QThermal\+PVDElement}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: call the underlying constructors and initialise the pointer to Alpha to point to the default value of 1.\+0. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00067}{67}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{thermo_8cc_source_l00058}{QThermal\+PVDElement$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, and \mbox{\hyperlink{thermo_8cc_source_l00061}{QThermal\+PVDElement$<$ DIM $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classQThermalPVDElement_a0f7eb960519ec1bf7263da9a90f1f29a}\label{classQThermalPVDElement_a0f7eb960519ec1bf7263da9a90f1f29a} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!alpha@{alpha}}
+\index{alpha@{alpha}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+const double \& \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the thermal expansion coefficient (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00081}{81}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{thermo_8cc_source_l00058}{QThermal\+PVDElement$<$ DIM $>$\+::\+Alpha\+\_\+pt}}.
+
+\Hypertarget{classQThermalPVDElement_af4cf775ecf7d0f26c30b1e522fb89a0f}\label{classQThermalPVDElement_af4cf775ecf7d0f26c30b1e522fb89a0f} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!alpha\_pt@{alpha\_pt}}
+\index{alpha\_pt@{alpha\_pt}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the pointer to the thermal expansion coefficientr. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00084}{84}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{thermo_8cc_source_l00058}{QThermal\+PVDElement$<$ DIM $>$\+::\+Alpha\+\_\+pt}}.
+
+\Hypertarget{classQThermalPVDElement_abbfb260a0c8dbf1dbfa797f15d98e0af}\label{classQThermalPVDElement_abbfb260a0c8dbf1dbfa797f15d98e0af} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!compute\_error@{compute\_error}}
+\index{compute\_error@{compute\_error}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}]{exact\+\_\+soln\+\_\+pt,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00174}{174}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a64e5047e9a054544b61a6e8cf5534364}\label{classQThermalPVDElement_a64e5047e9a054544b61a6e8cf5534364} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!compute\_error@{compute\_error}}
+\index{compute\_error@{compute\_error}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}]{exact\+\_\+soln\+\_\+pt,  }\item[{const double \&}]{time,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Validate against exact solution at given time Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element Call the broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00162}{162}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a7824ab9fd50480c1eb8b20e57620afe5}\label{classQThermalPVDElement_a7824ab9fd50480c1eb8b20e57620afe5} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!compute\_norm@{compute\_norm}}
+\index{compute\_norm@{compute\_norm}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_norm()}{compute\_norm()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::compute\+\_\+norm (\begin{DoxyParamCaption}\item[{double \&}]{el\+\_\+norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute norm of solution\+: use the version in the unsteady heat class. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00152}{152}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a9a9cb4c621700b1b84d2200bd94d5511}\label{classQThermalPVDElement_a9a9cb4c621700b1b84d2200bd94d5511} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
+\index{Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value()}{Default\_Physical\_Constant\_Value()}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ 2 $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set the default physical value to be one. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00219}{219}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a6fe89466bee5ebcf16a14a68550ff447}\label{classQThermalPVDElement_a6fe89466bee5ebcf16a14a68550ff447} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element\textquotesingle{}s residual Vector and the jacobian matrix We assume that the residuals vector and jacobian matrix have been initialised to zero before calling this function. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00205}{205}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_ab26361e4164834860ec74603276b0207}\label{classQThermalPVDElement_ab26361e4164834860ec74603276b0207} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the contribution to the residual vector. We assume that the vector has been initialised to zero before this function is called. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00192}{192}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a25774a0b8d2a7ec688e91420527cc5c4}\label{classQThermalPVDElement_a25774a0b8d2a7ec688e91420527cc5c4} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!get\_isotropic\_growth@{get\_isotropic\_growth}}
+\index{get\_isotropic\_growth@{get\_isotropic\_growth}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{get\_isotropic\_growth()}{get\_isotropic\_growth()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::get\+\_\+isotropic\+\_\+growth (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{double \&}]{gamma }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the growth function in the advection-\/diffusion equations. to be temperature-\/dependent. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00181}{181}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_af290922dfcefef30dc03fca2a2cb4fbf}\label{classQThermalPVDElement_af290922dfcefef30dc03fca2a2cb4fbf} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00125}{125}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a649062cd4f15d8f14a2755786dd466dc}\label{classQThermalPVDElement_a649062cd4f15d8f14a2755786dd466dc} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00129}{129}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827}\label{classQThermalPVDElement_a99e482f47a98c1b5ec7ec069211de827} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the standard output function with the broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00087}{87}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a9d00cc21789124a37dffc9fdf2f011cd}\label{classQThermalPVDElement_a9d00cc21789124a37dffc9fdf2f011cd} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output@{output}}
+\index{output@{output}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function\+: ~\newline
+ Output x, y, u, v, p, theta at Nplot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00092}{92}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a0bb6609214fc7991950848806f9fb742}\label{classQThermalPVDElement_a0bb6609214fc7991950848806f9fb742} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot,  }\item[{const double \&}]{time,  }\item[{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function for a time-\/dependent exact solution\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00141}{141}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_accda081c3fb783b2c24715ec0c8e8e19}\label{classQThermalPVDElement_accda081c3fb783b2c24715ec0c8e8e19} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!output\_fct@{output\_fct}}
+\index{output\_fct@{output\_fct}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{ostream \&}]{outfile,  }\item[{const unsigned \&}]{Nplot,  }\item[{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function for an exact solution\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00133}{133}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+\Hypertarget{classQThermalPVDElement_a55025994fc3d2799fde6f9c1142340af}\label{classQThermalPVDElement_a55025994fc3d2799fde6f9c1142340af} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
+\index{required\_nvalue@{required\_nvalue}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The required number of values stored at the nodes is the sum of the required values of the two single-\/physics elements. Note that this step is generic for any multi-\/physics element of this type. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00076}{76}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631}\label{classQThermalPVDElement_a97267a52ceec2a2153b23e18e2a2c631} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a private data member, the thermal expansion coefficient. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00058}{58}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{thermo_8cc_source_l00081}{QThermal\+PVDElement$<$ DIM $>$\+::alpha()}}, \mbox{\hyperlink{thermo_8cc_source_l00084}{QThermal\+PVDElement$<$ DIM $>$\+::alpha\+\_\+pt()}}, and \mbox{\hyperlink{thermo_8cc_source_l00067}{QThermal\+PVDElement$<$ DIM $>$\+::\+QThermal\+PVDElement()}}.
+
+\Hypertarget{classQThermalPVDElement_ad0722326e8c25746f63b35a46cac5886}\label{classQThermalPVDElement_ad0722326e8c25746f63b35a46cac5886} 
+\index{QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
+\index{Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}!QThermalPVDElement$<$ DIM $>$@{QThermalPVDElement$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement}}$<$ DIM $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The static default value of Alpha. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00061}{61}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{thermo_8cc_source_l00067}{QThermal\+PVDElement$<$ DIM $>$\+::\+QThermal\+PVDElement()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{thermo_8cc}{thermo.\+cc}}\end{DoxyCompactItemize}

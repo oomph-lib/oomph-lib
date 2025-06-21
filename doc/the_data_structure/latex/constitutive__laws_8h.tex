@@ -1,0 +1,22 @@
+\doxysection{constitutive\+\_\+laws.\+h File Reference}
+\hypertarget{constitutive__laws_8h}{}\label{constitutive__laws_8h}\index{constitutive\_laws.h@{constitutive\_laws.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1StrainEnergyFunction}{oomph\+::\+Strain\+Energy\+Function}}
+\begin{DoxyCompactList}\small\item\em Base class for strain energy functions to be used in solid mechanics computations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MooneyRivlin}{oomph\+::\+Mooney\+Rivlin}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1MooneyRivlin}{Mooney\+Rivlin} strain-\/energy function. with constitutive parameters C1 and C2\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GeneralisedMooneyRivlin}{oomph\+::\+Generalised\+Mooney\+Rivlin}}
+\begin{DoxyCompactList}\small\item\em Generalisation of Mooney Rivlin constitutive law to compressible media as suggested on p. 553 of Fung, Y.\+C. \& Tong, P. "{}\+Classical and \+Computational Solid Mechanics"{} World Scientific (2001). Input parameters are Young\textquotesingle{}s modulus E, Poisson ratio nu and the Mooney-\/\+Rivlin constant C1. In the small-\/deformation-\/limit the behaviour becomes equivalent to that of linear elasticity with the same E and nu. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{oomph\+::\+Constitutive\+Law}}
+\begin{DoxyCompactList}\small\item\em A class for constitutive laws for elements that solve the equations of solid mechanics based upon the principle of virtual displacements. In that formulation, the information required from a constitutive law is the (2nd Piola-\/\+Kirchhoff) stress tensor $ \sigma^{ij} $ as a function of the (Green) strain $ \gamma^{ij} $\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GeneralisedHookean}{oomph\+::\+Generalised\+Hookean}}
+\begin{DoxyCompactList}\small\item\em Class for a "{}non-\/rational"{} extension of classical linear elasticity to large displacements\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1IsotropicStrainEnergyFunctionConstitutiveLaw}{oomph\+::\+Isotropic\+Strain\+Energy\+Function\+Constitutive\+Law}}
+\begin{DoxyCompactList}\small\item\em A class for constitutive laws derived from strain-\/energy functions. Theory is in Green and Zerna. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,291 @@
+\doxysection{oomph\+::Vector\texorpdfstring{$<$}{<} \+\_\+\+Tp \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1Vector}{}\label{classoomph_1_1Vector}\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+
+
+A slight extension to the standard template vector class so that we can include "{}graceful"{} array range checks if the RANGE\+\_\+\+CHECKING flag is set. The generalisation to general allocators is NOT handled here, mainly because we never use it, but also because the intel and gnu compilers have different names for the internal classes, which makes writing code that works for both a pain!  
+
+
+
+
+{\ttfamily \#include $<$Vector.\+h$>$}
+
+Inheritance diagram for oomph\+::Vector\texorpdfstring{$<$}{<} \+\_\+\+Tp \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1Vector}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \mbox{\hyperlink{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}{value\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}{value\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}{reference}}
+\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}{value\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}{const\+\_\+reference}}
+\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a3ee293d1b770f0926ba350250bea37c7}{Vector}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a996ae9557e2ee9491771eb586e032994}{Vector}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}})
+\begin{DoxyCompactList}\small\item\em A constructor that creates a vector of size \+\_\+\+\_\+n. Note the use of explicit for "{}strong"{} type checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a408f09400832e1584c832aff24b00966}{Vector}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em A constructor that creates a vector of size \+\_\+\+\_\+n and initialises every entry to \+\_\+\+\_\+value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a6b383bf851bd1442e3552fded1cad024}{Vector}} (std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ init)
+\begin{DoxyCompactList}\small\item\em A constructor that creates a vector with entries set by the values in the input initialiser\+\_\+list Example\+: \doxylink{classoomph_1_1Vector}{Vector$<$int$>$} arr\{0, 20, 100, 150); \doxylink{classoomph_1_1Vector}{Vector$<$int$>$} arr = \{0, 20, 100, 150);. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a6b3ef7c59dd463636129183dd64f7843}{Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+x}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Vector_ad526bb1acccf11b485ebe12c9cde44fd}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Iterate over all values and set to the desired value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}{reference}} \mbox{\hyperlink{classoomph_1_1Vector_a7299888ed7f38cc2e891e1b50d47870d}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}})
+\begin{DoxyCompactList}\small\item\em Overload the bracket access operator to include array-\/range checking if the RANGE\+\_\+\+CHECKING flag is set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}{const\+\_\+reference}} \mbox{\hyperlink{classoomph_1_1Vector_a94d7a51d16e5792dd770e5a0ad7e7f89}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overloaded, range-\/checking, bracket access operator (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}{reference}} \mbox{\hyperlink{classoomph_1_1Vector_ac0b7cb9144acb726a6e1955532607883}{error\+\_\+checked\+\_\+access}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}})
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}{const\+\_\+reference}} \mbox{\hyperlink{classoomph_1_1Vector_a8c17ec5380c2056eacc506490fe386e9}{error\+\_\+checked\+\_\+access}} (\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+\_\+n}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}}$>$\newline
+class oomph\+::\+Vector$<$ \+\_\+\+Tp $>$}
+A slight extension to the standard template vector class so that we can include "{}graceful"{} array range checks if the RANGE\+\_\+\+CHECKING flag is set. The generalisation to general allocators is NOT handled here, mainly because we never use it, but also because the intel and gnu compilers have different names for the internal classes, which makes writing code that works for both a pain! 
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00057}{57}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}\label{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!const\_reference@{const\_reference}}
+\index{const\_reference@{const\_reference}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{const\_reference}{const\_reference}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}{value\+\_\+type}}\& \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::const\+\_\+reference}
+
+
+
+Typedef to make the constructors look a bit cleaner. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00067}{67}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}\label{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!reference@{reference}}
+\index{reference@{reference}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}{value\+\_\+type}}\& \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::reference}
+
+
+
+Typedef to make the constructors look a bit cleaner. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00064}{64}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}\label{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!size\_type@{size\_type}}
+\index{size\_type@{size\_type}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{size\_type}{size\_type}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{size\+\_\+t}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::size\+\_\+type}
+
+
+
+Typedef to make the constructors look a bit cleaner. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00070}{70}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2}\label{classoomph_1_1Vector_a73b0fda236ce64119befbeb30111f0b2} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::value\+\_\+type}
+
+
+
+Typedef to make the constructors look a bit cleaner. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00061}{61}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1Vector_a3ee293d1b770f0926ba350250bea37c7}\label{classoomph_1_1Vector_a3ee293d1b770f0926ba350250bea37c7} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::\+Vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an empty vector. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00141}{141}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a996ae9557e2ee9491771eb586e032994}\label{classoomph_1_1Vector_a996ae9557e2ee9491771eb586e032994} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+A constructor that creates a vector of size \+\_\+\+\_\+n. Note the use of explicit for "{}strong"{} type checking. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00145}{145}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a408f09400832e1584c832aff24b00966}\label{classoomph_1_1Vector_a408f09400832e1584c832aff24b00966} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \&}]{\+\_\+\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A constructor that creates a vector of size \+\_\+\+\_\+n and initialises every entry to \+\_\+\+\_\+value. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00149}{149}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a6b383bf851bd1442e3552fded1cad024}\label{classoomph_1_1Vector_a6b383bf851bd1442e3552fded1cad024} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::\+Vector (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$}]{init }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A constructor that creates a vector with entries set by the values in the input initialiser\+\_\+list Example\+: \doxylink{classoomph_1_1Vector}{Vector$<$int$>$} arr\{0, 20, 100, 150); \doxylink{classoomph_1_1Vector}{Vector$<$int$>$} arr = \{0, 20, 100, 150);. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00158}{158}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a6b3ef7c59dd463636129183dd64f7843}\label{classoomph_1_1Vector_a6b3ef7c59dd463636129183dd64f7843} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \&}]{\+\_\+\+\_\+x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00161}{161}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1Vector_ac0b7cb9144acb726a6e1955532607883}\label{classoomph_1_1Vector_ac0b7cb9144acb726a6e1955532607883} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!error\_checked\_access@{error\_checked\_access}}
+\index{error\_checked\_access@{error\_checked\_access}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{error\_checked\_access()}{error\_checked\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}{reference}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::error\+\_\+checked\+\_\+access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00077}{77}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{Vector_8h_source_l00180}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, and \mbox{\hyperlink{Vector_8h_source_l00186}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::operator\mbox{[}$\,$\mbox{]}()}}.
+
+\Hypertarget{classoomph_1_1Vector_a8c17ec5380c2056eacc506490fe386e9}\label{classoomph_1_1Vector_a8c17ec5380c2056eacc506490fe386e9} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!error\_checked\_access@{error\_checked\_access}}
+\index{error\_checked\_access@{error\_checked\_access}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{error\_checked\_access()}{error\_checked\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}{const\+\_\+reference}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::error\+\_\+checked\+\_\+access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00111}{111}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_ad526bb1acccf11b485ebe12c9cde44fd}\label{classoomph_1_1Vector_ad526bb1acccf11b485ebe12c9cde44fd} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} \&}]{\+\_\+\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate over all values and set to the desired value. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00167}{167}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\Hypertarget{classoomph_1_1Vector_a7299888ed7f38cc2e891e1b50d47870d}\label{classoomph_1_1Vector_a7299888ed7f38cc2e891e1b50d47870d} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector_a7bd8c89b884168f3ecc358acc501d356}{reference}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the bracket access operator to include array-\/range checking if the RANGE\+\_\+\+CHECKING flag is set. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00180}{180}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{Vector_8h_source_l00077}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::error\+\_\+checked\+\_\+access()}}.
+
+\Hypertarget{classoomph_1_1Vector_a94d7a51d16e5792dd770e5a0ad7e7f89}\label{classoomph_1_1Vector_a94d7a51d16e5792dd770e5a0ad7e7f89} 
+\index{oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!oomph::Vector$<$ \_Tp $>$@{oomph::Vector$<$ \_Tp $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector_ad126afbb3b115ef9dce224cf33c71428}{const\+\_\+reference}} \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+\+Tp}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_a8ad2a43bd51f6bf2a981dd4e4e4247f5}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded, range-\/checking, bracket access operator (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00186}{186}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+
+
+References \mbox{\hyperlink{Vector_8h_source_l00077}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::error\+\_\+checked\+\_\+access()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Vector_8h}{Vector.\+h}}\end{DoxyCompactItemize}

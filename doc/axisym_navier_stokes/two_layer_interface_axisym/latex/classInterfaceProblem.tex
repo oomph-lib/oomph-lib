@@ -1,0 +1,618 @@
+\doxysection{Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classInterfaceProblem}{}\label{classInterfaceProblem}\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+
+
+Axisymmetric two fluid interface problem in a rectangular domain.  
+
+
+Inheritance diagram for Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.924399cm]{classInterfaceProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}{Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{\texorpdfstring{$\sim$}{\string~}\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{set\+\_\+boundary\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Set boundary conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Doc\+Info}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Document the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\+\_\+max}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}})
+\begin{DoxyCompactList}\small\item\em Do unsteady run up to maximum time t\+\_\+max with given timestep dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_ab476bae8faf34f3238b31564d31a4795}{Interface\+Problem}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\+\_\+r}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\+\_\+z1}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\+\_\+z2}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{l\+\_\+r}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h1}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{h2}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements and the width of the domain in the r direction. Also pass the number of elements in the z direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{\texorpdfstring{$\sim$}{\string~}\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{set\+\_\+boundary\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Set boundary conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Doc\+Info}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{t\+\_\+max}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{dt}})
+\begin{DoxyCompactList}\small\item\em Do unsteady run up to maximum time t\+\_\+max with given timestep dt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em No actions required before solve step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em No actions required after solve step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ae3ec75fcc8ccca97207dc7eca23b1cce}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Actions before the timestep\+: For maximum stability, reset the current nodal positions to be the "{}stress-\/free"{} ones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Strip off the interface elements before adapting the bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a1c8a5dee970dccc3f1da993cf531872d}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Rebuild the mesh of interface elements after adapting the bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}{create\+\_\+interface\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create the 1d interface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}{delete\+\_\+interface\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete the 1d interface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{deform\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{k}})
+\begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}{fix\+\_\+pressure}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pdof}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pvalue}})
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em No actions required before solve step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update after solve can remain empty, because the update is performed automatically after every Newton step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{deform\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{k}})
+\begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}{fix\+\_\+pressure}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pdof}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pvalue}})
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the (specific) "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}surface"{} mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}{Constitutive\+\_\+law\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a6ebe4e37868be26465c7bc6d2cef95e7}{Lr}}
+\begin{DoxyCompactList}\small\item\em Width of domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ofstream}} \mbox{\hyperlink{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the specific bulk mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}}$>$\newline
+class Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Axisymmetric two fluid interface problem in a rectangular domain. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00173}{173}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba}\label{classInterfaceProblem_a5889be7fc8eab5d222f1bfb750c845ba} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
+\index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\mbox{\hyperlink{classInterfaceProblem}{\+::\+Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for axisymmetric two fluid interface problem. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00259}{259}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00080}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00116}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00089}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00069}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
+
+\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}}
+\index{````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}InterfaceProblem()}{\string~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00182}{182}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_ab476bae8faf34f3238b31564d31a4795}\label{classInterfaceProblem_ab476bae8faf34f3238b31564d31a4795} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
+\index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\mbox{\hyperlink{classInterfaceProblem}{\+::\+Interface\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{n\+\_\+r,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{n\+\_\+z1,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{n\+\_\+z2,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{l\+\_\+r,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{h1,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{h2 }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass the number of elements and the width of the domain in the r direction. Also pass the number of elements in the z direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers. 
+
+Constructor for axisymmetric two fluid interface problem. 
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00175}{175}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00083}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00080}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00069}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00484}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00240}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
+
+\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}}
+\index{````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}InterfaceProblem()}{\string~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00108}{108}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classInterfaceProblem_a1c8a5dee970dccc3f1da993cf531872d}\label{classInterfaceProblem_a1c8a5dee970dccc3f1da993cf531872d} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rebuild the mesh of interface elements after adapting the bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00537}{537}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00116}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}.
+
+\Hypertarget{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}\label{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+No actions required after solve step. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00202}{202}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}\label{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Update after solve can remain empty, because the update is performed automatically after every Newton step. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00138}{138}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}\label{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Strip off the interface elements before adapting the bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00521}{521}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_ae3ec75fcc8ccca97207dc7eca23b1cce}\label{classInterfaceProblem_ae3ec75fcc8ccca97207dc7eca23b1cce} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Actions before the timestep\+: For maximum stability, reset the current nodal positions to be the "{}stress-\/free"{} ones. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00206}{206}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}\label{classInterfaceProblem_ab4193771472aefce4cd67261491cc344} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00128}{128}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}\label{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+No actions required before solve step. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00199}{199}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}\label{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+No actions required before solve step. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00134}{134}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}\label{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!create\_interface\_elements@{create\_interface\_elements}}
+\index{create\_interface\_elements@{create\_interface\_elements}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{create\_interface\_elements()}{create\_interface\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::create\+\_\+interface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create the 1d interface elements. 
+
+Create interface elements between the two fluids in the mesh pointed to by Bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointed to by Surface\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00577}{577}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00083}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
+
+\Hypertarget{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}\label{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
+\index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{epsilon,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Deform the mesh/free surface to a prescribed function. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00661}{661}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00116}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}.
+
+\Hypertarget{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}\label{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
+\index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{epsilon,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Deform the mesh/free surface to a prescribed function. 
+
+\Hypertarget{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}\label{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!delete\_interface\_elements@{delete\_interface\_elements}}
+\index{delete\_interface\_elements@{delete\_interface\_elements}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_interface\_elements()}{delete\_interface\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::delete\+\_\+interface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete the 1d interface elements. 
+
+Delete the interface elements and wipe the surface mesh. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00639}{639}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Document the solution. 
+
+Doc the solution. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00695}{695}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}\label{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{e,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{pdof,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00227}{227}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00176}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}\label{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{e,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{pdof,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00144}{144}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}\label{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
+\index{set\_boundary\_conditions@{set\_boundary\_conditions}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::set\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set boundary conditions. 
+
+Set boundary conditions\+: Set all velocity components to zero on the top and bottom (solid) walls and the radial and azimuthal components only to zero on the side boundaries. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00484}{484}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00176}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}\label{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
+\index{set\_boundary\_conditions@{set\_boundary\_conditions}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::set\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set boundary conditions. 
+
+\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial conditions. 
+
+Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities and nodal positions to correspond to an impulsive start. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00454}{454}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial conditions. 
+
+\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
+
+Perform run up to specified time t\+\_\+max with given timestep dt. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00747}{747}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}\label{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the (specific) "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00237}{237}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00206}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00128}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00144}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00176}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}\label{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Two\+Layer\+Spine\+Mesh}}$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the specific bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00161}{161}} of file \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}\label{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Constitutive\+Law}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00243}{243}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a6ebe4e37868be26465c7bc6d2cef95e7}\label{classInterfaceProblem_a6ebe4e37868be26465c7bc6d2cef95e7} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Lr@{Lr}}
+\index{Lr@{Lr}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Lr}{Lr}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Lr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Width of domain. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00246}{246}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674}\label{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}surface"{} mesh. 
+
+Pointer to the surface mesh. 
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00240}{240}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{spine__two__layer__interface__axisym_8cc_source_l00176}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}\label{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} , \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ofstream}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{TIMESTEPPER}} $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source_l00249}{249}} of file \mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__two__layer__interface__axisym_8cc}{elastic\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}\item 
+\mbox{\hyperlink{spine__two__layer__interface__axisym_8cc}{spine\+\_\+two\+\_\+layer\+\_\+interface\+\_\+axisym.\+cc}}\end{DoxyCompactItemize}

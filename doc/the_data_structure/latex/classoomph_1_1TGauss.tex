@@ -1,0 +1,29 @@
+\doxysection{oomph\+::TGauss\texorpdfstring{$<$}{<} DIM, NPTS\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TGauss}{}\label{classoomph_1_1TGauss}\index{oomph::TGauss$<$ DIM, NPTS\_1D $>$@{oomph::TGauss$<$ DIM, NPTS\_1D $>$}}
+
+
+Class for Gaussian integration rules for triangles/tets.  
+
+
+
+
+{\ttfamily \#include $<$integral.\+h$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$\newline
+class oomph\+::\+TGauss$<$ DIM, NPTS\+\_\+1\+D $>$}
+Class for Gaussian integration rules for triangles/tets. 
+
+Empty -- just establishes the template parameters
+
+General logic\+: The template parameters correspond to those of the \doxylink{classoomph_1_1TElement}{TElement} family so that the integration scheme TGauss$<$\+DIM,\+NNODE\+\_\+1\+D$>$ provides the default ("{}full"{}) integration scheme for TElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$. "{}\+Full"{} integration means that for linear PDEs that are discretised on a uniform mesh, all integrals arising in the Galerkin weak form of the PDE are evaluated exactly. In such problems the highest-\/order polynomials arise from the products of the undifferentiated shape and test functions so a three node triangle needs an integration scheme that can integrate quadratic polynomials exactly etc. 
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l00625}{625}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{integral_8h}{integral.\+h}}\end{DoxyCompactItemize}

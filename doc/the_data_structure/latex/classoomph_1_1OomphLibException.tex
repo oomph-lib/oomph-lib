@@ -1,0 +1,170 @@
+\doxysection{oomph\+::Oomph\+Lib\+Exception Class Reference}
+\hypertarget{classoomph_1_1OomphLibException}{}\label{classoomph_1_1OomphLibException}\index{oomph::OomphLibException@{oomph::OomphLibException}}
+
+
+===================================================================== A Base class for oomph-\/lib run-\/time exception (error and warning) handling.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
+
+Inheritance diagram for oomph\+::Oomph\+Lib\+Exception\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.991453cm]{classoomph_1_1OomphLibException}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db4e1e507}{disable\+\_\+error\+\_\+message}} ()
+\begin{DoxyCompactList}\small\item\em Suppress issueing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b}{Oomph\+Lib\+Exception}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+type}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+stream}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+width}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{list\+\_\+trace\+\_\+back}})
+\begin{DoxyCompactList}\small\item\em Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string "{}\+WARNING"{} or "{}\+ERROR"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}{\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception}} ()  \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw}} ()
+\begin{DoxyCompactList}\small\item\em The destructor cannot throw an exception (C++ STL standard) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7}{Exception\+\_\+stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Exception stream to which we write message in destructor. \end{DoxyCompactList}\item 
+std\+::stringstream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}{Exception\+\_\+stringstream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em String stream that records the error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}{Suppress\+\_\+error\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+===================================================================== A Base class for oomph-\/lib run-\/time exception (error and warning) handling. 
+
+The class can only be instantiated by the derived classes \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error} and \doxylink{classoomph_1_1OomphLibWarning}{Oomph\+Lib\+Warning}. The (protected) constructor combines its string arguments into a standard format for uniform exception reports which are written to the specified output stream. 
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00180}{180}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b}\label{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!OomphLibException@{OomphLibException}}
+\index{OomphLibException@{OomphLibException}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{OomphLibException()}{OomphLibException()}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Exception\+::\+Oomph\+Lib\+Exception (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{error\+\_\+description,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{function\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}}]{location,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{exception\+\_\+type,  }\item[{std\+::ostream \&}]{exception\+\_\+stream,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{output\+\_\+width,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}}}]{list\+\_\+trace\+\_\+back }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string "{}\+WARNING"{} or "{}\+ERROR"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. 
+
+The \doxylink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception} constructor takes the error description, function name, a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION and an exception type "{}\+WARNING"{} or "{}\+ERROR"{} and combines them into a standard error message that is written to the exception stream. The output\+\_\+width of the message can also be specified. Optionally provide a traceback of the function calls. 
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{144}} of file \mbox{\hyperlink{oomph__definitions_8cc_source}{oomph\+\_\+definitions.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{Exception\+\_\+stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00103}{oomph\+::\+Terminate\+Helper\+::\+Exception\+\_\+stringstream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00216}{Exception\+\_\+stringstream\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{stacktrace_8h_source_l00047}{print\+\_\+stacktrace()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00063}{oomph\+::\+Terminate\+Helper\+::setup()}}, and \mbox{\hyperlink{oomph__definitions_8h_source_l00220}{Suppress\+\_\+error\+\_\+message}}.
+
+\Hypertarget{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}\label{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!````~OomphLibException@{\texorpdfstring{$\sim$}{\string~}OomphLibException}}
+\index{````~OomphLibException@{\texorpdfstring{$\sim$}{\string~}OomphLibException}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}OomphLibException()}{\string~OomphLibException()}}
+{\footnotesize\ttfamily oomph\+::\+Oomph\+Lib\+Exception\+::\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throw ( ) \hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The destructor cannot throw an exception (C++ STL standard) 
+
+The \doxylink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception} destructor actually spawns the error message created in the constructor (unless suppresed) 
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{126}} of file \mbox{\hyperlink{oomph__definitions_8cc_source}{oomph\+\_\+definitions.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00216}{Exception\+\_\+stringstream\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8h_source_l00220}{Suppress\+\_\+error\+\_\+message}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db4e1e507}\label{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db4e1e507} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!disable\_error\_message@{disable\_error\_message}}
+\index{disable\_error\_message@{disable\_error\_message}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{disable\_error\_message()}{disable\_error\_message()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Oomph\+Lib\+Exception\+::disable\+\_\+error\+\_\+message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Suppress issueing of the error message in destructor (useful if error is caught successfully!) 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00185}{185}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00220}{Suppress\+\_\+error\+\_\+message}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00072}{oomph\+::\+Terminate\+Helper\+::suppress\+\_\+exception\+\_\+error\+\_\+messages()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7}\label{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!Exception\_stream\_pt@{Exception\_stream\_pt}}
+\index{Exception\_stream\_pt@{Exception\_stream\_pt}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{Exception\_stream\_pt}{Exception\_stream\_pt}}
+{\footnotesize\ttfamily std\+::ostream\texorpdfstring{$\ast$}{*} oomph\+::\+Oomph\+Lib\+Exception\+::\+Exception\+\_\+stream\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Exception stream to which we write message in destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{213}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}.
+
+\Hypertarget{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}\label{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!Exception\_stringstream\_pt@{Exception\_stringstream\_pt}}
+\index{Exception\_stringstream\_pt@{Exception\_stringstream\_pt}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{Exception\_stringstream\_pt}{Exception\_stringstream\_pt}}
+{\footnotesize\ttfamily std\+::stringstream\texorpdfstring{$\ast$}{*} oomph\+::\+Oomph\+Lib\+Exception\+::\+Exception\+\_\+stringstream\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+String stream that records the error message. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00216}{216}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception()}}.
+
+\Hypertarget{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}\label{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d} 
+\index{oomph::OomphLibException@{oomph::OomphLibException}!Suppress\_error\_message@{Suppress\_error\_message}}
+\index{Suppress\_error\_message@{Suppress\_error\_message}!oomph::OomphLibException@{oomph::OomphLibException}}
+\doxysubsubsection{\texorpdfstring{Suppress\_error\_message}{Suppress\_error\_message}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Oomph\+Lib\+Exception\+::\+Suppress\+\_\+error\+\_\+message\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!) 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00220}{220}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__definitions_8h_source_l00185}{disable\+\_\+error\+\_\+message()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__definitions_8h}{oomph\+\_\+definitions.\+h}}\item 
+\mbox{\hyperlink{oomph__definitions_8cc}{oomph\+\_\+definitions.\+cc}}\end{DoxyCompactItemize}

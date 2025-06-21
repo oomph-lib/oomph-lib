@@ -1,0 +1,110 @@
+\doxysection{oomph\+::Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices Class Reference}
+\hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+
+
+Pure virtual base class for elements that can be used with Navier-\/\+Stokes Schur complement preconditioner and provide the diagonal of their velocity and pressure mass matrices -- needs to be defined here (in generic) because this applies to a variety of Navier-\/\+Stokes elements (cartesian, cylindrical polar, ...) that can be preconditioned effectively by the Navier Stokes (!) preconditioners in the (cartesian) Navier-\/\+Stokes directory.  
+
+
+
+
+{\ttfamily \#include $<$elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.961491cm]{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_ac7a1a5b65cbc7a5afce8abaf1c3df308}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a52a7a153383615753bf012b09e3745d1}{\texorpdfstring{$\sim$}{\string~}\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a777f513d624993ad9e73bf8575d451bf}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a2dbc324c7d8e69141f8e086c0d39bba0}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a4d491d10823eee10381a9b14bce6c244}{get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{press\+\_\+mass\+\_\+diag}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{veloc\+\_\+mass\+\_\+diag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{which\+\_\+one}}=0)=0
+\begin{DoxyCompactList}\small\item\em Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Pure virtual base class for elements that can be used with Navier-\/\+Stokes Schur complement preconditioner and provide the diagonal of their velocity and pressure mass matrices -- needs to be defined here (in generic) because this applies to a variety of Navier-\/\+Stokes elements (cartesian, cylindrical polar, ...) that can be preconditioned effectively by the Navier Stokes (!) preconditioners in the (cartesian) Navier-\/\+Stokes directory. 
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05234}{5234}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_ac7a1a5b65cbc7a5afce8abaf1c3df308}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_ac7a1a5b65cbc7a5afce8abaf1c3df308} 
+\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}!NavierStokesElementWithDiagonalMassMatrices@{NavierStokesElementWithDiagonalMassMatrices}}
+\index{NavierStokesElementWithDiagonalMassMatrices@{NavierStokesElementWithDiagonalMassMatrices}!oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+\doxysubsubsection{\texorpdfstring{NavierStokesElementWithDiagonalMassMatrices()}{NavierStokesElementWithDiagonalMassMatrices()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05238}{5238}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+\Hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a52a7a153383615753bf012b09e3745d1}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a52a7a153383615753bf012b09e3745d1} 
+\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}!````~NavierStokesElementWithDiagonalMassMatrices@{\texorpdfstring{$\sim$}{\string~}NavierStokesElementWithDiagonalMassMatrices}}
+\index{````~NavierStokesElementWithDiagonalMassMatrices@{\texorpdfstring{$\sim$}{\string~}NavierStokesElementWithDiagonalMassMatrices}!oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NavierStokesElementWithDiagonalMassMatrices()}{\string~NavierStokesElementWithDiagonalMassMatrices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::\texorpdfstring{$\sim$}{\string~}\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05241}{5241}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
+
+\Hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a777f513d624993ad9e73bf8575d451bf}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a777f513d624993ad9e73bf8575d451bf} 
+\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}!NavierStokesElementWithDiagonalMassMatrices@{NavierStokesElementWithDiagonalMassMatrices}}
+\index{NavierStokesElementWithDiagonalMassMatrices@{NavierStokesElementWithDiagonalMassMatrices}!oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+\doxysubsubsection{\texorpdfstring{NavierStokesElementWithDiagonalMassMatrices()}{NavierStokesElementWithDiagonalMassMatrices()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a4d491d10823eee10381a9b14bce6c244}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a4d491d10823eee10381a9b14bce6c244} 
+\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}!get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}}
+\index{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal@{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal}!oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+\doxysubsubsection{\texorpdfstring{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal()}{get\_pressure\_and\_velocity\_mass\_matrix\_diagonal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::get\+\_\+pressure\+\_\+and\+\_\+velocity\+\_\+mass\+\_\+matrix\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{press\+\_\+mass\+\_\+diag,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{veloc\+\_\+mass\+\_\+diag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{which\+\_\+one = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Compute the diagonal of the velocity/pressure mass matrices. If which one=0, both are computed, otherwise only the pressure (which\+\_\+one=1) or the velocity mass matrix (which\+\_\+one=2 -- the LSC version of the preconditioner only needs that one) 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ac0c850c7a41b408784f3a103f9aba982}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a0c4bd2fe53aee0df4fa9b2bf57fb6a89}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_a6a7432333fec18d7e68efc3f99a02f16}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianNavierStokesEquations_af66689b596908f67bf4af1ad9d6c11eb}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_a2d6e748dd25be78b65f927cd2b257c55}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesEquations_a94c16c8b4aa810e9e2f8df263654eaed}{oomph\+::\+Refineable\+Navier\+Stokes\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_a9175c06a19ef410ad6a96d745675c4d3}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableSpaceTimeNavierStokesMixedOrderEquations_a2c1c7d0481a14a1477b175a3535279f3}{oomph\+::\+Refineable\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$}}, \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a3cb7aec8278bb92aa731a19777608cac}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTemplateFreeNavierStokesEquationsBase_a04ab7221559a058af6f0266197094320}{oomph\+::\+Generalised\+Newtonian\+Template\+Free\+Navier\+Stokes\+Equations\+Base}}, \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesEquationsBase_aeb1a1fc53b7e8b25ace065e0b5fd5eff}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Equations\+Base}}, and \mbox{\hyperlink{classoomph_1_1TemplateFreeSpaceTimeNavierStokesMixedOrderEquationsBase_a979ec341be607d00d336ced9154634c4}{oomph\+::\+Template\+Free\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations\+Base}}.
+
+\Hypertarget{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a2dbc324c7d8e69141f8e086c0d39bba0}\label{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices_a2dbc324c7d8e69141f8e086c0d39bba0} 
+\index{oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::NavierStokesElementWithDiagonalMassMatrices@{oomph::NavierStokesElementWithDiagonalMassMatrices}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elements_8h}{elements.\+h}}\end{DoxyCompactItemize}

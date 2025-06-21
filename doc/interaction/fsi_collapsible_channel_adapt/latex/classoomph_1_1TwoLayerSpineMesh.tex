@@ -1,0 +1,683 @@
+\doxysection{oomph\+::Two\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TwoLayerSpineMesh}{}\label{classoomph_1_1TwoLayerSpineMesh}\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+
+
+Two-\/layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$).  
+
+
+
+
+{\ttfamily \#include $<$two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Two\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1TwoLayerSpineMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0c41a93e9ccaaa34956215e64611be2a}{Two\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}{Two\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}{Two\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ny2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h1}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{h2}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, a boolean flag to specify whether or not to call the "{}build\+\_\+two\+\_\+layer\+\_\+mesh"{} function, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5}{upper\+\_\+layer\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a}{lower\+\_\+layer\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c}{nupper}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4}{nlower}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in top layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144}{interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd}{interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115}{ninterface\+\_\+upper}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a5ad10a9a2022a32e2a5f311f789fae51}{ninterface\+\_\+lower}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in top layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{int}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2f31c7c1ad05803e296545a0a4210164}{interface\+\_\+upper\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{e}})
+\begin{DoxyCompactList}\small\item\em Index of the face of the elements next to the interface in the upper region (always -\/2) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{int}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a441e4c3a46f0ba2210130a59be471e09}{interface\+\_\+lower\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{e}})
+\begin{DoxyCompactList}\small\item\em Index of the face of the elements next to the interface in the lower region (always 2) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific update actions, depending on the node update fct id stored for each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-\/direction. Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}{element\+\_\+reorder}} ()
+\begin{DoxyCompactList}\small\item\em Reorder the elements\+: By default they are ordered in "{}horizontal"{} layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}{x\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em The spacing function for the x co-\/ordinates with two regions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}{y\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em The spacing function for the y co-\/ordinates with three regions in each fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}{spine\+\_\+node\+\_\+update\+\_\+lower}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the lower part of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}{spine\+\_\+node\+\_\+update\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the upper part of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ada5471a89c3ac91a606b3e5dcc1325cd}{build\+\_\+two\+\_\+layer\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to actually build the two-\/layer spine mesh (called from various constructors) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{build}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a614e800b8c5ba2963254e7e41bcfc9e2}{Ny1}}
+\begin{DoxyCompactList}\small\item\em Number of elements in lower layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a48a69edc318571675eed16c9154235e3}{Ny2}}
+\begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_ad98f7a291c592042279f0498ea3ec5c9}{H1}}
+\begin{DoxyCompactList}\small\item\em Height of the lower layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0a7e5f7297ad653440d7d833c89d1b44}{H2}}
+\begin{DoxyCompactList}\small\item\em Height of the upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a14b79ca1154063be4611c3855a05755f}{Lower\+\_\+layer\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the upper layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0973b44d5a44d36ba5c4c37864259b95}{Upper\+\_\+layer\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the lower layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_aaa5c2ad2f61cd7637b12573265b42bd7}{Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to the elements adjacent to the interface on the lower layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a1ebfbb343b476e764e3de338e4774d32}{Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to the element adjacent to the interface on the upper layer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}{Nx}}
+\begin{DoxyCompactList}\small\item\em Nx\+: number of elements in x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}{Ny}}
+\begin{DoxyCompactList}\small\item\em Ny\+: number of elements in y-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a92502c7536a6644ebffd806841cd4d98}{Np}}
+\begin{DoxyCompactList}\small\item\em Np\+: number of (linear) points in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}{Xperiodic}}
+\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}
+Two-\/layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$). 
+
+This mesh paritions the elements into those above and below a notional interface and relabels boundaries so that the mesh is as follows \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{3}{3}}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md5}
+\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 4 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 2 \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\vert$}{|}                 6                   \texorpdfstring{$\vert$}{|}}{|                 6                   |}}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md6}
+\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 5 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 1 \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\vert$}{|}                                     \texorpdfstring{$\vert$}{|}}{|                                     |}}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md7}
+0 Update information for the nodes in response to changes in spine length is given, but additional equations must be specified in order to completely specify the problem. 
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00058}{58}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0c41a93e9ccaaa34956215e64611be2a}\label{classoomph_1_1TwoLayerSpineMesh_a0c41a93e9ccaaa34956215e64611be2a} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
+\index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Two\+Layer\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers and pointer to timestepper (defaults to Steady timestepper) 
+
+Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, and pointer to timestepper (defaults to Static timestepper).
+
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{51}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00266}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00205}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00208}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00199}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00202}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}\label{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
+\index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Two\+Layer\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Steady timestepper) 
+
+Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Static timestepper).
+
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{99}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00266}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00205}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00208}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00199}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00202}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}\label{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
+\index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Two\+Layer\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{ny2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h1,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{h2,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{bool}} \&}]{build\+\_\+mesh,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, a boolean flag to specify whether or not to call the "{}build\+\_\+two\+\_\+layer\+\_\+mesh"{} function, and pointer to timestepper (defaults to Steady timestepper) 
+
+Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, a boolean flag to specify whether or not to call the "{}build\+\_\+two\+\_\+layer\+\_\+mesh"{} function, and pointer to timestepper (defaults to Static timestepper).
+
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{156}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00044}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00266}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00205}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00208}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00199}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00202}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_ada5471a89c3ac91a606b3e5dcc1325cd}\label{classoomph_1_1TwoLayerSpineMesh_ada5471a89c3ac91a606b3e5dcc1325cd} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!build\_two\_layer\_mesh@{build\_two\_layer\_mesh}}
+\index{build\_two\_layer\_mesh@{build\_two\_layer\_mesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_two\_layer\_mesh()}{build\_two\_layer\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Helper function to actually build the two-\/layer spine mesh (called from various constructors) 
+
+Helper function that actually builds the two-\/layer spine mesh based on the parameters set in the various constructors. 
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00266}{266}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00044}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd}\label{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}}
+\index{interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interface\_lower\_boundary\_element\_pt()}{interface\_lower\_boundary\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to elements in bottom layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00140}{140}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00218}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a441e4c3a46f0ba2210130a59be471e09}\label{classoomph_1_1TwoLayerSpineMesh_a441e4c3a46f0ba2210130a59be471e09} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_lower\_face\_index\_at\_boundary@{interface\_lower\_face\_index\_at\_boundary}}
+\index{interface\_lower\_face\_index\_at\_boundary@{interface\_lower\_face\_index\_at\_boundary}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interface\_lower\_face\_index\_at\_boundary()}{interface\_lower\_face\_index\_at\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{int}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::interface\+\_\+lower\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index of the face of the elements next to the interface in the lower region (always 2) 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00166}{166}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144}\label{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}}
+\index{interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interface\_upper\_boundary\_element\_pt()}{interface\_upper\_boundary\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to elements in upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00134}{134}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00222}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2f31c7c1ad05803e296545a0a4210164}\label{classoomph_1_1TwoLayerSpineMesh_a2f31c7c1ad05803e296545a0a4210164} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_upper\_face\_index\_at\_boundary@{interface\_upper\_face\_index\_at\_boundary}}
+\index{interface\_upper\_face\_index\_at\_boundary@{interface\_upper\_face\_index\_at\_boundary}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interface\_upper\_face\_index\_at\_boundary()}{interface\_upper\_face\_index\_at\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{int}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::interface\+\_\+upper\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index of the face of the elements next to the interface in the upper region (always -\/2) 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00159}{159}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a}\label{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!lower\_layer\_element\_pt@{lower\_layer\_element\_pt}}
+\index{lower\_layer\_element\_pt@{lower\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{lower\_layer\_element\_pt()}{lower\_layer\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to elements in bottom layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00116}{116}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00211}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a5ad10a9a2022a32e2a5f311f789fae51}\label{classoomph_1_1TwoLayerSpineMesh_a5ad10a9a2022a32e2a5f311f789fae51} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!ninterface\_lower@{ninterface\_lower}}
+\index{ninterface\_lower@{ninterface\_lower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ninterface\_lower()}{ninterface\_lower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::ninterface\+\_\+lower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in top layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00152}{152}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00218}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115}\label{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!ninterface\_upper@{ninterface\_upper}}
+\index{ninterface\_upper@{ninterface\_upper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ninterface\_upper()}{ninterface\_upper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::ninterface\+\_\+upper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00146}{146}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00222}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4}\label{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!nlower@{nlower}}
+\index{nlower@{nlower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nlower()}{nlower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::nlower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in top layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00128}{128}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00211}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c}\label{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!nupper@{nupper}}
+\index{nupper@{nupper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nupper()}{nupper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::nupper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00122}{122}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00214}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}\label{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
+\index{spine\_node\_update@{spine\_node\_update}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific update actions, depending on the node update fct id stored for each node. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00174}{174}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00240}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00252}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}\label{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update\_lower@{spine\_node\_update\_lower}}
+\index{spine\_node\_update\_lower@{spine\_node\_update\_lower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_lower()}{spine\_node\_update\_lower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the lower part of the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00240}{240}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00174}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}\label{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update\_upper@{spine\_node\_update\_upper}}
+\index{spine\_node\_update\_upper@{spine\_node\_update\_upper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_upper()}{spine\_node\_update\_upper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the upper part of the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00252}{252}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00077}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymax}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00174}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5}\label{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!upper\_layer\_element\_pt@{upper\_layer\_element\_pt}}
+\index{upper\_layer\_element\_pt@{upper\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{upper\_layer\_element\_pt()}{upper\_layer\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to elements in upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00110}{110}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00214}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}\label{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!x\_spacing\_function@{x\_spacing\_function}}
+\index{x\_spacing\_function@{x\_spacing\_function}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{x\_spacing\_function()}{x\_spacing\_function()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{xelement,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{xnode,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{yelement,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+The spacing function for the x co-\/ordinates with two regions. 
+
+The spacing function for the x co-\/ordinate, which is the same as the default function. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00210}{210}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}\label{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!y\_spacing\_function@{y\_spacing\_function}}
+\index{y\_spacing\_function@{y\_spacing\_function}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{y\_spacing\_function()}{y\_spacing\_function()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::y\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{xelement,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{xnode,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{yelement,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}}}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+The spacing function for the y co-\/ordinates with three regions in each fluid. 
+
+The spacing function for the y co-\/ordinates, which splits the region into two regions (1 and 2), according to the heights H1 and H2, with Ny1 and Ny2 elements respectively. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00226}{226}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_ad98f7a291c592042279f0498ea3ec5c9}\label{classoomph_1_1TwoLayerSpineMesh_ad98f7a291c592042279f0498ea3ec5c9} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!H1@{H1}}
+\index{H1@{H1}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{H1}{H1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+H1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Height of the lower layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00205}{205}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0a7e5f7297ad653440d7d833c89d1b44}\label{classoomph_1_1TwoLayerSpineMesh_a0a7e5f7297ad653440d7d833c89d1b44} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!H2@{H2}}
+\index{H2@{H2}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{H2}{H2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+H2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Height of the upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00208}{208}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_aaa5c2ad2f61cd7637b12573265b42bd7}\label{classoomph_1_1TwoLayerSpineMesh_aaa5c2ad2f61cd7637b12573265b42bd7} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Interface\_lower\_boundary\_element\_pt@{Interface\_lower\_boundary\_element\_pt}}
+\index{Interface\_lower\_boundary\_element\_pt@{Interface\_lower\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Interface\_lower\_boundary\_element\_pt}{Interface\_lower\_boundary\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to the elements adjacent to the interface on the lower layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00218}{218}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00140}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00152}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+lower()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a1ebfbb343b476e764e3de338e4774d32}\label{classoomph_1_1TwoLayerSpineMesh_a1ebfbb343b476e764e3de338e4774d32} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Interface\_upper\_boundary\_element\_pt@{Interface\_upper\_boundary\_element\_pt}}
+\index{Interface\_upper\_boundary\_element\_pt@{Interface\_upper\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Interface\_upper\_boundary\_element\_pt}{Interface\_upper\_boundary\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to the element adjacent to the interface on the upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00222}{222}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00134}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00146}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+upper()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a14b79ca1154063be4611c3855a05755f}\label{classoomph_1_1TwoLayerSpineMesh_a14b79ca1154063be4611c3855a05755f} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Lower\_layer\_element\_pt@{Lower\_layer\_element\_pt}}
+\index{Lower\_layer\_element\_pt@{Lower\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lower\_layer\_element\_pt}{Lower\_layer\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00211}{211}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00116}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00128}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::nlower()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a614e800b8c5ba2963254e7e41bcfc9e2}\label{classoomph_1_1TwoLayerSpineMesh_a614e800b8c5ba2963254e7e41bcfc9e2} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Ny1@{Ny1}}
+\index{Ny1@{Ny1}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ny1}{Ny1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Ny1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in lower layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00199}{199}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a48a69edc318571675eed16c9154235e3}\label{classoomph_1_1TwoLayerSpineMesh_a48a69edc318571675eed16c9154235e3} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Ny2@{Ny2}}
+\index{Ny2@{Ny2}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ny2}{Ny2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Ny2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in upper layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00202}{202}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00099}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00051}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0973b44d5a44d36ba5c4c37864259b95}\label{classoomph_1_1TwoLayerSpineMesh_a0973b44d5a44d36ba5c4c37864259b95} 
+\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Upper\_layer\_element\_pt@{Upper\_layer\_element\_pt}}
+\index{Upper\_layer\_element\_pt@{Upper\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Upper\_layer\_element\_pt}{Upper\_layer\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the lower layer. 
+
+
+
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00214}{214}} of file \mbox{\hyperlink{two__layer__spine__mesh_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00122}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::nupper()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8h_source_l00110}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__layer__spine__mesh_8h}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{two__layer__spine__mesh_8template_8cc}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

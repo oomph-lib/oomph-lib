@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: The equations of time-harmonic linear elasticity</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">The equations of time-harmonic linear elasticity </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The aim of this tutorial is to demonstrate the solution of the time-harmonic equations of linear elasticity in cartesian coordinates. These equations are useful to describe forced, time-harmonic oscillations of elastic bodies.</p>
+<center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> <br  />
+<br  />
+The implementation of the equations and the documentation were developed jointly with David Nigro. </center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory</h1>
+<p>Consider a linearly elastic body (of density <img class="formulaInl" alt="$ \rho $" src="form_0.png" width="8" height="9"/>, Young's modulus <img class="formulaInl" alt="$ E $" src="form_1.png" width="10" height="10"/> and Poisson's ratio <img class="formulaInl" alt="$ \nu $" src="form_2.png" width="6" height="6"/>), occupying the region <img class="formulaInl" alt="$ D $" src="form_3.png" width="10" height="10"/> whose boundary is <img class="formulaInl" alt="$ \partial D $" src="form_4.png" width="18" height="10"/>. Assuming that the body performs time-harmonic oscillations of frequency of <img class="formulaInl" alt="$ \omega $" src="form_5.png" width="9" height="6"/> its motion is governed by the equations of time-harmonic linear elasticity </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\pmb{\nabla}^*\cdot\pmb{\tau}^*+
+\rho \mathbf{F}^*=-\rho\omega^2 \mathbf{u}^*,
+\]" src="form_6.png" width="138" height="15"/>
+</p>
+ </center><p> where the <img class="formulaInl" alt="$ x_{i}^* $" src="form_7.png" width="13" height="14"/> are the cartesian coordinates, and the time-periodic stresses, body force and displacements are given by  <img class="formulaInl" alt="$ {\rm Re}\{\pmb{\tau^*}(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $" src="form_8.png" width="95" height="16"/>,  <img class="formulaInl" alt="$ {\rm Re}\{\mathbf{F}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $" src="form_9.png" width="98" height="16"/> and <img class="formulaInl" alt="$ {\rm Re}\{\mathbf{u}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $" src="form_10.png" width="96" height="16"/> respectively. Note that, as usual, the superscript asterisk notation is used to distinguish dimensional quantities from their non-dimensional counterparts where required.</p>
+<p>The body is subject to imposed time-harmonic displacements  <img class="formulaInl" alt="$  {\rm Re}\{\mathbf{\hat{u}}^* {\rm e}^{-{\rm i}\omega
+t^*}\} $" src="form_11.png" width="74" height="16"/> along <img class="formulaInl" alt="$ \partial D_d $" src="form_12.png" width="23" height="13"/>, and to an imposed time-harmonic traction  <img class="formulaInl" alt="$  {\rm Re}\{ \pmb{\hat{\tau}}^* {\rm e}^{-{\rm i}\omega
+t^*}\} $" src="form_13.png" width="73" height="16"/> along <img class="formulaInl" alt="$ \partial D_n $" src="form_14.png" width="24" height="13"/> where <img class="formulaInl" alt="$ \partial D=\partial D_d\cup\partial D_n $" src="form_15.png" width="95" height="13"/>. This requires that </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mathbf{u}^*=\mathbf{\hat{u}}^*\,\,\textrm{on $
+\partial D_d $ },\quad
+\pmb{\tau}^* \cdot 
+{\mathbf{n}}=\pmb{\hat{\tau}}^*\,\,\textrm{on $
+\partial D_n $ }
+\]" src="form_16.png" width="215" height="13"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ {\bf n} $" src="form_17.png" width="8" height="6"/> is the outer unit normal on the boundary.</p>
+<p>The stresses and displacements are related by the constitutive equations </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\pmb{\tau}^*=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}^*\cdot\mathbf{u}^*)\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}^*\mathbf{u}^*+\pmb{\nabla}^*\mathbf{u}^{*{\rm T}})\right),
+\]" src="form_18.png" width="295" height="31"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ \pmb{\nabla}^*\mathbf{u}^{*{\rm T}}
+$" src="form_19.png" width="38" height="13"/> represents the transpose of <img class="formulaInl" alt="$ \pmb{\nabla}^*\mathbf{u}^*
+$" src="form_20.png" width="30" height="11"/>.</p>
+<p>We non-dimensionalise the equations, using a problem specific reference length, <img class="formulaInl" alt="$ {\cal L} $" src="form_21.png" width="10" height="10"/>, and a timescale <img class="formulaInl" alt="$ \displaystyle {\cal T}=\frac{1}{\omega} $" src="form_22.png" width="38" height="26"/>, and use Young's modulus to non-dimensionalise the body force and the stress tensor: </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\pmb{\tau}^* = E \, \pmb{\tau}, \qquad
+x_{i}^* = {\cal L}\, x_{i}
+\]" src="form_23.png" width="130" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mathbf{u}^* = {\cal L}\, \mathbf{u}, \qquad
+\mathbf{F}^* = \frac{E}{\rho \cal L} \, \mathbf{F},
+\qquad
+t^* = {\cal T}\, t.
+\]" src="form_24.png" width="216" height="30"/>
+</p>
+ </center><p>The non-dimensional form of the equations is then given by </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\pmb{\nabla}\cdot\pmb{\tau}+\mathbf{F}=-\Omega^2\mathbf{u},
+\ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_25.png" width="163" height="16"/>
+</p>
+ </center><p> with the non-dimensional constitutive relation, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\pmb{\tau}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}\mathbf{u}+\pmb{\nabla}\mathbf{u}^{{\rm T}})\right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_26.png" width="313" height="31"/>
+</p>
+ </center><p> The non-dimensional parameter </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\Omega = {\cal L}\omega \sqrt{\frac{\rho}{E}}
+\]" src="form_27.png" width="69" height="31"/>
+</p>
+ </center><p> is the ratio of the elastic body's intrinsic timescale, <img class="formulaInl" alt="$\displaystyle {\cal L} \sqrt{\frac{\rho}{E}}$" src="form_28.png" width="35" height="31"/>, to the problem-specific timescale, <img class="formulaInl" alt="$ \displaystyle {\cal T}=\frac{1}{\omega} $" src="form_22.png" width="38" height="26"/>, that we used to non-dimensionalise time. <img class="formulaInl" alt="$ \Omega $" src="form_29.png" width="9" height="10"/> can be interpreted as a non-dimensional version of the excitation frequency; alternatively/equivalently <img class="formulaInl" alt="$ \Omega^2 $" src="form_30.png" width="14" height="11"/> may be interpreted as a non-dimensional density. The boundary conditions are </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $\partial D_d $ },\quad
+\pmb{\tau} \cdot 
+{\mathbf{n}}=\pmb{\hat{\tau}}\,\,\textrm{on $\partial D_n $ }.
+\]" src="form_31.png" width="200" height="13"/>
+</p>
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="element_types"></a>
+Implementation</h1>
+<p>Within <code>oomph-lib</code>, the non-dimensional version of equations (1) with the constitutive equations (2) are implemented in the <code>TimeHarmonicLinearElasticityEquations&lt;DIM&gt;</code> equations class, where the template parameter <code>DIM</code> indicates the spatial dimension. Following our usual approach, discussed in the <a href="../../../quick_guide/html/index.html">(Not-So-)Quick Guide,</a> this equation class is then combined with a geometric finite element to form a fully-functional finite element. For instance, the combination of the <code>TimeHarmonicLinearElasticityEquations&lt;2&gt;</code> class with the geometric finite element <code>QElement&lt;2,3&gt;</code> yields a nine-node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2,
+\]" src="form_32.png" width="169" height="43"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ N^{(E)} $" src="form_33.png" width="26" height="13"/> is the number of nodes in the element, <img class="formulaInl" alt="$ X^{(E)}_{ij}
+$" src="form_34.png" width="28" height="20"/> is the <img class="formulaInl" alt="$ i $" src="form_35.png" width="5" height="9"/>-th global (Eulerian) coordinate of the <img class="formulaInl" alt="$ j $" src="form_36.png" width="6" height="11"/>-th <code>Node</code> in the element, and the <img class="formulaInl" alt="$ \psi_j $" src="form_37.png" width="14" height="14"/> are the element's shape functions, defined in the geometric finite element.</p>
+<p>All the constitutive parameters are real. The two components of the displacement field have a real and imaginary part. We store the four real-valued nodal unknowns in the order  <img class="formulaInl" alt="$ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Im}\{u_y\}
+$" src="form_38.png" width="179" height="14"/> and use the shape functions to interpolate the displacements as </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_i^{(n)} = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,...4,
+\]" src="form_39.png" width="189" height="43"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$  U^{(E)}_{ij} $" src="form_40.png" width="25" height="20"/> is the <img class="formulaInl" alt="$ i $" src="form_35.png" width="5" height="9"/>-th displacement component (enumerated as described above) at the <img class="formulaInl" alt="$ j $" src="form_36.png" width="6" height="11"/>-th <code>Node</code> in the element.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="test"></a>
+A test problem: Oscillations of an elastic annulus</h1>
+<p>We consider the time-harmonic axisymmetric deformation of a 2D annular elastic body that occupies the region <img class="formulaInl" alt="$ r_{\rm min}\leq
+r\leq r_{\rm max}, 0\leq\theta\leq 2\pi $" src="form_41.png" width="153" height="13"/>, shown in the left half of the sketch below. We impose a constant-amplitude axisymmetric displacement <img class="formulaInl" alt="$ {\mathbf{u}}(r_{\rm min},\theta)=
+u_0 (1-{\rm i}) {\mathbf{e}}_r$" src="form_42.png" width="128" height="14"/> on the inner boundary and a constant-amplitude pressure load <img class="formulaInl" alt="$ \pmb{\hat{\tau}} = -P_0 {\mathbf{e}}_r $" src="form_43.png" width="59" height="13"/> on the outer boundary. ( <img class="formulaInl" alt="$ {\mathbf{e}}_r $" src="form_44.png" width="13" height="9"/> is the unit vector in the radial direction).</p>
+<div class="image">
+<img src="sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the test problems. </div></div>
+ <p>It is easy to find an analytical solution of this problem by working in polar coordinates and exploiting the axisymmetry of the solution by writing the displacement as <img class="formulaInl" alt="$ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_r $" src="form_45.png" width="61" height="14"/>. The radial displacement <img class="formulaInl" alt="$ U(r) $" src="form_46.png" width="24" height="14"/> is then governed by </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{d}{d r}\left(\frac{U}{r}+\frac{dU}{dr}\right) + k^2 U=0,
+\]" src="form_47.png" width="145" height="31"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ \displaystyle k^2= \frac{\Omega^2}{\lambda+2\mu}$" src="form_48.png" width="68" height="31"/> and </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lambda = \frac{\nu}{(1+\nu)(1-2\nu)} \qquad \textrm{and} 
+\qquad \mu = \frac{1}{2(1+\nu)}
+\]" src="form_49.png" width="250" height="30"/>
+</p>
+ </center><p> are the non-dimensional Lame parameters. The solution of this equation is given by: </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U(r) = aJ_1(kr)+bY_1(kr).
+\]" src="form_50.png" width="141" height="14"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ J_1 $" src="form_51.png" width="11" height="13"/> and <img class="formulaInl" alt="$ Y_1 $" src="form_52.png" width="13" height="13"/> are Bessel functions of the first and second kind, respectively. The amplitudes <img class="formulaInl" alt="$ a $" src="form_53.png" width="6" height="6"/> and <img class="formulaInl" alt="$ b $" src="form_54.png" width="5" height="10"/> can be found using the boundary conditions on <img class="formulaInl" alt="$ r_{\rm min} $" src="form_55.png" width="24" height="9"/> and <img class="formulaInl" alt="$ r_{\rm max} $" src="form_56.png" width="25" height="9"/>. In the driver code discussed below, the (lengthy) expressions for <img class="formulaInl" alt="$ a $" src="form_53.png" width="6" height="6"/> and <img class="formulaInl" alt="$ b $" src="form_54.png" width="5" height="10"/> in terms of the problem parameters can be found in the <code> GlobalParameters::exact_u() </code> function.</p>
+<p>We note that even though a relatively simple analytical solution (in polar coordinates!) exists for this problem, it is a non-trivial test case for our code which solves the governing equations in cartesian coordinates. However, to show that we can also compute non-trivial solutions, we also consider the case where the annular region has a "gap" and therefore occupies only a fraction (90%) of the circumference. This creates two additional boundaries (the radial lines bounding the "gap" and we subject these to the same pressure that acts on the outer boundary, as shown in the right half of the sketch above.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figures below show "carpet plots" of the real and imaginary parts of the exact (green) and computed (red) horizontal displacement ( <img class="formulaInl" alt="$ u_1 $" src="form_57.png" width="13" height="9"/> &ndash; the plots for <img class="formulaInl" alt="$ u_2 $" src="form_58.png" width="13" height="9"/> obviously look very similar) for the continuous coating and <img class="formulaInl" alt="$ \Omega^2=10 $" src="form_59.png" width="44" height="11"/>, <img class="formulaInl" alt="$ \nu=0.3 $" src="form_60.png" width="39" height="9"/>, <img class="formulaInl" alt="$ P_0 = 0.3 $" src="form_61.png" width="46" height="13"/>, <img class="formulaInl" alt="$ r_{\rm min}=1$" src="form_62.png" width="46" height="11"/> and <img class="formulaInl" alt="$ r_{\rm max}=1.5 $" src="form_63.png" width="58" height="11"/>.</p>
+<div class="image">
+<img src="re_ux.gif" alt=""/>
+<div class="caption">
+Real part of the horizontal displacement. Green: exact; red: computed. </div></div>
+ <div class="image">
+<img src="im_ux.gif" alt=""/>
+<div class="caption">
+Imaginary part of the horizontal displacement. Green: exact; red: computed. </div></div>
+ <p>To demonstrate that the resulting displacement field is indeed axisymmetric, here is a plot of the real part of the radial displacement, <img class="formulaInl" alt="$ ( Re(u_1)^2 + Re(u_2)^2 )^{1/2} $" src="form_64.png" width="126" height="16"/>.</p>
+<div class="image">
+<img src="re_ur.gif" alt=""/>
+<div class="caption">
+Real part of the radial displacement. Green: exact; red: computed. </div></div>
+ <p>Finally, here is a plot of the real part of the horizontal displacement for the case when there is a 10% "gap" in the annular region. The presence of the gap clearly breaks the axisymmetry of the solution and creates waves that propagate in all directions:</p>
+<div class="image">
+<img src="re_ux_hole.gif" alt=""/>
+<div class="caption">
+Real part of the horizontal displacement for an incomplete annular region. </div></div>
+ <p>Unsurprisingly, we are not aware of an analytical solution for this problem.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we define all non-dimensional parameters in a namespace where we also define the displacement to be applied on the inner boundary, the traction (pressure) to be applied on the outer boundary, and the exact solution (which we don't list here because it is very lengthy).</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment">//================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> = 0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Square of non-dim frequency</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Omega_sq</a>=100.0;</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// The elasticity tensor</span></div>
+<div class="line"><span class="comment"></span> TimeHarmonicIsotropicElasticityTensor <a class="code hl_function" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">E</a>(<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Thickness of annulus</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a0b73c5ead1114ae88bbd4cb0eb54f078">H_annulus</a>=0.5;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Displacement amplitude on inner radius</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a0138eb659958d7d7d1afd12577becf82">Displacement_amplitude</a>=0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Real-valued, radial displacement field on inner boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Parameters.html#a95af753fa152ac6013bc4f640816f7ce">solid_boundary_displacement</a>(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                                  Vector&lt;double&gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  Vector&lt;double&gt; normal(2);</div>
+<div class="line">  <span class="keywordtype">double</span> norm=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  normal[0]=x[0]/norm;</div>
+<div class="line">  normal[1]=x[1]/norm;</div>
+<div class="line"> </div>
+<div class="line">  u[0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a0138eb659958d7d7d1afd12577becf82">Displacement_amplitude</a>*normal[0];</div>
+<div class="line">  u[1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a0138eb659958d7d7d1afd12577becf82">Displacement_amplitude</a>*normal[1];</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Uniform pressure</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a> = 0.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constant pressure load (real and imag part)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Parameters.html#a8363ab9f8687e9f7802f801f6dcab6e6">constant_pressure</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                        <span class="keyword">const</span> Vector&lt;double&gt; &amp;n, </div>
+<div class="line">                        Vector&lt;std::complex&lt;double&gt; &gt;&amp;traction)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> dim = traction.size();</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;dim;i++)</div>
+<div class="line">   {</div>
+<div class="line">    traction[i] = complex&lt;double&gt;(-<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a>*n[i],<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a>*n[i]);</div>
+<div class="line">   }</div>
+<div class="line"> } <span class="comment">// end_of_pressure_load</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00049">time_harmonic_elastic_annulus.cc:50</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a0138eb659958d7d7d1afd12577becf82"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a0138eb659958d7d7d1afd12577becf82">Global_Parameters::Displacement_amplitude</a></div><div class="ttdeci">double Displacement_amplitude</div><div class="ttdoc">Displacement amplitude on inner radius.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00065">time_harmonic_elastic_annulus.cc:65</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a0b73c5ead1114ae88bbd4cb0eb54f078"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a0b73c5ead1114ae88bbd4cb0eb54f078">Global_Parameters::H_annulus</a></div><div class="ttdeci">double H_annulus</div><div class="ttdoc">Thickness of annulus.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00062">time_harmonic_elastic_annulus.cc:62</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a20fccdcfa2c15ad8b951b9ada3bb1661"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Poisson's ratio.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00053">time_harmonic_elastic_annulus.cc:53</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a31fb55c20db4aa0127aafa20f0d76731"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a></div><div class="ttdeci">double P</div><div class="ttdoc">Uniform pressure.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00081">time_harmonic_elastic_annulus.cc:81</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a8363ab9f8687e9f7802f801f6dcab6e6"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a8363ab9f8687e9f7802f801f6dcab6e6">Global_Parameters::constant_pressure</a></div><div class="ttdeci">void constant_pressure(const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; std::complex&lt; double &gt; &gt; &amp;traction)</div><div class="ttdoc">Constant pressure load (real and imag part)</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00084">time_harmonic_elastic_annulus.cc:84</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a95af753fa152ac6013bc4f640816f7ce"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a95af753fa152ac6013bc4f640816f7ce">Global_Parameters::solid_boundary_displacement</a></div><div class="ttdeci">void solid_boundary_displacement(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Real-valued, radial displacement field on inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00068">time_harmonic_elastic_annulus.cc:68</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aeeb26e11ef275bdfce14710e00290bb6"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">Global_Parameters::E</a></div><div class="ttdeci">TimeHarmonicIsotropicElasticityTensor E(Nu)</div><div class="ttdoc">The elasticity tensor.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_af9e1e178dfb7f5e35b452599bd4c4324"><div class="ttname"><a href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a></div><div class="ttdeci">double Omega_sq</div><div class="ttdoc">Square of non-dim frequency.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00056">time_harmonic_elastic_annulus.cc:56</a></div></div>
+</div><!-- fragment --><p> We also define the output directory and the number of elements in the mesh.</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Output directory</span></div>
+<div class="line"> <span class="keywordtype">string</span> Directory=<span class="stringliteral">&quot;RESLT&quot;</span>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Number of elements in azimuthal direction </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Ntheta=20;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Number of elements in radial direction </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> Nr=10;</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by defining command line arguments which specify the number of elements in the mesh and indicate the presence or absence of the "gap" in the coating.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for annular disk loaded by pressure</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="time__harmonic__elastic__annulus_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in azimuthal direction</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(</div>
+<div class="line">  <span class="stringliteral">&quot;--ntheta&quot;</span>,</div>
+<div class="line">  &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a1f67286edeb13ef67687fd483e105b5e">Global_Parameters::Ntheta</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in radial direction</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(</div>
+<div class="line">  <span class="stringliteral">&quot;--nr&quot;</span>,</div>
+<div class="line">  &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do have a gap in the annulus?</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--have_gap&quot;</span>);</div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a1f67286edeb13ef67687fd483e105b5e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a1f67286edeb13ef67687fd483e105b5e">Global_Parameters::Ntheta</a></div><div class="ttdeci">unsigned Ntheta</div><div class="ttdoc">Number of elements in azimuthal direction.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00100">time_harmonic_elastic_annulus.cc:100</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aeebb1e39d849d32cebdc9be13026606e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a></div><div class="ttdeci">unsigned Nr</div><div class="ttdoc">Number of elements in radial direction.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00103">time_harmonic_elastic_annulus.cc:103</a></div></div>
+<div class="ttc" id="atime__harmonic__elastic__annulus_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="time__harmonic__elastic__annulus_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver for annular disk loaded by pressure.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00646">time_harmonic_elastic_annulus.cc:646</a></div></div>
+</div><!-- fragment --><p> The code performs a parameter study in which we compute the solution for a range of pressures. We specify the pressure increment and the number of steps to be performed, parse the command line arguments and document them.</p>
+<div class="fragment"><div class="line"> <span class="comment">// P increment</span></div>
+<div class="line"> <span class="keywordtype">double</span> p_increment=0.1;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--p_increment&quot;</span>,&amp;p_increment);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of steps</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=3; </div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--nstep&quot;</span>,&amp;nstep);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+</div><!-- fragment --><p> Next, we create the problem (discretising the domain with nine-noded quadrilateral elements), </p><div class="fragment"><div class="line"> <span class="comment">//Set up the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classAnnularDiskProblem.html">AnnularDiskProblem&lt;RefineableQTimeHarmonicLinearElasticityElement&lt;2,3&gt;</a> &gt;</div>
+<div class="ttc" id="aclassAnnularDiskProblem_html"><div class="ttname"><a href="classAnnularDiskProblem.html">AnnularDiskProblem</a></div><div class="ttdoc">Annular disk.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00300">time_harmonic_elastic_annulus.cc:301</a></div></div>
+</div><!-- fragment --><p> and perform the parameter study:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Initial values for parameter values</span></div>
+<div class="line"> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a>=0.0; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve the problem using Newton&#39;s method</span></div>
+<div class="line">   problem.newton_solve();</div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   problem.doc_solution();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Increment pressure</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a>+=p_increment;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The <code>Problem</code> class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the "bulk" elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function <code>create_traction_elements()</code>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============begin_problem============================================ </span></div>
+<div class="line"><span class="comment">/// Annular disk</span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classAnnularDiskProblem.html">AnnularDiskProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classAnnularDiskProblem.html#aad1ce56fa5c26045fb14d46acf29c89e">AnnularDiskProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAnnularDiskProblem.html#a35d3a481c66849a57b9797c2338b8fc2">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAnnularDiskProblem.html#a147e5fbe37f7132bbace2b713acb03a5">actions_before_newton_solve</a>() {}</div>
+<div class="ttc" id="aclassAnnularDiskProblem_html_a147e5fbe37f7132bbace2b713acb03a5"><div class="ttname"><a href="classAnnularDiskProblem.html#a147e5fbe37f7132bbace2b713acb03a5">AnnularDiskProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00312">time_harmonic_elastic_annulus.cc:312</a></div></div>
+<div class="ttc" id="aclassAnnularDiskProblem_html_a35d3a481c66849a57b9797c2338b8fc2"><div class="ttname"><a href="classAnnularDiskProblem.html#a35d3a481c66849a57b9797c2338b8fc2">AnnularDiskProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00309">time_harmonic_elastic_annulus.cc:309</a></div></div>
+<div class="ttc" id="aclassAnnularDiskProblem_html_aad1ce56fa5c26045fb14d46acf29c89e"><div class="ttname"><a href="classAnnularDiskProblem.html#aad1ce56fa5c26045fb14d46acf29c89e">AnnularDiskProblem::AnnularDiskProblem</a></div><div class="ttdeci">AnnularDiskProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00356">time_harmonic_elastic_annulus.cc:356</a></div></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> create_traction_elements();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Delete traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> delete_traction_elements();</div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"> Mesh* Solid_mesh_pt;</div>
+<div class="line"><span class="comment"> /// Pointer to mesh of traction elements</span></div>
+<div class="line"> Mesh* Traction_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// DocInfo object for output</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We begin by building the "bulk" solid mesh, specifying the presence of the gap (and its width) if necessary. If there is no gap, the mesh is periodic; see <a class="el" href="index.html#comments">Comments</a> for a more detailed discussion of how the mesh for this problem is constructed.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_constructor======================================= </span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classAnnularDiskProblem.html#aad1ce56fa5c26045fb14d46acf29c89e">AnnularDiskProblem&lt;ELASTICITY_ELEMENT&gt;::AnnularDiskProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The mesh is periodic </span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Azimuthal fraction of elastic coating</span></div>
+<div class="line"> <span class="keywordtype">double</span> azimuthal_fraction_of_coating=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Innermost radius for solid mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> a=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Gap in annulus?</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--have_gap&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   periodic=<span class="keyword">false</span>;</div>
+<div class="line">   azimuthal_fraction_of_coating=0.9;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// Build solid mesh</span></div>
+<div class="line"> Solid_mesh_pt = <span class="keyword">new</span> </div>
+<div class="line">  RefineableTwoDAnnularMesh&lt;ELASTICITY_ELEMENT&gt;(</div>
+<div class="line">   periodic,azimuthal_fraction_of_coating,</div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a1f67286edeb13ef67687fd483e105b5e">Global_Parameters::Ntheta</a>,</div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a>,a,</div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a0b73c5ead1114ae88bbd4cb0eb54f078">Global_Parameters::H_annulus</a>);</div>
+</div><!-- fragment --><p> It is always a good idea to have a look at the mesh and its boundary enumeration:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Let&#39;s have a look where the boundaries are</span></div>
+<div class="line"> Solid_mesh_pt-&gt;output(<span class="stringliteral">&quot;solid_mesh.dat&quot;</span>);</div>
+<div class="line"> Solid_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;solid_mesh_boundary.dat&quot;</span>);</div>
+</div><!-- fragment --><p> We loop over the elements and specify the relevant physical parameters via the pointer to the tensor of constitutive parameters and the (square of the) non-dimensional frequency, </p><div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assign the physical properties to the elements</span></div>
+<div class="line"> <span class="comment">//Loop over the elements in the main mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element =Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">//Cast to a solid element</span></div>
+<div class="line">   ELASTICITY_ELEMENT *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(Solid_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   el_pt-&gt;elasticity_tensor_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#aeeb26e11ef275bdfce14710e00290bb6">Global_Parameters::E</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Square of non-dim frequency</span></div>
+<div class="line">   el_pt-&gt;omega_sq_pt()= &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> Next we create the mesh that contains the FaceElements that apply the traction boundary conditions, and combine all meshes into a global mesh:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the traction element mesh</span></div>
+<div class="line"> Traction_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_traction_elements(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh is first sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add traction sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Traction_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build combined &quot;global&quot; mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p> We apply the displacement boundary conditions by pinning the real and imaginary part of the two displacement components at all nodes on boundary 0. We then impose a purely radial displacement on the real and imaginary parts of the displacement field, using the function defined in the <code><a class="el" href="namespaceGlobal__Parameters.html" title="Global variables.">Global_Parameters</a></code> namespace:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line"> <span class="comment">//---------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin real and imag part of both displacement components </span></div>
+<div class="line"> <span class="comment">// on the inner (boundary 0)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b_inner=0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = Solid_mesh_pt-&gt;nboundary_node(b_inner);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the nodes to pin and assign boundary displacements on </span></div>
+<div class="line"> <span class="comment">//solid boundary</span></div>
+<div class="line"> Vector&lt;double&gt; u(2);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_node;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Node* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(b_inner,i);</div>
+<div class="line">   nod_pt-&gt;pin(0);</div>
+<div class="line">   nod_pt-&gt;pin(1);</div>
+<div class="line">   nod_pt-&gt;pin(2);</div>
+<div class="line">   nod_pt-&gt;pin(3);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Assign displacements</span></div>
+<div class="line">   x[0]=nod_pt-&gt;x(0);   </div>
+<div class="line">   x[1]=nod_pt-&gt;x(1);   </div>
+<div class="line">   <a class="code hl_function" href="namespaceGlobal__Parameters.html#a95af753fa152ac6013bc4f640816f7ce">Global_Parameters::solid_boundary_displacement</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Real part of x-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(0,u[0]);</div>
+<div class="line">   <span class="comment">// Real part of y-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(1,u[1]);</div>
+<div class="line">   <span class="comment">// Imag part of x-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(2,-u[0]);</div>
+<div class="line">   <span class="comment">// Imag part of y-displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(3,-u[1]);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> Finally we assign the equation numbers and specify the output directory:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Assign equation numbers</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> Doc_info.set_directory(<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_constructor</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a301ab922df72030c660b21328d6caf76"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a></div><div class="ttdeci">string Directory</div><div class="ttdoc">Output directory.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00097">time_harmonic_elastic_annulus.cc:97</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="traction_elements"></a>
+The traction elements</h1>
+<p>We create the face elements that apply the traction on the outer boundary (boundary 2). If there is a gap in the annular region we also apply the pressure loading on boundaries 1 and 3.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_traction_elements==============================</span></div>
+<div class="line"><span class="comment">/// Create traction elements </span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classAnnularDiskProblem.html#aeab547741d3b500af5f465e52e1ba57c">AnnularDiskProblem&lt;ELASTICITY_ELEMENT&gt;::create_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Load outer surface (2) and both &quot;ends&quot; (1 and 3) if there&#39;s a gap</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b_lo=1;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> b_hi=3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// ...otherwise load only the outside (2)</span></div>
+<div class="line"> <span class="keywordflow">if</span> (!CommandLineArgs::command_line_flag_has_been_set(<span class="stringliteral">&quot;--have_gap&quot;</span>))</div>
+<div class="line">  {     </div>
+<div class="line">   b_lo=2;</div>
+<div class="line">   b_hi=2;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> b=b_lo;b&lt;=b_hi;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">     ELASTICITY_ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Solid_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = Solid_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create element</span></div>
+<div class="line">     TimeHarmonicLinearElasticityTractionElement&lt;ELASTICITY_ELEMENT&gt;* el_pt=</div>
+<div class="line">      <span class="keyword">new</span> TimeHarmonicLinearElasticityTractionElement&lt;ELASTICITY_ELEMENT&gt;</div>
+<div class="line">      (bulk_elem_pt,face_index);   </div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Add to mesh</span></div>
+<div class="line">     Traction_mesh_pt-&gt;add_element_pt(el_pt);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Associate element with bulk boundary (to allow it to access</span></div>
+<div class="line">     <span class="comment">// the boundary coordinates in the bulk mesh)</span></div>
+<div class="line">     el_pt-&gt;set_boundary_number_in_bulk_mesh(b); </div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">//Set the traction function</span></div>
+<div class="line">     el_pt-&gt;traction_fct_pt() = <a class="code hl_function" href="namespaceGlobal__Parameters.html#a8363ab9f8687e9f7802f801f6dcab6e6">Global_Parameters::constant_pressure</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_create_traction_elements</span></div>
+<div class="ttc" id="aclassAnnularDiskProblem_html_aeab547741d3b500af5f465e52e1ba57c"><div class="ttname"><a href="classAnnularDiskProblem.html#aeab547741d3b500af5f465e52e1ba57c">AnnularDiskProblem::create_traction_elements</a></div><div class="ttdeci">void create_traction_elements()</div><div class="ttdoc">Create traction elements.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00522">time_harmonic_elastic_annulus.cc:522</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>As expected, this member function documents the computed solution.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==============start_doc===========================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classAnnularDiskProblem.html#a8034c630f21ccf5882a21eef2c1464fc">AnnularDiskProblem&lt;ELASTICITY_ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_plot=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output displacement field</span></div>
+<div class="line"> <span class="comment">//--------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/elast_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output traction elements</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/traction_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Traction_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output_fct(some_file,n_plot,<a class="code hl_function" href="namespaceGlobal__Parameters.html#a97162dba4bd29a15067b9c9bbe53c754">Global_Parameters::exact_u</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment label for output files</span></div>
+<div class="line"> Doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end doc</span></div>
+<div class="ttc" id="aclassAnnularDiskProblem_html_a8034c630f21ccf5882a21eef2c1464fc"><div class="ttname"><a href="classAnnularDiskProblem.html#a8034c630f21ccf5882a21eef2c1464fc">AnnularDiskProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00602">time_harmonic_elastic_annulus.cc:602</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a97162dba4bd29a15067b9c9bbe53c754"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a97162dba4bd29a15067b9c9bbe53c754">Global_Parameters::exact_u</a></div><div class="ttdeci">void exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector.</div><div class="ttdef"><b>Definition</b> <a href="time__harmonic__elastic__annulus_8cc_source.html#l00153">time_harmonic_elastic_annulus.cc:153</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="conclusion"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comments"></a>
+Comments</h2>
+<ul>
+<li>We did not discuss the mesh generation in detail here: The mesh is created by straightforward overloading of <code>oomph-lib's</code> existing rectangular quad mesh &ndash; the constructor simply adjusts the nodal positions (exactly as suggested in the <a href="../../../quick_guide/html/index.html#distorted_mesh">"Not-so-quick" guide</a>.) A little bit of extra work is required to enforce periodicity on the mesh for the case without a gap in the annular region because two of the boundaries in the original mesh then overlap. How this is dealt with is discussed in <a href="../../../navier_stokes/rayleigh_channel/html/index.html#periodic">another tutorial.</a> <br  />
+<br  />
+</li>
+<li>If you inspect the <a href="../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc">driver code</a> you will notice that it also contains relevant code to perform spatially adaptive simulations of the problem &ndash; the adaptive version of the code is selected with <code>#ifdefs</code>. Dealing with the periodic boundary conditions for spatially adaptive meshes requires a few additional steps, but they are also discussed <a href="../../../linear_elasticity/refineable_periodic_load/html/index.html#constructor">elsewhere,</a> so we won't discuss them here.</li>
+</ul>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ul>
+<li>Change the parameter study performed by the driver code such that the loop varies the frequency parameter <img class="formulaInl" alt="$ \Omega^2 $" src="form_30.png" width="14" height="11"/>. Assess the effect of an increase in <img class="formulaInl" alt="$ \Omega^2 $" src="form_30.png" width="14" height="11"/> on the accuracy of the solution by comparing the computed results against the exact solution at fixed spatial resolution. <br  />
+<br  />
+</li>
+<li>Explore the use of spatial adaptivity in the problem <br  />
+<br  />
+<ul>
+<li>for the same parameter study suggested in the previous exercise (increase in <img class="formulaInl" alt="$ \Omega^2 $" src="form_30.png" width="14" height="11"/> )</li>
+</ul>
+and<ul>
+<li>for the problem with the "gap" in the annular region.</li>
+</ul>
+<br  />
+<br  />
+</li>
+<li>Modify the code to exploit at least some of the problem's symmetry, e.g. by solving the problem for the continuous annulus in a quarter of the original domain, <img class="formulaInl" alt="$ x_1, x_2 \ge 0 $" src="form_65.png" width="55" height="11"/>, say, using appropriate symmetry boundary conditions along the coordinate axes.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/">demo_drivers/time_harmonic_linear_elasticity/elastic_annulus </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc">demo_drivers/time_harmonic_linear_elasticity/elastic_annulus/time_harmonic_elastic_annulus.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:20:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

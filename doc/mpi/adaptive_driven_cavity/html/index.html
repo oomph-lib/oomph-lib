@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Parallel solution of the adaptive driven cavity problem</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Parallel solution of the adaptive driven cavity problem </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This document concerns the parallel solution of the <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive driven cavity problem</a>. It is the first in a <a href="../../../example_code_list/html/index.html#distributed">series of tutorials</a> that discuss how to modify serial driver codes to distribute the <code>Problem</code> object across multiple processors.</p>
+<p>Most of the driver code is identical to its serial counterpart and we only discuss the changes required to distribute the problem. Please refer to <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</a> for a more detailed discussion of the problem and its (serial) implementation.</p>
+<hr  />
+<h1><a class="anchor" id="main_body"></a>
+The main function</h1>
+<p>As described in the <a href="../../general_mpi/html/index.html">parallel processing document </a> all parallel driver codes must initialise and shutdown oomph-lib's MPI routines by calling <code>MPI_Helpers::init(...)</code> and <code>MPI_Helpers::finalize()</code>. The functions <code>MPI_Helpers::init(...)</code> and <code>MPI_Helpers::finalize()</code> call their MPI counterparts, <code>MPI_Init(...)</code> and <code>MPI_Finalize()</code>, which must <b>not</b> be called again.</p>
+<p>In our demo driver codes, we surround all parallel sections of code with <code>#ifdefs</code> to ensure that the code remains functional if compiled without parallel support (in which case the macro <code>OOMPH_HAS_MPI</code> is undefined), for example.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver for RefineableDrivenCavity test problem </span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise MPI</span></div>
+<div class="line"> MPI_Helpers::init(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> In order to distribute the problem over multiple processors a single call to the function <code>Problem::distribute()</code> is all that is required. Thus, a minimally-changed serial driver code would be </p><div class="fragment"><div class="line"><span class="comment">// Set output directory</span></div>
+<div class="line">DocInfo doc_info;</div>
+<div class="line">doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Set max. number of black-box adaptation</span></div>
+<div class="line"><span class="keywordtype">unsigned</span> max_adapt=3;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Solve problem with Taylor Hood elements</span></div>
+<div class="line"><span class="comment">//---------------------------------------</span></div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Build problem</span></div>
+<div class="line"> RefineableDrivenCavityProblem&lt;RefineableQTaylorHoodElement&lt;2&gt; &gt; problem;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Distribute the problem (only change from serial version)</span></div>
+<div class="line"> problem.distribute();         </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Solve the problem with automatic adaptation</span></div>
+<div class="line"> problem.newton_solve(max_adapt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Output solution</span></div>
+<div class="line"> problem.doc_solution(doc_info);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Finally, we must call <code>MPI_finalize()</code> before the end of the main function  </p><div class="fragment"><div class="line"><span class="comment">// Finalise MPI</span></div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line"> MPI_Helpers::finalize();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+</div><!-- fragment --><p> The actual driver code is slightly more complicated that the version shown above because it also acts as a self-test. The distribution of individual elements over the processors is determined by <code>METIS</code> and we have found that <code>METIS</code> occasionally gives slightly different results on different machines. To ensure reproducible results when acting as a self-test, the code (like all our parallel test codes) reads a predetermined element distribution from the disk; see <a href="#distribution">below </a> for more details.</p>
+<hr  />
+<h1><a class="anchor" id="problem_class"></a>
+Changes to the problem class</h1>
+<p>A particular feature of the <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">driven cavity problem</a> is that the flow is completely enclosed and that a single pressure degree of freedom must be prescribed. In the serial driver code, we arbitrarily pinned the first pressure degree of freedom in the "first" element in the mesh. Once the problem is distributed this element will only be available to particular processors and the pressure degree of freedom must be pinned on each one. Consequently we re-write the <code>actions_after_adapt()</code> function as follows:</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// After adaptation: Unpin pressure and pin redundant pressure dofs.</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Unpin all pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">    unpin_all_pressure_dofs(mesh_pt()-&gt;element_pt());</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Pin redundant pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;2&gt;::</div>
+<div class="line">    pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Now set the first pressure dof in the first element to 0.0</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over all elements</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_element=mesh_pt()-&gt;nelement();</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// If the lower left node of this element is (0,0), then fix the </span></div>
+<div class="line">     <span class="comment">// pressure dof in this element to zero</span></div>
+<div class="line">     <span class="keywordflow">if</span> (mesh_pt()-&gt;finite_element_pt(e)-&gt;node_pt(0)-&gt;x(0)==0.0 &amp;&amp; </div>
+<div class="line">         mesh_pt()-&gt;finite_element_pt(e)-&gt;node_pt(0)-&gt;x(1)==0.0) <span class="comment">// 2d problem</span></div>
+<div class="line">      {</div>
+<div class="line">       oomph_info &lt;&lt; <span class="stringliteral">&quot;I&#39;m fixing the pressure &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">       <span class="comment">// Fix the pressure in element e at pdof=0 to 0.0</span></div>
+<div class="line">       <span class="keywordtype">unsigned</span> pdof=0;</div>
+<div class="line">       fix_pressure(e,pdof,0.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end_of_actions_after_adapt</span></div>
+</div><!-- fragment --><p> This change ensures that every processor that holds the element containing the node at position (0,0) (i.e. the first element) fixes the pressure for that element. The floating-point comparison does not cause any problems in this case because the <code>Node's</code> position is explicitly set to "exactly" (0.0,0.0) in the Mesh constructor and never changes.</p>
+<p>It is not necessary to change the corresponding statements in the problem constructor because the problem distribution occurs after the problem has been constructed. In fact, the problem constructor is unchanged from the serial version.</p>
+<hr  />
+<h1><a class="anchor" id="doc_solution"></a>
+Changes to doc_solution</h1>
+<p>The <code>doc_solution()</code> routine requires a slight modification to ensure that the output from different processors can be distinguished; this is achieved by including the current processor number in the filename of the solution:</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> RefineableDrivenCavityProblem&lt;ELEMENT&gt;::doc_solution(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get current process rank</span></div>
+<div class="line"> <span class="keywordtype">int</span> my_rank=this-&gt;communicator_pt()-&gt;my_rank();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln%i_on_proc%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number(),my_rank);</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+</div><!-- fragment --> <hr  />
+<p>The figure below shows the mesh after the final solution of this problem, distributed across two processors, with the two colours indicating which processor the elements belong to.</p>
+<div class="image">
+<img src="partition.gif" alt=""/>
+<div class="caption">
+Plot illustrating the distribution of the mesh for the adaptive driven cavity </div></div>
+ <hr  />
+<h1><a class="anchor" id="distribution"></a>
+Customising the distribution</h1>
+<p>The actual driver code demonstrates two of the different options available for the <code>Problem::distribute()</code> function, selected by the presence or absence of command line arguments.</p>
+<h2><a class="anchor" id="no_disk"></a>
+Option I: Distributing a problem using METIS and documenting its distribution</h2>
+<p>If no command line arguments are specified we determine the problem distribution using <code>METIS</code>, and write the distribution to a file.</p>
+<div class="fragment"><div class="line">  <span class="comment">//Are there command-line arguments?</span></div>
+<div class="line">  <span class="keywordflow">if</span> (CommandLineArgs::Argc==1)</div>
+<div class="line">   {</div>
+</div><!-- fragment --><p> The distribution is represented by a vector of unsigneds whose values indicate the processor on which the corresponding element is stored.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Provide storage for each element&#39;s partition number</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_element=problem.mesh_pt()-&gt;nelement();</div>
+<div class="line">    Vector&lt;unsigned&gt; out_element_partition(n_element);</div>
+</div><!-- fragment --><p> We distribute the problem with a call to <code>Problem::distribute(...)</code>, using the boolean flag to request that the relevant statistics are displayed on screen. The distribution chosen for the elements is returned in the vector created earlier.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Distribute the problem</span></div>
+<div class="line">    <span class="keywordtype">bool</span> report_stats=<span class="keyword">true</span>;</div>
+<div class="line">    out_element_partition=problem.distribute(report_stats);</div>
+</div><!-- fragment --><p> We document the distribution by writing the distribution vector to a file.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Write partition to disk</span></div>
+<div class="line">    std::ofstream output_file;</div>
+<div class="line">    <span class="keywordtype">char</span> filename[100];</div>
+<div class="line">    snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;out_adaptive_cavity_1_partition.dat&quot;</span>);</div>
+<div class="line">    output_file.open(filename);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">     {</div>
+<div class="line">      output_file &lt;&lt; out_element_partition[e] &lt;&lt; std::endl;</div>
+<div class="line">     }</div>
+</div><!-- fragment --><p> Finally, we perform an optional self-test of the halo-haloed lookup schemes.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Check halo schemes (optional)</span></div>
+<div class="line">    problem.check_halo_schemes(doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="from_disk"></a>
+Option II: Using a pre-determined distribution</h2>
+<p>If command line arguments are specified (typically when the code is run in validation mode) we read the distribution from disk, using a file that was written using the procedure shown above. (This is useful because in our experience <code>METIS</code> may produce slightly different distribution on different machines. This would cause the self-tests to fail even though the computed results would be correct).</p>
+<p>We start by creating a <code>DocInfo</code> object that specifies the directory in which the problem distribution will be documented and by reading in the vector that represents the distribution</p>
+ <div class="fragment"><div class="line">  <span class="comment">// Validation run - read in partition from file</span></div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">   {</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// DocInfo object specifies directory in which we document</span></div>
+<div class="line">    <span class="comment">// the distribution</span></div>
+<div class="line">    DocInfo mesh_doc_info;</div>
+<div class="line">    mesh_doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH_MESH&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Create storage for pre-determined partitioning</span></div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> n_element=problem.mesh_pt()-&gt;nelement();</div>
+<div class="line">    Vector&lt;unsigned&gt; element_partition(n_element);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Read in partitioning from disk</span></div>
+<div class="line">    std::ifstream input_file;</div>
+<div class="line">    <span class="keywordtype">char</span> filename[100];</div>
+<div class="line">    snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;adaptive_cavity_1_partition.dat&quot;</span>);</div>
+<div class="line">    input_file.open(filename);</div>
+<div class="line">    std::string input_string;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">     {</div>
+<div class="line">      getline(input_file,input_string,<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line">      element_partition[e]=atoi(input_string.c_str());</div>
+<div class="line">     }</div>
+</div><!-- fragment --><p> We pass the distribution vector to <code>Problem::distribute(...)</code> and thus bypass the partitioning by <code>METIS</code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Now perform the distribution and document it</span></div>
+<div class="line">    <span class="keywordtype">bool</span> report_stats=<span class="keyword">true</span>;</div>
+<div class="line">    problem.distribute(element_partition,mesh_doc_info,report_stats);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> We note that it is possible to document a mesh's distribution at any point, using the <code>Mesh::doc_mesh_distribution(...)</code> function, as indicated here</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// solve with adaptation</span></div>
+<div class="line">    problem.newton_solve(max_adapt);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//Output solution</span></div>
+<div class="line">    problem.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line"> </div>
+<div class="line">    mesh_doc_info.number()=1;</div>
+<div class="line">    problem.mesh_pt()-&gt;doc_mesh_distribution(mesh_doc_info);</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">   }</div>
+<div class="line"> </div>
+<div class="line"> } <span class="comment">// end of Taylor Hood elements</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<p>The driver code from which this example is taken also solves the same distributed problem using Crouzeix-Raviart elements. The fully modified parallel driver code can be found at</p>
+<center> <a href="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc </a> </center><p>For further examples of using the <code>distribute()</code> function for both two-dimensional and three-dimensional single-domain problems, see the directory</p>
+<center> <a href="../../../../demo_drivers/mpi/distribution/">demo_drivers/mpi/distribution/ </a> </center><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:36
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

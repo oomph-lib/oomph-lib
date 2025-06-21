@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Missing_masters_functions Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html">Missing_masters_functions</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">oomph::Missing_masters_functions Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a94805dfb28ba45ff7f4d7a0d6fef108d" id="r_a94805dfb28ba45ff7f4d7a0d6fef108d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a94805dfb28ba45ff7f4d7a0d6fef108d">add_external_haloed_node_to_storage</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:a94805dfb28ba45ff7f4d7a0d6fef108d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external haloed nodes, including any masters.  <br /></td></tr>
+<tr class="separator:a94805dfb28ba45ff7f4d7a0d6fef108d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a954b632d3a93388358723d33bca9c549" id="r_a954b632d3a93388358723d33bca9c549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a954b632d3a93388358723d33bca9c549">recursively_add_masters_of_external_haloed_node</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:a954b632d3a93388358723d33bca9c549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively add any master nodes (and their master nodes etc) of external nodes.  <br /></td></tr>
+<tr class="separator:a954b632d3a93388358723d33bca9c549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6034e2c1c81a56272efd35886b2a9543" id="r_a6034e2c1c81a56272efd35886b2a9543"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a6034e2c1c81a56272efd35886b2a9543">add_external_haloed_node_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:a6034e2c1c81a56272efd35886b2a9543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper to add external haloed node that is not a master.  <br /></td></tr>
+<tr class="separator:a6034e2c1c81a56272efd35886b2a9543"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3ecd40c8ebcfdb04f2e26c3fc304cc" id="r_acd3ecd40c8ebcfdb04f2e26c3fc304cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#acd3ecd40c8ebcfdb04f2e26c3fc304cc">add_external_haloed_master_node_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">master_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:acd3ecd40c8ebcfdb04f2e26c3fc304cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external haloed node that is a master.  <br /></td></tr>
+<tr class="separator:acd3ecd40c8ebcfdb04f2e26c3fc304cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3c8930de1090a3dd7d4a3ddb55cacb" id="r_acc3c8930de1090a3dd7d4a3ddb55cacb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#acc3c8930de1090a3dd7d4a3ddb55cacb">get_required_nodal_information_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:acc3c8930de1090a3dd7d4a3ddb55cacb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to get the required nodal information from an external haloed node so that a fully-functional external halo node (and therefore element) can be created on the receiving process.  <br /></td></tr>
+<tr class="separator:acc3c8930de1090a3dd7d4a3ddb55cacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56eaf8c8da98960d9929a0c9921c4df7" id="r_a56eaf8c8da98960d9929a0c9921c4df7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a56eaf8c8da98960d9929a0c9921c4df7">get_required_master_nodal_information_helper</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">iproc</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">master_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">send_doubles</a>)</td></tr>
+<tr class="memdesc:a56eaf8c8da98960d9929a0c9921c4df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to get the required master nodal information from an external haloed master node so that a fully-functional external halo master node (and possible element) can be created on the receiving process.  <br /></td></tr>
+<tr class="separator:a56eaf8c8da98960d9929a0c9921c4df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537b9f129421d1ad4f6915794d9dd66f" id="r_a537b9f129421d1ad4f6915794d9dd66f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a537b9f129421d1ad4f6915794d9dd66f">add_external_halo_node_helper</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">node_index</a>, <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_el_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:a537b9f129421d1ad4f6915794d9dd66f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper functiono to add external halo node that is not a master.  <br /></td></tr>
+<tr class="separator:a537b9f129421d1ad4f6915794d9dd66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae60b3fe43b4c8a9ccd03d2bc22f437c6" id="r_ae60b3fe43b4c8a9ccd03d2bc22f437c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#ae60b3fe43b4c8a9ccd03d2bc22f437c6">construct_new_external_halo_node_helper</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_nod_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">node_index</a>, <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_el_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:ae60b3fe43b4c8a9ccd03d2bc22f437c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process.  <br /></td></tr>
+<tr class="separator:ae60b3fe43b4c8a9ccd03d2bc22f437c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9510959d4583c82a516d520c9da35a93" id="r_a9510959d4583c82a516d520c9da35a93"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a9510959d4583c82a516d520c9da35a93"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a9510959d4583c82a516d520c9da35a93">add_external_halo_node_to_storage</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">node_index</a>, <a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_el_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:a9510959d4583c82a516d520c9da35a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external halo nodes, including any masters, based on information received from the haloed process.  <br /></td></tr>
+<tr class="separator:a9510959d4583c82a516d520c9da35a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aeedca2c5268a414d83fa7cfd023f14" id="r_a5aeedca2c5268a414d83fa7cfd023f14"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a5aeedca2c5268a414d83fa7cfd023f14"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a5aeedca2c5268a414d83fa7cfd023f14">recursively_add_masters_of_external_halo_node_to_storage</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">node_index</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:a5aeedca2c5268a414d83fa7cfd023f14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process.  <br /></td></tr>
+<tr class="separator:a5aeedca2c5268a414d83fa7cfd023f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3bf04e14473cd6671c5b1f17bc4823" id="r_a9e3bf04e14473cd6671c5b1f17bc4823"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a9e3bf04e14473cd6671c5b1f17bc4823"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a9e3bf04e14473cd6671c5b1f17bc4823">add_external_halo_master_node_helper</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_master_nod_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_nod_pt</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_cont_inter_values</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:a9e3bf04e14473cd6671c5b1f17bc4823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to add external halo node that is a master.  <br /></td></tr>
+<tr class="separator:a9e3bf04e14473cd6671c5b1f17bc4823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97561cb6cf8e5ad1c876173ee5973e41" id="r_a97561cb6cf8e5ad1c876173ee5973e41"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </td></tr>
+<tr class="memitem:a97561cb6cf8e5ad1c876173ee5973e41"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a97561cb6cf8e5ad1c876173ee5973e41">construct_new_external_halo_master_node_helper</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_master_nod_pt</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nod_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">loc_p</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;mesh_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_unsigneds</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_unsigneds</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">counter_for_recv_doubles</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">recv_doubles</a>)</td></tr>
+<tr class="memdesc:a97561cb6cf8e5ad1c876173ee5973e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function which constructs a new external halo master node with the information sent from the haloed process.  <br /></td></tr>
+<tr class="separator:a97561cb6cf8e5ad1c876173ee5973e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af558db56295524af220b5b4c981d5aa0" id="r_af558db56295524af220b5b4c981d5aa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#af558db56295524af220b5b4c981d5aa0">Flat_packed_unsigneds_string</a></td></tr>
+<tr class="separator:af558db56295524af220b5b4c981d5aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9cae489a6217b1566a1e40cbca86cf" id="r_acd9cae489a6217b1566a1e40cbca86cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#acd9cae489a6217b1566a1e40cbca86cf">Doc_timings</a> = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td></tr>
+<tr class="memdesc:acd9cae489a6217b1566a1e40cbca86cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to doc timings or not.  <br /></td></tr>
+<tr class="separator:acd9cae489a6217b1566a1e40cbca86cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ac04bf0028ba6e66c07466cc9774ce" id="r_a86ac04bf0028ba6e66c07466cc9774ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a86ac04bf0028ba6e66c07466cc9774ce">Doc_stats</a> = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td></tr>
+<tr class="memdesc:a86ac04bf0028ba6e66c07466cc9774ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to output basic info during setup_multi_domain_interaction() routines.  <br /></td></tr>
+<tr class="separator:a86ac04bf0028ba6e66c07466cc9774ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5059632b6254fcfc11f688e3e643d71c" id="r_a5059632b6254fcfc11f688e3e643d71c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1Missing__masters__functions.html#a5059632b6254fcfc11f688e3e643d71c">Doc_full_stats</a> = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td></tr>
+<tr class="memdesc:a5059632b6254fcfc11f688e3e643d71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether to output further info during setup_multi_domain_interaction() routines.  <br /></td></tr>
+<tr class="separator:a5059632b6254fcfc11f688e3e643d71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9e3bf04e14473cd6671c5b1f17bc4823" name="a9e3bf04e14473cd6671c5b1f17bc4823"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e3bf04e14473cd6671c5b1f17bc4823">&#9670;&#160;</a></span>add_external_halo_master_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_halo_master_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_master_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to add external halo node that is a master. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8template_8cc_source.html#l00177">177</a> of file <a class="el" href="missing__masters_8template_8cc_source.html">missing_masters.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8h_source.html#l02385">oomph::Mesh::external_halo_node_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, and <a class="el" href="mesh_8h_source.html#l02118">oomph::Mesh::shared_node_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a537b9f129421d1ad4f6915794d9dd66f" name="a537b9f129421d1ad4f6915794d9dd66f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a537b9f129421d1ad4f6915794d9dd66f">&#9670;&#160;</a></span>add_external_halo_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_halo_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_el_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper functiono to add external halo node that is not a master. </p>
+<p>Helper function to add external halo node that is not a master. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l01219">1219</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="missing__masters_8cc_source.html#l01297">construct_new_external_halo_node_helper()</a>, <a class="el" href="mesh_8h_source.html#l02385">oomph::Mesh::external_halo_node_pt()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, and <a class="el" href="mesh_8h_source.html#l02118">oomph::Mesh::shared_node_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8template_8cc_source.html#l00062">add_external_halo_node_to_storage()</a>.</p>
+
+</div>
+</div>
+<a id="a9510959d4583c82a516d520c9da35a93" name="a9510959d4583c82a516d520c9da35a93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9510959d4583c82a516d520c9da35a93">&#9670;&#160;</a></span>add_external_halo_node_to_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_halo_node_to_storage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_el_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to add external halo nodes, including any masters, based on information received from the haloed process. </p>
+<p>/ Templated helper functions for missing master methods,</p>
+<p>Helper function to add external halo nodes, including any masters, based on information received from the haloed process </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8template_8cc_source.html#l00062">62</a> of file <a class="el" href="missing__masters_8template_8cc_source.html">missing_masters.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="missing__masters_8cc_source.html#l01219">add_external_halo_node_helper()</a>.</p>
+
+</div>
+</div>
+<a id="acd3ecd40c8ebcfdb04f2e26c3fc304cc" name="acd3ecd40c8ebcfdb04f2e26c3fc304cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd3ecd40c8ebcfdb04f2e26c3fc304cc">&#9670;&#160;</a></span>add_external_haloed_master_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_haloed_master_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>master_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to add external haloed node that is a master. </p>
+<p>/ Slow search version without additional access function in <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> class /Search the internal shared node storage for this node</p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00306">306</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8cc_source.html#l09516">oomph::Mesh::add_external_haloed_node_pt()</a>, <a class="el" href="missing__masters_8cc_source.html#l00053">Flat_packed_unsigneds_string</a>, <a class="el" href="missing__masters_8cc_source.html#l00657">get_required_master_nodal_information_helper()</a>, <a class="el" href="mesh_8h_source.html#l02127">oomph::Mesh::get_shared_node_pt()</a>, <a class="el" href="mesh_8h_source.html#l02420">oomph::Mesh::nexternal_haloed_node()</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00105">recursively_add_masters_of_external_haloed_node()</a>.</p>
+
+</div>
+</div>
+<a id="a6034e2c1c81a56272efd35886b2a9543" name="a6034e2c1c81a56272efd35886b2a9543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6034e2c1c81a56272efd35886b2a9543">&#9670;&#160;</a></span>add_external_haloed_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_haloed_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper to add external haloed node that is not a master. </p>
+<p>Helper function to add external haloed node that is not a master. </p>
+<p>/ Slow search version without additional access function in <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> class /Search the internal shared node storage for this node</p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00173">173</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8cc_source.html#l09516">oomph::Mesh::add_external_haloed_node_pt()</a>, <a class="el" href="missing__masters_8cc_source.html#l00053">Flat_packed_unsigneds_string</a>, <a class="el" href="missing__masters_8cc_source.html#l00435">get_required_nodal_information_helper()</a>, <a class="el" href="mesh_8h_source.html#l02127">oomph::Mesh::get_shared_node_pt()</a>, <a class="el" href="mesh_8h_source.html#l02420">oomph::Mesh::nexternal_haloed_node()</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00076">add_external_haloed_node_to_storage()</a>.</p>
+
+</div>
+</div>
+<a id="a94805dfb28ba45ff7f4d7a0d6fef108d" name="a94805dfb28ba45ff7f4d7a0d6fef108d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94805dfb28ba45ff7f4d7a0d6fef108d">&#9670;&#160;</a></span>add_external_haloed_node_to_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::add_external_haloed_node_to_storage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to add external haloed nodes, including any masters. </p>
+<p>Helper function to add external haloed nodes, inc. masters of external haloed nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00076">76</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="missing__masters_8cc_source.html#l00173">add_external_haloed_node_helper()</a>, and <a class="el" href="missing__masters_8cc_source.html#l00105">recursively_add_masters_of_external_haloed_node()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00657">get_required_master_nodal_information_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a97561cb6cf8e5ad1c876173ee5973e41" name="a97561cb6cf8e5ad1c876173ee5973e41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97561cb6cf8e5ad1c876173ee5973e41">&#9670;&#160;</a></span>construct_new_external_halo_master_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::construct_new_external_halo_master_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_master_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function which constructs a new external halo master node with the information sent from the haloed process. </p>
+<p>Helper function which constructs a new external halo master node with the required information sent from the haloed process. </p>
+<p>The first entry of All_unsigned_values is the default node update id</p>
+<p>... so for the specified update_id, call add_node_update_info</p>
+<p>Now call update_node_update</p>
+<p>/print out nodes</p>
+<p>/ Check if sons...</p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8template_8cc_source.html#l00250">250</a> of file <a class="el" href="missing__masters_8template_8cc_source.html">missing_masters.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8cc_source.html#l00243">oomph::Mesh::add_boundary_node()</a>, <a class="el" href="mesh_8h_source.html#l02267">oomph::Mesh::add_external_halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l02376">oomph::Mesh::add_external_halo_node_pt()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="mesh_8h_source.html#l02259">oomph::Mesh::external_halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00477">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l01748">oomph::Mesh::halo_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01846">oomph::FiniteElement::local_coordinate_of_node()</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02222">oomph::FiniteElement::nnode_1d()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="elements_8h_source.html#l01138">oomph::GeneralisedElement::set_halo()</a>, <a class="el" href="elements_8h_source.html#l01876">oomph::FiniteElement::set_macro_elem_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00238">oomph::Data::time_stepper_pt()</a>.</p>
+
+</div>
+</div>
+<a id="ae60b3fe43b4c8a9ccd03d2bc22f437c6" name="ae60b3fe43b4c8a9ccd03d2bc22f437c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae60b3fe43b4c8a9ccd03d2bc22f437c6">&#9670;&#160;</a></span>construct_new_external_halo_node_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::construct_new_external_halo_node_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1FiniteElement.html">FiniteElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_el_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process. </p>
+<p>Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. </p>
+<p>The first entry of All_alg_nodal_info contains the default node update id e.g. for the quarter circle there are "Upper_left_box", "Lower right box" etc...</p>
+<p>again we need the size of this vector as it varies between meshes; we also need some indication as to which geometric object should be used...</p>
+<p>For the received update_id, ref_value, geom_object call add_node_update_info</p>
+<p>Now call update_node_update</p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l01297">1297</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8cc_source.html#l00243">oomph::Mesh::add_boundary_node()</a>, <a class="el" href="mesh_8h_source.html#l02376">oomph::Mesh::add_external_halo_node_pt()</a>, <a class="el" href="elements_8h_source.html#l02542">oomph::FiniteElement::construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l02513">oomph::FiniteElement::construct_node()</a>, <a class="el" href="mesh_8h_source.html#l00477">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01846">oomph::FiniteElement::local_coordinate_of_node()</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l00238">oomph::Data::time_stepper_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l01219">add_external_halo_node_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a56eaf8c8da98960d9929a0c9921c4df7" name="a56eaf8c8da98960d9929a0c9921c4df7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56eaf8c8da98960d9929a0c9921c4df7">&#9670;&#160;</a></span>get_required_master_nodal_information_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::get_required_master_nodal_information_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>master_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to get the required master nodal information from an external haloed master node so that a fully-functional external halo master node (and possible element) can be created on the receiving process. </p>
+<p>Helper function to get the required master nodal information from an external haloed master node so that a fully-functional external halo master node (and possible element) can be created on the receiving proc. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00657">657</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="mesh_8cc_source.html#l09475">oomph::Mesh::add_external_haloed_element_pt()</a>, <a class="el" href="missing__masters_8cc_source.html#l00076">add_external_haloed_node_to_storage()</a>, <a class="el" href="mesh_8h_source.html#l01608">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="mesh_8h_source.html#l02304">oomph::Mesh::external_haloed_element_pt()</a>, <a class="el" href="missing__masters_8cc_source.html#l00053">Flat_packed_unsigneds_string</a>, <a class="el" href="mesh_8h_source.html#l01787">oomph::Mesh::haloed_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01150">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="elements_8h_source.html#l01882">oomph::FiniteElement::macro_elem_pt()</a>, <a class="el" href="mesh_8h_source.html#l00835">oomph::Mesh::nboundary()</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="mesh_8h_source.html#l02275">oomph::Mesh::nexternal_haloed_element()</a>, <a class="el" href="geom__objects_8h_source.html#l00171">oomph::GeomObject::nlagrangian()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l01157">oomph::GeneralisedElement::non_halo_proc_ID()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00306">add_external_haloed_master_node_helper()</a>.</p>
+
+</div>
+</div>
+<a id="acc3c8930de1090a3dd7d4a3ddb55cacb" name="acc3c8930de1090a3dd7d4a3ddb55cacb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3c8930de1090a3dd7d4a3ddb55cacb">&#9670;&#160;</a></span>get_required_nodal_information_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::get_required_nodal_information_helper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to get the required nodal information from an external haloed node so that a fully-functional external halo node (and therefore element) can be created on the receiving process. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00435">435</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="missing__masters_8cc_source.html#l00053">Flat_packed_unsigneds_string</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="mesh_8h_source.html#l00835">oomph::Mesh::nboundary()</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00173">add_external_haloed_node_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a5aeedca2c5268a414d83fa7cfd023f14" name="a5aeedca2c5268a414d83fa7cfd023f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aeedca2c5268a414d83fa7cfd023f14">&#9670;&#160;</a></span>recursively_add_masters_of_external_halo_node_to_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">EXT_ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::recursively_add_masters_of_external_halo_node_to_storage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&amp;&#160;</td>
+          <td class="paramname"><em>new_nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>loc_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>counter_for_recv_doubles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>recv_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8template_8cc_source.html#l00105">105</a> of file <a class="el" href="missing__masters_8template_8cc_source.html">missing_masters.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>.</p>
+
+</div>
+</div>
+<a id="a954b632d3a93388358723d33bca9c549" name="a954b632d3a93388358723d33bca9c549"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a954b632d3a93388358723d33bca9c549">&#9670;&#160;</a></span>recursively_add_masters_of_external_haloed_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Missing_masters_functions::recursively_add_masters_of_external_haloed_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>iproc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *&#160;</td>
+          <td class="paramname"><em>nod_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_cont_inter_values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_unsigneds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>send_doubles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recursively add any master nodes (and their master nodes etc) of external nodes. </p>
+<p>Recursively add any master nodes (and their master nodes etc) of external haloed nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00105">105</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="missing__masters_8cc_source.html#l00306">add_external_haloed_master_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00053">Flat_packed_unsigneds_string</a>, and <a class="el" href="missing__masters_8cc_source.html#l00105">recursively_add_masters_of_external_haloed_node()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00076">add_external_haloed_node_to_storage()</a>, and <a class="el" href="missing__masters_8cc_source.html#l00105">recursively_add_masters_of_external_haloed_node()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a5059632b6254fcfc11f688e3e643d71c" name="a5059632b6254fcfc11f688e3e643d71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5059632b6254fcfc11f688e3e643d71c">&#9670;&#160;</a></span>Doc_full_stats</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::Missing_masters_functions::Doc_full_stats = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate whether to output further info during setup_multi_domain_interaction() routines. </p>
+<p>Boolean to indicate whether to document further info (to screen) during setup_multi_domain_interaction() routines. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00066">66</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+</div>
+</div>
+<a id="a86ac04bf0028ba6e66c07466cc9774ce" name="a86ac04bf0028ba6e66c07466cc9774ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ac04bf0028ba6e66c07466cc9774ce">&#9670;&#160;</a></span>Doc_stats</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::Missing_masters_functions::Doc_stats = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate whether to output basic info during setup_multi_domain_interaction() routines. </p>
+<p>Boolean to indicate whether to document basic info (to screen) during setup_multi_domain_interaction() routines. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00062">62</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+</div>
+</div>
+<a id="acd9cae489a6217b1566a1e40cbca86cf" name="acd9cae489a6217b1566a1e40cbca86cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd9cae489a6217b1566a1e40cbca86cf">&#9670;&#160;</a></span>Doc_timings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::Missing_masters_functions::Doc_timings = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean to indicate whether to doc timings or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00058">58</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+</div>
+</div>
+<a id="af558db56295524af220b5b4c981d5aa0" name="af558db56295524af220b5b4c981d5aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af558db56295524af220b5b4c981d5aa0">&#9670;&#160;</a></span>Flat_packed_unsigneds_string</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::string &gt; oomph::Missing_masters_functions::Flat_packed_unsigneds_string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="missing__masters_8cc_source.html#l00053">53</a> of file <a class="el" href="missing__masters_8cc_source.html">missing_masters.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="missing__masters_8cc_source.html#l00306">add_external_haloed_master_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00173">add_external_haloed_node_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00657">get_required_master_nodal_information_helper()</a>, <a class="el" href="missing__masters_8cc_source.html#l00435">get_required_nodal_information_helper()</a>, and <a class="el" href="missing__masters_8cc_source.html#l00105">recursively_add_masters_of_external_haloed_node()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

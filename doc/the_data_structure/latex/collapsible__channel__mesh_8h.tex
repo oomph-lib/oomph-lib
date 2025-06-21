@@ -1,0 +1,22 @@
+\doxysection{collapsible\+\_\+channel\+\_\+mesh.\+h File Reference}
+\hypertarget{collapsible__channel__mesh_8h}{}\label{collapsible__channel__mesh_8h}\index{collapsible\_channel\_mesh.h@{collapsible\_channel\_mesh.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Basic collapsible channel mesh. The mesh is derived from the {\ttfamily \doxylink{classoomph_1_1SimpleRectangularQuadMesh}{Simple\+Rectangular\+Quad\+Mesh}} so it\textquotesingle{}s node and element numbering scheme is the same as in that mesh. Only the boundaries are numbered differently to allow the easy identification of the "{}collapsible"{} segment. Boundary coordinates are set up for all nodes located on boundary 3 (the collapsible segment). The curvilinear ("{}collapsible"{}) segment is defined by a {\ttfamily \doxylink{classoomph_1_1GeomObject}{Geom\+Object}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableCollapsibleChannelMesh}{oomph\+::\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable collapsible channel mesh. The mesh is derived from the {\ttfamily \doxylink{classoomph_1_1SimpleRectangularQuadMesh}{Simple\+Rectangular\+Quad\+Mesh}} so it\textquotesingle{}s node and element numbering scheme is the same as in that mesh. Only the boundaries are numbered differently to allow the easy identification of the "{}collapsible"{} segment. Boundary coordinates are set up for all nodes located on boundary 3 (the collapsible segment). The curvilinear ("{}collapsible"{}) segment is defined by a {\ttfamily \doxylink{classoomph_1_1GeomObject}{Geom\+Object}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Collapsible channel mesh with Macro\+Element-\/based node update. The collapsible segment is represented by the specified geometric object. Some or all of the geometric \doxylink{classoomph_1_1Data}{Data} in that geometric object may contain unknowns in the global \doxylink{classoomph_1_1Problem}{Problem}. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from \doxylink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableCollapsibleChannelMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable collapsible channel mesh with Macro\+Element-\/based node update. The collapsible segment is represented by the specified geometric object. Some or all of the geometric \doxylink{classoomph_1_1Data}{Data} in that geometric object may contain unknowns in the global \doxylink{classoomph_1_1Problem}{Problem}. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from \doxylink{classoomph_1_1MacroElementNodeUpdateElementBase}{Macro\+Element\+Node\+Update\+Element\+Base}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Collapsible channel mesh with algebraic node update. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCollapsibleChannelMesh}{oomph\+::\+Refineable\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable version of the Collapsible\+Channel mesh with algebraic node update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

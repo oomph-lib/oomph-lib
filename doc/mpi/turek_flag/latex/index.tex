@@ -1,0 +1,524 @@
+\chapter{Parallel solution of Turek \& Hron\textquotesingle{}s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes}
+\hypertarget{index}{}\label{index}\index{Parallel solution of Turek \& Hron\textquotesingle{}s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes@{Parallel solution of Turek \& Hron\textquotesingle{}s FSI benchmark problem with spatial adaptivity for the fluid and solid meshes}}
+This document provides an overview of
+\begin{DoxyItemize}
+\item how to change the serial driver code for \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} so that both the fluid and solid meshes can be adapted,
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item how to distribute the problem across multiple processors,
+\end{DoxyItemize}and
+\begin{DoxyItemize}
+\item how to enable load balancing of the problem once it is distributed.
+\end{DoxyItemize}The document is part of a \href{../../../example_code_list/html/index.html\#distributed}{\texttt{ series of tutorials}} that discuss how to modify existing serial driver codes so that the {\ttfamily Problem} object can be distributed across multiple processors.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_double_adapt}{}\doxysection{\texorpdfstring{Enabling spatial adaptivity for the fluid and solid meshes}{Enabling spatial adaptivity for the fluid and solid meshes}}\label{index_double_adapt}
+In the original (serial) driver code for \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problem}} we only adapted the fluid mesh. Before discussing how to modify the code to refine the fluid and solid meshes simultaneously, we provide a brief reminder of the procedure used to discretise fluid-\/structure interaction problems that involve fluid and solid domains of equal spatial dimension (e.\+g. a 2D fluid domain interacting with a 2D solid domain) when using algebraic node update methods to adjust the position of the nodes in the fluid mesh. ~\newline
+ We refer to \href{../../fsi_channel_with_leaflet/html/index.html}{\texttt{ another tutorial}} for a discussion of FSI problems involving the interaction of fluids with (lower-\/dimensional) shell and beam structures.\hypertarget{index_orig}{}\doxysubsection{\texorpdfstring{General methodology}{General methodology}}\label{index_orig}
+The figure below shows a sketch of a simple(r) fluid-\/structure interaction problem involving fluid and solid domains that meet along a single mesh boundary. We assume that the fluid mesh uses an algebraic node update function to adjust the position of its nodes in response to changes in the domain boundary, represented by the {\ttfamily Geom\+Object} shown in magenta. (You may wish to consult \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ another tutorial}} for a reminder of how {\ttfamily oomph-\/lib\textquotesingle{}s} algebraic node update methods work).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{fsi_with_adaptive_wall_basic}
+\doxyfigcaption{Basic setup for FSI problems involving algebraic node updates for the fluid mesh. }
+\end{DoxyImage}
+
+
+In an FSI problem, the fluid mesh\textquotesingle{}s free boundary is a boundary of the solid mesh, {\itshape  i.\+e. } the boundary along which the fluid exerts a traction onto the solid. Within {\ttfamily oomph-\/lib}, the fluid traction is applied to the solid domain by attaching {\ttfamily FSISolid\+Traction\+Elements} to the faces of the "{}bulk"{} solid elements adjacent to the FSI boundary. (In the above sketch the {\ttfamily FSISolid\+Traction\+Elements} are shown in blue.) The deformation of the fluid and solid meshes is coupled by using the {\ttfamily Mesh\+As\+Geom\+Object} formed from the {\ttfamily FSISolid\+Traction\+Elements} as the {\ttfamily Geom\+Object} that defines the moving boundary of the fluid mesh. (In sketch above, this is indicated by the magenta arrow.)\hypertarget{index_modification1}{}\doxysubsection{\texorpdfstring{Modifications to allow adaptivity of the fluid and solid meshes}{Modifications to allow adaptivity of the fluid and solid meshes}}\label{index_modification1}
+If the solid mesh is not adapted, the adaptation for the fluid mesh is straightforward and proceeds fully automatically as described \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ elsewhere}}. In particular, the node update data for newly-\/created fluid nodes is created automatically by a call to the {\ttfamily Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(...)} function during the adaptation. This function obtains the required information about the boundary by using the {\ttfamily Mesh\+As\+Geom\+Object} built from the {\ttfamily FSISolid\+Traction\+Elements}.
+
+If the solid mesh is also adapted, then the existing {\ttfamily FSISolid\+Traction\+Elements} must (at some point) be deleted and new ones must be attached to the adapted "{}bulk"{} solid mesh. In all other problems, this is done by deleting the {\ttfamily FSISolid\+Traction\+Elements} in {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and attaching new ones in {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()}; see, e.\+g. the \href{../../../poisson/two_d_poisson_flux_bc/html/index.html}{\texttt{ tutorial on the solution of a Poisson problem with flux boundary conditions.}} However, in the present problem this is not possible because, once the {\ttfamily FSISolid\+Traction\+Elements} have been deleted, the {\ttfamily Mesh\+As\+Geom\+Object} can no longer be used to represent the shape and position of the FSI boundary, which would cause the adaptation of the fluid mesh to fail.
+
+To avoid this problem, we adopt the following strategy\+:
+\begin{DoxyEnumerate}
+\item When adding the various meshes to the {\ttfamily Problem\textquotesingle{}s} collection of sub-\/meshes, we add the fluid mesh {\bfseries{before}} the solid mesh. (This happens to be what was done already in the original driver code.) Usually, the order in which sub-\/meshes are added to the {\ttfamily Problem} is irrelevant. Here the order {\bfseries{does}} matter because we will exploit the fact that the sub-\/meshes are adapted individually, in the order in which they were added to the {\ttfamily Problem}. ~\newline
+~\newline
+
+\item The {\ttfamily FSISolid\+Traction\+Elements} are not deleted in {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and remain attached to the "{}bulk"{} solid elements throughout the "{}bulk"{} mesh adaptation procedure. When the fluid mesh is adapted, the appropriate {\ttfamily Mesh\+As\+Geom\+Object} is, therefore, still fully-\/functional (and refers to the boundary as represented by the solid domain {\bfseries{before}} the "{}bulk"{} solid mesh is adapted). ~\newline
+~\newline
+ Here is a sketch of problem after adaptation of the fluid mesh\+: ~\newline
+~\newline
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{fsi_with_adaptive_wall_adapted_fluid}
+\doxyfigcaption{Sketch of the problem following the adaptation of the fluid mesh. The solid mesh has not yet been refined. }
+\end{DoxyImage}
+ ~\newline
+~\newline
+
+\item The subsequent adaptation of the "{}bulk"{} solid mesh is likely to turn some of the {\ttfamily FSISolid\+Traction\+Elements} into "{}dangling"{} elements. (This occurs whenever a {\ttfamily FSISolid\+Traction\+Elements} is attached to a "{}bulk"{} solid elements that disappears during the adaptation, {\itshape  e.\+g. } by being refined.) ~\newline
+~\newline
+ Here is a plot of the problem following the adaptation of the solid mesh \+: ~\newline
+~\newline
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{fsi_with_adaptive_wall_adapted_solid}
+\doxyfigcaption{Sketch of the problem following the adaptation of the solid mesh -\/-\/ the \`{}dangling\textquotesingle{} FSISolid\+Traction\+Elements are represented by dotted lines. }
+\end{DoxyImage}
+ ~\newline
+~\newline
+
+\item Hence, in {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} we delete the existing {\ttfamily FSISolid\+Traction\+Elements} and immediately (re-\/)attach new ones. Now, the {\ttfamily Mesh\+As\+Geom\+Object} that represents the FSI boundary is broken because it still refers to the just deleted {\ttfamily FSISolid\+Traction\+Elements}. ~\newline
+~\newline
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{fsi_with_adaptive_wall_new_face_elements}
+\doxyfigcaption{Sketch of the problem following the creation of new FSISolid\+Traction\+Elements. The fact that the Mesh\+As\+Geom\+Object is broken is indicated by the dashed lines. }
+\end{DoxyImage}
+ ~\newline
+~\newline
+
+\item Thus, we rebuild the {\ttfamily Mesh\+As\+Geom\+Object} from the newly-\/created {\ttfamily FSISolid\+Traction\+Elements}, and update the fluid mesh\textquotesingle{}s pointer to this new {\ttfamily Geom\+Object} that describes the boundary shape. ~\newline
+~\newline
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{fsi_with_adaptive_wall_done}
+\doxyfigcaption{Sketch of the problem with re-\/built Mesh\+As\+Geom\+Object. }
+\end{DoxyImage}
+ ~\newline
+~\newline
+
+\item Finally, we execute the {\ttfamily Algebraic\+Mesh\+::update\+\_\+node\+\_\+update(...)} function for all nodes in the fluid mesh to ensure that their node update data refers to the new {\ttfamily FSISolid\+Traction\+Elements}. ~\newline
+~\newline
+
+\item The remaining tasks (such as the renewed setup of the fluid load on the {\ttfamily FSISolid\+Traction\+Elements} via a call to {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}, etc.) remain the same as in the previous version of the code.
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_distr}{}\doxysection{\texorpdfstring{Distributing the Problem}{Distributing the Problem}}\label{index_distr}
+In the present example, there are two "{}bulk"{} meshes corresponding to the fluid and solid domains and three "{}surface"{} meshes of traction elements. The traction elements are {\ttfamily Face\+Elements} created from the "{}bulk"{} fluid elements and should be deleted before the problem is distributed, see the tutorial on applying \href{../../two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ flux boundary conditions in a Poisson problem }} for more details. In the \href{../../fsi_channel_with_leaflet/html/index.html}{\texttt{ previous example}} involving the interaction of a 2D fluid domain with a 1D beam structure there were only two meshes\+: a "{}bulk"{} fluid mesh and a "{}surface"{} solid mesh. In that problem {\bfseries{all}} elements in the 1D mesh of {\ttfamily FSIHermite\+Beam\+Elements} were retained on all processors as halo elements by using the function {\ttfamily Mesh\+::keep\+\_\+all\+\_\+elements\+\_\+as\+\_\+halos()}. The same methodology could be used here, but it would be extremely wasteful to retain all the solid elements in the "{}bulk"{} solid mesh because only the elements next to the FSI boundary are required. Instead, we use a more fine-\/grained method of retaining elements via the function {\ttfamily Generalised\+Element\+::must\+\_\+be\+\_\+kept\+\_\+as\+\_\+halo()}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_impl}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_impl}
+Most of the driver code is identical to the original serial version discussed in \href{../../fsi_channel_with_leaflet/html/index.html}{\texttt{ another tutorial}}. We therefore only discuss those parts of the code that have to be changed to allow (i) the simultaneous adaptation of the fluid and solid meshes, and (ii) the problem distribution.
+
+\DoxyHorRuler{0}
+\hypertarget{index_main_body}{}\doxysubsection{\texorpdfstring{The main function}{The main function}}\label{index_main_body}
+As usual in a parallel driver code, the only addition to the {\ttfamily main()} function is the inclusion of calls to {\ttfamily MPI\+\_\+\+Helpers\+::init()}, {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}, and the {\ttfamily Problem\+::distribute()} functions.
+
+\DoxyHorRuler{0}
+\hypertarget{index_problem_class}{}\doxysubsection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem_class}
+The only additions to the serial version of the problem class are the functions {\ttfamily actions\+\_\+before\+\_\+distribute()} and {\ttfamily actions\+\_\+after\+\_\+distribute()}, and the helper function {\ttfamily delete\+\_\+fsi\+\_\+traction\+\_\+elements()}, discussed below.
+
+\DoxyHorRuler{0}
+\hypertarget{index_delete_fsi}{}\doxysubsection{\texorpdfstring{Deleting the FSISolid\+Traction\+Elements}{Deleting the FSISolidTractionElements}}\label{index_delete_fsi}
+To facilitate the deletion and re-\/creation of the {\ttfamily FSISolid\+Traction\+Elements} before and after the adaptation (and distribution) we provide a new helper function {\ttfamily delete\+\_\+fsi\+\_\+traction\+\_\+elements()} which complements the already-\/existing {\ttfamily create\+\_\+fsi\+\_\+traction\+\_\+elements()} function\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_traction\_elements==========================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Delete\ FSI\ traction\ elements\ }}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ FLUID\_ELEMENT,\textcolor{keyword}{class}\ SOLID\_ELEMENT\ >}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::delete\_fsi\_traction\_elements()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ There\ are\ 3\ traction\ meshes}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b=0;b<3;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element=Traction\_mesh\_pt[b]-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Kill\ the\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ Traction\_mesh\_pt[b]-\/>element\_pt(e);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \ \ Traction\_mesh\_pt[b]-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ delete\ traction\ elements}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_actions_before_distribute}{}\doxysubsection{\texorpdfstring{Actions before distribute}{Actions before distribute}}\label{index_actions_before_distribute}
+As discussed above, we must ensure that the "{}bulk"{} solid elements adjacent to the FSI boundary are retained on all processors. Hence, the {\ttfamily actions\+\_\+before\+\_\+distribute()} function starts with a loop over the {\ttfamily FSISolid\+Traction\+Elements} within which we use the function {\ttfamily Generalised\+Element\+::must\+\_\+be\+\_\+kept\+\_\+as\+\_\+halo()} to indicate that the associated bulk elements must be retained.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==================start\_of\_actions\_before\_distribute====================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ distribute:\ Make\ sure\ that\ the\ bulk\ solid\ elements\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ attached\ to\ the\ FSISolidTractionElements\ are\ kept\ as\ halo\ elements.}}
+\DoxyCodeLine{\textcolor{comment}{///\ Unlike\ in\ most\ other\ parallel\ codes\ we\ DON'T\ delete\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ FSISolidTractionElements\ here,\ though,\ because\ they\ need\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ be\ around\ while\ the\ fluid\ mesh\ is\ adapted.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ FLUID\_ELEMENT,\textcolor{keyword}{class}\ SOLID\_ELEMENT\ >}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::actions\_before\_distribute()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ bulk\ elements\ attached\ to\ the\ traction\ elements\ need\ to\ be\ kept}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ as\ halo\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ There\ are\ 3\ traction\ meshes}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b=0;b<3;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ elements\ in\ traction\ meshes}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element=Traction\_mesh\_pt[b]-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ FSISolidTractionElement<SOLID\_ELEMENT,2>*\ traction\_elem\_pt=}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}FSISolidTractionElement<SOLID\_ELEMENT,2>*\ \textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ (Traction\_mesh\_pt[b]-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ bulk\ element\ (which\ is\ a\ SOLID\_ELEMENT)}}
+\DoxyCodeLine{\ \ \ \ \ SOLID\_ELEMENT*\ solid\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}SOLID\_ELEMENT*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ (traction\_elem\_pt-\/>bulk\_element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Require\ bulk\ to\ be\ kept\ as\ a\ (possible)\ halo\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Note:\ The\ traction\ element\ itself\ will\ "{}become"{}\ a\ halo\ element\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ when\ it\ is\ recreated\ after\ the\ distribution\ has\ taken\ place}}
+\DoxyCodeLine{\ \ \ \ \ solid\_elem\_pt-\/>set\_must\_be\_kept\_as\_halo();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ loop\ over\ meshes\ of\ fsi\ traction\ elements}}
+
+\end{DoxyCodeInclude}
+ Next, we flush all the meshes from the problem\textquotesingle{}s collection of sub-\/meshes and add only the "{}bulk"{} fluid and solid meshes (in that order!). The {\ttfamily Face\+Elements} do not need to be distributed, because they will be re-\/created in {\ttfamily actions\+\_\+after\+\_\+distribute()}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Flush\ all\ the\ submeshes\ out\ but\ keep\ the\ meshes\ of\ FSISolidTractionElements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ alive\ (i.e.\ don't\ delete\ them)}}
+\DoxyCodeLine{\ flush\_sub\_meshes();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ fluid\ mesh\ and\ the\ solid\ mesh\ back\ again}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Remember\ that\ it's\ important\ that\ the\ fluid\ mesh\ is}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ added\ before\ the\ solid\ mesh!}}
+\DoxyCodeLine{\ add\_sub\_mesh(fluid\_mesh\_pt());}
+\DoxyCodeLine{\ add\_sub\_mesh(solid\_mesh\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ global\ mesh}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ actions\ before\ distribute}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_actions_after_distribute}{}\doxysubsection{\texorpdfstring{Actions after distribute}{Actions after distribute}}\label{index_actions_after_distribute}
+Following the problem distribution, we delete the old {\ttfamily FSISolid\+Traction\+Elements} and then (re-\/)attach new ones, which will be created as halo elements where necessary.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==================start\_of\_actions\_after\_distribute=====================}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ Actions\ after\ distribute:\ Re-\/setup\ FSI}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ FLUID\_ELEMENT,\textcolor{keyword}{class}\ SOLID\_ELEMENT\ >}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::actions\_after\_distribute()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ solid\ mesh\ has\ now\ been\ distributed,\ so\ it\ now\ has\ halo\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ on\ certain\ processors.\ The\ traction\ elements\ attached\ to\ these\ new}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ halo\ elements\ need\ to\ be\ halo\ themselves,\ so\ we\ need\ to\ delete\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ old\ ones\ and\ re-\/attach\ new\ ones.\ Recall\ that\ FaceElements\ attached}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ to\ bulk\ halo\ elements\ become\ halos\ themselves.}}
+\DoxyCodeLine{\ delete\_fsi\_traction\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ (Re-\/)Build\ the\ FSI\ traction\ elements}}
+\DoxyCodeLine{\ create\_fsi\_traction\_elements();}
+
+\end{DoxyCodeInclude}
+ We complete the build of the {\ttfamily FSISolid\+Traction\+Elements} by passing the FSI parameter and the boundary number in the bulk mesh. The relevant code is identical to the serial version and we omit its listing here.
+
+Next, we create new {\ttfamily Mesh\+As\+Geom\+Objects} from the newly-\/created {\ttfamily FSISolid\+Traction\+Elements} and pass them to the (algebraic) fluid mesh\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Turn\ the\ three\ meshes\ of\ FSI\ traction\ elements\ into\ compound}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ geometric\ objects\ (one\ Lagrangian,\ two\ Eulerian\ coordinates)}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ that\ determine\ particular\ boundaries\ of\ the\ fluid\ mesh}}
+\DoxyCodeLine{\ MeshAsGeomObject*}
+\DoxyCodeLine{\ \ bottom\_flag\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ MeshAsGeomObject}
+\DoxyCodeLine{\ \ (Traction\_mesh\_pt[0]);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ MeshAsGeomObject*\ tip\_flag\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ MeshAsGeomObject}
+\DoxyCodeLine{\ \ (Traction\_mesh\_pt[1]);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ MeshAsGeomObject*\ top\_flag\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ MeshAsGeomObject}
+\DoxyCodeLine{\ \ (Traction\_mesh\_pt[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Delete\ the\ old\ MeshAsGeomObjects\ and\ tell\ the\ fluid\ mesh\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ about\ the\ new\ ones.}}
+\DoxyCodeLine{\ \textcolor{keyword}{delete}\ fluid\_mesh\_pt()-\/>bottom\_flag\_pt();}
+\DoxyCodeLine{\ fluid\_mesh\_pt()-\/>set\_bottom\_flag\_pt(bottom\_flag\_pt);}
+\DoxyCodeLine{\ \textcolor{keyword}{delete}\ fluid\_mesh\_pt()-\/>top\_flag\_pt();}
+\DoxyCodeLine{\ fluid\_mesh\_pt()-\/>set\_top\_flag\_pt(top\_flag\_pt);}
+\DoxyCodeLine{\ \textcolor{keyword}{delete}\ fluid\_mesh\_pt()-\/>tip\_flag\_pt();}
+\DoxyCodeLine{\ fluid\_mesh\_pt()-\/>set\_tip\_flag\_pt(tip\_flag\_pt);}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily Mesh\+As\+Geom\+Objects} have changed, so we must call the {\ttfamily update\+\_\+node\+\_\+update()} function again for each node in the fluid mesh\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Call\ update\_node\_update\ for\ all\ the\ fluid\ mesh\ nodes,\ as\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ geometric\ objects\ representing\ the\ fluid\ mesh\ boundaries\ have\ changed}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_fluid\_node=fluid\_mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ n=0;n<n\_fluid\_node;n++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ the\ (algebraic)\ node}}
+\DoxyCodeLine{\ \ \ AlgebraicNode*\ alg\_nod\_pt=\textcolor{keyword}{dynamic\_cast<}AlgebraicNode*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (fluid\_mesh\_pt()-\/>node\_pt(n));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Call\ update\_node\_update\ for\ this\ node}}
+\DoxyCodeLine{\ \ \ fluid\_mesh\_pt()-\/>update\_node\_update(alg\_nod\_pt);}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Now we add the FSI traction meshes back to the problem and rebuild the global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ traction\ meshes\ back\ to\ the\ problem}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<3;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ add\_sub\_mesh(traction\_mesh\_pt(i));}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ global\ mesh}}
+\DoxyCodeLine{\ rebuild\_global\_mesh();}
+
+\end{DoxyCodeInclude}
+ Finally, we re-\/set the fluid load on the solid elements by calling {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} before re-\/assigning the auxiliary node update function that imposes the no-\/slip condition for all fluid nodes on the FSI boundaries. \mbox{[}\href{../../fsi_channel_with_leaflet/html/index.html\#action_after_adapt}{\texttt{ Recall}} that the (re-\/)assignment of the auxiliary node-\/update function must be performed {\bfseries{after}} the call to {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}.\mbox{]}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ the\ solid\ is\ to\ be\ loaded\ by\ the\ fluid,\ then\ set\ up\ the\ interaction}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ specify\ the\ velocity\ of\ the\ fluid\ nodes\ based\ on\ the\ wall\ motion}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!Global\_Parameters::Ignore\_fluid\_loading)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ OLD\_FSI}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Re-\/setup\ the\ fluid\ load\ information\ for\ fsi\ solid\ traction\ elements}}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Traction\_mesh\_pt[0]);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},6,Fluid\_mesh\_pt,Traction\_mesh\_pt[2]);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},7,Fluid\_mesh\_pt,Traction\_mesh\_pt[1]);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Package\ fsi\ solid\ traction\ meshes\ and\ boundary\ IDs\ in\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ fluid\ mesh}}
+\DoxyCodeLine{\ \ \ Vector<unsigned>\ fluid\_fsi\_boundary\_id(3);}
+\DoxyCodeLine{\ \ \ Vector<Mesh*>\ traction\_mesh\_pt(3);}
+\DoxyCodeLine{\ \ \ fluid\_fsi\_boundary\_id[0]=5;}
+\DoxyCodeLine{\ \ \ traction\_mesh\_pt[0]=Traction\_mesh\_pt[0];}
+\DoxyCodeLine{\ \ \ fluid\_fsi\_boundary\_id[1]=6;}
+\DoxyCodeLine{\ \ \ traction\_mesh\_pt[1]=Traction\_mesh\_pt[2];}
+\DoxyCodeLine{\ \ \ fluid\_fsi\_boundary\_id[2]=7;}
+\DoxyCodeLine{\ \ \ traction\_mesh\_pt[2]=Traction\_mesh\_pt[1];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Vector\ based\ FSI\ setup}}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},fluid\_fsi\_boundary\_id,Fluid\_mesh\_pt,}
+\DoxyCodeLine{\ \ \ \ \ traction\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ velocity\ of\ the\ fluid\ nodes\ on\ the\ wall\ (fluid\ mesh\ boundary\ 5,6,7)}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ is\ set\ by\ the\ wall\ motion\ -\/-\/\ hence\ the\ no-\/slip\ condition\ must\ be}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ re-\/applied\ whenever\ a\ node\ update\ is\ performed\ for\ these\ nodes.\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Such\ tasks\ may\ be\ performed\ automatically\ by\ the\ auxiliary\ node\ update\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ function\ specified\ by\ a\ function\ pointer:}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=5;ibound<8;ibound++\ )}
+\DoxyCodeLine{\ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,\ inod)-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ set\_auxiliary\_node\_update\_fct\_pt(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ (re-\/)assignment\ of\ the\ auxiliary\ node\ update\ fct}}
+
+\end{DoxyCodeInclude}
+ The remainder of the function identifies which processors contain the fluid control node whose velocities we document in the trace file.
+
+\DoxyHorRuler{0}
+\hypertarget{index_actions_after_adapt}{}\doxysubsection{\texorpdfstring{Actions after adapt}{Actions after adapt}}\label{index_actions_after_adapt}
+The {\ttfamily actions\+\_\+after\+\_\+adapt()} function is very similar to {\ttfamily actions\+\_\+after\+\_\+distribute()} function, so we omit is listing here. The only significant differences are that (i) the redundant fluid and solid pressures are (re)-\/pinned; (ii) the identification of the fluid control node does not need to be setup; and (iii) the traction meshes were never removed from the problem, so do not need to be added back in.
+
+\DoxyHorRuler{0}
+\hypertarget{index_doc_solution}{}\doxysubsection{\texorpdfstring{The doc\+\_\+solution() function}{The doc\_solution() function}}\label{index_doc_solution}
+As with the other parallel driver codes, the main modification to the post-\/processing function is the addition of the processor number to all output files. Furthermore, we only write the trace file on the processors that contain the fluid control node. In the interest of brevity we omit the listing of the modified function.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_result}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_result}
+The figure below illustrates the distribution of the problem across four processors, represented by the four colours, with the fluid elements outlined in black and the solid elements outlined in white.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{turek_partition}
+\doxyfigcaption{Distribution of the Turek \& Hron benchmark problem over four processors. }
+\end{DoxyImage}
+
+
+Zooming in near the "{}flag"{} shows how both fluid and solid meshes are refined and distributed independently\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{turek_partition_zoom}
+\doxyfigcaption{Distribution of the Turek \& Hron benchmark problem over four processors; zoomed in view near the \`{}flag\textquotesingle{}. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_load_balance}{}\doxysection{\texorpdfstring{Load balancing}{Load balancing}}\label{index_load_balance}
+When employing load balancing in this problem, we modify the time-\/stepping loop to perform the procedure after each timestep\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ of\ timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nstep;i++)}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ problem.unsteady\_newton\_solve(dt,max\_adapt,first);\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Output\ the\ solution}}
+\DoxyCodeLine{\ \ \ problem.doc\_solution(doc\_info,trace\_file);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Load\ balance\ the\ problem}}
+\DoxyCodeLine{\ \ \ DocInfo\ load\_doc\_info;}
+\DoxyCodeLine{\ \ \ problem.load\_balance(load\_doc\_info,report\_stats);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ timestepping\ loop}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_build_mesh}{}\doxysubsection{\texorpdfstring{The build\+\_\+mesh() function}{The build\_mesh() function}}\label{index_build_mesh}
+The function {\ttfamily Problem\+::build\+\_\+mesh()} must be supplied by the user if they wish to use the load balancing capability. Thus, in this driver code, we move all the required code to build the entire global mesh into this function, and call it from within the problem constructor\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor=============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ Pass\ length\ and\ height\ of\ domain}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\ \textcolor{keyword}{class}\ FLUID\_ELEMENT,\textcolor{keyword}{class}\ SOLID\_ELEMENT\ >}
+\DoxyCodeLine{TurekProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}
+\DoxyCodeLine{TurekProblem(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&length,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&height)\ :\ \ Domain\_height(height),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Domain\_length(length)}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Tell\ us\ how\ well\ the\ load\ balancing\ is\ doing...}}
+\DoxyCodeLine{\ enable\_doc\_imbalance\_in\_parallel\_assembly();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increase\ max.\ number\ of\ iterations\ in\ Newton\ solver\ to}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ accomodate\ possible\ poor\ initial\ guesses}}
+\DoxyCodeLine{\ Max\_newton\_iterations=20;}
+\DoxyCodeLine{\ Max\_residuals=1.0e4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ flag\ timestepper\ (consistent\ with\ BDF<2>\ for\ fluid)}}
+\DoxyCodeLine{\ Flag\_time\_stepper\_pt=\textcolor{keyword}{new}\ Newmark<2>;}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(Flag\_time\_stepper\_pt);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ error\ estimator\ for\ the\ solid\ mesh}}
+\DoxyCodeLine{\ Solid\_error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Create\ a\ new\ Circle\ object\ as\ the\ central\ cylinder}}
+\DoxyCodeLine{\ Cylinder\_pt\ =\ \textcolor{keyword}{new}\ Circle(Global\_Parameters::Centre\_x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Global\_Parameters::Centre\_y,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Global\_Parameters::Radius);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allocate\ the\ fluid\ timestepper}}
+\DoxyCodeLine{\ Fluid\_time\_stepper\_pt=\textcolor{keyword}{new}\ BDF<2>;}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(Fluid\_time\_stepper\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ error\ estimator\ for\ the\ fluid\ mesh}}
+\DoxyCodeLine{\ Fluid\_error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ meshes\ for\ this\ problem}}
+\DoxyCodeLine{\ build\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ FSI}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pass\ Strouhal\ number\ to\ the\ helper\ function\ that\ automatically\ applies}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ no-\/slip\ condition}}
+\DoxyCodeLine{\ FSI\_functions::Strouhal\_for\_no\_slip=Global\_Parameters::St;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ the\ solid\ is\ to\ be\ loaded\ by\ the\ fluid,\ then\ set\ up\ the\ interaction}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and\ specify\ the\ velocity\ of\ the\ fluid\ nodes\ based\ on\ the\ wall\ motion}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!Global\_Parameters::Ignore\_fluid\_loading)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Work\ out\ which\ fluid\ dofs\ affect\ the\ residuals\ of\ the\ wall\ elements:}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ We\ pass\ the\ boundary\ between\ the\ fluid\ and\ solid\ meshes\ and\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ pointers\ to\ the\ meshes.\ The\ interaction\ boundary\ are\ boundaries\ 5,6,7}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ of\ the\ 2D\ fluid\ mesh.}}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Traction\_mesh\_pt[0]);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},6,Fluid\_mesh\_pt,Traction\_mesh\_pt[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
+\DoxyCodeLine{\ \ \ \ (\textcolor{keyword}{this},7,Fluid\_mesh\_pt,Traction\_mesh\_pt[1]);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ velocity\ of\ the\ fluid\ nodes\ on\ the\ wall\ (fluid\ mesh\ boundary\ 5,6,7)}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ is\ set\ by\ the\ wall\ motion\ -\/-\/\ hence\ the\ no-\/slip\ condition\ must\ be}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ re-\/applied\ whenever\ a\ node\ update\ is\ performed\ for\ these\ nodes.\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Such\ tasks\ may\ be\ performed\ automatically\ by\ the\ auxiliary\ node\ update\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ function\ specified\ by\ a\ function\ pointer:}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=5;ibound<8;ibound++\ )}
+\DoxyCodeLine{\ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,\ inod)-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ set\_auxiliary\_node\_update\_fct\_pt(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ done\ automatic\ application\ of\ no-\/slip}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ FSI\ setup}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily build\+\_\+mesh()} function itself contains all the relevant code from within the previous parallel driver code\textquotesingle{}s problem constructor.\hypertarget{index_actions_functions}{}\doxysubsection{\texorpdfstring{Actions before and after load balancing}{Actions before and after load balancing}}\label{index_actions_functions}
+In this example, all that is required for the {\ttfamily actions\+\_\+after\+\_\+load\+\_\+balance()} function is the addition of the unpin-\/repin procedure from the {\ttfamily actions\+\_\+after\+\_\+adapt()} function to the appropriate part of the {\ttfamily actions\+\_\+after\+\_\+distribute()} function, since all the other functionality is already identical. The {\ttfamily actions\+\_\+before\+\_\+load\+\_\+balance()} function is identical to the {\ttfamily actions\+\_\+before\+\_\+distribute()} function.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/mpi/multi_domain/turek_flag/}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain/turek\+\_\+flag/ }} \end{center} ~\newline
+
+\item The main driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain/turek\+\_\+flag/turek\+\_\+flag.\+cc }} \end{center} 
+\item The driver code for the load balancing example is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain/turek\+\_\+flag/turek\+\_\+flag\+\_\+load\+\_\+balance.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

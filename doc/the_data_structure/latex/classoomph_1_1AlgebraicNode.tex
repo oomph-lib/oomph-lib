@@ -1,0 +1,1242 @@
+\doxysection{oomph\+::Algebraic\+Node Class Reference}
+\hypertarget{classoomph_1_1AlgebraicNode}{}\label{classoomph_1_1AlgebraicNode}\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+
+
+Algebraic nodes are nodes with an algebraic positional update function.  
+
+
+
+
+{\ttfamily \#include $<$algebraic\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1AlgebraicNode}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763}{Algebraic\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5}{Algebraic\+Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+nvalue}})
+\begin{DoxyCompactList}\small\item\em Constructor for steady algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates and with initial\+\_\+nvalue dofs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1}{Algebraic\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+nvalue}})
+\begin{DoxyCompactList}\small\item\em Constructor for bog-\/standard algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates, with initial\+\_\+nvalue dofs and with time dependence. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044}{\texorpdfstring{$\sim$}{\string~}\+Algebraic\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a699690273ec90c490b98c5d7ced2d007}{Algebraic\+Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}{node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27}{nnode\+\_\+update\+\_\+fcts}} ()
+\begin{DoxyCompactList}\small\item\em Number of node update fcts. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2}{node\+\_\+update\+\_\+fct\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Default (usually first if there are multiple ones) node update fct id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27}{node\+\_\+update\+\_\+fct\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Return vector of node update fct ids (vector is resized to contain the correct number of entries). Somewhat costly to call as map needs to be copied into vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8db6dd23ac5f75d19d5eb1d083eeb38b}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Default (usually first) mesh that implements update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac3d3a47acb5f2612e4cd47769392b546}{mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Mesh}{Mesh} that implements the id-\/th node update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734}{ngeom\+\_\+object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Number of geometric objects involved in id-\/th update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31}{ngeom\+\_\+object}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of geometric objects involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a66d4b6382b4e364a464c7c19a7324200}{vector\+\_\+geom\+\_\+object\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Return vector of geometric objects involved in id-\/th update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a40c652e55675c70e39799c65fafcc2d9}{vector\+\_\+geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return vector of geometric objects involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a1adbe59a85f6de8fcb04b08be23181c3}{all\+\_\+geom\+\_\+object\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the vector of all geometric objects. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a72a49e9a56c2bab91b1467547671fe65}{geom\+\_\+object\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return pointer to i-\/th geometric object involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383}{nref\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Number of reference values involved in id-\/th update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a}{nref\+\_\+value}} ()
+\begin{DoxyCompactList}\small\item\em Number of reference values involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac4a4f8e238b9ee1abb2761800ecd1c4a}{vector\+\_\+ref\+\_\+value}} ()
+\begin{DoxyCompactList}\small\item\em Return vector of reference values involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \& \mbox{\hyperlink{classoomph_1_1AlgebraicNode_adcdd76bff197e1f392ff3023a57ba38f}{vector\+\_\+ref\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Return vector of reference values involved in id-\/th update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return i-\/th reference value involved in default (usually first) update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c}{add\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8db6dd23ac5f75d19d5eb1d083eeb38b}{mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a72a49e9a56c2bab91b1467547671fe65}{geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{called\+\_\+from\+\_\+constructor}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Add algebraic update information for node\+: What\textquotesingle{}s the ID of the mesh update function (typically used within the mesh) Which \doxylink{classoomph_1_1Mesh}{Mesh} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. Negative values for ID are only allowed when called from node constructor, as indicated by the final argument which defaults to false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24}{add\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a8db6dd23ac5f75d19d5eb1d083eeb38b}{mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a72a49e9a56c2bab91b1467547671fe65}{geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}{ref\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Add algebraic update information for node\+: Which \doxylink{classoomph_1_1Mesh}{Mesh} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. We\textquotesingle{}re assigning a default node update fct id of 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe}{kill\+\_\+node\+\_\+update\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}}=0)
+\begin{DoxyCompactList}\small\item\em Erase algebraic node update information for id-\/th node update function. Id defaults to 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Perform self test\+: If the node has multiple node update functions, check that they all give the same result. Return 1/0 for failure/success. (Failure if max. difference between the nodal positions for different update functions exceeds \doxylink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Node}{oomph\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Node_af40c4014b1d7f30ed2142330fa5f1e68}{Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node_aca6c40f3a7bb1943b413a466d32c6970}{Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allocate\+\_\+x\+\_\+position}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Steady}{Steady} constructor, for a \doxylink{classoomph_1_1Node}{Node} of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values. NPosition\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node_a8a7c3c5e13ba0f434028ed2f93268a6e}{Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allocate\+\_\+x\+\_\+position}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Unsteady constructor for a node of spatial dimension n\+\_\+dim. Allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Node_afa67d364de717efb1bb8e2b61fc4a29f}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up the memory allocated for nodal position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node_ac77b41f698e71edde232ec9e7c3977ed}{Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Node}{Node}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a183f5f5b57987580a2cda286c3920a01}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Node}{Node}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_aee6f2b7a46fc9d875c6736895d7fc095}{nposition\+\_\+type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of coordinate types needed in the mapping between local and global coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\+\_\+time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the position timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1Node_aa4268bb2e9200e43641794588a71e8b1}{position\+\_\+time\+\_\+stepper\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the position timestepper (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a15d3962d66d92de44e32edc9c5c2fedf}{set\+\_\+position\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Node_a32b32940186f9d1e2abc5d4bedb6ff0d}{position\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{preserve\+\_\+existing\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Set a new position timestepper be resizing the appropriate storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_ab5d4bea7ffc69a82fde5720a2a6d784c}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+position\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Check whether the pointer parameter\+\_\+pt addresses position data values. It never does for a standard node, because the positions are not data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a5f727227a1c8fdc7d5d422492b98cefd}{assign\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+ndof}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Assign global equation numbers; increment global number of unknowns, global\+\_\+ndof; and add any new dofs to the dof\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_a786c96a8e46eb27a03b2b31f629d41b3}{ndim}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return (Eulerian) spatial dimension of the node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the i-\/th nodal coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_a8c8ecf7bc9e59312f6b2fb954ae803a0}{x}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th nodal coordinate (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_ad568bbadd1c5526b3d2a831eb0ed2e69}{x}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the position x(i) at previous timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0 previous timestep). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_aa1c472e7c6f3212e1b3a61499653e294}{x}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the position x(i) at previous timestep t (t=0\+: present; t\texorpdfstring{$>$}{>}0 previous timestep) (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_adecc64794ab05dfd0f1d53459fa42a93}{dx\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th component of nodal velocity\+: dx/dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_aa38adade14db8ea5b5f1015ebe657d31}{dx\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th component of j-\/th derivative of nodal position\+: d\texorpdfstring{$^\wedge$}{\string^}jx/dt\texorpdfstring{$^\wedge$}{\string^}j. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a5de5f4fa9259b44f527d90e474471563}{copied\+\_\+node\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to copied node (null if the current node is not a copy -- always the case here; it\textquotesingle{}s overloaded for boundary nodes) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_a80fe9192b35baa5321e8d0ffba4b8b8a}{position\+\_\+is\+\_\+a\+\_\+copy}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return whether any position coordinate has been copied (always false) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_a0e1ad244c2b109fb54a2fa6430d6ad5b}{position\+\_\+is\+\_\+a\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return whether the position coordinate i has been copied (always false) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_af7fdc0dfda495d69bd31c790ee77da73}{x\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_a1c397ca5356be0e32da91f6550e051e6}{x\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i). `Type'\+: k; Coordinate direction\+: i (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_a79e9ffd9c2eb7772265fa436e52a2128}{x\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i) at the previous timestep \mbox{[}t=0\+: present\mbox{]}. `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Node_a429a21d4ad1817021a4c476c0624a612}{x\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Reference to the generalised position x(k,i) at the previous timestep \mbox{[}t=0\+: present\mbox{]}. `Type'\+: k; Coordinate direction\+: i. (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a03ddcfc8146b7b54f2a3ee5fdf00fa3b}{dx\+\_\+gen\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th component of time derivative (velocity) of the generalised position, dx(k,i)/dt. `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_af9f1c9522857a0cb5ee04ef111865be2}{dx\+\_\+gen\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th component of j-\/th time derivative (velocity) of the generalised position, d\texorpdfstring{$^\wedge$}{\string^}jx(k,i)/dt\texorpdfstring{$^\wedge$}{\string^}j. `Type'\+: k; Coordinate direction\+: i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a378852d9ffea1a7a5c842b186187bc3f}{x\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Direct access to the i-\/th coordinate at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a103b12afe541e9bbe5c0790c1c0efe55}{copy}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{orig\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Copy all nodal data from specified \doxylink{classoomph_1_1Node}{Node} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_acd8bb142619d639d9bbfe813d0ba08df}{dump}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dump\+\_\+file}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Dump nodal position and associated data to file for restart. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a4a4bfedfe5c4278f91e4c0ba9d3e3549}{read}} (std\+::ifstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{restart\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Read nodal position and associated data from file for restart. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a3f0d0e77ba866ce8ad3c5c012b647080}{pin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1Node_a3f0d0e77ba866ce8ad3c5c012b647080}{pin\+\_\+all()} function must be overloaded by Solid\+Nodes, so we put the virtual interface here to avoid virtual functions in \doxylink{classoomph_1_1Data}{Data}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a8ef38470acf00f344c9567bcc9cbd000}{unpin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1Node_a8ef38470acf00f344c9567bcc9cbd000}{unpin\+\_\+all()} function must be overloaded by \doxylink{classoomph_1_1SolidNode}{Solid\+Node}, so we put the virtual interface here to avoid virtual functions in \doxylink{classoomph_1_1Data}{Data}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_aaa5ff8bea22ee29dfad3e631ae454961}{hang\+\_\+code}} ()
+\begin{DoxyCompactList}\small\item\em Code that encapsulates the hanging status of the node (incl. the geometric hanging status) as $  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1Node_afefa22db8b28e783b8647e3577ee01d9}{hanging\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to hanging node data (this refers to the geometric hanging node status) (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1Node_a9926ea92eaaccce9d9ac0df48e99ae27}{hanging\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to hanging node data for value i (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_af0e6237dfafad62cf427ff5013ddcfef}{is\+\_\+hanging}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node is geometrically hanging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_a55991f57a3f949774da64c6947fef9b2}{is\+\_\+hanging}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th value is hanging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a98b3e63390c43196db9429f32319b0ca}{set\+\_\+hanging\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hang\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Set the hanging data for the i-\/th value. (hang\+\_\+pt=0 to make non-\/hanging) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a2517b670b4494f5421f5ec0d92cf8bb0}{set\+\_\+nonhanging}} ()
+\begin{DoxyCompactList}\small\item\em Label node as non-\/hanging node by removing all hanging node data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_ae6598da29d403889020ccd47a2c07cc4}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Resize the number of equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a8758650a2e6d7312ad070bb8ce327c4b}{constrain\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Constrain the positions when the node is made hanging Empty virtual function that is overloaded in Solid\+Nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_ac23aaa36891269f3c9a832618f0c8c2c}{unconstrain\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Unconstrain the positions when the node is made non-\/hanging Empty virtual function that is overloaded in Solid\+Nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_aeb07848c19b83fd8b9690b8fcc200d56}{make\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Make the node periodic by copying the values from node\+\_\+pt. Note that the coordinates will always remain independent, even though this may lead to (a little) unrequired information being stored. Broken virtual (only implemented in Boundary\+Nodes) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a7b074cf3b864be50411fd9a34fde9d03}{make\+\_\+periodic\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{periodic\+\_\+nodes\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Make the nodes passed in the vector periodic\+\_\+nodes share the same data as this node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a33092a3d51285282ae8ec8e702d1cbf5}{get\+\_\+boundaries\+\_\+pt}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Return a pointer to set of mesh boundaries that this node occupies; this will be overloaded by Boundary\+Nodes. The default behaviour is that the \doxylink{classoomph_1_1Node}{Node} does not lie on any boundaries so the pointer to the set of boundaries is NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_a2ca215e42116ee8a2acc7d6a35e37788}{is\+\_\+on\+\_\+boundary}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the \doxylink{classoomph_1_1Node}{Node} lies on a boundary. The "{}bulk"{} \doxylink{classoomph_1_1Node}{Node} cannot lie on a boundary, so return false. This will be overloaded by Boundary\+Nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_ad1341e137f63f0c4df88844957665cc9}{is\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node lies on mesh boundary b. The "{}bulk"{} \doxylink{classoomph_1_1Node}{Node} cannot lie on a boundary, so return false. This will be overloaded by Boundary\+Nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a915ee24c67747f5e377014b024b9083f}{add\+\_\+to\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Broken interface for adding the node to the mesh boundary b Essentially here for error reporting. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a68d4703f8c8aa9f504ec2111dc1908f4}{remove\+\_\+from\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Broken interface for removing the node from the mesh boundary b Here to provide error reporting. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_a245b0e182ca0877bda9bbcb978807273}{ncoordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Get the number of boundary coordinates on mesh boundary b. Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_aa7f4a0c93bc405bb7ac9577c38bf0437}{boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Have boundary coordinates been set up? Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_abc8b7dc78cc1d0aab34eeaf856e21ea8}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of the k-\/th generalised boundary coordinates on mesh boundary b. Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a94c19e165ab4e88aabbfa27443c530b7}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of the k-\/th generalised boundary coordinates on mesh boundary b. Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a6db0c3e8349aa231c3c56cdbfb720e1c}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of coordinates on mesh boundary b Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a089465d789baa423cd30b3a792ad1e9e}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of coordinates on mesh boundary b Broken virtual interface provides run-\/time error checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a2f19488a7967f963b073b93dc12728ab}{set\+\_\+obsolete}} ()
+\begin{DoxyCompactList}\small\item\em Mark node as obsolete. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a6dfc895be93214f4a880c1e9e7a3b4a6}{set\+\_\+non\+\_\+obsolete}} ()
+\begin{DoxyCompactList}\small\item\em Mark node as non-\/obsolete. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_a2b1ff7b3b709fbf575ff27983483d9a2}{is\+\_\+obsolete}} ()
+\begin{DoxyCompactList}\small\item\em Test whether node is obsolete. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_abc9f54df56cbe8eedc6f1595c7d7f11e}{raw\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th value stored at the \doxylink{classoomph_1_1Node}{Node}. This interface does NOT take the hanging status of the \doxylink{classoomph_1_1Node}{Node} into account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_aec4e3050f0b7b85ef2ffb11a12c64214}{raw\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th value at time level t (t=0\+: present, t\texorpdfstring{$>$}{>}0\+: previous). This interface does NOT take the hanging status of the \doxylink{classoomph_1_1Node}{Node} into account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th value (dofs or pinned) at this node either directly or via hanging node representation. Note that this REDFINES the interface in \doxylink{classoomph_1_1Data}{Data} Thus, the present function will be called provided that it is accessed through a pointer to a node i.\+e. Node\texorpdfstring{$\ast$}{*} node\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value()} will take hanging information into account. If a pointer to a \doxylink{classoomph_1_1Node}{Node} has been explicitly down-\/cast to a pointer to \doxylink{classoomph_1_1Data}{Data} then the "{}wrong"{} (\doxylink{classoomph_1_1Data}{Data}) version of the function will be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a9865f3f77710b04934c1ca07510453b8}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th value at time level t (t=0\+: present, t\texorpdfstring{$>$}{>}0\+: previous) either directly or via hanging node representation. Note that this REDEFINES the interface in \doxylink{classoomph_1_1Data}{Data} Thus, the present function will be called provided that it is accessed through a pointer to a node i.\+e. Node\texorpdfstring{$\ast$}{*} node\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value()} will take hanging information into account. If a pointer to a \doxylink{classoomph_1_1Node}{Node} has been explicitly down-\/cast to a pointer to \doxylink{classoomph_1_1Data}{Data} then the "{}wrong"{} (\doxylink{classoomph_1_1Data}{Data}) version of the function will be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a3c9b6bdba6c5e33d2bb6b0a4799598ef}{value}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of values for the \doxylink{classoomph_1_1Data}{Data} value taking the hanging node status into account. Note that this REDEFINES the interface in \doxylink{classoomph_1_1Data}{Data} Thus, the present function will be called provided that it is accessed through a pointer to a node i.\+e. Node\texorpdfstring{$\ast$}{*} node\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value()} will take hanging information into account. If a pointer to a \doxylink{classoomph_1_1Node}{Node} has been explicitly down-\/cast to a pointer to \doxylink{classoomph_1_1Data}{Data} then the "{}wrong"{} (\doxylink{classoomph_1_1Data}{Data}) version of the function will be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1Node_a70ff07a3c51974732c00b6a602d6572b}{value}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return vector of values calculated using value(vector). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a8537fa95092b7d136a5a81a7b6f72bfc}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of values (dofs or pinned) in this data at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). This interface explicitly takes the hanging status into account. Thus, the present function will be called provided that it is accessed through a pointer to a node i.\+e. Node\texorpdfstring{$\ast$}{*} node\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Node_afcc5cdba40bca251826ae5bee5ca15b4}{value()} will take hanging information into account. If a pointer to a \doxylink{classoomph_1_1Node}{Node} has been explicitly down-\/cast to a pointer to \doxylink{classoomph_1_1Data}{Data} then the "{}wrong"{} (\doxylink{classoomph_1_1Data}{Data}) version of the function will be called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a61c3ad6b319e4d2cce38dc8faae1bfae}{position}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pos}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of nodal positions either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1Node_a1351c8994e1b6e4aef6e69e5bdea872e}{position}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return vector of position of node at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_abc8756948b04cb82f9f32a44ef9c69f9}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pos}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of nodal position at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous timestep), either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a05963e00bfc7dd92399a5b2230f77032}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th nodal coordinate either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a9110f050f09e803c37a4dde741ec249f}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th nodal coordinate at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous time level), either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_aa8974c69837b6909158054ecb70a64e2}{position\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return generalised nodal coordinate either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a56eb5caa6b0cbf91983e1a550de52d9f}{position\+\_\+gen}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return generalised nodal coordinate at time level t (t=0\+: current; t\texorpdfstring{$>$}{>}0\+: previous time level), either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_ad3d37ea1c80500645fa32cc43f1f29ce}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th component of nodal velocity\+: dx/dt, either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_a93be34f3311eaaabc026bd1df86b4cf1}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the i-\/th component of j-\/th derivative of nodal position\+: d\texorpdfstring{$^\wedge$}{\string^}jx/dt\texorpdfstring{$^\wedge$}{\string^}j either directly or via hanging node representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_af99eb195bbe21b6e380681f2167fbfb5}{dposition\+\_\+gen\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th component of time derivative (velocity) of the generalised position, dx(k,i)/dt. `Type'\+: k; Coordinate direction\+: i. This function uses the hanging node representation if necessary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Node_ae2528428e2fd8fedf035a54e63cee692}{dposition\+\_\+gen\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em i-\/th component of j-\/th time derivative (velocity) of the generalised position, d\texorpdfstring{$^\wedge$}{\string^}jx(k,i)/dt\texorpdfstring{$^\wedge$}{\string^}j. `Type'\+: k; Coordinate direction\+: i. This function uses the hanging node representation if necessary \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a638898508d6adc170afb1a2a203ac707}{set\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa44c98293a9}{Aux\+Node\+Update\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_ad5fe8ac9dcb705612903bc6945926375}{has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Boolean to indicate if node has a pointer to and auxiliary update function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a6c287aa85c19f2d37ed7952ece5c76dd}{perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct}} ()
+\begin{DoxyCompactList}\small\item\em Execute auxiliary update function (if any) -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_ad20302b7992437075d3ca42390b39f24}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of geometric data that affect the nodal position. The default value is zero (node is stationary) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a74cb27c26a1c9a21d9a3ecf655b2efb1}{all\+\_\+geom\+\_\+data\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to an array of all (geometric) data that affect the nodal position. The default value is zero (node is stationary) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a8b65b015c5365f99de179cd893955e9a}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}})
+\begin{DoxyCompactList}\small\item\em Output nodal position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a11400682e1fd2851777234a779e8bf8d}{add\+\_\+values\+\_\+to\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\+\_\+of\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Add all data and time history values to the vector. Overloaded to add the position information as well. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_accb033ab8ed4f96331014f7c4cd131f9}{read\+\_\+values\+\_\+from\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\+\_\+of\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index)
+\begin{DoxyCompactList}\small\item\em Read all data and time history values from the vector starting from index. On return the index will be set the value at the end of the data that has been read in Overload to also read the position information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Data}{oomph\+::\+Data}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24cc1f48bb}{clear\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Helper function that should be overloaded derived classes that contain copies of data. The function must unset (NULL out) the internal pointers to the copied data. This is used when destructing data to ensure that all pointers remain valid. The default implementation throws an error because \doxylink{classoomph_1_1Data}{Data} cannot be a copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_acbecfbd1dd3af51da9facdd897b64e74}{Data}} ()
+\begin{DoxyCompactList}\small\item\em Default\+: Just set pointer to (steady) timestepper. No storage for values is allocated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_a352ab3876876780d366866704a29dbb0}{Data}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Default constructor for steady problems\+: assign memory for initial\+\_\+n\+\_\+value values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_afe56d22d0dba308e33191e922993c5ee}{Data}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allocate\+\_\+storage}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Constructor for unsteady problems\+: assign memory for initial\+\_\+n\+\_\+value values and any memory required by the Timestepper for the storage of history values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data_ab35d30d1817db503265d59956a4ee02b}{Data}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_aeff1a35c9b9a48753a63b52c1d9959e2}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Data_a91d15d22184e0488123d856ea4c455f8}{\texorpdfstring{$\sim$}{\string~}\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, deallocates memory assigned for data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_acd22fabfb127ff4ea37a5bc60c61b414}{set\+\_\+time\+\_\+stepper}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{preserve\+\_\+existing\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Set a new timestepper by resizing the appropriate storage. If already assigned the equation numbering will not be altered. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1Data_a065d7bffcec82bf4d4bd7b41f9aa80b3}{time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1Data_a96f920e3d9d7560d3b6207bbd98f40f2}{time\+\_\+stepper\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the pointer to the timestepper (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6ca7ab233}{is\+\_\+a\+\_\+copy}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the \doxylink{classoomph_1_1Data}{Data} objact contains any copied values. A base \doxylink{classoomph_1_1Data}{Data} object can never be a copy so the default implementation always returns false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_ae31cff2285588c40cd33fac0cabcc371}{is\+\_\+a\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return flag to indicate whether the i-\/th value is a copy. A base \doxylink{classoomph_1_1Data}{Data} object can never be a copy so the default implementation always returns false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a7289ca322725c6fd493970a19474b382}{set\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{value\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Set the i-\/th stored data value to specified value. The only reason that we require an explicit set function is because we redefine \doxylink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()} in the \doxylink{classoomph_1_1Node}{Node} class to interpolate the values for nodes that are hanging and so we cannot return a reference to the value in this case. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a39c1ab8b0a45af29101c606b965bed07}{set\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{value\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Set the t-\/th history value of the i-\/th stored data value to specified value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th stored value. This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \doxylink{classoomph_1_1Data}{Data} object Data\texorpdfstring{$\ast$}{*} data\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()} always returns the "{}raw"{} stored value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Data_a3fad35eda2f9e1c69f163f1cd4d104ea}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return i-\/th value at time level t (t=0\+: present, t\texorpdfstring{$>$}{>}0\+: previous) This function is not virtual so that it can be inlined. This means that if we have an explicit pointer to a \doxylink{classoomph_1_1Data}{Data} object Data\texorpdfstring{$\ast$}{*} data\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1Data_a9383101536882db34e618cbe30dba2da}{value()} always returns to the "{}raw"{} stored value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a0a28f485ac3508c1cc37d3e0b7e86efe}{value}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of values for the \doxylink{classoomph_1_1Data}{Data} value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a15ab0a61bc348ba1b8b73d096a1bc70f}{value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&values) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Compute \doxylink{classoomph_1_1Vector}{Vector} of values (dofs or pinned) in this data at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Data_af545f88ca20583f0c1b66e4da6076aa3}{value\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the pointer to the i-\/the stored value. Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \doxylink{classoomph_1_1Data}{Data} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Data_a8246a9dbef20661ddd37d133130d407f}{value\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the pointer to the i-\/th stored value, or any of its history values (const version). Typically this is required when direct access to the stored value is required, e.\+g. when writing functions that return a reference to a variable that is stored in a \doxylink{classoomph_1_1Data}{Data} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_a1f001b88764d62579e0ed8d53f9d359f}{does\+\_\+pointer\+\_\+correspond\+\_\+to\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Check whether the pointer parameter\+\_\+pt addresses internal data values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a57889a9db7ca009434f0268173fcf3f8}{copy}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{orig\+\_\+data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Copy \doxylink{classoomph_1_1Data}{Data} values from specified \doxylink{classoomph_1_1Data}{Data} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a87fa5ba80f2e6f0d0fb9658b9b358c05}{dump}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dump\+\_\+file}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Dump the data object to a file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_ad520cff679734b7654b1638ada2c728a}{read}} (std\+::ifstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{restart\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Read data object from a file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Data_a35c8b361ab32cfb8602890b177f6044f}{eqn\+\_\+number\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the pointer to the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \& \mbox{\hyperlink{classoomph_1_1Data_ab6845db69833c541766d9a073b023fc4}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Data_a0181614ab39e3b02d28acba40bb33cb2}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the equation number of the i-\/th stored variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a422231c58e423f0b43822827aa334d79}{pin}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Pin the i-\/th stored variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a4e5cb031bf8eceb8f97c2c4fbd74cb05}{unpin}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Unpin the i-\/th stored variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a16277ea5b41cd9b09739b21a379d7eb4}{pin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Pin all the stored variables. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a590a3262e33167e464bb5d34c90a88ef}{unpin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Unpin all the stored variables. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_aedd0c445396ddcd650c814d17fef77dc}{is\+\_\+pinned}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is pinned (1\+: true; 0\+: false). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_a46bcce858da1ca61069329fda4876171}{is\+\_\+segregated\+\_\+solve\+\_\+pinned}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is temporaily pinned for a segregated solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a210c28ac93988dd8dbbbd944f6138c35}{constrain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Constrain the i-\/th stored variable when making hanging data If the data is already pinned leave it along, otherwise mark as constrained (hanging) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_accb670734a29a841e9ead16b703626ce}{unconstrain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Unconstrain the i-\/th stored variable when make the data nonhanging. Only unconstrain if it was actually constrained (hanging) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_ab8a322d75fc3e744cc6c9e945232ff4e}{constrain\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Constrain all the stored variables when the data is made hanging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a5e6a0d030f5e3230908f8a5eaf607082}{unconstrain\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Unconstrain all the stored variables when the data is made nonhanging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_ac3169455e25c1dc8fd2d3de458c5e101}{is\+\_\+constrained}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Test whether the i-\/th variable is constrained (1\+: true; 0\+: false). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Data_ae43b63b56afb8574db6da68f85802f80}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Self-\/test\+: Have all values been classified as pinned/unpinned? Return 0 if OK. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Data_a7e67fc78a2e8a2fd6eb75bd292d42ff8}{nvalue}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of values stored in data object (incl pinned ones). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Data_a9752205c5fb3bb886200b3fae9181e94}{ntstorage}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return total number of doubles stored per value to record time history of each value (one for steady problems). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a2dae16e2dcff9a40029f834c83364df5}{describe\+\_\+dofs}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{out}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{current\+\_\+string}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Function to describe the dofs of the \doxylink{classoomph_1_1Node}{Node}. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a314ae9723424aa30d1275ab213d38936}{add\+\_\+value\+\_\+pt\+\_\+to\+\_\+map}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{map\+\_\+of\+\_\+value\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Add pointers to all unpinned and unconstrained data to a map indexed by (global) equation number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_ac96b285ae3f1ce549807072b652573bf}{set\+\_\+halo}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}{non\+\_\+halo\+\_\+proc\+\_\+\+ID}})
+\begin{DoxyCompactList}\small\item\em Label the node as halo and specify processor that holds non-\/halo counterpart. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_ab2c485e220d3cf13647d251c509f5136}{set\+\_\+nonhalo}} ()
+\begin{DoxyCompactList}\small\item\em Label the node as not being a halo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Data_a6227d2775850d6cf482d8af0afc50f5c}{is\+\_\+halo}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is this \doxylink{classoomph_1_1Data}{Data} a halo? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1Data_ae8ef6f90c536b83bd393dbc87920741e}{non\+\_\+halo\+\_\+proc\+\_\+\+ID}} ()
+\begin{DoxyCompactList}\small\item\em ID of processor ID that holds non-\/halo counterpart of halo node; negative if not a halo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_a1d3f7c4200506d11fea3c647fe498f5d}{add\+\_\+eqn\+\_\+numbers\+\_\+to\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\+\_\+of\+\_\+eqn\+\_\+numbers}})
+\begin{DoxyCompactList}\small\item\em Add all equation numbers to the vector in the internal storage order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_ae958e52df6ede2a08f957db4ee685ca7}{read\+\_\+eqn\+\_\+numbers\+\_\+from\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vector\+\_\+of\+\_\+eqn\+\_\+numbers}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&index)
+\begin{DoxyCompactList}\small\item\em Read all equation numbers from the vector starting from index. On return the index will be set to the value at the end of the data that has been read in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc}{set\+\_\+default\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}})
+\begin{DoxyCompactList}\small\item\em Make id-\/th node update function the default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a1262df39be34981b4c2336a8f8d2f8aa}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh that performs the specified node update operation (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_accde26f42fbd9b8be1234d8b7426cbcb}{Geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of geometric objects that are involved in the specified node update operation. (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af453f7ba5efb85f1f08b1069c24278a6}{Ref\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of reference values that are required for the specified node update operation. (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default iterator for mesh\+: This mesh performs the default update. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a94d6c725f1d1fa8006503a0059a2baae}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default iterator for vector of geom objects. These Geom\+Objects are involved in the default update. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$\+::iterator \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a194589459f01a68a027b6c62a4fa5561}{Default\+\_\+it\+\_\+ref\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Default iterator for vector of ref values. These reference values are involved in the default update. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a}{Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Default node update function ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}}
+\begin{DoxyCompactList}\small\item\em What it says\+: Used in self-\/test to check if different node update functions produce the same result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}} = -\/100
+\begin{DoxyCompactList}\small\item\em Default (negative!) remesh fct id for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6}{Dummy\+\_\+mesh\+\_\+pt}} = \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Algebraic\+Node\+::\+Dummy\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Default dummy mesh to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh}{Dummy\+Algebraic\+Mesh}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Dummy\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Static Dummy mesh to which the pointer is addressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc}{Dummy\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Default dummy vector of geom objects to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61}{Dummy\+\_\+ref\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Default dummy vector of reference values to point to for nodes for which no remesh fct is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classoomph_1_1Node}{oomph\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa44c98293a9}{Aux\+Node\+Update\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Function pointer to auxiliary node update function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1Node}{oomph\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_a4c2238b9aeac6cf2236ec3e03f34736e}{No\+\_\+independent\+\_\+position}} = 10
+\begin{DoxyCompactList}\small\item\em Static "{}\+Magic number"{} used to indicate that there is no independent position in a periodic node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1Data}{oomph\+::\+Data}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Data_a3f351624d334f1babf55170d539b36fa}{Is\+\_\+pinned}} = -\/1
+\begin{DoxyCompactList}\small\item\em Static "{}\+Magic number"{} used in place of the equation number to indicate that the value is pinned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Data_ad83f76cbcd76d8ed96aca53dd04d5abf}{Is\+\_\+segregated\+\_\+solve\+\_\+pinned}} = -\/3
+\begin{DoxyCompactList}\small\item\em Static "{}\+Magic number"{} used in place of the equation number to indicate that the value is pinned, but only for the duration of a segregated solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Data_ac56011da9a923069793ecc3cb54f5e20}{Is\+\_\+unclassified}} = -\/10
+\begin{DoxyCompactList}\small\item\em Static "{}\+Magic number"{} used in place of the equation number to denote a value that hasn\textquotesingle{}t been classified as pinned or free. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Data_a71225ddbb54744f6fe662af5a5520ab8}{Is\+\_\+constrained}} = -\/2
+\begin{DoxyCompactList}\small\item\em Static "{}\+Magic number"{} used in place of the equation number to indicate that the value is constrained because it is associated with non-\/conforming element boundaries --- a hanging node --- (and is therefore pinned) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Node}{oomph\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Node_a58e9d5a62ae31a6512bfa7ef897cf3c6}{x\+\_\+gen\+\_\+range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Private function to check that the arguemnts to the position functions are in range. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a00055230af0bde1de96cc1a1c68c4324}{x\+\_\+position\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Direct access to the pointer to the i-\/th stored coordinate data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Data}{oomph\+::\+Data}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}{reset\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Helper function that should be overloaded in derived classes that can contain copies of \doxylink{classoomph_1_1Data}{Data}. The function must reset the internal pointers to the copied data. This is used when resizing data to ensure that all the pointers remain valid. The default implementation throws an error beacause \doxylink{classoomph_1_1Data}{Data} cannot be a copy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Node}{oomph\+::\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a908941e709ac28995147ab090f2cbf90}{X\+\_\+position}}
+\begin{DoxyCompactList}\small\item\em Array of pointers to the data holding the Eulerian positions. The storage format must be the same as the internal data storage so that we can implement the functions \doxylink{classoomph_1_1Node_ab76b4773a65b349f143539e07b6e15e2}{x()} in generality here without the need for virtual functions. The first index will be a flat array of position types and coordinates and the second will be the number of time history values at each position type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a8cf734873ab29a412289f8ac2d3be348}{Position\+\_\+time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the timestepper associated with the position data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HangInfo}{Hang\+Info}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Node_a9621d9d4dda3ebfe9578c180c5251484}{Hanging\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of pointers to hanging node info. It\textquotesingle{}s set to NULL if the node isn\textquotesingle{}t hanging. The first entry (0) is the geometric hanging node data. The remaining entries correspond to the hanging data for the other values stored at the node. Usually, these entries will be the same as the geometric hanging node data represented by Hanging\+\_\+pt\mbox{[}0\mbox{]}, but this is not necessarily the case; e.\+g. the pressure in Taylor Hood has different hanging node data from the velocities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_aa8ce049e9f9de38fa20d886a5c6b8116}{Ndim}}
+\begin{DoxyCompactList}\small\item\em Eulerian dimension of the node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Node_aa5419b3f46cb65976e1e1311eed9419d}{Nposition\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Number of coordinate types used in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Node_ae25c446374781036779c46bd8c1a2d74}{Obsolete}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate that the \doxylink{classoomph_1_1Node}{Node} has become obsolete --- usually during mesh refinement process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node_afcc4cc3e1e48964baf23fa44c98293a9}{Aux\+Node\+Update\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1Node_a8bfd206ba303b6d446f59974719b24b6}{Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to auxiliary update function -- this can be used to update any nodal values following the update of the nodal position. This is needed e.\+g. to update the no-\/slip condition on moving boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Data}{oomph\+::\+Data}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Data_a4e1e4a227baddb8f075761c48b06f4af}{Copy\+\_\+of\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em C-\/style array of any \doxylink{classoomph_1_1Data}{Data} objects that contain copies of the current \doxylink{classoomph_1_1Data}{Data} object\textquotesingle{}s data values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Data_a7e8dbdf96bf78658e85c1d7f81ff10dd}{Ncopies}}
+\begin{DoxyCompactList}\small\item\em Number of \doxylink{classoomph_1_1Data}{Data} that contain copies of this \doxylink{classoomph_1_1Data}{Data} object\textquotesingle{}s values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Data}{oomph\+::\+Data}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Data_a05936a16f5fca1612ad3f47b4e87d267}{Default\+\_\+static\+\_\+time\+\_\+stepper\+\_\+pt}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new}} \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$0$>$()
+\begin{DoxyCompactList}\small\item\em Default (static) timestepper used in steady problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Algebraic nodes are nodes with an algebraic positional update function. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00054}{54}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763}\label{classoomph_1_1AlgebraicNode_a7e421172a1063fc49f37559f23837763} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00058}{58}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5}\label{classoomph_1_1AlgebraicNode_a88eb17187c750f1f1a04d0dd554dd9b5} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+nvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for steady algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates and with initial\+\_\+nvalue dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01203}{oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00486}{Dummy\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00479}{Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00475}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00490}{Dummy\+\_\+ref\+\_\+value}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1}\label{classoomph_1_1AlgebraicNode_ab97ffb4a9663ce90e4d7788315ba31a1} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+nvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for bog-\/standard algebraic node of spatial dimension n\+\_\+dim, with n\+\_\+position\+\_\+type generalised coordinates, with initial\+\_\+nvalue dofs and with time dependence. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01203}{oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00486}{Dummy\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00479}{Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00475}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00490}{Dummy\+\_\+ref\+\_\+value}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044}\label{classoomph_1_1AlgebraicNode_af1fef20e4dd950f70003c3db5d289044} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!````~AlgebraicNode@{\texorpdfstring{$\sim$}{\string~}AlgebraicNode}}
+\index{````~AlgebraicNode@{\texorpdfstring{$\sim$}{\string~}AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AlgebraicNode()}{\string~AlgebraicNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Algebraic\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Algebraic\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00105}{105}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01203}{oomph\+::\+Leak\+Check\+Names\+::\+Algebraic\+Node\+\_\+build}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a699690273ec90c490b98c5d7ced2d007}\label{classoomph_1_1AlgebraicNode_a699690273ec90c490b98c5d7ced2d007} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!AlgebraicNode@{AlgebraicNode}}
+\index{AlgebraicNode@{AlgebraicNode}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{AlgebraicNode()}{AlgebraicNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+Algebraic\+Node\+::\+Algebraic\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1AlgebraicNode}{Algebraic\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24}\label{classoomph_1_1AlgebraicNode_ae6b0a1cf4dc041aa553f834b1ecd0a24} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!add\_node\_update\_info@{add\_node\_update\_info}}
+\index{add\_node\_update\_info@{add\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{add\_node\_update\_info()}{add\_node\_update\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&}]{geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ref\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add algebraic update information for node\+: Which \doxylink{classoomph_1_1Mesh}{Mesh} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. We\textquotesingle{}re assigning a default node update fct id of 0. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{331}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00456}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00479}{Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00475}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{mesh\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{ref\+\_\+value()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c}\label{classoomph_1_1AlgebraicNode_ac6bd268c80889507d92431a4638eb85c} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!add\_node\_update\_info@{add\_node\_update\_info}}
+\index{add\_node\_update\_info@{add\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{add\_node\_update\_info()}{add\_node\_update\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::add\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id,  }\item[{\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&}]{geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ref\+\_\+value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{called\+\_\+from\+\_\+constructor = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add algebraic update information for node\+: What\textquotesingle{}s the ID of the mesh update function (typically used within the mesh) Which \doxylink{classoomph_1_1Mesh}{Mesh} implements the update operation? Also, pass the vector of geometric objects and the vectors of reference values that are needed for the update operation. Negative values for ID are only allowed when called from node constructor, as indicated by the final argument which defaults to false. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{280}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00456}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00479}{Dummy\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00475}{Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{mesh\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{ref\+\_\+value()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{Algebraic\+Node()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{Algebraic\+Node()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a1adbe59a85f6de8fcb04b08be23181c3}\label{classoomph_1_1AlgebraicNode_a1adbe59a85f6de8fcb04b08be23181c3} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!all\_geom\_object\_pt@{all\_geom\_object\_pt}}
+\index{all\_geom\_object\_pt@{all\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{all\_geom\_object\_pt()}{all\_geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} oomph\+::\+Algebraic\+Node\+::all\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the vector of all geometric objects. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a3aa7050d81ace38d73d37279beaa5577}{oomph\+::\+Node}}.
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00215}{215}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00192}{ngeom\+\_\+object()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a72a49e9a56c2bab91b1467547671fe65}\label{classoomph_1_1AlgebraicNode_a72a49e9a56c2bab91b1467547671fe65} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!geom\_object\_pt@{geom\_object\_pt}}
+\index{geom\_object\_pt@{geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{geom\_object\_pt()}{geom\_object\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} oomph\+::\+Algebraic\+Node\+::geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to i-\/th geometric object involved in default (usually first) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{229}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe}\label{classoomph_1_1AlgebraicNode_a9de65e71efa3050187d41f05602accfe} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!kill\_node\_update\_info@{kill\_node\_update\_info}}
+\index{kill\_node\_update\_info@{kill\_node\_update\_info}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{kill\_node\_update\_info()}{kill\_node\_update\_info()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::kill\+\_\+node\+\_\+update\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Erase algebraic node update information for id-\/th node update function. Id defaults to 0. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{365}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a8db6dd23ac5f75d19d5eb1d083eeb38b}\label{classoomph_1_1AlgebraicNode_a8db6dd23ac5f75d19d5eb1d083eeb38b} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (usually first) mesh that implements update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{170}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00456}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, and \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_ac3d3a47acb5f2612e4cd47769392b546}\label{classoomph_1_1AlgebraicNode_ac3d3a47acb5f2612e4cd47769392b546} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Algebraic\+Node\+::mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{classoomph_1_1Mesh}{Mesh} that implements the id-\/th node update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00177}{177}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31}\label{classoomph_1_1AlgebraicNode_a10f49849e0942e68c6791810ffc6fb31} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ngeom\_object@{ngeom\_object}}
+\index{ngeom\_object@{ngeom\_object}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of geometric objects involved in default (usually first) update function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_a2c0fb79493f94d2ce19736737ebf5447}{oomph\+::\+Node}}.
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00192}{192}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00215}{all\+\_\+geom\+\_\+object\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734}\label{classoomph_1_1AlgebraicNode_a0e1fa66d3543da39a5e728d8af5c1734} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ngeom\_object@{ngeom\_object}}
+\index{ngeom\_object@{ngeom\_object}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ngeom\_object()}{ngeom\_object()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::ngeom\+\_\+object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of geometric objects involved in id-\/th update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00184}{184}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27}\label{classoomph_1_1AlgebraicNode_a8c9e49f378f2dc9e93e62e281bf58d27} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nnode\_update\_fcts@{nnode\_update\_fcts}}
+\index{nnode\_update\_fcts@{nnode\_update\_fcts}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nnode\_update\_fcts()}{nnode\_update\_fcts()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::nnode\+\_\+update\+\_\+fcts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of node update fcts. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{self\+\_\+test()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c}\label{classoomph_1_1AlgebraicNode_a754dc8fcac3382a07f60262c9792c84c} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Excute the node update function\+: Update the current (and if update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node==true also the previous) nodal position. Also update the current nodal values if an auxiliary update function is defined. Note\+: updating of previous positions is only required (and should only be performed for) newly created Algebraic\+Nodes i.\+e. when this function is called from Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(...). We create the history of its nodal positions from the time-\/dependent version of the specific \doxylink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}\textquotesingle{}s algebraic\+\_\+node\+\_\+update(...) function.
+
+Update the current nodal position, using the first (default) update function if there are multiple ones. If required perform the auxiliary update of nodal values. If update\+\_\+all\+\_\+time\+\_\+levels\+\_\+for\+\_\+new\+\_\+node==true, previous positions are also updated -- as indicated by the name of this flag, this should only be done for newly created nodes, when this function is called from Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update(...) Perform auxiliary update of function values?
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Node_aecf8c979266300d3609de2b4ddfa3cc8}{oomph\+::\+Node}}.
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{231}} of file \mbox{\hyperlink{algebraic__elements_8cc_source}{algebraic\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1AlgebraicMesh_ab01d6f93354f3c4e5c9d1f0a5885a65b}{oomph\+::\+Algebraic\+Mesh\+::algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{nodes_8h_source_l00967}{oomph\+::\+Node\+::\+Aux\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{mesh\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00136}{nnode\+\_\+update\+\_\+fcts()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{nodes_8h_source_l00932}{oomph\+::\+Node\+::\+Position\+\_\+time\+\_\+stepper\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{self\+\_\+test()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2}\label{classoomph_1_1AlgebraicNode_a8887f3a7c445b098835a7703c3a19bd2} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update\_fct\_id@{node\_update\_fct\_id}}
+\index{node\_update\_fct\_id@{node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update\_fct\_id()}{node\_update\_fct\_id()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default (usually first if there are multiple ones) node update fct id. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00467}{Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}.
+
+
+
+Referenced by \mbox{\hyperlink{fish__mesh_8h_source_l00351}{oomph\+::\+Algebraic\+Fish\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00521}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00545}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{self\+\_\+test()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00566}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8h_source_l00589}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27}\label{classoomph_1_1AlgebraicNode_a6b910e50ee47113aa0256e46043b0f27} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!node\_update\_fct\_id@{node\_update\_fct\_id}}
+\index{node\_update\_fct\_id@{node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{node\_update\_fct\_id()}{node\_update\_fct\_id()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of node update fct ids (vector is resized to contain the correct number of entries). Somewhat costly to call as map needs to be copied into vector. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00154}{154}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a}\label{classoomph_1_1AlgebraicNode_a1d5805d44950ad5783720ba7bb5a372a} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nref\_value@{nref\_value}}
+\index{nref\_value@{nref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nref\_value()}{nref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::nref\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of reference values involved in default (usually first) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00243}{243}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00464}{Default\+\_\+it\+\_\+ref\+\_\+value}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383}\label{classoomph_1_1AlgebraicNode_a18b508012bc638d85539568219865383} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!nref\_value@{nref\_value}}
+\index{nref\_value@{nref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{nref\_value()}{nref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::nref\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of reference values involved in id-\/th update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{235}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463}\label{classoomph_1_1AlgebraicNode_a9658be0ccdb312e7cf0175663407f463} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!ref\_value@{ref\_value}}
+\index{ref\_value@{ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{ref\_value()}{ref\_value()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Algebraic\+Node\+::ref\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return i-\/th reference value involved in default (usually first) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{267}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00464}{Default\+\_\+it\+\_\+ref\+\_\+value}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd}\label{classoomph_1_1AlgebraicNode_a68b0fc5d9b38bb087f889424382a3ecd} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Algebraic\+Node\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Perform self test\+: If the node has multiple node update functions, check that they all give the same result. Return 1/0 for failure/success. (Failure if max. difference between the nodal positions for different update functions exceeds \doxylink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}. 
+
+Perform self test\+: If the node has multiple update functions, check that all update functions give the same result (with a tolerance of \doxylink{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}{Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{297}} of file \mbox{\hyperlink{algebraic__elements_8cc_source}{algebraic\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00471}{Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00136}{nnode\+\_\+update\+\_\+fcts()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{nodes_8cc_source_l00965}{oomph\+::\+Data\+::self\+\_\+test()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc}\label{classoomph_1_1AlgebraicNode_a5f9d80a2826974b63376a4c58e0812fc} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!set\_default\_node\_update@{set\_default\_node\_update}}
+\index{set\_default\_node\_update@{set\_default\_node\_update}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{set\_default\_node\_update()}{set\_default\_node\_update()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Algebraic\+Node\+::set\+\_\+default\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Make id-\/th node update function the default. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{384}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00456}{Default\+\_\+it\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00464}{Default\+\_\+it\+\_\+ref\+\_\+value}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00467}{Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{Mesh\+\_\+pt}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, and \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{self\+\_\+test()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a40c652e55675c70e39799c65fafcc2d9}\label{classoomph_1_1AlgebraicNode_a40c652e55675c70e39799c65fafcc2d9} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_geom\_object\_pt@{vector\_geom\_object\_pt}}
+\index{vector\_geom\_object\_pt@{vector\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_geom\_object\_pt()}{vector\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of geometric objects involved in default (usually first) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00208}{208}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a66d4b6382b4e364a464c7c19a7324200}\label{classoomph_1_1AlgebraicNode_a66d4b6382b4e364a464c7c19a7324200} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_geom\_object\_pt@{vector\_geom\_object\_pt}}
+\index{vector\_geom\_object\_pt@{vector\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_geom\_object\_pt()}{vector\_geom\_object\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \& oomph\+::\+Algebraic\+Node\+::vector\+\_\+geom\+\_\+object\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of geometric objects involved in id-\/th update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{Geom\+\_\+object\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00834}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00921}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01039}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_ac4a4f8e238b9ee1abb2761800ecd1c4a}\label{classoomph_1_1AlgebraicNode_ac4a4f8e238b9ee1abb2761800ecd1c4a} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_ref\_value@{vector\_ref\_value}}
+\index{vector\_ref\_value@{vector\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_ref\_value()}{vector\_ref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \& oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of reference values involved in default (usually first) update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{251}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00464}{Default\+\_\+it\+\_\+ref\+\_\+value}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00834}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+central\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00921}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01029}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01039}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+lower\+\_\+right\+\_\+region()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01156}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::node\+\_\+update\+\_\+upper\+\_\+left\+\_\+region()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00048}{oomph\+::\+Algebraic\+Element\+Base\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01138}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+lower\+\_\+right\+\_\+box()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l01275}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+region()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l01234}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update\+\_\+in\+\_\+upper\+\_\+left\+\_\+box()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_adcdd76bff197e1f392ff3023a57ba38f}\label{classoomph_1_1AlgebraicNode_adcdd76bff197e1f392ff3023a57ba38f} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!vector\_ref\_value@{vector\_ref\_value}}
+\index{vector\_ref\_value@{vector\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{vector\_ref\_value()}{vector\_ref\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \& oomph\+::\+Algebraic\+Node\+::vector\+\_\+ref\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return vector of reference values involved in id-\/th update function. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00259}{259}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{Ref\+\_\+value}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1AlgebraicNode_a94d6c725f1d1fa8006503a0059a2baae}\label{classoomph_1_1AlgebraicNode_a94d6c725f1d1fa8006503a0059a2baae} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_geom\_object\_pt@{Default\_it\_geom\_object\_pt}}
+\index{Default\_it\_geom\_object\_pt@{Default\_it\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_geom\_object\_pt}{Default\_it\_geom\_object\_pt}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}},\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}\texorpdfstring{$\ast$}{*}$>$$>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default iterator for vector of geom objects. These Geom\+Objects are involved in the default update. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00460}{460}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00215}{all\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00229}{geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00192}{ngeom\+\_\+object()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00208}{vector\+\_\+geom\+\_\+object\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e}\label{classoomph_1_1AlgebraicNode_ac8cb7e56e80f1c0f3e200562d2b1d39e} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_mesh\_pt@{Default\_it\_mesh\_pt}}
+\index{Default\_it\_mesh\_pt@{Default\_it\_mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_mesh\_pt}{Default\_it\_mesh\_pt}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}},\mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}\texorpdfstring{$\ast$}{*}$>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default iterator for mesh\+: This mesh performs the default update. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00456}{456}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00170}{mesh\+\_\+pt()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a194589459f01a68a027b6c62a4fa5561}\label{classoomph_1_1AlgebraicNode_a194589459f01a68a027b6c62a4fa5561} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_it\_ref\_value@{Default\_it\_ref\_value}}
+\index{Default\_it\_ref\_value@{Default\_it\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_it\_ref\_value}{Default\_it\_ref\_value}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}},\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$$>$\+::iterator oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+it\+\_\+ref\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default iterator for vector of ref values. These reference values are involved in the default update. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00464}{464}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00243}{nref\+\_\+value()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00267}{ref\+\_\+value()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00251}{vector\+\_\+ref\+\_\+value()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a}\label{classoomph_1_1AlgebraicNode_adba92e804261f449a9142920661c339a} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Default\_node\_update\_fct\_id@{Default\_node\_update\_fct\_id}}
+\index{Default\_node\_update\_fct\_id@{Default\_node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Default\_node\_update\_fct\_id}{Default\_node\_update\_fct\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Algebraic\+Node\+::\+Default\+\_\+node\+\_\+update\+\_\+fct\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default node update function ID. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00467}{467}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00146}{node\+\_\+update\+\_\+fct\+\_\+id()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc}\label{classoomph_1_1AlgebraicNode_a74bfe556a50b852ee06245e6a374d5fc} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_geom\_object\_pt@{Dummy\_geom\_object\_pt}}
+\index{Dummy\_geom\_object\_pt@{Dummy\_geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_geom\_object\_pt}{Dummy\_geom\_object\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy vector of geom objects to point to for nodes for which no remesh fct is defined. 
+
+Zero-\/sized default dummy vector of geom objects to point to for nodes for which no remesh fct is defined. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00486}{486}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{Algebraic\+Node()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{Algebraic\+Node()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}\label{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_mesh@{Dummy\_mesh}}
+\index{Dummy\_mesh@{Dummy\_mesh}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_mesh}{Dummy\_mesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DummyAlgebraicMesh}{Dummy\+Algebraic\+Mesh}} oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+mesh\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Static Dummy mesh to which the pointer is addressed. 
+
+Set the dummy mesh. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00482}{482}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6}\label{classoomph_1_1AlgebraicNode_a21f78f61150e308456db352907aa26c6} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_mesh\_pt@{Dummy\_mesh\_pt}}
+\index{Dummy\_mesh\_pt@{Dummy\_mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_mesh\_pt}{Dummy\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}} \texorpdfstring{$\ast$}{*} oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+mesh\+\_\+pt = \&\mbox{\hyperlink{classoomph_1_1AlgebraicNode_aa89c19c1d7c5e5efd1b501098491bf5c}{Algebraic\+Node\+::\+Dummy\+\_\+mesh}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy mesh to point to for nodes for which no remesh fct is defined. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00479}{479}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{Algebraic\+Node()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{Algebraic\+Node()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8}\label{classoomph_1_1AlgebraicNode_af6d3b50db54114b5cf22f86c0ceed2f8} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_node\_update\_fct\_id@{Dummy\_node\_update\_fct\_id}}
+\index{Dummy\_node\_update\_fct\_id@{Dummy\_node\_update\_fct\_id}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_node\_update\_fct\_id}{Dummy\_node\_update\_fct\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+node\+\_\+update\+\_\+fct\+\_\+id = -\/100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default (negative!) remesh fct id for nodes for which no remesh fct is defined. 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00475}{475}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{Algebraic\+Node()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{Algebraic\+Node()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61}\label{classoomph_1_1AlgebraicNode_af73f0a803e1bdf2a7a1c7f1f4384df61} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Dummy\_ref\_value@{Dummy\_ref\_value}}
+\index{Dummy\_ref\_value@{Dummy\_ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Dummy\_ref\_value}{Dummy\_ref\_value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Algebraic\+Node\+::\+Dummy\+\_\+ref\+\_\+value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default dummy vector of reference values to point to for nodes for which no remesh fct is defined. 
+
+Zero-\/sized default dummy vector of reference values to point to for nodes for which no remesh fct is defined. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00490}{490}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00063}{Algebraic\+Node()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00085}{Algebraic\+Node()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_accde26f42fbd9b8be1234d8b7426cbcb}\label{classoomph_1_1AlgebraicNode_accde26f42fbd9b8be1234d8b7426cbcb} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Geom\_object\_pt@{Geom\_object\_pt}}
+\index{Geom\_object\_pt@{Geom\_object\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Geom\_object\_pt}{Geom\_object\_pt}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}\texorpdfstring{$\ast$}{*}$>$ $>$ oomph\+::\+Algebraic\+Node\+::\+Geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of geometric objects that are involved in the specified node update operation. (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00446}{446}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00184}{ngeom\+\_\+object()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00200}{vector\+\_\+geom\+\_\+object\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435}\label{classoomph_1_1AlgebraicNode_a5696d589c11a229f402d68476c7fe435} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Max\_allowed\_difference\_between\_node\_update\_fcts@{Max\_allowed\_difference\_between\_node\_update\_fcts}}
+\index{Max\_allowed\_difference\_between\_node\_update\_fcts@{Max\_allowed\_difference\_between\_node\_update\_fcts}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Max\_allowed\_difference\_between\_node\_update\_fcts}{Max\_allowed\_difference\_between\_node\_update\_fcts}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Algebraic\+Node\+::\+Max\+\_\+allowed\+\_\+difference\+\_\+between\+\_\+node\+\_\+update\+\_\+fcts\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ 1.0e-\/10}
+
+\end{DoxyCode}
+
+
+What it says\+: Used in self-\/test to check if different node update functions produce the same result. 
+
+Assign default value for test if different node update functions produce the same result. 
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00471}{471}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8cc_source_l00297}{self\+\_\+test()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_a1262df39be34981b4c2336a8f8d2f8aa}\label{classoomph_1_1AlgebraicNode_a1262df39be34981b4c2336a8f8d2f8aa} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Mesh\_pt@{Mesh\_pt}}
+\index{Mesh\_pt@{Mesh\_pt}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Mesh\_pt}{Mesh\_pt}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1AlgebraicMesh}{Algebraic\+Mesh}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Algebraic\+Node\+::\+Mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh that performs the specified node update operation (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00439}{439}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00177}{mesh\+\_\+pt()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00136}{nnode\+\_\+update\+\_\+fcts()}}, \mbox{\hyperlink{algebraic__elements_8cc_source_l00231}{node\+\_\+update()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00154}{node\+\_\+update\+\_\+fct\+\_\+id()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicNode_af453f7ba5efb85f1f08b1069c24278a6}\label{classoomph_1_1AlgebraicNode_af453f7ba5efb85f1f08b1069c24278a6} 
+\index{oomph::AlgebraicNode@{oomph::AlgebraicNode}!Ref\_value@{Ref\_value}}
+\index{Ref\_value@{Ref\_value}!oomph::AlgebraicNode@{oomph::AlgebraicNode}}
+\doxysubsubsection{\texorpdfstring{Ref\_value}{Ref\_value}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ $>$ oomph\+::\+Algebraic\+Node\+::\+Ref\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of reference values that are required for the specified node update operation. (Map because this node may only use the \doxylink{classoomph_1_1Mesh}{Mesh}\textquotesingle{}s 116th node update fct. There\textquotesingle{}s no point in wasting an entire vector for the non-\/existing entries) 
+
+
+
+Definition at line \mbox{\hyperlink{algebraic__elements_8h_source_l00453}{453}} of file \mbox{\hyperlink{algebraic__elements_8h_source}{algebraic\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{algebraic__elements_8h_source_l00331}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00280}{add\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00365}{kill\+\_\+node\+\_\+update\+\_\+info()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00235}{nref\+\_\+value()}}, \mbox{\hyperlink{algebraic__elements_8h_source_l00384}{set\+\_\+default\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{algebraic__elements_8h_source_l00259}{vector\+\_\+ref\+\_\+value()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__elements_8h}{algebraic\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{algebraic__elements_8cc}{algebraic\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

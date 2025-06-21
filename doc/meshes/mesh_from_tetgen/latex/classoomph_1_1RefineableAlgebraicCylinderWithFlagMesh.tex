@@ -1,0 +1,165 @@
+\doxysection{oomph\+::Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh}{}\label{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh}\index{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}}
+
+
+Refineable version of \doxylink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{Algebraic\+Cylinder\+With\+Flag\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.924399cm]{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a9ddd203e89075036bfdfe6b695fb3395}{Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Circle}} \texorpdfstring{$\ast$}{*}cylinder\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5ab2ab96405b054bf5b2579e1e704add}{top\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a88d6da54fa98f019769c0830354ea60b}{bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a0f2752a189b3dc62cc0278e36969e18b}{tip\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{a}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a186963cf4b1fc118929e49e012eba4d2}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the node update data for specified node following any mesh adapation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a2c307b804fee56aa620ea414b41883d5}{Algebraic\+Cylinder\+With\+Flag\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Circle}} \texorpdfstring{$\ast$}{*}cylinder\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5ab2ab96405b054bf5b2579e1e704add}{top\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a88d6da54fa98f019769c0830354ea60b}{bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a0f2752a189b3dc62cc0278e36969e18b}{tip\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{a}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_ac7e92a8dc3add0cd1f666dc8c9f8ca6f}{\texorpdfstring{$\sim$}{\string~}\+Algebraic\+Cylinder\+With\+Flag\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6aeef710528a9d8dd51023dd6ee131ea}{set\+\_\+bottom\+\_\+flag\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a88d6da54fa98f019769c0830354ea60b}{bottom\+\_\+flag\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set geometric object that defines the bottom face of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9d7f04acdaed3e9f2133d9665dd4b799}{set\+\_\+top\+\_\+flag\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5ab2ab96405b054bf5b2579e1e704add}{top\+\_\+flag\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the geometric object that defines the top face of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a191d736d9acbeb5927fc5f472420e9f6}{set\+\_\+tip\+\_\+flag\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a0f2752a189b3dc62cc0278e36969e18b}{tip\+\_\+flag\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the geometric object that defines the tip of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a88d6da54fa98f019769c0830354ea60b}{bottom\+\_\+flag\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Read-\/only access to geometric object that defines the bottom face of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5ab2ab96405b054bf5b2579e1e704add}{top\+\_\+flag\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Read-\/only access to geometric object that defines the top face of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a0f2752a189b3dc62cc0278e36969e18b}{tip\+\_\+flag\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Read-\/only access to geometric object that defines the tip of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a9d909de1db84a3b7e42494535b152d92}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the geometric references that are used to update node after mesh adaptation. Empty -- no update of node update required without adaptativity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a5e1e770e82577e5702470d8b87f8599d}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a6591a2b9fdcb8080c899e34b9c8277cd}{Cylinder\+With\+Flag\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Circle}} \texorpdfstring{$\ast$}{*}cylinder\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}top\+\_\+flag\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}bottom\+\_\+flag\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}tip\+\_\+flag\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+length}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{flag\+\_\+height}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{centre\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{a}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a04fb9a6ea7a70eb8dbfb83ef73ed7b48}{\texorpdfstring{$\sim$}{\string~}\+Cylinder\+With\+Flag\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_ae9595e7512c5285c8afa31ad6adb1c97}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_ad6af2e420e0f152a7fb055f25400a5d0}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Function to setup the algebraic node update. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a713cf7c2e1be91eae2667dc3e1fd8644}{node\+\_\+update\+\_\+I}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a2717b4ae70a9641c24becc8176410b3e}{node\+\_\+update\+\_\+\+II}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a3e8c71cc3ab123864b4f999e612345ee}{node\+\_\+update\+\_\+\+III}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a69ab465aa28dd9a65a0c50762c0a6d89}{node\+\_\+update\+\_\+\+IV}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a035216f13c9758881ce2b7e33ad27926}{node\+\_\+update\+\_\+V}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a989fe557f03ac20812e69a8de2dbb9a4}{node\+\_\+update\+\_\+\+VI}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_abb0565f0624583d2549f38602fd11e48}{node\+\_\+update\+\_\+\+VII}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a85336e587d9c4cac7f4d77890dd7690b}{node\+\_\+update\+\_\+\+VIII}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_ae8e85400abd282b64463b67e21e9c13a}{node\+\_\+update\+\_\+\+IX}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a423d4aa7ffcca5e707b2e5d820984957}{Cylinder\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Cylinder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a326e4789fe96b3052a8beb51ec9e94d0}{Top\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Top flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_ac1f7e1ba183ba813229302c5688ea1ba}{Bottom\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bottom flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_ad22c8bfa595f4b1f129be85a1904762f}{Tip\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Tip flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a7620fa5a4c36f638fb22c81b346b74a2}{Length}}
+\begin{DoxyCompactList}\small\item\em Length of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a29a0c970a11d46bdf03f3b5053d3ece2}{Height}}
+\begin{DoxyCompactList}\small\item\em Height of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a822ed90585320576084667f88c236396}{Flag\+\_\+length}}
+\begin{DoxyCompactList}\small\item\em Flag length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a76a19a39dd500d5a48c10baae59797e0}{Flag\+\_\+height}}
+\begin{DoxyCompactList}\small\item\em Flag thickness. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a3290ac9103e43f4a4a997fe4692b6506}{Centre\+\_\+x}}
+\begin{DoxyCompactList}\small\item\em x position of the centre of the cylinder \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_a6b4575a9c3818e04bdb00d4150d49290}{Centre\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em x position of the centre of the cylinder \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1AlgebraicCylinderWithFlagMesh_aabc6cdfe508f04a4b1c92f2c2f1639c4}{A}}
+\begin{DoxyCompactList}\small\item\em radius of the cylinder \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh}{oomph\+::\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain}{Cylinder\+With\+Flag\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagMesh_a257b36fed6fb0d20d108a27c6a1c5f86}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$}
+Refineable version of \doxylink{classoomph_1_1AlgebraicCylinderWithFlagMesh}{Algebraic\+Cylinder\+With\+Flag\+Mesh}. 
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source_l00347}{347}} of file \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a9ddd203e89075036bfdfe6b695fb3395}\label{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a9ddd203e89075036bfdfe6b695fb3395} 
+\index{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!RefineableAlgebraicCylinderWithFlagMesh@{RefineableAlgebraicCylinderWithFlagMesh}}
+\index{RefineableAlgebraicCylinderWithFlagMesh@{RefineableAlgebraicCylinderWithFlagMesh}!oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableAlgebraicCylinderWithFlagMesh()}{RefineableAlgebraicCylinderWithFlagMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Circle}} \texorpdfstring{$\ast$}{*}}]{cylinder\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{top\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{bottom\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{tip\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{height,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{flag\+\_\+length,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{flag\+\_\+height,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{centre\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{centre\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source_l00357}{357}} of file \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a186963cf4b1fc118929e49e012eba4d2}\label{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh_a186963cf4b1fc118929e49e012eba4d2} 
+\index{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicCylinderWithFlagMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh}{oomph\+::\+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Update the node update data for specified node following any mesh adapation. 
+
+Update the node update functions. 
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc_source_l01841}{1841}} of file \mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc_source}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cylinder__with__flag__mesh_8h}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{cylinder__with__flag__mesh_8template_8cc}{cylinder\+\_\+with\+\_\+flag\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ShapeWithDeepCopy Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html">ShapeWithDeepCopy</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1ShapeWithDeepCopy-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ShapeWithDeepCopy Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A shape function with a deep copy constructor. This allows for use with stl operations (e.g. manipulating vectors of shape functions). A seperate class is needed because the basic shape function uses a shallow copy.  
+ <a href="classoomph_1_1ShapeWithDeepCopy.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="shape_8h_source.html">shape.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ShapeWithDeepCopy:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ShapeWithDeepCopy.png" usemap="#oomph::ShapeWithDeepCopy_map" alt=""/>
+  <map id="oomph::ShapeWithDeepCopy_map" name="oomph::ShapeWithDeepCopy_map">
+<area href="classoomph_1_1Shape.html" title="A Class for shape functions. In simple cases, the shape functions have only one index that can be tho..." alt="oomph::Shape" shape="rect" coords="0,0,175,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a1499808202122f3b33c392e67deda9af" id="r_a1499808202122f3b33c392e67deda9af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#a1499808202122f3b33c392e67deda9af">ShapeWithDeepCopy</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;N)</td></tr>
+<tr class="memdesc:a1499808202122f3b33c392e67deda9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a single-index set of shape functions.  <br /></td></tr>
+<tr class="separator:a1499808202122f3b33c392e67deda9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf949c57278bc1971de05c23af752b12" id="r_abf949c57278bc1971de05c23af752b12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#abf949c57278bc1971de05c23af752b12">ShapeWithDeepCopy</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;N, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;M)</td></tr>
+<tr class="memdesc:abf949c57278bc1971de05c23af752b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a two-index set of shape functions.  <br /></td></tr>
+<tr class="separator:abf949c57278bc1971de05c23af752b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1288282b161fe1dac3908af5b09451e2" id="r_a1288282b161fe1dac3908af5b09451e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#a1288282b161fe1dac3908af5b09451e2">ShapeWithDeepCopy</a> ()</td></tr>
+<tr class="memdesc:a1288282b161fe1dac3908af5b09451e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:a1288282b161fe1dac3908af5b09451e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66ab9cb33d966ca340151e6bf6e4c8e" id="r_ae66ab9cb33d966ca340151e6bf6e4c8e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#ae66ab9cb33d966ca340151e6bf6e4c8e">ShapeWithDeepCopy</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ShapeWithDeepCopy.html">ShapeWithDeepCopy</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_shape</a>)</td></tr>
+<tr class="memdesc:ae66ab9cb33d966ca340151e6bf6e4c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep copy constructor.  <br /></td></tr>
+<tr class="separator:ae66ab9cb33d966ca340151e6bf6e4c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7152e896d26397f544d0a6fb108ad74" id="r_ac7152e896d26397f544d0a6fb108ad74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#ac7152e896d26397f544d0a6fb108ad74">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ShapeWithDeepCopy.html">ShapeWithDeepCopy</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_shape</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ac7152e896d26397f544d0a6fb108ad74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ac7152e896d26397f544d0a6fb108ad74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b263cf21ce417463668486e81ec3d60" id="r_a6b263cf21ce417463668486e81ec3d60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ShapeWithDeepCopy.html#a6b263cf21ce417463668486e81ec3d60">~ShapeWithDeepCopy</a> ()</td></tr>
+<tr class="memdesc:a6b263cf21ce417463668486e81ec3d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, clear up the memory allocated by the object.  <br /></td></tr>
+<tr class="separator:a6b263cf21ce417463668486e81ec3d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Shape"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Shape')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Shape.html">oomph::Shape</a></td></tr>
+<tr class="memitem:aedb62dd7998071721057eab955ecc1f9 inherit pub_methods_classoomph_1_1Shape" id="r_aedb62dd7998071721057eab955ecc1f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#aedb62dd7998071721057eab955ecc1f9">Shape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;N)</td></tr>
+<tr class="memdesc:aedb62dd7998071721057eab955ecc1f9 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a single-index set of shape functions.  <br /></td></tr>
+<tr class="separator:aedb62dd7998071721057eab955ecc1f9 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad892f46ca3265ba654bb4df164890505 inherit pub_methods_classoomph_1_1Shape" id="r_ad892f46ca3265ba654bb4df164890505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#ad892f46ca3265ba654bb4df164890505">Shape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;N, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;M)</td></tr>
+<tr class="memdesc:ad892f46ca3265ba654bb4df164890505 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for a two-index set of shape functions.  <br /></td></tr>
+<tr class="separator:ad892f46ca3265ba654bb4df164890505 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecba4a024c9c1595f253dd6ce48613c9 inherit pub_methods_classoomph_1_1Shape" id="r_aecba4a024c9c1595f253dd6ce48613c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#aecba4a024c9c1595f253dd6ce48613c9">Shape</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;shape)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:aecba4a024c9c1595f253dd6ce48613c9 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:aecba4a024c9c1595f253dd6ce48613c9 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d7a3572de5743ca382d275711a814e inherit pub_methods_classoomph_1_1Shape" id="r_af6d7a3572de5743ca382d275711a814e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#af6d7a3572de5743ca382d275711a814e">Shape</a> ()</td></tr>
+<tr class="memdesc:af6d7a3572de5743ca382d275711a814e inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - just assigns a null pointers and zero index sizes.  <br /></td></tr>
+<tr class="separator:af6d7a3572de5743ca382d275711a814e inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d3d4203abf1e39fc3db2732355c801 inherit pub_methods_classoomph_1_1Shape" id="r_aa9d3d4203abf1e39fc3db2732355c801"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#aa9d3d4203abf1e39fc3db2732355c801">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Shape.html">Shape</a> &amp;shape)</td></tr>
+<tr class="memdesc:aa9d3d4203abf1e39fc3db2732355c801 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">The assignment operator does a shallow copy (resets the pointer to the data)  <br /></td></tr>
+<tr class="separator:aa9d3d4203abf1e39fc3db2732355c801 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae56db76f6d0b46acb57869896dc9be20 inherit pub_methods_classoomph_1_1Shape" id="r_ae56db76f6d0b46acb57869896dc9be20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#ae56db76f6d0b46acb57869896dc9be20">operator=</a> (<a class="el" href="classoomph_1_1Shape.html">Shape</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">shape_pt</a>)</td></tr>
+<tr class="memdesc:ae56db76f6d0b46acb57869896dc9be20 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">The assignment operator does a shallow copy (resets the pointer to the data)  <br /></td></tr>
+<tr class="separator:ae56db76f6d0b46acb57869896dc9be20 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e38eb7b8c072b0acac31c61f11cc27 inherit pub_methods_classoomph_1_1Shape" id="r_af6e38eb7b8c072b0acac31c61f11cc27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#af6e38eb7b8c072b0acac31c61f11cc27">~Shape</a> ()</td></tr>
+<tr class="memdesc:af6e38eb7b8c072b0acac31c61f11cc27 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, clear up the memory allocated by the object.  <br /></td></tr>
+<tr class="separator:af6e38eb7b8c072b0acac31c61f11cc27 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a701caf3197248f0e4f598ede06f0d4ec inherit pub_methods_classoomph_1_1Shape" id="r_a701caf3197248f0e4f598ede06f0d4ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a701caf3197248f0e4f598ede06f0d4ec">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;N, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;M=1)</td></tr>
+<tr class="memdesc:a701caf3197248f0e4f598ede06f0d4ec inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the size of the storage.  <br /></td></tr>
+<tr class="separator:a701caf3197248f0e4f598ede06f0d4ec inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6738e5f9e1c1355c82a6a8ec1caedd63 inherit pub_methods_classoomph_1_1Shape" id="r_a6738e5f9e1c1355c82a6a8ec1caedd63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a6738e5f9e1c1355c82a6a8ec1caedd63">operator[]</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a6738e5f9e1c1355c82a6a8ec1caedd63 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the bracket operator to provide access to values.  <br /></td></tr>
+<tr class="separator:a6738e5f9e1c1355c82a6a8ec1caedd63 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e98287258052bf7dbb108a57b4b7d0 inherit pub_methods_classoomph_1_1Shape" id="r_a06e98287258052bf7dbb108a57b4b7d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a06e98287258052bf7dbb108a57b4b7d0">operator[]</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a06e98287258052bf7dbb108a57b4b7d0 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the bracket operator (const version)  <br /></td></tr>
+<tr class="separator:a06e98287258052bf7dbb108a57b4b7d0 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a487536cc828673c4a985ff0210103 inherit pub_methods_classoomph_1_1Shape" id="r_a56a487536cc828673c4a985ff0210103"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a56a487536cc828673c4a985ff0210103">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a56a487536cc828673c4a985ff0210103 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round bracket operator to provide access to values.  <br /></td></tr>
+<tr class="separator:a56a487536cc828673c4a985ff0210103 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394e184140b968f3c3dbd7d78aa1bf69 inherit pub_methods_classoomph_1_1Shape" id="r_a394e184140b968f3c3dbd7d78aa1bf69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a394e184140b968f3c3dbd7d78aa1bf69">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a394e184140b968f3c3dbd7d78aa1bf69 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round bracket operator (const version)  <br /></td></tr>
+<tr class="separator:a394e184140b968f3c3dbd7d78aa1bf69 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f013add08e787d28cced6df34f0ed43 inherit pub_methods_classoomph_1_1Shape" id="r_a9f013add08e787d28cced6df34f0ed43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a9f013add08e787d28cced6df34f0ed43">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a9f013add08e787d28cced6df34f0ed43 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round bracket operator, allowing for two indices.  <br /></td></tr>
+<tr class="separator:a9f013add08e787d28cced6df34f0ed43 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc1638fe2f7499087ba9046d390ef91 inherit pub_methods_classoomph_1_1Shape" id="r_a0dc1638fe2f7499087ba9046d390ef91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a0dc1638fe2f7499087ba9046d390ef91">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0dc1638fe2f7499087ba9046d390ef91 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round bracket operator, allowing for two indices (const version)  <br /></td></tr>
+<tr class="separator:a0dc1638fe2f7499087ba9046d390ef91 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a374bd15fa30336247543459231f82af0 inherit pub_methods_classoomph_1_1Shape" id="r_a374bd15fa30336247543459231f82af0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a374bd15fa30336247543459231f82af0">nindex1</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a374bd15fa30336247543459231f82af0 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 1 of the shape function object.  <br /></td></tr>
+<tr class="separator:a374bd15fa30336247543459231f82af0 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5be285b7233935366b561646a085463 inherit pub_methods_classoomph_1_1Shape" id="r_ae5be285b7233935366b561646a085463"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#ae5be285b7233935366b561646a085463">nindex2</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae5be285b7233935366b561646a085463 inherit pub_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 2 of the shape function object.  <br /></td></tr>
+<tr class="separator:ae5be285b7233935366b561646a085463 inherit pub_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1Shape"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1Shape')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1Shape.html">oomph::Shape</a></td></tr>
+<tr class="memitem:af24aed6aba597ff8cd52d201be5a414a inherit pro_methods_classoomph_1_1Shape" id="r_af24aed6aba597ff8cd52d201be5a414a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#af24aed6aba597ff8cd52d201be5a414a">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:af24aed6aba597ff8cd52d201be5a414a inherit pro_methods_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private function that checks whether the index is in range.  <br /></td></tr>
+<tr class="separator:af24aed6aba597ff8cd52d201be5a414a inherit pro_methods_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1Shape"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1Shape')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1Shape.html">oomph::Shape</a></td></tr>
+<tr class="memitem:ae045962e578d675877663404b177d301 inherit pro_attribs_classoomph_1_1Shape" id="r_ae045962e578d675877663404b177d301"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#ae045962e578d675877663404b177d301">Psi</a></td></tr>
+<tr class="memdesc:ae045962e578d675877663404b177d301 inherit pro_attribs_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer that addresses the storage that will be used to read and set the shape functions. The shape functions are packed into a flat array of doubles.  <br /></td></tr>
+<tr class="separator:ae045962e578d675877663404b177d301 inherit pro_attribs_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32c202fd82d361e354d7cf19615f162f inherit pro_attribs_classoomph_1_1Shape" id="r_a32c202fd82d361e354d7cf19615f162f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a32c202fd82d361e354d7cf19615f162f">Allocated_storage</a></td></tr>
+<tr class="memdesc:a32c202fd82d361e354d7cf19615f162f inherit pro_attribs_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer that addresses the storage allocated by the object on construction. This will be the same as Psi if the object is not copied.  <br /></td></tr>
+<tr class="separator:a32c202fd82d361e354d7cf19615f162f inherit pro_attribs_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63638007c6e3b84b57a023432c43ceb1 inherit pro_attribs_classoomph_1_1Shape" id="r_a63638007c6e3b84b57a023432c43ceb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#a63638007c6e3b84b57a023432c43ceb1">Index1</a></td></tr>
+<tr class="memdesc:a63638007c6e3b84b57a023432c43ceb1 inherit pro_attribs_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the first index of the shape function.  <br /></td></tr>
+<tr class="separator:a63638007c6e3b84b57a023432c43ceb1 inherit pro_attribs_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae154e349eaa0a2f4b415c2bdaef0708 inherit pro_attribs_classoomph_1_1Shape" id="r_aae154e349eaa0a2f4b415c2bdaef0708"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Shape.html#aae154e349eaa0a2f4b415c2bdaef0708">Index2</a></td></tr>
+<tr class="memdesc:aae154e349eaa0a2f4b415c2bdaef0708 inherit pro_attribs_classoomph_1_1Shape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the second index of the shape function.  <br /></td></tr>
+<tr class="separator:aae154e349eaa0a2f4b415c2bdaef0708 inherit pro_attribs_classoomph_1_1Shape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A shape function with a deep copy constructor. This allows for use with stl operations (e.g. manipulating vectors of shape functions). A seperate class is needed because the basic shape function uses a shallow copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00518">518</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1499808202122f3b33c392e67deda9af" name="a1499808202122f3b33c392e67deda9af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1499808202122f3b33c392e67deda9af">&#9670;&#160;</a></span>ShapeWithDeepCopy() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>N</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for a single-index set of shape functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00522">522</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="abf949c57278bc1971de05c23af752b12" name="abf949c57278bc1971de05c23af752b12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf949c57278bc1971de05c23af752b12">&#9670;&#160;</a></span>ShapeWithDeepCopy() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>M</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for a two-index set of shape functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00525">525</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="a1288282b161fe1dac3908af5b09451e2" name="a1288282b161fe1dac3908af5b09451e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1288282b161fe1dac3908af5b09451e2">&#9670;&#160;</a></span>ShapeWithDeepCopy() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00528">528</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+</div>
+</div>
+<a id="ae66ab9cb33d966ca340151e6bf6e4c8e" name="ae66ab9cb33d966ca340151e6bf6e4c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66ab9cb33d966ca340151e6bf6e4c8e">&#9670;&#160;</a></span>ShapeWithDeepCopy() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ShapeWithDeepCopy::ShapeWithDeepCopy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ShapeWithDeepCopy.html">ShapeWithDeepCopy</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_shape</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deep copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00531">531</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="shape_8h_source.html#l00089">oomph::Shape::Index1</a>, <a class="el" href="shape_8h_source.html#l00092">oomph::Shape::Index2</a>, and <a class="el" href="shape_8h_source.html#l00081">oomph::Shape::Psi</a>.</p>
+
+</div>
+</div>
+<a id="a6b263cf21ce417463668486e81ec3d60" name="a6b263cf21ce417463668486e81ec3d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b263cf21ce417463668486e81ec3d60">&#9670;&#160;</a></span>~ShapeWithDeepCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ShapeWithDeepCopy::~ShapeWithDeepCopy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor, clear up the memory allocated by the object. </p>
+
+<p class="definition">Definition at line <a class="el" href="shape_8h_source.html#l00544">544</a> of file <a class="el" href="shape_8h_source.html">shape.h</a>.</p>
+
+<p class="reference">References <a class="el" href="shape_8h_source.html#l00086">oomph::Shape::Allocated_storage</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac7152e896d26397f544d0a6fb108ad74" name="ac7152e896d26397f544d0a6fb108ad74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7152e896d26397f544d0a6fb108ad74">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ShapeWithDeepCopy::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ShapeWithDeepCopy.html">ShapeWithDeepCopy</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_shape</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="shape_8h_source.html">shape.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

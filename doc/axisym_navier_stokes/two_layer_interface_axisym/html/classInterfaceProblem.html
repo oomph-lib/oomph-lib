@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classInterfaceProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Axisymmetric two fluid interface problem in a rectangular domain.  
+ <a href="classInterfaceProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classInterfaceProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5889be7fc8eab5d222f1bfb750c845ba" id="r_a5889be7fc8eab5d222f1bfb750c845ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a5889be7fc8eab5d222f1bfb750c845ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a5889be7fc8eab5d222f1bfb750c845ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c191f8046069099b199743e7ce7111" id="r_a90c191f8046069099b199743e7ce7111"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">~InterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a90c191f8046069099b199743e7ce7111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:a90c191f8046069099b199743e7ce7111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3af8378c4f0a6e38636be958c300d5" id="r_a0d3af8378c4f0a6e38636be958c300d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:a0d3af8378c4f0a6e38636be958c300d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial conditions.  <br /></td></tr>
+<tr class="separator:a0d3af8378c4f0a6e38636be958c300d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844445832ad7a32aa9f5d03ffdb40ebb" id="r_a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">set_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions.  <br /></td></tr>
+<tr class="separator:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49714e35e94f7d2af0b6ddd22b851f52" id="r_a49714e35e94f7d2af0b6ddd22b851f52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">doc_solution</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">DocInfo</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>)</td></tr>
+<tr class="memdesc:a49714e35e94f7d2af0b6ddd22b851f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document the solution.  <br /></td></tr>
+<tr class="separator:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1f4e43d10939e4323e0e315b711085" id="r_adf1f4e43d10939e4323e0e315b711085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">t_max</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">dt</a>)</td></tr>
+<tr class="memdesc:adf1f4e43d10939e4323e0e315b711085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do unsteady run up to maximum time t_max with given timestep dt.  <br /></td></tr>
+<tr class="separator:adf1f4e43d10939e4323e0e315b711085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab476bae8faf34f3238b31564d31a4795" id="r_ab476bae8faf34f3238b31564d31a4795"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ab476bae8faf34f3238b31564d31a4795">InterfaceProblem</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">n_r</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">n_z1</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">n_z2</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">l_r</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">h1</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">h2</a>)</td></tr>
+<tr class="memdesc:ab476bae8faf34f3238b31564d31a4795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of elements and the width of the domain in the r direction. Also pass the number of elements in the z direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers.  <br /></td></tr>
+<tr class="separator:ab476bae8faf34f3238b31564d31a4795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90c191f8046069099b199743e7ce7111" id="r_a90c191f8046069099b199743e7ce7111"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a90c191f8046069099b199743e7ce7111">~InterfaceProblem</a> ()</td></tr>
+<tr class="memdesc:a90c191f8046069099b199743e7ce7111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:a90c191f8046069099b199743e7ce7111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3af8378c4f0a6e38636be958c300d5" id="r_a0d3af8378c4f0a6e38636be958c300d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a0d3af8378c4f0a6e38636be958c300d5">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:a0d3af8378c4f0a6e38636be958c300d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial conditions.  <br /></td></tr>
+<tr class="separator:a0d3af8378c4f0a6e38636be958c300d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844445832ad7a32aa9f5d03ffdb40ebb" id="r_a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a844445832ad7a32aa9f5d03ffdb40ebb">set_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions.  <br /></td></tr>
+<tr class="separator:a844445832ad7a32aa9f5d03ffdb40ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49714e35e94f7d2af0b6ddd22b851f52" id="r_a49714e35e94f7d2af0b6ddd22b851f52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a49714e35e94f7d2af0b6ddd22b851f52">doc_solution</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">DocInfo</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>)</td></tr>
+<tr class="memdesc:a49714e35e94f7d2af0b6ddd22b851f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <br /></td></tr>
+<tr class="separator:a49714e35e94f7d2af0b6ddd22b851f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf1f4e43d10939e4323e0e315b711085" id="r_adf1f4e43d10939e4323e0e315b711085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">t_max</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">dt</a>)</td></tr>
+<tr class="memdesc:adf1f4e43d10939e4323e0e315b711085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do unsteady run up to maximum time t_max with given timestep dt.  <br /></td></tr>
+<tr class="separator:adf1f4e43d10939e4323e0e315b711085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ade63c8a74f666edf530460b989968b4f" id="r_ade63c8a74f666edf530460b989968b4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ade63c8a74f666edf530460b989968b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required before solve step.  <br /></td></tr>
+<tr class="separator:ade63c8a74f666edf530460b989968b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc2e58b3d2f5f8c898a21ba2d245cee" id="r_aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required after solve step.  <br /></td></tr>
+<tr class="separator:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3ec75fcc8ccca97207dc7eca23b1cce" id="r_ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ae3ec75fcc8ccca97207dc7eca23b1cce">actions_before_implicit_timestep</a> ()</td></tr>
+<tr class="memdesc:ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actions before the timestep: For maximum stability, reset the current nodal positions to be the "stress-free" ones.  <br /></td></tr>
+<tr class="separator:ae3ec75fcc8ccca97207dc7eca23b1cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a944e5754e9b3f3394211b6c62f705abe" id="r_a944e5754e9b3f3394211b6c62f705abe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">actions_before_adapt</a> ()</td></tr>
+<tr class="memdesc:a944e5754e9b3f3394211b6c62f705abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strip off the interface elements before adapting the bulk mesh.  <br /></td></tr>
+<tr class="separator:a944e5754e9b3f3394211b6c62f705abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8a5dee970dccc3f1da993cf531872d" id="r_a1c8a5dee970dccc3f1da993cf531872d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a1c8a5dee970dccc3f1da993cf531872d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebuild the mesh of interface elements after adapting the bulk mesh.  <br /></td></tr>
+<tr class="separator:a1c8a5dee970dccc3f1da993cf531872d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e2cc71fe27c0c329030874e05734b8" id="r_a94e2cc71fe27c0c329030874e05734b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">create_interface_elements</a> ()</td></tr>
+<tr class="memdesc:a94e2cc71fe27c0c329030874e05734b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the 1d interface elements.  <br /></td></tr>
+<tr class="separator:a94e2cc71fe27c0c329030874e05734b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2aaab086d9bbd3913ce8bc0d244413d" id="r_ac2aaab086d9bbd3913ce8bc0d244413d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">delete_interface_elements</a> ()</td></tr>
+<tr class="memdesc:ac2aaab086d9bbd3913ce8bc0d244413d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the 1d interface elements.  <br /></td></tr>
+<tr class="separator:ac2aaab086d9bbd3913ce8bc0d244413d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa93d492461ac53f0d9f88516bce322dc" id="r_aa93d492461ac53f0d9f88516bce322dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">deform_free_surface</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">epsilon</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">k</a>)</td></tr>
+<tr class="memdesc:aa93d492461ac53f0d9f88516bce322dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deform the mesh/free surface to a prescribed function.  <br /></td></tr>
+<tr class="separator:aa93d492461ac53f0d9f88516bce322dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d1a04da451b6f41336cb6f3bd910633" id="r_a9d1a04da451b6f41336cb6f3bd910633"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a9d1a04da451b6f41336cb6f3bd910633">fix_pressure</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">e</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">pdof</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">pvalue</a>)</td></tr>
+<tr class="memdesc:a9d1a04da451b6f41336cb6f3bd910633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix pressure in element e at pressure dof pdof and set to pvalue.  <br /></td></tr>
+<tr class="separator:a9d1a04da451b6f41336cb6f3bd910633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4193771472aefce4cd67261491cc344" id="r_ab4193771472aefce4cd67261491cc344"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ab4193771472aefce4cd67261491cc344">actions_before_newton_convergence_check</a> ()</td></tr>
+<tr class="memdesc:ab4193771472aefce4cd67261491cc344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here.  <br /></td></tr>
+<tr class="separator:ab4193771472aefce4cd67261491cc344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade63c8a74f666edf530460b989968b4f" id="r_ade63c8a74f666edf530460b989968b4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ade63c8a74f666edf530460b989968b4f">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:ade63c8a74f666edf530460b989968b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required before solve step.  <br /></td></tr>
+<tr class="separator:ade63c8a74f666edf530460b989968b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc2e58b3d2f5f8c898a21ba2d245cee" id="r_aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aedc2e58b3d2f5f8c898a21ba2d245cee">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update after solve can remain empty, because the update is performed automatically after every Newton step.  <br /></td></tr>
+<tr class="separator:aedc2e58b3d2f5f8c898a21ba2d245cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa93d492461ac53f0d9f88516bce322dc" id="r_aa93d492461ac53f0d9f88516bce322dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#aa93d492461ac53f0d9f88516bce322dc">deform_free_surface</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">epsilon</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">k</a>)</td></tr>
+<tr class="memdesc:aa93d492461ac53f0d9f88516bce322dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deform the mesh/free surface to a prescribed function.  <br /></td></tr>
+<tr class="separator:aa93d492461ac53f0d9f88516bce322dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d1a04da451b6f41336cb6f3bd910633" id="r_a9d1a04da451b6f41336cb6f3bd910633"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a9d1a04da451b6f41336cb6f3bd910633">fix_pressure</a> (<a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">e</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">pdof</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;<a class="el" href="classElasticRefineableTwoLayerMesh.html">pvalue</a>)</td></tr>
+<tr class="memdesc:a9d1a04da451b6f41336cb6f3bd910633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix pressure in element e at pressure dof pdof and set to pvalue.  <br /></td></tr>
+<tr class="separator:a9d1a04da451b6f41336cb6f3bd910633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad7cdca485f230393096667bf0709ef8d" id="r_ad7cdca485f230393096667bf0709ef8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#ad7cdca485f230393096667bf0709ef8d">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:ad7cdca485f230393096667bf0709ef8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the (specific) "bulk" mesh.  <br /></td></tr>
+<tr class="separator:ad7cdca485f230393096667bf0709ef8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a011c7b4f2307ff909f64dc158e8fc674" id="r_a011c7b4f2307ff909f64dc158e8fc674"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a011c7b4f2307ff909f64dc158e8fc674">Surface_mesh_pt</a></td></tr>
+<tr class="memdesc:a011c7b4f2307ff909f64dc158e8fc674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the "surface" mesh.  <br /></td></tr>
+<tr class="separator:a011c7b4f2307ff909f64dc158e8fc674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bf645cbdbf7775ab6438be324caf3c3" id="r_a5bf645cbdbf7775ab6438be324caf3c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ConstitutiveLaw</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a5bf645cbdbf7775ab6438be324caf3c3">Constitutive_law_pt</a></td></tr>
+<tr class="separator:a5bf645cbdbf7775ab6438be324caf3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ebe4e37868be26465c7bc6d2cef95e7" id="r_a6ebe4e37868be26465c7bc6d2cef95e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a6ebe4e37868be26465c7bc6d2cef95e7">Lr</a></td></tr>
+<tr class="memdesc:a6ebe4e37868be26465c7bc6d2cef95e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Width of domain.  <br /></td></tr>
+<tr class="separator:a6ebe4e37868be26465c7bc6d2cef95e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e3bf3b44bcbeefab21a3598bef6179" id="r_a45e3bf3b44bcbeefab21a3598bef6179"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ofstream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a45e3bf3b44bcbeefab21a3598bef6179">Trace_file</a></td></tr>
+<tr class="memdesc:a45e3bf3b44bcbeefab21a3598bef6179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <br /></td></tr>
+<tr class="separator:a45e3bf3b44bcbeefab21a3598bef6179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e9cf118e6c477ea9a1a49610bb72174" id="r_a1e9cf118e6c477ea9a1a49610bb72174"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classElasticRefineableTwoLayerMesh.html">TwoLayerSpineMesh</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInterfaceProblem.html#a1e9cf118e6c477ea9a1a49610bb72174">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a1e9cf118e6c477ea9a1a49610bb72174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the specific bulk mesh.  <br /></td></tr>
+<tr class="separator:a1e9cf118e6c477ea9a1a49610bb72174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a>&gt;<br />
+class InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;</div><p>Axisymmetric two fluid interface problem in a rectangular domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00173">173</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5889be7fc8eab5d222f1bfb750c845ba" name="a5889be7fc8eab5d222f1bfb750c845ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5889be7fc8eab5d222f1bfb750c845ba">&#9670;&#160;</a></span>InterfaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;<a class="el" href="classInterfaceProblem.html">::InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructor for axisymmetric two fluid interface problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00259">259</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00080">Global_Physical_Variables::Density_Ratio</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00116">ElasticRefineableTwoLayerMesh&lt; ELEMENT &gt;::ElasticRefineableTwoLayerMesh()</a>, <a class="el" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G()</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00089">Global_Physical_Variables::Nu</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00063">Global_Physical_Variables::Re</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00072">Global_Physical_Variables::ReInvFr</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00069">Global_Physical_Variables::ReSt</a>, and <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00076">Global_Physical_Variables::Viscosity_Ratio</a>.</p>
+
+</div>
+</div>
+<a id="a90c191f8046069099b199743e7ce7111" name="a90c191f8046069099b199743e7ce7111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c191f8046069099b199743e7ce7111">&#9670;&#160;</a></span>~InterfaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::~<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00182">182</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab476bae8faf34f3238b31564d31a4795" name="ab476bae8faf34f3238b31564d31a4795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab476bae8faf34f3238b31564d31a4795">&#9670;&#160;</a></span>InterfaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;<a class="el" href="classInterfaceProblem.html">::InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>l_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>h1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>h2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the number of elements and the width of the domain in the r direction. Also pass the number of elements in the z direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers. </p>
+<p>Constructor for axisymmetric two fluid interface problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00175">175</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00083">Global_Physical_Variables::Ca</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00080">Global_Physical_Variables::Density_Ratio</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>, <a class="el" href="namespaceGlobal__Physical__Variables.html#af5ae275cf339105b9a54821c034df470">Global_Physical_Variables::G()</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00063">Global_Physical_Variables::Re</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00072">Global_Physical_Variables::ReInvFr</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00069">Global_Physical_Variables::ReSt</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00484">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions()</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00066">Global_Physical_Variables::St</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00240">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Surface_mesh_pt</a>, and <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00076">Global_Physical_Variables::Viscosity_Ratio</a>.</p>
+
+</div>
+</div>
+<a id="a90c191f8046069099b199743e7ce7111" name="a90c191f8046069099b199743e7ce7111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90c191f8046069099b199743e7ce7111">&#9670;&#160;</a></span>~InterfaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::~<a class="el" href="classInterfaceProblem.html">InterfaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00108">108</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1c8a5dee970dccc3f1da993cf531872d" name="a1c8a5dee970dccc3f1da993cf531872d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8a5dee970dccc3f1da993cf531872d">&#9670;&#160;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebuild the mesh of interface elements after adapting the bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00537">537</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00116">ElasticRefineableTwoLayerMesh&lt; ELEMENT &gt;::ElasticRefineableTwoLayerMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aedc2e58b3d2f5f8c898a21ba2d245cee" name="aedc2e58b3d2f5f8c898a21ba2d245cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc2e58b3d2f5f8c898a21ba2d245cee">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required after solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00202">202</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="aedc2e58b3d2f5f8c898a21ba2d245cee" name="aedc2e58b3d2f5f8c898a21ba2d245cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedc2e58b3d2f5f8c898a21ba2d245cee">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update after solve can remain empty, because the update is performed automatically after every Newton step. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00138">138</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a944e5754e9b3f3394211b6c62f705abe" name="a944e5754e9b3f3394211b6c62f705abe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a944e5754e9b3f3394211b6c62f705abe">&#9670;&#160;</a></span>actions_before_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_before_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Strip off the interface elements before adapting the bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00521">521</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae3ec75fcc8ccca97207dc7eca23b1cce" name="ae3ec75fcc8ccca97207dc7eca23b1cce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3ec75fcc8ccca97207dc7eca23b1cce">&#9670;&#160;</a></span>actions_before_implicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_before_implicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Actions before the timestep: For maximum stability, reset the current nodal positions to be the "stress-free" ones. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00206">206</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="ab4193771472aefce4cd67261491cc344" name="ab4193771472aefce4cd67261491cc344"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4193771472aefce4cd67261491cc344">&#9670;&#160;</a></span>actions_before_newton_convergence_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_before_newton_convergence_check </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00128">128</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="ade63c8a74f666edf530460b989968b4f" name="ade63c8a74f666edf530460b989968b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade63c8a74f666edf530460b989968b4f">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required before solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00199">199</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="ade63c8a74f666edf530460b989968b4f" name="ade63c8a74f666edf530460b989968b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade63c8a74f666edf530460b989968b4f">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required before solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00134">134</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a94e2cc71fe27c0c329030874e05734b8" name="a94e2cc71fe27c0c329030874e05734b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94e2cc71fe27c0c329030874e05734b8">&#9670;&#160;</a></span>create_interface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::create_interface_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the 1d interface elements. </p>
+<p>Create interface elements between the two fluids in the mesh pointed to by Bulk_mesh_pt and add the elements to the Mesh object pointed to by Surface_mesh_pt. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00577">577</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00083">Global_Physical_Variables::Ca</a>, <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00066">Global_Physical_Variables::St</a>, and <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00076">Global_Physical_Variables::Viscosity_Ratio</a>.</p>
+
+</div>
+</div>
+<a id="aa93d492461ac53f0d9f88516bce322dc" name="aa93d492461ac53f0d9f88516bce322dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93d492461ac53f0d9f88516bce322dc">&#9670;&#160;</a></span>deform_free_surface() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::deform_free_surface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deform the mesh/free surface to a prescribed function. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00661">661</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00116">ElasticRefineableTwoLayerMesh&lt; ELEMENT &gt;::ElasticRefineableTwoLayerMesh()</a>.</p>
+
+</div>
+</div>
+<a id="aa93d492461ac53f0d9f88516bce322dc" name="aa93d492461ac53f0d9f88516bce322dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93d492461ac53f0d9f88516bce322dc">&#9670;&#160;</a></span>deform_free_surface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::deform_free_surface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deform the mesh/free surface to a prescribed function. </p>
+
+</div>
+</div>
+<a id="ac2aaab086d9bbd3913ce8bc0d244413d" name="ac2aaab086d9bbd3913ce8bc0d244413d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2aaab086d9bbd3913ce8bc0d244413d">&#9670;&#160;</a></span>delete_interface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::delete_interface_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete the 1d interface elements. </p>
+<p>Delete the interface elements and wipe the surface mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00639">639</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a49714e35e94f7d2af0b6ddd22b851f52" name="a49714e35e94f7d2af0b6ddd22b851f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49714e35e94f7d2af0b6ddd22b851f52">&#9670;&#160;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document the solution. </p>
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00695">695</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a49714e35e94f7d2af0b6ddd22b851f52" name="a49714e35e94f7d2af0b6ddd22b851f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49714e35e94f7d2af0b6ddd22b851f52">&#9670;&#160;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+</div>
+</div>
+<a id="a9d1a04da451b6f41336cb6f3bd910633" name="a9d1a04da451b6f41336cb6f3bd910633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1a04da451b6f41336cb6f3bd910633">&#9670;&#160;</a></span>fix_pressure() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::fix_pressure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>pdof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>pvalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fix pressure in element e at pressure dof pdof and set to pvalue. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">227</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>, and <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00176">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a9d1a04da451b6f41336cb6f3bd910633" name="a9d1a04da451b6f41336cb6f3bd910633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1a04da451b6f41336cb6f3bd910633">&#9670;&#160;</a></span>fix_pressure() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::fix_pressure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>pdof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>pvalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fix pressure in element e at pressure dof pdof and set to pvalue. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00144">144</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::Bulk_mesh_pt</a>, and <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00227">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>.</p>
+
+</div>
+</div>
+<a id="a844445832ad7a32aa9f5d03ffdb40ebb" name="a844445832ad7a32aa9f5d03ffdb40ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844445832ad7a32aa9f5d03ffdb40ebb">&#9670;&#160;</a></span>set_boundary_conditions() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::set_boundary_conditions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions. </p>
+<p>Set boundary conditions: Set all velocity components to zero on the top and bottom (solid) walls and the radial and azimuthal components only to zero on the side boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00484">484</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00176">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a844445832ad7a32aa9f5d03ffdb40ebb" name="a844445832ad7a32aa9f5d03ffdb40ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844445832ad7a32aa9f5d03ffdb40ebb">&#9670;&#160;</a></span>set_boundary_conditions() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::set_boundary_conditions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions. </p>
+
+</div>
+</div>
+<a id="a0d3af8378c4f0a6e38636be958c300d5" name="a0d3af8378c4f0a6e38636be958c300d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3af8378c4f0a6e38636be958c300d5">&#9670;&#160;</a></span>set_initial_condition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set initial conditions. </p>
+<p>Set initial conditions: Set all nodal velocities to zero and initialise the previous velocities and nodal positions to correspond to an impulsive start. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00454">454</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0d3af8378c4f0a6e38636be958c300d5" name="a0d3af8378c4f0a6e38636be958c300d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3af8378c4f0a6e38636be958c300d5">&#9670;&#160;</a></span>set_initial_condition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set initial conditions. </p>
+
+</div>
+</div>
+<a id="adf1f4e43d10939e4323e0e315b711085" name="adf1f4e43d10939e4323e0e315b711085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf1f4e43d10939e4323e0e315b711085">&#9670;&#160;</a></span>unsteady_run() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Do unsteady run up to maximum time t_max with given timestep dt. </p>
+<p>Perform run up to specified time t_max with given timestep dt. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00747">747</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="adf1f4e43d10939e4323e0e315b711085" name="adf1f4e43d10939e4323e0e315b711085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf1f4e43d10939e4323e0e315b711085">&#9670;&#160;</a></span>unsteady_run() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">void</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classElasticRefineableTwoLayerMesh.html">const</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Do unsteady run up to maximum time t_max with given timestep dt. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad7cdca485f230393096667bf0709ef8d" name="ad7cdca485f230393096667bf0709ef8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7cdca485f230393096667bf0709ef8d">&#9670;&#160;</a></span>Bulk_mesh_pt <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a>&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>&gt;* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the (specific) "bulk" mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00237">237</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00206">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_implicit_timestep()</a>, <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00128">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_convergence_check()</a>, <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00144">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>, and <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00176">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a1e9cf118e6c477ea9a1a49610bb72174" name="a1e9cf118e6c477ea9a1a49610bb72174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e9cf118e6c477ea9a1a49610bb72174">&#9670;&#160;</a></span>Bulk_mesh_pt <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">TwoLayerSpineMesh</a>&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>&gt;* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the specific bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00161">161</a> of file <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5bf645cbdbf7775ab6438be324caf3c3" name="a5bf645cbdbf7775ab6438be324caf3c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf645cbdbf7775ab6438be324caf3c3">&#9670;&#160;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ConstitutiveLaw</a>* <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Constitutive_law_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00243">243</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6ebe4e37868be26465c7bc6d2cef95e7" name="a6ebe4e37868be26465c7bc6d2cef95e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ebe4e37868be26465c7bc6d2cef95e7">&#9670;&#160;</a></span>Lr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">double</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Lr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Width of domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00246">246</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<a id="a011c7b4f2307ff909f64dc158e8fc674" name="a011c7b4f2307ff909f64dc158e8fc674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a011c7b4f2307ff909f64dc158e8fc674">&#9670;&#160;</a></span>Surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">Mesh</a> * <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the "surface" mesh. </p>
+<p>Pointer to the surface mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00240">240</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spine__two__layer__interface__axisym_8cc_source.html#l00176">InterfaceProblem&lt; ELEMENT, TIMESTEPPER &gt;::InterfaceProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a45e3bf3b44bcbeefab21a3598bef6179" name="a45e3bf3b44bcbeefab21a3598bef6179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45e3bf3b44bcbeefab21a3598bef6179">&#9670;&#160;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> , <a class="el" href="classElasticRefineableTwoLayerMesh.html">class</a> <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classElasticRefineableTwoLayerMesh.html">ofstream</a> <a class="el" href="classInterfaceProblem.html">InterfaceProblem</a>&lt; <a class="el" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>, <a class="el" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a> &gt;::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html#l00249">249</a> of file <a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="elastic__two__layer__interface__axisym_8cc_source.html">elastic_two_layer_interface_axisym.cc</a></li>
+<li><a class="el" href="spine__two__layer__interface__axisym_8cc_source.html">spine_two_layer_interface_axisym.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:06:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

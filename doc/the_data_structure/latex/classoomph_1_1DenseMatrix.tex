@@ -1,0 +1,612 @@
+\doxysection{oomph\+::Dense\+Matrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1DenseMatrix}{}\label{classoomph_1_1DenseMatrix}\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+
+
+Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorted output functions inherited from Matrix$<$\+T$>$. The curious recursive template pattern is used here to pass the specific class to the base class so that round bracket access can be inlined.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::Dense\+Matrix\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1DenseMatrix}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix_aecfca835918b50b607e080fc706b6fcf}{Dense\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, simply assign the lengths N and M to 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452}{Dense\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Copy constructor\+: Deep copy! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d}{entry}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em The access function that will be called by the read-\/write round-\/bracket operator. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0}{get\+\_\+entry}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The access function the will be called by the read-\/only (const version) round-\/bracket operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix_a2291404def276dcee1a6099d054d44d6}{Dense\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Constructor to build a square n by n matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix_a5afcfd56a9720541e67a6e8d002016d4}{Dense\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Constructor to build a matrix with n rows and m columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix_a7b599610bd78a7818b2e4d0835b27e3a}{Dense\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+val}})
+\begin{DoxyCompactList}\small\item\em Constructor to build a matrix with n rows and m columns, with initial value initial\+\_\+val. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a673e04c72174ec084e56ad5f53ba51da}{\texorpdfstring{$\sim$}{\string~}\+Dense\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, clean up the matrix data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_adec1ef741b1c5048a12ba9a540c2719c}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Resize to a square nxn matrix; any values already present will be transfered. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a0f01dd97b1c71868371f93259efc26b0}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Resize to a non-\/square n x m matrix; any values already present will be transfered. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_aeb6daf6539fee8d3d6f7a81306798b10}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Resize to a non-\/square n x m matrix and initialize the new values to initial\+\_\+value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_aafcfbb0309fdcbd84f8654fe1b5601fd}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}})
+\begin{DoxyCompactList}\small\item\em Initialize all values in the matrix to val. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row to the stream outfile. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a4ab60b1e7db98bcb5b75b080266e452e}{output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row to a file. Specify filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a440b549690cfc07c85f395eb06951321}{indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a5730d359fa98ea501ab7115147a4bd87}{indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to a file as i,j,a(i,j). Specify filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837}{Matrix}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361}{Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11}{\texorpdfstring{$\sim$}{\string~}\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Virtual (empty) destructor. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX\+\_\+\+TYPE template parameter to call the get\+\_\+entry() function which must be defined in all derived classes that are to be fully instantiated. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}{Matrixdata}}
+\begin{DoxyCompactList}\small\item\em Internal representation of matrix as a pointer to data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}{N}}
+\begin{DoxyCompactList}\small\item\em Number of rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}{M}}
+\begin{DoxyCompactList}\small\item\em Number of columns. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T$>$\newline
+class oomph\+::\+Dense\+Matrix$<$ T $>$}
+Class for dense matrices, storing all the values of the matrix as a pointer to a pointer with assorted output functions inherited from Matrix$<$\+T$>$. The curious recursive template pattern is used here to pass the specific class to the base class so that round bracket access can be inlined. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00385}{385}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DenseMatrix_aecfca835918b50b607e080fc706b6fcf}\label{classoomph_1_1DenseMatrix_aecfca835918b50b607e080fc706b6fcf} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DenseMatrix()}{DenseMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Dense\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor, simply assign the lengths N and M to 0. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00399}{399}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452}\label{classoomph_1_1DenseMatrix_a1d8bf7ffb6cc91b882be17b25ff6d452} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DenseMatrix()}{DenseMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Dense\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ T $>$ \&}]{source\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor\+: Deep copy! 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00402}{402}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a2291404def276dcee1a6099d054d44d6}\label{classoomph_1_1DenseMatrix_a2291404def276dcee1a6099d054d44d6} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DenseMatrix()}{DenseMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Dense\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n }\end{DoxyParamCaption})}
+
+
+
+Constructor to build a square n by n matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02906}{2906}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a5afcfd56a9720541e67a6e8d002016d4}\label{classoomph_1_1DenseMatrix_a5afcfd56a9720541e67a6e8d002016d4} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DenseMatrix()}{DenseMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Dense\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Constructor to build a matrix with n rows and m columns. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02924}{2924}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a7b599610bd78a7818b2e4d0835b27e3a}\label{classoomph_1_1DenseMatrix_a7b599610bd78a7818b2e4d0835b27e3a} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DenseMatrix()}{DenseMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Dense\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{initial\+\_\+val }\end{DoxyParamCaption})}
+
+
+
+Constructor to build a matrix with n rows and m columns, with initial value initial\+\_\+val. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02941}{2941}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a673e04c72174ec084e56ad5f53ba51da}\label{classoomph_1_1DenseMatrix_a673e04c72174ec084e56ad5f53ba51da} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!````~DenseMatrix@{\texorpdfstring{$\sim$}{\string~}DenseMatrix}}
+\index{````~DenseMatrix@{\texorpdfstring{$\sim$}{\string~}DenseMatrix}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DenseMatrix()}{\string~DenseMatrix()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor, clean up the matrix data. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00478}{478}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d}\label{classoomph_1_1DenseMatrix_a727aed44cb4b695daa4120178517c03d} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!entry@{entry}}
+\index{entry@{entry}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{entry()}{entry()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The access function that will be called by the read-\/write round-\/bracket operator. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00447}{447}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l01316}{oomph\+::\+Dense\+Double\+Matrix\+::operator()()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0}\label{classoomph_1_1DenseMatrix_a0b03682b4c7d8f820599bd2681a01ee0} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!get\_entry@{get\_entry}}
+\index{get\_entry@{get\_entry}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_entry()}{get\_entry()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::get\+\_\+entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The access function the will be called by the read-\/only (const version) round-\/bracket operator. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00457}{457}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$\+::range\+\_\+check()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l01308}{oomph\+::\+Dense\+Double\+Matrix\+::operator()()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a440b549690cfc07c85f395eb06951321}\label{classoomph_1_1DenseMatrix_a440b549690cfc07c85f395eb06951321} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!indexed\_output@{indexed\_output}}
+\index{indexed\_output@{indexed\_output}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{indexed\_output()}{indexed\_output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::indexed\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const}
+
+
+
+Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) 
+
+Indexed output as i,j,a(i,j) 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03089}{3089}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a5730d359fa98ea501ab7115147a4bd87}\label{classoomph_1_1DenseMatrix_a5730d359fa98ea501ab7115147a4bd87} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!indexed\_output@{indexed\_output}}
+\index{indexed\_output@{indexed\_output}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{indexed\_output()}{indexed\_output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::indexed\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption}) const}
+
+
+
+Indexed output function to print a matrix to a file as i,j,a(i,j). Specify filename. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03108}{3108}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_aafcfbb0309fdcbd84f8654fe1b5601fd}\label{classoomph_1_1DenseMatrix_aafcfbb0309fdcbd84f8654fe1b5601fd} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize all values in the matrix to val. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00514}{514}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00389}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Matrixdata}}, and \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00614}{oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{problem_8cc_source_l03935}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{timesteppers_8h_source_l00374}{oomph\+::\+Time\+Stepper\+::make\+\_\+steady()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00578}{oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}\label{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00491}{491}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}.
+
+
+
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{matrices_8h_source_l01301}{oomph\+::\+Dense\+Double\+Matrix\+::ncol()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}\label{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00485}{485}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}.
+
+
+
+Referenced by \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{timesteppers_8h_source_l00318}{oomph\+::\+Time\+Stepper\+::highest\+\_\+derivative()}}, and \mbox{\hyperlink{matrices_8h_source_l01295}{oomph\+::\+Dense\+Double\+Matrix\+::nrow()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4}\label{classoomph_1_1DenseMatrix_a01b02acc166aa69ec0a7d9153076b5f4} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}} \& \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ T $>$ \&}]{source\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignment. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00420}{420}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00395}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00392}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::N}}, and \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}\label{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output@{output}}
+\index{output@{output}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output function to print a matrix row-\/by-\/row to the stream outfile. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03054}{3054}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a4ab60b1e7db98bcb5b75b080266e452e}\label{classoomph_1_1DenseMatrix_a4ab60b1e7db98bcb5b75b080266e452e} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output@{output}}
+\index{output@{output}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption}) const}
+
+
+
+Output function to print a matrix row-\/by-\/row to a file. Specify filename. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03074}{3074}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00096}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::output()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}\label{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
+\index{output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{output\_bottom\_right\_zero\_helper()}{output\_bottom\_right\_zero\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03124}{3124}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_adec1ef741b1c5048a12ba9a540c2719c}\label{classoomph_1_1DenseMatrix_adec1ef741b1c5048a12ba9a540c2719c} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a square nxn matrix; any values already present will be transfered. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00498}{498}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}.
+
+
+
+Referenced by \mbox{\hyperlink{Qspectral__elements_8h_source_l00229}{oomph\+::\+Spectral\+Element\+::assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{timesteppers_8h_source_l01193}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+BDF()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00614}{oomph\+::\+DGElement\+::get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals()}}, \mbox{\hyperlink{problem_8cc_source_l03935}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00047}{oomph\+::\+IMRBase\+::\+IMRBase()}}, \mbox{\hyperlink{shell__elements_8h_source_l00136}{oomph\+::\+Kirchhoff\+Love\+Shell\+Equations\+::\+Kirchhoff\+Love\+Shell\+Equations()}}, \mbox{\hyperlink{generalised__timesteppers_8h_source_l00126}{oomph\+::\+Continuation\+Storage\+Scheme\+::modify\+\_\+storage()}}, \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00578}{oomph\+::\+DGElement\+::pre\+\_\+compute\+\_\+mass\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00279}{oomph\+::\+Time\+Stepper\+::\+Time\+Stepper()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a0f01dd97b1c71868371f93259efc26b0}\label{classoomph_1_1DenseMatrix_a0f01dd97b1c71868371f93259efc26b0} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Resize to a non-\/square n x m matrix; any values already present will be transfered. 
+
+Resize to a non-\/square n\+\_\+row x m\+\_\+col matrix, where any values already present will be transfered. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02959}{2959}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_aeb6daf6539fee8d3d6f7a81306798b10}\label{classoomph_1_1DenseMatrix_aeb6daf6539fee8d3d6f7a81306798b10} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{initial\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Resize to a non-\/square n x m matrix and initialize the new values to initial\+\_\+value. 
+
+Resize to a non-\/square n\+\_\+row x m\+\_\+col matrix and initialize the new entries to specified value. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03008}{3008}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}\label{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
+\index{sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output\_helper()}{sparse\_indexed\_output\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. 
+
+Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}{oomph\+::\+Matrix$<$ T, Dense\+Matrix$<$ T $>$ $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l03143}{3143}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a}\label{classoomph_1_1DenseMatrix_aa36631ee95fe55afe697377b03d05d6a} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!M@{M}}
+\index{M@{M}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::M\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of columns. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00395}{395}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry()}}, \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00491}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::ncol()}}, and \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8}\label{classoomph_1_1DenseMatrix_a92a2eea603a42e22fd4d3ea0a258e6f8} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!Matrixdata@{Matrixdata}}
+\index{Matrixdata@{Matrixdata}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Matrixdata}{Matrixdata}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::\+Matrixdata\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Internal representation of matrix as a pointer to data. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00389}{389}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00447}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::entry()}}, \mbox{\hyperlink{matrices_8h_source_l00457}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, and \mbox{\hyperlink{matrices_8h_source_l00478}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\+Dense\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e}\label{classoomph_1_1DenseMatrix_a23cb539be0b4ef0381b9f18e8e50f75e} 
+\index{oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}!N@{N}}
+\index{N@{N}!oomph::DenseMatrix$<$ T $>$@{oomph::DenseMatrix$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{oomph\+::\+Dense\+Matrix}}$<$ T $>$\+::N\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of rows. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00392}{392}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00402}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::\+Dense\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00485}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::nrow()}}, and \mbox{\hyperlink{matrices_8h_source_l00420}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::operator=()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{communicator_8h}{communicator.\+h}}\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,343 @@
+\doxysection{oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement}{}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement}\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+
+
+Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates.  
+
+
+
+
+{\ttfamily \#include $<$specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.628507cm]{classoomph_1_1ElasticUpdateFluidInterfaceElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96}{Elastic\+Update\+Fluid\+Interface\+Element}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{element\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{id}}=0)
+\begin{DoxyCompactList}\small\item\em Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{k}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{i}}) \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}}
+\begin{DoxyCompactList}\small\item\em The "{}global"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Element representation, by default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}{lagrange}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n}})
+\begin{DoxyCompactList}\small\item\em Return the lagrange multiplier at local node n. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{jacobian}})
+\begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{outfile}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{outfile}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Output the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}{output}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{file\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}{output}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{file\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{residuals}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{flag}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Shape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{psif}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{dpsifds}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{dpsifdS}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{dpsifd\+S\+\_\+div}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{s}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{interpolated\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{W}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{J}})
+\begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{virtual}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}{make\+\_\+bounding\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{face\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Create an "{}bounding"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Shape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{psi}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{dpsids}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}{lagrange\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n}})
+\begin{DoxyCompactList}\small\item\em Return the index at which the lagrange multiplier is stored at the n-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}{kinematic\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{n}})
+\begin{DoxyCompactList}\small\item\em Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}{hijack\+\_\+kinematic\+\_\+conditions}} (\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{bulk\+\_\+node\+\_\+number}})
+\begin{DoxyCompactList}\small\item\em Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018}{Lagrange\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}}$>$\newline
+class oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}
+Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. 
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00672}{672}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!ElasticUpdateFluidInterfaceElement@{ElasticUpdateFluidInterfaceElement}}
+\index{ElasticUpdateFluidInterfaceElement@{ElasticUpdateFluidInterfaceElement}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticUpdateFluidInterfaceElement()}{ElasticUpdateFluidInterfaceElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{739}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Lagrange\+\_\+index}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00097}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::nadditional\+\_\+values()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00106}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::setup\+\_\+equation\+\_\+indices()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
+\index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{flag,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Shape}} \&}]{psif,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{dpsifds,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{dpsifdS,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{dpsifd\+S\+\_\+div,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{interpolated\+\_\+n,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \&}]{W,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{877}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{interpolated\+\_\+t,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{surface\+\_\+gradient,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{DShape}} \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00716}{716}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill in contribution to residuals and Jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}}
+\index{hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{hijack\_kinematic\_conditions()}{hijack\_kinematic\_conditions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::hijack\+\_\+kinematic\+\_\+conditions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} $>$ \&}]{bulk\+\_\+node\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{701}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
+\index{kinematic\_local\_eqn@{kinematic\_local\_eqn}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{kinematic\_local\_eqn()}{kinematic\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{692}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange@{lagrange}}
+\index{lagrange@{lagrange}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{lagrange()}{lagrange()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::lagrange (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the lagrange multiplier at local node n. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{830}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange\_index@{lagrange\_index}}
+\index{lagrange\_index@{lagrange\_index}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{lagrange\_index()}{lagrange\_index()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::lagrange\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Return the index at which the lagrange multiplier is stored at the n-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{685}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!make\_bounding\_element@{make\_bounding\_element}}
+\index{make\_bounding\_element@{make\_bounding\_element}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{make\_bounding\_element()}{make\_bounding\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{virtual}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{int}} \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create an "{}bounding"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00960}{960}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{FILE}} \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the C-\/style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00861}{861}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{FILE}} \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style Output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00867}{867}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00849}{849}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output the element. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00855}{855}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{const}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The "{}global"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Element representation, by default. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00822}{822}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!Lagrange\_index@{Lagrange\_index}}
+\index{Lagrange\_index@{Lagrange\_index}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lagrange\_index}{Lagrange\_index}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{class}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{unsigned}}$>$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{ELEMENT}} $>$\+::\+Lagrange\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end) 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{681}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{specific__node__update__interface__elements_8h}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}\end{DoxyCompactItemize}

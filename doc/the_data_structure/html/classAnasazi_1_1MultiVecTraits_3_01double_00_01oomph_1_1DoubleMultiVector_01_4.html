@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt; Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceAnasazi.html">Anasazi</a></li><li class="navelem"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html">MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt; Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Specialize the <a class="el" href="namespaceAnasazi.html">Anasazi</a> traits class for the oomph-lib DoubleMultiVector. This provides the interfaces required by the <a class="el" href="namespaceAnasazi.html">Anasazi</a> eigensolvers.  
+ <a href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:adba407e74e6a21e4c32c18d04b9cf9c0" id="r_adba407e74e6a21e4c32c18d04b9cf9c0"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#adba407e74e6a21e4c32c18d04b9cf9c0">Clone</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const int numvecs)</td></tr>
+<tr class="memdesc:adba407e74e6a21e4c32c18d04b9cf9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new empty DoubleMultiVector containing numvecs columns. Return a reference-counted pointer to the new multivector.  <br /></td></tr>
+<tr class="separator:adba407e74e6a21e4c32c18d04b9cf9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14629c9edef844f6d8dfb59dc10e5c2d" id="r_a14629c9edef844f6d8dfb59dc10e5c2d"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a14629c9edef844f6d8dfb59dc10e5c2d">CloneCopy</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:a14629c9edef844f6d8dfb59dc10e5c2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a deep copy of the DoubleMultiVector mv return Reference-counted pointer to the new DoubleMultiVector.  <br /></td></tr>
+<tr class="separator:a14629c9edef844f6d8dfb59dc10e5c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b76b1072966856cd44947f6a44b28ed" id="r_a1b76b1072966856cd44947f6a44b28ed"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a1b76b1072966856cd44947f6a44b28ed">CloneCopy</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const std::vector&lt; int &gt; &amp;index)</td></tr>
+<tr class="memdesc:a1b76b1072966856cd44947f6a44b28ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> and (deep) copies the contents of the vectors in index into the new vector return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>.  <br /></td></tr>
+<tr class="separator:a1b76b1072966856cd44947f6a44b28ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b2edd3d45cf6b65ef25fee807e4560" id="r_a71b2edd3d45cf6b65ef25fee807e4560"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a71b2edd3d45cf6b65ef25fee807e4560">CloneCopy</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const Teuchos::Range1D &amp;index)</td></tr>
+<tr class="memdesc:a71b2edd3d45cf6b65ef25fee807e4560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep copy of specified columns of <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>.  <br /></td></tr>
+<tr class="separator:a71b2edd3d45cf6b65ef25fee807e4560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7635b267a39048a1b16c0feaaf2bdf0" id="r_ad7635b267a39048a1b16c0feaaf2bdf0"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#ad7635b267a39048a1b16c0feaaf2bdf0">CloneViewNonConst</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const std::vector&lt; int &gt; &amp;index)</td></tr>
+<tr class="memdesc:ad7635b267a39048a1b16c0feaaf2bdf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>.  <br /></td></tr>
+<tr class="separator:ad7635b267a39048a1b16c0feaaf2bdf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06bf6627830afe4eb9259b070e92d774" id="r_a06bf6627830afe4eb9259b070e92d774"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a06bf6627830afe4eb9259b070e92d774">CloneViewNonConst</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const Teuchos::Range1D &amp;index)</td></tr>
+<tr class="memdesc:a06bf6627830afe4eb9259b070e92d774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>.  <br /></td></tr>
+<tr class="separator:a06bf6627830afe4eb9259b070e92d774"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22604ae5c0a66752385257db914b2455" id="r_a22604ae5c0a66752385257db914b2455"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a22604ae5c0a66752385257db914b2455">CloneView</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const std::vector&lt; int &gt; &amp;index)</td></tr>
+<tr class="memdesc:a22604ae5c0a66752385257db914b2455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (const version)  <br /></td></tr>
+<tr class="separator:a22604ae5c0a66752385257db914b2455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aaae3982fcc934297e56ff6318c16dd" id="r_a2aaae3982fcc934297e56ff6318c16dd"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a2aaae3982fcc934297e56ff6318c16dd">CloneView</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const std::vector&lt; int &gt; &amp;index)</td></tr>
+<tr class="memdesc:a2aaae3982fcc934297e56ff6318c16dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (Non-const version for Trilinos 9 interface) NOTE: Not required in Trilinos 13.4.0.  <br /></td></tr>
+<tr class="separator:a2aaae3982fcc934297e56ff6318c16dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f4a40b9b0b5194fce36328c5383545" id="r_a89f4a40b9b0b5194fce36328c5383545"><td class="memItemLeft" align="right" valign="top">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a89f4a40b9b0b5194fce36328c5383545">CloneView</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const Teuchos::Range1D &amp;index)</td></tr>
+<tr class="memdesc:a89f4a40b9b0b5194fce36328c5383545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (const version)  <br /></td></tr>
+<tr class="separator:a89f4a40b9b0b5194fce36328c5383545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f59461c4b9163eca79807a349deb4ea" id="r_a0f59461c4b9163eca79807a349deb4ea"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a0f59461c4b9163eca79807a349deb4ea">GetVecLength</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:a0f59461c4b9163eca79807a349deb4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the global length of the vector.  <br /></td></tr>
+<tr class="separator:a0f59461c4b9163eca79807a349deb4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0419f21e1304373866e5867849faffd" id="r_aa0419f21e1304373866e5867849faffd"><td class="memItemLeft" align="right" valign="top">static ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#aa0419f21e1304373866e5867849faffd">GetGlobalLength</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:aa0419f21e1304373866e5867849faffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of rows in the given multivector. NOTE: Trilinos 13.4.0 uses GetGlobalLength instead of GetVecLength.  <br /></td></tr>
+<tr class="separator:aa0419f21e1304373866e5867849faffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5e3e3825dc16a80d83a424d154db8c" id="r_abb5e3e3825dc16a80d83a424d154db8c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#abb5e3e3825dc16a80d83a424d154db8c">GetNumberVecs</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:abb5e3e3825dc16a80d83a424d154db8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of vectors in the multivector.  <br /></td></tr>
+<tr class="separator:abb5e3e3825dc16a80d83a424d154db8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41445251a1d0c052e1b24f4b75abbe41" id="r_a41445251a1d0c052e1b24f4b75abbe41"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a41445251a1d0c052e1b24f4b75abbe41">MvTimesMatAddMv</a> (const double alpha, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, const Teuchos::SerialDenseMatrix&lt; int, double &gt; &amp;B, const double beta, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:a41445251a1d0c052e1b24f4b75abbe41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update <code>mv</code> with <img class="formulaInl" alt="$ \alpha AB + \beta mv $" src="form_370.png" width="68" height="13"/>.  <br /></td></tr>
+<tr class="separator:a41445251a1d0c052e1b24f4b75abbe41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaebfcc1897c825815e9dbd4a3939cb0c" id="r_aaebfcc1897c825815e9dbd4a3939cb0c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#aaebfcc1897c825815e9dbd4a3939cb0c">MvAddMv</a> (const double alpha, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, const double beta, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;B, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:aaebfcc1897c825815e9dbd4a3939cb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace <code>mv</code> with <img class="formulaInl" alt="$\alpha A + \beta B$" src="form_371.png" width="50" height="13"/>.  <br /></td></tr>
+<tr class="separator:aaebfcc1897c825815e9dbd4a3939cb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e9e082eb66b9a5e31232de7df06a36d" id="r_a9e9e082eb66b9a5e31232de7df06a36d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a9e9e082eb66b9a5e31232de7df06a36d">MvScale</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const double alpha)</td></tr>
+<tr class="memdesc:a9e9e082eb66b9a5e31232de7df06a36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale each element of the vectors in <code>mv</code> with <code>alpha</code>.  <br /></td></tr>
+<tr class="separator:a9e9e082eb66b9a5e31232de7df06a36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75e3a2b5d0d65d3d5622205cd9b2ec37" id="r_a75e3a2b5d0d65d3d5622205cd9b2ec37"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a75e3a2b5d0d65d3d5622205cd9b2ec37">MvScale</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const std::vector&lt; double &gt; &amp;alpha)</td></tr>
+<tr class="memdesc:a75e3a2b5d0d65d3d5622205cd9b2ec37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale each element of the <code>i-th</code> vector in <code>mv</code> with <code>alpha</code>[i].  <br /></td></tr>
+<tr class="separator:a75e3a2b5d0d65d3d5622205cd9b2ec37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a338f59059891bc045555e3283949c6fa" id="r_a338f59059891bc045555e3283949c6fa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a338f59059891bc045555e3283949c6fa">MvTransMv</a> (const double alpha, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, Teuchos::SerialDenseMatrix&lt; int, double &gt; &amp;B)</td></tr>
+<tr class="memdesc:a338f59059891bc045555e3283949c6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a dense matrix <code>B</code> through the matrix-matrix multiply <img class="formulaInl" alt="$ \alpha A^Hmv $" src="form_372.png" width="44" height="11"/>.  <br /></td></tr>
+<tr class="separator:a338f59059891bc045555e3283949c6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2e5efa75fb3970e1ecf716f10b4ee5" id="r_acb2e5efa75fb3970e1ecf716f10b4ee5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#acb2e5efa75fb3970e1ecf716f10b4ee5">MvDot</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, std::vector&lt; double &gt; &amp;b)</td></tr>
+<tr class="memdesc:acb2e5efa75fb3970e1ecf716f10b4ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a vector <code>b</code> where the components are the individual dot-products of the <code>i-th</code> columns of <code>A</code> and <code>mv</code>, i.e. <img class="formulaInl" alt="$ b[i] = * A[i]^Hmv[i] $" src="form_373.png" width="96" height="15"/>.  <br /></td></tr>
+<tr class="separator:acb2e5efa75fb3970e1ecf716f10b4ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6fd03656134d6fccd7113a6876ba97e" id="r_ac6fd03656134d6fccd7113a6876ba97e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#ac6fd03656134d6fccd7113a6876ba97e">MvNorm</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, std::vector&lt; double &gt; &amp;normvec)</td></tr>
+<tr class="memdesc:ac6fd03656134d6fccd7113a6876ba97e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the 2-norm of each individual vector of <code>mv</code>. Upon return, <code>normvec</code>[i] holds the value of <img class="formulaInl" alt="$||mv_i||_2$" src="form_374.png" width="40" height="14"/>, the <code>i-th</code> column of <code>mv</code>.  <br /></td></tr>
+<tr class="separator:ac6fd03656134d6fccd7113a6876ba97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Initialization methods</div></td></tr>
+<tr class="memitem:ac52b7e1d688acef2afc3636e1cf7a58a" id="r_ac52b7e1d688acef2afc3636e1cf7a58a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#ac52b7e1d688acef2afc3636e1cf7a58a">SetBlock</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, const std::vector&lt; int &gt; &amp;index, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:ac52b7e1d688acef2afc3636e1cf7a58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the vectors in <code>A</code> to a set of vectors in <code>mv</code> indicated by the indices given in <code>index</code>.  <br /></td></tr>
+<tr class="separator:ac52b7e1d688acef2afc3636e1cf7a58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a2dfbb096511d602ef03d0ec29b50a" id="r_a72a2dfbb096511d602ef03d0ec29b50a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a72a2dfbb096511d602ef03d0ec29b50a">SetBlock</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, const Teuchos::Range1D &amp;index, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:a72a2dfbb096511d602ef03d0ec29b50a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep copy of A into specified columns of mv.  <br /></td></tr>
+<tr class="separator:a72a2dfbb096511d602ef03d0ec29b50a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7888014d05b442a4d908974bba3d6c5" id="r_af7888014d05b442a4d908974bba3d6c5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#af7888014d05b442a4d908974bba3d6c5">Assign</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;A, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:af7888014d05b442a4d908974bba3d6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">mv := A  <br /></td></tr>
+<tr class="separator:af7888014d05b442a4d908974bba3d6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad180ce9edf949c6e2b882b11cedeff8d" id="r_ad180ce9edf949c6e2b882b11cedeff8d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#ad180ce9edf949c6e2b882b11cedeff8d">MvRandom</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv)</td></tr>
+<tr class="memdesc:ad180ce9edf949c6e2b882b11cedeff8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace the vectors in <code>mv</code> with random vectors.  <br /></td></tr>
+<tr class="separator:ad180ce9edf949c6e2b882b11cedeff8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1301c3616281ebea692c28378dfead1" id="r_af1301c3616281ebea692c28378dfead1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#af1301c3616281ebea692c28378dfead1">MvInit</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, const double alpha=Teuchos::ScalarTraits&lt; double &gt;::zero())</td></tr>
+<tr class="memdesc:af1301c3616281ebea692c28378dfead1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace each element of the vectors in <code>mv</code> with <code>alpha</code>.  <br /></td></tr>
+<tr class="separator:af1301c3616281ebea692c28378dfead1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Print method</h2></td></tr>
+<tr class="memitem:a7061c8e783c77c300a83560bb3ff0a37" id="r_a7061c8e783c77c300a83560bb3ff0a37"><td class="memItemLeft" align="right" valign="top">typedef Anasazi::details::StubTsqrAdapter&lt; MV &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a7061c8e783c77c300a83560bb3ff0a37">tsqr_adaptor_type</a></td></tr>
+<tr class="memdesc:a7061c8e783c77c300a83560bb3ff0a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">TsqrAdaptor specialization for the multivector type MV.  <br /></td></tr>
+<tr class="separator:a7061c8e783c77c300a83560bb3ff0a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52dc632ffd66eb35ad481c6d36d71960" id="r_a52dc632ffd66eb35ad481c6d36d71960"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAnasazi_1_1MultiVecTraits_3_01double_00_01oomph_1_1DoubleMultiVector_01_4.html#a52dc632ffd66eb35ad481c6d36d71960">MvPrint</a> (const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;mv, std::ostream &amp;os)</td></tr>
+<tr class="memdesc:a52dc632ffd66eb35ad481c6d36d71960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <code>mv</code> multi-vector to the <code>os</code> output stream.  <br /></td></tr>
+<tr class="separator:a52dc632ffd66eb35ad481c6d36d71960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Specialize the <a class="el" href="namespaceAnasazi.html">Anasazi</a> traits class for the oomph-lib DoubleMultiVector. This provides the interfaces required by the <a class="el" href="namespaceAnasazi.html">Anasazi</a> eigensolvers. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00051">51</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a7061c8e783c77c300a83560bb3ff0a37" name="a7061c8e783c77c300a83560bb3ff0a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7061c8e783c77c300a83560bb3ff0a37">&#9670;&#160;</a></span>tsqr_adaptor_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::tsqr_adaptor_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>TsqrAdaptor specialization for the multivector type MV. </p>
+<p>By default, we provide a "stub" implementation. It has the right methods and typedefs, but its constructors and methods all throw std::logic_error. If you plan to use TSQR in <a class="el" href="namespaceAnasazi.html">Anasazi</a> (e.g., through TsqrOrthoManager), and if your multivector type MV is neither Epetra_MultiVector nor Tpetra::MultiVector, you must implement a functional TSQR adapter. Please refer to Epetra::TsqrAdapter (for Epetra_MultiVector) or Tpetra::TsqrAdaptor (for Tpetra::MultiVector) for examples. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00453">453</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af7888014d05b442a4d908974bba3d6c5" name="af7888014d05b442a4d908974bba3d6c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7888014d05b442a4d908974bba3d6c5">&#9670;&#160;</a></span>Assign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::Assign </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>mv := A </p>
+<p>Assign (deep copy) A into mv. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00396">396</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="adba407e74e6a21e4c32c18d04b9cf9c0" name="adba407e74e6a21e4c32c18d04b9cf9c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba407e74e6a21e4c32c18d04b9cf9c0">&#9670;&#160;</a></span>Clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::Clone </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>numvecs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new empty DoubleMultiVector containing numvecs columns. Return a reference-counted pointer to the new multivector. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00056">56</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a14629c9edef844f6d8dfb59dc10e5c2d" name="a14629c9edef844f6d8dfb59dc10e5c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14629c9edef844f6d8dfb59dc10e5c2d">&#9670;&#160;</a></span>CloneCopy() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneCopy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a deep copy of the DoubleMultiVector mv return Reference-counted pointer to the new DoubleMultiVector. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00064">64</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a1b76b1072966856cd44947f6a44b28ed" name="a1b76b1072966856cd44947f6a44b28ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b76b1072966856cd44947f6a44b28ed">&#9670;&#160;</a></span>CloneCopy() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneCopy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> and (deep) copies the contents of the vectors in index into the new vector return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00074">74</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a71b2edd3d45cf6b65ef25fee807e4560" name="a71b2edd3d45cf6b65ef25fee807e4560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71b2edd3d45cf6b65ef25fee807e4560">&#9670;&#160;</a></span>CloneCopy() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneCopy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Teuchos::Range1D &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deep copy of specified columns of <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00082">82</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a22604ae5c0a66752385257db914b2455" name="a22604ae5c0a66752385257db914b2455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22604ae5c0a66752385257db914b2455">&#9670;&#160;</a></span>CloneView() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneView </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00113">113</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a2aaae3982fcc934297e56ff6318c16dd" name="a2aaae3982fcc934297e56ff6318c16dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aaae3982fcc934297e56ff6318c16dd">&#9670;&#160;</a></span>CloneView() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneView </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (Non-const version for Trilinos 9 interface) NOTE: Not required in Trilinos 13.4.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00125">125</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a89f4a40b9b0b5194fce36328c5383545" name="a89f4a40b9b0b5194fce36328c5383545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f4a40b9b0b5194fce36328c5383545">&#9670;&#160;</a></span>CloneView() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneView </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Teuchos::Range1D &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00136">136</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="ad7635b267a39048a1b16c0feaaf2bdf0" name="ad7635b267a39048a1b16c0feaaf2bdf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7635b267a39048a1b16c0feaaf2bdf0">&#9670;&#160;</a></span>CloneViewNonConst() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneViewNonConst </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00092">92</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a06bf6627830afe4eb9259b070e92d774" name="a06bf6627830afe4eb9259b070e92d774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06bf6627830afe4eb9259b070e92d774">&#9670;&#160;</a></span>CloneViewNonConst() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Teuchos::RCP&lt; <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt; Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::CloneViewNonConst </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Teuchos::Range1D &amp;&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> that contains shallow copies of selected entries of the <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a> mv return Reference-counted pointer to the new <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">oomph::DoubleMultiVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00102">102</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="aa0419f21e1304373866e5867849faffd" name="aa0419f21e1304373866e5867849faffd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0419f21e1304373866e5867849faffd">&#9670;&#160;</a></span>GetGlobalLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ptrdiff_t Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::GetGlobalLength </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of rows in the given multivector. NOTE: Trilinos 13.4.0 uses GetGlobalLength instead of GetVecLength. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00150">150</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>.</p>
+
+</div>
+</div>
+<a id="abb5e3e3825dc16a80d83a424d154db8c" name="abb5e3e3825dc16a80d83a424d154db8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb5e3e3825dc16a80d83a424d154db8c">&#9670;&#160;</a></span>GetNumberVecs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::GetNumberVecs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain the number of vectors in the multivector. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00156">156</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="a0f59461c4b9163eca79807a349deb4ea" name="a0f59461c4b9163eca79807a349deb4ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f59461c4b9163eca79807a349deb4ea">&#9670;&#160;</a></span>GetVecLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::GetVecLength </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain the global length of the vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00143">143</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>.</p>
+
+</div>
+</div>
+<a id="aaebfcc1897c825815e9dbd4a3939cb0c" name="aaebfcc1897c825815e9dbd4a3939cb0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaebfcc1897c825815e9dbd4a3939cb0c">&#9670;&#160;</a></span>MvAddMv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvAddMv </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace <code>mv</code> with <img class="formulaInl" alt="$\alpha A + \beta B$" src="form_371.png" width="50" height="13"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00197">197</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="acb2e5efa75fb3970e1ecf716f10b4ee5" name="acb2e5efa75fb3970e1ecf716f10b4ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb2e5efa75fb3970e1ecf716f10b4ee5">&#9670;&#160;</a></span>MvDot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvDot </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute a vector <code>b</code> where the components are the individual dot-products of the <code>i-th</code> columns of <code>A</code> and <code>mv</code>, i.e. <img class="formulaInl" alt="$ b[i] = * A[i]^Hmv[i] $" src="form_373.png" width="96" height="15"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00310">310</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00809">oomph::DoubleMultiVector::dot()</a>.</p>
+
+</div>
+</div>
+<a id="af1301c3616281ebea692c28378dfead1" name="af1301c3616281ebea692c28378dfead1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1301c3616281ebea692c28378dfead1">&#9670;&#160;</a></span>MvInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em> = <code>Teuchos::ScalarTraits&lt;double&gt;::zero()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace each element of the vectors in <code>mv</code> with <code>alpha</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00419">419</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00364">oomph::DoubleMultiVector::initialise()</a>.</p>
+
+</div>
+</div>
+<a id="ac6fd03656134d6fccd7113a6876ba97e" name="ac6fd03656134d6fccd7113a6876ba97e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6fd03656134d6fccd7113a6876ba97e">&#9670;&#160;</a></span>MvNorm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvNorm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>normvec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the 2-norm of each individual vector of <code>mv</code>. Upon return, <code>normvec</code>[i] holds the value of <img class="formulaInl" alt="$||mv_i||_2$" src="form_374.png" width="40" height="14"/>, the <code>i-th</code> column of <code>mv</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00322">322</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00889">oomph::DoubleMultiVector::norm()</a>.</p>
+
+</div>
+</div>
+<a id="a52dc632ffd66eb35ad481c6d36d71960" name="a52dc632ffd66eb35ad481c6d36d71960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52dc632ffd66eb35ad481c6d36d71960">&#9670;&#160;</a></span>MvPrint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvPrint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Print the <code>mv</code> multi-vector to the <code>os</code> output stream. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00433">433</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00704">oomph::DoubleMultiVector::output()</a>.</p>
+
+</div>
+</div>
+<a id="ad180ce9edf949c6e2b882b11cedeff8d" name="ad180ce9edf949c6e2b882b11cedeff8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad180ce9edf949c6e2b882b11cedeff8d">&#9670;&#160;</a></span>MvRandom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvRandom </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace the vectors in <code>mv</code> with random vectors. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00404">404</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="a9e9e082eb66b9a5e31232de7df06a36d" name="a9e9e082eb66b9a5e31232de7df06a36d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e9e082eb66b9a5e31232de7df06a36d">&#9670;&#160;</a></span>MvScale() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvScale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Scale each element of the vectors in <code>mv</code> with <code>alpha</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00216">216</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a75e3a2b5d0d65d3d5622205cd9b2ec37" name="a75e3a2b5d0d65d3d5622205cd9b2ec37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75e3a2b5d0d65d3d5622205cd9b2ec37">&#9670;&#160;</a></span>MvScale() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvScale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>alpha</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Scale each element of the <code>i-th</code> vector in <code>mv</code> with <code>alpha</code>[i]. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00224">224</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="a41445251a1d0c052e1b24f4b75abbe41" name="a41445251a1d0c052e1b24f4b75abbe41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41445251a1d0c052e1b24f4b75abbe41">&#9670;&#160;</a></span>MvTimesMatAddMv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvTimesMatAddMv </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Teuchos::SerialDenseMatrix&lt; int, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update <code>mv</code> with <img class="formulaInl" alt="$ \alpha AB + \beta mv $" src="form_370.png" width="68" height="13"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00162">162</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="a338f59059891bc045555e3283949c6fa" name="a338f59059891bc045555e3283949c6fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a338f59059891bc045555e3283949c6fa">&#9670;&#160;</a></span>MvTransMv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::MvTransMv </td>
+          <td>(</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Teuchos::SerialDenseMatrix&lt; int, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute a dense matrix <code>B</code> through the matrix-matrix multiply <img class="formulaInl" alt="$ \alpha A^Hmv $" src="form_372.png" width="44" height="11"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00241">241</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00211">oomph::DoubleMultiVector::nvector()</a>.</p>
+
+</div>
+</div>
+<a id="ac52b7e1d688acef2afc3636e1cf7a58a" name="ac52b7e1d688acef2afc3636e1cf7a58a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac52b7e1d688acef2afc3636e1cf7a58a">&#9670;&#160;</a></span>SetBlock() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::SetBlock </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy the vectors in <code>A</code> to a set of vectors in <code>mv</code> indicated by the indices given in <code>index</code>. </p>
+<p>The <code>numvecs</code> vectors in <code>A</code> are copied to a subset of vectors in <code>mv</code> indicated by the indices given in <code>index</code>, i.e.<code> mv[index[i]] = A[i]</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00339">339</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>.</p>
+
+</div>
+</div>
+<a id="a72a2dfbb096511d602ef03d0ec29b50a" name="a72a2dfbb096511d602ef03d0ec29b50a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a2dfbb096511d602ef03d0ec29b50a">&#9670;&#160;</a></span>SetBlock() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Anasazi::MultiVecTraits&lt; double, <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &gt;::SetBlock </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Teuchos::Range1D &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">oomph::DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>mv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deep copy of A into specified columns of mv. </p>
+<p>(Deeply) copy the first <code>index.size()</code> columns of <code>A</code> into the columns of <code>mv</code> specified by the given index range.</p>
+<p>Postcondition: <code>mv[i] = A[i - index.lbound()]</code> for all <code>i</code> in <code>[index.lbound(), index.ubound()]</code></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>[in] Source multivector </td></tr>
+    <tr><td class="paramname">index</td><td>[in] Inclusive index range of columns of mv; index set of the target </td></tr>
+    <tr><td class="paramname">mv</td><td>[out] Target multivector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00371">371</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

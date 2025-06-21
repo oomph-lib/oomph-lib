@@ -1,0 +1,243 @@
+\doxysection{Axisymmetric\+Linear\+Elasticity\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classAxisymmetricLinearElasticityProblem}{}\label{classAxisymmetricLinearElasticityProblem}\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+
+
+Class to validate time harmonic linear elasticity (Fourier decomposed)  
+
+
+Inheritance diagram for Axisymmetric\+Linear\+Elasticity\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAxisymmetricLinearElasticityProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}{Axisymmetric\+Linear\+Elasticity\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in r and z directions, boundary locations and whether we are doing an impulsive start or not. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a25da062bc76af5ef30619a3f3ff3718f}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_af9b01e082da514668a89df9213afbbd5}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update after solve is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6ea18ecd60fd5878522ae6024cb57dee}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Actions before implicit timestep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}{set\+\_\+initial\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Set the initial conditions, either for an impulsive start or with history values for the time stepper. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ad6419d0572a6e869a5b9ba3c5aac3144}{set\+\_\+boundary\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Set the boundary conditions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}{assign\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Allocate traction elements on the bottom surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a49f2e786217cf28ebed1d828a4b06147}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the bulk mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem_a62a8248651ee5b17b5168fe9158039dc}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the mesh of traction elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
+class Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Class to validate time harmonic linear elasticity (Fourier decomposed) 
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00227}{227}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed}\label{classAxisymmetricLinearElasticityProblem_aaa4da18227b8b20dfba1f67bad4907ed} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!AxisymmetricLinearElasticityProblem@{AxisymmetricLinearElasticityProblem}}
+\index{AxisymmetricLinearElasticityProblem@{AxisymmetricLinearElasticityProblem}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{AxisymmetricLinearElasticityProblem()}{AxisymmetricLinearElasticityProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{\+::\+Axisymmetric\+Linear\+Elasticity\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in r and z directions, boundary locations and whether we are doing an impulsive start or not. 
+
+Problem constructor\+: Pass number of elements in coordinate directions and size of domain. 
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00276}{276}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00096}{Global\+\_\+\+Parameters\+::body\+\_\+force()}}, \mbox{\hyperlink{cylinder_8cc_source_l00083}{Global\+\_\+\+Parameters\+::boundary\+\_\+traction()}}, \mbox{\hyperlink{cylinder_8cc_source_l00049}{Global\+\_\+\+Parameters\+::E}}, \mbox{\hyperlink{cylinder_8cc_source_l00059}{Global\+\_\+\+Parameters\+::\+Nr}}, \mbox{\hyperlink{cylinder_8cc_source_l00046}{Global\+\_\+\+Parameters\+::\+Nu}}, \mbox{\hyperlink{cylinder_8cc_source_l00062}{Global\+\_\+\+Parameters\+::\+Nz}}, \mbox{\hyperlink{cylinder_8cc_source_l00056}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}}, \mbox{\hyperlink{cylinder_8cc_source_l00077}{Global\+\_\+\+Parameters\+::\+Rmax}}, \mbox{\hyperlink{cylinder_8cc_source_l00071}{Global\+\_\+\+Parameters\+::\+Rmin}}, \mbox{\hyperlink{cylinder_8cc_source_l00080}{Global\+\_\+\+Parameters\+::\+Zmax}}, and \mbox{\hyperlink{cylinder_8cc_source_l00074}{Global\+\_\+\+Parameters\+::\+Zmin}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAxisymmetricLinearElasticityProblem_af9b01e082da514668a89df9213afbbd5}\label{classAxisymmetricLinearElasticityProblem_af9b01e082da514668a89df9213afbbd5} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after solve is empty. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00239}{239}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a6ea18ecd60fd5878522ae6024cb57dee}\label{classAxisymmetricLinearElasticityProblem_a6ea18ecd60fd5878522ae6024cb57dee} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before implicit timestep. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00242}{242}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00574}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a25da062bc76af5ef30619a3f3ff3718f}\label{classAxisymmetricLinearElasticityProblem_a25da062bc76af5ef30619a3f3ff3718f} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve is empty. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00236}{236}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04}\label{classAxisymmetricLinearElasticityProblem_ab0cfde2632d6711b75744bcc2644ae04} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!assign\_traction\_elements@{assign\_traction\_elements}}
+\index{assign\_traction\_elements@{assign\_traction\_elements}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_traction\_elements()}{assign\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::assign\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Allocate traction elements on the bottom surface. 
+
+Make traction elements along the boundary r=Rmin. 
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00387}{387}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04}\label{classAxisymmetricLinearElasticityProblem_a370b76b9e2902242de018339d3aedd04} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00663}{663}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00203}{Global\+\_\+\+Parameters\+::exact\+\_\+solution()}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_ad6419d0572a6e869a5b9ba3c5aac3144}\label{classAxisymmetricLinearElasticityProblem_ad6419d0572a6e869a5b9ba3c5aac3144} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
+\index{set\_boundary\_conditions@{set\_boundary\_conditions}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the boundary conditions. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00573}{573}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00178}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+r\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00194}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+theta\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00186}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+z\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00154}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+r\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00170}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+theta\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00162}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+z\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00203}{Global\+\_\+\+Parameters\+::exact\+\_\+solution()}}, \mbox{\hyperlink{cylinder_8cc_source_l00130}{Global\+\_\+\+Parameters\+::u\+\_\+r()}}, \mbox{\hyperlink{cylinder_8cc_source_l00146}{Global\+\_\+\+Parameters\+::u\+\_\+theta()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00138}{Global\+\_\+\+Parameters\+::u\+\_\+z()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00242}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430}\label{classAxisymmetricLinearElasticityProblem_a6b0263b6f783652a1d8151948f4b9430} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_conditions@{set\_initial\_conditions}}
+\index{set\_initial\_conditions@{set\_initial\_conditions}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_conditions()}{set\_initial\_conditions()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the initial conditions, either for an impulsive start or with history values for the time stepper. 
+
+Set the initial conditions (history values) 
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00415}{415}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cylinder_8cc_source_l00178}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+r\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00194}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+theta\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00186}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+z\+\_\+dt2()}}, \mbox{\hyperlink{cylinder_8cc_source_l00154}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+r\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00170}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+theta\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00162}{Global\+\_\+\+Parameters\+::d\+\_\+u\+\_\+z\+\_\+dt()}}, \mbox{\hyperlink{cylinder_8cc_source_l00130}{Global\+\_\+\+Parameters\+::u\+\_\+r()}}, \mbox{\hyperlink{cylinder_8cc_source_l00146}{Global\+\_\+\+Parameters\+::u\+\_\+theta()}}, and \mbox{\hyperlink{cylinder_8cc_source_l00138}{Global\+\_\+\+Parameters\+::u\+\_\+z()}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder_8cc_source_l00714}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a49f2e786217cf28ebed1d828a4b06147}\label{classAxisymmetricLinearElasticityProblem_a49f2e786217cf28ebed1d828a4b06147} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00264}{264}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+\Hypertarget{classAxisymmetricLinearElasticityProblem_a62a8248651ee5b17b5168fe9158039dc}\label{classAxisymmetricLinearElasticityProblem_a62a8248651ee5b17b5168fe9158039dc} 
+\index{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$@{AxisymmetricLinearElasticityProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the mesh of traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00267}{267}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cylinder_8cc}{cylinder.\+cc}}\end{DoxyCompactItemize}

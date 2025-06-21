@@ -1,0 +1,886 @@
+\chapter{Demo problem\+: Free, small-\/amplitude axisymmetric oscillation of 2D circular disk}
+\hypertarget{index}{}\label{index}\index{Demo problem: Free, small-\/amplitude axisymmetric oscillation of 2D circular disk@{Demo problem: Free, small-\/amplitude axisymmetric oscillation of 2D circular disk}}
+In this tutorial we demonstrate how to solve time-\/dependent solid mechanics problems. We consider the small-\/amplitude oscillations of a circular disk and compare the computed solution against analytical predictions based on linear elasticity.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+Small-\/amplitude, axisymmetric oscillations of a circular disk of radius $ a $ are governed by the Navier-\/\+Lame equations  \[
+(\lambda +2 \mu) \ \mbox{grad}^* \mbox{div}^* {\bf u}^* = 
+\rho \frac{\partial^2 {\bf u}^*}{\partial t^{*2}},
+\] where the displacement field is given by $ {\bf u}^*  = u^*(r^*,t^*) \ {\bf e}_r$. Here $ \lambda, \mu $ are the disk\textquotesingle{}s two Lame constants and $ \rho $ is its density. The outer boundary is stress-\/free so that  \[
+\tau_{rr} = \lambda \ \mbox{div}^*  {\bf u}^* + 
+2 \mu \frac{\partial u^*}{\partial r^*} = 0 \ \ \ \ \ \mbox{at }
+r^* = a.
+\]
+
+We non-\/dimensionalise all lengths and displacements on the disk\textquotesingle{}s undeformed radius, $ {\cal L} = a $, and scale time on  \[ 
+{\cal T} = a \sqrt{\frac{\rho}{(\lambda+2\mu)}}. \ \ \ \ \ \ \ \ \ \ \
+\ \ \ \ \ \ \ \ \ \ (1)
+\] This transforms the governing PDE into the dimensionless and parameter-\/free form  \[
+\frac{\partial}{\partial r}\left(\frac{1}{r} \frac{\partial
+(ru)}{\partial r}\right) = \frac{\partial^2 u}{\partial t^2},
+\] subject to the boundary condition  \[
+\frac{\nu}{1-2\nu}\frac{1}{r} \frac{\partial (ru)}{\partial r} +
+\frac{\partial u}{\partial r} = 0 \mbox{\ \ \ \ \ at } r=1,
+\] where $ \nu $ is Poisson\textquotesingle{}s ratio.
+
+Making the ansatz $ u(r,t) = U(r) \sin(\omega t)$ transforms the PDE into an ODE for $ U(r) $\+:  \[
+\frac{d}{dr}\left( \frac{1}{r} \frac{d(rU)}{d r}\right)
++ \omega^2 U = 0. 
+\] The solution of this ODE are Bessel functions and the requirement that $ U(r) $ is finite at $ r=0 $ implies that  \[
+U(r) \sim J_1(\omega r).
+\] where $ J_1 $ is the Bessel function of first order.
+
+Substituting this into the stress-\/free boundary condition yields the dispersion relation  \[
+\frac{\nu}{1-2\nu}\frac{1}{r} \frac{d (rJ_1(\omega r))}{d r} +
+\frac{dJ_1(\omega r)}{dr} = 0 \mbox{\ \ \ \ \ at } r=1,
+\] for the eigenfrequencies $ \omega $.
+
+If the disk performs oscillations in a single mode with eigenfrequency $ \omega $ its displacement field is therefore given by  \[
+u(r,t) = A \ J_1(\omega r) \ \sin(\omega t),
+\] where $ A $ is the (small) amplitude of the oscillations.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_implementation}
+We discretise the disk with {\ttfamily oomph-\/lib\textquotesingle{}s} large-\/displacement solid mechanics elements and apply initial conditions that are consistent with an oscillation in its first eigenmode. As discussed in the \href{../../solid_theory/html/index.html\#non-dim_solid}{\texttt{ Solid Mechanics Theory Tutorial}}, time-\/dependent problems require the specification of the (square of the) parameter  \[
+\Lambda = \frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{{\cal S}}}
+\] which represents the ratio of the system\textquotesingle{}s intrinsic timescale $ {\cal L} \sqrt{\rho/{\cal S}} $, to the timescale $ {\cal T} $ used to non-\/dimensionalise time; here ${\cal S}$ is the reference stiffness used to non-\/dimensionalise the stresses.
+
+Since the disk performs small-\/amplitude oscillations it is appropriate to assume linear elastic behaviour with Young\textquotesingle{}s modulus $ E $ and Poisson\textquotesingle{}s ratio $ \nu $. We therefore use Young\textquotesingle{}s modulus to non-\/dimensionalise the stresses by setting $ {\cal S} =
+E. $ Using (1), the parameter $ \Lambda^2 $ is then given by  \[
+\Lambda^2 = \frac{(1-\nu)}{(1+\nu)(1-2\nu)}
+\] where we used the identity $ E = \mu(3\lambda +2
+\mu)/(\lambda+\mu). $
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+Here is an animation of the computed time-\/dependent displacement field. (Computations were only performed in a quarter of the domain, using appropriate symmetry boundary conditions along the lines $ x=0 $ and $ y=0. $
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{displ}
+\doxyfigcaption{Animation of the displacement field. }
+\end{DoxyImage}
+
+
+The figure below shows (in red) the radius of a control point on the disk\textquotesingle{}s curvilinear boundary. The green line shows the corresponding theoretical prediction for disk\textquotesingle{}s radius for the first eigenfrequency $ \omega = 2.126. $ Theoretical and computational results are in excellent agreement.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{trace}
+\doxyfigcaption{Time trace of the radius. Red\+: FE. Green\+: Linearised theory. }
+\end{DoxyImage}
+
+
+The final plot shows an animation of the theoretical and computed radial displacement fields along the line $ y=0 $, parametrised by a Lagrangian coordinate $ \xi $. The results are again in excellent agreement throughout the domain.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{line_displ}
+\doxyfigcaption{Animation of the exact (linearised) and computed radial displacement field. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters}{Global parameters}}\label{index_namespace}
+As usual we define the global problem parameters in a namespace. We define Poisson\textquotesingle{}s ratio, compute the associated timescale ratio $ \Lambda^2 $, and provide a pointer to the constitutive law.
+
+The {\ttfamily multiplier(...)} function is needed during the assignment of the initial conditions. It is used to specify the product of the timescale ratio $ \Lambda^2 $ and the isotropic growth $ \Gamma $. Since the present problem does not involve any growth we have $ \Gamma = 1 $, so the function simply returns the (spatially constant) timescale ratio. See the \href{../../solid_theory/html/index.html\#Solid_IC}{\texttt{ Solid Mechanics Theory Tutorial}} and section \doxysectlink{index_newmark_ic}{Assignment of history values for the Newmark timestepper}{2} for further details.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Timescale\ ratio\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\_sq}}=(1.0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})/((1.0+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}})*(1.0-\/2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}));}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Multiplier\ for\ inertia\ terms\ (needed\ for\ consistent\ assignment\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ of\ initial\ conditions\ in\ Newmark\ scheme)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{multiplier}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Global\_Physical\_Variables::Lambda\_sq}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We use command line arguments to indicate if the time-\/dependent simulation is run in validation mode, in which case we only perform a few timesteps\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//========start\_main====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ disk\ oscillation\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{disk__oscillation_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}}[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ there's\ a\ command\ line\ argument\ run\ the\ validation\ (i.e.\ do\ only\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ 10\ timesteps);\ otherwise\ do\ a\ few\ cycles}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}}=1000;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CommandLineArgs::Argc}}!=1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}}=10;}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We create a Hookean constitutive equation, build the problem and run the simulation\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Hookean\ constitutive\ equations}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DiskOscillationProblem<RefineableQPVDElement<2,3>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.run(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_ic_object}{}\doxysection{\texorpdfstring{Specifying the initial condition via a time-\/dependent Geom\+Object}{Specifying the initial condition via a time-dependent GeomObject}}\label{index_ic_object}
+The equations of solid mechanics require the assignment of initial conditions for the position and the velocity of all material particles at some initial time. Within {\ttfamily oomph-\/lib}, such initial conditions are most naturally specified in the form of time-\/dependent {\ttfamily Geom\+Objects}. Here is the specification of an axisymmetric, oscillating disk of unit radius whose displacement field is given by the analytical solution derived in the \doxysectlink{index_theory}{Theory}{1} section. The analytical solution requires the specification of the amplitude of the oscillation and the Poisson\textquotesingle{}s ratio -- these suffice to compute the time-\/dependent position, velocity and acceleration as a function of the current time, specified by the {\ttfamily Time\+Stepper} object.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//================disk\_as\_geom\_object======================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Axisymmetrially\ oscillating\ disk\ with\ displacement}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ field\ according\ to\ linear\ elasticity.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classAxisymOscillatingDisk}{AxisymOscillatingDisk}}\ :\ \textcolor{keyword}{public}\ GeomObject}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ 2\ Lagrangian\ coordinate,\ 2\ Eulerian\ coords.\ Pass\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ amplitude\ of\ oscillation,\ Poisson\ ratio\ nu,\ and\ pointer\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ global\ timestepper.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAxisymOscillatingDisk}{AxisymOscillatingDisk}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAxisymOscillatingDisk_ab79de13fa0dcfac5d04d6ff371241c5d}{\string~AxisymOscillatingDisk}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Position\ vector\ at\ Lagrangian\ coordinate\ xi\ at\ present}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ time}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}{position}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parametrised\ velocity\ on\ object\ at\ current\ time:\ veloc\ =\ d\ r(xi)/dt.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}{veloc}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}{veloc}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parametrised\ acceleration\ on\ object\ at\ current\ time:\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ accel\ =\ d\string^2\ r(xi)/dt\string^2.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}{accel}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}{accel}});}
+
+\end{DoxyCodeInclude}
+ The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+dispersion(...)} which is used to solve the nonlinear dispersion relation for the disk\textquotesingle{}s eigenfrequency $ \omega $. The function is static (and thus essentially a global function) because it interacts with {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parametrised\ j-\/th\ time-\/derivative\ on\ object\ at\ current\ time:\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \(\backslash\)f\$\ \(\backslash\)frac\{d\string^\{j\}\ r(\(\backslash\)zeta)\}\{dt\string^j\}\ \(\backslash\)f\$.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ dposition\_dt(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{drdt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Current\ position}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\ \ \ \ \ position(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{drdt}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Velocity:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\ \ \ \ \ veloc(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{drdt}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Acceleration:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\ \ \ \ \ accel(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{drdt}});}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{error\_message}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{error\_message}}\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}\ <<\ \textcolor{stringliteral}{"{}th\ derivative\ not\ implemented\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OomphLibError}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{error\_message}}.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Residual\ of\ dispersion\ relation\ for\ use\ in\ black-\/box\ Newton\ method}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ which\ requires\ global\ (or\ static)\ functions.\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio\ is\ \ passed\ as\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ residual\_for\_dispersion(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{residual}});}
+
+\end{DoxyCodeInclude}
+ The private member data stores the amplitude and period of the oscillation, the material\textquotesingle{}s Poisson ratio and the eigenfrequency.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Amplitude\ of\ oscillation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ Ampl;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Period\ of\ oscillation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ T;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson\ ratio\ nu}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Eigenfrequency}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ Omega;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ disk\_as\_geom\_object}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+\hypertarget{index_ic_constructor}{}\doxysubsection{\texorpdfstring{Constructor}{Constructor}}\label{index_ic_constructor}
+The constructor uses {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver, defined in the namespace {\ttfamily Black\+Box\+FDNewton\+Solver}, to determine the eigenfrequency.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============ic\_constructor============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ 2\ Lagrangian\ coordinates,\ 2\ Eulerian\ coords.\ Pass\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ amplitude\ of\ oscillation,\ Poisson\ ratio\ nu,\ and\ pointer\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ global\ timestepper.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\mbox{\hyperlink{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d}{AxisymOscillatingDisk::AxisymOscillatingDisk}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}})\ :\ }
+\DoxyCodeLine{\ GeomObject(2,2,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}),\ Ampl(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}}),\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parameters\ for\ dispersion\ relation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}}(1);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}}[0]=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ guess\ for\ eigenfrequency}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}(1);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0]=2.0;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Find\ eigenfrequency\ from\ black\ box\ Newton\ solver}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{BlackBoxFDNewtonSolver::black\_box\_fd\_newton\_solve}}(residual\_for\_dispersion,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ eigenfrequency}}
+\DoxyCodeLine{\ Omega=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign/doc\ period\ of\ oscillation}}
+\DoxyCodeLine{\ T=2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{MathematicalConstants::Pi}}/Omega;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ std::cout\ <<\ \textcolor{stringliteral}{"{}Period\ of\ oscillation:\ "{}}\ <<\ T\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_dispersion}{}\doxysubsection{\texorpdfstring{The dispersion relation}{The dispersion relation}}\label{index_dispersion}
+Here is the specification of the dispersion relation, in the form required by {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver. The Bessel functions are computed by \href{http://www.crbond.com/}{\texttt{ C.\+R. Bond\textquotesingle{}s}} {\ttfamily bessjy01a(...)} function, available (with permission) via {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily CRBond\+\_\+\+Bessel} namespace.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======================start\_of\_dispersion===============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Residual\ of\ dispersion\ relation\ for\ use\ in\ black\ box\ Newton\ method}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ which\ requires\ global\ (or\ static)\ functions.\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Poisson's\ ratio\ is\ passed\ as\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymOscillatingDisk_ae6a90b479781b587bb8905e7bf2bba3b}{AxisymOscillatingDisk::residual\_for\_dispersion}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}},}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{residual}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Extract\ parameters}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{param}}[0];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Argument\ of\ various\ Bessel\ functions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{arg}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0];}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Bessel\ fcts\ J\_0(x),\ J\_1(x),\ Y\_0(x),\ Y\_1(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1p}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CRBond\_Bessel::bessjy01a}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{arg}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1p}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Residual\ of\ dispersion\ relation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{residual}}[0]=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}}/(1.0-\/2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}})*(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}}+(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}}-\/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}}/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0])*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0])+}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}}-\/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}}/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0])*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{omega}}[0];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+\hypertarget{index_position}{}\doxysubsection{\texorpdfstring{The position(...), veloc(...) and accel(...) functions}{The position(...), veloc(...) and accel(...) functions}}\label{index_position}
+The {\ttfamily position(...)}, {\ttfamily veloc(...)} and {\ttfamily accel(...)} functions specify the motion of the {\ttfamily Geom\+Object}, according to the solution of the linearised equations derived in the \doxysectlink{index_theory}{Theory}{1} section. Here is a listing of the {\ttfamily position(...)} function\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_position===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Position\ Vector\ at\ Lagrangian\ coordinate\ xi\ at\ present}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ time}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}{AxisymOscillatingDisk::position}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{}\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parameter\ values\ at\ present\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Geom\_object\_time\_stepper\_pt}}-\/>time\_pt()-\/>time();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Radius\ in\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{lagr\_radius}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{sqrt}}(\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0],2)\ +\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[1],2)\ );}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{lagr\_radius}}<1.0e-\/12)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Position\ Vector}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}}[0]=0.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}}[1]=0.0;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Bessel\ fcts\ J\_0(x),\ J\_1(x),\ Y\_0(x),\ Y\_1(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1p}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CRBond\_Bessel::bessjy01a}}(\mbox{\hyperlink{classAxisymOscillatingDisk_ab0ae3a1a7324dd0ccce15fd84471e3d1}{Omega}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{lagr\_radius}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y0p}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{y1p}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Displacement\ field\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{u}}=\mbox{\hyperlink{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407}{Ampl}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j1}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{sin}}(2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{MathematicalConstants::Pi}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time}}/\mbox{\hyperlink{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1}{T}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Position\ Vector}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}}[0]=(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{lagr\_radius}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{u}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r}}[1]=(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[1]+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[1]/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{lagr\_radius}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{u}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ position}}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily veloc(...)} and {\ttfamily accel(...)} functions are very similar and we omit their listings in the interest of brevity. See the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_mesh}
+We discretise a quarter of the domain with a solid mechanics version of the refineable quarter circle sector mesh, constructed using multiple inheritance.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======================start\_mesh================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Elastic\ quarter\ circle\ sector\ mesh:\ We\ "{}upgrade"{}}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ the\ RefineableQuarterCircleSectorMesh\ to\ become\ an}}
+\DoxyCodeLine{\textcolor{comment}{///\ SolidMesh\ and\ equate\ the\ Eulerian\ and\ Lagrangian\ coordinates,}}
+\DoxyCodeLine{\textcolor{comment}{///\ thus\ making\ the\ domain\ represented\ by\ the\ mesh\ the\ stress-\/free\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ configuration.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh}}\ :}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableQuarterCircleSectorMesh<ELEMENT>,}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\{}
+
+\end{DoxyCodeInclude}
+ The constructor calls the constructor of the underlying non-\/solid mesh, checks that the element type, specified by the template argument, is a {\ttfamily Solid\+Finite\+Element}, and sets the Lagrangian coordinates of all nodes to their Eulerian positions, making the current configuration stress-\/free.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Build\ mesh\ and\ copy\ Eulerian\ coords\ to\ Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ ones\ so\ that\ the\ initial\ configuration\ is\ the\ stress-\/free\ one.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(GeomObject*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{wall\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{Mesh::Default\_TimeStepper}})\ :}
+\DoxyCodeLine{\ \ RefineableQuarterCircleSectorMesh<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{wall\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ PARANOID}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Check\ that\ the\ element\ type\ is\ derived\ from\ the\ SolidFiniteElement}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidFiniteElement}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}=\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidFiniteElement}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{finite\_element\_pt}}(0));}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}==0)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OomphLibError}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{stringliteral}{"{}Element\ needs\ to\ be\ derived\ from\ SolidFiniteElement\(\backslash\)n"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Eulerian\ ones}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{The Problem class}{The Problem class}}\label{index_problem_class}
+The {\ttfamily Problem} class has the usual member functions which will be discussed in more detail below.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//========start\_class===================================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class\ to\ simulate\ small-\/amplitude\ oscillations\ of\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ circular\ disk.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classDiskOscillationProblem}{DiskOscillationProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9}{DiskOscillationProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_a84fdc4311e8cc1fa5f80dc5568c88413}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_afea297af1844657099dec3d717fcccc5}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\ \mbox{\hyperlink{classDiskOscillationProblem_a583b50c50f3f065ddeeaa48e4e6d8b6c}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ the\ problem:\ Pass\ number\ of\ timesteps\ to\ be\ performed.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}{run}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}});}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8}{doc\_solution}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}}\ \mbox{\hyperlink{classDiskOscillationProblem_a45a4b574c10c6416b3b6be950713f505}{Trace\_file}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Vector\ of\ pointers\ to\ nodes\ whose\ position\ we're\ tracing}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<Node*>}}\ \mbox{\hyperlink{classDiskOscillationProblem_a141a79f41b33b19a6fca57793836e4da}{Trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Geometric\ object\ that\ specifies\ the\ initial\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAxisymOscillatingDisk}{AxisymOscillatingDisk}}*\ \mbox{\hyperlink{classDiskOscillationProblem_a338517a04848bb75252751df32879e40}{IC\_geom\_object\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_start_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_start_constructor}
+We start by creating the timestepper -- the standard {\ttfamily Newmark} timestepper with two history values (We refer to \href{../../../beam/unsteady_ring/html/index.html\#prev}{\texttt{ another tutorial}} for a discussion of the template parameter in the {\ttfamily Newmark} timestepper). Next, we create a {\ttfamily Geom\+Object} that specifies the curvilinear boundary of the quarter circle domain and pass it to the mesh constructor.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_constructor=========================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9}{DiskOscillationProblem<ELEMENT>::DiskOscillationProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allocate\ the\ timestepper:\ The\ classical\ Newmark\ scheme\ with}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ two\ history\ values.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{add\_time\_stepper\_pt}}(\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Newmark<2>}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ GeomObject\ that\ specifies\ the\ curvilinear\ boundary\ of\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ circular\ disk}}
+\DoxyCodeLine{\ GeomObject*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{curved\_boundary\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Ellipse}}(1.0,1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//The\ start\ and\ end\ intrinsic\ coordinates\ on\ the\ geometric\ object}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ that\ defines\ the\ curvilinear\ boundary\ of\ the\ disk}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}}=2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{atan}}(1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Fraction\ along\ geometric\ object\ at\ which\ the\ radial\ dividing\ line}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ placed}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{curved\_boundary\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}());}
+
+\end{DoxyCodeInclude}
+ We select the nodes on the horizontal symmetry boundary and on the curvilinear boundary as control nodes whose displacement we shall document in a trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ trace\ nodes\ as\ the\ nodes\ on\ boundaries\ 0\ (=\ horizontal\ symmetry}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ boundary)\ and\ 1\ (=curved\ boundary)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod0}}=mesh\_pt()-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod1}}=mesh\_pt()-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ Trace\_node\_pt.resize(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod0}}+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod1}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod0}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]=mesh\_pt()-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod1}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nnod0}}]=mesh\_pt()-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//done\ choosing\ trace\ nodes}}
+
+\end{DoxyCodeInclude}
+ We apply symmetry boundary conditions along the horizontal and vertical symmetry boundaries\+: zero vertical displacement along the line $ y=0 $ (boundary 0) and zero horizontal displacement along the line $ x=0 $ (boundary 2).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ horizontal\ boundary\ in\ the\ vertical\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_hor}}\ =\ mesh\_pt()-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_hor}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ vertical\ boundary\ in\ the\ horizontal\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_vert}}\ =\ mesh\_pt()-\/>nboundary\_node(2);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_vert}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(2,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}})-\/>pin\_position(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ done\ bcs}}
+
+\end{DoxyCodeInclude}
+ We complete the build of the elements by specifying the pointer to the constitutive law and to the timescale ratio $ \Lambda^2. $
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Finish\ build\ of\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}}\ =mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}\ *\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ timescale\ ratio}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>lambda\_sq\_pt()=\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Global\_Physical\_Variables::Lambda\_sq}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we apply one level of uniform refinement and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Refine\ uniformly}}
+\DoxyCodeLine{\ mesh\_pt()-\/>refine\_uniformly();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ equation\ numbers}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{assign\_eqn\_numbers}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+We start the post-\/processing routine by plotting the shape of the deformed body, before documenting the radii of the control points and the exact outer radius of the disk (according to linear theory) in the trace file.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_doc====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8}{DiskOscillationProblem<ELEMENT>::doc\_solution}}(}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}},\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}}=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ deformed\ body}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ position\ on\ IC\ object\ (exact\ solution)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}}(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]=1.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[1]=0.0;}
+\DoxyCodeLine{\ IC\_geom\_object\_pt-\/>position(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Exact\ outer\ radius\ for\ linear\ elasticity}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{exact\_r}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}}[0];\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ to\ trace\ file}}
+\DoxyCodeLine{\ Trace\_file\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_pt}}()-\/>time()\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{exact\_r}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ radii\ of\ control\ nodes}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ntrace\_node}}=Trace\_node\_pt.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ntrace\_node}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Trace\_file\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{sqrt}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}(0),2)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}(1),2))\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ Trace\_file\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ Next we and output the exact and computed displacements and velocities (as a function of the Lagrangian coordinate) along the horizontal symmetry line where $ y=0. $ The displacements are given by the difference between the current Eulerian and the Lagrangian positions\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ displacement\ as\ a\ function\ of\ the\ radial\ coordinate}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ along\ boundary\ 0}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ elements\ along\ boundary\ 0:}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nelem}}=mesh\_pt()-\/>nboundary\_element(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Open\ files}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/displ\_along\_line\%i.dat"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/exact\_displ\_along\_line\%i.dat"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}}.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}}(2);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}(2);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dxdt}}(2);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}(2);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}}(2);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{v\_exact}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nelem}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}\ <<\ \textcolor{stringliteral}{"{}ZONE\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}}\ <<\ \textcolor{stringliteral}{"{}ZONE\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Move\ along\ bottom\ edge\ of\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}}[0]=-\/1.0+2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}})/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}}[1]=-\/1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidFiniteElement}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}=\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidFiniteElement}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ \ (mesh\_pt()-\/>boundary\_element\_pt(0,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ Lagrangian\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>interpolated\_xi(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ Eulerian\ coordinate}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>interpolated\_x(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ velocity\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>interpolated\_dxdt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{s}},1,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dxdt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ exact\ Eulerian\ position}}
+\DoxyCodeLine{\ \ \ \ \ \ IC\_geom\_object\_pt-\/>position(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ exact\ velocity}}
+\DoxyCodeLine{\ \ \ \ \ \ IC\_geom\_object\_pt-\/>veloc(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{v\_exact}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Plot\ radial\ distance\ and\ displacement}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}[0]-\/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dxdt}}[0]\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}}\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{r\_exact}}[0]-\/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{v\_exact}}[0]\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.close();\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file2}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ line\ output}}
+
+\end{DoxyCodeInclude}
+ The function also contains similar output for 2D displacements fields but we suppress the listing here and refer to the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_start_run}{}\doxysection{\texorpdfstring{Running the time-\/integration}{Running the time-integration}}\label{index_start_run}
+Before starting the time-\/integration we create an output directory and open a trace file that we shall use to record the displacements of the control points selected earlier.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_run====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Run\ the\ problem:\ Pass\ number\ of\ timesteps\ to\ be\ performed.}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}{DiskOscillationProblem<ELEMENT>::run}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}[100];\ \ \ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+
+\end{DoxyCodeInclude}
+ Next, we initialise the global {\ttfamily Time} object so that the initial condition is assigned at $ t= 1 $, and set the timestep for the time integration.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time0}}=1.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_pt}}()-\/>time()=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time0}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dt}}=0.01;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_pt}}()-\/>initialise\_dt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dt}});}
+
+\end{DoxyCodeInclude}
+ We choose the amplitude of the oscillation and pass it and the value of Poisson\textquotesingle{}s ratio to the constructor of the {\ttfamily Geom\+Object} that specifies the initial condition.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ geometric\ object\ that\ specifies\ the\ initial\ conditions:}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Amplitude\ of\ the\ oscillation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}}=0.005;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ GeomObject}}
+\DoxyCodeLine{\ IC\_geom\_object\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAxisymOscillatingDisk}{AxisymOscillatingDisk}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ampl}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}());\ }
+
+\end{DoxyCodeInclude}
+ To assign the initial conditions, we create a {\ttfamily Solid\+Initial\+Condition} object from the {\ttfamily Geom\+Object} and call the helper function {\ttfamily set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which assigns the (Newmark) history values of the nodal positions to be consistent with the current motion of the {\ttfamily Axisym\+Oscillation\+Disk}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Turn\ into\ object\ that\ specifies\ the\ initial\ conditions:}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidInitialCondition}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{IC\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidInitialCondition}}(IC\_geom\_object\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ initial\ condition\ }}
+\DoxyCodeLine{\ SolidMesh::Solid\_IC\_problem.set\_newmark\_initial\_condition\_consistently(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{this},mesh\_pt(),\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}(),\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{IC\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dt}},}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{Global\_Physical\_Variables::multiplier}});\ }
+
+\end{DoxyCodeInclude}
+ Finally, we document the initial condition and start the timestepping loop.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ initial\ state}}
+\DoxyCodeLine{\ doc\_solution(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsteady\_newton\_solve}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dt}});}
+\DoxyCodeLine{\ \ \ doc\_solution(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ run}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comex}
+\hypertarget{index_higher_modes}{}\doxysubsection{\texorpdfstring{Higher modes}{Higher modes}}\label{index_higher_modes}
+In the constructor of the {\ttfamily Axisym\+Oscillation\+Disk} we used an initial guess of $ \omega=2 $ for the eigenfrequency. With this initial guess the Newton iteration converges to the first eigenfrequency with a period of $ T=2.96. $ The first eigenmode is relatively smooth and therefore easily resolved on a coarse mesh. Explore the system\textquotesingle{}s higher eigenmodes by specifying larger initial guesses for $ \omega  $. For instance, specifying an initial guess of $ \omega=4 $ the Newton iteration converges to an eigenmode with a period of $ 0.297. $ You will need much finer meshes and smaller timesteps to accurately resolve these oscillations. This is because the Newmark scheme does not have any dissipation. This implies that any spurious features that are generated by under-\/resolved computations persist indefinitely.\hypertarget{index_newmark_ic}{}\doxysubsection{\texorpdfstring{Assignment of history values for the Newmark timestepper}{Assignment of history values for the Newmark timestepper}}\label{index_newmark_ic}
+We commented \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ elsewhere}} that, even though the mathematical initial value problem only requires the specification of the initial position and the velocity, the Newmark timestepper requires assignments for the initial positions and for {\itshape two} history values, representing the discrete velocities and accelerations. We refer to the relevant section in the \href{../../../solid/solid_theory/html/index.html\#Solid_IC}{\texttt{ Solid Mechanics Tutorial}} for a discussion of the automatic assignment of these history values for solid mechanics problems.
+
+We note that the function {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+IC\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which may be used to assign the history values, requires the specification of the product of the (possibly spatially-\/varying) "{}multiplier"{} $\Gamma \Lambda^2 $ -- the product of the growth factor and the timescale ratio -- via a function pointer. If this function pointer is not specified, it is assumed that the product of these two quantities is equal to one -- appropriate for a case without growth and when time is non-\/dimensionalised on the system\textquotesingle{}s intrinsic timescale.
+
+If the "{}multiplier"{} is not (or wrongly) specified, the assignment of the history values will be incorrect and {\ttfamily oomph-\/lib} will issue a suitable warning if the library is compiled with the {\ttfamily PARANOID} flag. You should experiment with this by removing the function pointer in the call to {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+IC\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/disk_oscillation/}{\texttt{ demo\+\_\+drivers/solid/disk\+\_\+oscillation/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ demo\+\_\+drivers/solid/disk\+\_\+oscillation/disk\+\_\+oscillation.\+cc }} \end{center} 
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

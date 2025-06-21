@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: &quot;Action&quot; functions in oomph-lib&#39;s black-box Newton solver</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">"Action" functions in oomph-lib's black-box Newton solver </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><code>oomph-lib's</code> <code>Problem</code> class provides a black-box Newton solver, <br  />
+ <code>Problem::newton_solve()</code>, which allows the driver code to be as compact as this: </p><div class="fragment"><div class="line">main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// Create the problem object</span></div>
+<div class="line">  MyProblem problem;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem, using oomph-lib&#39;s default Newton solver</span></div>
+<div class="line">  problem.newton_solve();</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>While the availability of a black-box Newton solver is helpful, it is sometimes necessary to interact with the solution process, e.g. to perform certain additional tasks during the Newton iteration, or to analyse the convergence (or divergence!) of the iteration in more detail. For this purpose <code>oomph-lib's</code> <code>Problem</code> class has a number of empty virtual member functions that are executed at key stages of the Newton iteration. Two of these functions (<code>Problem::actions_before_newton_solve()</code> and <code>Problem::actions_after_newton_solve()</code> ) are pure virtual functions that must be implemented in every specific Problem, though they may, of course, be implemented as empty functions. Other functions may be overloaded to provide more detailed control.</p>
+<hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h1><a class="anchor" id="newton_solve"></a>
+Problem::newton_solve()</h1>
+<p>The following table lists the main steps performed by <code>oomph-lib's</code> Newton solver and indicates at which point the various "action" functions are executed.</p>
+<table class="doxtable">
+<tr>
+<td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right. 
+\]" src="form_0.png" width="3" height="3"/>
+</p>
+  </td><td><b>SEQUENCE OF MATHEMATICAL STEPS</b>  </td><td><b>SEQUENCE OF FUNCTION CALLS / KEY CONTROL PARAMETERS</b>   </td></tr>
+<tr>
+<td><b>Step 1:</b> Perform actions before solve.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_before_newton_solve();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 2:</b> Initialise counter for number of Newton iterations.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+c=0
+\]" src="form_2.png" width="29" height="9"/>
+</p>
+  </td><td><div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> count=0;</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td colspan="3"><center><b>Start loop over Newton iterations</b></center>   </td></tr>
+<tr>
+<td><b>Step 3:</b> Perform actions before the next Newton step  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm}\right.
+\]" src="form_3.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_before_newton_step();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td colspan="3"><center> <b>Only during the first Newton step:</b> </center>  </td></tr>
+<tr>
+<td style="padding-left: 30px;
+border-left: 3px solid grey;"><b>Step 4a:</b> Perform actions before Newton convergence check  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_before_newton_convergence_check();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td style="padding-left: 30px;
+border-left: 3px solid grey;"><b>Step 4b:</b> Compute residual vector  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\cal R}_i = {\cal R}_i\left(U_1,...,U_{N}\right) 
+\mbox{\ \ \ \  for $i=1,...,N$}
+\]" src="form_4.png" width="209" height="14"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Vector&lt;double&gt; residuals;</div>
+<div class="line">Problem::get_residuals(residuals); </div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td style="padding-left: 30px;
+border-left: 3px solid grey;"><b>Step 4c:</b> Convergence check. If converged go to <b>Step 13</b>  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{If $\max_i |{\cal R}_i| &lt; {\tt tol} \Longrightarrow $
+converged.}
+\]" src="form_5.png" width="185" height="14"/>
+</p>
+  </td><td><div class="fragment"><div class="line">...</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check convergence</span></div>
+<div class="line">if (max_res&lt;Problem::Newton_solver_tolerance)</div>
+<div class="line">{</div>
+<div class="line">   ...</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">... </div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td colspan="3" style="height:31px;"></td></tr>
+<tr>
+<td><b>Step 5:</b> Check if maximum residual or number of iterations exceed their maxima.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{If \ \ }
+\left\{
+\begin{array}{c}
+c &gt; {\tt Max\_newton\_iterations} \\
+\mbox{ or } \\ 
+\max_i |{\cal R}_i| &gt; {\tt Max\_residuals}
+\end{array}
+\right\} 
+\Longrightarrow \mbox{diverged.}
+\]" src="form_6.png" width="289" height="46"/>
+</p>
+  </td><td><div class="fragment"><div class="line">...</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check divergence/non-convergence</span></div>
+<div class="line">if ((max_res&gt;Problem::Max_residuals) ||</div>
+<div class="line">    (count == Problem::Max_newton_iterations))</div>
+<div class="line">{</div>
+<div class="line">   ...</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Throw an error</span></div>
+<div class="line">   <span class="keywordflow">throw</span> NewtonSolverError(count,max_res);</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">... </div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 6:</b> Solve linear system for correction of unknowns  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\begin{array}{l}
+\mbox{Solve} \\
+\\ 
+\hspace{1cm}\sum_{j=1}^N {\cal J}_{ij} \ \delta U_j = {\cal R}_i
+\mbox{\ \ \ (for $i=1,...,N$)} \\
+\\
+\mbox{for  $\delta U_j$ \ \ ($j=1,...,N$).} \\
+\\
+\mbox{Here the Jacobian matrix is given by} \\
+\\
+\hspace{1cm}{\cal J}_{ij} = \frac{\partial {\cal R}_i}{\partial U_j}
+\mbox{\ \ \ (for $i,j=1,...,N$)} \\
+\end{array}
+\]" src="form_7.png" width="241" height="139"/>
+</p>
+  </td><td><div class="fragment"><div class="line"><span class="comment">// Use the linear solver specified by </span></div>
+<div class="line"><span class="comment">// Problem::linear_solver_pt() to assemble</span></div>
+<div class="line"><span class="comment">// and solve the linear system.</span></div>
+<div class="line">...</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 7:</b> Apply the corrections to the solution  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U_i := U_i - \delta U_i
+\mbox{\ \ \ (for $i=1,...,N$)} \\
+\]" src="form_8.png" width="179" height="14"/>
+</p>
+  </td><td><div class="fragment"><div class="line"><span class="comment">// Update the unknowns</span></div>
+<div class="line">...</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 8:</b> Perform actions after Newton step  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_after_newton_step();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 9:</b> Increment counter for number of Newton iterations  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+c:=c+1
+\]" src="form_9.png" width="51" height="10"/>
+</p>
+  </td><td><div class="fragment"><div class="line">count++;</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 10:</b> Perform actions before Newton convergence check  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_before_newton_convergence_check();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 11:</b> Compute residual vector  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\cal R}_i = {\cal R}_i\left(U_1,...,U_{N}\right) 
+\mbox{\ \ \ \  for $i=1,...,N$}
+\]" src="form_4.png" width="209" height="14"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Vector&lt;double&gt; residuals;</div>
+<div class="line">Problem::get_residuals(residuals); </div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 12:</b> Convergence check. If converged go to <b>Step 13</b>, else go to <b>Step 3</b>.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{If $\max_i |{\cal R}_i| &lt; {\tt tol} \Longrightarrow$
+converged.}
+\]" src="form_10.png" width="185" height="14"/>
+</p>
+  </td><td><div class="fragment"><div class="line">...</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Check convergence</span></div>
+<div class="line">if (max_res&lt;Problem::Newton_solver_tolerance)</div>
+<div class="line">{</div>
+<div class="line">   ...</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">... </div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td colspan="3"><center><b>End loop over Newton iterations</b></center>   </td></tr>
+<tr>
+<td><b>Step 13:</b> Converged. Perform actions after solve.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_after_newton_solve();</div>
+</div><!-- fragment -->   </td></tr>
+</table>
+<hr  />
+<p> <br  />
+ </p><hr  />
+<p> <br  />
+</p>
+<p>The function <code>Problem::actions_before_newton_solve()</code> is often used to update boundary conditions when performing parameter studies in which these change; <code>Problem::actions_after_newton_solve()</code> may be used to automatically perform any post-processing when a solution has been obtained. The function <code>Problem::actions_before_newton_convergence_check()</code> makes it possible to update any "dependent" problem parameters, i.e. parameters that depend on one or more of the unknowns in the problem but are not updated automatically when the unknown is changed. This arises most frequently in free-boundary problems in which the position of the nodes in the "bulk" mesh is determined by an algebraic node update procedure. When the Newton method updates the <code>Data</code> values that determine the shape of the domain boundary in Step 7, the nodal positions themselves are not updated automatically unless the node update function is executed in <code>Problem::actions_before_newton_convergence_check()</code>. See the discussion of the <a href="../../interaction/macro_element_free_boundary_poisson/html/index.html">free-boundary Poisson problem</a> for an example of its use.</p>
+<hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h1><a class="anchor" id="opt"></a>
+Optimisation for linear problems</h1>
+<p>Recall that, by default, <code>oomph-lib</code> regards all problems as nonlinear. Provided a good initial guess for the unknowns is available, the Newton solver will converge quadratically towards the solution. Within this framework, linear problems are simply special cases for which the Newton iteration converges in one step. However, if the problem is known to be linear, a few of the steps in the generic Newton iteration are unnecessary. For instance, it is not necessary to check the residual before or after the Newton step as we know that the exact solution will have been obtained (modulo roundoff errors) after step 7. The computation of the global residual vectors in steps 4 and 11 (which require a finite amount of cpu time) are therefore superfluous and are omitted if the "user" declares a problem as linear by setting the flag </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> Problem::Problem_is_nonlinear</div>
+</div><!-- fragment --><p> which is initialised to <code>true</code> in the constructor of the <code>Problem</code> base class to <code>false</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_newton_solve"></a>
+Problem::unsteady_newton_solve(...)</h1>
+<p>The following table lists the main steps performed by <code>oomph-lib's</code> unsteady Newton solver and indicates at which point the various "action" functions are executed. The arguments passed to the function are the value of the timestep <code>dt</code> and a boolean flag <code>shift_values</code> which indicates whether or not history values are to be shifted.</p>
+<table class="doxtable">
+<tr>
+<td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right. 
+\]" src="form_0.png" width="3" height="3"/>
+</p>
+  </td><td><b>SEQUENCE OF MATHEMATICAL STEPS</b>  </td><td><b>SEQUENCE OF FUNCTION CALLS / KEY CONTROL PARAMETERS</b>   </td></tr>
+<tr>
+<td><b>Step 1:</b> Perform actions before implicit timestep.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_before_implicit_timestep();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 2:</b> Shift time values and dts, according to control flag.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line"><span class="keywordflow">if</span>(shift_values) { shift_time_values(); }</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 3:</b> Advance global time and set current value of dt.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ t:=t+dt \]" src="form_11.png" width="56" height="11"/>
+</p>
+  </td><td><div class="fragment"><div class="line">time_pt()-&gt;time()+=dt;</div>
+<div class="line">time_pt()-&gt;dt()=dt;</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 4:</b> Loop over all timesteppers and set weights.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line"><span class="keywordflow">for</span>(...)</div>
+<div class="line">{</div>
+<div class="line"> time_stepper_pt(i)-&gt;set_weights();</div>
+<div class="line">}</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 5:</b> Solve the non-linear problem for this timestep with Newton's method.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::newton_solve();</div>
+</div><!-- fragment -->   </td></tr>
+<tr>
+<td><b>Step 6:</b> Perform actions after implicit timestep.  </td><td><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. . \hspace{6cm} \right.
+\]" src="form_1.png" width="3" height="3"/>
+</p>
+  </td><td><div class="fragment"><div class="line">Problem::actions_after_implicit_timestep();</div>
+</div><!-- fragment -->   </td></tr>
+</table>
+<hr  />
+ </div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:22:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

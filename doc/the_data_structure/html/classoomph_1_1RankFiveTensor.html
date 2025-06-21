@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RankFiveTensor&lt; T &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1RankFiveTensor-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RankFiveTensor&lt; T &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A Rank 5 Tensor class.  
+ <a href="classoomph_1_1RankFiveTensor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="matrices_8h_source.html">matrices.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a388a9f191189d174e521d422e3bc44cd" id="r_a388a9f191189d174e521d422e3bc44cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a388a9f191189d174e521d422e3bc44cd">RankFiveTensor</a> ()</td></tr>
+<tr class="memdesc:a388a9f191189d174e521d422e3bc44cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:a388a9f191189d174e521d422e3bc44cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17aa636c6c8b4aa80ff4e168bca1881b" id="r_a17aa636c6c8b4aa80ff4e168bca1881b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a17aa636c6c8b4aa80ff4e168bca1881b">RankFiveTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_tensor</a>)</td></tr>
+<tr class="memdesc:a17aa636c6c8b4aa80ff4e168bca1881b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor: Deep copy.  <br /></td></tr>
+<tr class="separator:a17aa636c6c8b4aa80ff4e168bca1881b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20c271491dbce39872a9244a8d9711bf" id="r_a20c271491dbce39872a9244a8d9711bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a20c271491dbce39872a9244a8d9711bf">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">source_tensor</a>)</td></tr>
+<tr class="memdesc:a20c271491dbce39872a9244a8d9711bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignement.  <br /></td></tr>
+<tr class="separator:a20c271491dbce39872a9244a8d9711bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb5f83bfa8237882705e16ca1fbd04b" id="r_a2fb5f83bfa8237882705e16ca1fbd04b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a2fb5f83bfa8237882705e16ca1fbd04b">RankFiveTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:a2fb5f83bfa8237882705e16ca1fbd04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">One parameter constructor produces a nxnxnxnxn tensor.  <br /></td></tr>
+<tr class="separator:a2fb5f83bfa8237882705e16ca1fbd04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e765aecc61bca8ad9742e07822c54f" id="r_af7e765aecc61bca8ad9742e07822c54f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#af7e765aecc61bca8ad9742e07822c54f">RankFiveTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index2</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index3</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index4</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index5</a>)</td></tr>
+<tr class="memdesc:af7e765aecc61bca8ad9742e07822c54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four parameter constructor, general non-square tensor.  <br /></td></tr>
+<tr class="separator:af7e765aecc61bca8ad9742e07822c54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ebab81e4e9f7fdd193f59a4858930c" id="r_a79ebab81e4e9f7fdd193f59a4858930c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a79ebab81e4e9f7fdd193f59a4858930c">RankFiveTensor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index2</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index3</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index4</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index5</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_val</a>)</td></tr>
+<tr class="memdesc:a79ebab81e4e9f7fdd193f59a4858930c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Four parameter constructor, general non-square tensor.  <br /></td></tr>
+<tr class="separator:a79ebab81e4e9f7fdd193f59a4858930c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee507ed9367b053bcf538b3eaaf62d03" id="r_aee507ed9367b053bcf538b3eaaf62d03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aee507ed9367b053bcf538b3eaaf62d03">~RankFiveTensor</a> ()</td></tr>
+<tr class="memdesc:aee507ed9367b053bcf538b3eaaf62d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: delete the pointers.  <br /></td></tr>
+<tr class="separator:aee507ed9367b053bcf538b3eaaf62d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d0f38a3627c9d07dbf1106a26f61578" id="r_a8d0f38a3627c9d07dbf1106a26f61578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a8d0f38a3627c9d07dbf1106a26f61578">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a>)</td></tr>
+<tr class="memdesc:a8d0f38a3627c9d07dbf1106a26f61578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a square nxnxnxn tensor.  <br /></td></tr>
+<tr class="separator:a8d0f38a3627c9d07dbf1106a26f61578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd04cd2a29fb7b8c41f5300200813e1" id="r_afdd04cd2a29fb7b8c41f5300200813e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#afdd04cd2a29fb7b8c41f5300200813e1">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index2</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index3</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index4</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index5</a>)</td></tr>
+<tr class="memdesc:afdd04cd2a29fb7b8c41f5300200813e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a general tensor.  <br /></td></tr>
+<tr class="separator:afdd04cd2a29fb7b8c41f5300200813e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80eeaef66e9252fa5d1d7031e4ec402c" id="r_a80eeaef66e9252fa5d1d7031e4ec402c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a80eeaef66e9252fa5d1d7031e4ec402c">resize</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index2</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index3</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index4</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_index5</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>)</td></tr>
+<tr class="memdesc:a80eeaef66e9252fa5d1d7031e4ec402c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize to a general tensor.  <br /></td></tr>
+<tr class="separator:a80eeaef66e9252fa5d1d7031e4ec402c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fbc9fc71b68eec0fa4c00d9ad663b6" id="r_ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ad3fbc9fc71b68eec0fa4c00d9ad663b6">initialise</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">val</a>)</td></tr>
+<tr class="memdesc:ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise all values in the tensor to val.  <br /></td></tr>
+<tr class="separator:ad3fbc9fc71b68eec0fa4c00d9ad663b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f5651447193b2c7e669beff9146cc9" id="r_ad9f5651447193b2c7e669beff9146cc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ad9f5651447193b2c7e669beff9146cc9">nindex1</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ad9f5651447193b2c7e669beff9146cc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 1 of the tensor.  <br /></td></tr>
+<tr class="separator:ad9f5651447193b2c7e669beff9146cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d2a0f9ffc41e75cf5fffa9cfd601fd" id="r_a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a92d2a0f9ffc41e75cf5fffa9cfd601fd">nindex2</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 2 of the tensor.  <br /></td></tr>
+<tr class="separator:a92d2a0f9ffc41e75cf5fffa9cfd601fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a720c024bccf0b33f2f3bd6367611a4fa" id="r_a720c024bccf0b33f2f3bd6367611a4fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a720c024bccf0b33f2f3bd6367611a4fa">nindex3</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a720c024bccf0b33f2f3bd6367611a4fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 3 of the tensor.  <br /></td></tr>
+<tr class="separator:a720c024bccf0b33f2f3bd6367611a4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f59dd13534545f9e2641dafee86bc27" id="r_a2f59dd13534545f9e2641dafee86bc27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a2f59dd13534545f9e2641dafee86bc27">nindex4</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a2f59dd13534545f9e2641dafee86bc27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 4 of the tensor.  <br /></td></tr>
+<tr class="separator:a2f59dd13534545f9e2641dafee86bc27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa880f750e9d2e2bf5ec5c41ad3241568" id="r_aa880f750e9d2e2bf5ec5c41ad3241568"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aa880f750e9d2e2bf5ec5c41ad3241568">nindex5</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa880f750e9d2e2bf5ec5c41ad3241568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the range of index 5 of the tensor.  <br /></td></tr>
+<tr class="separator:aa880f750e9d2e2bf5ec5c41ad3241568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4e20c4ddef857cad0ddf9e4de264ad4" id="r_aa4e20c4ddef857cad0ddf9e4de264ad4"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aa4e20c4ddef857cad0ddf9e4de264ad4">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">l</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>)</td></tr>
+<tr class="memdesc:aa4e20c4ddef857cad0ddf9e4de264ad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the round brackets to give access as a(i,j,k,l,m)  <br /></td></tr>
+<tr class="separator:aa4e20c4ddef857cad0ddf9e4de264ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2ef9d9bcc8103b2d60f768ffa60532" id="r_a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a0d2ef9d9bcc8103b2d60f768ffa60532">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">l</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload a const version for read-only access as a(i,j,k,l,m)  <br /></td></tr>
+<tr class="separator:a0d2ef9d9bcc8103b2d60f768ffa60532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75d42bf8529d20a18c573eb62aeffed1" id="r_a75d42bf8529d20a18c573eb62aeffed1"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a75d42bf8529d20a18c573eb62aeffed1">raw_direct_access</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:a75d42bf8529d20a18c573eb62aeffed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <br /></td></tr>
+<tr class="separator:a75d42bf8529d20a18c573eb62aeffed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de048a5cdd37e9f5266de9718548b61" id="r_a7de048a5cdd37e9f5266de9718548b61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a7de048a5cdd37e9f5266de9718548b61">raw_direct_access</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7de048a5cdd37e9f5266de9718548b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <br /></td></tr>
+<tr class="separator:a7de048a5cdd37e9f5266de9718548b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3bd11afa49e36ff28c1d4968796f5a3" id="r_ab3bd11afa49e36ff28c1d4968796f5a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ab3bd11afa49e36ff28c1d4968796f5a3">offset</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab3bd11afa49e36ff28c1d4968796f5a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caculate the offset in flat-packed Cy-style, column-major format, required for a given i,j,k. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems.  <br /></td></tr>
+<tr class="separator:ab3bd11afa49e36ff28c1d4968796f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8fce9375f99c153e3d5b91193996dad8" id="r_a8fce9375f99c153e3d5b91193996dad8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a8fce9375f99c153e3d5b91193996dad8">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">k</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">l</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">m</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8fce9375f99c153e3d5b91193996dad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html" title="An OomphLibError object which should be thrown when an run-time error is encountered....">OomphLibError</a></code>.  <br /></td></tr>
+<tr class="separator:a8fce9375f99c153e3d5b91193996dad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae93e781da0ba64c2c5403099dc75dd3d" id="r_ae93e781da0ba64c2c5403099dc75dd3d"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ae93e781da0ba64c2c5403099dc75dd3d">Tensordata</a></td></tr>
+<tr class="memdesc:ae93e781da0ba64c2c5403099dc75dd3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private internal representation as pointer to data.  <br /></td></tr>
+<tr class="separator:ae93e781da0ba64c2c5403099dc75dd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeea12f3e80605e2c7b6b4a8ec47bf91c" id="r_aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#aeea12f3e80605e2c7b6b4a8ec47bf91c">N</a></td></tr>
+<tr class="memdesc:aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">1st Tensor dimension  <br /></td></tr>
+<tr class="separator:aeea12f3e80605e2c7b6b4a8ec47bf91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240c4e62ffa0dd3e5dfc3b0063f94c7f" id="r_a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a240c4e62ffa0dd3e5dfc3b0063f94c7f">M</a></td></tr>
+<tr class="memdesc:a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd Tensor dimension  <br /></td></tr>
+<tr class="separator:a240c4e62ffa0dd3e5dfc3b0063f94c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23d40bd6af9279e1e35362249c32855" id="r_ab23d40bd6af9279e1e35362249c32855"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#ab23d40bd6af9279e1e35362249c32855">P</a></td></tr>
+<tr class="memdesc:ab23d40bd6af9279e1e35362249c32855"><td class="mdescLeft">&#160;</td><td class="mdescRight">3rd Tensor dimension  <br /></td></tr>
+<tr class="separator:ab23d40bd6af9279e1e35362249c32855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68d3c3387b64dc8124cb0800ab4814a5" id="r_a68d3c3387b64dc8124cb0800ab4814a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a68d3c3387b64dc8124cb0800ab4814a5">Q</a></td></tr>
+<tr class="memdesc:a68d3c3387b64dc8124cb0800ab4814a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">4th Tensor dimension  <br /></td></tr>
+<tr class="separator:a68d3c3387b64dc8124cb0800ab4814a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c348e8860783caf59103dd86f38d1a6" id="r_a0c348e8860783caf59103dd86f38d1a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RankFiveTensor.html#a0c348e8860783caf59103dd86f38d1a6">R</a></td></tr>
+<tr class="memdesc:a0c348e8860783caf59103dd86f38d1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">5th Tensor dimension  <br /></td></tr>
+<tr class="separator:a0c348e8860783caf59103dd86f38d1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T&gt;<br />
+class oomph::RankFiveTensor&lt; T &gt;</div><p>A Rank 5 Tensor class. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02112">2112</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a388a9f191189d174e521d422e3bc44cd" name="a388a9f191189d174e521d422e3bc44cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388a9f191189d174e521d422e3bc44cd">&#9670;&#160;</a></span>RankFiveTensor() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::RankFiveTensor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02195">2195</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+</div>
+</div>
+<a id="a17aa636c6c8b4aa80ff4e168bca1881b" name="a17aa636c6c8b4aa80ff4e168bca1881b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17aa636c6c8b4aa80ff4e168bca1881b">&#9670;&#160;</a></span>RankFiveTensor() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::RankFiveTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor: Deep copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02198">2198</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a2fb5f83bfa8237882705e16ca1fbd04b" name="a2fb5f83bfa8237882705e16ca1fbd04b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb5f83bfa8237882705e16ca1fbd04b">&#9670;&#160;</a></span>RankFiveTensor() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::RankFiveTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>One parameter constructor produces a nxnxnxnxn tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02272">2272</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="af7e765aecc61bca8ad9742e07822c54f" name="af7e765aecc61bca8ad9742e07822c54f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7e765aecc61bca8ad9742e07822c54f">&#9670;&#160;</a></span>RankFiveTensor() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::RankFiveTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Four parameter constructor, general non-square tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02289">2289</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a79ebab81e4e9f7fdd193f59a4858930c" name="a79ebab81e4e9f7fdd193f59a4858930c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ebab81e4e9f7fdd193f59a4858930c">&#9670;&#160;</a></span>RankFiveTensor() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::RankFiveTensor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>initial_val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Four parameter constructor, general non-square tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02311">2311</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="aee507ed9367b053bcf538b3eaaf62d03" name="aee507ed9367b053bcf538b3eaaf62d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee507ed9367b053bcf538b3eaaf62d03">&#9670;&#160;</a></span>~RankFiveTensor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::~<a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: delete the pointers. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02331">2331</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad3fbc9fc71b68eec0fa4c00d9ad663b6" name="ad3fbc9fc71b68eec0fa4c00d9ad663b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3fbc9fc71b68eec0fa4c00d9ad663b6">&#9670;&#160;</a></span>initialise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::initialise </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise all values in the tensor to val. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02477">2477</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ad9f5651447193b2c7e669beff9146cc9" name="ad9f5651447193b2c7e669beff9146cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f5651447193b2c7e669beff9146cc9">&#9670;&#160;</a></span>nindex1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 1 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02486">2486</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>.</p>
+
+</div>
+</div>
+<a id="a92d2a0f9ffc41e75cf5fffa9cfd601fd" name="a92d2a0f9ffc41e75cf5fffa9cfd601fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d2a0f9ffc41e75cf5fffa9cfd601fd">&#9670;&#160;</a></span>nindex2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 2 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02492">2492</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>.</p>
+
+</div>
+</div>
+<a id="a720c024bccf0b33f2f3bd6367611a4fa" name="a720c024bccf0b33f2f3bd6367611a4fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720c024bccf0b33f2f3bd6367611a4fa">&#9670;&#160;</a></span>nindex3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex3 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 3 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02498">2498</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>.</p>
+
+</div>
+</div>
+<a id="a2f59dd13534545f9e2641dafee86bc27" name="a2f59dd13534545f9e2641dafee86bc27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f59dd13534545f9e2641dafee86bc27">&#9670;&#160;</a></span>nindex4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex4 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 4 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02504">2504</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>.</p>
+
+</div>
+</div>
+<a id="aa880f750e9d2e2bf5ec5c41ad3241568" name="aa880f750e9d2e2bf5ec5c41ad3241568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa880f750e9d2e2bf5ec5c41ad3241568">&#9670;&#160;</a></span>nindex5()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::nindex5 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the range of index 5 of the tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02510">2510</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+</div>
+</div>
+<a id="ab3bd11afa49e36ff28c1d4968796f5a3" name="ab3bd11afa49e36ff28c1d4968796f5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3bd11afa49e36ff28c1d4968796f5a3">&#9670;&#160;</a></span>offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Caculate the offset in flat-packed Cy-style, column-major format, required for a given i,j,k. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02564">2564</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, and <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+</div>
+</div>
+<a id="aa4e20c4ddef857cad0ddf9e4de264ad4" name="aa4e20c4ddef857cad0ddf9e4de264ad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e20c4ddef857cad0ddf9e4de264ad4">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the round brackets to give access as a(i,j,k,l,m) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02516">2516</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a0d2ef9d9bcc8103b2d60f768ffa60532" name="a0d2ef9d9bcc8103b2d60f768ffa60532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2ef9d9bcc8103b2d60f768ffa60532">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload a const version for read-only access as a(i,j,k,l,m) </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02529">2529</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a20c271491dbce39872a9244a8d9711bf" name="a20c271491dbce39872a9244a8d9711bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20c271491dbce39872a9244a8d9711bf">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a> &amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">RankFiveTensor</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>source_tensor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignement. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02231">2231</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02338">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a8fce9375f99c153e3d5b91193996dad8" name="a8fce9375f99c153e3d5b91193996dad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fce9375f99c153e3d5b91193996dad8">&#9670;&#160;</a></span>range_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::range_check </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an <code><a class="el" href="classoomph_1_1OomphLibError.html" title="An OomphLibError object which should be thrown when an run-time error is encountered....">OomphLibError</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02135">2135</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, and <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, and <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>.</p>
+
+</div>
+</div>
+<a id="a75d42bf8529d20a18c573eb62aeffed1" name="a75d42bf8529d20a18c573eb62aeffed1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75d42bf8529d20a18c573eb62aeffed1">&#9670;&#160;</a></span>raw_direct_access() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::raw_direct_access </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02545">2545</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a7de048a5cdd37e9f5266de9718548b61" name="a7de048a5cdd37e9f5266de9718548b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de048a5cdd37e9f5266de9718548b61">&#9670;&#160;</a></span>raw_direct_access() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp; <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::raw_direct_access </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Direct access to internal storage of data in flat-packed C-style column-major format. WARNING: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02555">2555</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a8d0f38a3627c9d07dbf1106a26f61578" name="a8d0f38a3627c9d07dbf1106a26f61578"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0f38a3627c9d07dbf1106a26f61578">&#9670;&#160;</a></span>resize() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a square nxnxnxn tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02338">2338</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="matrices_8h_source.html#l02338">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, and <a class="el" href="matrices_8h_source.html#l02338">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="afdd04cd2a29fb7b8c41f5300200813e1" name="afdd04cd2a29fb7b8c41f5300200813e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdd04cd2a29fb7b8c41f5300200813e1">&#9670;&#160;</a></span>resize() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a general tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02344">2344</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<a id="a80eeaef66e9252fa5d1d7031e4ec402c" name="a80eeaef66e9252fa5d1d7031e4ec402c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80eeaef66e9252fa5d1d7031e4ec402c">&#9670;&#160;</a></span>resize() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_index5</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> T &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resize to a general tensor. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02410">2410</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02122">oomph::RankFiveTensor&lt; T &gt;::M</a>, <a class="el" href="matrices_8h_source.html#l02119">oomph::RankFiveTensor&lt; T &gt;::N</a>, <a class="el" href="matrices_8h_source.html#l02125">oomph::RankFiveTensor&lt; T &gt;::P</a>, <a class="el" href="matrices_8h_source.html#l02128">oomph::RankFiveTensor&lt; T &gt;::Q</a>, <a class="el" href="matrices_8h_source.html#l02131">oomph::RankFiveTensor&lt; T &gt;::R</a>, and <a class="el" href="matrices_8h_source.html#l02116">oomph::RankFiveTensor&lt; T &gt;::Tensordata</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a240c4e62ffa0dd3e5dfc3b0063f94c7f" name="a240c4e62ffa0dd3e5dfc3b0063f94c7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a240c4e62ffa0dd3e5dfc3b0063f94c7f">&#9670;&#160;</a></span>M</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::M</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>2nd Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02122">2122</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02492">oomph::RankFiveTensor&lt; T &gt;::nindex2()</a>, <a class="el" href="matrices_8h_source.html#l02564">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="aeea12f3e80605e2c7b6b4a8ec47bf91c" name="aeea12f3e80605e2c7b6b4a8ec47bf91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeea12f3e80605e2c7b6b4a8ec47bf91c">&#9670;&#160;</a></span>N</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::N</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>1st Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02119">2119</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02486">oomph::RankFiveTensor&lt; T &gt;::nindex1()</a>, <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ab23d40bd6af9279e1e35362249c32855" name="ab23d40bd6af9279e1e35362249c32855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab23d40bd6af9279e1e35362249c32855">&#9670;&#160;</a></span>P</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::P</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>3rd Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02125">2125</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02498">oomph::RankFiveTensor&lt; T &gt;::nindex3()</a>, <a class="el" href="matrices_8h_source.html#l02564">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a68d3c3387b64dc8124cb0800ab4814a5" name="a68d3c3387b64dc8124cb0800ab4814a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68d3c3387b64dc8124cb0800ab4814a5">&#9670;&#160;</a></span>Q</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::Q</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>4th Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02128">2128</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02504">oomph::RankFiveTensor&lt; T &gt;::nindex4()</a>, <a class="el" href="matrices_8h_source.html#l02564">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="a0c348e8860783caf59103dd86f38d1a6" name="a0c348e8860783caf59103dd86f38d1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c348e8860783caf59103dd86f38d1a6">&#9670;&#160;</a></span>R</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::R</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>5th Tensor dimension </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02131">2131</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02510">oomph::RankFiveTensor&lt; T &gt;::nindex5()</a>, <a class="el" href="matrices_8h_source.html#l02564">oomph::RankFiveTensor&lt; T &gt;::offset()</a>, <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02231">oomph::RankFiveTensor&lt; T &gt;::operator=()</a>, <a class="el" href="matrices_8h_source.html#l02135">oomph::RankFiveTensor&lt; T &gt;::range_check()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>.</p>
+
+</div>
+</div>
+<a id="ae93e781da0ba64c2c5403099dc75dd3d" name="ae93e781da0ba64c2c5403099dc75dd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae93e781da0ba64c2c5403099dc75dd3d">&#9670;&#160;</a></span>Tensordata</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="classoomph_1_1RankFiveTensor.html">oomph::RankFiveTensor</a>&lt; T &gt;::Tensordata</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private internal representation as pointer to data. </p>
+
+<p class="definition">Definition at line <a class="el" href="matrices_8h_source.html#l02116">2116</a> of file <a class="el" href="matrices_8h_source.html">matrices.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="matrices_8h_source.html#l02477">oomph::RankFiveTensor&lt; T &gt;::initialise()</a>, <a class="el" href="matrices_8h_source.html#l02516">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02529">oomph::RankFiveTensor&lt; T &gt;::operator()()</a>, <a class="el" href="matrices_8h_source.html#l02198">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02272">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02289">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02311">oomph::RankFiveTensor&lt; T &gt;::RankFiveTensor()</a>, <a class="el" href="matrices_8h_source.html#l02545">oomph::RankFiveTensor&lt; T &gt;::raw_direct_access()</a>, <a class="el" href="matrices_8h_source.html#l02555">oomph::RankFiveTensor&lt; T &gt;::raw_direct_access()</a>, <a class="el" href="matrices_8h_source.html#l02344">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, <a class="el" href="matrices_8h_source.html#l02410">oomph::RankFiveTensor&lt; T &gt;::resize()</a>, and <a class="el" href="matrices_8h_source.html#l02331">oomph::RankFiveTensor&lt; T &gt;::~RankFiveTensor()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="matrices_8h_source.html">matrices.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:16:16
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

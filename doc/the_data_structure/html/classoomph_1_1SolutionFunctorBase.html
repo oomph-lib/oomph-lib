@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::SolutionFunctorBase Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1SolutionFunctorBase.html">SolutionFunctorBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1SolutionFunctorBase-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::SolutionFunctorBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Function base class for exact solutions/initial conditions/boundary conditions. This is needed so that we can have solutions that depend on problem parameters with resorting to global variables.  
+ <a href="classoomph_1_1SolutionFunctorBase.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::SolutionFunctorBase:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1SolutionFunctorBase.png" usemap="#oomph::SolutionFunctorBase_map" alt=""/>
+  <map id="oomph::SolutionFunctorBase_map" name="oomph::SolutionFunctorBase_map">
+<area href="classoomph_1_1SolutionFunctor.html" title="Function class for a simple function with no external parameters (just stores a function pointer,..." alt="oomph::SolutionFunctor" shape="rect" coords="0,56,172,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6da5b9aea59f09e01378860ff559c3bb" id="r_a6da5b9aea59f09e01378860ff559c3bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a6da5b9aea59f09e01378860ff559c3bb">TimeSpaceToDoubleFctPt</a>) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x)</td></tr>
+<tr class="memdesc:a6da5b9aea59f09e01378860ff559c3bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">General function of space and time which returns a double.  <br /></td></tr>
+<tr class="separator:a6da5b9aea59f09e01378860ff559c3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac78e613d81ff953916df7368c16b8360" id="r_ac78e613d81ff953916df7368c16b8360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#ac78e613d81ff953916df7368c16b8360">TimeSpaceToDoubleVectFctPt</a>) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x)</td></tr>
+<tr class="memdesc:ac78e613d81ff953916df7368c16b8360"><td class="mdescLeft">&#160;</td><td class="mdescRight">General function of space and time which returns a vector of doubles.  <br /></td></tr>
+<tr class="separator:ac78e613d81ff953916df7368c16b8360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea33a78d991c9e4eff2fe64fad34e95" id="r_a2ea33a78d991c9e4eff2fe64fad34e95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a2ea33a78d991c9e4eff2fe64fad34e95">TimeSpaceValueToDoubleVectFctPt</a>) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;u)</td></tr>
+<tr class="memdesc:a2ea33a78d991c9e4eff2fe64fad34e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">General function of time, space and a value vector which returns a vector of doubles.  <br /></td></tr>
+<tr class="separator:a2ea33a78d991c9e4eff2fe64fad34e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6c5ad348f7c2fa03ae7e9eaa845c6481" id="r_a6c5ad348f7c2fa03ae7e9eaa845c6481"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a6c5ad348f7c2fa03ae7e9eaa845c6481">~SolutionFunctorBase</a> ()</td></tr>
+<tr class="memdesc:a6c5ad348f7c2fa03ae7e9eaa845c6481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a6c5ad348f7c2fa03ae7e9eaa845c6481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00bb0d93c9513771ab08bf2ca4be27db" id="r_a00bb0d93c9513771ab08bf2ca4be27db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a00bb0d93c9513771ab08bf2ca4be27db">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> =0</td></tr>
+<tr class="memdesc:a00bb0d93c9513771ab08bf2ca4be27db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the function.  <br /></td></tr>
+<tr class="separator:a00bb0d93c9513771ab08bf2ca4be27db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a794f59127c33dec7e177aade170b3584" id="r_a794f59127c33dec7e177aade170b3584"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a794f59127c33dec7e177aade170b3584">derivative</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;u) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> =0</td></tr>
+<tr class="memdesc:a794f59127c33dec7e177aade170b3584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the derivative function.  <br /></td></tr>
+<tr class="separator:a794f59127c33dec7e177aade170b3584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53482fed2379500a8f279498aed07d56" id="r_a53482fed2379500a8f279498aed07d56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a53482fed2379500a8f279498aed07d56">jacobian</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;u, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;jacobian) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a53482fed2379500a8f279498aed07d56"><td class="mdescLeft">&#160;</td><td class="mdescRight">The derivatives of the derivative function with respect to u (note that this is not quite the jacobian of the residuals for an ODE problem defined by this solution: you also need the time derivative part there). Broken virtual function because not often needed.  <br /></td></tr>
+<tr class="separator:a53482fed2379500a8f279498aed07d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94ed993230c9b799ce6367b436e7e9e" id="r_af94ed993230c9b799ce6367b436e7e9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#af94ed993230c9b799ce6367b436e7e9e">have_jacobian</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:af94ed993230c9b799ce6367b436e7e9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is a jacobian function implemented?  <br /></td></tr>
+<tr class="separator:af94ed993230c9b799ce6367b436e7e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016f7f144cc563df9efb7d4679b18c46" id="r_a016f7f144cc563df9efb7d4679b18c46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolutionFunctorBase.html#a016f7f144cc563df9efb7d4679b18c46">initialise_from_problem</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt)</td></tr>
+<tr class="memdesc:a016f7f144cc563df9efb7d4679b18c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload to grab data from the problem.  <br /></td></tr>
+<tr class="separator:a016f7f144cc563df9efb7d4679b18c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Function base class for exact solutions/initial conditions/boundary conditions. This is needed so that we can have solutions that depend on problem parameters with resorting to global variables. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01118">1118</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a6da5b9aea59f09e01378860ff559c3bb" name="a6da5b9aea59f09e01378860ff559c3bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da5b9aea59f09e01378860ff559c3bb">&#9670;&#160;</a></span>TimeSpaceToDoubleFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>(* oomph::SolutionFunctorBase::TimeSpaceToDoubleFctPt) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>General function of space and time which returns a double. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01124">1124</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<a id="ac78e613d81ff953916df7368c16b8360" name="ac78e613d81ff953916df7368c16b8360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac78e613d81ff953916df7368c16b8360">&#9670;&#160;</a></span>TimeSpaceToDoubleVectFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;(* oomph::SolutionFunctorBase::TimeSpaceToDoubleVectFctPt) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>General function of space and time which returns a vector of doubles. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01128">1128</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<a id="a2ea33a78d991c9e4eff2fe64fad34e95" name="a2ea33a78d991c9e4eff2fe64fad34e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea33a78d991c9e4eff2fe64fad34e95">&#9670;&#160;</a></span>TimeSpaceValueToDoubleVectFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt;(* oomph::SolutionFunctorBase::TimeSpaceValueToDoubleVectFctPt) (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;x, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>General function of time, space and a value vector which returns a vector of doubles. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01133">1133</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6c5ad348f7c2fa03ae7e9eaa845c6481" name="a6c5ad348f7c2fa03ae7e9eaa845c6481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c5ad348f7c2fa03ae7e9eaa845c6481">&#9670;&#160;</a></span>~SolutionFunctorBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::SolutionFunctorBase::~SolutionFunctorBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01137">1137</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a794f59127c33dec7e177aade170b3584" name="a794f59127c33dec7e177aade170b3584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a794f59127c33dec7e177aade170b3584">&#9670;&#160;</a></span>derivative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; oomph::SolutionFunctorBase::derivative </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call the derivative function. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1SolutionFunctor.html#ad20676f44f5bcfb4f1b853ec52e69b08">oomph::SolutionFunctor</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ode__elements_8h_source.html#l00166">oomph::ODEElement::derivative_function()</a>.</p>
+
+</div>
+</div>
+<a id="af94ed993230c9b799ce6367b436e7e9e" name="af94ed993230c9b799ce6367b436e7e9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af94ed993230c9b799ce6367b436e7e9e">&#9670;&#160;</a></span>have_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::SolutionFunctorBase::have_jacobian </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is a jacobian function implemented? </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01163">1163</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ode__elements_8h_source.html#l00109">oomph::ODEElement::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a016f7f144cc563df9efb7d4679b18c46" name="a016f7f144cc563df9efb7d4679b18c46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a016f7f144cc563df9efb7d4679b18c46">&#9670;&#160;</a></span>initialise_from_problem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::SolutionFunctorBase::initialise_from_problem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload to grab data from the problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01169">1169</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<a id="a53482fed2379500a8f279498aed07d56" name="a53482fed2379500a8f279498aed07d56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53482fed2379500a8f279498aed07d56">&#9670;&#160;</a></span>jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::SolutionFunctorBase::jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The derivatives of the derivative function with respect to u (note that this is not quite the jacobian of the residuals for an ODE problem defined by this solution: you also need the time derivative part there). Broken virtual function because not often needed. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l01152">1152</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ode__elements_8h_source.html#l00109">oomph::ODEElement::fill_in_contribution_to_jacobian()</a>.</p>
+
+</div>
+</div>
+<a id="a00bb0d93c9513771ab08bf2ca4be27db" name="a00bb0d93c9513771ab08bf2ca4be27db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00bb0d93c9513771ab08bf2ca4be27db">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; oomph::SolutionFunctorBase::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call the function. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1SolutionFunctor.html#a91f54e36f56c6b430e55b94e9db35685">oomph::SolutionFunctor</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:28
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

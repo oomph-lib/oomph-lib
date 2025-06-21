@@ -1,0 +1,31 @@
+\doxysection{navier\+\_\+stokes\+\_\+preconditioners.\+h File Reference}
+\hypertarget{navier__stokes__preconditioners_8h}{}\label{navier__stokes__preconditioners_8h}\index{navier\_stokes\_preconditioners.h@{navier\_stokes\_preconditioners.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1FpPreconditionerAssemblyHandler}{oomph\+::\+Fp\+Preconditioner\+Assembly\+Handler}}
+\begin{DoxyCompactList}\small\item\em A class that is used to define the functions used to assemble the elemental contributions to the pressure advection diffusion problem used by the Fp preconditioner. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FpPressureAdvectionDiffusionProblem}{oomph\+::\+Fp\+Pressure\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Auxiliary \doxylink{classoomph_1_1Problem}{Problem} that can be used to assemble the pressure advection diffusion matrix needed by the Fp\+Preconditoner. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner}}
+\begin{DoxyCompactList}\small\item\em The least-\/squares commutator (LSC; formerly BFBT) Navier Stokes preconditioner. It uses blocks corresponding to the velocity and pressure unknowns, i.\+e. there are a total of 2x2 blocks, and all velocity components are treated as a single block of unknowns. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesExactPreconditioner}{oomph\+::\+Navier\+Stokes\+Exact\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The exact Navier Stokes preconditioner. This extracts 2x2 blocks (corresponding to the velocity and pressure unknowns) and uses these to build a single preconditioner matrix for testing purposes. Iterative solvers should converge in a single step if this is used. If it doesn\textquotesingle{}t something is wrong in the setup of the block matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation}{oomph\+::\+Pressure\+Advection\+Diffusion\+Validation}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for pressure advection diffusion problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a7bb38b47b4d4efe2e775baf918dda476}{oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::wind\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&wind)
+\begin{DoxyCompactList}\small\item\em Wind. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a4f01cf3a330e714439119ccd6e79f11e}{oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a5edd580baaf74648e888f4deff481218}{oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1PressureAdvectionDiffusionValidation_a704323835d1c48a60a83670d8694c938}{oomph\+::\+Pressure\+Advection\+Diffusion\+Validation\+::source\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{x\+\_\+vect}})
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,383 @@
+\doxysection{oomph\+::Distributable\+Linear\+Algebra\+Object Class Reference}
+\hypertarget{classoomph_1_1DistributableLinearAlgebraObject}{}\label{classoomph_1_1DistributableLinearAlgebraObject}\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+
+
+Base class for any linear algebra object that is distributable. Just contains storage for the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object and access functions.  
+
+
+
+
+{\ttfamily \#include $<$linear\+\_\+algebra\+\_\+distribution.\+h$>$}
+
+Inheritance diagram for oomph\+::Distributable\+Linear\+Algebra\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.524529cm]{classoomph_1_1DistributableLinearAlgebraObject}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a}{Distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for any linear algebra object that is distributable. Just contains storage for the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object and access functions. 
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00434}{434}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}\label{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}}
+\index{DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{DistributableLinearAlgebraObject()}{DistributableLinearAlgebraObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor -\/ create a distribution. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00438}{438}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}\label{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}}
+\index{DistributableLinearAlgebraObject@{DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{DistributableLinearAlgebraObject()}{DistributableLinearAlgebraObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}\label{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!````~DistributableLinearAlgebraObject@{\texorpdfstring{$\sim$}{\string~}DistributableLinearAlgebraObject}}
+\index{````~DistributableLinearAlgebraObject@{\texorpdfstring{$\sim$}{\string~}DistributableLinearAlgebraObject}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DistributableLinearAlgebraObject()}{\string~DistributableLinearAlgebraObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00451}{451}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}\label{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!build\_distribution@{build\_distribution}}
+\index{build\_distribution@{build\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{build\_distribution()}{build\_distribution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+setup the distribution of this distributable linear algebra object 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00514}{514}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}\label{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!build\_distribution@{build\_distribution}}
+\index{build\_distribution@{build\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{build\_distribution()}{build\_distribution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{dist\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+setup the distribution of this distributable linear algebra object 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{507}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l00059}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01353}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00323}{oomph\+::\+Double\+Multi\+Vector\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01286}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{double__vector_8h_source_l00167}{oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00043}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00415}{oomph\+::\+Inner\+Iteration\+Preconditioner$<$ SOLVER, PRECONDITIONER $>$\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00382}{oomph\+::\+Mumps\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00267}{oomph\+::\+Identity\+Preconditioner\+::setup()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00066}{oomph\+::\+Super\+LUPreconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00252}{oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00423}{oomph\+::\+Dense\+LU\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01078}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00323}{oomph\+::\+CG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00448}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00663}{oomph\+::\+GS$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00853}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01273}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01596}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00127}{oomph\+::\+HSL\+\_\+\+MA42\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00818}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00065}{oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01577}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01316}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}\label{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!clear\_distribution@{clear\_distribution}}
+\index{clear\_distribution@{clear\_distribution}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{clear\_distribution()}{clear\_distribution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+clear the distribution of this distributable linear algebra object 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{522}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00110}{oomph\+::\+Dense\+LU\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02709}{oomph\+::\+Super\+LUSolver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00387}{oomph\+::\+Double\+Multi\+Vector\+::clear()}}, \mbox{\hyperlink{double__vector_8h_source_l00142}{oomph\+::\+Double\+Vector\+::clear()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{oomph\+::\+CRDouble\+Matrix\+::clear()}}, and \mbox{\hyperlink{block__preconditioner_8h_source_l02159}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::clear\+\_\+block\+\_\+preconditioner\+\_\+base()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}\label{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distributed@{distributed}}
+\index{distributed@{distributed}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distributed()}{distributed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+distribution is serial or distributed 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{493}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00848}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00707}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00185}{oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01029}{oomph\+::\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{oomph\+::\+Double\+Multi\+Vector\+::dot()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{oomph\+::\+CRDouble\+Matrix\+::entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02187}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{oomph\+::\+CRDouble\+Matrix\+::get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{oomph\+::\+CRDouble\+Matrix\+::global\+\_\+matrix()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{oomph\+::\+Double\+Vector\+::max()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00241}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{oomph\+::\+Double\+Multi\+Vector\+::norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{oomph\+::\+Double\+Vector\+::output()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{oomph\+::\+CRDouble\+Matrix\+::redistribute()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{oomph\+::\+CRDouble\+Matrix\+::sort\+\_\+entries()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}\label{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distribution\_built@{distribution\_built}}
+\index{distribution\_built@{distribution\_built}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distribution\_built()}{distribution\_built()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{500}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02366}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+distributed()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{oomph\+::\+Double\+Multi\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{problem_8cc_source_l04042}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00550}{oomph\+::\+Double\+Vector\+::operator\texorpdfstring{$\ast$}{*}=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00642}{oomph\+::\+Double\+Multi\+Vector\+::operator\texorpdfstring{$\ast$}{*}=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{oomph\+::\+Double\+Vector\+::operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{oomph\+::\+Double\+Multi\+Vector\+::operator-\/=()}}, \mbox{\hyperlink{double__vector_8h_source_l00191}{oomph\+::\+Double\+Vector\+::set\+\_\+external\+\_\+values()}}, and \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}\label{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!distribution\_pt@{distribution\_pt}}
+\index{distribution\_pt@{distribution\_pt}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{distribution\_pt()}{distribution\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{457}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{oomph\+::\+CRDouble\+Matrix\+::add()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00644}{oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01736}{oomph\+::\+Augmented\+Problem\+GMRES\+::apply\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00115}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Apply\+Inverse()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{oomph\+::\+Mumps\+Solver\+::backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02366}{oomph\+::\+Super\+LUSolver\+::backsub\+\_\+distributed()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{oomph\+::\+Double\+Multi\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00185}{oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02709}{oomph\+::\+Super\+LUSolver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02086}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::complex\+\_\+matrix\+\_\+multiplication()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00069}{oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+matrix\+\_\+multiplication()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{oomph\+::\+Double\+Multi\+Vector\+::dot()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{problem_8cc_source_l07976}{oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{problem_8cc_source_l04042}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{oomph\+::\+CRDouble\+Matrix\+::get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{oomph\+::\+CRDouble\+Matrix\+::global\+\_\+matrix()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03251}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04849}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04292}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{matrices_8cc_source_l01749}{oomph\+::\+CRDouble\+Matrix\+::lubksub()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02017}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::master\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{oomph\+::\+Double\+Vector\+::max()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00241}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{oomph\+::\+Double\+Multi\+Vector\+::norm()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{oomph\+::\+Double\+Vector\+::output()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00280}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00624}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00682}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01838}{oomph\+::\+Hypre\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{preconditioner_8h_source_l00292}{oomph\+::\+Identity\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00402}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{oomph\+::\+CRDouble\+Matrix\+::redistribute()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00677}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02007}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02510}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve()}}, \mbox{\hyperlink{frontal__solver_8cc_source_l00888}{oomph\+::\+HSL\+\_\+\+MA42\+::resolve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{oomph\+::\+Mumps\+Solver\+::resolve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01595}{oomph\+::\+Hypre\+Solver\+::resolve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l05045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00043}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00415}{oomph\+::\+Inner\+Iteration\+Preconditioner$<$ SOLVER, PRECONDITIONER $>$\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00267}{oomph\+::\+Identity\+Preconditioner\+::setup()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00066}{oomph\+::\+Super\+LUPreconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00507}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::setup()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00988}{oomph\+::\+Double\+Multi\+Vector\+::setup\+\_\+doublevector\+\_\+representation()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00217}{oomph\+::\+Double\+Multi\+Vector\+::shallow\+\_\+build()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00423}{oomph\+::\+Dense\+LU\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01078}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01499}{oomph\+::\+Hypre\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00323}{oomph\+::\+CG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00448}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00663}{oomph\+::\+GS$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00853}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01130}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01273}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01596}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00405}{oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l01705}{oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02275}{oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03621}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00950}{oomph\+::\+CG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00090}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02746}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00818}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l01806}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03284}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00266}{oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem()}}, \mbox{\hyperlink{eigen__solver_8cc_source_l00065}{oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03966}{oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02453}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{complex__smoother_8h_source_l03551}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01577}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01316}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup()}}, \mbox{\hyperlink{matrices_8h_source_l01031}{oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00262}{oomph\+::\+GMRESBlock\+Preconditioner\+::update()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01368}{oomph\+::\+GMRES$<$ MATRIX $>$\+::update()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{oomph\+::\+Augmented\+Problem\+GMRES\+::update()}}, \mbox{\hyperlink{complex__smoother_8h_source_l02184}{oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::update()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l03446}{oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::update()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}\label{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on this processor 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{481}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}.
+
+
+
+Referenced by \mbox{\hyperlink{solid__preconditioners_8cc_source_l00707}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{oomph\+::\+CRDouble\+Matrix\+::global\+\_\+matrix()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{double__vector_8cc_source_l00138}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{oomph\+::\+Double\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00772}{oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{oomph\+::\+CRDouble\+Matrix\+::redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00043}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}\label{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!first\_row@{first\_row}}
+\index{first\_row@{first\_row}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{first\_row()}{first\_row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the first row on this processor 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00487}{487}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}\label{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the number of global rows. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{463}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}.
+
+
+
+Referenced by \mbox{\hyperlink{solid__preconditioners_8cc_source_l00707}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00185}{oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00925}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00150}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Get\+Global\+Length()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00143}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Get\+Vec\+Length()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04008}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00418}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00415}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{oomph\+::\+Double\+Vector\+::max()}}, \mbox{\hyperlink{matrices_8cc_source_l00294}{oomph\+::\+Dense\+Double\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00622}{oomph\+::\+CCDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l00385}{oomph\+::\+Dense\+Double\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{oomph\+::\+Double\+Vector\+::output()}}, \mbox{\hyperlink{lagrange__enforced__flow__preconditioner_8cc_source_l00310}{oomph\+::\+Lagrange\+Enforced\+Flow\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00495}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{general__purpose__preconditioners_8h_source_l00415}{oomph\+::\+Inner\+Iteration\+Preconditioner$<$ SOLVER, PRECONDITIONER $>$\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01777}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00262}{oomph\+::\+GMRESBlock\+Preconditioner\+::update()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01368}{oomph\+::\+GMRES$<$ MATRIX $>$\+::update()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l01790}{oomph\+::\+Augmented\+Problem\+GMRES\+::update()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}\label{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{469}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{oomph\+::\+CRDouble\+Matrix\+::add()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00644}{oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00707}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00281}{oomph\+::\+Double\+Multi\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00059}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8cc_source_l00091}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00323}{oomph\+::\+Double\+Multi\+Vector\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01694}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00809}{oomph\+::\+Double\+Multi\+Vector\+::dot()}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00105}{oomph\+::\+Double\+Multi\+Vector\+::\+Double\+Multi\+Vector()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00144}{oomph\+::\+Double\+Multi\+Vector\+::\+Double\+Multi\+Vector()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01891}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{oomph\+::\+CRDouble\+Matrix\+::global\+\_\+matrix()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00364}{oomph\+::\+Double\+Multi\+Vector\+::initialise()}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{double__vector_8cc_source_l00138}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03045}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+dof\+\_\+number()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l03113}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::internal\+\_\+index\+\_\+in\+\_\+dof()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00504}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00764}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+Old\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{oomph\+::\+CRDouble\+Matrix\+::matrix\+\_\+reduction()}}, \mbox{\hyperlink{double__vector_8cc_source_l00604}{oomph\+::\+Double\+Vector\+::max()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00197}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Add\+Mv()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00404}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Random()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00224}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Scale()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00162}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Times\+Mat\+Add\+Mv()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00241}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Mv\+Trans\+Mv()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00889}{oomph\+::\+Double\+Multi\+Vector\+::norm()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00484}{oomph\+::\+Double\+Multi\+Vector\+::operator()()}}, \mbox{\hyperlink{double__vector_8cc_source_l00550}{oomph\+::\+Double\+Vector\+::operator\texorpdfstring{$\ast$}{*}=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00642}{oomph\+::\+Double\+Multi\+Vector\+::operator\texorpdfstring{$\ast$}{*}=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00459}{oomph\+::\+Double\+Vector\+::operator+=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00549}{oomph\+::\+Double\+Multi\+Vector\+::operator+=()}}, \mbox{\hyperlink{double__vector_8cc_source_l00504}{oomph\+::\+Double\+Vector\+::operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00596}{oomph\+::\+Double\+Multi\+Vector\+::operator-\/=()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00514}{oomph\+::\+Double\+Multi\+Vector\+::operator==()}}, \mbox{\hyperlink{double__vector_8cc_source_l00426}{oomph\+::\+Double\+Vector\+::operator==()}}, \mbox{\hyperlink{double__vector_8cc_source_l00408}{oomph\+::\+Double\+Vector\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{double__vector_8cc_source_l00586}{oomph\+::\+Double\+Vector\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{double__multi__vector_8h_source_l00704}{oomph\+::\+Double\+Multi\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00653}{oomph\+::\+Double\+Vector\+::output()}}, \mbox{\hyperlink{double__vector_8cc_source_l00742}{oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values()}}, \mbox{\hyperlink{double__vector_8cc_source_l00772}{oomph\+::\+Double\+Vector\+::output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00117}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{double__multi__vector_8cc_source_l00037}{oomph\+::\+Double\+Multi\+Vector\+::redistribute()}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{oomph\+::\+CRDouble\+Matrix\+::redistribute()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00339}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Set\+Block()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00371}{Anasazi\+::\+Multi\+Vec\+Traits$<$ double, oomph\+::\+Double\+Multi\+Vector $>$\+::\+Set\+Block()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00043}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00815}{oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}\label{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!nrow\_local@{nrow\_local}}
+\index{nrow\_local@{nrow\_local}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{nrow\_local()}{nrow\_local()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function for the num of local rows on this processor. 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00475}{475}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{Distribution\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}.
+
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}\label{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a}\label{classoomph_1_1DistributableLinearAlgebraObject_a94280ec477823427098dc46b20e29f5a} 
+\index{oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}!Distribution\_pt@{Distribution\_pt}}
+\index{Distribution\_pt@{Distribution\_pt}!oomph::DistributableLinearAlgebraObject@{oomph::DistributableLinearAlgebraObject}}
+\doxysubsubsection{\texorpdfstring{Distribution\_pt}{Distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::\+Distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} object 
+
+
+
+Definition at line \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00529}{529}} of file \mbox{\hyperlink{linear__algebra__distribution_8h_source}{linear\+\_\+algebra\+\_\+distribution.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00514}{build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{clear\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00438}{Distributable\+Linear\+Algebra\+Object()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00487}{first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{nrow\+\_\+local()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00475}{nrow\+\_\+local()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00451}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{linear__algebra__distribution_8h}{linear\+\_\+algebra\+\_\+distribution.\+h}}\end{DoxyCompactItemize}

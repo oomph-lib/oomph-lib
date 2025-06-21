@@ -1,0 +1,110 @@
+\doxysection{Tanh\+Soln\+For\+Poisson Namespace Reference}
+\hypertarget{namespaceTanhSolnForPoisson}{}\label{namespaceTanhSolnForPoisson}\index{TanhSolnForPoisson@{TanhSolnForPoisson}}
+
+
+Namespace for exact solution for Poisson equation with "{}sharp step"{}.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{x}}, \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{u}})
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{get\+\_\+source}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{x}}, \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source}})
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}} =5.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of "{}step"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{Tan\+Phi}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle Phi of "{}step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for exact solution for Poisson equation with "{}sharp step"{}. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}\label{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_exact\_u@{get\_exact\_u}}
+\index{get\_exact\_u@{get\_exact\_u}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Exact solution as a Vector. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00098}{98}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00092}{Alpha}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00095}{Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00241}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00279}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}\label{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_source@{get\_source}}
+\index{get\_source@{get\_source}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_source()}{get\_source()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} Tanh\+Soln\+For\+Poisson\+::get\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Source function required to make the solution above an exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00104}{104}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00092}{Alpha}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00095}{Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00329}{main()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}\label{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!Alpha@{Alpha}}
+\index{Alpha@{Alpha}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} Tanh\+Soln\+For\+Poisson\+::\+Alpha =5.\+0}
+
+
+
+Parameter for steepness of "{}step"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00092}{92}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00098}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00104}{get\+\_\+source()}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00329}{main()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}\label{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!TanPhi@{TanPhi}}
+\index{TanPhi@{TanPhi}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{TanPhi}{TanPhi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi =0.\+0}
+
+
+
+Parameter for angle Phi of "{}step"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00095}{95}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00098}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00104}{get\+\_\+source()}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00329}{main()}}.
+

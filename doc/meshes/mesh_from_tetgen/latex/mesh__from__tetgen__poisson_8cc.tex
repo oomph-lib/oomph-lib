@@ -1,0 +1,61 @@
+\doxysection{mesh\+\_\+from\+\_\+tetgen\+\_\+poisson.\+cc File Reference}
+\hypertarget{mesh__from__tetgen__poisson_8cc}{}\label{mesh__from__tetgen__poisson_8cc}\index{mesh\_from\_tetgen\_poisson.cc@{mesh\_from\_tetgen\_poisson.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Micky mouse Poisson problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with sharp step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{u}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af197decab980d38d2037032780723984}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{u}})
+\begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+source}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{source}})
+\begin{DoxyCompactList}\small\item\em Source function to make it an exact solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{int}} \mbox{\hyperlink{mesh__from__tetgen__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{int}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{argc}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve Poisson problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}} =3
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ac3d25f0791c1363f487600e02757bc97}{Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+x}} =-\/1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised x-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a482d668ef91071985d1f4ce7cf29a926}{Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+y}} =-\/1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised y-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae6b5b5d21747a45776004756dc97dc5c}{Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+z}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised z-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af55e0479c15ab58929eb96ee9d6cf07a}{Tanh\+Soln\+For\+Poisson\+::\+X\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (x-\/coordinate of step plane) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_addc6dc6578b16a1d9aa774c25776b921}{Tanh\+Soln\+For\+Poisson\+::\+Y\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (y-\/coordinate of step plane) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_abf4856ed1855c34c2b2ea57fd6783644}{Tanh\+Soln\+For\+Poisson\+::\+Z\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (z-\/coordinate of step plane) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{mesh__from__tetgen__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{mesh__from__tetgen__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{mesh\_from\_tetgen\_poisson.cc@{mesh\_from\_tetgen\_poisson.cc}!main@{main}}
+\index{main@{main}!mesh\_from\_tetgen\_poisson.cc@{mesh\_from\_tetgen\_poisson.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve Poisson problem. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__tetgen__poisson_8cc_source_l00324}{324}} of file \mbox{\hyperlink{mesh__from__tetgen__poisson_8cc_source}{mesh\+\_\+from\+\_\+tetgen\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh__from__tetgen__poisson_8cc_source_l00093}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+source()}}.
+

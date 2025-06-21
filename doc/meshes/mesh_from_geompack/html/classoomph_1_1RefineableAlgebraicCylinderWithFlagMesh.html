@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html">RefineableAlgebraicCylinderWithFlagMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Refineable version of <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html" title="Algebraic version of CylinderWithFlagMesh.">AlgebraicCylinderWithFlagMesh</a>.  
+ <a href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="cylinder__with__flag__mesh_8h_source.html">cylinder_with_flag_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.png" usemap="#oomph::RefineableAlgebraicCylinderWithFlagMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::RefineableAlgebraicCylinderWithFlagMesh_3C_20ELEMENT_20_3E_map" name="oomph::RefineableAlgebraicCylinderWithFlagMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html" title="Algebraic version of CylinderWithFlagMesh." alt="oomph::AlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;" shape="rect" coords="390,112,770,136"/>
+<area href="classoomph_1_1CylinderWithFlagMesh.html" title="Domain-based mesh for cylinder with flag as in Turek benchmark." alt="oomph::CylinderWithFlagMesh&lt; ELEMENT &gt;" shape="rect" coords="585,56,965,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a9ddd203e89075036bfdfe6b695fb3395" id="r_a9ddd203e89075036bfdfe6b695fb3395"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html#a9ddd203e89075036bfdfe6b695fb3395">RefineableAlgebraicCylinderWithFlagMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">Circle</a> *cylinder_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5ab2ab96405b054bf5b2579e1e704add">top_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a88d6da54fa98f019769c0830354ea60b">bottom_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a0f2752a189b3dc62cc0278e36969e18b">tip_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_x</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_y</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">a</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a9ddd203e89075036bfdfe6b695fb3395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the pointers to the GeomObjects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper.  <br /></td></tr>
+<tr class="separator:a9ddd203e89075036bfdfe6b695fb3395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186963cf4b1fc118929e49e012eba4d2" id="r_a186963cf4b1fc118929e49e012eba4d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html#a186963cf4b1fc118929e49e012eba4d2">update_node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a186963cf4b1fc118929e49e012eba4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the node update data for specified node following any mesh adapation.  <br /></td></tr>
+<tr class="separator:a186963cf4b1fc118929e49e012eba4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html">oomph::AlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a2c307b804fee56aa620ea414b41883d5 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a2c307b804fee56aa620ea414b41883d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a2c307b804fee56aa620ea414b41883d5">AlgebraicCylinderWithFlagMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">Circle</a> *cylinder_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5ab2ab96405b054bf5b2579e1e704add">top_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a88d6da54fa98f019769c0830354ea60b">bottom_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a0f2752a189b3dc62cc0278e36969e18b">tip_flag_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_x</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_y</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">a</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a2c307b804fee56aa620ea414b41883d5 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass the pointers to the GeomObjects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper.  <br /></td></tr>
+<tr class="separator:a2c307b804fee56aa620ea414b41883d5 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7e92a8dc3add0cd1f666dc8c9f8ca6f inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_ac7e92a8dc3add0cd1f666dc8c9f8ca6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#ac7e92a8dc3add0cd1f666dc8c9f8ca6f">~AlgebraicCylinderWithFlagMesh</a> ()</td></tr>
+<tr class="memdesc:ac7e92a8dc3add0cd1f666dc8c9f8ca6f inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <br /></td></tr>
+<tr class="separator:ac7e92a8dc3add0cd1f666dc8c9f8ca6f inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aeef710528a9d8dd51023dd6ee131ea inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a6aeef710528a9d8dd51023dd6ee131ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a6aeef710528a9d8dd51023dd6ee131ea">set_bottom_flag_pt</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a88d6da54fa98f019769c0830354ea60b">bottom_flag_pt</a>)</td></tr>
+<tr class="memdesc:a6aeef710528a9d8dd51023dd6ee131ea inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set geometric object that defines the bottom face of the flag.  <br /></td></tr>
+<tr class="separator:a6aeef710528a9d8dd51023dd6ee131ea inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d7f04acdaed3e9f2133d9665dd4b799 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a9d7f04acdaed3e9f2133d9665dd4b799"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a9d7f04acdaed3e9f2133d9665dd4b799">set_top_flag_pt</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5ab2ab96405b054bf5b2579e1e704add">top_flag_pt</a>)</td></tr>
+<tr class="memdesc:a9d7f04acdaed3e9f2133d9665dd4b799 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the geometric object that defines the top face of the flag.  <br /></td></tr>
+<tr class="separator:a9d7f04acdaed3e9f2133d9665dd4b799 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a191d736d9acbeb5927fc5f472420e9f6 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a191d736d9acbeb5927fc5f472420e9f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a191d736d9acbeb5927fc5f472420e9f6">set_tip_flag_pt</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a0f2752a189b3dc62cc0278e36969e18b">tip_flag_pt</a>)</td></tr>
+<tr class="memdesc:a191d736d9acbeb5927fc5f472420e9f6 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the geometric object that defines the tip of the flag.  <br /></td></tr>
+<tr class="separator:a191d736d9acbeb5927fc5f472420e9f6 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d6da54fa98f019769c0830354ea60b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a88d6da54fa98f019769c0830354ea60b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a88d6da54fa98f019769c0830354ea60b">bottom_flag_pt</a> () <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a></td></tr>
+<tr class="memdesc:a88d6da54fa98f019769c0830354ea60b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to geometric object that defines the bottom face of the flag.  <br /></td></tr>
+<tr class="separator:a88d6da54fa98f019769c0830354ea60b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab2ab96405b054bf5b2579e1e704add inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a5ab2ab96405b054bf5b2579e1e704add"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5ab2ab96405b054bf5b2579e1e704add">top_flag_pt</a> () <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a></td></tr>
+<tr class="memdesc:a5ab2ab96405b054bf5b2579e1e704add inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to geometric object that defines the top face of the flag.  <br /></td></tr>
+<tr class="separator:a5ab2ab96405b054bf5b2579e1e704add inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f2752a189b3dc62cc0278e36969e18b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a0f2752a189b3dc62cc0278e36969e18b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a0f2752a189b3dc62cc0278e36969e18b">tip_flag_pt</a> () <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a></td></tr>
+<tr class="memdesc:a0f2752a189b3dc62cc0278e36969e18b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read-only access to geometric object that defines the tip of the flag.  <br /></td></tr>
+<tr class="separator:a0f2752a189b3dc62cc0278e36969e18b inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d909de1db84a3b7e42494535b152d92 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a9d909de1db84a3b7e42494535b152d92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a9d909de1db84a3b7e42494535b152d92">update_node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a9d909de1db84a3b7e42494535b152d92 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the geometric references that are used to update node after mesh adaptation. Empty &ndash; no update of node update required without adaptativity.  <br /></td></tr>
+<tr class="separator:a9d909de1db84a3b7e42494535b152d92 inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a5e1e770e82577e5702470d8b87f8599d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a5e1e770e82577e5702470d8b87f8599d">algebraic_node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update nodal position at time level t (t=0: present; t&gt;0: previous)  <br /></td></tr>
+<tr class="separator:a5e1e770e82577e5702470d8b87f8599d inherit pub_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1CylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1CylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1CylinderWithFlagMesh.html">oomph::CylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a6591a2b9fdcb8080c899e34b9c8277cd inherit pub_methods_classoomph_1_1CylinderWithFlagMesh" id="r_a6591a2b9fdcb8080c899e34b9c8277cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CylinderWithFlagMesh.html#a6591a2b9fdcb8080c899e34b9c8277cd">CylinderWithFlagMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">Circle</a> *cylinder_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *top_flag_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *bottom_flag_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *tip_flag_pt, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_length</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">flag_height</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_x</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_y</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">a</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a6591a2b9fdcb8080c899e34b9c8277cd inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Pass the pointers to the GeomObjects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper.  <br /></td></tr>
+<tr class="separator:a6591a2b9fdcb8080c899e34b9c8277cd inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04fb9a6ea7a70eb8dbfb83ef73ed7b48 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh" id="r_a04fb9a6ea7a70eb8dbfb83ef73ed7b48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CylinderWithFlagMesh.html#a04fb9a6ea7a70eb8dbfb83ef73ed7b48">~CylinderWithFlagMesh</a> ()</td></tr>
+<tr class="memdesc:a04fb9a6ea7a70eb8dbfb83ef73ed7b48 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Kill the domain.  <br /></td></tr>
+<tr class="separator:a04fb9a6ea7a70eb8dbfb83ef73ed7b48 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9595e7512c5285c8afa31ad6adb1c97 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh" id="r_ae9595e7512c5285c8afa31ad6adb1c97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CylinderWithFlagDomain.html">CylinderWithFlagDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CylinderWithFlagMesh.html#ae9595e7512c5285c8afa31ad6adb1c97">domain_pt</a> ()</td></tr>
+<tr class="memdesc:ae9595e7512c5285c8afa31ad6adb1c97 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the domain.  <br /></td></tr>
+<tr class="separator:ae9595e7512c5285c8afa31ad6adb1c97 inherit pub_methods_classoomph_1_1CylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html">oomph::AlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ad6af2e420e0f152a7fb055f25400a5d0 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_ad6af2e420e0f152a7fb055f25400a5d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#ad6af2e420e0f152a7fb055f25400a5d0">setup_algebraic_node_update</a> ()</td></tr>
+<tr class="memdesc:ad6af2e420e0f152a7fb055f25400a5d0 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to setup the algebraic node update.  <br /></td></tr>
+<tr class="separator:ad6af2e420e0f152a7fb055f25400a5d0 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713cf7c2e1be91eae2667dc3e1fd8644 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a713cf7c2e1be91eae2667dc3e1fd8644"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a713cf7c2e1be91eae2667dc3e1fd8644">node_update_I</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a713cf7c2e1be91eae2667dc3e1fd8644 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a713cf7c2e1be91eae2667dc3e1fd8644 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2717b4ae70a9641c24becc8176410b3e inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a2717b4ae70a9641c24becc8176410b3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a2717b4ae70a9641c24becc8176410b3e">node_update_II</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a2717b4ae70a9641c24becc8176410b3e inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a2717b4ae70a9641c24becc8176410b3e inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8c71cc3ab123864b4f999e612345ee inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a3e8c71cc3ab123864b4f999e612345ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a3e8c71cc3ab123864b4f999e612345ee">node_update_III</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a3e8c71cc3ab123864b4f999e612345ee inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a3e8c71cc3ab123864b4f999e612345ee inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69ab465aa28dd9a65a0c50762c0a6d89 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a69ab465aa28dd9a65a0c50762c0a6d89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a69ab465aa28dd9a65a0c50762c0a6d89">node_update_IV</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a69ab465aa28dd9a65a0c50762c0a6d89 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a69ab465aa28dd9a65a0c50762c0a6d89 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035216f13c9758881ce2b7e33ad27926 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a035216f13c9758881ce2b7e33ad27926"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a035216f13c9758881ce2b7e33ad27926">node_update_V</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a035216f13c9758881ce2b7e33ad27926 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a035216f13c9758881ce2b7e33ad27926 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a989fe557f03ac20812e69a8de2dbb9a4 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a989fe557f03ac20812e69a8de2dbb9a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a989fe557f03ac20812e69a8de2dbb9a4">node_update_VI</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a989fe557f03ac20812e69a8de2dbb9a4 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a989fe557f03ac20812e69a8de2dbb9a4 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0565f0624583d2549f38602fd11e48 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_abb0565f0624583d2549f38602fd11e48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#abb0565f0624583d2549f38602fd11e48">node_update_VII</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:abb0565f0624583d2549f38602fd11e48 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:abb0565f0624583d2549f38602fd11e48 inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85336e587d9c4cac7f4d77890dd7690b inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a85336e587d9c4cac7f4d77890dd7690b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a85336e587d9c4cac7f4d77890dd7690b">node_update_VIII</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a85336e587d9c4cac7f4d77890dd7690b inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a85336e587d9c4cac7f4d77890dd7690b inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8e85400abd282b64463b67e21e9c13a inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_ae8e85400abd282b64463b67e21e9c13a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#ae8e85400abd282b64463b67e21e9c13a">node_update_IX</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:ae8e85400abd282b64463b67e21e9c13a inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:ae8e85400abd282b64463b67e21e9c13a inherit pro_methods_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html">oomph::AlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a423d4aa7ffcca5e707b2e5d820984957 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a423d4aa7ffcca5e707b2e5d820984957"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a423d4aa7ffcca5e707b2e5d820984957">Cylinder_pt</a></td></tr>
+<tr class="memdesc:a423d4aa7ffcca5e707b2e5d820984957 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cylinder.  <br /></td></tr>
+<tr class="separator:a423d4aa7ffcca5e707b2e5d820984957 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326e4789fe96b3052a8beb51ec9e94d0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a326e4789fe96b3052a8beb51ec9e94d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a326e4789fe96b3052a8beb51ec9e94d0">Top_flag_pt</a></td></tr>
+<tr class="memdesc:a326e4789fe96b3052a8beb51ec9e94d0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top flag.  <br /></td></tr>
+<tr class="separator:a326e4789fe96b3052a8beb51ec9e94d0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1f7e1ba183ba813229302c5688ea1ba inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_ac1f7e1ba183ba813229302c5688ea1ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#ac1f7e1ba183ba813229302c5688ea1ba">Bottom_flag_pt</a></td></tr>
+<tr class="memdesc:ac1f7e1ba183ba813229302c5688ea1ba inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bottom flag.  <br /></td></tr>
+<tr class="separator:ac1f7e1ba183ba813229302c5688ea1ba inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad22c8bfa595f4b1f129be85a1904762f inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_ad22c8bfa595f4b1f129be85a1904762f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#ad22c8bfa595f4b1f129be85a1904762f">Tip_flag_pt</a></td></tr>
+<tr class="memdesc:ad22c8bfa595f4b1f129be85a1904762f inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tip flag.  <br /></td></tr>
+<tr class="separator:ad22c8bfa595f4b1f129be85a1904762f inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7620fa5a4c36f638fb22c81b346b74a2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a7620fa5a4c36f638fb22c81b346b74a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a7620fa5a4c36f638fb22c81b346b74a2">Length</a></td></tr>
+<tr class="memdesc:a7620fa5a4c36f638fb22c81b346b74a2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the domain.  <br /></td></tr>
+<tr class="separator:a7620fa5a4c36f638fb22c81b346b74a2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a0c970a11d46bdf03f3b5053d3ece2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a29a0c970a11d46bdf03f3b5053d3ece2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a29a0c970a11d46bdf03f3b5053d3ece2">Height</a></td></tr>
+<tr class="memdesc:a29a0c970a11d46bdf03f3b5053d3ece2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height of the domain.  <br /></td></tr>
+<tr class="separator:a29a0c970a11d46bdf03f3b5053d3ece2 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822ed90585320576084667f88c236396 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a822ed90585320576084667f88c236396"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a822ed90585320576084667f88c236396">Flag_length</a></td></tr>
+<tr class="memdesc:a822ed90585320576084667f88c236396 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag length.  <br /></td></tr>
+<tr class="separator:a822ed90585320576084667f88c236396 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a19a39dd500d5a48c10baae59797e0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a76a19a39dd500d5a48c10baae59797e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a76a19a39dd500d5a48c10baae59797e0">Flag_height</a></td></tr>
+<tr class="memdesc:a76a19a39dd500d5a48c10baae59797e0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag thickness.  <br /></td></tr>
+<tr class="separator:a76a19a39dd500d5a48c10baae59797e0 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3290ac9103e43f4a4a997fe4692b6506 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a3290ac9103e43f4a4a997fe4692b6506"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a3290ac9103e43f4a4a997fe4692b6506">Centre_x</a></td></tr>
+<tr class="memdesc:a3290ac9103e43f4a4a997fe4692b6506 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">x position of the centre of the cylinder  <br /></td></tr>
+<tr class="separator:a3290ac9103e43f4a4a997fe4692b6506 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b4575a9c3818e04bdb00d4150d49290 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_a6b4575a9c3818e04bdb00d4150d49290"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#a6b4575a9c3818e04bdb00d4150d49290">Centre_y</a></td></tr>
+<tr class="memdesc:a6b4575a9c3818e04bdb00d4150d49290 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">x position of the centre of the cylinder  <br /></td></tr>
+<tr class="separator:a6b4575a9c3818e04bdb00d4150d49290 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc6cdfe508f04a4b1c92f2c2f1639c4 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh" id="r_aabc6cdfe508f04a4b1c92f2c2f1639c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html#aabc6cdfe508f04a4b1c92f2c2f1639c4">A</a></td></tr>
+<tr class="memdesc:aabc6cdfe508f04a4b1c92f2c2f1639c4 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">radius of the cylinder  <br /></td></tr>
+<tr class="separator:aabc6cdfe508f04a4b1c92f2c2f1639c4 inherit pro_attribs_classoomph_1_1AlgebraicCylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1CylinderWithFlagMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1CylinderWithFlagMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1CylinderWithFlagMesh.html">oomph::CylinderWithFlagMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a257b36fed6fb0d20d108a27c6a1c5f86 inherit pro_attribs_classoomph_1_1CylinderWithFlagMesh" id="r_a257b36fed6fb0d20d108a27c6a1c5f86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1CylinderWithFlagDomain.html">CylinderWithFlagDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1CylinderWithFlagMesh.html#a257b36fed6fb0d20d108a27c6a1c5f86">Domain_pt</a></td></tr>
+<tr class="memdesc:a257b36fed6fb0d20d108a27c6a1c5f86 inherit pro_attribs_classoomph_1_1CylinderWithFlagMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the domain.  <br /></td></tr>
+<tr class="separator:a257b36fed6fb0d20d108a27c6a1c5f86 inherit pro_attribs_classoomph_1_1CylinderWithFlagMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a>&gt;<br />
+class oomph::RefineableAlgebraicCylinderWithFlagMesh&lt; ELEMENT &gt;</div><p>Refineable version of <a class="el" href="classoomph_1_1AlgebraicCylinderWithFlagMesh.html" title="Algebraic version of CylinderWithFlagMesh.">AlgebraicCylinderWithFlagMesh</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8h_source.html#l00347">347</a> of file <a class="el" href="cylinder__with__flag__mesh_8h_source.html">cylinder_with_flag_mesh.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9ddd203e89075036bfdfe6b695fb3395" name="a9ddd203e89075036bfdfe6b695fb3395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ddd203e89075036bfdfe6b695fb3395">&#9670;&#160;</a></span>RefineableAlgebraicCylinderWithFlagMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html">oomph::RefineableAlgebraicCylinderWithFlagMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::RefineableAlgebraicCylinderWithFlagMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">Circle</a> *&#160;</td>
+          <td class="paramname"><em>cylinder_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>top_flag_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>bottom_flag_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>tip_flag_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>flag_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>flag_height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>centre_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>centre_y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the pointers to the GeomObjects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. Timestepper defaults to Steady default timestepper. </p>
+
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8h_source.html#l00357">357</a> of file <a class="el" href="cylinder__with__flag__mesh_8h_source.html">cylinder_with_flag_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a186963cf4b1fc118929e49e012eba4d2" name="a186963cf4b1fc118929e49e012eba4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a186963cf4b1fc118929e49e012eba4d2">&#9670;&#160;</a></span>update_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableAlgebraicCylinderWithFlagMesh.html">oomph::RefineableAlgebraicCylinderWithFlagMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::update_node_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the node update data for specified node following any mesh adapation. </p>
+<p>Update the node update functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html#l01841">1841</a> of file <a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html">cylinder_with_flag_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="cylinder__with__flag__mesh_8h_source.html">cylinder_with_flag_mesh.h</a></li>
+<li><a class="el" href="cylinder__with__flag__mesh_8template_8cc_source.html">cylinder_with_flag_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:10
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

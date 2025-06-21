@@ -1,0 +1,31 @@
+\doxysection{Vector.\+h File Reference}
+\hypertarget{Vector_8h}{}\label{Vector_8h}\index{Vector.h@{Vector.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$}}
+\begin{DoxyCompactList}\small\item\em A slight extension to the standard template vector class so that we can include "{}graceful"{} array range checks if the RANGE\+\_\+\+CHECKING flag is set. The generalisation to general allocators is NOT handled here, mainly because we never use it, but also because the intel and gnu compilers have different names for the internal classes, which makes writing code that works for both a pain! \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4}{oomph\+::\+Vector$<$ bool $>$}}
+\begin{DoxyCompactList}\small\item\em A \doxylink{classoomph_1_1Vector}{Vector} of bools cannot be created because the is no compiler-\/independent implementation of the bit manipulators. Making all the constructors private should lead to compile-\/time errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers}{oomph\+::\+Vector\+Helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace for helper functions for \doxylink{classoomph_1_1Vector}{Vector$<$double$>$} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Check the lengths if two Vectors are the same length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{oomph\+::\+Vector\+Helpers\+::dot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Probably not always best/fastest because not optimised for dimension but useful... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{oomph\+::\+Vector\+Helpers\+::magnitude}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a)
+\begin{DoxyCompactList}\small\item\em Get the magnitude of a vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{oomph\+::\+Vector\+Helpers\+::angle}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Get the angle between two vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}{oomph\+::\+Vector\+Helpers\+::cross}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&A, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&B, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&C)
+\begin{DoxyCompactList}\small\item\em Cross product using "{}proper"{} output (move semantics means this is ok nowadays). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a46b44975d832ac17e752658afa5e0927}{oomph\+::\+Vector\+Helpers\+::cross}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&A, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&B)
+\begin{DoxyCompactList}\small\item\em Cross product using "{}proper"{} output (move semantics means this is ok This calls the other cross(...) function. \end{DoxyCompactList}\end{DoxyCompactItemize}

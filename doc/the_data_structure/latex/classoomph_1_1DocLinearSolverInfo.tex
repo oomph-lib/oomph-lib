@@ -1,0 +1,214 @@
+\doxysection{oomph\+::Doc\+Linear\+Solver\+Info Class Reference}
+\hypertarget{classoomph_1_1DocLinearSolverInfo}{}\label{classoomph_1_1DocLinearSolverInfo}\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+
+
+Collection of data structures for storing information about linear solves. Currently only contains storage for the iteration counts and the linear solver time.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_a9b0ce2e30cd7bb85473d1b057763cd23}{Doc\+Linear\+Solver\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. Initialised the Iterations\+\_\+and\+\_\+times vector of vector of pairs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_a09eb7f83980fc3a8e5cbd474ec1be4d4}{setup\+\_\+new\+\_\+time\+\_\+step}} ()
+\begin{DoxyCompactList}\small\item\em Set up a new vector of pairs for a new time step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_ad7f95ceab7e3c1a07af85daa2133e08d}{clear\+\_\+current\+\_\+time\+\_\+step}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_abc5d49fefeb08d33960af0ec729bea80}{add\+\_\+iteration\+\_\+and\+\_\+time}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iter}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{prec\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{linear\+\_\+solver\+\_\+time}})
+\begin{DoxyCompactList}\small\item\em Add a new iteration and time pair. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_ae158c6f6486fafc7a1ec900160bf4ecf}{current\+\_\+ntime\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The number of time steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_a9ad2cfbfcabac912a530cf5d3e8200b1}{current\+\_\+nnewton\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The number of Newton steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ $>$ \& \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_ab5e85463f9a7983a465aa7dae23804fd}{iterations\+\_\+and\+\_\+times}} ()
+\begin{DoxyCompactList}\small\item\em Accessor function for the iteration and times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_ad4b8b3e591fd5d12ada64ad734809deb}{iterations\+\_\+and\+\_\+times}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Accessor function for the iteration and times (const version). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1DocLinearSolverInfo_a39f9368b84a0247ec2aec6dd0b759c52}{Iterations\+\_\+and\+\_\+times}}
+\begin{DoxyCompactList}\small\item\em Storage for number of iterations during Newton steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collection of data structures for storing information about linear solves. Currently only contains storage for the iteration counts and the linear solver time. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00429}{429}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_a9b0ce2e30cd7bb85473d1b057763cd23}\label{classoomph_1_1DocLinearSolverInfo_a9b0ce2e30cd7bb85473d1b057763cd23} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!DocLinearSolverInfo@{DocLinearSolverInfo}}
+\index{DocLinearSolverInfo@{DocLinearSolverInfo}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{DocLinearSolverInfo()}{DocLinearSolverInfo()}}
+{\footnotesize\ttfamily oomph\+::\+Doc\+Linear\+Solver\+Info\+::\+Doc\+Linear\+Solver\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Initialised the Iterations\+\_\+and\+\_\+times vector of vector of pairs. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00434}{434}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_abc5d49fefeb08d33960af0ec729bea80}\label{classoomph_1_1DocLinearSolverInfo_abc5d49fefeb08d33960af0ec729bea80} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!add\_iteration\_and\_time@{add\_iteration\_and\_time}}
+\index{add\_iteration\_and\_time@{add\_iteration\_and\_time}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{add\_iteration\_and\_time()}{add\_iteration\_and\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Linear\+Solver\+Info\+::add\+\_\+iteration\+\_\+and\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}}]{iter,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}}]{prec\+\_\+setup\+\_\+time,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}}]{linear\+\_\+solver\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a new iteration and time pair. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00451}{451}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_ad7f95ceab7e3c1a07af85daa2133e08d}\label{classoomph_1_1DocLinearSolverInfo_ad7f95ceab7e3c1a07af85daa2133e08d} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!clear\_current\_time\_step@{clear\_current\_time\_step}}
+\index{clear\_current\_time\_step@{clear\_current\_time\_step}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{clear\_current\_time\_step()}{clear\_current\_time\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Linear\+Solver\+Info\+::clear\+\_\+current\+\_\+time\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00444}{444}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00437}{setup\+\_\+new\+\_\+time\+\_\+step()}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_a9ad2cfbfcabac912a530cf5d3e8200b1}\label{classoomph_1_1DocLinearSolverInfo_a9ad2cfbfcabac912a530cf5d3e8200b1} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!current\_nnewton\_step@{current\_nnewton\_step}}
+\index{current\_nnewton\_step@{current\_nnewton\_step}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{current\_nnewton\_step()}{current\_nnewton\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Doc\+Linear\+Solver\+Info\+::current\+\_\+nnewton\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The number of Newton steps. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00480}{480}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_ae158c6f6486fafc7a1ec900160bf4ecf}\label{classoomph_1_1DocLinearSolverInfo_ae158c6f6486fafc7a1ec900160bf4ecf} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!current\_ntime\_step@{current\_ntime\_step}}
+\index{current\_ntime\_step@{current\_ntime\_step}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{current\_ntime\_step()}{current\_ntime\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Doc\+Linear\+Solver\+Info\+::current\+\_\+ntime\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The number of time steps. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00474}{474}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_ab5e85463f9a7983a465aa7dae23804fd}\label{classoomph_1_1DocLinearSolverInfo_ab5e85463f9a7983a465aa7dae23804fd} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!iterations\_and\_times@{iterations\_and\_times}}
+\index{iterations\_and\_times@{iterations\_and\_times}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{iterations\_and\_times()}{iterations\_and\_times()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ $>$ \& oomph\+::\+Doc\+Linear\+Solver\+Info\+::iterations\+\_\+and\+\_\+times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor function for the iteration and times. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00486}{486}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_ad4b8b3e591fd5d12ada64ad734809deb}\label{classoomph_1_1DocLinearSolverInfo_ad4b8b3e591fd5d12ada64ad734809deb} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!iterations\_and\_times@{iterations\_and\_times}}
+\index{iterations\_and\_times@{iterations\_and\_times}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{iterations\_and\_times()}{iterations\_and\_times()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ $>$ oomph\+::\+Doc\+Linear\+Solver\+Info\+::iterations\+\_\+and\+\_\+times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor function for the iteration and times (const version). 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00492}{492}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}.
+
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_a09eb7f83980fc3a8e5cbd474ec1be4d4}\label{classoomph_1_1DocLinearSolverInfo_a09eb7f83980fc3a8e5cbd474ec1be4d4} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!setup\_new\_time\_step@{setup\_new\_time\_step}}
+\index{setup\_new\_time\_step@{setup\_new\_time\_step}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{setup\_new\_time\_step()}{setup\_new\_time\_step()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Doc\+Linear\+Solver\+Info\+::setup\+\_\+new\+\_\+time\+\_\+step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set up a new vector of pairs for a new time step. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00437}{437}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{Iterations\+\_\+and\+\_\+times}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00444}{clear\+\_\+current\+\_\+time\+\_\+step()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DocLinearSolverInfo_a39f9368b84a0247ec2aec6dd0b759c52}\label{classoomph_1_1DocLinearSolverInfo_a39f9368b84a0247ec2aec6dd0b759c52} 
+\index{oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}!Iterations\_and\_times@{Iterations\_and\_times}}
+\index{Iterations\_and\_times@{Iterations\_and\_times}!oomph::DocLinearSolverInfo@{oomph::DocLinearSolverInfo}}
+\doxysubsubsection{\texorpdfstring{Iterations\_and\_times}{Iterations\_and\_times}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ $>$ $>$ oomph\+::\+Doc\+Linear\+Solver\+Info\+::\+Iterations\+\_\+and\+\_\+times\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for number of iterations during Newton steps. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00499}{499}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00451}{add\+\_\+iteration\+\_\+and\+\_\+time()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00444}{clear\+\_\+current\+\_\+time\+\_\+step()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00480}{current\+\_\+nnewton\+\_\+step()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00474}{current\+\_\+ntime\+\_\+step()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00486}{iterations\+\_\+and\+\_\+times()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00492}{iterations\+\_\+and\+\_\+times()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00437}{setup\+\_\+new\+\_\+time\+\_\+step()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__utilities_8h}{oomph\+\_\+utilities.\+h}}\end{DoxyCompactItemize}

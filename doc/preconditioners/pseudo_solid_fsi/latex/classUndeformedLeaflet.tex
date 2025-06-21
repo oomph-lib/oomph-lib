@@ -1,0 +1,160 @@
+\doxysection{Undeformed\+Leaflet Class Reference}
+\hypertarget{classUndeformedLeaflet}{}\label{classUndeformedLeaflet}\index{UndeformedLeaflet@{UndeformedLeaflet}}
+
+
+Geom\+Object\+: Undeformed straight, vertical leaflet.  
+
+
+Inheritance diagram for Undeformed\+Leaflet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUndeformedLeaflet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUndeformedLeaflet_ac4c0478b1f329360684af14b59043b12}{Undeformed\+Leaflet}} (const double \&x0)
+\begin{DoxyCompactList}\small\item\em Constructor\+: argument is the x-\/coordinate of the leaflet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedLeaflet_a8e9b79702eb9a38e19886b84aeb47918}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedLeaflet_a6949784da1030dd63ef741d170ef9798}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedLeaflet_a47d674756ce22e00a44ca0bd030a99da}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+\begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classUndeformedLeaflet_a56153a1d117dd41657183655de094d3e}{ngeom\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em Number of geometric Data in Geom\+Object\+: None. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classUndeformedLeaflet_aa89fc695af9e53aa38894c9d875afd36}{X0}}
+\begin{DoxyCompactList}\small\item\em x position of the undeformed leaflet\textquotesingle{}s origin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Geom\+Object\+: Undeformed straight, vertical leaflet. 
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00272}{272}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classUndeformedLeaflet_ac4c0478b1f329360684af14b59043b12}\label{classUndeformedLeaflet_ac4c0478b1f329360684af14b59043b12} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!UndeformedLeaflet@{UndeformedLeaflet}}
+\index{UndeformedLeaflet@{UndeformedLeaflet}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{UndeformedLeaflet()}{UndeformedLeaflet()}}
+{\footnotesize\ttfamily Undeformed\+Leaflet\+::\+Undeformed\+Leaflet (\begin{DoxyParamCaption}\item[{const double \&}]{x0 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: argument is the x-\/coordinate of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00278}{278}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00332}{X0}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUndeformedLeaflet_a47d674756ce22e00a44ca0bd030a99da}\label{classUndeformedLeaflet_a47d674756ce22e00a44ca0bd030a99da} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}}
+{\footnotesize\ttfamily void Undeformed\+Leaflet\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00308}{308}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00332}{X0}}.
+
+\Hypertarget{classUndeformedLeaflet_a56153a1d117dd41657183655de094d3e}\label{classUndeformedLeaflet_a56153a1d117dd41657183655de094d3e} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily unsigned Undeformed\+Leaflet\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of geometric Data in Geom\+Object\+: None. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00327}{327}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+\Hypertarget{classUndeformedLeaflet_a6949784da1030dd63ef741d170ef9798}\label{classUndeformedLeaflet_a6949784da1030dd63ef741d170ef9798} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!position@{position}}
+\index{position@{position}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Undeformed\+Leaflet\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00295}{295}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00284}{position()}}.
+
+\Hypertarget{classUndeformedLeaflet_a8e9b79702eb9a38e19886b84aeb47918}\label{classUndeformedLeaflet_a8e9b79702eb9a38e19886b84aeb47918} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!position@{position}}
+\index{position@{position}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Undeformed\+Leaflet\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector at Lagrangian coordinate zeta. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00284}{284}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00332}{X0}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00295}{position()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUndeformedLeaflet_aa89fc695af9e53aa38894c9d875afd36}\label{classUndeformedLeaflet_aa89fc695af9e53aa38894c9d875afd36} 
+\index{UndeformedLeaflet@{UndeformedLeaflet}!X0@{X0}}
+\index{X0@{X0}!UndeformedLeaflet@{UndeformedLeaflet}}
+\doxysubsubsection{\texorpdfstring{X0}{X0}}
+{\footnotesize\ttfamily double Undeformed\+Leaflet\+::\+X0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+x position of the undeformed leaflet\textquotesingle{}s origin. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00332}{332}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00308}{d2position()}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00284}{position()}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00278}{Undeformed\+Leaflet()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}\end{DoxyCompactItemize}

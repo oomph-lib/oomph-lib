@@ -1,0 +1,333 @@
+\doxysection{oomph\+::Double\+Vector\+Halo\+Scheme Class Reference}
+\hypertarget{classoomph_1_1DoubleVectorHaloScheme}{}\label{classoomph_1_1DoubleVectorHaloScheme}\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+
+
+A class that stores the halo/haloed entries required when using a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}. This is a separate class so thay many different Vectors can share the same object. The constructor requires the distribution of the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} (if you pass in a different distribution things will go badly wrong) and a vector that specifies which GLOBAL eqn numbers are required on each processor.  
+
+
+
+
+{\ttfamily \#include $<$double\+\_\+vector\+\_\+with\+\_\+halo.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_ac3809f5cac00b082a66bbf706087627e}{Double\+Vector\+Halo\+Scheme}} (\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{required\+\_\+global\+\_\+eqn}})
+\begin{DoxyCompactList}\small\item\em Constructor that sets up the required information communicating between all processors. Requires two "{}all to all"{} communications. Arguments are the distribution of the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} and a \doxylink{classoomph_1_1Vector}{Vector} of global unknowns required on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a490138b2ae077bc6630d13057217105b}{n\+\_\+halo\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of halo values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_acc890e9b1db5c2fe4436a473664b4d85}{distribution\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the distirbution used to setup the halo information. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_aa630dd65e7a97e5609426baffcb6eca9}{setup\+\_\+halo\+\_\+dofs}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{halo\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{halo\+\_\+dof\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Function that sets up a vector of pointers to halo data, index using the scheme in Local\+\_\+index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_ad589a203cdd37bc2508930d8db845a49}{local\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+eqn}})
+\begin{DoxyCompactList}\small\item\em Return the local index associated with the global equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b}{Local\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Storage for the translation scheme from global unknown to local index in the additional storage vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_aac79c7fe19ec6fae41e2528a540d0eae}{Haloed\+\_\+eqns}}
+\begin{DoxyCompactList}\small\item\em The haloed entries that will be sent in a format compatible with MPI\+\_\+\+Alltoallv i.\+e. (send\+\_\+to\+\_\+proc0,send\+\_\+to\+\_\+proc1 ... send\+\_\+to\+\_\+procn) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a13f0645d32135d7ffaedef8c888f7382}{Haloed\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em Storage for the number of haloed entries to be sent to each processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a7e8278718224d7348051443805bf145e}{Haloed\+\_\+displacement}}
+\begin{DoxyCompactList}\small\item\em Storage for the offsets of the haloed entries for each processor in the packed Haloed\+\_\+eqns array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_ae9dc75c67359f762bd09bdaf904158fe}{Halo\+\_\+eqns}}
+\begin{DoxyCompactList}\small\item\em Storage for all the entries that are to be received from other processors (received\+\_\+from\+\_\+proc0,received\+\_\+from\+\_\+proc1,...received\+\_\+from\+\_\+procn) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a47895cdeb23fef294e0facf880847063}{Halo\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em Storage for the number of entries to be received from each other processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a4357c43e12dbadede7f9852a96db4391}{Halo\+\_\+displacement}}
+\begin{DoxyCompactList}\small\item\em Storage for the offsets of the processor data in the receive buffer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_a4c3aa7f9d1da907fdbacf79c36355004}{Distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Store the distribution that was used to setup the halo scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme_acae5914031232d05e22888b081f2598f}{Double\+Vector\+With\+Halo\+Entries}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} should be able to access the private data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that stores the halo/haloed entries required when using a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}. This is a separate class so thay many different Vectors can share the same object. The constructor requires the distribution of the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} (if you pass in a different distribution things will go badly wrong) and a vector that specifies which GLOBAL eqn numbers are required on each processor. 
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00051}{51}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_ac3809f5cac00b082a66bbf706087627e}\label{classoomph_1_1DoubleVectorHaloScheme_ac3809f5cac00b082a66bbf706087627e} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!DoubleVectorHaloScheme@{DoubleVectorHaloScheme}}
+\index{DoubleVectorHaloScheme@{DoubleVectorHaloScheme}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorHaloScheme()}{DoubleVectorHaloScheme()}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Double\+Vector\+Halo\+Scheme (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{required\+\_\+global\+\_\+eqn }\end{DoxyParamCaption})}
+
+
+
+Constructor that sets up the required information communicating between all processors. Requires two "{}all to all"{} communications. Arguments are the distribution of the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} and a \doxylink{classoomph_1_1Vector}{Vector} of global unknowns required on this processor. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{36}} of file \mbox{\hyperlink{double__vector__with__halo_8cc_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00084}{Halo\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00076}{Halo\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00080}{Halo\+\_\+n}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00071}{Haloed\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00063}{Haloed\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00067}{Haloed\+\_\+n}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{Local\+\_\+index}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_acc890e9b1db5c2fe4436a473664b4d85}\label{classoomph_1_1DoubleVectorHaloScheme_acc890e9b1db5c2fe4436a473664b4d85} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!distribution\_pt@{distribution\_pt}}
+\index{distribution\_pt@{distribution\_pt}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{distribution\_pt()}{distribution\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Double\+Vector\+Halo\+Scheme\+::distribution\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the distirbution used to setup the halo information. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00106}{106}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00088}{Distribution\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8h_source_l01794}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_ad589a203cdd37bc2508930d8db845a49}\label{classoomph_1_1DoubleVectorHaloScheme_ad589a203cdd37bc2508930d8db845a49} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!local\_index@{local\_index}}
+\index{local\_index@{local\_index}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{local\_index()}{local\_index()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Double\+Vector\+Halo\+Scheme\+::local\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{global\+\_\+eqn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the local index associated with the global equation. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00118}{118}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{Local\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8h_source_l01794}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a490138b2ae077bc6630d13057217105b}\label{classoomph_1_1DoubleVectorHaloScheme_a490138b2ae077bc6630d13057217105b} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!n\_halo\_values@{n\_halo\_values}}
+\index{n\_halo\_values@{n\_halo\_values}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{n\_halo\_values()}{n\_halo\_values()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Double\+Vector\+Halo\+Scheme\+::n\+\_\+halo\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of halo values. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00099}{99}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{Local\+\_\+index}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_aa630dd65e7a97e5609426baffcb6eca9}\label{classoomph_1_1DoubleVectorHaloScheme_aa630dd65e7a97e5609426baffcb6eca9} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!setup\_halo\_dofs@{setup\_halo\_dofs}}
+\index{setup\_halo\_dofs@{setup\_halo\_dofs}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{setup\_halo\_dofs()}{setup\_halo\_dofs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+Halo\+Scheme\+::setup\+\_\+halo\+\_\+dofs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&}]{halo\+\_\+data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&}]{halo\+\_\+dof\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Function that sets up a vector of pointers to halo data, index using the scheme in Local\+\_\+index. 
+
+Function that sets up a vector of pointers to halo data, index using the scheme in Local\+\_\+index. The first arguement is a map of pointers to all halo data index by the global equation number. 
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00225}{225}} of file \mbox{\hyperlink{double__vector__with__halo_8cc_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{Local\+\_\+index}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l00396}{oomph\+::\+Problem\+::setup\+\_\+dof\+\_\+halo\+\_\+scheme()}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_acae5914031232d05e22888b081f2598f}\label{classoomph_1_1DoubleVectorHaloScheme_acae5914031232d05e22888b081f2598f} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries}{DoubleVectorWithHaloEntries}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{friend}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} should be able to access the private data. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00055}{55}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a4c3aa7f9d1da907fdbacf79c36355004}\label{classoomph_1_1DoubleVectorHaloScheme_a4c3aa7f9d1da907fdbacf79c36355004} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Distribution\_pt@{Distribution\_pt}}
+\index{Distribution\_pt@{Distribution\_pt}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Distribution\_pt}{Distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store the distribution that was used to setup the halo scheme. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00088}{88}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8h_source_l00106}{distribution\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a4357c43e12dbadede7f9852a96db4391}\label{classoomph_1_1DoubleVectorHaloScheme_a4357c43e12dbadede7f9852a96db4391} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Halo\_displacement@{Halo\_displacement}}
+\index{Halo\_displacement@{Halo\_displacement}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Halo\_displacement}{Halo\_displacement}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+displacement\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the offsets of the processor data in the receive buffer. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00084}{84}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_ae9dc75c67359f762bd09bdaf904158fe}\label{classoomph_1_1DoubleVectorHaloScheme_ae9dc75c67359f762bd09bdaf904158fe} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Halo\_eqns@{Halo\_eqns}}
+\index{Halo\_eqns@{Halo\_eqns}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Halo\_eqns}{Halo\_eqns}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+eqns\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for all the entries that are to be received from other processors (received\+\_\+from\+\_\+proc0,received\+\_\+from\+\_\+proc1,...received\+\_\+from\+\_\+procn) 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00076}{76}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a47895cdeb23fef294e0facf880847063}\label{classoomph_1_1DoubleVectorHaloScheme_a47895cdeb23fef294e0facf880847063} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Halo\_n@{Halo\_n}}
+\index{Halo\_n@{Halo\_n}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Halo\_n}{Halo\_n}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the number of entries to be received from each other processor. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00080}{80}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a7e8278718224d7348051443805bf145e}\label{classoomph_1_1DoubleVectorHaloScheme_a7e8278718224d7348051443805bf145e} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Haloed\_displacement@{Haloed\_displacement}}
+\index{Haloed\_displacement@{Haloed\_displacement}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Haloed\_displacement}{Haloed\_displacement}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+displacement\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the offsets of the haloed entries for each processor in the packed Haloed\+\_\+eqns array. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00071}{71}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_aac79c7fe19ec6fae41e2528a540d0eae}\label{classoomph_1_1DoubleVectorHaloScheme_aac79c7fe19ec6fae41e2528a540d0eae} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Haloed\_eqns@{Haloed\_eqns}}
+\index{Haloed\_eqns@{Haloed\_eqns}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Haloed\_eqns}{Haloed\_eqns}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+eqns\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The haloed entries that will be sent in a format compatible with MPI\+\_\+\+Alltoallv i.\+e. (send\+\_\+to\+\_\+proc0,send\+\_\+to\+\_\+proc1 ... send\+\_\+to\+\_\+procn) 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00063}{63}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a13f0645d32135d7ffaedef8c888f7382}\label{classoomph_1_1DoubleVectorHaloScheme_a13f0645d32135d7ffaedef8c888f7382} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Haloed\_n@{Haloed\_n}}
+\index{Haloed\_n@{Haloed\_n}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Haloed\_n}{Haloed\_n}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+n\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the number of haloed entries to be sent to each processor. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00067}{67}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b}\label{classoomph_1_1DoubleVectorHaloScheme_a796210b483850bd17f09a0ba85033a1b} 
+\index{oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}!Local\_index@{Local\_index}}
+\index{Local\_index@{Local\_index}!oomph::DoubleVectorHaloScheme@{oomph::DoubleVectorHaloScheme}}
+\doxysubsubsection{\texorpdfstring{Local\_index}{Local\_index}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Local\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the translation scheme from global unknown to local index in the additional storage vector. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{59}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00036}{Double\+Vector\+Halo\+Scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00118}{local\+\_\+index()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00099}{n\+\_\+halo\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00225}{setup\+\_\+halo\+\_\+dofs()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{double__vector__with__halo_8h}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}\item 
+\mbox{\hyperlink{double__vector__with__halo_8cc}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}\end{DoxyCompactItemize}

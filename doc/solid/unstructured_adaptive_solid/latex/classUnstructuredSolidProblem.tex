@@ -1,0 +1,273 @@
+\doxysection{Unstructured\+Solid\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classUnstructuredSolidProblem}{}\label{classUnstructuredSolidProblem}\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+
+
+Unstructured solid problem.  
+
+
+Inheritance diagram for Unstructured\+Solid\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUnstructuredSolidProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{Unstructured\+Solid\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUnstructuredSolidProblem_a25fe105d949498bf8f7c15aff96a7d00}{\texorpdfstring{$\sim$}{\string~}\+Unstructured\+Solid\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredSolidProblem_a9b725d83bc051b594d080a40d6d317d3}{set\+\_\+incompressible}} ()
+\begin{DoxyCompactList}\small\item\em Set the problem to be incompressible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classUnstructuredSolidProblem_a4da918a1f0cf94ebccc5112b58c28ece}{get\+\_\+strain\+\_\+energy}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the strain energy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredSolidProblem_a463b4b976fdd12129ac2bd23bece1b8b}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Remove Traction Mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUnstructuredSolidProblem_acf0bbf57534a1516a633d702d9fd21ab}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Add on the traction elements after adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Refineable\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem_af121067bd532a78b4360373b60aaddd0}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Bulk mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem_a42018e62ce6bf48968f389880669c8f4}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh of traction elements. \end{DoxyCompactList}\item 
+Triangle\+Mesh\+Polygon \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem_a2e7ef7b4984d6d2a063c0c2374931d0c}{Outer\+\_\+boundary\+\_\+polyline\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Triangle mesh polygon for outer boundary. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classUnstructuredSolidProblem_a956386972054504cdc23fd970b126934}{Incompressible}}
+\begin{DoxyCompactList}\small\item\em Boolean flag used in an incompressible problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Unstructured\+Solid\+Problem$<$ ELEMENT $>$}
+Unstructured solid problem. 
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00085}{85}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}\label{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!UnstructuredSolidProblem@{UnstructuredSolidProblem}}
+\index{UnstructuredSolidProblem@{UnstructuredSolidProblem}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{UnstructuredSolidProblem()}{UnstructuredSolidProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classUnstructuredSolidProblem}{\+::\+Unstructured\+Solid\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+Constructor for unstructured solid problem. 
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00133}{133}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00348}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00120}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+polyline\+\_\+pt}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00114}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00117}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a25fe105d949498bf8f7c15aff96a7d00}\label{classUnstructuredSolidProblem_a25fe105d949498bf8f7c15aff96a7d00} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!````~UnstructuredSolidProblem@{\texorpdfstring{$\sim$}{\string~}UnstructuredSolidProblem}}
+\index{````~UnstructuredSolidProblem@{\texorpdfstring{$\sim$}{\string~}UnstructuredSolidProblem}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}UnstructuredSolidProblem()}{\string~UnstructuredSolidProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00094}{94}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUnstructuredSolidProblem_acf0bbf57534a1516a633d702d9fd21ab}\label{classUnstructuredSolidProblem_acf0bbf57534a1516a633d702d9fd21ab} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Add on the traction elements after adaptation. 
+
+Need to add on the traction elements after adaptation. 
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00348}{348}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure()}}, and \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00133}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a463b4b976fdd12129ac2bd23bece1b8b}\label{classUnstructuredSolidProblem_a463b4b976fdd12129ac2bd23bece1b8b} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Remove Traction Mesh. 
+
+Actions before adapt\+: remove the traction elements in the surface mesh. 
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00331}{331}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+\Hypertarget{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}\label{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00270}{270}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00419}{main()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a4da918a1f0cf94ebccc5112b58c28ece}\label{classUnstructuredSolidProblem_a4da918a1f0cf94ebccc5112b58c28ece} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!get\_strain\_energy@{get\_strain\_energy}}
+\index{get\_strain\_energy@{get\_strain\_energy}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_strain\_energy()}{get\_strain\_energy()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::get\+\_\+strain\+\_\+energy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculate the strain energy. 
+
+Calculate the strain energy in the entire elastic solid. 
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00309}{309}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00419}{main()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a9b725d83bc051b594d080a40d6d317d3}\label{classUnstructuredSolidProblem_a9b725d83bc051b594d080a40d6d317d3} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the problem to be incompressible. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00097}{97}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00123}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Incompressible}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00419}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUnstructuredSolidProblem_a956386972054504cdc23fd970b126934}\label{classUnstructuredSolidProblem_a956386972054504cdc23fd970b126934} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!Incompressible@{Incompressible}}
+\index{Incompressible@{Incompressible}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Incompressible}{Incompressible}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::\+Incompressible\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag used in an incompressible problem. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00123}{123}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00097}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a2e7ef7b4984d6d2a063c0c2374931d0c}\label{classUnstructuredSolidProblem_a2e7ef7b4984d6d2a063c0c2374931d0c} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!Outer\_boundary\_polyline\_pt@{Outer\_boundary\_polyline\_pt}}
+\index{Outer\_boundary\_polyline\_pt@{Outer\_boundary\_polyline\_pt}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Outer\_boundary\_polyline\_pt}{Outer\_boundary\_polyline\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Triangle\+Mesh\+Polygon\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+polyline\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Triangle mesh polygon for outer boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00120}{120}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00133}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_af121067bd532a78b4360373b60aaddd0}\label{classUnstructuredSolidProblem_af121067bd532a78b4360373b60aaddd0} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Solid\+Triangle\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00114}{114}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00133}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+\Hypertarget{classUnstructuredSolidProblem_a42018e62ce6bf48968f389880669c8f4}\label{classUnstructuredSolidProblem_a42018e62ce6bf48968f389880669c8f4} 
+\index{UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!UnstructuredSolidProblem$<$ ELEMENT $>$@{UnstructuredSolidProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Solid\+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem}}$<$ ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh of traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00117}{117}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00133}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unstructured__adaptive__solid_8cc}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\doxysection{elements.\+h File Reference}
+\hypertarget{elements_8h}{}\label{elements_8h}\index{elements.h@{elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{oomph\+::\+Generalised\+Element}}
+\begin{DoxyCompactList}\small\item\em A Generalised Element class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FiniteElement}{oomph\+::\+Finite\+Element}}
+\begin{DoxyCompactList}\small\item\em A general Finite Element class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PointElement}{oomph\+::\+Point\+Element}}
+\begin{DoxyCompactList}\small\item\em Point element has just a single node and a single shape function which is identically equal to one. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{oomph\+::\+Solid\+Initial\+Condition}}
+\begin{DoxyCompactList}\small\item\em A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-\/type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.\+r.\+t. to the local coordinates. A \doxylink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition} object specifies initial position (i.\+e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-\/derivative derivative is currently assigned. See example codes for a demonstration of its use. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{oomph\+::\+Solid\+Finite\+Element}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element} class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceElement}{oomph\+::\+Face\+Element}}
+\begin{DoxyCompactList}\small\item\em Face\+Elements are elements that coincide with the faces of higher-\/dimensional "{}bulk"{} elements. They are used on boundaries where additional non-\/trivial boundary conditions need to be applied. Examples include free surfaces, and applied traction conditions. In many cases, Face\+Elements need to evaluate to quantities in the associated bulk elements. For instance, the evaluation of a shear stresses on 2D \doxylink{classoomph_1_1FaceElement}{Face\+Element} requires the evaluation of velocity derivatives in the associated 3D volume element etc. Therefore we store a pointer to the associated bulk element, and information about the relation between the local coordinates in the face and bulk elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidFaceElement}{oomph\+::\+Solid\+Face\+Element}}
+\begin{DoxyCompactList}\small\item\em Solid\+Face\+Elements combine Face\+Elements and Solid\+Finite\+Elements and overload various functions so they work properly in the \doxylink{classoomph_1_1FaceElement}{Face\+Element} context. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidPointElement}{oomph\+::\+Solid\+Point\+Element}}
+\begin{DoxyCompactList}\small\item\em Solid point element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry}{oomph\+::\+Face\+Geometry$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} class definition\+: This policy class is used to allow construction of face elements that solve arbitrary equations without having to tamper with the corresponding "{}bulk"{} elements. The geometrical information for the face element must be specified by each "{}bulk"{} element using an explicit specialisation of this class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Dummy \doxylink{classoomph_1_1FaceElement}{Face\+Element} for use with purely geometric operations such as mesh generation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ElementWithDragFunction}{oomph\+::\+Element\+With\+Drag\+Function}}
+\begin{DoxyCompactList}\small\item\em Base class for elements that can specify a drag and torque (about the origin) -- typically used for immersed particle computations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Basic-\/ified \doxylink{classoomph_1_1FaceElement}{Face\+Element}, without any of the functionality of of actual Face\+Elements -- it\textquotesingle{}s just a surface element of the same geometric type as the \doxylink{classoomph_1_1FaceGeometry}{Face\+Geometry} associated with bulk element specified by the template parameter. The element can be used to represent boundaries without actually being attached to a bulk element. Used mainly during unstructured mesh generation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix}}
+\begin{DoxyCompactList}\small\item\em Pure virtual base class for elements that can be used with \doxylink{classoomph_1_1PressureBasedSolidLSCPreconditioner}{Pressure\+Based\+Solid\+LSCPreconditioner}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}}
+\begin{DoxyCompactList}\small\item\em Pure virtual base class for elements that can be used with Navier-\/\+Stokes Schur complement preconditioner and provide the diagonal of their velocity and pressure mass matrices -- needs to be defined here (in generic) because this applies to a variety of Navier-\/\+Stokes elements (cartesian, cylindrical polar, ...) that can be preconditioned effectively by the Navier Stokes (!) preconditioners in the (cartesian) Navier-\/\+Stokes directory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1InvertedElementError}{oomph\+::\+Inverted\+Element\+Error}}
+\begin{DoxyCompactList}\small\item\em A class to specify when the error is caused by an inverted element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry}{oomph\+::\+Element\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Enumeration a finite element\textquotesingle{}s geometry "{}type"{}. Either "{}\+Q"{} (square, cubeoid like) or "{}\+T"{} (triangle, tetrahedron). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers}{oomph\+::\+Locate\+\_\+zeta\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for tolerances, number of iterations, etc used in the locate\+\_\+zeta function in \doxylink{classoomph_1_1FiniteElement}{Finite\+Element}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_afa5c7a93cae1917e874b392601be0bde}{oomph\+::\+Coordinate\+Mapping\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{s\+\_\+bulk}})
+\begin{DoxyCompactList}\small\item\em Typedef for the function that translates the face coordinate to the coordinate in the bulk element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_a0a75fbfa1139f00cf88adeee835c8fe5}{oomph\+::\+Bulk\+Coordinate\+Derivatives\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ds\+\_\+bulk\+\_\+dsface}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interior\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Typedef for the function that returns the partial derivative of the local coordinates in the bulk element with respect to the coordinates along the face. In addition this function returns an index of one of the bulk local coordinates that varies away from the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{oomph\+::\+Element\+Geometry\+::\+Element\+Geometry}} \{ \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa950f376990cc80d475d36570d59f3ac3}{oomph\+::\+Element\+Geometry\+::Q}}
+, \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa9c3705b667836ab13e1b3b81a3eb28b8}{oomph\+::\+Element\+Geometry\+::T}}
+ \}
+\end{DoxyCompactItemize}

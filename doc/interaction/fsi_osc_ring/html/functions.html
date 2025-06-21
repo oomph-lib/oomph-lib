@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>actions_after_adapt()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#af4ffa3d628230ef064a84b7c6e6a5fb8">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#a2dd1cb9b211f2cbd2ea9aea625685bcb">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_after_newton_solve()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a63a3da079b167ccdc288372bee6bdbc3">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#a6e4be6a46ab263941b76ab4e6706f63a">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_before_newton_convergence_check()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#afaf315a9b0feb319cf66b21f959e465e">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#a98d4c847cd9d53ab3569b8418ecb0c6b">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>actions_before_newton_solve()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a9fd26120e4e078bca685a5c94482ee12">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#a7d8ff9543c042752b649ed326d6c5915">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>Doc_displacement_elem_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a85d9441c676456c71dffc27500bd0fec">FSIRingProblem</a></li>
+<li>doc_solution()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a686782b9af582b68e55c288e1fe4660e">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#a7de5df21c2179db1c97cc83332dcc82c">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>dump_it()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#af32f94658174188b1f029446161755b2">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>dynamic_run()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#acbb3bc5cd6d16cfee7a2f19a3b984ce7">FSIRingProblem</a></li>
+</ul>
+
+
+<h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>Eps_ampl&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a6e14af107a8f5b5a5254a55f0707ff4c">FSIRingProblem</a></li>
+</ul>
+
+
+<h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>FLUID_ELEMENT&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a2ce9ba3122272853bfa6ec3fcf39b78a">FSIRingProblem</a></li>
+<li>Fluid_mesh_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a33eec722bed7a0b02444c64d3e6c66fe">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#af9ccaa9a5c41ffadda773d704793c76e">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>fluid_mesh_pt()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>Fluid_time_stepper_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a6abf3345b68a0b4b671758439340138e">FSIRingProblem</a></li>
+<li>FSIRingProblem()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a8f4969c6397bebe8afa2b9285ec908e6">FSIRingProblem</a></li>
+</ul>
+
+
+<h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>IC_Fct_pt&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#ad9b2810092588c7708660c5325c73256">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>OscRingNStProblem()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#acd5f633c43eb4cfb43c45361ecf85e6b">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>Pcos_duration&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a90ff979880dbecb47f8830f4217eb17f">FSIRingProblem</a></li>
+<li>Pcos_initial&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a109eb6d9804264294357d6b76aa50ab6">FSIRingProblem</a></li>
+</ul>
+
+
+<h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>restart()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a0cf01737b8d53213d644413e84251d0f">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>Sarah_veloc_trace_node_pt&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a6688cac5da1f4092a9cd343ad5fdfd53">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>set_fluid_initial_condition()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#ad397e4e3b92845240dd6a996856f33e7">FSIRingProblem</a></li>
+<li>set_initial_condition()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a309ea4c79fbae58020d94bf2c2318169">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#ab1f2083699d00da4b7f6116e10792e86">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>set_wall_initial_condition()&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a5f987c1b22dc306cf7d26be7fa74e322">FSIRingProblem</a></li>
+<li>SOLID_ELEMENT&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a96528378f3baf6100aeb6b4fe83bc870">FSIRingProblem</a></li>
+</ul>
+
+
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>Trace_file&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a37c1af48245859045bed1c3fc36be3da">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
+<li>Undef_geom_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a1c7dfd9d2798fb518403e5ef99f1f69c">FSIRingProblem</a></li>
+<li>unsteady_run()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a00e957fb6a313a9c1de784d0fa3a7a36">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_v" name="index_v"></a>- v -</h3><ul>
+<li>Veloc_trace_node_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a2e64e4625ff61633607233d9a6205000">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#aed51269a285ffdc064739d6d363b1179">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
+<li>Wall_mesh_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a112c5285b6ea49d0e003fc3bdd817332">FSIRingProblem</a>, <a class="el" href="classOscRingNStProblem.html#aafee49228dbbee7178448da624b96c3f">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>Wall_pt&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a1349ecb860cacb34792fde6807d92905">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>wall_pt()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a6a62e926867df3c85c87cf59691be0e1">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+<li>Wall_time_stepper_pt&#160;:&#160;<a class="el" href="classFSIRingProblem.html#a67d7e17b8b0513e793f94fa4357b5784">FSIRingProblem</a></li>
+<li>write_trace_file_header()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a96e12e5bb761d765ebe9065b9990112f">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+
+
+<h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
+<li>~OscRingNStProblem()&#160;:&#160;<a class="el" href="classOscRingNStProblem.html#a96e43adf75d4e33270218ceb3397443c">OscRingNStProblem&lt; ELEMENT &gt;</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:18
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

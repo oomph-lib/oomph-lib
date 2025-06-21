@@ -1,0 +1,305 @@
+\doxysection{oomph\+::Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement\texorpdfstring{$<$}{<} HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by FSI parameter (q = k\texorpdfstring{$^\wedge$}{\string^}2 B/E). The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class.  
+
+
+
+
+{\ttfamily \#include $<$helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h$>$}
+
+Inheritance diagram for oomph\+::Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement\texorpdfstring{$<$}{<} HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.510018cm]{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae37a7a8b5ad9850527f9285f2325aa2c}{Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}} (Finite\+Element \texorpdfstring{$\ast$}{*}const \&bulk\+\_\+el\+\_\+pt, const int \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Constructor, takes the pointer to the "{}bulk"{} element and the face index identifying the face to which the element is attached. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae4c3577736bad0c2ebe723138dfc2f4f}{Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}} (const \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}} \&dummy)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aab5bbb5d7c84d2aa0a5d9112e6f2d914}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a5e10f6e632c05ce464548f51c8381b43}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a778e21256d01c8b51e4d9ab8e5767d5f}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aec87ba2999b0c2e58447ca490b987c0e}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: flux etc at Gauss points; n\+\_\+plot is ignored. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae75706159d926cbad94fe66fa607b1fe}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a3a08931249b5071b11ec8082848cc94e}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a91ee0e36a8c127d83269a08d6740dfb2}{shape\+\_\+and\+\_\+test}} (const Vector$<$ double $>$ \&s, Shape \&psi, Shape \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ad3a879cf569b317c086f07872164f9f8}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, Shape \&psi, Shape \&test) const
+\begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a66f653fb85249296deb66cc91647cc52}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a72d189d7598def4ce0ce2aecdc93bcd9}{Dim}}
+\begin{DoxyCompactList}\small\item\em The spatial dimension of the problem. \end{DoxyCompactList}\item 
+std\+::complex$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a84343ef8842d932061e696fdbd032590}{U\+\_\+index\+\_\+helmholtz\+\_\+from\+\_\+displacement}}
+\begin{DoxyCompactList}\small\item\em The index at which the unknown is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$}
+A class for elements that allow the imposition of an prescribed flux (determined from the normal displacements of an adjacent linearly elastic solid. Normal derivative for displacement potential is given by normal displacement of adjacent solid multiplies by FSI parameter (q = k\texorpdfstring{$^\wedge$}{\string^}2 B/E). The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00449}{449}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae37a7a8b5ad9850527f9285f2325aa2c}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae37a7a8b5ad9850527f9285f2325aa2c} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!HelmholtzFluxFromNormalDisplacementBCElement@{HelmholtzFluxFromNormalDisplacementBCElement}}
+\index{HelmholtzFluxFromNormalDisplacementBCElement@{HelmholtzFluxFromNormalDisplacementBCElement}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzFluxFromNormalDisplacementBCElement()}{HelmholtzFluxFromNormalDisplacementBCElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement (\begin{DoxyParamCaption}\item[{Finite\+Element \texorpdfstring{$\ast$}{*}const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Constructor, takes the pointer to the "{}bulk"{} element and the face index identifying the face to which the element is attached. 
+
+Constructor, takes the pointer to the "{}bulk"{} element, and the face index that identifies the face of the bulk element to which this face element is to be attached. 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00657}{657}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00639}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Dim}}, and \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00642}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz\+\_\+from\+\_\+displacement}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae4c3577736bad0c2ebe723138dfc2f4f}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae4c3577736bad0c2ebe723138dfc2f4f} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!HelmholtzFluxFromNormalDisplacementBCElement@{HelmholtzFluxFromNormalDisplacementBCElement}}
+\index{HelmholtzFluxFromNormalDisplacementBCElement@{HelmholtzFluxFromNormalDisplacementBCElement}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HelmholtzFluxFromNormalDisplacementBCElement()}{HelmholtzFluxFromNormalDisplacementBCElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a5e10f6e632c05ce464548f51c8381b43}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a5e10f6e632c05ce464548f51c8381b43} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00486}{486}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00815}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement()}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aab5bbb5d7c84d2aa0a5d9112e6f2d914}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aab5bbb5d7c84d2aa0a5d9112e6f2d914} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Add the element\textquotesingle{}s contribution to its residual vector 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00475}{475}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00815}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement()}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a66f653fb85249296deb66cc91647cc52}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a66f653fb85249296deb66cc91647cc52} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement@{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement}}
+\index{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement@{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement()}{fill\_in\_generic\_residual\_contribution\_helmholtz\_flux\_from\_displacement()}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+flux\+\_\+from\+\_\+displacement (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residual vector. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the contribution to the Jacobian as well. 
+
+Helper function to compute the element\textquotesingle{}s residual vector and the Jacobian matrix. 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00814}{814}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00486}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00475}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae75706159d926cbad94fe66fa607b1fe}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ae75706159d926cbad94fe66fa607b1fe} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00568}{568}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a3a08931249b5071b11ec8082848cc94e}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a3a08931249b5071b11ec8082848cc94e} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00574}{574}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a778e21256d01c8b51e4d9ab8e5767d5f}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a778e21256d01c8b51e4d9ab8e5767d5f} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00498}{498}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00498}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00498}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aec87ba2999b0c2e58447ca490b987c0e}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_aec87ba2999b0c2e58447ca490b987c0e} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function\+: flux etc at Gauss points; n\+\_\+plot is ignored. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00506}{506}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00639}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Dim}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a91ee0e36a8c127d83269a08d6740dfb2}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a91ee0e36a8c127d83269a08d6740dfb2} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!shape\_and\_test@{shape\_and\_test}}
+\index{shape\_and\_test@{shape\_and\_test}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test()}{shape\_and\_test()}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::shape\+\_\+and\+\_\+test (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{Shape \&}]{psi,  }\item[{Shape \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00584}{584}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ad3a879cf569b317c086f07872164f9f8}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_ad3a879cf569b317c086f07872164f9f8} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
+\index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{Shape \&}]{psi,  }\item[{Shape \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Function to compute the shape and test functions and to return the Jacobian of mapping between local and global (Eulerian) coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00608}{608}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a72d189d7598def4ce0ce2aecdc93bcd9}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a72d189d7598def4ce0ce2aecdc93bcd9} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Dim\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The spatial dimension of the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00639}{639}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00658}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement()}}, and \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00506}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+\Hypertarget{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a84343ef8842d932061e696fdbd032590}\label{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement_a84343ef8842d932061e696fdbd032590} 
+\index{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}!U\_index\_helmholtz\_from\_displacement@{U\_index\_helmholtz\_from\_displacement}}
+\index{U\_index\_helmholtz\_from\_displacement@{U\_index\_helmholtz\_from\_displacement}!oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$@{oomph::HelmholtzFluxFromNormalDisplacementBCElement$<$ HELMHOLTZ\_BULK\_ELEMENT, ELASTICITY\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{U\_index\_helmholtz\_from\_displacement}{U\_index\_helmholtz\_from\_displacement}}
+{\footnotesize\ttfamily template$<$class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT , class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+std\+::complex$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1HelmholtzFluxFromNormalDisplacementBCElement}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement}}$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz\+\_\+from\+\_\+displacement\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The index at which the unknown is stored at the nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00642}{642}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00658}{oomph\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement$<$ HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT, ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElement()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,852 @@
+\chapter{Example problem\+: Spin-\/up of a viscous fluid}
+\hypertarget{index}{}\label{index}\index{Example problem: Spin-\/up of a viscous fluid@{Example problem: Spin-\/up of a viscous fluid}}
+This is our first axisymmetric Navier--Stokes example problem. We discuss the non-\/dimensionalisation of the equations and their implementation in {\ttfamily oomph-\/lib}, and demonstrate the solution of a spin-\/up problem.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_equations}{}\doxysection{\texorpdfstring{The axisymmetric Navier–\+Stokes equations}{The axisymmetric Navier–Stokes equations}}\label{index_equations}
+In dimensional form the axisymmetric Navier--Stokes equations are given by the momentum equations (for the $ r^* $ , $ z^* $ and $ \theta $ directions, respectively) \begin{center}  \[
+\rho \left[
+  \frac{\partial u_r^*}{\partial t^*}
+  + {u_r^*}\frac{\partial u_r^*}{\partial r^*}
+  - \frac{{u_{\theta}^*}^2}{r^*}
+  + {u_z^*}\frac{\partial u_r^*}{\partial z^*}
+\right] = B_r^*\left(r^*,z^*,t^*\right)
++ \rho G_r^*
++ \frac{\partial \tau_{rr}^*}{\partial r^*}
++ \frac{\tau_{rr}^*}{r^*}
+- \frac{\tau_{\theta\theta}^*}{r^*}
++ \frac{\partial\tau_{rz}^*}{\partial z^*},
+\]  \[
+\rho \left[
+  \frac{\partial u_z^*}{\partial t^*}
+  + {u_r^*}\frac{\partial u_z^*}{\partial r^*}
+  + {u_z^*}\frac{\partial u_z^*}{\partial z^*}
+\right] = B_z^*\left(r^*,z^*,t^*\right)
++ \rho G_z^*
++ \frac{\partial \tau_{zr}^*}{\partial r^*}
++ \frac{\tau_{zr}^*}{r^*}
++ \frac{\partial\tau_{zz}^*}{\partial z^*},
+\]  \[
+\rho \left[
+  \frac{\partial u_{\theta}^*}{\partial t^*}
+  + {u_r^*}\frac{\partial u_{\theta}^*}{\partial r^*}
+  + \frac{u_r^* u_{\theta}^*}{r^*}
+  + u_z^* \frac{\partial u_{\theta}^*}{\partial z^*}
+\right] = B_\theta^*\left(r^*,z^*,t^*\right)
++ \rho G_\theta^*
++ \frac{\partial \tau_{\theta r}^*}{\partial r^*}
++ \frac{\tau_{\theta r}^*}{r^*}
++ \frac{\tau_{r\theta}^*}{r^*}
++ \frac{\partial\tau_{\theta z}^*}{\partial z^*},
+\] \end{center} 
+
+and the continuity equation
+
+\begin{center}  \[
+\frac{\partial u_r^*}{\partial r^*}
++ \frac{u_r^*}{r^*}
++ \frac{\partial u_z^*}{\partial z^*}
+= Q^*,
+\] \end{center} 
+
+where $ u_r^* $ , $ u_z^* $ and $ u_{\theta}^* $ are the radial, axial and azimuthal velocity components respectively, $ p^*
+$ is the pressure and $ t^* $ is time. We have split the body force into two components\+: A constant vector $ \rho \ G_i^* $ (where $ i = r, z, \theta $) which typically represents gravitational forces; and a variable body force, $
+B_i^*(r^*,z^*,t^*) $ . $ Q^*(r^*,z^*,t^*) $ is a volumetric source term for the continuity equation and is typically equal to zero.
+
+The components of the dimensional stress tensor $ \tau_{ij}^* $ are defined as\+:
+
+\begin{center}  \[
+\tau_{rr}^* = -p^*
++ \mu (1+\Gamma) \frac{\partial u_r^*}{\partial r^*},
+\qquad
+\tau_{\theta\theta}^* = -p^*
++ \mu (1+\Gamma) \frac{u_r^*}{r^*},
+\qquad
+\tau_{zz}^* = -p^*
++ \mu (1+\Gamma) \frac{\partial u_z^*}{\partial z^*},
+\]  \[
+\tau_{rz}^* = \mu \left(
+  \frac{\partial u_r^*}{\partial z^*}
+  + \Gamma \frac{\partial u_z^*}{\partial r^*}
+\right),
+\qquad
+\tau_{zr}^* = \mu \left(
+  \frac{\partial u_z^*}{\partial r^*}
+  + \Gamma \frac{\partial u_r^*}{\partial z^*}
+\right),
+\]  \[
+\tau_{r \theta}^* = \mu \left(
+  \Gamma \frac{\partial u_{\theta}^*}{\partial r^*}
+  - \frac{u_{\theta}^*}{r^*}
+\right),
+\qquad
+\tau_{\theta r}^* = \mu \left(
+  \frac{\partial u_{\theta}^*}{\partial r^*}
+  - \Gamma \frac{u_{\theta}^*}{r^*}
+\right),
+\]  \[
+\tau_{\theta z}^* = \mu \frac{\partial u_{\theta}^*}{\partial z^*},
+\qquad
+\tau_{z \theta}^* = \mu \Gamma \frac{\partial u_{\theta}^*}{\partial z^*}.
+\] \end{center} 
+
+We note that taking $ \Gamma=1 $ corresponds to using the stress-\/divergence form of the viscous term in the Navier--Stokes equations, which is the form that {\ttfamily oomph-\/lib} uses by default. We can, however, recover the `standard' form by setting $ \Gamma=0 $.
+
+We non-\/dimensionalise the equations, using problem-\/specific reference quantities for the velocity, $ {\cal U},$ length, $ {\cal L},
+$ and time, ${\cal T},$ and scale the constant body force vector on the gravitational acceleration, $ g, $ so that \begin{center}  \[
+u_r^* = {\cal U} \, u_r, \qquad
+u_z^* = {\cal U} \, u_z, \qquad
+u_\theta^* = {\cal U} \, u_\theta,
+\]  \[
+r^* = {\cal L} \, r, \qquad
+z^* = {\cal L} \, z, \qquad
+t^* = {\cal T} \, t, \qquad
+G_i^* = g \, G_i,
+\]  \[
+p^* = \frac{\mu_{ref} {\cal U}}{{\cal L}} \, p, \qquad
+B_i^* = \frac{{\cal U}\mu_{ref}}{{\cal L}^2} \, B_i, \qquad
+Q^* = \frac{{\cal U}}{{\cal L}}\, Q,
+\] \end{center}  where we note that the pressure and the variable body force have been non-\/dimensionalised on the viscous scale. $ \mu_{ref} $ and $
+\rho_{ref} $ are reference values for the fluid viscosity and density, respectively. In single-\/fluid problems, they are identical to the viscosity $ \mu $ and density $ \rho $ of the (one and only) fluid in the problem.
+
+The non-\/dimensional form of the axisymmetric Navier--Stokes equations is then given by \begin{center}  \[
+R_{\rho} Re \left[
+  St \frac{\partial u_r}{\partial t}
+  + u_r \frac{\partial u_r}{\partial r}
+  - \frac{u_\theta^2}{r}
+  + u_z \frac{\partial u_r}{\partial z}
+\right] = B_r\left(r,z,t\right)
++ R_\rho \frac{Re}{Fr} G_r
++ \frac{\partial \tau_{rr}}{\partial r}
++ \frac{\tau_{rr}}{r}
+- \frac{\tau_{\theta\theta}}{r}
++ \frac{\partial \tau_{rz}}{\partial z},
+\]  \[
+R_{\rho} Re \left[
+St \frac{\partial u_z}{\partial t}
++ u_r \frac{\partial u_z}{\partial r}
++ u_z \frac{\partial u_z}{\partial z}
+\right] = B_z\left(r,z,t\right)
++ R_\rho \frac{Re}{Fr} G_z
++ \frac{\partial \tau_{zr}}{\partial r}
++ \frac{\tau_{zr}}{r}
++ \frac{\partial \tau_{zz}}{\partial z},
+\]  \[
+R_{\rho} Re \left[
+St \frac{\partial u_\theta}{\partial t}
++ u_r \frac{\partial u_\theta}{\partial r}
++ \frac{u_r u_\theta}{r}
++ u_z \frac{\partial u_\theta}{\partial z}
+\right] = B_\theta\left(r,z,t\right)
++ R_\rho \frac{Re}{Fr} G_\theta
++ \frac{\partial \tau_{\theta r}}{\partial r}
++ \frac{\tau_{\theta r}}{r}
++ \frac{\tau_{r \theta}}{r}
++ \frac{\partial \tau_{\theta z}}{\partial z},
+\] \end{center} 
+
+and
+
+\begin{center}  \[
+\frac{\partial u_r}{\partial r}
++ \frac{u_r}{r}
++ \frac{\partial u_z}{\partial z}
+= Q.
+\] \end{center} 
+
+Here the components of the non-\/dimensional stress tensor $ \tau_{ij}
+$ are defined as\+:
+
+\begin{center}  \[
+\tau_{rr} = -p + R_\mu (1+\Gamma) \frac{\partial u_r}{\partial r},
+\qquad
+\tau_{\theta\theta} = -p + R_\mu (1+\Gamma) \frac{u_r}{r},
+\qquad
+\tau_{zz} = -p + R_\mu (1+\Gamma) \frac{\partial u_z}{\partial z},
+\]  \[
+\tau_{rz} = R_\mu \left(
+  \frac{\partial u_r}{\partial z}
+  + \Gamma \frac{\partial u_z}{\partial r}
+\right),
+\qquad
+\tau_{zr} = R_\mu \left(
+  \frac{\partial u_z}{\partial r}
+  + \Gamma \frac{\partial u_r}{\partial z}
+\right),
+\]  \[
+\tau_{r \theta} = R_\mu \left(
+  \Gamma \frac{\partial u_\theta}{\partial r}
+  - \frac{u_\theta}{r}
+\right),
+\qquad
+\tau_{\theta r} = R_\mu \left(
+  \frac{\partial u_\theta}{\partial r}
+  - \Gamma \frac{u_\theta}{r} \right),
+\]  \[
+\tau_{\theta z} = R_\mu \frac{\partial u_\theta}{\partial z}
+\qquad
+\tau_{z \theta} = R_\mu \Gamma \frac{\partial u_\theta}{\partial z}.
+\] \end{center} 
+
+The dimensionless parameters \begin{center}  \[
+Re = \frac{{\cal U}{\cal L}\rho_{ref}}{\mu_{ref}}, \qquad 
+St = \frac{{\cal L}}{{\cal U}{\cal T}}, \qquad 
+Fr = \frac{{\cal U}^2}{g{\cal L}},
+\] \end{center}  are the Reynolds number, Strouhal number and Froude number respectively. $ R_\rho=\rho/\rho_{ref} $ and $ R_\mu
+=\mu/\mu_{ref}$ represent the ratios of the fluid\textquotesingle{}s density and its dynamic viscosity, relative to the density and viscosity values used to form the non-\/dimensional parameters (By default, $ R_\rho = R_\mu
+= 1 $ ; other values tend to be used in problems involving multiple fluids). We refer to \href{../../../navier_stokes/driven_cavity/html/index.html\#params}{\texttt{ another tutorial}} for a more detailed discussion of these non-\/dimensional parameters and their default values.
+
+The above equations are typically augmented by Dirichlet boundary conditions for (some of) the velocity components. On boundaries where no velocity boundary conditions are applied, the flow satisfies the "{}traction free"{} natural boundary condition $ t_i = 0 $. For example, in the spin-\/up problem to be considered below, no condition is applied to the $ z $-\/component of the velocity on the symmetry boundary, which means that the traction in this direction, $ t_z $, is equal to zero.
+
+If the velocity is prescribed along the entire domain boundary, the fluid pressure $ p $ is only determined up to an arbitrary constant. This indeterminacy may be overcome by prescribing the value of the pressure at a single point in the domain. See the exercises at the end of the (non-\/axisymmetric) \href{../../../navier_stokes/driven_cavity/html/index.html\#exercises}{\texttt{ driven cavity example}} for further discussion of this issue.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_implementation}
+{\ttfamily oomph-\/lib} provides two LBB-\/stable isoparametric axisymmetric Navier--Stokes elements that are based on the {\ttfamily QElement$<$2,3$>$} family of geometric finite elements. They are nine-\/node quadrilateral elements which only differ in the way in which the pressure is represented. In {\ttfamily Axisymmetric\+QCrouzeix\+Raviart\+Elements} the pressure is represented by a discontinuous, piecewise bi-\/linear function. {\ttfamily Axisymmetric\+QTaylor\+Hood\+Elements} represent the pressure by a globally-\/continuous, piecewise bi-\/linear interpolation between the pressure values that are stored at the elements\textquotesingle{} four corner nodes.
+
+The implementation of these axisymmetric Navier--Stokes elements is very similar to their non-\/axisymmetric counterparts, discussed in detail in \href{../../../navier_stokes/driven_cavity/html/index.html\#element_types}{\texttt{ another tutorial}}. The radial and axial nodal positions are stored at the first and second nodal coordinates respectively, and can therefore be accessed by the member functions
+\begin{DoxyItemize}
+\item Radial coordinate ( $ r $)\+: {\ttfamily Node\+::x(0)} 
+\item Axial coordinate ( $ z $)\+: {\ttfamily Node\+::x(1)} 
+\end{DoxyItemize}
+
+By default the radial, axial and azimuthal components are stored as the first, second and third nodal values respectively, and can therefore be accessed by the member functions
+\begin{DoxyItemize}
+\item Radial component ( $ u_r $)\+: {\ttfamily Node\+::value(0)} 
+\item Axial component ( $ u_z $)\+: {\ttfamily Node\+::value(1)} 
+\item Azimuthal component ( $ u_\theta $)\+: {\ttfamily Node\+::value(2)} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+The solution of the axisymmetric Navier--Stokes equations will be illustrated using the example of a spin-\/up problem. We consider a sealed cylindrical container of radius $ R $ and height $ H $, filled with a fluid of density $ \rho $ and dynamic viscosity $
+\mu $. Both the fluid and the cylinder are initially at rest, and at time $ t=0 $ the cylinder immediately begins to rotate about its vertical axis of symmetry with a constant angular velocity $ \Omega
+$. Initially, the bulk of the fluid remains stationary, with the exception of the regions next to the solid boundaries. The fluid near the top and bottom `lids' is moving faster than that along the bulk of the cylinder, and gets driven radially outward. It is replaced by fluid from the interior, setting up secondary flows in the $ r $-\/ $ z
+$ plane, until eventually the entire fluid is moving in solid body rotation with the cylinder.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.3\textwidth]{spin_up_diagram}
+\doxyfigcaption{Sketch of the problem. The red \`{}slice\textquotesingle{} represents the domain in which the axisymmetric Navier-\/-\/\+Stokes equations will be solved. }
+\end{DoxyImage}
+
+
+We model this problem by solving the axisymmetric Navier--Stokes equations in a rectangular domain of width $ R $ and height $ H
+$. For our non-\/dimensionalisation we choose the length scale $
+{\cal L} $ to be the radius of the cylinder $ R $ and the velocity scale $ {\cal U} $ to be the speed of the outer wall $
+R \, \Omega $. The time scale $ {\cal T} $ is chosen to be $
+{\cal L}/{\cal U} $ so that the Strouhal number is equal to one. We choose an aspect ratio of $ H = 1.4 R $ and therefore our domain $ D $ is defined to be  \[
+D = \{ r \in [0.0,1.0], \; z \in [0.0,1.4] \}.
+\] The governing equations are subject to the Dirichlet boundary conditions  \[
+u_r = 0, \qquad u_z = 0, \qquad u_\theta = r
+\] on the bottom, right and top boundaries and  \[
+u_r = 0, \qquad u_\theta = 0
+\] on the left boundary, $ r=0 $. The $ z $-\/component of the velocity on this boundary is traction-\/free, which corresponds to the symmetry condition $ \partial u_z /\partial r = 0 $.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows contour plots of the azimuthal velocity component and the pressure distribution with superimposed streamlines, taken from \href{../figures/spin_up_stream.avi}{\texttt{ an animation of the flow field}}, computed with axisymmetric Taylor-\/\+Hood elements for the parameters $
+Re = Re \, St = 5.0 $
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{spin_up_stream}
+\doxyfigcaption{Plot of the azimuthal velocity and pressure fields. }
+\end{DoxyImage}
+
+
+The figure below shows carpet plots of all three velocity components and the pressure, taken from \href{../figures/spin_up_carpet.avi}{\texttt{ another animation of the flow field}}, computed with axisymmetric Taylor-\/\+Hood elements for the parameters $
+Re = Re \, St = 5.0 $
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{spin_up_carpet}
+\doxyfigcaption{Plot of the velocity and pressure fields. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+The Reynolds number and the Womersley number (the product of the Reynolds and Strouhal numbers) are needed in this problem. As usual, we define them in a namespace\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}\ =\ 5.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Womersley\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}\ =\ 5.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by specifying the (non-\/dimensional) length of time we want to run the simulation for and the size of the timestep. Because all driver codes are run as part of {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/testing routines we allow the user to pass a command line argument to the executable which sets the maximum time to some lower value.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ axisymmetric\ spin-\/up\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{spin__up_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Maximum\ time}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ t\_max\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Duration\ of\ timestep}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ dt\ =\ 0.01;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ we\ are\ doing\ validation\ run,\ use\ smaller\ number\ of\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(CommandLineArgs::Argc>1)\ \{\ t\_max\ =\ 0.02;\ \}}
+
+\end{DoxyCodeInclude}
+ Next we specify the dimensions of the mesh and the number of elements in the radial and azimuthal directions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ radial\ (r)\ direction}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_r\ =\ 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ axial\ (z)\ direction}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_z\ =\ 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Length\ in\ radial\ (r)\ direction}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ l\_r\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Length\ in\ axial\ (z)\ direction}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ l\_z\ =\ 1.4;}
+
+\end{DoxyCodeInclude}
+ We build the problem using {\ttfamily Refineable\+Axisymmetric\+QTaylor\+Hood\+Elements} and the {\ttfamily BDF$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ RefineableAxisymmetricQTaylorHoodElements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ cout\ <<\ \textcolor{stringliteral}{"{}Doing\ RefineableAxisymmetricQTaylorHoodElement"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ the\ problem\ with\ RefineableAxisymmetricQTaylorHoodElements}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRotatingCylinderProblem}{RotatingCylinderProblem}}}
+\DoxyCodeLine{\ \ \ <RefineableAxisymmetricQTaylorHoodElement,\ BDF<2>\ >\ }
+\DoxyCodeLine{\ \ \ problem(n\_r,n\_z,l\_r,l\_z);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ and\ output\ the\ solution}}
+\DoxyCodeLine{\ \ problem.unsteady\_run(t\_max,dt,\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCodeInclude}
+ We then repeat the process with {\ttfamily Refineable\+Axisymmetric\+QCrouzeix\+Raviart\+Elements}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ RefineableAxisymmetricQCrouzeixRaviartElements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ cout\ <<\ \textcolor{stringliteral}{"{}Doing\ RefineableAxisymmetricQCrouzeixRaviartElement"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ the\ problem\ with\ RefineableAxisymmetricQCrouzeixRaviartElements}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRotatingCylinderProblem}{RotatingCylinderProblem}}}
+\DoxyCodeLine{\ \ \ <RefineableAxisymmetricQCrouzeixRaviartElement,\ BDF<2>\ >}
+\DoxyCodeLine{\ \ \ problem(n\_r,n\_z,l\_r,l\_z);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ and\ output\ the\ solution}}
+\DoxyCodeLine{\ \ problem.unsteady\_run(t\_max,dt,\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily Problem} class for our unsteady axisymmetric Navier--Stokes problem is very similar to that used in the \href{../../../navier_stokes/rayleigh_channel/html/index.html}{\texttt{ Rayleigh channel example}}. We specify the type of the element and the type of the timestepper (assumed to be a member of the {\ttfamily BDF} family) as template parameters, and pass the number of elements and domain length in both coordinate directions to the problem constructor. We define an empty destructor, functions to set the initial and boundary conditions and a post-\/processing function {\ttfamily doc\+\_\+solution(...)}, which will be used by the timestepping function {\ttfamily unsteady\+\_\+run(...)}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Refineable\ rotating\ cylinder\ problem\ in\ a\ rectangular}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ axisymmetric\ domain}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRotatingCylinderProblem}{RotatingCylinderProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ the\ number\ of\ elements\ and\ the\ lengths\ of\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ domain\ in\ the\ radial\ (r)\ and\ axial\ (z)\ directions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRotatingCylinderProblem}{RotatingCylinderProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n\_r,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n\_z,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ l\_r,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ l\_z);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRotatingCylinderProblem_a586e71f48ee21cfc3bc93d17e91bbc11}{\string~RotatingCylinderProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ initial\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a5e4316cce2306c4aab4a20b88cdfe6e3}{set\_initial\_condition}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a37efdb2d7059535a48b12f69869996ee}{set\_boundary\_conditions}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Document\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a22f82fba41d68b9748642f9a29a12592}{doc\_solution}}(DocInfo\ \&doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Do\ unsteady\ run\ up\ to\ maximum\ time\ t\_max\ with\ given\ timestep\ dt}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_abfb7f77b97e9ac061edbaa97a018cd24}{unsteady\_run}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t\_max,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ dt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ dir\_name);}
+
+\end{DoxyCodeInclude}
+ Next we define an access function to the specific {\ttfamily Mesh\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ specific\ mesh}}
+\DoxyCodeLine{\ RefineableRectangularQuadMesh<ELEMENT>*\ mesh\_pt()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We reset the boundary conditions before each solve by overloading {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}. This is to ensure that all newly-\/created nodes are given the correct boundary conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve.\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reset\ velocity\ boundary\ conditions\ just\ to\ be\ on\ the\ safe\ side...}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ actions\_before\_newton\_solve()\ \{\ set\_boundary\_conditions();\ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ No\ actions\ required\ after\ solve\ step}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ actions\_after\_newton\_solve()\ \{\}}
+
+\end{DoxyCodeInclude}
+ In Navier--Stokes problems in which the velocity is prescribed along the entire domain boundary, the pressure is only determined up an arbitrary constant, making it necessary to "{}pin"{} one pressure value. If the pinned pressure degree of freedom is associated with an element that is unrefined during the mesh adaptation, the pinned degree of freedom may no longer exist in the adapted problem. We therefore use the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} to ensure that precisely one pressure degree of freedom is pinned when re-\/solving the adapted problem. Additionally, the possible presence of hanging nodes in an adapted mesh requires special treatment for elements (e.\+g. Taylor-\/\+Hood elements) in which the pressure is represented by a low-\/order interpolation between a subset of the element\textquotesingle{}s nodal values. The function {\ttfamily Axisymmetric\+Navier\+Stokes\+Equations\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures(...)} performs the required tasks. The technical details of these functions are discussed in detail in an \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ earlier tutorial}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ After\ adaptation:\ Pin\ pressure\ again\ (the\ previously\ pinned}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ value\ might\ have\ disappeared)\ and\ pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ actions\_after\_adapt()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Unpin\ all\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableAxisymmetricNavierStokesEquations::}
+\DoxyCodeLine{\ \ \ \ unpin\_all\_pressure\_dofs(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableAxisymmetricNavierStokesEquations::}
+\DoxyCodeLine{\ \ \ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Now\ set\ the\ pressure\ in\ first\ element\ at\ 'node'\ 0\ to\ 0.0}}
+\DoxyCodeLine{\ \ \ fix\_pressure(0,0,0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ actions\_after\_adapt}}
+
+\end{DoxyCodeInclude}
+ Finally, we provide a helper function {\ttfamily fix\+\_\+pressure(...)} which pins a pressure value in a specified element and assigns a specific value.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fix\ pressure\ in\ element\ e\ at\ pressure\ dof\ pdof\ and\ set\ to\ pvalue}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ fix\_pressure(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ e,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ pdof,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ pvalue)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ actual\ element\ and\ fix\ pressure}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{\ \ \ \ fix\_pressure(pdof,pvalue);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ End\ of\ problem\ class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We start by building the timestepper, determining its type from the class\textquotesingle{}s second template argument, and pass a pointer to it to the problem, using the function {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ refineable\ rotating\ cylinder\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a436b0ff8c4ac33acfe10492c587ad80d}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a436b0ff8c4ac33acfe10492c587ad80d}{RotatingCylinderProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n\_r,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n\_z,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ l\_r,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ l\_z)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Allocate\ the\ timestepper\ (this\ constructs\ the\ time\ object\ as\ well)}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ TIMESTEPPER);}
+
+\end{DoxyCodeInclude}
+ Next we build the adaptive mesh and specify an error estimator, which will be used to guide the automatic mesh adaptation. We pass this to the mesh, set the maximum refinement level and override the maximum and minimum permitted errors, which are used to determine whether or not an element should be refined/unrefined during mesh adaptation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ RefineableRectangularQuadMesh<ELEMENT>}
+\DoxyCodeLine{\ \ (n\_r,n\_z,l\_r,l\_z,time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ and\ set\ the\ error\ estimator\ for\ spatial\ adaptivity}}
+\DoxyCodeLine{\ mesh\_pt()-\/>spatial\_error\_estimator\_pt()\ =\ \textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ maximum\ refinement\ level\ for\ the\ mesh\ to\ 4}}
+\DoxyCodeLine{\ mesh\_pt()-\/>max\_refinement\_level()\ =\ 4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Override\ the\ maximum\ and\ minimum\ permitted\ errors}}
+\DoxyCodeLine{\ mesh\_pt()-\/>max\_permitted\_error()\ =\ 1.0e-\/2;}
+\DoxyCodeLine{\ mesh\_pt()-\/>min\_permitted\_error()\ =\ 1.0e-\/3;}
+
+\end{DoxyCodeInclude}
+ We pin the radial and azimuthal velocity components on all boundaries, and the axial component on the three solid boundaries.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ All\ nodes\ are\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Dirichlet\ conditions\ here}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_boundary\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=0;b<n\_boundary;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ values\ for\ radial\ velocity\ on\ all\ boundaries}}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ values\ for\ axial\ velocity\ on\ all\ SOLID\ boundaries\ (b\ =\ 0,1,2)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(b!=3)\ \{\ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin(1);\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ values\ for\ azimuthal\ velocity\ on\ all\ boundaries}}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ mesh\ boundaries}}
+
+\end{DoxyCodeInclude}
+ We pass the pointers to the Reynolds and Womersley numbers, $ Re $ and $ Re\, St $ , and the pointer to the global time object (created when we called {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)} above) to the elements. Because we know that the mesh will remain stationary we can disable the ALE formulation of the unsteady equations by calling {\ttfamily Axisymmetric\+Navier\+Stokes\+Equations\+::disable\+\_\+\+ALE()}. This suppresses the additional computation required to calculate the correction to the Eulerian time-\/derivative $ \partial u /\partial t $ which is required if the mesh is moving, as discussed in detail in \href{../../../optimisation/html/index.html\#ale}{\texttt{ another tutorial}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Reynolds\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Womersley\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ mesh\ remains\ fixed}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>disable\_ALE();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ elements}}
+
+\end{DoxyCodeInclude}
+ Since no traction boundary conditions are applied anywhere, the pressure is only determined up to an arbitrary constant. For the reasons discussed above we pin any redundant pressure degrees of freedom caused by hanging nodes and then ensure a unique solution by pinning a single pressure value. Finally, we set up the equation numbering scheme using the function {\ttfamily Problem\+::assign\+\_\+eqn\+\_\+numbers()}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ redundant\ pressure\ dofs}}
+\DoxyCodeLine{\ RefineableAxisymmetricNavierStokesEquations::}
+\DoxyCodeLine{\ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ set\ the\ pressure\ in\ first\ element\ at\ 'node'\ 0\ to\ 0.0}}
+\DoxyCodeLine{\ fix\_pressure(0,0,0.0);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_initial_condition}{}\doxysection{\texorpdfstring{Initial conditions}{Initial conditions}}\label{index_set_initial_condition}
+The function {\ttfamily set\+\_\+initial\+\_\+condition()} sets the initial conditions for the problem by looping over all the nodes in the mesh and setting all velocity components to zero. No initial conditions are required for the pressure. We then call the function {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} which copies the current values at each of the nodes into the required number of history values for the timestepper in question. This corresponds to an impulsive start, as for all time $ t \leq 0 $ the fluid is at rest. At the first timestep, the solid domain boundaries are immediately moving with a speed corresponding to their radial distance from the symmetry boundary. {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()} is called after each mesh adaptation on the first timestep only. This means that any newly-\/created nodes obtain their values from the actual (analytical) initial conditions rather than from interpolation of the values of previously-\/existing nodes.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ initial\ conditions:\ Set\ all\ nodal\ velocities\ to\ zero\ and}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ initialise\ the\ previous\ velocities\ to\ correspond\ to\ an\ impulsive\ start}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a5e4316cce2306c4aab4a20b88cdfe6e3}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ three\ velocity\ components}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<3;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ velocity\ component\ i\ of\ node\ n\ to\ zero}}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>node\_pt(n)-\/>set\_value(i,0.0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ the\ previous\ velocity\ values\ for\ timestepping}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ corresponding\ to\ an\ impulsive\ start}}
+\DoxyCodeLine{\ assign\_initial\_values\_impulsive();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ set\_initial\_condition}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_set_boundary_conditions}{}\doxysection{\texorpdfstring{Boundary conditions}{Boundary conditions}}\label{index_set_boundary_conditions}
+The function {\ttfamily set\+\_\+boundary\+\_\+conditions()} sets the boundary conditions for the problem. On the three solid boundaries ( $ r = 1.0 $, $ z
+= 0.0 $ and $ z = 1.4 $) we set the radial and axial velocities to zero so that there is no penetration of the wall by the fluid or flow along it. To simulate the domain rotating around the axis $ r =
+0 $ we set the azimuthal velocity at each node along these boundaries to be equal to the radial position of the node. On the symmetry boundary ( $ r = 0 $) we set the radial and azimuthal velocities to zero but leave the axial component unconstrained. As discussed \href{\#equations}{\texttt{ above}}, not applying a velocity boundary condition causes the flow to satisfy the "{}traction free"{} natural boundary condition; in this case, $ t_z = 0 $. This corresponds to the symmetry condition $ \partial u_z /\partial r = 0 $.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ boundary\ conditions:\ Set\ both\ velocity\ components\ to\ zero}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ on\ the\ bottom\ (solid)\ wall\ and\ the\ horizontal\ component\ only\ to\ zero}}
+\DoxyCodeLine{\textcolor{comment}{///\ on\ the\ side\ (periodic)\ boundaries}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a37efdb2d7059535a48b12f69869996ee}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_boundary\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ mesh\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=0;b<n\_boundary;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Determine\ number\ of\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ For\ the\ solid\ boundaries\ (boundaries\ 0,1,2)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(b<3)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ radial\ component\ of\ position}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ r\_pos\ =\ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ all\ velocity\ components\ to\ no\ flow\ along\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>set\_value(0,0,0.0);\ \textcolor{comment}{//\ Radial}}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>set\_value(0,1,0.0);\ \textcolor{comment}{//\ Axial}}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>set\_value(0,2,r\_pos);\ \textcolor{comment}{//\ Azimuthal}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ For\ the\ symmetry\ boundary\ (boundary\ 3)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(b==3)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ only\ the\ radial\ (i=0)\ and\ azimuthal\ (i=2)\ velocity\ components}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ to\ no\ flow\ along\ boundary\ (axial\ component\ is\ unconstrained)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>set\_value(0,0,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>set\_value(0,2,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ nodes\ on\ boundary\ b}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ mesh\ boundaries}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ set\_boundary\_conditions}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+As expected, this member function documents the computed solution. We first print the value of the current time to the screen, before outputting the computed solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Document\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRotatingCylinderProblem_a22f82fba41d68b9748642f9a29a12592}{RotatingCylinderProblem<ELEMENT,TIMESTEPPER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classRotatingCylinderProblem_a22f82fba41d68b9748642f9a29a12592}{doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ the\ time}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Time\ is\ now\ "{}}\ <<\ time\_pt()-\/>time()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ number\ of\ plot\ points\ (in\ each\ coordinate\ direction)}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ npts\ =\ 5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ solution\ output\ file}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.directory().c\_str(),doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ to\ file}}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Close\ solution\ output\ file}}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ doc\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_timestepping}{}\doxysection{\texorpdfstring{The timestepping loop}{The timestepping loop}}\label{index_timestepping}
+The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepping procedure. We start by creating a {\ttfamily Doc\+Info} object to store the output directory and the label for the output files.
+
+Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep $ dt $ must be passed to the problem\textquotesingle{}s timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem. Next we assign the initial conditions by calling {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()}, which was discussed \href{\#set_initial_condition}{\texttt{ above}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ timestep}}
+\DoxyCodeLine{\ initialise\_dt(dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ initial\ condition}}
+\DoxyCodeLine{\ set\_initial\_condition();}
+
+\end{DoxyCodeInclude}
+ We define the maximum number of spatial adaptations which are permitted per timestep, and refine the mesh uniformly twice.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Maximum\ number\ of\ spatial\ adaptations\ per\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt\ =\ 4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Call\ refine\_uniformly\ twice}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)\ \{\ refine\_uniformly();\ \}}
+
+\end{DoxyCodeInclude}
+ We determine the number of timesteps to be performed and document the initial conditions. A flag, {\ttfamily first\+\_\+timestep}, is initialised and set to true. This flag will be passed to {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, and when set to true instructs the code to re-\/assign the initial conditions after every mesh adaptation.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Determine\ number\ of\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ n\_timestep\ =\ unsigned(t\_max/dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ initial\ solution}}
+\DoxyCodeLine{\ doc\_solution(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Are\ we\ on\ the\ first\ timestep?\ At\ this\ point,\ yes!}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ first\_timestep\ =\ \textcolor{keyword}{true};}
+
+\end{DoxyCodeInclude}
+ A key feature of this problem is the fact that the flow field approaches a "{}trivial"{} solution (rigid body rotation) which can be fully-\/resolved by the discretisation. In that case, equidistribution of the error (normalised by the norm of the global error which tends to zero!) leads to strong uniform mesh refinement despite the fact that the solution is fully converged. To avoid this, we prescribe a constant reference flux to normalise the error. For more details, see the discussion in the \href{../../../the_data_structure/html/classoomph_1_1Z2ErrorEstimator.html}{\texttt{ {\ttfamily Z2\+Error\+Estimator} class reference}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ normalising\ factor\ explicitly}}
+\DoxyCodeLine{\ Z2ErrorEstimator*\ error\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}Z2ErrorEstimator*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ (mesh\_pt()-\/>spatial\_error\_estimator\_pt());}
+\DoxyCodeLine{\ error\_pt-\/>reference\_flux\_norm()\ =\ 0.01;}
+
+\end{DoxyCodeInclude}
+ Finally, we perform the actual timestepping loop. For each timestep the function {\ttfamily unsteady\+\_\+newton\+\_\+solve(dt)} is called and the solution documented.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ t=1;t<=n\_timestep;t++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Output\ current\ timestep\ to\ screen}}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nTimestep\ "{}}\ <<\ t\ <<\ \textcolor{stringliteral}{"{}\ of\ "{}}\ <<\ n\_timestep\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Take\ fixed\ timestep\ with\ spatial\ adaptivity}}
+\DoxyCodeLine{\ \ \ unsteady\_newton\_solve(dt,max\_adapt,first\_timestep);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ No\ longer\ on\ first\ timestep,\ so\ set\ first\_timestep\ flag\ to\ false}}
+\DoxyCodeLine{\ \ \ first\_timestep\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Reset\ maximum\ number\ of\ adaptations\ for\ all\ future\ timesteps}}
+\DoxyCodeLine{\ \ \ max\_adapt\ =\ 1;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ End\ of\ timestepping\ loop}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ End\ of\ unsteady\_run}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_good_practice_bcs}{}\doxysubsection{\texorpdfstring{Good practice\+: Assigning boundary conditions}{Good practice: Assigning boundary conditions}}\label{index_good_practice_bcs}
+In our driver code we reset the boundary conditions for the problem before each Newton solve. This is done to ensure that any new boundary nodes created during mesh refinement are explicitly given the correct boundary conditions. However, the function that actually creates the new nodes, {\ttfamily Refineable\+QElement$<$2$>$\+::build(...)}, automatically assigns new nodes with values by interpolating within the father element. Since in our case the boundary conditions are linear, there is in fact no need to reset them at any point during the simulation, as the new boundary nodes were already given precisely the correct values by interpolation. Resetting the boundary conditions is only strictly necessary, therefore, in cases where\+:
+
+
+\begin{DoxyEnumerate}
+\item The boundary conditions are given by a function which is of higher order than the shape functions used by the finite element, or
+\item The boundary conditions are time-\/dependent.
+\end{DoxyEnumerate}\hypertarget{index_good_practice_ics}{}\doxysubsection{\texorpdfstring{Good practice\+: Assigning initial conditions}{Good practice: Assigning initial conditions}}\label{index_good_practice_ics}
+Similarly, we repeatedly call the {\ttfamily set\+\_\+initial\+\_\+condition()} function after each mesh adaptation during the first timestep. This is done to ensure that the exact initial conditions are given to newly created nodes during mesh refinement. Again, this is not strictly necessary in our case since {\ttfamily Refineable\+QElement$<$2$>$\+::build(...)} provides newly-\/created nodes with history values which are computed by interpolation of the history values stored at the nodes of the father element. Our initial conditions are constant and can therefore be represented exactly by this procedure. Should the initial conditions be given by an analytical function of higher order than the shape functions used by the finite elements, however, it would indeed be necessary to explicitly provide newly-\/created nodes with the exact initial conditions during the first timestep. For a more in-\/depth discussion, see \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html\#spatial_adapt}{\texttt{ another tutorial}}.
+
+\begin{center} {\bfseries{A slight subtlety}} \end{center} 
+
+Omitting the re-\/assignment of the initial conditions on the adapted mesh when performing the first timestep does have a subtle effect that we encourage you to explore in the exercises below. You will observe that the solution obtained when re-\/assigning the initial conditions differs {\bfseries{very}} slightly from that obtained when this step is suppressed. This obviously seems to contradict the statements made above and requires some explanation.
+
+To understand why the behaviour is not unexpected (and perfectly acceptable!) let us analyse in more detail what really happens when we compute the first timestep in a spatially adaptive computation. When we perform the first Newton solve on the original mesh, the history values (which, for a BDF timestepper, represent the solution at previous timesteps) are identically equal to zero. The current values are also zero but this has no particular significance -- they simply provide the initial guess for the solution at the advanced time level and their values are subsequently updated by the Newton solver.
+
+Following the convergence of the Newton solver, the history values will therefore have retained their original values (zero) while the current values will have been updated to represent the "{}correct"{} solution of the nonlinear problem at the next timestep (on the current mesh). The accuracy of this solution is now assessed by the spatial error estimator. If the estimated error is deemed too large, the mesh is adapted and all quantities (history values {\bfseries{and}} current values) are automatically transferred onto the new mesh by interpolation -- exactly as discussed above. Interpolation of the (identically equal to zero) history values onto the new mesh assigns zero history values for all newly-\/created nodes -- exactly what we (needlessly) do in our own implementation of {\ttfamily Problem\+::set\+\_\+initial\+\_\+conditions()}. The interpolation of the current values transfers what is our current "{}best guess"{} for the solution at the advanced time onto the new mesh. In principle, this provides a "{}better"{} initial guess for the solution at the advanced time level than the zero initial guess that we re-\/assign when we call {\ttfamily Problem\+::set\+\_\+initial\+\_\+conditions()} but (as long as the Newton iteration converges) this assignment is irrelevant. However, starting the Newton iteration from a different initial guess will almost certainly lead to a slightly different solution -- a solution being defined as a(ny) set of current values for which the maximum residual in the {\ttfamily Problem\textquotesingle{}s} residual vector is less than the required tolerance. Hence, even though omitting or performing the re-\/assignment of the initial conditions leads to two {\bfseries{slightly}} different solutions, both solutions are equally acceptable (within the threshold that is implicit in our convergence criterion for the Newton iteration).\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Remove the function {\ttfamily set\+\_\+initial\+\_\+condition()} entirely from the driver code (do not just leave it empty!), so that the initial conditions are not constantly reset during the first timestep. Confirm that the code still produces approximately (but not precisely) the same results, as discussed in the \href{\#good_practice_ics}{\texttt{ previous section}}.
+\item Restore {\ttfamily set\+\_\+initial\+\_\+condition()} to its original state, but remove the call to {\ttfamily assign\+\_\+initial\+\_\+values\+\_\+impulsive()}. Confirm that the code still produces precisely the same results. Why are exactly the same results produced this time?
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/axisym_navier_stokes/spin_up/}{\texttt{ demo\+\_\+drivers/axisym\+\_\+navier\+\_\+stokes/spin\+\_\+up/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/axisym_navier_stokes/spin_up/spin_up.cc}{\texttt{ demo\+\_\+drivers/axisym\+\_\+navier\+\_\+stokes/spin\+\_\+up/spin\+\_\+up.\+cc }} \end{center} 
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

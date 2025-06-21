@@ -1,0 +1,136 @@
+\doxysection{oomph\+::Eighth\+Sphere\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1EighthSphereMesh}{}\label{classoomph_1_1EighthSphereMesh}\index{oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}}
+
+
+Eight of a sphere brick mesh, based on the Eight\+Sphere\+Domain Non-\/refineable version with four brick elements. The eighth-\/sphere is located in the positive octant, centred at the origin. The mesh boundaries are numbered as follows\+:  
+
+
+
+
+{\ttfamily \#include $<$eighth\+\_\+sphere\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Eighth\+Sphere\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1EighthSphereMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a0457fc188d930a1e8853a3f0e1effbb3}{Eighth\+Sphere\+Mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{radius}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass radius and timestepper; defaults to static default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a425c3de92974d00dbb126f4cbbaf8e3b}{\texorpdfstring{$\sim$}{\string~}\+Eighth\+Sphere\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Domain \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh_a6dbcd3a6d27416a0d9ef25cc631f6043}{Radius}}
+\begin{DoxyCompactList}\small\item\em Radius of the sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$}
+Eight of a sphere brick mesh, based on the Eight\+Sphere\+Domain Non-\/refineable version with four brick elements. The eighth-\/sphere is located in the positive octant, centred at the origin. The mesh boundaries are numbered as follows\+: 
+
+
+\begin{DoxyItemize}
+\item Boundary 0\+: Plane x=0
+\item Boundary 1\+: Plane y=0
+\item Boundary 2\+: Plane z=0
+\item Boundary 3\+: The surface of the sphere. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1EighthSphereMesh_a0457fc188d930a1e8853a3f0e1effbb3}\label{classoomph_1_1EighthSphereMesh_a0457fc188d930a1e8853a3f0e1effbb3} 
+\index{oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}!EighthSphereMesh@{EighthSphereMesh}}
+\index{EighthSphereMesh@{EighthSphereMesh}!oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{EighthSphereMesh()}{EighthSphereMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Eighth\+Sphere\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{radius,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass radius and timestepper; defaults to static default timestepper. 
+
+Constructor for the eighth of a sphere mesh\+: Pass timestepper; defaults to static default timestepper. 
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00040}{40}} of file \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source}{eighth\+\_\+sphere\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00070}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, and \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00073}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Radius}}.
+
+\Hypertarget{classoomph_1_1EighthSphereMesh_a425c3de92974d00dbb126f4cbbaf8e3b}\label{classoomph_1_1EighthSphereMesh_a425c3de92974d00dbb126f4cbbaf8e3b} 
+\index{oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}!````~EighthSphereMesh@{\texorpdfstring{$\sim$}{\string~}EighthSphereMesh}}
+\index{````~EighthSphereMesh@{\texorpdfstring{$\sim$}{\string~}EighthSphereMesh}!oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EighthSphereMesh()}{\string~EighthSphereMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{Eighth\+Sphere\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00062}{62}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00070}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17}\label{classoomph_1_1EighthSphereMesh_a4b08d71a9da8cbd278cc51919cbb1a17} 
+\index{oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+Domain\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00070}{70}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00040}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh()}}, \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00093}{oomph\+::\+Refineable\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Eighth\+Sphere\+Mesh()}}, and \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00062}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Eighth\+Sphere\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereMesh_a6dbcd3a6d27416a0d9ef25cc631f6043}\label{classoomph_1_1EighthSphereMesh_a6dbcd3a6d27416a0d9ef25cc631f6043} 
+\index{oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}!Radius@{Radius}}
+\index{Radius@{Radius}!oomph::EighthSphereMesh$<$ ELEMENT $>$@{oomph::EighthSphereMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Radius}{Radius}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1EighthSphereMesh}{oomph\+::\+Eighth\+Sphere\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Radius\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Radius of the sphere. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__mesh_8h_source_l00073}{73}} of file \mbox{\hyperlink{eighth__sphere__mesh_8h_source}{eighth\+\_\+sphere\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__mesh_8template_8cc_source_l00040}{oomph\+::\+Eighth\+Sphere\+Mesh$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{eighth__sphere__mesh_8h}{eighth\+\_\+sphere\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{eighth__sphere__mesh_8template_8cc}{eighth\+\_\+sphere\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

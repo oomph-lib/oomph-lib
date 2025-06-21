@@ -1,0 +1,624 @@
+\chapter{Demo problem\+: 3D Solid Mechanics on unstructured meshes}
+\hypertarget{index}{}\label{index}\index{Demo problem: 3D Solid Mechanics on unstructured meshes@{Demo problem: 3D Solid Mechanics on unstructured meshes}}
+The purpose of this tutorial is to demonstrate the solution of 3D solid mechanics problems on unstructured meshes. The problem studied here also serves as a "{}warm-\/up problem"{} for the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} in which the elastic, bifurcating vessel whose deformation is studied here conveys (and is loaded by) a viscous fluid.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem (and results)}{The problem (and results)}}\label{index_problem}
+Here is an animation of the problem\+: An elastic, bifurcating vessel is loaded by an internal pressure and by gravity which acts in the negative $x$-\/direction. The "{}ends"{} of the vessel are held in a fixed position. As the magnitude of the loading is increased the vessel inflates and sags downwards.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{deform}
+\doxyfigcaption{An elastic, bifurcating vessel, loaded by an internal pressure and transverse gravity. }
+\end{DoxyImage}
+
+
+The blue frame surrounding the vessel is drawn to clarify its spatial orientation. The yellow edges show the boundaries of the internal faces via which the pressure loading is applied, and the red arrows indicate the direction and magnitude of the pressure loading.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{3\+D unstructured mesh generation}{3D unstructured mesh generation}}\label{index_mesh}
+We use \href{http://www.wias-berlin.de/~si }{\texttt{ Hang Si\textquotesingle{}s}} open-\/source mesh generator \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} to generate the unstructured tetrahedral mesh "{}offline"{}. We then process the output files produced by ~\newline
+ \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} to generate an unstructured {\ttfamily oomph-\/lib} mesh.
+
+\href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }} requires the specification of the domain boundaries via so-\/called facets -- planar surface patches that are bounded by closed polygonal line segments. For simplicity, we only consider a very simplistic bifurcation, comprising three tube segments of approximately rectangular cross-\/section that meet at a common junction. Each of the three tube segments has four internal and four external faces. The internal and external faces are connected by three further faces at the "{}in-\/ and outflow"{} cross-\/sections (using terminology that anticipates the mesh\textquotesingle{}s use in the corresponding \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ fluid-\/structure interaction problem}}), resulting in a total of 27 facets.
+
+The 27 facets are defined in a {\ttfamily \texorpdfstring{$\ast$}{*}.poly} file that specifies the position of the vertices, and identifies the facets via a "{}face list"{} that establishes their bounding vertices. Facets that have holes (\doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{e.\+g}. the in-\/ and outflow facets) require the specification of the hole\textquotesingle{}s position. Finally, if the mesh itself has a hole (as in the current example where the vessel\textquotesingle{}s lumen forms a hole in the mesh) the position of the hole must be identified by specifying the position of a single point inside that hole. The well-\/annotated {\ttfamily \texorpdfstring{$\ast$}{*}.poly} file is located at\+:
+
+\begin{center} \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/fsi\+\_\+bifurcation\+\_\+solid.\+poly}} \end{center} 
+
+We refer to the \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} webpages }} and another \href{../../../meshes/mesh_from_tetgen/html/index.html}{\texttt{ {\ttfamily oomph-\/lib} tutorial}} for further details on how to create {\ttfamily \texorpdfstring{$\ast$}{*}.poly} files.
+
+Here is a plot of the domain specified by \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly}{\texttt{ fsi\+\_\+bifurcation\+\_\+solid.\+poly}}. The plot was created using {\ttfamily tetview} which is distributed with \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }}.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{tetgen_boundaries}
+\doxyfigcaption{The domain and its bounding facets. }
+\end{DoxyImage}
+
+
+Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the traction boundary condition somewhat tedious as the inner surface of the vessel (where the traction is to be applied) is represented by twelve separate mesh boundaries. However, the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} and is therefore {\bfseries{strongly recommended}}.
+
+\href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }} generates an unstructured volumetric mesh from the information contained in the {\ttfamily \texorpdfstring{$\ast$}{*}.poly} file and writes the mesh\textquotesingle{}s nodes, elements and faces in the files
+\begin{DoxyItemize}
+\item \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.node}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/fsi\+\_\+bifurcation\+\_\+solid.\+1.\+node }}
+\item \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.ele}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/fsi\+\_\+bifurcation\+\_\+solid.\+1.\+ele }}
+\item \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/fsi\+\_\+bifurcation\+\_\+solid.\+1.\+face}}
+\end{DoxyItemize}These files can be used as input to {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Tetgen\+Mesh} class, using the procedure discussed in \href{../../../meshes/mesh_from_tetgen/html/index.html}{\texttt{ another tutorial.}}
+
+The figure below shows a {\ttfamily tetview} plot of the mesh, created with a volume constraint of \doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{0.\+2} (\doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{i.\+e}. the maximum volume of each tetrahedron is guaranteed to be less than \doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{0.\+2} units), using the command 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classMySolidTetgenMesh}{tetgen}}\ -\/\mbox{\hyperlink{classMySolidTetgenMesh}{a0}}.2\ \mbox{\hyperlink{classMySolidTetgenMesh}{fsi\_bifurcation\_solid}}.poly\ }
+
+\end{DoxyCode}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{mesh_boundaries}
+\doxyfigcaption{Plot of the mesh, generated by tetgen. }
+\end{DoxyImage}
+
+
+Note how \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} has subdivided each of the 27 original facets specified in the {\ttfamily \texorpdfstring{$\ast$}{*}.poly} file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 27 original facets inherit their boundary IDs. This will be important when we assign the boundary conditions.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh_code}{}\doxysection{\texorpdfstring{Creating the mesh}{Creating the mesh}}\label{index_mesh_code}
+We create the solid mesh by multiple inheritance from {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Tetgen\+Mesh} and the {\ttfamily Solid\+Mesh} base class\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======================start\_mesh========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Tetgen-\/based\ mesh\ upgraded\ to\ become\ a\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ TetgenMesh<ELEMENT>,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh\ }
+\DoxyCodeLine{\{}
+
+\end{DoxyCodeInclude}
+ The constructor calls the constructor of the underlying {\ttfamily Tetgen\+Mesh} (using the {\ttfamily \texorpdfstring{$\ast$}{*}.node } {\ttfamily \texorpdfstring{$\ast$}{*}.ele} and {\ttfamily \texorpdfstring{$\ast$}{*}.face} files created by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen}. }} As usual we set the nodes\textquotesingle{} Lagrangian coordinates to their current Eulerian positions, making the current configuration stress-\/free.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{node\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{element\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{face\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{TimeStepper}}*\ \mbox{\hyperlink{classMySolidTetgenMesh}{time\_stepper\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{Mesh::Default\_TimeStepper}})\ :\ }
+\DoxyCodeLine{\ \ TetgenMesh<\mbox{\hyperlink{classMySolidTetgenMesh}{ELEMENT}}>(\mbox{\hyperlink{classMySolidTetgenMesh}{node\_file\_name}},\ \mbox{\hyperlink{classMySolidTetgenMesh}{element\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{face\_file\_name}},\ \mbox{\hyperlink{classMySolidTetgenMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Assign\ the\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+
+\end{DoxyCodeInclude}
+ Finally, we identify the elements that are located next to the various mesh boundaries to facilitate the application of the traction boundary conditions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Find\ elements\ next\ to\ boundaries}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{setup\_boundary\_element\_info}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Empty\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classMySolidTetgenMesh}{\string~MySolidTetgenMesh}}()\ \{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Problem parameters}{Problem parameters}}\label{index_namespace}
+As usual, we define the various problem parameters in a global namespace. We use {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hookean constitutive law as the constitutive equation, using a Poisson\textquotesingle{}s ratio of \doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{0.\+3}. (\href{../../solid_theory/html/index.html\#non-dim_solid}{\texttt{ Recall}} that omitting the specification of Young\textquotesingle{}s modulus, $ E $, implies that the stresses are non-\/dimensionalised on $ E $ .)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}=0.3;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Constitutive\_law\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classMySolidTetgenMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
+
+\end{DoxyCodeInclude}
+ Next we define the gravitational body force which acts in the negative $x$-\/direction,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dim\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dimensional\ gravity\ as\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{gravity}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{time}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{b}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classMySolidTetgenMesh}{b}}[0]=-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Gravity}};\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classMySolidTetgenMesh}{b}}[1]=0.0;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classMySolidTetgenMesh}{b}}[2]=0.0;}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ gravity}}
+
+\end{DoxyCodeInclude}
+ and the pressure load, $ {\bf t} = -P {\bf n} $, that acts on internal walls of the bifurcation (note that the outer unit normal $ {\bf n} $ on the wall is passed to the function).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constant\ pressure\ load.\ The\ arguments\ to\ this\ function\ are\ imposed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ on\ us\ by\ the\ SolidTractionElements\ which\ allow\ the\ traction\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ depend\ on\ the\ Lagrangian\ and\ Eulerian\ coordinates\ x\ and\ xi,\ and\ on\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ outer\ unit\ normal\ to\ the\ surface.\ Here\ we\ only\ need\ the\ outer\ unit}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ normal.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd}{constant\_pressure}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{n}},\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classMySolidTetgenMesh}{traction}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{dim}}\ =\ \mbox{\hyperlink{classMySolidTetgenMesh}{traction}}.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{dim}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{traction}}[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*\mbox{\hyperlink{classMySolidTetgenMesh}{n}}[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}];}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ traction}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is straightforward. We store the command line arguments, specify an output directory and create the problem object, using ten-\/noded tetrahedral solid mechanics elements to discretise the principle of virtual displacements.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============================start\_main==================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ an\ unstructured\ 3D\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{unstructured__three__d__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classMySolidTetgenMesh}{argc}},\ \textcolor{keywordtype}{char}\ **\mbox{\hyperlink{classMySolidTetgenMesh}{argv}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{CommandLineArgs::setup}}(\mbox{\hyperlink{classMySolidTetgenMesh}{argc}},\mbox{\hyperlink{classMySolidTetgenMesh}{argv}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Label\ for\ output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{DocInfo}}\ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{UnstructuredSolidProblem<TPVDElement<3,3>}}\ >\ \mbox{\hyperlink{classMySolidTetgenMesh}{problem}};}
+
+\end{DoxyCodeInclude}
+ We output the initial configuration and then perform a parameter study in which we increment the gravitational body force and the pressure loads simultaneously, causing the vessel to expand and sag, as shown in the animation at the beginning of this tutorial. (As usual we perform a smaller number of steps if the code is run in self-\/test mode; this is indicated by a non-\/zero number of command line arguments.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ initial\ configuration}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.number()++;\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Parameter\ study}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}=0.0;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classMySolidTetgenMesh}{g\_increment}}=1.0e-\/3;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classMySolidTetgenMesh}{p\_increment}}=1.0e-\/2;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{nstep}}=6;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{CommandLineArgs::Argc}}!=1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Validation\ -\/-\/\ only\ doing\ two\ steps"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{nstep}}=2;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ the\ parameter\ study}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{istep}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{istep}}<\mbox{\hyperlink{classMySolidTetgenMesh}{nstep}};\mbox{\hyperlink{classMySolidTetgenMesh}{istep}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Bump\ up\ load}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Global\_Parameters::Gravity}}+=\mbox{\hyperlink{classMySolidTetgenMesh}{g\_increment}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}+=\mbox{\hyperlink{classMySolidTetgenMesh}{p\_increment}};\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_class}{}\doxysection{\texorpdfstring{The Problem class}{The Problem class}}\label{index_class}
+The {\ttfamily Problem} class has the usual member functions, and provides storage for the various sub-\/meshes -- the bulk mesh of 3D solid elements and the meshes of 2D solid traction elements that apply the pressure load to the internal boundaries of the vessel.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============start\_problem===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classUnstructuredSolidProblem_a25fe105d949498bf8f7c15aff96a7d00}{\string~UnstructuredSolidProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\_solution}}(\mbox{\hyperlink{classMySolidTetgenMesh}{DocInfo}}\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredSolidProblem_a9137960284200ed998989f785965f902}{create\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Bulk\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh<ELEMENT>}}*\ \mbox{\hyperlink{classUnstructuredSolidProblem_ad6a8cbe2c2f3596385e1a2484bfb68f7}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Meshes\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<SolidMesh*>}}\ \mbox{\hyperlink{classUnstructuredSolidProblem_a32e691a698667053003e21333fc65057}{Solid\_traction\_mesh\_pt}};}
+
+\end{DoxyCodeInclude}
+
+
+The two vectors {\ttfamily Pinned\+\_\+solid\+\_\+boundary\+\_\+id} and {\ttfamily Solid\+\_\+traction\+\_\+boundary\+\_\+id} are used to store the IDs of mesh boundaries that make up the in-\/ and outflow cross-\/sections (where the bifurcation is pinned), and the internal boundaries (where the pressure load has to be applied). Recall that {\ttfamily tetgen} requires the domain boundaries to be specified as a collection of planar facets. Boundary of interest in the computation, such as the "{}internal boundary of the bifurcation"{}, therefore tend to comprise multiple distinct mesh boundaries.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ IDs\ of\ solid\ mesh\ boundaries\ where\ displacements\ are\ pinned}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<unsigned>}}\ Pinned\_solid\_boundary\_id;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ IDs\ of\ solid\ mesh\ boundaries\ which\ make\ up\ the\ traction\ interface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classMySolidTetgenMesh}{Vector<unsigned>}}\ Solid\_traction\_boundary\_id;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+We start by building the bulk mesh, using the files created by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }}\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============start\_constructor==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ unstructured\ solid\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Create\ solid\ bulk\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classMySolidTetgenMesh}{node\_file\_name}}=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.node"{}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classMySolidTetgenMesh}{element\_file\_name}}=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.ele"{}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classMySolidTetgenMesh}{face\_file\_name}}=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.face"{}};}
+\DoxyCodeLine{\ Solid\_mesh\_pt\ =\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh<ELEMENT>}}(\mbox{\hyperlink{classMySolidTetgenMesh}{node\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{element\_file\_name}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{face\_file\_name}});}
+
+\end{DoxyCodeInclude}
+ Next we specify the IDs of the \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} boundaries that form part of specific domain boundaries in our problem. Boundaries 0, 1 and 2 are the in-\/ and outflow faces along which the solid is pinned. (See the specification of the boundaries in \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly}{\texttt{ fsi\+\_\+bifurcation\+\_\+solid.\+poly}} and/or check the boundary enumeration using {\ttfamily tetview} as shown in the {\ttfamily tetview} plot of the domain boundaries at the beginning of this tutorial.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ following\ IDs\ corresponds\ to\ the\ boundary\ IDs\ specified\ in}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ *.poly\ file\ from\ which\ tetgen\ generated\ the\ unstructured\ mesh.}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ IDs\ of\ solid\ mesh\ boundaries\ where\ displacements\ are\ pinned}}
+\DoxyCodeLine{\textcolor{comment}{}\ Pinned\_solid\_boundary\_id.resize(3);}
+\DoxyCodeLine{\ Pinned\_solid\_boundary\_id[0]=0;}
+\DoxyCodeLine{\ Pinned\_solid\_boundary\_id[1]=1;}
+\DoxyCodeLine{\ Pinned\_solid\_boundary\_id[2]=2;}
+
+\end{DoxyCodeInclude}
+ Similarly, boundaries 3 to 15 are the faces that define the internal boundary of the bifurcation, \doxylink{classMySolidTetgenMesh_ac6f8d5bf403bb9da0149184c30eb6d8d}{i.\+e}. the boundary along which we have to apply the pressure load\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ solid\ mesh\ boundaries\ where\ an\ internal\ pressure\ is\ applied}}
+\DoxyCodeLine{\ Solid\_traction\_boundary\_id.resize(12);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<12;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Solid\_traction\_boundary\_id[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]=\mbox{\hyperlink{classMySolidTetgenMesh}{i}}+3;}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We apply the boundary conditions by pinning the displacements of all nodes that are located on the in-\/ and outflow faces, and document their positions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Apply\ BCs\ for\ solid}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ pinned\ solid\ nodes}}
+\DoxyCodeLine{\ std::ofstream\ \mbox{\hyperlink{classMySolidTetgenMesh}{bc\_file}}(\textcolor{stringliteral}{"{}RESLT/pinned\_solid\_nodes.dat"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ positions\ at\ inflow\ boundary\ (boundaries\ 0\ and\ 1)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{n}}=Pinned\_solid\_boundary\_id.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ boundary\ ID}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{b}}=Pinned\_solid\_boundary\_id[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}];}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{num\_nod}}=\ Solid\_mesh\_pt-\/>nboundary\_node(\mbox{\hyperlink{classMySolidTetgenMesh}{b}});\ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{inod}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{inod}}<\mbox{\hyperlink{classMySolidTetgenMesh}{num\_nod}};\mbox{\hyperlink{classMySolidTetgenMesh}{inod}}++)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ node}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{SolidNode}}*\ \mbox{\hyperlink{classMySolidTetgenMesh}{nod\_pt}}=Solid\_mesh\_pt-\/>boundary\_node\_pt(\mbox{\hyperlink{classMySolidTetgenMesh}{b}},\mbox{\hyperlink{classMySolidTetgenMesh}{inod}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ all\ directions}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<3;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{nod\_pt}}-\/>pin\_position(\mbox{\hyperlink{classMySolidTetgenMesh}{i}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ ...and\ doc\ it\ as\ pinned}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{bc\_file}}\ <<\ \mbox{\hyperlink{classMySolidTetgenMesh}{nod\_pt}}-\/>x(\mbox{\hyperlink{classMySolidTetgenMesh}{i}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{bc\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{bc\_file}}.close();}
+
+\end{DoxyCodeInclude}
+ We complete the build of the elements by setting the pointer to the constitutive equation and the body force.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{n\_element}}\ =\ Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n\_element}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{ELEMENT}}\ *\mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classMySolidTetgenMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classMySolidTetgenMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law\ \ \ }}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Global\_Parameters::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}}-\/>body\_force\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{Global\_Parameters::gravity}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+
+
+Next we create the traction elements, attaching them to the "{}bulk"{} solid elements that are adjacent to the boundaries that constitute the inside of the vessel.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ traction\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ meshes\ of\ traction\ elements}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{n}}=Solid\_traction\_boundary\_id.size();}
+\DoxyCodeLine{\ Solid\_traction\_mesh\_pt.resize(\mbox{\hyperlink{classMySolidTetgenMesh}{n}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Solid\_traction\_mesh\_pt[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]=\textcolor{keyword}{new}\ SolidMesh;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ traction\ elements}}
+\DoxyCodeLine{\ create\_traction\_elements();}
+
+\end{DoxyCodeInclude}
+ Finally, we add the various meshes as sub-\/meshes to the {\ttfamily Problem}, build the global mesh, and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ the\ lot}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ solid\ bulk\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{add\_sub\_mesh}}(Solid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ solid\ traction\ meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{n}}=Solid\_traction\_boundary\_id.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{add\_sub\_mesh}}(Solid\_traction\_mesh\_pt[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ global\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ std::cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classMySolidTetgenMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_traction}{}\doxysection{\texorpdfstring{Creating the traction elements}{Creating the traction elements}}\label{index_traction}
+The helper function {\ttfamily create\+\_\+traction\+\_\+elements()} does exactly what it says\+: It loops over the bulk elements that are adjacent to the inner surface of the vessel, and attaches {\ttfamily Solid\+Traction\+Elements} to the appropriate faces. We store the pointers to the newly-\/created traction elements in separate meshes and specify the function pointer to the load function.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==========================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ traction\ elements\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredSolidProblem_a9137960284200ed998989f785965f902}{UnstructuredSolidProblem<ELEMENT>::create\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ traction\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{n}}=Solid\_traction\_boundary\_id.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ boundary\ ID}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{b}}=Solid\_traction\_boundary\_id[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{n\_element}}\ =\ Solid\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classMySolidTetgenMesh}{b}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{e}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{e}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n\_element}};\mbox{\hyperlink{classMySolidTetgenMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{ELEMENT}}*\ \mbox{\hyperlink{classMySolidTetgenMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classMySolidTetgenMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ Solid\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classMySolidTetgenMesh}{b}},\mbox{\hyperlink{classMySolidTetgenMesh}{e}}));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//What\ is\ the\ index\ of\ the\ face\ of\ the\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classMySolidTetgenMesh}{face\_index}}\ =\ Solid\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classMySolidTetgenMesh}{b}},\mbox{\hyperlink{classMySolidTetgenMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element\ }}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{SolidTractionElement<ELEMENT>}}*\ \mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classMySolidTetgenMesh}{SolidTractionElement<ELEMENT>}}(\mbox{\hyperlink{classMySolidTetgenMesh}{bulk\_elem\_pt}},\mbox{\hyperlink{classMySolidTetgenMesh}{face\_index}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Solid\_traction\_mesh\_pt[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]-\/>add\_element\_pt(\mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{el\_pt}}-\/>traction\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd}{Global\_Parameters::constant\_pressure}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing routine outputs the deformed domain shape and the applied traction.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{UnstructuredSolidProblem<ELEMENT>::doc\_solution}}(\mbox{\hyperlink{classMySolidTetgenMesh}{DocInfo}}\&\ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}})}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{ofstream}}\ \mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classMySolidTetgenMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{npts}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{npts}}=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solid\ solution}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{snprintf}}(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/solid\_soln\%i.dat"{}},\mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}}.open(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}});}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(\mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}},\mbox{\hyperlink{classMySolidTetgenMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ traction}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{snprintf}}(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/traction\%i.dat"{}},\mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMySolidTetgenMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}}.open(\mbox{\hyperlink{classMySolidTetgenMesh}{filename}});}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{n}}=Solid\_traction\_boundary\_id.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classMySolidTetgenMesh}{i}}=0;\mbox{\hyperlink{classMySolidTetgenMesh}{i}}<\mbox{\hyperlink{classMySolidTetgenMesh}{n}};\mbox{\hyperlink{classMySolidTetgenMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Solid\_traction\_mesh\_pt[\mbox{\hyperlink{classMySolidTetgenMesh}{i}}]-\/>output(\mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}},\mbox{\hyperlink{classMySolidTetgenMesh}{npts}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classMySolidTetgenMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+\hypertarget{index_bound}{}\doxysubsection{\texorpdfstring{Identification/assignment of mesh boundaries}{Identification/assignment of mesh boundaries}}\label{index_bound}
+This tutorial shows that the use of unstructured 3D meshes for solid mechanics problems is extremely straightforward. The only aspect that requires some care (and not just for solid mechanics applications) is the correct identification/assignment of domain boundaries. The fact that we documented the position of the pinned nodes in the driver code suggests (correctly!) that we managed to get both assignments (slightly) wrong when we first generated the mesh and wrote the corresponding driver code. As usual, it pays off to {\bfseries{be as a paranoid as possible}}! Ignore this advice at your own risk...
+
+Here is a plot of the position of the pinned solid nodes
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{pinned_solid_nodes}
+\doxyfigcaption{Plot of the pinned solid nodes. }
+\end{DoxyImage}
+
+
+and here\textquotesingle{}s a plot showing the {\ttfamily Solid\+Traction\+Elements} attached to the inside of the vessel\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{traction_faces}
+\doxyfigcaption{Plot of the Solid\+Traction\+Elements that apply the pressure load to the inner surface of the vessel. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_your_own}{}\doxysubsection{\texorpdfstring{Exercise\+: Try it yourself}{Exercise: Try it yourself}}\label{index_your_own}
+Experiment with the {\ttfamily tetgen} -\/based mesh generation by modifying the {\ttfamily \texorpdfstring{$\ast$}{*}.poly} file used in this example to different vessel geometries.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/unstructured_three_d_solid/}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/ }} \end{center} ~\newline
+
+\item The driver codes are\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc }} \end{center}  and \begin{center} \href{../../../../demo_drivers/solid/unstructured_three_d_solid/unstructured_three_d_solid.cc}{\texttt{ demo\+\_\+drivers/solid/unstructured\+\_\+three\+\_\+d\+\_\+solid/unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

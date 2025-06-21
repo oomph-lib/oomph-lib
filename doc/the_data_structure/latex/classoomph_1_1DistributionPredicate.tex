@@ -1,0 +1,110 @@
+\doxysection{oomph\+::Distribution\+Predicate Class Reference}
+\hypertarget{classoomph_1_1DistributionPredicate}{}\label{classoomph_1_1DistributionPredicate}\index{oomph::DistributionPredicate@{oomph::DistributionPredicate}}
+
+
+Class to allow sorting of column indices in conversion to epetra matrix.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributionPredicate_a6eed861d5dca10c4118de4857705fd92}{Distribution\+Predicate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{first\+\_\+col}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ncol\+\_\+local}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of first column and the number of local columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributionPredicate_a701adea6dabe769c65afc647b655f39f}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{col}})
+\begin{DoxyCompactList}\small\item\em Comparison operator\+: is column col in the range between (including) First\+\_\+col and Last\+\_\+col. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1DistributionPredicate_a832f10468911bf3bd8323dc6bdaf10f4}{First\+\_\+col}}
+\begin{DoxyCompactList}\small\item\em First column held locally. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1DistributionPredicate_a835e3e981b0251f15b3c07d85afe0c3f}{Last\+\_\+col}}
+\begin{DoxyCompactList}\small\item\em Last colum held locally. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to allow sorting of column indices in conversion to epetra matrix. 
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00430}{430}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DistributionPredicate_a6eed861d5dca10c4118de4857705fd92}\label{classoomph_1_1DistributionPredicate_a6eed861d5dca10c4118de4857705fd92} 
+\index{oomph::DistributionPredicate@{oomph::DistributionPredicate}!DistributionPredicate@{DistributionPredicate}}
+\index{DistributionPredicate@{DistributionPredicate}!oomph::DistributionPredicate@{oomph::DistributionPredicate}}
+\doxysubsubsection{\texorpdfstring{DistributionPredicate()}{DistributionPredicate()}}
+{\footnotesize\ttfamily oomph\+::\+Distribution\+Predicate\+::\+Distribution\+Predicate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{first\+\_\+col,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{ncol\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of first column and the number of local columns. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00434}{434}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DistributionPredicate_a701adea6dabe769c65afc647b655f39f}\label{classoomph_1_1DistributionPredicate_a701adea6dabe769c65afc647b655f39f} 
+\index{oomph::DistributionPredicate@{oomph::DistributionPredicate}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::DistributionPredicate@{oomph::DistributionPredicate}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Distribution\+Predicate\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Comparison operator\+: is column col in the range between (including) First\+\_\+col and Last\+\_\+col. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00441}{441}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00455}{First\+\_\+col}}, and \mbox{\hyperlink{trilinos__helpers_8cc_source_l00458}{Last\+\_\+col}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DistributionPredicate_a832f10468911bf3bd8323dc6bdaf10f4}\label{classoomph_1_1DistributionPredicate_a832f10468911bf3bd8323dc6bdaf10f4} 
+\index{oomph::DistributionPredicate@{oomph::DistributionPredicate}!First\_col@{First\_col}}
+\index{First\_col@{First\_col}!oomph::DistributionPredicate@{oomph::DistributionPredicate}}
+\doxysubsubsection{\texorpdfstring{First\_col}{First\_col}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Distribution\+Predicate\+::\+First\+\_\+col\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+First column held locally. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00455}{455}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00441}{operator()()}}.
+
+\Hypertarget{classoomph_1_1DistributionPredicate_a835e3e981b0251f15b3c07d85afe0c3f}\label{classoomph_1_1DistributionPredicate_a835e3e981b0251f15b3c07d85afe0c3f} 
+\index{oomph::DistributionPredicate@{oomph::DistributionPredicate}!Last\_col@{Last\_col}}
+\index{Last\_col@{Last\_col}!oomph::DistributionPredicate@{oomph::DistributionPredicate}}
+\doxysubsubsection{\texorpdfstring{Last\_col}{Last\_col}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Distribution\+Predicate\+::\+Last\+\_\+col\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Last colum held locally. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00458}{458}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00441}{operator()()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__helpers_8cc}{trilinos\+\_\+helpers.\+cc}}\end{DoxyCompactItemize}

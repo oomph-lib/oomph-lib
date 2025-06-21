@@ -1,0 +1,211 @@
+\doxysection{Turek\+Non\+FSIProblem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classTurekNonFSIProblem}{}\label{classTurekNonFSIProblem}\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+
+
+Flow around a cylinder with flag.  
+
+
+Inheritance diagram for Turek\+Non\+FSIProblem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTurekNonFSIProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTurekNonFSIProblem_aacb3214544ef81c2f8b49777457e8be6}{Turek\+Non\+FSIProblem}} (const double \&length, const double \&height)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass length and height of domain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekNonFSIProblem_a161cfe46817a5129dcc33c7ce3a17173}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekNonFSIProblem_ae5881b3424aee1ba7b947fff96493d2f}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekNonFSIProblem_a88ed5ef8b1be34f5176c29ffec20eedd}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em After adaptation\+: Unpin pressures and pin redudant pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekNonFSIProblem_a29725cde9071c3a83792469787ea6c7d}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the velocity boundary condition on the flag. \end{DoxyCompactList}\item 
+Refineable\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTurekNonFSIProblem_af0ad929ee6b152a3a3d188acb9ce5468}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTurekNonFSIProblem_afd54bf2b892d6dc31062a6bf3f54935b}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTurekNonFSIProblem_a2f129e4eba71784a58b27d846fdc2a61}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classTurekNonFSIProblem_a7e85e76876a9b1136cc340b0bb25e299}{Height}}
+\begin{DoxyCompactList}\small\item\em Height of channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Turek\+Non\+FSIProblem$<$ ELEMENT $>$}
+Flow around a cylinder with flag. 
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00311}{311}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classTurekNonFSIProblem_aacb3214544ef81c2f8b49777457e8be6}\label{classTurekNonFSIProblem_aacb3214544ef81c2f8b49777457e8be6} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!TurekNonFSIProblem@{TurekNonFSIProblem}}
+\index{TurekNonFSIProblem@{TurekNonFSIProblem}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TurekNonFSIProblem()}{TurekNonFSIProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\mbox{\hyperlink{classTurekNonFSIProblem}{\+::\+Turek\+Non\+FSIProblem}} (\begin{DoxyParamCaption}\item[{const double \&}]{length,  }\item[{const double \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass length and height of domain. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{371}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00267}{Flag\+\_\+definition\+::\+Bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00079}{Flag\+\_\+definition\+::\+Centre\+\_\+x}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00082}{Flag\+\_\+definition\+::\+Centre\+\_\+y}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00274}{Flag\+\_\+definition\+::\+Cylinder\+\_\+pt}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00073}{Flag\+\_\+definition\+::H}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00360}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Height}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00076}{Flag\+\_\+definition\+::L}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00336}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00085}{Flag\+\_\+definition\+::\+Radius}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00058}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{Flag\+\_\+definition\+::setup()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00270}{Flag\+\_\+definition\+::\+Tip\+\_\+flag\+\_\+pt}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00264}{Flag\+\_\+definition\+::\+Top\+\_\+flag\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTurekNonFSIProblem_a88ed5ef8b1be34f5176c29ffec20eedd}\label{classTurekNonFSIProblem_a88ed5ef8b1be34f5176c29ffec20eedd} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+After adaptation\+: Unpin pressures and pin redudant pressure dofs. 
+
+Actions after adapt. 
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00503}{503}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+\Hypertarget{classTurekNonFSIProblem_a161cfe46817a5129dcc33c7ce3a17173}\label{classTurekNonFSIProblem_a161cfe46817a5129dcc33c7ce3a17173} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00321}{321}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+\Hypertarget{classTurekNonFSIProblem_a29725cde9071c3a83792469787ea6c7d}\label{classTurekNonFSIProblem_a29725cde9071c3a83792469787ea6c7d} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the velocity boundary condition on the flag. 
+
+Actions before implicit timestep\+: Update velocity boundary conditions. 
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00520}{520}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+\Hypertarget{classTurekNonFSIProblem_ae5881b3424aee1ba7b947fff96493d2f}\label{classTurekNonFSIProblem_ae5881b3424aee1ba7b947fff96493d2f} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00324}{324}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+\Hypertarget{classTurekNonFSIProblem_a2f129e4eba71784a58b27d846fdc2a61}\label{classTurekNonFSIProblem_a2f129e4eba71784a58b27d846fdc2a61} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00547}{547}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00576}{main()}}.
+
+\Hypertarget{classTurekNonFSIProblem_af0ad929ee6b152a3a3d188acb9ce5468}\label{classTurekNonFSIProblem_af0ad929ee6b152a3a3d188acb9ce5468} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00336}{336}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+\Hypertarget{classTurekNonFSIProblem_afd54bf2b892d6dc31062a6bf3f54935b}\label{classTurekNonFSIProblem_afd54bf2b892d6dc31062a6bf3f54935b} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00345}{345}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classTurekNonFSIProblem_a7e85e76876a9b1136cc340b0bb25e299}\label{classTurekNonFSIProblem_a7e85e76876a9b1136cc340b0bb25e299} 
+\index{TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}!Height@{Height}}
+\index{Height@{Height}!TurekNonFSIProblem$<$ ELEMENT $>$@{TurekNonFSIProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Height}{Height}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classTurekNonFSIProblem}{Turek\+Non\+FSIProblem}}$<$ ELEMENT $>$\+::\+Height\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of channel. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00360}{360}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{turek__flag__non__fsi_8cc}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}\end{DoxyCompactItemize}

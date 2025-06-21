@@ -1,0 +1,14 @@
+\doxysection{trilinos\+\_\+solver.\+h File Reference}
+\hypertarget{trilinos__solver_8h}{}\label{trilinos__solver_8h}\index{trilinos\_solver.h@{trilinos\_solver.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1OomphLibPreconditionerEpetraOperator}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator}}
+\begin{DoxyCompactList}\small\item\em An Epetra\+\_\+\+Operator class for oomph-\/lib preconditioners. A helper class for Trilinos\+Oomph\+Lib\+Preconditioner to allow an oomph-\/lib preconditioner (i.\+e. one derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}) to be used with a trilinos solver (\doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{oomph\+::\+Trilinos\+Aztec\+OOSolver}}
+\begin{DoxyCompactList}\small\item\em An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \doxylink{classoomph_1_1CG}{CG}, \doxylink{classoomph_1_1GMRES}{GMRES} or \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab}) can be set using \doxylink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type()}. This solver can be preconditioned with Trilinos Preconditioners (derived from \doxylink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}) or Oomph-\/lib preconditioners (derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}). Preconditioners are set using \doxylink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ExtrudedMacroElement Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html">ExtrudedMacroElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ExtrudedMacroElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ExtrudedMacroElement Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>DRAIG: FILL IN COMPLETE DESCRIPTION ONCE FINISHED...  
+ <a href="classoomph_1_1ExtrudedMacroElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ExtrudedMacroElement:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ExtrudedMacroElement.png" usemap="#oomph::ExtrudedMacroElement_map" alt=""/>
+  <map id="oomph::ExtrudedMacroElement_map" name="oomph::ExtrudedMacroElement_map">
+<area href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ..." alt="oomph::MacroElement" shape="rect" coords="126,0,369,24"/>
+<area href="classoomph_1_1QExtrudedMacroElement.html" title="QExtrudedMacroElement." alt="oomph::QExtrudedMacroElement&lt; DIM &gt;" shape="rect" coords="0,112,243,136"/>
+<area href="classoomph_1_1QExtrudedMacroElement_3_013_01_4.html" title="DRAIG: FILL IN COMPLETE DESCRIPTION ONCE FINISHED..." alt="oomph::QExtrudedMacroElement&lt; 3 &gt;" shape="rect" coords="253,112,496,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae25b1b102a86424d4f494bf95eb8d665" id="r_ae25b1b102a86424d4f494bf95eb8d665"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#ae25b1b102a86424d4f494bf95eb8d665">ExtrudedMacroElement</a> (<a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a> *<a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a4f359777be2467d66dba26a16978123a">extruded_domain_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1MacroElement.html#abeb744cd6c9bd213a1375fc8d924d445">macro_element_number</a>)</td></tr>
+<tr class="memdesc:ae25b1b102a86424d4f494bf95eb8d665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a> and the ID number of the <a class="el" href="classoomph_1_1ExtrudedMacroElement.html" title="DRAIG: FILL IN COMPLETE DESCRIPTION ONCE FINISHED...">ExtrudedMacroElement</a> within that <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a>. NOTE: The base class <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a> requires a pointer to a <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> object. However, the <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a> class has not yet been defined which means the compiler cannot know yet that its derives from <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a>. To avoid a compiler error a null pointer is passed to the base class <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a>.  <br /></td></tr>
+<tr class="separator:ae25b1b102a86424d4f494bf95eb8d665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0affb7bf0d7b1dbeef70bde7fecb1410" id="r_a0affb7bf0d7b1dbeef70bde7fecb1410"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a0affb7bf0d7b1dbeef70bde7fecb1410">ExtrudedMacroElement</a> ()</td></tr>
+<tr class="memdesc:a0affb7bf0d7b1dbeef70bde7fecb1410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:a0affb7bf0d7b1dbeef70bde7fecb1410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb905df2d0d0073cbc7819fa3f51103" id="r_afcb905df2d0d0073cbc7819fa3f51103"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#afcb905df2d0d0073cbc7819fa3f51103">ExtrudedMacroElement</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExtrudedMacroElement.html">ExtrudedMacroElement</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afcb905df2d0d0073cbc7819fa3f51103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:afcb905df2d0d0073cbc7819fa3f51103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcd21d0cd0ef9e6555aae68d51f8c7e9" id="r_afcd21d0cd0ef9e6555aae68d51f8c7e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#afcd21d0cd0ef9e6555aae68d51f8c7e9">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExtrudedMacroElement.html">ExtrudedMacroElement</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afcd21d0cd0ef9e6555aae68d51f8c7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:afcd21d0cd0ef9e6555aae68d51f8c7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17813304e0e71e08ff4777f112d56ba8" id="r_a17813304e0e71e08ff4777f112d56ba8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a17813304e0e71e08ff4777f112d56ba8">~ExtrudedMacroElement</a> ()</td></tr>
+<tr class="memdesc:a17813304e0e71e08ff4777f112d56ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <br /></td></tr>
+<tr class="separator:a17813304e0e71e08ff4777f112d56ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f359777be2467d66dba26a16978123a" id="r_a4f359777be2467d66dba26a16978123a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a4f359777be2467d66dba26a16978123a">extruded_domain_pt</a> ()</td></tr>
+<tr class="memdesc:a4f359777be2467d66dba26a16978123a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a>.  <br /></td></tr>
+<tr class="separator:a4f359777be2467d66dba26a16978123a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1MacroElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1MacroElement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1MacroElement.html">oomph::MacroElement</a></td></tr>
+<tr class="memitem:ad94cc0ffda0d77e1778110da4aa651eb inherit pub_methods_classoomph_1_1MacroElement" id="r_ad94cc0ffda0d77e1778110da4aa651eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#ad94cc0ffda0d77e1778110da4aa651eb">MacroElement</a> (<a class="el" href="classoomph_1_1Domain.html">Domain</a> *<a class="el" href="classoomph_1_1MacroElement.html#ab882e21d5add76995d1e896517030e45">domain_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1MacroElement.html#abeb744cd6c9bd213a1375fc8d924d445">macro_element_number</a>)</td></tr>
+<tr class="memdesc:ad94cc0ffda0d77e1778110da4aa651eb inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> and the number of the <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a> within that <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a>.  <br /></td></tr>
+<tr class="separator:ad94cc0ffda0d77e1778110da4aa651eb inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affaa1d2975bac834846195c710d86760 inherit pub_methods_classoomph_1_1MacroElement" id="r_affaa1d2975bac834846195c710d86760"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#affaa1d2975bac834846195c710d86760">MacroElement</a> ()</td></tr>
+<tr class="memdesc:affaa1d2975bac834846195c710d86760 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:affaa1d2975bac834846195c710d86760 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae00100790b8c6c669c4ee1c40578b7cc inherit pub_methods_classoomph_1_1MacroElement" id="r_ae00100790b8c6c669c4ee1c40578b7cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#ae00100790b8c6c669c4ee1c40578b7cc">MacroElement</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ae00100790b8c6c669c4ee1c40578b7cc inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ae00100790b8c6c669c4ee1c40578b7cc inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77638b2a2f06a96f467b4e42c894d738 inherit pub_methods_classoomph_1_1MacroElement" id="r_a77638b2a2f06a96f467b4e42c894d738"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a77638b2a2f06a96f467b4e42c894d738">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a77638b2a2f06a96f467b4e42c894d738 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a77638b2a2f06a96f467b4e42c894d738 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdc6cb9a63b44d4da0141dde40aa6310 inherit pub_methods_classoomph_1_1MacroElement" id="r_abdc6cb9a63b44d4da0141dde40aa6310"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#abdc6cb9a63b44d4da0141dde40aa6310">~MacroElement</a> ()</td></tr>
+<tr class="memdesc:abdc6cb9a63b44d4da0141dde40aa6310 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <br /></td></tr>
+<tr class="separator:abdc6cb9a63b44d4da0141dde40aa6310 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92030ed18caf4539c9e44e1062457edc inherit pub_methods_classoomph_1_1MacroElement" id="r_a92030ed18caf4539c9e44e1062457edc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a92030ed18caf4539c9e44e1062457edc">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</td></tr>
+<tr class="memdesc:a92030ed18caf4539c9e44e1062457edc inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot: x,y (or x,y,z) at current time in tecplot format.  <br /></td></tr>
+<tr class="separator:a92030ed18caf4539c9e44e1062457edc inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3646716d60aedf456889768a3c2dbe inherit pub_methods_classoomph_1_1MacroElement" id="r_a5d3646716d60aedf456889768a3c2dbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a5d3646716d60aedf456889768a3c2dbe">output</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)=0</td></tr>
+<tr class="memdesc:a5d3646716d60aedf456889768a3c2dbe inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot: x,y (or x,y,z) in tecplot format at time level t (t=0: current; t&gt;0: previous)  <br /></td></tr>
+<tr class="separator:a5d3646716d60aedf456889768a3c2dbe inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85e7842ad949bb4062a9ff302fa452e5 inherit pub_methods_classoomph_1_1MacroElement" id="r_a85e7842ad949bb4062a9ff302fa452e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a85e7842ad949bb4062a9ff302fa452e5">macro_map</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>)</td></tr>
+<tr class="memdesc:a85e7842ad949bb4062a9ff302fa452e5 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mapping from local to global coordinates at the current time : r(s)  <br /></td></tr>
+<tr class="separator:a85e7842ad949bb4062a9ff302fa452e5 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a819b095e97c92e634d6216ddce00c8a2 inherit pub_methods_classoomph_1_1MacroElement" id="r_a819b095e97c92e634d6216ddce00c8a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a819b095e97c92e634d6216ddce00c8a2">macro_map</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>)=0</td></tr>
+<tr class="memdesc:a819b095e97c92e634d6216ddce00c8a2 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time-dependent mapping from local to global coordinates: r(t,s). t is the discrete timelevel: t=0: current time; t&gt;0: previous timestep.  <br /></td></tr>
+<tr class="separator:a819b095e97c92e634d6216ddce00c8a2 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd7b36601982a9ebde9d614ce62c93d inherit pub_methods_classoomph_1_1MacroElement" id="r_a6dd7b36601982a9ebde9d614ce62c93d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a6dd7b36601982a9ebde9d614ce62c93d">macro_map</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>)</td></tr>
+<tr class="memdesc:a6dd7b36601982a9ebde9d614ce62c93d inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get global position r(s) at continuous time value, t.  <br /></td></tr>
+<tr class="separator:a6dd7b36601982a9ebde9d614ce62c93d inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a748b561313e952c9767d278d0e99be4e inherit pub_methods_classoomph_1_1MacroElement" id="r_a748b561313e952c9767d278d0e99be4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a748b561313e952c9767d278d0e99be4e">output_macro_element_boundaries</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)=0</td></tr>
+<tr class="memdesc:a748b561313e952c9767d278d0e99be4e inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output all macro element boundaries as tecplot zones.  <br /></td></tr>
+<tr class="separator:a748b561313e952c9767d278d0e99be4e inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd465f4065dee7acfbb36d307ad691f9 inherit pub_methods_classoomph_1_1MacroElement" id="r_acd465f4065dee7acfbb36d307ad691f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#acd465f4065dee7acfbb36d307ad691f9">assemble_macro_to_eulerian_jacobian</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:acd465f4065dee7acfbb36d307ad691f9 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">the jacobian of the mapping from the macro coordinates to the global coordinates  <br /></td></tr>
+<tr class="separator:acd465f4065dee7acfbb36d307ad691f9 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c898b6deef9f8bfcc957313030a3e68 inherit pub_methods_classoomph_1_1MacroElement" id="r_a3c898b6deef9f8bfcc957313030a3e68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a3c898b6deef9f8bfcc957313030a3e68">assemble_macro_to_eulerian_jacobian2</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">jacobian2</a>)</td></tr>
+<tr class="memdesc:a3c898b6deef9f8bfcc957313030a3e68 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates.  <br /></td></tr>
+<tr class="separator:a3c898b6deef9f8bfcc957313030a3e68 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5640171931fffc8add41437596d3df20 inherit pub_methods_classoomph_1_1MacroElement" id="r_a5640171931fffc8add41437596d3df20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a5640171931fffc8add41437596d3df20">assemble_macro_to_eulerian_jacobian</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:a5640171931fffc8add41437596d3df20 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the jacobian of the mapping from the macro coordinates to the global coordinates.  <br /></td></tr>
+<tr class="separator:a5640171931fffc8add41437596d3df20 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3c34b538e970d152a7f107d7ae418c8 inherit pub_methods_classoomph_1_1MacroElement" id="r_ae3c34b538e970d152a7f107d7ae418c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#ae3c34b538e970d152a7f107d7ae418c8">assemble_macro_to_eulerian_jacobian2</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">jacobian2</a>)</td></tr>
+<tr class="memdesc:ae3c34b538e970d152a7f107d7ae418c8 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the second derivative jacobian of the mapping from the macro coordinates to the global coordinates.  <br /></td></tr>
+<tr class="separator:ae3c34b538e970d152a7f107d7ae418c8 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb744cd6c9bd213a1375fc8d924d445 inherit pub_methods_classoomph_1_1MacroElement" id="r_abeb744cd6c9bd213a1375fc8d924d445"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#abeb744cd6c9bd213a1375fc8d924d445">macro_element_number</a> ()</td></tr>
+<tr class="memdesc:abeb744cd6c9bd213a1375fc8d924d445 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the Macro_element_number.  <br /></td></tr>
+<tr class="separator:abeb744cd6c9bd213a1375fc8d924d445 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab882e21d5add76995d1e896517030e45 inherit pub_methods_classoomph_1_1MacroElement" id="r_ab882e21d5add76995d1e896517030e45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Domain.html">Domain</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#ab882e21d5add76995d1e896517030e45">domain_pt</a> ()</td></tr>
+<tr class="memdesc:ab882e21d5add76995d1e896517030e45 inherit pub_methods_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the Domain_pt.  <br /></td></tr>
+<tr class="separator:ab882e21d5add76995d1e896517030e45 inherit pub_methods_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a953e0b43da1ee646e9be3a329ceaf390" id="r_a953e0b43da1ee646e9be3a329ceaf390"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExtrudedMacroElement.html#a953e0b43da1ee646e9be3a329ceaf390">Extruded_domain_pt</a></td></tr>
+<tr class="memdesc:a953e0b43da1ee646e9be3a329ceaf390"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the extruded domain.  <br /></td></tr>
+<tr class="separator:a953e0b43da1ee646e9be3a329ceaf390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1MacroElement"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1MacroElement')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1MacroElement.html">oomph::MacroElement</a></td></tr>
+<tr class="memitem:a0eba5a165f20079899fb935508ab77e2 inherit pro_attribs_classoomph_1_1MacroElement" id="r_a0eba5a165f20079899fb935508ab77e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Domain.html">Domain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a0eba5a165f20079899fb935508ab77e2">Domain_pt</a></td></tr>
+<tr class="memdesc:a0eba5a165f20079899fb935508ab77e2 inherit pro_attribs_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to domain.  <br /></td></tr>
+<tr class="separator:a0eba5a165f20079899fb935508ab77e2 inherit pro_attribs_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96e31a1ba7eac203a3bacb3403796ec1 inherit pro_attribs_classoomph_1_1MacroElement" id="r_a96e31a1ba7eac203a3bacb3403796ec1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MacroElement.html#a96e31a1ba7eac203a3bacb3403796ec1">Macro_element_number</a></td></tr>
+<tr class="memdesc:a96e31a1ba7eac203a3bacb3403796ec1 inherit pro_attribs_classoomph_1_1MacroElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">What is the number of the current macro element within its domain.  <br /></td></tr>
+<tr class="separator:a96e31a1ba7eac203a3bacb3403796ec1 inherit pro_attribs_classoomph_1_1MacroElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>DRAIG: FILL IN COMPLETE DESCRIPTION ONCE FINISHED... </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00058">58</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae25b1b102a86424d4f494bf95eb8d665" name="ae25b1b102a86424d4f494bf95eb8d665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae25b1b102a86424d4f494bf95eb8d665">&#9670;&#160;</a></span>ExtrudedMacroElement() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExtrudedMacroElement::ExtrudedMacroElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a> *&#160;</td>
+          <td class="paramname"><em>extruded_domain_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td>
+          <td class="paramname"><em>macro_element_number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a> and the ID number of the <a class="el" href="classoomph_1_1ExtrudedMacroElement.html" title="DRAIG: FILL IN COMPLETE DESCRIPTION ONCE FINISHED...">ExtrudedMacroElement</a> within that <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a>. NOTE: The base class <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a> requires a pointer to a <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> object. However, the <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a> class has not yet been defined which means the compiler cannot know yet that its derives from <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a>. To avoid a compiler error a null pointer is passed to the base class <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00068">68</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+
+</div>
+</div>
+<a id="a0affb7bf0d7b1dbeef70bde7fecb1410" name="a0affb7bf0d7b1dbeef70bde7fecb1410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0affb7bf0d7b1dbeef70bde7fecb1410">&#9670;&#160;</a></span>ExtrudedMacroElement() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExtrudedMacroElement::ExtrudedMacroElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor (empty and broken) </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00080">80</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+
+</div>
+</div>
+<a id="afcb905df2d0d0073cbc7819fa3f51103" name="afcb905df2d0d0073cbc7819fa3f51103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb905df2d0d0073cbc7819fa3f51103">&#9670;&#160;</a></span>ExtrudedMacroElement() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExtrudedMacroElement::ExtrudedMacroElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExtrudedMacroElement.html">ExtrudedMacroElement</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a17813304e0e71e08ff4777f112d56ba8" name="a17813304e0e71e08ff4777f112d56ba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17813304e0e71e08ff4777f112d56ba8">&#9670;&#160;</a></span>~ExtrudedMacroElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::ExtrudedMacroElement::~ExtrudedMacroElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00097">97</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4f359777be2467d66dba26a16978123a" name="a4f359777be2467d66dba26a16978123a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f359777be2467d66dba26a16978123a">&#9670;&#160;</a></span>extruded_domain_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a> *&amp; oomph::ExtrudedMacroElement::extruded_domain_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to the <a class="el" href="classoomph_1_1ExtrudedDomain.html" title="Base class for ExtrudedDomains with curvilinear and/or time-dependent boundaries. ExtrudedDomain boun...">ExtrudedDomain</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00106">106</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+
+<p class="reference">References <a class="el" href="extruded__macro__element_8h_source.html#l00115">Extruded_domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="afcd21d0cd0ef9e6555aae68d51f8c7e9" name="afcd21d0cd0ef9e6555aae68d51f8c7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcd21d0cd0ef9e6555aae68d51f8c7e9">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExtrudedMacroElement::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExtrudedMacroElement.html">ExtrudedMacroElement</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a953e0b43da1ee646e9be3a329ceaf390" name="a953e0b43da1ee646e9be3a329ceaf390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a953e0b43da1ee646e9be3a329ceaf390">&#9670;&#160;</a></span>Extruded_domain_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ExtrudedDomain.html">ExtrudedDomain</a>* oomph::ExtrudedMacroElement::Extruded_domain_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the extruded domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="extruded__macro__element_8h_source.html#l00115">115</a> of file <a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="extruded__macro__element_8h_source.html#l00106">extruded_domain_pt()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="extruded__macro__element_8h_source.html">extruded_macro_element.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:12
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

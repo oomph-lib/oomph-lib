@@ -1,0 +1,203 @@
+\doxysection{Disk\+Oscillation\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classDiskOscillationProblem}{}\label{classDiskOscillationProblem}\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+
+
+Problem class to simulate small-\/amplitude oscillations of a circular disk.  
+
+
+Inheritance diagram for Disk\+Oscillation\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDiskOscillationProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9}{Disk\+Oscillation\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem_a84fdc4311e8cc1fa5f80dc5568c88413}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem_afea297af1844657099dec3d717fcccc5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDiskOscillationProblem_a583b50c50f3f065ddeeaa48e4e6d8b6c}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}{run}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}})
+\begin{DoxyCompactList}\small\item\em Run the problem\+: Pass number of timesteps to be performed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8}{doc\+\_\+solution}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Doc\+Info}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}} \mbox{\hyperlink{classDiskOscillationProblem_a45a4b574c10c6416b3b6be950713f505}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classDiskOscillationProblem_a141a79f41b33b19a6fca57793836e4da}{Trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to nodes whose position we\textquotesingle{}re tracing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAxisymOscillatingDisk}{Axisym\+Oscillating\+Disk}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDiskOscillationProblem_a338517a04848bb75252751df32879e40}{IC\+\_\+geom\+\_\+object\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Geometric object that specifies the initial conditions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}$>$\newline
+class Disk\+Oscillation\+Problem$<$ ELEMENT $>$}
+Problem class to simulate small-\/amplitude oscillations of a circular disk. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00414}{414}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9}\label{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!DiskOscillationProblem@{DiskOscillationProblem}}
+\index{DiskOscillationProblem@{DiskOscillationProblem}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DiskOscillationProblem()}{DiskOscillationProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\mbox{\hyperlink{classDiskOscillationProblem}{\+::\+Disk\+Oscillation\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00462}{462}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00059}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00056}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classDiskOscillationProblem_a84fdc4311e8cc1fa5f80dc5568c88413}\label{classDiskOscillationProblem_a84fdc4311e8cc1fa5f80dc5568c88413} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00423}{423}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_afea297af1844657099dec3d717fcccc5}\label{classDiskOscillationProblem_afea297af1844657099dec3d717fcccc5} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00426}{426}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8}\label{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00554}{554}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_a583b50c50f3f065ddeeaa48e4e6d8b6c}\label{classDiskOscillationProblem_a583b50c50f3f065ddeeaa48e4e6d8b6c} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00429}{429}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}\label{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!run@{run}}
+\index{run@{run}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&}]{nstep }\end{DoxyParamCaption})}
+
+
+
+Run the problem\+: Pass number of timesteps to be performed. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00753}{753}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__oscillation_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::multiplier()}}, and \mbox{\hyperlink{disk__oscillation_8cc_source_l00053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classDiskOscillationProblem_a338517a04848bb75252751df32879e40}\label{classDiskOscillationProblem_a338517a04848bb75252751df32879e40} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!IC\_geom\_object\_pt@{IC\_geom\_object\_pt}}
+\index{IC\_geom\_object\_pt@{IC\_geom\_object\_pt}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{IC\_geom\_object\_pt}{IC\_geom\_object\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classAxisymOscillatingDisk}{Axisym\+Oscillating\+Disk}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+IC\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Geometric object that specifies the initial conditions. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00450}{450}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_a45a4b574c10c6416b3b6be950713f505}\label{classDiskOscillationProblem_a45a4b574c10c6416b3b6be950713f505} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}} \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00444}{444}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+\Hypertarget{classDiskOscillationProblem_a141a79f41b33b19a6fca57793836e4da}\label{classDiskOscillationProblem_a141a79f41b33b19a6fca57793836e4da} 
+\index{DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}!Trace\_node\_pt@{Trace\_node\_pt}}
+\index{Trace\_node\_pt@{Trace\_node\_pt}!DiskOscillationProblem$<$ ELEMENT $>$@{DiskOscillationProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_node\_pt}{Trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Node}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classDiskOscillationProblem}{Disk\+Oscillation\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of pointers to nodes whose position we\textquotesingle{}re tracing. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00447}{447}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{disk__oscillation_8cc}{disk\+\_\+oscillation.\+cc}}\end{DoxyCompactItemize}

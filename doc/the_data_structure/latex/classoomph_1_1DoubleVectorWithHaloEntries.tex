@@ -1,0 +1,494 @@
+\doxysection{oomph\+::Double\+Vector\+With\+Halo\+Entries Class Reference}
+\hypertarget{classoomph_1_1DoubleVectorWithHaloEntries}{}\label{classoomph_1_1DoubleVectorWithHaloEntries}\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+
+
+===================================================================== An extension of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} that allows access to certain global entries that are not stored locally. Synchronisation of these values must be performed manually by calling the \doxylink{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}{synchronise()} function. Synchronisation can only be from the haloed to the halo, but the local halo entries can all be summed and stored in the  
+
+
+
+
+{\ttfamily \#include $<$double\+\_\+vector\+\_\+with\+\_\+halo.\+h$>$}
+
+Inheritance diagram for oomph\+::Double\+Vector\+With\+Halo\+Entries\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1DoubleVectorWithHaloEntries}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a023d72d2bd81de0e62c5c860edbca5d5}{Double\+Vector\+With\+Halo\+Entries}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for an uninitialized \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a11d1cd58eeb7f5d125f76537f49a1c42}{Double\+Vector\+With\+Halo\+Entries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}{halo\+\_\+scheme\+\_\+pt}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a28df73429d7ab3f349849c33a610df8c}{Double\+Vector\+With\+Halo\+Entries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}{halo\+\_\+scheme\+\_\+pt}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_aff20c271cfabd18132df864d24ad5cbf}{\texorpdfstring{$\sim$}{\string~}\+Double\+Vector\+With\+Halo\+Entries}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a9bef4c069e52aa1aa394e8b0b75d3367}{Double\+Vector\+With\+Halo\+Entries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Copy constructor from any \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a4af6e4f6038ea0071b7b19d4f4c1a859}{Double\+Vector\+With\+Halo\+Entries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}{halo\+\_\+scheme\+\_\+pt}}=0)
+\begin{DoxyCompactList}\small\item\em Copy constructor from any \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_aac1e401b12a149b56fe0d6211487d30c}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em assignment operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_ad7e911b1a0cf1ffd163d75f0777f5100}{global\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Direct access to global entry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_ad98faaf52c404514c6c6190289458e40}{global\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Direct access to the global entry (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}{synchronise}} ()
+\begin{DoxyCompactList}\small\item\em Synchronise the halo data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7165745d3397b6ea9d87f123cc97e5c9}{sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Sum all the data, store in the master (haloed) data and then synchronise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}{halo\+\_\+scheme\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for halo scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a227b3502b01bf9719cceff99ac38c7f5}{halo\+\_\+scheme\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for halo scheme (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a1aab1a84c6a82a755fdc3c6b27ce49d7}{build\+\_\+halo\+\_\+scheme}} (\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}{halo\+\_\+scheme\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Construct the halo scheme and storage for the halo data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DoubleVector}{oomph\+::\+Double\+Vector}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a786d26f4034f2ae10c9d26542642661f}{Double\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for an uninitialized \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a21f824524cd7bc779af3cbdbfe1d3ef8}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a29d22a13eeaa61d5467d5cfa37e1f38f}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_a53441aa63f3acfa65dc4556ffa0b5573}{\texorpdfstring{$\sim$}{\string~}\+Double\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ just calls this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear()} to delete the distribution and data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector_af547ee3b90c4a5598b655ed57ed78b2f}{Double\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab5f56f41d86a18bba358912b1c4f2dac}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em assignment operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a7bcc94c157d6853a0f0502e8a76ed380}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{old\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Just copys the argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ad22d075ba35995e26f40209de1b25746}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a84d5a0b2335fb1af865c84f8f25421e9}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.\+0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a73332fc4a200a32d7281ceb548375d8a}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4e6219936d6b23265b46dd3a25acb7c8}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em Assembles a \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} with a distribution dist and coefficients taken from the vector v. Note. The vector v MUST be of length \doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a180c1057a29f4ed721da46040a619ecd}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em initialise the whole vector with value v \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3ce2b88e72d8b084e9be8e9af10c487}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em initialise the vector with coefficient from the vector v. Note\+: The vector v must be of length \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_af1677445056759263b1b076966e7bfae}{clear}} ()
+\begin{DoxyCompactList}\small\item\em wipes the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aae402d422ec4344a4a45cdb7659b7161}{built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4715c8cf47f9fc56d95889343d1a3b82}{set\+\_\+external\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete\+\_\+external\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} dist\+\_\+pt argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a0626a448c259a12bd2b7d50f92da91e3}{set\+\_\+external\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete\+\_\+external\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Allows are external data to be used by this vector. WARNING\+: The size of the external data must correspond to the distribution of this vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a9396b861977c16606d8eca39056976c8}{redistribute}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The contents of the vector are redistributed to match the new distribution. In a non-\/\+MPI rebuild this method works, but does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVector_acea3779324129da50076341bf6644d25}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4da2f710fccabe5a5349d8a5238b36cc}{operator==}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em == operator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a2724cce5d107b7e6535d9ae071d6d603}{operator+=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em += operator with another vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aaeb013d502cff3ee0b7e036945ece1ea}{operator-\/=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}})
+\begin{DoxyCompactList}\small\item\em -\/= operator with another vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a691d884622e4221e61436f2bc457c6e2}{operator\texorpdfstring{$\ast$}{*}=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&d)
+\begin{DoxyCompactList}\small\item\em multiply by a double \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab3cb62619709401a0e8f4bc4bee9dff3}{operator/=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&d)
+\begin{DoxyCompactList}\small\item\em divide by a double \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1DoubleVector_a54cec3cc3e28f6781c28c0dbcfcffa3e}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em \mbox{[}\mbox{]} access function to the (local) values of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a4c176b562f503701d65882a930d5b8f5}{max}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the maximum coefficient \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVector_ae3484a5eb4cb663e09640806ef1bf05a}{values\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em access function to the underlying values \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVector_a1e2a19113e346db74e6fe34e0e945022}{values\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the underlying values (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aa258eab026007d7f02847b6e5ef3d1dc}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the global contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_ab236e5a906d16e8c7edc6b9acafa23e4}{output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the global contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a2cdcd660a9a90868ba1f837095403649}{output\+\_\+local\+\_\+values}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a1cbc454999c271e7cb476f7c5c76ce72}{output\+\_\+local\+\_\+values}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_afc5d6ab2c9ba7a0f307cc419a331df70}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleVector_aa9f03b47d00fe70e4f5e4f2474b48bf4}{output\+\_\+local\+\_\+values\+\_\+with\+\_\+offset}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+precision}}=-\/1) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em output the local contents of the vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_abd20e2e394c8e08749ed34c7228c8506}{dot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the dot product of this vector with the vector vec. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_a9ac9245cac87ddcdb70cfcd697553a55}{norm}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the 2 norm of this vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleVector_abe25ba0bd83ba1e963103c4ad95328cc}{norm}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em compute the A-\/norm using the matrix at matrix\+\_\+pt \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a59c62401e999f683365a34151362e328}{Halo\+\_\+scheme\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the lookup scheme that stores information about on which processor the required information is haloed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_ac2b04ca1db09db85401e0d59a225856b}{Halo\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of the halo values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+===================================================================== An extension of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} that allows access to certain global entries that are not stored locally. Synchronisation of these values must be performed manually by calling the \doxylink{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}{synchronise()} function. Synchronisation can only be from the haloed to the halo, but the local halo entries can all be summed and stored in the 
+
+\hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_autotoc_md2}{}\doxysubsection{\texorpdfstring{haloed value.}{haloed value.}}\label{classoomph_1_1DoubleVectorWithHaloEntries_autotoc_md2}
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00149}{149}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a023d72d2bd81de0e62c5c860edbca5d5}\label{classoomph_1_1DoubleVectorWithHaloEntries_a023d72d2bd81de0e62c5c860edbca5d5} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries()}{DoubleVectorWithHaloEntries()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for an uninitialized \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00160}{160}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a11d1cd58eeb7f5d125f76537f49a1c42}\label{classoomph_1_1DoubleVectorWithHaloEntries_a11d1cd58eeb7f5d125f76537f49a1c42} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries()}{DoubleVectorWithHaloEntries()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{halo\+\_\+scheme\+\_\+pt = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Assembles a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00166}{166}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a28df73429d7ab3f349849c33a610df8c}\label{classoomph_1_1DoubleVectorWithHaloEntries_a28df73429d7ab3f349849c33a610df8c} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries()}{DoubleVectorWithHaloEntries()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&}]{dist,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{halo\+\_\+scheme\+\_\+pt = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{v = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Assembles a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries} with a prescribed distribution. Additionally every entry can be set (with argument v -\/ defaults to 0). 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00180}{180}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_aff20c271cfabd18132df864d24ad5cbf}\label{classoomph_1_1DoubleVectorWithHaloEntries_aff20c271cfabd18132df864d24ad5cbf} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!````~DoubleVectorWithHaloEntries@{\texorpdfstring{$\sim$}{\string~}DoubleVectorWithHaloEntries}}
+\index{````~DoubleVectorWithHaloEntries@{\texorpdfstring{$\sim$}{\string~}DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DoubleVectorWithHaloEntries()}{\string~DoubleVectorWithHaloEntries()}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\texorpdfstring{$\sim$}{\string~}\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00191}{191}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a9bef4c069e52aa1aa394e8b0b75d3367}\label{classoomph_1_1DoubleVectorWithHaloEntries_a9bef4c069e52aa1aa394e8b0b75d3367} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries()}{DoubleVectorWithHaloEntries()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \&}]{new\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor from any \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00195}{195}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a4af6e4f6038ea0071b7b19d4f4c1a859}\label{classoomph_1_1DoubleVectorWithHaloEntries_a4af6e4f6038ea0071b7b19d4f4c1a859} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}}
+\index{DoubleVectorWithHaloEntries@{DoubleVectorWithHaloEntries}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{DoubleVectorWithHaloEntries()}{DoubleVectorWithHaloEntries()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Double\+Vector\+With\+Halo\+Entries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{new\+\_\+vector,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{halo\+\_\+scheme\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor from any \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00203}{203}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a1aab1a84c6a82a755fdc3c6b27ce49d7}\label{classoomph_1_1DoubleVectorWithHaloEntries_a1aab1a84c6a82a755fdc3c6b27ce49d7} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!build\_halo\_scheme@{build\_halo\_scheme}}
+\index{build\_halo\_scheme@{build\_halo\_scheme}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{build\_halo\_scheme()}{build\_halo\_scheme()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::build\+\_\+halo\+\_\+scheme (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{halo\+\_\+scheme\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Construct the halo scheme and storage for the halo data. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{379}} of file \mbox{\hyperlink{double__vector__with__halo_8cc_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{Halo\+\_\+value}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00059}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Local\+\_\+index}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{synchronise()}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8h_source_l00203}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00195}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00180}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00166}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00213}{operator=()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{problem_8cc_source_l00240}{oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_ad7e911b1a0cf1ffd163d75f0777f5100}\label{classoomph_1_1DoubleVectorWithHaloEntries_ad7e911b1a0cf1ffd163d75f0777f5100} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!global\_value@{global\_value}}
+\index{global\_value@{global\_value}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{global\_value()}{global\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to global entry. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{221}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{Halo\+\_\+value}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00118}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::local\+\_\+index()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{problem_8cc_source_l07976}{oomph\+::\+Problem\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{problem_8cc_source_l00240}{oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_ad98faaf52c404514c6c6190289458e40}\label{classoomph_1_1DoubleVectorWithHaloEntries_ad98faaf52c404514c6c6190289458e40} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!global\_value@{global\_value}}
+\index{global\_value@{global\_value}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{global\_value()}{global\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to the global entry (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{268}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{Halo\+\_\+value}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00118}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::local\+\_\+index()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec}\label{classoomph_1_1DoubleVectorWithHaloEntries_a7d753121acddfdc4b29d04812b91b5ec} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!halo\_scheme\_pt@{halo\_scheme\_pt}}
+\index{halo\_scheme\_pt@{halo\_scheme\_pt}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{halo\_scheme\_pt()}{halo\_scheme\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::halo\+\_\+scheme\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for halo scheme. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{323}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00203}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00195}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00180}{Double\+Vector\+With\+Halo\+Entries()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00166}{Double\+Vector\+With\+Halo\+Entries()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00213}{operator=()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a227b3502b01bf9719cceff99ac38c7f5}\label{classoomph_1_1DoubleVectorWithHaloEntries_a227b3502b01bf9719cceff99ac38c7f5} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!halo\_scheme\_pt@{halo\_scheme\_pt}}
+\index{halo\_scheme\_pt@{halo\_scheme\_pt}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{halo\_scheme\_pt()}{halo\_scheme\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}  \& oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::halo\+\_\+scheme\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for halo scheme (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00329}{329}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_aac1e401b12a149b56fe0d6211487d30c}\label{classoomph_1_1DoubleVectorWithHaloEntries_aac1e401b12a149b56fe0d6211487d30c} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \&}]{old\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+assignment operator 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00213}{213}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, and \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a7165745d3397b6ea9d87f123cc97e5c9}\label{classoomph_1_1DoubleVectorWithHaloEntries_a7165745d3397b6ea9d87f123cc97e5c9} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!sum\_all\_halo\_and\_haloed\_values@{sum\_all\_halo\_and\_haloed\_values}}
+\index{sum\_all\_halo\_and\_haloed\_values@{sum\_all\_halo\_and\_haloed\_values}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{sum\_all\_halo\_and\_haloed\_values()}{sum\_all\_halo\_and\_haloed\_values()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sum all the data, store in the master (haloed) data and then synchronise. 
+
+Gather all ther data from multiple processors and sum the result which will be stored in the master copy and then synchronised to all copies. This requires two "{}all to all"{} communications. 
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{323}} of file \mbox{\hyperlink{double__vector__with__halo_8cc_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00084}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00076}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00080}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+n}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{Halo\+\_\+value}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00071}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00063}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00067}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+n}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{synchronise()}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{problem_8cc_source_l00240}{oomph\+::\+Problem\+::setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}\label{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!synchronise@{synchronise}}
+\index{synchronise@{synchronise}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{synchronise()}{synchronise()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Synchronise the halo data. 
+
+Synchronise the halo data within the vector. This requires one "{}all to all"{} communnication. 
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{269}} of file \mbox{\hyperlink{double__vector__with__halo_8cc_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00084}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00076}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00080}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Halo\+\_\+n}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{Halo\+\_\+value}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00071}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+displacement}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00063}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+eqns}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00067}{oomph\+::\+Double\+Vector\+Halo\+Scheme\+::\+Haloed\+\_\+n}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{oomph\+::\+Pitch\+Fork\+Handler\+::synchronise()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_a59c62401e999f683365a34151362e328}\label{classoomph_1_1DoubleVectorWithHaloEntries_a59c62401e999f683365a34151362e328} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!Halo\_scheme\_pt@{Halo\_scheme\_pt}}
+\index{Halo\_scheme\_pt@{Halo\_scheme\_pt}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{Halo\_scheme\_pt}{Halo\_scheme\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{Double\+Vector\+Halo\+Scheme}}\texorpdfstring{$\ast$}{*} oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Halo\+\_\+scheme\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the lookup scheme that stores information about on which processor the required information is haloed. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00153}{153}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00323}{halo\+\_\+scheme\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00329}{halo\+\_\+scheme\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{synchronise()}}.
+
+\Hypertarget{classoomph_1_1DoubleVectorWithHaloEntries_ac2b04ca1db09db85401e0d59a225856b}\label{classoomph_1_1DoubleVectorWithHaloEntries_ac2b04ca1db09db85401e0d59a225856b} 
+\index{oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}!Halo\_value@{Halo\_value}}
+\index{Halo\_value@{Halo\_value}!oomph::DoubleVectorWithHaloEntries@{oomph::DoubleVectorWithHaloEntries}}
+\doxysubsubsection{\texorpdfstring{Halo\_value}{Halo\_value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::\+Halo\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of the halo values. 
+
+
+
+Definition at line \mbox{\hyperlink{double__vector__with__halo_8h_source_l00156}{156}} of file \mbox{\hyperlink{double__vector__with__halo_8h_source}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00268}{global\+\_\+value()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{synchronise()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{double__vector__with__halo_8h}{double\+\_\+vector\+\_\+with\+\_\+halo.\+h}}\item 
+\mbox{\hyperlink{double__vector__with__halo_8cc}{double\+\_\+vector\+\_\+with\+\_\+halo.\+cc}}\end{DoxyCompactItemize}

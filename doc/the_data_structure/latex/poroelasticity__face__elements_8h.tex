@@ -1,0 +1,21 @@
+\doxysection{poroelasticity\+\_\+face\+\_\+elements.\+h File Reference}
+\hypertarget{poroelasticity__face__elements_8h}{}\label{poroelasticity__face__elements_8h}\index{poroelasticity\_face\_elements.h@{poroelasticity\_face\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PoroelasticityFaceElement}{oomph\+::\+Poroelasticity\+Face\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the imposition of an applied pressure in the Darcy equations. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1PoroelasticityFaceElementHelper}{oomph\+::\+Poroelasticity\+Face\+Element\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace containing the zero pressure function for Darcy pressure elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PoroelasticityFaceElementHelper_a488acda61b46c3a3fe9e18339160c745}{oomph\+::\+Poroelasticity\+Face\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero traction) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1PoroelasticityFaceElementHelper_a48a53a85499ac3c4a176a44c1edc397d}{oomph\+::\+Poroelasticity\+Face\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero pressure) \end{DoxyCompactList}\end{DoxyCompactItemize}

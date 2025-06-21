@@ -1,0 +1,624 @@
+\doxysection{oomph\+::Projection\+Problem\texorpdfstring{$<$}{<} PROJECTABLE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ProjectionProblem}{}\label{classoomph_1_1ProjectionProblem}\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+
+
+Projection problem. This is created during the adaptation of unstructured meshes and it is assumed that no boundary conditions have been set. If they have, they will be unset during the projection and must be reset afterwards.  
+
+
+
+
+{\ttfamily \#include $<$projection.\+h$>$}
+
+Inheritance diagram for oomph\+::Projection\+Problem\texorpdfstring{$<$}{<} PROJECTABLE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ProjectionProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a3706c034e47193038de20f3d40443a2c}{enable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Suppress all output during projection phases. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ab9bb57b5e9241388b4f90b37e338c454}{disable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Undo suppression of all output during projection phases. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a5652035eda34f398652ede076dc085ae}{use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Return the value of the flag about using an iterative solver for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_aefda55d76d58a951ef6714cbb998e358}{enable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Enables the use of an iterative solver for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_aaf4b8fcb1f5f15cd95075a7da3e76cc5}{disable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}} ()
+\begin{DoxyCompactList}\small\item\em Disbales the use of an iterative solver for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ad972f78212e515a03d1018996115265a}{project}} (Mesh \texorpdfstring{$\ast$}{*}base\+\_\+mesh\+\_\+pt, const bool \&dont\+\_\+project\+\_\+positions=false)
+\begin{DoxyCompactList}\small\item\em Project from base into the problem\textquotesingle{}s own mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ProjectionProblem_a4091e944bf95ae7b3cc86ac427d93257}{Projection\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (made this private so only the friend class can call the constructor) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ProjectionProblem_a2b18253c5a5f783a329307315e9ef69c}{\texorpdfstring{$\sim$}{\string~}\+Projection\+Problem}} ()
+\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a5518d9926a396536ea3d24a13e0a6a71}{store\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to store positions (the only things that have been set before doing projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_aeb3c03ed8381f389d3d598487b6fb987}{restore\+\_\+positions}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to restore positions (the only things that have been set before doing projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a9c24751d48a454956517a8541c423cf2}{pin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Pin all the field values and position unknowns (bit inefficient) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ac0b06207d156be752a3fccfab654826e}{unpin\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Unpin all the field values and position unknowns (bit inefficient) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a50b3643c4e6942755e1ede1c0ab417ec}{unpin\+\_\+dofs\+\_\+of\+\_\+coordinate}} (const unsigned \&coord)
+\begin{DoxyCompactList}\small\item\em Helper function to unpin the values of coordinate coord. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ade05dce90814098ec0af15324b758730}{pin\+\_\+dofs\+\_\+of\+\_\+coordinate}} (const unsigned \&coord)
+\begin{DoxyCompactList}\small\item\em Helper function to unpin the values of coordinate coord. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a36847f48bff4081b5db0c038ddba1260}{unpin\+\_\+dofs\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Helper function to unpin dofs of fld-\/th field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_acff96fd0e3dda445ba806e253988c547}{pin\+\_\+dofs\+\_\+of\+\_\+field}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Helper function to unpin dofs of fld-\/th field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a935983de617d4fb2feeef674af13d473}{set\+\_\+time\+\_\+level\+\_\+for\+\_\+projection}} (const unsigned \&time\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Helper function to set time level for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ad8f93fb7e51a0e427b634d4dac8e96a3}{set\+\_\+coordinate\+\_\+for\+\_\+projection}} (const unsigned \&i)
+\begin{DoxyCompactList}\small\item\em Set the coordinate for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a944bed6fe67a6e683d3c7eb242705b6e}{set\+\_\+lagrangian\+\_\+coordinate\+\_\+for\+\_\+projection}} (const unsigned \&i)
+\begin{DoxyCompactList}\small\item\em Set the Lagrangian coordinate for projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a616f08ea08e8f1ba6be018e966f38830}{set\+\_\+current\+\_\+field\+\_\+for\+\_\+projection}} (const unsigned \&fld)
+\begin{DoxyCompactList}\small\item\em Set current field for projection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ Dense\+Matrix$<$ double $>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectionProblem_af085e8e2152466d7a98eebff07ea9271}{Solid\+\_\+backup}}
+\begin{DoxyCompactList}\small\item\em Backup for pin status of solid node\textquotesingle{}s position Data. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a628ff404b240c75244eea7d38e5363dd}{Output\+\_\+during\+\_\+projection\+\_\+suppressed}}
+\begin{DoxyCompactList}\small\item\em Flag to suppress output during projection. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a917be524f0312bcf05c399d7c05f95a5}{Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}
+\item 
+Iterative\+Linear\+Solver \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a74cb4279bf7d10be200610ca73be4d90}{Iterative\+\_\+solver\+\_\+projection\+\_\+pt}}
+\item 
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProjectionProblem_ac351713a8fba2e5595955afaf65ab22a}{Preconditioner\+\_\+projection\+\_\+pt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ }\\class \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a13d7a9943fbdd399011c849d5839c211}{Refineable\+Triangle\+Mesh}}
+\item 
+{\footnotesize template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ }\\class \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a999f3861375bbdf2365f6ab38447a2c4}{Refineable\+Tetgen\+Mesh}}
+\item 
+{\footnotesize template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ }\\class \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a01ad4b9aac17e6b8e251ce52ba21bfe4}{Backup\+Mesh\+For\+Projection}}
+\item 
+{\footnotesize template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ }\\class \mbox{\hyperlink{classoomph_1_1ProjectionProblem_a933521be2c09eb1842625109de7a8b66}{Refineable\+Gmsh\+Tet\+Mesh}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class PROJECTABLE\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$}
+Projection problem. This is created during the adaptation of unstructured meshes and it is assumed that no boundary conditions have been set. If they have, they will be unset during the projection and must be reset afterwards. 
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00694}{694}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ProjectionProblem_a4091e944bf95ae7b3cc86ac427d93257}\label{classoomph_1_1ProjectionProblem_a4091e944bf95ae7b3cc86ac427d93257} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!ProjectionProblem@{ProjectionProblem}}
+\index{ProjectionProblem@{ProjectionProblem}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ProjectionProblem()}{ProjectionProblem()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Projection\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Default constructor (made this private so only the friend class can call the constructor) 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01387}{1387}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01808}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Iterative\+\_\+solver\+\_\+projection\+\_\+pt}}, \mbox{\hyperlink{projection_8h_source_l01802}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Output\+\_\+during\+\_\+projection\+\_\+suppressed}}, \mbox{\hyperlink{projection_8h_source_l01811}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Preconditioner\+\_\+projection\+\_\+pt}}, and \mbox{\hyperlink{projection_8h_source_l01805}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a2b18253c5a5f783a329307315e9ef69c}\label{classoomph_1_1ProjectionProblem_a2b18253c5a5f783a329307315e9ef69c} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!````~ProjectionProblem@{\texorpdfstring{$\sim$}{\string~}ProjectionProblem}}
+\index{````~ProjectionProblem@{\texorpdfstring{$\sim$}{\string~}ProjectionProblem}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ProjectionProblem()}{\string~ProjectionProblem()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1ProjectionProblem}{Projection\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01406}{1406}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01808}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Iterative\+\_\+solver\+\_\+projection\+\_\+pt}}, and \mbox{\hyperlink{projection_8h_source_l01811}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Preconditioner\+\_\+projection\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ProjectionProblem_ab9bb57b5e9241388b4f90b37e338c454}\label{classoomph_1_1ProjectionProblem_ab9bb57b5e9241388b4f90b37e338c454} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!disable\_suppress\_output\_during\_projection@{disable\_suppress\_output\_during\_projection}}
+\index{disable\_suppress\_output\_during\_projection@{disable\_suppress\_output\_during\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_output\_during\_projection()}{disable\_suppress\_output\_during\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::disable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Undo suppression of all output during projection phases. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00723}{723}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01802}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Output\+\_\+during\+\_\+projection\+\_\+suppressed}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_aaf4b8fcb1f5f15cd95075a7da3e76cc5}\label{classoomph_1_1ProjectionProblem_aaf4b8fcb1f5f15cd95075a7da3e76cc5} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!disable\_use\_iterative\_solver\_for\_projection@{disable\_use\_iterative\_solver\_for\_projection}}
+\index{disable\_use\_iterative\_solver\_for\_projection@{disable\_use\_iterative\_solver\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_use\_iterative\_solver\_for\_projection()}{disable\_use\_iterative\_solver\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::disable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disbales the use of an iterative solver for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00742}{742}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01805}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a3706c034e47193038de20f3d40443a2c}\label{classoomph_1_1ProjectionProblem_a3706c034e47193038de20f3d40443a2c} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!enable\_suppress\_output\_during\_projection@{enable\_suppress\_output\_during\_projection}}
+\index{enable\_suppress\_output\_during\_projection@{enable\_suppress\_output\_during\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_output\_during\_projection()}{enable\_suppress\_output\_during\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::enable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Suppress all output during projection phases. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00717}{717}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01802}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Output\+\_\+during\+\_\+projection\+\_\+suppressed}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_aefda55d76d58a951ef6714cbb998e358}\label{classoomph_1_1ProjectionProblem_aefda55d76d58a951ef6714cbb998e358} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!enable\_use\_iterative\_solver\_for\_projection@{enable\_use\_iterative\_solver\_for\_projection}}
+\index{enable\_use\_iterative\_solver\_for\_projection@{enable\_use\_iterative\_solver\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_use\_iterative\_solver\_for\_projection()}{enable\_use\_iterative\_solver\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::enable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables the use of an iterative solver for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00736}{736}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01805}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a9c24751d48a454956517a8541c423cf2}\label{classoomph_1_1ProjectionProblem_a9c24751d48a454956517a8541c423cf2} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!pin\_all@{pin\_all}}
+\index{pin\_all@{pin\_all}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_all()}{pin\_all()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Pin all the field values and position unknowns (bit inefficient) 
+
+Do we have a solid mesh?
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01503}{1503}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_ade05dce90814098ec0af15324b758730}\label{classoomph_1_1ProjectionProblem_ade05dce90814098ec0af15324b758730} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!pin\_dofs\_of\_coordinate@{pin\_dofs\_of\_coordinate}}
+\index{pin\_dofs\_of\_coordinate@{pin\_dofs\_of\_coordinate}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_dofs\_of\_coordinate()}{pin\_dofs\_of\_coordinate()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+dofs\+\_\+of\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{coord }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to unpin the values of coordinate coord. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01667}{1667}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_acff96fd0e3dda445ba806e253988c547}\label{classoomph_1_1ProjectionProblem_acff96fd0e3dda445ba806e253988c547} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!pin\_dofs\_of\_field@{pin\_dofs\_of\_field}}
+\index{pin\_dofs\_of\_field@{pin\_dofs\_of\_field}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_dofs\_of\_field()}{pin\_dofs\_of\_field()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+dofs\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to unpin dofs of fld-\/th field. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01716}{1716}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_ad972f78212e515a03d1018996115265a}\label{classoomph_1_1ProjectionProblem_ad972f78212e515a03d1018996115265a} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!project@{project}}
+\index{project@{project}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{project()}{project()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}}]{base\+\_\+mesh\+\_\+pt,  }\item[{const bool \&}]{dont\+\_\+project\+\_\+positions = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Project from base into the problem\textquotesingle{}s own mesh. 
+
+Disable documentation of solve times
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00748}{748}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01808}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Iterative\+\_\+solver\+\_\+projection\+\_\+pt}}, \mbox{\hyperlink{projection_8h_source_l01802}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Output\+\_\+during\+\_\+projection\+\_\+suppressed}}, \mbox{\hyperlink{projection_8h_source_l01503}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all()}}, \mbox{\hyperlink{projection_8h_source_l01667}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+dofs\+\_\+of\+\_\+coordinate()}}, \mbox{\hyperlink{projection_8h_source_l01716}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::pin\+\_\+dofs\+\_\+of\+\_\+field()}}, \mbox{\hyperlink{projection_8h_source_l01811}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Preconditioner\+\_\+projection\+\_\+pt}}, \mbox{\hyperlink{projection_8h_source_l01750}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+coordinate\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l01784}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+current\+\_\+field\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l01767}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+lagrangian\+\_\+coordinate\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l01736}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+time\+\_\+level\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l01799}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+backup}}, \mbox{\hyperlink{projection_8h_source_l01425}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::store\+\_\+positions()}}, \mbox{\hyperlink{projection_8h_source_l01573}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+all()}}, \mbox{\hyperlink{projection_8h_source_l01639}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+dofs\+\_\+of\+\_\+coordinate()}}, \mbox{\hyperlink{projection_8h_source_l01696}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+dofs\+\_\+of\+\_\+field()}}, and \mbox{\hyperlink{projection_8h_source_l01805}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_aeb3c03ed8381f389d3d598487b6fb987}\label{classoomph_1_1ProjectionProblem_aeb3c03ed8381f389d3d598487b6fb987} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!restore\_positions@{restore\_positions}}
+\index{restore\_positions@{restore\_positions}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{restore\_positions()}{restore\_positions()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::restore\+\_\+positions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to restore positions (the only things that have been set before doing projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01466}{1466}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01799}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+backup}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_ad8f93fb7e51a0e427b634d4dac8e96a3}\label{classoomph_1_1ProjectionProblem_ad8f93fb7e51a0e427b634d4dac8e96a3} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!set\_coordinate\_for\_projection@{set\_coordinate\_for\_projection}}
+\index{set\_coordinate\_for\_projection@{set\_coordinate\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_coordinate\_for\_projection()}{set\_coordinate\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+coordinate\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the coordinate for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01750}{1750}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a616f08ea08e8f1ba6be018e966f38830}\label{classoomph_1_1ProjectionProblem_a616f08ea08e8f1ba6be018e966f38830} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!set\_current\_field\_for\_projection@{set\_current\_field\_for\_projection}}
+\index{set\_current\_field\_for\_projection@{set\_current\_field\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_current\_field\_for\_projection()}{set\_current\_field\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+current\+\_\+field\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set current field for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01784}{1784}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a944bed6fe67a6e683d3c7eb242705b6e}\label{classoomph_1_1ProjectionProblem_a944bed6fe67a6e683d3c7eb242705b6e} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!set\_lagrangian\_coordinate\_for\_projection@{set\_lagrangian\_coordinate\_for\_projection}}
+\index{set\_lagrangian\_coordinate\_for\_projection@{set\_lagrangian\_coordinate\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_lagrangian\_coordinate\_for\_projection()}{set\_lagrangian\_coordinate\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+lagrangian\+\_\+coordinate\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the Lagrangian coordinate for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01767}{1767}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a935983de617d4fb2feeef674af13d473}\label{classoomph_1_1ProjectionProblem_a935983de617d4fb2feeef674af13d473} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!set\_time\_level\_for\_projection@{set\_time\_level\_for\_projection}}
+\index{set\_time\_level\_for\_projection@{set\_time\_level\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_time\_level\_for\_projection()}{set\_time\_level\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::set\+\_\+time\+\_\+level\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}\item[{const unsigned \&}]{time\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to set time level for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01736}{1736}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a5518d9926a396536ea3d24a13e0a6a71}\label{classoomph_1_1ProjectionProblem_a5518d9926a396536ea3d24a13e0a6a71} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!store\_positions@{store\_positions}}
+\index{store\_positions@{store\_positions}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{store\_positions()}{store\_positions()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::store\+\_\+positions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to store positions (the only things that have been set before doing projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01425}{1425}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01799}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+backup}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_ac0b06207d156be752a3fccfab654826e}\label{classoomph_1_1ProjectionProblem_ac0b06207d156be752a3fccfab654826e} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!unpin\_all@{unpin\_all}}
+\index{unpin\_all@{unpin\_all}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unpin\_all()}{unpin\_all()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Unpin all the field values and position unknowns (bit inefficient) 
+
+Do we have a solid mesh?
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01573}{1573}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a50b3643c4e6942755e1ede1c0ab417ec}\label{classoomph_1_1ProjectionProblem_a50b3643c4e6942755e1ede1c0ab417ec} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!unpin\_dofs\_of\_coordinate@{unpin\_dofs\_of\_coordinate}}
+\index{unpin\_dofs\_of\_coordinate@{unpin\_dofs\_of\_coordinate}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unpin\_dofs\_of\_coordinate()}{unpin\_dofs\_of\_coordinate()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+dofs\+\_\+of\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const unsigned \&}]{coord }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to unpin the values of coordinate coord. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01639}{1639}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a36847f48bff4081b5db0c038ddba1260}\label{classoomph_1_1ProjectionProblem_a36847f48bff4081b5db0c038ddba1260} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!unpin\_dofs\_of\_field@{unpin\_dofs\_of\_field}}
+\index{unpin\_dofs\_of\_field@{unpin\_dofs\_of\_field}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{unpin\_dofs\_of\_field()}{unpin\_dofs\_of\_field()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::unpin\+\_\+dofs\+\_\+of\+\_\+field (\begin{DoxyParamCaption}\item[{const unsigned \&}]{fld }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to unpin dofs of fld-\/th field. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01696}{1696}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a5652035eda34f398652ede076dc085ae}\label{classoomph_1_1ProjectionProblem_a5652035eda34f398652ede076dc085ae} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!use\_iterative\_solver\_for\_projection@{use\_iterative\_solver\_for\_projection}}
+\index{use\_iterative\_solver\_for\_projection@{use\_iterative\_solver\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{use\_iterative\_solver\_for\_projection()}{use\_iterative\_solver\_for\_projection()}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the flag about using an iterative solver for projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00730}{730}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+References \mbox{\hyperlink{projection_8h_source_l01805}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1ProjectionProblem_a01ad4b9aac17e6b8e251ce52ba21bfe4}\label{classoomph_1_1ProjectionProblem_a01ad4b9aac17e6b8e251ce52ba21bfe4} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!BackupMeshForProjection@{BackupMeshForProjection}}
+\index{BackupMeshForProjection@{BackupMeshForProjection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{BackupMeshForProjection}{BackupMeshForProjection}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+friend class Backup\+Mesh\+For\+Projection\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00704}{704}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a933521be2c09eb1842625109de7a8b66}\label{classoomph_1_1ProjectionProblem_a933521be2c09eb1842625109de7a8b66} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!RefineableGmshTetMesh@{RefineableGmshTetMesh}}
+\index{RefineableGmshTetMesh@{RefineableGmshTetMesh}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableGmshTetMesh}{RefineableGmshTetMesh}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+friend class Refineable\+Gmsh\+Tet\+Mesh\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00706}{706}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a999f3861375bbdf2365f6ab38447a2c4}\label{classoomph_1_1ProjectionProblem_a999f3861375bbdf2365f6ab38447a2c4} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!RefineableTetgenMesh@{RefineableTetgenMesh}}
+\index{RefineableTetgenMesh@{RefineableTetgenMesh}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableTetgenMesh}{RefineableTetgenMesh}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+friend class Refineable\+Tetgen\+Mesh\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00702}{702}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a13d7a9943fbdd399011c849d5839c211}\label{classoomph_1_1ProjectionProblem_a13d7a9943fbdd399011c849d5839c211} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!RefineableTriangleMesh@{RefineableTriangleMesh}}
+\index{RefineableTriangleMesh@{RefineableTriangleMesh}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableTriangleMesh}{RefineableTriangleMesh}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+template$<$class FRIEND\+\_\+\+PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+friend class Refineable\+Triangle\+Mesh\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l00700}{700}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ProjectionProblem_a74cb4279bf7d10be200610ca73be4d90}\label{classoomph_1_1ProjectionProblem_a74cb4279bf7d10be200610ca73be4d90} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!Iterative\_solver\_projection\_pt@{Iterative\_solver\_projection\_pt}}
+\index{Iterative\_solver\_projection\_pt@{Iterative\_solver\_projection\_pt}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Iterative\_solver\_projection\_pt}{Iterative\_solver\_projection\_pt}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+Iterative\+Linear\+Solver\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Iterative\+\_\+solver\+\_\+projection\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01808}{1808}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{projection_8h_source_l01387}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Projection\+Problem()}}, and \mbox{\hyperlink{projection_8h_source_l01406}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Projection\+Problem()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a628ff404b240c75244eea7d38e5363dd}\label{classoomph_1_1ProjectionProblem_a628ff404b240c75244eea7d38e5363dd} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!Output\_during\_projection\_suppressed@{Output\_during\_projection\_suppressed}}
+\index{Output\_during\_projection\_suppressed@{Output\_during\_projection\_suppressed}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Output\_during\_projection\_suppressed}{Output\_during\_projection\_suppressed}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Output\+\_\+during\+\_\+projection\+\_\+suppressed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to suppress output during projection. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01802}{1802}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00723}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::disable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00717}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::enable\+\_\+suppress\+\_\+output\+\_\+during\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, and \mbox{\hyperlink{projection_8h_source_l01387}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Projection\+Problem()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_ac351713a8fba2e5595955afaf65ab22a}\label{classoomph_1_1ProjectionProblem_ac351713a8fba2e5595955afaf65ab22a} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!Preconditioner\_projection\_pt@{Preconditioner\_projection\_pt}}
+\index{Preconditioner\_projection\_pt@{Preconditioner\_projection\_pt}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_projection\_pt}{Preconditioner\_projection\_pt}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+Preconditioner\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Preconditioner\+\_\+projection\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01811}{1811}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{projection_8h_source_l01387}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Projection\+Problem()}}, and \mbox{\hyperlink{projection_8h_source_l01406}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Projection\+Problem()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_af085e8e2152466d7a98eebff07ea9271}\label{classoomph_1_1ProjectionProblem_af085e8e2152466d7a98eebff07ea9271} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!Solid\_backup@{Solid\_backup}}
+\index{Solid\_backup@{Solid\_backup}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_backup}{Solid\_backup}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+Vector$<$Dense\+Matrix$<$double$>$ $>$ \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Solid\+\_\+backup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Backup for pin status of solid node\textquotesingle{}s position Data. 
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01799}{1799}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{projection_8h_source_l01466}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::restore\+\_\+positions()}}, and \mbox{\hyperlink{projection_8h_source_l01425}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::store\+\_\+positions()}}.
+
+\Hypertarget{classoomph_1_1ProjectionProblem_a917be524f0312bcf05c399d7c05f95a5}\label{classoomph_1_1ProjectionProblem_a917be524f0312bcf05c399d7c05f95a5} 
+\index{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}!Use\_iterative\_solver\_for\_projection@{Use\_iterative\_solver\_for\_projection}}
+\index{Use\_iterative\_solver\_for\_projection@{Use\_iterative\_solver\_for\_projection}!oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$@{oomph::ProjectionProblem$<$ PROJECTABLE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Use\_iterative\_solver\_for\_projection}{Use\_iterative\_solver\_for\_projection}}
+{\footnotesize\ttfamily template$<$class PROJECTABLE\+\_\+\+ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ProjectionProblem}{oomph\+::\+Projection\+Problem}}$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{projection_8h_source_l01805}{1805}} of file \mbox{\hyperlink{projection_8h_source}{projection.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00742}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::disable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00736}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::enable\+\_\+use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection()}}, \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, \mbox{\hyperlink{projection_8h_source_l01387}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::\+Projection\+Problem()}}, and \mbox{\hyperlink{projection_8h_source_l00730}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::use\+\_\+iterative\+\_\+solver\+\_\+for\+\_\+projection()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{projection_8h}{projection.\+h}}\end{DoxyCompactItemize}

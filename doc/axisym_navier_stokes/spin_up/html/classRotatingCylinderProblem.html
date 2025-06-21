@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="classRotatingCylinderProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Refineable rotating cylinder problem in a rectangular axisymmetric domain.  
+ <a href="classRotatingCylinderProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classRotatingCylinderProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a436b0ff8c4ac33acfe10492c587ad80d" id="r_a436b0ff8c4ac33acfe10492c587ad80d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a436b0ff8c4ac33acfe10492c587ad80d">RotatingCylinderProblem</a> (const unsigned &amp;n_r, const unsigned &amp;n_z, const double &amp;l_r, const double &amp;l_z)</td></tr>
+<tr class="memdesc:a436b0ff8c4ac33acfe10492c587ad80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass the number of elements and the lengths of the domain in the radial (r) and axial (z) directions.  <br /></td></tr>
+<tr class="separator:a436b0ff8c4ac33acfe10492c587ad80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a586e71f48ee21cfc3bc93d17e91bbc11" id="r_a586e71f48ee21cfc3bc93d17e91bbc11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a586e71f48ee21cfc3bc93d17e91bbc11">~RotatingCylinderProblem</a> ()</td></tr>
+<tr class="memdesc:a586e71f48ee21cfc3bc93d17e91bbc11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:a586e71f48ee21cfc3bc93d17e91bbc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4316cce2306c4aab4a20b88cdfe6e3" id="r_a5e4316cce2306c4aab4a20b88cdfe6e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a5e4316cce2306c4aab4a20b88cdfe6e3">set_initial_condition</a> ()</td></tr>
+<tr class="memdesc:a5e4316cce2306c4aab4a20b88cdfe6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set initial conditions.  <br /></td></tr>
+<tr class="separator:a5e4316cce2306c4aab4a20b88cdfe6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37efdb2d7059535a48b12f69869996ee" id="r_a37efdb2d7059535a48b12f69869996ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a37efdb2d7059535a48b12f69869996ee">set_boundary_conditions</a> ()</td></tr>
+<tr class="memdesc:a37efdb2d7059535a48b12f69869996ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set boundary conditions.  <br /></td></tr>
+<tr class="separator:a37efdb2d7059535a48b12f69869996ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22f82fba41d68b9748642f9a29a12592" id="r_a22f82fba41d68b9748642f9a29a12592"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a22f82fba41d68b9748642f9a29a12592">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a22f82fba41d68b9748642f9a29a12592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Document the solution.  <br /></td></tr>
+<tr class="separator:a22f82fba41d68b9748642f9a29a12592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb7f77b97e9ac061edbaa97a018cd24" id="r_abfb7f77b97e9ac061edbaa97a018cd24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#abfb7f77b97e9ac061edbaa97a018cd24">unsteady_run</a> (const double &amp;t_max, const double &amp;dt, const string dir_name)</td></tr>
+<tr class="memdesc:abfb7f77b97e9ac061edbaa97a018cd24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do unsteady run up to maximum time t_max with given timestep dt.  <br /></td></tr>
+<tr class="separator:abfb7f77b97e9ac061edbaa97a018cd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce95d28a5c0d7ce0d58b94210dee4c8" id="r_a9ce95d28a5c0d7ce0d58b94210dee4c8"><td class="memItemLeft" align="right" valign="top">RefineableRectangularQuadMesh&lt; ELEMENT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a9ce95d28a5c0d7ce0d58b94210dee4c8">mesh_pt</a> ()</td></tr>
+<tr class="memdesc:a9ce95d28a5c0d7ce0d58b94210dee4c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for the specific mesh.  <br /></td></tr>
+<tr class="separator:a9ce95d28a5c0d7ce0d58b94210dee4c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af6678f4329624865484d52058d8902a3" id="r_af6678f4329624865484d52058d8902a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#af6678f4329624865484d52058d8902a3">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:af6678f4329624865484d52058d8902a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve. Reset velocity boundary conditions just to be on the safe side...  <br /></td></tr>
+<tr class="separator:af6678f4329624865484d52058d8902a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cac6acd0607a98fd1b5f2c155335dbd" id="r_a2cac6acd0607a98fd1b5f2c155335dbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a2cac6acd0607a98fd1b5f2c155335dbd">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a2cac6acd0607a98fd1b5f2c155335dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">No actions required after solve step.  <br /></td></tr>
+<tr class="separator:a2cac6acd0607a98fd1b5f2c155335dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d2fc60789ca6e2458be45b94ee40a1c" id="r_a7d2fc60789ca6e2458be45b94ee40a1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a7d2fc60789ca6e2458be45b94ee40a1c">actions_after_adapt</a> ()</td></tr>
+<tr class="memdesc:a7d2fc60789ca6e2458be45b94ee40a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">After adaptation: Pin pressure again (the previously pinned value might have disappeared) and pin redudant pressure dofs.  <br /></td></tr>
+<tr class="separator:a7d2fc60789ca6e2458be45b94ee40a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a4c2a32a64bb6c0e6cf7a9e3bba157" id="r_a06a4c2a32a64bb6c0e6cf7a9e3bba157"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotatingCylinderProblem.html#a06a4c2a32a64bb6c0e6cf7a9e3bba157">fix_pressure</a> (const unsigned &amp;e, const unsigned &amp;pdof, const double &amp;pvalue)</td></tr>
+<tr class="memdesc:a06a4c2a32a64bb6c0e6cf7a9e3bba157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fix pressure in element e at pressure dof pdof and set to pvalue.  <br /></td></tr>
+<tr class="separator:a06a4c2a32a64bb6c0e6cf7a9e3bba157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELEMENT, class TIMESTEPPER&gt;<br />
+class RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;</div><p>Refineable rotating cylinder problem in a rectangular axisymmetric domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00071">71</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a436b0ff8c4ac33acfe10492c587ad80d" name="a436b0ff8c4ac33acfe10492c587ad80d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436b0ff8c4ac33acfe10492c587ad80d">&#9670;&#160;</a></span>RotatingCylinderProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;<a class="el" href="classRotatingCylinderProblem.html">::RotatingCylinderProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>l_z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass the number of elements and the lengths of the domain in the radial (r) and axial (z) directions. </p>
+<p>Constructor for refineable rotating cylinder problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00148">148</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spin__up_8cc_source.html#l00053">Global_Physical_Variables::Re</a>, and <a class="el" href="spin__up_8cc_source.html#l00056">Global_Physical_Variables::ReSt</a>.</p>
+
+</div>
+</div>
+<a id="a586e71f48ee21cfc3bc93d17e91bbc11" name="a586e71f48ee21cfc3bc93d17e91bbc11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a586e71f48ee21cfc3bc93d17e91bbc11">&#9670;&#160;</a></span>~RotatingCylinderProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::~<a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00082">82</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7d2fc60789ca6e2458be45b94ee40a1c" name="a7d2fc60789ca6e2458be45b94ee40a1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d2fc60789ca6e2458be45b94ee40a1c">&#9670;&#160;</a></span>actions_after_adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_adapt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>After adaptation: Pin pressure again (the previously pinned value might have disappeared) and pin redudant pressure dofs. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00115">115</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spin__up_8cc_source.html#l00131">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>, and <a class="el" href="spin__up_8cc_source.html#l00098">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::mesh_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a2cac6acd0607a98fd1b5f2c155335dbd" name="a2cac6acd0607a98fd1b5f2c155335dbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cac6acd0607a98fd1b5f2c155335dbd">&#9670;&#160;</a></span>actions_after_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>No actions required after solve step. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00111">111</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+</div>
+</div>
+<a id="af6678f4329624865484d52058d8902a3" name="af6678f4329624865484d52058d8902a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6678f4329624865484d52058d8902a3">&#9670;&#160;</a></span>actions_before_newton_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve. Reset velocity boundary conditions just to be on the safe side... </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00108">108</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spin__up_8cc_source.html#l00274">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions()</a>.</p>
+
+</div>
+</div>
+<a id="a22f82fba41d68b9748642f9a29a12592" name="a22f82fba41d68b9748642f9a29a12592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22f82fba41d68b9748642f9a29a12592">&#9670;&#160;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Document the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00319">319</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+</div>
+</div>
+<a id="a06a4c2a32a64bb6c0e6cf7a9e3bba157" name="a06a4c2a32a64bb6c0e6cf7a9e3bba157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a4c2a32a64bb6c0e6cf7a9e3bba157">&#9670;&#160;</a></span>fix_pressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>pdof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pvalue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fix pressure in element e at pressure dof pdof and set to pvalue. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00131">131</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="spin__up_8cc_source.html#l00131">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>, and <a class="el" href="spin__up_8cc_source.html#l00098">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::mesh_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spin__up_8cc_source.html#l00115">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_adapt()</a>, and <a class="el" href="spin__up_8cc_source.html#l00131">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>.</p>
+
+</div>
+</div>
+<a id="a9ce95d28a5c0d7ce0d58b94210dee4c8" name="a9ce95d28a5c0d7ce0d58b94210dee4c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce95d28a5c0d7ce0d58b94210dee4c8">&#9670;&#160;</a></span>mesh_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RefineableRectangularQuadMesh&lt; ELEMENT &gt; * <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::mesh_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for the specific mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00098">98</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spin__up_8cc_source.html#l00115">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_after_adapt()</a>, and <a class="el" href="spin__up_8cc_source.html#l00131">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::fix_pressure()</a>.</p>
+
+</div>
+</div>
+<a id="a37efdb2d7059535a48b12f69869996ee" name="a37efdb2d7059535a48b12f69869996ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37efdb2d7059535a48b12f69869996ee">&#9670;&#160;</a></span>set_boundary_conditions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_boundary_conditions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set boundary conditions. </p>
+<p>Set boundary conditions: Set both velocity components to zero on the bottom (solid) wall and the horizontal component only to zero on the side (periodic) boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00274">274</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="spin__up_8cc_source.html#l00108">RotatingCylinderProblem&lt; ELEMENT, TIMESTEPPER &gt;::actions_before_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a5e4316cce2306c4aab4a20b88cdfe6e3" name="a5e4316cce2306c4aab4a20b88cdfe6e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e4316cce2306c4aab4a20b88cdfe6e3">&#9670;&#160;</a></span>set_initial_condition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::set_initial_condition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set initial conditions. </p>
+<p>Set initial conditions: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00244">244</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+</div>
+</div>
+<a id="abfb7f77b97e9ac061edbaa97a018cd24" name="abfb7f77b97e9ac061edbaa97a018cd24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb7f77b97e9ac061edbaa97a018cd24">&#9670;&#160;</a></span>unsteady_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT , class TIMESTEPPER &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classRotatingCylinderProblem.html">RotatingCylinderProblem</a>&lt; ELEMENT, TIMESTEPPER &gt;::unsteady_run </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>t_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string&#160;</td>
+          <td class="paramname"><em>dir_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Do unsteady run up to maximum time t_max with given timestep dt. </p>
+<p>Perform run up to specified time t_max with given timestep dt. </p>
+
+<p class="definition">Definition at line <a class="el" href="spin__up_8cc_source.html#l00351">351</a> of file <a class="el" href="spin__up_8cc_source.html">spin_up.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="spin__up_8cc_source.html">spin_up.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:06:50
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

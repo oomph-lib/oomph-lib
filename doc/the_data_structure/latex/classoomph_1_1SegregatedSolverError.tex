@@ -1,0 +1,85 @@
+\doxysection{oomph\+::Segregated\+Solver\+Error Class Reference}
+\hypertarget{classoomph_1_1SegregatedSolverError}{}\label{classoomph_1_1SegregatedSolverError}\index{oomph::SegregatedSolverError@{oomph::SegregatedSolverError}}
+
+
+A class to handle errors in the Segregated solver.  
+
+
+
+
+{\ttfamily \#include $<$segregated\+\_\+fsi\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Segregated\+Solver\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1SegregatedSolverError}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SegregatedSolverError_a9beda33b1ad32cc06d133bc446719587}{Segregated\+Solver\+Error}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}})
+\begin{DoxyCompactList}\small\item\em Default constructor, does nothing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibError}{oomph\+::\+Oomph\+Lib\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibError_a2706846fffe8d60e13918daec455e780}{Oomph\+Lib\+Error}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}})
+\begin{DoxyCompactList}\small\item\em Constructor requires the error description and the function in which the error occured and the location provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db4e1e507}{disable\+\_\+error\+\_\+message}} ()
+\begin{DoxyCompactList}\small\item\em Suppress issueing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibError}{oomph\+::\+Oomph\+Lib\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibError_a64f1bfd5eaaafdef448c9a9f47be85cb}{set\+\_\+stream\+\_\+pt}} (std\+::ostream \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&stream\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the error stream, which must be passed as a pointer because streams cannot be copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1OomphLibError_a9c1f4842949a5938f2646428cb390124}{set\+\_\+output\+\_\+width}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Static member function used to specify the width (in characters) of the error stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b}{Oomph\+Lib\+Exception}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{error\+\_\+description}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{function\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{location}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+type}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{exception\+\_\+stream}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+width}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{list\+\_\+trace\+\_\+back}})
+\begin{DoxyCompactList}\small\item\em Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string "{}\+WARNING"{} or "{}\+ERROR"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}{\texorpdfstring{$\sim$}{\string~}\+Oomph\+Lib\+Exception}} ()  \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw}} ()
+\begin{DoxyCompactList}\small\item\em The destructor cannot throw an exception (C++ STL standard) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1OomphLibException}{oomph\+::\+Oomph\+Lib\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_ab9177b3f4d969f3e4d102487165103c7}{Exception\+\_\+stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Exception stream to which we write message in destructor. \end{DoxyCompactList}\item 
+std\+::stringstream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}{Exception\+\_\+stringstream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em String stream that records the error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}{Suppress\+\_\+error\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress issuing of the error message in destructor (useful if error is caught successfully!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to handle errors in the Segregated solver. 
+
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00143}{143}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SegregatedSolverError_a9beda33b1ad32cc06d133bc446719587}\label{classoomph_1_1SegregatedSolverError_a9beda33b1ad32cc06d133bc446719587} 
+\index{oomph::SegregatedSolverError@{oomph::SegregatedSolverError}!SegregatedSolverError@{SegregatedSolverError}}
+\index{SegregatedSolverError@{SegregatedSolverError}!oomph::SegregatedSolverError@{oomph::SegregatedSolverError}}
+\doxysubsubsection{\texorpdfstring{SegregatedSolverError()}{SegregatedSolverError()}}
+{\footnotesize\ttfamily oomph\+::\+Segregated\+Solver\+Error\+::\+Segregated\+Solver\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{error\+\_\+description,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{function\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}}]{location }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor, does nothing. 
+
+
+
+Definition at line \mbox{\hyperlink{segregated__fsi__solver_8h_source_l00147}{147}} of file \mbox{\hyperlink{segregated__fsi__solver_8h_source}{segregated\+\_\+fsi\+\_\+solver.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{segregated__fsi__solver_8h}{segregated\+\_\+fsi\+\_\+solver.\+h}}\end{DoxyCompactItemize}

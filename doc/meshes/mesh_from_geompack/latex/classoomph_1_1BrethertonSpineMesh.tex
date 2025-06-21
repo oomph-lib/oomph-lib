@@ -1,0 +1,945 @@
+\doxysection{oomph\+::Bretherton\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BrethertonSpineMesh}{}\label{classoomph_1_1BrethertonSpineMesh}\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+
+
+Mesh for 2D Bretherton problem -- based on single layer mesh. Templated by spine-\/ified Navier-\/\+Stokes element type (e.\+g. Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} and the corresponding interface element (e.\+g. Spine\+Line\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<}Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}  
+
+
+
+
+{\ttfamily \#include $<$bretherton\+\_\+spine\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Bretherton\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.731707cm]{classoomph_1_1BrethertonSpineMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0e9c404141ee65b000ab4d1fdc4f11da}{Bretherton\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nx1}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nx2}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nx3}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nh}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{nhalf}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{h}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lower\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{upper\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+start}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+transition\+\_\+start}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+transition\+\_\+end}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+end}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor. Arguments\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5}{interface\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to interface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c}{ninterface\+\_\+element}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements on interface. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633}{bulk\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{i}})
+\begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bulk. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce}{nbulk}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Number of elements in bulk. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18}{nfree\+\_\+surface\+\_\+spines}} ()
+\begin{DoxyCompactList}\small\item\em Number of free-\/surface spines (i.\+e. excluding the dummy spines in the channel region) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d}{find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{fs\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{initial\+\_\+zeta}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+base}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+end}})
+\begin{DoxyCompactList}\small\item\em Recalculate the spine lengths after repositioning. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb}{reposition\+\_\+spines}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+lo\+\_\+transition\+\_\+start}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+lo\+\_\+transition\+\_\+end}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+up\+\_\+transition\+\_\+start}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zeta\+\_\+up\+\_\+transition\+\_\+end}})
+\begin{DoxyCompactList}\small\item\em Reposition the spines in response to changes in geometry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd}{pin\+\_\+all\+\_\+spines}} ()
+\begin{DoxyCompactList}\small\item\em Pin all spines so the mesh can be used for computation without free surfaces. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific update actions, depending on the node update fct id stored for each node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e}{control\+\_\+element\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to control element (just under the symmetry line near the bubble tip, so the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73}{spine\+\_\+centre\+\_\+fraction}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Read the value of the spine centre\textquotesingle{}s vertical fraction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a33c3ed5af92e7b22a22615f42c34c387}{set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{fraction\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the pointer to the spine centre\textquotesingle{}s vertial fraction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a2cdbf36114a4da773fb7d659218d09cb}{Single\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{h}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_afb908e31d988eaa930e949a54eeea37f}{Single\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{h}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, axial length, height of layer, a boolean flag to make the mesh periodic in the x-\/direction, and a pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-\/direction. Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}{element\+\_\+reorder}} ()
+\begin{DoxyCompactList}\small\item\em Reorder the elements\+: By default they are ordered in "{}horizontal"{} layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{x\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the x-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default is to return nodes that are equally spaced in the x coodinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{y\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the y-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default it to return nodes that are equally spaced in the y coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0446cb0efaa31739f51ae0534a73d116}{spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the deposited film region in the lower part of the domain\+: Vertical spines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0dc35290fc96a075d864e79528e5fec8}{spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the horizontal transitition region in the lower part of the domain\+: Spine points from wall to origin. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a9ec578183760e386ed5229ba193e1fdf}{spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the vertical transitition region in the lower part of the domain\+: Spine points to origin. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a6ddc62166abfd621219551957c9b1103}{spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the vertical transitition region in the upper part of the domain\+: Spine points to origin. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_aa9fa4941d8fb02a388e933a7dd1c76a2}{spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the horizontal transitition region in the upper part of the domain\+: Spine points towards origin. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a3919bd086252db283ee5242b4688f8d1}{spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the deposited film region in the upper part of the domain\+: Vertical spines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a5a09b6d2f5e7ffd12a0ae882754ad818}{spine\+\_\+node\+\_\+update\+\_\+channel}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update function for the nodes in the channel region ahead of the finger tip\+: Nodes are evenly distributed along vertical lines between the top and bottom walls. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a52ffe1a705cb720d09c831b9cf5397f6}{initial\+\_\+element\+\_\+reorder}} ()
+\begin{DoxyCompactList}\small\item\em Initial reordering elements of the elements -- before the channel mesh is added. Vertical stacks of elements, each topped by their interface element -- this is (currently) identical to the version in the \doxylink{classoomph_1_1SingleLayerSpineMesh}{Single\+Layer\+Spine\+Mesh} but it\textquotesingle{}s important that the element reordering is maintained in exactly this form for the rest of the mesh generation process to work properly. Therefore we keep a copy of the function in here. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a6829fa8216137c0e2f5eb40b389dda35}{build\+\_\+single\+\_\+layer\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to actually build the single-\/layer spine mesh (called from various constructors) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{build}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_af6ef10fb80559c3ad27a50116da60dcc}{Nx1}}
+\begin{DoxyCompactList}\small\item\em Number of elements along wall in deposited film region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a237b4f516eb3f74e42e190f2a23f93c3}{Nx2}}
+\begin{DoxyCompactList}\small\item\em Number of elements along wall in horizontal transition region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a26c57f832b7cdc495087cef7b54c98fd}{Nx3}}
+\begin{DoxyCompactList}\small\item\em Number of elements along wall in channel region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a1e58d18dd2231c785008efa07260e8da}{Nhalf}}
+\begin{DoxyCompactList}\small\item\em Number of elements in vertical transition region (there are twice as many elements across the channel) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a4ba20dfa61b6c342f2defbc0cdb47851}{Nh}}
+\begin{DoxyCompactList}\small\item\em Number of elements across the deposited film. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a3d711e1bc9d751ab14662f6839a900e3}{H}}
+\begin{DoxyCompactList}\small\item\em Thickness of deposited film. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a1f97e78a12000afcc1bd754102b5b51a}{Upper\+\_\+wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the upper wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a04c0136de66c06a34347b89f453730e1}{Lower\+\_\+wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the lower wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0f41083aa9a97fca03d498bd6ec21eb2}{Zeta\+\_\+start}}
+\begin{DoxyCompactList}\small\item\em Start coordinate on wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ac1b5e005bfb5db65f54ca599942126ea}{Zeta\+\_\+end}}
+\begin{DoxyCompactList}\small\item\em Wall coordinate of end of liquid filled region (inflow) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_af701937d59d7804f40cb1b4c7a262391}{Zeta\+\_\+transition\+\_\+start}}
+\begin{DoxyCompactList}\small\item\em Wall coordinate of start of the transition region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a1d05bb741eba54ab7498ab4f3c55f1b7}{Zeta\+\_\+transition\+\_\+end}}
+\begin{DoxyCompactList}\small\item\em Wall coordinate of end of transition region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13d73f2b137947cda8a3}{Spine\+\_\+centre\+\_\+fraction\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to vertical fraction of the spine centre. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16}{Default\+\_\+spine\+\_\+centre\+\_\+fraction}}
+\begin{DoxyCompactList}\small\item\em Default spine fraction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}{Control\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to control element (just under the symmetry line near the bubble tip; the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a207b6a5e52ce95c0a6125f56eb22b98d}{Bulk\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to element in the fluid layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a7422b912ff7ad780777205f0cbe83362}{Interface\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to interface elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}{Nx}}
+\begin{DoxyCompactList}\small\item\em Nx\+: number of elements in x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}{Ny}}
+\begin{DoxyCompactList}\small\item\em Ny\+: number of elements in y-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a92502c7536a6644ebffd806841cd4d98}{Np}}
+\begin{DoxyCompactList}\small\item\em Np\+: number of (linear) points in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}{Xperiodic}}
+\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}}$>$\newline
+class oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}
+Mesh for 2D Bretherton problem -- based on single layer mesh. Templated by spine-\/ified Navier-\/\+Stokes element type (e.\+g. Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} and the corresponding interface element (e.\+g. Spine\+Line\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<}Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>} 
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00044}{44}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0e9c404141ee65b000ab4d1fdc4f11da}\label{classoomph_1_1BrethertonSpineMesh_a0e9c404141ee65b000ab4d1fdc4f11da} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!BrethertonSpineMesh@{BrethertonSpineMesh}}
+\index{BrethertonSpineMesh@{BrethertonSpineMesh}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{BrethertonSpineMesh()}{BrethertonSpineMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Bretherton\+Spine\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx1,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx2,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx3,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nh,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nhalf,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{lower\+\_\+wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{upper\+\_\+wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+start,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+transition\+\_\+start,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+transition\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor. Arguments\+: 
+
+
+\begin{DoxyItemize}
+\item nx1\+: Number of elements along wall in deposited film region
+\item nx2\+: Number of elements along wall in horizontal transition region
+\item nx3\+: Number of elements along wall in channel region
+\item nhalf\+: Number of elements in vertical transition region (there are twice as many elements across the channel)
+\item nh\+: Number of elements across the deposited film
+\item h\+: Thickness of deposited film
+\item zeta0\+: Start coordinate on wall
+\item zeta1\+: Wall coordinate of start of transition region
+\item zeta2\+: Wall coordinate of end of liquid filled region (inflow)
+\item lower\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the lower wall
+\item upper\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the upper wall
+\item time\+\_\+stepper\+\_\+pt\+: Pointer to timestepper; defaults to Steady
+\item nx1\+: Number of elements along wall in deposited film region
+\item nx2\+: Number of elements along wall in horizontal transition region
+\item nx3\+: Number of elements along wall in channel region
+\item nhalf\+: Number of elements in vertical transition region (there are twice as many elements across the channel)
+\item nh\+: Number of elements across the deposited film
+\item h\+: Thickness of deposited film
+\item zeta0\+: Start coordinate on wall
+\item zeta1\+: Wall coordinate of start of transition region
+\item zeta2\+: Wall coordinate of end of liquid filled region (inflow)
+\item lower\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the lower wall
+\item upper\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the upper wall
+\item time\+\_\+stepper\+\_\+pt\+: Pointer to timestepper; defaults to Static 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{60}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00537}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00534}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Control\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00505}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::H}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01019}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::initial\+\_\+element\+\_\+reorder()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00540}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00511}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Lower\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00495}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx3}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00508}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Upper\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00517}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+end}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00514}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+start}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00523}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+transition\+\_\+end}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00520}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+transition\+\_\+start}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633}\label{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!bulk\_element\_pt@{bulk\_element\_pt}}
+\index{bulk\_element\_pt@{bulk\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{bulk\_element\_pt()}{bulk\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::bulk\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to elements in bulk. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00091}{91}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00537}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e}\label{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!control\_element\_pt@{control\_element\_pt}}
+\index{control\_element\_pt@{control\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{control\_element\_pt()}{control\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::control\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to control element (just under the symmetry line near the bubble tip, so the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00183}{183}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00534}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Control\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d}\label{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!find\_distance\_to\_free\_surface@{find\_distance\_to\_free\_surface}}
+\index{find\_distance\_to\_free\_surface@{find\_distance\_to\_free\_surface}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{find\_distance\_to\_free\_surface()}{find\_distance\_to\_free\_surface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \&}]{fs\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&}]{initial\+\_\+zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&}]{spine\+\_\+base,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&}]{spine\+\_\+end }\end{DoxyParamCaption})}
+
+
+
+Recalculate the spine lengths after repositioning. 
+
+Calculate the distance from the spine base to the free surface, i.\+e. the spine height. 
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01056}{1056}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a52ffe1a705cb720d09c831b9cf5397f6}\label{classoomph_1_1BrethertonSpineMesh_a52ffe1a705cb720d09c831b9cf5397f6} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!initial\_element\_reorder@{initial\_element\_reorder}}
+\index{initial\_element\_reorder@{initial\_element\_reorder}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{initial\_element\_reorder()}{initial\_element\_reorder()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::initial\+\_\+element\+\_\+reorder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initial reordering elements of the elements -- before the channel mesh is added. Vertical stacks of elements, each topped by their interface element -- this is (currently) identical to the version in the \doxylink{classoomph_1_1SingleLayerSpineMesh}{Single\+Layer\+Spine\+Mesh} but it\textquotesingle{}s important that the element reordering is maintained in exactly this form for the rest of the mesh generation process to work properly. Therefore we keep a copy of the function in here. 
+
+Reorder elements\+: Vertical stacks of elements, each topped by their interface element -- this is (currently) identical to the version in the \doxylink{classoomph_1_1SingleLayerSpineMesh}{Single\+Layer\+Spine\+Mesh} but it\textquotesingle{}s important that element reordering is maintained in exactly this form so to be on the safe side, we move the function in here. 
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01019}{1019}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5}\label{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!interface\_element\_pt@{interface\_element\_pt}}
+\index{interface\_element\_pt@{interface\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{interface\_element\_pt()}{interface\_element\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::interface\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions for pointers to interface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00079}{79}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00540}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce}\label{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!nbulk@{nbulk}}
+\index{nbulk@{nbulk}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nbulk()}{nbulk()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::nbulk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements in bulk. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00097}{97}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00537}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18}\label{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!nfree\_surface\_spines@{nfree\_surface\_spines}}
+\index{nfree\_surface\_spines@{nfree\_surface\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nfree\_surface\_spines()}{nfree\_surface\_spines()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::nfree\+\_\+surface\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of free-\/surface spines (i.\+e. excluding the dummy spines in the channel region) 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00104}{104}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00499}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nhalf}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00489}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx1}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00492}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx2}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c}\label{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!ninterface\_element@{ninterface\_element}}
+\index{ninterface\_element@{ninterface\_element}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ninterface\_element()}{ninterface\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{long}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::ninterface\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of elements on interface. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00085}{85}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00540}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd}\label{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!pin\_all\_spines@{pin\_all\_spines}}
+\index{pin\_all\_spines@{pin\_all\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{pin\_all\_spines()}{pin\_all\_spines()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::pin\+\_\+all\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pin all spines so the mesh can be used for computation without free surfaces. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00124}{124}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb}\label{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!reposition\_spines@{reposition\_spines}}
+\index{reposition\_spines@{reposition\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{reposition\_spines()}{reposition\_spines()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::reposition\+\_\+spines (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+start,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+up\+\_\+transition\+\_\+start,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zeta\+\_\+up\+\_\+transition\+\_\+end }\end{DoxyParamCaption})}
+
+
+
+Reposition the spines in response to changes in geometry. 
+
+Reposition the spines that emenate from the lower wall. 
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01148}{1148}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a33c3ed5af92e7b22a22615f42c34c387}\label{classoomph_1_1BrethertonSpineMesh_a33c3ed5af92e7b22a22615f42c34c387} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!set\_spine\_centre\_fraction\_pt@{set\_spine\_centre\_fraction\_pt}}
+\index{set\_spine\_centre\_fraction\_pt@{set\_spine\_centre\_fraction\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_spine\_centre\_fraction\_pt()}{set\_spine\_centre\_fraction\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \&}]{fraction\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the pointer to the spine centre\textquotesingle{}s vertial fraction. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00196}{196}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00526}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73}\label{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_centre\_fraction@{spine\_centre\_fraction}}
+\index{spine\_centre\_fraction@{spine\_centre\_fraction}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_centre\_fraction()}{spine\_centre\_fraction()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+centre\+\_\+fraction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read the value of the spine centre\textquotesingle{}s vertical fraction. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{190}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00526}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00227}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00387}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00273}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00330}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}\label{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
+\index{spine\_node\_update@{spine\_node\_update}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+General node update function implements pure virtual function defined in Spine\+Mesh base class and performs specific update actions, depending on the node update fct id stored for each node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{136}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00458}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00204}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00434}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00227}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00387}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00273}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00330}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a5a09b6d2f5e7ffd12a0ae882754ad818}\label{classoomph_1_1BrethertonSpineMesh_a5a09b6d2f5e7ffd12a0ae882754ad818} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_channel@{spine\_node\_update\_channel}}
+\index{spine\_node\_update\_channel@{spine\_node\_update\_channel}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_channel()}{spine\_node\_update\_channel()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the nodes in the channel region ahead of the finger tip\+: Nodes are evenly distributed along vertical lines between the top and bottom walls. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00458}{458}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0446cb0efaa31739f51ae0534a73d116}\label{classoomph_1_1BrethertonSpineMesh_a0446cb0efaa31739f51ae0534a73d116} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_film\_lower@{spine\_node\_update\_film\_lower}}
+\index{spine\_node\_update\_film\_lower@{spine\_node\_update\_film\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_film\_lower()}{spine\_node\_update\_film\_lower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the deposited film region in the lower part of the domain\+: Vertical spines. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00204}{204}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a3919bd086252db283ee5242b4688f8d1}\label{classoomph_1_1BrethertonSpineMesh_a3919bd086252db283ee5242b4688f8d1} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_film\_upper@{spine\_node\_update\_film\_upper}}
+\index{spine\_node\_update\_film\_upper@{spine\_node\_update\_film\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_film\_upper()}{spine\_node\_update\_film\_upper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the deposited film region in the upper part of the domain\+: Vertical spines. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00434}{434}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0dc35290fc96a075d864e79528e5fec8}\label{classoomph_1_1BrethertonSpineMesh_a0dc35290fc96a075d864e79528e5fec8} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_horizontal\_transition\_lower@{spine\_node\_update\_horizontal\_transition\_lower}}
+\index{spine\_node\_update\_horizontal\_transition\_lower@{spine\_node\_update\_horizontal\_transition\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_horizontal\_transition\_lower()}{spine\_node\_update\_horizontal\_transition\_lower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the horizontal transitition region in the lower part of the domain\+: Spine points from wall to origin. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00227}{227}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_aa9fa4941d8fb02a388e933a7dd1c76a2}\label{classoomph_1_1BrethertonSpineMesh_aa9fa4941d8fb02a388e933a7dd1c76a2} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_horizontal\_transition\_upper@{spine\_node\_update\_horizontal\_transition\_upper}}
+\index{spine\_node\_update\_horizontal\_transition\_upper@{spine\_node\_update\_horizontal\_transition\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_horizontal\_transition\_upper()}{spine\_node\_update\_horizontal\_transition\_upper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the horizontal transitition region in the upper part of the domain\+: Spine points towards origin. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00387}{387}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a9ec578183760e386ed5229ba193e1fdf}\label{classoomph_1_1BrethertonSpineMesh_a9ec578183760e386ed5229ba193e1fdf} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_vertical\_transition\_lower@{spine\_node\_update\_vertical\_transition\_lower}}
+\index{spine\_node\_update\_vertical\_transition\_lower@{spine\_node\_update\_vertical\_transition\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_vertical\_transition\_lower()}{spine\_node\_update\_vertical\_transition\_lower()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the vertical transitition region in the lower part of the domain\+: Spine points to origin. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00273}{273}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a6ddc62166abfd621219551957c9b1103}\label{classoomph_1_1BrethertonSpineMesh_a6ddc62166abfd621219551957c9b1103} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_vertical\_transition\_upper@{spine\_node\_update\_vertical\_transition\_upper}}
+\index{spine\_node\_update\_vertical\_transition\_upper@{spine\_node\_update\_vertical\_transition\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update\_vertical\_transition\_upper()}{spine\_node\_update\_vertical\_transition\_upper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Update function for the vertical transitition region in the upper part of the domain\+: Spine points to origin. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00330}{330}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00136}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a207b6a5e52ce95c0a6125f56eb22b98d}\label{classoomph_1_1BrethertonSpineMesh_a207b6a5e52ce95c0a6125f56eb22b98d} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Bulk\_element\_pt@{Bulk\_element\_pt}}
+\index{Bulk\_element\_pt@{Bulk\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_element\_pt}{Bulk\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Bulk\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to element in the fluid layer. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00537}{537}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00091}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00097}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nbulk()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}\label{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Control\_element\_pt@{Control\_element\_pt}}
+\index{Control\_element\_pt@{Control\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Control\_element\_pt}{Control\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Control\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to control element (just under the symmetry line near the bubble tip; the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00534}{534}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00183}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::control\+\_\+element\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16}\label{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Default\_spine\_centre\_fraction@{Default\_spine\_centre\_fraction}}
+\index{Default\_spine\_centre\_fraction@{Default\_spine\_centre\_fraction}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Default\_spine\_centre\_fraction}{Default\_spine\_centre\_fraction}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Default\+\_\+spine\+\_\+centre\+\_\+fraction\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Default spine fraction. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00529}{529}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a3d711e1bc9d751ab14662f6839a900e3}\label{classoomph_1_1BrethertonSpineMesh_a3d711e1bc9d751ab14662f6839a900e3} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!H@{H}}
+\index{H@{H}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::H\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Thickness of deposited film. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00505}{505}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a7422b912ff7ad780777205f0cbe83362}\label{classoomph_1_1BrethertonSpineMesh_a7422b912ff7ad780777205f0cbe83362} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Interface\_element\_pt@{Interface\_element\_pt}}
+\index{Interface\_element\_pt@{Interface\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Interface\_element\_pt}{Interface\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Finite\+Element}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Interface\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Vector of pointers to interface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00540}{540}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00079}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::interface\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00085}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::ninterface\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a04c0136de66c06a34347b89f453730e1}\label{classoomph_1_1BrethertonSpineMesh_a04c0136de66c06a34347b89f453730e1} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Lower\_wall\_pt@{Lower\_wall\_pt}}
+\index{Lower\_wall\_pt@{Lower\_wall\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lower\_wall\_pt}{Lower\_wall\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Lower\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to geometric object that represents the lower wall. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00511}{511}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a4ba20dfa61b6c342f2defbc0cdb47851}\label{classoomph_1_1BrethertonSpineMesh_a4ba20dfa61b6c342f2defbc0cdb47851} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nh@{Nh}}
+\index{Nh@{Nh}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nh}{Nh}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Nh\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements across the deposited film. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00502}{502}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1e58d18dd2231c785008efa07260e8da}\label{classoomph_1_1BrethertonSpineMesh_a1e58d18dd2231c785008efa07260e8da} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nhalf@{Nhalf}}
+\index{Nhalf@{Nhalf}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nhalf}{Nhalf}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Nhalf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in vertical transition region (there are twice as many elements across the channel) 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00499}{499}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00104}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_af6ef10fb80559c3ad27a50116da60dcc}\label{classoomph_1_1BrethertonSpineMesh_af6ef10fb80559c3ad27a50116da60dcc} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx1@{Nx1}}
+\index{Nx1@{Nx1}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx1}{Nx1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Nx1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements along wall in deposited film region. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00489}{489}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00104}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a237b4f516eb3f74e42e190f2a23f93c3}\label{classoomph_1_1BrethertonSpineMesh_a237b4f516eb3f74e42e190f2a23f93c3} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx2@{Nx2}}
+\index{Nx2@{Nx2}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx2}{Nx2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Nx2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements along wall in horizontal transition region. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00492}{492}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00104}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a26c57f832b7cdc495087cef7b54c98fd}\label{classoomph_1_1BrethertonSpineMesh_a26c57f832b7cdc495087cef7b54c98fd} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx3@{Nx3}}
+\index{Nx3@{Nx3}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx3}{Nx3}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Nx3\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements along wall in channel region. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00495}{495}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13d73f2b137947cda8a3}\label{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13d73f2b137947cda8a3} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Spine\_centre\_fraction\_pt@{Spine\_centre\_fraction\_pt}}
+\index{Spine\_centre\_fraction\_pt@{Spine\_centre\_fraction\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Spine\_centre\_fraction\_pt}{Spine\_centre\_fraction\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to vertical fraction of the spine centre. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00526}{526}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00196}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00190}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1f97e78a12000afcc1bd754102b5b51a}\label{classoomph_1_1BrethertonSpineMesh_a1f97e78a12000afcc1bd754102b5b51a} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Upper\_wall\_pt@{Upper\_wall\_pt}}
+\index{Upper\_wall\_pt@{Upper\_wall\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Upper\_wall\_pt}{Upper\_wall\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Upper\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to geometric object that represents the upper wall. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00508}{508}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_ac1b5e005bfb5db65f54ca599942126ea}\label{classoomph_1_1BrethertonSpineMesh_ac1b5e005bfb5db65f54ca599942126ea} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_end@{Zeta\_end}}
+\index{Zeta\_end@{Zeta\_end}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zeta\_end}{Zeta\_end}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Zeta\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Wall coordinate of end of liquid filled region (inflow) 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00517}{517}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0f41083aa9a97fca03d498bd6ec21eb2}\label{classoomph_1_1BrethertonSpineMesh_a0f41083aa9a97fca03d498bd6ec21eb2} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_start@{Zeta\_start}}
+\index{Zeta\_start@{Zeta\_start}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zeta\_start}{Zeta\_start}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Zeta\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Start coordinate on wall. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00514}{514}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1d05bb741eba54ab7498ab4f3c55f1b7}\label{classoomph_1_1BrethertonSpineMesh_a1d05bb741eba54ab7498ab4f3c55f1b7} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_transition\_end@{Zeta\_transition\_end}}
+\index{Zeta\_transition\_end@{Zeta\_transition\_end}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zeta\_transition\_end}{Zeta\_transition\_end}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Zeta\+\_\+transition\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Wall coordinate of end of transition region. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00523}{523}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1BrethertonSpineMesh_af701937d59d7804f40cb1b4c7a262391}\label{classoomph_1_1BrethertonSpineMesh_af701937d59d7804f40cb1b4c7a262391} 
+\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_transition\_start@{Zeta\_transition\_start}}
+\index{Zeta\_transition\_start@{Zeta\_transition\_start}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zeta\_transition\_start}{Zeta\_transition\_start}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{INTERFACE\+\_\+\+ELEMENT}} $>$\+::\+Zeta\+\_\+transition\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Wall coordinate of start of the transition region. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8h_source_l00520}{520}} of file \mbox{\hyperlink{bretherton__spine__mesh_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00060}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{bretherton__spine__mesh_8h}{bretherton\+\_\+spine\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{bretherton__spine__mesh_8template_8cc}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

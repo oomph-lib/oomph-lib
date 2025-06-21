@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Telements.h File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4075b182e53a3873a42d885f4e1e98c4.html">generic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">Telements.h File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="Telements_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TFace.html">oomph::TFace</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangular Face class.  <a href="classoomph_1_1TFace.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape.html">oomph::TElementShape&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for those member functions that must be fully specialised for the Telements. The fact that member functions of partially specialised classes cannot necessarily be fully specialised means that we must either fully specialise every class, or use this base class to fully specialize only those functions that are required.  <a href="classoomph_1_1TElementShape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_011_00_012_01_4.html">oomph::TElementShape&lt; 1, 2 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1TElementShape.html" title="A class for those member functions that must be fully specialised for the Telements....">TElementShape</a> inline functions:  <a href="classoomph_1_1TElementShape_3_011_00_012_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_011_00_013_01_4.html">oomph::TElementShape&lt; 1, 3 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_011_00_014_01_4.html">oomph::TElementShape&lt; 1, 4 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_012_00_012_01_4.html">oomph::TElementShape&lt; 2, 2 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_012_00_013_01_4.html">oomph::TElementShape&lt; 2, 3 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_012_00_014_01_4.html">oomph::TElementShape&lt; 2, 4 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElementShape.html">oomph::TBubbleEnrichedElementShape&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class for those member functions that must be fully specialised for Telements that are enriched by bubbble functions. The fact that member functions of partially specialised classes cannot necessarily be fully specialised means that we must either fully specialise every class, or use this base class to fully specialize only those functions that are required.  <a href="classoomph_1_1TBubbleEnrichedElementShape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElementShape_3_012_00_013_01_4.html">oomph::TBubbleEnrichedElementShape&lt; 2, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific Enriched <a class="el" href="classoomph_1_1TElementShape.html" title="A class for those member functions that must be fully specialised for the Telements....">TElementShape</a> inline functions.  <a href="classoomph_1_1TBubbleEnrichedElementShape_3_012_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementGeometricBase.html">oomph::TElementGeometricBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty base class for Telements (created so that we can use dynamic_cast&lt;&gt;() to figure out if a an element is a Telement (from a purely geometric point of view).  <a href="classoomph_1_1TElementGeometricBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementBase.html">oomph::TElementBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty base class for Telements (created so that we can use dynamic_cast&lt;&gt;() to figure out if a an element is a Telement).  <a href="classoomph_1_1TElementBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElement.html">oomph::TElement&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">General <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class.  <a href="classoomph_1_1TElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElement_3_011_00_01NNODE__1D_01_4.html">oomph::TElement&lt; 1, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">General <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class specialised to one spatial dimensions Ordering of nodes is 0 at local coordinate s[0] = 0, 1 at local coordinate s[0] = 1 and then filling in the intermediate values from s[0]=0 to 1.  <a href="classoomph_1_1TElement_3_011_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4.html">oomph::TElement&lt; 2, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">General <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class specialised to two spatial dimensions Ordering of nodes as in Zienkiwizc sketches: vertex nodes 0 - 1 - 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last.  <a href="classoomph_1_1TElement_3_012_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_013_00_012_01_4.html">oomph::TElementShape&lt; 3, 2 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local coordinates of node j.  <a href="classoomph_1_1TElementShape_3_013_00_012_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElementShape_3_013_00_013_01_4.html">oomph::TElementShape&lt; 3, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return local coordinates of node j.  <a href="classoomph_1_1TElementShape_3_013_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElementShape_3_013_00_013_01_4.html">oomph::TBubbleEnrichedElementShape&lt; 3, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard quadratic shape functions enriched by the addition of three cubic "face" bubbles and quartic "volume" bubble, which consists of adding a node at the centroid of each face and a single node at the centroid of the tetrahedron.  <a href="classoomph_1_1TBubbleEnrichedElementShape_3_013_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TElement_3_013_00_01NNODE__1D_01_4.html">oomph::TElement&lt; 3, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">General <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class specialised to three spatial dimensions (tet) Ordering of nodes inverted from Zienkiewizc sketches: When looking into the tet from vertex node 0. The vertex nodes on the opposite face are 1 - 2 - 3 in anticlockwise direction. Other nodes filled in edge by edge, then the face ones, then the internal ones.  <a href="classoomph_1_1TElement_3_013_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElement.html">oomph::TBubbleEnrichedElement&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class for which the shape functions have been enriched by a single bubble function of the next order.  <a href="classoomph_1_1TBubbleEnrichedElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedGauss.html">oomph::TBubbleEnrichedGauss&lt; DIM, NPTS_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define integration schemes that are required to exactly integrate the mass matrices of the bubble-enriched elements. The enrichement increases the polynomial order which means that higher-order <a class="el" href="classoomph_1_1Gauss.html" title="Class for multidimensional Gaussian integration rules.">Gauss</a> rules must be used.  <a href="classoomph_1_1TBubbleEnrichedGauss.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedGauss_3_012_00_013_01_4.html">oomph::TBubbleEnrichedGauss&lt; 2, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialisation for two-dimensional elements, in which the highest order polynomial is cubic, so we need the integration scheme for the unenriched cubic element.  <a href="classoomph_1_1TBubbleEnrichedGauss_3_012_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedGauss_3_013_00_013_01_4.html">oomph::TBubbleEnrichedGauss&lt; 3, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialisation for three-dimensional elements, in which the highest order polynomial is quartic, so we need the integration scheme for the unenriched quartic element.  <a href="classoomph_1_1TBubbleEnrichedGauss_3_013_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html">oomph::TBubbleEnrichedElement&lt; DIM, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enriched <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches: vertex nodes 0 - 1 - 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing <a class="el" href="classoomph_1_1TElement.html">TElement&lt;2,3&gt;</a>, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element.  <a href="classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TSolidElementBase.html">oomph::TSolidElementBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for Solid Telements.  <a href="classoomph_1_1TSolidElementBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTElement.html">oomph::SolidTElement&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a> elements are triangular/tet elements whose derivatives also include those based upon the lagrangian positions of the nodes. They are the basis for solid mechanics elements.  <a href="classoomph_1_1SolidTElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTElement_3_011_00_01NNODE__1D_01_4.html">oomph::SolidTElement&lt; 1, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a> elements, specialised to one spatial dimension.  <a href="classoomph_1_1SolidTElement_3_011_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTElement_3_012_00_01NNODE__1D_01_4.html">oomph::SolidTElement&lt; 2, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a> elements, specialised to two spatial dimensions.  <a href="classoomph_1_1SolidTElement_3_012_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTElement_3_013_00_01NNODE__1D_01_4.html">oomph::SolidTElement&lt; 3, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a> elements, specialised to three spatial dimensions.  <a href="classoomph_1_1SolidTElement_3_013_00_01NNODE__1D_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html">oomph::SolidTBubbleEnrichedElement&lt; DIM, NNODE_1D &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html" title="SolidTBubbleEnrichedElement elements are the enriched version of the SolidTElements....">SolidTBubbleEnrichedElement</a> elements are the enriched version of the SolidTElements. They will simply inherit from the appropriate <a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a> and TBubblEnrichedElement. They are the basis for solid mechanics elements.  <a href="classoomph_1_1SolidTBubbleEnrichedElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement_3_01DIM_00_013_01_4.html">oomph::SolidTBubbleEnrichedElement&lt; DIM, 3 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify the <a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html" title="SolidTBubbleEnrichedElement elements are the enriched version of the SolidTElements....">SolidTBubbleEnrichedElement</a> corresponding to the quadratic triangle.  <a href="classoomph_1_1SolidTBubbleEnrichedElement_3_01DIM_00_013_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01TElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; TElement&lt; DIM, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> elements: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01TElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01TElement_3_011_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; TElement&lt; 1, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 1D <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> elements: Point elements.  <a href="classoomph_1_1FaceGeometry_3_01TElement_3_011_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; TBubbleEnrichedElement&lt; 2, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 2D <a class="el" href="classoomph_1_1TBubbleEnrichedElement.html" title="TElement class for which the shape functions have been enriched by a single bubble function of the ne...">TBubbleEnrichedElement</a> elements is exactly the same as for the corresponding <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a>. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; TBubbleEnrichedElement&lt; 3, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 3D <a class="el" href="classoomph_1_1TBubbleEnrichedElement.html" title="TElement class for which the shape functions have been enriched by a single bubble function of the ne...">TBubbleEnrichedElement</a> elements is the 2D <a class="el" href="classoomph_1_1TBubbleEnrichedElement.html" title="TElement class for which the shape functions have been enriched by a single bubble function of the ne...">TBubbleEnrichedElement</a>. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01TBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01SolidTElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; SolidTElement&lt; DIM, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> elements: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01SolidTElement_3_01DIM_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01SolidTElement_3_011_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; SolidTElement&lt; 1, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 1D <a class="el" href="classoomph_1_1TElement.html" title="General TElement class.">TElement</a> elements: Point elements.  <a href="classoomph_1_1FaceGeometry_3_01SolidTElement_3_011_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; SolidTBubbleEnrichedElement&lt; 2, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 2D <a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html" title="SolidTBubbleEnrichedElement elements are the enriched version of the SolidTElements....">SolidTBubbleEnrichedElement</a> elements is exactly the same as for the corresponding 2D <a class="el" href="classoomph_1_1SolidTElement.html" title="SolidTElement elements are triangular/tet elements whose derivatives also include those based upon th...">SolidTElement</a>. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_012_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4.html">oomph::FaceGeometry&lt; SolidTBubbleEnrichedElement&lt; 3, NNODE_1D &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Face geometry for the 3D <a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html" title="SolidTBubbleEnrichedElement elements are the enriched version of the SolidTElements....">SolidTBubbleEnrichedElement</a> elements is the 2D <a class="el" href="classoomph_1_1SolidTBubbleEnrichedElement.html" title="SolidTBubbleEnrichedElement elements are the enriched version of the SolidTElements....">SolidTBubbleEnrichedElement</a>. The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges.  <a href="classoomph_1_1FaceGeometry_3_01SolidTBubbleEnrichedElement_3_013_00_01NNODE__1D_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceoomph" id="r_namespaceoomph"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph.html">oomph</a></td></tr>
+<tr class="memdesc:namespaceoomph"><td class="mdescLeft">&#160;</td><td class="mdescRight">DRAIG: Change all instances of (SPATIAL_DIM) to (DIM-1). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

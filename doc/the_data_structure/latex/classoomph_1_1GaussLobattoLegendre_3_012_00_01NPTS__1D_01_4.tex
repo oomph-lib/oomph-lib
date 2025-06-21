@@ -1,0 +1,201 @@
+\doxysection{oomph\+::Gauss\+Lobatto\+Legendre\texorpdfstring{$<$}{<} 2, NPTS\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4}{}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4}\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+
+
+2D \doxylink{classoomph_1_1Gauss}{Gauss} Lobatto Legendre integration class  
+
+
+
+
+{\ttfamily \#include $<$integral.\+h$>$}
+
+Inheritance diagram for oomph\+::Gauss\+Lobatto\+Legendre\texorpdfstring{$<$}{<} 2, NPTS\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a0dee3143e486b59326d774682332812f}{Gauss\+Lobatto\+Legendre}} ()
+\begin{DoxyCompactList}\small\item\em Deafault constructor. Calculates and stores GLL nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1d7de3fd70cc8684195a2d7de253eb69}{nweight}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of integration points of the scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ae3194b6f3d9bf6d0448cf3d055ed57d1}{knot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a61eb3f22e13ab35f91d9439ec5382ebf}{weight}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return weight of integration point i. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Integral}{oomph\+::\+Integral}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Integral_a68e50805e1859191361da2be4e89b9a8}{Integral}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Integral_a2834c14eed14ab19d0ee182af599a86c}{Integral}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Integral}{Integral}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Integral_ae018673975ff5d9ecdac2052887884fd}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Integral}{Integral}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Integral_a61b5870e0953a50d0c678ef59eefe147}{\texorpdfstring{$\sim$}{\string~}\+Integral}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1Integral_a750f52bb0121c183d02822a623ec708d}{knot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return local coordinates of i-\/th intergration point. Broken virtual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a410881f935a19c9df7de4bd2cfa6aa29}{Knot}} \mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array to hold weight and knot points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1b5e7aa6863b1a44c51346cdf2d1edc7}{Weight}} \mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ad7b67b90f29484aff0f1567467aaf9bc}{Npts}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}
+\begin{DoxyCompactList}\small\item\em Number of integration points in scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$\newline
+class oomph\+::\+Gauss\+Lobatto\+Legendre$<$ 2, NPTS\+\_\+1\+D $>$}
+2D \doxylink{classoomph_1_1Gauss}{Gauss} Lobatto Legendre integration class 
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01373}{1373}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a0dee3143e486b59326d774682332812f}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a0dee3143e486b59326d774682332812f} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!GaussLobattoLegendre@{GaussLobattoLegendre}}
+\index{GaussLobattoLegendre@{GaussLobattoLegendre}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{GaussLobattoLegendre()}{GaussLobattoLegendre()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::\+Gauss\+Lobatto\+Legendre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deafault constructor. Calculates and stores GLL nodes. 
+
+Calculate positions and weights for the 2D \doxylink{classoomph_1_1Gauss}{Gauss} Lobatto Legendre integration class. 
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01413}{1413}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+References \mbox{\hyperlink{orthpoly_8cc_source_l00033}{oomph\+::\+Orthpoly\+::gll\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ae3194b6f3d9bf6d0448cf3d055ed57d1}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ae3194b6f3d9bf6d0448cf3d055ed57d1} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!knot@{knot}}
+\index{knot@{knot}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{knot()}{knot()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral}}.
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01395}{1395}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1d7de3fd70cc8684195a2d7de253eb69}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1d7de3fd70cc8684195a2d7de253eb69} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!nweight@{nweight}}
+\index{nweight@{nweight}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{nweight()}{nweight()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of integration points of the scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral}}.
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01389}{1389}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a61eb3f22e13ab35f91d9439ec5382ebf}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a61eb3f22e13ab35f91d9439ec5382ebf} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!weight@{weight}}
+\index{weight@{weight}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{weight()}{weight()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return weight of integration point i. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral}}.
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01401}{1401}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a410881f935a19c9df7de4bd2cfa6aa29}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a410881f935a19c9df7de4bd2cfa6aa29} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!Knot@{Knot}}
+\index{Knot@{Knot}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Knot}{Knot}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::\+Knot\mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Array to hold weight and knot points. 
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01380}{1380}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ad7b67b90f29484aff0f1567467aaf9bc}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_ad7b67b90f29484aff0f1567467aaf9bc} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!Npts@{Npts}}
+\index{Npts@{Npts}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Npts}{Npts}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::\+Npts = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Number of integration points in scheme. 
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01377}{1377}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+\Hypertarget{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1b5e7aa6863b1a44c51346cdf2d1edc7}\label{classoomph_1_1GaussLobattoLegendre_3_012_00_01NPTS__1D_01_4_a1b5e7aa6863b1a44c51346cdf2d1edc7} 
+\index{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}!Weight@{Weight}}
+\index{Weight@{Weight}!oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLobattoLegendre$<$ 2, NPTS\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Weight}{Weight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1GaussLobattoLegendre}{oomph\+::\+Gauss\+Lobatto\+Legendre}}$<$ 2, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} $>$\+::\+Weight\mbox{[}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NPTS\+\_\+1D}}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l01381}{1381}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{integral_8h}{integral.\+h}}\end{DoxyCompactItemize}

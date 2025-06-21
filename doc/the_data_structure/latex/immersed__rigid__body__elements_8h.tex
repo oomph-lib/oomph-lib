@@ -1,0 +1,14 @@
+\doxysection{immersed\+\_\+rigid\+\_\+body\+\_\+elements.\+h File Reference}
+\hypertarget{immersed__rigid__body__elements_8h}{}\label{immersed__rigid__body__elements_8h}\index{immersed\_rigid\_body\_elements.h@{immersed\_rigid\_body\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyElement}{oomph\+::\+Immersed\+Rigid\+Body\+Element}}
+\begin{DoxyCompactList}\small\item\em Class that solves the equations of motion for a general two-\/dimensional rigid body subject to a particular imposed force and torque distribution and immersed within an external fluid. The body\textquotesingle{}s position is entirely specified by the location of its centre of mass, $\mbox{\boldmath$X$}$, and a single angle, $\phi$, that represents a possible rotation. The equations of motion are then simply Newton\textquotesingle{}s second law for the conservation of linear momentum in two directions and angular momentum about the single possible axis of rotation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ImmersedRigidBodyTriangleMeshPolygon}{oomph\+::\+Immersed\+Rigid\+Body\+Triangle\+Mesh\+Polygon}}
+\begin{DoxyCompactList}\small\item\em Class upgrading a \doxylink{classoomph_1_1TriangleMeshPolygon}{Triangle\+Mesh\+Polygon} to a "{}hole"{} for use during triangle mesh generation. For mesh generation purposes, the main (and only) addition to the base class is the provision of the coordinates of a hole inside the polygon. To faciliate the movement of the "{}hole"{} through the domain we also provide a \doxylink{classoomph_1_1Data}{Data} object whose three values represent the x and y displacements of its centre of gravity and the polygon\textquotesingle{}s rotation about its centre of gravity. If added to a mesh in the \doxylink{classoomph_1_1Problem}{Problem} (in its incarnation as a \doxylink{classoomph_1_1GeneralisedElement}{Generalised\+Element}) the displacement/rotation of the polygon is computed in response to (i) user-\/specifiable applied forces and a torque and (ii) the net drag (and associated torque) from a mesh of elements that can exert a drag onto the polygon (typically Navier-\/\+Stokes Face\+Elements that apply a viscous drag to an immersed body, represented by the polygon.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

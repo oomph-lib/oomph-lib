@@ -1,0 +1,63 @@
+\doxysection{disk\+\_\+compression.\+cc File Reference}
+\hypertarget{disk__compression_8cc}{}\label{disk__compression_8cc}\index{disk\_compression.cc@{disk\_compression.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Elastic quarter circle sector mesh with functionality to attach traction elements to the curved surface. We "{}upgrade"{} the Refineable\+Quarter\+Circle\+Sector\+Mesh to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. ~\newline
+~\newline
+The member function {\ttfamily \doxylink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee2141079544bb782d3ace1}{make\+\_\+traction\+\_\+element\+\_\+mesh()}} creates a separate mesh of Solid\+Traction\+Elements that are attached to the mesh\textquotesingle{}s curved boundary (boundary 1). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Uniform compression of a circular disk in a state of plane strain, subject to uniform growth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction}})
+\begin{DoxyCompactList}\small\item\em Constant pressure load. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6be3760e5494b1772e4bfe5d5f3c5d53}{Global\+\_\+\+Physical\+\_\+\+Variables\+::growth\+\_\+function}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} $>$ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{gamma}})
+\begin{DoxyCompactList}\small\item\em Growth function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} \mbox{\hyperlink{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for disk-\/compression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Strain\+Energy\+Function}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Uniform\+\_\+gamma}} =1.\+1
+\begin{DoxyCompactList}\small\item\em Uniform volumetric expansion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{disk\_compression.cc@{disk\_compression.cc}!main@{main}}
+\index{main@{main}!disk\_compression.cc@{disk\_compression.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for disk-\/compression. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00411}{411}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__compression_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{disk__compression_8cc_source_l00055}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{disk__compression_8cc_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{disk__compression_8cc_source_l00122}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{disk__compression_8cc_source_l00061}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{disk__compression_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

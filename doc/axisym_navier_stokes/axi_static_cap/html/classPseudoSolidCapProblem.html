@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: PseudoSolidCapProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classPseudoSolidCapProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">PseudoSolidCapProblem&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class that solves the Navier&ndash;Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary.  
+ <a href="classPseudoSolidCapProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for PseudoSolidCapProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classPseudoSolidCapProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4ac05a07dd55950bb67f7f79cb9fbb77" id="r_a4ac05a07dd55950bb67f7f79cb9fbb77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a4ac05a07dd55950bb67f7f79cb9fbb77">PseudoSolidCapProblem</a> (const bool &amp;hijack_internal)</td></tr>
+<tr class="memdesc:a4ac05a07dd55950bb67f7f79cb9fbb77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Boolean flag indicates if volume constraint is applied by hijacking internal or external pressure.  <br /></td></tr>
+<tr class="separator:a4ac05a07dd55950bb67f7f79cb9fbb77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec2a79e44dfd785b2978419210b053b8" id="r_aec2a79e44dfd785b2978419210b053b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#aec2a79e44dfd785b2978419210b053b8">~PseudoSolidCapProblem</a> ()</td></tr>
+<tr class="memdesc:aec2a79e44dfd785b2978419210b053b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: clean up memory allocated by the object.  <br /></td></tr>
+<tr class="separator:aec2a79e44dfd785b2978419210b053b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae86ecaf62fa0920f5d14bf82a7f83b0e" id="r_ae86ecaf62fa0920f5d14bf82a7f83b0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#ae86ecaf62fa0920f5d14bf82a7f83b0e">parameter_study</a> (const string &amp;dir_name)</td></tr>
+<tr class="memdesc:ae86ecaf62fa0920f5d14bf82a7f83b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peform a parameter study: Solve problem for a range of contact angles Pass name of output directory as a string.  <br /></td></tr>
+<tr class="separator:ae86ecaf62fa0920f5d14bf82a7f83b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb98a37bde5742cbdf3c91cb1f5eb2f" id="r_a2fb98a37bde5742cbdf3c91cb1f5eb2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a2fb98a37bde5742cbdf3c91cb1f5eb2f">doc_solution</a> (DocInfo &amp;doc_info)</td></tr>
+<tr class="memdesc:a2fb98a37bde5742cbdf3c91cb1f5eb2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution.  <br /></td></tr>
+<tr class="separator:a2fb98a37bde5742cbdf3c91cb1f5eb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ac0219ed64385dc20c4fc3c6cc217fd67" id="r_ac0219ed64385dc20c4fc3c6cc217fd67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#ac0219ed64385dc20c4fc3c6cc217fd67">create_free_surface_elements</a> ()</td></tr>
+<tr class="memdesc:ac0219ed64385dc20c4fc3c6cc217fd67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the free surface elements.  <br /></td></tr>
+<tr class="separator:ac0219ed64385dc20c4fc3c6cc217fd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0289801610e2bc864c67d4d8557d56b1" id="r_a0289801610e2bc864c67d4d8557d56b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a0289801610e2bc864c67d4d8557d56b1">create_volume_constraint_elements</a> ()</td></tr>
+<tr class="memdesc:a0289801610e2bc864c67d4d8557d56b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the volume constraint elements.  <br /></td></tr>
+<tr class="separator:a0289801610e2bc864c67d4d8557d56b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f28ebf09bc66142725139291b4e21a0" id="r_a8f28ebf09bc66142725139291b4e21a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a8f28ebf09bc66142725139291b4e21a0">create_contact_angle_element</a> ()</td></tr>
+<tr class="memdesc:a8f28ebf09bc66142725139291b4e21a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the contact angle element.  <br /></td></tr>
+<tr class="separator:a8f28ebf09bc66142725139291b4e21a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad29a43062d88106c495d407abeddd88d" id="r_ad29a43062d88106c495d407abeddd88d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#ad29a43062d88106c495d407abeddd88d">Ca</a></td></tr>
+<tr class="memdesc:ad29a43062d88106c495d407abeddd88d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Capillary number.  <br /></td></tr>
+<tr class="separator:ad29a43062d88106c495d407abeddd88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49945d8e5740977a72c63e333a65293f" id="r_a49945d8e5740977a72c63e333a65293f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a49945d8e5740977a72c63e333a65293f">Volume</a></td></tr>
+<tr class="memdesc:a49945d8e5740977a72c63e333a65293f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The prescribed volume of the fluid.  <br /></td></tr>
+<tr class="separator:a49945d8e5740977a72c63e333a65293f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbcfe3a5a05d191c44815681e4b621d0" id="r_afbcfe3a5a05d191c44815681e4b621d0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#afbcfe3a5a05d191c44815681e4b621d0">Pext</a></td></tr>
+<tr class="memdesc:afbcfe3a5a05d191c44815681e4b621d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The external pressure.  <br /></td></tr>
+<tr class="separator:afbcfe3a5a05d191c44815681e4b621d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51dfbd14a2cca78dc0efe6740337a22b" id="r_a51dfbd14a2cca78dc0efe6740337a22b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a51dfbd14a2cca78dc0efe6740337a22b">Angle</a></td></tr>
+<tr class="memdesc:a51dfbd14a2cca78dc0efe6740337a22b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The contact angle.  <br /></td></tr>
+<tr class="separator:a51dfbd14a2cca78dc0efe6740337a22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d26ab5daa295e7ac4cdca1802ec156" id="r_ab9d26ab5daa295e7ac4cdca1802ec156"><td class="memItemLeft" align="right" valign="top">ConstitutiveLaw *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#ab9d26ab5daa295e7ac4cdca1802ec156">Constitutive_law_pt</a></td></tr>
+<tr class="memdesc:ab9d26ab5daa295e7ac4cdca1802ec156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constitutive law used to determine the mesh deformation.  <br /></td></tr>
+<tr class="separator:ab9d26ab5daa295e7ac4cdca1802ec156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51ac066b9117f30679fef658ff66d981" id="r_a51ac066b9117f30679fef658ff66d981"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a51ac066b9117f30679fef658ff66d981">External_pressure_data_pt</a></td></tr>
+<tr class="memdesc:a51ac066b9117f30679fef658ff66d981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data object whose single value stores the external pressure.  <br /></td></tr>
+<tr class="separator:a51ac066b9117f30679fef658ff66d981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073f0857df471e2f165d57828511d835" id="r_a073f0857df471e2f165d57828511d835"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a073f0857df471e2f165d57828511d835">Traded_pressure_data_pt</a></td></tr>
+<tr class="separator:a073f0857df471e2f165d57828511d835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d2d9915ba7d9a9a691ca2f2080b6b4" id="r_a81d2d9915ba7d9a9a691ca2f2080b6b4"><td class="memItemLeft" align="right" valign="top">ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a81d2d9915ba7d9a9a691ca2f2080b6b4">Trace_file</a></td></tr>
+<tr class="memdesc:a81d2d9915ba7d9a9a691ca2f2080b6b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace file.  <br /></td></tr>
+<tr class="separator:a81d2d9915ba7d9a9a691ca2f2080b6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d4520b30d05f3dde12ea9bae9d62d0b" id="r_a6d4520b30d05f3dde12ea9bae9d62d0b"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a6d4520b30d05f3dde12ea9bae9d62d0b">Bulk_mesh_pt</a></td></tr>
+<tr class="memdesc:a6d4520b30d05f3dde12ea9bae9d62d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the bulk mesh.  <br /></td></tr>
+<tr class="separator:a6d4520b30d05f3dde12ea9bae9d62d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab334d082c008553389374a90f732df2f" id="r_ab334d082c008553389374a90f732df2f"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#ab334d082c008553389374a90f732df2f">Free_surface_mesh_pt</a></td></tr>
+<tr class="memdesc:ab334d082c008553389374a90f732df2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the free surface mesh.  <br /></td></tr>
+<tr class="separator:ab334d082c008553389374a90f732df2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e45f375f3aa934391ca8e20e11410e4" id="r_a3e45f375f3aa934391ca8e20e11410e4"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a3e45f375f3aa934391ca8e20e11410e4">Free_surface_bounding_mesh_pt</a></td></tr>
+<tr class="memdesc:a3e45f375f3aa934391ca8e20e11410e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the element bounding the free surface.  <br /></td></tr>
+<tr class="separator:a3e45f375f3aa934391ca8e20e11410e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c678c2bfec0afcb94f356aeaa19089" id="r_aa9c678c2bfec0afcb94f356aeaa19089"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#aa9c678c2bfec0afcb94f356aeaa19089">Volume_computation_mesh_pt</a></td></tr>
+<tr class="memdesc:aa9c678c2bfec0afcb94f356aeaa19089"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the elements that compute the enclosed volume.  <br /></td></tr>
+<tr class="separator:aa9c678c2bfec0afcb94f356aeaa19089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f4baf9c47cb17e15e6b7a6065fdfe0" id="r_a27f4baf9c47cb17e15e6b7a6065fdfe0"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPseudoSolidCapProblem.html#a27f4baf9c47cb17e15e6b7a6065fdfe0">Volume_constraint_mesh_pt</a></td></tr>
+<tr class="memdesc:a27f4baf9c47cb17e15e6b7a6065fdfe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the volume constraint.  <br /></td></tr>
+<tr class="separator:a27f4baf9c47cb17e15e6b7a6065fdfe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELEMENT&gt;<br />
+class PseudoSolidCapProblem&lt; ELEMENT &gt;</div><p>A class that solves the Navier&ndash;Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00512">512</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4ac05a07dd55950bb67f7f79cb9fbb77" name="a4ac05a07dd55950bb67f7f79cb9fbb77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac05a07dd55950bb67f7f79cb9fbb77">&#9670;&#160;</a></span>PseudoSolidCapProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;<a class="el" href="classPseudoSolidCapProblem.html">::PseudoSolidCapProblem</a> </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>hijack_internal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Boolean flag indicates if volume constraint is applied by hijacking internal or external pressure. </p>
+<p>Constructor: Pass boolean flag to indicate if the volume constraint is applied by hijacking an internal pressure or the external pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00592">592</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="axi__static__cap_8cc_source.html#l00568">PseudoSolidCapProblem&lt; ELEMENT &gt;::Bulk_mesh_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00554">PseudoSolidCapProblem&lt; ELEMENT &gt;::Constitutive_law_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00898">PseudoSolidCapProblem&lt; ELEMENT &gt;::create_contact_angle_element()</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00805">PseudoSolidCapProblem&lt; ELEMENT &gt;::create_free_surface_elements()</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00852">PseudoSolidCapProblem&lt; ELEMENT &gt;::create_volume_constraint_elements()</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00557">PseudoSolidCapProblem&lt; ELEMENT &gt;::External_pressure_data_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00574">PseudoSolidCapProblem&lt; ELEMENT &gt;::Free_surface_bounding_mesh_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00571">PseudoSolidCapProblem&lt; ELEMENT &gt;::Free_surface_mesh_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00056">Global_Physical_Variables::Nu</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00548">PseudoSolidCapProblem&lt; ELEMENT &gt;::Pext</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00562">PseudoSolidCapProblem&lt; ELEMENT &gt;::Traded_pressure_data_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00577">PseudoSolidCapProblem&lt; ELEMENT &gt;::Volume_computation_mesh_pt</a>, <a class="el" href="axi__static__cap_8cc_source.html#l00580">PseudoSolidCapProblem&lt; ELEMENT &gt;::Volume_constraint_mesh_pt</a>, and <a class="el" href="axi__static__cap_8cc_source.html#l00059">Global_Physical_Variables::Wall_normal</a>.</p>
+
+</div>
+</div>
+<a id="aec2a79e44dfd785b2978419210b053b8" name="aec2a79e44dfd785b2978419210b053b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec2a79e44dfd785b2978419210b053b8">&#9670;&#160;</a></span>~PseudoSolidCapProblem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor: clean up memory allocated by the object. </p>
+<p>Destructor. Make sure to clean up all allocated memory, so that multiple instances of the problem don't lead to excessive memory usage. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00764">764</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8f28ebf09bc66142725139291b4e21a0" name="a8f28ebf09bc66142725139291b4e21a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f28ebf09bc66142725139291b4e21a0">&#9670;&#160;</a></span>create_contact_angle_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::create_contact_angle_element </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the contact angle element. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00898">898</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="axi__static__cap_8cc_source.html#l00062">Global_Physical_Variables::wall_unit_normal_fct()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ac0219ed64385dc20c4fc3c6cc217fd67" name="ac0219ed64385dc20c4fc3c6cc217fd67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0219ed64385dc20c4fc3c6cc217fd67">&#9670;&#160;</a></span>create_free_surface_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::create_free_surface_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the free surface elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00805">805</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a0289801610e2bc864c67d4d8557d56b1" name="a0289801610e2bc864c67d4d8557d56b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0289801610e2bc864c67d4d8557d56b1">&#9670;&#160;</a></span>create_volume_constraint_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::create_volume_constraint_elements </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the volume constraint elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00852">852</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a2fb98a37bde5742cbdf3c91cb1f5eb2f" name="a2fb98a37bde5742cbdf3c91cb1f5eb2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb98a37bde5742cbdf3c91cb1f5eb2f">&#9670;&#160;</a></span>doc_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00977">977</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<a id="ae86ecaf62fa0920f5d14bf82a7f83b0e" name="ae86ecaf62fa0920f5d14bf82a7f83b0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae86ecaf62fa0920f5d14bf82a7f83b0e">&#9670;&#160;</a></span>parameter_study()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::parameter_study </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>dir_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Peform a parameter study: Solve problem for a range of contact angles Pass name of output directory as a string. </p>
+<p>Perform a parameter study. Pass name of output directory as a string. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00935">935</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a51dfbd14a2cca78dc0efe6740337a22b" name="a51dfbd14a2cca78dc0efe6740337a22b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51dfbd14a2cca78dc0efe6740337a22b">&#9670;&#160;</a></span>Angle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Angle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The contact angle. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00551">551</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<a id="a6d4520b30d05f3dde12ea9bae9d62d0b" name="a6d4520b30d05f3dde12ea9bae9d62d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d4520b30d05f3dde12ea9bae9d62d0b">&#9670;&#160;</a></span>Bulk_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Bulk_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the bulk mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00568">568</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ad29a43062d88106c495d407abeddd88d" name="ad29a43062d88106c495d407abeddd88d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad29a43062d88106c495d407abeddd88d">&#9670;&#160;</a></span>Ca</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Ca</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Capillary number. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00542">542</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<a id="ab9d26ab5daa295e7ac4cdca1802ec156" name="ab9d26ab5daa295e7ac4cdca1802ec156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d26ab5daa295e7ac4cdca1802ec156">&#9670;&#160;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConstitutiveLaw* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Constitutive_law_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constitutive law used to determine the mesh deformation. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00554">554</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a51ac066b9117f30679fef658ff66d981" name="a51ac066b9117f30679fef658ff66d981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ac066b9117f30679fef658ff66d981">&#9670;&#160;</a></span>External_pressure_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::External_pressure_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Data object whose single value stores the external pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00557">557</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a3e45f375f3aa934391ca8e20e11410e4" name="a3e45f375f3aa934391ca8e20e11410e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e45f375f3aa934391ca8e20e11410e4">&#9670;&#160;</a></span>Free_surface_bounding_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Free_surface_bounding_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the element bounding the free surface. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00574">574</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="ab334d082c008553389374a90f732df2f" name="ab334d082c008553389374a90f732df2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab334d082c008553389374a90f732df2f">&#9670;&#160;</a></span>Free_surface_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Free_surface_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the free surface mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00571">571</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="afbcfe3a5a05d191c44815681e4b621d0" name="afbcfe3a5a05d191c44815681e4b621d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbcfe3a5a05d191c44815681e4b621d0">&#9670;&#160;</a></span>Pext</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Pext</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The external pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00548">548</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a81d2d9915ba7d9a9a691ca2f2080b6b4" name="a81d2d9915ba7d9a9a691ca2f2080b6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81d2d9915ba7d9a9a691ca2f2080b6b4">&#9670;&#160;</a></span>Trace_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ofstream <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Trace_file</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Trace file. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00565">565</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<a id="a073f0857df471e2f165d57828511d835" name="a073f0857df471e2f165d57828511d835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073f0857df471e2f165d57828511d835">&#9670;&#160;</a></span>Traded_pressure_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Traded_pressure_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00562">562</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a49945d8e5740977a72c63e333a65293f" name="a49945d8e5740977a72c63e333a65293f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49945d8e5740977a72c63e333a65293f">&#9670;&#160;</a></span>Volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Volume</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The prescribed volume of the fluid. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00545">545</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa9c678c2bfec0afcb94f356aeaa19089" name="aa9c678c2bfec0afcb94f356aeaa19089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c678c2bfec0afcb94f356aeaa19089">&#9670;&#160;</a></span>Volume_computation_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Volume_computation_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the elements that compute the enclosed volume. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00577">577</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a27f4baf9c47cb17e15e6b7a6065fdfe0" name="a27f4baf9c47cb17e15e6b7a6065fdfe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f4baf9c47cb17e15e6b7a6065fdfe0">&#9670;&#160;</a></span>Volume_constraint_mesh_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mesh* <a class="el" href="classPseudoSolidCapProblem.html">PseudoSolidCapProblem</a>&lt; ELEMENT &gt;::Volume_constraint_mesh_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the volume constraint. </p>
+
+<p class="definition">Definition at line <a class="el" href="axi__static__cap_8cc_source.html#l00580">580</a> of file <a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="axi__static__cap_8cc_source.html#l00592">PseudoSolidCapProblem&lt; ELEMENT &gt;::PseudoSolidCapProblem()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="axi__static__cap_8cc_source.html">axi_static_cap.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:06:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

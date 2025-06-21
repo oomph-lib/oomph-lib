@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: A static interface between two viscous fluids</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: A static interface between two viscous fluids </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="overview"></a>
+Overview of the problem</h1>
+<p>We consider a closed rectangular container of unit width that contains two immiscible fluids at rest. The lower fluid is of a prescribed volume <img class="formulaInl" alt="$ \mathcal{V} $" src="form_0.png" width="10" height="11"/> and the interface between the two fluids meets the wall of the container at a contact angle <img class="formulaInl" alt="$
+\theta_{c} $" src="form_1.png" width="10" height="13"/>. In the absence of any body forces or external forces, a static solution is obtained in which the velocity field is zero, the fluid pressure in each layer is constant, and free surface is of constant curvature (an arc of a circle in two-dimensions), set by the contact angle and the geometry of the domain. From simple geometry, the mean curvature of the interface in the present problem is <img class="formulaInl" alt="$ \kappa = 1/r = 2\cos\theta_{c} $" src="form_2.png" width="96" height="14"/>.</p>
+<p>We shall be rather brief in our discussion of this problem because it is extremely similar to the <a href="../../static_single_layer/html/index.html">static free surface bounding a single layer of viscous fluid. </a> In fact, the main difference is that the region of upper fluid is no longer treated as a single external pressure, but must be meshed so that the Navier&ndash;Stokes equations can be solved within it. In fact, the most significant difference between the two problems is that we need to <a href="#mesh">construct a two-layer mesh. </a> Dynamic two-fluid problems are introduced in <a href="../../two_layer_interface/html/index.html">another tutorial, </a> but the static problem discussed here is again complicated by the need to enforce a constant volume constraint.</p>
+<h1><a class="anchor" id="vol_const"></a>
+Enforcing the volume constraint</h1>
+<p>Unlike the <a href="../../static_single_layer/html/index.html">equivalent single-fluid problem </a>, there is no external pressure, so the volume constraint must be associated with an internal pressure degree of freedom. Thus, we must hijack a pressure variable and we choose to do so in the upper fluid.</p>
+ <div class="fragment"><div class="line"> <span class="comment">//Hijack one of the pressure values in the upper fluid. Its value</span></div>
+<div class="line"> <span class="comment">//will affect the residual of that element but it will not</span></div>
+<div class="line"> <span class="comment">//be determined by it!</span></div>
+<div class="line"> Traded_pressure_data_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">  Bulk_mesh_pt-&gt;upper_layer_element_pt(0))-&gt;hijack_internal_value(0,0);</div>
+</div><!-- fragment --><p> In addition, we must fix another fluid pressure at a fixed reference value so that the problem is non-degenerate. It is conceptually appealing to fix the reference pressure in the other (lower) fluid because the (constant) pressure in the upper fluid is already "being set" by the volume constraint.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Pin a single pressure value: Set the pressure dof 0 in element 0</span></div>
+<div class="line"> <span class="comment">// of the lower layer to zero.</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;lower_layer_element_pt(0))</div>
+<div class="line">  -&gt;fix_pressure(0,0.0);</div>
+</div><!-- fragment --> <h1><a class="anchor" id="contact_angle"></a>
+Enforcing the contact angle constraint</h1>
+<p>The method of enforcing the contact angle constraint is exactly the same as discussed in the <a href="../../static_single_layer/html/index.html#contact_angle">single-layer tutorial. </a></p>
+<h1><a class="anchor" id="mesh"></a>
+Constructing the Two-Layer Elastic Mesh</h1>
+<p>We must create a two-layer elastic mesh that will allow us access to the elements in each fluid. We will also need to set the volume constraint by adding <code>ElasticLineVolumeConstraintBoundingElements</code> to the boundaries that surround one of the fluids and to add the <code>ElasticLineFluidInterfaceElements</code> along the interface. Thus, we need to change the boundaries of the existing mesh.</p>
+<p>We begin by inheriting from the <code>ElasticRectangularQuadMesh</code>.  </p><div class="fragment"><div class="line"><span class="comment">//==start_of_specific_mesh_class==========================================</span></div>
+<div class="line"><span class="comment">/// Two layer mesh which employs a pseudo-solid node-update strategy.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// This class is essentially a wrapper to an </span></div>
+<div class="line"><span class="comment">/// ElasticRectangularQuadMesh, with an additional boundary</span></div>
+<div class="line"><span class="comment">/// to represent the interface between the two fluid layers. In addition,</span></div>
+<div class="line"><span class="comment">/// the mesh paritions the elements into those above and below</span></div>
+<div class="line"><span class="comment">/// the interface and relabels boundaries so that we can impose</span></div>
+<div class="line"><span class="comment">/// a volume constraint on the lower or upper fluid.</span></div>
+<div class="line"><span class="comment">///</span></div>
+<div class="line"><span class="comment">///                                 3</span></div>
+<div class="line"><span class="comment">///               ---------------------------------------</span></div>
+<div class="line"><span class="comment">///               |                                     |</span></div>
+<div class="line"><span class="comment">///             4 |                                     | 2</span></div>
+<div class="line"><span class="comment">///               |                 6                   |</span></div>
+<div class="line"><span class="comment">///               ---------------------------------------</span></div>
+<div class="line"><span class="comment">///               |                                     |</span></div>
+<div class="line"><span class="comment">///             5 |                                     | 1</span></div>
+<div class="line"><span class="comment">///               |                                     |</span></div>
+<div class="line"><span class="comment">///               ---------------------------------------</span></div>
+<div class="line"><span class="comment">///                                 0</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticTwoLayerMesh.html">ElasticTwoLayerMesh</a> :</div>
+<div class="line"> <span class="keyword">public</span> ElasticRectangularQuadMesh&lt;ELEMENT&gt;</div>
+<div class="ttc" id="aclassElasticTwoLayerMesh_html"><div class="ttname"><a href="classElasticTwoLayerMesh.html">ElasticTwoLayerMesh</a></div><div class="ttdoc">Two layer mesh which employs a pseudo-solid node-update strategy. This class is essentially a wrapper...</div><div class="ttdef"><b>Definition</b> <a href="static__two__layer_8cc_source.html#l00452">static_two_layer.cc:454</a></div></div>
+</div><!-- fragment --><p> The arguments to the constructor specify the number of elements in the horizontal direction and in each layer and also the width of the container and the height of each layer. The remaining arguments determine whether the mesh should be made periodic in the x direction and are the <code>TimeStepper</code> object.</p>
+<div class="fragment"><div class="line"> <a class="code hl_class" href="classElasticTwoLayerMesh.html">ElasticTwoLayerMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, </div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny1,</div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny2, </div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx,</div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h1,</div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;h2,</div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; periodic_in_x=<span class="keyword">false</span>,</div>
+<div class="line">                     TimeStepper* time_stepper_pt=</div>
+<div class="line">                     &amp;Mesh::Default_TimeStepper)</div>
+</div><!-- fragment --><p> We provide separate storage for elements above and below the interface</p>
+<div class="fragment"><div class="line">   <span class="comment">//Set up the pointers to elements in the upper and lower fluid</span></div>
+<div class="line">   <span class="comment">//Calculate numbers of nodes in upper and lower regions</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> n_lower = nx*ny1;</div>
+<div class="line">   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> n_upper = nx*ny2;</div>
+<div class="line">   <span class="comment">//Loop over lower elements and push back onto the array</span></div>
+<div class="line">   <a class="code hl_variable" href="classElasticTwoLayerMesh.html#a4f8c33eaaa185e8c8710883ee9b5811f">Lower_layer_element_pt</a>.resize(n_lower);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_lower;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="classElasticTwoLayerMesh.html#a4f8c33eaaa185e8c8710883ee9b5811f">Lower_layer_element_pt</a>[e] = this-&gt;finite_element_pt(e);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">//Loop over upper elements and push back onto the array</span></div>
+<div class="line">   <a class="code hl_variable" href="classElasticTwoLayerMesh.html#ae46d4ef2bb95a6c023bd0dc1e367ccfb">Upper_layer_element_pt</a>.resize(n_upper);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_upper;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <a class="code hl_variable" href="classElasticTwoLayerMesh.html#ae46d4ef2bb95a6c023bd0dc1e367ccfb">Upper_layer_element_pt</a>[e] =  this-&gt;finite_element_pt(n_lower + e);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">//end of upper and lower fluid element assignment</span></div>
+<div class="ttc" id="aclassElasticTwoLayerMesh_html_a4f8c33eaaa185e8c8710883ee9b5811f"><div class="ttname"><a href="classElasticTwoLayerMesh.html#a4f8c33eaaa185e8c8710883ee9b5811f">ElasticTwoLayerMesh::Lower_layer_element_pt</a></div><div class="ttdeci">Vector&lt; FiniteElement * &gt; Lower_layer_element_pt</div><div class="ttdoc">Vector of pointers to element in the upper layer.</div><div class="ttdef"><b>Definition</b> <a href="static__two__layer_8cc_source.html#l00725">static_two_layer.cc:725</a></div></div>
+<div class="ttc" id="aclassElasticTwoLayerMesh_html_ae46d4ef2bb95a6c023bd0dc1e367ccfb"><div class="ttname"><a href="classElasticTwoLayerMesh.html#ae46d4ef2bb95a6c023bd0dc1e367ccfb">ElasticTwoLayerMesh::Upper_layer_element_pt</a></div><div class="ttdeci">Vector&lt; FiniteElement * &gt; Upper_layer_element_pt</div><div class="ttdoc">Vector of pointers to element in the lower layer.</div><div class="ttdef"><b>Definition</b> <a href="static__two__layer_8cc_source.html#l00728">static_two_layer.cc:728</a></div></div>
+</div><!-- fragment --><p> and the elements adjacent to the interface in the upper and lower fluid.</p>
+<div class="fragment"><div class="line">   <span class="comment">//Set the elements adjacent to the interface on both sides</span></div>
+<div class="line">   <a class="code hl_variable" href="classElasticTwoLayerMesh.html#abc8751d632399afe56df6c32e1001582">Interface_lower_boundary_element_pt</a>.resize(nx);</div>
+<div class="line">   <a class="code hl_variable" href="classElasticTwoLayerMesh.html#af8218bd023535d3dbf4af3cf7bc1c12d">Interface_upper_boundary_element_pt</a>.resize(nx);</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">unsigned</span> count_lower=nx*(ny1-1);</div>
+<div class="line">    <span class="keywordtype">unsigned</span> count_upper= count_lower + nx; </div>
+<div class="line">    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nx;e++)</div>
+<div class="line">     {</div>
+<div class="line">      <a class="code hl_variable" href="classElasticTwoLayerMesh.html#abc8751d632399afe56df6c32e1001582">Interface_lower_boundary_element_pt</a>[e] =</div>
+<div class="line">     this-&gt;finite_element_pt(count_lower); ++count_lower;</div>
+<div class="line">      <a class="code hl_variable" href="classElasticTwoLayerMesh.html#af8218bd023535d3dbf4af3cf7bc1c12d">Interface_upper_boundary_element_pt</a>[e] = </div>
+<div class="line">       this-&gt;finite_element_pt(count_upper); ++count_upper;</div>
+<div class="line">     }</div>
+<div class="line">   } <span class="comment">//end of bulk elements next to interface setup</span></div>
+<div class="ttc" id="aclassElasticTwoLayerMesh_html_abc8751d632399afe56df6c32e1001582"><div class="ttname"><a href="classElasticTwoLayerMesh.html#abc8751d632399afe56df6c32e1001582">ElasticTwoLayerMesh::Interface_lower_boundary_element_pt</a></div><div class="ttdeci">Vector&lt; FiniteElement * &gt; Interface_lower_boundary_element_pt</div><div class="ttdoc">Vector of pointers to the elements adjacent to the interface on the lower layer.</div><div class="ttdef"><b>Definition</b> <a href="static__two__layer_8cc_source.html#l00732">static_two_layer.cc:732</a></div></div>
+<div class="ttc" id="aclassElasticTwoLayerMesh_html_af8218bd023535d3dbf4af3cf7bc1c12d"><div class="ttname"><a href="classElasticTwoLayerMesh.html#af8218bd023535d3dbf4af3cf7bc1c12d">ElasticTwoLayerMesh::Interface_upper_boundary_element_pt</a></div><div class="ttdeci">Vector&lt; FiniteElement * &gt; Interface_upper_boundary_element_pt</div><div class="ttdoc">Vector of pointers to the element adjacent to the interface on the upper layer.</div><div class="ttdef"><b>Definition</b> <a href="static__two__layer_8cc_source.html#l00736">static_two_layer.cc:736</a></div></div>
+</div><!-- fragment --><p> We will use these elements adjacent to the interface to construct the <code>ElasticLineFluidInterfaceElements</code> and it is important that we only add one layer of interface elements, as discussed in another tutorial.</p>
+<p>We next change the number of boundaries</p>
+<div class="fragment"><div class="line">   <span class="comment">// Reset the number of boundaries</span></div>
+<div class="line">   this-&gt;set_nboundary(7);</div>
+</div><!-- fragment --><p> and then reassign the existing boundary nodes to the new numbering scheme. This is tedious and not terribly instructive, so is not shown, but it's all in the code if you want to see how it's done.</p>
+<p>Finally, we add the nodes to the new interface boundary and setup the lookup schemes for the bulk elements adjacent to the new boundaries.</p>
+ <div class="fragment"><div class="line">   <span class="comment">//Add the nodes to the interface</span></div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Read out number of linear points in the element</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_p = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span></div>
+<div class="line">    (this-&gt;finite_element_pt(0))-&gt;nnode_1d();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Add the nodes on the interface to the boundary 6</span></div>
+<div class="line">   <span class="comment">//Storage for boundary coordinates (x-coordinate)</span></div>
+<div class="line">   b_coord.resize(1);</div>
+<div class="line">   this-&gt;set_boundary_coordinate_exists(6);</div>
+<div class="line">   <span class="comment">//Starting index of the nodes</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_start=0;</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nx;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//If we are past the </span></div>
+<div class="line">     <span class="keywordflow">if</span>(e&gt;0) {n_start=1;}</div>
+<div class="line">     <span class="comment">//Get the layer of elements just above the interface</span></div>
+<div class="line">     FiniteElement* el_pt = this-&gt;finite_element_pt(nx*ny1+e);</div>
+<div class="line">     <span class="comment">//The first n_p nodes lie on the boundary</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=n_start;n&lt;n_p;n++)</div>
+<div class="line">      {</div>
+<div class="line">       Node* nod_pt = el_pt-&gt;node_pt(n);</div>
+<div class="line">       this-&gt;convert_to_boundary_node(nod_pt);</div>
+<div class="line">       this-&gt;add_boundary_node(6,nod_pt);</div>
+<div class="line">       b_coord[0] = nod_pt-&gt;x(0);</div>
+<div class="line">       nod_pt-&gt;set_coordinates_on_boundary(6,b_coord);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set up the boundary element information</span></div>
+<div class="line">   this-&gt;setup_boundary_element_info();</div>
+</div><!-- fragment --> <h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is extremely similar to that in the <a href="../../static_single_layer/html/index.html">singer-layer problem. </a> The main differences are that the <code><a class="el" href="classElasticTwoLayerMesh.html" title="Two layer mesh which employs a pseudo-solid node-update strategy. This class is essentially a wrapper...">ElasticTwoLayerMesh</a></code> is used instead of the <code>ElasticRectangularQuadMesh</code> and the boundary conditions are modified to take the new boundary numbering into account. In addition, the free surface elements and volume constraint elements are created using the lookup schemes in the <code><a class="el" href="classElasticTwoLayerMesh.html" title="Two layer mesh which employs a pseudo-solid node-update strategy. This class is essentially a wrapper...">ElasticTwoLayerMesh</a></code> to ensure that only a single layer of elements are included on the free surface. If we used the lookup schemes assigned by the generic function <code>Mesh::setup_boundary_element_info()</code> bulk elements on both sides of internal boundaries will be included, so we would construct twice as many interface elements as required. </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="com"></a>
+Comments</h2>
+<ul>
+<li>The driver code also contains a formulation in which <code>SpineElements</code> are used. Happily, the answers produced by both formulations are the same.</li>
+<li>An axisymmetric version of the problem is also included in the library. The problem is so similar that it is not described in any further detail. For a list of the differences between the two-dimensional and axisymmetric formulations of the single-layer problem see <a href="../../../axisym_navier_stokes/axi_static_cap/html/index.html">another tutorial. </a></li>
+</ul>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Confirm that the computed pressure difference across the interface agrees with the analytic expression and the single-layer computations.</li>
+<li>What happens if you do not fix a pressure?</li>
+<li>What happens if you fix the pressure that is traded for the volume constraint?</li>
+<li>Can you fix the reference pressure and choose the traded pressure value from the same fluid?</li>
+<li>Use the generic <code>Mesh::boundary_element_pt()</code> function to construct the interface elements. What happens? Why?</li>
+<li>Modify the problem to include a non-zero gravitational body force? What happens to the interface in this case?</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/static_cap/">demo_drivers/navier_stokes/static_cap/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/navier_stokes/static_cap/static_two_layer.cc">demo_drivers/navier_stokes/static_cap/static_two_layer.cc </a> </center><br  />
+<br  />
+</li>
+<li>Source files for the axisymmetric version of the problem are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/">demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/two_fluid_spherical_cap.cc">demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/two_fluid_spherical_cap.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:55
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

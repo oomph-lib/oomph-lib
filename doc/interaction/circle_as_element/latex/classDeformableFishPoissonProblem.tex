@@ -1,0 +1,365 @@
+\doxysection{Deformable\+Fish\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classDeformableFishPoissonProblem}{}\label{classDeformableFishPoissonProblem}\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+
+
+Solve Poisson equation on deforming fish-\/shaped domain. Mesh update via pseudo-\/elasticity.  
+
+
+Inheritance diagram for Deformable\+Fish\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.992882cm]{classDeformableFishPoissonProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd}{Deformable\+Fish\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5}{run}} ()
+\begin{DoxyCompactList}\small\item\em Run simulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a}{doc\+\_\+solution}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Update after adapt\+: Pin all redundant solid pressure nodes (if required) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd}{Deformable\+Fish\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5}{run}} ()
+\begin{DoxyCompactList}\small\item\em Run simulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a}{doc\+\_\+solution}} (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Update after adapt\+: Pin all redundant solid pressure nodes (if required) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem_acdb029d569c5ecefa5a71f2f099e7f27}{Doc\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Node at which the solution of the Poisson equation is documented. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ofstream}} \mbox{\hyperlink{classDeformableFishPoissonProblem_a9fc310452a96891d566f50f3a231d5d5}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Circle}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem_a88745d43dc7a9377c13190ce1bed79e7}{Fish\+\_\+back\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement}{Elastically\+Supported\+Ring\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem_aaf5e3c5b0fc0e299b56f3d10d6dcbe20}{Fish\+\_\+back\+\_\+pt}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}}$>$\newline
+class Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}
+Solve Poisson equation on deforming fish-\/shaped domain. Mesh update via pseudo-\/elasticity. 
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00177}{177}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd}\label{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!DeformableFishPoissonProblem@{DeformableFishPoissonProblem}}
+\index{DeformableFishPoissonProblem@{DeformableFishPoissonProblem}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DeformableFishPoissonProblem()}{DeformableFishPoissonProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\mbox{\hyperlink{classDeformableFishPoissonProblem}{\+::\+Deformable\+Fish\+Poisson\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+Loop over elements and set pointers to source function
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00243}{243}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00061}{Const\+Source\+For\+Poisson\+::get\+\_\+source()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd}\label{classDeformableFishPoissonProblem_a383952a668f3cec16b85c6b35f437ddd} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!DeformableFishPoissonProblem@{DeformableFishPoissonProblem}}
+\index{DeformableFishPoissonProblem@{DeformableFishPoissonProblem}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{DeformableFishPoissonProblem()}{DeformableFishPoissonProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\mbox{\hyperlink{classDeformableFishPoissonProblem}{\+::\+Deformable\+Fish\+Poisson\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779}\label{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after adapt\+: Pin all redundant solid pressure nodes (if required) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00218}{218}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00189}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779}\label{classDeformableFishPoissonProblem_ada340a31a3b019116ecb7c0bb1d4c779} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after adapt\+: Pin all redundant solid pressure nodes (if required) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00217}{217}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00189}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182}\label{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00196}{196}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182}\label{classDeformableFishPoissonProblem_a18fdfaadd9ae10257088b9533f139182} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00199}{199}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450}\label{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00207}{207}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00189}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450}\label{classDeformableFishPoissonProblem_ad9d03c8349a059430f7329354033b450} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00210}{210}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00189}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a}\label{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00388}{388}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a}\label{classDeformableFishPoissonProblem_aee9b59f35d1ae98cda29fba0c01b226a} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}\label{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00189}{189}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00218}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00207}{Deformable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9}\label{classDeformableFishPoissonProblem_a4bf037fcb2420103fff50147a682c9f9} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00192}{192}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5}\label{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!run@{run}}
+\index{run@{run}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Run simulation. 
+
+Run the problem. 
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00417}{417}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+References \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_source_l00460}{demo\+\_\+fish\+\_\+poisson()}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00460}{main()}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5}\label{classDeformableFishPoissonProblem_a0ef0e4ab464ab41a6f0b7e8a74a9c8a5} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!run@{run}}
+\index{run@{run}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{void}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Run simulation. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classDeformableFishPoissonProblem_acdb029d569c5ecefa5a71f2f099e7f27}\label{classDeformableFishPoissonProblem_acdb029d569c5ecefa5a71f2f099e7f27} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!Doc\_node\_pt@{Doc\_node\_pt}}
+\index{Doc\_node\_pt@{Doc\_node\_pt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_node\_pt}{Doc\_node\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::\+Doc\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Node at which the solution of the Poisson equation is documented. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00229}{229}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a88745d43dc7a9377c13190ce1bed79e7}\label{classDeformableFishPoissonProblem_a88745d43dc7a9377c13190ce1bed79e7} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!Fish\_back\_pt@{Fish\_back\_pt}}
+\index{Fish\_back\_pt@{Fish\_back\_pt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fish\_back\_pt}{Fish\_back\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Circle}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::\+Fish\+\_\+back\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00235}{235}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_aaf5e3c5b0fc0e299b56f3d10d6dcbe20}\label{classDeformableFishPoissonProblem_aaf5e3c5b0fc0e299b56f3d10d6dcbe20} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!Fish\_back\_pt@{Fish\_back\_pt}}
+\index{Fish\_back\_pt@{Fish\_back\_pt}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fish\_back\_pt}{Fish\_back\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement}{Elastically\+Supported\+Ring\+Element}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::\+Fish\+\_\+back\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00235}{235}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+\Hypertarget{classDeformableFishPoissonProblem_a9fc310452a96891d566f50f3a231d5d5}\label{classDeformableFishPoissonProblem_a9fc310452a96891d566f50f3a231d5d5} 
+\index{DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!DeformableFishPoissonProblem$<$ ELEMENT $>$@{DeformableFishPoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{class}} \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ofstream}} \mbox{\hyperlink{classDeformableFishPoissonProblem}{Deformable\+Fish\+Poisson\+Problem}}$<$ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ELEMENT}} $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__mesh__update_8cc_source_l00232}{232}} of file \mbox{\hyperlink{elastic__mesh__update_8cc_source}{elastic\+\_\+mesh\+\_\+update.\+cc}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{elastic__mesh__update_8cc}{elastic\+\_\+mesh\+\_\+update.\+cc}}\item 
+\mbox{\hyperlink{elastic__poisson_8cc}{elastic\+\_\+poisson.\+cc}}\end{DoxyCompactItemize}

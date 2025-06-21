@@ -1,0 +1,588 @@
+\doxysection{Cantilever\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classCantileverProblem}{}\label{classCantileverProblem}\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+
+
+Problem class for the cantilever "{}beam"{} structure.  
+
+
+Inheritance diagram for Cantilever\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCantileverProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{Cantilever\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}{solid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}{traction\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the mesh of surface traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCantileverProblem_a83b396aa3bd0c2d9a491c605c208de83}{Cantilever\+Problem}} (const bool \&incompress, const bool \&use\+\_\+fd)
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}{solid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem_ad4b042c7d66e9c4e35367546fc7e2ef0}{solid\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the solid mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}{traction\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the mesh of surface traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a5c78c6602e0cbeac68239804c2d52243}{run\+\_\+it}} (const unsigned \&i\+\_\+case)
+\begin{DoxyCompactList}\small\item\em Run the job -- doc in RESLTi\+\_\+case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}{set\+\_\+traction\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pass pointer to traction function to the elements in the traction mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}{create\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}{delete\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}{set\+\_\+traction\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pass pointer to traction function to the elements in the traction mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}{create\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create traction elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}{delete\+\_\+traction\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete traction elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ofstream \mbox{\hyperlink{classCantileverProblem_af1e298e0b99bddc89b20da6ad4bb41e1}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem_a7b91e041c3e5336b62ced10774917370}{Trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointers to node whose position we\textquotesingle{}re tracing. \end{DoxyCompactList}\item 
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem_a263ff19e4aa0fa4391582242763f08f1}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem_a52485434aab5d653010c48a0b0f89088}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh of traction elements. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classCantileverProblem_a2d230bb59f229cf02a06a50493dd48e4}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc\+Info object for output. \end{DoxyCompactList}\item 
+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem_af46dcd5eca58d44f1078e54f7779f0d5}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Cantilever\+Problem$<$ ELEMENT $>$}
+Problem class for the cantilever "{}beam"{} structure. 
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00205}{205}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}\label{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!CantileverProblem@{CantileverProblem}}
+\index{CantileverProblem@{CantileverProblem}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CantileverProblem()}{CantileverProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classCantileverProblem}{\+::\+Cantilever\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00269}{269}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00189}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity()}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00152}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, and \mbox{\hyperlink{airy__cantilever_8cc_source_l00155}{Global\+\_\+\+Physical\+\_\+\+Variables\+::L}}.
+
+\Hypertarget{classCantileverProblem_a83b396aa3bd0c2d9a491c605c208de83}\label{classCantileverProblem_a83b396aa3bd0c2d9a491c605c208de83} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!CantileverProblem@{CantileverProblem}}
+\index{CantileverProblem@{CantileverProblem}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CantileverProblem()}{CantileverProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classCantileverProblem}{\+::\+Cantilever\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{incompress,  }\item[{const bool \&}]{use\+\_\+fd }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00306}{306}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00189}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity()}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00152}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, and \mbox{\hyperlink{airy__cantilever_8cc_source_l00155}{Global\+\_\+\+Physical\+\_\+\+Variables\+::L}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}\label{classCantileverProblem_af4d135ace3eac657b38de362e1644c75} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions after adapt\+: Rebuild the mesh of traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00388}{388}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}\label{classCantileverProblem_af4d135ace3eac657b38de362e1644c75} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions after adapt\+: Rebuild the mesh of traction elements. 
+
+\Hypertarget{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}\label{classCantileverProblem_a4a70a4328d287aaa15c7811562122013} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00214}{214}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}\label{classCantileverProblem_a4a70a4328d287aaa15c7811562122013} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00226}{226}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}\label{classCantileverProblem_a50f8964219c507562945655e0ed5fc23} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions before adapt\+: Wipe the mesh of traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00372}{372}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}\label{classCantileverProblem_a50f8964219c507562945655e0ed5fc23} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions before adapt\+: Wipe the mesh of traction elements. 
+
+\Hypertarget{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}\label{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00217}{217}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}\label{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00229}{229}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+\Hypertarget{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}\label{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!create\_traction\_elements@{create\_traction\_elements}}
+\index{create\_traction\_elements@{create\_traction\_elements}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_traction\_elements()}{create\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00437}{437}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9}\label{classCantileverProblem_abb6f19d964d96a531bf1a60732c72ce9} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!create\_traction\_elements@{create\_traction\_elements}}
+\index{create\_traction\_elements@{create\_traction\_elements}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_traction\_elements()}{create\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create traction elements. 
+
+\Hypertarget{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}\label{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!delete\_traction\_elements@{delete\_traction\_elements}}
+\index{delete\_traction\_elements@{delete\_traction\_elements}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_traction\_elements()}{delete\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete traction elements. 
+
+Delete traction elements and wipe the traction meshes. 
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00472}{472}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5}\label{classCantileverProblem_aeb64122ce3783bf36df3696c41e5d2a5} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!delete\_traction\_elements@{delete\_traction\_elements}}
+\index{delete\_traction\_elements@{delete\_traction\_elements}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_traction\_elements()}{delete\_traction\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete traction elements. 
+
+\Hypertarget{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}\label{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00495}{495}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00152}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00155}{Global\+\_\+\+Physical\+\_\+\+Variables\+::L}}, and \mbox{\hyperlink{airy__cantilever_8cc_source_l00167}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+
+
+
+Referenced by \mbox{\hyperlink{airy__cantilever_8cc_source_l00600}{main()}}.
+
+\Hypertarget{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}\label{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classCantileverProblem_a5c78c6602e0cbeac68239804c2d52243}\label{classCantileverProblem_a5c78c6602e0cbeac68239804c2d52243} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!run\_it@{run\_it}}
+\index{run\_it@{run\_it}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run\_it()}{run\_it()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::run\+\_\+it (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
+
+
+
+Run the job -- doc in RESLTi\+\_\+case. 
+
+Run it. 
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00672}{672}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00186}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}, and \mbox{\hyperlink{airy__cantilever_8cc_source_l00167}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+
+
+
+Referenced by \mbox{\hyperlink{airy__cantilever2_8cc_source_l00757}{main()}}.
+
+\Hypertarget{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}\label{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!set\_traction\_pt@{set\_traction\_pt}}
+\index{set\_traction\_pt@{set\_traction\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_traction\_pt()}{set\_traction\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+traction\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pass pointer to traction function to the elements in the traction mesh. 
+
+Set pointer to traction function for the relevant elements in the traction mesh. 
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00413}{413}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00174}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure()}}.
+
+\Hypertarget{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2}\label{classCantileverProblem_a96a9716947a15930f3881fcec6d448e2} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!set\_traction\_pt@{set\_traction\_pt}}
+\index{set\_traction\_pt@{set\_traction\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_traction\_pt()}{set\_traction\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+traction\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pass pointer to traction function to the elements in the traction mesh. 
+
+\Hypertarget{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}\label{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
+\index{solid\_mesh\_pt@{solid\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00220}{220}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00254}{Cantilever\+Problem$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0}\label{classCantileverProblem_a98c2d3b5e195f53b4fdd8d1698593ee0} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
+\index{solid\_mesh\_pt@{solid\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00234}{234}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00254}{Cantilever\+Problem$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCantileverProblem_ad4b042c7d66e9c4e35367546fc7e2ef0}\label{classCantileverProblem_ad4b042c7d66e9c4e35367546fc7e2ef0} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!solid\_mesh\_pt@{solid\_mesh\_pt}}
+\index{solid\_mesh\_pt@{solid\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{solid\_mesh\_pt()}{solid\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00240}{240}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00254}{Cantilever\+Problem$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}\label{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!traction\_mesh\_pt@{traction\_mesh\_pt}}
+\index{traction\_mesh\_pt@{traction\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction\_mesh\_pt()}{traction\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Solid\+Mesh \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the mesh of surface traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00224}{224}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00257}{Cantilever\+Problem$<$ ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4}\label{classCantileverProblem_a0f879b58f7b2ed17ef1c7105b2d9c9b4} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!traction\_mesh\_pt@{traction\_mesh\_pt}}
+\index{traction\_mesh\_pt@{traction\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{traction\_mesh\_pt()}{traction\_mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Solid\+Mesh \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the mesh of surface traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00247}{247}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00257}{Cantilever\+Problem$<$ ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCantileverProblem_a2d230bb59f229cf02a06a50493dd48e4}\label{classCantileverProblem_a2d230bb59f229cf02a06a50493dd48e4} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc\+Info object for output. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00260}{260}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a263ff19e4aa0fa4391582242763f08f1}\label{classCantileverProblem_a263ff19e4aa0fa4391582242763f08f1} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00254}{254}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{airy__cantilever_8cc_source_l00220}{Cantilever\+Problem$<$ ELEMENT $>$\+::solid\+\_\+mesh\+\_\+pt()}}.
+
+\Hypertarget{classCantileverProblem_af46dcd5eca58d44f1078e54f7779f0d5}\label{classCantileverProblem_af46dcd5eca58d44f1078e54f7779f0d5} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Elastic\+Rectangular\+Quad\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever2_8cc_source_l00288}{288}} of file \mbox{\hyperlink{airy__cantilever2_8cc_source}{airy\+\_\+cantilever2.\+cc}}.
+
+\Hypertarget{classCantileverProblem_af1e298e0b99bddc89b20da6ad4bb41e1}\label{classCantileverProblem_af1e298e0b99bddc89b20da6ad4bb41e1} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00248}{248}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a7b91e041c3e5336b62ced10774917370}\label{classCantileverProblem_a7b91e041c3e5336b62ced10774917370} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Trace\_node\_pt@{Trace\_node\_pt}}
+\index{Trace\_node\_pt@{Trace\_node\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_node\_pt}{Trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointers to node whose position we\textquotesingle{}re tracing. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00251}{251}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+\Hypertarget{classCantileverProblem_a52485434aab5d653010c48a0b0f89088}\label{classCantileverProblem_a52485434aab5d653010c48a0b0f89088} 
+\index{CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!CantileverProblem$<$ ELEMENT $>$@{CantileverProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Solid\+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem}}$<$ ELEMENT $>$\+::\+Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh of traction elements. 
+
+Pointers to meshes of traction elements. 
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00257}{257}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{airy__cantilever_8cc_source_l00224}{Cantilever\+Problem$<$ ELEMENT $>$\+::traction\+\_\+mesh\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{airy__cantilever_8cc}{airy\+\_\+cantilever.\+cc}}\item 
+\mbox{\hyperlink{airy__cantilever2_8cc}{airy\+\_\+cantilever2.\+cc}}\end{DoxyCompactItemize}

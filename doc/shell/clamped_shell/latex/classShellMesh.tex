@@ -1,0 +1,101 @@
+\doxysection{Shell\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classShellMesh}{}\label{classShellMesh}\index{ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}}
+
+
+A 2D Mesh class. The tube wall is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic Rectangular\+Quad\+Mesh.  
+
+
+Inheritance diagram for Shell\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.206897cm]{classShellMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}{Shell\+Mesh}} (\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&\mbox{\hyperlink{classShellMesh}{nx}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&\mbox{\hyperlink{classShellMesh}{ny}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&\mbox{\hyperlink{classShellMesh}{lx}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&\mbox{\hyperlink{classShellMesh}{ly}})
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{classShellMesh_a3576870121fad30d0f99588ea8082ca1}{assign\+\_\+undeformed\+\_\+positions}} (\mbox{\hyperlink{classShellMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classShellMesh}{const}} \&\mbox{\hyperlink{classShellMesh}{undeformed\+\_\+midplane\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}{Shell\+Mesh}} (\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&\mbox{\hyperlink{classShellMesh}{nx}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&\mbox{\hyperlink{classShellMesh}{ny}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&\mbox{\hyperlink{classShellMesh}{lx}}, \mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&\mbox{\hyperlink{classShellMesh}{ly}})
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{classShellMesh_a3576870121fad30d0f99588ea8082ca1}{assign\+\_\+undeformed\+\_\+positions}} (\mbox{\hyperlink{classShellMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classShellMesh}{const}} \&\mbox{\hyperlink{classShellMesh}{undeformed\+\_\+midplane\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Shell\+Mesh$<$ ELEMENT $>$}
+A 2D Mesh class. The tube wall is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic Rectangular\+Quad\+Mesh. 
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00094}{94}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}\label{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699} 
+\index{ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}!ShellMesh@{ShellMesh}}
+\index{ShellMesh@{ShellMesh}!ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ShellMesh()}{ShellMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classShellMesh}{class}} \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellMesh}{Shell\+Mesh}}$<$ \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$\mbox{\hyperlink{classShellMesh}{\+::\+Shell\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&}]{ly }\end{DoxyParamCaption})}
+
+
+
+Constructor for the mesh. 
+
+Mesh constructor Argument list\+: nx \+: number of elements in the axial direction ny \+: number of elements in the azimuthal direction lx \+: length in the axial direction ly \+: length in theta direction. 
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00124}{124}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{clamped__shell_8cc_source_l00540}{main()}}.
+
+\Hypertarget{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}\label{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699} 
+\index{ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}!ShellMesh@{ShellMesh}}
+\index{ShellMesh@{ShellMesh}!ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ShellMesh()}{ShellMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classShellMesh}{class}} \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellMesh}{Shell\+Mesh}}$<$ \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$\mbox{\hyperlink{classShellMesh}{\+::\+Shell\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classShellMesh}{const}} \mbox{\hyperlink{classShellMesh}{double}} \&}]{ly }\end{DoxyParamCaption})}
+
+
+
+Constructor for the mesh. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classShellMesh_a3576870121fad30d0f99588ea8082ca1}\label{classShellMesh_a3576870121fad30d0f99588ea8082ca1} 
+\index{ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}!assign\_undeformed\_positions@{assign\_undeformed\_positions}}
+\index{assign\_undeformed\_positions@{assign\_undeformed\_positions}!ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_undeformed\_positions()}{assign\_undeformed\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classShellMesh}{class}} \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{classShellMesh}{Shell\+Mesh}}$<$ \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$\+::assign\+\_\+undeformed\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classShellMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classShellMesh}{const}} \&}]{undeformed\+\_\+midplane\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. 
+
+Set the undeformed coordinates of the nodes. 
+
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00169}{169}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
+
+\Hypertarget{classShellMesh_a3576870121fad30d0f99588ea8082ca1}\label{classShellMesh_a3576870121fad30d0f99588ea8082ca1} 
+\index{ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}!assign\_undeformed\_positions@{assign\_undeformed\_positions}}
+\index{assign\_undeformed\_positions@{assign\_undeformed\_positions}!ShellMesh$<$ ELEMENT $>$@{ShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_undeformed\_positions()}{assign\_undeformed\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classShellMesh}{class}} \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classShellMesh}{void}} \mbox{\hyperlink{classShellMesh}{Shell\+Mesh}}$<$ \mbox{\hyperlink{classShellMesh}{ELEMENT}} $>$\+::assign\+\_\+undeformed\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classShellMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classShellMesh}{const}} \&}]{undeformed\+\_\+midplane\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{clamped__shell_8cc}{clamped\+\_\+shell.\+cc}}\item 
+\mbox{\hyperlink{clamped__shell__with__arclength__cont_8cc}{clamped\+\_\+shell\+\_\+with\+\_\+arclength\+\_\+cont.\+cc}}\end{DoxyCompactItemize}

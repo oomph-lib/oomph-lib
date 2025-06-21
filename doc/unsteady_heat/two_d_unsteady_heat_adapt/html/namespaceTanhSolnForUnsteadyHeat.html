@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: TanhSolnForUnsteadyHeat Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">TanhSolnForUnsteadyHeat Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for exact solution of unsteady heat equation with sharp step.  
+<a href="namespaceTanhSolnForUnsteadyHeat.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a99f50e575e38e80aa305ead2d4497272" id="r_a99f50e575e38e80aa305ead2d4497272"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a99f50e575e38e80aa305ead2d4497272">step_position</a> (const double &amp;time)</td></tr>
+<tr class="memdesc:a99f50e575e38e80aa305ead2d4497272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of step (x-axis intercept)  <br /></td></tr>
+<tr class="separator:a99f50e575e38e80aa305ead2d4497272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36857bbdec45f44018772de70558db7d" id="r_a36857bbdec45f44018772de70558db7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a36857bbdec45f44018772de70558db7d">get_exact_u</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a36857bbdec45f44018772de70558db7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution as a Vector.  <br /></td></tr>
+<tr class="separator:a36857bbdec45f44018772de70558db7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62871b93b792298dcdade93bde0085ff" id="r_a62871b93b792298dcdade93bde0085ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a62871b93b792298dcdade93bde0085ff">get_exact_u</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;u)</td></tr>
+<tr class="memdesc:a62871b93b792298dcdade93bde0085ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution as a scalar.  <br /></td></tr>
+<tr class="separator:a62871b93b792298dcdade93bde0085ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea922a29dfeeb80ef4768def0d6fbde4" id="r_aea922a29dfeeb80ef4768def0d6fbde4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#aea922a29dfeeb80ef4768def0d6fbde4">get_source</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;source)</td></tr>
+<tr class="memdesc:aea922a29dfeeb80ef4768def0d6fbde4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source function to make it an exact solution.  <br /></td></tr>
+<tr class="separator:aea922a29dfeeb80ef4768def0d6fbde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d78d73bd9981a5a9ecacecfd0e9cb8" id="r_af4d78d73bd9981a5a9ecacecfd0e9cb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#af4d78d73bd9981a5a9ecacecfd0e9cb8">prescribed_flux_on_fixed_y_boundary</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, double &amp;flux)</td></tr>
+<tr class="memdesc:af4d78d73bd9981a5a9ecacecfd0e9cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flux required by the exact solution on a boundary on which y is fixed.  <br /></td></tr>
+<tr class="separator:af4d78d73bd9981a5a9ecacecfd0e9cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a4c75d9887d6f25405bbead696a94db63" id="r_a4c75d9887d6f25405bbead696a94db63"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a4c75d9887d6f25405bbead696a94db63">Alpha</a></td></tr>
+<tr class="memdesc:a4c75d9887d6f25405bbead696a94db63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter for steepness of step.  <br /></td></tr>
+<tr class="separator:a4c75d9887d6f25405bbead696a94db63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66f6116310a5f9f96c2d3bf28250a92b" id="r_a66f6116310a5f9f96c2d3bf28250a92b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a66f6116310a5f9f96c2d3bf28250a92b">Beta</a></td></tr>
+<tr class="memdesc:a66f6116310a5f9f96c2d3bf28250a92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter for amplitude of step translation.  <br /></td></tr>
+<tr class="separator:a66f6116310a5f9f96c2d3bf28250a92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb742b074ab5f3f65286b1cff1f1512" id="r_a5bb742b074ab5f3f65286b1cff1f1512"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#a5bb742b074ab5f3f65286b1cff1f1512">Gamma</a></td></tr>
+<tr class="memdesc:a5bb742b074ab5f3f65286b1cff1f1512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter for timescale of step translation.  <br /></td></tr>
+<tr class="separator:a5bb742b074ab5f3f65286b1cff1f1512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8d2e06630e8a3f71d1f8dbeecf8a964" id="r_af8d2e06630e8a3f71d1f8dbeecf8a964"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceTanhSolnForUnsteadyHeat.html#af8d2e06630e8a3f71d1f8dbeecf8a964">TanPhi</a></td></tr>
+<tr class="memdesc:af8d2e06630e8a3f71d1f8dbeecf8a964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter for angle of step.  <br /></td></tr>
+<tr class="separator:af8d2e06630e8a3f71d1f8dbeecf8a964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for exact solution of unsteady heat equation with sharp step. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a62871b93b792298dcdade93bde0085ff" name="a62871b93b792298dcdade93bde0085ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62871b93b792298dcdade93bde0085ff">&#9670;&#160;</a></span>get_exact_u() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TanhSolnForUnsteadyHeat::get_exact_u </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exact solution as a scalar. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00131">131</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">Alpha</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">Beta</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">Gamma</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">TanPhi</a>.</p>
+
+</div>
+</div>
+<a id="a36857bbdec45f44018772de70558db7d" name="a36857bbdec45f44018772de70558db7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36857bbdec45f44018772de70558db7d">&#9670;&#160;</a></span>get_exact_u() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TanhSolnForUnsteadyHeat::get_exact_u </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>u</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exact solution as a Vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00121">121</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">Alpha</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">Beta</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">Gamma</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">TanPhi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00447">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::actions_before_implicit_timestep()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00658">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::doc_solution()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00526">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::set_initial_condition()</a>.</p>
+
+</div>
+</div>
+<a id="aea922a29dfeeb80ef4768def0d6fbde4" name="aea922a29dfeeb80ef4768def0d6fbde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea922a29dfeeb80ef4768def0d6fbde4">&#9670;&#160;</a></span>get_source()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TanhSolnForUnsteadyHeat::get_source </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Source function to make it an exact solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">140</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">Alpha</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">Beta</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">Gamma</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">TanPhi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00884">main()</a>.</p>
+
+</div>
+</div>
+<a id="af4d78d73bd9981a5a9ecacecfd0e9cb8" name="af4d78d73bd9981a5a9ecacecfd0e9cb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d78d73bd9981a5a9ecacecfd0e9cb8">&#9670;&#160;</a></span>prescribed_flux_on_fixed_y_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>flux</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flux required by the exact solution on a boundary on which y is fixed. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">157</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">Alpha</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">Beta</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">Gamma</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">TanPhi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00496">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::actions_after_adapt()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::RefineableUnsteadyHeatProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a99f50e575e38e80aa305ead2d4497272" name="a99f50e575e38e80aa305ead2d4497272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99f50e575e38e80aa305ead2d4497272">&#9670;&#160;</a></span>step_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TanhSolnForUnsteadyHeat::step_position </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Position of step (x-axis intercept) </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00115">115</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">Beta</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">Gamma</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00658">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::doc_solution()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4c75d9887d6f25405bbead696a94db63" name="a4c75d9887d6f25405bbead696a94db63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c75d9887d6f25405bbead696a94db63">&#9670;&#160;</a></span>Alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TanhSolnForUnsteadyHeat::Alpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parameter for steepness of step. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00103">103</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00131">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00121">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">get_source()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">prescribed_flux_on_fixed_y_boundary()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::RefineableUnsteadyHeatProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a66f6116310a5f9f96c2d3bf28250a92b" name="a66f6116310a5f9f96c2d3bf28250a92b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66f6116310a5f9f96c2d3bf28250a92b">&#9670;&#160;</a></span>Beta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TanhSolnForUnsteadyHeat::Beta</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parameter for amplitude of step translation. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00106">106</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00131">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00121">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">get_source()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">prescribed_flux_on_fixed_y_boundary()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::RefineableUnsteadyHeatProblem()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00115">step_position()</a>.</p>
+
+</div>
+</div>
+<a id="a5bb742b074ab5f3f65286b1cff1f1512" name="a5bb742b074ab5f3f65286b1cff1f1512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb742b074ab5f3f65286b1cff1f1512">&#9670;&#160;</a></span>Gamma</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TanhSolnForUnsteadyHeat::Gamma</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parameter for timescale of step translation. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00109">109</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00131">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00121">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">get_source()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">prescribed_flux_on_fixed_y_boundary()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::RefineableUnsteadyHeatProblem()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00115">step_position()</a>.</p>
+
+</div>
+</div>
+<a id="af8d2e06630e8a3f71d1f8dbeecf8a964" name="af8d2e06630e8a3f71d1f8dbeecf8a964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8d2e06630e8a3f71d1f8dbeecf8a964">&#9670;&#160;</a></span>TanPhi</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double TanhSolnForUnsteadyHeat::TanPhi</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parameter for angle of step. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00112">112</a> of file <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html">two_d_unsteady_heat_adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00131">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00121">get_exact_u()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00140">get_source()</a>, <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00157">prescribed_flux_on_fixed_y_boundary()</a>, and <a class="el" href="two__d__unsteady__heat__adapt_8cc_source.html#l00280">RefineableUnsteadyHeatProblem&lt; ELEMENT &gt;::RefineableUnsteadyHeatProblem()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:20:04
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

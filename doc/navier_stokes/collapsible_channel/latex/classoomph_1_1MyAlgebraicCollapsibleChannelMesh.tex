@@ -1,0 +1,209 @@
+\doxysection{oomph\+::My\+Algebraic\+Collapsible\+Channel\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+
+
+Collapsible channel mesh with algebraic node update.  
+
+
+
+
+{\ttfamily \#include $<$my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::My\+Algebraic\+Collapsible\+Channel\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.009569cm]{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a1a77973034fec46c16a41d1f4d250b0a}{My\+Algebraic\+Collapsible\+Channel\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{nup}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ncollapsible}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ndown}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ny}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{lup}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{lcollapsible}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ldown}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment, and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a36eed7b6be90d44726091c6d97d53e3f}{My\+Algebraic\+Collapsible\+Channel\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{nup}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ncollapsible}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ndown}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ny}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{lup}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{lcollapsible}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ldown}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{wall\+\_\+pt}}, Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{bl\+\_\+squash\+\_\+function\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment, function pointer to "{}boundary layer squash function"{}, and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_aba200b3263e6a11eb26739965df8cbcc}{\texorpdfstring{$\sim$}{\string~}\+My\+Algebraic\+Collapsible\+Channel\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt \& \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a78d90e5f7d50b85ad8b31a8c338b717e}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying Collapsible\+Channel\+Domain. This (deliberately broken) function overloads the one in the Collapsible\+Channel\+Mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a28702ba4f4f10e9dfc495c916ddf6f82}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{t}}, \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_adb6c8c672e0810b59174babf3623f5bd}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the geometric references that are used to update node after mesh adaptation. Empty -- no update of node update required. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad5ae1032e856e8997cc138b84a089452}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Function to setup the algebraic node update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad60e33d1b61229a7d591bd963713aa03}{Dummy\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Dummy function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}
+Collapsible channel mesh with algebraic node update. 
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00048}{48}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a1a77973034fec46c16a41d1f4d250b0a}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a1a77973034fec46c16a41d1f4d250b0a} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!MyAlgebraicCollapsibleChannelMesh@{MyAlgebraicCollapsibleChannelMesh}}
+\index{MyAlgebraicCollapsibleChannelMesh@{MyAlgebraicCollapsibleChannelMesh}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MyAlgebraicCollapsibleChannelMesh()}{MyAlgebraicCollapsibleChannelMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{nup,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ncollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ndown,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{lup,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{lcollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{ldown,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment, and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00060}{60}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00268}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a36eed7b6be90d44726091c6d97d53e3f}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a36eed7b6be90d44726091c6d97d53e3f} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!MyAlgebraicCollapsibleChannelMesh@{MyAlgebraicCollapsibleChannelMesh}}
+\index{MyAlgebraicCollapsibleChannelMesh@{MyAlgebraicCollapsibleChannelMesh}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MyAlgebraicCollapsibleChannelMesh()}{MyAlgebraicCollapsibleChannelMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{nup,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ncollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ndown,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{lup,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{lcollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{ldown,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}]{bl\+\_\+squash\+\_\+function\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment, function pointer to "{}boundary layer squash function"{}, and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00088}{88}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00126}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00268}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_aba200b3263e6a11eb26739965df8cbcc}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_aba200b3263e6a11eb26739965df8cbcc} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!````~MyAlgebraicCollapsibleChannelMesh@{\texorpdfstring{$\sim$}{\string~}MyAlgebraicCollapsibleChannelMesh}}
+\index{````~MyAlgebraicCollapsibleChannelMesh@{\texorpdfstring{$\sim$}{\string~}MyAlgebraicCollapsibleChannelMesh}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MyAlgebraicCollapsibleChannelMesh()}{\string~MyAlgebraicCollapsibleChannelMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{My\+Algebraic\+Collapsible\+Channel\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00118}{118}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a28702ba4f4f10e9dfc495c916ddf6f82}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a28702ba4f4f10e9dfc495c916ddf6f82} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!algebraic\_node\_update@{algebraic\_node\_update}}
+\index{algebraic\_node\_update@{algebraic\_node\_update}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{algebraic\_node\_update()}{algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Perform algebraic mesh update at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00355}{355}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a78d90e5f7d50b85ad8b31a8c338b717e}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_a78d90e5f7d50b85ad8b31a8c338b717e} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}}
+\index{bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{bl\_squash\_fct\_pt()}{bl\_squash\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt \& \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying Collapsible\+Channel\+Domain. This (deliberately broken) function overloads the one in the Collapsible\+Channel\+Mesh base class. 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00126}{126}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00161}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00088}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad5ae1032e856e8997cc138b84a089452}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad5ae1032e856e8997cc138b84a089452} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
+\index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Function to setup the algebraic node update. 
+
+Setup algebraic mesh update -- assumes that mesh has initially been set up with the wall in its undeformed position. 
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00268}{268}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00088}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh()}}, and \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00060}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_adb6c8c672e0810b59174babf3623f5bd}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_adb6c8c672e0810b59174babf3623f5bd} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the geometric references that are used to update node after mesh adaptation. Empty -- no update of node update required. 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00152}{152}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad60e33d1b61229a7d591bd963713aa03}\label{classoomph_1_1MyAlgebraicCollapsibleChannelMesh_ad60e33d1b61229a7d591bd963713aa03} 
+\index{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!Dummy\_fct\_pt@{Dummy\_fct\_pt}}
+\index{Dummy\_fct\_pt@{Dummy\_fct\_pt}!oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::MyAlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dummy\_fct\_pt}{Dummy\_fct\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt \mbox{\hyperlink{classoomph_1_1MyAlgebraicCollapsibleChannelMesh}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MyRefineableAlgebraicCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Dummy\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Dummy function pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00161}{161}} of file \mbox{\hyperlink{my__alg__channel__mesh_8h_source}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{my__alg__channel__mesh_8h_source_l00126}{oomph\+::\+My\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{my__alg__channel__mesh_8h}{my\+\_\+alg\+\_\+channel\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

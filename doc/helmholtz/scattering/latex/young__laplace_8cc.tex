@@ -1,0 +1,57 @@
+\doxysection{young\+\_\+laplace.\+cc File Reference}
+\hypertarget{young__laplace_8cc}{}\label{young__laplace_8cc}\index{young\_laplace.cc@{young\_laplace.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Young\+Laplace problem on rectangular domain, discretised with 2D QYoung\+Laplace elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}{run\+\_\+it}} (const string \&output\+\_\+directory)
+\begin{DoxyCompactList}\small\item\em Run code for current setting of parameter values -- specify name of output directory. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Young\+Laplace problem. Input arguments\+: none (for validation) or case (0,1,2 for all pinned, barrel and T junction) and number of steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{young\_laplace.cc@{young\_laplace.cc}!main@{main}}
+\index{main@{main}!young\_laplace.cc@{young\_laplace.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Young\+Laplace problem. Input arguments\+: none (for validation) or case (0,1,2 for all pinned, barrel and T junction) and number of steps. 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00549}{549}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+
+
+References \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00048}{Global\+Parameters\+::\+All\+\_\+pinned}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00049}{Global\+Parameters\+::\+Barrel\+\_\+shape}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00054}{Global\+Parameters\+::\+Case}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00086}{Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00061}{Global\+Parameters\+::\+Gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00080}{Global\+Parameters\+::\+Nsteps}}, \mbox{\hyperlink{young__laplace_8cc_source_l00478}{run\+\_\+it()}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00050}{Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00041}{Global\+Parameters\+::\+Use\+\_\+spines}}.
+
+\Hypertarget{young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}\label{young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2} 
+\index{young\_laplace.cc@{young\_laplace.cc}!run\_it@{run\_it}}
+\index{run\_it@{run\_it}!young\_laplace.cc@{young\_laplace.cc}}
+\doxysubsubsection{\texorpdfstring{run\_it()}{run\_it()}}
+{\footnotesize\ttfamily void run\+\_\+it (\begin{DoxyParamCaption}\item[{const string \&}]{output\+\_\+directory }\end{DoxyParamCaption})}
+
+
+
+Run code for current setting of parameter values -- specify name of output directory. 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00478}{478}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00291}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00080}{Global\+Parameters\+::\+Nsteps}}.
+
+
+
+Referenced by \mbox{\hyperlink{young__laplace_8cc_source_l00549}{main()}}.
+

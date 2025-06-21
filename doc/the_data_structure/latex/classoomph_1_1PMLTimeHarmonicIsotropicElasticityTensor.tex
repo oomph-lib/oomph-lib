@@ -1,0 +1,260 @@
+\doxysection{oomph\+::PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor Class Reference}
+\hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}{}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+
+
+An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h$>$}
+
+Inheritance diagram for oomph\+::PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a31b82a650e6e7f7485d0bf94eac00883}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}{nu}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&E)
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a60b7dc4f2a2b71f5fdb4af8026134fbd}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}{nu}})
+\begin{DoxyCompactList}\small\item\em Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}{nu}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734}{update\+\_\+constitutive\+\_\+parameters}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}{nu}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&E=1.\+0)
+\begin{DoxyCompactList}\small\item\em Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and (optionally) Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}{independent\+\_\+component}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the independent coefficient function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor}{oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a520e58b90e02cc9c36f39102e32afa3f}{\texorpdfstring{$\sim$}{\string~}\+PMLTime\+Harmonic\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual Destructor. \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_ac594b4fea1015ffb582862e078036d94}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the appropriate independent component via the index translation scheme (const version). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ae0b7edb4584cac4bfdf2cf9b74486a23}{set\+\_\+lame\+\_\+coefficients}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&lambda, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&mu)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ab577ccf1c4b74e02a287461649b5198e}{C}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Storage for the independent components of the elasticity tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6515ab800426cca35c724f8d7f96e681}{Nu}}
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623}{Static\+Index}} \mbox{[}21\mbox{]}
+\begin{DoxyCompactList}\small\item\em Translation scheme between the 21 independent components of the general elasticity tensor and the isotropic case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor}{oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_acc5d6de5e961ad67dd72bf032a47bb7b}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper range checking function (Note that this only captures over-\/runs in 3D but errors are likely to be caught in evaluation of the stress and strain tensors anyway...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a487ea0dfb56150b4189f1bc514a9bdda}{PMLTime\+Harmonic\+Elasticity\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An isotropic elasticity tensor defined in terms of Young\textquotesingle{}s modulus and Poisson\textquotesingle{}s ratio. The elasticity tensor is assumed to be non-\/dimensionalised on some reference value for Young\textquotesingle{}s modulus so the value provided to the constructor (if any) is to be interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus used to non-\/dimensionalise the stresses/tractions in the governing equations. 
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00148}{148}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a31b82a650e6e7f7485d0bf94eac00883}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a31b82a650e6e7f7485d0bf94eac00883} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!PMLTimeHarmonicIsotropicElasticityTensor@{PMLTimeHarmonicIsotropicElasticityTensor}}
+\index{PMLTimeHarmonicIsotropicElasticityTensor@{PMLTimeHarmonicIsotropicElasticityTensor}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{PMLTimeHarmonicIsotropicElasticityTensor()}{PMLTimeHarmonicIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the values of the Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{167}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a60b7dc4f2a2b71f5fdb4af8026134fbd}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a60b7dc4f2a2b71f5fdb4af8026134fbd} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!PMLTimeHarmonicIsotropicElasticityTensor@{PMLTimeHarmonicIsotropicElasticityTensor}}
+\index{PMLTimeHarmonicIsotropicElasticityTensor@{PMLTimeHarmonicIsotropicElasticityTensor}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{PMLTimeHarmonicIsotropicElasticityTensor()}{PMLTimeHarmonicIsotropicElasticityTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Passing in the value of the Poisson\textquotesingle{}s ratio. Stresses and tractions in the governing equations are assumed to have been non-\/dimensionalised on Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00180}{180}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_aee557f8f75af142cc59094cd3ab40a9c} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!independent\_component@{independent\_component}}
+\index{independent\_component@{independent\_component}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{independent\_component()}{independent\_component()}}
+{\footnotesize\ttfamily std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::independent\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the independent coefficient function. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PMLTimeHarmonicElasticityTensor_a9d07ac639fb398e15295e73bb87152b1}{oomph\+::\+PMLTime\+Harmonic\+Elasticity\+Tensor}}.
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{215}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00156}{Static\+Index}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6cc0a05cf8555f8a233894f65c38b555} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!nu@{nu}}
+\index{nu@{nu}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{nu()}{nu()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::nu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Poisson\textquotesingle{}s ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{194}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00159}{Nu}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__linear__elasticity__elements_8h_source_l00194}{oomph\+::\+PMLTime\+Harmonic\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::nu()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00180}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ae0b7edb4584cac4bfdf2cf9b74486a23}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ae0b7edb4584cac4bfdf2cf9b74486a23} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!set\_lame\_coefficients@{set\_lame\_coefficients}}
+\index{set\_lame\_coefficients@{set\_lame\_coefficients}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{set\_lame\_coefficients()}{set\_lame\_coefficients()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::set\+\_\+lame\+\_\+coefficients (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{lambda,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{mu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{223}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00180}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a87798565f87daddd8b370ef4cb94f734} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!update\_constitutive\_parameters@{update\_constitutive\_parameters}}
+\index{update\_constitutive\_parameters@{update\_constitutive\_parameters}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{update\_constitutive\_parameters()}{update\_constitutive\_parameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::update\+\_\+constitutive\+\_\+parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{E = {\ttfamily 1.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update parameters\+: Specify values of the Poisson\textquotesingle{}s ratio and (optionally) Young\textquotesingle{}s modulus (interpreted as the ratio of the actual Young\textquotesingle{}s modulus to the Young\textquotesingle{}s modulus (or other reference stiffness) used to non-\/dimensionalise stresses and tractions in the governing equations). 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{204}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+References \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{C}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ab577ccf1c4b74e02a287461649b5198e}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ab577ccf1c4b74e02a287461649b5198e} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!C@{C}}
+\index{C@{C}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily std\+::complex$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::C\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the independent components of the elasticity tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00152}{152}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{independent\+\_\+component()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00180}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00167}{PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor()}}, \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00223}{set\+\_\+lame\+\_\+coefficients()}}, and \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00204}{update\+\_\+constitutive\+\_\+parameters()}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6515ab800426cca35c724f8d7f96e681}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_a6515ab800426cca35c724f8d7f96e681} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!Nu@{Nu}}
+\index{Nu@{Nu}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::\+Nu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Poisson\textquotesingle{}s ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00159}{159}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00194}{nu()}}.
+
+\Hypertarget{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623}\label{classoomph_1_1PMLTimeHarmonicIsotropicElasticityTensor_ac1c39fcce5b79af772e89e86def6f623} 
+\index{oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}!StaticIndex@{StaticIndex}}
+\index{StaticIndex@{StaticIndex}!oomph::PMLTimeHarmonicIsotropicElasticityTensor@{oomph::PMLTimeHarmonicIsotropicElasticityTensor}}
+\doxysubsubsection{\texorpdfstring{StaticIndex}{StaticIndex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+PMLTime\+Harmonic\+Isotropic\+Elasticity\+Tensor\+::\+Static\+Index\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ 1,\ 0,\ 2,\ 3,\ 0,\ 1,\ 0,\ 0,\ 2,\ 0,\ 0,\ 0,\ 3,\ 0,\ 0,\ 0,\ 0,\ 2,\ 3,\ 0,\ 1\}}
+
+\end{DoxyCode}
+
+
+Translation scheme between the 21 independent components of the general elasticity tensor and the isotropic case. 
+
+Translation scheme for the isotropic elasticity tensor. 
+
+Definition at line \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00156}{156}} of file \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h_source_l00215}{independent\+\_\+component()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8h}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+h}}\item 
+\mbox{\hyperlink{pml__time__harmonic__elasticity__tensor_8cc}{pml\+\_\+time\+\_\+harmonic\+\_\+elasticity\+\_\+tensor.\+cc}}\end{DoxyCompactItemize}

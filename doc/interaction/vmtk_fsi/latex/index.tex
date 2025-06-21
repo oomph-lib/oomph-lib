@@ -1,0 +1,443 @@
+\chapter{Demo problem\+: Steady finite-\/\+Reynolds-\/number flow through an elastic iliac bifurcation \texorpdfstring{$<$}{<}br\texorpdfstring{$>$}{>}}
+\hypertarget{index}{}\label{index}\index{Demo problem: Steady finite-\/Reynolds-\/number flow through an elastic iliac bifurcation   $<$br$>$@{Demo problem: Steady finite-\/Reynolds-\/number flow through an elastic iliac bifurcation   $<$br$>$}}
+This tutorial demonstrates how to simulate physiological fluid-\/structure interaction problems, based on medical imaging data, processed with the \href{http://www.vmtk.org}{\texttt{ Vascular Modeling Toolkit.}}
+
+We combine two single-\/physics problems, namely
+\begin{DoxyItemize}
+\item \href{../../../solid/vmtk_solid/html/index.html}{\texttt{ The inflation of a blood vessel}}
+\item \href{../../../navier_stokes/vmtk_fluid/html/index.html}{\texttt{ Finite-\/\+Reynolds number flow through a rigid iliac bifurcation}}
+\end{DoxyItemize}to study the steady flow through an elastic iliac bifurcation. (Please refer to {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ VMTK tutorial}} to find out how to generate {\ttfamily oomph-\/lib} meshes from medical images.)
+
+The tutorial also provides a detailed discussion of the mechanism by which {\ttfamily Face\+Elements} introduce additional unknowns into a problem. This is important in the problem considered here because we employ two different types of {\ttfamily Face\+Elements}, both of which introduce additional unknowns. When dealing with nodes that are attached to both types of {\ttfamily Face\+Elements} we must therefore be able to determine which nodal values are associated with which {\ttfamily Face\+Element}. The section \doxysectlink{index_face}{How Face\+Elements introduce additional unknowns into a problem}{1} below shows how this is done.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} \end{center}  This tutorial and the associated driver codes were developed jointly with Amine Massit (ENSTA, Paris).   \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_prob}{}\doxysection{\texorpdfstring{The problem (and some results)}{The problem (and some results)}}\label{index_prob}
+The animations below show the deformation of an iliac bifurcation that conveys viscous fluid and deforms in response to the traction that the fluid exerts onto it. As in the previous examples where we considered the constituent single-\/physics \href{../../../navier_stokes/vmtk_fluid/html/index.html}{\texttt{ fluid}} and \href{../../../solid/vmtk_solid/html/index.html}{\texttt{ solid}} problems, the meshes are obviously very coarse and the boundary conditions are far from "{}physiologically realistic"{}\+: We keep the upstream and downstream "{}ends"{} of the vessel wall in a fixed position and drive the (steady!) flow by applying a constant pressure drop between the in-\/ and outflow cross sections. The different frames shown in the animation show results for different wall stiffnesses, using the same setup as in \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial.}}
+
+We stress that the computations presented here serve as quick-\/to-\/compute proof of concept and refer to the section \doxysectlink{index_comm_ex}{Comments and Exercises}{1} at the end of this tutorial for a discussion on how to make the simulation more "{}realistic"{}.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{elastic_iliac_solid}
+\doxyfigcaption{The flow-\/induced deformation of an iliac bifurcation. The animation shows the effect of variations in the wall stiffness. The arrows show the magnitude of the fluid traction on the wall. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{elastic_iliac_fluid}
+\doxyfigcaption{Steady finite-\/\+Reynolds number flow through an elastic iliac bifurcation (velocity vectors and pressure contours). The animation shows the effect of variations in the wall stiffness. }
+\end{DoxyImage}
+
+
+The driver code used for this computation is very similar to the one discussed in \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ another tutorial}} where we used a much simpler geometry in which the three branches of the bifurcation had rectangular cross-\/sections. Before discussing the changes to the driver code in section \doxysectlink{index_driver_code}{The driver code for the FSI problem}{1} below, we provide a more detailed discussion of the way in which {\ttfamily Face\+Elements} introduce additional unknowns into a problem. Feel free to skip the next section if you\textquotesingle{}re not keen on theory.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_face}{}\doxysection{\texorpdfstring{How Face\+Elements introduce additional unknowns into a problem}{How FaceElements introduce additional unknowns into a problem}}\label{index_face}
+{\ttfamily Face\+Elements} are used widely throughout {\ttfamily oomph-\/lib} to apply Neumann/flux/traction-\/type boundary conditions on the faces of higher-\/dimensional "{}bulk"{} elements. Examples include\+:
+\begin{DoxyItemize}
+\item \href{../../../poisson/two_d_poisson_flux_bc2/html/index.html}{\texttt{ the application of a flux boundary condition in a Poisson problem;}}
+\item the application of traction boundary conditions in \href{../../../navier_stokes/rayleigh_traction_channel/html/index.html}{\texttt{ fluid}} and \href{../../../solid/airy_cantilever/html/index.html}{\texttt{ solid}} mechanics problems;
+\item \href{../../../young_laplace/contact_angle/html/index.html}{\texttt{ the application of a contact-\/angle boundary condition for the Young-\/\+Laplace equation.}}
+\end{DoxyItemize}In all the examples listed above, the boundary conditions simply add a contribution to the elements\textquotesingle{} residuals but they do not introduce any additional unknowns into the problem.
+
+{\ttfamily Face\+Elements} may also be used to apply boundary conditions via Lagrange multipliers. An example is given in the tutorial that discusses
+\begin{DoxyItemize}
+\item \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ the application of displacement boundary conditions for solid mechanics problems}}
+\end{DoxyItemize}In such problems, the Lagrange multipliers must be determined as part of the solution, and storage for the associated discrete unknowns is created at the nodes of the {\ttfamily Face\+Elements}.
+
+To explain the relevant details of the implementation we consider a simple 2D Navier-\/\+Stokes problem discretised using nine-\/node Taylor-\/\+Hood elements (in these elements each vertex node stores two discrete velocities and one pressure; the other nodes store only two velocity degrees of freedom). We assume that boundaries 0 and 1 are subject to boundary conditions imposed via {\ttfamily Face\+Elements}, and that each boundary condition introduces its own Lagrange multipliers field{\bfseries{s}}. \mbox{[}Yes, the plural is correct. As an example, consider the case of imposing displacement constraints in a 2D solid mechanics problem via Lagrange multipliers. In this approach the imposition of the boundary condition requires {\itshape two} Lagrange multipliers along each constrained boundary. Physically, the Lagrange multipliers represent the two components of the surface traction required to deform the boundary into the required shape; see \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ the relevant solid mechanics problem}} for details.\mbox{]}
+
+The sketch below shows the discretisation of the domain, with the black circles representing the nodes. The enlargement of the top right corner also shows the discrete unknowns (nodal velocities and pressures) stored at each node after the creation of the "{}bulk"{} Navier-\/\+Stokes elements.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{multiple_face_elements1}
+\doxyfigcaption{Sketch of a problem that is subject to flux-\/type boundary conditions along boundaries 0 and 1. The sketch illustrates the degrees of freedom at each node before any Face\+Elements are attached. }
+\end{DoxyImage}
+
+
+The next figure shows the nodal degrees of freedom after the {\ttfamily Face\+Elements} on boundary 0 (shown in red) have been attached. The {\ttfamily Face\+Elements} share the existing nodes of the underlying "{}bulk"{} elements and automatically create storage for any additional nodal unknowns. Here we provide storage for two discrete Lagrange multipliers, $ \Lambda_x $ and $ \Lambda_y. $ Provided that a single {\ttfamily Face\+Element} is attached to a node, the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ FaceElement::nbulk\_value(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ j)}
+
+\end{DoxyCode}
+ can be used to determine the number of nodal values at the {\ttfamily Face\+Element\textquotesingle{}s} {\ttfamily j} -\/th node created by the underlying "{}bulk"{} element {\itshape before} the {\ttfamily Face\+Element} was attached. It is then easy to identify the additional nodal values associated with the {\ttfamily Face\+Element} in order to apply the boundary conditions for the Lagrange multipliers, say. The methodology is illustrated in the \href{../../../solid/prescribed_displ_lagr_mult/html/index.html\#bcs_for_lagrange_multipliers}{\texttt{ the solid mechanics problem referred to earlier.}}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{multiple_face_elements2}
+\doxyfigcaption{Sketch illustrating the degrees of freedom at each node after Face\+Elements have been attached to boundary 0. }
+\end{DoxyImage}
+
+
+The next figure shows the degrees of freedom after the {\ttfamily Face\+Elements} on boundary 1 (shown in green) have also been attached. These {\ttfamily Face\+Elements} must create storage for their own two Lagrange multipliers, $ \lambda_x $ and $ \lambda_y $. Thus, the corner node (which is attached to both types of {\ttfamily Face\+Elements}) has four additional degrees of freedom after all the {\ttfamily Face\+Elements} have been created.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{multiple_face_elements3}
+\doxyfigcaption{Sketch illustrating the degrees of freedom at each node after all Face\+Elements have been attached. }
+\end{DoxyImage}
+
+
+The identification of the additional degrees of freedom via a simple offset from the degrees of freedom created by the "{}bulk"{} element is now no longer possible. We therefore provide an alternative mechanism to access the relevant information from the nodes themselves via the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ BoundaryNodeBase::index\_of\_first\_value\_assigned\_by\_face\_element()}
+
+\end{DoxyCode}
+ which does exactly what it says. If only a single type of {\ttfamily Face\+Element} is attached to a (boundary) node, the unsigned that is returned by this function is exactly the same as the unsigned that is returned by the corresponding call to {\ttfamily Face\+Element\+::nbulk\+\_\+value(...)}. To cater for the case where multiple {\ttfamily Face\+Elements} are attached to the same node, the above function can take an ID (which defaults to zero) that identifies which type of {\ttfamily Face\+Element} we are dealing with, so the full interface is, in fact, 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ BoundaryNodeBase::index\_of\_first\_value\_assigned\_by\_face\_element(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \textcolor{keywordtype}{id}=0)}
+
+\end{DoxyCode}
+ The ID must be established by the user, typically when the constructor of the specific {\ttfamily Face\+Element} is called. It can then be passed on to the {\ttfamily Nodes} when the number of values at the nodes is adjusted to accommodate the additional values required by the {\ttfamily Face\+Element}.
+
+To illustrate this, the code extract shown below provides a (partial) listing of the constructor of the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element} that was used in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ the solid mechanics problem referred to earlier}}. The constructor has the usual two arguments that specify the pointer to the "{}bulk"{} element, and the index of the face that the {\ttfamily Face\+Element} is to be attached to. The final (optional) argument allows the specification of the ID referred to above. We store the ID in a private the element\textquotesingle{}s private member data.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Constructor\ takes\ a\ "{}bulk"{}\ element\ and\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ index\ that\ identifies\ which\ face\ the\ FaceElement\ is\ supposed}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ to\ be\ attached\ to.\ The\ optional\ identifier\ can\ be\ used}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ to\ distinguish\ the\ additional\ nodal\ values\ created\ by}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ this\ element\ from\ thos\ created\ by\ other\ FaceElements.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ ImposeDisplacementByLagrangeMultiplierElement(}
+\DoxyCodeLine{\ \ \ \ \ \ FiniteElement*\ \textcolor{keyword}{const}\&\ element\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ face\_index,}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \textcolor{keywordtype}{id}\ =\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ called\_from\_refineable\_constructor\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\ \ \ \ \ \ :\ FaceGeometry<ELEMENT>(),\ FaceElement(),\ Boundary\_shape\_geom\_object\_pt(0)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ \ Store\ the\ ID\ of\ the\ FaceElement\ -\/-\/\ this\ is\ used\ to\ distinguish}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ it\ from\ any\ others}}
+\DoxyCodeLine{\ \ \ \ \ \ Id\ =\ id;}
+
+\end{DoxyCodeInclude}
+
+
+\mbox{[}We omit a few lines of code that are irrelevant for the present discussion\mbox{]}. Next we specify the number of additional values required at each of the element\textquotesingle{}s nodes and store them in a vector. For a {\ttfamily dim} -\/dimensional bulk element, we need {\ttfamily dim} additional values at each node to store the Lagrange multipliers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Dimension\ of\ the\ bulk\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ dim\ =\ element\_pt-\/>dim();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ We\ need\ dim\ additional\ values\ for\ each\ FaceElement\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ to\ store\ the\ dim\ Lagrange\ multipliers.}}
+\DoxyCodeLine{\ \ \ \ \ \ Vector<unsigned>\ n\_additional\_values(nnode(),\ dim);}
+
+\end{DoxyCodeInclude}
+ Finally, we pass this vector, together with ID that identifies the type of the {\ttfamily Face\+Element} to the function {\ttfamily Face\+Element\+::add\+\_\+additional\+\_\+values(...)}\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Now\ add\ storage\ for\ Lagrange\ multipliers\ and\ set\ the\ map\ containing}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ the\ position\ of\ the\ first\ entry\ of\ this\ face\ element's}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ additional\ values.}}
+\DoxyCodeLine{\ \ \ \ \ \ add\_additional\_values(n\_additional\_values,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ This function creates the additional storage at each node and updates the node\textquotesingle{}s internal lookup scheme that provides access to the first value associated with the specified ID.
+
+The fact that the ID is specified as an optional argument means that the user does not have to provide a dummy ID in cases where none is required, i.\+e. in problems involving just a single type of {\ttfamily Face\+Element}, as in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ the solid mechanics problem referred to earlier.}} If a problem does involve multiple {\ttfamily Face\+Elements}, the user will be aware of this when writing the driver code and can then provide distinct IDs as and when required; see the section \doxysectlink{index_face_elements_code}{Creating the Lagrange multiplier elements}{2} below.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_driver_code}{}\doxysection{\texorpdfstring{The driver code for the FSI problem}{The driver code for the FSI problem}}\label{index_driver_code}
+The driver code for the flow through the elastic iliac is almost identical to that in the \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ tutorial considering the same problem in a more simplistic geometry.}} Comparing the two driver codes using
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sdiff\ demo\_drivers/interaction/vmtk\_fsi/vmtk\_fsi.cc\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc}
+
+\end{DoxyCode}
+
+
+shows that the only differences relate to the facts that\+:
+\begin{DoxyItemize}
+\item although the meshes for the two problems are topologically equivalent, the boundary numbers assigned by {\ttfamily Tetgen} are different.
+\item we impose parallel flow at the vessel\textquotesingle{}s in-\/ and outflow cross-\/sections, none of which are not aligned with any of the Cartesian coordinate planes. The parallel flow and the imposed pressure drop are therefore enforced by attaching {\ttfamily Impose\+Parallel\+Outflow\+Elements}, rather than {\ttfamily Navier\+Stokes\+Traction\+Elements} to the in-\/ and outflow boundaries. We refer to the corresponding \href{../../../navier_stokes/vmtk_fluid/html/index.html\#parallel_flow}{\texttt{ single-\/physics fluids problem}} for more details on this aspect.
+\item The problem involves two different types of {\ttfamily Face\+Elements\+:} 
+\begin{DoxyItemize}
+\item {\ttfamily Impose\+Parallel\+Outflow\+Elements} are used to impose parallel flow at the in-\/ and outflow cross-\/sections.
+\item {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multipler\+Elements} are used to deform the boundary of the pseudo-\/solid fluid mesh to reflect the changes in the geometry of the vessel wall.
+\end{DoxyItemize}Since both {\ttfamily Face\+Elements} introduce additional unknowns into the problem, we use the methodology described \href{\#face}{\texttt{ above}} to distinguish between the two types of Lagrange multipliers.
+\end{DoxyItemize}
+
+Once again, we shall discuss only those aspects of the code that are changed from the driver code discussed in the \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ previous tutorial.}}
+
+\DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysubsection{\texorpdfstring{The namespace for global parameters}{The namespace for global parameters}}\label{index_namespace}
+As usual, global parameters are specified in a namespace, which now includes an {\ttfamily enum} that specifies the IDs for the two different {\ttfamily Face\+Elements}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }Global\_Parameters}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Default\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ Re=50.0;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Default\ FSI\ parameter}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ Q=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ ConstitutiveLaw*\ Constitutive\_law\_pt=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio\ for\ generalised\ Hookean\ constitutive\ equation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ Nu=0.3;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fluid\ pressure\ on\ inflow\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ P\_in=0.25;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fluid\ pressure\ on\ outflow\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ P\_out=-\/0.25;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ IDs\ for\ the\ two\ types\ of\ Lagrange\ multipliers\ used}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ in\ this\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{enum}\{Parallel\_flow\_lagrange\_multiplier\_id,\ }
+\DoxyCodeLine{\ \ \ \ \ \ FSI\_interface\_displacement\_lagrange\_multiplier\_id\};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysubsection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+The general structure of the problem constructor remains unchanged. There are a few trivial changes in the import of fluid and solid meshes to reflect the fact that the tetgen boundary numbers are different.
+
+When imposing the boundary conditions for the fluid mesh we do {\bfseries{ not }} pin the transverse velocities at the in-\/ and outlets because the parallel flow is now imposed by Lagrange multiplier elements. Hence the only boundary condition to be applied at the in-\/ and outflow cross-\/sections is the pinning of the nodal positions.
+
+The only significant change arises in the application of the boundary conditions for the Lagrange multipliers. Recall that {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} are used to deform the FSI boundary of the fluid mesh so that it stays in contact with the vessel wall. This constraint must be applied along the entire FSI boundary, apart from the lines along which it meets the in-\/ and outflow boundaries where the position of the fluid nodes is already pinned. Consequently, we pin the Lagrange multipliers in this part of the mesh.
+
+Similarly, the {\ttfamily Impose\+Parallel\+Outflow\+Elements} ensure that the velocity in the in-\/ and outflow cross-\/sections is orthogonal to these cross-\/sections. This constraint must be applied along the entirety of the in-\/ and outflow boundaries, apart from the lines along which they meet the FSI interface where the fluid velocity is already determined by the no-\/slip condition. Consequently, we also pin the second set of Lagrange multipliers along this part of the fluid mesh boundary.
+
+We loop over all the fluid nodes on the FSI boundary\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ nodes\ on\ the\ FSI\ boundary\ in\ the\ fluid\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nbound=nfluid\_fsi\_boundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nbound;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Get\ the\ mesh\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ b\ =\ Fluid\_fsi\_boundary\_id[i];}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=Fluid\_mesh\_pt-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=\ Fluid\_mesh\_pt-\/>boundary\_node\_pt(b,inod);}
+
+\end{DoxyCodeInclude}
+ For each node we apply the no-\/slip condition on the wall by pinning all three velocity components,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ all\ velocities}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>pin(0);\ }
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>pin(1);\ }
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>pin(2);\ }
+
+\end{DoxyCodeInclude}
+ and determine whether the node also happens to be located on the in-\/ or outflow cross-\/sections\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Find\ out\ whether\ node\ is\ also\ on\ in/outflow}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_in\_or\_outflow\_node=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n=nfluid\_inflow\_traction\_boundary();}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ k=0;k<n;k++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nod\_pt-\/>is\_on\_boundary(Inflow\_boundary\_id[k]))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ is\_in\_or\_outflow\_node=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (!is\_in\_or\_outflow\_node)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n=nfluid\_outflow\_traction\_boundary();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ k=0;k<n;k++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nod\_pt-\/>is\_on\_boundary(Outflow\_boundary\_id[k]))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ is\_in\_or\_outflow\_node=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}\ \textcolor{comment}{//\ ...now\ we\ know\ if\ the\ node\ is\ on\ an\ in-\/\ or\ outflow\ boundary}}
+
+\end{DoxyCodeInclude}
+ If it is, we pin the Lagrange multipliers associated with the {\ttfamily Impose\+Parallel\+Flow\+Elements}, using the {\ttfamily Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element(...)} function referred to \href{\#face}{\texttt{ above}}, and specifying the appropriate ID.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pin\ the\ Lagrange\ multipliers\ for\ the\ imposition\ of}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ parallel\ flow\ if\ the\ nodes\ is\ also\ on\ the\ in/outflow\ boundaries}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(is\_in\_or\_outflow\_node)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Cast\ to\ a\ boundary\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ BoundaryNode<SolidNode>\ *bnod\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}BoundaryNode<SolidNode>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (\ Fluid\_mesh\_pt-\/>boundary\_node\_pt(b,inod)\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ index\ of\ the\ first\ Lagrange\ multiplier}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ first\_index=bnod\_pt-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ index\_of\_first\_value\_assigned\_by\_face\_element(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Global\_Parameters::Parallel\_flow\_lagrange\_multiplier\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Pin\ the\ Lagrange\ multipliers\ (as\ the\ velocity\ is\ already}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//determined\ via\ the\ no\ slip\ condition\ on\ the\ fsi\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l=0;l<2;l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ nod\_pt-\/>pin(first\_index+l);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ We repeat the same procedure for the Lagrange multipliers associated with the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ first\ index\ of\ the\ second\ Lagrange\ multiplier\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ first\_index=bnod\_pt-\/>index\_of\_first\_value\_assigned\_by\_face\_element(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Global\_Parameters::FSI\_interface\_displacement\_lagrange\_multiplier\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ Lagrange\ multipliers\ that\ deform\ the\ FSI\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ of\ the\ pseudo-\/solid\ fluid\ mesh.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l=0;l<3;l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pin\ the\ Lagrange\ multipliers\ that\ impose\ the\ displacement}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ because\ the\ positon\ of\ the\ fluid\ nodes\ at\ the\ in/outflow}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ already\ determined.\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ nod\_pt-\/>pin(first\_index+l);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ As usual we document the position of the nodes at which we pinned the Lagrange multipliers in a file to allow for an external sanity check.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Doc\ that\ we've\ pinned\ the\ Lagrange\ multipliers\ at\ this\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ pinned\_file\ <<\ nod\_pt-\/>x(0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ nod\_pt-\/>x(1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ nod\_pt-\/>x(2)\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ BC\ for\ fluid\ mesh}}
+
+\end{DoxyCodeInclude}
+ The rest of the problem constructor is unchanged.
+
+\DoxyHorRuler{0}
+\hypertarget{index_face_elements_code}{}\doxysubsection{\texorpdfstring{Creating the Lagrange multiplier elements}{Creating the Lagrange multiplier elements}}\label{index_face_elements_code}
+The creation of the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} is virtually identical to that in the \href{../../unstructured_three_d_fsi/html/index.html}{\texttt{ previous tutorial.}}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_lagrange\_multiplier\_elements===============}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ elements\ that\ impose\ the\ prescribed\ boundary\ displacement}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ for\ the\ pseudo-\/solid\ fluid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ FLUID\_ELEMENT,\ \textcolor{keyword}{class}\ SOLID\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}
+\DoxyCodeLine{create\_lagrange\_multiplier\_elements()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Make\ space}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n=nfluid\_fsi\_boundary();}
+\DoxyCodeLine{\ Solid\_fsi\_boundary\_pt.resize(n);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ FSI\ interfaces\ in\ fluid}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<n;i++)}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ boundary\ ID}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ b=Fluid\_fsi\_boundary\_id[i];}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ \ GeomObject\ incarnation\ of\ fsi\ boundary\ in\ solid\ mesh}}
+\DoxyCodeLine{\ \ \ Solid\_fsi\_boundary\_pt[i]=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ MeshAsGeomObject}
+\DoxyCodeLine{\ \ \ \ (Solid\_fsi\_traction\_mesh\_pt[i]);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ bulk\ fluid\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Fluid\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ fluid\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ fluid\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ FLUID\_ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}FLUID\_ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ Fluid\_mesh\_pt-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ Fluid\_mesh\_pt-\/>face\_index\_at\_boundary(b,e);}
+
+\end{DoxyCodeInclude}
+ The only difference is that we pass the ID that identifies the type of the {\ttfamily Face\+Element} to the constructor of the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element}}
+\DoxyCodeLine{\ \ \ \ \ ImposeDisplacementByLagrangeMultiplierElement<FLUID\_ELEMENT>*\ el\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ \ ImposeDisplacementByLagrangeMultiplierElement<FLUID\_ELEMENT>(}
+\DoxyCodeLine{\ \ \ \ \ \ \ bulk\_elem\_pt,face\_index,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ Global\_Parameters::FSI\_interface\_displacement\_lagrange\_multiplier\_id);\ \ \ }
+
+\end{DoxyCodeInclude}
+ The rest of the function is unchanged\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Lagrange\_multiplier\_mesh\_pt[i]-\/>add\_element\_pt(el\_pt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ GeomObject\ that\ defines\ the\ boundary\ shape\ and\ set}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ which\ bulk\ boundary\ we\ are\ attached\ to\ (needed\ to\ extract}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ the\ boundary\ coordinate\ from\ the\ bulk\ nodes)}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>set\_boundary\_shape\_geom\_object\_pt(Solid\_fsi\_boundary\_pt[i],b);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_lagrange\_multiplier\_elements}}
+
+\end{DoxyCodeInclude}
+ An equivalent procedure is adopted in the function {\ttfamily create\+\_\+parallel\+\_\+flow\+\_\+lagrange\+\_\+elements()} which follows exactly the same steps as in the corresponding \href{../../../navier_stokes/vmtk_fluid/html/index.html\#parallel_flow}{\texttt{ single-\/physics fluids problem}}, apart from the fact that we pass the other enumerated ID to the constructor of the {\ttfamily Impose\+Parallel\+Flow\+Elements}. We therefore omit the listing of the function and refer to \href{../../../../demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc}{\texttt{ the source code.}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+\hypertarget{index_realism}{}\doxysubsection{\texorpdfstring{Making the simulation more "{}realistic"{}}{Making the simulation more "realistic"}}\label{index_realism}
+The simulation shown at the beginning of this tutorial is obviously very crude and suffers from (at least) the sum of the shortcomings that we identified in the tutorials for the constituent single-\/physics \href{../../../navier_stokes/vmtk_fluid/html/index.html\#realism}{\texttt{ fluid}} and \href{../../../solid/vmtk_solid/html/index.html\#finer}{\texttt{ solid}} problems. You should consider repeating the computation using finer meshes (consult {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ VMTK tutorial}} for details) and explore the use of "{}flow extensions"{} which allow the (inevitably artificial) boundary conditions to be applied further from the region of interest. Adding time-\/dependence to the problem, e.\+g. by subjecting the flow to a periodic fluctuation in the applied pressure drop would be another interesting exercise.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/interaction/vmtk_fsi/}{\texttt{ demo\+\_\+drivers/interaction/vmtk\+\_\+fsi/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc}{\texttt{ demo\+\_\+drivers/interaction/vmtk\+\_\+fsi/vmtk\+\_\+fsi.\+cc }} \end{center} 
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

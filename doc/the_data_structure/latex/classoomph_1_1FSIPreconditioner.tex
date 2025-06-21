@@ -1,0 +1,874 @@
+\doxysection{oomph\+::FSIPreconditioner Class Reference}
+\hypertarget{classoomph_1_1FSIPreconditioner}{}\label{classoomph_1_1FSIPreconditioner}\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+
+
+FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner} is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an "{}exact"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks.  
+
+
+
+
+{\ttfamily \#include $<$fsi\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::FSIPreconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1FSIPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78}{FSIPreconditioner}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: By default use block triangular form with retained fluid on solid terms. A problem pointer is required for the underlying \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4}{FSIPreconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner}{FSIPreconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}{solid\+\_\+preconditioner\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}{solid\+\_\+preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read-\/only access to solid preconditoner (use set\+\_\+... to set it) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b}{use\+\_\+block\+\_\+diagonal\+\_\+version}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/diagonal preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/triangular preconditioner in which action of fluid dofs onto solid equations is retained. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/triangular preconditioner in which action of solid dofs onto fluid equations is retained. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80}{set\+\_\+navier\+\_\+stokes\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a295ad63173fcd9cfff7cbbdc6c518e9a}{mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are more than one type of elements in same mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5}{set\+\_\+wall\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a295ad63173fcd9cfff7cbbdc6c518e9a}{mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable FSI solid elements. The optional argument indicates if there are more than one type of elements in the same mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b}{preconditioner\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the Navier Stokes preconditioner (inexact solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a74c4b4bef4371b72816631445689a2e6}{Block\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0634f494e1284446512560cb1dc73a32}{Block\+Preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a78c33fc6f29101f027e22d64d158d567}{\texorpdfstring{$\sim$}{\string~}\+Block\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8f07557542d4ebeba0e5a2307c7a7d48}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to matrix\+\_\+pt. If this is the master then cast the matrix pointer to MATRIX\texorpdfstring{$\ast$}{*}, error check and return. Otherwise ask the master for its matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0d977a81515458e59b94438a215e93e1}{turn\+\_\+on\+\_\+recursive\+\_\+debug\+\_\+flag}} ()
+\begin{DoxyCompactList}\small\item\em Toggles on the recursive debug flag. The change goes up the block preconditioning hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8ed741a5fbf514fc29f0a332a211255f}{turn\+\_\+off\+\_\+recursive\+\_\+debug\+\_\+flag}} ()
+\begin{DoxyCompactList}\small\item\em Toggles off the recursive debug flag. The change goes up the block preconditioning hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a271bf5ea70579e43797187498d98f9a9}{turn\+\_\+on\+\_\+debug\+\_\+flag}} ()
+\begin{DoxyCompactList}\small\item\em Toggles on the debug flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a46c57c6a2f4b54e27d2aaccc4ec90665}{turn\+\_\+off\+\_\+debug\+\_\+flag}} ()
+\begin{DoxyCompactList}\small\item\em Toggles off the debug flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab8e2478caa8370dd12462f17e1cc8082}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "{}master block preconditioner (e.\+g. a Navier-\/\+Stokes 2x2 block preconditioner dealing with the fluid sub-\/blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. {\bfseries{1}}. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. {\bfseries{2}}. block\+\_\+setup(...) should be called in the master preconditioner before this method is called. {\bfseries{3}}. block\+\_\+setup(...) should be called in the corresponding subsidiary preconditioner after this method is called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae9282acaaf19fa2cdb703d49f1a8de25}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Function to turn this preconditioner into a subsidiary preconditioner that operates within a bigger "{}master block preconditioner (e.\+g. a Navier-\/\+Stokes 2x2 block preconditioner dealing with the fluid sub-\/blocks within a 3x3 FSI preconditioner. Once this is done the master block preconditioner deals with the block setup etc. The vector doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse must specify the dof number in the master preconditioner that corresponds to a dof number in this preconditioner. {\bfseries{1}}. The length of the vector is used to determine the number of blocks in this preconditioner therefore it must be correctly sized. {\bfseries{2}}. block\+\_\+setup(...) should be called in the master preconditioner before this method is called. {\bfseries{3}}. block\+\_\+setup(...) should be called in the corresponding subsidiary preconditioner after this method is called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af704c4816469cef4fed9d35a9ad651ec}{block\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "{}blocks"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the internal blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if the identity dof-\/to-\/block mapping is okay, i.\+e. dof number 0 corresponds to block number 0 dof number 1 corresponds to block number 1 dof number 2 corresponds to block number 2 etc... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6b70b51b533002ff33a09013aa084e54}{block\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dof\+\_\+to\+\_\+block\+\_\+map}})
+\begin{DoxyCompactList}\small\item\em Determine the size of the matrix blocks and setup the lookup schemes relating the global degrees of freedom with their "{}blocks"{} and their indices (row/column numbers) in those blocks. The distributions of the preconditioner and the blocks are automatically specified (and assumed to be uniform) at this stage. This method should be used if anything other than the identity dof-\/to-\/block mapping is required. The argument vector dof\+\_\+to\+\_\+block\+\_\+map should be of length ndof. The indices represents the dof types whilst the value represents the block types. In general we want\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a72b4dbe167da59d9ba12c7eff97d77e6}{get\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ignore\+\_\+replacement\+\_\+block}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Put block (i,j) into output\+\_\+matrix. This block accounts for any coarsening of dof types and any replaced dof-\/level blocks above this preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a4c37f469646c689b5f1e79d0953bd588}{get\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ignore\+\_\+replacement\+\_\+block}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return block (i,j). If the optional argument ignore\+\_\+replacement\+\_\+block is true, then any blocks in Replacement\+\_\+dof\+\_\+block\+\_\+pt will be ignored throughout the preconditioning hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a748e2ad8836bc8edf5b9a42373a7ad61}{set\+\_\+master\+\_\+matrix\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{in\+\_\+matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the matrix\+\_\+pt in the upper-\/most master preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9dae351352d344321ea82999d7003e17}{get\+\_\+block\+\_\+other\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{in\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Get a block from a different matrix using the blocking scheme that has already been set up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a69fa79db7073f39a1ac5333c8bd9c1d5}{get\+\_\+blocks}} (\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{required\+\_\+blocks}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+matrix\+\_\+pt}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get all the block matrices required by the block preconditioner. Takes a pointer to a matrix of bools that indicate if a specified sub-\/block is required for the preconditioning operation. Computes the required block matrices, and stores pointers to them in the matrix block\+\_\+matrix\+\_\+pt. If an entry in block\+\_\+matrix\+\_\+pt is equal to NULL on return, that sub-\/block has not been requested and is therefore not available. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a314fc14d95f2833be66067cd5b45e093}{get\+\_\+dof\+\_\+level\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+block}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ignore\+\_\+replacement\+\_\+block}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Gets dof-\/level block (i,j). If \doxylink{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}{Replacement\+\_\+dof\+\_\+block\+\_\+pt(i,j)} is not null, then the replacement block is returned via a deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1df550d281ec99914115edfa1a40b982}{get\+\_\+dof\+\_\+level\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+block}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ignore\+\_\+replacement\+\_\+block}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Gets dof-\/level block (i,j). If \doxylink{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}{Replacement\+\_\+dof\+\_\+block\+\_\+pt(i,j)} is not null, then the replacement block is returned via a deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a51636746e5921ee2845daf60b1c322dc}{get\+\_\+concatenated\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1VectorMatrix}{Vector\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1BlockSelector}{Block\+Selector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{selected\+\_\+block}})
+\begin{DoxyCompactList}\small\item\em Returns a concatenation of the block matrices specified by the argument selected\+\_\+block. The \doxylink{classoomph_1_1VectorMatrix}{Vector\+Matrix} selected\+\_\+block must be correctly sized as it is used to determine the number of sub block matrices to concatenate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af9321cdab3f506ab95fe51cd9b93deab}{get\+\_\+concatenated\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b)
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and extracts the blocks indicated by the block number (the values) in the \doxylink{classoomph_1_1Vector}{Vector} block\+\_\+vec\+\_\+number all at once, then concatenates them without communication. Here, the values in block\+\_\+vec\+\_\+number is the block number in the current preconditioner. This is a non-\/const function because distributions may be created and stored in Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt for future use. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6d5106c0b9dca23aa1cc7f7fd8e696cb}{return\+\_\+concatenated\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes concatenated block ordered vector, b, and copies its entries to the appropriate entries in the naturally ordered vector, v. Here the values in block\+\_\+vec\+\_\+number indicates which blocks the vector b is a concatenation of. The block number are those in the current preconditioner. If the preconditioner is a subsidiary block preconditioner the other entries in v that are not associated with it are left alone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ad356946d5de4f0817cdf8793fa3cdc74}{get\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas the total length of the s vectors is the sum of the lengths of the individual block vectors defined in block\+\_\+vec\+\_\+number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0517a3678def8b89ae69840345a8f838}{get\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas the total length of the s vectors is Nrow. This is simply a wrapper around the other get\+\_\+block\+\_\+vectors(...) function where the block\+\_\+vec\+\_\+number \doxylink{classoomph_1_1Vector}{Vector} is the identity, i.\+e. block\+\_\+vec\+\_\+number is \mbox{[}0, 1, ..., nblock\+\_\+types -\/ 1\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a71d48d8a70151ef0febd4537a2214c53}{return\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the vector of block vectors, s, and copies its entries into the naturally ordered vector, v. If this is a subsidiary block preconditioner only those entries in v that are associated with its blocks are affected. The block\+\_\+vec\+\_\+number indicates which block the vectors in s came from. The block number corresponds to the block numbers in this preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a628f3ab6c3c41ccb449da642fb7e1feb}{return\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the vector of block vectors, s, and copies its entries into the naturally ordered vector, v. If this is a subsidiary block preconditioner only those entries in v that are associated with its blocks are affected. The block\+\_\+vec\+\_\+number indicates which block the vectors in s came from. The block number corresponds to the block numbers in this preconditioner. This is simply a wrapper around the other return\+\_\+block\+\_\+vectors(...) function where the block\+\_\+vec\+\_\+number \doxylink{classoomph_1_1Vector}{Vector} is the identity, i.\+e. block\+\_\+vec\+\_\+number is \mbox{[}0, 1, ..., nblock\+\_\+types -\/ 1\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7efc9f2f0209764902e4e45fcb2556d1}{get\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector, v and returns the n-\/th block vector, b. Here n is the block number in the current preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1dd4d3cd6b64fa64e1ff6730b0deecc7}{return\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the n-\/th block ordered vector, b, and copies its entries to the appropriate entries in the naturally ordered vector, v. Here n is the block number in the current block preconditioner. If the preconditioner is a subsidiary block preconditioner the other entries in v that are not associated with it are left alone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_afd37323d2b5ba31e2d14f3ce8e6e474d}{get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&w)
+\begin{DoxyCompactList}\small\item\em Given the naturally ordered vector, v, return the vector rearranged in block order in w. This function calls get\+\_\+concatenated\+\_\+block\+\_\+vector(...) with the identity block mapping. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a98e920e003f085b02dbb30510fb23a0f}{return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&w, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the block ordered vector, w, and reorders it in natural order. Reordered vector is returned in v. Note\+: If the preconditioner is a subsidiary preconditioner then only the components of the vector associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas that of the vector w is of length this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a80808d42be8db74fd58af80b019bf317}{nblock\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of block types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab6cca480686ea8e44244ac60a0db23ba}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the total number of DOF types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a295ad63173fcd9cfff7cbbdc6c518e9a}{mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to i-\/th mesh (of the various meshes that contain block preconditionable elements of the same number of dof type). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a193776a271f7c23d20d2102de0ff1cb9}{nmesh}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of meshes in Mesh\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a64cfc57ffd16b92ac78499de515138}{block\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the block number corresponding to a global index i\+\_\+dof. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a75742d54177935fb22e59d045209b11e}{index\+\_\+in\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Given a global dof number, returns the index in the block it belongs to. This is the overall index, not local block (in parallel). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af497da125d1b8011af7ed00114f2d205}{block\+\_\+distribution\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the block distributions (const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a439c8a0322fb8a54125f6a1d1988605c}{block\+\_\+distribution\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} b)
+\begin{DoxyCompactList}\small\item\em Access function to the block distributions (non-\/const version). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec42a15c43a7d2b7bb128434be457279}{dof\+\_\+block\+\_\+distribution\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Access function to the dof-\/level block distributions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6837129a0e4a2b7f5c279234c0307184}{master\+\_\+distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the distribution of the master preconditioner. If this preconditioner does not have a master preconditioner then the distribution of this preconditioner is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a45509677ccef78be13b5e4485312ddc1}{ndof\+\_\+types\+\_\+in\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of DOF types in mesh i. WARNING\+: This should only be used by the upper-\/most master block preconditioner. An error is thrown is this function is called from a subsidiary preconditioner. They (and since every block preconditioner can in principle be used as s subsidiary preconditioner\+: all block preconditioners) should store local copies of "{}their meshes"{} (if they\textquotesingle{}re needed for anything) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9ac4335ec07fc13f7bf1093fd0489c52}{is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return true if this preconditioner is a subsidiary preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a804e1975f170d2ad941b3b7d2dd50407}{is\+\_\+master\+\_\+block\+\_\+preconditioner}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return true if this preconditioner is the master block preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ab36e905f7da268328709d62951d64ace}{set\+\_\+block\+\_\+output\+\_\+to\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{basefilename}})
+\begin{DoxyCompactList}\small\item\em Set the base part of the filename to output blocks to. If it is set then all blocks will be output at the end of block\+\_\+setup. If it is left empty nothing will be output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a45b37f1934144d882831bf354f35d035}{disable\+\_\+block\+\_\+output\+\_\+to\+\_\+files}} ()
+\begin{DoxyCompactList}\small\item\em Turn off output of blocks (by clearing the basefilename string). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0bd0ab19a7501b79c16c1283766f0abb}{block\+\_\+output\+\_\+on}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test if output of blocks is on or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adec848504d36ebcd8e27ec60f52f75a6}{output\+\_\+blocks\+\_\+to\+\_\+files}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{basefilename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=8) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output all blocks to numbered files. Called at the end of get blocks if an output filename has been set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aa760ae71a5aae488547ccf721d412b1e}{post\+\_\+block\+\_\+matrix\+\_\+assembly\+\_\+partial\+\_\+clear}} ()
+\begin{DoxyCompactList}\small\item\em A helper method to reduce the memory requirements of block preconditioners. Once the methods get\+\_\+block(...), get\+\_\+blocks(...) and build\+\_\+preconditioner\+\_\+matrix(...) have been called in this and all subsidiary block preconditioners this method can be called to clean up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7f5ac3923f56ebea6458f2f3fe2636c2}{master\+\_\+block\+\_\+preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the master block preconditioner pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7845d9301918e3f5cbecd729ec1e309b}{clear\+\_\+block\+\_\+preconditioner\+\_\+base}} ()
+\begin{DoxyCompactList}\small\item\em Clears all \doxylink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner} data. Called by the destructor and the block\+\_\+setup(...) methods. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a289db176ccafcc3719367fa98340f94d}{document}} ()
+\begin{DoxyCompactList}\small\item\em debugging method to document the setup. Should only be called after block\+\_\+setup(...). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a14e8e7525cf28f702a66245da112f96c}{doftype\+\_\+coarsen\+\_\+map\+\_\+fine}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for the Doftype\+\_\+coarsen\+\_\+map\+\_\+fine variable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7d8075333f8302dd0802b70a590a0b5e}{get\+\_\+fine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the most fine grain dof types in a (possibly coarsened) dof type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a50b76a374797805f64e2af34d581cdc2}{nfine\+\_\+grain\+\_\+dof\+\_\+types\+\_\+in}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for the number of most fine grain dof types in a (possibly coarsened) dof type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_abe3587d642c05b2ace85e3aa7fd3a718}{replacement\+\_\+dof\+\_\+block\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the replaced dof-\/level blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_adbe1ae854ee9831649249d50162bb6a9}{setup\+\_\+matrix\+\_\+vector\+\_\+product}} (\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matvec\+\_\+prod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+col\+\_\+indices}})
+\begin{DoxyCompactList}\small\item\em Setup a matrix vector product. matvec\+\_\+prod\+\_\+pt is a pointer to the \doxylink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}, block\+\_\+pt is a pointer to the block matrix, block\+\_\+col\+\_\+indices is a vector indicating which block indices does the RHS vector we want to multiply the matrix by. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a65059c036724814a0e490716fa6eaf0a}{setup\+\_\+matrix\+\_\+vector\+\_\+product}} (\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matvec\+\_\+prod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+col\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Setup matrix vector product. This is simply a wrapper around the other setup\+\_\+matrix\+\_\+vector\+\_\+product function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_afba1bef13cebdce65a0a49ff3381269a}{internal\+\_\+get\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&w) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Given the naturally ordered vector, v, return the vector rearranged in block order in w. This is a legacy function from the old block preconditioning framework. Kept alive in case it may be needed again. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a679a82067056628cc4bbc8bb68d088f2}{internal\+\_\+return\+\_\+block\+\_\+ordered\+\_\+preconditioner\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&w, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the block ordered vector, w, and reorders it in the natural order. Reordered vector is returned in v. Note\+: If the preconditioner is a subsidiary preconditioner then only the components of the vector associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas that of the vector w is of length this-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7c2b9ed482db072b0cabe5a51eb76efa}{internal\+\_\+nblock\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number internal blocks. This should be the same as the number of internal dof types. Internally, the block preconditioning framework always work with the most fine grain blocks. I.\+e. it always deal with the most fine grain dof-\/level blocks. This allows for coarsening of dof types. When we extract a block, we look at the Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine vector to find out which most fine grain dof types belongs to this block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a4f3efe468cd6e133d6840ede8c3687b5}{internal\+\_\+ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of internal dof types. This is the number of most fine grain dof types. The preconditioner writer should not have to concern him/her-\/self with the internal dof/block types. Thus this fuction is moved to private. We have kept this function alive since it it still used deep within the inner workings of the block preconditioning framework. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a04e260cc4160a952db2d410109fb2684}{internal\+\_\+return\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the n-\/th block ordered vector, b, and copies its entries to the appropriate entries in the naturally ordered vector, v. Here n is the block number in the current block preconditioner. If the preconditioner is a subsidiary block preconditioner the other entries in v that are not associated with it are left alone. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae3cf61f61e1aa50e2315e999827e7d59}{internal\+\_\+get\+\_\+block\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A helper function, takes the naturally ordered vector, v, and extracts the n-\/th block vector, b. Here n is the block number in the current preconditioner. NOTE\+: The ordering of the vector b is the same as the ordering of the block matrix from internal\+\_\+get\+\_\+block(...). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ace6e9dbdfe9a1c3571452e2cd6ec9780}{internal\+\_\+get\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a0cde8af922cd8054dbf352527dd682b1}{internal\+\_\+get\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A helper function, takes the naturally ordered vector and rearranges it into a vector of sub vectors corresponding to the blocks, so s\mbox{[}b\mbox{]}\mbox{[}i\mbox{]} contains the i-\/th entry in the vector associated with block b. The block\+\_\+vec\+\_\+number indicates which blocks we want. These blocks and vectors are those corresponding to the internal blocks. Note\+: If the preconditioner is a subsidiary preconditioner then only the sub-\/vectors associated with the blocks of the subsidiary preconditioner will be included. Hence the length of v is \doxylink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow()} whereas the total length of the s vectors is the sum of the Nrow of the sub vectors. This is simply a wrapper around the other internal\+\_\+get\+\_\+block\+\_\+vectors(...) function with the identity block\+\_\+vec\+\_\+number vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a2ca7f125e50493073d116ba8da271af5}{internal\+\_\+return\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A helper function, takes the vector of block vectors, s, and copies its entries into the naturally ordered vector, v. If this is a subsidiary block preconditioner only those entries in v that are associated with its blocks are affected. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9e2ce77e3efbcdd465f7ad7252936dfd}{internal\+\_\+return\+\_\+block\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{v}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A helper function, takes the vector of block vectors, s, and copies its entries into the naturally ordered vector, v. If this is a subsidiary block preconditioner only those entries in v that are associated with its blocks are affected. This is simple a wrapper around the other internal\+\_\+return\+\_\+block\+\_\+vectors(...) function with the identity block\+\_\+vec\+\_\+number vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_abe001ffe270c96e761ec5205364976a7}{internal\+\_\+get\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+block}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Gets block (i,j) from the matrix pointed to by Matrix\+\_\+pt and returns it in output\+\_\+block. This is associated with the internal blocks. Please use the other get\+\_\+block(...) function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a4f714d01cd2fdb791aa0795f34b9610a}{internal\+\_\+get\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+block}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Gets block (i,j) from the matrix pointed to by Matrix\+\_\+pt and returns it in output\+\_\+block. This is associated with the internal blocks. Please use the other get\+\_\+block(...) function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af3eadb5d8d36200c4738537eac1647a6}{internal\+\_\+block\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the block number corresponding to a global index i\+\_\+dof. This returns the block number corresponding to the internal blocks. What this means is that this returns the most fine grain dof-\/block number which this global index i\+\_\+dof corresponds to. Since the writer of the preconditioner does not need to care about the internal block types, this function should not be used and thus moved to private. This function should not be removed since it is still used deep within the inner workings of the block preconditioning framework. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_affcfd24c1ba15bf9cac712ffd46dc283}{internal\+\_\+index\+\_\+in\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the index in the block corresponding to a global block number i\+\_\+dof. The index returned corresponds to the internal blocks, which is the most fine grain dof blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a92aa6c59cd0b4dc15705d2b90f9bd206}{internal\+\_\+block\+\_\+distribution\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the internal block distributions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9b3c4072be2bf4f0dfdd18f56a5d51bf}{insert\+\_\+auxiliary\+\_\+block\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+vec\+\_\+number}}, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em insert a \doxylink{classoomph_1_1Vector}{Vector$<$unsigned$>$} and Linear\+Algebra\+Distribution\texorpdfstring{$\ast$}{*} pair into Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt. The Auxiliary\+\_\+block\+\_\+distribution\+\_\+pt should only contain pointers to distributions concatenated at this block level. We try to ensure this by checking if the block\+\_\+vec\+\_\+number vector is within the range \doxylink{classoomph_1_1BlockPreconditioner_a80808d42be8db74fd58af80b019bf317}{nblock\+\_\+types()}. Of course, this does not guarantee correctness, but this is the least we can do. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a4d8ff67e34e85a71c0f9bb68c0b10496}{block\+\_\+matrix\+\_\+test}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+matrix\+\_\+pt}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Private helper function to check that every element in the block matrix (i,j) matches the corresponding element in the original matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_acac55e8dea1a0f63fcf32b7b058b0979}{get\+\_\+index\+\_\+of\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{my\+Type}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{my\+Type}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sorted}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get the index of first occurrence of value in a vector. If the element does not exist, -\/1 is returned. The optional parameter indicates of the \doxylink{classoomph_1_1Vector}{Vector} is sorted or not. Complexity\+: if the \doxylink{classoomph_1_1Vector}{Vector} is sorted, then on average, logarithmic in the distance between first and last\+: Performs approximately log2(\+N)+2 element comparisons. Otherwise, up to linear in the distance between first and last\+: Compares elements until a match is found. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_a7bd8801e4395ccb88fe1f4296e77e9ab}{Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_ab6e58c82c3cc4f4e44434a7d92d8e776}{Preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a63fefcfb21ae1c2a3b4232d2dfbb6340}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ab60952a82cc1b6b91fff5924eaa62c0e}{\texorpdfstring{$\sim$}{\string~}\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1e469ffc87f31f6f2eebbe5ccf03d78b}{preconditioner\+\_\+solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ac2c0f7f39eccd814e72cc5813ec864e0}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner\+: store the matrix pointer and the communicator pointer then call preconditioner specific \doxylink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Compatability layer for old preconditioners where problem pointers were needed. The problem pointer is only used to get a communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_aad84467ec9243138945c4d5bbca8fa6c}{enable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Set up the block preconditioner quietly! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a221f120f734fd3ca851db42b8defb53d}{disable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Be verbose in the block preconditioner setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up memory (empty). Generic interface function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_af459b7333c4c64435fd8fa933535901f}{set\+\_\+matrix\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get function for comm pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a306f5a52f493816fcfda2dc9b2ee1dbf}{set\+\_\+comm\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a9202e15534f063a8e21a8a60623eac9f}{setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the time to setup the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1183f65956ef8a5b332a1246f418e907}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. There\textquotesingle{}s an assumption here that the block preconditioner will be in CR form but since that assumption is hard coded all over \doxylink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner} we\textquotesingle{}re safe. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a61a462f4266c22050b4ab9ab441c77a6}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. Version for coarsening dof-\/types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer the Navier Stokes preconditioner (inexact solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}{Solid\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the solid preconditioner (inexact solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid/solid interaction matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid/fluid solid interaction matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating the preconditioner has been set up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}
+\begin{DoxyCompactList}\small\item\em Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}
+\begin{DoxyCompactList}\small\item\em Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Set Doc\+\_\+time to true for outputting results of timings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the navier stokes mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a}{Wall\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em pointer to the solid mesh \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae055f998f6145656352aacac22e545ad}{set\+\_\+nmesh}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Specify the number of meshes required by this block preconditioner. Note\+: elements in different meshes correspond to different types of DOF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_af97821621b570d409e6662939e5f818d}{set\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Set the i-\/th mesh for this block preconditioner. Note\+: The method set\+\_\+nmesh(...) must be called before this method to specify the number of meshes. By default, it is assumed that each mesh only contains elements of the same type. This condition may be relaxed by setting the boolean allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh to true, however, each mesh must only contain elements with the same number of dof types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a8a0ae880f098d5b1e9df78fc74c31dbf}{set\+\_\+replacement\+\_\+dof\+\_\+block}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{block\+\_\+j}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}replacement\+\_\+dof\+\_\+block\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Set replacement dof-\/level blocks. Only dof-\/level blocks can be set. This is important due to how the dof type coarsening feature operates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a6fb68db9e79048615984b005f8aa43b3}{any\+\_\+mesh\+\_\+distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Check if any of the meshes are distributed. This is equivalent to problem.\+distributed() and is used as a replacement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_abb4dff3469cc6718103fddfdf3f3a7bb}{internal\+\_\+dof\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of the block associated with global unknown i\+\_\+dof. If this preconditioner is a subsidiary block preconditioner then the block number in the subsidiary block preconditioner is returned. If a particular global DOF is not associated with this preconditioner then -\/1 is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1e0a33327b5042dfba04baf46c045373}{internal\+\_\+index\+\_\+in\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+dof}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the row/column number of global unknown i\+\_\+dof within it\textquotesingle{}s block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ac460225afc092cc5ed9d77acc6316536}{internal\+\_\+block\+\_\+dimension}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of degrees of freedom in block b. Note that if this preconditioner acts as a subsidiary preconditioner then b refers to the block number in the subsidiary preconditioner not the master block preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_abe03c970690224b46a29e55e16992dd7}{internal\+\_\+dof\+\_\+block\+\_\+dimension}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the size of the dof "{}block"{} i, i.\+e. how many degrees of freedom are associated with it. Note that if this preconditioner acts as a subsidiary preconditioner, then i refers to the block number in the subsidiary preconditioner not the master block preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3e5b553f65e6c25354a5c908d507e8ee}{master\+\_\+nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of dofs (number of rows or columns) in the overall problem. The prefix "{}master\+\_\+"{} is sort of redundant when used as a stand-\/alone block preconditioner but is required to avoid ambiguities. The latter is stored (and maintained) separately for each specific block preconditioner regardless of its role. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a7297e4d24c2c7ae7af6a9ad009669928}{internal\+\_\+master\+\_\+dof\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Takes the block number within this preconditioner and returns the corresponding block number in the master preconditioner. If this preconditioner does not have a master block preconditioner then the block number passed is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aab9893960364a7fa71fdc4628a453b8a}{internal\+\_\+preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the internal preconditioner matrix distribution pt. preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt always returns the concatenation of the internal block distributions. Since the writer of the preconditioner does not need to concern themselves with the internal dof/block, please use \doxylink{classoomph_1_1BlockPreconditioner_a1fc376778f57a98580e6355e09db7a9d}{preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a1fc376778f57a98580e6355e09db7a9d}{preconditioner\+\_\+matrix\+\_\+distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the preconditioner matrix distribution pointer. This is the concatenation of the block distributions with the identity ordering. I.\+e. if this preconditioner has three block types, with the three associated block distributions dist\+\_\+b0, dist\+\_\+b1 and dist\+\_\+b2, then this distribution is\+: Linear\+Algebra\+Distribution\+Helpers\+::concatenate(dist\+\_\+b0, dist\+\_\+b1, dist\+\_\+b2). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MapMatrix}{Map\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ad2cd49c5c823c4202046e97038f6e080}{Replacement\+\_\+dof\+\_\+block\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The replacement dof-\/level blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a59e83eca59e3cdc41a93668539e138f1}{Block\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The distribution for the blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_ae047d81b8179dfd09b70cf35f40f62ca}{Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+coarse}}
+\begin{DoxyCompactList}\small\item\em Mapping for block types to dof types. These are the dof types the writer of the preconditioner expects. For the upper-\/most master block preconditioner, this would be the sum of the dof types in the meshes. For subsidiary block preconditioners, this is determined by the parent preconditioner when passing in the doftype\+\_\+coarsen\+\_\+map\+\_\+coarse vector in turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(...). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a278946969944848b12bdc2ceaed91a07}{Block\+\_\+to\+\_\+dof\+\_\+map\+\_\+fine}}
+\begin{DoxyCompactList}\small\item\em Mapping for the block types to the most fine grain dof types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a015ba85d839a80512c6c4065e39a3d4a}{Doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}}
+\begin{DoxyCompactList}\small\item\em Mapping for dof types within THIS precondition. This is usually passed down from the parent preconditioner. This list is used to tell which does types should be considered as a single dof type within this preconditioner. I.\+e. we "{}coarsen"{} the dof types. The values are local to this preconditioner, for example, even if the Doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse = \mbox{[}2,3,4\mbox{]}, the vector Doftype\+\_\+coarsen\+\_\+map\+\_\+coarse = \mbox{[}\mbox{[}0\mbox{]},\mbox{[}1,2\mbox{]}\mbox{]}, saying your local dof types 0 should be considered as dof type 0 and dof types 1 and 2 are considered as dof type 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aa4e2e47f537f9b6b4deae5792c493d65}{Doftype\+\_\+coarsen\+\_\+map\+\_\+fine}}
+\begin{DoxyCompactList}\small\item\em Mapping the dof types within this preconditioner. The values in here refers to the most grain dof types. This list is automatically generated either in block\+\_\+setup(...) (for the top-\/most preconditioner) or the turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(...) function. Please refer to the comment above Doftype\+\_\+coarsen\+\_\+map\+\_\+coarse for more details. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a38de6514d7065086335e0e6f60dc77a9}{Internal\+\_\+block\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the default distribution for each internal block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a21867eb330dd1177c530a590ad1fa571}{Dof\+\_\+block\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the default distribution for each dof block at this level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a2f3a3ac8c192a83facd5b560f017413e}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of unsigned to indicate which meshes contain multiple element types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a89adb506e8f9103c80b4b36cc309f536}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to the meshes containing the elements used in the block preconditioner. Const pointers to prevent modification of the mesh by the preconditioner (this could be relaxed if needed). If this is a subsidiary preconditioner, then the information is looked up in the master preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a43e9d73ff61daa00aea4e4deff0d6aff}{Ndof\+\_\+types\+\_\+in\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Storage for number of types of degree of freedom of the elements in each mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a06c7426a2c8c096c8f4dc583444e0e0e}{Internal\+\_\+nblock\+\_\+types}}
+\begin{DoxyCompactList}\small\item\em Number of different block types in this preconditioner. Note that this information is maintained if used as a subsidiary or stand-\/alone block preconditioner, in the latter case it stores the number of blocks within the subsidiary preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a3985436e4645c202eadd47a4f4f466e2}{Internal\+\_\+ndof\+\_\+types}}
+\begin{DoxyCompactList}\small\item\em Number of different DOF types in this preconditioner. Note that this information is maintained if used as a subsidiary or stand-\/alone block preconditioner, in the latter case it stores the number of dofs within the subsidiary preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ad191d6be6caf8875700f54c939ec33e6}{Silent\+\_\+preconditioner\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether or not the build should be done silently. \end{DoxyCompactList}\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a2a6b2f6cd34495167ea766b47f055a7d}{Stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the output stream -- defaults to std\+::cout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner} is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an "{}exact"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00050}{50}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78}\label{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!FSIPreconditioner@{FSIPreconditioner}}
+\index{FSIPreconditioner@{FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{FSIPreconditioner()}{FSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: By default use block triangular form with retained fluid on solid terms. A problem pointer is required for the underlying \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{56}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, \mbox{\hyperlink{linear__solver_8cc_source_l02819}{oomph\+::\+Exact\+Preconditioner\+Factory\+::create\+\_\+exact\+\_\+preconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02851}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+nmesh()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc}\label{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!````~FSIPreconditioner@{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner}}
+\index{````~FSIPreconditioner@{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner()}{\string~FSIPreconditioner()}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Clean up. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{94}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4}\label{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!FSIPreconditioner@{FSIPreconditioner}}
+\index{FSIPreconditioner@{FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{FSIPreconditioner()}{FSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner}{FSIPreconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340}\label{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
+\index{disable\_doc\_time@{disable\_doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_time()}{disable\_doc\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::disable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00212}{212}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0}\label{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
+\index{enable\_doc\_time@{enable\_doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_time()}{enable\_doc\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::enable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00206}{206}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}\label{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!navier\_stokes\_preconditioner\_pt@{navier\_stokes\_preconditioner\_pt}}
+\index{navier\_stokes\_preconditioner\_pt@{navier\_stokes\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{navier\_stokes\_preconditioner\_pt()}{navier\_stokes\_preconditioner\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}} \texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Navier Stokes preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00199}{199}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b}\label{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Apply preconditioner to r. 
+
+Apply preconditioner to \doxylink{classoomph_1_1Vector}{Vector} r. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{374}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04185}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04488}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80}\label{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}}
+\index{set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_navier\_stokes\_mesh()}{set\_navier\_stokes\_mesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are more than one type of elements in same mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{165}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}\label{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_solid\_preconditioner\_pt@{set\_solid\_preconditioner\_pt}}
+\index{set\_solid\_preconditioner\_pt@{set\_solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_solid\_preconditioner\_pt()}{set\_solid\_preconditioner\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::set\+\_\+solid\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}}]{solid\+\_\+preconditioner\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Set solid preconditioner (deletes existing one) 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{122}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{solid\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5}\label{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_wall\_mesh@{set\_wall\_mesh}}
+\index{set\_wall\_mesh@{set\_wall\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_wall\_mesh()}{set\_wall\_mesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::set\+\_\+wall\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter function for the mesh containing the block-\/preconditionable FSI solid elements. The optional argument indicates if there are more than one type of elements in the same mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{180}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01782}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e}\label{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Setup the preconditioner. 
+
+Setup the preconditioner. Note\+: \doxylink{classoomph_1_1Matrix}{Matrix} must be a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{270}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02482}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02037}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types\+\_\+in\+\_\+mesh()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02866}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::set\+\_\+mesh()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8h_source_l00732}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00147}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02397}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::setup\+\_\+matrix\+\_\+vector\+\_\+product()}}, \mbox{\hyperlink{preconditioner_8h_source_l00199}{oomph\+::\+Preconditioner\+::setup\+\_\+time()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02375}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}\label{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!solid\_preconditioner\_pt@{solid\_preconditioner\_pt}}
+\index{solid\_preconditioner\_pt@{solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{solid\_preconditioner\_pt()}{solid\_preconditioner\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::solid\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/only access to solid preconditoner (use set\+\_\+... to set it) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{133}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b}\label{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_diagonal\_version@{use\_block\_diagonal\_version}}
+\index{use\_block\_diagonal\_version@{use\_block\_diagonal\_version}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_diagonal\_version()}{use\_block\_diagonal\_version()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+diagonal\+\_\+version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/diagonal preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{140}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69}\label{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_triangular\_version\_with\_fluid\_on\_solid@{use\_block\_triangular\_version\_with\_fluid\_on\_solid}}
+\index{use\_block\_triangular\_version\_with\_fluid\_on\_solid@{use\_block\_triangular\_version\_with\_fluid\_on\_solid}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_triangular\_version\_with\_fluid\_on\_solid()}{use\_block\_triangular\_version\_with\_fluid\_on\_solid()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/triangular preconditioner in which action of fluid dofs onto solid equations is retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{148}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad}\label{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_triangular\_version\_with\_solid\_on\_fluid@{use\_block\_triangular\_version\_with\_solid\_on\_fluid}}
+\index{use\_block\_triangular\_version\_with\_solid\_on\_fluid@{use\_block\_triangular\_version\_with\_solid\_on\_fluid}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_triangular\_version\_with\_solid\_on\_fluid()}{use\_block\_triangular\_version\_with\_solid\_on\_fluid()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/triangular preconditioner in which action of solid dofs onto fluid equations is retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{156}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80}\label{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+\index{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{253}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5}\label{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Allow\_multiple\_element\_type\_in\_wall\_mesh@{Allow\_multiple\_element\_type\_in\_wall\_mesh}}
+\index{Allow\_multiple\_element\_type\_in\_wall\_mesh@{Allow\_multiple\_element\_type\_in\_wall\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Allow\_multiple\_element\_type\_in\_wall\_mesh}{Allow\_multiple\_element\_type\_in\_wall\_mesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{256}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{set\+\_\+wall\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9}\label{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Doc\_time@{Doc\_time}}
+\index{Doc\_time@{Doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Doc\_time}{Doc\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Doc\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set Doc\+\_\+time to true for outputting results of timings. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{243}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00212}{disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00206}{enable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57}\label{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Matrix\_vector\_product\_0\_1\_pt@{Matrix\_vector\_product\_0\_1\_pt}}
+\index{Matrix\_vector\_product\_0\_1\_pt@{Matrix\_vector\_product\_0\_1\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Matrix\_vector\_product\_0\_1\_pt}{Matrix\_vector\_product\_0\_1\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid/solid interaction matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{226}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c}\label{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Matrix\_vector\_product\_1\_0\_pt@{Matrix\_vector\_product\_1\_0\_pt}}
+\index{Matrix\_vector\_product\_1\_0\_pt@{Matrix\_vector\_product\_1\_0\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Matrix\_vector\_product\_1\_0\_pt}{Matrix\_vector\_product\_1\_0\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid/fluid solid interaction matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{229}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d}\label{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}}
+\index{Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_mesh\_pt}{Navier\_stokes\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the navier stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{246}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}\label{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}}
+\index{Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_preconditioner\_pt}{Navier\_stokes\_preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer the Navier Stokes preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{220}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00199}{navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346}\label{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
+\index{Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_has\_been\_setup}{Preconditioner\_has\_been\_setup}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean indicating the preconditioner has been set up. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{232}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e}\label{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Retain\_fluid\_onto\_solid\_terms@{Retain\_fluid\_onto\_solid\_terms}}
+\index{Retain\_fluid\_onto\_solid\_terms@{Retain\_fluid\_onto\_solid\_terms}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Retain\_fluid\_onto\_solid\_terms}{Retain\_fluid\_onto\_solid\_terms}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{240}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{use\+\_\+block\+\_\+diagonal\+\_\+version()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c}\label{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Retain\_solid\_onto\_fluid\_terms@{Retain\_solid\_onto\_fluid\_terms}}
+\index{Retain\_solid\_onto\_fluid\_terms@{Retain\_solid\_onto\_fluid\_terms}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Retain\_solid\_onto\_fluid\_terms}{Retain\_solid\_onto\_fluid\_terms}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+FSIPreconditioner\+::\+Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{236}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{use\+\_\+block\+\_\+diagonal\+\_\+version()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}\label{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}}
+\index{Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Solid\_preconditioner\_pt}{Solid\_preconditioner\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Solid\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the solid preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{223}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{solid\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a}\label{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
+\index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+pointer to the solid mesh 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{249}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{set\+\_\+wall\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__preconditioners_8h}{fsi\+\_\+preconditioners.\+h}}\end{DoxyCompactItemize}

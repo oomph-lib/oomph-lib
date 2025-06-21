@@ -1,0 +1,208 @@
+\doxysection{oomph\+::One\+DMesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1OneDMesh}{}\label{classoomph_1_1OneDMesh}\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+
+
+1D mesh consisting of N one-\/dimensional elements from the QElement family.  
+
+
+
+
+{\ttfamily \#include $<$one\+\_\+d\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::One\+DMesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1OneDMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OneDMesh_ac6962f5c0184d302544253e3b4407c48}{One\+DMesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{n\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{length}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, n\+\_\+element, length of domain, length, and pointer to timestepper (defaults to a Steady timestepper so we don\textquotesingle{}t need to specify one in problems without time-\/dependence). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OneDMesh_a1a8b9e65226f10dfbb48fe2362e83014}{One\+DMesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{n\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, n\+\_\+element, minimum coordinate, xmin, maximum coordinate, xmax, and a pointer to a timestepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1OneDMesh_a780eb2a0fdf02690aa5e93efe5ff3848}{check\+\_\+1d}} () \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Mesh can only be built with 1D elements (but can be either T or Q so can\textquotesingle{}t use the normal assert\+\_\+geometric\+\_\+element function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1OneDMesh_a5a1a27eaa9d58bb85facb617127e9f0a}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh constuction routine, called by all constructors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh_ab1c25c2437f203dd1f6d42ec0613e6a1}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh_ac625d93f5299895ad5801918a20aea31}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh_a9c5ebabd7b2286b5f489563b1106e1b4}{Length}}
+\begin{DoxyCompactList}\small\item\em Length of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1OneDMesh_a6f6f4087d7dd7417c79f39f2c3a2865a}{N}}
+\begin{DoxyCompactList}\small\item\em Number of elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+One\+DMesh$<$ ELEMENT $>$}
+1D mesh consisting of N one-\/dimensional elements from the QElement family. 
+
+\[ x \in [Xmin,Xmax] \] The mesh has two boundaries\+:
+\begin{DoxyItemize}
+\item Boundary 0 is at $x=Xmin$.
+\item Boundary 1 is at $x=Xmax$.
+\end{DoxyItemize}There is one node on each of these boundaries. 
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00051}{51}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1OneDMesh_ac6962f5c0184d302544253e3b4407c48}\label{classoomph_1_1OneDMesh_ac6962f5c0184d302544253e3b4407c48} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!OneDMesh@{OneDMesh}}
+\index{OneDMesh@{OneDMesh}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OneDMesh()}{OneDMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+One\+DMesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{n\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements, n\+\_\+element, length of domain, length, and pointer to timestepper (defaults to a Steady timestepper so we don\textquotesingle{}t need to specify one in problems without time-\/dependence). 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00058}{58}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{one__d__mesh_8template_8cc_source_l00038}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, and \mbox{\hyperlink{one__d__mesh_8h_source_l00085}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::check\+\_\+1d()}}.
+
+\Hypertarget{classoomph_1_1OneDMesh_a1a8b9e65226f10dfbb48fe2362e83014}\label{classoomph_1_1OneDMesh_a1a8b9e65226f10dfbb48fe2362e83014} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!OneDMesh@{OneDMesh}}
+\index{OneDMesh@{OneDMesh}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{OneDMesh()}{OneDMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+One\+DMesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{n\+\_\+element,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{xmin,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{xmax,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements, n\+\_\+element, minimum coordinate, xmin, maximum coordinate, xmax, and a pointer to a timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00071}{71}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{one__d__mesh_8template_8cc_source_l00038}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, and \mbox{\hyperlink{one__d__mesh_8h_source_l00085}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::check\+\_\+1d()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1OneDMesh_a5a1a27eaa9d58bb85facb617127e9f0a}\label{classoomph_1_1OneDMesh_a5a1a27eaa9d58bb85facb617127e9f0a} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Generic mesh constuction routine, called by all constructors. 
+
+The generic mesh construction routine --- this contains all the hard work and is called by all constructors. 
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8template_8cc_source_l00038}{38}} of file \mbox{\hyperlink{one__d__mesh_8template_8cc_source}{one\+\_\+d\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{one__d__mesh_8h_source_l00058}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::\+One\+DMesh()}}, and \mbox{\hyperlink{one__d__mesh_8h_source_l00071}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::\+One\+DMesh()}}.
+
+\Hypertarget{classoomph_1_1OneDMesh_a780eb2a0fdf02690aa5e93efe5ff3848}\label{classoomph_1_1OneDMesh_a780eb2a0fdf02690aa5e93efe5ff3848} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!check\_1d@{check\_1d}}
+\index{check\_1d@{check\_1d}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{check\_1d()}{check\_1d()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::check\+\_\+1d (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Mesh can only be built with 1D elements (but can be either T or Q so can\textquotesingle{}t use the normal assert\+\_\+geometric\+\_\+element function. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00085}{85}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{one__d__mesh_8h_source_l00058}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::\+One\+DMesh()}}, and \mbox{\hyperlink{one__d__mesh_8h_source_l00071}{oomph\+::\+One\+DMesh$<$ ELEMENT $>$\+::\+One\+DMesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1OneDMesh_a9c5ebabd7b2286b5f489563b1106e1b4}\label{classoomph_1_1OneDMesh_a9c5ebabd7b2286b5f489563b1106e1b4} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!Length@{Length}}
+\index{Length@{Length}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Length}{Length}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Length\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Length of the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00107}{107}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1OneDMesh_a6f6f4087d7dd7417c79f39f2c3a2865a}\label{classoomph_1_1OneDMesh_a6f6f4087d7dd7417c79f39f2c3a2865a} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!N@{N}}
+\index{N@{N}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::N\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00110}{110}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1OneDMesh_ac625d93f5299895ad5801918a20aea31}\label{classoomph_1_1OneDMesh_ac625d93f5299895ad5801918a20aea31} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!Xmax@{Xmax}}
+\index{Xmax@{Xmax}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xmax}{Xmax}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Xmax\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00104}{104}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1OneDMesh_ab1c25c2437f203dd1f6d42ec0613e6a1}\label{classoomph_1_1OneDMesh_ab1c25c2437f203dd1f6d42ec0613e6a1} 
+\index{oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}!Xmin@{Xmin}}
+\index{Xmin@{Xmin}!oomph::OneDMesh$<$ ELEMENT $>$@{oomph::OneDMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xmin}{Xmin}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1OneDMesh}{oomph\+::\+One\+DMesh}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{ELEMENT}} $>$\+::\+Xmin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{one__d__mesh_8h_source_l00101}{101}} of file \mbox{\hyperlink{one__d__mesh_8h_source}{one\+\_\+d\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{one__d__mesh_8h}{one\+\_\+d\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{one__d__mesh_8template_8cc}{one\+\_\+d\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

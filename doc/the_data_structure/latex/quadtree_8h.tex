@@ -1,0 +1,35 @@
+\doxysection{quadtree.\+h File Reference}
+\hypertarget{quadtree_8h}{}\label{quadtree_8h}\index{quadtree.h@{quadtree.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1QuadTree}{oomph\+::\+Quad\+Tree}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1QuadTree}{Quad\+Tree} class\+: Recursively defined, generalised quadtree. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QuadTreeRoot}{oomph\+::\+Quad\+Tree\+Root}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1QuadTreeRoot}{Quad\+Tree\+Root} is a \doxylink{classoomph_1_1QuadTree}{Quad\+Tree} that forms the root of a (recursive) quadtree. The "{}root node"{} is special as it holds additional information about its neighbours and their relative rotation (inside a \doxylink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest}). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QuadTreeForest}{oomph\+::\+Quad\+Tree\+Forest}}
+\begin{DoxyCompactList}\small\item\em A \doxylink{classoomph_1_1QuadTreeForest}{Quad\+Tree\+Forest} consists of a collection of Quad\+Tree\+Roots. Each member tree can have neighbours to its S/\+W/\+N/E and the orientation of their compasses can differ, allowing for complex, unstructured meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames}{oomph\+::\+Quad\+Tree\+Names}}
+\begin{DoxyCompactList}\small\item\em Namespace for \doxylink{classoomph_1_1QuadTree}{Quad\+Tree} directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81}{oomph\+::\+Quad\+Tree\+Names\+::\+SW}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da03479dd620c853ccd3c767125d6f29a4}{oomph\+::\+Quad\+Tree\+Names\+::\+SE}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daa01c8378aad2e474250e6ebefb9fa942}{oomph\+::\+Quad\+Tree\+Names\+::\+NW}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daa66bca2eb077ff943b39305b1965826f}{oomph\+::\+Quad\+Tree\+Names\+::\+NE}}
+, \newline
+\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a}{oomph\+::\+Quad\+Tree\+Names\+::N}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265}{oomph\+::\+Quad\+Tree\+Names\+::E}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{oomph\+::\+Quad\+Tree\+Names\+::S}}
+, \mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6}{oomph\+::\+Quad\+Tree\+Names\+::W}}
+, \newline
+\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da9eb65052764b429e1b5d7b313d751629}{oomph\+::\+Quad\+Tree\+Names\+::\+OMEGA}} = 26
+ \}
+\begin{DoxyCompactList}\small\item\em Directions. OMEGA is used if a direction is undefined in a certain context. \end{DoxyCompactList}\end{DoxyCompactItemize}

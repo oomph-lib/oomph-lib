@@ -1,0 +1,44 @@
+\doxysection{static\+\_\+two\+\_\+layer.\+cc File Reference}
+\hypertarget{static__two__layer_8cc}{}\label{static__two__layer_8cc}\index{static\_two\_layer.cc@{static\_two\_layer.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCapProblem}{Cap\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A Problem class that solves the Navier--Stokes equations + free surface in a 2D geometry using a spine-\/based node update. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Two layer mesh which employs a pseudo-\/solid node-\/update strategy. This class is essentially a wrapper to an Elastic\+Rectangular\+Quad\+Mesh, with an additional boundary to represent the interface between the two fluid layers. In addition, the mesh paritions the elements into those above and below the interface and relabels boundaries so that we can impose a volume constraint on the lower or upper fluid. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class that solves the Navier--Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+fct}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&normal)
+\begin{DoxyCompactList}\small\item\em Function that specifies the wall unit normal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{static__two__layer_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main driver\+: Build problem and initiate parameter study. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{static__two__layer_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{static__two__layer_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{static\_two\_layer.cc@{static\_two\_layer.cc}!main@{main}}
+\index{main@{main}!static\_two\_layer.cc@{static\_two\_layer.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main driver\+: Build problem and initiate parameter study. 
+
+
+
+Definition at line \mbox{\hyperlink{static__two__layer_8cc_source_l01229}{1229}} of file \mbox{\hyperlink{static__two__layer_8cc_source}{static\+\_\+two\+\_\+layer.\+cc}}.
+
+
+
+References \mbox{\hyperlink{static__single__layer_8cc_source_l00419}{Cap\+Problem$<$ ELEMENT $>$\+::parameter\+\_\+study()}}.
+

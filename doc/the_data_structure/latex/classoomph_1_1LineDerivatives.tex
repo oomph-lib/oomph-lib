@@ -1,0 +1,74 @@
+\doxysection{oomph\+::Line\+Derivatives Class Reference}
+\hypertarget{classoomph_1_1LineDerivatives}{}\label{classoomph_1_1LineDerivatives}\index{oomph::LineDerivatives@{oomph::LineDerivatives}}
+
+
+Class that establishes the surface derivative functions for Line\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes.  
+
+
+
+
+{\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Line\+Derivatives\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.861539cm]{classoomph_1_1LineDerivatives}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LineDerivatives_ab8e7af32651605a82d53995caddbe7fb}{Line\+Derivatives}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LineDerivatives_aa50209ce504b25d255f9f0a6df36c0e3}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsids}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&interpolated\+\_\+x, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that establishes the surface derivative functions for Line\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
+
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00660}{660}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1LineDerivatives_ab8e7af32651605a82d53995caddbe7fb}\label{classoomph_1_1LineDerivatives_ab8e7af32651605a82d53995caddbe7fb} 
+\index{oomph::LineDerivatives@{oomph::LineDerivatives}!LineDerivatives@{LineDerivatives}}
+\index{LineDerivatives@{LineDerivatives}!oomph::LineDerivatives@{oomph::LineDerivatives}}
+\doxysubsubsection{\texorpdfstring{LineDerivatives()}{LineDerivatives()}}
+{\footnotesize\ttfamily oomph\+::\+Line\+Derivatives\+::\+Line\+Derivatives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00664}{664}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1LineDerivatives_aa50209ce504b25d255f9f0a6df36c0e3}\label{classoomph_1_1LineDerivatives_aa50209ce504b25d255f9f0a6df36c0e3} 
+\index{oomph::LineDerivatives@{oomph::LineDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::LineDerivatives@{oomph::LineDerivatives}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Line\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{surface\+\_\+gradient,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations. 
+
+Specialise the surface derivatives for the line interface case. 
+
+Definition at line \mbox{\hyperlink{interface__elements_8cc_source_l00757}{757}} of file \mbox{\hyperlink{interface__elements_8cc_source}{interface\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface__elements_8h}{interface\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{interface__elements_8cc}{interface\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

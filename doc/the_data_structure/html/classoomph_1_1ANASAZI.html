@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ANASAZI Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ANASAZI.html">ANASAZI</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1ANASAZI-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ANASAZI Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for the <a class="el" href="namespaceAnasazi.html">Anasazi</a> eigensolver.  
+ <a href="classoomph_1_1ANASAZI.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ANASAZI:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ANASAZI.png" usemap="#oomph::ANASAZI_map" alt=""/>
+  <map id="oomph::ANASAZI_map" name="oomph::ANASAZI_map">
+<area href="classoomph_1_1EigenSolver.html" title="Base class for all EigenProblem solves. This simply defines standard interfaces so that different sol..." alt="oomph::EigenSolver" shape="rect" coords="0,56,243,80"/>
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,243,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af90440448c3cbbb7c21bc6ce3bbb2d0a" id="r_af90440448c3cbbb7c21bc6ce3bbb2d0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#af90440448c3cbbb7c21bc6ce3bbb2d0a">ANASAZI</a> ()</td></tr>
+<tr class="memdesc:af90440448c3cbbb7c21bc6ce3bbb2d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:af90440448c3cbbb7c21bc6ce3bbb2d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfab863205ce697807b4a1ac5e74ac8f" id="r_abfab863205ce697807b4a1ac5e74ac8f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#abfab863205ce697807b4a1ac5e74ac8f">ANASAZI</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ANASAZI.html">ANASAZI</a> &amp;)</td></tr>
+<tr class="memdesc:abfab863205ce697807b4a1ac5e74ac8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty copy constructor.  <br /></td></tr>
+<tr class="separator:abfab863205ce697807b4a1ac5e74ac8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7e7f7fdc23c04c419fba24474f95a7" id="r_a3f7e7f7fdc23c04c419fba24474f95a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a3f7e7f7fdc23c04c419fba24474f95a7">~ANASAZI</a> ()</td></tr>
+<tr class="memdesc:a3f7e7f7fdc23c04c419fba24474f95a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, delete the linear solver.  <br /></td></tr>
+<tr class="separator:a3f7e7f7fdc23c04c419fba24474f95a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4958cbb97c74b86f2bc0c50c9c4d9d0f" id="r_a4958cbb97c74b86f2bc0c50c9c4d9d0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a4958cbb97c74b86f2bc0c50c9c4d9d0f">solve_eigenproblem</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;problem_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_eval</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;alpha, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;beta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">eigenvector_real</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">eigenvector_imag</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">do_adjoint_problem</a>)</td></tr>
+<tr class="memdesc:a4958cbb97c74b86f2bc0c50c9c4d9d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_215.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_216.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_217.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs. There's a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.h header and the associated feenable function). NOTE: While the above statement is true, the implementation of this function is actually everse engineered &ndash; trilinos actually computes the eigenvalues directly (and being an Arnoldi method it wouldn't be able to obtain any infinite/NaN eigenvalues anyway.  <br /></td></tr>
+<tr class="separator:a4958cbb97c74b86f2bc0c50c9c4d9d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a442d849223a2714072a189610647fd4b" id="r_a442d849223a2714072a189610647fd4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a442d849223a2714072a189610647fd4b">solve_eigenproblem</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;problem_pt, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_eval</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;eigenvalue, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">eigenvector_real</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">eigenvector_imag</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">do_adjoint_problem</a>)</td></tr>
+<tr class="memdesc:a442d849223a2714072a189610647fd4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the eigen problem.  <br /></td></tr>
+<tr class="separator:a442d849223a2714072a189610647fd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a722642959f946fdda1b9b5266ad07521" id="r_a722642959f946fdda1b9b5266ad07521"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a722642959f946fdda1b9b5266ad07521">linear_solver_pt</a> ()</td></tr>
+<tr class="memdesc:a722642959f946fdda1b9b5266ad07521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object.  <br /></td></tr>
+<tr class="separator:a722642959f946fdda1b9b5266ad07521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16c5671b8291377505d5d9a9ee4ef9c" id="r_ac16c5671b8291377505d5d9a9ee4ef9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#ac16c5671b8291377505d5d9a9ee4ef9c">linear_solver_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac16c5671b8291377505d5d9a9ee4ef9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the linear solver object (const version)  <br /></td></tr>
+<tr class="separator:ac16c5671b8291377505d5d9a9ee4ef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1EigenSolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1EigenSolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1EigenSolver.html">oomph::EigenSolver</a></td></tr>
+<tr class="memitem:a677b40c853c649f87b52815a6fadb2c6 inherit pub_methods_classoomph_1_1EigenSolver" id="r_a677b40c853c649f87b52815a6fadb2c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#a677b40c853c649f87b52815a6fadb2c6">EigenSolver</a> ()</td></tr>
+<tr class="memdesc:a677b40c853c649f87b52815a6fadb2c6 inherit pub_methods_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:a677b40c853c649f87b52815a6fadb2c6 inherit pub_methods_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ab3e3ffc0a171dd5299d12d8be5d1b2 inherit pub_methods_classoomph_1_1EigenSolver" id="r_a2ab3e3ffc0a171dd5299d12d8be5d1b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#a2ab3e3ffc0a171dd5299d12d8be5d1b2">EigenSolver</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1EigenSolver.html">EigenSolver</a> &amp;)</td></tr>
+<tr class="memdesc:a2ab3e3ffc0a171dd5299d12d8be5d1b2 inherit pub_methods_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty copy constructor.  <br /></td></tr>
+<tr class="separator:a2ab3e3ffc0a171dd5299d12d8be5d1b2 inherit pub_methods_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05742af42f53f3904b06c7650e3c10c5 inherit pub_methods_classoomph_1_1EigenSolver" id="r_a05742af42f53f3904b06c7650e3c10c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#a05742af42f53f3904b06c7650e3c10c5">~EigenSolver</a> ()</td></tr>
+<tr class="memdesc:a05742af42f53f3904b06c7650e3c10c5 inherit pub_methods_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <br /></td></tr>
+<tr class="separator:a05742af42f53f3904b06c7650e3c10c5 inherit pub_methods_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab55677b39f98ed8ddb1b1ae682f07b inherit pub_methods_classoomph_1_1EigenSolver" id="r_a8ab55677b39f98ed8ddb1b1ae682f07b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#a8ab55677b39f98ed8ddb1b1ae682f07b">set_shift</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">shift_value</a>)</td></tr>
+<tr class="memdesc:a8ab55677b39f98ed8ddb1b1ae682f07b inherit pub_methods_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of the (real) shift.  <br /></td></tr>
+<tr class="separator:a8ab55677b39f98ed8ddb1b1ae682f07b inherit pub_methods_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7322889dc43a88480d6eab8e5406c976 inherit pub_methods_classoomph_1_1EigenSolver" id="r_a7322889dc43a88480d6eab8e5406c976"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#a7322889dc43a88480d6eab8e5406c976">get_shift</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7322889dc43a88480d6eab8e5406c976 inherit pub_methods_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the value of the (real) shift (const version)  <br /></td></tr>
+<tr class="separator:a7322889dc43a88480d6eab8e5406c976 inherit pub_methods_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac9492d59cff9d9b0098712ae72989cd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7522391265c46e6c748fd660eae66f5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7522391265c46e6c748fd660eae66f5e">DistributableLinearAlgebraObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ada5f539f36451c06e69de79bb129521b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ada5f539f36451c06e69de79bb129521b">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4038de53b5737dc625411e7848d21dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_abfa9cf25494c796d62b15bad586fab47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#abfa9cf25494c796d62b15bad586fab47">distribution_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <br /></td></tr>
+<tr class="separator:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7569556f14fd68b28508920e89bd5eee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a9bd7e1d242c69a28da85a804a7717fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a21e966b025edec79067b41d7f1f25220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ab00a3919b8634c698749f14a4d92947d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a5505731e7e73d7e4251c67c7adec6bf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a8c35baa65e335043f62954c92c090a5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the communicator_pt is null then the distribution is not setup then false is returned, otherwise return true  <br /></td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac5340bac40b9559b0378037b57005203"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_adad20ac61a61d907f823da7694b50616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a604b8dc6a0618d81dfce82849d5b47a7" id="r_a604b8dc6a0618d81dfce82849d5b47a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a></td></tr>
+<tr class="separator:a604b8dc6a0618d81dfce82849d5b47a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb5eb9f072ed92f48fdd32ca22abd0e" id="r_a1bb5eb9f072ed92f48fdd32ca22abd0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Teuchos::ScalarTraits&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a1bb5eb9f072ed92f48fdd32ca22abd0e">SCT</a></td></tr>
+<tr class="separator:a1bb5eb9f072ed92f48fdd32ca22abd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c8982a3b6f716d4ea9b497235351cf2" id="r_a8c8982a3b6f716d4ea9b497235351cf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> SCT::magnitudeType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a8c8982a3b6f716d4ea9b497235351cf2">MT</a></td></tr>
+<tr class="separator:a8c8982a3b6f716d4ea9b497235351cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1922409eb193949b0cb4e89d43316ed" id="r_aa1922409eb193949b0cb4e89d43316ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::MultiVec&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">MV</a></td></tr>
+<tr class="separator:aa1922409eb193949b0cb4e89d43316ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89159c0da5e64ce641a2bcb8bd2d2be" id="r_ac89159c0da5e64ce641a2bcb8bd2d2be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::Operator&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#ac89159c0da5e64ce641a2bcb8bd2d2be">OP</a></td></tr>
+<tr class="separator:ac89159c0da5e64ce641a2bcb8bd2d2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d52920a458018ddcc6962d53c7ccdf" id="r_ab8d52920a458018ddcc6962d53c7ccdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::MultiVecTraits&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>, <a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">MV</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#ab8d52920a458018ddcc6962d53c7ccdf">MVT</a></td></tr>
+<tr class="separator:ab8d52920a458018ddcc6962d53c7ccdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a83b8577f1fe904ccf0bcc37e4ea4f4" id="r_a2a83b8577f1fe904ccf0bcc37e4ea4f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::OperatorTraits&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>, <a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">MV</a>, <a class="el" href="classoomph_1_1ANASAZI.html#ac89159c0da5e64ce641a2bcb8bd2d2be">OP</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a2a83b8577f1fe904ccf0bcc37e4ea4f4">OPT</a></td></tr>
+<tr class="separator:a2a83b8577f1fe904ccf0bcc37e4ea4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a10a57e0c5468fd511c7458dda6f99dce" id="r_a10a57e0c5468fd511c7458dda6f99dce"><td class="memItemLeft" align="right" valign="top">Anasazi::OutputManager&lt; <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a10a57e0c5468fd511c7458dda6f99dce">Output_manager_pt</a></td></tr>
+<tr class="memdesc:a10a57e0c5468fd511c7458dda6f99dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to output manager.  <br /></td></tr>
+<tr class="separator:a10a57e0c5468fd511c7458dda6f99dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af90db68a430f129f360c00a669e809" id="r_a4af90db68a430f129f360c00a669e809"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a4af90db68a430f129f360c00a669e809">Linear_solver_pt</a></td></tr>
+<tr class="memdesc:a4af90db68a430f129f360c00a669e809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a linear solver.  <br /></td></tr>
+<tr class="separator:a4af90db68a430f129f360c00a669e809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d68fe86419ff9260bd2dd8c5e75b1e8" id="r_a0d68fe86419ff9260bd2dd8c5e75b1e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ANASAZI.html#a0d68fe86419ff9260bd2dd8c5e75b1e8">Default_linear_solver_pt</a></td></tr>
+<tr class="memdesc:a0d68fe86419ff9260bd2dd8c5e75b1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a default linear solver.  <br /></td></tr>
+<tr class="separator:a0d68fe86419ff9260bd2dd8c5e75b1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a30742aa2ac9abcfa037179f2d28ff43a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1EigenSolver"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1EigenSolver')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1EigenSolver.html">oomph::EigenSolver</a></td></tr>
+<tr class="memitem:ab0ead9f50f12f8d6acf9be4521de95a1 inherit pro_attribs_classoomph_1_1EigenSolver" id="r_ab0ead9f50f12f8d6acf9be4521de95a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1EigenSolver.html#ab0ead9f50f12f8d6acf9be4521de95a1">Sigma_real</a></td></tr>
+<tr class="memdesc:ab0ead9f50f12f8d6acf9be4521de95a1 inherit pro_attribs_classoomph_1_1EigenSolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Double value that represents the real part of the shift in shifted eigensolvers.  <br /></td></tr>
+<tr class="separator:ab0ead9f50f12f8d6acf9be4521de95a1 inherit pro_attribs_classoomph_1_1EigenSolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for the <a class="el" href="namespaceAnasazi.html">Anasazi</a> eigensolver. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00686">686</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a8c8982a3b6f716d4ea9b497235351cf2" name="a8c8982a3b6f716d4ea9b497235351cf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c8982a3b6f716d4ea9b497235351cf2">&#9670;&#160;</a></span>MT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> SCT::magnitudeType <a class="el" href="classoomph_1_1ANASAZI.html#a8c8982a3b6f716d4ea9b497235351cf2">oomph::ANASAZI::MT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00691">691</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="aa1922409eb193949b0cb4e89d43316ed" name="aa1922409eb193949b0cb4e89d43316ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1922409eb193949b0cb4e89d43316ed">&#9670;&#160;</a></span>MV</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::MultiVec&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>&gt; <a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">oomph::ANASAZI::MV</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00692">692</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="ab8d52920a458018ddcc6962d53c7ccdf" name="ab8d52920a458018ddcc6962d53c7ccdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8d52920a458018ddcc6962d53c7ccdf">&#9670;&#160;</a></span>MVT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::MultiVecTraits&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>, <a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">MV</a>&gt; <a class="el" href="classoomph_1_1ANASAZI.html#ab8d52920a458018ddcc6962d53c7ccdf">oomph::ANASAZI::MVT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00694">694</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="ac89159c0da5e64ce641a2bcb8bd2d2be" name="ac89159c0da5e64ce641a2bcb8bd2d2be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac89159c0da5e64ce641a2bcb8bd2d2be">&#9670;&#160;</a></span>OP</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::Operator&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>&gt; <a class="el" href="classoomph_1_1ANASAZI.html#ac89159c0da5e64ce641a2bcb8bd2d2be">oomph::ANASAZI::OP</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00693">693</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a83b8577f1fe904ccf0bcc37e4ea4f4" name="a2a83b8577f1fe904ccf0bcc37e4ea4f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a83b8577f1fe904ccf0bcc37e4ea4f4">&#9670;&#160;</a></span>OPT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Anasazi::OperatorTraits&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>, <a class="el" href="classoomph_1_1ANASAZI.html#aa1922409eb193949b0cb4e89d43316ed">MV</a>, <a class="el" href="classoomph_1_1ANASAZI.html#ac89159c0da5e64ce641a2bcb8bd2d2be">OP</a>&gt; <a class="el" href="classoomph_1_1ANASAZI.html#a2a83b8577f1fe904ccf0bcc37e4ea4f4">oomph::ANASAZI::OPT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00695">695</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a1bb5eb9f072ed92f48fdd32ca22abd0e" name="a1bb5eb9f072ed92f48fdd32ca22abd0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb5eb9f072ed92f48fdd32ca22abd0e">&#9670;&#160;</a></span>SCT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> Teuchos::ScalarTraits&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>&gt; <a class="el" href="classoomph_1_1ANASAZI.html#a1bb5eb9f072ed92f48fdd32ca22abd0e">oomph::ANASAZI::SCT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00690">690</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a604b8dc6a0618d81dfce82849d5b47a7" name="a604b8dc6a0618d81dfce82849d5b47a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604b8dc6a0618d81dfce82849d5b47a7">&#9670;&#160;</a></span>ST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">oomph::ANASAZI::ST</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00689">689</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af90440448c3cbbb7c21bc6ce3bbb2d0a" name="af90440448c3cbbb7c21bc6ce3bbb2d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af90440448c3cbbb7c21bc6ce3bbb2d0a">&#9670;&#160;</a></span>ANASAZI() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ANASAZI::ANASAZI </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00724">724</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__eigen__solver_8h_source.html#l00698">Output_manager_pt</a>.</p>
+
+</div>
+</div>
+<a id="abfab863205ce697807b4a1ac5e74ac8f" name="abfab863205ce697807b4a1ac5e74ac8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfab863205ce697807b4a1ac5e74ac8f">&#9670;&#160;</a></span>ANASAZI() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ANASAZI::ANASAZI </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ANASAZI.html">ANASAZI</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00744">744</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a3f7e7f7fdc23c04c419fba24474f95a7" name="a3f7e7f7fdc23c04c419fba24474f95a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f7e7f7fdc23c04c419fba24474f95a7">&#9670;&#160;</a></span>~ANASAZI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::ANASAZI::~ANASAZI </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor, delete the linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00747">747</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a722642959f946fdda1b9b5266ad07521" name="a722642959f946fdda1b9b5266ad07521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a722642959f946fdda1b9b5266ad07521">&#9670;&#160;</a></span>linear_solver_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *&amp; oomph::ANASAZI::linear_solver_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to the linear solver object. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00999">999</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__eigen__solver_8h_source.html#l00701">Linear_solver_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00815">solve_eigenproblem()</a>.</p>
+
+</div>
+</div>
+<a id="ac16c5671b8291377505d5d9a9ee4ef9c" name="ac16c5671b8291377505d5d9a9ee4ef9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16c5671b8291377505d5d9a9ee4ef9c">&#9670;&#160;</a></span>linear_solver_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a>  &amp; oomph::ANASAZI::linear_solver_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to the linear solver object (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l01005">1005</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="trilinos__eigen__solver_8h_source.html#l00701">Linear_solver_pt</a>.</p>
+
+</div>
+</div>
+<a id="a4958cbb97c74b86f2bc0c50c9c4d9d0f" name="a4958cbb97c74b86f2bc0c50c9c4d9d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4958cbb97c74b86f2bc0c50c9c4d9d0f">&#9670;&#160;</a></span>solve_eigenproblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ANASAZI::solve_eigenproblem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_eval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenvector_real</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenvector_imag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>do_adjoint_problem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_215.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_216.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_217.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs. There's a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.h header and the associated feenable function). NOTE: While the above statement is true, the implementation of this function is actually everse engineered &ndash; trilinos actually computes the eigenvalues directly (and being an Arnoldi method it wouldn't be able to obtain any infinite/NaN eigenvalues anyway. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1EigenSolver.html#a45497b2b9ca94c6fd5ec2836bb3bc08b">oomph::EigenSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00788">788</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00788">solve_eigenproblem()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00788">solve_eigenproblem()</a>.</p>
+
+</div>
+</div>
+<a id="a442d849223a2714072a189610647fd4b" name="a442d849223a2714072a189610647fd4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a442d849223a2714072a189610647fd4b">&#9670;&#160;</a></span>solve_eigenproblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ANASAZI::solve_eigenproblem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_eval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenvalue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenvector_real</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>eigenvector_imag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>do_adjoint_problem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve the eigen problem. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1EigenSolver.html#a3ee4360a4ceb78eebf5d4740d056e37d">oomph::EigenSolver</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00815">815</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l00309">oomph::Problem::create_new_linear_algebra_distribution()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01486">oomph::Problem::linear_solver_pt()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00701">Linear_solver_pt</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00999">linear_solver_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="eigen__solver_8h_source.html#l00065">oomph::EigenSolver::Sigma_real</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0d68fe86419ff9260bd2dd8c5e75b1e8" name="a0d68fe86419ff9260bd2dd8c5e75b1e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d68fe86419ff9260bd2dd8c5e75b1e8">&#9670;&#160;</a></span>Default_linear_solver_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a>* oomph::ANASAZI::Default_linear_solver_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a default linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00704">704</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+</div>
+</div>
+<a id="a4af90db68a430f129f360c00a669e809" name="a4af90db68a430f129f360c00a669e809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af90db68a430f129f360c00a669e809">&#9670;&#160;</a></span>Linear_solver_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1LinearSolver.html">LinearSolver</a>* oomph::ANASAZI::Linear_solver_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to a linear solver. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00701">701</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00999">linear_solver_pt()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l01005">linear_solver_pt()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00815">solve_eigenproblem()</a>.</p>
+
+</div>
+</div>
+<a id="a10a57e0c5468fd511c7458dda6f99dce" name="a10a57e0c5468fd511c7458dda6f99dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10a57e0c5468fd511c7458dda6f99dce">&#9670;&#160;</a></span>Output_manager_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Anasazi::OutputManager&lt;<a class="el" href="classoomph_1_1ANASAZI.html#a604b8dc6a0618d81dfce82849d5b47a7">ST</a>&gt;* oomph::ANASAZI::Output_manager_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to output manager. </p>
+
+<p class="definition">Definition at line <a class="el" href="trilinos__eigen__solver_8h_source.html#l00698">698</a> of file <a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00724">ANASAZI()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="trilinos__eigen__solver_8h_source.html">trilinos_eigen_solver.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:12
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

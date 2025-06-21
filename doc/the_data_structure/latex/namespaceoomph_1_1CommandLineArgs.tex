@@ -1,0 +1,463 @@
+\doxysection{oomph\+::Command\+Line\+Args Namespace Reference}
+\hypertarget{namespaceoomph_1_1CommandLineArgs}{}\label{namespaceoomph_1_1CommandLineArgs}\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+
+
+Namespace for command line arguments.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}
+\begin{DoxyCompactList}\small\item\em Structure to store information on a command line argument. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a02666c3d933af7c70da94bb0e87ebeb0}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argv}})
+\begin{DoxyCompactList}\small\item\em Set values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}{output}} ()
+\begin{DoxyCompactList}\small\item\em Doc the command line arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a4b0153b45b4b4e026b2fe767194d8088}{specify\+\_\+command\+\_\+line\+\_\+flag}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&doc)
+\begin{DoxyCompactList}\small\item\em Specify possible argument-\/free command line flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a1ddbea55361272d5b057bd76ca9550f0}{specify\+\_\+command\+\_\+line\+\_\+flag}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}arg\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&doc)
+\begin{DoxyCompactList}\small\item\em Specify possible command line flag that specifies a double, accessed via pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a4f5c63f51f006503cf75dd6fccaf971c}{specify\+\_\+command\+\_\+line\+\_\+flag}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}arg\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&doc)
+\begin{DoxyCompactList}\small\item\em Specify possible command line flag that specifies an int, accessed via pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aa5aa20da06e63203c96ae8c78928d405}{specify\+\_\+command\+\_\+line\+\_\+flag}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \texorpdfstring{$\ast$}{*}arg\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&doc)
+\begin{DoxyCompactList}\small\item\em Specify possible command line flag that specifies an unsigned, accessed via pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aa5204d492af173835b5f178dcf1fffca}{specify\+\_\+command\+\_\+line\+\_\+flag}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{command\+\_\+line\+\_\+flag}}, std\+::string \texorpdfstring{$\ast$}{*}arg\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&doc)
+\begin{DoxyCompactList}\small\item\em Specify possible command line flag that specifies a string, accessed via pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a4127f6d5354aa20af7e5ff55c14a4419}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{flag}})
+\begin{DoxyCompactList}\small\item\em Check if command line flag has been set (value will have been assigned directly). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a5b126e4b3314fd7971ed876b89fc0d94}{doc\+\_\+all\+\_\+flags}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outstream}})
+\begin{DoxyCompactList}\small\item\em Document the values of all flags (specified or not). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_af1a5dba4897b1fa9e9860e457079d988}{doc\+\_\+specified\+\_\+flags}} ()
+\begin{DoxyCompactList}\small\item\em Document specified command line flags. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a17dcadc5a258d8ea6e72c5527961a6eb}{doc\+\_\+available\+\_\+flags}} ()
+\begin{DoxyCompactList}\small\item\em Document available command line flags. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a4f5296cb47ecd076ecb7467d58c38084}{check\+\_\+arg\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{arg\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Helper function to check if command line index is legal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a8fee7d9c4bee7cec9121075c1a0dc341}{parse\+\_\+and\+\_\+assign}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{argv}}\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw\+\_\+on\+\_\+unrecognised\+\_\+args}})
+\begin{DoxyCompactList}\small\item\em Parse command line, check for recognised flags and assign associated values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a541bf74c755c9d3f885d075151367e95}{parse\+\_\+and\+\_\+assign}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw\+\_\+on\+\_\+unrecognised\+\_\+args}})
+\begin{DoxyCompactList}\small\item\em Parse previously specified command line, check for recognised flags and assign associated values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83}{Argc}}
+\begin{DoxyCompactList}\small\item\em Number of arguments + 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a3b51290f4dc7018bba2e46bfc6f8bedc}{Argv}}
+\begin{DoxyCompactList}\small\item\em Arguments themselves. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a26248b14a69e0839c647c5c9540a09b3}{Specified\+\_\+command\+\_\+line\+\_\+flag}}
+\begin{DoxyCompactList}\small\item\em Map to indicate an input flag as having been set. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_aa4decec3dde9efd1b7e2e447fe656f41}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map to associate an input flag with a double -- specified via pointer. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a872a9f3ad510078d12dc24f19dd54f88}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map to associate an input flag with an int -- specified via pointer. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_ae489c2891e5e891242ed788b2a64d477}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map to associate an input flag with an unsigned -- specified via pointer. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ std\+::string $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a6801e3bd896891e4c5b40399c56df332}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Map to associate an input flag with a string -- specified via pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for command line arguments. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a4f5296cb47ecd076ecb7467d58c38084}\label{namespaceoomph_1_1CommandLineArgs_a4f5296cb47ecd076ecb7467d58c38084} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!check\_arg\_index@{check\_arg\_index}}
+\index{check\_arg\_index@{check\_arg\_index}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{check\_arg\_index()}{check\_arg\_index()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::check\+\_\+arg\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{arg\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Helper function to check if command line index is legal. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00745}{745}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00444}{output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a4127f6d5354aa20af7e5ff55c14a4419}\label{namespaceoomph_1_1CommandLineArgs_a4127f6d5354aa20af7e5ff55c14a4419} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!command\_line\_flag\_has\_been\_set@{command\_line\_flag\_has\_been\_set}}
+\index{command\_line\_flag\_has\_been\_set@{command\_line\_flag\_has\_been\_set}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{command\_line\_flag\_has\_been\_set()}{command\_line\_flag\_has\_been\_set()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Command\+Line\+Args\+::command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{flag }\end{DoxyParamCaption})}
+
+
+
+Check if command line flag has been set (value will have been assigned directly). 
+
+Check if specified flag has been set (the associated value will have been assigned directly) 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{509}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a5b126e4b3314fd7971ed876b89fc0d94}\label{namespaceoomph_1_1CommandLineArgs_a5b126e4b3314fd7971ed876b89fc0d94} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!doc\_all\_flags@{doc\_all\_flags}}
+\index{doc\_all\_flags@{doc\_all\_flags}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{doc\_all\_flags()}{doc\_all\_flags()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::doc\+\_\+all\+\_\+flags (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outstream }\end{DoxyParamCaption})}
+
+
+
+Document the values of all flags (specified or not). 
+
+Document the values of all flags (specified or not) 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{570}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a17dcadc5a258d8ea6e72c5527961a6eb}\label{namespaceoomph_1_1CommandLineArgs_a17dcadc5a258d8ea6e72c5527961a6eb} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!doc\_available\_flags@{doc\_available\_flags}}
+\index{doc\_available\_flags@{doc\_available\_flags}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{doc\_available\_flags()}{doc\_available\_flags()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::doc\+\_\+available\+\_\+flags (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Document available command line flags. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{684}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00745}{check\+\_\+arg\+\_\+index()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_af1a5dba4897b1fa9e9860e457079d988}\label{namespaceoomph_1_1CommandLineArgs_af1a5dba4897b1fa9e9860e457079d988} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!doc\_specified\_flags@{doc\_specified\_flags}}
+\index{doc\_specified\_flags@{doc\_specified\_flags}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{doc\_specified\_flags()}{doc\_specified\_flags()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::doc\+\_\+specified\+\_\+flags (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Document specified command line flags. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{618}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87}\label{namespaceoomph_1_1CommandLineArgs_aca07d359a96b9c7b566142112604ea87} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!output@{output}}
+\index{output@{output}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the command line arguments. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00444}{444}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00415}{Argc}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00418}{Argv}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00745}{check\+\_\+arg\+\_\+index()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a541bf74c755c9d3f885d075151367e95}\label{namespaceoomph_1_1CommandLineArgs_a541bf74c755c9d3f885d075151367e95} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!parse\_and\_assign@{parse\_and\_assign}}
+\index{parse\_and\_assign@{parse\_and\_assign}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{parse\_and\_assign()}{parse\_and\_assign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::parse\+\_\+and\+\_\+assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{throw\+\_\+on\+\_\+unrecognised\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Parse previously specified command line, check for recognised flags and assign associated values. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00944}{944}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00415}{Argc}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00418}{Argv}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a8fee7d9c4bee7cec9121075c1a0dc341}\label{namespaceoomph_1_1CommandLineArgs_a8fee7d9c4bee7cec9121075c1a0dc341} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!parse\_and\_assign@{parse\_and\_assign}}
+\index{parse\_and\_assign@{parse\_and\_assign}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{parse\_and\_assign()}{parse\_and\_assign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::parse\+\_\+and\+\_\+assign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{throw\+\_\+on\+\_\+unrecognised\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Parse command line, check for recognised flags and assign associated values. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{768}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00745}{check\+\_\+arg\+\_\+index()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01040}{oomph\+::\+MPI\+\_\+\+Helpers\+::finalize()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00944}{parse\+\_\+and\+\_\+assign()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a02666c3d933af7c70da94bb0e87ebeb0}\label{namespaceoomph_1_1CommandLineArgs_a02666c3d933af7c70da94bb0e87ebeb0} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!setup@{setup}}
+\index{setup@{setup}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Set values. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00437}{437}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00415}{Argc}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00418}{Argv}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a4b0153b45b4b4e026b2fe767194d8088}\label{namespaceoomph_1_1CommandLineArgs_a4b0153b45b4b4e026b2fe767194d8088} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!specify\_command\_line\_flag@{specify\_command\_line\_flag}}
+\index{specify\_command\_line\_flag@{specify\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{specify\_command\_line\_flag()}{specify\_command\_line\_flag()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::specify\+\_\+command\+\_\+line\+\_\+flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{command\+\_\+line\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{doc }\end{DoxyParamCaption})}
+
+
+
+Specify possible argument-\/free command line flag. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00459}{459}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{Specified\+\_\+command\+\_\+line\+\_\+flag}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a1ddbea55361272d5b057bd76ca9550f0}\label{namespaceoomph_1_1CommandLineArgs_a1ddbea55361272d5b057bd76ca9550f0} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!specify\_command\_line\_flag@{specify\_command\_line\_flag}}
+\index{specify\_command\_line\_flag@{specify\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{specify\_command\_line\_flag()}{specify\_command\_line\_flag()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::specify\+\_\+command\+\_\+line\+\_\+flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{command\+\_\+line\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{arg\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{doc }\end{DoxyParamCaption})}
+
+
+
+Specify possible command line flag that specifies a double, accessed via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00468}{468}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a4f5c63f51f006503cf75dd6fccaf971c}\label{namespaceoomph_1_1CommandLineArgs_a4f5c63f51f006503cf75dd6fccaf971c} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!specify\_command\_line\_flag@{specify\_command\_line\_flag}}
+\index{specify\_command\_line\_flag@{specify\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{specify\_command\_line\_flag()}{specify\_command\_line\_flag()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::specify\+\_\+command\+\_\+line\+\_\+flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{command\+\_\+line\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}}]{arg\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{doc }\end{DoxyParamCaption})}
+
+
+
+Specify possible command line flag that specifies an int, accessed via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00478}{478}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_aa5204d492af173835b5f178dcf1fffca}\label{namespaceoomph_1_1CommandLineArgs_aa5204d492af173835b5f178dcf1fffca} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!specify\_command\_line\_flag@{specify\_command\_line\_flag}}
+\index{specify\_command\_line\_flag@{specify\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{specify\_command\_line\_flag()}{specify\_command\_line\_flag()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::specify\+\_\+command\+\_\+line\+\_\+flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{command\+\_\+line\+\_\+flag,  }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{arg\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{doc }\end{DoxyParamCaption})}
+
+
+
+Specify possible command line flag that specifies a string, accessed via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00498}{498}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_aa5aa20da06e63203c96ae8c78928d405}\label{namespaceoomph_1_1CommandLineArgs_aa5aa20da06e63203c96ae8c78928d405} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!specify\_command\_line\_flag@{specify\_command\_line\_flag}}
+\index{specify\_command\_line\_flag@{specify\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{specify\_command\_line\_flag()}{specify\_command\_line\_flag()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Command\+Line\+Args\+::specify\+\_\+command\+\_\+line\+\_\+flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{command\+\_\+line\+\_\+flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \texorpdfstring{$\ast$}{*}}]{arg\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{doc }\end{DoxyParamCaption})}
+
+
+
+Specify possible command line flag that specifies an unsigned, accessed via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00488}{488}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83}\label{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Argc@{Argc}}
+\index{Argc@{Argc}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Argc}{Argc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Command\+Line\+Args\+::\+Argc}
+
+
+
+Number of arguments + 1. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00415}{415}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00444}{output()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00944}{parse\+\_\+and\+\_\+assign()}}, \mbox{\hyperlink{stacktrace_8h_source_l00047}{print\+\_\+stacktrace()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00437}{setup()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a3b51290f4dc7018bba2e46bfc6f8bedc}\label{namespaceoomph_1_1CommandLineArgs_a3b51290f4dc7018bba2e46bfc6f8bedc} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Argv@{Argv}}
+\index{Argv@{Argv}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Argv}{Argv}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} oomph\+::\+Command\+Line\+Args\+::\+Argv}
+
+
+
+Arguments themselves. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00418}{418}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00444}{output()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00944}{parse\+\_\+and\+\_\+assign()}}, \mbox{\hyperlink{stacktrace_8h_source_l00047}{print\+\_\+stacktrace()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00437}{setup()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_aa4decec3dde9efd1b7e2e447fe656f41}\label{namespaceoomph_1_1CommandLineArgs_aa4decec3dde9efd1b7e2e447fe656f41} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Specified\_command\_line\_double\_pt@{Specified\_command\_line\_double\_pt}}
+\index{Specified\_command\_line\_double\_pt@{Specified\_command\_line\_double\_pt}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Specified\_command\_line\_double\_pt}{Specified\_command\_line\_double\_pt}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ oomph\+::\+Command\+Line\+Args\+::\+Specified\+\_\+command\+\_\+line\+\_\+double\+\_\+pt}
+
+
+
+Map to associate an input flag with a double -- specified via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00424}{424}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{doc\+\_\+all\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{doc\+\_\+specified\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00468}{specify\+\_\+command\+\_\+line\+\_\+flag()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a26248b14a69e0839c647c5c9540a09b3}\label{namespaceoomph_1_1CommandLineArgs_a26248b14a69e0839c647c5c9540a09b3} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Specified\_command\_line\_flag@{Specified\_command\_line\_flag}}
+\index{Specified\_command\_line\_flag@{Specified\_command\_line\_flag}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Specified\_command\_line\_flag}{Specified\_command\_line\_flag}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} $>$ $>$ oomph\+::\+Command\+Line\+Args\+::\+Specified\+\_\+command\+\_\+line\+\_\+flag}
+
+
+
+Map to indicate an input flag as having been set. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00421}{421}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{doc\+\_\+all\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{doc\+\_\+specified\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00459}{specify\+\_\+command\+\_\+line\+\_\+flag()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a872a9f3ad510078d12dc24f19dd54f88}\label{namespaceoomph_1_1CommandLineArgs_a872a9f3ad510078d12dc24f19dd54f88} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Specified\_command\_line\_int\_pt@{Specified\_command\_line\_int\_pt}}
+\index{Specified\_command\_line\_int\_pt@{Specified\_command\_line\_int\_pt}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Specified\_command\_line\_int\_pt}{Specified\_command\_line\_int\_pt}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ $>$ oomph\+::\+Command\+Line\+Args\+::\+Specified\+\_\+command\+\_\+line\+\_\+int\+\_\+pt}
+
+
+
+Map to associate an input flag with an int -- specified via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00427}{427}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{doc\+\_\+all\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{doc\+\_\+specified\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00478}{specify\+\_\+command\+\_\+line\+\_\+flag()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_a6801e3bd896891e4c5b40399c56df332}\label{namespaceoomph_1_1CommandLineArgs_a6801e3bd896891e4c5b40399c56df332} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Specified\_command\_line\_string\_pt@{Specified\_command\_line\_string\_pt}}
+\index{Specified\_command\_line\_string\_pt@{Specified\_command\_line\_string\_pt}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Specified\_command\_line\_string\_pt}{Specified\_command\_line\_string\_pt}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ std\+::string $>$ $>$ oomph\+::\+Command\+Line\+Args\+::\+Specified\+\_\+command\+\_\+line\+\_\+string\+\_\+pt}
+
+
+
+Map to associate an input flag with a string -- specified via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00434}{434}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{doc\+\_\+all\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{doc\+\_\+specified\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00498}{specify\+\_\+command\+\_\+line\+\_\+flag()}}.
+
+\Hypertarget{namespaceoomph_1_1CommandLineArgs_ae489c2891e5e891242ed788b2a64d477}\label{namespaceoomph_1_1CommandLineArgs_ae489c2891e5e891242ed788b2a64d477} 
+\index{oomph::CommandLineArgs@{oomph::CommandLineArgs}!Specified\_command\_line\_unsigned\_pt@{Specified\_command\_line\_unsigned\_pt}}
+\index{Specified\_command\_line\_unsigned\_pt@{Specified\_command\_line\_unsigned\_pt}!oomph::CommandLineArgs@{oomph::CommandLineArgs}}
+\doxysubsubsection{\texorpdfstring{Specified\_command\_line\_unsigned\_pt}{Specified\_command\_line\_unsigned\_pt}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{structoomph_1_1CommandLineArgs_1_1ArgInfo}{Arg\+Info}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ oomph\+::\+Command\+Line\+Args\+::\+Specified\+\_\+command\+\_\+line\+\_\+unsigned\+\_\+pt}
+
+
+
+Map to associate an input flag with an unsigned -- specified via pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00430}{430}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00509}{command\+\_\+line\+\_\+flag\+\_\+has\+\_\+been\+\_\+set()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00570}{doc\+\_\+all\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00684}{doc\+\_\+available\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00618}{doc\+\_\+specified\+\_\+flags()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00768}{parse\+\_\+and\+\_\+assign()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00488}{specify\+\_\+command\+\_\+line\+\_\+flag()}}.
+

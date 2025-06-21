@@ -1,0 +1,881 @@
+\chapter{The equations of time-\/harmonic linear elasticity and use of PMLs}
+\hypertarget{index}{}\label{index}\index{The equations of time-\/harmonic linear elasticity and use of PMLs@{The equations of time-\/harmonic linear elasticity and use of PMLs}}
+The aim of this tutorial is to demonstrate the solution of the time-\/harmonic equations of linear elasticity in Cartesian coordinates. These equations are useful to describe forced, time-\/harmonic oscillations of elastic bodies. The implementation extends the standard formulation discussed in \href{../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html}{\texttt{ another tutorial,}} which is modified to incorporate perfectly matched layers (PMLs) as an alternative to classical absorbing/approximate boundary conditions or DtN maps.
+
+We first present details on the relevant theory and its extensions and proceed with an example problem of time-\/harmonic oscillations on an infinite domain with an interior circular boundary.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} The implementation of the equations and the documentation were developed jointly with \href{http://imperial.academia.edu/RaduCimpeanu}{\texttt{ Radu Cimpeanu}} (Imperial College London), with financial support from Thales Underwater. \end{center}    \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+Consider an infinite, linearly elastic body (of density $ \rho $, Young\textquotesingle{}s modulus $ E $ and Poisson\textquotesingle{}s ratio $ \nu $), occupying the region $ D $ whose inner boundary is $ \partial D_d $. Assuming that the body performs time-\/harmonic oscillations of frequency of $ \omega $ its motion is governed by the equations of time-\/harmonic linear elasticity \begin{center}  \[
+{\pmb{\nabla}^*}\cdot\pmb{\tau}^*+
+\rho \pmb{F}^*={\rm -\rho\omega^2}\pmb{u}^*,
+\] \end{center}  where the $ x_{i}^* $ are the Cartesian coordinates, and the time-\/periodic stresses, body force and displacements are given by  $ {\rm Re}\{\pmb{\tau^*}(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $,  $ {\rm Re}\{\mathbf{F}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $ and $ {\rm Re}\{\mathbf{u}^*(x_{i}^*){\rm e}^{-{\rm i}\omega
+t^*}\} $ respectively. Note that, as usual, the superscript asterisk notation is used to distinguish dimensional quantities from their non-\/dimensional counterparts where required.
+
+The body is subject to imposed time-\/harmonic displacements  $  {\rm Re}\{\mathbf{\hat{u}}^* {\rm e}^{-{\rm i}\omega
+t^*}\} $ along $ \partial D_d $. This requires that \begin{center}  \[
+\mathbf{u}^*=\mathbf{\hat{u}}^*\,\,\textrm{on $
+\partial D_d. $ }
+\] \end{center} 
+
+The stresses and displacements are related by the constitutive equations \begin{center}  \[
+\pmb{\tau}^*=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}^*\cdot\mathbf{u}^*)\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}^*\mathbf{u}^*+(\pmb{\nabla}^*\mathbf{u}^*){{\rm T}})\right),
+\] \end{center}  where $ (\pmb{\nabla}^*\mathbf{u}^*)^{{\rm T}}
+$ represents the transpose of $ \pmb{\nabla}^*\mathbf{u}^*.
+$
+
+We non-\/dimensionalise the equations, using a problem specific reference length, $ {\cal L} $, and a timescale $ \displaystyle {\cal T}=\frac{1}{\omega} $, and use Young\textquotesingle{}s modulus to non-\/dimensionalise the body force and the stress tensor\+: \begin{center}  \[
+\pmb{\tau}^* = E \, \pmb{\tau}, \qquad
+x_{i}^* = {\cal L}\, x_{i}
+\]  \[
+\mathbf{u}^* = {\cal L}\, \mathbf{u}, \qquad
+\mathbf{F}^* = \frac{E}{\rho \cal L} \, \mathbf{F},
+\qquad
+t^* = {\cal T}\, t.
+\] \end{center} 
+
+The non-\/dimensional form of the equations is then given by \begin{center}  \[
+\pmb{\nabla}\cdot\pmb{\tau}+\mathbf{F}=-\Omega^2\mathbf{u},
+\ \ \ \ \ \ \ \ \ \ (1)
+\] \end{center}  with the non-\/dimensional constitutive relation, \begin{center}  \[
+\pmb{\tau}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}\mathbf{u}+(\pmb{\nabla}\mathbf{u})^{{\rm T}})\right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\] \end{center}  The non-\/dimensional parameter \begin{center}  \[
+\Omega = {\cal L}\omega \sqrt{\frac{\rho}{E}}
+\] \end{center}  is the ratio of the elastic body\textquotesingle{}s intrinsic timescale, $\displaystyle {\cal L} \sqrt{\frac{\rho}{E}}$, to the problem-\/specific timescale, $ \displaystyle {\cal T}=\frac{1}{\omega} $, that we used to non-\/dimensionalise time. $ \Omega $ can be interpreted as a non-\/dimensional version of the excitation frequency; alternatively/equivalently $ \Omega^2 $ may be interpreted as a non-\/dimensional density. The boundary conditions are set as \begin{center}  \[
+\mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $
+\partial D_d $. }
+\] \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_pml}{}\doxysection{\texorpdfstring{Perfectly matched layers}{Perfectly matched layers}}\label{index_pml}
+The idea behind perfectly matched layers is illustrated in the figure below. The actual physical/mathematical problem has to be solved in the infinite domain $ D $ (shown on the left), with a boundary condition at a certain distance from the source of the waves ensuring the suitable decay of the solution at large distances from the region of interest.
+
+If computations are performed in a finite computational domain, $
+D_c $ , (shown in the middle), spurious wave reflections are likely to be generated at the artificial boundary $
+\partial D_c $ of the computational domain.
+
+The idea behind PML methods is to surround the actual computational domain $ D_c $ with a layer of "{}absorbing"{} material whose properties are chosen such that the outgoing waves are absorbed within it, without creating any artificial reflected waves at the interface between the PML layer and the computational domain.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{pml}
+\doxyfigcaption{Sketch illustrating the idea behind perfectly matched layers. }
+\end{DoxyImage}
+
+
+Our implementation of the perfectly matched layers follows the development in \href{http://www.sciencedirect.com/science/article/pii/S0021999106004487}{\texttt{ A. Bermudez, L. Hervella-\/\+Nieto, A. Prieto, and R. Rodriguez "{}\+An optimal perfectly matched layer with unbounded  absorbing function for time-\/harmonic acoustic scattering problems"{} Journal of Computational Physics {\bfseries{223}} 469-\/488 (2007)}} and we assume the boundaries of the computational domain to be aligned with the coordinate axes, as shown in the sketch above.
+
+The method requires a slight generalisation of the equations, achieved by introducing the complex coordinate mapping  \[
+\frac{\partial}{\partial x_j} \to \frac{1}{\gamma_j} \frac{\partial}{\partial x_j} 
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\] within the perfectly matched layers.
+
+The choice of $ \gamma_j $ depends on the orientation of the PML layer. Since we are restricting ourselves to axis-\/aligned mesh boundaries we need to distinguish three different cases, as shown in the sketch below\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{PMLDomain}
+\doxyfigcaption{Sketch illustrating the geometry of the perfectly matched layers. }
+\end{DoxyImage}
+
+
+We follow the work of \href{http://www.sciencedirect.com/science/article/pii/S0045782502006424}{\texttt{ U. Basu and A. Chopra "{}\+Perfectly matched layers for time-\/harmonic elastodynamics of unbounded domains\+: theory and finite-\/element implementation"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{192}} 1337-\/1375(2003)}} and choose\+:
+\begin{DoxyItemize}
+\item For layers that are aligned with the y axis (such as the left and right PML layers in the sketch, with vertical stripes) we set  \[
+  \gamma_{x}(x)  = 
+  1 +i\frac{f_0}{a_0}\ \sigma_{x}(x) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{x}(x)  =  \frac{1}{|X_{PML_{out}}-x|}-\frac{1}{|X_{PML_{out}}-X_{PML_{in}}|}, \ \ \ \ \ 
+  (4)
+  \] where $ a_0 = \sqrt{2.0(1.0+\nu)}\Omega$, $ f_0 $ is a constant to be tuned, $ X_{PML_{in}} $ is the x-\/coordinate of the inner boundary of the PML layer (the coordinate of the interface with the physical domain), $ X_{PML_{out}} $ is the x-\/coordinate of the outer boundary of the PML layer , and  \[
+   \gamma_y = 1.
+  \]
+\item For layers that are aligned with the x axis (such as the top and bottom PML layers in the sketch, with horizontal stripes) we set  \[ 
+  \gamma_x = 1,
+  \] and  \[
+  \gamma_{y}(y) = 
+  1+i\frac{f_0}{a_0} \ \sigma_{y}(y) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{y}(y)  =  \frac{1}{|Y_{PML_{out}}-y|}-\frac{1}{|Y_{PML_{out}}-Y_{PML_{in}}|}, \ \ \ \ \ 
+  (5)
+  \] where $ Y_{PML} $ is the y-\/coordinate of the outer boundary of the PML layer.
+\item In corner regions (diagonally striped) that are bounded by two axis-\/aligned PML layers (with outer coordinates $ X_{PML} $ and ~\newline
+ $ Y_{PML} $) we set  \[
+  \gamma_{x}(x)  = 
+  1 +i\frac{f_0}{a_0}\ \sigma_{x}(x) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{x}(x)  =  \frac{1}{|X_{PML_{out}}-x|}-\frac{1}{|X_{PML_{out}}-X_{PML_{in}}|} \ \ \ \ \ 
+  (6)
+  \] and  \[
+  \gamma_{y}(y) = 
+  1+i\frac{f_0}{a_0} \ \sigma_{y}(y) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{y}(y)  =  \frac{1}{|Y_{PML_{out}}-y|}-\frac{1}{|Y_{PML_{out}}-Y_{PML_{in}}|}. \ \ \ \ \ 
+  (7)
+  \]
+\item Finally, in the actual computational domain (outside the PML layers) we set  \[
+  \gamma_{x}(x) =   \gamma_{y}(y) = 1.
+  \]
+\end{DoxyItemize}In our numerical experiments $ f_0 = 20.0 $ was found to be an appropriate value, which gives acceptable numerical behaviour. This is well aligned with the cited paper, where this parameter ranges from roughly $ 10.0 $ to $ 50.0 $.
+
+\DoxyHorRuler{0}
+\hypertarget{index_impl}{}\doxysubsection{\texorpdfstring{Implementation of the perfectly matched layers within oomph-\/lib}{Implementation of the perfectly matched layers within oomph-lib}}\label{index_impl}
+The finite-\/element-\/discretised equations (modified by the PML terms discussed above) are implemented in the {\ttfamily PMLTime\+Harmonic\+Linear\+Elasticity\+Equations$<$\+DIM$>$} class which is templated by the spatial dimension, {\ttfamily DIM}. As usual, we provide fully functional elements by combining these with geometric finite elements (from the Q and T families -- corresponding (in 2D) to triangles and quad elements). By default, the PML modifications are disabled, i.\+e. $ \gamma_{x}(x) $ and $ \gamma_{y}(y) $ are both set to 1.
+
+The generation of suitable 2D PML meshes along the axis-\/aligned boundaries of a given bulk mesh is facilitated by helper functions which automatically erect layers of (quadrilateral) PML elements. The layers are built from {\ttfamily QPMLTime\+Harmonic\+Linear\+Elasticity\+Element$<$2,\+NNODE\+\_\+1\+D$>$} elements and the parameter {\ttfamily NNODE\+\_\+1D} is automatically chosen to match that of the elements in the bulk mesh. The bulk mesh can contain quads or triangles (as shown in the specific example presented below).
+
+For instance, to erect a PML layer (of width {\ttfamily width}, with {\ttfamily n\+\_\+pml} elements across the width of the layer) on the "{}right"{} boundary (with boundary ID {\ttfamily b\+\_\+bulk}) of the bulk mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}, a call to 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TwoDimensionalPMLHelper::create\_right\_pml\_mesh}
+\DoxyCodeLine{<PMLLayerElement<ELASTICITY\_ELEMENT>\ >}
+\DoxyCodeLine{(Solid\_mesh\_pt,\ right\_boundary\_id,\ }
+\DoxyCodeLine{Global\_Parameters::n\_x\_right\_pml,\ }
+\DoxyCodeLine{Global\_Parameters::width\_x\_right\_pml);}
+
+\end{DoxyCode}
+ returns a pointer to a newly-\/created mesh that contains the PML elements which are automatically attached to the boundary of the bulk mesh (i.\+e. the {\ttfamily Nodes} on the outer boundary of the bulk mesh are shared (pointed to), rather than duplicated, by the elements in the PML mesh). The PML-\/ness of the elements is automatically enabled, i.\+e. the functions $ \gamma_x(x) $ and $ \gamma_y(y) $ are set as described above. Finally, zero Dirichlet boundary conditions are applied to the real and imaginary parts of the solution on the outer boundary of the PML layer.
+
+Similar helper functions exist for PML layers on other axis-\/aligned boundaries, and for corner PML meshes; see the code listings provided below. Currently, we only provide this functionality for convex 2D computational domains, but the generalisation to non-\/convex boundaries and 3D is straightforward (if tedious) to implement (Any volunteers?).
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element_types}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_element_types}
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of equations (1) with the constitutive equations (2) are implemented in the {\ttfamily PMLTime\+Harmonic\+Linear\+Elasticity\+Equations$<$\+DIM$>$} equations class, where the template parameter {\ttfamily DIM} indicates the spatial dimension. Following our usual approach, discussed in the \href{../../../doc/quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily PMLTime\+Harmonic\+Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center}  \[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2,
+\] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij}
+$ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+
+All the constitutive parameters are real. The two components of the displacement field have a real and imaginary part. We store the four real-\/valued nodal unknowns in the order  $ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Im}\{u_y\}
+$ and use the shape functions to interpolate the displacements as \begin{center}  \[
+u_i^{(n)} = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,...4,
+\] \end{center}  where $  U^{(E)}_{ij} $ is the $ i $-\/th displacement component (enumerated as described above) at the $ j $-\/th {\ttfamily Node} in the element.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_test}{}\doxysection{\texorpdfstring{A specific example\+: outward propagation of elastic waves from the surface of a cylindrical object}{A specific example: outward propagation of elastic waves from the surface of a cylindrical object}}\label{index_test}
+We consider the time-\/harmonic deformation of a 2D elastic body that occupies the region outside a circle whose diameter we use as the lengthscale $ \cal L $. We impose a displacement $ {\mathbf{u}}(r,\theta)=
+ u_0 {\mathbf{e}}_r + u_1 {\mathbf{e}}_{\theta} $ on the inner boundary (to generate a combination of pressure waves and shear waves) and allow for a formulation with perfectly matched layers on the outer boundary of the computational domain, which should allow for a smooth propagation of the elastic waves with no interference from the restriction of the problem to a finite computational domain. $ {\mathbf{e}}_r $ is the unit vector in the radial direction, whereas $ {\mathbf{e}}_{\theta} $ is the unit vector in azimuthal direction.
+
+It is easy to find an analytical solution of this problem by working in polar coordinates and exploiting the axisymmetry of the solution by writing the displacements as $ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_r $ or $ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_{\theta} $. The displacement $ U(r) $ is then governed in both cases by an equation of type \begin{center}  \[
+\frac{d}{d r}\left(\frac{U}{r}+\frac{dU}{dr}\right) + k^2 U=0,
+\] \end{center}  where $ \displaystyle k^2 = k_{r}^2=
+\frac{\Omega^2}{\lambda+2\mu}$ for the radial component and  $ \displaystyle k^2 = k_{\theta}^2=
+\frac{\Omega^2}{\mu}$ for the azimuthal component. We also note that \begin{center}  \[
+\lambda = \frac{\nu}{(1+\nu)(1-2\nu)} \qquad \textrm{and} 
+\qquad \mu = \frac{1}{2(1+\nu)}
+\] \end{center}  are the non-\/dimensional Lame parameters. The solution of these equations is given in each case by\+: \begin{center}  \[
+U(r) = H_1(kr).
+\] \end{center}  where $ H_1 $ is the Hankel function of first kind. The two solutions can then be converted to Cartesian coordinates and added together in an appropriate manner. The details of the procedure can be found in the {\ttfamily  Global\+Parameters\+::exact\+\_\+u() } function.
+
+We note that even though a relatively simple analytical solution (in polar coordinates!) exists for this problem, it is a non-\/trivial test case for our code which solves the governing equations in Cartesian coordinates. It is also a highly relevant test case in the context of testing perfectly matched layers, since the solution contains both shear and compression waves.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The discretised geometry is shown below. We choose a circle of radius $ r=0.5$ in a computational domain otherwise set to $ -2 \le x \le 2, -2 \le y
+\le 2 $, with a PML thickness of $ 1.6 $ in each dimension, spanned by $ 16 $ elements.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{mesh}
+\doxyfigcaption{Mesh used to resolve the geometry. }
+\end{DoxyImage}
+
+
+The figures below show "{}carpet plots"{} (on the left) of the real and imaginary parts of the exact (green) and computed (blue) horizontal displacement for $ \Omega^2=30.0 $ and $ \nu=0.3 $. Comparing the two solutions shows good agreement and hence an efficient damping given by the perfectly matched layers. We can also observe this by taking a one-\/dimensional slice from point $ (-2.0,0.0)$ to point $ (2.0,0.0)$ and visualising the profiles of the exact and computed solutions, shown on the right. The green line represents the profile of the exact solution, whereas the blue dots are extracted from the profile of the computed solution.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.95\textwidth]{result1}
+\doxyfigcaption{Real part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green\+: exact; dark blue\+: computed; light blue\+: perfectly matched layers. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.95\textwidth]{result2}
+\doxyfigcaption{Imaginary part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green\+: exact; dark blue\+: computed; light blue\+: perfectly matched layers. }
+\end{DoxyImage}
+
+
+To demonstrate that the resulting displacement field is indeed axisymmetric, we present plots of the real and imaginary parts of the radial displacement, $ (Re(u_1)^2 + Re(u_2)^2)^{1/2} $ and $ (Im(u_1)^2
++ Im(u_2)^2)^{1/2} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{result3}
+\doxyfigcaption{Real part of the computed radial displacement. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{result4}
+\doxyfigcaption{Imaginary part of the computed radial displacement. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As usual, we define all non-\/dimensional parameters in a namespace where we also define the exact solution which is imposed at the inner boundary. We omit the (lengthy) listing of the exact solution.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ helper\ to\ set\ target\ mesh\ element\ size}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_af365b0769e142cabdaed848057332858}{Element\_area}}\ =\ 0.01;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ helpers\ to\ time\ the\ code}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a6106a50c4a420f4040e2ccd7d443267c}{T\_start}}\ =\ 0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a42ef00f24f3bc5c16dae72557c736634}{T\_end}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ PML\ width\ in\ elements\ for\ the\ right\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{N\_pml\_multiplier}}\ =\ 1;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{L\_pml\_multiplier}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ PML\ width\ in\ elements\ for\ the\ right\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a401ab27b40efe725bc047909ae65b4b1}{N\_x\_right\_pml}}\ =\ 8;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ PML\ width\ in\ elements\ for\ the\ top\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_ade86fec7e40fc9a5330e6213482f09d6}{N\_y\_top\_pml}}\ =\ 8;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ PML\ width\ in\ elements\ for\ the\ left\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_accf11b5794502b15efd0aa37347f6994}{N\_x\_left\_pml}}\ =\ 8;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ PML\ width\ in\ elements\ for\ the\ left\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a79bff9b8e3435255541b71c0e3cc30a1}{N\_y\_bottom\_pml}}\ =\ 8;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ physical\ length\ of\ the\ PML\ layers}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ defaults\ to\ 0.2,\ so\ 10\%\ of\ the\ size\ of\ the\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ physical\ domain}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a140b1b8aaef0bf2b94acf75d681d4545}{Width\_x\_right\_pml}}\ \ =\ 2.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a175759402c54bb216b0599c6a031abea}{Width\_y\_top\_pml}}\ \ \ \ =\ 2.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a28925335dcc7b2bed01d744a543be9aa}{Width\_x\_left\_pml}}\ \ \ =\ 2.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a67848e80f63ec793108a4710a28cc3a9}{Width\_y\_bottom\_pml}}\ =\ 2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ to\ compute\ dependent\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aafb6ae2e2642a42a7c8ce999837d18b1}{compute\_dependent\_parameters}}()}
+\DoxyCodeLine{\ \{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Adjust\ number\ of\ PML\ elements,\ set\ to\ be\ equal\ for\ all\ layers}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a401ab27b40efe725bc047909ae65b4b1}{N\_x\_right\_pml}}\ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a401ab27b40efe725bc047909ae65b4b1}{N\_x\_right\_pml}}\ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{N\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_accf11b5794502b15efd0aa37347f6994}{N\_x\_left\_pml}}\ \ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_accf11b5794502b15efd0aa37347f6994}{N\_x\_left\_pml}}\ \ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{N\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_ade86fec7e40fc9a5330e6213482f09d6}{N\_y\_top\_pml}}\ \ \ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_ade86fec7e40fc9a5330e6213482f09d6}{N\_y\_top\_pml}}\ \ \ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{N\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a79bff9b8e3435255541b71c0e3cc30a1}{N\_y\_bottom\_pml}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a79bff9b8e3435255541b71c0e3cc30a1}{N\_y\_bottom\_pml}}\ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{N\_pml\_multiplier}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Adjust\ physical\ size\ of\ PML\ layers,\ set\ to\ be\ equal\ for\ all\ layers}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a140b1b8aaef0bf2b94acf75d681d4545}{Width\_x\_right\_pml}}\ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a140b1b8aaef0bf2b94acf75d681d4545}{Width\_x\_right\_pml}}\ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{L\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a28925335dcc7b2bed01d744a543be9aa}{Width\_x\_left\_pml}}\ \ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a28925335dcc7b2bed01d744a543be9aa}{Width\_x\_left\_pml}}\ \ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{L\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a175759402c54bb216b0599c6a031abea}{Width\_y\_top\_pml}}\ \ \ \ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a175759402c54bb216b0599c6a031abea}{Width\_y\_top\_pml}}\ \ \ \ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{L\_pml\_multiplier}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a67848e80f63ec793108a4710a28cc3a9}{Width\_y\_bottom\_pml}}\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a67848e80f63ec793108a4710a28cc3a9}{Width\_y\_bottom\_pml}}\ *\ \mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{L\_pml\_multiplier}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ non-\/dim\ frequency\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Omega\_sq}}=30.0;\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ elasticity\ tensor}}
+\DoxyCodeLine{\textcolor{comment}{}\ PMLTimeHarmonicIsotropicElasticityTensor*\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9dc0631434879b47501f64851ad679b8}{E\_pt}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Thickness\ of\ annulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{H\_annulus}}=0.5;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ directory}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by reading the command line arguments, which allow the specification of the perfectly matched layers in terms of number of elements and thickness.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ annular\ disk\ loaded\ by\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{time__harmonic__elasticity__driver_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}\ **argv)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ timing\ of\ the\ code}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a6106a50c4a420f4040e2ccd7d443267c}{Global\_Parameters::T\_start}}=TimingHelpers::timer();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Over-\/write\ PML\ layers\ element\ number\ in\ each\ dimension}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/n\_pml"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a9af8f57814ac363b52f2a88d75864524}{Global\_Parameters::N\_pml\_multiplier}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Over-\/write\ PML\ layers\ physical\ length\ in\ each\ dimension}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/l\_pml"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a7a49a7bc4052082ccf10caf8ff7a52b6}{Global\_Parameters::L\_pml\_multiplier}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ directory}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(}
+\DoxyCodeLine{\ \ \textcolor{stringliteral}{"{}-\/-\/dir"{}},\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
+
+\end{DoxyCodeInclude}
+ After extracting the relevant information from the command line we continue by computing the dependent parameters.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation\ run?}}
+\DoxyCodeLine{\ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::parse\_and\_assign();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ CommandLineArgs::doc\_specified\_flags();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Validation\ run?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ oomph\_info\ <<\ \textcolor{stringliteral}{"{}Using\ coarser\ resolution\ for\ self-\/test\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Number\ of\ elements\ for\ each\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a401ab27b40efe725bc047909ae65b4b1}{Global\_Parameters::N\_x\_right\_pml}}\ \ =\ 2;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_ade86fec7e40fc9a5330e6213482f09d6}{Global\_Parameters::N\_y\_top\_pml}}\ \ \ \ =\ 2;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_accf11b5794502b15efd0aa37347f6994}{Global\_Parameters::N\_x\_left\_pml}}\ \ \ =\ 2;\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a79bff9b8e3435255541b71c0e3cc30a1}{Global\_Parameters::N\_y\_bottom\_pml}}\ =\ 2;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Thickness\ of\ each\ layer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a140b1b8aaef0bf2b94acf75d681d4545}{Global\_Parameters::Width\_x\_right\_pml}}\ \ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a175759402c54bb216b0599c6a031abea}{Global\_Parameters::Width\_y\_top\_pml}}\ \ \ \ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a28925335dcc7b2bed01d744a543be9aa}{Global\_Parameters::Width\_x\_left\_pml}}\ \ \ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a67848e80f63ec793108a4710a28cc3a9}{Global\_Parameters::Width\_y\_bottom\_pml}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Target\ element\ size}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_af365b0769e142cabdaed848057332858}{Global\_Parameters::Element\_area}}\ \ =\ 0.025;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Target\ element\ size}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Global\_Parameters::Omega\_sq}}\ \ =\ 10.0;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ dependent\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{namespaceGlobal__Parameters_aafb6ae2e2642a42a7c8ce999837d18b1}{Global\_Parameters::compute\_dependent\_parameters}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
+
+\end{DoxyCodeInclude}
+ Next, we create the elasticity tensor and set up the problem (discretised with six-\/noded triangular elements). 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ elasticity\ tensor}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9dc0631434879b47501f64851ad679b8}{Global\_Parameters::E\_pt}}=\textcolor{keyword}{new}\ PMLTimeHarmonicIsotropicElasticityTensor(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticAnnulusProblem}{ElasticAnnulusProblem}}<}
+\DoxyCodeLine{\ ProjectablePMLTimeHarmonicLinearElasticityElement}
+\DoxyCodeLine{\ \ <TPMLTimeHarmonicLinearElasticityElement<2,3>\ >\ }
+\DoxyCodeLine{\ >\ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticAnnulusProblem}{ElasticAnnulusProblem<TPMLTimeHarmonicLinearElasticityElement<2,3>}}\ >\ }
+\DoxyCodeLine{\ \ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCodeInclude}
+ and perform the actual computation and the post-\/processing of the results\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ the\ problem\ using\ Newton's\ method}}
+\DoxyCodeLine{\ problem.newton\_solve();}
+\DoxyCodeLine{\ \textcolor{comment}{//\ End\ timing\ of\ the\ code}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Parameters_a42ef00f24f3bc5c16dae72557c736634}{Global\_Parameters::T\_end}}=TimingHelpers::timer();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily Problem} class is very simple and is very similar to that employed for the \href{../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html}{\texttt{ solution of the classical time harmonic linear elasticity problem with traction boundary conditions.}} We provide helper functions to create the PML meshes and to apply the boundary conditions (mainly because these tasks have to be performed repeatedly in the spatially adaptive version this code which is not discussed explicitly here; but see \doxysectlink{index_comm_ex}{Comments and Exercises}{1} ).
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Annular\ disk}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticAnnulusProblem}{ElasticAnnulusProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticAnnulusProblem_aedf3d30576ccc20e2d8aa809cf075228}{ElasticAnnulusProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticAnnulusProblem_a7e791acd99dc0ae25ab9f2e2fd07c587}{\string~ElasticAnnulusProblem}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_adfb87876ac9981899c6c0b4caf0786f9}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_af50a0dc2601e1a5e884166941d2cb9ce}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ PML\ meshes}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_a0d2b0cc613caaca7c8f1a78c80b40bc7}{create\_pml\_meshes}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_abc8f38dd49a37b06212c168588301900}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_aa47beeedeac662b19c0f992daf77ef25}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_ab2952a8591047f62f9f66cfe29a533de}{doc\_solution}}(DocInfo\&\ doc\_info);}
+
+\end{DoxyCodeInclude}
+ The private member data includes pointers the bulk mesh
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ solid\ mesh}}
+\DoxyCodeLine{\ TriangleMesh<ELASTICITY\_ELEMENT>*\ Solid\_mesh\_pt;}
+
+\end{DoxyCodeInclude}
+ and to the various PML sub-\/meshes
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ right\ PML\ mesh}}
+\DoxyCodeLine{\ Mesh*\ PML\_right\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ top\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_top\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ left\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_left\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ bottom\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_bottom\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ top\ right\ corner\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_top\_right\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ top\ left\ corner\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_top\_left\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ bottom\ right\ corner\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_bottom\_right\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ bottom\ left\ corner\ PML\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ PML\_bottom\_left\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ Doc\_info;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ upper\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ Upper\_inner\_boundary\_id;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ upper\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ Upper\_outer\_boundary\_id;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ lower\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ Lower\_inner\_boundary\_id;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Boundary\ ID\ of\ lower\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ Lower\_outer\_boundary\_id;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We start by creating the {\ttfamily Circle} object that defines the inner boundary of the domain. The radius has been defined as part of the {\ttfamily \doxylink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}} definition\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classElasticAnnulusProblem_aedf3d30576ccc20e2d8aa809cf075228}{ElasticAnnulusProblem<ELASTICITY\_ELEMENT>::ElasticAnnulusProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ circle\ representing\ inner\ boundary}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ a=0.2;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ x\_c=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ y\_c=0.0;}
+\DoxyCodeLine{\ Circle*\ inner\_circle\_pt=\textcolor{keyword}{new}\ Circle(x\_c,y\_c,a);}
+
+\end{DoxyCodeInclude}
+ and define the polygonal outer boundary of the computational domain. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ TriangleMeshClosedCurve*\ outer\_boundary\_pt=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_segments\ =\ 16;}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ outer\_boundary\_line\_pt(4);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Each\ polyline\ only\ has\ three\ vertices,\ provide\ storage\ for\ their}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ coordinates}}
+\DoxyCodeLine{\ Vector<Vector<double>\ >\ vertex\_coord(2);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ vertex\_coord[i].resize(2);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ First\ polyline}}
+\DoxyCodeLine{\ vertex\_coord[0][0]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[0][1]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][0]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][1]=2.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 1st\ boundary\ polyline}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ boundary\_id=2;}
+\DoxyCodeLine{\ outer\_boundary\_line\_pt[0]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertex\_coord,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Second\ boundary\ polyline}}
+\DoxyCodeLine{\ vertex\_coord[0][0]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[0][1]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][0]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][1]=2.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 2nd\ boundary\ polyline}}
+\DoxyCodeLine{\ boundary\_id=3;}
+\DoxyCodeLine{\ outer\_boundary\_line\_pt[1]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertex\_coord,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Third\ boundary\ polyline}}
+\DoxyCodeLine{\ vertex\_coord[0][0]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[0][1]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][0]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][1]=-\/2.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 3rd\ boundary\ polyline}}
+\DoxyCodeLine{\ boundary\_id=4;}
+\DoxyCodeLine{\ outer\_boundary\_line\_pt[2]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertex\_coord,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Fourth\ boundary\ polyline}}
+\DoxyCodeLine{\ vertex\_coord[0][0]=2.0;}
+\DoxyCodeLine{\ vertex\_coord[0][1]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][0]=-\/2.0;}
+\DoxyCodeLine{\ vertex\_coord[1][1]=-\/2.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ 4th\ boundary\ polyline}}
+\DoxyCodeLine{\ boundary\_id=5;}
+\DoxyCodeLine{\ outer\_boundary\_line\_pt[3]\ =\ \textcolor{keyword}{new}\ TriangleMeshPolyLine(vertex\_coord,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ triangle\ mesh\ polygon\ for\ outer\ boundary}}
+\DoxyCodeLine{\ outer\_boundary\_pt\ =\ \textcolor{keyword}{new}\ TriangleMeshPolygon(outer\_boundary\_line\_pt);}
+
+\end{DoxyCodeInclude}
+ Next we define the curvilinear inner boundary in terms of two {\ttfamily Triangle\+Mesh\+Curvi\+Lines} which define the hole in the domain\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Inner\ circular\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Vector<TriangleMeshCurveSection*>\ inner\_boundary\_line\_pt(2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ s\_start\ =\ 0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ s\_end\ \ \ =\ MathematicalConstants::Pi;}
+\DoxyCodeLine{\ boundary\_id\ =\ 0;}
+\DoxyCodeLine{\ inner\_boundary\_line\_pt[0]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(inner\_circle\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_end,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_segments,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ s\_start\ =\ MathematicalConstants::Pi;}
+\DoxyCodeLine{\ s\_end\ \ \ =\ 2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{\ boundary\_id\ =\ 1;}
+\DoxyCodeLine{\ inner\_boundary\_line\_pt[1]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ TriangleMeshCurviLine(inner\_circle\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_end,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_segments,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_id);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Combine\ to\ hole}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ Vector<TriangleMeshClosedCurve*>\ hole\_pt(1);}
+\DoxyCodeLine{\ Vector<double>\ hole\_coords(2);}
+\DoxyCodeLine{\ hole\_coords[0]=0.0;}
+\DoxyCodeLine{\ hole\_coords[1]=0.0;}
+\DoxyCodeLine{\ hole\_pt[0]=\textcolor{keyword}{new}\ TriangleMeshClosedCurve(inner\_boundary\_line\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hole\_coords);}
+
+\end{DoxyCodeInclude}
+ We specify the mesh parameters (including a target element size)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ TriangleMeshParameters\ object\ for\ helping\ on\ the\ manage\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ of\ the\ TriangleMesh\ parameters.\ The\ only\ parameter\ that\ needs\ to\ take\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ the\ outer\ boundary.}}
+\DoxyCodeLine{\ TriangleMeshParameters\ triangle\_mesh\_parameters(outer\_boundary\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ the\ closed\ curve\ using\ the\ TriangleMeshParameters\ object}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.internal\_closed\_curve\_pt()\ =\ hole\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Target\ element\ size\ in\ bulk\ mesh}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.element\_area()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_af365b0769e142cabdaed848057332858}{Global\_Parameters::Element\_area}};\ }
+
+\end{DoxyCodeInclude}
+ and build the bulk mesh
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ mesh}}
+\DoxyCodeLine{\ Solid\_mesh\_pt=\textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ RefineableTriangleMesh<ELASTICITY\_ELEMENT>(triangle\_mesh\_parameters);}
+
+\end{DoxyCodeInclude}
+ We create the PML meshes and add them (and the solid mesh) to the Problem\textquotesingle{}s collection of sub-\/meshes and build the global mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ main\ triangular\ mesh}}
+\DoxyCodeLine{\ add\_sub\_mesh(Solid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ PML\ meshes\ and\ add\ them\ to\ the\ global\ mesh}}
+\DoxyCodeLine{\ create\_pml\_meshes();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ entire\ mesh\ from\ its\ submeshes}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+
+\end{DoxyCodeInclude}
+ Next we pass the problem parameters to all elements via calling ~\newline
+ {\ttfamily  \doxylink{classElasticAnnulusProblem_a06d509ff3316e5f3072ad5f9144cc33f}{Elastic\+Annulus\+Problem$<$\+ELASTICITY\+\_\+\+ELEMENT$>$\+::complete\+\_\+problem\+\_\+setup()} } discussed below (remember that even the elements in the PML layers need to be told about these since they adjust the $ \gamma_x $ and $ \gamma_y $ functions in terms of these parameters), apply the boundary conditions and assign the equation numbers.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ problem\ setup}}
+\DoxyCodeLine{\ complete\_problem\_setup();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ The setup of the problem is now complete.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_complete_setup}{}\doxysubsection{\texorpdfstring{Completing the problem setup}{Completing the problem setup}}\label{index_complete_setup}
+We pass the problem parameters to all elements, which are used in the equation construction and perfectly matched layer definition.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_complete\_problem\_setup====================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Complete\ problem\ setup}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELASTICITY\_ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classElasticAnnulusProblem_a06d509ff3316e5f3072ad5f9144cc33f}{ElasticAnnulusProblem<ELASTICITY\_ELEMENT>::complete\_problem\_setup}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Min\ element\ size\ allowed\ during\ adaptation}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
+\DoxyCodeLine{\ \ \{\ \ \ }
+\DoxyCodeLine{\ \ \ Solid\_mesh\_pt-\/>min\_element\_size()=1.0e-\/5;\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ the\ physical\ properties\ to\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nel=this-\/>mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \{\ \ \ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Upcast\ from\ PMLElement\ to\ time\ harmonic\ }}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ linear\ elasticity\ bulk\ element}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ PMLTimeHarmonicLinearElasticityEquations<2>\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}PMLTimeHarmonicLinearElasticityEquations<2>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>elasticity\_tensor\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Parameters_a9dc0631434879b47501f64851ad679b8}{Global\_Parameters::E\_pt}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Square\ of\ non-\/dim\ frequency}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>omega\_sq\_pt()=\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Global\_Parameters::Omega\_sq}};}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_assignment\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+
+\end{DoxyCodeInclude}
+ We pin all four nodal values (representing the real and imaginary part of the two displacement components) on the inner boundaries (boundaries 0 and 1; see enumeration of the boundaries in the constructor) and assign the desired boundary values.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=0;b<2;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ Solid\_mesh\_pt-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ Node*\ nod\_pt=Solid\_mesh\_pt-\/>boundary\_node\_pt(b,n);}
+\DoxyCodeLine{\ \ \ \ \ \ \ Vector<double>\ x\_node(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ x\_node[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ x\_node[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ Vector<double>\ u\_exact(4);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a97162dba4bd29a15067b9c9bbe53c754}{Global\_Parameters::exact\_u}}(x\_node,u\_exact);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ k=0;k<4;k++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ nod\_pt-\/>pin(k);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ nod\_pt-\/>set\_value(k,u\_exact[k]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_complete\_setup}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+As expected, the {\ttfamily doc\+\_\+solution(...)} member function documents the computed solution. We are particularly interested in the computed solution and the exact solution for comparison purposes
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ displacement\ field}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\_bulk\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output\_fct(some\_file,n\_plot,\mbox{\hyperlink{namespaceGlobal__Parameters_a97162dba4bd29a15067b9c9bbe53c754}{Global\_Parameters::exact\_u}});\ }
+\DoxyCodeLine{\ some\_file.close();}
+
+\end{DoxyCodeInclude}
+ We also output the solution in the perfectly matched layers themselves and document the norm of the solution, the wall clock time and number of degrees of freedom.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ runtime\ (wall\ clock\ time)\ in\ s\ in\ a\ file}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/wall\_clock\_time\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());\ }
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ some\_file\ <<\ \mbox{\hyperlink{namespaceGlobal__Parameters_a42ef00f24f3bc5c16dae72557c736634}{Global\_Parameters::T\_end}}-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a6106a50c4a420f4040e2ccd7d443267c}{Global\_Parameters::T\_start}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ number\ of\ degrees\ of\ freedom\ in\ a\ file}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/ndof\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());\ }
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ some\_file\ <<\ this-\/>ndof()\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ norm\ of\ solution\ (to\ allow\ validation\ of\ solution\ even}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ if\ triangle\ generates\ a\ slightly\ different\ mesh)}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/elast\_soln\_norm\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());\ \ \ }
+\DoxyCodeLine{\ some\_file.open(filename);\ \ \ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ norm\_soln=0.0;}
+\DoxyCodeLine{\ this-\/>mesh\_pt()-\/>compute\_norm(norm\_soln);\ \ }
+\DoxyCodeLine{\ some\_file\ <<\ sqrt(norm\_soln)\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ computed\ solution:\ "{}}\ \ \ <<\ sqrt(norm\_soln)\ \ <<\ endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+\hypertarget{index_comments}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_comments}
+
+\begin{DoxyItemize}
+\item If you inspect the \href{../../../demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc}{\texttt{ driver code}} you will notice that it also contains relevant code to perform spatially adaptive simulations of the problem -- the adaptive version of the code is selected with {\ttfamily \#ifdefs}.
+\item The choice for the absorbing functions in our implementation of the PMLs is not unique. There are alternatives varying in both order and continuity properties. The current form is the result of several feasibility studies and comparisons found in \href{http://www.sciencedirect.com/science/article/pii/S0021999106004487}{\texttt{ Bermudez et al.}} For Helmholtz equations these damping functions produce an acceptable result in most practical situations without further modifications. For very specific applications, alternatives may need to be used and can easily be implemented within the existing framework.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+\hypertarget{index_pmlsize}{}\doxysubsubsection{\texorpdfstring{Changing perfectly matched layer parameters}{Changing perfectly matched layer parameters}}\label{index_pmlsize}
+Confirm that only a relatively small number of PML elements (across the thickness of the PML layer) is required to effectively damp the outgoing waves. It is also interesting to explore the effect of increasing the number of elements of the mesh inside the perfectly matched layers.
+
+Another parameter that can be adjusted is the geometrical thickness of the perfectly matched layers. In the case of linear elasticity (as opposed to for example the Helmholtz equation), the thickness of these layers must be relatively large to obtain the best results. Try to explain why and take note of the differences between the two mentioned problems.\hypertarget{index_adaptivity}{}\doxysubsubsection{\texorpdfstring{Spatial adaptivity}{Spatial adaptivity}}\label{index_adaptivity}
+The driver code discussed above already contains the straightforward modifications required to enable spatial adaptivity. Explore this (by recompiling the code with -\/DADAPTIVE) and explain why spatial adaptivity is not particularly helpful for the test problem discussed above.\hypertarget{index_diff_order}{}\doxysubsubsection{\texorpdfstring{Linear and cubic finite elements}{Linear and cubic finite elements}}\label{index_diff_order}
+The driver code also contains (commented out) modifications that allow the simulation to be performed with three-\/node (linear) and ten-\/node (cubic) triangles. Explore the performance of these elements and confirm that the helper functions correctly create matching (four-\/node and sixteen-\/node) quad elements in the PML layers.\hypertarget{index_default}{}\doxysubsubsection{\texorpdfstring{Default values for problem parameters}{Default values for problem parameters}}\label{index_default}
+Following our usual convention, we provide default values for problem parameters where this is sensible. Some parameters, such as the elasticity tensor, do need to be set since there are no obvious defaults. If {\ttfamily oomph-\/lib} is compiled in {\ttfamily PARANOID} mode, an error is thrown if the relevant pointers haven\textquotesingle{}t been set. Without paranoia, you get a segmentation fault...
+
+Confirm that this is the case by commenting out the relevant assignments.\hypertarget{index_non_convex}{}\doxysubsubsection{\texorpdfstring{Non-\/convex PML boundaries}{Non-convex PML boundaries}}\label{index_non_convex}
+As discussed above, we currently provide helper functions to attach PML layers to axis-\/aligned boundaries of 2D meshes with convex outer boundaries. Essentially, this restricts us to rectangular computational domains. Extend this capability by developing methodologies to
+\begin{DoxyItemize}
+\item deal with non-\/convex domain boundaries. We suggest you create PML meshes for the non-\/convex corners first, then create the axis-\/aligned meshes (note that these have to share nodes with the already-\/created elements that occupy the non-\/convex corners), and then create the corner meshes for the convex corners (as before). When you\textquotesingle{}re done, let us know -- this would be a really useful addition to oomph-\/lib\textquotesingle{}s machinery. We\textquotesingle{}re happy to help!
+\item Repeat the same exercise in 3D -- somewhat less trivial (so we\textquotesingle{}re even keener for somebody to have a go!)
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../demo_drivers/pml_time_harmonic_linear_elasticity/}{\texttt{ demo\+\_\+drivers/pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../demo_drivers/pml_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc}{\texttt{ demo\+\_\+drivers/pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity/time\+\_\+harmonic\+\_\+elasticity\+\_\+driver.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

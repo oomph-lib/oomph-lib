@@ -1,0 +1,70 @@
+\doxysection{oomph\+::Surface\+Derivatives Class Reference}
+\hypertarget{classoomph_1_1SurfaceDerivatives}{}\label{classoomph_1_1SurfaceDerivatives}\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+
+
+Class that establishes the surface derivative functions for Surface\+Interface\+Elements (2D surfaces in 3D space) These are defined in a separate class so that they can be used by other interface equation-\/type classes.  
+
+
+
+
+{\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Surface\+Derivatives\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.834575cm]{classoomph_1_1SurfaceDerivatives}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd}{Surface\+Derivatives}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{psi}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dpsids}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{interpolated\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that establishes the surface derivative functions for Surface\+Interface\+Elements (2D surfaces in 3D space) These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
+
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00708}{708}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd}\label{classoomph_1_1SurfaceDerivatives_a7bd520c805a4444073f5b05501d747fd} 
+\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}!SurfaceDerivatives@{SurfaceDerivatives}}
+\index{SurfaceDerivatives@{SurfaceDerivatives}!oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+\doxysubsubsection{\texorpdfstring{SurfaceDerivatives()}{SurfaceDerivatives()}}
+{\footnotesize\ttfamily oomph\+::\+Surface\+Derivatives\+::\+Surface\+Derivatives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00712}{712}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}\label{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7} 
+\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} oomph\+::\+Surface\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{interpolated\+\_\+t,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{surface\+\_\+gradient,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{DShape}} \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations. 
+
+Specialise the surface derivatives for 2D surface case. 
+
+Definition at line \mbox{\hyperlink{interface__elements_8cc_source_l00847}{847}} of file \mbox{\hyperlink{interface__elements_8cc_source}{interface\+\_\+elements.\+cc}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interface__elements_8h}{interface\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{interface__elements_8cc}{interface\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

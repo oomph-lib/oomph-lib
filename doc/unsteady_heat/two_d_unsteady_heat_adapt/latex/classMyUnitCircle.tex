@@ -1,0 +1,108 @@
+\doxysection{My\+Unit\+Circle Class Reference}
+\hypertarget{classMyUnitCircle}{}\label{classMyUnitCircle}\index{MyUnitCircle@{MyUnitCircle}}
+
+
+Unit circle as Geom\+Object.  
+
+
+Inheritance diagram for My\+Unit\+Circle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMyUnitCircle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMyUnitCircle_a056add64776e52a8ea2ba2e9d6d0e32d}{My\+Unit\+Circle}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: The circle is a 1D object (i.\+e. it\textquotesingle{}s parametrised by one intrinsic coordinate) in 2D space. Pass these arguments to the constructor of the Geom\+Object base class. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classMyUnitCircle_ae6b321a25ef6f6b12d7c9a225f91140d}{\texorpdfstring{$\sim$}{\string~}\+My\+Unit\+Circle}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyUnitCircle_ab60b73d1c28b013c40dd2aaa98072261}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Current position vector to material point at Lagrangian coordinate xi. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyUnitCircle_a6a38e6320399940db4c9858668189ec3}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. Circle is fixed -- simply call the steady version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit circle as Geom\+Object. 
+
+\[ x = \cos(\xi)  \] \[ y = \sin(\xi)  \] 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00053}{53}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMyUnitCircle_a056add64776e52a8ea2ba2e9d6d0e32d}\label{classMyUnitCircle_a056add64776e52a8ea2ba2e9d6d0e32d} 
+\index{MyUnitCircle@{MyUnitCircle}!MyUnitCircle@{MyUnitCircle}}
+\index{MyUnitCircle@{MyUnitCircle}!MyUnitCircle@{MyUnitCircle}}
+\doxysubsubsection{\texorpdfstring{MyUnitCircle()}{MyUnitCircle()}}
+{\footnotesize\ttfamily My\+Unit\+Circle\+::\+My\+Unit\+Circle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: The circle is a 1D object (i.\+e. it\textquotesingle{}s parametrised by one intrinsic coordinate) in 2D space. Pass these arguments to the constructor of the Geom\+Object base class. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00061}{61}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+
+\Hypertarget{classMyUnitCircle_ae6b321a25ef6f6b12d7c9a225f91140d}\label{classMyUnitCircle_ae6b321a25ef6f6b12d7c9a225f91140d} 
+\index{MyUnitCircle@{MyUnitCircle}!````~MyUnitCircle@{\texorpdfstring{$\sim$}{\string~}MyUnitCircle}}
+\index{````~MyUnitCircle@{\texorpdfstring{$\sim$}{\string~}MyUnitCircle}!MyUnitCircle@{MyUnitCircle}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MyUnitCircle()}{\string~MyUnitCircle()}}
+{\footnotesize\ttfamily virtual My\+Unit\+Circle\+::\texorpdfstring{$\sim$}{\string~}\+My\+Unit\+Circle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00064}{64}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMyUnitCircle_a6a38e6320399940db4c9858668189ec3}\label{classMyUnitCircle_a6a38e6320399940db4c9858668189ec3} 
+\index{MyUnitCircle@{MyUnitCircle}!position@{position}}
+\index{position@{position}!MyUnitCircle@{MyUnitCircle}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void My\+Unit\+Circle\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrised position on object\+: r(xi). Evaluated at previous time level. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous time level. Circle is fixed -- simply call the steady version. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00079}{79}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00068}{position()}}.
+
+\Hypertarget{classMyUnitCircle_ab60b73d1c28b013c40dd2aaa98072261}\label{classMyUnitCircle_ab60b73d1c28b013c40dd2aaa98072261} 
+\index{MyUnitCircle@{MyUnitCircle}!position@{position}}
+\index{position@{position}!MyUnitCircle@{MyUnitCircle}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void My\+Unit\+Circle\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Current position vector to material point at Lagrangian coordinate xi. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00068}{68}} of file \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_source_l00079}{position()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+cc}}\end{DoxyCompactItemize}

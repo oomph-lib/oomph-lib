@@ -1,0 +1,226 @@
+\doxysection{Tanh\+Soln\+For\+Poisson Namespace Reference}
+\hypertarget{namespaceTanhSolnForPoisson}{}\label{namespaceTanhSolnForPoisson}\index{TanhSolnForPoisson@{TanhSolnForPoisson}}
+
+
+Namespace for exact solution for Poisson equation with sharp step.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af197decab980d38d2037032780723984}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, double \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a scalar. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function to make it an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}} =1
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of step. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ac3d25f0791c1363f487600e02757bc97}{N\+\_\+x}} =-\/1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised x-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_a482d668ef91071985d1f4ce7cf29a926}{N\+\_\+y}} =-\/1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised y-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae6b5b5d21747a45776004756dc97dc5c}{N\+\_\+z}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (non-\/normalised z-\/component of unit vector in direction of step plane) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_af55e0479c15ab58929eb96ee9d6cf07a}{X\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (x-\/coordinate of step plane) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_addc6dc6578b16a1d9aa774c25776b921}{Y\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (y-\/coordinate of step plane) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_abf4856ed1855c34c2b2ea57fd6783644}{Z\+\_\+0}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Orientation (z-\/coordinate of step plane) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for exact solution for Poisson equation with sharp step. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_af197decab980d38d2037032780723984}\label{namespaceTanhSolnForPoisson_af197decab980d38d2037032780723984} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_exact\_u@{get\_exact\_u}}
+\index{get\_exact\_u@{get\_exact\_u}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Exact solution as a scalar. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{82}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00048}{Alpha}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00052}{N\+\_\+x}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00056}{N\+\_\+y}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00060}{N\+\_\+z}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00064}{X\+\_\+0}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00067}{Y\+\_\+0}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00070}{Z\+\_\+0}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}\label{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_exact\_u@{get\_exact\_u}}
+\index{get\_exact\_u@{get\_exact\_u}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{74}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00048}{Alpha}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00052}{N\+\_\+x}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00056}{N\+\_\+y}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00060}{N\+\_\+z}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00064}{X\+\_\+0}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00067}{Y\+\_\+0}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00070}{Z\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00155}{Eighth\+Sphere\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00271}{Eighth\+Sphere\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}\label{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_source@{get\_source}}
+\index{get\_source@{get\_source}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_source()}{get\_source()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::get\+\_\+source (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Source function to make it an exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{91}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00048}{Alpha}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00052}{N\+\_\+x}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00056}{N\+\_\+y}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00060}{N\+\_\+z}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00064}{X\+\_\+0}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00067}{Y\+\_\+0}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00070}{Z\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00326}{main()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}\label{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!Alpha@{Alpha}}
+\index{Alpha@{Alpha}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+Alpha =1}
+
+
+
+Parameter for steepness of step. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00048}{48}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00195}{Eighth\+Sphere\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Eighth\+Sphere\+Poisson\+Problem()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_ac3d25f0791c1363f487600e02757bc97}\label{namespaceTanhSolnForPoisson_ac3d25f0791c1363f487600e02757bc97} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!N\_x@{N\_x}}
+\index{N\_x@{N\_x}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{N\_x}{N\_x}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+x =-\/1.\+0}
+
+
+
+Orientation (non-\/normalised x-\/component of unit vector in direction of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00052}{52}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_a482d668ef91071985d1f4ce7cf29a926}\label{namespaceTanhSolnForPoisson_a482d668ef91071985d1f4ce7cf29a926} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!N\_y@{N\_y}}
+\index{N\_y@{N\_y}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{N\_y}{N\_y}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+y =-\/1.\+0}
+
+
+
+Orientation (non-\/normalised y-\/component of unit vector in direction of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00056}{56}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_ae6b5b5d21747a45776004756dc97dc5c}\label{namespaceTanhSolnForPoisson_ae6b5b5d21747a45776004756dc97dc5c} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!N\_z@{N\_z}}
+\index{N\_z@{N\_z}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{N\_z}{N\_z}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+N\+\_\+z =1.\+0}
+
+
+
+Orientation (non-\/normalised z-\/component of unit vector in direction of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00060}{60}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_af55e0479c15ab58929eb96ee9d6cf07a}\label{namespaceTanhSolnForPoisson_af55e0479c15ab58929eb96ee9d6cf07a} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!X\_0@{X\_0}}
+\index{X\_0@{X\_0}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{X\_0}{X\_0}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+X\+\_\+0 =0.\+0}
+
+
+
+Orientation (x-\/coordinate of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00064}{64}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_addc6dc6578b16a1d9aa774c25776b921}\label{namespaceTanhSolnForPoisson_addc6dc6578b16a1d9aa774c25776b921} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!Y\_0@{Y\_0}}
+\index{Y\_0@{Y\_0}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{Y\_0}{Y\_0}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+Y\+\_\+0 =0.\+0}
+
+
+
+Orientation (y-\/coordinate of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00067}{67}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_abf4856ed1855c34c2b2ea57fd6783644}\label{namespaceTanhSolnForPoisson_abf4856ed1855c34c2b2ea57fd6783644} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!Z\_0@{Z\_0}}
+\index{Z\_0@{Z\_0}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{Z\_0}{Z\_0}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+Z\+\_\+0 =0.\+0}
+
+
+
+Orientation (z-\/coordinate of step plane) 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00070}{70}} of file \mbox{\hyperlink{eighth__sphere__poisson_8cc_source}{eighth\+\_\+sphere\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00074}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{eighth__sphere__poisson_8cc_source_l00091}{get\+\_\+source()}}.
+

@@ -1,0 +1,1052 @@
+\chapter{The Bretherton problem\+: An air finger propagates into a 2D channel}
+\hypertarget{index}{}\label{index}\index{The Bretherton problem: An air finger propagates into a 2D channel@{The Bretherton problem: An air finger propagates into a 2D channel}}
+This tutorial discusses the solution of the classical Bretherton problem in which an air-\/finger is driven steadily into a 2D fluid-\/filled, rigid-\/walled channel.
+
+The driver code listed below was originally developed as a test-\/bed for the paper
+
+\begin{center} Hazel, A.\+L. \& Heil, M. (2008) The influence of gravity on the steady propagation of a semi-\/infinite bubble into a flexible channel. Physics of Fluids 20, 092109 \href{http://www.maths.manchester.ac.uk/~mheil/MATTHIAS/PDF/HazelHeilPoF2008.pdf}{\texttt{ (pdf reprint)}} \end{center} 
+
+in which we studied the elastic-\/walled equivalent, paying particular attention to the effect of transverse gravity which plays quite an important role in this problem.
+
+Compared to other tutorials, there is no detailed discussion of the driver code itself because the implementation is somewhat messy. However, given that the driver code is (of course!) very well documented you should be able to figure out what\textquotesingle{}s going on once you\textquotesingle{}ve read through the discussion of the problem formulation and our brief comments on the \doxysectlink{index_implement}{Implementation}{1}. \href{../../../contact/html/index.html}{\texttt{ Get in touch}} if you need more information.\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem}{The problem}}\label{index_problem}
+The sketch below shows the problem setup\+: An (inviscid) air finger propagates at a steady speed $ U $ into a 2D rigid-\/walled, fluid-\/filled channel of half-\/width $ H_0^* $. In the process it displaces some of the viscous fluid (of density $ \rho $, viscosity $ \mu $ and surface tension $ \sigma^* $) and deposits a film of thickness $ h_0^* $ on the channel walls. \mbox{[}Note that, for the sake of simplicity, we ignore the effect of transverse gravity in this discussion; the driver code listed below allows the specification of a gravitational body force which will break the up-\/down symmetry of the solution.\mbox{]}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{bretherton_sketch}
+\doxyfigcaption{Sketch of the problem setup }
+\end{DoxyImage}
+
+
+We non-\/dimensionalise the velocities on $ U $, the lengths on $ H_0^* $ and the pressure on the viscous scale, $ \mu U /
+H_0^* $ and solve the problem in a frame moving with the velocity of the finger. The flow is then governed by the non-\/dimensional Navier-\/\+Stokes equations  \[
+Re \ u_j\frac{\partial u_i}{\partial x_j} = -\frac{\partial p}{\partial x_i} + \
+\frac{\partial }{\partial x_j }\left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}  \right)
+\] and the continuity equation  \[ 
+\frac{\partial u_i}{\partial x_i}=0, 
+\] where the Reynolds number is defined as $ Re=U H_0 \rho/\mu $. On the free fluid surface, whose outer unit normal we denote by $ {\bf n} $, the fluid normal velocity vanishes,  \[
+{\bf u} \cdot {\bf n} = 0 \mbox{\ \ \ on the air-liquid interface}.
+\] We measure the fluid pressure $ p $ relative to the bubble pressure $ p_b $. Then the dynamic boundary condition implies that  \[
+-p n_i + \left( \frac{\partial u_i}{\partial x_j} + 
+\frac{\partial u_j}{\partial x_i} \right) n_j + \frac{1}{Ca} \
+\kappa_f n_i  = 0
+\mbox{\ \ \ on the air-liquid interface,}
+\] where $ \kappa_f = \kappa_f^* H_0 $ is the non-\/dimensional interface curvature and the capillary number $ Ca = U\mu/\sigma^* $ is a non-\/dimensional measure of the bubble velocity. The no-\/slip condition on the channel walls requires that $ {\bf
+u}=(-1,0) $ at $ x_2=\pm 1 $. Far behind the bubble tip, the fluid remains stationary on the walls. In the moving frame of reference, this corresponds to the plug flow profile $ {\bf u}=(-1,0) $ as $
+x_1\to -\infty $. The residual film thickness $ h_0 $ has to be determined as part of the solution and it determines the volume flux through the system. The Poiseuille velocity profile far ahead of the bubble tip,  \[
+{\bf u}=(-1+\frac{3}{2}(1-h_0)(1-x_2^2),0) \mbox{\ \ \ as $ x_1\to \infty$,}
+\ \ \ \ \ \ \ \ (1)
+\] is then determined by overall continuity. ~\newline
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Some results}{Some results}}\label{index_results}
+Here are some pretty pictures of the computed flow field,
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{bretherton_flow_with_streamlines}
+\doxyfigcaption{Velocity and pressure fields }
+\end{DoxyImage}
+
+
+and here is a comparison of the computational predictions for the bubble pressure and film thickness against Bretherton\textquotesingle{}s famous asymptotic predictions (valid only for small capillary numbers!)\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{bretherton_trace}
+\doxyfigcaption{Bubble pressure and film thickness far behind the finger tip vs. capillary number; computed solution and Bretherton\textquotesingle{}s predictions for small Ca. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implement}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_implement}
+The discretisation of the problem is reasonably straightforward, the most (human-\/)time-\/consuming part being the creation of the spine mesh, discussed in \href{../../../navier_stokes/spine_channel/html/index.html}{\texttt{ another tutorial}}. The real complication arises from the fact that the application of the "{}inflow condition"{} (1) at the right end of the domain -- superficially a Dirichlet condition for the velocity -- depends on the non-\/dimensional film thickness $ h_0 $ at the left end of the domain. This introduces a non-\/local interaction between these degrees of freedom. We handle this by providing a templated wrapper class {\ttfamily \doxylink{classBrethertonElement}{Bretherton\+Element}} (templated by the type of the "{}wrapped"{} fluid element) which allows the specification of the film thickness as external {\ttfamily Data} (i.\+e. {\ttfamily Data} whose values affect the element\textquotesingle{}s residuals but are not determined by the element; see the discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} various types of elemental {\ttfamily Data} in \href{../../../the_data_structure/html/index.html}{\texttt{ the "{}bottom up"{} discussion of the library\textquotesingle{}s data structure}}). Read the driver code listed below to see how it works!
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_driver}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_driver}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ 2D\ Bretherton\ problem}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include<algorithm>}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ The\ oomphlib\ headers\ \ \ }}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}navier\_stokes.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}fluid\_interface.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ mesh}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/bretherton\_spine\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namepspace\ for\ global\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Womersley\ =\ Reynolds\ times\ Strouhal}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}};\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Product\ of\ Reynolds\ and\ Froude\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Capillary\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}};\ \ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Direction\ of\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{G}}(2);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ film\ thickness\ at\ outflow\ on\ the\ lower\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{H\_lo\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ film\ thickness\ at\ outflow\ on\ the\ upper\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a83a3a82f89784013805bd23d63faa7e3}{H\_up\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ y-\/position\ at\ inflow\ on\ the\ lower\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a84caa2a64e50ba5b390a3cd100f0f835}{Y\_lo\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ y-\/position\ at\ inflow\ on\ the\ upper\ wall}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a75878a0c79c88065fd9031f273b62698}{Y\_up\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ inflow\ velocity,\ based\ on\ spine\ heights\ at\ outflow}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ channel\ width\ at\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a08e9835d71b7f7194ec5475f139211be}{inflow}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ veloc)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\ \ std::ostringstream\ error\_stream;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{bool}\ throw\_error=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{H\_lo\_pt}}==0)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ error\_stream\ <<\ \textcolor{stringliteral}{"{}You\ must\ set\ H\_lo\_pt\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ throw\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a83a3a82f89784013805bd23d63faa7e3}{H\_up\_pt}}==0)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ error\_stream\ <<\ \textcolor{stringliteral}{"{}You\ must\ set\ H\_up\_pt\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ throw\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a84caa2a64e50ba5b390a3cd100f0f835}{Y\_lo\_pt}}==0)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ error\_stream\ <<\ \textcolor{stringliteral}{"{}You\ must\ set\ Y\_lo\_pt\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ throw\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a75878a0c79c88065fd9031f273b62698}{Y\_up\_pt}}==0)\ }
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ error\_stream\ <<\ \textcolor{stringliteral}{"{}You\ must\ set\ Y\_up\_pt\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ throw\_error\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//If\ one\ of\ the\ errors\ has\ occured}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}(throw\_error)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ average\ film\ thickness\ far\ ahead}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ h\_av=0.5*(*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{H\_lo\_pt}}+*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a83a3a82f89784013805bd23d63faa7e3}{H\_up\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ position\ of\ upper\ and\ lower\ wall\ at\ inflow}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y\_up=*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a75878a0c79c88065fd9031f273b62698}{Y\_up\_pt}};}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y\_lo=*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a84caa2a64e50ba5b390a3cd100f0f835}{Y\_lo\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Constant\ in\ velocity\ profile}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ C\ =6.0*(2.0*h\_av+y\_lo-\/y\_up)/}
+\DoxyCodeLine{\ \ \ (y\_up*y\_up*y\_up-\/y\_lo*y\_lo*y\_lo-\/h\_av*y\_up*}
+\DoxyCodeLine{\ \ \ \ y\_up*y\_up+h\_av*y\_lo*y\_lo*y\_lo-\/3.0*y\_lo*y\_up*y\_up+}
+\DoxyCodeLine{\ \ \ \ 3.0*y\_lo*y\_lo*y\_up+3.0*y\_lo*y\_up*y\_up*h\_av-\/3.0*y\_lo*y\_lo*y\_up*h\_av);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ y\ coordinate}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ y=x[1];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Parallel,\ parabolic\ inflow}}
+\DoxyCodeLine{\ \ veloc[0]=-\/1.0+C*(1.0-\/h\_av)*((y\_lo-\/y)*(y\_up-\/y));}
+\DoxyCodeLine{\ \ veloc[1]=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ "{}Bretherton\ element"{}\ is\ a\ fluid\ element\ (of\ type\ ELEMENT)\ for\ which}}
+\DoxyCodeLine{\textcolor{comment}{///\ the\ (inflow)\ velocity\ \ at\ those\ nodes\ that\ are\ located\ on\ a\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ specified\ Mesh\ boundary\ is\ prescribed\ by\ Dirichlet\ boundary\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ conditions.\ The\ key\ is\ that\ prescribed\ velocity\ profile\ can\ be}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ function\ of\ some\ external\ Data\ -\/-\/\ this\ dependency\ must}}
+\DoxyCodeLine{\textcolor{comment}{///\ be\ taken\ into\ account\ when\ computing\ the\ element's\ Jacobian}}
+\DoxyCodeLine{\textcolor{comment}{///\ matrix.}}
+\DoxyCodeLine{\textcolor{comment}{///\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ This\ element\ type\ is\ useful,\ for\ instance,\ in\ the\ Bretherton}}
+\DoxyCodeLine{\textcolor{comment}{///\ problem,\ where\ the\ parabolic\ "{}inflow"{}\ profile\ is\ a\ function\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ of\ the\ film\ thickness\ (represented\ by\ Spine\ heights)\ at\ the}}
+\DoxyCodeLine{\textcolor{comment}{///\ "{}outflow"{}.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}\ :\ \textcolor{keyword}{public}\ ELEMENT}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Typedef\ for\ pointer\ (global)\ function\ that\ specifies\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}})(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ veloc);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Call\ the\ constructor\ of\ the\ underlying\ element}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classBrethertonElement_acbc668eed3ea683a67b6b822d6e59974}{BrethertonElement}}()\ :\ ELEMENT()\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Activate\ the\ dependency\ of\ the\ "{}inflow"{}\ on\ the\ external}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ data.\ Pass\ the\ vector\ of\ pointers\ to\ the\ external\ Data\ that\ affects}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ inflow,\ the\ id\ of\ the\ boundary\ on\ which\ the\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ condition\ is\ to\ be\ applied\ and\ the\ function\ pointer\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ the\ global\ function\ that\ defines\ the\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonElement_a5a8333b92b4b732e62798c172d7e9d52}{activate\_inflow\_dependency\_on\_external\_data}}(}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ Vector<Data*>\&\ inflow\_ext\_data,}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ inflow\_boundary,}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}}\ inflow\_fct\_pt)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Copy\ data\ that\ affects\ the\ inflow}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_ext=inflow\_ext\_data.size();}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.resize(n\_ext);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<n\_ext;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i]=inflow\_ext\_data[i];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ inflow\ boundary}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}}=inflow\_boundary;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ fct\ pointer\ to\ inflow\ condition}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}}=inflow\_fct\_pt;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overload\ assign\ local\ equation\ numbers:\ Add\ the\ dependency\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ on\ the\ external\ Data\ that\ affects\ the\ inflow\ profile}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonElement_a40f35d9e03eae08954b6b32badadcf61}{assign\_local\_eqn\_numbers}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \ \&store\_local\_dof\_pt)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Call\ the\ element's\ local\ equation\ numbering\ procedure\ first}}
+\DoxyCodeLine{\ \ \ ELEMENT::assign\_local\_eqn\_numbers(store\_local\_dof\_pt);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Now\ add\ the\ equation\ numbers\ for\ the\ Data\ that\ affects\ the\ inflow}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ profile}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Number\ of\ local\ equations\ so\ far}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ local\_eqn\_count\ =\ this-\/>ndof();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Find\ out\ max.\ number\ of\ values\ stored\ at\ all\ Data\ values\ }}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ that\ affect\ the\ inflow}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ max\_nvalue=0;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_ext=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.size();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<n\_ext;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ external\ Data:}}
+\DoxyCodeLine{\ \ \ \ \ Data*\ data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Number\ of\ values}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_val=data\_pt-\/>nvalue();}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\_val>max\_nvalue)\ max\_nvalue=n\_val;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Allocate\ sufficient\ storage}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}.resize(n\_ext,max\_nvalue);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//A\ local\ queue\ to\ store\ the\ global\ equation\ numbers}}
+\DoxyCodeLine{\ \ \ std::deque<unsigned\ long>\ global\_eqn\_number\_queue;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ external\ Data\ that\ affect\ the\ "{}inflow"{}}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<n\_ext;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ external\ Data:}}
+\DoxyCodeLine{\ \ \ \ \ Data*\ data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ number\ of\ values:}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_val=data\_pt-\/>nvalue();}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ival=0;ival<n\_val;ival++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Is\ it\ free\ or\ pinned?}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ eqn\_number=data\_pt-\/>eqn\_number(ival);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (eqn\_number>=0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ global\ equation\ number\ to\ local\ storage}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ global\_eqn\_number\_queue.push\_back(eqn\_number);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Store\ local\ equation\ number\ associated\ with\ this\ external\ dof}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival)=local\_eqn\_count;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ counter\ for\ local\ dofs}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ local\_eqn\_count++;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival)=-\/1;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Now\ add\ our\ global\ equations\ numbers\ to\ the\ internal\ element\ storage}}
+\DoxyCodeLine{\ \ \ this-\/>add\_global\_eqn\_numbers(global\_eqn\_number\_queue,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GeneralisedElement::Dof\_pt\_deque);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overloaded\ Jacobian\ computation:\ Computes\ the\ Jacobian}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ of\ the\ underlying\ element\ and\ then\ adds\ the\ FD\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ operations\ to\ evaluate\ the\ derivatives\ w.r.t.\ the\ Data\ values}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ that\ affect\ the\ inflow.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonElement_ab0bc00d862b2c888703ed38c74f18b77}{get\_jacobian}}(Vector<double>\&\ residuals,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DenseMatrix<double>\&\ jacobian)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ Data\ values\ that\ affect\ the\ inflow}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_ext=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Call\ "{}normal"{}\ jacobian\ first.}}
+\DoxyCodeLine{\ \ \ ELEMENT::get\_jacobian(residuals,jacobian);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (n\_ext==0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ ready\ for\ FD\ operations}}
+\DoxyCodeLine{\ \ \ Vector<double>\ residuals\_plus(residuals.size());}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ fd\_step=1.0e-\/8;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ Data\ values\ that\ affect\ the\ inflow}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<n\_ext;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ Data\ item}}
+\DoxyCodeLine{\ \ \ \ \ Data*\ data\_pt=\mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}}[i];}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ values}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_val=data\_pt-\/>nvalue();}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ival=0;ival<n\_val;ival++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Local\ equation\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ local\_eqn=\mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}}(i,ival);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Dof\ or\ pinned?}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_eqn>=0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ pointer\ to\ the\ data\ value}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ *value\_pt\ =\ data\_pt-\/>value\_pt(ival);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Backup\ Data\ value}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ backup\ =\ *value\_pt;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ FD\ step}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ *value\_pt\ +=\ fd\_step;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Re-\/assign\ the\ inflow\ velocities\ for\ nodes\ in\ this\ element}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Fill\ in\ the\ relevant\ column\ in\ the\ Jacobian\ matrix}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_dof\ =\ this-\/>ndof();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Zero\ the\ residuals}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ idof=0;idof<n\_dof;idof++)\ \{residuals\_plus[idof]\ =\ 0.0;\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Re-\/compute\ the\ element\ residual}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ this-\/>get\_residuals(residuals\_plus);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ idof=0;idof<n\_dof;idof++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ jacobian(idof,local\_eqn)=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ (residuals\_plus[idof]-\/residuals[idof])/fd\_step;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Reset\ spine\ height}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ *value\_pt\ =\ backup;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Note:\ Re-\/assignment\ of\ inflow\ is\ done\ on\ the\ fly\ during\ next\ loop}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Final\ re-\/assign\ for\ the\ inflow\ velocities\ for\ nodes\ in\ this\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ For\ all\ nodes\ that\ are\ located\ on\ specified\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ re-\/assign\ the\ inflow\ velocity,\ using\ the\ function\ pointed\ to}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ by\ the\ function\ pointer}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonElement_a7e655df2ed6104862cc70c2408daf93c}{reassign\_inflow}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes\ in\ element\ -\/-\/\ if\ they\ are}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ on\ inflow\ boundary,\ re-\/assign\ their\ velocities}}
+\DoxyCodeLine{\ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ Vector<double>\ veloc(2);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_nod\ =\ this-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ j=0;j<n\_nod;j++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt\ =\ this-\/>node\_pt(j);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(nod\_pt-\/>is\_on\_boundary(\mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nod\_pt-\/>eqn\_number(0)>=0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ostringstream\ error\_stream;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\_stream\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}We're\ assigning\ a\ Dirichlet\ condition\ for\ the\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ i\ <<\ \textcolor{stringliteral}{"{}-\/th\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}velocity,\ even\ though\ it\ is\ not\ pinned!\(\backslash\)n"{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}This\ can't\ be\ right!\ I'm\ bailing\ out..."{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_stream.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif\ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ inflow\ profile\ }}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}}(x,veloc);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ nod\_pt-\/>set\_value(0,veloc[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ nod\_pt-\/>set\_value(1,veloc[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Storage\ for\ the\ external\ Data\ that\ affects\ the\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<Data*>\ \mbox{\hyperlink{classBrethertonElement_a84c7822cf2a97fe45e936429faa16788}{Inflow\_ext\_data}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Storage\ for\ the\ local\ equation\ numbers\ associated\ the\ Data}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ values\ that\ affect\ the\ inflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ DenseMatrix<int>\ \mbox{\hyperlink{classBrethertonElement_ad1ddf8c7a6fd590bf7156d13640303d1}{Inflow\_ext\_data\_eqn}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ the\ inflow\ boundary\ in\ the\ global\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classBrethertonElement_a2d3a3d4837d41865d5f62271c98715c5}{Inflow\_boundary}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ pointer\ to\ the\ global\ function\ that\ specifies\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ inflow\ velocity\ profile\ on\ the\ global\ mesh\ boundary\ Inflow\_boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classBrethertonElement_a313d868ce6fbd8df07b0360db25133ce}{InflowFctPt}}\ \mbox{\hyperlink{classBrethertonElement_a6ded0faba9d7fcfe96834c56af461977}{Inflow\_fct\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Note:\ Specialisation\ must\ go\ into\ namespace!}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Face\ geometry\ of\ the\ Bretherton\ 2D\ Crouzeix\_Raviart\ spine\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FaceGeometry<\mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}<SpineElement<QCrouzeixRaviartElement<2>\ >\ >\ >:\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QElement<1,3>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ FaceGeometry()\ :\ QElement<1,3>()\ \{\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Face\ geometry\ of\ the\ Bretherton\ 2D\ Taylor\ Hood\ spine\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FaceGeometry<\mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}<SpineElement<QTaylorHoodElement<2>\ >\ >\ >:\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QElement<1,3>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ FaceGeometry()\ :\ QElement<1,3>()\ \{\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Face\ geometry\ of\ the\ Face\ geometry\ of\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ \ the\ Bretherton\ 2D\ Crouzeix\_Raviart\ spine\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FaceGeometry<FaceGeometry<\mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}<}
+\DoxyCodeLine{\ SpineElement<QCrouzeixRaviartElement<2>\ >\ >\ >\ >:\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ PointElement}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ FaceGeometry()\ :\ PointElement()\ \{\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Face\ geometry\ of\ face\ geometry\ of\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ the\ Bretherton\ 2D\ Taylor\ Hood\ spine\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FaceGeometry<FaceGeometry<\mbox{\hyperlink{classBrethertonElement}{BrethertonElement}}<SpineElement<QTaylorHoodElement<2>\ >\ >\ >\ >:\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ PointElement}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ FaceGeometry()\ :\ PointElement()\ \{\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Bretherton\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classBrethertonProblem}{BrethertonProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classBrethertonProblem_a207cdfe4cf60e83257e759b1ac15e5eb}{BrethertonProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Spine\ heights/lengths\ are\ unknowns\ in\ the\ problem\ so\ their}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ values\ get\ corrected\ during\ each\ Newton\ step.\ However,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ changing\ their\ value\ does\ not\ automatically\ change\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ nodal\ positions,\ so\ we\ need\ to\ update\ all\ of\ them}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_a6a3e76e4900715d8c2fd15d0e350d724}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Update}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}}-\/>node\_update();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Apply\ inflow\ on\ boundary\ 1}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ ibound=1;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Coordinate\ and\ velocity}}
+\DoxyCodeLine{\ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ Vector<double>\ veloc(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ nodes}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ nodal\ position}}
+\DoxyCodeLine{\ \ \ \ \ x[0]=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ inflow\ profile}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a08e9835d71b7f7194ec5475f139211be}{Global\_Physical\_Variables::inflow}}(x,veloc);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,veloc[0]);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,veloc[1]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve:\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_a7112e0efe4c0cd0269cf47f02df4fe22}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ can\ remain\ empty,\ because\ the\ update\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ is\ performed\ automatically\ after\ every\ Newton\ step.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_a2e84e3ce784b0f0de5eeefe1175d48ff}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fix\ pressure\ value\ l\ in\ element\ e\ to\ value\ p\_value}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_aa4c346d4dc8d7d24147076d281d181e9}{fix\_pressure}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&e,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&l,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&pvalue)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Fix\ the\ pressure\ at\ that\ element}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT\ *\textcolor{keyword}{>}(\mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}}-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classBrethertonProblem_aa4c346d4dc8d7d24147076d281d181e9}{fix\_pressure}}(l,pvalue);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Activate\ the\ dependency\ of\ the\ inflow\ velocity\ on\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ spine\ heights\ at\ the\ outflow}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_a04257edfb80f2ff3bf865442d9eb01fb}{activate\_inflow\_dependency}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ a\ parameter\ study;\ perform\ specified\ number\ of\ steps}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_ac24db9373e1a3005e6b14fc92c16b41c}{parameter\_study}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nsteps);\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_ab6e29ecf0dbffabd4ce897203d35626e}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ control\ element}}
+\DoxyCodeLine{\textcolor{comment}{}\ ELEMENT*\ \mbox{\hyperlink{classBrethertonProblem_ab1dfeabf599487ac4a121398c6a98368}{Control\_element\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ \mbox{\hyperlink{classBrethertonProblem_ae37c09c1e0faf5ba8b347fab6a9f687f}{Trace\_file}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ BrethertonSpineMesh<ELEMENT,SpineLineFluidInterfaceElement<ELEMENT>\ >*\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classBrethertonProblem_af293d72416de7a93ed51f20a5e4fb86e}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classBrethertonProblem_a207cdfe4cf60e83257e759b1ac15e5eb}{BrethertonProblem<ELEMENT>::BrethertonProblem}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ the\ deposited\ film\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx1=24;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ the\ bottom\ part\ of\ the\ transition\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx2=6;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ channel\ region}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx3=12;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ the\ vertical\ part\ of\ the\ transition\ region}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ (=half\ the\ number\ of\ elements\ in\ the\ liquid\ filled\ region\ ahead}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ of\ the\ finger\ tip)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nhalf=4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ through\ thickness\ of\ deposited\ film}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nh=3;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Thickness\ of\ deposited\ film}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ h=0.1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ wall\ geom\ objects}}
+\DoxyCodeLine{\ GeomObject*\ lower\_wall\_pt=\textcolor{keyword}{new}\ StraightLine(-\/1.0);}
+\DoxyCodeLine{\ GeomObject*\ upper\_wall\_pt=\textcolor{keyword}{new}\ StraightLine(\ 1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ coordinate\ on\ wall}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ xi0=-\/4.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ End\ of\ transition\ region\ on\ wall}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ xi1=1.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ End\ of\ liquid\ filled\ region\ (inflow)\ on\ wall}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ xi2=5.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \ BrethertonSpineMesh<ELEMENT,}
+\DoxyCodeLine{\ \ SpineLineFluidInterfaceElement<ELEMENT>\ >\ }
+\DoxyCodeLine{\ \ (nx1,nx2,nx3,nh,nhalf,h,lower\_wall\_pt,upper\_wall\_pt,xi0,0.0,xi1,xi2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Make\ bulk\ mesh\ the\ global\ mesh}}
+\DoxyCodeLine{\ mesh\_pt()=Bulk\_mesh\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ the\ control\ element}}
+\DoxyCodeLine{\ Control\_element\_pt=Bulk\_mesh\_pt-\/>control\_element\_pt();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ pointers\ to\ quantities\ that\ determine\ the\ inflow\ profile}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Film\ thickness\ at\ outflow\ on\ lower\ wall:}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a137bdac2ad4b72a03ec9916e8ee7395b}{Global\_Physical\_Variables::H\_lo\_pt}}=}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt-\/>spine\_pt(0)-\/>spine\_height\_pt()-\/>value\_pt(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Film\ thickness\ at\ outflow\ on\ upper\ wall:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ last\_spine=Bulk\_mesh\_pt-\/>nfree\_surface\_spines()-\/1;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a83a3a82f89784013805bd23d63faa7e3}{Global\_Physical\_Variables::H\_up\_pt}}=}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt-\/>spine\_pt(last\_spine)-\/>spine\_height\_pt()-\/>value\_pt(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Current\ y-\/position\ on\ lower\ wall\ at\ inflow}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ibound=1;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a84caa2a64e50ba5b390a3cd100f0f835}{Global\_Physical\_Variables::Y\_lo\_pt}}=}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,0)-\/>x\_pt(0,1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Current\ y-\/position\ on\ upper\ wall\ at\ inflow}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nnod=Bulk\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a75878a0c79c88065fd9031f273b62698}{Global\_Physical\_Variables::Y\_up\_pt}}=}
+\DoxyCodeLine{\ \ Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,nnod-\/1)-\/>x\_pt(0,1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Activate\ dependency\ of\ inflow\ on\ spine\ heights\ at\ outflow}}
+\DoxyCodeLine{\ activate\_inflow\_dependency();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ slip\ on\ boundaries\ 0\ 1\ and\ 2}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<=2;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Uniform,\ parallel\ outflow\ on\ boundaries\ 3\ and\ 5}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=3;ibound<=5;ibound+=2)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ central\ spine}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ central\_spine=(Bulk\_mesh\_pt-\/>nfree\_surface\_spines()-\/1)/2;}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spine\_pt(central\_spine)-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ slip\ in\ moving\ frame\ on\ boundaries\ 0\ and\ 2}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<=2;ibound+=2)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Parallel\ flow}}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,-\/1.0);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,\ 0.0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parallel,\ uniform\ outflow\ on\ boundaries\ 3\ and\ 5}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ibound=3;ibound<=5;ibound+=2)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Parallel\ inflow}}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,-\/1.0);}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,\ 0.0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ elements\ in\ the\ layer}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_bulk=Bulk\_mesh\_pt-\/>nbulk();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_bulk;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ fluid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bulk\_element\_pt(i));}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number,\ etc}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_st\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_invfr\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\_Physical\_Variables::ReInvFr}};}
+\DoxyCodeLine{\ \ \ el\_pt-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ 1D\ interface\ elements\ and\ set\ capillary\ number}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ interface\_element\_pt\_range\ =\ Bulk\_mesh\_pt-\/>ninterface\_element();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<interface\_element\_pt\_range;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ interface\ element}}
+\DoxyCodeLine{\ \ \ SpineLineFluidInterfaceElement<ELEMENT>*\ el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}SpineLineFluidInterfaceElement<ELEMENT>*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Bulk\_mesh\_pt-\/>interface\_element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Capillary\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>ca\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Update\ the\ nodal\ positions,\ so\ that\ the\ domain\ is\ correct}}
+\DoxyCodeLine{\ \textcolor{comment}{//(and\ therefore\ the\ repeated\ node\ test\ passes)}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>node\_update();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Do\ equation\ numbering}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Number\ of\ unknowns:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Activate\ the\ dependency\ of\ the\ inflow\ velocity\ on\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ spine\ heights\ at\ the\ outflow}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_a04257edfb80f2ff3bf865442d9eb01fb}{BrethertonProblem<ELEMENT>::activate\_inflow\_dependency}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Spine\ heights\ that\ affect\ the\ inflow}}
+\DoxyCodeLine{\ Vector<Data*>\ outflow\_spines(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ First\ spine}}
+\DoxyCodeLine{\ outflow\_spines[0]=Bulk\_mesh\_pt-\/>spine\_pt(0)-\/>spine\_height\_pt();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Last\ proper\ spine}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ last\_spine=Bulk\_mesh\_pt-\/>nfree\_surface\_spines()-\/1;}
+\DoxyCodeLine{\ outflow\_spines[1]=Bulk\_mesh\_pt-\/>spine\_pt(last\_spine)-\/>spine\_height\_pt();;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Loop\ over\ elements\ on\ inflow\ boundary\ (1)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ ibound=1;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nel=Bulk\_mesh\_pt-\/>nboundary\_element(ibound);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nel;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt=\textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ boundary\_element\_pt(ibound,e));\ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Activate\ depency\ on\ inflow}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>activate\_inflow\_dependency\_on\_external\_data(}
+\DoxyCodeLine{\ \ \ \ outflow\_spines,ibound,\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a08e9835d71b7f7194ec5475f139211be}{Global\_Physical\_Variables::inflow}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_ab6e29ecf0dbffabd4ce897203d35626e}{BrethertonProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Control\ coordinate:\ At\ bubble\ tip}}
+\DoxyCodeLine{\ Vector<double>\ s(2);}
+\DoxyCodeLine{\ s[0]=1.0;}
+\DoxyCodeLine{\ s[1]=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Last\ proper\ spine}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ last\_spine=Bulk\_mesh\_pt-\/>nfree\_surface\_spines()-\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc}}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ Bulk\_mesh\_pt-\/>spine\_pt(0)-\/>height();}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ Bulk\_mesh\_pt-\/>spine\_pt(last\_spine)-\/>height();}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ 1.3375*pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}},2.0/3.0);}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ -\/Control\_element\_pt-\/>interpolated\_p\_nst(s)*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ 1.0+3.8*pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}},2.0/3.0);}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ Control\_element\_pt-\/>interpolated\_u\_nst(s,0);}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ Control\_element\_pt-\/>interpolated\_u\_nst(s,1);}
+\DoxyCodeLine{\ Trace\_file\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ boundaries}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/boundaries\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_boundaries(some\_file);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Parameter\ study}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBrethertonProblem_ac24db9373e1a3005e6b14fc92c16b41c}{BrethertonProblem<ELEMENT>::parameter\_study}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nsteps)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increase\ maximum\ residual}}
+\DoxyCodeLine{\ Problem::Max\_residuals=500.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ doc\_info.number()=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];\ \ \ }
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(filename);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}Ca\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}h<sub>bottom</sub>\(\backslash\)"{},\(\backslash\)"{}h<sub>too</sub>\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}h<sub>Bretherton</sub>\(\backslash\)"{},\(\backslash\)"{}p<sub>tip</sub>\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}p<sub>tip\ (Bretherton)</sub>\(\backslash\)"{},\(\backslash\)"{}u<sub>stag</sub>\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}v<sub>stag</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}<greek>a</greek><sub>bottom</sub>\(\backslash\)"{},"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}<greek>a</greek><sub>top</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\ Trace\_file\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ scaling\ factor\ for\ Ca\ reduction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ factor=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Doc\ initial\ solution}}
+\DoxyCodeLine{\ doc\_solution(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Loop\ over\ the\ steps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ step=1;step<=nsteps;step++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ cout\ <<\ std::endl\ <<\ \textcolor{stringliteral}{"{}STEP\ "{}}\ <<\ step\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Newton\ method\ tends\ to\ converge\ is\ initial\ stays\ bounded\ below}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ a\ certain\ tolerance:\ This\ is\ cheaper\ to\ check\ than\ restarting}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ the\ Newton\ method\ after\ divergence\ (we'd\ also\ need\ to\ back\ up}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ the\ previous\ solution)}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ maxres\ =\ Problem::Max\_residuals;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Checking\ max.\ res\ for\ Ca\ =\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ <<\ \textcolor{stringliteral}{"{}.\ \ \ Max.\ residual:\ "{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Check\ the\ maximum\ residual}}
+\DoxyCodeLine{\ \ \ \ \ DoubleVector\ residuals;}
+\DoxyCodeLine{\ \ \ \ \ actions\_before\_newton\_solve();}
+\DoxyCodeLine{\ \ \ \ \ actions\_before\_newton\_convergence\_check();}
+\DoxyCodeLine{\ \ \ \ \ get\_residuals(residuals);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ max\_res=residuals.max();}
+\DoxyCodeLine{\ \ \ \ \ cout\ <<\ max\_res;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Check\ what\ to\ do\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_res>maxres)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}.\ Too\ big!"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ *=\ factor;\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Reduce\ the\ factor}}
+\DoxyCodeLine{\ \ \ \ \ \ \ factor=1.0+(factor-\/1.0)/1.5;}
+\DoxyCodeLine{\ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}New\ reduction\ factor:\ "{}}\ <<\ factor\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Reduce\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ /=\ factor;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ again}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Looks\ promising:\ Let's\ proceed\ to\ solve}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}.\ OK"{}}\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Break\ out\ of\ the\ Ca\ adjustment\ loop}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Solve}}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Solving\ for\ capillary\ number:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Reduce\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ /=\ factor;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ unsteady\ two-\/layer\ fluid\ problem.\ If\ there\ are}}
+\DoxyCodeLine{\textcolor{comment}{///\ any\ command\ line\ arguments,\ we\ regard\ this\ as\ a\ validation\ run}}
+\DoxyCodeLine{\textcolor{comment}{///\ and\ perform\ only\ a\ single\ step.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{bretherton_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ physical\ parameters:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ direction\ of\ gravity:\ Vertically\ downwards}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[1]\ =\ -\/1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Womersley\ number\ =\ Reynolds\ number\ (St\ =\ 1)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}}\ =\ 0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}}\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ Capillary\ number}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\_Physical\_Variables::Ca}}\ =\ 0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Re/Fr\ -\/-\/\ a\ measure\ of\ gravity...}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\_Physical\_Variables::ReInvFr}}\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classBrethertonProblem}{BrethertonProblem<BrethertonElement<SpineElement<QCrouzeixRaviartElement<2>}}\ >\ >\ >\ problem;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Self\ test:}}
+\DoxyCodeLine{\ problem.self\_test();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ steps:\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc>1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Validation\ run:\ Just\ one\ step}}
+\DoxyCodeLine{\ \ \ nstep=2;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Full\ run\ otherwise}}
+\DoxyCodeLine{\ \ \ nstep=30;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Run\ the\ parameter\ study:\ Perform\ nstep\ steps}}
+\DoxyCodeLine{\ problem.\mbox{\hyperlink{classBrethertonProblem_ac24db9373e1a3005e6b14fc92c16b41c}{parameter\_study}}(nstep);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/navier_stokes/bretherton}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/bretherton }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/navier_stokes/bretherton/bretherton.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/bretherton/bretherton.\+cc}} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

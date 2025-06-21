@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MemoryUsage Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1MemoryUsage.html">MemoryUsage</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">oomph::MemoryUsage Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace with helper functions to assess total memory usage on the fly using system() &ndash; details are very machine specific! This just provides the overall machinery with default settings for our own (linux machines). Uses the system command to spawn a command that computes the total memory usage on the machine where this is called. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  
+<a href="namespaceoomph_1_1MemoryUsage.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aadcb42d5c4ca8099981d75b2d5adcd96" id="r_aadcb42d5c4ca8099981d75b2d5adcd96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#aadcb42d5c4ca8099981d75b2d5adcd96">empty_my_memory_usage_file</a> ()</td></tr>
+<tr class="memdesc:aadcb42d5c4ca8099981d75b2d5adcd96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to empty file that records my memory usage in file whose name is specified by My_memory_usage_filename.  <br /></td></tr>
+<tr class="separator:aadcb42d5c4ca8099981d75b2d5adcd96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43f39ca6f2e6040903ec86b46eb760dd" id="r_a43f39ca6f2e6040903ec86b46eb760dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a43f39ca6f2e6040903ec86b46eb760dd">doc_my_memory_usage</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">prefix_string</a>)</td></tr>
+<tr class="memdesc:a43f39ca6f2e6040903ec86b46eb760dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc my memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by My_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#aadcb42d5c4ca8099981d75b2d5adcd96" title="Function to empty file that records my memory usage in file whose name is specified by My_memory_usag...">empty_my_memory_usage_file()</a>. Note: This requires getpid() which is defined in unistd.h so if you don't have that we won't build that function!  <br /></td></tr>
+<tr class="separator:a43f39ca6f2e6040903ec86b46eb760dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a0031773893f06aac876985e38940e4" id="r_a8a0031773893f06aac876985e38940e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a8a0031773893f06aac876985e38940e4">empty_total_memory_usage_file</a> ()</td></tr>
+<tr class="memdesc:a8a0031773893f06aac876985e38940e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to empty file that records total memory usage in file whose name is specified by Total_memory_usage_filename.  <br /></td></tr>
+<tr class="separator:a8a0031773893f06aac876985e38940e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216dececd7087625de8e2211216cd861" id="r_a216dececd7087625de8e2211216cd861"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a216dececd7087625de8e2211216cd861">doc_total_memory_usage</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">prefix_string</a>)</td></tr>
+<tr class="memdesc:a216dececd7087625de8e2211216cd861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc total memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by Total_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with empty_memory_usage_file().  <br /></td></tr>
+<tr class="separator:a216dececd7087625de8e2211216cd861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47bde23694eeafe80bdcffb3aaeb07a5" id="r_a47bde23694eeafe80bdcffb3aaeb07a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a47bde23694eeafe80bdcffb3aaeb07a5">empty_memory_usage_files</a> ()</td></tr>
+<tr class="memdesc:a47bde23694eeafe80bdcffb3aaeb07a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to empty file that records total and local memory usage in appropriate files.  <br /></td></tr>
+<tr class="separator:a47bde23694eeafe80bdcffb3aaeb07a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa714e9e49de96f4ca6a9fd7ae99dbeab" id="r_aa714e9e49de96f4ca6a9fd7ae99dbeab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#aa714e9e49de96f4ca6a9fd7ae99dbeab">doc_memory_usage</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">prefix_string</a>)</td></tr>
+<tr class="memdesc:aa714e9e49de96f4ca6a9fd7ae99dbeab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc total and local memory usage, prepended by string (which allows identification from where the function is called, say). NOTE: Local memory usage only works if we have unistd.h header.  <br /></td></tr>
+<tr class="separator:aa714e9e49de96f4ca6a9fd7ae99dbeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0034019640ac5f6ffe7e8e40fae1e453" id="r_a0034019640ac5f6ffe7e8e40fae1e453"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453">empty_top_file</a> ()</td></tr>
+<tr class="memdesc:a0034019640ac5f6ffe7e8e40fae1e453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to empty file that records continuous output from top in file whose name is specified by Top_output_filename.  <br /></td></tr>
+<tr class="separator:a0034019640ac5f6ffe7e8e40fae1e453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c2afeb4ffd85dd771ace27fcb84136" id="r_a53c2afeb4ffd85dd771ace27fcb84136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a53c2afeb4ffd85dd771ace27fcb84136">run_continous_top</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">comment</a>)</td></tr>
+<tr class="memdesc:a53c2afeb4ffd85dd771ace27fcb84136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start running top continuously and output (append) into file specified by Top_output_filename. Wipe that file with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> if you wish. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before starting.  <br /></td></tr>
+<tr class="separator:a53c2afeb4ffd85dd771ace27fcb84136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64410078236ee55e630ee6416b4ccdb0" id="r_a64410078236ee55e630ee6416b4ccdb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a64410078236ee55e630ee6416b4ccdb0">stop_continous_top</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">comment</a>)</td></tr>
+<tr class="memdesc:a64410078236ee55e630ee6416b4ccdb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop running top continuously. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before stopping.  <br /></td></tr>
+<tr class="separator:a64410078236ee55e630ee6416b4ccdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3426ed2144d50ce7a0941555b911c701" id="r_a3426ed2144d50ce7a0941555b911c701"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a3426ed2144d50ce7a0941555b911c701">insert_comment_to_continous_top</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">comment</a>)</td></tr>
+<tr class="memdesc:a3426ed2144d50ce7a0941555b911c701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert comment into running continuous top output.  <br /></td></tr>
+<tr class="separator:a3426ed2144d50ce7a0941555b911c701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a77ed83cae1c77e9a046bc6b1ff55645a" id="r_a77ed83cae1c77e9a046bc6b1ff55645a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a77ed83cae1c77e9a046bc6b1ff55645a">Suppress_mpi_synchronisation</a> = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a></td></tr>
+<tr class="memdesc:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is suppressed) by default because not all processors may reach the relevant doc memory usage statements causing the code to hang).  <br /></td></tr>
+<tr class="separator:a77ed83cae1c77e9a046bc6b1ff55645a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5280b46bc1ce506ba96494d6dacbdbe" id="r_ae5280b46bc1ce506ba96494d6dacbdbe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#ae5280b46bc1ce506ba96494d6dacbdbe">My_memory_usage_system_string</a> = &quot;ps <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">aux&quot;</a></td></tr>
+<tr class="memdesc:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that obtains memory usage of all processes. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <br /></td></tr>
+<tr class="separator:ae5280b46bc1ce506ba96494d6dacbdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b52934e2d3ddd6779f5f9581d14abc1" id="r_a1b52934e2d3ddd6779f5f9581d14abc1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a1b52934e2d3ddd6779f5f9581d14abc1">Bypass_all_memory_usage_monitoring</a> = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td></tr>
+<tr class="memdesc:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool allowing quick bypassing of ALL operations related to memory usage monitoring &ndash; this allows the code to remain "instrumented" without incurring the heavy penalties associated with the system calls and i/o. Default setting: false.  <br /></td></tr>
+<tr class="separator:a1b52934e2d3ddd6779f5f9581d14abc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa764cf2d9bfd321a3784aafdd32714bf" id="r_aa764cf2d9bfd321a3784aafdd32714bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#aa764cf2d9bfd321a3784aafdd32714bf">My_memory_usage_filename</a> = &quot;my_memory_usage.dat&quot;</td></tr>
+<tr class="memdesc:aa764cf2d9bfd321a3784aafdd32714bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document my memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file()  <br /></td></tr>
+<tr class="separator:aa764cf2d9bfd321a3784aafdd32714bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b915316a3658a60e8fa86490c8d013a" id="r_a9b915316a3658a60e8fa86490c8d013a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a9b915316a3658a60e8fa86490c8d013a">Total_memory_usage_system_string</a></td></tr>
+<tr class="memdesc:a9b915316a3658a60e8fa86490c8d013a"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that obtains total memory usage. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <br /></td></tr>
+<tr class="separator:a9b915316a3658a60e8fa86490c8d013a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd9a74c901df404ddb665921e408a3a3" id="r_afd9a74c901df404ddb665921e408a3a3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#afd9a74c901df404ddb665921e408a3a3">Total_memory_usage_filename</a> = &quot;memory_usage.dat&quot;</td></tr>
+<tr class="memdesc:afd9a74c901df404ddb665921e408a3a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document total memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file()  <br /></td></tr>
+<tr class="separator:afd9a74c901df404ddb665921e408a3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c07afc6531dcc4f77ae2f2b738383f" id="r_a61c07afc6531dcc4f77ae2f2b738383f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a61c07afc6531dcc4f77ae2f2b738383f">Top_system_string</a> = &quot;while <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">do</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">top</a> -b -<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a> 2 ; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">done</a> &quot;</td></tr>
+<tr class="memdesc:a61c07afc6531dcc4f77ae2f2b738383f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH].  <br /></td></tr>
+<tr class="separator:a61c07afc6531dcc4f77ae2f2b738383f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03231c21b4d9a8b4a08cecc3d688c7d3" id="r_a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1MemoryUsage.html#a03231c21b4d9a8b4a08cecc3d688c7d3">Top_output_filename</a> = &quot;top_output.dat&quot;</td></tr>
+<tr class="memdesc:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing name of file in which we document "continuous" output from "top" (or equivalent)&ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a>  <br /></td></tr>
+<tr class="separator:a03231c21b4d9a8b4a08cecc3d688c7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace with helper functions to assess total memory usage on the fly using system() &ndash; details are very machine specific! This just provides the overall machinery with default settings for our own (linux machines). Uses the system command to spawn a command that computes the total memory usage on the machine where this is called. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
+<p>Namespace with helper functions to assess total memory usage on the fly using system() &ndash; details are very machine specific! This just provides the overall machinery with default settings for our own (linux machines). Uses the system command to spawn a command that computes the total memory usage on the machine where this is called. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aa714e9e49de96f4ca6a9fd7ae99dbeab" name="aa714e9e49de96f4ca6a9fd7ae99dbeab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa714e9e49de96f4ca6a9fd7ae99dbeab">&#9670;&#160;</a></span>doc_memory_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::doc_memory_usage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>prefix_string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc total and local memory usage, prepended by string (which allows identification from where the function is called, say). NOTE: Local memory usage only works if we have unistd.h header. </p>
+<p>Doc total and local memory usage, prepended by string (which allows identification from where the function is called, say) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01543">1543</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01432">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01497">doc_total_memory_usage()</a>.</p>
+
+</div>
+</div>
+<a id="a43f39ca6f2e6040903ec86b46eb760dd" name="a43f39ca6f2e6040903ec86b46eb760dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f39ca6f2e6040903ec86b46eb760dd">&#9670;&#160;</a></span>doc_my_memory_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::doc_my_memory_usage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>prefix_string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc my memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by My_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#aadcb42d5c4ca8099981d75b2d5adcd96" title="Function to empty file that records my memory usage in file whose name is specified by My_memory_usag...">empty_my_memory_usage_file()</a>. Note: This requires getpid() which is defined in unistd.h so if you don't have that we won't build that function! </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01432">1432</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01406">My_memory_usage_filename</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01392">My_memory_usage_system_string</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01386">Suppress_mpi_synchronisation</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01543">doc_memory_usage()</a>.</p>
+
+</div>
+</div>
+<a id="a216dececd7087625de8e2211216cd861" name="a216dececd7087625de8e2211216cd861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a216dececd7087625de8e2211216cd861">&#9670;&#160;</a></span>doc_total_memory_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::doc_total_memory_usage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>prefix_string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc total memory usage, prepended by string (which allows identification from where the function is called, say) that records memory usage in file whose name is specified by Total_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with empty_memory_usage_file(). </p>
+<p>Doc total memory usage, prepended by string (which allows identification from where the function is called, say) that records mem usage in file whose name is specified by Total_memory_usage_filename. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is appended to that file; wipe it with empty_memory_usage_file(). </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01497">1497</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01386">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01476">Total_memory_usage_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01467">Total_memory_usage_system_string</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01543">doc_memory_usage()</a>.</p>
+
+</div>
+</div>
+<a id="a47bde23694eeafe80bdcffb3aaeb07a5" name="a47bde23694eeafe80bdcffb3aaeb07a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47bde23694eeafe80bdcffb3aaeb07a5">&#9670;&#160;</a></span>empty_memory_usage_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::empty_memory_usage_files </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to empty file that records total and local memory usage in appropriate files. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01530">1530</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01410">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01572">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01480">empty_total_memory_usage_file()</a>.</p>
+
+</div>
+</div>
+<a id="aadcb42d5c4ca8099981d75b2d5adcd96" name="aadcb42d5c4ca8099981d75b2d5adcd96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadcb42d5c4ca8099981d75b2d5adcd96">&#9670;&#160;</a></span>empty_my_memory_usage_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::empty_my_memory_usage_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to empty file that records my memory usage in file whose name is specified by My_memory_usage_filename. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01410">1410</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01406">My_memory_usage_filename</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01530">empty_memory_usage_files()</a>.</p>
+
+</div>
+</div>
+<a id="a0034019640ac5f6ffe7e8e40fae1e453" name="a0034019640ac5f6ffe7e8e40fae1e453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0034019640ac5f6ffe7e8e40fae1e453">&#9670;&#160;</a></span>empty_top_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::empty_top_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to empty file that records continuous output from top in file whose name is specified by Top_output_filename. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01572">1572</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01568">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01560">Top_system_string</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01530">empty_memory_usage_files()</a>.</p>
+
+</div>
+</div>
+<a id="a8a0031773893f06aac876985e38940e4" name="a8a0031773893f06aac876985e38940e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a0031773893f06aac876985e38940e4">&#9670;&#160;</a></span>empty_total_memory_usage_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::empty_total_memory_usage_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function to empty file that records total memory usage in file whose name is specified by Total_memory_usage_filename. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01480">1480</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01476">Total_memory_usage_filename</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01530">empty_memory_usage_files()</a>.</p>
+
+</div>
+</div>
+<a id="a3426ed2144d50ce7a0941555b911c701" name="a3426ed2144d50ce7a0941555b911c701"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3426ed2144d50ce7a0941555b911c701">&#9670;&#160;</a></span>insert_comment_to_continous_top()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::insert_comment_to_continous_top </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>comment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insert comment into running continuous top output. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01688">1688</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01568">Top_output_filename</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01591">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01649">stop_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="a53c2afeb4ffd85dd771ace27fcb84136" name="a53c2afeb4ffd85dd771ace27fcb84136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c2afeb4ffd85dd771ace27fcb84136">&#9670;&#160;</a></span>run_continous_top()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::run_continous_top </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>comment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start running top continuously and output (append) into file specified by Top_output_filename. Wipe that file with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> if you wish. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before starting. </p>
+<p>Start running top continuously and output (append) into file specified by Top_output_filename. Wipe that file with <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> first if you wish. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before starting. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01591">1591</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01688">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01386">Suppress_mpi_synchronisation</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01568">Top_output_filename</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01560">Top_system_string</a>.</p>
+
+</div>
+</div>
+<a id="a64410078236ee55e630ee6416b4ccdb0" name="a64410078236ee55e630ee6416b4ccdb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64410078236ee55e630ee6416b4ccdb0">&#9670;&#160;</a></span>stop_continous_top()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MemoryUsage::stop_continous_top </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;&#160;</td>
+          <td class="paramname"><em>comment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop running top continuously. Note that this is again quite Linux specific and unlikely to work on other operating systems. Insert optional comment into output file before stopping. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01649">1649</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01398">Bypass_all_memory_usage_monitoring</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01054">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01688">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00861">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01386">Suppress_mpi_synchronisation</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01568">Top_output_filename</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a1b52934e2d3ddd6779f5f9581d14abc1" name="a1b52934e2d3ddd6779f5f9581d14abc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b52934e2d3ddd6779f5f9581d14abc1">&#9670;&#160;</a></span>Bypass_all_memory_usage_monitoring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MemoryUsage::Bypass_all_memory_usage_monitoring = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bool allowing quick bypassing of ALL operations related to memory usage monitoring &ndash; this allows the code to remain "instrumented" without incurring the heavy penalties associated with the system calls and i/o. Default setting: false. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01398">1398</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01543">doc_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01432">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01497">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01530">empty_memory_usage_files()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01410">empty_my_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01572">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01480">empty_total_memory_usage_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01688">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01591">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01649">stop_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="aa764cf2d9bfd321a3784aafdd32714bf" name="aa764cf2d9bfd321a3784aafdd32714bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa764cf2d9bfd321a3784aafdd32714bf">&#9670;&#160;</a></span>My_memory_usage_filename</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_filename = &quot;my_memory_usage.dat&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String containing name of file in which we document my memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file() </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01406">1406</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01432">doc_my_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01410">empty_my_memory_usage_file()</a>.</p>
+
+</div>
+</div>
+<a id="ae5280b46bc1ce506ba96494d6dacbdbe" name="ae5280b46bc1ce506ba96494d6dacbdbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5280b46bc1ce506ba96494d6dacbdbe">&#9670;&#160;</a></span>My_memory_usage_system_string</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::My_memory_usage_system_string = &quot;ps <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">aux&quot;</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String containing system command that obtains memory usage of all processes. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
+<p>String containing system command that obtains memory usage of all processes. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01392">1392</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01432">doc_my_memory_usage()</a>.</p>
+
+</div>
+</div>
+<a id="a77ed83cae1c77e9a046bc6b1ff55645a" name="a77ed83cae1c77e9a046bc6b1ff55645a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ed83cae1c77e9a046bc6b1ff55645a">&#9670;&#160;</a></span>Suppress_mpi_synchronisation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MemoryUsage::Suppress_mpi_synchronisation = <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is suppressed) by default because not all processors may reach the relevant doc memory usage statements causing the code to hang). </p>
+<p>Boolean to suppress synchronisation of doc memory usage on processors (via mpi barriers). True (i.e. sync is is suppressed by default because not all processors may execute the reach the relevant doc memory usage statements causing the code to hang). </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01386">1386</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01432">doc_my_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01497">doc_total_memory_usage()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01591">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01649">stop_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="a03231c21b4d9a8b4a08cecc3d688c7d3" name="a03231c21b4d9a8b4a08cecc3d688c7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03231c21b4d9a8b4a08cecc3d688c7d3">&#9670;&#160;</a></span>Top_output_filename</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::Top_output_filename = &quot;top_output.dat&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String containing name of file in which we document "continuous" output from "top" (or equivalent)&ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function <a class="el" href="namespaceoomph_1_1MemoryUsage.html#a0034019640ac5f6ffe7e8e40fae1e453" title="Function to empty file that records continuous output from top in file whose name is specified by Top...">empty_top_file()</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01568">1568</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01572">empty_top_file()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01688">insert_comment_to_continous_top()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01591">run_continous_top()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01649">stop_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="a61c07afc6531dcc4f77ae2f2b738383f" name="a61c07afc6531dcc4f77ae2f2b738383f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61c07afc6531dcc4f77ae2f2b738383f">&#9670;&#160;</a></span>Top_system_string</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::Top_system_string = &quot;while <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">do</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">top</a> -b -<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n</a> 2 ; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">done</a> &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
+<p>String containing system command that runs "top" (or equivalent) "indefinitely" and writes to file specified in Top_output_filename. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01560">1560</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01572">empty_top_file()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01591">run_continous_top()</a>.</p>
+
+</div>
+</div>
+<a id="afd9a74c901df404ddb665921e408a3a3" name="afd9a74c901df404ddb665921e408a3a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd9a74c901df404ddb665921e408a3a3">&#9670;&#160;</a></span>Total_memory_usage_filename</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::Total_memory_usage_filename = &quot;memory_usage.dat&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String containing name of file in which we document total memory usage &ndash; you may want to change this to allow different processors to write to separate files (especially in mpi context). Note that file is appended to so it ought to be emptied (either manually or by calling helper function empty_memory_usage_file() </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01476">1476</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01497">doc_total_memory_usage()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01480">empty_total_memory_usage_file()</a>.</p>
+
+</div>
+</div>
+<a id="a9b915316a3658a60e8fa86490c8d013a" name="a9b915316a3658a60e8fa86490c8d013a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b915316a3658a60e8fa86490c8d013a">&#9670;&#160;</a></span>Total_memory_usage_system_string</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string oomph::MemoryUsage::Total_memory_usage_system_string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <span class="stringliteral">&quot;ps aux | awk &#39;BEGIN{sum=0}{sum+=$4}END{print sum}&#39;&quot;</span></div>
+</div><!-- fragment -->
+<p>String containing system command that obtains total memory usage. Default assignment for linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; linux or not. MH]. </p>
+<p>String containing system command that obtains total memory usage. Default assignment for Linux. [Disclaimer: works on my machine(s) &ndash; no guarantees for any other platform; Linux or not. MH]. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01467">1467</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01497">doc_total_memory_usage()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

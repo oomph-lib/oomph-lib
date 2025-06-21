@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::HangInfo Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1HangInfo-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::HangInfo Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class that contains data for hanging nodes.  
+ <a href="classoomph_1_1HangInfo.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nodes_8h_source.html">nodes.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a23d3ff929ac052ecb401e2a929e8ca64" id="r_a23d3ff929ac052ecb401e2a929e8ca64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a23d3ff929ac052ecb401e2a929e8ca64">HangInfo</a> ()</td></tr>
+<tr class="memdesc:a23d3ff929ac052ecb401e2a929e8ca64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, initialise vectors to have size zero.  <br /></td></tr>
+<tr class="separator:a23d3ff929ac052ecb401e2a929e8ca64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72416a50e81cf0646aed5501c8949bf1" id="r_a72416a50e81cf0646aed5501c8949bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a72416a50e81cf0646aed5501c8949bf1">HangInfo</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_master</a>)</td></tr>
+<tr class="memdesc:a72416a50e81cf0646aed5501c8949bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternative constructor when the number of master nodes is known.  <br /></td></tr>
+<tr class="separator:a72416a50e81cf0646aed5501c8949bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e76983eb02020a62cd49db543414a2" id="r_a12e76983eb02020a62cd49db543414a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a12e76983eb02020a62cd49db543414a2">~HangInfo</a> ()</td></tr>
+<tr class="memdesc:a12e76983eb02020a62cd49db543414a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the storage.  <br /></td></tr>
+<tr class="separator:a12e76983eb02020a62cd49db543414a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc68f5d450c376dde3cf2b4e287c1e32" id="r_afc68f5d450c376dde3cf2b4e287c1e32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#afc68f5d450c376dde3cf2b4e287c1e32">HangInfo</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afc68f5d450c376dde3cf2b4e287c1e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:afc68f5d450c376dde3cf2b4e287c1e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fadce704a90ee904d22cf4f1e3ee585" id="r_a5fadce704a90ee904d22cf4f1e3ee585"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a5fadce704a90ee904d22cf4f1e3ee585">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a5fadce704a90ee904d22cf4f1e3ee585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a5fadce704a90ee904d22cf4f1e3ee585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c1130b58db2ff6d5eee4f923ba365c" id="r_aa9c1130b58db2ff6d5eee4f923ba365c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#aa9c1130b58db2ff6d5eee4f923ba365c">nmaster</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa9c1130b58db2ff6d5eee4f923ba365c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of master nodes.  <br /></td></tr>
+<tr class="separator:aa9c1130b58db2ff6d5eee4f923ba365c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a935ae7eeca594a648ca1800444827c" id="r_a7a935ae7eeca594a648ca1800444827c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a7a935ae7eeca594a648ca1800444827c">master_node_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7a935ae7eeca594a648ca1800444827c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the i-th master node.  <br /></td></tr>
+<tr class="separator:a7a935ae7eeca594a648ca1800444827c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac49ebdd8957a658fe4a2420108d2dcee" id="r_ac49ebdd8957a658fe4a2420108d2dcee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#ac49ebdd8957a658fe4a2420108d2dcee">master_weight</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ac49ebdd8957a658fe4a2420108d2dcee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return weight for dofs on i-th master node.  <br /></td></tr>
+<tr class="separator:ac49ebdd8957a658fe4a2420108d2dcee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4042d5805342d5e12b6a28e376885a" id="r_afe4042d5805342d5e12b6a28e376885a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#afe4042d5805342d5e12b6a28e376885a">set_master_node_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1HangInfo.html#a7a935ae7eeca594a648ca1800444827c">master_node_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;weight)</td></tr>
+<tr class="memdesc:afe4042d5805342d5e12b6a28e376885a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the pointer to the i-th master node and its weight.  <br /></td></tr>
+<tr class="separator:afe4042d5805342d5e12b6a28e376885a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7b5808b80bc4438726383e81a1b1e3c" id="r_af7b5808b80bc4438726383e81a1b1e3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#af7b5808b80bc4438726383e81a1b1e3c">add_master_node_pt</a> (<a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1HangInfo.html#a7a935ae7eeca594a648ca1800444827c">master_node_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;weight)</td></tr>
+<tr class="memdesc:af7b5808b80bc4438726383e81a1b1e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights.  <br /></td></tr>
+<tr class="separator:af7b5808b80bc4438726383e81a1b1e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7aaef82d109bb5daed0721402e97afe8" id="r_a7aaef82d109bb5daed0721402e97afe8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a7aaef82d109bb5daed0721402e97afe8">range_check</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7aaef82d109bb5daed0721402e97afe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that the argument is within the range of stored data values.  <br /></td></tr>
+<tr class="separator:a7aaef82d109bb5daed0721402e97afe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a05e1d45e1cc741723552bb3191299fa3" id="r_a05e1d45e1cc741723552bb3191299fa3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Node.html">Node</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a05e1d45e1cc741723552bb3191299fa3">Master_nodes_pt</a></td></tr>
+<tr class="memdesc:a05e1d45e1cc741723552bb3191299fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style array of pointers to nodes that this hanging node depends on.  <br /></td></tr>
+<tr class="separator:a05e1d45e1cc741723552bb3191299fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9edb46a1890f19fb4dfc02c652cd398" id="r_ac9edb46a1890f19fb4dfc02c652cd398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#ac9edb46a1890f19fb4dfc02c652cd398">Master_weights</a></td></tr>
+<tr class="memdesc:ac9edb46a1890f19fb4dfc02c652cd398"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style array of weights for the dofs on the master nodes.  <br /></td></tr>
+<tr class="separator:ac9edb46a1890f19fb4dfc02c652cd398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e256dac82251e6167bd7a763fe4e134" id="r_a9e256dac82251e6167bd7a763fe4e134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1HangInfo.html#a9e256dac82251e6167bd7a763fe4e134">Nmaster</a></td></tr>
+<tr class="memdesc:a9e256dac82251e6167bd7a763fe4e134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of master nodes required by this hanging node.  <br /></td></tr>
+<tr class="separator:a9e256dac82251e6167bd7a763fe4e134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that contains data for hanging nodes. </p>
+<p>To ensure inter-element continuity, the values and nodal positions of hanging nodes must be linear combinations of the values and positions on certain adjacent "master" nodes. For every hanging node <img class="formulaInl" alt="$ J $" src="form_8.png" width="8" height="10"/> , </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \]" src="form_337.png" width="99" height="28"/>
+</p>
+<p> and </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \]" src="form_11.png" width="99" height="28"/>
+</p>
+<p>, where <img class="formulaInl" alt="$ {\bf U}_I $" src="form_338.png" width="18" height="13"/> and <img class="formulaInl" alt="$ {\bf U}_I $" src="form_338.png" width="18" height="13"/> are Vectors containing the nodal values and positions of node <img class="formulaInl" alt="$ I $" src="form_339.png" width="8" height="10"/> respectively; the sum is taken over the hanging node's master nodes <img class="formulaInl" alt="$ K $" src="form_12.png" width="11" height="10"/> and <img class="formulaInl" alt="$ \omega_{JK} $" src="form_13.png" width="24" height="9"/> are suitable weights. This class provides storage and access functions for the pointers to the master nodes and their associated weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00741">741</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a23d3ff929ac052ecb401e2a929e8ca64" name="a23d3ff929ac052ecb401e2a929e8ca64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23d3ff929ac052ecb401e2a929e8ca64">&#9670;&#160;</a></span>HangInfo() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor, initialise vectors to have size zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00745">745</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01200">oomph::LeakCheckNames::HangInfo_build</a>.</p>
+
+</div>
+</div>
+<a id="a72416a50e81cf0646aed5501c8949bf1" name="a72416a50e81cf0646aed5501c8949bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72416a50e81cf0646aed5501c8949bf1">&#9670;&#160;</a></span>HangInfo() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_master</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Alternative constructor when the number of master nodes is known. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00753">753</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01200">oomph::LeakCheckNames::HangInfo_build</a>, <a class="el" href="nodes_8h_source.html#l00839">Master_nodes_pt</a>, and <a class="el" href="nodes_8h_source.html#l00842">Master_weights</a>.</p>
+
+</div>
+</div>
+<a id="a12e76983eb02020a62cd49db543414a2" name="a12e76983eb02020a62cd49db543414a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e76983eb02020a62cd49db543414a2">&#9670;&#160;</a></span>~HangInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::~HangInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete the storage. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00763">763</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01200">oomph::LeakCheckNames::HangInfo_build</a>, <a class="el" href="nodes_8h_source.html#l00839">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00842">Master_weights</a>, and <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>.</p>
+
+</div>
+</div>
+<a id="afc68f5d450c376dde3cf2b4e287c1e32" name="afc68f5d450c376dde3cf2b4e287c1e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc68f5d450c376dde3cf2b4e287c1e32">&#9670;&#160;</a></span>HangInfo() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::HangInfo::HangInfo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af7b5808b80bc4438726383e81a1b1e3c" name="af7b5808b80bc4438726383e81a1b1e3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b5808b80bc4438726383e81a1b1e3c">&#9670;&#160;</a></span>add_master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HangInfo::add_master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>master_node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add (pointer to) master node and corresponding weight to the internally stored (pointers to) master nodes and weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01489">1489</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00839">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00842">Master_weights</a>, and <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>.</p>
+
+</div>
+</div>
+<a id="a7a935ae7eeca594a648ca1800444827c" name="a7a935ae7eeca594a648ca1800444827c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a935ae7eeca594a648ca1800444827c">&#9670;&#160;</a></span>master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a>  &amp; oomph::HangInfo::master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to the i-th master node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00791">791</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00839">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>, and <a class="el" href="nodes_8cc_source.html#l01456">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mesh_8cc_source.html#l06881">oomph::Mesh::check_halo_schemes()</a>, <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8cc_source.html#l00048">oomph::RefineablePolarNavierStokesEquations::fill_in_generic_residual_contribution()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__axisym__advection__diffusion__elements_8cc_source.html#l00037">oomph::RefineableAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_axi_adv_diff()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00038">oomph::RefineableAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_axi_nst()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="refineable__gen__axisym__advection__diffusion__elements_8cc_source.html#l00037">oomph::RefineableGeneralisedAxisymAdvectionDiffusionEquations::fill_in_generic_residual_contribution_cons_axisym_adv_diff()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableLinearisedAxisymmetricNavierStokesEquations::fill_in_generic_residual_contribution_linearised_axi_nst()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8cc_source.html#l00040">oomph::RefineableLinearisedNavierStokesEquations::fill_in_generic_residual_contribution_linearised_nst()</a>, <a class="el" href="refineable__spherical__advection__diffusion__elements_8cc_source.html#l00037">oomph::RefineableSphericalAdvectionDiffusionEquations::fill_in_generic_residual_contribution_spherical_adv_diff()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8cc_source.html#l00038">oomph::RefineableSphericalNavierStokesEquations::fill_in_generic_residual_contribution_spherical_nst()</a>, <a class="el" href="boussinesq__elements_8h_source.html#l01301">oomph::RefineableBuoyantQCrouzeixRaviartElement&lt; DIM &gt;::fill_in_off_diagonal_jacobian_blocks_analytic()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8cc_source.html#l00982">oomph::RefineableAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source.html#l01557">oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates()</a>, <a class="el" href="nodes_8cc_source.html#l03588">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03621">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00231">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="macro__element__node__update__element_8cc_source.html#l00048">oomph::MacroElementNodeUpdateNode::node_update()</a>, <a class="el" href="nodes_8cc_source.html#l02528">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02560">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02592">oomph::Node::position_gen()</a>, <a class="el" href="nodes_8cc_source.html#l02624">oomph::Node::position_gen()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03133">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="navier__stokes__flux__control__elements_8h_source.html#l00614">oomph::RefineableNavierStokesFluxControlElement&lt; ELEMENT &gt;::refineable_fill_in_generic_residual_contribution_fluid_traction()</a>, <a class="el" href="problem_8cc_source.html#l02664">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02437">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="ac49ebdd8957a658fe4a2420108d2dcee" name="ac49ebdd8957a658fe4a2420108d2dcee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac49ebdd8957a658fe4a2420108d2dcee">&#9670;&#160;</a></span>master_weight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a>  &amp; oomph::HangInfo::master_weight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return weight for dofs on i-th master node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00808">808</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00842">Master_weights</a>, <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>, and <a class="el" href="nodes_8cc_source.html#l01456">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__young__laplace__elements_8cc_source.html#l00034">oomph::RefineableYoungLaplaceEquations::fill_in_contribution_to_residuals()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="nodes_8cc_source.html#l03588">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03621">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="nodes_8cc_source.html#l02528">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02560">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02592">oomph::Node::position_gen()</a>, <a class="el" href="nodes_8cc_source.html#l02624">oomph::Node::position_gen()</a>, <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02437">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="aa9c1130b58db2ff6d5eee4f923ba365c" name="aa9c1130b58db2ff6d5eee4f923ba365c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c1130b58db2ff6d5eee4f923ba365c">&#9670;&#160;</a></span>nmaster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HangInfo::nmaster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of master nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00785">785</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">References <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mesh_8cc_source.html#l06881">oomph::Mesh::check_halo_schemes()</a>, <a class="el" href="refineable__advection__diffusion__elements_8h_source.html#l00199">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::dinterpolated_u_adv_diff_ddata()</a>, <a class="el" href="refineable__young__laplace__elements_8cc_source.html#l00034">oomph::RefineableYoungLaplaceEquations::fill_in_contribution_to_residuals()</a>, <a class="el" href="refineable__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_adv_diff()</a>, <a class="el" href="refineable__advection__diffusion__reaction__elements_8cc_source.html#l00038">oomph::RefineableAdvectionDiffusionReactionEquations&lt; NREAGENT, DIM &gt;::fill_in_generic_residual_contribution_adv_diff_react()</a>, <a class="el" href="refineable__gen__advection__diffusion__elements_8cc_source.html#l00038">oomph::RefineableGeneralisedAdvectionDiffusionEquations&lt; DIM &gt;::fill_in_generic_residual_contribution_cons_adv_diff()</a>, <a class="el" href="nodes_8cc_source.html#l03588">oomph::SolidNode::lagrangian_position()</a>, <a class="el" href="nodes_8cc_source.html#l03621">oomph::SolidNode::lagrangian_position_gen()</a>, <a class="el" href="algebraic__elements_8cc_source.html#l00231">oomph::AlgebraicNode::node_update()</a>, <a class="el" href="macro__element__node__update__element_8cc_source.html#l00048">oomph::MacroElementNodeUpdateNode::node_update()</a>, <a class="el" href="nodes_8cc_source.html#l02528">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02560">oomph::Node::position()</a>, <a class="el" href="nodes_8cc_source.html#l02592">oomph::Node::position_gen()</a>, <a class="el" href="nodes_8cc_source.html#l02624">oomph::Node::position_gen()</a>, <a class="el" href="problem_8cc_source.html#l02664">oomph::Problem::remove_duplicate_data()</a>, <a class="el" href="nodes_8cc_source.html#l02408">oomph::Node::value()</a>, and <a class="el" href="nodes_8cc_source.html#l02437">oomph::Node::value()</a>.</p>
+
+</div>
+</div>
+<a id="a5fadce704a90ee904d22cf4f1e3ee585" name="a5fadce704a90ee904d22cf4f1e3ee585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fadce704a90ee904d22cf4f1e3ee585">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HangInfo::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1HangInfo.html">HangInfo</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a7aaef82d109bb5daed0721402e97afe8" name="a7aaef82d109bb5daed0721402e97afe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aaef82d109bb5daed0721402e97afe8">&#9670;&#160;</a></span>range_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HangInfo::range_check </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check that the argument is within the range of stored data values. </p>
+<p>Check that the argument is within the range of stored master nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01456">1456</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="nodes_8h_source.html#l00845">Nmaster</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8h_source.html#l00791">master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00808">master_weight()</a>, and <a class="el" href="nodes_8cc_source.html#l01474">set_master_node_pt()</a>.</p>
+
+</div>
+</div>
+<a id="afe4042d5805342d5e12b6a28e376885a" name="afe4042d5805342d5e12b6a28e376885a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4042d5805342d5e12b6a28e376885a">&#9670;&#160;</a></span>set_master_node_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::HangInfo::set_master_node_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Node.html">Node</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>master_node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>weight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the pointer to the i-th master node and its weight. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8cc_source.html#l01474">1474</a> of file <a class="el" href="nodes_8cc_source.html">nodes.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="nodes_8h_source.html#l00839">Master_nodes_pt</a>, <a class="el" href="nodes_8h_source.html#l00842">Master_weights</a>, and <a class="el" href="nodes_8cc_source.html#l01456">range_check()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="problem_8cc_source.html#l02664">oomph::Problem::remove_duplicate_data()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a05e1d45e1cc741723552bb3191299fa3" name="a05e1d45e1cc741723552bb3191299fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05e1d45e1cc741723552bb3191299fa3">&#9670;&#160;</a></span>Master_nodes_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Node.html">Node</a>** oomph::HangInfo::Master_nodes_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style array of pointers to nodes that this hanging node depends on. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00839">839</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01489">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00753">HangInfo()</a>, <a class="el" href="nodes_8h_source.html#l00791">master_node_pt()</a>, <a class="el" href="nodes_8cc_source.html#l01474">set_master_node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00763">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<a id="ac9edb46a1890f19fb4dfc02c652cd398" name="ac9edb46a1890f19fb4dfc02c652cd398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9edb46a1890f19fb4dfc02c652cd398">&#9670;&#160;</a></span>Master_weights</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* oomph::HangInfo::Master_weights</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style array of weights for the dofs on the master nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00842">842</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01489">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00753">HangInfo()</a>, <a class="el" href="nodes_8h_source.html#l00808">master_weight()</a>, <a class="el" href="nodes_8cc_source.html#l01474">set_master_node_pt()</a>, and <a class="el" href="nodes_8h_source.html#l00763">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a9e256dac82251e6167bd7a763fe4e134" name="a9e256dac82251e6167bd7a763fe4e134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e256dac82251e6167bd7a763fe4e134">&#9670;&#160;</a></span>Nmaster</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::HangInfo::Nmaster</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of master nodes required by this hanging node. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodes_8h_source.html#l00845">845</a> of file <a class="el" href="nodes_8h_source.html">nodes.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodes_8cc_source.html#l01489">add_master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00791">master_node_pt()</a>, <a class="el" href="nodes_8h_source.html#l00808">master_weight()</a>, <a class="el" href="nodes_8h_source.html#l00785">nmaster()</a>, <a class="el" href="nodes_8cc_source.html#l01456">range_check()</a>, and <a class="el" href="nodes_8h_source.html#l00763">~HangInfo()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="nodes_8h_source.html">nodes.h</a></li>
+<li><a class="el" href="nodes_8cc_source.html">nodes.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

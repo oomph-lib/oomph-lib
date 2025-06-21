@@ -1,0 +1,370 @@
+\doxysection{oomph\+::Missing\+\_\+masters\+\_\+functions Namespace Reference}
+\hypertarget{namespaceoomph_1_1Missing__masters__functions}{}\label{namespaceoomph_1_1Missing__masters__functions}\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed nodes, including any masters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Recursively add any master nodes (and their master nodes etc) of external nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper to add external haloed node that is not a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed node that is a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{send\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper functiono to add external halo node that is not a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo nodes, including any masters, based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo node that is a master. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+unsigneds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{counter\+\_\+for\+\_\+recv\+\_\+doubles}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{recv\+\_\+doubles}})
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo master node with the information sent from the haloed process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf}{Doc\+\_\+timings}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to doc timings or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce}{Doc\+\_\+stats}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output basic info during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c}{Doc\+\_\+full\+\_\+stats}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output further info during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823}\label{namespaceoomph_1_1Missing__masters__functions_a9e3bf04e14473cd6671c5b1f17bc4823} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}}
+\index{add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_master\_node\_helper()}{add\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo node that is a master. 
+
+
+
+Definition at line \mbox{\hyperlink{missing__masters_8template_8cc_source_l00177}{177}} of file \mbox{\hyperlink{missing__masters_8template_8cc_source}{missing\+\_\+masters.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02385}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{mesh_8h_source_l02118}{oomph\+::\+Mesh\+::shared\+\_\+node\+\_\+pt()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f}\label{namespaceoomph_1_1Missing__masters__functions_a537b9f129421d1ad4f6915794d9dd66f} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}}
+\index{add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_helper()}{add\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper functiono to add external halo node that is not a master. 
+
+Helper function to add external halo node that is not a master. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l01219}{1219}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{missing__masters_8cc_source_l01297}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{mesh_8h_source_l02385}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{mesh_8h_source_l02118}{oomph\+::\+Mesh\+::shared\+\_\+node\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8template_8cc_source_l00062}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93}\label{namespaceoomph_1_1Missing__masters__functions_a9510959d4583c82a516d520c9da35a93} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}}
+\index{add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_to\_storage()}{add\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo nodes, including any masters, based on information received from the haloed process. 
+
+/ Templated helper functions for missing master methods,
+
+Helper function to add external halo nodes, including any masters, based on information received from the haloed process 
+
+Definition at line \mbox{\hyperlink{missing__masters_8template_8cc_source_l00062}{62}} of file \mbox{\hyperlink{missing__masters_8template_8cc_source}{missing\+\_\+masters.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{missing__masters_8cc_source_l01219}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc}\label{namespaceoomph_1_1Missing__masters__functions_acd3ecd40c8ebcfdb04f2e26c3fc304cc} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}}
+\index{add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_master\_node\_helper()}{add\_external\_haloed\_master\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed node that is a master. 
+
+/ Slow search version without additional access function in \doxylink{classoomph_1_1Mesh}{Mesh} class /\+Search the internal shared node storage for this node
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00306}{306}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8cc_source_l09516}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00053}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{missing__masters_8cc_source_l00657}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{mesh_8h_source_l02127}{oomph\+::\+Mesh\+::get\+\_\+shared\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02420}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00105}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543}\label{namespaceoomph_1_1Missing__masters__functions_a6034e2c1c81a56272efd35886b2a9543} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}}
+\index{add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_helper()}{add\_external\_haloed\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper to add external haloed node that is not a master. 
+
+Helper function to add external haloed node that is not a master. / Slow search version without additional access function in \doxylink{classoomph_1_1Mesh}{Mesh} class /\+Search the internal shared node storage for this node
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00173}{173}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8cc_source_l09516}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00053}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{missing__masters_8cc_source_l00435}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{mesh_8h_source_l02127}{oomph\+::\+Mesh\+::get\+\_\+shared\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02420}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00076}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d}\label{namespaceoomph_1_1Missing__masters__functions_a94805dfb28ba45ff7f4d7a0d6fef108d} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}}
+\index{add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_to\_storage()}{add\_external\_haloed\_node\_to\_storage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed nodes, including any masters. 
+
+Helper function to add external haloed nodes, inc. masters of external haloed nodes. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00076}{76}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{missing__masters_8cc_source_l00173}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, and \mbox{\hyperlink{missing__masters_8cc_source_l00105}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00657}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41}\label{namespaceoomph_1_1Missing__masters__functions_a97561cb6cf8e5ad1c876173ee5973e41} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}}
+\index{construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_master\_node\_helper()}{construct\_new\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo master node with the information sent from the haloed process. 
+
+Helper function which constructs a new external halo master node with the required information sent from the haloed process. The first entry of All\+\_\+unsigned\+\_\+values is the default node update id
+
+... so for the specified update\+\_\+id, call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+/print out nodes
+
+/ Check if sons...
+
+Definition at line \mbox{\hyperlink{missing__masters_8template_8cc_source_l00250}{250}} of file \mbox{\hyperlink{missing__masters_8template_8cc_source}{missing\+\_\+masters.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l02267}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02376}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{mesh_8h_source_l02259}{oomph\+::\+Mesh\+::external\+\_\+halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00477}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l01748}{oomph\+::\+Mesh\+::halo\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01846}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02222}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{elements_8h_source_l01138}{oomph\+::\+Generalised\+Element\+::set\+\_\+halo()}}, \mbox{\hyperlink{elements_8h_source_l01876}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6}\label{namespaceoomph_1_1Missing__masters__functions_ae60b3fe43b4c8a9ccd03d2bc22f437c6} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}}
+\index{construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_node\_helper()}{construct\_new\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process. 
+
+Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. The first entry of All\+\_\+alg\+\_\+nodal\+\_\+info contains the default node update id e.\+g. for the quarter circle there are "{}\+Upper\+\_\+left\+\_\+box"{}, "{}\+Lower right box"{} etc...
+
+again we need the size of this vector as it varies between meshes; we also need some indication as to which geometric object should be used...
+
+For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l01297}{1297}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l02376}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02542}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02513}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00477}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01846}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l01219}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7}\label{namespaceoomph_1_1Missing__masters__functions_a56eaf8c8da98960d9929a0c9921c4df7} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}}
+\index{get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_master\_nodal\_information\_helper()}{get\_required\_master\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process. 
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00657}{657}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh_8cc_source_l09475}{oomph\+::\+Mesh\+::add\+\_\+external\+\_\+haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00076}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{mesh_8h_source_l01608}{oomph\+::\+Mesh\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{mesh_8h_source_l02304}{oomph\+::\+Mesh\+::external\+\_\+haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00053}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{mesh_8h_source_l01787}{oomph\+::\+Mesh\+::haloed\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{elements_8h_source_l01882}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00835}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{mesh_8h_source_l02275}{oomph\+::\+Mesh\+::nexternal\+\_\+haloed\+\_\+element()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01157}{oomph\+::\+Generalised\+Element\+::non\+\_\+halo\+\_\+proc\+\_\+\+ID()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00306}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb}\label{namespaceoomph_1_1Missing__masters__functions_acc3c8930de1090a3dd7d4a3ddb55cacb} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
+\index{get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_nodal\_information\_helper()}{get\_required\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. 
+
+
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00435}{435}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{missing__masters_8cc_source_l00053}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00835}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00173}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14}\label{namespaceoomph_1_1Missing__masters__functions_a5aeedca2c5268a414d83fa7cfd023f14} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}
+\index{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{recv\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{counter\+\_\+for\+\_\+recv\+\_\+doubles,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{recv\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. 
+
+
+
+Definition at line \mbox{\hyperlink{missing__masters_8template_8cc_source_l00105}{105}} of file \mbox{\hyperlink{missing__masters_8template_8cc_source}{missing\+\_\+masters.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549}\label{namespaceoomph_1_1Missing__masters__functions_a954b632d3a93388358723d33bca9c549} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}}
+\index{recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_haloed\_node()}{recursively\_add\_masters\_of\_external\_haloed\_node()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{send\+\_\+unsigneds,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{send\+\_\+doubles }\end{DoxyParamCaption})}
+
+
+
+Recursively add any master nodes (and their master nodes etc) of external nodes. 
+
+Recursively add any master nodes (and their master nodes etc) of external haloed nodes. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00105}{105}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+References \mbox{\hyperlink{missing__masters_8cc_source_l00306}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00053}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, and \mbox{\hyperlink{missing__masters_8cc_source_l00105}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00076}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, and \mbox{\hyperlink{missing__masters_8cc_source_l00105}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c}\label{namespaceoomph_1_1Missing__masters__functions_a5059632b6254fcfc11f688e3e643d71c} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_full\_stats@{Doc\_full\_stats}}
+\index{Doc\_full\_stats@{Doc\_full\_stats}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_full\_stats}{Doc\_full\_stats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to output further info during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. 
+
+Boolean to indicate whether to document further info (to screen) during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00066}{66}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce}\label{namespaceoomph_1_1Missing__masters__functions_a86ac04bf0028ba6e66c07466cc9774ce} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_stats@{Doc\_stats}}
+\index{Doc\_stats@{Doc\_stats}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+stats = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to output basic info during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. 
+
+Boolean to indicate whether to document basic info (to screen) during setup\+\_\+multi\+\_\+domain\+\_\+interaction() routines. 
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00062}{62}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf}\label{namespaceoomph_1_1Missing__masters__functions_acd9cae489a6217b1566a1e40cbca86cf} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Doc\_timings@{Doc\_timings}}
+\index{Doc\_timings@{Doc\_timings}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_timings}{Doc\_timings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Doc\+\_\+timings = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to doc timings or not. 
+
+
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00058}{58}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0}\label{namespaceoomph_1_1Missing__masters__functions_af558db56295524af220b5b4c981d5aa0} 
+\index{oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}!Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}}
+\index{Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}!oomph::Missing\_masters\_functions@{oomph::Missing\_masters\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_unsigneds\_string}{Flat\_packed\_unsigneds\_string}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}
+
+
+
+Definition at line \mbox{\hyperlink{missing__masters_8cc_source_l00053}{53}} of file \mbox{\hyperlink{missing__masters_8cc_source}{missing\+\_\+masters.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{missing__masters_8cc_source_l00306}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00173}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00657}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{missing__masters_8cc_source_l00435}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{missing__masters_8cc_source_l00105}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+

@@ -1,0 +1,198 @@
+\doxysection{oomph\+::Tet\+Edge Class Reference}
+\hypertarget{classoomph_1_1TetEdge}{}\label{classoomph_1_1TetEdge}\index{oomph::TetEdge@{oomph::TetEdge}}
+
+
+Helper class to keep track of edges in tet mesh generation.  
+
+
+
+
+{\ttfamily \#include $<$gmsh\+\_\+tet\+\_\+mesh.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetEdge_aa50127a0f255985cced5d90ec2325c0c}{Tet\+Edge}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{vertex1}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{vertex2}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass two vertices, identified by their indices Edge "{}direction"{} is from lower vertex to higher vertex id so can compare if we\textquotesingle{}re dealing with the same one... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetEdge_acc26fa59e15615e1620fade6f9d1bbe1}{first\+\_\+vertex\+\_\+id}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em First vertex id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetEdge_a5ab63d3dece25fd81b5dad00b7fc8b3f}{second\+\_\+vertex\+\_\+id}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Second vertex id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetEdge_a9a124de5c191e1b0e43ed92c2a867c55}{is\+\_\+reversed}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Edge is reversed in the sense that vertex1 actually has a higher id than vertex2 (when specified in the constructor) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetEdge_a07cbad9bf3e951fcdfab23575c42e379}{operator==}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetEdge}{Tet\+Edge}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tet\+\_\+edge}}) \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Comparison operator\+: Edges are identical if their sorted (and therefore possibly reversed) vertex ids agree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetEdge_ac8d4b17db0a1e741664d8029ffb419b9}{operator$<$}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetEdge}{Tet\+Edge}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{tet\+\_\+edge}}) \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Comparison operator. Lexicographic comparison based on vertex ids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TetEdge_a4aa99b9d2755ffd9562888aaa26f2cbd}{Vertex\+\_\+pair}}
+\begin{DoxyCompactList}\small\item\em The vertices (sorted by vertex ids) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \mbox{\hyperlink{classoomph_1_1TetEdge_ad2832c145c84cf2655a2c02a8e86a4fa}{Reversed}}
+\begin{DoxyCompactList}\small\item\em Is it reversed? I.\+e. is the first input vertex stored after the second one? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper class to keep track of edges in tet mesh generation. 
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00263}{263}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TetEdge_aa50127a0f255985cced5d90ec2325c0c}\label{classoomph_1_1TetEdge_aa50127a0f255985cced5d90ec2325c0c} 
+\index{oomph::TetEdge@{oomph::TetEdge}!TetEdge@{TetEdge}}
+\index{TetEdge@{TetEdge}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{TetEdge()}{TetEdge()}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Edge\+::\+Tet\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{vertex1,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{vertex2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass two vertices, identified by their indices Edge "{}direction"{} is from lower vertex to higher vertex id so can compare if we\textquotesingle{}re dealing with the same one... 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00269}{269}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00346}{Reversed}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{Vertex\+\_\+pair}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TetEdge_acc26fa59e15615e1620fade6f9d1bbe1}\label{classoomph_1_1TetEdge_acc26fa59e15615e1620fade6f9d1bbe1} 
+\index{oomph::TetEdge@{oomph::TetEdge}!first\_vertex\_id@{first\_vertex\_id}}
+\index{first\_vertex\_id@{first\_vertex\_id}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{first\_vertex\_id()}{first\_vertex\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} oomph\+::\+Tet\+Edge\+::first\+\_\+vertex\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+First vertex id. 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00291}{291}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{Vertex\+\_\+pair}}.
+
+\Hypertarget{classoomph_1_1TetEdge_a9a124de5c191e1b0e43ed92c2a867c55}\label{classoomph_1_1TetEdge_a9a124de5c191e1b0e43ed92c2a867c55} 
+\index{oomph::TetEdge@{oomph::TetEdge}!is\_reversed@{is\_reversed}}
+\index{is\_reversed@{is\_reversed}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{is\_reversed()}{is\_reversed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} oomph\+::\+Tet\+Edge\+::is\+\_\+reversed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Edge is reversed in the sense that vertex1 actually has a higher id than vertex2 (when specified in the constructor) 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00305}{305}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00346}{Reversed}}.
+
+\Hypertarget{classoomph_1_1TetEdge_ac8d4b17db0a1e741664d8029ffb419b9}\label{classoomph_1_1TetEdge_ac8d4b17db0a1e741664d8029ffb419b9} 
+\index{oomph::TetEdge@{oomph::TetEdge}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} oomph\+::\+Tet\+Edge\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetEdge}{Tet\+Edge}} \&}]{tet\+\_\+edge }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Comparison operator. Lexicographic comparison based on vertex ids. 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00320}{320}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{Vertex\+\_\+pair}}.
+
+\Hypertarget{classoomph_1_1TetEdge_a07cbad9bf3e951fcdfab23575c42e379}\label{classoomph_1_1TetEdge_a07cbad9bf3e951fcdfab23575c42e379} 
+\index{oomph::TetEdge@{oomph::TetEdge}!operator==@{operator==}}
+\index{operator==@{operator==}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} oomph\+::\+Tet\+Edge\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetEdge}{Tet\+Edge}} \&}]{tet\+\_\+edge }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Comparison operator\+: Edges are identical if their sorted (and therefore possibly reversed) vertex ids agree. 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00312}{312}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{Vertex\+\_\+pair}}.
+
+\Hypertarget{classoomph_1_1TetEdge_a5ab63d3dece25fd81b5dad00b7fc8b3f}\label{classoomph_1_1TetEdge_a5ab63d3dece25fd81b5dad00b7fc8b3f} 
+\index{oomph::TetEdge@{oomph::TetEdge}!second\_vertex\_id@{second\_vertex\_id}}
+\index{second\_vertex\_id@{second\_vertex\_id}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{second\_vertex\_id()}{second\_vertex\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} oomph\+::\+Tet\+Edge\+::second\+\_\+vertex\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Second vertex id. 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00297}{297}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{Vertex\+\_\+pair}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TetEdge_ad2832c145c84cf2655a2c02a8e86a4fa}\label{classoomph_1_1TetEdge_ad2832c145c84cf2655a2c02a8e86a4fa} 
+\index{oomph::TetEdge@{oomph::TetEdge}!Reversed@{Reversed}}
+\index{Reversed@{Reversed}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{Reversed}{Reversed}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} oomph\+::\+Tet\+Edge\+::\+Reversed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Is it reversed? I.\+e. is the first input vertex stored after the second one? 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00346}{346}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00305}{is\+\_\+reversed()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00269}{Tet\+Edge()}}.
+
+\Hypertarget{classoomph_1_1TetEdge_a4aa99b9d2755ffd9562888aaa26f2cbd}\label{classoomph_1_1TetEdge_a4aa99b9d2755ffd9562888aaa26f2cbd} 
+\index{oomph::TetEdge@{oomph::TetEdge}!Vertex\_pair@{Vertex\_pair}}
+\index{Vertex\_pair@{Vertex\_pair}!oomph::TetEdge@{oomph::TetEdge}}
+\doxysubsubsection{\texorpdfstring{Vertex\_pair}{Vertex\_pair}}
+{\footnotesize\ttfamily std\+::pair$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}}$>$ oomph\+::\+Tet\+Edge\+::\+Vertex\+\_\+pair\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The vertices (sorted by vertex ids) 
+
+
+
+Definition at line \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00342}{342}} of file \mbox{\hyperlink{gmsh__tet__mesh_8h_source}{gmsh\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00291}{first\+\_\+vertex\+\_\+id()}}, \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00320}{operator$<$()}}, \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00312}{operator==()}}, \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00297}{second\+\_\+vertex\+\_\+id()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00269}{Tet\+Edge()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gmsh__tet__mesh_8h}{gmsh\+\_\+tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

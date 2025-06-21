@@ -1,0 +1,78 @@
+/**
+
+\mainpage Copyright
+
+
+ \c oomph-lib is "open source" software and may therefore be
+freely downloaded and distributed -- the full details
+are given below. To facilitate the installation of the library,
+the \c oomph-lib distribution includes (parts of)
+certain other open source libraries (SuperLU, METIS and BLAS).
+Redistribution of these libraries with \c oomph-lib has been
+approved by their authors -- we suggest you get in touch with
+them if you wish to re-distribute their libraries yet again.
+
+<HR>
+
+<H2><TT>oomph-lib's</TT> licencing terms</H2>
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the
+<a href="http://www.gnu.org/licenses/lgpl.html">
+GNU Lesser General Public License
+</a> as published by the
+<a href="http://www.fsf.org/">Free Software Foundation</a> ;
+either version 2.1 of the License, or (at your option) any later version.
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the
+<a href="http://www.gnu.org/licenses/lgpl.html">
+GNU Lesser General Public License
+</a>
+for more details.
+
+
+
+Your use or distribution of \c oomph-lib or any derivative code
+implies that you  agree to this License.
+<br>
+<br>
+Copyright (C) 2006-2025 by
+<a href="https://www.matthias-heil.co.uk/new_webpage/index.html">Matthias Heil</a>
+and <a href="https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/">Andrew L. Hazel</a>.
+
+<HR>
+
+<H2>Licencing details for third-party libraries</H2>
+<TT>oomph-lib</TT> provides the option to install various
+third-party libraries as part of its overall build process.
+These are:
+<ul>
+<li><a href="https://github.com/OpenMathLib/OpenBLAS">OpenBLAS</a></li>
+<li><a href="https://github.com/boostorg/boost">Boost</a></li>
+<li><a href="https://github.com/CGAL/cgal/">CGAL</a></li>
+<li><a href="https://github.com/hypre-space/hypre/">HYPRE</a></li>
+<li><a href="https://mumps-solver.org/index.php">MUMPS</a> (built via
+a fork of the <a href="https://github.com/scivision/mumps">Scivision
+MUMPS via CMake</a> project)
+<li><a href="https://github.com/KarypisLab/GKlib">GKlib</a></li>
+<li><a href="https://github.com/KarypisLab/METIS">METIS</A>
+<li><a href="https://github.com/KarypisLab/ParMETIS">ParMETIS</a></li>
+<li><a href="https://github.com/xiaoyeli/superlu">SuperLU</a></li>
+<li><a href="https://github.com/xiaoyeli/superlu_dist">SuperLU_dist</a></li>
+<li><a href="https://github.com/trilinos/Trilinos/">Trilinos</a></li>
+</ul>
+
+
+
+Our build scripts download the relevant source automatically from
+the relevant GitHub repositories where the libraries' licencing
+information can be found.
+
+<hr>
+<hr>
+\section pdf PDF file
+A <a href="../latex/refman.pdf">pdf version</a> of this document is available.
+\*/
+

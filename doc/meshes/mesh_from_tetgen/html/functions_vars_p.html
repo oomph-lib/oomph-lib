@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members - Variables</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all variables with links to the classes they belong to:</div>
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>p1&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a22098b556345f035ddacbdf9ea1f7076">oomph::CylinderWithFlagDomain</a></li>
+<li>p10&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#af9fe7cd9299c2fe162804d60455609c6">oomph::CylinderWithFlagDomain</a></li>
+<li>p11&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#af209469424b0b515eedb4587901453b6">oomph::CylinderWithFlagDomain</a></li>
+<li>p12&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a8cd9138a4f584d439da6264e5aa65d2e">oomph::CylinderWithFlagDomain</a></li>
+<li>p13&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#af96f841048a399c0d5b7cd4519c22d72">oomph::CylinderWithFlagDomain</a></li>
+<li>p14&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ac07282a9f587fc6f10b81506c59a2001">oomph::CylinderWithFlagDomain</a></li>
+<li>p15&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a3ddcf9eca20ac5f31358b9711fef5a09">oomph::CylinderWithFlagDomain</a></li>
+<li>p16&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a633feb876937a1b58c013209defbad7e">oomph::CylinderWithFlagDomain</a></li>
+<li>p17&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a38c6ea86f1d6218dccce7482dd6daf48">oomph::CylinderWithFlagDomain</a></li>
+<li>p18&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a0076ec3ac4fbd0213719a2d2679ab1db">oomph::CylinderWithFlagDomain</a></li>
+<li>p19&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a0a3ba355180e34fc7372fef35a6accb7">oomph::CylinderWithFlagDomain</a></li>
+<li>p2&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a518fb98d53857ffd86d1cac4c23db0d9">oomph::CylinderWithFlagDomain</a></li>
+<li>p20&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a5c13c0e741670b57b0b8ac2e50e4f157">oomph::CylinderWithFlagDomain</a></li>
+<li>p21&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#afb18b71be9144eb6ea2b36d113531b7e">oomph::CylinderWithFlagDomain</a></li>
+<li>p22&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a69b821d40d982324df13380bb05db70b">oomph::CylinderWithFlagDomain</a></li>
+<li>p23&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ad0ce5ac87bc9e4b455a99fc3a6cf5b9c">oomph::CylinderWithFlagDomain</a></li>
+<li>p24&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a1e0ffc29a35d430c6ab123f8bc9a5d37">oomph::CylinderWithFlagDomain</a></li>
+<li>p25&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#abbcbd7a97f86134091e3750f04a3fdfd">oomph::CylinderWithFlagDomain</a></li>
+<li>p26&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a85707f0839cd70631c82d9254ed8c5d0">oomph::CylinderWithFlagDomain</a></li>
+<li>p27&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a4f485315dc6bb184e298d8bba550866e">oomph::CylinderWithFlagDomain</a></li>
+<li>p28&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a56fdcc4a8538bdc4c10e2c11355163f0">oomph::CylinderWithFlagDomain</a></li>
+<li>p29&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a5eb61c2f311296d0ce91ec428a5d5329">oomph::CylinderWithFlagDomain</a></li>
+<li>p3&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a6327976b3d8e582cfc232be01c45d975">oomph::CylinderWithFlagDomain</a></li>
+<li>p30&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#af35a25c3f63e71f2bff61b1da3384630">oomph::CylinderWithFlagDomain</a></li>
+<li>p31&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a73977bbf7e952fd71a465884e526c4db">oomph::CylinderWithFlagDomain</a></li>
+<li>p32&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a600f1d0f8f3168e95b9f20931cdd5a26">oomph::CylinderWithFlagDomain</a></li>
+<li>p33&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a2c3ddad128b8d2ca54bb015171637809">oomph::CylinderWithFlagDomain</a></li>
+<li>p34&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a44aa94c4106c3f2d7c7575a50a56a98c">oomph::CylinderWithFlagDomain</a></li>
+<li>p35&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#afba63042c55f44d17628aaa0623e97b8">oomph::CylinderWithFlagDomain</a></li>
+<li>p36&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a8366e523946d218b27c998aca522742e">oomph::CylinderWithFlagDomain</a></li>
+<li>p37&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#aa239d71da15390053e4418e4902c8608">oomph::CylinderWithFlagDomain</a></li>
+<li>p38&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a986aabc271029813cb541ae8555d1696">oomph::CylinderWithFlagDomain</a></li>
+<li>p39&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a0b6726667f09eeabad0885858e684ff0">oomph::CylinderWithFlagDomain</a></li>
+<li>p4&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a060890ea588f8e5833d518fa707fe774">oomph::CylinderWithFlagDomain</a></li>
+<li>p40&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a9a6150121807b24c30f1a57e23c899ca">oomph::CylinderWithFlagDomain</a></li>
+<li>p41&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ad40423594322c7cea0161a39501535a3">oomph::CylinderWithFlagDomain</a></li>
+<li>p42&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a49f3169b5cd06322394e808f3fb8dc91">oomph::CylinderWithFlagDomain</a></li>
+<li>p43&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a4cf79435459ac5399f94f6e0686e5a0a">oomph::CylinderWithFlagDomain</a></li>
+<li>p44&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a4288652a4436b747a86ff94346c61ebc">oomph::CylinderWithFlagDomain</a></li>
+<li>p45&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a6988e0912e925fe62d6cad22195e8c5d">oomph::CylinderWithFlagDomain</a></li>
+<li>p46&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a5dedb150b33c1260e09a5e73924c6861">oomph::CylinderWithFlagDomain</a></li>
+<li>p47&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a34928d206b87289667344fc94a307509">oomph::CylinderWithFlagDomain</a></li>
+<li>p48&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ae02eac305b33b85a2e87df1764e4b8d8">oomph::CylinderWithFlagDomain</a></li>
+<li>p49&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#aa5418e036166408fb5df662d93479a84">oomph::CylinderWithFlagDomain</a></li>
+<li>p5&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ad4f4179e51afb966f11b999ef9ddd0a9">oomph::CylinderWithFlagDomain</a></li>
+<li>p50&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a0b46b0c29925ba405a04fda8b3ab9c06">oomph::CylinderWithFlagDomain</a></li>
+<li>p6&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a8af35f3606195d1bab1da58102b7fa15">oomph::CylinderWithFlagDomain</a></li>
+<li>p7&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#ae0aaa23dad312e7ea308e98b59015a51">oomph::CylinderWithFlagDomain</a></li>
+<li>p8&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a20743a18902498e2537f557da2fec123">oomph::CylinderWithFlagDomain</a></li>
+<li>p9&#160;:&#160;<a class="el" href="classoomph_1_1CylinderWithFlagDomain.html#a8ff949c600451d8cc9e53fc9b204dd79">oomph::CylinderWithFlagDomain</a></li>
+<li>Phi&#160;:&#160;<a class="el" href="classoomph_1_1AnnularDomain.html#a0280549bd7a88cabb84a7223ed114040">oomph::AnnularDomain</a></li>
+<li>Print_timings_level_adaptation&#160;:&#160;<a class="el" href="classoomph_1_1RefineableTriangleMesh.html#a0b8c7af317c5279a00a13aa39ea896f2">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a></li>
+<li>Print_timings_level_load_balance&#160;:&#160;<a class="el" href="classoomph_1_1RefineableTriangleMesh.html#ad2abc4d856b22d59ecc5640669700b31">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a></li>
+<li>Print_timings_projection&#160;:&#160;<a class="el" href="classoomph_1_1RefineableTriangleMesh.html#ac0e10dae151eb6c03f90be0bc3462f8d">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a></li>
+<li>Print_timings_transfering_target_areas&#160;:&#160;<a class="el" href="classoomph_1_1RefineableTriangleMesh.html#acd5c63891d8a4052ce629610697561b6">oomph::RefineableTriangleMesh&lt; ELEMENT &gt;</a></li>
+<li>Projection_is_disabled&#160;:&#160;<a class="el" href="classoomph_1_1GmshParameters.html#aebabc7ca82ac23e87e164655b6dc9bb4">oomph::GmshParameters</a>, <a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a274ebedf983f3b34620fa2bbb1980fcd">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

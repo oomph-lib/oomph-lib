@@ -1,0 +1,725 @@
+\chapter{Demo problem\+: Compressible and incompressible behaviour}
+\hypertarget{index}{}\label{index}\index{Demo problem: Compressible and incompressible behaviour@{Demo problem: Compressible and incompressible behaviour}}
+The purpose of this tutorial is to discuss the use of compressible and incompressible constitutive equations for solid mechanics problems. As discussed in the \href{../../solid_theory/html/index.html\#elastic_constitutive}{\texttt{ Solid Mechanics Theory Tutorial}}, problems in which the solid is truly incompressible require a solution based on the pressure/displacement formulation of the principle of virtual displacements (PVD). Mathematically, this is because the pressure acts as the Lagrange multiplier that enforces incompressibility. The pressure/displacement form of the PVD may be discretised with finite elements that employ continuous (e.\+g. Taylor-\/\+Hood-\/type) or discontinuous (e.\+g. Crouzeix-\/\+Raviart-\/type) elements.
+
+Some constitutive equations allow for compressible and incompressible behaviour, depending on their parameters. Problems involving such constitutive equations may be solved with large number of formulations. As an example, consider {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hookean constitutive equation (see the \href{\#disclaimer}{\texttt{ disclaimer}} below).
+
+{\bfseries{ I. The displacement form }}
+
+{\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hookean constitutive law assumes that the 2nd Piola Kirchhoff stress $ \sigma^{ij} $ (non-\/dimensionalised on Young\textquotesingle{}s modulus $ E $) is related to Green\textquotesingle{}s strain tensor $ \gamma_{ij} = 1/2 \ (G_{ij} - g_{ij}) $ via  \[
+\sigma^{ij} = \frac{1}{2(1+\nu)}
+\left( 
+G^{ik} G^{jl} + G^{il} G^{jk}  +
+\frac{2\nu}{1-2\nu} G^{ij} G^{kl} 
+\right) \gamma_{kl}.
+\hspace{3cm} (1)
+\] Here $ g_{ij} $ and $ G_{ij} $ are the metric tensors associated with the undeformed and deformed configurations. This constitutive law reduces to the the classical version of Hooke\textquotesingle{}s law for small strains when $ G_{ij} \to g_{ij}. $ In the above form, the constitutive law can be used directly in the displacement-\/based form of the PVD, unless $ \nu = 1/2 $ -- the case that corresponds to incompressible behaviour in the small-\/displacement regime. (While the above formulation only breaks down completely when $ \nu = 1/2, $ numerical solutions based on the above form of the constitutive equation become badly-\/behaved as $ \nu $ approaches that value.)
+
+{\bfseries{ II. The pressure-\/displacement form for compressible and incompressible behaviour}}
+
+To avoid the problems that arise as $ \nu \to 1/2, $ the constitutive equation may be rewritten in the form  \[
+\sigma^{ij} =  \overline{\sigma}^{ij} - p \ G^{ij} \ , 
+\] where the deviatoric stress is given by  \[ 
+\overline{\sigma}^{ij} = 
+\frac{1}{2(1+\nu)}
+\bigg( 
+G^{ik} G^{jl} + G^{il} G^{jk} \bigg) \gamma_{kl}.
+\] To remain consistent with (1), the pressure $ p $ must then be determined via the equation  \[
+p \ \frac{1}{\kappa} + d = 0, \hspace{4cm} (2)
+\] where  \[
+d = G^{ij} \gamma_{ij}
+\] is the generalised dilatation (which reduces to the actual dilatation in the small-\/strain limit). The inverse bulk modulus is defined as  \[
+\frac{1}{\kappa} =  \frac{(1-2\nu)(1+\nu)}{\nu}
+\] and tends to zero as $ \nu \to 0. $ The alternative form of the constitutive equation can therefore be used for any value of $ \nu $. If $ \nu = 1/2, $ the constraint (2) enforces $ d=0, $ i.\+e incompressible behaviour (at least in the small displacement regime -- for large deflections the constraint (2) simply ensures that the generalised dilatation vanishes; this may not be a physically meaningful constraint).
+
+{\bfseries{ III. Truly incompressible behaviour}}
+
+Finally, we may retain the decomposition of the stress into its deviatoric and non-\/deviatoric parts but determine the pressure from the actual incompressibility constraint, i.\+e. replace (2) by  \[
+\det G_{ij} - \det g_{ij} = 0. \hspace{5cm} (3)
+\] In this case, the deviatoric part of the stress is determined by the material\textquotesingle{}s constitutive parameters, i.\+e. its Young\textquotesingle{}s modulus and its Poisson ratio while the pressure (acting as the Lagrange multiplier for the constraint (3)) enforces true incompressibility.
+
+\label{index_disclaimer}%
+\Hypertarget{index_disclaimer}%
+
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Disclaimer}} \end{center}  We wish to stress that not all the combinations discussed above are necessarily physically meaningful. For instance, as already acknowledged, setting $ \nu = 1/2 $ in formulation II does not ensure true incompressibility (in the sense of (3)) if the solid undergoes large deflections. Similarly, setting $ \nu $ to a value that differs from $ 1/2 $ while enforcing true incompressibility via formulation III would be extremely odd. Furthermore, it is not clear (to us) if our generalisation of Hooke\textquotesingle{}s law (obtained by replacing the undeformed metric tensor $ g_{ij} $ by its deformed counterpart $ G_{ij}
+$ yields a constitutive equation that is particularly useful for any specific material. However, the same is true for any other constitutive equation -- not all of them are useful for all materials! The important point is that all constitutive equations that allow for compressible and incompressible behaviour contain combinations of constitutive parameters that blow up as incompressibility is approached. Formulation II shows how to express such constitutive laws in a way that can be used for any value of the constitutive parameters.   \\\cline{1-1}
+\end{longtabu}
+
+
+With this disclaimer in mind, we will now demonstrate the use of the various combinations outlined above in a simple test problem for which an exact (linearised) solution is available.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem}{The problem}}\label{index_problem}
+Here is a sketch of the problem\+: Three faces of a square elastic body are surrounded by "{}slippery"{} rigid walls that allow the body to slide freely along them. The body is subject to a vertical, gravitational body force, acting in the negative $ y $ -\/direction.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sketch}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+We choose the height of the square as the reference length for the non-\/dimensionalisation by setting $ {\cal L} = L, $ and use the characteristic stiffness associated with the body\textquotesingle{}s constitutive equation to scale the stresses and the body forces. For instance, for linear elastic behaviour, we choose the reference stress to be the solid\textquotesingle{}s Young\textquotesingle{}s modulus, thus setting $ {\cal S} = E. $ The non-\/dimensional body force is then given by $ {\bf f} = - g \ {\bf e}_y, $ where  \[
+g = \frac{\rho g^* L}{E}
+\] indicates the magnitude of the gravitational load relative to the body\textquotesingle{}s stiffness; see the \href{../../solid_theory/html/index.html\#non-dim_solid}{\texttt{ Solid Mechanics Theory Tutorial}} for full details on the non-\/dimensionalisation of the governing equations.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exact}{}\doxysection{\texorpdfstring{An exact solution}{An exact solution}}\label{index_exact}
+Assuming weak loading, i.\+e. $ g \ll 1 $, the body will undergo small deflections and its deformation will be governed by the equations of linear elasticity. Given that the walls bounding the solid are slippery, it is easy to show that a displacement field has the form $ {\bf u} = v(y)\ {\bf e}_y $. Inserting this ansatz into the Navier-\/\+Lame equations shows that the non-\/dimensional displacement in the vertical direction is given by  \[
+v(y) = g \ \frac{(1+\nu)(1-2\nu)}{(1-\nu)} 
+\left( \frac{1}{2} y^2 - y \right).
+\] The stresses are given by  \[
+\sigma_{xx} = \frac{g \ \nu}{(1-\nu)} (y-1) \ , \ \ \ \
+\sigma_{xy} = 0 \ ,  
+\mbox{ \ \ \ and \ \ \ }
+\sigma_{yy} = g \ (y-1) \ .
+\] This shows that, as the solid approaches incompressibility, $ \nu \to 1/2, $ the displacements are suppressed and the stress distribution becomes hydrostatic with $ \sigma_{xx} \to 
+\sigma_{yy}. $
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+Here is a plot of the three non-\/zero quantities (the vertical displacement $ v $, and the horizontal and vertical stresses, $ \sigma_{xx} $ and $ \sigma_{yy} $, respectively) for $ g = 10^{-2}  $ and $ \nu =0.45. $ The shaded surface shows the exact solution while the mesh shows the finite element solution obtained with the displacement formulation of the problem. The solutions obtained with formulations II and III are graphically indistinguishable. All other quantities (the transverse displacement and the shear stress $ \sigma_{xy} $) are of order $ 10^{-12}. $
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{validate_vs_lin}
+\doxyfigcaption{Plot of the vertical displacement and the horizontal and vertical stresses, respectively. }
+\end{DoxyImage}
+
+
+The driver code listed below also computes solutions for various other values of $ \nu $ (including the incompressible case $ \nu=1/2 $), and demonstrates how to enforce "{}true"{} incompressibility via formulation III. Furthermore, it computes a solution based on the incompressible Mooney-\/\+Rivlin constitutive law. The agreement between analytical and computed results is as good as the one shown in the above plot. In particular in all cases where incompressibility is enforced, the vertical displacement is suppressed and the stress state becomes hydrostatic, as predicted by the analytical solution.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_wrapper}{}\doxysection{\texorpdfstring{Modifying the element\textquotesingle{}s output function}{Modifying the element's output function}}\label{index_wrapper}
+Since we wish to compare the stresses and displacements against the analytical solution, we modify the {\ttfamily Solid\+Element\textquotesingle{}s} output function by means of a wrapper class that overloads the {\ttfamily Solid\+Element\+::output(...)}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=================start\_wrapper==================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Wrapper\ class\ for\ solid\ element\ to\ modify\ the\ output\ }}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MySolidElement\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ ELEMENT}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Call\ constructor\ of\ underlying\ element}}
+\DoxyCodeLine{\textcolor{comment}{}\ MySolidElement()\ :\ ELEMENT()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overload\ output\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ output(std::ostream\ \&outfile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&n\_plot)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Vector<double>\ s(2);}
+\DoxyCodeLine{\ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ Vector<double>\ xi(2);}
+\DoxyCodeLine{\ \ \ DenseMatrix<double>\ sigma(2,2);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Tecplot\ header\ info\ }}
+\DoxyCodeLine{\ \ \ outfile\ <<\ \textcolor{stringliteral}{"{}ZONE\ I="{}}\ <<\ n\_plot\ <<\ \textcolor{stringliteral}{"{},\ J="{}}\ <<\ n\_plot\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ plot\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_plot;l2++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ s[1]\ =\ -\/1.0\ +\ l2*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l1=0;l1<n\_plot;l1++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ s[0]\ =\ -\/1.0\ +\ l1*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ Eulerian\ and\ Lagrangian\ coordinates\ and\ the\ stress}}
+\DoxyCodeLine{\ \ \ \ \ \ \ this-\/>interpolated\_x(s,x);}
+\DoxyCodeLine{\ \ \ \ \ \ \ this-\/>interpolated\_xi(s,xi);}
+\DoxyCodeLine{\ \ \ \ \ \ \ this-\/>get\_stress(s,sigma);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Output\ the\ x,y\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{outfile\ <<\ x[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ displacements,\ the\ difference\ between\ Eulerian\ and\ Lagrangian}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{outfile\ <<\ x[i]-\/xi[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Output\ stress}}
+\DoxyCodeLine{\ \ \ \ \ \ \ outfile\ <<\ sigma(0,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Problem Parameters}{Problem Parameters}}\label{index_namespace}
+As usual we define the various problem parameters in a global namespace. We prepare a pointer to a constitutive equation and define Poisson\textquotesingle{}s ratio for use with the generalised Hookean constitutive law.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ ConstitutiveLaw*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio\ for\ Hooke's\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.45;}
+
+\end{DoxyCodeInclude}
+ We also prepare a pointer to a strain energy function and define the coefficients for the Mooney Rivlin law\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ strain\ energy\ function\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ StrainEnergyFunction*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Strain\_energy\_function\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ First\ "{}Mooney\ Rivlin"{}\ coefficient\ for\ generalised\ Mooney\ Rivlin\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Second\ "{}Mooney\ Rivlin"{}\ coefficient\ for\ generalised\ Mooney\ Rivlin\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{C2}}=1.3;}
+
+\end{DoxyCodeInclude}
+ Finally, we define the gravitational body force.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dim\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dimensional\ gravity\ as\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{gravity}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&xi,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&b)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ b[0]=0.0;}
+\DoxyCodeLine{\ \ b[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code solves the problem with a large number of different formulations and constitutive equations. We start with the generalised Hookean constitutive equation and consider three different values of Poisson\textquotesingle{}s ratio, corresponding to compressible, near-\/incompressible and incompressible behaviour\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ compressed\ square}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{compressed__square_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Flag\ to\ indicate\ if\ we\ want\ the\ material\ to\ be\ incompressible\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ incompress=\textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Label\ for\ different\ cases}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{int}\ case\_number=-\/1;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Generalised\ Hookean\ constitutive\ equations}}
+\DoxyCodeLine{\ \textcolor{comment}{//===========================================}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Nu\ values}}
+\DoxyCodeLine{\ \ Vector<double>\ nu\_value(3);}
+\DoxyCodeLine{\ \ nu\_value[0]=0.45;}
+\DoxyCodeLine{\ \ nu\_value[1]=0.499999;}
+\DoxyCodeLine{\ \ nu\_value[2]=0.5;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Loop\ over\ nu\ values}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<3;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ Poisson\ ratio}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}}=nu\_value[i];}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}===========================================\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Doing\ Nu="{}}\ <<\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}===========================================\(\backslash\)n"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ constitutive\ equation}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{new}\ GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
+
+\end{DoxyCodeInclude}
+ First, we solve the problem in the pure displacement formulation, using (the wrapped version of the) displacement-\/based {\ttfamily QPVDElements}. (As discussed above, the displacement formulation cannot be used for $ \nu=1/2 $.)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Displacement-\/based\ formulation}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ (not\ for\ nu=1/2,\ obviously)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (i!=2)\ }
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ case\_number++;}
+\DoxyCodeLine{\ \ \ \ \ \ std::cout\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Doing\ Generalised\ Hookean\ with\ displacement\ formulation:\ Case\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ case\_number\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ pure\ displacement\ based\ elements}}
+\DoxyCodeLine{\ \ \ \ \ \ incompress=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem<MySolidElement<QPVDElement<2,3>}}\ >\ >\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ problem(incompress);}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ \ \ \ \ problem.run\_it(case\_number,incompress);}
+\DoxyCodeLine{\ \ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ Next we consider the pressure/displacement formulation with continuous pressures (Taylor-\/\+Hood), using the ~\newline
+ {\ttfamily QPVDElement\+With\+Continuous\+Pressure} element.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Generalised\ Hookean\ with\ continuous\ pressure,\ compressible}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ case\_number++;}
+\DoxyCodeLine{\ \ \ \ \ std::cout\ }
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Doing\ Generalised\ Hookean\ with\ displacement/cont\ pressure\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}formulation:\ Case\ "{}}\ <<\ case\_number\ <<\ std::endl;\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ continous\ pressure/displacement}}
+\DoxyCodeLine{\ \ \ \ \ incompress=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}}<MySolidElement<}
+\DoxyCodeLine{\ \ \ \ \ \ QPVDElementWithContinuousPressure<2>\ >\ >\ }
+\DoxyCodeLine{\ \ \ \ \ \ problem(incompress);\ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ \ \ \ problem.run\_it(case\_number,incompress);}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ We suppress the listing of the remaining combinations (see the driver code \href{../../../../demo_drivers/solid/compressed_square/compressed_square.cc}{\texttt{ compressed\+\_\+square.\+cc }}for details)\+:
+\begin{DoxyItemize}
+\item Pressure/displacement formulation with discontinuous pressures (Crouzeix-\/\+Raviart), using the {\ttfamily QPVDElement\+With\+Pressure} element.
+\item Pressure/displacement formulation with continuous pressures (Taylor-\/\+Hood), using the {\ttfamily QPVDElement\+With\+Continuous\+Pressure} element, with true incompressibility enforced via formulation III.
+\item Pressure/displacement formulation with discontinuous pressures (Crouzeix-\/\+Raviart), using the {\ttfamily QPVDElement\+With\+Pressure} element, with true incompressibility enforced via formulation III.
+\end{DoxyItemize}Before the end of the loop over the different $ \nu $ values we delete the constitutive equation, allowing it to be re-\/built with a different Poisson ratio.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Clean\ up}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \}\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ generalised\ Hookean}}
+
+\end{DoxyCodeInclude}
+ Next we build the strain-\/energy-\/based Mooney-\/\+Rivlin constitutive law
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Incompressible\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \textcolor{comment}{//=============================}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ strain\ energy\ function}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{new}\ MooneyRivlin(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{Global\_Physical\_Variables::C2}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ (based\ on\ strain\ energy\ function)}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{new}\ IsotropicStrainEnergyFunctionConstitutiveLaw(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
+
+\end{DoxyCodeInclude}
+ and solve the problem with {\ttfamily QPVDElement\+With\+Continuous\+Pressure} and {\ttfamily QPVDElement\+With\+Pressure} elements, enforcing true incompressibility enforced via formulation III by setting the {\ttfamily incompressible} flag to true.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Mooney-\/Rivlin\ with\ continous\ pressure/displacement;\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ incompressible}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ case\_number++;}
+\DoxyCodeLine{\ \ \ std::cout\ }
+\DoxyCodeLine{\ \ \ \ <<\ \textcolor{stringliteral}{"{}Doing\ Mooney\ Rivlin\ with\ cont\ pressure\ formulation:\ Case\ "{}}}
+\DoxyCodeLine{\ \ \ \ <<\ case\_number\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ continous\ pressure/displacement}}
+\DoxyCodeLine{\ \ \ incompress=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}}<MySolidElement<}
+\DoxyCodeLine{\ \ \ \ QPVDElementWithContinuousPressure<2>\ >\ >\ }
+\DoxyCodeLine{\ \ \ \ problem(incompress);\ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ \ problem.run\_it(case\_number,incompress);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Mooney-\/Rivlin\ with\ discontinous\ pressure/displacement;\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ incompressible}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ case\_number++;}
+\DoxyCodeLine{\ \ \ std::cout\ }
+\DoxyCodeLine{\ \ \ \ <<\ \textcolor{stringliteral}{"{}Doing\ Mooney\ Rivlin\ with\ discont\ pressure\ formulation:\ Case\ "{}}}
+\DoxyCodeLine{\ \ \ \ <<\ case\_number\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ discontinous\ pressure/displacement}}
+\DoxyCodeLine{\ \ \ incompress=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}}<MySolidElement<}
+\DoxyCodeLine{\ \ \ \ QPVDElementWithPressure<2>\ >\ >\ }
+\DoxyCodeLine{\ \ \ \ problem(incompress);\ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ \ problem.run\_it(case\_number,incompress);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Clean\ up}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{delete}\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_class}{}\doxysection{\texorpdfstring{The Problem class}{The Problem class}}\label{index_class}
+The {\ttfamily Problem} class has the usual member functions. The {\ttfamily i\+\_\+case} label is used to distinguish different cases while the boolean {\ttfamily incompressible} indicates if we wish to enforce incompressibility via formulation III.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ flag\ that\ determines\ if\ we\ want\ to\ use}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ a\ true\ incompressible\ formulation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classCompressedSquareProblem}{CompressedSquareProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ incompress);}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCompressedSquareProblem_afef46d13ff7c8b2845e96a84762077dc}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCompressedSquareProblem_aed8338e212b31c56a5df20c222385e15}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution\ \&\ exact\ (linear)\ solution\ for\ compressible\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ or\ incompressible\ materials}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCompressedSquareProblem_a34d511f377379122d65b2a1402898f5c}{doc\_solution}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ incompress);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ the\ job\ -\/-\/\ doc\ in\ RESLTi\_case}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCompressedSquareProblem_a1543bb8bcba7bf3491e29d141faaf774}{run\_it}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ i\_case,\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ incompress);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ ofstream\ \mbox{\hyperlink{classCompressedSquareProblem_afc8bc8ff7811d18f8d59cd1c35e6cb00}{Trace\_file}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointers\ to\ node\ whose\ position\ we're\ tracing}}
+\DoxyCodeLine{\textcolor{comment}{}\ Node*\ \mbox{\hyperlink{classCompressedSquareProblem_a0af6b1044a8392a3ae3d753f4db52664}{Trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ \mbox{\hyperlink{classCompressedSquareProblem_a2269691c7bef351c87a4421d275fe7c3}{Doc\_info}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+We start by building the mesh -- the {\ttfamily Solid\+Mesh} version of the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ Pass\ flag\ that\ determines\ if\ we\ want\ to\ enforce}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ incompressibility}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classCompressedSquareProblem_af013df43f2a9f6ee8ff16cf59ddd9439}{CompressedSquareProblem<ELEMENT>::CompressedSquareProblem}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ incompress)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_x=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_y=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ }}
+\DoxyCodeLine{\ mesh\_pt()\ =\ \textcolor{keyword}{new}\ ElasticRectangularQuadMesh<ELEMENT>(n\_x,n\_y,l\_x,l\_y);}
+
+\end{DoxyCodeInclude}
+ We complete the build of the elements by specifying the constitutive equation and the gravitational body force.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ the\ physical\ properties\ to\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>body\_force\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\_Physical\_Variables::gravity}};}
+
+\end{DoxyCodeInclude}
+ If the element is based on the pressure/displacement form of the principle of virtual displacements we enforce (true) incompressibility if required. Note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} pressure/displacement-\/based solid mechanics elements do not assume incompressibility, i.\+e. the default is to use formulation II.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Is\ the\ element\ based\ on\ the\ pressure/displacement\ formulation?}}
+\DoxyCodeLine{\ \ \ PVDEquationsWithPressure<2>*\ test\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}PVDEquationsWithPressure<2>*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (test\_pt!=0)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Do\ we\ want\ true\ incompressibility\ (formulation\ III\ in\ the\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ associated\ tutorial)\ or\ not\ (formulation\ II)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (incompress)}
+\DoxyCodeLine{\ \ \ \ \ \ \{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ test\_pt-\/>set\_incompressible();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Note\ that\ this\ assignment\ isn't\ strictly\ necessary\ as\ it's\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ default\ setting,\ but\ it\ doesn't\ do\ any\ harm\ to\ be\ explicit.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ test\_pt-\/>set\_compressible();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ compressibility}}
+
+\end{DoxyCodeInclude}
+ Finally, we pick a control node to document the solid\textquotesingle{}s load-\/displacement characteristics and apply the boundary conditions (no displacements normal to the "{}slippery"{} walls) before setting up the equation numbering scheme.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Choose\ a\ control\ node:\ The\ last\ node\ in\ the\ solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nnod=mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ Trace\_node\_pt=mesh\_pt()-\/>node\_pt(nnod-\/1);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ Pin\ the\ left\ and\ right\ boundaries\ (1\ and\ 2)\ in\ the\ horizontal\ directions}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ b=1;b<4;b+=2)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ nnod\ =\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nnod;i++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}SolidNode*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,i))-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ Pin\ the\ bottom\ boundary\ (0)\ in\ the\ vertical\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ b=0;}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ nnod=\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<nnod;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}SolidNode*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,i))-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ equation\ numbers}}
+\DoxyCodeLine{\ assign\_eqn\_numbers();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing routine documents the load-\/displacement characteristics in a trace file and outputs the deformed domain shape.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCompressedSquareProblem_a34d511f377379122d65b2a1402898f5c}{CompressedSquareProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ incompress)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_plot\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ and\ stress\ in\ deformed\ body}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,n\_plot);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file:\ Load/displacement\ characteristics}}
+\DoxyCodeLine{\ Trace\_file\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ Trace\_node\_pt-\/>x(0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ Trace\_node\_pt-\/>x(1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ We then output the exact solution of the linearised equations using the same format as in the element\textquotesingle{}s overloaded output function.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ for\ linear\ elasticity}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nelem=mesh\_pt()-\/>nelement();\ }
+\DoxyCodeLine{\ Vector<double>\ s(2);}
+\DoxyCodeLine{\ Vector<double>\ x(2);}
+\DoxyCodeLine{\ DenseMatrix<double>\ sigma(2,2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Poisson's\ ratio}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ nu=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}};}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (incompress)\ nu=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ all\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=0;e<nelem;e++)}
+\DoxyCodeLine{\ \ \{\ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Tecplot\ header\ info\ }}
+\DoxyCodeLine{\ \ \ some\_file\ <<\ \textcolor{stringliteral}{"{}ZONE\ I="{}}\ <<\ n\_plot\ <<\ \textcolor{stringliteral}{"{},\ J="{}}\ <<\ n\_plot\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ plot\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_plot;l2++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ s[1]\ =\ -\/1.0\ +\ l2*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l1=0;l1<n\_plot;l1++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ s[0]\ =\ -\/1.0\ +\ l1*2.0/(n\_plot-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ el\_pt-\/>interpolated\_x(s,x);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ the\ x,y,..}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{some\_file\ <<\ x[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Exact\ vertical\ displacement}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ v\_exact=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ (1.0+nu)*(1.0-\/2*nu)/(1.0-\/nu)*(0.5*x[1]*x[1]-\/x[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ x\ and\ y\ displacement}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ some\_file\ <<\ \textcolor{stringliteral}{"{}0.0\ "{}}\ <<\ \ \ v\_exact\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Stresses}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(0,0)=nu/(1.0-\/nu)*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}*(x[1]-\/1.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(1,0)=0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ sigma(1,1)=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}*(x[1]-\/1.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Output\ linear\ stress\ tensor}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ some\_file\ <<\ sigma(0,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,0)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ sigma(1,1)\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+As usual, {\ttfamily oomph-\/lib} provides self-\/tests that assess if the enforcement incompressibility (or the lack thereof) is consistent\+:
+\begin{DoxyItemize}
+\item The compiler will not allow the user to enforce incompressibility on elements that are based on the displacement form of the principle of virtual displacements. This is because the displacement-\/based elements do not have a member function {\ttfamily incompressible()}. ~\newline
+~\newline
+
+\item Certain constitutive laws, such as the Mooney-\/\+Rivlin law used in the present example require an incompressible formulation. If {\ttfamily oomph-\/lib} is compiled with the {\ttfamily PARANOID} flag, an error is thrown if such a constitutive law is used by an element for which incompressibility has not been requested. ~\newline
+~\newline
+ \begin{center} {\bfseries{Recall that the default setting is not to enforce incompressibility!}} \end{center}  ~\newline
+ If the library is compiled without the {\ttfamily PARANOID} flag no warning will be issued but the results will be "{}wrong"{} at least in the sense that the material does not behave like an incompressible Mooney-\/\+Rivlin solid. In fact, it is likely that the Newton solver will diverge. Anyway, as we keep saying, without the {\ttfamily PARANOID} flag, you\textquotesingle{}re on your own! ~\newline
+~\newline
+
+\end{DoxyItemize}You should experiment with different combinations of constitutive laws and element types to familiarise yourself with these issues.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/compressed_square/}{\texttt{ demo\+\_\+drivers/solid/compressed\+\_\+square/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/compressed_square/compressed_square.cc}{\texttt{ demo\+\_\+drivers/solid/compressed\+\_\+square/compressed\+\_\+square.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,748 @@
+\doxysection{oomph\+::Boundary\+Node\texorpdfstring{$<$}{<} NODE\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BoundaryNode}{}\label{classoomph_1_1BoundaryNode}\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+
+
+A template Class for Boundary\+Nodes; that is Nodes that MAY live on the boundary of a \doxylink{classoomph_1_1Mesh}{Mesh}. The class is formed by a simple composition of the template parameter NODE\+\_\+\+TYPE, which must be a \doxylink{classoomph_1_1Node}{Node} class and the \doxylink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base} class. Final overloading of functions is always in favour of the \doxylink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base} implementation; i.\+e. these nodes can live on boundaries.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+h$>$}
+
+Inheritance diagram for oomph\+::Boundary\+Node\texorpdfstring{$<$}{<} NODE\+\_\+\+TYPE \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1BoundaryNode}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}{clear\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Clear pointers to the copied data used when we have periodic nodes. The shallow (pointer) copy is turned into a deep copy by allocating new data and copying the actual values across. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_aae4348d85debf5606c286e582bf0e475}{Boundary\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Steady}{Steady} constructor, for a \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \doxylink{classoomph_1_1Node}{Node} constructor which allocates storage for initial\+\_\+n\+\_\+value values. NPosition\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&time\+\_\+stepper\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Unsteady constructor for a \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \doxylink{classoomph_1_1Node}{Node} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Steady}{Steady} constructor for Solid-\/type boundary nodes. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the \doxylink{classoomph_1_1Node}{Node} is n\+\_\+dim and we have n\+\_\+position\+\_\+type (generalised) Eulerian coordinates. There are initial\+\_\+n\+\_\+value values stored at this node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&time\+\_\+stepper\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+position\+\_\+type}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Unsteady constructor for Solid-\/type boundary nodes Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \doxylink{classoomph_1_1Node}{Node} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}{\texorpdfstring{$\sim$}{\string~}\+Boundary\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor resets pointers if. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNode_a367f3be5bd90318a35d512185d6c645e}{Boundary\+Node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a2d3498b4d0ac4760a4cbc503a20c4c58}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$ \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_abf4d213105e2a484dab50e718a8ae654}{boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Have boundary coordinates been set up? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}{get\+\_\+boundaries\+\_\+pt}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Access to pointer to set of mesh boundaries that this node occupies; NULL if the node is not on any boundary Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}{is\+\_\+on\+\_\+boundary}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node lies on a boundary Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_afd7aca2edeec2464ed080163b90d26a1}{is\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node lies on mesh boundary b Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_aa2fa81a38645fe14ccea5b10c2985f38}{add\+\_\+to\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Add the node to mesh boundary b, final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a95b9f27994cc3cd64d33ccb287bbd92a}{remove\+\_\+from\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Remover the node from mesh boundary b, final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a1fdf098d397c0b677566f353efae23a7}{ncoordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Get the number of boundary coordinates on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ac532d47cb38f559cae6f4ed9bdd248cd}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of coordinates on mesh boundary b Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a3478a8db5e0bb06a7091e53c467f31db}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of coordinates on mesh boundary b Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_af333382e63fa01ba1a22d9964cfe92c0}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of k-\/th generalised boundary coordinates on mesh boundary b Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ae47b80084ac968d1a7db32917749c56f}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of k-\/th generalised boundary coordinates on mesh boundary b. Final overload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ac3a1c7120899518a10ae86bb8b1b6f17}{nvalue\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+id}}=0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of values associated with the i-\/th face element field. If no argument is specified we return the value associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any Face\+Elements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it\textquotesingle{}s not clear a priori if a node has been resized by Face\+Elements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns UINT\+\_\+\+MAX if error. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a04ba9bf0b13ec5a8da2e2a27d41a1ef5}{assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+additional\+\_\+value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+id}}=0)
+\begin{DoxyCompactList}\small\item\em Member function to allocates storage for a given number of additional degrees of freedom, n\+\_\+additional\+\_\+value, associated with a particular face\+\_\+id to the \doxylink{classoomph_1_1Node}{Node} node\+\_\+pt. Needs to be filled in here so that access to the nodal values is available. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a96a34bd1911f8a125be570f361d3a211}{make\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Make the node periodic. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a540781a9eecfc8b4c2fa28723d088745}{make\+\_\+periodic\+\_\+nodes}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{periodic\+\_\+nodes\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Make the nodes passed in periodic\+\_\+nodes periodic from this node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c9e}{is\+\_\+a\+\_\+copy}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the data contains any copied values. If the node is periodic all values are copied. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}{is\+\_\+a\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a boolean to indicate whether the i-\/th value is a copied value. If the node is periodic all values are copies. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0}{copied\+\_\+node\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return pointer to copied node (null if the current node is not a copy) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e}{assign\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+ndof}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Overload the equation assignment operation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Resize the number of equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_a11c0b14661482e08d65fb9ecaa9d73ec}{make\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Make the node periodic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{oomph\+::\+Boundary\+Node\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a5f73c54dbb9bdfe3538b61117a0cc674}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return pointer to the map giving the index of the first face element value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a67c470bd15750e91775101b5bce65a58}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+id}}=0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the index of the first value associated with the i-\/th face element value. If no argument is specified we return the index associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any Face\+Elements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it\textquotesingle{}s not clear a priori if a node has been resized by Face\+Elements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns UINT\+\_\+\+MAX if error. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a1ff36a9e6c0894657a3ea61f1a4beeae}{index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw\+\_\+if\+\_\+no\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{throw\+\_\+quietly}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+id}}=0) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the index of the first value associated with the i-\/th face element value. If no argument id is specified we return the index associated with the first (and assumed to be only) face element attached to this node. If no values have been set by any Face\+Elements and throw\+\_\+if\+\_\+no\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element is set to true, this is caught gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it\textquotesingle{}s not clear a priori if a node has been resized by Face\+Elements) by throwing an \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error} that can be caught gracefully. If throw\+\_\+quietly is set to true we throw an \doxylink{classoomph_1_1OomphLibQuietException}{Oomph\+Lib\+Quiet\+Exception} instead. You can catch either by catching the underlying std\+::runtime\+\_\+error. In PARANOID mode we check regardless of the setting of throw\+\_\+if\+\_\+no\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element (but respect the request for quietness). Returns UINT\+\_\+\+MAX if error. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a00957868c82b2ec9f676ebdd80f2edf4}{Boundary\+Node\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, set the pointers to the storage to NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_acb698db0bafda5e858856d4106614059}{\texorpdfstring{$\sim$}{\string~}\+Boundary\+Node\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, clean up any allocated storage for the boundaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a3381b2997d4fe951d48ed53ea5d84634}{Boundary\+Node\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+node\+\_\+base}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a75b43203e9539aec0cde988b57d24f2f}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a5f40147dddc319bcde0e26239e2fb813}{boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Have boundary coordinates been set up? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a29342ee40e695be4300b09920456073c}{get\+\_\+boundaries\+\_\+pt}} (std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundaries\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Access to pointer to set of mesh boundaries that this node occupies; NULL if the node is not on any boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a3f909fc5f583bcfa5838766769448343}{add\+\_\+to\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Add the node to the mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_ab2b651cea5e5e0ec02183e6ab1b3c9b7}{remove\+\_\+from\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Remove the node from the mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_aa977a1295a422bf0bd44944ae056ff96}{is\+\_\+on\+\_\+boundary}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node lies on a boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a90a976e520409d6c6fb0b1948c618294}{is\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the node lies on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a0a623123c46cafc3e81ede1a981c8663}{ncoordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b)
+\begin{DoxyCompactList}\small\item\em Get the number of boundary coordinates on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a4c0397f720292ff195f32332f284cd8f}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of boundary coordinates on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a2dfc687fb793ef32693282a08c012d30}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of boundary coordinates on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a6dd015b923a309292616805a658eb401}{get\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Return the vector of the k-\/th generalised boundary coordinates on mesh boundary b. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a45d53bb02ccf50ab551d051b5e2d4777}{set\+\_\+coordinates\+\_\+on\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&b, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+zeta}})
+\begin{DoxyCompactList}\small\item\em Set the vector of the k-\/th generalised boundary coordinates on mesh boundary b. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ab90ca88d1178cfab62445d198470d404}{reset\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Set pointers to the copied data used when we have periodic nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b341}{clear\+\_\+additional\+\_\+copied\+\_\+pointers}} ()
+\begin{DoxyCompactList}\small\item\em Copy over additional information so that if the node is periodic it can remain active if the node that holds the periodic data is deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{oomph\+::\+Boundary\+Node\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a335936260b9a5d6ed4e191e4c44ab3a2}{make\+\_\+node\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{original\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function that is used to turn Boundary\+Nodes into peridic boundary nodes by setting the data values of copied\+\_\+node\+\_\+pt to those of original\+\_\+node\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a37f55f9018ae7dcd5cb194f030fccfd6}{make\+\_\+nodes\+\_\+periodic}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{periodic\+\_\+copies\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function that is used to turn Boundary\+Nodes into periodic boundary nodes by setting the data values of the nodes in the vector periodic\+\_\+copies\+\_\+pt to be the same as those in node\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase}{oomph\+::\+Boundary\+Node\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a950c7d3ab5b9ee0473b45b2a134728a7}{Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a map, indexed by the face element identifier it returns the position of the first face element value. If the \doxylink{classoomph_1_1Node}{Node} does not lie on a face element this map should never be queried. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a4afcc250ee4d601a60f06d0d39ebaca0}{Copied\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em If the \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} is periodic, this pointer is set to the \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} whose data it shares. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE$>$\newline
+class oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$}
+A template Class for Boundary\+Nodes; that is Nodes that MAY live on the boundary of a \doxylink{classoomph_1_1Mesh}{Mesh}. The class is formed by a simple composition of the template parameter NODE\+\_\+\+TYPE, which must be a \doxylink{classoomph_1_1Node}{Node} class and the \doxylink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base} class. Final overloading of functions is always in favour of the \doxylink{classoomph_1_1BoundaryNodeBase}{Boundary\+Node\+Base} implementation; i.\+e. these nodes can live on boundaries. 
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02241}{2241}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1BoundaryNode_aae4348d85debf5606c286e582bf0e475}\label{classoomph_1_1BoundaryNode_aae4348d85debf5606c286e582bf0e475} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02382}{2382}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214}\label{classoomph_1_1BoundaryNode_a3d76a60cda13edec1549693fc6e49214} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{classoomph_1_1Steady}{Steady} constructor, for a \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlying \doxylink{classoomph_1_1Node}{Node} constructor which allocates storage for initial\+\_\+n\+\_\+value values. NPosition\+\_\+type is the number of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements, etc). 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02391}{2391}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb}\label{classoomph_1_1BoundaryNode_a1a18c0a20d10ae670671de9600846edb} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unsteady constructor for a \doxylink{classoomph_1_1BoundaryNode}{Boundary\+Node} of spatial dimension n\+\_\+dim. Simply passes all arguments through to the underlygin \doxylink{classoomph_1_1Node}{Node} constructor which allocates storage for initial\+\_\+n\+\_\+value values with history values as required by the timestepper. n\+\_\+position\+\_\+type\+: \# of coordinate types needed in the mapping between local and global coordinates (e.\+g. 1 for Lagrange-\/type elements; 2 for 1D Hermite elements; 4 for 2D Hermite elements). 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02407}{2407}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc}\label{classoomph_1_1BoundaryNode_a65d27f75e6e015ceb1978be7d3cd83bc} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+lagrangian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+lagrangian\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{classoomph_1_1Steady}{Steady} constructor for Solid-\/type boundary nodes. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.). The Eulerian dimension of the \doxylink{classoomph_1_1Node}{Node} is n\+\_\+dim and we have n\+\_\+position\+\_\+type (generalised) Eulerian coordinates. There are initial\+\_\+n\+\_\+value values stored at this node. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02424}{2424}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98}\label{classoomph_1_1BoundaryNode_a969b9b49766f702d755c71f3981cfe98} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+lagrangian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+lagrangian\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+dim,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+position\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{initial\+\_\+n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unsteady constructor for Solid-\/type boundary nodes Allocates storage for initial\+\_\+n\+\_\+value nodal values with history values as required by timestepper. The node has n\+\_\+lagrangian Lagrangian coordinates of n\+\_\+lagrangian\+\_\+type types (1 for Lagrange elements, 2 for 1D Hermite etc.)/ The Eulerian dimension of the \doxylink{classoomph_1_1Node}{Node} is n\+\_\+dim and we have n\+\_\+position\+\_\+type generalised Eulerian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02445}{2445}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51}\label{classoomph_1_1BoundaryNode_a29f6d775e2f97943ad0588ed4df5de51} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!````~BoundaryNode@{\texorpdfstring{$\sim$}{\string~}BoundaryNode}}
+\index{````~BoundaryNode@{\texorpdfstring{$\sim$}{\string~}BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BoundaryNode()}{\string~BoundaryNode()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor resets pointers if. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02462}{2462}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{nodes_8cc_source_l00102}{oomph\+::\+Data\+::remove\+\_\+copy()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a367f3be5bd90318a35d512185d6c645e}\label{classoomph_1_1BoundaryNode_a367f3be5bd90318a35d512185d6c645e} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!BoundaryNode@{BoundaryNode}}
+\index{BoundaryNode@{BoundaryNode}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{BoundaryNode()}{BoundaryNode()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$ \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1BoundaryNode_aa2fa81a38645fe14ccea5b10c2985f38}\label{classoomph_1_1BoundaryNode_aa2fa81a38645fe14ccea5b10c2985f38} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!add\_to\_boundary@{add\_to\_boundary}}
+\index{add\_to\_boundary@{add\_to\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{add\_to\_boundary()}{add\_to\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::add\+\_\+to\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add the node to mesh boundary b, final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02545}{2545}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l03028}{oomph\+::\+Boundary\+Node\+Base\+::add\+\_\+to\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a04ba9bf0b13ec5a8da2e2a27d41a1ef5}\label{classoomph_1_1BoundaryNode_a04ba9bf0b13ec5a8da2e2a27d41a1ef5} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!assign\_additional\_values\_with\_face\_id@{assign\_additional\_values\_with\_face\_id}}
+\index{assign\_additional\_values\_with\_face\_id@{assign\_additional\_values\_with\_face\_id}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_additional\_values\_with\_face\_id()}{assign\_additional\_values\_with\_face\_id()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+additional\+\_\+value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{face\+\_\+id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Member function to allocates storage for a given number of additional degrees of freedom, n\+\_\+additional\+\_\+value, associated with a particular face\+\_\+id to the \doxylink{classoomph_1_1Node}{Node} node\+\_\+pt. Needs to be filled in here so that access to the nodal values is available. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_a2af96b956e59182fe8bfe8e2a87e02ce}{oomph\+::\+Boundary\+Node\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02677}{2677}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l02610}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::nvalue\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{nodes_8h_source_l02854}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e}\label{classoomph_1_1BoundaryNode_a86dd914c93b468a84d5c3d202a34f33e} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!assign\_eqn\_numbers@{assign\_eqn\_numbers}}
+\index{assign\_eqn\_numbers@{assign\_eqn\_numbers}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_eqn\_numbers()}{assign\_eqn\_numbers()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{global\+\_\+ndof,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&}]{dof\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the equation assignment operation. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02828}{2828}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_abf4d213105e2a484dab50e718a8ae654}\label{classoomph_1_1BoundaryNode_abf4d213105e2a484dab50e718a8ae654} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!boundary\_coordinates\_have\_been\_set\_up@{boundary\_coordinates\_have\_been\_set\_up}}
+\index{boundary\_coordinates\_have\_been\_set\_up@{boundary\_coordinates\_have\_been\_set\_up}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_coordinates\_have\_been\_set\_up()}{boundary\_coordinates\_have\_been\_set\_up()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Have boundary coordinates been set up? 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02517}{2517}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02170}{oomph\+::\+Boundary\+Node\+Base\+::boundary\+\_\+coordinates\+\_\+have\+\_\+been\+\_\+set\+\_\+up()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b341}\label{classoomph_1_1BoundaryNode_ab0ef928d7afc2ea759d35dbf4690b341} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!clear\_additional\_copied\_pointers@{clear\_additional\_copied\_pointers}}
+\index{clear\_additional\_copied\_pointers@{clear\_additional\_copied\_pointers}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{clear\_additional\_copied\_pointers()}{clear\_additional\_copied\_pointers()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::clear\+\_\+additional\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Copy over additional information so that if the node is periodic it can remain active if the node that holds the periodic data is deleted. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02288}{2288}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656}\label{classoomph_1_1BoundaryNode_a8310f571e69ee1d3f9de4fd4ac32c656} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!clear\_copied\_pointers@{clear\_copied\_pointers}}
+\index{clear\_copied\_pointers@{clear\_copied\_pointers}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{clear\_copied\_pointers()}{clear\_copied\_pointers()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::clear\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clear pointers to the copied data used when we have periodic nodes. The shallow (pointer) copy is turned into a deep copy by allocating new data and copying the actual values across. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02332}{2332}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0}\label{classoomph_1_1BoundaryNode_ac9fa4614f6410c5e845b62019d1070f0} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!copied\_node\_pt@{copied\_node\_pt}}
+\index{copied\_node\_pt@{copied\_node\_pt}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{copied\_node\_pt()}{copied\_node\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::copied\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to copied node (null if the current node is not a copy) 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02822}{2822}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d}\label{classoomph_1_1BoundaryNode_af0ed7828ec05bded2cd8d1c5576fbe5d} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_boundaries\_pt@{get\_boundaries\_pt}}
+\index{get\_boundaries\_pt@{get\_boundaries\_pt}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{get\_boundaries\_pt()}{get\_boundaries\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::get\+\_\+boundaries\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \texorpdfstring{$\ast$}{*}\&}]{boundaries\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to pointer to set of mesh boundaries that this node occupies; NULL if the node is not on any boundary Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02525}{2525}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02177}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+boundaries\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_af333382e63fa01ba1a22d9964cfe92c0}\label{classoomph_1_1BoundaryNode_af333382e63fa01ba1a22d9964cfe92c0} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}}
+\index{get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{get\_coordinates\_on\_boundary()}{get\_coordinates\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{boundary\+\_\+zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the vector of k-\/th generalised boundary coordinates on mesh boundary b Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02583}{2583}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02201}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ac532d47cb38f559cae6f4ed9bdd248cd}\label{classoomph_1_1BoundaryNode_ac532d47cb38f559cae6f4ed9bdd248cd} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}}
+\index{get\_coordinates\_on\_boundary@{get\_coordinates\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{get\_coordinates\_on\_boundary()}{get\_coordinates\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{boundary\+\_\+zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the vector of coordinates on mesh boundary b Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02566}{2566}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02201}{oomph\+::\+Boundary\+Node\+Base\+::get\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c9e}\label{classoomph_1_1BoundaryNode_a373e3a5c0f617eb91a54fa88c8e83c9e} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a boolean to indicate whether the data contains any copied values. If the node is periodic all values are copied. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02792}{2792}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d}\label{classoomph_1_1BoundaryNode_a787efb1b118065987222b4c40c15570d} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_a\_copy@{is\_a\_copy}}
+\index{is\_a\_copy@{is\_a\_copy}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{is\_a\_copy()}{is\_a\_copy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+a\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a boolean to indicate whether the i-\/th value is a copied value. If the node is periodic all values are copies. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02807}{2807}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644}\label{classoomph_1_1BoundaryNode_a70e488e087d1da3ec13c4412935e5644} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_on\_boundary@{is\_on\_boundary}}
+\index{is\_on\_boundary@{is\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{is\_on\_boundary()}{is\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the node lies on a boundary Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02532}{2532}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02189}{oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_afd7aca2edeec2464ed080163b90d26a1}\label{classoomph_1_1BoundaryNode_afd7aca2edeec2464ed080163b90d26a1} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!is\_on\_boundary@{is\_on\_boundary}}
+\index{is\_on\_boundary@{is\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{is\_on\_boundary()}{is\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::is\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the node lies on mesh boundary b Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02539}{2539}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02189}{oomph\+::\+Boundary\+Node\+Base\+::is\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a96a34bd1911f8a125be570f361d3a211}\label{classoomph_1_1BoundaryNode_a96a34bd1911f8a125be570f361d3a211} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic@{make\_periodic}}
+\index{make\_periodic@{make\_periodic}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{make\_periodic()}{make\_periodic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::make\+\_\+periodic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Make the node periodic. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02778}{2778}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l02951}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a11c0b14661482e08d65fb9ecaa9d73ec}\label{classoomph_1_1BoundaryNode_a11c0b14661482e08d65fb9ecaa9d73ec} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic@{make\_periodic}}
+\index{make\_periodic@{make\_periodic}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{make\_periodic()}{make\_periodic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ \mbox{\hyperlink{classoomph_1_1SolidNode}{Solid\+Node}} $>$\+::make\+\_\+periodic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Make the node periodic. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02885}{2885}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l02951}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+node\+\_\+periodic()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a540781a9eecfc8b4c2fa28723d088745}\label{classoomph_1_1BoundaryNode_a540781a9eecfc8b4c2fa28723d088745} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!make\_periodic\_nodes@{make\_periodic\_nodes}}
+\index{make\_periodic\_nodes@{make\_periodic\_nodes}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{make\_periodic\_nodes()}{make\_periodic\_nodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::make\+\_\+periodic\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} $>$ \&}]{periodic\+\_\+nodes\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Make the nodes passed in periodic\+\_\+nodes periodic from this node. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02785}{2785}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l02896}{oomph\+::\+Boundary\+Node\+Base\+::make\+\_\+nodes\+\_\+periodic()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a1fdf098d397c0b677566f353efae23a7}\label{classoomph_1_1BoundaryNode_a1fdf098d397c0b677566f353efae23a7} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!ncoordinates\_on\_boundary@{ncoordinates\_on\_boundary}}
+\index{ncoordinates\_on\_boundary@{ncoordinates\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ncoordinates\_on\_boundary()}{ncoordinates\_on\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::ncoordinates\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of boundary coordinates on mesh boundary b. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02558}{2558}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l03119}{oomph\+::\+Boundary\+Node\+Base\+::ncoordinates\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ac3a1c7120899518a10ae86bb8b1b6f17}\label{classoomph_1_1BoundaryNode_ac3a1c7120899518a10ae86bb8b1b6f17} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!nvalue\_assigned\_by\_face\_element@{nvalue\_assigned\_by\_face\_element}}
+\index{nvalue\_assigned\_by\_face\_element@{nvalue\_assigned\_by\_face\_element}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{nvalue\_assigned\_by\_face\_element()}{nvalue\_assigned\_by\_face\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::nvalue\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{face\+\_\+id = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of values associated with the i-\/th face element field. If no argument is specified we return the value associated with the first (and assumed to be only) face element attached to this node. Throws error only in paranoid mode if no values have been set by any Face\+Elements. If you want to catch such cases gracefully in all circumstances (there are examples with complex unstructured 3D meshes where it\textquotesingle{}s not clear a priori if a node has been resized by Face\+Elements) use alternative version (with leading bool arguments) that always checks and throws so exceptions can be caught gracefully. Returns UINT\+\_\+\+MAX if error. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1BoundaryNodeBase_ae0d9f15e311861a09073ee01e5fb5cd2}{oomph\+::\+Boundary\+Node\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02610}{2610}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02017}{oomph\+::\+Boundary\+Node\+Base\+::\+Index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8h_source_l02677}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a2d3498b4d0ac4760a4cbc503a20c4c58}\label{classoomph_1_1BoundaryNode_a2d3498b4d0ac4760a4cbc503a20c4c58} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1BoundaryNode_a95b9f27994cc3cd64d33ccb287bbd92a}\label{classoomph_1_1BoundaryNode_a95b9f27994cc3cd64d33ccb287bbd92a} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!remove\_from\_boundary@{remove\_from\_boundary}}
+\index{remove\_from\_boundary@{remove\_from\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{remove\_from\_boundary()}{remove\_from\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::remove\+\_\+from\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Remover the node from mesh boundary b, final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02551}{2551}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l03062}{oomph\+::\+Boundary\+Node\+Base\+::remove\+\_\+from\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ab90ca88d1178cfab62445d198470d404}\label{classoomph_1_1BoundaryNode_ab90ca88d1178cfab62445d198470d404} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!reset\_copied\_pointers@{reset\_copied\_pointers}}
+\index{reset\_copied\_pointers@{reset\_copied\_pointers}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{reset\_copied\_pointers()}{reset\_copied\_pointers()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::reset\+\_\+copied\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set pointers to the copied data used when we have periodic nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02245}{2245}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, \mbox{\hyperlink{nodes_8h_source_l02046}{oomph\+::\+Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607}\label{classoomph_1_1BoundaryNode_a8ceaf97ad0211572e251091f84e4f607} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize the number of equations. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02854}{2854}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02021}{oomph\+::\+Boundary\+Node\+Base\+::\+Copied\+\_\+node\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+
+
+
+Referenced by \mbox{\hyperlink{nodes_8h_source_l02677}{oomph\+::\+Boundary\+Node$<$ NODE\+\_\+\+TYPE $>$\+::assign\+\_\+additional\+\_\+values\+\_\+with\+\_\+face\+\_\+id()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_ae47b80084ac968d1a7db32917749c56f}\label{classoomph_1_1BoundaryNode_ae47b80084ac968d1a7db32917749c56f} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}}
+\index{set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{set\_coordinates\_on\_boundary()}{set\_coordinates\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{boundary\+\_\+zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the vector of k-\/th generalised boundary coordinates on mesh boundary b. Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02592}{2592}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02210}{oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1BoundaryNode_a3478a8db5e0bb06a7091e53c467f31db}\label{classoomph_1_1BoundaryNode_a3478a8db5e0bb06a7091e53c467f31db} 
+\index{oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}!set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}}
+\index{set\_coordinates\_on\_boundary@{set\_coordinates\_on\_boundary}!oomph::BoundaryNode$<$ NODE\_TYPE $>$@{oomph::BoundaryNode$<$ NODE\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{set\_coordinates\_on\_boundary()}{set\_coordinates\_on\_boundary()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} NODE\+\_\+\+TYPE $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BoundaryNode}{oomph\+::\+Boundary\+Node}}$<$ NODE\+\_\+\+TYPE $>$\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{boundary\+\_\+zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the vector of coordinates on mesh boundary b Final overload. 
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8h_source_l02574}{2574}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l02210}{oomph\+::\+Boundary\+Node\+Base\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8h}{nodes.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,226 @@
+\doxysection{oomph\+::Edge Class Reference}
+\hypertarget{classoomph_1_1Edge}{}\label{classoomph_1_1Edge}\index{oomph::Edge@{oomph::Edge}}
+
+
+\doxylink{classoomph_1_1Edge}{Edge} class.  
+
+
+
+
+{\ttfamily \#include $<$mesh.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Edge_acf82b3fc446b2673499da51baac74c4b}{Edge}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Edge_a9851ce1fa98ef37835faae0076709f13}{node1\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Edge_a1f99be065596a6241686e60493bf4f98}{node2\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass in the two vertex nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Edge_a9851ce1fa98ef37835faae0076709f13}{node1\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to the first vertex node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Edge_a1f99be065596a6241686e60493bf4f98}{node2\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to the second vertex node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Edge_afc64c614a15316a3ee55a0c3a27cb0bf}{operator==}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Edge}{Edge}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{other}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Comparison operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Edge_ad582b8c145bb83d32547e80adb199dc0}{operator$<$}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Edge}{Edge}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{other}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Less-\/than operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Edge_a4465216fafea9e4d67b3801ba18cd1dc}{is\+\_\+on\+\_\+boundary}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the \doxylink{classoomph_1_1Edge}{Edge} lies on a boundary. Relatively simple test, based on both vertices lying on (some) boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Edge_aa19b9b455032267cae828ede9c6b5ad6}{is\+\_\+boundary\+\_\+edge}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Test whether the \doxylink{classoomph_1_1Edge}{Edge} is a boundary edge, i.\+e. does it connnect two boundary nodes? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Edge_abeda3f3e0e770102690fe836c1a5ee70}{Node1\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em First vertex node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Edge_ad5c83aa8a63acf45173e5f255477a9b9}{Node2\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Second vertex node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1Edge}{Edge} class. 
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02699}{2699}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1Edge_acf82b3fc446b2673499da51baac74c4b}\label{classoomph_1_1Edge_acf82b3fc446b2673499da51baac74c4b} 
+\index{oomph::Edge@{oomph::Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily oomph\+::\+Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{node1\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{node2\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass in the two vertex nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02703}{2703}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02731}{node1\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l02737}{node2\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1Edge_aa19b9b455032267cae828ede9c6b5ad6}\label{classoomph_1_1Edge_aa19b9b455032267cae828ede9c6b5ad6} 
+\index{oomph::Edge@{oomph::Edge}!is\_boundary\_edge@{is\_boundary\_edge}}
+\index{is\_boundary\_edge@{is\_boundary\_edge}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{is\_boundary\_edge()}{is\_boundary\_edge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Edge\+::is\+\_\+boundary\+\_\+edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the \doxylink{classoomph_1_1Edge}{Edge} is a boundary edge, i.\+e. does it connnect two boundary nodes? 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02791}{2791}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1Edge_a4465216fafea9e4d67b3801ba18cd1dc}\label{classoomph_1_1Edge_a4465216fafea9e4d67b3801ba18cd1dc} 
+\index{oomph::Edge@{oomph::Edge}!is\_on\_boundary@{is\_on\_boundary}}
+\index{is\_on\_boundary@{is\_on\_boundary}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{is\_on\_boundary()}{is\_on\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Edge\+::is\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test whether the \doxylink{classoomph_1_1Edge}{Edge} lies on a boundary. Relatively simple test, based on both vertices lying on (some) boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02783}{2783}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l01373}{oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1Edge_a9851ce1fa98ef37835faae0076709f13}\label{classoomph_1_1Edge_a9851ce1fa98ef37835faae0076709f13} 
+\index{oomph::Edge@{oomph::Edge}!node1\_pt@{node1\_pt}}
+\index{node1\_pt@{node1\_pt}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{node1\_pt()}{node1\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} oomph\+::\+Edge\+::node1\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to the first vertex node. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02731}{2731}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8h_source_l02703}{Edge()}}.
+
+\Hypertarget{classoomph_1_1Edge_a1f99be065596a6241686e60493bf4f98}\label{classoomph_1_1Edge_a1f99be065596a6241686e60493bf4f98} 
+\index{oomph::Edge@{oomph::Edge}!node2\_pt@{node2\_pt}}
+\index{node2\_pt@{node2\_pt}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{node2\_pt()}{node2\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*} oomph\+::\+Edge\+::node2\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to the second vertex node. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02737}{2737}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8h_source_l02703}{Edge()}}.
+
+\Hypertarget{classoomph_1_1Edge_ad582b8c145bb83d32547e80adb199dc0}\label{classoomph_1_1Edge_ad582b8c145bb83d32547e80adb199dc0} 
+\index{oomph::Edge@{oomph::Edge}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Edge\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Edge}{Edge}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Less-\/than operator. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02758}{2758}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1Edge_afc64c614a15316a3ee55a0c3a27cb0bf}\label{classoomph_1_1Edge_afc64c614a15316a3ee55a0c3a27cb0bf} 
+\index{oomph::Edge@{oomph::Edge}!operator==@{operator==}}
+\index{operator==@{operator==}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Edge\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Edge}{Edge}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Comparison operator. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02743}{2743}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l02799}{Node1\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l02802}{Node2\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1Edge_abeda3f3e0e770102690fe836c1a5ee70}\label{classoomph_1_1Edge_abeda3f3e0e770102690fe836c1a5ee70} 
+\index{oomph::Edge@{oomph::Edge}!Node1\_pt@{Node1\_pt}}
+\index{Node1\_pt@{Node1\_pt}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{Node1\_pt}{Node1\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}\texorpdfstring{$\ast$}{*} oomph\+::\+Edge\+::\+Node1\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+First vertex node. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02799}{2799}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8h_source_l02703}{Edge()}}, \mbox{\hyperlink{mesh_8h_source_l02791}{is\+\_\+boundary\+\_\+edge()}}, \mbox{\hyperlink{mesh_8h_source_l02783}{is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l02731}{node1\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02758}{operator$<$()}}, and \mbox{\hyperlink{mesh_8h_source_l02743}{operator==()}}.
+
+\Hypertarget{classoomph_1_1Edge_ad5c83aa8a63acf45173e5f255477a9b9}\label{classoomph_1_1Edge_ad5c83aa8a63acf45173e5f255477a9b9} 
+\index{oomph::Edge@{oomph::Edge}!Node2\_pt@{Node2\_pt}}
+\index{Node2\_pt@{Node2\_pt}!oomph::Edge@{oomph::Edge}}
+\doxysubsubsection{\texorpdfstring{Node2\_pt}{Node2\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}\texorpdfstring{$\ast$}{*} oomph\+::\+Edge\+::\+Node2\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Second vertex node. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02802}{2802}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8h_source_l02703}{Edge()}}, \mbox{\hyperlink{mesh_8h_source_l02791}{is\+\_\+boundary\+\_\+edge()}}, \mbox{\hyperlink{mesh_8h_source_l02783}{is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{mesh_8h_source_l02737}{node2\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l02758}{operator$<$()}}, and \mbox{\hyperlink{mesh_8h_source_l02743}{operator==()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh_8h}{mesh.\+h}}\end{DoxyCompactItemize}

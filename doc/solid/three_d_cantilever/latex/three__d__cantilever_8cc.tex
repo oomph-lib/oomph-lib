@@ -1,0 +1,63 @@
+\doxysection{three\+\_\+d\+\_\+cantilever.\+cc File Reference}
+\hypertarget{three__d__cantilever_8cc}{}\label{three__d__cantilever_8cc}\index{three\_d\_cantilever.cc@{three\_d\_cantilever.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Refineable\+Elastic\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Simple quarter tube mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classElasticQuarterTubeMesh}{Elastic\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Simple quarter tube mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class for the 3D cantilever "{}beam"{} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{const}} \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{time}}, \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{const}} \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector}}$<$ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} $>$ \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi}}, \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector}}$<$ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} $>$ \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}})
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{int}} \mbox{\hyperlink{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{int}} \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{argc}}, \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{argv}}\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for 3D cantilever beam loaded by gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{Global\+\_\+\+Physical\+\_\+\+Variables\+::L}} =10.\+0
+\begin{DoxyCompactList}\small\item\em Length of beam. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Strain\+Energy\+Function}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em First "{}\+Mooney Rivlin"{} coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}} =1.\+3
+\begin{DoxyCompactList}\small\item\em Second "{}\+Mooney Rivlin"{} coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{three\_d\_cantilever.cc@{three\_d\_cantilever.cc}!main@{main}}
+\index{main@{main}!three\_d\_cantilever.cc@{three\_d\_cantilever.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{char}} \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for 3D cantilever beam loaded by gravity. 
+
+
+
+Definition at line \mbox{\hyperlink{three__d__cantilever_8cc_source_l00473}{473}} of file \mbox{\hyperlink{three__d__cantilever_8cc_source}{three\+\_\+d\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{three__d__cantilever_8cc_source_l00135}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{three__d__cantilever_8cc_source_l00138}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C2}}, \mbox{\hyperlink{three__d__cantilever_8cc_source_l00141}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{three__d__cantilever_8cc_source_l00169}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{three__d__cantilever_8cc_source_l00144}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}, \mbox{\hyperlink{three__d__cantilever_8cc_source_l00172}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{three__d__cantilever_8cc_source_l00132}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

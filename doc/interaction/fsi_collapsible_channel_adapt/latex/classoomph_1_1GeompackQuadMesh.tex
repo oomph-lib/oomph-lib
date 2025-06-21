@@ -1,0 +1,130 @@
+\doxysection{oomph\+::Geompack\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1GeompackQuadMesh}{}\label{classoomph_1_1GeompackQuadMesh}\index{oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}}
+
+
+Quadrilateral mesh generator; Uses input from Geompack++. See\+: \href{http://members.shaw.ca/bjoe/}{\texttt{ http\+://members.\+shaw.\+ca/bjoe/}} Currently only for four-\/noded quads -- extension to higher-\/order quads should be trivial (see the corresponding classes for triangular meshes).  
+
+
+
+
+{\ttfamily \#include $<$geompack\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Geompack\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1GeompackQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh_aa1de3a1b4fedf1c404d6ed5bbebfb800}{Geompack\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{mesh\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{curve\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor with the input files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh_a7795c44ea2da182fbeffa30808481ffb}{\texorpdfstring{$\sim$}{\string~}\+Geompack\+Quad\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh_a714ee07999e06676f08080bac8c024db}{build\+\_\+from\+\_\+scaffold}} (\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Build mesh from scaffold. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Geompack\+Quad\+Scaffold\+Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh_a0b7edabf329aed8f4fb00eddb41b3299}{Tmp\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Temporary scaffold mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$}
+Quadrilateral mesh generator; Uses input from Geompack++. See\+: \href{http://members.shaw.ca/bjoe/}{\texttt{ http\+://members.\+shaw.\+ca/bjoe/}} Currently only for four-\/noded quads -- extension to higher-\/order quads should be trivial (see the corresponding classes for triangular meshes). 
+
+Definition at line \mbox{\hyperlink{geompack__mesh_8h_source_l00041}{41}} of file \mbox{\hyperlink{geompack__mesh_8h_source}{geompack\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1GeompackQuadMesh_aa1de3a1b4fedf1c404d6ed5bbebfb800}\label{classoomph_1_1GeompackQuadMesh_aa1de3a1b4fedf1c404d6ed5bbebfb800} 
+\index{oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}!GeompackQuadMesh@{GeompackQuadMesh}}
+\index{GeompackQuadMesh@{GeompackQuadMesh}!oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{GeompackQuadMesh()}{GeompackQuadMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{oomph\+::\+Geompack\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Geompack\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} std\+::string \&}]{mesh\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} std\+::string \&}]{curve\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with the input files. 
+
+
+
+Definition at line \mbox{\hyperlink{geompack__mesh_8h_source_l00045}{45}} of file \mbox{\hyperlink{geompack__mesh_8h_source}{geompack\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{geompack__mesh_8template_8cc_source_l00043}{oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, and \mbox{\hyperlink{geompack__mesh_8h_source_l00070}{oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1GeompackQuadMesh_a7795c44ea2da182fbeffa30808481ffb}\label{classoomph_1_1GeompackQuadMesh_a7795c44ea2da182fbeffa30808481ffb} 
+\index{oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}!````~GeompackQuadMesh@{\texorpdfstring{$\sim$}{\string~}GeompackQuadMesh}}
+\index{````~GeompackQuadMesh@{\texorpdfstring{$\sim$}{\string~}GeompackQuadMesh}!oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GeompackQuadMesh()}{\string~GeompackQuadMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{oomph\+::\+Geompack\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geompack\+Quad\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{geompack__mesh_8h_source_l00066}{66}} of file \mbox{\hyperlink{geompack__mesh_8h_source}{geompack\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1GeompackQuadMesh_a714ee07999e06676f08080bac8c024db}\label{classoomph_1_1GeompackQuadMesh_a714ee07999e06676f08080bac8c024db} 
+\index{oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}!build\_from\_scaffold@{build\_from\_scaffold}}
+\index{build\_from\_scaffold@{build\_from\_scaffold}!oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_from\_scaffold()}{build\_from\_scaffold()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{void}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{oomph\+::\+Geompack\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::build\+\_\+from\+\_\+scaffold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Build mesh from scaffold. 
+
+Quadrilateral mesh generator; Uses input from Geompack++. See\+: \href{http://members.shaw.ca/bjoe/}{\texttt{ http\+://members.\+shaw.\+ca/bjoe/}} Currently only for four-\/noded quads -- extension to higher-\/order quads should be trivial (see the corresponding classes for triangular meshes). 
+
+Definition at line \mbox{\hyperlink{geompack__mesh_8template_8cc_source_l00043}{43}} of file \mbox{\hyperlink{geompack__mesh_8template_8cc_source}{geompack\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{geompack__mesh_8h_source_l00045}{oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Geompack\+Quad\+Mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1GeompackQuadMesh_a0b7edabf329aed8f4fb00eddb41b3299}\label{classoomph_1_1GeompackQuadMesh_a0b7edabf329aed8f4fb00eddb41b3299} 
+\index{oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}!Tmp\_mesh\_pt@{Tmp\_mesh\_pt}}
+\index{Tmp\_mesh\_pt@{Tmp\_mesh\_pt}!oomph::GeompackQuadMesh$<$ ELEMENT $>$@{oomph::GeompackQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Tmp\_mesh\_pt}{Tmp\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Geompack\+Quad\+Scaffold\+Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{oomph\+::\+Geompack\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Tmp\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Temporary scaffold mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{geompack__mesh_8h_source_l00070}{70}} of file \mbox{\hyperlink{geompack__mesh_8h_source}{geompack\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geompack__mesh_8h_source_l00045}{oomph\+::\+Geompack\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Geompack\+Quad\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geompack__mesh_8h}{geompack\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{geompack__mesh_8template_8cc}{geompack\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

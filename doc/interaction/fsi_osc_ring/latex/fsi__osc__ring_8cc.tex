@@ -1,0 +1,69 @@
+\doxysection{fsi\+\_\+osc\+\_\+ring.\+cc File Reference}
+\hypertarget{fsi__osc__ring_8cc}{}\label{fsi__osc__ring_8cc}\index{fsi\_osc\_ring.cc@{fsi\_osc\_ring.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFSIRingProblem}{FSIRing\+Problem}}
+\begin{DoxyCompactList}\small\item\em FSI Ring problem\+: a fluid-\/structure interaction problem in which a viscous fluid bounded by an initially circular beam is set into motion by a small sinusoidal perturbation of the beam (the domain boundary). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for physical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}{Global\+\_\+\+Physical\+\_\+\+Variables\+::set\+\_\+params}} ()
+\begin{DoxyCompactList}\small\item\em Set the parameters that are used in the code as a function of the Womersley number, the density ratio and H. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa08c246eac99f59be33ef4a6ee924990}{Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Non-\/\+FSI load function, a constant external pressure plus a (small) sinusoidal perturbation of wavenumber two. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fsi__osc__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for fsi ring test problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a056817f9a80034eff75fcf94c44b08cd}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+sq}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Square of Womersly number (a frequency parameter) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5163137c5b98c6ebb942973cba4e297}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+ratio}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Density ratio of the solid and the fluid. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a00f471db241ed712eaefcbaf4fb1d6a9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext}} =0.\+0
+\begin{DoxyCompactList}\small\item\em External Pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+49
+\begin{DoxyCompactList}\small\item\em Poisson ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}} =0.\+05
+\begin{DoxyCompactList}\small\item\em Nondimensional thickness of the beam. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Perturbation pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} =100.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}} =100.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds x Strouhal number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}}
+\begin{DoxyCompactList}\small\item\em Timescale ratio (non-\/dimensation density) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}
+\begin{DoxyCompactList}\small\item\em Stress ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fsi__osc__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{fsi__osc__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{fsi\_osc\_ring.cc@{fsi\_osc\_ring.cc}!main@{main}}
+\index{main@{main}!fsi\_osc\_ring.cc@{fsi\_osc\_ring.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for fsi ring test problem. 
+
+Perturbation pressure
+
+Duration of initial pcos perturbation
+
+Amplitude of initial deformation
+
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00815}{815}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}.
+

@@ -1,0 +1,105 @@
+\doxysection{oomph\+::Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{}\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+
+
+Mesh class that takes a 2D mesh, "{}extrudes"{} it in the z-\/direction and also makes the resulting mesh refineable.  
+
+
+
+
+{\ttfamily \#include $<$extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.063882cm]{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a6169df22666f223bf75cb56b60ee23ed}{nz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the Steady timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168}{Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a6169df22666f223bf75cb56b60ee23ed}{nz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to Steady. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_ada54323a2bfb15d0cd4d5e1b603c06b7}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a6169df22666f223bf75cb56b60ee23ed}{nz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the Steady timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a50b394141c0fbee53a9ea33eabbbe0f9}{Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a6169df22666f223bf75cb56b60ee23ed}{nz}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a70c7b07f8676b21240376f7d9d0e556e}{\texorpdfstring{$\sim$}{\string~}\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: If the underlying spatial domain was made up of any macro elements then we will have created an extruded domain which in turn creates extruded macro elements. As we\textquotesingle{}re responsible for creating the domain, we need to kill it and it\textquotesingle{}ll kill the extruded macro elements... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a3a1060226336c4b324847d793719a07f}{z\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{z\+\_\+element}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{z\+\_\+node}}) \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the z-\/coordinate at the node given by the local node number, znode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{int}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a5b7cfb164e04a5cdd40977daa3c1373e}{get\+\_\+element\+\_\+boundary\+\_\+information}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+el\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Get all the boundary information of an element using the input (quad\+\_\+mesh\+\_\+pt) mesh. If the element lies on a boundary then the user will be given the corresponding boundary index and the index of the face of quad\+\_\+el\+\_\+pt attached to the boundary. If the element does NOT lie on any boundaries, this function simply returns a vector of size zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a6169df22666f223bf75cb56b60ee23ed}{nz}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in z-\/direction (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a0bd947d799c3bb05fb166ab92f6d4ae1}{build\+\_\+mesh}} (Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{quad\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a818f184ecbd22bbcbc945849821c6bd3}{N\+\_\+node\+\_\+1d}}
+\begin{DoxyCompactList}\small\item\em The number of nodes in each direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a7ed68dab30f3e19371a1729d82c3e83e}{Nz}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the z-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a093e86d7332b0e04d985abdc6e628ef2}{Zmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of z coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_aa31fbf612b3758962f68f42cb2d83229}{Zmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of z coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Extruded\+Domain}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1ExtrudedCubeMeshFromQuadMesh_a4ca62b8ba6a7828647dc1e10e09102a0}{Extruded\+\_\+domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to extruded domain objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$}
+Mesh class that takes a 2D mesh, "{}extrudes"{} it in the z-\/direction and also makes the resulting mesh refineable. 
+
+Definition at line \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source_l00217}{217}} of file \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac}\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_abd6a587e192e137abcee3fee9e7bd0ac} 
+\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}}
+\index{RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}!oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableExtrudedCubeMeshFromQuadMesh()}{RefineableExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}}]{quad\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lz,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding length in this direction. Assumes that the back lower left corner is located at (0,0,0). Timestepper defaults to the Steady timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source_l00227}{227}} of file \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168}\label{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh_a380730c77deb4ff40cfa3d06f0cfe168} 
+\index{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}!RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}}
+\index{RefineableExtrudedCubeMeshFromQuadMesh@{RefineableExtrudedCubeMeshFromQuadMesh}!oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$@{oomph::RefineableExtrudedCubeMeshFromQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableExtrudedCubeMeshFromQuadMesh()}{RefineableExtrudedCubeMeshFromQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableExtrudedCubeMeshFromQuadMesh}{oomph\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Refineable\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{Quad\+Mesh\+Base \texorpdfstring{$\ast$}{*}}]{quad\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{zmax,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass a mesh consisting of quad elements, specify the number of elements in the z direction, and the corresponding minimum and maximum z-\/value of the mesh. Again, timestepper defaults to Steady. 
+
+
+
+Definition at line \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source_l00245}{245}} of file \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h_source}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8h}{extruded\+\_\+cube\+\_\+mesh\+\_\+from\+\_\+quad\+\_\+mesh\+\_\+with\+\_\+macro\+\_\+elements.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,600 @@
+\doxysection{oomph\+::Quarter\+Circle\+Sector\+Domain Class Reference}
+\hypertarget{classoomph_1_1QuarterCircleSectorDomain}{}\label{classoomph_1_1QuarterCircleSectorDomain}\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+
+
+Circular sector as domain. Domain is bounded by curved boundary which is represented by a Geom\+Object. Domain is parametrised by three macro elements.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Quarter\+Circle\+Sector\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1QuarterCircleSectorDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{BLSquash\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Typedef for function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_accee19bdd94e0e3fe0d7c347ede685de}{Quarter\+Circle\+Sector\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{boundary\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xi\+\_\+hi}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass boundary object and start and end coordinates and fraction along boundary object where outer ring is divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a14fbdfa04b3770f97aea05a9f858e71b}{Quarter\+Circle\+Sector\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad5104a0a36fba12512}{operator=}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aea4997af819b532c8d8588123785950a}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Sector\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aa016f72247c5a8446594f7c7401103f2}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a5b66f846233b3cf976ed63d9bf54f0c7}{s\+\_\+squashed}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Note that the local coordinate {\bfseries{s}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_af1520e712b46c8e1b0f098596fa63101}{r\+\_\+top\+\_\+left\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a84f4970adc3a93392ef1a57f19df96a1}{r\+\_\+top\+\_\+left\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a0bb74af9c782bd0a0a8d3ccfd708af55}{r\+\_\+top\+\_\+left\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a951bc38c7e96a40f33c60b3ccee820bf}{r\+\_\+top\+\_\+left\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ad937b0da664b5c01063e7f8de6427fce}{r\+\_\+bot\+\_\+right\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a85ba295aaeff2833644691978deac247}{r\+\_\+bot\+\_\+right\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a552f9bfc6fd451669f44ee02c8bb0d38}{r\+\_\+bot\+\_\+right\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_abb05f2e719d81f167fc0f608e80c5696}{r\+\_\+bot\+\_\+right\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of bottom right macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a1cb12e9b1d2e17f8bd5c3d6691be3b1d}{r\+\_\+centr\+\_\+N}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ae4558d37a4f9bb3f9d78b6878cb77a49}{r\+\_\+centr\+\_\+E}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aaa17ff1d6529000f8309005396966830}{r\+\_\+centr\+\_\+S}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a453fc6f043f57031c1347065d521a1c3}{r\+\_\+centr\+\_\+W}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1] $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{static}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_adce1f0c6cf5405d6f8e9e6e0390d8c68}{default\+\_\+\+BL\+\_\+squash\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}})
+\begin{DoxyCompactList}\small\item\em Default for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value\+: Identity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_afed5ccc21ccf6c6cd1dca65d58a5b708}{Xi\+\_\+lo}}
+\begin{DoxyCompactList}\small\item\em Lower limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ade78897c44c26af82ac90052f799796c}{Fract\+\_\+mid}}
+\begin{DoxyCompactList}\small\item\em Fraction along wall where outer ring is to be divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_aba0cc67782144fe066dd0d04ac9d79dd}{Xi\+\_\+hi}}
+\begin{DoxyCompactList}\small\item\em Upper limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a59722c43d41fef0bc3df4cf6571930a8}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the curved wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{BLSquash\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_ae9b74ffcade9fdc1eeba26b4acced7a8}{BL\+\_\+squash\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Circular sector as domain. Domain is bounded by curved boundary which is represented by a Geom\+Object. Domain is parametrised by three macro elements. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00042}{42}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}\label{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!BLSquashFctPt@{BLSquashFctPt}}
+\index{BLSquashFctPt@{BLSquashFctPt}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{BLSquashFctPt}{BLSquashFctPt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}}(\texorpdfstring{$\ast$}{*} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+BLSquash\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}})}
+
+
+
+Typedef for function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00083}{83}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_accee19bdd94e0e3fe0d7c347ede685de}\label{classoomph_1_1QuarterCircleSectorDomain_accee19bdd94e0e3fe0d7c347ede685de} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!QuarterCircleSectorDomain@{QuarterCircleSectorDomain}}
+\index{QuarterCircleSectorDomain@{QuarterCircleSectorDomain}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{QuarterCircleSectorDomain()}{QuarterCircleSectorDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Quarter\+Circle\+Sector\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{boundary\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xi\+\_\+hi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass boundary object and start and end coordinates and fraction along boundary object where outer ring is divided. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00047}{47}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a14fbdfa04b3770f97aea05a9f858e71b}\label{classoomph_1_1QuarterCircleSectorDomain_a14fbdfa04b3770f97aea05a9f858e71b} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!QuarterCircleSectorDomain@{QuarterCircleSectorDomain}}
+\index{QuarterCircleSectorDomain@{QuarterCircleSectorDomain}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{QuarterCircleSectorDomain()}{QuarterCircleSectorDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Quarter\+Circle\+Sector\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_aea4997af819b532c8d8588123785950a}\label{classoomph_1_1QuarterCircleSectorDomain_aea4997af819b532c8d8588123785950a} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!````~QuarterCircleSectorDomain@{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorDomain}}
+\index{````~QuarterCircleSectorDomain@{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorDomain}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorDomain()}{\string~QuarterCircleSectorDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Sector\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00077}{77}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_aa016f72247c5a8446594f7c7401103f2}\label{classoomph_1_1QuarterCircleSectorDomain_aa016f72247c5a8446594f7c7401103f2} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}}
+\index{bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{bl\_squash\_fct\_pt()}{bl\_squash\_fct\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{BLSquash\+Fct\+Pt}} \& oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00089}{89}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00132}{BL\+\_\+squash\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00117}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_adce1f0c6cf5405d6f8e9e6e0390d8c68}\label{classoomph_1_1QuarterCircleSectorDomain_adce1f0c6cf5405d6f8e9e6e0390d8c68} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!default\_BL\_squash\_fct@{default\_BL\_squash\_fct}}
+\index{default\_BL\_squash\_fct@{default\_BL\_squash\_fct}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{default\_BL\_squash\_fct()}{default\_BL\_squash\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{static}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::default\+\_\+\+BL\+\_\+squash\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Default for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value\+: Identity. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00138}{138}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b}\label{classoomph_1_1QuarterCircleSectorDomain_a9faddf9d13e0a7633f732bac1ddda80b} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Note that the local coordinate {\bfseries{s}} is a 1D Vector rather than a scalar -- this is unavoidable because this function implements the pure virtual function in the Domain base class. 
+
+Vector representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{214}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00440}{r\+\_\+bot\+\_\+right\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00518}{r\+\_\+centr\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00508}{r\+\_\+centr\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00528}{r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00546}{r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{r\+\_\+top\+\_\+left\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad5104a0a36fba12512}\label{classoomph_1_1QuarterCircleSectorDomain_a76c032d372019ad5104a0a36fba12512} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_abb05f2e719d81f167fc0f608e80c5696}\label{classoomph_1_1QuarterCircleSectorDomain_abb05f2e719d81f167fc0f608e80c5696} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_bot\_right\_E@{r\_bot\_right\_E}}
+\index{r\_bot\_right\_E@{r\_bot\_right\_E}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_bot\_right\_E()}{r\_bot\_right\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of bottom right macro element zeta $ \in [-1,1] $. 
+
+Eastern edge of bottom right macro element. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{493}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00120}{Fract\+\_\+mid}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_ad937b0da664b5c01063e7f8de6427fce}\label{classoomph_1_1QuarterCircleSectorDomain_ad937b0da664b5c01063e7f8de6427fce} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_bot\_right\_N@{r\_bot\_right\_N}}
+\index{r\_bot\_right\_N@{r\_bot\_right\_N}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_bot\_right\_N()}{r\_bot\_right\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of bottom right macro element zeta $ \in [-1,1] $. 
+
+Northern edge of bottom right macro element. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00440}{440}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a552f9bfc6fd451669f44ee02c8bb0d38}\label{classoomph_1_1QuarterCircleSectorDomain_a552f9bfc6fd451669f44ee02c8bb0d38} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_bot\_right\_S@{r\_bot\_right\_S}}
+\index{r\_bot\_right\_S@{r\_bot\_right\_S}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_bot\_right\_S()}{r\_bot\_right\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of bottom right macro element zeta $ \in [-1,1] $. 
+
+Southern edge of bottom right macro element. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{475}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00097}{s\+\_\+squashed()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a85ba295aaeff2833644691978deac247}\label{classoomph_1_1QuarterCircleSectorDomain_a85ba295aaeff2833644691978deac247} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_bot\_right\_W@{r\_bot\_right\_W}}
+\index{r\_bot\_right\_W@{r\_bot\_right\_W}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_bot\_right\_W()}{r\_bot\_right\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+bot\+\_\+right\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of bottom right macro element zeta $ \in [-1,1] $. 
+
+Western edge of bottom right macro element. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{450}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00518}{r\+\_\+centr\+\_\+\+E()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_ae4558d37a4f9bb3f9d78b6878cb77a49}\label{classoomph_1_1QuarterCircleSectorDomain_ae4558d37a4f9bb3f9d78b6878cb77a49} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_centr\_E@{r\_centr\_E}}
+\index{r\_centr\_E@{r\_centr\_E}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_E()}{r\_centr\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1] $. 
+
+Eastern edge of central box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00518}{518}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a1cb12e9b1d2e17f8bd5c3d6691be3b1d}\label{classoomph_1_1QuarterCircleSectorDomain_a1cb12e9b1d2e17f8bd5c3d6691be3b1d} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_centr\_N@{r\_centr\_N}}
+\index{r\_centr\_N@{r\_centr\_N}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_N()}{r\_centr\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1] $. 
+
+Northern edge of central box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00508}{508}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{r\+\_\+top\+\_\+left\+\_\+\+S()}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_aaa17ff1d6529000f8309005396966830}\label{classoomph_1_1QuarterCircleSectorDomain_aaa17ff1d6529000f8309005396966830} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_centr\_S@{r\_centr\_S}}
+\index{r\_centr\_S@{r\_centr\_S}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_S()}{r\_centr\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1] $. 
+
+Southern edge of central box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00528}{528}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a453fc6f043f57031c1347065d521a1c3}\label{classoomph_1_1QuarterCircleSectorDomain_a453fc6f043f57031c1347065d521a1c3} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_centr\_W@{r\_centr\_W}}
+\index{r\_centr\_W@{r\_centr\_W}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_W()}{r\_centr\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+centr\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1] $. 
+
+Western edge of central box. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00546}{546}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a951bc38c7e96a40f33c60b3ccee820bf}\label{classoomph_1_1QuarterCircleSectorDomain_a951bc38c7e96a40f33c60b3ccee820bf} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_top\_left\_E@{r\_top\_left\_E}}
+\index{r\_top\_left\_E@{r\_top\_left\_E}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_top\_left\_E()}{r\_top\_left\_E()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+E (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left macro element zeta $ \in [-1,1] $. 
+
+Eastern edge of top left macro element $ s \in [-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{407}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00120}{Fract\+\_\+mid}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00097}{s\+\_\+squashed()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00440}{r\+\_\+bot\+\_\+right\+\_\+\+N()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_af1520e712b46c8e1b0f098596fa63101}\label{classoomph_1_1QuarterCircleSectorDomain_af1520e712b46c8e1b0f098596fa63101} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_top\_left\_N@{r\_top\_left\_N}}
+\index{r\_top\_left\_N@{r\_top\_left\_N}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_top\_left\_N()}{r\_top\_left\_N()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+N (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left macro element zeta $ \in [-1,1] $. 
+
+Northern edge of top left macro element $ s \in [-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{348}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00120}{Fract\+\_\+mid}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{Xi\+\_\+lo}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a0bb74af9c782bd0a0a8d3ccfd708af55}\label{classoomph_1_1QuarterCircleSectorDomain_a0bb74af9c782bd0a0a8d3ccfd708af55} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_top\_left\_S@{r\_top\_left\_S}}
+\index{r\_top\_left\_S@{r\_top\_left\_S}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_top\_left\_S()}{r\_top\_left\_S()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+S (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left macro element zeta $ \in [-1,1] $. 
+
+Southern edge of top left macro element $ s \in [-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{382}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00508}{r\+\_\+centr\+\_\+\+N()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a84f4970adc3a93392ef1a57f19df96a1}\label{classoomph_1_1QuarterCircleSectorDomain_a84f4970adc3a93392ef1a57f19df96a1} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!r\_top\_left\_W@{r\_top\_left\_W}}
+\index{r\_top\_left\_W@{r\_top\_left\_W}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{r\_top\_left\_W()}{r\_top\_left\_W()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::r\+\_\+top\+\_\+left\+\_\+W (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left macro element zeta $ \in [-1,1] $. 
+
+Western edge of top left macro element $s \in [-1,1] $. 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{363}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00097}{s\+\_\+squashed()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{Wall\+\_\+pt}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{Xi\+\_\+hi}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00214}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a5b66f846233b3cf976ed63d9bf54f0c7}\label{classoomph_1_1QuarterCircleSectorDomain_a5b66f846233b3cf976ed63d9bf54f0c7} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!s\_squashed@{s\_squashed}}
+\index{s\_squashed@{s\_squashed}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{s\_squashed()}{s\_squashed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::s\+\_\+squashed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00097}{97}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00132}{BL\+\_\+squash\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{r\+\_\+top\+\_\+left\+\_\+\+W()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_ae9b74ffcade9fdc1eeba26b4acced7a8}\label{classoomph_1_1QuarterCircleSectorDomain_ae9b74ffcade9fdc1eeba26b4acced7a8} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!BL\_squash\_fct\_pt@{BL\_squash\_fct\_pt}}
+\index{BL\_squash\_fct\_pt@{BL\_squash\_fct\_pt}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{BL\_squash\_fct\_pt}{BL\_squash\_fct\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{BLSquash\+Fct\+Pt}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+BL\+\_\+squash\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00132}{132}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00089}{bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00097}{s\+\_\+squashed()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_ade78897c44c26af82ac90052f799796c}\label{classoomph_1_1QuarterCircleSectorDomain_ade78897c44c26af82ac90052f799796c} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!Fract\_mid@{Fract\_mid}}
+\index{Fract\_mid@{Fract\_mid}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{Fract\_mid}{Fract\_mid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Fract\+\_\+mid\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fraction along wall where outer ring is to be divided. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00120}{120}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{r\+\_\+top\+\_\+left\+\_\+\+N()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_a59722c43d41fef0bc3df4cf6571930a8}\label{classoomph_1_1QuarterCircleSectorDomain_a59722c43d41fef0bc3df4cf6571930a8} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!Wall\_pt@{Wall\_pt}}
+\index{Wall\_pt@{Wall\_pt}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the curved wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00126}{126}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00528}{r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00546}{r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{r\+\_\+top\+\_\+left\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_aba0cc67782144fe066dd0d04ac9d79dd}\label{classoomph_1_1QuarterCircleSectorDomain_aba0cc67782144fe066dd0d04ac9d79dd} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!Xi\_hi@{Xi\_hi}}
+\index{Xi\_hi@{Xi\_hi}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{Xi\_hi}{Xi\_hi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Xi\+\_\+hi\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Upper limit for the (1D) coordinates along the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00123}{123}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00546}{r\+\_\+centr\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{r\+\_\+top\+\_\+left\+\_\+\+N()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00382}{r\+\_\+top\+\_\+left\+\_\+\+S()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00363}{r\+\_\+top\+\_\+left\+\_\+\+W()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorDomain_afed5ccc21ccf6c6cd1dca65d58a5b708}\label{classoomph_1_1QuarterCircleSectorDomain_afed5ccc21ccf6c6cd1dca65d58a5b708} 
+\index{oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}!Xi\_lo@{Xi\_lo}}
+\index{Xi\_lo@{Xi\_lo}!oomph::QuarterCircleSectorDomain@{oomph::QuarterCircleSectorDomain}}
+\doxysubsubsection{\texorpdfstring{Xi\_lo}{Xi\_lo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::\+Xi\+\_\+lo\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Lower limit for the (1D) coordinates along the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00117}{117}} of file \mbox{\hyperlink{quarter__circle__sector__domain_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00493}{r\+\_\+bot\+\_\+right\+\_\+\+E()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00475}{r\+\_\+bot\+\_\+right\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00450}{r\+\_\+bot\+\_\+right\+\_\+\+W()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00528}{r\+\_\+centr\+\_\+\+S()}}, \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00407}{r\+\_\+top\+\_\+left\+\_\+\+E()}}, and \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00348}{r\+\_\+top\+\_\+left\+\_\+\+N()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__circle__sector__domain_8h}{quarter\+\_\+circle\+\_\+sector\+\_\+domain.\+h}}\end{DoxyCompactItemize}

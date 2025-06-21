@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The deformation of an elastic strip by a periodic traction &ndash; this time with spatial adaptivity</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: The deformation of an elastic strip by a periodic traction &ndash; this time with spatial adaptivity </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we re-visit a linear elasticity problem that we already discussed in detail in <a href="../../periodic_load/html/index.html">another tutorial</a>: The deformation of an elastic strip loaded by a periodic surface traction. We demonstrate how to solve the problem with spatial adaptivity and explain how to apply periodic boundary conditions in such problems.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>We consider the same problem that we discussed in <a href="../../periodic_load/html/index.html">another tutorial:</a></p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The problem.</b> </center> <div class="image">
+<img src="attempt3.gif" alt=""/>
+<div class="caption">
+Infinitely long strip loaded by a periodic traction. </div></div>
+  Solve  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="136" height="31"/>
+</p>
+ in the domain <img class="formulaInl" alt="$ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} $" src="form_1.png" width="190" height="14"/>, subject to the Dirichlet boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_2.png" width="143" height="15"/>
+</p>
+ on the bottom boundary, the Neumann (traction) boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_3.png" width="320" height="31"/>
+</p>
+ on the top boundary, and symmetry conditions at <img class="formulaInl" alt="$ x_1 = 0 $" src="form_4.png" width="36" height="11"/> and <img class="formulaInl" alt="$ x_1 = L_x$" src="form_5.png" width="45" height="13"/>,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_6.png" width="158" height="15"/>
+</p>
+   </td></tr>
+</table>
+<br  />
+ </center><p>As before, we only discretise the domain over one period of the applied spatially-periodic traction and apply symmetry conditions at the left and right domain boundaries. Here we compute the solution with spatial adaptivity.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows a vector plot of the displacement field near the upper domain boundary. As already observed in the <a href="../../periodic_load/html/index.html">computations with a spatially uniform discretisation,</a> the displacements decay rapidly with distance from the loaded surface. <code>oomph-lib's</code> automatic mesh adaptation therefore chooses a much finer discretisation near the upper domain boundary than in the interior, leading to a significant reduction in the number of unknowns in the problem.</p>
+<div class="image">
+<img src="displ.gif" alt=""/>
+<div class="caption">
+Plot of displacement field, computed with spatial adaptivity. Note that the mesh is much finer near the top boundary where the displacement (gradients) are large. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>Most of the driver code is identical to that discussed in the <a href="../../periodic_load/html/index.html">tutorial in which we solved the problem without spatial adaptivity</a>. We will therefore only discuss the parts of the code that require significant changes.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very similar to that used in the non-refineable version of the problem. As usual, we detach the face elements that apply the traction boundary condition before adapting the bulk mesh and then re-attach them afterwards. This is done by the functions <code>delete_traction_elements()</code> and <code>assign_traction_elements()</code> which are called from <code>actions_before_adapt()</code> and <code>actions_after_adapt()</code>, respectively.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Periodic loading problem</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classRefineablePeriodicLoadProblem.html">RefineablePeriodicLoadProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in x and y directions </span></div>
+<div class="line"><span class="comment"> /// and lengths.</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classRefineablePeriodicLoadProblem.html">RefineablePeriodicLoadProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update before solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#aece9eef8c0bf14527ea1fb6902820cb4">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#a5b1bd71066266f1eb1cc36d524d57894">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#aae144ae04342a103a870d9dfbf29c188">actions_before_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill the traction elements and wipe surface mesh</span></div>
+<div class="line">   <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#a491998bff6616edaa5e29bf155d0284b">delete_traction_elements</a>();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line">   rebuild_global_mesh();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#ad4fdb5d3805ea8dec6cedf515e5a73d7">actions_after_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create traction elements</span></div>
+<div class="line">   <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#a0de046a3d8a5d88f01d782fdc1be82a0">assign_traction_elements</a>();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line">   rebuild_global_mesh();</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#ac10c477b8edd2d0b7d3a69e65184356a">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Allocate traction elements on the top surface</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#a0de046a3d8a5d88f01d782fdc1be82a0">assign_traction_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Kill traction elements on the top surface</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#a491998bff6616edaa5e29bf155d0284b">delete_traction_elements</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = <a class="code hl_variable" href="classRefineablePeriodicLoadProblem.html#a760d47dad3385febb9bd893afda424c2">Surface_mesh_pt</a>-&gt;nelement();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the traction elements</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Kill surface element</span></div>
+<div class="line">     <span class="keyword">delete</span> <a class="code hl_variable" href="classRefineablePeriodicLoadProblem.html#a760d47dad3385febb9bd893afda424c2">Surface_mesh_pt</a>-&gt;element_pt(e);</div>
+<div class="line">    }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Wipe the mesh</span></div>
+<div class="line">   <a class="code hl_variable" href="classRefineablePeriodicLoadProblem.html#a760d47dad3385febb9bd893afda424c2">Surface_mesh_pt</a>-&gt;flush_element_and_node_storage();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the (refineable!) bulk mesh</span></div>
+<div class="line"><span class="comment"></span> TreeBasedRefineableMeshBase* <a class="code hl_variable" href="classRefineablePeriodicLoadProblem.html#a98440a404cb3de29aad5a93f768889cd">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classRefineablePeriodicLoadProblem.html#a760d47dad3385febb9bd893afda424c2">Surface_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html">RefineablePeriodicLoadProblem</a></div><div class="ttdoc">Periodic loading problem.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00091">refineable_periodic_load.cc:92</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_a0de046a3d8a5d88f01d782fdc1be82a0"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#a0de046a3d8a5d88f01d782fdc1be82a0">RefineablePeriodicLoadProblem::assign_traction_elements</a></div><div class="ttdeci">void assign_traction_elements()</div><div class="ttdoc">Allocate traction elements on the top surface.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00300">refineable_periodic_load.cc:300</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_a491998bff6616edaa5e29bf155d0284b"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#a491998bff6616edaa5e29bf155d0284b">RefineablePeriodicLoadProblem::delete_traction_elements</a></div><div class="ttdeci">void delete_traction_elements()</div><div class="ttdoc">Kill traction elements on the top surface.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00135">refineable_periodic_load.cc:135</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_a5b1bd71066266f1eb1cc36d524d57894"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#a5b1bd71066266f1eb1cc36d524d57894">RefineablePeriodicLoadProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00104">refineable_periodic_load.cc:104</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_a760d47dad3385febb9bd893afda424c2"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#a760d47dad3385febb9bd893afda424c2">RefineablePeriodicLoadProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00155">refineable_periodic_load.cc:155</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_a98440a404cb3de29aad5a93f768889cd"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#a98440a404cb3de29aad5a93f768889cd">RefineablePeriodicLoadProblem::Bulk_mesh_pt</a></div><div class="ttdeci">TreeBasedRefineableMeshBase * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the (refineable!) bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00152">refineable_periodic_load.cc:152</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_aae144ae04342a103a870d9dfbf29c188"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#aae144ae04342a103a870d9dfbf29c188">RefineablePeriodicLoadProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00107">refineable_periodic_load.cc:107</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_ac10c477b8edd2d0b7d3a69e65184356a"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#ac10c477b8edd2d0b7d3a69e65184356a">RefineablePeriodicLoadProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00340">refineable_periodic_load.cc:340</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_ad4fdb5d3805ea8dec6cedf515e5a73d7"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#ad4fdb5d3805ea8dec6cedf515e5a73d7">RefineablePeriodicLoadProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00117">refineable_periodic_load.cc:117</a></div></div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_aece9eef8c0bf14527ea1fb6902820cb4"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#aece9eef8c0bf14527ea1fb6902820cb4">RefineablePeriodicLoadProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00101">refineable_periodic_load.cc:101</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor – applying periodic boundary condition in spatially adaptive computations.</h1>
+<p>A key feature of this problem is the presence of the periodic boundary conditions (4) which require that the displacement field at the left boundary is the same as that on the right one. As discussed in <a href="../../../navier_stokes/rayleigh_channel/html/index.html#periodic">another tutorial,</a> such constraints can be imposed by the function </p><div class="fragment"><div class="line">BoundaryNode::make_periodic(...).</div>
+</div><!-- fragment --><p> Once this function is called for a <code>BoundaryNode</code>, the <code>BoundaryNode</code> shares its <code>Data</code> with the <code>Node</code> specified as the argument to that function. This "wraps the solution around the domain".</p>
+<p>In spatially adaptive computations a complication arises because the non-uniform refinement of a mesh creates so-called hanging nodes, i.e. nodes in a refined element that have no counterpart in an adjacent less-refined element. Within <code>oomph-lib</code>, such hanging nodes <br  />
+ are automatically constrained to maintain the inter-element continuity of the solution. The automatic detection of hanging nodes requires the identification of the elements' neighbours. This task is performed by neighbour finding routines that operate on a tree-(forest-)based representation of a mesh's refinement pattern; see the discussion in <br  />
+ <a href="../../../the_data_structure/html/index.html#QuadTreeInMeshes">the tutorial explaining <code>oomph-lib's</code> overall data structure.</a> The representation of the initial, unrefined mesh as a <code>TreeForest</code>, required by these routines, is typically generated in the mesh constructor, using the function <code>TreeBasedRefineableMeshBase::setup_tree_forest()</code>. In the 4x4 mesh shown below this function would establish that within the <code>Forest</code> representing this mesh, the <code>Tree</code> associated with element 11 has three neighbours: Element 16 in the northern (N) direction; element 10 in the western (W) direction; element 7 in the southern (S) direction. There is no neighbour in the eastern (E) direction. If element 11 is refined but its neighbours are not, the hanging nodes on the edges with elements 7, 10 and 16 are automatically detected and constrained, maintaining the continuity of the solution across the element boundaries.</p>
+<div class="image">
+<img src="wrapped_forest.gif" alt=""/>
+<div class="caption">
+Sketch illustrating neighbour finding in problems with periodic boundary conditions. </div></div>
+ <p>If periodic boundary conditions are applied, the "wrapping around" of the domain (indicated by the red line) means that element 8 must be regarded as the (periodic) eastern (E) neighbour of element 11. This information must be passed to the root of the <code>Tree</code> associated with element 11, using the functions <code>TreeRoot::neighbour_pt(...)</code> and <code>TreeRoot::neighbour_periodic(...)</code>.</p>
+<p>This is illustrated in the following code segment which shows the revised version of the problem constructor. We start by building the refineable mesh and set the spatial error estimator.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Problem constructor: Pass number of elements in the coordinate</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// directions and the domain sizes.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classRefineablePeriodicLoadProblem.html#ae950fdcf80e684eddb29358e1f9a3412">RefineablePeriodicLoadProblem&lt;ELEMENT&gt;::RefineablePeriodicLoadProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create the mesh </span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RefineableRectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create/set error estimator</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="ttc" id="aclassRefineablePeriodicLoadProblem_html_ae950fdcf80e684eddb29358e1f9a3412"><div class="ttname"><a href="classRefineablePeriodicLoadProblem.html#ae950fdcf80e684eddb29358e1f9a3412">RefineablePeriodicLoadProblem::RefineablePeriodicLoadProblem</a></div><div class="ttdeci">RefineablePeriodicLoadProblem(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor: Pass number of elements in x and y directions and lengths.</div><div class="ttdef"><b>Definition</b> <a href="refineable__periodic__load_8cc_source.html#l00165">refineable_periodic_load.cc:166</a></div></div>
+</div><!-- fragment --><p> Next we declare all nodes on boundary 1 (the right boundary) to be periodic counterparts of the corresponding nodes on boundary 3 (the left boundary). (Here we exploit that within this particular mesh the boundary nodes on the left and right boundaries are enumerated consistently from top to bottom; this is not guaranteed to be the case &ndash; for a general mesh you will have to establish which node corresponds to which; see <a class="el" href="index.html#comments">Comments and Exercises</a> .)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Make the mesh periodic in the x-direction by setting the nodes on</span></div>
+<div class="line"> <span class="comment">// right boundary (boundary 1) to be the periodic counterparts of</span></div>
+<div class="line"> <span class="comment">// those on the left one (boundary 3).</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = Bulk_mesh_pt-&gt;nboundary_node(1);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">  {</div>
+<div class="line">   Bulk_mesh_pt-&gt;boundary_node_pt(1,n)</div>
+<div class="line">    -&gt;make_periodic(Bulk_mesh_pt-&gt;boundary_node_pt(3,n));</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> We obtain the tree roots associated with the elements on the left and right boundaries, again exploiting the specific enumeration of the elements (from bottom left to top right, as in the sketch shown above).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now establish the new neighbours (created by &quot;wrapping around&quot;</span></div>
+<div class="line"> <span class="comment">// the domain) in the TreeForst representation of the mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get pointers to tree roots associated with elements on the </span></div>
+<div class="line"> <span class="comment">// left and right boundaries</span></div>
+<div class="line">  Vector&lt;TreeRoot*&gt; left_root_pt(ny);</div>
+<div class="line">  Vector&lt;TreeRoot*&gt; right_root_pt(ny);</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;ny;i++) </div>
+<div class="line">   {</div>
+<div class="line">    left_root_pt[i] = </div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(i*nx))-&gt;</div>
+<div class="line">     tree_pt()-&gt;root_pt();</div>
+<div class="line">    right_root_pt[i] = </div>
+<div class="line">     <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(nx-1+i*nx))-&gt;</div>
+<div class="line">     tree_pt()-&gt;root_pt();</div>
+<div class="line">   }</div>
+</div><!-- fragment --><p> Using this information it is easy to establish the (periodic) connections between the trees:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">  <span class="comment">// Switch on QuadTreeNames for enumeration of directions</span></div>
+<div class="line">   <span class="keyword">using namespace </span>QuadTreeNames;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">//Set the neighbour and periodicity</span></div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;ny;i++) </div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// The western neighbours of the elements on the left</span></div>
+<div class="line">    <span class="comment">// boundary are those on the right</span></div>
+<div class="line">    left_root_pt[i]-&gt;neighbour_pt(W) = right_root_pt[i];</div>
+<div class="line">    left_root_pt[i]-&gt;set_neighbour_periodic(W); </div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// The eastern neighbours of the elements on the right</span></div>
+<div class="line">    <span class="comment">// boundary are those on the left</span></div>
+<div class="line">    right_root_pt[i]-&gt;neighbour_pt(E) = left_root_pt[i];</div>
+<div class="line">    right_root_pt[i]-&gt;set_neighbour_periodic(E);     </div>
+<div class="line">   } <span class="comment">// done</span></div>
+</div><!-- fragment --><p> The rest of the problem constructor is identical to that in its non-refineable counterpart and is therefore omitted here.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="nondim"></a>
+Comments</h2>
+<p>When setting up periodic boundary conditions, it is obviously important to correctly identify the corresponding nodes and elements on the mesh boundaries. The enumeration of these nodes and elements is typically performed in the mesh constructor. If you are unsure what conventions have been used (and are too lazy to read the source code), recall that you can use the function </p><div class="fragment"><div class="line">Mesh::boundary_node_pt(b,j)</div>
+</div><!-- fragment --><p> to obtain a pointer to the <code>j</code> -th node on the <code>Mesh's</code> <code>b</code> -th boundary and <br  />
+ </p><div class="fragment"><div class="line">Mesh::boundary_element_pt(b,j)</div>
+</div><!-- fragment --><p> to obtain a pointer to the <code>j</code> -th element on the <code>Mesh's</code> <code>b</code> -th boundary.</p>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Modify the problem constructor to check that the vertical coordinate of each periodic node matches that of its non-periodic counterpart.</li>
+<li>Confirm that the computed solution has a small discontinuity across the periodic boundary when you<ol type="a">
+<li>comment out the assignment of the periodic tree neighbours</li>
+<li>force the refinement of a single element next to the left boundary, say.</li>
+</ol>
+The relevant code is for the latter task is, in fact, already implemented in the problem constructor because the driver code acts as a self-test for this functionality.  <div class="fragment"><div class="line"> <span class="comment">// Do selective refinement of one element so that we can test</span></div>
+<div class="line"> <span class="comment">// whether periodic hanging nodes work: Choose a single element </span></div>
+<div class="line"> <span class="comment">// (the zero-th one) as the to-be-refined element.</span></div>
+<div class="line"> <span class="comment">// This creates a hanging node on the periodic boundary</span></div>
+<div class="line"> Vector&lt;unsigned&gt; refine_pattern(1,0);</div>
+<div class="line"> Bulk_mesh_pt-&gt;refine_selected_elements(refine_pattern);</div>
+</div><!-- fragment --> <b>Note:</b> To facilitate the visualisation of the discontinuity it is helpful to perform this test with the bilinear <code>RefineableQLinearElasticityElement&lt;2,2&gt;</code>, with a shallower domain (e.g. <img class="formulaInl" alt="$ L_y = 0.5 $" src="form_7.png" width="46" height="14"/> ), and without any further spatial refinement (set <code>max_adapt=0</code> in <code><a class="el" href="periodic__load_8cc.html#a0ddf1224851353fc92bfbff6f499fa97" title="Driver code for PeriodicLoad linearly elastic problem.">main()</a></code> ).</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/linear_elasticity/periodic_load/">demo_drivers/linear_elasticity/periodic_load/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc">demo_drivers/linear_elasticity/periodic_load/refineable_periodic_load.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:10
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

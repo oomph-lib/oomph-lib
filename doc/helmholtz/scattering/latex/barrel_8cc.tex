@@ -1,0 +1,53 @@
+\doxysection{barrel.\+cc File Reference}
+\hypertarget{barrel_8cc}{}\label{barrel_8cc}\index{barrel.cc@{barrel.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Young\+Laplace problem on rectangular domain, discretised with 2D QYoung\+Laplace elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for "{}global"{} problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}{Global\+Parameters\+::get\+\_\+exact\+\_\+kappa}} ()
+\begin{DoxyCompactList}\small\item\em Exact kappa. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{Global\+Parameters\+::spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
+\begin{DoxyCompactList}\small\item\em Spine basis\+: The position vector to the basis of the spine as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i Spines start in the (x\+\_\+1,x\+\_\+2) plane at (x\+\_\+1,x\+\_\+2). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{Global\+Parameters\+::spine\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
+\begin{DoxyCompactList}\small\item\em Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{barrel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a3731f24a02ce4f306d65a9a488f85c96}{Global\+Parameters\+::\+Controlled\+\_\+height}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Height control value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae8fa7610a34b7a2a8223eade99a5c22f}{Global\+Parameters\+::\+Alpha\+\_\+min}} = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}1.\+5
+\begin{DoxyCompactList}\small\item\em Min. spine angle against horizontal plane. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a19d04a02b0b5ef5c72e9c30d822e4dc7}{Global\+Parameters\+::\+Alpha\+\_\+max}} = Mathematical\+Constants\+::\+Pi/2.\+0\texorpdfstring{$\ast$}{*}0.\+5
+\begin{DoxyCompactList}\small\item\em Max. spine angle against horizontal plane. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{barrel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{barrel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{barrel.cc@{barrel.cc}!main@{main}}
+\index{main@{main}!barrel.cc@{barrel.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00321}{321}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00051}{Global\+Parameters\+::\+Controlled\+\_\+height}}, and \mbox{\hyperlink{barrel_8cc_source_l00291}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+

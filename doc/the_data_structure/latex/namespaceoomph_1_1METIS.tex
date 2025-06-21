@@ -1,0 +1,190 @@
+\doxysection{oomph\+::METIS Namespace Reference}
+\hypertarget{namespaceoomph_1_1METIS}{}\label{namespaceoomph_1_1METIS}\index{oomph::METIS@{oomph::METIS}}
+
+
+Namespace for \doxylink{namespaceoomph_1_1METIS}{METIS} graph partitioning routines.  
+
+
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{spatial\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&max\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&min\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&weight)
+\begin{DoxyCompactList}\small\item\em Typedef for function pointer to to function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{spatial\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&max\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&min\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&weight)
+\begin{DoxyCompactList}\small\item\em Default function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning (unit weight regardless of input). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}{uniform\+\_\+partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ndomain}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{element\+\_\+domain}})
+\begin{DoxyCompactList}\small\item\em Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1METIS_aa3c7e4be46d6148cc60f43354127fc94}{partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ndomain}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{objective}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{element\+\_\+domain}})
+\begin{DoxyCompactList}\small\item\em Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}{partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}comm\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ndomain}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{objective}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{element\+\_\+domain}})
+\begin{DoxyCompactList}\small\item\em Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}{partition\+\_\+distributed\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{objective}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bypass\+\_\+metis}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \doxylink{classoomph_1_1Problem}{Problem}\textquotesingle{}s mesh, with the halo elements being skipped. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} \mbox{\hyperlink{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}} = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}
+\begin{DoxyCompactList}\small\item\em Function pointer to to function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for \doxylink{namespaceoomph_1_1METIS}{METIS} graph partitioning routines. 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}\label{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1} 
+\index{oomph::METIS@{oomph::METIS}!ErrorToWeightFctPt@{ErrorToWeightFctPt}}
+\index{ErrorToWeightFctPt@{ErrorToWeightFctPt}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{ErrorToWeightFctPt}{ErrorToWeightFctPt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}(\texorpdfstring{$\ast$}{*} oomph\+::\+METIS\+::\+Error\+To\+Weight\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{spatial\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&max\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&min\+\_\+error, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&weight)}
+
+
+
+Typedef for function pointer to to function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning. 
+
+
+
+Definition at line \mbox{\hyperlink{partitioning_8h_source_l00088}{88}} of file \mbox{\hyperlink{partitioning_8h_source}{partitioning.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}\label{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5} 
+\index{oomph::METIS@{oomph::METIS}!default\_error\_to\_weight\_fct@{default\_error\_to\_weight\_fct}}
+\index{default\_error\_to\_weight\_fct@{default\_error\_to\_weight\_fct}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{default\_error\_to\_weight\_fct()}{default\_error\_to\_weight\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+METIS\+::default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{spatial\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{max\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{min\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{weight }\end{DoxyParamCaption})}
+
+
+
+Default function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning (unit weight regardless of input). 
+
+Default function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning (unit weight regardless of input) 
+
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00047}{47}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00110}{partition\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}\label{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701} 
+\index{oomph::METIS@{oomph::METIS}!partition\_distributed\_mesh@{partition\_distributed\_mesh}}
+\index{partition\_distributed\_mesh@{partition\_distributed\_mesh}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{partition\_distributed\_mesh()}{partition\_distributed\_mesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+METIS\+::partition\+\_\+distributed\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{bypass\+\_\+metis = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \doxylink{classoomph_1_1Problem}{Problem}\textquotesingle{}s mesh, with the halo elements being skipped. 
+
+Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \doxylink{classoomph_1_1Problem}{Problem}\textquotesingle{}s mesh, with the halo elements being skipped. Objective\+:
+
+Objective\+:
+\begin{DoxyItemize}
+\item objective=0\+: minimise edgecut.
+\item objective=1\+: minimise total communications volume.
+\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \doxylink{namespaceoomph_1_1METIS}{METIS} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat
+
+
+\begin{DoxyItemize}
+\item objective=0\+: minimise edgecut.
+\item objective=1\+: minimise total communications volume.
+\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \doxylink{namespaceoomph_1_1METIS}{METIS} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat 
+
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00556}{556}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00884}{oomph\+::\+Problem\+::elemental\+\_\+assembly\+\_\+time()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l17268}{oomph\+::\+Problem\+::load\+\_\+balance()}}.
+
+\Hypertarget{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}\label{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9} 
+\index{oomph::METIS@{oomph::METIS}!partition\_mesh@{partition\_mesh}}
+\index{partition\_mesh@{partition\_mesh}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{partition\_mesh()}{partition\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+METIS\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}}]{comm\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndomain,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
+
+
+\begin{DoxyItemize}
+\item objective=0\+: minimise edgecut.
+\item objective=1\+: minimise total communications volume.
+\end{DoxyItemize}Partioning is based on nodal graph of mesh. \Hypertarget{namespaceoomph_1_1METIS_aa3c7e4be46d6148cc60f43354127fc94}\label{namespaceoomph_1_1METIS_aa3c7e4be46d6148cc60f43354127fc94} 
+\index{oomph::METIS@{oomph::METIS}!partition\_mesh@{partition\_mesh}}
+\index{partition\_mesh@{partition\_mesh}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{partition\_mesh()}{partition\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+METIS\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndomain,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Use \doxylink{namespaceoomph_1_1METIS}{METIS} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
+
+
+\begin{DoxyItemize}
+\item objective=0\+: minimise edgecut.
+\item objective=1\+: minimise total communications volume.
+\end{DoxyItemize}Partioning is based on nodal graph of mesh.
+
+
+\begin{DoxyItemize}
+\item objective=0\+: minimise edgecut.
+\item objective=1\+: minimise total communications volume.
+\end{DoxyItemize}Partioning is based on dual graph of mesh. 
+
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00110}{110}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{partitioning_8cc_source_l00047}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{partitioning_8cc_source_l00057}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01343}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l00974}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}\label{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78} 
+\index{oomph::METIS@{oomph::METIS}!uniform\_partition\_mesh@{uniform\_partition\_mesh}}
+\index{uniform\_partition\_mesh@{uniform\_partition\_mesh}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{uniform\_partition\_mesh()}{uniform\_partition\_mesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+METIS\+::uniform\+\_\+partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ndomain,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
+
+
+
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00070}{70}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5}\label{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5} 
+\index{oomph::METIS@{oomph::METIS}!Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}}
+\index{Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}!oomph::METIS@{oomph::METIS}}
+\doxysubsubsection{\texorpdfstring{Error\_to\_weight\_fct\_pt}{Error\_to\_weight\_fct\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} oomph\+::\+METIS\+::\+Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}}
+
+
+
+Function pointer to to function that translates spatial error into weight for \doxylink{namespaceoomph_1_1METIS}{METIS} partitioning. 
+
+
+
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00057}{57}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00110}{partition\+\_\+mesh()}}.
+

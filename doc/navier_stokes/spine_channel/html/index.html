@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Steady 2D finite-Reynolds-number flow in a channel of non-uniform width &ndash; An introduction to Spine meshes.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Steady 2D finite-Reynolds-number flow in a channel of non-uniform width &ndash; An introduction to Spine meshes. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Many previous examples demonstrated <code>oomph-lib's</code> ability to solve problems on domains with moving, curvilinear boundaries. These examples had the following common features:</p><ul>
+<li>The motion of the curvilinear domain boundaries was prescribed.</li>
+<li>The domain was discretised by <code>Domain</code> / <code>MacroElement</code> - based meshes. Recall that in such meshes the function <code><a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">Mesh::node_update()</a></code> updates the position of <em>all</em> of its constituent nodes in response to changes in the shape/position of the geometric objects that define its curvilinear boundaries. The update of the nodal positions is performed on an element-by-element basis and each element determines the new positions of its nodes by referring to the <code>MacroElement</code> representation of the domain.</li>
+<li>The governing equations were implemented in their Arbitrary Eulerian Lagrangian (ALE) form, in which the mesh velocity is determined from the "history values" of the nodal positions.</li>
+</ul>
+<p>We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution. This situation arises, <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">e.g</a>., in free-surface fluid flow problems and in fluid-structure interaction problems. We shall explain why <code>Domain</code> / <code>MacroElement</code> - based node update strategies are unlikely to be efficient for such problems and then introduce the "Method of Spines" as one of a number of sparse (and therefore more efficient) node-update strategies available in <code>oomph-lib</code>.</p>
+<hr  />
+<h1><a class="anchor" id="why_sparse"></a>
+Why we need sparse node updates</h1>
+<p>The sketch below shows a free-surface fluids problem in which the "height" of the fluid domain (parametrised by the scalar function <img class="formulaInl" alt="$ x_2 = h(x_1) $" src="form_0.png" width="59" height="14"/>) is unknown. The lower half of the sketch shows a body-fitted finite-element mesh (the nodes and elements are shown in dark blue) that discretises the fluid domain.</p>
+<div class="image">
+<img src="film_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of a free-surface fluid problem. </div></div>
+ <p>Assume now that we have some discrete representation of the unknown free surface so that <img class="formulaInl" alt="$ h(x_1) $" src="form_1.png" width="29" height="14"/> is approximated by a function that involves a finite number of discrete unknowns <img class="formulaInl" alt="$ H_i \  (i=1,...,N_H)$" src="form_2.png" width="95" height="14"/> . In principle, this allows us to represent the unknown boundary by a <code>GeomObject</code> in which the unknowns <img class="formulaInl" alt="$ H_i \  (i=1,...,N_H)$" src="form_2.png" width="95" height="14"/> play the role of "geometric
+\c Data", <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">i.e</a>. <code>Data</code> whose values determine the shape of the geometric object. Once the curvilinear boundary is represented by a <code>GeomObject</code>, the update of the nodal positions in the "bulk" mesh could be performed by the <code>Domain</code> / <code>MacroElement</code> - based methods referred to above.</p>
+<p>How exactly the unknowns <img class="formulaInl" alt="$ H_i \  (i=1,...,N_H)$" src="form_2.png" width="95" height="14"/> are determined is irrelevant for the purpose of this discussion ( in free surface flow problems, the relevant equation is the kinematic free-surface condition discussed in <a href="../../../navier_stokes/single_layer_free_surface/html/index.html#kinematic_condition_theory">another tutorial</a>) &ndash; we simply assume that there <em>are</em> some equations that determine their values. The feature we wish to focus on here is that the solution of the problem by Newton's method requires the computation of the derivatives of <em>all</em> discrete residuals with respect to <em>all</em> unknowns in the problem. <code>oomph-lib's</code> Navier-Stokes elements compute the element residual vectors (the residuals of the discretised momentum and continuity equations, evaluated for the current values of the unknowns), and the derivatives of these residuals with respect to the elements' velocity and pressure degrees of freedom. Clearly, the entries in the element's residual vector also depend on the position of the element's constituent nodes, which, in a free-boundary problem, are determined (via the node update function) by the unknowns <img class="formulaInl" alt="$ H_i \  (i=1,...,N_H)$" src="form_2.png" width="95" height="14"/> that discretise the position of the free surface.</p>
+<p>The main purpose of this example is to demonstrate the use (and the creation) of so-called "spine meshes". Such meshes are similar to the <code>MacroElement</code> / <code>Domain</code> - based meshes employed in many previous examples, in that they allow the nodal positions to be updated in response to changes in the shape of their (curvilinear) domain boundaries. The key feature of "spine meshes" is that the node update can be performed on a node-by-node basis &ndash; this an important requirement for the efficient solution of free-boundary and fluid-structure interaction problems in which the position of the nodes in the "bulk
+mesh" is determined by the (unknown) position of the domain boundary. The efficient evaluation of the so-called "shape derivatives" (the derivatives of the residuals of the equations discretised by the elements in the "bulk mesh" with respect to the unknowns that determine the position of the domain boundary)</p>
+<p>The idea behind spine-based node updates is illustrated in the sketch below. Assume that the position of the domain boundary is parametrised by a scalar function, so that, for instance, <img class="formulaInl" alt="$ x_2 = h(x_1)$" src="form_3.png" width="59" height="14"/>, where <img class="formulaInl" alt="$ h(x_1)$" src="form_4.png" width="29" height="14"/> may have to be determined as part of the solution (<a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">e.g</a>. in free-surface fluids problems &ndash; the origin of the "Method of Spines").</p>
+<div class="image">
+<img src="spine_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the Method of Spines. </div></div>
+ <p>Further, assume that the mesh topology is such that the mesh's <img class="formulaInl" alt="$ N_{node} $" src="form_5.png" width="31" height="13"/> nodes are distributed along <img class="formulaInl" alt="$ N_{spine} $" src="form_6.png" width="34" height="14"/> lines that are (topologically) orthogonal to the free boundary. We refer to these lines as the "spines" and denote the "height" of the domain, measured along spine <img class="formulaInl" alt="$ s $" src="form_7.png" width="5" height="6"/> by <img class="formulaInl" alt="$ H_s \ (s=1,...,N_{spine}) $" src="form_8.png" width="114" height="14"/>. We associate each node with a particular spine (so that node <img class="formulaInl" alt="$ j $" src="form_9.png" width="6" height="11"/> is located on spine <img class="formulaInl" alt="$ s_j$" src="form_10.png" width="10" height="10"/>) and locate it along a fixed fraction <img class="formulaInl" alt="$ \omega_j $" src="form_11.png" width="13" height="10"/> along "its" spine. The position of node <img class="formulaInl" alt="$ j $" src="form_9.png" width="6" height="11"/> may therefore be written as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf x}_j =  {\bf B}_{s_j} + \omega_j \, H_{s_j}  \,
+{\bf S}_{s_j} \ \ \ \ \ \ \ \ \ \ \ \ \  (1)
+\]" src="form_12.png" width="190" height="15"/>
+</p>
+<p> where <img class="formulaInl" alt="$ {\bf B}_s $" src="form_13.png" width="16" height="13"/> is the vector to the "base" of spine <img class="formulaInl" alt="$ s $" src="form_7.png" width="5" height="6"/>, and <img class="formulaInl" alt="$ {\bf S}_s $" src="form_14.png" width="13" height="13"/> the unit vector along that spine.</p>
+<p>A key feature of this method is that</p>
+<p>Determining the nodal positions via the "Method of Spines" equation (1)</p>
+<p>Spine-based node updates This document has two main parts:</p><ul>
+<li>In <a class="el" href="index.html#part1">Part 1: Flow through a channel of non-uniform width</a> we demonstrate how to use a <code>SpineMesh</code> </li>
+<li>In <a class="el" href="index.html#part2">Part 2: How to create a SpineMesh</a> we explain the general "philosophy" behind spine-based node-updates and demonstrate their implementation.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="part1"></a>
+Part 1: Flow through a channel of non-uniform width</h1>
+<h2><a class="anchor" id="example"></a>
+The example problem</h2>
+<p>We shall illustrate the use of <code>SpineMeshes</code> by considering the problem of steady 2D flow through a channel of non-uniform width.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The steady 2D Navier-Stokes equations in a channel of non-uniform width.</b> </center><p> Solve  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re \ u_j\frac{\partial u_i}{\partial x_j}
+= - \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +
+\frac{\partial u_j}{\partial x_i} \right),
+\]" src="form_15.png" width="226" height="31"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0,
+\]" src="form_16.png" width="48" height="29"/>
+</p>
+<p> in the region <img class="formulaInl" alt="$ D = \left\{(x_1,x_2) \ \bigg| \ x_1 \in [0,L],
+x_2 \in [0,h(x_1)] \right\} $" src="form_17.png" width="235" height="31"/>, where  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+h(x_1) = \left\{
+\begin{array}{cl}
+H &amp; 0 \leq x_1 \leq L_1 \\
+H + A\sin\left(\frac{x_1-L_1}{L_2-L_1}\right) &amp; L_1 \leq x_1 \leq L_2 \\
+H &amp; L_2 \leq x_1 \leq L
+\end{array} \right.
+\]" src="form_18.png" width="254" height="54"/>
+</p>
+<p> shown in this sketch </p><div class="image">
+<img src="channel_sketch.gif" alt=""/>
+<div class="caption">
+Sketch of the problem. </div></div>
+ <p class="endtd">subject to the no-slip Dirichlet boundary conditions on the top and bottom rigid walls  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D_{wall}}=(0,0),
+\]" src="form_19.png" width="93" height="15"/>
+</p>
+<p> parallel, parabolic inflow on the left inflow boundary, <img class="formulaInl" alt="$ \partial D_{inflow} = \{ (x_1,x_2) \ |  \ x_1=0 \}$" src="form_20.png" width="166" height="14"/> ,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D_{inflow}}
+=\left(x_2\left(H-x_2\right),0\right),
+\]" src="form_21.png" width="163" height="16"/>
+</p>
+<p> and axially traction-free, parallel outflow on the outflow boundary, <img class="formulaInl" alt="$ \partial D_{outflow} = \{ (x_1,x_2) \ | \ x_1=L \}$" src="form_22.png" width="173" height="14"/> ,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. u_2\right|_{\partial D_{outflow}}=0.
+\]" src="form_23.png" width="90" height="16"/>
+</p>
+   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figures below show the results (carpet plots of the two velocity components and the pressure, and a contour plot of the pressure distribution with superimposed streamlines), obtained from computations with Taylor-Hood and Crouzeix-Raviart elements for a channel of length <img class="formulaInl" alt="$ L = 2.7$" src="form_24.png" width="41" height="10"/> , height <img class="formulaInl" alt="$ H=1.0 $" src="form_25.png" width="44" height="10"/> , with deflection amplitude <img class="formulaInl" alt="$ A = 0.4 $" src="form_26.png" width="43" height="10"/>, and a Reynolds number of <img class="formulaInl" alt="$ Re=100$" src="form_27.png" width="50" height="10"/>.</p>
+<div class="image">
+<img src="TH.gif" alt=""/>
+<div class="caption">
+Plot of results computed with 2D Taylor-Hood elements. </div></div>
+  <div class="image">
+<img src="CR.gif" alt=""/>
+<div class="caption">
+Plot of results computed with 2D Crouzeix-Raviart elements. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters</h1>
+<p>The Reynolds number is the only parameter in this problem. As usual, we define and initialise it in a namespace:</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_namespace===================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=100;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00407">simple_spine_channel.cc:408</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00411">simple_spine_channel.cc:411</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by creating a <code>DocInfo</code> object to define the output directory.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver for channel flow problem with spine mesh.</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="simple__spine__channel_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleSpineMesh.html">DocInfo</a> <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>;</div>
+<div class="line"> <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>.number()=0;</div>
+<div class="ttc" id="aclassSimpleSpineMesh_html"><div class="ttname"><a href="classSimpleSpineMesh.html">SimpleSpineMesh</a></div><div class="ttdoc">Simple spine mesh class derived from standard 2D mesh. Vertical lines of nodes are located on spines.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00089">simple_spine_channel.cc:91</a></div></div>
+<div class="ttc" id="asimple__spine__channel_8cc_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="simple__spine__channel_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">Driver for channel flow problem with spine mesh.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00654">simple_spine_channel.cc:654</a></div></div>
+</div><!-- fragment --><p> When using spines, we must use elements augmented by the <code>SpineElement&lt;ELEMENT&gt;</code> class. This class, adds the functionality to be updated using the method of spines (<a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">i.e</a> storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using <code>SpineElement&lt;TayloorHoodElement&lt;2&gt;&gt;</code>.</p>
+<p>We now build and solve the problem with Spine-Taylor-Hood elements, then repeat for Spine-Crouzeix-Raviart elements.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Solve problem with Taylor Hood elements</span></div>
+<div class="line"> <span class="comment">//---------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Build problem</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">ChannelSpineFlowProblem&lt;SpineElement&lt;QTaylorHoodElement&lt;2&gt;</a> &gt; &gt;</div>
+<div class="line">   <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem with automatic adaptation</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Output solution</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>.doc_solution(<a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>);</div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>.number()++;</div>
+<div class="line"> </div>
+<div class="line"> } <span class="comment">// end of Taylor Hood elements</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve problem with Crouzeix Raviart elements</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Build problem</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">ChannelSpineFlowProblem&lt;SpineElement&lt;QCrouzeixRaviartElement&lt;2&gt;</a> &gt; &gt;</div>
+<div class="line">   <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem with automatic adaptation</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>.newton_solve();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//Output solution</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">problem</a>.doc_solution(<a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>);</div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>.number()++;</div>
+<div class="line">  </div>
+<div class="line"> } <span class="comment">// end of Crouzeix Raviart elements</span></div>
+<div class="line">      </div>
+<div class="line"> </div>
+<div class="line">     </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class for this example is very similar to our previous <a href="../../driven_cavity/html/index.html#problem">steady Navier-Stokes examples </a>. We store the height of the channel as private data, this is because we need it to set the inflow boundary condition.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_problem_class============================================</span></div>
+<div class="line"><span class="comment">/// Channel flow through a non-uniform channel whose geometry is defined </span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// by a spine mesh.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classChannelSpineFlowProblem.html">ChannelSpineFlowProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classChannelSpineFlowProblem.html#a23f1b987e3395b1d101eaf3f3b5c94b2">ChannelSpineFlowProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Destructor: (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classChannelSpineFlowProblem.html#abdf2cc520915167d8718499459df348b">~ChannelSpineFlowProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve. </span></div>
+<div class="line"><span class="comment"> /// Set velocity boundary conditions just to be on the safe side...</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classChannelSpineFlowProblem.html#aaf6dd8a8a472ccd938df579aba61ec97">actions_before_newton_solve</a>()</div>
+<div class="line">  { </div>
+<div class="line">   <span class="comment">// Update the mesh</span></div>
+<div class="line">   <a class="code hl_function" href="classChannelSpineFlowProblem.html#a6f3a60eb5d2f2a0eccb9b40848d4387d">mesh_pt</a>()-&gt;node_update();</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// end_of_actions_before_newton_solve</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classChannelSpineFlowProblem.html#a419a80ef3d19438f193bd7843f72446a">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classChannelSpineFlowProblem.html#a101bdeee56502231945cbac272ca21f6">doc_solution</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">DocInfo</a>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">doc_info</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Width of channel</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classChannelSpineFlowProblem.html#a6ac51c3c9d400869e694fe00452e293f">Ly</a>;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html"><div class="ttname"><a href="classChannelSpineFlowProblem.html">ChannelSpineFlowProblem</a></div><div class="ttdoc">Channel flow through a non-uniform channel whose geometry is defined by a spine mesh.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00458">simple_spine_channel.cc:459</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_a101bdeee56502231945cbac272ca21f6"><div class="ttname"><a href="classChannelSpineFlowProblem.html#a101bdeee56502231945cbac272ca21f6">ChannelSpineFlowProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00631">simple_spine_channel.cc:631</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_a23f1b987e3395b1d101eaf3f3b5c94b2"><div class="ttname"><a href="classChannelSpineFlowProblem.html#a23f1b987e3395b1d101eaf3f3b5c94b2">ChannelSpineFlowProblem::ChannelSpineFlowProblem</a></div><div class="ttdeci">ChannelSpineFlowProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00505">simple_spine_channel.cc:505</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_a419a80ef3d19438f193bd7843f72446a"><div class="ttname"><a href="classChannelSpineFlowProblem.html#a419a80ef3d19438f193bd7843f72446a">ChannelSpineFlowProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00479">simple_spine_channel.cc:479</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_a6ac51c3c9d400869e694fe00452e293f"><div class="ttname"><a href="classChannelSpineFlowProblem.html#a6ac51c3c9d400869e694fe00452e293f">ChannelSpineFlowProblem::Ly</a></div><div class="ttdeci">double Ly</div><div class="ttdoc">Width of channel.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00494">simple_spine_channel.cc:494</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_a6f3a60eb5d2f2a0eccb9b40848d4387d"><div class="ttname"><a href="classChannelSpineFlowProblem.html#a6f3a60eb5d2f2a0eccb9b40848d4387d">ChannelSpineFlowProblem::mesh_pt</a></div><div class="ttdeci">SimpleSpineMesh&lt; ELEMENT &gt; * mesh_pt()</div><div class="ttdoc">Overload access to mesh.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00485">simple_spine_channel.cc:485</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_aaf6dd8a8a472ccd938df579aba61ec97"><div class="ttname"><a href="classChannelSpineFlowProblem.html#aaf6dd8a8a472ccd938df579aba61ec97">ChannelSpineFlowProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve. Update the nodal positions.</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00471">simple_spine_channel.cc:471</a></div></div>
+<div class="ttc" id="aclassChannelSpineFlowProblem_html_abdf2cc520915167d8718499459df348b"><div class="ttname"><a href="classChannelSpineFlowProblem.html#abdf2cc520915167d8718499459df348b">ChannelSpineFlowProblem::~ChannelSpineFlowProblem</a></div><div class="ttdeci">~ChannelSpineFlowProblem()</div><div class="ttdoc">Destructor: (empty)</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00467">simple_spine_channel.cc:467</a></div></div>
+</div><!-- fragment --><p> Note that the absence of boundary conditions on the right boundary (1), causes a zero traction condition to be applied there. This implies that we should not fix a pressure degree of freedom.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>We begin by setting all the mesh parameters, and building it.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_constructor==================================================</span></div>
+<div class="line"><span class="comment">/// Constructor for ChannelSpineFlow problem </span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classChannelSpineFlowProblem.html#a23f1b987e3395b1d101eaf3f3b5c94b2">ChannelSpineFlowProblem&lt;ELEMENT&gt;::ChannelSpineFlowProblem</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in x-direction in left region </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx0</a>=3;</div>
+<div class="line"> <span class="comment">// # of elements in x-direction in centre region</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx1</a>=12;</div>
+<div class="line"> <span class="comment">// # of elements in x-direction in right region</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Nx2</a>=8;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of elements in y-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Ny</a>=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in x-direction in left region</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>=0.5;</div>
+<div class="line"> <span class="comment">// Domain length in x-direction in centre region</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx1</a>=0.7;</div>
+<div class="line"> <span class="comment">// Domain length in x-direction in right region</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Lx2</a>=1.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Domain length in y-direction</span></div>
+<div class="line"> Ly=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build geometric object that represents the sinusoidal bump on</span></div>
+<div class="line"> <span class="comment">// the upper wall:</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// 40% indendentation</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">amplitude_upper</a> = -0.4*Ly;</div>
+<div class="line"> <span class="comment">// Minimum and maximum coordinates of bump</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">zeta_min</a>=<a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">zeta_max</a>=<a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>+<a class="code hl_class" href="classSimpleSpineMesh.html">Lx1</a>;</div>
+<div class="line"> GeomObject* <a class="code hl_class" href="classSimpleSpineMesh.html">UpperWall</a> = </div>
+<div class="line">  <span class="keyword">new</span> <a class="code hl_class" href="classSimpleSpineMesh.html">SinusoidalWall</a>(Ly,<a class="code hl_class" href="classSimpleSpineMesh.html">amplitude_upper</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">zeta_min</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">zeta_max</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh -- pass pointer to geometric object</span></div>
+<div class="line"> <span class="comment">// that represents the sinusoidal bump on the upper wall</span></div>
+<div class="line"> Problem::mesh_pt() = <span class="keyword">new</span> <a class="code hl_class" href="classSimpleSpineMesh.html">ChannelSpineMesh&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">Nx0</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">Nx1</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">Nx2</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">Ny</a>,</div>
+<div class="line">                                                    <a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">Lx1</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">Lx2</a>,Ly,</div>
+<div class="line">                                                    <a class="code hl_class" href="classSimpleSpineMesh.html">UpperWall</a>);</div>
+</div><!-- fragment --><p> We then pin the velocities on the left, top and bottom boundaries (3,2 and 0).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here: All boundaries are Dirichlet boundaries, except on boundary 1</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">num_bound</a> = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">num_bound</a>;<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>= mesh_pt()-&gt;nboundary_node(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">if</span> (<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>!=1)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Loop over values (u and v velocities)</span></div>
+<div class="line">       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">i</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>&lt;2;<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>++)</div>
+<div class="line">        {</div>
+<div class="line">         mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;pin(<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>); </div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">     <span class="keywordflow">else</span></div>
+<div class="line">      {</div>
+<div class="line">       <span class="comment">// Parallel outflow ==&gt; no-slip</span></div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;pin(1); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p> Finally, we pass a pointer to the Reynolds number to each element and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// No slip on stationary upper and lower walls (boundaries 0 and 2) </span></div>
+<div class="line"> <span class="comment">// and parallel outflow (boundary 1) </span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">num_bound</a>-1;<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>= mesh_pt()-&gt;nboundary_node(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="keywordflow">if</span> (<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>!=1)</div>
+<div class="line">      {</div>
+<div class="line">       <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">i</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>&lt;2;<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>++)</div>
+<div class="line">        {</div>
+<div class="line">         mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;set_value(<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>,0.0);</div>
+<div class="line">        }</div>
+<div class="line">      }</div>
+<div class="line">     <span class="keywordflow">else</span></div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;set_value(1,0.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup parabolic inflow along boundary 3:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>=3; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>= mesh_pt()-&gt;nboundary_node(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">num_nod</a>;<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">y</a>=mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;x(1);</div>
+<div class="line">   <span class="comment">// Parallel, parabolic inflow</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;set_value(0,<a class="code hl_class" href="classSimpleSpineMesh.html">y</a>*(Ly-<a class="code hl_class" href="classSimpleSpineMesh.html">y</a>));</div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">ibound</a>,<a class="code hl_class" href="classSimpleSpineMesh.html">inod</a>)-&gt;set_value(1,0.0);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_element</a> = mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor: Pass </span></div>
+<div class="line"> <span class="comment">// pointer to Reynolds number</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>=0;<a class="code hl_class" href="classSimpleSpineMesh.html">e</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">n_element</a>;<a class="code hl_class" href="classSimpleSpineMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   <a class="code hl_class" href="classSimpleSpineMesh.html">ELEMENT</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classSimpleSpineMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">e</a>));</div>
+<div class="line">   <span class="comment">//Set the Reynolds number</span></div>
+<div class="line">   <a class="code hl_class" href="classSimpleSpineMesh.html">el_pt</a>-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  } </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> <a class="code hl_class" href="classSimpleSpineMesh.html">cout</a> &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classSimpleSpineMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="part2"></a>
+Part 2: How to create a SpineMesh</h1>
+<p>Spine-based meshes have their origin in free-surface fluid-mechanics problems where they were first (?) introduced by Kistler &amp; Scriven in their paper</p>
+<center> Kistler, <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">S.F</a>. &amp; Scriven, L.E. <code>Coating Flows.'' In: </code>Computational Analysis of Polymer Processing,'' Pearson, J.R.A. &amp; Richardson, <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">S.M</a>. (eds.); Applied Science Publishers, London (1983). </center><p><code>oomph-lib's</code> SpineMeshes provide a generalisation of their node-update techniques.</p>
+<p>In the past when solving a problem in a domain with curved boundaries, we have made a specific Mesh for the domain, and use a geometric object to define its curved wall(s).</p>
+<div class="image">
+<img src="mesh.gif" alt=""/>
+<div class="caption">
+Diagram of a ChannelSpineMesh, going through the process of updating its central nodes, where the heights have been changed. </div></div>
+ <p>To generalise this approach <code>oomph-lib</code> makes use of spines.</p><ul>
+<li>A <code>Spine</code> is most easily visualised a line of a certain height, in one coordinate direction.</li>
+<li>A <code>SpineNode</code> is a <code>Node</code> located at a certain fraction along a <code>Spine</code>.</li>
+<li>A <code>SpineMesh</code> is a <code>Mesh</code> which will update using spines.</li>
+<li>A <code>SpineElement&lt;ELEMENT&gt;</code> takes a "normal" element and adds the functionality to work with spines.</li>
+</ul>
+<p>The creation of a <code>SpineMesh</code> is discussed in detail below <a class="el" href="index.html#spine_mesh">Making a SpineMesh</a>. While the picture above demonstrates the ability of SpineNode to individually update using the function <code>spine_node_update(spine_node_pt)</code>.</p>
+<h2><a class="anchor" id="spine_mesh"></a>
+Making a SpineMesh</h2>
+<p>In this example we use a <code>SpineMesh</code> to model the domain. This mesh constitutes three regions: left (0), centre (1) and right (2), the left and right regions have a constant height, while in the centre region the height varies. These heights are defined by two geometric objects, a <a href="../../../the_data_structure/html/classoomph_1_1StraightLine.html">straight line </a> and a deflected line respectively. We will discuss the necessary steps taken to create this mesh (the complete documentation for this specific mesh can be found <a href="../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html">here </a>).</p>
+<p>To begin, we create a new class templated by a element and inheriting from <code>RectangularQuadMesh&lt;ELEMENT&gt;</code> and <code>SpineMesh</code>. The latter adds the functionality needed for using Spines.</p>
+ <div class="fragment"></div><!-- fragment --><p> All SpineMeshs must include a function <code>spine_node_update(SpineNode*
+spine_node_pt)</code>, this will describe the operations performed when updating every SpineNode in the mesh. First we find the SpineNodes fraction along the spine.</p>
+<div class="fragment"></div><!-- fragment --><p> We then get the local coordinate on the geometric object that defines the upper wall.</p>
+<div class="fragment"></div><!-- fragment --><p> Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.</p>
+<div class="fragment"></div><!-- fragment --><p> We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.</p>
+<div class="fragment"></div><!-- fragment --><p> All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, copies these values to their storage in the mesh.</p>
+ <div class="fragment"><div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line">  <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">ChannelSpineMesh&lt;ELEMENT&gt;::ChannelSpineMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">nx0</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">nx1</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">nx2</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">ny</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">lx0</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">lx1</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">lx2</a>,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; <a class="code hl_class" href="classSimpleSpineMesh.html">h</a>,</div>
+<div class="line">                                              GeomObject* <a class="code hl_class" href="classSimpleSpineMesh.html">wall_pt</a>,</div>
+<div class="line">                                              <a class="code hl_class" href="classSimpleSpineMesh.html">TimeStepper</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">time_stepper_pt</a>)</div>
+<div class="line">    : <a class="code hl_class" href="classSimpleSpineMesh.html">RectangularQuadMesh</a>&lt;<a class="code hl_class" href="classSimpleSpineMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classSimpleSpineMesh.html">nx0</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">nx1</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">nx2</a>,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">ny</a>,</div>
+<div class="line">                                   0.0,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">lx0</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">lx1</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">lx2</a>,</div>
+<div class="line">                                   0.0,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">h</a>,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">false</a>,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">false</a>,</div>
+<div class="line">                                   <a class="code hl_class" href="classSimpleSpineMesh.html">time_stepper_pt</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nx0</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">nx0</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nx1</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">nx1</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nx2</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">nx2</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">lx0</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Lx1</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">lx1</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Lx2</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">lx2</a>),</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Wall_pt</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">wall_pt</a>)</div>
+<div class="ttc" id="aclassSimpleSpineMesh_html_a69815e3a950e6e5ede2f85004796dadb"><div class="ttname"><a href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">SimpleSpineMesh::SimpleSpineMesh</a></div><div class="ttdeci">SimpleSpineMesh(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;h, GeomObject *substrate_pt, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass number of elements in x-direction, number of elements in y-direction,...</div><div class="ttdef"><b>Definition</b> <a href="simple__spine__channel_8cc_source.html#l00206">simple_spine_channel.cc:206</a></div></div>
+</div><!-- fragment --><p> We then assign all the parameters for the <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, create the geometric object for the uniform wall and call the function <code>build_channel_spine_mesh(...)</code> </p>
+<div class="fragment"><div class="line">  {</div>
+<div class="line">    <span class="comment">// Mesh can only be built with 2D Qelements.</span></div>
+<div class="line">    <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">MeshChecker::assert_geometric_element&lt;QElementGeometricBase, ELEMENT&gt;</a>(2);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Mesh can only be built with spine elements</span></div>
+<div class="line">    <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">MeshChecker::assert_geometric_element&lt;SpineFiniteElement, ELEMENT&gt;</a>(2);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// We&#39;ve called the &quot;generic&quot; constructor for the RectangularQuadMesh</span></div>
+<div class="line">    <span class="comment">// which doesn&#39;t do much...</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Build the straight line object</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Straight_wall_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classSimpleSpineMesh.html">StraightLine</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">h</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Now build the mesh:</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">build_channel_spine_mesh</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">time_stepper_pt</a>);</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> When we call the function <code>build_channel_spine_mesh(...)</code>, it calls its counterpart in the <code>RectangularQuadMesh&lt;ELEMENT&gt;</code>, then store the numbers of elements in each direction in each region (and all at once).</p>
+ <div class="fragment"><div class="line">  <span class="keywordtype">void</span> <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">ChannelSpineMesh&lt;ELEMENT&gt;::build_channel_spine_mesh</a>(</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">TimeStepper</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">time_stepper_pt</a>)</div>
+<div class="line">  {</div>
+<div class="line">    <span class="comment">// Build the underlying quad mesh:</span></div>
+<div class="line">    <a class="code hl_function" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb">RectangularQuadMesh&lt;ELEMENT&gt;::build_mesh</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">time_stepper_pt</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Read out the number of elements in the x-direction and y-direction</span></div>
+<div class="line">    <span class="comment">// and in each of the left, centre and right regions</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a> = this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">Nx</a>;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a> = this-&gt;Ny;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> = this-&gt;Nx0;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a> = this-&gt;Nx1;</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_x2</a> = this-&gt;Nx2;</div>
+</div><!-- fragment --><p> We then allocate memory for the elements and spines in each region in each region.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Set up the pointers to elements in the left region</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">nleft</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>;</div>
+<div class="line">    ;</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Left_element_pt</a>.reserve(<a class="code hl_class" href="classSimpleSpineMesh.html">nleft</a>);</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">ncentre</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>;</div>
+<div class="line">    ;</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Centre_element_pt</a>.reserve(<a class="code hl_class" href="classSimpleSpineMesh.html">ncentre</a>);</div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">nright</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">n_x2</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>;</div>
+<div class="line">    ;</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Right_element_pt</a>.reserve(<a class="code hl_class" href="classSimpleSpineMesh.html">nright</a>);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">irow</a> = 0; <a class="code hl_class" href="classSimpleSpineMesh.html">irow</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">irow</a>++)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> = 0; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>++)</div>
+<div class="line">      {</div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">Left_element_pt</a>.push_back(this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">finite_element_pt</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">irow</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>));</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> = 0; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>++)</div>
+<div class="line">      {</div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">Centre_element_pt</a>.push_back(</div>
+<div class="line">          this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">finite_element_pt</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">irow</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a> + (<a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>)));</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> = 0; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_x2</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>++)</div>
+<div class="line">      {</div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">Right_element_pt</a>.push_back(</div>
+<div class="line">          this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">finite_element_pt</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">irow</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a> + (<a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">e</a>)));</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef PARANOID</span></div>
+<div class="line">    <span class="comment">// Check that we have the correct number of elements</span></div>
+<div class="line">    <span class="keywordflow">if</span> (<a class="code hl_class" href="classSimpleSpineMesh.html">nelement</a>() != <a class="code hl_class" href="classSimpleSpineMesh.html">nleft</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">ncentre</a> + <a class="code hl_class" href="classSimpleSpineMesh.html">nright</a>)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keywordflow">throw</span> <a class="code hl_class" href="classSimpleSpineMesh.html">OomphLibError</a>(<span class="stringliteral">&quot;Incorrect number of element pointers!&quot;</span>,</div>
+<div class="line">                          <a class="code hl_class" href="classSimpleSpineMesh.html">OOMPH_CURRENT_FUNCTION</a>,</div>
+<div class="line">                          <a class="code hl_class" href="classSimpleSpineMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line">    }</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Allocate memory for the spines and fractions along spines</span></div>
+<div class="line">    <span class="comment">//---------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Read out number of linear points in the element</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classSimpleSpineMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classSimpleSpineMesh.html">finite_element_pt</a>(0))-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">nnode_1d</a>();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">nspine</a>;</div>
+<div class="line">    <span class="comment">// Allocate store for the spines:</span></div>
+<div class="line">    <span class="keywordflow">if</span> (this-&gt;<a class="code hl_class" href="classSimpleSpineMesh.html">Xperiodic</a>)</div>
+<div class="line">    {</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">nspine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a>;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Spine_pt</a>.reserve(<a class="code hl_class" href="classSimpleSpineMesh.html">nspine</a>);</div>
+<div class="line">      <span class="comment">// Number of spines in each region</span></div>
+<div class="line">      <span class="comment">// NOTE that boundary spines are in both regions</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nleft_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> + 1;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Ncentre_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a> + 1;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nright_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x2</a>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">nspine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a> + 1;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Spine_pt</a>.reserve(<a class="code hl_class" href="classSimpleSpineMesh.html">nspine</a>);</div>
+<div class="line">      <span class="comment">// Number of spines in each region</span></div>
+<div class="line">      <span class="comment">// NOTE that boundary spines are in both regions</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nleft_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a> + 1;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Ncentre_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x1</a> + 1;</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Nright_spine</a> = (<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1) * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x2</a> + 1;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// end Allocating memory</span></div>
+</div><!-- fragment --><p> Now we allocate storage for the parameters used to build the spines.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// set up the vectors of geometric data &amp; objects for building spines</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classSimpleSpineMesh.html">r_wall</a>(2), <a class="code hl_class" href="classSimpleSpineMesh.html">zeta</a>(1), <a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>(1);</div>
+<div class="line">    GeomObject* <a class="code hl_class" href="classSimpleSpineMesh.html">geometric_object_pt</a> = 0;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// LEFT REGION</span></div>
+<div class="line">    <span class="comment">// ===========</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// SPINES IN LEFT REGION</span></div>
+<div class="line">    <span class="comment">// ---------------------</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set up zeta increments</span></div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">zeta_lo</a> = 0.0;</div>
+<div class="line">    <span class="keywordtype">double</span> <a class="code hl_class" href="classSimpleSpineMesh.html">dzeta</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">Lx0</a> / <a class="code hl_class" href="classSimpleSpineMesh.html">n_x0</a>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Initialise number of elements in previous regions:</span></div>
+<div class="line">    <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">n_prev_elements</a> = 0;</div>
+</div><!-- fragment --><p> Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the <code>Spine_pt</code>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// FIRST SPINE</span></div>
+<div class="line">    <span class="comment">//-----------</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Element 0</span></div>
+<div class="line">    <span class="comment">// Node 0</span></div>
+<div class="line">    <span class="comment">// Assign the new spine with unit length</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Spine</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">new_spine_pt</a> = <span class="keyword">new</span> <a class="code hl_class" href="classSimpleSpineMesh.html">Spine</a>(1.0);</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">new_spine_pt</a>-&gt;spine_height_pt()-&gt;pin(0);</div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">Spine_pt</a>.push_back(<a class="code hl_class" href="classSimpleSpineMesh.html">new_spine_pt</a>);</div>
+</div><!-- fragment --><p> We then set the <code>spine_pt()</code> of the first node to the Spine we just created, assign the nodes <code>fraction()</code> to zero and define the node as part of this mesh.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Get pointer to node</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">SpineNode</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">element_node_pt</a>(0, 0);</div>
+<div class="line">    <span class="comment">// Set the pointer to the spine</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_pt() = <a class="code hl_class" href="classSimpleSpineMesh.html">new_spine_pt</a>;</div>
+<div class="line">    <span class="comment">// Set the fraction</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;fraction() = 0.0;</div>
+<div class="line">    <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_mesh_pt() = <span class="keyword">this</span>;</div>
+</div><!-- fragment --><p> We then mark the node as part of the left (0) region.</p>
+<div class="fragment"><div class="line">    <span class="comment">// Set update fct id</span></div>
+<div class="line">    <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;node_update_fct_id() = 0;</div>
+</div><!-- fragment --><p> When we built the Spine, we set its height to <a class="el" href="classSimpleSpineMesh.html#a69815e3a950e6e5ede2f85004796dadb" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction,...">1.0</a>. We now need to assign its height from the <code>Straight_wall_pt</code> and assign all the information needed to update the mesh to the Spine.</p>
+<p>First we set the value of <img class="formulaInl" alt="$\zeta$" src="form_28.png" width="6" height="13"/> and get the geometric object and the local coordinate.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Provide spine with additional storage for wall coordinate</span></div>
+<div class="line">    <span class="comment">// and wall geom object:</span></div>
+<div class="line"> </div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Get the Lagrangian coordinate in the Lower Wall</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">zeta</a>[0] = 0.0;</div>
+<div class="line">      <span class="comment">// Get the geometric object and local coordinate</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Straight_wall_pt</a>-&gt;locate_zeta(<a class="code hl_class" href="classSimpleSpineMesh.html">zeta</a>, <a class="code hl_class" href="classSimpleSpineMesh.html">geometric_object_pt</a>, <a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>);</div>
+</div><!-- fragment --><p> Then we store these geometric parameters in the Spine.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// The local coordinate is a geometric parameter</span></div>
+<div class="line">      <span class="comment">// This needs to be set (rather than added) because the</span></div>
+<div class="line">      <span class="comment">// same spine may be visited more than once</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Vector&lt;double&gt;</a> <a class="code hl_class" href="classSimpleSpineMesh.html">parameters</a>(1, <a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>[0]);</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_pt()-&gt;set_geom_parameter(<a class="code hl_class" href="classSimpleSpineMesh.html">parameters</a>);</div>
+</div><!-- fragment --><p> We then set the height of the Spine according to the geometric object.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Get position of wall</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Straight_wall_pt</a>-&gt;position(<a class="code hl_class" href="classSimpleSpineMesh.html">s_wall</a>, <a class="code hl_class" href="classSimpleSpineMesh.html">r_wall</a>);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Adjust spine height</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_pt()-&gt;height() = <a class="code hl_class" href="classSimpleSpineMesh.html">r_wall</a>[1];</div>
+</div><!-- fragment --><p> Finally we set the Spines' pointer to the geometric object.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// The sub geom object is one (and only) geom object</span></div>
+<div class="line">      <span class="comment">// for spine:</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">Vector&lt;GeomObject*&gt;</a> <a class="code hl_class" href="classSimpleSpineMesh.html">geom_object_pt</a>(1);</div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">geom_object_pt</a>[0] = <a class="code hl_class" href="classSimpleSpineMesh.html">geometric_object_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Pass geom object(s) to spine</span></div>
+<div class="line">      <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_pt()-&gt;set_geom_object_pt(<a class="code hl_class" href="classSimpleSpineMesh.html">geom_object_pt</a>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="comment">// Loop vertically along the spine</span></div>
+<div class="line">    <span class="comment">// Loop over the elements</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code hl_class" href="classSimpleSpineMesh.html">i</a> = 0; <a class="code hl_class" href="classSimpleSpineMesh.html">i</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">i</a>++)</div>
+<div class="line">    {</div>
+<div class="line">      <span class="comment">// Loop over the vertical nodes, apart from the first</span></div>
+<div class="line">      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classSimpleSpineMesh.html">l1</a> = 1; <a class="code hl_class" href="classSimpleSpineMesh.html">l1</a> &lt; <a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a>; <a class="code hl_class" href="classSimpleSpineMesh.html">l1</a>++)</div>
+<div class="line">      {</div>
+<div class="line">        <span class="comment">// Get pointer to node</span></div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">SpineNode</a>* <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a> = <a class="code hl_class" href="classSimpleSpineMesh.html">element_node_pt</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">i</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_x</a>, <a class="code hl_class" href="classSimpleSpineMesh.html">l1</a> * <a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a>);</div>
+<div class="line">        <span class="comment">// Set the pointer to the spine</span></div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_pt() = <a class="code hl_class" href="classSimpleSpineMesh.html">new_spine_pt</a>;</div>
+<div class="line">        <span class="comment">// Set the fraction</span></div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;fraction() =</div>
+<div class="line">          (<a class="code hl_class" href="classSimpleSpineMesh.html">double</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">i</a>) + <a class="code hl_class" href="classSimpleSpineMesh.html">double</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">l1</a>) / <a class="code hl_class" href="classSimpleSpineMesh.html">double</a>(<a class="code hl_class" href="classSimpleSpineMesh.html">n_p</a> - 1)) / <span class="keywordtype">double</span>(<a class="code hl_class" href="classSimpleSpineMesh.html">n_y</a>);</div>
+<div class="line">        <span class="comment">// Pointer to the mesh that implements the update fct</span></div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;spine_mesh_pt() = <span class="keyword">this</span>;</div>
+<div class="line">        <span class="comment">// Set update fct id</span></div>
+<div class="line">        <a class="code hl_class" href="classSimpleSpineMesh.html">nod_pt</a>-&gt;node_update_fct_id() = 0;</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">// end loop over elements</span></div>
+</div><!-- fragment --><p> We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.</p>
+<p>We then repeat this process for the centre and right regions, using the correct geometric objects to define the upper wall, which can be examined in detail <a href="../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html">here </a>.</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Investigate what happens when a pressure degree of freedom is fixed.</li>
+<li>Try creating a new geometric object, which creates a triangular indentation in the central region of the upper wall as shown.</li>
+</ol>
+<div class="image">
+<img src="Exercise.gif" alt=""/>
+<div class="caption">
+Plot of the solution to the problem specified in the above exercise computed with 3x3 Taylor-Hood elements and Re=100. </div></div>
+ <hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:37
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

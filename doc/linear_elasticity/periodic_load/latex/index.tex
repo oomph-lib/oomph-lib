@@ -1,0 +1,530 @@
+\chapter{Example problem\+: The deformation of an elastic strip by a periodic traction}
+\hypertarget{index}{}\label{index}\index{Example problem: The deformation of an elastic strip by a periodic traction@{Example problem: The deformation of an elastic strip by a periodic traction}}
+This is our first linear elasticity example problem. We discuss the non-\/dimensionalisation of the governing equations and their implementation in {\ttfamily oomph-\/lib}, and then demonstrate the solution of a 2D problem\+: the deformation of an elastic strip by a periodic traction.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} This tutorial and the associated driver code was developed jointly with David Rutter. \end{center}    \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ ~\newline
+\hypertarget{index_equation}{}\doxysection{\texorpdfstring{The governing equations}{The governing equations}}\label{index_equation}
+The figure below shows a sketch of a general elasticity problem. A linearly elastic solid body occupies the domain $ V $ and is loaded by a body force $ {\bf F}^* $ and by a surface traction $ {\bf t}^* $ which is applied along part of its boundary, $ A_{\rm tract} $. The displacement is prescribed along the remainder of the boundary, $ A_{\rm displ} $, where $ \partial V = A_{\rm tract} \cup  A_{\rm displ} $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{Solid_boundary_conds}
+\doxyfigcaption{Sketch of a general elasticity problem\+: A linearly elastic body is loaded by a body force and is exposed to a prescribed traction along part of its boundary while the displacement is prescribed along the remainder of the boundary. }
+\end{DoxyImage}
+
+
+We adopt an Eulerian approach and describe the deformation in terms of the displacement field $ {\bf u}^*\left( x_i^*,t^* \right) $ where $ x_i^* $ and $ t^* $ are the spatial coordinates and time, respectively. Throughout this document we will use index notation and the summation convention, and use asterisks to distinguish dimensional quantities from their non-\/dimensional counterparts. ~\newline
+ Denoting the density of the body by $ \rho $, the deformation is governed by the Cauchy equations, \begin{center}  \[
+\frac{\partial \tau_{ij}^*}{\partial x_j^*} + \rho F_i^*
+=
+\rho \frac{\partial^2 u_i^*}{\partial t^{2*}},
+\] \end{center}  where $ \tau_{ij}^* $ is the Cauchy stress tensor which, for a linearly elastic solid, is given by \begin{center}  \[
+\tau_{ij}^* = E_{ijkl}^* \ e_{kl},
+\] \end{center}  where $ e_{kl} $ is the strain tensor, \begin{center}  \[
+e_{ij} = \frac{1}{2} 
+\left( \frac{\partial u_i^*}{\partial x_j^*}+
+       \frac{\partial u_j^*}{\partial x_i^*}\right).
+\] \end{center}  $ E_{ijkl} $ is the 4th order elasticity tensor, which for a homogeneous and isotropic solid is \begin{center}  \[
+E_{ijkl}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \delta_{ij}
+ \delta_{kl} + \delta_{ik} \delta_{jl} \right),
+\] \end{center}  where $ E $ is Young\textquotesingle{}s modulus, $ \nu $ is the Poisson ratio and $ \delta_{ij} $ is the Kronecker delta. Thus the Cauchy stress is given in terms of the displacement derivatives by \begin{center}  \[
+\tau_{ij}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k^*}{\partial x_k^*} + 
+\frac{1}{2}\left(\frac{\partial u_i^*}{\partial x_j^*}+
+\frac{\partial u_j^*}{\partial x_i^*} \right) \right).
+\] \end{center} 
+
+We non-\/dimensionalise the equations, using a problem specific reference length, $ {\cal L} $, and a timescale $ {\cal T} $, and use Young\textquotesingle{}s modulus to non-\/dimensionalise the body force and the stress, \begin{center}  \[
+\tau_{ij}^* = E \, \tau_{ij}, \qquad
+x_i^* = {\cal L}\, x_i, \qquad
+u_i^* = {\cal L}\, u_i,
+\]  \[
+t^* = {\cal T}\, t, \qquad
+F_i^* = \frac{E}{\rho \cal L} \, F_i. \qquad
+\] \end{center} 
+
+The non-\/dimensional form of the Cauchy equations is then given by \begin{center}  \[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i
+=
+\Lambda^2  \frac{\partial^2 u_i}{\partial t^2},
+\ \ \ \ \ \ \ \ \ \ (1)
+\] \end{center}  where \begin{center}  \[
+\tau_{ij} = \frac{1}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k}{\partial x_k} + 
+\frac{1}{2} \left(\frac{\partial u_i}{\partial x_j}+
+\frac{\partial u_j}{\partial x_i} \right) \right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\] \end{center}  The parameter \begin{center}  \[
+\Lambda = \frac{{\cal L} \sqrt{\frac{\rho}{E}} }{\cal T},
+\] \end{center}  is the ratio of the elastic body\textquotesingle{}s intrinsic timescale, $ {\cal L} \sqrt{\frac{\rho}{E}} $, to the problem-\/specific timescale, $ {\cal T} $, that we used to non-\/dimensionalise time.
+
+The displacement constraints provide a Dirichlet condition for the displacements,  \[
+u_i = u_i^{[\rm prescribed]} \ \ \ \ \ \ \mbox{on $A_{\mathrm{displ}}$},
+
+\] while the traction boundary conditions require that  \[
+t_i = \tau_{ij} n_j \ \ \ \ \ \ \mbox{on $A_{\mathrm{tract}},$}
+\] where the $ n_j $ are the components of the outer unit normal to the boundary.
+
+In this tutorial we only consider steady problems for which the equations reduce to \begin{center}  \[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i = 0.
+\] \end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_element_types}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_element_types}
+\DoxyHorRuler{0}
+\hypertarget{index_el}{}\doxysubsection{\texorpdfstring{The elements}{The elements}}\label{index_el}
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the {\ttfamily DIM}-\/dimensional Cauchy equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Linear\+Elasticity\+Equations$<$\+DIM$>$} equations class. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral linear elasticity element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center}  \[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2\quad [\mbox{and }3],
+\] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+
+The cartesian displacement components $ u_1, $ $ u_2, $ ~\newline
+ \mbox{[}and $ u_3 $\mbox{]} are stored as nodal values, and the shape functions are used to interpolate the displacements as \begin{center}  \[
+u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,2\quad [\mbox{and }3],
+\] \end{center}  where $  U^{(E)}_{ij} $ is the $ i $-\/th displacement component at the $ j $-\/th {\ttfamily Node} in the element. Nodal values of the displacement components are accessible via the access function
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{LinearElasticityEquations<DIM>::u(i,j)}
+
+\end{DoxyCode}
+
+
+which returns the $ i $-\/th displacement component stored at the element\textquotesingle{}s $ j $-\/th {\ttfamily Node}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+To illustrate the solution of the steady equations of linear elasticity, we consider the 2D problem shown in the sketch below.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{The problem.}} \end{center}   
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{attempt3}
+\doxyfigcaption{Infinitely long strip loaded by a periodic traction. }
+\end{DoxyImage}
+ Solve  \[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (3)
+\] in the domain $ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} $, subject to the Dirichlet boundary conditions  \[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (4)
+\] on the bottom boundary, the Neumann (traction) boundary conditions  \[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (5)
+\] on the top boundary, and symmetry conditions at $ x_1 = 0 $ and $ x_1 = L_x $,  \[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\]   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+We note that for $ L_y \to \infty $ the problem converges to the analytical solution.  \[
+u_1^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\cos{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]  \[
+u_2^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\sin{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows a vector plot of the displacement field near the upper domain boundary for $ L_x = 1 $ and $ L_y=2 $. ~\newline
+ Note that we only discretised the infinite strip over one period of the applied, spatially-\/periodic surface traction, and imposed symmetry conditions on the left and right mesh boundaries.
+
+The plot shows that the displacements decay rapidly with distance from the loaded surface -- as suggested by the analytical solution for the infinite depth case. This suggests that the computation could greatly benefit from the use of spatial adaptivity. This is indeed the case and is explored in \href{../../refineable_periodic_load/html/index.html}{\texttt{ another tutorial.}}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{displ}
+\doxyfigcaption{Plot of the displacement field. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As usual, we define all non-\/dimensional parameters in a namespace.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ global\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Amplitude\ of\ traction\ applied}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Specify\ problem\ to\ be\ solved\ (boundary\ conditons\ for\ finite\ or}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ infinite\ domain).}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Finite}}=\textcolor{keyword}{false};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Define\ Poisson\ coefficient\ Nu}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}\ =\ 0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ in\ x\ direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}}\ =\ 1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ domain\ in\ y\ direction}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Ly}}\ =\ 2.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ elasticity\ tensor}}
+\DoxyCodeLine{\textcolor{comment}{}\ IsotropicElasticityTensor\ \mbox{\hyperlink{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}{E}}(\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ exact\ solution\ for\ infinite\ depth\ case}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{exact\_solution}}(\textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}}*cos(2.0*MathematicalConstants::Pi*x[0]/\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}})*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ exp(2.0*MathematicalConstants::Pi*(x[1]-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Ly}}))/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (2.0/(1.0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})*MathematicalConstants::Pi);}
+\DoxyCodeLine{\ \ u[1]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}}*sin(2.0*MathematicalConstants::Pi*x[0]/\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}})*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ exp(2.0*MathematicalConstants::Pi*(x[1]-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Ly}}))/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (2.0/(1.0+\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})*MathematicalConstants::Pi);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ The\ traction\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}{periodic\_traction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&time,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&x,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\ \&n,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\ \&result)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ result[0]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}}*cos(2.0*MathematicalConstants::Pi*x[0]/\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}});}
+\DoxyCodeLine{\ \ result[1]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}}*sin(2.0*MathematicalConstants::Pi*x[0]/\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Lx}});}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+We start by setting the number of elements in each of the two coordinate directions before creating a {\ttfamily Doc\+Info} object to store the output directory.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ PeriodicLoad\ linearly\ elastic\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nx=5;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ y-\/direction\ (for\ (approximately)\ square\ elements)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ny=unsigned(\textcolor{keywordtype}{double}(nx)*\mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\_Parameters::Ly}}/\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Global\_Parameters::Lx}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ doc\ info}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+
+\end{DoxyCodeInclude}
+ We build the problem using two-\/dimensional {\ttfamily QLinear\+Elasticity\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the results.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classPeriodicLoadProblem}{PeriodicLoadProblem<QLinearElasticityElement<2,3>}}\ >\ }
+\DoxyCodeLine{\ \ problem(nx,ny,\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Global\_Parameters::Lx}},\ \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\_Parameters::Ly}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve}}
+\DoxyCodeLine{\ problem.newton\_solve();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ the\ solution}}
+\DoxyCodeLine{\ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily Problem} class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the "{}bulk"{} elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function {\ttfamily assign\+\_\+traction\+\_\+elements()}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Periodic\ loading\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classPeriodicLoadProblem}{PeriodicLoadProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ number\ of\ elements\ in\ x\ and\ y\ directions\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ lengths}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classPeriodicLoadProblem}{PeriodicLoadProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&ly);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ before\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_aad83601d810e4cc135f83c1308a0449b}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ after\ solve\ is\ empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_aad99d153549e1ec0b5504e486039ef5e}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_ad414cf9a0b4a61de439e459f10e762c7}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Allocate\ traction\ elements\ on\ the\ top\ surface}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_ad850863c61c0055e230e6319d67905e2}{assign\_traction\_elements}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classPeriodicLoadProblem_a120027bff23e2cd1f17f560c852533b6}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ Mesh*\ \mbox{\hyperlink{classPeriodicLoadProblem_a39b0b15487ae9aafc3d9e70b0e017325}{Surface\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+Since this is a steady problem, the constructor is quite simple. We begin by building the meshes and pin the displacements on the appropriate boundaries. We then assign the boundary values for the displacements along the bottom boundary. We either set the displacements to zero or assign their values from the exact solution for the infinite depth case.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ constructor:\ Pass\ number\ of\ elements\ in\ coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ directions\ and\ size\ of\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classPeriodicLoadProblem_a66bf36608f2068374c09c73d9256edda}{PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem}}}
+\DoxyCodeLine{(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&ny,}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&lx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ ly)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ with\ periodic\ boundary\ conditions\ in\ x\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ periodic\_in\_x=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic\_in\_x);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Create\ the\ surface\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\ Surface\_mesh\_pt=\textcolor{keyword}{new}\ Mesh;}
+\DoxyCodeLine{\ assign\_traction\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ \&\ set\ the\ ones\ that\ have\ Dirichlet\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ conditions\ here}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ ibound=0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_nod=Bulk\_mesh\_pt-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ Node*\ nod\_pt=Bulk\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pinned\ in\ x\ \&\ y\ at\ the\ bottom\ and\ set\ value}}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(0);}
+\DoxyCodeLine{\ \ \ nod\_pt-\/>pin(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Check\ which\ boundary\ conditions\ to\ set\ and\ set\ them}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Global\_Parameters::Finite}})}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ displacements\ to\ zero}}
+\DoxyCodeLine{\ \ \ \ \ \ nod\_pt-\/>set\_value(0,0);}
+\DoxyCodeLine{\ \ \ \ \ \ nod\_pt-\/>set\_value(1,0);}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Extract\ nodal\ coordinates\ from\ node:}}
+\DoxyCodeLine{\ \ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Compute\ the\ value\ of\ the\ exact\ solution\ at\ the\ nodal\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ Vector<double>\ u(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}}(x,u);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Assign\ these\ values\ to\ the\ nodal\ values\ at\ this\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ nod\_pt-\/>set\_value(0,u[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ nod\_pt-\/>set\_value(1,u[1]);}
+\DoxyCodeLine{\ \ \ \ \ \};}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_loop\_over\_boundary\_nodes}}
+
+\end{DoxyCodeInclude}
+ Next we pass a pointer to the elasticity tensor (stored in {\ttfamily Global\+\_\+\+Physical\+\_\+\+Variables\+::E}) to all elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ problem\ setup\ to\ make\ the\ elements\ fully\ functional}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_el\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_el;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ a\ bulk\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ elasticity\ tensor}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>elasticity\_tensor\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}{Global\_Parameters::E}};}
+\DoxyCodeLine{\ \ \}\textcolor{comment}{//\ end\ loop\ over\ elements}}
+
+\end{DoxyCodeInclude}
+ We loop over the traction elements and specify the applied traction.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ traction\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_traction\ =\ \ Surface\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_traction;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ a\ surface\ element}}
+\DoxyCodeLine{\ \ \ LinearElasticityTractionElement<ELEMENT>\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}LinearElasticityTractionElement<ELEMENT>*\ \textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Surface\_mesh\_pt-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ applied\ traction}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>traction\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}{Global\_Parameters::periodic\_traction}};}
+\DoxyCodeLine{\ \ \}\textcolor{comment}{//\ end\ loop\ over\ traction\ elements}}
+
+\end{DoxyCodeInclude}
+ The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ submeshes\ to\ the\ problem}}
+\DoxyCodeLine{\ add\_sub\_mesh(Bulk\_mesh\_pt);}
+\DoxyCodeLine{\ add\_sub\_mesh(Surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ build\ the\ global\ mesh}}
+\DoxyCodeLine{\ build\_global\_mesh();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Assign\ equation\ numbers}}
+\DoxyCodeLine{\ cout\ <<\ assign\_eqn\_numbers()\ <<\ \textcolor{stringliteral}{"{}\ equations\ assigned"{}}\ <<\ std::endl;\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_traction_elements}{}\doxysection{\texorpdfstring{The traction elements}{The traction elements}}\label{index_traction_elements}
+In anticipation of the extension of this code to its \href{../../refineable_periodic_load/html/index.html}{\texttt{ adaptive counterpart}}, we create the face elements that apply the traction to the upper boundary in a separate function.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_traction===============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Make\ traction\ elements\ along\ the\ top\ boundary\ of\ the\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_ad850863c61c0055e230e6319d67905e2}{PeriodicLoadProblem<ELEMENT>::assign\_traction\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ next\ to\ boundary\ 2\ (the\ top\ boundary)?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ bound=2;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_neigh\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(bound);\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ loop\ over\ bulk\ elements\ and\ create\ the\ face\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ n=0;n<n\_neigh;n++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ the\ face\ element}}
+\DoxyCodeLine{\ \ \ FiniteElement\ *traction\_element\_pt\ }
+\DoxyCodeLine{\ \ \ \ =\ \textcolor{keyword}{new}\ LinearElasticityTractionElement<ELEMENT>}
+\DoxyCodeLine{\ \ \ \ (Bulk\_mesh\_pt-\/>boundary\_element\_pt(bound,n),}
+\DoxyCodeLine{\ \ \ \ \ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(bound,n));}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Add\ to\ mesh}}
+\DoxyCodeLine{\ \ \ Surface\_mesh\_pt-\/>add\_element\_pt(traction\_element\_pt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ assign\_traction\_elements}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+As expected, this member function documents the computed solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPeriodicLoadProblem_ad414cf9a0b4a61de439e459f10e762c7}{PeriodicLoadProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}});\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ error=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ norm=0.0;}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/error.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>compute\_error(some\_file,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error,norm);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Doc\ error\ norm:}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNorm\ of\ error\ \ \ \ "{}}\ <<\ sqrt(error)\ <<\ std::endl;\ }
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ solution\ :\ "{}}\ <<\ sqrt(norm)\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution\ \ \ }}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_nondim}{}\doxysubsection{\texorpdfstring{Comments}{Comments}}\label{index_nondim}
+As discussed in the introduction, the non-\/dimensional version of the steady Cauchy equations only contains a single non-\/dimensional parameter, the Poisson ratio $ \nu $ which is passed to the constructor of the {\ttfamily Isotropic\+Elasticity\+Tensor}. If you inspect the relevant source code \href{../../../../src/linear_elasticity/elasticity_tensor.h}{\texttt{ src/linear\+\_\+elasticity/elasticity\+\_\+tensor.\+h}} you will find that this constructor has a second argument which defaults to one. This argument plays the role of Young\textquotesingle{}s modulus and is best interpreted as the ratio of the material\textquotesingle{}s actual Young\textquotesingle{}s modulus to the (nominal) Young\textquotesingle{}s modulus used in the non-\/dimensionalisation of the equations. The ability to provide this ratio is important if different regions of the body contain materials with different material properties.\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Fix the size of the domain and set the displacements along the bottom boundary to the exact solution for the infinite depth case, i.\+e. $ {\bf u} = {\bf u}^{[\mathrm{exact}]} $, using the {\ttfamily \doxylink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Global\+\_\+\+Parameters\+::\+Finite}} flag. Then investigate how the solution converges to the exact solution for increasing numbers of elements.
+\item Try varying the depth of the domain by changing {\ttfamily \doxylink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\+\_\+\+Parameters\+::\+Ly}} while maintaining a constant spatial resolution (i.\+e. increasing the number of elements -- this is already done in the driver code where we compute {\ttfamily ny} in terms of {\ttfamily \doxylink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\+\_\+\+Parameters\+::\+Ly}} ) and compare how the solution converges to the exact solution of the infinite depth case.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/linear_elasticity/periodic_load/}{\texttt{ demo\+\_\+drivers/linear\+\_\+elasticity/periodic\+\_\+load/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/linear_elasticity/periodic_load/periodic_load.cc}{\texttt{ demo\+\_\+drivers/linear\+\_\+elasticity/periodic\+\_\+load/periodic\+\_\+load.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,411 @@
+\doxysection{oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement}{}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement}\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+
+
+Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates.  
+
+
+
+
+{\ttfamily \#include $<$specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Elastic\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.707071cm]{classoomph_1_1ElasticUpdateFluidInterfaceElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96}{Elastic\+Update\+Fluid\+Interface\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}}=0)
+\begin{DoxyCompactList}\small\item\em Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em The "{}global"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \doxylink{classoomph_1_1FaceElement}{Face\+Element} representation, by default. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}{lagrange}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Return the lagrange multiplier at local node n. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}})
+\begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Output the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FILE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{flag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psif}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsifds}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsifdS}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsifd\+S\+\_\+div}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&interpolated\+\_\+x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interpolated\+\_\+n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&W, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{J}})
+\begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}{make\+\_\+bounding\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Create an "{}bounding"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Hijacked}{oomph\+::\+Hijacked$<$ Face\+Geometry$<$ ELEMENT $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Hijacked_aaf792ec7672bf812fdc5b3e74c31f807}{Hijacked}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, call the constructors of the base elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Hijacked_a5e4aa47011d8141757f9ecbd8f787811}{Hijacked}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Constructor used for hijacking face elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Hijacked_ac03d9be9ce8252556d41ef643b3658be}{Hijacked}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{id}}=0)
+\begin{DoxyCompactList}\small\item\em Constructor used for hijacking face elements with specification of ID of additional variables. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Hijacked_ac010278a5af2f3072d7a79fd507aa71b}{hijack\+\_\+internal\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{return\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at internal data n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. This can be used as the input to other elements. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Hijacked_a38b793b1597b567938ca5014fef86a78}{hijack\+\_\+external\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{return\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at external data n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Note that the calling program assumes responsibility for this data object and must clean it up. The default is that the data object is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Hijacked_a944ab621f0da8b6434d843c33b8a63f4}{hijack\+\_\+nodal\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{return\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at node n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Once again, the calling program must clean up the allocated \doxylink{classoomph_1_1Data}{Data} object. The default is that the data object is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Hijacked_a79cc7c9e72db17bf07538925b6d0537a}{hijack\+\_\+nodal\+\_\+position\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{return\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Hijack the i-\/th positional value stored at node n. Optionaly return a custom-\/made (copied) data object that contains only the hijacked value. Again, responsibility for the memory allocated lies with the calling function. The default is that the data object is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Hijacked_aaf4d8eb01937473cc10cc1c89dfe7dc6}{hijack\+\_\+nodal\+\_\+spine\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{return\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Hijack the i-\/th value stored at the spine that affects local node n. Optionally return a custom-\/made (copied) data object that contains only the hijacked value. Deletion must be handled at the higher level The default is that the data object is returned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Hijacked_afd4a5578291487aa37b0931dab845701}{assign\+\_\+local\+\_\+eqn\+\_\+numbers}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{store\+\_\+local\+\_\+dof\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set up the local equation numbers for the underlying element, then set up the local arrays to hold the hijacked variables. If the boolean argument is true then pointers to the associated degrees of freedom are stored in the array Dof\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Hijacked_adb1760705326df86f6289cc3774d37b9}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}})
+\begin{DoxyCompactList}\small\item\em Get the residuals from the underlying element, but then wipe the entries in the residual vector that correspond to hijacked values -- they will be computed by other elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Hijacked_a35778dccc9cf036c37ee569efe5b5f7c}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Get the residuals and Jacobian matrix from the underlying element, but then wipe the entries in the residual vector and the rows in the Jacobian matrix that correspond to hijacked values -- they will be computed by other elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1HijackedElementBase}{oomph\+::\+Hijacked\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}{Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, initialise the pointer to the equation numbers for the storage to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}{\texorpdfstring{$\sim$}{\string~}\+Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, destroy the storage for the equation numbers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}{unhijack\+\_\+all\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Reset the hijacked data pt, so that none of the equations in the element are hijacked. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}{residual\+\_\+multiplier}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the residual multiplier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the residual multiplier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}{compute\+\_\+surface\+\_\+derivatives}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{psi}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dpsids}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interpolated\+\_\+t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&interpolated\+\_\+x, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{surface\+\_\+gradient}}, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{surface\+\_\+divergence}})
+\begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1HijackedElementBase}{oomph\+::\+Hijacked\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}{hijack\+\_\+global\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+eqn\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}{unhijack\+\_\+global\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+eqn\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}{lagrange\+\_\+index}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Return the index at which the lagrange multiplier is stored at the n-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}{kinematic\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}{hijack\+\_\+kinematic\+\_\+conditions}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&bulk\+\_\+node\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018}{Lagrange\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1HijackedElementBase}{oomph\+::\+Hijacked\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a Set of pointers to the equation numbers that will be hijacked by this element. Note that these MUST be pointers because hijacking information is set BEFORE global equation numbers have been assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}{Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}{Residual\+\_\+multiplier\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1HijackedElementBase}{oomph\+::\+Hijacked\+Element\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}{Default\+\_\+residual\+\_\+multiplier}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Static default value for the double that multiplies the original residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT$>$\newline
+class oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}
+Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. 
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00672}{672}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a5e5d81d8ba6c7b6567ec6d1dd42c1c96} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!ElasticUpdateFluidInterfaceElement@{ElasticUpdateFluidInterfaceElement}}
+\index{ElasticUpdateFluidInterfaceElement@{ElasticUpdateFluidInterfaceElement}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticUpdateFluidInterfaceElement()}{ElasticUpdateFluidInterfaceElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other Face\+Elements. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{739}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l05163}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Lagrange\+\_\+index}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
+\index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{flag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psif,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsifds,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsifdS,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsifd\+S\+\_\+div,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{W,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{877}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae9df6c11ccb63dc04c0d5ca655fe1482} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
+\index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{surface\+\_\+gradient,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00716}{716}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_acc1d5bb57e5664b86a9a76a4cfb8259f} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill in contribution to residuals and Jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00837}{837}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ae82f486496a0647d905ab6ee857de0d0} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}}
+\index{hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{hijack\_kinematic\_conditions()}{hijack\_kinematic\_conditions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{bulk\+\_\+node\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{701}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{oomph\+::\+Hijacked$<$ Face\+Geometry$<$ ELEMENT $>$ $>$\+::hijack\+\_\+nodal\+\_\+value()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a940840693906b7b8d619ff97f521c811} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
+\index{kinematic\_local\_eqn@{kinematic\_local\_eqn}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{kinematic\_local\_eqn()}{kinematic\_local\_eqn()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{692}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a9340c15f4463fad5bca019829f5998cf} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange@{lagrange}}
+\index{lagrange@{lagrange}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{lagrange()}{lagrange()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the lagrange multiplier at local node n. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{830}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index()}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00877}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!lagrange\_index@{lagrange\_index}}
+\index{lagrange\_index@{lagrange\_index}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{lagrange\_index()}{lagrange\_index()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Return the index at which the lagrange multiplier is stored at the n-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00685}{685}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00701}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions()}}, \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00692}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00830}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::lagrange()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a88d35a42eb1b3abb4adba9ca79787d2e} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!make\_bounding\_element@{make\_bounding\_element}}
+\index{make\_bounding\_element@{make\_bounding\_element}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{make\_bounding\_element()}{make\_bounding\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Create an "{}bounding"{} element (here actually a 2D line element of type Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$\+ELEMENT$>$ that allows the application of a contact angle boundary condition on the the specified face. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00960}{960}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l00312}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a8baae14bdede6a659e948942d7a08cb5} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FILE}} \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the C-\/style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00861}{861}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a10b64a463b5ff98475e727b06d95b0ac} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FILE}} \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style Output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00867}{867}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a46b22d178b248355083a3564e4e92eb0} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the output function. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00849}{849}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_ac193aa64a8223a96e4148a5af456fb64} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output the element. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00855}{855}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a41706192ce4de3c4c51a70086199d8fa} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
+\index{zeta\_nodal@{zeta\_nodal}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The "{}global"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \doxylink{classoomph_1_1FaceElement}{Face\+Element} representation, by default. 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00822}{822}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04501}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018}\label{classoomph_1_1ElasticUpdateFluidInterfaceElement_a7852050a89e3aac51ed3693814be9018} 
+\index{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!Lagrange\_index@{Lagrange\_index}}
+\index{Lagrange\_index@{Lagrange\_index}!oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::ElasticUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Lagrange\_index}{Lagrange\_index}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} EQUATION\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} DERIVATIVE\+\_\+\+CLASS , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Lagrange\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end) 
+
+
+
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00681}{681}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00739}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\+Elastic\+Update\+Fluid\+Interface\+Element()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{specific__node__update__interface__elements_8h}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}\end{DoxyCompactItemize}

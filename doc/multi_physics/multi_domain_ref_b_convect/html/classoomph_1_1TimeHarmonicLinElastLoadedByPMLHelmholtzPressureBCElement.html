@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A class for elements that allow the imposition of an applied traction in the equations of time-harmonic linear elasticity from a PMLHelmholtz potential (interpreted as a displacement potential for the fluid in a quasi-steady, linearised FSI problem.) The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and thus, we can be generic enough without the need to have a separate equations class.  
+ <a href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa22755297b70b0733797902787ffdcb1" id="r_aa22755297b70b0733797902787ffdcb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#aa22755297b70b0733797902787ffdcb1">TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a> (FiniteElement *const &amp;element_pt, const int &amp;face_index)</td></tr>
+<tr class="memdesc:aa22755297b70b0733797902787ffdcb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, which takes a "bulk" element and the value of the index and its limit.  <br /></td></tr>
+<tr class="separator:aa22755297b70b0733797902787ffdcb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44261df2f1e5122ad707f17523a439c2" id="r_a44261df2f1e5122ad707f17523a439c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a44261df2f1e5122ad707f17523a439c2">fill_in_contribution_to_residuals</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:a44261df2f1e5122ad707f17523a439c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the residuals.  <br /></td></tr>
+<tr class="separator:a44261df2f1e5122ad707f17523a439c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec08514d7dbb65dc5c05af3131828daa" id="r_aec08514d7dbb65dc5c05af3131828daa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#aec08514d7dbb65dc5c05af3131828daa">fill_in_contribution_to_jacobian</a> (Vector&lt; double &gt; &amp;residuals, DenseMatrix&lt; double &gt; &amp;jacobian)</td></tr>
+<tr class="memdesc:aec08514d7dbb65dc5c05af3131828daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution from Jacobian.  <br /></td></tr>
+<tr class="separator:aec08514d7dbb65dc5c05af3131828daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98c7b28fe99f814fe5ad01e210da2d65" id="r_a98c7b28fe99f814fe5ad01e210da2d65"><td class="memItemLeft" align="right" valign="top">const double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a98c7b28fe99f814fe5ad01e210da2d65">q</a> () const</td></tr>
+<tr class="memdesc:a98c7b28fe99f814fe5ad01e210da2d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_2.png" width="79" height="15"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E.  <br /></td></tr>
+<tr class="separator:a98c7b28fe99f814fe5ad01e210da2d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb6f5ce378e284976d22fea7b2a76a8" id="r_a0bb6f5ce378e284976d22fea7b2a76a8"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a0bb6f5ce378e284976d22fea7b2a76a8">q_pt</a> ()</td></tr>
+<tr class="memdesc:a0bb6f5ce378e284976d22fea7b2a76a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations.  <br /></td></tr>
+<tr class="separator:a0bb6f5ce378e284976d22fea7b2a76a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af349037cacaedb53f60de79415b83ac2" id="r_af349037cacaedb53f60de79415b83ac2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#af349037cacaedb53f60de79415b83ac2">output</a> (std::ostream &amp;outfile)</td></tr>
+<tr class="memdesc:af349037cacaedb53f60de79415b83ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function.  <br /></td></tr>
+<tr class="separator:af349037cacaedb53f60de79415b83ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b68e66db379729d4164df09dc00c681" id="r_a5b68e66db379729d4164df09dc00c681"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a5b68e66db379729d4164df09dc00c681">output</a> (std::ostream &amp;outfile, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a5b68e66db379729d4164df09dc00c681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output function: Plot traction etc at Gauss points nplot is ignored.  <br /></td></tr>
+<tr class="separator:a5b68e66db379729d4164df09dc00c681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9c27044ffbe07602f60ac7daef22af" id="r_a1d9c27044ffbe07602f60ac7daef22af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a1d9c27044ffbe07602f60ac7daef22af">output</a> (FILE *file_pt)</td></tr>
+<tr class="memdesc:a1d9c27044ffbe07602f60ac7daef22af"><td class="mdescLeft">&#160;</td><td class="mdescRight">C_style output function.  <br /></td></tr>
+<tr class="separator:a1d9c27044ffbe07602f60ac7daef22af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e6d0ec6a0f9bec280fb4f520bf391f2" id="r_a7e6d0ec6a0f9bec280fb4f520bf391f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a7e6d0ec6a0f9bec280fb4f520bf391f2">output</a> (FILE *file_pt, const unsigned &amp;n_plot)</td></tr>
+<tr class="memdesc:a7e6d0ec6a0f9bec280fb4f520bf391f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style output function.  <br /></td></tr>
+<tr class="separator:a7e6d0ec6a0f9bec280fb4f520bf391f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2808a6385d4cde4209ebfc34eb1c4df" id="r_af2808a6385d4cde4209ebfc34eb1c4df"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#af2808a6385d4cde4209ebfc34eb1c4df">global_flux_contribution_from_solid</a> ()</td></tr>
+<tr class="memdesc:af2808a6385d4cde4209ebfc34eb1c4df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the global_flux_contribution through the template elasticity elements : we compute u.n.  <br /></td></tr>
+<tr class="separator:af2808a6385d4cde4209ebfc34eb1c4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e881470a6bbb3db76b1abf91216659" id="r_a26e881470a6bbb3db76b1abf91216659"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a26e881470a6bbb3db76b1abf91216659">global_flux_contribution_from_solid</a> (std::ofstream &amp;outfile)</td></tr>
+<tr class="memdesc:a26e881470a6bbb3db76b1abf91216659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open.  <br /></td></tr>
+<tr class="separator:a26e881470a6bbb3db76b1abf91216659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ccb0065eebdc7ab0aa08711385c9df" id="r_a61ccb0065eebdc7ab0aa08711385c9df"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a61ccb0065eebdc7ab0aa08711385c9df">global_flux_contribution_from_helmholtz</a> ()</td></tr>
+<tr class="memdesc:a61ccb0065eebdc7ab0aa08711385c9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the global_flux_contribution through the helmholtz elements : we compute dphidn.n.  <br /></td></tr>
+<tr class="separator:a61ccb0065eebdc7ab0aa08711385c9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb3ac7f783bb300626d8aac6bc7f78f9" id="r_acb3ac7f783bb300626d8aac6bc7f78f9"><td class="memItemLeft" align="right" valign="top">std::complex&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#acb3ac7f783bb300626d8aac6bc7f78f9">global_flux_contribution_from_helmholtz</a> (std::ofstream &amp;outfile)</td></tr>
+<tr class="memdesc:acb3ac7f783bb300626d8aac6bc7f78f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open.  <br /></td></tr>
+<tr class="separator:acb3ac7f783bb300626d8aac6bc7f78f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a7012451bb562db8a3c8c07542699f6c8" id="r_a7012451bb562db8a3c8c07542699f6c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a7012451bb562db8a3c8c07542699f6c8">fill_in_contribution_to_residuals_helmholtz_traction</a> (Vector&lt; double &gt; &amp;residuals)</td></tr>
+<tr class="memdesc:a7012451bb562db8a3c8c07542699f6c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that actually calculates the residuals.  <br /></td></tr>
+<tr class="separator:a7012451bb562db8a3c8c07542699f6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa45224393afa639869972fdf77384e63" id="r_aa45224393afa639869972fdf77384e63"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#aa45224393afa639869972fdf77384e63">Q_pt</a></td></tr>
+<tr class="memdesc:aa45224393afa639869972fdf77384e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_1.png" width="10" height="13"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses.  <br /></td></tr>
+<tr class="separator:aa45224393afa639869972fdf77384e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07cd6f158abf744ab24011d0d0a8a010" id="r_a07cd6f158abf744ab24011d0d0a8a010"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::complex&lt; unsigned &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a07cd6f158abf744ab24011d0d0a8a010">U_index_time_harmonic_linear_elasticity_helmholtz_traction</a></td></tr>
+<tr class="memdesc:a07cd6f158abf744ab24011d0d0a8a010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index at which the i-th displacement component is stored.  <br /></td></tr>
+<tr class="separator:a07cd6f158abf744ab24011d0d0a8a010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a0f3bb2e8a6d9efe816f766b5e946f9c7" id="r_a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html#a0f3bb2e8a6d9efe816f766b5e946f9c7">Default_Q_Value</a> = 1.0</td></tr>
+<tr class="memdesc:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0)  <br /></td></tr>
+<tr class="separator:a0f3bb2e8a6d9efe816f766b5e946f9c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT&gt;<br />
+class oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;</div><p>A class for elements that allow the imposition of an applied traction in the equations of time-harmonic linear elasticity from a PMLHelmholtz potential (interpreted as a displacement potential for the fluid in a quasi-steady, linearised FSI problem.) The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and thus, we can be generic enough without the need to have a separate equations class. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00047">47</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa22755297b70b0733797902787ffdcb1" name="aa22755297b70b0733797902787ffdcb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa22755297b70b0733797902787ffdcb1">&#9670;&#160;</a></span>TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement </td>
+          <td>(</td>
+          <td class="paramtype">FiniteElement *const &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, which takes a "bulk" element and the value of the index and its limit. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00076">76</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::U_index_time_harmonic_linear_elasticity_helmholtz_traction</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aec08514d7dbb65dc5c05af3131828daa" name="aec08514d7dbb65dc5c05af3131828daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec08514d7dbb65dc5c05af3131828daa">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DenseMatrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in contribution from Jacobian. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00140">140</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00507">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+
+</div>
+</div>
+<a id="a44261df2f1e5122ad707f17523a439c2" name="a44261df2f1e5122ad707f17523a439c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44261df2f1e5122ad707f17523a439c2">&#9670;&#160;</a></span>fill_in_contribution_to_residuals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00133">133</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00507">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction()</a>.</p>
+
+</div>
+</div>
+<a id="a7012451bb562db8a3c8c07542699f6c8" name="a7012451bb562db8a3c8c07542699f6c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7012451bb562db8a3c8c07542699f6c8">&#9670;&#160;</a></span>fill_in_contribution_to_residuals_helmholtz_traction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals_helmholtz_traction </td>
+          <td>(</td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function that actually calculates the residuals. </p>
+<p>Return the residuals. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00506">506</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00140">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00133">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+
+</div>
+</div>
+<a id="a61ccb0065eebdc7ab0aa08711385c9df" name="a61ccb0065eebdc7ab0aa08711385c9df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ccb0065eebdc7ab0aa08711385c9df">&#9670;&#160;</a></span>global_flux_contribution_from_helmholtz() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; double &gt; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_helmholtz </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the global_flux_contribution through the helmholtz elements : we compute dphidn.n. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00347">347</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00347">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_helmholtz()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00347">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_helmholtz()</a>.</p>
+
+</div>
+</div>
+<a id="acb3ac7f783bb300626d8aac6bc7f78f9" name="acb3ac7f783bb300626d8aac6bc7f78f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb3ac7f783bb300626d8aac6bc7f78f9">&#9670;&#160;</a></span>global_flux_contribution_from_helmholtz() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; double &gt; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_helmholtz </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00357">357</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="af2808a6385d4cde4209ebfc34eb1c4df" name="af2808a6385d4cde4209ebfc34eb1c4df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2808a6385d4cde4209ebfc34eb1c4df">&#9670;&#160;</a></span>global_flux_contribution_from_solid() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; double &gt; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_solid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the global_flux_contribution through the template elasticity elements : we compute u.n. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00256">256</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00256">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_solid()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00256">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_solid()</a>.</p>
+
+</div>
+</div>
+<a id="a26e881470a6bbb3db76b1abf91216659" name="a26e881470a6bbb3db76b1abf91216659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e881470a6bbb3db76b1abf91216659">&#9670;&#160;</a></span>global_flux_contribution_from_solid() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::complex&lt; double &gt; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::global_flux_contribution_from_solid </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the element's contribution to the integral of the flux over the artificial boundary. Also output the flux in the specified output file if it's open. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00266">266</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a1d9c27044ffbe07602f60ac7daef22af" name="a1d9c27044ffbe07602f60ac7daef22af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9c27044ffbe07602f60ac7daef22af">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C_style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00243">243</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e6d0ec6a0f9bec280fb4f520bf391f2" name="a7e6d0ec6a0f9bec280fb4f520bf391f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e6d0ec6a0f9bec280fb4f520bf391f2">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00249">249</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="af349037cacaedb53f60de79415b83ac2" name="af349037cacaedb53f60de79415b83ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af349037cacaedb53f60de79415b83ac2">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function. </p>
+<p>Dummy</p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00169">169</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00169">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00169">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a5b68e66db379729d4164df09dc00c681" name="a5b68e66db379729d4164df09dc00c681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b68e66db379729d4164df09dc00c681">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output function: Plot traction etc at Gauss points nplot is ignored. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00178">178</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>.</p>
+
+</div>
+</div>
+<a id="a98c7b28fe99f814fe5ad01e210da2d65" name="a98c7b28fe99f814fe5ad01e210da2d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98c7b28fe99f814fe5ad01e210da2d65">&#9670;&#160;</a></span>q()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double &amp; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. E.g. <img class="formulaInl" alt="$ Q = (\omega a)^2 \rho/E $" src="form_2.png" width="79" height="15"/>, i.e. the ratio between the inertial fluid stress and the solid's elastic modulus E. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">155</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00178">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::output()</a>.</p>
+
+</div>
+</div>
+<a id="a0bb6f5ce378e284976d22fea7b2a76a8" name="a0bb6f5ce378e284976d22fea7b2a76a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb6f5ce378e284976d22fea7b2a76a8">&#9670;&#160;</a></span>q_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double *&amp; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00162">162</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0f3bb2e8a6d9efe816f766b5e946f9c7" name="a0f3bb2e8a6d9efe816f766b5e946f9c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f3bb2e8a6d9efe816f766b5e946f9c7">&#9670;&#160;</a></span>Default_Q_Value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Default_Q_Value = 1.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.0) </p>
+<p>Static default value for the ragoogletio of stress scales used in the fluid and solid equations (default is 1.0) </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00060">60</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+</div>
+</div>
+<a id="aa45224393afa639869972fdf77384e63" name="aa45224393afa639869972fdf77384e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa45224393afa639869972fdf77384e63">&#9670;&#160;</a></span>Q_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::Q_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_1.png" width="10" height="13"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00056">56</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00155">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q()</a>, and <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00162">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::q_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a07cd6f158abf744ab24011d0d0a8a010" name="a07cd6f158abf744ab24011d0d0a8a010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07cd6f158abf744ab24011d0d0a8a010">&#9670;&#160;</a></span>U_index_time_harmonic_linear_elasticity_helmholtz_traction</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELASTICITY_BULK_ELEMENT , class HELMHOLTZ_BULK_ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;std::complex&lt;unsigned&gt; &gt; <a class="el" href="classoomph_1_1TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement.html">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement</a>&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::U_index_time_harmonic_linear_elasticity_helmholtz_traction</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index at which the i-th displacement component is stored. </p>
+
+<p class="definition">Definition at line <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00064">64</a> of file <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html#l00076">oomph::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement&lt; ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT &gt;::TimeHarmonicLinElastLoadedByPMLHelmholtzPressureBCElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="pml__helmholtz__time__harmonic__linear__elasticity__interaction_8h_source.html">pml_helmholtz_time_harmonic_linear_elasticity_interaction.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:13:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

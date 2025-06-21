@@ -1,0 +1,35 @@
+\doxysection{oomph\+::Gauss\texorpdfstring{$<$}{<} DIM, NPTS\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1Gauss}{}\label{classoomph_1_1Gauss}\index{oomph::Gauss$<$ DIM, NPTS\_1D $>$@{oomph::Gauss$<$ DIM, NPTS\_1D $>$}}
+
+
+Class for multidimensional Gaussian integration rules.  
+
+
+
+
+{\ttfamily \#include $<$integral.\+h$>$}
+
+Inheritance diagram for oomph\+::Gauss\texorpdfstring{$<$}{<} DIM, NPTS\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1Gauss}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NPTS\+\_\+1D$>$\newline
+class oomph\+::\+Gauss$<$ DIM, NPTS\+\_\+1\+D $>$}
+Class for multidimensional Gaussian integration rules. 
+
+Empty -- just establishes the template parameters.
+
+General logic\+: The template parameters correspond to those of the \doxylink{classoomph_1_1QElement}{QElement} family so that the integration scheme Gauss$<$\+DIM,\+NNODE\+\_\+1\+D$>$ provides the default ("{}full"{}) integration scheme for QElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$. "{}\+Full"{} integration means that for linear PDEs that are discretised on a uniform mesh, all integrals arising in the Galerkin weak form of the PDE are evaluated exactly. In such problems the highest-\/order polynomials arise from the products of the undifferentiated shape and test functions so a 4 node quad needs an integration scheme that can integrate fourth-\/order polynomials exactly etc. 
+
+Definition at line \mbox{\hyperlink{integral_8h_source_l00144}{144}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{integral_8h}{integral.\+h}}\end{DoxyCompactItemize}

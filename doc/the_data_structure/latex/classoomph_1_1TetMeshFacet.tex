@@ -1,0 +1,378 @@
+\doxysection{oomph\+::Tet\+Mesh\+Facet Class Reference}
+\hypertarget{classoomph_1_1TetMeshFacet}{}\label{classoomph_1_1TetMeshFacet}\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+
+
+Facet for Tet mesh generation. Can lie on boundary (identified via one-\/based enumeration!) and can have \doxylink{classoomph_1_1GeomObject}{Geom\+Object} associated with those boundaries.  
+
+
+
+
+{\ttfamily \#include $<$tet\+\_\+mesh.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshFacet_add77aa70a861eb137b09db7d5a2c0636}{Tet\+Mesh\+Facet}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetMeshFacet_aa6f08ddc938cd6a52f601c63831148ea}{nvertex}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify number of vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_aa6f08ddc938cd6a52f601c63831148ea}{nvertex}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to j-\/th vertex (const) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a08ca13e75ab395de75eab807d2f680b5}{set\+\_\+vertex\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}{vertex\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set pointer to j-\/th vertex and pass one-\/based boundary id that may already have been set for this facet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a77738b43364fd6f1196e47928f57de65}{one\+\_\+based\+\_\+boundary\+\_\+id}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Constant access to (one-\/based!) boundary IDs this facet lives on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a578058c44b79c484e14be087f4f0a77f}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{one\+\_\+based\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Set (one-\/based!) boundary IDs this facet lives on. Passed to any existing vertices and to any future ones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac9be074ef764a6b59cbef9840fe7f38b}{set\+\_\+one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{one\+\_\+based\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Set (one-\/based!) region ID this facet is adjacent to. Specification of zero argument is harmless as it indicates that that facet is not adjacent to any region. \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacet_ae2fe3405121483d23e6cb7e28b605bc5}{one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return set of (one-\/based!) region IDs this facet is adjacent to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a511eb9fd9ae134075c0736486fd8b69d}{facet\+\_\+is\+\_\+embedded\+\_\+in\+\_\+a\+\_\+specified\+\_\+region}} ()
+\begin{DoxyCompactList}\small\item\em Boolean indicating that facet is embedded in a specified region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a3b81b5e50eae3d6494d43c8e74318b93}{set\+\_\+one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{one\+\_\+based\+\_\+region\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Facet is to be embedded in specified one-\/based region. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_acbceefd4c9afbd31c0a163e7a008e6e4}{one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}} ()
+\begin{DoxyCompactList}\small\item\em Which (one-\/based) region is facet embedded in (if zero, it\textquotesingle{}s not embedded in any region) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a10fc468ac2700b4fdd96168a5b17eca3}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a04408ee7d013283e6ca4c109da15d5e2}{Vertex\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_ab7defe35a8a9ca959852131df5436cc1}{One\+\_\+based\+\_\+boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em (One-\/based!) boundary IDs this facet lives on \end{DoxyCompactList}\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TetMeshFacet_a4fda6667fb015320fa128df5b3ce5316}{One\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Set of one-\/based adjacent region ids; no adjacent region if it\textquotesingle{}s zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetMeshFacet_ac3fcb94904c86c64b391bb15ceca1706}{One\+\_\+based\+\_\+region\+\_\+id\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}}
+\begin{DoxyCompactList}\small\item\em Facet is to be embedded in specified one-\/based region. Defaults to zero, indicating that its not embedded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Facet for Tet mesh generation. Can lie on boundary (identified via one-\/based enumeration!) and can have \doxylink{classoomph_1_1GeomObject}{Geom\+Object} associated with those boundaries. 
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00167}{167}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TetMeshFacet_add77aa70a861eb137b09db7d5a2c0636}\label{classoomph_1_1TetMeshFacet_add77aa70a861eb137b09db7d5a2c0636} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!TetMeshFacet@{TetMeshFacet}}
+\index{TetMeshFacet@{TetMeshFacet}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{TetMeshFacet()}{TetMeshFacet()}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Facet\+::\+Tet\+Mesh\+Facet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nvertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Specify number of vertices. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00171}{171}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00181}{nvertex()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TetMeshFacet_a511eb9fd9ae134075c0736486fd8b69d}\label{classoomph_1_1TetMeshFacet_a511eb9fd9ae134075c0736486fd8b69d} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!facet\_is\_embedded\_in\_a\_specified\_region@{facet\_is\_embedded\_in\_a\_specified\_region}}
+\index{facet\_is\_embedded\_in\_a\_specified\_region@{facet\_is\_embedded\_in\_a\_specified\_region}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{facet\_is\_embedded\_in\_a\_specified\_region()}{facet\_is\_embedded\_in\_a\_specified\_region()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Tet\+Mesh\+Facet\+::facet\+\_\+is\+\_\+embedded\+\_\+in\+\_\+a\+\_\+specified\+\_\+region (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Boolean indicating that facet is embedded in a specified region. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00243}{243}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00292}{One\+\_\+based\+\_\+region\+\_\+id\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}}.
+
+
+
+Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_aa6f08ddc938cd6a52f601c63831148ea}\label{classoomph_1_1TetMeshFacet_aa6f08ddc938cd6a52f601c63831148ea} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!nvertex@{nvertex}}
+\index{nvertex@{nvertex}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{nvertex()}{nvertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Facet\+::nvertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of vertices. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00181}{181}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00171}{Tet\+Mesh\+Facet()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_ae2fe3405121483d23e6cb7e28b605bc5}\label{classoomph_1_1TetMeshFacet_ae2fe3405121483d23e6cb7e28b605bc5} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!one\_based\_adjacent\_region\_id@{one\_based\_adjacent\_region\_id}}
+\index{one\_based\_adjacent\_region\_id@{one\_based\_adjacent\_region\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{one\_based\_adjacent\_region\_id()}{one\_based\_adjacent\_region\_id()}}
+{\footnotesize\ttfamily std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ oomph\+::\+Tet\+Mesh\+Facet\+::one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return set of (one-\/based!) region IDs this facet is adjacent to. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00237}{237}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00287}{One\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id}}.
+
+
+
+Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a77738b43364fd6f1196e47928f57de65}\label{classoomph_1_1TetMeshFacet_a77738b43364fd6f1196e47928f57de65} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!one\_based\_boundary\_id@{one\_based\_boundary\_id}}
+\index{one\_based\_boundary\_id@{one\_based\_boundary\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{one\_based\_boundary\_id()}{one\_based\_boundary\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Facet\+::one\+\_\+based\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constant access to (one-\/based!) boundary IDs this facet lives on. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00207}{207}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00283}{One\+\_\+based\+\_\+boundary\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_acbceefd4c9afbd31c0a163e7a008e6e4}\label{classoomph_1_1TetMeshFacet_acbceefd4c9afbd31c0a163e7a008e6e4} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!one\_based\_region\_that\_facet\_is\_embedded\_in@{one\_based\_region\_that\_facet\_is\_embedded\_in}}
+\index{one\_based\_region\_that\_facet\_is\_embedded\_in@{one\_based\_region\_that\_facet\_is\_embedded\_in}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{one\_based\_region\_that\_facet\_is\_embedded\_in()}{one\_based\_region\_that\_facet\_is\_embedded\_in()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Facet\+::one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Which (one-\/based) region is facet embedded in (if zero, it\textquotesingle{}s not embedded in any region) 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00257}{257}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00292}{One\+\_\+based\+\_\+region\+\_\+id\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}}.
+
+
+
+Referenced by \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a10fc468ac2700b4fdd96168a5b17eca3}\label{classoomph_1_1TetMeshFacet_a10fc468ac2700b4fdd96168a5b17eca3} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!output@{output}}
+\index{output@{output}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Facet\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00263}{263}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00283}{One\+\_\+based\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_ac9be074ef764a6b59cbef9840fe7f38b}\label{classoomph_1_1TetMeshFacet_ac9be074ef764a6b59cbef9840fe7f38b} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!set\_one\_based\_adjacent\_region\_id@{set\_one\_based\_adjacent\_region\_id}}
+\index{set\_one\_based\_adjacent\_region\_id@{set\_one\_based\_adjacent\_region\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{set\_one\_based\_adjacent\_region\_id()}{set\_one\_based\_adjacent\_region\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{one\+\_\+based\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set (one-\/based!) region ID this facet is adjacent to. Specification of zero argument is harmless as it indicates that that facet is not adjacent to any region. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00231}{231}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00287}{One\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a578058c44b79c484e14be087f4f0a77f}\label{classoomph_1_1TetMeshFacet_a578058c44b79c484e14be087f4f0a77f} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!set\_one\_based\_boundary\_id@{set\_one\_based\_boundary\_id}}
+\index{set\_one\_based\_boundary\_id@{set\_one\_based\_boundary\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{set\_one\_based\_boundary\_id()}{set\_one\_based\_boundary\_id()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{one\+\_\+based\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set (one-\/based!) boundary IDs this facet lives on. Passed to any existing vertices and to any future ones. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00214}{214}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00283}{One\+\_\+based\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a3b81b5e50eae3d6494d43c8e74318b93}\label{classoomph_1_1TetMeshFacet_a3b81b5e50eae3d6494d43c8e74318b93} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!set\_one\_based\_region\_that\_facet\_is\_embedded\_in@{set\_one\_based\_region\_that\_facet\_is\_embedded\_in}}
+\index{set\_one\_based\_region\_that\_facet\_is\_embedded\_in@{set\_one\_based\_region\_that\_facet\_is\_embedded\_in}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{set\_one\_based\_region\_that\_facet\_is\_embedded\_in()}{set\_one\_based\_region\_that\_facet\_is\_embedded\_in()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{one\+\_\+based\+\_\+region\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Facet is to be embedded in specified one-\/based region. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00249}{249}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00292}{One\+\_\+based\+\_\+region\+\_\+id\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a08ca13e75ab395de75eab807d2f680b5}\label{classoomph_1_1TetMeshFacet_a08ca13e75ab395de75eab807d2f680b5} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!set\_vertex\_pt@{set\_vertex\_pt}}
+\index{set\_vertex\_pt@{set\_vertex\_pt}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{set\_vertex\_pt()}{set\_vertex\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+vertex\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*}}]{vertex\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set pointer to j-\/th vertex and pass one-\/based boundary id that may already have been set for this facet. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00194}{194}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00283}{One\+\_\+based\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{tet__mesh_8h_source_l00187}{vertex\+\_\+pt()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48}\label{classoomph_1_1TetMeshFacet_ac3e8bb06cabd39c2108af501b163df48} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!vertex\_pt@{vertex\_pt}}
+\index{vertex\_pt@{vertex\_pt}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{vertex\_pt()}{vertex\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}} \texorpdfstring{$\ast$}{*} oomph\+::\+Tet\+Mesh\+Facet\+::vertex\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to j-\/th vertex (const) 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00187}{187}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{tet__mesh_8h_source_l00280}{Vertex\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00194}{set\+\_\+vertex\+\_\+pt()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l01003}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TetMeshFacet_a4fda6667fb015320fa128df5b3ce5316}\label{classoomph_1_1TetMeshFacet_a4fda6667fb015320fa128df5b3ce5316} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!One\_based\_adjacent\_region\_id@{One\_based\_adjacent\_region\_id}}
+\index{One\_based\_adjacent\_region\_id@{One\_based\_adjacent\_region\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{One\_based\_adjacent\_region\_id}{One\_based\_adjacent\_region\_id}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Tet\+Mesh\+Facet\+::\+One\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set of one-\/based adjacent region ids; no adjacent region if it\textquotesingle{}s zero. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00287}{287}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00237}{one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00231}{set\+\_\+one\+\_\+based\+\_\+adjacent\+\_\+region\+\_\+id()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_ab7defe35a8a9ca959852131df5436cc1}\label{classoomph_1_1TetMeshFacet_ab7defe35a8a9ca959852131df5436cc1} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!One\_based\_boundary\_id@{One\_based\_boundary\_id}}
+\index{One\_based\_boundary\_id@{One\_based\_boundary\_id}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{One\_based\_boundary\_id}{One\_based\_boundary\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Facet\+::\+One\+\_\+based\+\_\+boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+(One-\/based!) boundary IDs this facet lives on 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00283}{283}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00207}{one\+\_\+based\+\_\+boundary\+\_\+id()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00263}{output()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00214}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00194}{set\+\_\+vertex\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_ac3fcb94904c86c64b391bb15ceca1706}\label{classoomph_1_1TetMeshFacet_ac3fcb94904c86c64b391bb15ceca1706} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!One\_based\_region\_id\_that\_facet\_is\_embedded\_in@{One\_based\_region\_id\_that\_facet\_is\_embedded\_in}}
+\index{One\_based\_region\_id\_that\_facet\_is\_embedded\_in@{One\_based\_region\_id\_that\_facet\_is\_embedded\_in}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{One\_based\_region\_id\_that\_facet\_is\_embedded\_in}{One\_based\_region\_id\_that\_facet\_is\_embedded\_in}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Tet\+Mesh\+Facet\+::\+One\+\_\+based\+\_\+region\+\_\+id\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Facet is to be embedded in specified one-\/based region. Defaults to zero, indicating that its not embedded. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00292}{292}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00243}{facet\+\_\+is\+\_\+embedded\+\_\+in\+\_\+a\+\_\+specified\+\_\+region()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00257}{one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00249}{set\+\_\+one\+\_\+based\+\_\+region\+\_\+that\+\_\+facet\+\_\+is\+\_\+embedded\+\_\+in()}}.
+
+\Hypertarget{classoomph_1_1TetMeshFacet_a04408ee7d013283e6ca4c109da15d5e2}\label{classoomph_1_1TetMeshFacet_a04408ee7d013283e6ca4c109da15d5e2} 
+\index{oomph::TetMeshFacet@{oomph::TetMeshFacet}!Vertex\_pt@{Vertex\_pt}}
+\index{Vertex\_pt@{Vertex\_pt}!oomph::TetMeshFacet@{oomph::TetMeshFacet}}
+\doxysubsubsection{\texorpdfstring{Vertex\_pt}{Vertex\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TetMeshVertex}{Tet\+Mesh\+Vertex}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Tet\+Mesh\+Facet\+::\+Vertex\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to vertices. 
+
+
+
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00280}{280}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00181}{nvertex()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00263}{output()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00214}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00194}{set\+\_\+vertex\+\_\+pt()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00171}{Tet\+Mesh\+Facet()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00187}{vertex\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tet__mesh_8h}{tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

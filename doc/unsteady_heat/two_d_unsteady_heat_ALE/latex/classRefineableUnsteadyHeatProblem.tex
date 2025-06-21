@@ -1,0 +1,484 @@
+\doxysection{Refineable\+Unsteady\+Heat\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRefineableUnsteadyHeatProblem}{}\label{classRefineableUnsteadyHeatProblem}\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+
+
+Unsteady heat problem in deformable ellipse domain.  
+
+
+Inheritance diagram for Refineable\+Unsteady\+Heat\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRefineableUnsteadyHeatProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}{Refineable\+Unsteady\+Heat\+Problem}} (Unsteady\+Heat\+Equations$<$ 2 $>$\+::\+Unsteady\+Heat\+Source\+Fct\+Pt source\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to source function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a975e00f5e87d77b4e1bf4d50482dea2b}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Unsteady\+Heat\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Close trace file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41}{actions\+\_\+after\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after timestep (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before next timestep\+: Set Dirchlet boundary conditions from exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4419fcea0ccbf0509f1d5dd37d8301de}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1f8a9e91269440c799a2075f989d62b1}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial condition (incl previous timesteps) according to specified function. Note that his overloads the virtual function in the Problem base class and is therefore executed automatically to re-\/assign the initial conditions during the spatially adaptive solution at the first timestep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\+\_\+flux\+\_\+elements}} (const unsigned \&b, Mesh \texorpdfstring{$\ast$}{*}const \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\+\_\+mesh\+\_\+pt}}, Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create Unsteady\+Heat flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}{delete\+\_\+flux\+\_\+elements}} (Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Delete Unsteady\+Heat flux elements and wipe the surface mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37}{doc\+\_\+solution}} ()
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{dump\+\_\+it}} (ofstream \&dump\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Dump problem data to allow for later restart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{restart}} (ifstream \&restart\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Read problem data for restart. \end{DoxyCompactList}\item 
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\+\_\+mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to bulk mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a368512778fbfd59e918104340466b1df}{Boundary\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that specifies the domain bondary. \end{DoxyCompactList}\item 
+Unsteady\+Heat\+Equations$<$ 2 $>$\+::\+Unsteady\+Heat\+Source\+Fct\+Pt \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639}{Source\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to source function. \end{DoxyCompactList}\item 
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}surface"{} mesh. \end{DoxyCompactList}\item 
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a7ff1982af5819bab492c693178be0c24}{Doc\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to central node (exists at all refinement levels) for doc. \end{DoxyCompactList}\item 
+Doc\+Info \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a9ea9d79a57cb16a6292a637965767f7e}{Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info object. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07b00254ca7a0e6a}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$}
+Unsteady heat problem in deformable ellipse domain. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00215}{215}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}\label{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!RefineableUnsteadyHeatProblem@{RefineableUnsteadyHeatProblem}}
+\index{RefineableUnsteadyHeatProblem@{RefineableUnsteadyHeatProblem}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableUnsteadyHeatProblem()}{RefineableUnsteadyHeatProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{\+::\+Refineable\+Unsteady\+Heat\+Problem}} (\begin{DoxyParamCaption}\item[{Unsteady\+Heat\+Equations$<$ 2 $>$\+::\+Unsteady\+Heat\+Source\+Fct\+Pt}]{source\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to source function. 
+
+Constructor for Unsteady\+Heat problem on deformable ellipse domain. Pass pointer to source function. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{308}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00131}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Alpha}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00134}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Beta}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00281}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Boundary\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00287}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00854}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements()}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00296}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00293}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00137}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Gamma}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00185}{Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary()}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00284}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00290}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00140}{Tanh\+Soln\+For\+Unsteady\+Heat\+::\+Tan\+Phi}}, and \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00299}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Trace\+\_\+file}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a975e00f5e87d77b4e1bf4d50482dea2b}\label{classRefineableUnsteadyHeatProblem_a975e00f5e87d77b4e1bf4d50482dea2b} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!````~RefineableUnsteadyHeatProblem@{\texorpdfstring{$\sim$}{\string~}RefineableUnsteadyHeatProblem}}
+\index{````~RefineableUnsteadyHeatProblem@{\texorpdfstring{$\sim$}{\string~}RefineableUnsteadyHeatProblem}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableUnsteadyHeatProblem()}{\string~RefineableUnsteadyHeatProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: Close trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00476}{476}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRefineableUnsteadyHeatProblem_a1f8a9e91269440c799a2075f989d62b1}\label{classRefineableUnsteadyHeatProblem_a1f8a9e91269440c799a2075f989d62b1} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions after adapt\+: Rebuild the mesh of prescribed flux elements. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00541}{541}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00185}{Tanh\+Soln\+For\+Unsteady\+Heat\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41}\label{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}}
+\index{actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_implicit\_timestep()}{actions\_after\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after timestep (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00234}{234}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da}\label{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00228}{228}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a4419fcea0ccbf0509f1d5dd37d8301de}\label{classRefineableUnsteadyHeatProblem_a4419fcea0ccbf0509f1d5dd37d8301de} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Actions before adapt\+: Wipe the mesh of prescribed flux elements. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00525}{525}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}\label{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before next timestep\+: Set Dirchlet boundary conditions from exact solution. 
+
+Actions before timestep\+: Update the domain shape, then set the boundary conditions for the current time. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00489}{489}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00149}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5}\label{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00231}{231}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}\label{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!bulk\_mesh\_pt@{bulk\_mesh\_pt}}
+\index{bulk\_mesh\_pt@{bulk\_mesh\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{bulk\_mesh\_pt()}{bulk\_mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00272}{272}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00287}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00952}{main()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}\label{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!create\_flux\_elements@{create\_flux\_elements}}
+\index{create\_flux\_elements@{create\_flux\_elements}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_flux\_elements()}{create\_flux\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Create Unsteady\+Heat flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
+
+Create Unsteady\+Heat Flux Elements on the b-\/th boundary of the Mesh object pointed to by bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00853}{853}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}\label{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!delete\_flux\_elements@{delete\_flux\_elements}}
+\index{delete\_flux\_elements@{delete\_flux\_elements}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_flux\_elements()}{delete\_flux\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Delete Unsteady\+Heat flux elements and wipe the surface mesh. 
+
+Delete Unsteady\+Heat Flux Elements and wipe the surface mesh. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00886}{886}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37}\label{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00713}{713}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00149}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00143}{Tanh\+Soln\+For\+Unsteady\+Heat\+::step\+\_\+position()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00952}{main()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}\label{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!dump\_it@{dump\_it}}
+\index{dump\_it@{dump\_it}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_it()}{dump\_it()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::dump\+\_\+it (\begin{DoxyParamCaption}\item[{ofstream \&}]{dump\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Dump problem data to allow for later restart. 
+
+Dump the solution to disk. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00909}{909}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}\label{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!restart@{restart}}
+\index{restart@{restart}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::restart (\begin{DoxyParamCaption}\item[{ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Read problem data for restart. 
+
+Read solution from disk. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00924}{924}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}\label{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial condition (incl previous timesteps) according to specified function. Note that his overloads the virtual function in the Problem base class and is therefore executed automatically to re-\/assign the initial conditions during the spatially adaptive solution at the first timestep. 
+
+Set initial condition\+: Assign previous and current values from exact solution. 
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00571}{571}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00149}{Tanh\+Soln\+For\+Unsteady\+Heat\+::get\+\_\+exact\+\_\+u()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00952}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classRefineableUnsteadyHeatProblem_a368512778fbfd59e918104340466b1df}\label{classRefineableUnsteadyHeatProblem_a368512778fbfd59e918104340466b1df} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Boundary\_pt@{Boundary\_pt}}
+\index{Boundary\_pt@{Boundary\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_pt}{Boundary\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Boundary\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Geom\+Object that specifies the domain bondary. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00281}{281}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}\label{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00287}{287}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00272}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a9ea9d79a57cb16a6292a637965767f7e}\label{classRefineableUnsteadyHeatProblem_a9ea9d79a57cb16a6292a637965767f7e} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
+\index{Doc\_info@{Doc\_info}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc info object. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00296}{296}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a7ff1982af5819bab492c693178be0c24}\label{classRefineableUnsteadyHeatProblem_a7ff1982af5819bab492c693178be0c24} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Doc\_node\_pt@{Doc\_node\_pt}}
+\index{Doc\_node\_pt@{Doc\_node\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_node\_pt}{Doc\_node\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Doc\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to central node (exists at all refinement levels) for doc. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00293}{293}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639}\label{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
+\index{Source\_fct\_pt@{Source\_fct\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Source\_fct\_pt}{Source\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Unsteady\+Heat\+Equations$<$2$>$\+::\+Unsteady\+Heat\+Source\+Fct\+Pt \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to source function. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00284}{284}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6}\label{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}surface"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00290}{290}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+\Hypertarget{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07b00254ca7a0e6a}\label{classRefineableUnsteadyHeatProblem_a8f62ba78fb856d2e07b00254ca7a0e6a} 
+\index{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!RefineableUnsteadyHeatProblem$<$ ELEMENT $>$@{RefineableUnsteadyHeatProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{Refineable\+Unsteady\+Heat\+Problem}}$<$ ELEMENT $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00299}{299}} of file \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc_source_l00308}{Refineable\+Unsteady\+Heat\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Unsteady\+Heat\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__unsteady__heat__ALE_8cc}{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc}}\end{DoxyCompactItemize}

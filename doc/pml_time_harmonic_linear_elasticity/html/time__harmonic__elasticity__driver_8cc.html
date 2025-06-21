@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: time_harmonic_elasticity_driver.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_a9eed19037dc70a23fbe98084b848729.html">pml_time_harmonic_linear_elasticity</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">time_harmonic_elasticity_driver.cc File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="time__harmonic__elasticity__driver_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classElasticAnnulusProblem.html">ElasticAnnulusProblem&lt; ELASTICITY_ELEMENT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Annular disk.  <a href="classElasticAnnulusProblem.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceGlobal__Parameters" id="r_namespaceGlobal__Parameters"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html">Global_Parameters</a></td></tr>
+<tr class="memdesc:namespaceGlobal__Parameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global variables. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aafb6ae2e2642a42a7c8ce999837d18b1" id="r_aafb6ae2e2642a42a7c8ce999837d18b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aafb6ae2e2642a42a7c8ce999837d18b1">Global_Parameters::compute_dependent_parameters</a> ()</td></tr>
+<tr class="memdesc:aafb6ae2e2642a42a7c8ce999837d18b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to compute dependent parameters.  <br /></td></tr>
+<tr class="separator:aafb6ae2e2642a42a7c8ce999837d18b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ae8c02f7e4ef9d552591d22f1c26f9" id="r_a28ae8c02f7e4ef9d552591d22f1c26f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a28ae8c02f7e4ef9d552591d22f1c26f9">Global_Parameters::Hankel_first</a> (const unsigned &amp;n, const double &amp;x, Vector&lt; std::complex&lt; double &gt; &gt; &amp;h, Vector&lt; std::complex&lt; double &gt; &gt; &amp;hp)</td></tr>
+<tr class="memdesc:a28ae8c02f7e4ef9d552591d22f1c26f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative.  <br /></td></tr>
+<tr class="separator:a28ae8c02f7e4ef9d552591d22f1c26f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97162dba4bd29a15067b9c9bbe53c754" id="r_a97162dba4bd29a15067b9c9bbe53c754"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a97162dba4bd29a15067b9c9bbe53c754">Global_Parameters::exact_u</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a97162dba4bd29a15067b9c9bbe53c754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exact solution as a Vector: {u_x_real, u_y_real, u_x_imag, u_y_imag}.  <br /></td></tr>
+<tr class="separator:a97162dba4bd29a15067b9c9bbe53c754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time__harmonic__elasticity__driver_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver for annular disk loaded by pressure.  <br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af365b0769e142cabdaed848057332858" id="r_af365b0769e142cabdaed848057332858"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#af365b0769e142cabdaed848057332858">Global_Parameters::Element_area</a> = 0.01</td></tr>
+<tr class="memdesc:af365b0769e142cabdaed848057332858"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper to set target mesh element size  <br /></td></tr>
+<tr class="separator:af365b0769e142cabdaed848057332858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6106a50c4a420f4040e2ccd7d443267c" id="r_a6106a50c4a420f4040e2ccd7d443267c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a6106a50c4a420f4040e2ccd7d443267c">Global_Parameters::T_start</a> = 0.0</td></tr>
+<tr class="memdesc:a6106a50c4a420f4040e2ccd7d443267c"><td class="mdescLeft">&#160;</td><td class="mdescRight">helpers to time the code  <br /></td></tr>
+<tr class="separator:a6106a50c4a420f4040e2ccd7d443267c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ef00f24f3bc5c16dae72557c736634" id="r_a42ef00f24f3bc5c16dae72557c736634"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a42ef00f24f3bc5c16dae72557c736634">Global_Parameters::T_end</a> = 0.0</td></tr>
+<tr class="separator:a42ef00f24f3bc5c16dae72557c736634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9af8f57814ac363b52f2a88d75864524" id="r_a9af8f57814ac363b52f2a88d75864524"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a9af8f57814ac363b52f2a88d75864524">Global_Parameters::N_pml_multiplier</a> = 1</td></tr>
+<tr class="memdesc:a9af8f57814ac363b52f2a88d75864524"><td class="mdescLeft">&#160;</td><td class="mdescRight">PML width in elements for the right layer.  <br /></td></tr>
+<tr class="separator:a9af8f57814ac363b52f2a88d75864524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a49a7bc4052082ccf10caf8ff7a52b6" id="r_a7a49a7bc4052082ccf10caf8ff7a52b6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7a49a7bc4052082ccf10caf8ff7a52b6">Global_Parameters::L_pml_multiplier</a> = 1.0</td></tr>
+<tr class="separator:a7a49a7bc4052082ccf10caf8ff7a52b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a401ab27b40efe725bc047909ae65b4b1" id="r_a401ab27b40efe725bc047909ae65b4b1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a401ab27b40efe725bc047909ae65b4b1">Global_Parameters::N_x_right_pml</a> = 8</td></tr>
+<tr class="memdesc:a401ab27b40efe725bc047909ae65b4b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">PML width in elements for the right layer.  <br /></td></tr>
+<tr class="separator:a401ab27b40efe725bc047909ae65b4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade86fec7e40fc9a5330e6213482f09d6" id="r_ade86fec7e40fc9a5330e6213482f09d6"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ade86fec7e40fc9a5330e6213482f09d6">Global_Parameters::N_y_top_pml</a> = 8</td></tr>
+<tr class="memdesc:ade86fec7e40fc9a5330e6213482f09d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">PML width in elements for the top layer.  <br /></td></tr>
+<tr class="separator:ade86fec7e40fc9a5330e6213482f09d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf11b5794502b15efd0aa37347f6994" id="r_accf11b5794502b15efd0aa37347f6994"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#accf11b5794502b15efd0aa37347f6994">Global_Parameters::N_x_left_pml</a> = 8</td></tr>
+<tr class="memdesc:accf11b5794502b15efd0aa37347f6994"><td class="mdescLeft">&#160;</td><td class="mdescRight">PML width in elements for the left layer.  <br /></td></tr>
+<tr class="separator:accf11b5794502b15efd0aa37347f6994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79bff9b8e3435255541b71c0e3cc30a1" id="r_a79bff9b8e3435255541b71c0e3cc30a1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a79bff9b8e3435255541b71c0e3cc30a1">Global_Parameters::N_y_bottom_pml</a> = 8</td></tr>
+<tr class="memdesc:a79bff9b8e3435255541b71c0e3cc30a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">PML width in elements for the left layer.  <br /></td></tr>
+<tr class="separator:a79bff9b8e3435255541b71c0e3cc30a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a140b1b8aaef0bf2b94acf75d681d4545" id="r_a140b1b8aaef0bf2b94acf75d681d4545"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a140b1b8aaef0bf2b94acf75d681d4545">Global_Parameters::Width_x_right_pml</a> = 2.0</td></tr>
+<tr class="separator:a140b1b8aaef0bf2b94acf75d681d4545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a175759402c54bb216b0599c6a031abea" id="r_a175759402c54bb216b0599c6a031abea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a175759402c54bb216b0599c6a031abea">Global_Parameters::Width_y_top_pml</a> = 2.0</td></tr>
+<tr class="separator:a175759402c54bb216b0599c6a031abea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28925335dcc7b2bed01d744a543be9aa" id="r_a28925335dcc7b2bed01d744a543be9aa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a28925335dcc7b2bed01d744a543be9aa">Global_Parameters::Width_x_left_pml</a> = 2.0</td></tr>
+<tr class="separator:a28925335dcc7b2bed01d744a543be9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67848e80f63ec793108a4710a28cc3a9" id="r_a67848e80f63ec793108a4710a28cc3a9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a67848e80f63ec793108a4710a28cc3a9">Global_Parameters::Width_y_bottom_pml</a> = 2.0</td></tr>
+<tr class="separator:a67848e80f63ec793108a4710a28cc3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661" id="r_a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a> =0.3</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e1e178dfb7f5e35b452599bd4c4324" id="r_af9e1e178dfb7f5e35b452599bd4c4324"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a> =30.0</td></tr>
+<tr class="memdesc:af9e1e178dfb7f5e35b452599bd4c4324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of non-dim frequency.  <br /></td></tr>
+<tr class="separator:af9e1e178dfb7f5e35b452599bd4c4324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc0631434879b47501f64851ad679b8" id="r_a9dc0631434879b47501f64851ad679b8"><td class="memItemLeft" align="right" valign="top">PMLTimeHarmonicIsotropicElasticityTensor *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a9dc0631434879b47501f64851ad679b8">Global_Parameters::E_pt</a></td></tr>
+<tr class="memdesc:a9dc0631434879b47501f64851ad679b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The elasticity tensor.  <br /></td></tr>
+<tr class="separator:a9dc0631434879b47501f64851ad679b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b73c5ead1114ae88bbd4cb0eb54f078" id="r_a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a0b73c5ead1114ae88bbd4cb0eb54f078">Global_Parameters::H_annulus</a> =0.5</td></tr>
+<tr class="memdesc:a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thickness of annulus.  <br /></td></tr>
+<tr class="separator:a0b73c5ead1114ae88bbd4cb0eb54f078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301ab922df72030c660b21328d6caf76" id="r_a301ab922df72030c660b21328d6caf76"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a> =&quot;RESLT&quot;</td></tr>
+<tr class="memdesc:a301ab922df72030c660b21328d6caf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output directory.  <br /></td></tr>
+<tr class="separator:a301ab922df72030c660b21328d6caf76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Driver for annular disk loaded by pressure. </p>
+<p>Number of elements for each layer</p>
+<p>Thickness of each layer</p>
+<p>Target element size</p>
+<p>Target element size</p>
+<p>Update dependent parameters</p>
+
+<p class="definition">Definition at line <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00841">841</a> of file <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html">time_harmonic_elasticity_driver.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00089">Global_Parameters::compute_dependent_parameters()</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00117">Global_Parameters::Directory</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00111">Global_Parameters::E_pt</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00058">Global_Parameters::Element_area</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00066">Global_Parameters::L_pml_multiplier</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00065">Global_Parameters::N_pml_multiplier</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00075">Global_Parameters::N_x_left_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00069">Global_Parameters::N_x_right_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00078">Global_Parameters::N_y_bottom_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00072">Global_Parameters::N_y_top_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00105">Global_Parameters::Nu</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00108">Global_Parameters::Omega_sq</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00062">Global_Parameters::T_end</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00061">Global_Parameters::T_start</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00085">Global_Parameters::Width_x_left_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00083">Global_Parameters::Width_x_right_pml</a>, <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00086">Global_Parameters::Width_y_bottom_pml</a>, and <a class="el" href="time__harmonic__elasticity__driver_8cc_source.html#l00084">Global_Parameters::Width_y_top_pml</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

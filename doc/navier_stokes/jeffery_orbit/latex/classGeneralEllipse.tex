@@ -1,0 +1,176 @@
+\doxysection{General\+Ellipse Class Reference}
+\hypertarget{classGeneralEllipse}{}\label{classGeneralEllipse}\index{GeneralEllipse@{GeneralEllipse}}
+
+
+A geometric object for an ellipse with initial centre of mass at (centre\+\_\+x, centre\+\_\+y) with axis in the x direction given by 2a and in the y-\/direction given by 2b. The boundary of the ellipse is parametrised by its angle.  
+
+
+Inheritance diagram for General\+Ellipse\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGeneralEllipse}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGeneralEllipse_a50dc036d709bcd1d53eafb62b5548f67}{General\+Ellipse}} (const double \&centre\+\_\+x, const double \&centre\+\_\+y, const double \&a, const double \&b)
+\begin{DoxyCompactList}\small\item\em Simple Constructor that transfers appropriate geometric parameters into internal data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGeneralEllipse_a3ac5c17cf8c4998f1b74913860cb3bb9}{\texorpdfstring{$\sim$}{\string~}\+General\+Ellipse}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeneralEllipse_a85e975c70441a9c9c711b5e27d124bff}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Return the position of the ellipse boundary as a function of the angle xi\mbox{[}0\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeneralEllipse_a2bdcc69fcb1f1725124d625c032d171a}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classGeneralEllipse_aeb974769f58d136a12ac1532506304cc}{Centre\+\_\+x}}
+\item 
+double \mbox{\hyperlink{classGeneralEllipse_abf2def5a5140bb35e381b800c4b91dc9}{Centre\+\_\+y}}
+\item 
+double \mbox{\hyperlink{classGeneralEllipse_ae583e1437da6ad4eb228dda60b61808a}{A}}
+\item 
+double \mbox{\hyperlink{classGeneralEllipse_a185ae9786d5c6c82eef61e163e9310c6}{B}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A geometric object for an ellipse with initial centre of mass at (centre\+\_\+x, centre\+\_\+y) with axis in the x direction given by 2a and in the y-\/direction given by 2b. The boundary of the ellipse is parametrised by its angle. 
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00145}{145}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGeneralEllipse_a50dc036d709bcd1d53eafb62b5548f67}\label{classGeneralEllipse_a50dc036d709bcd1d53eafb62b5548f67} 
+\index{GeneralEllipse@{GeneralEllipse}!GeneralEllipse@{GeneralEllipse}}
+\index{GeneralEllipse@{GeneralEllipse}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{GeneralEllipse()}{GeneralEllipse()}}
+{\footnotesize\ttfamily General\+Ellipse\+::\+General\+Ellipse (\begin{DoxyParamCaption}\item[{const double \&}]{centre\+\_\+x,  }\item[{const double \&}]{centre\+\_\+y,  }\item[{const double \&}]{a,  }\item[{const double \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Simple Constructor that transfers appropriate geometric parameters into internal data. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00156}{156}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+\Hypertarget{classGeneralEllipse_a3ac5c17cf8c4998f1b74913860cb3bb9}\label{classGeneralEllipse_a3ac5c17cf8c4998f1b74913860cb3bb9} 
+\index{GeneralEllipse@{GeneralEllipse}!````~GeneralEllipse@{\texorpdfstring{$\sim$}{\string~}GeneralEllipse}}
+\index{````~GeneralEllipse@{\texorpdfstring{$\sim$}{\string~}GeneralEllipse}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GeneralEllipse()}{\string~GeneralEllipse()}}
+{\footnotesize\ttfamily General\+Ellipse\+::\texorpdfstring{$\sim$}{\string~}\+General\+Ellipse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00162}{162}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGeneralEllipse_a2bdcc69fcb1f1725124d625c032d171a}\label{classGeneralEllipse_a2bdcc69fcb1f1725124d625c032d171a} 
+\index{GeneralEllipse@{GeneralEllipse}!position@{position}}
+\index{position@{position}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void General\+Ellipse\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00173}{173}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+References \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{position()}}.
+
+\Hypertarget{classGeneralEllipse_a85e975c70441a9c9c711b5e27d124bff}\label{classGeneralEllipse_a85e975c70441a9c9c711b5e27d124bff} 
+\index{GeneralEllipse@{GeneralEllipse}!position@{position}}
+\index{position@{position}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void General\+Ellipse\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the position of the ellipse boundary as a function of the angle xi\mbox{[}0\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{166}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+References \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{A}}, \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{B}}, \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{Centre\+\_\+x}}, and \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{Centre\+\_\+y}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00173}{position()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classGeneralEllipse_ae583e1437da6ad4eb228dda60b61808a}\label{classGeneralEllipse_ae583e1437da6ad4eb228dda60b61808a} 
+\index{GeneralEllipse@{GeneralEllipse}!A@{A}}
+\index{A@{A}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily double General\+Ellipse\+::A\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{150}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{position()}}.
+
+\Hypertarget{classGeneralEllipse_a185ae9786d5c6c82eef61e163e9310c6}\label{classGeneralEllipse_a185ae9786d5c6c82eef61e163e9310c6} 
+\index{GeneralEllipse@{GeneralEllipse}!B@{B}}
+\index{B@{B}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily double General\+Ellipse\+::B\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{150}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{position()}}.
+
+\Hypertarget{classGeneralEllipse_aeb974769f58d136a12ac1532506304cc}\label{classGeneralEllipse_aeb974769f58d136a12ac1532506304cc} 
+\index{GeneralEllipse@{GeneralEllipse}!Centre\_x@{Centre\_x}}
+\index{Centre\_x@{Centre\_x}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{Centre\_x}{Centre\_x}}
+{\footnotesize\ttfamily double General\+Ellipse\+::\+Centre\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{150}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{position()}}.
+
+\Hypertarget{classGeneralEllipse_abf2def5a5140bb35e381b800c4b91dc9}\label{classGeneralEllipse_abf2def5a5140bb35e381b800c4b91dc9} 
+\index{GeneralEllipse@{GeneralEllipse}!Centre\_y@{Centre\_y}}
+\index{Centre\_y@{Centre\_y}!GeneralEllipse@{GeneralEllipse}}
+\doxysubsubsection{\texorpdfstring{Centre\_y}{Centre\_y}}
+{\footnotesize\ttfamily double General\+Ellipse\+::\+Centre\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00150}{150}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00166}{position()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{jeffery__orbit_8cc}{jeffery\+\_\+orbit.\+cc}}\end{DoxyCompactItemize}

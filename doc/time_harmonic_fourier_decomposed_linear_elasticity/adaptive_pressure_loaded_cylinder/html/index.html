@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: The spatially-adaptive solution of the azimuthally Fourier-decomposed equations of 3D time-harmonic linear elasticity on unstructured meshes</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">The spatially-adaptive solution of the azimuthally Fourier-decomposed equations of 3D time-harmonic linear elasticity on unstructured meshes </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this tutorial we re-visit the solution of the time-harmonic equations of 3D linear elasticity in cylindrical polar coordinates, using a Fourier decomposition of the solution in the azimuthal direction. The driver code is very similar to the one discussed in <a href="../../cylinder/html/index.html">another tutorial </a> &ndash; the main purpose of the current tutorial is to demonstrate the use of spatial adaptivity on unstructured meshes. Compared to the test case considered in the <a href="../../cylinder/html/index.html">other tutorial</a> we study a slightly less contrived test problem: the forced time-harmonic oscillations of a finite-length, hollow cylinder, loaded by a time-periodic pressure load on its inner surface.</p>
+<center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> This implementation of the equations and the documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester's EPSRC-funded Knowledge Transfer Account. </center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<h1><a class="anchor" id="test"></a>
+The test problem</h1>
+<p>The figure below shows the problem considered in this tutorial: an annular elastic body that occupies the region <img class="formulaInl" alt="$ r_{\rm min}\leq
+r\leq r_{\rm max}, z_{\rm min}\leq
+z\leq z_{\rm max} $" src="form_0.png" width="180" height="11"/> is loaded by a time-harmonic pressure load acting on its inner surface (at <img class="formulaInl" alt="$ r = r_{\rm min} $" src="form_1.png" width="46" height="9"/>). The upper and lower ends of the hollow cylinder (at <img class="formulaInl" alt="$ z = z_{\rm min} $" src="form_2.png" width="45" height="9"/> and <img class="formulaInl" alt="$ z = z_{\rm min} $" src="form_2.png" width="45" height="9"/>) are held at a fixed position.</p>
+<p>Here is an animation of the resulting displacement field for <img class="formulaInl" alt="$ r_{\rm min} = 0.1 $" src="form_3.png" width="56" height="11"/> and <img class="formulaInl" alt="$ r_{\rm max} = 1.1. $" src="form_4.png" width="61" height="11"/></p>
+<div class="image">
+<img src="anim.gif" alt=""/>
+<div class="caption">
+Forced oscillations of a thick-walled, hollow cylinder, subject to a pressure load on its inner surface. The pink shape in the background shows the cylinder's undeformed shape (in a radial plane); the mesh plotted in the region r &lt; 0 illustrates how spatial adaptivity refines the mesh in regions of sharp displacement gradients (near the loaded surface and the supports). </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="num"></a>
+The numerical solution</h1>
+<p>The driver code for this problem is very similar to the one discussed in <a href="../../cylinder/html/index.html">another tutorial</a>. Running <code>sdiff</code> on the two driver codes </p><center> <a href="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc">demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc </a> </center><p> and </p><center> <a href="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc">demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc </a> </center><p> shows you the differences, the most important of which are:</p><ul>
+<li>The change of the forcing to a spatially constant pressure load on the inside boundary.</li>
+<li>The provision of the <code>actions_before/after_adapt</code>() functions and a helper function <code>complete_problem_setup()</code> which rebuilds the elements (by passing the problem parameters to the elements) following the unstructured mesh adaptation. (The need/rationale for such a function is discussed in <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">another tutorial.</a>)</li>
+<li>The mesh generation and the application of boundary conditions at the upper and lower boundaries of the hollow cylinder. . <br  />
+ All of this is reasonably straightforward and provides a powerful code that automatically adapts the mesh in regions of large displacement gradients. Have a look through the driver code and play with it.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="code"></a>
+Code listing</h1>
+<p>Here's a listing of the complete driver code:</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">// Driver </span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The oomphlib headers</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;time_harmonic_fourier_decomposed_linear_elasticity.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The mesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/rectangular_quadmesh.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/triangle_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>oomph;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_namespace=================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for global parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Define Poisson&#39;s ratio Nu</span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#a5978c2a1498ec7775b228a11a3912209">Nu</a>(0.3,0.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define the non-dimensional Young&#39;s modulus</span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#ac74d762d76b56416281173421b018460">E</a>(1.0,0.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define Fourier wavenumber</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Fourier_wavenumber</a> = 0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define the non-dimensional square angular frequency of </span></div>
+<div class="line"><span class="comment"> /// time-harmonic motion</span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#aa7f960ed4311ccf6e3dbf9371f13876a">Omega_sq</a> (10.0,0.0);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in r direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Lr</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in z-direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Lz</a> = 2.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up min &amp; max (r,z) coordinates</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a> = 0.1;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a> = 0.3;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">rmax</a> = <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a>+<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Lr</a>;</div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">zmax</a> = <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a>+<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Lz</a>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Define the imaginary unit</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">const</span> std::complex&lt;double&gt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#a2ceef30cf51dfd432bafde39945a4e45">I</a>(0.0,1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pressure load</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a>=1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The traction function at r=rmin: (t_r, t_z, t_theta)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Parameters.html#a579fa434bf9ee57e66d4bd42b208fc23">boundary_traction</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                      <span class="keyword">const</span> Vector&lt;double&gt; &amp;n,</div>
+<div class="line">                      Vector&lt;std::complex&lt;double&gt; &gt; &amp;result)</div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Radial traction</span></div>
+<div class="line">  result[0] = <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a>;</div>
+<div class="line">  <span class="comment">// Axial traction</span></div>
+<div class="line">  result[1] = 0.0;</div>
+<div class="line">  <span class="comment">// Azimuthal traction</span></div>
+<div class="line">  result[2] = 0.0;</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_problem_class=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Class to validate time harmonic linear elasticity (Fourier </span></div>
+<div class="line"><span class="comment">/// decomposed)</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html">FourierDecomposedTimeHarmonicLinearElasticityProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in r and z directions </span></div>
+<div class="line"><span class="comment"> /// and boundary locations</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html">FourierDecomposedTimeHarmonicLinearElasticityProblem</a>(</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nr, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nz,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;rmin, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmax,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;zmin, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; zmax);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update before solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad9a3f48c3b399c4595f73d3f1e9a14ef">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ac5c25fb4658eaef91104ef7be1b0d25e">actions_after_newton_solve</a>() {}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Delete traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad51d1870683e0141c7854c583dd3916b">delete_traction_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Helper function to complete problem setup</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aeb3e1638026cb1cabf1b16a32496f63c">complete_problem_setup</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions before adapt: Wipe the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a36fdaec8cffb1f6ac313515a86010d8d">actions_before_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill the traction elements and wipe surface mesh</span></div>
+<div class="line">   <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad51d1870683e0141c7854c583dd3916b">delete_traction_elements</a>();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line">   rebuild_global_mesh();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Actions after adapt: Rebuild the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a5b9d18ea43b802e8a2b1f3b50140054b">actions_after_adapt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create traction elements from all elements that are </span></div>
+<div class="line">   <span class="comment">// adjacent to FSI boundaries and add them to surface meshes</span></div>
+<div class="line">   <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ab995077cbd92377b726d0ea0de81720e">assign_traction_elements</a>();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line">   rebuild_global_mesh();</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Complete problem setup</span></div>
+<div class="line">   <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aeb3e1638026cb1cabf1b16a32496f63c">complete_problem_setup</a>();   </div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#af328e5b2260377fa7df04b727ca130bd">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Allocate traction elements on the bottom surface</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ab995077cbd92377b726d0ea0de81720e">assign_traction_elements</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableTriangleMesh&lt;ELEMENT&gt;* <a class="code hl_variable" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#abc7e142ef488a0533a2544ac302f8b08">Bulk_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#abc7e142ef488a0533a2544ac302f8b08">Bulk_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aaf7a1b8aadd027cf6ed340e31fb53550">Surface_mesh_pt</a>;</div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_constructor=============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Problem constructor: Pass number of elements in coordinate</span></div>
+<div class="line"><span class="comment">/// directions and size of domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a52597ec969cbd2aaa9fde263594c1c32">FourierDecomposedTimeHarmonicLinearElasticityProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a52597ec969cbd2aaa9fde263594c1c32">FourierDecomposedTimeHarmonicLinearElasticityProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nr, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nz,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;rmin, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmax,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;zmin, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; zmax)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The boundary is bounded by four distinct boundaries, each</span></div>
+<div class="line"> <span class="comment">// represented by its own polyline</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; boundary_polyline_pt(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vertex coordinates on boundary</span></div>
+<div class="line"> Vector&lt;Vector&lt;double&gt; &gt; bound_coords(2);</div>
+<div class="line"> bound_coords[0].resize(2);</div>
+<div class="line"> bound_coords[1].resize(2);</div>
+<div class="line">     </div>
+<div class="line"> <span class="comment">// Horizontal bottom boundary</span></div>
+<div class="line"> bound_coords[0][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a>;</div>
+<div class="line"> bound_coords[0][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a>;</div>
+<div class="line"> bound_coords[1][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">rmax</a>;</div>
+<div class="line"> bound_coords[1][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary polyline</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_id=0;</div>
+<div class="line"> boundary_polyline_pt[0]=<span class="keyword">new</span> TriangleMeshPolyLine(bound_coords,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vertical outer boundary</span></div>
+<div class="line"> bound_coords[0][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">rmax</a>;</div>
+<div class="line"> bound_coords[0][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a>;</div>
+<div class="line"> bound_coords[1][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">rmax</a>;</div>
+<div class="line"> bound_coords[1][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">zmax</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary polyline</span></div>
+<div class="line"> boundary_id=1;</div>
+<div class="line"> boundary_polyline_pt[1]=<span class="keyword">new</span> TriangleMeshPolyLine(bound_coords,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Horizontal top boundary</span></div>
+<div class="line"> bound_coords[0][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">rmax</a>;</div>
+<div class="line"> bound_coords[0][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">zmax</a>;</div>
+<div class="line"> bound_coords[1][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a>;</div>
+<div class="line"> bound_coords[1][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">zmax</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary polyline</span></div>
+<div class="line"> boundary_id=2;</div>
+<div class="line"> boundary_polyline_pt[2]=<span class="keyword">new</span> TriangleMeshPolyLine(bound_coords,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vertical inner boundary</span></div>
+<div class="line"> bound_coords[0][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a>;</div>
+<div class="line"> bound_coords[0][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">zmax</a>;</div>
+<div class="line"> bound_coords[1][0]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">rmin</a>;</div>
+<div class="line"> bound_coords[1][1]=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">zmin</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the boundary polyline</span></div>
+<div class="line"> boundary_id=3;</div>
+<div class="line"> boundary_polyline_pt[3]=<span class="keyword">new</span> TriangleMeshPolyLine(bound_coords,boundary_id);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointer to the closed curve that defines the outer boundary</span></div>
+<div class="line"> TriangleMeshClosedCurve* closed_curve_pt= </div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolygon(boundary_polyline_pt);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Use the TriangleMeshParameters object for helping on the manage of the</span></div>
+<div class="line"> <span class="comment">// TriangleMesh parameters</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters(closed_curve_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify the maximum area element</span></div>
+<div class="line"> <span class="keywordtype">double</span> uniform_element_area=0.2;</div>
+<div class="line"> triangle_mesh_parameters.element_area() = uniform_element_area;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create the mesh</span></div>
+<div class="line"> Bulk_mesh_pt=<span class="keyword">new</span> RefineableTriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt()=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Now create the mesh</span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(nr,nz,rmin,rmax,zmin,zmax);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the surface mesh of traction elements</span></div>
+<div class="line"> Surface_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> assign_traction_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete problem setup</span></div>
+<div class="line"> complete_problem_setup();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the submeshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build the global mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign equation numbers</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; <span class="stringliteral">&quot; equations assigned&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_complete_problem_setup=================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Complete problem setup</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aeb3e1638026cb1cabf1b16a32496f63c">FourierDecomposedTimeHarmonicLinearElasticityProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aeb3e1638026cb1cabf1b16a32496f63c">complete_problem_setup</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin &amp; set the ones that have Dirichlet </span></div>
+<div class="line"> <span class="comment">// conditions here</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin displacements everywhere apart from boundaries 1 and 3</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------------------</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;3;ibound=ibound+2)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=Bulk_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++) </div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to node</span></div>
+<div class="line">     Node* nod_pt=Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pinned in r, z and theta</span></div>
+<div class="line">     nod_pt-&gt;pin(0);nod_pt-&gt;pin(1);nod_pt-&gt;pin(2);</div>
+<div class="line">     nod_pt-&gt;pin(3);nod_pt-&gt;pin(4);nod_pt-&gt;pin(5);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Set the displacements</span></div>
+<div class="line">     nod_pt-&gt;set_value(0,0.0);</div>
+<div class="line">     nod_pt-&gt;set_value(1,0.0);</div>
+<div class="line">     nod_pt-&gt;set_value(2,0.0);</div>
+<div class="line">     nod_pt-&gt;set_value(3,0.0);</div>
+<div class="line">     nod_pt-&gt;set_value(4,0.0);</div>
+<div class="line">     nod_pt-&gt;set_value(5,0.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_el = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a bulk element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to Poisson&#39;s ratio</span></div>
+<div class="line">   el_pt-&gt;nu_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a5978c2a1498ec7775b228a11a3912209">Global_Parameters::Nu</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to Fourier wavenumber</span></div>
+<div class="line">   el_pt-&gt;fourier_wavenumber_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to non-dim Young&#39;s modulus</span></div>
+<div class="line">   el_pt-&gt;youngs_modulus_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#ac74d762d76b56416281173421b018460">Global_Parameters::E</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to square of the angular frequency</span></div>
+<div class="line">   el_pt-&gt;omega_sq_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#aa7f960ed4311ccf6e3dbf9371f13876a">Global_Parameters::Omega_sq</a>;</div>
+<div class="line"> </div>
+<div class="line">  }<span class="comment">// end loop over elements</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the traction elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_traction =  Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_traction;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a surface element</span></div>
+<div class="line">   TimeHarmonicFourierDecomposedLinearElasticityTractionElement&lt;ELEMENT&gt;*</div>
+<div class="line">    el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>TimeHarmonicFourierDecomposedLinearElasticityTractionElement</div>
+<div class="line">    &lt;ELEMENT<span class="keyword">&gt;</span>* &gt;(Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the applied traction</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a579fa434bf9ee57e66d4bd42b208fc23">Global_Parameters::boundary_traction</a>;</div>
+<div class="line">   </div>
+<div class="line">  }<span class="comment">// end loop over traction elements</span></div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_traction===============================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Make traction elements along the boundary r=rmin</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ab995077cbd92377b726d0ea0de81720e">FourierDecomposedTimeHarmonicLinearElasticityProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ab995077cbd92377b726d0ea0de81720e">assign_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="keywordtype">unsigned</span> bound, n_neigh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are next to boundary 3</span></div>
+<div class="line"> bound=3;</div>
+<div class="line"> n_neigh = Bulk_mesh_pt-&gt;nboundary_element(bound); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now loop over bulk elements and create the face elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_neigh;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create the face element</span></div>
+<div class="line">   FiniteElement *traction_element_pt </div>
+<div class="line">    = <span class="keyword">new</span> TimeHarmonicFourierDecomposedLinearElasticityTractionElement&lt;ELEMENT&gt;</div>
+<div class="line">    (Bulk_mesh_pt-&gt;boundary_element_pt(bound,n),</div>
+<div class="line">     Bulk_mesh_pt-&gt;face_index_at_boundary(bound,n));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Add to mesh</span></div>
+<div class="line">   Surface_mesh_pt-&gt;add_element_pt(traction_element_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of assign_traction_elements</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_delete_traction========================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Delete traction elements</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad51d1870683e0141c7854c583dd3916b">FourierDecomposedTimeHarmonicLinearElasticityProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad51d1870683e0141c7854c583dd3916b">delete_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// How many surface elements are in the surface mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the surface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Kill surface element</span></div>
+<div class="line">   <span class="keyword">delete</span> Surface_mesh_pt-&gt;element_pt(e);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> Surface_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of delete_traction_elements</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==start_of_doc_solution=================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#af328e5b2260377fa7df04b727ca130bd">FourierDecomposedTimeHarmonicLinearElasticityProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#af328e5b2260377fa7df04b727ca130bd">doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output norm of solution (to allow validation of solution even</span></div>
+<div class="line"> <span class="comment">// if triangle generates a slightly different mesh)</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/norm.dat&quot;</span>,doc_info.directory().c_str());   </div>
+<div class="line"> some_file.open(filename);   </div>
+<div class="line"> <span class="keywordtype">double</span> norm=0.0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nel=Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nel;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> el_norm=0.0;</div>
+<div class="line">   Bulk_mesh_pt-&gt;compute_norm(el_norm);</div>
+<div class="line">   norm+=el_norm;</div>
+<div class="line">  }</div>
+<div class="line"> some_file &lt;&lt; norm &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution   </span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//===start_of_main======================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver code </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of elements in r-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nr=10;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in z-direction (for (approximately) square elements)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nz=unsigned(<span class="keywordtype">double</span>(nr)*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Global_Parameters::Lz</a>/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Global_Parameters::Lr</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#ifdef ADAPTIVE</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up problem</span></div>
+<div class="line"> <a class="code hl_class" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html">FourierDecomposedTimeHarmonicLinearElasticityProblem</a></div>
+<div class="line">  &lt;ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement</div>
+<div class="line">   &lt;TTimeHarmonicFourierDecomposedLinearElasticityElement&lt;3&gt; &gt; &gt;</div>
+<div class="line">  problem(nr,nz,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">Global_Parameters::rmin</a>,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">Global_Parameters::rmax</a>,</div>
+<div class="line">          <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">Global_Parameters::zmin</a>,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">Global_Parameters::zmax</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt=3;</div>
+<div class="line"> problem.newton_solve(max_adapt);</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up problem</span></div>
+<div class="line"> <a class="code hl_class" href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html">FourierDecomposedTimeHarmonicLinearElasticityProblem</a></div>
+<div class="line">  &lt;QTimeHarmonicFourierDecomposedLinearElasticityElement&lt;3&gt; &gt; </div>
+<div class="line">  problem(nr,nz,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">Global_Parameters::rmin</a>,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">Global_Parameters::rmax</a>,</div>
+<div class="line">          <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">Global_Parameters::zmin</a>,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">Global_Parameters::zmax</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve</span></div>
+<div class="line"> problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output the solution</span></div>
+<div class="line"> problem.doc_solution(doc_info);</div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html">FourierDecomposedTimeHarmonicLinearElasticityProblem</a></div><div class="ttdoc">Class to validate time harmonic linear elasticity (Fourier decomposed)</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00133">cylinder.cc:134</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_a36fdaec8cffb1f6ac313515a86010d8d"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a36fdaec8cffb1f6ac313515a86010d8d">FourierDecomposedTimeHarmonicLinearElasticityProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Actions before adapt: Wipe the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="pressure__loaded__cylinder_8cc_source.html#l00124">pressure_loaded_cylinder.cc:124</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_a52597ec969cbd2aaa9fde263594c1c32"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a52597ec969cbd2aaa9fde263594c1c32">FourierDecomposedTimeHarmonicLinearElasticityProblem::FourierDecomposedTimeHarmonicLinearElasticityProblem</a></div><div class="ttdeci">FourierDecomposedTimeHarmonicLinearElasticityProblem(const unsigned &amp;nr, const unsigned &amp;nz, const double &amp;rmin, const double &amp;rmax, const double &amp;zmin, const double &amp;zmax)</div><div class="ttdoc">Constructor: Pass number of elements in r and z directions and boundary locations.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00172">cylinder.cc:174</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_a5b9d18ea43b802e8a2b1f3b50140054b"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#a5b9d18ea43b802e8a2b1f3b50140054b">FourierDecomposedTimeHarmonicLinearElasticityProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Actions after adapt: Rebuild the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="pressure__loaded__cylinder_8cc_source.html#l00135">pressure_loaded_cylinder.cc:135</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_aaf7a1b8aadd027cf6ed340e31fb53550"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aaf7a1b8aadd027cf6ed340e31fb53550">FourierDecomposedTimeHarmonicLinearElasticityProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00163">cylinder.cc:163</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_ab995077cbd92377b726d0ea0de81720e"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ab995077cbd92377b726d0ea0de81720e">FourierDecomposedTimeHarmonicLinearElasticityProblem::assign_traction_elements</a></div><div class="ttdeci">void assign_traction_elements()</div><div class="ttdoc">Allocate traction elements on the bottom surface.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00288">cylinder.cc:289</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_abc7e142ef488a0533a2544ac302f8b08"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#abc7e142ef488a0533a2544ac302f8b08">FourierDecomposedTimeHarmonicLinearElasticityProblem::Bulk_mesh_pt</a></div><div class="ttdeci">Mesh * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00160">cylinder.cc:160</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_ac5c25fb4658eaef91104ef7be1b0d25e"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ac5c25fb4658eaef91104ef7be1b0d25e">FourierDecomposedTimeHarmonicLinearElasticityProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00149">cylinder.cc:149</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_ad51d1870683e0141c7854c583dd3916b"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad51d1870683e0141c7854c583dd3916b">FourierDecomposedTimeHarmonicLinearElasticityProblem::delete_traction_elements</a></div><div class="ttdeci">void delete_traction_elements()</div><div class="ttdoc">Delete traction elements.</div><div class="ttdef"><b>Definition</b> <a href="pressure__loaded__cylinder_8cc_source.html#l00392">pressure_loaded_cylinder.cc:393</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_ad9a3f48c3b399c4595f73d3f1e9a14ef"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#ad9a3f48c3b399c4595f73d3f1e9a14ef">FourierDecomposedTimeHarmonicLinearElasticityProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00146">cylinder.cc:146</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_aeb3e1638026cb1cabf1b16a32496f63c"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#aeb3e1638026cb1cabf1b16a32496f63c">FourierDecomposedTimeHarmonicLinearElasticityProblem::complete_problem_setup</a></div><div class="ttdeci">void complete_problem_setup()</div><div class="ttdoc">Helper function to complete problem setup.</div><div class="ttdef"><b>Definition</b> <a href="pressure__loaded__cylinder_8cc_source.html#l00287">pressure_loaded_cylinder.cc:288</a></div></div>
+<div class="ttc" id="aclassFourierDecomposedTimeHarmonicLinearElasticityProblem_html_af328e5b2260377fa7df04b727ca130bd"><div class="ttname"><a href="classFourierDecomposedTimeHarmonicLinearElasticityProblem.html#af328e5b2260377fa7df04b727ca130bd">FourierDecomposedTimeHarmonicLinearElasticityProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00317">cylinder.cc:318</a></div></div>
+<div class="ttc" id="acylinder_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00360">cylinder.cc:360</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Namespace for global parameters.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00042">cylinder.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a2bcf0bd846d839f1e3bb04a6c0a612c1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Global_Parameters::Lz</a></div><div class="ttdeci">double Lz</div><div class="ttdoc">Length of domain in z-direction.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00065">cylinder.cc:65</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a2ceef30cf51dfd432bafde39945a4e45"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a2ceef30cf51dfd432bafde39945a4e45">Global_Parameters::I</a></div><div class="ttdeci">const std::complex&lt; double &gt; I(0.0, 1.0)</div><div class="ttdoc">Define the imaginary unit.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a31fb55c20db4aa0127aafa20f0d76731"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">Global_Parameters::P</a></div><div class="ttdeci">double P</div><div class="ttdef"><b>Definition</b> <a href="pressure__loaded__cylinder_8cc_source.html#l00075">pressure_loaded_cylinder.cc:75</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a444f5c911c8805ad2ba45ed8b1b8904e"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Global_Parameters::Lr</a></div><div class="ttdeci">double Lr</div><div class="ttdoc">Length of domain in r direction.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00062">cylinder.cc:62</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a579fa434bf9ee57e66d4bd42b208fc23"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a579fa434bf9ee57e66d4bd42b208fc23">Global_Parameters::boundary_traction</a></div><div class="ttdeci">void boundary_traction(const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; std::complex&lt; double &gt; &gt; &amp;result)</div><div class="ttdoc">The traction function at r=rmin: (t_r, t_z, t_theta)</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00077">cylinder.cc:77</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a5978c2a1498ec7775b228a11a3912209"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a5978c2a1498ec7775b228a11a3912209">Global_Parameters::Nu</a></div><div class="ttdeci">std::complex&lt; double &gt; Nu(0.3, 0.05)</div><div class="ttdoc">Define Poisson's ratio Nu.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a5d7fb394c980bb4bf2a52158f9d7cc50"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a5d7fb394c980bb4bf2a52158f9d7cc50">Global_Parameters::rmax</a></div><div class="ttdeci">double rmax</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00070">cylinder.cc:70</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a8ee2afb91b9b105939f19a0efa8e1441"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a8ee2afb91b9b105939f19a0efa8e1441">Global_Parameters::zmax</a></div><div class="ttdeci">double zmax</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00071">cylinder.cc:71</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_aa7f960ed4311ccf6e3dbf9371f13876a"><div class="ttname"><a href="namespaceGlobal__Parameters.html#aa7f960ed4311ccf6e3dbf9371f13876a">Global_Parameters::Omega_sq</a></div><div class="ttdeci">std::complex&lt; double &gt; Omega_sq(10.0, 5.0)</div><div class="ttdoc">Define the non-dimensional square angular frequency of time-harmonic motion.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ac6a17dbcf1b8f1136a1ec5c07efef708"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ac6a17dbcf1b8f1136a1ec5c07efef708">Global_Parameters::zmin</a></div><div class="ttdeci">double zmin</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00069">cylinder.cc:69</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ac74d762d76b56416281173421b018460"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ac74d762d76b56416281173421b018460">Global_Parameters::E</a></div><div class="ttdeci">std::complex&lt; double &gt; E(1.0, 0.01)</div><div class="ttdoc">Define the non-dimensional Young's modulus.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ad454d80ae621f272dd1d7932249545a5"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ad454d80ae621f272dd1d7932249545a5">Global_Parameters::rmin</a></div><div class="ttdeci">double rmin</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00068">cylinder.cc:68</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae1198385d90f52c4ed921520ae43a9e7"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a></div><div class="ttdeci">int Fourier_wavenumber</div><div class="ttdoc">Define Fourier wavenumber.</div><div class="ttdef"><b>Definition</b> <a href="cylinder_8cc_source.html#l00055">cylinder.cc:55</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/">demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc">demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:19:28
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

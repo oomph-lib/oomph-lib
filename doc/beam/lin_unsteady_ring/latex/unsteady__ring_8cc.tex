@@ -1,0 +1,54 @@
+\doxysection{unsteady\+\_\+ring.\+cc File Reference}
+\hypertarget{unsteady__ring_8cc}{}\label{unsteady__ring_8cc}\index{unsteady\_ring.cc@{unsteady\_ring.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classElasticRingProblem}{Elastic\+Ring\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Oscillating ring problem\+: Compare small-\/amplitude oscillations against analytical solution of the linearised equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for physical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Perturbation pressure to force non-\/axisymmetric deformation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver for oscillating ring problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos}}
+\begin{DoxyCompactList}\small\item\em Perturbation pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a2c0589daf61085e7ebec410cbbbc76}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+T\+\_\+kick}}
+\begin{DoxyCompactList}\small\item\em Duration of transient load. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Scaling factor for wall thickness (to be used in an exercise) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}} =\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}\texorpdfstring{$\ast$}{*}1.\+0/20.\+0
+\begin{DoxyCompactList}\small\item\em Wall thickness -- 1/20 for default value of scaling factor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}} =pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}},2)
+\begin{DoxyCompactList}\small\item\em Square of timescale ratio (i.\+e. non-\/dimensional density) ~\newline
+ -- 1.\+0 for default value of scaling factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{unsteady\_ring.cc@{unsteady\_ring.cc}!main@{main}}
+\index{main@{main}!unsteady\_ring.cc@{unsteady\_ring.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver for oscillating ring problem. 
+
+
+
+Definition at line \mbox{\hyperlink{unsteady__ring_8cc_source_l00549}{549}} of file \mbox{\hyperlink{unsteady__ring_8cc_source}{unsteady\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{lin__unsteady__ring_8cc_source_l00320}{Elastic\+Ring\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run()}}.
+

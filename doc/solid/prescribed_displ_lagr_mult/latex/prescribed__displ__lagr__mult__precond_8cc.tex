@@ -1,0 +1,57 @@
+\doxysection{prescribed\+\_\+displ\+\_\+lagr\+\_\+mult\+\_\+precond.\+cc File Reference}
+\hypertarget{prescribed__displ__lagr__mult__precond_8cc}{}\label{prescribed__displ__lagr__mult__precond_8cc}\index{prescribed\_displ\_lagr\_mult\_precond.cc@{prescribed\_displ\_lagr\_mult\_precond.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Pseudo-\/\+Elastic Solid element class to overload the block preconditioner methods \doxylink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()} and \doxylink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} to differentiate between DOFs subject to Lagrange multiplier and those that are not. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFiniteElementComp}{Finite\+Element\+Comp}}
+\begin{DoxyCompactList}\small\item\em Function-\/type-\/object to compare finite elements based on their x coordinate. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classWarpedLine}{Warped\+Line}}
+\begin{DoxyCompactList}\small\item\em Warped line in 2D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem}{Prescribed\+Boundary\+Displacement\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class for deformation of elastic block by prescribed boundary motion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper}{Diagonal\+Preconditioner\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace to "{}hide"{} global function that creates an instance of oomph-\/lib\textquotesingle{}s diagonal preconditioner. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper_aa6417c25f4cdc434c198624739fb3d38}{Diagonal\+Preconditioner\+Helper\+::get\+\_\+diagonal\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Create a matrix-\/based diagonal preconditioner for subsidiary linear systems. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classWarpedLine}{Warped\+Line}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object}} (0.\+0)
+\begin{DoxyCompactList}\small\item\em Geom\+Object specifying the shape of the boundary\+: Initially it\textquotesingle{}s flat. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{prescribed__displ__lagr__mult__precond_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{prescribed__displ__lagr__mult__precond_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{prescribed\_displ\_lagr\_mult\_precond.cc@{prescribed\_displ\_lagr\_mult\_precond.cc}!main@{main}}
+\index{main@{main}!prescribed\_displ\_lagr\_mult\_precond.cc@{prescribed\_displ\_lagr\_mult\_precond.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_source_l00711}{711}} of file \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_source}{prescribed\+\_\+displ\+\_\+lagr\+\_\+mult\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{prescribed__displ__lagr__mult_8cc_source_l00111}{Warped\+Line\+::ampl()}}, and \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object}}.
+

@@ -1,0 +1,14 @@
+\doxysection{double\+\_\+vector\+\_\+with\+\_\+halo.\+h File Reference}
+\hypertarget{double__vector__with__halo_8h}{}\label{double__vector__with__halo_8h}\index{double\_vector\_with\_halo.h@{double\_vector\_with\_halo.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{oomph\+::\+Double\+Vector\+Halo\+Scheme}}
+\begin{DoxyCompactList}\small\item\em A class that stores the halo/haloed entries required when using a \doxylink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}. This is a separate class so thay many different Vectors can share the same object. The constructor requires the distribution of the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} (if you pass in a different distribution things will go badly wrong) and a vector that specifies which GLOBAL eqn numbers are required on each processor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries}}
+\begin{DoxyCompactList}\small\item\em ===================================================================== An extension of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} that allows access to certain global entries that are not stored locally. Synchronisation of these values must be performed manually by calling the \doxylink{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}{synchronise()} function. Synchronisation can only be from the haloed to the halo, but the local halo entries can all be summed and stored in the \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Namespace Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all namespace enum values with links to the namespace documentation for each enum value:</div>
+
+<h3><a id="index_b" name="index_b"></a>- b -</h3><ul>
+<li>B&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a43c804e2bcf9862a4bf629d5f01761e8">oomph::OcTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>D&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a51292b8e4d96f2bb9f0d6bb0340d1620">oomph::OcTreeNames</a></li>
+<li>DB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40aeb944d7232b126b9034678f074c3078e">oomph::OcTreeNames</a></li>
+<li>DF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a1dd915e02b2435707c33bc9f24b0d5c8">oomph::OcTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>E&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da585070bd0e3801c3bbed287ef3c4a265">oomph::QuadTreeNames</a></li>
+<li>Exists&#160;:&#160;<a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a82a287ab8a3bad9e68edc3437d9dbfb8ae79558bf4c6d5520127c346350aa1ecd">oomph::Multi_domain_functions</a></li>
+</ul>
+
+
+<h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>F&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a755807a4724a0f4d96f0817559c0a927">oomph::OcTreeNames</a></li>
+<li>Failed&#160;:&#160;<a class="el" href="namespaceoomph.html#a8054837ca377b820becfb7d3d5182236a7f4f75eaf58c9d9f0b987b6d3a449b41">oomph</a></li>
+</ul>
+
+
+<h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
+<li>L&#160;:&#160;<a class="el" href="namespaceoomph_1_1BinaryTreeNames.html#a7ff5e7e46beae31bf81579531b1f9895a8df863dabb4096fa066f7a6dbf7502d1">oomph::BinaryTreeNames</a>, <a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a56b1e55e65e346693677249c84b86176">oomph::OcTreeNames</a></li>
+<li>LB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40aff75a49d684424436ad419a818d0f480">oomph::OcTreeNames</a></li>
+<li>LD&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a91fa3c9ccf834f81f50238be7bcc5269">oomph::OcTreeNames</a></li>
+<li>LDB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40abed39d2cabdadba8a0746381691ccf77">oomph::OcTreeNames</a></li>
+<li>LDF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a7bf18855ab002d44e301413456917d9c">oomph::OcTreeNames</a></li>
+<li>LF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a854222a7a6f7470d6803ffb8d11180bc">oomph::OcTreeNames</a></li>
+<li>LU&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40ae7245a89994ff850f2a88ea7bff7e7f8">oomph::OcTreeNames</a></li>
+<li>LUB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a9717fc1b8f4e28fe7271b90dba57802d">oomph::OcTreeNames</a></li>
+<li>LUF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a6357637fc339bbb6745b6b5ce101b45a">oomph::OcTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>N&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dabc60bec4cc294aa2adf92726c6d6823a">oomph::QuadTreeNames</a></li>
+<li>NE&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daa66bca2eb077ff943b39305b1965826f">oomph::QuadTreeNames</a></li>
+<li>New&#160;:&#160;<a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a82a287ab8a3bad9e68edc3437d9dbfb8a4effe7dd231a015f6e120c3f2d4fdd55">oomph::Multi_domain_functions</a></li>
+<li>Not_found&#160;:&#160;<a class="el" href="namespaceoomph_1_1Multi__domain__functions.html#a82a287ab8a3bad9e68edc3437d9dbfb8abf3c04eff4fec3f0659fac92a035aed9">oomph::Multi_domain_functions</a></li>
+<li>NW&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daa01c8378aad2e474250e6ebefb9fa942">oomph::QuadTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>OMEGA&#160;:&#160;<a class="el" href="namespaceoomph_1_1BinaryTreeNames.html#a7ff5e7e46beae31bf81579531b1f9895afbb1d921b86ded476b8bee384d9059e1">oomph::BinaryTreeNames</a>, <a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40ad4297fd722627a441c9ed9eacaba3460">oomph::OcTreeNames</a>, <a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da9eb65052764b429e1b5d7b313d751629">oomph::QuadTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>Passed&#160;:&#160;<a class="el" href="namespaceoomph.html#a8054837ca377b820becfb7d3d5182236a8f2f0dcc08206e70ce98a3cad349b201">oomph</a></li>
+</ul>
+
+
+<h3><a id="index_q" name="index_q"></a>- q -</h3><ul>
+<li>Q&#160;:&#160;<a class="el" href="namespaceoomph_1_1ElementGeometry.html#a86ff99972b0205d7524e294c58c1182aa950f376990cc80d475d36570d59f3ac3">oomph::ElementGeometry</a></li>
+</ul>
+
+
+<h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>R&#160;:&#160;<a class="el" href="namespaceoomph_1_1BinaryTreeNames.html#a7ff5e7e46beae31bf81579531b1f9895a1bf47d3f36e6272d94344ae84aca2498">oomph::BinaryTreeNames</a>, <a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a5e03c0a30df340df04d44883d52b425d">oomph::OcTreeNames</a></li>
+<li>RB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a593ad5f0759943d367efb7f308deabc4">oomph::OcTreeNames</a></li>
+<li>RD&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a37246039cac1119e55029efcae57ef85">oomph::OcTreeNames</a></li>
+<li>RDB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a8f4fba3e9fa2aa0c76ec6bb85fe89e1b">oomph::OcTreeNames</a></li>
+<li>RDF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a172055f90c2c767808f297a31c9844be">oomph::OcTreeNames</a></li>
+<li>RF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40aa2aad9af9821c9f410b188efa95908d1">oomph::OcTreeNames</a></li>
+<li>RU&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a72d8c5c6b2d5fa77e57930951a567546">oomph::OcTreeNames</a></li>
+<li>RUB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a4876386f3bfaed6e524e2a251945b57d">oomph::OcTreeNames</a></li>
+<li>RUF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a9db7ad20ea4f76808cd9cf026229bcdc">oomph::OcTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>S&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198">oomph::QuadTreeNames</a></li>
+<li>SE&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7da03479dd620c853ccd3c767125d6f29a4">oomph::QuadTreeNames</a></li>
+<li>SW&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7dab02ffb52d34a25323447061474613d81">oomph::QuadTreeNames</a></li>
+</ul>
+
+
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>T&#160;:&#160;<a class="el" href="namespaceoomph_1_1ElementGeometry.html#a86ff99972b0205d7524e294c58c1182aa9c3705b667836ab13e1b3b81a3eb28b8">oomph::ElementGeometry</a></li>
+</ul>
+
+
+<h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
+<li>U&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a9d5dc3f8f9d04ae80237132101f4258f">oomph::OcTreeNames</a></li>
+<li>UB&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40afd5ae3a92102eb1faf7e8e77c6742831">oomph::OcTreeNames</a></li>
+<li>UF&#160;:&#160;<a class="el" href="namespaceoomph_1_1OcTreeNames.html#ae7e7e58298b85825061eeff362656c40a5f1bfb03fbc606141a391b7a2f9d4ea7">oomph::OcTreeNames</a></li>
+<li>UseCGALSamplePointContainer&#160;:&#160;<a class="el" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a75595ef05f43add7443737e4fe76cd61">oomph</a></li>
+<li>UseNonRefineableBinArray&#160;:&#160;<a class="el" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991ae9f4b2ff7655b9f053dd855d15d929af">oomph</a></li>
+<li>UseRefineableBinArray&#160;:&#160;<a class="el" href="namespaceoomph.html#a8c0fdc9bd9751811cd49fe6f06c55991a6bd4eede6af4e6e7881a96e4dc0e34cd">oomph</a></li>
+</ul>
+
+
+<h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
+<li>W&#160;:&#160;<a class="el" href="namespaceoomph_1_1QuadTreeNames.html#a8954a5947b19986b8c4b755bc7639f7daabab2a070c062503375f8264f1b6d7d6">oomph::QuadTreeNames</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:27
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

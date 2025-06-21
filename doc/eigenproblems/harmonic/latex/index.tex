@@ -1,0 +1,449 @@
+\chapter{Demo problem\+: A one-\/dimensional eigenproblem}
+\hypertarget{index}{}\label{index}\index{Demo problem: A one-\/dimensional eigenproblem@{Demo problem: A one-\/dimensional eigenproblem}}
+In this document, we demonstrate how to solve a 1D eigenproblem (eigenvalues of the 1D Laplace operator in a bounded domain) by creating custom elements. The tutorial is similar in spirit to the \href{../../../quick_guide/html/index.html}{\texttt{ quick guide }} but far less detailed. \begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{One-\/dimensional model eigenvalue problem}} \end{center}  Solve  \[
+\frac{\partial^2u}{\partial x_1^2} + \lambda u = 0,
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the domain $D =\left\{ x_1 \in 
+[0,1] \right\}$, with homogeneous Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D}=0. 
+\ \ \ \ \ \ \ \ \ \ (2)
+\]   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+An eigenfunction must be non-\/zero by definition and so the exact solutions are given by the countably infinite set\+:  \[
+   u_{n} = \sin (\sqrt{\lambda}_{n} x_{1}), \ \ \ \ \ \ \
+   \lambda_{n} = n^{2}\pi^{2}.
+\]
+
+We provide a detailed discussion of the driver code \href{../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc}{\texttt{ harmonic.\+cc}} which solves the problem for the first four eigenvalues.
+
+In {\ttfamily oomph-\/lib} all eigenproblems are solved by using interfaces to third-\/party libraries. The default is LAPACK\textquotesingle{}s (direct) QZ solver which is included with the library. An interface is also provided to the ANASAZI solver, part of The Trilinos Project, a suite of iterative solvers. Thus, if you want to solve small problems, use the default QZ solver; for larger problems, we recommend using ANASAZI.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Overview of the theory}{Overview of the theory}}\label{index_theory}
+A discrete (linear) eigenproblem takes the form \[ J_{ij} V_{j} = \lambda M_{ij} V_{j}, \ \ \ \ \ \ \ \ (3) \] where $ V_{j} $ is the vector of discrete unknowns, $ \lambda $ is the eigenvalue, and $ J_{ij}  $ and $ M_{ij} $ are two matrices\+: $ J_{ij} $ (often denoted $ K_{ij} $ in the literature) is known as the stiffness matrix and $ M_{ij}
+ $ is termed the mass matrix. The third-\/party libraries mentioned above all solve systems of the form (3), and within {\ttfamily oomph-\/lib} we must simply provide the required mass and stiffness matrices.\hypertarget{index_linear_stab}{}\doxysubsection{\texorpdfstring{Linear Stability Theory}{Linear Stability Theory}}\label{index_linear_stab}
+In many cases, eigenproblems arise from linear stability analyses of steady solutions to our set of nonlinear residuals. For example, if we have a time-\/dependent system of equations \[ \frac{\partial u}{\partial t} = \mathcal{F}(u), \] then the residual formulation is  \[ \mathcal{R}(u) = \mathcal{F}(u) - \frac{\partial u}{\partial t} =
+0;  \ \ \ \ \ \ \ (4) \] and steady solutions, $ u_{s} $ are found by setting $ \partial
+u / \partial t  =
+0 $. Note that in a nonlinear system there may be many possible steady solutions for the same set of parameter values.
+
+A linear stability analysis proceeds by assuming that the steady solution is perturbed by a small amount, so that $ u = u_{s} + \epsilon \hat{u} $, where $ |\epsilon| \ll
+1$. If we substitute this expression into the governing equation (4) and neglect terms that involve $ \epsilon^{2} $ (on the assumption that they are really small) then we obtain the equation\+:  \[ \mathcal{F}(u_{s}) + \epsilon \left[\frac{\partial
+\mathcal{F}(u_{s})}{\partial u} \hat{u}  - \frac{\partial
+\hat{u}}{\partial t} \right] \approx 0. \] Note that we have used a Taylor expansion of $ \mathcal{F} $, so we are assuming that such an operation "{}makes sense"{}. The solution $
+u_{s} $ is a steady state, so by definition $\mathcal{F}(u_{s}) =
+0$ and then we are left with the {\bfseries{linear}} equation  \[ \frac{\partial \mathcal{F} (u_{s})}{\partial u} \hat{u} =
+ \mathcal{J}(u_{s}) \hat{u} = \frac{\partial
+ \hat{u}}{\partial t}. \ \ \ \ \ \ \ \ \ (5) \] The Jacobian $ \mathcal{J} $ is exactly the same as that required by the Newton method when solving the steady set of equations, $
+ \mathcal{F}(u) = 0.$
+
+The general solution of equation (5) takes the form $
+\hat{u} = \mbox{e}^{\lambda t} v$ because the only function that is proportional to its derivative is the exponential. The necessary functional form of the solution means that equation (5) becomes \[ \mathcal{J}(u_{s}) v = \lambda v, \] which is an eigenproblem in which the mass "{}matrix"{} is the identity. Thus, in order to assess the stability of a solution to our nonlinear system we must solve an eigenproblem using the Jacobian matrix, which is why we used the notation $ J_{ij} $ rather than $ K_{ij} $ in equation (3). The solution is said to be linearly stable if the real part of all eigenvalues is negative because then the perturbation decays as $ t \to \infty$, but it is linearly unstable if even a single eigenvalue has positive real part. Note that in even more general equations the mass "{}matrix"{} is not necessarily the identity.\hypertarget{index_weak}{}\doxysubsection{\texorpdfstring{Weak formulation of the problem}{Weak formulation of the problem}}\label{index_weak}
+If we wish to solve the problem (1) using finite elements, we must first derive the weak form, which follows from the standard procedure of multiplication by a test function and integration by parts  \[ \int_{D} \frac{\partial u}{\partial x_{1}} \frac{\partial
+\phi^{(test)}}{\partial x_{1}}\,\mbox{d} x_{1} = 
+ \lambda \int_{D} u\, \phi^{(test)}\,\mbox{d} x_{1}. \] Note that the boundary terms are neglected as a consequence of the Dirichlet boundary conditions.
+
+If we expand the $ u(x_{1}) = V_{j} \psi_{j}(x_{1}) $ in terms of known basis functions $ \psi_{j} $ and use the same basis functions as our test functions (Galerkin method), then the weak form becomes  \[ \int_{D} \frac{\partial \psi_{j}}{\partial x_{1}} \frac{\partial
+\psi_{i}}{\partial x_{1}}\,\mbox{d} x_{1} V_{j} = \lambda \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x_{1} V_{j}. \] On comparison with equation (3), we identify the Jacobian and mass matrices  \[ J_{ij} =  \int_{D} \frac{\partial \psi_{j}}{\partial x_{1}} \frac{\partial
+\psi_{i}}{\partial x_{1}}\,\mbox{d} x_{1}, \ \ \ \ \ 
+    M_{ij} = \int_{D}
+\psi_{i} \psi_{j}\,\mbox{d} x_{1}. \ \ \ \ \ (6) \]
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_impl}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_impl}
+In {\ttfamily oomph-\/lib}, eigenproblems are formulated on an element-\/by-\/element basis in a similar way to standard problems. Eigenproblems make use of the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GeneralisedElement::get\_jacobian\_and\_mass\_matrix(}
+\DoxyCodeLine{\ \ Vector<double>\ \&residuals,\ }
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&jacobian,}
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&mass\_matrix);}
+
+\end{DoxyCode}
+ where the Jacobian is the matrix $J_{ij}$ and the mass matrix is $M_{ij}$ in equation (3). The residuals need not be returned when solving an eigenproblem, but the interface is chosen so that linear stability of solutions to the nonlinear system can easily be calculated without reformulating the problem.
+
+Once again, to avoid reinitialisation in multi-\/physics problems, the helper function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{GeneralisedElement::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix(}
+\DoxyCodeLine{\ \ Vector<double>\ \&residuals,\ }
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&jacobian,}
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&mass\_matrix);}
+
+\end{DoxyCode}
+ is used and this will be overloaded in our custom elements below.\hypertarget{index_equations}{}\doxysubsection{\texorpdfstring{Creating the elements}{Creating the elements}}\label{index_equations}
+For generality, we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined in equations (6) in the class {\ttfamily \doxylink{classHarmonicEquations}{Harmonic\+Equations}} that inherits from {\ttfamily Finite\+Element}. This construction mirrors that in our standard equation classes and allows a clean separation between the equations and the choice of basis function.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ A\ class\ for\ all\ elements\ that\ solve\ the\ simple\ one-\/dimensional}}
+\DoxyCodeLine{\textcolor{comment}{///\ eigenvalue\ problem}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)f[\ \(\backslash\)frac\{\(\backslash\)partial\string^2\ u\}\{\(\backslash\)partial\ x\_i\string^2\}\ \ +\ \(\backslash\)lambda\ u\ =\ 0\ \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{///\ These\ elements\ are\ very\ closely\ related\ to\ the\ Poisson}}
+\DoxyCodeLine{\textcolor{comment}{///\ elements\ and\ could\ inherit\ from\ them.\ They\ are\ here\ developed}}
+\DoxyCodeLine{\textcolor{comment}{///\ from\ scratch\ for\ pedagogical\ purposes.}}
+\DoxyCodeLine{\textcolor{comment}{///\ This\ class\ \ contains\ the\ generic\ maths.\ Shape\ functions,\ geometric}}
+\DoxyCodeLine{\textcolor{comment}{///\ mapping\ etc.\ must\ get\ implemented\ in\ derived\ class.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classHarmonicEquations}{HarmonicEquations}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ FiniteElement}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Empty\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classHarmonicEquations_a288d1c0777b2cf5360e1310d48f8c217}{HarmonicEquations}}()\ \{\}}
+
+\end{DoxyCodeInclude}
+ The unknowns that represent the discretised eigenfunction are assumed to be stored at the nodes.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function:\ Eigenfunction\ value\ at\ local\ node\ n}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Note\ that\ solving\ the\ eigenproblem\ does\ not\ assign\ values}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ this\ storage\ space.\ It\ is\ used\ for\ output\ purposes\ only.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ u(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)\textcolor{keyword}{\ const\ }}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ nodal\_value(n,0);\}}
+
+\end{DoxyCodeInclude}
+ The class contains functions to output the eigenfunction; interpolate the nodal unknown; and provides interfaces for the shape functions and their derivatives. The key function is {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix} which implements the calculation of the equations (6). The residuals vector is not filled in and does not need to be unless we also wish to solve an associated (non-\/eigen) problem.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix(}
+\DoxyCodeLine{\ \ Vector<double>\ \&residuals,}
+\DoxyCodeLine{\ \ DenseMatrix<double>\ \&jacobian,\ DenseMatrix<double>\ \&mass\_matrix)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ out\ how\ many\ nodes\ there\ are}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ nnode();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ memory\ for\ the\ shape\ functions\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \ Shape\ psi(n\_node);}
+\DoxyCodeLine{\ \ \ DShape\ dpsidx(n\_node,1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ number\ of\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_intpt\ =\ integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Integers\ to\ store\ the\ local\ equation\ and\ unknown\ numbers}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ local\_eqn=0,\ local\_unknown=0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ipt=0;ipt<n\_intpt;ipt++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Get\ the\ integral\ weight}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ w\ =\ integral\_pt()-\/>weight(ipt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Call\ the\ derivatives\ of\ the\ shape\ and\ test\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ J\ =\ dshape\_eulerian\_at\_knot(ipt,psi,dpsidx);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Premultiply\ the\ weights\ and\ the\ Jacobian}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ W\ =\ w*J;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Assemble\ the\ contributions\ to\ the\ mass\ matrix}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ test\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l=0;l<n\_node;l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ local\ equation\ number}}
+\DoxyCodeLine{\ \ \ \ \ \ \ local\_eqn\ =\ u\_local\_eqn(l);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{/*IF\ it's\ not\ a\ boundary\ condition*/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Loop\ over\ the\ shape\ functions}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ l2=0;l2<n\_node;l2++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ u\_local\_eqn(l2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ at\ a\ non-\/zero\ degree\ of\ freedom\ add\ in\ the\ entry}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,local\_unknown)\ +=\ dpsidx(l,0)*dpsidx(l2,0)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ mass\_matrix(local\_eqn,\ local\_unknown)\ +=\ psi(l)*psi(l2)*W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\_of\_fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
+
+\end{DoxyCodeInclude}
+
+
+The shape functions are specified in the {\ttfamily \doxylink{classQHarmonicElement}{QHarmonic\+Element}} class that inherits from our standard one-\/dimensional Lagrange elements {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} as well as {\ttfamily \doxylink{classHarmonicEquations}{Harmonic\+Equations}}. The number of unknowns (one) is specified and the output functions and shape functions are overloaded as required\+: the output functions are specified in the {\ttfamily \doxylink{classHarmonicEquations}{Harmonic\+Equations}} class, whereas the shape functions are provided by the {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} class.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{unsigned}\ NNODE\_1D>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classQHarmonicElement}{QHarmonicElement}}\ :\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ QElement<1,NNODE\_1D>,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classHarmonicEquations}{HarmonicEquations}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Call\ constructors\ for\ QElement\ and\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson\ equations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classQHarmonicElement_a0e7480a0064b51e87ba197551bb10373}{QHarmonicElement}}()\ :\ QElement<1,NNODE\_1D>(),\ \mbox{\hyperlink{classHarmonicEquations}{HarmonicEquations}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \ Required\ \ \#\ of\ \`{}values'\ (pinned\ or\ dofs)\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ at\ node\ n}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classQHarmonicElement_a8574a452983b15fb2b4d40ec4ef3e890}{required\_nvalue}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&n)\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ 1;\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Output\ function\ overloaded\ from\ HarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQHarmonicElement_a8b38012f3d62ef419c359f5e545e5f85}{output}}(ostream\ \&outfile)\ }
+\DoxyCodeLine{\ \ \{\mbox{\hyperlink{classHarmonicEquations_abe34292042ce1394f8979618ee10f354}{HarmonicEquations::output}}(outfile);\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \ Output\ function\ overloaded\ from\ HarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQHarmonicElement_a8b38012f3d62ef419c359f5e545e5f85}{output}}(ostream\ \&outfile,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&Nplot)\ }
+\DoxyCodeLine{\ \ \{\mbox{\hyperlink{classHarmonicEquations_abe34292042ce1394f8979618ee10f354}{HarmonicEquations::output}}(outfile,Nplot);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{protected}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Shape,\ test\ functions\ \&\ derivs.\ w.r.t.\ to\ global\ coords.\ Return\ Jacobian.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classQHarmonicElement_a206b7334e82cb563d7d575deb9f755b1}{dshape\_eulerian}}(\textcolor{keyword}{const}\ Vector<double>\ \&s,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DShape\ \&dpsidx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ QElement<1,NNODE\_1D>::dshape\_eulerian(s,psi,dpsidx);\}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Shape,\ test\ functions\ \&\ derivs.\ w.r.t.\ to\ global\ coords.\ at}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ integration\ point\ ipt.\ Return\ Jacobian.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classQHarmonicElement_a6b11b5a42bd20c4e1d1e9840ba22a80a}{dshape\_eulerian\_at\_knot}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ipt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Shape\ \&psi,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DShape\ \&dpsidx)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ }\{\textcolor{keywordflow}{return}\ QElement<1,NNODE\_1D>::dshape\_eulerian\_at\_knot(ipt,psi,dpsidx);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//end\_of\_QHarmonic\_class\_definition}}
+
+\end{DoxyCodeInclude}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+In order to solve the 1D eigenproblem using {\ttfamily oomph-\/lib}, we represent the mathematical problem defined by equations (1) and (2) in a specific {\ttfamily Problem} object, {\ttfamily \doxylink{classHarmonicProblem}{Harmonic\+Problem}}, which is templated by the element type and the eigensolver. We use {\ttfamily QHarmonic\+Element$<$3$>$}, a quadratic element and our three different eigensolvers, including timing statements to compare the three approaches. Note that if you do not have Trilinos installed then only the LAPACK\+\_\+\+QZ solver will do anything.
+
+The problem class takes a single argument corresponding to the number of elements used to discretise the domain and contains a member function {\ttfamily solve} that takes an integer used for documentation purposes.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element=100;\ \textcolor{comment}{//Number\ of\ elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ clock\_t\ t\_start1\ =\ clock();}
+\DoxyCodeLine{\ \textcolor{comment}{//Solve\ with\ LAPACK\_QZ}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},LAPACK\_QZ>\ }
+\DoxyCodeLine{\ \ \ problem(n\_element);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ problem.solve(1);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ clock\_t\ t\_end1\ =\ clock();}
+
+\end{DoxyCodeInclude}
+ The same problem is then solved with a different solver
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ clock\_t\ t\_start2\ =\ clock();}
+\DoxyCodeLine{\textcolor{comment}{//Solve\ with\ Anasazi}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ hierher\ Andrew:\ This\ doesn't\ seem\ to\ be\ included\ in\ the\ self\ tests}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem<QHarmonicElement<3>}},ANASAZI>\ problem(n\_element);}
+\DoxyCodeLine{\ \ problem.solve(2);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ clock\_t\ t\_end2\ =\ clock();}
+
+\end{DoxyCodeInclude}
+ and again with the Trilinos ANASAZI solver if it is installed.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The {\ttfamily \doxylink{classHarmonicProblem}{Harmonic\+Problem}} is derived from {\ttfamily oomph-\/lib\textquotesingle{}s} generic {\ttfamily Problem} class and the specific element type and eigensolver are specified as template parameters to make it easy for the "{}user"{} to change either of these from the driver code.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ 1D\ Harmonic\ problem\ in\ unit\ interval.}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ EIGEN\_SOLVER>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classHarmonicProblem}{HarmonicProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+
+\end{DoxyCodeInclude}
+ The problem class has four member functions\+:
+\begin{DoxyItemize}
+\item the constructor {\ttfamily \doxylink{classHarmonicProblem}{Harmonic\+Problem(...)}} 
+\item the destructor {\ttfamily \texorpdfstring{$\sim$}{\string~}\+Harmonic\+Problem()} 
+\item the function {\ttfamily solve(...)} 
+\item the function {\ttfamily doc\+\_\+solution(...)} 
+\end{DoxyItemize}The destructor merely cleans up the memory by deleting the objects that are allocated in the constructor, so we shall not discuss it further here. The {\ttfamily doc\+\_\+solution} function is also simple and writes the eigenfunction to a file.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+In the {\ttfamily Problem} constructor, we start by creating the eigensolver specified by the second template parameter. We then discretise the domain using {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily 1DMesh} object. The arguments of this object\textquotesingle{}s constructor are the number of elements (whose type is specified by the template parameter), and the domain length. Next, we pin the nodal values on the domain boundaries, which corresponds to applying the Dirichlet boundary conditions. Finally we call the generic {\ttfamily Problem\+::assign\+\_\+eqn\+\_\+numbers()} routine to set up the equation numbers.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ 1D\ Harmonic\ problem\ in\ unit\ interval.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Discretise\ the\ 1D\ domain\ with\ n\_element\ elements\ of\ type\ ELEMENT.}}
+\DoxyCodeLine{\textcolor{comment}{///\ Specify\ function\ pointer\ to\ source\ function.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ EIGEN\_SOLVER>}
+\DoxyCodeLine{\mbox{\hyperlink{classHarmonicProblem_a77a25847f00ae50c83218530149e3e57}{HarmonicProblem<ELEMENT,EIGEN\_SOLVER>::HarmonicProblem}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n\_element)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Create\ the\ eigen\ solver}}
+\DoxyCodeLine{\ this-\/>eigen\_solver\_pt()\ =\ \textcolor{keyword}{new}\ EIGEN\_SOLVER;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ domain\ length\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ L=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ mesh\ and\ store\ pointer\ in\ Problem}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ OneDMesh<ELEMENT>(n\_element,L);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ By\ default,\ all\ nodal}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ values\ are\ free\ -\/-\/\ we\ only\ need\ to\ pin\ the\ ones\ that\ have\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Dirichlet\ conditions.\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ single\ nodal\ value\ at\ the\ single\ node\ on\ mesh\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ boundary\ 0\ (=\ the\ left\ domain\ boundary\ at\ x=0)}}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(0,0)-\/>pin(0);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ single\ nodal\ value\ at\ the\ single\ node\ on\ mesh\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ boundary\ 1\ (=\ the\ right\ domain\ boundary\ at\ x=1)}}
+\DoxyCodeLine{\ mesh\_pt()-\/>boundary\_node\_pt(1,0)-\/>pin(0);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ assign\_eqn\_numbers();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_solve}{}\doxysection{\texorpdfstring{Solving the problem}{Solving the problem}}\label{index_solve}
+The {\ttfamily solve(...)} function is where all the action happens and takes a single unsigned integer argument which is used as a label to distinguish the output from different eigensolvers.
+
+The function {\ttfamily Problem\+::solve\+\_\+eigenproblem(...)} plays an equivalent role to {\ttfamily Problem\+::newton\+\_\+solve(...)} in eigenproblems. Here, additional storage must be allocated for the eigenvalues (a vector of complex numbers) and eigenvectors (a vector of double vectors). The vectors will be resized internally depending on the number of eigenvalues returned. The number is not always the same as the number of eigenvalues requested because both parts of a complex conjugate pair of eigenvalues are always returned. In the {\ttfamily solve}(..) function we first allocate the required storage, specify the desired number of eigenvalues and then solve the eigenproblem\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======================start\_of\_solve==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Solve\ the\ eigenproblem\ }}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\textcolor{keyword}{class}\ EIGEN\_SOLVER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classHarmonicProblem_aba2b3fd58a67f03ca0481e426d385c5d}{HarmonicProblem<ELEMENT,EIGEN\_SOLVER>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classHarmonicProblem_aba2b3fd58a67f03ca0481e426d385c5d}{solve}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ label)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ external\ storage\ for\ the\ eigenvalues}}
+\DoxyCodeLine{\ Vector<complex<double>\ >\ eigenvalue;}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ external\ storage\ for\ the\ eigenvectors}}
+\DoxyCodeLine{\ Vector<DoubleVector>\ eigenvector\_real;}
+\DoxyCodeLine{\ Vector<DoubleVector>\ eigenvector\_imag;}
+\DoxyCodeLine{\ \textcolor{comment}{//Desired\ number\ eigenvalues}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_eval=4;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Solve\ the\ eigenproblem}}
+\DoxyCodeLine{\ this-\/>solve\_eigenproblem(n\_eval,eigenvalue,eigenvector\_real,eigenvector\_imag);}
+
+\end{DoxyCodeInclude}
+ The rest of the function post-\/processes the output from the eigensolver. In order to ensure repeatability of the output for our self-\/tests the eigenvalues are sorted on the size of their real part. The eigenfunction associated with the second smallest eigenvalue is normalised to have unit length and then output to a file.
+
+In order to output the eigenfunction the values must be transferred to the nodal values so that it can be interpolated. This is performed by the function {\ttfamily Problem\+::assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(...)}. Note that this function overwrites the existing nodal data, so a backup must be taken if it is important. This can be done using the function {\ttfamily Problem\+::store\+\_\+current\+\_\+dof\+\_\+values()} and the stored values can be recovered via {\ttfamily Problem\+::restore\+\_\+dof\+\_\+values()}.
+
+Finally, the sorted eigenvalues are reported and also saved to a file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//We\ now\ need\ to\ sort\ the\ output\ based\ on\ the\ size\ of\ the\ real\ part}}
+\DoxyCodeLine{\ \textcolor{comment}{//of\ the\ eigenvalues.}}
+\DoxyCodeLine{\ \textcolor{comment}{//This\ is\ because\ the\ solver\ does\ not\ necessarily\ sort\ the\ eigenvalues}}
+\DoxyCodeLine{\ Vector<complex<double>\ >\ sorted\_eigenvalue\ =\ eigenvalue;}
+\DoxyCodeLine{\ sort(sorted\_eigenvalue.begin(),sorted\_eigenvalue.end(),}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classComplexLess}{ComplexLess<double>}}());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Read\ out\ the\ second\ smallest\ eigenvalue}}
+\DoxyCodeLine{\ complex<double>\ temp\_evalue\ =\ sorted\_eigenvalue[1];}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ second\_smallest\_index=0;}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ unsorted\ eigenvalues\ and\ find\ the\ entry\ that\ corresponds}}
+\DoxyCodeLine{\ \textcolor{comment}{//to\ our\ second\ smallest\ eigenvalue.}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<eigenvalue.size();i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Note\ that\ equality\ tests\ for\ doubles\ are\ bad,\ but\ it\ was\ just}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//sorted\ data,\ so\ should\ be\ fine}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(eigenvalue[i]\ ==\ temp\_evalue)\ \{second\_smallest\_index=i;\ \textcolor{keywordflow}{break};\}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Normalise\ the\ eigenvector\ }}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Get\ the\ dimension\ of\ the\ eigenvector}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ dim\ =\ eigenvector\_real[second\_smallest\_index].nrow();}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ length=0.0;}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Loop\ over\ all\ the\ entries}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<dim;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Add\ the\ contribution\ to\ the\ length}}
+\DoxyCodeLine{\ \ \ \ length\ +=\ std::pow(eigenvector\_real[second\_smallest\_index][i],2.0);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Now\ take\ the\ magnitude}}
+\DoxyCodeLine{\ \ length\ =\ sqrt(length);}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Fix\ the\ sign}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}(eigenvector\_real[second\_smallest\_index][0]\ <\ 0)\ \{length\ *=\ -\/1.0;\}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Finally\ normalise}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<dim;i++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ eigenvector\_real[second\_smallest\_index][i]\ /=\ length;}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ assign\ the\ second\ eigenvector\ to\ the\ dofs\ of\ the\ problem}}
+\DoxyCodeLine{\ this-\/>assign\_eigenvector\_to\_dofs(eigenvector\_real[second\_smallest\_index]);}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ solution\ for\ this\ case\ (label\ output\ files\ with\ "{}1"{})}}
+\DoxyCodeLine{\ this-\/>\mbox{\hyperlink{classHarmonicProblem_a95e94f87cf4f63e332c09bd9f1bbae7c}{doc\_solution}}(label);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}eigenvalues\%i.dat"{}},label);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Open\ an\ output\ file\ for\ the\ sorted\ eigenvalues}}
+\DoxyCodeLine{\ ofstream\ evalues(filename);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_eval;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Print\ to\ screen}}
+\DoxyCodeLine{\ \ \ cout\ <<\ sorted\_eigenvalue[i].real()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <<\ sorted\_eigenvalue[i].imag()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Send\ to\ file}}
+\DoxyCodeLine{\ \ \ evalues\ <<\ sorted\_eigenvalue[i].real()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ <<\ sorted\_eigenvalue[i].imag()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ evalues.close();}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\_of\_solve}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Comments and exercises}{Comments and exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Modify the code to compute a different number of eigenvalues. What is the maximum number of eigenvalues that could be computed?
+\item Write a function to calculate the error between the numerical and exact solutions to the eigenproblem. How does the error vary with changes in the number of elements?
+\item Compare the errors for each different eigenfunction. What happens to the error as the eigenvalue increase? Can you explain why?
+\item Repeat the above experiments with {\ttfamily QHarmonic\+Element$<$2$>$}. What happens?
+\item Modify the problem to include a convective-\/like term $ \mu
+\frac{\partial u}{\partial x_{1}} $. Compare the computed results to the analytic solution. What happens to the eigenvalues and eigenfunctions?
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/eigenproblems/harmonic/}{\texttt{ demo\+\_\+drivers/eigenproblems/harmonic/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/eigenproblems/harmonic/harmonic.cc}{\texttt{ demo\+\_\+drivers/eigenproblems/harmonic/harmonic.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

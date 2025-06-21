@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: cylinder.cc File Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_ddb094a380b94394dbbcf95a63b535e6.html">demo_drivers</a></li><li class="navelem"><a class="el" href="dir_04ea7e52909b7ff85866d73ad04b29ef.html">axisym_linear_elasticity</a></li><li class="navelem"><a class="el" href="dir_320a5933b71509e1777ce25743e6687c.html">cylinder</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">cylinder.cc File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;fenv.h&gt;</code><br />
+<code>#include &quot;generic.h&quot;</code><br />
+<code>#include &quot;axisym_linear_elasticity.h&quot;</code><br />
+<code>#include &quot;meshes/rectangular_quadmesh.h&quot;</code><br />
+</div>
+<p><a href="cylinder_8cc_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisymmetricLinearElasticityProblem.html">AxisymmetricLinearElasticityProblem&lt; ELEMENT, TIMESTEPPER &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to validate time harmonic linear elasticity (Fourier decomposed)  <a href="classAxisymmetricLinearElasticityProblem.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceGlobal__Parameters" id="r_namespaceGlobal__Parameters"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html">Global_Parameters</a></td></tr>
+<tr class="memdesc:namespaceGlobal__Parameters"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace for global parameters. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a61ef31c4db13380658f6d5ea47c3369d" id="r_a61ef31c4db13380658f6d5ea47c3369d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a61ef31c4db13380658f6d5ea47c3369d">Global_Parameters::boundary_traction</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a61ef31c4db13380658f6d5ea47c3369d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The traction function at r=Rmin: (t_r, t_z, t_theta)  <br /></td></tr>
+<tr class="separator:a61ef31c4db13380658f6d5ea47c3369d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6459755c5d38e277ceddbf317c4ed179" id="r_a6459755c5d38e277ceddbf317c4ed179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a6459755c5d38e277ceddbf317c4ed179">Global_Parameters::body_force</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;result)</td></tr>
+<tr class="memdesc:a6459755c5d38e277ceddbf317c4ed179"><td class="mdescLeft">&#160;</td><td class="mdescRight">The body force function; returns vector of doubles in the order (b_r, b_z, b_theta)  <br /></td></tr>
+<tr class="separator:a6459755c5d38e277ceddbf317c4ed179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f4ce30b09a582bb2d85ddb6f087f80" id="r_a42f4ce30b09a582bb2d85ddb6f087f80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a42f4ce30b09a582bb2d85ddb6f087f80">Global_Parameters::exact_solution_th</a> (const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a42f4ce30b09a582bb2d85ddb6f087f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function - spatial components of the exact solution in a vector. This is necessary because we need to multiply this by different things to obtain the velocity and acceleration 0: u_r, 1: u_z, 2: u_theta.  <br /></td></tr>
+<tr class="separator:a42f4ce30b09a582bb2d85ddb6f087f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae600c7d1b0928a5cb532fa3a93bab338" id="r_ae600c7d1b0928a5cb532fa3a93bab338"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ae600c7d1b0928a5cb532fa3a93bab338">Global_Parameters::u_r</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:ae600c7d1b0928a5cb532fa3a93bab338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the r-component of displacement.  <br /></td></tr>
+<tr class="separator:ae600c7d1b0928a5cb532fa3a93bab338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc24d54054d6868dfb4bf3eedb2b062d" id="r_adc24d54054d6868dfb4bf3eedb2b062d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#adc24d54054d6868dfb4bf3eedb2b062d">Global_Parameters::u_z</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:adc24d54054d6868dfb4bf3eedb2b062d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the z-component of displacement.  <br /></td></tr>
+<tr class="separator:adc24d54054d6868dfb4bf3eedb2b062d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed85254e9565e5e25dbe336a799bf6b5" id="r_aed85254e9565e5e25dbe336a799bf6b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aed85254e9565e5e25dbe336a799bf6b5">Global_Parameters::u_theta</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:aed85254e9565e5e25dbe336a799bf6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the theta-component of displacement.  <br /></td></tr>
+<tr class="separator:aed85254e9565e5e25dbe336a799bf6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa587494218fe51b7d23a58009bf370f6" id="r_aa587494218fe51b7d23a58009bf370f6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aa587494218fe51b7d23a58009bf370f6">Global_Parameters::d_u_r_dt</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:aa587494218fe51b7d23a58009bf370f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the r-component of velocity.  <br /></td></tr>
+<tr class="separator:aa587494218fe51b7d23a58009bf370f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc07c67f4203664ac0c23c4ff9d4dac1" id="r_adc07c67f4203664ac0c23c4ff9d4dac1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#adc07c67f4203664ac0c23c4ff9d4dac1">Global_Parameters::d_u_z_dt</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:adc07c67f4203664ac0c23c4ff9d4dac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the z-component of velocity.  <br /></td></tr>
+<tr class="separator:adc07c67f4203664ac0c23c4ff9d4dac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87fd49f1b07cd74a364cf1373890864e" id="r_a87fd49f1b07cd74a364cf1373890864e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a87fd49f1b07cd74a364cf1373890864e">Global_Parameters::d_u_theta_dt</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:a87fd49f1b07cd74a364cf1373890864e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the theta-component of velocity.  <br /></td></tr>
+<tr class="separator:a87fd49f1b07cd74a364cf1373890864e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37715fdf266bd7d91b44ad779e20a11a" id="r_a37715fdf266bd7d91b44ad779e20a11a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a37715fdf266bd7d91b44ad779e20a11a">Global_Parameters::d2_u_r_dt2</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:a37715fdf266bd7d91b44ad779e20a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the r-component of acceleration.  <br /></td></tr>
+<tr class="separator:a37715fdf266bd7d91b44ad779e20a11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2167fee22e8f4d63a51a39ace1e3a743" id="r_a2167fee22e8f4d63a51a39ace1e3a743"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a2167fee22e8f4d63a51a39ace1e3a743">Global_Parameters::d2_u_z_dt2</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:a2167fee22e8f4d63a51a39ace1e3a743"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the z-component of acceleration.  <br /></td></tr>
+<tr class="separator:a2167fee22e8f4d63a51a39ace1e3a743"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902b0bba2b1393518a914330f30ee4c9" id="r_a902b0bba2b1393518a914330f30ee4c9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a902b0bba2b1393518a914330f30ee4c9">Global_Parameters::d2_u_theta_dt2</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x)</td></tr>
+<tr class="memdesc:a902b0bba2b1393518a914330f30ee4c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the time dependent form of the theta-component of acceleration.  <br /></td></tr>
+<tr class="separator:a902b0bba2b1393518a914330f30ee4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da914d64b7a62d35793172f6a0fd712" id="r_a7da914d64b7a62d35793172f6a0fd712"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7da914d64b7a62d35793172f6a0fd712">Global_Parameters::exact_solution</a> (const double &amp;time, const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</td></tr>
+<tr class="memdesc:a7da914d64b7a62d35793172f6a0fd712"><td class="mdescLeft">&#160;</td><td class="mdescRight">The exact solution in a vector: 0: u_r, 1: u_z, 2: u_theta and their 1st and 2nd derivs.  <br /></td></tr>
+<tr class="separator:a7da914d64b7a62d35793172f6a0fd712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cylinder_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver code.  <br /></td></tr>
+<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661" id="r_a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a> = 0.3</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define Poisson's ratio Nu.  <br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dfbdb1b2fd80d516850f66c96b6fd0" id="r_aa3dfbdb1b2fd80d516850f66c96b6fd0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">Global_Parameters::E</a> = 1.0</td></tr>
+<tr class="memdesc:aa3dfbdb1b2fd80d516850f66c96b6fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define the non-dimensional Young's modulus.  <br /></td></tr>
+<tr class="separator:aa3dfbdb1b2fd80d516850f66c96b6fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f84a82174136947cce7a0d137097ae" id="r_ae2f84a82174136947cce7a0d137097ae"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ae2f84a82174136947cce7a0d137097ae">Global_Parameters::Lambda</a> = <a class="el" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>*<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>/(1.0+<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)/(1.0-2.0*<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)</td></tr>
+<tr class="memdesc:ae2f84a82174136947cce7a0d137097ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lame parameters.  <br /></td></tr>
+<tr class="separator:ae2f84a82174136947cce7a0d137097ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a490d7680a7de63058a9c921e2705a103" id="r_a490d7680a7de63058a9c921e2705a103"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a490d7680a7de63058a9c921e2705a103">Global_Parameters::Mu</a> = <a class="el" href="namespaceGlobal__Parameters.html#aa3dfbdb1b2fd80d516850f66c96b6fd0">E</a>/2.0/(1.0+<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)</td></tr>
+<tr class="separator:a490d7680a7de63058a9c921e2705a103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e1e178dfb7f5e35b452599bd4c4324" id="r_af9e1e178dfb7f5e35b452599bd4c4324"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#af9e1e178dfb7f5e35b452599bd4c4324">Global_Parameters::Omega_sq</a> = 0.5</td></tr>
+<tr class="memdesc:af9e1e178dfb7f5e35b452599bd4c4324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of the frequency of the time dependence.  <br /></td></tr>
+<tr class="separator:af9e1e178dfb7f5e35b452599bd4c4324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebb1e39d849d32cebdc9be13026606e" id="r_aeebb1e39d849d32cebdc9be13026606e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#aeebb1e39d849d32cebdc9be13026606e">Global_Parameters::Nr</a> = 5</td></tr>
+<tr class="memdesc:aeebb1e39d849d32cebdc9be13026606e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in r-direction.  <br /></td></tr>
+<tr class="separator:aeebb1e39d849d32cebdc9be13026606e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f35a0690c7745167a7178fb71f92e6e" id="r_a1f35a0690c7745167a7178fb71f92e6e"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a1f35a0690c7745167a7178fb71f92e6e">Global_Parameters::Nz</a> = 10</td></tr>
+<tr class="memdesc:a1f35a0690c7745167a7178fb71f92e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of elements in z-direction.  <br /></td></tr>
+<tr class="separator:a1f35a0690c7745167a7178fb71f92e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a444f5c911c8805ad2ba45ed8b1b8904e" id="r_a444f5c911c8805ad2ba45ed8b1b8904e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Global_Parameters::Lr</a> = 1.0</td></tr>
+<tr class="memdesc:a444f5c911c8805ad2ba45ed8b1b8904e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain in r direction.  <br /></td></tr>
+<tr class="separator:a444f5c911c8805ad2ba45ed8b1b8904e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bcf0bd846d839f1e3bb04a6c0a612c1" id="r_a2bcf0bd846d839f1e3bb04a6c0a612c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Global_Parameters::Lz</a> = 2.0</td></tr>
+<tr class="memdesc:a2bcf0bd846d839f1e3bb04a6c0a612c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain in z-direction.  <br /></td></tr>
+<tr class="separator:a2bcf0bd846d839f1e3bb04a6c0a612c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e73c8b2e1105b14203856b81efa8cf" id="r_ab0e73c8b2e1105b14203856b81efa8cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Global_Parameters::Rmin</a> = 0.1</td></tr>
+<tr class="memdesc:ab0e73c8b2e1105b14203856b81efa8cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up min r coordinate.  <br /></td></tr>
+<tr class="separator:ab0e73c8b2e1105b14203856b81efa8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1813b913bc85d4ce15ea68226ba6c63f" id="r_a1813b913bc85d4ce15ea68226ba6c63f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Global_Parameters::Zmin</a> = 0.3</td></tr>
+<tr class="memdesc:a1813b913bc85d4ce15ea68226ba6c63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up min z coordinate.  <br /></td></tr>
+<tr class="separator:a1813b913bc85d4ce15ea68226ba6c63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f5ea713550f61da323eafb91fceedd" id="r_a06f5ea713550f61da323eafb91fceedd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a06f5ea713550f61da323eafb91fceedd">Global_Parameters::Rmax</a> = <a class="el" href="namespaceGlobal__Parameters.html#ab0e73c8b2e1105b14203856b81efa8cf">Rmin</a>+<a class="el" href="namespaceGlobal__Parameters.html#a444f5c911c8805ad2ba45ed8b1b8904e">Lr</a></td></tr>
+<tr class="memdesc:a06f5ea713550f61da323eafb91fceedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up max r coordinate.  <br /></td></tr>
+<tr class="separator:a06f5ea713550f61da323eafb91fceedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b7b169826f906d1d8d1a3aa4347d80" id="r_a36b7b169826f906d1d8d1a3aa4347d80"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a36b7b169826f906d1d8d1a3aa4347d80">Global_Parameters::Zmax</a> = <a class="el" href="namespaceGlobal__Parameters.html#a1813b913bc85d4ce15ea68226ba6c63f">Zmin</a>+<a class="el" href="namespaceGlobal__Parameters.html#a2bcf0bd846d839f1e3bb04a6c0a612c1">Lz</a></td></tr>
+<tr class="memdesc:a36b7b169826f906d1d8d1a3aa4347d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up max z coordinate.  <br /></td></tr>
+<tr class="separator:a36b7b169826f906d1d8d1a3aa4347d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Driver code. </p>
+
+<p class="definition">Definition at line <a class="el" href="cylinder_8cc_source.html#l00714">714</a> of file <a class="el" href="cylinder_8cc_source.html">cylinder.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cylinder_8cc_source.html#l00416">AxisymmetricLinearElasticityProblem&lt; ELEMENT, TIMESTEPPER &gt;::set_initial_conditions()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:06:39
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

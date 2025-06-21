@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: Adaptive simulation of finite-Reynolds number entry flow into a 3D tube</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: Adaptive simulation of finite-Reynolds number entry flow into a 3D tube </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this example we shall demonstrate the spatially adaptive solution of the steady 3D Navier-Stokes equations using the problem of developing pipe flow.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The 3D developing pipe flow in a quarter-tube domain.</b> </center> Solve the steady Navier-Stokes equations:  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\phantom{i}u_j\frac{\partial u_i}{\partial x_j} =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="286" height="31"/>
+</p>
+ and  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0,
+\]" src="form_1.png" width="48" height="29"/>
+</p>
+ in the quarter-tube domain <img class="formulaInl" alt="$
+D = \left\{x_1 \geq 0, x_2 \geq 0, x_1^2+x_2^2 \leq 1, x_3 \in [0,L]
+\right\}$" src="form_2.png" width="248" height="16"/>, subject to the Dirichlet boundary conditions:  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D_{wall}}=(0,0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_3.png" width="163" height="15"/>
+</p>
+ on the curved wall <img class="formulaInl" alt="$ \partial D_{wall} = \{(x_1,x_2,x_3) \ | \ x_1^2+x_2^2=1\}, $" src="form_4.png" width="204" height="15"/>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\cdot\mathbf{n}\right|_{\partial D_{sym[1,2]}}=0,
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_5.png" width="163" height="18"/>
+</p>
+ (where <img class="formulaInl" alt="$ \mathbf{n} $" src="form_6.png" width="8" height="6"/> is the outer unit normal vector) on the symmetry boundaries <img class="formulaInl" alt="$ \partial D_{sym[1]} = \{(x_1,x_2,x_3) \ | \ x_1=0\} $" src="form_7.png" width="183" height="15"/> and <img class="formulaInl" alt="$ \partial D_{sym[2]} = \{(x_1,x_2,x_3) \ | \ x_2=0\}, $" src="form_8.png" width="186" height="15"/>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{\partial D}=(0,0,1-(x_1^2+x^2)^\alpha),
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_9.png" width="218" height="16"/>
+</p>
+ on the inflow boundary, <img class="formulaInl" alt="$ \partial D_{inflow} = \{(x_1,x_2,x_3) \ | \ x_3=0\}, $" src="form_10.png" width="188" height="14"/> and finally  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. u_1\right|_{\partial D_{outflow}}= 
+\left. u_2\right|_{\partial D_{outflow}}=0,
+\ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_11.png" width="230" height="16"/>
+</p>
+ (parallel flow) on the outflow boundary <img class="formulaInl" alt="$ \partial D_{outflow} = 
+\{(x_1,x_2,x_3) \ | \ x_3=L\}.$" src="form_12.png" width="195" height="14"/> Note that the axial velocity component, <img class="formulaInl" alt="$u_3$" src="form_13.png" width="14" height="9"/>, is not constrained at the outflow. Implicitly, we are therefore setting the axial component of traction on the fluid to zero,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ 
+t_3|_{\partial D_{outflow}} = \left. \left(-p +  2 \, 
+\frac{\partial u_3}{\partial x_3}\right)
+\right|_{\partial D_{outflow}} = 0.
+\]" src="form_14.png" width="238" height="35"/>
+</p>
+ Since <img class="formulaInl" alt="$ \partial u_1 / \partial x_1 = \partial u_2
+/\partial x_2 = 0$" src="form_15.png" width="131" height="14"/> in the outflow cross-section [see (5], and the flow is incompressible, this is equivalent to (weakly) setting the pressure at the outflow to zero,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+p|_{\partial D_{outflow}}=0.
+\]" src="form_16.png" width="85" height="15"/>
+</p>
+   </td></tr>
+</table>
+<br  />
+ </center><hr  />
+ <hr  />
+<h2><a class="anchor" id="results"></a>
+Results for Taylor-Hood elements</h2>
+<p>The figure below shows the results computed with <code>oomph-lib's</code> 3x3x3-node 3D adaptive Taylor-Hood elements for the parameters <img class="formulaInl" alt="$ \alpha=20$" src="form_17.png" width="36" height="9"/>, <img class="formulaInl" alt="$ L=7$" src="form_18.png" width="31" height="10"/> and <img class="formulaInl" alt="$Re=100 $" src="form_19.png" width="50" height="10"/>. The large exponent <img class="formulaInl" alt="$ \alpha=20$" src="form_17.png" width="36" height="9"/> imposes a very blunt inflow profile, which creates a thin boundary layer near the wall. Diffusion of vorticity into the centre of the tube smooths the velocity profile which ultimately approaches a parabolic Poiseuille profile. If you are viewing these results online you will be able to see how successive mesh adaptations refine the mesh &ndash; predominantly near the entry region where the large velocity gradients in the boundary layer require a fine spatial discretisation. Note also that on the coarsest mesh, even the (imposed) inflow profile is represented very poorly.</p>
+<div class="image">
+<img src="axial_veloc.gif" alt=""/>
+<div class="caption">
+Contour plot of the axial velocity distribution for Re=100. Flow is from right to left. </div></div>
+  <div class="image">
+<img src="full_profiles.gif" alt=""/>
+<div class="caption">
+Axial velocity profiles in equally-spaced cross-sections along the tube for Re=100. Flow is from left to right. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>The problem only contains one global parameter, the Reynolds number, which we define in a namespace, as usual.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=start_of_namespace================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=100;</div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition</b> <a href="full__tube_8cc_source.html#l00082">full_tube.cc:83</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="full__tube_8cc_source.html#l00085">full_tube.cc:85</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>Since the 3D computations can take a long time, and since all demo codes are executed during <code>oomph-lib's</code> self-test procedures, we allow the code to operate in two modes:</p><ul>
+<li>By default, we specify error targets for which the code refines the mesh near the inflow region, and allow up to five successive mesh adaptations. The code is executed in this mode if the executable is run without any command line arguments.</li>
+<li>If the code is run during the self-test procedure (indicated by specifying some random command line argument), we only perform one level of adaptation to speed up the self-test. However, because the original mesh is very coarse, the first mesh adaptation refines <em>all</em> elements in the mesh (cf. the animation of the adaptive mesh refinement shown above), so that no hanging nodes are created &ndash; not a good test-case for a validation run! Therefore adjust the error targets so that the first (and only) mesh adaption only refines a few elements and therefore creates a few hanging nodes.</li>
+</ul>
+<p>The main code therefore starts by storing the command line arguments and setting the adaptation targets accordingly:</p>
+<div class="fragment"><div class="line"><span class="comment">//=start_of_main=======================================================</span></div>
+<div class="line"><span class="comment">/// Driver for 3D entry flow into a quarter tube. If there are</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// any command line arguments, we regard this as a validation run</span></div>
+<div class="line"><span class="comment">/// and perform only a single adaptation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="full__tube_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Allow (up to) five rounds of fully automatic adapation in response to </span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// error estimate</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt;</div>
+<div class="line"> <span class="keywordtype">double</span> max_error_target,min_error_target;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set max number of adaptations in black-box Newton solver and</span></div>
+<div class="line"> <span class="comment">// error targets for adaptation</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==1)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Up to five adaptations</span></div>
+<div class="line">   max_adapt=5;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line">   max_error_target=0.005;</div>
+<div class="line">   min_error_target=0.0005;</div>
+<div class="line">  } </div>
+<div class="line"> <span class="comment">// Validation run: Only one adaptation. Relax error targets</span></div>
+<div class="line"> <span class="comment">// to ensure that not all elements are refined so we&#39;re getting</span></div>
+<div class="line"> <span class="comment">// some hanging nodes.</span></div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Validation run: Just one round of adaptation</span></div>
+<div class="line">   max_adapt=1;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line">   max_error_target=0.02;</div>
+<div class="line">   min_error_target=0.002;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment">// end max_adapt setup</span></div>
+<div class="ttc" id="afull__tube_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="full__tube_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for 3D entry flow into a straight tube.</div><div class="ttdef"><b>Definition</b> <a href="full__tube_8cc_source.html#l00310">full_tube.cc:310</a></div></div>
+</div><!-- fragment --><p> We then create a <code>DocInfo</code> object to specify the labels for the output files, and solve the problem, first with Taylor-Hood and then with Crouzeix-Raviart elements, writing the results from the two discretisations to different directories:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do Taylor-Hood elements</span></div>
+<div class="line"> <span class="comment">//------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_TH&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build problem</span></div>
+<div class="line">  <a class="code hl_class" href="classEntryFlowProblem.html">EntryFlowProblem&lt;RefineableQTaylorHoodElement&lt;3&gt;</a> &gt; </div>
+<div class="line">   problem(doc_info,min_error_target,max_error_target);</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot; Doing Taylor-Hood elements &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Doc solution after solving</span></div>
+<div class="line">  problem.doc_solution();</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem </span></div>
+<div class="line">  problem.newton_solve(max_adapt);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do Crouzeix-Raviart elements</span></div>
+<div class="line"> <span class="comment">//-----------------------------</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Set output directory</span></div>
+<div class="line">  doc_info.set_directory(<span class="stringliteral">&quot;RESLT_CR&quot;</span>);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Step number</span></div>
+<div class="line">  doc_info.number()=0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Build problem</span></div>
+<div class="line">  <a class="code hl_class" href="classEntryFlowProblem.html">EntryFlowProblem&lt;RefineableQCrouzeixRaviartElement&lt;3&gt;</a> &gt;</div>
+<div class="line">   problem(doc_info,min_error_target,max_error_target);</div>
+<div class="line">  </div>
+<div class="line">  cout &lt;&lt; <span class="stringliteral">&quot; Doing Crouzeix-Raviart elements &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Solve the problem </span></div>
+<div class="line">  problem.newton_solve(max_adapt);</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+<div class="ttc" id="aclassEntryFlowProblem_html"><div class="ttname"><a href="classEntryFlowProblem.html">EntryFlowProblem</a></div><div class="ttdoc">Entry flow problem in quarter tube domain.</div><div class="ttdef"><b>Definition</b> <a href="three__d__entry__flow_8cc_source.html#l00053">three_d_entry_flow.cc:54</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The problem class is very similar to the ones used in the <a href="../../circular_driven_cavity/html/index.html#problem">2D examples</a>. We pass the <code>DocInfo</code> object and the target errors to the <code>Problem</code> constructor.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Entry flow problem in quarter tube domain</span></div>
+<div class="line"><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classEntryFlowProblem.html">EntryFlowProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass DocInfo object and target errors</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classEntryFlowProblem.html">EntryFlowProblem</a>(DocInfo&amp; doc_info, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; min_error_target,</div>
+<div class="line">                  <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; max_error_target);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classEntryFlowProblem.html#a22d76abde64459f167067c1d2cb5c1e2">~EntryFlowProblem</a>() {}</div>
+<div class="ttc" id="aclassEntryFlowProblem_html_a22d76abde64459f167067c1d2cb5c1e2"><div class="ttname"><a href="classEntryFlowProblem.html#a22d76abde64459f167067c1d2cb5c1e2">EntryFlowProblem::~EntryFlowProblem</a></div><div class="ttdeci">~EntryFlowProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="three__d__entry__flow_8cc_source.html#l00063">three_d_entry_flow.cc:63</a></div></div>
+</div><!-- fragment --><p> The function <code>Problem::actions_after_newton_solve()</code> is used to document the solutions computed at various levels of mesh refinement:</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution after solve</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_newton_solve() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Doc solution after solving</span></div>
+<div class="line">   doc_solution();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment label for output files</span></div>
+<div class="line">   Doc_info.number()++;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> The function <code>Problem::actions_before_newton_solve()</code> is discussed <a href="#before_solve">below</a>, and, as in all adaptive Navier-Stokes computations, we use the function <code>Problem::actions_after_adapt()</code> to pin any redundant pressure degrees of freedom; see <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</a> for details.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_before_newton_solve();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// After adaptation: Pin redudant pressure dofs.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Pin redudant pressure dofs</span></div>
+<div class="line">   RefineableNavierStokesEquations&lt;3&gt;::</div>
+<div class="line">    pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+<div class="line">  } </div>
+</div><!-- fragment --><p> Finally, we have the usual <code>doc_solution()</code> function and include an access function to the mesh. The private member data <code>Alpha</code> determines the bluntness of the inflow profile.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> doc_solution();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Overload generic access function by one that returns</span></div>
+<div class="line"><span class="comment"> /// a pointer to the specific  mesh</span></div>
+<div class="line"><span class="comment"></span> RefineableQuarterTubeMesh&lt;ELEMENT&gt;* mesh_pt() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span>RefineableQuarterTubeMesh&lt;ELEMENT&gt;*<span class="keyword">&gt;</span>(Problem::mesh_pt());</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Exponent for bluntness of velocity profile</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> Alpha;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc info object</span></div>
+<div class="line"><span class="comment"></span> DocInfo Doc_info;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The constructor</h1>
+<p>We start by building the adaptive mesh for the quarter tube domain. As for most meshes with curvilinear boundaries, the <code>RefineablequarterTubeMesh</code> expects the curved boundary to be represented by a <code>GeomObject</code>. We therefore create an <code>EllipticalTube</code> with unit half axes, i.e. a unit cylinder and a pass a pointer to the <code>GeomObject</code> to the mesh constructor. The "ends" of the curvilinear boundary (in terms of the maximum and minimum values of the Lagrangian coordinates that parametrise the shape of the <code>GeomObject</code>) are such that it represents a quarter of a cylindrical tube of length <img class="formulaInl" alt="$L=7$" src="form_20.png" width="31" height="10"/>.</p>
+<div class="fragment"><div class="line"><span class="comment">//=start_of_constructor===================================================</span></div>
+<div class="line"><span class="comment">/// Constructor: Pass DocInfo object and error targets</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classEntryFlowProblem.html#a0d527811321d270d769224dcbac8d240">EntryFlowProblem&lt;ELEMENT&gt;::EntryFlowProblem</a>(DocInfo&amp; doc_info,</div>
+<div class="line">                                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; min_error_target,</div>
+<div class="line">                                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; max_error_target) </div>
+<div class="line"> : Doc_info(doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup mesh:</span></div>
+<div class="line"> <span class="comment">//------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create geometric objects: Elliptical tube with half axes = radius = 1.0</span></div>
+<div class="line"> <span class="keywordtype">double</span> radius=1.0;</div>
+<div class="line"> GeomObject* Wall_pt=<span class="keyword">new</span> EllipticalTube(radius,radius);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Boundaries on object</span></div>
+<div class="line"> Vector&lt;double&gt; xi_lo(2);</div>
+<div class="line"> <span class="comment">// height of inflow</span></div>
+<div class="line"> xi_lo[0]=0.0;</div>
+<div class="line"> <span class="comment">// start of Wall_pt</span></div>
+<div class="line"> xi_lo[1]=0.0;</div>
+<div class="line"> </div>
+<div class="line"> Vector&lt;double&gt; xi_hi(2);</div>
+<div class="line"> <span class="comment">// height of outflow</span></div>
+<div class="line"> xi_hi[0]=7.0;</div>
+<div class="line"> <span class="comment">// end of Wall_pt</span></div>
+<div class="line"> xi_hi[1]=2.0*atan(1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// # of layers</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nlayer=6;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Radial divider is located half-way along the circumference</span></div>
+<div class="line"> <span class="keywordtype">double</span> frac_mid=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build and assign mesh</span></div>
+<div class="line"> Problem::mesh_pt()=</div>
+<div class="line">  <span class="keyword">new</span> RefineableQuarterTubeMesh&lt;ELEMENT&gt;(Wall_pt,xi_lo,frac_mid,xi_hi,nlayer);</div>
+<div class="ttc" id="aclassEntryFlowProblem_html_a0d527811321d270d769224dcbac8d240"><div class="ttname"><a href="classEntryFlowProblem.html#a0d527811321d270d769224dcbac8d240">EntryFlowProblem::EntryFlowProblem</a></div><div class="ttdeci">EntryFlowProblem(DocInfo &amp;doc_info, const double &amp;min_error_target, const double &amp;max_error_target)</div><div class="ttdoc">Constructor: Pass DocInfo object and target errors.</div><div class="ttdef"><b>Definition</b> <a href="three__d__entry__flow_8cc_source.html#l00113">three_d_entry_flow.cc:113</a></div></div>
+</div><!-- fragment --><p> Next, we build an error estimator and specify the target errors for the mesh adaptation:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator </span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> mesh_pt()-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Error targets for adaptive refinement</span></div>
+<div class="line"> mesh_pt()-&gt;max_permitted_error()=max_error_target; </div>
+<div class="line"> mesh_pt()-&gt;min_permitted_error()=min_error_target; </div>
+</div><!-- fragment --><p> Now we have to apply boundary conditions on the various mesh boundaries. [<b>Reminder:</b> If the numbering of the mesh boundaries is not apparent from its documentation (as it should be!), you can use the function <code>Mesh::output_boundaries(...)</code> to output them in a tecplot-readable form.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Doc the boundaries</span></div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;boundaries.dat&quot;</span>);</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output_boundaries(some_file);</div>
+<div class="line"> some_file.close();</div>
+</div><!-- fragment --><p> If the mesh has N boundaries, the output file will contain N different zones, each containing the <img class="formulaInl" alt="$(x,y,z)$" src="form_21.png" width="40" height="14"/> coordinates of the nodes on the boundary.]</p>
+<p>For the <code>RefineableQuarterTubeMesh</code>, the boundaries are numbered as follows:</p><ul>
+<li>Boundary 0: "Inflow" cross section; located along the line parametrised by <img class="formulaInl" alt="$ x_3=\xi_0 = \xi_0^{lo} $" src="form_22.png" width="73" height="15"/> on the <code>GeomObject</code> that specifies the wall.</li>
+<li>Boundary 1: Plane <img class="formulaInl" alt="$ x_1=0 $" src="form_23.png" width="36" height="11"/></li>
+<li>Boundary 2: Plane <img class="formulaInl" alt="$ x_2=0 $" src="form_24.png" width="36" height="11"/></li>
+<li>Boundary 3: The curved wall</li>
+<li>Boundary 4: "Outflow" cross section; located along the line parametrised by <img class="formulaInl" alt="$ x_3=\xi_0 = \xi_0^{hi} $" src="form_25.png" width="74" height="15"/> on the <code>GeomObject</code> that specifies the wall.</li>
+</ul>
+<div class="image">
+<img src="boundaries.gif" alt=""/>
+<div class="caption">
+Plot of the mesh boundaries. </div></div>
+ <p>We apply the following boundary conditions:</p><ul>
+<li>Boundary 0: ( <img class="formulaInl" alt="$ x_3=0$" src="form_26.png" width="36" height="11"/>) pin all three velocities.</li>
+<li>Boundary 1: ( <img class="formulaInl" alt="$ x_1=0$" src="form_27.png" width="36" height="11"/>) pin <img class="formulaInl" alt="$ u_1$" src="form_28.png" width="13" height="9"/>.</li>
+<li>Boundary 2: ( <img class="formulaInl" alt="$ x_2=0$" src="form_29.png" width="36" height="11"/>) pin <img class="formulaInl" alt="$ u_2$" src="form_30.png" width="13" height="9"/>.</li>
+<li>Boundary 3: ( <img class="formulaInl" alt="$ x_1^2+x_2^2=1$" src="form_31.png" width="64" height="15"/>) pin all three velocities.</li>
+<li>Boundary 4: ( <img class="formulaInl" alt="$ x_3=L$" src="form_32.png" width="39" height="13"/>) pin <img class="formulaInl" alt="$ u_1 $" src="form_33.png" width="13" height="9"/> and <img class="formulaInl" alt="$ u_2 $" src="form_34.png" width="13" height="9"/>.</li>
+</ul>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodal values are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin the ones that have Dirichlet conditions</span></div>
+<div class="line"> <span class="comment">// here. </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_bound = mesh_pt()-&gt;nboundary();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> ibound=0;ibound&lt;num_bound;ibound++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Boundary 1 is the vertical symmetry boundary: We allow flow in </span></div>
+<div class="line">     <span class="comment">//the y-direction. Elsewhere, pin the y velocity</span></div>
+<div class="line">     <span class="keywordflow">if</span>(ibound!=1) mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Boundary 2 is the horizontal symmetry boundary: We allow flow in </span></div>
+<div class="line">     <span class="comment">//the x-direction. Elsewhere, pin the x velocity</span></div>
+<div class="line">     <span class="keywordflow">if</span>(ibound!=2) mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Boundaries 0 and 3 are the inflow and the wall respectively.</span></div>
+<div class="line">     <span class="comment">// Pin the axial velocity because of the prescribed inflow</span></div>
+<div class="line">     <span class="comment">// profile and the no slip on the stationary wall, respectively</span></div>
+<div class="line">     <span class="keywordflow">if</span>((ibound==0) || (ibound==3)) </div>
+<div class="line">      {</div>
+<div class="line">       mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(2);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="comment">// end loop over boundaries</span></div>
+</div><!-- fragment --><p> Now we assign the <code>re_pt()</code> for each element and pin the redundant nodal pressures (see <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</a> for details).</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   ELEMENT* el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redudant pressure dofs</span></div>
+<div class="line"> RefineableNavierStokesEquations&lt;3&gt;::</div>
+<div class="line">  pin_redundant_nodal_pressures(mesh_pt()-&gt;element_pt());</div>
+</div><!-- fragment --><p> We provide an initial guess for the velocity field by initialising all velocity components with their Poiseuille flow values.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set Poiseuille flow as initial for solution</span></div>
+<div class="line"> <span class="comment">// Inflow will be overwritten in actions_before_newton_solve()</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_nod=mesh_pt()-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> j=0;j&lt;n_nod;j++)</div>
+<div class="line">  {</div>
+<div class="line">   Node* node_pt=mesh_pt()-&gt;node_pt(j);</div>
+<div class="line">   <span class="comment">// Recover coordinates</span></div>
+<div class="line">   <span class="keywordtype">double</span> x=node_pt-&gt;x(0);</div>
+<div class="line">   <span class="keywordtype">double</span> y=node_pt-&gt;x(1);</div>
+<div class="line">   <span class="keywordtype">double</span> r=sqrt(x*x+y*y );  </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Poiseuille flow</span></div>
+<div class="line">   node_pt-&gt;set_value(0,0.0);</div>
+<div class="line">   node_pt-&gt;set_value(1,0.0);</div>
+<div class="line">   node_pt-&gt;set_value(2,(1.0-r*r));</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> Finally, we set the value of <code>Alpha</code>, the exponent that specifies the bluntness of the inflow profile and assign the equation numbers.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Set the exponent for bluntness: Alpha=2 --&gt; Poisseuille; anything</span></div>
+<div class="line"> <span class="comment">// larger makes the inflow blunter</span></div>
+<div class="line"> Alpha=20;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="before_solve"></a>
+Actions before solve</h1>
+<p>We use the function <code>Problem::actions_before_newton_solve()</code> to re-assign the inflow boundary conditions before every solve. In the present problem this is an <em>essential</em> step because the blunt inflow profile (4) cannot be represented accurately on the initial coarse mesh (see the animation of the axial velocity profiles at the beginning of this document). As discussed in the <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html">example that illustrates the use of spatial adaptivity for time-dependent problems</a>, <code>oomph-lib</code> automatically <b>(i)</b> applies the correct boundary conditions for newly created nodes that are located on the mesh boundaries and <b>(ii)</b> assigns the nodal values at such nodes by interpolation from the previously computed solution. This procedure is adequate on boundaries where homogeneous boundary conditions are applied, e.g. on the curved wall, the symmetry and the outflow boundaries. However, on the inflow boundary, the interpolation from the FE representation of the blunt velocity profile (imposed on the coarse initial mesh) onto the refined mesh, does not yield a more accurate representation of the prescribed inflow profile. It is therefore necessary to re-assign the nodal values on this boundary after every adaptation, i.e. before every solve.</p>
+<div class="fragment"><div class="line"><span class="comment">//=start_of_actions_before_newton_solve==========================================</span></div>
+<div class="line"><span class="comment">/// Set the inflow boundary conditions</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classEntryFlowProblem.html#ae4dde95573350d8fdb19463849991130">EntryFlowProblem&lt;ELEMENT&gt;::actions_before_newton_solve</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// (Re-)assign velocity profile at inflow values</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup bluntish parallel inflow on boundary 0:</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0; </div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod= mesh_pt()-&gt;nboundary_node(ibound); </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Recover coordinates</span></div>
+<div class="line">   <span class="keywordtype">double</span> x=mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(0);</div>
+<div class="line">   <span class="keywordtype">double</span> y=mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;x(1);</div>
+<div class="line">   <span class="keywordtype">double</span> r=sqrt(x*x+y*y);  </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Bluntish profile for axial velocity (component 2)</span></div>
+<div class="line">   mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;</div>
+<div class="line">    set_value(2,(1.0-pow(r,Alpha)));</div>
+<div class="line">  }</div>
+<div class="ttc" id="aclassEntryFlowProblem_html_ae4dde95573350d8fdb19463849991130"><div class="ttname"><a href="classEntryFlowProblem.html#ae4dde95573350d8fdb19463849991130">EntryFlowProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve.</div><div class="ttdef"><b>Definition</b> <a href="three__d__entry__flow_8cc_source.html#l00243">three_d_entry_flow.cc:243</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post processing</h1>
+<p>This function remains exactly the same as in the <a href="../../driven_cavity/html/index.html">2D examples</a>.</p>
+<div class="fragment"><div class="line"><span class="comment">//=start_of_doc_solution==================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classEntryFlowProblem.html#a8ba37cd2a4af4356e4182929027d7828">EntryFlowProblem&lt;ELEMENT&gt;::doc_solution</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,Doc_info.directory().c_str(),</div>
+<div class="line">         Doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> mesh_pt()-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution</span></div>
+<div class="ttc" id="aclassEntryFlowProblem_html_a8ba37cd2a4af4356e4182929027d7828"><div class="ttname"><a href="classEntryFlowProblem.html#a8ba37cd2a4af4356e4182929027d7828">EntryFlowProblem::doc_solution</a></div><div class="ttdeci">void doc_solution()</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="three__d__entry__flow_8cc_source.html#l00271">three_d_entry_flow.cc:271</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and exercises</h1>
+<ol type="1">
+<li>Suppress the reassignment of the prescribed inflow profile in <code>Problem::actions_before_newton_solve()</code> to confirm that this step is essential if the computation is to converge to the exact solution.</li>
+<li>Suppress the specification of the parabolic (Poiseuille) velocity profile as the initial guess for the velocity field in the problem constructor to confirm that the assignment of a "good" initial guess for the solution is essential for the convergence of the Newton method. [Hint: You can simply comment out the initialisation of the velocities &ndash; they then retain their default initial values of 0.0. When you re-run the code, the Newton iteration will "die" immediately with an error message stating that the maximum residual exceeds the default threshold of 10.0, stored in the protected data member <code>Problem::Max_residuals</code>. Try increasing the value of this threshold in the Problem constructor. Is this sufficient to make the Newton method converge?]</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/three_d_entry_flow/">demo_drivers/navier_stokes/three_d_entry_flow/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/three_d_entry_flow/three_d_entry_flow.cc">demo_drivers/navier_stokes/three_d_entry_flow/three_d_entry_flow.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:38
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

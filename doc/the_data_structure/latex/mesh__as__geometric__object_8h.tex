@@ -1,0 +1,19 @@
+\doxysection{mesh\+\_\+as\+\_\+geometric\+\_\+object.\+h File Reference}
+\hypertarget{mesh__as__geometric__object_8h}{}\label{mesh__as__geometric__object_8h}\index{mesh\_as\_geometric\_object.h@{mesh\_as\_geometric\_object.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{oomph\+::\+Mesh\+As\+Geom\+Object}}
+\begin{DoxyCompactList}\small\item\em This class provides a \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representation of a given finite element mesh. The Lagrangian coordinate is taken to be the dimension of the (first) element in the mesh and the Eulerian coordinate is taken to be the dimension of the (first) node in the mesh. If there are no elements or nodes the appropriate dimensions will be set to zero. The constituent elements of the mesh must have their own \doxylink{classoomph_1_1GeomObject}{Geom\+Object} representations, so they must be Finite\+Elements, and they become sub-\/objects in this compound \doxylink{classoomph_1_1GeomObject}{Geom\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1MeshAsGeomObject__Helper}{oomph\+::\+Mesh\+As\+Geom\+Object\+\_\+\+Helper}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for \doxylink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object} -- its only function creates \doxylink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters} of the right type for the default sample point container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1MeshAsGeomObject__Helper_a4c01eba9e65a9757c7e18ff56cb28122}{oomph\+::\+Mesh\+As\+Geom\+Object\+\_\+\+Helper\+::create\+\_\+sample\+\_\+point\+\_\+container\+\_\+parameters}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em "{}\+Factory"{} for \doxylink{classoomph_1_1SamplePointContainerParameters}{Sample\+Point\+Container\+Parameters} of the right type as selected by Default\+\_\+sample\+\_\+point\+\_\+container\+\_\+version \end{DoxyCompactList}\end{DoxyCompactItemize}

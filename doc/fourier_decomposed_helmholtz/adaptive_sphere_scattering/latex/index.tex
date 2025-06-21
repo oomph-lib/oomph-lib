@@ -1,0 +1,1136 @@
+\chapter{Example problem\+: The spatially-\/adaptive solution of the azimuthally Fourier-\/decomposed 3D Helmholtz equation}
+\hypertarget{index}{}\label{index}\index{Example problem: The spatially-\/adaptive solution of the azimuthally Fourier-\/decomposed 3D Helmholtz equation@{Example problem: The spatially-\/adaptive solution of the azimuthally Fourier-\/decomposed 3D Helmholtz equation}}
+In this document we discuss the spatially-\/adaptive finite-\/element-\/based solution of the 3D Helmholtz equation in cylindrical polar coordinates, using a Fourier-\/decomposition of the solution in the azimuthal direction.
+
+The driver code is very similar to the one discussed in \href{../../sphere_scattering/html/index.html}{\texttt{ another tutorial }} -- the main purpose of the current tutorial is to demonstrate the use of spatial adaptivity on unstructured meshes.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_scattering}{}\doxysection{\texorpdfstring{A specific example}{A specific example}}\label{index_scattering}
+We will solve the azimuthally Fourier-\/decomposed Helmholtz equation  \[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0,
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\] where $ N $ is the azimuthal wavenumber, in the finite domain $ 1 < \sqrt{r^2 + z^2} < 3 $. We impose the Sommerfeld radiation condition at the outer boundary of the computational domain at $ \sqrt{r^2 + z^2} = 3$, using a Dirichlet-\/to-\/\+Neumann mapping, and apply flux boundary condition on the surface of the unit-\/sphere (where $ \sqrt{r^2 + z^2} = 1 $) such that the exact solution is given by  \[
+u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} 
+h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right).
+\] This solution corresponds to the superposition of several outgoing waves that emerge from the unit sphere.
+
+The two plots below show a comparison between the exact and computed solutions for $ N_{\rm terms}=6 $ , a Fourier wavenumber of $ N=1 $ , and a (squared) Helmholtz wavenumber of $ k^2 = 10 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{re}
+\doxyfigcaption{Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-\/decomposed Helmholtz equation for N=1 and a wavenumber of k\texorpdfstring{$^\wedge$}{\string^}2 = 10. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{im}
+\doxyfigcaption{Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-\/decomposed Helmholtz equation for N=1 and a wavenumber of k\texorpdfstring{$^\wedge$}{\string^}2 = 10. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_num_soln}{}\doxysection{\texorpdfstring{The numerical solution}{The numerical solution}}\label{index_num_soln}
+The driver code for this problem is very similar to the one discussed in \href{../../sphere_scattering/html/index.html}{\texttt{ another tutorial. }}
+
+Running {\ttfamily sdiff} on the driver codes \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/sphere\+\_\+scattering.\+cc }} \end{center}  and \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/unstructured\+\_\+sphere\+\_\+scattering.\+cc }} \end{center}  shows the main differences required to discretise the computational domain with an adaptive, unstructured mesh\+:
+\begin{DoxyItemize}
+\item The provision of the functions {\ttfamily actions\+\_\+before/after\+\_\+adapt}() to detach/re-\/attach the {\ttfamily Face\+Elements} that are used to enforce the Neumann boundary conditions before and after every spatial adaptation, and to pass the physical parameters to the newly created bulk elements. ~\newline
+~\newline
+
+\item The generation of an unstructured mesh whose curvilinear boundaries are represented by {\ttfamily Geom\+Objects} -- this ensures that the domain boundaries become increasingly well resolved under mesh refinement.
+\end{DoxyItemize}That\textquotesingle{}s all!
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_code}{}\doxysection{\texorpdfstring{Code listing}{Code listing}}\label{index_code}
+Here\textquotesingle{}s a listing of the complete driver code\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//Driver\ for\ Fourier-\/decomposed\ \ Helmholtz\ problem\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <complex>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Generic\ routines}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ Helmholtz\ equations}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}fourier\_decomposed\_helmholtz.h"{}}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//\ The\ mesh}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/triangle\_mesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Get\ the\ Bessel\ functions}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}oomph\_crbond\_bessel.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_namespace\_planar\_wave=================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ to\ test\ representation\ of\ planar\ wave\ in\ spherical}}
+\DoxyCodeLine{\textcolor{comment}{///\ polars}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacePlanarWave}{PlanarWave}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ terms\ in\ series}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}=100;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Wave\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacePlanarWave_a1d51c00058fbc80aa9d255fffd92abac}{K}}=3.0*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Imaginary\ unit\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ std::complex<double>\ \mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}(0.0,1.0);\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ Vector\ of\ size\ 2,\ containing\ real\ and\ imag\ parts}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{get\_exact\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{x}},\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{u}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Switch\ to\ spherical\ coordinates}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{R}}=\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]+\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{theta}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{theta}}=\mbox{\hyperlink{classAnnularQuadMesh}{atan2}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0],\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Argument\ for\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{kr}}\ =\ \mbox{\hyperlink{namespacePlanarWave_a1d51c00058fbc80aa9d255fffd92abac}{K}}*\mbox{\hyperlink{classAnnularQuadMesh}{R}};\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Need\ half-\/order\ Bessel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{jv}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{yv}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{djv}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{dyv}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}});}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}}=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}-\/1)+\mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}};}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}}=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ This\ function\ returns\ vectors\ containing\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ J\_k(x),\ Y\_k(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ up\ to\ k=order\_max,\ with\ k\ increasing\ in}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ integer\ increments\ starting\ with\ smallest}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ positive\ value.\ So,\ e.g.\ for\ order\_max=3.5}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[0]\ contains\ J\_\{1/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[1]\ contains\ J\_\{3/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[2]\ contains\ J\_\{5/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[3]\ contains\ J\_\{7/2\}(x).}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CRBond\_Bessel::bessjyv}}(\mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{kr}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[0],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{djv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[0]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assemble\ \ exact\ solution\ (actually\ no\ need\ to\ add\ terms}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ below\ i=N\_fourier\ as\ Legendre\ polynomial\ would\ be\ zero\ anyway)}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}(0.0,0.0);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Associated\_legendre\_functions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{p}}=\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Legendre\_functions\_helper::plgndr2}}(\mbox{\hyperlink{classAnnularQuadMesh}{i}},0,\mbox{\hyperlink{classAnnularQuadMesh}{cos}}(\mbox{\hyperlink{classAnnularQuadMesh}{theta}}));}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ exact\ solution}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}+=(2.0*\mbox{\hyperlink{classAnnularQuadMesh}{i}}+1.0)*\mbox{\hyperlink{classAnnularQuadMesh}{pow}}(\mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}},\mbox{\hyperlink{classAnnularQuadMesh}{i}})*}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}}/(2.0*\mbox{\hyperlink{classAnnularQuadMesh}{kr}}))*\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]*\mbox{\hyperlink{classAnnularQuadMesh}{p}};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ real\ \&\ imaginary\ part\ of\ the\ result}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{u}}[0]=\mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}.real();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{u}}[1]=\mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}.imag();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\textcolor{comment}{//end\ of\ get\_exact\_u}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Plot\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacePlanarWave_afe1e9812d1b1dc40a89f7a1f18d1165f}{plot}}()}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nr}}=20;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nz}}=100;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nt}}=40;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}(\textcolor{stringliteral}{"{}planar\_wave.dat"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i\_t}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i\_t}}<\mbox{\hyperlink{classAnnularQuadMesh}{nt}};\mbox{\hyperlink{classAnnularQuadMesh}{i\_t}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{t}}=2.0*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}}*\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{i\_t}})/\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{nt}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \textcolor{stringliteral}{"{}ZONE\ I="{}}<<\ \mbox{\hyperlink{classAnnularQuadMesh}{nz}}\ <<\ \textcolor{stringliteral}{"{},\ J="{}}<<\ \mbox{\hyperlink{classAnnularQuadMesh}{nr}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}(2);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{u}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{nr}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]=0.001+\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{i}})/\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{nr}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<\mbox{\hyperlink{classAnnularQuadMesh}{nz}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{j}})/\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{nz}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{get\_exact\_u}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}},\mbox{\hyperlink{classAnnularQuadMesh}{u}});\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{uu}}=\mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}(\mbox{\hyperlink{classAnnularQuadMesh}{u}}[0],\mbox{\hyperlink{classAnnularQuadMesh}{u}}[1])*\mbox{\hyperlink{classAnnularQuadMesh}{exp}}(-\/\mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}*\mbox{\hyperlink{classAnnularQuadMesh}{t}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{uu}}.real()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{uu}}.imag()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}\ }
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_namespace=============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ the\ Fourier\ decomposed\ Helmholtz\ problem\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceProblemParameters}{ProblemParameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ the\ wavenumber}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}}=10.0;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fourier\ wave\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}}=3;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ terms\ in\ computation\ of\ DtN\ boundary\ condition}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Nterms\_for\_DtN}}=6;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ terms\ in\ the\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}=6;\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Coefficients\ in\ the\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}},1.0);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Imaginary\ unit\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ std::complex<double>\ \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}(0.0,1.0);\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ Vector\ of\ size\ 2,\ containing\ real\ and\ imag\ parts}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\_exact\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{x}},\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{u}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Switch\ to\ spherical\ coordinates}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{R}}=\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]+\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{theta}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{theta}}=\mbox{\hyperlink{classAnnularQuadMesh}{atan2}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0],\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Argument\ for\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{kr}}\ =\ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}})*\mbox{\hyperlink{classAnnularQuadMesh}{R}};\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Need\ half-\/order\ Bessel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{jv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{yv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{djv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{dyv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}}=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}-\/1)+\mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}};}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}}=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ This\ function\ returns\ vectors\ containing\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ J\_k(x),\ Y\_k(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ up\ to\ k=order\_max,\ with\ k\ increasing\ in}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ integer\ increments\ starting\ with\ smallest}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ positive\ value.\ So,\ e.g.\ for\ order\_max=3.5}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[0]\ contains\ J\_\{1/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[1]\ contains\ J\_\{3/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[2]\ contains\ J\_\{5/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[3]\ contains\ J\_\{7/2\}(x).}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CRBond\_Bessel::bessjyv}}(\mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{kr}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[0],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{djv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[0]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assemble\ \ exact\ solution\ (actually\ no\ need\ to\ add\ terms}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ below\ i=N\_fourier\ as\ Legendre\ polynomial\ would\ be\ zero\ anyway)}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}(0.0,0.0);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Associated\_legendre\_functions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{p}}=\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Legendre\_functions\_helper::plgndr2}}(\mbox{\hyperlink{classAnnularQuadMesh}{i}},\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{cos}}(\mbox{\hyperlink{classAnnularQuadMesh}{theta}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ exact\ solution}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}+=\mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]*\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}}/(2.0*\mbox{\hyperlink{classAnnularQuadMesh}{kr}}))*(\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}])*\mbox{\hyperlink{classAnnularQuadMesh}{p}};}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Get\ the\ real\ \&\ imaginary\ part\ of\ the\ result}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{u}}[0]=\mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}.real();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{u}}[1]=\mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}.imag();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\textcolor{comment}{//end\ of\ get\_exact\_u}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Get\ -\/du/dr\ (spherical\ r)\ for\ exact\ solution.\ Equal\ to\ prescribed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ flux\ on\ inner\ boundary.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{x}},\ std::complex<double>\&\ \mbox{\hyperlink{classAnnularQuadMesh}{flux}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Initialise\ flux}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{flux}}=std::complex<double>(0.0,0.0);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Switch\ to\ spherical\ coordinates}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{R}}=\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0]+\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]*\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{theta}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{theta}}=\mbox{\hyperlink{classAnnularQuadMesh}{atan2}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0],\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Argument\ for\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{kr}}=\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}})*\mbox{\hyperlink{classAnnularQuadMesh}{R}};\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Helmholtz\ wavenumber}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{k}}=\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Need\ half-\/order\ Bessel\ functions}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{jv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{yv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{djv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{dyv}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}});}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}}=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}}-\/1)+\mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}};}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}}=0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ This\ function\ returns\ vectors\ containing\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ J\_k(x),\ Y\_k(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ up\ to\ k=order\_max,\ with\ k\ increasing\ in}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ integer\ increments\ starting\ with\ smallest}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ positive\ value.\ So,\ e.g.\ for\ order\_max=3.5}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[0]\ contains\ J\_\{1/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[1]\ contains\ J\_\{3/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[2]\ contains\ J\_\{5/2\}(x),}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ jv[3]\ contains\ J\_\{7/2\}(x).}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CRBond\_Bessel::bessjyv}}(\mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{kr}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[0],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{djv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[0]);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Assemble\ \ exact\ solution\ (actually\ no\ need\ to\ add\ terms}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ below\ i=N\_fourier\ as\ Legendre\ polynomial\ would\ be\ zero\ anyway)}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{u\_ex}}(0.0,0.0);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{namespaceProblemParameters_a6361f0f1c4a120e62d28db64baa84b40}{N\_terms}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Associated\_legendre\_functions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{p}}=\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Legendre\_functions\_helper::plgndr2}}(\mbox{\hyperlink{classAnnularQuadMesh}{i}},\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{cos}}(\mbox{\hyperlink{classAnnularQuadMesh}{theta}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ flux\ of\ exact\ solution}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{flux}}-\/=\mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]*\mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}}/(2.0*\mbox{\hyperlink{classAnnularQuadMesh}{kr}}))*\mbox{\hyperlink{classAnnularQuadMesh}{p}}*}
+\DoxyCodeLine{\ \ \ \ \ (\ \mbox{\hyperlink{classAnnularQuadMesh}{k}}*(\mbox{\hyperlink{classAnnularQuadMesh}{djv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*\mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}])\ -\/\ (0.5*(\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]+\mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}*\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}])/\mbox{\hyperlink{classAnnularQuadMesh}{R}})\ );}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\textcolor{comment}{//\ end\ of\ exact\_normal\_derivative}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=========\ start\_of\_problem\_class=====================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a03174fa5a35b7c38f08f91bcd2a80c20}{\string~FourierDecomposedHelmholtzProblem}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a82ef5a969f4404fc1acb35c38c800ce6}{actions\_before\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a5a37ba3fcf8563764f80108c9a657929}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution.\ DocInfo\ object\ stores\ flags/labels\ for\ where\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ output\ gets\ written\ to}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{doc\_solution}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Recompute\ gamma\ integral\ before\ checking\ Newton\ residuals}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ae80673ef299e4935ddcac177ed919da3}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}}-\/>setup\_gamma();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_acbc6f3c692463e5a098ccec7fe9029c1}{actions\_before\_adapt}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt:\ Rebuild\ the\ mesh\ of\ prescribed\ flux\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3258e3817d8747aac0409eca1a24d14b}{actions\_after\_adapt}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Check\ gamma\ computation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ac4f3f737660b11e8762a61bca999eb0f}{check\_gamma}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ BC\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{create\_outer\_bc\_elements}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a81d64611f2de2492cec6b0621d8124b0}{create\_flux\_elements\_on\_inner\_boundary}}();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Delete\ boundary\ face\ elements\ and\ wipe\ the\ surface\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_aa2c19a495d042fbeca1e226e2ff73080}{delete\_face\_elements}}(\ \mbox{\hyperlink{classAnnularQuadMesh}{Mesh}}*\ \textcolor{keyword}{const}\ \&\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_mesh\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ surface\ elements}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Kill\ surface\ element}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keyword}{delete}\ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_mesh\_pt}}-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Wipe\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_mesh\_pt}}-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{RefineableTriangleMesh<ELEMENT>}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ the\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMesh<ELEMENT>}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ containing\ the\ DtN\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ condition\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNMesh<ELEMENT>}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ on\ the\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{Mesh}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3ecc5a3fc3407de8985ed9a61402f2f0}{Helmholtz\_inner\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab9786130005c43637f8b305c2becc555}{Trace\_file}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Actions\ before\ adapt:\ Wipe\ the\ mesh\ of\ face\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_acbc6f3c692463e5a098ccec7fe9029c1}{FourierDecomposedHelmholtzProblem<ELEMENT>::actions\_before\_adapt}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Kill\ the\ flux\ elements\ and\ wipe\ the\ boundary\ meshs}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ delete\_face\_elements(Helmholtz\_outer\_boundary\_mesh\_pt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ delete\_face\_elements(Helmholtz\_inner\_boundary\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_before\_adapt}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ Actions\ after\ adapt:\ Rebuild\ the\ face\ element\ meshes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3258e3817d8747aac0409eca1a24d14b}{FourierDecomposedHelmholtzProblem<ELEMENT>::actions\_after\_adapt}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ Helmholtz\ bulk\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor:\ Pass\ pointer\ to\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ wave\ number\ squared}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ Helmholtz\ bulk\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}\ *\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{e}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ k\_squared\ \ pointer}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>k\_squared\_pt()\ =\ \&\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ Fourier\ wave\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>fourier\_wavenumber\_pt()=\&\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ prescribed-\/flux\ elements\ and\ BC\ elements\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ from\ all\ elements\ that\ are\ adjacent\ to\ the\ boundaries\ and\ add\ them\ to\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Helmholtz\_boundary\_meshes}}
+\DoxyCodeLine{\ create\_flux\_elements\_on\_inner\_boundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ create\_outer\_bc\_elements();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Rebuild\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}\textcolor{comment}{//\ end\ of\ actions\_after\_adapt}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ Fourier-\/decomposed\ Helmholtz\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ Trace\_file.open(\textcolor{stringliteral}{"{}RESLT/trace.dat"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ circles\ representing\ inner\ and\ outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{x\_c}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{y\_c}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{r\_min}}=1.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{r\_max}}=3.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{Circle}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{inner\_circle\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{Circle}}(\mbox{\hyperlink{classAnnularQuadMesh}{x\_c}},\mbox{\hyperlink{classAnnularQuadMesh}{y\_c}},\mbox{\hyperlink{classAnnularQuadMesh}{r\_min}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{Circle}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_circle\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{Circle}}(\mbox{\hyperlink{classAnnularQuadMesh}{x\_c}},\mbox{\hyperlink{classAnnularQuadMesh}{y\_c}},\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Edges/boundary\ segments\ making\ up\ outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<TriangleMeshCurveSection*>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}(4);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ segments\ used\ for\ representing\ the\ curvilinear\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_segments}}\ =\ 20;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ All\ poly\ boundaries\ are\ defined\ by\ two\ vertices}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<Vector<double>}}\ >\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}(2);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Bottom\ straight\ boundary\ on\ symmetry\ line}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0].resize(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][0]=0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][1]=-\/\mbox{\hyperlink{classAnnularQuadMesh}{r\_min}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1].resize(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][0]=0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][1]=-\/\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}}=0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}[0]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshPolyLine}}(\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}},\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Square\ outer\ boundary:}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<Vector<double>}}\ >\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}(4);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0].resize(2);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][0]=0.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][1]=-\/\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1].resize(2);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][0]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][1]=-\/\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[2].resize(2);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[2][0]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[2][1]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[3].resize(2);}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[3][0]=0.0;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[3][1]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}}=1;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}[1]=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshPolyLine}}(\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}},\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Outer\ circular\ boundary:}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{s\_start}}\ =\ -\/0.5*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{s\_end}}\ \ \ =\ \ 0.5*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}}\ =\ 1;}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}[1]=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshCurviLine}}(\mbox{\hyperlink{classAnnularQuadMesh}{outer\_circle\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{s\_start}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{s\_end}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{n\_segments}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Top\ straight\ boundary\ on\ symmetry\ line}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][0]=0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[0][1]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][0]=0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}}[1][1]=\mbox{\hyperlink{classAnnularQuadMesh}{r\_min}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}}=2;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}[2]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshPolyLine}}(\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_vertices}},\mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Inner\ circular\ boundary:}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ intrinsic\ coordinates\ for\ the\ beginning\ and\ end\ of\ the\ curve}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{s\_start}}\ =\ \ 0.5*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{s\_end}}\ \ \ =\ \ -\/0.5*\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{MathematicalConstants::Pi}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}}\ =\ 3;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}}[3]=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshCurviLine}}(\mbox{\hyperlink{classAnnularQuadMesh}{inner\_circle\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{s\_start}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{s\_end}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{n\_segments}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{boundary\_id}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ closed\ curve\ that\ defines\ outer\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshClosedCurve}}\ *\mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_pt}}\ =}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshClosedCurve}}(\mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_line\_pt}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ TriangleMeshParameters\ object\ for\ helping\ on\ the\ manage\ of\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ TriangleMesh\ parameters.\ The\ only\ parameter\ that\ needs\ to\ take\ is\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ outer\ boundary.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMeshParameters}}\ \mbox{\hyperlink{classAnnularQuadMesh}{triangle\_mesh\_parameters}}(\mbox{\hyperlink{classAnnularQuadMesh}{outer\_boundary\_pt}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Specify\ maximum\ element\ area}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{element\_area}}\ =\ 0.1;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{triangle\_mesh\_parameters}}.element\_area()\ =\ \mbox{\hyperlink{classAnnularQuadMesh}{element\_area}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ "{}bulk"{}\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{RefineableTriangleMesh<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{triangle\_mesh\_parameters}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create/set\ error\ estimator}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Choose\ error\ tolerances\ to\ force\ some\ uniform\ refinement}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>min\_permitted\_error()=0.00004;}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>max\_permitted\_error()=0.0001;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pass\ the\ TriangleMeshParameters\ object\ to\ the\ TriangleMesh\ one}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt=\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{TriangleMesh<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{triangle\_mesh\_parameters}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ what\ we've\ built\ so\ far...}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}mesh.dat"{}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}boundaries.dat"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ mesh\ for\ DtN\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\ \ \ Helmholtz\_outer\_boundary\_mesh\_pt=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{r\_max}},\mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{ProblemParameters::Nterms\_for\_DtN}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Populate\ it\ with\ elements}}
+\DoxyCodeLine{\ \ \ create\_outer\_bc\_elements();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{\ Helmholtz\_inner\_boundary\_mesh\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{Mesh}};}
+\DoxyCodeLine{\ create\_flux\_elements\_on\_inner\_boundary();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ several\ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Helmholtz\_inner\_boundary\_mesh\_pt);\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Helmholtz\_outer\_boundary\_mesh\_pt);\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{build\_global\_mesh}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralsedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}\ *\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ k\_squared\ pointer}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>k\_squared\_pt()=\&\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ Fourier\ wave\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>fourier\_wavenumber\_pt()=\&\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=================================start\_of\_check\_gamma===================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Check\ gamma\ computation:\ \(\backslash\)f\$\ \(\backslash\)gamma\ =\ -\/du/dn\ \(\backslash\)f\$}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ac4f3f737660b11e8762a61bca999eb0f}{FourierDecomposedHelmholtzProblem<ELEMENT>::check\_gamma}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Compute\ gamma\ stuff}}
+\DoxyCodeLine{\ Helmholtz\_outer\_boundary\_mesh\_pt-\/>setup\_gamma();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classAnnularQuadMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/gamma\_test\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//first\ loop\ over\ elements\ e}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nel}}=Helmholtz\_outer\_boundary\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{nel}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ a\ pointer\ to\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Helmholtz\_outer\_boundary\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{e}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ value\ of\ n\_intpt}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_intpt}}\ =\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>integral\_pt()-\/>nweight();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ gamma\ at\ all\ gauss\ points\ in\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<std::complex<double>}}\ >\ \mbox{\hyperlink{classAnnularQuadMesh}{gamma}}(}
+\DoxyCodeLine{\ \ \ \ Helmholtz\_outer\_boundary\_mesh\_pt-\/>gamma\_at\_gauss\_point(\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Loop\ over\ the\ integration\ points}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{ipt}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{ipt}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_intpt}};\mbox{\hyperlink{classAnnularQuadMesh}{ipt}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Allocate\ and\ initialise\ coordiante}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}(\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>dim()+1,0.0);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ Vector\ to\ hold\ local\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n}}=\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>dim();}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{s}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}},0.0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{s}}[\mbox{\hyperlink{classAnnularQuadMesh}{i}}]=\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>integral\_pt()-\/>knot(\mbox{\hyperlink{classAnnularQuadMesh}{ipt}},\mbox{\hyperlink{classAnnularQuadMesh}{i}});}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Get\ the\ coordinates\ of\ the\ integration\ point}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>interpolated\_x(\mbox{\hyperlink{classAnnularQuadMesh}{s}},\mbox{\hyperlink{classAnnularQuadMesh}{x}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{complex<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{flux}};}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{ProblemParameters::exact\_minus\_dudr}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}},\mbox{\hyperlink{classAnnularQuadMesh}{flux}});}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{atan2}}(\mbox{\hyperlink{classAnnularQuadMesh}{x}}[0],\mbox{\hyperlink{classAnnularQuadMesh}{x}}[1])\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{gamma}}[\mbox{\hyperlink{classAnnularQuadMesh}{ipt}}].real()\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{gamma}}[\mbox{\hyperlink{classAnnularQuadMesh}{ipt}}].imag()\ <<\ \textcolor{stringliteral}{"{}\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{flux}}.real()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{flux}}.imag()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \}\textcolor{comment}{//\ end\ of\ loop\ over\ integration\ points}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \}\textcolor{comment}{//\ end\ of\ loop\ over\ elements}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}\textcolor{comment}{//end\ of\ output\_gamma}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution:\ doc\_info\ contains\ labels/output\ directory\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{FourierDecomposedHelmholtzProblem<ELEMENT>::doc\_solution}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}})}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classAnnularQuadMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points:\ npts\ x\ npts}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{npts}}=5;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{classAnnularQuadMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_fct(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{classAnnularQuadMesh}{npts}},\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error\ and\ return\ of\ the\ square\ of\ the\ L2\ error}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{error}},\mbox{\hyperlink{classAnnularQuadMesh}{norm}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>compute\_error(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{error}},\mbox{\hyperlink{classAnnularQuadMesh}{norm}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ L2\ error\ and\ norm\ of\ solution}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNorm\ of\ error\ \ \ :\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{error}})\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ solution:\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{norm}})\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ norm\ of\ solution\ to\ trace\ file}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>compute\_norm(\mbox{\hyperlink{classAnnularQuadMesh}{norm}});\ }
+\DoxyCodeLine{\ Trace\_file\ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{norm}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::command\_line\_flag\_has\_been\_set}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}}))}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Check\ gamma\ computation}}
+\DoxyCodeLine{\ \ \ check\_gamma(\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ BC\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{FourierDecomposedHelmholtzProblem<ELEMENT>::create\_outer\_bc\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ boundary\ is\ boundary\ 1:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{b}}=1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classAnnularQuadMesh}{b}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classAnnularQuadMesh}{face\_index}}\ =\ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ corresponding\ DtN\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{face\_index}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ flux\ boundary\ element\ to\ the\ \ helmholtz\_outer\_boundary\_mesh}}
+\DoxyCodeLine{\ \ \ Helmholtz\_outer\_boundary\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ the\ mesh\ that\ contains\ all\ the\ boundary\ condition}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ elements\ on\ this\ boundary}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}-\/>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{set\_outer\_boundary\_mesh\_pt}}(Helmholtz\_outer\_boundary\_mesh\_pt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_outer\_bc\_elements}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_flux\_elements=================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a81d64611f2de2492cec6b0621d8124b0}{FourierDecomposedHelmholtzProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a81d64611f2de2492cec6b0621d8124b0}{create\_flux\_elements\_on\_inner\_boundary}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Apply\ flux\ bc\ on\ inner\ boundary\ (boundary\ 3)}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{b}}=3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classAnnularQuadMesh}{b}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classAnnularQuadMesh}{face\_index}}\ =\ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ corresponding\ prescribed\ incoming-\/flux\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzFluxElement<ELEMENT>}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzFluxElement<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}},\mbox{\hyperlink{classAnnularQuadMesh}{face\_index}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ prescribed\ incoming-\/flux\ element\ to\ the\ surface\ mesh}}
+\DoxyCodeLine{\ \ \ Helmholtz\_inner\_boundary\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ prescribed\ flux\ function}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}-\/>flux\_fct\_pt()\ =\ \&\mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{ProblemParameters::exact\_minus\_dudr}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ loop\ over\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_main=====================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ Fourier\ decomposed\ Helmholtz\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classAnnularQuadMesh}{argc}},\ \textcolor{keywordtype}{char}\ **\mbox{\hyperlink{classAnnularQuadMesh}{argv}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::setup}}(\mbox{\hyperlink{classAnnularQuadMesh}{argc}},\mbox{\hyperlink{classAnnularQuadMesh}{argv}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ possible\ command\ line\ arguments\ and\ parse\ the\ ones\ that}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ were\ actually\ specified}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Square\ domain\ without\ DtN}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::specify\_command\_line\_flag}}(\textcolor{stringliteral}{"{}-\/-\/square\_domain"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Parse\ command\ line}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::parse\_and\_assign}}();\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ what\ has\ actually\ been\ specified\ on\ the\ command\ line}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CommandLineArgs::doc\_specified\_flags}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ if\ the\ claimed\ representation\ of\ a\ planar\ wave\ in}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ tutorial\ is\ correct\ -\/-\/\ of\ course\ it\ is!}}
+\DoxyCodeLine{\ \textcolor{comment}{//PlanarWave::plot();}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Test\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ Bessel\ functions\ to\ be\ computed}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n}}=3;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Offset\ of\ Bessel\ function\ order\ (less\ than\ 1!)}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}}=0.5;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_file}}(\textcolor{stringliteral}{"{}besselY.dat"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_deriv\_file}}(\textcolor{stringliteral}{"{}dbesselY.dat"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_file}}(\textcolor{stringliteral}{"{}besselJ.dat"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_deriv\_file}}(\textcolor{stringliteral}{"{}dbesselJ.dat"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Evaluate\ Bessel/Hankel\ functions}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{jv}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}}+1);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{yv}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}}+1);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{djv}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}}+1);}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{classAnnularQuadMesh}{dyv}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}}+1);}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{x\_min}}=0.5;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{x\_max}}=5.0;}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nplot}}=100;}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{nplot}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}=\mbox{\hyperlink{classAnnularQuadMesh}{x\_min}}+(\mbox{\hyperlink{classAnnularQuadMesh}{x\_max}}-\/\mbox{\hyperlink{classAnnularQuadMesh}{x\_min}})*\textcolor{keywordtype}{double}(\mbox{\hyperlink{classAnnularQuadMesh}{i}})/\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{nplot}}-\/1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}}=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}})+\mbox{\hyperlink{classAnnularQuadMesh}{bessel\_offset}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}}=0;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ This\ function\ returns\ vectors\ containing\ }}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ J\_k(x),\ Y\_k(x)\ and\ their\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ up\ to\ k=order\_max,\ with\ k\ increasing\ in}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ integer\ increments\ starting\ with\ smallest}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ positive\ value.\ So,\ e.g.\ for\ order\_max=3.5}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ jv[0]\ contains\ J\_\{1/2\}(x),}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ jv[1]\ contains\ J\_\{3/2\}(x),}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ jv[2]\ contains\ J\_\{5/2\}(x),}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ jv[3]\ contains\ J\_\{7/2\}(x).}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{CRBond\_Bessel::bessjyv}}(\mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_in}},\mbox{\hyperlink{classAnnularQuadMesh}{x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{order\_max\_out}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{jv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{yv}}[0],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classAnnularQuadMesh}{djv}}[0],\&\mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[0]);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<=\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{yv}}[\mbox{\hyperlink{classAnnularQuadMesh}{j}}]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<=\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{jv}}[\mbox{\hyperlink{classAnnularQuadMesh}{j}}]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_deriv\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<=\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_deriv\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{dyv}}[\mbox{\hyperlink{classAnnularQuadMesh}{j}}]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_deriv\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_deriv\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<=\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_deriv\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{djv}}[\mbox{\hyperlink{classAnnularQuadMesh}{j}}]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_deriv\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_file}}.close();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_file}}.close();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{bessely\_deriv\_file}}.close();}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{besselj\_deriv\_file}}.close();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Test\ Legrendre\ Polynomials}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Number\ of\ lower\ indices}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n}}=3;}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}(\textcolor{stringliteral}{"{}legendre3.dat"{}});}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nplot}}=100;}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{nplot}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}=\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{i}})/\mbox{\hyperlink{classAnnularQuadMesh}{double}}(\mbox{\hyperlink{classAnnularQuadMesh}{nplot}}-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{x}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{j}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{j}}<=\mbox{\hyperlink{classAnnularQuadMesh}{n}};\mbox{\hyperlink{classAnnularQuadMesh}{j}}++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Legendre\_functions\_helper::plgndr2}}(\mbox{\hyperlink{classAnnularQuadMesh}{n}},\mbox{\hyperlink{classAnnularQuadMesh}{j}},\mbox{\hyperlink{classAnnularQuadMesh}{x}})\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ problem\ with\ 2D\ six-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ TFourierDecomposedHelmholtzElement\ family.\ }}
+\DoxyCodeLine{\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}}<\mbox{\hyperlink{classAnnularQuadMesh}{ProjectableFourierDecomposedHelmholtzElement}}<}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{TFourierDecomposedHelmholtzElement<3>}}\ >\ >\ \mbox{\hyperlink{classAnnularQuadMesh}{problem}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ problem\ with\ 2D\ six-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ TFourierDecomposedHelmholtzElement\ family.\ }}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzProblem<TFourierDecomposedHelmholtzElement<3>}}\ >\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ label\ for\ output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ for\ a\ few\ Fourier\ wavenumbers}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}=0;\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}<4;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number()=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef\ ADAPTIVE}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Max.\ number\ of\ adaptations}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{max\_adapt}}=1;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ Newton's\ method,\ allowing}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ up\ to\ max\_adapt\ mesh\ adaptations\ after\ every\ solve.}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}}.newton\_solve(\mbox{\hyperlink{classAnnularQuadMesh}{max\_adapt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ the\ solution}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/unstructured_sphere_scattering.cc}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/unstructured\+\_\+sphere\+\_\+scattering.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

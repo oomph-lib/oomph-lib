@@ -1,0 +1,1259 @@
+\doxysection{oomph\+::Mumps\+Solver Class Reference}
+\hypertarget{classoomph_1_1MumpsSolver}{}\label{classoomph_1_1MumpsSolver}\index{oomph::MumpsSolver@{oomph::MumpsSolver}}
+
+
+Wrapper to Mumps solver.  
+
+
+
+
+{\ttfamily \#include $<$mumps\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Mumps\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1MumpsSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e}{Mumps\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a85731b5c626437479245e91f20e18500}{Mumps\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8d5ca953c8e042da066d0598b1941112}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4}{\texorpdfstring{$\sim$}{\string~}\+Mumps\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Cleanup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Overload disable resolve so that it cleans up memory too. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5}{enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean to suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1}{disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1}{enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Set boolean to suppress info being printed to screen during MUMPS solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c}{disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t suppress info being printed to screen during MUMPS solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \doxylink{classoomph_1_1Vector}{Vector} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \doxylink{classoomph_1_1Vector}{Vector}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled Jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25}{enable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of statistics. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f}{disable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of statistics. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7}{jacobian\+\_\+setup\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Returns the time taken to assemble the Jacobian matrix and residual vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604}{linear\+\_\+solver\+\_\+solution\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e}{enable\+\_\+suppress\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Set the flag to avoid solution of the system, so just assemble the Jacobian and the rhs. (Used only for timing runs, obviously) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7}{disable\+\_\+suppress\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Unset the flag so that the system is actually solved again This is the default (obviously) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3}{enable\+\_\+delete\+\_\+matrix\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Set Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f}{disable\+\_\+delete\+\_\+matrix\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333}{factorise}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3}{backsub}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Do the backsubstitution for mumps solver Note\+: returns the global result \doxylink{classoomph_1_1Vector}{Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up the memory allocated by the mumps solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_af6bceea5ab29bbc30322b092b227ac03}{declare\+\_\+jacobian\+\_\+is\+\_\+unsymmetric}} ()
+\begin{DoxyCompactList}\small\item\em Tell MUMPS that the Jacobian matrix is unsymmetric. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a752f8f023f3b6c1b7021ad6683853850}{declare\+\_\+jacobian\+\_\+is\+\_\+symmetric}} ()
+\begin{DoxyCompactList}\small\item\em Tell MUMPS that the Jacobian matrix is general symmetric. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_aee53c09d398f6a982de5dc5fa9c02df7}{declare\+\_\+jacobian\+\_\+is\+\_\+symmetric\+\_\+positive\+\_\+definite}} ()
+\begin{DoxyCompactList}\small\item\em Tell MUMPS that the Jacobian matrix is symmetric positive-\/definite. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a576cb1f983353144e063aa63c50757bc}{use\+\_\+pord\+\_\+ordering}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a25cd4ab6089d1532100ff61d5863c6fd}{use\+\_\+metis\+\_\+ordering}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a7f1be2e67797276aaed32de190df0ff1}{use\+\_\+parmetis\+\_\+ordering}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad80d03ad4dac6676b11247d3f5e78000}{use\+\_\+ptscotch\+\_\+ordering}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a34fecff46bfab62a67f7200a745efeea}{use\+\_\+scotch\+\_\+ordering}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e998c0e32140bc56d4}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the Jacobian matrix and residual vector (needs to be overloaded for each solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c196478c7e2f77ef09}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}{Default\+\_\+workspace\+\_\+scaling\+\_\+factor}} = 5
+\begin{DoxyCompactList}\small\item\em Default factor for workspace -- static so it can be overwritten globally. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836}{Mumps\+Jacobian\+Symmetry\+Flags}} \{ \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836a8e20922b3a1dbfa7ddb6ca95c35b03a8}{Unsymmetric}} = 0
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836aafd4b90b3304bd19bd2998f9464e4095}{Symmetric\+\_\+positive\+\_\+definite}} = 1
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836ac37b58b1aad1705a3986aad20494e1c0}{Symmetric}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em values of the SYM variable used by the MUMPS solver which dictates the symmetry properties of the Jacobian matrix; magic numbers as defined by MUMPS documentation \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4b}{Mumps\+Jacobian\+Ordering\+Flags}} \{ \newline
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1fe27821e464333f73325dee0b3d9a51}{Ptscotch\+\_\+ordering}} = 1
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1068dd1549caba5ff828d561ee1e1294}{Parmetis\+\_\+ordering}} = 2
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba8484bf86594bef6f3509ca968e65eb1d}{Scotch\+\_\+ordering}} = 3
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba13393a6ca320fac921fdc389ef247f10}{Pord\+\_\+ordering}} = 4
+, \newline
+\mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba3f76be5ac72cb29a86f05019e0b7f496}{Metis\+\_\+ordering}} = 5
+ \}
+\begin{DoxyCompactList}\small\item\em ordering library to use for serial analysis; magic numbers as defined by MUMPS documentation \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58}{Mumps\+Error\+Codes}} \{ \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58abf5814743ab0232029d127a11d891a11}{Structurally\+\_\+singular\+\_\+jacobian}} = -\/6
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58a6a99bc01bc65caee8a8d699d0e5ecadb}{Numerically\+\_\+singular\+\_\+jacobian}} = -\/10
+, \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58ad5b292632246218c9ff9bb414ecc5538}{Workspace\+\_\+too\+\_\+small}} = -\/19
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72}{initialise\+\_\+mumps}} ()
+\begin{DoxyCompactList}\small\item\em Initialise instance of mumps data structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6}{shutdown\+\_\+mumps}} ()
+\begin{DoxyCompactList}\small\item\em Shutdown mumps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Solution time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce}{Suppress\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Suppress solve? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}{Doc\+\_\+stats}}
+\begin{DoxyCompactList}\small\item\em Set to true for \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} to output statistics (false by default). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Boolean to suppress info being printed to screen during MUMPS solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}{Mumps\+\_\+is\+\_\+initialised}}
+\begin{DoxyCompactList}\small\item\em Has mumps been initialised? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8}{Workspace\+\_\+scaling\+\_\+factor}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9}{Delete\+\_\+matrix\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745}{Irn\+\_\+loc}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} for row numbers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce}{Jcn\+\_\+loc}}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06}{A\+\_\+loc}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DMUMPS\+\_\+\+STRUC\+\_\+C}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8}{Mumps\+\_\+struc\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to MUMPS struct that contains the solver data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ab816409c94736fea48814096af0bd14b}{Jacobian\+\_\+symmetry\+\_\+flag}}
+\begin{DoxyCompactList}\small\item\em symmetry of the Jacobian matrix we\textquotesingle{}re solving; takes one of the enum values above \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a3358fea674f17424aac41152aeb7f990}{Jacobian\+\_\+ordering\+\_\+flag}}
+\begin{DoxyCompactList}\small\item\em stores an integer from the public enum which specifies which package (PORD, Metis or SCOTCH) is used to reorder the Jacobian matrix during the analysis \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wrapper to Mumps solver. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00061}{61}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58}\label{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsErrorCodes@{MumpsErrorCodes}}
+\index{MumpsErrorCodes@{MumpsErrorCodes}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsErrorCodes}{MumpsErrorCodes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58}{oomph\+::\+Mumps\+Solver\+::\+Mumps\+Error\+Codes}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Structurally\_singular\_jacobian@{Structurally\_singular\_jacobian}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Structurally\_singular\_jacobian@{Structurally\_singular\_jacobian}}}\Hypertarget{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58abf5814743ab0232029d127a11d891a11}\label{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58abf5814743ab0232029d127a11d891a11} 
+Structurally\+\_\+singular\+\_\+jacobian&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Numerically\_singular\_jacobian@{Numerically\_singular\_jacobian}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Numerically\_singular\_jacobian@{Numerically\_singular\_jacobian}}}\Hypertarget{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58a6a99bc01bc65caee8a8d699d0e5ecadb}\label{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58a6a99bc01bc65caee8a8d699d0e5ecadb} 
+Numerically\+\_\+singular\+\_\+jacobian&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Workspace\_too\_small@{Workspace\_too\_small}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Workspace\_too\_small@{Workspace\_too\_small}}}\Hypertarget{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58ad5b292632246218c9ff9bb414ecc5538}\label{classoomph_1_1MumpsSolver_ad0fce5d4442647434eeab7b68eb64b58ad5b292632246218c9ff9bb414ecc5538} 
+Workspace\+\_\+too\+\_\+small&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00332}{332}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4b}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4b} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsJacobianOrderingFlags@{MumpsJacobianOrderingFlags}}
+\index{MumpsJacobianOrderingFlags@{MumpsJacobianOrderingFlags}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsJacobianOrderingFlags}{MumpsJacobianOrderingFlags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4b}{oomph\+::\+Mumps\+Solver\+::\+Mumps\+Jacobian\+Ordering\+Flags}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ordering library to use for serial analysis; magic numbers as defined by MUMPS documentation 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ptscotch\_ordering@{Ptscotch\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Ptscotch\_ordering@{Ptscotch\_ordering}}}\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1fe27821e464333f73325dee0b3d9a51}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1fe27821e464333f73325dee0b3d9a51} 
+Ptscotch\+\_\+ordering&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Parmetis\_ordering@{Parmetis\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Parmetis\_ordering@{Parmetis\_ordering}}}\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1068dd1549caba5ff828d561ee1e1294}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba1068dd1549caba5ff828d561ee1e1294} 
+Parmetis\+\_\+ordering&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Scotch\_ordering@{Scotch\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Scotch\_ordering@{Scotch\_ordering}}}\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba8484bf86594bef6f3509ca968e65eb1d}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba8484bf86594bef6f3509ca968e65eb1d} 
+Scotch\+\_\+ordering&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pord\_ordering@{Pord\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Pord\_ordering@{Pord\_ordering}}}\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba13393a6ca320fac921fdc389ef247f10}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba13393a6ca320fac921fdc389ef247f10} 
+Pord\+\_\+ordering&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Metis\_ordering@{Metis\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Metis\_ordering@{Metis\_ordering}}}\Hypertarget{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba3f76be5ac72cb29a86f05019e0b7f496}\label{classoomph_1_1MumpsSolver_a5e380357c515b4f280cf6bdf7273ed4ba3f76be5ac72cb29a86f05019e0b7f496} 
+Metis\+\_\+ordering&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00323}{323}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836}\label{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsJacobianSymmetryFlags@{MumpsJacobianSymmetryFlags}}
+\index{MumpsJacobianSymmetryFlags@{MumpsJacobianSymmetryFlags}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsJacobianSymmetryFlags}{MumpsJacobianSymmetryFlags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}} \mbox{\hyperlink{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836}{oomph\+::\+Mumps\+Solver\+::\+Mumps\+Jacobian\+Symmetry\+Flags}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+values of the SYM variable used by the MUMPS solver which dictates the symmetry properties of the Jacobian matrix; magic numbers as defined by MUMPS documentation 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Unsymmetric@{Unsymmetric}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Unsymmetric@{Unsymmetric}}}\Hypertarget{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836a8e20922b3a1dbfa7ddb6ca95c35b03a8}\label{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836a8e20922b3a1dbfa7ddb6ca95c35b03a8} 
+Unsymmetric&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Symmetric\_positive\_definite@{Symmetric\_positive\_definite}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Symmetric\_positive\_definite@{Symmetric\_positive\_definite}}}\Hypertarget{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836aafd4b90b3304bd19bd2998f9464e4095}\label{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836aafd4b90b3304bd19bd2998f9464e4095} 
+Symmetric\+\_\+positive\+\_\+definite&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Symmetric@{Symmetric}!oomph::MumpsSolver@{oomph::MumpsSolver}}\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Symmetric@{Symmetric}}}\Hypertarget{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836ac37b58b1aad1705a3986aad20494e1c0}\label{classoomph_1_1MumpsSolver_aeffb9b19a97ee7ba86336b694a57d836ac37b58b1aad1705a3986aad20494e1c0} 
+Symmetric&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00314}{314}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e}\label{classoomph_1_1MumpsSolver_ac3f965da46774f48a9b756610f81140e} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsSolver@{MumpsSolver}}
+\index{MumpsSolver@{MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsSolver()}{MumpsSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::\+Mumps\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Call setup. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00069}{69}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a85731b5c626437479245e91f20e18500}\label{classoomph_1_1MumpsSolver_a85731b5c626437479245e91f20e18500} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!MumpsSolver@{MumpsSolver}}
+\index{MumpsSolver@{MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{MumpsSolver()}{MumpsSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::\+Mumps\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4}\label{classoomph_1_1MumpsSolver_a20e6116da9911337fb80486bcfaf7eb4} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!````~MumpsSolver@{\texorpdfstring{$\sim$}{\string~}MumpsSolver}}
+\index{````~MumpsSolver@{\texorpdfstring{$\sim$}{\string~}MumpsSolver}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MumpsSolver()}{\string~MumpsSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Mumps\+Solver\+::\texorpdfstring{$\sim$}{\string~}\+Mumps\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor\+: Cleanup. 
+
+Destructor\+: Shutdown mumps. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00189}{189}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3}\label{classoomph_1_1MumpsSolver_a92ab601b671c2b7eea44a470aa5ec4f3} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!backsub@{backsub}}
+\index{backsub@{backsub}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{backsub()}{backsub()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::backsub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
+
+
+
+Do the backsubstitution for mumps solver Note\+: returns the global result \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Do the backsubstitution for mumps solver. This does not make any assumption about the distribution of the vectors. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{604}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l01324}{oomph\+::\+Timing\+Helpers\+::convert\+\_\+secs\+\_\+to\+\_\+formatted\+\_\+string()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00276}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{mumps__solver_8h_source_l00286}{Mumps\+\_\+is\+\_\+initialised}}, \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mumps__solver_8h_source_l00066}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}, \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{resolve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}\label{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up the memory allocated by the mumps solver. 
+
+Clean up the memory allocated for the \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} solver. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00792}{792}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00416}{oomph\+::\+Mumps\+Preconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00081}{disable\+\_\+resolve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a752f8f023f3b6c1b7021ad6683853850}\label{classoomph_1_1MumpsSolver_a752f8f023f3b6c1b7021ad6683853850} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!declare\_jacobian\_is\_symmetric@{declare\_jacobian\_is\_symmetric}}
+\index{declare\_jacobian\_is\_symmetric@{declare\_jacobian\_is\_symmetric}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{declare\_jacobian\_is\_symmetric()}{declare\_jacobian\_is\_symmetric()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::declare\+\_\+jacobian\+\_\+is\+\_\+symmetric (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tell MUMPS that the Jacobian matrix is general symmetric. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00218}{218}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00341}{Jacobian\+\_\+symmetry\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00318}{Symmetric}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_aee53c09d398f6a982de5dc5fa9c02df7}\label{classoomph_1_1MumpsSolver_aee53c09d398f6a982de5dc5fa9c02df7} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!declare\_jacobian\_is\_symmetric\_positive\_definite@{declare\_jacobian\_is\_symmetric\_positive\_definite}}
+\index{declare\_jacobian\_is\_symmetric\_positive\_definite@{declare\_jacobian\_is\_symmetric\_positive\_definite}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{declare\_jacobian\_is\_symmetric\_positive\_definite()}{declare\_jacobian\_is\_symmetric\_positive\_definite()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::declare\+\_\+jacobian\+\_\+is\+\_\+symmetric\+\_\+positive\+\_\+definite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tell MUMPS that the Jacobian matrix is symmetric positive-\/definite. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00224}{224}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00341}{Jacobian\+\_\+symmetry\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00317}{Symmetric\+\_\+positive\+\_\+definite}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_af6bceea5ab29bbc30322b092b227ac03}\label{classoomph_1_1MumpsSolver_af6bceea5ab29bbc30322b092b227ac03} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!declare\_jacobian\_is\_unsymmetric@{declare\_jacobian\_is\_unsymmetric}}
+\index{declare\_jacobian\_is\_unsymmetric@{declare\_jacobian\_is\_unsymmetric}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{declare\_jacobian\_is\_unsymmetric()}{declare\_jacobian\_is\_unsymmetric()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::declare\+\_\+jacobian\+\_\+is\+\_\+unsymmetric (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tell MUMPS that the Jacobian matrix is unsymmetric. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00212}{212}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00341}{Jacobian\+\_\+symmetry\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00316}{Unsymmetric}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f}\label{classoomph_1_1MumpsSolver_a52b3fbf9407cb8284f1c80600b11869f} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_delete\_matrix\_data@{disable\_delete\_matrix\_data}}
+\index{disable\_delete\_matrix\_data@{disable\_delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_delete\_matrix\_data()}{disable\_delete\_matrix\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+delete\+\_\+matrix\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unset Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00190}{190}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00297}{Delete\+\_\+matrix\+\_\+data}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f}\label{classoomph_1_1MumpsSolver_a8f64fcf52cb7cbf89b75da1d794dee5f} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_doc\_stats@{disable\_doc\_stats}}
+\index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of statistics. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00139}{139}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00276}{Doc\+\_\+stats}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00362}{oomph\+::\+Mumps\+Preconditioner\+::\+Mumps\+Preconditioner()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344}\label{classoomph_1_1MumpsSolver_aba2b1c844e190da45c8adbd6dfc0f344} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload disable resolve so that it cleans up memory too. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00081}{81}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00792}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00146}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c}\label{classoomph_1_1MumpsSolver_ad75c9ff36be18867a88e0a68fac68f7c} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_mumps\_info\_during\_solve@{disable\_suppress\_mumps\_info\_during\_solve}}
+\index{disable\_suppress\_mumps\_info\_during\_solve@{disable\_suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_mumps\_info\_during\_solve()}{disable\_suppress\_mumps\_info\_during\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t suppress info being printed to screen during MUMPS solve. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00108}{108}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00283}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7}\label{classoomph_1_1MumpsSolver_a34346022a010acc09dc0ab1ce59d90a7} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_solve@{disable\_suppress\_solve}}
+\index{disable\_suppress\_solve@{disable\_suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_solve()}{disable\_suppress\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unset the flag so that the system is actually solved again This is the default (obviously) 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00168}{168}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00273}{Suppress\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1}\label{classoomph_1_1MumpsSolver_ade6f5dff6fddd0eeef6ef051ab5dfbc1} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}{disable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Don\textquotesingle{}t suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00095}{95}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3}\label{classoomph_1_1MumpsSolver_afbab47dbf3effebd34f3d3ba1634f7d3} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_delete\_matrix\_data@{enable\_delete\_matrix\_data}}
+\index{enable\_delete\_matrix\_data@{enable\_delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_delete\_matrix\_data()}{enable\_delete\_matrix\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::enable\+\_\+delete\+\_\+matrix\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00179}{179}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00297}{Delete\+\_\+matrix\+\_\+data}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25}\label{classoomph_1_1MumpsSolver_a25426798eb831cf552bdc17c0307ff25} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_doc\_stats@{enable\_doc\_stats}}
+\index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of statistics. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00133}{133}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00276}{Doc\+\_\+stats}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1}\label{classoomph_1_1MumpsSolver_a9be151628e1d8b488441ce2455f888e1} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_mumps\_info\_during\_solve@{enable\_suppress\_mumps\_info\_during\_solve}}
+\index{enable\_suppress\_mumps\_info\_during\_solve@{enable\_suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_mumps\_info\_during\_solve()}{enable\_suppress\_mumps\_info\_during\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean to suppress info being printed to screen during MUMPS solve. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00102}{102}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00283}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e}\label{classoomph_1_1MumpsSolver_ab5d49803e13ef6e6026e470a9933613e} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_solve@{enable\_suppress\_solve}}
+\index{enable\_suppress\_solve@{enable\_suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_solve()}{enable\_suppress\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the flag to avoid solution of the system, so just assemble the Jacobian and the rhs. (Used only for timing runs, obviously) 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00161}{161}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00273}{Suppress\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5}\label{classoomph_1_1MumpsSolver_a0f7ea8c453b2ff106ce42a11c8182cf5} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD@{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}{enable\_suppress\_warning\_about\_MPI\_COMM\_WORLD()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set boolean to suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00089}{89}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333}\label{classoomph_1_1MumpsSolver_aeab520bd25edb0f4e88feaedec689333} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!factorise@{factorise}}
+\index{factorise@{factorise}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{factorise()}{factorise()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. 
+
+LU decompose the matrix addressed by matrix\+\_\+pt using mumps. The resulting matrix factors are stored internally. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{201}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00306}{A\+\_\+loc}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01324}{oomph\+::\+Timing\+Helpers\+::convert\+\_\+secs\+\_\+to\+\_\+formatted\+\_\+string()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00297}{Delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00276}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{initialise\+\_\+mumps()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00300}{Irn\+\_\+loc}}, \mbox{\hyperlink{mumps__solver_8h_source_l00303}{Jcn\+\_\+loc}}, \mbox{\hyperlink{mumps__solver_8h_source_l00329}{Metis\+\_\+ordering}}, \mbox{\hyperlink{mumps__solver_8h_source_l00286}{Mumps\+\_\+is\+\_\+initialised}}, \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00335}{Numerically\+\_\+singular\+\_\+jacobian}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mumps__solver_8h_source_l00326}{Parmetis\+\_\+ordering}}, \mbox{\hyperlink{mumps__solver_8h_source_l00328}{Pord\+\_\+ordering}}, \mbox{\hyperlink{mumps__solver_8h_source_l00325}{Ptscotch\+\_\+ordering}}, \mbox{\hyperlink{mumps__solver_8h_source_l00327}{Scotch\+\_\+ordering}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00334}{Structurally\+\_\+singular\+\_\+jacobian}}, \mbox{\hyperlink{mumps__solver_8h_source_l00283}{Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00316}{Unsymmetric}}, \mbox{\hyperlink{mumps__solver_8h_source_l00289}{Workspace\+\_\+scaling\+\_\+factor}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00336}{Workspace\+\_\+too\+\_\+small}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00382}{oomph\+::\+Mumps\+Preconditioner\+::setup()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72}\label{classoomph_1_1MumpsSolver_ae5e186152100c7d5f045d3df2a115c72} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!initialise\_mumps@{initialise\_mumps}}
+\index{initialise\_mumps@{initialise\_mumps}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{initialise\_mumps()}{initialise\_mumps()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::initialise\+\_\+mumps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initialise instance of mumps data structure. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{86}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, \mbox{\hyperlink{mumps__solver_8h_source_l00341}{Jacobian\+\_\+symmetry\+\_\+flag}}, \mbox{\hyperlink{mumps__solver_8h_source_l00286}{Mumps\+\_\+is\+\_\+initialised}}, \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}, \mbox{\hyperlink{mumps__solver_8h_source_l00326}{Parmetis\+\_\+ordering}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00325}{Ptscotch\+\_\+ordering}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7}\label{classoomph_1_1MumpsSolver_aea9e3eead627f8f8963f7b5c70b669f7} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
+\index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Mumps\+Solver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the time taken to assemble the Jacobian matrix and residual vector. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00146}{146}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00267}{Jacobian\+\_\+setup\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604}\label{classoomph_1_1MumpsSolver_a52e765662a0e2cbd81dc5dc280905604} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
+\index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Mumps\+Solver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the time taken to solve the linear system (needs to be overloaded for each linear solver) 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00153}{153}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00270}{Solution\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a8d5ca953c8e042da066d0598b1941112}\label{classoomph_1_1MumpsSolver_a8d5ca953c8e042da066d0598b1941112} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MumpsSolver}{Mumps\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f}\label{classoomph_1_1MumpsSolver_a849d13cac2177452446c2ec387a0260f} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resolve the system defined by the last assembled Jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Resolve the system defined by the last assembled jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \doxylink{classoomph_1_1Vector}{Vector}. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{1091}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01324}{oomph\+::\+Timing\+Helpers\+::convert\+\_\+secs\+\_\+to\+\_\+formatted\+\_\+string()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00276}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mumps__solver_8h_source_l00270}{Solution\+\_\+time}}, \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00408}{oomph\+::\+Mumps\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6}\label{classoomph_1_1MumpsSolver_a5cf1f5e02e905d39e1b324dc921568f6} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!shutdown\_mumps@{shutdown\_mumps}}
+\index{shutdown\_mumps@{shutdown\_mumps}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{shutdown\_mumps()}{shutdown\_mumps()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::shutdown\+\_\+mumps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shutdown mumps. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{162}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00306}{A\+\_\+loc}}, \mbox{\hyperlink{mumps__solver_8h_source_l00300}{Irn\+\_\+loc}}, \mbox{\hyperlink{mumps__solver_8h_source_l00303}{Jcn\+\_\+loc}}, \mbox{\hyperlink{mumps__solver_8h_source_l00286}{Mumps\+\_\+is\+\_\+initialised}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00792}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00189}{\texorpdfstring{$\sim$}{\string~}\+Mumps\+Solver()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf}\label{classoomph_1_1MumpsSolver_a3995dcf46675fc443b4d373d348a0fdf} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \doxylink{classoomph_1_1Vector}{Vector}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. 
+
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \doxylink{classoomph_1_1Problem}{Problem} pointer defaults to NULL and can be omitted. The function returns the global result vector. \doxylink{classoomph_1_1Matrix}{Matrix} must be \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} will be used to wipe the matrix data. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{806}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00792}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01324}{oomph\+::\+Timing\+Helpers\+::convert\+\_\+secs\+\_\+to\+\_\+formatted\+\_\+string()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00309}{Mumps\+\_\+struc\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mumps__solver_8h_source_l00270}{Solution\+\_\+time}}, \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad}\label{classoomph_1_1MumpsSolver_ae0346a464f3ed74bfcca4063bdeed3ad} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Solver\+: Takes pointer to problem and returns the results \doxylink{classoomph_1_1Vector}{Vector} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \doxylink{classoomph_1_1Vector}{Vector}. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{978}} of file \mbox{\hyperlink{mumps__solver_8cc_source}{mumps\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01324}{oomph\+::\+Timing\+Helpers\+::convert\+\_\+secs\+\_\+to\+\_\+formatted\+\_\+string()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00297}{Delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03935}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00267}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00273}{Suppress\+\_\+solve}}, \mbox{\hyperlink{mumps__solver_8h_source_l00280}{Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a25cd4ab6089d1532100ff61d5863c6fd}\label{classoomph_1_1MumpsSolver_a25cd4ab6089d1532100ff61d5863c6fd} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!use\_metis\_ordering@{use\_metis\_ordering}}
+\index{use\_metis\_ordering@{use\_metis\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{use\_metis\_ordering()}{use\_metis\_ordering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::use\+\_\+metis\+\_\+ordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00236}{236}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00329}{Metis\+\_\+ordering}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a7f1be2e67797276aaed32de190df0ff1}\label{classoomph_1_1MumpsSolver_a7f1be2e67797276aaed32de190df0ff1} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!use\_parmetis\_ordering@{use\_parmetis\_ordering}}
+\index{use\_parmetis\_ordering@{use\_parmetis\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{use\_parmetis\_ordering()}{use\_parmetis\_ordering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::use\+\_\+parmetis\+\_\+ordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00242}{242}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00326}{Parmetis\+\_\+ordering}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a576cb1f983353144e063aa63c50757bc}\label{classoomph_1_1MumpsSolver_a576cb1f983353144e063aa63c50757bc} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!use\_pord\_ordering@{use\_pord\_ordering}}
+\index{use\_pord\_ordering@{use\_pord\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{use\_pord\_ordering()}{use\_pord\_ordering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::use\+\_\+pord\+\_\+ordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00230}{230}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00328}{Pord\+\_\+ordering}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ad80d03ad4dac6676b11247d3f5e78000}\label{classoomph_1_1MumpsSolver_ad80d03ad4dac6676b11247d3f5e78000} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!use\_ptscotch\_ordering@{use\_ptscotch\_ordering}}
+\index{use\_ptscotch\_ordering@{use\_ptscotch\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{use\_ptscotch\_ordering()}{use\_ptscotch\_ordering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::use\+\_\+ptscotch\+\_\+ordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00248}{248}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00325}{Ptscotch\+\_\+ordering}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a34fecff46bfab62a67f7200a745efeea}\label{classoomph_1_1MumpsSolver_a34fecff46bfab62a67f7200a745efeea} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!use\_scotch\_ordering@{use\_scotch\_ordering}}
+\index{use\_scotch\_ordering@{use\_scotch\_ordering}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{use\_scotch\_ordering()}{use\_scotch\_ordering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Mumps\+Solver\+::use\+\_\+scotch\+\_\+ordering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00254}{254}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{mumps__solver_8h_source_l00346}{Jacobian\+\_\+ordering\+\_\+flag}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00327}{Scotch\+\_\+ordering}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06}\label{classoomph_1_1MumpsSolver_a5b40d6e4d26ada5edef87bc1fa511d06} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!A\_loc@{A\_loc}}
+\index{A\_loc@{A\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{A\_loc}{A\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Mumps\+Solver\+::\+A\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00306}{306}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25}\label{classoomph_1_1MumpsSolver_ad6bd1660c9c62b039b9cdd8074169a25} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}}
+\index{Default\_workspace\_scaling\_factor@{Default\_workspace\_scaling\_factor}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Default\_workspace\_scaling\_factor}{Default\_workspace\_scaling\_factor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Mumps\+Solver\+::\+Default\+\_\+workspace\+\_\+scaling\+\_\+factor = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default factor for workspace -- static so it can be overwritten globally. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00209}{209}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9}\label{classoomph_1_1MumpsSolver_a88430ee69fb2015c48ec123b26e019e9} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Delete\_matrix\_data@{Delete\_matrix\_data}}
+\index{Delete\_matrix\_data@{Delete\_matrix\_data}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Delete\_matrix\_data}{Delete\_matrix\_data}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Delete\+\_\+matrix\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete\+\_\+matrix\+\_\+data flag. \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \doxylink{classoomph_1_1MumpsSolver_adc1541e4a9cbbe9c641f988380618713}{clean\+\_\+up\+\_\+memory()} function. Default value is false. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00297}{297}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00190}{disable\+\_\+delete\+\_\+matrix\+\_\+data()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00179}{enable\+\_\+delete\+\_\+matrix\+\_\+data()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16}\label{classoomph_1_1MumpsSolver_a8dc51b4b7e2b121773aea1ed7820ea16} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Doc\_stats@{Doc\_stats}}
+\index{Doc\_stats@{Doc\_stats}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set to true for \doxylink{classoomph_1_1MumpsSolver}{Mumps\+Solver} to output statistics (false by default). 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00276}{276}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00139}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00133}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{resolve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745}\label{classoomph_1_1MumpsSolver_a969c7e01bcce31a946e01f03953e0745} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Irn\_loc@{Irn\_loc}}
+\index{Irn\_loc@{Irn\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Irn\_loc}{Irn\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Mumps\+Solver\+::\+Irn\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} for row numbers. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00300}{300}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a3358fea674f17424aac41152aeb7f990}\label{classoomph_1_1MumpsSolver_a3358fea674f17424aac41152aeb7f990} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jacobian\_ordering\_flag@{Jacobian\_ordering\_flag}}
+\index{Jacobian\_ordering\_flag@{Jacobian\_ordering\_flag}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_ordering\_flag}{Jacobian\_ordering\_flag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mumps\+Solver\+::\+Jacobian\+\_\+ordering\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+stores an integer from the public enum which specifies which package (PORD, Metis or SCOTCH) is used to reorder the Jacobian matrix during the analysis 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00346}{346}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{initialise\+\_\+mumps()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00236}{use\+\_\+metis\+\_\+ordering()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00242}{use\+\_\+parmetis\+\_\+ordering()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00230}{use\+\_\+pord\+\_\+ordering()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00248}{use\+\_\+ptscotch\+\_\+ordering()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00254}{use\+\_\+scotch\+\_\+ordering()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780}\label{classoomph_1_1MumpsSolver_a0608ee6d4a166c35a5d2d3756f119780} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
+\index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Mumps\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Jacobian setup time. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00267}{267}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00146}{jacobian\+\_\+setup\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ab816409c94736fea48814096af0bd14b}\label{classoomph_1_1MumpsSolver_ab816409c94736fea48814096af0bd14b} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jacobian\_symmetry\_flag@{Jacobian\_symmetry\_flag}}
+\index{Jacobian\_symmetry\_flag@{Jacobian\_symmetry\_flag}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_symmetry\_flag}{Jacobian\_symmetry\_flag}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mumps\+Solver\+::\+Jacobian\+\_\+symmetry\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+symmetry of the Jacobian matrix we\textquotesingle{}re solving; takes one of the enum values above 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00341}{341}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00218}{declare\+\_\+jacobian\+\_\+is\+\_\+symmetric()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00224}{declare\+\_\+jacobian\+\_\+is\+\_\+symmetric\+\_\+positive\+\_\+definite()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00212}{declare\+\_\+jacobian\+\_\+is\+\_\+unsymmetric()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{initialise\+\_\+mumps()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce}\label{classoomph_1_1MumpsSolver_a593d7783708440445e09b6d595168cce} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Jcn\_loc@{Jcn\_loc}}
+\index{Jcn\_loc@{Jcn\_loc}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Jcn\_loc}{Jcn\_loc}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+Mumps\+Solver\+::\+Jcn\+\_\+loc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00303}{303}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806}\label{classoomph_1_1MumpsSolver_a3512c04b1bfcf11064c0da453ba34806} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Mumps\_is\_initialised@{Mumps\_is\_initialised}}
+\index{Mumps\_is\_initialised@{Mumps\_is\_initialised}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Mumps\_is\_initialised}{Mumps\_is\_initialised}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Mumps\+\_\+is\+\_\+initialised\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Has mumps been initialised? 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00286}{286}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{initialise\+\_\+mumps()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8}\label{classoomph_1_1MumpsSolver_a0cf148106cf3cc86e238ae4f289be0f8} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Mumps\_struc\_pt@{Mumps\_struc\_pt}}
+\index{Mumps\_struc\_pt@{Mumps\_struc\_pt}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Mumps\_struc\_pt}{Mumps\_struc\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DMUMPS\+\_\+\+STRUC\+\_\+C}}\texorpdfstring{$\ast$}{*} oomph\+::\+Mumps\+Solver\+::\+Mumps\+\_\+struc\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to MUMPS struct that contains the solver data. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00309}{309}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00086}{initialise\+\_\+mumps()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{resolve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00162}{shutdown\+\_\+mumps()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900}\label{classoomph_1_1MumpsSolver_a6a5a305985a4215cc3456df54f531900} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Solution\_time@{Solution\_time}}
+\index{Solution\_time@{Solution\_time}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Solution\_time}{Solution\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Mumps\+Solver\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Solution time. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00270}{270}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00153}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{resolve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535}\label{classoomph_1_1MumpsSolver_ab0656b67b21335203eb7fbce8c7c7535} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
+\index{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{false}}
+
+\end{DoxyCode}
+
+
+Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not. 
+
+Static warning to suppress warnings about incorrect distribution of RHS vector. Default is false. 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00066}{66}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7}\label{classoomph_1_1MumpsSolver_acfc51e1ed214d9d2dc5a83b04a08d1f7} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_mumps\_info\_during\_solve@{Suppress\_mumps\_info\_during\_solve}}
+\index{Suppress\_mumps\_info\_during\_solve@{Suppress\_mumps\_info\_during\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_mumps\_info\_during\_solve}{Suppress\_mumps\_info\_during\_solve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to suppress info being printed to screen during MUMPS solve. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00283}{283}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00108}{disable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00102}{enable\+\_\+suppress\+\_\+mumps\+\_\+info\+\_\+during\+\_\+solve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce}\label{classoomph_1_1MumpsSolver_a851b95821f3adce5545e7abe238b3cce} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_solve@{Suppress\_solve}}
+\index{Suppress\_solve@{Suppress\_solve}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_solve}{Suppress\_solve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Suppress solve? 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00273}{273}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00168}{disable\+\_\+suppress\+\_\+solve()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00161}{enable\+\_\+suppress\+\_\+solve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd}\label{classoomph_1_1MumpsSolver_a4a770886867c62d2eff6afe4b091fabd} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Suppress\_warning\_about\_MPI\_COMM\_WORLD@{Suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+\index{Suppress\_warning\_about\_MPI\_COMM\_WORLD@{Suppress\_warning\_about\_MPI\_COMM\_WORLD}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_MPI\_COMM\_WORLD}{Suppress\_warning\_about\_MPI\_COMM\_WORLD}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Mumps\+Solver\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to suppress warning about communicator not equal to MPI\+\_\+\+COMM\+\_\+\+WORLD. 
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00280}{280}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00604}{backsub()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00095}{disable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00089}{enable\+\_\+suppress\+\_\+warning\+\_\+about\+\_\+\+MPI\+\_\+\+COMM\+\_\+\+WORLD()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l01091}{resolve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00806}{solve()}}, and \mbox{\hyperlink{mumps__solver_8cc_source_l00978}{solve()}}.
+
+\Hypertarget{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8}\label{classoomph_1_1MumpsSolver_a78d0283ea0263a5b31b7662d7abdfcb8} 
+\index{oomph::MumpsSolver@{oomph::MumpsSolver}!Workspace\_scaling\_factor@{Workspace\_scaling\_factor}}
+\index{Workspace\_scaling\_factor@{Workspace\_scaling\_factor}!oomph::MumpsSolver@{oomph::MumpsSolver}}
+\doxysubsubsection{\texorpdfstring{Workspace\_scaling\_factor}{Workspace\_scaling\_factor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Mumps\+Solver\+::\+Workspace\+\_\+scaling\+\_\+factor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00289}{289}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{mumps__solver_8cc_source_l00201}{factorise()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mumps__solver_8h}{mumps\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{mumps__solver_8cc}{mumps\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

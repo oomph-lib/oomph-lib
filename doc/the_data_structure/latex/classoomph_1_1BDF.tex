@@ -1,0 +1,1022 @@
+\doxysection{oomph\+::BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1BDF}{}\label{classoomph_1_1BDF}\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+
+
+Templated class for BDF-\/type time-\/steppers with fixed or variable timestep. 1st time derivative recovered directly from the previous function values. Template parameter represents the number of previous timesteps stored, so that BDF$<$1$>$ is the classical first order backward \doxylink{classoomph_1_1Euler}{Euler} scheme. Need to reset weights after every change in timestep.  
+
+
+
+
+{\ttfamily \#include $<$timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::BDF\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1BDF}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BDF_a7b4271c53928ee107dc9b5ab218bfe74}{Initial\+Condition\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
+\begin{DoxyCompactList}\small\item\em Typedef for function that returns the (scalar) initial value at a given value of the continuous time t. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1BDF_a52ac633248d5603926b3e74559607d07}{BDF}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{adaptive}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor for the case when we allow adaptive timestepping. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BDF_ab90066621c7160c9e8805d15f3ce6e3b}{BDF}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a7b3914aa4c684707ebc6fef2502393cc}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF_a778cd01f9e0e8047d5838f6283512131}{order}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the actual order of the scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a569e571e8f96382bfa9cecd7abb05af4}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \doxylink{classoomph_1_1Data}{Data} values, corresponding to an impulsive start. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a2506824a840f47d5d816b68f6144c7e7}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the nodal positions corresponding to an impulsive start. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_ae40c166092d039798704a8969c0acc0e}{assign\+\_\+initial\+\_\+data\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1BDF_a7b4271c53928ee107dc9b5ab218bfe74}{Initial\+Condition\+Fct\+Pt}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+value\+\_\+fct}})
+\begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \doxylink{classoomph_1_1Data}{Data} values, corresponding to given time history, specified by \doxylink{classoomph_1_1Vector}{Vector} of function pointers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a037ce83f202e4ba2e61666bfdb1ce4b9}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em This function updates the \doxylink{classoomph_1_1Data}{Data}\textquotesingle{}s time history so that we can advance to the next timestep. For \doxylink{classoomph_1_1BDF}{BDF} schemes, we simply push the values backwards... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_aad5191a5605337d43458d42f67460dbd}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a59cfd069cfa09e8b342cbf2d5234c7ce}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set the weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF_ae6fac2faf065b8abf2afff64b63874f6}{nprev\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of previous values available. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF_a6bfaedcd81cad549615bd21ce4336421}{ndt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of timestep increments that need to be stored by the scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a9c5b309e589b0e0da14d912556e5cc4a}{set\+\_\+predictor\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Function to set the predictor weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a24a8bcf4fffc8cd4514ef36fc2c997f8}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Function to calculate predicted positions at a node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a4c3da151a405c2041103cb2795c3ff95}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Function to calculate predicted data values in a \doxylink{classoomph_1_1Data}{Data} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_ae7edaffc90cfe8cca6817751fa3cccb8}{set\+\_\+error\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Function to set the error weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_ae4ef2e161fb944b7e6fcf6f7ee47579b}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Compute the error in the position i at a node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_aab34e35252db11052c72ae7692825149}{temporal\+\_\+error\+\_\+in\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Compute the error in the value i in a \doxylink{classoomph_1_1Data}{Data} structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a9d247ea52d1cddbf74d4fa054110b2ca}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Assign the values of the weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a108f0a3b2228efe92763135f4603c925}{set\+\_\+predictor\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set the predictor weights (Gresho and Sani pg. 270) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a4ad578785017ea87429ad07f025abf3b}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a4542664b2fcd531a6f328b671fc1ec59}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Calculate predictions for the positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_aaaa65898eacdbaf30f4863334d737633}{set\+\_\+error\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Set the error weights (Gresho and Sani pg. 270) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_a4224776ca068afa5d942d27c53257bbf}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to compute the error in position i at node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_aea51a795cdd524b6db3f3a0af961295a}{temporal\+\_\+error\+\_\+in\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to calculate the error in the data value i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a6247877f68b3f05a666f48b2ae1bba19}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Assign the values of the weights. The scheme used is from Gresho \& Sani, Incompressible Flow and the Finite Element Method (advection-\/diffusion and isothermal laminar flow), 1998, pg. 715 (with some algebraic rearrangement). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_ae7707775e9680fced8c73e8ffad6e128}{set\+\_\+predictor\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the predictor weights. The scheme used is from Gresho \& Sani, Incompressible Flow and the Finite Element Method (advection-\/diffusion and isothermal laminar flow), 1998, pg. 715. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_ae6df3030f401934811c5404302931c43}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_ac18181b30a4087e50df9b7f1447c4628}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Calculate predictions for the positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a86a9de5ebf4262f48070bd4890a0a3fd}{set\+\_\+error\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Function that sets the error weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_a0312c8a7b70393901dd23fa642afbb4c}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to compute the error in position i at node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_a3e79ecd14a1d3050a2aafd87144f79c9}{temporal\+\_\+error\+\_\+in\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to calculate the error in the data value i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a9147291c6a4007d1cbfc9e3761f277f4}{set\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Assign the values of the weights; pass the value of the timestep. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a56cb4ff554d97a3930fe26e5dd073611}{set\+\_\+predictor\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the predictor weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a962e127ab9a9753073e796d077ca0351}{calculate\+\_\+predicted\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a725c01b15133c89f0330265303ae7ad5}{calculate\+\_\+predicted\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Calculate predictions for the positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF_a8c1a5f1f2bfeecd1a89af839d8bcb113}{set\+\_\+error\+\_\+weights}} ()
+\begin{DoxyCompactList}\small\item\em Function that sets the error weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_a55d6a294f551a13862facdae3c0cc43c}{temporal\+\_\+error\+\_\+in\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to compute the error in position i at node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_aea8acbe8a110fdd94b183bf71c9d1c29}{temporal\+\_\+error\+\_\+in\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function to calculate the error in the data value i. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TimeStepper}{oomph\+::\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper_a8a4f14d18d49b82f0a6ad1c279485cd9}{Time\+Stepper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{tstorage}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{max\+\_\+deriv}})
+\begin{DoxyCompactList}\small\item\em Constructor. Pass the amount of storage required by timestepper (present value + history values) and the order of highest time-\/derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper_a67f21ad40e01e35dd4cbb218aecbf596}{Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Broken empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper_a035589314a3bdbe215ba002fd4f49f62}{Time\+Stepper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a6ddf0fae6331efde51deb853866bdeed}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a171b5bbc223c889474ee38fd02eefc4d}{\texorpdfstring{$\sim$}{\string~}\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em virtual destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TimeStepper_aa02483da1254fab8f268d70bb3ef2289}{highest\+\_\+derivative}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Highest order derivative that the scheme can compute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1TimeStepper_a5a69b6874b36b2f594cbee45719d4c7b}{time}} ()
+\begin{DoxyCompactList}\small\item\em Return current value of continous time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TimeStepper_ab0fe7c6da82843fbaf406a29f5aaa78b}{time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return current value of continous time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a5fcbef20161383c516ecdba4cf782106}{nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of previous values needed to calculate the value at the current time. i.\+e. how many previous values must we loop over to calculate the values at the evaluation time. For most methods this is 1, i.\+e. just use the value at t\+\_\+\{n+1\}. See midpoint method for a counter-\/example. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a81ea0ff2e66cef5e0184b616c608e418}{make\+\_\+steady}} ()
+\begin{DoxyCompactList}\small\item\em Function to make the time stepper temporarily steady. This is trivially achieved by setting all the weights to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_ad341ba9e80265e1c26c1cda0f40c8292}{is\+\_\+steady}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if a timestepper has been made steady (possibly temporarily to switch off time-\/dependence) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_abf0f84ac9e7c1266dea9bd9e479fb2bf}{predict\+\_\+by\+\_\+explicit\+\_\+step}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Flag\+: is adaptivity done by taking a separate step using an \doxylink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper} object? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeStepper_a1214f9edca10512e1f3b857cff4e0797}{explicit\+\_\+predictor\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Get the pointer to the explicit timestepper to use as a predictor in adaptivity if Predict\+\_\+by\+\_\+explicit\+\_\+step is set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_affb7d9405e9b8cfbd108082faa0c74e4}{set\+\_\+predictor\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{\+\_\+pred\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the pointer to the explicit timestepper to use as a predictor in adaptivity if Predict\+\_\+by\+\_\+explicit\+\_\+step is set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_ab9813c8ea8ad981f0db9a467302b9cd0}{update\+\_\+predicted\+\_\+time}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+time}})
+\begin{DoxyCompactList}\small\item\em Set the time that the current predictions apply for, only needed for paranoid checks when doing Predict\+\_\+by\+\_\+explicit\+\_\+step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a385e522bb6b5c6109e20e860b70e9b6b}{check\+\_\+predicted\+\_\+values\+\_\+up\+\_\+to\+\_\+date}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Check that the predicted values are the ones we want. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a31e756a339277e21f74b21a5d61c9841}{predictor\+\_\+storage\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the time-\/index in each \doxylink{classoomph_1_1Data}{Data} where predicted values are stored if the timestepper is adaptive. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a365cc834ec75291eba462f671ec997e1}{enable\+\_\+warning\+\_\+in\+\_\+assign\+\_\+initial\+\_\+data\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Enable the output of warnings due to possible fct pointer vector size mismatch in assign\+\_\+initial\+\_\+data\+\_\+values (Default) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a7f97ab9e4d8d4269cf75bf79b72da5bc}{disable\+\_\+warning\+\_\+in\+\_\+assign\+\_\+initial\+\_\+data\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Disable the output of warnings due to possible fct pointer vector size mismatch in assign\+\_\+initial\+\_\+data\+\_\+values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeStepper_ac59f0fb50e6ca3622c03cd9b4d29ee8c}{weights\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get a (const) pointer to the weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_aada05f89e86aae352bd5b32bfb173b18}{undo\+\_\+make\+\_\+steady}} ()
+\begin{DoxyCompactList}\small\item\em Reset the is\+\_\+steady status of a specific \doxylink{classoomph_1_1TimeStepper}{Time\+Stepper} to its default and re-\/assign the weights. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1TimeStepper_acbd69b35e54efa29b219bbb56ba49260}{type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return string that indicates the type of the timestepper (e.\+g. "{}\+BDF"{}, "{}\+Newmark"{}, etc.) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a802c8b2a2e1933e4e8da30c6d10d1f9c}{time\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{deriv}})
+\begin{DoxyCompactList}\small\item\em Evaluate i-\/th derivative of all values in \doxylink{classoomph_1_1Data}{Data} and return in \doxylink{classoomph_1_1Vector}{Vector} deriv\mbox{[}\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TimeStepper_ab88e09cb347f024c07d7341ee6ba7389}{time\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Evaluate i-\/th derivative of j-\/th value in \doxylink{classoomph_1_1Data}{Data}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a3adfcfcf4ba99366d1475df8b4722082}{time\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{deriv}})
+\begin{DoxyCompactList}\small\item\em Evaluate i-\/th derivative of all values in \doxylink{classoomph_1_1Node}{Node} and return in \doxylink{classoomph_1_1Vector}{Vector} deriv\mbox{[}\mbox{]} (this can\textquotesingle{}t be simply combined with time\+\_\+derivative(.., \doxylink{classoomph_1_1Data}{Data}, ...) because of differences with haning nodes). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TimeStepper_af02a53d7047869cbf0d563272b4de908}{time\+\_\+derivative}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&node\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Evaluate i-\/th derivative of j-\/th value in \doxylink{classoomph_1_1Node}{Node}. Note the use of the node\textquotesingle{}s value() function so that hanging nodes are taken into account (this is why the functions for \doxylink{classoomph_1_1Data}{Data} and \doxylink{classoomph_1_1Node}{Node} cannot be combined through simple polymorphism\+: value is not virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1TimeStepper_ac73981d5a68161d7b317bebb4ee04adb}{time\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for the pointer to time (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TimeStepper_a5f1c63c2e8adf1137264a78871772986}{time\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the pointer to time (can\textquotesingle{}t have a paranoid test for null pointers because this is used as a set function). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0553cdd54b586d8a}{weight}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for j-\/th weight for the i-\/th derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a3939b77ec3578e4bd5b453c85649d631}{ntstorage}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of doubles required to represent history (one for steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a6168cca9a2a3c7bfd50c8797aed72d2d}{adaptive\+\_\+flag}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Function to indicate whether the scheme is adaptive (false by default) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a36cbcee0c1127085ba3aa2331bfc0f74}{actions\+\_\+before\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Interface for any actions that need to be performed before a time step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a3a0fabf83f9bdc89800cd3501df2c586}{actions\+\_\+after\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Interface for any actions that need to be performed after a time step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1BDF_a8973b856c5829681fd890323e43e03ae}{Predictor\+\_\+weight}}
+\begin{DoxyCompactList}\small\item\em Private data for the predictor weights. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF_a64fe5c2a1e2872698dd72033d9f0087f}{Error\+\_\+weight}}
+\begin{DoxyCompactList}\small\item\em Private data for the error weight. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1TimeStepper}{oomph\+::\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeStepper_a38740bc33e75ecfd61746ff43be54358}{Time\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to discrete time storage scheme. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TimeStepper_a0dbf867c7f0e06f790a470d547b6b3f2}{Weight}}
+\begin{DoxyCompactList}\small\item\em Storage for the weights associated with the timestepper. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1TimeStepper_a39dfe6cf216263d547c430d6f7a67530}{Type}}
+\begin{DoxyCompactList}\small\item\em String that indicates the type of the timestepper (e.\+g. "{}\+BDF"{}, "{}\+Newmark"{}, etc.) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_afe6d4d7cf3e0b2a186694f24c8cf016f}{Adaptive\+\_\+\+Flag}}
+\begin{DoxyCompactList}\small\item\em Boolean variable to indicate whether the timestepping scheme can be adaptive. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a5a23db485d16d7f9598c011850d0563f}{Is\+\_\+steady}}
+\begin{DoxyCompactList}\small\item\em Bool to indicate if the timestepper is steady, i.\+e. its time-\/derivatives evaluate to zero. This status may be achieved temporarily by calling \doxylink{classoomph_1_1TimeStepper_a81ea0ff2e66cef5e0184b616c608e418}{make\+\_\+steady()}. It can be reset to the appropriate default by the function \doxylink{classoomph_1_1TimeStepper_aada05f89e86aae352bd5b32bfb173b18}{undo\+\_\+make\+\_\+steady()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a1a8928784f3903a8f0f3f5e2400fa430}{Shut\+\_\+up\+\_\+in\+\_\+assign\+\_\+initial\+\_\+data\+\_\+values}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate if the timestepper will output warnings when setting possibly an incorrect number of initial data values from function pointers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TimeStepper_a30f71fb3ee14db4dd9d9d2cef1189ddc}{Predict\+\_\+by\+\_\+explicit\+\_\+step}}
+\begin{DoxyCompactList}\small\item\em Flag\+: is adaptivity done by taking a separate step using an \doxylink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper} object? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeStepper_a41f408e1a313ae5b1806c3a306d720a2}{Explicit\+\_\+predictor\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to explicit time stepper to use as predictor if Predict\+\_\+by\+\_\+explicit\+\_\+step is set. ??ds merge the two? predict by explicit if pointer is set? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TimeStepper_af41318cc5f48050e143182f59a06e5d6}{Predicted\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Store the time that the predicted values currently stored are at, to compare for paranoid checks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1TimeStepper_af91eb510f32a9d072399f37389853174}{Predictor\+\_\+storage\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em The time-\/index in each \doxylink{classoomph_1_1Data}{Data} object where predicted values are stored. -\/1 if not set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$\newline
+class oomph\+::\+BDF$<$ NSTEPS $>$}
+Templated class for BDF-\/type time-\/steppers with fixed or variable timestep. 1st time derivative recovered directly from the previous function values. Template parameter represents the number of previous timesteps stored, so that BDF$<$1$>$ is the classical first order backward \doxylink{classoomph_1_1Euler}{Euler} scheme. Need to reset weights after every change in timestep. 
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01164}{1164}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1BDF_a7b4271c53928ee107dc9b5ab218bfe74}\label{classoomph_1_1BDF_a7b4271c53928ee107dc9b5ab218bfe74} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!InitialConditionFctPt@{InitialConditionFctPt}}
+\index{InitialConditionFctPt@{InitialConditionFctPt}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{InitialConditionFctPt}{InitialConditionFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::\+Initial\+Condition\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
+
+
+
+Typedef for function that returns the (scalar) initial value at a given value of the continuous time t. 
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01302}{1302}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1BDF_a52ac633248d5603926b3e74559607d07}\label{classoomph_1_1BDF_a52ac633248d5603926b3e74559607d07} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!BDF@{BDF}}
+\index{BDF@{BDF}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{BDF()}{BDF()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::\+BDF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{adaptive = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the case when we allow adaptive timestepping. 
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01193}{1193}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00245}{oomph\+::\+Time\+Stepper\+::\+Adaptive\+\_\+\+Flag}}, \mbox{\hyperlink{timesteppers_8h_source_l00273}{oomph\+::\+Time\+Stepper\+::\+Predictor\+\_\+storage\+\_\+index}}, \mbox{\hyperlink{timesteppers_8h_source_l01186}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+Predictor\+\_\+weight}}, \mbox{\hyperlink{matrices_8h_source_l00498}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
+
+\Hypertarget{classoomph_1_1BDF_ab90066621c7160c9e8805d15f3ce6e3b}\label{classoomph_1_1BDF_ab90066621c7160c9e8805d15f3ce6e3b} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!BDF@{BDF}}
+\index{BDF@{BDF}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{BDF()}{BDF()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::\+BDF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BDF}{BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1BDF_ae40c166092d039798704a8969c0acc0e}\label{classoomph_1_1BDF_ae40c166092d039798704a8969c0acc0e} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!assign\_initial\_data\_values@{assign\_initial\_data\_values}}
+\index{assign\_initial\_data\_values@{assign\_initial\_data\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_data\_values()}{assign\_initial\_data\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1BDF_a7b4271c53928ee107dc9b5ab218bfe74}{Initial\+Condition\+Fct\+Pt}} $>$}]{initial\+\_\+value\+\_\+fct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialise the time-\/history for the \doxylink{classoomph_1_1Data}{Data} values, corresponding to given time history, specified by \doxylink{classoomph_1_1Vector}{Vector} of function pointers. 
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01307}{1307}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00234}{oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1BDF_a2506824a840f47d5d816b68f6144c7e7}\label{classoomph_1_1BDF_a2506824a840f47d5d816b68f6144c7e7} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
+\index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Initialise the time-\/history for the nodal positions corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23e46afd5}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01263}{1263}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+
+\Hypertarget{classoomph_1_1BDF_a569e571e8f96382bfa9cecd7abb05af4}\label{classoomph_1_1BDF_a569e571e8f96382bfa9cecd7abb05af4} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
+\index{assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_initial\_values\_impulsive()}{assign\_initial\_values\_impulsive()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Initialise the time-\/history for the \doxylink{classoomph_1_1Data}{Data} values, corresponding to an impulsive start. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced2700228225}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01234}{1234}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+\Hypertarget{classoomph_1_1BDF_a4542664b2fcd531a6f328b671fc1ec59}\label{classoomph_1_1BDF_a4542664b2fcd531a6f328b671fc1ec59} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
+\index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate predictions for the positions. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac971078cf9dc248701}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00148}{148}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1BDF_ac18181b30a4087e50df9b7f1447c4628}\label{classoomph_1_1BDF_ac18181b30a4087e50df9b7f1447c4628} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
+\index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate predictions for the positions. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac971078cf9dc248701}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00310}{310}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1BDF_a725c01b15133c89f0330265303ae7ad5}\label{classoomph_1_1BDF_a725c01b15133c89f0330265303ae7ad5} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
+\index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate predictions for the positions. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac971078cf9dc248701}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00453}{453}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_a24a8bcf4fffc8cd4514ef36fc2c997f8}\label{classoomph_1_1BDF_a24a8bcf4fffc8cd4514ef36fc2c997f8} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_positions@{calculate\_predicted\_positions}}
+\index{calculate\_predicted\_positions@{calculate\_predicted\_positions}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_positions()}{calculate\_predicted\_positions()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::calculate\+\_\+predicted\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to calculate predicted positions at a node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2e7fafceb9330ac971078cf9dc248701}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_a4ad578785017ea87429ad07f025abf3b}\label{classoomph_1_1BDF_a4ad578785017ea87429ad07f025abf3b} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
+\index{calculate\_predicted\_values@{calculate\_predicted\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_values()}{calculate\_predicted\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::calculate\+\_\+predicted\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe31b55da9ee789dbf}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00115}{115}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BDF_ae6df3030f401934811c5404302931c43}\label{classoomph_1_1BDF_ae6df3030f401934811c5404302931c43} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
+\index{calculate\_predicted\_values@{calculate\_predicted\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_values()}{calculate\_predicted\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::calculate\+\_\+predicted\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe31b55da9ee789dbf}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00277}{277}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BDF_a962e127ab9a9753073e796d077ca0351}\label{classoomph_1_1BDF_a962e127ab9a9753073e796d077ca0351} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
+\index{calculate\_predicted\_values@{calculate\_predicted\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_values()}{calculate\_predicted\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::calculate\+\_\+predicted\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the predicted values and store them at the appropriate location in the data structure This function must be called after the time-\/values have been shifted! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe31b55da9ee789dbf}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00445}{445}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_a4c3da151a405c2041103cb2795c3ff95}\label{classoomph_1_1BDF_a4c3da151a405c2041103cb2795c3ff95} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!calculate\_predicted\_values@{calculate\_predicted\_values}}
+\index{calculate\_predicted\_values@{calculate\_predicted\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_predicted\_values()}{calculate\_predicted\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::calculate\+\_\+predicted\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to calculate predicted data values in a \doxylink{classoomph_1_1Data}{Data} object. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a159d508b1ae643fe31b55da9ee789dbf}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_a6bfaedcd81cad549615bd21ce4336421}\label{classoomph_1_1BDF_a6bfaedcd81cad549615bd21ce4336421} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!ndt@{ndt}}
+\index{ndt@{ndt}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{ndt()}{ndt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of timestep increments that need to be stored by the scheme. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b81a78a1a}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01440}{1440}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+\Hypertarget{classoomph_1_1BDF_ae6fac2faf065b8abf2afff64b63874f6}\label{classoomph_1_1BDF_ae6fac2faf065b8abf2afff64b63874f6} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!nprev\_values@{nprev\_values}}
+\index{nprev\_values@{nprev\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{nprev\_values()}{nprev\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::nprev\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of previous values available. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01434}{1434}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01333}{oomph\+::\+BDF$<$ NSTEPS $>$\+::shift\+\_\+time\+\_\+values()}}.
+
+\Hypertarget{classoomph_1_1BDF_a7b3914aa4c684707ebc6fef2502393cc}\label{classoomph_1_1BDF_a7b3914aa4c684707ebc6fef2502393cc} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1BDF}{BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1BDF_a778cd01f9e0e8047d5838f6283512131}\label{classoomph_1_1BDF_a778cd01f9e0e8047d5838f6283512131} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!order@{order}}
+\index{order@{order}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{order()}{order()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the actual order of the scheme. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582b7cf4c554e2e724}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01227}{1227}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+\Hypertarget{classoomph_1_1BDF_aaaa65898eacdbaf30f4863334d737633}\label{classoomph_1_1BDF_aaaa65898eacdbaf30f4863334d737633} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
+\index{set\_error\_weights@{set\_error\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_error\_weights()}{set\_error\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::set\+\_\+error\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the error weights (Gresho and Sani pg. 270) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64efebb51dfc96a3d}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00181}{181}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_a86a9de5ebf4262f48070bd4890a0a3fd}\label{classoomph_1_1BDF_a86a9de5ebf4262f48070bd4890a0a3fd} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
+\index{set\_error\_weights@{set\_error\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_error\_weights()}{set\_error\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::set\+\_\+error\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function that sets the error weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64efebb51dfc96a3d}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00343}{343}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BDF_a8c1a5f1f2bfeecd1a89af839d8bcb113}\label{classoomph_1_1BDF_a8c1a5f1f2bfeecd1a89af839d8bcb113} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
+\index{set\_error\_weights@{set\_error\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_error\_weights()}{set\_error\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::set\+\_\+error\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function that sets the error weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64efebb51dfc96a3d}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00461}{461}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_ae7edaffc90cfe8cca6817751fa3cccb8}\label{classoomph_1_1BDF_ae7edaffc90cfe8cca6817751fa3cccb8} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_error\_weights@{set\_error\_weights}}
+\index{set\_error\_weights@{set\_error\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_error\_weights()}{set\_error\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::set\+\_\+error\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to set the error weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_aee0c1da870a603e64efebb51dfc96a3d}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_a108f0a3b2228efe92763135f4603c925}\label{classoomph_1_1BDF_a108f0a3b2228efe92763135f4603c925} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
+\index{set\_predictor\_weights@{set\_predictor\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_predictor\_weights()}{set\_predictor\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::set\+\_\+predictor\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the predictor weights (Gresho and Sani pg. 270) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba433066fd69dc427ba1ce}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00092}{92}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_ae7707775e9680fced8c73e8ffad6e128}\label{classoomph_1_1BDF_ae7707775e9680fced8c73e8ffad6e128} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
+\index{set\_predictor\_weights@{set\_predictor\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_predictor\_weights()}{set\_predictor\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::set\+\_\+predictor\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the predictor weights. The scheme used is from Gresho \& Sani, Incompressible Flow and the Finite Element Method (advection-\/diffusion and isothermal laminar flow), 1998, pg. 715. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba433066fd69dc427ba1ce}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00253}{253}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BDF_a56cb4ff554d97a3930fe26e5dd073611}\label{classoomph_1_1BDF_a56cb4ff554d97a3930fe26e5dd073611} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
+\index{set\_predictor\_weights@{set\_predictor\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_predictor\_weights()}{set\_predictor\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::set\+\_\+predictor\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the predictor weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba433066fd69dc427ba1ce}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00429}{429}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_a9c5b309e589b0e0da14d912556e5cc4a}\label{classoomph_1_1BDF_a9c5b309e589b0e0da14d912556e5cc4a} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_predictor\_weights@{set\_predictor\_weights}}
+\index{set\_predictor\_weights@{set\_predictor\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_predictor\_weights()}{set\_predictor\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::set\+\_\+predictor\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to set the predictor weights. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a2dfb949155ba433066fd69dc427ba1ce}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_a9d247ea52d1cddbf74d4fa054110b2ca}\label{classoomph_1_1BDF_a9d247ea52d1cddbf74d4fa054110b2ca} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Assign the values of the weights. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00080}{80}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_a6247877f68b3f05a666f48b2ae1bba19}\label{classoomph_1_1BDF_a6247877f68b3f05a666f48b2ae1bba19} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Assign the values of the weights. The scheme used is from Gresho \& Sani, Incompressible Flow and the Finite Element Method (advection-\/diffusion and isothermal laminar flow), 1998, pg. 715 (with some algebraic rearrangement). 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00232}{232}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1BDF_a9147291c6a4007d1cbfc9e3761f277f4}\label{classoomph_1_1BDF_a9147291c6a4007d1cbfc9e3761f277f4} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Assign the values of the weights; pass the value of the timestep. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00402}{402}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1BDF_a59cfd069cfa09e8b342cbf2d5234c7ce}\label{classoomph_1_1BDF_a59cfd069cfa09e8b342cbf2d5234c7ce} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
+\index{set\_weights@{set\_weights}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the weights. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb0468d55}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_aad5191a5605337d43458d42f67460dbd}\label{classoomph_1_1BDF_aad5191a5605337d43458d42f67460dbd} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!shift\_time\_positions@{shift\_time\_positions}}
+\index{shift\_time\_positions@{shift\_time\_positions}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function advances the time history of the positions at a node. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560d1954ac}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01373}{1373}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l01016}{oomph\+::\+Node\+::nposition\+\_\+type()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l01113}{oomph\+::\+Node\+::position\+\_\+is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}, and \mbox{\hyperlink{nodes_8h_source_l01126}{oomph\+::\+Node\+::x\+\_\+gen()}}.
+
+\Hypertarget{classoomph_1_1BDF_a037ce83f202e4ba2e61666bfdb1ce4b9}\label{classoomph_1_1BDF_a037ce83f202e4ba2e61666bfdb1ce4b9} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
+\index{shift\_time\_values@{shift\_time\_values}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{shift\_time\_values()}{shift\_time\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+This function updates the \doxylink{classoomph_1_1Data}{Data}\textquotesingle{}s time history so that we can advance to the next timestep. For \doxylink{classoomph_1_1BDF}{BDF} schemes, we simply push the values backwards... 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca10641427255}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01333}{1333}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00623}{oomph\+::\+Time\+Stepper\+::adaptive\+\_\+flag()}}, \mbox{\hyperlink{timesteppers_8h_source_l01434}{oomph\+::\+BDF$<$ NSTEPS $>$\+::nprev\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}.
+
+\Hypertarget{classoomph_1_1BDF_a4224776ca068afa5d942d27c53257bbf}\label{classoomph_1_1BDF_a4224776ca068afa5d942d27c53257bbf} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
+\index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to compute the error in position i at node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd6e8a463c7390536}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00190}{190}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1BDF_a0312c8a7b70393901dd23fa642afbb4c}\label{classoomph_1_1BDF_a0312c8a7b70393901dd23fa642afbb4c} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
+\index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to compute the error in position i at node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd6e8a463c7390536}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00362}{362}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1BDF_a55d6a294f551a13862facdae3c0cc43c}\label{classoomph_1_1BDF_a55d6a294f551a13862facdae3c0cc43c} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
+\index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to compute the error in position i at node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd6e8a463c7390536}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00471}{471}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_ae4ef2e161fb944b7e6fcf6f7ee47579b}\label{classoomph_1_1BDF_ae4ef2e161fb944b7e6fcf6f7ee47579b} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_position@{temporal\_error\_in\_position}}
+\index{temporal\_error\_in\_position@{temporal\_error\_in\_position}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_position()}{temporal\_error\_in\_position()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::temporal\+\_\+error\+\_\+in\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{node\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Compute the error in the position i at a node. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_ac463807aff4bcbedd6e8a463c7390536}{oomph\+::\+Time\+Stepper}}.
+
+\Hypertarget{classoomph_1_1BDF_aea51a795cdd524b6db3f3a0af961295a}\label{classoomph_1_1BDF_aea51a795cdd524b6db3f3a0af961295a} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
+\index{temporal\_error\_in\_value@{temporal\_error\_in\_value}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_value()}{temporal\_error\_in\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 1 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to calculate the error in the data value i. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040d26918adb998c78}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00210}{210}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1BDF_a3e79ecd14a1d3050a2aafd87144f79c9}\label{classoomph_1_1BDF_a3e79ecd14a1d3050a2aafd87144f79c9} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
+\index{temporal\_error\_in\_value@{temporal\_error\_in\_value}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_value()}{temporal\_error\_in\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 2 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to calculate the error in the data value i. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040d26918adb998c78}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00382}{382}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1BDF_aea8acbe8a110fdd94b183bf71c9d1c29}\label{classoomph_1_1BDF_aea8acbe8a110fdd94b183bf71c9d1c29} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
+\index{temporal\_error\_in\_value@{temporal\_error\_in\_value}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_value()}{temporal\_error\_in\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ 4 $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to calculate the error in the data value i. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040d26918adb998c78}{oomph\+::\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8cc_source_l00484}{484}} of file \mbox{\hyperlink{timesteppers_8cc_source}{timesteppers.\+cc}}.
+
+\Hypertarget{classoomph_1_1BDF_aab34e35252db11052c72ae7692825149}\label{classoomph_1_1BDF_aab34e35252db11052c72ae7692825149} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!temporal\_error\_in\_value@{temporal\_error\_in\_value}}
+\index{temporal\_error\_in\_value@{temporal\_error\_in\_value}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{temporal\_error\_in\_value()}{temporal\_error\_in\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::temporal\+\_\+error\+\_\+in\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Compute the error in the value i in a \doxylink{classoomph_1_1Data}{Data} structure. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a27f66759f6d9b2040d26918adb998c78}{oomph\+::\+Time\+Stepper}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1BDF_a64fe5c2a1e2872698dd72033d9f0087f}\label{classoomph_1_1BDF_a64fe5c2a1e2872698dd72033d9f0087f} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!Error\_weight@{Error\_weight}}
+\index{Error\_weight@{Error\_weight}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{Error\_weight}{Error\_weight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::\+Error\+\_\+weight\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private data for the error weight. 
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01189}{1189}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+\Hypertarget{classoomph_1_1BDF_a8973b856c5829681fd890323e43e03ae}\label{classoomph_1_1BDF_a8973b856c5829681fd890323e43e03ae} 
+\index{oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}!Predictor\_weight@{Predictor\_weight}}
+\index{Predictor\_weight@{Predictor\_weight}!oomph::BDF$<$ NSTEPS $>$@{oomph::BDF$<$ NSTEPS $>$}}
+\doxysubsubsection{\texorpdfstring{Predictor\_weight}{Predictor\_weight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NSTEPS}} $>$\+::\+Predictor\+\_\+weight\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private data for the predictor weights. 
+
+
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l01186}{1186}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{timesteppers_8h_source_l01193}{oomph\+::\+BDF$<$ NSTEPS $>$\+::\+BDF()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{timesteppers_8h}{timesteppers.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,549 @@
+\doxysection{Two\+Layer\+Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classTwoLayerInterfaceProblem}{}\label{classTwoLayerInterfaceProblem}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+
+
+Problem class to simulate viscous drop propagating along 2D channel.  
+
+
+Inheritance diagram for Two\+Layer\+Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTwoLayerInterfaceProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTwoLayerInterfaceProblem_abf42cfea7dd731795995051c1de78a32}{Two\+Layer\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTwoLayerInterfaceProblem_a5034f5c3d7ec8fd556b1af7f0c2351ef}{\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a89431a4ad9400976c295c4cfd04b3727}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of free surface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a496c283472765b000a0348137c1b560b}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of free surface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_aa3798e4cbf4cfebf7652aea3fd2fbdff}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the after solve (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_aa34b7c3a13847571a9fedc2465daab30}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a96392e407b2c1f5fc295fe423404c943}{complete\+\_\+problem\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Set boundary conditions and complete the build of all elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a234f5fe08dbb1286868cf6b1eff7c6a3}{doc\+\_\+solution}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} std\+::string \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{comment}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a87ef8df1cf7f548b19f14163a085370f}{compute\+\_\+error\+\_\+estimate}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{max\+\_\+err}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{min\+\_\+err}})
+\begin{DoxyCompactList}\small\item\em Compute the error estimates and assign to elements for plotting. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_ac2852a90a68b7cde5c6d04f79d029047}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set the initial conditions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_adac700fd7368550b91620a7f79091857}{deform\+\_\+interface}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{epsilon}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{n\+\_\+periods}})
+\begin{DoxyCompactList}\small\item\em Function to deform the interface. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a81589b120683037dc07ab9251bf81e85}{fix\+\_\+pressure}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{e}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pdof}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{pvalue}})
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\mbox{\hyperlink{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a582586eb71c1946acb7c015f522ca25a}{Inflow\+\_\+boundary\+\_\+id}} =0
+, \mbox{\hyperlink{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843ab1b61715cc4516f188fd88dc95877254}{Upper\+\_\+wall\+\_\+boundary\+\_\+id}} =1
+, \mbox{\hyperlink{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a23dd316467ea3d5ee5f372bb76fbe0ed}{Outflow\+\_\+boundary\+\_\+id}} =2
+, \mbox{\hyperlink{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a9df123da5b21353b2a8400c70f3d4328}{Bottom\+\_\+wall\+\_\+boundary\+\_\+id}} =3
+, \newline
+\mbox{\hyperlink{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a0252430699fd738de92b51854db0e932}{Interface\+\_\+boundary\+\_\+id}} =4
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of channel boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a94c52097a6333dd830449ce83b512a4f}{create\+\_\+free\+\_\+surface\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Create free surface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a474a9ea9fda21eb1cddf79809b2de6d4}{delete\+\_\+free\+\_\+surface\+\_\+elements}} ()
+\begin{DoxyCompactList}\small\item\em Delete free surface elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a406dd9cb8b718773530a3d1170bece96}{Free\+\_\+surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointers to mesh of free surface elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Refineable\+Solid\+Triangle\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem_accfab13c26afb181d320bd5dc25ed878}{Fluid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Fluid\+\_\+mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classTwoLayerInterfaceProblem_ac3c380cea3010fcf83b41d854e4595f9}{Drop\+\_\+polygon\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector storing pointer to the drop polygons. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Triangle\+Mesh\+Polygon}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem_ade0bdb2267a9fdbab1bea08fc2d87104}{Outer\+\_\+boundary\+\_\+polyline\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Triangle mesh polygon for outer boundary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem_ae9d05acfe4e978cdfd727afb4f27969f}{Drop\+\_\+pressure\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a global drop pressure datum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_afa49f2cb784a03dfb93d33d678cfc1f9}{Initial\+\_\+value\+\_\+for\+\_\+drop\+\_\+pressure}}
+\begin{DoxyCompactList}\small\item\em Backed up drop pressure between adaptations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem_a12d0b30397350f3a6dcf56d67216d6ff}{Hijacked\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to hijacked element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{bool}} \mbox{\hyperlink{classTwoLayerInterfaceProblem_add2bdae31e9372250c62608f1a30fdc4}{Use\+\_\+volume\+\_\+constraint}}
+\begin{DoxyCompactList}\small\item\em Bool to indicate if volume constraint is applied (only for steady run) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}$>$\newline
+class Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$}
+Problem class to simulate viscous drop propagating along 2D channel. 
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00351}{351}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{anonymous}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{enum}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enumeration of channel boundaries. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Inflow\_boundary\_id@{Inflow\_boundary\_id}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Inflow\_boundary\_id@{Inflow\_boundary\_id}}}\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a582586eb71c1946acb7c015f522ca25a}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a582586eb71c1946acb7c015f522ca25a} 
+Inflow\+\_\+boundary\+\_\+id&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Upper\_wall\_boundary\_id@{Upper\_wall\_boundary\_id}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Upper\_wall\_boundary\_id@{Upper\_wall\_boundary\_id}}}\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843ab1b61715cc4516f188fd88dc95877254}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843ab1b61715cc4516f188fd88dc95877254} 
+Upper\+\_\+wall\+\_\+boundary\+\_\+id&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Outflow\_boundary\_id@{Outflow\_boundary\_id}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Outflow\_boundary\_id@{Outflow\_boundary\_id}}}\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a23dd316467ea3d5ee5f372bb76fbe0ed}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a23dd316467ea3d5ee5f372bb76fbe0ed} 
+Outflow\+\_\+boundary\+\_\+id&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Bottom\_wall\_boundary\_id@{Bottom\_wall\_boundary\_id}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Bottom\_wall\_boundary\_id@{Bottom\_wall\_boundary\_id}}}\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a9df123da5b21353b2a8400c70f3d4328}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a9df123da5b21353b2a8400c70f3d4328} 
+Bottom\+\_\+wall\+\_\+boundary\+\_\+id&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Interface\_boundary\_id@{Interface\_boundary\_id}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Interface\_boundary\_id@{Interface\_boundary\_id}}}\Hypertarget{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a0252430699fd738de92b51854db0e932}\label{classTwoLayerInterfaceProblem_ad9d1e892e0530f82166a932c24ec5843a0252430699fd738de92b51854db0e932} 
+Interface\+\_\+boundary\+\_\+id&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00558}{558}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classTwoLayerInterfaceProblem_abf42cfea7dd731795995051c1de78a32}\label{classTwoLayerInterfaceProblem_abf42cfea7dd731795995051c1de78a32} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!TwoLayerInterfaceProblem@{TwoLayerInterfaceProblem}}
+\index{TwoLayerInterfaceProblem@{TwoLayerInterfaceProblem}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoLayerInterfaceProblem()}{TwoLayerInterfaceProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\mbox{\hyperlink{classTwoLayerInterfaceProblem}{\+::\+Two\+Layer\+Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00575}{575}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00291}{Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00113}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00326}{Problem\+\_\+\+Parameter\+::\+Height}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00329}{Problem\+\_\+\+Parameter\+::\+Interface\+\_\+\+Height}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00323}{Problem\+\_\+\+Parameter\+::\+Length}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a5034f5c3d7ec8fd556b1af7f0c2351ef}\label{classTwoLayerInterfaceProblem_a5034f5c3d7ec8fd556b1af7f0c2351ef} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!````~TwoLayerInterfaceProblem@{\texorpdfstring{$\sim$}{\string~}TwoLayerInterfaceProblem}}
+\index{````~TwoLayerInterfaceProblem@{\texorpdfstring{$\sim$}{\string~}TwoLayerInterfaceProblem}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TwoLayerInterfaceProblem()}{\string~TwoLayerInterfaceProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{360}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00332}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00512}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::delete\+\_\+free\+\_\+surface\+\_\+elements()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00546}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Drop\+\_\+pressure\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00533}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00543}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+polyline\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTwoLayerInterfaceProblem_a496c283472765b000a0348137c1b560b}\label{classTwoLayerInterfaceProblem_a496c283472765b000a0348137c1b560b} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions after adapt\+: Rebuild the mesh of free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00405}{405}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00825}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00775}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_aa3798e4cbf4cfebf7652aea3fd2fbdff}\label{classTwoLayerInterfaceProblem_aa3798e4cbf4cfebf7652aea3fd2fbdff} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00422}{422}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a89431a4ad9400976c295c4cfd04b3727}\label{classTwoLayerInterfaceProblem_a89431a4ad9400976c295c4cfd04b3727} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before adapt\+: Wipe the mesh of free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00393}{393}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00512}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::delete\+\_\+free\+\_\+surface\+\_\+elements()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_aa34b7c3a13847571a9fedc2465daab30}\label{classTwoLayerInterfaceProblem_aa34b7c3a13847571a9fedc2465daab30} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00425}{425}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a96392e407b2c1f5fc295fe423404c943}\label{classTwoLayerInterfaceProblem_a96392e407b2c1f5fc295fe423404c943} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!complete\_problem\_setup@{complete\_problem\_setup}}
+\index{complete\_problem\_setup@{complete\_problem\_setup}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{complete\_problem\_setup()}{complete\_problem\_setup()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::complete\+\_\+problem\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set boundary conditions and complete the build of all elements. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00825}{825}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00332}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00311}{Problem\+\_\+\+Parameter\+::\+Density\+\_\+\+Ratio}}, \mbox{\hyperlink{namespaceProblem__Parameter_a72d7ca9081c6c7e123a878e7f3626086}{Problem\+\_\+\+Parameter\+::\+G()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00294}{Problem\+\_\+\+Parameter\+::\+Re}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00303}{Problem\+\_\+\+Parameter\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00300}{Problem\+\_\+\+Parameter\+::\+Re\+St}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00307}{Problem\+\_\+\+Parameter\+::\+Viscosity\+\_\+\+Ratio}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00405}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a87ef8df1cf7f548b19f14163a085370f}\label{classTwoLayerInterfaceProblem_a87ef8df1cf7f548b19f14163a085370f} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!compute\_error\_estimate@{compute\_error\_estimate}}
+\index{compute\_error\_estimate@{compute\_error\_estimate}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_error\_estimate()}{compute\_error\_estimate()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::compute\+\_\+error\+\_\+estimate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{max\+\_\+err,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{min\+\_\+err }\end{DoxyParamCaption})}
+
+
+
+Compute the error estimates and assign to elements for plotting. 
+
+Compute error estimates and assign to elements for plotting. 
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l01033}{1033}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a94c52097a6333dd830449ce83b512a4f}\label{classTwoLayerInterfaceProblem_a94c52097a6333dd830449ce83b512a4f} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!create\_free\_surface\_elements@{create\_free\_surface\_elements}}
+\index{create\_free\_surface\_elements@{create\_free\_surface\_elements}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_free\_surface\_elements()}{create\_free\_surface\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::create\+\_\+free\+\_\+surface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create free surface elements. 
+
+Create elements that impose the kinematic and dynamic bcs for the pseudo-\/solid fluid mesh. 
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00775}{775}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00314}{Problem\+\_\+\+Parameter\+::\+Ca}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00297}{Problem\+\_\+\+Parameter\+::\+St}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00405}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_adac700fd7368550b91620a7f79091857}\label{classTwoLayerInterfaceProblem_adac700fd7368550b91620a7f79091857} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!deform\_interface@{deform\_interface}}
+\index{deform\_interface@{deform\_interface}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{deform\_interface()}{deform\_interface()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::deform\+\_\+interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{epsilon,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{n\+\_\+periods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to deform the interface. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00470}{470}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00113}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00323}{Problem\+\_\+\+Parameter\+::\+Length}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a474a9ea9fda21eb1cddf79809b2de6d4}\label{classTwoLayerInterfaceProblem_a474a9ea9fda21eb1cddf79809b2de6d4} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!delete\_free\_surface\_elements@{delete\_free\_surface\_elements}}
+\index{delete\_free\_surface\_elements@{delete\_free\_surface\_elements}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_free\_surface\_elements()}{delete\_free\_surface\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::delete\+\_\+free\+\_\+surface\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Delete free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00512}{512}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00533}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Free\+\_\+surface\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00393}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt()}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a234f5fe08dbb1286868cf6b1eff7c6a3}\label{classTwoLayerInterfaceProblem_a234f5fe08dbb1286868cf6b1eff7c6a3} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} std\+::string \&}]{comment = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00969}{969}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00291}{Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00335}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a81589b120683037dc07ab9251bf81e85}\label{classTwoLayerInterfaceProblem_a81589b120683037dc07ab9251bf81e85} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{e,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{unsigned}} \&}]{pdof,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{const}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00495}{495}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00495}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00495}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_ac2852a90a68b7cde5c6d04f79d029047}\label{classTwoLayerInterfaceProblem_ac2852a90a68b7cde5c6d04f79d029047} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{void}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the initial conditions. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00444}{444}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\+Fluid\+\_\+mesh\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classTwoLayerInterfaceProblem_ac3c380cea3010fcf83b41d854e4595f9}\label{classTwoLayerInterfaceProblem_ac3c380cea3010fcf83b41d854e4595f9} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Drop\_polygon\_pt@{Drop\_polygon\_pt}}
+\index{Drop\_polygon\_pt@{Drop\_polygon\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Drop\_polygon\_pt}{Drop\_polygon\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Vector}}$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Triangle\+Mesh\+Polygon}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Drop\+\_\+polygon\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector storing pointer to the drop polygons. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00540}{540}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_ae9d05acfe4e978cdfd727afb4f27969f}\label{classTwoLayerInterfaceProblem_ae9d05acfe4e978cdfd727afb4f27969f} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Drop\_pressure\_data\_pt@{Drop\_pressure\_data\_pt}}
+\index{Drop\_pressure\_data\_pt@{Drop\_pressure\_data\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Drop\_pressure\_data\_pt}{Drop\_pressure\_data\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Data}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Drop\+\_\+pressure\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a global drop pressure datum. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00546}{546}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_accfab13c26afb181d320bd5dc25ed878}\label{classTwoLayerInterfaceProblem_accfab13c26afb181d320bd5dc25ed878} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
+\index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Refineable\+Solid\+Triangle\+Mesh}}$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Fluid\+\_\+mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00537}{537}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00425}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00470}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::deform\+\_\+interface()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00495}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00444}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::set\+\_\+initial\+\_\+condition()}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a406dd9cb8b718773530a3d1170bece96}\label{classTwoLayerInterfaceProblem_a406dd9cb8b718773530a3d1170bece96} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Free\_surface\_mesh\_pt@{Free\_surface\_mesh\_pt}}
+\index{Free\_surface\_mesh\_pt@{Free\_surface\_mesh\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Free\_surface\_mesh\_pt}{Free\_surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Free\+\_\+surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointers to mesh of free surface elements. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00533}{533}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00512}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::delete\+\_\+free\+\_\+surface\+\_\+elements()}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_a12d0b30397350f3a6dcf56d67216d6ff}\label{classTwoLayerInterfaceProblem_a12d0b30397350f3a6dcf56d67216d6ff} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Hijacked\_element\_pt@{Hijacked\_element\_pt}}
+\index{Hijacked\_element\_pt@{Hijacked\_element\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Hijacked\_element\_pt}{Hijacked\_element\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Hijacked\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to hijacked element. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00552}{552}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_afa49f2cb784a03dfb93d33d678cfc1f9}\label{classTwoLayerInterfaceProblem_afa49f2cb784a03dfb93d33d678cfc1f9} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Initial\_value\_for\_drop\_pressure@{Initial\_value\_for\_drop\_pressure}}
+\index{Initial\_value\_for\_drop\_pressure@{Initial\_value\_for\_drop\_pressure}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Initial\_value\_for\_drop\_pressure}{Initial\_value\_for\_drop\_pressure}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Initial\+\_\+value\+\_\+for\+\_\+drop\+\_\+pressure\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Backed up drop pressure between adaptations. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00549}{549}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_ade0bdb2267a9fdbab1bea08fc2d87104}\label{classTwoLayerInterfaceProblem_ade0bdb2267a9fdbab1bea08fc2d87104} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Outer\_boundary\_polyline\_pt@{Outer\_boundary\_polyline\_pt}}
+\index{Outer\_boundary\_polyline\_pt@{Outer\_boundary\_polyline\_pt}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Outer\_boundary\_polyline\_pt}{Outer\_boundary\_polyline\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Triangle\+Mesh\+Polygon}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Outer\+\_\+boundary\+\_\+polyline\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Triangle mesh polygon for outer boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00543}{543}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00360}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Two\+Layer\+Interface\+Problem()}}.
+
+\Hypertarget{classTwoLayerInterfaceProblem_add2bdae31e9372250c62608f1a30fdc4}\label{classTwoLayerInterfaceProblem_add2bdae31e9372250c62608f1a30fdc4} 
+\index{TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}!Use\_volume\_constraint@{Use\_volume\_constraint}}
+\index{Use\_volume\_constraint@{Use\_volume\_constraint}!TwoLayerInterfaceProblem$<$ ELEMENT $>$@{TwoLayerInterfaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Use\_volume\_constraint}{Use\_volume\_constraint}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{class}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{bool}} \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ELEMENT}} $>$\+::\+Use\+\_\+volume\+\_\+constraint\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bool to indicate if volume constraint is applied (only for steady run) 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00555}{555}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__two__layer__interface_8cc}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}\end{DoxyCompactItemize}

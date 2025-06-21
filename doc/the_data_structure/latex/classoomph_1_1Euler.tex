@@ -1,0 +1,120 @@
+\doxysection{oomph\+::Euler Class Reference}
+\hypertarget{classoomph_1_1Euler}{}\label{classoomph_1_1Euler}\index{oomph::Euler@{oomph::Euler}}
+
+
+=========================================================== Simple first-\/order \doxylink{classoomph_1_1Euler}{Euler} Timestepping  
+
+
+
+
+{\ttfamily \#include $<$explicit\+\_\+timesteppers.\+h$>$}
+
+Inheritance diagram for oomph\+::Euler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1Euler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Euler_a6d7ce4a89e4464afee180b7e7a69bc30}{Euler}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, set the type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Euler_ac353f047ef089390ec27ca93aa9d1ff8}{Euler}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Euler_a1a4bb8b3928b674a215c11ed3049271f}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Euler_adeea8e3567a50fb3873fab05a7ca928a}{timestep}} (\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt)
+\begin{DoxyCompactList}\small\item\em Overload function that is used to advance time in the object reference by object\+\_\+pt by an amount dt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{oomph\+::\+Explicit\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a4b54826f4098eae55da1ee7fd51b634d}{Explicit\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a1e71c44aeb2699d63ba6300b212ad609}{Explicit\+Time\+Stepper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_aeb7796f8074f510f630a7a73dca98886}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{Explicit\+Time\+Stepper}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_a51f659328a57063563b7344c8b9d7737}{\texorpdfstring{$\sim$}{\string~}\+Explicit\+Time\+Stepper}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor --- no memory is allocated in this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{oomph\+::\+Explicit\+Time\+Stepper}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_aa923e120e84dc7cec56d2a50f5b33421}{Type}}
+\begin{DoxyCompactList}\small\item\em String that indicates the type of the timestepper (e.\+g. "{}\+Runge\+Kutta"{}, etc.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+=========================================================== Simple first-\/order \doxylink{classoomph_1_1Euler}{Euler} Timestepping 
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8h_source_l00161}{161}} of file \mbox{\hyperlink{explicit__timesteppers_8h_source}{explicit\+\_\+timesteppers.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1Euler_a6d7ce4a89e4464afee180b7e7a69bc30}\label{classoomph_1_1Euler_a6d7ce4a89e4464afee180b7e7a69bc30} 
+\index{oomph::Euler@{oomph::Euler}!Euler@{Euler}}
+\index{Euler@{Euler}!oomph::Euler@{oomph::Euler}}
+\doxysubsubsection{\texorpdfstring{Euler()}{Euler()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Euler\+::\+Euler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, set the type. 
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8h_source_l00165}{165}} of file \mbox{\hyperlink{explicit__timesteppers_8h_source}{explicit\+\_\+timesteppers.\+h}}.
+
+\Hypertarget{classoomph_1_1Euler_ac353f047ef089390ec27ca93aa9d1ff8}\label{classoomph_1_1Euler_ac353f047ef089390ec27ca93aa9d1ff8} 
+\index{oomph::Euler@{oomph::Euler}!Euler@{Euler}}
+\index{Euler@{Euler}!oomph::Euler@{oomph::Euler}}
+\doxysubsubsection{\texorpdfstring{Euler()}{Euler()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Euler\+::\+Euler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1Euler_a1a4bb8b3928b674a215c11ed3049271f}\label{classoomph_1_1Euler_a1a4bb8b3928b674a215c11ed3049271f} 
+\index{oomph::Euler@{oomph::Euler}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Euler@{oomph::Euler}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Euler\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1Euler_adeea8e3567a50fb3873fab05a7ca928a}\label{classoomph_1_1Euler_adeea8e3567a50fb3873fab05a7ca928a} 
+\index{oomph::Euler@{oomph::Euler}!timestep@{timestep}}
+\index{timestep@{timestep}!oomph::Euler@{oomph::Euler}}
+\doxysubsubsection{\texorpdfstring{timestep()}{timestep()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Euler\+::timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{Explicit\+Time\+Steppable\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload function that is used to advance time in the object reference by object\+\_\+pt by an amount dt. 
+
+\doxylink{classoomph_1_1Euler}{Euler} timestepping x\texorpdfstring{$^\wedge$}{\string^}\{t+1\} = x\texorpdfstring{$^\wedge$}{\string^}\{t\} + dt M\texorpdfstring{$^\wedge$}{\string^}\{-\/1\} L(x\texorpdfstring{$^\wedge$}{\string^}\{t\}) 
+
+Implements \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper_ab43bbab17960d0f50b8842e996f5c765}{oomph\+::\+Explicit\+Time\+Stepper}}.
+
+
+
+Definition at line \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00163}{163}} of file \mbox{\hyperlink{explicit__timesteppers_8cc_source}{explicit\+\_\+timesteppers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{explicit__timesteppers_8h_source_l00108}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00116}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+after\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00102}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+stage()}}, \mbox{\hyperlink{explicit__timesteppers_8h_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::actions\+\_\+before\+\_\+explicit\+\_\+timestep()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00112}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::add\+\_\+to\+\_\+dofs()}}, \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00041}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::get\+\_\+dvaluesdt()}}, and \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00132}{oomph\+::\+Explicit\+Time\+Steppable\+Object\+::time()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{explicit__timesteppers_8h}{explicit\+\_\+timesteppers.\+h}}\item 
+\mbox{\hyperlink{explicit__timesteppers_8cc}{explicit\+\_\+timesteppers.\+cc}}\end{DoxyCompactItemize}

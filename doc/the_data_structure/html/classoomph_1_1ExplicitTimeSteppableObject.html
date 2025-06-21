@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ExplicitTimeSteppableObject Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classoomph_1_1ExplicitTimeSteppableObject-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ExplicitTimeSteppableObject Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for objects than can be advanced in time by an Explicit Timestepper. WARNING: For explicit time stepping to work the object's residual function (as used by get_inverse_mass_matrix_times_residuals(..)) MUST be in the form r = f(t, u) - [timestepper approximation to dudt]! Standard implicit time stepping will work with plenty of residuals that don't fit into this form. Some examples where implicit time stepping will work fine but explicit will fail: 1) The negation of the above formula, this implementation will end up using dudt = - f(u,t). 2) A residual which is implicit or non-linear in dudt, such as r = dudt.  
+ <a href="classoomph_1_1ExplicitTimeSteppableObject.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ExplicitTimeSteppableObject:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ExplicitTimeSteppableObject.png" usemap="#oomph::ExplicitTimeSteppableObject_map" alt=""/>
+  <map id="oomph::ExplicitTimeSteppableObject_map" name="oomph::ExplicitTimeSteppableObject_map">
+<area href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////..." alt="oomph::Problem" shape="rect" coords="0,56,423,80"/>
+<area href="classoomph_1_1WomersleyProblem.html" alt="oomph::WomersleyProblem&lt; WOMERSLEY_ELEMENT, DIM &gt;" shape="rect" coords="433,112,856,136"/>
+<area href="classoomph_1_1BiharmonicFluidProblem.html" title="Biharmonic Fluid Problem Class - describes stokes flow in 2D. Developed for the topologically rectang..." alt="oomph::BiharmonicFluidProblem&lt; DIM &gt;" shape="rect" coords="433,168,856,192"/>
+<area href="classoomph_1_1BiharmonicProblem.html" title="Biharmonic Plate Problem Class - for problems where the load can be assumed to be acting normal to th..." alt="oomph::BiharmonicProblem&lt; DIM &gt;" shape="rect" coords="433,224,856,248"/>
+<area href="classoomph_1_1FpPressureAdvectionDiffusionProblem.html" title="Auxiliary Problem that can be used to assemble the pressure advection diffusion matrix needed by the ..." alt="oomph::FpPressureAdvectionDiffusionProblem&lt; ELEMENT &gt;" shape="rect" coords="433,280,856,304"/>
+<area href="classoomph_1_1HelmholtzMGProblem.html" title="HelmholtzMGProblem class; subclass of Problem." alt="oomph::HelmholtzMGProblem" shape="rect" coords="433,336,856,360"/>
+<area href="classoomph_1_1LinearElasticitySmoothMesh.html" title="Auxiliary Problem to smooth a SolidMesh by adjusting the internal nodal positions by solving a LINEAR..." alt="oomph::LinearElasticitySmoothMesh&lt; LINEAR_ELASTICITY_ELEMENT &gt;" shape="rect" coords="433,392,856,416"/>
+<area href="classoomph_1_1MGProblem.html" title="MGProblem class; subclass of Problem." alt="oomph::MGProblem" shape="rect" coords="433,448,856,472"/>
+<area href="classoomph_1_1NonLinearElasticitySmoothMesh.html" title="Auxiliary Problem to smooth a SolidMesh by adjusting the internal nodal positions via the solution of..." alt="oomph::NonLinearElasticitySmoothMesh&lt; ELEMENT &gt;" shape="rect" coords="433,504,856,528"/>
+<area href="classoomph_1_1PoissonSmoothMesh.html" title="Functor to smooth a SolidMesh by adjusting the internal nodal positions by solving a Poisson problem ..." alt="oomph::PoissonSmoothMesh&lt; POISSON_ELEMENT &gt;" shape="rect" coords="433,560,856,584"/>
+<area href="classoomph_1_1ProjectionProblem.html" title="Projection problem. This is created during the adaptation of unstructured meshes and it is assumed th..." alt="oomph::ProjectionProblem&lt; PROJECTABLE_ELEMENT &gt;" shape="rect" coords="433,616,856,640"/>
+<area href="classoomph_1_1SegregatableFSIProblem.html" title="Base class for problems that can be solved by segregated FSI solver." alt="oomph::SegregatableFSIProblem" shape="rect" coords="433,672,856,696"/>
+<area href="classoomph_1_1SolidICProblem.html" title="IC problem for an elastic body discretised on a given (sub)-mesh. We switch the elements&#39; residuals a..." alt="oomph::SolidICProblem" shape="rect" coords="433,728,856,752"/>
+<area href="classoomph_1_1WomersleyProblem.html" title="Womersley problem." alt="oomph::WomersleyProblem&lt; ELEMENT, DIM &gt;" shape="rect" coords="433,784,856,808"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a07e82e7df9f289fc59fbf5ac438ad068" id="r_a07e82e7df9f289fc59fbf5ac438ad068"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a07e82e7df9f289fc59fbf5ac438ad068">ExplicitTimeSteppableObject</a> ()</td></tr>
+<tr class="memdesc:a07e82e7df9f289fc59fbf5ac438ad068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:a07e82e7df9f289fc59fbf5ac438ad068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e1d1c57792a5540f0d31f3b36b4d7b" id="r_af9e1d1c57792a5540f0d31f3b36b4d7b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#af9e1d1c57792a5540f0d31f3b36b4d7b">ExplicitTimeSteppableObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:af9e1d1c57792a5540f0d31f3b36b4d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:af9e1d1c57792a5540f0d31f3b36b4d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85c2f447b67a0afd64e910b558ac6f90" id="r_a85c2f447b67a0afd64e910b558ac6f90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a85c2f447b67a0afd64e910b558ac6f90">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a85c2f447b67a0afd64e910b558ac6f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a85c2f447b67a0afd64e910b558ac6f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed68ad4da79ddfdc5b545fa62292304" id="r_a0ed68ad4da79ddfdc5b545fa62292304"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a0ed68ad4da79ddfdc5b545fa62292304">~ExplicitTimeSteppableObject</a> ()</td></tr>
+<tr class="memdesc:a0ed68ad4da79ddfdc5b545fa62292304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <br /></td></tr>
+<tr class="separator:a0ed68ad4da79ddfdc5b545fa62292304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e7d8d7ec548b26ed039b61a9eba9c4" id="r_ab1e7d8d7ec548b26ed039b61a9eba9c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#ab1e7d8d7ec548b26ed039b61a9eba9c4">get_dvaluesdt</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">minv_res</a>)</td></tr>
+<tr class="memdesc:ab1e7d8d7ec548b26ed039b61a9eba9c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single virtual function that returns the residuals vector multiplied by the inverse mass matrix.  <br /></td></tr>
+<tr class="separator:ab1e7d8d7ec548b26ed039b61a9eba9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fcf43487590dd723f25184067f26219" id="r_a0fcf43487590dd723f25184067f26219"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a0fcf43487590dd723f25184067f26219">get_dofs</a> (<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dofs</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0fcf43487590dd723f25184067f26219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gets the values of the dofs in the object.  <br /></td></tr>
+<tr class="separator:a0fcf43487590dd723f25184067f26219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370d8d077bb5e07290f4c2f31183d8d2" id="r_a370d8d077bb5e07290f4c2f31183d8d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a370d8d077bb5e07290f4c2f31183d8d2">get_dofs</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dofs</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a370d8d077bb5e07290f4c2f31183d8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gets the history values of the dofs in the object.  <br /></td></tr>
+<tr class="separator:a370d8d077bb5e07290f4c2f31183d8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a8d64f2d6aa8de955b44c86e9b3ecb" id="r_a76a8d64f2d6aa8de955b44c86e9b3ecb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a76a8d64f2d6aa8de955b44c86e9b3ecb">set_dofs</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dofs</a>)</td></tr>
+<tr class="memdesc:a76a8d64f2d6aa8de955b44c86e9b3ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that sets the values of the dofs in the object.  <br /></td></tr>
+<tr class="separator:a76a8d64f2d6aa8de955b44c86e9b3ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f10d9ad6de867dd72ba175a5f0ec89" id="r_a00f10d9ad6de867dd72ba175a5f0ec89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a00f10d9ad6de867dd72ba175a5f0ec89">add_to_dofs</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;lambda, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">increment_dofs</a>)</td></tr>
+<tr class="memdesc:a00f10d9ad6de867dd72ba175a5f0ec89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that adds the values to the dofs.  <br /></td></tr>
+<tr class="separator:a00f10d9ad6de867dd72ba175a5f0ec89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74eb2ebff3fc3066edccdfe4d3b6bc07" id="r_a74eb2ebff3fc3066edccdfe4d3b6bc07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a74eb2ebff3fc3066edccdfe4d3b6bc07">actions_before_explicit_stage</a> ()</td></tr>
+<tr class="memdesc:a74eb2ebff3fc3066edccdfe4d3b6bc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual function to do anything needed before a stage of an explicit time step (Runge-Kutta steps contain multiple stages per time step, most others only contain one).  <br /></td></tr>
+<tr class="separator:a74eb2ebff3fc3066edccdfe4d3b6bc07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1eb700abad36e868a84c475f9866b7d" id="r_ad1eb700abad36e868a84c475f9866b7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#ad1eb700abad36e868a84c475f9866b7d">actions_after_explicit_stage</a> ()</td></tr>
+<tr class="memdesc:ad1eb700abad36e868a84c475f9866b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual function that should be overloaded to update any dependent data or boundary conditions that should be advanced after each stage of an explicit time step (Runge-Kutta steps contain multiple stages per time step, most others only contain one).  <br /></td></tr>
+<tr class="separator:ad1eb700abad36e868a84c475f9866b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae169b713aa971921bfd1269de898b934" id="r_ae169b713aa971921bfd1269de898b934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#ae169b713aa971921bfd1269de898b934">actions_before_explicit_timestep</a> ()</td></tr>
+<tr class="memdesc:ae169b713aa971921bfd1269de898b934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual function that can be overloaded to do anything needed before an explicit step.  <br /></td></tr>
+<tr class="separator:ae169b713aa971921bfd1269de898b934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22371b17397f74660c8e9d54ed50ccea" id="r_a22371b17397f74660c8e9d54ed50ccea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a22371b17397f74660c8e9d54ed50ccea">actions_after_explicit_timestep</a> ()</td></tr>
+<tr class="memdesc:a22371b17397f74660c8e9d54ed50ccea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual function that can be overloaded to do anything needed after an explicit step.  <br /></td></tr>
+<tr class="separator:a22371b17397f74660c8e9d54ed50ccea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fde674301963f01b8e41b3f333cc65" id="r_a42fde674301963f01b8e41b3f333cc65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a42fde674301963f01b8e41b3f333cc65">time</a> ()</td></tr>
+<tr class="memdesc:a42fde674301963f01b8e41b3f333cc65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken virtual function that should be overloaded to return access to the local time in the object.  <br /></td></tr>
+<tr class="separator:a42fde674301963f01b8e41b3f333cc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49ecd5e667dc16d4f2b991598d311b36" id="r_a49ecd5e667dc16d4f2b991598d311b36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Time.html">Time</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#a49ecd5e667dc16d4f2b991598d311b36">time_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a49ecd5e667dc16d4f2b991598d311b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function that should be overloaded to return a pointer to a <a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> object.  <br /></td></tr>
+<tr class="separator:a49ecd5e667dc16d4f2b991598d311b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ae16e2f717ed0e72c2c543745f8716252" id="r_ae16e2f717ed0e72c2c543745f8716252"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html#ae16e2f717ed0e72c2c543745f8716252">Dummy_time_value</a> = 0.0</td></tr>
+<tr class="memdesc:ae16e2f717ed0e72c2c543745f8716252"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy value of time always set to zero.  <br /></td></tr>
+<tr class="separator:ae16e2f717ed0e72c2c543745f8716252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for objects than can be advanced in time by an Explicit Timestepper. WARNING: For explicit time stepping to work the object's residual function (as used by get_inverse_mass_matrix_times_residuals(..)) MUST be in the form r = f(t, u) - [timestepper approximation to dudt]! Standard implicit time stepping will work with plenty of residuals that don't fit into this form. Some examples where implicit time stepping will work fine but explicit will fail: 1) The negation of the above formula, this implementation will end up using dudt = - f(u,t). 2) A residual which is implicit or non-linear in dudt, such as r = dudt. </p>
+<ul>
+<li>u x dudt. </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00064">64</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a07e82e7df9f289fc59fbf5ac438ad068" name="a07e82e7df9f289fc59fbf5ac438ad068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e82e7df9f289fc59fbf5ac438ad068">&#9670;&#160;</a></span>ExplicitTimeSteppableObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExplicitTimeSteppableObject::ExplicitTimeSteppableObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00071">71</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+</div>
+</div>
+<a id="af9e1d1c57792a5540f0d31f3b36b4d7b" name="af9e1d1c57792a5540f0d31f3b36b4d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e1d1c57792a5540f0d31f3b36b4d7b">&#9670;&#160;</a></span>ExplicitTimeSteppableObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ExplicitTimeSteppableObject::ExplicitTimeSteppableObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a0ed68ad4da79ddfdc5b545fa62292304" name="a0ed68ad4da79ddfdc5b545fa62292304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ed68ad4da79ddfdc5b545fa62292304">&#9670;&#160;</a></span>~ExplicitTimeSteppableObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> oomph::ExplicitTimeSteppableObject::~ExplicitTimeSteppableObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00080">80</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad1eb700abad36e868a84c475f9866b7d" name="ad1eb700abad36e868a84c475f9866b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1eb700abad36e868a84c475f9866b7d">&#9670;&#160;</a></span>actions_after_explicit_stage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::actions_after_explicit_stage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual function that should be overloaded to update any dependent data or boundary conditions that should be advanced after each stage of an explicit time step (Runge-Kutta steps contain multiple stages per time step, most others only contain one). </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00108">108</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a22371b17397f74660c8e9d54ed50ccea" name="a22371b17397f74660c8e9d54ed50ccea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22371b17397f74660c8e9d54ed50ccea">&#9670;&#160;</a></span>actions_after_explicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::actions_after_explicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual function that can be overloaded to do anything needed after an explicit step. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#a51bfd872c45467a65ce977f3753a6d1d">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00116">116</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a74eb2ebff3fc3066edccdfe4d3b6bc07" name="a74eb2ebff3fc3066edccdfe4d3b6bc07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74eb2ebff3fc3066edccdfe4d3b6bc07">&#9670;&#160;</a></span>actions_before_explicit_stage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::actions_before_explicit_stage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual function to do anything needed before a stage of an explicit time step (Runge-Kutta steps contain multiple stages per time step, most others only contain one). </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00102">102</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="ae169b713aa971921bfd1269de898b934" name="ae169b713aa971921bfd1269de898b934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae169b713aa971921bfd1269de898b934">&#9670;&#160;</a></span>actions_before_explicit_timestep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::actions_before_explicit_timestep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty virtual function that can be overloaded to do anything needed before an explicit step. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#a6ae06bc0ecba349ebdf76220c1a17546">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00112">112</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a00f10d9ad6de867dd72ba175a5f0ec89" name="a00f10d9ad6de867dd72ba175a5f0ec89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00f10d9ad6de867dd72ba175a5f0ec89">&#9670;&#160;</a></span>add_to_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::add_to_dofs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>increment_dofs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that adds the values to the dofs. </p>
+<p>Function that adds the lambda multiplied by the increment_dofs vector to the dofs in the object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#a352210408b3eed3e7a834b8b9a33a99a">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00112">112</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a370d8d077bb5e07290f4c2f31183d8d2" name="a370d8d077bb5e07290f4c2f31183d8d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370d8d077bb5e07290f4c2f31183d8d2">&#9670;&#160;</a></span>get_dofs() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::get_dofs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that gets the history values of the dofs in the object. </p>
+<p>Function that should get the values of the dofs in the object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#abb56c404b0dd6df75bcadab797d9a24e">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00077">77</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+</div>
+</div>
+<a id="a0fcf43487590dd723f25184067f26219" name="a0fcf43487590dd723f25184067f26219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fcf43487590dd723f25184067f26219">&#9670;&#160;</a></span>get_dofs() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::get_dofs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that gets the values of the dofs in the object. </p>
+<p>Function that should get the values of the dofs in the object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#ae2ef66732d76053dba15001818c0605c">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00060">60</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="ab1e7d8d7ec548b26ed039b61a9eba9c4" name="ab1e7d8d7ec548b26ed039b61a9eba9c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e7d8d7ec548b26ed039b61a9eba9c4">&#9670;&#160;</a></span>get_dvaluesdt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::get_dvaluesdt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>minv_res</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A single virtual function that returns the residuals vector multiplied by the inverse mass matrix. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#a2d456362f4408556e879871ae34e57f1">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00041">41</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a85c2f447b67a0afd64e910b558ac6f90" name="a85c2f447b67a0afd64e910b558ac6f90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c2f447b67a0afd64e910b558ac6f90">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1ExplicitTimeSteppableObject.html">ExplicitTimeSteppableObject</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a76a8d64f2d6aa8de955b44c86e9b3ecb" name="a76a8d64f2d6aa8de955b44c86e9b3ecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a8d64f2d6aa8de955b44c86e9b3ecb">&#9670;&#160;</a></span>set_dofs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ExplicitTimeSteppableObject::set_dofs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>dofs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that sets the values of the dofs in the object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#ab51480d18550c107c9f13629102f6b08">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00095">95</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a42fde674301963f01b8e41b3f333cc65" name="a42fde674301963f01b8e41b3f333cc65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42fde674301963f01b8e41b3f333cc65">&#9670;&#160;</a></span>time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp; oomph::ExplicitTimeSteppableObject::time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken virtual function that should be overloaded to return access to the local time in the object. </p>
+<p>Virtual function that should be overloaded to return access to the local time in the object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#acd8c357349d20a28af70b2b7ea7f488d">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00132">132</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="explicit__timesteppers_8h_source.html#l00067">Dummy_time_value</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00203">oomph::RungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00378">oomph::LowStorageRungeKutta&lt; ORDER &gt;::timestep()</a>, <a class="el" href="explicit__timesteppers_8cc_source.html#l00163">oomph::Euler::timestep()</a>, and <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<a id="a49ecd5e667dc16d4f2b991598d311b36" name="a49ecd5e667dc16d4f2b991598d311b36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49ecd5e667dc16d4f2b991598d311b36">&#9670;&#160;</a></span>time_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Time.html">Time</a> * oomph::ExplicitTimeSteppableObject::time_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual function that should be overloaded to return a pointer to a <a class="el" href="classoomph_1_1Time.html" title="Class to keep track of discrete/continous time. It is essential to have a single Time object when usi...">Time</a> object. </p>
+
+<p>Reimplemented in <a class="el" href="classoomph_1_1Problem.html#adfa7a89cbbae5de1cb1aea1ce0264b48">oomph::Problem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8cc_source.html#l00147">147</a> of file <a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00427">oomph::EBDF3::timestep()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae16e2f717ed0e72c2c543745f8716252" name="ae16e2f717ed0e72c2c543745f8716252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae16e2f717ed0e72c2c543745f8716252">&#9670;&#160;</a></span>Dummy_time_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ExplicitTimeSteppableObject::Dummy_time_value = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dummy value of time always set to zero. </p>
+
+<p class="definition">Definition at line <a class="el" href="explicit__timesteppers_8h_source.html#l00067">67</a> of file <a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="explicit__timesteppers_8cc_source.html#l00132">time()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="explicit__timesteppers_8h_source.html">explicit_timesteppers.h</a></li>
+<li><a class="el" href="explicit__timesteppers_8cc_source.html">explicit_timesteppers.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:12:11
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

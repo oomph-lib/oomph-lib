@@ -1,0 +1,65 @@
+\doxysection{airy\+\_\+cantilever.\+cc File Reference}
+\hypertarget{airy__cantilever_8cc}{}\label{airy__cantilever_8cc}\index{airy\_cantilever.cc@{airy\_cantilever.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MySolidElement}{oomph\+::\+My\+Solid\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Wrapper class for solid elements to modify their output functions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01MySolidElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ My\+Solid\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classCantileverProblem}{Cantilever\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class for the cantilever "{}beam"{} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\+\_\+\+Physical\+\_\+\+Variables\+::gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{airy__cantilever_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver for cantilever beam loaded by surface traction and/or gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Half height of beam. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{Global\+\_\+\+Physical\+\_\+\+Variables\+::L}} =10.\+0
+\begin{DoxyCompactList}\small\item\em Length of beam. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{airy__cantilever_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{airy__cantilever_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{airy\_cantilever.cc@{airy\_cantilever.cc}!main@{main}}
+\index{main@{main}!airy\_cantilever.cc@{airy\_cantilever.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver for cantilever beam loaded by surface traction and/or gravity. 
+
+
+
+Definition at line \mbox{\hyperlink{airy__cantilever_8cc_source_l00600}{600}} of file \mbox{\hyperlink{airy__cantilever_8cc_source}{airy\+\_\+cantilever.\+cc}}.
+
+
+
+References \mbox{\hyperlink{airy__cantilever_8cc_source_l00158}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00495}{Cantilever\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00161}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00186}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}, \mbox{\hyperlink{airy__cantilever_8cc_source_l00164}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, and \mbox{\hyperlink{airy__cantilever_8cc_source_l00167}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+

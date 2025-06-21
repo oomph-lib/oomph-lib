@@ -1,0 +1,334 @@
+\doxysection{Leaflet Class Reference}
+\hypertarget{classLeaflet}{}\label{classLeaflet}\index{Leaflet@{Leaflet}}
+
+
+Geom\+Object representing a vertical leaflet that performs bending and stretching oscillations.  
+
+
+Inheritance diagram for Leaflet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLeaflet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}{Leaflet}} (const double \&\mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}, const double \&\mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\+\_\+x}}, const double \&\mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\+\_\+y}}, const double \&\mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\+\_\+0}}, const double \&period, Time \texorpdfstring{$\ast$}{*}time\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass length (in Lagrangian coordinates), the amplitude of the horizontal and vertical deflection of the tip, the x-\/coordinate of the origin and the period of the oscillation. Passes the number of Lagrangian and Eulerian coordinates to the constructor of the Geom\+Object base class. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classLeaflet_a0bbfaeec2534389b203fd2a2316db859}{\texorpdfstring{$\sim$}{\string~}\+Leaflet}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -- emtpy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLeaflet_a5b78c2735652b6a5c08c6aa9d38b6232}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Position vector, r, to the point identified by ~\newline
+ its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLeaflet_a01daf4944eaaf7e9697eac53d78965f5}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Steady version\+: Get current shape. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classLeaflet_a91f2460718ec5a4ef32e302b8b14cdca}{ngeom\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em Number of geometric Data in Geom\+Object\+: None. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}} ()
+\begin{DoxyCompactList}\small\item\em Length of the leaflet. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\+\_\+x}} ()
+\begin{DoxyCompactList}\small\item\em Amplitude of horizontal tip displacement. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\+\_\+y}} ()
+\begin{DoxyCompactList}\small\item\em Amplitude of vertical tip displacement. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\+\_\+0}} ()
+\begin{DoxyCompactList}\small\item\em x-\/coordinate of leaflet origin \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}
+\begin{DoxyCompactList}\small\item\em Length in terms of Lagrangian coordinates. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\+\_\+x}}
+\begin{DoxyCompactList}\small\item\em Horizontal displacement of tip. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Vertical displacement of tip. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\+\_\+0}}
+\begin{DoxyCompactList}\small\item\em Origin. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9}{T}}
+\begin{DoxyCompactList}\small\item\em Period of the oscillations. \end{DoxyCompactList}\item 
+Time \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classLeaflet_ac10f13ad45456dc714ab57042861de53}{Time\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the global time object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Geom\+Object representing a vertical leaflet that performs bending and stretching oscillations. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00043}{43}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}\label{classLeaflet_acb53ccf4578a9981216cf0afd4b38453} 
+\index{Leaflet@{Leaflet}!Leaflet@{Leaflet}}
+\index{Leaflet@{Leaflet}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{Leaflet()}{Leaflet()}}
+{\footnotesize\ttfamily Leaflet\+::\+Leaflet (\begin{DoxyParamCaption}\item[{const double \&}]{length,  }\item[{const double \&}]{d\+\_\+x,  }\item[{const double \&}]{d\+\_\+y,  }\item[{const double \&}]{x\+\_\+0,  }\item[{const double \&}]{period,  }\item[{Time \texorpdfstring{$\ast$}{*}}]{time\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass length (in Lagrangian coordinates), the amplitude of the horizontal and vertical deflection of the tip, the x-\/coordinate of the origin and the period of the oscillation. Passes the number of Lagrangian and Eulerian coordinates to the constructor of the Geom\+Object base class. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00053}{53}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+\Hypertarget{classLeaflet_a0bbfaeec2534389b203fd2a2316db859}\label{classLeaflet_a0bbfaeec2534389b203fd2a2316db859} 
+\index{Leaflet@{Leaflet}!````~Leaflet@{\texorpdfstring{$\sim$}{\string~}Leaflet}}
+\index{````~Leaflet@{\texorpdfstring{$\sim$}{\string~}Leaflet}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Leaflet()}{\string~Leaflet()}}
+{\footnotesize\ttfamily virtual Leaflet\+::\texorpdfstring{$\sim$}{\string~}\+Leaflet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor -- emtpy. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00060}{60}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}\label{classLeaflet_a48b7c945eca16ff01995cc70cbf54210} 
+\index{Leaflet@{Leaflet}!d\_x@{d\_x}}
+\index{d\_x@{d\_x}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{d\_x()}{d\_x()}}
+{\footnotesize\ttfamily double \& Leaflet\+::d\+\_\+x (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Amplitude of horizontal tip displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00088}{88}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00102}{D\+\_\+x}}.
+
+\Hypertarget{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}\label{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58} 
+\index{Leaflet@{Leaflet}!d\_y@{d\_y}}
+\index{d\_y@{d\_y}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{d\_y()}{d\_y()}}
+{\footnotesize\ttfamily double Leaflet\+::d\+\_\+y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Amplitude of vertical tip displacement. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00091}{91}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00105}{D\+\_\+y}}.
+
+\Hypertarget{classLeaflet_a7a28827b7081107ac9e33087598ca868}\label{classLeaflet_a7a28827b7081107ac9e33087598ca868} 
+\index{Leaflet@{Leaflet}!length@{length}}
+\index{length@{length}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily double Leaflet\+::length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Length of the leaflet. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00085}{85}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00099}{Length}}.
+
+\Hypertarget{classLeaflet_a91f2460718ec5a4ef32e302b8b14cdca}\label{classLeaflet_a91f2460718ec5a4ef32e302b8b14cdca} 
+\index{Leaflet@{Leaflet}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily unsigned Leaflet\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of geometric Data in Geom\+Object\+: None. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00082}{82}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+\Hypertarget{classLeaflet_a5b78c2735652b6a5c08c6aa9d38b6232}\label{classLeaflet_a5b78c2735652b6a5c08c6aa9d38b6232} 
+\index{Leaflet@{Leaflet}!position@{position}}
+\index{position@{position}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Leaflet\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Position vector, r, to the point identified by ~\newline
+ its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous). 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{65}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00102}{D\+\_\+x}}, \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00105}{D\+\_\+y}}, \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00099}{Length}}, \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00111}{T}}, \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00114}{Time\+\_\+pt}}, and \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00108}{X\+\_\+0}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00076}{position()}}.
+
+\Hypertarget{classLeaflet_a01daf4944eaaf7e9697eac53d78965f5}\label{classLeaflet_a01daf4944eaaf7e9697eac53d78965f5} 
+\index{Leaflet@{Leaflet}!position@{position}}
+\index{position@{position}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Leaflet\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Steady version\+: Get current shape. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00076}{76}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}\label{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b} 
+\index{Leaflet@{Leaflet}!x\_0@{x\_0}}
+\index{x\_0@{x\_0}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{x\_0()}{x\_0()}}
+{\footnotesize\ttfamily double Leaflet\+::x\+\_\+0 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+x-\/coordinate of leaflet origin 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00094}{94}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00108}{X\+\_\+0}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}\label{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b} 
+\index{Leaflet@{Leaflet}!D\_x@{D\_x}}
+\index{D\_x@{D\_x}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{D\_x}{D\_x}}
+{\footnotesize\ttfamily double Leaflet\+::\+D\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Horizontal displacement of tip. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00102}{102}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00088}{d\+\_\+x()}}, and \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}\label{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee} 
+\index{Leaflet@{Leaflet}!D\_y@{D\_y}}
+\index{D\_y@{D\_y}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{D\_y}{D\_y}}
+{\footnotesize\ttfamily double Leaflet\+::\+D\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vertical displacement of tip. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00105}{105}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00091}{d\+\_\+y()}}, and \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_a64c27b796ceece358d09d137f15bbf20}\label{classLeaflet_a64c27b796ceece358d09d137f15bbf20} 
+\index{Leaflet@{Leaflet}!Length@{Length}}
+\index{Length@{Length}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{Length}{Length}}
+{\footnotesize\ttfamily double Leaflet\+::\+Length\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Length in terms of Lagrangian coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00099}{99}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00085}{length()}}, and \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9}\label{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9} 
+\index{Leaflet@{Leaflet}!T@{T}}
+\index{T@{T}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{T}{T}}
+{\footnotesize\ttfamily double Leaflet\+::T\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Period of the oscillations. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00111}{111}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_ac10f13ad45456dc714ab57042861de53}\label{classLeaflet_ac10f13ad45456dc714ab57042861de53} 
+\index{Leaflet@{Leaflet}!Time\_pt@{Time\_pt}}
+\index{Time\_pt@{Time\_pt}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{Time\_pt}{Time\_pt}}
+{\footnotesize\ttfamily Time\texorpdfstring{$\ast$}{*} Leaflet\+::\+Time\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the global time object. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00114}{114}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}.
+
+\Hypertarget{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}\label{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c} 
+\index{Leaflet@{Leaflet}!X\_0@{X\_0}}
+\index{X\_0@{X\_0}!Leaflet@{Leaflet}}
+\doxysubsubsection{\texorpdfstring{X\_0}{X\_0}}
+{\footnotesize\ttfamily double Leaflet\+::\+X\+\_\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Origin. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00108}{108}} of file \mbox{\hyperlink{channel__with__leaflet_8cc_source}{channel\+\_\+with\+\_\+leaflet.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00065}{position()}}, and \mbox{\hyperlink{channel__with__leaflet_8cc_source_l00094}{x\+\_\+0()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{channel__with__leaflet_8cc}{channel\+\_\+with\+\_\+leaflet.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,822 @@
+\doxysection{oomph\+::Pitch\+Fork\+Handler Class Reference}
+\hypertarget{classoomph_1_1PitchForkHandler}{}\label{classoomph_1_1PitchForkHandler}\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+
+
+A class that is used to assemble the augmented system that defines a pitchfork (symmetry-\/breaking) bifurcation. The "{}standard"{} problem must be a function of a global parameter $ \lambda $ and a solution is $R(u,\lambda) = 0$, where $u$ are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size $2N+2$.  
+
+
+
+
+{\ttfamily \#include $<$assembly\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Pitch\+Fork\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PitchForkHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a96e0343c261d087f5d67a49f68561d96}{Pitch\+Fork\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symmetry\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Constructor, initialise the systems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a69c6b0b6aedd03d828d295531fd61820}{\texorpdfstring{$\sim$}{\string~}\+Pitch\+Fork\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, return the problem to its original state, before the augmented system was added. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ae066fa45e9f1bf10601286ca2d083a42}{ndof}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Get the number of elemental degrees of freedom. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ieqn\+\_\+local}})
+\begin{DoxyCompactList}\small\item\em Get the global equation number of the local unknown. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}})
+\begin{DoxyCompactList}\small\item\em Get the residuals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix "{}d equation / d variable"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191}{get\+\_\+djacobian\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djac\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f}{get\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}{Y}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}{C}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{product}})
+\begin{DoxyCompactList}\small\item\em Overload the hessian vector product function so that it breaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679}{bifurcation\+\_\+type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indicate that we are tracking a pitchfork bifurcation by returning 2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451}{bifurcation\+\_\+parameter\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenfunction}})
+\begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478}{synchronise}} ()
+\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47}{solve\+\_\+augmented\+\_\+block\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Set to solve the augmented block system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802}{solve\+\_\+block\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Set to solve the block system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a27325616f4342d159f6f5e7c82ccdf98}{solve\+\_\+full\+\_\+system}} ()
+\begin{DoxyCompactList}\small\item\em Solve non-\/block system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{oomph\+::\+Assembly\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AssemblyHandler_af3ab79744dce0b50370defdbf7981691}{Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_abfd15243fce76ce8f1ea0248c700a3f4}{dof\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&dof)
+\begin{DoxyCompactList}\small\item\em Return vector of dofs at time level t in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_afe6002d5703a93b3b147de79508c5719}{dof\+\_\+pt\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Return vector of pointers to dofs in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab61559fc5df46871c1eebd103f7bf08b}{local\+\_\+problem\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the t-\/th level of storage associated with the i-\/th (local) dof stored in the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})
+\begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}{get\+\_\+inner\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product}})
+\begin{DoxyCompactList}\small\item\em Compute the inner products of the given vector of pairs of history values over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}{get\+\_\+inner\+\_\+product\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Compute the vectors that when taken as a dot product with other history values give the inner product over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}{\texorpdfstring{$\sim$}{\string~}\+Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacba0e7d0b0eb06a1f2d90a3ab2831bec36d}{Full\+\_\+augmented}}
+, \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbae729c94eb567cd88e0b33dc29d9f8d5d}{Block\+\_\+J}}
+, \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbac8e196e66210e158988de0bfebcdf6a5}{Block\+\_\+augmented\+\_\+J}}
+ \}
+\begin{DoxyCompactList}\small\item\em A little private enum to determine whether we are solving the block system or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ac1a4bbb1415a009e9f176f16263fcb3e}{global\+\_\+eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Function that is used to return map the global equations using the simplistic numbering scheme into the actual distributed scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a614de1eea213de58687ed161fc7c53ae}{Solve\+\_\+which\+\_\+system}}
+\begin{DoxyCompactList}\small\item\em Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-\/augmented jacobian system (1), a system in which the jacobian is augmented by 1 row and column to ensure that it is non-\/singular (2). See the enum above. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a196adc8e79a66292d2df9bd9093f8f73}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a40358960131e00efd6bd0febd397a3ef}{Assembly\+\_\+handler\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the underlying (original) assembly handler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359accfbec751}{Ndof}}
+\begin{DoxyCompactList}\small\item\em Store the number of degrees of freedom in the non-\/augmented problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a075f47b5f8941d25796f96d258a1752e}{Dof\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Store the original dof distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The augmented distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817}{Sigma}}
+\begin{DoxyCompactList}\small\item\em A slack variable used to specify the amount of antisymmetry in the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}{Y}}
+\begin{DoxyCompactList}\small\item\em Storage for the null vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1}{Psi}}
+\begin{DoxyCompactList}\small\item\em A constant vector that is specifies the symmetry being broken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}{C}}
+\begin{DoxyCompactList}\small\item\em A constant vector used to ensure that the null vector is not trivial. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ad3f5fc1d7ee4918c9734e59e0611a62c}{Count}}
+\begin{DoxyCompactList}\small\item\em A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. This should really be an integer, but its double so that the distribution can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ac7010a8c64237d76cb0f23bfad126e07}{Global\+\_\+eqn\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em A vector that is used to map the global equations to their actual location in a distributed problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aa0e8800d56e68fcb63ec2315f503cab2}{Parameter\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the pointer to the parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ac85263fcd40fa913e4bc12c07f6b7343}{Nelement}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_ab948b0ac9640e85e8a17f993a764e000}{Distributed}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the problem is distributed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}{Block\+Pitch\+Fork\+Linear\+Solver}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1PitchForkHandler_a223dd55e02e905ce0ce98e98f50b7e57}{Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that is used to assemble the augmented system that defines a pitchfork (symmetry-\/breaking) bifurcation. The "{}standard"{} problem must be a function of a global parameter $ \lambda $ and a solution is $R(u,\lambda) = 0$, where $u$ are the unknowns in the problem. A pitchfork bifurcation may be specified by the augmented system of size $2N+2$. 
+
+\[ R(u,\lambda) + \sigma \psi = 0,\] \[ Jy = 0,\] \[ \langle u, \phi \rangle = 0, \] \[ \phi \cdot y = 1.\] In the abovem $J$ is the usual Jacobian matrix, $dR/du$ and $\phi$ is a constant vector that is chosen to ensure that the null vector, $y$, is not trivial. Here $\sigma $ is a slack variable that is used to enforce the constraint $ \langle u, \phi \rangle = 0 $ --- the inner product of the solution with the chosen symmetry vector is zero. At the bifurcation $ \sigma $ should be very close to zero. Note that this formulation means that any odd symmetry in the problem must be about zero. Moreover, we use the dot product of two vectors to calculate the inner product, rather than an integral over the domain and so the mesh must be symmetric in the appropriate directions. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00772}{772}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacb}\label{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacb} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{anonymous}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A little private enum to determine whether we are solving the block system or not. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Full\_augmented@{Full\_augmented}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Full\_augmented@{Full\_augmented}}}\Hypertarget{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacba0e7d0b0eb06a1f2d90a3ab2831bec36d}\label{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacba0e7d0b0eb06a1f2d90a3ab2831bec36d} 
+Full\+\_\+augmented&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block\_J@{Block\_J}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Block\_J@{Block\_J}}}\Hypertarget{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbae729c94eb567cd88e0b33dc29d9f8d5d}\label{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbae729c94eb567cd88e0b33dc29d9f8d5d} 
+Block\+\_\+J&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block\_augmented\_J@{Block\_augmented\_J}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Block\_augmented\_J@{Block\_augmented\_J}}}\Hypertarget{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbac8e196e66210e158988de0bfebcdf6a5}\label{classoomph_1_1PitchForkHandler_a51e85b70ec1c902015024b18bdb3dacbac8e196e66210e158988de0bfebcdf6a5} 
+Block\+\_\+augmented\+\_\+J&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00779}{779}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PitchForkHandler_a96e0343c261d087f5d67a49f68561d96}\label{classoomph_1_1PitchForkHandler_a96e0343c261d087f5d67a49f68561d96} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!PitchForkHandler@{PitchForkHandler}}
+\index{PitchForkHandler@{PitchForkHandler}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{PitchForkHandler()}{PitchForkHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{symmetry\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Constructor, initialise the systems. 
+
+Constructor\+: Initialise the \doxylink{classoomph_1_1PitchForkHandler}{Pitch\+Fork\+Handler} by setting intial guesses for Sigma, Y, specifying C and Psi and calculating count. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{2677}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00797}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00807}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00379}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::build\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{problem_8h_source_l00828}{oomph\+::\+Problem\+::distributed()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00832}{Global\+\_\+eqn\+\_\+number}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{problem_8h_source_l00580}{oomph\+::\+Problem\+::\+Halo\+\_\+scheme\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{problem_8h_source_l01704}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00838}{Nelement}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{problem_8cc_source_l00396}{oomph\+::\+Problem\+::setup\+\_\+dof\+\_\+halo\+\_\+scheme()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00323}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::sum\+\_\+all\+\_\+halo\+\_\+and\+\_\+haloed\+\_\+values()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a69c6b0b6aedd03d828d295531fd61820}\label{classoomph_1_1PitchForkHandler_a69c6b0b6aedd03d828d295531fd61820} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!````~PitchForkHandler@{\texorpdfstring{$\sim$}{\string~}PitchForkHandler}}
+\index{````~PitchForkHandler@{\texorpdfstring{$\sim$}{\string~}PitchForkHandler}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PitchForkHandler()}{\string~PitchForkHandler()}}
+{\footnotesize\ttfamily oomph\+::\+Pitch\+Fork\+Handler\+::\texorpdfstring{$\sim$}{\string~}\+Pitch\+Fork\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, return the problem to its original state, before the augmented system was added. 
+
+Destructor return the problem to its original (non-\/augmented) state. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{2897}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01486}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451}\label{classoomph_1_1PitchForkHandler_a3bd2172c28b5414bcb03566169d91451} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}}
+\index{bifurcation\_parameter\_pt@{bifurcation\_parameter\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{bifurcation\_parameter\_pt()}{bifurcation\_parameter\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::bifurcation\+\_\+parameter\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return a pointer to the bifurcation parameter in bifurcation tracking problems. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d36a4a2a8a64dab7fe2b}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00924}{924}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679}\label{classoomph_1_1PitchForkHandler_aadc4f0b5dfb82cf171b91432536d1679} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!bifurcation\_type@{bifurcation\_type}}
+\index{bifurcation\_type@{bifurcation\_type}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{bifurcation\_type()}{bifurcation\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Pitch\+Fork\+Handler\+::bifurcation\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Indicate that we are tracking a pitchfork bifurcation by returning 2. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4f6cee12006790c11dae}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00917}{917}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d}\label{classoomph_1_1PitchForkHandler_ab29e58e25bd5bebd836e30015f01ac8d} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+Pitch\+Fork\+Handler\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the global equation number of the local unknown. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559cde803d1ba2195b5290}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{2974}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191}\label{classoomph_1_1PitchForkHandler_aa16d6770f6d46b7db4101f417373b191} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_djacobian\_dparameter@{get\_djacobian\_dparameter}}
+\index{get\_djacobian\_dparameter@{get\_djacobian\_dparameter}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_djacobian\_dparameter()}{get\_djacobian\_dparameter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+djacobian\+\_\+dparameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dres\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{djac\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks. 
+
+Overload the derivative of the residuals and jacobian with respect to a parameter so that it breaks because it should not be required. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342806c167c5d53f014803}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03394}{3394}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541}\label{classoomph_1_1PitchForkHandler_a6510803afcbcfce1ae5b1c1c5d82a541} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
+\index{get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_dresiduals\_dparameter()}{get\_dresiduals\_dparameter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+dresiduals\+\_\+dparameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dres\+\_\+dparam }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the derivatives of the residuals with respect to a parameter to apply to the augmented system. 
+
+Get the derivatives of the residuals with respect to a parameter. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0ad82f98e694eecf270bb}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{3316}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01068}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l01033}{oomph\+::\+Generalised\+Element\+::get\+\_\+djacobian\+\_\+dparameter()}}, \mbox{\hyperlink{elements_8h_source_l01021}{oomph\+::\+Generalised\+Element\+::get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a}\label{classoomph_1_1PitchForkHandler_a9d5e1388fe0ede6834a249b98168b71a} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_eigenfunction@{get\_eigenfunction}}
+\index{get\_eigenfunction@{get\_eigenfunction}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_eigenfunction()}{get\_eigenfunction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+eigenfunction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenfunction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d0eb7ceb393e3ae9594f}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{3430}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f}\label{classoomph_1_1PitchForkHandler_a85e7dba2d21c9fe95a575a115cf3ee9f} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_hessian\_vector\_products@{get\_hessian\_vector\_products}}
+\index{get\_hessian\_vector\_products@{get\_hessian\_vector\_products}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_hessian\_vector\_products()}{get\_hessian\_vector\_products()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+hessian\+\_\+vector\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{Y,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{C,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Overload the hessian vector product function so that it breaks. 
+
+Overload the hessian vector product function so that it calls the underlying element\textquotesingle{}s hessian function. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d23522bb660c4c5207f03}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{3416}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{elements_8h_source_l01070}{oomph\+::\+Generalised\+Element\+::get\+\_\+hessian\+\_\+vector\+\_\+products()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4}\label{classoomph_1_1PitchForkHandler_aa6728813a099111bee2b6c79dec20fc4} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the elemental Jacobian matrix "{}d equation / d variable"{}. 
+
+ALICE\+:
+
+ALICE
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{3137}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01171}{oomph\+::\+Problem\+::actions\+\_\+after\+\_\+change\+\_\+in\+\_\+bifurcation\+\_\+parameter()}}, \mbox{\hyperlink{problem_8h_source_l01068}{oomph\+::\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00797}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00977}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{problem_8h_source_l01794}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c}\label{classoomph_1_1PitchForkHandler_a461b24284da88b9489d720e484a6925c} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the residuals. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{3034}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00821}{C}}, \mbox{\hyperlink{assembly__handler_8h_source_l00828}{Count}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00977}{oomph\+::\+Generalised\+Element\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{elements_8h_source_l00967}{oomph\+::\+Generalised\+Element\+::get\+\_\+residuals()}}, \mbox{\hyperlink{problem_8h_source_l01794}{oomph\+::\+Problem\+::global\+\_\+dof\+\_\+pt()}}, \mbox{\hyperlink{double__vector__with__halo_8h_source_l00221}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::global\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00838}{Nelement}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00817}{Psi}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ac1a4bbb1415a009e9f176f16263fcb3e}\label{classoomph_1_1PitchForkHandler_ac1a4bbb1415a009e9f176f16263fcb3e} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!global\_eqn\_number@{global\_eqn\_number}}
+\index{global\_eqn\_number@{global\_eqn\_number}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{global\_eqn\_number()}{global\_eqn\_number()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pitch\+Fork\+Handler\+::global\+\_\+eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Function that is used to return map the global equations using the simplistic numbering scheme into the actual distributed scheme. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00848}{848}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00832}{Global\+\_\+eqn\+\_\+number}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ae066fa45e9f1bf10601286ca2d083a42}\label{classoomph_1_1PitchForkHandler_ae066fa45e9f1bf10601286ca2d083a42} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!ndof@{ndof}}
+\index{ndof@{ndof}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pitch\+Fork\+Handler\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the number of elemental degrees of freedom. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{2944}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47}\label{classoomph_1_1PitchForkHandler_ad0b0920383bcbdab5df1f43db5affa47} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_augmented\_block\_system@{solve\_augmented\_block\_system}}
+\index{solve\_augmented\_block\_system@{solve\_augmented\_block\_system}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_augmented\_block\_system()}{solve\_augmented\_block\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set to solve the augmented block system. 
+
+Set to solve the augmented-\/by-\/one block system. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{3476}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00783}{Block\+\_\+augmented\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00801}{Ndof}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802}\label{classoomph_1_1PitchForkHandler_ad193c3d67741edd60b023c94e42c8802} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_block\_system@{solve\_block\_system}}
+\index{solve\_block\_system@{solve\_block\_system}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_block\_system()}{solve\_block\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+block\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set to solve the block system. 
+
+Set to solve the block system. The boolean flag is used to specify whether the block decomposition should use exactly the same jacobian as the original system. 
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{3512}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, and \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a27325616f4342d159f6f5e7c82ccdf98}\label{classoomph_1_1PitchForkHandler_a27325616f4342d159f6f5e7c82ccdf98} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!solve\_full\_system@{solve\_full\_system}}
+\index{solve\_full\_system@{solve\_full\_system}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{solve\_full\_system()}{solve\_full\_system()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Solve non-\/block system. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{3535}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{assembly__handler_8h_source_l00807}{Augmented\+\_\+dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00782}{Block\+\_\+J}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00804}{Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00781}{Full\+\_\+augmented}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00193}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{assembly__handler_8h_source_l00791}{Solve\+\_\+which\+\_\+system}}, \mbox{\hyperlink{problem_8h_source_l00670}{oomph\+::\+Problem\+::\+Sparse\+\_\+assemble\+\_\+with\+\_\+arrays\+\_\+previous\+\_\+allocation}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478}\label{classoomph_1_1PitchForkHandler_a23a67d7212e25108e40cf9b4606f4478} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!synchronise@{synchronise}}
+\index{synchronise@{synchronise}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{synchronise()}{synchronise()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Pitch\+Fork\+Handler\+::synchronise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function that is used to perform any synchronisation required during the solution. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d997dd1a78ed26c2b99fce}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{3448}} of file \mbox{\hyperlink{assembly__handler_8cc_source}{assembly\+\_\+handler.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00842}{Distributed}}, \mbox{\hyperlink{assembly__handler_8h_source_l00835}{Parameter\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00794}{Problem\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8h_source_l00811}{Sigma}}, \mbox{\hyperlink{double__vector__with__halo_8cc_source_l00269}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries\+::synchronise()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00814}{Y}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classoomph_1_1PitchForkHandler_a223dd55e02e905ce0ce98e98f50b7e57}\label{classoomph_1_1PitchForkHandler_a223dd55e02e905ce0ce98e98f50b7e57} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!AugmentedBlockPitchForkLinearSolver@{AugmentedBlockPitchForkLinearSolver}}
+\index{AugmentedBlockPitchForkLinearSolver@{AugmentedBlockPitchForkLinearSolver}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{AugmentedBlockPitchForkLinearSolver}{AugmentedBlockPitchForkLinearSolver}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{friend}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1AugmentedBlockPitchForkLinearSolver}{Augmented\+Block\+Pitch\+Fork\+Linear\+Solver}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00775}{775}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45}\label{classoomph_1_1PitchForkHandler_aba62ac8cc057be07657972adc4a78b45} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!BlockPitchForkLinearSolver@{BlockPitchForkLinearSolver}}
+\index{BlockPitchForkLinearSolver@{BlockPitchForkLinearSolver}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{BlockPitchForkLinearSolver}{BlockPitchForkLinearSolver}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{friend}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1BlockPitchForkLinearSolver}{Block\+Pitch\+Fork\+Linear\+Solver}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00774}{774}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1PitchForkHandler_a40358960131e00efd6bd0febd397a3ef}\label{classoomph_1_1PitchForkHandler_a40358960131e00efd6bd0febd397a3ef} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Assembly\_handler\_pt@{Assembly\_handler\_pt}}
+\index{Assembly\_handler\_pt@{Assembly\_handler\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Assembly\_handler\_pt}{Assembly\_handler\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}}\texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::\+Assembly\+\_\+handler\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the underlying (original) assembly handler. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00797}{797}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f}\label{classoomph_1_1PitchForkHandler_af6346c1dc77f3d4fb3dc8950afd91e0f} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Augmented\_dof\_distribution\_pt@{Augmented\_dof\_distribution\_pt}}
+\index{Augmented\_dof\_distribution\_pt@{Augmented\_dof\_distribution\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Augmented\_dof\_distribution\_pt}{Augmented\_dof\_distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::\+Augmented\+\_\+dof\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The augmented distribution. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00807}{807}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599}\label{classoomph_1_1PitchForkHandler_a88f5df169c44b02f4ba563cf42241599} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!C@{C}}
+\index{C@{C}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} oomph\+::\+Pitch\+Fork\+Handler\+::C\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A constant vector used to ensure that the null vector is not trivial. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00821}{821}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ad3f5fc1d7ee4918c9734e59e0611a62c}\label{classoomph_1_1PitchForkHandler_ad3f5fc1d7ee4918c9734e59e0611a62c} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Count@{Count}}
+\index{Count@{Count}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Count\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A vector that is used to determine how many elements contribute to a particular equation. It is used to ensure that the global system is correctly formulated. This should really be an integer, but its double so that the distribution can be used. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00828}{828}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ab948b0ac9640e85e8a17f993a764e000}\label{classoomph_1_1PitchForkHandler_ab948b0ac9640e85e8a17f993a764e000} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Distributed@{Distributed}}
+\index{Distributed@{Distributed}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Distributed}{Distributed}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Distributed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to indicate whether the problem is distributed. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00842}{842}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a075f47b5f8941d25796f96d258a1752e}\label{classoomph_1_1PitchForkHandler_a075f47b5f8941d25796f96d258a1752e} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Dof\_distribution\_pt@{Dof\_distribution\_pt}}
+\index{Dof\_distribution\_pt@{Dof\_distribution\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Dof\_distribution\_pt}{Dof\_distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::\+Dof\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store the original dof distribution. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00804}{804}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{\texorpdfstring{$\sim$}{\string~}\+Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ac7010a8c64237d76cb0f23bfad126e07}\label{classoomph_1_1PitchForkHandler_ac7010a8c64237d76cb0f23bfad126e07} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Global\_eqn\_number@{Global\_eqn\_number}}
+\index{Global\_eqn\_number@{Global\_eqn\_number}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Global\_eqn\_number}{Global\_eqn\_number}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}$>$ oomph\+::\+Pitch\+Fork\+Handler\+::\+Global\+\_\+eqn\+\_\+number\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A vector that is used to map the global equations to their actual location in a distributed problem. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00832}{832}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00848}{global\+\_\+eqn\+\_\+number()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359accfbec751}\label{classoomph_1_1PitchForkHandler_a9314a176be55e7e9c5a359accfbec751} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Ndof@{Ndof}}
+\index{Ndof@{Ndof}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Ndof}{Ndof}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Ndof\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store the number of degrees of freedom in the non-\/augmented problem. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00801}{801}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_ac85263fcd40fa913e4bc12c07f6b7343}\label{classoomph_1_1PitchForkHandler_ac85263fcd40fa913e4bc12c07f6b7343} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Nelement@{Nelement}}
+\index{Nelement@{Nelement}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Nelement}{Nelement}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Nelement\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00838}{838}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aa0e8800d56e68fcb63ec2315f503cab2}\label{classoomph_1_1PitchForkHandler_aa0e8800d56e68fcb63ec2315f503cab2} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Parameter\_pt@{Parameter\_pt}}
+\index{Parameter\_pt@{Parameter\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Parameter\_pt}{Parameter\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::\+Parameter\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the pointer to the parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00835}{835}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00924}{bifurcation\+\_\+parameter\+\_\+pt()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a196adc8e79a66292d2df9bd9093f8f73}\label{classoomph_1_1PitchForkHandler_a196adc8e79a66292d2df9bd9093f8f73} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} oomph\+::\+Pitch\+Fork\+Handler\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00794}{794}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02897}{\texorpdfstring{$\sim$}{\string~}\+Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1}\label{classoomph_1_1PitchForkHandler_aa04d0f340d919d4da3f9199eb76649b1} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Psi@{Psi}}
+\index{Psi@{Psi}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Psi}{Psi}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Psi\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A constant vector that is specifies the symmetry being broken. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00817}{817}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817}\label{classoomph_1_1PitchForkHandler_a56a173cbdf59e73728c9c1b8c5221817} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Sigma@{Sigma}}
+\index{Sigma@{Sigma}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Sigma}{Sigma}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Sigma\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A slack variable used to specify the amount of antisymmetry in the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00811}{811}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a614de1eea213de58687ed161fc7c53ae}\label{classoomph_1_1PitchForkHandler_a614de1eea213de58687ed161fc7c53ae} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Solve\_which\_system@{Solve\_which\_system}}
+\index{Solve\_which\_system@{Solve\_which\_system}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Solve\_which\_system}{Solve\_which\_system}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Pitch\+Fork\+Handler\+::\+Solve\+\_\+which\+\_\+system\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Integer flag to indicate which system should be assembled. There are three possibilities. The full augmented system (0), the non-\/augmented jacobian system (1), a system in which the jacobian is augmented by 1 row and column to ensure that it is non-\/singular (2). See the enum above. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00791}{791}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l02974}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03137}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02944}{ndof()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03476}{solve\+\_\+augmented\+\_\+block\+\_\+system()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03512}{solve\+\_\+block\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}.
+
+\Hypertarget{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed}\label{classoomph_1_1PitchForkHandler_a289ce15584734b8ea50cd9a7f7f430ed} 
+\index{oomph::PitchForkHandler@{oomph::PitchForkHandler}!Y@{Y}}
+\index{Y@{Y}!oomph::PitchForkHandler@{oomph::PitchForkHandler}}
+\doxysubsubsection{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} oomph\+::\+Pitch\+Fork\+Handler\+::Y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the null vector. 
+
+
+
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00814}{814}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{assembly__handler_8cc_source_l03316}{get\+\_\+dresiduals\+\_\+dparameter()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03430}{get\+\_\+eigenfunction()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03416}{get\+\_\+hessian\+\_\+vector\+\_\+products()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03034}{get\+\_\+residuals()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l02677}{Pitch\+Fork\+Handler()}}, \mbox{\hyperlink{assembly__handler_8cc_source_l03535}{solve\+\_\+full\+\_\+system()}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l03448}{synchronise()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{assembly__handler_8h}{assembly\+\_\+handler.\+h}}\item 
+\mbox{\hyperlink{assembly__handler_8cc}{assembly\+\_\+handler.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::QuarterCircleSectorDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1QuarterCircleSectorDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::QuarterCircleSectorDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Circular sector as domain. Domain is bounded by curved boundary which is represented by a GeomObject. Domain is parametrised by three macro elements.  
+ <a href="classoomph_1_1QuarterCircleSectorDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::QuarterCircleSectorDomain:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1QuarterCircleSectorDomain.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6cffab57f87c9f4ab01744647240bb1e" id="r_a6cffab57f87c9f4ab01744647240bb1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">typedef</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">BLSquashFctPt</a>) (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>)</td></tr>
+<tr class="memdesc:a6cffab57f87c9f4ab01744647240bb1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value.  <br /></td></tr>
+<tr class="separator:a6cffab57f87c9f4ab01744647240bb1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:accee19bdd94e0e3fe0d7c347ede685de" id="r_accee19bdd94e0e3fe0d7c347ede685de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#accee19bdd94e0e3fe0d7c347ede685de">QuarterCircleSectorDomain</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">boundary_geom_object_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi_lo</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">fract_mid</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">xi_hi</a>)</td></tr>
+<tr class="memdesc:accee19bdd94e0e3fe0d7c347ede685de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass boundary object and start and end coordinates and fraction along boundary object where outer ring is divided.  <br /></td></tr>
+<tr class="separator:accee19bdd94e0e3fe0d7c347ede685de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14fbdfa04b3770f97aea05a9f858e71b" id="r_a14fbdfa04b3770f97aea05a9f858e71b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a14fbdfa04b3770f97aea05a9f858e71b">QuarterCircleSectorDomain</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> &amp;)=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">delete</a></td></tr>
+<tr class="memdesc:a14fbdfa04b3770f97aea05a9f858e71b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a14fbdfa04b3770f97aea05a9f858e71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76c032d372019ad5104a0a36fba12512" id="r_a76c032d372019ad5104a0a36fba12512"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a76c032d372019ad5104a0a36fba12512">operator=</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> &amp;)=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">delete</a></td></tr>
+<tr class="memdesc:a76c032d372019ad5104a0a36fba12512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a76c032d372019ad5104a0a36fba12512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4997af819b532c8d8588123785950a" id="r_aea4997af819b532c8d8588123785950a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#aea4997af819b532c8d8588123785950a">~QuarterCircleSectorDomain</a> ()</td></tr>
+<tr class="memdesc:aea4997af819b532c8d8588123785950a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty; cleanup done in base class.  <br /></td></tr>
+<tr class="separator:aea4997af819b532c8d8588123785950a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa016f72247c5a8446594f7c7401103f2" id="r_aa016f72247c5a8446594f7c7401103f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">BLSquashFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#aa016f72247c5a8446594f7c7401103f2">bl_squash_fct_pt</a> ()</td></tr>
+<tr class="memdesc:aa016f72247c5a8446594f7c7401103f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value.  <br /></td></tr>
+<tr class="separator:aa016f72247c5a8446594f7c7401103f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b66f846233b3cf976ed63d9bf54f0c7" id="r_a5b66f846233b3cf976ed63d9bf54f0c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a5b66f846233b3cf976ed63d9bf54f0c7">s_squashed</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>)</td></tr>
+<tr class="memdesc:a5b66f846233b3cf976ed63d9bf54f0c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value.  <br /></td></tr>
+<tr class="separator:a5b66f846233b3cf976ed63d9bf54f0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9faddf9d13e0a7633f732bac1ddda80b" id="r_a9faddf9d13e0a7633f732bac1ddda80b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a9faddf9d13e0a7633f732bac1ddda80b">macro_element_boundary</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">i_macro</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">i_direct</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a9faddf9d13e0a7633f732bac1ddda80b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector representation of the i_macro-th macro element boundary i_direct (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): f(s). Note that the local coordinate <b>s</b> is a 1D Vector rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the Domain base class.  <br /></td></tr>
+<tr class="separator:a9faddf9d13e0a7633f732bac1ddda80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af1520e712b46c8e1b0f098596fa63101" id="r_af1520e712b46c8e1b0f098596fa63101"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#af1520e712b46c8e1b0f098596fa63101">r_top_left_N</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:af1520e712b46c8e1b0f098596fa63101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:af1520e712b46c8e1b0f098596fa63101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f4970adc3a93392ef1a57f19df96a1" id="r_a84f4970adc3a93392ef1a57f19df96a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a84f4970adc3a93392ef1a57f19df96a1">r_top_left_W</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a84f4970adc3a93392ef1a57f19df96a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a84f4970adc3a93392ef1a57f19df96a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb74af9c782bd0a0a8d3ccfd708af55" id="r_a0bb74af9c782bd0a0a8d3ccfd708af55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a0bb74af9c782bd0a0a8d3ccfd708af55">r_top_left_S</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a0bb74af9c782bd0a0a8d3ccfd708af55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a0bb74af9c782bd0a0a8d3ccfd708af55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a951bc38c7e96a40f33c60b3ccee820bf" id="r_a951bc38c7e96a40f33c60b3ccee820bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a951bc38c7e96a40f33c60b3ccee820bf">r_top_left_E</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a951bc38c7e96a40f33c60b3ccee820bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a951bc38c7e96a40f33c60b3ccee820bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad937b0da664b5c01063e7f8de6427fce" id="r_ad937b0da664b5c01063e7f8de6427fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#ad937b0da664b5c01063e7f8de6427fce">r_bot_right_N</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:ad937b0da664b5c01063e7f8de6427fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:ad937b0da664b5c01063e7f8de6427fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ba295aaeff2833644691978deac247" id="r_a85ba295aaeff2833644691978deac247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a85ba295aaeff2833644691978deac247">r_bot_right_W</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a85ba295aaeff2833644691978deac247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a85ba295aaeff2833644691978deac247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552f9bfc6fd451669f44ee02c8bb0d38" id="r_a552f9bfc6fd451669f44ee02c8bb0d38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a552f9bfc6fd451669f44ee02c8bb0d38">r_bot_right_S</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a552f9bfc6fd451669f44ee02c8bb0d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a552f9bfc6fd451669f44ee02c8bb0d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb05f2e719d81f167fc0f608e80c5696" id="r_abb05f2e719d81f167fc0f608e80c5696"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#abb05f2e719d81f167fc0f608e80c5696">r_bot_right_E</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:abb05f2e719d81f167fc0f608e80c5696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:abb05f2e719d81f167fc0f608e80c5696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb12e9b1d2e17f8bd5c3d6691be3b1d" id="r_a1cb12e9b1d2e17f8bd5c3d6691be3b1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a1cb12e9b1d2e17f8bd5c3d6691be3b1d">r_centr_N</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a1cb12e9b1d2e17f8bd5c3d6691be3b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a1cb12e9b1d2e17f8bd5c3d6691be3b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4558d37a4f9bb3f9d78b6878cb77a49" id="r_ae4558d37a4f9bb3f9d78b6878cb77a49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#ae4558d37a4f9bb3f9d78b6878cb77a49">r_centr_E</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:ae4558d37a4f9bb3f9d78b6878cb77a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:ae4558d37a4f9bb3f9d78b6878cb77a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa17ff1d6529000f8309005396966830" id="r_aaa17ff1d6529000f8309005396966830"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#aaa17ff1d6529000f8309005396966830">r_centr_S</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:aaa17ff1d6529000f8309005396966830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:aaa17ff1d6529000f8309005396966830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453fc6f043f57031c1347065d521a1c3" id="r_a453fc6f043f57031c1347065d521a1c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a453fc6f043f57031c1347065d521a1c3">r_centr_W</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">zeta</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">f</a>)</td></tr>
+<tr class="memdesc:a453fc6f043f57031c1347065d521a1c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>.  <br /></td></tr>
+<tr class="separator:a453fc6f043f57031c1347065d521a1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:adce1f0c6cf5405d6f8e9e6e0390d8c68" id="r_adce1f0c6cf5405d6f8e9e6e0390d8c68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">static</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#adce1f0c6cf5405d6f8e9e6e0390d8c68">default_BL_squash_fct</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>)</td></tr>
+<tr class="memdesc:adce1f0c6cf5405d6f8e9e6e0390d8c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value: Identity.  <br /></td></tr>
+<tr class="separator:adce1f0c6cf5405d6f8e9e6e0390d8c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afed5ccc21ccf6c6cd1dca65d58a5b708" id="r_afed5ccc21ccf6c6cd1dca65d58a5b708"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#afed5ccc21ccf6c6cd1dca65d58a5b708">Xi_lo</a></td></tr>
+<tr class="memdesc:afed5ccc21ccf6c6cd1dca65d58a5b708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower limit for the (1D) coordinates along the wall.  <br /></td></tr>
+<tr class="separator:afed5ccc21ccf6c6cd1dca65d58a5b708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade78897c44c26af82ac90052f799796c" id="r_ade78897c44c26af82ac90052f799796c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#ade78897c44c26af82ac90052f799796c">Fract_mid</a></td></tr>
+<tr class="memdesc:ade78897c44c26af82ac90052f799796c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fraction along wall where outer ring is to be divided.  <br /></td></tr>
+<tr class="separator:ade78897c44c26af82ac90052f799796c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0cc67782144fe066dd0d04ac9d79dd" id="r_aba0cc67782144fe066dd0d04ac9d79dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#aba0cc67782144fe066dd0d04ac9d79dd">Xi_hi</a></td></tr>
+<tr class="memdesc:aba0cc67782144fe066dd0d04ac9d79dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper limit for the (1D) coordinates along the wall.  <br /></td></tr>
+<tr class="separator:aba0cc67782144fe066dd0d04ac9d79dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59722c43d41fef0bc3df4cf6571930a8" id="r_a59722c43d41fef0bc3df4cf6571930a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a59722c43d41fef0bc3df4cf6571930a8">Wall_pt</a></td></tr>
+<tr class="memdesc:a59722c43d41fef0bc3df4cf6571930a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to geometric object that represents the curved wall.  <br /></td></tr>
+<tr class="separator:a59722c43d41fef0bc3df4cf6571930a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9b74ffcade9fdc1eeba26b4acced7a8" id="r_ae9b74ffcade9fdc1eeba26b4acced7a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">BLSquashFctPt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#ae9b74ffcade9fdc1eeba26b4acced7a8">BL_squash_fct_pt</a></td></tr>
+<tr class="memdesc:ae9b74ffcade9fdc1eeba26b4acced7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value.  <br /></td></tr>
+<tr class="separator:ae9b74ffcade9fdc1eeba26b4acced7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Circular sector as domain. Domain is bounded by curved boundary which is represented by a GeomObject. Domain is parametrised by three macro elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00042">42</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a6cffab57f87c9f4ab01744647240bb1e" name="a6cffab57f87c9f4ab01744647240bb1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cffab57f87c9f4ab01744647240bb1e">&#9670;&#160;</a></span>BLSquashFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">typedef</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a>(* oomph::QuarterCircleSectorDomain::BLSquashFctPt) (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">s</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Typedef for function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00083">83</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="accee19bdd94e0e3fe0d7c347ede685de" name="accee19bdd94e0e3fe0d7c347ede685de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accee19bdd94e0e3fe0d7c347ede685de">&#9670;&#160;</a></span>QuarterCircleSectorDomain() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterCircleSectorDomain::QuarterCircleSectorDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>boundary_geom_object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi_lo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>fract_mid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>xi_hi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass boundary object and start and end coordinates and fraction along boundary object where outer ring is divided. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00047">47</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="a14fbdfa04b3770f97aea05a9f858e71b" name="a14fbdfa04b3770f97aea05a9f858e71b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14fbdfa04b3770f97aea05a9f858e71b">&#9670;&#160;</a></span>QuarterCircleSectorDomain() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterCircleSectorDomain::QuarterCircleSectorDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="aea4997af819b532c8d8588123785950a" name="aea4997af819b532c8d8588123785950a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea4997af819b532c8d8588123785950a">&#9670;&#160;</a></span>~QuarterCircleSectorDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::QuarterCircleSectorDomain::~QuarterCircleSectorDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: empty; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00077">77</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa016f72247c5a8446594f7c7401103f2" name="aa016f72247c5a8446594f7c7401103f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa016f72247c5a8446594f7c7401103f2">&#9670;&#160;</a></span>bl_squash_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">BLSquashFctPt</a> &amp; oomph::QuarterCircleSectorDomain::bl_squash_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00089">89</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00132">BL_squash_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__mesh_8h_source.html#l00117">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;::bl_squash_fct_pt()</a>.</p>
+
+</div>
+</div>
+<a id="adce1f0c6cf5405d6f8e9e6e0390d8c68" name="adce1f0c6cf5405d6f8e9e6e0390d8c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce1f0c6cf5405d6f8e9e6e0390d8c68">&#9670;&#160;</a></span>default_BL_squash_fct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">static</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterCircleSectorDomain::default_BL_squash_fct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value: Identity. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00138">138</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+</div>
+</div>
+<a id="a9faddf9d13e0a7633f732bac1ddda80b" name="a9faddf9d13e0a7633f732bac1ddda80b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9faddf9d13e0a7633f732bac1ddda80b">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_macro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i_direct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vector representation of the i_macro-th macro element boundary i_direct (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): f(s). Note that the local coordinate <b>s</b> is a 1D Vector rather than a scalar &ndash; this is unavoidable because this function implements the pure virtual function in the Domain base class. </p>
+<p>Vector representation of the imacro-th macro element boundary idirect (N/S/W/E) at time level t (t=0: present; t&gt;0: previous): f(s) </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">214</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">r_bot_right_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00440">r_bot_right_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">r_bot_right_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">r_bot_right_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00518">r_centr_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00508">r_centr_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00528">r_centr_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00546">r_centr_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">r_top_left_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">r_top_left_S()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">r_top_left_W()</a>.</p>
+
+</div>
+</div>
+<a id="a76c032d372019ad5104a0a36fba12512" name="a76c032d372019ad5104a0a36fba12512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c032d372019ad5104a0a36fba12512">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html">QuarterCircleSectorDomain</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="abb05f2e719d81f167fc0f608e80c5696" name="abb05f2e719d81f167fc0f608e80c5696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb05f2e719d81f167fc0f608e80c5696">&#9670;&#160;</a></span>r_bot_right_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_bot_right_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Eastern edge of bottom right macro element. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">493</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00120">Fract_mid</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ad937b0da664b5c01063e7f8de6427fce" name="ad937b0da664b5c01063e7f8de6427fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad937b0da664b5c01063e7f8de6427fce">&#9670;&#160;</a></span>r_bot_right_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_bot_right_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Northern edge of bottom right macro element. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00440">440</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a552f9bfc6fd451669f44ee02c8bb0d38" name="a552f9bfc6fd451669f44ee02c8bb0d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552f9bfc6fd451669f44ee02c8bb0d38">&#9670;&#160;</a></span>r_bot_right_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_bot_right_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Southern edge of bottom right macro element. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">475</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00097">s_squashed()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a85ba295aaeff2833644691978deac247" name="a85ba295aaeff2833644691978deac247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85ba295aaeff2833644691978deac247">&#9670;&#160;</a></span>r_bot_right_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_bot_right_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of bottom right macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Western edge of bottom right macro element. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">450</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00518">r_centr_E()</a>.</p>
+
+</div>
+</div>
+<a id="ae4558d37a4f9bb3f9d78b6878cb77a49" name="ae4558d37a4f9bb3f9d78b6878cb77a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4558d37a4f9bb3f9d78b6878cb77a49">&#9670;&#160;</a></span>r_centr_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_centr_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Eastern edge of central box. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00518">518</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">r_bot_right_W()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1cb12e9b1d2e17f8bd5c3d6691be3b1d" name="a1cb12e9b1d2e17f8bd5c3d6691be3b1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cb12e9b1d2e17f8bd5c3d6691be3b1d">&#9670;&#160;</a></span>r_centr_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_centr_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Northern edge of central box. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00508">508</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">r_top_left_S()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aaa17ff1d6529000f8309005396966830" name="aaa17ff1d6529000f8309005396966830"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa17ff1d6529000f8309005396966830">&#9670;&#160;</a></span>r_centr_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_centr_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Southern edge of central box. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00528">528</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a453fc6f043f57031c1347065d521a1c3" name="a453fc6f043f57031c1347065d521a1c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453fc6f043f57031c1347065d521a1c3">&#9670;&#160;</a></span>r_centr_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_centr_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of central box macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Western edge of central box. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00546">546</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a951bc38c7e96a40f33c60b3ccee820bf" name="a951bc38c7e96a40f33c60b3ccee820bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a951bc38c7e96a40f33c60b3ccee820bf">&#9670;&#160;</a></span>r_top_left_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_top_left_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Eastern edge of top left macro element <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">407</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00120">Fract_mid</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00097">s_squashed()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00440">r_bot_right_N()</a>.</p>
+
+</div>
+</div>
+<a id="af1520e712b46c8e1b0f098596fa63101" name="af1520e712b46c8e1b0f098596fa63101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1520e712b46c8e1b0f098596fa63101">&#9670;&#160;</a></span>r_top_left_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_top_left_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Northern edge of top left macro element <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">348</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00120">Fract_mid</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">Xi_lo</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a0bb74af9c782bd0a0a8d3ccfd708af55" name="a0bb74af9c782bd0a0a8d3ccfd708af55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb74af9c782bd0a0a8d3ccfd708af55">&#9670;&#160;</a></span>r_top_left_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_top_left_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Southern edge of top left macro element <img class="formulaInl" alt="$ s \in [-1,1] $" src="form_3.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">382</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00508">r_centr_N()</a>.</p>
+
+</div>
+</div>
+<a id="a84f4970adc3a93392ef1a57f19df96a1" name="a84f4970adc3a93392ef1a57f19df96a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f4970adc3a93392ef1a57f19df96a1">&#9670;&#160;</a></span>r_top_left_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> oomph::QuarterCircleSectorDomain::r_top_left_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boundary of top left macro element zeta <img class="formulaInl" alt="$ \in [-1,1] $" src="form_5.png" width="45" height="14"/>. </p>
+<p>Western edge of top left macro element <img class="formulaInl" alt="$s \in [-1,1] $" src="form_13.png" width="55" height="14"/>. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">363</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00097">s_squashed()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">Wall_pt</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">Xi_hi</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00214">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a5b66f846233b3cf976ed63d9bf54f0c7" name="a5b66f846233b3cf976ed63d9bf54f0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b66f846233b3cf976ed63d9bf54f0c7">&#9670;&#160;</a></span>s_squashed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterCircleSectorDomain::s_squashed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00097">97</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00132">BL_squash_fct_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">r_bot_right_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">r_top_left_W()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae9b74ffcade9fdc1eeba26b4acced7a8" name="ae9b74ffcade9fdc1eeba26b4acced7a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b74ffcade9fdc1eeba26b4acced7a8">&#9670;&#160;</a></span>BL_squash_fct_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#a6cffab57f87c9f4ab01744647240bb1e">BLSquashFctPt</a> oomph::QuarterCircleSectorDomain::BL_squash_fct_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00132">132</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00089">bl_squash_fct_pt()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00097">s_squashed()</a>.</p>
+
+</div>
+</div>
+<a id="ade78897c44c26af82ac90052f799796c" name="ade78897c44c26af82ac90052f799796c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade78897c44c26af82ac90052f799796c">&#9670;&#160;</a></span>Fract_mid</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterCircleSectorDomain::Fract_mid</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fraction along wall where outer ring is to be divided. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00120">120</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">r_bot_right_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">r_top_left_N()</a>.</p>
+
+</div>
+</div>
+<a id="a59722c43d41fef0bc3df4cf6571930a8" name="a59722c43d41fef0bc3df4cf6571930a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59722c43d41fef0bc3df4cf6571930a8">&#9670;&#160;</a></span>Wall_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">GeomObject</a>* oomph::QuarterCircleSectorDomain::Wall_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to geometric object that represents the curved wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00126">126</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">r_bot_right_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">r_bot_right_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">r_bot_right_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00528">r_centr_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00546">r_centr_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">r_top_left_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">r_top_left_S()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">r_top_left_W()</a>.</p>
+
+</div>
+</div>
+<a id="aba0cc67782144fe066dd0d04ac9d79dd" name="aba0cc67782144fe066dd0d04ac9d79dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba0cc67782144fe066dd0d04ac9d79dd">&#9670;&#160;</a></span>Xi_hi</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterCircleSectorDomain::Xi_hi</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Upper limit for the (1D) coordinates along the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00123">123</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">r_bot_right_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">r_bot_right_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00546">r_centr_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">r_top_left_N()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00382">r_top_left_S()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00363">r_top_left_W()</a>.</p>
+
+</div>
+</div>
+<a id="afed5ccc21ccf6c6cd1dca65d58a5b708" name="afed5ccc21ccf6c6cd1dca65d58a5b708"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed5ccc21ccf6c6cd1dca65d58a5b708">&#9670;&#160;</a></span>Xi_lo</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> oomph::QuarterCircleSectorDomain::Xi_lo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lower limit for the (1D) coordinates along the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00117">117</a> of file <a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00493">r_bot_right_E()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00475">r_bot_right_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00450">r_bot_right_W()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00528">r_centr_S()</a>, <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00407">r_top_left_E()</a>, and <a class="el" href="quarter__circle__sector__domain_8h_source.html#l00348">r_top_left_N()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="quarter__circle__sector__domain_8h_source.html">quarter_circle_sector_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

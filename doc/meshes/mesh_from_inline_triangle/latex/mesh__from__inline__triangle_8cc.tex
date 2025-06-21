@@ -1,0 +1,51 @@
+\doxysection{mesh\+\_\+from\+\_\+inline\+\_\+triangle.\+cc File Reference}
+\hypertarget{mesh__from__inline__triangle_8cc}{}\label{mesh__from__inline__triangle_8cc}\index{mesh\_from\_inline\_triangle.cc@{mesh\_from\_inline\_triangle.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classUnstructuredPoissonProblem}{Unstructured\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Class definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with "{}sharp step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a5cd8441c6e87d4bc153697eff13513dd}{Tanh\+Soln\+For\+Poisson\+::zero}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Zero function -- used to compute norm of the computed solution by computing the norm of the error when compared against this. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code for demo of inline triangle mesh generation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}} =5.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of "{}step"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle Phi of "{}step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{mesh\_from\_inline\_triangle.cc@{mesh\_from\_inline\_triangle.cc}!main@{main}}
+\index{main@{main}!mesh\_from\_inline\_triangle.cc@{mesh\_from\_inline\_triangle.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for demo of inline triangle mesh generation. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__inline__triangle_8cc_source_l00595}{595}} of file \mbox{\hyperlink{mesh__from__inline__triangle_8cc_source}{mesh\+\_\+from\+\_\+inline\+\_\+triangle.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh__from__inline__triangle_8cc_source_l00536}{Unstructured\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{mesh__from__inline__triangle_8cc_source_l00052}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}}.
+

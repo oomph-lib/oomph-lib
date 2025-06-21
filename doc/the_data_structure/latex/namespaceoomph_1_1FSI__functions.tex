@@ -1,0 +1,173 @@
+\doxysection{oomph\+::FSI\+\_\+functions Namespace Reference}
+\hypertarget{namespaceoomph_1_1FSI__functions}{}\label{namespaceoomph_1_1FSI__functions}\index{oomph::FSI\_functions@{oomph::FSI\_functions}}
+
+
+Namespace for "{}global"{} FSI functions.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \doxylink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FLUID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+FLUID$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27}{setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+in\+\_\+fluid\+\_\+mesh}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}=0)
+\begin{DoxyCompactList}\small\item\em Set up the information that the FSIWall\+Elements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWall\+Elements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "{}back"{} of the FSIWall\+Elements. This routine uses the procedures in the \doxylink{namespaceoomph_1_1Multi__domain__functions}{Multi\+\_\+domain\+\_\+functions} namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FLUID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+FLUID$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598}{setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+in\+\_\+fluid\+\_\+mesh}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face}}=0)
+\begin{DoxyCompactList}\small\item\em Set up the information that the FSIWall\+Elements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWall\+Elements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "{}back"{} of the FSIWall\+Elements. This routine uses the procedures in the \doxylink{namespaceoomph_1_1Multi__domain__functions}{Multi\+\_\+domain\+\_\+functions} namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{SOLID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+SOLID$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b}{setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{b\+\_\+solid\+\_\+fsi}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the FSI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{SOLID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+SOLID$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60}{setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{b\+\_\+solid\+\_\+fsi}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the FSI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NODE}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe}{doc\+\_\+fsi}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{wall\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc FSI\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{Strouhal\+\_\+for\+\_\+no\+\_\+slip}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for "{}global"{} FSI functions. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}\label{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!apply\_no\_slip\_on\_moving\_wall@{apply\_no\_slip\_on\_moving\_wall}}
+\index{apply\_no\_slip\_on\_moving\_wall@{apply\_no\_slip\_on\_moving\_wall}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{apply\_no\_slip\_on\_moving\_wall()}{apply\_no\_slip\_on\_moving\_wall()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{node\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \doxylink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. 
+
+Apply no-\/slip condition for N.\+St. on a moving wall node, u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \doxylink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. 
+
+Definition at line \mbox{\hyperlink{fsi_8cc_source_l00048}{48}} of file \mbox{\hyperlink{fsi_8cc_source}{fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{nodes_8cc_source_l02659}{oomph\+::\+Node\+::dposition\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, and \mbox{\hyperlink{fsi_8cc_source_l00039}{Strouhal\+\_\+for\+\_\+no\+\_\+slip}}.
+
+\Hypertarget{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe}\label{namespaceoomph_1_1FSI__functions_afc4e716b0325ab47465bd6c312c829fe} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!doc\_fsi@{doc\_fsi}}
+\index{doc\_fsi@{doc\_fsi}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{doc\_fsi()}{doc\_fsi()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NODE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::doc\+\_\+fsi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidMesh}{Solid\+Mesh}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Doc FSI\+: 
+
+
+\begin{DoxyEnumerate}
+\item Which \doxylink{classoomph_1_1Data}{Data} values affect the traction onto the FSIWall\+Elements and what type of \doxylink{classoomph_1_1Data}{Data} is it stored in (\mbox{[}fluid-\/\mbox{]}nodes, internal \doxylink{classoomph_1_1Data}{Data} \mbox{[}in fluid elements\mbox{]} or Solid\+Nodes?
+\item Which Solid\+Nodes affect the node update of the fluid nodes?
+\end{DoxyEnumerate}Output is in tecplot readable form\+: Use fs1.\+mcr and fsi2.\+mcr (or straightforward modifications thereof), stored in doc/interaction/fsi\+\_\+collapsible\+\_\+channel/nondist\+\_\+figures to process.
+
+Pass pointer to fluid and solid meshes and pointer to the \doxylink{classoomph_1_1DocInfo}{Doc\+Info} object that specifies the directory and the overall step number. Template parameter specifies the type of node that is used to implement the node update strategy. 
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00724}{724}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00534}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8h_source_l02671}{oomph\+::\+Finite\+Element\+::geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01967}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00605}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03992}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02664}{oomph\+::\+Finite\+Element\+::ngeom\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00810}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02488}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00564}{oomph\+::\+Doc\+Info\+::number()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00096}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l02807}{oomph\+::\+Finite\+Element\+::s\+\_\+max()}}, \mbox{\hyperlink{elements_8h_source_l02797}{oomph\+::\+Finite\+Element\+::s\+\_\+min()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598}\label{namespaceoomph_1_1FSI__functions_adccd22c19d99eabffd72f7671df49598} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}}
+\index{setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_fluid\_load\_info\_for\_solid\_elements()}{setup\_fluid\_load\_info\_for\_solid\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FLUID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+FLUID$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{boundary\+\_\+in\+\_\+fluid\+\_\+mesh,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{solid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{face = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set up the information that the FSIWall\+Elements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWall\+Elements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "{}back"{} of the FSIWall\+Elements. This routine uses the procedures in the \doxylink{namespaceoomph_1_1Multi__domain__functions}{Multi\+\_\+domain\+\_\+functions} namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00632}{632}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27}\label{namespaceoomph_1_1FSI__functions_ac71732700aad0d671fa1285d173d5b27} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}}
+\index{setup\_fluid\_load\_info\_for\_solid\_elements@{setup\_fluid\_load\_info\_for\_solid\_elements}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_fluid\_load\_info\_for\_solid\_elements()}{setup\_fluid\_load\_info\_for\_solid\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FLUID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+FLUID$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{boundary\+\_\+in\+\_\+fluid\+\_\+mesh,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{solid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{face = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set up the information that the FSIWall\+Elements in the specified solid mesh require to obtain the fluid loading from the adjacent fluid elements in the specified fluid mesh. The parameter b specifies the boundary in the fluid mesh that is adjacent to the solid mesh. The template parameters specify the type of the fluid element and their spatial dimension. The optional final argument, face, identifies the face of the FSIWall\+Elements that is exposed to the fluid. face defaults to 0, indicating that the front is loaded along the specified fluid mesh boundary. Set it to 1 to set up the FSI lookup schemes for fluid loading along the "{}back"{} of the FSIWall\+Elements. This routine uses the procedures in the \doxylink{namespaceoomph_1_1Multi__domain__functions}{Multi\+\_\+domain\+\_\+functions} namespace to set up the interaction by locating the adjacent (source) elements for each integration point of each solid element. 
+
+This is the vector based version it works simultaneously on fluid fsi boundaries identified in the vector boundary\+\_\+in\+\_\+fluid\+\_\+mesh and the corresponding solid meshes in solid\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00601}{601}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60}\label{namespaceoomph_1_1FSI__functions_ad638257ef97a089f5367edf5d2911e60} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}}
+\index{setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_solid\_elements\_for\_displacement\_bc()}{setup\_solid\_elements\_for\_displacement\_bc()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{SOLID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+SOLID$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{b\+\_\+solid\+\_\+fsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{solid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the FSI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in l lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00692}{692}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b}\label{namespaceoomph_1_1FSI__functions_aacfff5c6e8f9ee75e7d2ae490d28fb7b} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}}
+\index{setup\_solid\_elements\_for\_displacement\_bc@{setup\_solid\_elements\_for\_displacement\_bc}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_solid\_elements\_for\_displacement\_bc()}{setup\_solid\_elements\_for\_displacement\_bc()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{SOLID\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM\+\_\+\+SOLID$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{b\+\_\+solid\+\_\+fsi,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{solid\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Setup multi-\/domain interaction required for imposition of solid displacements onto the pseudo-\/solid fluid mesh by Lagrange multipliers\+: This function locates the bulk solid elements next to boundary b\+\_\+solid\+\_\+fsi (the FSI boundary) in the solid mesh pointed to by Solid\+\_\+mesh\+\_\+pt. The deformation of these elements drives the deformation of the pseudo-\/solid fluid mesh via the Lagrange multiplier elements stored in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. The template parameters specify the type of the bulk solid elements and their spatial dimension. 
+
+This is the vector based version it works simultaneously on solid fsi boundaries identified in the vector b\+\_\+solid\+\_\+fsi and the corresponding Lagrange multiplier meshes in lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00665}{665}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}\label{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8} 
+\index{oomph::FSI\_functions@{oomph::FSI\_functions}!Strouhal\_for\_no\_slip@{Strouhal\_for\_no\_slip}}
+\index{Strouhal\_for\_no\_slip@{Strouhal\_for\_no\_slip}!oomph::FSI\_functions@{oomph::FSI\_functions}}
+\doxysubsubsection{\texorpdfstring{Strouhal\_for\_no\_slip}{Strouhal\_for\_no\_slip}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip = 1.\+0}
+
+
+
+Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.\+0. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi_8cc_source_l00039}{39}} of file \mbox{\hyperlink{fsi_8cc_source}{fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi_8cc_source_l00048}{apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall()}}.
+

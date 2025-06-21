@@ -1,0 +1,574 @@
+\chapter{Example problem\+: 2D driven cavity flow in a quarter-\/circle domain with spatial adaptation.}
+\hypertarget{index}{}\label{index}\index{Example problem: 2D driven cavity flow in a quarter-\/circle domain with spatial adaptation.@{Example problem: 2D driven cavity flow in a quarter-\/circle domain with spatial adaptation.}}
+In this example we shall demonstrate
+\begin{DoxyItemize}
+\item how easy it is to adapt the code for the solution of the driven cavity problem in a square domain, discussed in a \href{../../adaptive_driven_cavity/html/index.html}{\texttt{ previous example }}, to a different domain shape,
+\item how to apply body forces (e.\+g. gravity) in a Navier-\/\+Stokes problem,
+\item how to switch between the stress-\/divergence and the simplified forms of the incompressible Navier-\/\+Stokes equations.
+\end{DoxyItemize}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+In this example we shall illustrate the solution of the steady 2D Navier-\/\+Stokes equations in a modified driven cavity problem\+: The fluid is contained in a quarter-\/circle domain and is subject to gravity which acts in the vertical direction. We solve the problem in two different formulations, using the stress-\/divergence and the simplified form of the Navier-\/\+Stokes equations, respectively, and by applying the gravitational body force via the gravity vector, $ {\bf G} $, and via the body force function, $ {\bf B}$, respectively.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Problem 1\+:}}\end{center} 
+
+\begin{center}{\bfseries{The 2D driven cavity problem in a quarter circle domain with gravity, ~\newline
+ using the stress-\/divergence form of the Navier-\/\+Stokes equations}}\end{center} 
+
+\begin{center}\end{center}  Solve  \[
+Re\phantom{i}u_j\frac{\partial u_i}{\partial x_j} =
+- \frac{\partial p}{\partial x_i} +
+\frac{Re}{Fr} \, G_i +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] in the quarter-\/circle domain $ D = \{x_1 \geq 0 $, $ x_2 \geq 0
+$ and $ x_1^2+x_2^2 \leq 1 \} $, subject to the Dirichlet boundary conditions  \[
+\left. \mathbf{u}\right|_{\partial D}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\] on the curved and left boundaries; and  \[
+\left. \mathbf{u}\right|_{\partial D}=(1,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\] on the bottom boundary, $ x_2 = 0 $. Gravity acts vertically downwards so that $ (G_1, G_2) = (0,-1) $.
+
+\\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+When discussing the implementation of the Navier-\/\+Stokes equations in an \href{../../driven_cavity/html/index.html\#stress_divergence}{\texttt{ earlier example }}, we mentioned that {\ttfamily oomph-\/lib} allows the incompressible Navier-\/\+Stokes equations to be solved in the simplified, rather than the (default) stress-\/divergence form. We will demonstrate the use of this feature by solving the following problem\+: \begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+
+
+\begin{center} {\bfseries{Problem 2\+:}}\end{center} 
+
+\begin{center}{\bfseries{The 2D driven cavity problem in a quarter circle domain with gravity, ~\newline
+ using the simplified form of the Navier-\/\+Stokes equations}}\end{center} 
+
+\begin{center}\end{center}  Solve  \[
+Re\phantom{i}u_j\frac{\partial u_i}{\partial x_j} =
+- \frac{\partial p}{\partial x_i} +
+B_i + 
+\frac{\partial^2 u_i}{\partial x_j^2},
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] and  \[
+\frac{\partial u_i}{\partial x_i} = 0,
+\] in the quarter-\/circle domain $ D = \{x_1 \geq 0 $, $ x_2 \geq 0
+$ and $ x_1^2+x_2^2 \leq 1 \} $, subject to the Dirichlet boundary conditions  \[
+\left. \mathbf{u}\right|_{\partial D}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (2)
+\] on the curved and left boundaries; and  \[
+\left. \mathbf{u}\right|_{\partial D}=(1,0),
+\ \ \ \ \ \ \ \ \ \ (3)
+\] on the bottom boundary, $ x_2 = 0 $. To make this consistent with Problem 1, we define the body force function as $ (B_1, B_2) = (0,-Re/Fr) $.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+Note that in Problem 2, the gravitational body force is represented by the body force rather than the gravity vector.
+
+\DoxyHorRuler{0}
+\hypertarget{index_stress_divergence}{}\doxysubsection{\texorpdfstring{Switching between the stress-\/divergence and the simplified forms of the Navier-\/\+Stokes equations}{Switching between the stress-divergence and the simplified forms of the Navier-Stokes equations}}\label{index_stress_divergence}
+The two forms of the Navier-\/\+Stokes equations differ in the implementation of the viscous terms, which may be represented as  \[
+\frac{\partial^2 u_i}{\partial x_j^2} \mbox{ \ \ \ or \ \ \ }
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right).
+\] For an incompressible flow, $ \partial u_i/\partial x_i = 0$, both forms are mathematically equivalent but the stress-\/divergence form is required for \href{../../single_layer_free_surface/html/index.html}{\texttt{ problems with free surfaces }}, or for \href{../../rayleigh_traction_channel//html/index.html}{\texttt{ problems in which traction boundary conditions are to be applied.}}
+
+In order to be able do deal with both cases, {\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements actually implement the viscous term as  \[
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +
+\Gamma_i \, \frac{\partial u_j}{\partial x_i} \right).
+\]
+
+By default the components of the vector $ \Gamma_i $, are set to 1.\+0, so that the stress-\/divergence form is used. The components $ \Gamma_i $ are stored in the static data member 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static}\ Vector<double>\ NavierStokesEquations<DIM>::Gamma}
+
+\end{DoxyCode}
+ of the {\ttfamily Navier\+Stokes\+Equations$<$\+DIM$>$} class which forms the basis for all Navier-\/\+Stokes elements in {\ttfamily oomph-\/lib}. Its entries are initialised to 1.\+0. The user may over-\/write these assignments and thus re-\/define the values of $ \Gamma $ being used for a specific problem. \mbox{[}In principle, it is possible to use stress-\/divergence form for the first component of the momentum equations, and the simplified form for the second one, say. However, we do not believe that this is a particularly useful/desirable option and have certainly never used such (slightly bizarre) assignments in any of our own computations.\mbox{]}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sol1}{}\doxysubsection{\texorpdfstring{Solution to problem 1}{Solution to problem 1}}\label{index_sol1}
+The figure below shows "{}carpet plots"{} of the velocity and pressure fields as well as a contour plot of the pressure distribution with superimposed streamlines for Problem 1 at a Reynolds number of $ Re=100$ and a ratio of Reynolds and Froude numbers (a measure of gravity on the viscous scale) of $ Re/Fr = 100$. The velocity vanishes along the entire domain boundary, apart from the bottom boundary $ (x_2 = 0) $ where the moving "{}lid"{} imposes a unit tangential velocity which drives a large vortex, centred at $ (x_1,x_2) \approx (0.59,0.22) $. The pressure singularities created by the velocity discontinuities at $ (x_1,x_2)=(0,0) $ and $ (x_1, x_2)=(1,0) $ are well resolved. The pressure plot shows that away from the singularities, the pressure decreases linearly with $ x_2 $, reflecting the effect of the gravitational body forces which acts in the negative $ x_2-$ direction.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sol1}
+\doxyfigcaption{Plot of the velocity and pressure fields for problem 1 with Re=100 and Re/\+Fr=100, computed with adaptive Taylor-\/\+Hood elements. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_sol2}{}\doxysubsection{\texorpdfstring{Solution to problem 2}{Solution to problem 2}}\label{index_sol2}
+The next figure shows the computational results for Problem 2, obtained from a computation with adaptive Crouzeix-\/\+Raviart elements.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{sol2}
+\doxyfigcaption{Plot of the velocity and pressure fields for problem 2 with Re=100 and Re/\+Fr=100, computed with adaptive Crouzeix-\/\+Raviart elements. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_code}{}\doxysection{\texorpdfstring{The code}{The code}}\label{index_code}
+We use a namespace {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}} to define the various parameters\+: The Reynolds number,
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ physical\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=100;}
+
+\end{DoxyCodeInclude}
+ the gravity vector $ {\bf G}$, and the ratio of Reynolds and Froude number, $ Re/Fr $, which represents the ratio of gravitational and viscous forces,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Reynolds/Froude\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab1a845a672b4d74b304639a976dc65c6}{Re\_invFr}}=100;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Gravity\ vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ Vector<double>\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Gravity}}(2);}
+
+\end{DoxyCodeInclude}
+ In Problem 2, gravity is introduced via the body force function $ {\bf B}$ which we define such that Problems 1 and 2 are equivalent. (We use the gravity vector $ {\bf G} = (0,-1)$ to specify the direction of gravity, while indicating it magnitude by $ Re/Fr.$)
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Functional\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87da705b8a46bed337cf5dbdd788b87b}{body\_force}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ result)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ result[0]=0.0;}
+\DoxyCodeLine{\ \ result[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab1a845a672b4d74b304639a976dc65c6}{Re\_invFr}};}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCodeInclude}
+ Finally we define a body force function, which returns zero values, for use when solving Problem 1.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Zero\ functional\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9780d615ae07c4e00a436ab2973b54e6}{zero\_body\_force}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ result)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ result[0]=0.0;}
+\DoxyCodeLine{\ \ result[1]=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+First we create a {\ttfamily Doc\+Info} object to control the output, and set the maximum number of spatial adaptations to three.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ QuarterCircleDrivenCavityProblem\ test\ problem\ }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{circular__driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory\ and\ initialise\ count}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ max.\ number\ of\ black-\/box\ adaptation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ max\_adapt=3;}
+
+\end{DoxyCodeInclude}
+ To solve problem 1 we define the direction of gravity, $ {\bf G} = 
+(0,-1)$, and set the entries in the {\ttfamily Navier\+Stokes\+Equations$<$2$>$\+::\+Gamma} vector to $ (1,1)$, so that the stress-\/divergence form of the equation is used \mbox{[}In fact, this step is not strictly necessary as it simply re-\/assigns the default values.\mbox{]}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ problem\ 1\ with\ Taylor-\/Hood\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ downwards-\/Gravity\ vector}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[1]\ =\ -\/1.0;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ Gamma\ vector\ for\ stress-\/divergence\ form}}
+\DoxyCodeLine{\ \ NavierStokesEquations<2>::Gamma[0]=1;}
+\DoxyCodeLine{\ \ NavierStokesEquations<2>::Gamma[1]=1;}
+
+\end{DoxyCodeInclude}
+ Next we build problem 1 using Taylor-\/\+Hood elements and passing a function pointer to the {\ttfamily zero\+\_\+body\+\_\+force(...)} function (defined in the namespace {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}) as the argument.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem\ with\ Gravity\ vector\ in\ stress\ divergence\ form,\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ using\ zero\ body\ force\ function}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem}{QuarterCircleDrivenCavityProblem<RefineableQTaylorHoodElement<2>}}\ >\ }
+\DoxyCodeLine{\ \ \ problem(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9780d615ae07c4e00a436ab2973b54e6}{Global\_Physical\_Variables::zero\_body\_force}});}
+
+\end{DoxyCodeInclude}
+ Now problem 1 can be solved as in \href{../../adaptive_driven_cavity/html/index.html\#main}{\texttt{ the previous example}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ automatic\ adaptation}}
+\DoxyCodeLine{\ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ doc\_info.number()=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Output\ solution}}
+\DoxyCodeLine{\ \ problem.doc\_solution(doc\_info);\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ problem\ 1}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+
+
+To solve problem 2 we set the entries in the {\ttfamily Navier\+Stokes\+Equations$<$2$>$\+::\+Gamma} vector to zero (thus choosing the simplified version of the Navier-\/\+Stokes equations), define $ {\bf G} = 
+(0,0)$, and pass a function pointer to the {\ttfamily body\+\_\+force(...)} function to the problem constructor.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ problem\ 2\ with\ Taylor\ Hood\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ zero-\/Gravity\ vector}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[0]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}}[1]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Set\ up\ Gamma\ vector\ for\ simplified\ form}}
+\DoxyCodeLine{\ \ NavierStokesEquations<2>::Gamma[0]=0;}
+\DoxyCodeLine{\ \ NavierStokesEquations<2>::Gamma[1]=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem\ with\ body\ force\ function\ and\ simplified\ form,}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ using\ body\ force\ function}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem}{QuarterCircleDrivenCavityProblem<RefineableQTaylorHoodElement<2>}}\ >}
+\DoxyCodeLine{\ \ \ problem(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a87da705b8a46bed337cf5dbdd788b87b}{Global\_Physical\_Variables::body\_force}});}
+
+\end{DoxyCodeInclude}
+ Problem 2 may then be solved as before.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ automatic\ adaptation}}
+\DoxyCodeLine{\ \ problem.newton\_solve(max\_adapt);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ doc\_info.number()=1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Output\ solution}}
+\DoxyCodeLine{\ \ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ problem\ 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is very similar to that used in the \href{../../adaptive_driven_cavity/html/index.html\#problem}{\texttt{ previous example }}, with two exceptions\+:
+
+
+\begin{DoxyItemize}
+\item We pass a function pointer to the body force function $ {\bf B}$ to the constructor and
+\item store the function pointer to the body force function in the problem\textquotesingle{}s private member data.
+\end{DoxyItemize}
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driven\ cavity\ problem\ in\ quarter\ circle\ domain,\ templated}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ by\ element\ type.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem}{QuarterCircleDrivenCavityProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem}{QuarterCircleDrivenCavityProblem}}(}
+\DoxyCodeLine{\ \ NavierStokesEquations<2>::NavierStokesBodyForceFctPt\ body\_force\_fct\_pt);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor:\ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a07410fd9d1194613f92dd6620fa3207a}{\string~QuarterCircleDrivenCavityProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_ad2ed0b3e89e1cd0e28cc61ae4fd129bc}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve.\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ (Re-\/)set\ velocity\ boundary\ conditions\ just\ to\ be\ on\ the\ safe\ side...}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_aa1d9cfd27fc1abe2a85e756009781547}{actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Setup\ tangential\ flow\ along\ boundary\ 0:}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ ibound=0;\ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Tangential\ flow}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ i=0;}
+\DoxyCodeLine{\ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ No\ penetration}}
+\DoxyCodeLine{\ \ \ \ i=1;}
+\DoxyCodeLine{\ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Overwrite\ with\ no\ flow\ along\ all\ other\ boundaries}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=1;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_actions\_before\_newton\_solve}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ After\ adaptation:\ Unpin\ pressure\ and\ pin\ redudant\ pressure\ dofs.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a4873f31ccf76e340abb284b17430c407}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Unpin\ all\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ \ \ unpin\_all\_pressure\_dofs(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pin\ redundant\ pressure\ dofs}}
+\DoxyCodeLine{\ \ \ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ \ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Now\ pin\ the\ first\ pressure\ dof\ in\ the\ first\ element\ and\ set\ it\ to\ 0.0}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a0c4e0cb1a4fb12053142fa43f899a5b1}{fix\_pressure}}(0,0,0.0);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_actions\_after\_adapt}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a390b7b3c027a0253a2a3ac42f9715736}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ body\ force\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ NavierStokesEquations<2>::NavierStokesBodyForceFctPt\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a66bd39fdcb467ebdb6afe9446d4566f3}{Body\_force\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fix\ pressure\ in\ element\ e\ at\ pressure\ dof\ pdof\ and\ set\ to\ pvalue}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a0c4e0cb1a4fb12053142fa43f899a5b1}{fix\_pressure}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&e,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&pdof,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&pvalue)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ proper\ element\ and\ fix\ pressure}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a0c4e0cb1a4fb12053142fa43f899a5b1}{fix\_pressure}}(pdof,pvalue);}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\_of\_fix\_pressure}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\_of\_problem\_class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We store the function pointer to the body force function in the private data member {\ttfamily Body\+\_\+force\+\_\+fct\+\_\+pt}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ driven\ cavity\ problem\ in\ quarter\ circle\ domain}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_ae5fd69acf7d28a600cb6aa0bbb6a341c}{QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem}}(}
+\DoxyCodeLine{\ NavierStokesEquations<2>::NavierStokesBodyForceFctPt\ body\_force\_fct\_pt)\ :}
+\DoxyCodeLine{\ Body\_force\_fct\_pt(body\_force\_fct\_pt)}
+
+\end{DoxyCodeInclude}
+ As usual the first task is to create the mesh. We now use the {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh$<$\+ELEMENT$>$}, which requires the creation of a {\ttfamily Geom\+Object} to describe geometry of the curved wall\+: We choose an ellipse with unit half axes (i.\+e. a unit circle).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ geometric\ object\ that\ parametrises\ the\ curved\ boundary}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ of\ the\ domain}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Half\ axes\ for\ ellipse}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ a\_ellipse=1.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ b\_ellipse=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ elliptical\ ring\ }}
+\DoxyCodeLine{\ GeomObject*\ Wall\_pt=\textcolor{keyword}{new}\ Ellipse(a\_ellipse,b\_ellipse);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ End\ points\ for\ wall}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ xi\_lo=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ xi\_hi=2.0*atan(1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ fract\_mid=0.5;}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ RefineableQuarterCircleSectorMesh<ELEMENT>(}
+\DoxyCodeLine{\ \ \ Wall\_pt,xi\_lo,fract\_mid,xi\_hi);}
+
+\end{DoxyCodeInclude}
+ Next the error estimator is set, the boundary nodes are pinned and the Reynolds number is assigned, as \href{../../adaptive_driven_cavity/html/index.html\#constructor}{\texttt{ before }}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ Z2ErrorEstimator*\ error\_estimator\_pt=\textcolor{keyword}{new}\ Z2ErrorEstimator;}
+\DoxyCodeLine{\ \textcolor{keyword}{dynamic\_cast<}RefineableQuarterCircleSectorMesh<ELEMENT>*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ mesh\_pt())-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here:\ All\ boundaries\ are\ Dirichlet\ boundaries.}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ values\ (u\ and\ v\ velocities)}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<2;i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(i);\ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Find\ number\ of\ elements\ in\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor:\ Pass\ pointer\ to\ Reynolds}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ number}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Reynolds\ number,\ etc}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
+
+\end{DoxyCodeInclude}
+ Within this loop we also pass the pointers to $ Re/Fr $, the gravity vector and the body-\/force function to the elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ Re/Fr}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>re\_invfr\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab1a845a672b4d74b304639a976dc65c6}{Global\_Physical\_Variables::Re\_invFr}};}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ Gravity\ vector}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>g\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8a067a902bf49c306bed9293eb042771}{Global\_Physical\_Variables::Gravity}};}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//set\ body\ force\ function}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>body\_force\_fct\_pt()\ =\ Body\_force\_fct\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ elements}}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh$<$\+ELEMENT$>$} contains only three elements and therefore provides a very coarse discretisation of the domain. We refine the mesh uniformly twice before pinning the redundant pressure degrees of freedom, pinning a single pressure degree of freedom, and assigning the equation numbers, as \href{../../adaptive_driven_cavity/html/index.html\#doc}{\texttt{ before}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ refinement\ level}}
+\DoxyCodeLine{\ refine\_uniformly();}
+\DoxyCodeLine{\ refine\_uniformly();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ redudant\ pressure\ dofs}}
+\DoxyCodeLine{\ RefineableNavierStokesEquations<2>::}
+\DoxyCodeLine{\ \ pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ pin\ the\ first\ pressure\ dof\ in\ the\ first\ element\ and\ set\ it\ to\ 0.0}}
+\DoxyCodeLine{\ fix\_pressure(0,0,0.0);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post processing}{Post processing}}\label{index_doc}
+The post processing function remains the same as in the \href{../../driven_cavity/html/index.html\#doc}{\texttt{ previous examples }}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem_a390b7b3c027a0253a2a3ac42f9715736}{QuarterCircleDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\_of\_doc\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+
+\begin{DoxyEnumerate}
+\item Try making the curved boundary the driving wall \mbox{[}Hint\+: this requires a change in the wall velocities prescribed in {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}. The figure below shows what you should expect.\mbox{]}
+\end{DoxyEnumerate}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{curved_driving_wall}
+\doxyfigcaption{Plot of the velocity and pressure distribution for a circular driven cavity in which the flow is driven by the tangential motion of the curvilinear boundary. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/circular_driven_cavity/}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/circular\+\_\+driven\+\_\+cavity/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/navier_stokes/circular_driven_cavity/circular_driven_cavity.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/circular\+\_\+driven\+\_\+cavity/circular\+\_\+driven\+\_\+cavity.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

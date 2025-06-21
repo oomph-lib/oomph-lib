@@ -1,0 +1,210 @@
+\doxysection{oomph\+::GZip\+Reader Class Reference}
+\hypertarget{classoomph_1_1GZipReader}{}\label{classoomph_1_1GZipReader}\index{oomph::GZipReader@{oomph::GZipReader}}
+
+
+{\ttfamily \#include $<$gzip\+\_\+reader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GZipReader_a5838b6b6ac48087ec45a59d8260ec30b}{GZip\+Reader}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1GZipReader_a088309e39cb310d7afa1085e31b97fee}{GZip\+Reader}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{chunk\+\_\+size}}=256)
+\item 
+\mbox{\hyperlink{classoomph_1_1GZipReader_ab387d3f0842633c369dd4512cad07f5d}{\texorpdfstring{$\sim$}{\string~}\+GZip\+Reader}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GZipReader_a3501ba01a945d401932e80fa1b66e81c}{open}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GZipReader_a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf}{close}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1GZipReader_a66588e2446b09abb9c2b430843c0f745}{is\+\_\+open}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\item 
+\mbox{\hyperlink{structoomph_1_1Packet}{Packet}} \mbox{\hyperlink{classoomph_1_1GZipReader_a65ebc1426d85174ca673dab76bc53255}{getline}} ()
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classoomph_1_1GZipReader_a19ade96e79403b1162b63607fac5cb39}{read\+\_\+all}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gz\+File}} \mbox{\hyperlink{classoomph_1_1GZipReader_a05353e27cad21f589af6c84331604e6e}{Gzip\+\_\+file}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GZipReader_afd5ba93fa067e76483051fd234010b8b}{Chunk\+\_\+size}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8h_source_l00054}{54}} of file \mbox{\hyperlink{gzip__reader_8h_source}{gzip\+\_\+reader.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1GZipReader_a5838b6b6ac48087ec45a59d8260ec30b}\label{classoomph_1_1GZipReader_a5838b6b6ac48087ec45a59d8260ec30b} 
+\index{oomph::GZipReader@{oomph::GZipReader}!GZipReader@{GZipReader}}
+\index{GZipReader@{GZipReader}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{GZipReader()}{GZipReader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+GZip\+Reader\+::\+GZip\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00041}{41}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a088309e39cb310d7afa1085e31b97fee}\label{classoomph_1_1GZipReader_a088309e39cb310d7afa1085e31b97fee} 
+\index{oomph::GZipReader@{oomph::GZipReader}!GZipReader@{GZipReader}}
+\index{GZipReader@{GZipReader}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{GZipReader()}{GZipReader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+GZip\+Reader\+::\+GZip\+Reader (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{chunk\+\_\+size = {\ttfamily 256} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00048}{48}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00078}{open()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_ab387d3f0842633c369dd4512cad07f5d}\label{classoomph_1_1GZipReader_ab387d3f0842633c369dd4512cad07f5d} 
+\index{oomph::GZipReader@{oomph::GZipReader}!````~GZipReader@{\texorpdfstring{$\sim$}{\string~}GZipReader}}
+\index{````~GZipReader@{\texorpdfstring{$\sim$}{\string~}GZipReader}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GZipReader()}{\string~GZipReader()}}
+{\footnotesize\ttfamily oomph\+::\+GZip\+Reader\+::\texorpdfstring{$\sim$}{\string~}\+GZip\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00065}{65}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8cc_source_l00087}{close()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1GZipReader_a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf}\label{classoomph_1_1GZipReader_a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf} 
+\index{oomph::GZipReader@{oomph::GZipReader}!close@{close}}
+\index{close@{close}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+GZip\+Reader\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00087}{87}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8h_source_l00067}{Gzip\+\_\+file}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{getline()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00065}{\texorpdfstring{$\sim$}{\string~}\+GZip\+Reader()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a65ebc1426d85174ca673dab76bc53255}\label{classoomph_1_1GZipReader_a65ebc1426d85174ca673dab76bc53255} 
+\index{oomph::GZipReader@{oomph::GZipReader}!getline@{getline}}
+\index{getline@{getline}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{getline()}{getline()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structoomph_1_1Packet}{Packet}} oomph\+::\+GZip\+Reader\+::getline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{119}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8h_source_l00068}{Chunk\+\_\+size}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00087}{close()}}, \mbox{\hyperlink{gzip__reader_8h_source_l00067}{Gzip\+\_\+file}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00180}{read\+\_\+all()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a66588e2446b09abb9c2b430843c0f745}\label{classoomph_1_1GZipReader_a66588e2446b09abb9c2b430843c0f745} 
+\index{oomph::GZipReader@{oomph::GZipReader}!is\_open@{is\_open}}
+\index{is\_open@{is\_open}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{is\_open()}{is\_open()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+GZip\+Reader\+::is\+\_\+open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{103}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8h_source_l00067}{Gzip\+\_\+file}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00087}{close()}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{getline()}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00048}{GZip\+Reader()}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00180}{read\+\_\+all()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00065}{\texorpdfstring{$\sim$}{\string~}\+GZip\+Reader()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a3501ba01a945d401932e80fa1b66e81c}\label{classoomph_1_1GZipReader_a3501ba01a945d401932e80fa1b66e81c} 
+\index{oomph::GZipReader@{oomph::GZipReader}!open@{open}}
+\index{open@{open}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+GZip\+Reader\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00078}{78}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8h_source_l00067}{Gzip\+\_\+file}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00048}{GZip\+Reader()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a19ade96e79403b1162b63607fac5cb39}\label{classoomph_1_1GZipReader_a19ade96e79403b1162b63607fac5cb39} 
+\index{oomph::GZipReader@{oomph::GZipReader}!read\_all@{read\_all}}
+\index{read\_all@{read\_all}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{read\_all()}{read\_all()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ oomph\+::\+GZip\+Reader\+::read\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8cc_source_l00180}{180}} of file \mbox{\hyperlink{gzip__reader_8cc_source}{gzip\+\_\+reader.\+cc}}.
+
+
+
+References \mbox{\hyperlink{gzip__reader_8h_source_l00045}{oomph\+::\+Packet\+::found}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{getline()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}.
+
+
+
+Referenced by \mbox{\hyperlink{fpdiff_8cc_source_l00161}{oomph\+::gzip\+\_\+load()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1GZipReader_afd5ba93fa067e76483051fd234010b8b}\label{classoomph_1_1GZipReader_afd5ba93fa067e76483051fd234010b8b} 
+\index{oomph::GZipReader@{oomph::GZipReader}!Chunk\_size@{Chunk\_size}}
+\index{Chunk\_size@{Chunk\_size}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{Chunk\_size}{Chunk\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+GZip\+Reader\+::\+Chunk\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8h_source_l00068}{68}} of file \mbox{\hyperlink{gzip__reader_8h_source}{gzip\+\_\+reader.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{getline()}}.
+
+\Hypertarget{classoomph_1_1GZipReader_a05353e27cad21f589af6c84331604e6e}\label{classoomph_1_1GZipReader_a05353e27cad21f589af6c84331604e6e} 
+\index{oomph::GZipReader@{oomph::GZipReader}!Gzip\_file@{Gzip\_file}}
+\index{Gzip\_file@{Gzip\_file}!oomph::GZipReader@{oomph::GZipReader}}
+\doxysubsubsection{\texorpdfstring{Gzip\_file}{Gzip\_file}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gz\+File}} oomph\+::\+GZip\+Reader\+::\+Gzip\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{gzip__reader_8h_source_l00067}{67}} of file \mbox{\hyperlink{gzip__reader_8h_source}{gzip\+\_\+reader.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{gzip__reader_8cc_source_l00087}{close()}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00119}{getline()}}, \mbox{\hyperlink{gzip__reader_8cc_source_l00103}{is\+\_\+open()}}, and \mbox{\hyperlink{gzip__reader_8cc_source_l00078}{open()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{gzip__reader_8h}{gzip\+\_\+reader.\+h}}\item 
+\mbox{\hyperlink{gzip__reader_8cc}{gzip\+\_\+reader.\+cc}}\end{DoxyCompactItemize}

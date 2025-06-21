@@ -1,0 +1,473 @@
+\chapter{Example problem\+: SUPG-\/stabilised solution of the 2D advection diffusion equation}
+\hypertarget{index}{}\label{index}\index{Example problem: SUPG-\/stabilised solution of the 2D advection diffusion equation@{Example problem: SUPG-\/stabilised solution of the 2D advection diffusion equation}}
+In this example we discuss the SUPG-\/stabilised solution of the 2D advection-\/diffusion problem
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Two-\/dimensional advection-\/diffusion problem in a rectangular domain}} \end{center}  Solve  \[
+\mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2\right) \frac{\partial u}{\partial
+x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), 
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the rectangular domain $D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}$, with Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D}=u_0,
+\ \ \ \ \ \ \ \ \ \ (2)
+\]
+
+where the {\itshape Peclet} {\itshape number}, $ \mbox{Pe} $ the boundary values, $ u_0$, the source function $ f(x_1,x_2),$ ~\newline
+ and the components of the "{}wind"{} $ w_i(x_1,x_2) \ (i=1,2)$ are given.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center}  ~\newline
+
+
+We set $ f(x_1,x_2)=0$ and assign the boundary conditions such that  \[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  (3)
+\] For large values of $ \alpha, $ this boundary data approaches a step, oriented at an angle $\Phi$ against the $x_1-$axis.
+
+In the computations we will impose the "{}wind"{}  \[
+\mathbf{w}\left(x_1,x_2 \right) = 
+\left(
+\begin{array}{c}
+\sin(6x_2) \\
+ \cos(6x_1)
+\end{array}
+\right),
+\ \ \ \ \ \ \ \ \  (4)
+\] illustrated in this vector plot\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{wind}
+\doxyfigcaption{Plot of the wind. }
+\end{DoxyImage}
+
+
+The figures below show plots of the solution for $\Phi=45^\circ, \ \alpha=50 $ and a Peclet number of $ Pe = 200$, with and without SUPG stabilisation. The wire-\/mesh plot shows the solution computed on a 10x10 mesh, the shaded surface represents the solution obtained from an unstabilised solution on a 150x150 mesh. Note how SUPG stabilisation "{}suppresses the wiggles"{} on the relatively coarse mesh.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{stab}
+\doxyfigcaption{Plot of the SUPG-\/stabilised solution at different levels of mesh refinement. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{unstab}
+\doxyfigcaption{Plot of the unstabilised solution at different levels of mesh refinement. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+Overall, the structure of the driver code is very similar to that used for the \href{../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html}{\texttt{ problem without stabilisation}}.\hypertarget{index_todo}{}\doxysubsection{\texorpdfstring{To be written\+:}{To be written:}}\label{index_todo}
+
+\begin{DoxyItemize}
+\item Discuss SUPG theory.
+\item Implementation and the role of basis, shape and test functions (our equations are isoparametric)
+\end{DoxyItemize}Until we get around to completing this example, here\textquotesingle{}s the driver code. Fairly self-\/explanatory, isn\textquotesingle{}t it?
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//Driver\ for\ a\ simple\ 2D\ adv\ diff\ problem\ with\ SUPG\ stabilisation}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Generic\ routines}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ Poisson\ equations}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}advection\_diffusion.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ mesh\ }}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}meshes/rectangular\_quadmesh.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{comment}{//======start\_of\_namespace============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ global\ parameters:\ Unforced\ problem\ with}}
+\DoxyCodeLine{\textcolor{comment}{///\ boundary\ values\ corresponding\ to\ a\ steep\ tanh\ step\ profile}}
+\DoxyCodeLine{\textcolor{comment}{///\ oriented\ at\ 45\ degrees\ across\ the\ domain.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobalPhysicalParameters}{GlobalPhysicalParameters}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Peclet\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_ab7011a8f93f2cbd3d45af00151aee3b2}{Peclet}}=200.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ steepness\ of\ step\ in\ boundary\ values}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_aec7a344b74b10d835b331ef0dc6601da}{Alpha}}=50.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ angle\ of\ step\ in\ boundary\ values:\ 45\ degrees}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_af9a5a947d725f1f088db6a6423f2f3ef}{TanPhi}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Some\ "{}solution"{}\ for\ assignment\ of\ boundary\ values}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a6e1db5726436a705e9d400fedf914cef}{get\_boundary\_values}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]=tanh(1.0-\/\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aec7a344b74b10d835b331ef0dc6601da}{Alpha}}*(\mbox{\hyperlink{namespaceGlobalPhysicalParameters_af9a5a947d725f1f088db6a6423f2f3ef}{TanPhi}}*x[0]-\/x[1]));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Zero\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{source\_function}}(\textcolor{keyword}{const}\ Vector<double>\&\ x\_vect,\ \textcolor{keywordtype}{double}\&\ source)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ source=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Wind}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{wind\_function}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ wind)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ wind[0]=sin(6.0*x[1]);}
+\DoxyCodeLine{\ \ wind[1]=cos(6.0*x[0]);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======\ start\_of\_problem\_class=======================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ 2D\ AdvectionDiffusion\ problem\ on\ rectangular\ domain,\ discretised\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ with\ refineable\ 2D\ QAdvectionDiffusion\ elements.\ The\ specific\ type}}
+\DoxyCodeLine{\textcolor{comment}{///\ of\ element\ is\ specified\ via\ the\ template\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ pointer\ to\ source\ and\ wind\ functions,\ and}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ flag\ to\ indicate\ if\ stabilisation\ is\ to\ be\ used.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}(}
+\DoxyCodeLine{\ \ AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt\ source\_fct\_pt,}
+\DoxyCodeLine{\ \ AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt\ wind\_fct\_pt,}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ use\_stabilisation);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor.\ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a2112492d8a8a2ad9c0d8ef79e892ebd1}{\string~SUPGAdvectionDiffusionProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve:\ Reset\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ the\ values\ from\ the\ tanh\ solution\ and\ compute\ stabilisation}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_affa45863033de517e1fba088aaae7eb5}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a7ca10f3d82af3c3fec4c1a3260062ff2}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a3133ba26f0917f5d210d69ea0ddcb1fe}{doc\_solution}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Overloaded\ version\ of\ the\ problem's\ access\ function\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ mesh.\ Recasts\ the\ pointer\ to\ the\ base\ Mesh\ object\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ the\ actual\ mesh\ type.}}
+\DoxyCodeLine{\textcolor{comment}{}\ RectangularQuadMesh<ELEMENT>*\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a41139c639c691f95f066c8939378762b}{mesh\_pt}}()\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}RectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object}}
+\DoxyCodeLine{\textcolor{comment}{}\ DocInfo\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_af80606875e03033c0de217f7a861d0af}{Doc\_info}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a9bf04de8641dd4151514c2e2603f3ac5}{Source\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ wind\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a89bc22484946ccf51bb7cf7328bc9df6}{Wind\_fct\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flag\ to\ indicate\ if\ stabilisation\ is\ to\ be\ used}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_ab8c19428c17ac7d8bb776e91940734bd}{Use\_stabilisation}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ AdvectionDiffusion\ problem:\ Pass\ pointer\ to\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ source\ function\ and\ wind\ functions\ and\ flag\ to\ indicate\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ if\ stabilisation\ is\ to\ be\ used.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a95aa4192c1b42327b12cdbb75295d192}{SUPGAdvectionDiffusionProblem<ELEMENT>::SUPGAdvectionDiffusionProblem}}(}
+\DoxyCodeLine{\ AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt\ source\_fct\_pt,}
+\DoxyCodeLine{\ AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt\ wind\_fct\_pt,}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ use\_stabilisation)}
+\DoxyCodeLine{\ :\ \ Source\_fct\_pt(source\_fct\_pt),\ Wind\_fct\_pt(wind\_fct\_pt),\ }
+\DoxyCodeLine{\ \ \ \ Use\_stabilisation(use\_stabilisation)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (use\_stabilisation)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_stabilised"{}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_unstabilised"{}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=40;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=40;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_x=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_y=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(n\_x,n\_y,l\_x,l\_y);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ only\ need\ to\ pin\ the\ ones\ that\ have\ Dirichlet\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ conditions\ here}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);\ }
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ loop\ over\ boundaries}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional\ }}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ the\ (argument-\/free!)\ ELEMENT\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ constructor:\ Pass\ pointer\ to\ source\ function}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralsedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>source\_fct\_pt()\ =\ Source\_fct\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ wind\ function\ pointer}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>wind\_fct\_pt()\ =\ Wind\_fct\_pt;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ Peclet\ number}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>pe\_pt()\ =\ \&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_ab7011a8f93f2cbd3d45af00151aee3b2}{GlobalPhysicalParameters::Peclet}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//========================================start\_of\_actions\_before\_newton\_solve===}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Update\ the\ problem\ specs\ before\ solve:\ (Re-\/)set\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_affa45863033de517e1fba088aaae7eb5}{SUPGAdvectionDiffusionProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ boundaries\ are\ there?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ nodes\ are\ there\ on\ this\ boundary?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Extract\ nodal\ coordinates\ from\ node:}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ boundary\ value}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ u(1);}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a6e1db5726436a705e9d400fedf914cef}{GlobalPhysicalParameters::get\_boundary\_values}}(x,u);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ value\ to\ the\ one\ (and\ only)\ nodal\ value\ at\ this\ node}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(0,u[0]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ loop\ over\ all\ elements\ and\ set\ the\ stabilisation\ parameter}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralsedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Use\ stabilisation?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (Use\_stabilisation)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Compute\ stabilisation\ parameter}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>compute\_stabilisation\_parameter();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Compute\ stabilisation\ parameter}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>switch\_off\_stabilisation();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ end\ of\ actions\ before\ solve}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a3133ba26f0917f5d210d69ea0ddcb1fe}{SUPGAdvectionDiffusionProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points:\ npts\ x\ npts}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts=5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_main=====================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ 2D\ AdvectionDiffusion\ problem}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{two__d__adv__diff__SUPG_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem\ with\ stabilisation}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{bool}\ use\_stabilisation=\textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ problem\ with\ 2D\ nine-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ QAdvectionDiffusionElement\ family.\ Pass\ pointer\ to\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ source\ and\ wind\ function.\ }}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem<QSUPGAdvectionDiffusionElement<2,3>}}\ >\ }
+\DoxyCodeLine{\ \ \ problem(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{GlobalPhysicalParameters::wind\_function}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ use\_stabilisation);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ problem.newton\_solve();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Output\ the\ solution}}
+\DoxyCodeLine{\ \ problem.doc\_solution();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem\ without\ stabilisation}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{bool}\ use\_stabilisation=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ problem\ with\ 2D\ nine-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ QAdvectionDiffusionElement\ family.\ Pass\ pointer\ to\ }}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ source\ and\ wind\ function.\ }}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem<QSUPGAdvectionDiffusionElement<2,3>}}\ >\ }
+\DoxyCodeLine{\ \ \ problem(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{GlobalPhysicalParameters::wind\_function}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ use\_stabilisation);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ problem.newton\_solve();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Output\ the\ solution}}
+\DoxyCodeLine{\ \ problem.doc\_solution();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{
+../../../../
+
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/
+}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{
+../../../../
+demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
+}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

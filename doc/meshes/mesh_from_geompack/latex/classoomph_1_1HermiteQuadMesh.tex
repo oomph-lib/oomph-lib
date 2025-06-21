@@ -1,0 +1,372 @@
+\doxysection{oomph\+::Hermite\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1HermiteQuadMesh}{}\label{classoomph_1_1HermiteQuadMesh}\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+
+
+A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain. The geometry of the problem must be prescribed using the \doxylink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}. Non uniform node spacing can be prescribed using a function pointer.  
+
+
+
+
+{\ttfamily \#include $<$hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Hermite\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1HermiteQuadMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}}) (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\+\_\+uniform\+\_\+spacing}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\+\_\+non\+\_\+uniform\+\_\+spacing}})
+\begin{DoxyCompactList}\small\item\em Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_aea2e2144668d092f4e358f195bbc74e7}{Hermite\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&nx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ny, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{domain}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}=\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Mesh Constructor (for a uniformly spaced mesh). Takes the following arguments \+: nx \+: number of elements in x direction; ny \+: number of elements in y direction; domain \+: topologically rectangular domain; periodic\+\_\+in\+\_\+x \+: flag specifying if the mesh is periodic in the x direction (default = false); time\+\_\+stepper\+\_\+pt \+: pointer to the time stepper (default = no timestepper);. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_ae28d471336aebafc5fe5e9f303ab0ad8}{Hermite\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&nx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ny, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{domain}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{spacing\+\_\+fn}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{periodic\+\_\+in\+\_\+x}}=\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Mesh Constructor (for a non-\/uniformly spaced mesh). Takes the following arguments \+: nx \+: number of elements in x direction; ny \+: number of elements in y direction; domain \+: topologically rectangular domain; spacing\+\_\+fn \+: spacing function prescribing a non-\/uniformly spaced mesh periodic\+\_\+in\+\_\+x \+: flag specifying if the mesh is periodic in the x direction (default = false); time\+\_\+stepper\+\_\+pt \+: pointer to the time stepper (default = notimestepper);. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a81f14d729df268911cd3943efc125492}{\texorpdfstring{$\sim$}{\string~}\+Hermite\+Quad\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ does nothing -\/ handled in mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a433b92da06ab05477a823c7724e1ca8b}{nelement\+\_\+in\+\_\+dim}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{d}})
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in mesh in each dimension. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01}{macro\+\_\+coordinate\+\_\+position}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{macro\+\_\+element\+\_\+position}})
+\begin{DoxyCompactList}\small\item\em returns the macro element position of the node that is the x-\/th node along from the LHS and the y-\/th node up from the lower edge \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}{set\+\_\+position\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a735fd20f847ac98c5bd5db5196ff3ea4}{set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Boundary\+Node}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Node}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. Also sets coordinates on boundary vector for the node to be the generalised position of the node in macro element coordinates \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a17d8992ae7fa8b46b568d156306d3c89}{generalised\+\_\+macro\+\_\+element\+\_\+position\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+num\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\+\_\+gen}})
+\begin{DoxyCompactList}\small\item\em computes the generalised position of the node at position (node\+\_\+num\+\_\+x, node\+\_\+num\+\_\+y) in the macro element coordinate scheme. index 0 of m\+\_\+gen \+: 0 -\/ m\+\_\+i 1 -\/ dm\+\_\+i/ds\+\_\+0 2 -\/ dm\+\_\+i/ds\+\_\+1 3 -\/ d2m\+\_\+i/ds\+\_\+0ds\+\_\+1 (where i is index 1 of m\+\_\+gen) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_af72fd9b700fdee643ce6d6259c0e8e6f}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function to build the mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}{setup\+\_\+boundary\+\_\+element\+\_\+info}} ()
+\begin{DoxyCompactList}\small\item\em Setup lookup schemes which establish whic elements are located next to mesh\textquotesingle{}s boundaries (wrapper to suppress doc). Specific version for \doxylink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh} to ensure that the order of the elements in Boundary\+\_\+element\+\_\+pt matches the actual order along the boundary. This is required when hijacking the Biharmonic\+Element to apply the Biharmonic\+Fluid\+Boundary\+Element in Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge(...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a0e4cd3df0828e87a762c61b09121e1c0}{setup\+\_\+boundary\+\_\+element\+\_\+info}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Setup lookup schemes which establish which elements are located next to which boundaries (Doc to outfile if it\textquotesingle{}s open). Specific version for \doxylink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh} to ensure that the order of the elements in Boundary\+\_\+element\+\_\+pt matches the actual order along the boundary. This is required when hijacking the Biharmonic\+Element to apply the Biharmonic\+Fluid\+Boundary\+Element in Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge(...) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a0d02ca1a2769955ce57f09616195bd27}{Nelement}}
+\begin{DoxyCompactList}\small\item\em number of elements in each coordinate direction \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_af1c2c974dc0d2e599b6bbe3921c5bb77}{Xperiodic}}
+\begin{DoxyCompactList}\small\item\em boolean variable to determine whether the mesh is periodic in the x-\/direction \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_af6bae1864691e8fe94d7c61995ae560a}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the topologically rectangular domain which prescribes the problem domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_a3b3cc55576538fc29e6975def870536f}{Node\+\_\+spacing\+\_\+fn}}
+\begin{DoxyCompactList}\small\item\em non uniform mesh spacing function pointer \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$}
+A two dimensional Hermite bicubic element quadrilateral mesh for a topologically rectangular domain. The geometry of the problem must be prescribed using the \doxylink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}. Non uniform node spacing can be prescribed using a function pointer. 
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}\label{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!MeshSpacingFnPtr@{MeshSpacingFnPtr}}
+\index{MeshSpacingFnPtr@{MeshSpacingFnPtr}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MeshSpacingFnPtr}{MeshSpacingFnPtr}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Mesh\+Spacing\+Fn\+Ptr) (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\+\_\+uniform\+\_\+spacing}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{m\+\_\+non\+\_\+uniform\+\_\+spacing}})}
+
+
+
+Mesh Spacing Function Pointer -\/ an optional function pointer to prescibe the node spacing in a non-\/uniformly spaced mesh -\/ takes the position of a node (in macro element coordinates) in the uniformly spaced mesh and return the position in the non-\/uniformly spaced mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00060}{60}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1HermiteQuadMesh_aea2e2144668d092f4e358f195bbc74e7}\label{classoomph_1_1HermiteQuadMesh_aea2e2144668d092f4e358f195bbc74e7} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!HermiteQuadMesh@{HermiteQuadMesh}}
+\index{HermiteQuadMesh@{HermiteQuadMesh}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HermiteQuadMesh()}{HermiteQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Hermite\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \texorpdfstring{$\ast$}{*}}]{domain,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&}]{periodic\+\_\+in\+\_\+x = {\ttfamily \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}}},  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Mesh Constructor (for a uniformly spaced mesh). Takes the following arguments \+: nx \+: number of elements in x direction; ny \+: number of elements in y direction; domain \+: topologically rectangular domain; periodic\+\_\+in\+\_\+x \+: flag specifying if the mesh is periodic in the x direction (default = false); time\+\_\+stepper\+\_\+pt \+: pointer to the time stepper (default = no timestepper);. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{74}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00599}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00238}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00230}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nelement}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00241}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Node\+\_\+spacing\+\_\+fn}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00234}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xperiodic}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_ae28d471336aebafc5fe5e9f303ab0ad8}\label{classoomph_1_1HermiteQuadMesh_ae28d471336aebafc5fe5e9f303ab0ad8} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!HermiteQuadMesh@{HermiteQuadMesh}}
+\index{HermiteQuadMesh@{HermiteQuadMesh}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{HermiteQuadMesh()}{HermiteQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Hermite\+Quad\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} \texorpdfstring{$\ast$}{*}}]{domain,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}}}]{spacing\+\_\+fn,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&}]{periodic\+\_\+in\+\_\+x = {\ttfamily \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}}},  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Mesh Constructor (for a non-\/uniformly spaced mesh). Takes the following arguments \+: nx \+: number of elements in x direction; ny \+: number of elements in y direction; domain \+: topologically rectangular domain; spacing\+\_\+fn \+: spacing function prescribing a non-\/uniformly spaced mesh periodic\+\_\+in\+\_\+x \+: flag specifying if the mesh is periodic in the x direction (default = false); time\+\_\+stepper\+\_\+pt \+: pointer to the time stepper (default = notimestepper);. 
+
+build the mesh
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{115}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00599}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00238}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00230}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nelement}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00241}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Node\+\_\+spacing\+\_\+fn}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00234}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xperiodic}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a81f14d729df268911cd3943efc125492}\label{classoomph_1_1HermiteQuadMesh_a81f14d729df268911cd3943efc125492} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!````~HermiteQuadMesh@{\texorpdfstring{$\sim$}{\string~}HermiteQuadMesh}}
+\index{````~HermiteQuadMesh@{\texorpdfstring{$\sim$}{\string~}HermiteQuadMesh}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HermiteQuadMesh()}{\string~HermiteQuadMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor -\/ does nothing -\/ handled in mesh base class. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00144}{144}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1HermiteQuadMesh_af72fd9b700fdee643ce6d6259c0e8e6f}\label{classoomph_1_1HermiteQuadMesh_af72fd9b700fdee643ce6d6259c0e8e6f} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Generic mesh construction function to build the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00599}{599}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a17d8992ae7fa8b46b568d156306d3c89}\label{classoomph_1_1HermiteQuadMesh_a17d8992ae7fa8b46b568d156306d3c89} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!generalised\_macro\_element\_position\_of\_node@{generalised\_macro\_element\_position\_of\_node}}
+\index{generalised\_macro\_element\_position\_of\_node@{generalised\_macro\_element\_position\_of\_node}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{generalised\_macro\_element\_position\_of\_node()}{generalised\_macro\_element\_position\_of\_node()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::generalised\+\_\+macro\+\_\+element\+\_\+position\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&}]{m\+\_\+gen }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+computes the generalised position of the node at position (node\+\_\+num\+\_\+x, node\+\_\+num\+\_\+y) in the macro element coordinate scheme. index 0 of m\+\_\+gen \+: 0 -\/ m\+\_\+i 1 -\/ dm\+\_\+i/ds\+\_\+0 2 -\/ dm\+\_\+i/ds\+\_\+1 3 -\/ d2m\+\_\+i/ds\+\_\+0ds\+\_\+1 (where i is index 1 of m\+\_\+gen) 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00197}{197}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01}\label{classoomph_1_1HermiteQuadMesh_a745a06530e60580e95826bedcf2e3e01} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!macro\_coordinate\_position@{macro\_coordinate\_position}}
+\index{macro\_coordinate\_position@{macro\_coordinate\_position}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{macro\_coordinate\_position()}{macro\_coordinate\_position()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::macro\+\_\+coordinate\+\_\+position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} $>$ \&}]{macro\+\_\+element\+\_\+position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+returns the macro element position of the node that is the x-\/th node along from the LHS and the y-\/th node up from the lower edge 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00155}{155}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00230}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nelement}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00241}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Node\+\_\+spacing\+\_\+fn}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a433b92da06ab05477a823c7724e1ca8b}\label{classoomph_1_1HermiteQuadMesh_a433b92da06ab05477a823c7724e1ca8b} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!nelement\_in\_dim@{nelement\_in\_dim}}
+\index{nelement\_in\_dim@{nelement\_in\_dim}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nelement\_in\_dim()}{nelement\_in\_dim()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::nelement\+\_\+in\+\_\+dim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in mesh in each dimension. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00147}{147}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00230}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nelement}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a735fd20f847ac98c5bd5db5196ff3ea4}\label{classoomph_1_1HermiteQuadMesh_a735fd20f847ac98c5bd5db5196ff3ea4} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!set\_position\_of\_boundary\_node@{set\_position\_of\_boundary\_node}}
+\index{set\_position\_of\_boundary\_node@{set\_position\_of\_boundary\_node}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_position\_of\_boundary\_node()}{set\_position\_of\_boundary\_node()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::set\+\_\+position\+\_\+of\+\_\+boundary\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Boundary\+Node}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Node}} $>$ \texorpdfstring{$\ast$}{*}}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. Also sets coordinates on boundary vector for the node to be the generalised position of the node in macro element coordinates 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00115}{115}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8}\label{classoomph_1_1HermiteQuadMesh_abaac1dedc4a2e578b73b0d849c9a68e8} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!set\_position\_of\_node@{set\_position\_of\_node}}
+\index{set\_position\_of\_node@{set\_position\_of\_node}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_position\_of\_node()}{set\_position\_of\_node()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::set\+\_\+position\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{node\+\_\+num\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Node}} \texorpdfstring{$\ast$}{*}}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+sets the generalised position of the node (i.\+e. -\/ x\+\_\+i, dx\+\_\+i/ds\+\_\+0, dx\+\_\+i/ds\+\_\+1 \& d2x\+\_\+i/ds\+\_\+0ds\+\_\+1 for i = 1,2). Takes the x,y coordinates of the node from which its position can be determined. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l00049}{49}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44}\label{classoomph_1_1HermiteQuadMesh_a6eefe872b5bf8a06174b536d9727ea44} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
+\index{setup\_boundary\_element\_info@{setup\_boundary\_element\_info}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_element\_info()}{setup\_boundary\_element\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Setup lookup schemes which establish whic elements are located next to mesh\textquotesingle{}s boundaries (wrapper to suppress doc). Specific version for \doxylink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh} to ensure that the order of the elements in Boundary\+\_\+element\+\_\+pt matches the actual order along the boundary. This is required when hijacking the Biharmonic\+Element to apply the Biharmonic\+Fluid\+Boundary\+Element in Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge(...) 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00212}{212}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00212}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00212}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a0e4cd3df0828e87a762c61b09121e1c0}\label{classoomph_1_1HermiteQuadMesh_a0e4cd3df0828e87a762c61b09121e1c0} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
+\index{setup\_boundary\_element\_info@{setup\_boundary\_element\_info}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_element\_info()}{setup\_boundary\_element\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Setup lookup schemes which establish which elements are located next to which boundaries (Doc to outfile if it\textquotesingle{}s open). Specific version for \doxylink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh} to ensure that the order of the elements in Boundary\+\_\+element\+\_\+pt matches the actual order along the boundary. This is required when hijacking the Biharmonic\+Element to apply the Biharmonic\+Fluid\+Boundary\+Element in Biharmonic\+Fluid\+Problem\+::impose\+\_\+traction\+\_\+free\+\_\+edge(...) 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source_l01250}{1250}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1HermiteQuadMesh_af6bae1864691e8fe94d7c61995ae560a}\label{classoomph_1_1HermiteQuadMesh_af6bae1864691e8fe94d7c61995ae560a} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the topologically rectangular domain which prescribes the problem domain. 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00238}{238}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a0d02ca1a2769955ce57f09616195bd27}\label{classoomph_1_1HermiteQuadMesh_a0d02ca1a2769955ce57f09616195bd27} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!Nelement@{Nelement}}
+\index{Nelement@{Nelement}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nelement}{Nelement}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}}$>$ \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Nelement\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+number of elements in each coordinate direction 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00230}{230}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00155}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::macro\+\_\+coordinate\+\_\+position()}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00147}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::nelement\+\_\+in\+\_\+dim()}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_a3b3cc55576538fc29e6975def870536f}\label{classoomph_1_1HermiteQuadMesh_a3b3cc55576538fc29e6975def870536f} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!Node\_spacing\_fn@{Node\_spacing\_fn}}
+\index{Node\_spacing\_fn@{Node\_spacing\_fn}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Node\_spacing\_fn}{Node\_spacing\_fn}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh_abebf4806b300591f976398404ed0ef3f}{Mesh\+Spacing\+Fn\+Ptr}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Node\+\_\+spacing\+\_\+fn\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+non uniform mesh spacing function pointer 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00241}{241}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00155}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::macro\+\_\+coordinate\+\_\+position()}}.
+
+\Hypertarget{classoomph_1_1HermiteQuadMesh_af1c2c974dc0d2e599b6bbe3921c5bb77}\label{classoomph_1_1HermiteQuadMesh_af1c2c974dc0d2e599b6bbe3921c5bb77} 
+\index{oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}!Xperiodic@{Xperiodic}}
+\index{Xperiodic@{Xperiodic}!oomph::HermiteQuadMesh$<$ ELEMENT $>$@{oomph::HermiteQuadMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xperiodic}{Xperiodic}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{oomph\+::\+Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Xperiodic\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean variable to determine whether the mesh is periodic in the x-\/direction 
+
+
+
+Definition at line \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00234}{234}} of file \mbox{\hyperlink{hermite__element__quad__mesh_8h_source}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00074}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}, and \mbox{\hyperlink{hermite__element__quad__mesh_8h_source_l00115}{oomph\+::\+Hermite\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Hermite\+Quad\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hermite__element__quad__mesh_8h}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{hermite__element__quad__mesh_8template_8cc}{hermite\+\_\+element\+\_\+quad\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

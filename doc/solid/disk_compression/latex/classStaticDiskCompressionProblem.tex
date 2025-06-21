@@ -1,0 +1,207 @@
+\doxysection{Static\+Disk\+Compression\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classStaticDiskCompressionProblem}{}\label{classStaticDiskCompressionProblem}\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+
+
+Uniform compression of a circular disk in a state of plane strain, subject to uniform growth.  
+
+
+Inheritance diagram for Static\+Disk\+Compression\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classStaticDiskCompressionProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classStaticDiskCompressionProblem_a462e81aec225a5d6204b579719b3db87}{Static\+Disk\+Compression\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\+\_\+study}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{case\+\_\+number}})
+\begin{DoxyCompactList}\small\item\em Run simulation\+: Pass case number to label output files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem_a9154152d022e86461966b5562f5acba4}{doc\+\_\+solution}} (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Doc\+Info}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem_a484b47d6a10a91cbd30cb807a49b1f58}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem_a2b00608d2992b40217248e01b2294153}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}} \mbox{\hyperlink{classStaticDiskCompressionProblem_a7affbfca1efcaadb4770386dc7d23e4c}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classStaticDiskCompressionProblem_a8e98a225a1bb49cb6943b59d9f3145dc}{Trace\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to nodes whose position we\textquotesingle{}re tracing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classStaticDiskCompressionProblem_a6ad5b428d535a90f71e2e9325e9a5b15}{Solid\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid mesh. \end{DoxyCompactList}\item 
+Solid\+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classStaticDiskCompressionProblem_a66623722b4cb3bdc94d46a56c18d2908}{Traction\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh of traction elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}$>$\newline
+class Static\+Disk\+Compression\+Problem$<$ ELEMENT $>$}
+Uniform compression of a circular disk in a state of plane strain, subject to uniform growth. 
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00170}{170}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classStaticDiskCompressionProblem_a462e81aec225a5d6204b579719b3db87}\label{classStaticDiskCompressionProblem_a462e81aec225a5d6204b579719b3db87} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!StaticDiskCompressionProblem@{StaticDiskCompressionProblem}}
+\index{StaticDiskCompressionProblem@{StaticDiskCompressionProblem}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{StaticDiskCompressionProblem()}{StaticDiskCompressionProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\mbox{\hyperlink{classStaticDiskCompressionProblem}{\+::\+Static\+Disk\+Compression\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00210}{210}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__compression_8cc_source_l00070}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure()}}, \mbox{\hyperlink{disk__compression_8cc_source_l00055}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{disk__compression_8cc_source_l00122}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, \mbox{\hyperlink{disk__compression_8cc_source_l00085}{Global\+\_\+\+Physical\+\_\+\+Variables\+::growth\+\_\+function()}}, and \mbox{\hyperlink{disk__compression_8cc_source_l00139}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::make\+\_\+traction\+\_\+element\+\_\+mesh()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classStaticDiskCompressionProblem_a484b47d6a10a91cbd30cb807a49b1f58}\label{classStaticDiskCompressionProblem_a484b47d6a10a91cbd30cb807a49b1f58} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00185}{185}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_a2b00608d2992b40217248e01b2294153}\label{classStaticDiskCompressionProblem_a2b00608d2992b40217248e01b2294153} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00188}{188}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_a9154152d022e86461966b5562f5acba4}\label{classStaticDiskCompressionProblem_a9154152d022e86461966b5562f5acba4} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00303}{303}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__compression_8cc_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{disk__compression_8cc_source_l00061}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{disk__compression_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}, and \mbox{\hyperlink{disk__compression_8cc_source_l00082}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Uniform\+\_\+gamma}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}\label{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!parameter\_study@{parameter\_study}}
+\index{parameter\_study@{parameter\_study}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{parameter\_study()}{parameter\_study()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{void}} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::parameter\+\_\+study (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{unsigned}} \&}]{case\+\_\+number }\end{DoxyParamCaption})}
+
+
+
+Run simulation\+: Pass case number to label output files. 
+
+Run the paramter study. 
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00356}{356}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__compression_8cc_source_l00122}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, and \mbox{\hyperlink{disk__compression_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classStaticDiskCompressionProblem_a6ad5b428d535a90f71e2e9325e9a5b15}\label{classStaticDiskCompressionProblem_a6ad5b428d535a90f71e2e9325e9a5b15} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
+\index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00199}{199}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_a7affbfca1efcaadb4770386dc7d23e4c}\label{classStaticDiskCompressionProblem_a7affbfca1efcaadb4770386dc7d23e4c} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00193}{193}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_a8e98a225a1bb49cb6943b59d9f3145dc}\label{classStaticDiskCompressionProblem_a8e98a225a1bb49cb6943b59d9f3145dc} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!Trace\_node\_pt@{Trace\_node\_pt}}
+\index{Trace\_node\_pt@{Trace\_node\_pt}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_node\_pt}{Trace\_node\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector}}$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Node}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of pointers to nodes whose position we\textquotesingle{}re tracing. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00196}{196}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+\Hypertarget{classStaticDiskCompressionProblem_a66623722b4cb3bdc94d46a56c18d2908}\label{classStaticDiskCompressionProblem_a66623722b4cb3bdc94d46a56c18d2908} 
+\index{StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}!Traction\_mesh\_pt@{Traction\_mesh\_pt}}
+\index{Traction\_mesh\_pt@{Traction\_mesh\_pt}!StaticDiskCompressionProblem$<$ ELEMENT $>$@{StaticDiskCompressionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Traction\_mesh\_pt}{Traction\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+Solid\+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classStaticDiskCompressionProblem}{Static\+Disk\+Compression\+Problem}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\+::\+Traction\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to mesh of traction elements. 
+
+
+
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00202}{202}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{disk__compression_8cc}{disk\+\_\+compression.\+cc}}\end{DoxyCompactItemize}

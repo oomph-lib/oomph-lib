@@ -1,0 +1,249 @@
+\doxysection{Rayleigh\+Traction\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRayleighTractionProblem}{}\label{classRayleighTractionProblem}\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+
+
+Rayleigh-\/type problem\+: 2D channel flow driven by traction bc.  
+
+
+Inheritance diagram for Rayleigh\+Traction\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRayleighTractionProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a}{Rayleigh\+Traction\+Problem}} (const unsigned \&nx, const unsigned \&ny, const double \&lx, const double \&ly)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x and y directions and lengths. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_ad8f0e846280b0dd56f90c6d40808d3ea}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_ad85c20559eec76d54ebf666f62507d2e}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update after solve is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_aea3e470265c0e98a8b5bdabedd28eb82}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Actions before timestep (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_a50871474406082ae1c1a1694e69e094b}{unsteady\+\_\+run}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Run an unsteady simulation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_a451af703b4a6de97b060884ca71c3ef8}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_ad6394f146505e00aeba2fc37f2c75488}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial condition (incl previous timesteps) according to specified function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}{create\+\_\+traction\+\_\+elements}} (const unsigned \&b, Mesh \texorpdfstring{$\ast$}{*}const \&bulk\+\_\+mesh\+\_\+pt, Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create traction elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRayleighTractionProblem_a21664c5b87a5ae008842a150539496ad}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRayleighTractionProblem_ac47f90966608b8797074f5a3fb9ff40a}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}surface"{} mesh. \end{DoxyCompactList}\item 
+ofstream \mbox{\hyperlink{classRayleighTractionProblem_aac28de2e912d5a48638d3399914ac153}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
+class Rayleigh\+Traction\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Rayleigh-\/type problem\+: 2D channel flow driven by traction bc. 
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00125}{125}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a}\label{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!RayleighTractionProblem@{RayleighTractionProblem}}
+\index{RayleighTractionProblem@{RayleighTractionProblem}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{RayleighTractionProblem()}{RayleighTractionProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\mbox{\hyperlink{classRayleighTractionProblem}{\+::\+Rayleigh\+Traction\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x and y directions and lengths. 
+
+Problem constructor. 
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00179}{179}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00092}{Exact\+Soln\+::prescribed\+\_\+traction()}}, \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00045}{Global\+\_\+\+Parameters\+::\+Re}}, and \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00048}{Global\+\_\+\+Parameters\+::\+Re\+St}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRayleighTractionProblem_ad85c20559eec76d54ebf666f62507d2e}\label{classRayleighTractionProblem_ad85c20559eec76d54ebf666f62507d2e} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update after solve is empty. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00138}{138}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_aea3e470265c0e98a8b5bdabedd28eb82}\label{classRayleighTractionProblem_aea3e470265c0e98a8b5bdabedd28eb82} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before timestep (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00141}{141}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_ad8f0e846280b0dd56f90c6d40808d3ea}\label{classRayleighTractionProblem_ad8f0e846280b0dd56f90c6d40808d3ea} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve is empty. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00135}{135}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}\label{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!create\_traction\_elements@{create\_traction\_elements}}
+\index{create\_traction\_elements@{create\_traction\_elements}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{create\_traction\_elements()}{create\_traction\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::create\+\_\+traction\+\_\+elements (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Create traction elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
+
+Create Navier-\/\+Stokes traction elements on the b-\/th boundary of the Mesh object pointed to by bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointeed to by surface\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00424}{424}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_a451af703b4a6de97b060884ca71c3ef8}\label{classRayleighTractionProblem_a451af703b4a6de97b060884ca71c3ef8} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00339}{339}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00067}{Exact\+Soln\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classRayleighTractionProblem_ad6394f146505e00aeba2fc37f2c75488}\label{classRayleighTractionProblem_ad6394f146505e00aeba2fc37f2c75488} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial condition (incl previous timesteps) according to specified function. 
+
+Set initial condition\+: Assign previous and current values from exact solution. 
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00272}{272}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00067}{Exact\+Soln\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classRayleighTractionProblem_a50871474406082ae1c1a1694e69e094b}\label{classRayleighTractionProblem_a50871474406082ae1c1a1694e69e094b} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Run an unsteady simulation. 
+
+Unsteady run... 
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00458}{458}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00055}{Global\+\_\+\+Parameters\+::\+Impulsive\+\_\+start\+\_\+flag}}, and \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00051}{Global\+\_\+\+Parameters\+::\+Long\+\_\+run\+\_\+flag}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00537}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classRayleighTractionProblem_a21664c5b87a5ae008842a150539496ad}\label{classRayleighTractionProblem_a21664c5b87a5ae008842a150539496ad} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Rectangular\+Quad\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00163}{163}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_ac47f90966608b8797074f5a3fb9ff40a}\label{classRayleighTractionProblem_ac47f90966608b8797074f5a3fb9ff40a} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}surface"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00166}{166}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+\Hypertarget{classRayleighTractionProblem_aac28de2e912d5a48638d3399914ac153}\label{classRayleighTractionProblem_aac28de2e912d5a48638d3399914ac153} 
+\index{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$@{RayleighTractionProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+ofstream \mbox{\hyperlink{classRayleighTractionProblem}{Rayleigh\+Traction\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__traction__channel_8cc_source_l00169}{169}} of file \mbox{\hyperlink{rayleigh__traction__channel_8cc_source}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rayleigh__traction__channel_8cc}{rayleigh\+\_\+traction\+\_\+channel.\+cc}}\end{DoxyCompactItemize}

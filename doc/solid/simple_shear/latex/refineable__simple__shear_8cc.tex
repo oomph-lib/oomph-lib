@@ -1,0 +1,57 @@
+\doxysection{refineable\+\_\+simple\+\_\+shear.\+cc File Reference}
+\hypertarget{refineable__simple__shear_8cc}{}\label{refineable__simple__shear_8cc}\index{refineable\_simple\_shear.cc@{refineable\_simple\_shear.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classRefineableElasticCubicMesh}{Refineable\+Elastic\+Cubic\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Simple cubic mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Boundary-\/driven elastic deformation of fish-\/shaped domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a055c27a8d2375f73e74970a8ea1dee21}{Global\+\_\+\+Physical\+\_\+\+Variables\+::body\+\_\+force}} (const Vector$<$ double $>$ \&xi, const double \&t, Vector$<$ double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Body force vector\+: Vertically downwards with magnitude Gravity. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{refineable__simple__shear_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver for simple elastic problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Strain\+Energy\+Function \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6838abf46c7850f1ee0b3452d6d2498}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to strain energy function. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}} =1.\+3
+\begin{DoxyCompactList}\small\item\em "{}\+Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Body force. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{refineable__simple__shear_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{refineable__simple__shear_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{refineable\_simple\_shear.cc@{refineable\_simple\_shear.cc}!main@{main}}
+\index{main@{main}!refineable\_simple\_shear.cc@{refineable\_simple\_shear.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver for simple elastic problem. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00407}{407}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00110}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+C1}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00101}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00104}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00107}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00335}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::run()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00098}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Strain\+\_\+energy\+\_\+function\+\_\+pt}}.
+

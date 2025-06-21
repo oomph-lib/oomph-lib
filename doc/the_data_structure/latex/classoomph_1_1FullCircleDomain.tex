@@ -1,0 +1,265 @@
+\doxysection{oomph\+::Full\+Circle\+Domain Class Reference}
+\hypertarget{classoomph_1_1FullCircleDomain}{}\label{classoomph_1_1FullCircleDomain}\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+
+
+Topologically circular domain, e.\+g. a tube cross section. The entire domain must be defined by a \doxylink{classoomph_1_1GeomObject}{Geom\+Object} with the following convention\+: zeta\mbox{[}0\mbox{]} is the radial coordinate and zeta\mbox{[}1\mbox{]} is the theta coordinate around the cross-\/sectin. The outer boundary must lie at zeta\mbox{[}0\mbox{]} = 1.  
+
+
+
+
+{\ttfamily \#include $<$full\+\_\+circle\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Full\+Circle\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FullCircleDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac}{Full\+Circle\+Domain}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{area\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{theta\+\_\+positions}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{radius\+\_\+box}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass geometric object; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; and the corresponding fractions of the radius at which the central box is to be placed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_a1510d15a099f9ac13553ba31a8fa92d7}{Full\+Circle\+Domain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain_aa6b8b159fc25247caad5edc0d689578d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175}{\texorpdfstring{$\sim$}{\string~}\+Full\+Circle\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Domain}{oomph\+::\+Domain}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Domain_a091982333107142c3ac71a02fbdb6ac8}{Domain}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Domain_ad3ae60cfff2bc9595d942c6891aefb8a}{Domain}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a33de7a18dd8ff992dc7faf068197ff50}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Domain_afd6c101003640d74becabcd8f1dcbc67}{\texorpdfstring{$\sim$}{\string~}\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the \doxylink{classoomph_1_1Domain}{Domain} to generically kill any Macro\+Elements left over in the \doxylink{classoomph_1_1MacroElement}{Macro\+Element} container (if it hasn\textquotesingle{}t already been done in the derived class) to avoid memory leaks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Domain_abef3886384a9b9e722e490268feecc2d}{macro\+\_\+element\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access to i-\/th macro element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1Domain_a3ed63583615d0e8471d95ba13ccc0aff}{nmacro\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Number of macro elements in domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a7b0c50db44e3bc3c8ae1a0d34ac835c8}{output}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ab7ccc375ba2e46ffb11e4e2c5c485578}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output macro elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a10142c029e8a57c5470d22701518e9d1}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a9d293b736e74bfeace64c1c8858add8a}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ac663be35932981a1c02b3ed930ec2eda}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a59dfe3a2cff10aa2e12f86dba9584f15}{output\+\_\+macro\+\_\+element\+\_\+boundaries}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nplot}})
+\begin{DoxyCompactList}\small\item\em Output all macro element boundaries as tecplot zones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_ae573c54363a8e9d33951e59208a9bc39}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_af4de3686bcfbf5a8e98b92a071607e0f}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a6973f0ef86b83c6cadcd722374c62270}{dmacro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_afeeb40f9179abe710f14effbe4db42a1}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a645d0e40b2e378eca3b6230741b21169}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary seocond derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at continuous time level t. Broken virtual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Domain_a837d82e917451ca9adc755aa99ad99a2}{d2macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary second derivatives i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D) at current time\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}{lin\+\_\+interpolate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{low}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{high}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&f)
+\begin{DoxyCompactList}\small\item\em A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s, which is assumed to run from -\/1 to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}{Theta\+\_\+positions}}
+\begin{DoxyCompactList}\small\item\em Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636}{Radius\+\_\+box}}
+\begin{DoxyCompactList}\small\item\em Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}{Area\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Domain}{oomph\+::\+Domain}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElement}{Macro\+Element}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1Domain_a3a54693bb493f31acccadc62468dd7ae}{Macro\+\_\+element\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to macro elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Topologically circular domain, e.\+g. a tube cross section. The entire domain must be defined by a \doxylink{classoomph_1_1GeomObject}{Geom\+Object} with the following convention\+: zeta\mbox{[}0\mbox{]} is the radial coordinate and zeta\mbox{[}1\mbox{]} is the theta coordinate around the cross-\/sectin. The outer boundary must lie at zeta\mbox{[}0\mbox{]} = 1. 
+
+The domain is parametrised by five macro elements (a central box surrounded by four curved elements). The labelling of the macro elements is shown below.
+
+\DoxyHorRuler{0}
+ \texorpdfstring{$\vert$}{|}\textbackslash{} /\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \textbackslash{} Macro / \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 3 Element 3 2 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \textbackslash{} / \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---/ \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 4 \texorpdfstring{$\vert$}{|} Macro \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} Element 0 \texorpdfstring{$\vert$}{|} 2 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / \textbackslash{} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 0 Macro 1 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / Element 1 \textbackslash{} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / $|$ \texorpdfstring{$\vert$}{|}/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|} 
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00068}{68}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac}\label{classoomph_1_1FullCircleDomain_a35697cff7683dde517a2b8cf912a6aac} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!FullCircleDomain@{FullCircleDomain}}
+\index{FullCircleDomain@{FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{FullCircleDomain()}{FullCircleDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{area\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{theta\+\_\+positions,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{radius\+\_\+box }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass geometric object; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; and the corresponding fractions of the radius at which the central box is to be placed. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00077}{77}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FullCircleDomain_a1510d15a099f9ac13553ba31a8fa92d7}\label{classoomph_1_1FullCircleDomain_a1510d15a099f9ac13553ba31a8fa92d7} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!FullCircleDomain@{FullCircleDomain}}
+\index{FullCircleDomain@{FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{FullCircleDomain()}{FullCircleDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::\+Full\+Circle\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175}\label{classoomph_1_1FullCircleDomain_afbdae044de6d958491a0b1a8cfcbc175} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!````~FullCircleDomain@{\texorpdfstring{$\sim$}{\string~}FullCircleDomain}}
+\index{````~FullCircleDomain@{\texorpdfstring{$\sim$}{\string~}FullCircleDomain}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FullCircleDomain()}{\string~FullCircleDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Full\+Circle\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Full\+Circle\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00102}{102}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a}\label{classoomph_1_1FullCircleDomain_a77b7b1454eb0082545b1b63310cb978a} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!lin\_interpolate@{lin\_interpolate}}
+\index{lin\_interpolate@{lin\_interpolate}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{lin\_interpolate()}{lin\_interpolate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Full\+Circle\+Domain\+::lin\+\_\+interpolate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{low,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{high,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s, which is assumed to run from -\/1 to 1. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00132}{132}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d}\label{classoomph_1_1FullCircleDomain_a93253d6c878c3ab40a582e0d2070a69d} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Full\+Circle\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
+
+\doxylink{classoomph_1_1Vector}{Vector} representation of the imacro-\/th macro element boundary idirect (N/\+S/\+W/E) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) 
+
+Implements \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain}}.
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{155}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{full__circle__domain_8h_source_l00126}{Area\+\_\+pt}}, \mbox{\hyperlink{full__circle__domain_8h_source_l00132}{lin\+\_\+interpolate()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{full__circle__domain_8h_source_l00123}{Radius\+\_\+box}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{full__circle__domain_8h_source_l00119}{Theta\+\_\+positions}}.
+
+\Hypertarget{classoomph_1_1FullCircleDomain_aa6b8b159fc25247caad5edc0d689578d}\label{classoomph_1_1FullCircleDomain_aa6b8b159fc25247caad5edc0d689578d} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Full\+Circle\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1FullCircleDomain}{Full\+Circle\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd}\label{classoomph_1_1FullCircleDomain_a49eca6b304caf0840bd99bd18a9a32cd} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Area\_pt@{Area\_pt}}
+\index{Area\_pt@{Area\_pt}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Area\_pt}{Area\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Full\+Circle\+Domain\+::\+Area\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00126}{126}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636}\label{classoomph_1_1FullCircleDomain_a96d5b35a7b41251a033d923afc953636} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Radius\_box@{Radius\_box}}
+\index{Radius\_box@{Radius\_box}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Radius\_box}{Radius\_box}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Full\+Circle\+Domain\+::\+Radius\+\_\+box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00123}{123}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6}\label{classoomph_1_1FullCircleDomain_ab995977e0da3045269da04fb15fd2cb6} 
+\index{oomph::FullCircleDomain@{oomph::FullCircleDomain}!Theta\_positions@{Theta\_positions}}
+\index{Theta\_positions@{Theta\_positions}!oomph::FullCircleDomain@{oomph::FullCircleDomain}}
+\doxysubsubsection{\texorpdfstring{Theta\_positions}{Theta\_positions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Full\+Circle\+Domain\+::\+Theta\+\_\+positions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. 
+
+
+
+Definition at line \mbox{\hyperlink{full__circle__domain_8h_source_l00119}{119}} of file \mbox{\hyperlink{full__circle__domain_8h_source}{full\+\_\+circle\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{full__circle__domain_8h_source_l00155}{macro\+\_\+element\+\_\+boundary()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{full__circle__domain_8h}{full\+\_\+circle\+\_\+domain.\+h}}\end{DoxyCompactItemize}

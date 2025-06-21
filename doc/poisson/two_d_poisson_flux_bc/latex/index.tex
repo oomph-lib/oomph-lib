@@ -1,0 +1,548 @@
+\chapter{Demo problem\+: A two-\/dimensional Poisson problem with flux boundary conditions}
+\hypertarget{index}{}\label{index}\index{Demo problem: A two-\/dimensional Poisson problem with flux boundary conditions@{Demo problem: A two-\/dimensional Poisson problem with flux boundary conditions}}
+In this document, we demonstrate how to solve a 2D Poisson problem with Neumann boundary conditions, using existing objects from the {\ttfamily oomph-\/lib} library\+: \begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Two-\/dimensional model Poisson problem with Neumann boundary conditions}} \end{center}  Solve  \[
+\sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the rectangular domain $ D = \left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\} $. The domain boundary $ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} $, where $ \partial D_{Neumann} 
+= \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} $. On $ \partial D_{Dirichlet} $ we apply the Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D_{Dirichlet}}=u_0,
+\ \ \ \ \ \ \ \ \ \ (2)
+\] where the function $ u_0 $ is given. On $ \partial D_{Neumann} $ we apply the Neumann conditions  \[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = 
+\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}
+=g_0,
+\ \ \ \ \ \ \ \ \ \ (3)
+\] where the function $ g_0 $ is given.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center}  ~\newline
+
+
+We provide a detailed discussion of the driver code \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc}{\texttt{ two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc.\+cc}} which solves the problem for  \[
+u_0(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  (4)
+\]  \[
+f(x_1,x_2) = \sum_{i=1}^2 \frac{\partial^2 u_0}{\partial x_i^2},
+\ \ \ \ \ \ \ \ \  (5)
+\] and  \[
+g_0 = \left. \frac{\partial u_0}{\partial n} \right|_{x_1=1}
+    = \left. \frac{\partial u_0}{\partial x_1} \right|_{x_1=1},
+\ \ \ \ \ \ \ \ \  (6)
+\] so that $ u_0(x_1,x_2) $ is the exact solution of the problem. For large values of $ \alpha $ the solution approaches a step function  \[
+u_{step}(x_1,x_2) = \left\{
+\begin{array}{rl}
+-1 & \mbox {for $x_2 < x_1 \ \tan\Phi$} \\
+1 & \mbox {for $x_2 > x_1 \ \tan\Phi$} 
+\end{array}
+ \right.
+\] and presents a serious challenge for any numerical method. The figure below compares the numerical and exact solutions for $ \alpha = 1 $ and $ \Phi = 45^o $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{soln}
+\doxyfigcaption{Plot of the solution }
+\end{DoxyImage}
+
+
+Most of the driver code is identical to the code that solves the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ equivalent problem without Neumann boundary conditions}}. Therefore we only provide a detailed discussion of those functions that needed to be changed to accommodate the Neumann boundary conditions.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+As in the Dirichlet problem, we define the source function (5) and the exact solution (4), together with the problem parameters $ \tan \Phi $ and $ \alpha $, in a namespace {\ttfamily \doxylink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}. We add the function {\ttfamily Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary(...)} which computes the prescribed flux $ g_0 $ required in the Neumann boundary condition (3). The function evaluates $ \partial u_0 /\partial n = {\bf N} \cdot \nabla u_0 $ for the normal direction specified by the vector $ {\bf N} =
+(1,0)^T. $
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_namespace=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ exact\ solution\ for\ Poisson\ equation\ with\ "{}sharp\ step"{}\ }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ steepness\ of\ "{}step"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}=1.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ angle\ Phi\ of\ "{}step"{}}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ Vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{get\_exact\_u}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]=tanh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Source\ function\ required\ to\ make\ the\ solution\ above\ an\ exact\ solution\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{source\_function}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ \textcolor{keywordtype}{double}\&\ source)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ source\ =\ 2.0*tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]))*}
+\DoxyCodeLine{\ \ \ (1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}+2.0*tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1]))*}
+\DoxyCodeLine{\ \ \ (1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Flux\ required\ by\ the\ exact\ solution\ on\ a\ boundary\ on\ which\ x\ is\ fixed}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a0e99ccf27df36f28f091de6d57484172}{prescribed\_flux\_on\_fixed\_x\_boundary}}(\textcolor{keyword}{const}\ Vector<double>\&\ x,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\&\ flux)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//The\ outer\ unit\ normal\ to\ the\ boundary\ is\ (1,0)}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ N[2]\ =\ \{1.0,\ 0.0\};}
+\DoxyCodeLine{\ \ \textcolor{comment}{//The\ flux\ in\ terms\ of\ the\ normal\ is}}
+\DoxyCodeLine{\ \ flux\ =\ }
+\DoxyCodeLine{\ \ \ -\/(1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*N[0]+(}
+\DoxyCodeLine{\ \ \ 1.0-\/pow(tanh(-\/1.0+\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*(\mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}*x[0]-\/x[1])),2.0))*\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}*N[1];}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is very similar to that for the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem\+:}} We set up the problem, check its integrity and define the problem parameters. Following this, we solve the problem for a number of $ \alpha $ values and document the solution.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ 2D\ Poisson\ problem\ with\ flux\ boundary\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{two__d__poisson__flux__bc_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ the\ problem\ with\ 2D\ nine-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//QPoissonElement\ family.\ Pass\ pointer\ to\ source\ function.\ }}
+\DoxyCodeLine{\ \mbox{\hyperlink{classFluxPoissonProblem}{FluxPoissonProblem<QPoissonElement<2,3>}}\ >\ }
+\DoxyCodeLine{\ \ problem(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{TanhSolnForPoisson::source\_function}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ label\ for\ output}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ doc\_info.number()=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ that\ we're\ ready\ to\ go:}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem\ self-\/test\ "{}};}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (problem.self\_test()==0)\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}passed:\ Problem\ can\ be\ solved."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{throw}\ OomphLibError(\textcolor{stringliteral}{"{}Self\ test\ failed"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ orientation\ of\ the\ "{}step"{}\ to\ 45\ degrees}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}=1.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initial\ value\ for\ the\ steepness\ of\ the\ "{}step"{}}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}=1.0;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ a\ couple\ of\ solutions\ for\ different\ forcing\ functions}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=4;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ istep=0;istep<nstep;istep++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increase\ the\ steepness\ of\ the\ step:}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}+=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nSolving\ for\ TanhSolnForPoisson::Alpha="{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ problem.newton\_solve();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \ problem.doc\_solution(doc\_info);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is virtually identical to that used for the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem}}\+: The only difference is that the class now contains an additional private data member, {\ttfamily \doxylink{classFluxPoissonProblem_a1ee0cfcbc307252430a3a5ba7ab7fd6e}{Flux\+Poisson\+Problem\+::\+Npoisson\+\_\+elements}}, which stores the number of 2D "{}bulk"{} elements in the mesh, and an additional private member function {\ttfamily Flux\+Poisson\+Problem\+::create\+\_\+flux\+\_\+elements(...)}. pwd
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=========\ start\_of\_problem\_class=====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ 2D\ Poisson\ problem\ on\ rectangular\ domain,\ discretised\ with}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ 2D\ QPoisson\ elements.\ Flux\ boundary\ conditions\ are\ applied}}
+\DoxyCodeLine{\textcolor{comment}{///\ along\ boundary\ 1\ (the\ boundary\ where\ x=L).\ The\ specific\ type\ of\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ element\ is\ specified\ via\ the\ template\ parameter.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classFluxPoissonProblem}{FluxPoissonProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Pass\ pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFluxPoissonProblem}{FluxPoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt\ source\_fct\_pt);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFluxPoissonProblem_afe4848aa1478883fa4dd59abbd7c7547}{\string~FluxPoissonProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution.\ DocInfo\ object\ stores\ flags/labels\ for\ where\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ output\ gets\ written\ to}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_ae410950b9dc1f2bd4991480df15a1586}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve:\ Reset\ boundary\ conditions}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ to\ the\ values\ from\ the\ exact\ solution.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_aaea8f7f6f7a2e1aedfd2854e1ae12338}{actions\_before\_newton\_solve}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_aa52ae9abbe805520a697929ab115f114}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ Poisson\ flux\ elements\ on\ the\ b-\/th\ boundary\ of\ the\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ problem's\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_a542ce9cc1c4e17eae68d51d2e13ac0c3}{create\_flux\_elements}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&b);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ Poisson\ "{}bulk"{}\ elements\ (We're\ attaching\ the\ flux\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ elements\ to\ the\ bulk\ mesh\ -\/-\/>\ only\ the\ first\ Npoisson\_elements\ elements}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ in\ the\ mesh\ are\ bulk\ elements!)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classFluxPoissonProblem_a1ee0cfcbc307252430a3a5ba7ab7fd6e}{Npoisson\_elements}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ PoissonEquations<2>::PoissonSourceFctPt\ \mbox{\hyperlink{classFluxPoissonProblem_ad003b34801b1c58b762bec0fe00b86aa}{Source\_fct\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+
+\end{DoxyCodeInclude}
+ \mbox{[}See the discussion of the \href{../../../poisson/one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Problem constructor}{The Problem constructor}}\label{index_constructor}
+The first part of the {\ttfamily Problem} constructor is identical to that used for the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem}}\+: We create a 2D Mesh consisting of 4x4 quadrilateral Poisson elements\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ Poisson\ problem:\ Pass\ pointer\ to\ source\ function.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classFluxPoissonProblem_a1b57e0c67634586cb69fbeeec7874e36}{FluxPoissonProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classFluxPoissonProblem_a1b57e0c67634586cb69fbeeec7874e36}{\ \ \ \ \ \ FluxPoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt\ source\_fct\_pt)}
+\DoxyCodeLine{\ \ \ \ \ \ \ :\ \ Source\_fct\_pt(source\_fct\_pt)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ mesh}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_x=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ l\_y=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\textcolor{keyword}{new}\ SimpleRectangularQuadMesh<ELEMENT>(n\_x,n\_y,l\_x,l\_y);}
+
+\end{DoxyCodeInclude}
+ Before continuing, we store the number of 2D "{}bulk"{} Poisson elements in the variable {\ttfamily Flux\+Poisson\+Problem\+::\+Npoisson\+\_\+element\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ number\ of\ Poisson\ bulk\ elements\ (=\ number\ of\ elements\ so\ far).}}
+\DoxyCodeLine{\ Npoisson\_elements=mesh\_pt()-\/>nelement();}
+
+\end{DoxyCodeInclude}
+ Now, we need to apply the prescribed-\/flux boundary condition along the Neumann boundary $ \partial D_{Neumann} $. The documentation for the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} shows that this boundary is mesh boundary 1. The necessary steps are performed by the function {\ttfamily create\+\_\+flux\+\_\+elements}(..), described in the section \doxysectlink{index_create_flux}{Creating the flux elements}{1} below.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ prescribed-\/flux\ elements\ from\ all\ elements\ that\ are\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ adjacent\ to\ boundary\ 1\ and\ add\ them\ to\ the\ (single)\ global\ mesh}}
+\DoxyCodeLine{\ create\_flux\_elements(1);}
+
+\end{DoxyCodeInclude}
+ The rest of the constructor is very similar to its counterpart in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem}}. First we apply Dirichlet conditions on the remaining boundaries by pinning the nodal values. Next, we finish the problem setup by looping over all "{}bulk"{} Poisson elements and set the pointer to the source function. Since we have added the {\ttfamily Poisson\+Flux\+Elements} to the {\ttfamily Mesh}, only the first {\ttfamily Npoisson\+\_\+element} elements are "{}bulk"{} elements and the loop is restricted to these. We then perform a second loop over the {\ttfamily Poisson\+Flux\+Elements} which need to be passed the pointer to the prescribed-\/flux function {\ttfamily Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary(...)}. Finally, we generate the equation numbering scheme.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=0;b<n\_bound;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Leave\ nodes\ on\ boundary\ 1\ free}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(b!=1)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_node=\ mesh\_pt()-\/>nboundary\_node(b);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(b,n)-\/>pin(0);\ }
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ Poisson\ bulk\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor:\ Pass\ pointer\ to\ source}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ function}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<Npoisson\_elements;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ Poisson\ bulk\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>source\_fct\_pt()\ =\ Source\_fct\_pt;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Total\ number\ of\ elements:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ flux\ elements\ (located\ at\ the\ "{}end"{}\ of\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ mesh)\ to\ pass\ function\ pointer\ to\ prescribed-\/flux\ function.}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ e=Npoisson\_elements;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ Poisson\ flux\ element}}
+\DoxyCodeLine{\ \ \ PoissonFluxElement<ELEMENT>\ *el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}PoissonFluxElement<ELEMENT>*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ pointer\ to\ the\ prescribed\ flux\ function}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>flux\_fct\_pt()\ =\ }
+\DoxyCodeLine{\ \ \ \ \&\mbox{\hyperlink{namespaceTanhSolnForPoisson_a0e99ccf27df36f28f091de6d57484172}{TanhSolnForPoisson::prescribed\_flux\_on\_fixed\_x\_boundary}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_create_flux}{}\doxysection{\texorpdfstring{Creating the flux elements}{Creating the flux elements}}\label{index_create_flux}
+{\ttfamily oomph-\/lib} provides an element type {\ttfamily Poisson\+Flux\+Element}, which allows the application of Neumann (flux) boundary conditions along the "{}faces"{} of higher-\/dimensional "{}bulk"{} Poisson elements. {\ttfamily Poisson\+Flux\+Elements} are templated by the type of the corresponding higher-\/dimensional "{}bulk"{} element, so that a {\ttfamily Poisson\+Flux\+Element\texorpdfstring{$<$}{<}QPoisson\+Element$<$2,3$>$} \texorpdfstring{$>$}{>} is a one-\/dimensional three-\/node element that applies Neumann boundary conditions along the one-\/dimensional edge of a nine-\/node quadrilateral Poisson element. Similarly, a {\ttfamily Poisson\+Flux\+Element\texorpdfstring{$<$}{<}QPoisson\+Element$<$3,2$>$} \texorpdfstring{$>$}{>} is a two-\/dimensional quadrilateral four-\/node element that applies Neumann boundary conditions along the two-\/dimensional face of a eight-\/node brick-\/shaped Poisson element; etc.
+
+The constructor of the {\ttfamily Poisson\+Flux\+Element} takes two arguments\+:
+\begin{DoxyItemize}
+\item a pointer to the corresponding bulk element
+\item the index {\ttfamily face\+\_\+index} of the face that is to be constructed. The convention for two-\/dimensional Q-\/type elements is that the face\+\_\+index is $ -(i+1) $ when the coordinate $ s_i $ is fixed at its minimum value over the face and $ +(i+1) $ when $ s_i $ is fixed at its maximum value over the face
+\end{DoxyItemize}The layout of the elements in the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} is sufficiently simple to allow the direct determination of the face index\+: Elements 3, 7, 11 and 15 are located next to mesh boundary 1 and along this boundary the element\textquotesingle{}s local coordinate $ s_0 $ has a constant (maximum) value of +1.\+0. Hence we need to set {\ttfamily face\+\_\+index=1} 
+
+In more complicated meshes, the determination of the face index can be more difficult (or at least very tedious), especially if a {\ttfamily Mesh} has been refined non-\/uniformly. The generic {\ttfamily Mesh} class therefore provides helper functions to determine the required face index for all elements adjacent to a specified {\ttfamily Mesh} boundary. This allows the creation of the flux elements by the following, completely generic procedure\+: We use the function {\ttfamily Mesh\+::boundary\+\_\+element\+\_\+pt(...)} to determine the "{}bulk"{} elements that are adjacent to the Neumann boundary, and obtain {\ttfamily face\+\_\+index} from the function {\ttfamily Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary(...)}. We pass the parameters to the constructor of the {\ttfamily Poisson\+Flux\+Element} and add the (pointer to) the newly created element to the {\ttfamily Problem\textquotesingle{}s} mesh.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_flux\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ Poisson\ Flux\ Elements\ on\ the\ b-\/th\ boundary\ of\ the\ Mesh}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_a542ce9cc1c4e17eae68d51d2e13ac0c3}{FluxPoissonProblem<ELEMENT>::create\_flux\_elements}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \&b)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ bulk\ elements\ are\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nboundary\_element(b);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ mesh\_pt()-\/>boundary\_element\_pt(b,e));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ What\ is\ the\ index\ of\ the\ face\ of\ the\ bulk\ element\ at\ the\ boundary}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ mesh\_pt()-\/>face\_index\_at\_boundary(b,e);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ corresponding\ prescribed-\/flux\ element}}
+\DoxyCodeLine{\ \ \ PoissonFluxElement<ELEMENT>*\ flux\_element\_pt\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \ PoissonFluxElement<ELEMENT>(bulk\_elem\_pt,face\_index);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ prescribed-\/flux\ element\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>add\_element\_pt(flux\_element\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ loop\ over\ bulk\ elements\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_flux\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_actions_before}{}\doxysection{\texorpdfstring{"{}\+Actions before solve"{}}{"Actions before solve"}}\label{index_actions_before}
+The function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} is identical to that in the ~\newline
+ \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem}} and is only listed here for the sake of completeness\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//====================start\_of\_actions\_before\_newton\_solve================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Update\ the\ problem\ specs\ before\ solve:\ Reset\ boundary\ conditions}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ to\ the\ values\ from\ the\ exact\ solution.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_aaea8f7f6f7a2e1aedfd2854e1ae12338}{FluxPoissonProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ How\ many\ boundaries\ are\ there?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_bound;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Only\ update\ Dirichlet\ nodes}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (i!=1)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ How\ many\ nodes\ are\ there\ on\ this\ boundary?}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ n\_node\ =\ mesh\_pt()-\/>nboundary\_node(i);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ n=0;n<n\_node;n++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Node*\ nod\_pt\ =\ mesh\_pt()-\/>boundary\_node\_pt(i,n);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ nodal\ coordinates\ from\ node:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Compute\ the\ value\ of\ the\ exact\ solution\ at\ the\ nodal\ point}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Vector<double>\ u(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}}(x,u);}
+\DoxyCodeLine{\ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ value\ to\ the\ one\ (and\ only)\ nodal\ value\ at\ this\ node}}
+\DoxyCodeLine{\ \ \ \ \ \ \ nod\_pt-\/>set\_value(0,u[0]);}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ actions\ before\ solve}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing, implemented in {\ttfamily doc\+\_\+solution(...)} is similar to that in \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ pure Dirichlet problem}}. However, since the {\ttfamily Poisson\+Flux\+Elements} are auxiliary elements which are only used to apply Neumann boundary conditions on adjacent "{}bulk"{} elements, their error checking function is not implemented. We cannot use the generic {\ttfamily Mesh} member function {\ttfamily Mesh\+::compute\+\_\+error()} to compute an overall error since this function would try to execute the "{}broken virtual"{} function {\ttfamily Generalised\+Element\+::compute\+\_\+error(...)}; see the section \doxysectlink{index_exercises}{Exercises and Comments}{1} for a more detailed discussion of "{}broken virtual"{} functions. Error checking would therefore have to be implemented "{}by hand"{} (excluding the {\ttfamily Poisson\+Flux\+Elements}), or a suitable error measure would have to be defined in the {\ttfamily Poisson\+Flux\+Elements}.
+
+We do not pursue either approach here because the difficulty is a direct consequence of our (questionable) decision to include elements of different types in the same {\ttfamily Mesh} object. While this is perfectly "{}legal"{} and often convenient, the practice introduces additional difficulties in refineable problems and we shall demonstrate \href{../../../poisson/two_d_poisson_flux_bc2/html/index.html}{\texttt{ an alternative approach in another example}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution:\ doc\_info\ contains\ labels/output\ directory\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFluxPoissonProblem_ae410950b9dc1f2bd4991480df15a1586}{FluxPoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts;}
+\DoxyCodeLine{\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<Npoisson\_elements;e++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
+\DoxyCodeLine{\ \ \ el\_pt-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}});\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Can't\ use\ black-\/box\ error\ computatation\ routines\ because}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ mesh\ contains\ two\ different\ types\ of\ elements.\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ error\ function\ hasn't\ been\ implemented\ for\ the\ prescribed}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ flux\ elements...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Exercises and Comments}{Exercises and Comments}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item What happens if you do not create the {\ttfamily Poisson\+Flux\+Elements} but leave the nodes on the Neumann boundary un-\/pinned? Compare the computational result to those obtained when you set the prescribed flux to zero, $ g_0 = 0 $. Does this make sense? \mbox{[}Hint\+: Remember the "{}natural"{} boundary conditions for Poisson\textquotesingle{}s equation\mbox{]}.
+\item Try to compute the error of the computed solution by re-\/instating the global error checking procedure 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Doc\ error\ and\ return\ of\ the\ square\ of\ the\ L2\ error}}
+\DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ error,norm;}
+\DoxyCodeLine{snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{some\_file.open(filename);}
+\DoxyCodeLine{mesh\_pt()-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error,norm);\ }
+\DoxyCodeLine{some\_file.close();}
+
+\end{DoxyCode}
+ in {\ttfamily doc\+\_\+solution(...)}. What happens when you run the code? The code\textquotesingle{}s behaviour illustrates a general convention in {\ttfamily oomph-\/lib}\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center}{\bfseries{\label{index_broken_virtual}%
+\Hypertarget{index_broken_virtual}%
+A general convention}}\end{center}  Some {\ttfamily oomph-\/lib} functions, such as {\ttfamily Generalised\+Element\+::compute\+\_\+error(...)}, are defined as virtual functions in a base class to allow the implementation of generic procedures such as {\ttfamily Mesh\+::compute\+\_\+error(...)}, which loops over all of the {\ttfamily Mesh\textquotesingle{}s} constituent elements and executes their specific {\ttfamily compute\+\_\+error(...)} member functions. In some rare cases (such as the one encountered here), the implementation of a particular virtual function might not be sensible for a specific element. Therefore, rather than forcing the "{}element-\/writer"{} to implement a dummy version of this function in his/her derived class (by declaring it as a pure virtual function in the base class), we provide a {\bfseries{ "{}broken virtual"{} }} implementation in {\ttfamily Generalised\+Element}. If the function is (re-\/)implemented in a derived element, the broken version is ignored; if the function is not overloaded, the broken virtual function throws an error, allowing a traceback in a debugger to find out where the broken function was called from. We note that this practice is not universally approved of in the C++ community but we believe it to have its place in situations such as the one described here. ~\newline
+ ~\newline
+ ~\newline
+ Incidentally, the code discussed above contains another (possibly more convincing) example of why "{}broken virtual"{} functions can be useful. Recall that the creation of the {\ttfamily Poisson\+Flux\+Elements} on the Neumann boundary was greatly facilitated by the availability of the helper functions {\ttfamily Mesh\+::boundary\+\_\+element\+\_\+pt(...)} and ~\newline
+ {\ttfamily Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary(...)}. These functions are implemented in the generic {\ttfamily Mesh} base class and determine the relevant parameters via lookup schemes that are stored in that class. Obviously, the lookup schemes need to be set up when a specific {\ttfamily Mesh} is built and this task can involve a considerable amount of work (see also \doxysectlink{index_footnote}{Setting up the boundary lookup schemes}{2}). Since the lookup schemes are useful but by no means essential, the three helper functions are again implemented as broken virtual functions. If the functions are called before the required lookup schemes have been set up, code execution stops with a suitable warning message.   \\\cline{1-1}
+\end{longtabu}
+
+\item Implement the error computation by hand to familiarise yourself with the way in which the {\ttfamily Mesh\+::compute\+\_\+error(...)} function works.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \hypertarget{index_footnote}{}\doxysubsection{\texorpdfstring{Setting up the boundary lookup schemes}{Setting up the boundary lookup schemes}}\label{index_footnote}
+{\ttfamily oomph-\/lib} provides a range of helper functions that set up the boundary lookup schemes for specific {\ttfamily Mesh} classes. For instance, the {\ttfamily Quad\+Mesh\+Base} class forms a base class for all {\ttfamily Meshes} that consist of two-\/dimensional quadrilateral elements and has a member function {\ttfamily Quad\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info()} which can be called from the constructor of any derived {\ttfamily Mesh} class to set up the lookup schemes required by {\ttfamily Mesh\+::boundary\+\_\+element\+\_\+pt(...)} and {\ttfamily Mesh\+::face\+\_\+index\+\_\+at\+\_\+boundary(...)}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc/}{\texttt{ demo\+\_\+drivers/poisson/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc}{\texttt{ demo\+\_\+drivers/poisson/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc/two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

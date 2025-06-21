@@ -1,0 +1,39 @@
+\doxysection{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h File Reference}
+\hypertarget{pml__fourier__decomposed__helmholtz__elements_8h}{}\label{pml__fourier__decomposed__helmholtz__elements_8h}\index{pml\_fourier\_decomposed\_helmholtz\_elements.h@{pml\_fourier\_decomposed\_helmholtz\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate}{oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate}}
+\begin{DoxyCompactList}\small\item\em Class to hold the mapping function for the PML. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate}{oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}}
+\begin{DoxyCompactList}\small\item\em The mapping function propsed by Bermudez et al, appears to be the best and so this will be the default mapping (see definition of \doxylink{classoomph_1_1PMLHelmholtzEquations}{PMLHelmholtz\+Equations}) \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PMLFourierDecomposedHelmholtzEquations}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations}}
+\begin{DoxyCompactList}\small\item\em A class for all isoparametric elements that solve the Helmholtz equations with pml capabilities. in Fourier decomposed form (cylindrical polars)\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QPMLFourierDecomposedHelmholtzElement}{oomph\+::\+QPMLFourier\+Decomposed\+Helmholtz\+Element$<$ NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1QPMLFourierDecomposedHelmholtzElement}{QPMLFourier\+Decomposed\+Helmholtz\+Element} elements are linear/quadrilateral/brick-\/shaped PMLFourier\+Decomposed\+Helmholtz elements with isoparametric interpolation for the function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QPMLFourierDecomposedHelmholtzElement_3_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QPMLFourier\+Decomposed\+Helmholtz\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the \doxylink{classoomph_1_1QPMLFourierDecomposedHelmholtzElement}{QPMLFourier\+Decomposed\+Helmholtz\+Element} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectablePMLFourierDecomposedHelmholtzElement}{oomph\+::\+Projectable\+PMLFourier\+Decomposed\+Helmholtz\+Element$<$ FOURIER\+\_\+\+DECOMPOSED\+\_\+\+HELMHOLTZ\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Fourier decomposed Helmholtz upgraded to become projectable. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectablePMLFourierDecomposedHelmholtzElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+PMLFourier\+Decomposed\+Helmholtz\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectablePMLFourierDecomposedHelmholtzElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+PMLFourier\+Decomposed\+Helmholtz\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PMLLayerElement_3_01QPMLFourierDecomposedHelmholtzElement_3_01NNODE__1D_01_4_01_4}{oomph\+::\+PMLLayer\+Element$<$ QPMLFourier\+Decomposed\+Helmholtz\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Policy class defining the elements to be used in the actual PML layers. Same! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper}{oomph\+::\+Legendre\+\_\+functions\+\_\+helper}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for functions required for Helmholtz computations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_a3dd21a83f1086186315aa4f5445a8287}{oomph\+::\+Legendre\+\_\+functions\+\_\+helper\+::factorial}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}})
+\begin{DoxyCompactList}\small\item\em Factorial. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ab30701a5b66d96424a97e10e389be377}{oomph\+::\+Legendre\+\_\+functions\+\_\+helper\+::plgndr1}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Legendre polynomials depending on one parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Legendre__functions__helper_ad67fdae863cee220b1051883aac923aa}{oomph\+::\+Legendre\+\_\+functions\+\_\+helper\+::plgndr2}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Legendre polynomials depending on two parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}

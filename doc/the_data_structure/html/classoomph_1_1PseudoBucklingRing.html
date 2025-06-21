@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::PseudoBucklingRing Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1PseudoBucklingRing.html">PseudoBucklingRing</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1PseudoBucklingRing-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::PseudoBucklingRing Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring.  
+ <a href="classoomph_1_1PseudoBucklingRing.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::PseudoBucklingRing:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1PseudoBucklingRing.png" usemap="#oomph::PseudoBucklingRing_map" alt=""/>
+  <map id="oomph::PseudoBucklingRing_map" name="oomph::PseudoBucklingRing_map">
+<area href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio..." alt="oomph::GeomObject" shape="rect" coords="0,0,214,24"/>
+<area href="classoomph_1_1PseudoBucklingRingElement.html" title="Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring." alt="oomph::PseudoBucklingRingElement" shape="rect" coords="0,112,214,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7028441632808d2bc24d7f398aff3c6c" id="r_a7028441632808d2bc24d7f398aff3c6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a7028441632808d2bc24d7f398aff3c6c">PseudoBucklingRing</a> ()</td></tr>
+<tr class="memdesc:a7028441632808d2bc24d7f398aff3c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:a7028441632808d2bc24d7f398aff3c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab85d68a2bcb4158e74cb3eeb3c24dd4" id="r_aab85d68a2bcb4158e74cb3eeb3c24dd4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#aab85d68a2bcb4158e74cb3eeb3c24dd4">PseudoBucklingRing</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#aed7e4e24a81d91f21bc972da131d1407">geom_data_pt</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:aab85d68a2bcb4158e74cb3eeb3c24dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber (as a double), undeformed ring radius (all as <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>) and pointer to global timestepper.  <br /></td></tr>
+<tr class="separator:aab85d68a2bcb4158e74cb3eeb3c24dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5569f859a21fc3ce498096397822fe47" id="r_a5569f859a21fc3ce498096397822fe47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a5569f859a21fc3ce498096397822fe47">PseudoBucklingRing</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad28891383abe71a473a079721c6dd53e">eps_buckl</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ade2881e77f7cf0be26970c78c70d3a4d">ampl_ratio</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_buckl</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad202df097c0a68d93a5b2f99abf4c39b">r_0</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#af53f509aa119f74c77ae45046023f28f">T</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:a5569f859a21fc3ce498096397822fe47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber, undeformed ring radius, period of osc and pointer to global timestepper. All geometric data is pinned by default.  <br /></td></tr>
+<tr class="separator:a5569f859a21fc3ce498096397822fe47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68bb9ee9e3e2a37d78758b6f594e2369" id="r_a68bb9ee9e3e2a37d78758b6f594e2369"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a68bb9ee9e3e2a37d78758b6f594e2369">PseudoBucklingRing</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad28891383abe71a473a079721c6dd53e">eps_buckl</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">HoR</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_buckl</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">imode</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:a68bb9ee9e3e2a37d78758b6f594e2369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, h/R, buckling wavenumbe and pointer to global timestepper. Other parameters get set up to represent oscillating ring with mode imode (1 or 2). All geometric data is pinned by default.  <br /></td></tr>
+<tr class="separator:a68bb9ee9e3e2a37d78758b6f594e2369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf080e9a7f32a9836647f74e28e09ece" id="r_aaf080e9a7f32a9836647f74e28e09ece"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#aaf080e9a7f32a9836647f74e28e09ece">PseudoBucklingRing</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1PseudoBucklingRing.html">PseudoBucklingRing</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">node</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:aaf080e9a7f32a9836647f74e28e09ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:aaf080e9a7f32a9836647f74e28e09ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4b5a765475478b3d3466b71d718b59f" id="r_ad4b5a765475478b3d3466b71d718b59f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad4b5a765475478b3d3466b71d718b59f">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1PseudoBucklingRing.html">PseudoBucklingRing</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ad4b5a765475478b3d3466b71d718b59f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ad4b5a765475478b3d3466b71d718b59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b1c4cc24f5bd87654ae62f44e4fa547" id="r_a1b1c4cc24f5bd87654ae62f44e4fa547"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a1b1c4cc24f5bd87654ae62f44e4fa547">~PseudoBucklingRing</a> ()</td></tr>
+<tr class="memdesc:a1b1c4cc24f5bd87654ae62f44e4fa547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Clean up if necessary.  <br /></td></tr>
+<tr class="separator:a1b1c4cc24f5bd87654ae62f44e4fa547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28891383abe71a473a079721c6dd53e" id="r_ad28891383abe71a473a079721c6dd53e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad28891383abe71a473a079721c6dd53e">eps_buckl</a> ()</td></tr>
+<tr class="memdesc:ad28891383abe71a473a079721c6dd53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for buckling amplitude.  <br /></td></tr>
+<tr class="separator:ad28891383abe71a473a079721c6dd53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade2881e77f7cf0be26970c78c70d3a4d" id="r_ade2881e77f7cf0be26970c78c70d3a4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ade2881e77f7cf0be26970c78c70d3a4d">ampl_ratio</a> ()</td></tr>
+<tr class="memdesc:ade2881e77f7cf0be26970c78c70d3a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for amplitude ratio.  <br /></td></tr>
+<tr class="separator:ade2881e77f7cf0be26970c78c70d3a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad202df097c0a68d93a5b2f99abf4c39b" id="r_ad202df097c0a68d93a5b2f99abf4c39b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad202df097c0a68d93a5b2f99abf4c39b">r_0</a> ()</td></tr>
+<tr class="memdesc:ad202df097c0a68d93a5b2f99abf4c39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for undeformed radius.  <br /></td></tr>
+<tr class="separator:ad202df097c0a68d93a5b2f99abf4c39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af53f509aa119f74c77ae45046023f28f" id="r_af53f509aa119f74c77ae45046023f28f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#af53f509aa119f74c77ae45046023f28f">T</a> ()</td></tr>
+<tr class="memdesc:af53f509aa119f74c77ae45046023f28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for period of oscillation.  <br /></td></tr>
+<tr class="separator:af53f509aa119f74c77ae45046023f28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61e55df2895b2a1cd877517a31e928e4" id="r_a61e55df2895b2a1cd877517a31e928e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a61e55df2895b2a1cd877517a31e928e4">n_buckl_float</a> ()</td></tr>
+<tr class="memdesc:a61e55df2895b2a1cd877517a31e928e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for buckling wavenumber (as float)  <br /></td></tr>
+<tr class="separator:a61e55df2895b2a1cd877517a31e928e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad93efaf7bde42f34272ba668a5b71304" id="r_ad93efaf7bde42f34272ba668a5b71304"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad93efaf7bde42f34272ba668a5b71304">set_eps_buckl</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad28891383abe71a473a079721c6dd53e">eps_buckl</a>)</td></tr>
+<tr class="memdesc:ad93efaf7bde42f34272ba668a5b71304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set buckling amplitude.  <br /></td></tr>
+<tr class="separator:ad93efaf7bde42f34272ba668a5b71304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c88bd59587d51f5d0083ec783a6797" id="r_a54c88bd59587d51f5d0083ec783a6797"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a54c88bd59587d51f5d0083ec783a6797">set_ampl_ratio</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ade2881e77f7cf0be26970c78c70d3a4d">ampl_ratio</a>)</td></tr>
+<tr class="memdesc:a54c88bd59587d51f5d0083ec783a6797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set amplitude ratio between radial and azimuthal buckling displacements.  <br /></td></tr>
+<tr class="separator:a54c88bd59587d51f5d0083ec783a6797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac52faed0469827fc629abd7de267262f" id="r_ac52faed0469827fc629abd7de267262f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ac52faed0469827fc629abd7de267262f">set_n_buckl</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_buckl</a>)</td></tr>
+<tr class="memdesc:ac52faed0469827fc629abd7de267262f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set buckling wavenumber.  <br /></td></tr>
+<tr class="separator:ac52faed0469827fc629abd7de267262f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a348dbc5d192cb5a162448420bd7a185e" id="r_a348dbc5d192cb5a162448420bd7a185e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a348dbc5d192cb5a162448420bd7a185e">set_R_0</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#ad202df097c0a68d93a5b2f99abf4c39b">r_0</a>)</td></tr>
+<tr class="memdesc:a348dbc5d192cb5a162448420bd7a185e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set undeformed radius of ring.  <br /></td></tr>
+<tr class="separator:a348dbc5d192cb5a162448420bd7a185e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37ea2b2f4e889e187eda1d46ba0b27ce" id="r_a37ea2b2f4e889e187eda1d46ba0b27ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a37ea2b2f4e889e187eda1d46ba0b27ce">set_T</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1PseudoBucklingRing.html#af53f509aa119f74c77ae45046023f28f">T</a>)</td></tr>
+<tr class="memdesc:a37ea2b2f4e889e187eda1d46ba0b27ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set period of oscillation.  <br /></td></tr>
+<tr class="separator:a37ea2b2f4e889e187eda1d46ba0b27ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cd6c36f2f84385b6485933b18cbbe43" id="r_a1cd6c36f2f84385b6485933b18cbbe43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a1cd6c36f2f84385b6485933b18cbbe43">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1cd6c36f2f84385b6485933b18cbbe43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> at Lagrangian coordinate zeta at present time.  <br /></td></tr>
+<tr class="separator:a1cd6c36f2f84385b6485933b18cbbe43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c45a80564ceaeb146d9eb813611572d" id="r_a7c45a80564ceaeb146d9eb813611572d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a7c45a80564ceaeb146d9eb813611572d">veloc</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;veloc)</td></tr>
+<tr class="memdesc:a7c45a80564ceaeb146d9eb813611572d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised velocity on object at current time: veloc = d r(zeta)/dt.  <br /></td></tr>
+<tr class="separator:a7c45a80564ceaeb146d9eb813611572d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae983ed12da7311457a4a2d4f1c3f8b6c" id="r_ae983ed12da7311457a4a2d4f1c3f8b6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#ae983ed12da7311457a4a2d4f1c3f8b6c">accel</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;accel)</td></tr>
+<tr class="memdesc:ae983ed12da7311457a4a2d4f1c3f8b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised acceleration on object at current time: accel = d^2 r(zeta)/dt^2.  <br /></td></tr>
+<tr class="separator:ae983ed12da7311457a4a2d4f1c3f8b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027211cc7067efa849e605b456cb5462" id="r_a027211cc7067efa849e605b456cb5462"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a027211cc7067efa849e605b456cb5462">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a027211cc7067efa849e605b456cb5462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> at Lagrangian coordinate zeta at discrete previous time (t=0: present time; t&gt;0: previous time)  <br /></td></tr>
+<tr class="separator:a027211cc7067efa849e605b456cb5462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11d7bbd2d01a646200e8719e61ad09a" id="r_aa11d7bbd2d01a646200e8719e61ad09a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#aa11d7bbd2d01a646200e8719e61ad09a">dposition_dt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdt</a>)</td></tr>
+<tr class="memdesc:aa11d7bbd2d01a646200e8719e61ad09a"><td class="mdescLeft">&#160;</td><td class="mdescRight">j-th time-derivative on object at current time: <img class="formulaInl" alt="$ \frac{d^{j} r(\zeta)}{dt^j} $" src="form_45.png" width="30" height="20"/>.  <br /></td></tr>
+<tr class="separator:aa11d7bbd2d01a646200e8719e61ad09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e03780134886a9a2a19358519eca3be" id="r_a9e03780134886a9a2a19358519eca3be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a9e03780134886a9a2a19358519eca3be">ngeom_data</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9e03780134886a9a2a19358519eca3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many items of <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> does the shape of the object depend on?  <br /></td></tr>
+<tr class="separator:a9e03780134886a9a2a19358519eca3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed7e4e24a81d91f21bc972da131d1407" id="r_aed7e4e24a81d91f21bc972da131d1407"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Data.html">Data</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#aed7e4e24a81d91f21bc972da131d1407">geom_data_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:aed7e4e24a81d91f21bc972da131d1407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the j-th <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item that the object's shape depends on.  <br /></td></tr>
+<tr class="separator:aed7e4e24a81d91f21bc972da131d1407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1GeomObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1GeomObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1GeomObject.html">oomph::GeomObject</a></td></tr>
+<tr class="memitem:aff5bdabab387795b74ea1df0ab4ef1a6 inherit pub_methods_classoomph_1_1GeomObject" id="r_aff5bdabab387795b74ea1df0ab4ef1a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#aff5bdabab387795b74ea1df0ab4ef1a6">GeomObject</a> ()</td></tr>
+<tr class="memdesc:aff5bdabab387795b74ea1df0ab4ef1a6 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
+<tr class="separator:aff5bdabab387795b74ea1df0ab4ef1a6 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56cd9cb7bb39ff2c30fb56039be83d31 inherit pub_methods_classoomph_1_1GeomObject" id="r_a56cd9cb7bb39ff2c30fb56039be83d31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a56cd9cb7bb39ff2c30fb56039be83d31">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>)</td></tr>
+<tr class="memdesc:a56cd9cb7bb39ff2c30fb56039be83d31 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass dimension of geometric object (# of Eulerian coords = # of Lagrangian coords; no time history available/needed)  <br /></td></tr>
+<tr class="separator:a56cd9cb7bb39ff2c30fb56039be83d31 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3fcf14b1bf5d2bc26f64156baecb7da inherit pub_methods_classoomph_1_1GeomObject" id="r_ae3fcf14b1bf5d2bc26f64156baecb7da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ae3fcf14b1bf5d2bc26f64156baecb7da">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>)</td></tr>
+<tr class="memdesc:ae3fcf14b1bf5d2bc26f64156baecb7da inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: pass # of Eulerian and Lagrangian coordinates. No time history available/needed.  <br /></td></tr>
+<tr class="separator:ae3fcf14b1bf5d2bc26f64156baecb7da inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a091c285c27b4efc14c5afed4d3b31 inherit pub_methods_classoomph_1_1GeomObject" id="r_a75a091c285c27b4efc14c5afed4d3b31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a75a091c285c27b4efc14c5afed4d3b31">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a>, <a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a>)</td></tr>
+<tr class="memdesc:a75a091c285c27b4efc14c5afed4d3b31 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: pass # of Eulerian and Lagrangian coordinates and pointer to time-stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the GeomData varies with time.  <br /></td></tr>
+<tr class="separator:a75a091c285c27b4efc14c5afed4d3b31 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcff7382d77b6c995d2b43f14392047e inherit pub_methods_classoomph_1_1GeomObject" id="r_afcff7382d77b6c995d2b43f14392047e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#afcff7382d77b6c995d2b43f14392047e">GeomObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:afcff7382d77b6c995d2b43f14392047e inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:afcff7382d77b6c995d2b43f14392047e inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561d2439cbab0ca9ec8c15b3d4cda00d inherit pub_methods_classoomph_1_1GeomObject" id="r_a561d2439cbab0ca9ec8c15b3d4cda00d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a561d2439cbab0ca9ec8c15b3d4cda00d">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a561d2439cbab0ca9ec8c15b3d4cda00d inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a561d2439cbab0ca9ec8c15b3d4cda00d inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab784d34d63bd852ee30fc03684717410 inherit pub_methods_classoomph_1_1GeomObject" id="r_ab784d34d63bd852ee30fc03684717410"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ab784d34d63bd852ee30fc03684717410">~GeomObject</a> ()</td></tr>
+<tr class="memdesc:ab784d34d63bd852ee30fc03684717410 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Empty) destructor  <br /></td></tr>
+<tr class="separator:ab784d34d63bd852ee30fc03684717410 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8974ee138b0f879c459340a9f05e06c inherit pub_methods_classoomph_1_1GeomObject" id="r_ae8974ee138b0f879c459340a9f05e06c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#ae8974ee138b0f879c459340a9f05e06c">nlagrangian</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae8974ee138b0f879c459340a9f05e06c inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to # of Lagrangian coordinates.  <br /></td></tr>
+<tr class="separator:ae8974ee138b0f879c459340a9f05e06c inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0305c3102fa6f5042461afb600a082df inherit pub_methods_classoomph_1_1GeomObject" id="r_a0305c3102fa6f5042461afb600a082df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a0305c3102fa6f5042461afb600a082df">ndim</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0305c3102fa6f5042461afb600a082df inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to # of Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a0305c3102fa6f5042461afb600a082df inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375ecd197d0aff695825ad33a35e0d7e inherit pub_methods_classoomph_1_1GeomObject" id="r_a375ecd197d0aff695825ad33a35e0d7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a375ecd197d0aff695825ad33a35e0d7e">set_nlagrangian_and_ndim</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_lagrangian</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_dim</a>)</td></tr>
+<tr class="memdesc:a375ecd197d0aff695825ad33a35e0d7e inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set # of Lagrangian and Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a375ecd197d0aff695825ad33a35e0d7e inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc851a3b50103b6c9f68efe86e709de inherit pub_methods_classoomph_1_1GeomObject" id="r_a0fc851a3b50103b6c9f68efe86e709de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a0fc851a3b50103b6c9f68efe86e709de">time_stepper_pt</a> ()</td></tr>
+<tr class="memdesc:a0fc851a3b50103b6c9f68efe86e709de inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to time stepper: Null if object is not time-dependent.  <br /></td></tr>
+<tr class="separator:a0fc851a3b50103b6c9f68efe86e709de inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca52ab6f4609144b7057961bd318fdc inherit pub_methods_classoomph_1_1GeomObject" id="r_a8ca52ab6f4609144b7057961bd318fdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a8ca52ab6f4609144b7057961bd318fdc">time_stepper_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8ca52ab6f4609144b7057961bd318fdc inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function for pointer to time stepper: Null if object is not time-dependent. Const version.  <br /></td></tr>
+<tr class="separator:a8ca52ab6f4609144b7057961bd318fdc inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5736db11f3a40daa1a9b3d4859ca061 inherit pub_methods_classoomph_1_1GeomObject" id="r_af5736db11f3a40daa1a9b3d4859ca061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#af5736db11f3a40daa1a9b3d4859ca061">position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:af5736db11f3a40daa1a9b3d4859ca061 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(zeta). Evaluated at the continuous time value, t.  <br /></td></tr>
+<tr class="separator:af5736db11f3a40daa1a9b3d4859ca061 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91cd59efcb15971a293914b7b9bd7f75 inherit pub_methods_classoomph_1_1GeomObject" id="r_a91cd59efcb15971a293914b7b9bd7f75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a91cd59efcb15971a293914b7b9bd7f75">dposition</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a91cd59efcb15971a293914b7b9bd7f75 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a91cd59efcb15971a293914b7b9bd7f75 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08472dbe196123490ea109762cefd00c inherit pub_methods_classoomph_1_1GeomObject" id="r_a08472dbe196123490ea109762cefd00c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a08472dbe196123490ea109762cefd00c">d2position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ddrdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a08472dbe196123490ea109762cefd00c inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">2nd derivative of position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a08472dbe196123490ea109762cefd00c inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdbd372e26d4486026c06dcfdaafe81 inherit pub_methods_classoomph_1_1GeomObject" id="r_a4fdbd372e26d4486026c06dcfdaafe81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a4fdbd372e26d4486026c06dcfdaafe81">d2position</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1DenseMatrix.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">drdzeta</a>, <a class="el" href="classoomph_1_1RankThreeTensor.html">RankThreeTensor</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ddrdzeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4fdbd372e26d4486026c06dcfdaafe81 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posn <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> and its 1st &amp; 2nd derivatives w.r.t. to coordinates: <img class="formulaInl" alt="$ \frac{dR_i}{d \zeta_\alpha}$" src="form_304.png" width="19" height="19"/> = drdzeta(alpha,i). <img class="formulaInl" alt="$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$" src="form_305.png" width="34" height="21"/> = ddrdzeta(alpha,beta,i). Evaluated at current time.  <br /></td></tr>
+<tr class="separator:a4fdbd372e26d4486026c06dcfdaafe81 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ee9f98bcfd0c5e1f07a459777663d3 inherit pub_methods_classoomph_1_1GeomObject" id="r_a78ee9f98bcfd0c5e1f07a459777663d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a78ee9f98bcfd0c5e1f07a459777663d3">locate_zeta</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">sub_geom_object_pt</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">use_coordinate_as_initial_guess</a>=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">false</a>)</td></tr>
+<tr class="memdesc:a78ee9f98bcfd0c5e1f07a459777663d3 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">A geometric object may be composed of may sub-objects (e.g. a finite-element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-object and local coordinate within that sub-object at a given intrinsic coordinate, zeta. Note that only one sub-object can "cover" any given intrinsic position. If the position is at an "interface" between sub-objects, either one can be returned. The default implementation merely returns, the pointer to the "entire" <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess.  <br /></td></tr>
+<tr class="separator:a78ee9f98bcfd0c5e1f07a459777663d3 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5530baea63e377937920d2dcf0d583 inherit pub_methods_classoomph_1_1GeomObject" id="r_a1c5530baea63e377937920d2dcf0d583"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a1c5530baea63e377937920d2dcf0d583">interpolated_zeta</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a1c5530baea63e377937920d2dcf0d583 inherit pub_methods_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">A geometric object may be composed of many sub-objects each with their own local coordinate. This function returns the "global" intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.e. the intrinsic coordinate of the sub-GeomObject. In simple (non-compound) GeomObjects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode.  <br /></td></tr>
+<tr class="separator:a1c5530baea63e377937920d2dcf0d583 inherit pub_methods_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6d7d859995d19d6dbcd13f444fb73d6a" id="r_a6d7d859995d19d6dbcd13f444fb73d6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a></td></tr>
+<tr class="memdesc:a6d7d859995d19d6dbcd13f444fb73d6a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> items that affects the object's shape.  <br /></td></tr>
+<tr class="separator:a6d7d859995d19d6dbcd13f444fb73d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b25eb9891d9811158a11b8e8802542" id="r_a37b25eb9891d9811158a11b8e8802542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1PseudoBucklingRing.html#a37b25eb9891d9811158a11b8e8802542">Must_clean_up</a></td></tr>
+<tr class="memdesc:a37b25eb9891d9811158a11b8e8802542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do I need to clean up?  <br /></td></tr>
+<tr class="separator:a37b25eb9891d9811158a11b8e8802542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1GeomObject"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1GeomObject')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1GeomObject.html">oomph::GeomObject</a></td></tr>
+<tr class="memitem:a11d8ac51be65ee822a6c782c5e079a2c inherit pro_attribs_classoomph_1_1GeomObject" id="r_a11d8ac51be65ee822a6c782c5e079a2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a11d8ac51be65ee822a6c782c5e079a2c">NLagrangian</a></td></tr>
+<tr class="memdesc:a11d8ac51be65ee822a6c782c5e079a2c inherit pro_attribs_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Lagrangian (intrinsic) coordinates.  <br /></td></tr>
+<tr class="separator:a11d8ac51be65ee822a6c782c5e079a2c inherit pro_attribs_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6351e2d8fbd54ff23498eb6f77c905cc inherit pro_attribs_classoomph_1_1GeomObject" id="r_a6351e2d8fbd54ff23498eb6f77c905cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a6351e2d8fbd54ff23498eb6f77c905cc">Ndim</a></td></tr>
+<tr class="memdesc:a6351e2d8fbd54ff23498eb6f77c905cc inherit pro_attribs_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Eulerian coordinates.  <br /></td></tr>
+<tr class="separator:a6351e2d8fbd54ff23498eb6f77c905cc inherit pro_attribs_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158a36e0dbcaf236ffc351b76faaed53 inherit pro_attribs_classoomph_1_1GeomObject" id="r_a158a36e0dbcaf236ffc351b76faaed53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeomObject.html#a158a36e0dbcaf236ffc351b76faaed53">Geom_object_time_stepper_pt</a></td></tr>
+<tr class="memdesc:a158a36e0dbcaf236ffc351b76faaed53 inherit pro_attribs_classoomph_1_1GeomObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestepper (used to handle access to geometry at previous timesteps)  <br /></td></tr>
+<tr class="separator:a158a36e0dbcaf236ffc351b76faaed53 inherit pro_attribs_classoomph_1_1GeomObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Pseudo buckling ring: Circular ring deformed by the N-th buckling mode of a thin-wall elastic ring. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \]" src="form_360.png" width="350" height="14"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \]" src="form_361.png" width="349" height="14"/>
+</p>
+<p> where A is the ratio of the aziumuthal to the radial buckling amplitude (A=-1/N for statically buckling rings) and epsilon is the buckling amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00055">55</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7028441632808d2bc24d7f398aff3c6c" name="a7028441632808d2bc24d7f398aff3c6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7028441632808d2bc24d7f398aff3c6c">&#9670;&#160;</a></span>PseudoBucklingRing() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor (empty and broken) </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00059">59</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+</div>
+</div>
+<a id="aab85d68a2bcb4158e74cb3eeb3c24dd4" name="aab85d68a2bcb4158e74cb3eeb3c24dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab85d68a2bcb4158e74cb3eeb3c24dd4">&#9670;&#160;</a></span>PseudoBucklingRing() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Data.html">Data</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>geom_data_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber (as a double), undeformed ring radius (all as <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a>) and pointer to global timestepper. </p>
+<div class="fragment"><div class="line"><a class="code hl_variable" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a>[0]-&gt;value(0) = <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Eps_buckl</a>;</div>
+<div class="line"><a class="code hl_variable" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a>[0]-&gt;value(1) = <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Ampl_ratio</a>;</div>
+<div class="line"><a class="code hl_variable" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a>[0]-&gt;value(2) = <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">Double_N_buckl</a>;</div>
+<div class="line"><a class="code hl_variable" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a>[0]-&gt;value(3) = <a class="code hl_class" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">R_0</a>;</div>
+<div class="line"><a class="code hl_variable" href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">Geom_data_pt</a>[0]-&gt;value(4) = <a class="code hl_function" href="classoomph_1_1PseudoBucklingRing.html#af53f509aa119f74c77ae45046023f28f">T</a>;</div>
+<div class="ttc" id="aclassoomph_1_1PseudoBucklingRing_html_a6d7d859995d19d6dbcd13f444fb73d6a"><div class="ttname"><a href="classoomph_1_1PseudoBucklingRing.html#a6d7d859995d19d6dbcd13f444fb73d6a">oomph::PseudoBucklingRing::Geom_data_pt</a></div><div class="ttdeci">Vector&lt; Data * &gt; Geom_data_pt</div><div class="ttdoc">Vector of pointers to Data items that affects the object's shape.</div><div class="ttdef"><b>Definition</b> <a href="pseudo__buckling__ring_8h_source.html#l00553">pseudo_buckling_ring.h:553</a></div></div>
+<div class="ttc" id="aclassoomph_1_1PseudoBucklingRing_html_af53f509aa119f74c77ae45046023f28f"><div class="ttname"><a href="classoomph_1_1PseudoBucklingRing.html#af53f509aa119f74c77ae45046023f28f">oomph::PseudoBucklingRing::T</a></div><div class="ttdeci">double T()</div><div class="ttdoc">Access function for period of oscillation.</div><div class="ttdef"><b>Definition</b> <a href="pseudo__buckling__ring_8h_source.html#l00299">pseudo_buckling_ring.h:299</a></div></div>
+<div class="ttc" id="aclassoomph_1_1TAdvectionDiffusionReactionElement_html"><div class="ttname"><a href="classoomph_1_1TAdvectionDiffusionReactionElement.html">oomph::TAdvectionDiffusionReactionElement</a></div><div class="ttdoc">TAdvectionDiffusionReactionElement&lt;NREAGENT,DIM,NNODE_1D&gt; elements are isoparametric triangular DIM-d...</div><div class="ttdef"><b>Definition</b> <a href="Tadvection__diffusion__reaction__elements_8h_source.html#l00062">Tadvection_diffusion_reaction_elements.h:66</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00078">78</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00545">geom_data_pt()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00556">Must_clean_up</a>, and <a class="el" href="nodes_8h_source.html#l00483">oomph::Data::nvalue()</a>.</p>
+
+</div>
+</div>
+<a id="a5569f859a21fc3ce498096397822fe47" name="a5569f859a21fc3ce498096397822fe47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5569f859a21fc3ce498096397822fe47">&#9670;&#160;</a></span>PseudoBucklingRing() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>eps_buckl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ampl_ratio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td>
+          <td class="paramname"><em>n_buckl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>r_0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>T</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, ratio of of buckling amplitudes, buckling wavenumber, undeformed ring radius, period of osc and pointer to global timestepper. All geometric data is pinned by default. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">116</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00287">ampl_ratio()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00281">eps_buckl()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00556">Must_clean_up</a>, <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper::nprev_values()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00293">r_0()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a68bb9ee9e3e2a37d78758b6f594e2369" name="a68bb9ee9e3e2a37d78758b6f594e2369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68bb9ee9e3e2a37d78758b6f594e2369">&#9670;&#160;</a></span>PseudoBucklingRing() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>eps_buckl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>HoR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_buckl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>imode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TimeStepper.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: 1 Lagrangian coordinate, 2 Eulerian coords. Pass buckling amplitude, h/R, buckling wavenumbe and pointer to global timestepper. Other parameters get set up to represent oscillating ring with mode imode (1 or 2). All geometric data is pinned by default. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">165</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00287">ampl_ratio()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00281">eps_buckl()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00556">Must_clean_up</a>, <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper::nprev_values()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8h_source.html#l00167">oomph::MathematicalConstants::Pi</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
+
+</div>
+</div>
+<a id="aaf080e9a7f32a9836647f74e28e09ece" name="aaf080e9a7f32a9836647f74e28e09ece"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf080e9a7f32a9836647f74e28e09ece">&#9670;&#160;</a></span>PseudoBucklingRing() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1PseudoBucklingRing.html">PseudoBucklingRing</a> &amp;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="a1b1c4cc24f5bd87654ae62f44e4fa547" name="a1b1c4cc24f5bd87654ae62f44e4fa547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b1c4cc24f5bd87654ae62f44e4fa547">&#9670;&#160;</a></span>~PseudoBucklingRing()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::PseudoBucklingRing::~PseudoBucklingRing </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Clean up if necessary. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00269">269</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00556">Must_clean_up</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae983ed12da7311457a4a2d4f1c3f8b6c" name="ae983ed12da7311457a4a2d4f1c3f8b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae983ed12da7311457a4a2d4f1c3f8b6c">&#9670;&#160;</a></span>accel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::accel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>accel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised acceleration on object at current time: accel = d^2 r(zeta)/dt^2. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">416</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">accel()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00435">oomph::GeomObject::Geom_object_time_stepper_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00431">oomph::GeomObject::Ndim</a>, <a class="el" href="oomph__utilities_8h_source.html#l00167">oomph::MathematicalConstants::Pi</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, and <a class="el" href="timesteppers_8h_source.html#l00572">oomph::TimeStepper::time_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">accel()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00505">dposition_dt()</a>.</p>
+
+</div>
+</div>
+<a id="ade2881e77f7cf0be26970c78c70d3a4d" name="ade2881e77f7cf0be26970c78c70d3a4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade2881e77f7cf0be26970c78c70d3a4d">&#9670;&#160;</a></span>ampl_ratio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::PseudoBucklingRing::ampl_ratio </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for amplitude ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00287">287</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">PseudoBucklingRing()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00318">set_ampl_ratio()</a>.</p>
+
+</div>
+</div>
+<a id="aa11d7bbd2d01a646200e8719e61ad09a" name="aa11d7bbd2d01a646200e8719e61ad09a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11d7bbd2d01a646200e8719e61ad09a">&#9670;&#160;</a></span>dposition_dt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::dposition_dt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>drdt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>j-th time-derivative on object at current time: <img class="formulaInl" alt="$ \frac{d^{j} r(\zeta)}{dt^j} $" src="form_45.png" width="30" height="20"/>. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#aa46469e491d25eda8dbe213f07152974">oomph::GeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00505">505</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">accel()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">position()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">veloc()</a>.</p>
+
+</div>
+</div>
+<a id="ad28891383abe71a473a079721c6dd53e" name="ad28891383abe71a473a079721c6dd53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28891383abe71a473a079721c6dd53e">&#9670;&#160;</a></span>eps_buckl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::PseudoBucklingRing::eps_buckl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for buckling amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00281">281</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">PseudoBucklingRing()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00311">set_eps_buckl()</a>.</p>
+
+</div>
+</div>
+<a id="aed7e4e24a81d91f21bc972da131d1407" name="aed7e4e24a81d91f21bc972da131d1407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed7e4e24a81d91f21bc972da131d1407">&#9670;&#160;</a></span>geom_data_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Data.html">Data</a> * oomph::PseudoBucklingRing::geom_data_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to the j-th <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> item that the object's shape depends on. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#a512b6e559414821452836a387cb34132">oomph::GeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00545">545</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00078">PseudoBucklingRing()</a>.</p>
+
+</div>
+</div>
+<a id="a61e55df2895b2a1cd877517a31e928e4" name="a61e55df2895b2a1cd877517a31e928e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61e55df2895b2a1cd877517a31e928e4">&#9670;&#160;</a></span>n_buckl_float()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::PseudoBucklingRing::n_buckl_float </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for buckling wavenumber (as float) </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00305">305</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9e03780134886a9a2a19358519eca3be" name="a9e03780134886a9a2a19358519eca3be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e03780134886a9a2a19358519eca3be">&#9670;&#160;</a></span>ngeom_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::PseudoBucklingRing::ngeom_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>How many items of <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> does the shape of the object depend on? </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#a19d325347e19964e127fe124df56f251">oomph::GeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00538">538</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, and <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>.</p>
+
+</div>
+</div>
+<a id="ad4b5a765475478b3d3466b71d718b59f" name="ad4b5a765475478b3d3466b71d718b59f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4b5a765475478b3d3466b71d718b59f">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1PseudoBucklingRing.html">PseudoBucklingRing</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a027211cc7067efa849e605b456cb5462" name="a027211cc7067efa849e605b456cb5462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a027211cc7067efa849e605b456cb5462">&#9670;&#160;</a></span>position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> at Lagrangian coordinate zeta at discrete previous time (t=0: present time; t&gt;0: previous time) </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#ad44a736d23dcd63af163a7d80b5c4dfa">oomph::GeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00452">452</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00435">oomph::GeomObject::Geom_object_time_stepper_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geom__objects_8h_source.html#l00431">oomph::GeomObject::Ndim</a>, <a class="el" href="classoomph_1_1TimeStepper.html#a0f38713ed304c18d9f7b5cf8131664c1">oomph::TimeStepper::nprev_values()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00167">oomph::MathematicalConstants::Pi</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, and <a class="el" href="timesteppers_8h_source.html#l00572">oomph::TimeStepper::time_pt()</a>.</p>
+
+</div>
+</div>
+<a id="a1cd6c36f2f84385b6485933b18cbbe43" name="a1cd6c36f2f84385b6485933b18cbbe43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cd6c36f2f84385b6485933b18cbbe43">&#9670;&#160;</a></span>position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Position <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> at Lagrangian coordinate zeta at present time. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">344</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00435">oomph::GeomObject::Geom_object_time_stepper_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00431">oomph::GeomObject::Ndim</a>, <a class="el" href="oomph__utilities_8h_source.html#l00167">oomph::MathematicalConstants::Pi</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, and <a class="el" href="timesteppers_8h_source.html#l00572">oomph::TimeStepper::time_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00505">dposition_dt()</a>.</p>
+
+</div>
+</div>
+<a id="ad202df097c0a68d93a5b2f99abf4c39b" name="ad202df097c0a68d93a5b2f99abf4c39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad202df097c0a68d93a5b2f99abf4c39b">&#9670;&#160;</a></span>r_0()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::PseudoBucklingRing::r_0 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for undeformed radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00293">293</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00745">oomph::PseudoBucklingRingElement::get_residuals_generic()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00330">set_R_0()</a>.</p>
+
+</div>
+</div>
+<a id="a54c88bd59587d51f5d0083ec783a6797" name="a54c88bd59587d51f5d0083ec783a6797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54c88bd59587d51f5d0083ec783a6797">&#9670;&#160;</a></span>set_ampl_ratio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::set_ampl_ratio </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>ampl_ratio</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set amplitude ratio between radial and azimuthal buckling displacements. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00318">318</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00287">ampl_ratio()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+</div>
+</div>
+<a id="ad93efaf7bde42f34272ba668a5b71304" name="ad93efaf7bde42f34272ba668a5b71304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad93efaf7bde42f34272ba668a5b71304">&#9670;&#160;</a></span>set_eps_buckl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::set_eps_buckl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>eps_buckl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set buckling amplitude. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00311">311</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00281">eps_buckl()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac52faed0469827fc629abd7de267262f" name="ac52faed0469827fc629abd7de267262f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac52faed0469827fc629abd7de267262f">&#9670;&#160;</a></span>set_n_buckl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::set_n_buckl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_buckl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set buckling wavenumber. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00324">324</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+</div>
+</div>
+<a id="a348dbc5d192cb5a162448420bd7a185e" name="a348dbc5d192cb5a162448420bd7a185e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a348dbc5d192cb5a162448420bd7a185e">&#9670;&#160;</a></span>set_R_0()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::set_R_0 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>r_0</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set undeformed radius of ring. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00330">330</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00293">r_0()</a>.</p>
+
+</div>
+</div>
+<a id="a37ea2b2f4e889e187eda1d46ba0b27ce" name="a37ea2b2f4e889e187eda1d46ba0b27ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37ea2b2f4e889e187eda1d46ba0b27ce">&#9670;&#160;</a></span>set_T()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::set_T </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>T</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set period of oscillation. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00336">336</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>.</p>
+
+</div>
+</div>
+<a id="af53f509aa119f74c77ae45046023f28f" name="af53f509aa119f74c77ae45046023f28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af53f509aa119f74c77ae45046023f28f">&#9670;&#160;</a></span>T()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::PseudoBucklingRing::T </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function for period of oscillation. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">299</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">accel()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00452">position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00336">set_T()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">veloc()</a>.</p>
+
+</div>
+</div>
+<a id="a7c45a80564ceaeb146d9eb813611572d" name="a7c45a80564ceaeb146d9eb813611572d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c45a80564ceaeb146d9eb813611572d">&#9670;&#160;</a></span>veloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::PseudoBucklingRing::veloc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>veloc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised velocity on object at current time: veloc = d r(zeta)/dt. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">381</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">References <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">Geom_data_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00435">oomph::GeomObject::Geom_object_time_stepper_pt</a>, <a class="el" href="geom__objects_8h_source.html#l00431">oomph::GeomObject::Ndim</a>, <a class="el" href="oomph__utilities_8h_source.html#l00167">oomph::MathematicalConstants::Pi</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, <a class="el" href="timesteppers_8h_source.html#l00572">oomph::TimeStepper::time_pt()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">veloc()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00505">dposition_dt()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">veloc()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6d7d859995d19d6dbcd13f444fb73d6a" name="a6d7d859995d19d6dbcd13f444fb73d6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d7d859995d19d6dbcd13f444fb73d6a">&#9670;&#160;</a></span>Geom_data_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1Data.html">Data</a>*&gt; oomph::PseudoBucklingRing::Geom_data_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> items that affects the object's shape. </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00553">553</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00416">accel()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00287">ampl_ratio()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00281">eps_buckl()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00545">geom_data_pt()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00305">n_buckl_float()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00538">ngeom_data()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00452">position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00344">position()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00078">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00614">oomph::PseudoBucklingRingElement::PseudoBucklingRingElement()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00648">oomph::PseudoBucklingRingElement::PseudoBucklingRingElement()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00293">r_0()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00318">set_ampl_ratio()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00311">set_eps_buckl()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00324">set_n_buckl()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00330">set_R_0()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00336">set_T()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00299">T()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00381">veloc()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00269">~PseudoBucklingRing()</a>.</p>
+
+</div>
+</div>
+<a id="a37b25eb9891d9811158a11b8e8802542" name="a37b25eb9891d9811158a11b8e8802542"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b25eb9891d9811158a11b8e8802542">&#9670;&#160;</a></span>Must_clean_up</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::PseudoBucklingRing::Must_clean_up</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do I need to clean up? </p>
+
+<p class="definition">Definition at line <a class="el" href="pseudo__buckling__ring_8h_source.html#l00556">556</a> of file <a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="pseudo__buckling__ring_8h_source.html#l00116">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00165">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00078">PseudoBucklingRing()</a>, <a class="el" href="pseudo__buckling__ring_8h_source.html#l00269">~PseudoBucklingRing()</a>, and <a class="el" href="pseudo__buckling__ring_8h_source.html#l00682">oomph::PseudoBucklingRingElement::~PseudoBucklingRingElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="pseudo__buckling__ring_8h_source.html">pseudo_buckling_ring.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:46
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

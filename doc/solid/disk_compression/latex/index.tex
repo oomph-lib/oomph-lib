@@ -1,0 +1,743 @@
+\chapter{Demo problem\+: Compression of 2D circular disk}
+\hypertarget{index}{}\label{index}\index{Demo problem: Compression of 2D circular disk@{Demo problem: Compression of 2D circular disk}}
+In this example we study the compression of a 2D circular disk, loaded by an external pressure. We also demonstrate\+:
+\begin{DoxyItemize}
+\item how to "{}upgrade"{} a {\ttfamily Mesh} to a {\ttfamily Solid\+Mesh} 
+\item why it is necessary to use "{}undeformed Macro\+Elements"{} to ensure that the numerical results converge to the correct solution under mesh refinement if the domain has curvilinear boundaries.
+\item how to switch between different constitutive equations
+\item how to incorporate isotropic growth into the model
+\end{DoxyItemize}We validate the numerical results by comparing them against the analytical solution of the equations of linear elasticity which are valid for small deflections.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem}{The problem}}\label{index_problem}
+The figure below shows a sketch of the basic problem\+: A 2D circular disk of radius $ a $ is loaded by a uniform pressure $ p_0^*$. We wish to compute the disk\textquotesingle{}s deformation for a variety of constitutive equations.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{disk_compression}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+The next sketch shows a variant of the problem\+: We assume that the material undergoes isotropic growth (\doxylink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{e.\+g}. via a biological growth process or thermal expansion, say) with a constant growth factor $ \Gamma $. We refer to the the document \href{../../solid_theory/html/index.html\#isotropic_growth}{\texttt{ "{}\+Solid mechanics\+: Theory and implementation"{}}} for a detailed discussion of the theory of isotropic growth. Briefly, the growth factor defines the relative increase in the volume of an infinitesimal material element, relative to its volume in the stress-\/free reference configuration. If the growth factor is spatially uniform, isotropic growth leads to a uniform expansion of the material. For a circular disk, uniform growth increases the disk\textquotesingle{}s radius from $ a_0 $ to $ a = a_0 \sqrt{\Gamma} $ without inducing any internal stresses. This uniformly expanded disk may then be regarded as the stress-\/free reference configuration upon which the external pressure acts.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{disk_compression_with_growth}
+\doxyfigcaption{Sketch of the problem. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The animation shows the disk\textquotesingle{}s deformation when subjected to uniform growth of $ \Gamma = 1.1 $ and loaded by a pressure that ranges from negative to positive values. All lengths were scaled on the disks initial radius (\doxylink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{i.\+e}. its radius in the absence of growth and without any external load).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{disk_compression_anim}
+\doxyfigcaption{Deformation of the uniformly grown disk when subjected to an external pressure. }
+\end{DoxyImage}
+
+
+The figure below illustrates the disk\textquotesingle{}s load-\/displacement characteristics by plotting the disk\textquotesingle{}s non-\/dimensional radius as function of the non-\/dimensional pressure, $ p_0 = p_0^*/{\cal S} $ , where $ {\cal S} $ is the characteristic stiffness of the material, for a variety of constitutive equations. ~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{trace}
+\doxyfigcaption{Load displacement characteristics for various constitutive equations. }
+\end{DoxyImage}
+\hypertarget{index_hooke}{}\doxysubsection{\texorpdfstring{Generalised Hooke\textquotesingle{}s law}{Generalised Hooke's law}}\label{index_hooke}
+The blue, dash-\/dotted line corresponds to {\ttfamily oomph-\/lib\textquotesingle{}s} generalisation of Hooke\textquotesingle{}s law (with Young\textquotesingle{}s modulus $ E $ and Poisson ratio $ \nu $ ) in which the dimensionless second Piola Kirchhoff stress tensor (non-\/dimensionalised with the material\textquotesingle{}s Young\textquotesingle{}s modulus $ E $, so that $ {\cal S} = E $ ) is given by  \[
+\sigma^{ij} = \frac{1}{2(1+\nu)}
+\left( 
+G^{ik} G^{jl} + G^{il} G^{jk}  +
+\frac{2\nu}{1-2\nu} G^{ij} G^{kl} 
+\right) \gamma_{kl}.
+\] Here $ \gamma_{ij}= 1/2 (G_{ij}-g_{ij})$ is Green\textquotesingle{}s strain tensor, formed from the difference between the deformed and undeformed metric tensors, $ G_{ij} $ and $ g_{ij} $, respectively. The three different markers identify the results obtained with the two forms of the principle of virtual displacement, employing the displacement formulation (squares), and a pressure/displacement formulation with a continuous (delta) and a discontinuous (nabla) pressure interpolation.
+
+For zero pressure the disk\textquotesingle{}s non-\/dimensional radius is equal to the uniformly grown radius $ \sqrt{\Gamma} = 1.0488. $ For small pressures the load-\/displacement curve follows the linear approximation  \[
+r =  \sqrt{\Gamma} \big( 1-p_0 (1+\nu)(1-2\nu) \big).
+\] We note that the generalised Hooke\textquotesingle{}s law leads to strain softening behaviour under compression (the pressure required to reduce the disk\textquotesingle{}s radius to a given value increases more rapidly than predicted by the linear approximation) whereas under expansion (for negative external pressures) the behaviour is strain softening.\hypertarget{index_mr}{}\doxysubsection{\texorpdfstring{Generalised Mooney-\/\+Rivlin law}{Generalised Mooney-Rivlin law}}\label{index_mr}
+The red, dashed line illustrates the behaviour when Fung \& Tong\textquotesingle{}s generalisation of the Mooney-\/\+Rivlin law (with Young\textquotesingle{}s modulus, $ E $, Poisson ratio $ \nu $ and Mooney-\/\+Rivlin parameter $ C_1$) is used as the constitutive equation. For this constitutive law, the non-\/dimensional strain energy function $ W = W^*/{\cal S}$, where the characteristic stress is given by Young\textquotesingle{}s modulus, \doxylink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{i.\+e}. $ {\cal
+S} =E $, is given by  \[
+W =  \frac{1}{2} (I_1-3) + (G-C_1)(I_2-3) + (C_1-2G)(I_3-1)
++ (I_3-1)^2 \ \frac{G(1-\nu)}{2(1-2\nu)} \ ,
+\] where  \[
+G = \frac{E}{2(1+\nu)}
+\] is the shear modulus, and $ I_1, I_2 $ and $ I_3 $ are the three invariants of Green\textquotesingle{}s strain tensor. See \href{../../solid_theory/html/index.html\#strain-energy}{\texttt{ "{}\+Solid mechanics\+: Theory and implementation"{}}} for a detailed discussion of strain energy functions. The figure shows that for small deflections, the disk\textquotesingle{}s behaviour is again well approximated by linear elasticity. However, in the large-\/displacement regime the Mooney-\/\+Rivlin is strain hardening under extension and softening under compression when compared to the linear elastic behaviour.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As usual we define the global problem parameters in a namespace. We provide pointers to the constitutive equations and strain energy functions to be explored, and define the associated constitutive parameters.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============namespace\_for\_problem\_parameters=====================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ strain\ energy\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Strain\_energy\_function\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Elastic\ modulus}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{E}}=1.0;\ }
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Poisson's\ ratio}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ "{}Mooney\ Rivlin"{}\ coefficient\ for\ generalised\ Mooney\ Rivlin\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
+
+\end{DoxyCodeInclude}
+
+
+Next we define the pressure load, using the general interface defined in the {\ttfamily Solid\+Traction\+Element} class. The arguments of the function reflect that the load on a solid may be a function of the Lagrangian and Eulerian coordinates, and the external unit normal on the solid. Here we apply a spatially constant external pressure of magnitude {\ttfamily P} which acts in the direction of the negative outer unit normal on the solid.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ pressure}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}}\ =\ 0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constant\ pressure\ load}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{constant\_pressure}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n}},\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dim}}\ =\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction}}.size();}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dim}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction}}[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}]\ =\ -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n}}[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}];}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ end\ of\ pressure\ load}}
+
+\end{DoxyCodeInclude}
+ Finally, we define the growth function and impose a spatially uniform expansion that (in the absence of any external load) would increase the disk\textquotesingle{}s volume by 10\%.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Uniform\ volumetric\ expansion}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Uniform\_gamma}}=1.1;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Growth\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6be3760e5494b1772e4bfe5d5f3c5d53}{growth\_function}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi}},\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{gamma}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{gamma}}\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Uniform\_gamma}};}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ namespace}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is very short\+: We store the command line arguments (as usual, we use a non-\/zero number of command line arguments as an indication that the code is run in self-\/test mode and reduce the number of steps performed in the parameter study) and create a strain-\/energy-\/based constitutive equation\+: Fung \& Tong\textquotesingle{}s generalisation of the Mooney-\/\+Rivlin law.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====start\_of\_main====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ disk-\/compression}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}}[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CommandLineArgs::setup}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argc}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{argv}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ strain\ energy\ function:\ Generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{GeneralisedMooneyRivlin}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ (based\ on\ strain\ energy\ function)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
+
+\end{DoxyCodeInclude}
+ We build a problem object, using the displacement-\/based {\ttfamily Refineable\+QPVDElements} to discretise the domain, and perform a parameter study, exploring the disk\textquotesingle{}s deformation for a range of external pressures.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 0:\ No\ pressure,\ generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ M.R.:\ RefineableQPVDElement<2,3>"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(0);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\ \textcolor{comment}{//\ done\ case\ 0}}
+
+\end{DoxyCodeInclude}
+ We repeat the exercise with elements from the {\ttfamily Refineable\+QPVDElement\+With\+Continuous\+Pressure} family which discretise the principle of virtual displacements (PVD) in the pressure/displacement formulation, using continuous pressures (Q2\+Q1; Taylor Hood).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 1:\ Continuous\ pressure\ formulation\ with\ generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem}}<}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{RefineableQPVDElementWithContinuousPressure<2>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ M.R.:\ RefineableQPVDElementWithContinuousPressure<2>\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \ \textcolor{comment}{//\ done\ case\ 1}}
+
+\end{DoxyCodeInclude}
+ The next computation employs {\ttfamily Refineable\+QPVDElement\+With\+Pressure} elements in which the pressure is interpolated by piecewise linear but globally discontinuous basis functions (Q2\+Q-\/1; Crouzeiux-\/\+Raviart).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 2:\ Discontinuous\ pressure\ formulation\ with\ generalised\ Mooney\ Rivlin}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2>}}\ >\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ M.R.:\ RefineableQPVDElementWithPressure<2>"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(2);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\ \ \textcolor{comment}{//\ done\ case\ 2}}
+
+\end{DoxyCodeInclude}
+ Next, we change the constitutive equation to {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hooke\textquotesingle{}s law,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Change\ the\ consitutive\ law:\ Delete\ the\ old\ one}}
+\DoxyCodeLine{\ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ oomph-\/lib's\ generalised\ Hooke's\ law\ constitutive\ equation}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{GeneralisedHookean}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
+
+\end{DoxyCodeInclude}
+ before repeating the parameter studies with the same three element types\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 3:\ No\ pressure,\ generalised\ Hooke's\ law}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ Hooke:\ RefineableQPVDElement<2,3>\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(3);\ \ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}\ \ \textcolor{comment}{//\ done\ case\ 3}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 4:\ Continuous\ pressure\ formulation\ with\ generalised\ Hooke's\ law}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem}}<}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{RefineableQPVDElementWithContinuousPressure<2>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ Hooke:\ RefineableQPVDElementWithContinuousPressure<2>\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(4);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \}\ \ \textcolor{comment}{//\ done\ case\ 4}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Case\ 5:\ \ Discontinous\ pressure\ formulation\ with\ generalised\ Hooke's\ law}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Set\ up\ the\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2>}}\ >\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}};}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}gen.\ Hooke:\ RefineableQPVDElementWithPressure<2>\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//Run\ the\ simulation}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{problem}}.parameter\_study(5);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \}\ \ \textcolor{comment}{//\ done\ case\ 5}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Clean\ up\ }}
+\DoxyCodeLine{\ \textcolor{keyword}{delete}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_mesh}
+We formulate the problem in cartesian coordinates (ignoring the problem\textquotesingle{}s axisymmetry) but discretise only one quarter of the domain, applying appropriate symmetry conditions along the x and y axes. The computational domain may be discretised with the {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh} that we already used in many previous examples. To use the mesh in this solid mechanics problem we must first "{}upgrade"{} it to a {\ttfamily Solid\+Mesh}. This is easily done by multiple inheritance\+:
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==========start\_mesh=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Elastic\ quarter\ circle\ sector\ mesh\ with\ functionality\ to}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ attach\ traction\ elements\ to\ the\ curved\ surface.\ We\ "{}upgrade"{}}}
+\DoxyCodeLine{\textcolor{comment}{///\ the\ RefineableQuarterCircleSectorMesh\ to\ become\ an}}
+\DoxyCodeLine{\textcolor{comment}{///\ SolidMesh\ and\ equate\ the\ Eulerian\ and\ Lagrangian\ coordinates,}}
+\DoxyCodeLine{\textcolor{comment}{///\ thus\ making\ the\ domain\ represented\ by\ the\ mesh\ the\ stress-\/free\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ configuration.\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{///\ The\ member\ function\ \(\backslash\)c\ make\_traction\_element\_mesh()\ creates}}
+\DoxyCodeLine{\textcolor{comment}{///\ a\ separate\ mesh\ of\ SolidTractionElements\ that\ are\ attached\ to\ the}}
+\DoxyCodeLine{\textcolor{comment}{///\ mesh's\ curved\ boundary\ (boundary\ 1).\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh}}\ :}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableQuarterCircleSectorMesh<ELEMENT>,}
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh}
+\DoxyCodeLine{\{}
+
+\end{DoxyCodeInclude}
+ The constructor calls the constructor of the underlying {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh} and sets the Lagrangian coordinates of the nodes to their current Eulerian positions, making the initial configuration stress-\/free.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ Build\ mesh\ and\ copy\ Eulerian\ coords\ to\ Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ ones\ so\ that\ the\ initial\ configuration\ is\ the\ stress-\/free\ one.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{GeomObject}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{wall\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{TimeStepper}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{Mesh::Default\_TimeStepper}})\ :}
+\DoxyCodeLine{\ \ RefineableQuarterCircleSectorMesh<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}>(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{wall\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\_stepper\_pt}})}
+\DoxyCodeLine{\ \ \{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Make\ the\ current\ configuration\ the\ undeformed\ one\ by}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ setting\ the\ nodal\ Lagrangian\ coordinates\ to\ their\ current}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ ///\ Eulerian\ ones}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We also provide a helper function that creates a mesh of {\ttfamily Solid\+Traction\+Elements} which are attached to the curved domain boundary (boundary 1). These elements will be used to apply the external pressure load.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Function\ to\ create\ mesh\ made\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ make\_traction\_element\_mesh(SolidMesh*\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction\_mesh\_pt}})}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Make\ new\ mesh}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction\_mesh\_pt}}\ =\ \textcolor{keyword}{new}\ SolidMesh;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ all\ elements\ on\ boundary\ 1:}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{b}}=1;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}}\ =\ this-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nboundary\_element}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{b}});}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ element\ itself:}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{FiniteElement}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fe\_pt}}\ =\ this-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{boundary\_element\_pt}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{b}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{face\_index}}\ =\ this-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{face\_index\_at\_boundary}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{b}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{traction\_mesh\_pt}}-\/>add\_element\_pt(\textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidTractionElement<ELEMENT>}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fe\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{face\_index}}));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem_class}{}\doxysection{\texorpdfstring{The Problem class}{The Problem class}}\label{index_problem_class}
+The definition of the Problem class is very straightforward. In addition to the constructor and the (empty) {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily actions\+\_\+after\+\_\+newton\+\_\+solve()} functions, we provide the function {\ttfamily parameter\+\_\+study(...)} which performs a parameter study, computing the disk\textquotesingle{}s deformation for a range of external pressures. The member data includes pointers to the mesh of "{}bulk"{} solid elements, and the mesh of {\ttfamily Solid\+Traction\+Elements} that apply the pressure load. The trace file is used to document the disk\textquotesingle{}s load-\/displacement characteristics by plotting the radial displacement of the nodes on the curvilinear boundary, pointers to which are stored in the vector {\ttfamily Trace\+\_\+node\+\_\+pt}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Uniform\ compression\ of\ a\ circular\ disk\ in\ a\ state\ of\ plane\ strain,}}
+\DoxyCodeLine{\textcolor{comment}{///\ subject\ to\ uniform\ growth.\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a462e81aec225a5d6204b579719b3db87}{StaticDiskCompressionProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Run\ simulation:\ Pass\ case\ number\ to\ label\ output\ files}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{case\_number}});}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a9154152d022e86461966b5562f5acba4}{doc\_solution}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a484b47d6a10a91cbd30cb807a49b1f58}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a2b00608d2992b40217248e01b2294153}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Trace\ file}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a7affbfca1efcaadb4770386dc7d23e4c}{Trace\_file}};}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Vector\ of\ pointers\ to\ nodes\ whose\ position\ we're\ tracing}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Vector<Node*>}}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a8e98a225a1bb49cb6943b59d9f3145dc}{Trace\_node\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a6ad5b428d535a90f71e2e9325e9a5b15}{Solid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ of\ traction\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ SolidMesh*\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a66623722b4cb3bdc94d46a56c18d2908}{Traction\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The Constructor}{The Constructor}}\label{index_constructor}
+We start by constructing the mesh of "{}bulk"{} {\ttfamily Solid\+Elements}, using the {\ttfamily Ellipse} object to specify the shape of the curvilinear domain boundary.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classStaticDiskCompressionProblem_a462e81aec225a5d6204b579719b3db87}{StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ geometric\ object\ that\ describes\ the\ curvilinear}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ boundary\ of\ the\ quarter\ circle\ domain}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Ellipse}}*\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{curved\_boundary\_pt}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Ellipse}}(1.0,1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ curved\ boundary\ of\ the\ mesh\ is\ defined\ by\ the\ geometric\ object}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ What\ follows\ are\ the\ start\ and\ end\ coordinates\ on\ the\ geometric\ object:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}}=2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{atan}}(1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Fraction\ along\ geometric\ object\ at\ which\ the\ radial\ dividing\ line}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ placed}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ using\ the\ geometric\ object}}
+\DoxyCodeLine{\ Solid\_mesh\_pt\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{curved\_boundary\_pt}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_lo}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\_mid}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\_hi}});}
+
+\end{DoxyCodeInclude}
+ Next we choose the nodes on the curvilinear domain boundary (boundary 1) as the nodes whose displacement we document in the trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ trace\ nodes\ as\ the\ nodes\ on\ boundary\ \ 1\ (=curved\ boundary)\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ in\ the\ original\ mesh.}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_boundary\_node}}\ =\ Solid\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{\ Trace\_node\_pt.resize(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_boundary\_node}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_boundary\_node}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}++)}
+\DoxyCodeLine{\ \ \{Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]=Solid\_mesh\_pt-\/>boundary\_node\_pt(1,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}});\}}
+
+\end{DoxyCodeInclude}
+ The {\ttfamily Quarter\+Circle\+Sector\+Mesh} that forms the basis of the "{}bulk"{} mesh contains only three elements -- not enough to expect the solution to be accurate. Therefore we apply one round of uniform mesh refinement before attaching the {\ttfamily Solid\+Traction\+Elements} to the mesh boundary 1, using the function {\ttfamily make\+\_\+traction\+\_\+element\+\_\+mesh()} in the {\ttfamily \doxylink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Refine\ the\ mesh\ uniformly}}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>refine\_uniformly();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ construct\ the\ traction\ element\ mesh}}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>make\_traction\_element\_mesh(Traction\_mesh\_pt);}
+
+\end{DoxyCodeInclude}
+ We add both meshes to the {\ttfamily Problem} and build a combined global mesh\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solid\ mesh\ is\ first\ sub-\/mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{add\_sub\_mesh}}(Solid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Traction\ mesh\ is\ second\ sub-\/mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{add\_sub\_mesh}}(Traction\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ combined\ "{}global"{}\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{build\_global\_mesh}}();}
+
+\end{DoxyCodeInclude}
+ Symmetry boundary conditions along the horizontal and vertical symmetry lines require that the nodes\textquotesingle{} vertical position is pinned along boundary 0, while their horizontal position is pinned along boundary 2.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ left\ edge\ in\ the\ horizontal\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_side}}\ =\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{mesh\_pt}}()-\/>nboundary\_node(2);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_side}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{Solid\_mesh\_pt-\/>boundary\_node\_pt(2,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}})-\/>pin\_position(0);\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ bottom\ in\ the\ vertical\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_bottom}}\ =\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{mesh\_pt}}()-\/>nboundary\_node(0);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_bottom}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{Solid\_mesh\_pt-\/>boundary\_node\_pt(0,\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}})-\/>pin\_position(1);\}}
+
+\end{DoxyCodeInclude}
+ Since we are using refineable solid elements, we pin any "{}redundant"{} pressure degrees of freedom in the "{}bulk"{} solid mesh (see \href{../../airy_cantilever/html/index.html\#ex}{\texttt{ the exercises in another tutorial}} for a more detailed discussion of this issue).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ Solid\_mesh\_pt-\/>element\_pt());}
+
+\end{DoxyCodeInclude}
+ Next, we complete the build of the elements in the "{}bulk"{} solid mesh by passing the pointer to the constitutive equation and the pointer to the isotropic-\/growth function to the elements\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Complete\ the\ build\ process\ for\ elements\ in\ "{}bulk"{}\ solid\ mesh}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}}\ =Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}\ *\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}}*\textcolor{keyword}{>}(Solid\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ isotropic\ growth\ function\ pointer}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>isotropic\_growth\_fct\_pt()=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6be3760e5494b1772e4bfe5d5f3c5d53}{Global\_Physical\_Variables::growth\_function}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ We repeat this exercise for the {\ttfamily Solid\+Traction\+Elements} which must be given a pointer to the function that applies the pressure load
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ build\ process\ for\ SolidTractionElements}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}}=Traction\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{n\_element}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Cast\ to\ a\ solid\ traction\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidTractionElement<ELEMENT>}}\ *\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{SolidTractionElement<ELEMENT>}}*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ (Traction\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ traction\ function}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{el\_pt}}-\/>traction\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\_Physical\_Variables::constant\_pressure}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we set up the equation numbering scheme and report the number of unknowns.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ up\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc_solution}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc_solution}
+The post-\/processing function outputs the shape of the deformed disk. We use the trace file to record how the disk\textquotesingle{}s volume (area) and the radii of the control nodes on the curvilinear domain boundary vary with the applied pressure. To facilitate the validation of the results against the analytical solution, we also add the radius predicted by the linear theory to the trace file.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_a9154152d022e86461966b5562f5acba4}{StaticDiskCompressionProblem<ELEMENT>::doc\_solution}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ofstream}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}}\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ deformed\ body}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+\DoxyCodeLine{\ Solid\_mesh\_pt-\/>output(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Find\ number\ of\ solid\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nelement}}\ =\ Solid\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Work\ out\ volume}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{volume}}\ =\ 0.0;}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nelement}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}}++)\ }
+\DoxyCodeLine{\ \ \{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{volume}}+=\ Solid\_mesh\_pt-\/>finite\_element\_pt(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{e}})-\/>size();\}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Exact\ outer\ radius\ for\ linear\ elasticity}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{exact\_r}}=\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{sqrt}}(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\_Physical\_Variables::Uniform\_gamma}})*}
+\DoxyCodeLine{\ \ (1.0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}}}
+\DoxyCodeLine{\ \ \ *((1.0+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}})*(1.0-\/2.0*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nu}})));}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file:\ Problem\ parameters}}
+\DoxyCodeLine{\ Trace\_file\ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}\ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\_Physical\_Variables::Uniform\_gamma}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{volume}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{exact\_r}}\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ radii\ of\ trace\ nodes}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ntrace\_node}}=Trace\_node\_pt.size();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ntrace\_node}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Trace\_file\ <<\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{sqrt}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}(0),2)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{pow}}(Trace\_node\_pt[\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{j}}]-\/>\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{x}}(1),2))\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ Trace\_file\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc\_solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_run_it}{}\doxysection{\texorpdfstring{Performing the parameter study}{Performing the parameter study}}\label{index_run_it}
+The function {\ttfamily parameter\+\_\+study(...)} computes the disk\textquotesingle{}s deformation for a range of external pressures and outputs the results. The output directory is labelled by the {\ttfamily unsigned} function argument. This ensures that parameter studies performed with different constitutive equations are written into different directories.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Run\ the\ paramter\ study}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{StaticDiskCompressionProblem<ELEMENT>::parameter\_study}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{case\_number}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{DocInfo}}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dirname}}[100];}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dirname}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dirname}}),\ \textcolor{stringliteral}{"{}RESLT\%i"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{case\_number}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.set\_directory(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{dirname}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number()=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}[100];\ \ \ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{snprintf}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{filename}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{delta\_p}}=0.0125;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}}=21;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Perform\ fewer\ steps\ if\ run\ as\ self-\/test\ (indicated\ by\ nonzero\ number}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ of\ command\ line\ arguments)}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{CommandLineArgs::Argc}}!=1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}}=3;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Offset\ external\ pressure\ so\ that\ the\ computation\ sweeps\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ over\ a\ range\ of\ positive\ and\ negative\ pressures}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}\ =-\/\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{delta\_p}}*\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}}(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}}-\/1)*0.5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ the\ parameter\ study}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}=0;\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}<\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{nstep}};\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Solve\ the\ problem\ for\ current\ load}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{newton\_solve}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{doc\_info}}.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Increment\ pressure\ load}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}\ +=\ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{delta\_p}};\ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ parameter\ study}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_and_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_and_ex}
+\hypertarget{index_macro}{}\doxysubsection{\texorpdfstring{The use of Macro\+Elements in solid mechanics problems}{The use of MacroElements in solid mechanics problems}}\label{index_macro}
+\href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ Recall}} how {\ttfamily oomph-\/lib} employs {\ttfamily Macro\+Elements} to represent the exact domain shapes in adaptive computations involving problems with curvilinear boundaries. When an element is refined, the (Eulerian) position of any newly-\/created nodes is based on the element\textquotesingle{}s {\ttfamily Macro\+Element} counterpart, rather than being determined by finite-\/element interpolation from the "{}father element"{}. This ensures that {\bfseries{(i)}} newly-\/created nodes on curvilinear domain boundaries are placed exactly onto those boundaries and {\bfseries{(ii)}} that newly-\/created nodes in the interior are placed at positions that match smoothly onto the boundary.
+
+This strategy is adapted slightly for solid mechanics problems\+:
+\begin{DoxyEnumerate}
+\item The Eulerian position of newly-\/created {\ttfamily Solid\+Nodes} is determined by finite element interpolation from the "{}father element"{}, {\bfseries{unless}} the newly-\/created {\ttfamily Solid\+Node} is located on a domain boundary and its position is pinned by displacement boundary conditions. ~\newline
+~\newline
+
+\item The same procedure is employed to determine the Lagrangian coordinates of newly-\/created {\ttfamily Solid\+Nodes}.
+\end{DoxyEnumerate}These modifications ensure that, as before, newly-\/created nodes on curvilinear domain boundaries are placed exactly onto those boundaries if their positions are pinned by displacement boundary conditions. (If the nodal positions are not pinned, the node\textquotesingle{}s Eulerian position will be determined as part of the solution.) The use of finite-\/element interpolation from the "{}father element"{} in the interior of the domain for both Lagrangian and Eulerian coordinates ensures that the creation of new nodes does not induce any stresses into a previously computed solution.\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+
+\begin{DoxyEnumerate}
+\item Our discretisation of the problem in cartesian coordinates did not exploit the problem\textquotesingle{}s axisymmetry. Examine the trace file to assess to which extent the computation retained the axisymmetry. ~\newline
+~\newline
+
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

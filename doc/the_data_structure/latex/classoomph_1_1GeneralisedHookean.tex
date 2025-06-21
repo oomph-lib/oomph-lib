@@ -1,0 +1,299 @@
+\doxysection{oomph\+::Generalised\+Hookean Class Reference}
+\hypertarget{classoomph_1_1GeneralisedHookean}{}\label{classoomph_1_1GeneralisedHookean}\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+
+
+Class for a "{}non-\/rational"{} extension of classical linear elasticity to large displacements\+:  
+
+
+
+
+{\ttfamily \#include $<$constitutive\+\_\+laws.\+h$>$}
+
+Inheritance diagram for oomph\+::Generalised\+Hookean\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1GeneralisedHookean}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ae345f3619a2826b4547f7cb42a052ca6}{Generalised\+Hookean}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}nu\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{e\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The constructor takes the pointers to values of material parameters\+: Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a470dde76fd6603da69bf4b6f12c50917}{Generalised\+Hookean}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}nu\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em The constructor takes the pointers to value of Poisson\textquotesingle{}s ratio . Young\textquotesingle{}s modulus is set to E=1.\+0, implying that all stresses have been non-\/dimensionalised on on it. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369b2a412a1228}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Hookean}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&sigma)
+\begin{DoxyCompactList}\small\item\em Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a641d0893e485df52b48b15e189a850ed}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sigma\+\_\+dev}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G\+\_\+contra}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Gdet}})
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  $ where the "{}pressure"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ad19b5e80755f5d8e5513c4199f62fe03}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sigma\+\_\+dev}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Gcontra}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gen\+\_\+dil}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\+\_\+kappa}})
+\begin{DoxyCompactList}\small\item\em Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  $ where the "{}pressure"{} $ p $ is determined from $ p / \kappa - d =0 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a9ed467d8b7c838cb7fed8c861aa652e9}{requires\+\_\+incompressibility\+\_\+constraint}} ()
+\begin{DoxyCompactList}\small\item\em Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{oomph\+::\+Constitutive\+Law}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a864c36413e8ea31e63552f3db3b97a2f}{Constitutive\+Law}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_aa75b88c826723ba090ace39c26da0ae6}{\texorpdfstring{$\sim$}{\string~}\+Constitutive\+Law}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6076752384082cfa3de3e0cf17daa9aa}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+sigma\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symmetrize\+\_\+tensor}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor with respect to the deformed metric tensor. Arguments are the covariant undeformed and deformed metric tensor, the current value of the stress tensor and the rank four tensor in which to return the derivatives of the stress tensor The default implementation uses finite differences, but can be overloaded for constitutive laws in which an analytic formulation is possible. If the boolean flag symmetrize\+\_\+tensor is false, only the "{}upper  triangular"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_af13f9d05db09870d1b90b7ef389bdb71}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{detG}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&interpolated\+\_\+solid\+\_\+p, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+sigma\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+det\+G\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symmetrize\+\_\+tensor}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. with respect to the deformed metric tensor. Also return the derivatives of the determinant of the deformed metric tensor with respect to the deformed metric tensor. This form is appropriate for truly-\/incompressible materials. The default implementation uses finite differences for the derivatives that depend on the constitutive law, but not for the derivatives of the determinant, which are generic. / If the boolean flag symmetrize\+\_\+tensor is false, only the "{}upper  triangular"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a4f1bcac8d308d9ad0013ddf5def505}{calculate\+\_\+d\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress\+\_\+dG}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gen\+\_\+dil}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inv\+\_\+kappa}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&interpolated\+\_\+solid\+\_\+p, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+sigma\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+gen\+\_\+dil\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{symmetrize\+\_\+tensor}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant 2nd Piola Kirchoff stress tensor with respect to the deformed metric tensor. Also return the derivatives of the generalised dilatation, $ d, $ with respect to the deformed metric tensor. This form is appropriate for near-\/incompressible materials. The default implementation uses finite differences. If the boolean flag symmetrize\+\_\+tensor is false, only the "{}upper  triangular"{} entries of the tensor will be filled in. This is a useful efficiency when using the derivatives in Jacobian calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_ad719ee5ed6d1bcacb18fec3339ae98de}{Nu\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Poisson ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a7a68b35f227848a065a7a844766b4eeb}{E\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean_a21d4ef7498c2efd5bf30fa0ecd0d7dd5}{Must\+\_\+delete\+\_\+e}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if storage for elastic modulus must be deleted in destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{oomph\+::\+Constitutive\+Law}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a73f01e1459e7ba998ef78f7ece6baa37}{is\+\_\+matrix\+\_\+square}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&M)
+\begin{DoxyCompactList}\small\item\em Test whether a matrix is square. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a8a89bb96a9b922294509923563a13063}{are\+\_\+matrices\+\_\+of\+\_\+equal\+\_\+dimensions}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{M1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{M2}})
+\begin{DoxyCompactList}\small\item\em Test whether two matrices are of equal dimensions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a01763658a56a962460a80607653a33b4}{error\+\_\+checking\+\_\+in\+\_\+input}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&g, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{G}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&sigma)
+\begin{DoxyCompactList}\small\item\em Check for errors in the input, i.\+e. check that the dimensions of the arrays are all consistent. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a5c188df10b08b340b923c3a733c0d178}{calculate\+\_\+contravariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Gcov}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Gcontra}})
+\begin{DoxyCompactList}\small\item\em Calculate a contravariant tensor from a covariant tensor, and return the determinant of the covariant tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a6dda64e60ed8128cb4603041dc66036f}{calculate\+\_\+d\+\_\+contravariant\+\_\+dG}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Gcov}}, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+Gcontra\+\_\+dG}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{d\+\_\+det\+G\+\_\+dG}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivatives of the contravariant tensor and the derivatives of the determinant of the covariant tensor with respect to the components of the covariant tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for a "{}non-\/rational"{} extension of classical linear elasticity to large displacements\+: 
+
+\[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \] where \[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl} + \frac{1}{2} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \] For small strains $ (| G_{ij} - g_{ij} | \ll 1)$ this approaches the version appropriate for linear elasticity, obtained by replacing $ G^{ij}$ with $ g^{ij}$.
+
+We provide three versions of {\ttfamily \doxylink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}\+:
+\begin{DoxyEnumerate}
+\item If $ \nu \ne 1/2 $ (and not close to $ 1/2 $), the constitutive law can be used directly in the above form, using the deformed and undeformed metric tensors as input.
+\item If the material is incompressible ( $ \nu = 1/2 $), the first term in the above expression for $ E^{ijkl} $ is singular. We re-\/write the constitutive equation for this case as
+
+\[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \] where the pressure $ p $ needs to be determined independently via the incompressibility constraint. In this case, the stress returned by {\ttfamily \doxylink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
+
+\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), and the determinant of the deformed covariant metric tensor $ {\tt detG} = \det G_{ij} $ (since it is needed in the equation that enforces the incompressibility).
+\item If $ \nu \approx 1/2 $, the original form of the constitutive equation could be used, but the resulting equations tend to be ill-\/conditioned since they contain the product of the large "{}bulk modulus"{}
+
+\[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \] and the small "{}generalised dilatation"{}
+
+\[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \] \mbox{[} $ d $ represents the actual dilatation in the small strain limit; for large deformations it doesn\textquotesingle{}t have any sensible interpretation (or does it?). It is simply the term that needs to go to zero as $ \kappa \to \infty$.\mbox{]} In this case, the stress returned by {\ttfamily \doxylink{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}} contains only the deviatoric part of the 2nd Piola Kirchhoff stress,
+
+\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \] The function also returns the contravariant metric tensor $ G^{ij}$ (since it is needed to form the complete stress tensor), the inverse of the bulk modulus, and the generalised dilatation (since they are needed in the equation that determines the pressure). 
+\end{DoxyEnumerate}
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00698}{698}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1GeneralisedHookean_ae345f3619a2826b4547f7cb42a052ca6}\label{classoomph_1_1GeneralisedHookean_ae345f3619a2826b4547f7cb42a052ca6} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!GeneralisedHookean@{GeneralisedHookean}}
+\index{GeneralisedHookean@{GeneralisedHookean}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{GeneralisedHookean()}{GeneralisedHookean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Hookean\+::\+Generalised\+Hookean (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{nu\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{e\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The constructor takes the pointers to values of material parameters\+: Poisson\textquotesingle{}s ratio and Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00703}{703}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_a470dde76fd6603da69bf4b6f12c50917}\label{classoomph_1_1GeneralisedHookean_a470dde76fd6603da69bf4b6f12c50917} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!GeneralisedHookean@{GeneralisedHookean}}
+\index{GeneralisedHookean@{GeneralisedHookean}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{GeneralisedHookean()}{GeneralisedHookean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Hookean\+::\+Generalised\+Hookean (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{nu\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The constructor takes the pointers to value of Poisson\textquotesingle{}s ratio . Young\textquotesingle{}s modulus is set to E=1.\+0, implying that all stresses have been non-\/dimensionalised on on it. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00712}{712}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369b2a412a1228}\label{classoomph_1_1GeneralisedHookean_a18794fa4b1750aafa2369b2a412a1228} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!````~GeneralisedHookean@{\texorpdfstring{$\sim$}{\string~}GeneralisedHookean}}
+\index{````~GeneralisedHookean@{\texorpdfstring{$\sim$}{\string~}GeneralisedHookean}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GeneralisedHookean()}{\string~GeneralisedHookean()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Generalised\+Hookean\+::\texorpdfstring{$\sim$}{\string~}\+Generalised\+Hookean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00722}{722}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8h_source_l00783}{E\+\_\+pt}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00787}{Must\+\_\+delete\+\_\+e}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1}\label{classoomph_1_1GeneralisedHookean_a5beca3e59f04d109c394bf9fd24bb7c1} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
+\index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Generalised\+Hookean\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{sigma }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed and deformed metric tensor and the matrix in which to return the stress tensor. 
+
+Calculate the contravariant 2nd Piola Kirchhoff stress tensor. Arguments are the covariant undeformed (stress-\/free) and deformed metric tensors, g and G, and the matrix in which to return the stress tensor. 
+
+Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a93527d910de908035feb8f41b0401065}{oomph\+::\+Constitutive\+Law}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l00682}{682}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00071}{oomph\+::\+Constitutive\+Law\+::error\+\_\+checking\+\_\+in\+\_\+input()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00765}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_a641d0893e485df52b48b15e189a850ed}\label{classoomph_1_1GeneralisedHookean_a641d0893e485df52b48b15e189a850ed} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
+\index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Generalised\+Hookean\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{G\+\_\+contra,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{Gdet }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the deviatoric part $ \overline{ \sigma^{ij}}$ of the contravariant 2nd Piola Kirchhoff stress tensor $ \sigma^{ij}$. Also return the contravariant deformed metric tensor and the determinant of the deformed metric tensor. This form is appropriate for truly-\/incompressible materials for which $ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}}  $ where the "{}pressure"{} $ p $ is determined by $ \det G_{ij} - \det g_{ij} = 0 $. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_ac8178b1b7cd7e6a64942dba9e0997b30}{oomph\+::\+Constitutive\+Law}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l00811}{811}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00113}{oomph\+::\+Constitutive\+Law\+::calculate\+\_\+contravariant()}}, \mbox{\hyperlink{constitutive__laws_8cc_source_l00071}{oomph\+::\+Constitutive\+Law\+::error\+\_\+checking\+\_\+in\+\_\+input()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_ad19b5e80755f5d8e5513c4199f62fe03}\label{classoomph_1_1GeneralisedHookean_ad19b5e80755f5d8e5513c4199f62fe03} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}}
+\index{calculate\_second\_piola\_kirchhoff\_stress@{calculate\_second\_piola\_kirchhoff\_stress}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{calculate\_second\_piola\_kirchhoff\_stress()}{calculate\_second\_piola\_kirchhoff\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Generalised\+Hookean\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{sigma\+\_\+dev,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{Gcontra,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{gen\+\_\+dil,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{inv\+\_\+kappa }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculate the deviatoric part of the contravariant 2nd Piola Kirchoff stress tensor. Also return the contravariant deformed metric tensor, the generalised dilatation, $ d, $ and the inverse of the bulk modulus $ \kappa$. This form is appropriate for near-\/incompressible materials for which $ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}}  $ where the "{}pressure"{} $ p $ is determined from $ p / \kappa - d =0 $. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a26f34355b626bebcad8f498fa5271d20}{oomph\+::\+Constitutive\+Law}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8cc_source_l00765}{765}} of file \mbox{\hyperlink{constitutive__laws_8cc_source}{constitutive\+\_\+laws.\+cc}}.
+
+
+
+References \mbox{\hyperlink{constitutive__laws_8cc_source_l00682}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00783}{E\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00780}{Nu\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_a9ed467d8b7c838cb7fed8c861aa652e9}\label{classoomph_1_1GeneralisedHookean_a9ed467d8b7c838cb7fed8c861aa652e9} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}}
+\index{requires\_incompressibility\_constraint@{requires\_incompressibility\_constraint}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{requires\_incompressibility\_constraint()}{requires\_incompressibility\_constraint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Generalised\+Hookean\+::requires\+\_\+incompressibility\+\_\+constraint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Pure virtual function in which the writer must declare if the constitutive equation requires an incompressible formulation in which the volume constraint is enforced explicitly. Used as a sanity check in PARANOID mode. False. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw_a446452158a8ae9fbc3dde4277155f824}{oomph\+::\+Constitutive\+Law}}.
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00773}{773}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1GeneralisedHookean_a7a68b35f227848a065a7a844766b4eeb}\label{classoomph_1_1GeneralisedHookean_a7a68b35f227848a065a7a844766b4eeb} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!E\_pt@{E\_pt}}
+\index{E\_pt@{E\_pt}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{E\_pt}{E\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Generalised\+Hookean\+::\+E\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Young\textquotesingle{}s modulus. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00783}{783}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00765}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00722}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Hookean()}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_a21d4ef7498c2efd5bf30fa0ecd0d7dd5}\label{classoomph_1_1GeneralisedHookean_a21d4ef7498c2efd5bf30fa0ecd0d7dd5} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!Must\_delete\_e@{Must\_delete\_e}}
+\index{Must\_delete\_e@{Must\_delete\_e}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{Must\_delete\_e}{Must\_delete\_e}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Generalised\+Hookean\+::\+Must\+\_\+delete\+\_\+e\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate if storage for elastic modulus must be deleted in destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00787}{787}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8h_source_l00722}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Hookean()}}.
+
+\Hypertarget{classoomph_1_1GeneralisedHookean_ad719ee5ed6d1bcacb18fec3339ae98de}\label{classoomph_1_1GeneralisedHookean_ad719ee5ed6d1bcacb18fec3339ae98de} 
+\index{oomph::GeneralisedHookean@{oomph::GeneralisedHookean}!Nu\_pt@{Nu\_pt}}
+\index{Nu\_pt@{Nu\_pt}!oomph::GeneralisedHookean@{oomph::GeneralisedHookean}}
+\doxysubsubsection{\texorpdfstring{Nu\_pt}{Nu\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Generalised\+Hookean\+::\+Nu\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{constitutive__laws_8h_source_l00780}{780}} of file \mbox{\hyperlink{constitutive__laws_8h_source}{constitutive\+\_\+laws.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{constitutive__laws_8cc_source_l00765}{calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{constitutive__laws_8h}{constitutive\+\_\+laws.\+h}}\item 
+\mbox{\hyperlink{constitutive__laws_8cc}{constitutive\+\_\+laws.\+cc}}\end{DoxyCompactItemize}

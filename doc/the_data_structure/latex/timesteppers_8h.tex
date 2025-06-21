@@ -1,0 +1,22 @@
+\doxysection{timesteppers.\+h File Reference}
+\hypertarget{timesteppers_8h}{}\label{timesteppers_8h}\index{timesteppers.h@{timesteppers.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1Time}{oomph\+::\+Time}}
+\begin{DoxyCompactList}\small\item\em Class to keep track of discrete/continous time. It is essential to have a single \doxylink{classoomph_1_1Time}{Time} object when using multiple time-\/stepping schemes; e.\+g., in fluid-\/structure interaction problems, it is common to use different schemes for the fluid and solid domains. Storage is allocated for the current value of the (continuous) time and a limited history of previous timesteps. The number of previous timesteps must be equal to the number required by the "{}highest order"{} scheme. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TimeStepper}{oomph\+::\+Time\+Stepper}}
+\begin{DoxyCompactList}\small\item\em Base class for time-\/stepping schemes. Timestepper provides an approximation of the temporal derivatives of \doxylink{classoomph_1_1Data}{Data} such that the i-\/th derivative of the j-\/th value in \doxylink{classoomph_1_1Data}{Data} is represented as. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady$<$ NSTEPS $>$}}
+\begin{DoxyCompactList}\small\item\em Faux time-\/stepper for steady problems. Allows storage for NSTEPS previous values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1Newmark}{oomph\+::\+Newmark$<$ NSTEPS $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Newmark}{Newmark} scheme for second time deriv. Stored data represents. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NewmarkBDF}{oomph\+::\+Newmark\+BDF$<$ NSTEPS $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Newmark}{Newmark} scheme for second time deriv with first derivatives calculated using \doxylink{classoomph_1_1BDF}{BDF}. . Stored data represents. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BDF}{oomph\+::\+BDF$<$ NSTEPS $>$}}
+\begin{DoxyCompactList}\small\item\em Templated class for BDF-\/type time-\/steppers with fixed or variable timestep. 1st time derivative recovered directly from the previous function values. Template parameter represents the number of previous timesteps stored, so that BDF$<$1$>$ is the classical first order backward \doxylink{classoomph_1_1Euler}{Euler} scheme. Need to reset weights after every change in timestep. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

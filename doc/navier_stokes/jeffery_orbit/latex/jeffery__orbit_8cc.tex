@@ -1,0 +1,69 @@
+\doxysection{jeffery\+\_\+orbit.\+cc File Reference}
+\hypertarget{jeffery__orbit_8cc}{}\label{jeffery__orbit_8cc}\index{jeffery\_orbit.cc@{jeffery\_orbit.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classGeneralEllipse}{General\+Ellipse}}
+\begin{DoxyCompactList}\small\item\em A geometric object for an ellipse with initial centre of mass at (centre\+\_\+x, centre\+\_\+y) with axis in the x direction given by 2a and in the y-\/direction given by 2b. The boundary of the ellipse is parametrised by its angle. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Unstructured Navier-\/\+Stokes ALE Problem for a rigid ellipse immersed within a viscous fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceProblem__Parameter}{Problem\+\_\+\+Parameter}}
+\begin{DoxyCompactList}\small\item\em Namespace for Problem Parameters. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceJeffery__Solution}{Jeffery\+\_\+\+Solution}}
+\begin{DoxyCompactList}\small\item\em Exact solution for the rotation of an ellipse in unbounded shear flow as computed by Jeffery (1922) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceJeffery__Solution_a6a47b12e9a89f545c7467fae2e6a4350}{Jeffery\+\_\+\+Solution\+::null}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Null function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceJeffery__Solution_ad3bd18834ecba370674e34242f8125c1}{Jeffery\+\_\+\+Solution\+::angle}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Angular position as a function of time t. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceJeffery__Solution_acf35d547e7d28609a17c66c9a191090b}{Jeffery\+\_\+\+Solution\+::velocity}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Angular velocity as function of time t. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceJeffery__Solution_afe09bdca1fe833f94f510e206d5df08c}{Jeffery\+\_\+\+Solution\+::acceleration}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Angular acceleration as a function of time t (should always be zero) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{jeffery__orbit_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code for immersed ellipse problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}{Problem\+\_\+\+Parameter\+::\+Re}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30}{Problem\+\_\+\+Parameter\+::\+St}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a7fcb9a415485247d626190923235be2a}{Problem\+\_\+\+Parameter\+::\+Density\+\_\+ratio}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Density ratio (Solid density / Fluid density) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a23071148de0fea3597c2a7eb848320b6}{Problem\+\_\+\+Parameter\+::A}} = 0.\+25
+\begin{DoxyCompactList}\small\item\em Initial axis of the elliptical solid in x-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}{Problem\+\_\+\+Parameter\+::B}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Initial axis of the elliptical solid in y-\/direction (N.\+B. 2B = 1 is the reference length scale) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Problem\+\_\+\+Parameter\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid (mesh) Poisson ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12}{Problem\+\_\+\+Parameter\+::\+Lambda\+\_\+sq}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid (mesh) "{}density"{} Set to zero because we don\textquotesingle{}t want inertia in the node update! \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{jeffery__orbit_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{jeffery__orbit_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{jeffery\_orbit.cc@{jeffery\_orbit.cc}!main@{main}}
+\index{main@{main}!jeffery\_orbit.cc@{jeffery\_orbit.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for immersed ellipse problem. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l01198}{1198}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+References \mbox{\hyperlink{jeffery__orbit_8cc_source_l00864}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::solve\+\_\+for\+\_\+consistent\+\_\+nodal\+\_\+positions()}}.
+

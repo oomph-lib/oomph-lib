@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph-lib&#39;s fluid-structure-interaction (FSI) preconditioner</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">oomph-lib's fluid-structure-interaction (FSI) preconditioner </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>The purpose of this tutorial is to show how to use <code>oomph-lib's</code> FSI preconditioner for the efficient monolithic solution of fluid-structure interaction problems. We illustrate the use of the preconditioner for the collapsible channel problem described in the <a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">tutorial demonstrating the use of <code>oomph-lib's</code> segregated FSI solver.</a> The test problem used is discussed in detail in </p><center> <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, M., Hazel, A.L. &amp; Boyle, J. (2008): Solvers for large-displacement fluid-structure interaction problems: Segregated vs. monolithic approaches. Computational Mechanics.</a> </center><p> <br  />
+where we contrast the relative performance of segregated and monolithic solvers.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory</h1>
+<p>The monolithic discretisation of fluid-structure interaction problems in which the fluid node-update in response to changes in the wall shape is performed by one of <code>oomph-lib's</code> algebraic node update techniques (such as the ones implemented in the <code> <a href="../../../the_data_structure/html/classoomph_1_1AlgebraicMesh.html">AlgebraicMesh </a></code> and <code> <a href="../../../the_data_structure/html/classoomph_1_1MacroElementNodeUpdateMesh.html">MacroElementNodeUpdateMesh</a></code> classes; see the relevant tutorials for a discussion of the <a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">algebraic</a> and <a href="../../../interaction/macro_element_free_boundary_poisson/html/index.html">macro-element-based</a> node update techniques) leads to Jacobian matrices that contain three types of degree of freedom, namely the fluid velocities, the fluid pressures, and the solid mechanics degrees of freedom.</p>
+<p><code>oomph-lib's</code> FSI preconditioner employs the library's <a href="../../../mpi/block_preconditioners/html/index.html">block-preconditioning framework</a> to (formally) re-order the linear system to be solved during the Newton iteration into 3x3 blocks. We note that all fluid velocity components and all solid degrees of freedom are treated as single blocks of unknowns. The linear system therefore has the following block structure</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left(
+\begin{array}{cc|c}
+{\bf F} &amp; {\bf G} &amp; {\bf  C}_{us} \\
+{\bf D} &amp; {\bf 0} &amp; {\bf  C}_{ps} \\
+\hline
+{\bf C}_{su} &amp; {\bf C}_{sp} &amp; {\bf S} 
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\delta {\bf u} \\
+\delta {\bf p} \\
+\hline
+\delta {\bf s}
+\end{array}
+\right)
+= 
+- \left(
+\begin{array}{c}
+{\bf r}_{u} \\
+{\bf r}_{p} \\
+\hline
+{\bf r}_{s}
+\end{array}
+\right)
+\]" src="form_0.png" width="243" height="48"/>
+</p>
+<p> Here the on-diagonal block matrices  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left( 
+\begin{array}{cc}
+{\bf F} &amp; {\bf G} \\ {\bf D} &amp; {\bf 0} 
+\end{array} 
+\right)
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_1.png" width="155" height="31"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\big( {\bf S} \big)
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_2.png" width="133" height="16"/>
+</p>
+<p> are the Jacobian matrices from the corresponding single-physics (fluid and solid) problems. The off-diagonal matrix blocks <img class="formulaInl" alt="${\bf C}_{**}$" src="form_3.png" width="20" height="11"/> arise from the interaction between fluid and solid equations: <img class="formulaInl" alt="$ {\bf C}_{us}$" src="form_4.png" width="20" height="13"/> and <img class="formulaInl" alt="$ {\bf C}_{ps}$" src="form_5.png" width="20" height="14"/> contain the so-called `&lsquo;shape derivatives&rsquo;' &mdash; the derivatives of the Navier&ndash;Stokes residuals with respect to the solid displacements that affect the nodal positions in the fluid mesh. Similarly, <img class="formulaInl" alt="${\bf C}_{su}$" src="form_6.png" width="21" height="13"/> and <img class="formulaInl" alt="${\bf C}_{sp}$" src="form_7.png" width="20" height="14"/> contain the derivatives of the solid residuals with respect to the fluid variables; this interaction arises through the fluid loading on the wall. <code>oomph-lib's</code> algebraic node-update strategy ensures that the interaction matrices are very sparse. The maximum fill level for the examples presented in <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, Hazel &amp; Boyle's (2008) paper </a> is about 3% and such (relatively) large values only arose in computations with very coarse meshes; the much finer meshes used in typical production runs resulted in much sparser matrices.</p>
+<p>We showed in an earlier paper [ <a href="http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6V29-4B5C1C6-1&amp;_user=494590&amp;_rdoc=1&amp;_fmt=&amp;_orig=search&amp;_sort=d&amp;view=c&amp;_acct=C000024058&amp;_version=1&amp;_urlVersion=0&amp;_userid=494590&amp;md5=1ed12ccb0a1535610fb2d11dca48a4e3">Heil, M. "An efficient solver
+for the fully-coupled solution of large-displacement fluid-structure
+interaction problems". Computer Methods in Applied Mechanics and Engineering <b>193</b>, 1-23, (2004)</a>] that the use of block-triangular approximations to the global Jacobian matrix, obtained by neglecting the fluid-solid or solid-fluid interaction blocks,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\cal P}_1 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} &amp; {\bf G} &amp; {\bf 0} \\
+{\bf D} &amp; {\bf 0} &amp; {\bf 0} \\
+\hline
+{\bf C}_{su} &amp; {\bf C}_{sp} &amp; {\bf S} 
+\end{array}
+\right)
+\mbox{\ \ and \ \ } 
+{\cal  P}_2 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} &amp; {\bf G} &amp; {\bf C}_{us} \\
+{\bf D} &amp; {\bf 0} &amp; {\bf C}_{ps} \\
+\hline
+{\bf 0} &amp; {\bf 0} &amp; {\bf S} 
+\end{array}
+\right)
+\mbox{\ \ and \ \ } 
+{\cal  P}_3 = 
+\left(
+\begin{array}{cc|c}
+{\bf F} &amp; {\bf G} &amp; {\bf 0} \\
+{\bf D} &amp; {\bf 0} &amp; {\bf 0} \\
+\hline
+{\bf 0} &amp; {\bf 0} &amp; {\bf S} 
+\end{array}
+\right)
+\]" src="form_8.png" width="478" height="48"/>
+</p>
+<p> in the Newton method seriously degrades its performance, resulting in the loss of its quadratic convergence and thus one of its the most attractive features. However, the block-triangular approximations were shown to be excellent preconditioners for the solution of the linear system by Krylov subspace methods. Because of their block-triangular structure, each application of the preconditioners involves linear solves with each of the two single-physics systems (1) and (2), and matrix-vector products with the retained interaction matrices.</p>
+<p>The current implementation of the FSI preconditioner within <code>oomph-lib</code> employs Elman, Silvester &amp; Wathen's `&lsquo;least squares commutator&rsquo;' (LSC) preconditioner, <a href="../../lsc_navier_stokes/html/index.html">discussed in another tutorial</a> to approximately solve the linear system involving the fluid matrix (1).</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+An example</h1>
+<p>To demonstrate how to use the preconditioner, here are the relevant extracts from the <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc">driver code <code>fsi_chan_precond_driver.cc</code></a> which solves the collapsible channel problem discussed in <a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">another tutorial.</a> As explained in the <a href="../../../linear_solvers/html/index.html">Linear Solvers Tutorial</a> switching to an iterative linear solver is typically performed in the <code>Problem</code> constructor and involves a few straightforward steps:</p>
+<ol type="1">
+<li><b>Create an instance of the IterativeLinearSolver and pass it to the Problem</b> <br  />
+<br  />
+ We create an instance of <code>GMRES</code>, <br  />
+<br  />
+  <div class="fragment"><div class="line">   <span class="comment">// Build iterative linear solver</span></div>
+<div class="line">   GMRES&lt;CRDoubleMatrix&gt;* iterative_linear_solver_pt = </div>
+<div class="line">     <span class="keyword">new</span> GMRES&lt;CRDoubleMatrix&gt;;</div>
+</div><!-- fragment --> <br  />
+ set the maximum number of iterations to 100, and increase the GMRES convergence tolerance to <img class="formulaInl" alt="$ 10^{-6} $" src="form_9.png" width="25" height="11"/> as experiments showed this to give the fastest overall solve times; see <a class="el" href="index.html#comm_ex">Further comments and exercises</a>. <br  />
+<br  />
+ <div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Set maximum number of iterations</span></div>
+<div class="line">   iterative_linear_solver_pt-&gt;max_iter() = 100;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set tolerance</span></div>
+<div class="line">   iterative_linear_solver_pt-&gt;tolerance() = 1.0e-6;   </div>
+</div><!-- fragment --> <br  />
+ Finally, we pass the pointer to the iterative linear solver to the problem.<br  />
+<br  />
+ <div class="fragment"><div class="line">     this-&gt;linear_solver_pt()=iterative_linear_solver_pt;</div>
+</div><!-- fragment --> <br  />
+<br  />
+</li>
+<li><b>Create an instance of the Preconditioner and pass it to the IterativeLinearSolver</b> <br  />
+<br  />
+ We start by creating an instance of the FSI preconditioner. <br  />
+<br  />
+ <div class="fragment"><div class="line">      <span class="comment">// Create an instance of the FSI preconditioner -- pass the pointer</span></div>
+<div class="line">      <span class="comment">// to the problem</span></div>
+<div class="line">      FSIPreconditioner* prec_pt=<span class="keyword">new</span> FSIPreconditioner(<span class="keyword">this</span>);</div>
+</div><!-- fragment --> <br  />
+ Next we identify the meshes that contain the fluid and solid elements &ndash; this information is required by <code>oomph-lib's</code> block-preconditioning framework to identify the types of the various degrees of freedom in the Jacobian matrix. Identifying the fluid elements is straightforward as they are already contained in a distinct (sub-)mesh, accessible via the member function <code>bulk_mesh_pt()</code>: <br  />
+<br  />
+ <div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Set Navier Stokes mesh:</span></div>
+<div class="line">      prec_pt-&gt;set_navier_stokes_mesh(this-&gt;bulk_mesh_pt());</div>
+</div><!-- fragment --> <br  />
+ The <code>FSIHermiteBeamElement</code> elements used for the discretisation of the flexible channel wall are also contained in their own (sub-)mesh, accessible via the member function <code>wall_mesh_pt()</code>. If displacement control is used, the <code>DisplacementControlElement</code> introduces a further unknown into the problem: the adjustable external pressure; see the brief discussion of this in <a href="../../../interaction/fsi_channel_segregated_solver/html/index.html">another tutorial</a>. We classify the external pressure as a solid mechanics degree of freedom and therefore add the <code>DisplacementControlElement</code> to a combined solid mesh (constructed from a vector of pointers to its constituent sub-meshes): <br  />
+<br  />
+ <div class="fragment"><div class="line">      <span class="comment">// Build a compound mesh that contains all solid elements:</span></div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Create a vector of pointers to submeshes. Start with the solid</span></div>
+<div class="line">      <span class="comment">// mesh itself.</span></div>
+<div class="line">      Vector&lt;Mesh*&gt; s_mesh_pt(1);</div>
+<div class="line">      s_mesh_pt[0]=this-&gt;wall_mesh_pt();</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Add the displacement control mesh if required</span></div>
+<div class="line">      <span class="keywordflow">if</span> (this-&gt;Displ_control) </div>
+<div class="line">       {</div>
+<div class="line">        s_mesh_pt.push_back(this-&gt;Displ_control_mesh_pt);</div>
+<div class="line">       }</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Build compound mesh from vector of solid submeshes</span></div>
+<div class="line">      Mesh* combined_solid_mesh_pt = <span class="keyword">new</span> Mesh(s_mesh_pt);</div>
+</div><!-- fragment --> <br  />
+ Finally, we pass the pointer to the combined solid mesh to the FSI preconditioner to identify the solid degrees of freedom (the optional boolean flag indicates that we allow the mesh to contain multiple element types): <br  />
+<br  />
+ <div class="fragment"><div class="line"> </div>
+<div class="line">      <span class="comment">// Set solid mesh and tolerate multiple element types this is mesh.</span></div>
+<div class="line">      prec_pt-&gt;set_wall_mesh(combined_solid_mesh_pt,<span class="keyword">true</span>);</div>
+</div><!-- fragment --> <br  />
+ The preconditioner is now fully functional and we pass <br  />
+ a pointer to it to the preconditioner: <br  />
+<br  />
+ <div class="fragment"><div class="line">      <span class="comment">// Pass preconditioner to iterative linear solver</span></div>
+<div class="line">      iterative_linear_solver_pt-&gt;preconditioner_pt()= prec_pt;</div>
+</div><!-- fragment --> <br  />
+</li>
+<li><b>Customise the Preconditioner (if required)</b> <br  />
+<br  />
+ The <code>FSIPreconditioner</code> allows preconditioning to be performed with either one of the three block-triangular approximations to the Jacobian: <br  />
+<br  />
+<ol type="a">
+<li>The lower-triangular block preconditioner <img class="formulaInl" alt="$ {\cal P}_1 $" src="form_10.png" width="14" height="13"/> which retains the interaction matrices <img class="formulaInl" alt="$ {\bf C}_{s*} $" src="form_11.png" width="20" height="13"/> that represent the effect of the fluid onto the solid: <br  />
+<br  />
+  <div class="fragment"><div class="line">        <span class="comment">// Choose preconditioner that retains fluid on solid terms</span></div>
+<div class="line">        prec_pt-&gt;use_block_triangular_version_with_fluid_on_solid();</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>The upper-triangular block preconditioner <img class="formulaInl" alt="$ {\cal P}_2 $" src="form_12.png" width="15" height="13"/> which retains the interaction matrices <img class="formulaInl" alt="$ {\bf C}_{*s} $" src="form_13.png" width="20" height="13"/> that represent the effect of the solid onto the fluid: <br  />
+<br  />
+  <div class="fragment"><div class="line">        <span class="comment">// Choose preconditioner that retains solid on fluid terms</span></div>
+<div class="line">        prec_pt-&gt;use_block_triangular_version_with_solid_on_fluid();</div>
+</div><!-- fragment --> <br  />
+</li>
+<li>The block-diagonal block preconditioner <img class="formulaInl" alt="$ {\cal P}_3 $" src="form_14.png" width="15" height="13"/> which suppresses all the interaction matrices: <br  />
+<br  />
+  <div class="fragment"><div class="line">        <span class="comment">// Use block-diagonal preconditioner</span></div>
+<div class="line">        prec_pt-&gt;use_block_diagonal_version();</div>
+</div><!-- fragment --> <br  />
+</li>
+</ol>
+The linear systems involving the fluid block are solved (approximately) by <code>oomph-lib's</code> Least-Squares-Commutator Navier-Stokes preconditioner <code>NavierStokesLSCPreconditioner</code>, discussed in <a href="../../lsc_navier_stokes/html/index.html">another tutorial.</a> The behaviour of this (sub-)preconditioner may be customised too. For instance, to employ the <code>Hypre</code> AMG solver to solve the linear systems involving the pressure Schur complement matrix <img class="formulaInl" alt="$ {\bf P}
+   $" src="form_15.png" width="10" height="10"/> in the <code>NavierStokesLSCPreconditioner</code>, we use the procedure discussed <a href="../../lsc_navier_stokes/html/index.html">earlier</a>: <br  />
+<br  />
+  <div class="fragment"><div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_HYPRE</span></div>
+<div class="line"><span class="comment">//If we are using MPI, then only use HYPRE if it has been initialised</span></div>
+<div class="line"><span class="preprocessor">#ifdef OOMPH_HAS_MPI</span></div>
+<div class="line">      <span class="keywordflow">if</span>(MPI_Helpers::mpi_has_been_initialised())</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line">       {</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// By default, the LSC Preconditioner uses SuperLU as</span></div>
+<div class="line">        <span class="comment">// an exact preconditioner (i.e. a solver) for the</span></div>
+<div class="line">        <span class="comment">// momentum and Schur complement blocks. </span></div>
+<div class="line">        <span class="comment">// Can overwrite this by passing pointers to </span></div>
+<div class="line">        <span class="comment">// other preconditioners that perform the (approximate)</span></div>
+<div class="line">        <span class="comment">// solves of these blocks.</span></div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// Create internal preconditioners used on Schur block</span></div>
+<div class="line">        HyprePreconditioner* P_matrix_preconditioner_pt = </div>
+<div class="line">         <span class="keyword">new</span> HyprePreconditioner;</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// Set defaults parameters for use as preconditioner on Poisson-type </span></div>
+<div class="line">        <span class="comment">// problem</span></div>
+<div class="line">        Hypre_default_settings::set_defaults_for_2D_poisson_problem(</div>
+<div class="line">         P_matrix_preconditioner_pt);</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// Use Hypre for the Schur complement block</span></div>
+<div class="line">        prec_pt-&gt;navier_stokes_preconditioner_pt()-&gt;</div>
+<div class="line">         set_p_preconditioner(P_matrix_preconditioner_pt);</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">// Shut up</span></div>
+<div class="line">        P_matrix_preconditioner_pt-&gt;disable_doc_time();</div>
+<div class="line">       }</div>
+<div class="line"><span class="preprocessor">#endif </span><span class="comment">// endif for we have hypre...</span></div>
+</div><!-- fragment --></li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Further comments and exercises</h1>
+<ol type="1">
+<li><b>The convergence tolerance for the iterative linear solver</b><br  />
+<br  />
+ Since the iterative linear solver operates within an "outer" (Newton) iteration it has occasionally been suggested to adjust the convergence tolerance for the iterative linear solver, depending on the progress of the "outer" (Newton) iteration: The idea is that there is little point in "over-solving" the linear system (i.e. solving it to very high precision) if the Newton method is still "far" from converged. (Only) during the final stages of the Newton iteration is an accurate solution of linear systems essential, otherwise the Newton iteration stagnates. This idea can be made rigorous (see, e.g., R.S. Dembo, S.C. Eisenstat and T. Steilhaug "Inexact Newton methods" SIAM J. Numer. Anal. <b>19</b> (1982), 400-408). <br  />
+<br  />
+ In practice we found that the method does not offer particularly great savings in CPU time; see e.g. <a href="http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6V29-4B5C1C6-1&amp;_user=494590&amp;_rdoc=1&amp;_fmt=&amp;_orig=search&amp;_sort=d&amp;view=c&amp;_acct=C000024058&amp;_version=1&amp;_urlVersion=0&amp;_userid=494590&amp;md5=1ed12ccb0a1535610fb2d11dca48a4e3">Heil (2004).</a> This is because the Newton method tends to converge in very few steps. Hence the need to perform the occasional additional Newton step (because the convergence tolerance of the "inner" iterative linear solver <br  />
+ was "just" not tight enough) is hardly ever compensated for by <br  />
+ the reduced number of iterations in the iterative linear solver. <br  />
+<br  />
+ The GMRES convergence tolerance of <img class="formulaInl" alt="$ 10^{-6} $" src="form_9.png" width="25" height="11"/> chosen here was found (by trial and error) to give optimal overall solve times, but this choice is problem-dependent and unless you are willing to perform systematic preliminary investigations, we recommend using the default convergence tolerance of <img class="formulaInl" alt="$ 10^{-8} $" src="form_16.png" width="25" height="11"/>, as defined in the <code>IterativeLinearSolver</code> base class. <br  />
+<br  />
+</li>
+<li><b>Explore the behaviour of preconditioner(s)</b> <br  />
+<br  />
+ The shell script <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/steady_precond.bash">steady_precond.bash</a> may be used to explore the performance of the various FSI preconditioners. It solves the monolithically-discretised, steady fluid-structure interaction problem described in <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, Hazel &amp; Boyle's (2008) paper </a> with a variety of solver/preconditioner combinations: <br  />
+<br  />
+<ol type="a">
+<li>The direct solver, <code>SuperLUSolver</code>. <br  />
+<br  />
+</li>
+<li><code>GMRES</code>, with the three FSI preconditioners <img class="formulaInl" alt="$ {\cal P}_1, {\cal P}_2 $" src="form_17.png" width="35" height="13"/> or <img class="formulaInl" alt="$ {\cal P}_3 $" src="form_14.png" width="15" height="13"/>, discussed above, using various (sub-)solver combinations (<code>SuperLUSolver</code> or (if available) <code>Hypre</code>) for the solution of linear (sub-)systems. <br  />
+<br  />
+</li>
+<li>GMRES with various "sanity-check" preconditioners: <br  />
+<br  />
+<ul>
+<li>The <code>ExactFSIPreconditioner:</code> A preconditioner formed from the full Jacobian matrix by re-arranging the entries into the appropriate block structure. This is an exact preconditioner (and its application is therefore just as costly as a direct solve) and leads to GMRES convergence in a single iteration. <br  />
+<br  />
+</li>
+<li>The <code>SimpleFSIPreconditioner:</code> A preconditioner that uses the block-triangular matrices <img class="formulaInl" alt="$ {\cal P}_1, {\cal P}_2 $" src="form_17.png" width="35" height="13"/> or <img class="formulaInl" alt="$ {\cal P}_3 $" src="form_14.png" width="15" height="13"/>, stored as full matrices (i.e. without performing any block elimination). <br  />
+<br  />
+</li>
+</ul>
+</li>
+</ol>
+There is a second shell script <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/unsteady_precond.bash">unsteady_precond.bash</a> that can be used to perform similar parameter studies for the corresponding unsteady problem discussed in <a href="http://www.springerlink.com/content/m3r6318701g338g4/">Heil, Hazel &amp; Boyle's (2008) paper.</a> <br  />
+<br  />
+</li>
+<li><b>Explore the FSI preconditioner in other problems</b> <br  />
+<br  />
+ The FSI preconditioner is also used in the driver codes for other demo problems:<br  />
+<br  />
+<ul>
+<li><a href="../../../interaction/turek_flag/html/index.html">Hron &amp; Turek's FSI benchmark of flow past a flag.</a><br  />
+<br  />
+</li>
+<li><a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">The problem of flow in a channel that is partially obstructed by an elastic leaflet.</a><br  />
+<br  />
+</li>
+<li>Your own? If so, <a href="../../../contact/html/index.html">let us know how</a> it works.</li>
+</ul>
+</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/">demo_drivers/interaction/fsi_channel_seg_and_precond </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc">demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_precond_driver.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:12
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

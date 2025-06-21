@@ -1,0 +1,226 @@
+\doxysection{oomph\+::Advection\+Diffusion\+Boussinesq\+Element\texorpdfstring{$<$}{<} AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement}{}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement}\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+
+
+Build \doxylink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{Advection\+Diffusion\+Boussinesq\+Element} that inherits from Element\+With\+External\+Element so that it can "{}communicate"{} with the Navier Stokes element.  
+
+
+
+
+{\ttfamily \#include $<$multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Advection\+Diffusion\+Boussinesq\+Element\texorpdfstring{$<$}{<} AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.161826cm]{classoomph_1_1AdvectionDiffusionBoussinesqElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_a733c18518938e3b85e06de5a618cd49f}{Advection\+Diffusion\+Boussinesq\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: call the underlying constructors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_a86ec5858acc0a562cee7bccedfecb252}{get\+\_\+wind\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
+\begin{DoxyCompactList}\small\item\em Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity, obtained from the source element in the other mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_afcb2b136650ecca8fd47eb4278616d29}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Output function\+: Output x, y, theta at Nplot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_acc615c265bef2c3f5c30c6be95c0f50d}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Overload the standard output function with the broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbd60fca6201bc2cd80ff39303323053}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbe60877f205b36d76a87695afb28caa}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: Broken default. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_a89ea74af5d011a3866999c3760621edf}{get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data}} (const unsigned \&ipt, const unsigned \&i, Vector$<$ double $>$ \&result, Vector$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Fill in the derivatives of the wind with respect to the external unknowns. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_afc63db5ad4e397df7809447ee3ca56ac}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. Jacobian is computed by finite-\/differencing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_a375fb98e225dbd5ac716ed3f68831069}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement_a9e859b487d8398ae696de72104c76271}{fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Compute the contribution of the external degrees of freedom (velocities) on the Advection\+Diffusion equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class AD\+\_\+\+ELEMENT, class NST\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}
+Build \doxylink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{Advection\+Diffusion\+Boussinesq\+Element} that inherits from Element\+With\+External\+Element so that it can "{}communicate"{} with the Navier Stokes element. 
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01070}{1070}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_a733c18518938e3b85e06de5a618cd49f}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_a733c18518938e3b85e06de5a618cd49f} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!AdvectionDiffusionBoussinesqElement@{AdvectionDiffusionBoussinesqElement}}
+\index{AdvectionDiffusionBoussinesqElement@{AdvectionDiffusionBoussinesqElement}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AdvectionDiffusionBoussinesqElement()}{AdvectionDiffusionBoussinesqElement()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::\+Advection\+Diffusion\+Boussinesq\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: call the underlying constructors. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01076}{1076}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_afc63db5ad4e397df7809447ee3ca56ac}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_afc63db5ad4e397df7809447ee3ca56ac} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the element\textquotesingle{}s residual vector and the Jacobian matrix. Jacobian is computed by finite-\/differencing. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01169}{1169}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01206}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic()}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_a375fb98e225dbd5ac716ed3f68831069}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_a375fb98e225dbd5ac716ed3f68831069} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
+\index{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01191}{1191}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_a9e859b487d8398ae696de72104c76271}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_a9e859b487d8398ae696de72104c76271} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!fill\_in\_off\_diagonal\_block\_analytic@{fill\_in\_off\_diagonal\_block\_analytic}}
+\index{fill\_in\_off\_diagonal\_block\_analytic@{fill\_in\_off\_diagonal\_block\_analytic}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_off\_diagonal\_block\_analytic()}{fill\_in\_off\_diagonal\_block\_analytic()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the contribution of the external degrees of freedom (velocities) on the Advection\+Diffusion equations. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01206}{1206}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01344}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01169}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_a89ea74af5d011a3866999c3760621edf}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_a89ea74af5d011a3866999c3760621edf} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!get\_dwind\_adv\_diff\_dexternal\_element\_data@{get\_dwind\_adv\_diff\_dexternal\_element\_data}}
+\index{get\_dwind\_adv\_diff\_dexternal\_element\_data@{get\_dwind\_adv\_diff\_dexternal\_element\_data}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dwind\_adv\_diff\_dexternal\_element\_data()}{get\_dwind\_adv\_diff\_dexternal\_element\_data()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+dwind\+\_\+adv\+\_\+diff\+\_\+dexternal\+\_\+element\+\_\+data (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const unsigned \&}]{i,  }\item[{Vector$<$ double $>$ \&}]{result,  }\item[{Vector$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})}
+
+
+
+Fill in the derivatives of the wind with respect to the external unknowns. 
+
+Fill in the derivatives of the wind with respect to the external unknowns in the advection-\/diffusion equations. 
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01343}{1343}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01206}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic()}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_a86ec5858acc0a562cee7bccedfecb252}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_a86ec5858acc0a562cee7bccedfecb252} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!get\_wind\_adv\_diff@{get\_wind\_adv\_diff}}
+\index{get\_wind\_adv\_diff@{get\_wind\_adv\_diff}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_wind\_adv\_diff()}{get\_wind\_adv\_diff()}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{wind }\end{DoxyParamCaption}) const}
+
+
+
+Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity, obtained from the source element in the other mesh. 
+
+Overload the wind function in the advection-\/diffusion equations. This provides the coupling from the Navier--Stokes equations to the advection-\/diffusion equations because the wind is the fluid velocity, obtained from the source elements in the other mesh. 
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01320}{1320}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbd60fca6201bc2cd80ff39303323053}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbd60fca6201bc2cd80ff39303323053} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01146}{1146}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbe60877f205b36d76a87695afb28caa}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_adbe60877f205b36d76a87695afb28caa} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function\+: Broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01152}{1152}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_acc615c265bef2c3f5c30c6be95c0f50d}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_acc615c265bef2c3f5c30c6be95c0f50d} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the standard output function with the broken default. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01140}{1140}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AdvectionDiffusionBoussinesqElement_afcb2b136650ecca8fd47eb4278616d29}\label{classoomph_1_1AdvectionDiffusionBoussinesqElement_afcb2b136650ecca8fd47eb4278616d29} 
+\index{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$@{oomph::AdvectionDiffusionBoussinesqElement$<$ AD\_ELEMENT, NST\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class AD\+\_\+\+ELEMENT , class NST\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element}}$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function\+: Output x, y, theta at Nplot\texorpdfstring{$^\wedge$}{\string^}\+DIM plot points. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source_l01104}{1104}} of file \mbox{\hyperlink{multi__domain__boussinesq__elements_8h_source}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{multi__domain__boussinesq__elements_8h}{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h}}\end{DoxyCompactItemize}

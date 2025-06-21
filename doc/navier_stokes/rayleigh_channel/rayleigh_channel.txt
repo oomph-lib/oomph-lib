@@ -1,0 +1,482 @@
+\mainpage Example problem: Flow in a 2D channel with an oscillating wall
+
+In this example we consider our first time-dependent Navier-Stokes
+problem and  demonstrate how to apply periodic boundary conditions.
+
+<HR>
+
+
+\section example The example problem
+We consider finite-Reynolds-number flow in a 2D channel that is driven
+by the oscillatory tangential motion of the "upper" wall:
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+<CENTER>
+<B>Unsteady flow in a 2D channel with an oscillating wall.</B>
+</CENTER> 
+Here is a sketch of the problem:
+
+@I w 0.75\textwidth rayleigh_channel "Sketch of the problem. "
+
+The flow is governed by the 2D unsteady Navier-Stokes equations,
+\f[
+Re\left(St\frac{\partial u_i}{\partial t} +  
+u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} +
+\frac{\partial }{\partial x_j} \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right)
+ \ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes]@
+\f]
+and the continuity equation
+\f[
+\frac{\partial u_i}{\partial x_i} = 0
+ \ \ \ \ \ \ \ \ \ \ @E[Continuity]@
+\f]
+in the domain 
+\f[
+D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}.
+\f]
+We apply the Dirichlet (no-slip) boundary condition
+\f[
+\left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0),
+\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC1]@
+\f]
+on the lower, stationary wall, \f$ \partial D_{lower} = 
+\big\{(x_1,x_2) \ | \ x_2=0 \big\} \f$ , apply the Dirichlet 
+(no-slip) conditions
+\f[
+\left. \mathbf{u}\right|_{\partial D{upper}}=(\sin\left(\omega t\right),0),
+\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC2]@
+\f]
+on the upper, moving wall ,  \f$ \partial D_{upper} = 
+\big\{(x_1,x_2) \ | \ x_2=1 \big\} \f$ , and apply 
+periodic boundary condition on the "left" and "right" boundaries:
+\f[
+\left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}.
+\ \ \ \ \ \ \ \ \ \ @E[2DNavierStokes_BC3]@
+\f]
+Initial conditions for the velocities are given by
+\f[
+{\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2),
+\f]
+where \f$ {\bf u}_{IC}(x_1,x_2)\f$ is given.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+<HR>
+
+\subsection solution The exact solution
+The above problem has an exact, time-periodic parallel flow solution
+of the form 
+\f[
+{\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and
+\ \ \ \ }
+p_{exact}(x_1,x_2,t) = 0,
+\f]
+where \f$ U(x_2,t) \f$ is governed by
+\f[
+Re\, St\frac{\partial U}{\partial t} = 
+\frac{\partial^2 U}{\partial x_2^2},
+\f]
+subject to the boundary conditions 
+\f$ U(x_2=0,t)=0\f$ and  \f$ U(x_2=1,t)=\sin(\omega t)\f$ . 
+The solution is given by
+\f[
+U(x_2,t) = Re\left\{\frac{e^{i\omega t}}{e^{i\lambda}-e^{-i\lambda}}
+\left(e^{i\lambda y}-e^{-i\lambda y}\right)\right\}, 
+\f]
+where
+\f[
+\lambda = i\sqrt{i\omega Re\, St}.
+\f]
+
+<HR>
+
+\section results Results
+The two animations below show the computed solutions obtained from
+a spatial discretisation with Taylor-Hood and Crouzeix-Raviart
+elements, respectively. In both cases we set \f$ \omega=2\pi, \ Re =
+ReSt = 10 \f$ and specified the exact, time-periodic solution as the
+initial condition, i.e. \f$ {\bf u}_{IC}(x_1,x_2) = {\bf
+u}_{exact}(x_1,x_2,t=0)\f$ . The computed solutions agree extremely
+well with the exact solution throughout the simulation.
+
+@I w 0.75\textwidth velocity_vectors_CR "Plot of the velocity field computed with 2D Crouzeix-Raviart elements, starting form the exact, time-periodic solution. "
+
+@I w 0.75\textwidth velocity_vectors_TH "Plot of the velocity field computed with 2D Taylor-Hood elements, starting form the exact, time-periodic solution. " 
+
+
+If the simulation is started from other initial conditions, i.e. 
+\f$ {\bf u}_{IC}(x_1,x_2) \ne {\bf u}_{exact}(x_1,x_2,t=0)\f$ , 
+the velocity field initially differs noticeably from the
+time-periodic solution \f$ {\bf u}_{exact}(x_1,x_2,t)\f$ but
+following the decay of initial transients we have
+\f[
+\lim_{t\to \infty} {\bf u}(x_1,x_2,t) = {\bf u}_{exact}(x_1,x_2,t).
+\f]
+This is illustrated in the following plot which shows the evolution of 
+the L2-"error" between the computed and the time-periodic solutions
+for two different initial conditions.  The red line was obtained from
+a simulation in which 
+\f$ {\bf u}_{IC}(x_1,x_2) = {\bf u}_{exact}(x_1,x_2,t=0)\f$ ; the
+blue line was obtained from a computation in which the simulation was 
+started by an "impulsive start", \f$ {\bf u}_{IC}(x_1,x_2) = {\bf
+0}\f$ .
+
+
+@I w 0.75\textwidth error "Plot of the L2-'errors' between the computed and time-periodic solution for two different initial conditions. "
+
+The animations of the simulations for the "impulsive start" (for 
+<A HREF="../figures/velocity_vectors_TH.avi"> Taylor-Hood</A>
+and <A HREF="../figures/velocity_vectors_CR.avi"> Crouzeix-Raviart
+elements</A>) show how the velocity profile approaches the
+time-periodic solution as the simulation progresses.
+
+<HR>
+<HR>
+
+\section namespace The global parameters
+As usual, we use a namespace to define the problem parameters, the
+Reynolds number, \f$ Re\f$ , and the Womersley number, \f$ Re\, St\f$ .
+We also provide two flags that indicate the length of the run 
+(to allow a short run to be performed when the code is run as a self-test),
+and the initial condition (allowing a start from \f$ {\bf u}_{exact}\f$ or 
+an impulsive start in which the fluid is initially at rest).
+ 
+
+\dontinclude rayleigh_channel.cc
+\skipline start_of_namespace
+\until end of namespace 
+
+<HR>
+<HR>
+
+\section exact The exact solution
+We use another namespace to define the exact, time-periodic 
+parallel-flow solution:
+
+\dontinclude rayleigh_channel.cc
+\skipline start_of_exact_solution
+\until // end of exact_solution
+
+
+<HR> 
+<HR>
+
+\section main The driver code
+We use optional command line arguments to specify which mode
+the code is run in: Either as a short or a long run (indicated by
+the first command line argument being 0 or 1, respectively), and with
+initial conditions corresponding to an impulsive start or a start
+from the time-periodic exact solution (indicated by the second command 
+line argument being 1 or 0, respectively). If no command line arguments are
+specified the code is run in the default mode, specified by the
+parameter values assigned in the namespace \c Global_Parameters.
+
+\skipline main
+\until Global_Parameters::Impulsive_start_flag << std::endl;
+
+Next we set the physical and mesh parameters.
+
+\until ny
+ 
+Finally we set up \c DocInfo objects and solve for both Taylor-Hood
+elements and Crouzeix-Raviart elements.
+
+\until end of main
+
+<HR>
+<HR>
+
+\section problem The problem class 
+The problem class is very similar to that used in the 
+<A HREF="../../driven_cavity/html/index.html"> driven cavity
+example</A>. We specify the type of the element and the type of the
+timestepper (assumed to be a member of the BDF family) as template
+parameters and pass the mesh parameters to the problem constructor.
+
+\dontinclude rayleigh_channel.cc
+\skipline start_of_problem_class
+\until double &ly
+
+No action is needed before or after solving, but we update the 
+time-dependent boundary conditions at the upper wall before
+each timestep, using \c Problem::actions_before_implicit_timestep().
+The boundary values are obtained from the exact solution, defined in 
+the namespace \c ExactSoln.
+
+\until end of actions_before_implicit_timestep
+
+The function \c unsteady_run(...), discussed below, performs the timestepping 
+and documents the solution in the directory specified in the \c
+DocInfo object.
+
+\until unsteady_run
+
+We define the function \c doc_solution(...) which documents the results, and
+provide functions to set the initial conditions and to fix
+a pressure value. The problem's only member data contains an output
+stream in which we record the time-trace of the solution.
+
+\until end of problem_class 
+
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+We start by building the timestepper, determining its type from the
+class's second template argument, and pass a pointer to it to 
+the Problem, using the function \c Problem::add_time_stepper_pt(...).
+
+\skipline start_of_constructor
+\until add_time_stepper_pt
+
+Next we build the mesh and pass an additional boolean flag to the 
+constructor to indicate that periodic boundary conditions are to be 
+applied in the \f$ x_1\f$ -direction. 
+We will discuss the implementation of this feature in 
+more detail in <A HREF="#periodic"> below</A>.
+
+\until time_stepper_pt()
+
+We pin both velocity components on the top and bottom boundaries
+(i.e. at \f$ x_2=0\f$
+and \f$ x_2=1\f$ , respectively), and pin the vertical velocity 
+on the left and right boundaries (i.e. at \f$ x_1=0 \f$ and \f$ x_1=1
+\f$ ,
+respectively) to enforce horizontal outflow through the periodic
+boundaries.
+
+\until end loop over boundaries
+
+Finally we pass the pointers to the Reynolds and Strouhal numbers,
+\f$ Re \f$ and \f$ Re\, St \f$ , to the elements. Since no 
+traction boundary conditions are
+applied anywhere, the pressure is only determined up to an arbitrary
+constant. To ensure a unique solution we pin a single pressure value 
+before setting up the equation numbering scheme.
+
+\until end of constructor
+
+<HR>
+<HR>
+
+\section IC Initial conditions
+The application of initial conditions for vector-valued problems
+is performed by the same procedure that we described for 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#IC">
+scalar problems</A>, except that we now have to assign "history
+values" for multiple nodal values. For timesteppers from the BDF family,
+the "history values" represent the solution at previous timesteps.
+We check that the timestepper is of the appropriate type,  
+loop over previous time levels, determine the 
+velocity at those times and assign them to the "history values"
+of the velocities. No initial conditions are required
+for the pressure.  Note that we also have to assign "history values"
+for the nodal positions since \c oomph-lib's Navier-Stokes elements
+discretise the momentum equations in their ALE form. This aspect 
+was explained in more detail in our discussion of the solution of the 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#IC">
+unsteady heat equation</A>.
+
+\skipline start_of_set_initial_condition
+\until end of set_initial_condition
+
+<HR>
+<HR>
+
+\section doc Post processing
+The function \c doc_solution(...) is similar to those used in the 
+<A HREF="../../../unsteady_heat/two_d_unsteady_heat/html/index.html#doc">
+unsteady heat examples</A>. We plot the computed solution, the
+time-periodic exact solution and the difference between the two,
+and record various parameters in the trace file. The plot of the
+computed solution contains tecplot instructions that generate
+a blue line in the top-left corner of the plot to indicate how time
+progresses during the simulation. The trace file contains a record of
+- the value of the continuous time, \f$ t \f$ ,
+- the coordinates of a control node, \f$ (x_1^{[c]},x_2^{[c]})\f$ ,
+- the computed velocity at the control
+node,\f$( u_1^{[c]},u_2^{[c]})\f$ ,
+- the time-periodic solution, evaluated at the control node,
+   \f$ (u_1^{[c,exact]},u_2^{[c,exact]})\f$ ,
+- the difference between the computed velocities and the
+  time-periodic solution at the control node,
+- the L2 norm of the "error" between the computed and time-periodic
+  solution for the velocity, and
+- the L2 norm of the  time-periodic
+  solution for the velocity.
+.
+
+  
+\skipline start_of_doc_solution
+\until end_of_doc_solution 
+
+
+<HR>
+<HR>
+
+\section unsteady_run The timestepping loop
+The function  \c unsteady_run(...) is used to perform the timestepping
+procedure. We start by opening the trace file and
+write a suitable header for the visualisation with tecplot.
+
+\skipline start_of_unsteady_run
+\until L2 norm
+
+Next, we choose a value for the timestep and set up the initial
+conditions, either for an impulsive start... 
+
+\until }
+
+...or for a "smooth" start from the time-periodic exact solution:
+
+\until }
+
+We choose the number of timesteps to be computed and 
+document the initial conditions.
+
+\until ++
+
+Finally, perform the actual timestepping and 
+document the solution after every timestep.
+
+\until end of unsteady run
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+
+
+\subsection periodic Periodic boundaries
+A key feature of the current problem is the presence of periodic
+boundary conditions. The application of the periodic boundary
+condition is performed "inside" the mesh constructor and details of 
+the implementation were therefore "hidden". We will now discuss
+the steps required to apply periodic boundary conditions
+and explain why it is easier to apply periodic boundary
+conditions in the mesh constructor rather than in the "driver code".
+
+  Periodic boundary conditions arise in problems that are periodic
+in one of their coordinate directions. It is important to realise that,
+even though the solution at the corresponding nodes on the two 
+periodic domain boundaries (the left and the right boundary in 
+the above example) are the same, one of their nodal coordinates
+differs. For instance, in the above example, each of the nodes on the left 
+boundary has the same velocity values and the same 
+\f$ x_2\f$ -coordinate as its corresponding (periodic) node on the 
+right boundary.  However, the \f$ x_1 \f$ -coordinate of the nodes on 
+the left boundary is \f$ x_1=0\f$ , whereas that of the (periodic) nodes 
+on the right boundary is \f$ x_1=1\f$ . It is therefore not possible
+to regard the nodes as identical.
+
+In \c oomph-lib we create periodic nodes by allowing two (or more) nodes to
+access some of the same internal data. 
+One of the nodes should be regarded as the
+original and the other(s) are set to be its "periodic counterpart(s)"
+and hence access its internal data. The "periodic counterpart(s)" are
+created by calling the member function
+\code
+BoundaryNode::make_periodic(Node *const& node_pt)
+\endcode
+where the pointer to the original node is passed as the argument.
+Note that the required functionality imposes a slight
+storage overhead and so in \c oomph-lib we only allow BoundaryNodes to
+be made periodic.
+
+Here is a sketch of a 2D rectangular quad mesh. If this mesh is
+to be used in a problem with periodic boundary conditions in the
+horizontal direction (as in the above example), the pointer to
+node 3 on boundary 3 would have to be used when node 3 on 
+boundary 1 is made periodic, etc. The
+appropriate commands are
+\code
+ //Get pointers to the two nodes that are to be "connected" via
+ //a periodic boundary
+ Node* original_node_pt = mesh_pt()->boundary_node_pt(3,3);
+ Node* periodic_node_pt = mesh_pt()->boundary_node_pt(1,3);
+
+ //Make the periodic_node_pt periodic the data from the original_node_pt
+ periodic_node_pt->make_periodic(original_node_pt);
+\endcode
+
+@I w 0.75\textwidth periodic_mesh "Figure of a mesh that is periodic in the horizontal direction. "
+
+Although it is possible to make
+nodes periodic at any time, it is usually easier to determine which
+nodes should be "connected" during mesh construction.
+We therefore strongly recommend to implement periodic boundary conditions
+inside the mesh constructor. The 
+<A HREF="../../../../src/meshes/rectangular_quadmesh.template.cc">source
+code</A> for the constructor of the
+
+\code
+RectangularQuadMesh<ELEMENT>
+\endcode
+
+that we used in the above problem, illustrates a possible implementation. 
+
+\subsection periodic_adapt Periodic boundaries in spatially adaptive computations
+We note that the application of periodic boundary conditions
+in spatially adaptive computations is slightly more complicated
+because of the possible presence of hanging nodes on the periodic
+boundaries. We refer to 
+<a href="../../../linear_elasticity/refineable_periodic_load/html/index.html">
+another
+tutorial</a> for a discussion of this aspect.
+
+
+
+<HR>
+
+\subsection ex Exercises
+-# Show that in the present problem the time-periodic solution
+   can also be obtained without applying periodic boundary conditions.
+   Show this mathematically and "by trial and error" (i.e. by changing 
+   the boolean flag that is passed to the mesh constructor). Explain why
+   the number of unknowns increases when no periodic boundary 
+   conditions are applied. 
+-# Confirm that the assignment of "history values" for the nodal
+   positions in \c set_initial_conditions() is essential. 
+
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/rayleigh_channel/">
+demo_drivers/navier_stokes/rayleigh_channel/
+</A>
+</CENTER>
+- The driver code is: 
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/rayleigh_channel/rayleigh_channel.cc">
+demo_drivers/navier_stokes/rayleigh_channel/rayleigh_channel.cc
+</A>
+</CENTER>
+.
+
+
+
+
+
+
+
+
+
+
+
+

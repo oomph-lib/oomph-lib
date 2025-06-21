@@ -1,0 +1,86 @@
+\doxysection{oomph\+::Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper Namespace Reference}
+\hypertarget{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper}{}\label{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper}\index{oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}}
+
+
+Namespace containing the zero pressure function for Darcy pressure elements.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_ac1b72b45f96c640e7ddc520ca5c2b251}{Zero\+\_\+traction\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero traction) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a8f4239ad8976b18eb097acb4b6446a6d}{Zero\+\_\+pressure\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&N, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{load}})
+\begin{DoxyCompactList}\small\item\em Default load function (zero pressure) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a3f8d9dbd05b5f4e7cc89157083db2ef0}{Allow\+\_\+gap\+\_\+in\+\_\+\+FSI}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Public boolean to allow gap between poro-\/elastic and Navier Stokes element in FSI computations. Useful in hybrid linear/nonlinear geometry runs where this will happen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace containing the zero pressure function for Darcy pressure elements. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a8f4239ad8976b18eb097acb4b6446a6d}\label{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a8f4239ad8976b18eb097acb4b6446a6d} 
+\index{oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}!Zero\_pressure\_fct@{Zero\_pressure\_fct}}
+\index{Zero\_pressure\_fct@{Zero\_pressure\_fct}!oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}}
+\doxysubsubsection{\texorpdfstring{Zero\_pressure\_fct()}{Zero\_pressure\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+pressure\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{load }\end{DoxyParamCaption})}
+
+
+
+Default load function (zero pressure) 
+
+
+
+Definition at line \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00068}{68}} of file \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+face\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00156}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element()}}.
+
+\Hypertarget{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_ac1b72b45f96c640e7ddc520ca5c2b251}\label{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_ac1b72b45f96c640e7ddc520ca5c2b251} 
+\index{oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}!Zero\_traction\_fct@{Zero\_traction\_fct}}
+\index{Zero\_traction\_fct@{Zero\_traction\_fct}!oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}}
+\doxysubsubsection{\texorpdfstring{Zero\_traction\_fct()}{Zero\_traction\_fct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{load }\end{DoxyParamCaption})}
+
+
+
+Default load function (zero traction) 
+
+
+
+Definition at line \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00053}{53}} of file \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+face\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00156}{oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a3f8d9dbd05b5f4e7cc89157083db2ef0}\label{namespaceoomph_1_1AxisymmetricPoroelasticityTractionElementHelper_a3f8d9dbd05b5f4e7cc89157083db2ef0} 
+\index{oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}!Allow\_gap\_in\_FSI@{Allow\_gap\_in\_FSI}}
+\index{Allow\_gap\_in\_FSI@{Allow\_gap\_in\_FSI}!oomph::AxisymmetricPoroelasticityTractionElementHelper@{oomph::AxisymmetricPoroelasticityTractionElementHelper}}
+\doxysubsubsection{\texorpdfstring{Allow\_gap\_in\_FSI}{Allow\_gap\_in\_FSI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Axisymmetric\+Poroelasticity\+Traction\+Element\+Helper\+::\+Allow\+\_\+gap\+\_\+in\+\_\+\+FSI = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Public boolean to allow gap between poro-\/elastic and Navier Stokes element in FSI computations. Useful in hybrid linear/nonlinear geometry runs where this will happen. 
+
+
+
+Definition at line \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00079}{79}} of file \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source}{axisym\+\_\+poroelasticity\+\_\+face\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00447}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::contribution\+\_\+to\+\_\+total\+\_\+porous\+\_\+flux()}}, \mbox{\hyperlink{axisym__poroelasticity__face__elements_8h_source_l00934}{oomph\+::\+FSILinearised\+Axisym\+Poroelastic\+Traction\+Element$<$ POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, NAVIER\+\_\+\+STOKES\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::get\+\_\+traction()}}, and \mbox{\hyperlink{axisym__poroelastic__fsi__face__elements_8h_source_l00231}{oomph\+::\+Linearised\+Axisym\+Poroelastic\+BJS\+\_\+\+FSIElement$<$ FLUID\+\_\+\+BULK\+\_\+\+ELEMENT, POROELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+

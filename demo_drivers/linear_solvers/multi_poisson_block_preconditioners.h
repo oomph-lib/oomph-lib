@@ -1,0 +1,3567 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+// Header file with various simple block preconditioners written
+// from scratch for "didactic" purposes, not necessarily to
+// illustrate any particularly clever maths (though they work!)
+ 
+//Include guards
+#ifndef OOMPH_SIMPLE_BLOCK_PRECONDITIONERS
+#define OOMPH_SIMPLE_BLOCK_PRECONDITIONERS
+
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+// oomph-lib includes
+#include "generic.h"
+
+namespace oomph
+{
+  
+
+//=========================start_of_diagonal_class=============================
+/// Simple proof-of-concept block diagonal preconditioner for
+/// demo purposes. There's a much better version in src/generic!
+//=============================================================================
+ template<typename MATRIX> 
+ class Diagonal : public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for Diagonal preconditioner
+  Diagonal() : BlockPreconditioner<MATRIX>()
+   {
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+
+ 
+  /// Destructor - delete the subsidiary preconditioners (solvers for
+  /// linear systems involving diagonal block)
+  ~Diagonal()
+   {
+    this->clean_up_my_memory();
+   }
+  
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+     
+  /// Broken copy constructor
+  Diagonal(const Diagonal&) 
+   { 
+    BrokenCopy::broken_copy("Diagonal");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const Diagonal&) 
+   {
+    BrokenCopy::broken_assign("Diagonal");
+   }
+
+
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Apply preconditioner to r, i.e. return solution of P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private :
+  
+  /// Vector of pointers to preconditioners/inexact solvers 
+  /// for each diagonal block
+  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
+  
+  /// Mesh pointers with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //=========================start_of_setup_for_simple========================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void Diagonal<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+  
+  // Set up the generic block lookup scheme
+  this->block_setup();
+
+  // Extract the number of blocks
+  unsigned nblock_types = this->nblock_types();
+
+  // Create the subsidiary preconditioners
+  Diagonal_block_preconditioner_pt.resize(nblock_types);
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    Diagonal_block_preconditioner_pt[i] =
+     ExactPreconditionerFactory::create_exact_preconditioner();
+   }
+
+  // Setup preconditioners
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    // Get block -- this makes a deep copy of the relevant entries in the
+    // full Jacobian (i.e. the matrix of the linear system we're
+    // actually trying to solve); we can do with this copy whatever
+    // we want...
+    CRDoubleMatrix block;
+    this->get_block(i,i,block);
+    
+    // Set up preconditioner (i.e. lu-decompose the block)
+    Diagonal_block_preconditioner_pt[i]->setup(&block);
+    
+    // Done with this block now, so the diagonal block that we extracted
+    // above can go out of scope. Its LU decomposition (which is the only 
+    // thing we need to apply the preconditioner in the preconditioner_solve(...)
+    // function) is retained in the associated sub-preconditioner/(in)exact 
+    // solver(SuperLU).
+   }
+ }
+ 
+ 
+ //============================================================================
+ /// Preconditioner solve for the diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //============================================================================
+ template<typename MATRIX> 
+ void Diagonal<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Get number of blocks
+  unsigned nblock_types = this->nblock_types();
+
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  Vector<DoubleVector> block_r;
+  this->get_block_vectors(r,block_r);
+
+  // Solution of block solves
+  Vector<DoubleVector> block_z(nblock_types);
+  for (unsigned i = 0; i < nblock_types; i++)
+   {
+    Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
+                                                              block_z[i]);
+   }
+  
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vectors(block_z,z);
+ }
+
+ //=========================start_of_clean_up_for_simple=======================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void Diagonal<MATRIX>::clean_up_my_memory()
+ { 
+  // Delete diagonal preconditioners (approximate solvers)
+  unsigned n_block = Diagonal_block_preconditioner_pt.size();
+  for (unsigned i=0;i<n_block;i++)
+   {
+    if(Diagonal_block_preconditioner_pt[i]!=0)
+     {
+      delete Diagonal_block_preconditioner_pt[i];
+      Diagonal_block_preconditioner_pt[i]=0;
+     }
+   }
+ } // End of clean_up_my_memory function.
+ 
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+//=========================start_of_diagonal_class=============================
+/// SimpleTwoDofOnly block diagonal preconditioner which works with
+/// only two DOF types.  If this is used by a master preconditioner to operate
+/// on a compound block with more than two DOF types then they must be coarsened 
+/// via a parameter to the master preconditioner's member
+/// function turn_into_subsidiary_block_preconditioner(...).
+//=============================================================================
+ template<typename MATRIX> 
+ class SimpleTwoDofOnly : public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for SimpleTwoDofOnly
+  SimpleTwoDofOnly() : BlockPreconditioner<MATRIX>()
+   {
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+
+  
+  /// Destructor - clean up memory
+  ~SimpleTwoDofOnly()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// Clean up the memory
+  virtual void clean_up_my_memory();
+     
+  /// Broken copy constructor
+  SimpleTwoDofOnly(const SimpleTwoDofOnly&) 
+   { 
+    BrokenCopy::broken_copy("SimpleTwoDofOnly");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const SimpleTwoDofOnly&) 
+   {
+    BrokenCopy::broken_assign("SimpleTwoDofOnly");
+   }
+  
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Apply preconditioner to r, i.e. return solution of P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+  
+ private :
+  
+  /// Vector of pointers to preconditioners/inexact solvers 
+  /// for each diagonal block
+  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //=========================start_of_setup_for_simple==========================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleTwoDofOnly<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+#ifdef PARANOID
+  // This preconditioner only works for 2 dof types
+  unsigned n_dof_types = this->ndof_types();  
+  if (n_dof_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 2 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+  // Set up the generic block look up scheme
+  this->block_setup();
+
+  // Extract the number of blocks.
+  unsigned nblock_types = this->nblock_types();
+#ifdef PARANOID
+  if (nblock_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "There are supposed to be two block types.\n"
+        << "Yours has " << nblock_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+
+  // Resize the storage for the diagonal blocks
+  Diagonal_block_preconditioner_pt.resize(nblock_types);
+
+  // Create the subsidiary preconditioners
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    Diagonal_block_preconditioner_pt[i] =
+     ExactPreconditionerFactory::create_exact_preconditioner();
+   }
+
+  // Setup preconditioners
+  for (unsigned i=0;i<nblock_types;i++)
+   {
+    // Get block -- this makes a copy of the relevant entries in the
+    // full Jacobian (i.e. the matrix of the linear system we're
+    // actually trying to solve); we can do with this copy whatever
+    // we want...
+    CRDoubleMatrix block = this->get_block(i,i);
+    
+    // Set up preconditioner (i.e. lu-decompose the block)
+    Diagonal_block_preconditioner_pt[i]->setup(&block);
+    
+    // Done with this block now, so the diagonal block that we extracted
+    // above can go out of scope. Its LU decomposition (which is the only 
+    // thing we need to apply the preconditoner in the preconditoner_solve(...)
+    // function) is retained in the associated sub-preconditioner/(in)exact 
+    // solver(SuperLU).
+   }
+ }
+ 
+ 
+ //============================================================================
+ /// Preconditioner solve for the diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleTwoDofOnly<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Get number of blocks
+  unsigned nblock_types = this->nblock_types();
+
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  Vector<DoubleVector> block_r;
+  this->get_block_vectors(r,block_r);
+
+  // Solution of block solves
+  Vector<DoubleVector> block_z(nblock_types);
+  for (unsigned i = 0; i < nblock_types; i++)
+   {
+    Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
+                                                              block_z[i]);
+   }
+  
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vectors(block_z,z);
+ }
+
+ //=========================start_of_clean_up==================================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleTwoDofOnly<MATRIX>::clean_up_my_memory()
+ { 
+  // Delete diagonal preconditioners (approximate solvers)
+  unsigned n_block = Diagonal_block_preconditioner_pt.size();
+  for (unsigned i=0;i<n_block;i++)
+   {
+    if(Diagonal_block_preconditioner_pt[i]!=0)
+     {
+      delete Diagonal_block_preconditioner_pt[i];
+      Diagonal_block_preconditioner_pt[i]=0;
+     }
+   }
+ } // End of clean_up_my_memory function.
+ 
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+//=========================start_of_diagonal_class=============================
+/// SimpleOneDofOnly block diagonal preconditioner which works with
+/// only one DOF type. If this is used by a master preconditioner to operate
+/// on a compound block with more than one DOF type then they must be coarsened 
+/// via a parameter to the master preconditioner's member
+/// function turn_into_subsidiary_block_preconditioner(...).
+//=============================================================================
+ template<typename MATRIX> 
+ class SimpleOneDofOnly : public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for SimpleOneDofOnly
+  SimpleOneDofOnly() : BlockPreconditioner<MATRIX>()
+   {
+    Subsidiary_preconditioner_pt = 0;
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+
+ 
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~SimpleOneDofOnly()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+     
+  /// Broken copy constructor
+  SimpleOneDofOnly(const SimpleOneDofOnly&) 
+   { 
+    BrokenCopy::broken_copy("SimpleOneDofOnly");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const SimpleOneDofOnly&) 
+   {
+    BrokenCopy::broken_assign("SimpleOneDofOnly");
+   }
+
+
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Apply preconditioner to r, i.e. return solution of P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+ 
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+  
+   private :
+  
+  /// Pointer to the preconditioners/inexact solver.
+  Preconditioner* Subsidiary_preconditioner_pt;
+  
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+ };
+
+ //=========================start_of_setup_for_simple==========================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void SimpleOneDofOnly<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+
+#ifdef PARANOID
+  // This preconditioner only works for 1 dof type.
+  unsigned n_dof_types = this->ndof_types();  
+  if (n_dof_types!=1)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 1 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Set up the generic block look up scheme
+  this->block_setup();
+  
+#ifdef PARANOID
+  const unsigned nblock_types = this->nblock_types();
+  if (nblock_types!=1)
+   {
+    std::stringstream tmp;
+    tmp << "There are supposed to be 1 block type.\n"
+        << "Yours has " << nblock_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  
+  // Create the subsidiary preconditioner that actually does the
+  // work on the one-and-only block
+  Subsidiary_preconditioner_pt =
+   ExactPreconditionerFactory::create_exact_preconditioner();
+  
+  // Setup preconditioners
+  {
+   CRDoubleMatrix block = this->get_block(0,0);
+   
+   // Set up preconditioner (i.e. lu-decompose the block)
+   Subsidiary_preconditioner_pt->setup(&block);
+
+   // Block can now go out of scope since subsidiaray preconditioner
+   // stores everything it needs (here the LU decomposition of the
+   // block).
+  }
+ }
+ 
+ 
+ //============================================================================
+ /// Preconditioner solve for the diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r.
+ //============================================================================
+ template<typename MATRIX> 
+  void SimpleOneDofOnly<MATRIX>::
+  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+  {   
+  // Get the rhs into block order.
+   DoubleVector block_r;
+   this->get_block_vector(0,r,block_r);
+   
+   // Solution of block solve.
+   DoubleVector block_z;
+   Subsidiary_preconditioner_pt->preconditioner_solve(block_r, block_z);
+   
+   // Copy solution in block vector block_z back to z
+   this->return_block_vector(0,block_z,z);
+  }
+ 
+ //=========================start_of_clean_up==================================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+  void SimpleOneDofOnly<MATRIX>::clean_up_my_memory()
+  { 
+   // Delete the preconditioner (approximate solvers)
+   if(Subsidiary_preconditioner_pt!=0)
+    {
+     delete Subsidiary_preconditioner_pt;
+     Subsidiary_preconditioner_pt=0;
+    }
+  } // End of clean_up_my_memory function.
+ 
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+//=========================start_of_diagonal_class=============================
+/// CoarseTwoIntoOne block diagonal preconditioner which works with
+/// only two DOF types. If this is used by a master preconditioner to operate
+/// on a compound block with more than two DOF types then they must be coarsened 
+/// via a parameter to the master preconditioner's member
+/// function turn_into_subsidiary_block_preconditioner(...).
+///
+/// The uses SimpleOneDofOnly as a subsidiary block preconditioner.
+/// Thus the two DOF types are coarsened.
+//=============================================================================
+ template<typename MATRIX> 
+ class CoarseTwoIntoOne : public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for CoarseTwoIntoOne
+  CoarseTwoIntoOne() : BlockPreconditioner<MATRIX>()
+   {
+    Subsidiary_preconditioner_pt = 0;
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+
+ 
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~CoarseTwoIntoOne()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+     
+  /// Broken copy constructor
+  CoarseTwoIntoOne(const CoarseTwoIntoOne&) 
+   { 
+    BrokenCopy::broken_copy("CoarseTwoIntoOne");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const CoarseTwoIntoOne&) 
+   {
+    BrokenCopy::broken_assign("CoarseTwoIntoOne");
+   }
+
+
+  /// Setup the preconditioner 
+  void setup();
+  
+  // This is put in to override the default behaviour of name hiding, which
+  // "hides", but does not override, base class functions with the same name
+  // as a derived class function even if the argument differ to allow for 
+  // overloading. This is not a problem when using base class pointers.
+  using Preconditioner::setup;
+
+   
+  /// Preconditioner solve for the diagonal preconditioner: 
+  /// Apply preconditioner to r and return z, so that P z = r, where
+  /// P is the block diagonal matrix constructed from the original 
+  /// linear system.
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private :
+  
+  /// Pointer to the preconditioners/inexact solvers 
+  Preconditioner* Subsidiary_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+ };
+
+ //=========================start_of_setup_for_simple==========================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void CoarseTwoIntoOne<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+
+#ifdef PARANOID
+  // This preconditioner only works for 2 dof types
+  unsigned n_dof_types = this->ndof_types();
+
+  // Output the number of dof types.
+  std::cout << "CoarseTwoIntoOne ndof_types: " << n_dof_types << std::endl; 
+  
+  if (n_dof_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 2 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+
+  // Set up the generic block look up scheme
+  this->block_setup();
+
+
+#ifdef PARANOID
+  unsigned n_block_types = this->nblock_types();
+
+  std::cout << "CoarseTwoIntoOne nblock_types: " 
+            << n_block_types << std::endl; 
+
+  if (n_block_types!=2)
+   {
+    std::stringstream tmp;
+    tmp << "There are supposed to be two block types.\n"
+        << "Yours has " << n_block_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+
+  // Create the subsidiary preconditioners
+  SimpleOneDofOnly<CRDoubleMatrix>* block_prec_pt = 
+    new SimpleOneDofOnly<CRDoubleMatrix>;
+  Subsidiary_preconditioner_pt = block_prec_pt;
+
+  // Setup preconditioner
+  // We use a subsidiary block preconditioner which accepts only one DOF 
+  // types. Since we have two DOF types, we must coarsen DOF types.
+  {
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+    // This is the usual dof map between master's DOF type and subsidiary 
+    // DOF types. In this case, the vector [0,1] tells the subsidiary block
+    // preconditioner that it's DOF type 0(1) is mapped to the master's DOF 
+    // type 0(1).
+   Vector<unsigned>dof_map(2);
+   dof_map[0] = 0;
+   dof_map[1] = 1;
+
+   // To coarsen DOF types, we have a 2D Vector.
+   // Size of the outer Vector is the number of subsidiary DOF types.
+   const unsigned n_sub_dof_types = 1;
+   Vector<Vector<unsigned> >doftype_coarsening(n_sub_dof_types);
+   
+   // The inner vector(s) tells the subsidiary block preconditioner which
+   // DOF types to coarsen into one. In this case the 0th inner vector is
+   // of size TWO with values [0,1], this tells the subsidiary block
+   // preconditioner that IT'S DOF type 0 and 1 is coarsened into 
+   // DOF type 0.
+   doftype_coarsening[0].resize(2);
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,
+                                      dof_map,doftype_coarsening);
+   
+   // Set up block preconditioner. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+ }
+ 
+ 
+ //============================================================================
+ /// Preconditioner solve for the diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //============================================================================
+ template<typename MATRIX> 
+ void CoarseTwoIntoOne<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {
+   // Call the subsidiary block preconditioner's preconditioner_solve(...)
+   // function. We do not need to return the solution to the vector z since
+   // this is handled by the subsidiary BLOCK preconditioner.
+   Subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+ }
+
+ //=========================start_of_clean_up_for_simple=======================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void CoarseTwoIntoOne<MATRIX>::clean_up_my_memory()
+ { 
+   // Delete the subsidiary block preconditioner (approximate solver)
+   if(Subsidiary_preconditioner_pt!=0)
+   {
+     delete Subsidiary_preconditioner_pt;
+     Subsidiary_preconditioner_pt=0;
+   }
+ } // End of clean_up_my_memory function.
+
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+//=========================start_of_upper_triangular_class=====================
+/// Upper triangular preconditioner for a system 
+/// with any number of dof types.
+//=============================================================================
+ template<typename MATRIX> 
+ class UpperTriangular : public BlockPreconditioner<MATRIX>
+ {
+ 
+ public :
+ 
+  /// Constructor.
+  UpperTriangular() : BlockPreconditioner<MATRIX>()
+   {
+    Multi_poisson_mesh_pt=0;
+   }
+ 
+  /// Destructor - delete the preconditioner matrices
+  virtual ~UpperTriangular()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+ 
+  /// Broken copy constructor
+  UpperTriangular(const UpperTriangular&) 
+   { 
+    BrokenCopy::broken_copy("UpperTriangular");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const UpperTriangular&) 
+   {
+    BrokenCopy::broken_assign("UpperTriangular");
+   }
+  
+  /// Apply preconditioner to r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+ 
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private:  
+
+  /// Pointers to matrix vector product operators for the off diagonals
+  DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_product_pt;
+
+  /// Vector of pointers to preconditioners/inexact solvers 
+  /// for each diagonal block
+  Vector<Preconditioner*> Block_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //========================start_of_setup_for_upper_triangular_class===========
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void UpperTriangular<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // Set up the block look up schemes
+  this->block_setup();
+
+  // Number of block types  
+  unsigned nblock_types = this->nblock_types();
+
+  // Storage for the pointers to the off diagonal matrix vector products
+  // and the the subsidiary preconditioners (inexact solvers) for the diagonal 
+  // blocks
+  Off_diagonal_matrix_vector_product_pt.resize(nblock_types,nblock_types,0);
+  Block_preconditioner_pt.resize(nblock_types);
+
+  // Build the preconditioners and matrix vector products
+  for(unsigned i = 0; i < nblock_types; i++)
+   {
+    // Create the subsidiary preconditioners
+    Block_preconditioner_pt[i] =
+     ExactPreconditionerFactory::create_exact_preconditioner();
+    
+    // Put in braces so block matrix goes out of scope when done...
+    {
+     // Get block -- this makes a deep copy of the relevant entries in the
+     // full Jacobian (i.e. the matrix of the linear system we're
+     // actually trying to solve); we can do with this copy whatever
+     // we want...
+     CRDoubleMatrix block;
+     this->get_block(i,i,block);
+     
+     // Set up preconditioner (i.e. lu-decompose the block)
+     Block_preconditioner_pt[i]->setup(&block);
+     
+     // Done with this block now, so the diagonal block that we extracted
+     // above can go out of scope. Its LU decomposition (which is the only 
+     // thing we need to apply the preconditioner in the 
+     // preconditioner_solve(...) function) is retained in the associated 
+     // sub-preconditioner/(in)exact solver(SuperLU).
+
+    } // end of brace to make block go out of scope
+     
+    // Next set up the off diagonal mat vec operators
+    for(unsigned j=i+1;j<nblock_types;j++)
+     {
+      // Get the off diagonal block
+      CRDoubleMatrix block_matrix = this->get_block(i,j);
+
+      // Create a matrix vector product operator
+      Off_diagonal_matrix_vector_product_pt(i,j) = new MatrixVectorProduct;
+
+      // Setup the matrix vector product for the currrent block matrix
+      // and specify the column in the "big matrix" as final argument.
+      // This is needed for things to work properly in parallel -- don't ask!
+      this->setup_matrix_vector_product(
+       Off_diagonal_matrix_vector_product_pt(i,j),&block_matrix,j);
+
+      // Done with this block now, so the diagonal block that we extracted
+      // above can go out of scope. The MatrixVectorProduct operator retains
+      // its own copy of whatever data it needs.
+
+     } // End for loop over j
+   } // End for loop over i
+ } // End setup(...)
+
+
+ //=============================================================================
+ /// Preconditioner solve for the upper triangular preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> void UpperTriangular<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {
+  // Get number of blocks
+  unsigned n_block = this->nblock_types();
+
+  // vector of vectors for each section of rhs vector
+  Vector<DoubleVector> block_r;
+  
+  // rearrange the vector r into the vector of block vectors block_r
+  this->get_block_vectors(r,block_r);
+
+  // Vector of vectors for the solution block vectors
+  Vector<DoubleVector> block_z(n_block);
+
+  // Required to be an int due to an unsigned being unable to be compared to a
+  // negative number (because it would roll over).
+  for (int i=n_block-1;i>-1;i--)
+   {
+    // Back substitute
+    for (unsigned j=i+1;j<n_block;j++)
+     {
+      DoubleVector temp;
+      Off_diagonal_matrix_vector_product_pt(i,j)->multiply(block_z[j],temp);
+      block_r[i] -= temp;
+     } // End for over j
+
+    // Solve on the block
+    this->Block_preconditioner_pt[i]->
+     preconditioner_solve(block_r[i], block_z[i]);
+   } // End for over i
+
+  // Copy solution in block vectors block_r back to z
+  this->return_block_vectors(block_z,z);
+ }
+
+ //========================start_of_clean_up_for_upper_triangular_class========
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void UpperTriangular<MATRIX>::clean_up_my_memory()
+ {     
+  // Delete anything in Off_diagonal_matrix_vector_products
+  for(unsigned i=0,ni=Off_diagonal_matrix_vector_product_pt.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Off_diagonal_matrix_vector_product_pt.ncol();j<nj;j++)
+     {
+      if(Off_diagonal_matrix_vector_product_pt(i,j) != 0)
+       {    
+        delete Off_diagonal_matrix_vector_product_pt(i,j);
+        Off_diagonal_matrix_vector_product_pt(i,j) = 0;
+       }
+     }
+   }
+
+  // Delete preconditioners (approximate solvers)
+  unsigned n_block = Block_preconditioner_pt.size();
+  for (unsigned i=0;i<n_block;i++)
+   {
+    if(Block_preconditioner_pt[i]!=0)
+     {
+      delete Block_preconditioner_pt[i];
+      Block_preconditioner_pt[i]=0;
+     }
+   }
+ } // End of clean_up_my_memory function.
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//=======================start_of_two_plus_three_class=========================
+/// Block diagonal preconditioner for system with 5 dof types
+/// assembled into a 2x2 block system, with (0,0) block containing the 
+/// first two dof types and the (1,1) block the remaining three dof types.
+//=============================================================================
+ template<typename MATRIX> 
+ class TwoPlusThree : public BlockPreconditioner<MATRIX>
+  {
+    public :
+   
+  /// Constructor for TwoPlusThree
+  TwoPlusThree() : BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0)
+    {
+     Multi_poisson_mesh_pt=0;
+    } // end_of_constructor
+    
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~TwoPlusThree()
+   {
+    this->clean_up_my_memory();
+   }
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+
+  /// Broken copy constructor
+  TwoPlusThree
+  (const TwoPlusThree&) 
+   { 
+    BrokenCopy::broken_copy("TwoPlusThree");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const TwoPlusThree&) 
+   {
+    BrokenCopy::broken_assign("TwoPlusThree");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  virtual void setup();
+ 
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private :
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.  
+  Mesh* Multi_poisson_mesh_pt; 
+ };
+
+ //====================start_of_setup_for_two_plus_three=======================
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThree<MATRIX>::setup()
+ {
+  // Clean up memory.
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // How many dof types do we have?
+  unsigned n_dof_types = this->ndof_types();
+
+
+#ifdef PARANOID
+  // This preconditioner only works for 5 dof types
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+
+  // Combine into two blocks, one containing dof types 0 and 1, the
+  // final one dof types 2-4. In general we want:
+  // dof_to_block_map[dof_type] = block type
+  Vector<unsigned> dof_to_block_map(n_dof_types);
+  dof_to_block_map[0]=0;
+  dof_to_block_map[1]=0;
+  dof_to_block_map[2]=1;
+  dof_to_block_map[3]=1;
+  dof_to_block_map[4]=1;
+  this->block_setup(dof_to_block_map);
+
+  // Show that it worked ok:
+  oomph_info << "Preconditioner has " 
+             << this->nblock_types() << " block types\n";
+  
+  // Create the subsidiary preconditioners
+  First_subsidiary_preconditioner_pt=
+   ExactPreconditionerFactory::create_exact_preconditioner();
+  Second_subsidiary_preconditioner_pt=
+   ExactPreconditionerFactory::create_exact_preconditioner();
+  
+  // Set diagonal solvers/preconditioners; put in own scope
+  // so variable block goes out of scope
+  {
+   CRDoubleMatrix block;
+   this->get_block(0,0,block);
+
+   // Set up preconditioner (i.e. lu-decompose the block)
+   First_subsidiary_preconditioner_pt->setup(&block);
+  }
+  {
+   CRDoubleMatrix block;
+   this->get_block(1,1,block);
+   
+   // Set up preconditioner (i.e. lu-decompose the block)
+   Second_subsidiary_preconditioner_pt->setup(&block);
+  }
+
+ } // End of setup
+ 
+ 
+ //=============================================================================
+ /// Preconditioner solve for the two plus three diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P r = z, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThree<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Get number of blocks
+  unsigned n_block = this->nblock_types();
+
+  // Split up rhs vector into sub-vectors, arranged to match the matrix blocks.
+  Vector<DoubleVector> block_r;
+  this->get_block_vectors(r,block_r);
+
+  // Create storage for solution of block solves
+  Vector<DoubleVector> block_z(n_block);
+
+  // Solve (0,0) diagonal block system
+  First_subsidiary_preconditioner_pt->preconditioner_solve(block_r[0],
+                                                           block_z[0]);
+  
+  // Solve (1,1) diagonal block system
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(block_r[1],
+                                                            block_z[1]);
+  
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vectors(block_z,z);
+ }
+
+  
+ //====================start_of_clean_up_for_two_plus_three====================
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThree<MATRIX>::clean_up_my_memory()
+ {     
+  //Clean up subsidiary preconditioners.
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//=================start_of_two_plus_three_upper_triangular_class==============
+/// Upper triangular two plus three triangular preconditioner for a 
+/// system with  5 dof types.
+//=============================================================================
+ template<typename MATRIX> 
+ class TwoPlusThreeUpperTriangular 
+  : public BlockPreconditioner<MATRIX>
+ {
+ 
+ public :
+ 
+  /// Constructor.
+  TwoPlusThreeUpperTriangular()  :
+   BlockPreconditioner<MATRIX>(),
+    Off_diagonal_matrix_vector_product_pt(0),
+    First_subsidiary_preconditioner_pt(0),
+    Second_subsidiary_preconditioner_pt(0)
+   { 
+    Multi_poisson_mesh_pt=0;
+   }
+ 
+  /// Destructor - delete the preconditioner matrices
+  virtual ~TwoPlusThreeUpperTriangular()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+ 
+  /// Broken copy constructor
+  TwoPlusThreeUpperTriangular(const TwoPlusThreeUpperTriangular&) 
+   { 
+    BrokenCopy::broken_copy("TwoPlusThreeUpperTriangular");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const TwoPlusThreeUpperTriangular&) 
+   {
+    BrokenCopy::broken_assign("TwoPlusThreeUpperTriangular");
+   }
+ 
+  /// Apply preconditioner to r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+ 
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private:  
+
+  /// Pointer to matrix vector product operator for the single off diagonals
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //==============start_of_setup_for_two_plus_three_upper_triangular_class=======
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangular<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // Get number of degrees of freedom.
+  unsigned n_dof_types = this->ndof_types();
+
+#ifdef PARANOID
+  // This preconditioner only works for 5 dof types
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Combine into two major blocks, one containing dof types 0 and 1, the
+  // final one dof types 2-4. In general we want
+  // dof_to_block_map[dof_type] = block_type
+  Vector<unsigned> dof_to_block_map(n_dof_types);
+  dof_to_block_map[0]=0;
+  dof_to_block_map[1]=0;
+  dof_to_block_map[2]=1;
+  dof_to_block_map[3]=1;
+  dof_to_block_map[4]=1;
+  this->block_setup(dof_to_block_map);
+  
+  // Create the subsidiary preconditioners
+  First_subsidiary_preconditioner_pt=
+   ExactPreconditionerFactory::create_exact_preconditioner();
+  Second_subsidiary_preconditioner_pt=
+   ExactPreconditionerFactory::create_exact_preconditioner();
+
+  // Set diagonal solvers/preconditioners; put in own scope
+  // so block goes out of scope
+  {
+
+   CRDoubleMatrix block;
+   this->get_block(0,0,block);
+   
+   // Set up preconditioner (i.e. lu-decompose the block)
+   First_subsidiary_preconditioner_pt->setup(&block);
+
+  }
+  {
+
+   CRDoubleMatrix block;
+   this->get_block(1,1,block);
+   
+   // Set up preconditioner (i.e. lu-decompose the block)
+   Second_subsidiary_preconditioner_pt->setup(&block);
+
+  } // end setup of last subsidiary preconditioner
+
+
+  // next setup the off diagonal mat vec operators
+  {
+   // Get the block
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+
+   // Create matrix vector product
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+
+   // Set it up -- note that the block column index refers to the
+   // block enumeration (not the dof enumeration)
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+  }
+ 
+ }
+
+ //=============================================================================
+ /// Preconditioner solve for the two plus three upper block triangular 
+ /// preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangular<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {
+  // Get number of blocks
+  unsigned n_block = this->nblock_types();
+
+  // Split up rhs vector into sub-vectors, rarranged to match the matrix blocks.
+  Vector<DoubleVector> block_r;
+  this->get_block_vectors(r,block_r);
+
+  // Create storage for solution of block solves
+  Vector<DoubleVector> block_z(n_block);
+
+  // Solve (1,1) diagonal block system
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(block_r[1],
+                                                            block_z[1]);
+
+  // Solve (0,1) off diagonal.
+  // Substitute
+  DoubleVector temp;
+  Off_diagonal_matrix_vector_product_pt->multiply(block_z[1],temp);
+  block_r[0] -= temp;   
+
+  // Solve (0,0) diagonal block system
+  First_subsidiary_preconditioner_pt->preconditioner_solve(block_r[0],
+                                                           block_z[0]); 
+
+  // Copy solution in block vectors block_z back to z
+  this->return_block_vectors(block_z,z);
+ }
+
+
+ //===========start_of_clean_up_for_two_plus_three_upper_triangular_class======
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangular<MATRIX>::clean_up_my_memory()
+ {     
+  // Delete of diagonal matrix vector product
+  if (Off_diagonal_matrix_vector_product_pt != 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+
+  //Clean up subsidiary preconditioners.
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//=========start_of_two_plus_three_upper_triangular_with_sub_class=============
+/// Upper block triangular with subsidiary block preconditioners 
+/// for a system with 5 dof types.
+//=============================================================================
+ template<typename MATRIX> 
+ class TwoPlusThreeUpperTriangularWithOneLevelSubsidiary 
+  : public BlockPreconditioner<MATRIX>
+ {
+ 
+ public :
+ 
+  /// Constructor.
+  TwoPlusThreeUpperTriangularWithOneLevelSubsidiary() :
+   BlockPreconditioner<MATRIX>(),
+    Off_diagonal_matrix_vector_product_pt(0),
+    First_subsidiary_preconditioner_pt(0),
+    Second_subsidiary_preconditioner_pt(0)
+   {
+    Multi_poisson_mesh_pt=0;
+   }
+ 
+  /// Destructor - delete the preconditioner matrices
+  virtual ~TwoPlusThreeUpperTriangularWithOneLevelSubsidiary()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// Clean up the memory
+  void clean_up_my_memory();
+ 
+  /// Broken copy constructor
+  TwoPlusThreeUpperTriangularWithOneLevelSubsidiary
+  (const TwoPlusThreeUpperTriangularWithOneLevelSubsidiary&) 
+   { 
+    BrokenCopy::broken_copy
+     ("TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const 
+                 TwoPlusThreeUpperTriangularWithOneLevelSubsidiary&) 
+   {
+    BrokenCopy::broken_assign(
+     "TwoPlusThreeUpperTriangularWithOneLevelSubsidiary");
+   }
+ 
+  /// Apply preconditioner to r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+ 
+  /// Setup the preconditioner 
+  void setup();
+
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private:  
+
+  /// Pointer to matrix vector product operators for the off diagonal block
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //=======start_of_setup_for_two_plus_three_upper_triangular_with_sub_class====
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // number of dof types  
+  unsigned n_dof_types = this->ndof_types();
+
+#ifdef PARANOID
+  // This preconditioner only works for 5 dof types
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Combine "dof blocks" into two compound blocks, one containing dof 
+  // types 0 and 1, the final one dof types 2-4. In general we want:
+  // dof_to_block_map[dof_type] = block type
+  Vector<unsigned> dof_to_block_map(n_dof_types);
+  dof_to_block_map[0]=0;
+  dof_to_block_map[1]=0;
+  dof_to_block_map[2]=1;
+  dof_to_block_map[3]=1;
+  dof_to_block_map[4]=1;
+  this->block_setup(dof_to_block_map);
+  
+  // Create the subsidiary block preconditioners.  
+  {
+   // Block upper triangular block preconditioner for compound 
+   // 2x2 top left block in "big" 5x5 matrix
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner:
+   // dof_map[dof_block_ID_in_subsdiary] = dof_block_ID_in_master. Also 
+   // pass pointer to present (master) preconditioner.
+   unsigned n_sub_dof_types=2;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   dof_map[1]=1;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+    
+   // Setup: Pass pointer to full-size matrix!
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  {
+   // Block upper triangular for 3x3 bottom right block in "big" 5x5 matrix
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn second_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner:
+   // dof_map[dof_block_ID_in_subsdiary] = dof_block_ID_in_master. Also 
+   // pass pointer to present (master) preconditioner.
+   unsigned n_sub_dof_types=3;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
+
+   // Setup: Pass pointer to full-size matrix!
+   block_prec_pt->setup(this->matrix_pt());
+  }
+  
+  // Setup the off-diagonal mat vec operator
+  {
+   // Get the off-diagonal block: the top-right block in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+  }
+ 
+ }
+
+ //=============================================================================
+ /// Preconditioner solve 
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<MATRIX>::
+ preconditioner_solve(const DoubleVector& z, DoubleVector& y)
+ {
+  // Solve "bottom right" (1,1) diagonal block system, using the 
+  // subsidiary block preconditioner that acts on the
+  // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (3x1) "sub-vectors" from the "big" (5x1)
+  // vector z and treat it as the rhs, r, of P y = z
+  // where P is 3x3 a block matrix. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (5x1) vector y:
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(z,y);
+    
+  // Now extract the "bottom" (3x1) block vector from the full-size (5x1)
+  // solution vector that we've just computed -- note that index 1
+  // refers to the block enumeration in the current preconditioner
+  // (which has two blocks!)
+  DoubleVector block_y;
+  this->get_block_vector(1,y,block_y);
+
+  // Evaluate matrix vector product of just-extracted (3x1) solution 
+  // vector with off-diagonal block and store in temporary vector
+  DoubleVector temp;
+  Off_diagonal_matrix_vector_product_pt->multiply(block_y,temp);
+
+  // Extract "upper" (2x1) block vector from full-size (5x1) rhs 
+  // vector (as passed into this function)...
+  DoubleVector block_z;
+  this->get_block_vector(0,z,block_z);
+
+  // ...and subtract matrix vector product computed above
+  block_z -= temp;   
+
+  // Block solve for first diagonal block. Since the associated subsidiary 
+  // preconditioner is a block preconditioner itself, it will extract 
+  // the required (2x1) block from a "big" (5x1) rhs vector.
+  // Therefore we first put the actual (2x1) rhs vector block_z into a
+  // "big" (5x1) vector big_z whose row distribution matches that of the
+  // "big" right hand side vector, z, that was passed into this function.
+  DoubleVector big_z(z.distribution_pt());
+  this->return_block_vector(0,block_z,big_z);
+ 
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "upper left" (2x2) sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) block vector from the "big" (5x1)
+  // vector big_r and treat it as the rhs, z, of its P y = z
+  // where P is upper left 2x2 block diagonal of the big system. 
+  // Once the system is solved, the result is automatically put back 
+  // into the appropriate places of the "big" (5x1) vector y which is 
+  // returned by the current function, so no further action is required.
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_z,y);
+ }
+
+ //====start_of_clean_up_for_two_plus_three_upper_triangular_with_sub_class=====
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithOneLevelSubsidiary<MATRIX>::
+ clean_up_my_memory()
+ {     
+  // Delete off-diagonal matrix vector product
+  if(Off_diagonal_matrix_vector_product_pt!= 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+
+  //Clean up subsidiary preconditioners.
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+ 
+//====================start_of_two_plus_one_class=============================
+/// Block diagonal preconditioner for system with 3 dof types
+/// assembled into a 2x2 block system, with (0,0) block containing
+/// the first two dof types, the (1,1) block containing the last one.
+/// Both blocks are solved by subsidiary diagonal block preconditioners, so
+/// the overall behaviour is equivalent to a solve with a 3x3 upper triangular
+/// preconditioner.
+//=============================================================================
+template<typename MATRIX> 
+class TwoPlusOneUpperTriangularPreconditioner : 
+public BlockPreconditioner<MATRIX>
+ {
+  
+   public :
+  
+  /// Constructor for TwoPlusOneUpperTriangularPreconditioner
+   TwoPlusOneUpperTriangularPreconditioner() : 
+  BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0),
+   Off_diagonal_matrix_vector_product_pt(0)
+    {
+     Multi_poisson_mesh_pt=0;
+    } // end_of_constructor
+  
+  
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~TwoPlusOneUpperTriangularPreconditioner()
+   {
+    this->clean_up_my_memory();
+   }
+  
+  
+  /// Cleanup function 
+  virtual void clean_up_my_memory();
+  
+  /// Broken copy constructor
+  TwoPlusOneUpperTriangularPreconditioner
+   (const TwoPlusOneUpperTriangularPreconditioner&) 
+   { 
+    BrokenCopy::broken_copy("TwoPlusOneUpperTriangularPreconditioner");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const TwoPlusOneUpperTriangularPreconditioner&) 
+   {
+    BrokenCopy::broken_assign("TwoPlusOneUpperTriangularPreconditioner");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  void setup();
+  
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+  
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+   private :
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+  
+  /// Matrix vector product operators for the off diagonals.
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+//================start_of_setup_for_two_plus_one_preconditioner=============
+/// The setup function.
+//===========================================================================
+template<typename MATRIX> 
+ void TwoPlusOneUpperTriangularPreconditioner<MATRIX>::setup()
+ {
+  // Clean up memory.
+  this->clean_up_my_memory();
+  
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+
+#ifdef PARANOID
+  // This preconditioner only works for 3 dof types
+  unsigned n_dof_types = this->ndof_types();
+  if (n_dof_types!=3)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 3 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Combine into two major blocks, one containing dofs 0 and 1, the
+  // final one dof, 2.
+  
+  Vector<unsigned> dof_to_block_map(3);
+  dof_to_block_map[0]=0;
+  dof_to_block_map[1]=0;
+  dof_to_block_map[2]=1;
+  this->block_setup(dof_to_block_map);
+  
+  // Create the subsidiary preconditioners
+  //--------------------------------------
+  
+  // First one:
+  {
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn it into a subsidiary preconditioner, declaring which
+   // of the three dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner,
+   // i.e. arguments: dof_map[doc_in_subsidiary]=dof_in_present
+   unsigned n_sub_dof_types=2;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0] = 0;
+   dof_map[1] = 1;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+   
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  
+  // Second one:
+  {
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn it into a subsidiary preconditioner, declaring which
+   // of the three dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner i.e.
+   // arguments: dof_map[doc_in_subsidiary]=dof_in_present
+   unsigned n_sub_dof_types=1;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0] = 2;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+   
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt()); 
+  }
+
+
+  // Set up off diagonal matrix vector product operator.
+  {
+   // Get the block
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+
+   // Extracted block can now go out of scope since the 
+   // matrix vector product operators stores what it needs
+  }
+
+ }
+ 
+ 
+ //=============================================================================
+ /// Preconditioner solve for the two plus one diagonal preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusOneUpperTriangularPreconditioner<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Solve (1,1) diagonal block system:
+  // Apply the subsidiary block preconditioner that acts on the
+  // "bottom right" 1x1 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (1x1) "sub-vectors" from the "big" (3x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 1x1 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (3x1) vector z:
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+
+  // Perform matrix vector product with (0,1) off diagonal.
+  DoubleVector temp;
+  DoubleVector z_1;
+  this->get_block_vector(1,z,z_1);
+  Off_diagonal_matrix_vector_product_pt->multiply(z_1,temp);
+  
+  // Get r_0 from the RHS and modify it accordingly.
+  DoubleVector r_0;
+  this->get_block_vector(0,r,r_0);
+  r_0 -= temp;   
+
+  
+  // Block solve for first diagonal block. Since the associated subsidiary 
+  // preconditioner is a block preconditioner itself, it will extract 
+  // the required (2x1) block rhs from a "big" (3x1) rhs vector, big_r.
+  // Therefore we first put the actual (2x1) rhs vector r_0 into the
+  // "big" (3x1) vector big_r. 
+  DoubleVector big_r(z.distribution_pt());
+  this->return_block_vector(0,r_0,big_r);
+    
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "top left" 2x2 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) "sub-vectors" from the "big" (3x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 2x2 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (3x1) vector z:
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+ }
+
+ //================start_of_clean_up_for_two_plus_one_preconditioner==========
+ /// The clean up function.
+ //===========================================================================
+ template<typename MATRIX> 
+ void TwoPlusOneUpperTriangularPreconditioner<MATRIX>::clean_up_my_memory()
+ {     
+  // Delete diagonal preconditioners (approximate solvers)
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+  if(Off_diagonal_matrix_vector_product_pt!=0)
+   {
+    delete  Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+ 
+//=========start_of_two_plus_three_upper_triangular_with_two_sub_class=========
+/// Upper block triangular with two levels of subsidiary preconditioners
+/// for a system with 5 dof types.
+//=============================================================================
+ template<typename MATRIX> 
+ class TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary 
+  : public BlockPreconditioner<MATRIX>
+ {
+ 
+ public :
+ 
+  /// Constructor.
+  TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary() :
+   BlockPreconditioner<MATRIX>(),
+   Off_diagonal_matrix_vector_product_pt(0),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0)
+   {   
+    Multi_poisson_mesh_pt=0;
+   }
+ 
+  /// Destructor - delete the preconditioner matrices
+  virtual ~TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+ 
+  /// Broken copy constructor
+  TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary
+  (const TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary&) 
+   { 
+    BrokenCopy::broken_copy(
+      "TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary");
+   } 
+ 
+  /// Broken assignment operator
+  void operator=(const 
+                 TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary&) 
+   {
+    BrokenCopy::broken_assign(
+     "TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary");
+   }
+ 
+  /// Apply preconditioner to r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+ 
+  /// Setup the preconditioner 
+  void setup();
+
+  // Use the version in the Preconditioner base class for the alternative
+  // setup function that takes a matrix pointer as an argument.
+  using Preconditioner::setup;
+
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private:  
+
+  /// Pointer to matrix vector product operator
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //===start_of_setup_for_two_plus_three_upper_triangular_with_two_sub_class=====
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<MATRIX>::setup()
+ {
+  // clean the memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // number of block types  
+  unsigned n_dof_types = this->ndof_types();
+
+#ifdef PARANOID
+  // This preconditioner only works for 5 dof types
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+
+  // Combine into two major blocks, one containing dof types 0 and 1, the
+  // final one dof types 2-4. In general we want
+  // dof_to_block_map[dof_type] = block type
+  Vector<unsigned> dof_to_block_map(n_dof_types);
+  dof_to_block_map[0]=0;
+  dof_to_block_map[1]=0;
+  dof_to_block_map[2]=1;
+  dof_to_block_map[3]=1;
+  dof_to_block_map[4]=1;
+  this->block_setup(dof_to_block_map);
+
+  // Show that it worked ok:
+  oomph_info << "Preconditioner has " << this->nblock_types() 
+             << " block types\n";
+  
+  // Create the subsidiary preconditioners.
+
+  // First subsidiary precond is a block diagonal preconditioner itself.
+  {
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn first_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner,
+   // i.e. arguments: dof_map[doc_in_subsidiary]=dof_in_present
+   unsigned n_sub_dof_types=2;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   dof_map[1]=1;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
+
+   // Perform setup.Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+  
+  // Second subsidiary precond is a block diagonal preconditioner itself
+  {
+   TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>* block_prec_pt=
+    new TwoPlusOneUpperTriangularPreconditioner<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn second_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner,
+   // i.e. arguments: dof_map[doc_in_subsidiary]=dof_in_present
+   unsigned n_sub_dof_types=3;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  // Set up the off diagonal mat vec operators
+  {
+   // Get the block
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+
+   // Block can now go out of scope since the matrix vector product operator
+   // stores what it needs
+  }
+  
+ }
+
+ //=============================================================================
+ /// Preconditioner solve for the one plus four upper triangular with 
+ /// subsisdiary  preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {
+  // Solve (1,1) diagonal block system
+  // Apply the subsidiary block preconditioner that acts on the
+  // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (3x1) "sub-vectors" from the "big" (5x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 3x3 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (5x1) vector z:
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+    
+  // Get number of blocks
+  unsigned n_block = this->nblock_types();
+
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  Vector<DoubleVector> block_r;
+  this->get_block_vectors(r,block_r);
+
+  // Create storage for solution of block solves
+  Vector<DoubleVector> block_z(n_block);
+
+  // Multiply by (0,1) off diagonal.
+  this->get_block_vectors(z,block_z);
+  DoubleVector temp;
+  Off_diagonal_matrix_vector_product_pt->multiply(block_z[1],temp);
+  block_r[0] -= temp;   
+
+  // Block solve for first diagonal block. Since the associated subsidiary 
+  // preconditioner is a block preconditioner itself, it will extract 
+  // the required (2x1) block rhs from a "big" (5x1) rhs vector, big_r.
+  // Therefore we first put the actual (2x1) rhs vector block_r[0] into the
+  // "big" (5x1) vector big_r. 
+  DoubleVector big_r(z.distribution_pt());
+  this->return_block_vector(0,block_r[0],big_r);
+     
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "upper left" 2x2 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) "sub-vectors" from the "big" (5x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 2x2 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (5x1) vector z:
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+ }
+
+ //====start_of_clean_up_for_two_plus_three_upper_triangular_with_sub_class=====
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithTwoLevelSubsidiary<MATRIX>::
+ clean_up_my_memory()
+ {     
+  // Clean up matrix vector product
+  if(Off_diagonal_matrix_vector_product_pt!= 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+
+  //Clean up subsidiary preconditioners.
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//=============start_of_two_plus_three_upper_triangular_with_replace_class=====
+/// Block diagonal preconditioner for system with 5 dof types
+/// assembled into a 2x2 block system, with (0,0) block containing
+/// the first two dof types, the (1,1) block the remaining dof types.
+/// The blocks are solved by upper block triangular preconditioners.
+/// However, the overall system is modified by replacing all off-diagonal 
+/// blocks by replacement matrices (zero matrices, so the preconditioner 
+/// again behaves like a 5x5 block diagonal preconditioner).
+//=============================================================================
+ template<typename MATRIX> 
+ class TwoPlusThreeUpperTriangularWithReplace : 
+  public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for TwoPlusThreeUpperTriangularWithReplace
+  TwoPlusThreeUpperTriangularWithReplace() : 
+   BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0),
+   Off_diagonal_matrix_vector_product_pt(0)
+   {    
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+  
+  
+  /// Destructor clean up memory
+  ~TwoPlusThreeUpperTriangularWithReplace()
+   {
+    this->clean_up_my_memory();
+   }
+
+  /// Clean up the memory
+  virtual void clean_up_my_memory();
+
+  /// Broken copy constructor
+  TwoPlusThreeUpperTriangularWithReplace
+  (const TwoPlusThreeUpperTriangularWithReplace&) 
+   { 
+    BrokenCopy::
+     broken_copy("TwoPlusThreeUpperTriangularWithReplace");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const TwoPlusThreeUpperTriangularWithReplace&) 
+   {
+    BrokenCopy::
+     broken_assign("TwoPlusThreeUpperTriangularWithReplace");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  void setup();
+ 
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+   private :
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for compound  (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for compound (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  /// Matrix vector product operator with the compound 
+  /// (0,1) off diagonal block.
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  // Matrix of pointers to replacement matrix blocks
+  DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+  
+ };
+ 
+
+ //==start_of_setup_for_two_plus_three_upper_triangular_with_replace===========
+ /// The setup function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithReplace<MATRIX>::setup()
+ {
+  // Clean up memory.
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // How many dof types do we have?
+  const unsigned n_dof_types = this->ndof_types();
+
+#ifdef PARANOID
+  // This preconditioner only works for 5 dof types
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+   
+  // Call block setup with the Vector [0,0,1,1,1] to:
+  // Merge DOF types 0 and 1 into block type 0
+  // Merge DOF types 2, 3, and 4 into block type 1.
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
+  dof_to_block_map[0] = 0;
+  dof_to_block_map[1] = 0;
+  dof_to_block_map[2] = 1;
+  dof_to_block_map[3] = 1;
+  dof_to_block_map[4] = 1;
+  this->block_setup(dof_to_block_map);
+
+#ifdef PARANOID
+
+  // We should now have two block types -- do we?
+  const unsigned nblocks = this->nblock_types();
+  if (nblocks!=2)
+   {
+    std::stringstream tmp;
+    tmp << "Expected number of block types is 2.\n"
+        << "Yours has " << nblocks << ".\n"
+        << "Perhaps your argument to block_setup(...) is not correct.\n";
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+#endif
+
+  // Now replace all the off-diagonal DOF blocks.
+
+  // Storage for the replacement DOF blocks
+  Replacement_matrix_pt.resize(n_dof_types,n_dof_types,0);
+
+  // Set off-diagonal DOF blocks to zero, loop over the number of DOF blocks.
+  // NOTE: There are two (compound) blocks, but the replacement functionality
+  // works with DOF blocks.
+  for(unsigned i=0;i<n_dof_types;i++)
+   {
+    for(unsigned j=0;j<n_dof_types;j++)
+     {
+      if(i!=j)
+       {
+        // Modify matrix
+        bool modify_existing_matrix=true;
+        if (modify_existing_matrix)
+         {
+          // Get the dof-block and make a deep copy of it
+          Replacement_matrix_pt(i,j)=new CRDoubleMatrix;
+          this->get_dof_level_block(i,j,(*Replacement_matrix_pt(i,j))); 
+          
+          // Set all its entries to zero
+          unsigned nnz=Replacement_matrix_pt(i,j)->nnz();
+          for (unsigned k=0;k<nnz;k++)
+           {
+            Replacement_matrix_pt(i,j)->value()[k]=0.0;
+           }
+         } // done -- quite wasteful, we're actually storing lots of zeroes, but
+           // this is just an example!
+
+        // Build (zero) replacement matrix from scratch:
+        else
+         {
+          // Get the DOF block's (row!) distribution.
+          LinearAlgebraDistribution* dof_block_dist_pt=
+           this->dof_block_distribution_pt(i);
+          
+          // Number of rows in DOF block matrix (i,j).
+          const unsigned long dof_block_nrow_local 
+           = dof_block_dist_pt->nrow_local();
+          
+          // Number of columns in DOF block matrix (i,j) is the same as the
+          // number of rows in block matrix (j,i).
+          const unsigned long dof_block_ncol 
+           = this->dof_block_distribution_pt(j)->nrow();
+          
+          // Storage for replacement matrices:
+          // Values
+          Vector<double> replacement_value(0);
+          // Column index
+          Vector<int> replacement_column_index(0);
+          // Row start
+          Vector<int> replacement_row_start;
+          
+          // Need one row start per row, and one for the nnz, all of which are 0.
+          // There are no rows, so this is a Vector of size 1.
+          replacement_row_start.resize(dof_block_nrow_local+1,0);
+          
+          Replacement_matrix_pt(i,j)=
+           new CRDoubleMatrix(dof_block_dist_pt, 
+                              dof_block_ncol, 
+                              replacement_value,
+                              replacement_column_index, 
+                              replacement_row_start);
+         }
+        
+        // Replace (i,j)-th dof block
+        this->set_replacement_dof_block(i,j,Replacement_matrix_pt(i,j));
+       }
+     }// end for loop of j
+   }// end for loop of i
+  
+  
+  // First subsidiary precond is a block triangular preconditioner
+  {
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+  
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn it into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner
+   unsigned n_sub_dof_types=2;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   dof_map[1]=1;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+
+    // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  // Second subsidiary precond is a block triangular preconditioner
+  {
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn it into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner
+   unsigned n_sub_dof_types=3;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);
+   
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  // Next setup the off diagonal mat vec operators:
+  {
+   // Get the block
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+   Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+
+   // Extracted block can now go out of scope since the matrix vector
+   // product retains whatever information it needs
+  }
+
+ }
+
+ 
+ //=============================================================================
+ /// Preconditioner solve for the two plus three upper triangular with 
+ /// replacement preconditioner: 
+ /// Apply preconditioner to r and return z, so that P r = z, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithReplace<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (3x1) "sub-vectors" from the "big" (5x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 3x3 block diagonal.
+  Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+   
+  // Split up rhs vector into sub-vectors, re-arranged to match
+  // the matrix blocks
+  DoubleVector r_0;
+  this->get_block_vector(0,r,r_0);
+     
+  DoubleVector z_1;
+  this->get_block_vector(1,z,z_1);
+
+  // Multiply by (0,1) off diagonal.
+  DoubleVector temp;
+  Off_diagonal_matrix_vector_product_pt->multiply(z_1,temp);
+  r_0 -= temp;
+
+  // Block solve for first diagonal block. Since the associated subsidiary 
+  // preconditioner is a block preconditioner itself, it will extract 
+  // the required (2x1) block rhs from a "big" (5x1) rhs vector, big_r.
+  // Therefore we first put the actual (2x1) rhs vector block_r_0 into the
+  // "big" (5x1) vector big_r. 
+  DoubleVector big_r(z.distribution_pt());
+  this->return_block_vector(0,r_0,big_r);
+    
+  // Now apply the subsidiary block preconditioner that acts on the
+  // "top left" 2x2 sub-system (only!). The subsidiary preconditioner 
+  // will extract the relevant (2x1) "sub-vectors" from the "big" (5x1)
+  // vector big_r and treat it as the rhs, r, of P z = r
+  // where P is 2x2 block diagonal. Once the system is solved,
+  // the result is automatically put back into the appropriate places 
+  // of the "big" (5x1) vector z:
+  First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+  
+ }
+
+ //==start_of_clean_up_for_two_plus_three_upper_triangular_with_replace========
+ /// The clean up function.
+ //============================================================================
+ template<typename MATRIX> 
+ void TwoPlusThreeUpperTriangularWithReplace<MATRIX>:: 
+ clean_up_my_memory()
+ {     
+  // Clean up subsidiary preconditioners.
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+
+  // Clean up the replacement matricies.
+  for(unsigned i=0,ni=Replacement_matrix_pt.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Replacement_matrix_pt.ncol();j<nj;j++)
+     {
+      if(Replacement_matrix_pt(i,j)!=0)
+       {
+        delete Replacement_matrix_pt(i,j);
+        Replacement_matrix_pt(i,j)=0;
+       }
+     } // End loop over j.
+   } // End loop over i.
+    
+  // Clean up the off diag matrix products.
+  if(Off_diagonal_matrix_vector_product_pt != 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+ } // End of clean_up_my_memory function.
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//==================start_of_coarse_two_plus_two_plus_one_class================
+/// Block diagonal preconditioner for system with 5 dof types
+/// assembled into a 2x2 block system, with the (0,0) block containing
+/// the first two dof types, the (1,1) block containing the three remaining 
+/// ones.
+//=============================================================================
+ template<typename MATRIX> 
+ class CoarseTwoPlusTwoPlusOne : 
+  public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for CoarseTwoPlusTwoPlusOne
+   CoarseTwoPlusTwoPlusOne() : 
+  BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0),
+   Off_diagonal_matrix_vector_product_pt(0)
+    {    
+     Multi_poisson_mesh_pt=0;
+    } // end_of_constructor
+  
+  
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~CoarseTwoPlusTwoPlusOne()
+   {
+    this->clean_up_my_memory();
+   }    
+  
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+
+  /// Broken copy constructor
+  CoarseTwoPlusTwoPlusOne
+  (const CoarseTwoPlusTwoPlusOne&) 
+   { 
+    BrokenCopy::broken_copy(
+     "CoarseTwoPlusTwoPlusOne");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const 
+                 CoarseTwoPlusTwoPlusOne&) 
+   {
+    BrokenCopy::broken_assign(
+     "CoarseTwoPlusTwoPlusOne");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  virtual void setup();
+ 
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private :
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  // Matrix of pointers to replacement matrix blocks
+  DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
+
+  /// Matrix vector product operator
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.  
+  Mesh* Multi_poisson_mesh_pt;
+ };
+
+ //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
+ /// The setup function.
+ //===========================================================================
+ template<typename MATRIX> 
+ void CoarseTwoPlusTwoPlusOne<MATRIX>::setup()
+ {
+  // Clean up memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // This preconditioner only works for 5 dof types
+  unsigned n_dof_types = this->ndof_types();
+#ifdef PARANOID
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+
+  // Call block setup with the Vector [0,0,1,1,1] to:
+  // Merge DOF types 0 and 1 into block type 0.
+  // Merge DOF types 2, 3 and 4 into block type 1.
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
+  dof_to_block_map[0] = 0;
+  dof_to_block_map[1] = 0;
+  dof_to_block_map[2] = 1;
+  dof_to_block_map[3] = 1;
+  dof_to_block_map[4] = 1;
+  this->block_setup(dof_to_block_map);
+
+
+  // Replace all the off-diagonal DOF blocks.
+  Replacement_matrix_pt.resize(n_dof_types,n_dof_types,0);
+  for(unsigned i=0;i<n_dof_types;i++)
+   {
+    for(unsigned j=0;j<n_dof_types;j++)
+     {
+      if(i!=j)
+       {
+        // Get the DOF block's (row!) distribution.
+        LinearAlgebraDistribution* dof_block_dist_pt=
+         this->dof_block_distribution_pt(i);
+         
+        // Number of rows in DOF block matrix (i,j).
+        const unsigned long dof_block_nrow = dof_block_dist_pt->nrow_local();
+
+        // Number of columns in block matrix (i,j) is the same as the number
+        // of rows in block matrix (j,i).
+        // We use the actual nrow, not the local one here as this block may
+        // need to be gotten from another processor.
+        const unsigned long dof_block_ncol 
+          = this->dof_block_distribution_pt(j)->nrow();
+
+        // Storage for replacement matrices:
+        // Values
+        Vector<double> replacement_value(0);
+        // Column index
+        Vector<int> replacement_column_index(0);
+        // Row start
+        Vector<int> replacement_row_start;
+
+        // Need one row start per row, and one for the nnz, all of which are 0.
+        replacement_row_start.resize(dof_block_nrow+1,0);
+
+        Replacement_matrix_pt(i,j)=
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, 
+                            replacement_value,
+                            replacement_column_index, replacement_row_start);
+
+        // Replace.
+        this->set_replacement_dof_block(i,j,Replacement_matrix_pt(i,j));
+
+       }// End of if
+     }// End of j loop.
+   }// End of i loop.
+
+  // Create the subsidiary preconditioners
+  //--------------------------------------
+  {
+   // First subsidiary precond is a block diagonal preconditioner itself.
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn first_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner
+   const unsigned n_sub_dof_types=2;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   dof_map[1]=1;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map);    
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+
+  // Second subsidiary preconditioner is also a block preconditioner 
+  {
+   SimpleTwoDofOnly<CRDoubleMatrix>* block_prec_pt=
+    new SimpleTwoDofOnly<CRDoubleMatrix>;
+   Second_subsidiary_preconditioner_pt=block_prec_pt;
+   
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // This is the usual mapping between the subsidiary and master dof types.
+   Vector<unsigned> dof_map(3);
+   dof_map[0]=2;
+   dof_map[1]=3;
+   dof_map[2]=4;
+   
+   // The subsidiary block preconditioner SimpleTwoDofOnly accepts only two
+   // dof types. We therefore have to "coarsen" the 3 dof types into two
+   // by specifying the vector of vectors doftype_coarsening whose
+   // entries are to be interpreted as
+   // 
+   //    doftype_coarsening[coarsened_dof_type][i]=dof_type
+   //
+   // where i ranges from 0 to the number of dof types (minus one, because
+   // of the zero-based indexing...) that are to be
+   // combined/coarsened into dof type dof_type_in_coarsed_block_preconditioner
+
+
+   // Number of dof types the subsidiary block preconditioner expects.
+   const unsigned n_sub_dof_types=2;
+   Vector<Vector<unsigned> > doftype_coarsening(n_sub_dof_types);
+   
+   // Subsidiary dof type 0 contains 2 dof types.
+   doftype_coarsening[0].resize(2);
+
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   // Subsidiary dof type 1 contains 1 dof types. 
+   doftype_coarsening[1].resize(1);
+   
+   // Subsidiary Dof type 1 contains subsidiary dof type 2.
+   doftype_coarsening[1][0]=2;
+      
+   // Turn into subdiary preconditioner
+   block_prec_pt->
+    turn_into_subsidiary_block_preconditioner(this,dof_map,
+                                              doftype_coarsening);
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+   
+   
+  // Set up off diagonal matrix vector product
+  {
+   // Get the off diagonal block.
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix,block_column_index);
+
+   // extracted block can now go out of scope; the matrix vector product
+   // retains its own (deep) copy.
+  }
+ 
+ }// End of setup
+  
+  
+ //=============================================================================
+ /// Preconditioner solve: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void CoarseTwoPlusTwoPlusOne<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+   // Now apply the subsidiary block preconditioner that acts on the
+   // "bottom right" 3x3 sub-system (only!). The subsidiary preconditioner 
+   // will extract the relevant (3x1) "sub-vectors" from the "big" (5x1)
+   // vector big_r and treat it as the rhs, r, of P z = r
+   // where P is 3x3 block diagonal.
+   Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+
+   // Get the entries from r corresponding to matrix block 0.
+   DoubleVector r_0;
+   this->get_block_vector(0,r,r_0);
+
+   // Get the entries from z corresponding to matrix block 0.
+   DoubleVector z_1;
+   this->get_block_vector(1,z,z_1);
+
+   // Multiply by off diagonal block and subtract from RHS.
+   DoubleVector temp;
+   Off_diagonal_matrix_vector_product_pt->multiply(z_1,temp);
+   r_0 -= temp;
+
+   // Block solve for first diagonal block. Since the associated subsidiary 
+   // preconditioner is a block preconditioner itself, it will extract 
+   // the required (2x1) block rhs from a "big" (5x1) rhs vector, big_r.
+   // Therefore we first put the actual (2x1) rhs vector block_r_0 into the
+   // "big" (5x1) vector big_r. 
+   DoubleVector big_r(z.distribution_pt());
+
+   this->return_block_vector(0,r_0,big_r);
+
+   // Now apply the subsidiary block preconditioner that acts on the
+   // "top left" 2x2 sub-system (only!). The subsidiary preconditioner 
+   // will extract the relevant (2x1) "sub-vectors" from the "big" (5x1)
+   // vector big_r and treat it as the rhs, r, of P z = r
+   // where P is 2x2 block diagonal. Once the system is solved,
+   // the result is automatically put back into the appropriate places 
+   // of the "big" (5x1) vector z:
+   First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+ }// End of solve
+ 
+ //=============start_of_clean_up_for_coarse_one_plus_two_plus_two===========
+/// The clean up function.
+//===========================================================================
+ template<typename MATRIX> 
+ void CoarseTwoPlusTwoPlusOne<MATRIX>::
+ clean_up_my_memory()
+ {     
+  // Delete diagonal preconditioners (approximate solvers)
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+
+  // Clean up the replacement matricies.
+  for(unsigned i=0,ni=Replacement_matrix_pt.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Replacement_matrix_pt.ncol();j<nj;j++)
+     {
+      if(Replacement_matrix_pt(i,j)!=0)
+       {
+        delete Replacement_matrix_pt(i,j);
+        Replacement_matrix_pt(i,j)=0;
+       }
+     } // End loop over j.
+   } // End loop over i.
+
+  // Kill matrix vector product
+  if(Off_diagonal_matrix_vector_product_pt!= 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+
+ } // End of clean_up_my_memory function.
+
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+
+
+//==================start_of_coarse_two_plus_two_plus_one_class================
+/// Block diagonal preconditioner for system with 5 dof types
+/// assembled into a 2x2 block system, with (0,0) block containing
+/// the first dof type, the (1,1) block containing the remaining,
+/// (1,1) block is itself solved by a (2x2) block preconditioner which
+/// only accepts two DOF types.
+//=============================================================================
+ template<typename MATRIX> 
+ class OnePlusFourWithTwoCoarse : 
+  public BlockPreconditioner<MATRIX>
+ {
+  
+ public :
+  
+  /// Constructor for OnePlusFourWithTwoCoarse
+  OnePlusFourWithTwoCoarse() : 
+  BlockPreconditioner<MATRIX>(),
+   First_subsidiary_preconditioner_pt(0),
+   Second_subsidiary_preconditioner_pt(0),
+   Off_diagonal_matrix_vector_product_pt(0)
+   {   
+    Multi_poisson_mesh_pt=0;
+   } // end_of_constructor
+  
+  
+  /// Destructor - delete the diagonal solvers (subsidiary preconditioners)
+  ~OnePlusFourWithTwoCoarse()
+   {
+    this->clean_up_my_memory();
+   }    
+  
+  /// clean up the memory
+  virtual void clean_up_my_memory();
+
+  /// Broken copy constructor
+  OnePlusFourWithTwoCoarse
+  (const OnePlusFourWithTwoCoarse&) 
+   { 
+    BrokenCopy::broken_copy(
+     "OnePlusFourWithTwoCoarse");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const 
+                 OnePlusFourWithTwoCoarse&) 
+   {
+    BrokenCopy::broken_assign(
+     "OnePlusFourWithTwoCoarse");
+   }
+  
+  /// Apply preconditioner to r, i.e. return z such that P z = r
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+  
+  /// Setup the preconditioner 
+  virtual void setup();
+ 
+  /// Specify the mesh that contains multi-poisson elements
+  void set_multi_poisson_mesh(Mesh* multi_poisson_mesh_pt)
+  {
+   Multi_poisson_mesh_pt=multi_poisson_mesh_pt;
+  }
+
+ private :
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (0,0) block
+  Preconditioner* First_subsidiary_preconditioner_pt;
+  
+  /// Pointer to preconditioners/inexact solver
+  /// for (1,1) block
+  Preconditioner* Second_subsidiary_preconditioner_pt;
+
+  // Matrix of pointers to replacement matrx blocks
+  DenseMatrix<CRDoubleMatrix*> Replacement_matrix_pt;
+
+  /// Matrix vector product operators for the off diagonal.
+  MatrixVectorProduct* Off_diagonal_matrix_vector_product_pt;
+
+  /// Pointer to mesh with preconditionable elements used
+  /// for classification of dof types.
+  Mesh* Multi_poisson_mesh_pt;
+
+ };
+
+ //===============start_of_setup_for_coarse_two_plus_two_plus_one=============
+ /// The setup function.
+ //===========================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::setup()
+ {
+  // Clean up memory
+  this->clean_up_my_memory();
+
+#ifdef PARANOID
+  if (Multi_poisson_mesh_pt == 0)
+   {
+    std::stringstream err;
+    err << "Please set pointer to mesh using set_multi_poisson_mesh(...).\n";
+    throw OomphLibError(err.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+
+  // The preconditioner works with one mesh; set it!
+  this->set_nmesh(1);
+  this->set_mesh(0,Multi_poisson_mesh_pt);
+
+  // This preconditioner only works for 5 dof types
+  unsigned n_dof_types = this->ndof_types();
+#ifdef PARANOID
+  if (n_dof_types!=5)
+   {
+    std::stringstream tmp;
+    tmp << "This preconditioner only works for problems with 5 dof types\n"
+        << "Yours has " << n_dof_types;
+    throw OomphLibError(tmp.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Combine into two major blocks, one containing dof type 0, the
+  // final one dof types 1-4. In general we want:
+  // dof_to_block_map[dof_type] = block type
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
+  dof_to_block_map[0] = 0;
+  dof_to_block_map[1] = 1;
+  dof_to_block_map[2] = 1;
+  dof_to_block_map[3] = 1;
+  dof_to_block_map[4] = 1;
+  this->block_setup(dof_to_block_map);
+
+  // Replace all the off-diagonal DOF blocks.
+  Replacement_matrix_pt.resize(n_dof_types,n_dof_types,0);
+  for(unsigned i=0;i<n_dof_types;i++)
+   {
+    for(unsigned j=0;j<n_dof_types;j++)
+     {
+      if(i!=j)
+       {
+        // Get the DOF block's (row!) distribution.
+        LinearAlgebraDistribution* dof_block_dist_pt=
+         this->dof_block_distribution_pt(i);
+         
+        // Number of rows in DOF block matrix (i,j).
+        const unsigned long dof_block_nrow = dof_block_dist_pt->nrow_local();
+
+        // Number of columns in block matrix (i,j) is the same as the number
+        // of rows in block matrix (j,i).
+        // We use the actual nrow, not the local one here as this block may
+        // need to be gotten from another processor.
+        const unsigned long dof_block_ncol 
+          = this->dof_block_distribution_pt(j)->nrow();
+
+        // Storage for replacement matrices:
+        // Values
+        Vector<double> replacement_value(0);
+        // Column index
+        Vector<int> replacement_column_index(0);
+        // Row start
+        Vector<int> replacement_row_start;
+
+        // Need one row start per row, and one for the nnz, all of which are 0.
+        replacement_row_start.resize(dof_block_nrow+1,0);
+
+        Replacement_matrix_pt(i,j)=
+         new CRDoubleMatrix(dof_block_dist_pt, dof_block_ncol, replacement_value,
+                            replacement_column_index, replacement_row_start);
+
+        // Replace.
+        this->set_replacement_dof_block(i,j,Replacement_matrix_pt(i,j));
+       }// End of if
+     }// End of j loop.
+   }// End of i loop.
+
+  // Create the subsidiary preconditioners
+  //--------------------------------------
+
+  {
+   // First subsidiary precond is a block diagonal preconditioner itself.
+   // Put in owns cope so block_prec_pt goes out of scope.
+   UpperTriangular<CRDoubleMatrix>* block_prec_pt=
+    new UpperTriangular<CRDoubleMatrix>;
+   First_subsidiary_preconditioner_pt=block_prec_pt;
+
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // Turn first_sub into a subsidiary preconditioner, declaring which
+   // of the five dof types in the present (master) preconditioner
+   // correspond to the dof types in the subsidiary block preconditioner
+   unsigned n_sub_dof_types=1;
+   Vector<unsigned> dof_map(n_sub_dof_types);
+   dof_map[0]=0;
+   block_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_map); 
+
+   // Perform setup. Note that because the subsidiary
+   // preconditioner is a block preconditioner itself it is given
+   // the pointer to the "full" matrix
+   block_prec_pt->setup(this->matrix_pt());
+  }
+  
+
+  // Second subsidiary precond is a block diagonal preconditioner itself
+  // This preconditioner only accepts two DOF types, it then coarsen these 
+  // two dof types to use a block preconditioner which accepts only one DOF
+  // type.
+  CoarseTwoIntoOne<CRDoubleMatrix>* block_prec_pt=
+   new CoarseTwoIntoOne<CRDoubleMatrix>;
+  Second_subsidiary_preconditioner_pt=block_prec_pt;
+
+   // Set mesh
+   block_prec_pt->set_multi_poisson_mesh(Multi_poisson_mesh_pt);
+   
+   // This is the usual dof map between subsidiary and master dof types.
+   Vector<unsigned> dof_map(4);
+   dof_map[0]=1;
+   dof_map[1]=2;
+   dof_map[2]=3;
+   dof_map[3]=4;
+   
+
+   // The subsidiary block preconditioner CoarseTwoIntoOne accepts only two
+   // dof types. To use this preconditioner on the remaining 4 dof types,
+   // we coarsen the 4 dof types into 2 dof types
+   // by specifying the vector of vectors doftype_coarsening whose
+   // entries are to be interpreted as
+   // 
+   //    doftype_coarsening[coarsened_dof_type][i]=dof_type
+   //
+   // where i ranges from 0 to the number of dof types (minus one, because
+   // of the zero-based indexing...) that are to be
+   // combined/coarsened into dof type dof_type_in_coarsed_block_preconditioner
+   
+   // Number of dof types the subsidiary block preconditioner expects. 
+   const unsigned n_sub_dof_types=2;
+   Vector<Vector<unsigned> > doftype_coarsening(n_sub_dof_types);
+   
+   // Subsidiary dof type 0 contains 2 dof types.
+   doftype_coarsening[0].resize(2);
+
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 0.
+   doftype_coarsening[0][0]=0;
+   doftype_coarsening[0][1]=1;
+   
+   // Subsidiary dof type 1 contains 2 dof types. 
+   doftype_coarsening[1].resize(2);
+   
+   // Coarsen subsidiary dof types 0 and 1 into subsidiary dof type 1.
+   doftype_coarsening[1][0]=2;
+   doftype_coarsening[1][1]=3;
+   
+   // Turn the block preconditioner into a subsidiary block preconditioner.
+   block_prec_pt->
+    turn_into_subsidiary_block_preconditioner(this,dof_map,
+                                              doftype_coarsening);
+   
+  // Perform setup. Note that because the subsidiary
+  // preconditioner is a block preconditioner itself it is given
+  // the pointer to the "full" matrix
+  block_prec_pt->setup(this->matrix_pt());
+  
+
+  // Set up off diagonal matrix vector product
+  {
+   // Get the block
+   CRDoubleMatrix block_matrix = this->get_block(0,1);
+   
+   // Create matrix vector product operator
+   Off_diagonal_matrix_vector_product_pt = new MatrixVectorProduct;
+   
+   // Setup: Final argument indicates block column in the present
+   // block preconditioner (which views the system matrix as comprising
+   // 2x2 blocks).
+   unsigned block_column_index=1;
+   this->setup_matrix_vector_product(
+    Off_diagonal_matrix_vector_product_pt,&block_matrix, block_column_index);
+  }
+
+ }// End of setup
+ 
+ 
+ //=============================================================================
+ /// Preconditioner solve for the coarse one plus two plus two with subsidiary 
+ /// and replacement preconditioner: 
+ /// Apply preconditioner to r and return z, so that P z = r, where
+ /// P is the block diagonal matrix constructed from the original 
+ /// linear system.
+ //=============================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::
+ preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+ {   
+   // Now apply the subsidiary block preconditioner that acts on the
+   // "bottom right" 4x4 sub-system (only!). The subsidiary preconditioner 
+   // will extract the relevant (4x1) "sub-vectors" from the "big" (5x1)
+   // vector big_r and treat it as the rhs, r, of P z = r
+   // where P is 4x4 block diagonal.
+   Second_subsidiary_preconditioner_pt->preconditioner_solve(r,z);
+
+   // Split up rhs vector into sub-vectors, re-arranged to match
+   // the matrix blocks
+   DoubleVector r_0;
+   this->get_block_vector(0,r,r_0);
+
+   DoubleVector z_1;
+   this->get_block_vector(1,z,z_1);
+
+   // Multiply by (0,1) off diagonal.
+   DoubleVector temp;
+   Off_diagonal_matrix_vector_product_pt->multiply(z_1,temp);
+   r_0 -= temp;
+
+   // Block solve for first diagonal block. Since the associated subsidiary 
+   // preconditioner is a block preconditioner itself, it will extract 
+   // the required (1x1) block rhs from a "big" (5x1) rhs vector, big_r.
+   // Therefore we first put the actual (1x1) rhs vector block_r_0 into the
+   // "big" (5x1) vector big_r. 
+   DoubleVector big_r(z.distribution_pt());
+
+   this->return_block_vector(0,r_0,big_r); 
+   // Now apply the subsidiary block preconditioner that acts on the
+   // "top left" 1x1 sub-system (only!). The subsidiary preconditioner 
+   // will extract the relevant (1x1) "sub-vectors" from the "big" (5x1)
+   // vector big_r and treat it as the rhs, r, of P z = r
+   // where P is 1x1 block diagonal. Once the system is solved,
+   // the result is automatically put back into the appropriate places 
+   // of the "big" (5x1) vector z:
+   First_subsidiary_preconditioner_pt->preconditioner_solve(big_r,z);
+ }// End of solve
+ 
+ //=============start_of_clean_up_for_coarse_one_plus_two_plus_two===========
+/// The clean up function.
+//===========================================================================
+ template<typename MATRIX> 
+ void OnePlusFourWithTwoCoarse<MATRIX>::
+ clean_up_my_memory()
+ {     
+  // Delete diagonal preconditioners (approximate solvers)
+  if(First_subsidiary_preconditioner_pt!=0)
+   {
+    delete First_subsidiary_preconditioner_pt;
+    First_subsidiary_preconditioner_pt = 0;
+   }
+  if(Second_subsidiary_preconditioner_pt!=0)
+   {
+    delete Second_subsidiary_preconditioner_pt;
+    Second_subsidiary_preconditioner_pt = 0;
+   }
+
+  // Clean up the replacement matrices.
+  for(unsigned i=0,ni=Replacement_matrix_pt.nrow();i<ni;i++)
+   {
+    for(unsigned j=0,nj=Replacement_matrix_pt.ncol();j<nj;j++)
+     {
+      if(Replacement_matrix_pt(i,j)!=0)
+       {
+        delete Replacement_matrix_pt(i,j);
+        Replacement_matrix_pt(i,j)=0;
+       }
+     } // End loop over j.
+   } // End loop over i.
+
+  // Kill off diagonal matrix vector product
+  if(Off_diagonal_matrix_vector_product_pt!= 0)
+   {
+    delete Off_diagonal_matrix_vector_product_pt;
+    Off_diagonal_matrix_vector_product_pt = 0;
+   }
+
+ } // End of clean_up_my_memory function.
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+
+}
+#endif

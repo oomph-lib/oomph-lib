@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Demo problem: Relaxation oscillations of an interface between two viscous fluids</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Demo problem: Relaxation oscillations of an interface between two viscous fluids </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In the <a href="../../single_layer_free_surface/html/index.html">previous example</a> we considered a two-dimensional free surface Navier&ndash;Stokes problem. The free surface was deformed to a prescribed shape and then allowed to relax. In this example we consider the relaxation of an interface between two viscous fluids.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="implementation"></a>
+Implementation</h1>
+<p>The extension from a single fluid problem to one involving two fluids separated by an interface is very straightforward. As <code>oomph-lib's</code> Navier&ndash;Stokes elements are based on the Arbitrary Lagrangian Eulerian form of the equations, and can therefore be used to solve problems in moving domains, we can discretise the domain using a rectangular mesh containing an additional boundary corresponding to the position of the interface. The construction of such a mesh is described <a href="#mesh">below</a>. We also require a method of distinguishing between (and assigning) the physical properties of the two fluid layers.</p>
+<h2><a class="anchor" id="interface_eqns"></a>
+Boundary conditions at the interface</h2>
+<p>A discussion of the theory and implementation of the boundary conditions at a free surface is given in the <a href="../../single_layer_free_surface/html/index.html#free_surface_eqns">previous example</a>, where we showed that the dynamic boundary condition is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^{[2]} \, n_j^{[1]} =
+\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.
+\]" src="form_0.png" width="163" height="26"/>
+</p>
+<p> Here <img class="formulaInl" alt="$ \tau_{ij}^{[1]} $" src="form_1.png" width="18" height="20"/> and <img class="formulaInl" alt="$ \tau_{ij}^{[2]} $" src="form_2.png" width="18" height="20"/> are the stress tensors in the &lsquo;lower&rsquo; and &lsquo;upper&rsquo; fluids respectively, <img class="formulaInl" alt="$
+n_j^{[1]} $" src="form_3.png" width="19" height="20"/> is the unit normal pointing out of the &lsquo;lower&rsquo; fluid and <img class="formulaInl" alt="$ Ca $" src="form_4.png" width="16" height="10"/> is the Capillary number.</p>
+<p>The interface conditions in this two-fluid example are implemented in an almost identical way to the <a href="../../single_layer_free_surface/html/index.html#implementation">single layer case</a>. We employ the same pseudo-solid node-update strategy, where the interior mesh is treated as a fictitious elastic solid and thus the (unknown) nodal positions can be determined by solving a solid mechanics problem. The deformation of the free surface boundary itself is imposed by introducing a a field of Lagrange multipliers at the interface, and the equation associated with these additional unknowns is the kinematic condition. In the <a href="../../single_layer_free_surface/html/index.html#implementation">single layer case</a> this equation is discretised by attaching <code>FaceElements</code> to the boundaries of the &lsquo;bulk&rsquo; elements that are adjacent to the free surface. In this two-layer example we attach the same <code>FaceElements</code> to only those &lsquo;bulk&rsquo; elements which are in the &lsquo;lower&rsquo; fluid (and have boundaries adjacent to the interface). These same <code>FaceElements</code> are also responsible for adding the surface tension contributions to the momentum equations that arise through the application of the dynamic boundary condition. We note that since we are solving the Navier&ndash;Stokes equations on either side of the interface we do not specify an external pressure, a step that was necessary in the <a href="../../single_layer_free_surface/html/index.html#implementation">single layer case</a>.</p>
+<p>The other difference between this problem and the <a href="../../single_layer_free_surface/html/index.html">previous example</a> is that we shall be solving this one using spatial adaptivity. We refer to <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">another tutorial</a> for a discussion of how to apply boundary conditions in such problems.</p>
+<h2><a class="anchor" id="dens_visc_ratios"></a>
+Distinguishing between the two fluids</h2>
+<p>In a problem containing a single fluid, the definitions of the Reynolds number, Strouhal number, Capillary number and so on are based on the physical properties of that fluid, as well as the geometry of the problem and typical timescales. In our <a href="../../driven_cavity/html/index.html">discussion of the non-dimensionalisation of the Navier&ndash;Stokes equations</a> we describe how the various dimensionless parameters are defined in terms of a reference density, <img class="formulaInl" alt="$ \rho_{ext} $" src="form_5.png" width="21" height="9"/>, and a reference viscosity, <img class="formulaInl" alt="$ \mu_{ext} $" src="form_6.png" width="23" height="9"/>. We can then define two dimensionless ratios, <img class="formulaInl" alt="$ R_\rho $" src="form_7.png" width="15" height="14"/> and <img class="formulaInl" alt="$ R_\mu $" src="form_8.png" width="15" height="14"/>, which describe a particular fluid's density <img class="formulaInl" alt="$ \rho $" src="form_9.png" width="8" height="9"/> and kinematic viscosity <img class="formulaInl" alt="$ \mu $" src="form_10.png" width="9" height="9"/> relative to these reference quantities:  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+R_\rho = \frac{\rho}{\rho_{ref}} 
+\qquad ; \qquad 
+R_\mu = \frac{\mu}{\mu_{ref}}.
+\]" src="form_11.png" width="175" height="28"/>
+</p>
+<p> <code>oomph-lib's</code> implementation of the Navier&ndash;Stokes equations contains these ratios in the appropriate terms. They default to one but can be set to other values via the member functions <code>density_ratio_pt()</code> and <code>viscosity_ratio_pt()</code> in each element.</p>
+<p>It is convenient to choose one of the fluids in this problem to be the &lsquo;reference fluid&rsquo; on which the dimensionless parameters are based. We choose the lower fluid (fluid 1), and hence the density <img class="formulaInl" alt="$ \rho^{[1]} $" src="form_12.png" width="18" height="15"/> and viscosity <img class="formulaInl" alt="$ \mu^{[1]} $" src="form_13.png" width="19" height="15"/> of this fluid are identically equal to <img class="formulaInl" alt="$ \rho_{ref} $" src="form_14.png" width="23" height="10"/> and <img class="formulaInl" alt="$ \mu_{ref}
+$" src="form_15.png" width="24" height="10"/> (and thus <img class="formulaInl" alt="$ R_\rho^{[1]} = R_\mu^{[1]} = 1 $" src="form_16.png" width="80" height="18"/>). We can now control the relative density and viscosity of the upper fluid to the lower fluid using the ratios <img class="formulaInl" alt="$ R_\rho^{[2]} = \rho^{[2]}/\rho_{ref}
+$" src="form_17.png" width="83" height="19"/> and <img class="formulaInl" alt="$ R_\mu^{[2]} = \mu^{[2]}/\mu_{ref} $" src="form_18.png" width="85" height="19"/> respectively. For simplicity we will from now on refer to <img class="formulaInl" alt="$ R_\rho^{[2]} $" src="form_19.png" width="19" height="18"/> simply as <img class="formulaInl" alt="$ R_\rho $" src="form_7.png" width="15" height="14"/> and to <img class="formulaInl" alt="$ R_\mu^{[2]} $" src="form_20.png" width="19" height="18"/> as <img class="formulaInl" alt="$ R_\mu $" src="form_8.png" width="15" height="14"/>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example_problem"></a>
+The example problem</h1>
+<p>We will illustrate the solution of the unsteady two-dimensional Navier&ndash;Stokes equations using the example of a distorted interface between two viscous fluids which is allowed to relax. The domain is periodic in the <img class="formulaInl" alt="$ x_1 $" src="form_21.png" width="13" height="9"/> direction.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b> The 2D unsteady Navier&ndash;Stokes equations either side of a distorted interface.</b> </center><p> Solve  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right]
+\ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_22.png" width="394" height="31"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_23.png" width="100" height="29"/>
+</p>
+<p> in the &lsquo;lower&rsquo; fluid, and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+R_\rho Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + R_\rho \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[R_\mu \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right) \right]
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_24.png" width="435" height="31"/>
+</p>
+<p> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_25.png" width="100" height="29"/>
+</p>
+<p> in the &lsquo;upper&rsquo; fluid. Gravity acts in the negative <img class="formulaInl" alt="$ x_2 $" src="form_26.png" width="13" height="9"/> direction and so <img class="formulaInl" alt="$ G_1 = 0 $" src="form_27.png" width="38" height="13"/> and <img class="formulaInl" alt="$ G_2 = 1 $" src="form_28.png" width="38" height="13"/>. The governing equations are subject to the no slip boundary conditions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_1 = u_2 = 0 \ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_29.png" width="123" height="14"/>
+</p>
+<p> on the top ( <img class="formulaInl" alt="$ x_2 = 2.0 $" src="form_30.png" width="46" height="11"/>) and bottom ( <img class="formulaInl" alt="$ x_2 = 0.0 $" src="form_31.png" width="46" height="11"/>) solid boundaries and the symmetry boundary conditions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_1 = 0 \ \ \ \ \ \ \ \ \ \ (6)
+\]" src="form_32.png" width="93" height="14"/>
+</p>
+<p> on the left ( <img class="formulaInl" alt="$ x_1 = 0.0 $" src="form_33.png" width="46" height="11"/>) and right ( <img class="formulaInl" alt="$ x_1 = 1.0 $" src="form_34.png" width="46" height="11"/>) boundaries.</p>
+<p class="intertd">We denote the position vector to the interface between the two fluids by <img class="formulaInl" alt="$ \mathbf{R} $" src="form_35.png" width="13" height="10"/>, which is subject to the kinematic condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
+\ \ \ \ \ \ \ \ \ \ (7)
+\]" src="form_36.png" width="180" height="31"/>
+</p>
+<p> and the dynamic condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^{[2]} \, n_j^{[1]} =
+\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]}.
+\ \ \ \ \ \ \ \ \ \ (8)
+\]" src="form_37.png" width="220" height="26"/>
+</p>
+<p> The stress tensor in the &lsquo;lower&rsquo; fluid is defined as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^{[1]} = -p^{[1]} \, \delta_{ij} + \left(\frac{\partial u^{[1]}_i}{\partial x_j}
++ \frac{\partial u^{[1]}_j}{\partial x_i}\right),
+\ \ \ \ \ \ \ \ \ \ (9)
+\]" src="form_38.png" width="250" height="40"/>
+</p>
+<p> and that in the &lsquo;upper&rsquo; fluid is defined as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^{[2]} = -p^{[2]} \, \delta_{ij} + R_\mu \left(\frac{\partial u^{[2]}_i}{\partial x_j}
++ \frac{\partial u^{[2]}_j}{\partial x_i}\right).
+\ \ \ \ \ \ \ \ \ \ (10)
+\]" src="form_39.png" width="273" height="40"/>
+</p>
+<p class="endtd">The initial shape of the interface is defined by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+ \mathbf{R} = x_1 \, \mathbf{i} + \left[ 1.0 + 
+ \epsilon\cos\left( 2 n \pi x_1 \right)\right] \, \mathbf{j},
+\ \ \ \ \ \ \ \ \ \ (11)
+\]" src="form_40.png" width="246" height="14"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \epsilon $" src="form_41.png" width="5" height="6"/> is the amplitude of the initial deflection and <img class="formulaInl" alt="$ n $" src="form_42.png" width="9" height="6"/> is an integer.   </p>
+</td></tr>
+</table>
+<br  />
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows a contour plot of the pressure distribution taken from <a href="../figures/two_layer_interface.avi">an animation of the flow field</a>, for the parameters <img class="formulaInl" alt="$ Re = Re \, St = Re/Fr = 5.0 $" src="form_43.png" width="149" height="14"/>, <img class="formulaInl" alt="$ R_\rho =
+0.5 $" src="form_44.png" width="48" height="14"/>, <img class="formulaInl" alt="$ R_\mu = 0.1 $" src="form_45.png" width="48" height="14"/> and <img class="formulaInl" alt="$ Ca = 0.01 $" src="form_46.png" width="55" height="10"/>.</p>
+<div class="image">
+<img src="two_layer_interface.gif" alt=""/>
+<div class="caption">
+Pressure contour plot for the relaxing interface problem. </div></div>
+ <p>The restoring forces of surface tension and gravitational acceleration act to revert the interface to its undeformed flat state. The interface oscillates up and down, but the motion is damped as the energy in the system is dissipated through viscous forces. Eventually the interface settles down to its equilibrium position, as can be seen in the following time-trace of the height of the interface at the left-hand edge of the domain ( <img class="formulaInl" alt="$ x_1 = 0 $" src="form_47.png" width="36" height="11"/>).</p>
+<div class="image">
+<img src="two_layer_interface_trace.gif" alt=""/>
+<div class="caption">
+Time-trace of the height of the interface at the point x_1 = 0. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="validation"></a>
+Validation</h1>
+<p>The free surface boundary conditions for the Cartesian Navier&ndash;Stokes equations have been validated against an analytical test case, and we present the results in the figure below. For sufficiently small amplitudes, <img class="formulaInl" alt="$ \epsilon \ll 1 $" src="form_48.png" width="30" height="10"/>, we can linearise the governing equations and obtain a dispersion relation <img class="formulaInl" alt="$ \lambda(k) $" src="form_49.png" width="23" height="14"/>, the derivation of which is discussed in the <a href="../../single_layer_free_surface/html/index.html#validation">previous tutorial</a>. The only difference in this two layer case is that the linear system which needs to be solved contains nine unknowns rather than five, since the two fluids have different properties. The real and imaginary parts of <img class="formulaInl" alt="$ \lambda $" src="form_50.png" width="8" height="10"/> correspond to the growth rate and the frequency of the oscillating interface respectively, and can be compared to numerical results computed for given values of the wavenumber <img class="formulaInl" alt="$ k $" src="form_51.png" width="6" height="10"/>. We choose an initial deflection amplitude of <img class="formulaInl" alt="$ \epsilon = 0.01 $" src="form_52.png" width="44" height="9"/> and determine the growth rate and frequency of the oscillation from a time-trace of the left-hand edge of the interface.</p>
+<div class="image">
+<img src="two_layer_interface_code_validation.gif" alt=""/>
+<div class="caption">
+Validation of the code (points) by comparison with an analytical dispersion relation (lines). </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As in the <a href="../../single_layer_free_surface/html/index.html#namespace">previous example</a>, we use a namespace to define the dimensionless parameters <img class="formulaInl" alt="$ Re $" src="form_53.png" width="15" height="10"/>, <img class="formulaInl" alt="$ St $" src="form_54.png" width="13" height="10"/>, <img class="formulaInl" alt="$ Re/Fr $" src="form_55.png" width="38" height="14"/> and <img class="formulaInl" alt="$ Ca $" src="form_4.png" width="16" height="10"/>. The pseudo-solid mesh is governed by a generalised Hookean constitutive law which requires the definition of the Poisson ratio, <img class="formulaInl" alt="$ \nu $" src="form_56.png" width="6" height="6"/>, and we create a vector <img class="formulaInl" alt="$ G $" src="form_57.png" width="10" height="10"/> which will define the direction in which gravity acts. Because this is a two-fluid problem, we also need to define the density ratio <img class="formulaInl" alt="$ R_{\rho} = \rho^{[2]}/\rho^{[1]} $" src="form_58.png" width="73" height="16"/> and viscosity ratio <img class="formulaInl" alt="$ R_{\mu} = \mu^{[2]}/\mu^{[1]} $" src="form_59.png" width="75" height="16"/> of the two fluids.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_namespace====================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a> = 5.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Strouhal number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">St</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Womersley number (Reynolds x Strouhal)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a> = 5.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Product of Reynolds number and inverse of Froude number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">ReInvFr</a> = 5.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Ratio of viscosity in upper fluid to viscosity in lower</span></div>
+<div class="line"><span class="comment"> /// fluid. Reynolds number etc. is based on viscosity in lower fluid.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Viscosity_Ratio</a> = 0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Ratio of density in upper fluid to density in lower</span></div>
+<div class="line"><span class="comment"> /// fluid. Reynolds number etc. is based on density in lower fluid.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Density_Ratio</a> = 0.5;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Capillary number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Ca</a> = 0.01;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Direction of gravity</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">Vector&lt;double&gt;</a> <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">G</a>(2);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pseudo-solid Poisson ratio</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Nu</a> = 0.1;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of namespace</span></div>
+<div class="ttc" id="aclassElasticRefineableTwoLayerMesh_html"><div class="ttname"><a href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a></div><div class="ttdoc">Two layer mesh which employs a pseudo-solid node-update strategy. This class is essentially a wrapper...</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00102">elastic_two_layer_interface.cc:104</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00055">elastic_two_layer_interface.cc:56</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a085ee4bf968ffdd01a41b8c41864f907"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Womersley number (Reynolds x Strouhal)</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00065">elastic_two_layer_interface.cc:65</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a37a6f46efcb35b4bd12c73f19d741020"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a></div><div class="ttdeci">Vector&lt; double &gt; G(2)</div><div class="ttdoc">Direction of gravity.</div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a3962c36313826b19f216f6bbbdd6a477"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Pseudo-solid Poisson ratio.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00085">elastic_two_layer_interface.cc:85</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a4b6ef72bd221361c37f5b9a4a6899afc"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a></div><div class="ttdeci">double St</div><div class="ttdoc">Strouhal number.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00062">elastic_two_layer_interface.cc:62</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a80a34b6dfb7e1501966b8d6c7501e718"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Global_Physical_Variables::Density_Ratio</a></div><div class="ttdeci">double Density_Ratio</div><div class="ttdoc">Ratio of density in upper fluid to density in lower fluid. Reynolds number etc. is based on density i...</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00076">elastic_two_layer_interface.cc:76</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a8b32b93d2e546f9375ec418474107838"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a></div><div class="ttdeci">double Ca</div><div class="ttdoc">Capillary number.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00079">elastic_two_layer_interface.cc:79</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_aa6286f02b476912dd7550eced538331a"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a></div><div class="ttdeci">double ReInvFr</div><div class="ttdoc">Product of Reynolds number and inverse of Froude number.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00068">elastic_two_layer_interface.cc:68</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00059">elastic_two_layer_interface.cc:59</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_adb51428300a01b19395c43c0d3586d6f"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a></div><div class="ttdeci">double Viscosity_Ratio</div><div class="ttdoc">Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc....</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00072">elastic_two_layer_interface.cc:72</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>The driver code is very similar to the <a href="../../single_layer_free_surface/html/index.html#main">previous example</a>. We define a command line flag which allows us to run a &lsquo;validation&rsquo; version of the code (for <code>oomph-lib's</code> self-testing routines) and check that the non-dimensional quantities provided in the <code><a class="el" href="namespaceGlobal__Physical__Variables.html" title="Namespace for physical parameters.">Global_Physical_Variables</a></code> namespace are self-consistent.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_main=========================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for two-dimensional two fluid interface problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="elastic__two__layer__interface_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">argc</a>, <span class="keywordtype">char</span>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">argv</a>[]) </div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">CommandLineArgs::setup</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">argc</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">argv</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// -----------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> <span class="comment">// -----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Are we performing a validation run?</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">CommandLineArgs::specify_command_line_flag</a>(<span class="stringliteral">&quot;--validation&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">CommandLineArgs::parse_and_assign</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">CommandLineArgs::doc_specified_flags</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Check that definition of Womersley number is consistent with those</span></div>
+<div class="line"> <span class="comment">// of the Reynolds and Strouhal numbers</span></div>
+<div class="line"> <span class="keywordflow">if</span>(<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a> !=</div>
+<div class="line">    <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>*<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a>)</div>
+<div class="line">  {</div>
+<div class="line">   std::ostringstream <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">error_stream</a>;</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">error_stream</a> &lt;&lt; <span class="stringliteral">&quot;Definition of Global_Physical_Variables::ReSt is &quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;inconsistant with those\n&quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;of Global_Physical_Variables::Re and &quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;Global_Physical_Variables::St.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   <span class="keywordflow">throw</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">OomphLibError</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">error_stream</a>.str(),</div>
+<div class="line">                       <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">OOMPH_CURRENT_FUNCTION</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">OOMPH_EXCEPTION_LOCATION</a>);</div>
+<div class="line">  }</div>
+<div class="ttc" id="aclassElasticRefineableTwoLayerMesh_html_a4f6c6b4214a7a99e94e24906d033f8f7"><div class="ttname"><a href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">ElasticRefineableTwoLayerMesh::ElasticRefineableTwoLayerMesh</a></div><div class="ttdeci">ElasticRefineableTwoLayerMesh(const unsigned &amp;nx, const unsigned &amp;ny1, const unsigned &amp;ny2, const double &amp;lx, const double &amp;h1, const double &amp;h2, const bool &amp;periodic_in_x, TimeStepper *time_stepper_pt=&amp;Mesh::Default_TimeStepper)</div><div class="ttdoc">Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and ...</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00113">elastic_two_layer_interface.cc:113</a></div></div>
+<div class="ttc" id="aelastic__two__layer__interface_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="elastic__two__layer__interface_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for two-dimensional two fluid interface problem.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00810">elastic_two_layer_interface.cc:810</a></div></div>
+</div><!-- fragment --><p> Next we specify the duration of the simulation and the size of the timestep. If we are running the code as a self-test, we set the length of the simulation such that only two timesteps are taken. The direction in which gravity acts is defined to be vertically downwards.</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Maximum time</span></div>
+<div class="line"> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t_max</a> = 0.6;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Duration of timestep</span></div>
+<div class="line"><span class="comment"></span> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a> = 0.0025;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If we are doing validation run, use smaller number of timesteps</span></div>
+<div class="line"> <span class="keywordflow">if</span>(<a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">CommandLineArgs::command_line_flag_has_been_set</a>(<span class="stringliteral">&quot;--validation&quot;</span>))</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t_max</a> = 0.005;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set direction of gravity (vertically downwards)</span></div>
+<div class="line"> <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a>[0] = 0.0;</div>
+<div class="line"> <a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a>[1] = -1.0;</div>
+</div><!-- fragment --><p> Finally, we build the problem using the &lsquo;pseudo-solid&rsquo; version of <code>RefineableQCrouzeixRaviartElements</code> and the <code>BDF&lt;2&gt;</code> timestepper, before calling <code>unsteady_run(...)</code>. This function solves the system at each timestep using the <code>Problem::unsteady_newton_solve(...)</code> function before documenting the result.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set up the elastic test problem with QCrouzeixRaviartElements,</span></div>
+<div class="line"> <span class="comment">// using the BDF&lt;2&gt; timestepper</span></div>
+<div class="line"> <a class="code hl_class" href="classInterfaceProblem.html">InterfaceProblem</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">RefineablePseudoSolidNodeUpdateElement</a>&lt;</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">RefineableQCrouzeixRaviartElement&lt;2&gt;</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">RefineableQPVDElement&lt;2,3&gt;</a> &gt;, <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">BDF&lt;2&gt;</a> &gt;</div>
+<div class="line">  <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">problem</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Run the unsteady simulation</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">problem</a>.unsteady_run(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t_max</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a>);</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of main</span></div>
+<div class="ttc" id="aclassInterfaceProblem_html"><div class="ttname"><a href="classInterfaceProblem.html">InterfaceProblem</a></div><div class="ttdoc">Two fluid interface problem in a rectangular domain which is periodic in the x direction.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00173">elastic_two_layer_interface.cc:174</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="mesh"></a>
+The mesh class</h1>
+<p>In the <a href="../../single_layer_free_surface/html/index.html#main">previous example</a> we employed <code>oomph-lib's</code> <code>ElasticRectangularQuadMesh</code>. If we wanted to solve the same single-layer problem but with spatial adaptivity we would simply use that mesh's refineable counterpart, the <code>ElasticRefineableRectangularQuadMesh</code>. For this two-layer problem, however, it is convenient to define a new mesh class which contains an additional &lsquo;boundary&rsquo; which corresponds to the interface between the two fluids. We start by defining the new class (which is templated by the element type) and inheriting from <code>ElasticRefineableRectangularQuadMesh</code>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==start_of_specific_mesh_class==========================================</span></div>
+<div class="line"><span class="comment">/// Two layer mesh which employs a pseudo-solid node-update strategy.</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// This class is essentially a wrapper to an </span></div>
+<div class="line"><span class="comment">/// ElasticRefineableRectangularQuadMesh, with an additional boundary</span></div>
+<div class="line"><span class="comment">/// to represent the interface between the two fluid layers.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a> :</div>
+<div class="line"> <span class="keyword">public</span> <span class="keyword">virtual</span> ElasticRefineableRectangularQuadMesh&lt;ELEMENT&gt;</div>
+<div class="line">{</div>
+</div><!-- fragment --><p> Next we define the mesh's constructor. We pass it the usual parameters, including a boolean flag which indicates whether or not the mesh is periodic in the <img class="formulaInl" alt="$ x $" src="form_60.png" width="8" height="6"/> direction.</p>
+<div class="fragment"><div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in x-direction, number of</span></div>
+<div class="line"><span class="comment"> /// elements in y-direction in bottom and top layer, respectively,</span></div>
+<div class="line"><span class="comment"> /// axial length and height of top and bottom layers, a boolean</span></div>
+<div class="line"><span class="comment"> /// flag to make the mesh periodic in the x-direction, and pointer </span></div>
+<div class="line"><span class="comment"> /// to timestepper (defaults to Steady timestepper)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>, </div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny1</a>,</div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny2</a>, </div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">lx</a>,</div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a>,</div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a>,</div>
+<div class="line">                               <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">periodic_in_x</a>,</div>
+<div class="line">                               <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">TimeStepper</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">time_stepper_pt</a>=</div>
+<div class="line">                               &amp;<a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">Mesh::Default_TimeStepper</a>)</div>
+<div class="line">  : <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">RectangularQuadMesh</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny2</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">lx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a>,</div>
+<div class="line">                                 <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">periodic_in_x</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">time_stepper_pt</a>),</div>
+<div class="line">    <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticRectangularQuadMesh</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny2</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">lx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a>,</div>
+<div class="line">                                        <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">periodic_in_x</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">time_stepper_pt</a>),</div>
+<div class="line">    ElasticRefineableRectangularQuadMesh&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>&gt;(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny2</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">lx</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a>,</div>
+<div class="line">                                                  <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">periodic_in_x</a>,</div>
+<div class="line">                                                  <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">time_stepper_pt</a>)</div>
+<div class="line">  {</div>
+</div><!-- fragment --><p> We have so far created an <code>ElasticRefineableRectangularQuadMesh</code>, which has four boundaries corresponding to the edges of our problem's domain. We wish to define a fifth boundary which corresponds to the interface position. First we set the number of boundaries to five and then convert all the <code>Nodes</code> which lie on the interface into <code>BoundaryNodes</code>. These are then added to the fifth boundary.</p>
+<div class="fragment"><div class="line">   <span class="comment">// Set the number of boundaries to 5</span></div>
+<div class="line">   this-&gt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">set_nboundary</a>(5);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over horizontal elements</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to element in lower fluid adjacent to interface</span></div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">FiniteElement</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a> = this-&gt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">finite_element_pt</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nx</a>*(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ny1</a>-1)+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Determine number of nodes in this element</span></div>
+<div class="line">     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// The last three nodes in this element are those on the interface.</span></div>
+<div class="line">     <span class="comment">// Loop over these nodes and convert them to boundary nodes.</span></div>
+<div class="line">     <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>&lt;3;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>++)</div>
+<div class="line">      {</div>
+<div class="line">       <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">Node</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nod_pt</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a>-3+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>);</div>
+<div class="line">       this-&gt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">convert_to_boundary_node</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nod_pt</a>);</div>
+<div class="line">       this-&gt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">add_boundary_node</a>(4,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">nod_pt</a>);</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="comment">// End of loop over horizontal elements</span></div>
+</div><!-- fragment --><p> All that remains is to set up the boundary element information. This is required so that we can easily have access to the bulk elements either side of this new boundary.</p>
+<div class="fragment"><div class="line">   <span class="comment">// Set up the boundary element information</span></div>
+<div class="line">   this-&gt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">setup_boundary_element_info</a>();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// End of specific mesh class</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="problem_class"></a>
+The problem class</h1>
+<p>This is very similar to the problem class in the <a href="../../single_layer_free_surface/html/index.html#problem_class">previous example</a>, with a few modifications. Because we shall use spatial adaptivity when solving this problem, we define the following two functions, which will be called before and after mesh adaptation.</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Strip off the interface elements before adapting the bulk mesh</span></div>
+<div class="line"> <span class="keywordtype">void</span> actions_before_adapt();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Rebuild the mesh of interface elements after adapting the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> actions_after_adapt();</div>
+</div><!-- fragment --><p> These two functions will employ two helper functions which are responsible for the creation and deletion of the interface elements.</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Create the 1d interface elements</span></div>
+<div class="line"> <span class="keywordtype">void</span> create_interface_elements();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Delete the 1d interface elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> delete_interface_elements();</div>
+</div><!-- fragment --><p> The final modification to the problem class is the addition of a helper function which pins a pressure value in a specified element and assigns a specific value.</p>
+<div class="fragment"><div class="line"><span class="comment"> /// Fix pressure in element e at pressure dof pdof and set to pvalue</span></div>
+<div class="line"> <span class="keywordtype">void</span> fix_pressure(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>,</div>
+<div class="line">                   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">pdof</a>, </div>
+<div class="line">                   <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">pvalue</a>)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Fix the pressure at that element</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">mesh_pt</a>()-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>))-&gt;</div>
+<div class="line">                          fix_pressure(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">pdof</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">pvalue</a>);</div>
+<div class="line">  }</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>The constructor starts by building the timestepper and setting the dimensions of the mesh. The number of elements in the <img class="formulaInl" alt="$ x_1 $" src="form_21.png" width="13" height="9"/> and <img class="formulaInl" alt="$ x_2 $" src="form_26.png" width="13" height="9"/> directions in both fluid layers are specified.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_constructor==================================================</span></div>
+<div class="line"><span class="comment">/// Constructor for two fluid interface problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><a class="code hl_function" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Allocate the timestepper (this constructs the time object as well)</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">add_time_stepper_pt</a>(<span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">TIMESTEPPER</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define number of elements in x direction</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_x</a> = 3;</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Define number of elements in y direction in lower fluid (fluid 1)</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y1</a> = 3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define number of elements in y direction in upper fluid (fluid 2)</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y2</a> = 3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define width of domain and store as class member data</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">l_x</a> = 1.0;</div>
+<div class="line"> this-&gt;Lx = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">l_x</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define height of lower fluid layer</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a> = 1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define height of upper fluid layer</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a> = 1.0;</div>
+<div class="ttc" id="aclassInterfaceProblem_html_a5889be7fc8eab5d222f1bfb750c845ba"><div class="ttname"><a href="classInterfaceProblem.html#a5889be7fc8eab5d222f1bfb750c845ba">InterfaceProblem::InterfaceProblem</a></div><div class="ttdeci">InterfaceProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00259">elastic_two_layer_interface.cc:260</a></div></div>
+</div><!-- fragment --><p> Next we build the bulk mesh, create an error estimator for the problem and set the maximum refinement level.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Build and assign the &quot;bulk&quot; mesh (the &quot;true&quot; boolean flag tells</span></div>
+<div class="line"> <span class="comment">// the mesh constructor that the domain is periodic in x)</span></div>
+<div class="line"> Bulk_mesh_pt = <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticRefineableTwoLayerMesh&lt;ELEMENT&gt;</a></div>
+<div class="line">  (<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_x</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y1</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y2</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">l_x</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h1</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">h2</a>,<span class="keyword">true</span>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">time_stepper_pt</a>());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create and set the error estimator for spatial adaptivity</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;spatial_error_estimator_pt() = <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">Z2ErrorEstimator</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the maximum refinement level for the mesh to 4</span></div>
+<div class="line"> Bulk_mesh_pt-&gt;max_refinement_level() = 4;</div>
+</div><!-- fragment --><p> An empty surface mesh is created and then populated with a call to <code>create_interface_elements()</code>. The bulk and surface meshes are then combined to form the global mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Create the &quot;surface&quot; mesh that will contain only the interface</span></div>
+<div class="line"> <span class="comment">// elements. The constructor just creates the mesh without giving</span></div>
+<div class="line"> <span class="comment">// it any elements, nodes, etc.</span></div>
+<div class="line"> Surface_mesh_pt = <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">Mesh</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create interface elements at the boundary between the two fluids,</span></div>
+<div class="line"> <span class="comment">// and add them to the surface mesh</span></div>
+<div class="line"> create_interface_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the two sub meshes to the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">add_sub_mesh</a>(Bulk_mesh_pt);</div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">add_sub_mesh</a>(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine all sub-meshes into a single mesh</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">build_global_mesh</a>();</div>
+</div><!-- fragment --><p> On the top and bottom boundaries ( <img class="formulaInl" alt="$ y = 2.0 $" src="form_61.png" width="40" height="11"/> and <img class="formulaInl" alt="$ y = 0.0 $" src="form_62.png" width="40" height="11"/>) we apply the no-slip condition by pinning both velocity components. On the left and right symmetry boundaries ( <img class="formulaInl" alt="$ x = 0.0 $" src="form_63.png" width="41" height="9"/> and <img class="formulaInl" alt="$ x =
+1.0 $" src="form_64.png" width="41" height="9"/>) we pin the <img class="formulaInl" alt="$ x $" src="form_60.png" width="8" height="6"/> component of the velocity but leave the <img class="formulaInl" alt="$ y $" src="form_65.png" width="8" height="9"/> component unconstrained. We pin the vertical displacement of the nodes on the solid boundaries (since these must remain stationary) and pin the horizontal displacement of all nodes in the mesh.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the boundary conditions for this problem</span></div>
+<div class="line"> <span class="comment">// --------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// All values are free by default -- just pin the ones that have</span></div>
+<div class="line"> <span class="comment">// Dirichlet conditions here</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine number of mesh boundaries</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_boundary</a> = Bulk_mesh_pt-&gt;nboundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over mesh boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_boundary</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Determine number of nodes on boundary b</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nboundary_node(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Loop over nodes on boundary b</span></div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Fluid boundary conditions:</span></div>
+<div class="line">     <span class="comment">// --------------------------</span></div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin x-component of velocity (no slip/penetration)</span></div>
+<div class="line">     <span class="comment">// on all boundaries other than the interface (b=4)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>!=4) { Bulk_mesh_pt-&gt;boundary_node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;pin(0); }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin y-component of velocity on both solid boundaries (no penetration)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>==0 || <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>==2) { Bulk_mesh_pt-&gt;boundary_node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;pin(1); }</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line">     <span class="comment">// --------------------------</span></div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Pin vertical mesh position on both solid boundaries (no penetration)</span></div>
+<div class="line">     <span class="keywordflow">if</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>==0 || <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>==2) { Bulk_mesh_pt-&gt;boundary_node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">b</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;pin_position(1); }</div>
+<div class="line"> </div>
+<div class="line">    } <span class="comment">// End of loop over nodes on boundary b</span></div>
+<div class="line">  } <span class="comment">// End of loop over mesh boundaries</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin horizontal position of all nodes</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>++) { Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;pin_position(0); }</div>
+</div><!-- fragment --><p> Next we create a generalised Hookean constitutive equation for the pseudo-solid mesh. This constitutive equation is discussed in <a href="../../../solid/disk_compression/html/index.html#hooke">another tutorial</a>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Define a constitutive law for the solid equations: generalised Hookean</span></div>
+<div class="line"> Constitutive_law_pt = <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">GeneralisedHookean</a>(&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a3962c36313826b19f216f6bbbdd6a477">Global_Physical_Variables::Nu</a>);</div>
+</div><!-- fragment --><p> We loop over the bulk elements in the lower fluid and pass them pointers to the Reynolds and Womersley numbers, <img class="formulaInl" alt="$ Re $" src="form_53.png" width="15" height="10"/> and <img class="formulaInl" alt="$
+Re\, St $" src="form_66.png" width="30" height="10"/>, the product of the Reynolds number and the inverse of the Froude number, <img class="formulaInl" alt="$ Re/Fr $" src="form_55.png" width="38" height="14"/>, the direction of gravity, <img class="formulaInl" alt="$ G $" src="form_57.png" width="10" height="10"/>, the constitutive law and the global time object, created when we called <code>Problem::add_time_stepper_pt(...)</code> above. Note that we do not assign pointers for the viscosity and density ratios, <img class="formulaInl" alt="$ R_\mu $" src="form_8.png" width="15" height="14"/> and <img class="formulaInl" alt="$
+R_\rho $" src="form_67.png" width="15" height="14"/>, since these take the default value in the lower fluid.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> <span class="comment">// ----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute number of bulk elements in lower/upper fluids</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_lower</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_x</a>*<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y1</a>;</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_upper</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_x</a>*<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_y2</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over bulk elements in lower fluid</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_lower</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> *<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Reynolds number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Womersley number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the product of the Reynolds number and the inverse of the</span></div>
+<div class="line">   <span class="comment">// Froude number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_invfr_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the direction of gravity</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;g_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of loop over bulk elements in lower fluid</span></div>
+</div><!-- fragment --><p> We then do the same for the bulk elements in the upper fluid, and this time we do assign pointers for the viscosity and density ratios.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Loop over bulk elements in upper fluid</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_lower</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_lower</a>+<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_upper</a>);<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a> *<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Reynolds number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Womersley number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the product of the Reynolds number and the inverse of the</span></div>
+<div class="line">   <span class="comment">// Froude number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;re_invfr_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#aa6286f02b476912dd7550eced538331a">Global_Physical_Variables::ReInvFr</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the viscosity ratio</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;viscosity_ratio_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the density ratio</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;density_ratio_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a80a34b6dfb7e1501966b8d6c7501e718">Global_Physical_Variables::Density_Ratio</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the direction of gravity</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;g_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Physical__Variables.html#a37a6f46efcb35b4bd12c73f19d741020">Global_Physical_Variables::G</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the constitutive law</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;constitutive_law_pt() = Constitutive_law_pt;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of loop over bulk elements in upper fluid</span></div>
+</div><!-- fragment --><p> We then pin one pressure degree of freedom.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set the pressure in the first element at &#39;node&#39; 0 to 0.0</span></div>
+<div class="line"> fix_pressure(0,0,0.0);</div>
+</div><!-- fragment --><p> At this point we set up the boundary conditions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Apply the boundary conditions</span></div>
+<div class="line"> set_boundary_conditions();</div>
+</div><!-- fragment --><p> Finally, we set up the equation numbering scheme.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set up equation numbering scheme</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">assign_eqn_numbers</a>() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of constructor</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="set_initial_condition"></a>
+Initial conditions</h1>
+<p>The <code>set_initial_conditions()</code> function is identical to that in the <a href="../../single_layer_free_surface/html/index.html#set_initial_condition">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="set_boundary_conditions"></a>
+Boundary conditions</h1>
+<p>The <code>set_boundary_conditions()</code> function is very similar to that in the <a href="../../single_layer_free_surface/html/index.html#set_boundary_conditions">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="before_adapt"></a>
+Actions before adaptation</h1>
+<p>The mesh adaptation is driven by the error estimates in the bulk elements and only performed for that mesh. The interface elements must therefore be removed before adaptation. We do this by calling the function <code>delete_interface_elements()</code>, and then rebuilding the <code>Problem's</code> global mesh.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_actions_before_adapt=========================================</span></div>
+<div class="line"><span class="comment">/// Strip off the interface elements before adapting the bulk mesh</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::actions_before_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Delete the interface elements and wipe the surface mesh</span></div>
+<div class="line"> delete_interface_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">rebuild_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of actions_before_adapt</span></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a944e5754e9b3f3394211b6c62f705abe"><div class="ttname"><a href="classInterfaceProblem.html#a944e5754e9b3f3394211b6c62f705abe">InterfaceProblem::actions_before_adapt</a></div><div class="ttdeci">void actions_before_adapt()</div><div class="ttdoc">Strip off the interface elements before adapting the bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00502">elastic_two_layer_interface.cc:502</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="after_adapt"></a>
+Actions after adapt</h1>
+<p>After the bulk mesh has been adapted we must create new interface elements and rebuild the problem's global mesh. Any newly-created boundary nodes will automatically have the appropriate boundary conditions applied; however, we must remember to pin the horizontal displacement of all nodes throughout the bulk of the domain.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_actions_after_adapt==========================================</span></div>
+<div class="line"><span class="comment">/// Rebuild the mesh of interface elements after adapting the bulk mesh</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::actions_after_adapt</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Create the interface elements</span></div>
+<div class="line"> this-&gt;create_interface_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">rebuild_global_mesh</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin horizontal displacement of all nodes</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>++) { Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;pin_position(0); }</div>
+<div class="ttc" id="aclassInterfaceProblem_html_a1c8a5dee970dccc3f1da993cf531872d"><div class="ttname"><a href="classInterfaceProblem.html#a1c8a5dee970dccc3f1da993cf531872d">InterfaceProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Rebuild the mesh of interface elements after adapting the bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00518">elastic_two_layer_interface.cc:518</a></div></div>
+</div><!-- fragment --><p> To ensure that precisely one fluid pressure degree of freedom is pinned, we unpin all pressure degrees of freedom, pin any redundant nodal pressures which have arisen following mesh adaptation and call <code>fix_pressure(...)</code>. We also pin any redundant solid pressures before re-setting the boundary conditions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Unpin all fluid pressure dofs</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">RefineableNavierStokesEquations&lt;2&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">  unpin_all_pressure_dofs</a>(Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin redudant fluid pressure dofs</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">RefineableNavierStokesEquations&lt;2&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">  pin_redundant_nodal_pressures</a>(Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now set the pressure in the first element at &#39;node&#39; 0 to 0.0</span></div>
+<div class="line"> fix_pressure(0,0,0.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the redundant solid pressures (if any)</span></div>
+<div class="line"> <a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">PVDEquationsBase&lt;2&gt;::pin_redundant_nodal_solid_pressures</a>(</div>
+<div class="line">  Bulk_mesh_pt-&gt;element_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Reset the boundary conditions</span></div>
+<div class="line"> set_boundary_conditions();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of actions_after_adapt</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="create_interface_elements"></a>
+Create interface elements</h1>
+<p>This function is used to &lsquo;attach&rsquo; interface elements to the upper face of those bulk elements in the lower fluid which are adjacent to the interface. Firstly, we loop over all bulk elements (in either fluid) which are adjacent to the interface.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_create_interface_elements====================================</span></div>
+<div class="line"><span class="comment">/// Create interface elements between the two fluids in the mesh</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// pointed to by Bulk_mesh_pt and add the elements to the Mesh object</span></div>
+<div class="line"><span class="comment">/// pointed to by Surface_mesh_pt.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::create_interface_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Determine number of bulk elements adjacent to interface (boundary 4)</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_element</a> = this-&gt;Bulk_mesh_pt-&gt;nboundary_element(4);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over those elements adjacent to the interface</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_element</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to the interface</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">bulk_elem_pt</a> = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ELEMENT</a>*<span class="keyword">&gt;</span>(</div>
+<div class="line">    this-&gt;Bulk_mesh_pt-&gt;boundary_element_pt(4,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>));</div>
+<div class="ttc" id="aclassInterfaceProblem_html_a94e2cc71fe27c0c329030874e05734b8"><div class="ttname"><a href="classInterfaceProblem.html#a94e2cc71fe27c0c329030874e05734b8">InterfaceProblem::create_interface_elements</a></div><div class="ttdeci">void create_interface_elements()</div><div class="ttdoc">Create the 1d interface elements.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00558">elastic_two_layer_interface.cc:558</a></div></div>
+</div><!-- fragment --><p> In order to determine whether the bulk element we are currently looking at is in the upper or lower fluid, we check to see whether that element's <code>viscosity_ratio_pt</code> is pointing to the address of <code><a class="el" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f" title="Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc....">Global_Physical_Variables::Viscosity_Ratio</a></code>. If it is, then that bulk element is in the upper fluid, and we ignore it. Otherwise, we determine the face of the bulk element that corresponds to the interface and create an interface element on that face. The newly-created element is then added to the surface mesh.</p>
+<div class="fragment"><div class="line">   <span class="comment">// We only want to attach interface elements to the bulk elements</span></div>
+<div class="line">   <span class="comment">// which are BELOW the interface, and so we filter out those above by</span></div>
+<div class="line">   <span class="comment">// referring to the viscosity_ratio_pt</span></div>
+<div class="line">   <span class="keywordflow">if</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">bulk_elem_pt</a>-&gt;viscosity_ratio_pt()</div>
+<div class="line">      !=&amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#adb51428300a01b19395c43c0d3586d6f">Global_Physical_Variables::Viscosity_Ratio</a>)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Find index of the face of element e that corresponds to the interface</span></div>
+<div class="line">     <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">face_index</a> = this-&gt;Bulk_mesh_pt-&gt;face_index_at_boundary(4,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Create the interface element</span></div>
+<div class="line">     <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">FiniteElement</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">interface_element_element_pt</a> =</div>
+<div class="line">      <span class="keyword">new</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">bulk_elem_pt</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">face_index</a>);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Add the interface element to the surface mesh</span></div>
+<div class="line">     this-&gt;Surface_mesh_pt-&gt;add_element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">interface_element_element_pt</a>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> Finally, we pass the Strouhal and Capillary numbers to the interface elements.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the setup to make the elements fully functional</span></div>
+<div class="line"> <span class="comment">// --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Determine number of 1D interface elements in mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_interface_element</a> = this-&gt;Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the interface elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_interface_element</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralisedElement to the present element</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;</a>* <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a> = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">ElasticLineFluidInterfaceElement&lt;ELEMENT&gt;</a>*<span class="keyword">&gt;</span></div>
+<div class="line">    (Surface_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Strouhal number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a4b6ef72bd221361c37f5b9a4a6899afc">Global_Physical_Variables::St</a>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the Capillary number</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">el_pt</a>-&gt;ca_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a8b32b93d2e546f9375ec418474107838">Global_Physical_Variables::Ca</a>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of loop over interface elements</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of create_interface_elements</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="delete_interface_elements"></a>
+Delete interface elements</h1>
+<p>This function loops over all the interface elements (<a class="el" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7" title="Constructor: Pass number of elements in x-direction, number of elements in y-direction in bottom and ...">i.e</a>. those in the surface mesh) and deletes them and their storage.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_delete_interface_elements====================================</span></div>
+<div class="line"><span class="comment">/// Delete the interface elements and wipe the surface mesh</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::delete_interface_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Determine number of interface elements</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_interface_element</a> = Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over interface elements and delete</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_interface_element</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">delete</span> Surface_mesh_pt-&gt;element_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">e</a>);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wipe the mesh</span></div>
+<div class="line"> Surface_mesh_pt-&gt;flush_element_and_node_storage();</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of delete_interface_elements</span></div>
+<div class="ttc" id="aclassInterfaceProblem_html_ac2aaab086d9bbd3913ce8bc0d244413d"><div class="ttname"><a href="classInterfaceProblem.html#ac2aaab086d9bbd3913ce8bc0d244413d">InterfaceProblem::delete_interface_elements</a></div><div class="ttdeci">void delete_interface_elements()</div><div class="ttdoc">Delete the 1d interface elements.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00619">elastic_two_layer_interface.cc:619</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="deform_free_surface"></a>
+Prescribing the initial free surface position</h1>
+<p>At the beginning of the simulation the interface is deformed by a prescribed function (11), implemented in the function <code>deform_free_surface(...)</code>, which cycles through the bulk mesh's <code>Nodes</code> and modifies their positions such that the nodes on the free surface follow the prescribed interface shape and the bulk nodes retain their fractional position between the solid boundaries and the (now deformed) interface.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_deform_free_surface==========================================</span></div>
+<div class="line"><span class="comment">/// Deform the mesh/free surface to a prescribed function</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">deform_free_surface</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">epsilon</a>,<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_periods</a>)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Determine number of nodes in the &quot;bulk&quot; mesh</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a> = Bulk_mesh_pt-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over all nodes in mesh</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>&lt;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_node</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Determine eulerian position of node</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">current_x_pos</a> = Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;x(0);</div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">current_y_pos</a> = Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;x(1);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Determine new vertical position of node</span></div>
+<div class="line">   <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">new_y_pos</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">current_y_pos</a></div>
+<div class="line">    + (1.0-<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">fabs</a>(1.0-<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">current_y_pos</a>))*<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">epsilon</a></div>
+<div class="line">    *(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">cos</a>(2.0*<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_periods</a>*<a class="code hl_function" href="classElasticRefineableTwoLayerMesh.html#a4f6c6b4214a7a99e94e24906d033f8f7">MathematicalConstants::Pi</a>*<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">current_x_pos</a>/Lx));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set new position</span></div>
+<div class="line">   Bulk_mesh_pt-&gt;node_pt(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n</a>)-&gt;x(1) = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">new_y_pos</a>;</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// End of deform_free_surface</span></div>
+<div class="ttc" id="aclassInterfaceProblem_html_a2319232b08d9df1ab473f6cbd40939d5"><div class="ttname"><a href="classInterfaceProblem.html#a2319232b08d9df1ab473f6cbd40939d5">InterfaceProblem::deform_free_surface</a></div><div class="ttdeci">void deform_free_surface(const double &amp;epsilon, const unsigned &amp;n_periods)</div><div class="ttdoc">Deform the mesh/free surface to a prescribed function.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00641">elastic_two_layer_interface.cc:642</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>This function is identical to that in the <a href="../../single_layer_free_surface/html/index.html#doc">previous example</a>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="unsteady_run"></a>
+The timestepping loop</h1>
+<p>The function <code>unsteady_run(...)</code> is used to perform the timestepping procedure, and is very similar to that in the <a href="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</a>. The only changes arise due to this problem being solved with spatial adaptivity. We start by deforming the interface in the manner specified by equation (11).</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_unsteady_run=================================================</span></div>
+<div class="line"><span class="comment">/// Perform run up to specified time t_max with given timestep dt</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> ELEMENT, <span class="keyword">class</span> TIMESTEPPER&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">InterfaceProblem&lt;ELEMENT,TIMESTEPPER&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">unsteady_run</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t_max</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a>)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set value of epsilon</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">epsilon</a> = 0.1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set number of periods for cosine term</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_periods</a> = 1;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Deform the mesh/free surface</span></div>
+<div class="line"> deform_free_surface(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">epsilon</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_periods</a>);</div>
+<div class="ttc" id="aclassInterfaceProblem_html_adf1f4e43d10939e4323e0e315b711085"><div class="ttname"><a href="classInterfaceProblem.html#adf1f4e43d10939e4323e0e315b711085">InterfaceProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(const double &amp;t_max, const double &amp;dt)</div><div class="ttdoc">Do unsteady run up to maximum time t_max with given timestep dt.</div><div class="ttdef"><b>Definition</b> <a href="elastic__two__layer__interface_8cc_source.html#l00722">elastic_two_layer_interface.cc:723</a></div></div>
+</div><!-- fragment --><p> We then create a <code>DocInfo</code> object to store the output directory and the label for the output files.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Initialise DocInfo object</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">DocInfo</a> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise counter for solutions</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>.number()=0;</div>
+</div><!-- fragment --><p> Next we open and initialise the trace file.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">filename</a>[100];   </div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">snprintf</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">filename</a>, <span class="keyword">sizeof</span>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">filename</a>), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>.directory().c_str());</div>
+<div class="line"> Trace_file.open(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">filename</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;time, interface height&quot;</span> &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p> Before using any of <code>oomph-lib's</code> timestepping functions, the timestep <img class="formulaInl" alt="$ dt $" src="form_68.png" width="11" height="10"/> must be passed to the problem's timestepping routines by calling the function <code>Problem::initialise_dt(...)</code> which sets the weights for all timesteppers in the problem. Next we assign the initial conditions by calling <code>Problem::set_initial_condition()</code>, which was discussed <a href="#set_initial_condition">above</a>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Initialise timestep</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">initialise_dt</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set initial condition</span></div>
+<div class="line"> set_initial_condition();</div>
+</div><!-- fragment --><p> We limit number of spatial adaptations per timestep to two and refine the problem uniformly twice, before documenting the initial conditions.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Maximum number of spatial adaptations per timestep</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">max_adapt</a> = 2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Call refine_uniformly twice</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">i</a>=0;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">i</a>&lt;2;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">i</a>++) { <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">refine_uniformly</a>(); }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial solution</span></div>
+<div class="line"> doc_solution(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment counter for solutions</span></div>
+<div class="line"> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>.number()++;</div>
+</div><!-- fragment --><p> Finally, we determine the number of timesteps to be performed and perform the actual timestepping loop. For each timestep the function <code>unsteady_newton_solve(dt,max_adapt,first_timestep)</code> is called and the solution documented. The boolean flag <code>first_timestep</code> is used to instruct the code to re-assign the initial conditions after every mesh adaptation. After the first timestep, the maximum number of adaptations for all timesteps is reset to one. We refer to <a href="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html#spatial_adapt">another example</a> for a discussion of why this is recommended.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Determine number of timesteps</span></div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_timestep</a> = <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">unsigned</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t_max</a>/<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Are we on the first timestep? At this point, yes!</span></div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">first_timestep</a> = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Timestepping loop</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t</a>=1;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t</a>&lt;=<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_timestep</a>;<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t</a>++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Output current timestep to screen</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">cout</a> &lt;&lt; <span class="stringliteral">&quot;\nTimestep &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">t</a> &lt;&lt; <span class="stringliteral">&quot; of &quot;</span> &lt;&lt; <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">n_timestep</a> &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Take one fixed timestep with spatial adaptivity</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">unsteady_newton_solve</a>(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">dt</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">max_adapt</a>,<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">first_timestep</a>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// No longer on first timestep, so set first_timestep flag to false</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">first_timestep</a> = <span class="keyword">false</span>; </div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Reset maximum number of adaptations for all future timesteps</span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">max_adapt</a> = 1;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   doc_solution(<a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment counter for solutions </span></div>
+<div class="line">   <a class="code hl_class" href="classElasticRefineableTwoLayerMesh.html">doc_info</a>.number()++;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">// End of timestepping loop</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// End of unsteady_run</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments</h1>
+<ul>
+<li>Since the problem discussed in this example has the fluid velocity prescribed along the entire domain boundary, the fluid pressure is only determined up to an arbitrary constant and hence we fix the pressure at a single point in the domain. However, it is worth noting that in the case of Crouzeix&ndash;Raviart elements being used in a problem with spatial adaptivity the notion of a fixed pressure is slightly subtle. In this example we fix the first pressure value of the first element in the mesh to zero, which in the case of Crouzeix&ndash;Raviart elements means that we fix the average value of the pressure to zero in this element. Were this element to be refined, however, we would then be imposing a zero pressure elsewhere in the domain, causing the entire pressure field to &lsquo;jump&rsquo; from one timestep to the next. Since the problem is incompressible this would not affect the computed velocity fields, but could lead to some confusion when studying the time evolution of the pressure field.</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="exercises"></a>
+Exercises</h1>
+<ul>
+<li>In the <a href="../../single_layer_free_surface/html/index.html">single-layer example</a> we chose to discretise the problem using Crouzeix&ndash;Raviart elements, but we could also have chosen to use Taylor&ndash;Hood elements. Why can we not use Taylor&ndash;Hood elements to solve this two-layer problem?</li>
+<li>What happens if we do not call <code>setup_boundary_element_info()</code> in the <a href="#mesh">mesh constructor</a>? Why is this?</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/navier_stokes/two_layer_interface/">demo_drivers/navier_stokes/two_layer_interface/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc">demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:15:22
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

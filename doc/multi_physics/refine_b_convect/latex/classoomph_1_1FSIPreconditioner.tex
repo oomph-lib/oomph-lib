@@ -1,0 +1,576 @@
+\doxysection{oomph\+::FSIPreconditioner Class Reference}
+\hypertarget{classoomph_1_1FSIPreconditioner}{}\label{classoomph_1_1FSIPreconditioner}\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+
+
+FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an "{}exact"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks.  
+
+
+
+
+{\ttfamily \#include $<$fsi\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::FSIPreconditioner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1FSIPreconditioner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78}{FSIPreconditioner}} (Problem \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: By default use block triangular form with retained fluid on solid terms. A problem pointer is required for the underlying Navier\+Stokes\+Schur\+Complement\+Preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4}{FSIPreconditioner}} (const \mbox{\hyperlink{classoomph_1_1FSIPreconditioner}{FSIPreconditioner}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt}} (Preconditioner \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}{solid\+\_\+preconditioner\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}{solid\+\_\+preconditioner\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Read-\/only access to solid preconditoner (use set\+\_\+... to set it) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b}{use\+\_\+block\+\_\+diagonal\+\_\+version}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/diagonal preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/triangular preconditioner in which action of fluid dofs onto solid equations is retained. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid}} ()
+\begin{DoxyCompactList}\small\item\em Switch to block-\/triangular preconditioner in which action of solid dofs onto fluid equations is retained. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80}{set\+\_\+navier\+\_\+stokes\+\_\+mesh}} (Mesh \texorpdfstring{$\ast$}{*}mesh\+\_\+pt, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh=false)
+\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are more than one type of elements in same mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5}{set\+\_\+wall\+\_\+mesh}} (Mesh \texorpdfstring{$\ast$}{*}mesh\+\_\+pt, const bool \&allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh=false)
+\begin{DoxyCompactList}\small\item\em Setter function for the mesh containing the block-\/preconditionable FSI solid elements. The optional argument indicates if there are more than one type of elements in the same mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b}{preconditioner\+\_\+solve}} (const Double\+Vector \&r, Double\+Vector \&z)
+\begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
+Navier\+Stokes\+Schur\+Complement\+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}{navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Access function to the Navier Stokes preconditioner (inexact solver) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Navier\+Stokes\+Schur\+Complement\+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer the Navier Stokes preconditioner (inexact solver) \end{DoxyCompactList}\item 
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}{Solid\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the solid preconditioner (inexact solver) \end{DoxyCompactList}\item 
+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fluid/solid interaction matrix. \end{DoxyCompactList}\item 
+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to solid/fluid solid interaction matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean indicating the preconditioner has been set up. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}
+\begin{DoxyCompactList}\small\item\em Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}
+\begin{DoxyCompactList}\small\item\em Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Set Doc\+\_\+time to true for outputting results of timings. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the navier stokes mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a}{Wall\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em pointer to the solid mesh \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FSI preconditioner. This extracts upper/lower triangular blocks in the 3x3 overall block matrix structure arising from the monolithic discretisation of FSI problems with algebraic node updates. Dofs are decomposed into fluid velocity, pressure and solid unknowns. Navier\+Stokes\+Schur\+Complement\+Preconditioner is used as the inexact solver for the fluid block; Super\+LU (in its incarnation as an "{}exact"{} preconditioner) is used for the solid block. By default we retain the fluid on solid off diagonal blocks. 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00050}{50}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78}\label{classoomph_1_1FSIPreconditioner_aee06474cc9aabbde2dacb2cff1317a78} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!FSIPreconditioner@{FSIPreconditioner}}
+\index{FSIPreconditioner@{FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{FSIPreconditioner()}{FSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{Problem \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: By default use block triangular form with retained fluid on solid terms. A problem pointer is required for the underlying Navier\+Stokes\+Schur\+Complement\+Preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{56}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc}\label{classoomph_1_1FSIPreconditioner_a787995de6ec09a9113b1b9a8b7c4f9cc} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!````~FSIPreconditioner@{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner}}
+\index{````~FSIPreconditioner@{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FSIPreconditioner()}{\string~FSIPreconditioner()}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Clean up. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{94}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4}\label{classoomph_1_1FSIPreconditioner_a598032c73f37fb9d4202ca666f2567d4} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!FSIPreconditioner@{FSIPreconditioner}}
+\index{FSIPreconditioner@{FSIPreconditioner}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{FSIPreconditioner()}{FSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+FSIPreconditioner\+::\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FSIPreconditioner}{FSIPreconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340}\label{classoomph_1_1FSIPreconditioner_a932cb1cf6a20503a5cbb43a6b67f2340} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
+\index{disable\_doc\_time@{disable\_doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_time()}{disable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::disable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00212}{212}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0}\label{classoomph_1_1FSIPreconditioner_a2836b05d6eb81b807bd53b50dad7d3a0} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
+\index{enable\_doc\_time@{enable\_doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_time()}{enable\_doc\_time()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::enable\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable documentation of time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00206}{206}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426}\label{classoomph_1_1FSIPreconditioner_a26be7d10862b057d139e4e0de102b426} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!navier\_stokes\_preconditioner\_pt@{navier\_stokes\_preconditioner\_pt}}
+\index{navier\_stokes\_preconditioner\_pt@{navier\_stokes\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{navier\_stokes\_preconditioner\_pt()}{navier\_stokes\_preconditioner\_pt()}}
+{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner \texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the Navier Stokes preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00199}{199}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b}\label{classoomph_1_1FSIPreconditioner_a31c84c3ca19c31488acd0bf2fe333a6b} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const Double\+Vector \&}]{r,  }\item[{Double\+Vector \&}]{z }\end{DoxyParamCaption})}
+
+
+
+Apply preconditioner to r. 
+
+Apply preconditioner to Vector r. 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{374}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80}\label{classoomph_1_1FSIPreconditioner_a5d70612246bd08bec6c7b373da5e9c80} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}}
+\index{set\_navier\_stokes\_mesh@{set\_navier\_stokes\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_navier\_stokes\_mesh()}{set\_navier\_stokes\_mesh()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::set\+\_\+navier\+\_\+stokes\+\_\+mesh (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{const bool \&}]{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter function for the mesh containing the block-\/preconditionable Navier-\/\+Stokes elements. The optional argument indicates if there are more than one type of elements in same mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{165}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa}\label{classoomph_1_1FSIPreconditioner_a0f21e38e18521e0946c3f3ec98a85baa} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_solid\_preconditioner\_pt@{set\_solid\_preconditioner\_pt}}
+\index{set\_solid\_preconditioner\_pt@{set\_solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_solid\_preconditioner\_pt()}{set\_solid\_preconditioner\_pt()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::set\+\_\+solid\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}\item[{Preconditioner \texorpdfstring{$\ast$}{*}}]{solid\+\_\+preconditioner\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broken assignment operator. 
+
+Set solid preconditioner (deletes existing one) 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{122}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{solid\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5}\label{classoomph_1_1FSIPreconditioner_a61d583e9d3a1596efe22b11950fb47a5} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!set\_wall\_mesh@{set\_wall\_mesh}}
+\index{set\_wall\_mesh@{set\_wall\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{set\_wall\_mesh()}{set\_wall\_mesh()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::set\+\_\+wall\+\_\+mesh (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}}]{mesh\+\_\+pt,  }\item[{const bool \&}]{allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter function for the mesh containing the block-\/preconditionable FSI solid elements. The optional argument indicates if there are more than one type of elements in the same mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{180}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e}\label{classoomph_1_1FSIPreconditioner_adadfe9f4332af610b00f1f45d1ad432e} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!setup@{setup}}
+\index{setup@{setup}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setup the preconditioner. 
+
+Setup the preconditioner. Note\+: Matrix must be a CRDouble\+Matrix. 
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{270}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{Doc\+\_\+time}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{Navier\+\_\+stokes\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{Wall\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f}\label{classoomph_1_1FSIPreconditioner_a13fb46804ec6675a26f901586c416f2f} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!solid\_preconditioner\_pt@{solid\_preconditioner\_pt}}
+\index{solid\_preconditioner\_pt@{solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{solid\_preconditioner\_pt()}{solid\_preconditioner\_pt()}}
+{\footnotesize\ttfamily Preconditioner \texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::solid\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/only access to solid preconditoner (use set\+\_\+... to set it) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{133}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{Solid\+\_\+preconditioner\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b}\label{classoomph_1_1FSIPreconditioner_a8cdc0304cf22456a8b27ef95f5560e0b} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_diagonal\_version@{use\_block\_diagonal\_version}}
+\index{use\_block\_diagonal\_version@{use\_block\_diagonal\_version}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_diagonal\_version()}{use\_block\_diagonal\_version()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+diagonal\+\_\+version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/diagonal preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{140}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69}\label{classoomph_1_1FSIPreconditioner_ad6e461da68c8e7f87b86f38fcd67ec69} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_triangular\_version\_with\_fluid\_on\_solid@{use\_block\_triangular\_version\_with\_fluid\_on\_solid}}
+\index{use\_block\_triangular\_version\_with\_fluid\_on\_solid@{use\_block\_triangular\_version\_with\_fluid\_on\_solid}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_triangular\_version\_with\_fluid\_on\_solid()}{use\_block\_triangular\_version\_with\_fluid\_on\_solid()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/triangular preconditioner in which action of fluid dofs onto solid equations is retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{148}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad}\label{classoomph_1_1FSIPreconditioner_a193bbf986401ecb843e71581460004ad} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!use\_block\_triangular\_version\_with\_solid\_on\_fluid@{use\_block\_triangular\_version\_with\_solid\_on\_fluid}}
+\index{use\_block\_triangular\_version\_with\_solid\_on\_fluid@{use\_block\_triangular\_version\_with\_solid\_on\_fluid}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{use\_block\_triangular\_version\_with\_solid\_on\_fluid()}{use\_block\_triangular\_version\_with\_solid\_on\_fluid()}}
+{\footnotesize\ttfamily void oomph\+::\+FSIPreconditioner\+::use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to block-\/triangular preconditioner in which action of solid dofs onto fluid equations is retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{156}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80}\label{classoomph_1_1FSIPreconditioner_a4c015d18092bf2bfc1db075c74006e80} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+\index{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh@{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}{Allow\_multiple\_element\_type\_in\_navier\_stokes\_mesh}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+navier\+\_\+stokes\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate if there are multiple element types in the Navier-\/\+Stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00253}{253}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5}\label{classoomph_1_1FSIPreconditioner_a87e5a1cb279243414b1b0c2a5834efb5} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Allow\_multiple\_element\_type\_in\_wall\_mesh@{Allow\_multiple\_element\_type\_in\_wall\_mesh}}
+\index{Allow\_multiple\_element\_type\_in\_wall\_mesh@{Allow\_multiple\_element\_type\_in\_wall\_mesh}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Allow\_multiple\_element\_type\_in\_wall\_mesh}{Allow\_multiple\_element\_type\_in\_wall\_mesh}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Allow\+\_\+multiple\+\_\+element\+\_\+type\+\_\+in\+\_\+wall\+\_\+mesh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00256}{256}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{set\+\_\+wall\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9}\label{classoomph_1_1FSIPreconditioner_a405ccaf05553b1bf7702cb2f25df57e9} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Doc\_time@{Doc\_time}}
+\index{Doc\_time@{Doc\_time}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Doc\_time}{Doc\_time}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Doc\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Set Doc\+\_\+time to true for outputting results of timings. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00243}{243}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00212}{disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00206}{enable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57}\label{classoomph_1_1FSIPreconditioner_a595acfea83abd9fd907c208f3b487f57} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Matrix\_vector\_product\_0\_1\_pt@{Matrix\_vector\_product\_0\_1\_pt}}
+\index{Matrix\_vector\_product\_0\_1\_pt@{Matrix\_vector\_product\_0\_1\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Matrix\_vector\_product\_0\_1\_pt}{Matrix\_vector\_product\_0\_1\_pt}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Matrix\+\_\+vector\+\_\+product\+\_\+0\+\_\+1\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to fluid/solid interaction matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00226}{226}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c}\label{classoomph_1_1FSIPreconditioner_a8b4161c521cb4160ae07bb0096eaca1c} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Matrix\_vector\_product\_1\_0\_pt@{Matrix\_vector\_product\_1\_0\_pt}}
+\index{Matrix\_vector\_product\_1\_0\_pt@{Matrix\_vector\_product\_1\_0\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Matrix\_vector\_product\_1\_0\_pt}{Matrix\_vector\_product\_1\_0\_pt}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Matrix\+\_\+vector\+\_\+product\+\_\+1\+\_\+0\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to solid/fluid solid interaction matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00229}{229}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d}\label{classoomph_1_1FSIPreconditioner_a201e3fcf3e13bd19b3871e9d3a734a1d} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}}
+\index{Navier\_stokes\_mesh\_pt@{Navier\_stokes\_mesh\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_mesh\_pt}{Navier\_stokes\_mesh\_pt}}
+{\footnotesize\ttfamily Mesh\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the navier stokes mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00246}{246}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00165}{set\+\_\+navier\+\_\+stokes\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498}\label{classoomph_1_1FSIPreconditioner_adc98903b78d0bc97c40eb733eaf6e498} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}}
+\index{Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_preconditioner\_pt}{Navier\_stokes\_preconditioner\_pt}}
+{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer the Navier Stokes preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00220}{220}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00199}{navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346}\label{classoomph_1_1FSIPreconditioner_ad8d4b031c62a4ec74fad432a6bf27346} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
+\index{Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Preconditioner\_has\_been\_setup}{Preconditioner\_has\_been\_setup}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean indicating the preconditioner has been set up. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00232}{232}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e}\label{classoomph_1_1FSIPreconditioner_ada9ff0aa8a1b15dea196a6d753ec740e} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Retain\_fluid\_onto\_solid\_terms@{Retain\_fluid\_onto\_solid\_terms}}
+\index{Retain\_fluid\_onto\_solid\_terms@{Retain\_fluid\_onto\_solid\_terms}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Retain\_fluid\_onto\_solid\_terms}{Retain\_fluid\_onto\_solid\_terms}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Retain\+\_\+fluid\+\_\+onto\+\_\+solid\+\_\+terms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag used to indicate that the fluid onto solid interaction terms are to be retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00240}{240}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{use\+\_\+block\+\_\+diagonal\+\_\+version()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c}\label{classoomph_1_1FSIPreconditioner_acecba46494b0aa6f2035020f53be634c} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Retain\_solid\_onto\_fluid\_terms@{Retain\_solid\_onto\_fluid\_terms}}
+\index{Retain\_solid\_onto\_fluid\_terms@{Retain\_solid\_onto\_fluid\_terms}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Retain\_solid\_onto\_fluid\_terms}{Retain\_solid\_onto\_fluid\_terms}}
+{\footnotesize\ttfamily bool oomph\+::\+FSIPreconditioner\+::\+Retain\+\_\+solid\+\_\+onto\+\_\+fluid\+\_\+terms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag used to indicate that the solid onto fluid interaction terms are to be retained. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00236}{236}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00140}{use\+\_\+block\+\_\+diagonal\+\_\+version()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00148}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+fluid\+\_\+on\+\_\+solid()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00156}{use\+\_\+block\+\_\+triangular\+\_\+version\+\_\+with\+\_\+solid\+\_\+on\+\_\+fluid()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893}\label{classoomph_1_1FSIPreconditioner_a9a6616d03bd67e2c1c406bcb6d332893} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}}
+\index{Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Solid\_preconditioner\_pt}{Solid\_preconditioner\_pt}}
+{\footnotesize\ttfamily Preconditioner\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Solid\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the solid preconditioner (inexact solver) 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00223}{223}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00122}{set\+\_\+solid\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00133}{solid\+\_\+preconditioner\+\_\+pt()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00094}{\texorpdfstring{$\sim$}{\string~}\+FSIPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a}\label{classoomph_1_1FSIPreconditioner_ae86cf988796524f905c8d6edc942816a} 
+\index{oomph::FSIPreconditioner@{oomph::FSIPreconditioner}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
+\index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!oomph::FSIPreconditioner@{oomph::FSIPreconditioner}}
+\doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
+{\footnotesize\ttfamily Mesh\texorpdfstring{$\ast$}{*} oomph\+::\+FSIPreconditioner\+::\+Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+pointer to the solid mesh 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__preconditioners_8h_source_l00249}{249}} of file \mbox{\hyperlink{fsi__preconditioners_8h_source}{fsi\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00056}{FSIPreconditioner()}}, \mbox{\hyperlink{fsi__preconditioners_8h_source_l00180}{set\+\_\+wall\+\_\+mesh()}}, and \mbox{\hyperlink{fsi__preconditioners_8h_source_l00270}{setup()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__preconditioners_8h}{fsi\+\_\+preconditioners.\+h}}\end{DoxyCompactItemize}

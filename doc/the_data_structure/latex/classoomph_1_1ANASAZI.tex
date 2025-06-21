@@ -1,0 +1,393 @@
+\doxysection{oomph\+::ANASAZI Class Reference}
+\hypertarget{classoomph_1_1ANASAZI}{}\label{classoomph_1_1ANASAZI}\index{oomph::ANASAZI@{oomph::ANASAZI}}
+
+
+Class for the \doxylink{namespaceAnasazi}{Anasazi} eigensolver.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+eigen\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::ANASAZI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1ANASAZI}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ANASAZI_af90440448c3cbbb7c21bc6ce3bbb2d0a}{ANASAZI}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}{ANASAZI}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ANASAZI}{ANASAZI}} \&)
+\begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}{\texorpdfstring{$\sim$}{\string~}\+ANASAZI}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, delete the linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ANASAZI_a4958cbb97c74b86f2bc0c50c9c4d9d0f}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+eval}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&alpha, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&beta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+real}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+imag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\+\_\+adjoint\+\_\+problem}})
+\begin{DoxyCompactList}\small\item\em Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). NOTE\+: While the above statement is true, the implementation of this function is actually everse engineered -- trilinos actually computes the eigenvalues directly (and being an Arnoldi method it wouldn\textquotesingle{}t be able to obtain any infinite/\+NaN eigenvalues anyway. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ANASAZI_a442d849223a2714072a189610647fd4b}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+eval}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+real}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenvector\+\_\+imag}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{do\+\_\+adjoint\+\_\+problem}})
+\begin{DoxyCompactList}\small\item\em Solve the eigen problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521}{linear\+\_\+solver\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c}{linear\+\_\+solver\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1EigenSolver}{oomph\+::\+Eigen\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EigenSolver_a677b40c853c649f87b52815a6fadb2c6}{Eigen\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EigenSolver_a2ab3e3ffc0a171dd5299d12d8be5d1b2}{Eigen\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1EigenSolver}{Eigen\+Solver}} \&)
+\begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a05742af42f53f3904b06c7650e3c10c5}{\texorpdfstring{$\sim$}{\string~}\+Eigen\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1EigenSolver_a8ab55677b39f98ed8ddb1b1ae682f07b}{set\+\_\+shift}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{shift\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Set the value of the (real) shift. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1EigenSolver_a7322889dc43a88480d6eab8e5406c976}{get\+\_\+shift}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the (real) shift (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Teuchos\+::\+Scalar\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{SCT}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} SCT\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{MT}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Multi\+Vec$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Operator$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Multi\+Vec\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{MVT}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Operator\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{OPT}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Anasazi\+::\+Output\+Manager$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ANASAZI_a10a57e0c5468fd511c7458dda6f99dce}{Output\+\_\+manager\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to output manager. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ANASAZI_a4af90db68a430f129f360c00a669e809}{Linear\+\_\+solver\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a linear solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ANASAZI_a0d68fe86419ff9260bd2dd8c5e75b1e8}{Default\+\_\+linear\+\_\+solver\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a default linear solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1EigenSolver}{oomph\+::\+Eigen\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1EigenSolver_ab0ead9f50f12f8d6acf9be4521de95a1}{Sigma\+\_\+real}}
+\begin{DoxyCompactList}\small\item\em Double value that represents the real part of the shift in shifted eigensolvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for the \doxylink{namespaceAnasazi}{Anasazi} eigensolver. 
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00686}{686}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}\label{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!MT@{MT}}
+\index{MT@{MT}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{MT}{MT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} SCT\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{oomph\+::\+ANASAZI\+::\+MT}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00691}{691}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}\label{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!MV@{MV}}
+\index{MV@{MV}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{MV}{MV}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Multi\+Vec$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{oomph\+::\+ANASAZI\+::\+MV}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00692}{692}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}\label{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!MVT@{MVT}}
+\index{MVT@{MVT}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{MVT}{MVT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Multi\+Vec\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{oomph\+::\+ANASAZI\+::\+MVT}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00694}{694}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}\label{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!OP@{OP}}
+\index{OP@{OP}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{OP}{OP}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Operator$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{oomph\+::\+ANASAZI\+::\+OP}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00693}{693}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}\label{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!OPT@{OPT}}
+\index{OPT@{OPT}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{OPT}{OPT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Anasazi\+::\+Operator\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{oomph\+::\+ANASAZI\+::\+OPT}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00695}{695}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}\label{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!SCT@{SCT}}
+\index{SCT@{SCT}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{SCT}{SCT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} Teuchos\+::\+Scalar\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{oomph\+::\+ANASAZI\+::\+SCT}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00690}{690}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}\label{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!ST@{ST}}
+\index{ST@{ST}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{ST}{ST}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{oomph\+::\+ANASAZI\+::\+ST}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00689}{689}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ANASAZI_af90440448c3cbbb7c21bc6ce3bbb2d0a}\label{classoomph_1_1ANASAZI_af90440448c3cbbb7c21bc6ce3bbb2d0a} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!ANASAZI@{ANASAZI}}
+\index{ANASAZI@{ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{ANASAZI()}{ANASAZI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+ANASAZI\+::\+ANASAZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00724}{724}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00698}{Output\+\_\+manager\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}\label{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!ANASAZI@{ANASAZI}}
+\index{ANASAZI@{ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{ANASAZI()}{ANASAZI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+ANASAZI\+::\+ANASAZI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ANASAZI}{ANASAZI}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00744}{744}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}\label{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!````~ANASAZI@{\texorpdfstring{$\sim$}{\string~}ANASAZI}}
+\index{````~ANASAZI@{\texorpdfstring{$\sim$}{\string~}ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ANASAZI()}{\string~ANASAZI()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+ANASAZI\+::\texorpdfstring{$\sim$}{\string~}\+ANASAZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor, delete the linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00747}{747}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521}\label{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+ANASAZI\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the linear solver object. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00999}{999}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00701}{Linear\+\_\+solver\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00815}{solve\+\_\+eigenproblem()}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c}\label{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!linear\_solver\_pt@{linear\_solver\_pt}}
+\index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}  \& oomph\+::\+ANASAZI\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer to the linear solver object (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l01005}{1005}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00701}{Linear\+\_\+solver\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a4958cbb97c74b86f2bc0c50c9c4d9d0f}\label{classoomph_1_1ANASAZI_a4958cbb97c74b86f2bc0c50c9c4d9d0f} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!solve\_eigenproblem@{solve\_eigenproblem}}
+\index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{beta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{do\+\_\+adjoint\+\_\+problem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Solve the real eigenproblem that is assembled by elements in a mesh in a \doxylink{classoomph_1_1Problem}{Problem} object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). NOTE\+: While the above statement is true, the implementation of this function is actually everse engineered -- trilinos actually computes the eigenvalues directly (and being an Arnoldi method it wouldn\textquotesingle{}t be able to obtain any infinite/\+NaN eigenvalues anyway. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1EigenSolver_a45497b2b9ca94c6fd5ec2836bb3bc08b}{oomph\+::\+Eigen\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00788}{788}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00788}{solve\+\_\+eigenproblem()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00788}{solve\+\_\+eigenproblem()}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a442d849223a2714072a189610647fd4b}\label{classoomph_1_1ANASAZI_a442d849223a2714072a189610647fd4b} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!solve\_eigenproblem@{solve\_eigenproblem}}
+\index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+real,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector\+\_\+imag,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{do\+\_\+adjoint\+\_\+problem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Solve the eigen problem. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1EigenSolver_a3ee4360a4ceb78eebf5d4740d056e37d}{oomph\+::\+Eigen\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00815}{815}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8cc_source_l00309}{oomph\+::\+Problem\+::create\+\_\+new\+\_\+linear\+\_\+algebra\+\_\+distribution()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01486}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00701}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00999}{linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{eigen__solver_8h_source_l00065}{oomph\+::\+Eigen\+Solver\+::\+Sigma\+\_\+real}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1ANASAZI_a0d68fe86419ff9260bd2dd8c5e75b1e8}\label{classoomph_1_1ANASAZI_a0d68fe86419ff9260bd2dd8c5e75b1e8} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}}
+\index{Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{Default\_linear\_solver\_pt}{Default\_linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}\texorpdfstring{$\ast$}{*} oomph\+::\+ANASAZI\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a default linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00704}{704}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a4af90db68a430f129f360c00a669e809}\label{classoomph_1_1ANASAZI_a4af90db68a430f129f360c00a669e809} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!Linear\_solver\_pt@{Linear\_solver\_pt}}
+\index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}\texorpdfstring{$\ast$}{*} oomph\+::\+ANASAZI\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a linear solver. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00701}{701}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00999}{linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l01005}{linear\+\_\+solver\+\_\+pt()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00815}{solve\+\_\+eigenproblem()}}.
+
+\Hypertarget{classoomph_1_1ANASAZI_a10a57e0c5468fd511c7458dda6f99dce}\label{classoomph_1_1ANASAZI_a10a57e0c5468fd511c7458dda6f99dce} 
+\index{oomph::ANASAZI@{oomph::ANASAZI}!Output\_manager\_pt@{Output\_manager\_pt}}
+\index{Output\_manager\_pt@{Output\_manager\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
+\doxysubsubsection{\texorpdfstring{Output\_manager\_pt}{Output\_manager\_pt}}
+{\footnotesize\ttfamily Anasazi\+::\+Output\+Manager$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$\texorpdfstring{$\ast$}{*} oomph\+::\+ANASAZI\+::\+Output\+\_\+manager\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to output manager. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00698}{698}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00724}{ANASAZI()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__eigen__solver_8h}{trilinos\+\_\+eigen\+\_\+solver.\+h}}\end{DoxyCompactItemize}

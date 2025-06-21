@@ -1,0 +1,216 @@
+\doxysection{oomph\+::Trilinos\+Epetra\+Helpers Namespace Reference}
+\hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers}{}\label{namespaceoomph_1_1TrilinosEpetraHelpers}\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+
+
+Helper namespace for use with the Trilinos Epetra package. Contains functions to generate two Epetra containers (Epetra\+\_\+\+Vector and Epetra\+\_\+\+Crs\+Matrix) and provides access to the trilinos matrix-\/matrix and matrix-\/vector product routines.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}{create\+\_\+distributed\+\_\+epetra\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+vec}})
+\begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Vector from an oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. If oomph\+\_\+vec is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+vec is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as oomp\+\_\+vec. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_abdba45d59fca1a4509df5a1c6b44d0bc}{create\+\_\+distributed\+\_\+epetra\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Vector based on the argument oomph-\/lib \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} If dist is NOT distributed and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If dist is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as dist. The coefficient values are not set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_acc7e0619f591ab3b4dc04802444dc92b}{create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+vec}})
+\begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Vector equivalent of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} The argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} must be built. The Epetra\+\_\+\+Vector will point to, and NOT COPY the underlying data in the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. The oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} and the returned Epetra\+\_\+\+Vector will have the the same distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a302ed5d22db12175522a3fcf304856c9}{copy\+\_\+to\+\_\+oomphlib\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{epetra\+\_\+vec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+vec}})
+\begin{DoxyCompactList}\small\item\em Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a0a8d24c6cf06d8c71bb414c153a276cf}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. If oomph\+\_\+matrix\+\_\+pt is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+matrix\+\_\+pt is distributed then the Epetra\+\_\+\+Crs\+Matrix returned will have the same distribution as oomph\+\_\+matrix\+\_\+pt. The \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} argument dist\+\_\+pt should specify the distribution of the object this matrix will operate on. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a1b96bb02b661a770a7b5830af771a249}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em create and Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. Specialisation for Trilinos Aztec\+OO. If oomph\+\_\+matrix\+\_\+pt is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+matrix\+\_\+pt is distributed then the Epetra\+\_\+\+Crs\+Matrix returned will have the same distribution as oomph\+\_\+matrix\+\_\+pt. For Aztec\+OO, the column map is ordered such that the local rows are first. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Function to perform a matrix-\/vector multiplication on a oomph-\/lib matrix and vector using Trilinos functionality. NOTE 1. the matrix and the vectors must have the same communicator. NOTE 2. The vector will be returned with the same distribution as the matrix, unless a distribution is predefined in the solution vector in which case the vector will be returned with that distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a0d96936ed1e5f3266ef06564ae300103}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix\+\_\+1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix\+\_\+2}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix\+\_\+soln}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+ml}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{NOTE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{NOTE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{NOTE}} 3. All matrices must share the same communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1TrilinosEpetraHelpers_a5ccd0dec0ba044834119416b0ed06a2f}{create\+\_\+epetra\+\_\+map}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em create an Epetra\+\_\+\+Map corresponding to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper namespace for use with the Trilinos Epetra package. Contains functions to generate two Epetra containers (Epetra\+\_\+\+Vector and Epetra\+\_\+\+Crs\+Matrix) and provides access to the trilinos matrix-\/matrix and matrix-\/vector product routines. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a302ed5d22db12175522a3fcf304856c9}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a302ed5d22db12175522a3fcf304856c9} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!copy\_to\_oomphlib\_vector@{copy\_to\_oomphlib\_vector}}
+\index{copy\_to\_oomphlib\_vector@{copy\_to\_oomphlib\_vector}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{copy\_to\_oomphlib\_vector()}{copy\_to\_oomphlib\_vector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}}]{epetra\+\_\+vec\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{oomph\+\_\+vec }\end{DoxyParamCaption})}
+
+
+
+Helper function to copy the contents of a Trilinos vector to an oomph-\/lib distributed vector. The distribution of the two vectors must be identical. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{180}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{multiply()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a0a8d24c6cf06d8c71bb414c153a276cf}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a0a8d24c6cf06d8c71bb414c153a276cf} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_distributed\_epetra\_matrix@{create\_distributed\_epetra\_matrix}}
+\index{create\_distributed\_epetra\_matrix@{create\_distributed\_epetra\_matrix}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_distributed\_epetra\_matrix()}{create\_distributed\_epetra\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{oomph\+\_\+matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{dist\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+create an Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. If oomph\+\_\+matrix\+\_\+pt is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+matrix\+\_\+pt is distributed then the Epetra\+\_\+\+Crs\+Matrix returned will have the same distribution as oomph\+\_\+matrix\+\_\+pt. The \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} argument dist\+\_\+pt should specify the distribution of the object this matrix will operate on. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{289}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{create\+\_\+epetra\+\_\+map()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{multiply()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{multiply()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a1b96bb02b661a770a7b5830af771a249}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a1b96bb02b661a770a7b5830af771a249} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_distributed\_epetra\_matrix\_for\_aztecoo@{create\_distributed\_epetra\_matrix\_for\_aztecoo}}
+\index{create\_distributed\_epetra\_matrix\_for\_aztecoo@{create\_distributed\_epetra\_matrix\_for\_aztecoo}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_distributed\_epetra\_matrix\_for\_aztecoo()}{create\_distributed\_epetra\_matrix\_for\_aztecoo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{oomph\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+create and Epetra\+\_\+\+Crs\+Matrix from an oomph-\/lib \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. Specialisation for Trilinos Aztec\+OO. If oomph\+\_\+matrix\+\_\+pt is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+matrix\+\_\+pt is distributed then the Epetra\+\_\+\+Crs\+Matrix returned will have the same distribution as oomph\+\_\+matrix\+\_\+pt. For Aztec\+OO, the column map is ordered such that the local rows are first. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00473}{473}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{create\+\_\+epetra\+\_\+map()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a914dd010ddb4896a7af801945a2db912} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_distributed\_epetra\_vector@{create\_distributed\_epetra\_vector}}
+\index{create\_distributed\_epetra\_vector@{create\_distributed\_epetra\_vector}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_distributed\_epetra\_vector()}{create\_distributed\_epetra\_vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{oomph\+\_\+vec }\end{DoxyParamCaption})}
+
+
+
+create an Epetra\+\_\+\+Vector from an oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. If oomph\+\_\+vec is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+vec is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as oomp\+\_\+vec. 
+
+create an Epetra\+\_\+\+Vector from an oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. If oomph\+\_\+vec is NOT distributed (i.\+e. locally replicated) and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If the oomph\+\_\+vec is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as oomph\+\_\+vec. 
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{41}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{create\+\_\+epetra\+\_\+map()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{multiply()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_abdba45d59fca1a4509df5a1c6b44d0bc}\label{namespaceoomph_1_1TrilinosEpetraHelpers_abdba45d59fca1a4509df5a1c6b44d0bc} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_distributed\_epetra\_vector@{create\_distributed\_epetra\_vector}}
+\index{create\_distributed\_epetra\_vector@{create\_distributed\_epetra\_vector}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_distributed\_epetra\_vector()}{create\_distributed\_epetra\_vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{dist\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+create an Epetra\+\_\+\+Vector based on the argument oomph-\/lib \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} If dist is NOT distributed and on more than one processor, then the returned Epetra\+\_\+\+Vector will be uniformly distributed. If dist is distributed then the Epetra\+\_\+\+Vector returned will have the same distribution as dist. The coefficient values are not set. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00100}{100}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{create\+\_\+epetra\+\_\+map()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a5ccd0dec0ba044834119416b0ed06a2f}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a5ccd0dec0ba044834119416b0ed06a2f} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_epetra\_map@{create\_epetra\_map}}
+\index{create\_epetra\_map@{create\_epetra\_map}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_epetra\_map()}{create\_epetra\_map()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Map}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{dist }\end{DoxyParamCaption})}
+
+
+
+create an Epetra\+\_\+\+Map corresponding to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{977}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00474}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix\+\_\+for\+\_\+aztecoo()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00100}{create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00146}{create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00052}{oomph\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator\+::\+Oomph\+Lib\+Preconditioner\+Epetra\+Operator()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_acc7e0619f591ab3b4dc04802444dc92b}\label{namespaceoomph_1_1TrilinosEpetraHelpers_acc7e0619f591ab3b4dc04802444dc92b} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!create\_epetra\_vector\_view\_data@{create\_epetra\_vector\_view\_data}}
+\index{create\_epetra\_vector\_view\_data@{create\_epetra\_vector\_view\_data}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_epetra\_vector\_view\_data()}{create\_epetra\_vector\_view\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+epetra\+\_\+vector\+\_\+view\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{oomph\+\_\+vec }\end{DoxyParamCaption})}
+
+
+
+create an Epetra\+\_\+\+Vector equivalent of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} The argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} must be built. The Epetra\+\_\+\+Vector will point to, and NOT COPY the underlying data in the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. The oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} and the returned Epetra\+\_\+\+Vector will have the the same distribution. 
+
+Create an Epetra\+\_\+\+Vector equivalent of \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} The argument \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} must be built. The Epetra\+\_\+\+Vector will point to, and NOT COPY the underlying data in the \doxylink{classoomph_1_1DoubleVector}{Double\+Vector}. The oomph-\/lib \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} and the returned Epetra\+\_\+\+Vector will have the the same distribution. 
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00146}{146}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00977}{create\+\_\+epetra\+\_\+map()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a0d96936ed1e5f3266ef06564ae300103}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a0d96936ed1e5f3266ef06564ae300103} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix\+\_\+1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix\+\_\+2,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix\+\_\+soln,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+ml = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Function to perform a matrix-\/matrix multiplication on oomph-\/lib matrices by using Trilinos functionality. {\bfseries{NOTE}} 1. There are two Trilinos matrix-\/matrix multiplication methods available, using either the Epetra\+Ext\+::\+Matrix\+Matrix class (if use\+\_\+ml == false) or using ML (Epetra\+\_\+\+Matrix\+Mult method) {\bfseries{NOTE}} 2. the solution matrix (matrix\+\_\+soln) will be returned with the same distribution as matrix1 {\bfseries{NOTE}} 3. All matrices must share the same communicator. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00753}{753}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}.
+
+\Hypertarget{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db}\label{namespaceoomph_1_1TrilinosEpetraHelpers_a595c337ff02ad53b3dcac04ed142f8db} 
+\index{oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::TrilinosEpetraHelpers@{oomph::TrilinosEpetraHelpers}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{matrix,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption})}
+
+
+
+Function to perform a matrix-\/vector multiplication on a oomph-\/lib matrix and vector using Trilinos functionality. NOTE 1. the matrix and the vectors must have the same communicator. NOTE 2. The vector will be returned with the same distribution as the matrix, unless a distribution is predefined in the solution vector in which case the vector will be returned with that distribution. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{657}} of file \mbox{\hyperlink{trilinos__helpers_8cc_source}{trilinos\+\_\+helpers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, and \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01992}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, and \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}.
+

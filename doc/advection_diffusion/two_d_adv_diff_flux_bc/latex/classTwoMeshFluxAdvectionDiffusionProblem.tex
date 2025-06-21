@@ -1,0 +1,306 @@
+\doxysection{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classTwoMeshFluxAdvectionDiffusionProblem}{}\label{classTwoMeshFluxAdvectionDiffusionProblem}\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+
+
+2D Advection\+Diffusion problem on rectangular domain, discretised with 2D QAdvection\+Diffusion elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter.  
+
+
+Inheritance diagram for Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classTwoMeshFluxAdvectionDiffusionProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a7f3ec24317465521cb84212d1c2dc662}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}} (Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Source\+Fct\+Pt source\+\_\+fct\+\_\+pt, Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Wind\+Fct\+Pt wind\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to source and wind functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a65445b9eb9c01680d8137d1fdba05626}{\texorpdfstring{$\sim$}{\string~}\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a53cc08148cdf2f548939b5d09236f023}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a05c049ca4714c5f4866d70f8bbe0f134}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_ae5e1314c6772586f0fa0bc628adab7c0}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a3ea654224e481f37e8bde4edb38993cc}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt\+: Wipe the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_aa02be21b629b8d9809be106b27afcb59}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adapt\+: Rebuild the mesh of prescribed flux elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_af01824e72ea624e25854a62e0dbd4eb9}{create\+\_\+flux\+\_\+elements}} (const unsigned \&b, Mesh \texorpdfstring{$\ast$}{*}const \&bulk\+\_\+mesh\+\_\+pt, Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create Advection Diffusion flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_ac478c7d0dc6e94cbe007287d5af69a28}{delete\+\_\+flux\+\_\+elements}} (Mesh \texorpdfstring{$\ast$}{*}const \&surface\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Delete Advection Diffusion flux elements and wipe the surface mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_ad022fed8fda1294ac4e86b893f32d63c}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}bulk"{} mesh. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a0b1a0dd20caad23315b6837bb773327e}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the "{}surface"{} mesh. \end{DoxyCompactList}\item 
+Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Source\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_a73a3fdaa5eb9cfffc19ed0cd8fd8379c}{Source\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to source function. \end{DoxyCompactList}\item 
+Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Wind\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem_acec16e75f69f21f927dd6a4671cd64ea}{Wind\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to wind function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$}
+2D Advection\+Diffusion problem on rectangular domain, discretised with 2D QAdvection\+Diffusion elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter. 
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00119}{119}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a7f3ec24317465521cb84212d1c2dc662}\label{classTwoMeshFluxAdvectionDiffusionProblem_a7f3ec24317465521cb84212d1c2dc662} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!TwoMeshFluxAdvectionDiffusionProblem@{TwoMeshFluxAdvectionDiffusionProblem}}
+\index{TwoMeshFluxAdvectionDiffusionProblem@{TwoMeshFluxAdvectionDiffusionProblem}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TwoMeshFluxAdvectionDiffusionProblem()}{TwoMeshFluxAdvectionDiffusionProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}} (\begin{DoxyParamCaption}\item[{Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Source\+Fct\+Pt}]{source\+\_\+fct\+\_\+pt,  }\item[{Advection\+Diffusion\+Equations$<$ 2 $>$\+::\+Advection\+Diffusion\+Wind\+Fct\+Pt}]{wind\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to source and wind functions. 
+
+Constructor for Advection\+Diffusion problem\+: Pass pointer to source and wind functions. 
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00183}{183}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00162}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00395}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements()}}, \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00051}{Tanh\+Soln\+For\+Advection\+Diffusion\+::\+Peclet}}, \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00088}{Tanh\+Soln\+For\+Advection\+Diffusion\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary()}}, \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00168}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00165}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00171}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Wind\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a65445b9eb9c01680d8137d1fdba05626}\label{classTwoMeshFluxAdvectionDiffusionProblem_a65445b9eb9c01680d8137d1fdba05626} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!````~TwoMeshFluxAdvectionDiffusionProblem@{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxAdvectionDiffusionProblem}}
+\index{````~TwoMeshFluxAdvectionDiffusionProblem@{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxAdvectionDiffusionProblem}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TwoMeshFluxAdvectionDiffusionProblem()}{\string~TwoMeshFluxAdvectionDiffusionProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00130}{130}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_aa02be21b629b8d9809be106b27afcb59}\label{classTwoMeshFluxAdvectionDiffusionProblem_aa02be21b629b8d9809be106b27afcb59} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Actions after adapt\+: Rebuild the mesh of prescribed flux elements. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00461}{461}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00088}{Tanh\+Soln\+For\+Advection\+Diffusion\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_ae5e1314c6772586f0fa0bc628adab7c0}\label{classTwoMeshFluxAdvectionDiffusionProblem_ae5e1314c6772586f0fa0bc628adab7c0} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00144}{144}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a3ea654224e481f37e8bde4edb38993cc}\label{classTwoMeshFluxAdvectionDiffusionProblem_a3ea654224e481f37e8bde4edb38993cc} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Actions before adapt\+: Wipe the mesh of prescribed flux elements. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00448}{448}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a05c049ca4714c5f4866d70f8bbe0f134}\label{classTwoMeshFluxAdvectionDiffusionProblem_a05c049ca4714c5f4866d70f8bbe0f134} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00292}{292}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00060}{Tanh\+Soln\+For\+Advection\+Diffusion\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_af01824e72ea624e25854a62e0dbd4eb9}\label{classTwoMeshFluxAdvectionDiffusionProblem_af01824e72ea624e25854a62e0dbd4eb9} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!create\_flux\_elements@{create\_flux\_elements}}
+\index{create\_flux\_elements@{create\_flux\_elements}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_flux\_elements()}{create\_flux\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create Advection Diffusion flux elements on boundary b of the Mesh pointed to by bulk\+\_\+mesh\+\_\+pt and add them to the Mesh object pointed to by surface\+\_\+mesh\+\_\+pt. 
+
+Create Advection\+Diffusion Flux Elements on the b-\/th boundary of the Mesh object pointed to by bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointeed to by surface\+\_\+mesh\+\_\+pt. 
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00394}{394}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00184}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_ac478c7d0dc6e94cbe007287d5af69a28}\label{classTwoMeshFluxAdvectionDiffusionProblem_ac478c7d0dc6e94cbe007287d5af69a28} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!delete\_flux\_elements@{delete\_flux\_elements}}
+\index{delete\_flux\_elements@{delete\_flux\_elements}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{delete\_flux\_elements()}{delete\_flux\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+flux\+\_\+elements (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}const \&}]{surface\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Delete Advection Diffusion flux elements and wipe the surface mesh. 
+
+Delete Advection Diffusion Flux Elements and wipe the surface mesh. 
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00426}{426}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a53cc08148cdf2f548939b5d09236f023}\label{classTwoMeshFluxAdvectionDiffusionProblem_a53cc08148cdf2f548939b5d09236f023} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. 
+
+Doc the solution\+: doc\+\_\+info contains labels/output directory etc. 
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00334}{334}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00060}{Tanh\+Soln\+For\+Advection\+Diffusion\+::get\+\_\+exact\+\_\+u()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00499}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_ad022fed8fda1294ac4e86b893f32d63c}\label{classTwoMeshFluxAdvectionDiffusionProblem_ad022fed8fda1294ac4e86b893f32d63c} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Refineable\+Rectangular\+Quad\+Mesh$<$ELEMENT$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}bulk"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00162}{162}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00184}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a73a3fdaa5eb9cfffc19ed0cd8fd8379c}\label{classTwoMeshFluxAdvectionDiffusionProblem_a73a3fdaa5eb9cfffc19ed0cd8fd8379c} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
+\index{Source\_fct\_pt@{Source\_fct\_pt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Source\_fct\_pt}{Source\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Advection\+Diffusion\+Equations$<$2$>$\+::\+Advection\+Diffusion\+Source\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to source function. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00168}{168}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00184}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_a0b1a0dd20caad23315b6837bb773327e}\label{classTwoMeshFluxAdvectionDiffusionProblem_a0b1a0dd20caad23315b6837bb773327e} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the "{}surface"{} mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00165}{165}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00184}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem()}}.
+
+\Hypertarget{classTwoMeshFluxAdvectionDiffusionProblem_acec16e75f69f21f927dd6a4671cd64ea}\label{classTwoMeshFluxAdvectionDiffusionProblem_acec16e75f69f21f927dd6a4671cd64ea} 
+\index{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}!Wind\_fct\_pt@{Wind\_fct\_pt}}
+\index{Wind\_fct\_pt@{Wind\_fct\_pt}!TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$@{TwoMeshFluxAdvectionDiffusionProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Wind\_fct\_pt}{Wind\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Advection\+Diffusion\+Equations$<$2$>$\+::\+Advection\+Diffusion\+Wind\+Fct\+Pt \mbox{\hyperlink{classTwoMeshFluxAdvectionDiffusionProblem}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem}}$<$ ELEMENT $>$\+::\+Wind\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to wind function. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00171}{171}} of file \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc_source_l00184}{Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem$<$ ELEMENT $>$\+::\+Two\+Mesh\+Flux\+Advection\+Diffusion\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__adv__diff__flux__bc_8cc}{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc}}\end{DoxyCompactItemize}

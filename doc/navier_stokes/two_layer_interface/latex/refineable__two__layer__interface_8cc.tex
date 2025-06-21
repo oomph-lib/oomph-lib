@@ -1,0 +1,81 @@
+\doxysection{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc File Reference}
+\hypertarget{refineable__two__layer__interface_8cc}{}\label{refineable__two__layer__interface_8cc}\index{refineable\_two\_layer\_interface.cc@{refineable\_two\_layer\_interface.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MyCrouzeixRaviartElement}{oomph\+::\+My\+Crouzeix\+Raviart\+Element}}
+\begin{DoxyCompactList}\small\item\em Overload Crouzeix\+Raviart element to modify output. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01MyCrouzeixRaviartElement_01_4}{oomph\+::\+Face\+Geometry$<$ My\+Crouzeix\+Raviart\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01MyCrouzeixRaviartElement_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ My\+Crouzeix\+Raviart\+Element $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classTwoLayerInterfaceProblem}{Two\+Layer\+Interface\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class to simulate viscous drop propagating along 2D channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceProblem__Parameter}{Problem\+\_\+\+Parameter}}
+\begin{DoxyCompactList}\small\item\em Namespace for Problem Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Vector}}$<$ \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} $>$ \mbox{\hyperlink{namespaceProblem__Parameter_a72d7ca9081c6c7e123a878e7f3626086}{Problem\+\_\+\+Parameter\+::G}} (2)
+\begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} \mbox{\hyperlink{refineable__two__layer__interface_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argc}}, \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{argv}})
+\begin{DoxyCompactList}\small\item\em Driver code for moving block problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Doc\+Info}} \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Doc info. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}{Problem\+\_\+\+Parameter\+::\+Re}} =5.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30}{Problem\+\_\+\+Parameter\+::\+St}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_a1be099d26a4388edccc1592236dda50c}{Problem\+\_\+\+Parameter\+::\+Re\+St}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Womersley number (Reynolds x Strouhal) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_ab5e1078e81238be42d304c9cd3f7a9cc}{Problem\+\_\+\+Parameter\+::\+Re\+Inv\+Fr}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Product of Reynolds number and inverse of Froude number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_ac643ff6a132687f67099ab5b35849c51}{Problem\+\_\+\+Parameter\+::\+Viscosity\+\_\+\+Ratio}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Ratio of viscosity in upper fluid to viscosity in lower fluid. Reynolds number etc. is based on viscosity in lower fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_a8cdfc2498b04d7887068b1daf03ba0e1}{Problem\+\_\+\+Parameter\+::\+Density\+\_\+\+Ratio}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Ratio of density in upper fluid to density in lower fluid. Reynolds number etc. is based on density in lower fluid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}{Problem\+\_\+\+Parameter\+::\+Ca}} = 0.\+01
+\begin{DoxyCompactList}\small\item\em Capillary number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Problem\+\_\+\+Parameter\+::\+Nu}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b}{Problem\+\_\+\+Parameter\+::\+Length}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length of the channel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_aef705e249abde5f1527cbc01497dcabb}{Problem\+\_\+\+Parameter\+::\+Height}} = 2.\+0
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{double}} \mbox{\hyperlink{namespaceProblem__Parameter_a0d53d8c976c13e0723304666b87324e1}{Problem\+\_\+\+Parameter\+::\+Interface\+\_\+\+Height}} = 0.\+5
+\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ofstream}} \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{ofstream}} \mbox{\hyperlink{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec}{Problem\+\_\+\+Parameter\+::\+Norm\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em File to document the norm of the solution (for validation purposes -- triangle doesn\textquotesingle{}t give fully reproducible results so mesh generation/adaptation may generate slightly different numbers of elements on different machines!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{refineable__two__layer__interface_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{refineable__two__layer__interface_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{refineable\_two\_layer\_interface.cc@{refineable\_two\_layer\_interface.cc}!main@{main}}
+\index{main@{main}!refineable\_two\_layer\_interface.cc@{refineable\_two\_layer\_interface.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for moving block problem. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l01068}{1068}} of file \mbox{\hyperlink{refineable__two__layer__interface_8cc_source}{refineable\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00332}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00291}{Problem\+\_\+\+Parameter\+::\+Doc\+\_\+info}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00113}{Elastic\+Refineable\+Two\+Layer\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Two\+Layer\+Mesh()}}, \mbox{\hyperlink{namespaceProblem__Parameter_a72d7ca9081c6c7e123a878e7f3626086}{Problem\+\_\+\+Parameter\+::\+G()}}, \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00320}{Problem\+\_\+\+Parameter\+::\+Nu}}, and \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00335}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}.
+

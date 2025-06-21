@@ -1,0 +1,1234 @@
+\doxysection{oomph\+::CRDouble\+Matrix Class Reference}
+\hypertarget{classoomph_1_1CRDoubleMatrix}{}\label{classoomph_1_1CRDoubleMatrix}\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+
+
+A class for compressed row matrices. This is a distributable object.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::CRDouble\+Matrix\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.430396cm]{classoomph_1_1CRDoubleMatrix}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structoomph_1_1CRDoubleMatrix_1_1CRDoubleMatrixComparisonHelper}{CRDouble\+Matrix\+Comparison\+Helper}}
+\begin{DoxyCompactList}\small\item\em Create a struct to provide a comparison function for std\+::sort. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ad8914fa1a5a98f7602a1724b76eef26c}{CRDouble\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}{CRDouble\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}{CRDouble\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: just stores the distribution but does not build the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26}{CRDouble\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f472490}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}{\texorpdfstring{$\sim$}{\string~}\+CRDouble\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}{entries\+\_\+are\+\_\+sorted}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doc\+\_\+unordered\+\_\+entries}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Runs through the column index vector and checks if the entries follow the regular lexicographical ordering of matrix entries, i.\+e. it will check (at the i-\/th row of the matrix) if the entries in the column index vector associated with this row are in increasing order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}{sort\+\_\+entries}} ()
+\begin{DoxyCompactList}\small\item\em Sorts the entries associated with each row of the matrix in the column index vector and the value vector into ascending order and sets up the Index\+\_\+of\+\_\+diagonal\+\_\+entries vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+\begin{DoxyCompactList}\small\item\em build method\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em rebuild the matrix -\/ assembles an empty matrix will a defined distribution \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+\begin{DoxyCompactList}\small\item\em keeps the existing distribution and just matrix that is stored \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}{build\+\_\+without\+\_\+copy}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}})
+\begin{DoxyCompactList}\small\item\em keeps the existing distribution and just matrix that is stored without copying the matrix data \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d}{redistribute}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The contents of the matrix are redistributed to match the new distribution. In a non-\/\+MPI build this method does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a70c8a67158c081e70b4d07a6b248bc7a}{clear}} ()
+\begin{DoxyCompactList}\small\item\em clear \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab0887b5420752c47bfc14777006bcc1e}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b3239e66}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to a file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename. This uses acual global row numbers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the round-\/bracket access operator for read-\/only access. In a distributed matrix i refers to the local row index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}{row\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f}{row\+\_\+start}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style row\+\_\+start array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}{column\+\_\+index}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style column index array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136}{column\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style column index array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}{value}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style value array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793}{value}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style value array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}{nnz}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of nonzero entries (the local nnz) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4b90203edbcbfec4e5e1c79f7d8d2722}{ludecompose}} ()
+\begin{DoxyCompactList}\small\item\em LU decomposition using Super\+LU if matrix is not distributed or distributed onto a single processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7}{lubksub}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em LU back solve for given RHS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{multiply\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A\texorpdfstring{$^\wedge$}{\string^}T x. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix\+\_\+in}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Function to multiply this matrix by the \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} matrix\+\_\+in. In a serial matrix, there are 4 methods available\+: Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinox Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} Mulitply (ml based) If Trilinos is installed then Method 4 is employed by default, otherwise Method 2 is employed by default. In a distributed matrix, only Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply is available. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}{matrix\+\_\+reduction}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&alpha, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{reduced\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read only access function (const version) to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 2\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Read only access function (const version) to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 2\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62}{built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the Built flag -\/ indicates whether the matrix has been build -\/ i.\+e. the distribution has been defined and the matrix assembled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a984602c9df0c573451f315a025820ced}{global\+\_\+matrix}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if this matrix is distributed then a the equivalent global matrix is built using new and returned. The calling method is responsible for the destruction of the new matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a82cb428139f7c35a7c62a09fad38eecb}{get\+\_\+matrix\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the transpose of this matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a6cd938ba5f026f1508239cef05b16cb4}{inf\+\_\+norm}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the inf-\/norm of this matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ad438e693468cd0ae179460eafcaab038}{diagonal\+\_\+entries}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns a \doxylink{classoomph_1_1Vector}{Vector} of diagonal entries of this matrix. This only works with square matrices. This condition may be relaxed in the future if need be. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a57f88253acfa87a764652c06c1bdc362}{add}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix\+\_\+in}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result\+\_\+matrix}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em element-\/wise addition of this matrix with matrix\+\_\+in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837}{Matrix}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361}{Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11}{\texorpdfstring{$\sim$}{\string~}\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Virtual (empty) destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX\+\_\+\+TYPE template parameter to call the get\+\_\+entry() function which must be defined in all derived classes that are to be fully instantiated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{oomph\+::\+Double\+Matrix\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a9ab2dcaf990403cd43d4b952f7dbaa1c}{Double\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a449fe88a14eed90f8820a75f53883c66}{Double\+Matrix\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_abc390458d9899179f84488f6a94b261d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}{\texorpdfstring{$\sim$}{\string~}\+Double\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em virtual (empty) destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_aa2ef063bc84bee59fec7a933093ac8f7}{linear\+\_\+solver\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a48e6ef5e74c6c260919d3bf0420c7a68}{linear\+\_\+solver\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}{solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}{solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residual\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Find the residual, i.\+e. r=b-\/\+Ax the residual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\+\_\+residual}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined "{}on the fly"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{struct}} \mbox{\hyperlink{structoomph_1_1CRDoubleMatrix_1_1CRDoubleMatrixComparisonHelper}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix\+Comparison\+Helper}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}{Comparison\+\_\+struct}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a6cb9860ebacf742fc7fc47d77703cc82}{Index\+\_\+of\+\_\+diagonal\+\_\+entries}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} whose i\textquotesingle{}th entry contains the index of the last entry below or on the diagonal of the i\textquotesingle{}th row of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}
+\begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used (for serial (or global) matrices) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}
+\begin{DoxyCompactList}\small\item\em Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRMatrix}{CRMatrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}{CR\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Storage for the \doxylink{classoomph_1_1Matrix}{Matrix} in CR Format. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a63afd9976f0970a4e6ffee3755d21540}{Built}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup AND the matrix has been assembled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{oomph\+::\+Double\+Matrix\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}{Linear\+\_\+solver\+\_\+pt}}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a6ef2e36e4e5907af2738934f131e8dcf}{Default\+\_\+linear\+\_\+solver\+\_\+pt}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for compressed row matrices. This is a distributable object. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00885}{885}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ad8914fa1a5a98f7602a1724b76eef26c}\label{classoomph_1_1CRDoubleMatrix_ad8914fa1a5a98f7602a1724b76eef26c} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
+\index{CRDoubleMatrix@{CRDoubleMatrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CRDoubleMatrix()}{CRDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01214}{1214}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5}\label{classoomph_1_1CRDoubleMatrix_a1f1ffece5cbd2d25d46fe3db3b9c3ff5} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
+\index{CRDoubleMatrix@{CRDoubleMatrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CRDoubleMatrix()}{CRDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{distribution\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{column\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{row\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. 
+
+Constructor\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01311}{1311}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l03404}{oomph\+::\+CRMatrix$<$ T $>$\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3}\label{classoomph_1_1CRDoubleMatrix_a80b1f351988b2a7c0bd39387c77b85f3} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
+\index{CRDoubleMatrix@{CRDoubleMatrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CRDoubleMatrix()}{CRDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{distribution\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: just stores the distribution but does not build the matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01286}{1286}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26}\label{classoomph_1_1CRDoubleMatrix_af88437afe2b838fd6b508c590d26bd26} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CRDoubleMatrix@{CRDoubleMatrix}}
+\index{CRDoubleMatrix@{CRDoubleMatrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CRDoubleMatrix()}{CRDoubleMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01234}{1234}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4}\label{classoomph_1_1CRDoubleMatrix_a27c30b4faf3d2328f3b9ce9c590f43a4} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!````~CRDoubleMatrix@{\texorpdfstring{$\sim$}{\string~}CRDoubleMatrix}}
+\index{````~CRDoubleMatrix@{\texorpdfstring{$\sim$}{\string~}CRDoubleMatrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CRDoubleMatrix()}{\string~CRDoubleMatrix()}}
+{\footnotesize\ttfamily oomph\+::\+CRDouble\+Matrix\+::\texorpdfstring{$\sim$}{\string~}\+CRDouble\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01343}{1343}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, and \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a57f88253acfa87a764652c06c1bdc362}\label{classoomph_1_1CRDoubleMatrix_a57f88253acfa87a764652c06c1bdc362} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!add@{add}}
+\index{add@{add}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix\+\_\+in,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{result\+\_\+matrix }\end{DoxyParamCaption}) const}
+
+
+
+element-\/wise addition of this matrix with matrix\+\_\+in. 
+
+Element-\/wise addition of this matrix with matrix\+\_\+in. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l03515}{3515}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132}\label{classoomph_1_1CRDoubleMatrix_a7fc397b91a7289df8ee64287ae20e132} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
+\index{build@{build}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{distribution\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+rebuild the matrix -\/ assembles an empty matrix will a defined distribution 
+
+Rebuild the matrix -\/ assembles an empty matrix with a defined distribution. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01353}{1353}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, and \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977}\label{classoomph_1_1CRDoubleMatrix_af44bac2acd071317f96dae49cbb0d977} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
+\index{build@{build}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{distribution\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{column\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{row\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+build method\+: vector of values, vector of column indices, vector of row starts and number of rows and columns. 
+
+build method\+: Takes the distribution and the number of columns, as well as the vector of values, vector of column indices,vector of row starts. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01672}{1672}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{problem_8cc_source_l04042}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l01476}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::setup\+\_\+mg\+\_\+structures()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01362}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2}\label{classoomph_1_1CRDoubleMatrix_ac04c0787a123256b3dbaf6acf40df4e2} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build@{build}}
+\index{build@{build}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{column\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{row\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+keeps the existing distribution and just matrix that is stored 
+
+method to rebuild the matrix, but not the distribution 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01694}{1694}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l03404}{oomph\+::\+CRMatrix$<$ T $>$\+::build()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l03323}{oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060}\label{classoomph_1_1CRDoubleMatrix_aafb4d7de0a87b4bda560928e6a128060} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!build\_without\_copy@{build\_without\_copy}}
+\index{build\_without\_copy@{build\_without\_copy}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{build\_without\_copy()}{build\_without\_copy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::build\+\_\+without\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nnz,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}}]{column\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}}]{row\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+keeps the existing distribution and just matrix that is stored without copying the matrix data 
+
+method to rebuild the matrix, but not the distribution 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01710}{1710}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l03354}{oomph\+::\+CRMatrix$<$ T $>$\+::build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l03323}{oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00848}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::assemble\+\_\+inv\+\_\+press\+\_\+and\+\_\+veloc\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00707}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{problem_8cc_source_l04042}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, and \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62}\label{classoomph_1_1CRDoubleMatrix_aa0503bc64ef0ccb60cb7d7e645425a62} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!built@{built}}
+\index{built@{built}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{built()}{built()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+CRDouble\+Matrix\+::built (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+access function to the Built flag -\/ indicates whether the matrix has been build -\/ i.\+e. the distribution has been defined and the matrix assembled. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01210}{1210}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{oomph\+::\+Double\+Vector\+::norm()}}, and \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a70c8a67158c081e70b4d07a6b248bc7a}\label{classoomph_1_1CRDoubleMatrix_a70c8a67158c081e70b4d07a6b248bc7a} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!clear@{clear}}
+\index{clear@{clear}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+clear 
+
+Clean method. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01657}{1657}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{linear__solver_8h_source_l00258}{oomph\+::\+Linear\+Solver\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8h_source_l03323}{oomph\+::\+CRMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00264}{oomph\+::\+Double\+Matrix\+Base\+::\+Linear\+\_\+solver\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01353}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, and \mbox{\hyperlink{matrices_8cc_source_l01343}{\texorpdfstring{$\sim$}{\string~}\+CRDouble\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105}\label{classoomph_1_1CRDoubleMatrix_a925b465e7e86cf1ec45c1fb70a37c105} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!column\_index@{column\_index}}
+\index{column\_index@{column\_index}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style column index array. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01072}{1072}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, and \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136}\label{classoomph_1_1CRDoubleMatrix_aed3ef1fa860752c33ac3fe6ecabde136} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!column\_index@{column\_index}}
+\index{column\_index@{column\_index}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{column\_index()}{column\_index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style column index array (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01078}{1078}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, and \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ad438e693468cd0ae179460eafcaab038}\label{classoomph_1_1CRDoubleMatrix_ad438e693468cd0ae179460eafcaab038} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!diagonal\_entries@{diagonal\_entries}}
+\index{diagonal\_entries@{diagonal\_entries}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{diagonal\_entries()}{diagonal\_entries()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+CRDouble\+Matrix\+::diagonal\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns a \doxylink{classoomph_1_1Vector}{Vector} of diagonal entries of this matrix. This only works with square matrices. This condition may be relaxed in the future if need be. 
+
+Return the diagonal entries of the matrix. This only works with square matrices. This condition may be relaxed in the future if need be. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l03465}{3465}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l00398}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be}\label{classoomph_1_1CRDoubleMatrix_a5c1850605f916040619230a5760dc6be} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}}
+\index{distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{distributed\_matrix\_matrix\_multiply\_method()}{distributed\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 2\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01191}{1191}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01246}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d}\label{classoomph_1_1CRDoubleMatrix_aae258c4df846901a39c86af1fadc262d} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}}
+\index{distributed\_matrix\_matrix\_multiply\_method@{distributed\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{distributed\_matrix\_matrix\_multiply\_method()}{distributed\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+CRDouble\+Matrix\+::distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read only access function (const version) to Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for distributed matrices. Method 1\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 2\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01202}{1202}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01246}{Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e}\label{classoomph_1_1CRDoubleMatrix_ae35fbae1702bbf75601c2a1026df103e} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!entries\_are\_sorted@{entries\_are\_sorted}}
+\index{entries\_are\_sorted@{entries\_are\_sorted}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{entries\_are\_sorted()}{entries\_are\_sorted()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+CRDouble\+Matrix\+::entries\+\_\+are\+\_\+sorted (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{doc\+\_\+unordered\+\_\+entries = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Runs through the column index vector and checks if the entries follow the regular lexicographical ordering of matrix entries, i.\+e. it will check (at the i-\/th row of the matrix) if the entries in the column index vector associated with this row are in increasing order. 
+
+Runs through the column index vector and checks if the entries are arranged arbitrarily or if they follow the regular lexicographical of matrices. If a boolean argument is provided with the assignment TRUE then information on the first entry which is not in the correct position will also be given. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01366}{1366}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50}\label{classoomph_1_1CRDoubleMatrix_a52aed99d498f7279bcc9d975873dec50} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!get\_index\_of\_diagonal\_entries@{get\_index\_of\_diagonal\_entries}}
+\index{get\_index\_of\_diagonal\_entries@{get\_index\_of\_diagonal\_entries}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{get\_index\_of\_diagonal\_entries()}{get\_index\_of\_diagonal\_entries()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ oomph\+::\+CRDouble\+Matrix\+::get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function\+: returns the vector Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of the vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00920}{920}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01238}{Index\+\_\+of\+\_\+diagonal\+\_\+entries}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a82cb428139f7c35a7c62a09fad38eecb}\label{classoomph_1_1CRDoubleMatrix_a82cb428139f7c35a7c62a09fad38eecb} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!get\_matrix\_transpose@{get\_matrix\_transpose}}
+\index{get\_matrix\_transpose@{get\_matrix\_transpose}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{get\_matrix\_transpose()}{get\_matrix\_transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::get\+\_\+matrix\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Returns the transpose of this matrix. 
+
+Compute transpose of matrix. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l03271}{3271}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00618}{oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a984602c9df0c573451f315a025820ced}\label{classoomph_1_1CRDoubleMatrix_a984602c9df0c573451f315a025820ced} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!global\_matrix@{global\_matrix}}
+\index{global\_matrix@{global\_matrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{global\_matrix()}{global\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::global\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+if this matrix is distributed then a the equivalent global matrix is built using new and returned. The calling method is responsible for the destruction of the new matrix. 
+
+if this matrix is distributed then the equivalent global matrix is built using new and returned. The calling method is responsible for the destruction of the new matrix. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l02431}{2431}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a6cd938ba5f026f1508239cef05b16cb4}\label{classoomph_1_1CRDoubleMatrix_a6cd938ba5f026f1508239cef05b16cb4} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!inf\_norm@{inf\_norm}}
+\index{inf\_norm@{inf\_norm}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{inf\_norm()}{inf\_norm()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+CRDouble\+Matrix\+::inf\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns the inf-\/norm of this matrix 
+
+Compute infinity (maximum) norm of matrix. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l03412}{3412}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7}\label{classoomph_1_1CRDoubleMatrix_af2c0f286f77ca44453f0da684b8f9dc7} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!lubksub@{lubksub}}
+\index{lubksub@{lubksub}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU back solve for given RHS. 
+
+Do back-\/substitution. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01749}{1749}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a4b90203edbcbfec4e5e1c79f7d8d2722}\label{classoomph_1_1CRDoubleMatrix_a4b90203edbcbfec4e5e1c79f7d8d2722} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!ludecompose@{ludecompose}}
+\index{ludecompose@{ludecompose}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{ludecompose()}{ludecompose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::ludecompose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU decomposition using Super\+LU if matrix is not distributed or distributed onto a single processor. 
+
+Do LU decomposition. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01728}{1728}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, and \mbox{\hyperlink{matrices_8h_source_l00267}{oomph\+::\+Double\+Matrix\+Base\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1}\label{classoomph_1_1CRDoubleMatrix_a3853068b7fce9e83bc817930262e9ca1} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!matrix\_reduction@{matrix\_reduction}}
+\index{matrix\_reduction@{matrix\_reduction}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{matrix\_reduction()}{matrix\_reduction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::matrix\+\_\+reduction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{alpha,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{reduced\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+For every row, find the maximum absolute value of the entries in this row. Set all values that are less than alpha times this maximum to zero and return the resulting matrix in reduced\+\_\+matrix. Note\+: Diagonal entries are retained regardless of their size. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l02365}{2365}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43}\label{classoomph_1_1CRDoubleMatrix_af08fd73a7edbdbde9facf47b913e3e43} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{matrix\+\_\+in,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Function to multiply this matrix by the \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} matrix\+\_\+in. In a serial matrix, there are 4 methods available\+: Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinox Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} Mulitply (ml based) If Trilinos is installed then Method 4 is employed by default, otherwise Method 2 is employed by default. In a distributed matrix, only Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply is available. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01992}{1992}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}\label{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the matrix by the vector x\+: soln=Ax. 
+
+Multiply the matrix by the vector x. 
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01782}{1782}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{double__vector_8cc_source_l00123}{oomph\+::\+Double\+Vector\+::initialise()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00550}{oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00644}{oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::apply()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{oomph\+::\+Matrix\+Vector\+Product\+::multiply()}}, \mbox{\hyperlink{double__vector_8cc_source_l00914}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00629}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}\label{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!multiply\_transpose@{multiply\_transpose}}
+\index{multiply\_transpose@{multiply\_transpose}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{soln }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the transposed matrix by the vector x\+: soln=A\texorpdfstring{$^\wedge$}{\string^}T x. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01882}{1882}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01253}{Built}}, \mbox{\hyperlink{matrices_8h_source_l00797}{oomph\+::\+CRMatrix$<$ T $>$\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00657}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::multiply()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}\label{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+CRDouble\+Matrix\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01008}{1008}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00634}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::ncol()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{oomph\+::\+Matrix\+Vector\+Product\+::setup()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565}\label{classoomph_1_1CRDoubleMatrix_a9482dafc0a17ebc5b7431369d8d07565} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!nnz@{nnz}}
+\index{nnz@{nnz}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{nnz()}{nnz()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+CRDouble\+Matrix\+::nnz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of nonzero entries (the local nnz) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01096}{1096}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00640}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, and \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}\label{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+CRDouble\+Matrix\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01002}{1002}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l01697}{oomph\+::\+Augmented\+Problem\+GMRES\+::augmented\+\_\+matrix\+\_\+multiply()}}, \mbox{\hyperlink{complex__smoother_8h_source_l00398}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+setup()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, and \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}\label{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+CRDouble\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the round-\/bracket access operator for read-\/only access. In a distributed matrix i refers to the local row index. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}{oomph\+::\+Double\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01053}{1053}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f472490}\label{classoomph_1_1CRDoubleMatrix_a3def3614952fcdd16a8edbc82f472490} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ab0887b5420752c47bfc14777006bcc1e}\label{classoomph_1_1CRDoubleMatrix_ab0887b5420752c47bfc14777006bcc1e} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
+\index{output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{output\_bottom\_right\_zero\_helper()}{output\_bottom\_right\_zero\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01016}{1016}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00811}{oomph\+::\+CRMatrix$<$ T $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d}\label{classoomph_1_1CRDoubleMatrix_a9ba295a04e08e3153ae06bc0556f507d} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!redistribute@{redistribute}}
+\index{redistribute@{redistribute}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{redistribute()}{redistribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::redistribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dist\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+The contents of the matrix are redistributed to match the new distribution. In a non-\/\+MPI build this method does nothing. {\bfseries{NOTE}} 1\+: The current distribution and the new distribution must have the same number of global rows. {\bfseries{NOTE}} 2\+: The current distribution and the new distribution must have the same Communicator. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l02575}{2575}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l04042}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372}\label{classoomph_1_1CRDoubleMatrix_a31a5d05c00d653a02e7b07714472d372} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!row\_start@{row\_start}}
+\index{row\_start@{row\_start}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style row\+\_\+start array. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01060}{1060}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01366}{entries\+\_\+are\+\_\+sorted()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f}\label{classoomph_1_1CRDoubleMatrix_ab288a44a89581070675d536d931eb73f} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!row\_start@{row\_start}}
+\index{row\_start@{row\_start}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{row\_start()}{row\_start()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style row\+\_\+start array (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01066}{1066}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00785}{oomph\+::\+CRMatrix$<$ T $>$\+::row\+\_\+start()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7}\label{classoomph_1_1CRDoubleMatrix_a0b77e4dd1d6633d68264c0f41fc0e5e7} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}}
+\index{serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{serial\_matrix\_matrix\_multiply\_method()}{serial\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01159}{1159}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710}\label{classoomph_1_1CRDoubleMatrix_a8ca76ee3ec67406f16ef1d958fedc710} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}}
+\index{serial\_matrix\_matrix\_multiply\_method@{serial\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{serial\_matrix\_matrix\_multiply\_method()}{serial\_matrix\_matrix\_multiply\_method()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+CRDouble\+Matrix\+::serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read only access function (const version) to Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method, the flag which determines the matrix matrix multiplication method used for serial matrices. Method 1\+: First runs through this matrix and matrix\+\_\+in to find the storage requirements for result -\/ arrays of the correct size are then allocated before performing the calculation. Minimises memory requirements but more costly. Method 2\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using an array of maps. Faster but more memory intensive. Method 3\+: Grows storage for values and column indices of result \textquotesingle{}on the fly\textquotesingle{} using a vector of vectors. Not particularly impressive on the platforms we tried... Method 4\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply. Method 5\+: Trilinos Epetra \doxylink{classoomph_1_1Matrix}{Matrix} \doxylink{classoomph_1_1Matrix}{Matrix} multiply (ML based). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01181}{1181}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01242}{Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078}\label{classoomph_1_1CRDoubleMatrix_a2107875787d4dfa1cf007c05a041b078} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sort\_entries@{sort\_entries}}
+\index{sort\_entries@{sort\_entries}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{sort\_entries()}{sort\_entries()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::sort\+\_\+entries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sorts the entries associated with each row of the matrix in the column index vector and the value vector into ascending order and sets up the Index\+\_\+of\+\_\+diagonal\+\_\+entries vector. 
+
+This helper function sorts the entries in the column index vector and the value vector. During the construction of the matrix the entries were most likely assigned in an arbitrary order. As a result, it cannot be assumed that the entries in the column index vector corresponding to each row of the matrix have been arranged in increasing order. During the setup an additional vector will be set up; Index\+\_\+of\+\_\+diagonal\+\_\+entries. The i-\/th entry of this vector contains the index of the last entry below or on the diagonal. If there are no entries below or on the diagonal then the corresponding entry is -\/1. If, however, there are no entries in the row then the entry is irrelevant and is kept as the initialised value; 0. 
+
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l01449}{1449}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}{Comparison\+\_\+struct}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l01238}{Index\+\_\+of\+\_\+diagonal\+\_\+entries}}, \mbox{\hyperlink{matrices_8h_source_l01002}{nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01435}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::setup\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856}\label{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
+\index{sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output\_helper()}{sparse\_indexed\_output\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}{oomph\+::\+Matrix$<$ double, CRDouble\+Matrix $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01023}{1023}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00828}{oomph\+::\+CRMatrix$<$ T $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b3239e66}\label{classoomph_1_1CRDoubleMatrix_a2b5dcdc5e1b9ccea51647f02b3239e66} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!sparse\_indexed\_output\_with\_offset@{sparse\_indexed\_output\_with\_offset}}
+\index{sparse\_indexed\_output\_with\_offset@{sparse\_indexed\_output\_with\_offset}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output\_with\_offset()}{sparse\_indexed\_output\_with\_offset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CRDouble\+Matrix\+::sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indexed output function to print a matrix to a file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename. This uses acual global row numbers. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01031}{1031}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796}\label{classoomph_1_1CRDoubleMatrix_aafc5f1896dc3a317cdeddb067290c796} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!value@{value}}
+\index{value@{value}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style value array. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01084}{1084}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l03515}{add()}}, \mbox{\hyperlink{matrices_8cc_source_l01672}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03271}{get\+\_\+matrix\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02431}{global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l02575}{redistribute()}}, \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8h_source_l01031}{sparse\+\_\+indexed\+\_\+output\+\_\+with\+\_\+offset()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793}\label{classoomph_1_1CRDoubleMatrix_a4a2812ca4c4a026d5e50972dab83d793} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!value@{value}}
+\index{value@{value}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} oomph\+::\+CRDouble\+Matrix\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to C-\/style value array (const version) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01090}{1090}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l01249}{CR\+\_\+matrix}}, and \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a63afd9976f0970a4e6ffee3755d21540}\label{classoomph_1_1CRDoubleMatrix_a63afd9976f0970a4e6ffee3755d21540} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Built@{Built}}
+\index{Built@{Built}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Built}{Built}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+CRDouble\+Matrix\+::\+Built\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to indicate whether the matrix has been built -\/ i.\+e. the distribution has been setup AND the matrix has been assembled. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01253}{1253}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{built()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01286}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01728}{ludecompose()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, and \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15}\label{classoomph_1_1CRDoubleMatrix_a37d76ad3814e127802b80e1e274a3f15} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Comparison\_struct@{Comparison\_struct}}
+\index{Comparison\_struct@{Comparison\_struct}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Comparison\_struct}{Comparison\_struct}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{struct}} \mbox{\hyperlink{structoomph_1_1CRDoubleMatrix_1_1CRDoubleMatrixComparisonHelper}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix\+Comparison\+Helper}} oomph\+::\+CRDouble\+Matrix\+::\+Comparison\+\_\+struct}
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f}\label{classoomph_1_1CRDoubleMatrix_aefc9a269911694cdd5bde98dc536148f} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!CR\_matrix@{CR\_matrix}}
+\index{CR\_matrix@{CR\_matrix}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{CR\_matrix}{CR\_matrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRMatrix}{CRMatrix}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+CRDouble\+Matrix\+::\+CR\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the \doxylink{classoomph_1_1Matrix}{Matrix} in CR Format. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01249}{1249}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01694}{build()}}, \mbox{\hyperlink{matrices_8cc_source_l01710}{build\+\_\+without\+\_\+copy()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{clear()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01078}{column\+\_\+index()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l03465}{diagonal\+\_\+entries()}}, \mbox{\hyperlink{matrices_8cc_source_l03412}{inf\+\_\+norm()}}, \mbox{\hyperlink{matrices_8cc_source_l02365}{matrix\+\_\+reduction()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{multiply()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8h_source_l01008}{ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01053}{operator()()}}, \mbox{\hyperlink{matrices_8h_source_l01016}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01066}{row\+\_\+start()}}, \mbox{\hyperlink{matrices_8h_source_l01023}{sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}, \mbox{\hyperlink{matrices_8h_source_l01084}{value()}}, and \mbox{\hyperlink{matrices_8h_source_l01090}{value()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb}\label{classoomph_1_1CRDoubleMatrix_a4ab4056eff376d383c613a11082651cb} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Distributed\_matrix\_matrix\_multiply\_method@{Distributed\_matrix\_matrix\_multiply\_method}}
+\index{Distributed\_matrix\_matrix\_multiply\_method@{Distributed\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Distributed\_matrix\_matrix\_multiply\_method}{Distributed\_matrix\_matrix\_multiply\_method}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+CRDouble\+Matrix\+::\+Distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to determine which matrix-\/matrix multiplication method is used (for distributed matrices) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01246}{1246}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l01191}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}, and \mbox{\hyperlink{matrices_8h_source_l01202}{distributed\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_a6cb9860ebacf742fc7fc47d77703cc82}\label{classoomph_1_1CRDoubleMatrix_a6cb9860ebacf742fc7fc47d77703cc82} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Index\_of\_diagonal\_entries@{Index\_of\_diagonal\_entries}}
+\index{Index\_of\_diagonal\_entries@{Index\_of\_diagonal\_entries}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Index\_of\_diagonal\_entries}{Index\_of\_diagonal\_entries}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$ oomph\+::\+CRDouble\+Matrix\+::\+Index\+\_\+of\+\_\+diagonal\+\_\+entries\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} whose i\textquotesingle{}th entry contains the index of the last entry below or on the diagonal of the i\textquotesingle{}th row of the matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01238}{1238}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00920}{get\+\_\+index\+\_\+of\+\_\+diagonal\+\_\+entries()}}, and \mbox{\hyperlink{matrices_8cc_source_l01449}{sort\+\_\+entries()}}.
+
+\Hypertarget{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce}\label{classoomph_1_1CRDoubleMatrix_ac8fab9824a0766b6bb6361a6b25df9ce} 
+\index{oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}!Serial\_matrix\_matrix\_multiply\_method@{Serial\_matrix\_matrix\_multiply\_method}}
+\index{Serial\_matrix\_matrix\_multiply\_method@{Serial\_matrix\_matrix\_multiply\_method}!oomph::CRDoubleMatrix@{oomph::CRDoubleMatrix}}
+\doxysubsubsection{\texorpdfstring{Serial\_matrix\_matrix\_multiply\_method}{Serial\_matrix\_matrix\_multiply\_method}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+CRDouble\+Matrix\+::\+Serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag to determine which matrix-\/matrix multiplication method is used (for serial (or global) matrices) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l01242}{1242}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01214}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01234}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01286}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01311}{CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01992}{multiply()}}, \mbox{\hyperlink{matrices_8h_source_l01159}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}, and \mbox{\hyperlink{matrices_8h_source_l01181}{serial\+\_\+matrix\+\_\+matrix\+\_\+multiply\+\_\+method()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\item 
+\mbox{\hyperlink{matrices_8cc}{matrices.\+cc}}\end{DoxyCompactItemize}

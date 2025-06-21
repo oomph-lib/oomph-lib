@@ -1,0 +1,134 @@
+\doxysection{Tanh\+Soln\+For\+Poisson Namespace Reference}
+\hypertarget{namespaceTanhSolnForPoisson}{}\label{namespaceTanhSolnForPoisson}\index{TanhSolnForPoisson@{TanhSolnForPoisson}}
+
+
+Namespace for exact solution for Poisson equation with "{}sharp step"{}.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{source\+\_\+function}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of "{}step"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{Tan\+Phi}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle Phi of "{}step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for exact solution for Poisson equation with "{}sharp step"{}. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}\label{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_exact\_u@{get\_exact\_u}}
+\index{get\_exact\_u@{get\_exact\_u}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Exact solution as a Vector. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson_8cc_source_l00055}{55}} of file \mbox{\hyperlink{two__d__poisson_8cc_source}{two\+\_\+d\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson_8cc_source_l00049}{Alpha}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00052}{Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson_8cc_source_l00183}{Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00221}{Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}\label{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!get\_source@{get\_source}}
+\index{get\_source@{get\_source}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{get\_source()}{get\_source()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::get\+\_\+source (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Source function required to make the solution above an exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson2_8cc_source_l00063}{63}} of file \mbox{\hyperlink{two__d__poisson2_8cc_source}{two\+\_\+d\+\_\+poisson2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson_8cc_source_l00049}{Alpha}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00052}{Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson2_8cc_source_l00274}{main()}}, and \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00317}{run()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}\label{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!source\_function@{source\_function}}
+\index{source\_function@{source\_function}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{source\_function()}{source\_function()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Poisson\+::source\+\_\+function (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Source function required to make the solution above an exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson_8cc_source_l00061}{61}} of file \mbox{\hyperlink{two__d__poisson_8cc_source}{two\+\_\+d\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson_8cc_source_l00049}{Alpha}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00052}{Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson_8cc_source_l00271}{main()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}\label{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!Alpha@{Alpha}}
+\index{Alpha@{Alpha}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+Alpha =1.\+0}
+
+
+
+Parameter for steepness of "{}step"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson_8cc_source_l00049}{49}} of file \mbox{\hyperlink{two__d__poisson_8cc_source}{two\+\_\+d\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson_8cc_source_l00055}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{two__d__poisson2_8cc_source_l00063}{get\+\_\+source()}}, \mbox{\hyperlink{two__d__poisson_8cc_source_l00271}{main()}}, \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00317}{run()}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00061}{source\+\_\+function()}}.
+
+\Hypertarget{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}\label{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294} 
+\index{TanhSolnForPoisson@{TanhSolnForPoisson}!TanPhi@{TanPhi}}
+\index{TanPhi@{TanPhi}!TanhSolnForPoisson@{TanhSolnForPoisson}}
+\doxysubsubsection{\texorpdfstring{TanPhi}{TanPhi}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi =0.\+0}
+
+
+
+Parameter for angle Phi of "{}step"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson_8cc_source_l00052}{52}} of file \mbox{\hyperlink{two__d__poisson_8cc_source}{two\+\_\+d\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson_8cc_source_l00055}{get\+\_\+exact\+\_\+u()}}, \mbox{\hyperlink{two__d__poisson2_8cc_source_l00063}{get\+\_\+source()}}, \mbox{\hyperlink{two__d__poisson_8cc_source_l00271}{main()}}, \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00317}{run()}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00061}{source\+\_\+function()}}.
+

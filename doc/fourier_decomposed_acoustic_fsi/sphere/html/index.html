@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Azimuthally Fourier-decomposed time-harmonic 3D acoustic fluid-structure interaction problems</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Azimuthally Fourier-decomposed time-harmonic 3D acoustic fluid-structure interaction problems </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> This tutorial and the associated driver codes were developed jointly with David Nigro and Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester's EPSRC-funded Knowledge Transfer Account. </center>   </td></tr>
+</table>
+</center><p>In this document we discuss the solution of time-harmonic acoustic fluid-structure interaction problems in cylindrical polar coordinates, using a Fourier decomposition of the solution in the azimuthal direction. These equations are useful to solve problems involving axisymmetric elastic bodies.</p>
+<p>We start by reviewing the relevant theory and then present the solution of a simple model problem &ndash; the sound radiation from an oscillating sphere that is coated with a compressible elastic layer.</p>
+<p>This problem combines the problems discussed in the tutorials illustrating</p><ul>
+<li><a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">the solution of the time-harmonic equations of linear elasticity in cylindrical polar coordinates</a></li>
+</ul>
+<p>and</p><ul>
+<li><a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz equation in cylindrical polar coordinates</a></li>
+</ul>
+<p>[Note that this tutorial is (obviously) very similar to its <a href="../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">cartesian counterpart</a>. The considerable overlap of material is deliberate to make both tutorials reasonably self-contained and explicit.]</p>
+<hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h1><a class="anchor" id="theory"></a>
+Theory: Time-harmonic acoustic fluid-structure interaction problems in cylindrical polar coordinates</h1>
+<p>The figure below shows a sketch of a representative model problem: a sphere is immersed in an inviscid compressible fluid and performs a prescribed harmonic oscillation of radian frequency <img class="formulaInl" alt="$\omega$" src="form_0.png" width="9" height="6"/>. The sphere is coated with a compressible elastic layer. We wish to compute the displacement field in the elastic coating (assumed to be described by the <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">equations of time-harmonic linear elasticity</a>) and the pressure distribution in the fluid (governed by <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz equation</a>). The two sets of equations interact at the interface between fluid and solid: the fluid pressure exerts a traction onto the elastic layer, while the motion of the elastic layer drives the fluid motion via the non-penetration condition.</p>
+<div class="image">
+<img src="coated_sphere.gif" alt=""/>
+<div class="caption">
+Sketch of the model problem: Forced oscillations of a sphere (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. </div></div>
+ <h2><a class="anchor" id="fluid"></a>
+The fluid model: the Helmholtz equation</h2>
+<p>We describe the behaviour of the fluid in terms of the displacement field, <img class="formulaInl" alt="$ {\bf d}^*(r^*,z^*,\varphi,t^*)$" src="form_1.png" width="83" height="14"/>, of the fluid particles, where <img class="formulaInl" alt="$r^*, z^* $" src="form_2.png" width="30" height="13"/> and <img class="formulaInl" alt="$ \varphi $" src="form_3.png" width="8" height="9"/> are cylindrical polar coordinates. As usual, we use asterisks to distinguish dimensional quantities from their non-dimensional equivalents. The fluid is inviscid and compressible, with a bulk modulus <img class="formulaInl" alt="$ B $" src="form_4.png" width="10" height="10"/>, such that the acoustic pressure is given by <img class="formulaInl" alt="$ P^* = - B \ \nabla^{*} \cdot {\bf d}^* $" src="form_5.png" width="94" height="11"/> We assume that the fluid motion is irrotational and can be described by a displacement potential <img class="formulaInl" alt="$\Phi^*$" src="form_6.png" width="14" height="10"/>, such that <img class="formulaInl" alt="$ {\bf d}^*= \nabla^*
+\Phi^*. $" src="form_7.png" width="65" height="11"/> We consider steady-state time-harmonic oscillations and write the displacement potential and the pressure as <img class="formulaInl" alt="$\Phi^*(r^*,z^*,\varphi,t^*) =
+\mbox{Re} \{\phi^*(r^*,z^*,\varphi) \exp(-{\rm i} \omega t^*)\} $" src="form_8.png" width="255" height="14"/> and  <img class="formulaInl" alt="$P^*(r^*,z^*,\varphi,t^*) = \mbox{Re}\{p^*(r^*,z^*,\varphi) 
+\exp(-{\rm i} \omega t^*)\}$" src="form_9.png" width="254" height="14"/>, respectively, where <img class="formulaInl" alt="$\mbox{Re}\{\ldots \}$" src="form_10.png" width="43" height="14"/> denotes the real part. For small disturbances, the linearised Euler equation reveals that the time-harmonic pressure is related to the displacement potential via <img class="formulaInl" alt="$ p^* = \rho_{\rm f} \omega^2 \phi^*$" src="form_11.png" width="66" height="14"/> where <img class="formulaInl" alt="$ \rho_{\rm f}$" src="form_12.png" width="11" height="9"/> is the ambient fluid density. We non-dimensionalise all lengths on a problem-specific lengthscale <img class="formulaInl" alt="$ {\cal L}$" src="form_13.png" width="10" height="10"/> (e.g. the outer radius of the coating layer) such that <img class="formulaInl" alt="$ [r^*, z^*] = {\cal L} [r,z], \ {\bf d}^* = {\cal L} {\bf d} $" src="form_14.png" width="141" height="14"/> and <img class="formulaInl" alt="$\phi^* = {\cal L}^2 \phi$" src="form_15.png" width="51" height="14"/>.</p>
+<p>We then decompose <img class="formulaInl" alt="$ \phi $" src="form_16.png" width="8" height="13"/> into its Fourier components by writing  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\phi}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} \phi_N(r,z) \exp({\rm i}
+N \varphi).
+\]" src="form_17.png" width="201" height="36"/>
+</p>
+<p> Since the governing equations are linear we can compute each Fourier component <img class="formulaInl" alt="$ \phi_N(r,z) $" src="form_18.png" width="43" height="14"/> individually by solving  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 {\phi_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) \phi_N(r,z) = 0,
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_19.png" width="280" height="33"/>
+</p>
+<p> where the square of the non-dimensional wavenumber,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+k^2 = \frac{\rho_{\rm f} (\omega {\cal L})^2}{B},
+\]" src="form_20.png" width="79" height="29"/>
+</p>
+<p> represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the &lsquo;stiffness&rsquo; of the fluid.</p>
+<h2><a class="anchor" id="elastic"></a>
+The solid model: the time harmonic equations of linear elasticity</h2>
+<p>We model the coating layer as a linearly elastic solid, described in terms of a displacement field <img class="formulaInl" alt="$ {\bf U}^*(r^*,z^*,\varphi,t^*)$" src="form_21.png" width="85" height="14"/>, with stress tensor  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{\boldmath$ \tau^*$}=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla^*\cdot U^*$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla^* U^*$}+
+\mbox{\boldmath$ \nabla^* U^*$}^{{\rm T}})\right),
+\]" src="form_22.png" width="316" height="31"/>
+</p>
+<p> where <img class="formulaInl" alt="$E$" src="form_23.png" width="10" height="10"/> and <img class="formulaInl" alt="$\nu$" src="form_24.png" width="6" height="6"/> are the material's Young's modulus and Poisson's ratio, respectively.</p>
+<p>As before, we assume a time-harmonic solution with frequency <img class="formulaInl" alt="$ \omega$" src="form_25.png" width="9" height="6"/> so that  <img class="formulaInl" alt="$ {\bf U}^*(r^*,z^*,\varphi,t^*) = {\rm Re} \{ 
+{\bf u}^*(r^*,z^*,\varphi) \exp(-{\rm i}\omega t^*)\}$" src="form_26.png" width="259" height="14"/>. We non-dimensionalise the displacements on <img class="formulaInl" alt="${\cal L}$" src="form_27.png" width="10" height="10"/> and the stress on Young's modulus, <img class="formulaInl" alt="$E$" src="form_23.png" width="10" height="10"/>, so that <img class="formulaInl" alt="${\bf u}^* = {\cal L}
+{\bf u} $" src="form_28.png" width="46" height="10"/> and <img class="formulaInl" alt="$ \mbox{\boldmath$ \tau^*$} = E \mbox{\boldmath$
+\tau$}$" src="form_29.png" width="50" height="10"/>. The deformation of the elastic coating is then governed by the time-harmonic Navier-Lame equations </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{\boldmath$ \nabla\cdot\tau$}+\Omega^2\mbox{\boldmath$ u$} = {\bf
+0}
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_30.png" width="149" height="16"/>
+</p>
+ </center><p> where </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{\boldmath$ \tau $}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla
+u$}^{{\rm T}})\right)
+\ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_31.png" width="318" height="31"/>
+</p>
+ </center><p> is the non-dimensional stress tensor. The (square of the) non-dimensional wavenumber  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\Omega^2 = \frac{\rho_{\rm s} (\omega {\cal L})^2}{E},
+\]" src="form_32.png" width="81" height="29"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \rho_{\rm s}$" src="form_33.png" width="11" height="9"/> is the solid density, represents the ratio of the typical inertial solid pressure induced by the wall oscillation to the stiffness of the elastic coating. We note that for a &lsquo;light&rsquo; coating we have <img class="formulaInl" alt="$\Omega \ll 1$" src="form_34.png" width="34" height="11"/>.</p>
+<p>We then decompose <img class="formulaInl" alt="$ {\bf u} $" src="form_35.png" width="8" height="6"/> into its Fourier components by writing  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf u}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} {\bf u}_N(r,z) \exp({\rm i}
+N \varphi).
+\]" src="form_36.png" width="203" height="36"/>
+</p>
+<p> This decomposition allows us to remove the <img class="formulaInl" alt="$ \theta $" src="form_37.png" width="6" height="10"/>-dependence from the equations by writing <img class="formulaInl" alt="$ \partial (.)/\partial\theta={\rm i} N (.) $" src="form_38.png" width="84" height="14"/>. Since the governing equations are linear, we can solve for each Fourier component separately and specify the Fourier wavenumber <img class="formulaInl" alt="$ N $" src="form_39.png" width="11" height="10"/> as a parameter.</p>
+<h2><a class="anchor" id="bc"></a>
+Boundary conditions</h2>
+<p>The inner surface of the elastic coating, <img class="formulaInl" alt="$ \partial D_{\rm s} $" src="form_40.png" width="21" height="13"/>, is subject to the prescribed displacement imposed by the oscillating cylinder. For instance, if the inner cylinder performs spherically symmetric oscillations of non-dimensional amplitude <img class="formulaInl" alt="$ \epsilon$" src="form_41.png" width="5" height="6"/>, we have  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{\bf u}_0 = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} 
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_42.png" width="246" height="15"/>
+</p>
+<p> where  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ 
+\mbox{\bf e}_{r_{\rm sphere}}  = \frac{r}{\sqrt{r^2+z^2}} {\bf e}_r +
+\frac{z}{\sqrt{r^2+z^2}} {\bf e}_z
+\]" src="form_43.png" width="196" height="26"/>
+</p>
+<p> is the unit vector in the (spherically!) radial direction, while the other Fourier components remain zero, <img class="formulaInl" alt="$ \mbox{\bf u}_j = {\bf 0} $" src="form_44.png" width="36" height="13"/> for <img class="formulaInl" alt="$ j=\pm 1, \pm 2, ...$" src="form_45.png" width="76" height="11"/> The fluid-loaded surface of the elastic coating, <img class="formulaInl" alt="$ \partial D_{\rm
+f} $" src="form_46.png" width="21" height="13"/>, is subject to the fluid pressure. The non-dimensional traction exerted by the fluid onto the solid (on the solid stress scale) is therefore given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+{\bf t}^{\rm [solid]} = \mbox{\boldmath$ \tau $}^{\rm [solid]} \cdot {\bf n} =
+ - \phi \  Q \ {\bf n}
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_47.png" width="333" height="16"/>
+</p>
+<p> where the <img class="formulaInl" alt="$ {\bf n} = n_r {\bf e}_r + n_z {\bf e}_z $" src="form_48.png" width="90" height="11"/> is the outer unit normal on the solid boundary <img class="formulaInl" alt="$\partial D_{\rm f}$" src="form_49.png" width="21" height="13"/> and  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E}
+\]" src="form_50.png" width="71" height="29"/>
+</p>
+<p> is the final non-dimensional parameter in the problem. It represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the stiffness of the elastic coating. The parameter <img class="formulaInl" alt="$Q$" src="form_51.png" width="10" height="13"/> therefore provides a measure of the strength of the fluid-structure interaction (FSI) in the sense that for <img class="formulaInl" alt="$Q \to 0$" src="form_52.png" width="35" height="13"/> the elastic coating does not &lsquo;feel&rsquo; the presence of the fluid.</p>
+<p>The fluid is forced by the normal displacement of the solid. Imposing the non-penetration condition <img class="formulaInl" alt="$({\bf d} - {\bf u}) \cdot {\bf n} =
+0$" src="form_53.png" width="80" height="14"/> on <img class="formulaInl" alt="$\partial
+D_{\rm f}$" src="form_54.png" width="21" height="13"/> yields a Neumann condition for the displacement potential,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \phi}{\partial n} = {\bf u} \cdot  {\bf n}
+\mbox{\ \ \ \ \ on $\partial D_{\rm f}$}.
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6)
+\]" src="form_55.png" width="229" height="28"/>
+</p>
+<p> Finally, the displacement potential for the fluid must satisfy the Sommerfeld radiation condition  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lim_{r_{\rm sphere} \to \infty} r_{\rm sphere}
+\left( \frac{\partial \phi}{\partial r_{\rm sphere} } -    
+{\rm i} k \phi \right) = 0,
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7)
+\]" src="form_56.png" width="318" height="31"/>
+</p>
+<p> where <img class="formulaInl" alt="$ r_{\rm sphere} = \sqrt{(r^2+z^2)} $" src="form_57.png" width="113" height="16"/> is the (spherical) radius. The Sommerfeld radiation condition ensures that the oscillating sphere does not generate any incoming waves.</p>
+<p>Equations (5), (6) and (7) apply for each Fourier component of the solution.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="impl"></a>
+Implementation</h1>
+<p>The implementation of the coupled problem follows the usual procedure for multi-domain problems in <code>oomph-lib</code>. We discretise the constituent single-physics problems using the existing single-physics elements, here <code>oomph-lib's</code> </p><ul>
+<li><a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">Helmholtz elements</a></li>
+</ul>
+<p>and</p><ul>
+<li><a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">time-harmonic linear elasticity elements</a></li>
+</ul>
+<p>for the discretisation of the PDEs (1) and (2), respectively. The displacement boundary condition (4) on the inner surface of the elastic coating is imposed as usual by pinning the relevant degrees of freedom, exactly as in a <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">single-physics solid mechanics problem</a>. Similarly, the Sommerfeld radiation condition (7) on the outer boundary of the fluid domain can be imposed by any of the methods available for the solution of the single-physics Helmholtz equation, such as a <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">Dirichlet-to-Neumann mapping.</a></p>
+<p>The boundary conditions (5) and (6) at the fluid-solid interface are traction boundary conditions for the solid, and Neumann boundary conditions for the Helmholtz equation, respectively. In a single-physics problem we would impose such boundary conditions by attaching suitable <code>FaceElements</code> to the appropriate boundaries of the "bulk" elements, as shown in the sketch below: <code>TimeHarmonicFourierDecomposedLinearElasticityTractionElement</code> could be used to impose a (given) traction, <img class="formulaInl" alt="$ {\bf t}_0$" src="form_58.png" width="11" height="11"/>, onto the solid; <code>FourierDecomposedHelmholtzFluxElements</code> could be used to impose a (given) normal derivative, <img class="formulaInl" alt="$ f_0$" src="form_59.png" width="11" height="13"/>, on the displacement potential. Both <img class="formulaInl" alt="$ {\bf t}_0$" src="form_58.png" width="11" height="11"/> and <img class="formulaInl" alt="$ f_0 $" src="form_60.png" width="11" height="13"/> would usually be specified in a user-defined namespace and accessed via function pointers as indicated in the right half of the sketch.</p>
+<div class="image">
+<img src="single_physics.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the imposition of flux and traction boundary conditions in single-physics problems. The continuous problems are shown on the left; the discretised ones on the right. </div></div>
+ <p>In the coupled problem, illustrated in the left half of the next sketch, the traction acting on the solid becomes a function of the displacement potential via the boundary condition (5), while the normal derivative of the displacement potential is given in terms of the solid displacement via equation (6). Note that corresponding points on the FSI boundary <img class="formulaInl" alt="$ \partial D_{\rm f}$" src="form_61.png" width="21" height="13"/> are identified by matching values of the boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_62.png" width="6" height="13"/> which is assumed to be consistent between the two domains.</p>
+<p>The implementation of this interaction in the discretised problem is illustrated in the right half of the sketch: We replace the single-physics <code>FourierDecomposedHelmholtzFluxElements</code> by <code>FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElements</code>, and the <code>TimeHarmonicFourierDecomposedLinearElasticityTractionElements</code> by <code>FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElements</code>. (Yes, we like to be verbose...). Both of these <code>FaceElements</code> are derived from the <code>ElementWithExternalElement</code> base class and can therefore store a pointer to an "external" element that provides the information required to impose the appropriate boundary condition. Thus, the <code>FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElements</code> store pointers to the "adjacent" time-harmonic linear elasticity elements (from which they obtain the boundary displacement required for the imposition of (6)), while the <code>FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElements</code> store pointers to the "adjacent" Helmholtz elements that provide the value of the displacement potential required for the evaluation of (5).</p>
+<div class="image">
+<img src="multi_physics.gif" alt=""/>
+<div class="caption">
+Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-physics problem. The continuous problems are shown on the left; the discretised ones on the right. </div></div>
+ <p>The identification of the "adjacent" bulk elements can be performed using the <code>Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)</code> helper function. We note that, as suggested by the sketch above, this function does not require to the two adjacent meshes to have a consistent discretisation &ndash; the identification of adjacent elements is based entirely on the (assumed to be consistent) boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_62.png" width="6" height="13"/> in the two meshes. We refer to <a href="../../../poisson/fish_poisson2/html/index.html#boundary_coords">another tutorial</a> for a discussion of how to set up (or change) the parametrisation of mesh boundaries by boundary coordinates.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The animation below shows the deformation of the elastic coating if a non-spherically symmetric displacement  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\mbox{\bf u} = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} \cos (M\theta)
+\mbox{\ \ \ \ \ on $\partial D_{\rm s}$},
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (8)
+\]" src="form_63.png" width="289" height="15"/>
+</p>
+<p> (for <img class="formulaInl" alt="$ M=4 $" src="form_64.png" width="36" height="10"/>) where <img class="formulaInl" alt="$ \theta $" src="form_37.png" width="6" height="10"/> is the zenith angle, is imposed on the inner boundary of the coating <img class="formulaInl" alt="$\partial D_{\rm s}$" src="form_65.png" width="21" height="13"/>.</p>
+<div class="image">
+<img src="anim.gif" alt=""/>
+<div class="caption">
+Animation showing the time-harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) </div></div>
+ <p>Here is a plot of the corresponding pressure field:</p>
+<div class="image">
+<img src="potential.gif" alt=""/>
+<div class="caption">
+Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. </div></div>
+ <p>Finally, we provide some validation of the computational results by comparing the non-dimensional time-average radiated power  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+\]" src="form_66.png" width="78" height="34"/>
+</p>
+<p> (see <a class="el" href="index.html#appendix">Appendix: The time-averaged radiated power</a> for details) against the analytical solution for spherically symmetric forcing ( <img class="formulaInl" alt="$
+N=0, M=0 $" src="form_67.png" width="76" height="13"/>) for the parameter values <img class="formulaInl" alt="$ k^2 = 10 $" src="form_68.png" width="41" height="11"/>, <img class="formulaInl" alt="$ \rho_{\rm solid}/\rho_{\rm fluid} =1.0 $" src="form_69.png" width="94" height="14"/>, <img class="formulaInl" alt="$ \nu =0.3 $" src="form_70.png" width="39" height="9"/> and a non-dimensional coating thickness of <img class="formulaInl" alt="$ h = 0.2. $" src="form_71.png" width="43" height="10"/></p>
+<div class="image">
+<img src="trace.gif" alt=""/>
+<div class="caption">
+Radiated power as function of the FSI parameter Q for a spherically-symmetrically oscillating coating. Markers: computed results; continuous line: analytical result. </div></div>
+ <div class="image">
+<img src="comp_phi_re.gif" alt=""/>
+<div class="caption">
+Real part of the fluid displacement potential (a measure of the fluid pressure) for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <div class="image">
+<img src="comp_phi_im.gif" alt=""/>
+<div class="caption">
+Imaginary part of the fluid displacement potential (a measure of the fluid pressure) for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <div class="image">
+<img src="comp_ur_re.gif" alt=""/>
+<div class="caption">
+Real part of the radial solid displacement for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <div class="image">
+<img src="comp_ur_im.gif" alt=""/>
+<div class="caption">
+Imaginary part of the radial solid displacement for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <div class="image">
+<img src="comp_uz_re.gif" alt=""/>
+<div class="caption">
+Real part of the axial solid displacement for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <div class="image">
+<img src="comp_uz_im.gif" alt=""/>
+<div class="caption">
+Imaginary part of the axial solid displacement for Q=10. Shaded: computed; spheres: exact. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<h2><a class="anchor" id="namespace"></a>
+The global namespace</h2>
+<p>As usual we define the problem parameters in a namespace. (<a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#comments">Recall</a> that we allow the constitutive parameters to be complex-valued.)  </p><div class="fragment"><div class="line"><span class="comment">//=======start_of_namespace==========================================</span></div>
+<div class="line"><span class="comment">/// Global variables</span></div>
+<div class="line"><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Square of wavenumber for the Helmholtz equation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">K_squared</a>=10.0;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Radius of outer boundary of Helmholtz domain</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Outer_radius</a>=2.0; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// FSI parameter</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Q</a>=10.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim thickness of elastic coating</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">H_coating</a>=0.2; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define azimuthal Fourier wavenumber</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Fourier_wavenumber</a>=0;</div>
+<div class="line">   <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Poisson&#39;s ratio Nu</span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#a373950a959cd784c8f8028099807c2fb">Nu</a>(std::complex&lt;double&gt;(0.3,0.0));</div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Global variables.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00060">fourier_decomposed_acoustic_fsi.cc:61</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a373950a959cd784c8f8028099807c2fb"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a373950a959cd784c8f8028099807c2fb">Global_Parameters::Nu</a></div><div class="ttdeci">std::complex&lt; double &gt; Nu(std::complex&lt; double &gt;(0.3, 0.0))</div><div class="ttdoc">Poisson's ratio Nu.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a7814fddf663e56168174a42d2cd6b4c1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a></div><div class="ttdeci">double Q</div><div class="ttdoc">FSI parameter.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00070">fourier_decomposed_acoustic_fsi.cc:70</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a88ded445ecd7bd89701409e68fd0b900"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a></div><div class="ttdeci">double Outer_radius</div><div class="ttdoc">Radius of outer boundary of Helmholtz domain.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00067">fourier_decomposed_acoustic_fsi.cc:67</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a91a3fa265abaf9e724c668ee800ffb29"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Square of wavenumber for the Helmholtz equation.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00064">fourier_decomposed_acoustic_fsi.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae1198385d90f52c4ed921520ae43a9e7"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a></div><div class="ttdeci">int Fourier_wavenumber</div><div class="ttdoc">Define azimuthal Fourier wavenumber.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00076">fourier_decomposed_acoustic_fsi.cc:76</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae3cf8878ede839bffda01f79bbe3e819"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a></div><div class="ttdeci">double H_coating</div><div class="ttdoc">Non-dim thickness of elastic coating.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00073">fourier_decomposed_acoustic_fsi.cc:73</a></div></div>
+</div><!-- fragment --><p> We wish to perform parameter studies in which we vary the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/>. To make this physically meaningful, we interpret <img class="formulaInl" alt="$ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E $" src="form_73.png" width="95" height="15"/> as a measure of the stiffness of the elastic coating (so that an increase in <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/> corresponds to a reduction in the layer's elastic modulus <img class="formulaInl" alt="$ E $" src="form_74.png" width="10" height="10"/>). In that case, the frequency parameter <img class="formulaInl" alt="$ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E $" src="form_75.png" width="100" height="15"/> in the time-harmonic linear elasticity equations becomes a dependent parameter and is given in terms of the density ratio <img class="formulaInl" alt="$ \rho_{\rm solid}/\rho_{\rm fluid}
+$" src="form_76.png" width="60" height="14"/> and <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/> by <img class="formulaInl" alt="$ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q$" src="form_77.png" width="110" height="15"/>. We therefore provide a helper function to update the dependent parameter following any change in the independent parameters.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Non-dim square of frequency for solid -- dependent variable!</span></div>
+<div class="line"><span class="comment"></span> std::complex&lt;double&gt;  Omega_sq(std::complex&lt;double&gt;(100.0,0.0));</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Density ratio: solid to fluid</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> Density_ratio=1.0; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function to update dependent parameter values</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> update_parameter_values()</div>
+<div class="line"> {</div>
+<div class="line">  Omega_sq=Density_ratio*Q;</div>
+<div class="line"> }</div>
+</div><!-- fragment --><p> We force the system by imposing a prescribed displacement on the inner surface of the elastic coating and allow this to vary in the "zenith"-direction with wavenumber <img class="formulaInl" alt="$ M $" src="form_78.png" width="14" height="10"/>:</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Wavenumber &quot;zenith&quot;-variation of imposed displacement of coating</span></div>
+<div class="line"><span class="comment"> /// on inner boundary </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> M=4; </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Displacement field on inner boundary of solid</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> solid_boundary_displacement(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x,</div>
+<div class="line">                                  Vector&lt;std::complex&lt;double&gt; &gt;&amp; u)</div>
+<div class="line"> {</div>
+<div class="line">  Vector&lt;double&gt; normal(2);</div>
+<div class="line">  <span class="keywordtype">double</span> norm=sqrt(x[0]*x[0]+x[1]*x[1]);</div>
+<div class="line">  <span class="keywordtype">double</span> theta=atan2(x[1],x[0]);</div>
+<div class="line">  normal[0]=x[0]/norm;</div>
+<div class="line">  normal[1]=x[1]/norm;</div>
+<div class="line"> </div>
+<div class="line">  u[0]=complex&lt;double&gt;(normal[0]*cos(<span class="keywordtype">double</span>(M)*theta),0.0);</div>
+<div class="line">  u[1]=complex&lt;double&gt;(normal[1]*cos(<span class="keywordtype">double</span>(M)*theta),0.0);</div>
+<div class="line"> }</div>
+</div><!-- fragment --><p> Finally, we specify the output directory and a multiplier for the number of elements in the meshes to aid mesh convergence studies.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Output directory</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">string</span> Directory=<span class="stringliteral">&quot;RESLT&quot;</span>;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Multiplier for number of elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> El_multiplier=1;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_namespace</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h2><a class="anchor" id="main"></a>
+The driver code</h2>
+<p>The driver code is very straightforward. We parse the command line to determine the parameters for the parameter study and build the problem object, using nine-noded quadrilateral elements for the solution of the time-harmonic elasticity and Helmholtz equations.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_main==================================================</span></div>
+<div class="line"><span class="comment">/// Driver for coated sphere loaded by lineared fluid loading</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="fourier__decomposed__acoustic__fsi_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Define possible command line arguments and parse the ones that</span></div>
+<div class="line"> <span class="comment">// were actually specified</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--dir&quot;</span>,</div>
+<div class="line">                                            &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parameter for the Helmholtz equation</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--k_squared&quot;</span>,</div>
+<div class="line">                                            &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initial value of Q </span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--q_initial&quot;</span>, </div>
+<div class="line">                                            &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of steps in parameter study</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=2;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--nstep&quot;</span>,&amp;nstep);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Increment in FSI parameter in parameter study</span></div>
+<div class="line"> <span class="keywordtype">double</span> q_increment=5.0;</div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--q_increment&quot;</span>,&amp;q_increment);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wavenumber &quot;zenith&quot;-variation of imposed displacement of coating</span></div>
+<div class="line"> <span class="comment">// on inner boundary </span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--M&quot;</span>,</div>
+<div class="line">                                            &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#abc67bb72ab99af013e3c7f6ffe453798">Global_Parameters::M</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Multiplier for number of elements</span></div>
+<div class="line"> CommandLineArgs::specify_command_line_flag(<span class="stringliteral">&quot;--el_multiplier&quot;</span>,</div>
+<div class="line">                                            &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parse command line</span></div>
+<div class="line"> CommandLineArgs::parse_and_assign(); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc what has actually been specified on the command line</span></div>
+<div class="line"> CommandLineArgs::doc_specified_flags();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Update dependent parameters values</span></div>
+<div class="line"> <a class="code hl_function" href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a>();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up the problem</span></div>
+<div class="line"> <a class="code hl_class" href="classCoatedSphereProblem.html">CoatedSphereProblem&lt;QTimeHarmonicFourierDecomposedLinearElasticityElement&lt;3&gt;</a>,</div>
+<div class="line">                     QFourierDecomposedHelmholtzElement&lt;3&gt; &gt; problem;</div>
+<div class="ttc" id="aclassCoatedSphereProblem_html"><div class="ttname"><a href="classCoatedSphereProblem.html">CoatedSphereProblem</a></div><div class="ttdoc">Coated sphere FSI.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00126">fourier_decomposed_acoustic_fsi.cc:127</a></div></div>
+<div class="ttc" id="afourier__decomposed__acoustic__fsi_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="fourier__decomposed__acoustic__fsi_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver for coated sphere loaded by lineared fluid loading.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00687">fourier_decomposed_acoustic_fsi.cc:687</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a301ab922df72030c660b21328d6caf76"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a></div><div class="ttdeci">string Directory</div><div class="ttdoc">Output directory.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00113">fourier_decomposed_acoustic_fsi.cc:113</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a35d5d2ecfff0cec6150a5dc79e5c1ad1"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a></div><div class="ttdeci">unsigned El_multiplier</div><div class="ttdoc">Multiplier for number of elements.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00116">fourier_decomposed_acoustic_fsi.cc:116</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_abc67bb72ab99af013e3c7f6ffe453798"><div class="ttname"><a href="namespaceGlobal__Parameters.html#abc67bb72ab99af013e3c7f6ffe453798">Global_Parameters::M</a></div><div class="ttdeci">unsigned M</div><div class="ttdoc">Wavenumber &quot;zenith&quot;-variation of imposed displacement of coating on inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00095">fourier_decomposed_acoustic_fsi.cc:95</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ae0f9a80fb7510dbfbbef22582da231b7"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a></div><div class="ttdeci">void update_parameter_values()</div><div class="ttdoc">Function to update dependent parameter values.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00088">fourier_decomposed_acoustic_fsi.cc:88</a></div></div>
+</div><!-- fragment --><p> We then solve the problem for various values of <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/>, updating the dependent variables after every increment.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">//Parameter incrementation</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;nstep;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Solve the problem with Newton&#39;s method</span></div>
+<div class="line">   problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   problem.<a class="code hl_function" href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">doc_solution</a>(doc_info);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Increment FSI parameter</span></div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>+=q_increment;</div>
+<div class="line">   <a class="code hl_function" href="namespaceGlobal__Parameters.html#ae0f9a80fb7510dbfbbef22582da231b7">Global_Parameters::update_parameter_values</a>();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_main</span></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_aaeade2a110160c002b2b45954a5a0edc"><div class="ttname"><a href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">CoatedSphereProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00592">fourier_decomposed_acoustic_fsi.cc:593</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="class"></a>
+The problem class</h2>
+<p>The <code>Problem</code> class is templated by the types of the "bulk" elements used to discretise the Fourier-decomposed time-harmonic linear elasticity and Helmholtz equations, respectively. It contains the usual member functions to attach <code>FaceElements</code> to the bulk meshes in order to apply the various Neumann boundary conditions. We note that the costly recomputation of the <img class="formulaInl" alt="$ \gamma- $" src="form_79.png" width="18" height="9"/> integral in the Dirichlet-to-Neumann mapping before the Newton convergence check (implemented in <code>actions_before_newton_convergence_check()</code>) can be avoided by declaring the problem to be linear; see the discussion in the <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">Helmholtz tutorial</a> and <a class="el" href="index.html#comm">Comments</a>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=============start_of_problem_class===================================</span></div>
+<div class="line"><span class="comment">/// Coated sphere FSI</span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classCoatedSphereProblem.html">CoatedSphereProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor:</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classCoatedSphereProblem.html#ab9c983e7f0bed66f13d59bd65d6d151b">CoatedSphereProblem</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#aa268009485d4d2bb6b4856bfa318aaa9">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update function (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#ae5287efab54b16ec1bd5cced98971c9c">actions_after_newton_solve</a>() {}</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Recompute gamma integral before checking Newton residuals</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#a2f55bc904971ca96eb9af3451ef5b4c4">actions_before_newton_convergence_check</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <a class="code hl_variable" href="classCoatedSphereProblem.html#abb33720ab0a096c5e1d6be33310bff21">Helmholtz_DtN_mesh_pt</a>-&gt;setup_gamma();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create FSI traction elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#a2d342158b3058cd5392e2de3fd7595da">create_fsi_traction_elements</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create Helmholtz FSI flux elements</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#a9a301689052eefd53552aadc23ff893b">create_helmholtz_fsi_flux_elements</a>(); </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Setup interaction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#aeea43c892871a6c65df992aedc3b3547">setup_interaction</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create DtN elements on outer boundary</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#a867f4ed706f00a73c87c2c862dcf19c3">create_helmholtz_DtN_elements</a>();</div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_a2d342158b3058cd5392e2de3fd7595da"><div class="ttname"><a href="classCoatedSphereProblem.html#a2d342158b3058cd5392e2de3fd7595da">CoatedSphereProblem::create_fsi_traction_elements</a></div><div class="ttdeci">void create_fsi_traction_elements()</div><div class="ttdoc">Create FSI traction elements.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00505">fourier_decomposed_acoustic_fsi.cc:506</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_a2f55bc904971ca96eb9af3451ef5b4c4"><div class="ttname"><a href="classCoatedSphereProblem.html#a2f55bc904971ca96eb9af3451ef5b4c4">CoatedSphereProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Recompute gamma integral before checking Newton residuals.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00141">fourier_decomposed_acoustic_fsi.cc:141</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_a867f4ed706f00a73c87c2c862dcf19c3"><div class="ttname"><a href="classCoatedSphereProblem.html#a867f4ed706f00a73c87c2c862dcf19c3">CoatedSphereProblem::create_helmholtz_DtN_elements</a></div><div class="ttdeci">void create_helmholtz_DtN_elements()</div><div class="ttdoc">Create DtN elements on outer boundary.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00421">fourier_decomposed_acoustic_fsi.cc:422</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_a9a301689052eefd53552aadc23ff893b"><div class="ttname"><a href="classCoatedSphereProblem.html#a9a301689052eefd53552aadc23ff893b">CoatedSphereProblem::create_helmholtz_fsi_flux_elements</a></div><div class="ttdeci">void create_helmholtz_fsi_flux_elements()</div><div class="ttdoc">Create Helmholtz FSI flux elements.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00549">fourier_decomposed_acoustic_fsi.cc:550</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_aa268009485d4d2bb6b4856bfa318aaa9"><div class="ttname"><a href="classCoatedSphereProblem.html#aa268009485d4d2bb6b4856bfa318aaa9">CoatedSphereProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00135">fourier_decomposed_acoustic_fsi.cc:135</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_ab9c983e7f0bed66f13d59bd65d6d151b"><div class="ttname"><a href="classCoatedSphereProblem.html#ab9c983e7f0bed66f13d59bd65d6d151b">CoatedSphereProblem::CoatedSphereProblem</a></div><div class="ttdeci">CoatedSphereProblem()</div><div class="ttdoc">Constructor:</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00188">fourier_decomposed_acoustic_fsi.cc:189</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_abb33720ab0a096c5e1d6be33310bff21"><div class="ttname"><a href="classCoatedSphereProblem.html#abb33720ab0a096c5e1d6be33310bff21">CoatedSphereProblem::Helmholtz_DtN_mesh_pt</a></div><div class="ttdeci">FourierDecomposedHelmholtzDtNMesh&lt; HELMHOLTZ_ELEMENT &gt; * Helmholtz_DtN_mesh_pt</div><div class="ttdoc">Pointer to mesh containing the DtN elements.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00176">fourier_decomposed_acoustic_fsi.cc:176</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_ae5287efab54b16ec1bd5cced98971c9c"><div class="ttname"><a href="classCoatedSphereProblem.html#ae5287efab54b16ec1bd5cced98971c9c">CoatedSphereProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update function (empty)</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00138">fourier_decomposed_acoustic_fsi.cc:138</a></div></div>
+<div class="ttc" id="aclassCoatedSphereProblem_html_aeea43c892871a6c65df992aedc3b3547"><div class="ttname"><a href="classCoatedSphereProblem.html#aeea43c892871a6c65df992aedc3b3547">CoatedSphereProblem::setup_interaction</a></div><div class="ttdeci">void setup_interaction()</div><div class="ttdoc">Setup interaction.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00462">fourier_decomposed_acoustic_fsi.cc:463</a></div></div>
+</div><!-- fragment --><p> The private member data includes storage for the various meshes and objects that are used for outputting the results.</p>
+<div class="fragment"><div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to solid mesh</span></div>
+<div class="line"><span class="comment"></span> TwoDAnnularMesh&lt;ELASTICITY_ELEMENT&gt;* Solid_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of FSI traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* FSI_traction_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to Helmholtz mesh</span></div>
+<div class="line"><span class="comment"></span> TwoDAnnularMesh&lt;HELMHOLTZ_ELEMENT&gt;* Helmholtz_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to mesh of Helmholtz FSI flux elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* Helmholtz_fsi_flux_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to mesh containing the DtN elements</span></div>
+<div class="line"><span class="comment"></span> FourierDecomposedHelmholtzDtNMesh&lt;HELMHOLTZ_ELEMENT&gt;* Helmholtz_DtN_mesh_pt;</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">};<span class="comment">// end_of_problem_class</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="constr"></a>
+The problem constructor</h2>
+<p>We start by building the meshes for the elasticity and Helmholtz equations. Both domains are half annular regions, so the annular mesh (which is built from a rectangular <code>QuadMesh</code>) is not periodic but only occupies 180 degrees. The mesh also needs to be rotated by 90 degrees to align its ends with the <img class="formulaInl" alt="$ z- $" src="form_80.png" width="15" height="6"/> axis:</p>
+ <div class="fragment"><div class="line"><span class="comment">//===========start_of_constructor======================================= </span></div>
+<div class="line"><span class="comment">/// Constructor: </span></div>
+<div class="line"><span class="comment">//====================================================================== </span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classCoatedSphereProblem.html#ab9c983e7f0bed66f13d59bd65d6d151b">CoatedSphereProblem&lt;ELASTICITY_ELEMENT, HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classCoatedSphereProblem.html#ab9c983e7f0bed66f13d59bd65d6d151b">CoatedSphereProblem</a>() </div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parameters for meshes</span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic=<span class="keyword">false</span>;</div>
+<div class="line"> <span class="keywordtype">double</span> azimuthal_fraction_of_coating=0.5;</div>
+<div class="line"> <span class="keywordtype">double</span> phi=0.5*MathematicalConstants::Pi;</div>
+</div><!-- fragment --><p> The solid mesh occupies the region between <img class="formulaInl" alt="$ r = 1-h $" src="form_81.png" width="53" height="10"/> and <img class="formulaInl" alt="$ r=1
+$" src="form_82.png" width="29" height="9"/> where <img class="formulaInl" alt="$ h $" src="form_83.png" width="8" height="10"/> is the thickness of the elastic coating:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Solid mesh</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> <span class="comment">// Number of elements in azimuthal direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntheta_solid=10*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in radial direction </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nr_solid=3*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Innermost radius for solid mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> a=1.0-<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build solid mesh</span></div>
+<div class="line"> Solid_mesh_pt = <span class="keyword">new</span> </div>
+<div class="line">  TwoDAnnularMesh&lt;ELASTICITY_ELEMENT&gt;(periodic,azimuthal_fraction_of_coating,</div>
+<div class="line">                                      ntheta_solid,nr_solid,a,</div>
+<div class="line">                                      <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae3cf8878ede839bffda01f79bbe3e819">Global_Parameters::H_coating</a>,phi);</div>
+</div><!-- fragment --><p>The Helmholtz mesh occupies the region between <img class="formulaInl" alt="$ r = 1 $" src="form_84.png" width="29" height="9"/> and <img class="formulaInl" alt="$
+r=R_{\rm outer} $" src="form_85.png" width="56" height="13"/> where <img class="formulaInl" alt="$ R_{\rm outer}$" src="form_86.png" width="33" height="13"/> is the outer radius of the computational domain where we will apply the Sommerfeld radiation condition. Note that the two meshes are not matching &ndash; both meshes have 3 element layers in the radial direction but 10 and 11 in the azimuthal direction, respectively. This is done mainly to illustrate our claim that the multi-domain setup functions can operate with non-matching meshes.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Helmholtz mesh</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in azimuthal direction in Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ntheta_helmholtz=11*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in radial direction in Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nr_helmholtz=3*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a35d5d2ecfff0cec6150a5dc79e5c1ad1">Global_Parameters::El_multiplier</a>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Innermost radius of Helmholtz mesh</span></div>
+<div class="line"> a=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Thickness of Helmholtz mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> h_thick_helmholtz=<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a>-a;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build mesh</span></div>
+<div class="line"> Helmholtz_mesh_pt = <span class="keyword">new</span> TwoDAnnularMesh&lt;HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line">  (periodic,azimuthal_fraction_of_coating,</div>
+<div class="line">   ntheta_helmholtz,nr_helmholtz,a,h_thick_helmholtz,phi);</div>
+</div><!-- fragment --><p> Next we create the mesh that will store the <code>FaceElements</code> that will apply the Sommerfeld radiation condition, using the specified number of Fourier terms in the Dirichlet-to-Neumann mapping; see the <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">Helmholtz tutorial</a> for details.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create mesh for DtN elements on outer boundary</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nfourier=20;</div>
+<div class="line"> Helmholtz_DtN_mesh_pt=</div>
+<div class="line">  <span class="keyword">new</span> FourierDecomposedHelmholtzDtNMesh&lt;HELMHOLTZ_ELEMENT&gt;(</div>
+<div class="line">   <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a>,nfourier);</div>
+</div><!-- fragment --><p> Next we pass the problem parameters to the bulk elements. The elasticity elements require a pointer to Poisson's ratio, <img class="formulaInl" alt="$ \nu $" src="form_87.png" width="6" height="6"/>, the azimuthal (Fourier) wavenumber <img class="formulaInl" alt="$ N $" src="form_39.png" width="11" height="10"/>, and the frequency parameter <img class="formulaInl" alt="$ \Omega^2 $" src="form_88.png" width="14" height="11"/>:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the solid problem setup to make the elements fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nel=Solid_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> e=0;e&lt;nel;e++)</div>
+<div class="line">  {     </div>
+<div class="line">   <span class="comment">// Cast to a bulk element</span></div>
+<div class="line">   ELASTICITY_ELEMENT* el_pt=<span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Solid_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to Fourier wavenumber</span></div>
+<div class="line">   el_pt-&gt;fourier_wavenumber_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the pointer to Poisson&#39;s ratio</span></div>
+<div class="line">   el_pt-&gt;nu_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a373950a959cd784c8f8028099807c2fb">Global_Parameters::Nu</a>;</div>
+<div class="line">      </div>
+<div class="line">   <span class="comment">// Set the pointer to square of the angular frequency</span></div>
+<div class="line">   el_pt-&gt;omega_sq_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a64666b7f54095b6095ce9214285e0b01">Global_Parameters::Omega_sq</a>;</div>
+<div class="line">  }</div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a64666b7f54095b6095ce9214285e0b01"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a64666b7f54095b6095ce9214285e0b01">Global_Parameters::Omega_sq</a></div><div class="ttdeci">std::complex&lt; double &gt; Omega_sq(std::complex&lt; double &gt;(100.0, 0.0))</div><div class="ttdoc">Non-dim square of frequency for solid – dependent variable!</div></div>
+</div><!-- fragment --><p> The Helmholtz elements need a pointer to the (square of the) wavenumber, <img class="formulaInl" alt="$ k^2 $" src="form_89.png" width="11" height="11"/> and the azimuthal (Fourier) wavenumber <img class="formulaInl" alt="$ N $" src="form_39.png" width="11" height="10"/>:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all Helmholtz elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Helmholtz_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   HELMHOLTZ_ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>HELMHOLTZ_ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Helmholtz_mesh_pt-&gt;element_pt(i));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Set the k_squared pointer</span></div>
+<div class="line">   el_pt-&gt;k_squared_pt()=&amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a>;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set pointer to Fourier wave number</span></div>
+<div class="line">   el_pt-&gt;fourier_wavenumber_pt()=&amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a>;</div>
+<div class="line">  }</div>
+</div><!-- fragment --><p> It is always a good idea to check the enumeration of the mesh boundaries to facilitate the application of boundary conditions:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Output meshes and their boundaries so far so we can double </span></div>
+<div class="line"> <span class="comment">// check the boundary enumeration</span></div>
+<div class="line"> Solid_mesh_pt-&gt;output(<span class="stringliteral">&quot;solid_mesh.dat&quot;</span>);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output(<span class="stringliteral">&quot;helmholtz_mesh.dat&quot;</span>);</div>
+<div class="line"> Solid_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;solid_mesh_boundary.dat&quot;</span>);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output_boundaries(<span class="stringliteral">&quot;helmholtz_mesh_boundary.dat&quot;</span>);</div>
+</div><!-- fragment --><p> Next we create the meshes containing the various <code>FaceElements</code> used to apply to the FSI traction boundary condition (5), the FSI flux boundary condition (6) for the Helmholtz equation, and the Sommerfeld radiation condition (7), respectively, using helper functions discussed below.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Create FaceElement meshes for boundary conditions</span></div>
+<div class="line"> <span class="comment">//--------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the fsi traction element mesh</span></div>
+<div class="line"> FSI_traction_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_fsi_traction_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Construct the Helmholtz fsi flux element mesh</span></div>
+<div class="line"> Helmholtz_fsi_flux_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_helmholtz_fsi_flux_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Create DtN elements</span></div>
+<div class="line"> create_helmholtz_DtN_elements();</div>
+</div><!-- fragment --><p>We add the various sub-meshes to the problem and build the global mesh</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine sub meshes</span></div>
+<div class="line"> <span class="comment">//-------------------</span></div>
+<div class="line"> add_sub_mesh(Solid_mesh_pt);</div>
+<div class="line"> add_sub_mesh(FSI_traction_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Helmholtz_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Helmholtz_fsi_flux_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Helmholtz_DtN_mesh_pt); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p> The solid displacements are prescribed on the inner boundary (boundary 0) of the solid mesh so we pin all six values (representing the real and imaginary parts of the displacements in the <img class="formulaInl" alt="$ r-, z- $" src="form_90.png" width="38" height="9"/> and <img class="formulaInl" alt="$ \varphi- $" src="form_91.png" width="18" height="9"/> directions, respectively) and assign the boundary values using the function <code>Global_Parameters::solid_boundary_displacement(...)</code>. (The enumeration of the unknowns in the Fourier-decomposed equations time-harmonic linear elasticity is discussed in <a href="../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html#element_types">another tutorial</a>.)</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solid boundary conditions:</span></div>
+<div class="line"> <span class="comment">//---------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pin the solid inner boundary (boundary 0) in all directions</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_node = Solid_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line"> </div>
+<div class="line"> Vector&lt;std::complex&lt;double&gt; &gt; u(2);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the nodes to pin and assign boundary displacements on </span></div>
+<div class="line"> <span class="comment">//solid boundary</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_node;i++)</div>
+<div class="line">  {</div>
+<div class="line">   Node* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(b,i);</div>
+<div class="line">   nod_pt-&gt;pin(0);</div>
+<div class="line">   nod_pt-&gt;pin(1);</div>
+<div class="line">   nod_pt-&gt;pin(2);</div>
+<div class="line">   nod_pt-&gt;pin(3);</div>
+<div class="line">   nod_pt-&gt;pin(4);</div>
+<div class="line">   nod_pt-&gt;pin(5);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Assign prescribed displacements</span></div>
+<div class="line">   x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">   x[1]=nod_pt-&gt;x(1);</div>
+<div class="line">   <a class="code hl_function" href="namespaceGlobal__Parameters.html#ab51fa55d06d9963d363bcf966cfcc62b">Global_Parameters::solid_boundary_displacement</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Real part of radial displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(0,u[0].real());</div>
+<div class="line">   <span class="comment">// Real part of axial displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(1,u[1].real());</div>
+<div class="line">   <span class="comment">// Real part of azimuthal displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(2,0.0);</div>
+<div class="line">   <span class="comment">// Imag part of radial displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(3,u[0].imag());</div>
+<div class="line">   <span class="comment">// Imag part of axial displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(4,u[1].imag());</div>
+<div class="line">   <span class="comment">// Imag part of azimuthal displacement</span></div>
+<div class="line">   nod_pt-&gt;set_value(5,0.0);</div>
+<div class="line">  }</div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_ab51fa55d06d9963d363bcf966cfcc62b"><div class="ttname"><a href="namespaceGlobal__Parameters.html#ab51fa55d06d9963d363bcf966cfcc62b">Global_Parameters::solid_boundary_displacement</a></div><div class="ttdeci">void solid_boundary_displacement(const Vector&lt; double &gt; &amp;x, Vector&lt; std::complex&lt; double &gt; &gt; &amp;u)</div><div class="ttdoc">Displacement field on inner boundary of solid.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00098">fourier_decomposed_acoustic_fsi.cc:98</a></div></div>
+</div><!-- fragment --><p> The radial and azimuthal displacements have to vanish on the symmetry boundary (boundaries 1 and 3):</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Vertical Symmetry boundary (r=0 and z&lt;0)</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> ibound=1;</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Solid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to node</span></div>
+<div class="line">     Node* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin radial displacement (u_0 (real) and u_3 (imag))</span></div>
+<div class="line">     nod_pt-&gt;pin(0);</div>
+<div class="line">     nod_pt-&gt;set_value(0,0.0);</div>
+<div class="line">     nod_pt-&gt;pin(3);</div>
+<div class="line">     nod_pt-&gt;set_value(3,0.0);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin azimuthal displacement (u_2 (real) and u_5 (imag))</span></div>
+<div class="line">     nod_pt-&gt;pin(2);</div>
+<div class="line">     nod_pt-&gt;set_value(2,0.0);</div>
+<div class="line">     nod_pt-&gt;pin(5);</div>
+<div class="line">     nod_pt-&gt;set_value(5,0.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vertical Symmetry boundary (r=0 and z&gt;0)</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="keywordtype">unsigned</span> ibound=3;</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= Solid_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to node</span></div>
+<div class="line">     Node* nod_pt=Solid_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin radial displacement (u_0 (real) and u_3 (imag))</span></div>
+<div class="line">     nod_pt-&gt;pin(0);</div>
+<div class="line">     nod_pt-&gt;set_value(0,0.0);</div>
+<div class="line">     nod_pt-&gt;pin(3);</div>
+<div class="line">     nod_pt-&gt;set_value(3,0.0);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin azimuthal displacement (u_2 (real) and u_5 (imag))</span></div>
+<div class="line">     nod_pt-&gt;pin(2);</div>
+<div class="line">     nod_pt-&gt;set_value(2,0.0);</div>
+<div class="line">     nod_pt-&gt;pin(5);</div>
+<div class="line">     nod_pt-&gt;set_value(5,0.0);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> } <span class="comment">// done sym bc</span></div>
+</div><!-- fragment --><p> Finally, we set up the fluid-structure interaction, assign the equation numbers and open a trace file to record the radiated power as a function of the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup fluid-structure interaction</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> setup_interaction();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a301ab922df72030c660b21328d6caf76">Global_Parameters::Directory</a>.c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">//end_of_constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h2><a class="anchor" id="create_flux"></a>
+Creating the FSI traction elements (and the FSI flux and DtN elements)</h2>
+<p>The function <code>create_fsi_traction_elements()</code> creates the <code>FaceElements</code> required to apply the FSI traction boundary condition (5) on the outer boundary (boundary 2) of the solid mesh:</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_fsi_traction_elements======================</span></div>
+<div class="line"><span class="comment">/// Create fsi traction elements </span></div>
+<div class="line"><span class="comment">//=======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#a2d342158b3058cd5392e2de3fd7595da">CoatedSphereProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classCoatedSphereProblem.html#a2d342158b3058cd5392e2de3fd7595da">create_fsi_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// We&#39;re on boundary 2 of the solid mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are adjacent to boundary b?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Solid_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELASTICITY_ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELASTICITY_ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Solid_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = Solid_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Create element</span></div>
+<div class="line">   FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</div>
+<div class="line">    &lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;* el_pt=</div>
+<div class="line">    <span class="keyword">new</span> FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement</div>
+<div class="line">    &lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;(bulk_elem_pt,</div>
+<div class="line">                                           face_index);   </div>
+<div class="line">   <span class="comment">// Add to mesh</span></div>
+<div class="line">   FSI_traction_mesh_pt-&gt;add_element_pt(el_pt);</div>
+</div><!-- fragment --><p> To function properly, the elements need to know the number of the bulk mesh boundary they are attached to (this allows them to determine the boundary coordinate <img class="formulaInl" alt="$ \zeta $" src="form_62.png" width="6" height="13"/> required to set up the fluid-structure interaction; see <a class="el" href="index.html#impl">Implementation</a> ), and the FSI parameter <img class="formulaInl" alt="$ Q $" src="form_72.png" width="10" height="13"/>.</p>
+<div class="fragment"><div class="line">   </div>
+<div class="line">   <span class="comment">// Associate element with bulk boundary (to allow it to access</span></div>
+<div class="line">   <span class="comment">// the boundary coordinates in the bulk mesh)</span></div>
+<div class="line">   el_pt-&gt;set_boundary_number_in_bulk_mesh(b); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set FSI parameter</span></div>
+<div class="line">   el_pt-&gt;q_pt()=&amp;<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_create_fsi_traction_elements</span></div>
+</div><!-- fragment --><p>[<b>Note:</b> We omit the listings of the functions <code>create_helmholtz_fsi_flux_elements()</code> and <code>create_helmholtz_DtN_elements()</code> which create the <code>FaceElements</code> required to apply the FSI flux boundary condition (6) on the inner boundary (boundary 0), and the Sommerfeld radiation condition (7) on the outer boundary (boundary 2) of the Helmholtz mesh because they are very similar. Feel free to inspect the <br  />
+ <a href="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">source code.</a>]</p>
+<hr  />
+ <hr  />
+<h2><a class="anchor" id="fsi"></a>
+Setting up the fluid-structure interaction</h2>
+<p>The setup of the fluid-structure interaction requires the identification of the "bulk" Helmholtz elements that are adjacent to (the Gauss points of) the <code>FaceElements</code> that impose the FSI traction boundary condition (5), in terms of the displacement potential <img class="formulaInl" alt="$ \phi $" src="form_16.png" width="8" height="13"/> computed by these "bulk" elements. This can be done using the helper function <code>Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)</code> which is templated by the type of the "bulk" element and its spatial dimension, and takes as arguments:</p><ul>
+<li>a pointer to the <code>Problem</code>,</li>
+<li>the boundary ID of the FSI boundary in the "bulk" mesh,</li>
+<li>a pointer to that mesh,</li>
+<li>a pointer to the mesh of <code>FaceElements</code>.</li>
+</ul>
+<p>Nearly a one-liner (if you ignore the optional output of the boundary coordinate which allows us to check that the FSI boundaries of the fluid and solid domains have been parametrised consistently).</p>
+ <div class="fragment"><div class="line"><span class="comment">//=====================start_of_setup_interaction======================</span></div>
+<div class="line"><span class="comment">/// Setup interaction between two fields</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#aeea43c892871a6c65df992aedc3b3547">CoatedSphereProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classCoatedSphereProblem.html#aeea43c892871a6c65df992aedc3b3547">setup_interaction</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup Helmholtz &quot;pressure&quot; load on traction elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_in_helmholtz_mesh=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc boundary coordinate for Helmholtz</span></div>
+<div class="line"> ofstream the_file;</div>
+<div class="line"> the_file.open(<span class="stringliteral">&quot;boundary_coordinate_hh.dat&quot;</span>);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;Mesh::template doc_boundary_coordinates&lt;HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line">  (boundary_in_helmholtz_mesh, the_file);</div>
+<div class="line"> the_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup interaction</span></div>
+<div class="line">  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh</div>
+<div class="line">  &lt;HELMHOLTZ_ELEMENT,2&gt;</div>
+<div class="line">  (<span class="keyword">this</span>,boundary_in_helmholtz_mesh,Helmholtz_mesh_pt,FSI_traction_mesh_pt);</div>
+</div><!-- fragment --><p> Exactly the same method can be used for the identification of the "bulk" elasticity elements that are adjacent to (the Gauss points of) the <code>FaceElements</code> that impose the FSI flux boundary condition (6), using the displacement <img class="formulaInl" alt="$ {\bf u} $" src="form_35.png" width="8" height="6"/> computed by these "bulk" elements:</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"> <span class="comment">// Setup Helmholtz flux from normal displacement interaction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_in_solid_mesh=2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc boundary coordinate for solid mesh</span></div>
+<div class="line"> the_file.open(<span class="stringliteral">&quot;boundary_coordinate_solid.dat&quot;</span>);</div>
+<div class="line"> Solid_mesh_pt-&gt;Mesh::template doc_boundary_coordinates&lt;ELASTICITY_ELEMENT&gt;</div>
+<div class="line">  (boundary_in_solid_mesh, the_file);</div>
+<div class="line"> the_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup interaction</span></div>
+<div class="line"> Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh</div>
+<div class="line">  &lt;ELASTICITY_ELEMENT,2&gt;(</div>
+<div class="line">   <span class="keyword">this</span>,boundary_in_solid_mesh,Solid_mesh_pt,Helmholtz_fsi_flux_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line">}<span class="comment">// end_of_setup_interaction</span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h2><a class="anchor" id="doc"></a>
+Post-processing</h2>
+<p>The post-processing function <code>doc_solution(...)</code> computes and outputs the total radiated power, and plots the computed solutions (real and imaginary parts) for all fields.</p>
+ <div class="fragment"><div class="line"><span class="comment">//==============start_of_doc_solution===============================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELASTICITY_ELEMENT, <span class="keyword">class</span> HELMHOLTZ_ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">CoatedSphereProblem&lt;ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classCoatedSphereProblem.html#aaeade2a110160c002b2b45954a5a0edc">doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc parameters</span></div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Writing result for step &quot;</span> &lt;&lt; doc_info.number() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;. Parameters: &quot;</span>&lt;&lt; std::endl;</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Fourier mode number : N = &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#ae1198385d90f52c4ed921520ae43a9e7">Global_Parameters::Fourier_wavenumber</a> &lt;&lt; std::endl;</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;FSI parameter : Q = &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a> &lt;&lt; std::endl;</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Fluid outer radius : R = &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a88ded445ecd7bd89701409e68fd0b900">Global_Parameters::Outer_radius</a></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Fluid wavenumber : k^2 = &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a></div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Solid wavenumber : Omega_sq = &quot;</span> &lt;&lt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#a64666b7f54095b6095ce9214285e0b01">Global_Parameters::Omega_sq</a> </div>
+<div class="line">            &lt;&lt; std::endl &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file,some_file2;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_plot=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute/output the radiated power</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/power%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Accumulate contribution from elements</span></div>
+<div class="line"> <span class="keywordtype">double</span> power=0.0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nn_element=Helmholtz_DtN_mesh_pt-&gt;nelement(); </div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nn_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   FourierDecomposedHelmholtzBCElementBase&lt;HELMHOLTZ_ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>FourierDecomposedHelmholtzBCElementBase&lt;HELMHOLTZ_ELEMENT&gt;*<span class="keyword">&gt;</span>(</div>
+<div class="line">     Helmholtz_DtN_mesh_pt-&gt;element_pt(e)); </div>
+<div class="line">   power += el_pt-&gt;global_power_contribution(some_file);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Radiated power: &quot;</span> &lt;&lt; power &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output displacement field</span></div>
+<div class="line"> <span class="comment">//--------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/elast_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Solid_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output Helmholtz</span></div>
+<div class="line"> <span class="comment">//-----------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/helmholtz_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Helmholtz_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output fsi traction elements</span></div>
+<div class="line"> <span class="comment">//----------------------------- </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/fsi_traction_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> FSI_traction_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output Helmholtz fsi flux elements</span></div>
+<div class="line"> <span class="comment">//----------------------------------- </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/fsi_flux_bc_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Helmholtz_fsi_flux_mesh_pt-&gt;output(some_file,n_plot);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a7814fddf663e56168174a42d2cd6b4c1">Global_Parameters::Q</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a91a3fa265abaf9e724c668ee800ffb29">Global_Parameters::K_squared</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; <a class="code hl_function" href="namespaceGlobal__Parameters.html#a64666b7f54095b6095ce9214285e0b01">Global_Parameters::Omega_sq</a>.real() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line">            &lt;&lt; power &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line"> <span class="comment">// Bump up counter</span></div>
+<div class="line"> doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end_of_doc_solution</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a517d4c31b8bce6563c2f605266dd9679"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a517d4c31b8bce6563c2f605266dd9679">Global_Parameters::Density_ratio</a></div><div class="ttdeci">double Density_ratio</div><div class="ttdoc">Density ratio: solid to fluid.</div><div class="ttdef"><b>Definition</b> <a href="fourier__decomposed__acoustic__fsi_8cc_source.html#l00085">fourier_decomposed_acoustic_fsi.cc:85</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comm_ex"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="comm"></a>
+Comments</h2>
+<ul>
+<li>The application of the Sommerfeld radiation condition via a Dirichlet-to-Neumann mapping is discussed in detail in <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html#DtN">another tutorial.</a> We explain there that, because the <img class="formulaInl" alt="$ \gamma $" src="form_92.png" width="9" height="9"/> integral depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to <code>FourierDecomposedHelmholtzDtNMesh::setup_gamma()</code> to <code>Problem::actions_before_newton_convergence_check()</code> as done in the driver code listed above. However, if Helmholtz's equation is solved in isolation (or within a coupled, but linear problem as in the present case ), the Newton method is guaranteed to converge in one iteration. In such cases the unnecessary recomputation of <img class="formulaInl" alt="$ \gamma $" src="form_92.png" width="9" height="9"/> after the one-and-only Newton iteration can be suppressed by setting <code>Problem::Problem_is_nonlinear</code> to <code>false</code> &ndash; in that case, <code>oomph-lib's</code> Newton solver skips the convergence check in the Newton iteration and simply accepts the solution obtained after one linear solve.</li>
+<li>You may have noticed that, unlike the tutorial for the <a href="../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">cartesian counterpart</a> of the model problem considered here, we neither demonstrate how to apply the Sommerfeld radiation condition by approximate/absorbing boundary conditions (ABCs), nor do we demonstrate the use of spatial adaptivity. This is because the relevant elements have not (yet!) been written (Any volunteers?). If you wish to enable spatial adaptivity we suggest using an unstructured adaptive mesh, using the methodology demonstrated in <a href="../../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html#DtN">another tutorial.</a></li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="ex"></a>
+Exercises</h2>
+<ul>
+<li>As shown in the <a class="el" href="index.html#appendix">Appendix: The time-averaged radiated power</a>, the time-averaged radiated power <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_93.png" width="11" height="13"/> depends on the derivatives of the displacement potential <img class="formulaInl" alt="$ \phi $" src="form_16.png" width="8" height="13"/>. This implies that the value for <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_93.png" width="11" height="13"/> computed from the finite-element solution for <img class="formulaInl" alt="$ \phi $" src="form_16.png" width="8" height="13"/> is not as accurate as the displacement potential itself. Computing <img class="formulaInl" alt="$ \overline{\cal P}$" src="form_93.png" width="11" height="13"/> to a certain tolerance (e.g. to "graphical accuracy" as in the plot shown above) therefore tends to require meshes that are much finer than would be required if we were only interested in <img class="formulaInl" alt="$ \phi $" src="form_16.png" width="8" height="13"/> itself. <br  />
+<br  />
+ Investigate the accuracy of the computational predictions for <img class="formulaInl" alt="$
+  \overline{\cal P}$" src="form_94.png" width="11" height="13"/> by:<ul>
+<li>increasing the spatial resolution e.g. by using the command line flag <code>--el_multiplier</code> which controls the number of elements in the mesh.</li>
+<li>reducing the outer radius of the computational domain, using the command line flag <code>--outer_radius</code>, say.</li>
+<li>varying the element type, from the bi-linear <code>QFourierDecomposedHelmholtzElement&lt;2&gt;</code> to the bi-cubic <code>QFourierDecomposedHelmholtzElement&lt;4&gt;</code>, say.</li>
+</ul>
+Which of these approaches gives you the "most accuracy" for a given number of degrees of freedom?</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="appendix"></a>
+Appendix: The time-averaged radiated power</h1>
+<p>This appendix provides a brief summary of the computation (and non-dimensionalisation) of the time-averaged power <img class="formulaInl" alt="$ \overline{\cal P }^* $" src="form_95.png" width="15" height="14"/> radiated across the closed surface <img class="formulaInl" alt="$ \partial V $" src="form_96.png" width="18" height="10"/> (with outer unit normal <img class="formulaInl" alt="$ {\bf n} $" src="form_97.png" width="8" height="6"/>) of a fluid volume <img class="formulaInl" alt="$ V $" src="form_98.png" width="10" height="10"/>. In dimensional terms, <img class="formulaInl" alt="$ \overline{\cal P }^* $" src="form_95.png" width="15" height="14"/> is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }^* = \oint_{\partial V} I^* dA^*, 
+\ \ \ \ \ \ \ \ \ \ \ (9)
+\]" src="form_99.png" width="156" height="30"/>
+</p>
+<p> where the intensity  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+I^* =  \frac{1}{{\cal T}} \int_0^{\cal T} 
+{\bf U}^* \cdot P^* {\bf n}  \
+dt^* 
+\]" src="form_100.png" width="136" height="33"/>
+</p>
+<p> depends on the fluid velocity <img class="formulaInl" alt="$ {\bf U}^* =
+\partial {\bf d}^*/\partial t^* = \partial/\partial t^* (\nabla^*
+\Phi^*) $" src="form_101.png" width="166" height="14"/> and the pressure <img class="formulaInl" alt="$ P^* = \rho_{\rm f} \omega^2 \Phi^* $" src="form_102.png" width="70" height="14"/>. The time average is taken over the period of the oscillation, <img class="formulaInl" alt="$ {\cal T} = 2\pi/\omega. $" src="form_103.png" width="59" height="14"/> Using our time-periodic ansatz for the fluid displacement potential, <img class="formulaInl" alt="$ \Phi^* = 
+Re\{ \phi^* \exp(-{\rm i}\omega t^*) \} $" src="form_104.png" width="134" height="14"/>, the intensity can be re-written as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+I^* = \frac{1}{2} \rho_{\rm f} \omega^3 
+\bigg( Im \{\frac{\partial \phi^*}{\partial n^*} \} Re\{\phi^* \} -
+      Re \{\frac{\partial \phi^*}{\partial n^*} \} Im\{\phi^* \} 
+\bigg).
+\]" src="form_105.png" width="288" height="31"/>
+</p>
+<p> Next we express the surface integral in (9) in cylindrical polar coordinates. Assuming the (axisymmetric) boundary of the fluid domain is parametrised (in the <img class="formulaInl" alt="$
+(r^*,z^*)$" src="form_106.png" width="38" height="14"/> plane) as <img class="formulaInl" alt="$ r^* = R^*(s^*)$" src="form_107.png" width="65" height="14"/> and <img class="formulaInl" alt="$ z^* = Z^*(s^*)$" src="form_108.png" width="64" height="14"/>, where <img class="formulaInl" alt="$ s^* $" src="form_109.png" width="10" height="10"/> is some curve parameter (e.g. the arclength), we have  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }^* = \int \int_0^{2\pi} I^*(s^*,\varphi) 
+\sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 +
+       \left(\frac{\partial Z^*}{\partial s^*}\right)^2 }
+       R^*(s^*) \ d\varphi \  ds^* 
+\]" src="form_110.png" width="324" height="39"/>
+</p>
+<p> The power associated with the <img class="formulaInl" alt="$ N-$" src="form_111.png" width="20" height="10"/>th azimuthal Fourier mode, <img class="formulaInl" alt="$ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) $" src="form_112.png" width="109" height="14"/>, is then given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }^*_N = \pi \rho_{\rm f} \omega^3  \int 
+\bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} -
+       Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} 
+\bigg)
+\sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 +
+       \left(\frac{\partial Z^*}{\partial s^*}\right)^2 }
+       R^*(s^*) \  ds^*.
+\]" src="form_113.png" width="504" height="39"/>
+</p>
+<p> Non-dimensionalising all lengths on <img class="formulaInl" alt="$ {\cal L}$" src="form_13.png" width="10" height="10"/> and the displacement potential on <img class="formulaInl" alt="$ {\cal L}^2 $" src="form_114.png" width="15" height="11"/> then yields the following expression for the non-dimensional time-averaged radiated power  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+=  \pi \int 
+\bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} -
+       Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} 
+\bigg)
+\sqrt{ \left(\frac{\partial R}{\partial s}\right)^2 +
+       \left(\frac{\partial Z}{\partial s}\right)^2 }
+       R(s) \  ds.
+\]" src="form_115.png" width="509" height="39"/>
+</p>
+<p> This quantity is computed by <code>oomph-lib</code> on an element-by-element basis, using the function <code>FourierDecomposedHelmholtzBCElementBase::global_power_contribution(...)</code>.</p>
+<p>The computation is most easily validated by comparing against analytical results in which the displacement potential is expressed in spherical polar coordinates <img class="formulaInl" alt="$ (r_{\rm sphere}^*, \theta, \varphi)
+$" src="form_116.png" width="68" height="15"/> where <img class="formulaInl" alt="$ r_{\rm sphere}^* = \sqrt{r^{*2} + z^{*2}} $" src="form_117.png" width="111" height="16"/> and <img class="formulaInl" alt="$ \theta $" src="form_37.png" width="6" height="10"/> is the zenith angle which varies from <img class="formulaInl" alt="$ \theta=0$" src="form_118.png" width="29" height="10"/> at the "North pole" to <img class="formulaInl" alt="$ \theta=\pi $" src="form_119.png" width="30" height="10"/> at the "South pole". If we evaluate the surface integral in (9) on a spherical surface of dimensional radius <img class="formulaInl" alt="$ a^* $" src="form_120.png" width="11" height="10"/>, the dimensional time-averaged radiated power is  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }^* = \int_0^\pi \int_0^{2\pi} I^*(r_{\rm sphere}^*=a^*,
+\theta,\varphi)\  a^{*2} \sin(\theta) \ d\varphi \ d\theta.
+\]" src="form_121.png" width="284" height="33"/>
+</p>
+<p> The power associated with <img class="formulaInl" alt="$ N-$" src="form_111.png" width="20" height="10"/>th azimuthal Fourier mode, <img class="formulaInl" alt="$ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) $" src="form_112.png" width="109" height="14"/>, is then given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }^*_N = \pi a^{*2} \rho_{\rm f} \omega^3  \int_0^\pi 
+\left.\bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} -
+       Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} 
+\bigg)\right|_{r_{\rm sphere}^*=a^*}
+\sin(\theta) \ d\theta,
+\]" src="form_122.png" width="451" height="36"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \partial / \partial n^* = \partial / \partial r_{\rm
+sphere}^* $" src="form_123.png" width="105" height="15"/>. The non-dimensional time-averaged power, evaluated on a sphere of non-dimensional radius <img class="formulaInl" alt="$ a = a^*/{\cal L}$" src="form_124.png" width="50" height="14"/> is then given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\overline{\cal P }_N = 
+\frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}
+=  \pi a^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} -
+       Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} 
+\bigg)\right|_{r_{\rm sphere}=a} \sin(\theta) \ d\theta,
+\]" src="form_125.png" width="475" height="38"/>
+</p>
+<p> where <img class="formulaInl" alt="$ \partial / \partial n = \partial / \partial r_{\rm
+sphere} $" src="form_126.png" width="99" height="14"/>.</p>
+<p>The derivation of the analytical expression for <img class="formulaInl" alt="$ \overline{\cal P }_N $" src="form_127.png" width="20" height="14"/> against which we validated our computational results were performed with maple, using the script <a href="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/exact.map">demo_drivers/interaction/fourier_decomposed_acoustic_fsi/exact.map </a>. </p><hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi">demo_drivers/interaction/fourier_decomposed_acoustic_fsi/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:30
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

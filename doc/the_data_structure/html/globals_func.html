@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: File Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all functions with links to the files they belong to:</div>
+
+<h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
+<li>c2fstrv()&#160;:&#160;<a class="el" href="cfortran_8h.html#a94295e9d6cd4e9e17763ef3812d53b2f">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>DSC$DESCRIPTOR_A()&#160;:&#160;<a class="el" href="cfortran_8h.html#a4368c4a27381fb1fcdadcb7734a8c801">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>f2cstrv()&#160;:&#160;<a class="el" href="cfortran_8h.html#a4947de2f6058a2cf38fb084762cb2d5a">cfortran.h</a></li>
+<li>for()&#160;:&#160;<a class="el" href="cfortran_8h.html#ad66176dcd46750202b430effec302599">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
+<li>get_lu_factor_memory_usage_in_bytes()&#160;:&#160;<a class="el" href="superlu_8c.html#a9e8f593487b0f2e6925138cd33e3fbb2">superlu.c</a></li>
+<li>get_lu_factor_memory_usage_in_bytes_dist()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#a2402ef70b70f76dbd6cd3824f80aeb3b">superlu_dist.c</a></li>
+<li>get_memory_usage_in_bytes()&#160;:&#160;<a class="el" href="superlu_8c.html#a69adc9284c505fa959966039ac941988">superlu.c</a></li>
+<li>get_memory_usage_in_bytes_dist()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#a9f3f38c273359b89ea37dbb6a718d1a9">superlu_dist.c</a></li>
+<li>get_total_memory_usage_in_bytes()&#160;:&#160;<a class="el" href="superlu_8c.html#ad729fab34b601084a13f8f8bc5cc653c">superlu.c</a></li>
+<li>get_total_memory_usage_in_bytes_dist()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#a06a6e09f687861556218d7bffc0f8af3">superlu_dist.c</a></li>
+</ul>
+
+
+<h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>if()&#160;:&#160;<a class="el" href="cfortran_8h.html#a6817bef1e2c0420fa284500e4875ffcb">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_k" name="index_k"></a>- k -</h3><ul>
+<li>kill_trailing()&#160;:&#160;<a class="el" href="cfortran_8h.html#a556928a15d6ee74e39809aa4279b1c09">cfortran.h</a></li>
+<li>kill_trailingn()&#160;:&#160;<a class="el" href="cfortran_8h.html#ad8a3d360fe85ae4d024d785598e3f6f8">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>num_elem()&#160;:&#160;<a class="el" href="cfortran_8h.html#ac5977f3790a2b5e5a4e7e5ea21259aa1">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>print_stacktrace()&#160;:&#160;<a class="el" href="stacktrace_8h.html#adcfca2f623b46c3c828797c1bf94f9a4">stacktrace.h</a></li>
+<li>PROTOCCALLSFSUB1()&#160;:&#160;<a class="el" href="frontal_8h.html#a6c14bd0f45a5ce79afa80fc22358821e">frontal.h</a>, <a class="el" href="mumps_8h.html#a85b119d035735c8c1f6661c34b50eed4">mumps.h</a></li>
+<li>PROTOCCALLSFSUB17()&#160;:&#160;<a class="el" href="lapack__qz_8h.html#a51ce94e8f1515a32503b5fe67a3db757">lapack_qz.h</a></li>
+<li>PROTOCCALLSFSUB2()&#160;:&#160;<a class="el" href="mumps_8h.html#a319f30661a915d1558463251cb9ac2ea">mumps.h</a></li>
+<li>PROTOCCALLSFSUB22()&#160;:&#160;<a class="el" href="frontal_8h.html#a221a37008623dad47ba8a59b6e8ef5d6">frontal.h</a></li>
+<li>PROTOCCALLSFSUB3()&#160;:&#160;<a class="el" href="frontal_8h.html#ac5fa63f703da950b52ddf1a64131e691">frontal.h</a></li>
+<li>PROTOCCALLSFSUB7()&#160;:&#160;<a class="el" href="mumps_8h.html#abb3a71a02a45a77419f20e8562f638d7">mumps.h</a></li>
+<li>PROTOCCALLSFSUB9()&#160;:&#160;<a class="el" href="frontal_8h.html#a0d4a7b5cdc32eaccf6aff94b23fa4d47">frontal.h</a></li>
+</ul>
+
+
+<h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>return()&#160;:&#160;<a class="el" href="cfortran_8h.html#a212ebd5b21744055114ec210bf5a04d7">cfortran.h</a></li>
+</ul>
+
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>superlu()&#160;:&#160;<a class="el" href="superlu_8c.html#a1239692943ece692bfd22e2f62364381">superlu.c</a></li>
+<li>superlu_complex()&#160;:&#160;<a class="el" href="superlu__complex_8c.html#a09a380b3a4c8b979a16271913c19d164">superlu_complex.c</a></li>
+<li>superlu_cr_to_cc()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#a26f239b3f535d534a737fbe03c51fe5e">superlu_dist.c</a></li>
+<li>superlu_dist_distributed_matrix()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#abed14a95611831a19ffd921de0d4a89d">superlu_dist.c</a></li>
+<li>superlu_dist_global_matrix()&#160;:&#160;<a class="el" href="superlu__dist_8c.html#a95c6e8a7870a4921759e90111073ccb8">superlu_dist.c</a></li>
+</ul>
+
+
+<h3><a id="index_v" name="index_v"></a>- v -</h3><ul>
+<li>vkill_trailing()&#160;:&#160;<a class="el" href="cfortran_8h.html#a6b280b49f08fd8d2f06a7ab7d9272e72">cfortran.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:28
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

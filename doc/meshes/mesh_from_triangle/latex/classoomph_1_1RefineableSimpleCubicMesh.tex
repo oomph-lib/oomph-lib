@@ -1,0 +1,111 @@
+\doxysection{oomph\+::Refineable\+Simple\+Cubic\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RefineableSimpleCubicMesh}{}\label{classoomph_1_1RefineableSimpleCubicMesh}\index{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$@{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$}}
+
+
+Refineable version of simple cubic 3D Brick mesh class.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+cubic\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Refineable\+Simple\+Cubic\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.745098cm]{classoomph_1_1RefineableSimpleCubicMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSimpleCubicMesh_a71fab83f3bdc3f0cf7676afb5e313d10}{Refineable\+Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{lz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableSimpleCubicMesh_a058dc3781f5bf9b5580380e1161ad7d5}{Refineable\+Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zmax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a6732b9fc1cd2e98929158fc300b5b0c7}{Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{lz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a22d32a0d85ab3ec9ac3e52cad0bb81d7}{Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{zmax}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aea141bf600aaed7c7c9ccfa3f4f1edfc}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aad51fb31a4f31f2681740793a07594e9}{Nx}}
+\begin{DoxyCompactList}\small\item\em Number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a084445d7cbea1c3d1d67739934bbd6ec}{Ny}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a370e4597208fa51bca60750ae1e5acd4}{Nz}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_ad04c180e97b51e795d79759916006d0f}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_afdfcb28e93c910a57b9c6ab116f5fd2f}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a7a004fc52edde081924073c49b0dd853}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a7933aa6e3d1755d6a5fbcc2a16af79a7}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_af01c08e1e33360eaa2102d0bebb11bcd}{Zmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of z coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aec11ab3ae84b1ba658024d833b7eafbf}{Zmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of z coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Refineable\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$}
+Refineable version of simple cubic 3D Brick mesh class. 
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00165}{165}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RefineableSimpleCubicMesh_a71fab83f3bdc3f0cf7676afb5e313d10}\label{classoomph_1_1RefineableSimpleCubicMesh_a71fab83f3bdc3f0cf7676afb5e313d10} 
+\index{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$@{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$}!RefineableSimpleCubicMesh@{RefineableSimpleCubicMesh}}
+\index{RefineableSimpleCubicMesh@{RefineableSimpleCubicMesh}!oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$@{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSimpleCubicMesh()}{RefineableSimpleCubicMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableSimpleCubicMesh}{oomph\+::\+Refineable\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Refineable\+Simple\+Cubic\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{lz,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00172}{172}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1RefineableSimpleCubicMesh_a058dc3781f5bf9b5580380e1161ad7d5}\label{classoomph_1_1RefineableSimpleCubicMesh_a058dc3781f5bf9b5580380e1161ad7d5} 
+\index{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$@{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$}!RefineableSimpleCubicMesh@{RefineableSimpleCubicMesh}}
+\index{RefineableSimpleCubicMesh@{RefineableSimpleCubicMesh}!oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$@{oomph::RefineableSimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineableSimpleCubicMesh()}{RefineableSimpleCubicMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableSimpleCubicMesh}{oomph\+::\+Refineable\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Refineable\+Simple\+Cubic\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xmin,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{xmax,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{ymin,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{ymax,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{zmax,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00191}{191}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{simple__cubic__mesh_8h}{simple\+\_\+cubic\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

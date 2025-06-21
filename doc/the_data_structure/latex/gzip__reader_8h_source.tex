@@ -1,0 +1,79 @@
+\doxysection{gzip\+\_\+reader.\+h}
+\hypertarget{gzip__reader_8h_source}{}\label{gzip__reader_8h_source}\index{gzip\_reader.h@{gzip\_reader.h}}
+\mbox{\hyperlink{gzip__reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00001}00001\ \textcolor{comment}{//\ LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00002}00002\ \textcolor{comment}{//\ LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00003}00003\ \textcolor{comment}{//\ LIC//\ multi-\/physics\ finite-\/element\ library,\ available}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00004}00004\ \textcolor{comment}{//\ LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00005}00005\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00006}00006\ \textcolor{comment}{//\ LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00007}00007\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00008}00008\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00009}00009\ \textcolor{comment}{//\ LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00010}00010\ \textcolor{comment}{//\ LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00011}00011\ \textcolor{comment}{//\ LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00012}00012\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00013}00013\ \textcolor{comment}{//\ LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00014}00014\ \textcolor{comment}{//\ LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00015}00015\ \textcolor{comment}{//\ LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00016}00016\ \textcolor{comment}{//\ LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00017}00017\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00018}00018\ \textcolor{comment}{//\ LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00019}00019\ \textcolor{comment}{//\ LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00020}00020\ \textcolor{comment}{//\ LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00021}00021\ \textcolor{comment}{//\ LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00022}00022\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00023}00023\ \textcolor{comment}{//\ LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00024}00024\ \textcolor{comment}{//\ LIC//}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00025}00025\ \textcolor{comment}{//\ LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00027}00027\ \textcolor{preprocessor}{\#ifndef\ OOMPH\_GZIP\_READER\_HEADER}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00028}00028\ \textcolor{preprocessor}{\#define\ OOMPH\_GZIP\_READER\_HEADER}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}oomph\_zlib/zlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00032}00032\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00036}00036\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00038}00038\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00039}00039\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00040}00040\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00041}00041\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00042}\mbox{\hyperlink{structoomph_1_1Packet}{00042}}\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structoomph_1_1Packet}{Packet}}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00043}00043\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00044}\mbox{\hyperlink{structoomph_1_1Packet_a8bcdec2f9b29d01ed1b67242d0892a23}{00044}}\ \ \ \ \ std::string\ \mbox{\hyperlink{structoomph_1_1Packet_a8bcdec2f9b29d01ed1b67242d0892a23}{data}};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00045}\mbox{\hyperlink{structoomph_1_1Packet_a80a4e511d6b85cde7d7156af2dd8603c}{00045}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structoomph_1_1Packet_a80a4e511d6b85cde7d7156af2dd8603c}{found}};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00046}00046\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00048}00048\ \textcolor{comment}{\ \ /************************************************************************************}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00049}00049\ \textcolor{comment}{\ \ \ *\ @brief}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00050}00050\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00051}00051\ \textcolor{comment}{\ \ \ *\ @tparam\ \_CharT}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00052}00052\ \textcolor{comment}{\ \ \ *\ @tparam\ \_Traits}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ ************************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00054}\mbox{\hyperlink{classoomph_1_1GZipReader}{00054}}\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1GZipReader}{GZipReader}}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00055}00055\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00056}00056\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00057}00057\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GZipReader_a5838b6b6ac48087ec45a59d8260ec30b}{GZipReader}}();}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00058}00058\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GZipReader_a5838b6b6ac48087ec45a59d8260ec30b}{GZipReader}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{chunk\_size}}\ =\ 256);}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00059}00059\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1GZipReader_ab387d3f0842633c369dd4512cad07f5d}{\string~GZipReader}}();}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1GZipReader_a3501ba01a945d401932e80fa1b66e81c}{open}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}});}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1GZipReader_a8a56f6a5d6e6d7c8a1fe4ae19a0af8bf}{close}}();}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1GZipReader_a66588e2446b09abb9c2b430843c0f745}{is\_open}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00063}00063\ \ \ \ \ \mbox{\hyperlink{structoomph_1_1Packet}{Packet}}\ \mbox{\hyperlink{classoomph_1_1GZipReader_a65ebc1426d85174ca673dab76bc53255}{getline}}();}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00064}00064\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classoomph_1_1GZipReader_a19ade96e79403b1162b63607fac5cb39}{read\_all}}();}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00066}00066\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00067}\mbox{\hyperlink{classoomph_1_1GZipReader_a05353e27cad21f589af6c84331604e6e}{00067}}\ \ \ \ \ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gzFile}}\ \mbox{\hyperlink{classoomph_1_1GZipReader_a05353e27cad21f589af6c84331604e6e}{Gzip\_file}};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00068}\mbox{\hyperlink{classoomph_1_1GZipReader_afd5ba93fa067e76483051fd234010b8b}{00068}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1GZipReader_afd5ba93fa067e76483051fd234010b8b}{Chunk\_size}};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00069}00069\ \ \ \};}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00071}00071\ \}\ \textcolor{comment}{//\ namespace\ oomph}}
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{gzip__reader_8h_source_l00073}00073\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

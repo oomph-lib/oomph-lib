@@ -1,0 +1,372 @@
+\doxysection{oomph\+::Circular\+Cylindrical\+Shell\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1CircularCylindricalShellMesh}{}\label{classoomph_1_1CircularCylindricalShellMesh}\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+
+
+A 2D solid mesh for (topologically) circular cylindrical shells. The shell is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic \doxylink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}.  
+
+
+
+
+{\ttfamily \#include $<$circular\+\_\+shell\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Circular\+Cylindrical\+Shell\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.700965cm]{classoomph_1_1CircularCylindricalShellMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Typedef for fct that defines the axial stretching fct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_ad392c085b9a8f87fd9a24e02738f5d60}{Circular\+Cylindrical\+Shell\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh -- uniformly spaced elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a2382a9ed0cd210c7b697e6ba4f4e2b0b}{Circular\+Cylindrical\+Shell\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86}{axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh -- specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aba83d68289f90a8567887443c3b9c6f0}{Circular\+Cylindrical\+Shell\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nx\+\_\+bl}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delta\+\_\+bl}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a03bba13301e4dec893d73716e146c71d}{assign\+\_\+undeformed\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{undeformed\+\_\+midplane\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86}{axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access to fct pointer to fct that defines the axial stretching fct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-\/direction. Also pass pointer to timestepper (defaults to Steady) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}{x\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}{y\+\_\+min}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}{y\+\_\+max}} () \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Return the maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}{element\+\_\+reorder}} ()
+\begin{DoxyCompactList}\small\item\em Reorder the elements\+: By default they are ordered in "{}horizontal"{} layers (increasing in x, then in y). This function changes this to an ordering in the vertical direction (y first, then x). This is more efficient if a frontal solver is used and the mesh has more elements in the x than the y direction. Can be overloaded in specific derived meshes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{x\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the x-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default is to return nodes that are equally spaced in the x coodinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{y\+\_\+spacing\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{xnode}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{yelement}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ynode}})
+\begin{DoxyCompactList}\small\item\em Return the value of the y-\/coordinate at the node given by the local node number (xnode, ynode) in the element (xelement,yelement). The description is in a "{}psudeo"{} two-\/dimensional coordinate system, so the range of xelement is \mbox{[}0,Nx-\/1\mbox{]}, yelement is \mbox{[}0,Ny-\/1\mbox{]}, and that of xnode and ynode is \mbox{[}0,Np-\/1\mbox{]}. The default it to return nodes that are equally spaced in the y coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a032ddb9b1afa4ef446ca74c8a6965000}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ly}})
+\begin{DoxyCompactList}\small\item\em Mesh build helper fct. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}{scaled\+\_\+x}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&x)
+\begin{DoxyCompactList}\small\item\em Fct that defines the axial stretching to accomodate bending boundary layers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db}{piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xi}})
+\begin{DoxyCompactList}\small\item\em Default axial scaling fct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9}{Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Fct pointer to fct that defines the axial stretching fct. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a1a7ed3a5cd4c03c6254e5a8a0d3e532a}{Nx\+\_\+bl}}
+\begin{DoxyCompactList}\small\item\em Number of azimuthal element layers that get squashed into each of the the two boundary layers at the ends of the tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a935925bc28901cf99f2ebdc2cff1b692}{Delta\+\_\+bl}}
+\begin{DoxyCompactList}\small\item\em Axial extent of the squashed boundary layer part of the mesh occupied by Nx\+\_\+bl elements (at each end of the tube) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{periodic\+\_\+in\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{build}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}{Nx}}
+\begin{DoxyCompactList}\small\item\em Nx\+: number of elements in x-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}{Ny}}
+\begin{DoxyCompactList}\small\item\em Ny\+: number of elements in y-\/direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a92502c7536a6644ebffd806841cd4d98}{Np}}
+\begin{DoxyCompactList}\small\item\em Np\+: number of (linear) points in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{bool}} \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}{Xperiodic}}
+\begin{DoxyCompactList}\small\item\em Boolean variable used to determine whether the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$}
+A 2D solid mesh for (topologically) circular cylindrical shells. The shell is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic \doxylink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}. 
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00050}{50}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}\label{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!AxialBLStretchingFctPt@{AxialBLStretchingFctPt}}
+\index{AxialBLStretchingFctPt@{AxialBLStretchingFctPt}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AxialBLStretchingFctPt}{AxialBLStretchingFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Axial\+BLStretching\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&x)}
+
+
+
+Typedef for fct that defines the axial stretching fct. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00056}{56}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_ad392c085b9a8f87fd9a24e02738f5d60}\label{classoomph_1_1CircularCylindricalShellMesh_ad392c085b9a8f87fd9a24e02738f5d60} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!CircularCylindricalShellMesh@{CircularCylindricalShellMesh}}
+\index{CircularCylindricalShellMesh@{CircularCylindricalShellMesh}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CircularCylindricalShellMesh()}{CircularCylindricalShellMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the mesh -- uniformly spaced elements. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00059}{59}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00043}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00197}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Delta\+\_\+bl}}, \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00224}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Nx\+\_\+bl}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00231}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a2382a9ed0cd210c7b697e6ba4f4e2b0b}\label{classoomph_1_1CircularCylindricalShellMesh_a2382a9ed0cd210c7b697e6ba4f4e2b0b} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!CircularCylindricalShellMesh@{CircularCylindricalShellMesh}}
+\index{CircularCylindricalShellMesh@{CircularCylindricalShellMesh}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CircularCylindricalShellMesh()}{CircularCylindricalShellMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}}}]{axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the mesh -- specify fct that maps axial Lagr. coordinates to new positions to allow for better resolution of bending boundary layer. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{82}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00134}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00043}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00197}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Delta\+\_\+bl}}, \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00224}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Nx\+\_\+bl}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00231}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_aba83d68289f90a8567887443c3b9c6f0}\label{classoomph_1_1CircularCylindricalShellMesh_aba83d68289f90a8567887443c3b9c6f0} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!CircularCylindricalShellMesh@{CircularCylindricalShellMesh}}
+\index{CircularCylindricalShellMesh@{CircularCylindricalShellMesh}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{CircularCylindricalShellMesh()}{CircularCylindricalShellMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx\+\_\+bl,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{delta\+\_\+bl,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the mesh. nx\+\_\+bl azimuthal layers of elements near the ends are squashed to that axial extent of the elements changes from lx/nx to delta\+\_\+bl. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00105}{105}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00043}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00197}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Delta\+\_\+bl}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Nx\+\_\+bl}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00231}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a03bba13301e4dec893d73716e146c71d}\label{classoomph_1_1CircularCylindricalShellMesh_a03bba13301e4dec893d73716e146c71d} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!assign\_undeformed\_positions@{assign\_undeformed\_positions}}
+\index{assign\_undeformed\_positions@{assign\_undeformed\_positions}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{assign\_undeformed\_positions()}{assign\_undeformed\_positions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::assign\+\_\+undeformed\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \&}]{undeformed\+\_\+midplane\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+In all elastic problems, the nodes must be assigned an undeformed, or reference, position, corresponding to the stress-\/free state of the elastic body. This function assigns the undeformed position for the nodes on the elastic tube. 
+
+Set the undeformed coordinates of the nodes. 
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00126}{126}} of file \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source}{circular\+\_\+shell\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86}\label{classoomph_1_1CircularCylindricalShellMesh_aa9c69dc3c6692d19706178d558d07f86} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!axial\_bl\_stretching\_fct\_pt@{axial\_bl\_stretching\_fct\_pt}}
+\index{axial\_bl\_stretching\_fct\_pt@{axial\_bl\_stretching\_fct\_pt}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{axial\_bl\_stretching\_fct\_pt()}{axial\_bl\_stretching\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access to fct pointer to fct that defines the axial stretching fct. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00134}{134}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a032ddb9b1afa4ef446ca74c8a6965000}\label{classoomph_1_1CircularCylindricalShellMesh_a032ddb9b1afa4ef446ca74c8a6965000} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{ly }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mesh build helper fct. 
+
+Mesh build fct. 
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source_l00043}{43}} of file \mbox{\hyperlink{circular__shell__mesh_8template_8cc_source}{circular\+\_\+shell\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{tetgen__mesh_8h_source_l00054}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgen\+Mesh()}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00105}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{circular__shell__mesh_8h_source_l00059}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db}\label{classoomph_1_1CircularCylindricalShellMesh_a5730df8baedd890ca909f31e5452f3db} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!piecewise\_linear\_axial\_bl\_stretching\_fct@{piecewise\_linear\_axial\_bl\_stretching\_fct}}
+\index{piecewise\_linear\_axial\_bl\_stretching\_fct@{piecewise\_linear\_axial\_bl\_stretching\_fct}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{piecewise\_linear\_axial\_bl\_stretching\_fct()}{piecewise\_linear\_axial\_bl\_stretching\_fct()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{xi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Default axial scaling fct. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00162}{162}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00197}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Delta\+\_\+bl}}, \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00063}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nx}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00193}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Nx\+\_\+bl}}, \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00072}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmax}}, and \mbox{\hyperlink{rectangular__quadmesh_8h_source_l00070}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmin}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00149}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::scaled\+\_\+x()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b}\label{classoomph_1_1CircularCylindricalShellMesh_a4fb67c76ca3ad60efadfe2d3aabcfa0b} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!scaled\_x@{scaled\_x}}
+\index{scaled\_x@{scaled\_x}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{scaled\_x()}{scaled\_x()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::scaled\+\_\+x (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fct that defines the axial stretching to accomodate bending boundary layers. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00149}{149}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{circular__shell__mesh_8h_source_l00162}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9}\label{classoomph_1_1CircularCylindricalShellMesh_a5669a7c088fe0d30f7d011275861f6b9} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!Axial\_bl\_stretching\_fct\_pt@{Axial\_bl\_stretching\_fct\_pt}}
+\index{Axial\_bl\_stretching\_fct\_pt@{Axial\_bl\_stretching\_fct\_pt}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Axial\_bl\_stretching\_fct\_pt}{Axial\_bl\_stretching\_fct\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh_a770336fa72e8911f31b9fe3f70197a51}{Axial\+BLStretching\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fct pointer to fct that defines the axial stretching fct. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00189}{189}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00134}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::axial\+\_\+bl\+\_\+stretching\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00105}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00059}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{circular__shell__mesh_8h_source_l00149}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::scaled\+\_\+x()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a935925bc28901cf99f2ebdc2cff1b692}\label{classoomph_1_1CircularCylindricalShellMesh_a935925bc28901cf99f2ebdc2cff1b692} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!Delta\_bl@{Delta\_bl}}
+\index{Delta\_bl@{Delta\_bl}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Delta\_bl}{Delta\_bl}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Delta\+\_\+bl\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Axial extent of the squashed boundary layer part of the mesh occupied by Nx\+\_\+bl elements (at each end of the tube) 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00197}{197}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00105}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00059}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{circular__shell__mesh_8h_source_l00162}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}.
+
+\Hypertarget{classoomph_1_1CircularCylindricalShellMesh_a1a7ed3a5cd4c03c6254e5a8a0d3e532a}\label{classoomph_1_1CircularCylindricalShellMesh_a1a7ed3a5cd4c03c6254e5a8a0d3e532a} 
+\index{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}!Nx\_bl@{Nx\_bl}}
+\index{Nx\_bl@{Nx\_bl}!oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$@{oomph::CircularCylindricalShellMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx\_bl}{Nx\_bl}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CircularCylindricalShellMesh}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Nx\+\_\+bl\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of azimuthal element layers that get squashed into each of the the two boundary layers at the ends of the tube. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__shell__mesh_8h_source_l00193}{193}} of file \mbox{\hyperlink{circular__shell__mesh_8h_source}{circular\+\_\+shell\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8h_source_l00082}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00105}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8h_source_l00059}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{circular__shell__mesh_8h_source_l00162}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{circular__shell__mesh_8h}{circular\+\_\+shell\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{circular__shell__mesh_8template_8cc}{circular\+\_\+shell\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

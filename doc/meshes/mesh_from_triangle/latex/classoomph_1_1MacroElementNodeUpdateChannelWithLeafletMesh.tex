@@ -1,0 +1,101 @@
+\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}{}\label{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}\index{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$}}
+
+
+Channel with leaflet mesh with Macro\+Element-\/based node update. The leaflet is represented by the specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base.  
+
+
+
+
+{\ttfamily \#include $<$channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.828283cm]{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a8b2ddfc283a8f1ff6927c7a0c7f0ed21}{Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}leaflet\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&lleft, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&lright, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&hleaflet, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&htot, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&nleft, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&nright, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ny2}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. Timestepper defaults to Steady default Timestepper defined in the Mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a5debbfa68133a5ad9bd621b24b2fd086}{\texorpdfstring{$\sim$}{\string~}\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh}{oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh_ab210be34e9d7f72af9aefee618d41f3d}{Channel\+With\+Leaflet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}leaflet\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&lleft, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&lright, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&hleaflet, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&htot, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&nleft, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&nright, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ny1}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ny2}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. Timestepper defaults to Steady default Timestepper defined in the Mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh_ad767dc06cf65becc207f780f8100657c}{\texorpdfstring{$\sim$}{\string~}\+Channel\+With\+Leaflet\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor \+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain}{Channel\+With\+Leaflet\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh_a149962cb0c0385515c8ed872358c448f}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407}{Simple\+Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&Nx, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&Ny, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&Lx, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&Ly, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions. Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}} () \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh}{oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ChannelWithLeafletDomain}{Channel\+With\+Leaflet\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh_a20dc25dbf38222156f72b6d6213c5246}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ChannelWithLeafletMesh_ab0d744f2c35b9397dd35cc75a2db9e60}{Leaflet\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that represents the leaflet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$}
+Channel with leaflet mesh with Macro\+Element-\/based node update. The leaflet is represented by the specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base. 
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00163}{163}} of file \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a8b2ddfc283a8f1ff6927c7a0c7f0ed21}\label{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a8b2ddfc283a8f1ff6927c7a0c7f0ed21} 
+\index{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateChannelWithLeafletMesh@{MacroElementNodeUpdateChannelWithLeafletMesh}}
+\index{MacroElementNodeUpdateChannelWithLeafletMesh@{MacroElementNodeUpdateChannelWithLeafletMesh}!oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateChannelWithLeafletMesh()}{MacroElementNodeUpdateChannelWithLeafletMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{leaflet\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{lleft,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{lright,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{hleaflet,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{htot,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nleft,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nright,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{ny1,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{ny2,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer to Geom\+Object that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. Timestepper defaults to Steady default Timestepper defined in the Mesh base class. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00177}{177}} of file \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00081}{oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, and \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00091}{oomph\+::\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$\+::\+Leaflet\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a5debbfa68133a5ad9bd621b24b2fd086}\label{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh_a5debbfa68133a5ad9bd621b24b2fd086} 
+\index{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateChannelWithLeafletMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateChannelWithLeafletMesh}}
+\index{````~MacroElementNodeUpdateChannelWithLeafletMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateChannelWithLeafletMesh}!oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateChannelWithLeafletMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateChannelWithLeafletMesh()}{\string~MacroElementNodeUpdateChannelWithLeafletMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateChannelWithLeafletMesh}{Macro\+Element\+Node\+Update\+Channel\+With\+Leaflet\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source_l00274}{274}} of file \mbox{\hyperlink{channel__with__leaflet__mesh_8h_source}{channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{channel__with__leaflet__mesh_8h}{channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

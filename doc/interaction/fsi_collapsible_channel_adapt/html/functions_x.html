@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Class Members</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
+
+<h3><a id="index_x" name="index_x"></a>- x -</h3><ul>
+<li>x&#160;:&#160;<a class="el" href="structoomph_1_1TriangleMesh_1_1Point.html#a3d99bdf85c838801260dda624a518133">oomph::TriangleMesh&lt; ELEMENT &gt;::Point</a></li>
+<li>X0&#160;:&#160;<a class="el" href="classUndeformedWall.html#a7ab875c46fef905df33eb47e0336581b">UndeformedWall</a></li>
+<li>X_0&#160;:&#160;<a class="el" href="classoomph_1_1AlgebraicChannelWithLeafletMesh.html#a1577beb584df4ad0f8517563934855fc">oomph::AlgebraicChannelWithLeafletMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a165703af81538c28bbbd780d65bbb333">oomph::ChannelWithLeafletDomain</a></li>
+<li>x_fin()&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#ae30b2566729bf9c70f5bf447c2da01ce">oomph::FishDomain</a></li>
+<li>X_fin&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#af27c51fe0272df3dec2ad93c5c231d59">oomph::FishDomain</a></li>
+<li>x_max()&#160;:&#160;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#a3449b36a5e4fc4728e517bd38d7b0cc6">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></li>
+<li>x_min()&#160;:&#160;<a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab311c3bec7f9f721bae1f93e0798ab2c">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></li>
+<li>X_mouth&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#aa25f3280c2453dd725d59f23a478ee11">oomph::FishDomain</a></li>
+<li>x_mouth()&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#a96565a2b7f7f8b07c1018d43c83b96ff">oomph::FishDomain</a></li>
+<li>x_north_east&#160;:&#160;<a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#aea8383a0d263080b49c3cbaee4af7833">oomph::TopologicallyRectangularDomain</a></li>
+<li>x_south_west&#160;:&#160;<a class="el" href="classoomph_1_1TopologicallyRectangularDomain.html#a2e58acf65777d33e580b4953b7753b45">oomph::TopologicallyRectangularDomain</a></li>
+<li>x_spacing_function()&#160;:&#160;<a class="el" href="classoomph_1_1ChannelSpineMesh.html#a16e0d4264443b1beb274753b0d6b970e">oomph::ChannelSpineMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ad4c2f349cf201cb3107f0a4e5447c16f">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1TwoLayerSpineMesh.html#a5fd9eae27ba19788e0b397936f0c5ead">oomph::TwoLayerSpineMesh&lt; ELEMENT &gt;</a></li>
+<li>XdaTetMesh()&#160;:&#160;<a class="el" href="classoomph_1_1XdaTetMesh.html#a4cea32a11d0899ac230de66899e503d1">oomph::XdaTetMesh&lt; ELEMENT &gt;</a></li>
+<li>Xi_hi&#160;:&#160;<a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#aba0cc67782144fe066dd0d04ac9d79dd">oomph::QuarterCircleSectorDomain</a>, <a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#a1fa3bfeddd4467e9fe0ec45fbfac0740">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1QuarterTubeDomain.html#ab28aec59a8756da42f74c0affb7276c2">oomph::QuarterTubeDomain</a>, <a class="el" href="classoomph_1_1QuarterTubeMesh.html#aabb226a0b0208c579f426e58d944685c">oomph::QuarterTubeMesh&lt; ELEMENT &gt;</a></li>
+<li>Xi_lo&#160;:&#160;<a class="el" href="classoomph_1_1QuarterCircleSectorDomain.html#afed5ccc21ccf6c6cd1dca65d58a5b708">oomph::QuarterCircleSectorDomain</a>, <a class="el" href="classoomph_1_1QuarterCircleSectorMesh.html#ab5c1e4484c69eb78bd3323321605a93c">oomph::QuarterCircleSectorMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1QuarterTubeDomain.html#a63fb621521e3e01a84ae393f73fc7117">oomph::QuarterTubeDomain</a>, <a class="el" href="classoomph_1_1QuarterTubeMesh.html#a323243990ecc860e5083d205c1ab247c">oomph::QuarterTubeMesh&lt; ELEMENT &gt;</a></li>
+<li>xi_nose()&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#a35a6dd2a8c0555586b5131a4bb28d649">oomph::FishDomain</a></li>
+<li>Xi_nose&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#af85c4be86bb87528939778e3f63a40a5">oomph::FishDomain</a></li>
+<li>Xi_tail&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#a38633d4f3e2777be9544b907d1de5870">oomph::FishDomain</a></li>
+<li>xi_tail()&#160;:&#160;<a class="el" href="classoomph_1_1FishDomain.html#afbea554d73dacc45b9c5fbb032ff3ec1">oomph::FishDomain</a></li>
+<li>Xmax&#160;:&#160;<a class="el" href="classoomph_1_1OneDMesh.html#ac625d93f5299895ad5801918a20aea31">oomph::OneDMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#ab8e4ddba0ce8315cf480cdd1f3447684">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#afdfcb28e93c910a57b9c6ab116f5fd2f">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></li>
+<li>Xmin&#160;:&#160;<a class="el" href="classoomph_1_1OneDMesh.html#ab1c25c2437f203dd1f6d42ec0613e6a1">oomph::OneDMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#af3aab508d077460545031e758396514a">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1SimpleCubicMesh.html#ad04c180e97b51e795d79759916006d0f">oomph::SimpleCubicMesh&lt; ELEMENT &gt;</a></li>
+<li>Xperiodic&#160;:&#160;<a class="el" href="classoomph_1_1HermiteQuadMesh.html#af1c2c974dc0d2e599b6bbe3921c5bb77">oomph::HermiteQuadMesh&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RectangularQuadMesh.html#a83dd0ace2eb47449f5e30522f71d9f59">oomph::RectangularQuadMesh&lt; ELEMENT &gt;</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:09:23
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

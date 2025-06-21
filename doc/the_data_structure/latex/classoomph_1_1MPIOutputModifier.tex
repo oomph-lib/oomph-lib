@@ -1,0 +1,216 @@
+\doxysection{oomph\+::MPIOutput\+Modifier Class Reference}
+\hypertarget{classoomph_1_1MPIOutputModifier}{}\label{classoomph_1_1MPIOutputModifier}\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+
+
+MPI output modifier\+: Precedes every output by specification of the processor ID. Output can be restricted to a single processor.  
+
+
+
+
+{\ttfamily \#include $<$oomph\+\_\+utilities.\+h$>$}
+
+Inheritance diagram for oomph\+::MPIOutput\+Modifier\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MPIOutputModifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a3f9c2bd12d8f68daa52c7eb3e5d0ac00}{MPIOutput\+Modifier}} ()
+\begin{DoxyCompactList}\small\item\em Constructor -- initialise flags for output from all processors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a5969aeb173e3f0aafda56fab954806cc}{communicator\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return pointer to communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a982af85269a497f384cdff7baf9487a1}{operator()}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{stream}})
+\begin{DoxyCompactList}\small\item\em Precede the output by the processor ID but output everything. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a5822d5ea7cd02753e5706ec790f2ff6e}{restrict\+\_\+output\+\_\+to\+\_\+single\+\_\+processor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+rank}}=0)
+\begin{DoxyCompactList}\small\item\em Switch to ensure output is only produced from a single processor (default\+: Master node, i.\+e. rank 0) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_af4b8be91b5f6eb8be549f2926047aa14}{allow\+\_\+output\+\_\+from\+\_\+all\+\_\+processors}} ()
+\begin{DoxyCompactList}\small\item\em Switch to ensure output is only produced from a single processor (default\+: Master node, i.\+e. rank 0) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1OutputModifier}{oomph\+::\+Output\+Modifier}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1OutputModifier_ab7e4b4d9e455cc93204160e70e2d50f6}{Output\+Modifier}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1OutputModifier_aa8a586ce54aeae7d1d0d5a075dd5b172}{\texorpdfstring{$\sim$}{\string~}\+Output\+Modifier}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_ad255e5084d5a8df94597711a096d3863}{Output\+\_\+rank}}
+\begin{DoxyCompactList}\small\item\em Rank of single processor that produces output (only used if Output\+\_\+from\+\_\+single\+\_\+processor=true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a9fbc25a8b8187f1669fcbfefa47dacd0}{Output\+\_\+from\+\_\+single\+\_\+processor}}
+\begin{DoxyCompactList}\small\item\em Boolean to control if output is performed only on a single processor (default\+: false) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MPIOutputModifier_a93306d57a0a753eb7a7735c78f7e4360}{Communicator\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Communicator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MPI output modifier\+: Precedes every output by specification of the processor ID. Output can be restricted to a single processor. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00773}{773}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MPIOutputModifier_a3f9c2bd12d8f68daa52c7eb3e5d0ac00}\label{classoomph_1_1MPIOutputModifier_a3f9c2bd12d8f68daa52c7eb3e5d0ac00} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!MPIOutputModifier@{MPIOutputModifier}}
+\index{MPIOutputModifier@{MPIOutputModifier}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{MPIOutputModifier()}{MPIOutputModifier()}}
+{\footnotesize\ttfamily oomph\+::\+MPIOutput\+Modifier\+::\+MPIOutput\+Modifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor -- initialise flags for output from all processors. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00789}{789}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MPIOutputModifier_af4b8be91b5f6eb8be549f2926047aa14}\label{classoomph_1_1MPIOutputModifier_af4b8be91b5f6eb8be549f2926047aa14} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!allow\_output\_from\_all\_processors@{allow\_output\_from\_all\_processors}}
+\index{allow\_output\_from\_all\_processors@{allow\_output\_from\_all\_processors}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{allow\_output\_from\_all\_processors()}{allow\_output\_from\_all\_processors()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+MPIOutput\+Modifier\+::allow\+\_\+output\+\_\+from\+\_\+all\+\_\+processors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to ensure output is only produced from a single processor (default\+: Master node, i.\+e. rank 0) 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00811}{811}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00782}{Output\+\_\+from\+\_\+single\+\_\+processor}}.
+
+\Hypertarget{classoomph_1_1MPIOutputModifier_a5969aeb173e3f0aafda56fab954806cc}\label{classoomph_1_1MPIOutputModifier_a5969aeb173e3f0aafda56fab954806cc} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!communicator\_pt@{communicator\_pt}}
+\index{communicator\_pt@{communicator\_pt}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{communicator\_pt()}{communicator\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+MPIOutput\+Modifier\+::communicator\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return pointer to communicator. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00792}{792}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00785}{Communicator\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00991}{oomph\+::\+MPI\+\_\+\+Helpers\+::init()}}.
+
+\Hypertarget{classoomph_1_1MPIOutputModifier_a982af85269a497f384cdff7baf9487a1}\label{classoomph_1_1MPIOutputModifier_a982af85269a497f384cdff7baf9487a1} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+MPIOutput\+Modifier\+::operator() (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Precede the output by the processor ID but output everything. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1OutputModifier_ae2d5a2d19865858377b5113ca84aa423}{oomph\+::\+Output\+Modifier}}.
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00960}{960}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00785}{Communicator\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00782}{Output\+\_\+from\+\_\+single\+\_\+processor}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00778}{Output\+\_\+rank}}.
+
+\Hypertarget{classoomph_1_1MPIOutputModifier_a5822d5ea7cd02753e5706ec790f2ff6e}\label{classoomph_1_1MPIOutputModifier_a5822d5ea7cd02753e5706ec790f2ff6e} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!restrict\_output\_to\_single\_processor@{restrict\_output\_to\_single\_processor}}
+\index{restrict\_output\_to\_single\_processor@{restrict\_output\_to\_single\_processor}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{restrict\_output\_to\_single\_processor()}{restrict\_output\_to\_single\_processor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+MPIOutput\+Modifier\+::restrict\+\_\+output\+\_\+to\+\_\+single\+\_\+processor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{output\+\_\+rank = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch to ensure output is only produced from a single processor (default\+: Master node, i.\+e. rank 0) 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00802}{802}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00782}{Output\+\_\+from\+\_\+single\+\_\+processor}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00778}{Output\+\_\+rank}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MPIOutputModifier_a93306d57a0a753eb7a7735c78f7e4360}\label{classoomph_1_1MPIOutputModifier_a93306d57a0a753eb7a7735c78f7e4360} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!Communicator\_pt@{Communicator\_pt}}
+\index{Communicator\_pt@{Communicator\_pt}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{Communicator\_pt}{Communicator\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}}\texorpdfstring{$\ast$}{*} oomph\+::\+MPIOutput\+Modifier\+::\+Communicator\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Communicator. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00785}{785}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00792}{communicator\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00960}{operator()()}}.
+
+\Hypertarget{classoomph_1_1MPIOutputModifier_a9fbc25a8b8187f1669fcbfefa47dacd0}\label{classoomph_1_1MPIOutputModifier_a9fbc25a8b8187f1669fcbfefa47dacd0} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!Output\_from\_single\_processor@{Output\_from\_single\_processor}}
+\index{Output\_from\_single\_processor@{Output\_from\_single\_processor}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{Output\_from\_single\_processor}{Output\_from\_single\_processor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+MPIOutput\+Modifier\+::\+Output\+\_\+from\+\_\+single\+\_\+processor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean to control if output is performed only on a single processor (default\+: false) 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00782}{782}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8h_source_l00811}{allow\+\_\+output\+\_\+from\+\_\+all\+\_\+processors()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00960}{operator()()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00802}{restrict\+\_\+output\+\_\+to\+\_\+single\+\_\+processor()}}.
+
+\Hypertarget{classoomph_1_1MPIOutputModifier_ad255e5084d5a8df94597711a096d3863}\label{classoomph_1_1MPIOutputModifier_ad255e5084d5a8df94597711a096d3863} 
+\index{oomph::MPIOutputModifier@{oomph::MPIOutputModifier}!Output\_rank@{Output\_rank}}
+\index{Output\_rank@{Output\_rank}!oomph::MPIOutputModifier@{oomph::MPIOutputModifier}}
+\doxysubsubsection{\texorpdfstring{Output\_rank}{Output\_rank}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+MPIOutput\+Modifier\+::\+Output\+\_\+rank\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rank of single processor that produces output (only used if Output\+\_\+from\+\_\+single\+\_\+processor=true. 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00778}{778}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00960}{operator()()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00802}{restrict\+\_\+output\+\_\+to\+\_\+single\+\_\+processor()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{oomph__utilities_8h}{oomph\+\_\+utilities.\+h}}\item 
+\mbox{\hyperlink{oomph__utilities_8cc}{oomph\+\_\+utilities.\+cc}}\end{DoxyCompactItemize}

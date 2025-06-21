@@ -1,0 +1,154 @@
+\doxysection{Flow\+Past\+Box\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classFlowPastBoxProblem}{}\label{classFlowPastBoxProblem}\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+
+
+Flow past a box in a channel.  
+
+
+Inheritance diagram for Flow\+Past\+Box\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFlowPastBoxProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFlowPastBoxProblem_a6b674c1028abcd6e54c50d939d25a00e}{Flow\+Past\+Box\+Problem}} (const string \&node\+\_\+file\+\_\+name, const string \&element\+\_\+file\+\_\+name, const string \&poly\+\_\+file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass filenames for mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlowPastBoxProblem_a48bb150799924e3d0ab42a610babefbd}{\texorpdfstring{$\sim$}{\string~}\+Flow\+Past\+Box\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFlowPastBoxProblem_a5d226368814cfbf84f274a63b3c0b20c}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFlowPastBoxProblem_a602772b5e37d5bd426d64e46cc3f59ea}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. Re-\/set velocity boundary conditions just to be on the safe side... \end{DoxyCompactList}\item 
+Triangle\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFlowPastBoxProblem_af6aadbd7afdae37e00903113c8aa53c5}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFlowPastBoxProblem_a7e2f3692ab8f492c6d5e967953c4a4ea}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Flow\+Past\+Box\+Problem$<$ ELEMENT $>$}
+Flow past a box in a channel. 
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00062}{62}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFlowPastBoxProblem_a6b674c1028abcd6e54c50d939d25a00e}\label{classFlowPastBoxProblem_a6b674c1028abcd6e54c50d939d25a00e} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!FlowPastBoxProblem@{FlowPastBoxProblem}}
+\index{FlowPastBoxProblem@{FlowPastBoxProblem}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{FlowPastBoxProblem()}{FlowPastBoxProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classFlowPastBoxProblem}{\+::\+Flow\+Past\+Box\+Problem}} (\begin{DoxyParamCaption}\item[{const string \&}]{node\+\_\+file\+\_\+name,  }\item[{const string \&}]{element\+\_\+file\+\_\+name,  }\item[{const string \&}]{poly\+\_\+file\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass filenames for mesh. 
+
+Constructor for Flow\+Past\+Box problem. Pass filenames for mesh. 
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00140}{140}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00046}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}.
+
+\Hypertarget{classFlowPastBoxProblem_a48bb150799924e3d0ab42a610babefbd}\label{classFlowPastBoxProblem_a48bb150799924e3d0ab42a610babefbd} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!````~FlowPastBoxProblem@{\texorpdfstring{$\sim$}{\string~}FlowPastBoxProblem}}
+\index{````~FlowPastBoxProblem@{\texorpdfstring{$\sim$}{\string~}FlowPastBoxProblem}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FlowPastBoxProblem()}{\string~FlowPastBoxProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00074}{74}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFlowPastBoxProblem_a5d226368814cfbf84f274a63b3c0b20c}\label{classFlowPastBoxProblem_a5d226368814cfbf84f274a63b3c0b20c} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00077}{77}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+\Hypertarget{classFlowPastBoxProblem_a602772b5e37d5bd426d64e46cc3f59ea}\label{classFlowPastBoxProblem_a602772b5e37d5bd426d64e46cc3f59ea} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve. Re-\/set velocity boundary conditions just to be on the safe side... 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00081}{81}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00125}{Flow\+Past\+Box\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classFlowPastBoxProblem_a7e2f3692ab8f492c6d5e967953c4a4ea}\label{classFlowPastBoxProblem_a7e2f3692ab8f492c6d5e967953c4a4ea} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00203}{203}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00237}{main()}}.
+
+\Hypertarget{classFlowPastBoxProblem_af6aadbd7afdae37e00903113c8aa53c5}\label{classFlowPastBoxProblem_af6aadbd7afdae37e00903113c8aa53c5} 
+\index{FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!FlowPastBoxProblem$<$ ELEMENT $>$@{FlowPastBoxProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Triangle\+Mesh$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFlowPastBoxProblem}{Flow\+Past\+Box\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00125}{125}} of file \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00081}{Flow\+Past\+Box\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc_source_l00237}{main()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mesh__from__xfig__navier__stokes_8cc}{mesh\+\_\+from\+\_\+xfig\+\_\+navier\+\_\+stokes.\+cc}}\end{DoxyCompactItemize}

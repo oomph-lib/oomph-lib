@@ -1,0 +1,639 @@
+\doxysection{oomph\+::Rank\+Five\+Tensor\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RankFiveTensor}{}\label{classoomph_1_1RankFiveTensor}\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+
+
+A Rank 5 Tensor class.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor_a388a9f191189d174e521d422e3bc44cd}{Rank\+Five\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor_a17aa636c6c8b4aa80ff4e168bca1881b}{Rank\+Five\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Copy constructor\+: Deep copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}} \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a20c271491dbce39872a9244a8d9711bf}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Copy assignement. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor_a2fb5f83bfa8237882705e16ca1fbd04b}{Rank\+Five\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em One parameter constructor produces a nxnxnxnxn tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor_af7e765aecc61bca8ad9742e07822c54f}{Rank\+Five\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index3}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index4}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index5}})
+\begin{DoxyCompactList}\small\item\em Four parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor_a79ebab81e4e9f7fdd193f59a4858930c}{Rank\+Five\+Tensor}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index3}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index4}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index5}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+val}})
+\begin{DoxyCompactList}\small\item\em Four parameter constructor, general non-\/square tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_aee507ed9367b053bcf538b3eaaf62d03}{\texorpdfstring{$\sim$}{\string~}\+Rank\+Five\+Tensor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: delete the pointers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a8d0f38a3627c9d07dbf1106a26f61578}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}})
+\begin{DoxyCompactList}\small\item\em Resize to a square nxnxnxn tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_afdd04cd2a29fb7b8c41f5300200813e1}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index3}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index4}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index5}})
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a80eeaef66e9252fa5d1d7031e4ec402c}{resize}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index1}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index2}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index3}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index4}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+index5}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+value}})
+\begin{DoxyCompactList}\small\item\em Resize to a general tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_ad3fbc9fc71b68eec0fa4c00d9ad663b6}{initialise}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{val}})
+\begin{DoxyCompactList}\small\item\em Initialise all values in the tensor to val. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_ad9f5651447193b2c7e669beff9146cc9}{nindex1}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 1 of the tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a92d2a0f9ffc41e75cf5fffa9cfd601fd}{nindex2}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 2 of the tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a720c024bccf0b33f2f3bd6367611a4fa}{nindex3}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 3 of the tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a2f59dd13534545f9e2641dafee86bc27}{nindex4}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 4 of the tensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_aa880f750e9d2e2bf5ec5c41ad3241568}{nindex5}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the range of index 5 of the tensor. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor_aa4e20c4ddef857cad0ddf9e4de264ad4}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Overload the round brackets to give access as a(i,j,k,l,m) \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a0d2ef9d9bcc8103b2d60f768ffa60532}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload a const version for read-\/only access as a(i,j,k,l,m) \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a75d42bf8529d20a18c573eb62aeffed1}{raw\+\_\+direct\+\_\+access}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a7de048a5cdd37e9f5266de9718548b61}{raw\+\_\+direct\+\_\+access}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_ab3bd11afa49e36ff28c1d4968796f5a3}{offset}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Caculate the offset in flat-\/packed Cy-\/style, column-\/major format, required for a given i,j,k. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a8fce9375f99c153e3d5b91193996dad8}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{k}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{l}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_ae93e781da0ba64c2c5403099dc75dd3d}{Tensordata}}
+\begin{DoxyCompactList}\small\item\em Private internal representation as pointer to data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_aeea12f3e80605e2c7b6b4a8ec47bf91c}{N}}
+\begin{DoxyCompactList}\small\item\em 1st Tensor dimension \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a240c4e62ffa0dd3e5dfc3b0063f94c7f}{M}}
+\begin{DoxyCompactList}\small\item\em 2nd Tensor dimension \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_ab23d40bd6af9279e1e35362249c32855}{P}}
+\begin{DoxyCompactList}\small\item\em 3rd Tensor dimension \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a68d3c3387b64dc8124cb0800ab4814a5}{Q}}
+\begin{DoxyCompactList}\small\item\em 4th Tensor dimension \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor_a0c348e8860783caf59103dd86f38d1a6}{R}}
+\begin{DoxyCompactList}\small\item\em 5th Tensor dimension \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T$>$\newline
+class oomph\+::\+Rank\+Five\+Tensor$<$ T $>$}
+A Rank 5 Tensor class. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02112}{2112}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RankFiveTensor_a388a9f191189d174e521d422e3bc44cd}\label{classoomph_1_1RankFiveTensor_a388a9f191189d174e521d422e3bc44cd} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!RankFiveTensor@{RankFiveTensor}}
+\index{RankFiveTensor@{RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFiveTensor()}{RankFiveTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Rank\+Five\+Tensor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02195}{2195}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a17aa636c6c8b4aa80ff4e168bca1881b}\label{classoomph_1_1RankFiveTensor_a17aa636c6c8b4aa80ff4e168bca1881b} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!RankFiveTensor@{RankFiveTensor}}
+\index{RankFiveTensor@{RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFiveTensor()}{RankFiveTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Rank\+Five\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor\+: Deep copy. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02198}{2198}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a2fb5f83bfa8237882705e16ca1fbd04b}\label{classoomph_1_1RankFiveTensor_a2fb5f83bfa8237882705e16ca1fbd04b} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!RankFiveTensor@{RankFiveTensor}}
+\index{RankFiveTensor@{RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFiveTensor()}{RankFiveTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Rank\+Five\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+One parameter constructor produces a nxnxnxnxn tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02272}{2272}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_af7e765aecc61bca8ad9742e07822c54f}\label{classoomph_1_1RankFiveTensor_af7e765aecc61bca8ad9742e07822c54f} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!RankFiveTensor@{RankFiveTensor}}
+\index{RankFiveTensor@{RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFiveTensor()}{RankFiveTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Rank\+Five\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index2,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index3,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index4,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index5 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Four parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02289}{2289}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a79ebab81e4e9f7fdd193f59a4858930c}\label{classoomph_1_1RankFiveTensor_a79ebab81e4e9f7fdd193f59a4858930c} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!RankFiveTensor@{RankFiveTensor}}
+\index{RankFiveTensor@{RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RankFiveTensor()}{RankFiveTensor()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Rank\+Five\+Tensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index2,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index3,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index4,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index5,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{initial\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Four parameter constructor, general non-\/square tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02311}{2311}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_aee507ed9367b053bcf538b3eaaf62d03}\label{classoomph_1_1RankFiveTensor_aee507ed9367b053bcf538b3eaaf62d03} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!````~RankFiveTensor@{\texorpdfstring{$\sim$}{\string~}RankFiveTensor}}
+\index{````~RankFiveTensor@{\texorpdfstring{$\sim$}{\string~}RankFiveTensor}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RankFiveTensor()}{\string~RankFiveTensor()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: delete the pointers. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02331}{2331}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RankFiveTensor_ad3fbc9fc71b68eec0fa4c00d9ad663b6}\label{classoomph_1_1RankFiveTensor_ad3fbc9fc71b68eec0fa4c00d9ad663b6} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!initialise@{initialise}}
+\index{initialise@{initialise}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{initialise()}{initialise()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::initialise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialise all values in the tensor to val. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02477}{2477}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_ad9f5651447193b2c7e669beff9146cc9}\label{classoomph_1_1RankFiveTensor_ad9f5651447193b2c7e669beff9146cc9} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!nindex1@{nindex1}}
+\index{nindex1@{nindex1}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex1()}{nindex1()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::nindex1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 1 of the tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02486}{2486}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a92d2a0f9ffc41e75cf5fffa9cfd601fd}\label{classoomph_1_1RankFiveTensor_a92d2a0f9ffc41e75cf5fffa9cfd601fd} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!nindex2@{nindex2}}
+\index{nindex2@{nindex2}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex2()}{nindex2()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::nindex2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 2 of the tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02492}{2492}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a720c024bccf0b33f2f3bd6367611a4fa}\label{classoomph_1_1RankFiveTensor_a720c024bccf0b33f2f3bd6367611a4fa} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!nindex3@{nindex3}}
+\index{nindex3@{nindex3}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex3()}{nindex3()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::nindex3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 3 of the tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02498}{2498}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a2f59dd13534545f9e2641dafee86bc27}\label{classoomph_1_1RankFiveTensor_a2f59dd13534545f9e2641dafee86bc27} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!nindex4@{nindex4}}
+\index{nindex4@{nindex4}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex4()}{nindex4()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::nindex4 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 4 of the tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02504}{2504}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_aa880f750e9d2e2bf5ec5c41ad3241568}\label{classoomph_1_1RankFiveTensor_aa880f750e9d2e2bf5ec5c41ad3241568} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!nindex5@{nindex5}}
+\index{nindex5@{nindex5}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nindex5()}{nindex5()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::nindex5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the range of index 5 of the tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02510}{2510}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_ab3bd11afa49e36ff28c1d4968796f5a3}\label{classoomph_1_1RankFiveTensor_ab3bd11afa49e36ff28c1d4968796f5a3} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!offset@{offset}}
+\index{offset@{offset}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{offset()}{offset()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::offset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Caculate the offset in flat-\/packed Cy-\/style, column-\/major format, required for a given i,j,k. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02564}{2564}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, and \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_aa4e20c4ddef857cad0ddf9e4de264ad4}\label{classoomph_1_1RankFiveTensor_aa4e20c4ddef857cad0ddf9e4de264ad4} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload the round brackets to give access as a(i,j,k,l,m) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02516}{2516}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a0d2ef9d9bcc8103b2d60f768ffa60532}\label{classoomph_1_1RankFiveTensor_a0d2ef9d9bcc8103b2d60f768ffa60532} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload a const version for read-\/only access as a(i,j,k,l,m) 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02529}{2529}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a20c271491dbce39872a9244a8d9711bf}\label{classoomph_1_1RankFiveTensor_a20c271491dbce39872a9244a8d9711bf} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}} \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{Rank\+Five\+Tensor}}$<$ T $>$ \&}]{source\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assignement. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02231}{2231}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02338}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a8fce9375f99c153e3d5b91193996dad8}\label{classoomph_1_1RankFiveTensor_a8fce9375f99c153e3d5b91193996dad8} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{l,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02135}{2135}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, and \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, and \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a75d42bf8529d20a18c573eb62aeffed1}\label{classoomph_1_1RankFiveTensor_a75d42bf8529d20a18c573eb62aeffed1} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!raw\_direct\_access@{raw\_direct\_access}}
+\index{raw\_direct\_access@{raw\_direct\_access}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{raw\_direct\_access()}{raw\_direct\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::raw\+\_\+direct\+\_\+access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02545}{2545}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a7de048a5cdd37e9f5266de9718548b61}\label{classoomph_1_1RankFiveTensor_a7de048a5cdd37e9f5266de9718548b61} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!raw\_direct\_access@{raw\_direct\_access}}
+\index{raw\_direct\_access@{raw\_direct\_access}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{raw\_direct\_access()}{raw\_direct\_access()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \& \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::raw\+\_\+direct\+\_\+access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Direct access to internal storage of data in flat-\/packed C-\/style column-\/major format. WARNING\+: Only for experienced users. Only use this if raw speed is of the essence, as in the solid mechanics problems. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02555}{2555}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a8d0f38a3627c9d07dbf1106a26f61578}\label{classoomph_1_1RankFiveTensor_a8d0f38a3627c9d07dbf1106a26f61578} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a square nxnxnxn tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02338}{2338}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02338}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, and \mbox{\hyperlink{matrices_8h_source_l02338}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_afdd04cd2a29fb7b8c41f5300200813e1}\label{classoomph_1_1RankFiveTensor_afdd04cd2a29fb7b8c41f5300200813e1} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index2,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index3,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index4,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index5 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02344}{2344}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a80eeaef66e9252fa5d1d7031e4ec402c}\label{classoomph_1_1RankFiveTensor_a80eeaef66e9252fa5d1d7031e4ec402c} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!resize@{resize}}
+\index{resize@{resize}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index2,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index3,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index4,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n\+\_\+index5,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \&}]{initial\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize to a general tensor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02410}{2410}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02122}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l02119}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02125}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::P}}, \mbox{\hyperlink{matrices_8h_source_l02128}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::Q}}, \mbox{\hyperlink{matrices_8h_source_l02131}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::R}}, and \mbox{\hyperlink{matrices_8h_source_l02116}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Tensordata}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1RankFiveTensor_a240c4e62ffa0dd3e5dfc3b0063f94c7f}\label{classoomph_1_1RankFiveTensor_a240c4e62ffa0dd3e5dfc3b0063f94c7f} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!M@{M}}
+\index{M@{M}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::M\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+2nd Tensor dimension 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02122}{2122}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02492}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::nindex2()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_aeea12f3e80605e2c7b6b4a8ec47bf91c}\label{classoomph_1_1RankFiveTensor_aeea12f3e80605e2c7b6b4a8ec47bf91c} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!N@{N}}
+\index{N@{N}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::N\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+1st Tensor dimension 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02119}{2119}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02486}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::nindex1()}}, \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_ab23d40bd6af9279e1e35362249c32855}\label{classoomph_1_1RankFiveTensor_ab23d40bd6af9279e1e35362249c32855} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!P@{P}}
+\index{P@{P}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::P\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+3rd Tensor dimension 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02125}{2125}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02498}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::nindex3()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a68d3c3387b64dc8124cb0800ab4814a5}\label{classoomph_1_1RankFiveTensor_a68d3c3387b64dc8124cb0800ab4814a5} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!Q@{Q}}
+\index{Q@{Q}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::Q\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+4th Tensor dimension 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02128}{2128}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02504}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::nindex4()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_a0c348e8860783caf59103dd86f38d1a6}\label{classoomph_1_1RankFiveTensor_a0c348e8860783caf59103dd86f38d1a6} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!R@{R}}
+\index{R@{R}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::R\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+5th Tensor dimension 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02131}{2131}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02510}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::nindex5()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02231}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator=()}}, \mbox{\hyperlink{matrices_8h_source_l02135}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::range\+\_\+check()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}.
+
+\Hypertarget{classoomph_1_1RankFiveTensor_ae93e781da0ba64c2c5403099dc75dd3d}\label{classoomph_1_1RankFiveTensor_ae93e781da0ba64c2c5403099dc75dd3d} 
+\index{oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}!Tensordata@{Tensordata}}
+\index{Tensordata@{Tensordata}!oomph::RankFiveTensor$<$ T $>$@{oomph::RankFiveTensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Tensordata}{Tensordata}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+T\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RankFiveTensor}{oomph\+::\+Rank\+Five\+Tensor}}$<$ T $>$\+::\+Tensordata\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private internal representation as pointer to data. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l02116}{2116}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02477}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l02516}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02529}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{matrices_8h_source_l02198}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02272}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02289}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02311}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\+Rank\+Five\+Tensor()}}, \mbox{\hyperlink{matrices_8h_source_l02545}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02555}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02344}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, \mbox{\hyperlink{matrices_8h_source_l02410}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::resize()}}, and \mbox{\hyperlink{matrices_8h_source_l02331}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\+Rank\+Five\+Tensor()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Creation of internal boundaries for Triangle based meshes</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Creation of internal boundaries for Triangle based meshes </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we show how to add internal boundaries and create connections among them in 2D unstructured meshes with <code>oomph-lib</code>. The mesh generation procedure is performed by using <a href="http://www.cs.berkeley.edu/~jrs/">Jonathan Shewchuk's</a> <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle</a>. This tutorial complements the discussion in <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html">another tutorial</a> where we illustrated how to build <code>oomph-lib</code> meshes using the <code>TriangleMeshPolygon</code> and <code>TriangleMeshClosedCurve</code> objects.</p>
+<hr  />
+<p>Additionally, we show via examples</p><ul>
+<li>how to connect <code>TriangleMeshCurveSection</code> objects</li>
+<li>how to add addition holes and extra regions, i.e. regions not defined via <code>TriangleMeshPolygon</code> or <code>TriangleMeshClosedCurve</code> objects</li>
+</ul>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="overview"></a>
+Adding internal boundaries</h1>
+<h2><a class="anchor" id="open_curve"></a>
+The TriangleMeshOpenCurve object</h2>
+<p>An internal boundary is defined in <code>oomph-lib</code> by the object <code>TriangleMeshOpenCurve</code>. We can create and add as many internal boundaries as we need for defining our domain, see figure below.</p>
+<div class="image">
+<img src="figure_extravagant.gif" alt=""/>
+<div class="caption">
+The <code>TriangleMeshOpenCurve</code> object allow us to define domains with internal boundaries. The internal boundaries are shown in red. Notice the connections of the internal boundaries with other boundaries. The connections are shown with filled small circles. </div></div>
+ <p>The <code>TriangleMeshOpenCurve</code> object allows the creation of complex internal boundaries as a combination of <code>TriangleMeshPolyLine</code> and/or <code>TriangleMeshCurviLine</code> objects. In order to create a <code>TriangleMeshOpenCurve</code> it is necessary to create a <code>Vector</code> of <code>TriangleMeshCurveSection</code> objects that define the <code>TriangleMeshOpenCurve</code>, see figure below.</p>
+<div class="image">
+<img src="different_open_curves.gif" alt=""/>
+<div class="caption">
+Different types of <code>TriangleMeshOpenCurve</code>, a) A <code>TriangleMeshOpenCurve</code> defined as a combination of two <code>TriangleMeshPolyLines</code> (in blue) and a <code>TriangleMeshCurviLine</code> (in red). b) A <code>TriangleMeshOpenCurve</code> can also be defined as just one <code>TriangleMeshCurveSection</code>, in this case a <code>TriangleMeshPolyLine</code>. c) A <code>TriangleMeshOpenCurve</code> defined as a combination of a <code>TriangleMeshPolyLine</code> and a <code>TrianglesMeshCurviLine</code>. </div></div>
+ <hr  />
+<h1><a class="anchor" id="connections"></a>
+Creating connections among current boundaries in the domain and with internal boundaries</h1>
+<p>Any internal boundary can be connected (via its ends) to any other boundary currently in the domain.</p>
+<p>It is important to note that there are four different types of connections:</p><ul>
+<li>Connection between a <code>TriangleMeshPolyLine</code> and a <code>TriangleMeshPolyLine</code> </li>
+<li>Connection between a <code>TriangleMeshCurviLine</code> and a <code>TriangleMeshPolyLine</code> </li>
+<li>Connection between a <code>TriangleMeshPolyLine</code> and a <code>TriangleMeshCurviLine</code> </li>
+<li>Connection between a <code>TriangleMeshCurviLine</code> and a <code>TriangleMeshCurviLine</code> </li>
+</ul>
+<p>The next figure shows an sketch of the different types of connections.</p>
+<div class="image">
+<img src="connections.gif" alt=""/>
+<div class="caption">
+Different types of connections. a) Connection between a <code>TriangleMeshPolyLine</code> and a <code>TriangleMeshPolyLine</code>. b) Connection between a <code>TriangleMeshCurviLine</code> and a <code>TriangleMeshPolyLine</code>. c) Connection between a <code>TriangleMeshPolyLine</code> and a <code>TriangleMeshCurviLine</code>. d) Connection between a <code>TriangleMeshCurviLine</code> and a <code>TriangleMeshCurviLine</code>. </div></div>
+ <p>Connections to <code>TriangleMeshPolyLine</code> can only be made by using existing vertices of the destination <code>TriangleMeshPolyLine</code>. Conversely, connections to <code>TriangleMeshCurviLine</code> can be made by specifying the position along the <code>TriangleMeshCurviLine</code>. The <br  />
+ connection point is identified by the <code>TriangleMeshCurviLine's</code> intrinsic coordinates. The figure below shows the case when a connection with a <code>TriangleMeshPolyLine</code> is possible.</p>
+<div class="image">
+<img src="figure_poly.gif" alt=""/>
+<div class="caption">
+In order to connect a boundary to a <code>TriangleMeshPolyLine</code> it is necessary that the destination boundary has a vertex on the connection point. a) There is no vertex for connecting to the destination <code>TriangleMeshPolyLine</code>. b) There is a vertex in the destination <code>TriangleMeshPolyLine</code> to receive the initial end of the source boundary. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="example_poisson"></a>
+Example: A domain with multiple internal boundaries and connections</h1>
+<p>We will show how to add internal boundaries and how to create connections among them by using the same example as in <a href="../../../../doc/meshes/mesh_from_triangle/html/index.html">another tutorial</a>.</p>
+<hr  />
+<p>A sketch of the domain is shown on the next figure. The domain has seven boundaries, two of which define the outer boundary and the other five define internal boundaries.</p>
+<div class="image">
+<img src="sketch_domain.gif" alt=""/>
+<div class="caption">
+The sketch of the domain; note the different internal boundaries and their connection points. </div></div>
+ <hr  />
+<h2><a class="anchor" id="def_domain"></a>
+Definition of the domain/mesh</h2>
+<p>The following code is extracted from the Problem constructor and shows how to create the domain/mesh.</p>
+<h3><a class="anchor" id="def_out"></a>
+Defining the outer boundaries</h3>
+<p>The first task is to define the outer boundary which we represent by a <code>TriangleMeshClosedCurve</code> comprising two <code>TriangleMeshPolyLines</code>.</p>
+ <div class="fragment"><div class="line">  <span class="comment">// Begin - Outer boundary</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create storage for the vertices coordinates that define each boundary</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_vertices_b0 = 4;</div>
+<div class="line">  Vector&lt;Vector &lt;double&gt; &gt; vertices(num_vertices_b0);</div>
+<div class="line"> </div>
+<div class="line">  vertices[0].resize(2);</div>
+<div class="line">  vertices[1].resize(2);</div>
+<div class="line">  vertices[2].resize(2);</div>
+<div class="line">  vertices[3].resize(2);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Building the outer boundary (vertices)</span></div>
+<div class="line">  vertices[0][0] = 0;</div>
+<div class="line">  vertices[0][1] = 0;</div>
+<div class="line"> </div>
+<div class="line">  vertices[1][0] = 0;</div>
+<div class="line">  vertices[1][1] = 1;</div>
+<div class="line"> </div>
+<div class="line">  vertices[2][0] = 0;</div>
+<div class="line">  vertices[2][1] = 3;</div>
+<div class="line"> </div>
+<div class="line">  vertices[3][0] = 3;</div>
+<div class="line">  vertices[3][1] = 3;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The outer boundary is represented by two TriangleMeshPolyLine objects,</span></div>
+<div class="line">  <span class="comment">// this is the first one</span></div>
+<div class="line">  boundary_id = 0;</div>
+<div class="line">  TriangleMeshPolyLine *boundary0_pt =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshPolyLine(vertices, boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Create storage for the vertices coordinates that define each boundary</span></div>
+<div class="line">  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_vertices_b1 = 5;</div>
+<div class="line">  vertices.resize(num_vertices_b1);</div>
+<div class="line"> </div>
+<div class="line">  vertices[0].resize(2);</div>
+<div class="line">  vertices[1].resize(2);</div>
+<div class="line">  vertices[2].resize(2);</div>
+<div class="line">  vertices[3].resize(2);</div>
+<div class="line">  vertices[4].resize(2);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// More vertices for the outer boundary</span></div>
+<div class="line">  vertices[0][0] = 3;</div>
+<div class="line">  vertices[0][1] = 3;</div>
+<div class="line"> </div>
+<div class="line">  vertices[1][0] = 3;</div>
+<div class="line">  vertices[1][1] = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  vertices[2][0] = 3;</div>
+<div class="line">  vertices[2][1] = 0;</div>
+<div class="line"> </div>
+<div class="line">  vertices[3][0] = 1;</div>
+<div class="line">  vertices[3][1] = 0;</div>
+<div class="line"> </div>
+<div class="line">  vertices[4][0] = 0;</div>
+<div class="line">  vertices[4][1] = 0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The outer boundary is represented by two TriangleMeshPolyLine objects,</span></div>
+<div class="line">  <span class="comment">// this is the second one</span></div>
+<div class="line">  boundary_id = 1;</div>
+<div class="line">  TriangleMeshPolyLine *boundary1_pt =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshPolyLine(vertices, boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// A vector for storing the outer boundary representation</span></div>
+<div class="line">  Vector&lt;TriangleMeshCurveSection*&gt; outer_boundary_polyLines_pt(2);</div>
+<div class="line"> </div>
+<div class="line">  outer_boundary_polyLines_pt[0] = boundary0_pt;</div>
+<div class="line">  outer_boundary_polyLines_pt[1] = boundary1_pt;</div>
+<div class="line"> </div>
+<div class="line">  TriangleMeshClosedCurve *outer_boundary_pt =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshPolygon(outer_boundary_polyLines_pt);</div>
+<div class="line">  <span class="comment">// End - Outer boundary</span></div>
+</div><!-- fragment --><p> Note that we defined additional vertices along the two boundaries to allow the creation of connections to the outer boundary, see figure below.</p>
+<div class="image">
+<img src="outer_boundary_vertices.gif" alt=""/>
+<div class="caption">
+Vertex 1 on boundary 0 and vertices 1 and 3 on boundary 1 are created to allow the subsequent connections with internal boundaries. </div></div>
+ <h3><a class="anchor" id="def_inopen"></a>
+Defining internal boundaries</h3>
+<p>We create a <code>Vector</code> of five <code>TriangleMeshOpenCurves</code> which will represent the internal boundaries.</p>
+ <div class="fragment"><div class="line">  <span class="comment">// Internal open boundaries</span></div>
+<div class="line">  <span class="comment">// Total number of open curves in the domain</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_open_curves = 5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// We want internal open curves</span></div>
+<div class="line">  Vector&lt;TriangleMeshOpenCurve *&gt; inner_open_boundaries_pt(n_open_curves);</div>
+</div><!-- fragment --> <hr  />
+<p><b> Simple internal boundaries without connections </b></p>
+<p>Our domain has two unconnected internal boundaries: a straight line, represented by a <code>TriangleMeshPolyLine</code> and a curve line represented by a <code>TriangleMeshCurviLine</code>.</p>
+ <div class="fragment"><div class="line">  <span class="comment">// We start by creating the internal boundaries</span></div>
+<div class="line">  <span class="comment">// The boundary 2 is defined by its two vertices</span></div>
+<div class="line">  <span class="comment">// Open curve 1</span></div>
+<div class="line">  vertices.resize(2);</div>
+<div class="line">  vertices[0].resize(2);</div>
+<div class="line">  vertices[1].resize(2);</div>
+<div class="line"> </div>
+<div class="line">  vertices[0][0] = 0.5;</div>
+<div class="line">  vertices[0][1] = 2.0;</div>
+<div class="line"> </div>
+<div class="line">  vertices[1][0] = 0.5;</div>
+<div class="line">  vertices[1][1] = 2.5;</div>
+<div class="line"> </div>
+<div class="line">  boundary_id = 2;</div>
+<div class="line">  TriangleMeshPolyLine *boundary2_pt =</div>
+<div class="line">    <span class="keyword">new</span> TriangleMeshPolyLine(vertices, boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Each internal open curve is defined by a vector of TriangleMeshCurveSection,</span></div>
+<div class="line">  <span class="comment">// on this example we only need one curve section for each internal boundary</span></div>
+<div class="line">  Vector&lt;TriangleMeshCurveSection *&gt; internal_curve_section1_pt(1);</div>
+<div class="line"> </div>
+<div class="line">  internal_curve_section1_pt[0] = boundary2_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The open curve that define this boundary is composed of just one</span></div>
+<div class="line">  <span class="comment">// curve section</span></div>
+<div class="line">  inner_open_boundaries_pt[0] =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshOpenCurve(internal_curve_section1_pt);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// *********************************************************************</span></div>
+<div class="line">  <span class="comment">// We define the curved boundary as a TriangleMeshCurviline</span></div>
+<div class="line">  <span class="comment">// Open curve 2</span></div>
+<div class="line">  <span class="keywordtype">double</span> x_centre = 2.0;</div>
+<div class="line">  <span class="keywordtype">double</span> y_centre = 2.0;</div>
+<div class="line">  <span class="keywordtype">double</span> r_circle = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  Circle * boundary_circle1_pt = <span class="keyword">new</span> Circle(x_centre, y_centre, r_circle);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of segments used for representing the curve boundary</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_segments = 20;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line">  <span class="keywordtype">double</span> s_start = 0.0;</div>
+<div class="line">  <span class="keywordtype">double</span> s_end = MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line">  boundary_id = 3;</div>
+<div class="line">  TriangleMeshCurviLine *boundary3_pt =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshCurviLine(boundary_circle1_pt,</div>
+<div class="line">          s_start,</div>
+<div class="line">          s_end,</div>
+<div class="line">          n_segments,</div>
+<div class="line">          boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  Vector&lt;TriangleMeshCurveSection *&gt; internal_curve_section2_pt(1);</div>
+<div class="line">  internal_curve_section2_pt[0] = boundary3_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The open curve that define this boundary is composed of just one</span></div>
+<div class="line">  <span class="comment">// curve section</span></div>
+<div class="line">  inner_open_boundaries_pt[1] =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshOpenCurve(internal_curve_section2_pt);</div>
+</div><!-- fragment --> <hr  />
+<p><b> Adding an internal boundary connected to an outer boundary </b></p>
+<p>We need to add three more internal boundaries which have connections with the outer boundary and with some internal boundaries; see the sketch of the domain.</p>
+<p>In order to connect an internal boundary with any other boundary in the domain it is necessary to specify the following:</p>
+<ul>
+<li>Is the initial or the final end of the boundary the one that we want to connect?</li>
+<li>Do we want to connect the boundary with a <code>TriangleMeshPolyLine</code> or with a <code>TriangleMeshCurviLine</code>?</li>
+<li>If we want to connect with a <code>TriangleMeshPolyLine</code> then we need to identify the corresponding vertex number to which we want to connect. If we want to connect with a <code>TriangleMeshCurviLine</code> we need to identify the corresponding intrinsic coordinate <img class="formulaInl" alt="$ s $" src="form_0.png" width="5" height="6"/> on the curve for connection.</li>
+</ul>
+<hr  />
+<p>Consider the creation of the internal boundary 4 shown on the sketch of the domain. This is an example of connecting a <code>TriangleMeshCurviLine</code> with a <code>TriangleMeshPolyLine</code> (the outer boundary). In this case both ends of the <code>TriangleMeshCurviLine</code> are connected so we need to use the interface for connecting the initial and the final ends of the boundary to a <code>TriangleMeshPolyLine</code>. There is only one thing left to identify, the vertex number of the destination boundary to which we want to connect. By looking at figure 1.5 we see that these values are vertex #3 for the initial end and vertex #1 for the final end. Once identified, we perform the connection as follow:</p>
+<ul>
+<li>Create the internal boundary as usual</li>
+</ul>
+ <div class="fragment"><div class="line">  <span class="comment">// Open curve 3</span></div>
+<div class="line">  x_centre = 0.0;</div>
+<div class="line">  y_centre = 0.0;</div>
+<div class="line">  r_circle = 1.0;</div>
+<div class="line"> </div>
+<div class="line">  Circle * boundary_circle2_pt = <span class="keyword">new</span> Circle(x_centre, y_centre, r_circle);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of segments used for representing the curve boundary</span></div>
+<div class="line">  n_segments = 20;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line">  s_start = 0.0;</div>
+<div class="line">  s_end = MathematicalConstants::Pi / 2.0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// State the vertex number for connection on the destination</span></div>
+<div class="line">  <span class="comment">// boundaries</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> vertex_to_connect_initial = 3;</div>
+<div class="line">  <span class="keywordtype">unsigned</span> vertex_to_connect_final = 1;</div>
+<div class="line"> </div>
+<div class="line">  boundary_id = 4;</div>
+<div class="line">  TriangleMeshCurviLine *boundary4_pt =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshCurviLine(boundary_circle2_pt,</div>
+<div class="line">          s_start,</div>
+<div class="line">          s_end,</div>
+<div class="line">          n_segments,</div>
+<div class="line">          boundary_id);</div>
+</div><!-- fragment --><ul>
+<li>Specify connections using the destination boundary and the vertex number</li>
+</ul>
+ <div class="fragment"><div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with the outer boundary</span></div>
+<div class="line">  boundary4_pt-&gt;connect_initial_vertex_to_polyline(</div>
+<div class="line">                                boundary1_pt,</div>
+<div class="line">                                vertex_to_connect_initial);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with the outer boundary</span></div>
+<div class="line">  boundary4_pt-&gt;connect_final_vertex_to_polyline(</div>
+<div class="line">                                boundary0_pt,</div>
+<div class="line">                                vertex_to_connect_final);</div>
+</div><!-- fragment --><ul>
+<li>Finally, create the <code>TriangleMeshOpenCurve</code> object as usual</li>
+</ul>
+<div class="fragment"><div class="line">  <span class="comment">// The open curve that define this boundary is composed of just one</span></div>
+<div class="line">  <span class="comment">// curve section</span></div>
+<div class="line">  inner_open_boundaries_pt[2] =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshOpenCurve(internal_curve_section3_pt);</div>
+</div><!-- fragment --> <hr  />
+<p><b> Adding an internal boundary connected with another internal boundary </b></p>
+<p>Boundary 5, a straight line connected to the outer boundary and to an internal boundary (the one that we created on the previous step).</p>
+<p>The initial end of the boundary is connected to the outer boundary therefore we need to identify the vertex number to which it is connected; by looking at the sketch of the domain we see that the destination vertex number is 1. The final end is connected with a <code>TriangleMeshCurviLine</code> therefore we need to specify the intrinsic coordinate in the object where we want to connect (the intrinsic coordinate is the arc-length along the circle).</p>
+ <div class="fragment"><div class="line">  <span class="comment">// This boundary is connected to the outer boundary on the initial end</span></div>
+<div class="line">  <span class="comment">// and to an internal boundary on the final end</span></div>
+<div class="line">  <span class="comment">// Open curve 4</span></div>
+<div class="line">  vertices.resize(3);</div>
+<div class="line">  vertices[0].resize(2);</div>
+<div class="line">  vertices[1].resize(2);</div>
+<div class="line">  vertices[2].resize(2);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// We need to specify the vertices for the boundary on the first end</span></div>
+<div class="line">  <span class="comment">// The connection method performs a checking on the matching of the</span></div>
+<div class="line">  <span class="comment">// vertices used for connection</span></div>
+<div class="line">  vertices[0][0] = 3.0;</div>
+<div class="line">  vertices[0][1] = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// These values are necessary when we subsequently perform the connection</span></div>
+<div class="line">  <span class="comment">// of the last boundary</span></div>
+<div class="line">  vertices[1][0] = (3.0 + sqrt(3.0)) * 0.5;</div>
+<div class="line">  vertices[1][1] = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// We need to specify the vertices for the boundary on the last end</span></div>
+<div class="line">  <span class="comment">// The connection method performs a checking on the matching of the</span></div>
+<div class="line">  <span class="comment">// vertices used for connection</span></div>
+<div class="line">  vertices[2][0] = sqrt(3.0) * 0.5;</div>
+<div class="line">  vertices[2][1] = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// State the vertex number for connection with the destination</span></div>
+<div class="line">  <span class="comment">// boundary</span></div>
+<div class="line">  vertex_to_connect_initial = 1;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// State the s value for connection with the destination boundary</span></div>
+<div class="line">  <span class="keywordtype">double</span> s_connection_final = atan2(0.5, sqrt(3.0) * 0.5);</div>
+<div class="line"> </div>
+<div class="line">  boundary_id = 5;</div>
+<div class="line">  TriangleMeshPolyLine *boundary5_pt =</div>
+<div class="line">    <span class="keyword">new</span> TriangleMeshPolyLine(vertices, boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with the outer boundary</span></div>
+<div class="line">  boundary5_pt-&gt;connect_initial_vertex_to_polyline(</div>
+<div class="line">                                boundary1_pt,</div>
+<div class="line">                                vertex_to_connect_initial);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with an internal boundary</span></div>
+<div class="line">  boundary5_pt-&gt;connect_final_vertex_to_curviline(</div>
+<div class="line">                                boundary4_pt,</div>
+<div class="line">                                s_connection_final);</div>
+<div class="line"> </div>
+<div class="line">  Vector&lt;TriangleMeshCurveSection *&gt; internal_curve_section4_pt(1);</div>
+<div class="line">  internal_curve_section4_pt[0] = boundary5_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The open curve that define this boundary is composed of just one</span></div>
+<div class="line">  <span class="comment">// curve section</span></div>
+<div class="line">  inner_open_boundaries_pt[3] =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshOpenCurve(internal_curve_section4_pt);</div>
+</div><!-- fragment --><p> <b> Adding an internal boundary connected with another internal boundary (the last one from our example) </b></p>
+<p>The fifth internal boundary is connected to two internal boundaries. The initial end of the new internal boundary is connected to a <code>TriangleMeshPolyLine</code> and the final end is connected to a <code>TriangleMeshCurviLine</code>. The vertex number for connection with the <code>TriangleMeshPolyLine</code> was established in the definition of the previous internal boundary, vertex #1. The circles defining boundaries 4 and 6 meet each other at <img class="formulaInl" alt="$(x, y) = (\frac{3}{4}, \frac{\sqrt(7)}{4})$" src="form_1.png" width="94" height="21"/> which corresponds to the intrinsic coordinate <img class="formulaInl" alt="$ s = arctan(\frac{\sqrt{7}}{3}) $" src="form_2.png" width="84" height="18"/> on the <code>TriangleMeshCurviLine</code> object representing boundary 4.</p>
+ <div class="fragment"><div class="line">  <span class="comment">// Open curve 5</span></div>
+<div class="line">  x_centre = 1.5;</div>
+<div class="line">  y_centre = 0.0;</div>
+<div class="line">  r_circle = 1.0;</div>
+<div class="line"> </div>
+<div class="line">  Circle * boundary_circle3_pt = <span class="keyword">new</span> Circle(x_centre, y_centre, r_circle);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Number of segments used for representing the curve boundary</span></div>
+<div class="line">  n_segments = 20;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// These numbers can be easily obtained by computing the</span></div>
+<div class="line">  <span class="comment">// intersection of the circle (circle3) and the other boundaries</span></div>
+<div class="line">  <span class="comment">// (in this case, boundaries 4 and 5)</span></div>
+<div class="line">  s_start = atan2(0.5, (3.0 + sqrt(3.0)) * 0.5 - 1.5);</div>
+<div class="line">  s_end = atan2(0.25*sqrt(7.0), -0.75);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// State the vertex number for connection on the destination</span></div>
+<div class="line">  <span class="comment">// boundaries</span></div>
+<div class="line">  vertex_to_connect_initial = 1;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// State the s value for connection with the destination boundary</span></div>
+<div class="line">  s_connection_final = atan2(0.25*sqrt(7.0), 0.75);</div>
+<div class="line"> </div>
+<div class="line">  boundary_id = 6;</div>
+<div class="line">  TriangleMeshCurviLine *boundary6_pt =</div>
+<div class="line">    <span class="keyword">new</span> TriangleMeshCurviLine(boundary_circle3_pt,</div>
+<div class="line">          s_start,</div>
+<div class="line">          s_end,</div>
+<div class="line">          n_segments,</div>
+<div class="line">          boundary_id);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with an internal boundary</span></div>
+<div class="line">  boundary6_pt-&gt;connect_initial_vertex_to_polyline(</div>
+<div class="line">                                boundary5_pt,</div>
+<div class="line">                                vertex_to_connect_initial);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Do the connection with the destination boundary, in this case</span></div>
+<div class="line">  <span class="comment">// the connection is done with an internal boundary</span></div>
+<div class="line">  boundary6_pt-&gt;connect_final_vertex_to_curviline(</div>
+<div class="line">                                boundary4_pt,</div>
+<div class="line">                                s_connection_final);</div>
+<div class="line"> </div>
+<div class="line">  Vector&lt;TriangleMeshCurveSection *&gt; internal_curve_section5_pt(1);</div>
+<div class="line">  internal_curve_section5_pt[0] = boundary6_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// The open curve that define this boundary is composed of just one</span></div>
+<div class="line">  <span class="comment">// curve section</span></div>
+<div class="line">  inner_open_boundaries_pt[4] =</div>
+<div class="line">      <span class="keyword">new</span> TriangleMeshOpenCurve(internal_curve_section5_pt);</div>
+</div><!-- fragment --> <h3><a class="anchor" id="create_mesh"></a>
+Build the mesh</h3>
+<p>We build the mesh specific parameters using a <code>TriangleMeshParameters</code> object.</p>
+ <div class="fragment"><div class="line">  <span class="comment">//Create mesh</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Use the TriangleMeshParameters object for helping on the manage of the</span></div>
+<div class="line">  <span class="comment">// TriangleMesh parameters. The only parameter that needs to take is the</span></div>
+<div class="line">  <span class="comment">// outer boundary.</span></div>
+<div class="line">  TriangleMeshParameters triangle_mesh_parameters(outer_boundary_pt);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Specify the internal closed boundaries</span></div>
+<div class="line">  triangle_mesh_parameters.internal_closed_curve_pt() = inner_boundaries_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Specify the internal open boundaries</span></div>
+<div class="line">  triangle_mesh_parameters.internal_open_curves_pt() = inner_open_boundaries_pt;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// One can define an specific maximum element area</span></div>
+<div class="line">  <span class="keywordtype">double</span> element_area = 0.2;</div>
+<div class="line">  triangle_mesh_parameters.element_area() = element_area;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pass the TriangleMeshParameters object to the TriangleMesh one</span></div>
+<div class="line">  Problem::mesh_pt() = <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h2><a class="anchor" id="def_extra"></a>
+Defining additional holes and regions</h2>
+<p>It is possible to define holes in the domain using the methods discussed in <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html">another tutorial</a>; where we explained how to create holes by using closed curves. Holes could also be created by specifying additional parameters on the <code>TriangleMeshParameters</code> object. The specification of regions or layers follows the same principle.</p>
+<h3><a class="anchor" id="def_extra_holes"></a>
+Defining additional holes</h3>
+<p>For defining holes it is only necessary to specify a point that lies inside a closed boundary (created by the connection of internal open boundaries). For example, the region bounded by boundaries 4, 5 and 6 can be turned into a hole by specifying the coordinate <img class="formulaInl" alt="$ ( 1.5, 0.75) $" src="form_3.png" width="53" height="14"/>, see figure below.</p>
+<div class="image">
+<img src="sketch_domain_hole.gif" alt=""/>
+<div class="caption">
+The sketch of the domain with a hole created by the connection of internal lines. </div></div>
+  <div class="fragment"><div class="line">  <span class="comment">// Adding a hole on the domain</span></div>
+<div class="line">  Vector&lt;Vector &lt;double&gt; &gt; additional_hole(1);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Define the coordinates on the domain</span></div>
+<div class="line">  additional_hole[0].resize(2);</div>
+<div class="line">  additional_hole[0][0] = 1.5;</div>
+<div class="line">  additional_hole[0][1] = 0.75;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pass information about the additional holes coordinates</span></div>
+<div class="line">  triangle_mesh_parameters.extra_holes_coordinates() = additional_hole;</div>
+<div class="line">  <span class="comment">// Pass the TriangleMeshParameters object to the TriangleMesh one</span></div>
+<div class="line">  Problem::mesh_pt() = <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+</div><!-- fragment --> <h3><a class="anchor" id="def_extra_regions"></a>
+Defining regions</h3>
+<p>The definition of regions follows the same principle that defining holes, it means, one only need to specify the coordinates of a point that lies inside a region. If we would like to define the region showed on light grey on the figure below we use the method <code>add_region_coordinates</code> of the <code>TriangleMeshParameters</code> object. You can specify any region id for the defined region.</p>
+<div class="image">
+<img src="sketch_domain_hole_region.gif" alt=""/>
+<div class="caption">
+The sketch of the domain with a hole and a defined region. </div></div>
+  <div class="fragment"><div class="line">  <span class="comment">// Adding a region on the domain</span></div>
+<div class="line">  Vector&lt;double&gt; region(2);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Define the coordinates of the regions on the domain</span></div>
+<div class="line">  region[0] = 0.5;</div>
+<div class="line">  region[1] = 0.5;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pass information about the defined regions</span></div>
+<div class="line">  triangle_mesh_parameters.add_region_coordinates(1, region);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Specify different target area of region 1:</span></div>
+<div class="line">  triangle_mesh_parameters.set_target_area_for_region(1,0.01);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Pass the TriangleMeshParameters object to the TriangleMesh one</span></div>
+<div class="line">  Problem::mesh_pt() = <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+</div><!-- fragment --><p> By default the complete domain belongs to region zero. Therefore, one could leave parts of the domain without a defined region or explicitly define all the regions on the domain. NOTE: Be sure to use the region ids when documenting the solution by its specified regions.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="ex"></a>
+Comments and exercises</h1>
+<ol type="1">
+<li>Create two new internal boundaries without connections, one using a <code>TriangleMeshPolyLine</code> object and other using a <code>TriangleMeshCurviLine</code> object. <br  />
+<br  />
+</li>
+<li>Define a new vertex on the new <code>TriangleMeshPolyLine</code> and create a connection to that vertex. <br  />
+<br  />
+</li>
+<li>Once one performs a connection to a <code>TriangleMeshPolyLine</code> or to a <code>TriangleMeshCurviLine</code> there is an internal checking on the connection vertices coordinates for the <code>TriangleMeshPolyLine</code> and on the connection intrinsic coordinate for the <code>TriangleMesheCurviline</code> case, they must be close enough in order to allow the connection. The tolerance values are <code>tolerance_for_vertex_connection</code> = <img class="formulaInl" alt="$ 1.0e-14 $" src="form_4.png" width="49" height="9"/> for the <code>TriangleMeshPolyline</code> case and <code>tolerance_for_zeta_connection</code> = <img class="formulaInl" alt="$ 1.0e-14 $" src="form_4.png" width="49" height="9"/> for the <code>TriangleMeshCurviline</code> case. One can explicitly define the allowed tolerance by adding an extra argument when using the methods <code>connect_initial_vertex_to_polyline</code>, <code>connect_final_vertex_to_polyline</code> <code>connect_initial_vertex_to_curviline</code> or <code>connect_final_vertex_to_curviline</code>. As an exercise, use different values for the allowed connection tolerance.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory:<br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_triangle/">demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/ </a> </center><br  />
+</li>
+<li>The driver code is: <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/mesh_from_inline_triangle_internal_boundaries.cc">demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_internal_boundaries.cc </a> </center> <br  />
+<br  />
+</li>
+<li>The additional driver code <br  />
+<br  />
+<center> <a href="../../../../demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/mesh_from_inline_triangle_internal_boundaries_extra.cc">demo_drivers/meshing/mesh_from_inline_triangle_internal_boundaries/mesh_from_inline_triangle_internal_boundaries_extra.cc </a> </center> <br  />
+shows how to define a hole by connecting internal boundaries.</li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:29
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+\doxysection{oomph\+::Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}\index{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}}
+
+
+Domain-\/based mesh for rectangular mesh with circular hole.  
+
+
+
+
+{\ttfamily \#include $<$rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aea51cf4a702058dd3e93ca351eab240c}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}cylinder\+\_\+pt, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{annular\+\_\+region\+\_\+radius}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{length}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that represents the cylinder, the length and height of the domain. The Geom\+Object must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to Steady default timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aff3fb68d0410de3d8f8d2c4e83819c2b}{\texorpdfstring{$\sim$}{\string~}\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: We made the Domain object so we have a responsibility for deleting it! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aa80017813692e75c076bfa9702cbdb50}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_a0c34b7eb785281cf43ad472ae1eba124}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$}
+Domain-\/based mesh for rectangular mesh with circular hole. 
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00215}{215}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aea51cf4a702058dd3e93ca351eab240c}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aea51cf4a702058dd3e93ca351eab240c} 
+\index{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}!RectangleWithHoleAndAnnularRegionMesh@{RectangleWithHoleAndAnnularRegionMesh}}
+\index{RectangleWithHoleAndAnnularRegionMesh@{RectangleWithHoleAndAnnularRegionMesh}!oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RectangleWithHoleAndAnnularRegionMesh()}{RectangleWithHoleAndAnnularRegionMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{cylinder\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{annular\+\_\+region\+\_\+radius,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to geometric object that represents the cylinder, the length and height of the domain. The Geom\+Object must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to Steady default timestepper. 
+
+Domain-\/based mesh for rectangular mesh with circular hole.
+
+Constructor\+: Pass pointer to geometric object that represents the cylinder, the length and height of the domain. The Geom\+Object must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to Steady default timestepper. 
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l00916}{916}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aff3fb68d0410de3d8f8d2c4e83819c2b}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aff3fb68d0410de3d8f8d2c4e83819c2b} 
+\index{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}!````~RectangleWithHoleAndAnnularRegionMesh@{\texorpdfstring{$\sim$}{\string~}RectangleWithHoleAndAnnularRegionMesh}}
+\index{````~RectangleWithHoleAndAnnularRegionMesh@{\texorpdfstring{$\sim$}{\string~}RectangleWithHoleAndAnnularRegionMesh}!oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RectangleWithHoleAndAnnularRegionMesh()}{\string~RectangleWithHoleAndAnnularRegionMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: We made the Domain object so we have a responsibility for deleting it! 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00232}{232}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00255}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aa80017813692e75c076bfa9702cbdb50}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_aa80017813692e75c076bfa9702cbdb50} 
+\index{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00247}{247}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00255}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_a0c34b7eb785281cf43ad472ae1eba124}\label{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh_a0c34b7eb785281cf43ad472ae1eba124} 
+\index{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$@{oomph::RectangleWithHoleAndAnnularRegionMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionDomain}{Rectangle\+With\+Hole\+And\+Annular\+Region\+Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1RectangleWithHoleAndAnnularRegionMesh}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00255}{255}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00247}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00279}{oomph\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}, and \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h_source_l00232}{oomph\+::\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8h}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

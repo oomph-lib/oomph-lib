@@ -1,0 +1,199 @@
+\chapter{Creating documentation}
+\hypertarget{index}{}\label{index}\index{Creating documentation@{Creating documentation}}
+This document provides an overview of how to prepare documentation for inclusion within {\ttfamily oomph-\/lib}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_setup}{}\doxysection{\texorpdfstring{Setup}{Setup}}\label{index_setup}
+\hypertarget{index_dirs_and_cmake}{}\doxysubsection{\texorpdfstring{Create the directory and update the CMake\+Lists.\+txt files}{Create the directory and update the CMakeLists.txt files}}\label{index_dirs_and_cmake}
+
+\begin{DoxyEnumerate}
+\item Within an appropriate subdirectory of the {\ttfamily doc} directory, create a directory for your documentation, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ doc/axisym\_navier\_stokes/}
+\DoxyCodeLine{mkdir\ spin\_up}
+
+\end{DoxyCode}
+
+\item Add this new directory to the parent directory\textquotesingle{}s {\ttfamily CMake\+Lists.\+txt} file
+\item Create a new {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily txt} file with the same name as the newly-\/created directory, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{touch\ spin\_up.txt}
+
+\end{DoxyCode}
+ This is the "{}source"{} file from which the documentation will be generated.
+\item From an existing documentation directory, copy across the following files into the newly created directory\+:
+\begin{DoxyItemize}
+\item {\ttfamily CMake\+Lists.\+txt} 
+\item {\ttfamily Doxyfile} 
+\end{DoxyItemize}
+\item In {\ttfamily CMake\+LIsts.\+txt} update
+\begin{DoxyItemize}
+\item the name of the directory in the two messages at the start and end of the file
+\item the name of the directory in the {\ttfamily project} command
+\item the name of the directory in the {\ttfamily DOCFILE} variable in the {\ttfamily oomph\+\_\+generate-\/doc\+\_\+from} command.
+\end{DoxyItemize}
+\item In {\ttfamily Doxyfile} update the (relative) path to the demo-\/driver directory. Two entries must be updated, one following {\ttfamily "{}\+INPUT"{}} and the other following {\ttfamily "{}\+EXAMPLE\+\_\+\+PATH"{}}. To find these, search for {\ttfamily "{}../.."{}}.
+\item Return to {\ttfamily oomph-\/lib\textquotesingle{}s} doc directory and re-\/configure\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ doc}
+\DoxyCodeLine{cmake\ -\/G\ Ninja\ -\/B\ build}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{index_figures_setup}{}\doxysubsection{\texorpdfstring{Figures}{Figures}}\label{index_figures_setup}
+If your documentation is to contain figures or animations, the following subdirectories must be created within your documentation directory\+:
+\begin{DoxyItemize}
+\item {\ttfamily figures} 
+\begin{DoxyItemize}
+\item This must contain all figures used in the documentation in both {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily gif} and {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily eps} formats ({\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily gif} is used for the {\ttfamily html} documentation whilst {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily eps} is used for {\ttfamily La\+TeX}).
+\end{DoxyItemize}
+\item {\ttfamily non\+\_\+distfigures} 
+\begin{DoxyItemize}
+\item This contains any additional files (etc.) used to create or maintain the documentation. It is good practise to always keep any {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily lay} and {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily lpk} files that were used to create figures, along with any macro ({\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily mcr}) files.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_write}{}\doxysection{\texorpdfstring{Writing the documentation}{Writing the documentation}}\label{index_write}
+The "{}source"{} of the documentation is contained in the {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily txt} file (a mixture of {\ttfamily html/doxygen} markup). The title must follow the tag {\ttfamily \textbackslash{}mainpage} and be all on one line, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)mainpage\ Demo\ problem:\ Spin-\/up\ of\ a\ viscous\ fluid}
+
+\end{DoxyCode}
+ The main body of the text just follows as in a {\ttfamily La\+TeX} document, with line spacings indicating paragraph breaks.\hypertarget{index_html}{}\doxysubsection{\texorpdfstring{HTML}{HTML}}\label{index_html}
+Any standard html tags can be used (for example, {\ttfamily \texorpdfstring{$<$}{<}hr\texorpdfstring{$>$}{>}} inserts a horizontal line). Hyperlinks are inserted in the following way\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{This\ is\ illustrated\ in\ an\ <A\ HREF=\textcolor{stringliteral}{"{}../figures/my\_movie.avi"{}}>animation</A>.}
+
+\end{DoxyCode}
+ Note that the {\ttfamily "{}.."{}} is present in the path above because during the build process the documentation is created in subdirectories of the directory in which the source file is located. See the section \doxysectlink{index_generate}{Generating the documentation}{1} below for more details.
+
+To link to the documentation of another demo driver, {\ttfamily poisson/one\+\_\+d\+\_\+poisson} for example, hyperlink to the {\ttfamily index.\+html} file within the {\ttfamily html} directory of that demo driver\textquotesingle{}s documentation. Note that because the processed ({\ttfamily html}) version of the documentation you are working on will live in its own {\ttfamily html} subdirectory, it is necessary to go up three directories in order to be in {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily doc} directory. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{...see\ <A\ HREF=\textcolor{stringliteral}{"{}../../../poisson/one\_d\_poisson/html/index.html"{}}>the}
+\DoxyCodeLine{Poisson\ tutorial</A>.}
+
+\end{DoxyCode}
+\hypertarget{index_sections}{}\doxysubsection{\texorpdfstring{Sections}{Sections}}\label{index_sections}
+Sections are created as follows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)section\ section\_label\ This\ is\ the\ title\ of\ my\ section}
+
+\end{DoxyCode}
+
+
+Likewise, subsections are created in the following way\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)subsection\ subsection\_label\ This\ is\ the\ title\ of\ my\ subsection}
+
+\end{DoxyCode}
+
+
+Any {\ttfamily La\+TeX} section types can be used in this way. To link to a section within a document, use the syntax {\ttfamily \textbackslash{}ref} {\ttfamily section\+\_\+label}, as in this example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{...can\ be\ found\ in\ the\ section\ \(\backslash\)ref\ theory\ below.}
+
+\end{DoxyCode}
+\hypertarget{index_equations}{}\doxysubsection{\texorpdfstring{Equations}{Equations}}\label{index_equations}
+Equations are generated as in {\ttfamily La\+TeX} except {\ttfamily \textbackslash{}f} must be added before {\ttfamily \$} or {\ttfamily }\mbox{[}, {\ttfamily }\mbox{]}.
+\begin{DoxyItemize}
+\item E.\+g. inline maths\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{...is\ given\ by\ \(\backslash\)f\$\ \(\backslash\)sin(x)\ \(\backslash\)f\$}
+
+\end{DoxyCode}
+
+\item E.\+g. equation environment\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)f[}
+\DoxyCodeLine{\(\backslash\)sin(x)}
+\DoxyCodeLine{\(\backslash\)f]}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+To label equations, the normal {\ttfamily La\+TeX} system cannot be used. Instead, mark an equation with the tag {\ttfamily @E{\ttfamily }\mbox{[}LABEL{\ttfamily }\mbox{]}@} and refer to it later using {\ttfamily @R{\ttfamily }\mbox{[}LABEL{\ttfamily }\mbox{]}@}, e.\+g.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.71\textwidth]{labelling_example}}
+\end{DoxyImageNoCaption}
+
+
+and then later on... 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{...is\ given\ by\ equation\ (@R[eqn:cont]@).}
+
+\end{DoxyCode}
+\hypertarget{index_lists}{}\doxysubsection{\texorpdfstring{Lists}{Lists}}\label{index_lists}
+To create bullet point lists, precede each item with a {\ttfamily -\/}, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/\ First\ item}
+\DoxyCodeLine{-\/\ Second\ item}
+
+\end{DoxyCode}
+ To create enumerated lists, precede each item with a {\ttfamily -\/\#}, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/\#\ First\ item}
+\DoxyCodeLine{-\/\#\ Second\ item}
+
+\end{DoxyCode}
+\hypertarget{index_figures}{}\doxysubsection{\texorpdfstring{Figures}{Figures}}\label{index_figures}
+A figure with the filename {\ttfamily my\+\_\+figure}.{\ttfamily \texorpdfstring{$\ast$}{*}} is inserted in the following way\+:
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.71\textwidth]{insert_figures}}
+\end{DoxyImageNoCaption}
+
+
+Note the space between the last character in the caption and the quotation marks. Like the equation labelling, this line is processed by the {\ttfamily txt2h.\+sh} script (which is run automatically as part of the {\ttfamily make} process) and replaced with the necessary commands that tell {\ttfamily doxygen} to use the {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily gif} files for the html documentation and the {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily eps} files for the {\ttfamily La\+TeX} documentation.\hypertarget{index_code}{}\doxysubsection{\texorpdfstring{Code}{Code}}\label{index_code}
+To insert single words of code into prose, precede the word with a {\ttfamily \textbackslash{}c}, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{The\ function\ \(\backslash\)c\ FiniteElement::output(...)\ is\ used\ to...}
+
+\end{DoxyCode}
+
+
+To include blocks of code such as the one immediately above this line of text, use the {\ttfamily \textbackslash{}code} environment, e.\+g.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=0.71\textwidth]{code_environment}}
+\end{DoxyImageNoCaption}
+
+
+To include sections of the demo code which you are documenting, e.\+g. the main function of {\ttfamily spin\+\_\+up}.{\ttfamily cc}, use the following syntax\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)dontinclude\ spin\_up.cc}
+\DoxyCodeLine{\(\backslash\)skipline\ start\_of\_main}
+\DoxyCodeLine{\(\backslash\)until\ end\ of\ main}
+
+\end{DoxyCode}
+ This only works if {\ttfamily start\+\_\+of\+\_\+main} exists somewhere in {\ttfamily spin\+\_\+up}.{\ttfamily cc} file, but any word(s) can be used as a start/endpoint. However, {\bfseries{do not use dashes as targets}} because more recent versions of doxygen get very confused by this, so {\bfseries{don\textquotesingle{}t}} do 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)skipline\ -\/-\/-\/-\/}
+
+\end{DoxyCode}
+ say.\hypertarget{index_misc}{}\doxysubsection{\texorpdfstring{Miscellaneous}{Miscellaneous}}\label{index_misc}
+
+\begin{DoxyItemize}
+\item To tell {\ttfamily doxygen} to ignore everything in the source file below a certain point, denote this point with {\ttfamily @@END@@}.
+\item To tell {\ttfamily doxygen} that a certain section of the source file is only to be included in the {\ttfamily html} version of the documentation and omitted in the {\ttfamily La\+TeX} version, enclose this section within {\ttfamily {\ttfamily \textbackslash{}htmlonly} and} {\ttfamily \textbackslash{}endhtmlonly} tags. CAREFUL\+: With recent version of doxygen, this has caused problems with certain commands not being interpreted correctly. Best not to use this...
+\end{DoxyItemize}\DoxyHorRuler{0}
+\hypertarget{index_generate}{}\doxysection{\texorpdfstring{Generating the documentation}{Generating the documentation}}\label{index_generate}
+Once the source file has been written, simply type {\ttfamily cmake --build build} in the top level doc directory to build the {\ttfamily html} and {\ttfamily La\+TeX} versions, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ doc}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
+
+\end{DoxyCode}
+ Two subdirectories, {\ttfamily html} and {\ttfamily latex}, are now created containing the two versions of the documentation. A {\ttfamily \texorpdfstring{$\ast$}{*}}.{\ttfamily pdf} file of the {\ttfamily La\+TeX} version is also placed in the directory.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

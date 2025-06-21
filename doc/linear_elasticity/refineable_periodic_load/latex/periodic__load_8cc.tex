@@ -1,0 +1,57 @@
+\doxysection{periodic\+\_\+load.\+cc File Reference}
+\hypertarget{periodic__load_8cc}{}\label{periodic__load_8cc}\index{periodic\_load.cc@{periodic\_load.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPeriodicLoadProblem}{Periodic\+Load\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Periodic loading problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Isotropic\+Elasticity\+Tensor \mbox{\hyperlink{namespaceGlobal__Parameters_a397f48e074d2589259ed5c6e4d89f948}{Global\+\_\+\+Parameters\+::E}} (\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\begin{DoxyCompactList}\small\item\em The elasticity tensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\+\_\+\+Parameters\+::exact\+\_\+solution}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em The exact solution for infinite depth case. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a003c4c942a4c8b88b417f139fc5c637c}{Global\+\_\+\+Parameters\+::periodic\+\_\+traction}} (const double \&time, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&result)
+\begin{DoxyCompactList}\small\item\em The traction function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Driver code for Periodic\+Load linearly elastic problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Global\+\_\+\+Parameters\+::\+Amplitude}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Amplitude of traction applied. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Global\+\_\+\+Parameters\+::\+Finite}} =false
+\begin{DoxyCompactList}\small\item\em Specify problem to be solved (boundary conditons for finite or infinite domain). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Define Poisson coefficient Nu. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Global\+\_\+\+Parameters\+::\+Lx}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in x direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\+\_\+\+Parameters\+::\+Ly}} = 2.\+0
+\begin{DoxyCompactList}\small\item\em Length of domain in y direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{periodic\_load.cc@{periodic\_load.cc}!main@{main}}
+\index{main@{main}!periodic\_load.cc@{periodic\_load.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Driver code for Periodic\+Load linearly elastic problem. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__load_8cc_source_l00290}{290}} of file \mbox{\hyperlink{periodic__load_8cc_source}{periodic\+\_\+load.\+cc}}.
+
+
+
+References \mbox{\hyperlink{periodic__load_8cc_source_l00247}{Periodic\+Load\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{periodic__load_8cc_source_l00055}{Global\+\_\+\+Parameters\+::\+Lx}}, and \mbox{\hyperlink{periodic__load_8cc_source_l00058}{Global\+\_\+\+Parameters\+::\+Ly}}.
+

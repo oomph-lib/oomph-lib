@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Global_Parameters Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Global_Parameters Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Global variables.  
+<a href="namespaceGlobal__Parameters.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a200109847bf4cc26da4d00e8d68d569e" id="r_a200109847bf4cc26da4d00e8d68d569e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a200109847bf4cc26da4d00e8d68d569e">gravity</a> (<a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">double</a> &amp;<a class="el" href="classMySolidTetgenMesh.html">time</a>, <a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">xi</a>, <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">b</a>)</td></tr>
+<tr class="memdesc:a200109847bf4cc26da4d00e8d68d569e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dimensional gravity as body force.  <br /></td></tr>
+<tr class="separator:a200109847bf4cc26da4d00e8d68d569e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc25ca2abd48b7f1bffb2d6129f02bd" id="r_a7dc25ca2abd48b7f1bffb2d6129f02bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a7dc25ca2abd48b7f1bffb2d6129f02bd">constant_pressure</a> (<a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">xi</a>, <a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">x</a>, <a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">n</a>, <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;<a class="el" href="classMySolidTetgenMesh.html">traction</a>)</td></tr>
+<tr class="memdesc:a7dc25ca2abd48b7f1bffb2d6129f02bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant pressure load. The arguments to this function are imposed on us by the SolidTractionElements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal.  <br /></td></tr>
+<tr class="separator:a7dc25ca2abd48b7f1bffb2d6129f02bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a20fccdcfa2c15ad8b951b9ada3bb1661" id="r_a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> =0.3</td></tr>
+<tr class="memdesc:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poisson's ratio.  <br /></td></tr>
+<tr class="separator:a20fccdcfa2c15ad8b951b9ada3bb1661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd1f040f375c96fe56b3f475f7dbec2" id="r_adbd1f040f375c96fe56b3f475f7dbec2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">ConstitutiveLaw</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#adbd1f040f375c96fe56b3f475f7dbec2">Constitutive_law_pt</a> =<a class="el" href="classMySolidTetgenMesh.html">new</a> <a class="el" href="classMySolidTetgenMesh.html">GeneralisedHookean</a>(&amp;<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)</td></tr>
+<tr class="memdesc:adbd1f040f375c96fe56b3f475f7dbec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create constitutive law.  <br /></td></tr>
+<tr class="separator:adbd1f040f375c96fe56b3f475f7dbec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335000b5db4206486a116ae0468d2d0c" id="r_a335000b5db4206486a116ae0468d2d0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a335000b5db4206486a116ae0468d2d0c">Gravity</a> =0.0</td></tr>
+<tr class="memdesc:a335000b5db4206486a116ae0468d2d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dim gravity.  <br /></td></tr>
+<tr class="separator:a335000b5db4206486a116ae0468d2d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31fb55c20db4aa0127aafa20f0d76731" id="r_a31fb55c20db4aa0127aafa20f0d76731"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMySolidTetgenMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceGlobal__Parameters.html#a31fb55c20db4aa0127aafa20f0d76731">P</a> = 0.0</td></tr>
+<tr class="memdesc:a31fb55c20db4aa0127aafa20f0d76731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uniform pressure.  <br /></td></tr>
+<tr class="separator:a31fb55c20db4aa0127aafa20f0d76731"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Global variables. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a7dc25ca2abd48b7f1bffb2d6129f02bd" name="a7dc25ca2abd48b7f1bffb2d6129f02bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc25ca2abd48b7f1bffb2d6129f02bd">&#9670;&#160;</a></span>constant_pressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">void</a> Global_Parameters::constant_pressure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>traction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constant pressure load. The arguments to this function are imposed on us by the SolidTractionElements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00114">114</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="vmtk__solid_8cc_source.html#l00107">P</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__solid_8cc_source.html#l00305">UnstructuredSolidProblem&lt; ELEMENT &gt;::create_traction_elements()</a>.</p>
+
+</div>
+</div>
+<a id="a200109847bf4cc26da4d00e8d68d569e" name="a200109847bf4cc26da4d00e8d68d569e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200109847bf4cc26da4d00e8d68d569e">&#9670;&#160;</a></span>gravity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">void</a> Global_Parameters::gravity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">const</a> <a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classMySolidTetgenMesh.html">Vector</a>&lt; <a class="el" href="classMySolidTetgenMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dimensional gravity as body force. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00097">97</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="vmtk__solid_8cc_source.html#l00094">Gravity</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__solid_8cc_source.html#l00181">UnstructuredSolidProblem&lt; ELEMENT &gt;::UnstructuredSolidProblem()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="adbd1f040f375c96fe56b3f475f7dbec2" name="adbd1f040f375c96fe56b3f475f7dbec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd1f040f375c96fe56b3f475f7dbec2">&#9670;&#160;</a></span>Constitutive_law_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">ConstitutiveLaw</a>* Global_Parameters::Constitutive_law_pt =<a class="el" href="classMySolidTetgenMesh.html">new</a> <a class="el" href="classMySolidTetgenMesh.html">GeneralisedHookean</a>(&amp;<a class="el" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create constitutive law. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00091">91</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__solid_8cc_source.html#l00181">UnstructuredSolidProblem&lt; ELEMENT &gt;::UnstructuredSolidProblem()</a>.</p>
+
+</div>
+</div>
+<a id="a335000b5db4206486a116ae0468d2d0c" name="a335000b5db4206486a116ae0468d2d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335000b5db4206486a116ae0468d2d0c">&#9670;&#160;</a></span>Gravity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">double</a> Global_Parameters::Gravity =0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-dim gravity. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00094">94</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__solid_8cc_source.html#l00097">gravity()</a>, and <a class="el" href="vmtk__solid_8cc_source.html#l00388">main()</a>.</p>
+
+</div>
+</div>
+<a id="a20fccdcfa2c15ad8b951b9ada3bb1661" name="a20fccdcfa2c15ad8b951b9ada3bb1661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20fccdcfa2c15ad8b951b9ada3bb1661">&#9670;&#160;</a></span>Nu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">double</a> Global_Parameters::Nu =0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Poisson's ratio. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00088">88</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+</div>
+</div>
+<a id="a31fb55c20db4aa0127aafa20f0d76731" name="a31fb55c20db4aa0127aafa20f0d76731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31fb55c20db4aa0127aafa20f0d76731">&#9670;&#160;</a></span>P</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMySolidTetgenMesh.html">double</a> Global_Parameters::P = 0.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uniform pressure. </p>
+
+<p class="definition">Definition at line <a class="el" href="vmtk__solid_8cc_source.html#l00107">107</a> of file <a class="el" href="vmtk__solid_8cc_source.html">vmtk_solid.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="vmtk__solid_8cc_source.html#l00114">constant_pressure()</a>, and <a class="el" href="vmtk__solid_8cc_source.html#l00388">main()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:51
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

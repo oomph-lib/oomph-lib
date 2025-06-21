@@ -1,0 +1,90 @@
+\doxysection{two\+\_\+d\+\_\+poisson\+\_\+compare\+\_\+solvers.\+cc File Reference}
+\hypertarget{two__d__poisson__compare__solvers_8cc}{}\label{two__d__poisson__compare__solvers_8cc}\index{two\_d\_poisson\_compare\_solvers.cc@{two\_d\_poisson\_compare\_solvers.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with "{}sharp step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_a23bdfecb707db57cd809897a41b71297}{run}} (const string \&dir\+\_\+name, Linear\+Solver \texorpdfstring{$\ast$}{*}linear\+\_\+solver\+\_\+pt, const unsigned nel\+\_\+1d, bool mess\+\_\+up\+\_\+order)
+\begin{DoxyCompactList}\small\item\em Build and run problem with specified linear solver. Also pass flag to specify if order of elements should be messed up. nel\+\_\+1d is the number of elements along the 1D mesh edge. Total number of elements is nel\+\_\+1d x nel\+\_\+1d. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Poisson problem -- compare different solvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{two__d__poisson__compare__solvers_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{two__d__poisson__compare__solvers_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{two\_d\_poisson\_compare\_solvers.cc@{two\_d\_poisson\_compare\_solvers.cc}!main@{main}}
+\index{main@{main}!two\_d\_poisson\_compare\_solvers.cc@{two\_d\_poisson\_compare\_solvers.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Poisson problem -- compare different solvers. 
+
+Use Super\+LU with compressed row storage
+
+Use compressed row storage
+
+Switch on full doc
+
+Use Super\+LU with compressed column storage
+
+Use compressed row storage
+
+Switch on full doc
+
+Use HSL frontal solver MA42 without element re-\/ordering
+
+Switch on full doc
+
+Use HSL frontal solver MA42 with element reordering by Sloan\textquotesingle{}s algorithm
+
+Switch on full doc
+
+Switch on re-\/ordering
+
+Use dense matrix LU decomposition
+
+Use dense matrix LU decomposition
+
+Definition at line \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00385}{385}} of file \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+compare\+\_\+solvers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00317}{run()}}.
+
+\Hypertarget{two__d__poisson__compare__solvers_8cc_a23bdfecb707db57cd809897a41b71297}\label{two__d__poisson__compare__solvers_8cc_a23bdfecb707db57cd809897a41b71297} 
+\index{two\_d\_poisson\_compare\_solvers.cc@{two\_d\_poisson\_compare\_solvers.cc}!run@{run}}
+\index{run@{run}!two\_d\_poisson\_compare\_solvers.cc@{two\_d\_poisson\_compare\_solvers.cc}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void run (\begin{DoxyParamCaption}\item[{const string \&}]{dir\+\_\+name,  }\item[{Linear\+Solver \texorpdfstring{$\ast$}{*}}]{linear\+\_\+solver\+\_\+pt,  }\item[{const unsigned}]{nel\+\_\+1d,  }\item[{bool}]{mess\+\_\+up\+\_\+order }\end{DoxyParamCaption})}
+
+
+
+Build and run problem with specified linear solver. Also pass flag to specify if order of elements should be messed up. nel\+\_\+1d is the number of elements along the 1D mesh edge. Total number of elements is nel\+\_\+1d x nel\+\_\+1d. 
+
+Set linear solver\+:
+
+Definition at line \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00317}{317}} of file \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+compare\+\_\+solvers.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson_8cc_source_l00049}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}}, \mbox{\hyperlink{two__d__poisson_8cc_source_l00221}{Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{two__d__poisson2_8cc_source_l00063}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+source()}}, and \mbox{\hyperlink{two__d__poisson_8cc_source_l00052}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__compare__solvers_8cc_source_l00385}{main()}}.
+

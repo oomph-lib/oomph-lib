@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::LeakCheckNames Namespace Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html">LeakCheckNames</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">oomph::LeakCheckNames Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Namespace for leak check: Keep a running count of all instantiated objects &ndash; add your own if you want to...  
+<a href="namespaceoomph_1_1LeakCheckNames.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0ce3a9e079632ff8ff7e5d9c4258c620" id="r_a0ce3a9e079632ff8ff7e5d9c4258c620"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a0ce3a9e079632ff8ff7e5d9c4258c620">reset</a> ()</td></tr>
+<tr class="separator:a0ce3a9e079632ff8ff7e5d9c4258c620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ef7bca3a63e643b0eec22dd3bab58b" id="r_ad5ef7bca3a63e643b0eec22dd3bab58b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#ad5ef7bca3a63e643b0eec22dd3bab58b">doc</a> ()</td></tr>
+<tr class="separator:ad5ef7bca3a63e643b0eec22dd3bab58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a351966bc1ea214b5cabfa8a2ddbc11a1" id="r_a351966bc1ea214b5cabfa8a2ddbc11a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a351966bc1ea214b5cabfa8a2ddbc11a1">QuadTree_build</a></td></tr>
+<tr class="separator:a351966bc1ea214b5cabfa8a2ddbc11a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae550f6949511aa03ea98188eca2ad49e" id="r_ae550f6949511aa03ea98188eca2ad49e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#ae550f6949511aa03ea98188eca2ad49e">OcTree_build</a></td></tr>
+<tr class="separator:ae550f6949511aa03ea98188eca2ad49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a010e35c7b7095d47bfcf7a2f84f0ee47" id="r_a010e35c7b7095d47bfcf7a2f84f0ee47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a010e35c7b7095d47bfcf7a2f84f0ee47">QuadTreeForest_build</a></td></tr>
+<tr class="separator:a010e35c7b7095d47bfcf7a2f84f0ee47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f27a2ceb410044d17f59cdcd362358d" id="r_a8f27a2ceb410044d17f59cdcd362358d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a8f27a2ceb410044d17f59cdcd362358d">OcTreeForest_build</a></td></tr>
+<tr class="separator:a8f27a2ceb410044d17f59cdcd362358d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6073b8e2ad2b94519b899f11682b3e07" id="r_a6073b8e2ad2b94519b899f11682b3e07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RefineableQElement.html">RefineableQElement</a>&lt; 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a6073b8e2ad2b94519b899f11682b3e07">_build</a></td></tr>
+<tr class="separator:a6073b8e2ad2b94519b899f11682b3e07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a476fe9e4ac0c35fd2728482b057eac1d" id="r_a476fe9e4ac0c35fd2728482b057eac1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a476fe9e4ac0c35fd2728482b057eac1d">MacroElement_build</a></td></tr>
+<tr class="separator:a476fe9e4ac0c35fd2728482b057eac1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e19877adeefc340e80e123fda601c0" id="r_a64e19877adeefc340e80e123fda601c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a64e19877adeefc340e80e123fda601c0">HangInfo_build</a></td></tr>
+<tr class="separator:a64e19877adeefc340e80e123fda601c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c2258aca1f7ebedf466b03ac245183" id="r_a19c2258aca1f7ebedf466b03ac245183"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a19c2258aca1f7ebedf466b03ac245183">Node_build</a></td></tr>
+<tr class="separator:a19c2258aca1f7ebedf466b03ac245183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce23df3d85b2382c3a4c96aca9105bb" id="r_abce23df3d85b2382c3a4c96aca9105bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#abce23df3d85b2382c3a4c96aca9105bb">GeomReference_build</a></td></tr>
+<tr class="separator:abce23df3d85b2382c3a4c96aca9105bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f5d29c2e057271177919c9bf0d68eb1" id="r_a2f5d29c2e057271177919c9bf0d68eb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a2f5d29c2e057271177919c9bf0d68eb1">AlgebraicNode_build</a></td></tr>
+<tr class="separator:a2f5d29c2e057271177919c9bf0d68eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321ef3e96c25ca67e8d2fd473f24b544" id="r_a321ef3e96c25ca67e8d2fd473f24b544"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceoomph_1_1LeakCheckNames.html#a321ef3e96c25ca67e8d2fd473f24b544">AlgebraicNodeNodeUpdateInfo_build</a></td></tr>
+<tr class="separator:a321ef3e96c25ca67e8d2fd473f24b544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Namespace for leak check: Keep a running count of all instantiated objects &ndash; add your own if you want to... </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ad5ef7bca3a63e643b0eec22dd3bab58b" name="ad5ef7bca3a63e643b0eec22dd3bab58b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ef7bca3a63e643b0eec22dd3bab58b">&#9670;&#160;</a></span>doc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::LeakCheckNames::doc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01220">1220</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01197">_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01203">AlgebraicNode_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01202">GeomReference_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01200">HangInfo_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01199">MacroElement_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01201">Node_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01194">OcTree_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01196">OcTreeForest_build</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00326">oomph::oomph_info</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01193">QuadTree_build</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01195">QuadTreeForest_build</a>.</p>
+
+</div>
+</div>
+<a id="a0ce3a9e079632ff8ff7e5d9c4258c620" name="a0ce3a9e079632ff8ff7e5d9c4258c620"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ce3a9e079632ff8ff7e5d9c4258c620">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::LeakCheckNames::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01205">1205</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01197">_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01203">AlgebraicNode_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01202">GeomReference_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01200">HangInfo_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01199">MacroElement_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01201">Node_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01194">OcTree_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01196">OcTreeForest_build</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01193">QuadTree_build</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01195">QuadTreeForest_build</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a6073b8e2ad2b94519b899f11682b3e07" name="a6073b8e2ad2b94519b899f11682b3e07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6073b8e2ad2b94519b899f11682b3e07">&#9670;&#160;</a></span>_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> <a class="el" href="classoomph_1_1RefineableQElement.html">RefineableQElement</a>&lt; 3 &gt; oomph::LeakCheckNames::_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01197">1197</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a2f5d29c2e057271177919c9bf0d68eb1" name="a2f5d29c2e057271177919c9bf0d68eb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f5d29c2e057271177919c9bf0d68eb1">&#9670;&#160;</a></span>AlgebraicNode_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::AlgebraicNode_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01203">1203</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="algebraic__elements_8h_source.html#l00063">oomph::AlgebraicNode::AlgebraicNode()</a>, <a class="el" href="algebraic__elements_8h_source.html#l00085">oomph::AlgebraicNode::AlgebraicNode()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>, and <a class="el" href="algebraic__elements_8h_source.html#l00105">oomph::AlgebraicNode::~AlgebraicNode()</a>.</p>
+
+</div>
+</div>
+<a id="a321ef3e96c25ca67e8d2fd473f24b544" name="a321ef3e96c25ca67e8d2fd473f24b544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a321ef3e96c25ca67e8d2fd473f24b544">&#9670;&#160;</a></span>AlgebraicNodeNodeUpdateInfo_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::AlgebraicNodeNodeUpdateInfo_build</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abce23df3d85b2382c3a4c96aca9105bb" name="abce23df3d85b2382c3a4c96aca9105bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce23df3d85b2382c3a4c96aca9105bb">&#9670;&#160;</a></span>GeomReference_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::GeomReference_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01202">1202</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a64e19877adeefc340e80e123fda601c0" name="a64e19877adeefc340e80e123fda601c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e19877adeefc340e80e123fda601c0">&#9670;&#160;</a></span>HangInfo_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::HangInfo_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01200">1200</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="nodes_8h_source.html#l00745">oomph::HangInfo::HangInfo()</a>, <a class="el" href="nodes_8h_source.html#l00753">oomph::HangInfo::HangInfo()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>, and <a class="el" href="nodes_8h_source.html#l00763">oomph::HangInfo::~HangInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a476fe9e4ac0c35fd2728482b057eac1d" name="a476fe9e4ac0c35fd2728482b057eac1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a476fe9e4ac0c35fd2728482b057eac1d">&#9670;&#160;</a></span>MacroElement_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::MacroElement_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01199">1199</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="macro__element_8h_source.html#l00077">oomph::MacroElement::MacroElement()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>, and <a class="el" href="macro__element_8h_source.html#l00101">oomph::MacroElement::~MacroElement()</a>.</p>
+
+</div>
+</div>
+<a id="a19c2258aca1f7ebedf466b03ac245183" name="a19c2258aca1f7ebedf466b03ac245183"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19c2258aca1f7ebedf466b03ac245183">&#9670;&#160;</a></span>Node_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::Node_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01201">1201</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="nodes_8cc_source.html#l01574">oomph::Node::Node()</a>, <a class="el" href="nodes_8cc_source.html#l01595">oomph::Node::Node()</a>, <a class="el" href="nodes_8cc_source.html#l01644">oomph::Node::Node()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>, and <a class="el" href="nodes_8cc_source.html#l01695">oomph::Node::~Node()</a>.</p>
+
+</div>
+</div>
+<a id="ae550f6949511aa03ea98188eca2ad49e" name="ae550f6949511aa03ea98188eca2ad49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae550f6949511aa03ea98188eca2ad49e">&#9670;&#160;</a></span>OcTree_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::OcTree_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01194">1194</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a8f27a2ceb410044d17f59cdcd362358d" name="a8f27a2ceb410044d17f59cdcd362358d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f27a2ceb410044d17f59cdcd362358d">&#9670;&#160;</a></span>OcTreeForest_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::OcTreeForest_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01196">1196</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="octree_8cc_source.html#l04875">oomph::OcTreeForest::OcTreeForest()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a351966bc1ea214b5cabfa8a2ddbc11a1" name="a351966bc1ea214b5cabfa8a2ddbc11a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a351966bc1ea214b5cabfa8a2ddbc11a1">&#9670;&#160;</a></span>QuadTree_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::QuadTree_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01193">1193</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+<a id="a010e35c7b7095d47bfcf7a2f84f0ee47" name="a010e35c7b7095d47bfcf7a2f84f0ee47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a010e35c7b7095d47bfcf7a2f84f0ee47">&#9670;&#160;</a></span>QuadTreeForest_build</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">long</a> oomph::LeakCheckNames::QuadTreeForest_build</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l01195">1195</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l01220">doc()</a>, <a class="el" href="quadtree_8cc_source.html#l00863">oomph::QuadTreeForest::QuadTreeForest()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l01205">reset()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:24
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

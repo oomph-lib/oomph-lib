@@ -1,0 +1,570 @@
+\doxysection{oomph\+::Periodic\+Orbit\+Assembly\+Handler\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler}{}\label{classoomph_1_1PeriodicOrbitAssemblyHandler}\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+
+
+A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly.  
+
+
+
+
+{\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
+
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Assembly\+Handler\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1PeriodicOrbitAssemblyHandler}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_abe3fe6f2f74260df121bbf115ef3a5ee}{Periodic\+Orbit\+Assembly\+Handler}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+element\+\_\+in\+\_\+period}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{initial\+\_\+guess}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&omega)
+\begin{DoxyCompactList}\small\item\em Constructor, initialises values and constructs mesh of elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3296942fb40f5ca642521db38d44988}{set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs}} ()
+\begin{DoxyCompactList}\small\item\em Update the previous dofs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9239cfbc47f1036893362ff}{ndof}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Return the number of degrees of freedom in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ieqn\+\_\+local}})
+\begin{DoxyCompactList}\small\item\em Return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}})
+\begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3}{get\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dofs}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463e924aa88e0e691e2c6}{get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dofs}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843}{set\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dofs}})
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix "{}d equation / d variable"{} for elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f}{orbit\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+plot}})
+\begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611}{discrete\+\_\+times}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
+\begin{DoxyCompactList}\small\item\em Tell me the times at which you want the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a358d1749faa8ac7dd0de87340d878088}{adapt\+\_\+temporal\+\_\+mesh}} ()
+\begin{DoxyCompactList}\small\item\em Adapt the time mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a919aba117d2e7f08d1462b9d00799782}{\texorpdfstring{$\sim$}{\string~}\+Periodic\+Orbit\+Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, destroy the time mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a75182b5fa555a6d410015feb180701b8}{Periodic\+Orbit\+Assembly\+Handler\+Base}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1AssemblyHandler}{oomph\+::\+Assembly\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AssemblyHandler_af3ab79744dce0b50370defdbf7981691}{Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_abfd15243fce76ce8f1ea0248c700a3f4}{dof\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&dof)
+\begin{DoxyCompactList}\small\item\em Return vector of dofs at time level t in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_afe6002d5703a93b3b147de79508c5719}{dof\+\_\+pt\+\_\+vector}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} $>$ \&dof\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Return vector of pointers to dofs in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab61559fc5df46871c1eebd103f7bf08b}{local\+\_\+problem\+\_\+dof}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Return the t-\/th level of storage associated with the i-\/th (local) dof stored in the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab2e4ee4623116b18245ca90cfe9ba144}{get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{vec}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})
+\begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2ee980ccabe0ad82f98e694eecf270bb}{get\+\_\+dresiduals\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivative of the residuals with respect to a parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_aefc0c13a65342806c167c5d53f014803}{get\+\_\+djacobian\+\_\+dparameter}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{parameter\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dres\+\_\+dparam}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{djac\+\_\+dparam}})
+\begin{DoxyCompactList}\small\item\em Calculate the derivative of the residuals and jacobian with respect to a parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a296bef49838d23522bb660c4c5207f03}{get\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&Y, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&C, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{product}})
+\begin{DoxyCompactList}\small\item\em Calculate the product of the Hessian (derivative of Jacobian with respect to all variables) an eigenvector, Y, and other specified vectors, C (d(J\+\_\+\{ij\})/d u\+\_\+\{k\}) Y\+\_\+\{j\} C\+\_\+\{k\}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a22c5f240674e4f6cee12006790c11dae}{bifurcation\+\_\+type}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a3e369ec692c3d36a4a2a8a64dab7fe2b}{bifurcation\+\_\+parameter\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return a pointer to the bifurcation parameter in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a6d614b1b3809d0eb7ceb393e3ae9594f}{get\+\_\+eigenfunction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{eigenfunction}})
+\begin{DoxyCompactList}\small\item\em Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a60c8efc6756825df9cd41389cdeac6cc}{get\+\_\+inner\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product}})
+\begin{DoxyCompactList}\small\item\em Compute the inner products of the given vector of pairs of history values over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a2300910f43476551318d74e3a90e7713}{get\+\_\+inner\+\_\+product\+\_\+vectors}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elem\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{history\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{inner\+\_\+product\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Compute the vectors that when taken as a dot product with other history values give the inner product over the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a0ccef21253d997dd1a78ed26c2b99fce}{synchronise}} ()
+\begin{DoxyCompactList}\small\item\em Function that is used to perform any synchronisation required during the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ab26633238200230ab57a20cc49e731de}{\texorpdfstring{$\sim$}{\string~}\+Assembly\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ae2a8149c7cd33e41765ef080e1654e81}{Time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$ $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}{Time\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for mesh of temporal elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ae527e33cddc33225b532e6a64f255483}{Basic\+\_\+time\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Storage for the mesh of temporal elements with a simple mesh pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_aac4a358fed9397f2ffcb796252f78025}{Previous\+\_\+dofs}}
+\begin{DoxyCompactList}\small\item\em Storage for the previous solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_aa04e0d8d17e69d64d53df7f9d7369fad}{Ndof}}
+\begin{DoxyCompactList}\small\item\em Store number of degrees of freedom in the original problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a52b49ec4c94b9cf480395c7cad123ced}{N\+\_\+element\+\_\+in\+\_\+period}}
+\begin{DoxyCompactList}\small\item\em Storage for number of elements in the period. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ada223550212a4e5e5b6838f96e5a2170}{N\+\_\+tstorage}}
+\begin{DoxyCompactList}\small\item\em Storage for the number of unknown time values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dcf2e79e837bbbe774e053}{Omega}}
+\begin{DoxyCompactList}\small\item\em Storage for the frequency of the orbit (scaled by 2pi) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$\newline
+class oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$}
+A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly. 
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00689}{689}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_abe3fe6f2f74260df121bbf115ef3a5ee}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_abe3fe6f2f74260df121bbf115ef3a5ee} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}}
+\index{PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{PeriodicOrbitAssemblyHandler()}{PeriodicOrbitAssemblyHandler()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Periodic\+Orbit\+Assembly\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+element\+\_\+in\+\_\+period,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{initial\+\_\+guess,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{omega }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, initialises values and constructs mesh of elements. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00718}{718}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a919aba117d2e7f08d1462b9d00799782}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a919aba117d2e7f08d1462b9d00799782} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!````~PeriodicOrbitAssemblyHandler@{\texorpdfstring{$\sim$}{\string~}PeriodicOrbitAssemblyHandler}}
+\index{````~PeriodicOrbitAssemblyHandler@{\texorpdfstring{$\sim$}{\string~}PeriodicOrbitAssemblyHandler}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PeriodicOrbitAssemblyHandler()}{\string~PeriodicOrbitAssemblyHandler()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor, destroy the time mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01449}{1449}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a358d1749faa8ac7dd0de87340d878088}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a358d1749faa8ac7dd0de87340d878088} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!adapt\_temporal\_mesh@{adapt\_temporal\_mesh}}
+\index{adapt\_temporal\_mesh@{adapt\_temporal\_mesh}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{adapt\_temporal\_mesh()}{adapt\_temporal\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::adapt\+\_\+temporal\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adapt the time mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{1044}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8cc_source_l02085}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{elements_8cc_source_l00696}{oomph\+::\+Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00703}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Basic\+\_\+time\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00075}{oomph\+::\+Mesh\+::\+Default\+\_\+\+Time\+Stepper}}, \mbox{\hyperlink{problem_8h_source_l00463}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00557}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01673}{oomph\+::\+Problem\+::global\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00605}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00712}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+element\+\_\+in\+\_\+period}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00715}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00709}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01716}{oomph\+::\+Problem\+::nglobal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00810}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00604}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00440}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01343}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00718}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Omega}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00706}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}, \mbox{\hyperlink{nodes_8cc_source_l00406}{oomph\+::\+Data\+::set\+\_\+time\+\_\+stepper()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l01524}{oomph\+::\+Problem\+::time\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00693}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+stepper\+\_\+pt}}, and \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!discrete\_times@{discrete\_times}}
+\index{discrete\_times@{discrete\_times}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{discrete\_times()}{discrete\_times()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::discrete\+\_\+times (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tell me the times at which you want the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01033}{1033}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!eqn\_number@{eqn\_number}}
+\index{eqn\_number@{eqn\_number}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559cde803d1ba2195b5290}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{917}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00715}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00709}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00948}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00962}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00977}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_dofs\_for\_element@{get\_dofs\_for\_element}}
+\index{get\_dofs\_for\_element@{get\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dofs\_for\_element()}{get\_dofs\_for\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a48968325ba57e969f64298c5b2dfb8f8}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00948}{948}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01843}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00910}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_jacobian@{get\_jacobian}}
+\index{get\_jacobian@{get\_jacobian}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Calculate the elemental Jacobian matrix "{}d equation / d variable"{} for elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00993}{993}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463e924aa88e0e691e2c6}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463e924aa88e0e691e2c6} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}}
+\index{get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_previous\_dofs\_for\_element()}{get\_previous\_dofs\_for\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a680c82526671e8213d317367f3f7a7e1}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00962}{962}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00910}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00706}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_residuals@{get\_residuals}}
+\index{get\_residuals@{get\_residuals}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the contribution to the residuals of the element elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00940}{940}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9239cfbc47f1036893362ff}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9239cfbc47f1036893362ff} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!ndof@{ndof}}
+\index{ndof@{ndof}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of degrees of freedom in the element elem\+\_\+pt. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00910}{910}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00715}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, and \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00948}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00962}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00977}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!orbit\_output@{orbit\_output}}
+\index{orbit\_output@{orbit\_output}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{orbit\_output()}{orbit\_output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. 
+
+Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not) Return a pointer to the bifurcation parameter in bifurcation tracking problems Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems Return the contribution to the residuals of the element elem\+\_\+pt 
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01021}{1021}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!set\_dofs\_for\_element@{set\_dofs\_for\_element}}
+\index{set\_dofs\_for\_element@{set\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{set\_dofs\_for\_element()}{set\_dofs\_for\_element()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a09d7c31dec8b9688cec82f8b24558b9b}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00977}{977}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01843}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00910}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3296942fb40f5ca642521db38d44988}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3296942fb40f5ca642521db38d44988} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!set\_previous\_dofs\_to\_current\_dofs@{set\_previous\_dofs\_to\_current\_dofs}}
+\index{set\_previous\_dofs\_to\_current\_dofs@{set\_previous\_dofs\_to\_current\_dofs}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{set\_previous\_dofs\_to\_current\_dofs()}{set\_previous\_dofs\_to\_current\_dofs()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the previous dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{901}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01843}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00715}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00709}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00706}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ae527e33cddc33225b532e6a64f255483}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ae527e33cddc33225b532e6a64f255483} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Basic\_time\_mesh\_pt@{Basic\_time\_mesh\_pt}}
+\index{Basic\_time\_mesh\_pt@{Basic\_time\_mesh\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Basic\_time\_mesh\_pt}{Basic\_time\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Basic\+\_\+time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the mesh of temporal elements with a simple mesh pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00703}{703}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a52b49ec4c94b9cf480395c7cad123ced}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a52b49ec4c94b9cf480395c7cad123ced} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!N\_element\_in\_period@{N\_element\_in\_period}}
+\index{N\_element\_in\_period@{N\_element\_in\_period}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{N\_element\_in\_period}{N\_element\_in\_period}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+N\+\_\+element\+\_\+in\+\_\+period\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for number of elements in the period. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00712}{712}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ada223550212a4e5e5b6838f96e5a2170}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ada223550212a4e5e5b6838f96e5a2170} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!N\_tstorage@{N\_tstorage}}
+\index{N\_tstorage@{N\_tstorage}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{N\_tstorage}{N\_tstorage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+N\+\_\+tstorage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the number of unknown time values. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00715}{715}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00910}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aa04e0d8d17e69d64d53df7f9d7369fad}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aa04e0d8d17e69d64d53df7f9d7369fad} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Ndof@{Ndof}}
+\index{Ndof@{Ndof}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Ndof}{Ndof}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Ndof\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store number of degrees of freedom in the original problem. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00709}{709}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00917}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dcf2e79e837bbbe774e053}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dcf2e79e837bbbe774e053} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Omega@{Omega}}
+\index{Omega@{Omega}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Omega}{Omega}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Omega\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the frequency of the orbit (scaled by 2pi) 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00718}{718}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aac4a358fed9397f2ffcb796252f78025}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aac4a358fed9397f2ffcb796252f78025} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Previous\_dofs@{Previous\_dofs}}
+\index{Previous\_dofs@{Previous\_dofs}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Previous\_dofs}{Previous\_dofs}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Previous\+\_\+dofs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the previous solution. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00706}{706}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00962}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00696}{696}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00948}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01021}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::orbit\+\_\+output()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00977}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00901}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Time\_mesh\_pt@{Time\_mesh\_pt}}
+\index{Time\_mesh\_pt@{Time\_mesh\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Time\_mesh\_pt}{Time\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}}$>$ $>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for mesh of temporal elements. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00700}{700}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01033}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::discrete\+\_\+times()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00993}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00940}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+residuals()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01021}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::orbit\+\_\+output()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01449}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\texorpdfstring{$\sim$}{\string~}\+Periodic\+Orbit\+Assembly\+Handler()}}.
+
+\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ae2a8149c7cd33e41765ef080e1654e81}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ae2a8149c7cd33e41765ef080e1654e81} 
+\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Time\_stepper\_pt@{Time\_stepper\_pt}}
+\index{Time\_stepper\_pt@{Time\_stepper\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{Time\_stepper\_pt}{Time\_stepper\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{NNODE\+\_\+1D}} $>$\+::\+Time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00693}{693}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01044}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{periodic__orbit__handler_8h}{periodic\+\_\+orbit\+\_\+handler.\+h}}\end{DoxyCompactItemize}

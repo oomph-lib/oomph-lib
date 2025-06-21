@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation and the use of perfectly matched layers</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation and the use of perfectly matched layers </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>In this document we discuss the finite-element-based solution of the the Helmholtz equation in cylindrical polar coordinates, using a Fourier-decomposition of the solution in the azimuthal direction and with perfectly matched layers.</p>
+<p>Compared to the Fourier-decomposed Helmholtz equation discussed in <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">another tutorial, </a> the formulation used here allows the imposition of the Sommerfeld radiation condition by means of so-called "perfectly matched layers" (PMLs) as an alternative to classical absorbing/approximate boundary conditions or DtN maps.</p>
+<p>We start by reviewing the relevant theory and then present the solution of a simple model problem - the outward propagation of waves from the surface of a unit sphere.</p>
+<table border="0">
+<tr>
+<td><center class="panel panel-success"> <div class="panel-heading"><b>Acknowledgements</b></div><div class="panel-body">This tutorial and the associated driver codes were developed jointly with Matthew Walker (The University of Manchester), with financial support from Thales Underwater Ltd. </div></center><p class="endtd"></p>
+</td></tr>
+</table>
+<hr  />
+<h1><a class="anchor" id="theory"></a>
+Theory: The azimuthally Fourier-decomposed Helmholtz equation</h1>
+<p>The Helmholtz equation governs time-harmonic solutions of problems governed by the linear wave equation  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_0.png" width="254" height="29"/>
+</p>
+<p> where <img class="formulaInl" alt="$ c $" src="form_1.png" width="5" height="6"/> is the wavespeed. Assuming that <img class="formulaInl" alt="$ U(x,y,z,t) $" src="form_2.png" width="60" height="14"/> is time-harmonic, with frequency <img class="formulaInl" alt="$ \omega $" src="form_3.png" width="9" height="6"/>, we write the real function <img class="formulaInl" alt="$ U(x,y,z,t) $" src="form_2.png" width="60" height="14"/> as  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+U(x,y,z,t) = Re (u(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_4.png" width="246" height="16"/>
+</p>
+<p> where <img class="formulaInl" alt="$ u(x,y,z) $" src="form_5.png" width="49" height="14"/> is complex-valued. This transforms (1) into the Helmholtz equation  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 u(x,y,z) + k^2 u(x,y,z) = 0 \ ,
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_6.png" width="238" height="16"/>
+</p>
+<p> where <img class="formulaInl" alt="$ k = \omega/c $" src="form_7.png" width="44" height="14"/> is the wavenumber. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.</p>
+<p>If the equation is solved in an unbounded spatial domain (e.g. in scattering problems) the solution must also satisfy the so-called <a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">Sommerfeld radiation condition</a>, which in 3D has the form  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\lim_{r\to \infty} r \left(\frac{\partial u}{\partial r} - iku
+\right) =0. 
+\]" src="form_8.png" width="130" height="31"/>
+</p>
+<p> Mathematically, this condition is required to ensure the uniqueness of the solution (and hence the well-posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.</p>
+<p>These equations can be solved using <code>oomph-lib's</code> cartesian Helmholtz elements, described in <br  />
+ <a href="../../../helmholtz/scattering/html/index.html">another tutorial.</a> Here we consider an alternative approach in which we solve the equations in cylindrical polar coordinates <img class="formulaInl" alt="$ (r,\varphi,z)
+$" src="form_9.png" width="40" height="14"/>, related to the cartesian coordinates <img class="formulaInl" alt="$ (x,y,z) $" src="form_10.png" width="40" height="14"/> via  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+x =  r \cos(\varphi),
+\]" src="form_11.png" width="70" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+y =  r \sin(\varphi),
+\]" src="form_12.png" width="68" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+z = z.
+\]" src="form_13.png" width="33" height="6"/>
+</p>
+<p> We then decompose the solution into its Fourier components by writing  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\]" src="form_14.png" width="201" height="36"/>
+</p>
+<p> Since the governing equations are linear we can compute each Fourier component <img class="formulaInl" alt="$ u_N(r,z) $" src="form_15.png" width="44" height="14"/> individually by solving  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_16.png" width="274" height="33"/>
+</p>
+<p> while specifying the Fourier wavenumber <img class="formulaInl" alt="$ N $" src="form_17.png" width="11" height="10"/> as a parameter.</p>
+<hr  />
+<h1><a class="anchor" id="discr"></a>
+Discretisation by finite elements</h1>
+<p>The discretisation of the Fourier-decomposed Helmholtz equation itself only requires a trivial modification of its <a href="../../../helmholtz/scattering/html/index.html">cartesian counterpart</a>. Since most practical applications of the Helmholtz equation involve complex-valued solutions, we provide separate storage for the real and imaginary parts of the solution &ndash; each <code>Node</code> therefore stores two unknowns values. By default,the real and imaginary parts are stored as values 0 and 1, respectively;</p>
+<p>The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson equation:</p><ul>
+<li>Dirichlet conditions are imposed by pinning the relevant nodal values and setting them to the appropriate prescribed values.</li>
+<li>Neumann (flux) boundary conditions are imposed via <code>FaceElements</code> (here the <code>PMLFourierDecomposedHelmholtzFluxElements</code>). <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">As usual</a> we attach these to the faces of the "bulk" elements that are subject to the Neumann boundary conditions.</li>
+</ul>
+<p>The imposition of the Sommerfeld radiation condition for problems in infinite domains is slightly more complicated. In the next section we will discuss a method of representing the Sommerfeld radiation condition numerically by means of perfectly matched layers.</p>
+<hr  />
+<h1><a class="anchor" id="pml"></a>
+Perfectly matched layers</h1>
+<p>The idea behind perfectly matched layers is illustrated in the figure below. The actual physical/mathematical problem has to be solved in the infinite domain <img class="formulaInl" alt="$ D $" src="form_18.png" width="10" height="10"/> (shown on the left), with the Sommerfeld radiation condition ensuring the suitable decay of the solution at large distances from the region of interest (the vicinity of the scatterer, say).</p>
+<p>If computations are performed in a finite computational domain, <img class="formulaInl" alt="$
+D_c $" src="form_19.png" width="15" height="13"/> , (shown in the middle), spurious wave reflections are likely to be generated at the artificial boundary <img class="formulaInl" alt="$
+\partial D_c $" src="form_20.png" width="23" height="13"/> of the computational domain.</p>
+<p>The idea behind PML methods is to surround the actual computational domain <img class="formulaInl" alt="$ D_c $" src="form_21.png" width="15" height="13"/> with a layer of "absorbing" material whose properties are chosen such that the outgoing waves are absorbed within it, without creating any artificial reflected waves at the interface between the PML layer and the computational domain.</p>
+<p>Our implementation of the perfectly matched layers follows the development in <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">A. Bermudez, L. Hervella-Nieto, A. Prieto, and R. Rodriguez "An optimal perfectly matched layer with unbounded 
+absorbing function for time-harmonic acoustic scattering problems" Journal of Computational Physics <b>223</b> 469-488 (2007)</a> and we assume the boundaries of the computational domain to be aligned with the coordinate axes, as shown in the sketch below.</p>
+<p>The method requires a slight further generalisation of the equations, achieved by introducing the complex coordinate mapping <br  />
+  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial}{\partial x_j} \to \frac{1}{s_j(x_j)} \frac{\partial}{\partial x_j} 
+ \ \ \ \ \mbox{where $j =&quot;r&quot;,&quot;z&quot;$} \ \ \ \ \ \ \ \ (5)
+\]" src="form_22.png" width="266" height="31"/>
+</p>
+<p> within the perfectly matched layers. The choice of <img class="formulaInl" alt="$ s_r(r) $" src="form_23.png" width="26" height="14"/> and <img class="formulaInl" alt="$ s_z(z) $" src="form_24.png" width="26" height="14"/> depends on the orientation of the PML layer. Since we are restricting ourselves to axis-aligned mesh boundaries we distinguish three different cases</p>
+<ul>
+<li>For layers that are aligned with the r axis (such as the top and bottom PML layers) we set  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  s_z(z)  = 
+  1 +\frac{i}{k}\ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}, \ \ \ \ \ 
+  (6)
+  \]" src="form_25.png" width="349" height="30"/>
+</p>
+ where <img class="formulaInl" alt="$ Z_{PML} $" src="form_26.png" width="33" height="13"/> is the z-coordinate of the outer boundary of the PML layer, and  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+   s_r(r) = 1.
+  \]" src="form_27.png" width="54" height="14"/>
+</p>
+</li>
+<li>For the right layer that is aligned with the z axis we set  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ 
+  s_z(z) = 1,
+  \]" src="form_28.png" width="54" height="14"/>
+</p>
+ and  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  s_r(r) = 
+  1+\frac{i}{k} \ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|}, \ \ \ \ \ 
+  (7)
+  \]" src="form_29.png" width="346" height="30"/>
+</p>
+ where <img class="formulaInl" alt="$ R_{PML} $" src="form_30.png" width="34" height="13"/> is the r-coordinate of the outer boundary of the PML layer.</li>
+<li>In corner regions that are bounded by two axis-aligned PML layers (with outer coordinates <img class="formulaInl" alt="$ R_{PML} $" src="form_30.png" width="34" height="13"/> and <br  />
+ <img class="formulaInl" alt="$ Z_{PML} $" src="form_26.png" width="33" height="13"/>) we set  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  s_r(r)  = 
+  1 +\frac{i}{k}\ \sigma_{r}(r) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{r}(r)  =  \frac{1}{|R_{PML}-r|} \ \ \ \ \ 
+  (8)
+  \]" src="form_31.png" width="341" height="30"/>
+</p>
+ and  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  s_z(z) = 
+  1+\frac{i}{k} \ \sigma_{z}(z) 
+  \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
+  \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}. \ \ \ \ \ 
+  (9)
+  \]" src="form_32.png" width="346" height="30"/>
+</p>
+</li>
+<li>Finally, in the actual computational domain (outside the PML layers) we set  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+  s_r(r) =   s_z(z) = 1.
+  \]" src="form_33.png" width="96" height="14"/>
+</p>
+</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="impl"></a>
+Implementation within oomph-lib</h1>
+<p>The finite-element-discretised equations (modified by the PML terms discussed above) are implemented in the <code>PMLFourierDecomposedHelmholtzEquations</code> class. As usual, we provide fully functional elements by combining these with geometric finite elements (from the Q and T families &ndash; corresponding (in 2D) to triangles and quad elements). By default, the PML modifications are disabled, i.e. <img class="formulaInl" alt="$ s_{r}(r) $" src="form_34.png" width="26" height="14"/> and <img class="formulaInl" alt="$ s_{z}(z) $" src="form_35.png" width="26" height="14"/> are both set to 1.</p>
+<p>The generation of suitable 2D PML meshes along the axis-aligned boundaries of a given bulk mesh is facilitated by helper functions which automatically erect layers of (quadrilateral) PML elements. The layers are built from <code>QPMLFourierDecomposedHelmholtzElement&lt;NNODE_1D&gt;</code> elements and the parameter <code>NNODE_1D</code> is automatically chosen to match that of the elements in the bulk mesh. The bulk mesh can contain quads or triangles (as shown in the specific example presented below).</p>
+<hr  />
+<h1><a class="anchor" id="osc_sph"></a>
+A specific example: Outward propagation of waves from the surface of an oscillating sphere</h1>
+<p>We will now demonstrate the methodology for a specific example: the propagation of waves from the surface of a unit sphere.</p>
+<p>The specific domain used in this case can be seen in the figure below. We create an unstructured mesh of six-noded <code>TPMLFourierDecomposedHelmholtzElements</code> to create the finite computational domain surrounding a sphere. This is surrounded by three axis-aligned PML layers and two corner meshes (each made of nine-noded <code>QPMLFourierDecomposedHelmholtzElements</code>).</p>
+<div class="image">
+<img src="comp_domain.gif" alt=""/>
+<div class="caption">
+The computational domain used in the example problem. </div></div>
+ <p>We construct an exact solution to the problem by applying Neumann/flux boundary condition on the inner spherical boundary such that the imposed flux <img class="formulaInl" alt="$ \partial u/\partial
+n $" src="form_36.png" width="35" height="14"/> is consistent with the exact solution <img class="formulaInl" alt="$ u(\rho,\varphi,\theta) $" src="form_37.png" width="49" height="14"/> in spherical polar coordinates <img class="formulaInl" alt="$
+(\rho,\theta,\varphi) $" src="form_38.png" width="40" height="14"/>, given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ (10)
+\]" src="form_39.png" width="428" height="39"/>
+</p>
+<p> where the <img class="formulaInl" alt="$a_{ln}, b_{ln} $" src="form_40.png" width="36" height="13"/> are arbitrary coefficients and the functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\]" src="form_41.png" width="311" height="18"/>
+</p>
+<p> are the spherical Hankel functions of first and second kind, respectively, expressed in terms the spherical Bessel functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\]" src="form_42.png" width="310" height="31"/>
+</p>
+<p> The functions  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\]" src="form_43.png" width="205" height="28"/>
+</p>
+<p> are the associated Legendre functions, expressed in terms of the Legendre polynomials  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\]" src="form_44.png" width="161" height="28"/>
+</p>
+<p> This definition shows that <img class="formulaInl" alt="$ P_{l}^{m}(x)=0 $" src="form_45.png" width="59" height="14"/> for <img class="formulaInl" alt="$ m&gt;l $" src="form_46.png" width="33" height="11"/> which explains the limited range of summation indices in the second sum in (10).</p>
+<p>The relation between the cylindrical polar coordinates <img class="formulaInl" alt="$
+(r,\varphi,z)$" src="form_47.png" width="40" height="14"/> and spherical polar coordinates <img class="formulaInl" alt="$
+(\rho,\theta,\varphi) $" src="form_38.png" width="40" height="14"/> is given by  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\rho = \sqrt{r^2 + z^2},
+\]" src="form_48.png" width="78" height="16"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\theta = \arctan(r/z),
+\]" src="form_49.png" width="89" height="14"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\varphi = \varphi,
+\]" src="form_50.png" width="36" height="9"/>
+</p>
+<p> so <img class="formulaInl" alt="$\varphi \in [0,2\pi] $" src="form_51.png" width="55" height="14"/> remains unchanged, and <br  />
+ <img class="formulaInl" alt="$\theta \in [0,\pi] $" src="form_52.png" width="46" height="14"/> sweeps from the north pole ( <img class="formulaInl" alt="$ \theta = 0 $" src="form_53.png" width="29" height="10"/>), via the equator ( <img class="formulaInl" alt="$ \theta = \pi/2 $" src="form_54.png" width="43" height="14"/> ) to the south pole ( <img class="formulaInl" alt="$ \theta = \pi $" src="form_55.png" width="30" height="10"/>).</p>
+<hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The two figures below show a comparison between the computed and exact solutions for a Fourier wavenumber of <img class="formulaInl" alt="$ N = 3
+$" src="form_56.png" width="34" height="10"/>, wavenumber squared <img class="formulaInl" alt="$ k^2 = 10 $" src="form_57.png" width="41" height="11"/>.</p>
+<div class="image">
+<img src="soln3_real.gif" alt=""/>
+<div class="caption">
+Plot of the computed (red) and exact (green) real parts of the solution of the Fourier-decomposed Helmholtz equation. </div></div>
+ <div class="image">
+<img src="soln3_imag.gif" alt=""/>
+<div class="caption">
+Plot of the computed (red) and exact (green) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation. </div></div>
+ <hr  />
+<h1><a class="anchor" id="num_soln"></a>
+The numerical solution</h1>
+<h2><a class="anchor" id="glb_name"></a>
+The global namespace</h2>
+<p>As usual, we define the problem parameters in a global namespace. The main parameters are the wavenumber squared <img class="formulaInl" alt="$ k^2 $" src="form_58.png" width="11" height="11"/>, the PML thickness, the number of elements within the PML layer, and the Fourier wavenumber <img class="formulaInl" alt="$ N $" src="form_17.png" width="11" height="10"/>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_namespace=============================================</span></div>
+<div class="line"><span class="comment">/// Namespace for the Fourier decomposed Helmholtz problem parameters</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceProblemParameters.html">ProblemParameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Output directory</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">string</span> <a class="code hl_variable" href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">Directory</a>=<span class="stringliteral">&quot;RESLT&quot;</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Frequency</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">K_squared</a> = 10.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Default physical PML thickness</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceProblemParameters.html#ad56d4d5946cbe68de28413e4f8aa4d42">PML_thickness</a>=4.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Default number of elements within PMLs</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aef2e7cb819b8c5012a0f2db03892ee87">Nel_pml</a>=15;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Target area for initial mesh</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aafe26abadfce87800a6a4676f0476956">Element_area</a> = 0.1;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The default Fourier wave number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">int</span> <a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">N_fourier</a>=0;</div>
+<div class="ttc" id="anamespaceProblemParameters_html"><div class="ttname"><a href="namespaceProblemParameters.html">ProblemParameters</a></div><div class="ttdoc">Namespace for the Fourier decomposed Helmholtz problem parameters.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00056">oscillating_sphere.cc:57</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_a9df0f1728e8e7e53dcca84385ae9a031"><div class="ttname"><a href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">ProblemParameters::Directory</a></div><div class="ttdeci">string Directory</div><div class="ttdoc">Output directory.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00059">oscillating_sphere.cc:59</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa5362de1af9e257fde4317c367158a93"><div class="ttname"><a href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a></div><div class="ttdeci">double K_squared</div><div class="ttdoc">Frequency.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00062">oscillating_sphere.cc:62</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aaa674958a1ca6ee0b99de3377288c93f"><div class="ttname"><a href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a></div><div class="ttdeci">int N_fourier</div><div class="ttdoc">The default Fourier wave number.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00074">oscillating_sphere.cc:74</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aafe26abadfce87800a6a4676f0476956"><div class="ttname"><a href="namespaceProblemParameters.html#aafe26abadfce87800a6a4676f0476956">ProblemParameters::Element_area</a></div><div class="ttdeci">double Element_area</div><div class="ttdoc">Target area for initial mesh.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00071">oscillating_sphere.cc:71</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_ad56d4d5946cbe68de28413e4f8aa4d42"><div class="ttname"><a href="namespaceProblemParameters.html#ad56d4d5946cbe68de28413e4f8aa4d42">ProblemParameters::PML_thickness</a></div><div class="ttdeci">double PML_thickness</div><div class="ttdoc">Default physical PML thickness.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00065">oscillating_sphere.cc:65</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aef2e7cb819b8c5012a0f2db03892ee87"><div class="ttname"><a href="namespaceProblemParameters.html#aef2e7cb819b8c5012a0f2db03892ee87">ProblemParameters::Nel_pml</a></div><div class="ttdeci">unsigned Nel_pml</div><div class="ttdoc">Default number of elements within PMLs.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00068">oscillating_sphere.cc:68</a></div></div>
+</div><!-- fragment --><p> Next we define the coefficients</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Number of terms in the exact solution</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> N_terms=6;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Coefficients in the exact solution</span></div>
+<div class="line"><span class="comment"></span> Vector&lt;double&gt; Coeff(N_terms,1.0);</div>
+</div><!-- fragment --><p> required for the specification of the exact solution</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Exact solution as a Vector of size 2, containing real and imag parts</span></div>
+<div class="line"> <span class="keywordtype">void</span> get_exact_u(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, Vector&lt;double&gt;&amp; u)</div>
+</div><!-- fragment --><p> and its derivative</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Get -du/dr (spherical r) for exact solution. Equal to prescribed</span></div>
+<div class="line"><span class="comment"> /// flux on inner boundary.</span></div>
+<div class="line"> <span class="keywordtype">void</span> exact_minus_dudr(<span class="keyword">const</span> Vector&lt;double&gt;&amp; x, std::complex&lt;double&gt;&amp; flux)</div>
+</div><!-- fragment --><p> whose listings we omit here.</p>
+<hr  />
+<h2><a class="anchor" id="drv_cde"></a>
+The driver code</h2>
+<p>The driver code is very straightforward. We create the problem object,</p>
+ <div class="fragment"><div class="line"><span class="comment">//===== start_of_main=====================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for Pml Fourier decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="oscillating__sphere_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv)</div>
+<div class="line">{</div>
+<div class="ttc" id="aoscillating__sphere_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="oscillating__sphere_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Driver code for Pml Fourier decomposed Helmholtz problem.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l01184">oscillating_sphere.cc:1184</a></div></div>
+<div class="line"> <span class="comment">// Create the problem with 2D six-node elements from the</span></div>
+<div class="line"> <span class="comment">// TPMLFourierDecomposedHelmholtzElement family.</span></div>
+<div class="line"> <a class="code hl_class" href="classPMLFourierDecomposedHelmholtzProblem.html">PMLFourierDecomposedHelmholtzProblem</a></div>
+<div class="line">  &lt;TPMLFourierDecomposedHelmholtzElement&lt;3&gt; &gt;</div>
+<div class="line">  problem;</div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html">PMLFourierDecomposedHelmholtzProblem</a></div><div class="ttdoc">Problem class.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00429">oscillating_sphere.cc:430</a></div></div>
+</div><!-- fragment --><p> and define the output directory.</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create label for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<a class="code hl_variable" href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">ProblemParameters::Directory</a>);</div>
+</div><!-- fragment --><p>Finally, we solve the problem and document the results.</p>
+ <div class="fragment"><div class="line"><span class="comment">// Solve the problem with Newton&#39;s method</span></div>
+<div class="line">problem.newton_solve();</div>
+<div class="line"> <span class="comment">//Output the solution</span></div>
+<div class="line"> problem.doc_solution(doc_info);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">//end of main</span></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="prb_clss"></a>
+The problem class</h2>
+<p>The problem class is very similar to that employed for the <a href="../../../helmholtz/scattering/html/index.html">solution of the 2D Helmholtz equation with flux boundary conditions.</a> We provide helper functions to create the PML meshes and to apply the boundary conditions (mainly because these tasks have to be performed repeatedly in the spatially adaptive version of this code which is not discussed explicitly here; but see the exercise on <a class="el" href="index.html#adaptivity">Spatial adaptivity</a>).</p>
+ <div class="fragment"><div class="line"><span class="comment">//========= start_of_problem_class=====================================</span></div>
+<div class="line"><span class="comment">/// Problem class</span></div>
+<div class="line"><span class="comment">//=====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classPMLFourierDecomposedHelmholtzProblem.html">PMLFourierDecomposedHelmholtzProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a5764db8312a28a3e1eaac2cc61813f83">PMLFourierDecomposedHelmholtzProblem</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#abc35779657bcdd622d09464c225b079a">~PMLFourierDecomposedHelmholtzProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#af87810cbe164981cc14ee779793a69fb">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a013d95d489b85e326a71bb744af4a40f">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution. DocInfo object stores flags/labels for where the</span></div>
+<div class="line"><span class="comment"> /// output gets written to</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#afcdfaf86efc75fbea14f6ade9eeb7f9c">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create PML meshes</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#ae562dddf5c60793371b594bff5047f91">create_pml_meshes</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Create mesh of face elements that monitor the radiated power</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a83e0aa333ec3b25f1afccc3bc0a529ad">create_power_monitor_mesh</a>();</div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_a013d95d489b85e326a71bb744af4a40f"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#a013d95d489b85e326a71bb744af4a40f">PMLFourierDecomposedHelmholtzProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update the problem after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00444">oscillating_sphere.cc:444</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_a5764db8312a28a3e1eaac2cc61813f83"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#a5764db8312a28a3e1eaac2cc61813f83">PMLFourierDecomposedHelmholtzProblem::PMLFourierDecomposedHelmholtzProblem</a></div><div class="ttdeci">PMLFourierDecomposedHelmholtzProblem()</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00789">oscillating_sphere.cc:790</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_a83e0aa333ec3b25f1afccc3bc0a529ad"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#a83e0aa333ec3b25f1afccc3bc0a529ad">PMLFourierDecomposedHelmholtzProblem::create_power_monitor_mesh</a></div><div class="ttdeci">void create_power_monitor_mesh()</div><div class="ttdoc">Create mesh of face elements that monitor the radiated power.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00543">oscillating_sphere.cc:544</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_abc35779657bcdd622d09464c225b079a"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#abc35779657bcdd622d09464c225b079a">PMLFourierDecomposedHelmholtzProblem::~PMLFourierDecomposedHelmholtzProblem</a></div><div class="ttdeci">~PMLFourierDecomposedHelmholtzProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00438">oscillating_sphere.cc:438</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_ae562dddf5c60793371b594bff5047f91"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#ae562dddf5c60793371b594bff5047f91">PMLFourierDecomposedHelmholtzProblem::create_pml_meshes</a></div><div class="ttdeci">void create_pml_meshes()</div><div class="ttdoc">Create PML meshes.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l01110">oscillating_sphere.cc:1110</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_af87810cbe164981cc14ee779793a69fb"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#af87810cbe164981cc14ee779793a69fb">PMLFourierDecomposedHelmholtzProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00441">oscillating_sphere.cc:441</a></div></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_afcdfaf86efc75fbea14f6ade9eeb7f9c"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#afcdfaf86efc75fbea14f6ade9eeb7f9c">PMLFourierDecomposedHelmholtzProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution. DocInfo object stores flags/labels for where the output gets written to.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00974">oscillating_sphere.cc:975</a></div></div>
+</div><!-- fragment --><p> The private member data includes pointers to the bulk mesh,</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Pointer to the &quot;bulk&quot; mesh</span></div>
+<div class="line"> TriangleMesh&lt;ELEMENT&gt;* Bulk_mesh_pt;</div>
+</div><!-- fragment --><p> a pointer to the mesh of FaceElements that apply the flux boundary condition on the surface of the sphere,</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Mesh of FaceElements that apply the flux bc on the inner boundary</span></div>
+<div class="line"> Mesh* Helmholtz_inner_boundary_mesh_pt;</div>
+</div><!-- fragment --><p> and the various PML sub-meshes:</p>
+ <div class="fragment"><div class="line"><span class="comment"> /// Pointer to the right PML mesh</span></div>
+<div class="line"> Mesh* PML_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the top PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_top_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bottom PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_bottom_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the top right corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_top_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the bottom right corner PML mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* PML_bottom_right_mesh_pt;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream Trace_file;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end of problem class</span></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="prb_con"></a>
+The problem constructor</h2>
+<p>We open a trace file in which we record the radiated power and create the <code>Circle</code> object that defines the curvilinear inner boundary of the domain.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=======start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Constructor for Pml Fourier-decomposed Helmholtz problem</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a5764db8312a28a3e1eaac2cc61813f83">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a5764db8312a28a3e1eaac2cc61813f83">PMLFourierDecomposedHelmholtzProblem</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">string</span> trace_file_location = <a class="code hl_variable" href="namespaceProblemParameters.html#a9df0f1728e8e7e53dcca84385ae9a031">ProblemParameters::Directory</a> + <span class="stringliteral">&quot;/trace.dat&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> Trace_file.open(trace_file_location.c_str());</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Setup &quot;bulk&quot; mesh</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> <span class="comment">// Create the circle that represents the inner boundary</span></div>
+<div class="line"> <span class="keywordtype">double</span> x_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> y_c=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> r_min=1.0;</div>
+<div class="line"> Circle* inner_circle_pt=<span class="keyword">new</span> Circle(x_c,y_c,r_min);</div>
+</div><!-- fragment --><p> Next we specify the the outer radius of computational domain  </p><div class="fragment"><div class="line"> <span class="keywordtype">double</span> r_max=3.0;</div>
+</div><!-- fragment --><p> and define its polygonal outer boundary:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Edges/boundary segments making up outer boundary</span></div>
+<div class="line"> <span class="comment">//-------------------------------------------------</span></div>
+<div class="line"> Vector&lt;TriangleMeshCurveSection*&gt; outer_boundary_line_pt(6);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// All poly boundaries are defined by two vertices</span></div>
+<div class="line"> Vector&lt;Vector&lt;double&gt; &gt; boundary_vertices(2);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom straight boundary on symmetry line</span></div>
+<div class="line"> <span class="comment">//------------------------------------------</span></div>
+<div class="line"> boundary_vertices[0].resize(2);</div>
+<div class="line"> boundary_vertices[0][0]=0.0;</div>
+<div class="line"> boundary_vertices[0][1]=-r_min;</div>
+<div class="line"> boundary_vertices[1].resize(2);</div>
+<div class="line"> boundary_vertices[1][0]=0.0;</div>
+<div class="line"> boundary_vertices[1][1]=-r_max;</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> boundary_id=0;</div>
+<div class="line"> outer_boundary_line_pt[0]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshPolyLine(boundary_vertices,boundary_id);</div>
+</div><!-- fragment --><p> Next we define the curvilinear inner boundary in terms of a <code>TriangleMeshCurviLine</code> which defines the surface of the sphere,</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Inner circular boundary:</span></div>
+<div class="line"> <span class="comment">//-------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of segments used for representing the curvilinear boundary</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_segments = 20;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The intrinsic coordinates for the beginning and end of the curve</span></div>
+<div class="line"> <span class="keywordtype">double</span> s_start =  0.5*MathematicalConstants::Pi;</div>
+<div class="line"> <span class="keywordtype">double</span> s_end   =  -0.5*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line"> boundary_id = 5;</div>
+<div class="line"> outer_boundary_line_pt[5]=</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshCurviLine(inner_circle_pt,</div>
+<div class="line">                            s_start,</div>
+<div class="line">                            s_end,</div>
+<div class="line">                            n_segments,</div>
+<div class="line">                            boundary_id);</div>
+</div><!-- fragment --><p> and combine the various pieces of the boundary to the closed outer boundary:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create closed curve that defines outer boundary</span></div>
+<div class="line"> <span class="comment">//------------------------------------------------</span></div>
+<div class="line"> TriangleMeshClosedCurve *outer_boundary_pt =</div>
+<div class="line">  <span class="keyword">new</span> TriangleMeshClosedCurve(outer_boundary_line_pt);</div>
+</div><!-- fragment --><p> Finally, we specify the mesh parameters,</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Use the TriangleMeshParameters object for helping on the manage of the</span></div>
+<div class="line"> <span class="comment">// TriangleMesh parameters. The only parameter that needs to take is the</span></div>
+<div class="line"> <span class="comment">// outer boundary.</span></div>
+<div class="line"> TriangleMeshParameters triangle_mesh_parameters(outer_boundary_pt);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Specify maximum element area</span></div>
+<div class="line"> <span class="keywordtype">double</span> element_area = <a class="code hl_variable" href="namespaceProblemParameters.html#aafe26abadfce87800a6a4676f0476956">ProblemParameters::Element_area</a>;</div>
+<div class="line"> triangle_mesh_parameters.element_area() = element_area;</div>
+</div><!-- fragment --><p> build the bulk mesh, and add it to the problem:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create the bulk mesh</span></div>
+<div class="line"> Bulk_mesh_pt= <span class="keyword">new</span> TriangleMesh&lt;ELEMENT&gt;(triangle_mesh_parameters);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Add the bulk mesh to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+</div><!-- fragment --><p> Next, we create the FaceElements that apply the flux boundary condition on the boundary of the sphere and add the corresponding mesh to the problem too:</p>
+<div class="fragment"><div class="line">  <span class="comment">// Create flux elements on inner boundary</span></div>
+<div class="line"> Helmholtz_inner_boundary_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_flux_elements_on_inner_boundary();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// ...and add the mesh to the problem</span></div>
+<div class="line"> add_sub_mesh(Helmholtz_inner_boundary_mesh_pt);</div>
+</div><!-- fragment --><p> We create another set of FaceElements that allow the computation of the radiated flux over the outer boundaries of the domain:</p>
+<div class="fragment"><div class="line"> <span class="comment">// Attach the power monitor elements</span></div>
+<div class="line"> Power_monitor_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> create_power_monitor_mesh();</div>
+</div><!-- fragment --><p> (This mesh does not need to be added to the problem since its elements merely act as post-processing tools and do not provide any contributions to the problem's residual vector.</p>
+<p>We build the PML meshes and combine the various sub-meshes to the problem's global mesh:</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Create the pml meshes</span></div>
+<div class="line"> create_pml_meshes();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build the Problem&#39;s global mesh from its various sub-meshes</span></div>
+<div class="line"> build_global_mesh();</div>
+</div><!-- fragment --><p> We complete the problem setup by passing the problem parameters to the elements, using the helper function <code>complete_problem_setup()</code> (Remember that even the elements in the PML layers need to be told about these parameters since they adjust the <img class="formulaInl" alt="$ s_r(r) $" src="form_23.png" width="26" height="14"/> and <img class="formulaInl" alt="$ s_z(z) $" src="form_24.png" width="26" height="14"/> functions in terms of these parameters).</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Complete the build of all elements</span></div>
+<div class="line"> complete_problem_setup();</div>
+</div><!-- fragment --><p> Finally we assign the equation numbers,</p>
+ <div class="fragment"><div class="line"> <span class="comment">// Setup equation numbering scheme</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p> The problem can now be solved.</p>
+<hr  />
+<h2><a class="anchor" id="inner_flx"></a>
+Impose flux on inner boundary</h2>
+<p>The function <code>create_flux_elements()</code> creates the FaceElements required to apply the flux/Neumann boundary conditions on the boundary of the sphere.</p>
+ <div class="fragment"><div class="line"><span class="comment">//============start_of_create_flux_elements=================</span></div>
+<div class="line"><span class="comment">/// Create flux elements on inner boundary</span></div>
+<div class="line"><span class="comment">//==========================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span>  <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#afd6e3401bdbd1d3deb3271553fbe1d3a">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#afd6e3401bdbd1d3deb3271553fbe1d3a">create_flux_elements_on_inner_boundary</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Apply flux bc on inner boundary (boundary 5)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> b=5;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Loop over the bulk elements adjacent to boundary b</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">   ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">    Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">   <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Build the corresponding prescribed incoming-flux element</span></div>
+<div class="line">   PMLFourierDecomposedHelmholtzFluxElement&lt;ELEMENT&gt;*</div>
+<div class="line">    flux_element_pt = <span class="keyword">new</span></div>
+<div class="line">    PMLFourierDecomposedHelmholtzFluxElement&lt;ELEMENT&gt;</div>
+<div class="line">    (bulk_elem_pt,face_index);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Add the prescribed incoming-flux element to the surface mesh</span></div>
+<div class="line">   Helmholtz_inner_boundary_mesh_pt-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the pointer to the prescribed flux function</span></div>
+<div class="line">   flux_element_pt-&gt;flux_fct_pt() = &amp;<a class="code hl_function" href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a>;</div>
+<div class="line"> </div>
+<div class="line">  } <span class="comment">//end of loop over bulk elements adjacent to boundary b</span></div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of create flux elements on inner boundary</span></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_afd6e3401bdbd1d3deb3271553fbe1d3a"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#afd6e3401bdbd1d3deb3271553fbe1d3a">PMLFourierDecomposedHelmholtzProblem::create_flux_elements_on_inner_boundary</a></div><div class="ttdeci">void create_flux_elements_on_inner_boundary()</div><div class="ttdoc">Create flux elements on inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l01071">oscillating_sphere.cc:1072</a></div></div>
+<div class="ttc" id="anamespaceProblemParameters_html_aa544d1f3e384d3283f7113512931ea8f"><div class="ttname"><a href="namespaceProblemParameters.html#aa544d1f3e384d3283f7113512931ea8f">ProblemParameters::exact_minus_dudr</a></div><div class="ttdeci">void exact_minus_dudr(const Vector&lt; double &gt; &amp;x, std::complex&lt; double &gt; &amp;flux)</div><div class="ttdoc">Get -du/dr (spherical r) for exact solution. Equal to prescribed flux on inner boundary.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00147">oscillating_sphere.cc:147</a></div></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="p_monitor"></a>
+Create power monitor mesh</h2>
+<p>The function <code>create_power_monitor_mesh</code> creates the FaceElements that allow the computation of the radiated power over the outer boundary of the computational domain.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===================start_of_create_power_monitor_mesh===================</span></div>
+<div class="line"><span class="comment">/// Create BC elements on outer boundary</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a83e0aa333ec3b25f1afccc3bc0a529ad">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#a83e0aa333ec3b25f1afccc3bc0a529ad">create_power_monitor_mesh</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Loop over outer boundaries</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> b=1;b&lt;4;b++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Loop over the bulk elements adjacent to boundary b?</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> n_element = Bulk_mesh_pt-&gt;nboundary_element(b);</div>
+<div class="line">   <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_element;e++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Get pointer to the bulk element that is adjacent to boundary b</span></div>
+<div class="line">     ELEMENT* bulk_elem_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">      Bulk_mesh_pt-&gt;boundary_element_pt(b,e));</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Find the index of the face of element e along boundary b</span></div>
+<div class="line">     <span class="keywordtype">int</span> face_index = Bulk_mesh_pt-&gt;face_index_at_boundary(b,e);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Build the corresponding element</span></div>
+<div class="line">     PMLFourierDecomposedHelmholtzPowerMonitorElement&lt;ELEMENT&gt;*</div>
+<div class="line">      flux_element_pt = <span class="keyword">new</span></div>
+<div class="line">      PMLFourierDecomposedHelmholtzPowerMonitorElement&lt;ELEMENT&gt;</div>
+<div class="line">      (bulk_elem_pt,face_index);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">//Add the flux boundary element</span></div>
+<div class="line">     Power_monitor_mesh_pt-&gt;add_element_pt(flux_element_pt);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">} <span class="comment">// end of create_power_monitor_mesh</span></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="c_prob_setup"></a>
+Complete problem setup</h2>
+<p>The helper function <code>complete_problem_setup()</code> completes the setup of the elements by passing pointers to the relevant problem parameters to them. We apply zero Dirichlet boundary conditions on the centreline if the Fourier wavenumber is odd.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=================start_of_complete_problem_setup==================</span></div>
+<div class="line"><span class="comment">// Complete the build of all elements so that they are fully</span></div>
+<div class="line"><span class="comment">// functional</span></div>
+<div class="line"><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#aca49343d9672607fdc3ab5f6ed4e9d24">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#aca49343d9672607fdc3ab5f6ed4e9d24">complete_problem_setup</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = this-&gt;mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from GeneralsedElement to the present element</span></div>
+<div class="line">   PMLFourierDecomposedHelmholtzEquations *el_pt = <span class="keyword">dynamic_cast&lt;</span></div>
+<div class="line">    PMLFourierDecomposedHelmholtzEquations*<span class="keyword">&gt;</span>(</div>
+<div class="line">     mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="keywordflow">if</span> (!(el_pt==0))</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">//Set the frequency pointer</span></div>
+<div class="line">     el_pt-&gt;k_squared_pt()=&amp;<a class="code hl_variable" href="namespaceProblemParameters.html#aa5362de1af9e257fde4317c367158a93">ProblemParameters::K_squared</a>;</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Set pointer to Fourier wave number</span></div>
+<div class="line">     el_pt-&gt;pml_fourier_wavenumber_pt()=&amp;<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a>;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If the Fourier wavenumber is odd, then apply zero dirichlet boundary</span></div>
+<div class="line"> <span class="comment">// conditions on the two straight boundaries on the symmetry line.</span></div>
+<div class="line"> <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceProblemParameters.html#aaa674958a1ca6ee0b99de3377288c93f">ProblemParameters::N_fourier</a> % 2 == 1)</div>
+<div class="line">  {</div>
+<div class="line">   cout</div>
+<div class="line">    &lt;&lt; <span class="stringliteral">&quot;Zero Dirichlet boundary condition has been applied on symmetry line\n&quot;</span>;</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;due to an odd Fourier wavenumber\n&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   apply_zero_dirichlet_boundary_conditions();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of complete_problem_setup</span></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_aca49343d9672607fdc3ab5f6ed4e9d24"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#aca49343d9672607fdc3ab5f6ed4e9d24">PMLFourierDecomposedHelmholtzProblem::complete_problem_setup</a></div><div class="ttdeci">void complete_problem_setup()</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00648">oscillating_sphere.cc:649</a></div></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="app_z_bc"></a>
+Apply zero Dirichlet boundary conditions</h2>
+<p>This final helper function pins both nodal values (representing the real and imaginary part of the solution) on the centreline and sets their values to zero.</p>
+ <div class="fragment"><div class="line"><span class="comment">//=========start_of_apply_zero_dirichlet_boundary_conditions========</span></div>
+<div class="line"><span class="comment">// Apply extra bounday conditions if given an odd Fourier wavenumber</span></div>
+<div class="line"><span class="comment">//==================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#ad7680c25a32087cb6da96d4bcedf1b23">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#ad7680c25a32087cb6da96d4bcedf1b23">apply_zero_dirichlet_boundary_conditions</a>()</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Apply zero dirichlet conditions on the bottom straight boundary</span></div>
+<div class="line"> <span class="comment">// and the top straight boundary located on the symmetry line.</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom straight boundary on symmetry line:</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Boundary id</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> b=0;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// How many nodes are there?</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_node=Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Get the node</span></div>
+<div class="line">    Node* nod_pt=Bulk_mesh_pt-&gt;boundary_node_pt(b,n);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Pin the node</span></div>
+<div class="line">    nod_pt-&gt;pin(0);</div>
+<div class="line">    nod_pt-&gt;pin(1);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the node&#39;s value</span></div>
+<div class="line">    nod_pt-&gt;set_value(0, 0.0);</div>
+<div class="line">    nod_pt-&gt;set_value(1, 0.0);</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Top straight boundary on symmetry line:</span></div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">//Boundary id</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> b=4;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// How many nodes are there?</span></div>
+<div class="line">  <span class="keywordtype">unsigned</span> n_node=Bulk_mesh_pt-&gt;nboundary_node(b);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> n=0;n&lt;n_node;n++)</div>
+<div class="line">   {</div>
+<div class="line">    <span class="comment">// Get the node</span></div>
+<div class="line">    Node* nod_pt=Bulk_mesh_pt-&gt;boundary_node_pt(b,n);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Pin the node</span></div>
+<div class="line">    nod_pt-&gt;pin(0);</div>
+<div class="line">    nod_pt-&gt;pin(1);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Set the node&#39;s value</span></div>
+<div class="line">    nod_pt-&gt;set_value(0, 0.0);</div>
+<div class="line">    nod_pt-&gt;set_value(1, 0.0);</div>
+<div class="line">   }</div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of apply_zero_dirichlet_boundary_conditions</span></div>
+<div class="ttc" id="aclassPMLFourierDecomposedHelmholtzProblem_html_ad7680c25a32087cb6da96d4bcedf1b23"><div class="ttname"><a href="classPMLFourierDecomposedHelmholtzProblem.html#ad7680c25a32087cb6da96d4bcedf1b23">PMLFourierDecomposedHelmholtzProblem::apply_zero_dirichlet_boundary_conditions</a></div><div class="ttdeci">void apply_zero_dirichlet_boundary_conditions()</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00731">oscillating_sphere.cc:732</a></div></div>
+</div><!-- fragment --> <hr  />
+<h2><a class="anchor" id="p_process"></a>
+Post-processing</h2>
+<p>The post-processing function <code>doc_solution(...)</code> outputs the solution within the bulk, the solution within the PMLs, the exact solution and the radiated power</p>
+ <div class="fragment"><div class="line"><span class="comment">//===============start_of_doc=============================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution: doc_info contains labels/output directory etc.</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#afcdfaf86efc75fbea14f6ade9eeb7f9c">PMLFourierDecomposedHelmholtzProblem&lt;ELEMENT&gt;::</a></div>
+<div class="line"><a class="code hl_function" href="classPMLFourierDecomposedHelmholtzProblem.html#afcdfaf86efc75fbea14f6ade9eeb7f9c">doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points: npts x npts</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5;</div>
+<div class="line"> <span class="comment">// Output solution within the bulk mesh</span></div>
+<div class="line"> <span class="comment">//-------------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> <span class="comment">// Output solution within pml domains</span></div>
+<div class="line"> <span class="comment">//-----------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/pml_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> PML_top_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> PML_right_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> PML_bottom_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> PML_top_right_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> PML_bottom_right_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> <span class="comment">// Output exact solution</span></div>
+<div class="line"> <span class="comment">//----------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(some_file,npts,<a class="code hl_function" href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a>);</div>
+<div class="line"> some_file.close();</div>
+<div class="ttc" id="anamespaceProblemParameters_html_af750b29069b29bd38b5220ecf534e7f7"><div class="ttname"><a href="namespaceProblemParameters.html#af750b29069b29bd38b5220ecf534e7f7">ProblemParameters::get_exact_u</a></div><div class="ttdeci">void get_exact_u(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">Exact solution as a Vector of size 2, containing real and imag parts.</div><div class="ttdef"><b>Definition</b> <a href="oscillating__sphere_8cc_source.html#l00086">oscillating_sphere.cc:86</a></div></div>
+</div><!-- fragment -->  <div class="fragment"><div class="line"> <span class="comment">// Total radiated power</span></div>
+<div class="line"> <span class="keywordtype">double</span> power=0.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Compute/output the radiated power</span></div>
+<div class="line"> <span class="comment">//----------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/power%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Accumulate contribution from elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nn_element=Power_monitor_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;nn_element;e++)</div>
+<div class="line">  {</div>
+<div class="line">   PMLFourierDecomposedHelmholtzPowerMonitorElement&lt;ELEMENT&gt; *el_pt =</div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>PMLFourierDecomposedHelmholtzPowerMonitorElement</div>
+<div class="line">    &lt;ELEMENT<span class="keyword">&gt;</span>*&gt;(Power_monitor_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   power += el_pt-&gt;global_power_contribution(some_file);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> oomph_info &lt;&lt; <span class="stringliteral">&quot;Total radiated power: &quot;</span> &lt;&lt; power &lt;&lt; std::endl;</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="unkns"></a>
+The enumeration of the unknowns</h2>
+<p>As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since <code>oomph-lib's</code> solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via <code>Node::value(0)</code> and <code>Node::value(1)</code>. However, to facilitate the use of the elements in multi-physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function </p><div class="fragment"><div class="line">std::complex&lt;unsigned&gt; PMLFourierDecomposedHelmholtzEquations::u_index_pml_fourier_decomposed_helmholtz()</div>
+</div><!-- fragment --><p> which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in <a href="../../../multi_physics/b_convection/html/index.html">the Boussinesq convection tutorial</a>.</p>
+<h2><a class="anchor" id="dmp_fcts"></a>
+PML damping functions</h2>
+<p>The choice for the absorbing functions in our implementation of the PMLs is not unique. There are alternatives varying in both order and continuity properties. The current form is the result of several feasibility studies and comparisons found in both <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">Bermudez et al.</a> These damping functions produce an acceptable result in most practical situations without further modifications. For very specific applications, alternatives may need to be used and can easily be implemented by constructing a PML Mapping class and passing a pointer to the elements. <br  />
+</p>
+<hr  />
+<h2><a class="anchor" id="exer"></a>
+Exercises</h2>
+<h3><a class="anchor" id="Fwave"></a>
+Changing the Fourier wavenumber</h3>
+<p>The generalised Fourier-decomposed Helmholtz equation allows for various Fourier wavenumbers <img class="formulaInl" alt="$ N $" src="form_17.png" width="11" height="10"/>. Confirm that a zero Dirichlet boundary condition is applied to odd Fourier wavenumbers.</p>
+<h3><a class="anchor" id="dtn"></a>
+Comparison of results</h3>
+<p>Compare the results computed by the current driver code against those obtained when the Sommerfeld radiation condition is imposed by a DtN mapping, as discussed in <a href="../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">another tutorial.</a></p>
+<h3><a class="anchor" id="pmlsize"></a>
+Changing perfectly matched layer parameters</h3>
+<p>Confirm that only a very small number of PML elements (across the thickness of the PML layer) is required to effectively damp the outgoing waves. Explore the effects of altering the number of elements layer while keeping the PML thickness constant.</p>
+<p>A second parameter that can be adjusted is the geometrical thickness of the perfectly matched layers. Explore the effects of altering the thickness while maintaining the number of elements within the PML layer.</p>
+<h3><a class="anchor" id="large_k"></a>
+Large wavenumbers</h3>
+<p>For Helmholtz problems in general, ill-conditioning appears as the wavenumber becomes very large. By altering <img class="formulaInl" alt="$ k^2 $" src="form_58.png" width="11" height="11"/>, explore the limitations of both the mesh and the solver in terms of this parameter. Try adjusting the target element size in order to alleviate resolution-related effects. Assess the effectiveness of the perfectly matched layers in high wavenumber problems.</p>
+<h3><a class="anchor" id="adaptivity"></a>
+Spatial adaptivity</h3>
+<p>The driver code discussed above already contains the straightforward modifications required to enable spatial adaptivity. Explore this (by recompiling the code with -DADAPTIVE). You will note that the driver code for this case is modified slightly &ndash; the system is no longer driven by flux boundary conditions on the boundary of the sphere, but by a point source inside the domain. This was done to demonstrate the advantage of spatial adaptivity for such problems. The benefits of spatial adaptation in problems without any singularities tends to be limited since Helmholtz (and most other wave-type problems) require fairly uniform meshes throughout the domain.</p>
+<h3><a class="anchor" id="default"></a>
+Default values for problem parameters</h3>
+<p>Following our usual convention, we provide default values for problem parameters where this is sensible. For instance, if the pointer to the PML damping class is not set, it will default to the best known PML mapping function proposed by Bermudez et al. Some parameters, such as the wavenumber squared <img class="formulaInl" alt="$ k^2 $" src="form_58.png" width="11" height="11"/>, do need to be set since there are no obvious defaults. If <code>oomph-lib</code> is compiled in <code>PARANOID</code> mode, an error is thrown if the relevant pointers haven't been set. Without paranoia, you get a segmentation fault...</p>
+<p>Confirm that this is the case by commenting out the relevant assignments.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere">demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc">demo_drivers/pml_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:17:02
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

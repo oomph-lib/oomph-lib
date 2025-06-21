@@ -1,0 +1,169 @@
+\doxysection{oomph\+::Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1XdaTetMesh}{}\label{classoomph_1_1XdaTetMesh}\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+
+
+Tet mesh made of quadratic (ten node) tets built from xda input file.  
+
+
+
+
+{\ttfamily \#include $<$xda\+\_\+tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Xda\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1XdaTetMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1XdaTetMesh_a4cea32a11d0899ac230de66899e503d1}{Xda\+Tet\+Mesh}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for FSI problems. In this case; the vector containing the oomph-\/lib boundary IDs of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815}{setup\+\_\+boundary\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{b}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{switch\+\_\+normal}})
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}{setup\+\_\+boundary\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{b}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{switch\+\_\+normal}}, std\+::ofstream \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{outfile}})
+\begin{DoxyCompactList}\small\item\em Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). Doc faces in output file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c99dd5}{nxda\+\_\+boundary}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the number of distinct boundaries specified in the original xda enumeration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}{oomph\+\_\+lib\+\_\+boundary\+\_\+ids}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{xda\+\_\+boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Access functions to the Vector of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh_a1774abc96e730c89e95b99933a7c0ae3}{Boundary\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Vector of vectors containing the boundary IDs of the overall boundary specified in the xda file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$}
+Tet mesh made of quadratic (ten node) tets built from xda input file. 
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00052}{52}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1XdaTetMesh_a4cea32a11d0899ac230de66899e503d1}\label{classoomph_1_1XdaTetMesh_a4cea32a11d0899ac230de66899e503d1} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!XdaTetMesh@{XdaTetMesh}}
+\index{XdaTetMesh@{XdaTetMesh}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{XdaTetMesh()}{XdaTetMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Xda\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} std\+::string}]{xda\+\_\+file\+\_\+name,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for FSI problems. In this case; the vector containing the oomph-\/lib boundary IDs of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. 
+
+Constructor\+: Pass name of xda file. Note that all boundary elements get their own ID -- this is required for FSI problems. The vector containing the oomph-\/lib boundary IDs of all oomph-\/lib boundaries that collectively form a given boundary as specified in the xda input file can be obtained from the access function oomph\+\_\+lib\+\_\+boundary\+\_\+ids(...). Timestepper defaults to steady pseudo-\/timestepper. 
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source_l00047}{47}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c99dd5}\label{classoomph_1_1XdaTetMesh_ad81712bc6c7215d64494ccafc8c99dd5} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!nxda\_boundary@{nxda\_boundary}}
+\index{nxda\_boundary@{nxda\_boundary}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nxda\_boundary()}{nxda\_boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::nxda\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the number of distinct boundaries specified in the original xda enumeration. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00096}{96}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{xda__tet__mesh_8h_source_l00111}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5}\label{classoomph_1_1XdaTetMesh_a0597a3e3d72a756631beac452b9240c5} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}}
+\index{oomph\_lib\_boundary\_ids@{oomph\_lib\_boundary\_ids}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{oomph\_lib\_boundary\_ids()}{oomph\_lib\_boundary\_ids()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{xda\+\_\+boundary\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access functions to the Vector of oomph-\/lib boundary ids that make up boundary b in the original xda enumeration. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00103}{103}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{xda__tet__mesh_8h_source_l00111}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::\+Boundary\+\_\+id}}.
+
+\Hypertarget{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815}\label{classoomph_1_1XdaTetMesh_a3a09ba1d3e29133dd032519ced703815} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
+\index{setup\_boundary\_coordinates@{setup\_boundary\_coordinates}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_coordinates()}{setup\_boundary\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::setup\+\_\+boundary\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{switch\+\_\+normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00074}{74}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{xda__tet__mesh_8h_source_l00074}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+coordinates()}}.
+
+
+
+Referenced by \mbox{\hyperlink{xda__tet__mesh_8h_source_l00074}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+coordinates()}}.
+
+\Hypertarget{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192}\label{classoomph_1_1XdaTetMesh_a415f0211f064766f8c38bca6f877c192} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!setup\_boundary\_coordinates@{setup\_boundary\_coordinates}}
+\index{setup\_boundary\_coordinates@{setup\_boundary\_coordinates}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_coordinates()}{setup\_boundary\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::setup\+\_\+boundary\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{bool}} \&}]{switch\+\_\+normal,  }\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})}
+
+
+
+Setup boundary coordinate on boundary b while is temporarily flattened to simplex faces. Boundary coordinates are the x-\/y coordinates in the plane of that boundary with the x-\/axis along the line from the (lexicographically) "{}lower left"{} to the "{}upper right"{} node. The y axis is obtained by taking the cross-\/product of the positive x direction with the outer unit normal computed by the face elements (or its negative if switch\+\_\+normal is set to true). Doc faces in output file. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source_l00342}{342}} of file \mbox{\hyperlink{xda__tet__mesh_8template_8cc_source}{xda\+\_\+tet\+\_\+mesh.\+template.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1XdaTetMesh_a1774abc96e730c89e95b99933a7c0ae3}\label{classoomph_1_1XdaTetMesh_a1774abc96e730c89e95b99933a7c0ae3} 
+\index{oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}!Boundary\_id@{Boundary\_id}}
+\index{Boundary\_id@{Boundary\_id}!oomph::XdaTetMesh$<$ ELEMENT $>$@{oomph::XdaTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Boundary\_id}{Boundary\_id}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{class}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}}$>$ $>$ \mbox{\hyperlink{classoomph_1_1XdaTetMesh}{oomph\+::\+Xda\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{ELEMENT}} $>$\+::\+Boundary\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of vectors containing the boundary IDs of the overall boundary specified in the xda file. 
+
+
+
+Definition at line \mbox{\hyperlink{xda__tet__mesh_8h_source_l00111}{111}} of file \mbox{\hyperlink{xda__tet__mesh_8h_source}{xda\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{xda__tet__mesh_8h_source_l00096}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::nxda\+\_\+boundary()}}, and \mbox{\hyperlink{xda__tet__mesh_8h_source_l00103}{oomph\+::\+Xda\+Tet\+Mesh$<$ ELEMENT $>$\+::oomph\+\_\+lib\+\_\+boundary\+\_\+ids()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{xda__tet__mesh_8h}{xda\+\_\+tet\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{xda__tet__mesh_8template_8cc}{xda\+\_\+tet\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

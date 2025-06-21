@@ -1,0 +1,68 @@
+\doxysection{common\+\_\+young\+\_\+laplace\+\_\+stuff.\+h File Reference}
+\hypertarget{common__young__laplace__stuff_8h}{}\label{common__young__laplace__stuff_8h}\index{common\_young\_laplace\_stuff.h@{common\_young\_laplace\_stuff.h}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Namespace for "{}global"{} problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}{Global\+Parameters\+::\+Cases}} \{ \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7}{Global\+Parameters\+::\+Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{Global\+Parameters\+::\+All\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc}{Global\+Parameters\+::\+Barrel\+\_\+shape}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8}{Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration for the possible cases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{Global\+Parameters\+::setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Setup dependent parameters and perform sanity check. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{Global\+Parameters\+::spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
+\begin{DoxyCompactList}\small\item\em Spine basis\+: The position vector to the basis of the spine as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i Spines start in the (x\+\_\+1,x\+\_\+2) plane at (x\+\_\+1,x\+\_\+2). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{Global\+Parameters\+::spine\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
+\begin{DoxyCompactList}\small\item\em Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}{Global\+Parameters\+::get\+\_\+exact\+\_\+kappa}} ()
+\begin{DoxyCompactList}\small\item\em Exact kappa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a7cd7766fae9d0ca421d7e24677be3131}{Global\+Parameters\+::\+Use\+\_\+spines}} = true
+\begin{DoxyCompactList}\small\item\em Use spines (true) or not (false) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a624713d35bc418b2d5fa79f4d385a27a}{Global\+Parameters\+::\+Use\+\_\+height\+\_\+control}} = true
+\begin{DoxyCompactList}\small\item\em Use height control (true) or not (false)? \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespaceGlobalParameters_aeb4257eec7a4c5a92e2b88e93248a201}{Global\+Parameters\+::\+Case}} = \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{All\+\_\+pinned}}
+\begin{DoxyCompactList}\small\item\em What case are we considering\+: Choose one from the enumeration Cases. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}{Global\+Parameters\+::\+Gamma}} = Mathematical\+Constants\+::\+Pi/4.\+0
+\begin{DoxyCompactList}\small\item\em Contact angle and its cos (dependent parameter -- is reassigned) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae982fcb894e82c683d07d3c2fbbead3d}{Global\+Parameters\+::\+Cos\+\_\+gamma}} =cos(\mbox{\hyperlink{namespaceGlobalParameters_adb0a994119055242fcc762cac5edc317}{Gamma}})
+\begin{DoxyCompactList}\small\item\em Cos of contact angle. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobalParameters_ac6234184cce40ab2c6bec92b37e4ae41}{Global\+Parameters\+::\+Kappa\+\_\+pt}} = 0
+\begin{DoxyCompactList}\small\item\em Pointer to Data object that stores the prescribed curvature. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ae7651e73d3f8346da9fcfdbb149bc22e}{Global\+Parameters\+::\+Kappa\+\_\+initial}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Initial value for kappa. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespaceGlobalParameters_aeb81cc1c282502497ef6df576559b650}{Global\+Parameters\+::\+Step\+\_\+sign}} = 1
+\begin{DoxyCompactList}\small\item\em Increase or decrease the value of the control parameters? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_aa6c94936d7c81286bb747e14a90d7ba0}{Global\+Parameters\+::\+Nsteps}} = 5
+\begin{DoxyCompactList}\small\item\em Number of steps. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101032}{Global\+Parameters\+::\+Kappa\+\_\+increment}} = -\/0.\+05
+\begin{DoxyCompactList}\small\item\em Increment for prescribed curvature. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}{Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Increment for height control. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}{Global\+Parameters\+::\+Control\+\_\+element}} = 0
+\begin{DoxyCompactList}\small\item\em Number of element in bulk mesh at which height control is applied. Initialise to 0 -- will be overwritte in \doxylink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()} \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}{Global\+Parameters\+::\+L\+\_\+x}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Length and width of the domain. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}{Global\+Parameters\+::\+L\+\_\+y}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Width of domain. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_ab020cb50fa321b26e8d2127d2cff23b9}{Global\+Parameters\+::\+N\+\_\+x}} = 8
+\begin{DoxyCompactList}\small\item\em Number of elements in the mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a711d6f05552ddaac30bd245ae8bdf878}{Global\+Parameters\+::\+N\+\_\+y}} = 8
+\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_aeb7f1ae574be563e0b603662c6fff5aa}{Global\+Parameters\+::\+Beta\+\_\+min}} = Mathematical\+Constants\+::\+Pi/2.\+0
+\begin{DoxyCompactList}\small\item\em Min. second spine angle against horizontal plane. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobalParameters_aa34aff6eb29a2a1245e9ffc2fac42caa}{Global\+Parameters\+::\+Beta\+\_\+max}} = Mathematical\+Constants\+::\+Pi/2.\+0
+\begin{DoxyCompactList}\small\item\em Max. second pine angle against horizontal plane. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceGlobalParameters_a69a238365a4fef33b1abdae287185f3e}{Global\+Parameters\+::\+Rotate\+\_\+spines\+\_\+in\+\_\+both\+\_\+directions}} = true
+\begin{DoxyCompactList}\small\item\em Should the spines rotate in the x and y directions (true)? \end{DoxyCompactList}\end{DoxyCompactItemize}

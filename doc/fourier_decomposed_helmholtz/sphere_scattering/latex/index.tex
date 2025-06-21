@@ -1,0 +1,639 @@
+\chapter{Example problem\+: The azimuthally Fourier-\/decomposed 3D Helmholtz equation}
+\hypertarget{index}{}\label{index}\index{Example problem: The azimuthally Fourier-\/decomposed 3D Helmholtz equation@{Example problem: The azimuthally Fourier-\/decomposed 3D Helmholtz equation}}
+In this document we discuss the finite-\/element-\/based solution of the Helmholtz equation in cylindrical polar coordinates, using a Fourier-\/decomposition of the solution in the azimuthal direction. This is useful for solving time-\/harmonic wave problems in 3D axisymmetric domains, \doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{e.\+g}. the scattering of acoustic sound field from a sphere, the example we consider below.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} This implementation of the equations and the documentation were developed jointly with Ahmed Wassfi (Ensta\+Paris\+Tech, Paris). \end{center}    \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory\+: The Fourier-\/decomposed Helmholtz equation}{Theory: The Fourier-decomposed Helmholtz equation}}\label{index_theory}
+The Helmholtz equation governs time-\/harmonic solutions of problems governed by the linear wave equation  \[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ (1)
+\] where $ c $ is the wavespeed. Assuming that $ U(x,y,z,t) $ is time-\/harmonic, with frequency $ \omega $, we write the real function $ U(x,y,z,t) $ as  \[
+U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ (2)
+\] where $ {\tt U}(x,y,z) $ is complex-\/valued. This transforms (1) into the Helmholtz equation  \[
+\nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (3)
+\] where  \[
+k = \frac{\omega}{c}
+ \ \ \ \ \ \ \ \ \ \ \ \ (4)
+\] is the wave number. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+
+If the equation is solved in an infinite domain (\doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{e.\+g}. in scattering problems) the solution must satisfy the so-\/called \href{http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition}{\texttt{ Sommerfeld radiation condition}} which in 3D has the form  \[
+\lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U}
+\right) =0. 
+\] Mathematically, this conditions is required to ensure the uniqueness of the solution (and hence the well-\/posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.
+
+These equations can be solved using {\ttfamily oomph-\/lib\textquotesingle{}s} cartesian Helmholtz elements, described in ~\newline
+ \href{../../../helmholtz/scattering/html/index.html}{\texttt{ another tutorial.}} Here we consider an alternative approach in which we solve the equations in cylindrical polar coordinates $ (r,\varphi,z)
+$, related to the cartesian coordinates $ (x,y,z) $ via  \[
+x =  r \cos(\varphi),
+\]  \[
+y =  r \sin(\varphi),
+\]  \[
+z = z.
+\] We then decompose the solution into its Fourier components by writing  \[
+{\tt U}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\] Since the governing equations are linear we can compute each Fourier component $ u_N(r,z) $ individually by solving  \[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ (5)
+\] while specifying the Fourier wavenumber $ N $ as a parameter.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_discr}{}\doxysection{\texorpdfstring{Discretisation by finite elements}{Discretisation by finite elements}}\label{index_discr}
+The discretisation of the Fourier-\/decomposed Helmholtz equation itself only requires a trivial modification of its \href{../../../helmholtz/scattering/html/index.html}{\texttt{ cartesian counterpart}}. Since most practical applications of the Helmholtz equation involve complex-\/valued solutions, we provide separate storage for the real and imaginary parts of the solution -- each {\ttfamily Node} therefore stores two unknowns values. By default, the real and imaginary parts are stored as values 0 and 1, respectively; see the section \doxysectlink{index_numbering}{The enumeration of the unknowns}{2} for details.
+
+The application of Dirichlet and Neumann boundary conditions is straightforward and follows the pattern employed for the solution of the Poisson equation\+:
+\begin{DoxyItemize}
+\item Dirichlet conditions are imposed by pinning the relevant nodal values and setting them to the appropriate prescribed values.
+\item Neumann (flux) boundary conditions are imposed via {\ttfamily Face\+Elements} (here the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements}). \href{../../../poisson/two_d_poisson_flux_bc/html/index.html}{\texttt{ As usual}} we attach these to the faces of the "{}bulk"{} elements that are subject to the Neumann boundary conditions.
+\end{DoxyItemize}The imposition of the Sommerfeld radiation condition for problems in infinite domains is slightly more complicated. In the following discussion we will assume that the infinite domain is truncated at a spherical artificial boundary $ \Gamma $ of radius $ R. $ \mbox{[}The methodology can easily be modified to deal with other geometries but this has not been done yet -- any volunteers?\mbox{]}. All methods exploit the fact that the relevant solution of the Helmholtz equation can be written in spherical polar coordinates $ (\rho,\varphi,\theta) $ as  \[
+{\tt U}(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ (6)
+\] where the $a_{ln}, b_{ln} $ are arbitrary coefficients and the functions  \[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\] are the spherical Hankel functions of first and second kind, respectively, expressed in terms the spherical Bessel functions  \[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\] The functions  \[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\] are the associated Legendre functions, expressed in terms of the Legendre polynomials  \[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\] This definition shows that $ P_{l}^{m}(x)=0 $ for $ m>l $ which explains the limited range of summation indices in the second sum in (6).
+
+The relation between the cylindrical polar coordinates $
+(r,\varphi,z)$ and spherical polar coordinates $
+(\rho,\theta,\varphi) $ is given by  \[
+\rho = \sqrt{r^2 + z^2},
+\]  \[
+\theta = \arctan(r/z),
+\]  \[
+\varphi = \varphi,
+\] so $\varphi \in [0,2\pi] $ remains unchanged, and ~\newline
+ $\theta \in [0,\pi] $ sweeps from the north pole ( $ \theta = 0 $), via the equator ( $ \theta = \pi/2 $ ) to the south pole ( $ \theta = \pi $).\hypertarget{index_DtN}{}\doxysubsection{\texorpdfstring{The Dirichlet-\/to-\/\+Neumann mapping (\+Dt\+N)}{The Dirichlet-to-Neumann mapping (DtN)}}\label{index_DtN}
+Assuming that the artificial outer boundary $ \Gamma $is sufficiently far from the region of interest, so that any near field effects associated with the scatterer have decayed, we have to ensure that the solution on $ \Gamma $ contains only outgoing waves. For our choice of the time-\/dependence in (2), such waves are represented by the terms involving the spherical Hankel functions of the first kind, $ h_l^{(1)} $, in (6).
+
+The solution on (and near) $ \Gamma $ is therefore given by  \[
+{\tt U}(\rho,\theta,\phi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho)
+\ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi).
+\] Restricting ourselves to the single azimuthal Fourier mode $ n=N $ to be determined by (5), we have  \[
+u_N(\rho,\theta)=\sum_{l=N}^{+\infty}
+a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta).
+ \ \ \ \ \ \ \ (7)
+\] We multiply this equation by $ P_{n}^{N}(\cos\theta)
+\sin(\theta)$, integrate over $ \theta $, and exploit the orthogonality of the Legendre functions, to show that  \[
+a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)}
+\frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta)
+\ \sin(\theta) \ d\theta.
+\] Using these coefficients, we can differentiate (7) to obtain the normal derivative of the solution on the (spherical) artificial outer boundary $ \Gamma $ in terms of the solution itself\+:  \[
+\left. \frac{\partial u}{\partial n} \right|_{\rho=R} = 
+\left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = 
+k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)\textnormal{\textquotesingle}}(kR)\ P_{n}^{N}(\cos \theta)
+\] \doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{i.\+e}.  \[
+\gamma(u(R,\theta))=
+k \sum_{n=N}^{\infty} h_{n}^{(1)\textnormal{\textquotesingle}}(kR) \ 
+P_{n}^{N}(\cos \theta) \
+\frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!}
+\int_{0}^{\pi} u(R,\overline{\theta}) \
+P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \;
+d\overline{\theta},
+\ \ \ \ \ \ \ \ \ \  (8)
+\] a Dirichlet-\/to-\/\+Neumann mapping.
+
+Equation (8) provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element} class. Since $ \gamma $ depends on the solution everywhere along the artificial boundary, the application of the Sommerfeld radiation condition via (8) introduces a non-\/local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect $ \gamma $ but are not associated with an element\textquotesingle{}s own nodes as its external {\ttfamily Data}.
+
+To facilitate the setup of the interaction between the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Elements}, {\ttfamily oomph-\/lib} provides the class {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh} which provides storage for (the pointers to) the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Elements} that discretise the artificial boundary. The member function {\ttfamily \doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()}} pre-\/computes the $ \gamma $ values required for the imposition of equation (8). The radius $ R $ of the artificial boundary and the (finite) upper limit for the sum in (8) are specified as arguments to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh}.
+
+{\bfseries{NOTE\+:}} Since $ \gamma $ depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily \doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()}} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}. \mbox{[}If Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem), Newton\textquotesingle{}s method will converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false}.\mbox{]}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_scattering}{}\doxysection{\texorpdfstring{A specific example}{A specific example}}\label{index_scattering}
+We will now demonstrate the methodology for a specific example for which the exact solution of (5) is given by  \[
+u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} 
+h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right).
+\] This solution corresponds to the superposition of several outgoing waves of the form (7) with coefficients $ a_l = 1 $. We solve the Helmholtz equation in the infinite region surrounding the unit sphere on whose surface we impose flux boundary conditions consistent with the derivative of the exact solution.
+
+To solve this problem numerically, we discretise the annular domain $ 1 < \sqrt{r^2 + z^2} < 3 $ with finite elements and apply the Sommerfeld radiation condition using a Dirichlet-\/to-\/\+Neumann mapping on the artificial outer boundary $ \Gamma $ located at $ \sqrt{r^2 + z^2}
+= R = 3$.
+
+The two plots below show a comparison between the exact and computed solutions for $ N_{\rm terms}=6 $ , a Fourier wavenumber of $ N=3 $ , and a (squared) Helmholtz wavenumber of $ k^2 = 10 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{real}
+\doxyfigcaption{Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-\/decomposed Helmholtz equation for N=3 and a wavenumber of k\texorpdfstring{$^\wedge$}{\string^}2 = 10. }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{imag}
+\doxyfigcaption{Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-\/decomposed Helmholtz equation for N=3 and a wavenumber of k\texorpdfstring{$^\wedge$}{\string^}2 = 10. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_num_soln}{}\doxysection{\texorpdfstring{The numerical solution}{The numerical solution}}\label{index_num_soln}
+\hypertarget{index_namespace}{}\doxysubsection{\texorpdfstring{The global namespace}{The global namespace}}\label{index_namespace}
+As usual, we define the problem parameters in a global namespace. The main parameter are the (square of the) Helmholtz wave number, $ k^2 $, and the Fourier wavenumber, $ N $. The parameter {\ttfamily Nterms\+\_\+for\+\_\+\+DtN} determines how many terms are to be used in the computation of the $ \gamma  $ integral in the Dirichlet-\/to-\/\+Neumann mapping (8); see \doxysectlink{index_acc}{The accuracy of the boundary condition elements}{3}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_namespace=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ the\ Fourier\ decomposed\ Helmholtz\ problem\ parameters}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceProblemParameters}{ProblemParameters}}}
+\DoxyCodeLine{\{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Square\ of\ the\ wavenumber}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}}=10.0;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Fourier\ wave\ number}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{N\_fourier}}=3;}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ terms\ in\ computation\ of\ DtN\ boundary\ condition}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Nterms\_for\_DtN}}=6;}
+
+\end{DoxyCodeInclude}
+ Next we define the coefficients
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Number\ of\ terms\ in\ the\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{namespacePlanarWave_a56abdb2474ccaffd88346ee3607d8672}{N\_terms}}=6;\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Coefficients\ in\ the\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\ \mbox{\hyperlink{namespaceProblemParameters_acb1788444ef78fe2adec824504f24246}{Coeff}}(N\_terms,1.0);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Imaginary\ unit\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ std::complex<double>\ \mbox{\hyperlink{namespacePlanarWave_a541691caf71477c8c389062797c0fdab}{I}}(0.0,1.0);\ }
+
+\end{DoxyCodeInclude}
+ required for the specification of the exact solution
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ Vector\ of\ size\ 2,\ containing\ real\ and\ imag\ parts}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacePlanarWave_a00f252bcf0181187c656a58ce36b07b5}{get\_exact\_u}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{x}},\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{u}})}
+
+\end{DoxyCodeInclude}
+ and its derivative,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Get\ -\/du/dr\ (spherical\ r)\ for\ exact\ solution.\ Equal\ to\ prescribed}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ flux\ on\ inner\ boundary.}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classAnnularQuadMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{x}},\ std::complex<double>\&\ \mbox{\hyperlink{classAnnularQuadMesh}{flux}})}
+
+\end{DoxyCodeInclude}
+ whose listings we omit here.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ ~\newline
+\hypertarget{index_main}{}\doxysubsection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The driver code is very straightforward. We create the problem object, discretising the domain with 3x3-\/noded {\ttfamily QFourier\+Decomposed\+Helmholtz\+Elements} and set up the output directory.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=====\ start\_of\_main=====================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ code\ for\ Fourier\ decomposed\ Helmholtz\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classAnnularQuadMesh}{argc}},\ \textcolor{keywordtype}{char}\ **\mbox{\hyperlink{classAnnularQuadMesh}{argv}})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ problem\ with\ 2D\ nine-\/node\ elements\ from\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ QFourierDecomposedHelmholtzElement\ family.\ }}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzProblem<QFourierDecomposedHelmholtzElement<3>}}\ >\ }
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ label\ for\ output}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ output\ directory}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+
+\end{DoxyCodeInclude}
+ We solve the problem for a range of Fourier wavenumbers and document the results.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Solve\ for\ a\ few\ Fourier\ wavenumbers}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}=0;\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}<4;}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Step\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number()=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Solve\ the\ problem}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}}.newton\_solve();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ the\ solution}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{problem}}.doc\_solution(\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ main}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_class}{}\doxysubsection{\texorpdfstring{The problem class}{The problem class}}\label{index_class}
+The problem class is very similar to that employed for the \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ solution of the 2D Poisson equation with flux boundary conditions}} or, of course, the 2D cartesian Helmholtz problem discussed in \href{../../../helmholtz/scattering/html/index.html}{\texttt{ another tutorial.}}
+
+We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inner boundary where the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} apply the Neumann condition, and one for the outer boundary where we apply the (approximate) Sommerfeld radiation condition. As discussed in section \doxysectlink{index_DtN}{The Dirichlet-\/to-\/\+Neumann mapping (DtN)}{2} , we use the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} to recompute the $ \gamma $ integral whenever the unknowns are updated during the Newton iteration.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=========\ start\_of\_problem\_class=====================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class\ }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>\ }
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a03174fa5a35b7c38f08f91bcd2a80c20}{\string~FourierDecomposedHelmholtzProblem}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a82ef5a969f4404fc1acb35c38c800ce6}{actions\_before\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a5a37ba3fcf8563764f80108c9a657929}{actions\_after\_newton\_solve}}()\{\}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution.\ DocInfo\ object\ stores\ flags/labels\ for\ where\ the}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ output\ gets\ written\ to}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{doc\_solution}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Recompute\ gamma\ integral\ before\ checking\ Newton\ residuals}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ae80673ef299e4935ddcac177ed919da3}{actions\_before\_newton\_convergence\_check}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}}-\/>setup\_gamma();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Check\ gamma\ computation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ac4f3f737660b11e8762a61bca999eb0f}{check\_gamma}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ BC\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{create\_outer\_bc\_elements}}();}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a81d64611f2de2492cec6b0621d8124b0}{create\_flux\_elements\_on\_inner\_boundary}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ bulk\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{AnnularQuadMesh<ELEMENT>}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
+\DoxyCodeLine{\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ mesh\ containing\ the\ DtN\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ condition\ elements}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNMesh<ELEMENT>}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Mesh\ of\ face\ elements\ that\ apply\ the\ prescribed\ flux}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ on\ the\ inner\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classAnnularQuadMesh}{Mesh}}*\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3ecc5a3fc3407de8985ed9a61402f2f0}{Helmholtz\_inner\_boundary\_mesh\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constr}{}\doxysubsection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constr}
+We start by building the bulk mesh, using the {\ttfamily Two\+DAnnular\+Mesh}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ Fourier-\/decomposed\ Helmholtz\ problem}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem<ELEMENT>::}}}
+\DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Build\ annular\ mesh}}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\textcolor{comment}{//\ \#\ of\ elements\ in\ r-\/direction\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_r}}=10*\mbox{\hyperlink{namespaceProblemParameters_a23b618b9e3a0d282fd91aa3f3f7b9254}{ProblemParameters::El\_multiplier}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ theta-\/direction\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_theta}}=10*\mbox{\hyperlink{namespaceProblemParameters_a23b618b9e3a0d282fd91aa3f3f7b9254}{ProblemParameters::El\_multiplier}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ boundaries\ in\ theta-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{theta\_min}}=-\/90.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{theta\_max}}=90.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ boundaries\ in\ r-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{r\_min}}=1.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{r\_max}}=3.0;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Bulk\_mesh\_pt\ =\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{AnnularQuadMesh<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{n\_r}},\mbox{\hyperlink{classAnnularQuadMesh}{n\_theta}},\mbox{\hyperlink{classAnnularQuadMesh}{r\_min}},\mbox{\hyperlink{classAnnularQuadMesh}{r\_max}},\mbox{\hyperlink{classAnnularQuadMesh}{theta\_min}},\mbox{\hyperlink{classAnnularQuadMesh}{theta\_max}});}
+
+\end{DoxyCodeInclude}
+ Next we create and populate the mesh of elements containing the DtN boundary elements on the artificial outer boundary,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ mesh\ for\ DtN\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\ Helmholtz\_outer\_boundary\_mesh\_pt=}
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNMesh<ELEMENT>}}(}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{r\_max}},\mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{ProblemParameters::Nterms\_for\_DtN}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Populate\ it\ with\ elements}}
+\DoxyCodeLine{\ create\_outer\_bc\_elements();}
+
+\end{DoxyCodeInclude}
+ and attach flux elements to the inner boundary\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ flux\ elements\ on\ inner\ boundary}}
+\DoxyCodeLine{\ Helmholtz\_inner\_boundary\_mesh\_pt=\textcolor{keyword}{new}\ \mbox{\hyperlink{classAnnularQuadMesh}{Mesh}};}
+\DoxyCodeLine{\ create\_flux\_elements\_on\_inner\_boundary();}
+
+\end{DoxyCodeInclude}
+ We combine the various meshes to a global mesh,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ the\ several\ \ sub\ meshes\ to\ the\ problem}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Bulk\_mesh\_pt);\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Helmholtz\_inner\_boundary\_mesh\_pt);\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{add\_sub\_mesh}}(Helmholtz\_outer\_boundary\_mesh\_pt);\ }
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ the\ Problem's\ global\ mesh\ from\ its\ various\ sub-\/meshes}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{build\_global\_mesh}}();}
+
+\end{DoxyCodeInclude}
+ pass the problem parameters to the bulk elements,
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ the\ build\ of\ all\ elements\ so\ they\ are\ fully\ functional}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{i}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{i}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralsedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}\ *\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ k\_squared\ pointer}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>k\_squared\_pt()=\&\mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ Fourier\ wave\ number}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>fourier\_wavenumber\_pt()=\&\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ and set up the equation numbering scheme\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{assign\_eqn\_numbers}}()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ The problem is now ready to be solved.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_create_flux}{}\doxysubsection{\texorpdfstring{Creating the face elements}{Creating the face elements}}\label{index_create_flux}
+The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements(...)} create the {\ttfamily Face\+Elements} required to apply the boundary conditions on the inner and outer boundaries of the annular computational domain. They both loop over the bulk elements that are adjacent to the appropriate mesh boundary and attach the required {\ttfamily Face\+Elements} to their faces. The newly created {\ttfamily Face\+Elements} are then added to the appropriate mesh.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ BC\ elements\ on\ outer\ boundary}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{FourierDecomposedHelmholtzProblem<ELEMENT>::create\_outer\_bc\_elements}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Outer\ boundary\ is\ boundary\ 1:}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{b}}=1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{n\_element}}\ =\ Bulk\_mesh\_pt-\/>nboundary\_element(\mbox{\hyperlink{classAnnularQuadMesh}{b}});}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{n\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ element\ that\ is\ adjacent\ to\ boundary\ b}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{ELEMENT}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Bulk\_mesh\_pt-\/>boundary\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b\ }}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classAnnularQuadMesh}{face\_index}}\ =\ Bulk\_mesh\_pt-\/>face\_index\_at\_boundary(\mbox{\hyperlink{classAnnularQuadMesh}{b}},\mbox{\hyperlink{classAnnularQuadMesh}{e}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Build\ the\ corresponding\ DtN\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}*\ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}\ =\ \textcolor{keyword}{new}\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzDtNBoundaryElement<ELEMENT>}}(\mbox{\hyperlink{classAnnularQuadMesh}{bulk\_elem\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{face\_index}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Add\ the\ flux\ boundary\ element\ to\ the\ \ helmholtz\_outer\_boundary\_mesh}}
+\DoxyCodeLine{\ \ \ Helmholtz\_outer\_boundary\_mesh\_pt-\/>add\_element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ pointer\ to\ the\ mesh\ that\ contains\ all\ the\ boundary\ condition}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ elements\ on\ this\ boundary}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{flux\_element\_pt}}-\/>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{set\_outer\_boundary\_mesh\_pt}}(Helmholtz\_outer\_boundary\_mesh\_pt);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ create\_outer\_bc\_elements}}
+
+\end{DoxyCodeInclude}
+ (We omit the listing of the function {\ttfamily create\+\_\+flux\+\_\+elements(...)} because it is very similar. Feel free to inspect in the \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ source code.}})
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysubsection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the computed and exact solutions (real and complex parts) and assesses the error in the computed solution.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution:\ doc\_info\ contains\ labels/output\ directory\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{FourierDecomposedHelmholtzProblem<ELEMENT>::doc\_solution}}(\mbox{\hyperlink{classAnnularQuadMesh}{DocInfo}}\&\ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}})}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{ofstream}}\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classAnnularQuadMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points:\ npts\ x\ npts}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{npts}}=5;}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{classAnnularQuadMesh}{npts}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>output\_fct(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{classAnnularQuadMesh}{npts}},\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error\ and\ return\ of\ the\ square\ of\ the\ L2\ error}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{error}},\mbox{\hyperlink{classAnnularQuadMesh}{norm}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ Bulk\_mesh\_pt-\/>compute\_error(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}},\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{error}},\mbox{\hyperlink{classAnnularQuadMesh}{norm}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ L2\ error\ and\ norm\ of\ solution}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNorm\ of\ error\ \ \ :\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{error}})\ <<\ std::endl;\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{cout}}\ <<\ \textcolor{stringliteral}{"{}Norm\ of\ solution:\ "{}}\ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{sqrt}}(\mbox{\hyperlink{classAnnularQuadMesh}{norm}})\ <<\ std::endl\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ The function {\ttfamily check\+\_\+gamma(...)} is used to check the computation of the $ \gamma $ integral. If computed correctly, its values (pre-\/computed at the Gauss points of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Element}) ought to agree (well) with the derivative of the exact solution. They do; see \doxysectlink{index_acc}{The accuracy of the boundary condition elements}{3}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ gamma\ computation}}
+\DoxyCodeLine{\ check\_gamma(\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}});}
+
+\end{DoxyCodeInclude}
+ Finally, we output the time-\/averaged power radiated over the outer boundary of the domain, defined as  \[
+\overline{\cal P }_N =  \pi R^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} -
+       Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} 
+\bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.
+\] We refer to \href{../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html\#appendix}{\texttt{ another tutorial}} for the derivation which shows (in the context of an acoustic fluid-\/structure interaction problem) why this is a sensible definition of the radiated power.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Compute/output\ the\ radiated\ power}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/power\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{snprintf}}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classAnnularQuadMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/total\_power\%i.dat"{}},\mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{doc\_info}}.number());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Accumulate\ contribution\ from\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classAnnularQuadMesh}{power}}=0.0;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{nn\_element}}=Helmholtz\_outer\_boundary\_mesh\_pt-\/>nelement();\ }
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classAnnularQuadMesh}{e}}=0;\mbox{\hyperlink{classAnnularQuadMesh}{e}}<\mbox{\hyperlink{classAnnularQuadMesh}{nn\_element}};\mbox{\hyperlink{classAnnularQuadMesh}{e}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzBCElementBase<ELEMENT>}}\ *\mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classAnnularQuadMesh}{FourierDecomposedHelmholtzBCElementBase<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ Helmholtz\_outer\_boundary\_mesh\_pt-\/>element\_pt(\mbox{\hyperlink{classAnnularQuadMesh}{e}}));\ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classAnnularQuadMesh}{power}}\ +=\ \mbox{\hyperlink{classAnnularQuadMesh}{el\_pt}}-\/>global\_power\_contribution(\mbox{\hyperlink{classAnnularQuadMesh}{some\_file}});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ total\ power}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{oomph\_info}}\ <<\ \textcolor{stringliteral}{"{}Radiated\ power:\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{power}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.open(\mbox{\hyperlink{classAnnularQuadMesh}{filename}});\ }
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}\ <<\ \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classAnnularQuadMesh}{power}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classAnnularQuadMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+\hypertarget{index_numbering}{}\doxysubsection{\texorpdfstring{The enumeration of the unknowns}{The enumeration of the unknowns}}\label{index_numbering}
+As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since {\ttfamily oomph-\/lib\textquotesingle{}s} solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via {\ttfamily Node\+::value(0)} and {\ttfamily Node\+::value(1)}. However, to facilitate the use of the elements in multi-\/physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::complex<unsigned>\ \mbox{\hyperlink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{FourierDecomposedHelmholtzEquations<DIM>::u\_index\_fourier\_decomposed\_helmholtz}}()}
+
+\end{DoxyCode}
+ which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-\/physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in \href{../../../multi_physics/b_convection/html/index.html}{\texttt{ the Boussinesq convection tutorial}}.\hypertarget{index_acc}{}\doxysubsubsection{\texorpdfstring{The accuracy of the boundary condition elements}{The accuracy of the boundary condition elements}}\label{index_acc}
+As discussed above, the Dirichlet-\/to-\/\+Neumann mapping allows an "{}exact"{} implementation of the Sommerfeld radiation condition, provided the artificial outer boundary is sufficiently far from the scatterer that any near field effects have decayed. The actual accuracy of the computational results depends on various factors\+:
+\begin{DoxyItemize}
+\item The number of {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element} along the artificial domain boundary. Since these elements are attached to the "{}bulk"{} {\ttfamily Fourier\+Decomposed\+Helmholtz\+Elements} it is important that the bulk mesh is sufficiently fine to resolve the relevant features of the solution throughout the domain.
+\item The number of terms included in the sum (8) -- specified in the call to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh}.
+\item The accuracy of the integration scheme used to evaluate the integral in (8).
+\end{DoxyItemize}\DoxyHorRuler{0}
+\hypertarget{index_ex}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_ex}
+\hypertarget{index_lin}{}\doxysubsubsection{\texorpdfstring{Exploiting linearity}{Exploiting linearity}}\label{index_lin}
+Confirm that the (costly) re-\/computation of the $ \gamma $ integral in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.\hypertarget{index_acc_ex}{}\doxysubsubsection{\texorpdfstring{The accuracy of the boundary condition elements}{The accuracy of the boundary condition elements}}\label{index_acc_ex}
+
+\begin{DoxyItemize}
+\item Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose {\ttfamily \doxylink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Problem\+Parameters\+::\+Nterms\+\_\+for\+\_\+\+DtN}} \texorpdfstring{$<$}{<} {\ttfamily Problem\+Parameters\+::\+Nterms}. ~\newline
+
+\item Explore the function {\ttfamily check\+\_\+gamma()} and confirm that the computed value for the $ \gamma $ integral provides a good approximation to the derivative of the exact solution. Here is a representative comparison obtained with the parameters used in the driver code listed above\+:
+\end{DoxyItemize} 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{compare_gamma}
+\doxyfigcaption{Plot of the exact (dashed) and computed (solid) gamma integral for N=3 and a wavenumber of k\texorpdfstring{$^\wedge$}{\string^}2 = 10. }
+\end{DoxyImage}
+\hypertarget{index_sphere}{}\doxysubsubsection{\texorpdfstring{Scattering of a planar acoustic wave off a sound-\/hard sphere}{Scattering of a planar acoustic wave off a sound-hard sphere}}\label{index_sphere}
+Modify the driver code to compute the sound field created when a planar acoustic wave, propagating along the $ z $-\/axis, impinges on a sound-\/hard sphere. The relevant theory is described in \href{../../../helmholtz/scattering/html/index.html\#scattering}{\texttt{ another tutorial}}; you can use the fact that in spherical polar coordinates a planar wave of the form  \[
+{\tt U}(x,y,z) = \exp({\rm i}kz)
+\] can be written as  \[
+{\tt U}(\rho,\theta) = \sum_{l=0}^{\infty}
+(2l+1) \ {\rm i}^l \ j_l(kr) \  P_l(\cos\theta),
+\] \doxylink{classAnnularQuadMesh_acf01203e48fdee730b6c194bf538177c}{i.\+e}. the wave comprises a single azimuthal Fourier component with $
+N=0$. Note that the \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ driver code}} already contains a namespace {\ttfamily \doxylink{namespacePlanarWave}{Planar\+Wave}} with several (but not all!) functions required for this task.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ demo\+\_\+drivers/fourier\+\_\+decomposed\+\_\+helmholtz/sphere\+\_\+scattering/sphere\+\_\+scattering.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

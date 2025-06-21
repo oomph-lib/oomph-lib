@@ -1,0 +1,55 @@
+\doxysection{vmtk\+\_\+solid.\+cc File Reference}
+\hypertarget{vmtk__solid_8cc}{}\label{vmtk__solid_8cc}\index{vmtk\_solid.cc@{vmtk\_solid.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMySolidTetgenMesh}{My\+Solid\+Tetgen\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Tetgen-\/based mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{Global\+\_\+\+Parameters\+::gravity}} (\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{double}} \&\mbox{\hyperlink{classMySolidTetgenMesh}{time}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}}, \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{b}})
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd}{Global\+\_\+\+Parameters\+::constant\+\_\+pressure}} (\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{x}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{n}}, \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{traction}})
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{int}} \mbox{\hyperlink{vmtk__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (\mbox{\hyperlink{classMySolidTetgenMesh}{int}} \mbox{\hyperlink{classMySolidTetgenMesh}{argc}}, \mbox{\hyperlink{classMySolidTetgenMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classMySolidTetgenMesh}{argv}})
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured 3D solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt}} =\mbox{\hyperlink{classMySolidTetgenMesh}{new}} \mbox{\hyperlink{classMySolidTetgenMesh}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\begin{DoxyCompactList}\small\item\em Create constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Global\+\_\+\+Parameters\+::\+Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\+\_\+\+Parameters\+::P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{vmtk__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{vmtk__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{vmtk\_solid.cc@{vmtk\_solid.cc}!main@{main}}
+\index{main@{main}!vmtk\_solid.cc@{vmtk\_solid.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{int}} main (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{int}}}]{argc,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{char}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured 3D solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{vmtk__solid_8cc_source_l00388}{388}} of file \mbox{\hyperlink{vmtk__solid_8cc_source}{vmtk\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{vmtk__solid_8cc_source_l00094}{Global\+\_\+\+Parameters\+::\+Gravity}}, \mbox{\hyperlink{vmtk__solid_8cc_source_l00054}{My\+Solid\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+My\+Solid\+Tetgen\+Mesh()}}, and \mbox{\hyperlink{vmtk__solid_8cc_source_l00107}{Global\+\_\+\+Parameters\+::P}}.
+

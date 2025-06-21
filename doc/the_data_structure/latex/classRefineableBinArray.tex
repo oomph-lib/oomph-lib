@@ -1,0 +1,940 @@
+\doxysection{Refineable\+Bin\+Array Class Reference}
+\hypertarget{classRefineableBinArray}{}\label{classRefineableBinArray}\index{RefineableBinArray@{RefineableBinArray}}
+
+
+\doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} class.  
+
+
+
+
+{\ttfamily \#include $<$sample\+\_\+point\+\_\+container.\+h$>$}
+
+Inheritance diagram for Refineable\+Bin\+Array\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRefineableBinArray}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineableBinArray_ae8f20e18970ec50ea92ea975ed3b1f6e}{Refineable\+Bin\+Array}} (Sample\+Point\+Container\+Parameters \texorpdfstring{$\ast$}{*}bin\+\_\+array\+\_\+parameters\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBinArray_aeecaf1657c6b3866efce1d5ce42b815c}{Refineable\+Bin\+Array}} (const \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \&data)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2}{operator=}} (const \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBinArray_a0ab4375c167506d001a9522307805ab4}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Bin\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b}{root\+\_\+bin\+\_\+array\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Root bin array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408}{bin\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Pointer to i-\/th bin; can be null if bin is empty. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}{nbin}} () const
+\begin{DoxyCompactList}\small\item\em Number of bins (not taking recursion into account) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively}} () const
+\begin{DoxyCompactList}\small\item\em Compute total number of sample points recursively. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a324600bc7ba047fb17adcb3918ea5c17}{fill\+\_\+bin\+\_\+array}} (const Vector$<$ \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*} $>$ \&sample\+\_\+point\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Fill the bin array with specified Sample\+Points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a477a68e97b7cb297d38a0b2a844f53a5}{add\+\_\+sample\+\_\+point}} (\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*}new\+\_\+sample\+\_\+point\+\_\+pt, const Vector$<$ double $>$ \&zeta)
+\begin{DoxyCompactList}\small\item\em Add specified \doxylink{classSamplePoint}{Sample\+Point} to \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}{locate\+\_\+zeta}} (const Vector$<$ double $>$ \&zeta, Geom\+Object \texorpdfstring{$\ast$}{*}\&sub\+\_\+geom\+\_\+object\+\_\+pt, Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}{get\+\_\+bin\+\_\+boundaries}} (const unsigned \&bin\+\_\+index, Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}})
+\begin{DoxyCompactList}\small\item\em Boundaries of specified bin in each coordinate direction. \texorpdfstring{$\ast$}{*}.first = min; \texorpdfstring{$\ast$}{*}.second = max. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a07632b2aa85958ed406ca980f0cd025b}{depth}} () const
+\begin{DoxyCompactList}\small\item\em Depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a}{max\+\_\+depth}} () const
+\begin{DoxyCompactList}\small\item\em Max depth of the hierarchical bin\+\_\+array; const version. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125}{max\+\_\+depth}} ()
+\begin{DoxyCompactList}\small\item\em Max depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3}{bin\+\_\+array\+\_\+is\+\_\+recursive}} () const
+\begin{DoxyCompactList}\small\item\em Is the \doxylink{classBinArray}{Bin\+Array} recursive? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_aec5b36a2a2b631093e53d0ea640eeffc}{max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}} () const
+\begin{DoxyCompactList}\small\item\em Maximum number of sample points in bin (before its subdivided recursively) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}{output\+\_\+bins}} (std\+::ofstream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output bins. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa}{output\+\_\+bin\+\_\+vertices}} (std\+::ofstream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output bin vertices (allowing display of bins as zones). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159}{output\+\_\+neighbouring\+\_\+bins}} (const unsigned \&bin\+\_\+index, const unsigned \&radius, std\+::ofstream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output neighbouring bins at given "{}radius"{} of the specified bin. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}} ()
+\begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de}{first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter is less than this value. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em Every time we\textquotesingle{}ve completed a "{}spiral"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}} ()
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classBinArray}{Bin\+Array}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBinArray_ae441b5dcc0d0276f4661a09ff735b581}{Bin\+Array}} (Mesh \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const Vector$<$ unsigned $>$ \&\mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\+\_\+of\+\_\+bin\+\_\+array}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBinArray_ae1bd440bc2eb6436158d306e26309eba}{Bin\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classBinArray_ad60dd2a93b57b4fb7dae54cc342e9173}{Bin\+Array}} (const \mbox{\hyperlink{classBinArray}{Bin\+Array}} \&data)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBinArray_af8cb652301eb452d7a908407134d36d1}{operator=}} (const \mbox{\hyperlink{classBinArray}{Bin\+Array}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classBinArray_ab29e48e0bc2242673fac09b245714d4e}{\texorpdfstring{$\sim$}{\string~}\+Bin\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBinArray_a704060ec54de24dd65c73af63a25d2b2}{get\+\_\+neighbouring\+\_\+bins\+\_\+helper}} (const unsigned \&bin\+\_\+index, const unsigned \&radius, Vector$<$ unsigned $>$ \&neighbouring\+\_\+bin\+\_\+index, const bool \&use\+\_\+old\+\_\+version=true)
+\begin{DoxyCompactList}\small\item\em Helper function for computing the bin indices of neighbouring bins at a given "{}radius"{} of the specified bin. Final, optional boolean (default\+: true) chooses to use the old version which appears to be faster than Louis\textquotesingle{} new one after all (in the few cases where this functionality is still used -- not all if we have cgal!) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBinArray_af2a223b6a244b75d4c1e358a95aa57f1}{profile\+\_\+get\+\_\+neighbouring\+\_\+bins\+\_\+helper}} ()
+\begin{DoxyCompactList}\small\item\em Profiling function to compare performance of two different versions of the get\+\_\+neighbouring\+\_\+bins\+\_\+helper(...) function. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classBinArray_ae57a55f73048b7c209fdff93725c4049}{coords\+\_\+to\+\_\+bin\+\_\+index}} (const Vector$<$ double $>$ \&zeta)
+\begin{DoxyCompactList}\small\item\em Get (linearly enumerated) bin index of bin that contains specified zeta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBinArray_afc41ba4569c25acdf56000a6a82e7859}{coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index}} (const Vector$<$ double $>$ \&zeta, Vector$<$ unsigned $>$ \&bin\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Get "{}coordinates"{} of bin that contains specified zeta. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classBinArray_a1bd867e26195feb7ae95a8e77acadca8}{max\+\_\+bin\+\_\+dimension}} () const
+\begin{DoxyCompactList}\small\item\em Max. bin dimension (number of bins in coordinate directions) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classBinArray_a8e0c4a67385d7dcc714de95ce9965f34}{ndim\+\_\+zeta}} () const
+\begin{DoxyCompactList}\small\item\em Dimension of the zeta ( = dim of local coordinate of elements) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classBinArray_a0148631c80ef91ad21b985986ae24394}{dimension\+\_\+of\+\_\+bin\+\_\+array}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Number of bins in coordinate direction i. \end{DoxyCompactList}\item 
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classBinArray_a55a09b07aea56637d29ba63e28f21f1b}{dimensions\+\_\+of\+\_\+bin\+\_\+array}} () const
+\begin{DoxyCompactList}\small\item\em Number of bins in coordinate directions. Const vector-\/based version. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classBinArray_a7814241e3fa3da0f5449a85a6d0d2ee1}{dimensions\+\_\+of\+\_\+bin\+\_\+array}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Number of bins in specified coordinate direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSamplePointContainer_a68326e89f80f01690d8c2d03effb8508}{Sample\+Point\+Container}} (Mesh \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}}, const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&\mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}, const bool \&\mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}, const unsigned \&\mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSamplePointContainer_a6801f78c9d6b55a69f7e60a372dc9bf2}{Sample\+Point\+Container}} ()
+\begin{DoxyCompactList}\small\item\em Broken default constructor; needed for broken copy constructors. Don\textquotesingle{}t call. It will die. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSamplePointContainer_a6fa9329fb09b49f9db769e167edd21ba}{Sample\+Point\+Container}} (const \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} \&data)=delete
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSamplePointContainer_aec11fe761eb5769d975ab4874f1ae332}{operator=}} (const \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classSamplePointContainer_a753a58798c528e01d384a4f444368db3}{\texorpdfstring{$\sim$}{\string~}\+Sample\+Point\+Container}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSamplePointContainer_aa638ec17fc518066a473e49ad148b122}{mesh\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{classSamplePointContainer_aac031f93652a7fcd21b5917a780d3022}{min\+\_\+and\+\_\+max\+\_\+coordinates}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+\begin{DoxyCompactList}\small\item\em Pair of doubles for min and maximum coordinates in i-\/th direction\+: min (first) and max. (second) coordinates. \end{DoxyCompactList}\item 
+const Vector$<$ std\+::pair$<$ double, double $>$ $>$ \& \mbox{\hyperlink{classSamplePointContainer_aa0d2d5baaf1b124a1eac77cd4f6d5005}{min\+\_\+and\+\_\+max\+\_\+coordinates}} () const
+\begin{DoxyCompactList}\small\item\em Vector of pair of doubles for min and maximum coordinates. min (first) and max. (second) coordinates. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSamplePointContainer_a399d246c1afdfd993ceb80e6f2de1400}{ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}} () const
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSamplePointContainer_a6b6b42a9e6bd8f116af8699e03a78d44}{use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}} () const
+\begin{DoxyCompactList}\small\item\em Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i.\+e. interpolated\+\_\+zeta) to identify point. \end{DoxyCompactList}\item 
+unsigned \& \mbox{\hyperlink{classSamplePointContainer_a816528cf500a37fa9ecabe6381b31852}{nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em "{}\+Measure of"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classSamplePointContainer_ac69b644e4974dfdf9c9d3b31f5f75e72}{max\+\_\+search\+\_\+radius}} ()
+\begin{DoxyCompactList}\small\item\em Set maximum search radius for locate zeta. This is initialised do DBL\+\_\+\+MAX so we brutally search through the entire bin structure, no matter how big it is until we\textquotesingle{}ve found the required point (or failed to do so. This can be VERY costly with fine meshes. Here the user takes full responsibility and states that we have no chance in hell to find the required point in a bin whose closest vertex is further than the specified max search radius. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned \mbox{\hyperlink{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}{Default\+\_\+n\+\_\+bin\+\_\+1d}} = 5
+\begin{DoxyCompactList}\small\item\em Default number of bins (in each coordinate direction) (Note\+: don\textquotesingle{}t move this into a common base class because each derived class has its own value; we\textquotesingle{}ll want far fewer in the refineable version!) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::ofstream \mbox{\hyperlink{classSamplePointContainer_ad08a1cb658b3783bcf7d8491e90965f3}{Visited\+\_\+sample\+\_\+points\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em File to record sequence of visited sample points in. Used for debugging/ illustration of search procedures. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classSamplePointContainer_a1098cdf602fabc6ceec41bb7ea73805f}{Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}} = false
+\begin{DoxyCompactList}\small\item\em Boolean flag to make to make locate zeta fail. Used for debugging/ illustration of search procedures. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classSamplePointContainer_affcd582fab41aa86bfe46e1bf92fafd1}{Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}} = true
+\begin{DoxyCompactList}\small\item\em Use equally spaced sample points? (otherwise vertices are sampled repeatedly. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classSamplePointContainer_a1755d4419776cc87ab27e845d03449de}{Enable\+\_\+timing\+\_\+of\+\_\+setup}} = false
+\begin{DoxyCompactList}\small\item\em Time setup? \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classSamplePointContainer_a13035786055416a2da9ae7eec515bccd}{Percentage\+\_\+offset}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em Offset of sample point container boundaries beyond max/min coords. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRefineableBinArray_a89a3c1f13eeceec0fb11e399cc58d57d}{fill\+\_\+bin\+\_\+array}} ()
+\begin{DoxyCompactList}\small\item\em Fill the bin array with sample points from Finite\+Elements stored in mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRefineableBinArray_ac8f32afc025239c62a5d7e7e2535313e}{create\+\_\+sample\+\_\+points\+\_\+from\+\_\+element}} (Finite\+Element \texorpdfstring{$\ast$}{*}const element\+\_\+pt, const unsigned \&n\+\_\+element)
+\begin{DoxyCompactList}\small\item\em Loop over all sample points in the element specified via the pointer and create a \doxylink{classSamplePoint}{Sample\+Point} for each. Also specify the index of the element in its mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classRefineableBinArray_a164db8709f15119c8c5a761e9715d1a4}{Bin\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to constituent Refineable\+Bins. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRefineableBinArray_af36bed0c24cd70af160db504a3160d0b}{Bin\+\_\+array\+\_\+is\+\_\+recursive}}
+\begin{DoxyCompactList}\small\item\em Variable which stores if the \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} is recursive or not. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a5ecc65773101eced0ff7afe57fe04804}{Depth}}
+\begin{DoxyCompactList}\small\item\em Variable which stores the Depth value of the bin\+\_\+array. Useful for debugging and for preventing "{}infinite"{} recursion in case if there is a problem. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a234ea22c1be2373c08ee64721735d898}{Max\+\_\+depth}}
+\begin{DoxyCompactList}\small\item\em Max depth of the hierarchical bin\+\_\+array. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a6841cb84bc34762a8b192db60393a98a}{Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}}
+\begin{DoxyCompactList}\small\item\em Maximum number of sample points in bin (before it\textquotesingle{}s subdivided recursively) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineableBinArray_a5b75f5d76558759afe6ebae878f35f50}{Root\+\_\+bin\+\_\+array\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to root bin array. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a2eb9af06f24bef587e220675d56c5042}{First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_aa2f3e80292b0b82fc0a41815dac9958d}{Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter is less than this value. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_a058f9e44828158525e7655d4007cae76}{Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em Every time we\textquotesingle{}ve completed a "{}spiral"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380812}{Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}
+\begin{DoxyCompactList}\small\item\em When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSamplePointContainer_af69785a39545f46473ccf0d10f61e08b}{setup\+\_\+min\+\_\+and\+\_\+max\+\_\+coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to compute the min and max coordinates for the mesh, in each dimension. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classBinArray}{Bin\+Array}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ unsigned $>$ \mbox{\hyperlink{classBinArray_aaab4005f8563e42df5fc8e7ac626fedc}{Dimensions\+\_\+of\+\_\+bin\+\_\+array}}
+\begin{DoxyCompactList}\small\item\em Number of bins in each coordinate direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classSamplePointContainer}{Sample\+Point\+Container}}}
+\begin{DoxyCompactItemize}
+\item 
+Mesh \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSamplePointContainer_a9f044cf51ea29b0a1a85e029defd81d5}{Mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh from whose Finite\+Elements sample points are created. \end{DoxyCompactList}\item 
+Vector$<$ std\+::pair$<$ double, double $>$ $>$ \mbox{\hyperlink{classSamplePointContainer_a1607ff8abb3f3b6364bc169a6ea4a79c}{Min\+\_\+and\+\_\+max\+\_\+coordinates}}
+\begin{DoxyCompactList}\small\item\em Vector of pairs of doubles for min and maximum coordinates. Call\+: Min\+\_\+and\+\_\+max\+\_\+coordinates\mbox{[}j\mbox{]} gives me the pair of min (first) and max. (second) coordinates in the j-\/th coordinate direction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSamplePointContainer_a8d7215f8363d751343efe60a1b051e6a}{Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Use Eulerian coordinates (i.\+e. interpolated\+\_\+x) rather than zeta itself (i.\+e. interpolated\+\_\+zeta) to identify point. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSamplePointContainer_a5b1f32943385600039df3a76b13a216b}{Ignore\+\_\+halo\+\_\+elements\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+search}}
+\begin{DoxyCompactList}\small\item\em Ignore halo elements? \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classSamplePointContainer_a849e85891df1b33c5cbe65c8a1f3b4f7}{Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em "{}\+Measure of"{} number of sample points generated in each element \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classSamplePointContainer_a8a2db41f731f23e430bb751e6ea17723}{Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}
+\begin{DoxyCompactList}\small\item\em Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classSamplePointContainer_aae6e7df15b2dbbdf18467716da817f22}{Max\+\_\+search\+\_\+radius}}
+\begin{DoxyCompactList}\small\item\em Max radius beyond which we stop searching the bin. Initialised to DBL\+\_\+\+MAX so keep going until the point is found or until we\textquotesingle{}ve searched every single bin. Overwriting this means we won\textquotesingle{}t search in bins whose closest vertex is at a distance greater than Max\+\_\+search\+\_\+radius from the point to be located. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} class. 
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00520}{520}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRefineableBinArray_ae8f20e18970ec50ea92ea975ed3b1f6e}\label{classRefineableBinArray_ae8f20e18970ec50ea92ea975ed3b1f6e} 
+\index{RefineableBinArray@{RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
+\index{RefineableBinArray@{RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{RefineableBinArray()}{RefineableBinArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array (\begin{DoxyParamCaption}\item[{Sample\+Point\+Container\+Parameters \texorpdfstring{$\ast$}{*}}]{sample\+\_\+point\+\_\+container\+\_\+parameters\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\doxylink{classRefineableBin}{Refineable\+Bin} array class /////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////.
+
+Constructor 
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{841}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00763}{Bin\+\_\+array\+\_\+is\+\_\+recursive}}, \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00568}{Default\+\_\+n\+\_\+bin\+\_\+1d}}, \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8h_source_l00346}{Sample\+Point\+Container\+::\+Enable\+\_\+timing\+\_\+of\+\_\+setup}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00785}{First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00806}{Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00790}{Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00775}{Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00800}{Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00547}{root\+\_\+bin\+\_\+array\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00684}{Sample\+Point\+Container\+::setup\+\_\+min\+\_\+and\+\_\+max\+\_\+coordinates()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}.
+
+\Hypertarget{classRefineableBinArray_aeecaf1657c6b3866efce1d5ce42b815c}\label{classRefineableBinArray_aeecaf1657c6b3866efce1d5ce42b815c} 
+\index{RefineableBinArray@{RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
+\index{RefineableBinArray@{RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{RefineableBinArray()}{RefineableBinArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Refineable\+Bin\+Array\+::\+Refineable\+Bin\+Array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classRefineableBinArray_a0ab4375c167506d001a9522307805ab4}\label{classRefineableBinArray_a0ab4375c167506d001a9522307805ab4} 
+\index{RefineableBinArray@{RefineableBinArray}!````~RefineableBinArray@{\texorpdfstring{$\sim$}{\string~}RefineableBinArray}}
+\index{````~RefineableBinArray@{\texorpdfstring{$\sim$}{\string~}RefineableBinArray}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineableBinArray()}{\string~RefineableBinArray()}}
+{\footnotesize\ttfamily Refineable\+Bin\+Array\+::\texorpdfstring{$\sim$}{\string~}\+Refineable\+Bin\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00533}{533}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRefineableBinArray_a477a68e97b7cb297d38a0b2a844f53a5}\label{classRefineableBinArray_a477a68e97b7cb297d38a0b2a844f53a5} 
+\index{RefineableBinArray@{RefineableBinArray}!add\_sample\_point@{add\_sample\_point}}
+\index{add\_sample\_point@{add\_sample\_point}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{add\_sample\_point()}{add\_sample\_point()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::add\+\_\+sample\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+sample\+\_\+point\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{zeta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add specified \doxylink{classSamplePoint}{Sample\+Point} to \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array}. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00612}{612}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00574}{fill\+\_\+bin\+\_\+array()}}.
+
+\Hypertarget{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3}\label{classRefineableBinArray_a3450f66578018c21cb0e46a75788b6c3} 
+\index{RefineableBinArray@{RefineableBinArray}!bin\_array\_is\_recursive@{bin\_array\_is\_recursive}}
+\index{bin\_array\_is\_recursive@{bin\_array\_is\_recursive}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{bin\_array\_is\_recursive()}{bin\_array\_is\_recursive()}}
+{\footnotesize\ttfamily bool Refineable\+Bin\+Array\+::bin\+\_\+array\+\_\+is\+\_\+recursive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Is the \doxylink{classBinArray}{Bin\+Array} recursive? 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00659}{659}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00763}{Bin\+\_\+array\+\_\+is\+\_\+recursive}}.
+
+\Hypertarget{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408}\label{classRefineableBinArray_aab485f3d5cac273ab89883ba5c782408} 
+\index{RefineableBinArray@{RefineableBinArray}!bin\_pt@{bin\_pt}}
+\index{bin\_pt@{bin\_pt}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{bin\_pt()}{bin\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}} \texorpdfstring{$\ast$}{*} Refineable\+Bin\+Array\+::bin\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to i-\/th bin; can be null if bin is empty. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00553}{553}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classRefineableBinArray_ac8f32afc025239c62a5d7e7e2535313e}\label{classRefineableBinArray_ac8f32afc025239c62a5d7e7e2535313e} 
+\index{RefineableBinArray@{RefineableBinArray}!create\_sample\_points\_from\_element@{create\_sample\_points\_from\_element}}
+\index{create\_sample\_points\_from\_element@{create\_sample\_points\_from\_element}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{create\_sample\_points\_from\_element()}{create\_sample\_points\_from\_element()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::create\+\_\+sample\+\_\+points\+\_\+from\+\_\+element (\begin{DoxyParamCaption}\item[{Finite\+Element \texorpdfstring{$\ast$}{*}const}]{element\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loop over all sample points in the element specified via the pointer and create a \doxylink{classSamplePoint}{Sample\+Point} for each. Also specify the index of the element in its mesh. 
+
+\Hypertarget{classRefineableBinArray_a07632b2aa85958ed406ca980f0cd025b}\label{classRefineableBinArray_a07632b2aa85958ed406ca980f0cd025b} 
+\index{RefineableBinArray@{RefineableBinArray}!depth@{depth}}
+\index{depth@{depth}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{depth()}{depth()}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Depth of the hierarchical bin\+\_\+array. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00641}{641}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}.
+
+\Hypertarget{classRefineableBinArray_a89a3c1f13eeceec0fb11e399cc58d57d}\label{classRefineableBinArray_a89a3c1f13eeceec0fb11e399cc58d57d} 
+\index{RefineableBinArray@{RefineableBinArray}!fill\_bin\_array@{fill\_bin\_array}}
+\index{fill\_bin\_array@{fill\_bin\_array}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{fill\_bin\_array()}{fill\_bin\_array()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fill the bin array with sample points from Finite\+Elements stored in mesh. 
+
+For all the sample points we have to create ...
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{1882}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00377}{Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8h_source_l00343}{Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00367}{Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a324600bc7ba047fb17adcb3918ea5c17}\label{classRefineableBinArray_a324600bc7ba047fb17adcb3918ea5c17} 
+\index{RefineableBinArray@{RefineableBinArray}!fill\_bin\_array@{fill\_bin\_array}}
+\index{fill\_bin\_array@{fill\_bin\_array}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{fill\_bin\_array()}{fill\_bin\_array()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::fill\+\_\+bin\+\_\+array (\begin{DoxyParamCaption}\item[{const Vector$<$ \mbox{\hyperlink{classSamplePoint}{Sample\+Point}} \texorpdfstring{$\ast$}{*} $>$ \&}]{sample\+\_\+point\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill the bin array with specified Sample\+Points. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00574}{574}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00612}{add\+\_\+sample\+\_\+point()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00357}{Sample\+Point\+Container\+::\+Mesh\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00377}{Sample\+Point\+Container\+::\+Nsample\+\_\+points\+\_\+generated\+\_\+per\+\_\+element}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8h_source_l00343}{Sample\+Point\+Container\+::\+Use\+\_\+equally\+\_\+spaced\+\_\+interior\+\_\+sample\+\_\+points}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00367}{Sample\+Point\+Container\+::\+Use\+\_\+eulerian\+\_\+coordinates\+\_\+during\+\_\+setup}}.
+
+\Hypertarget{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de}\label{classRefineableBinArray_af02301fa30cd6dd5807efd949df9f5de} 
+\index{RefineableBinArray@{RefineableBinArray}!first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{first\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00712}{712}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00785}{First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+
+\Hypertarget{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca}\label{classRefineableBinArray_aaf7e968daa598e460269fac55dfb55ca} 
+\index{RefineableBinArray@{RefineableBinArray}!get\_bin\_boundaries@{get\_bin\_boundaries}}
+\index{get\_bin\_boundaries@{get\_bin\_boundaries}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{get\_bin\_boundaries()}{get\_bin\_boundaries()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::get\+\_\+bin\+\_\+boundaries (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{Vector$<$ std\+::pair$<$ double, double $>$ $>$ \&}]{min\+\_\+and\+\_\+max\+\_\+coordinates }\end{DoxyParamCaption})}
+
+
+
+Boundaries of specified bin in each coordinate direction. \texorpdfstring{$\ast$}{*}.first = min; \texorpdfstring{$\ast$}{*}.second = max. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{995}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00486}{Bin\+Array\+::dimension\+\_\+of\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{output\+\_\+neighbouring\+\_\+bins()}}.
+
+\Hypertarget{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459}\label{classRefineableBinArray_aedb53aae2b2ecb83a254ba992c848459} 
+\index{RefineableBinArray@{RefineableBinArray}!initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00741}{741}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00806}{Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+
+\Hypertarget{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9}\label{classRefineableBinArray_a4e91f20ad3d7f334f90af31feca1e8b9} 
+\index{RefineableBinArray@{RefineableBinArray}!last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter is less than this value. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00720}{720}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00790}{Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+
+\Hypertarget{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1}\label{classRefineableBinArray_a4f2f78efe9b05fda23d94e857d00cfa1} 
+\index{RefineableBinArray@{RefineableBinArray}!locate\_zeta@{locate\_zeta}}
+\index{locate\_zeta@{locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{locate\_zeta()}{locate\_zeta()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Geom\+Object \texorpdfstring{$\ast$}{*}\&}]{sub\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Find sub-\/\+Geom\+Object (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub\+\_\+geom\+\_\+object\+\_\+pt=0 if point can\textquotesingle{}t be found. 
+
+
+
+Implements \mbox{\hyperlink{classSamplePointContainer_acca8dbae8346d6c8924b1f815aa5f049}{Sample\+Point\+Container}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{2002}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00339}{Sample\+Point\+Container\+::\+Always\+\_\+fail\+\_\+elemental\+\_\+locate\+\_\+zeta}}, \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01840}{Bin\+Array\+::coords\+\_\+to\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01969}{Bin\+Array\+::coords\+\_\+to\+\_\+vectorial\+\_\+bin\+\_\+index()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00508}{Bin\+Array\+::\+Dimensions\+\_\+of\+\_\+bin\+\_\+array}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00327}{Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}.
+
+\Hypertarget{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125}\label{classRefineableBinArray_af23bddd8d9f462f8dd9c44eeed960125} 
+\index{RefineableBinArray@{RefineableBinArray}!max\_depth@{max\_depth}}
+\index{max\_depth@{max\_depth}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{max\_depth()}{max\_depth()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::max\+\_\+depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Max depth of the hierarchical bin\+\_\+array. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00653}{653}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}.
+
+\Hypertarget{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a}\label{classRefineableBinArray_a1ada9a3c5cb95bbd690dd1d68421014a} 
+\index{RefineableBinArray@{RefineableBinArray}!max\_depth@{max\_depth}}
+\index{max\_depth@{max\_depth}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{max\_depth()}{max\_depth()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::max\+\_\+depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Max depth of the hierarchical bin\+\_\+array; const version. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00647}{647}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00771}{Max\+\_\+depth}}.
+
+\Hypertarget{classRefineableBinArray_aec5b36a2a2b631093e53d0ea640eeffc}\label{classRefineableBinArray_aec5b36a2a2b631093e53d0ea640eeffc} 
+\index{RefineableBinArray@{RefineableBinArray}!max\_number\_of\_sample\_point\_per\_bin@{max\_number\_of\_sample\_point\_per\_bin}}
+\index{max\_number\_of\_sample\_point\_per\_bin@{max\_number\_of\_sample\_point\_per\_bin}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{max\_number\_of\_sample\_point\_per\_bin()}{max\_number\_of\_sample\_point\_per\_bin()}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Maximum number of sample points in bin (before its subdivided recursively) 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00666}{666}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00775}{Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin}}.
+
+\Hypertarget{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f}\label{classRefineableBinArray_a2367a6337a800cce5a6413548b49f75f} 
+\index{RefineableBinArray@{RefineableBinArray}!multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}{multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta()}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Every time we\textquotesingle{}ve completed a "{}spiral"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00732}{732}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00800}{Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta}}.
+
+\Hypertarget{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1}\label{classRefineableBinArray_a5975657726af982a4d67ff6470abb9d1} 
+\index{RefineableBinArray@{RefineableBinArray}!nbin@{nbin}}
+\index{nbin@{nbin}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{nbin()}{nbin()}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::nbin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of bins (not taking recursion into account) 
+
+
+
+Implements \mbox{\hyperlink{classBinArray_aad085bf99d78162120c419f7504d256b}{Bin\+Array}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00559}{559}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}.
+
+\Hypertarget{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2}\label{classRefineableBinArray_a406e1a7f7521c32915f9e8a4e33492e2} 
+\index{RefineableBinArray@{RefineableBinArray}!operator=@{operator=}}
+\index{operator=@{operator=}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa}\label{classRefineableBinArray_a982851086eb3973d4f17d5a5364d8faa} 
+\index{RefineableBinArray@{RefineableBinArray}!output\_bin\_vertices@{output\_bin\_vertices}}
+\index{output\_bin\_vertices@{output\_bin\_vertices}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{output\_bin\_vertices()}{output\_bin\_vertices()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::output\+\_\+bin\+\_\+vertices (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Output bin vertices (allowing display of bins as zones). 
+
+Output neighbouring bins up to given "{}radius"{} of the specified bin. 
+
+Implements \mbox{\hyperlink{classBinArray_afc595a05f2ab19e1bb973c5a076b1432}{Bin\+Array}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01027}{1027}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75}\label{classRefineableBinArray_ab92ef5225b96b684b58f3a0905aacf75} 
+\index{RefineableBinArray@{RefineableBinArray}!output\_bins@{output\_bins}}
+\index{output\_bins@{output\_bins}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{output\_bins()}{output\_bins()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::output\+\_\+bins (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output bins. 
+
+Loop over bins
+
+Implements \mbox{\hyperlink{classBinArray_a66fe7e379a53e3fee81ead7ef4045b40}{Bin\+Array}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00672}{672}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159}\label{classRefineableBinArray_a98b6de46ffffbdc8045831c6fc03b159} 
+\index{RefineableBinArray@{RefineableBinArray}!output\_neighbouring\_bins@{output\_neighbouring\_bins}}
+\index{output\_neighbouring\_bins@{output\_neighbouring\_bins}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{output\_neighbouring\_bins()}{output\_neighbouring\_bins()}}
+{\footnotesize\ttfamily void Refineable\+Bin\+Array\+::output\+\_\+neighbouring\+\_\+bins (\begin{DoxyParamCaption}\item[{const unsigned \&}]{bin\+\_\+index,  }\item[{const unsigned \&}]{radius,  }\item[{std\+::ofstream \&}]{outfile }\end{DoxyParamCaption})}
+
+
+
+Output neighbouring bins at given "{}radius"{} of the specified bin. 
+
+Output neighbouring bins up to given "{}radius"{} of the specified bin. 
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01044}{1044}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8cc_source_l00995}{get\+\_\+bin\+\_\+boundaries()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01350}{Bin\+Array\+::get\+\_\+neighbouring\+\_\+bins\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{sample__point__container_8h_source_l00290}{Sample\+Point\+Container\+::min\+\_\+and\+\_\+max\+\_\+coordinates()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00363}{Sample\+Point\+Container\+::\+Min\+\_\+and\+\_\+max\+\_\+coordinates}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00480}{Bin\+Array\+::ndim\+\_\+zeta()}}.
+
+\Hypertarget{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b}\label{classRefineableBinArray_a67acf7be335ccf874517fd36ac27433b} 
+\index{RefineableBinArray@{RefineableBinArray}!root\_bin\_array\_pt@{root\_bin\_array\_pt}}
+\index{root\_bin\_array\_pt@{root\_bin\_array\_pt}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{root\_bin\_array\_pt()}{root\_bin\_array\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}} \texorpdfstring{$\ast$}{*} Refineable\+Bin\+Array\+::root\+\_\+bin\+\_\+array\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Root bin array. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00547}{547}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b}\label{classRefineableBinArray_a267d58bd06dafc53aff7b42927500a8b} 
+\index{RefineableBinArray@{RefineableBinArray}!total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}}
+\index{total\_number\_of\_sample\_points\_computed\_recursively@{total\_number\_of\_sample\_points\_computed\_recursively}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{total\_number\_of\_sample\_points\_computed\_recursively()}{total\_number\_of\_sample\_points\_computed\_recursively()}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Compute total number of sample points recursively. 
+
+
+
+Implements \mbox{\hyperlink{classSamplePointContainer_ac7bf51a6987a9180c7715d6211fdbb46}{Sample\+Point\+Container}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8cc_source_l01819}{1819}} of file \mbox{\hyperlink{sample__point__container_8cc_source}{sample\+\_\+point\+\_\+container.\+cc}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00759}{Bin\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115}\label{classRefineableBinArray_a00fcd3ddc867085313ac945fc4553115} 
+\index{RefineableBinArray@{RefineableBinArray}!total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}}
+\index{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level@{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}{total\_number\_of\_sample\_points\_visited\_during\_locate\_zeta\_from\_top\_level()}}
+{\footnotesize\ttfamily unsigned \& Refineable\+Bin\+Array\+::total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Counter to keep track of how many sample points we\textquotesingle{}ve visited during top level call to locate\+\_\+zeta. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classSamplePointContainer_a16ac5bc68c5f0e161e65bbc4799b5ec4}{Sample\+Point\+Container}}.
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00696}{696}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+References \mbox{\hyperlink{sample__point__container_8h_source_l00768}{Depth}}, \mbox{\hyperlink{sample__point__container_8h_source_l00778}{Root\+\_\+bin\+\_\+array\+\_\+pt}}, \mbox{\hyperlink{sample__point__container_8h_source_l00382}{Sample\+Point\+Container\+::\+Total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classRefineableBinArray_af36bed0c24cd70af160db504a3160d0b}\label{classRefineableBinArray_af36bed0c24cd70af160db504a3160d0b} 
+\index{RefineableBinArray@{RefineableBinArray}!Bin\_array\_is\_recursive@{Bin\_array\_is\_recursive}}
+\index{Bin\_array\_is\_recursive@{Bin\_array\_is\_recursive}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Bin\_array\_is\_recursive}{Bin\_array\_is\_recursive}}
+{\footnotesize\ttfamily bool Refineable\+Bin\+Array\+::\+Bin\+\_\+array\+\_\+is\+\_\+recursive\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable which stores if the \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} is recursive or not. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00763}{763}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00659}{bin\+\_\+array\+\_\+is\+\_\+recursive()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a164db8709f15119c8c5a761e9715d1a4}\label{classRefineableBinArray_a164db8709f15119c8c5a761e9715d1a4} 
+\index{RefineableBinArray@{RefineableBinArray}!Bin\_pt@{Bin\_pt}}
+\index{Bin\_pt@{Bin\_pt}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Bin\_pt}{Bin\_pt}}
+{\footnotesize\ttfamily Vector$<$\mbox{\hyperlink{classRefineableBin}{Refineable\+Bin}}\texorpdfstring{$\ast$}{*}$>$ Refineable\+Bin\+Array\+::\+Bin\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of pointers to constituent Refineable\+Bins. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00759}{759}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00612}{add\+\_\+sample\+\_\+point()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00553}{bin\+\_\+pt()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01882}{fill\+\_\+bin\+\_\+array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00559}{nbin()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01027}{output\+\_\+bin\+\_\+vertices()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00672}{output\+\_\+bins()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l01820}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+computed\+\_\+recursively()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00533}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2}\label{classRefineableBinArray_a34a623036985925b9adc0b28c89ad1c2} 
+\index{RefineableBinArray@{RefineableBinArray}!Default\_n\_bin\_1d@{Default\_n\_bin\_1d}}
+\index{Default\_n\_bin\_1d@{Default\_n\_bin\_1d}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Default\_n\_bin\_1d}{Default\_n\_bin\_1d}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Default\+\_\+n\+\_\+bin\+\_\+1d = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Default number of bins (in each coordinate direction) (Note\+: don\textquotesingle{}t move this into a common base class because each derived class has its own value; we\textquotesingle{}ll want far fewer in the refineable version!) 
+
+Default number of bins (in each coordinate direction) 
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00568}{568}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a5ecc65773101eced0ff7afe57fe04804}\label{classRefineableBinArray_a5ecc65773101eced0ff7afe57fe04804} 
+\index{RefineableBinArray@{RefineableBinArray}!Depth@{Depth}}
+\index{Depth@{Depth}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Depth}{Depth}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Depth\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable which stores the Depth value of the bin\+\_\+array. Useful for debugging and for preventing "{}infinite"{} recursion in case if there is a problem. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00768}{768}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00641}{depth()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l02002}{locate\+\_\+zeta()}}, \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+
+\Hypertarget{classRefineableBinArray_a2eb9af06f24bef587e220675d56c5042}\label{classRefineableBinArray_a2eb9af06f24bef587e220675d56c5042} 
+\index{RefineableBinArray@{RefineableBinArray}!First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}{First\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+First\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00785}{785}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00712}{first\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380812}\label{classRefineableBinArray_ace7075adbe1606ef0b01cbb14c380812} 
+\index{RefineableBinArray@{RefineableBinArray}!Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}{Initial\_last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter exceeds this value. This is the initial value when starting the spiral based search. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00806}{806}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00741}{initial\+\_\+last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_aa2f3e80292b0b82fc0a41815dac9958d}\label{classRefineableBinArray_aa2f3e80292b0b82fc0a41815dac9958d} 
+\index{RefineableBinArray@{RefineableBinArray}!Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}{Last\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+When searching through sample points recursively from the top level \doxylink{classRefineableBinArray}{Refineable\+Bin\+Array} (in deterministic order!) only actually do the locate\+\_\+zeta calls when when the counter is less than this value. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00790}{790}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00720}{last\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a234ea22c1be2373c08ee64721735d898}\label{classRefineableBinArray_a234ea22c1be2373c08ee64721735d898} 
+\index{RefineableBinArray@{RefineableBinArray}!Max\_depth@{Max\_depth}}
+\index{Max\_depth@{Max\_depth}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Max\_depth}{Max\_depth}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Max\+\_\+depth\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Max depth of the hierarchical bin\+\_\+array. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00771}{771}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00653}{max\+\_\+depth()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00647}{max\+\_\+depth()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a6841cb84bc34762a8b192db60393a98a}\label{classRefineableBinArray_a6841cb84bc34762a8b192db60393a98a} 
+\index{RefineableBinArray@{RefineableBinArray}!Max\_number\_of\_sample\_point\_per\_bin@{Max\_number\_of\_sample\_point\_per\_bin}}
+\index{Max\_number\_of\_sample\_point\_per\_bin@{Max\_number\_of\_sample\_point\_per\_bin}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Max\_number\_of\_sample\_point\_per\_bin}{Max\_number\_of\_sample\_point\_per\_bin}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximum number of sample points in bin (before it\textquotesingle{}s subdivided recursively) 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00775}{775}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00666}{max\+\_\+number\+\_\+of\+\_\+sample\+\_\+point\+\_\+per\+\_\+bin()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a058f9e44828158525e7655d4007cae76}\label{classRefineableBinArray_a058f9e44828158525e7655d4007cae76} 
+\index{RefineableBinArray@{RefineableBinArray}!Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+\index{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta@{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}{Multiplier\_for\_max\_sample\_point\_to\_actually\_lookup\_during\_locate\_zeta}}
+{\footnotesize\ttfamily unsigned Refineable\+Bin\+Array\+::\+Multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Every time we\textquotesingle{}ve completed a "{}spiral"{}, visiting a finite number of sample points in a deterministic order, use this multiplier to increase the max. number of sample points to be visited. Using a multiplier rather than a constant increment increases the amount of (more and more unlikely to yield anything!) work done locally before doing another costly mpi round trip when we\textquotesingle{}re already far from the point we\textquotesingle{}re trying to find. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00800}{800}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8h_source_l00732}{multiplier\+\_\+for\+\_\+max\+\_\+sample\+\_\+point\+\_\+to\+\_\+actually\+\_\+lookup\+\_\+during\+\_\+locate\+\_\+zeta()}}, and \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}.
+
+\Hypertarget{classRefineableBinArray_a5b75f5d76558759afe6ebae878f35f50}\label{classRefineableBinArray_a5b75f5d76558759afe6ebae878f35f50} 
+\index{RefineableBinArray@{RefineableBinArray}!Root\_bin\_array\_pt@{Root\_bin\_array\_pt}}
+\index{Root\_bin\_array\_pt@{Root\_bin\_array\_pt}!RefineableBinArray@{RefineableBinArray}}
+\doxysubsubsection{\texorpdfstring{Root\_bin\_array\_pt}{Root\_bin\_array\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRefineableBinArray}{Refineable\+Bin\+Array}}\texorpdfstring{$\ast$}{*} Refineable\+Bin\+Array\+::\+Root\+\_\+bin\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to root bin array. 
+
+
+
+Definition at line \mbox{\hyperlink{sample__point__container_8h_source_l00778}{778}} of file \mbox{\hyperlink{sample__point__container_8h_source}{sample\+\_\+point\+\_\+container.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sample__point__container_8cc_source_l00841}{Refineable\+Bin\+Array()}}, \mbox{\hyperlink{sample__point__container_8h_source_l00547}{root\+\_\+bin\+\_\+array\+\_\+pt()}}, and \mbox{\hyperlink{sample__point__container_8h_source_l00696}{total\+\_\+number\+\_\+of\+\_\+sample\+\_\+points\+\_\+visited\+\_\+during\+\_\+locate\+\_\+zeta\+\_\+from\+\_\+top\+\_\+level()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sample__point__container_8h}{sample\+\_\+point\+\_\+container.\+h}}\item 
+\mbox{\hyperlink{sample__point__container_8cc}{sample\+\_\+point\+\_\+container.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,20 @@
+\doxysection{macro\+\_\+element\+\_\+node\+\_\+update\+\_\+element.\+h File Reference}
+\hypertarget{macro__element__node__update__element_8h}{}\label{macro__element__node__update__element_8h}\index{macro\_element\_node\_update\_element.h@{macro\_element\_node\_update\_element.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateNode}{oomph\+::\+Macro\+Element\+Node\+Update\+Node}}
+\begin{DoxyCompactList}\small\item\em Macro\+Element\+Node\+Update nodes are nodes with a positional update function, based on their element\textquotesingle{}s \doxylink{classoomph_1_1MacroElement}{Macro\+Element} representation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElementBase}{oomph\+::\+Macro\+Element\+Node\+Update\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for elements that allow Macro\+Element-\/based node update. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateElement}{oomph\+::\+Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Macro\+Element\+Node\+Update elements are elements that can not only be updated via their \doxylink{classoomph_1_1MacroElement}{Macro\+Element} representation (in princple any \doxylink{classoomph_1_1FiniteElement}{Finite\+Element} could do that...) but also allows the geometric \doxylink{classoomph_1_1Data}{Data} contained in the Geom\+Objects that affect the Macro\+Element-\/based node update operations to be unknowns in the overall \doxylink{classoomph_1_1Problem}{Problem}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Mesh}}
+\begin{DoxyCompactList}\small\item\em Macro\+Element\+Node\+Update\+Meshes contain Macro\+Element\+Node\+Update\+Nodes which have their own node update functions. When the node\textquotesingle{}s \doxylink{classoomph_1_1MacroElementNodeUpdateMesh_ab5271c4514bcd236271307361423ac9d}{node\+\_\+update()} function is called, they also perform any auxiliary update functions, e.\+g. to update no-\/slip boundary conditions on moving domain boundaries. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01MacroElementNodeUpdateElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Macro\+Element\+Node\+Update\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of Macro\+Element\+Node\+Update\+Elements, which is the same as the face geometry of the underlying element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,540 @@
+\mainpage Frequently Asked Questions
+
+
+Here are some frequently asked questions (with assorted frequently
+given answers...). Please check these before contacting us
+with any problems.
+- \ref compilation_and_seg \n\n
+  - \ref missing_this \n\n
+  - \ref rodata \n\n
+  - \ref seg_fault \n\n
+  - \ref wrong_results \n\n
+  - \ref newton_divergence \n\n
+- \ref cust_opt \n\n
+  - \ref tecplot \n\n
+  - \ref element_too_general \n\n
+- \ref nav \n\n
+  - \ref too_much \n\n
+  - \ref includes  \n\n
+- \ref all_else_fails \n\n
+  - \ref reporting \n\n
+.
+
+
+
+#########################################################################
+\n\n
+<HR>
+<HR>
+#########################################################################
+
+
+
+\section compilation_and_seg Compilation problems and run-time errors
+
+\subsection missing_this Missing 'this->'
+
+Recent versions of the <A HREF="http://gcc.gnu.org/">gcc compilers</A>
+enforce the <A HREF="http://www.open-std.org/jtc1/sc22/wg21/">C++
+standard</A> much more rigorously than earlier versions.
+Unfortunately, the standard includes some rules that are so counter-intuitive
+that it is hard get into the habit of using them, especially if code
+is developed on a compiler that does not enforce the standard
+as rigorously.
+
+The most frequent problem arises in classes that
+are derived from a templated base class.
+<A HREF="http://www.open-std.org/jtc1/sc22/wg21/">The C++ standard</A>
+insists that all references to member functions (or member data) that
+is defined in the templated base class must be preceded by  "this->"
+when the reference is made in the derived class.  Allegedly, this
+is necessary to avoid ambiguities, though it is not entirely clear what this
+ambiguity is supposed to be... Here is a driver code that illustrates
+the problem.
+
+\include broken_this_demo.cc
+
+If you compile this with sufficiently recent versions of the
+<A HREF="http://gcc.gnu.org/">gcc compilers</A>, using the
+flag \c -DUSE_BROKEN_VERSION, the compilation will fail with the
+following error:
+\code
+broken_this_demo.cc: In member function 'void SomeDerivedClass<TEMPLATE_PARAMETER>::output_template_parameter()':
+broken_this_demo.cc:55: error: there are no arguments to 'say_hello_world' that depend on a template parameter, so a declaration of 'say_hello_world' must be available
+broken_this_demo.cc:55: error: (if you use '-fpermissive', G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+\endcode
+
+You may not only stumble across this problem in one of your own codes but
+it is also possible that some code in the library itself still violates
+this rule. This is because templated classes are only built when
+needed and it is conceivable that \c oomph-lib's suite of
+self-tests do not instantiate all templated classes that exist in the
+library. If you encounter any such problems, check if
+putting a "this->" in front of the function call fixes the problem.
+If it does, <A HREF="../../contact/html/index.html">let us know!</A>
+
+
+
+########################################################################
+<HR>
+
+
+\subsection rodata Warning about "discarded sections" during linking
+
+When linking, some versions of the <a href="http://gcc.gnu.org/">
+gcc compiler</a> produce warnings
+about references to "discarded sections" being referenced. Here's an
+example:
+
+\code
+/usr/bin/ld: `.gnu.linkonce.t._ZNK5oomph8QElementILj3ELj3EE14vertex_node_ptERKj' referenced in section `.rodata' of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o): defined in discarded section `.gnu.linkonce.t._ZNK5oomph8QElementILj3ELj3EE14vertex_node_ptERKj' of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o)
+\endcode
+
+We admit to being slightly baffled by this. Other libraries seem to suffer
+from the same problem (google for .\c rodata \c discarded, say),
+but as far as we can tell no solution has ever been suggested, nor does one
+seem to be required. The executable works fine. Upgrade to a newer version of
+<a href="http://gcc.gnu.org/">gcc?</a>
+
+
+#########################################################################
+<HR>
+
+\subsection seg_fault My driver code compiles but dies with a segmentation fault
+
+Suggestions:
+- Run \c Problem::self_test() before solving the problem. This function
+  performs a large number of sanity checks and reports
+  any inconsistencies in the data structure. \n\n
+- Recompile the relevant libraries
+  with the PARANOID and RANGE_CHECKING flags set.
+  Segmentation faults are often caused by out-of-bounds access
+  to STL containers. Since > 95% (?) of the containers used in \c oomph-lib
+  are \c Vectors (\c oomph-lib's wrapper to the STL vector class,
+  with optional range checking) they can easily be detected.
+  Make sure to re-compile again with RANGE_CHECKING switched
+  off before you start any production runs -- the run-time overheads
+  incurred by range-checking are significant!  \n\n
+- Recompile the relevant libraries and your driver code with
+  the debugging flag ("-g" for the gnu compiler suite) switched on
+  and all optimisation disabled. Re-run the code in a debugger
+  (\c gdb or its GUI-based equivalent
+  <A HREF="http://www.gnu.org/software/ddd/">ddd</a>) to (try to!) find out
+  where the segmentation fault occurred.
+  [\b Careful: If the segmentation fault is caused by a pointer problem,
+  this naive inspection can be quite misleading -- tell-tale signs are that
+  the traceback displays a non-sensical call stack, e.g. a function being
+  called "out of nowhere"; variables that have just been given
+  values not existing; etc.] \n\n
+
+#########################################################################
+<HR>
+
+\subsection wrong_results My driver code runs but it produces incorrect/non-sensical results
+
+Suggestions:
+- Have you applied the boundary conditions correctly? Check this by looping
+  over all nodes in your mesh and documenting the pinned-status
+  of their nodal values, using the function \c Node::is_pinned(...). \n\n
+- Have you passed the required (function) pointers to the elements?
+  Most element constructors assign default values for any physical parameters,
+  e.g. the Reynolds number in the Navier-Stokes
+  elements. Similarly, most source functions etc. default to zero. For
+  instance \c oomph-lib's Poisson elements solve the Laplace equation unless a
+  function pointer to the source function is specified. \n\n
+- In time-dependent problems, have you assigned suitable initial
+  conditions? Note that, if you use elements that are based on
+  the ALE formulation (and all time-dependent elements should be!)
+  you must initialise the history values for the nodal positions,
+  even if the mesh is stationary!
+  See the discussion of \c oomph-lib's timestepping procedures in the
+  context of <A HREF="../../unsteady_heat/two_d_unsteady_heat/html/index.html">
+  the unsteady heat equation</A> for details. \n\n
+- Have you implemented the relevant "action" functions, such as
+  \c Problem::actions_before_implicit_timestep()
+  to update any time-dependent boundary conditions?
+.
+
+#########################################################################
+<HR>
+
+\subsection newton_divergence The Newton solver diverges
+
+Suggestions:
+- \c oomph-lib's default solver \c Problem::newton_solve(...)
+  will converge quadratically, provided  \n\n
+  - a "good" initial guess for the solution has been assigned,
+  .
+  \n
+  or
+  \n
+  - the problem is linear.
+  .
+  \n
+  If the Newton solver fails to converge for a nonlinear problem,
+  try to identify a related linear problem and use continuation
+  to generate a sequence of good initial guesses. For instance,
+  to solve the Navier-Stokes equations at a Reynolds number
+  of 500, say, start by solving the problem for zero Reynolds number
+  (in which case the problem becomes linear so that the Newton
+  method converges in one iteration); increase the Reynolds number
+  by 50, say, and re-solve. Repeat this procedure until
+  the desired value of the Reynolds number is reached.
+  \n\n
+  \b Note: \c oomph-lib also provides automatic continuation methods,
+  based on Keller's arclength continuation, but at the moment,
+  no tutorials exist for these.
+  \n\n
+- If you have tried the above and the Newton method fails to converge
+  even for a linear version of your problem, the most likely reasons are
+  that
+  \n\n
+  -# You have developed a new element and made a mistake in the
+     implementation of the element's Jacobian matrix.
+     To check if this is the case, comment out the
+     function that computes the element's Jacobian matrix,
+     i.e. the element member functions
+     \c get_jacobian(...) or \c fill_in_contribution_to_jacobian(...).
+     \c oomph-lib will then use the default implementation
+     of these functions in the \c GeneralisedElement base class
+     to compute the Jacobian matrices by finite-differencing.
+     The executable is likely to run more slowly since the
+     finite-difference-based computation
+     is unlikely to be as efficient as the customised
+     implementation for your specific element, but if the
+     Newton method then converges, you know where to look for your
+     bug! You may also want to check for any un-initialised variables.
+     They are the most likely culprits if your code behaves
+     differently at different levels of optimisation as
+     more aggressive optimisation may suppress any default
+     initialisations of data -- in fact, you should never rely on that
+     anyway!
+     \n\n
+  -# Your problem contains "dependent" variables, such as
+     the nodal positions in a free-boundary problem. If the
+     node update in response to changes in the shape of the
+     domain boundary is performed by an algebraic node update
+     procedure (using \c AlgebraicNodes, \c SpineNodes or nodes whose
+     position is updated by a \c MacroElement/Domain - based
+     procedure), the position of the nodes in the "bulk" mesh
+     must be updated whenever the Newton method updates the unknowns.
+     This is most easily done by calling \c Mesh::node_update() in
+     \c Problem::actions_before_newton_convergence_check().
+  .
+.
+
+
+
+#########################################################################
+\n\n
+<HR>
+<HR>
+#########################################################################
+
+\section cust_opt Customisation and optimisation
+
+\subsection tecplot I don't have tecplot. How do I change oomph-lib's output so it can be displayed by my own plotting package?
+
+\c oomph-lib's high-level post-processing routines output the results
+of the computations in a form that is suitable for display with
+<A HREF="http://www.tecplot.com">tecplot</A>, a powerful commercial
+plotting package. Purists may find it odd that an open-source library
+should choose an output format that is customised for a commercial
+software package. We tend to agree... Our only excuse is that
+<A HREF="http://www.tecplot.com">tecplot</A> is very very good,
+and without it we would have found it extremely difficult to create
+many of the plots shown in the
+<A HREF="../../example_code_list/html/index.html">tutorials.</A>
+[If you know of any open-source plotting package whose capabilities
+are comparable to those of <A HREF="http://www.tecplot.com">tecplot</A>,
+<A HREF="../../contact/html/index.html">let us know!]</A>
+
+
+Angelo Simone has written a python script that converts \c oomph-lib's
+output to the vtu format that can be read by
+<a href="http://www.paraview.org">paraview</a>,
+an open-source 3D plotting package. The conversion script
+can currently deal with output from meshes that are composed
+of 2D quad elements -- the extension to 3D is work in progress.
+Use of the conversion script is documented
+<A HREF="../../paraview/html/index.html">in another tutorial.</A>
+
+
+It is possible to display \c oomph-lib's default output (in more
+elementary  form, obviously) with <A HREF="http://www.gnuplot.info">
+gnuplot</A>. The trick is to specify the \c using option in
+<A HREF="http://www.gnuplot.info">gnuplot</A>'s
+plot commands -- in this mode <A HREF="http://www.gnuplot.info">gnuplot</A>
+ignores tecplot's "ZONE" commands. For instance, trying to
+plot the x-y data created by
+<A HREF="../../poisson/one_d_poisson/html/index.html">the demo code
+for the solution of the 1D Poisson equation</A> with
+\code
+plot "RESLT/soln0.dat"
+\endcode
+will fail because
+<A HREF="http://www.gnuplot.info">gnuplot</A> gets confused by
+the \c ZONE specifications required by
+<A HREF="http://www.tecplot.com">tecplot.</A> However,
+\code
+plot "RESLT/soln0.dat" using 1:2
+\endcode
+works.
+
+
+If the data is too complex to be displayed by
+<A HREF="http://www.gnuplot.info">gnuplot</A>, you may wish to customise the
+output for your preferred plotting package. This is easily done as
+\c oomph-lib creates its output element-by-element. The elements'
+various \c output(...) functions are virtual
+functions that can easily be overloaded in a user-defined
+wrapper class.
+
+Here is an example driver code that illustrates how to change the
+output from \c oomph-lib's \c QPoissonElement family of
+1D-line/2D-quad/3D-brick Poisson elements so that they
+output the string "Hello world".
+
+
+We include \c oomph-lib's \c generic and \c poisson library
+headers:
+\dontinclude customising_output.cc
+\until poisson.h
+
+and then create a customised version of the Poisson elements
+in which we overload the tecplot-based
+\c QPoissonElement<DIM,NNODE_1D>::output(...) function, defined in
+the \c poisson library:
+
+\dontinclude customising_output.cc
+\skipline The wrapper class for the element
+\until end extension of
+
+If we now call the output function, the version defined
+in the customised element is used. The remaining
+implementation of the Poisson element remains
+unchanged.
+
+\until end of main
+
+\n\n
+
+#########################################################################
+<HR>
+
+\n\n
+
+\subsection element_too_general oomph-lib's implementation of the Navier-Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?
+
+Many of \c oomph-lib's equations classes (or elements) are implemented
+in great generality. For instance, our discretisation of the
+Navier-Stokes equations includes a source term in the continuity equation,
+and body force terms in the momentum equations; it allows switching between
+the stress-divergence and simplified forms of the viscous terms;
+it includes the mesh velocity into the ALE formulation of the
+time-derivatives; etc. This makes the elements very versatile
+and robust. However, the generality/robustness comes at a price:
+Even though we provide default values for most functions
+(e.g. the body force terms default to zero), their
+evaluation requires a finite amount of CPU time. If you wish
+to use the elements in a simple application in which the
+Navier-Stokes equations are solved in a fixed domain, without
+any body forces or other source terms, say, you may wish to disable
+the additional functionality.
+
+This is easily done: After all, \c oomph-lib is open-source software and
+you can therefore change anything you want! In principle, you
+could edit the source code in the \c src/navier_stokes directory and
+delete (or at least comment out) all the functionality that you do not require.
+However, this is probably a risky step as it will break all
+demo codes (used during \c oomph-lib's self-test procedure) that use
+some of the features that you are not interested in. We therefore
+recommend copying the content of the directory \c src/navier_stokes
+into a new directory, e.g. \c src/my_navier_stokes
+and to edit the copied sources. Follow the instructions in the
+\c oomph-lib <A HREF="https://github.com/oomph-lib/oomph-lib">
+GitHub repository</A> to turn these sources into a separate
+library against which you can link.
+
+#########################################################################
+
+\n\n
+<HR>
+<HR>
+###################################################################
+
+
+
+\section nav Finding your way around the distribution
+
+
+########################################################################
+<HR>
+
+\subsection too_much There is so much information -- how do I get started?
+
+Yes, \c oomph-lib does contain a lot of code and a lot of
+documentation. How to get started obviously depends on your background:
+Are you familiar with the finite element method? How good is your
+knowledge of C++? Etc. \n\n
+Here are some possible "routemaps" around the library:
+
+- <B>You are familiar with the finite element method and have a fairly
+  good knowledge of C++</B>\n\n
+  - Have a look through the <A HREF="../../example_code_list/html/index.html">
+    list of example codes</A> to get a feeling for \c oomph-lib's
+    capabilities. Pick a problem that interests you and
+    study the associated tutorial. Copy the driver code into your
+    own directory and play with it. \n\n
+  - Once you have played with a few example codes, you may wish to
+    to learn more about \c oomph-lib's
+    <A HREF="../../the_data_structure/html/index.html">overall data
+    structure,</A> or find out <A HREF="../../optimisation/html/index.html">
+    how to optimise the library</A> for your particular application. \n\n
+- <B>You have never used finite element methods but have a fairly
+   good knowledge of C++</B>\n\n
+   - Study the <A HREF="../../intro/html/index.html">
+     "Top Down" introduction</A>. This document includes a "low tech" overview
+     of the mathematical/theoretical background and contrasts
+     procedural implementations of the finite element method with
+     the object-oriented approach adopted in \c oomph-lib. \n\n
+   - Consult the <A HREF="../../quick_guide/html/index.html">
+     (Not-So-)Quick-Guide</A> to learn how to construct
+     basic \c oomph-lib objects for your problem: \c Problems,
+     \c Meshes, \c FiniteElements, etc. \n\n
+   - Continue with the steps suggested above.
+     \n\n
+- <B>You have never used finite element methods and are a newcomer to
+  C++</B>\n\n
+   - Buy <A HREF="http://www.math.wayne.edu/~yang/">Daoqi Yang</A>
+     brilliant book
+    <A HREF="http://www.springeronline.com/sgw/cda/frontpage/0,11855,4-40007-22-2105335-0,00.html?changeHeader=true">
+     C++ and Object-Oriented Numeric Computing for Scientists and
+     Engineers.</A> Read it! Pretty much everything in this book is
+     relevant for some parts of \c oomph-lib. You should at least
+     understand: \n\n
+     - The procedural aspects of C++ (basic types, functions and control
+       structures).
+     - Namespaces.
+     - Classes (private, protected and public members; inheritance
+       and multiple inheritance;
+       virtual and pure virtual functions; base classes and derived
+       classes; static and dynamic casts).
+     - Templates and template instantiations.
+     - The standard template library (STL).
+     .
+     \n\n
+   - Continue with the steps suggested above.
+     \n\n
+   .
+.
+
+
+
+
+\n\n
+
+#########################################################################
+<HR>
+
+\n\n
+
+\subsection includes Where is this class/function/... defined?
+
+Assume you have studied one of the
+<A HREF="../../example_code_list/html/index.html">example codes</A>
+and wish to find out more about the implementation of a particular
+class or function that is used there. How do you find
+its source code and/or its full documentation?
+
+Generally, a class/function that is used in a demo code
+can only be defined in one of two places:
+-# In the demo driver code itself.
+-# In an included file and/or an associated library.
+.
+\c oomph-lib's <A HREF="../../example_code_list/html/index.html">
+tutorials</A> tend to provide a fairly complete annotated
+listing of the relevant driver codes; if the function you are
+interested in is not mentioned explicitly in the tutorial, it is most
+likely to be defined in an include file. You can inspect the driver code
+in its entirety by following the link at the end of the
+tutorials. If you cannot find the class/function there,
+it must be defined in one of the include files listed
+at the beginning of the source code.
+
+  The included files themselves can either be located in
+the same directory as the demo driver (the directory also tends
+to be mentioned at the end of the tutorial) or in one of
+\c oomph-lib's sub-libraries. The source code for these
+is located in the sub-directories of the \c src directory. Often
+the class/function is defined in a source file
+with an "obvious" name; if not, use \c grep to find it.
+This can, of course, be done recursively. For instance,
+the command
+
+\code
+find . \( -name '*.h' -o -name '*.cc' \) -exec grep -H FiniteElement {} \;
+\endcode
+
+issued in \c oomph-lib's top-level directory
+will search through the entire distribution to
+locate files that contain the string "FiniteElement".
+
+
+You can also use the html-based representation of \c oomph-lib's
+data structure, created by <A HREF="http://www.doxygen.org">doxygen,</A>
+in the <A HREF="../../the_data_structure/html/index.html">"bottom-up"
+discussion of the data structure.</A> (Note that the search
+menu may not work on your browser.)
+
+#########################################################################
+\n\n
+<HR>
+<HR>
+###################################################################
+
+
+\section all_else_fails If all else fails...
+
+
+\subsection reporting How to report problems/bugs
+
+If all else fails and you think you have found a bug in the library,
+make sure you follow these steps:
+-# Isolate the problem: Try to identify the shortest driver code
+   that still produces the problem.\n\n
+-# Double-check the <A HREF="../../the_data_structure/html/index.html">
+   relevant documentation</A>, the installation
+   instructions on <code>oomph-lib</code>'s
+   <a href="https://github.com/oomph-lib/oomph-lib">GitHub repository</A>
+   and the other FAQs listed here.\n\n
+-# Does the problem persist when you compile the library and
+   your test code without optimisation,
+   and when the \c RANGE_CHECKING and
+   \c PARANOID flags are set? \n\n
+-# Does the problem occur with a sufficiently recent version of
+   the <A HREF="http://gcc.gnu.org/">gcc compiler suite</A>?\n\n
+-# If the above steps identify the problem,
+   <A HREF="../../contact/html/index.html">let us know</A>, ideally
+   with a bug fix! \n\n
+-# If you can't fix the problem yourself, get in touch
+   <A HREF="../../contact/html/index.html">either directly</A>,
+   or via our GitHub-based
+   bug tracking system, accessible online at
+   \n\n
+   <CENTER>
+   <a href="https://github.com/oomph-lib/oomph-lib/issues">
+   https://github.com/oomph-lib/oomph-lib/issues</a>
+   </CENTER>
+   \n
+   and provide as much information as possible (clear description
+   of the problem; the source code; the
+   Makefile; details of the compiler and compilation flags used;
+   any warning/error messages that are displayed during the
+   compilation of the library or the driver code itself; etc.) \n\n
+.
+
+
+#########################################################################
+
+

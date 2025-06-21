@@ -1,0 +1,459 @@
+\chapter{Coding conventions and C++-\/style}
+\hypertarget{index}{}\label{index}\index{Coding conventions and C++-\/style@{Coding conventions and C++-\/style}}
+This document provides an overview of the general coding conventions that are used throughout {\ttfamily oomph-\/lib}. Knowledge of these conventions will greatly facilitate the use of the library. Contributors to the library are expected to adhere to these standards.
+
+~\newline
+ Note that following our move to Git\+Hub we have started to use \href{https://clang.llvm.org/docs/ClangFormat.html}{\texttt{ clang-\/format}} to automatically format our sources (but only those in the {\ttfamily src} directory). The formatting rules are contained in the {\ttfamily .clang-\/format} file in the {\ttfamily oomph-\/lib} home directory. To run this on your own sources you need at least version 10.\+0.\+0 of {\ttfamily clang-\/format.} Note that some of the code shown below would be changed slightly by {\ttfamily clang-\/format} but this concerns mainly minor whitespace adjustments and the beauty of automatic formatting means that you don\textquotesingle{}t have to worry about these too much. \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_naming}{}\doxysection{\texorpdfstring{Naming conventions}{Naming conventions}}\label{index_naming}
+\hypertarget{index_filenames}{}\doxysubsection{\texorpdfstring{File names}{File names}}\label{index_filenames}
+All C++ source files end with the standard extensions \texorpdfstring{$\ast$}{*}.h and \texorpdfstring{$\ast$}{*}.cc.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \texorpdfstring{$\ast$}{*}}.h\+: Contains the class definitions and any inline functions.
+\item {\ttfamily \texorpdfstring{$\ast$}{*}}.cc\+: Contains all non-\/inline member functions that can be compiled once and for all. This includes
+\begin{DoxyItemize}
+\item member functions of classes that do not have any template parameters
+\item member functions of templated classes for which it is known a priori which instantiations are required. Examples are classes that are templated by the spatial dimension. In this case we\textquotesingle{}re unlikely to require instantiations for any values other than 0,1,2 and 3.
+\end{DoxyItemize}
+\item {\ttfamily \texorpdfstring{$\ast$}{*}}.template.\+cc\+: Contains any non-\/inline member function of templated classes. This file must be included (together with the corresponding {\ttfamily \texorpdfstring{$\ast$}{*}}.h file) when a specific instantiation of a templated class is required. For instance, most specific {\ttfamily Mesh} classes are templated by the element type and the mesh writer can obviously not predict which element types his/her specific mesh is going to be used with.
+\end{DoxyItemize}\hypertarget{index_variables}{}\doxysubsection{\texorpdfstring{General variables}{General variables}}\label{index_variables}
+
+\begin{DoxyItemize}
+\item General variables are all lowercase
+\item Variables that contain multiple words contain underscores to separate them, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FiniteElement*\ surface\_element\_pt;\ }
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_classes}{}\doxysubsection{\texorpdfstring{Classes}{Classes}}\label{index_classes}
+
+\begin{DoxyItemize}
+\item Classes start with capital letter, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Shape\ }
+
+\end{DoxyCode}
+
+\item If the class name contains multiple words, the first letter of any subsequent word also gets capitalised, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }AlgebraicElement\ }
+
+\end{DoxyCode}
+ {\bfseries{Note\+:}} No underscores in class names.
+\end{DoxyItemize}\hypertarget{index_private_public}{}\doxysubsection{\texorpdfstring{Private data and access functions to  private data}{Private data and access functions to  private data}}\label{index_private_public}
+Use a capital first letter for private data, and the all-\/lowercase equivalent for the access functions. Examples\+:
+\begin{DoxyItemize}
+\item This is a declaration for a private data member\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Pointer\ to\ boundary\ node}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ Node*\ Boundary\_node\_pt;\ }
+
+\end{DoxyCode}
+
+\item Here are two public access functions to the private data member\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ to\ boundary\ node\ (const\ version)}}
+\DoxyCodeLine{\textcolor{comment}{}\ Node*\ boundary\_node\_pt()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ Boundary\_node\_pt;\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ to\ boundary\ node}}
+\DoxyCodeLine{\textcolor{comment}{}\ Node*\&\ boundary\_node\_pt()\ \{\textcolor{keywordflow}{return}\ Boundary\_node\_pt;\}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+{\bfseries{Note\+:}} Do {\bfseries{not}} use public data -- ever! Make it private and and provide an access function -- even if it seems "{}perfectly  obvious"{} at the time of writing the class that the internal storage for the data item is "{}never going to be changed"{}.\hypertarget{index_pointers}{}\doxysubsection{\texorpdfstring{Pointers}{Pointers}}\label{index_pointers}
+
+\begin{DoxyItemize}
+\item Pointers and access functions to pointers are identified explicitly by the postfix {\itshape \+\_\+pt} to the variable names, as shown in the previous examples.
+\end{DoxyItemize}\hypertarget{index_numbering}{}\doxysubsection{\texorpdfstring{Access functions to containers}{Access functions to containers}}\label{index_numbering}
+Many classes have member functions that provide access to data in private containers (e.\+g. vectors); they are usually accompanied by a member function that returns the number of entries in that container. Naming conventions\+:
+\begin{DoxyItemize}
+\item Use singular for the access function to the container, i.\+e. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Return\ pointer\ to\ e-\/th\ element}}
+\DoxyCodeLine{FiniteElement*\ element\_pt(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ e);}
+
+\end{DoxyCode}
+ rather than {\ttfamily elements\+\_\+pt(...)} 
+\item Use a prefix `{\ttfamily n'} for the access function for the number of entries in the container, i.\+e. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Total\ number\ of\ elements}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ nelement();}
+
+\end{DoxyCode}
+ {\bfseries{Notes\+:}} (i) No underscore between the "{}n"{} and the container\textquotesingle{}s name; you can then use the underscore for the name of the local variable that stores the value, e.\+g. {\ttfamily unsigned} {\ttfamily n\+\_\+element} {\ttfamily =} {\ttfamily my\+\_\+mesh\+\_\+pt-\/\texorpdfstring{$>$}{>}nelement()}; (ii) No trailing {\ttfamily \+\_\+pt} in the function that returns the number of objects in the container.
+\end{DoxyItemize}\hypertarget{index_template}{}\doxysubsection{\texorpdfstring{Template parameters}{Template parameters}}\label{index_template}
+
+\begin{DoxyItemize}
+\item Template parameters are all caps, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ DIM>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }NavierStokesEquations}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+\item Sometimes it is necessary to expose the template parameter to make it accessible to the user. This should be done by adding a public {\ttfamily static} {\ttfamily const} copy of the parameter to the class\textquotesingle{}s member data, using the prefix {\ttfamily TEMPLATE\+\_\+\+PARAMETER\+\_\+} , so the template parameter {\ttfamily DIM} in the above example would be exposed like this\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Publicly\ exposed\ template\ parameter}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ TEMPLATE\_PARAMETER\_DIM\ =\ DIM;}
+
+\end{DoxyCode}
+ Note the exposure of template parameters is optional and is only implemented when we needed it. Feel free to modify existing code yourself if required -- {\ttfamily oomph-\/lib} is open source!
+\end{DoxyItemize}\hypertarget{index_verbose}{}\doxysubsection{\texorpdfstring{Use descriptive function/variable names}{Use descriptive function/variable names}}\label{index_verbose}
+
+\begin{DoxyItemize}
+\item Make sure you choose descriptive names for functions and variables, even if the names become long.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_layout}{}\doxysection{\texorpdfstring{Layout etc.}{Layout etc.}}\label{index_layout}
+\hypertarget{index_include_files}{}\doxysubsection{\texorpdfstring{Position of include statements}{Position of include statements}}\label{index_include_files}
+
+\begin{DoxyItemize}
+\item Place include statements at the beginning of each file.
+\end{DoxyItemize}\hypertarget{index_layout_blocks}{}\doxysubsection{\texorpdfstring{Layout of blocks}{Layout of blocks}}\label{index_layout_blocks}
+
+\begin{DoxyItemize}
+\item Braces on separate lines (unless the content is extremely short) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<10;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}doing\ something"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_indentation}{}\doxysubsection{\texorpdfstring{Indentation}{Indentation}}\label{index_indentation}
+
+\begin{DoxyItemize}
+\item Indentation of blocks etc. should follow the emacs standards.
+\end{DoxyItemize}\hypertarget{index_layout_functions_etc}{}\doxysubsection{\texorpdfstring{Layout of functions, classes, etc.}{Layout of functions, classes, etc.}}\label{index_layout_functions_etc}
+
+\begin{DoxyItemize}
+\item Precede all functions by a comment block, enclosed between lines of `===' 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ =============================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)short\ (add\ \(\backslash\)short\ to\ make\ sure\ that\ multi-\/line\ descriptions}}
+\DoxyCodeLine{\textcolor{comment}{///\ appear\ in\ doxygen's\ short\ documentation.\ Include\ lists\ with\ items}}
+\DoxyCodeLine{\textcolor{comment}{///\ -\/\ first\ item}}
+\DoxyCodeLine{\textcolor{comment}{///\ -\/\ second\ item}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ \ -\/\ first\ item\ of\ sublist}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ \ -\/\ second\ item\ of\ sublist}}
+\DoxyCodeLine{\textcolor{comment}{///\ \ \ .\ //end\ of\ sublist}}
+\DoxyCodeLine{\textcolor{comment}{///\ .\ //end\ of\ main\ list}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//\ =============================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ SomeClass::some\_function()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i=0;i<10;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}doing\ something"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ Note the triple slash "{}///"{} in the comment block that preceeds the function definition -- comments contained in such lines are automatically extracted by doxygen and inserted into the code documentation.
+\item All member data is defined (and annotated) on a separate line, otherwise doxygen gets confused. So use 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Number\ of\ elements}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ Nelement;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Number\ of\ nodes}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{unsigned}\ Nnode;}
+
+\end{DoxyCode}
+ rather than 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Number\ of\ elements\ and\ nodes}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ Nelement,\ Nnode;}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_oomph}{}\doxysubsection{\texorpdfstring{The oomph-\/lib namespace}{The oomph-lib namespace}}\label{index_oomph}
+
+\begin{DoxyItemize}
+\item {\ttfamily oomph-\/lib} is contained in its own namespace, {\ttfamily oomph}, to avoid clashes of class names with those of other (third-\/party) libraries. If there is no danger of name clashes, the entire {\ttfamily oomph} namespace may be imported at the beginning of each driver code by placing the statement 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }oomph;}
+
+\end{DoxyCode}
+ at the beginning of the source code (after the included header files). Any additions to the library (this includes the instantiation of templated {\ttfamily oomph-\/lib} classes inside a driver code!) must be included into the {\ttfamily oomph} namespace by surrounding the code by 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }oomph}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Additions\ to\ the\ library\ go\ here...}}
+\DoxyCodeLine{\ \ \ \ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_std}{}\doxysubsection{\texorpdfstring{Namespace pollution}{Namespace pollution}}\label{index_std}
+
+\begin{DoxyItemize}
+\item To avoid namespace pollution, the namespace {\ttfamily std} {\bfseries{must}} {\bfseries{not}} be included globally in any header files. The statement 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
+
+\end{DoxyCode}
+ may only be used in driver codes, in \texorpdfstring{$\ast$}{*}.cc files, or inside specific functions in a \texorpdfstring{$\ast$}{*}.h file.
+\end{DoxyItemize}\hypertarget{index_layout_classes}{}\doxysubsection{\texorpdfstring{Layout of class definitions and include guards.}{Layout of class definitions and include guards.}}\label{index_layout_classes}
+Here is an example of a complete header file, including include guards and library includes. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ OOMPH\_SOME\_CLASS\_HEADER\ \ \ \ \ }\textcolor{comment}{//\ Assuming\ that\ the\ file\ is}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ OOMPH\_SOME\_CLASS\_HEADER\ \ \ \ \ }\textcolor{comment}{//\ called\ some\_class.h}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Include\ generic\ oomph-\/lib\ library}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}generic.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Add\ to\ oomph-\/lib\ namespace}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }oomph}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ =============================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Waffle\ about\ what\ the\ class\ does\ etc.}}
+\DoxyCodeLine{\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//\ =============================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }SomeClass\ :\ \textcolor{keyword}{public}\ SomeBaseClass}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Constructor:\ Pass\ coefficients\ n1\ and\ n2}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ SomeClass(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n1,\ \textcolor{keyword}{const}\ T\&\ n2)\ :\ N1(n1),\ N2(n2)}
+\DoxyCodeLine{\ \ \ \ \ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ coefficient}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ n1()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ N1;}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ Access\ function\ to\ other\ coefficient}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \textcolor{keyword}{inline}\ T\&\ n2()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ N2;}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ ///\ Coefficient}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ N1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ ///\ Second\ coefficient}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \ \ \ \ T\ \ N2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{preprocessor}{\ \#endif}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Order of public/protected/private may be reversed but the declarations should always be explicit (even though everything is private by default).
+\item Note the prefix {\ttfamily  OOMPH\+\_\+\texorpdfstring{$\ast$}{*}} in the include guard. This is to avoid clashes with include guards of other libraries.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_debug}{}\doxysection{\texorpdfstring{Debugging etc.}{Debugging etc.}}\label{index_debug}
+\hypertarget{index_paranoia}{}\doxysubsection{\texorpdfstring{The PARANOID flag and error handling}{The PARANOID flag and error handling}}\label{index_paranoia}
+
+\begin{DoxyItemize}
+\item Implement optional validation routines, self-\/tests, and other sanity checks via conditional compilation, using the compiler flag PARANOID, so that the relevant statements are only activated if {\ttfamily -\/DPARANOID} is specified as a compilation flag for the C++ compiler. If errors are detected, a meaningful diagnostic should be issued, by throwing an {\ttfamily Oomph\+Lib\+Error}. If the code is compiled without the PARANOID flag, all sanity checks are bypassed -- good for the overall execution speed, bad for error handling... The user can choose. ~\newline
+~\newline
+ Here\textquotesingle{}s an example\+: ~\newline
+~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Has\ a\ global\ mesh\ already\ been\ built?}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}(Mesh\_pt!=0)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ std::string\ error\_message\ =}
+\DoxyCodeLine{\ \ \ \textcolor{stringliteral}{"{}Problem::build\_global\_mesh()\ called,\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ error\_message\ +=\ \textcolor{stringliteral}{"{}\ but\ a\ global\ mesh\ has\ already\ been\ built:\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ error\_message\ +=\ \textcolor{stringliteral}{"{}Problem::Mesh\_pt\ is\ not\ zero!\(\backslash\)n"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{throw}\ OomphLibError(error\_message,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+
+\item {\ttfamily oomph-\/lib} also has an object that allows warning messages to be issued in a uniform format. Here\textquotesingle{}s an example of its use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Was\ it\ a\ duplicate?}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ nel\_now=element\_set\_pt.size();}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (nel\_now==nel\_before)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ std::ostringstream\ warning\_stream;}
+\DoxyCodeLine{\ \ warning\_stream\ \ <<\textcolor{stringliteral}{"{}WARNING:\ "{}}\ <<\ std::endl}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\textcolor{stringliteral}{"{}Element\ "{}}\ <<\ e\ <<\ \textcolor{stringliteral}{"{}\ in\ submesh\ "{}}\ <<\ imesh}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\textcolor{stringliteral}{"{}\ is\ a\ duplicate\ \(\backslash\)n\ and\ was\ ignored\ when\ assembling\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\textcolor{stringliteral}{"{}global\ mesh."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ OomphLibWarning(warning\_stream.str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_range}{}\doxysubsection{\texorpdfstring{Range checking}{Range checking}}\label{index_range}
+
+\begin{DoxyItemize}
+\item Most access functions that provide indexed access to a private container, do, in fact, access a private STL vector. Explicit range checking for these (frequent!) cases can be avoided by changing to container to Vector class instead. Vectors performs automatic range checking, if the {\ttfamily generic} library is compiled with the {\ttfamily RANGE\+\_\+\+CHECKING} flag, i.\+e. if {\ttfamily -\/DRANGE\+\_\+\+CHECKING} is specified as a compilation flag for the C++ compiler. {\bfseries{Note\+:}} While it is generally a good idea to compile with {\ttfamily PARANOID} while developing code, {\ttfamily RANGE\+\_\+\+CHECKING} is {\bfseries{very}} {\bfseries{expensive}} and is therefore activated via a second independent flag. We only tend to active this flag as a last resort, typically to track down particularly stubborn segmentation faults.
+\end{DoxyItemize}\hypertarget{index_self_test}{}\doxysubsection{\texorpdfstring{Self test routines}{Self test routines}}\label{index_self_test}
+
+\begin{DoxyItemize}
+\item Every sufficiently complex class should come with its own 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ self\_test()\ }
+
+\end{DoxyCode}
+ routine which returns 1 for failure, 0 for successful test.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_other}{}\doxysection{\texorpdfstring{Other conventions}{Other conventions}}\label{index_other}
+\hypertarget{index_constness}{}\doxysubsection{\texorpdfstring{Const-\/ness}{Const-ness}}\label{index_constness}
+
+\begin{DoxyItemize}
+\item Use const wherever applicable (arguments, member functions,...)
+\item Always provide const and non-\/const overloaded subscript operators.
+\item Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Return\ i-\/th\ coordinate\ of\ Point}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\&\ operator[](\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ i)\{\textcolor{keywordflow}{return}\ x[i];\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Return\ i-\/th\ coordinate\ of\ Point\ -\/-\/\ const\ version}}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ operator[](\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ i)\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ x[i];\}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_unsigned}{}\doxysubsection{\texorpdfstring{Only use int if a variable can actually take negative values}{Only use int if a variable can actually take negative values}}\label{index_unsigned}
+
+\begin{DoxyItemize}
+\item Just as the name of a variable gives some indication of its likely use, its type does too. For instance this code fragment ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ counter}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ counter=0;}
+
+\end{DoxyCode}
+ ~\newline
+ immediately raises the question why the programmer anticipates circumstances in which the counter might be negative. Are negative values used to indicate special cases; etc? If the name of the variable was chosen correctly (i.\+e. if the variable really is used as a counter) then ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ counter}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ counter=0;}
+
+\end{DoxyCode}
+ ~\newline
+ is much clearer and therefore preferable, even if the two versions of the code would, of course, give the same result.
+\end{DoxyItemize}\hypertarget{index_pass_by_reference}{}\doxysubsection{\texorpdfstring{Only use "{}pass by reference"{}}{Only use "pass by reference"}}\label{index_pass_by_reference}
+
+\begin{DoxyItemize}
+\item Arguments to functions should only be passed "{}by reference"{}, not "{}by value"{}. Use "{}pass by constant reference"{} if you want to ensure the const-\/ness of any (input) arguments.
+\item To "{}encourage"{} this behaviour, most {\ttfamily oomph-\/lib} objects have (deliberately) broken copy constructors and assignment operators, making a "{}pass by value"{} impossible. The only exceptions are cases in which we could see a good reason why a fully-\/functional, non-\/memory-\/leaking copy/assignment operator might be required.
+\end{DoxyItemize}\hypertarget{index_break_copy}{}\doxysubsection{\texorpdfstring{Provide fully-\/functional or deliberately-\/broken copy constructors and assignment operators}{Provide fully-functional or deliberately-broken copy constructors and assignment operators}}\label{index_break_copy}
+
+\begin{DoxyItemize}
+\item For the reasons mentioned above, "{}passing by value"{} is discouraged and we have only implemented copy constructors for very few classes. To make the use of C++\textquotesingle{}s default copy constructor impossible (as their accidental use may lead to serious memory leaks) all classes should either have a deliberately-\/broken copy constructor or provide a "{}proper"{} implementation (as in the case of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Vector} class). The same applies to assignment operators. ~\newline
+ ~\newline
+ With the advent of C++11, this can be done easily using the {\ttfamily delete} keyword\+: ~\newline
+~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ Broken\ copy\ constructor}}
+\DoxyCodeLine{Mesh(\textcolor{keyword}{const}\ Mesh\&\ dummy)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Broken\ assignment\ operator}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void}\ operator=(\textcolor{keyword}{const}\ Mesh\&)\ =\ \textcolor{keyword}{delete};}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_order_of_args}{}\doxysubsection{\texorpdfstring{Order of arguments}{Order of arguments}}\label{index_order_of_args}
+
+\begin{DoxyItemize}
+\item If values are returned from a function, put them at the end of the argument list.
+\item "{}\+Time"{} arguments always come first, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{///\ \(\backslash\)short\ Return\ FE\ interpolated\ coordinate\ x[i]\ at\ local\ coordinate\ s}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ at\ previous\ timestep\ t\ (t=0:\ present;\ t>0:\ previous\ timestep)}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ interpolated\_x(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ t,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Vector<double>\&\ s,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ i)\ \textcolor{keyword}{const};}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_brackets}{}\doxysubsection{\texorpdfstring{Access to elements in containers}{Access to elements in containers}}\label{index_brackets}
+
+\begin{DoxyItemize}
+\item Avoid access via square brackets (i.\+e. via operators) and write access functions instead, as they can be overloaded more easily.
+\end{DoxyItemize}\hypertarget{index_boolean}{}\doxysubsection{\texorpdfstring{Boolean member data}{Boolean member data}}\label{index_boolean}
+
+\begin{DoxyItemize}
+\item Avoid access to boolean member data via trivial wrapper functions that return references. These constructions lead to somewhat ugly driver codes and can lead to code that appears to set a boolean, when it does not. Instead the status of the boolean should be modified by two set/unset or enable/disable subroutines (i.\+e. returning void) and tested using a (const) has\+\_\+ or is\+\_\+ function that returns a bool . For example 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Boolean\ to\ indicate\ whether\ documentation\ should\ be\ on\ or\ off}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ Doc\_flag;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Enable\ documentation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ enable\_doc()\ \{Doc\_flag=\textcolor{keyword}{true};\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Disable\ documentation}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{void}\ disable\_doc()\ \{Doc\_flag=\textcolor{keyword}{false};\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Test\ whether\ documentation\ is\ on\ or\ off}}
+\DoxyCodeLine{\textcolor{comment}{}\ \ \textcolor{keywordtype}{bool}\ is\_doc\_enabled()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ Doc\_flag;\}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_dont_use_macros}{}\doxysubsection{\texorpdfstring{Macros}{Macros}}\label{index_dont_use_macros}
+
+\begin{DoxyItemize}
+\item Don\textquotesingle{}t use macros! There are two exceptions to this rule\+: We use the macros {\ttfamily OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION} and {\ttfamily OOMPH\+\_\+\+CURRENT\+\_\+\+FUNCTION} to make the file name, line number and current function name available to the {\ttfamily Oomph\+Lib\+Exception} object -- the object that is thrown if a run-\/time error is detected.
+\end{DoxyItemize}\hypertarget{index_inlining}{}\doxysubsection{\texorpdfstring{Inlining}{Inlining}}\label{index_inlining}
+
+\begin{DoxyItemize}
+\item Inline all simple set/get functions by placing them into the \texorpdfstring{$\ast$}{*}.h file.
+\item {\bfseries{Careful\+:}} Inlined functions should not contain calls to member functions of classes that are defined in other files as this can lead to triangular dependencies.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

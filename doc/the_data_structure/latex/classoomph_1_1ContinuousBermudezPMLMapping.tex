@@ -1,0 +1,83 @@
+\doxysection{oomph\+::Continuous\+Bermudez\+PMLMapping Class Reference}
+\hypertarget{classoomph_1_1ContinuousBermudezPMLMapping}{}\label{classoomph_1_1ContinuousBermudezPMLMapping}\index{oomph::ContinuousBermudezPMLMapping@{oomph::ContinuousBermudezPMLMapping}}
+
+
+A mapping function proposed by Bermudez et al, similar to the one above but is continuous across the inner Pml boundary appears to be the best for Time\+Harmonic\+Linear\+Elasticity and so this will be the default mapping.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+mapping\+\_\+functions.\+h$>$}
+
+Inheritance diagram for oomph\+::Continuous\+Bermudez\+PMLMapping\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ContinuousBermudezPMLMapping}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ContinuousBermudezPMLMapping_acd6005d275ef8e5a659fb402facacb67}{Continuous\+Bermudez\+PMLMapping}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1ContinuousBermudezPMLMapping_a46c5e7d168dc1557697f08c49d5b63ea}{gamma}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nu\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+width\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{wavenumber\+\_\+squared}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&alpha\+\_\+shift=0.\+0)
+\begin{DoxyCompactList}\small\item\em Overwrite the pure Pml mapping coefficient function to return the coeffcients proposed by Bermudez et al. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1PMLMapping}{oomph\+::\+PMLMapping}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLMapping_a9642a52ea6b195a6da7d732b58030467}{PMLMapping}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A mapping function proposed by Bermudez et al, similar to the one above but is continuous across the inner Pml boundary appears to be the best for Time\+Harmonic\+Linear\+Elasticity and so this will be the default mapping. 
+
+Definition at line \mbox{\hyperlink{pml__mapping__functions_8h_source_l00090}{90}} of file \mbox{\hyperlink{pml__mapping__functions_8h_source}{pml\+\_\+mapping\+\_\+functions.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ContinuousBermudezPMLMapping_acd6005d275ef8e5a659fb402facacb67}\label{classoomph_1_1ContinuousBermudezPMLMapping_acd6005d275ef8e5a659fb402facacb67} 
+\index{oomph::ContinuousBermudezPMLMapping@{oomph::ContinuousBermudezPMLMapping}!ContinuousBermudezPMLMapping@{ContinuousBermudezPMLMapping}}
+\index{ContinuousBermudezPMLMapping@{ContinuousBermudezPMLMapping}!oomph::ContinuousBermudezPMLMapping@{oomph::ContinuousBermudezPMLMapping}}
+\doxysubsubsection{\texorpdfstring{ContinuousBermudezPMLMapping()}{ContinuousBermudezPMLMapping()}}
+{\footnotesize\ttfamily oomph\+::\+Continuous\+Bermudez\+PMLMapping\+::\+Continuous\+Bermudez\+PMLMapping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{pml__mapping__functions_8h_source_l00094}{94}} of file \mbox{\hyperlink{pml__mapping__functions_8h_source}{pml\+\_\+mapping\+\_\+functions.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ContinuousBermudezPMLMapping_a46c5e7d168dc1557697f08c49d5b63ea}\label{classoomph_1_1ContinuousBermudezPMLMapping_a46c5e7d168dc1557697f08c49d5b63ea} 
+\index{oomph::ContinuousBermudezPMLMapping@{oomph::ContinuousBermudezPMLMapping}!gamma@{gamma}}
+\index{gamma@{gamma}!oomph::ContinuousBermudezPMLMapping@{oomph::ContinuousBermudezPMLMapping}}
+\doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
+{\footnotesize\ttfamily std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Continuous\+Bermudez\+PMLMapping\+::gamma (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{pml\+\_\+width\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{wavenumber\+\_\+squared,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{alpha\+\_\+shift = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overwrite the pure Pml mapping coefficient function to return the coeffcients proposed by Bermudez et al. 
+
+return $\gamma=1 + (i/k)(1/|outer_boundary - x|-1/|pml width|)$
+
+Implements \mbox{\hyperlink{classoomph_1_1PMLMapping_a748bcc76abc77d6df3ea83a174ebfb65}{oomph\+::\+PMLMapping}}.
+
+
+
+Definition at line \mbox{\hyperlink{pml__mapping__functions_8h_source_l00098}{98}} of file \mbox{\hyperlink{pml__mapping__functions_8h_source}{pml\+\_\+mapping\+\_\+functions.\+h}}.
+
+
+
+References \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__mapping__functions_8h}{pml\+\_\+mapping\+\_\+functions.\+h}}\end{DoxyCompactItemize}

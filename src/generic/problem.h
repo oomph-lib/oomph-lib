@@ -1,0 +1,3126 @@
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// A generic problem class to keep MH happy
+
+// Include guards to prevent multiple inclusion of this header
+#ifndef OOMPH_PROBLEM_CLASS_HEADER
+#define OOMPH_PROBLEM_CLASS_HEADER
+
+
+// Config header
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
+// OOMPH-LIB headers
+#include "Vector.h"
+#include "matrices.h"
+#include "generalised_timesteppers.h"
+#include "explicit_timesteppers.h"
+#include "double_vector_with_halo.h"
+#include <complex>
+#include <map>
+
+
+namespace oomph
+{
+  // Forward definition for Data class
+  class Data;
+
+  // Forward definition for Time class
+  class Time;
+
+  // Forward definition for TimeStepper class
+  class TimeStepper;
+
+  // Forward definition for Mesh class
+  class Mesh;
+
+  // Forward definition for RefineableElement class
+  class RefineableElement;
+
+  // Forward definition for PRefineableElement class
+  class PRefineableElement;
+
+  // Forward definition for FiniteElement class
+  class FiniteElement;
+
+  // Forward definition for the GeneralisedElement class
+  class GeneralisedElement;
+
+  // Forward definition for the Linearsolver class
+  class LinearSolver;
+
+  // Forward definition for the Eigensolver class
+  class EigenSolver;
+
+  // Forward definition for the assembly handler
+  class AssemblyHandler;
+
+  // Forward definition for sum of matrices class
+  class SumOfMatrices;
+
+  // Forward definition for inverted element errors
+  class InvertedElementError;
+
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// The Problem class
+  ///
+  /// The main components of a Problem are:
+  /// - a pointer to the (global) Mesh (which provides ordered
+  ///   access to the nodes, elements, etc of all submeshes in the problem --
+  ///   if there are any)
+  /// - pointers to the submeshes (if there are any)
+  /// - pointers to any global Data
+  /// - a pointer to the global Time
+  /// - pointers to the Timestepper used in the problem
+  /// - a pointer to the linear solver that will be used in Newton's method
+  /// - pointers to all DOFs in the problem.
+  ///
+  /// Obviously, at this level in the code hierarchy, many things become
+  /// very problem-dependent but when setting up a specific problem
+  /// (as a class that inherits from Problem), the problem constructor
+  /// will/should typically have a structure similar to this:
+  /// \code
+  /// // Set up a timestepper
+  ///  TimeStepper* time_stepper_pt=new Steady;
+  ///
+  /// // Add timestepper to problem
+  ///  add_time_stepper_pt(time_stepper_pt);
+  ///
+  /// // Build and assign mesh
+  ///  Problem::mesh_pt() = new
+  ///  SomeMesh<ELEMENT_TYPE>(Nelement,time_stepper_pt);
+  ///
+  /// // Set the boundary conditions for this problem: All nodes are
+  /// // free by default -- just pin the ones that have Dirichlet conditions
+  /// // here (boundary 0 in this example)
+  /// unsigned i_bound = 0
+  /// unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+  ///   for (unsigned inod=0;inod<num_nod;inod++)
+  ///    {
+  ///      mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
+  ///    }
+  ///
+  /// // Complete the build of all elements so they are fully functional
+  ///
+  ///  // Setup equation numbering scheme
+  ///  oomph_info <<"Number of equations: " << assign_eqn_numbers() <<
+  ///  std::endl;
+  /// \endcode
+  /// For time-dependent problems, we can then use
+  /// \code assign_initial_values_impulsive (); \endcode
+  /// to generate an initial guess (for an impulsive start) and
+  /// the problem can then be solved, e.g. using the steady
+  /// or unsteady Newton solvers
+  /// \code newton_solve() \endcode
+  /// or
+  /// \code unsteady_newton_solve(...) \endcode
+  ///
+  //=======================================================================
+  class Problem : public ExplicitTimeSteppableObject
+  {
+    // The handler classes need to be friend
+    friend class FoldHandler;
+    friend class PitchForkHandler;
+    friend class HopfHandler;
+    template<unsigned NNODE_1D>
+    friend class PeriodicOrbitAssemblyHandler;
+    friend class BlockFoldLinearSolver;
+    friend class BlockPitchForkLinearSolver;
+    friend class AugmentedBlockFoldLinearSolver;
+    friend class AugmentedBlockPitchForkLinearSolver;
+    friend class BlockHopfLinearSolver;
+
+
+  private:
+    /// The mesh pointer
+    Mesh* Mesh_pt;
+
+    /// Vector of pointers to submeshes
+    Vector<Mesh*> Sub_mesh_pt;
+
+    /// Pointer to the linear solver for the problem
+    LinearSolver* Linear_solver_pt;
+
+    /// Pointer to the linear solver used for explicit time steps (this is
+    /// likely to be different to the linear solver for newton solves because
+    /// explicit time steps only involve inverting a mass matrix. This can be
+    /// done very efficiently by, e.g. CG with a diagonal predconditioner).
+    LinearSolver* Mass_matrix_solver_for_explicit_timestepper_pt;
+
+    /// Pointer to the eigen solver for the problem
+    EigenSolver* Eigen_solver_pt;
+
+    // Pointer to handler
+    AssemblyHandler* Assembly_handler_pt;
+
+    /// Pointer to the default linear solver
+    LinearSolver* Default_linear_solver_pt;
+
+    /// Pointer to the default eigensolver
+    EigenSolver* Default_eigen_solver_pt;
+
+    /// Pointer to the default assembly handler
+    AssemblyHandler* Default_assembly_handler_pt;
+
+    /// Pointer to global time for the problem
+    Time* Time_pt;
+
+    /// The Vector of time steppers (there could be many
+    /// different ones in multiphysics problems)
+    Vector<TimeStepper*> Time_stepper_pt;
+
+    /// Pointer to a single explicit timestepper
+    ExplicitTimeStepper* Explicit_time_stepper_pt;
+
+    /// Pointer to vector for backup of dofs
+    Vector<double>* Saved_dof_pt;
+
+    /// Has default set_initial_condition function been called?
+    /// Default: false
+    bool Default_set_initial_condition_called;
+
+    /// Use the globally convergent newton method
+    bool Use_globally_convergent_newton_method;
+
+    /// Boolean to indicate that empty
+    /// actions_before_read_unstructured_meshes() function has been called.
+    bool Empty_actions_before_read_unstructured_meshes_has_been_called;
+
+    /// Boolean to indicate that empty
+    /// actions_after_read_unstructured_meshes() function has been called.
+    bool Empty_actions_after_read_unstructured_meshes_has_been_called;
+
+    /// Boolean to indicate whether local dof pointers should be
+    /// stored in the elements
+    bool Store_local_dof_pt_in_elements;
+
+    /// Use values from the time stepper predictor as an initial guess
+    bool Use_predictor_values_as_initial_guess;
+
+  protected:
+    /// Vector of pointers to copies of the problem used in adaptive
+    /// bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
+    Vector<Problem*> Copy_of_problem_pt;
+
+    /// Map used to determine whether the derivatives with respect to
+    /// a parameter should be finite differenced. The default is that
+    /// finite differences should be used
+    std::map<double*, bool> Calculate_dparameter_analytic;
+
+    /// Map used to determine whether the hessian products should be
+    /// computed using finite differences. The default is that finite
+    /// differences will be used
+    bool Calculate_hessian_products_analytic;
+
+  public:
+    /// Hook for debugging. Can be overloaded in driver code; argument
+    /// allows identification of where we're coming from
+    virtual void debug_hook_fct(const unsigned& i)
+    {
+      oomph_info << "Called empty hook fct with i=" << i << std::endl;
+    }
+
+    /// Function to turn on analytic calculation of the parameter
+    /// derivatives in continuation and bifurcation detection problems
+    inline void set_analytic_dparameter(double* const& parameter_pt)
+    {
+      Calculate_dparameter_analytic[parameter_pt] = true;
+    }
+
+    /// Function to turn off analytic calculation of the parameter
+    /// derivatives in continuation and bifurcation detection problems
+    inline void unset_analytic_dparameter(double* const& parameter_pt)
+    {
+      // Find the iterator to the parameter
+      std::map<double*, bool>::iterator it =
+        Calculate_dparameter_analytic.find(parameter_pt);
+      // If the parameter has been found, erase it
+      if (it != Calculate_dparameter_analytic.end())
+      {
+        Calculate_dparameter_analytic.erase(it);
+      }
+    }
+
+    /// Function to determine whether the parameter derivatives
+    /// are calculated analytically
+    inline bool is_dparameter_calculated_analytically(
+      double* const& parameter_pt)
+    {
+      // If the entry is found then the iterator returned from the find
+      // command will NOT be equal to the end and the expression will
+      // return true, otherwise it will return false
+      return (Calculate_dparameter_analytic.find(parameter_pt) !=
+              Calculate_dparameter_analytic.end());
+    }
+
+    /// Function to turn on analytic calculation of the parameter
+    /// derivatives in continuation and bifurcation detection problems
+    inline void set_analytic_hessian_products()
+    {
+      Calculate_hessian_products_analytic = true;
+    }
+
+    /// Function to turn off analytic calculation of the parameter
+    /// derivatives in continuation and bifurcation detection problems
+    void unset_analytic_hessian_products()
+    {
+      Calculate_hessian_products_analytic = false;
+    }
+
+    /// Function to determine whether the hessian products
+    /// are calculated analytically
+    inline bool are_hessian_products_calculated_analytically()
+    {
+      return Calculate_hessian_products_analytic;
+    }
+
+    /// Set all pinned values to zero.
+    /// Used to set boundary conditions to be homogeneous in the copy
+    /// of the problem  used in adaptive bifurcation tracking
+    /// (ALH: TEMPORARY HACK, WILL BE FIXED)
+    void set_pinned_values_to_zero();
+
+
+    /// Flag to allow suppression of warning messages re reading in
+    /// unstructured meshes during restart.
+    static bool Suppress_warning_about_actions_before_read_unstructured_meshes;
+
+
+  private:
+    /// Private helper function that actually performs the unsteady
+    /// "doubly"  adaptive Newton solve. See actual (non-helper) functions
+    /// for description of parameters.
+    double doubly_adaptive_unsteady_newton_solve_helper(
+      const double& dt,
+      const double& epsilon,
+      const unsigned& max_adapt,
+      const unsigned& suppress_resolve_after_spatial_adapt,
+      const bool& first,
+      const bool& shift = true);
+
+
+    /// Helper function to do compund refinement of (all) refineable
+    /// (sub)mesh(es) uniformly as many times as specified in vector and
+    /// rebuild problem; doc refinement process. Set boolean argument
+    /// to true if you want to prune immediately after refining the meshes
+    /// individually.
+    void refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                              DocInfo& doc_info,
+                              const bool& prune);
+
+    /// Helper function to do compund p-refinement of (all) p-refineable
+    /// (sub)mesh(es) uniformly as many times as specified in vector and
+    /// rebuild problem; doc refinement process. Set boolean argument
+    /// to true if you want to prune immediately after refining the meshes
+    /// individually.
+    void p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                                DocInfo& doc_info,
+                                const bool& prune);
+
+    /// Helper function to re-setup the Base_mesh enumeration
+    /// (used during load balancing) after pruning
+    void setup_base_mesh_info_after_pruning();
+
+    /// Private helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    /// This version uses vectors of pairs.
+    virtual void sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    /// Private helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    /// This version uses two vectors.
+    virtual void sparse_assemble_row_or_column_compressed_with_two_vectors(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    /// Private helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    /// This version uses maps
+    virtual void sparse_assemble_row_or_column_compressed_with_maps(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    /// Private helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    /// This version uses lists
+    virtual void sparse_assemble_row_or_column_compressed_with_lists(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    /// Private helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    /// This version uses lists
+    virtual void sparse_assemble_row_or_column_compressed_with_two_arrays(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    /// Vector of global data: "Nobody" (i.e. none of the elements etc.)
+    /// is "in charge" of this Data so it would be overlooked when it
+    /// comes to equation-numbering, timestepping etc. Including
+    /// (pointers) to such Data in here, puts the Problem itself
+    /// "in charge" of these tasks.
+    Vector<Data*> Global_data_pt;
+
+    /// A function that performs the guts of the continuation
+    /// derivative calculation in arc length continuation problems.
+    void calculate_continuation_derivatives_helper(const DoubleVector& z);
+
+    /// A function that performs the guts of the continuation
+    /// derivative calculation in arc-length continuation problems using
+    /// finite differences
+    void calculate_continuation_derivatives_fd_helper(
+      double* const& parameter_pt);
+
+    /// A function that is used to adapt a bifurcation-tracking
+    /// problem, which requires separate interpolation of the
+    /// associated eigenfunction. The error measure is chosen to be
+    /// a suitable combination of the errors in the base flow and the
+    /// eigenfunction
+    void bifurcation_adapt_helper(unsigned& n_refined,
+                                  unsigned& n_unrefined,
+                                  const unsigned& bifurcation_type,
+                                  const bool& actually_adapt = true);
+
+    /// A function that is used to document the errors used
+    /// in the adaptive solution of bifurcation problems.
+    void bifurcation_adapt_doc_errors(const unsigned& bifurcation_type);
+
+    // ALH_TEMP_DEVELOPMENT
+  protected:
+    /// The distribution of the DOFs in this problem.
+    /// This object is created in the Problem constructor and setup
+    /// when assign_eqn_numbers(...) is called.
+    /// If this problem is distributed then this distribution will match
+    /// the distribution of the equation numbers.
+    /// If this problem is not distributed then this distribution will
+    /// be uniform over all processors.
+    LinearAlgebraDistribution* Dof_distribution_pt;
+
+  private:
+#ifdef OOMPH_HAS_MPI
+
+    /// Helper method that returns the (unique) global equations to which
+    /// the elements in the range el_lo to el_hi contribute on this
+    /// processor using the given assembly_handler
+    void get_my_eqns(AssemblyHandler* const& assembly_handler_pt,
+                     const unsigned& el_lo,
+                     const unsigned& el_hi,
+                     Vector<unsigned>& my_eqns);
+
+    /// Helper method to assemble CRDoubleMatrices from distributed
+    /// on multiple processors.
+    void parallel_sparse_assemble(
+      const LinearAlgebraDistribution* const& dist_pt,
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residuals);
+
+    /// A private helper function to
+    /// copy the haloed equation numbers into the halo equation numbers,
+    /// either for the problem's one and only mesh or for all of its
+    /// submeshes. Bools control if we deal with data associated with
+    /// external halo/ed elements/nodes or the "normal" halo/ed ones.
+    void copy_haloed_eqn_numbers_helper(const bool& do_halos,
+                                        const bool& do_external_halos);
+
+    /// Private helper function to remove repeated data
+    /// in external haloed elements in specified mesh. Bool is true if some data
+    /// was removed -- this usually requires re-running through certain
+    /// parts of the equation numbering procedure.
+    void remove_duplicate_data(Mesh* const& mesh_pt,
+                               bool& actually_removed_some_data);
+
+
+    /// Consolidate external halo node storage by removing nulled out
+    /// pointers in external halo and haloed schemes for all meshes.
+    void remove_null_pointers_from_external_halo_node_storage();
+
+    /// Helper function to re-assign the first and last elements to be
+    /// assembled by each processor during parallel assembly for
+    /// non-distributed problem.
+    void recompute_load_balanced_assembly();
+
+    /// Boolean to switch on assessment of load imbalance in parallel
+    /// assembly of distributed problem
+    bool Doc_imbalance_in_parallel_assembly;
+
+    /// Flag to use "default partition" during load balance.
+    /// Should only be set to true when run in validation mode.
+    bool Use_default_partition_in_load_balance;
+
+    /// First element to be assembled by given processor for
+    /// non-distributed problem (only kept up to date when default assignment
+    /// is used)
+    Vector<unsigned> First_el_for_assembly;
+
+    /// Last element (plus one) to be assembled by given processor
+    /// for non-distributed problem (only kept up to date when default
+    /// assignment is used)
+    Vector<unsigned> Last_el_plus_one_for_assembly;
+
+    /// Boolean indicating that the division of elements over processors
+    /// during the assembly process must be re-load-balanced.
+    /// (only used for non-distributed problems)
+    bool Must_recompute_load_balance_for_assembly;
+
+    /// Map which stores the correspondence between a root element and
+    /// its element number (plus one) within the global mesh at the point
+    /// when it is distributed. NB a root element in this instance is one
+    /// of the elements in the uniformly-refined mesh at the point when
+    /// Problem::distribute() is called, since these elements become roots
+    /// on each of the processors involved in the distribution. Null when
+    /// element doesn't exist following the adjustment of this when pruning.
+    std::map<GeneralisedElement*, unsigned> Base_mesh_element_number_plus_one;
+
+
+    /// Vector to store the correspondence between a root element and
+    /// its element number within the global mesh at the point when it is
+    /// distributed. NB a root element in this instance is one of the elements
+    /// in the uniformly-refined mesh at the point when Problem::distribute()
+    /// is called, since these elements become roots on each of the processors
+    /// involved in the distribution. Null when element doesn't exist
+    /// following the adjustment of this when pruning.
+    Vector<GeneralisedElement*> Base_mesh_element_pt;
+
+#endif
+
+  protected:
+    /// Vector of pointers to dofs
+    Vector<double*> Dof_pt;
+
+    /// Counter that records how many elements contribute to each dof.
+    /// Used to determine the (discrete) arc-length automatically.
+    /// It really should be an integer, but is a double so that the
+    /// distribution information can be used for distributed problems
+    DoubleVectorWithHaloEntries Element_count_per_dof;
+
+    /// Function that populates the Element_counter_per_dof vector
+    /// with the number of elements that contribute to each dof. For example,
+    /// with linear elements in 1D each dof contains contributions from two
+    /// elements apart from those on the boundary. Returns the total number
+    /// of elements in the problem
+    unsigned setup_element_count_per_dof();
+
+
+#ifdef OOMPH_HAS_MPI
+
+    /// Storage for assembly times (used for load balancing)
+    Vector<double> Elemental_assembly_time;
+
+    /// Pointer to the halo scheme for any global vectors
+    /// that have the Dof_distribution
+    DoubleVectorHaloScheme* Halo_scheme_pt;
+
+    /// Storage for the halo degrees of freedom (only required)
+    /// when accessing via the global equation number in distributed problems
+    Vector<double*> Halo_dof_pt;
+
+    /// Function that is used to setup the halo scheme
+    void setup_dof_halo_scheme();
+
+#endif
+
+    //--------------------- Newton solver parameters
+
+    /// Relaxation fator for Newton method (only a fractional Newton
+    /// correction is applied if this is less than 1; default 1).
+    double Relaxation_factor;
+
+    /// The Tolerance below which the Newton Method is deemed to have
+    /// converged
+    double Newton_solver_tolerance;
+
+    /// Maximum number of Newton iterations
+    unsigned Max_newton_iterations;
+
+    /// Actual number of Newton iterations taken during the most recent
+    /// iteration
+    unsigned Nnewton_iter_taken;
+
+    /// Maximum residuals at start and after each newton iteration
+    Vector<double> Max_res;
+
+    /// Maximum desired residual:
+    /// if the maximum residual exceeds this value, the program will exit
+    double Max_residuals;
+
+    /// Bool to specify what to do if a Newton solve fails within a
+    /// time adaptive solve. Default (false) is to half the step and try
+    /// again. If true then crash instead.
+    bool Time_adaptive_newton_crash_on_solve_fail;
+
+    /// Is re-use of Jacobian in Newton iteration enabled? Default: false
+    bool Jacobian_reuse_is_enabled;
+
+    /// Has a Jacobian been computed (and can therefore be re-used
+    /// if required)? Default: false
+    bool Jacobian_has_been_computed;
+
+    /// Boolean flag indicating if we're dealing with a linear or
+    /// nonlinear Problem -- if set to false the Newton solver will not check
+    /// the residual before or after the linear solve. Set to true by default;
+    /// can be over-written in specific Problem class.
+    bool Problem_is_nonlinear;
+
+    /// Protected boolean flag to halt program execution
+    /// during sparse assemble process to assess peak memory
+    /// usage. Initialised to false (obviously!)
+    bool Pause_at_end_of_sparse_assembly;
+
+    /// Protected boolean flag to provide comprehensive timimings
+    /// during problem distribution. Initialised to false.
+    bool Doc_time_in_distribute;
+
+    /// Flag to determine which sparse assembly method to use
+    /// By default we use assembly by vectors of pairs.
+    unsigned Sparse_assembly_method;
+
+    /// Enumerated flags to determine which sparse assembly method is used
+    enum Assembly_method
+    {
+      Perform_assembly_using_vectors_of_pairs,
+      Perform_assembly_using_two_vectors,
+      Perform_assembly_using_maps,
+      Perform_assembly_using_lists,
+      Perform_assembly_using_two_arrays
+    };
+
+    /// the number of elements to initially allocate for a matrix row
+    /// within the sparse_assembly_with_two_arrays(...) method (if a matrix
+    /// of this size has not been assembled already). If a matrix of this size
+    /// has been assembled then the number of elements in each row in that
+    /// matrix is used as the initial allocation
+    unsigned Sparse_assemble_with_arrays_initial_allocation;
+
+    /// the number of elements to add to a matrix row when the initial
+    /// allocation is exceeded within the sparse_assemble_with_two_arrays(...)
+    /// method.
+    unsigned Sparse_assemble_with_arrays_allocation_increment;
+
+    /// the number of elements in each row of a compressed matrix
+    /// in the previous matrix assembly.
+    Vector<Vector<unsigned>> Sparse_assemble_with_arrays_previous_allocation;
+
+    /// A tolerance used to determine whether the entry in a sparse
+    /// matrix is zero. If it is then storage need not be allocated.
+    double Numerical_zero_for_sparse_assembly;
+
+    /// Protected helper function that is used to assemble the Jacobian
+    /// matrix in the case when the storage is row or column compressed.
+    /// The boolean Flag indicates
+    /// if we want compressed row format (true) or compressed column.
+    virtual void sparse_assemble_row_or_column_compressed(
+      Vector<int*>& column_or_row_index,
+      Vector<int*>& row_or_column_start,
+      Vector<double*>& value,
+      Vector<unsigned>& nnz,
+      Vector<double*>& residual,
+      bool compressed_row_flag);
+
+    double FD_step_used_in_get_hessian_vector_products;
+
+    //---------------------Explicit time-stepping parameters
+
+    /// Is re-use of the mass matrix in explicit timestepping enabled
+    /// Default:false
+    bool Mass_matrix_reuse_is_enabled;
+
+    /// Has the mass matrix been computed (and can therefore be reused)
+    /// Default: false
+    bool Mass_matrix_has_been_computed;
+
+    //---------------------Discontinuous control flags
+    /// Is the problem a discontinuous one, i.e. can the
+    /// elemental contributions be treated independently. Default: false
+    bool Discontinuous_element_formulation;
+
+
+    //--------------------- Adaptive time-stepping parameters
+
+    /// Minimum desired dt: if dt falls below this value, exit
+    double Minimum_dt;
+
+    /// Maximum desired dt
+    double Maximum_dt;
+
+    /// Maximum possible increase of dt between time-steps in adaptive
+    /// schemes
+    double DTSF_max_increase;
+
+    /// Minimum allowed decrease of dt between time-steps in adaptive
+    /// schemes. Lower scaling values will reject the time-step (and retry
+    /// with a smaller dt).
+    double DTSF_min_decrease;
+
+    /// Safety factor to ensure we are aiming for a target error, TARGET,
+    /// that is below our tolerance:
+    ///     TARGET = Target_error_safety_factor * TOL
+    /// For this to make sense Target_error_safety_factor should be <1.0. If
+    /// Keep_temporal_error_below_tolerance is set to true (default) then,
+    /// without this, timesteps suggested by the adaptive time-stepper can be
+    /// expected to lead to rejection (because the error exceeds TOL) about
+    /// half of the time.
+    /// Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value
+    /// around 0.25-0.40 to be the most efficient, however this is highly
+    /// problem and timestepper dependent and sometimes as high as 0.95 may be
+    /// effective at improving the robustness of timestep prediction.
+    ///
+    /// Note: Despite this, we are setting this to default to 1.0 to prevent
+    /// introducing any change in the default behaviour of oomph-lib for now.
+    double Target_error_safety_factor;
+
+    /// If  Minimum_dt_but_still_proceed positive, then dt will not be
+    /// reduced below this value during adaptive timestepping and the
+    /// computation will continue with this value, accepting the larger
+    /// errors that this will incur). Note: This option is disabled by default
+    /// as this value is initialised to -1.0.
+    double Minimum_dt_but_still_proceed;
+
+
+    //---------------------  Arc-length continuation paramaters
+
+    /// Boolean to control whether arc-length should be scaled
+    bool Scale_arc_length;
+
+    /// Proportion of the arc-length to taken by the parameter
+    double Desired_proportion_of_arc_length;
+
+    /// Value of the scaling parameter required so that the parameter
+    /// occupies the desired proportion of the arc length. NOTE: If you wish
+    /// to change this then make sure to set the value of Scale_arc_length
+    /// to false to ensure the value of this isn't overwritten during the
+    /// arc-length process. Instead of changing this variable, it's better
+    /// to actually update the Desired_proportion_of_arc_length value.
+    double Theta_squared;
+
+    /// Storage for the sign of the global Jacobian
+    int Sign_of_jacobian;
+
+    /// The direction of the change in parameter that will ensure that
+    /// a branch is followed in one direction only
+    double Continuation_direction;
+
+    /// Storage for the derivative of the global parameter wrt arc-length
+    double Parameter_derivative;
+
+    /// Storage for the present value of the global parameter
+    double Parameter_current;
+
+    /// Boolean to control original or new storage of dof stuff
+    bool Use_continuation_timestepper;
+
+    /// Storage for the single static continuation timestorage object
+    static ContinuationStorageScheme Continuation_time_stepper;
+
+    /// Storage for the offset for the continuation derivatives from the
+    /// original dofs (default is 1, but this will be differnet when continuing
+    /// bifurcations and periodic orbits)
+    unsigned Dof_derivative_offset;
+
+    /// Storage for the offset for the current values of dofs from the
+    /// original dofs (default is 2, but this will be differnet when continuing
+    /// bifurcations and periodic orbits)
+    unsigned Dof_current_offset;
+
+    /// Storage for the derivative of the problem variables wrt arc-length
+    Vector<double> Dof_derivative;
+
+    /// Storage for the present values of the variables
+    Vector<double> Dof_current;
+
+    /// Storage for the current step value
+    double Ds_current;
+
+    /// The desired number of Newton Steps to reach convergence at each
+    /// step along the arc
+    unsigned Desired_newton_iterations_ds;
+
+    /// Minimum desired value of arc-length
+    double Minimum_ds;
+
+    /// Boolean to control bifurcation detection via determinant of Jacobian
+    bool Bifurcation_detection;
+
+    /// Boolean to control wheter bisection is used to located bifurcation
+    bool Bisect_to_find_bifurcation;
+
+    /// Boolean to indicate whether a sign change has occured in the Jacobian
+    bool First_jacobian_sign_change;
+
+    /// Boolean to indicate whether an arc-length step has been taken
+    bool Arc_length_step_taken;
+
+    /// Boolean to specify which scheme to use to calculate the continuation
+    /// derivatievs
+    bool Use_finite_differences_for_continuation_derivatives;
+
+  public:
+    /// If we have MPI return the "problem has been distributed" flag,
+    /// otherwise it can't be distributed so return false.
+    bool distributed() const
+    {
+#ifdef OOMPH_HAS_MPI
+      return Problem_has_been_distributed;
+#else
+      return false;
+#endif
+    }
+
+#ifdef OOMPH_HAS_MPI
+
+
+    /// enum for distribution of distributed jacobians.
+    ///  1 - Automatic - the Problem distribution is employed, unless any
+    /// processor has number of rows equal to 110% of N/P, in which case
+    /// uniform distribution is employed.
+    ///  2 - Problem - the jacobian on processor p only contains rows that
+    /// correspond to equations that are on this processor. (minimises
+    /// communication)
+    ///  3 - Uniform - each processor holds as close to N/P matrix rows as
+    /// possible. (very well load balanced)
+    enum Distributed_problem_matrix_distribution{Default_matrix_distribution,
+                                                 Problem_matrix_distribution,
+                                                 Uniform_matrix_distribution};
+
+    /// accesss function to the distributed matrix distribution method
+    ///  1 - Automatic - the Problem distribution is employed, unless any
+    /// processor has number of rows equal to 110% of N/P, in which case
+    /// uniform distribution is employed.
+    ///  2 - Problem - the jacobian on processor p only contains rows that
+    /// correspond to equations that are on this processor. (minimises
+    /// communication)
+    ///  3 - Uniform - each processor holds as close to N/P matrix rows as
+    /// possible. (very well load balanced)
+    Distributed_problem_matrix_distribution& distributed_problem_matrix_distribution()
+    {
+      return Dist_problem_matrix_distribution;
+    }
+
+    /// Enable doc of load imbalance in parallel
+    /// assembly of distributed problem
+    void enable_doc_imbalance_in_parallel_assembly()
+    {
+      Doc_imbalance_in_parallel_assembly = true;
+    }
+
+    /// Disable doc of load imbalance in parallel
+    /// assembly of distributed problem
+    void disable_doc_imbalance_in_parallel_assembly()
+    {
+      Doc_imbalance_in_parallel_assembly = false;
+    }
+
+    /// Return vector of most-recent elemental assembly times
+    /// (used for load balancing). Zero sized if no Jacobian has been
+    /// computed since last re-assignment of equation numbers
+    Vector<double> elemental_assembly_time()
+    {
+      return Elemental_assembly_time;
+    }
+
+    /// Clear storage of most-recent elemental assembly times
+    /// (used for load balancing). Next load balancing operation
+    /// will be based on the number of elements associated with a tree root.
+    void clear_elemental_assembly_time()
+    {
+      Must_recompute_load_balance_for_assembly = true;
+      Elemental_assembly_time.clear();
+    }
+
+  private:
+    /// Load balance helper routine: Get data to be sent to other
+    /// processors during load balancing and other information about
+    /// re-distribution.
+    /// - target_domain_for_local_non_halo_element: Input, generated by METIS.
+    ///   target_domain_for_local_non_halo_element[e] contains the number
+    ///   of the domain [0,1,...,nproc-1] to which non-halo element e on THE
+    ///   CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
+    ///   elements is the same as in the Problem's mesh, with the halo
+    ///   elements being skipped.
+    /// - send_n: Output, number of data to be sent to each processor
+    /// - send_data: Output, storage for all values to be sent to all processors
+    /// - send_displacement: Output, start location within send_data for data to
+    ///   be sent to each processor
+    /// - max_refinement_level_overall: Output, max. refinement level of any
+    ///   element
+    void get_data_to_be_sent_during_load_balancing(
+      const Vector<unsigned>& element_domain_on_this_proc,
+      Vector<int>& send_n,
+      Vector<double>& send_data,
+      Vector<int>& send_displacement,
+      Vector<unsigned>& old_domain_for_base_element,
+      Vector<unsigned>& new_domain_for_base_element,
+      unsigned& max_refinement_level_overall);
+
+    /// Get flat-packed refinement pattern for each root element in
+    /// current mesh (labeled by unique number of root element in unrefined base
+    /// mesh). The vector stored for each root element contains the following
+    /// information:
+    /// - First entry: Number of tree nodes (not just leaves!) in refinement
+    ///   tree emanating from this root [Zero if root element is not refineable]
+    /// - Loop over all refinement levels
+    ///   - Loop over all tree nodes (not just leaves!)
+    ///     - If associated element exists when the mesh has been refined to
+    ///       this level (either because it has been refined to this level or
+    ///       because it's less refined): 1
+    ///       - If the element is to be refined: 1; else: 0
+    ///     - else (element doesn't exist when mesh is refined to this level
+    ///       (because it's more refined): 0
+    ///     .
+    ///   .
+    /// .
+    void get_flat_packed_refinement_pattern_for_load_balancing(
+      const Vector<unsigned>& old_domain_for_base_element,
+      const Vector<unsigned>& new_domain_for_base_element,
+      const unsigned& max_refinement_level_overall,
+      std::map<unsigned, Vector<unsigned>>&
+        flat_packed_refinement_info_for_root);
+
+
+    /// Load balance helper routine: Send data to other
+    /// processors during load balancing.
+    /// - send_n: Input, number of data to be sent to each processor
+    /// - send_data: Input, storage for all values to be sent to all processors
+    /// - send_displacement: Input, start location within send_data for data to
+    ///   be sent to each processor
+    void send_data_to_be_sent_during_load_balancing(
+      Vector<int>& send_n,
+      Vector<double>& send_data,
+      Vector<int>& send_displacement);
+
+    /// Send refinement information between processors
+    void send_refinement_info_helper(
+      Vector<unsigned>& old_domain_for_base_element,
+      Vector<unsigned>& new_domain_for_base_element,
+      const unsigned& max_refinement_level_overall,
+      std::map<unsigned, Vector<unsigned>>& refinement_info_for_root_local,
+      Vector<Vector<Vector<unsigned>>>& refinement_info_for_root_elements);
+
+    /// The distributed matrix distribution method
+    ///  1 - Automatic - the Problem distribution is employed, unless any
+    /// processor has number of rows equal to 110% of N/P, in which case
+    /// uniform distribution is employed.
+    ///  2 - Problem - the jacobian on processor p only contains rows that
+    /// correspond to equations that are on this processor. (minimises
+    /// communication)
+    ///  3 - Uniform - each processor holds as close to N/P matrix rows as
+    /// possible. (very well load balanced)
+    Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
+
+    /// The amount of data allocated during the previous parallel sparse
+    /// assemble. Used to optimise the next call to parallel_sparse_assemble()
+    unsigned Parallel_sparse_assemble_previous_allocation;
+
+  protected:
+    /// Has the problem been distributed amongst multiple processors?
+    bool Problem_has_been_distributed;
+
+    /// Boolean to bypass check of increase in dofs during pruning
+    bool Bypass_increase_in_dof_check_during_pruning;
+
+  public:
+    /// Enable problem distributed
+    void enable_problem_distributed()
+    {
+      Problem_has_been_distributed = true;
+    }
+
+    /// Disable problem distributed
+    void disable_problem_distributed()
+    {
+      Problem_has_been_distributed = false;
+    }
+
+    /// Set default first and last elements for parallel assembly
+    /// of non-distributed problem.
+    void set_default_first_and_last_element_for_assembly();
+
+    /// Manually set first and last elements for parallel assembly
+    /// of non-distributed problem.
+    void set_first_and_last_element_for_assembly(
+      Vector<unsigned>& first_el_for_assembly,
+      Vector<unsigned>& last_el_for_assembly)
+    {
+      First_el_for_assembly = first_el_for_assembly;
+      Last_el_plus_one_for_assembly = last_el_for_assembly;
+      unsigned n = last_el_for_assembly.size();
+      for (unsigned i = 0; i < n; i++)
+      {
+        Last_el_plus_one_for_assembly[i] += 1;
+      }
+    }
+
+
+    /// Get first and last elements for parallel assembly
+    /// of non-distributed problem.
+    void get_first_and_last_element_for_assembly(
+      Vector<unsigned>& first_el_for_assembly,
+      Vector<unsigned>& last_el_for_assembly) const
+    {
+      first_el_for_assembly = First_el_for_assembly;
+      last_el_for_assembly = Last_el_plus_one_for_assembly;
+      unsigned n = last_el_for_assembly.size();
+      for (unsigned i = 0; i < n; i++)
+      {
+        last_el_for_assembly[i] -= 1;
+      }
+    }
+
+#endif
+
+    /// Actions that are to be performed before a mesh adaptation.
+    /// These might include removing any additional elements, such as traction
+    /// boundary elements before the adaptation.
+    virtual void actions_before_adapt() {}
+
+    /// Actions that are to be performed after a mesh adaptation.
+    virtual void actions_after_adapt() {}
+
+  protected:
+    /// Any actions that are to be performed before a complete
+    /// Newton solve (e.g. adjust boundary conditions). CAREFUL: This
+    /// step should (and if the FD-based LinearSolver FD_LU is used, must)
+    /// only update values that are pinned!
+    virtual void actions_before_newton_solve() {}
+
+    /// Any actions that are to be performed after a complete Newton
+    /// solve, e.g. post processing.  CAREFUL: This step should (and if the
+    /// FD-based LinearSolver FD_LU is used, must) only update values that are
+    /// pinned!
+    virtual void actions_after_newton_solve() {}
+
+    /// Any actions that are to be performed before
+    /// the residual is checked in the Newton method, e.g. update
+    /// any boundary conditions that depend upon
+    /// variables of the problem; update any `dependent' variables; or
+    /// perform an update of the nodal positions in SpineMeshes etc.
+    /// CAREFUL: This
+    /// step should (and if the FD-based LinearSolver FD_LU is used, must)
+    /// only update values that are pinned!
+    virtual void actions_before_newton_convergence_check() {}
+
+    /// Any actions that are to be performed before each individual
+    /// Newton step. Most likely to be used for diagnostic purposes
+    /// to doc the solution during a non-converging iteration, say.
+    virtual void actions_before_newton_step() {}
+
+    /// Any actions that are to be performed after each individual
+    /// Newton step. Most likely to be used for diagnostic purposes
+    /// to doc the solution during a non-converging iteration, say.
+    virtual void actions_after_newton_step() {}
+
+    /// Actions that should be performed before each implicit time step.
+    /// This is needed when one wants
+    /// to solve a steady problem before timestepping and needs to distinguish
+    /// between the two cases
+    virtual void actions_before_implicit_timestep() {}
+
+    /// Actions that should be performed after each implicit time step.
+    /// This is needed when one wants
+    /// to solve a steady problem before timestepping and needs to distinguish
+    /// between the two cases
+    virtual void actions_after_implicit_timestep() {}
+
+    /// Actions that should be performed after each implicit time step.
+    /// This is needed if your actions_after_implicit_timestep() modify the
+    /// solution in a way that affects the error estimate.
+    virtual void actions_after_implicit_timestep_and_error_estimation() {}
+
+    /// Actions that should be performed before each explicit time step.
+    virtual void actions_before_explicit_timestep() {}
+
+    /// Actions that should be performed after each explicit time step.
+    virtual void actions_after_explicit_timestep() {}
+
+    /// Actions that are to be performed before reading in
+    /// restart data for problems involving unstructured bulk meshes.
+    /// If the problem contains such meshes we need
+    /// to strip out any face elements that are attached to them
+    /// because restart of unstructured meshes re-creates their elements
+    /// and nodes from scratch, leading to dangling pointers from the
+    /// face elements to the old elements and nodes. This function is
+    /// virtual and (practically) empty
+    /// but toggles a flag to indicate that it has been called. This is used to
+    /// issue a warning, prompting the user to consider overloading it
+    /// if the problem is found to contain unstructured bulk meshes during
+    /// restarts.
+    virtual void actions_before_read_unstructured_meshes()
+    {
+      Empty_actions_before_read_unstructured_meshes_has_been_called = true;
+    }
+
+    /// Actions that are to be performed before reading in
+    /// restart data for problems involving unstructured bulk meshes.
+    /// Typically used to re-attach FaceElements, say, that were stripped
+    /// out in actions_before_read_unstructured_meshes(). This function is
+    /// virtual and (practically) empty
+    /// but toggles a flag to indicate that it has been called. This is used to
+    /// issue a warning, prompting the user to consider overloading it
+    /// if the problem is found to contain unstructured bulk meshes during
+    /// restarts.
+    virtual void actions_after_read_unstructured_meshes()
+    {
+      Empty_actions_after_read_unstructured_meshes_has_been_called = true;
+    }
+
+#ifdef OOMPH_HAS_MPI
+    /// Actions to be performed before a (mesh) distribution
+    virtual void actions_before_distribute() {}
+
+    /// Actions to be performed after a (mesh) distribution
+    virtual void actions_after_distribute() {}
+
+#endif
+
+    /// Actions that are to be performed when the global parameter
+    /// addressed by parameter_pt
+    /// has been changed in the function get_derivative_wrt_global_parameter()
+    /// The default is to call actions_before_newton_solve(),
+    /// actions_before_newton_convergence_check() and
+    /// actions_after_newton_solve().
+    /// This could be amazingly inefficient in certain problems and should
+    /// be overloaded in such cases. An example would be when a remesh is
+    /// required in general, but the global parameter does not affect the mesh
+    /// directly.
+    virtual void actions_after_change_in_global_parameter(
+      double* const& parameter_pt)
+    {
+      // Default action should cover all possibilities
+      actions_before_newton_solve();
+      actions_before_newton_convergence_check();
+      actions_after_newton_solve();
+    }
+
+    /// Actions that are to be performed after a change in the parameter
+    /// that is being varied as part of the solution of a bifurcation detection
+    /// problem. The default is to call actions_before_newton_solve(),
+    /// actions_before_newton_convergence_check() and
+    /// actions_after_newton_solve().
+    /// This could be amazingly inefficient in certain problems and should
+    /// be overloaded in such cases. An example would be when a remesh is
+    /// required in general, but the global parameter does not affect the mesh
+    /// directly.
+    virtual void actions_after_change_in_bifurcation_parameter()
+    {
+      // Default action should cover all possibilities
+      actions_before_newton_solve();
+      actions_before_newton_convergence_check();
+      actions_after_newton_solve();
+    }
+
+    /// Empty virtual function; provides hook to perform actions after
+    /// the increase in the arclength parameter (during continuation)
+    virtual void actions_after_parameter_increase(double* const& parameter_pt)
+    {
+    }
+
+    /// Access function to the derivative of the i-th (local)
+    /// dof with respect to
+    /// the arc length, used in continuation
+    inline double& dof_derivative(const unsigned& i)
+    {
+      if (!Use_continuation_timestepper)
+      {
+        return Dof_derivative[i];
+      }
+      else
+      {
+        return (*(Dof_pt[i] + Dof_derivative_offset));
+      }
+    }
+
+    /// Access function to the current value of the i-th (local)
+    /// dof at the start of a continuation step
+    inline double& dof_current(const unsigned& i)
+    {
+      if (!Use_continuation_timestepper)
+      {
+        return Dof_current[i];
+      }
+      else
+      {
+        return (*(Dof_pt[i] + Dof_current_offset));
+      }
+    }
+
+    /// Set initial condition (incl previous timesteps).
+    /// We need to establish this interface
+    /// because I.C. needs to be reset when problem is adapted during
+    /// the first timestep.
+    virtual void set_initial_condition()
+    {
+      std::ostringstream warn_message;
+      warn_message
+        << "Warning: We're using the default (empty) set_initial_condition().\n"
+        << "If the initial conditions isn't re-assigned after a mesh adaption "
+           "\n"
+        << "the initial conditions will represent the interpolation of the \n"
+        << "initial conditions that were assigned on the original coarse "
+           "mesh.\n";
+      OomphLibWarning(warn_message.str(),
+                      "Problem::set_initial_condition()",
+                      OOMPH_EXCEPTION_LOCATION);
+
+      // Indicate that this function has been called. This flag is set so
+      // that the unsteady_newton_solve routine can be instructed whether
+      // or not to shift the history values. If set_initial_condition() has
+      // been overloaded than this (default) function won't be called, and
+      // so this flag will remain false (its default value). If
+      // set_initial_condition() has not been overloaded then this function
+      // will be called and the flag set to true.
+      Default_set_initial_condition_called = true;
+    }
+
+    /// Function to calculate a global error norm, used in adaptive
+    /// timestepping to control the change in timestep. Individual errors for
+    /// each data object can be obtained via the data timestepper's
+    /// temporal_error_in_value or temporal_error_in_position functions and
+    /// should be combined to construct a global norm. For example, in fluids
+    /// problems a suitable norm is usually the weighted sum of the errors in
+    /// the velocities; for moving mesh problems is it usually better to use the
+    /// weighted sum of the errors in position.
+    virtual double global_temporal_error_norm()
+    {
+      std::string error_message =
+        "The global_temporal_error_norm function will be problem-specific:\n";
+      error_message += "Please write your own in your Problem class";
+
+      throw OomphLibError(
+        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      return 0.0;
+    }
+
+    /// The communicator for this problem
+    OomphCommunicator* Communicator_pt;
+
+  public:
+    /// access function to the oomph-lib communicator
+    OomphCommunicator* communicator_pt()
+    {
+      return Communicator_pt;
+    }
+
+    /// access function to the oomph-lib communicator, const version
+    const OomphCommunicator* communicator_pt() const
+    {
+      return Communicator_pt;
+    }
+
+    /// Function pointer for spatial error estimator
+    typedef void (*SpatialErrorEstimatorFctPt)(Mesh*& mesh_pt,
+                                               Vector<double>& elemental_error);
+
+    /// Function pointer for spatial error estimator with doc
+    typedef void (*SpatialErrorEstimatorWithDocFctPt)(
+      Mesh*& mesh_pt, Vector<double>& elemental_error, DocInfo& doc_info);
+
+    /// Constructor: Allocate space for one time stepper
+    /// and set all pointers to NULL and set defaults for all
+    /// parameters.
+    Problem();
+
+    /// Broken copy constructor
+    Problem(const Problem& dummy) = delete;
+
+    /// Broken assignment operator
+    void operator=(const Problem&) = delete;
+
+    /// Virtual destructor to clean up memory
+    virtual ~Problem();
+
+    /// Return a pointer to the global mesh
+    Mesh*& mesh_pt()
+    {
+      return Mesh_pt;
+    }
+
+    /// Return a pointer to the global mesh (const version)
+    Mesh* const& mesh_pt() const
+    {
+      return Mesh_pt;
+    }
+
+    /// Return a pointer to the i-th submesh. If there are
+    /// no submeshes, the 0-th submesh is the global mesh itself.
+    Mesh*& mesh_pt(const unsigned& imesh)
+    {
+      // If there are no submeshes then the zero-th submesh is the
+      // mesh itself
+      if ((Sub_mesh_pt.size() == 0) && (imesh == 0))
+      {
+        return Mesh_pt;
+      }
+      else
+      {
+        return Sub_mesh_pt[imesh];
+      }
+    }
+
+    /// Return a pointer to the i-th submesh (const version)
+    Mesh* const& mesh_pt(const unsigned& imesh) const
+    {
+      // If there are no submeshes then the zero-th submesh is the
+      // mesh itself
+      if ((Sub_mesh_pt.size() == 0) && (imesh == 0))
+      {
+        return Mesh_pt;
+      }
+      else
+      {
+        return Sub_mesh_pt[imesh];
+      }
+    }
+
+    /// Return number of submeshes
+    unsigned nsub_mesh() const
+    {
+      return Sub_mesh_pt.size();
+    }
+
+    /// Add a submesh to the problem and return its number, i, by which
+    /// it can be accessed via mesh_pt(i).
+    unsigned add_sub_mesh(Mesh* const& mesh_pt)
+    {
+      Sub_mesh_pt.push_back(mesh_pt);
+      return Sub_mesh_pt.size() - 1;
+    }
+
+
+    /// Flush the problem's collection of sub-meshes. Must be followed
+    /// by call to rebuild_global_mesh().
+    void flush_sub_meshes()
+    {
+      Sub_mesh_pt.clear();
+    }
+
+    /// Build the global mesh by combining the all the submeshes.
+    /// \b Note: The nodes boundary information refers to the boundary numbers
+    /// within the submesh!
+    void build_global_mesh();
+
+    /// If one of the submeshes has changed (e.g. by
+    /// mesh adaptation) we need to update the global mesh.
+    /// \b Note: The nodes boundary information refers to the
+    /// boundary numbers within the submesh!
+    void rebuild_global_mesh();
+
+#ifdef OOMPH_HAS_MPI
+
+    /// Function to build the Problem's base mesh; this must be supplied
+    /// by the user if they wish to use the load_balance() functionality,
+    /// which is only available to problems that have already been distributed.
+    /// If the problem has multiple meshes, each mesh must be built, added as
+    /// as a submesh, and a call to build_global_mesh() must be made
+    /// in this function. On return from this function all meshes must
+    /// have been refined to the same level that they were in the when
+    /// Problem::distribute() was first called.
+    virtual void build_mesh()
+    {
+      std::string error_message = "You are likely to have reached this error "
+                                  "from Problem::load_balance()\n";
+      error_message +=
+        "The build_mesh() function is problem-specific and must be supplied:\n";
+      error_message +=
+        "Please write your own in your Problem class, ensuring that\n";
+      error_message += "any (sub)meshes are built before calling "
+                       "Problem::build_global_mesh().\n";
+      throw OomphLibError(
+        error_message, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    ///  Balance the load of a (possibly non-uniformly refined) problem
+    /// that has already been distributed, by re-distributing elements over
+    /// processors.
+    void load_balance()
+    {
+      // Dummy DocInfo
+      DocInfo doc_info;
+      doc_info.disable_doc();
+
+      // Don't report stats
+      bool report_stats = false;
+
+      // Dummy imposed partioning vector
+      Vector<unsigned> input_target_domain_for_local_non_halo_element;
+
+      // Do it!
+      load_balance(
+        doc_info, report_stats, input_target_domain_for_local_non_halo_element);
+    }
+
+    /// Balance the load of a (possibly non-uniformly refined) problem
+    /// that has already been distributed, by re-distributing elements over
+    /// processors.  Produce explicit stats of load balancing process if
+    /// boolean, report_stats, is set to true.
+    void load_balance(const bool& report_stats)
+    {
+      // Dummy DocInfo
+      DocInfo doc_info;
+      doc_info.disable_doc();
+
+      // Dummy imposed partioning vector
+      Vector<unsigned> input_target_domain_for_local_non_halo_element;
+
+      // Do it
+      load_balance(
+        doc_info, report_stats, input_target_domain_for_local_non_halo_element);
+    }
+
+
+    /// Balance the load of a (possibly non-uniformly refined) problem
+    /// that has already been distributed, by re-distributing elements over
+    /// processors.  Produce explicit stats of load balancing process if
+    /// boolean, report_stats, is set to true.
+    void load_balance(DocInfo& doc_info, const bool& report_stats)
+    {
+      // Dummy imposed partioning vector
+      Vector<unsigned> input_target_domain_for_local_non_halo_element;
+
+      // Do it
+      load_balance(
+        doc_info, report_stats, input_target_domain_for_local_non_halo_element);
+    }
+
+    /// Balance the load of a (possibly non-uniformly refined) problem
+    /// that has already been distributed, by re-distributing elements over
+    /// processors. Produce explicit stats of load balancing process if
+    /// boolean, report_stats, is set to true and doc various bits of
+    /// data (mainly for debugging) in directory specified by DocInfo object.
+    /// If final input vector is non-zero-sized it provides an imposed
+    /// partitioning.
+    void load_balance(
+      DocInfo& doc_info,
+      const bool& report_stats,
+      const Vector<unsigned>& input_target_domain_for_local_non_halo_element);
+
+    /// Set the use of the default partition in the load balance
+    void set_default_partition_in_load_balance()
+    {
+      Use_default_partition_in_load_balance = true;
+    }
+
+    /// Do not use the default partition in the load balance
+    void unset_default_partition_in_load_balance()
+    {
+      Use_default_partition_in_load_balance = false;
+    }
+
+    /// Load balance helper routine: refine each new base (sub)mesh
+    /// based upon the elements to be refined within each tree at each root
+    /// on the current processor
+    void refine_distributed_base_mesh(
+      Vector<Vector<Vector<unsigned>>>& to_be_refined_on_each_root,
+      const unsigned& max_level_overall);
+
+#endif
+
+    /// Return a pointer to the linear solver object
+    LinearSolver*& linear_solver_pt()
+    {
+      return Linear_solver_pt;
+    }
+
+    /// Return a pointer to the linear solver object (const version)
+    LinearSolver* const& linear_solver_pt() const
+    {
+      return Linear_solver_pt;
+    }
+
+    /// Return a pointer to the linear solver object used for explicit time
+    /// stepping.
+    LinearSolver*& mass_matrix_solver_for_explicit_timestepper_pt()
+    {
+      return Mass_matrix_solver_for_explicit_timestepper_pt;
+    }
+
+    /// Return a pointer to the linear solver object used for explicit time
+    /// stepping (const version).
+    LinearSolver* mass_matrix_solver_for_explicit_timestepper_pt() const
+    {
+      return Mass_matrix_solver_for_explicit_timestepper_pt;
+    }
+
+    /// Return a pointer to the eigen solver object
+    EigenSolver*& eigen_solver_pt()
+    {
+      return Eigen_solver_pt;
+    }
+
+    /// Return a pointer to the eigen solver object (const version)
+    EigenSolver* const& eigen_solver_pt() const
+    {
+      return Eigen_solver_pt;
+    }
+
+    /// Return a pointer to the global time object
+    Time*& time_pt()
+    {
+      return Time_pt;
+    }
+
+    /// Return a pointer to the global time object (const version).
+    Time* time_pt() const
+    {
+      return Time_pt;
+    }
+
+    /// Return the current value of continuous time
+    double& time();
+
+    /// Return the current value of continuous time (const version)
+    double time() const;
+
+
+    /// Access function for the pointer to the first (presumably only)
+    /// timestepper
+    TimeStepper*& time_stepper_pt()
+    {
+      if (Time_stepper_pt.size() == 0)
+      {
+        throw OomphLibError("No timestepper allocated yet\n",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      return Time_stepper_pt[0];
+    }
+
+    /// Access function for the pointer to the first (presumably only)
+    /// timestepper
+    const TimeStepper* time_stepper_pt() const
+    {
+      if (Time_stepper_pt.size() == 0)
+      {
+        throw OomphLibError("No timestepper allocated yet\n",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+      return Time_stepper_pt[0];
+    }
+
+    /// Return a pointer to the i-th timestepper
+    TimeStepper*& time_stepper_pt(const unsigned& i)
+    {
+      return Time_stepper_pt[i];
+    }
+
+    /// Return a pointer to the explicit timestepper
+    ExplicitTimeStepper*& explicit_time_stepper_pt()
+    {
+      return Explicit_time_stepper_pt;
+    }
+
+    /// Set all problem data to have the same timestepper
+    /// (timestepper_pt) Return the new number of dofs in the problem
+    unsigned long set_timestepper_for_all_data(
+      TimeStepper* const& time_stepper_pt,
+      const bool& preserve_existing_data = false);
+
+    /// Shift all values along to prepare for next timestep
+    virtual void shift_time_values();
+
+    /// Return a pointer to the assembly handler object
+    AssemblyHandler*& assembly_handler_pt()
+    {
+      return Assembly_handler_pt;
+    }
+
+    /// Return a pointer to the assembly handler object (const version)
+    AssemblyHandler* const& assembly_handler_pt() const
+    {
+      return Assembly_handler_pt;
+    }
+
+    /// Access function to min timestep in adaptive timestepping
+    double& minimum_dt()
+    {
+      return Minimum_dt;
+    }
+
+    /// Access function to max timestep in adaptive timestepping
+    double& maximum_dt()
+    {
+      return Maximum_dt;
+    }
+
+    /// Access function to the safety factor in adaptive timestepping
+    double& target_error_safety_factor()
+    {
+      return Target_error_safety_factor;
+    }
+
+    /// Access function to max Newton iterations before giving up.
+    unsigned& max_newton_iterations()
+    {
+      return Max_newton_iterations;
+    }
+
+    /// Access function to Problem_is_nonlinear.
+    void problem_is_nonlinear(const bool& prob_lin)
+    {
+      Problem_is_nonlinear = prob_lin;
+    }
+
+
+    /// Access function to max residuals in Newton iterations before
+    /// giving up.
+    double& max_residuals()
+    {
+      return Max_residuals;
+    }
+
+    /// Access function for Time_adaptive_newton_crash_on_solve_fail.
+    bool& time_adaptive_newton_crash_on_solve_fail()
+    {
+      return Time_adaptive_newton_crash_on_solve_fail;
+    }
+
+    /// Access function to tolererance of the Newton solver, i.e. the
+    /// maximum value of the residuals that will be accepted.
+    double& newton_solver_tolerance()
+    {
+      return Newton_solver_tolerance;
+    }
+
+    /// Add a timestepper to the problem. The function will automatically
+    /// create or resize the Time object so that it contains the appropriate
+    /// number of levels of storage.
+    void add_time_stepper_pt(TimeStepper* const& time_stepper_pt);
+
+    /// Set the explicit timestepper for the problem. The function
+    /// will automatically create or resize the Time object so that it contains
+    /// the appropriate number of levels of storage
+    void set_explicit_time_stepper_pt(
+      ExplicitTimeStepper* const& explicit_time_stepper_pt);
+
+
+    /// Set all timesteps to the same value, dt, and assign
+    /// weights for all timesteppers in the problem
+    void initialise_dt(const double& dt);
+
+    /// Set the value of the timesteps to be equal to the values passed
+    /// in a vector and assign weights for all timesteppers in the problem
+    void initialise_dt(const Vector<double>& dt);
+
+    /// Return a pointer to the the i-th global data object
+    Data*& global_data_pt(const unsigned& i)
+    {
+      return Global_data_pt[i];
+    }
+
+    /// Add Data to the Problem's global data -- the Problem will
+    /// perform equation numbering etc. for such Data
+    void add_global_data(Data* const& global_data_pt)
+    {
+      Global_data_pt.push_back(global_data_pt);
+    }
+
+
+    /// Flush the Problem's global data  -- resizes container to zero.
+    /// Data objects are not deleted!
+    void flush_global_data()
+    {
+      Global_data_pt.resize(0);
+    }
+
+    /// Get new linear algebra distribution (you're in charge of deleting it!)
+    void create_new_linear_algebra_distribution(
+      LinearAlgebraDistribution*& dist_pt);
+
+    /// Return the pointer to the dof distribution (read-only)
+    LinearAlgebraDistribution* const& dof_distribution_pt() const
+    {
+      return Dof_distribution_pt;
+    }
+
+    /// Return the number of dofs
+    unsigned long ndof() const
+    {
+      return Dof_distribution_pt->nrow();
+    }
+
+    /// Return the number of time steppers
+    unsigned ntime_stepper() const
+    {
+      return Time_stepper_pt.size();
+    }
+
+    /// Return the number of global data values
+    unsigned nglobal_data() const
+    {
+      return Global_data_pt.size();
+    }
+
+    /// Self-test: Check meshes and global data. Return 0 for OK
+    unsigned self_test();
+
+    /// Insist that local dof pointers are set up in each element
+    /// when equation numbering takes place
+    void enable_store_local_dof_pt_in_elements()
+    {
+      Store_local_dof_pt_in_elements = true;
+    }
+
+    /// Insist that local dof pointers are NOT set up in each element
+    /// when equation numbering takes place (the default)
+    void disable_store_local_dof_pt_in_elements()
+    {
+      Store_local_dof_pt_in_elements = false;
+    }
+
+    /// Assign all equation numbers for problem: Deals with global
+    /// data (= data that isn't attached to any elements) and then
+    /// does the equation numbering for the elements. Virtual so it
+    /// can be overloaded in MPI problems.  Bool argument can be set to false
+    /// to ignore assigning local equation numbers (found to be necessary in
+    /// the parallel implementation of locate_zeta between multiple meshes).
+    unsigned long assign_eqn_numbers(
+      const bool& assign_local_eqn_numbers = true);
+
+    /// Function to describe the dofs in terms of the global
+    /// equation number, i.e. what type of value (nodal value of
+    /// a Node; value in a Data object; value of internal Data in an
+    /// element; etc) is the unknown with a certain global equation number.
+    /// Output stream defaults to oomph_info.
+    void describe_dofs(std::ostream& out = *(oomph_info.stream_pt())) const;
+
+    /// Indicate that the problem involves discontinuous elements
+    /// This allows for a more efficiently assembly and inversion of the
+    /// mass matrix
+    void enable_discontinuous_formulation()
+    {
+      Discontinuous_element_formulation = true;
+    }
+
+    /// Disable the use of a discontinuous-element formulation.
+    /// Note that the methods will all still work even if the elements are
+    /// discontinuous, we will just be assembling a larger system matrix than
+    /// necessary.
+    void disable_discontinuous_formulation()
+    {
+      Discontinuous_element_formulation = false;
+    }
+
+    /// Return the vector of dofs, i.e. a vector containing the current
+    /// values of all unknowns.
+    void get_dofs(DoubleVector& dofs) const;
+
+    /// Return vector of the t'th history value of all dofs.
+    void get_dofs(const unsigned& t, DoubleVector& dofs) const;
+
+    /// Set the values of the dofs
+    void set_dofs(const DoubleVector& dofs);
+
+    /// Set the history values of the dofs
+    void set_dofs(const unsigned& t, DoubleVector& dofs);
+
+    /// Set history values of dofs from the type of vector stored in
+    /// problem::Dof_pt.
+    void set_dofs(const unsigned& t, Vector<double*>& dof_pt);
+
+    /// Add lambda x incremenet_dofs[l] to the l-th dof
+    void add_to_dofs(const double& lambda, const DoubleVector& increment_dofs);
+
+    /// Return a pointer to the dof, indexed by global equation number
+    /// which may be haloed or stored locally. If it is haloed, a local copy
+    /// must have been requested on this processor in the Halo_scheme_pt.
+    inline double* global_dof_pt(const unsigned& i)
+    {
+#ifdef OOMPH_HAS_MPI
+      // If the problem is distributed I have to do something different
+      if (Problem_has_been_distributed)
+      {
+#ifdef PARANOID
+        if (Halo_scheme_pt == 0)
+        {
+          std::ostringstream error_stream;
+          error_stream
+            << "Direct access to global dofs in a distributed problem is only\n"
+            << "possible if the function setup_dof_halo_scheme() has been "
+               "called.\n"
+            << "You can access local dofs via Problem::dof(i).\n";
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+        // Work out the local coordinate of the dof
+        // based on the original distribution stored in the Halo_scheme
+        const unsigned first_row_local =
+          Halo_scheme_pt->distribution_pt()->first_row();
+        const unsigned n_row_local =
+          Halo_scheme_pt->distribution_pt()->nrow_local();
+
+        // If we are in range then just call the local value
+        if ((i >= first_row_local) && (i < first_row_local + n_row_local))
+        {
+          return this->Dof_pt[i - first_row_local];
+        }
+        // Otherwise the entry is not stored in the local processor
+        // and we must have haloed it
+        else
+        {
+          return Halo_dof_pt[Halo_scheme_pt->local_index(i)];
+        }
+      }
+      // Otherwise just return the dof
+      else
+#endif
+      {
+        return this->Dof_pt[i];
+      }
+    }
+
+    /// i-th dof in the problem
+    double& dof(const unsigned& i)
+    {
+      return *(Dof_pt[i]);
+    }
+
+    /// i-th dof in the problem (const version)
+    double dof(const unsigned& i) const
+    {
+      return *(Dof_pt[i]);
+    }
+
+    /// Pointer to i-th dof in the problem
+    double*& dof_pt(const unsigned& i)
+    {
+      return Dof_pt[i];
+    }
+
+    /// Pointer to i-th dof in the problem (const version)
+    double* dof_pt(const unsigned& i) const
+    {
+      return Dof_pt[i];
+    }
+
+    /// Return the residual vector multiplied by the inverse mass matrix
+    /// Virtual so that it can be overloaded for mpi problems
+    virtual void get_inverse_mass_matrix_times_residuals(DoubleVector& Mres);
+
+    /// Get the time derivative of all values (using
+    /// get_inverse_mass_matrix_times_residuals(..) with all time steppers set
+    /// to steady) e.g. for use in explicit time steps. The approach used is
+    /// slighty hacky, beware if you have a residual which is non-linear or
+    /// implicit in the derivative or if you have overloaded
+    /// get_jacobian(...).
+    virtual void get_dvaluesdt(DoubleVector& f);
+
+    /// Return the fully-assembled residuals Vector for the problem:
+    /// Virtual so it can be overloaded in for mpi problems
+    virtual void get_residuals(DoubleVector& residuals);
+
+    /// Return the fully-assembled Jacobian and residuals for the problem
+    /// Interface for the case when the Jacobian matrix is dense.
+    /// This is virtual so, if we feel like it (e.g. for testing iterative
+    /// solvers with specific test matrices, we can bypass the default
+    /// assembly procedure for the Jacobian and the residual vector.
+    virtual void get_jacobian(DoubleVector& residuals,
+                              DenseDoubleMatrix& jacobian);
+
+    /// Return the fully-assembled Jacobian and residuals for the
+    /// problem. Interface for the case when the Jacobian is in row-compressed
+    /// storage format. This is virtual so, if we feel like it (e.g. for testing
+    /// iterative solvers with specific test matrices), we can bypass the
+    /// default assembly procedure for the Jacobian and the residual vector.
+    virtual void get_jacobian(DoubleVector& residuals,
+                              CRDoubleMatrix& jacobian);
+
+    /// Return the fully-assembled Jacobian and residuals for the
+    /// problem. Interface for the case when the Jacobian is in
+    /// column-compressed storage format. This is virtual so, if we feel like it
+    /// (e.g. for testing iterative solvers with specific test matrices), we can
+    /// bypass the default assembly procedure for the Jacobian and the residual
+    /// vector.
+    virtual void get_jacobian(DoubleVector& residuals,
+                              CCDoubleMatrix& jacobian);
+
+    /// Dummy virtual function that must be overloaded by the problem to
+    /// specify which matrices should be summed to give the final Jacobian.
+    virtual void get_jacobian(DoubleVector& residuals, SumOfMatrices& jacobian)
+    {
+      std::ostringstream error_stream;
+      error_stream
+        << "You must overload this function in your problem class to specify\n"
+        << "which matrices should be summed to give the final Jacobian.";
+      throw OomphLibError(
+        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+    }
+
+    /// Return the fully-assembled Jacobian and residuals, generated by
+    /// finite differences
+    void get_fd_jacobian(DoubleVector& residuals,
+                         DenseMatrix<double>& jacobian);
+
+    /// Get the derivative of the entire residuals vector wrt a
+    /// global parameter, used in continuation problems
+    void get_derivative_wrt_global_parameter(double* const& parameter_pt,
+                                             DoubleVector& result);
+
+    /// Return the product of the global hessian (derivative of Jacobian
+    /// matrix  with respect to all variables) with
+    /// an eigenvector, Y, and any number of other specified vectors C
+    /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}.
+    /// This function is used in assembling and solving the augmented systems
+    /// associated with bifurcation tracking.
+    /// The default implementation is to use finite differences at the global
+    /// level.
+    void get_hessian_vector_products(
+      DoubleVectorWithHaloEntries const& Y,
+      Vector<DoubleVectorWithHaloEntries> const& C,
+      Vector<DoubleVectorWithHaloEntries>& product);
+
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. The eigenvalues and eigenvectors are, in general, complex.
+    /// Eigenvalues may be infinite and are therefore returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    /// There's a convenience wrapper to this function that simply computes
+    /// these eigenvalues regardless. That version may die in NaN checking is
+    /// enabled (via the fenv.h header and the associated feenable function).
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& steady = true);
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements. Calculate (at least) n_eval eigenvalues and return the
+    /// corresponding eigenvectors. The boolean flag (default true) specifies
+    /// whether the steady jacobian should be assembled. If the flag is false
+    /// then the weighted mass-matrix terms from the timestepper will
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues and eigenvectors are,
+    /// in general, complex and the eigenvalues may be infinite. In this
+    /// case it's safer to use the other version of this function which
+    /// returns the eigenvalues in terms of a fractional representation.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            Vector<DoubleVector>& eigenvector_real,
+                            Vector<DoubleVector>& eigenvector_imag,
+                            const bool& steady = true);
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements but only return the eigenvalues, not the eigenvectors.
+    /// At least n_eval eigenvalues are computed.
+    /// The boolean flag (default true) is used to specify whether the
+    /// weighted mass-matrix terms from the timestepping scheme should
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues may be infinite. In this
+    /// case it's safer to use the other version of this function which
+    /// returns the eigenvalues in terms of a fractional representation.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& eigenvalue,
+                            const bool& make_timesteppers_steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_eigenproblem(n_eval,
+                         eigenvalue,
+                         eigenvector_real,
+                         eigenvector_imag,
+                         make_timesteppers_steady);
+    }
+
+    /// Solve an eigenproblem as assembled by the Problem's constituent
+    /// elements but only return the eigenvalues, not the eigenvectors.
+    /// At least n_eval eigenvalues are computed.
+    /// The boolean flag (default true) is used to specify whether the
+    /// weighted mass-matrix terms from the timestepping scheme should
+    /// be included in the jacobian --- this is almost certainly never
+    /// wanted. Note that the eigenvalues may be infinite
+    /// and are therefore returned as
+    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
+    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
+    /// computed by doing the division, checking for zero betas to avoid NaNs.
+    void solve_eigenproblem(const unsigned& n_eval,
+                            Vector<std::complex<double>>& alpha,
+                            Vector<double>& beta,
+                            const bool& steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_eigenproblem(
+        n_eval, alpha, beta, eigenvector_real, eigenvector_imag, steady);
+    }
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem. See the documentation on that function for more
+    /// details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    Vector<DoubleVector>& eigenvector_real,
+                                    Vector<DoubleVector>& eigenvector_imag,
+                                    const bool& steady = true);
+
+    /// Solve an adjoint eigenvalue problem using the same procedure as
+    /// solve_eigenproblem but only return the eigenvalues, not the
+    /// eigenvectors. At least n_eval eigenvalues are computed. See the
+    /// documentation on that function for more details.
+    void solve_adjoint_eigenproblem(const unsigned& n_eval,
+                                    Vector<std::complex<double>>& eigenvalue,
+                                    const bool& steady = true)
+    {
+      // Create temporary storage for the eigenvectors (potentially wasteful)
+      Vector<DoubleVector> eigenvector_real;
+      Vector<DoubleVector> eigenvector_imag;
+      solve_adjoint_eigenproblem(
+        n_eval, eigenvalue, eigenvector_real, eigenvector_imag, steady);
+    }
+
+
+    /// \short Get the matrices required by a eigensolver. If the
+    /// shift parameter is non-zero the second matrix will be shifted
+    virtual void get_eigenproblem_matrices(CRDoubleMatrix& mass_matrix,
+                                           CRDoubleMatrix& main_matrix,
+                                           const double& shift = 0.0);
+
+    /// Assign the eigenvector passed to the function
+    /// to the dofs in the problem so that it can be output by
+    /// the usual routines.
+    void assign_eigenvector_to_dofs(DoubleVector& eigenvector);
+
+    /// Add the eigenvector passed to the function scaled by
+    /// the constat epsilon to the dofs in the problem so that
+    /// it can be output by the usual routines
+    void add_eigenvector_to_dofs(const double& epsilon,
+                                 const DoubleVector& eigenvector);
+
+
+    /// Store the current values of the degrees of freedom
+    void store_current_dof_values();
+
+    /// Restore the stored values of the degrees of freedom
+    void restore_dof_values();
+
+    /// Enable recycling of Jacobian in Newton iteration
+    /// (if the linear solver allows it).
+    /// Useful for linear problems with constant Jacobians or nonlinear
+    /// problems where you're willing to risk the trade-off between
+    /// faster solve times and degraded Newton convergence rate
+    void enable_jacobian_reuse()
+    {
+      Jacobian_reuse_is_enabled = true;
+      Jacobian_has_been_computed = false;
+    }
+
+    /// Disable recycling of Jacobian in Newton iteration
+    void disable_jacobian_reuse()
+    {
+      Jacobian_reuse_is_enabled = false;
+      Jacobian_has_been_computed = false;
+    }
+
+    /// Is recycling of Jacobian in Newton iteration enabled?
+    bool jacobian_reuse_is_enabled()
+    {
+      return Jacobian_reuse_is_enabled;
+    }
+
+    bool& use_predictor_values_as_initial_guess()
+    {
+      return Use_predictor_values_as_initial_guess;
+    }
+
+    /// Use Newton method to solve the problem
+    void newton_solve();
+
+    /// enable globally convergent Newton method
+    void enable_globally_convergent_newton_method()
+    {
+      Use_globally_convergent_newton_method = true;
+    }
+
+    /// disable globally convergent Newton method
+    void disable_globally_convergent_newton_method()
+    {
+      Use_globally_convergent_newton_method = false;
+    }
+
+  private:
+    /// Line search helper for globally convergent Newton method
+    void globally_convergent_line_search(
+      const Vector<double>& x_old,
+      const double& half_residual_squared_old,
+      DoubleVector& gradient,
+      DoubleVector& newton_dir,
+      double& half_residual_squared,
+      const double& stpmax);
+
+  public:
+    /// Adaptive Newton solve: up to max_adapt adaptations of all
+    /// refineable submeshes are performed to achieve the
+    /// the error targets specified in the refineable submeshes.
+    void newton_solve(unsigned const& max_adapt);
+
+    /// Solve a steady problem using adaptive Newton's method,
+    /// but in the context of an overall unstady problem, perhaps to
+    /// determine an initial condition.
+    /// This is achieved by setting the weights in the timesteppers to be zero
+    /// which has the effect of rendering them steady timesteppers.
+    /// The optional argument max_adapt specifies the max. number of
+    /// adaptations of all refineable submeshes are performed to
+    /// achieve the the error targets specified in the refineable submeshes.
+    void steady_newton_solve(unsigned const& max_adapt = 0);
+
+    /// Copy Data values, nodal positions etc from specified problem.
+    /// Note: This is not a copy constructor. We assume that the current
+    /// and the "original" problem have both been created by calling
+    /// the same problem constructor so that all Data objects,
+    /// time steppers etc. in the two problems are completely independent.
+    /// This function copies the nodal, internal and global values,
+    /// and the time parameters from the original problem into
+    /// "this" one. This functionality is required, e.g. for
+    /// multigrid computations.
+    void copy(Problem* orig_problem_pt);
+
+    /// Make and return a pointer to the copy of the problem. A virtual
+    /// function that must be filled in by the user is they wish to perform
+    /// adaptive refinement in bifurcation tracking or in multigrid problems.
+    /// ALH: WILL NOT BE NECESSARY IN BIFURCATION TRACKING IN LONG RUN...
+    virtual Problem* make_copy();
+
+    /// Read refinement pattern of all refineable meshes and refine them
+    /// accordingly, then read all Data and nodal position info from
+    /// file for restart. Return flag to indicate if the restart was from
+    /// steady or unsteady solution
+    virtual void read(std::ifstream& restart_file, bool& unsteady_restart);
+
+    /// Read refinement pattern of all refineable meshes and refine them
+    /// accordingly, then read all Data and nodal position info from
+    /// file for restart.
+    virtual void read(std::ifstream& restart_file)
+    {
+      bool unsteady_restart;
+      read(restart_file, unsteady_restart);
+    }
+
+    /// Dump refinement pattern of all refineable meshes and all generic
+    /// Problem data to file for restart.
+    virtual void dump(std::ofstream& dump_file) const;
+
+    /// Dump refinement pattern of all refineable meshes and all generic
+    /// Problem data to file for restart.
+    void dump(const std::string& dump_file_name) const
+    {
+      std::ofstream dump_stream(dump_file_name.c_str());
+#ifdef PARANOID
+      if (!dump_stream.is_open())
+      {
+        std::string err = "Couldn't open file " + dump_file_name;
+        throw OomphLibError(
+          err, OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
+      }
+#endif
+      dump(dump_stream);
+    }
+
+#ifdef OOMPH_HAS_MPI
+
+    /// Get pointers to all possible halo data indexed by global
+    /// equation number in a map.
+    void get_all_halo_data(std::map<unsigned, double*>& map_of_halo_data);
+
+    /// Classify any non-classified nodes into halo/haloed and
+    /// synchronise equation numbers. Return the total
+    /// number of degrees of freedom in the overall problem
+    long synchronise_eqn_numbers(const bool& assign_local_eqn_numbers = true);
+
+    /// Synchronise the degrees of freedom by overwriting
+    /// the haloed values with their non-halo counterparts held
+    /// on other processors. Bools control if we deal with data associated with
+    /// external halo/ed elements/nodes or the "normal" halo/ed ones.
+    void synchronise_dofs(const bool& do_halos, const bool& do_external_halos);
+
+    /// Perform all required synchronisation in solvers
+    void synchronise_all_dofs();
+
+    /// Check the halo/haloed node/element schemes
+    void check_halo_schemes(DocInfo& doc_info);
+
+    /// Check the halo/haloed node/element schemes
+    void check_halo_schemes()
+    {
+      DocInfo tmp_doc_info;
+      tmp_doc_info.disable_doc();
+      check_halo_schemes(tmp_doc_info);
+    }
+
+    /// Distribute the problem and doc, using the specified partition;
+    /// returns a vector which details the partitioning
+    Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
+                                DocInfo& doc_info,
+                                const bool& report_stats = false);
+
+    /// Distribute the problem; returns a vector which
+    /// details the partitioning
+    Vector<unsigned> distribute(DocInfo& doc_info,
+                                const bool& report_stats = false);
+
+    /// Distribute the problem using the specified partition;
+    /// returns a vector which details the partitioning
+    Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
+                                const bool& report_stats = false);
+
+    /// Distribute the problem; returns a vector which
+    /// details the partitioning
+    Vector<unsigned> distribute(const bool& report_stats = false);
+
+    /// Partition the global mesh, return vector specifying the processor
+    /// number for each element. Virtual so that it can be overloaded by
+    /// any user; the default is to use METIS to perform the partitioning
+    /// (with a bit of cleaning up afterwards to sort out "special cases").
+    virtual void partition_global_mesh(Mesh*& global_mesh_pt,
+                                       DocInfo& doc_info,
+                                       Vector<unsigned>& element_domain,
+                                       const bool& report_stats = false);
+
+    /// (Irreversibly) prune halo(ed) elements and nodes, usually
+    /// after another round of refinement, to get rid of
+    /// excessively wide halo layers. Note that the current
+    /// mesh will be now regarded as the base mesh and no unrefinement
+    /// relative to it will be possible once this function
+    /// has been called.
+    void prune_halo_elements_and_nodes(DocInfo& doc_info,
+                                       const bool& report_stats);
+
+    /// (Irreversibly) prune halo(ed) elements and nodes, usually
+    /// after another round of refinement, to get rid of
+    /// excessively wide halo layers. Note that the current
+    /// mesh will be now regarded as the base mesh and no unrefinement
+    /// relative to it will be possible once this function
+    /// has been called.
+    void prune_halo_elements_and_nodes(const bool& report_stats = false)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      prune_halo_elements_and_nodes(doc_info, report_stats);
+    }
+
+    /// Threshold for error throwing in Problem::check_halo_schemes()
+    double Max_permitted_error_for_halo_check;
+
+    /// Access to Problem_has_been_distributed flag
+    bool problem_has_been_distributed()
+    {
+      return Problem_has_been_distributed;
+    }
+
+#endif
+
+    /// Wrapper function to delete external storage for
+    /// each submesh of the problem
+    void delete_all_external_storage();
+
+    /// Boolean to indicate if all output is suppressed in
+    /// Problem::newton_solve(). Defaults to false.
+    bool Shut_up_in_newton_solve;
+
+
+  protected:
+    /// Boolean to indicate whether a Newton step should be taken
+    /// even if the initial residuals are below the required tolerance
+    bool Always_take_one_newton_step;
+
+    /// What it says: If temporally adaptive Newton solver fails to
+    /// to converge, reduce timestep by this factor and try again; defaults
+    /// to 1/2; can be over-written by user in derived problem.
+    double Timestep_reduction_factor_after_nonconvergence;
+
+
+    /// Boolean to decide if a timestep is to be rejected if the
+    /// error estimate post-solve (computed by global_temporal_error_norm())
+    /// exceeds the tolerance required in the call to
+    /// adaptive_unsteady_newton_solve(...). Defaults to true.
+    bool Keep_temporal_error_below_tolerance;
+
+    /// Perform a basic arc-length continuation step using Newton's
+    /// method. Returns number of Newton steps taken.
+    unsigned newton_solve_continuation(double* const& parameter_pt);
+
+    /// This function performs a basic continuation step using the Newton
+    /// method. The number of Newton steps taken is returned, to be used in any
+    /// external step-size control routines.
+    /// The governing parameter of the problem is passed as a pointer to the
+    /// routine, as is a vector in which
+    /// to store the derivatives wrt the parameter, if required.
+    unsigned newton_solve_continuation(double* const& parameter_pt,
+                                       DoubleVector& z);
+
+    /// A function to calculate the derivatives wrt the arc-length. This
+    /// version of the function actually does a linear solve so that the
+    /// derivatives
+    /// are calculated "exactly" rather than using the values at the Newton
+    /// step just before convergence. This is necessary in spatially adaptive
+    /// problems, in which the number of degrees of freedom changes and so
+    /// the appropriate derivatives must be calculated for the new variables.
+    /// This function is called if no Newton steps were taken in the
+    /// continuation routine ... i.e. the initial residuals were sufficiently
+    /// small.
+    void calculate_continuation_derivatives(double* const& parameter_pt);
+
+    /// A function to calculate the derivatives with respect to the
+    /// arc-length required for continuation. The arguments is the solution
+    /// of the  linear system,
+    /// Jz = dR/dparameter, that gives du/dparameter and the direction
+    /// output from the newton_solve_continuation function. The derivatives
+    /// are stored in the ContinuationParameters namespace.
+    void calculate_continuation_derivatives(const DoubleVector& z);
+
+    /// A function to calculate the derivatives with respect to the
+    /// arc-length required for continuation by finite differences, using
+    /// the previous values of the solution. The derivatives are stored in
+    /// the ContinuationParameters namespace.
+    void calculate_continuation_derivatives_fd(double* const& parameter_pt);
+
+    /// Return a boolean flag to indicate whether the pointer
+    /// parameter_pt refers to values stored in a Data object that
+    /// is contained within the problem
+    bool does_pointer_correspond_to_problem_data(double* const& parameter_pt);
+
+  public:
+    /// Virtual function that is used to symmetrise the problem so that
+    /// the current solution exactly satisfies any symmetries within the system.
+    /// Used when adpativly solving pitchfork detection problems when small
+    /// asymmetries in the coarse solution can be magnified
+    /// leading to very inaccurate answers on the fine mesh.
+    /// This is always problem-specific and must be filled in by the user
+    /// The default issues a warning
+    virtual void symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();
+
+    /// Return pointer to the parameter that is used in the
+    /// bifurcation detection. If we are not tracking a bifurcation then
+    /// an error will be thrown by the AssemblyHandler
+    double* bifurcation_parameter_pt() const;
+
+
+    /// Return the eigenfunction calculated as part of a
+    /// bifurcation tracking process. If we are not tracking a bifurcation
+    /// then an error will be thrown by the AssemblyHandler
+    void get_bifurcation_eigenfunction(Vector<DoubleVector>& eigenfunction);
+
+
+    /// Turn on fold tracking using the augmented system specified
+    /// in the FoldHandler class. After a call to this function subsequent calls
+    /// of the standard solution methods will converge to a fold (limit) point
+    /// at a particular value of the variable addressed by parameter_pt.
+    /// The system may not converge if the initial guess is sufficiently poor
+    /// or, alternatively, if finite differencing is used to calculate the
+    /// jacobian matrix in the elements.  If the boolean flag block_solver is
+    /// true (the default) then a block factorisation is used to solve the
+    /// augmented system which is both faster and uses less memory.
+    void activate_fold_tracking(double* const& parameter_pt,
+                                const bool& block_solve = true);
+
+    /// Activate generic bifurcation tracking for a single (real)
+    /// eigenvalue where the initial guess for the eigenvector can be specified.
+    void activate_bifurcation_tracking(double* const& parameter_pt,
+                                       const DoubleVector& eigenvector,
+                                       const bool& block_solve = true);
+
+    /// Activate generic bifurcation tracking for a single (real)
+    /// eigenvalue where the initial guess for the eigenvector can be specified
+    /// and the normalisation condition can also be specified.
+    void activate_bifurcation_tracking(double* const& parameter_pt,
+                                       const DoubleVector& eigenvector,
+                                       const DoubleVector& normalisation,
+                                       const bool& block_solve = true);
+
+
+    /// Turn on pitchfork tracking using the augmented system specified
+    /// in the PitchForkHandler class.
+    /// After a call to this function subsequent calls
+    /// of the standard solution methods will converge to a pitchfork
+    /// bifurcation
+    /// at a particular value of the variable addressed by parameter_pt.
+    /// The symmetry that is to be broken must be specified by supplying
+    /// a symmetry_vector(ndof). The easiest way to determine such a vector
+    /// is to solve the associated eigenproblem \f$ Jx = \lambda M x\f$
+    /// and pass in the eigenvector. This is not always necessary however,
+    /// if the symmetry is easy to construct.
+    /// The system may not converge if the initial guess is sufficiently poor
+    /// or, alternatively, if finite differencing is used to calculate the
+    /// jacobian matrix in the elements. If the boolean flag block_solver is
+    /// true (the default) then a block factorisation is used to solve the
+    /// augmented system which is both faster and requires less memory.
+    void activate_pitchfork_tracking(double* const& parameter_pt,
+                                     const DoubleVector& symmetry_vector,
+                                     const bool& block_solve = true);
+
+    /// Turn on Hopf bifurcation
+    /// tracking using the augmented system specified
+    /// in the HopfHandler class. After a call to this function subsequent calls
+    /// of the standard solution methods will converge to a Hopf bifuraction
+    /// at a particular value of the variable addressed by parameter_pt.
+    /// The system may not converge if the initial guess is sufficiently poor
+    /// or, alternatively, if finite differencing is used to calculate the
+    /// jacobian matrix in the elements.
+    void activate_hopf_tracking(double* const& parameter_pt,
+                                const bool& block_solve = true);
+
+    /// Turn on Hopf bifurcation
+    /// tracking using the augmented system specified
+    /// in the HopfHandler class. After a call to this function subsequent calls
+    /// of the standard solution methods will converge to a Hopf bifuraction
+    /// at a particular value of the variable addressed by parameter_pt.
+    /// The system may not converge if the initial guess is sufficiently poor
+    /// or, alternatively, if finite differencing is used to calculate the
+    /// jacobian matrix in the elements. This interface allows specification
+    /// of an inital guess for the frequency and real and imaginary parts
+    /// of the null vector, such as might be obtained from an eigensolve
+    void activate_hopf_tracking(double* const& parameter_pt,
+                                const double& omega,
+                                const DoubleVector& null_real,
+                                const DoubleVector& null_imag,
+                                const bool& block_solve = true);
+
+    /// Deactivate all bifuraction tracking, by reseting
+    /// the assembly handler to the default
+    void deactivate_bifurcation_tracking()
+    {
+      reset_assembly_handler_to_default();
+    }
+
+    /// Reset the system to the standard non-augemented state
+    void reset_assembly_handler_to_default();
+
+  private:
+    /// Private helper function that actually contains the guts
+    /// of the arc-length stepping, parameter_pt is a pointer to the
+    /// parameter that is traded for the arc-length constraint, ds is
+    /// the desired arc length and max_adapt is the maximum number of
+    /// spatial adaptations. The pointer to the parameter may be changed
+    /// if this is called from the Data-based interface
+    double arc_length_step_solve_helper(double* const& parameter_pt,
+                                        const double& ds,
+                                        const unsigned& max_adapt);
+
+
+    // ALH_DEVELOP
+  protected:
+    /// Private helper function that is used to set the appropriate
+    /// pinned values for continuation.
+    void set_consistent_pinned_values_for_continuation();
+
+  public:
+    /// Solve a steady problem using arc-length continuation, when the
+    /// parameter that becomes a variable corresponding to the arc-length
+    /// constraint equation is an external double:
+    /// parameter_pt is a pointer to that double,
+    /// ds is the desired arc_length and max_adapt is the maximum
+    /// number of spatial adaptations (default zero, no adaptation).
+    double arc_length_step_solve(double* const& parameter_pt,
+                                 const double& ds,
+                                 const unsigned& max_adapt = 0);
+
+    /// Solve a steady problem using arc-length continuation, when the
+    /// variable corresponding to the arc-length
+    /// constraint equation is already stored in data used in the problem:
+    /// data_pt is a pointer to the appropriate data object,
+    /// data_index is the index of the value that will be traded for the
+    /// constriant,
+    /// ds is the desired arc_length and max_adapt is the maximum
+    /// number of spatial adaptations (default zero, no adaptation).
+    /// Note that the value must be pinned in order for this formulation to work
+    double arc_length_step_solve(Data* const& data_pt,
+                                 const unsigned& data_index,
+                                 const double& ds,
+                                 const unsigned& max_adapt = 0);
+
+
+    /// Reset the "internal" arc-length continuation parameters, so as
+    /// to allow continuation in another parameter. N.B. The parameters that
+    /// are reset are the "minimum" that are required, others should perhaps
+    /// be reset, depending upon the application.
+    void reset_arc_length_parameters()
+    {
+      Theta_squared = 1.0;
+      Sign_of_jacobian = 0;
+      Continuation_direction = 1.0;
+      Parameter_derivative = 1.0;
+      First_jacobian_sign_change = false;
+      Arc_length_step_taken = false;
+      Dof_derivative.resize(0);
+    }
+
+    /// Access function for the sign of the global jacobian matrix.
+    /// This will be set by the linear solver, if possible (direct solver).
+    /// If not alternative methods must be used to detect bifurcations
+    /// (solving the associated eigenproblem).
+    int& sign_of_jacobian()
+    {
+      return Sign_of_jacobian;
+    }
+
+    /// Take an explicit timestep of size dt and optionally shift
+    /// any stored values of the time history
+    void explicit_timestep(const double& dt, const bool& shift_values = true);
+
+    /// Advance time by dt and solve by Newton's method.
+    /// This version always shifts time values
+    void unsteady_newton_solve(const double& dt);
+
+    /// Advance time by dt and solve the system,
+    /// using Newton's method. The boolean flag is used to control
+    /// whether the time
+    /// values should be shifted. If it is true the current data values will
+    /// be shifted (copied to the locations where there are stored as
+    /// previous timesteps) before solution.
+    void unsteady_newton_solve(const double& dt, const bool& shift_values);
+
+    /// Unsteady adaptive Newton solve: up to max_adapt adaptations of
+    /// all refineable submeshes are performed to achieve the the error targets
+    /// specified in the refineable submeshes. If first==true, the initial
+    /// conditions are re-assigned after the mesh adaptations. Shifting of time
+    /// can be suppressed by overwriting the default value of shift (true).
+    /// [Shifting must be done if first_timestep==true because we're constantly
+    /// re-assigning the initial conditions; if first_timestep==true and
+    /// shift==false shifting is performed anyway and a warning is issued.
+    void unsteady_newton_solve(const double& dt,
+                               const unsigned& max_adapt,
+                               const bool& first,
+                               const bool& shift = true);
+
+
+    /// Unsteady "doubly" adaptive Newton solve: Does temporal
+    /// adaptation first, i.e. we try to do a timestep with an increment
+    /// of dt, and adjusting dt until the solution on the given mesh satisfies
+    /// the temporal error measure with tolerance epsilon. Following
+    /// this, we do up to max_adapt spatial adaptions (without
+    /// re-examining the temporal error). If first==true, the initial conditions
+    /// are re-assigned after the mesh adaptations.
+    /// Shifting of time can be suppressed by overwriting the
+    /// default value of shift (true). [Shifting must be done
+    /// if first_timestep==true because we're constantly re-assigning
+    /// the initial conditions; if first_timestep==true and shift==false
+    /// shifting is performed anyway and a warning is issued.
+    double doubly_adaptive_unsteady_newton_solve(const double& dt,
+                                                 const double& epsilon,
+                                                 const unsigned& max_adapt,
+                                                 const bool& first,
+                                                 const bool& shift = true)
+    {
+      // Call helper function with default setting (do re-solve after
+      // spatial adaptation)
+      unsigned suppress_resolve_after_spatial_adapt_flag = 0;
+      return doubly_adaptive_unsteady_newton_solve_helper(
+        dt,
+        epsilon,
+        max_adapt,
+        suppress_resolve_after_spatial_adapt_flag,
+        first,
+        shift);
+    }
+
+
+    /// Unsteady "doubly" adaptive Newton solve: Does temporal
+    /// adaptation first, i.e. we try to do a timestep with an increment
+    /// of dt, and adjusting dt until the solution on the given mesh satisfies
+    /// the temporal error measure with tolerance epsilon. Following
+    /// this, we do up to max_adapt spatial adaptions (without
+    /// re-examining the temporal error). If first==true, the initial conditions
+    /// are re-assigned after the mesh adaptations.
+    /// Shifting of time can be suppressed by overwriting the
+    /// default value of shift (true). [Shifting must be done
+    /// if first_timestep==true because we're constantly re-assigning
+    /// the initial conditions; if first_timestep==true and shift==false
+    /// shifting is performed anyway and a warning is issued.
+    /// Pseudo-Boolean flag suppress_resolve_after_spatial_adapt [0: false;
+    /// 1: true] does what it says.]
+    double doubly_adaptive_unsteady_newton_solve(
+      const double& dt,
+      const double& epsilon,
+      const unsigned& max_adapt,
+      const unsigned& suppress_resolve_after_spatial_adapt_flag,
+      const bool& first,
+      const bool& shift = true)
+    {
+      // Call helper function
+      return doubly_adaptive_unsteady_newton_solve_helper(
+        dt,
+        epsilon,
+        max_adapt,
+        suppress_resolve_after_spatial_adapt_flag,
+        first,
+        shift);
+    }
+
+
+    /// Attempt to advance timestep by dt_desired. If the solution fails
+    /// the timestep will be halved until convergence is achieved, or the
+    /// timestep falls below NewtonSolverParameters::Minimum_time_step. The
+    /// error control parameter epsilon represents the (approximate) desired
+    /// magnitude of the global error at each timestep. The routine returns a
+    /// double that is the suggested next timestep and should be passed as
+    /// dt_desired the next time the routine is called. This version always
+    /// shifts the time values.
+    double adaptive_unsteady_newton_solve(const double& dt_desired,
+                                          const double& epsilon);
+
+    /// Attempt to advance timestep by dt_desired. If the solution fails
+    /// the timestep will be halved until convergence is achieved, or the
+    /// timestep falls below NewtonSolverParameters::Minimum_time_step. The
+    /// error control parameter epsilon represents the (approximate) desired
+    /// magnitude of the global error at each timestep. The routine returns a
+    /// double that is the suggested next timestep and should be passed as
+    /// dt_desired the next time the routine is called.
+    /// Once again the boolean flag, shift_values, is used to control whether
+    /// the time values are shifted.
+    double adaptive_unsteady_newton_solve(const double& dt_desired,
+                                          const double& epsilon,
+                                          const bool& shift_values);
+
+    /// Initialise data and nodal positions to simulate impulsive
+    /// start from initial configuration/solution
+    void assign_initial_values_impulsive();
+
+    /// Initialise data and nodal positions to simulate an impulsive
+    /// start and also set the initial and previous values of dt
+    void assign_initial_values_impulsive(const double& dt);
+
+    /// Calculate predictions
+    void calculate_predictions();
+
+    /// Enable recycling of the mass matrix in explicit timestepping
+    /// schemes. Useful for timestepping on fixed meshes when you want
+    /// to avoid the linear solve phase.
+    void enable_mass_matrix_reuse();
+
+    /// Turn off recyling of the mass matrix in explicit timestepping
+    /// schemes
+    void disable_mass_matrix_reuse();
+
+    /// Return whether the mass matrix is being reused
+    bool mass_matrix_reuse_is_enabled()
+    {
+      return Mass_matrix_reuse_is_enabled;
+    }
+
+    /// Refine refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem
+    void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      bool prune = false;
+      refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// Refine refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem; doc refinement process
+    void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
+                          DocInfo& doc_info)
+    {
+      bool prune = false;
+      refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// Refine refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem. Prune after
+    /// refinements
+    void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      bool prune = true;
+      refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// Refine refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem; doc refinement process
+    void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
+                                    DocInfo& doc_info)
+    {
+      bool prune = true;
+      refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    ///  Refine (all) refineable (sub)mesh(es) uniformly and
+    /// rebuild problem; doc refinement process.
+    void refine_uniformly(DocInfo& doc_info)
+    {
+      // Number of (sub)meshes
+      unsigned nmesh = std::max(unsigned(1), nsub_mesh());
+
+      // Refine each mesh once
+      Vector<unsigned> nrefine_for_mesh(nmesh, 1);
+      refine_uniformly(nrefine_for_mesh);
+    }
+
+
+    ///  Refine (all) refineable (sub)mesh(es) uniformly and
+    /// rebuild problem; doc refinement process.
+    void refine_uniformly_and_prune(DocInfo& doc_info)
+    {
+      // Number of (sub)meshes
+      unsigned nmesh = std::max(unsigned(1), nsub_mesh());
+
+      // Refine each mesh once
+      Vector<unsigned> nrefine_for_mesh(nmesh, 1);
+      refine_uniformly_and_prune(nrefine_for_mesh);
+    }
+
+
+    ///  Refine (all) refineable (sub)mesh(es) uniformly and
+    /// rebuild problem
+    void refine_uniformly()
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      refine_uniformly(doc_info);
+    }
+
+    /// Do uniform refinement for submesh i_mesh with documentation
+    void refine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
+
+    /// Do uniform refinement for submesh i_mesh without documentation
+    void refine_uniformly(const unsigned& i_mesh)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      refine_uniformly(i_mesh, doc_info);
+    }
+
+    /// p-refine p-refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem
+    void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      bool prune = false;
+      p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// p-refine p-refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem; doc refinement process
+    void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
+                            DocInfo& doc_info)
+    {
+      bool prune = false;
+      p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// p-refine p-refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem. Prune after
+    /// refinements
+    void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
+    {
+      // Not tested:
+      throw OomphLibWarning("This functionality has not yet been tested.",
+                            "Problem::p_refine_uniformly_and_prune()",
+                            OOMPH_EXCEPTION_LOCATION);
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      bool prune = true;
+      p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    /// p-refine p-refineable sub-meshes, each as many times as
+    /// specified in the vector and rebuild problem; doc refinement process
+    void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
+                                      DocInfo& doc_info)
+    {
+      // Not tested:
+      throw OomphLibWarning("This functionality has not yet been tested.",
+                            "Problem::p_refine_uniformly_and_prune()",
+                            OOMPH_EXCEPTION_LOCATION);
+      bool prune = true;
+      p_refine_uniformly_aux(nrefine_for_mesh, doc_info, prune);
+    }
+
+    ///  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    /// rebuild problem; doc refinement process.
+    void p_refine_uniformly(DocInfo& doc_info)
+    {
+      // Number of (sub)meshes
+      unsigned nmesh = std::max(unsigned(1), nsub_mesh());
+
+      // Refine each mesh once
+      Vector<unsigned> nrefine_for_mesh(nmesh, 1);
+      p_refine_uniformly(nrefine_for_mesh);
+    }
+
+
+    ///  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    /// rebuild problem; doc refinement process.
+    void p_refine_uniformly_and_prune(DocInfo& doc_info)
+    {
+      // Not tested:
+      throw OomphLibWarning("This functionality has not yet been tested.",
+                            "Problem::p_refine_uniformly_and_prune()",
+                            OOMPH_EXCEPTION_LOCATION);
+      // Number of (sub)meshes
+      unsigned nmesh = std::max(unsigned(1), nsub_mesh());
+
+      // Refine each mesh once
+      Vector<unsigned> nrefine_for_mesh(nmesh, 1);
+      p_refine_uniformly_and_prune(nrefine_for_mesh);
+    }
+
+
+    ///  p-refine (all) p-refineable (sub)mesh(es) uniformly and
+    /// rebuild problem
+    void p_refine_uniformly()
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      p_refine_uniformly(doc_info);
+    }
+
+    /// Do uniform p-refinement for submesh i_mesh with documentation
+    void p_refine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
+
+    /// Do uniform p-refinement for submesh i_mesh without documentation
+    void p_refine_uniformly(const unsigned& i_mesh)
+    {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      p_refine_uniformly(i_mesh, doc_info);
+    }
+
+    /// Refine (one and only!) mesh by splitting the elements identified
+    /// by their numbers relative to the problems' only mesh, then rebuild
+    /// the problem.
+    void refine_selected_elements(
+      const Vector<unsigned>& elements_to_be_refined);
+
+
+    /// Refine (one and only!) mesh by splitting the elements identified
+    /// by their pointers, then rebuild the problem.
+    void refine_selected_elements(
+      const Vector<RefineableElement*>& elements_to_be_refined_pt);
+
+    /// Refine specified submesh by splitting the elements identified
+    /// by their numbers relative to the submesh, then rebuild the problem.
+    void refine_selected_elements(
+      const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined);
+
+    /// Refine specified submesh by splitting the elements identified
+    /// by their pointers, then rebuild the problem.
+    void refine_selected_elements(
+      const unsigned& i_mesh,
+      const Vector<RefineableElement*>& elements_to_be_refined_pt);
+
+    /// Refine all submeshes by splitting the elements identified
+    /// by their numbers relative to each submesh in a Vector of Vectors,
+    /// then rebuild the problem.
+    void refine_selected_elements(
+      const Vector<Vector<unsigned>>& elements_to_be_refined);
+
+    /// Refine all submeshes by splitting the elements identified
+    /// by their pointers within each submesh in a Vector of Vectors,
+    /// then rebuild the problem.
+    void refine_selected_elements(
+      const Vector<Vector<RefineableElement*>>& elements_to_be_refined_pt);
+
+    /// p-refine (one and only!) mesh by refining the elements identified
+    /// by their numbers relative to the problems' only mesh, then rebuild
+    /// the problem.
+    void p_refine_selected_elements(
+      const Vector<unsigned>& elements_to_be_refined);
+
+
+    /// p-refine (one and only!) mesh by refining the elements identified
+    /// by their pointers, then rebuild the problem.
+    void p_refine_selected_elements(
+      const Vector<PRefineableElement*>& elements_to_be_refined_pt);
+
+    /// p-refine specified submesh by refining the elements identified
+    /// by their numbers relative to the submesh, then rebuild the problem.
+    void p_refine_selected_elements(
+      const unsigned& i_mesh, const Vector<unsigned>& elements_to_be_refined);
+
+    /// p-refine specified submesh by refining the elements identified
+    /// by their pointers, then rebuild the problem.
+    void p_refine_selected_elements(
+      const unsigned& i_mesh,
+      const Vector<PRefineableElement*>& elements_to_be_refined_pt);
+
+    /// p-refine all submeshes by refining the elements identified
+    /// by their numbers relative to each submesh in a Vector of Vectors,
+    /// then rebuild the problem.
+    void p_refine_selected_elements(
+      const Vector<Vector<unsigned>>& elements_to_be_refined);
+
+    /// p-refine all submeshes by refining the elements identified
+    /// by their pointers within each submesh in a Vector of Vectors,
+    /// then rebuild the problem.
+    void p_refine_selected_elements(
+      const Vector<Vector<PRefineableElement*>>& elements_to_be_refined_pt);
+
+    ///  Refine (all) refineable (sub)mesh(es) uniformly and
+    /// rebuild problem. Return 0 for success,
+    /// 1 for failure (if unrefinement has reached the coarsest permitted
+    /// level)
+    unsigned unrefine_uniformly();
+
+    /// Do uniform refinement for submesh i_mesh without documentation.
+    /// Return 0 for success, 1 for failure (if unrefinement has reached
+    /// the coarsest permitted level)
+    unsigned unrefine_uniformly(const unsigned& i_mesh);
+
+    ///  p-unrefine (all) p-refineable (sub)mesh(es) uniformly and
+    /// rebuild problem.
+    void p_unrefine_uniformly(DocInfo& doc_info);
+
+    /// Do uniform p-unrefinement for submesh i_mesh without documentation.
+    void p_unrefine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
+
+    /// Adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on their own error estimates and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// Return # of refined/unrefined elements. On return from this
+    /// function, Problem can immediately be solved again.
+    void adapt(unsigned& n_refined, unsigned& n_unrefined);
+
+    /// Adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on their own error estimates and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// On return from this function, Problem can immediately be solved again.
+    /// [Argument-free wrapper]
+    void adapt()
+    {
+      unsigned n_refined, n_unrefined;
+      adapt(n_refined, n_unrefined);
+    }
+
+    /// p-adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on their own error estimates and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// Return # of refined/unrefined elements. On return from this
+    /// function, Problem can immediately be solved again.
+    void p_adapt(unsigned& n_refined, unsigned& n_unrefined);
+
+    /// p-adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on their own error estimates and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// On return from this function, Problem can immediately be solved again.
+    /// [Argument-free wrapper]
+    void p_adapt()
+    {
+      unsigned n_refined, n_unrefined;
+      p_adapt(n_refined, n_unrefined);
+    }
+
+
+    /// Adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on the error estimates in elemental_error
+    /// and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// Return # of refined/unrefined elements. On return from this
+    /// function, Problem can immediately be solved again.
+    void adapt_based_on_error_estimates(
+      unsigned& n_refined,
+      unsigned& n_unrefined,
+      Vector<Vector<double>>& elemental_error);
+
+    /// Adapt problem:
+    /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+    /// based on the error estimates in elemental_error
+    /// and the target errors specified
+    /// in the mesh(es). Following mesh adaptation,
+    /// update global mesh, and re-assign equation numbers.
+    /// Return # of refined/unrefined elements. On return from this
+    /// function, Problem can immediately be solved again.
+    /// [Wrapper without n_refined and n_unrefined arguments]
+    void adapt_based_on_error_estimates(Vector<Vector<double>>& elemental_error)
+    {
+      unsigned n_refined, n_unrefined;
+      adapt_based_on_error_estimates(n_refined, n_unrefined, elemental_error);
+    }
+
+
+    ///  Return the error estimates computed by (all) refineable
+    /// (sub)mesh(es) in the elemental_error structure, which consists of
+    /// a vector of vectors of elemental errors, one vector for each (sub)mesh.
+    void get_all_error_estimates(Vector<Vector<double>>& elemental_error);
+
+    /// Get max and min error for all elements in submeshes
+    void doc_errors(DocInfo& doc_info);
+
+    /// Get max and min error for all elements in submeshes
+    void doc_errors()
+    {
+      DocInfo tmp_doc_info;
+      tmp_doc_info.disable_doc();
+      doc_errors(tmp_doc_info);
+    }
+
+    /// Enable the output of information when in the newton solver
+    /// (Default)
+    void enable_info_in_newton_solve()
+    {
+      Shut_up_in_newton_solve = false;
+    }
+
+    /// Disable the output of information when in the  newton solver
+    void disable_info_in_newton_solve()
+    {
+      Shut_up_in_newton_solve = true;
+    }
+  };
+
+
+  //=======================================================================
+  /// A class to handle errors in the Newton solver
+  //=======================================================================
+  class NewtonSolverError : public OomphLibError
+  {
+  private:
+    /// Error in the linear solver
+    bool Linear_solver_error;
+
+    /// Max. # of iterations performed when the Newton solver died
+    unsigned Iterations;
+
+    /// Max. residual when Newton solver died
+    double Maxres;
+
+  public:
+    /// Default constructor, does nothing
+    NewtonSolverError()
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        Linear_solver_error(false),
+        Iterations(0),
+        Maxres(0.0)
+    {
+    }
+
+    /// Constructor that passes a failure of the linear solver
+    NewtonSolverError(const bool& Passed_linear_failure)
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        Linear_solver_error(Passed_linear_failure),
+        Iterations(0),
+        Maxres(0.0)
+    {
+    }
+
+    /// Constructor that passes number of iterations and residuals
+    NewtonSolverError(unsigned Passed_iterations, double Passed_maxres)
+      : OomphLibError("There was an error in the Newton Solver.",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION),
+        Linear_solver_error(false),
+        Iterations(Passed_iterations),
+        Maxres(Passed_maxres)
+    {
+    }
+
+    /// Access function to the error in the linear solver
+    bool linear_solver_error()
+    {
+      return Linear_solver_error;
+    }
+
+    /// Access function to Max. # of iterations performed when the Newton solver
+    /// died
+    unsigned iterations()
+    {
+      return Iterations;
+    }
+
+    /// Access function to Max. residual when Newton solver died
+    double maxres()
+    {
+      return Maxres;
+    }
+  };
+
+
+} // namespace oomph
+
+
+#endif

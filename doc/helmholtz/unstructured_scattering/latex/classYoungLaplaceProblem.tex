@@ -1,0 +1,328 @@
+\doxysection{Young\+Laplace\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classYoungLaplaceProblem}{}\label{classYoungLaplaceProblem}\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+
+
+2D Young\+Laplace problem on rectangular domain, discretised with 2D QYoung\+Laplace elements. The specific type of element is specified via the template parameter.  
+
+
+Inheritance diagram for Young\+Laplace\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classYoungLaplaceProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a}{Young\+Laplace\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14}{\texorpdfstring{$\sim$}{\string~}\+Young\+Laplace\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info, ofstream \&trace\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to and the trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a}{Young\+Laplace\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14}{\texorpdfstring{$\sim$}{\string~}\+Young\+Laplace\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info, ofstream \&trace\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to and the trace file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classYoungLaplaceProblem_a3ebbc17f9f27480e720f0bd87a036a12}{create\+\_\+contact\+\_\+angle\+\_\+elements}} (const unsigned \&b)
+\begin{DoxyCompactList}\small\item\em Create Young\+Laplace contact angle elements on the b-\/th boundary of the problem\textquotesingle{}s mesh and add them to mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classYoungLaplaceProblem_a1d659f1b2d73140a5d52889f9581d12f}{Control\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Node at which the height (displacement along spine) is controlled/doced. \end{DoxyCompactList}\item 
+Data \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classYoungLaplaceProblem_a78d1ae3b73777674003b2c9794ea9b43}{Kappa\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Data object that stores the prescribed curvature. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem_a4dc49a3807638823ac2157d67e8fed4a}{N\+\_\+bulk\+\_\+elements}}
+\begin{DoxyCompactList}\small\item\em Number of Young\+Laplace "{}bulk"{} elements (We\textquotesingle{}re attaching the ~\newline
+ contact angle elements to the bulk mesh -\/-\/\texorpdfstring{$>$}{>} only the first N\+\_\+bulk\+\_\+elements elements in the mesh are bulk elements!) \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem_a30b767547f8b93461b56653dd007063a}{Last\+\_\+element\+\_\+on\+\_\+boundary1}}
+\begin{DoxyCompactList}\small\item\em Number of last Face\+Element on boundary 1. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem_a5c9ac739e14a03c0dd36ff7407382814}{Last\+\_\+element\+\_\+on\+\_\+boundary3}}
+\begin{DoxyCompactList}\small\item\em Number of last Face\+Element on boundary 3. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Young\+Laplace\+Problem$<$ ELEMENT $>$}
+2D Young\+Laplace problem on rectangular domain, discretised with 2D QYoung\+Laplace elements. The specific type of element is specified via the template parameter. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00139}{139}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a}\label{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!YoungLaplaceProblem@{YoungLaplaceProblem}}
+\index{YoungLaplaceProblem@{YoungLaplaceProblem}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{YoungLaplaceProblem()}{YoungLaplaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classYoungLaplaceProblem}{\+::\+Young\+Laplace\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+Constructor for Young\+Laplace problem. Add height control element to mesh at the very end
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00180}{180}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00051}{Global\+Parameters\+::\+Controlled\+\_\+height}}, \mbox{\hyperlink{barrel_8cc_source_l00072}{Global\+Parameters\+::spine\+\_\+base\+\_\+function()}}, and \mbox{\hyperlink{barrel_8cc_source_l00104}{Global\+Parameters\+::spine\+\_\+function()}}.
+
+\Hypertarget{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14}\label{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!````~YoungLaplaceProblem@{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem}}
+\index{````~YoungLaplaceProblem@{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem()}{\string~YoungLaplaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00148}{148}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a}\label{classYoungLaplaceProblem_a4ea552f351994849e9ab597ef2da797a} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!YoungLaplaceProblem@{YoungLaplaceProblem}}
+\index{YoungLaplaceProblem@{YoungLaplaceProblem}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{YoungLaplaceProblem()}{YoungLaplaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classYoungLaplaceProblem}{\+::\+Young\+Laplace\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+\Hypertarget{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14}\label{classYoungLaplaceProblem_aa3482606bfd86a3db9d2dec86ba75f14} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!````~YoungLaplaceProblem@{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem}}
+\index{````~YoungLaplaceProblem@{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}YoungLaplaceProblem()}{\string~YoungLaplaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00062}{62}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc}\label{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve\+: Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00159}{159}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc}\label{classYoungLaplaceProblem_a8eed49ad1c6247cc293a584ab9262efc} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve\+: Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00068}{68}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24}\label{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem before solve. 
+
+Update the problem specs before solve\+: (Re-\/)set boundary conditions to the values from the exact solution. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00151}{151}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00171}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::\+Kappa\+\_\+pt}}.
+
+\Hypertarget{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24}\label{classYoungLaplaceProblem_a93dd45313d28c3b9b0b51e34d14ebd24} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve. 
+
+\Hypertarget{classYoungLaplaceProblem_a3ebbc17f9f27480e720f0bd87a036a12}\label{classYoungLaplaceProblem_a3ebbc17f9f27480e720f0bd87a036a12} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!create\_contact\_angle\_elements@{create\_contact\_angle\_elements}}
+\index{create\_contact\_angle\_elements@{create\_contact\_angle\_elements}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{create\_contact\_angle\_elements()}{create\_contact\_angle\_elements()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+contact\+\_\+angle\+\_\+elements (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create Young\+Laplace contact angle elements on the b-\/th boundary of the problem\textquotesingle{}s mesh and add them to mesh. 
+
+Create Young\+Laplace contact angle elements on the b-\/th boundary of the Mesh. 
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00279}{279}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12}\label{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to and the trace file. 
+
+Doc the solution\+: doc\+\_\+info contains labels/output directory etc. 
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00291}{291}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{barrel_8cc_source_l00054}{Global\+Parameters\+::get\+\_\+exact\+\_\+kappa()}}.
+
+
+
+Referenced by \mbox{\hyperlink{barrel_8cc_source_l00321}{main()}}, and \mbox{\hyperlink{young__laplace_8cc_source_l00478}{run\+\_\+it()}}.
+
+\Hypertarget{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12}\label{classYoungLaplaceProblem_a16f10e66457718eca76d1335dbed8f12} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to and the trace file. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classYoungLaplaceProblem_a1d659f1b2d73140a5d52889f9581d12f}\label{classYoungLaplaceProblem_a1d659f1b2d73140a5d52889f9581d12f} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!Control\_node\_pt@{Control\_node\_pt}}
+\index{Control\_node\_pt@{Control\_node\_pt}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Control\_node\_pt}{Control\_node\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\+Control\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Node at which the height (displacement along spine) is controlled/doced. 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00168}{168}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a78d1ae3b73777674003b2c9794ea9b43}\label{classYoungLaplaceProblem_a78d1ae3b73777674003b2c9794ea9b43} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!Kappa\_pt@{Kappa\_pt}}
+\index{Kappa\_pt@{Kappa\_pt}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Kappa\_pt}{Kappa\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Data\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\+Kappa\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Data object that stores the prescribed curvature. 
+
+
+
+Definition at line \mbox{\hyperlink{barrel_8cc_source_l00171}{171}} of file \mbox{\hyperlink{barrel_8cc_source}{barrel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{barrel_8cc_source_l00151}{Young\+Laplace\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}.
+
+\Hypertarget{classYoungLaplaceProblem_a30b767547f8b93461b56653dd007063a}\label{classYoungLaplaceProblem_a30b767547f8b93461b56653dd007063a} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!Last\_element\_on\_boundary1@{Last\_element\_on\_boundary1}}
+\index{Last\_element\_on\_boundary1@{Last\_element\_on\_boundary1}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Last\_element\_on\_boundary1}{Last\_element\_on\_boundary1}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\+Last\+\_\+element\+\_\+on\+\_\+boundary1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of last Face\+Element on boundary 1. 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00086}{86}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a5c9ac739e14a03c0dd36ff7407382814}\label{classYoungLaplaceProblem_a5c9ac739e14a03c0dd36ff7407382814} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!Last\_element\_on\_boundary3@{Last\_element\_on\_boundary3}}
+\index{Last\_element\_on\_boundary3@{Last\_element\_on\_boundary3}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Last\_element\_on\_boundary3}{Last\_element\_on\_boundary3}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\+Last\+\_\+element\+\_\+on\+\_\+boundary3\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of last Face\+Element on boundary 3. 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00089}{89}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+\Hypertarget{classYoungLaplaceProblem_a4dc49a3807638823ac2157d67e8fed4a}\label{classYoungLaplaceProblem_a4dc49a3807638823ac2157d67e8fed4a} 
+\index{YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}!N\_bulk\_elements@{N\_bulk\_elements}}
+\index{N\_bulk\_elements@{N\_bulk\_elements}!YoungLaplaceProblem$<$ ELEMENT $>$@{YoungLaplaceProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{N\_bulk\_elements}{N\_bulk\_elements}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classYoungLaplaceProblem}{Young\+Laplace\+Problem}}$<$ ELEMENT $>$\+::\+N\+\_\+bulk\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of Young\+Laplace "{}bulk"{} elements (We\textquotesingle{}re attaching the ~\newline
+ contact angle elements to the bulk mesh -\/-\/\texorpdfstring{$>$}{>} only the first N\+\_\+bulk\+\_\+elements elements in the mesh are bulk elements!) 
+
+
+
+Definition at line \mbox{\hyperlink{young__laplace_8cc_source_l00083}{83}} of file \mbox{\hyperlink{young__laplace_8cc_source}{young\+\_\+laplace.\+cc}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{barrel_8cc}{barrel.\+cc}}\item 
+\mbox{\hyperlink{young__laplace_8cc}{young\+\_\+laplace.\+cc}}\end{DoxyCompactItemize}

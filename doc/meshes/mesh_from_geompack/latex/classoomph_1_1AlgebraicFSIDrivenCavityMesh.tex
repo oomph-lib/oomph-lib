@@ -1,0 +1,173 @@
+\doxysection{oomph\+::Algebraic\+FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh}\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+
+
+/ Alebraic node update version of \doxylink{classoomph_1_1FSIDrivenCavityMesh}{FSIDriven\+Cavity\+Mesh}  
+
+
+
+
+{\ttfamily \#include $<$fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.645833cm]{classoomph_1_1AlgebraicFSIDrivenCavityMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a973ccadc769d98fed6bc9dd4eff32083}{Algebraic\+FSIDriven\+Cavity\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{gap\+\_\+fraction}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a048a142aff0ca5fd62273f756bce4ab6}{\texorpdfstring{$\sim$}{\string~}\+Algebraic\+FSIDriven\+Cavity\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a87d34d6cf84c62a9049773451c664176}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the node-\/udate data after mesh adaptation. Empty -- no update of node update required as this is non-\/refineable mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_af227477a1de5faf56352d21913a91feb}{FSIDriven\+Cavity\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{gap\+\_\+fraction}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, number of elements, fractional height of the gap above the moving wall, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407}{Simple\+Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&Nx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&Ny, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&Lx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&Ly, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions. Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a7f6b7c3dae1c61c2cdb0cbd229173114}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Function to setup the algebraic node update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}{oomph\+::\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_a179f742e7bb521e8943107be3005d49b}{Nx}}
+\begin{DoxyCompactList}\small\item\em Number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_af80a5662c2f61ebe49caba4ab08886b9}{Ny}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_ad95b3650cfa765b1ac6a0f131d407b23}{Gap\+\_\+fraction}}
+\begin{DoxyCompactList}\small\item\em Fraction of the gap next to moving lid, relative to the height of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh_a4f05e03a223ac1f8370bdd39c56a5638}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the moving wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}
+/ Alebraic node update version of \doxylink{classoomph_1_1FSIDrivenCavityMesh}{FSIDriven\+Cavity\+Mesh} 
+
+
+\begin{DoxyItemize}
+\item Boundary 0 is the moving lid.
+\item Boundary 1 is the gap above the moving lid on the right wall
+\item Boundary 2 is the rigid part of the right wall
+\item Boundary 3 is the moving (elastic) wall
+\item Boundary 4 is the rigid part of the left wall
+\item Boundary 5 is the gap above the moving lid on the left wall 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source_l00153}{153}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a973ccadc769d98fed6bc9dd4eff32083}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a973ccadc769d98fed6bc9dd4eff32083} 
+\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!AlgebraicFSIDrivenCavityMesh@{AlgebraicFSIDrivenCavityMesh}}
+\index{AlgebraicFSIDrivenCavityMesh@{AlgebraicFSIDrivenCavityMesh}!oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicFSIDrivenCavityMesh()}{AlgebraicFSIDrivenCavityMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{gap\+\_\+fraction,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source_l00161}{161}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00283}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a048a142aff0ca5fd62273f756bce4ab6}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a048a142aff0ca5fd62273f756bce4ab6} 
+\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!````~AlgebraicFSIDrivenCavityMesh@{\texorpdfstring{$\sim$}{\string~}AlgebraicFSIDrivenCavityMesh}}
+\index{````~AlgebraicFSIDrivenCavityMesh@{\texorpdfstring{$\sim$}{\string~}AlgebraicFSIDrivenCavityMesh}!oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AlgebraicFSIDrivenCavityMesh()}{\string~AlgebraicFSIDrivenCavityMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{Algebraic\+FSIDriven\+Cavity\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source_l00180}{180}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a56c72b78935e84f7fef3f6b5d85556c3} 
+\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!algebraic\_node\_update@{algebraic\_node\_update}}
+\index{algebraic\_node\_update@{algebraic\_node\_update}!oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{algebraic\_node\_update()}{algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Perform algebraic mesh update at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00202}{202}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a7f6b7c3dae1c61c2cdb0cbd229173114}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a7f6b7c3dae1c61c2cdb0cbd229173114} 
+\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
+\index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Function to setup the algebraic node update. 
+
+Setup algebraic mesh update -- assumes that mesh has initially been set up with a flush upper wall. 
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00283}{283}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source_l00161}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a87d34d6cf84c62a9049773451c664176}\label{classoomph_1_1AlgebraicFSIDrivenCavityMesh_a87d34d6cf84c62a9049773451c664176} 
+\index{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::AlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicFSIDrivenCavityMesh}{oomph\+::\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the node-\/udate data after mesh adaptation. Empty -- no update of node update required as this is non-\/refineable mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source_l00189}{189}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__driven__cavity__mesh_8h}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

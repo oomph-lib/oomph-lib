@@ -1,0 +1,98 @@
+\doxysection{oomph\+::Locate\+\_\+zeta\+\_\+helpers Namespace Reference}
+\hypertarget{namespaceoomph_1_1Locate__zeta__helpers}{}\label{namespaceoomph_1_1Locate__zeta__helpers}\index{oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}}
+
+
+Helper namespace for tolerances, number of iterations, etc used in the locate\+\_\+zeta function in \doxylink{classoomph_1_1FiniteElement}{Finite\+Element}.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers_ad78a9bb56905a77e0bb9486ba3fac6b3}{Newton\+\_\+tolerance}} = 1.\+0e-\/7
+\begin{DoxyCompactList}\small\item\em Convergence tolerance for the newton solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers_a473b3aa4666ed6dfeb49bff0c6ed0e71}{Max\+\_\+newton\+\_\+iterations}} = 10
+\begin{DoxyCompactList}\small\item\em Maximum number of newton iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers_add7a14717af82a04aea106aa76fa1a94}{Radius\+\_\+multiplier\+\_\+for\+\_\+fast\+\_\+exit\+\_\+from\+\_\+locate\+\_\+zeta}} = 1.\+5
+\begin{DoxyCompactList}\small\item\em Multiplier for (zeta-\/based) outer radius of element used for deciding that point is outside element. Set to negative value to suppress test. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers_ad92daa85eb93813c72e1ec57cce15382}{N\+\_\+local\+\_\+points}} = 5
+\begin{DoxyCompactList}\small\item\em Number of points along one dimension of each element used to create coordinates within the element in order to see which has the smallest initial residual (and is therefore used as the initial guess in the Newton method when locating coordinate) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper namespace for tolerances, number of iterations, etc used in the locate\+\_\+zeta function in \doxylink{classoomph_1_1FiniteElement}{Finite\+Element}. 
+
+Helper namespace for tolerances and iterations within the Newton method used in the locate\+\_\+zeta function in Finite\+Elements. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1Locate__zeta__helpers_a473b3aa4666ed6dfeb49bff0c6ed0e71}\label{namespaceoomph_1_1Locate__zeta__helpers_a473b3aa4666ed6dfeb49bff0c6ed0e71} 
+\index{oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}!Max\_newton\_iterations@{Max\_newton\_iterations}}
+\index{Max\_newton\_iterations@{Max\_newton\_iterations}!oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}}
+\doxysubsubsection{\texorpdfstring{Max\_newton\_iterations}{Max\_newton\_iterations}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Locate\+\_\+zeta\+\_\+helpers\+::\+Max\+\_\+newton\+\_\+iterations = 10}
+
+
+
+Maximum number of newton iterations. 
+
+Maximum number of Newton iterations. 
+
+Definition at line \mbox{\hyperlink{elements_8cc_source_l01682}{1682}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}.
+
+\Hypertarget{namespaceoomph_1_1Locate__zeta__helpers_ad92daa85eb93813c72e1ec57cce15382}\label{namespaceoomph_1_1Locate__zeta__helpers_ad92daa85eb93813c72e1ec57cce15382} 
+\index{oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}!N\_local\_points@{N\_local\_points}}
+\index{N\_local\_points@{N\_local\_points}!oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}}
+\doxysubsubsection{\texorpdfstring{N\_local\_points}{N\_local\_points}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Locate\+\_\+zeta\+\_\+helpers\+::\+N\+\_\+local\+\_\+points = 5}
+
+
+
+Number of points along one dimension of each element used to create coordinates within the element in order to see which has the smallest initial residual (and is therefore used as the initial guess in the Newton method when locating coordinate) 
+
+Number of points along one dimension of each element used to create coordinates within the element in order to see which has the smallest initial residual (and is therefore used as the initial guess in the Newton method for locate\+\_\+zeta) 
+
+Definition at line \mbox{\hyperlink{elements_8cc_source_l01693}{1693}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}.
+
+\Hypertarget{namespaceoomph_1_1Locate__zeta__helpers_ad78a9bb56905a77e0bb9486ba3fac6b3}\label{namespaceoomph_1_1Locate__zeta__helpers_ad78a9bb56905a77e0bb9486ba3fac6b3} 
+\index{oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}!Newton\_tolerance@{Newton\_tolerance}}
+\index{Newton\_tolerance@{Newton\_tolerance}!oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}}
+\doxysubsubsection{\texorpdfstring{Newton\_tolerance}{Newton\_tolerance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Locate\+\_\+zeta\+\_\+helpers\+::\+Newton\+\_\+tolerance = 1.\+0e-\/7}
+
+
+
+Convergence tolerance for the newton solver. 
+
+Convergence tolerance for the Newton solver. 
+
+Definition at line \mbox{\hyperlink{elements_8cc_source_l01679}{1679}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}.
+
+\Hypertarget{namespaceoomph_1_1Locate__zeta__helpers_add7a14717af82a04aea106aa76fa1a94}\label{namespaceoomph_1_1Locate__zeta__helpers_add7a14717af82a04aea106aa76fa1a94} 
+\index{oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}!Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta@{Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta}}
+\index{Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta@{Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta}!oomph::Locate\_zeta\_helpers@{oomph::Locate\_zeta\_helpers}}
+\doxysubsubsection{\texorpdfstring{Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta}{Radius\_multiplier\_for\_fast\_exit\_from\_locate\_zeta}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Locate\+\_\+zeta\+\_\+helpers\+::\+Radius\+\_\+multiplier\+\_\+for\+\_\+fast\+\_\+exit\+\_\+from\+\_\+locate\+\_\+zeta = 1.\+5}
+
+
+
+Multiplier for (zeta-\/based) outer radius of element used for deciding that point is outside element. Set to negative value to suppress test. 
+
+
+
+Definition at line \mbox{\hyperlink{elements_8cc_source_l01687}{1687}} of file \mbox{\hyperlink{elements_8cc_source}{elements.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}.
+

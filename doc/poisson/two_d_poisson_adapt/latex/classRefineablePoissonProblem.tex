@@ -1,0 +1,181 @@
+\doxysection{Refineable\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classRefineablePoissonProblem}{}\label{classRefineablePoissonProblem}\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+
+
+2D Poisson problem on rectangular domain, discretised with refineable 2D QPoisson elements. The specific type of element is specified via the template parameter.  
+
+
+Inheritance diagram for Refineable\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRefineablePoissonProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}{Refineable\+Poisson\+Problem}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Poisson\+Equations}}$<$ 2 $>$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{\+::\+Poisson\+Source\+Fct\+Pt}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source\+\_\+fct\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to source function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineablePoissonProblem_a84980680d8a6576e14af42a8639d391a}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Poisson\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem_a883906ab6c06ffa10ed55dc4fc02ce96}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem_ac4d433dad09bce5bd9be21e86d347e38}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem after solve (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem_aaf9482084473a6ca2bd0de24acae08e9}{doc\+\_\+solution}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Doc\+Info}} \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Simple\+Refineable\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineablePoissonProblem_a3cde3ea5577b065e081eb74ff870b5c3}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Overloaded version of the Problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Poisson\+Equations}}$<$ 2 $>$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{\+::\+Poisson\+Source\+Fct\+Pt}} \mbox{\hyperlink{classRefineablePoissonProblem_abaf852221a8673550f96bbb507d6b05a}{Source\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to source function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}}$>$\newline
+class Refineable\+Poisson\+Problem$<$ ELEMENT $>$}
+2D Poisson problem on rectangular domain, discretised with refineable 2D QPoisson elements. The specific type of element is specified via the template parameter. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00127}{127}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}\label{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!RefineablePoissonProblem@{RefineablePoissonProblem}}
+\index{RefineablePoissonProblem@{RefineablePoissonProblem}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{RefineablePoissonProblem()}{RefineablePoissonProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\mbox{\hyperlink{classRefineablePoissonProblem}{\+::\+Refineable\+Poisson\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Poisson\+Equations}}$<$ 2 $>$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{\+::\+Poisson\+Source\+Fct\+Pt}}}]{source\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to source function. 
+
+Constructor for Poisson problem\+: Pass pointer to source function. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00173}{173}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00153}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00162}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Source\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classRefineablePoissonProblem_a84980680d8a6576e14af42a8639d391a}\label{classRefineablePoissonProblem_a84980680d8a6576e14af42a8639d391a} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!````~RefineablePoissonProblem@{\texorpdfstring{$\sim$}{\string~}RefineablePoissonProblem}}
+\index{````~RefineablePoissonProblem@{\texorpdfstring{$\sim$}{\string~}RefineablePoissonProblem}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RefineablePoissonProblem()}{\string~RefineablePoissonProblem()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00137}{137}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRefineablePoissonProblem_ac4d433dad09bce5bd9be21e86d347e38}\label{classRefineablePoissonProblem_ac4d433dad09bce5bd9be21e86d347e38} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00144}{144}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+\Hypertarget{classRefineablePoissonProblem_a883906ab6c06ffa10ed55dc4fc02ce96}\label{classRefineablePoissonProblem_a883906ab6c06ffa10ed55dc4fc02ce96} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the problem specs before solve\+: Reset boundary conditions to the values from the exact solution. 
+
+Update the problem specs before solve\+: (Re-\/)set boundary conditions to the values from the exact solution. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00241}{241}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00098}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classRefineablePoissonProblem_aaf9482084473a6ca2bd0de24acae08e9}\label{classRefineablePoissonProblem_aaf9482084473a6ca2bd0de24acae08e9} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. Doc\+Info object stores flags/labels for where the output gets written to. 
+
+Doc the solution\+: doc\+\_\+info contains labels/output directory etc. 
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00279}{279}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00098}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classRefineablePoissonProblem_a3cde3ea5577b065e081eb74ff870b5c3}\label{classRefineablePoissonProblem_a3cde3ea5577b065e081eb74ff870b5c3} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Simple\+Refineable\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overloaded version of the Problem\textquotesingle{}s access function to the mesh. Recasts the pointer to the base Mesh object to the actual mesh type. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00153}{153}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00174}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Poisson\+Problem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classRefineablePoissonProblem_abaf852221a8673550f96bbb507d6b05a}\label{classRefineablePoissonProblem_abaf852221a8673550f96bbb507d6b05a} 
+\index{RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}!Source\_fct\_pt@{Source\_fct\_pt}}
+\index{Source\_fct\_pt@{Source\_fct\_pt}!RefineablePoissonProblem$<$ ELEMENT $>$@{RefineablePoissonProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Source\_fct\_pt}{Source\_fct\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{class}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Poisson\+Equations}}$<$2$>$\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{\+::\+Poisson\+Source\+Fct\+Pt}} \mbox{\hyperlink{classRefineablePoissonProblem}{Refineable\+Poisson\+Problem}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{ELEMENT}} $>$\+::\+Source\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to source function. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00162}{162}} of file \mbox{\hyperlink{two__d__poisson__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__poisson__adapt_8cc_source_l00174}{Refineable\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Poisson\+Problem()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{two__d__poisson__adapt_8cc}{two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,302 @@
+\doxysection{oomph\+::Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+
+
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a Sisko fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a cubic (for n \texorpdfstring{$<$}{<} 1)  
+
+
+
+
+{\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
+
+Inheritance diagram for oomph\+::Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a284ae14a748f8650c68f6e6b6bb8b742}{Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}alpha\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{flow\+\_\+index\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{critical\+\_\+second\+\_\+invariant\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em "{}\+Cutoff regularised"{} Sisko constitutive equation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_afa231563fc5db2dd262f6536b461cd04}{calculate\+\_\+cutoff\+\_\+viscosity}} ()
+\begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4aa9049f9acfd25208deb26d011350fc}{calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+viscosity}})
+\begin{DoxyCompactList}\small\item\em Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff Hard-\/coded to a value that ensures a smooth transition. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4fe343a1c95f24fde634df78b7fc31cc}{calculate\+\_\+zero\+\_\+shear\+\_\+viscosity}} ()
+\begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at zero I2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_ab45c38b298775d7225bc8f03fa045294}{report\+\_\+cut\+\_\+off\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+invariant}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{cut\+\_\+off\+\_\+viscosity}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zero\+\_\+shear\+\_\+viscosity}})
+\begin{DoxyCompactList}\small\item\em Report cutoff values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a0a0d5f636cfcfefa838c95d24e12eed7}{calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&a, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&b)
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_aab87a911e6c87d5126240a756ea1a5fe}{viscosity}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Viscosity ratio as a fct of strain rate invariant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a66579b2c9c19b7ca3168fe58202e8591}{dviscosity\+\_\+dinvariant}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor}})
+\begin{DoxyCompactList}\small\item\em Deriv of viscosity w.\+r.\+t. strain rate invariant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a4b84eb3626aaed2f77f6dc96258f7e01}{Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_af85f107604d04e8fdaf03e8274c485e6}{\texorpdfstring{$\sim$}{\string~}\+Generalised\+Newtonian\+Constitutive\+Equation}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a33df82ccf7720d8e9bee3be5e4cf4781}{Alpha\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em pre-\/factor alpha \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a14da5ea532c1e43195a1088ef82a7f22}{Flow\+\_\+index\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em power law index n \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a933d63f71e194671e7d922cb3c98d0d3}{Critical\+\_\+second\+\_\+invariant\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$}
+A \doxylink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation} class defining a Sisko fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a cubic (for n \texorpdfstring{$<$}{<} 1) 
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00683}{683}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a284ae14a748f8650c68f6e6b6bb8b742}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a284ae14a748f8650c68f6e6b6bb8b742} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!SiskoTanMilRegWithBlendingConstitutiveEquation@{SiskoTanMilRegWithBlendingConstitutiveEquation}}
+\index{SiskoTanMilRegWithBlendingConstitutiveEquation@{SiskoTanMilRegWithBlendingConstitutiveEquation}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{SiskoTanMilRegWithBlendingConstitutiveEquation()}{SiskoTanMilRegWithBlendingConstitutiveEquation()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{alpha\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{flow\+\_\+index\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{critical\+\_\+second\+\_\+invariant\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+"{}\+Cutoff regularised"{} Sisko constitutive equation 
+
+get the cutoff viscosity
+
+get the zero shear viscosity
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00700}{700}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_afa231563fc5db2dd262f6536b461cd04}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_afa231563fc5db2dd262f6536b461cd04} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}}
+\index{calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_cutoff\_viscosity()}{calculate\_cutoff\_viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+cutoff\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{729}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00691}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00761}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00700}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a0a0d5f636cfcfefa838c95d24e12eed7}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a0a0d5f636cfcfefa838c95d24e12eed7} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_fitting\_parameters\_of\_cubic@{calculate\_fitting\_parameters\_of\_cubic}}
+\index{calculate\_fitting\_parameters\_of\_cubic@{calculate\_fitting\_parameters\_of\_cubic}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_fitting\_parameters\_of\_cubic()}{calculate\_fitting\_parameters\_of\_cubic()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{a,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{771}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00688}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00741}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00691}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00847}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00807}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4aa9049f9acfd25208deb26d011350fc}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4aa9049f9acfd25208deb26d011350fc} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_viscosity\_offset\_at\_zero\_shear@{calculate\_viscosity\_offset\_at\_zero\_shear}}
+\index{calculate\_viscosity\_offset\_at\_zero\_shear@{calculate\_viscosity\_offset\_at\_zero\_shear}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_viscosity\_offset\_at\_zero\_shear()}{calculate\_viscosity\_offset\_at\_zero\_shear()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff Hard-\/coded to a value that ensures a smooth transition. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00741}{741}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4fe343a1c95f24fde634df78b7fc31cc}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a4fe343a1c95f24fde634df78b7fc31cc} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}}
+\index{calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_zero\_shear\_viscosity()}{calculate\_zero\_shear\_viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function that calculates the viscosity at zero I2. 
+
+Offset by how much the zero shear rate viscosity lies above the viscosity at I2\+\_\+cutoff
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{747}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00741}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+viscosity\+\_\+offset\+\_\+at\+\_\+zero\+\_\+shear()}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00761}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00700}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00807}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a66579b2c9c19b7ca3168fe58202e8591}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a66579b2c9c19b7ca3168fe58202e8591} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
+\index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Deriv of viscosity w.\+r.\+t. strain rate invariant. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00847}{847}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00688}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Alpha\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00691}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_ab45c38b298775d7225bc8f03fa045294}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_ab45c38b298775d7225bc8f03fa045294} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!report\_cut\_off\_values@{report\_cut\_off\_values}}
+\index{report\_cut\_off\_values@{report\_cut\_off\_values}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{report\_cut\_off\_values()}{report\_cut\_off\_values()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::report\+\_\+cut\+\_\+off\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+invariant,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{cut\+\_\+off\+\_\+viscosity,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{zero\+\_\+shear\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Report cutoff values. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00761}{761}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_aab87a911e6c87d5126240a756ea1a5fe}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_aab87a911e6c87d5126240a756ea1a5fe} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::viscosity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Viscosity ratio as a fct of strain rate invariant. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00807}{807}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00747}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00691}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a33df82ccf7720d8e9bee3be5e4cf4781}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a33df82ccf7720d8e9bee3be5e4cf4781} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Alpha\_pt@{Alpha\_pt}}
+\index{Alpha\_pt@{Alpha\_pt}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+pre-\/factor alpha 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00688}{688}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00847}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a933d63f71e194671e7d922cb3c98d0d3}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a933d63f71e194671e7d922cb3c98d0d3} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}}
+\index{Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Critical\_second\_invariant\_pt}{Critical\_second\_invariant\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00695}{695}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00847}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00761}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00700}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00807}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+\Hypertarget{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a14da5ea532c1e43195a1088ef82a7f22}\label{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation_a14da5ea532c1e43195a1088ef82a7f22} 
+\index{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Flow\_index\_pt@{Flow\_index\_pt}}
+\index{Flow\_index\_pt@{Flow\_index\_pt}!oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::SiskoTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Flow\_index\_pt}{Flow\_index\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SiskoTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Flow\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+power law index n 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00691}{691}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00729}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00771}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+fitting\+\_\+parameters\+\_\+of\+\_\+cubic()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00847}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00807}{oomph\+::\+Sisko\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{generalised__newtonian__constitutive__models_8h}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}\end{DoxyCompactItemize}

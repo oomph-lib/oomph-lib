@@ -1,0 +1,433 @@
+\chapter{Interfaces, Free Surfaces and Surface Transport\+: Theory and implementation}
+\hypertarget{index}{}\label{index}\index{Interfaces, Free Surfaces and Surface Transport: Theory and implementation@{Interfaces, Free Surfaces and Surface Transport: Theory and implementation}}
+This document provides the theoretical background underlying {\ttfamily oomph-\/lib\textquotesingle{}s} free surface, interface and surface transport capabilities. We begin with a review of the relevant theory to establish the overall framework and notation, and then discuss the implementation of the methodology in {\ttfamily oomph-\/lib}.
+
+Here is an overview of the structure of this document\+:
+\begin{DoxyItemize}
+\item \doxysectlink{index_theory}{Theory}{1}
+\begin{DoxyItemize}
+\item \doxysectlink{index_surface_representation}{Geometry of Surfaces}{2}
+\item \doxysectlink{index_surface_gradient}{Differential Operators On A Surface}{2}
+\item \doxysectlink{index_boundary_conditions}{Free Surface and Interface Boundary Conditions}{2}
+\item \doxysectlink{index_surface_transport}{Surface Transport Equations}{2}
+\end{DoxyItemize}
+\item \doxysectlink{index_fs_implementation}{Implementation}{1}
+\begin{DoxyItemize}
+\item \doxysectlink{index_fluid_interface}{The Fluid\+Interface\+Element class}{2}
+\item \doxysectlink{index_line}{The Line\+Derivatives class}{2}
+\item \doxysectlink{index_axi}{The Axisymmetric\+Derivatives class}{2}
+\item \doxysectlink{index_spine_formulation}{The Spine\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}{1}
+\item \doxysectlink{index_elastic_formulation}{The Elastic\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}{1}
+\end{DoxyItemize}
+\end{DoxyItemize}If you don\textquotesingle{}t need all the gory details, you may prefer to start by exploring the free-\/surface flow tutorials in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../example_code_list/html/index.html\#free_surface_nst}{\texttt{ list of example driver codes.}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_theory}{}\doxysection{\texorpdfstring{Theory}{Theory}}\label{index_theory}
+A complete theoretical treatment of moving surfaces in space requires the use of differential geometry, described in detail by Aris (1962) {\itshape  Vectors, Tensors and the Basic Equations of Fluid Mechanics }, Wetherburn (1955) {\itshape  Differential Geometry of Three Dimensions, Volume I } and Green \& Zerna (1968) {\itshape  Theoretical Elasticity } among others. Here, we shall present only the essential information and the reader is referred to these texts to fill in additional background.
+
+\DoxyHorRuler{0}
+\hypertarget{index_surface_representation}{}\doxysubsection{\texorpdfstring{Geometry of Surfaces}{Geometry of Surfaces}}\label{index_surface_representation}
+For our purposes, a surface is a object of dimension $n-1$ embedded in an $n\!$-\/dimensional Euclidean space, where $n$ is two or three. We can always represent such a surface by a position vector from our chosen origin $ \mathbf{R}^{*}(\zeta^{\alpha},t)
+$, parametrised by time $t$ and intrinsic (surface) coordinates $\zeta^{\alpha}$, where the Greek index $\alpha = 1,..,n-1$.
+
+Throughout this document we will use the summation convention that repeated Roman indices are to be summed over the range from 1 to $n$ and repeated Greek indices are to be summed over the range from 1 to $n-1$. We will retain the summation signs for all other sums, such as sums over the nodes etc.
+
+The covariant base vectors of the surface are defined to be the partial derivatives of the position vector with respect to the surface coordinates. For a two-\/dimensional surface,  \[ \mbox{\boldmath$g$}_{1} =
+\frac{\partial\mbox{\boldmath$R$}}{\partial \zeta^{1}}, \quad \quad \quad
+\mbox{\boldmath$g$}_{2} =
+\frac{\partial\mbox{\boldmath$R$}}{\partial \zeta^{2}}. \] The covariant metric tensor of the surface is formed by taking the dot product of the covariant base vectors  \[ g_{\alpha\beta} =  \mbox{\boldmath$g$}_{\alpha}\mbox{\boldmath$\cdot$}
+ \mbox{\boldmath$g$}_{\beta}, \] and the determinant of the covariant metric tensor is denoted by \[ g = g_{11}g_{22} - g_{12}g_{21}. \] The contravariant metric tensor is the inverse of the covariant metric tensor and is denoted by $ g^{\alpha\beta} $. Thus,  \[ g^{11} = g_{22}/g, \quad g^{12} = -g_{12}/g, \quad g^{21} = -
+ g_{21}/g, \quad g^{22} = g_{11}/g. \]
+
+For a one-\/dimensional surface, there is a single covariant base vector that coincides with the tangent vector  \[ \mbox{\boldmath$g$}_{1} = \frac{\partial
+ \mbox{\boldmath$R$}}{\partial \zeta^1}.\] Here, the covariant metric tensor is simply the inner product of the tangent vector with itself $ g_{11} = \mbox{\boldmath$g$}_{1}
+ \mbox{\boldmath$\cdot g$}_{1}
+ $ with determinant $ g = g_{11} $ and the contravariant metric tensor is $ g^{11} = 1/g_{11}
+ $.
+
+We will need to integrate quantities over the surface, which uses the result that an infinitesimal unit of area is \[ \mbox{ d}S = \sqrt{g} \mbox{ d}\zeta^{\alpha}, \] in terms of the intrinsic coordinates.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.5\textwidth]{surface_sketch}
+\doxyfigcaption{Sketch of section of a two-\/dimensional surface, S , in a three-\/dimensional space. The covariant base vectors are tangent to the surface and in the direction of the intrinsic surface coordinates. The intrinsic coordinates parametrise the position vector to material points in the surface. The surface is bounded by the curve B and the vector m is perpendicular to the outer unit normal of the surface and tangent to the bounding curve. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_surface_gradient}{}\doxysubsection{\texorpdfstring{Differential Operators On A Surface}{Differential Operators On A Surface}}\label{index_surface_gradient}
+The formulation of transport equations within the surface requires the rates of change of surface quantities. The appropriate derivative is the surface gradient, often written as $ \mbox{\boldmath$\nabla$}_{\!\!_S} $ and defined unhelpfully in many papers and textbooks as the gradient operator restricted to the surface or  \[ \mbox{\boldmath$\nabla$}_{\!\!S} \phi = \mbox{\boldmath$\nabla$}
+ \phi - (\mbox{\boldmath$\nabla$}\phi \mbox{\boldmath$\cdot n$})
+ \mbox{\boldmath$n$}.\] The problem with the above definition is that if a quantity is defined only on the surface it is impossible to take its gradient $\mbox{\boldmath$\nabla$}$.
+
+A more helpful definition in terms of the intrinsic coordinates is that  \[ \mbox{\boldmath$\nabla$}_{\!\!_S} \phi =
+ g^{\alpha\beta} \mbox{\boldmath$g$}_{\alpha} \frac{\partial \phi}{\partial
+ \zeta^{\beta}}. \] For a one dimensional surface parametrised by the arc-\/length, $ s$, this reduces to $ \mbox{\boldmath$\nabla$}_{\!\!_S} \phi =
+ \mbox{\boldmath$t$} \partial \phi / \partial s,$ where $ t$ is a unit tangent vector to the surface. By definition the surface gradient is tangent to the surface and has no normal component.
+
+The surface divergence of an $ n\!$-\/dimensional vector quantity defined on the surface is given by  \[  \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot v$} =
+ g^{\alpha\beta} \mbox{\boldmath$g$}_{\alpha} \mbox{\boldmath$\cdot$}
+\frac{\partial \mbox{\boldmath$v$}}{\partial \zeta^{\beta}}. \] The divergence theorem applied over the surface (Aris, 1955) is  \[ \int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot
+v$}_{t}\,\mbox{ d}S = \int_{B} \mbox{\boldmath$v$}_{t}
+\mbox{\boldmath$\cdot m$}\,\mbox{d} l, \] where $ \mbox{\boldmath$v$}_{t}$ is a vector tangential to the surface; and $ \mbox{\boldmath$m$}$ is the unit vector tangent to the surface, but perpendicular to the tangent of the bounding curve $ B$, see the Figure above.
+
+If a general vector is decomposed into normal and tangential components, $ \mbox{\boldmath$v$} = \mbox{\boldmath$v$}_{t} + v_{n}
+\mbox{\boldmath$n$} $, we can write  \[ \int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S}
+\mbox{\boldmath$\cdot v$}\,\mbox{ d}S = 
+ \int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S}
+\mbox{\boldmath$\cdot$}
+\left(\mbox{\boldmath$v$}_{t} + v_{n} \mbox{\boldmath$n$}\right)\,\mbox{ d}S = 
+\int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot
+v$}_{t}\,\mbox{ d}S + \int\!\!\!\int_{S}
+\mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot$} (v_{n}
+\mbox{\boldmath$n$})\,\mbox{ d}S \]  \[ = \int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot
+v$}_{t}\,\mbox{ d}S\  + \int\!\!\!\int_{S}
+ v_{n} \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot$}
+ \mbox{\boldmath$n$} + \mbox{\boldmath$n\cdot\nabla$}_{\!\!_S}
+ v_{n}\,\mbox{ d}S =  
+\int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S} \mbox{\boldmath$\cdot
+v$}_{t}\,\mbox{ d}S\  - \int\!\!\!\int_{S}
+ v_{n} \kappa\,\mbox{ d}S, \] where $\kappa$ is twice the mean curvature of the surface and equal to minus the surface divergence of the normal. The term $ \mbox{\boldmath$n\cdot\nabla$}_{\!\!_S} v_{n} = 0 $ because the normal and surface divergence of any scalar quantity are orthogonal.
+
+Hence using the divergence theorem on the first term on the right-\/hand side, we obtain  \[  \int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S}
+\mbox{\boldmath$\cdot v$}\,\mbox{ d}S
+ =  - \int\!\!\!\int_{S}
+ v_{n} \kappa\,\mbox{ d}S
++ \int_{B} \mbox{\boldmath$v$}_{t} \mbox{\boldmath$\cdot m$}\,\mbox{d}
+l =  - \int\!\!\!\int_{S}
+ v_{n} \kappa\,\mbox{ d}S +
+\int_{B} \mbox{\boldmath$v\cdot
+m$}\,\mbox{d} l, \quad (1) \] because the normal component of $ \mbox{\boldmath$v$}$ is perpendicular to $ \mbox{\boldmath$m$}$ and therefore contributes nothing to the line integral.
+
+If we now choose $ \mbox{\boldmath$v$} = \phi\,
+\mbox{\boldmath$e$}_{i}$, where $ \mbox{\boldmath$e$}_{i}$ is the unit base vector in the $ i\!$-\/th Cartesian coordinate direction, then we obtain  \[\int\!\!\!\int_{S} \mbox{\boldmath$\nabla$}_{\!\!_S} \phi\,
+\mbox{\boldmath$\cdot e$}_{i}\,\mbox{ d}S\  = - \int\!\!\!\int_{S}
+ \phi (\mbox{\boldmath$e$}_{i} \mbox{\boldmath$\cdot n$}) \kappa\,\mbox{ d}S +
+\int_{B} \phi\, \mbox{\boldmath$e$}_{i} \mbox{\boldmath$\cdot m$}\,\mbox{d} l, \] which is equivalent to the surface divergence theorem for a scalar field described by Wetherburn (1955; p 240, Eqn 26)  \[
+\int\!\!\!\int_{S} \kappa \phi \mbox{\boldmath$n$}\mbox{ d}S =
+ \int_{B} \phi \mbox{\boldmath$m$} \mbox{ d} l -
+\int\!\!\!\int_{S}\mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \phi\mbox{ d}S.
+\quad \quad (2) \]
+
+\DoxyHorRuler{0}
+\hypertarget{index_boundary_conditions}{}\doxysubsection{\texorpdfstring{Free Surface and Interface Boundary Conditions}{Free Surface and Interface Boundary Conditions}}\label{index_boundary_conditions}
+\hypertarget{index_dyn_con}{}\doxysubsubsection{\texorpdfstring{Dynamic condition}{Dynamic condition}}\label{index_dyn_con}
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{free_surface_sketch}
+\doxyfigcaption{Sketch of the interface between two fluids. }
+\end{DoxyImage}
+
+
+The presence of an interface with non-\/constant surface tension $ \sigma^{*} $ contributes to the overall force balance, as also described in \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }}. The surface tension acts a line force bounding the interface and acting in the direction $ \mbox{\boldmath$m$}$. Thus using the surface divergence theorem in the form (2),  \[
+ \int_{B} \sigma^{*} \mbox{\boldmath$m$} \mbox{ d} l = 
+\int\!\!\!\int_{S} \sigma^{*} \kappa + 
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \sigma^{*} \mbox{
+ d}S, \] which gives the terms to be included in the force balance.
+
+If we define the lower fluid in the sketch above to be fluid 1 and the upper fluid to be fluid 2. The traction exerted by fluid 1 onto fluid 2, $
+\mathbf{t}^{[1]*} $ and that exerted by fluid 2 onto fluid 1, $ \mathbf{t}^{[2]*} $. Then, balance of forces requires that  \[ \mathbf{t}^{[1]*} - \mathbf{t}^{[2]*} \equiv 
+\left[\left[ \mbox{\boldmath$\tau$}^{*}
+\mbox{\boldmath$\cdot n$}^{[1]} \right]\right] = 
+\sigma^{*} \, \kappa^{*} \, \mbox{\boldmath$n$}^{[1]} +
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \sigma^{*} \] where we have been explicit about the fact that the curvature is dimensional and $ \kappa^{*} > 0 $ if the centre of curvature lies inside fluid 1.
+
+After using the non-\/dimensionalisation described in \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial, }} the boundary condition becomes  \[\left[\left[ \mbox{\boldmath$\tau$}
+\mbox{\boldmath$\cdot n$}^{[1]} \right]\right]
+    = \frac{1}{Ca} \left[\sigma \, \kappa \, \mbox{\boldmath$n$} +
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \sigma  \right] \] where $ \sigma = \sigma^{*} / \sigma_{ref} $ and $ Ca = \mu_{ref}\, \mathcal{U} / \sigma_{ref},$ is the capillary number based on a reference viscosity and surface tension. This condition can be incorporated directly into the weak form of the momentum equations because the surface integral term in these equations, as described in \href{../../rayleigh_traction_channel/html/index.html\#traction_theory}{\texttt{ another tutorial }}, is \[ \int\!\!\!\int_{S} \mbox{\boldmath$n\cdot \tau\cdot  \psi$}^{(F)}\,\mbox{ d}S, \] where $ \mbox{\boldmath$\psi$}^{(F)}$ are the vector test functions associated with the momentum equations. Note that it is more compact to work with vector test functions rather than the Cartesian components of a vector test function in this case. The terms in the integral are exactly those on the left-\/hand side of the boundary condition multiplied by the test function. Hence, they become  \[ \int\!\!\!\int_{S} 
+\frac{1}{Ca} \left[\sigma \, \kappa \, \mbox{\boldmath$n$} +
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \sigma
+ \right]\mbox{\boldmath$\cdot\psi$}^{(F)}\, \mbox{ d}S. \]
+
+Early contributors computed these terms directly, but an undesirable feature is that computation of the curvature requires taking second derivatives of the position vector, which requires a higher degree of smoothness than previously demanded. We can use the surface divergence theorem again to weaken this requirement. Firstly we must use the product rule to bring the test function into the surface divergence  \[ \int\!\!\!\int_{S} 
+\frac{1}{Ca} \left[\sigma \mbox{\boldmath$\psi$}^{(F)} \mbox{\boldmath$\cdot$}\, \kappa \, \mbox{\boldmath$n$}  +
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \mbox{\boldmath$\cdot$}\left(\sigma 
+ \mbox{\boldmath$\psi$}^{(F)} \right)  - \sigma\,
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\,\mbox{\boldmath$\cdot\psi$}^{(F)} \right]\, \mbox{ d}S; \] and then we can use the surface divergence theorem (1) on the first two terms to obtain  \[ \int_{B} \frac{1}{Ca} \sigma \mbox{\boldmath$\psi$}^{(F)}
+ \mbox{\boldmath$\cdot m$}\,\mbox{ d}l 
+ - \int\!\!\!\int_{S} \frac{1}{Ca}
+\sigma
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \mbox{\boldmath$\cdot\psi$}^{(F)} \, \mbox{ d}S. \]
+
+In index notation these terms become  \[ \int_{B} \frac{1}{Ca} \sigma \psi_{i}^{(F)} m_{i}\,\mbox{ d}l 
+ - \int\!\!\!\int_{S} \frac{1}{Ca}
+\sigma g^{\alpha\beta} \Big[\mbox{\boldmath$g$}_{\alpha}\Big]_{i}
+ \left[\mbox{\boldmath$\psi$}^{(F)}_{,\beta}\right]_{i} \, \mbox{ d}S, \] where $ [\mbox{\boldmath$g$}_{\alpha}]_{i} $ denotes the $
+ i\!$-\/th component of the covariant base vector $
+ \mbox{\boldmath$g$}_{\alpha} $ and $ \sigma_{,\beta}$ represents the derivative $ \partial \sigma / \partial
+ \zeta^{\beta} \quad (3) $. These are the terms that are implemented in {\ttfamily oomph-\/lib\textquotesingle{}s} free surface elements. Note that variations in surface tension are taken into account in this formulation without the explicit need to take its surface derivative. An important observation is that the intrinsic surface coordinates can be chosen to be the local coordinates of each element so that we do not need to introduce another set of coordinates.\hypertarget{index_kin_con}{}\doxysubsubsection{\texorpdfstring{Kinematic condition}{Kinematic condition}}\label{index_kin_con}
+The kinematic condition is that "{}particles on the surface must  remain on the surface"{}. In other words the normal velocity of the surface must equal the normal rate of change of its position with time. The condition is compactly expressed in non-\/dimensional form as  \[ \left(\mbox{\boldmath$U$} - St \frac{\partial \mathbf{R}}{\partial
+ t}\right) \mbox{\boldmath$\cdot n$} = 0, \] where $ St$ is the Strouhal number, see \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }} for details. Note that, in general $ \mbox{\boldmath$U$}$ the velocity of the surface need {\itshape  not } coincide with the velocity of the fluid.
+
+Although this equation must be satisfied the details of how exactly it is implemented depend crucially on the mesh-\/update strategy chosen and we make use of the C++ features of inheritance and templating to avoid code duplication, see below for details.
+
+\DoxyHorRuler{0}
+\hypertarget{index_surface_transport}{}\doxysubsection{\texorpdfstring{Surface Transport Equations}{Surface Transport Equations}}\label{index_surface_transport}
+Consider a chemical species with surface concentration $ \Gamma$ that is only present on the surface. It can be transported within the moving surface by the standard mechanisms of advection and diffusion, but changes in the surface area can also induce changes in its concentration. The formulation of surface transport equations has been discussed many times in the literature and the main confusion surrounds how material derivatives are taken. Unlike the conventional bulk equations the surface does not occupy every point in the domain, so one cannot simply use the standard form of the material derivative.
+
+Rather than covering the literature, here we shall simply state, {\itshape  ab initio }, the governing equations formulated by Huang, Lai \& Tseng as well as Cermelli et al (2005), who claim it was established by Slattery (1972). We shall demonstrate that it is equivalent to the form stated by Wong \& Rumshitski and used by Campana et al (2004), but that it leads to a simpler formulation which avoids explicit calculation of the curvature (and hence second derivatives).
+
+The dimensionless governing equations in weak form governing the transport of a scalar quantity $ \Gamma $ are  \[ \int\!\!\!\int_{S} \left[ St \left(\frac{\partial \Gamma}{\partial t} -
+   \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} 
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) +
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} 
+   \left(\Gamma \mbox{\boldmath$U$}\right) -
+   \frac{1}{Pe_{s}}
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$} 
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+   \Gamma \right]\, \phi\, \mbox{d}S = 0. \] In the above equation the time derivative is taken at fixed \`{}`nodes'\textquotesingle{} in the finite element formulation and the ALE-\/like term compensates for tangential movement of these nodes along the surface. The normal movement is enforced to be exactly the same as the surface velocity by the kinematic condition. Note that the velocity in the third term of the governing equation is the full (bulk) fluid velocity. The dimensionless quantity $
+ Pe_s = \mathcal{U}\mathcal{L} / D_{s} $ is the surface Peclet number.
+
+The formulation of Campana et al is found by decomposing the velocity in this term into normal and tangential components.  \[ \mbox{\boldmath$\nabla$}_{S} 
+ \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}\right) = 
+ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$}
+ \left(\Gamma \mbox{\boldmath$U$}_{t} + \Gamma U_{n}
+ \mbox{\boldmath$n$} \right). \] The surface gradient yields a vector that is tangential to the surface so that its inner product with the unit normal, $ \mbox{\boldmath$n$}$ is zero. Thus,  \[ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} 
+ \left(\Gamma \mbox{\boldmath$U$}\right) = 
+  \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$}
+  \left(\Gamma \mbox{\boldmath$U$}_{t}\right)  
+  + \Gamma U_{n} \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+ \mbox{\boldmath$\cdot n$}, \] which is the starting point for Campana {\itshape  et al}\textquotesingle{}s derivation because the surface divergence of the normal may be replaced by the curvature, as described above.
+
+Returning to our formulation we use the surface divergence theorem (1) to integrate the diffusion term and the product rule to handle the third term\+:  \[ \int\!\!\!\int_{S} \left[ St \left(\frac{\partial \Gamma}{\partial t} -
+   \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) +
+   \Gamma \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$U$} + \mbox{\boldmath$U$} \mbox{\boldmath$\cdot$}
+   \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right] \phi +
+   \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+   \phi\, \mbox{d}S  -
+ \int_{B} \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma
+ \mbox{\boldmath$\cdot m$}\,  \phi \,\mbox{ d} l
+= 0,\]  \[ \Rightarrow \quad \int\!\!\!\int_{S} \left[ St\, \frac{\partial
+       \Gamma}{\partial t} 
+ + (\mbox{\boldmath$U$} -
+   St\, \dot{\mbox{\boldmath$R$}}) \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma +
+   \Gamma \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$U$} \right] \phi +
+   \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}}
+   \phi\, \mbox{d}S 
+ -
+ \int_{B} \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma
+ \mbox{\boldmath$\cdot m$}\,  \phi \,\mbox{ d} l
+= 0,\] The line term represents no-\/diffusive flux out of the system. In index notation the equations are  \[ \int\!\!\!\int_{S} \left[ St\, \frac{\partial
+       \Gamma}{\partial t} 
++ g^{\alpha\beta}
+ [\mbox{\boldmath$g$}_{\alpha}]_{i}\left\{
+ (U_{i} -  St\, \dot{R}_{i})  \Gamma_{,\beta}
+ + \Gamma \left[\mbox{\boldmath$U$}_{,\beta}\right]_{i}\right\}
+  \right] \phi +
+   \frac{1}{Pe_{s}} g^{\alpha\beta} \Gamma_{,\alpha} \phi_{,\beta}\, \mbox{d}S 
+ -
+ \int_{B} \frac{1}{Pe_{s}} g^{\alpha\beta}
+ [\mbox{\boldmath$g$}_{\alpha}]_{i} m_{i} \Gamma_{,\beta}\,  \phi \,\mbox{ d} l
+= 0,\]
+
+These are the equations implemented in {\ttfamily oomph-\/lib} using the definitions of surface derivatives given in \doxysectlink{index_surface_gradient}{Differential Operators On A Surface}{2}.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_fs_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_fs_implementation}
+We will now discuss how the discrete versions of the equations derived above are actually implemented in {\ttfamily oomph-\/lib}. The basic idea is that the equations should be implemented independently of the specific element type and mesh-\/update strategy and a base class \doxylink{classoomph_1_1FluidInterfaceElement}{oomph\+::\+Fluid\+Interface\+Element} defines the generic functionality for all fluid interface elements. The only difference between the different surface geometries are in the definitions of the surface derivative operators and these are defined in specific classes \doxylink{classoomph_1_1LineDerivatives}{oomph\+::\+Line\+Derivatives} (1D surface), \doxylink{classoomph_1_1AxisymmetricDerivatives}{oomph\+::\+Axisymmetric\+Derivatives} and \doxylink{classoomph_1_1SurfaceDerivatives}{oomph\+::\+Surface\+Derivatives} (2D surface). The final specific element is created by using a special templated class that determines the node-\/update strategy and takes the base class, derivative class and bulk element as template arguments.
+
+\DoxyHorRuler{0}
+\hypertarget{index_fluid_interface}{}\doxysubsection{\texorpdfstring{The Fluid\+Interface\+Element class}{The FluidInterfaceElement class}}\label{index_fluid_interface}
+The template-\/free \doxylink{classoomph_1_1FluidInterfaceElement}{oomph\+::\+Fluid\+Interface\+Element} class provides storage and member functions that are common to all free-\/surface and interface elements. The most important functions to be aware of are\+:
+\begin{DoxyItemize}
+\item Storage and access functions for (pointers to) the capillary and Strouhal numbers.
+\item Storage for a (pointer to) an external pressure degree of freedom if the boundary is a free surface, rather than an interface.
+\item The virtual function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ FluidInterfaceElement::compute\_surface\_derivatives(...)}
+
+\end{DoxyCode}
+ specifies how the surface gradient operators are computed.
+\item The function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ FluidInterfaceElement::sigma(\textcolor{keyword}{const}\ Vector<double>\ \&s\_local)\ }
+
+\end{DoxyCode}
+ that returns the surface tension at the given local coordinate; default implementation returns 1.\+0.
+\item The function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FluidInterfaceElement::fill\_in\_generic\_residual\_contribution\_interface(..)}
+
+\end{DoxyCode}
+ that is responsible for assembling the residual and jacobian contributions corresponding to the dynamic and kinematic boundary conditions.
+\item The function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FluidInterfaceElement::add\_additional\_residual\_contributions\_interface(...)}
+
+\end{DoxyCode}
+ which is called from {\itshape  within } the integration loop and is used to assemble any additional surface transport equations or equations arising from different node update strategies. This function is virtual so that it can be overloaded in derived classes.
+\item The function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ FluidInterfaceElement::kinematic\_local\_eqn(...)}
+
+\end{DoxyCode}
+ that is used to specify the local equation number used for the kinematic condition, which depends on the mesh-\/update strategy chosen.
+\end{DoxyItemize}\hypertarget{index_line}{}\doxysubsection{\texorpdfstring{The Line\+Derivatives class}{The LineDerivatives class}}\label{index_line}
+The class \doxylink{classoomph_1_1LineDerivatives}{oomph\+::\+Line\+Derivatives} implements the specific surface derivatives associated with a one-\/dimensional surface in a two-\/dimensional domain.\+The global coordinate system is Cartesian so its base vectors do not vary with the surface coordinates and  $ [\mbox{\boldmath$\psi$}_{,\beta}^{(F)}]_{i} =
+\psi^{(F)}_{i,\beta}$; and the contribution to each component of the momentum equation is found by setting the appropriate component $ \psi^{(F)}_{i} = 0$ for $ i = 1,2 $.\hypertarget{index_axi}{}\doxysubsection{\texorpdfstring{The Axisymmetric\+Derivatives class}{The AxisymmetricDerivatives class}}\label{index_axi}
+The class \doxylink{classoomph_1_1AxisymmetricDerivatives}{oomph\+::\+Axisymmetric\+Derivatives} implements the specific residuals associated with a two-\/dimensional surface in a three-\/dimensional domain, under the assumption of axisymmetry. Thus, the coordinate system is cylindrical polar $(r,z,\theta)$, but it is assumed that there are no variations in the $ \theta $ direction.
+
+It is worthwhile including the required mathematics here because the terms are not the same as in the {\ttfamily Line\+Derivatives} class. Specifically, if the surface coordinates are $ (\zeta^{1},
+\zeta^{2}) = (s,\theta)$, the position vector to the surface is given by  \[ \mbox{\boldmath$R$} = \left(\begin{array}{c} r(s)\cos\theta \\
+ r(s)\sin\theta \\ z(s) \end{array}\right) \quad\Rightarrow\quad
+  \mbox{\boldmath$g$}_{1} = \left(\begin{array}{c} r\textnormal{\textquotesingle}(s)\cos\theta \\
+ r\textnormal{\textquotesingle}(s)\sin\theta \\ z\textnormal{\textquotesingle}(s) \end{array}\right), \quad
+  \mbox{\boldmath$g$}_{2} = \left(\begin{array}{c} -r(s)\sin\theta \\
+ r(s)\cos\theta \\ 0 \end{array}\right), \] where $ r\textnormal{\textquotesingle}(s) = \partial r / \partial s$ and $ z\textnormal{\textquotesingle}(s) = \partial
+ z / \partial s$. Hence,  \[ g_{11} = (r\textnormal{\textquotesingle})^{2} + (z\textnormal{\textquotesingle})^{2}, \quad g_{12} = g_{21} = 0, \quad
+ g_{22} = r^{2}, \quad\mbox{and}\quad g = r^{2} \left[(r\textnormal{\textquotesingle})^{2} +
+ (z\textnormal{\textquotesingle})^{2}\right].\] In our standard formulation, the vector test function is given by  \[ \mbox{\boldmath$\psi$}^{(F)} = \left(\begin{array}{c}
+ \psi_{r}^{(F)}(s) \cos\theta \\ \psi_{r}^{(F)}(s) \sin\theta \\
+ \psi_{z}^{(F)}(s) \end{array} \right) \quad\Rightarrow\quad
+\mbox{\boldmath$\psi$}^{(F)}_{,1} = \left(\begin{array}{c}
+ (\psi\textnormal{\textquotesingle})_{r}^{(F)}(s) \cos\theta \\ (\psi\textnormal{\textquotesingle})_{r}^{(F)}(s) \sin\theta \\
+ (\psi\textnormal{\textquotesingle})_{z}^{(F)}(s) \end{array} \right) \quad\mbox{and}\quad 
+ \mbox{\boldmath$\psi$}^{(F)}_{,2} = \left(\begin{array}{c}
+ -\psi_{r}^{(F)}(s) \sin\theta \\ \psi_{r}^{(F)}(s) \cos\theta \\
+ 0 \end{array} \right).\]
+
+Thus the contribution to the momentum equation (3) are  \[ \int_{B} \frac{1}{Ca} \sigma \psi_{i}^{(F)} m_{i}\,\mbox{ d}l 
+ - \int\!\!\!\int_{S} \frac{1}{Ca}
+\sigma  \left[\frac{r\textnormal{\textquotesingle} (\psi\textnormal{\textquotesingle})_{r}^{(F)} + z\textnormal{\textquotesingle} (\psi\textnormal{\textquotesingle})_{z}^{(F)}}{(r\textnormal{\textquotesingle})^{2} +
+(z\textnormal{\textquotesingle})^2} + \frac{1}{r} \psi_{r}^{(F)}\right]\, \mbox{ d}S, \] Two separate contributions are then derived from the cases $
+\psi_{r}^{(F)} = 0 $ and $ \psi_{z}^{(F)} = 0$. The difference from the {\ttfamily Line\+Derivatives} is the final term that accounts for the azimuthal curvature. In addition, we must also multiply all terms by the additional factor of $ r$ in the square-\/root of the determinant of the surface metric tensor.\hypertarget{index_surface}{}\doxysubsection{\texorpdfstring{The Surface\+Derivatives class}{The SurfaceDerivatives class}}\label{index_surface}
+The class \doxylink{classoomph_1_1SurfaceDerivatives}{oomph\+::\+Surface\+Derivatives} implements the specific residuals associated with a general two-\/dimensional surface in a three-\/dimensional domain. Once again, the global coordinate is Cartesian, so the contribution to each momentum equation is found by setting the two other components of the test function to be zero.
+
+\DoxyHorRuler{0}
+\hypertarget{index_spine_formulation}{}\doxysection{\texorpdfstring{The Spine\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}{The SpineLine/Axi/SurfaceFluidInterfaceElement classes}}\label{index_spine_formulation}
+We shall discuss the "{}line"{} version of the elements, but the others are essentially the same.
+
+The class \doxylink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Fluid\+Interface\+Element}, Line\+Derivatives and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Spine\+Element\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}. The hijacking is only required for imposition of contact angle boundary conditions, see \href{../../static_single_layer/html/index.html}{\texttt{ another tutorial }} for more details.
+
+Note that the use of templates to make the code generic makes it hard to read. A simplified constructor is given below and simply builds the element based on the {\ttfamily Face\+Geometry} of the bulk element and sets the indices associated with the bulk fluid velocity components from the bulk element.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ SpineLineFluidInterfaceElement(FiniteElement*\ \textcolor{keyword}{const}\&\ element\_pt,}
+
+\end{DoxyCodeInclude}
+
+
+If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ kinematic\_local\_eqn(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>spine\_local\_eqn(n);}
+
+\end{DoxyCodeInclude}
+ Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Element\+With\+Moving\+Nodes} 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_jacobian(Vector<double>\&\ residuals,}
+
+\end{DoxyCodeInclude}
+ There are no additional contributions to the residuals or jacobian.
+
+\DoxyHorRuler{0}
+\hypertarget{index_elastic_formulation}{}\doxysection{\texorpdfstring{The Elastic\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}{The ElasticLine/Axi/SurfaceFluidInterfaceElement classes}}\label{index_elastic_formulation}
+We shall discuss the "{}line"{} version of the elements, but the others are essentially the same.
+
+The class \doxylink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Line\+Derivatives}, Fluid\+Interface\+Element and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>}. The hijacking is again only required for imposition of contact angle boundary conditions.
+
+The "{}elastic"{} versions of the elements are more complicated than the "{}spine"{} versions because the kinematic condition is imposed using Lagrange multipliers, following the method described by Cairncross et al A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion\textquotesingle{} (2000). These Lagrange multipliers must be added to the {\ttfamily Nodes} on the free surface and their introduction adds additional terms to the equations governing the bulk mesh motion.
+
+The constructor is given below and in addition to building the element based on the {\ttfamily Face\+Geometry} of the bulk element and setting the indices associated with the bulk fluid velocity components from the bulk element, it also adds the additional storage required for the Lagrange multipliers
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ ElasticLineFluidInterfaceElement(FiniteElement*\ \textcolor{keyword}{const}\&\ element\_pt,}
+
+\end{DoxyCodeInclude}
+ The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ ///\ (This\ is\ the\ equation\ for\ the\ Lagrange\ multiplier)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ kinematic\_local\_eqn(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ n)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ index\ of\ the\ nodal\ value\ associated\ with\ Lagrange\ multiplier}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>nodal\_local\_eqn(n,\ this-\/>lagrange\_index(n));}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ The element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Solid\+Elements} 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ fill\_in\_contribution\_to\_jacobian(Vector<double>\&\ residuals,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DenseMatrix<double>\&\ jacobian)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Call\ the\ generic\ routine\ with\ the\ flag\ set\ to\ 1}}
+\DoxyCodeLine{\ \ \ \ \ \ EQUATION\_CLASS::fill\_in\_generic\_residual\_contribution\_interface(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ residuals,\ jacobian,\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Call\ the\ generic\ finite\ difference\ routine\ for\ the\ solid\ variables}}
+\DoxyCodeLine{\ \ \ \ \ \ this-\/>fill\_in\_jacobian\_from\_solid\_position\_by\_fd(jacobian);}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ shape\ functions\ to\ assemble\ contributions}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l\ =\ 0;\ l\ <\ n\_node;\ l++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ directions}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ nodal\_dimension;\ i++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Now\ using\ the\ same\ shape\ functions\ for\ the\ elastic\ equations,}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ we\ can\ stay\ in\ the\ loop}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ local\_eqn\ =\ this-\/>position\_local\_eqn(l,\ 0,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_eqn\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ in\ the\ Lagrange\ multiplier\ contribution}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ residuals[local\_eqn]\ -\/=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ interpolated\_lagrange\ *\ interpolated\_n[i]\ *\ psif(l)\ *\ J\ *\ W;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ the\ Jacobian\ calculation}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flag)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ l2\ =\ 0;\ l2\ <\ n\_node;\ l2++)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dependence\ on\ solid\ positions\ will\ be\ handled\ by\ FDs}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ That\ leaves\ the\ Lagrange\ multiplier\ contribution}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_unknown\ =\ this-\/>kinematic\_local\_eqn(l2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_unknown\ >=\ 0)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(local\_eqn,\ local\_unknown)\ -\/=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ psif(l2)\ *\ interpolated\_n[i]\ *\ psif(l)\ *\ J\ *\ W;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ Jacobian\ calculation}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}\ \textcolor{comment}{//\ End\ of\ loop\ over\ shape\ functions}}
+
+\end{DoxyCodeInclude}
+ \hypertarget{index_surface2}{}\doxysection{\texorpdfstring{Surface Transport Implementation}{Surface Transport Implementation}}\label{index_surface2}
+The recommended strategy for implementing surface transport equations is to inherit from the appropriate {\ttfamily Fluid\+Interface\+Element}, and include the equations independently of the mesh-\/update strategy by overloading the function 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FluidInterfaceElement::add\_additional\_residual\_contributions\_interface(...)}
+
+\end{DoxyCode}
+ The mesh-\/update specialisations can be added by further specialisation as required. Alternatively, one could simply inherit directly from the specialised element. This is the approach taken in this \href{../../../multi_physics/rayleigh_instability_surfactant/html/index.html}{\texttt{ example code. }}
+
+An important point is that the axisymmetric formulation of the surface divergence of a vector is not entirely trivial, as discussed in \doxysectlink{index_axi}{The Axisymmetric\+Derivatives class}{2}. In the context of surface transport the term that is always present is $
+\mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$}
+\mbox{\boldmath$U$} $. Using the same surface coordinates as above,  $ (\zeta^{1},
+\zeta^{2}) = (s,\theta)$, the velocity vector is  \[ \mbox{\boldmath$U$} = \left(\begin{array}{c} U_r(s)\cos\theta \\
+ U_r(s)\sin\theta \\ U_z(s) \end{array}\right)
+\quad\Rightarrow\quad
+  \mbox{\boldmath$U$}_{,1} = \left(\begin{array}{c} \frac{\partial
+  U_{r}}{\partial s}\cos\theta \\
+ \frac{\partial U_{r}}{\partial s} \sin\theta \\ \frac{\partial
+ U_z}{\partial s} \end{array}\right), \quad
+  \mbox{\boldmath$U$}_{,2} = \left(\begin{array}{c} -U_r \sin\theta \\
+ U_r\cos\theta \\ 0 \end{array}\right). \] Thus, the surface divergence term is  \[ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$}
+\mbox{\boldmath$U$}
+ =  \frac{\left(\frac{\partial U_{r}}{\partial s} \frac{\partial
+    r}{\partial s} + \frac{\partial U_{z}}{\partial s} \frac{\partial
+   z}{\partial s}\right)}{(r\textnormal{\textquotesingle})^{2} + (z\textnormal{\textquotesingle})^{2}} + \frac{U_{r}}{r},\] which is exactly the same form as the surface divergence of the vector test function derived in the section \doxysectlink{index_axi}{The Axisymmetric\+Derivatives class}{2}, as expected.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

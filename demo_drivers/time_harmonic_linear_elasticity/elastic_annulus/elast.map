@@ -1,0 +1,75 @@
+#===================================================
+# Analytical solution for time-harmonic linear elasticity
+#===================================================
+
+
+#==========================
+# elasticity
+#==========================
+lin_elast_ode:=(lambda+2*mu)*diff(1/r*diff(r*u(r),r),r)+Omega_sq*u(r);
+
+
+#-----------------------------------
+# Radial stress from lecture notes
+#-----------------------------------
+tau_rr:=lambda*1/r*diff(r*u(r),r)+2*mu*diff(u(r),r);
+
+soln:=dsolve(lin_elast_ode,u(r));
+assign(soln);
+
+
+#-----------------------------------
+# Boundary conditions for displacement
+# field: Zero radial traction 
+# on inside
+#-----------------------------------
+eqn1:=subs(r=1,eval(tau_rr))+P;
+#eqn1:=subs(r=1,eval(u(r)))-Epsilon;
+eqn2:=subs(r=1-h,eval(tau_rr));
+
+
+#-----------------------------------
+# Solve for coefficients in solution
+#-----------------------------------
+soln_coeff:=solve({eqn1,eqn2},{_C1,_C2});
+assign(soln_coeff);
+
+
+#-------------------------------------
+# Transfer to code non-dim and 
+# parametrisation
+#-------------------------------------
+mu:=1/(2*(1+Nu));
+lambda:=Nu/((1+Nu)*(1-2*Nu));
+
+
+#-------------------------------------
+# Rename variables for use with code
+#-------------------------------------
+h:=H_annulus;
+
+plot(subs(H_annulus=0.1,Epsilon=0.1,Omega_sq=10,Nu=0.3,eval(u(r))),r=0.9..1);
+evalf(subs(r=1,H_annulus=0.1,Epsilon=0.1,P=0.1,Omega_sq=10,Nu=0.3,eval(u(r))));
+
+fd := fopen("maple.dat", WRITE);
+for R from 0.9 by 0.025 to 1.0
+do
+        for phi from evalf(-Pi/2) by evalf(Pi/60) to evalf(Pi/2)
+        do
+                U:=evalf(subs(r=R,H_annulus=0.1,Epsilon=0.1,P=0.1,Omega_sq=10,Nu=0.3,eval(u(r))));
+                x:=R*cos(phi);
+                y:=R*sin(phi);
+                ux:=evalf(U)*cos(phi);
+                uy:=evalf(U)*sin(phi);
+                fprintf(fd,"%g %g %g %g %g %g\n",x,y,ux,uy,-ux,-uy);
+         end do;
+end do;
+fclose(fd);
+
+
+
+with(codegen);
+C(u(r));
+
+
+ aerjerp@+@;

@@ -1,0 +1,103 @@
+\doxysection{oomph\+::Pseudo\+Elastic\+Bulk\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1PseudoElasticBulkElement}{}\label{classoomph_1_1PseudoElasticBulkElement}\index{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}}
+
+
+Pseudo-\/\+Elastic Solid element class to overload the Block Preconditioner methods \doxylink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()} and \doxylink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} to differentiate between DOFs subject to Lagrange multiplier and those that are not.  
+
+
+Inheritance diagram for oomph\+::Pseudo\+Elastic\+Bulk\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PseudoElasticBulkElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a38c03edd9639522e713ef9bf679d7e5a}{Pseudo\+Elastic\+Bulk\+Element}} ()
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types}} () const
+\begin{DoxyCompactList}\small\item\em Return the number of DOF types associated with this element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "{}\+DOF"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.)~\newline
+E.\+g. in a 3D problem there are 6 types of DOF\+:~\newline
+0 -\/ x displacement (without lagr mult traction)~\newline
+1 -\/ y displacement (without lagr mult traction)~\newline
+2 -\/ z displacement (without lagr mult traction)~\newline
+4 -\/ x displacement (with lagr mult traction)~\newline
+5 -\/ y displacement (with lagr mult traction)~\newline
+6 -\/ z displacement (with lagr mult traction)~\newline
+. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$}
+Pseudo-\/\+Elastic Solid element class to overload the Block Preconditioner methods \doxylink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()} and \doxylink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} to differentiate between DOFs subject to Lagrange multiplier and those that are not. 
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00055}{55}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PseudoElasticBulkElement_a38c03edd9639522e713ef9bf679d7e5a}\label{classoomph_1_1PseudoElasticBulkElement_a38c03edd9639522e713ef9bf679d7e5a} 
+\index{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}!PseudoElasticBulkElement@{PseudoElasticBulkElement}}
+\index{PseudoElasticBulkElement@{PseudoElasticBulkElement}!oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{PseudoElasticBulkElement()}{PseudoElasticBulkElement()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element}}$<$ ELEMENT $>$\mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{\+::\+Pseudo\+Elastic\+Bulk\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+default constructor 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00062}{62}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}\label{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080} 
+\index{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
+\index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element}}$<$ ELEMENT $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the "{}\+DOF"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.)~\newline
+E.\+g. in a 3D problem there are 6 types of DOF\+:~\newline
+0 -\/ x displacement (without lagr mult traction)~\newline
+1 -\/ y displacement (without lagr mult traction)~\newline
+2 -\/ z displacement (without lagr mult traction)~\newline
+4 -\/ x displacement (with lagr mult traction)~\newline
+5 -\/ y displacement (with lagr mult traction)~\newline
+6 -\/ z displacement (with lagr mult traction)~\newline
+. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00083}{83}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+\Hypertarget{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}\label{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175} 
+\index{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}!ndof\_types@{ndof\_types}}
+\index{ndof\_types@{ndof\_types}!oomph::PseudoElasticBulkElement$<$ ELEMENT $>$@{oomph::PseudoElasticBulkElement$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element}}$<$ ELEMENT $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of DOF types associated with this element. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00065}{65}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}\end{DoxyCompactItemize}

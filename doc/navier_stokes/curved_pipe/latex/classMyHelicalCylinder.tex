@@ -1,0 +1,184 @@
+\doxysection{My\+Helical\+Cylinder Class Reference}
+\hypertarget{classMyHelicalCylinder}{}\label{classMyHelicalCylinder}\index{MyHelicalCylinder@{MyHelicalCylinder}}
+
+
+The arguemts are the radius of the tube, its curvature in the x,y plane and the pitch of the helix.  
+
+
+Inheritance diagram for My\+Helical\+Cylinder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMyHelicalCylinder}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMyHelicalCylinder_a2ed054a7b461d0dabd5c35a59f7aefb3}{My\+Helical\+Cylinder}} (const double \&radius, const double \&delta, const double \&pitch)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classMyHelicalCylinder_aa93f7a69d2fabd3fedb804ab4ba65946}{\texorpdfstring{$\sim$}{\string~}\+My\+Helical\+Cylinder}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyHelicalCylinder_aaf3a0e41ba30cd66d049a3fcb8eb1213}{position}} (const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Lagrangian coordinate xi. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMyHelicalCylinder_ae35db6b394ce561acfda83a61b678ff5}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Return the position of the tube as a function of time (doesn\textquotesingle{}t move as a function of time) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classMyHelicalCylinder_a15daea10a805c0564e89a1bf48fa964b}{Pi}}
+\item 
+double \mbox{\hyperlink{classMyHelicalCylinder_af199ebf44d8ebb0dfbad5c0dadfff2a6}{Radius}}
+\item 
+double \mbox{\hyperlink{classMyHelicalCylinder_a104c0949848d76adefb15d050853c5f0}{Delta}}
+\item 
+double \mbox{\hyperlink{classMyHelicalCylinder_a65f84ee526f6ff7fb20d6eb1f04e0bc7}{P}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The arguemts are the radius of the tube, its curvature in the x,y plane and the pitch of the helix. 
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00045}{45}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMyHelicalCylinder_a2ed054a7b461d0dabd5c35a59f7aefb3}\label{classMyHelicalCylinder_a2ed054a7b461d0dabd5c35a59f7aefb3} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!MyHelicalCylinder@{MyHelicalCylinder}}
+\index{MyHelicalCylinder@{MyHelicalCylinder}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{MyHelicalCylinder()}{MyHelicalCylinder()}}
+{\footnotesize\ttfamily My\+Helical\+Cylinder\+::\+My\+Helical\+Cylinder (\begin{DoxyParamCaption}\item[{const double \&}]{radius,  }\item[{const double \&}]{delta,  }\item[{const double \&}]{pitch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00050}{50}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{helical__pipe_8cc_source_l00079}{Pi}}.
+
+\Hypertarget{classMyHelicalCylinder_aa93f7a69d2fabd3fedb804ab4ba65946}\label{classMyHelicalCylinder_aa93f7a69d2fabd3fedb804ab4ba65946} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!````~MyHelicalCylinder@{\texorpdfstring{$\sim$}{\string~}MyHelicalCylinder}}
+\index{````~MyHelicalCylinder@{\texorpdfstring{$\sim$}{\string~}MyHelicalCylinder}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MyHelicalCylinder()}{\string~MyHelicalCylinder()}}
+{\footnotesize\ttfamily virtual My\+Helical\+Cylinder\+::\texorpdfstring{$\sim$}{\string~}\+My\+Helical\+Cylinder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00059}{59}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMyHelicalCylinder_ae35db6b394ce561acfda83a61b678ff5}\label{classMyHelicalCylinder_ae35db6b394ce561acfda83a61b678ff5} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!position@{position}}
+\index{position@{position}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void My\+Helical\+Cylinder\+::position (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the position of the tube as a function of time (doesn\textquotesingle{}t move as a function of time) 
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00072}{72}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{position()}}.
+
+\Hypertarget{classMyHelicalCylinder_aaf3a0e41ba30cd66d049a3fcb8eb1213}\label{classMyHelicalCylinder_aaf3a0e41ba30cd66d049a3fcb8eb1213} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!position@{position}}
+\index{position@{position}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void My\+Helical\+Cylinder\+::position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{Vector$<$ double $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Lagrangian coordinate xi. 
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{62}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+References \mbox{\hyperlink{helical__pipe_8cc_source_l00081}{Delta}}, \mbox{\hyperlink{helical__pipe_8cc_source_l00082}{P}}, \mbox{\hyperlink{helical__pipe_8cc_source_l00079}{Pi}}, and \mbox{\hyperlink{helical__pipe_8cc_source_l00080}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{helical__pipe_8cc_source_l00072}{position()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classMyHelicalCylinder_a104c0949848d76adefb15d050853c5f0}\label{classMyHelicalCylinder_a104c0949848d76adefb15d050853c5f0} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!Delta@{Delta}}
+\index{Delta@{Delta}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{Delta}{Delta}}
+{\footnotesize\ttfamily double My\+Helical\+Cylinder\+::\+Delta\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00081}{81}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{position()}}.
+
+\Hypertarget{classMyHelicalCylinder_a65f84ee526f6ff7fb20d6eb1f04e0bc7}\label{classMyHelicalCylinder_a65f84ee526f6ff7fb20d6eb1f04e0bc7} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!P@{P}}
+\index{P@{P}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily double My\+Helical\+Cylinder\+::P\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00082}{82}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{position()}}.
+
+\Hypertarget{classMyHelicalCylinder_a15daea10a805c0564e89a1bf48fa964b}\label{classMyHelicalCylinder_a15daea10a805c0564e89a1bf48fa964b} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!Pi@{Pi}}
+\index{Pi@{Pi}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{Pi}{Pi}}
+{\footnotesize\ttfamily double My\+Helical\+Cylinder\+::\+Pi\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00079}{79}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{helical__pipe_8cc_source_l00050}{My\+Helical\+Cylinder()}}, and \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{position()}}.
+
+\Hypertarget{classMyHelicalCylinder_af199ebf44d8ebb0dfbad5c0dadfff2a6}\label{classMyHelicalCylinder_af199ebf44d8ebb0dfbad5c0dadfff2a6} 
+\index{MyHelicalCylinder@{MyHelicalCylinder}!Radius@{Radius}}
+\index{Radius@{Radius}!MyHelicalCylinder@{MyHelicalCylinder}}
+\doxysubsubsection{\texorpdfstring{Radius}{Radius}}
+{\footnotesize\ttfamily double My\+Helical\+Cylinder\+::\+Radius\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{helical__pipe_8cc_source_l00080}{80}} of file \mbox{\hyperlink{helical__pipe_8cc_source}{helical\+\_\+pipe.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{helical__pipe_8cc_source_l00062}{position()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{helical__pipe_8cc}{helical\+\_\+pipe.\+cc}}\end{DoxyCompactItemize}

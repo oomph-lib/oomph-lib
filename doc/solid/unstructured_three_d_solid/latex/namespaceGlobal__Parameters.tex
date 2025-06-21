@@ -1,0 +1,146 @@
+\doxysection{Global\+\_\+\+Parameters Namespace Reference}
+\hypertarget{namespaceGlobal__Parameters}{}\label{namespaceGlobal__Parameters}\index{Global\_Parameters@{Global\_Parameters}}
+
+
+Global variables.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{gravity}} (\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{double}} \&\mbox{\hyperlink{classMySolidTetgenMesh}{time}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}}, \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{b}})
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{void}} \mbox{\hyperlink{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd}{constant\+\_\+pressure}} (\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{xi}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{x}}, \mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{n}}, \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classMySolidTetgenMesh}{traction}})
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Constitutive\+\_\+law\+\_\+pt}} =\mbox{\hyperlink{classMySolidTetgenMesh}{new}} \mbox{\hyperlink{classMySolidTetgenMesh}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})
+\begin{DoxyCompactList}\small\item\em Create constitutive law. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Gravity}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMySolidTetgenMesh}{double}} \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global variables. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd}\label{namespaceGlobal__Parameters_a7dc25ca2abd48b7f1bffb2d6129f02bd} 
+\index{Global\_Parameters@{Global\_Parameters}!constant\_pressure@{constant\_pressure}}
+\index{constant\_pressure@{constant\_pressure}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{constant\_pressure()}{constant\_pressure()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{void}} Global\+\_\+\+Parameters\+::constant\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{traction }\end{DoxyParamCaption})}
+
+
+
+Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00114}{114}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00107}{P}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00297}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::create\+\_\+traction\+\_\+elements()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}\label{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e} 
+\index{Global\_Parameters@{Global\_Parameters}!gravity@{gravity}}
+\index{gravity@{gravity}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{gravity()}{gravity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{void}} Global\+\_\+\+Parameters\+::gravity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{double}} \&}]{time,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{const}} \mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classMySolidTetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classMySolidTetgenMesh}{double}} $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Non-\/dimensional gravity as body force. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00097}{97}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00094}{Gravity}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00175}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}\label{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2} 
+\index{Global\_Parameters@{Global\_Parameters}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{Constitutive\+Law}}\texorpdfstring{$\ast$}{*} Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt =\mbox{\hyperlink{classMySolidTetgenMesh}{new}} \mbox{\hyperlink{classMySolidTetgenMesh}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}})}
+
+
+
+Create constitutive law. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00091}{91}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00175}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Solid\+Problem()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}\label{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c} 
+\index{Global\_Parameters@{Global\_Parameters}!Gravity@{Gravity}}
+\index{Gravity@{Gravity}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Gravity}{Gravity}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{double}} Global\+\_\+\+Parameters\+::\+Gravity =0.\+0}
+
+
+
+Non-\/dim gravity. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00094}{94}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00097}{gravity()}}, and \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00380}{main()}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}\label{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661} 
+\index{Global\_Parameters@{Global\_Parameters}!Nu@{Nu}}
+\index{Nu@{Nu}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{double}} Global\+\_\+\+Parameters\+::\+Nu =0.\+3}
+
+
+
+Poisson\textquotesingle{}s ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00088}{88}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+\Hypertarget{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}\label{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731} 
+\index{Global\_Parameters@{Global\_Parameters}!P@{P}}
+\index{P@{P}!Global\_Parameters@{Global\_Parameters}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMySolidTetgenMesh}{double}} Global\+\_\+\+Parameters\+::P = 0.\+0}
+
+
+
+Uniform pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00107}{107}} of file \mbox{\hyperlink{unstructured__three__d__solid_8cc_source}{unstructured\+\_\+three\+\_\+d\+\_\+solid.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00114}{constant\+\_\+pressure()}}, and \mbox{\hyperlink{unstructured__three__d__solid_8cc_source_l00380}{main()}}.
+

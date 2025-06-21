@@ -1,0 +1,122 @@
+
+#---------------
+# Node list
+#---------------
+
+18 3 0 1  # number of nodes
+
+# Front inflow face
+1 -1 -1 0 0
+2 -1  1 0 0 
+3  1  1 0 0
+4  1 -1 0 0
+
+# Bifurcation
+5 -1 -1 5 0
+6 -1  0 5 0
+7 -1  1 5 0 
+8  1  1 5 0
+9  1  0 5 0
+10 1 -1 5 0
+
+# Left bifurcation
+11 -1 -3   10 0
+12 -1 -2.5 10 0
+13  1 -2.5 10 0
+14  1 -3   10 0
+
+# Right bifurcation
+15 -1  2.5 10 0
+16 -1  3   10 0
+17  1  3   10 0
+18  1  2.5 10 0
+
+
+#---------------
+# Face list
+#---------------
+
+15 1 # number of faces; yes, we do have boundary markers
+
+# inflow face
+1 0 1   # one polygon, zero holes, boundary 1
+4 1 2 3 4  # four vertices and their indices in node list
+
+# left main branch face
+1 0 4  # one polygon, zero holes, boundary 4
+4 1 4 10 5  # four vertices and their indices in node list
+
+# upper main branch face
+1 0 5  # one polygon, zero holes, boundary 5
+5 4 3 8 9 10  # five vertices and their indices in node list
+
+# right main branch face
+1 0 6 # one polygon, zero holes, boundary 6
+4 2 3 8 7 # four vertices and their indices in node list
+
+# lower main branch face
+1 0 7  # one polygon, zero holes, boundary 7
+5 1 2 7 6 5  # five vertices and their indices in node list
+
+
+
+# left left-bifurcation face
+1 0 8 # one polygon, zero holes, boundary 8
+4 5 10 14 11 # four vertices and their indices in node list
+
+# upper left-bifurcation face
+1 0 9 # one polygon, zero holes, boundary 9
+4 10 9 13 14 # four vertices and their indices in node list
+
+# right left-bifurcation face
+1 0 10 # one polygon, zero holes, boundary 10
+4 6 9 13 12 # four vertices and their indices in node list
+
+# lower left-bifurcation face
+1 0 11  # one polygon, zero holes, boundary 11
+4 5 6 12 11 # four vertices and their indices in node list
+
+
+# left-bifurcation outflow face
+1 0 2  # one polygon, zero holes, boundary 2
+4 11 12 13 14 # four vertices and their indices in node list
+
+
+
+
+
+# left right-bifurcation face
+1 0 12 # one polygon, zero holes, boundary 12
+4 6 9 18 15 # four vertices and their indices in node list
+
+# upper right-bifurcation face
+1 0 13 # one polygon, zero holes, boundary 13
+4 9 8 17 18 # four vertices and their indices in node list
+
+# right right-bifurcation face
+1 0 14 # one polygon, zero holes, boundary 14
+4 7 8 17 16 # four vertices and their indices in node list
+
+# lower right-bifurcation face
+1 0 15  # one polygon, zero holes, boundary 15
+4 6 7 16 15 # four vertices and their indices in node list
+
+# right-bifurcation outflow face
+1 0 3  # one polygon, zero holes, boundary 3
+4 15 16 17 18 # four vertices and their indices in node list
+
+
+
+
+
+
+
+#---------------
+# Hole list
+#---------------
+0
+
+#---------------
+# Region list
+#---------------
+0

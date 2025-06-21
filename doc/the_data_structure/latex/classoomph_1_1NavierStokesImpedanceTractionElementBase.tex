@@ -1,0 +1,172 @@
+\doxysection{oomph\+::Navier\+Stokes\+Impedance\+Traction\+Element\+Base Class Reference}
+\hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase}{}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase}\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+
+
+A base class for elements that allow the imposition of an impedance type boundary condition to the Navier--Stokes equations. Establishes the template-\/free common functionality, that they must have to be able to compute the volume flux that passes through them, etc.  
+
+
+
+
+{\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.590909cm]{classoomph_1_1NavierStokesImpedanceTractionElementBase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a5879757e9fd1c596fa2bb60321c97270}{Navier\+Stokes\+Impedance\+Traction\+Element\+Base}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a3162972ba2dfdff8bbae08f27efaf132}{\texorpdfstring{$\sim$}{\string~}\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty vitual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a7f71882ae8a0d34e3d5a5c91586081b3}{get\+\_\+volume\+\_\+flux}} ()=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function that must be implemented to compute the volume flux that passes through this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a4ce2150b59ff999c24e623b645f1c899}{add\+\_\+element\+\_\+contribution\+\_\+to\+\_\+aux\+\_\+integral}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux\+\_\+integral\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to the auxiliary integral used in the element\textquotesingle{}s Jacobian. The aux\+\_\+integral contains the derivative of the total volume flux through the outflow boundary of the (higher-\/dimensional) Navier-\/\+Stokes mesh w.\+r.\+t. to the discrete (global) (velocity) degrees of freedom. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_ac9583fd74bc1bb57101bce20fffa39d3}{set\+\_\+aux\+\_\+integral\+\_\+pt}} (std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{aux\+\_\+integral\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Pass the pointer to the pre-\/computed auxiliary integral to the element so it can be accessed when computing the elemental Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_add9c7ae3f33b8e03805c256daf038ab4}{set\+\_\+impedance\+\_\+tube\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase}{Template\+Free\+Womersley\+Impedance\+Tube\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{impedance\+\_\+tube\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Pass the pointer to the "{}impedance tube"{} that computes the flow resistance via the solution of Womersley\textquotesingle{}s equations to the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a648cfcbd9bf1f3404b0e7f184cecdc62}{set\+\_\+external\+\_\+data\+\_\+from\+\_\+navier\+\_\+stokes\+\_\+outflow\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt\+\_\+mesh\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Pass the pointer to the mesh containing all Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream "{}impedance tube"{} to the element and classify all nodes in that mesh as external \doxylink{classoomph_1_1Data}{Data} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElementBase_a460dbb1435dcd04e506b90d029513fc2}{Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to mesh containing the Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the "{}downstream tube"{} that provides the flow resistance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A base class for elements that allow the imposition of an impedance type boundary condition to the Navier--Stokes equations. Establishes the template-\/free common functionality, that they must have to be able to compute the volume flux that passes through them, etc. 
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00095}{95}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a5879757e9fd1c596fa2bb60321c97270}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a5879757e9fd1c596fa2bb60321c97270} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!NavierStokesImpedanceTractionElementBase@{NavierStokesImpedanceTractionElementBase}}
+\index{NavierStokesImpedanceTractionElementBase@{NavierStokesImpedanceTractionElementBase}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{NavierStokesImpedanceTractionElementBase()}{NavierStokesImpedanceTractionElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00099}{99}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a3162972ba2dfdff8bbae08f27efaf132}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a3162972ba2dfdff8bbae08f27efaf132} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!````~NavierStokesImpedanceTractionElementBase@{\texorpdfstring{$\sim$}{\string~}NavierStokesImpedanceTractionElementBase}}
+\index{````~NavierStokesImpedanceTractionElementBase@{\texorpdfstring{$\sim$}{\string~}NavierStokesImpedanceTractionElementBase}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NavierStokesImpedanceTractionElementBase()}{\string~NavierStokesImpedanceTractionElementBase()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty vitual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a4ce2150b59ff999c24e623b645f1c899}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a4ce2150b59ff999c24e623b645f1c899} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!add\_element\_contribution\_to\_aux\_integral@{add\_element\_contribution\_to\_aux\_integral}}
+\index{add\_element\_contribution\_to\_aux\_integral@{add\_element\_contribution\_to\_aux\_integral}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{add\_element\_contribution\_to\_aux\_integral()}{add\_element\_contribution\_to\_aux\_integral()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::add\+\_\+element\+\_\+contribution\+\_\+to\+\_\+aux\+\_\+integral (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*}}]{aux\+\_\+integral\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Add the element\textquotesingle{}s contribution to the auxiliary integral used in the element\textquotesingle{}s Jacobian. The aux\+\_\+integral contains the derivative of the total volume flux through the outflow boundary of the (higher-\/dimensional) Navier-\/\+Stokes mesh w.\+r.\+t. to the discrete (global) (velocity) degrees of freedom. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_addae9a132e1004423ce501f71a84fe07}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$}}.
+
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a7f71882ae8a0d34e3d5a5c91586081b3}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a7f71882ae8a0d34e3d5a5c91586081b3} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!get\_volume\_flux@{get\_volume\_flux}}
+\index{get\_volume\_flux@{get\_volume\_flux}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{get\_volume\_flux()}{get\_volume\_flux()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::get\+\_\+volume\+\_\+flux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual function that must be implemented to compute the volume flux that passes through this element. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_a853055ebb50a6500602288a6f0563852}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$}}.
+
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_ac9583fd74bc1bb57101bce20fffa39d3}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_ac9583fd74bc1bb57101bce20fffa39d3} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!set\_aux\_integral\_pt@{set\_aux\_integral\_pt}}
+\index{set\_aux\_integral\_pt@{set\_aux\_integral\_pt}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_aux\_integral\_pt()}{set\_aux\_integral\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::set\+\_\+aux\+\_\+integral\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*}}]{aux\+\_\+integral\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pass the pointer to the pre-\/computed auxiliary integral to the element so it can be accessed when computing the elemental Jacobian. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_abd5db43a552949e7d2ab4c1c25a68e96}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$}}.
+
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a648cfcbd9bf1f3404b0e7f184cecdc62}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a648cfcbd9bf1f3404b0e7f184cecdc62} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!set\_external\_data\_from\_navier\_stokes\_outflow\_mesh@{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh}}
+\index{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh@{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh()}{set\_external\_data\_from\_navier\_stokes\_outflow\_mesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::set\+\_\+external\+\_\+data\+\_\+from\+\_\+navier\+\_\+stokes\+\_\+outflow\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pass the pointer to the mesh containing all Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the downstream "{}impedance tube"{} to the element and classify all nodes in that mesh as external \doxylink{classoomph_1_1Data}{Data} for this element (unless the nodes are also the element\textquotesingle{}s own nodes, of course). 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_afd73c927eab27d77f54d83c67ef84a0f}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$}}.
+
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_add9c7ae3f33b8e03805c256daf038ab4}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_add9c7ae3f33b8e03805c256daf038ab4} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!set\_impedance\_tube\_pt@{set\_impedance\_tube\_pt}}
+\index{set\_impedance\_tube\_pt@{set\_impedance\_tube\_pt}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{set\_impedance\_tube\_pt()}{set\_impedance\_tube\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::set\+\_\+impedance\+\_\+tube\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase}{Template\+Free\+Womersley\+Impedance\+Tube\+Base}} \texorpdfstring{$\ast$}{*}}]{impedance\+\_\+tube\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pass the pointer to the "{}impedance tube"{} that computes the flow resistance via the solution of Womersley\textquotesingle{}s equations to the element. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1NavierStokesImpedanceTractionElement_aab0f649a0569d9caa428b8a932cc1c40}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1NavierStokesImpedanceTractionElementBase_a460dbb1435dcd04e506b90d029513fc2}\label{classoomph_1_1NavierStokesImpedanceTractionElementBase_a460dbb1435dcd04e506b90d029513fc2} 
+\index{oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}!Navier\_stokes\_outflow\_mesh\_pt@{Navier\_stokes\_outflow\_mesh\_pt}}
+\index{Navier\_stokes\_outflow\_mesh\_pt@{Navier\_stokes\_outflow\_mesh\_pt}!oomph::NavierStokesImpedanceTractionElementBase@{oomph::NavierStokesImpedanceTractionElementBase}}
+\doxysubsubsection{\texorpdfstring{Navier\_stokes\_outflow\_mesh\_pt}{Navier\_stokes\_outflow\_mesh\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}\texorpdfstring{$\ast$}{*} oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element\+Base\+::\+Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to mesh containing the Navier\+Stokes\+Impedance\+Traction\+Elements that contribute to the volume flux into the "{}downstream tube"{} that provides the flow resistance. 
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l00143}{143}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l02091}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$\+::navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{womersley__elements_8h_source_l02035}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$\+::\+Navier\+Stokes\+Impedance\+Traction\+Element()}}, \mbox{\hyperlink{womersley__elements_8h_source_l02196}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$\+::set\+\_\+external\+\_\+data\+\_\+from\+\_\+navier\+\_\+stokes\+\_\+outflow\+\_\+mesh()}}, and \mbox{\hyperlink{womersley__elements_8h_source_l02249}{oomph\+::\+Navier\+Stokes\+Impedance\+Traction\+Element$<$ BULK\+\_\+\+NAVIER\+\_\+\+STOKES\+\_\+\+ELEMENT, WOMERSLEY\+\_\+\+ELEMENT, DIM $>$\+::total\+\_\+volume\+\_\+flux\+\_\+into\+\_\+downstream\+\_\+tube()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{womersley__elements_8h}{womersley\+\_\+elements.\+h}}\end{DoxyCompactItemize}

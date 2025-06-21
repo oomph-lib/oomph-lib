@@ -1,0 +1,2529 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+// Header file for elements that enforce solid contact
+
+#ifndef OOMPH_CONTACT_ELEMENTS_HEADER
+#define OOMPH_CONTACT_ELEMENTS_HEADER
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+//Standard libray headers
+#include <cmath>
+
+// oomph-lib includes
+#include "generic.h" // ../generic/Qelements.h"
+
+namespace oomph
+{
+ 
+
+//=========================================================
+/// Piecewise Gauss integration rule. Uses
+/// Gauss rules of specified order in three sub-intervals
+/// of element.
+//=========================================================
+ template <unsigned DIM, unsigned NPTS_1D>
+  class PiecewiseGauss : public Gauss<DIM,NPTS_1D>
+  {
+    private:
+   
+   /// Store for the lower and upper limits of integration and the range
+   double Lower, Upper, Range;
+   
+    public:
+   
+   /// Constructor: Pass in lower and upper limits of 1D coordinate
+   /// over which we're integrating
+   PiecewiseGauss(const double& lower, const double& upper) : 
+   Lower(lower), Upper(upper)
+    {
+     //Set the range of integration
+     Range = upper - lower;
+    }
+
+   /// Broken copy constructor
+   PiecewiseGauss(const PiecewiseGauss& dummy) 
+    { 
+     BrokenCopy::broken_copy("PiecewiseGauss");
+    } 
+   
+   /// Return the number of integration points of the scheme. 
+   virtual unsigned nweight() const
+   {
+    return 3*Gauss<DIM,NPTS_1D>::nweight();
+   }
+   
+   /// Return the rescaled knot values s[j] at integration point i
+   double knot(const unsigned &i, const unsigned &j) const
+   {
+    if (i<Gauss<DIM,NPTS_1D>::nweight())
+     {
+      double range=0.25*Range;
+      double lower=Lower+0.0;
+      //double upper=Lower+0.25*Range;
+      unsigned ii=i;
+      return (lower+(0.5*(1.0+Gauss<DIM,NPTS_1D>::knot(ii,j))*range));
+     }
+    else if (i<2*Gauss<DIM,NPTS_1D>::nweight())
+     {
+      double range=0.5*Range;
+      double lower=Lower+0.25*Range;
+      //double upper=Lower+0.75*Range;
+      unsigned ii=i-Gauss<DIM,NPTS_1D>::nweight();
+      return (lower+(0.5*(1.0+Gauss<DIM,NPTS_1D>::knot(ii,j))*range));
+     }
+    else
+     {
+      double range=0.25*Range;
+      double lower=Lower+0.75*Range;
+      //double upper=Upper;
+      unsigned ii=i-2*Gauss<DIM,NPTS_1D>::nweight();
+      return (lower+(0.5*(1.0+Gauss<DIM,NPTS_1D>::knot(ii,j))*range));
+     }
+   }
+   
+   /// Return the rescaled weight at integration point i
+   double weight(const unsigned &i) const
+   {
+    if (i<Gauss<DIM,NPTS_1D>::nweight())
+      {
+       double range=0.25*Range;
+       unsigned ii=i;
+       return Gauss<DIM,NPTS_1D>::weight(ii)*
+        pow(0.5*range,static_cast<int>(DIM));
+      }
+    else if (i<2*Gauss<DIM,NPTS_1D>::nweight())
+     {
+      double range=0.5*Range;
+      unsigned ii=i-Gauss<DIM,NPTS_1D>::nweight();
+      return Gauss<DIM,NPTS_1D>::weight(ii)*
+       pow(0.5*range,static_cast<int>(DIM));
+     }
+     
+    else
+     {
+      double range=0.25*Range;
+      unsigned ii=i-2*Gauss<DIM,NPTS_1D>::nweight();
+      return Gauss<DIM,NPTS_1D>::weight(ii)*
+       pow(0.5*range,static_cast<int>(DIM));
+     }
+   }
+   
+};
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Base class for penetrator. Must be able to compute
+/// the penetration with another body, based on the position vector, x,
+/// to, and the outer unit normal, n, on that other body. 
+//======================================================================
+class Penetrator 
+ {
+
+   public:
+
+  /// Constructor
+  Penetrator(){};
+
+  /// Destructor
+  virtual ~Penetrator(){};
+  
+  /// Get penetration for given point x with outer unit normal n.
+  /// Should return the negative distance along outer unit normal to the  
+  /// closest point on the penetrator, so that minus values imply no 
+  /// penetration and positive ones imply penetration. If the ray from the 
+  /// unit normal never crosses the penetrator,set intersection to false
+  /// In this case, d can be set to anything, as it should be ignored anway.
+  /// Returning a bool moves the problem of deciding what to do with 
+  /// non-intersection to each individual method
+  virtual void penetration(const Vector<double>& x,
+                           const Vector<double>& n,
+                           double& d,
+                           bool& intersection) const = 0;
+  
+  /// Output coordinates of penetrator at nplot plot points
+  virtual void output(std::ostream &outfile, const unsigned& nplot) const =0;
+  
+  /// Get rigid body displacement of reference point in penetrator.
+  /// Broken virtual, so you don't really have to imlement this...
+  virtual Vector<double> rigid_body_displacement() const 
+  {
+   throw OomphLibError(
+    "This is a broken virtual function. Please implement/overload. ",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+  /// Vector of pairs identifying values (via a pair of pointer to 
+  /// Data object and index within it) that correspond to the Data values 
+  /// that are determined by the horizontal/vertical/... equilibrium of force 
+  /// equations. Empty by default, indicating that the penetrator is in a 
+  /// prescribed position (i.e. a position that is not determined as part
+  /// of the solution!)
+  virtual Vector<std::pair<Data*,unsigned> > equilibrium_data()
+   {
+    Vector<std::pair<Data*,unsigned> > dummy;
+    return dummy;
+   }
+
+  /// Get surface coordinate along penetrator for given point x;
+  /// implies some sort of "projection"-type relation between
+  /// point x and the parametrisation of the surface (e.g. polar
+  /// angle).
+  virtual void surface_coordinate(const Vector<double>& x, 
+                                  Vector<double>& zeta) const 
+  {
+   throw OomphLibError(
+    "This is a broken virtual function. Please implement/overload. ",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+    
+
+ };
+
+
+//======================================================================
+/// Base class for "heated" penetrator.
+//======================================================================
+class HeatedPenetrator : public virtual Penetrator
+ {
+
+   public:
+
+  /// Constructor
+  HeatedPenetrator(){};
+
+  /// Destructor
+  virtual ~HeatedPenetrator(){};
+
+  /// Get penetrator temperature at surface for given point x. Specific 
+  /// implementation of penetetrator has do decide how to relate
+  /// these two points.
+  virtual double temperature(const Vector<double>& x) const=0;
+
+ };
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Penetrator -- here implemented as a circle
+//======================================================================
+class CircularPenetrator : public virtual Penetrator
+ {
+
+   public:
+
+  /// Constructor: Pass pointer to centre and radius
+  CircularPenetrator(Vector<double>* r_c_pt, const double& r)
+   {
+    Centre_pt=r_c_pt;
+    Radius=r;
+
+    // Back up original centre
+    unsigned n=r_c_pt->size();
+    Orig_centre.resize(n);
+    for (unsigned i=0;i<n;i++)
+     {
+      Orig_centre[i]=(*r_c_pt)[i];
+     }
+   }
+
+  /// Destructor
+  virtual ~CircularPenetrator(){}
+
+  /// Get penetration for given point x
+  void penetration(const Vector<double>& x,
+                     const Vector<double>& n,
+                     double& d,
+                     bool& intersection)const
+  {
+
+   // Vector from potential contact point to centre of penetrator
+   Vector<double> l(2);
+   l[0]=(*Centre_pt)[0]-x[0];
+   l[1]=(*Centre_pt)[1]-x[1];
+   
+   // Distance from potential contact point to centre of penetrator
+   double ll=sqrt(l[0]*l[0]+l[1]*l[1]);
+
+   // Projection of vector from potential contact point to centre of penetrator
+   // onto outer unit normal on potential contact point
+   double project=n[0]*l[0]+n[1]*l[1];
+   double project_squared=project*project;
+
+   // Final term in square root
+   double b_squared=ll*ll-Radius*Radius;
+
+   // Is square root negative? In this case we have no intersection
+   if (project_squared<b_squared)
+    {
+     d = 0.0;
+     intersection = false;
+     //return -10*std::numeric_limits<double>::min();
+    }
+   else
+    {
+     double sqr=sqrt(project_squared-b_squared);
+     d = -std::min(project-sqr,project+sqr);
+     intersection = true;
+    }
+  }
+ 
+
+
+  /// Output coordinates of penetrator at nplot plot points
+  void output(std::ostream &outfile, const unsigned& nplot) const
+   {
+    for (unsigned j=0;j<nplot;j++)
+     {
+      double phi=2.0*MathematicalConstants::Pi*double(j)/double(nplot-1);
+      outfile << (*Centre_pt)[0]+Radius*cos(phi) << " " 
+              << (*Centre_pt)[1]+Radius*sin(phi)
+              << std::endl;
+     }
+   }
+    
+  
+  /// Get position to surface, r, in terms of surface coordinate zeta.
+  void position_from_zeta(const Vector<double>& zeta, 
+                          Vector<double>& r) const
+  {
+   double phi=zeta[0];
+   r[0]=(*Centre_pt)[0]+Radius*cos(phi);
+   r[1]=(*Centre_pt)[1]+Radius*sin(phi);
+  }
+
+
+
+  /// Get surface coordinate along penetrator for given point x.
+  /// We assume that point on the surface and given point share the
+  /// same polar angle and return that polar angle 
+  void surface_coordinate(const Vector<double>& x, Vector<double>& zeta) const
+  {
+   zeta[0]=atan2(x[1]-(*Centre_pt)[1],x[0]-(*Centre_pt)[0]);
+  }
+
+  
+  /// Get rigid body displacement of reference point in penetrator.
+  Vector<double> rigid_body_displacement() const
+   {    
+    unsigned n=Orig_centre.size();
+    Vector<double> displ(n);
+    for (unsigned i=0;i<n;i++)
+     {
+      displ[i]=(*Centre_pt)[i]-Orig_centre[i];
+     }
+    return displ;
+   }
+
+
+  /// Set original centre of penetrator (for computation of rigid body
+  /// displacement
+  void set_original_centre(const Vector<double>& orig_centre)
+  {
+   Orig_centre=orig_centre;
+  }
+  
+
+   protected:
+  
+  /// Pointer to centre of penetrator (origin for cylindrical polar
+  /// coordinate system)
+  Vector<double>* Centre_pt;
+
+
+  /// Original centre of penetrator (origin for cylindrical polar
+  /// coordinate system)
+  Vector<double> Orig_centre;
+
+  /// Radius of penetrator
+  double Radius;
+
+ };
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Heated circular penetrator
+//======================================================================
+class HeatedCircularPenetrator : public virtual HeatedPenetrator,
+ public virtual CircularPenetrator
+ {
+
+   public:
+
+  /// Constructor: Pass pointer to centre and radius
+   HeatedCircularPenetrator(Vector<double>* r_c_pt, const double& r) :
+  CircularPenetrator(r_c_pt,r) {}
+  
+  /// Destructor
+  virtual ~HeatedCircularPenetrator(){}
+
+
+  /// Get temperature on penetrator at point "associated" with
+  /// point x using the same logic as for the position function). Here
+  /// we assume that both points shrare the same polar angle relative
+  /// to the centre of (circular!) penetrator
+  double temperature(const Vector<double>& x) const
+   {
+    double phi=atan2(x[1]-(*Centre_pt)[1],x[0]-(*Centre_pt)[0]);
+    return cos(phi-0.5*MathematicalConstants::Pi);
+   }
+
+ };
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//====================================================================
+/// Namespace with helper function for polygons
+//====================================================================
+namespace PolygonHelper
+{
+
+ /// Check if point in inside polygon.
+ /// Reference: http://paulbourke.net/geometry/insidepoly/
+ bool point_is_in_polygon(const Vector<double>& point,
+                          const Vector<Vector<double> >& polygon_vertex)
+ {
+
+  // Total number of vertices
+  unsigned nvertex=polygon_vertex.size();
+
+// faire: obviously polygons should ALWAYS be designed to be closed, so
+// such testing should only need to be done once upon implementation of
+// the polygon, not everytime we want to check number of intersections 
+// hierher #ifdef PARANOID
+  
+  // Make sure the polygon closes exactly:
+  double d0=polygon_vertex[nvertex-1][0]-polygon_vertex[0][0];
+  double d1=polygon_vertex[nvertex-1][1]-polygon_vertex[0][1];
+  if (sqrt(d0*d0+d1*d1)>0.0)
+   {
+    std::stringstream junk;
+    junk << "First and last point of polygon don't coincide!\n"
+         << "First point at: " 
+         << polygon_vertex[0][0] << " " 
+         << polygon_vertex[0][1] << "\n"
+         << "Last point at: " 
+         << polygon_vertex[nvertex-1][0] << " " 
+         << polygon_vertex[nvertex-1][1] << "\n";
+    throw OomphLibError(
+     junk.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+   }
+
+// #endif
+
+  // Counter for number of intersections
+  unsigned intersect_counter=0;
+  
+  //Get first vertex
+  Vector<double> p1=polygon_vertex[0];
+  for (unsigned i=1;i<=nvertex;i++)
+   {
+    // Get second vertex by wrap-around
+    Vector<double> p2 = polygon_vertex[i%nvertex];
+    
+    if (point[1] > std::min(p1[1],p2[1]))
+     {
+      if (point[1] <= std::max(p1[1],p2[1]))
+       {
+        if (point[0] <= std::max(p1[0],p2[0]))
+         {
+          if (p1[1] != p2[1])
+           {
+            double xintersect =
+             (point[1]-p1[1])*(p2[0]-p1[0])/
+             (p2[1]-p1[1])+p1[0];
+            if ( (p1[0] == p2[0]) ||
+                 (point[0] <= xintersect) )
+             {
+              intersect_counter++;
+             }
+           }
+         }
+       }
+     }
+    p1 = p2;
+   }
+  
+  // Even number of intersections: outside
+  if (intersect_counter%2==0)
+   {
+    return false;
+   }
+  return true;
+ }
+
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//======================================================================
+/// Template-free base class for contact elements 
+//======================================================================
+class TemplateFreeContactElementBase : public virtual FiniteElement
+{
+
+  public:
+  //Constructor null pointer for traction 
+ TemplateFreeContactElementBase() : Traction_fct_pt(0),
+  Use_isoparametric_flag_pt(0), Use_collocated_penetration_flag_pt(0),
+  Use_collocated_contact_pressure_flag_pt(0)
+  {}
+
+
+  /// Destructor
+  virtual ~TemplateFreeContactElementBase(){}
+
+ /// Resulting contact force
+  virtual void resulting_contact_force(Vector<double> &contact_force)=0;
+  
+  //typedef for traction function pointer, passed in from driver code
+  typedef void (*TractionFctPt)(const double& t,
+                                const Vector<double>& x, 
+                                Vector<double>& p);
+
+  //Refer to this in the residuals, instead of worrying about pointers 
+  //and nullity
+  void traction_fct(const Vector<double>& x,
+                    Vector<double>& p)
+  {
+   //p will be same size as x as tractions are same dim
+   unsigned n = x.size();
+   if (Traction_fct_pt==0)
+    {
+     p.assign(n,0.0);
+    }
+   else
+    {
+     // Get time from timestepper of first node
+     double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+
+     (*Traction_fct_pt)(time,x,p);
+    }
+  }
+
+  /// Determine whether or not the contact pressure (p_c) should be 
+  /// represented isoparametrically (true) or with a hat function (false)
+  bool use_isoparametric_flag() const
+  {
+   if (Use_isoparametric_flag_pt==0)
+    {
+     return true;
+    }
+   else
+    {
+     return *Use_isoparametric_flag_pt;
+    }
+  }
+
+
+  /// Determine which method to use to discretise contact pressure,
+  /// collocation (true) or integrated using the hat function (false)
+  bool use_collocated_penetration_flag()
+  {
+   if (Use_collocated_penetration_flag_pt==0)
+    {
+     return true;
+    }
+   else
+    {
+     return *Use_collocated_penetration_flag_pt;
+    }
+  }
+
+
+  /// Determine which method to use to discretise contact pressure, 
+  /// collocation (true) or integrated using the hat function (false)
+  bool use_collocated_contact_pressure_flag()
+  {
+   if (Use_collocated_contact_pressure_flag_pt==0)
+    {
+     return true;
+    }
+   else
+    {
+     return *Use_collocated_contact_pressure_flag_pt;
+    }
+  }
+
+  /// Access function: Pointer to body force function
+  TractionFctPt& traction_fct_pt() {return Traction_fct_pt;}
+  /// Access function: Pointer to body force function (const version)
+  TractionFctPt traction_fct_pt() const {return Traction_fct_pt;}
+
+  /// Access function: Pointer to flag to use isoparametric
+  bool*& use_isoparametric_flag_pt() 
+   {return Use_isoparametric_flag_pt;}
+  /// Access function: Pointer to flag to use isoparametric 
+  /// (const version)
+  bool* use_isoparametric_flag_pt() const 
+   {return Use_isoparametric_flag_pt;}
+
+  /// Access function: Pointer to flag to use collocated penetration
+  bool*& use_collocated_penetration_flag_pt() 
+   {return Use_collocated_penetration_flag_pt;}
+  /// Access function: Pointer to flag to use collocated penetration 
+  /// (const version)
+  bool* use_collocated_penetration_flag_pt() const 
+   {return Use_collocated_penetration_flag_pt;}
+
+  /// Access function: Pointer to flag to use collocated contact pressure
+  bool*& use_collocated_contact_pressure_flag_pt() 
+   {return Use_collocated_contact_pressure_flag_pt;}
+  /// Access function: Pointer to flag to use collocated contact pressure 
+  /// (const version)
+  bool* use_collocated_contact_pressure_flag_pt() 
+   const {return Use_collocated_contact_pressure_flag_pt;}
+
+
+  protected:
+ 
+ /// Enumeration for type of penetrator data
+ enum{Nodal_data, 
+      Nodal_position_data, 
+      External_data};
+
+  //create an instance of a traction pointer
+  TractionFctPt Traction_fct_pt;
+
+
+  /// Set whether or not to use isoparametric basis function for pressure
+  bool* Use_isoparametric_flag_pt;
+
+  /// Set options for basis/test functions for penetration and pressure
+  bool* Use_collocated_penetration_flag_pt;
+
+  /// Set options for basis/test functions for penetration and pressure
+  bool* Use_collocated_contact_pressure_flag_pt;
+};
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Base class for elements that impose contact boundary conditions
+/// either enforcing non-penetration (but "without stick"; default) or 
+/// permament contact (in which case contact force can be
+/// positive or negative. Uses Lagrange-multiplier-like pressure
+/// to enforce contact/non-penetration. Almost certainly works only with
+/// 2D Penetrator at the moment. Specific implementation required for
+/// linear or nonlinear elasticity.
+//======================================================================
+template <class ELEMENT>
+class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>, 
+ //public virtual SolidFaceElement, 
+ public virtual FaceElement, 
+ public virtual TemplateFreeContactElementBase
+ {
+ 
+   public:
+ 
+  /// Constructor, which takes a "bulk" element and the 
+ /// value of the index and its limit
+  SurfaceContactElementBase(FiniteElement* const &element_pt, 
+                            const int &face_index,
+                            const unsigned &id=0,
+                            const bool& called_from_refineable_constructor=
+                            false) : 
+   FaceGeometry<ELEMENT>(), FaceElement()
+   { 
+   
+    // By default we only to proper non-penetration (without "stick", i.e.
+    // we don't allow negative contact pressures) 
+    Enable_stick=false;
+   
+    // Initialise pointer to penetrator
+    Penetrator_pt=0;
+   
+    //Attach the geometrical information to the element. N.B. This function
+    //also assigns nbulk_value from the required_nvalue of the bulk element
+    element_pt->build_face_element(face_index,this);
+   
+   
+#ifdef PARANOID
+    {
+     //Check that the bulk element is not a refineable 3d element
+     if (!called_from_refineable_constructor)
+      {
+       if(element_pt->dim()==3)
+        {
+         //Is it refineable
+         RefineableElement* ref_el_pt=
+          dynamic_cast<RefineableElement*>(element_pt);
+         if(ref_el_pt!=0)
+          {
+           if (this->has_hanging_nodes())
+            {
+             throw OomphLibError(
+              "This face element will not work correctly if nodes are hanging.\nUse the refineable version instead. ",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+      }
+    }
+#endif
+   
+    //  Store the ID of the FaceElement -- this is used to distinguish
+    // it from any others
+    Contact_id=id;
+    
+    // We need one additional value for each FaceElement node:
+    // the normal traction (Lagrange multiplier) to be 
+    // exerted onto the solid
+    unsigned n_nod=nnode();
+    Vector<unsigned> n_additional_values(n_nod,1);
+   
+    // Now add storage for Lagrange multipliers and set the map containing 
+    // the position of the first entry of this face element's 
+    // additional values.
+    add_additional_values(n_additional_values,id);
+   
+#ifdef PARANOID
+    // Check spatial dimension
+    if (element_pt->dim()!=2)
+     {
+      //Issue a warning
+      throw OomphLibError(
+       "This element will almost certainly not work in non-2D problems, though it should be easy enough to upgrade... Volunteers?\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    // Always use piecewise Gauss -- it "over-integrates" for isoparametric formulations
+    // but is likely to be better for discontinuous basis fcts.
+    //Only implemented for 1,3 (1 is from surface of 2D bulk) (3 for quadratic elements)
+#ifdef PARANOID
+    // Bit hacky... Only really works for three-noded 1D elements
+    if (n_nod!=3)
+     {
+      //Issue a warning
+      throw OomphLibError(
+       "Piecwise Gauss used here isn't appropriate for non-3-node elements.\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+     set_integration_scheme(new PiecewiseGauss<1,3>(this->s_min(),this->s_max()));
+   }
+ 
+
+   /// Default constructor
+   SurfaceContactElementBase(){}
+ 
+   /// Enforce permanent contact with penetrator, allowing
+   /// for negative contact pressures.
+   void enable_stick()
+   {
+    Enable_stick=true;
+   }
+ 
+   // final overrider
+   double zeta_nodal(const unsigned &n, const unsigned &k, const unsigned &i) const
+   {
+    return  oomph::FiniteElement::zeta_nodal(n,k,i);
+   }
+
+   //Explicit overload for s_min
+   double s_min() const
+   {
+    return FaceGeometry<ELEMENT>::s_min();
+   }
+
+   double s_max() const
+   {
+    return FaceGeometry<ELEMENT>::s_max();
+   }
+   
+   /// Allow only proper non-penetration (without "stick", i.e.
+   /// we don't allow negative contact pressures) 
+   void disable_stick()
+   {
+    Enable_stick=false;
+   }
+   
+   /// Do we allow only proper non-penetration (without "stick", i.e.
+   /// no negative contact pressures)?
+   bool is_stick_enabled()
+   {
+    return Enable_stick;
+   }
+   
+   
+   /// Return the residuals
+   void fill_in_contribution_to_residuals(Vector<double> &residuals)
+   {
+    fill_in_contribution_to_residuals_surface_contact(residuals);
+   }
+   
+   // fiare: we are currently using FD, but this may be useful if that ever changes
+   // some parts of the jacobian are known a priori
+   // hierher FD the lot for now
+   // /// Fill in contribution from Jacobian
+   // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+   //                                       DenseMatrix<double> &jacobian)
+   //  {
+   //   //Call the residuals
+   //   fill_in_contribution_to_residuals_surface_contact(residuals);
+   
+   //   //Call the generic FD jacobian calculation
+   //   FaceGeometry<ELEMENT>::fill_in_jacobian_from_solid_position_by_fd(jacobian);
+   
+   //   //Derivs w.r.t. to any external data (e.g. during displacement control)
+   //   this->fill_in_jacobian_from_external_by_fd(residuals,jacobian);
+   //   }
+   
+   
+   /// Pointer to penetrator
+   Penetrator* penetrator_pt() const
+    {
+     return Penetrator_pt;
+    }
+   
+   /// Set pointer to penetrator
+   void set_penetrator_pt(Penetrator* penetrator_pt)
+   {
+    Penetrator_pt=penetrator_pt;
+    Vector<std::pair<Data*,unsigned> > 
+     eq_data(Penetrator_pt->equilibrium_data());
+    unsigned n=eq_data.size();
+    Penetrator_eq_data_data_index.resize(n,-1);
+    Penetrator_eq_data_index.resize(n,-1);
+    Penetrator_eq_data_type.resize(n,-1);
+    for (unsigned i=0;i<n;i++)
+     {
+      if (eq_data[i].first!=0)
+       {
+        bool is_duplicate=false;
+        unsigned nnod=nnode();
+        for (unsigned j=0;j<nnod;j++)
+         {
+          if (eq_data[i].first==node_pt(j))
+           {
+            Penetrator_eq_data_type[i]=Nodal_data;
+            Penetrator_eq_data_data_index[i]=j;
+            Penetrator_eq_data_index[i]=eq_data[i].second;
+            is_duplicate=true;
+            break;
+           }
+          if (eq_data[i].first==
+              dynamic_cast<SolidNode*>(node_pt(j))->variable_position_pt())
+           {
+            Penetrator_eq_data_type[i]=Nodal_position_data;
+            Penetrator_eq_data_data_index[i]=j;
+            Penetrator_eq_data_index[i]=eq_data[i].second;
+            is_duplicate=true;
+            break;
+           }
+         }
+        
+        if (!is_duplicate)
+         {
+          Penetrator_eq_data_type[i]=External_data;
+          Penetrator_eq_data_data_index[i]=
+           this->add_external_data(eq_data[i].first);
+          Penetrator_eq_data_index[i]=eq_data[i].second;
+         }
+       }
+     }
+   }
+   
+   /// C_style output function
+   void output(FILE* file_pt)
+   {FiniteElement::output(file_pt);}
+   
+   /// C-style output function
+   void output(FILE* file_pt, const unsigned &n_plot)
+   {FiniteElement::output(file_pt,n_plot);}
+   
+   /// Output function
+   void output(std::ostream &outfile)
+   {
+    unsigned n_plot=5;
+    FiniteElement::output(outfile,n_plot);
+   }
+   
+   /// Output function
+   void output(std::ostream &outfile, const unsigned &n_plot)
+   {
+    FiniteElement::output(outfile,n_plot);
+   }
+   
+   /// Shape fct for lagrange multiplier
+   void shape_p(const Vector<double>& s, Shape &psi) const
+   {
+    if (this->use_isoparametric_flag())
+     {
+      FaceGeometry<ELEMENT>::shape(s,psi);
+     }
+    else
+     {
+      const double smin=this->s_min();
+      const double smax=this->s_max();
+      const double sl=smin+0.25*(smax-smin);
+      const double sr=smin+0.75*(smax-smin);
+      if (s[0]<=sl)
+       {
+        psi[0]=1.0;
+        psi[1]=0.0;
+        psi[2]=0.0;
+       }
+      else if (s[0]<=sr)
+       {
+        psi[0]=0.0;
+        psi[1]=1.0;
+        psi[2]=0.0;
+       }
+      else 
+       {
+        psi[0]=0.0;
+        psi[1]=0.0;
+        psi[2]=1.0;
+       }
+     }
+   }
+   
+   /// Top hat function used in discretising either penetration
+   /// or the contact pressure
+   void shape_i(const Vector<double>& s, Shape &psi) const
+   {  
+    const double smin=this->s_min();
+    const double smax=this->s_max();
+    const double sl=smin+0.25*(smax-smin);
+    const double sr=smin+0.75*(smax-smin);
+    if (s[0]<=sl)
+     {
+      psi[0]=1.0;
+      psi[1]=0.0;
+      psi[2]=0.0;
+     }
+    else if (s[0]<=sr)
+     {
+      psi[0]=0.0;
+      psi[1]=1.0;
+      psi[2]=0.0;
+     }
+    else 
+     {
+      psi[0]=0.0;
+      psi[1]=0.0;
+      psi[2]=1.0;
+     }
+   }
+   
+   
+   protected:
+   
+   /// Get interpolated pressure (essentially a Lagrange multiplier
+   /// that enforces the imposed boundary motion to ensure 
+   /// non-penetration or contact)
+   double get_interpolated_lagrange_p(const Vector<double>& s)
+   {
+    // Initialise pressure
+    double p=0;
+    
+    //Find out how many nodes there are
+    unsigned n_node = nnode();
+    
+    //Set up memory for the shape functions
+    Shape psi(n_node);
+    
+    // Evaluate shape function
+    shape_p(s,psi);
+    
+    // Build up Lagrange multiplier (pressure)
+    for (unsigned j=0;j<n_node;j++)
+     {
+      // Cast to a boundary node
+      BoundaryNodeBase *bnod_pt = 
+       dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+      
+      // Get the index of the first nodal value associated with
+      // this FaceElement
+      unsigned first_index=
+       bnod_pt->index_of_first_value_assigned_by_face_element(Contact_id);
+      
+      // Pressure (Lagrange multiplier) is the first (and only) additional
+      // value created by this face element
+      p+=node_pt(j)->value(first_index)*psi[j];
+     }
+    return p;
+   }
+   
+/// Helper function that actually calculates the residuals
+/// This small level of indirection is required to avoid calling
+/// fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
+/// which causes all kinds of pain if overloading later on
+ virtual void fill_in_contribution_to_residuals_surface_contact(
+  Vector<double>& residuals)=0;
+ 
+ /// Work out penetration of point 
+ void penetration(const Vector<double>& x, 
+                  const Vector<double>& n,
+                  double& d,
+                  bool& intersection) const
+ { 
+   Penetrator_pt->penetration(x,n,d,intersection);
+ }
+ 
+ /// Pointer to penetrator
+ Penetrator* Penetrator_pt;
+ 
+ /// ID of the contact constraint (used for the identification of
+ /// the nodal value that corresponds to the pressure-like
+ /// Lagrange multipliers.
+ unsigned Contact_id;
+ 
+   /// Do we allow only proper non-penetration (without "stick", i.e.
+   /// no negative contact pressures)?
+ bool Enable_stick;
+ 
+ 
+ /// Vector containing the type of Data (labeled by the 
+ /// class' private enumeration) that is determined (via pseudo-hijacking)
+ /// from the Penetrator's i-th equilibrium of forces equation. -1 if
+ /// this relevant equilibrium equation is not employed to determine
+ /// an unknown that's associated with the current element.
+ Vector<int> Penetrator_eq_data_type;
+ 
+ /// Vector containing the index of the Data object (e.g. the
+ /// node number in the current element) that stores the unknown 
+ /// that is determined from the Penetrator's 
+ /// i-th equilibrium of forces equation. -1 if the relevant 
+ /// equilibrium equation is not employed to determine
+ /// an unknown that's associated with the current element.
+ Vector<int> Penetrator_eq_data_index;
+ 
+ /// Vector containing the index of the value in the Data 
+ /// object (e.g. the node number in the current element) that 
+ /// stores the unknown that is determined from the Penetrator's 
+ /// i-th equilibrium of forces equation. -1 if the relevant 
+ /// equilibrium equation is not employed to determine
+ /// an unknown that's associated with the current element.
+ Vector<int> Penetrator_eq_data_data_index;
+ 
+ 
+}; 
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Class for elements that impose contact boundary conditions
+/// either enforcing non-penetration (but "without stick"; default) or 
+/// permament contact (in which case contact force can be
+/// positive or negative. Uses Lagrange-multiplier-like pressure
+/// to enforce contact/non-penetration. Almost certainly works only with
+/// 2D Penetrator at the moment. Specific implementation for
+/// nonlinear elasticity.
+//======================================================================
+template <class ELEMENT>
+class NonlinearSurfaceContactElement : 
+public virtual SurfaceContactElementBase<ELEMENT>
+{
+ 
+  public:
+ 
+ /// Constructor, which takes a "bulk" element and the 
+ /// value of the index and its limit
+  NonlinearSurfaceContactElement(FiniteElement* const &element_pt, 
+                                 const int &face_index,
+                                 const unsigned &id=0,
+                                 const bool& called_from_refineable_constructor=
+                                 false) : 
+//   FaceGeometry<ELEMENT>(), FaceElement(), 
+ SurfaceContactElementBase<ELEMENT>(element_pt, 
+                                    face_index,
+                                    id,
+                                    called_from_refineable_constructor)
+  {}
+ 
+ /// Return the residuals for the SurfaceContactElement equations
+ void fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals);
+
+ 
+ /// Output function
+ void output(std::ostream &outfile)
+ {
+  unsigned n_plot=5;
+  this->output(outfile,n_plot);
+ }
+
+ /// Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {
+  
+  unsigned n_dim = this->nodal_dimension();
+  
+  Vector<double> x(n_dim);
+  Vector<double> xi(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> r_pen(n_dim);
+  Vector<double> unit_normal(n_dim);
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(n_plot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(n_plot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,n_plot,s);
+    
+    // Get Eulerian and Lagrangian coordinates and outer unit normal
+    this->interpolated_x(s,x);
+    this->interpolated_xi(s,xi);
+    this->outer_unit_normal(s,unit_normal);   
+    
+    // Get penetration
+    double d=0.0;
+    bool intersection = false;
+    this->penetration(x,unit_normal,d,intersection);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << x[i] << " ";}//1,2
+    
+    // Penetration
+    outfile << std::max(d,-100.0) << " ";//3
+    
+    // Lagrange multiplier-like pressure
+    double p=this->get_interpolated_lagrange_p(s);
+    outfile << p << " "; //4
+    
+    
+    // Plot Lagrange multiplier like pressure
+    outfile << -unit_normal[0]*p << " ";//5
+    outfile << -unit_normal[1]*p << " ";//6
+    
+    // Plot vector from current point to boundary of penetrator
+    double d_tmp=d;
+    if (!intersection) d_tmp=0.0;
+    outfile << -d_tmp*unit_normal[0] << " "; 
+    outfile << -d_tmp*unit_normal[1] << " "; 
+    
+    // Output normal
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << unit_normal[i] << " ";} 
+    
+    
+    //Output the displacements
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << x[i]-xi[i] << " ";}
+    
+    outfile << std::endl;
+   }
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,n_plot);
+  
+ }
+ 
+ /// Resulting contact force
+ void resulting_contact_force(Vector<double> &contact_force);
+ 
+};
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//=====================================================================
+/// Return the residuals for the SurfaceContactElement equations
+//=====================================================================
+template<class ELEMENT>
+void NonlinearSurfaceContactElement<ELEMENT>::
+fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
+{
+ 
+ // Spatial dimension of problem
+ unsigned n_dim = this->nodal_dimension();
+ 
+ // Contribution to contact force
+ Vector<double> contact_force(n_dim,0.0);
+ 
+ // Create vector of local residuals (start assembling contributions
+ // from zero -- necessary so we can over-write pseudo-hijacked
+ // contributions at the end.
+ unsigned n_dof=this->ndof();
+ Vector<double> local_residuals(n_dof,0.0);
+ {
+  
+  //Find out how many nodes there are
+  unsigned n_node = this->nnode();
+   
+  //Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+      
+  //Integer to hold the local equation number
+  int local_eqn=0;
+   
+  //Set up memory for the shape functions
+  //Note that in this case, the number of lagrangian coordinates is always
+  //equal to the dimension of the nodes
+  Shape psi(n_node,n_position_type);
+  DShape dpsids(n_node,n_position_type,n_dim-1); 
+
+  // Separate shape functions for Lagrange multiplier
+  Shape psi_p(n_node);
+  Vector<double> s(n_dim-1);
+
+  //Seperate shape for top hat function
+  Shape psi_i(n_node);
+
+  // Contribution to integrated pressure
+  Vector<double> pressure_integral(n_node,0.0);
+     
+  // Contribution to weighted penetration integral
+  Vector<double> penetration_integral(n_node,0.0);
+     
+  //Set the value of n_intpt
+  unsigned n_intpt = this->integral_pt()->nweight();
+   
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the integral weight
+    double w = this->integral_pt()->weight(ipt);
+     
+    //Only need to call the local derivatives
+    this->dshape_local_at_knot(ipt,psi,dpsids);
+     
+    // Separate shape function for Lagrange multiplier
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i] = this->integral_pt()->knot(ipt,i);
+     }
+    this->shape_p(s,psi_p);
+
+    //If we are using collocation for both, then we don't need to set up the integration shape
+    if(!(this->use_collocated_penetration_flag() 
+        && this->use_collocated_contact_pressure_flag()))
+     {
+      this->shape_i(s,psi_i);
+     }
+    
+    // Interpolated Lagrange multiplier (pressure acting on solid
+    // to enforce melting)
+    double interpolated_lambda_p=0.0;
+        
+    //Calculate the Eulerian and Lagrangian coordinates 
+    Vector<double> interpolated_x(n_dim,0.0);
+     
+    //Also calculate the surface Vectors (derivatives wrt local coordinates)
+    DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
+     
+    //Calculate displacements and derivatives
+    for(unsigned l=0;l<n_node;l++) 
+     {
+
+      // Cast to a boundary node
+      BoundaryNodeBase *bnod_pt = 
+       dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+       
+      // Get the index of the nodal value associated with
+      // this FaceElement
+      unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+       
+      // Add to Lagrange multiplier (acting as pressure on solid
+      // to enforce motion to ensure non-penetration)
+      interpolated_lambda_p+=this->node_pt(l)->value(first_index)*psi_p[l];
+       
+      //Loop over positional dofs
+      for(unsigned k=0;k<n_position_type;k++)
+       {
+        //Loop over displacement components (deformed position)
+        for(unsigned i=0;i<n_dim;i++)
+         {
+          //Calculate the Eulerian and Lagrangian positions
+          interpolated_x[i] += 
+           this->nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
+                      
+          //Loop over LOCAL derivative directions, to calculate the tangent(s)
+          for(unsigned j=0;j<n_dim-1;j++)
+           {
+            interpolated_A(j,i) += 
+             this->nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
+           }
+         }
+       }
+     }
+     
+    //Now find the local deformed metric tensor from the tangent Vectors
+    DenseMatrix<double> A(n_dim-1);
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      for(unsigned j=0;j<n_dim-1;j++)
+       {
+        //Initialise surface metric tensor to zero
+        A(i,j) = 0.0;
+        //Take the dot product
+        for(unsigned k=0;k<n_dim;k++)
+         { 
+          A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+         }
+       }
+     }
+     
+    //Get the outer unit normal
+    Vector<double> interpolated_normal(n_dim);
+    this->outer_unit_normal(ipt,interpolated_normal);
+     
+    //Find the determinant of the metric tensor
+    double Adet =0.0;
+    switch(n_dim)
+     {
+     case 2:
+      Adet = A(0,0);
+      break;
+     case 3:
+      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+      break;
+     default:
+      throw OomphLibError(
+       "Wrong dimension in SurfaceContactElement",
+       "SurfaceContactElement::fill_in_contribution_to_residuals()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+     
+    //Premultiply the weights and the square-root of the determinant of 
+    //the metric tensor
+    double W = w*sqrt(Adet);
+     
+    // Calculate the "load" -- Lagrange multiplier acts as traction to
+    // to enforce required surface displacement
+    Vector<double> traction(n_dim);
+    for (unsigned i=0;i<n_dim;i++)
+     {
+      traction[i]=-interpolated_lambda_p*interpolated_normal[i];
+     }
+
+
+    // Accumulate contribution to total contact force
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      contact_force[i]+=traction[i]*W;
+     }
+     
+    //=====LOAD TERMS  FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
+       
+    //Loop over the test functions, nodes of the element
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop of types of dofs
+      for(unsigned k=0;k<n_position_type;k++)
+       {
+        //Loop over the displacement components
+        for(unsigned i=0;i<n_dim;i++)
+         {
+          local_eqn = this->position_local_eqn(l,this->bulk_position_type(k),i);
+          /*IF it's not a boundary condition*/
+          if(local_eqn >= 0)
+           {
+            //Add the loading terms to the residuals
+            local_residuals[local_eqn] -= traction[i]*psi(l,k)*W;
+           }
+         }
+       } //End of if not boundary condition
+     } //End of loop over shape functions
+//faire!!!!
+       //=====CONTRIBUTION TO CONTACT PRESSURE/LAGRANGE MULTIPLIER EQNS ========
+    
+    if(!this->use_collocated_contact_pressure_flag())
+     {
+      //Loop over the nodes
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated pressure
+        pressure_integral[l]+=interpolated_lambda_p*psi_i[l]*W;
+       }
+     }
+    
+    if(!this->use_collocated_penetration_flag())
+     {
+      //Get local penetration
+      double d = 0.0;
+      bool intersection = false;
+      this->penetration(interpolated_x,interpolated_normal,d,intersection);
+      if(!intersection)
+       {
+        //if there is no intersection then we set d as -infinity
+        d = -DBL_MAX;
+       }
+      
+      //Loop over the nodes
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated penetration
+        penetration_integral[l]+=d*psi_i[l]*W;
+       }
+     }
+   } //End of loop over integration points
+
+    
+
+
+  
+  // Determine contact pressure/Lagrange multiplier:
+  //------------------------------------------------
+  
+  // Storage for nodal coordinate
+  Vector<double> x(n_dim);
+  
+  //Loop over the nodes
+  for(unsigned l=0;l<n_node;l++)
+   {
+    // get the node pt
+    Node* nod_pt = this->node_pt(l);
+   
+    // Cast to a boundary node
+    BoundaryNodeBase *bnod_pt =
+     dynamic_cast<BoundaryNodeBase*>(nod_pt);
+   
+    // Get the index of the first nodal value associated with
+    // this FaceElement
+    unsigned first_index=
+     bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+
+    // Equation for Lagrange multiplier
+    local_eqn = this->nodal_local_eqn(l,first_index);
+    
+    /*IF it's not a boundary condition*/
+    if(local_eqn >= 0)
+     {
+      //Set to integrated discretisations for now
+      double d=penetration_integral[l];
+      double contact_pressure=pressure_integral[l];
+      
+      //overwrite appropriate measure if using collocation
+      if(this->use_collocated_penetration_flag() 
+         || this->use_collocated_contact_pressure_flag())
+       {//If so, we are gonna need information about the node
+        
+        // Nodal position
+        x[0]=nod_pt->x(0);
+        x[1]=nod_pt->x(1);
+        
+        // Get outer unit normal
+        Vector<double> s(1);
+        this->local_coordinate_of_node(l,s);
+        Vector<double> unit_normal(2);
+        this->outer_unit_normal(s,unit_normal);
+
+        if(this->use_collocated_penetration_flag())
+         {
+          // Get penetration
+          bool intersection = false;
+          this->penetration(x,unit_normal,d,intersection);
+          
+          //If there is no intersection, d = -max, ie the penetrator is infinitely far away
+          if(!intersection)
+           {
+            d = -DBL_MAX;
+           }
+         }
+
+        if(this->use_collocated_contact_pressure_flag())
+         {
+          contact_pressure=nod_pt->value(first_index);
+         }
+       }
+
+      //Now that we have the appropriate discretisations of penetration and contact pressure, 
+      //use the semi-smooth residual scheme
+
+      // Contact/non-penetration residual
+      if (this->Enable_stick)
+       {
+        // Enforce contact
+        local_residuals[local_eqn]-=d;
+       }
+      else
+       {
+        // Piecewise linear variation for non-penetration constraint
+        if (-d>contact_pressure)
+         {
+          local_residuals[local_eqn]+=contact_pressure;
+         }
+        else
+         {
+          local_residuals[local_eqn]-=d;
+         }
+       }
+     }
+   }
+ }
+
+// faire: we need to go through this
+ // Now deal with the penetrator equilibrium equations (if any!)
+ unsigned n=this->Penetrator_eq_data_type.size();
+ for (unsigned i=0;i<n;i++)
+  {
+   if (this->Penetrator_eq_data_type[i]>=0)
+    {
+     switch(unsigned(this->Penetrator_eq_data_type[i]))
+      {
+         
+      case TemplateFreeContactElementBase::External_data:
+      {
+       int local_eqn=this->external_local_eqn(
+        this->Penetrator_eq_data_data_index[i],
+        this->Penetrator_eq_data_index[i]);
+       if (local_eqn>=0)
+        {
+         local_residuals[local_eqn]+=contact_force[i];
+        }
+      }
+      break;
+        
+      case TemplateFreeContactElementBase::Nodal_position_data:
+      {
+       // position type (dummy -- hierher paranoid check)
+       unsigned k=0;
+       int local_eqn=this->position_local_eqn(
+        this->Penetrator_eq_data_data_index[i],k,
+        this->Penetrator_eq_data_index[i]);
+       if (local_eqn>=0)
+        {
+         local_residuals[local_eqn]+=contact_force[i];
+        }
+      }
+      break;
+        
+        
+      case TemplateFreeContactElementBase::Nodal_data:
+      {
+       int local_eqn=this->nodal_local_eqn(
+        this->Penetrator_eq_data_data_index[i],
+        this->Penetrator_eq_data_index[i]);
+       if (local_eqn>=0)
+        {
+         local_residuals[local_eqn]+=contact_force[i];
+        }
+      }
+      break;
+        
+      default:
+
+
+       std::stringstream junk;
+       junk << "Never get here: "
+            << "unsigned(Penetrator_eq_data_type[i]) = "
+            << unsigned(this->Penetrator_eq_data_type[i]);
+       throw OomphLibError(
+        junk.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+
+      }
+    }  
+  }
+
+ // Now add local contribution to existing entries
+ for (unsigned j=0;j<n_dof;j++)
+  {
+   residuals[j]+=local_residuals[j];
+  }
+
+}
+
+
+
+
+//=====================================================================
+/// Resulting contact force
+//=====================================================================
+template<class ELEMENT>
+void NonlinearSurfaceContactElement<ELEMENT>::resulting_contact_force(
+ Vector<double> &contact_force) 
+{
+ //Find out how many nodes there are
+ unsigned n_node = this->nnode();
+   
+ //Find out how many positional dofs there are
+ unsigned n_position_type = this->nnodal_position_type();
+   
+ //Find out the dimension of the node
+ unsigned n_dim = this->nodal_dimension();
+
+ // Initialise
+ for (unsigned i=0;i<n_dim;i++)
+  {
+   contact_force[i]=0.0;
+  }
+
+ //Set up memory for the shape functions
+ //Note that in this case, the number of lagrangian coordinates is always
+ //equal to the dimension of the nodes
+ Shape psi(n_node,n_position_type);
+ DShape dpsids(n_node,n_position_type,n_dim-1); 
+   
+ // Separate shape functions for Lagrange multiplier
+ Shape psi_p(n_node);
+ Vector<double> s(n_dim-1);
+   
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+   
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+     
+   //Only need to call the local derivatives
+   this->dshape_local_at_knot(ipt,psi,dpsids);
+     
+   // Separate shape function for Lagrange multiplier
+   for(unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   this->shape_p(s,psi_p);
+     
+   // Interpolated Lagrange multiplier (pressure acting on solid
+   // to enforce melting)
+   double interpolated_lambda_p=0.0;
+     
+   //Calculate the Eulerian and Lagrangian coordinates 
+   Vector<double> interpolated_x(n_dim,0.0);
+     
+   //Also calculate the surface Vectors (derivatives wrt local coordinates)
+   DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
+     
+   //Calculate displacements and derivatives
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+       
+     // Get the index of the nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+       
+     // Add to Lagrange multiplier (acting as pressure on solid
+     // to enforce motion to ensure non-penetration)
+     interpolated_lambda_p+=this->node_pt(l)->value(first_index)*psi_p[l];
+       
+     //Loop over positional dofs
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over displacement components (deformed position)
+       for(unsigned i=0;i<n_dim;i++)
+        {
+         //Calculate the Eulerian and Lagrangian positions
+         interpolated_x[i] += 
+          this->nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
+           
+         //Loop over LOCAL derivative directions, to calculate the tangent(s)
+         for(unsigned j=0;j<n_dim-1;j++)
+          {
+           interpolated_A(j,i) += 
+            this->nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
+          }
+        }
+      }
+    }
+     
+   //Now find the local deformed metric tensor from the tangent Vectors
+   DenseMatrix<double> A(n_dim-1);
+   for(unsigned i=0;i<n_dim-1;i++)
+    {
+     for(unsigned j=0;j<n_dim-1;j++)
+      {
+       //Initialise surface metric tensor to zero
+       A(i,j) = 0.0;
+       //Take the dot product
+       for(unsigned k=0;k<n_dim;k++)
+        { 
+         A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+        }
+      }
+    }
+     
+   //Get the outer unit normal
+   Vector<double> interpolated_normal(n_dim);
+   this->outer_unit_normal(ipt,interpolated_normal);
+     
+   //Find the determinant of the metric tensor
+   double Adet =0.0;
+   switch(n_dim)
+    {
+    case 2:
+     Adet = A(0,0);
+     break;
+    case 3:
+     Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+     break;
+    default:
+     throw OomphLibError(
+      "Wrong dimension in SurfaceContactElement",
+      "SurfaceContactElement::contact_force()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+     
+   //Premultiply the weights and the square-root of the determinant of 
+   //the metric tensor
+   double W = w*sqrt(Adet);
+     
+   // Calculate the "load" -- Lagrange multiplier acts as traction to
+   // to enforce required surface displacement
+   Vector<double> traction(n_dim);
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     traction[i]=-interpolated_lambda_p*interpolated_normal[i];
+    }
+     
+   // Add to resulting force
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     contact_force[i]+=traction[i]*W;
+    }
+  }
+ 
+}
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Class for elements that impose contact boundary conditions
+/// either enforcing non-penetration (but "without stick"; default) or 
+/// permament contact (in which case contact force can be
+/// positive or negative. Uses Lagrange-multiplier-like pressure
+/// to enforce contact/non-penetration. Almost certainly works only with
+/// 2D Penetrator at the moment. Specific implementation for
+/// linear elasticity.
+//======================================================================
+template <class ELEMENT>
+class LinearSurfaceContactElement : 
+public virtual SurfaceContactElementBase<ELEMENT>
+{
+ 
+  public:
+ 
+ /// Constructor, which takes a "bulk" element and the 
+ /// value of the index and its limit
+  LinearSurfaceContactElement(FiniteElement* const &element_pt, 
+                              const int &face_index,
+                              const unsigned &id=0,
+                              const bool& called_from_refineable_constructor=
+                              false) : 
+//   FaceGeometry<ELEMENT>(), FaceElement(), 
+ SurfaceContactElementBase<ELEMENT>(element_pt, 
+                                    face_index,
+                                    id,
+                                    called_from_refineable_constructor)
+  {
+   //Find the dimension of the problem
+   unsigned n_dim = element_pt->nodal_dimension();
+   
+   //Find the index at which the displacemenet unknowns are stored
+   ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
+   this->U_index_linear_elasticity_traction.resize(n_dim);
+   for(unsigned i=0;i<n_dim;i++)
+    {
+     this->U_index_linear_elasticity_traction[i] = 
+      cast_element_pt->u_index_linear_elasticity(i);
+    }
+  }
+
+ /// Default constructor
+ LinearSurfaceContactElement(){}
+
+ /// Return the residuals for the SurfaceContactElement equations
+ void fill_in_contribution_to_residuals_surface_contact(Vector<double>&
+                                                        residuals);
+ 
+ 
+ /// Output function
+ void output(std::ostream &outfile)
+ {
+  unsigned n_plot=5;
+  this->output(outfile,n_plot);
+ }
+
+ /// Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {
+  unsigned n_dim = this->nodal_dimension();
+  
+  Vector<double> x(n_dim);
+  Vector<double> disp(n_dim);
+  Vector<double> x_def(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> r_pen(n_dim);
+  Vector<double> unit_normal(n_dim);
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(n_plot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(n_plot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,n_plot,s);
+    
+    // Get coordinates and outer unit normal
+    this->interpolated_x(s,x);
+    this->outer_unit_normal(s,unit_normal);   
+    
+    // Displacement
+    this->interpolated_u_linear_elasticity(s,disp);
+    
+    // Deformed position
+    for(unsigned i=0;i<n_dim;i++) 
+     {
+      x_def[i]=x[i]+disp[i];
+     }
+    
+    // Get penetration based on deformed position
+    double d= 0.0;
+    bool intersection = false;
+    this->penetration(x_def,unit_normal,d,intersection);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << x[i] << " ";} // col 1,2
+    
+    // Penetration
+    outfile << std::max(d,-100.0) << " "; // col 3
+    
+    // Lagrange multiplier-like pressure
+    double p=this->get_interpolated_lagrange_p(s);
+    outfile << p << " "; // col 4
+    
+    
+    // Plot Lagrange multiplier like pressure
+    outfile << -unit_normal[0]*p << " "; // col 5
+    outfile << -unit_normal[1]*p << " "; // col 6
+    
+    // Plot vector from current point to boundary of penetrator
+    double d_tmp=d;
+    if (!intersection) d_tmp=0.0;
+    outfile << -d_tmp*unit_normal[0] << " ";  // col 7
+    outfile << -d_tmp*unit_normal[1] << " ";  // col 8
+    
+    // Output normal
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << unit_normal[i] << " ";} // col 9, 10
+    
+    //Output the displacements
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << disp[i] << " "; // col 11, 12
+     }
+    
+    //Output the deformed position
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x_def[i] << " "; // col 13, 14
+     }
+    outfile << std::endl;
+   }
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,n_plot);
+  
+ } 
+ 
+ /// Resulting contact force
+ void resulting_contact_force(Vector<double> &contact_force);
+ 
+  protected:
+ 
+ /// Compute vector of FE interpolated displacement u at local coordinate s
+ void interpolated_u_linear_elasticity(const Vector<double> &s,
+                                       Vector<double>& disp) const
+ {
+  //Find the dimension of the problem
+  unsigned n_dim = this->nodal_dimension();
+    
+  //Find number of nodes
+  unsigned n_node = this->nnode();
+    
+  //Local shape function
+  Shape psi(n_node);
+    
+  //Find values of shape function
+  this->shape(s,psi);
+    
+  // Get displacements
+  for (unsigned i=0;i<n_dim;i++)
+   {
+    //Index at which the nodal value is stored
+    unsigned u_nodal_index = this->U_index_linear_elasticity_traction[i];
+      
+    //Initialise value of u
+    disp[i] = 0.0;
+      
+    //Loop over the local nodes and sum
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      disp[i] += this->nodal_value(l,u_nodal_index)*psi[l];
+     }
+   }
+ }
+  
+
+ /// Index at which the i-th displacement component is stored
+ Vector<unsigned> U_index_linear_elasticity_traction;
+   
+};
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//=====================================================================
+/// Return the residuals for the LinearSurfaceContactElement equations
+//=====================================================================
+template<class ELEMENT>
+void LinearSurfaceContactElement<ELEMENT>::
+fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
+{
+ 
+ // Spatial dimension of problem
+ unsigned n_dim = this->nodal_dimension();
+   
+ // Contribution to contact force
+ Vector<double> contact_force(n_dim,0.0);
+ 
+ // Create vector of local residuals (start assembling contributions
+ // from zero -- necessary so we can over-write pseudo-hijacked
+ // contributions at the end.
+ unsigned n_dof=this->ndof();
+ Vector<double> local_residuals(n_dof,0.0);
+ 
+ {
+  //Find out how many nodes there are
+  unsigned n_node = this->nnode();
+
+  //Integer to hold the local equation number
+  int local_eqn=0;
+   
+  //Set up memory for the shape functions
+  Shape psi(n_node);
+  DShape dpsids(n_node,n_dim-1);
+
+  // Separate shape functions for Lagrange multiplier
+  Shape psi_p(n_node);
+  Vector<double> s(n_dim-1);
+
+  //Seperate shape for top hat function
+  Shape psi_i(n_node);
+
+  // Contribution to integrated pressure
+  Vector<double> pressure_integral(n_node,0.0);
+     
+  // Contribution to weighted penetration integral
+  Vector<double> penetration_integral(n_node,0.0);
+     
+  // Deformed position
+  Vector<double> x_def(n_dim,0.0);
+
+  //Set the value of n_intpt
+  unsigned n_intpt = this->integral_pt()->nweight();
+   
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the integral weight
+    double w = this->integral_pt()->weight(ipt);
+     
+    //Only need to call the local derivatives
+    this->dshape_local_at_knot(ipt,psi,dpsids);
+     
+    // Separate shape function for Lagrange multiplier
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i] = this->integral_pt()->knot(ipt,i);
+     }
+    this->shape_p(s,psi_p);
+
+    //If we are using collocation for both, then we don't need to set up the integration shape
+    if(!(this->use_collocated_penetration_flag() 
+        && this->use_collocated_contact_pressure_flag())){
+     this->shape_i(s,psi_i);
+    }
+
+    // Interpolated Lagrange multiplier (pressure acting on solid)
+    double interpolated_lambda_p=0.0;
+
+    // Displacement
+    Vector<double> disp(n_dim,0.0);
+     
+    //Calculate the coordinates 
+    Vector<double> interpolated_x(n_dim,0.0);
+     
+    //Also calculate the surface Vectors (derivatives wrt local coordinates)
+    DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
+     
+    //Calculate displacements and derivatives
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      // Cast to a boundary node
+      BoundaryNodeBase *bnod_pt = 
+       dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+       
+      // Get the index of the nodal value associated with
+      // this FaceElement
+      unsigned first_index=
+       bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+       
+      // Add to Lagrange multiplier (acting as pressure on solid
+      // to enforce motion to ensure non-penetration)
+      interpolated_lambda_p+=this->node_pt(l)->value(first_index)*psi_p[l];
+      
+      //Loop over displacement components
+      for(unsigned i=0;i<n_dim;i++)
+       {
+        //Calculate the positions
+        interpolated_x[i]+=this->nodal_position(l,i)*psi(l);
+           
+        //Index at which the displacement nodal value is stored
+        unsigned u_nodal_index=this->U_index_linear_elasticity_traction[i];
+        disp[i] += this->nodal_value(l,u_nodal_index)*psi(l);
+
+        // Loop over LOCAL derivative directions, to calculate the 
+        // tangent(s)
+        for(unsigned j=0;j<n_dim-1;j++)
+         {
+          interpolated_A(j,i)+=this->nodal_position(l,i)*dpsids(l,j);
+         }
+       }
+      //std::cout<<interpolated_lambda_p; //test for no contact
+     }
+     
+    //Now find the local deformed metric tensor from the tangent Vectors
+    DenseMatrix<double> A(n_dim-1);
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      for(unsigned j=0;j<n_dim-1;j++)
+       {
+        //Initialise surface metric tensor to zero
+        A(i,j) = 0.0;
+        //Take the dot product
+        for(unsigned k=0;k<n_dim;k++)
+         { 
+          A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+         }
+       }
+     }
+     
+    //Get the outer unit normal
+    Vector<double> interpolated_normal(n_dim);
+    this->outer_unit_normal(ipt,interpolated_normal);
+     
+    //Find the determinant of the metric tensor
+    double Adet =0.0;
+    switch(n_dim)
+     {
+     case 2:
+      Adet = A(0,0);
+      break;
+     case 3:
+      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+      break;
+     default:
+      throw OomphLibError(
+       "Wrong dimension in SurfaceContactElement",
+       "LinearSurfaceContactElement::fill_in_contribution_to_residuals()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+     
+    //Premultiply the weights and the square-root of the determinant of 
+    //the metric tensor
+    double W = w*sqrt(Adet);
+     
+    // Calculate the "load" -- Lagrange multiplier acts as traction to
+    // to enforce required surface displacement and the
+    // deformed position
+    Vector<double> traction(n_dim);
+    for (unsigned i=0;i<n_dim;i++)
+     {
+      traction[i]=-interpolated_lambda_p*interpolated_normal[i];
+      x_def[i]=interpolated_x[i]+disp[i];
+     }
+
+
+    // Accumulate contribution to total contact force
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      contact_force[i]+=traction[i]*W;
+     }
+     
+    //=====LOAD TERMS FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS AND BOUNDARY CONDITIONS========
+    
+    //holder for externally imposed traction 
+    Vector<double> p(n_dim,0.0);
+    
+    //Get vector of traction from the function which has been passed in
+    this->traction_fct(interpolated_x,p);
+    
+    //Loop over the test functions, nodes of the element
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over the displacement components
+      for(unsigned i=0;i<n_dim;i++)
+       {
+        local_eqn = this->nodal_local_eqn(l,i);
+        /*IF it's not a boundary condition*/
+        if(local_eqn >= 0)
+         {
+          
+          //Add the loading terms from penetrator and imposed externally to the residuals
+          local_residuals[local_eqn] -= (traction[i]+p[i])*psi(l)*W;
+         } //End of if not boundary condition
+       }
+     } //End of loop over shape functions
+       
+    //=====CONTRIBUTION TO CONTACT PRESSURE/LAGRANGE MULTIPLIER EQNS ========
+    
+    if(!this->use_collocated_contact_pressure_flag())
+     {
+      //Loop over the nodes
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated pressure
+        pressure_integral[l]+=interpolated_lambda_p*psi_i[l]*W;
+       }
+     }
+
+    if(!this->use_collocated_penetration_flag())
+     {
+      //Get local penetration
+      double d = 0.0;
+      bool intersection = false;
+      this->penetration(x_def,interpolated_normal,d,intersection);
+      if(!intersection)
+       {
+        //if there is no intersection then we set d as -infinity
+        d = -DBL_MAX;
+       }
+
+      //Loop over the nodes
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated penetration
+        penetration_integral[l]+=d*psi_i[l]*W;
+       }
+     }
+   } //End of loop over integration points
+
+
+  // Determine contact pressure/Lagrange multiplier
+  //-----------------------------------------------
+  
+  // Storage for nodal coordinate
+  Vector<double> x(n_dim);
+     
+  //Loop over the nodes
+  for(unsigned l=0;l<n_node;l++)
+   {
+    // get the node pt
+    Node* nod_pt = this->node_pt(l);
+       
+    // Cast to a boundary node
+    BoundaryNodeBase *bnod_pt =
+     dynamic_cast<BoundaryNodeBase*>(nod_pt);
+       
+    // Get the index of the first nodal value associated with
+    // this FaceElement
+    unsigned first_index=
+     bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+       
+    // Equation for Lagrange multiplier
+    local_eqn = this->nodal_local_eqn(l,first_index);
+       
+    /*IF it's not a boundary condition*/
+    if(local_eqn >= 0)
+     {
+      //Set to integrated discretisations for now
+      double d=penetration_integral[l];
+      double contact_pressure=pressure_integral[l];
+      
+      //overwrite appropriate measure if using collocation
+      if(this->use_collocated_penetration_flag() 
+         || this->use_collocated_contact_pressure_flag())
+       {//If so, we are gonna need information about the node
+        
+        // Nodal position
+        x[0]=nod_pt->x(0);
+        x[1]=nod_pt->x(1);
+        
+        // Get outer unit normal
+        Vector<double> s(1);
+        this->local_coordinate_of_node(l,s);
+        Vector<double> unit_normal(2);
+        this->outer_unit_normal(s,unit_normal);
+
+        // Displacement
+        Vector<double> disp(2);
+        this->interpolated_u_linear_elasticity(s,disp);
+
+        // Deformed position
+        Vector<double> x_def(2);
+        x_def[0]=x[0]+disp[0];
+        x_def[1]=x[1]+disp[1];
+
+        if(this->use_collocated_penetration_flag())
+         {
+          // Get penetration
+          bool intersection = false;
+          this->penetration(x_def,unit_normal,d,intersection);
+          
+          //If there is no intersection, d = -max, ie the penetrator is infinitely far away
+          if(!intersection)
+           {
+            d = -DBL_MAX;
+           }
+         }
+
+        if(this->use_collocated_contact_pressure_flag())
+         {
+          contact_pressure=nod_pt->value(first_index);
+         }
+       }
+
+      //Now that we have the appropriate discretisations of penetration and contact pressure, 
+      //use the semi-smooth residual scheme
+
+      // Contact/non-penetration residual
+      if (this->Enable_stick)
+       {
+        // Enforce contact
+        local_residuals[local_eqn]-=d;
+       }
+      else
+       {
+        // Piecewise linear variation for non-penetration constraint
+        if (-d>contact_pressure)
+         {
+          local_residuals[local_eqn]+=contact_pressure;
+         }
+        else
+         {
+          local_residuals[local_eqn]-=d;
+         }
+       }
+     }
+   }
+ }
+
+//faire: equilibrium again
+ // Now deal with the penetrator equilibrium equations (if any!)
+ unsigned n=this->Penetrator_eq_data_type.size();
+ for (unsigned i=0;i<n;i++)
+  {
+   if (this->Penetrator_eq_data_type[i]>=0)
+    {
+     switch(unsigned(this->Penetrator_eq_data_type[i]))
+      {
+         
+      case TemplateFreeContactElementBase::External_data:
+      {
+       int local_eqn=this->external_local_eqn(
+        this->Penetrator_eq_data_data_index[i],
+        this->Penetrator_eq_data_index[i]);
+       if (local_eqn>=0)
+        {
+         local_residuals[local_eqn]+=contact_force[i];
+        }
+      }
+      break;
+        
+
+// hierher this case should not arise because the nodal positions
+      // will not be affected by the force balance.
+/*       case TemplateFreeContactElementBase::Nodal_position_data: */
+/*       { */
+/*        // position type (dummy -- hierher paranoid check) */
+/*        unsigned k=0; */
+/*        int local_eqn=position_local_eqn( */
+/*         this->Penetrator_eq_data_data_index[i],k, */
+/*         this->Penetrator_eq_data_index[i]); */
+/*        if (local_eqn>=0) */
+/*         { */
+/*          local_residuals[local_eqn]=contact_force[i]; */
+/*         } */
+/*       } */
+/*       break; */
+        
+      case TemplateFreeContactElementBase::Nodal_data:
+      {
+       int local_eqn=this->nodal_local_eqn(
+        this->Penetrator_eq_data_data_index[i],
+        this->Penetrator_eq_data_index[i]);
+       if (local_eqn>=0)
+        {
+         local_residuals[local_eqn]+=contact_force[i];
+        }
+      }
+      break;
+        
+      default:
+
+
+       std::stringstream junk;
+       junk << "Never get here: "
+            << "unsigned(Penetrator_eq_data_type[i]) = "
+            << unsigned(this->Penetrator_eq_data_type[i]);
+       throw OomphLibError(
+        junk.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+
+      }
+    }  
+  }
+
+ // Now add local contribution to existing entries
+ for (unsigned j=0;j<n_dof;j++)
+  {
+   residuals[j]+=local_residuals[j];
+  }
+
+}
+
+
+
+
+//=====================================================================
+/// Resulting contact force
+//=====================================================================
+template<class ELEMENT>
+void LinearSurfaceContactElement<ELEMENT>::resulting_contact_force(
+ Vector<double> &contact_force) 
+{
+ 
+ //Find out how many nodes there are
+ unsigned n_node = this->nnode();
+   
+ //Find out the dimension of the node
+ unsigned n_dim = this->nodal_dimension();
+
+ // Initialise
+ for (unsigned i=0;i<n_dim;i++)
+  {
+   contact_force[i]=0.0;
+  }
+
+ //Set up memory for the shape functions
+ Shape psi(n_node);
+ DShape dpsids(n_node,n_dim-1);
+   
+ // Separate shape functions for Lagrange multiplier
+ Shape psi_p(n_node);
+ Vector<double> s(n_dim-1);
+   
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+   
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+     
+   //Only need to call the local derivatives
+   this->dshape_local_at_knot(ipt,psi,dpsids);
+     
+   // Separate shape function for Lagrange multiplier
+   for(unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   this->shape_p(s,psi_p);
+     
+   // Interpolated Lagrange multiplier (pressure acting on solid
+   // to enforce melting)
+   double interpolated_lambda_p=0.0;
+     
+   //Calculate the coordinates
+   Vector<double> interpolated_x(n_dim,0.0);
+     
+   // Displacement
+   Vector<double> disp(n_dim,0.0);
+     
+   //Also calculate the surface Vectors (derivatives wrt local coordinates)
+   DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);
+     
+   //Calculate displacements and derivatives
+   for(unsigned l=0;l<n_node;l++)
+    {
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt =
+      dynamic_cast<BoundaryNodeBase*>(this->node_pt(l));
+       
+     // Get the index of the nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
+       
+     // Add to Lagrange multiplier (acting as pressure on solid
+     // to enforce motion to ensure non-penetration)
+     interpolated_lambda_p+=this->node_pt(l)->value(first_index)*psi_p[l];
+       
+     //Loop over displacement components
+     for(unsigned i=0;i<n_dim;i++)
+      {
+       //Calculate the positions
+       interpolated_x[i] += this->nodal_position(l,i)*psi(l);
+         
+       //Index at which the displacement nodal value is stored
+       unsigned u_nodal_index=this->U_index_linear_elasticity_traction[i];
+       disp[i] += this->nodal_value(l,u_nodal_index)*psi(l);
+         
+       //Loop over LOCAL derivative directions, to calculate the tangent(s)
+       for(unsigned j=0;j<n_dim-1;j++)
+        {
+         interpolated_A(j,i) += this->nodal_position(l,i)*dpsids(l,j);
+        }
+      }
+    }
+     
+     
+   //Now find the local deformed metric tensor from the tangent Vectors
+   DenseMatrix<double> A(n_dim-1);
+   for(unsigned i=0;i<n_dim-1;i++)
+    {
+     for(unsigned j=0;j<n_dim-1;j++)
+      {
+       //Initialise surface metric tensor to zero
+       A(i,j) = 0.0;
+       //Take the dot product
+       for(unsigned k=0;k<n_dim;k++)
+        {
+         A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+        }
+      }
+    }
+     
+   //Get the outer unit normal
+   Vector<double> interpolated_normal(n_dim);
+   this->outer_unit_normal(ipt,interpolated_normal);
+     
+   //Find the determinant of the metric tensor
+   double Adet =0.0;
+   switch(n_dim)
+    {
+    case 2:
+     Adet = A(0,0);
+     break;
+    case 3:
+     Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+     break;
+    default:
+     throw OomphLibError(
+      "Wrong dimension in SurfaceContactElement",
+      "SurfaceContactElement::contact_force()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+     
+   //Premultiply the weights and the square-root of the determinant of
+   //the metric tensor
+   double W = w*sqrt(Adet);
+     
+   // Calculate the "load" -- Lagrange multiplier acts as traction to
+   // to enforce required surface displacement
+   Vector<double> traction(n_dim);
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     traction[i]=-interpolated_lambda_p*interpolated_normal[i];
+    }
+     
+   // Add to resulting force
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     contact_force[i]+=traction[i]*W;
+    }
+  }
+  
+}
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+}
+
+
+#endif

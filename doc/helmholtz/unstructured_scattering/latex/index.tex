@@ -1,0 +1,64 @@
+\chapter{Example problem\+: Solving the Helmholtz equation on an unstructured mesh}
+\hypertarget{index}{}\label{index}\index{Example problem: Solving the Helmholtz equation on an unstructured mesh@{Example problem: Solving the Helmholtz equation on an unstructured mesh}}
+In this document we revisit the solution of the Helmholtz equation and demonstrate how to simulate the scattering of a planar wave from a circular cylinder using an unstructured mesh.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_scattering}{}\doxysection{\texorpdfstring{A specific example\+: Scattering of an acoustic wave from a sound-\/hard obstacle.}{A specific example: Scattering of an acoustic wave from a sound-hard obstacle.}}\label{index_scattering}
+We revisit the problem considered in \href{../../scattering/html/index.html}{\texttt{ another tutorial}}\+: the scattering of a planar sound wave impacting on a rigid, impermeable obstacle as shown in this sketch\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.6\textwidth]{scattering}
+\doxyfigcaption{Scattering of an incoming wave from a sound-\/hard obstacle -\/-\/ the scatterer. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+The figure below shows plots of the real and imaginary parts of the fluid\textquotesingle{}s displacement potential $ \phi $ (a measure of the fluid pressure). The red and green lines correspond to the computed and exact analytical solutions, respectively. (We refer to \href{../../scattering/html/index.html}{\texttt{ another tutorial}} for details.)
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{re}
+\doxyfigcaption{Real part of the displacement potential (red\+: computed; green\+: exact). }
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.8\textwidth]{im}
+\doxyfigcaption{Imaginary part of the displacement potential (red\+: computed; green\+: exact). }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_num}{}\doxysection{\texorpdfstring{The numerical solution}{The numerical solution}}\label{index_num}
+The driver code for this problem is very similar to the one discussed in \href{../../scattering/html/index.html}{\texttt{ another tutorial}}. Running {\ttfamily sdiff} on the two driver codes \begin{center} \href{../../../../demo_drivers/helmholtz/scattering/scattering.cc}{\texttt{ demo\+\_\+drivers/helmholtz/scattering/scattering.\+cc }} \end{center}  and \begin{center} \href{../../../../demo_drivers/helmholtz/scattering/unstructured_scattering.cc}{\texttt{ demo\+\_\+drivers/helmholtz/scattering/unstructured\+\_\+scattering.\+cc }} \end{center}  shows you the differences, the most important of which are\+:
+\begin{DoxyItemize}
+\item the setup of the unstructured mesh, ensuring that mesh adaptation respects the curvilinear boundaries. ~\newline
+~\newline
+
+\item the re-\/assignment of element properties following any mesh adaptation -- we refer to \href{../../../meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial}} for a more detailed discussion of why this is necessary.
+\end{DoxyItemize}That\textquotesingle{}s all!
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/helmholtz/scattering}{\texttt{ demo\+\_\+drivers/helmholtz/scattering/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/helmholtz/scattering/unstructured_scattering.cc}{\texttt{ demo\+\_\+drivers/helmholtz/scattering/unstructured\+\_\+scattering.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

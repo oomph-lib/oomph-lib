@@ -1,0 +1,321 @@
+\doxysection{oomph\+::Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement\texorpdfstring{$<$}{<} ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an applied traction in the equations of time-\/harmonic linear elasticity from a Helmholtz potential (interpreted as a displacement potential for the fluid in a quasi-\/steady, linearised FSI problem.) The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class.  
+
+
+
+
+{\ttfamily \#include $<$helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h$>$}
+
+Inheritance diagram for oomph\+::Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement\texorpdfstring{$<$}{<} ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.469012cm]{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_af0ac460cd2caeb9ba7c7b27e13d5ebc6}{Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}} (Finite\+Element \texorpdfstring{$\ast$}{*}const \&element\+\_\+pt, const int \&face\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a "{}bulk"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a0a69b95db2d95da34929a9750d3bce3d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a151fa0b3aa8df4a582d62d82ae42f40e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a62a38bdb929e8bab68e6bcee69cf4147}{q}} () const
+\begin{DoxyCompactList}\small\item\em Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. E.\+g. $ Q = (\omega a)^2 \rho/E $, i.\+e. the ratio between the inertial fluid stress and the solid\textquotesingle{}s elastic modulus E. \end{DoxyCompactList}\item 
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a681617ad191e00186878a641d73c5884}{q\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a1ecf56e825d5af950572efe4208ad307}{output}} (std\+::ostream \&outfile)
+\begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a2cfc5c6af366019bc8d8d9bb42ffae03}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: Plot traction etc at Gauss points nplot is ignored. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a6a1d8e8ae161b0ca0aa3de8d2a04a409}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em C\+\_\+style output function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_aab8bf1e29247d96cef5a0ab8c593de61}{output}} (FILE \texorpdfstring{$\ast$}{*}file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a42333cd2a19c901bc01d666d85a4e108}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+helmholtz\+\_\+traction}} (Vector$<$ double $>$ \&residuals)
+\begin{DoxyCompactList}\small\item\em Helper function that actually calculates the residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ae5d333e308981db0bd733cbaa139a538}{Q\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the fluid stresses to the stress used to non-\/dimensionalise the solid stresses. \end{DoxyCompactList}\item 
+Vector$<$ std\+::complex$<$ unsigned $>$ $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a65d16036ca5c85f6cf501a992f6e85df}{U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+helmholtz\+\_\+traction}}
+\begin{DoxyCompactList}\small\item\em Index at which the i-\/th displacement component is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a71a4d2fe30c7423a08c883843fec938b}{Default\+\_\+\+Q\+\_\+\+Value}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$}
+A class for elements that allow the imposition of an applied traction in the equations of time-\/harmonic linear elasticity from a Helmholtz potential (interpreted as a displacement potential for the fluid in a quasi-\/steady, linearised FSI problem.) The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00045}{45}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_af0ac460cd2caeb9ba7c7b27e13d5ebc6}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_af0ac460cd2caeb9ba7c7b27e13d5ebc6} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement@{TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}}
+\index{TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement@{TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement()}{TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement (\begin{DoxyParamCaption}\item[{Finite\+Element \texorpdfstring{$\ast$}{*}const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, which takes a "{}bulk"{} element and the value of the index and its limit. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00074}{74}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00062}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+helmholtz\+\_\+traction}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a151fa0b3aa8df4a582d62d82ae42f40e}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a151fa0b3aa8df4a582d62d82ae42f40e} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
+\index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fill in contribution from Jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00137}{137}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00274}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+helmholtz\+\_\+traction()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a0a69b95db2d95da34929a9750d3bce3d}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a0a69b95db2d95da34929a9750d3bce3d} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
+\index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the residuals. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00130}{130}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00274}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+helmholtz\+\_\+traction()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a42333cd2a19c901bc01d666d85a4e108}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a42333cd2a19c901bc01d666d85a4e108} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!fill\_in\_contribution\_to\_residuals\_helmholtz\_traction@{fill\_in\_contribution\_to\_residuals\_helmholtz\_traction}}
+\index{fill\_in\_contribution\_to\_residuals\_helmholtz\_traction@{fill\_in\_contribution\_to\_residuals\_helmholtz\_traction}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals\_helmholtz\_traction()}{fill\_in\_contribution\_to\_residuals\_helmholtz\_traction()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+helmholtz\+\_\+traction (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function that actually calculates the residuals. 
+
+Return the residuals. 
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00273}{273}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00137}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00130}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a6a1d8e8ae161b0ca0aa3de8d2a04a409}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a6a1d8e8ae161b0ca0aa3de8d2a04a409} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C\+\_\+style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00240}{240}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_aab8bf1e29247d96cef5a0ab8c593de61}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_aab8bf1e29247d96cef5a0ab8c593de61} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+C-\/style output function. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00246}{246}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a1ecf56e825d5af950572efe4208ad307}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a1ecf56e825d5af950572efe4208ad307} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function. 
+
+Dummy
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00166}{166}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00166}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00166}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a2cfc5c6af366019bc8d8d9bb42ffae03}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a2cfc5c6af366019bc8d8d9bb42ffae03} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!output@{output}}
+\index{output@{output}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Output function\+: Plot traction etc at Gauss points nplot is ignored. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00175}{175}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00152}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::q()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a62a38bdb929e8bab68e6bcee69cf4147}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a62a38bdb929e8bab68e6bcee69cf4147} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!q@{q}}
+\index{q@{q}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{q()}{q()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+const double \& \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::q (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the ratio of the stress scales used to non-\/dimensionalise the fluid and elasticity equations. E.\+g. $ Q = (\omega a)^2 \rho/E $, i.\+e. the ratio between the inertial fluid stress and the solid\textquotesingle{}s elastic modulus E. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00152}{152}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00054}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Q\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00175}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::output()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a681617ad191e00186878a641d73c5884}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a681617ad191e00186878a641d73c5884} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!q\_pt@{q\_pt}}
+\index{q\_pt@{q\_pt}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{q\_pt()}{q\_pt()}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::q\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a pointer the ratio of stress scales used to non-\/dimensionalise the fluid and solid equations. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00159}{159}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+References \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00054}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Q\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a71a4d2fe30c7423a08c883843fec938b}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a71a4d2fe30c7423a08c883843fec938b} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!Default\_Q\_Value@{Default\_Q\_Value}}
+\index{Default\_Q\_Value@{Default\_Q\_Value}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Default\_Q\_Value}{Default\_Q\_Value}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Default\+\_\+\+Q\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Static default value for the ratio of stress scales used in the fluid and solid equations (default is 1.\+0) 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00058}{58}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ae5d333e308981db0bd733cbaa139a538}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_ae5d333e308981db0bd733cbaa139a538} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!Q\_pt@{Q\_pt}}
+\index{Q\_pt@{Q\_pt}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Q\_pt}{Q\_pt}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+double\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Q\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the ratio, $ Q $ , of the stress used to non-\/dimensionalise the fluid stresses to the stress used to non-\/dimensionalise the solid stresses. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00054}{54}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00152}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::q()}}, and \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00159}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::q\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a65d16036ca5c85f6cf501a992f6e85df}\label{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement_a65d16036ca5c85f6cf501a992f6e85df} 
+\index{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}!U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction@{U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction}}
+\index{U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction@{U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction}!oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$@{oomph::TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement$<$ ELASTICITY\_BULK\_ELEMENT, HELMHOLTZ\_BULK\_ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction}{U\_index\_time\_harmonic\_linear\_elasticity\_helmholtz\_traction}}
+{\footnotesize\ttfamily template$<$class ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT , class HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$ \\
+Vector$<$std\+::complex$<$unsigned$>$ $>$ \mbox{\hyperlink{classoomph_1_1TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement}}$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+U\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+helmholtz\+\_\+traction\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Index at which the i-\/th displacement component is stored. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00062}{62}} of file \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h_source_l00074}{oomph\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement$<$ ELASTICITY\+\_\+\+BULK\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+BULK\+\_\+\+ELEMENT $>$\+::\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElement()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{helmholtz__time__harmonic__linear__elasticity__interaction_8h}{helmholtz\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity\+\_\+interaction.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\doxysection{oomph\+::Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SolidThinLayerBrickOnTetMesh}{}\label{classoomph_1_1SolidThinLayerBrickOnTetMesh}\index{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
+
+
+Solid brick mesh layer built on top of a given tet mesh. Typically used in FSI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the FSI interface.  
+
+
+
+
+{\ttfamily \#include $<$thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.592592cm]{classoomph_1_1SolidThinLayerBrickOnTetMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{h\+\_\+thick}})
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{h\+\_\+thick}})
+\begin{DoxyCompactList}\small\item\em Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1}{Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{tet\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\+\_\+ids}}, \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{thickness\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the "{}in/outflow"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the "{}outer"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh}{oomph\+::\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ad452469bc94bff203012e68e80ee543c}{Thin\+Layer\+Brick\+On\+Tet\+Mesh}} (Mesh \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{tet\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\+\_\+ids}}, \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aed34f7d1e9a5c6b5f3e220cb5bdf4550}{Thickness\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{thickness\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{nlayer}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TetgenMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the "{}in/outflow"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the "{}outer"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ac69889bc842936bcd202fe78d0cbcfbd}{fsi\+\_\+boundary\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Access functions to the Vector of oomph-\/lib boundary ids that make up boundary on which the mesh was erected (typically the FSI interface in an FSI problem) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_aa753cb61dc2b1ed692dff8feeff67930}{outer\+\_\+boundary\+\_\+id}} ()
+\begin{DoxyCompactList}\small\item\em Boundary ID of the "{}outer"{} surface -- in an FSI context this is the non-\/wetted tube surface at a distance h\+\_\+thick from the FSI surface. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \mbox{\hyperlink{classoomph_1_1ThinLayerBrickOnTetMesh_ab3b948a7715ca95dc05e75bbbe7bd110}{in\+\_\+out\+\_\+boundary\+\_\+id}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{boundary\+\_\+id}})
+\begin{DoxyCompactList}\small\item\em Access function to the vector containing the ids of the oomph-\/lib mesh boundaries that make up the specified in/outflow boundaries as specified in constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh$<$ ELEMENT $>$}
+Solid brick mesh layer built on top of a given tet mesh. Typically used in FSI problems where the tet mesh is the fluid mesh and this mesh acts as the solid mesh that surrounds the FSI interface. 
+
+Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source_l00178}{178}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}\label{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee} 
+\index{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!ThicknessFctPt@{ThicknessFctPt}}
+\index{ThicknessFctPt@{ThicknessFctPt}!oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ThicknessFctPt}{ThicknessFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{typedef}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Thickness\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{h\+\_\+thick}})}
+
+
+
+Function pointer to function that specifies the wall thickness as a fct of the coordinates of the inner surface. 
+
+
+
+Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source_l00185}{185}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1}\label{classoomph_1_1SolidThinLayerBrickOnTetMesh_ac06a05511ae55f0d554e940789661de1} 
+\index{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}!SolidThinLayerBrickOnTetMesh@{SolidThinLayerBrickOnTetMesh}}
+\index{SolidThinLayerBrickOnTetMesh@{SolidThinLayerBrickOnTetMesh}!oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$@{oomph::SolidThinLayerBrickOnTetMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SolidThinLayerBrickOnTetMesh()}{SolidThinLayerBrickOnTetMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TetgenMesh}{class}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh}{oomph\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{ELEMENT}} $>$\+::\+Solid\+Thin\+Layer\+Brick\+On\+Tet\+Mesh (\begin{DoxyParamCaption}\item[{Mesh \texorpdfstring{$\ast$}{*}}]{tet\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ \&}]{boundary\+\_\+ids,  }\item[{\mbox{\hyperlink{classoomph_1_1SolidThinLayerBrickOnTetMesh_ae4289650b0c0eccb2fd3d661b85e85ee}{Thickness\+Fct\+Pt}}}]{thickness\+\_\+fct\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{nlayer,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} $>$ $>$ \&}]{in\+\_\+out\+\_\+boundary\+\_\+id,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Specify (quadratic) tet mesh, boundary IDs of boundary on which the current mesh is to be erected (in an FSI context this boundary tends to be the FSI boundary of the fluid mesh. Also specify the uniform thickness of layer, and the number of element layers. The vectors stored in in\+\_\+out\+\_\+boundary\+\_\+ids contain the boundary IDs of the other boundaries in the tet mesh. In an FSI context these typically identify the in/outflow boundaries in the fluid mesh. The boundary enumeration of the current mesh follows the one of the underlying fluid mesh\+: The enumeration of the FSI boundary matches (to enable the setup of the FSI matching); the "{}in/outflow"{} faces in this mesh inherit the same enumeration as the in/outflow faces in the underlying fluid mesh. Finally, the "{}outer"{} boundary gets its own boundary ID. Timestepper defaults to steady pseudo-\/timestepper. 
+
+
+
+Definition at line \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source_l00201}{201}} of file \mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h_source}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{thin__layer__brick__on__tet__mesh_8h}{thin\+\_\+layer\+\_\+brick\+\_\+on\+\_\+tet\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

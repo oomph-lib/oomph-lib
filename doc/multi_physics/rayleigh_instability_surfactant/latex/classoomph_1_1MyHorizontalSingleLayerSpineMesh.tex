@@ -1,0 +1,70 @@
+\doxysection{oomph\+::My\+Horizontal\+Single\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{}\label{classoomph_1_1MyHorizontalSingleLayerSpineMesh}\index{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$@{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$}}
+
+
+Inherit from the standard Horizontal single-\/layer Spine\+Mesh and modify the \doxylink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c}{spine\+\_\+node\+\_\+update()} function so that it is appropriate for an annular film, rather than a fluid fibre.  
+
+
+Inheritance diagram for oomph\+::My\+Horizontal\+Single\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MyHorizontalSingleLayerSpineMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_a0bd73ed947e30341144d081df52332b5}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{nx}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ny}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, radial extent, axial length , and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{spine\+\_\+node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Node update function assumed spines rooted at the wall fixed to be at r=1 and directed inwards to r=0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}
+Inherit from the standard Horizontal single-\/layer Spine\+Mesh and modify the \doxylink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c}{spine\+\_\+node\+\_\+update()} function so that it is appropriate for an annular film, rather than a fluid fibre. 
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00709}{709}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MyHorizontalSingleLayerSpineMesh_a0bd73ed947e30341144d081df52332b5}\label{classoomph_1_1MyHorizontalSingleLayerSpineMesh_a0bd73ed947e30341144d081df52332b5} 
+\index{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$@{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$}!MyHorizontalSingleLayerSpineMesh@{MyHorizontalSingleLayerSpineMesh}}
+\index{MyHorizontalSingleLayerSpineMesh@{MyHorizontalSingleLayerSpineMesh}!oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$@{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MyHorizontalSingleLayerSpineMesh()}{MyHorizontalSingleLayerSpineMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction, radial extent, axial length , and pointer to timestepper (defaults to Steady timestepper) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00718}{718}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c}\label{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c} 
+\index{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$@{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
+\index{spine\_node\_update@{spine\_node\_update}!oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$@{oomph::MyHorizontalSingleLayerSpineMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Spine\+Node}} \texorpdfstring{$\ast$}{*}}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Node update function assumed spines rooted at the wall fixed to be at r=1 and directed inwards to r=0. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00728}{728}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}\end{DoxyCompactItemize}

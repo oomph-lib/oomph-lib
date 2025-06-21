@@ -1,0 +1,51 @@
+\doxysection{thermo.\+cc File Reference}
+\hypertarget{thermo_8cc}{}\label{thermo_8cc}\index{thermo.cc@{thermo.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classQThermalPVDElement}{QThermal\+PVDElement$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class that solves the equations of steady thermoelasticity by combining the Unsteady\+Heat and PVD equations into a single element. A temperature-\/dependent growth term is added to the PVD equations by overloading the member function get\+\_\+istotropic\+\_\+growth() \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classThermalProblem}{Thermal\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Thermoelasticity problem on rectangular domain, discretised with refineable elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for the physical parameters in the problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{thermo_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Thermoelasticity problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Thermal expansion coefficient. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Young\textquotesingle{}s modulus for solid mechanics. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson ratio for solid mechanics. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em We need a constitutive law for the solid mechanics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{thermo_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{thermo_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{thermo.cc@{thermo.cc}!main@{main}}
+\index{main@{main}!thermo.cc@{thermo.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code for 2D Thermoelasticity problem. 
+
+
+
+Definition at line \mbox{\hyperlink{thermo_8cc_source_l00406}{406}} of file \mbox{\hyperlink{thermo_8cc_source}{thermo.\+cc}}.
+
+
+
+References \mbox{\hyperlink{thermo_8cc_source_l00227}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{thermo_8cc_source_l00236}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{thermo_8cc_source_l00382}{Thermal\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{thermo_8cc_source_l00230}{Global\+\_\+\+Physical\+\_\+\+Variables\+::E}}, and \mbox{\hyperlink{thermo_8cc_source_l00233}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}.
+

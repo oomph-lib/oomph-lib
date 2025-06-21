@@ -1,0 +1,29 @@
+\doxysection{multi\+\_\+domain\+\_\+boussinesq\+\_\+elements.\+h File Reference}
+\hypertarget{multi__domain__boussinesq__elements_8h}{}\label{multi__domain__boussinesq__elements_8h}\index{multi\_domain\_boussinesq\_elements.h@{multi\_domain\_boussinesq\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesBoussinesqElement}{oomph\+::\+Refineable\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Build a refineable Navier Stokes element that inherits from \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element} so that it can "{}communicate"{} with an advection diffusion element that provides the temperature in the body force term. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionBoussinesqElement}{oomph\+::\+Refineable\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Build an Advection\+Diffusion\+Element that inherits from \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element} so that it can "{}communicate"{} with the a Navier\+Stokes\+Element that provides its wind. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1NavierStokesBoussinesqElement}{oomph\+::\+Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Build \doxylink{classoomph_1_1NavierStokesBoussinesqElement}{Navier\+Stokes\+Boussinesq\+Element} that inherits from \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element} so that it can "{}communicate"{} with Advection\+Diffusion\+Element\+With\+External\+Element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01NavierStokesBoussinesqElement_3_01NST__ELEMENT_00_01AD__ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of these elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01NavierStokesBoussinesqElement_3_01NST__ELEMENT_00_01AD__ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Navier\+Stokes\+Boussinesq\+Element$<$ NST\+\_\+\+ELEMENT, AD\+\_\+\+ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry of these elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{oomph\+::\+Advection\+Diffusion\+Boussinesq\+Element$<$ AD\+\_\+\+ELEMENT, NST\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Build \doxylink{classoomph_1_1AdvectionDiffusionBoussinesqElement}{Advection\+Diffusion\+Boussinesq\+Element} that inherits from \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element} so that it can "{}communicate"{} with the Navier Stokes element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper}{oomph\+::\+Multi\+Domain\+Boussinesq\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace for default parameters in multi-\/domain Boussinesq. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1MultiDomainBoussinesqHelper_ae77c07b69cffe295ac07e2c25c31a8aa}{oomph\+::\+Multi\+Domain\+Boussinesq\+Helper\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Default value for physical constants. \end{DoxyCompactList}\end{DoxyCompactItemize}

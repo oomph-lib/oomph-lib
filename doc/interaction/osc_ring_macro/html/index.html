@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: A simple fluid-structure interaction problem: Finite Reynolds number flow, driven by an oscillating ring.</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">A simple fluid-structure interaction problem: Finite Reynolds number flow, driven by an oscillating ring. </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This is a very simple fluid-structure interaction problem: We study the finite-Reynolds number internal flow generated by an oscillating ring. The wall motion only has a single degree of freedom: The ring's average radius, which needs to be adjusted to conserve mass. [This is a warm-up problem for the full fluid structure interaction problem discussed in the next example]. We compare the predictions for the flow field against asymptotic results.</p>
+<p>The nodal positions in the fluid domain is updated by <code>MacroElements</code>.</p>
+<div class="fragment"><div class="line"><span class="comment">//LIC// ====================================================================</span></div>
+<div class="line"><span class="comment">//LIC// This file forms part of oomph-lib, the object-oriented, </span></div>
+<div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
+<div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
+<div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License as published by the Free Software Foundation; either</span></div>
+<div class="line"><span class="comment">//LIC// version 2.1 of the License, or (at your option) any later version.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// This library is distributed in the hope that it will be useful,</span></div>
+<div class="line"><span class="comment">//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><span class="comment">//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></div>
+<div class="line"><span class="comment">//LIC// Lesser General Public License for more details.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// You should have received a copy of the GNU Lesser General Public</span></div>
+<div class="line"><span class="comment">//LIC// License along with this library; if not, write to the Free Software</span></div>
+<div class="line"><span class="comment">//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA</span></div>
+<div class="line"><span class="comment">//LIC// 02110-1301  USA.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.</span></div>
+<div class="line"><span class="comment">//LIC// </span></div>
+<div class="line"><span class="comment">//LIC//====================================================================</span></div>
+<div class="line"><span class="comment">// Driver for 2D Navier Stokes flow, driven by oscillating ring</span></div>
+<div class="line"><span class="comment">// with pseudo-elasticity: The mean radius of ring is adjusted to</span></div>
+<div class="line"><span class="comment">// allow conservation of volume (area).</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Oomph-lib includes</span></div>
+<div class="line"><span class="preprocessor">#include &quot;generic.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;navier_stokes.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Need to instantiate templated mesh</span></div>
+<div class="line"><span class="preprocessor">#include &quot;meshes/quarter_circle_sector_mesh.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//Include namespace containing Sarah&#39;s asymptotics </span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="osc__ring__sarah__asymptotics_8h.html">osc_ring_sarah_asymptotics.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceoomph.html">oomph</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>MathematicalConstants;</div>
+<div class="line"> </div>
+<div class="line">  </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span>  </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Namespace for physical parameters</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//==================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div>
+<div class="line">{</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Re</a>=100.0;  <span class="comment">// ADJUST_PRIORITY </span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Reynolds x Strouhal number</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">ReSt</a>=100.0; <span class="comment">// ADJUST_PRIORITY </span></div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//====================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for oscillating ring problem: Wall performs oscillations</span></div>
+<div class="line"><span class="comment">/// that resemble eigenmodes of freely oscillating ring and drives</span></div>
+<div class="line"><span class="comment">/// viscous fluid flow. Mean radius of wall is adjustable and</span></div>
+<div class="line"><span class="comment">/// responds to a pressure value in the fluid to allow for</span></div>
+<div class="line"><span class="comment">/// mass conservation. </span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classOscRingNStProblem.html">OscRingNStProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass timestep and function pointer to the </span></div>
+<div class="line"><span class="comment"> /// solution that provides the initial conditions for the fluid</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classOscRingNStProblem.html">OscRingNStProblem</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; dt,</div>
+<div class="line">                   FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Destructor (empty)</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_function" href="classOscRingNStProblem.html#a96e43adf75d4e33270218ceb3397443c">~OscRingNStProblem</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Get pointer to wall as geometric object</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code hl_function" href="classOscRingNStProblem.html#a6a62e926867df3c85c87cf59691be0e1">wall_pt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscRingNStProblem.html#a1349ecb860cacb34792fde6807d92905">Wall_pt</a>;</div>
+<div class="line">  }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a6e4be6a46ab263941b76ab4e6706f63a">actions_after_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before solve (empty)</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a7d8ff9543c042752b649ed326d6c5915">actions_before_newton_solve</a>(){}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs before checking Newton</span></div>
+<div class="line"><span class="comment"> /// convergence: Update the fluid mesh and re-set velocity</span></div>
+<div class="line"><span class="comment"> ///  boundary conditions -- no slip velocity on the wall means</span></div>
+<div class="line"><span class="comment"> /// that the velocity on the wall is dependent.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a98d4c847cd9d53ab3569b8418ecb0c6b">actions_before_newton_convergence_check</a>() </div>
+<div class="line"> {</div>
+<div class="line">  <span class="comment">// Update the fluid mesh -- auxiliary update function for algebraic</span></div>
+<div class="line">  <span class="comment">// nodes automatically updates no slip condition.</span></div>
+<div class="line">  <a class="code hl_function" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">fluid_mesh_pt</a>()-&gt;node_update(); </div>
+<div class="line"> }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update the problem specs after adaptation:</span></div>
+<div class="line"><span class="comment"> /// Set auxiliary update function that applies no slip on all </span></div>
+<div class="line"><span class="comment"> /// boundary nodes and choose fluid pressure dof that drives</span></div>
+<div class="line"><span class="comment"> /// the wall deformation</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a2dd1cb9b211f2cbd2ea9aea625685bcb">actions_after_adapt</a>() </div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Ring boundary: No slip; this also implies that the velocity needs</span></div>
+<div class="line">   <span class="comment">// to be updated in response to wall motion. This needs to be reset</span></div>
+<div class="line">   <span class="comment">// every time the mesh is changed -- there&#39;s no mechanism by which</span></div>
+<div class="line">   <span class="comment">// auxiliary update functions are copied to newly created nodes.</span></div>
+<div class="line">   <span class="comment">// (that&#39;s because unlike boundary conditions, they don&#39;t </span></div>
+<div class="line">   <span class="comment">// occur exclusively at boundaries)</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> ibound=1;</div>
+<div class="line">   {</div>
+<div class="line">    <span class="keywordtype">unsigned</span> num_nod= <a class="code hl_function" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">fluid_mesh_pt</a>()-&gt;nboundary_node(ibound);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">     {</div>
+<div class="line">      <a class="code hl_function" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">fluid_mesh_pt</a>()-&gt;boundary_node_pt(ibound,inod)-&gt;</div>
+<div class="line">       set_auxiliary_node_update_fct_pt(</div>
+<div class="line">        FSI_functions::apply_no_slip_on_moving_wall); </div>
+<div class="line">     }</div>
+<div class="line">   }</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the reference pressure as the constant pressure in element 0</span></div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classOscRingNStProblem.html#a1349ecb860cacb34792fde6807d92905">Wall_pt</a>)</div>
+<div class="line">    -&gt;set_reference_pressure_pt(<a class="code hl_function" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">fluid_mesh_pt</a>()-&gt;element_pt(0)</div>
+<div class="line">                                -&gt;internal_data_pt(0));</div>
+<div class="line">  }</div>
+<div class="line">   <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Run the time integration for ntsteps steps</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a00e957fb6a313a9c1de784d0fa3a7a36">unsteady_run</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ntsteps, <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; restarted,</div>
+<div class="line">                   DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Set initial condition (incl previous timesteps) according</span></div>
+<div class="line"><span class="comment"> /// to specified function. </span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#ab1f2083699d00da4b7f6116e10792e86">set_initial_condition</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a7de5df21c2179db1c97cc83332dcc82c">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Access function for the fluid mesh</span></div>
+<div class="line"><span class="comment"></span> MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;* <a class="code hl_function" href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">fluid_mesh_pt</a>()</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscRingNStProblem.html#af9ccaa9a5c41ffadda773d704793c76e">Fluid_mesh_pt</a>; </div>
+<div class="line">  }</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Dump problem data.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#af32f94658174188b1f029446161755b2">dump_it</a>(ofstream&amp; dump_file, DocInfo doc_info);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Read problem data.</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a0cf01737b8d53213d644413e84251d0f">restart</a>(ifstream&amp; restart_file);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Write header for trace file</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a96e12e5bb761d765ebe9065b9990112f">write_trace_file_header</a>();</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Function pointer to set the intial condition</span></div>
+<div class="line"><span class="comment"></span> FiniteElement::UnsteadyExactSolutionFctPt <a class="code hl_variable" href="classOscRingNStProblem.html#ad9b2810092588c7708660c5325c73256">IC_Fct_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to wall</span></div>
+<div class="line"><span class="comment"></span> GeomObject* <a class="code hl_variable" href="classOscRingNStProblem.html#a1349ecb860cacb34792fde6807d92905">Wall_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to fluid mesh</span></div>
+<div class="line"><span class="comment"></span> MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;* <a class="code hl_variable" href="classOscRingNStProblem.html#af9ccaa9a5c41ffadda773d704793c76e">Fluid_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to wall mesh (contains only a single GeneralisedElement)</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classOscRingNStProblem.html#aafee49228dbbee7178448da624b96c3f">Wall_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Trace file</span></div>
+<div class="line"><span class="comment"></span> ofstream <a class="code hl_variable" href="classOscRingNStProblem.html#a37c1af48245859045bed1c3fc36be3da">Trace_file</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to node on coarsest mesh on which velocity is traced</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code hl_variable" href="classOscRingNStProblem.html#aed51269a285ffdc064739d6d363b1179">Veloc_trace_node_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to node in symmetry plane on coarsest mesh at </span></div>
+<div class="line"><span class="comment"> /// which velocity is traced</span></div>
+<div class="line"><span class="comment"></span> Node* <a class="code hl_variable" href="classOscRingNStProblem.html#a6688cac5da1f4092a9cd343ad5fdfd53">Sarah_veloc_trace_node_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Constructor: Pass (constant) timestep and function pointer to the solution </span></div>
+<div class="line"><span class="comment">/// that provides the initial conditions for the fluid.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classOscRingNStProblem.html#acd5f633c43eb4cfb43c45361ecf85e6b">OscRingNStProblem&lt;ELEMENT&gt;::OscRingNStProblem</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; dt, </div>
+<div class="line">FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt) : IC_Fct_pt(IC_fct_pt)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Period of oscillation</span></div>
+<div class="line"> <span class="keywordtype">double</span> T=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Allocate the timestepper</span></div>
+<div class="line"> add_time_stepper_pt(<span class="keyword">new</span> BDF&lt;4&gt;);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Initialise timestep -- also sets the weights for all timesteppers</span></div>
+<div class="line"> <span class="comment">// in the problem.</span></div>
+<div class="line"> initialise_dt(dt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Parameters for pseudo-buckling ring </span></div>
+<div class="line"> <span class="keywordtype">double</span> eps_buckl=0.1;  <span class="comment">// ADJUST_PRIORITY </span></div>
+<div class="line"> <span class="keywordtype">double</span> ampl_ratio=-0.5;  <span class="comment">// ADJUST_PRIORITY </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_buckl=2; <span class="comment">// ADJUST_PRIORITY </span></div>
+<div class="line"> <span class="keywordtype">double</span> r_0=1.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build wall geometric element</span></div>
+<div class="line"> Wall_pt=<span class="keyword">new</span> PseudoBucklingRingElement(eps_buckl,ampl_ratio,n_buckl,r_0,T,</div>
+<div class="line">                                       time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fluid mesh is suspended from wall between these two Lagrangian</span></div>
+<div class="line"> <span class="comment">// coordinates:</span></div>
+<div class="line"> <span class="keywordtype">double</span> xi_lo=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> xi_hi=2.0*atan(1.0);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Fractional position of dividing line for two outer blocks in fluid mesh</span></div>
+<div class="line"> <span class="keywordtype">double</span> fract_mid=0.5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build fluid mesh</span></div>
+<div class="line"> Fluid_mesh_pt=<span class="keyword">new</span> MacroElementNodeUpdateRefineableQuarterCircleSectorMesh&lt;ELEMENT&gt;(</div>
+<div class="line">  Wall_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set error estimator</span></div>
+<div class="line"> Z2ErrorEstimator* error_estimator_pt=<span class="keyword">new</span> Z2ErrorEstimator;</div>
+<div class="line"> Fluid_mesh_pt-&gt;spatial_error_estimator_pt()=error_estimator_pt;</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Fluid mesh is first sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Fluid_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build wall mesh </span></div>
+<div class="line"> Wall_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wall mesh is completely empty: Add Wall element in its GeneralisedElement</span></div>
+<div class="line"> <span class="comment">// incarnation</span></div>
+<div class="line"> Wall_mesh_pt-&gt;add_element_pt(<span class="keyword">dynamic_cast&lt;</span>GeneralisedElement*<span class="keyword">&gt;</span>(Wall_pt));</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Wall mesh is second sub-mesh</span></div>
+<div class="line"> add_sub_mesh(Wall_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Combine all submeshes into a single Mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Extract pointer to node at center of mesh (this node exists</span></div>
+<div class="line"> <span class="comment">// at all refinement levels and can be used to doc continuous timetrace</span></div>
+<div class="line"> <span class="comment">// of velocities)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnode=fluid_mesh_pt()-&gt;finite_element_pt(0)-&gt;nnode();</div>
+<div class="line"> Veloc_trace_node_pt=fluid_mesh_pt()-&gt;finite_element_pt(0)-&gt;node_pt(nnode-1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//  Extract pointer to node in symmetry plane (this node exists</span></div>
+<div class="line"> <span class="comment">// at all refinement levels and can be used to doc continuous timetrace</span></div>
+<div class="line"> <span class="comment">// of velocities)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nnode_1d=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(</div>
+<div class="line">  fluid_mesh_pt()-&gt;finite_element_pt(0))-&gt;nnode_1d();</div>
+<div class="line"> Sarah_veloc_trace_node_pt=fluid_mesh_pt()-&gt;</div>
+<div class="line">  finite_element_pt(0)-&gt;node_pt(nnode_1d-1);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// The &quot;pseudo-elastic&quot; wall element is &quot;loaded&quot; by a pressure.</span></div>
+<div class="line"> <span class="comment">// Use the &quot;constant&quot; pressure component in Crouzeix Raviart</span></div>
+<div class="line"> <span class="comment">// fluid element as that pressure. </span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)</div>
+<div class="line">  -&gt;set_reference_pressure_pt(fluid_mesh_pt()-&gt;element_pt(0)</div>
+<div class="line">                              -&gt;internal_data_pt(0));</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem:</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// All nodes are free by default -- just pin the ones that have </span></div>
+<div class="line"> <span class="comment">// Dirichlet conditions here. </span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Bottom boundary: </span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0;</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod= fluid_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Pin vertical velocity</span></div>
+<div class="line">     {</div>
+<div class="line">       fluid_mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(1); </div>
+<div class="line">     }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> <span class="comment">// Ring boundary: No slip; this also implies that the velocity needs</span></div>
+<div class="line"> <span class="comment">// to be updated in response to wall motion</span></div>
+<div class="line"> ibound=1;</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=fluid_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Which node are we dealing with?</span></div>
+<div class="line">     Node* node_pt=fluid_mesh_pt()-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Set auxiliary update function pointer to apply no-slip condition</span></div>
+<div class="line">     <span class="comment">// to velocities whenever nodal position is updated</span></div>
+<div class="line">     node_pt-&gt;set_auxiliary_node_update_fct_pt(</div>
+<div class="line">      FSI_functions::apply_no_slip_on_moving_wall);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Pin both velocities</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       node_pt-&gt;pin(i); </div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">                        </div>
+<div class="line"> <span class="comment">// Left boundary:</span></div>
+<div class="line"> ibound=2;</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">unsigned</span> num_nod=fluid_mesh_pt()-&gt;nboundary_node(ibound);</div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">    {</div>
+<div class="line">     <span class="comment">// Pin horizontal velocity</span></div>
+<div class="line">      {</div>
+<div class="line">       fluid_mesh_pt()-&gt;boundary_node_pt(ibound,inod)-&gt;pin(0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Complete the build of all elements so they are fully functional</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of elements in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_element = fluid_mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements to set up element-specific </span></div>
+<div class="line"> <span class="comment">// things that cannot be handled by constructor</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> i=0;i&lt;n_element;i++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Upcast from FiniteElement to the present element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fluid_mesh_pt()-&gt;element_pt(i));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Set the Reynolds number, etc</span></div>
+<div class="line">   el_pt-&gt;re_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>;</div>
+<div class="line">   el_pt-&gt;re_st_pt() = &amp;<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>;</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Attach the boundary conditions to the mesh</span></div>
+<div class="line"> cout &lt;&lt;<span class="stringliteral">&quot;Number of equations: &quot;</span> &lt;&lt; assign_eqn_numbers() &lt;&lt; std::endl; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set parameters for Sarah&#39;s asymptotic solution</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Amplitude of the oscillation</span></div>
+<div class="line"> SarahBL::epsilon=<span class="keyword">static_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;</div>
+<div class="line">  eps_buckl();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Womersley number is the same as square root of Reynolds number</span></div>
+<div class="line"> SarahBL::alpha=sqrt(<a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Amplitude ratio</span></div>
+<div class="line"> SarahBL::A=<span class="keyword">static_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;ampl_ratio();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Buckling wavenumber</span></div>
+<div class="line"> SarahBL::N=<span class="keyword">static_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;n_buckl_float();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Frequency of oscillation (period is one)</span></div>
+<div class="line"> SarahBL::Omega=2.0*MathematicalConstants::Pi;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Set initial condition: Assign previous and current values</span></div>
+<div class="line"><span class="comment">/// of the velocity from the velocity field specified via</span></div>
+<div class="line"><span class="comment">/// the function pointer.</span></div>
+<div class="line"><span class="comment">///</span></div>
+<div class="line"><span class="comment">/// Values are assigned so that the velocities and accelerations</span></div>
+<div class="line"><span class="comment">/// are correct for current time.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#ab1f2083699d00da4b7f6116e10792e86">OscRingNStProblem&lt;ELEMENT&gt;::set_initial_condition</a>()</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Elastic wall: We&#39;re starting from a given initial state in which</span></div>
+<div class="line"> <span class="comment">// the wall is undeformed. If set_initial_condition() is called again</span></div>
+<div class="line"> <span class="comment">// after mesh refinement for first timestep, this needs to be reset.</span></div>
+<div class="line"> <span class="keyword">dynamic_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;set_R_0(1.0); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Backup time in global timestepper</span></div>
+<div class="line"> <span class="keywordtype">double</span> backed_up_time=time_pt()-&gt;time();</div>
+<div class="line">         </div>
+<div class="line"> <span class="comment">// Past history for velocities needs to be established for t=time0-deltat, ...</span></div>
+<div class="line"> <span class="comment">// Then provide current values (at t=time0) which will also form</span></div>
+<div class="line"> <span class="comment">// the initial guess for first solve at t=time0+deltat</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Vector of exact solution values (includes pressure)</span></div>
+<div class="line"> Vector&lt;double&gt; soln(3);</div>
+<div class="line"> Vector&lt;double&gt; x(2);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Find number of nodes in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod = fluid_mesh_pt()-&gt;nnode();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get continuous times at previous timesteps</span></div>
+<div class="line"> <span class="keywordtype">int</span> nprev_steps=time_stepper_pt()-&gt;nprev_values();</div>
+<div class="line"> Vector&lt;double&gt; prev_time(nprev_steps+1);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">  {</div>
+<div class="line">   prev_time[itime]=time_pt()-&gt;time(<span class="keywordtype">unsigned</span>(itime));</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over current &amp; previous timesteps (in outer loop because</span></div>
+<div class="line"> <span class="comment">// the mesh might also move)</span></div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">int</span> itime=nprev_steps;itime&gt;=0;itime--)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keywordtype">double</span> time=prev_time[itime];</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set global time (because this is how the geometric object refers </span></div>
+<div class="line">   <span class="comment">// to continous time </span></div>
+<div class="line">   time_pt()-&gt;time()=time;</div>
+<div class="line">   </div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;setting IC at time =&quot;</span> &lt;&lt; time &lt;&lt; std::endl;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Update the fluid mesh for this value of the continuous time</span></div>
+<div class="line">   <span class="comment">// (The wall object reads the continous time from the same</span></div>
+<div class="line">   <span class="comment">// global time object)</span></div>
+<div class="line">   fluid_mesh_pt()-&gt;node_update(); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Loop over the nodes to set initial guess everywhere</span></div>
+<div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> jnod=0;jnod&lt;num_nod;jnod++)</div>
+<div class="line">    {</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Get nodal coordinates</span></div>
+<div class="line">     x[0]=fluid_mesh_pt()-&gt;node_pt(jnod)-&gt;x(0);</div>
+<div class="line">     x[1]=fluid_mesh_pt()-&gt;node_pt(jnod)-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">     <span class="comment">// Get intial solution</span></div>
+<div class="line">     (*IC_Fct_pt)(time,x,soln);</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over velocity directions (velocities are in soln[0] and soln[1]).</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       fluid_mesh_pt()-&gt;node_pt(jnod)-&gt;set_value(itime,i,soln[i]);</div>
+<div class="line">      }</div>
+<div class="line">     </div>
+<div class="line">     <span class="comment">// Loop over coordinate directions</span></div>
+<div class="line">     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i=0;i&lt;2;i++)</div>
+<div class="line">      {</div>
+<div class="line">       fluid_mesh_pt()-&gt;node_pt(jnod)-&gt;x(itime,i)=x[i];</div>
+<div class="line">      }</div>
+<div class="line">    } </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Reset backed up time for global timestepper</span></div>
+<div class="line"> time_pt()-&gt;time()=backed_up_time;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">///</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a7de5df21c2179db1c97cc83332dcc82c">OscRingNStProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Doc-ing step &quot;</span> &lt;&lt;  doc_info.number()</div>
+<div class="line">      &lt;&lt; <span class="stringliteral">&quot; for time &quot;</span> &lt;&lt; time_stepper_pt()-&gt;time_pt()-&gt;time() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts;</div>
+<div class="line"> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution on fluid mesh</span></div>
+<div class="line"> <span class="comment">//-------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> <span class="comment">//some_file.precision(20);</span></div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> <span class="keywordtype">unsigned</span> nelem=fluid_mesh_pt()-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;nelem;ielem++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fluid_mesh_pt()-&gt;element_pt(ielem))-&gt;</div>
+<div class="line">    full_output(some_file,npts);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Plot wall posn</span></div>
+<div class="line"> <span class="comment">//---------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/Wall%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordtype">unsigned</span> nplot=100;</div>
+<div class="line"> Vector&lt;double &gt; xi_wall(1);</div>
+<div class="line"> Vector&lt;double &gt; r_wall(2);</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> iplot=0;iplot&lt;nplot;iplot++)</div>
+<div class="line">   {</div>
+<div class="line">    xi_wall[0]=0.5*Pi*double(iplot)/double(nplot-1);</div>
+<div class="line">    Wall_pt-&gt;position(xi_wall,r_wall);</div>
+<div class="line">    some_file &lt;&lt; r_wall[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; r_wall[1] &lt;&lt; std::endl;</div>
+<div class="line">   }</div>
+<div class="line">  some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc Sarah&#39;s asymptotic solution </span></div>
+<div class="line"> <span class="comment">//--------------------------------</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/exact_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> fluid_mesh_pt()-&gt;output_fct(some_file,npts,</div>
+<div class="line">                       time_stepper_pt()-&gt;time_pt()-&gt;time(), </div>
+<div class="line">                       SarahBL::full_exact_soln);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get position of control point</span></div>
+<div class="line"> <span class="comment">//------------------------------</span></div>
+<div class="line"> Vector&lt;double&gt; r(2);</div>
+<div class="line"> Vector&lt;double&gt; xi(1);</div>
+<div class="line"> xi[0]=MathematicalConstants::Pi/2.0;</div>
+<div class="line"> wall_pt()-&gt;position(xi,r);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get total volume (area) of computational domain, energies and average</span></div>
+<div class="line"> <span class="comment">//----------------------------------------------------------------------</span></div>
+<div class="line"> <span class="comment">// pressure</span></div>
+<div class="line"> <span class="comment">//---------</span></div>
+<div class="line"> <span class="keywordtype">double</span> area=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> press_int=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> diss=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> kin_en=0.0;</div>
+<div class="line"> nelem=fluid_mesh_pt()-&gt;nelement();</div>
+<div class="line"> </div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;nelem;ielem++)</div>
+<div class="line">  {</div>
+<div class="line">   area+=fluid_mesh_pt()-&gt;finite_element_pt(ielem)-&gt;size();</div>
+<div class="line">   press_int+=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fluid_mesh_pt()-&gt;element_pt(ielem))</div>
+<div class="line">    -&gt;pressure_integral();</div>
+<div class="line">   diss+=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fluid_mesh_pt()-&gt;element_pt(ielem))-&gt;</div>
+<div class="line">    dissipation();</div>
+<div class="line">   kin_en+=<span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(fluid_mesh_pt()-&gt;element_pt(ielem))-&gt;</div>
+<div class="line">    kin_energy();</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Total kinetic energy in entire domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> global_kin=4.0*kin_en;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max/min refinement level</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> min_level;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_level;</div>
+<div class="line"> fluid_mesh_pt()-&gt;get_refinement_levels(min_level,max_level);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Total dissipation for quarter domain</span></div>
+<div class="line"> <span class="keywordtype">double</span> time=time_pt()-&gt;time();</div>
+<div class="line"> <span class="keywordtype">double</span> diss_asympt=SarahBL::Total_Diss_sarah(time)/4.0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Asymptotic predictions for velocities at control point</span></div>
+<div class="line"> Vector&lt;double&gt; x_sarah(2);</div>
+<div class="line"> Vector&lt;double&gt; soln_sarah(3);</div>
+<div class="line"> x_sarah[0]=Sarah_veloc_trace_node_pt-&gt;x(0);</div>
+<div class="line"> x_sarah[1]=Sarah_veloc_trace_node_pt-&gt;x(1);</div>
+<div class="line"> SarahBL::exact_soln(time,x_sarah,soln_sarah);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc</span></div>
+<div class="line"> Trace_file &lt;&lt; time_pt()-&gt;time() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; r[1]</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; global_kin </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; SarahBL::Kin_energy_sarah(time_pt()-&gt;time()) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;r_0()</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; area  </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; press_int/area </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss  </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss_asympt</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Veloc_trace_node_pt-&gt;x(0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Veloc_trace_node_pt-&gt;x(1) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Veloc_trace_node_pt-&gt;value(0)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Veloc_trace_node_pt-&gt;value(1) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;nelement() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; ndof()</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; min_level </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; max_level</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;nrefinement_overruled() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;max_error()  </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;min_error()  </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;max_permitted_error() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;min_permitted_error() </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;max_keep_unrefined()</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; doc_info.number()</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Sarah_veloc_trace_node_pt-&gt;x(0) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Sarah_veloc_trace_node_pt-&gt;x(1) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Sarah_veloc_trace_node_pt-&gt;value(0) </div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; Sarah_veloc_trace_node_pt-&gt;value(1)</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x_sarah[0]</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; x_sarah[1]</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; soln_sarah[0]</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; soln_sarah[1]</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">            &lt;&lt; <span class="keyword">static_cast&lt;</span>PseudoBucklingRingElement*<span class="keyword">&gt;</span>(Wall_pt)-&gt;r_0()-1.0</div>
+<div class="line">            &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output fluid solution on coarse-ish mesh </span></div>
+<div class="line"> <span class="comment">//-----------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Extract all elements from quadtree representation</span></div>
+<div class="line"> Vector&lt;Tree*&gt; all_element_pt;</div>
+<div class="line"> fluid_mesh_pt()-&gt;forest_pt()-&gt;</div>
+<div class="line">  stick_all_tree_nodes_into_vector(all_element_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Build a coarse mesh</span></div>
+<div class="line"> Mesh* coarse_mesh_pt = <span class="keyword">new</span> Mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over all elements and check if their refinement level is</span></div>
+<div class="line"> <span class="comment">//equal to the mesh&#39;s minimum refinement level</span></div>
+<div class="line"> nelem=all_element_pt.size();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;nelem;ielem++)</div>
+<div class="line">  {</div>
+<div class="line">   Tree* el_pt=all_element_pt[ielem];</div>
+<div class="line">   <span class="keywordflow">if</span> (el_pt-&gt;level()==min_level)</div>
+<div class="line">    {</div>
+<div class="line">     coarse_mesh_pt-&gt;add_element_pt(el_pt-&gt;object_pt());</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output fluid solution on coarse mesh</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/coarse_soln%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> nelem=coarse_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> ielem=0;ielem&lt;nelem;ielem++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(coarse_mesh_pt-&gt;element_pt(ielem))-&gt;</div>
+<div class="line">    full_output(some_file,npts);</div>
+<div class="line">  }</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write restart file</span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/restart%i.dat&quot;</span>,doc_info.directory().c_str(),</div>
+<div class="line">         doc_info.number());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> dump_it(some_file,doc_info);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Dump the solution</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#af32f94658174188b1f029446161755b2">OscRingNStProblem&lt;ELEMENT&gt;::dump_it</a>(ofstream&amp; dump_file,DocInfo doc_info)</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Dump refinement status of mesh</span></div>
+<div class="line"> <span class="comment">//fluid_mesh_pt()-&gt;dump_refinement(dump_file);</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Call generic dump()</span></div>
+<div class="line"> Problem::dump(dump_file);</div>
+<div class="line">  </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Read solution from disk</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a0cf01737b8d53213d644413e84251d0f">OscRingNStProblem&lt;ELEMENT&gt;::restart</a>(ifstream&amp; restart_file)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Refine fluid mesh according to the instructions in restart file</span></div>
+<div class="line"> <span class="comment">//fluid_mesh_pt()-&gt;refine(restart_file);</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Rebuild the global mesh</span></div>
+<div class="line"> <span class="comment">//rebuild_global_mesh();</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Read generic problem data</span></div>
+<div class="line"> Problem::read(restart_file);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//   // Complete build of all elements so they are fully functional</span></div>
+<div class="line"><span class="comment">//  finish_problem_setup();</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Assign equation numbers</span></div>
+<div class="line"> <span class="comment">//cout &lt;&lt;&quot;\nNumber of equations: &quot; &lt;&lt; assign_eqn_numbers() </span></div>
+<div class="line"> <span class="comment">//     &lt;&lt; std::endl&lt;&lt; std::endl; </span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Driver for timestepping the problem: Fixed timestep but </span></div>
+<div class="line"><span class="comment">/// guaranteed spatial accuracy. Beautiful, innit?</span></div>
+<div class="line"><span class="comment">///</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a00e957fb6a313a9c1de784d0fa3a7a36">OscRingNStProblem&lt;ELEMENT&gt;::unsteady_run</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span>&amp; ntsteps,</div>
+<div class="line">                                              <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; restarted,</div>
+<div class="line">                                              DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Open trace file</span></div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];   </div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/trace.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> Trace_file.open(filename);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations per solve</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_adapt;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. number of adaptations per solve</span></div>
+<div class="line"> <span class="keywordflow">if</span> (restarted)</div>
+<div class="line">  {</div>
+<div class="line">   max_adapt=0;</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   max_adapt=1; </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Max. and min. error for adaptive refinement/unrefinement</span></div>
+<div class="line"> fluid_mesh_pt()-&gt;max_permitted_error()=  0.5e-2;   </div>
+<div class="line"> fluid_mesh_pt()-&gt;min_permitted_error()=  0.5e-3;  </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Don&#39;t allow refinement to drop under given level</span></div>
+<div class="line"> fluid_mesh_pt()-&gt;min_refinement_level()=2;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Don&#39;t allow refinement beyond given level </span></div>
+<div class="line"> fluid_mesh_pt()-&gt;max_refinement_level()=6; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Don&#39;t bother adapting the mesh if no refinement is required</span></div>
+<div class="line"> <span class="comment">// and if less than ... elements are to be merged.</span></div>
+<div class="line"> fluid_mesh_pt()-&gt;max_keep_unrefined()=20;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Get max/min refinement levels in mesh</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> min_refinement_level;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> max_refinement_level;</div>
+<div class="line"> fluid_mesh_pt()-&gt;get_refinement_levels(min_refinement_level,</div>
+<div class="line">                                        max_refinement_level);</div>
+<div class="line"> </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\n Initial mesh: min/max refinement levels: &quot;</span> </div>
+<div class="line">      &lt;&lt; min_refinement_level &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; max_refinement_level &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc refinement targets</span></div>
+<div class="line"> fluid_mesh_pt()-&gt;doc_adaptivity_targets(cout);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Write header for trace file</span></div>
+<div class="line"> write_trace_file_header();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial condition</span></div>
+<div class="line"> doc_solution(doc_info);</div>
+<div class="line"> doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Switch off doc during solve</span></div>
+<div class="line"> doc_info.disable_doc();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// If we set first to true, then initial guess will be re-assigned</span></div>
+<div class="line"> <span class="comment">// after mesh adaptation. Don&#39;t want this if we&#39;ve done a restart.</span></div>
+<div class="line"> <span class="keywordtype">bool</span> first;</div>
+<div class="line"> <span class="keywordtype">bool</span> shift;</div>
+<div class="line"> <span class="keywordflow">if</span> (restarted)</div>
+<div class="line">  {</div>
+<div class="line">   first=<span class="keyword">false</span>;</div>
+<div class="line">   shift=<span class="keyword">false</span>;</div>
+<div class="line">   <span class="comment">// Move time back by dt to make sure we&#39;re re-solving the read-in solution</span></div>
+<div class="line">   time_pt()-&gt;time()-=time_pt()-&gt;dt();</div>
+<div class="line">  }</div>
+<div class="line"> <span class="keywordflow">else</span></div>
+<div class="line">  {</div>
+<div class="line">   first=<span class="keyword">true</span>;</div>
+<div class="line">   shift=<span class="keyword">true</span>;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Take the first fixed timestep with specified tolerance for Newton solver</span></div>
+<div class="line"> <span class="keywordtype">double</span> dt=time_pt()-&gt;dt();</div>
+<div class="line"> unsteady_newton_solve(dt,max_adapt,first,shift);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Switch doc back on</span></div>
+<div class="line"> doc_info.enable_doc();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc initial solution</span></div>
+<div class="line"> doc_solution(doc_info);</div>
+<div class="line"> doc_info.number()++;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now do normal run; allow for one mesh adaptation per timestep</span></div>
+<div class="line"> max_adapt=1; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Loop over the remaining timesteps</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> t=2;t&lt;=ntsteps;t++)</div>
+<div class="line">  {</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Switch off doc during solve</span></div>
+<div class="line">   doc_info.disable_doc();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">//Take fixed timestep</span></div>
+<div class="line">   first=<span class="keyword">false</span>;</div>
+<div class="line">   unsteady_newton_solve(dt,max_adapt,first);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Switch doc back on</span></div>
+<div class="line">   doc_info.enable_doc();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Doc solution</span></div>
+<div class="line">   <span class="comment">//if (icount%10==0)</span></div>
+<div class="line">    {</div>
+<div class="line">     doc_solution(doc_info);</div>
+<div class="line">     doc_info.number()++;</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Close trace file</span></div>
+<div class="line"> Trace_file.close();</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Write trace file header</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classOscRingNStProblem.html#a96e12e5bb761d765ebe9065b9990112f">OscRingNStProblem&lt;ELEMENT&gt;::write_trace_file_header</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc parameters in trace file</span></div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# err_max &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;max_permitted_error() &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# err_min &quot;</span> &lt;&lt; fluid_mesh_pt()-&gt;min_permitted_error() &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# Re &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a> &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# St &quot;</span> &lt;&lt; <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a>/</div>
+<div class="line">                          <a class="code hl_variable" href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a> &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# dt &quot;</span> &lt;&lt; time_stepper_pt()-&gt;time_pt()-&gt;dt() &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# initial # elements &quot;</span> &lt;&lt; mesh_pt()-&gt;nelement() &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# min_refinement_level &quot;</span> </div>
+<div class="line">            &lt;&lt; fluid_mesh_pt()-&gt;min_refinement_level() &lt;&lt; std::endl;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;# max_refinement_level &quot;</span> </div>
+<div class="line">            &lt;&lt; fluid_mesh_pt()-&gt;max_refinement_level() &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;VARIABLES=\&quot;time\&quot;,\&quot;V_c_t_r_l\&quot;,\&quot;e_k_i_n\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;e_k_i_n_(_a_s_y_m_p_t_)\&quot;,\&quot;R_0\&quot;,\&quot;Area\&quot;&quot;</span> ;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;Average pressure\&quot;,\&quot;Total dissipation (quarter domain)\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;Asymptotic dissipation (quarter domain)\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;N&lt;sub&gt;element&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;N&lt;sub&gt;dof&lt;/sub&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;max. refinement level\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;min. refinement level\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;# of elements whose refinement was over-ruled\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;max. error\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;min. error\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;max. permitted error\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;min. permitted error\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;max. permitted # of unrefined elements\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;doc number\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track2 FE)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track2 FE)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track2 FE)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track2 FE)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track2 Sarah)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;x&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track2 Sarah)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;(track2 Sarah)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;u&lt;sub&gt;2&lt;/sub&gt;&lt;sup&gt;(track2 Sarah)&lt;/sup&gt;\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; <span class="stringliteral">&quot;,\&quot;R&lt;sub&gt;0&lt;/sub&gt;-1\&quot;&quot;</span>;</div>
+<div class="line"> Trace_file &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment">////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//========================================================================</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// Demonstrate how to solve OscRingNSt problem in deformable domain</span></div>
+<div class="line"><span class="comment">/// with mesh adaptation</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="fsi__osc__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Store command line arguments</span></div>
+<div class="line"> CommandLineArgs::setup(argc,argv);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Do a certain number of timesteps per period</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep_per_period=40; <span class="comment">// 80;  // ADJUST_PRIORITY</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nperiod=3;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Work out total number of steps and timestep</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nstep=nstep_per_period*nperiod;  </div>
+<div class="line"> <span class="keywordtype">double</span> dt=1.0/double(nstep_per_period);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up the problem: Pass timestep and Sarah&#39;s asymptotic solution for</span></div>
+<div class="line"> <span class="comment">// generation of initial condition</span></div>
+<div class="line"> <a class="code hl_class" href="classOscRingNStProblem.html">OscRingNStProblem&lt;MacroElementNodeUpdateElement&lt;RefineableQCrouzeixRaviartElement&lt;2&gt;</a> &gt; &gt;</div>
+<div class="line">  problem(dt,&amp;SarahBL::full_exact_soln);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Restart?</span></div>
+<div class="line"> <span class="comment">//---------</span></div>
+<div class="line"> <span class="keywordtype">bool</span> restarted=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Pointer to restart file</span></div>
+<div class="line"> ifstream* restart_file_pt=0;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// No restart</span></div>
+<div class="line"> <span class="comment">//-----------</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc!=2)</div>
+<div class="line">  {</div>
+<div class="line">   cout &lt;&lt; <span class="stringliteral">&quot;No restart&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">   restarted=<span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Refine uniformly</span></div>
+<div class="line">   problem.refine_uniformly();</div>
+<div class="line">   problem.refine_uniformly();</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set initial condition on uniformly refined domain (if this isn&#39;t done</span></div>
+<div class="line">   <span class="comment">// then the mesh contains the interpolation of the initial guess</span></div>
+<div class="line">   <span class="comment">// on the original coarse mesh -- if the nodal values were zero in</span></div>
+<div class="line">   <span class="comment">// the interior and nonzero on the boundary, then the the waviness of</span></div>
+<div class="line">   <span class="comment">// of the interpolated i.g. between the nodes on the coarse mesh</span></div>
+<div class="line">   <span class="comment">// gets transferred onto the fine mesh where we can do better</span></div>
+<div class="line">   problem.set_initial_condition();</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Restart</span></div>
+<div class="line"> <span class="comment">//--------</span></div>
+<div class="line"> <span class="keywordflow">else</span> <span class="keywordflow">if</span> (CommandLineArgs::Argc==2)</div>
+<div class="line">  {</div>
+<div class="line">   restarted=<span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Open restart file</span></div>
+<div class="line">   restart_file_pt=<span class="keyword">new</span> ifstream(CommandLineArgs::Argv[1],ios_base::in);</div>
+<div class="line">   <span class="keywordflow">if</span> (restart_file_pt!=0)</div>
+<div class="line">    {</div>
+<div class="line">     cout &lt;&lt; <span class="stringliteral">&quot;Have opened &quot;</span> &lt;&lt; CommandLineArgs::Argv[1] &lt;&lt; </div>
+<div class="line">      <span class="stringliteral">&quot; for restart. &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">    }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">    {</div>
+<div class="line">     std::ostringstream error_stream;</div>
+<div class="line">     error_stream &lt;&lt; <span class="stringliteral">&quot;ERROR while trying to open &quot;</span> </div>
+<div class="line">                  &lt;&lt; CommandLineArgs::Argv[2] </div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; for restart.&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line">     <span class="keywordflow">throw</span> OomphLibError(error_stream.str(),</div>
+<div class="line">                         OOMPH_CURRENT_FUNCTION,</div>
+<div class="line">                         OOMPH_EXCEPTION_LOCATION);</div>
+<div class="line">    }</div>
+<div class="line">   <span class="comment">// Do the actual restart</span></div>
+<div class="line">   problem.restart(*restart_file_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Two command line arguments: do validation run</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==3)</div>
+<div class="line">  {</div>
+<div class="line">    nstep=3;</div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;Only doing nstep steps for validation: &quot;</span> &lt;&lt; nstep &lt;&lt; std::endl;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Setup labels for output</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>); </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Do unsteady run of the problem for nstep steps</span></div>
+<div class="line"> <span class="comment">//-----------------------------------------------</span></div>
+<div class="line"> problem.unsteady_run(nstep,restarted,doc_info);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Validate the restart procedure</span></div>
+<div class="line"> <span class="comment">//-------------------------------</span></div>
+<div class="line"> <span class="keywordflow">if</span> (CommandLineArgs::Argc==3)</div>
+<div class="line">  {</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Build problem and restart</span></div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set up the problem: Pass timestep and Sarah&#39;s asymptotic solution for</span></div>
+<div class="line">   <span class="comment">// generation of initial condition</span></div>
+<div class="line">   <a class="code hl_class" href="classOscRingNStProblem.html">OscRingNStProblem</a>&lt;MacroElementNodeUpdateElement&lt;</div>
+<div class="line">    RefineableQCrouzeixRaviartElement&lt;2&gt; &gt; &gt;</div>
+<div class="line">    restarted_problem(dt,&amp;SarahBL::full_exact_soln);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Setup labels for output</span></div>
+<div class="line">   DocInfo restarted_doc_info;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Output directory</span></div>
+<div class="line">   restarted_doc_info.set_directory(<span class="stringliteral">&quot;RESLT_restarted&quot;</span>); </div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Step number</span></div>
+<div class="line">   restarted_doc_info.number()=0;</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Copy by performing a restart from old problem</span></div>
+<div class="line">   restart_file_pt=<span class="keyword">new</span> ifstream(<span class="stringliteral">&quot;RESLT/restart2.dat&quot;</span>);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Do the actual restart</span></div>
+<div class="line">   restarted_problem.restart(*restart_file_pt);</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Do unsteady run of the problem for one step</span></div>
+<div class="line">   <span class="keywordtype">unsigned</span> nstep=2;</div>
+<div class="line">   <span class="keywordtype">bool</span> restarted=<span class="keyword">true</span>;</div>
+<div class="line">   restarted_problem.unsteady_run(nstep,restarted,restarted_doc_info);</div>
+<div class="line"> </div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="ttc" id="aclassOscRingNStProblem_html"><div class="ttname"><a href="classOscRingNStProblem.html">OscRingNStProblem</a></div><div class="ttdoc">Driver for oscillating ring problem: Wall performs oscillations that resemble eigenmodes of freely os...</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00085">osc_ring_alg.cc:86</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a00e957fb6a313a9c1de784d0fa3a7a36"><div class="ttname"><a href="classOscRingNStProblem.html#a00e957fb6a313a9c1de784d0fa3a7a36">OscRingNStProblem::unsteady_run</a></div><div class="ttdeci">void unsteady_run(const unsigned &amp;ntsteps, const bool &amp;restarted, DocInfo &amp;doc_info)</div><div class="ttdoc">Run the time integration for ntsteps steps.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00731">osc_ring_alg.cc:731</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a0cf01737b8d53213d644413e84251d0f"><div class="ttname"><a href="classOscRingNStProblem.html#a0cf01737b8d53213d644413e84251d0f">OscRingNStProblem::restart</a></div><div class="ttdeci">void restart(ifstream &amp;restart_file)</div><div class="ttdoc">Read problem data.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00704">osc_ring_alg.cc:704</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a1349ecb860cacb34792fde6807d92905"><div class="ttname"><a href="classOscRingNStProblem.html#a1349ecb860cacb34792fde6807d92905">OscRingNStProblem::Wall_pt</a></div><div class="ttdeci">GeomObject * Wall_pt</div><div class="ttdoc">Pointer to wall.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00183">osc_ring_alg.cc:183</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a2dd1cb9b211f2cbd2ea9aea625685bcb"><div class="ttname"><a href="classOscRingNStProblem.html#a2dd1cb9b211f2cbd2ea9aea625685bcb">OscRingNStProblem::actions_after_adapt</a></div><div class="ttdeci">void actions_after_adapt()</div><div class="ttdoc">Update the problem specs after adaptation: Set auxiliary update function that applies no slip on all ...</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00126">osc_ring_alg.cc:126</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a37c1af48245859045bed1c3fc36be3da"><div class="ttname"><a href="classOscRingNStProblem.html#a37c1af48245859045bed1c3fc36be3da">OscRingNStProblem::Trace_file</a></div><div class="ttdeci">ofstream Trace_file</div><div class="ttdoc">Trace file.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00192">osc_ring_alg.cc:192</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a6688cac5da1f4092a9cd343ad5fdfd53"><div class="ttname"><a href="classOscRingNStProblem.html#a6688cac5da1f4092a9cd343ad5fdfd53">OscRingNStProblem::Sarah_veloc_trace_node_pt</a></div><div class="ttdeci">Node * Sarah_veloc_trace_node_pt</div><div class="ttdoc">Pointer to node in symmetry plane on coarsest mesh at which velocity is traced.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00199">osc_ring_alg.cc:199</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a67d88d19c34d72a239cb26fcedd0b451"><div class="ttname"><a href="classOscRingNStProblem.html#a67d88d19c34d72a239cb26fcedd0b451">OscRingNStProblem::fluid_mesh_pt</a></div><div class="ttdeci">AlgebraicRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * fluid_mesh_pt()</div><div class="ttdoc">Access function for the fluid mesh.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00163">osc_ring_alg.cc:163</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a6a62e926867df3c85c87cf59691be0e1"><div class="ttname"><a href="classOscRingNStProblem.html#a6a62e926867df3c85c87cf59691be0e1">OscRingNStProblem::wall_pt</a></div><div class="ttdeci">GeomObject * wall_pt()</div><div class="ttdoc">Get pointer to wall as geometric object.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00099">osc_ring_alg.cc:99</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a6e4be6a46ab263941b76ab4e6706f63a"><div class="ttname"><a href="classOscRingNStProblem.html#a6e4be6a46ab263941b76ab4e6706f63a">OscRingNStProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00105">osc_ring_alg.cc:105</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a7d8ff9543c042752b649ed326d6c5915"><div class="ttname"><a href="classOscRingNStProblem.html#a7d8ff9543c042752b649ed326d6c5915">OscRingNStProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update the problem specs before solve (empty)</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00108">osc_ring_alg.cc:108</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a7de5df21c2179db1c97cc83332dcc82c"><div class="ttname"><a href="classOscRingNStProblem.html#a7de5df21c2179db1c97cc83332dcc82c">OscRingNStProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00486">osc_ring_alg.cc:486</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a96e12e5bb761d765ebe9065b9990112f"><div class="ttname"><a href="classOscRingNStProblem.html#a96e12e5bb761d765ebe9065b9990112f">OscRingNStProblem::write_trace_file_header</a></div><div class="ttdeci">void write_trace_file_header()</div><div class="ttdoc">Write header for trace file.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00856">osc_ring_alg.cc:856</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a96e43adf75d4e33270218ceb3397443c"><div class="ttname"><a href="classOscRingNStProblem.html#a96e43adf75d4e33270218ceb3397443c">OscRingNStProblem::~OscRingNStProblem</a></div><div class="ttdeci">~OscRingNStProblem()</div><div class="ttdoc">Destructor (empty)</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00096">osc_ring_alg.cc:96</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_a98d4c847cd9d53ab3569b8418ecb0c6b"><div class="ttname"><a href="classOscRingNStProblem.html#a98d4c847cd9d53ab3569b8418ecb0c6b">OscRingNStProblem::actions_before_newton_convergence_check</a></div><div class="ttdeci">void actions_before_newton_convergence_check()</div><div class="ttdoc">Update the problem specs before checking Newton convergence: Update the fluid mesh and re-set velocit...</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00114">osc_ring_alg.cc:114</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_aafee49228dbbee7178448da624b96c3f"><div class="ttname"><a href="classOscRingNStProblem.html#aafee49228dbbee7178448da624b96c3f">OscRingNStProblem::Wall_mesh_pt</a></div><div class="ttdeci">Mesh * Wall_mesh_pt</div><div class="ttdoc">Pointer to wall mesh (contains only a single GeneralisedElement)</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00189">osc_ring_alg.cc:189</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_ab1f2083699d00da4b7f6116e10792e86"><div class="ttname"><a href="classOscRingNStProblem.html#ab1f2083699d00da4b7f6116e10792e86">OscRingNStProblem::set_initial_condition</a></div><div class="ttdeci">void set_initial_condition()</div><div class="ttdoc">Set initial condition (incl previous timesteps) according to specified function.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00400">osc_ring_alg.cc:400</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_acd5f633c43eb4cfb43c45361ecf85e6b"><div class="ttname"><a href="classOscRingNStProblem.html#acd5f633c43eb4cfb43c45361ecf85e6b">OscRingNStProblem::OscRingNStProblem</a></div><div class="ttdeci">OscRingNStProblem(const double &amp;dt, FiniteElement::UnsteadyExactSolutionFctPt IC_fct_pt)</div><div class="ttdoc">Constructor: Pass timestep and function pointer to the solution that provides the initial conditions ...</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00209">osc_ring_alg.cc:209</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_ad9b2810092588c7708660c5325c73256"><div class="ttname"><a href="classOscRingNStProblem.html#ad9b2810092588c7708660c5325c73256">OscRingNStProblem::IC_Fct_pt</a></div><div class="ttdeci">FiniteElement::UnsteadyExactSolutionFctPt IC_Fct_pt</div><div class="ttdoc">Function pointer to set the intial condition.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00180">osc_ring_alg.cc:180</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_aed51269a285ffdc064739d6d363b1179"><div class="ttname"><a href="classOscRingNStProblem.html#aed51269a285ffdc064739d6d363b1179">OscRingNStProblem::Veloc_trace_node_pt</a></div><div class="ttdeci">Node * Veloc_trace_node_pt</div><div class="ttdoc">Pointer to node on coarsest mesh on which velocity is traced.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00195">osc_ring_alg.cc:195</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_af32f94658174188b1f029446161755b2"><div class="ttname"><a href="classOscRingNStProblem.html#af32f94658174188b1f029446161755b2">OscRingNStProblem::dump_it</a></div><div class="ttdeci">void dump_it(ofstream &amp;dump_file, DocInfo doc_info)</div><div class="ttdoc">Dump problem data.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00687">osc_ring_alg.cc:687</a></div></div>
+<div class="ttc" id="aclassOscRingNStProblem_html_af9ccaa9a5c41ffadda773d704793c76e"><div class="ttname"><a href="classOscRingNStProblem.html#af9ccaa9a5c41ffadda773d704793c76e">OscRingNStProblem::Fluid_mesh_pt</a></div><div class="ttdeci">AlgebraicRefineableQuarterCircleSectorMesh&lt; ELEMENT &gt; * Fluid_mesh_pt</div><div class="ttdoc">Pointer to fluid mesh.</div><div class="ttdef"><b>Definition</b> <a href="osc__ring__alg_8cc_source.html#l00186">osc_ring_alg.cc:186</a></div></div>
+<div class="ttc" id="afsi__osc__ring_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="fsi__osc__ring_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver for fsi ring test problem.</div><div class="ttdef"><b>Definition</b> <a href="fsi__osc__ring_8cc_source.html#l00815">fsi_osc_ring.cc:815</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html">Global_Physical_Variables</a></div><div class="ttdoc">Namespace for physical parameters.</div><div class="ttdef"><b>Definition</b> <a href="fsi__osc__ring_8cc_source.html#l00045">fsi_osc_ring.cc:46</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_a085ee4bf968ffdd01a41b8c41864f907"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#a085ee4bf968ffdd01a41b8c41864f907">Global_Physical_Variables::ReSt</a></div><div class="ttdeci">double ReSt</div><div class="ttdoc">Reynolds x Strouhal number.</div><div class="ttdef"><b>Definition</b> <a href="fsi__osc__ring_8cc_source.html#l00077">fsi_osc_ring.cc:77</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Physical__Variables_html_ab814e627d2eb5bc50318879d19ab16b9"><div class="ttname"><a href="namespaceGlobal__Physical__Variables.html#ab814e627d2eb5bc50318879d19ab16b9">Global_Physical_Variables::Re</a></div><div class="ttdeci">double Re</div><div class="ttdoc">Reynolds number.</div><div class="ttdef"><b>Definition</b> <a href="fsi__osc__ring_8cc_source.html#l00074">fsi_osc_ring.cc:74</a></div></div>
+<div class="ttc" id="anamespaceoomph_html"><div class="ttname"><a href="namespaceoomph.html">oomph</a></div><div class="ttdef"><b>Definition</b> <a href="osc__ring__sarah__asymptotics_8h_source.html#l00028">osc_ring_sarah_asymptotics.h:29</a></div></div>
+<div class="ttc" id="aosc__ring__sarah__asymptotics_8h_html"><div class="ttname"><a href="osc__ring__sarah__asymptotics_8h.html">osc_ring_sarah_asymptotics.h</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:08:17
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1671 @@
+\doxysection{oomph\+::MGSolver\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MGSolver}{}\label{classoomph_1_1MGSolver}\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+
+
+{\ttfamily \#include $<$geometric\+\_\+multigrid.\+h$>$}
+
+Inheritance diagram for oomph\+::MGSolver\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classoomph_1_1MGSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}}) ()
+\begin{DoxyCompactList}\small\item\em typedef for a function that returns a pointer to an object of the class \doxylink{classoomph_1_1Smoother}{Smoother} to be used as the pre-\/smoother \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}}) ()
+\begin{DoxyCompactList}\small\item\em typedef for a function that returns a pointer to an object of the class \doxylink{classoomph_1_1Smoother}{Smoother} to be used as the post-\/smoother \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}{set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pre\+\_\+smoother\+\_\+fn}})
+\begin{DoxyCompactList}\small\item\em Access function to set the pre-\/smoother creation function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}{set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function}} (\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{post\+\_\+smoother\+\_\+fn}})
+\begin{DoxyCompactList}\small\item\em Access function to set the post-\/smoother creation function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGSolver_a61354743e9989dc8eb69efe2b1414cfa}{MGSolver}} (\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mg\+\_\+problem\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set up default values for number of V-\/cycles and pre-\/ and post-\/smoothing steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGSolver_aae6259c5553a6570841e689b63bd691d}{\texorpdfstring{$\sim$}{\string~}\+MGSolver}} ()
+\begin{DoxyCompactList}\small\item\em Delete any dynamically allocated data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up anything that needs to be cleaned up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a081eb7bcdd49dfce9a03f0ae3ab4cfab}{set\+\_\+self\+\_\+test\+\_\+vector}} ()
+\begin{DoxyCompactList}\small\item\em Makes a vector which will be used in the self-\/test. Is currently set to make the entries of the vector represent a plane wave propagating at an angle of 45 degrees. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a88efa5f110e824947f50306e3b56e07b}{self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Makes a vector, restricts it down the levels of the hierarchy and documents it at each level. After this is done the vector is interpolated up the levels of the hierarchy with the output being documented at each level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_acfc50241a9dc27e7e60b06564e5dd726}{restriction\+\_\+self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Make a self-\/test to make sure that the interpolation matrices are doing the same thing to restrict the vectors down through the heirachy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a25fbe00e277a8fba8c7f54902b92c417}{interpolation\+\_\+self\+\_\+test}} ()
+\begin{DoxyCompactList}\small\item\em Make a self-\/test to make sure that the interpolation matrices are doing the same thing to interpolate the vectors up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a4af1269b75f9dcd598474d242de1f4ef}{plot}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hierarchy\+\_\+level}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{input\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}})
+\begin{DoxyCompactList}\small\item\em Given a level in the hierarchy, an input vector and a filename this function will document the given vector according to the structure of the mesh on the given level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_aa96a2b512287d603f3be8fb1c693e05a}{disable\+\_\+v\+\_\+cycle\+\_\+output}} ()
+\begin{DoxyCompactList}\small\item\em Disable all output from mg\+\_\+solve apart from the number of V-\/cycles used to solve the problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a72dcbb3e6fd8420e7236ada2b5e33b91}{disable\+\_\+output}} ()
+\begin{DoxyCompactList}\small\item\em Suppress anything that can be suppressed, i.\+e. any timings. Things like mesh adaptation can not however be silenced using this. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a34098c30d954bc884b7df62ec61bd836}{enable\+\_\+v\+\_\+cycle\+\_\+output}} ()
+\begin{DoxyCompactList}\small\item\em Enable the output of the V-\/cycle timings and other output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_ac1e06a4689b41bbb9a05ba9a0eecdb23}{enable\+\_\+doc\+\_\+everything}} ()
+\begin{DoxyCompactList}\small\item\em Enable the output from anything that could have been suppressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e}{enable\+\_\+output}} ()
+\begin{DoxyCompactList}\small\item\em Enable the output from anything that could have been suppressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9}{disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Suppress the output of both smoothers and Super\+LU. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02}{npost\+\_\+smooth}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of post-\/smoothing iterations (lvalue) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b}{npre\+\_\+smooth}} ()
+\begin{DoxyCompactList}\small\item\em Return the number of pre-\/smoothing iterations (lvalue) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e}{pre\+\_\+smooth}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level)
+\begin{DoxyCompactList}\small\item\em Pre-\/smoother\+: Perform \textquotesingle{}max\+\_\+iter\textquotesingle{} smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Return the residual vector r=b-\/\+Ax. Uses the default smoother (set in the \doxylink{classoomph_1_1MGProblem}{MGProblem} constructor) which can be overloaded for a specific problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a449bc7f6ebf7ba7bc517c7712373c68d}{post\+\_\+smooth}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level)
+\begin{DoxyCompactList}\small\item\em Post-\/smoother\+: Perform max\+\_\+iter smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Uses the default smoother (set in the \doxylink{classoomph_1_1MGProblem}{MGProblem} constructor) which can be overloaded for specific problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MGSolver_ae1780530c59f06913884eec764a4b6cc}{residual\+\_\+norm}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level)
+\begin{DoxyCompactList}\small\item\em Return norm of residual r=b-\/\+Ax and the residual vector itself on the level-\/th level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a966b9775086c2a238c212605a9bb16de}{direct\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Call the direct solver (Super\+LU) to solve the problem exactly. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_ad749205517822b5855faab5701f90afe}{interpolation\+\_\+matrix\+\_\+set}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}value, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{col\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{row\+\_\+st}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&ncol, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&nnz)
+\begin{DoxyCompactList}\small\item\em Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a7f96b229fb357fdf817f790f92197745}{interpolation\+\_\+matrix\+\_\+set}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&value, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{col\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{row\+\_\+st}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&ncol, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}})
+\begin{DoxyCompactList}\small\item\em Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a52dcf1e19aa7f5d77697575b341a838b}{set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes}} ()
+\begin{DoxyCompactList}\small\item\em Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} on each level that is used to restrict the residual between levels. The transpose can be used as the interpolation matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a755ee1fd473faa22f342829dadbe4e51}{restrict\+\_\+residual}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level)
+\begin{DoxyCompactList}\small\item\em Restrict residual (computed on level-\/th MG level) to the next coarser mesh and stick it into the coarse mesh RHS vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_addc29a0b865681c3eaf7d67e702ee995}{interpolate\+\_\+and\+\_\+correct}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&level)
+\begin{DoxyCompactList}\small\item\em Interpolate solution at current level onto next finer mesh and correct the solution x at that level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a28c5bc08c12849ac16bc0d78bdb9b58a}{level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&son\+\_\+type, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Given the son\+\_\+type of an element and a local node number j in that element with nnode\+\_\+1d nodes per coordinate direction, return the local coordinate s in its father element. Needed in the setup of the interpolation matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a368106b0ca8332ab5a6571b9421822e2}{setup\+\_\+interpolation\+\_\+matrices}} ()
+\begin{DoxyCompactList}\small\item\em Setup the interpolation matrix on each level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a923c121b000fc5372664045c764b163f}{setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured}} ()
+\begin{DoxyCompactList}\small\item\em Setup the interpolation matrix on each level (used for unstructured meshes) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a332a6b1028732481a4954fa0a9337a80}{setup\+\_\+transfer\+\_\+matrices}} ()
+\begin{DoxyCompactList}\small\item\em Setup the transfer matrices on each level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a104b2f66ce3e177c31cdd666bbc1f17d}{full\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Do a full setup (assumes everything will be setup around the \doxylink{classoomph_1_1MGProblem}{MGProblem} pointer given in the constructor) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Virtual function in the base class that needs to be implemented later but for now just leave it empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}{iterations}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a}{level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&son\+\_\+type, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 2D case. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a1de2d3013acb7401751a0daf7872889e}{level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&son\+\_\+type, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
+\begin{DoxyCompactList}\small\item\em Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 3D case. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd}{Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0}{Iterative\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5}{\texorpdfstring{$\sim$}{\string~}\+Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c}{preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access to convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access to max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd}{enable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511}{disable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zone\+\_\+title}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we\textquotesingle{}re running (e.\+g. what combination of linear solver and preconditioner or parameter values are used). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7}{close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Close convergence history output stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the jacobian matrix and residual vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3}{preconditioner\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the the time taken to setup the preconditioner \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307}{enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0}{disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t set up the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99}{enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af}{disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge within max\+\_\+iter (default). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b}{enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570}{disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve (i.\+e. store matrix and/or LU decomposition, say) This function simply resets an internal flag. It\textquotesingle{}s virtual so it can be overloaded to perform additional tasks such as cleaning up memory that is only required for the resolve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a70f1090e0673b8f9c4b87080adff0e2f}{mg\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Do the actual solve -- this is called through the pure virtual solve function in the \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} base class. The function is stored as protected to allow the \doxylink{classoomph_1_1MGPreconditioner}{MGPreconditioner} derived class to use the solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_ad31f3a5daa8edec01ab20c92e5fcca54}{modify\+\_\+restriction\+\_\+matrices}} ()
+\begin{DoxyCompactList}\small\item\em Normalise the rows of the restriction matrices to avoid amplifications when projecting to the coarser level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_ab3d4af8ea6d7bc8d0a6f528cb669e920}{Nvcycle}}
+\begin{DoxyCompactList}\small\item\em Maximum number of V-\/cycles (this is set as a protected variable so. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver_af48a7c051423b2a5d27b19aa8adb996a}{Mg\+\_\+problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the MG problem (deep copy). This is protected to provide access to the MG preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a18889939fb1256a86e5862c1e5ecbd31}{Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the RHS vectors (Rhs\+\_\+mg). This is protected to allow the multigrid preconditioner to assign the RHS vector during preconditioner\+\_\+solve() \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver_ac533f8f9a9f6efaf5b3c63fbdd09e0d1}{Suppress\+\_\+v\+\_\+cycle\+\_\+output}}
+\begin{DoxyCompactList}\small\item\em Indicates whether or not the V-\/cycle output should be suppressed. Needs to be protected member data for the multigrid preconditioner to know whether or not to output information with each preconditioning step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver_a0cd765279d8e8f3929cc253fd00ba9eb}{Suppress\+\_\+all\+\_\+output}}
+\begin{DoxyCompactList}\small\item\em If this is set to true then all output from the solver is suppressed. This is protected member data so that the multigrid preconditioner knows whether or not to restore the stream pointer. \end{DoxyCompactList}\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver_a5184053b6d2a717a6d6865c76acef14b}{Stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the output stream -- defaults to std\+::cout. This is protected member data to allow the preconditioner to restore normal output if everything was chosen to be suppressed by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997}{Doc\+\_\+convergence\+\_\+history}}
+\begin{DoxyCompactList}\small\item\em Flag indicating if the convergence history is to be documented. \end{DoxyCompactList}\item 
+std\+::ofstream \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9}{Output\+\_\+file\+\_\+stream}}
+\begin{DoxyCompactList}\small\item\em Output file stream for convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d}{Tolerance}}
+\begin{DoxyCompactList}\small\item\em Convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989}{Max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Maximum number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248}{Preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em linear solver solution time \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10}{Preconditioner\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em indicates whether the preconditioner should be setup before solve. Default = true; \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Should we throw an error instead of just returning when we hit the max iterations? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Use the iterative solver as preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a}{First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a8b25ea9a7781f95ddf46b4b8d427d3d0}{setup\+\_\+mg\+\_\+hierarchy}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a24b2cc3ce0eefde4eef0b80b38339b38}{setup\+\_\+mg\+\_\+structures}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804}{setup\+\_\+smoothers}} ()
+\begin{DoxyCompactList}\small\item\em Function to set up all of the smoothers once the system matrices have been set up. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}{Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function to create pre-\/smoothers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}{Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Function to create post-\/smoothers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9}{Nlevel}}
+\begin{DoxyCompactList}\small\item\em The number of levels in the multigrid heirachy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_ab6a410abeb049aec45409a5cf74597f6}{Mg\+\_\+hierarchy}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} containing pointers to problems in hierarchy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a90b372c8339dda0589493bd1a1b58b6a}{Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the system matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_abb0744bdd778ed6076ee60803b0bc24a}{Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the interpolation matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a8a4974aac58e9835089da9b4b8039952}{Restriction\+\_\+matrices\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the restriction matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_ad0117f918473d50a9ca8526103401534}{X\+\_\+mg\+\_\+vectors\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the solution vectors (X\+\_\+mg) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a2c3f9d64997faf275de633fe3c799fee}{Residual\+\_\+mg\+\_\+vectors\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the residual vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_ab751da487614e6f661b8d944f37c20ec}{Interpolation\+\_\+self\+\_\+test\+\_\+vectors\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the result of interpolation on each level (only required if the user wishes to document the output of interpolation and restriction on each level) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a79fd640c7e43f08dca60f41d3ff91d59}{Restriction\+\_\+self\+\_\+test\+\_\+vectors\+\_\+storage}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the result of restriction on each level (only required if the user wishes to document the output of interpolation and restriction on each level) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a50cea09c4fd325e52c6d50884095bac8}{Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the pre-\/smoothers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1MGSolver_a2b5b5a2719782ab2f43b1aa9179c814c}{Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to store the post-\/smoothers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_acc27929d8448646bd1551a32db05c966}{Npre\+\_\+smooth}}
+\begin{DoxyCompactList}\small\item\em Number of pre-\/smoothing steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_aa1bd9b32d6d5976582b57739bcc10b6d}{Npost\+\_\+smooth}}
+\begin{DoxyCompactList}\small\item\em Number of post-\/smoothing steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver_a3134e1d815d8d6d974f4ba4cabec2bd7}{Doc\+\_\+everything}}
+\begin{DoxyCompactList}\small\item\em If this is set to true we document everything. In addition to outputting the information of the setup timings and V-\/cycle data we document the refinement and unrefinement patterns given by the transfer operators which is done by keeping the coarser MG problem pointers alive. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver_ae78a2b15951afde6d3e60bd9127fb978}{Has\+\_\+been\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean variable to indicate whether or not the solver has been setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver_af7b6c7e1c4e047f8c5a7c83e5b8169c7}{Has\+\_\+been\+\_\+solved}}
+\begin{DoxyCompactList}\small\item\em Boolean variable to indicate whether or not the problem was successfully solved. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c45a}{V\+\_\+cycle\+\_\+counter}}
+\begin{DoxyCompactList}\small\item\em Pointer to counter for V-\/cycles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c}{Default\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Default preconditioner\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+MGSolver$<$ DIM $>$}
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00087}{87}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}\label{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!PostSmootherFactoryFctPt@{PostSmootherFactoryFctPt}}
+\index{PostSmootherFactoryFctPt@{PostSmootherFactoryFctPt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{PostSmootherFactoryFctPt}{PostSmootherFactoryFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Post\+Smoother\+Factory\+Fct\+Pt) ()}
+
+
+
+typedef for a function that returns a pointer to an object of the class \doxylink{classoomph_1_1Smoother}{Smoother} to be used as the post-\/smoother 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00096}{96}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}\label{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!PreSmootherFactoryFctPt@{PreSmootherFactoryFctPt}}
+\index{PreSmootherFactoryFctPt@{PreSmootherFactoryFctPt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{PreSmootherFactoryFctPt}{PreSmootherFactoryFctPt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pre\+Smoother\+Factory\+Fct\+Pt) ()}
+
+
+
+typedef for a function that returns a pointer to an object of the class \doxylink{classoomph_1_1Smoother}{Smoother} to be used as the pre-\/smoother 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00092}{92}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MGSolver_a61354743e9989dc8eb69efe2b1414cfa}\label{classoomph_1_1MGSolver_a61354743e9989dc8eb69efe2b1414cfa} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!MGSolver@{MGSolver}}
+\index{MGSolver@{MGSolver}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{MGSolver()}{MGSolver()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+MGSolver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} \texorpdfstring{$\ast$}{*}}]{mg\+\_\+problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Set up default values for number of V-\/cycles and pre-\/ and post-\/smoothing steps. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00116}{116}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00671}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00624}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+
+\Hypertarget{classoomph_1_1MGSolver_aae6259c5553a6570841e689b63bd691d}\label{classoomph_1_1MGSolver_aae6259c5553a6570841e689b63bd691d} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!````~MGSolver@{\texorpdfstring{$\sim$}{\string~}MGSolver}}
+\index{````~MGSolver@{\texorpdfstring{$\sim$}{\string~}MGSolver}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MGSolver()}{\string~MGSolver()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1MGSolver}{MGSolver}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Delete any dynamically allocated data. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00139}{139}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08}\label{classoomph_1_1MGSolver_a85e3e6f32b4e77d696d5b001e1428f08} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Clean up anything that needs to be cleaned up. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{146}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00715}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00718}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00677}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00671}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00668}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00702}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00699}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00680}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00139}{oomph\+::\+MGSolver$<$ DIM $>$\+::\texorpdfstring{$\sim$}{\string~}\+MGSolver()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a966b9775086c2a238c212605a9bb16de}\label{classoomph_1_1MGSolver_a966b9775086c2a238c212605a9bb16de} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!direct\_solve@{direct\_solve}}
+\index{direct\_solve@{direct\_solve}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{direct\_solve()}{direct\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::direct\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call the direct solver (Super\+LU) to solve the problem exactly. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00390}{390}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00668}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00629}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00683}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a72dcbb3e6fd8420e7236ada2b5e33b91}\label{classoomph_1_1MGSolver_a72dcbb3e6fd8420e7236ada2b5e33b91} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_output@{disable\_output}}
+\index{disable\_output@{disable\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_output()}{disable\_output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::disable\+\_\+output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Suppress anything that can be suppressed, i.\+e. any timings. Things like mesh adaptation can not however be silenced using this. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00254}{254}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00320}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00646}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00471}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00640}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9}\label{classoomph_1_1MGSolver_a84a562088ef3ec0514027cac6a69d5a9} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_smoother\_and\_superlu\_doc\_time@{disable\_smoother\_and\_superlu\_doc\_time}}
+\index{disable\_smoother\_and\_superlu\_doc\_time@{disable\_smoother\_and\_superlu\_doc\_time}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_smoother\_and\_superlu\_doc\_time()}{disable\_smoother\_and\_superlu\_doc\_time()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Suppress the output of both smoothers and Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00306}{306}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00668}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00702}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00699}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MGSolver_aa96a2b512287d603f3be8fb1c693e05a}\label{classoomph_1_1MGSolver_aa96a2b512287d603f3be8fb1c693e05a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!disable\_v\_cycle\_output@{disable\_v\_cycle\_output}}
+\index{disable\_v\_cycle\_output@{disable\_v\_cycle\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{disable\_v\_cycle\_output()}{disable\_v\_cycle\_output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::disable\+\_\+v\+\_\+cycle\+\_\+output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable all output from mg\+\_\+solve apart from the number of V-\/cycles used to solve the problem. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00243}{243}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ac1e06a4689b41bbb9a05ba9a0eecdb23}\label{classoomph_1_1MGSolver_ac1e06a4689b41bbb9a05ba9a0eecdb23} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_doc\_everything@{enable\_doc\_everything}}
+\index{enable\_doc\_everything@{enable\_doc\_everything}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_everything()}{enable\_doc\_everything()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::enable\+\_\+doc\+\_\+everything (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable the output from anything that could have been suppressed. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00284}{284}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00715}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Doc\+\_\+everything}}.
+
+\Hypertarget{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e}\label{classoomph_1_1MGSolver_abf5d8dc2a2a116a41bb625e1d6985f2e} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_output@{enable\_output}}
+\index{enable\_output@{enable\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_output()}{enable\_output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::enable\+\_\+output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable the output from anything that could have been suppressed. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00293}{293}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00640}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a34098c30d954bc884b7df62ec61bd836}\label{classoomph_1_1MGSolver_a34098c30d954bc884b7df62ec61bd836} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!enable\_v\_cycle\_output@{enable\_v\_cycle\_output}}
+\index{enable\_v\_cycle\_output@{enable\_v\_cycle\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{enable\_v\_cycle\_output()}{enable\_v\_cycle\_output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::enable\+\_\+v\+\_\+cycle\+\_\+output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable the output of the V-\/cycle timings and other output. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00274}{274}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a104b2f66ce3e177c31cdd666bbc1f17d}\label{classoomph_1_1MGSolver_a104b2f66ce3e177c31cdd666bbc1f17d} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!full\_setup@{full\_setup}}
+\index{full\_setup@{full\_setup}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{full\_setup()}{full\_setup()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::full\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Do a full setup (assumes everything will be setup around the \doxylink{classoomph_1_1MGProblem}{MGProblem} pointer given in the constructor) 
+
+Runs a full setup of the MG solver. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00823}{823}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{advection__diffusion__reaction__elements_8cc_source_l00331}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$\+::self\+\_\+test()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00752}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_addc29a0b865681c3eaf7d67e702ee995}\label{classoomph_1_1MGSolver_addc29a0b865681c3eaf7d67e702ee995} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolate\_and\_correct@{interpolate\_and\_correct}}
+\index{interpolate\_and\_correct@{interpolate\_and\_correct}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolate\_and\_correct()}{interpolate\_and\_correct()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::interpolate\+\_\+and\+\_\+correct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level }\end{DoxyParamCaption})}
+
+
+
+Interpolate solution at current level onto next finer mesh and correct the solution x at that level. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02038}{2038}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ad749205517822b5855faab5701f90afe}\label{classoomph_1_1MGSolver_ad749205517822b5855faab5701f90afe} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_matrix\_set@{interpolation\_matrix\_set}}
+\index{interpolation\_matrix\_set@{interpolation\_matrix\_set}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolation\_matrix\_set()}{interpolation\_matrix\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::interpolation\+\_\+matrix\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}}]{col\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}}]{row\+\_\+st,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nnz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00400}{400}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00677}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a7f96b229fb357fdf817f790f92197745}\label{classoomph_1_1MGSolver_a7f96b229fb357fdf817f790f92197745} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_matrix\_set@{interpolation\_matrix\_set}}
+\index{interpolation\_matrix\_set@{interpolation\_matrix\_set}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolation\_matrix\_set()}{interpolation\_matrix\_set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::interpolation\+\_\+matrix\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{col\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{row\+\_\+st,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{ncol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{nrow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} that is used to interpolate the residual between levels. The transpose can be used as the full weighting restriction. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00418}{418}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00677}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00671}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+hierarchy}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a25fbe00e277a8fba8c7f54902b92c417}\label{classoomph_1_1MGSolver_a25fbe00e277a8fba8c7f54902b92c417} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!interpolation\_self\_test@{interpolation\_self\_test}}
+\index{interpolation\_self\_test@{interpolation\_self\_test}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{interpolation\_self\_test()}{interpolation\_self\_test()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::interpolation\+\_\+self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Make a self-\/test to make sure that the interpolation matrices are doing the same thing to interpolate the vectors up. 
+
+Function which implements a self-\/test to interpolate a vector up all of levels of the MG hierarchy and outputs the restricted vectors to file. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02339}{2339}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363}\label{classoomph_1_1MGSolver_ace1b91d44c67c990259807ee746a6363} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Number of iterations. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00593}{593}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00725}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a}\label{classoomph_1_1MGSolver_a403ac19c2fceb11768d1d1426f70ef6a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
+\index{level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{level\_up\_local\_coord\_of\_node()}{level\_up\_local\_coord\_of\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ 2 $>$\+::level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{son\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 2D case. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8cc_source_l00037}{37}} of file \mbox{\hyperlink{geometric__multigrid_8cc_source}{geometric\+\_\+multigrid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{quadtree_8h_source_l00059}{oomph\+::\+Quad\+Tree\+Names\+::\+NE}}, \mbox{\hyperlink{quadtree_8h_source_l00058}{oomph\+::\+Quad\+Tree\+Names\+::\+NW}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00057}{oomph\+::\+Quad\+Tree\+Names\+::\+SE}}, and \mbox{\hyperlink{quadtree_8h_source_l00056}{oomph\+::\+Quad\+Tree\+Names\+::\+SW}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a1de2d3013acb7401751a0daf7872889e}\label{classoomph_1_1MGSolver_a1de2d3013acb7401751a0daf7872889e} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
+\index{level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{level\_up\_local\_coord\_of\_node()}{level\_up\_local\_coord\_of\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ 3 $>$\+::level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{son\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Given the son type of the element and the local coordinate s of a given node in the son element, return the local coordinate s in its father element. 3D case. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8cc_source_l00091}{91}} of file \mbox{\hyperlink{geometric__multigrid_8cc_source}{geometric\+\_\+multigrid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{octree_8h_source_l00049}{oomph\+::\+Oc\+Tree\+Names\+::\+LDB}}, \mbox{\hyperlink{octree_8h_source_l00053}{oomph\+::\+Oc\+Tree\+Names\+::\+LDF}}, \mbox{\hyperlink{octree_8h_source_l00051}{oomph\+::\+Oc\+Tree\+Names\+::\+LUB}}, \mbox{\hyperlink{octree_8h_source_l00055}{oomph\+::\+Oc\+Tree\+Names\+::\+LUF}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{octree_8h_source_l00050}{oomph\+::\+Oc\+Tree\+Names\+::\+RDB}}, \mbox{\hyperlink{octree_8h_source_l00054}{oomph\+::\+Oc\+Tree\+Names\+::\+RDF}}, \mbox{\hyperlink{octree_8h_source_l00052}{oomph\+::\+Oc\+Tree\+Names\+::\+RUB}}, \mbox{\hyperlink{octree_8h_source_l00056}{oomph\+::\+Oc\+Tree\+Names\+::\+RUF}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a28c5bc08c12849ac16bc0d78bdb9b58a}\label{classoomph_1_1MGSolver_a28c5bc08c12849ac16bc0d78bdb9b58a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}}
+\index{level\_up\_local\_coord\_of\_node@{level\_up\_local\_coord\_of\_node}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{level\_up\_local\_coord\_of\_node()}{level\_up\_local\_coord\_of\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::level\+\_\+up\+\_\+local\+\_\+coord\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{son\+\_\+type,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Given the son\+\_\+type of an element and a local node number j in that element with nnode\+\_\+1d nodes per coordinate direction, return the local coordinate s in its father element. Needed in the setup of the interpolation matrices. 
+
+\Hypertarget{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c}\label{classoomph_1_1MGSolver_af8a50fac4acaadaa5a12eaf29231bc4c} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!max\_iter@{max\_iter}}
+\index{max\_iter@{max\_iter}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of iterations. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00600}{600}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00620}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nvcycle}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a70f1090e0673b8f9c4b87080adff0e2f}\label{classoomph_1_1MGSolver_a70f1090e0673b8f9c4b87080adff0e2f} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!mg\_solve@{mg\_solve}}
+\index{mg\_solve@{mg\_solve}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{mg\_solve()}{mg\_solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::mg\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Do the actual solve -- this is called through the pure virtual solve function in the \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} base class. The function is stored as protected to allow the \doxylink{classoomph_1_1MGPreconditioner}{MGPreconditioner} derived class to use the solver. 
+
+Linear solver. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02520}{2520}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ad31f3a5daa8edec01ab20c92e5fcca54}\label{classoomph_1_1MGSolver_ad31f3a5daa8edec01ab20c92e5fcca54} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!modify\_restriction\_matrices@{modify\_restriction\_matrices}}
+\index{modify\_restriction\_matrices@{modify\_restriction\_matrices}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{modify\_restriction\_matrices()}{modify\_restriction\_matrices()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::modify\+\_\+restriction\+\_\+matrices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Normalise the rows of the restriction matrices to avoid amplifications when projecting to the coarser level. 
+
+Modify the restriction matrices. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02065}{2065}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02}\label{classoomph_1_1MGSolver_a4cf132b23574081bd2334253ac864d02} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!npost\_smooth@{npost\_smooth}}
+\index{npost\_smooth@{npost\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{npost\_smooth()}{npost\_smooth()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::npost\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of post-\/smoothing iterations (lvalue) 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00326}{326}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00708}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npost\+\_\+smooth}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b}\label{classoomph_1_1MGSolver_ace13f81b421aa1084d5963f2ebc69f8b} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!npre\_smooth@{npre\_smooth}}
+\index{npre\_smooth@{npre\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{npre\_smooth()}{npre\_smooth()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::npre\+\_\+smooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of pre-\/smoothing iterations (lvalue) 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00334}{334}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00705}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Npre\+\_\+smooth}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a4af1269b75f9dcd598474d242de1f4ef}\label{classoomph_1_1MGSolver_a4af1269b75f9dcd598474d242de1f4ef} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!plot@{plot}}
+\index{plot@{plot}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{plot()}{plot()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::plot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{hierarchy\+\_\+level,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{input\+\_\+vector,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Given a level in the hierarchy, an input vector and a filename this function will document the given vector according to the structure of the mesh on the given level. 
+
+Plots the input vector (assuming we\textquotesingle{}re dealing with scalar nodal data, otherwise I don\textquotesingle{}t know how to implement this...) 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02374}{2374}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02222}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{elements_8h_source_l03165}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a449bc7f6ebf7ba7bc517c7712373c68d}\label{classoomph_1_1MGSolver_a449bc7f6ebf7ba7bc517c7712373c68d} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!post\_smooth@{post\_smooth}}
+\index{post\_smooth@{post\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{post\_smooth()}{post\_smooth()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::post\+\_\+smooth (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Post-\/smoother\+: Perform max\+\_\+iter smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Uses the default smoother (set in the \doxylink{classoomph_1_1MGProblem}{MGProblem} constructor) which can be overloaded for specific problem. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00364}{364}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00702}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00629}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00683}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e}\label{classoomph_1_1MGSolver_ac44511f43e0029f325f09d297d46134e} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!pre\_smooth@{pre\_smooth}}
+\index{pre\_smooth@{pre\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{pre\_smooth()}{pre\_smooth()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::pre\+\_\+smooth (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pre-\/smoother\+: Perform \textquotesingle{}max\+\_\+iter\textquotesingle{} smoothing steps on the linear system Ax=b with current RHS vector, b, starting with current solution vector, x. Return the residual vector r=b-\/\+Ax. Uses the default smoother (set in the \doxylink{classoomph_1_1MGProblem}{MGProblem} constructor) which can be overloaded for a specific problem. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{346}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00699}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00686}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00629}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00683}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ae1780530c59f06913884eec764a4b6cc}\label{classoomph_1_1MGSolver_ae1780530c59f06913884eec764a4b6cc} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!residual\_norm@{residual\_norm}}
+\index{residual\_norm@{residual\_norm}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{residual\_norm()}{residual\_norm()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::residual\+\_\+norm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return norm of residual r=b-\/\+Ax and the residual vector itself on the level-\/th level. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00373}{373}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00686}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00629}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00683}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a755ee1fd473faa22f342829dadbe4e51}\label{classoomph_1_1MGSolver_a755ee1fd473faa22f342829dadbe4e51} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!restrict\_residual@{restrict\_residual}}
+\index{restrict\_residual@{restrict\_residual}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{restrict\_residual()}{restrict\_residual()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::restrict\+\_\+residual (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{level }\end{DoxyParamCaption})}
+
+
+
+Restrict residual (computed on level-\/th MG level) to the next coarser mesh and stick it into the coarse mesh RHS vector. 
+
+Restrict residual (computed on current MG level) to next coarser mesh and stick it into the coarse mesh RHS vector using the restriction matrix (if restrict\+\_\+flag=1) or the transpose of the interpolation matrix (if restrict\+\_\+flag=2) 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02015}{2015}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+\Hypertarget{classoomph_1_1MGSolver_acfc50241a9dc27e7e60b06564e5dd726}\label{classoomph_1_1MGSolver_acfc50241a9dc27e7e60b06564e5dd726} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!restriction\_self\_test@{restriction\_self\_test}}
+\index{restriction\_self\_test@{restriction\_self\_test}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{restriction\_self\_test()}{restriction\_self\_test()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::restriction\+\_\+self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Make a self-\/test to make sure that the interpolation matrices are doing the same thing to restrict the vectors down through the heirachy. 
+
+Function which implements a self-\/test to restrict the residual vector down all of the coarser grids and output the restricted vectors to file. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02302}{2302}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a88efa5f110e824947f50306e3b56e07b}\label{classoomph_1_1MGSolver_a88efa5f110e824947f50306e3b56e07b} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!self\_test@{self\_test}}
+\index{self\_test@{self\_test}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{self\_test()}{self\_test()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::self\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Makes a vector, restricts it down the levels of the hierarchy and documents it at each level. After this is done the vector is interpolated up the levels of the hierarchy with the output being documented at each level. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02130}{2130}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4}\label{classoomph_1_1MGSolver_a451bf822bb1b42c8cdd8ed3fbb3a7be4} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_post\_smoother\_factory\_function@{set\_post\_smoother\_factory\_function}}
+\index{set\_post\_smoother\_factory\_function@{set\_post\_smoother\_factory\_function}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{set\_post\_smoother\_factory\_function()}{set\_post\_smoother\_factory\_function()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}}}]{post\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to set the post-\/smoother creation function. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00107}{107}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00653}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938}\label{classoomph_1_1MGSolver_a0c783dddf9108f26b835509fddec6938} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_pre\_smoother\_factory\_function@{set\_pre\_smoother\_factory\_function}}
+\index{set\_pre\_smoother\_factory\_function@{set\_pre\_smoother\_factory\_function}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{set\_pre\_smoother\_factory\_function()}{set\_pre\_smoother\_factory\_function()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}}}]{pre\+\_\+smoother\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to set the pre-\/smoother creation function. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00099}{99}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00650}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a52dcf1e19aa7f5d77697575b341a838b}\label{classoomph_1_1MGSolver_a52dcf1e19aa7f5d77697575b341a838b} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_restriction\_matrices\_as\_interpolation\_transposes@{set\_restriction\_matrices\_as\_interpolation\_transposes}}
+\index{set\_restriction\_matrices\_as\_interpolation\_transposes@{set\_restriction\_matrices\_as\_interpolation\_transposes}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{set\_restriction\_matrices\_as\_interpolation\_transposes()}{set\_restriction\_matrices\_as\_interpolation\_transposes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} on each level that is used to restrict the residual between levels. The transpose can be used as the interpolation matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00463}{463}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00677}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00668}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Nlevel}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00680}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a081eb7bcdd49dfce9a03f0ae3ab4cfab}\label{classoomph_1_1MGSolver_a081eb7bcdd49dfce9a03f0ae3ab4cfab} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!set\_self\_test\_vector@{set\_self\_test\_vector}}
+\index{set\_self\_test\_vector@{set\_self\_test\_vector}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{set\_self\_test\_vector()}{set\_self\_test\_vector()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::set\+\_\+self\+\_\+test\+\_\+vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Makes a vector which will be used in the self-\/test. Is currently set to make the entries of the vector represent a plane wave propagating at an angle of 45 degrees. 
+
+Sets the initial vector to be used in the restriction and interpolation self-\/tests. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l02214}{2214}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00167}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a368106b0ca8332ab5a6571b9421822e2}\label{classoomph_1_1MGSolver_a368106b0ca8332ab5a6571b9421822e2} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_interpolation\_matrices@{setup\_interpolation\_matrices}}
+\index{setup\_interpolation\_matrices@{setup\_interpolation\_matrices}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_interpolation\_matrices()}{setup\_interpolation\_matrices()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+interpolation\+\_\+matrices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setup the interpolation matrix on each level. 
+
+Setup the interpolation matrices. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01505}{1505}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01228}{oomph\+::\+Node\+::hanging\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8h_source_l01846}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a923c121b000fc5372664045c764b163f}\label{classoomph_1_1MGSolver_a923c121b000fc5372664045c764b163f} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_interpolation\_matrices\_unstructured@{setup\_interpolation\_matrices\_unstructured}}
+\index{setup\_interpolation\_matrices\_unstructured@{setup\_interpolation\_matrices\_unstructured}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_interpolation\_matrices\_unstructured()}{setup\_interpolation\_matrices\_unstructured()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+interpolation\+\_\+matrices\+\_\+unstructured (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setup the interpolation matrix on each level (used for unstructured meshes) 
+
+Setup the interpolation matrices. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01827}{1827}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l00367}{oomph\+::\+Data\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00691}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{nodes_8h_source_l01285}{oomph\+::\+Node\+::is\+\_\+hanging()}}, \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02680}{oomph\+::\+Finite\+Element\+::position()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a8b25ea9a7781f95ddf46b4b8d427d3d0}\label{classoomph_1_1MGSolver_a8b25ea9a7781f95ddf46b4b8d427d3d0} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_mg\_hierarchy@{setup\_mg\_hierarchy}}
+\index{setup\_mg\_hierarchy@{setup\_mg\_hierarchy}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_mg\_hierarchy()}{setup\_mg\_hierarchy()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+mg\+\_\+hierarchy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. 
+
+Set up the MG hierarchy. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00965}{965}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a24b2cc3ce0eefde4eef0b80b38339b38}\label{classoomph_1_1MGSolver_a24b2cc3ce0eefde4eef0b80b38339b38} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_mg\_structures@{setup\_mg\_structures}}
+\index{setup\_mg\_structures@{setup\_mg\_structures}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_mg\_structures()}{setup\_mg\_structures()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+mg\+\_\+structures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to set up the hierachy of levels. Creates a vector of pointers to each MG level. 
+
+Set up the MG hierarchy structures. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01177}{1177}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00822}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804}\label{classoomph_1_1MGSolver_a9b3674f92da65b8cacada47325107804} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_smoothers@{setup\_smoothers}}
+\index{setup\_smoothers@{setup\_smoothers}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_smoothers()}{setup\_smoothers()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+smoothers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to set up all of the smoothers once the system matrices have been set up. 
+
+Set up the smoothers on all levels. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01356}{1356}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a332a6b1028732481a4954fa0a9337a80}\label{classoomph_1_1MGSolver_a332a6b1028732481a4954fa0a9337a80} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!setup\_transfer\_matrices@{setup\_transfer\_matrices}}
+\index{setup\_transfer\_matrices@{setup\_transfer\_matrices}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_transfer\_matrices()}{setup\_transfer\_matrices()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::setup\+\_\+transfer\+\_\+matrices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Setup the transfer matrices on each level. 
+
+Set up the transfer matrices. Both the pure injection and full weighting method have been implemented here but it is highly recommended that full weighting is used in general. In both methods the transpose of the transfer matrix is used to transfer a vector back. 
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l01114}{1114}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00070}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::\+TAdvection\+Diffusion\+Reaction\+Element()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5}\label{classoomph_1_1MGSolver_a68f8c874b922c5b67e73c836048e34f5} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!solve@{solve}}
+\index{solve@{solve}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual function in the base class that needs to be implemented later but for now just leave it empty. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{507}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+References \mbox{\hyperlink{geometric__multigrid_8h_source_l00823}{oomph\+::\+MGSolver$<$ DIM $>$\+::full\+\_\+setup()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00722}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Has\+\_\+been\+\_\+solved}}, \mbox{\hyperlink{problem_8h_source_l01300}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00624}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Mg\+\_\+problem\+\_\+pt}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l02520}{oomph\+::\+MGSolver$<$ DIM $>$\+::mg\+\_\+solve()}}, \mbox{\hyperlink{mesh_8h_source_l00440}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00646}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00471}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00640}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+all\+\_\+output}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00725}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+V\+\_\+cycle\+\_\+counter}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MGSolver_a3134e1d815d8d6d974f4ba4cabec2bd7}\label{classoomph_1_1MGSolver_a3134e1d815d8d6d974f4ba4cabec2bd7} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Doc\_everything@{Doc\_everything}}
+\index{Doc\_everything@{Doc\_everything}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Doc\_everything}{Doc\_everything}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Doc\+\_\+everything\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+If this is set to true we document everything. In addition to outputting the information of the setup timings and V-\/cycle data we document the refinement and unrefinement patterns given by the transfer operators which is done by keeping the coarser MG problem pointers alive. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00715}{715}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00284}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+doc\+\_\+everything()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ae78a2b15951afde6d3e60bd9127fb978}\label{classoomph_1_1MGSolver_ae78a2b15951afde6d3e60bd9127fb978} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Has\_been\_setup@{Has\_been\_setup}}
+\index{Has\_been\_setup@{Has\_been\_setup}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Has\_been\_setup}{Has\_been\_setup}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean variable to indicate whether or not the solver has been setup. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00718}{718}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_af7b6c7e1c4e047f8c5a7c83e5b8169c7}\label{classoomph_1_1MGSolver_af7b6c7e1c4e047f8c5a7c83e5b8169c7} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Has\_been\_solved@{Has\_been\_solved}}
+\index{Has\_been\_solved@{Has\_been\_solved}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Has\_been\_solved}{Has\_been\_solved}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Has\+\_\+been\+\_\+solved\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean variable to indicate whether or not the problem was successfully solved. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00722}{722}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_abb0744bdd778ed6076ee60803b0bc24a}\label{classoomph_1_1MGSolver_abb0744bdd778ed6076ee60803b0bc24a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Interpolation\_matrices\_storage\_pt@{Interpolation\_matrices\_storage\_pt}}
+\index{Interpolation\_matrices\_storage\_pt@{Interpolation\_matrices\_storage\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Interpolation\_matrices\_storage\_pt}{Interpolation\_matrices\_storage\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Interpolation\+\_\+matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the interpolation matrices. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00677}{677}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00400}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00418}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00463}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ab751da487614e6f661b8d944f37c20ec}\label{classoomph_1_1MGSolver_ab751da487614e6f661b8d944f37c20ec} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Interpolation\_self\_test\_vectors\_storage@{Interpolation\_self\_test\_vectors\_storage}}
+\index{Interpolation\_self\_test\_vectors\_storage@{Interpolation\_self\_test\_vectors\_storage}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Interpolation\_self\_test\_vectors\_storage}{Interpolation\_self\_test\_vectors\_storage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Interpolation\+\_\+self\+\_\+test\+\_\+vectors\+\_\+storage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the result of interpolation on each level (only required if the user wishes to document the output of interpolation and restriction on each level) 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00691}{691}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ab6a410abeb049aec45409a5cf74597f6}\label{classoomph_1_1MGSolver_ab6a410abeb049aec45409a5cf74597f6} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_hierarchy@{Mg\_hierarchy}}
+\index{Mg\_hierarchy@{Mg\_hierarchy}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mg\_hierarchy}{Mg\_hierarchy}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mg\+\_\+hierarchy\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} containing pointers to problems in hierarchy. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00671}{671}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00418}{oomph\+::\+MGSolver$<$ DIM $>$\+::interpolation\+\_\+matrix\+\_\+set()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00116}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a90b372c8339dda0589493bd1a1b58b6a}\label{classoomph_1_1MGSolver_a90b372c8339dda0589493bd1a1b58b6a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_matrices\_storage\_pt@{Mg\_matrices\_storage\_pt}}
+\index{Mg\_matrices\_storage\_pt@{Mg\_matrices\_storage\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mg\_matrices\_storage\_pt}{Mg\_matrices\_storage\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mg\+\_\+matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the system matrices. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00674}{674}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00390}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00306}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00373}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_af48a7c051423b2a5d27b19aa8adb996a}\label{classoomph_1_1MGSolver_af48a7c051423b2a5d27b19aa8adb996a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Mg\_problem\_pt@{Mg\_problem\_pt}}
+\index{Mg\_problem\_pt@{Mg\_problem\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Mg\_problem\_pt}{Mg\_problem\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Mg\+\_\+problem\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the MG problem (deep copy). This is protected to provide access to the MG preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00624}{624}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00116}{oomph\+::\+MGSolver$<$ DIM $>$\+::\+MGSolver()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9}\label{classoomph_1_1MGSolver_a4ab5b80c46b66867e720b1c28f170bb9} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Nlevel@{Nlevel}}
+\index{Nlevel@{Nlevel}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Nlevel}{Nlevel}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Nlevel\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The number of levels in the multigrid heirachy. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00668}{668}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00390}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00306}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00463}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_aa1bd9b32d6d5976582b57739bcc10b6d}\label{classoomph_1_1MGSolver_aa1bd9b32d6d5976582b57739bcc10b6d} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Npost\_smooth@{Npost\_smooth}}
+\index{Npost\_smooth@{Npost\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Npost\_smooth}{Npost\_smooth}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Npost\+\_\+smooth\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of post-\/smoothing steps. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00708}{708}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00326}{oomph\+::\+MGSolver$<$ DIM $>$\+::npost\+\_\+smooth()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_acc27929d8448646bd1551a32db05c966}\label{classoomph_1_1MGSolver_acc27929d8448646bd1551a32db05c966} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Npre\_smooth@{Npre\_smooth}}
+\index{Npre\_smooth@{Npre\_smooth}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Npre\_smooth}{Npre\_smooth}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Npre\+\_\+smooth\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of pre-\/smoothing steps. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00705}{705}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00334}{oomph\+::\+MGSolver$<$ DIM $>$\+::npre\+\_\+smooth()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ab3d4af8ea6d7bc8d0a6f528cb669e920}\label{classoomph_1_1MGSolver_ab3d4af8ea6d7bc8d0a6f528cb669e920} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Nvcycle@{Nvcycle}}
+\index{Nvcycle@{Nvcycle}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Nvcycle}{Nvcycle}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Nvcycle\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum number of V-\/cycles (this is set as a protected variable so. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00620}{620}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00600}{oomph\+::\+MGSolver$<$ DIM $>$\+::max\+\_\+iter()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00736}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::\+MGPreconditioner()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79}\label{classoomph_1_1MGSolver_a2c105a6889f43968c9e57366f44ebd79} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Post\_smoother\_factory\_function\_pt@{Post\_smoother\_factory\_function\_pt}}
+\index{Post\_smoother\_factory\_function\_pt@{Post\_smoother\_factory\_function\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Post\_smoother\_factory\_function\_pt}{Post\_smoother\_factory\_function\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGSolver_a0a46fa180d8a32f54272fc98e28001cf}{Post\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Post\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to create post-\/smoothers. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00653}{653}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00107}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+post\+\_\+smoother\+\_\+factory\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a2b5b5a2719782ab2f43b1aa9179c814c}\label{classoomph_1_1MGSolver_a2b5b5a2719782ab2f43b1aa9179c814c} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Post\_smoothers\_storage\_pt@{Post\_smoothers\_storage\_pt}}
+\index{Post\_smoothers\_storage\_pt@{Post\_smoothers\_storage\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Post\_smoothers\_storage\_pt}{Post\_smoothers\_storage\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Post\+\_\+smoothers\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the post-\/smoothers. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00702}{702}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00306}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00364}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02}\label{classoomph_1_1MGSolver_af7d8204d7b71b18f5362b01a971aad02} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Pre\_smoother\_factory\_function\_pt@{Pre\_smoother\_factory\_function\_pt}}
+\index{Pre\_smoother\_factory\_function\_pt@{Pre\_smoother\_factory\_function\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pre\_smoother\_factory\_function\_pt}{Pre\_smoother\_factory\_function\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1MGSolver_a60aa316ebfc000491554e28dbfbebc10}{Pre\+Smoother\+Factory\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pre\+\_\+smoother\+\_\+factory\+\_\+function\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to create pre-\/smoothers. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00650}{650}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00099}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+pre\+\_\+smoother\+\_\+factory\+\_\+function()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a50cea09c4fd325e52c6d50884095bac8}\label{classoomph_1_1MGSolver_a50cea09c4fd325e52c6d50884095bac8} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Pre\_smoothers\_storage\_pt@{Pre\_smoothers\_storage\_pt}}
+\index{Pre\_smoothers\_storage\_pt@{Pre\_smoothers\_storage\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Pre\_smoothers\_storage\_pt}{Pre\_smoothers\_storage\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Smoother}{Smoother}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Pre\+\_\+smoothers\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the pre-\/smoothers. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00699}{699}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00306}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a2c3f9d64997faf275de633fe3c799fee}\label{classoomph_1_1MGSolver_a2c3f9d64997faf275de633fe3c799fee} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Residual\_mg\_vectors\_storage@{Residual\_mg\_vectors\_storage}}
+\index{Residual\_mg\_vectors\_storage@{Residual\_mg\_vectors\_storage}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Residual\_mg\_vectors\_storage}{Residual\_mg\_vectors\_storage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Residual\+\_\+mg\+\_\+vectors\+\_\+storage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the residual vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00686}{686}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00373}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a8a4974aac58e9835089da9b4b8039952}\label{classoomph_1_1MGSolver_a8a4974aac58e9835089da9b4b8039952} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Restriction\_matrices\_storage\_pt@{Restriction\_matrices\_storage\_pt}}
+\index{Restriction\_matrices\_storage\_pt@{Restriction\_matrices\_storage\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Restriction\_matrices\_storage\_pt}{Restriction\_matrices\_storage\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}\texorpdfstring{$\ast$}{*}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Restriction\+\_\+matrices\+\_\+storage\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the restriction matrices. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00680}{680}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00146}{oomph\+::\+MGSolver$<$ DIM $>$\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00463}{oomph\+::\+MGSolver$<$ DIM $>$\+::set\+\_\+restriction\+\_\+matrices\+\_\+as\+\_\+interpolation\+\_\+transposes()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a79fd640c7e43f08dca60f41d3ff91d59}\label{classoomph_1_1MGSolver_a79fd640c7e43f08dca60f41d3ff91d59} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Restriction\_self\_test\_vectors\_storage@{Restriction\_self\_test\_vectors\_storage}}
+\index{Restriction\_self\_test\_vectors\_storage@{Restriction\_self\_test\_vectors\_storage}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Restriction\_self\_test\_vectors\_storage}{Restriction\_self\_test\_vectors\_storage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Restriction\+\_\+self\+\_\+test\+\_\+vectors\+\_\+storage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the result of restriction on each level (only required if the user wishes to document the output of interpolation and restriction on each level) 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00696}{696}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a18889939fb1256a86e5862c1e5ecbd31}\label{classoomph_1_1MGSolver_a18889939fb1256a86e5862c1e5ecbd31} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Rhs\_mg\_vectors\_storage@{Rhs\_mg\_vectors\_storage}}
+\index{Rhs\_mg\_vectors\_storage@{Rhs\_mg\_vectors\_storage}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Rhs\_mg\_vectors\_storage}{Rhs\_mg\_vectors\_storage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Rhs\+\_\+mg\+\_\+vectors\+\_\+storage\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the RHS vectors (Rhs\+\_\+mg). This is protected to allow the multigrid preconditioner to assign the RHS vector during preconditioner\+\_\+solve() 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00629}{629}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00390}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00364}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00373}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a5184053b6d2a717a6d6865c76acef14b}\label{classoomph_1_1MGSolver_a5184053b6d2a717a6d6865c76acef14b} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Stream\_pt@{Stream\_pt}}
+\index{Stream\_pt@{Stream\_pt}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Stream\_pt}{Stream\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+std\+::ostream\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Stream\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the output stream -- defaults to std\+::cout. This is protected member data to allow the preconditioner to restore normal output if everything was chosen to be suppressed by the user. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00646}{646}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00254}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00752}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a0cd765279d8e8f3929cc253fd00ba9eb}\label{classoomph_1_1MGSolver_a0cd765279d8e8f3929cc253fd00ba9eb} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Suppress\_all\_output@{Suppress\_all\_output}}
+\index{Suppress\_all\_output@{Suppress\_all\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Suppress\_all\_output}{Suppress\_all\_output}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Suppress\+\_\+all\+\_\+output\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+If this is set to true then all output from the solver is suppressed. This is protected member data so that the multigrid preconditioner knows whether or not to restore the stream pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00640}{640}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00254}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00293}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00752}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::setup()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ac533f8f9a9f6efaf5b3c63fbdd09e0d1}\label{classoomph_1_1MGSolver_ac533f8f9a9f6efaf5b3c63fbdd09e0d1} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!Suppress\_v\_cycle\_output@{Suppress\_v\_cycle\_output}}
+\index{Suppress\_v\_cycle\_output@{Suppress\_v\_cycle\_output}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Suppress\_v\_cycle\_output}{Suppress\_v\_cycle\_output}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Suppress\+\_\+v\+\_\+cycle\+\_\+output\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Indicates whether or not the V-\/cycle output should be suppressed. Needs to be protected member data for the multigrid preconditioner to know whether or not to output information with each preconditioning step. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00635}{635}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00254}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00243}{oomph\+::\+MGSolver$<$ DIM $>$\+::disable\+\_\+v\+\_\+cycle\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00293}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00274}{oomph\+::\+MGSolver$<$ DIM $>$\+::enable\+\_\+v\+\_\+cycle\+\_\+output()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00779}{oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c45a}\label{classoomph_1_1MGSolver_a29bdc90613e9759bd3fdff47a0c7c45a} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!V\_cycle\_counter@{V\_cycle\_counter}}
+\index{V\_cycle\_counter@{V\_cycle\_counter}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{V\_cycle\_counter}{V\_cycle\_counter}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+V\+\_\+cycle\+\_\+counter\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to counter for V-\/cycles. 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00725}{725}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00593}{oomph\+::\+MGSolver$<$ DIM $>$\+::iterations()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00507}{oomph\+::\+MGSolver$<$ DIM $>$\+::solve()}}.
+
+\Hypertarget{classoomph_1_1MGSolver_ad0117f918473d50a9ca8526103401534}\label{classoomph_1_1MGSolver_ad0117f918473d50a9ca8526103401534} 
+\index{oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}!X\_mg\_vectors\_storage@{X\_mg\_vectors\_storage}}
+\index{X\_mg\_vectors\_storage@{X\_mg\_vectors\_storage}!oomph::MGSolver$<$ DIM $>$@{oomph::MGSolver$<$ DIM $>$}}
+\doxysubsubsection{\texorpdfstring{X\_mg\_vectors\_storage}{X\_mg\_vectors\_storage}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}$>$ \mbox{\hyperlink{classoomph_1_1MGSolver}{oomph\+::\+MGSolver}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+X\+\_\+mg\+\_\+vectors\+\_\+storage\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to store the solution vectors (X\+\_\+mg) 
+
+
+
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00683}{683}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00390}{oomph\+::\+MGSolver$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00364}{oomph\+::\+MGSolver$<$ DIM $>$\+::post\+\_\+smooth()}}, \mbox{\hyperlink{geometric__multigrid_8h_source_l00346}{oomph\+::\+MGSolver$<$ DIM $>$\+::pre\+\_\+smooth()}}, and \mbox{\hyperlink{geometric__multigrid_8h_source_l00373}{oomph\+::\+MGSolver$<$ DIM $>$\+::residual\+\_\+norm()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geometric__multigrid_8h}{geometric\+\_\+multigrid.\+h}}\end{DoxyCompactItemize}

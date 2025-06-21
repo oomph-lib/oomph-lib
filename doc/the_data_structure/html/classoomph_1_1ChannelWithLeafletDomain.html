@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ChannelWithLeafletDomain Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html">ChannelWithLeafletDomain</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1ChannelWithLeafletDomain-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ChannelWithLeafletDomain Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Rectangular domain with a leaflet blocking the lower half.  
+ <a href="classoomph_1_1ChannelWithLeafletDomain.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::ChannelWithLeafletDomain:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1ChannelWithLeafletDomain.png" usemap="#oomph::ChannelWithLeafletDomain_map" alt=""/>
+  <map id="oomph::ChannelWithLeafletDomain_map" name="oomph::ChannelWithLeafletDomain_map">
+<area href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic..." alt="oomph::Domain" shape="rect" coords="0,0,206,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6cca7d06136de0c76facec2a92b0939e" id="r_a6cca7d06136de0c76facec2a92b0939e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a6cca7d06136de0c76facec2a92b0939e">ChannelWithLeafletDomain</a> (<a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5b84ffb4aa9c9b53cafdd14ce1b0967e">leaflet_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5538092062970dbd2f02218a05639d49">lleft</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aee74846110e70cd5538386e1ccb0ce7c">lright</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af70ada72d505ebea468d1000b04c20e1">hleaflet</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaf195c688423473ed97af61f8a1467ab">htot</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;nleft, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;nright, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ny1</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">ny2</a>)</td></tr>
+<tr class="memdesc:a6cca7d06136de0c76facec2a92b0939e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet.  <br /></td></tr>
+<tr class="separator:a6cca7d06136de0c76facec2a92b0939e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f00e3d9ed53ca70519671446fe60510" id="r_a7f00e3d9ed53ca70519671446fe60510"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a7f00e3d9ed53ca70519671446fe60510">~ChannelWithLeafletDomain</a> ()</td></tr>
+<tr class="memdesc:a7f00e3d9ed53ca70519671446fe60510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty; cleanup done in base class.  <br /></td></tr>
+<tr class="separator:a7f00e3d9ed53ca70519671446fe60510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf195c688423473ed97af61f8a1467ab" id="r_aaf195c688423473ed97af61f8a1467ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaf195c688423473ed97af61f8a1467ab">htot</a> ()</td></tr>
+<tr class="memdesc:aaf195c688423473ed97af61f8a1467ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total height of domain (width of channel)  <br /></td></tr>
+<tr class="separator:aaf195c688423473ed97af61f8a1467ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af70ada72d505ebea468d1000b04c20e1" id="r_af70ada72d505ebea468d1000b04c20e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af70ada72d505ebea468d1000b04c20e1">hleaflet</a> ()</td></tr>
+<tr class="memdesc:af70ada72d505ebea468d1000b04c20e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Height of leaflet.  <br /></td></tr>
+<tr class="separator:af70ada72d505ebea468d1000b04c20e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5538092062970dbd2f02218a05639d49" id="r_a5538092062970dbd2f02218a05639d49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5538092062970dbd2f02218a05639d49">lleft</a> ()</td></tr>
+<tr class="memdesc:a5538092062970dbd2f02218a05639d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain to the left of leaflet.  <br /></td></tr>
+<tr class="separator:a5538092062970dbd2f02218a05639d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee74846110e70cd5538386e1ccb0ce7c" id="r_aee74846110e70cd5538386e1ccb0ce7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aee74846110e70cd5538386e1ccb0ce7c">lright</a> ()</td></tr>
+<tr class="memdesc:aee74846110e70cd5538386e1ccb0ce7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of domain to the right of leaflet.  <br /></td></tr>
+<tr class="separator:aee74846110e70cd5538386e1ccb0ce7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b84ffb4aa9c9b53cafdd14ce1b0967e" id="r_a5b84ffb4aa9c9b53cafdd14ce1b0967e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a5b84ffb4aa9c9b53cafdd14ce1b0967e">leaflet_pt</a> ()</td></tr>
+<tr class="memdesc:a5b84ffb4aa9c9b53cafdd14ce1b0967e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the wall.  <br /></td></tr>
+<tr class="separator:a5b84ffb4aa9c9b53cafdd14ce1b0967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b123847f4ab6e242a0409d72fe5cbd" id="r_ae4b123847f4ab6e242a0409d72fe5cbd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae4b123847f4ab6e242a0409d72fe5cbd">macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">imacro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">idirect</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>)</td></tr>
+<tr class="memdesc:ae4b123847f4ab6e242a0409d72fe5cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrisation of macro element boundaries.  <br /></td></tr>
+<tr class="separator:ae4b123847f4ab6e242a0409d72fe5cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Domain"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Domain')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Domain.html">oomph::Domain</a></td></tr>
+<tr class="memitem:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain" id="r_a091982333107142c3ac71a02fbdb6ac8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a091982333107142c3ac71a02fbdb6ac8">Domain</a> ()</td></tr>
+<tr class="memdesc:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a091982333107142c3ac71a02fbdb6ac8 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ae60cfff2bc9595d942c6891aefb8a inherit pub_methods_classoomph_1_1Domain" id="r_ad3ae60cfff2bc9595d942c6891aefb8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ad3ae60cfff2bc9595d942c6891aefb8a">Domain</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Domain.html">Domain</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ad3ae60cfff2bc9595d942c6891aefb8a inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ad3ae60cfff2bc9595d942c6891aefb8a inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33de7a18dd8ff992dc7faf068197ff50 inherit pub_methods_classoomph_1_1Domain" id="r_a33de7a18dd8ff992dc7faf068197ff50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a33de7a18dd8ff992dc7faf068197ff50">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Domain.html">Domain</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a33de7a18dd8ff992dc7faf068197ff50 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a33de7a18dd8ff992dc7faf068197ff50 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain" id="r_afd6c101003640d74becabcd8f1dcbc67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#afd6c101003640d74becabcd8f1dcbc67">~Domain</a> ()</td></tr>
+<tr class="memdesc:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Strictly speaking, whoever creates an object dynamically should be responsible for the cleanup of said object but it makes sense here for the <a class="el" href="classoomph_1_1Domain.html" title="Base class for Domains with curvilinear and/or time-dependent boundaries. Domain boundaries are typic...">Domain</a> to generically kill any MacroElements left over in the <a class="el" href="classoomph_1_1MacroElement.html" title="Base class for MacroElement s that are used during mesh refinement in domains with curvlinear and/or ...">MacroElement</a> container (if it hasn't already been done in the derived class) to avoid memory leaks.  <br /></td></tr>
+<tr class="separator:afd6c101003640d74becabcd8f1dcbc67 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef3886384a9b9e722e490268feecc2d inherit pub_methods_classoomph_1_1Domain" id="r_abef3886384a9b9e722e490268feecc2d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#abef3886384a9b9e722e490268feecc2d">macro_element_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:abef3886384a9b9e722e490268feecc2d inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to i-th macro element.  <br /></td></tr>
+<tr class="separator:abef3886384a9b9e722e490268feecc2d inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain" id="r_a3ed63583615d0e8471d95ba13ccc0aff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a3ed63583615d0e8471d95ba13ccc0aff">nmacro_element</a> ()</td></tr>
+<tr class="memdesc:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro elements in domain.  <br /></td></tr>
+<tr class="separator:a3ed63583615d0e8471d95ba13ccc0aff inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain" id="r_a7b0c50db44e3bc3c8ae1a0d34ac835c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a7b0c50db44e3bc3c8ae1a0d34ac835c8">output</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</td></tr>
+<tr class="memdesc:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output macro elements.  <br /></td></tr>
+<tr class="separator:a7b0c50db44e3bc3c8ae1a0d34ac835c8 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain" id="r_ab7ccc375ba2e46ffb11e4e2c5c485578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ab7ccc375ba2e46ffb11e4e2c5c485578">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</td></tr>
+<tr class="memdesc:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output macro elements.  <br /></td></tr>
+<tr class="separator:ab7ccc375ba2e46ffb11e4e2c5c485578 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain" id="r_a10142c029e8a57c5470d22701518e9d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a10142c029e8a57c5470d22701518e9d1">macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at continuous time, t.  <br /></td></tr>
+<tr class="separator:a10142c029e8a57c5470d22701518e9d1 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain" id="r_a9d293b736e74bfeace64c1c8858add8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a9d293b736e74bfeace64c1c8858add8a">macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <br /></td></tr>
+<tr class="separator:a9d293b736e74bfeace64c1c8858add8a inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain" id="r_ac663be35932981a1c02b3ed930ec2eda"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ac663be35932981a1c02b3ed930ec2eda">output_macro_element_boundaries</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</td></tr>
+<tr class="memdesc:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output all macro element boundaries as tecplot zones.  <br /></td></tr>
+<tr class="separator:ac663be35932981a1c02b3ed930ec2eda inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain" id="r_a59dfe3a2cff10aa2e12f86dba9584f15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a59dfe3a2cff10aa2e12f86dba9584f15">output_macro_element_boundaries</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">nplot</a>)</td></tr>
+<tr class="memdesc:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output all macro element boundaries as tecplot zones.  <br /></td></tr>
+<tr class="separator:a59dfe3a2cff10aa2e12f86dba9584f15 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain" id="r_ae573c54363a8e9d33951e59208a9bc39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#ae573c54363a8e9d33951e59208a9bc39">dmacro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at time level t (t=0: present; t&gt;0: previous): f(s). Broken virtual.  <br /></td></tr>
+<tr class="separator:ae573c54363a8e9d33951e59208a9bc39 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain" id="r_af4de3686bcfbf5a8e98b92a071607e0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#af4de3686bcfbf5a8e98b92a071607e0f">dmacro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. Broken virtual.  <br /></td></tr>
+<tr class="separator:af4de3686bcfbf5a8e98b92a071607e0f inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain" id="r_a6973f0ef86b83c6cadcd722374c62270"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a6973f0ef86b83c6cadcd722374c62270">dmacro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <br /></td></tr>
+<tr class="separator:a6973f0ef86b83c6cadcd722374c62270 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain" id="r_afeeb40f9179abe710f14effbe4db42a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#afeeb40f9179abe710f14effbe4db42a1">d2macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at time level t (t=0: present; t&gt;0: previous): f(s). Broken virtual.  <br /></td></tr>
+<tr class="separator:afeeb40f9179abe710f14effbe4db42a1 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain" id="r_a645d0e40b2e378eca3b6230741b21169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a645d0e40b2e378eca3b6230741b21169">d2macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary seocond derivatives i_direct (e.g. N/S/W/E in 2D) at continuous time level t. Broken virtual.  <br /></td></tr>
+<tr class="separator:a645d0e40b2e378eca3b6230741b21169 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain" id="r_a837d82e917451ca9adc755aa99ad99a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a837d82e917451ca9adc755aa99ad99a2">d2macro_element_boundary</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_macro</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">i_direct</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;f)</td></tr>
+<tr class="memdesc:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> representation of the i_macro-th macro element boundary second derivatives i_direct (e.g. N/S/W/E in 2D) at current time: f(s).  <br /></td></tr>
+<tr class="separator:a837d82e917451ca9adc755aa99ad99a2 inherit pub_methods_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a08d97680e95f42a385a869d5c384e610" id="r_a08d97680e95f42a385a869d5c384e610"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a08d97680e95f42a385a869d5c384e610">macro_bound_I_N</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a08d97680e95f42a385a869d5c384e610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a08d97680e95f42a385a869d5c384e610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20898c8b6747cf01e3e92e4a5c6ff5e4" id="r_a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a20898c8b6747cf01e3e92e4a5c6ff5e4">macro_bound_I_S</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a20898c8b6747cf01e3e92e4a5c6ff5e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e43fe342a04c8466a43112e3a48ff3" id="r_a15e43fe342a04c8466a43112e3a48ff3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a15e43fe342a04c8466a43112e3a48ff3">macro_bound_I_W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a15e43fe342a04c8466a43112e3a48ff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a15e43fe342a04c8466a43112e3a48ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0bc6edb7d09bfdb310de99f846f5093" id="r_ac0bc6edb7d09bfdb310de99f846f5093"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ac0bc6edb7d09bfdb310de99f846f5093">macro_bound_I_E</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:ac0bc6edb7d09bfdb310de99f846f5093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:ac0bc6edb7d09bfdb310de99f846f5093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1402c0d3fe42a8ffd6c9fb1d6df9d460" id="r_a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1402c0d3fe42a8ffd6c9fb1d6df9d460">macro_bound_II_N</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a1402c0d3fe42a8ffd6c9fb1d6df9d460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a565166bede89908189cc8e426a898859" id="r_a565166bede89908189cc8e426a898859"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a565166bede89908189cc8e426a898859">macro_bound_II_S</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a565166bede89908189cc8e426a898859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a565166bede89908189cc8e426a898859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa35af75e7a60d3e5d4adf6a8097825e" id="r_afa35af75e7a60d3e5d4adf6a8097825e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#afa35af75e7a60d3e5d4adf6a8097825e">macro_bound_II_W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:afa35af75e7a60d3e5d4adf6a8097825e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:afa35af75e7a60d3e5d4adf6a8097825e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9083a5ac562feb1cd33d78e6cc18b257" id="r_a9083a5ac562feb1cd33d78e6cc18b257"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a9083a5ac562feb1cd33d78e6cc18b257">macro_bound_II_E</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a9083a5ac562feb1cd33d78e6cc18b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a9083a5ac562feb1cd33d78e6cc18b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7f88fb218ceb09f0fde09ba22cd5b9" id="r_a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a8b7f88fb218ceb09f0fde09ba22cd5b9">macro_bound_III_N</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a8b7f88fb218ceb09f0fde09ba22cd5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacdeafe878caadb3e6d0cf98a87df25a" id="r_aacdeafe878caadb3e6d0cf98a87df25a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aacdeafe878caadb3e6d0cf98a87df25a">macro_bound_III_S</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:aacdeafe878caadb3e6d0cf98a87df25a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:aacdeafe878caadb3e6d0cf98a87df25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06ccb5b6d160c3a31acf80174381a834" id="r_a06ccb5b6d160c3a31acf80174381a834"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a06ccb5b6d160c3a31acf80174381a834">macro_bound_III_W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a06ccb5b6d160c3a31acf80174381a834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a06ccb5b6d160c3a31acf80174381a834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af17451c66c723d841aa6f16505c51be3" id="r_af17451c66c723d841aa6f16505c51be3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#af17451c66c723d841aa6f16505c51be3">macro_bound_III_E</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:af17451c66c723d841aa6f16505c51be3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:af17451c66c723d841aa6f16505c51be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d9410d270e27677cb89c5dfe9cc136" id="r_ae8d9410d270e27677cb89c5dfe9cc136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ae8d9410d270e27677cb89c5dfe9cc136">macro_bound_IV_N</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:ae8d9410d270e27677cb89c5dfe9cc136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:ae8d9410d270e27677cb89c5dfe9cc136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a038eba8447f4d1643cd44642294bf43f" id="r_a038eba8447f4d1643cd44642294bf43f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a038eba8447f4d1643cd44642294bf43f">macro_bound_IV_S</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a038eba8447f4d1643cd44642294bf43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a038eba8447f4d1643cd44642294bf43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9da487d185f947a30e03b43d0fc0c9b" id="r_ab9da487d185f947a30e03b43d0fc0c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ab9da487d185f947a30e03b43d0fc0c9b">macro_bound_IV_W</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:ab9da487d185f947a30e03b43d0fc0c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:ab9da487d185f947a30e03b43d0fc0c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c8d718f5da2e6d9d73fe0455bacc0c" id="r_a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a16c8d718f5da2e6d9d73fe0455bacc0c">macro_bound_IV_E</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">j</a>)</td></tr>
+<tr class="memdesc:a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:a16c8d718f5da2e6d9d73fe0455bacc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca0af9c2a638c80bd8af783b9972599" id="r_aaca0af9c2a638c80bd8af783b9972599"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#aaca0af9c2a638c80bd8af783b9972599">slanted_bound_up</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#af6f0bd3dc13317f895c91323c25c2b8f">t</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">zeta</a>, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>)</td></tr>
+<tr class="memdesc:aaca0af9c2a638c80bd8af783b9972599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function.  <br /></td></tr>
+<tr class="separator:aaca0af9c2a638c80bd8af783b9972599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6c1a799bbedc5f0ff08f38088eaedc68" id="r_a6c1a799bbedc5f0ff08f38088eaedc68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a6c1a799bbedc5f0ff08f38088eaedc68">Lright</a></td></tr>
+<tr class="memdesc:a6c1a799bbedc5f0ff08f38088eaedc68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the domain to the right of the leaflet.  <br /></td></tr>
+<tr class="separator:a6c1a799bbedc5f0ff08f38088eaedc68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a50a8a7b274fb1dfc6d18c79ca884cd" id="r_a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a0a50a8a7b274fb1dfc6d18c79ca884cd">Lleft</a></td></tr>
+<tr class="memdesc:a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the domain to the left of the leaflet.  <br /></td></tr>
+<tr class="separator:a0a50a8a7b274fb1dfc6d18c79ca884cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75ce3248efae5c33a9c9989b2f310139" id="r_a75ce3248efae5c33a9c9989b2f310139"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a75ce3248efae5c33a9c9989b2f310139">Hleaflet</a></td></tr>
+<tr class="memdesc:a75ce3248efae5c33a9c9989b2f310139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lagrangian coordinate at end of leaflet.  <br /></td></tr>
+<tr class="separator:a75ce3248efae5c33a9c9989b2f310139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32b0daa71b42d34aec81c7e3d25cb98" id="r_ad32b0daa71b42d34aec81c7e3d25cb98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ad32b0daa71b42d34aec81c7e3d25cb98">Htot</a></td></tr>
+<tr class="memdesc:ad32b0daa71b42d34aec81c7e3d25cb98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total width of the channel.  <br /></td></tr>
+<tr class="separator:ad32b0daa71b42d34aec81c7e3d25cb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11aac62965f9bcb7d4c0043669b28f15" id="r_a11aac62965f9bcb7d4c0043669b28f15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a11aac62965f9bcb7d4c0043669b28f15">Nright</a></td></tr>
+<tr class="memdesc:a11aac62965f9bcb7d4c0043669b28f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element columnns to the right of the leaflet.  <br /></td></tr>
+<tr class="separator:a11aac62965f9bcb7d4c0043669b28f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0abd8837f9f0924b801d2fb78c69532" id="r_ad0abd8837f9f0924b801d2fb78c69532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#ad0abd8837f9f0924b801d2fb78c69532">Nleft</a></td></tr>
+<tr class="memdesc:ad0abd8837f9f0924b801d2fb78c69532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element columns to the left of the leaflet.  <br /></td></tr>
+<tr class="separator:ad0abd8837f9f0924b801d2fb78c69532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6393ef6e626d7a2f2a8ea70c8addbe" id="r_a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a3c6393ef6e626d7a2f2a8ea70c8addbe">Ny1</a></td></tr>
+<tr class="memdesc:a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element rows up to the end of the leaflet.  <br /></td></tr>
+<tr class="separator:a3c6393ef6e626d7a2f2a8ea70c8addbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1596a538b4263b42d20f9c098c5f2752" id="r_a1596a538b4263b42d20f9c098c5f2752"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a1596a538b4263b42d20f9c098c5f2752">Ny2</a></td></tr>
+<tr class="memdesc:a1596a538b4263b42d20f9c098c5f2752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of macro element rows above the leaflet.  <br /></td></tr>
+<tr class="separator:a1596a538b4263b42d20f9c098c5f2752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165703af81538c28bbbd780d65bbb333" id="r_a165703af81538c28bbbd780d65bbb333"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a165703af81538c28bbbd780d65bbb333">X_0</a></td></tr>
+<tr class="memdesc:a165703af81538c28bbbd780d65bbb333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Center of the domain : origin of the leaflet, extracted from <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> and stored for fast access.  <br /></td></tr>
+<tr class="separator:a165703af81538c28bbbd780d65bbb333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08a8eb7078cdc788dc7643e09e7405fb" id="r_a08a8eb7078cdc788dc7643e09e7405fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ChannelWithLeafletDomain.html#a08a8eb7078cdc788dc7643e09e7405fb">Leaflet_pt</a></td></tr>
+<tr class="memdesc:a08a8eb7078cdc788dc7643e09e7405fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to leaflet.  <br /></td></tr>
+<tr class="separator:a08a8eb7078cdc788dc7643e09e7405fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1Domain"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1Domain')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1Domain.html">oomph::Domain</a></td></tr>
+<tr class="memitem:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain" id="r_a3a54693bb493f31acccadc62468dd7ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1MacroElement.html">MacroElement</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Domain.html#a3a54693bb493f31acccadc62468dd7ae">Macro_element_pt</a></td></tr>
+<tr class="memdesc:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to macro elements.  <br /></td></tr>
+<tr class="separator:a3a54693bb493f31acccadc62468dd7ae inherit pro_attribs_classoomph_1_1Domain"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rectangular domain with a leaflet blocking the lower half. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00040">40</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6cca7d06136de0c76facec2a92b0939e" name="a6cca7d06136de0c76facec2a92b0939e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cca7d06136de0c76facec2a92b0939e">&#9670;&#160;</a></span>ChannelWithLeafletDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ChannelWithLeafletDomain::ChannelWithLeafletDomain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>leaflet_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lleft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>lright</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>hleaflet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>htot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nleft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nright</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>ny2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> that represents the leaflet, the length of the domain to left and right of the leaflet, the height of the leaflet and the overall height of the channel, the number of element columns to the left and right of the leaflet, the number of rows of elements from the bottom of the channel to the end of the leaflet, the number of rows of elements above the end of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">51</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00100">hleaflet()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00094">htot()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00118">leaflet_pt()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00106">lleft()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00112">lright()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>, <a class="el" href="domain_8h_source.html#l00301">oomph::Domain::Macro_element_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">Ny2</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+</div>
+</div>
+<a id="a7f00e3d9ed53ca70519671446fe60510" name="a7f00e3d9ed53ca70519671446fe60510"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f00e3d9ed53ca70519671446fe60510">&#9670;&#160;</a></span>~ChannelWithLeafletDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::ChannelWithLeafletDomain::~ChannelWithLeafletDomain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty; cleanup done in base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00091">91</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af70ada72d505ebea468d1000b04c20e1" name="af70ada72d505ebea468d1000b04c20e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af70ada72d505ebea468d1000b04c20e1">&#9670;&#160;</a></span>hleaflet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::hleaflet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Height of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00100">100</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aaf195c688423473ed97af61f8a1467ab" name="aaf195c688423473ed97af61f8a1467ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf195c688423473ed97af61f8a1467ab">&#9670;&#160;</a></span>htot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::htot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total height of domain (width of channel) </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00094">94</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a5b84ffb4aa9c9b53cafdd14ce1b0967e" name="a5b84ffb4aa9c9b53cafdd14ce1b0967e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b84ffb4aa9c9b53cafdd14ce1b0967e">&#9670;&#160;</a></span>leaflet_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a> *&amp; oomph::ChannelWithLeafletDomain::leaflet_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the wall. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00118">118</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="a5538092062970dbd2f02218a05639d49" name="a5538092062970dbd2f02218a05639d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5538092062970dbd2f02218a05639d49">&#9670;&#160;</a></span>lleft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::lleft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of domain to the left of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00106">106</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="aee74846110e70cd5538386e1ccb0ce7c" name="aee74846110e70cd5538386e1ccb0ce7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee74846110e70cd5538386e1ccb0ce7c">&#9670;&#160;</a></span>lright()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::lright </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of domain to the right of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00112">112</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>.</p>
+
+</div>
+</div>
+<a id="ac0bc6edb7d09bfdb310de99f846f5093" name="ac0bc6edb7d09bfdb310de99f846f5093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0bc6edb7d09bfdb310de99f846f5093">&#9670;&#160;</a></span>macro_bound_I_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_I_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in lower left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">411</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00495">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00517">macro_bound_I_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a08d97680e95f42a385a869d5c384e610" name="a08d97680e95f42a385a869d5c384e610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08d97680e95f42a385a869d5c384e610">&#9670;&#160;</a></span>macro_bound_I_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_I_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in lower left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00495">495</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a20898c8b6747cf01e3e92e4a5c6ff5e4" name="a20898c8b6747cf01e3e92e4a5c6ff5e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20898c8b6747cf01e3e92e4a5c6ff5e4">&#9670;&#160;</a></span>macro_bound_I_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_I_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in lower left region. </p>
+<p>Find the coordinates of the two corners of the south boundary</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00517">517</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a15e43fe342a04c8466a43112e3a48ff3" name="a15e43fe342a04c8466a43112e3a48ff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e43fe342a04c8466a43112e3a48ff3">&#9670;&#160;</a></span>macro_bound_I_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_I_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in lower left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">453</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00495">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00517">macro_bound_I_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a9083a5ac562feb1cd33d78e6cc18b257" name="a9083a5ac562feb1cd33d78e6cc18b257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9083a5ac562feb1cd33d78e6cc18b257">&#9670;&#160;</a></span>macro_bound_II_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_II_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in lower right region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">546</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00633">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00655">macro_bound_II_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1402c0d3fe42a8ffd6c9fb1d6df9d460" name="a1402c0d3fe42a8ffd6c9fb1d6df9d460"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1402c0d3fe42a8ffd6c9fb1d6df9d460">&#9670;&#160;</a></span>macro_bound_II_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_II_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00633">633</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a565166bede89908189cc8e426a898859" name="a565166bede89908189cc8e426a898859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a565166bede89908189cc8e426a898859">&#9670;&#160;</a></span>macro_bound_II_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_II_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00655">655</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="afa35af75e7a60d3e5d4adf6a8097825e" name="afa35af75e7a60d3e5d4adf6a8097825e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa35af75e7a60d3e5d4adf6a8097825e">&#9670;&#160;</a></span>macro_bound_II_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_II_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in lower right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">589</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00633">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00655">macro_bound_II_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="af17451c66c723d841aa6f16505c51be3" name="af17451c66c723d841aa6f16505c51be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af17451c66c723d841aa6f16505c51be3">&#9670;&#160;</a></span>macro_bound_III_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_III_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in upper left region. </p>
+<p>Final expression of r</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">705</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">Ny2</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00793">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00815">macro_bound_III_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a8b7f88fb218ceb09f0fde09ba22cd5b9" name="a8b7f88fb218ceb09f0fde09ba22cd5b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7f88fb218ceb09f0fde09ba22cd5b9">&#9670;&#160;</a></span>macro_bound_III_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_III_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00793">793</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="aacdeafe878caadb3e6d0cf98a87df25a" name="aacdeafe878caadb3e6d0cf98a87df25a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacdeafe878caadb3e6d0cf98a87df25a">&#9670;&#160;</a></span>macro_bound_III_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_III_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00815">815</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a06ccb5b6d160c3a31acf80174381a834" name="a06ccb5b6d160c3a31acf80174381a834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06ccb5b6d160c3a31acf80174381a834">&#9670;&#160;</a></span>macro_bound_III_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_III_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in upper left region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">749</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">Lleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">Ny2</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00793">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00815">macro_bound_III_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a16c8d718f5da2e6d9d73fe0455bacc0c" name="a16c8d718f5da2e6d9d73fe0455bacc0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c8d718f5da2e6d9d73fe0455bacc0c">&#9670;&#160;</a></span>macro_bound_IV_E()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_IV_E </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for eastern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">844</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">Ny2</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00932">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ae8d9410d270e27677cb89c5dfe9cc136" name="ae8d9410d270e27677cb89c5dfe9cc136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d9410d270e27677cb89c5dfe9cc136">&#9670;&#160;</a></span>macro_bound_IV_N()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_IV_N </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for northern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00932">932</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a038eba8447f4d1643cd44642294bf43f" name="a038eba8447f4d1643cd44642294bf43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a038eba8447f4d1643cd44642294bf43f">&#9670;&#160;</a></span>macro_bound_IV_S()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_IV_S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for southern boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">954</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ab9da487d185f947a30e03b43d0fc0c9b" name="ab9da487d185f947a30e03b43d0fc0c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9da487d185f947a30e03b43d0fc0c9b">&#9670;&#160;</a></span>macro_bound_IV_W()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_bound_IV_W </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Helper function for western boundary in upper right region. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">888</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">Lright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">Ny2</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00932">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="ae4b123847f4ab6e242a0409d72fe5cbd" name="ae4b123847f4ab6e242a0409d72fe5cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b123847f4ab6e242a0409d72fe5cbd">&#9670;&#160;</a></span>macro_element_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::macro_element_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>imacro</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>idirect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrisation of macro element boundaries. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Domain.html#a95f3e00d28ea37e6c4d3027bfac91096">oomph::Domain</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">282</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00495">macro_bound_I_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00517">macro_bound_I_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00633">macro_bound_II_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00655">macro_bound_II_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00793">macro_bound_III_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00815">macro_bound_III_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00932">macro_bound_IV_N()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00954">macro_bound_IV_S()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">Nleft</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">Nright</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">Ny1</a>, and <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
+
+</div>
+</div>
+<a id="aaca0af9c2a638c80bd8af783b9972599" name="aaca0af9c2a638c80bd8af783b9972599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaca0af9c2a638c80bd8af783b9972599">&#9670;&#160;</a></span>slanted_bound_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::ChannelWithLeafletDomain::slanted_bound_up </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function. </p>
+<p>Describe the line between the boundary north of the domain (at x=X_0) and the top of the wall, when zeta goes from 0 to 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">685</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">References <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">Hleaflet</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">Htot</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">Leaflet_pt</a>, <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject::position()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">X_0</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a75ce3248efae5c33a9c9989b2f310139" name="a75ce3248efae5c33a9c9989b2f310139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ce3248efae5c33a9c9989b2f310139">&#9670;&#160;</a></span>Hleaflet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::Hleaflet</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lagrangian coordinate at end of leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00254">254</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00100">hleaflet()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="ad32b0daa71b42d34aec81c7e3d25cb98" name="ad32b0daa71b42d34aec81c7e3d25cb98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32b0daa71b42d34aec81c7e3d25cb98">&#9670;&#160;</a></span>Htot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::Htot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Total width of the channel. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00257">257</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00094">htot()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="a08a8eb7078cdc788dc7643e09e7405fb" name="a08a8eb7078cdc788dc7643e09e7405fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a8eb7078cdc788dc7643e09e7405fb">&#9670;&#160;</a></span>Leaflet_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeomObject.html">GeomObject</a>* oomph::ChannelWithLeafletDomain::Leaflet_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00276">276</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00118">leaflet_pt()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<a id="a0a50a8a7b274fb1dfc6d18c79ca884cd" name="a0a50a8a7b274fb1dfc6d18c79ca884cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a50a8a7b274fb1dfc6d18c79ca884cd">&#9670;&#160;</a></span>Lleft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::Lleft</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of the domain to the left of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00251">251</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00106">lleft()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>.</p>
+
+</div>
+</div>
+<a id="a6c1a799bbedc5f0ff08f38088eaedc68" name="a6c1a799bbedc5f0ff08f38088eaedc68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1a799bbedc5f0ff08f38088eaedc68">&#9670;&#160;</a></span>Lright</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::Lright</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of the domain to the right of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00248">248</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00112">lright()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<a id="ad0abd8837f9f0924b801d2fb78c69532" name="ad0abd8837f9f0924b801d2fb78c69532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0abd8837f9f0924b801d2fb78c69532">&#9670;&#160;</a></span>Nleft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::ChannelWithLeafletDomain::Nleft</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element columns to the left of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00263">263</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a11aac62965f9bcb7d4c0043669b28f15" name="a11aac62965f9bcb7d4c0043669b28f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11aac62965f9bcb7d4c0043669b28f15">&#9670;&#160;</a></span>Nright</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::ChannelWithLeafletDomain::Nright</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element columnns to the right of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00260">260</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a3c6393ef6e626d7a2f2a8ea70c8addbe" name="a3c6393ef6e626d7a2f2a8ea70c8addbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c6393ef6e626d7a2f2a8ea70c8addbe">&#9670;&#160;</a></span>Ny1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::ChannelWithLeafletDomain::Ny1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element rows up to the end of the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00266">266</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00282">macro_element_boundary()</a>.</p>
+
+</div>
+</div>
+<a id="a1596a538b4263b42d20f9c098c5f2752" name="a1596a538b4263b42d20f9c098c5f2752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1596a538b4263b42d20f9c098c5f2752">&#9670;&#160;</a></span>Ny2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::ChannelWithLeafletDomain::Ny2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of macro element rows above the leaflet. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00269">269</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>.</p>
+
+</div>
+</div>
+<a id="a165703af81538c28bbbd780d65bbb333" name="a165703af81538c28bbbd780d65bbb333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a165703af81538c28bbbd780d65bbb333">&#9670;&#160;</a></span>X_0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::ChannelWithLeafletDomain::X_0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Center of the domain : origin of the leaflet, extracted from <a class="el" href="classoomph_1_1GeomObject.html" title="A geometric object is an object that provides a parametrised description of its shape via the functio...">GeomObject</a> and stored for fast access. </p>
+
+<p class="definition">Definition at line <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00273">273</a> of file <a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00051">ChannelWithLeafletDomain()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00411">macro_bound_I_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00453">macro_bound_I_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00546">macro_bound_II_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00589">macro_bound_II_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00705">macro_bound_III_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00749">macro_bound_III_W()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00844">macro_bound_IV_E()</a>, <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00888">macro_bound_IV_W()</a>, and <a class="el" href="channel__with__leaflet__domain_8h_source.html#l00685">slanted_bound_up()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="channel__with__leaflet__domain_8h_source.html">channel_with_leaflet_domain.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:40
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

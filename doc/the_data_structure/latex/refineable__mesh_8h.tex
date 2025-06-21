@@ -1,0 +1,20 @@
+\doxysection{refineable\+\_\+mesh.\+h File Reference}
+\hypertarget{refineable__mesh_8h}{}\label{refineable__mesh_8h}\index{refineable\_mesh.h@{refineable\_mesh.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableMeshBase}{oomph\+::\+Refineable\+Mesh\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for refineable meshes. Provides standardised interfaces for the following standard mesh adaptation routines\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for tree-\/based refineable meshes. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1TreeBasedRefineableMeshBase_1_1HangHelperStruct}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Hang\+Helper\+Struct}}
+\begin{DoxyCompactList}\small\item\em Helper struct to collate data required during \doxylink{classoomph_1_1TreeBasedRefineableMeshBase_a0ba902eb4b63aaa8c4da1aadcf25709a}{Tree\+Based\+Refineable\+Mesh\+Base\+::synchronise\+\_\+hanging\+\_\+nodes}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Templated base class for refineable meshes. The use of the template parameter is required only for creating new elements during mesh adaptation. This class overloaded the template-\/free inteface to the function \doxylink{classoomph_1_1TreeBasedRefineableMesh_a43f134cb974f25f25d5ddfa88d56ef95}{split\+\_\+elements\+\_\+if\+\_\+required()} to make use of the template parameter. All refineable meshes should inherit directly from Tree\+Based\+Refineable\+Mesh$<$\+ELEMENT$>$ \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableTetMeshBase}{oomph\+::\+Refineable\+Tet\+Mesh\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for refineable tet meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

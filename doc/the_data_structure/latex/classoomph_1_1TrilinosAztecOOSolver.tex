@@ -1,0 +1,1037 @@
+\doxysection{oomph\+::Trilinos\+Aztec\+OOSolver Class Reference}
+\hypertarget{classoomph_1_1TrilinosAztecOOSolver}{}\label{classoomph_1_1TrilinosAztecOOSolver}\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+
+
+An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \doxylink{classoomph_1_1CG}{CG}, \doxylink{classoomph_1_1GMRES}{GMRES} or \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab}) can be set using \doxylink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type()}. This solver can be preconditioned with Trilinos Preconditioners (derived from \doxylink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}) or Oomph-\/lib preconditioners (derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}). Preconditioners are set using \doxylink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt()}.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+solver.\+h$>$}
+
+Inheritance diagram for oomph\+::Trilinos\+Aztec\+OOSolver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TrilinosAztecOOSolver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958}{Aztec\+OO\+\_\+solver\+\_\+types}} \{ \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a444cf8d677f36a05433c69812a4d1e20}{CG}}
+, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a1729a0500bca95c117f5795d06b83bb4}{GMRES}}
+, \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958ac6422728788cf5c341d1e3e988b4fc7d}{Bi\+CGStab}}
+ \}
+\begin{DoxyCompactList}\small\item\em if this solver is using an oomph-\/lib preconditioner then the vectors passed to preconditioner\+\_\+solve(...) should be using the values in the epetra vector as external data. If the vectors are using external data then rebuild(...) methods cannot be used be used in the preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a2abd3c0ee288fdaceefbde6f4e854e2c}{Trilinos\+Aztec\+OOSolver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7b06c1e69e25f407083453f98cfdb144}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Aztec\+OOSolver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ delete the solver and the matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aa29c842b4a8abe16e50c9e371557b2f8}{Trilinos\+Aztec\+OOSolver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ae78dde00323507932c4103723dec10fa}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aa3cd029cc48f36cc41d75e8c83faa037}{enable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Enable workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1af343aeeb7c}{disable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Disable workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be}{is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled}} ()
+\begin{DoxyCompactList}\small\item\em Is workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Clean up method -\/ deletes the solver, the matrices and the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Aztec\+OO solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em Function to solve the linear system defined by matrix\+\_\+pt and rhs. {\bfseries{NOTE}} 1. The matrix has to be of type \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix. {\bfseries{NOTE}} 2. This function will delete any existing internal data and generate a new Aztec\+OO solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a022f537f95c0bf352bab739f2f58bd7f}{resolve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{solution}})
+\begin{DoxyCompactList}\small\item\em Function to resolve a linear system using the existing solver data, allowing a solve with a new right hand side vector. This function must be used after a call to solve(...) with enable\+\_\+resolve set to true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}{disable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Disable resolve function (overloads the \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} disable\+\_\+resolve function). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2cdb00e05ff87}{enable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Call if the matrix can be deleted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6}{disable\+\_\+delete\+\_\+matrix}} ()
+\begin{DoxyCompactList}\small\item\em Call if the matrix can not be deleted (default) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max\+\_\+iter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}{iterations}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Acess function to Iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Solver\+\_\+type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f}{jacobian\+\_\+setup\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Function to return Jacobian\+\_\+setup\+\_\+time;. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a88cf6614457b404e38c6aed2e5d41257}{linear\+\_\+solver\+\_\+solution\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Function to return Linear\+\_\+solver\+\_\+solution\+\_\+time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a80de34d99eff7b2ad41af3e04229a55b}{enable\+\_\+assemble\+\_\+serial\+\_\+jacobian}} ()
+\begin{DoxyCompactList}\small\item\em Set the assembly of the serial jacobian when performing a problem-\/based solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a9f79dc6d711d4052ee61cb305da226db}{disable\+\_\+assemble\+\_\+serial\+\_\+jacobian}} ()
+\begin{DoxyCompactList}\small\item\em Unset the assembly of the serial jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a77f4a929d741d4996f02d2c2b75670cd}{Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Set (default) trivial preconditioner and set defaults for tolerance and max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ac6a4aa16ecb477418b49ee1efb3279b0}{Iterative\+Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_abc48956500beae92fec8807842f5d5de}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a655eb19872606c2d05e8ee87a4fb6bc5}{\texorpdfstring{$\sim$}{\string~}\+Iterative\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad5c3f3218779658f3233fa04f78aec8c}{preconditioner\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to preconditioner (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7be3c4ea16f1fc9b397e7c87eae253d8}{tolerance}} ()
+\begin{DoxyCompactList}\small\item\em Access to convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a6ad71be9573148c533d17b2f26e8c4cb}{max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Access to max. number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a57419aaa61fde5b7f802454a4ec396cd}{enable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a7a5b846d3df565490022348a53bbf511}{disable\+\_\+doc\+\_\+convergence\+\_\+history}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of the convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a1c5e176ff2c767f2dc2168f9789f9c8f}{open\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zone\+\_\+title}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Write convergence history into file with specified filename (automatically switches on doc). Optional second argument is a string that can be used (as a zone title) to identify what case we\textquotesingle{}re running (e.\+g. what combination of linear solver and preconditioner or parameter values are used). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a27ef8fa59ce805c221a577c6b9bb56c7}{close\+\_\+convergence\+\_\+history\+\_\+file\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Close convergence history output stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aed10c606a26c8084e1fa482f3409f9b3}{jacobian\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the time taken to assemble the jacobian matrix and residual vector \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a65544b6c2090d3d019f48e047e338352}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a87eb959944a3e8efa467d60aed43a0d3}{preconditioner\+\_\+setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em returns the the time taken to setup the preconditioner \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a448830993c9046443cfa7479901cc307}{enable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_adbbfd63d0da5f82abc6cd1143fa5a9b0}{disable\+\_\+setup\+\_\+preconditioner\+\_\+before\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t set up the preconditioner before the solve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a68983fd17ca417843b9ba3f810dbdc99}{enable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Throw an error if we don\textquotesingle{}t converge within max\+\_\+iter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a4b6ee927fcefefee7271798a6ed6f5af}{disable\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}} ()
+\begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t throw an error if we don\textquotesingle{}t converge within max\+\_\+iter (default). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5992bf9fde252add8d3be2970093905b}{enable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Enables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a96b5e3f30fd7bdc9b52a22cdac02a570}{disable\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Disables the iterative solver be used as preconditioner (when calling the solve method it bypass the setup solver method -- currently only used by Trilinos solver ---) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6e7e8728f36c888f052e49df8624b8ca}{Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor, initialise the member data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearSolver_a6c4dba96b243e3e9be1ef6bdb9440d23}{Linear\+Solver}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a0b342cfa595300cb8227665382929e8b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9cc9b2c9a239777c4f9b15f26bb324a0}{\texorpdfstring{$\sim$}{\string~}\+Linear\+Solver}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_abeb9ef9127e927bf6df75d03645d6a81}{enable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Enable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a91ffe51f3de82dad1a110c099f256d73}{disable\+\_\+doc\+\_\+time}} ()
+\begin{DoxyCompactList}\small\item\em Disable documentation of solve times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a451ce3af5db82f9edbddf8f417597248}{is\+\_\+doc\+\_\+time\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Is documentation of solve times enabled? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ae1e4d34a7e2b1537d36153f87e8a62a6}{is\+\_\+resolve\+\_\+enabled}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Boolean flag indicating if resolves are enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a3000ebd9becb3468d8a6a821a9cc0cd9}{enable\+\_\+resolve}} ()
+\begin{DoxyCompactList}\small\item\em Enable resolve (i.\+e. store matrix and/or LU decomposition, say) Virtual so it can be overloaded to perform additional tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3dafc20a61ca2f52dbb}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector (broken virtual). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a499b738758451f94df398d8d2556ae76}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{resolve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{result}})
+\begin{DoxyCompactList}\small\item\em Solver\+: Resolve the system defined by the last assembled jacobian and the rhs vector. Solution is returned in the vector result. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115e649739abd5d2f5d}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a8bc045e20074cb9b45ab3f304d037fc6}{disable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to disable the computation of the gradient required for the globally convergent Newton method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aceef502cbdf826cdf6aa31f5803982e0}{reset\+\_\+gradient}} ()
+\begin{DoxyCompactList}\small\item\em function to reset the size of the gradient before each Newton solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a6733411e85f0a1d6d82200c802481681}{get\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{gradient}})
+\begin{DoxyCompactList}\small\item\em function to access the gradient, provided it has been computed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a419638218c26238bab55674304c5fc98}{solve\+\_\+using\+\_\+\+Aztec\+OO}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function performs the actual solve once the Aztec\+OO solver is set up. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}{solver\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&matrix\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function for setting up the solver. Converts the oomph-\/lib matrices to Epetra matrices, sets up the preconditioner, creates the Trilinos Aztec00 solver and passes in the matrix, preconditioner and parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aead1067bb965649abddcf0af0e2d47f7}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Use workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a26a9366d3ec0f11e7e907587c0439ea7}{Iterations}}
+\begin{DoxyCompactList}\small\item\em Stores number of iterations used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Aztec\+OO}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ad71b280c5af25e35e0f9da8cd68228cf}{Aztec\+OO\+\_\+solver\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the Aztec\+OO solver. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_afec53c52f4fcab981eb0ed7244d750de}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Stores set up time for Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_ab2373a8cdd5c27d2ac099ad8444dfbb7}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Stores time for the solution (excludes time to set up preconditioner) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a6cd6d4719412c7ebf01bfb6cb4fddfcc}{Delete\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Trilinos copies matrix data from oomph-\/lib\textquotesingle{}s own \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix to Trilinos\textquotesingle{}s Epetra format -\/ the Trilinos solver no longer requires the oomph-\/lib matrices and therefore they could be deleted to save memory. This must be requested explicitly by setting this flag to TRUE. {\bfseries{NOTE\+:}} The matrix is deleted after the preconditioner is setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a3bfc11cd816eee847f102327ae4315aa}{Assemble\+\_\+serial\+\_\+jacobian}}
+\begin{DoxyCompactList}\small\item\em If true, when performing a problem based solve a serial matrix will be requested from Problem\+::get\+\_\+jacobian(...). Defaults to true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_aaa1ffdf657c54fbd5cfa097cc962050c}{Solver\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Defines which solver is set up -\/ available types are defined in Aztec\+OO\+\_\+solver\+\_\+types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a015ad0b4207515558d270ef08a213125}{Using\+\_\+problem\+\_\+based\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Helper flag keeping track of whether we called the linear algebra or problem-\/based solve function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a2d0905cb4a63b119e784a5caee458691}{Epetra\+\_\+matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A pointer for the linear system matrix in Epetra\+\_\+\+Crs\+Matrix format. \end{DoxyCompactList}\item 
+Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a7a419b3a461f998608dcc9b868fb0a89}{Epetra\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A pointer to the Epetra\+\_\+\+Operator for the preconditioner. This is only used if the preconditioner NOT a Trilinos preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a71d7437b0502f3be59f64258e0af458e}{Oomph\+\_\+matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Oomph lib matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_abc6a63eb67694f7ac5dfc8505a8b9a5f}{Problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em A pointer to the underlying problem (NULL if MATRIX based solve) The problem\+\_\+pt is stored here in a problem based solve for the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590aa71d4a879e8}{If\+\_\+oomphlib\+\_\+preconditioner\+\_\+use\+\_\+epetra\+\_\+values}}
+\begin{DoxyCompactList}\small\item\em if this solver is using an oomph-\/lib preconditioner then the vectors passed to preconditioner\+\_\+solve(...) should be using the values in the epetra vector as external data. If the vectors are using external data then rebuild(...) methods cannot be used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_aeb0fbe103e721196232260230abb1997}{Doc\+\_\+convergence\+\_\+history}}
+\begin{DoxyCompactList}\small\item\em Flag indicating if the convergence history is to be documented. \end{DoxyCompactList}\item 
+std\+::ofstream \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ad4d6766bec67399c29392e6540b91dd9}{Output\+\_\+file\+\_\+stream}}
+\begin{DoxyCompactList}\small\item\em Output file stream for convergence history. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a46dd6b0243c734a77afce3c44cf4597d}{Tolerance}}
+\begin{DoxyCompactList}\small\item\em Convergence tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a9bdc42768d009b093fd7bc23647dc989}{Max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Maximum number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a55111d8d76589944d81d13b5e15f7248}{Preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a82a12e45c78e910b46e9d0935beb8f0d}{Jacobian\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Jacobian setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_ab90d7e7780e709946dd0540a146186b5}{Solution\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em linear solver solution time \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8022e90c9c7c720a0bacf9d090c81a10}{Preconditioner\+\_\+setup\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} setup time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_af0344cc8a3a850f160973f1d44bf20f2}{Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em indicates whether the preconditioner should be setup before solve. Default = true; \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a76284ada37aafb9ab39836907569c7b2}{Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}
+\begin{DoxyCompactList}\small\item\em Should we throw an error instead of just returning when we hit the max iterations? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a10af0af774e98543b7ecd6a563018ff8}{Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Use the iterative solver as preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a18f24e4d07f783ddd1f6a8153f39024a}{First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em When the iterative solver is used a preconditioner then we call the setup of solver method only once (the first time the solve method is called) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1LinearSolver}{oomph\+::\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a5f5e7e7a44ff0897b0e4cd9524000edc}{Enable\+\_\+resolve}}
+\begin{DoxyCompactList}\small\item\em Boolean that indicates whether the matrix (or its factors, in the case of direct solver) should be stored so that the resolve function can be used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a536e41b50b3f3464ca9cb4a5776acc19}{Doc\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Boolean flag that indicates whether the time taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_aef857e4c0c16e8b342a14493e558bb15}{Compute\+\_\+gradient}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient required for the globally convergent Newton method should be computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1LinearSolver_a9fd3bf9a5a94dcc23b7d903f99535e72}{Gradient\+\_\+has\+\_\+been\+\_\+computed}}
+\begin{DoxyCompactList}\small\item\em flag that indicates whether the gradient was computed or not \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \mbox{\hyperlink{classoomph_1_1LinearSolver_ad38255ae12611787a857cc5c90ffa9f8}{Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1DoubleVector}{Double\+Vector} storing the gradient for the globally convergent Newton method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{oomph\+::\+Iterative\+Linear\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}} \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a8393d99578cbee0fdb937ddec34be74c}{Default\+\_\+preconditioner}}
+\begin{DoxyCompactList}\small\item\em Default preconditioner\+: The base class for preconditioners is a fully functional (if trivial!) preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An interface to the Trilinos Aztec\+OO classes allowing it to be used as an Oomph-\/lib \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver}. The Aztec\+OO solver is a Krylov Subspace solver; the solver type (either \doxylink{classoomph_1_1CG}{CG}, \doxylink{classoomph_1_1GMRES}{GMRES} or \doxylink{classoomph_1_1BiCGStab}{Bi\+CGStab}) can be set using \doxylink{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}{solver\+\_\+type()}. This solver can be preconditioned with Trilinos Preconditioners (derived from \doxylink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}) or Oomph-\/lib preconditioners (derived from \doxylink{classoomph_1_1Preconditioner}{Preconditioner}). Preconditioners are set using \doxylink{classoomph_1_1IterativeLinearSolver_ad4ae617ce8304f17bd42f4dc39813e22}{preconditioner\+\_\+pt()}. 
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00266}{266}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958}\label{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!AztecOO\_solver\_types@{AztecOO\_solver\_types}}
+\index{AztecOO\_solver\_types@{AztecOO\_solver\_types}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{AztecOO\_solver\_types}{AztecOO\_solver\_types}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Aztec\+OO\+\_\+solver\+\_\+types}}}
+
+
+
+if this solver is using an oomph-\/lib preconditioner then the vectors passed to preconditioner\+\_\+solve(...) should be using the values in the epetra vector as external data. If the vectors are using external data then rebuild(...) methods cannot be used be used in the preconditioner. 
+
+Enumerated list to define which Aztec\+OO solver is used \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CG@{CG}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!CG@{CG}}}\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a444cf8d677f36a05433c69812a4d1e20}\label{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a444cf8d677f36a05433c69812a4d1e20} 
+CG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GMRES@{GMRES}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!GMRES@{GMRES}}}\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a1729a0500bca95c117f5795d06b83bb4}\label{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958a1729a0500bca95c117f5795d06b83bb4} 
+GMRES&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BiCGStab@{BiCGStab}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!BiCGStab@{BiCGStab}}}\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958ac6422728788cf5c341d1e3e988b4fc7d}\label{classoomph_1_1TrilinosAztecOOSolver_a8a9d76e6cfa1594b150de04413c0f958ac6422728788cf5c341d1e3e988b4fc7d} 
+Bi\+CGStab&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00483}{483}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a2abd3c0ee288fdaceefbde6f4e854e2c}\label{classoomph_1_1TrilinosAztecOOSolver_a2abd3c0ee288fdaceefbde6f4e854e2c} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!TrilinosAztecOOSolver@{TrilinosAztecOOSolver}}
+\index{TrilinosAztecOOSolver@{TrilinosAztecOOSolver}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{TrilinosAztecOOSolver()}{TrilinosAztecOOSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Trilinos\+Aztec\+OOSolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{270}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00486}{GMRES}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00556}{If\+\_\+oomphlib\+\_\+preconditioner\+\_\+use\+\_\+epetra\+\_\+values}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{Problem\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7b06c1e69e25f407083453f98cfdb144}\label{classoomph_1_1TrilinosAztecOOSolver_a7b06c1e69e25f407083453f98cfdb144} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!````~TrilinosAztecOOSolver@{\texorpdfstring{$\sim$}{\string~}TrilinosAztecOOSolver}}
+\index{````~TrilinosAztecOOSolver@{\texorpdfstring{$\sim$}{\string~}TrilinosAztecOOSolver}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrilinosAztecOOSolver()}{\string~TrilinosAztecOOSolver()}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Aztec\+OOSolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor -\/ delete the solver and the matrices. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{304}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aa29c842b4a8abe16e50c9e371557b2f8}\label{classoomph_1_1TrilinosAztecOOSolver_aa29c842b4a8abe16e50c9e371557b2f8} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!TrilinosAztecOOSolver@{TrilinosAztecOOSolver}}
+\index{TrilinosAztecOOSolver@{TrilinosAztecOOSolver}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{TrilinosAztecOOSolver()}{TrilinosAztecOOSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Trilinos\+Aztec\+OOSolver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59}\label{classoomph_1_1TrilinosAztecOOSolver_a365a39ae1dec32eb78aa160b70426f59} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Clean up method -\/ deletes the solver, the matrices and the preconditioner. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06a365f98216afd85f}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{347}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{preconditioner_8h_source_l00147}{oomph\+::\+Preconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00095}{oomph\+::\+Iterative\+Linear\+Solver\+::preconditioner\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00405}{disable\+\_\+resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a9f79dc6d711d4052ee61cb305da226db}\label{classoomph_1_1TrilinosAztecOOSolver_a9f79dc6d711d4052ee61cb305da226db} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_assemble\_serial\_jacobian@{disable\_assemble\_serial\_jacobian}}
+\index{disable\_assemble\_serial\_jacobian@{disable\_assemble\_serial\_jacobian}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_assemble\_serial\_jacobian()}{disable\_assemble\_serial\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::disable\+\_\+assemble\+\_\+serial\+\_\+jacobian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unset the assembly of the serial jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00467}{467}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1af343aeeb7c}\label{classoomph_1_1TrilinosAztecOOSolver_a25ba106bb6f1cd4b99dd1af343aeeb7c} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
+\index{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup()}{disable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::disable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Disable workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00333}{333}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6}\label{classoomph_1_1TrilinosAztecOOSolver_a6df71e8dd3967f17d39142696f71aef6} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_delete\_matrix@{disable\_delete\_matrix}}
+\index{disable\_delete\_matrix@{disable\_delete\_matrix}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_delete\_matrix()}{disable\_delete\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::disable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call if the matrix can not be deleted (default) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00418}{418}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4}\label{classoomph_1_1TrilinosAztecOOSolver_a7d9c9d9beddb2d18abea55529db534e4} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!disable\_resolve@{disable\_resolve}}
+\index{disable\_resolve@{disable\_resolve}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Disable resolve function (overloads the \doxylink{classoomph_1_1LinearSolver}{Linear\+Solver} disable\+\_\+resolve function). 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c5961830bd9807225a48d6}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00405}{405}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a80de34d99eff7b2ad41af3e04229a55b}\label{classoomph_1_1TrilinosAztecOOSolver_a80de34d99eff7b2ad41af3e04229a55b} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_assemble\_serial\_jacobian@{enable\_assemble\_serial\_jacobian}}
+\index{enable\_assemble\_serial\_jacobian@{enable\_assemble\_serial\_jacobian}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_assemble\_serial\_jacobian()}{enable\_assemble\_serial\_jacobian()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::enable\+\_\+assemble\+\_\+serial\+\_\+jacobian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the assembly of the serial jacobian when performing a problem-\/based solve. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00461}{461}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{Assemble\+\_\+serial\+\_\+jacobian}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aa3cd029cc48f36cc41d75e8c83faa037}\label{classoomph_1_1TrilinosAztecOOSolver_aa3cd029cc48f36cc41d75e8c83faa037} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
+\index{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup()}{enable\_aztecoo\_workaround\_for\_epetra\_matrix\_setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::enable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00326}{326}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2cdb00e05ff87}\label{classoomph_1_1TrilinosAztecOOSolver_ad48df1a369de8dabe6c2cdb00e05ff87} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!enable\_delete\_matrix@{enable\_delete\_matrix}}
+\index{enable\_delete\_matrix@{enable\_delete\_matrix}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{enable\_delete\_matrix()}{enable\_delete\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::enable\+\_\+delete\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call if the matrix can be deleted. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00412}{412}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be}\label{classoomph_1_1TrilinosAztecOOSolver_ac17e7d21595ce4b9b854f0207f3b04be} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled@{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled}}
+\index{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled@{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled()}{is\_aztecoo\_workaround\_for\_epetra\_matrix\_setup\_enabled()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Is workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements enabled? 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00340}{340}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d}\label{classoomph_1_1TrilinosAztecOOSolver_aaa90619b05f448d7bd610f474a9f750d} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Acess function to Iterations. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fdbd4f95d3875ec7a46}{oomph\+::\+Iterative\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00430}{430}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{Iterations}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f}\label{classoomph_1_1TrilinosAztecOOSolver_a3b7cf9349909686e3638aced9b29303f} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
+\index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to return Jacobian\+\_\+setup\+\_\+time;. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00448}{448}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{Jacobian\+\_\+setup\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a88cf6614457b404e38c6aed2e5d41257}\label{classoomph_1_1TrilinosAztecOOSolver_a88cf6614457b404e38c6aed2e5d41257} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
+\index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to return Linear\+\_\+solver\+\_\+solution\+\_\+time. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00454}{454}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56}\label{classoomph_1_1TrilinosAztecOOSolver_a8e3fbb5d980b5764a7934cc7e901bd56} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!max\_iter@{max\_iter}}
+\index{max\_iter@{max\_iter}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{max\_iter()}{max\_iter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::max\+\_\+iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max\+\_\+iter. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00424}{424}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ae78dde00323507932c4103723dec10fa}\label{classoomph_1_1TrilinosAztecOOSolver_ae78dde00323507932c4103723dec10fa} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a022f537f95c0bf352bab739f2f58bd7f}\label{classoomph_1_1TrilinosAztecOOSolver_a022f537f95c0bf352bab739f2f58bd7f} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!resolve@{resolve}}
+\index{resolve@{resolve}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::resolve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to resolve a linear system using the existing solver data, allowing a solve with a new right hand side vector. This function must be used after a call to solve(...) with enable\+\_\+resolve set to true. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{489}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190}\label{classoomph_1_1TrilinosAztecOOSolver_a7d2853c49429224fc2deb3260340b190} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function to solve the linear system defined by matrix\+\_\+pt and rhs. {\bfseries{NOTE}} 1. The matrix has to be of type \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix. {\bfseries{NOTE}} 2. This function will delete any existing internal data and generate a new Aztec\+OO solver. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{135}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00075}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00270}{oomph\+::\+Iterative\+Linear\+Solver\+::\+First\+\_\+time\+\_\+solve\+\_\+when\+\_\+used\+\_\+as\+\_\+preconditioner}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{Linear\+\_\+solver\+\_\+solution\+\_\+time}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00265}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Use\+\_\+iterative\+\_\+solver\+\_\+as\+\_\+preconditioner}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9}\label{classoomph_1_1TrilinosAztecOOSolver_a7dc1ae7f05e8a50416b8df700f832eb9} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve@{solve}}
+\index{solve@{solve}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function which uses problem\+\_\+pt\textquotesingle{}s get\+\_\+jacobian(...) function to generate a linear system which is then solved. This function deletes any existing internal data and then generates a new Aztec\+OO solver. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{43}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03935}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{Problem\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a419638218c26238bab55674304c5fc98}\label{classoomph_1_1TrilinosAztecOOSolver_a419638218c26238bab55674304c5fc98} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solve\_using\_AztecOO@{solve\_using\_AztecOO}}
+\index{solve\_using\_AztecOO@{solve\_using\_AztecOO}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{solve\_using\_AztecOO()}{solve\_using\_AztecOO()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve\+\_\+using\+\_\+\+Aztec\+OO (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}\&}]{rhs\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Vector}} \texorpdfstring{$\ast$}{*}\&}]{soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function performs the actual solve once the Aztec\+OO solver is set up. 
+
+Helper function performs the actual solve once the Aztec\+OO solver is set up (i.\+e. \doxylink{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}{solver\+\_\+setup()} is called) 
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{570}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{Iterations}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc}\label{classoomph_1_1TrilinosAztecOOSolver_a1d5e7dfc9fe3c890569465a167c2f2fc} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solver\_setup@{solver\_setup}}
+\index{solver\_setup@{solver\_setup}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{solver\_setup()}{solver\_setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper function for setting up the solver. Converts the oomph-\/lib matrices to Epetra matrices, sets up the preconditioner, creates the Trilinos Aztec00 solver and passes in the matrix, preconditioner and parameters. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{283}} of file \mbox{\hyperlink{trilinos__solver_8cc_source}{trilinos\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{Aztec\+OO\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00487}{Bi\+CGStab}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00485}{CG}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{Delete\+\_\+matrix}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00079}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{Epetra\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00486}{GMRES}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00245}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Preconditioner\+\_\+pt}}, \mbox{\hyperlink{preconditioner_8h_source_l00094}{oomph\+::\+Preconditioner\+::setup()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00258}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Setup\+\_\+preconditioner\+\_\+before\+\_\+solve}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{Using\+\_\+problem\+\_\+based\+\_\+solve}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc}\label{classoomph_1_1TrilinosAztecOOSolver_a7c81cd1f21720d2c05db9d499dc8f2bc} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!solver\_type@{solver\_type}}
+\index{solver\_type@{solver\_type}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{solver\_type()}{solver\_type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solver\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Solver\+\_\+type. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00442}{442}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{Solver\+\_\+type}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb}\label{classoomph_1_1TrilinosAztecOOSolver_a0b7b6b0431efdc7fd6276552349610bb} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!tolerance@{tolerance}}
+\index{tolerance@{tolerance}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{tolerance()}{tolerance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Trilinos\+Aztec\+OOSolver\+::tolerance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Tolerance. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00436}{436}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+References \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a3bfc11cd816eee847f102327ae4315aa}\label{classoomph_1_1TrilinosAztecOOSolver_a3bfc11cd816eee847f102327ae4315aa} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Assemble\_serial\_jacobian@{Assemble\_serial\_jacobian}}
+\index{Assemble\_serial\_jacobian@{Assemble\_serial\_jacobian}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Assemble\_serial\_jacobian}{Assemble\_serial\_jacobian}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Assemble\+\_\+serial\+\_\+jacobian\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+If true, when performing a problem based solve a serial matrix will be requested from Problem\+::get\+\_\+jacobian(...). Defaults to true. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00527}{527}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00467}{disable\+\_\+assemble\+\_\+serial\+\_\+jacobian()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00461}{enable\+\_\+assemble\+\_\+serial\+\_\+jacobian()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ad71b280c5af25e35e0f9da8cd68228cf}\label{classoomph_1_1TrilinosAztecOOSolver_ad71b280c5af25e35e0f9da8cd68228cf} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!AztecOO\_solver\_pt@{AztecOO\_solver\_pt}}
+\index{AztecOO\_solver\_pt@{AztecOO\_solver\_pt}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{AztecOO\_solver\_pt}{AztecOO\_solver\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Aztec\+OO}}\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Aztec\+OO\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the Aztec\+OO solver. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00509}{509}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a6cd6d4719412c7ebf01bfb6cb4fddfcc}\label{classoomph_1_1TrilinosAztecOOSolver_a6cd6d4719412c7ebf01bfb6cb4fddfcc} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Delete\_matrix@{Delete\_matrix}}
+\index{Delete\_matrix@{Delete\_matrix}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Delete\_matrix}{Delete\_matrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Delete\+\_\+matrix\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Trilinos copies matrix data from oomph-\/lib\textquotesingle{}s own \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix to Trilinos\textquotesingle{}s Epetra format -\/ the Trilinos solver no longer requires the oomph-\/lib matrices and therefore they could be deleted to save memory. This must be requested explicitly by setting this flag to TRUE. {\bfseries{NOTE\+:}} The matrix is deleted after the preconditioner is setup. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00523}{523}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00418}{disable\+\_\+delete\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00412}{enable\+\_\+delete\+\_\+matrix()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a2d0905cb4a63b119e784a5caee458691}\label{classoomph_1_1TrilinosAztecOOSolver_a2d0905cb4a63b119e784a5caee458691} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Epetra\_matrix\_pt@{Epetra\_matrix\_pt}}
+\index{Epetra\_matrix\_pt@{Epetra\_matrix\_pt}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Epetra\_matrix\_pt}{Epetra\_matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}}\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Epetra\+\_\+matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A pointer for the linear system matrix in Epetra\+\_\+\+Crs\+Matrix format. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00538}{538}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a7a419b3a461f998608dcc9b868fb0a89}\label{classoomph_1_1TrilinosAztecOOSolver_a7a419b3a461f998608dcc9b868fb0a89} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Epetra\_preconditioner\_pt@{Epetra\_preconditioner\_pt}}
+\index{Epetra\_preconditioner\_pt@{Epetra\_preconditioner\_pt}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Epetra\_preconditioner\_pt}{Epetra\_preconditioner\_pt}}
+{\footnotesize\ttfamily Epetra\+\_\+\+Operator\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Epetra\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A pointer to the Epetra\+\_\+\+Operator for the preconditioner. This is only used if the preconditioner NOT a Trilinos preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00542}{542}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00347}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590aa71d4a879e8}\label{classoomph_1_1TrilinosAztecOOSolver_a028992b1b3fe1a501590aa71d4a879e8} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!If\_oomphlib\_preconditioner\_use\_epetra\_values@{If\_oomphlib\_preconditioner\_use\_epetra\_values}}
+\index{If\_oomphlib\_preconditioner\_use\_epetra\_values@{If\_oomphlib\_preconditioner\_use\_epetra\_values}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{If\_oomphlib\_preconditioner\_use\_epetra\_values}{If\_oomphlib\_preconditioner\_use\_epetra\_values}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+If\+\_\+oomphlib\+\_\+preconditioner\+\_\+use\+\_\+epetra\+\_\+values\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+if this solver is using an oomph-\/lib preconditioner then the vectors passed to preconditioner\+\_\+solve(...) should be using the values in the epetra vector as external data. If the vectors are using external data then rebuild(...) methods cannot be used. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00556}{556}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a26a9366d3ec0f11e7e907587c0439ea7}\label{classoomph_1_1TrilinosAztecOOSolver_a26a9366d3ec0f11e7e907587c0439ea7} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Iterations\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores number of iterations used. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00506}{506}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00430}{iterations()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00570}{solve\+\_\+using\+\_\+\+Aztec\+OO()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_afec53c52f4fcab981eb0ed7244d750de}\label{classoomph_1_1TrilinosAztecOOSolver_afec53c52f4fcab981eb0ed7244d750de} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
+\index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores set up time for Jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00512}{512}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00448}{jacobian\+\_\+setup\+\_\+time()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_ab2373a8cdd5c27d2ac099ad8444dfbb7}\label{classoomph_1_1TrilinosAztecOOSolver_ab2373a8cdd5c27d2ac099ad8444dfbb7} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Linear\_solver\_solution\_time@{Linear\_solver\_solution\_time}}
+\index{Linear\_solver\_solution\_time@{Linear\_solver\_solution\_time}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_solution\_time}{Linear\_solver\_solution\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Linear\+\_\+solver\+\_\+solution\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores time for the solution (excludes time to set up preconditioner) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00515}{515}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00454}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00489}{resolve()}}, and \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a71d7437b0502f3be59f64258e0af458e}\label{classoomph_1_1TrilinosAztecOOSolver_a71d7437b0502f3be59f64258e0af458e} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Oomph\_matrix\_pt@{Oomph\_matrix\_pt}}
+\index{Oomph\_matrix\_pt@{Oomph\_matrix\_pt}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Oomph\_matrix\_pt}{Oomph\_matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}}\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Oomph\+\_\+matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Oomph lib matrix pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00545}{545}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_abc6a63eb67694f7ac5dfc8505a8b9a5f}\label{classoomph_1_1TrilinosAztecOOSolver_abc6a63eb67694f7ac5dfc8505a8b9a5f} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Problem\_pt@{Problem\_pt}}
+\index{Problem\_pt@{Problem\_pt}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A pointer to the underlying problem (NULL if MATRIX based solve) The problem\+\_\+pt is stored here in a problem based solve for the preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00550}{550}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aaa1ffdf657c54fbd5cfa097cc962050c}\label{classoomph_1_1TrilinosAztecOOSolver_aaa1ffdf657c54fbd5cfa097cc962050c} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Solver\_type@{Solver\_type}}
+\index{Solver\_type@{Solver\_type}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Solver\_type}{Solver\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Solver\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Defines which solver is set up -\/ available types are defined in Aztec\+OO\+\_\+solver\+\_\+types. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00531}{531}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00442}{solver\+\_\+type()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_aead1067bb965649abddcf0af0e2d47f7}\label{classoomph_1_1TrilinosAztecOOSolver_aead1067bb965649abddcf0af0e2d47f7} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
+\index{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup@{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}{Use\_aztecoo\_workaround\_for\_epetra\_matrix\_setup}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Use\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Use workaround for creating of epetra matrix that respects aztecoo\textquotesingle{}s ordering requirements. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00503}{503}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8h_source_l00333}{disable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00326}{enable\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00340}{is\+\_\+aztecoo\+\_\+workaround\+\_\+for\+\_\+epetra\+\_\+matrix\+\_\+setup\+\_\+enabled()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}.
+
+\Hypertarget{classoomph_1_1TrilinosAztecOOSolver_a015ad0b4207515558d270ef08a213125}\label{classoomph_1_1TrilinosAztecOOSolver_a015ad0b4207515558d270ef08a213125} 
+\index{oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}!Using\_problem\_based\_solve@{Using\_problem\_based\_solve}}
+\index{Using\_problem\_based\_solve@{Using\_problem\_based\_solve}!oomph::TrilinosAztecOOSolver@{oomph::TrilinosAztecOOSolver}}
+\doxysubsubsection{\texorpdfstring{Using\_problem\_based\_solve}{Using\_problem\_based\_solve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Trilinos\+Aztec\+OOSolver\+::\+Using\+\_\+problem\+\_\+based\+\_\+solve\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Helper flag keeping track of whether we called the linear algebra or problem-\/based solve function. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__solver_8h_source_l00535}{535}} of file \mbox{\hyperlink{trilinos__solver_8h_source}{trilinos\+\_\+solver.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__solver_8cc_source_l00043}{solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00283}{solver\+\_\+setup()}}, \mbox{\hyperlink{trilinos__solver_8h_source_l00270}{Trilinos\+Aztec\+OOSolver()}}, and \mbox{\hyperlink{trilinos__solver_8h_source_l00304}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Aztec\+OOSolver()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__solver_8h}{trilinos\+\_\+solver.\+h}}\item 
+\mbox{\hyperlink{trilinos__solver_8cc}{trilinos\+\_\+solver.\+cc}}\end{DoxyCompactItemize}

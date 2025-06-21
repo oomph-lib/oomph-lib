@@ -1,0 +1,715 @@
+\doxysection{oomph\+::Eighth\+Sphere\+Domain Class Reference}
+\hypertarget{classoomph_1_1EighthSphereDomain}{}\label{classoomph_1_1EighthSphereDomain}\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+
+
+Eighth sphere as domain. Domain is parametrised by four macro elements.  
+
+
+
+
+{\ttfamily \#include $<$eighth\+\_\+sphere\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Eighth\+Sphere\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1EighthSphereDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a82c8a6b479e41bf07b9478e3d903b465}{Eighth\+Sphere\+Domain}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{radius}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the radius of the sphere. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b}{Eighth\+Sphere\+Domain}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333}{operator=}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1TetgenMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2}{\texorpdfstring{$\sim$}{\string~}\+Eighth\+Sphere\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{imacro}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{idirect}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{s}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}{r\+\_\+centr\+\_\+L}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}{r\+\_\+centr\+\_\+R}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}{r\+\_\+centr\+\_\+D}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}{r\+\_\+centr\+\_\+U}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}{r\+\_\+centr\+\_\+B}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}{r\+\_\+centr\+\_\+F}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}{r\+\_\+right\+\_\+L}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}{r\+\_\+right\+\_\+R}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}{r\+\_\+right\+\_\+D}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}{r\+\_\+right\+\_\+U}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}{r\+\_\+right\+\_\+B}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}{r\+\_\+right\+\_\+F}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}{r\+\_\+up\+\_\+L}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}{r\+\_\+up\+\_\+R}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}{r\+\_\+up\+\_\+D}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}{r\+\_\+up\+\_\+U}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}{r\+\_\+up\+\_\+B}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}{r\+\_\+up\+\_\+F}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}{r\+\_\+front\+\_\+L}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}{r\+\_\+front\+\_\+R}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}{r\+\_\+front\+\_\+D}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}{r\+\_\+front\+\_\+U}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}{r\+\_\+front\+\_\+B}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}{r\+\_\+front\+\_\+F}} (\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{t}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{zeta}}, \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TetgenMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9ef9d21c2c9ed0ea28652011b1756419}{Radius}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Eighth sphere as domain. Domain is parametrised by four macro elements. 
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00041}{41}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1EighthSphereDomain_a82c8a6b479e41bf07b9478e3d903b465}\label{classoomph_1_1EighthSphereDomain_a82c8a6b479e41bf07b9478e3d903b465} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!EighthSphereDomain@{EighthSphereDomain}}
+\index{EighthSphereDomain@{EighthSphereDomain}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{EighthSphereDomain()}{EighthSphereDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} \&}]{radius }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the radius of the sphere. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00045}{45}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b}\label{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!EighthSphereDomain@{EighthSphereDomain}}
+\index{EighthSphereDomain@{EighthSphereDomain}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{EighthSphereDomain()}{EighthSphereDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2}\label{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!````~EighthSphereDomain@{\texorpdfstring{$\sim$}{\string~}EighthSphereDomain}}
+\index{````~EighthSphereDomain@{\texorpdfstring{$\sim$}{\string~}EighthSphereDomain}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EighthSphereDomain()}{\string~EighthSphereDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Eighth\+Sphere\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Eighth\+Sphere\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00067}{67}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}\label{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{imacro,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{idirect,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{74}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00477}{r\+\_\+centr\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00451}{r\+\_\+centr\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00490}{r\+\_\+centr\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00425}{r\+\_\+centr\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00438}{r\+\_\+centr\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00464}{r\+\_\+centr\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00879}{r\+\_\+front\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00840}{r\+\_\+front\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00890}{r\+\_\+front\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00798}{r\+\_\+front\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00826}{r\+\_\+front\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00868}{r\+\_\+front\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00603}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00547}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00631}{r\+\_\+right\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00503}{r\+\_\+right\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00575}{r\+\_\+right\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00742}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00698}{r\+\_\+up\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00770}{r\+\_\+up\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00659}{r\+\_\+up\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00687}{r\+\_\+up\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{r\+\_\+up\+\_\+\+U()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333}\label{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}\label{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_B@{r\_centr\_B}}
+\index{r\_centr\_B@{r\_centr\_B}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_B()}{r\_centr\_B()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+B (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00477}{477}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}\label{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_D@{r\_centr\_D}}
+\index{r\_centr\_D@{r\_centr\_D}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_D()}{r\_centr\_D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00451}{451}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}\label{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_F@{r\_centr\_F}}
+\index{r\_centr\_F@{r\_centr\_F}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_F()}{r\_centr\_F()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00490}{490}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00879}{r\+\_\+front\+\_\+\+B()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}\label{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_L@{r\_centr\_L}}
+\index{r\_centr\_L@{r\_centr\_L}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_L()}{r\_centr\_L()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+L (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00425}{425}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}\label{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_R@{r\_centr\_R}}
+\index{r\_centr\_R@{r\_centr\_R}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_R()}{r\_centr\_R()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+R (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00438}{438}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00503}{r\+\_\+right\+\_\+\+L()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}\label{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_U@{r\_centr\_U}}
+\index{r\_centr\_U@{r\_centr\_U}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_centr\_U()}{r\_centr\_U()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+centr\+\_\+U (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00464}{464}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00698}{r\+\_\+up\+\_\+\+D()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}\label{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_B@{r\_front\_B}}
+\index{r\_front\_B@{r\_front\_B}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_B()}{r\_front\_B()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+B (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00879}{879}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00490}{r\+\_\+centr\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}\label{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_D@{r\_front\_D}}
+\index{r\_front\_D@{r\_front\_D}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_D()}{r\_front\_D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00840}{840}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00890}{r\+\_\+front\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}\label{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_F@{r\_front\_F}}
+\index{r\_front\_F@{r\_front\_F}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_F()}{r\_front\_F()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00890}{890}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00840}{r\+\_\+front\+\_\+\+D()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00798}{r\+\_\+front\+\_\+\+L()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}\label{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_L@{r\_front\_L}}
+\index{r\_front\_L@{r\_front\_L}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_L()}{r\_front\_L()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+L (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00798}{798}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00890}{r\+\_\+front\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}\label{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_R@{r\_front\_R}}
+\index{r\_front\_R@{r\_front\_R}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_R()}{r\_front\_R()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+R (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00826}{826}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00631}{r\+\_\+right\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}\label{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_U@{r\_front\_U}}
+\index{r\_front\_U@{r\_front\_U}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_front\_U()}{r\_front\_U()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+front\+\_\+U (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00868}{868}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00770}{r\+\_\+up\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}\label{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_B@{r\_right\_B}}
+\index{r\_right\_B@{r\_right\_B}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_B()}{r\_right\_B()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+B (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00603}{603}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}\label{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_D@{r\_right\_D}}
+\index{r\_right\_D@{r\_right\_D}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_D()}{r\_right\_D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00547}{547}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}\label{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_F@{r\_right\_F}}
+\index{r\_right\_F@{r\_right\_F}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_F()}{r\_right\_F()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00631}{631}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00826}{r\+\_\+front\+\_\+\+R()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}\label{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_L@{r\_right\_L}}
+\index{r\_right\_L@{r\_right\_L}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_L()}{r\_right\_L()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+L (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00503}{503}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00438}{r\+\_\+centr\+\_\+\+R()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}\label{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_R@{r\_right\_R}}
+\index{r\_right\_R@{r\_right\_R}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_R()}{r\_right\_R()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+R (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{514}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00603}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00547}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00631}{r\+\_\+right\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00575}{r\+\_\+right\+\_\+\+U()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}\label{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_U@{r\_right\_U}}
+\index{r\_right\_U@{r\_right\_U}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_right\_U()}{r\_right\_U()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+right\+\_\+U (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00575}{575}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00687}{r\+\_\+up\+\_\+\+R()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}\label{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_B@{r\_up\_B}}
+\index{r\_up\_B@{r\_up\_B}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_B()}{r\_up\_B()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+B (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00742}{742}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}\label{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_D@{r\_up\_D}}
+\index{r\_up\_D@{r\_up\_D}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_D()}{r\_up\_D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00698}{698}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00464}{r\+\_\+centr\+\_\+\+U()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}\label{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_F@{r\_up\_F}}
+\index{r\_up\_F@{r\_up\_F}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_F()}{r\_up\_F()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00770}{770}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00868}{r\+\_\+front\+\_\+\+U()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}\label{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_L@{r\_up\_L}}
+\index{r\_up\_L@{r\_up\_L}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_L()}{r\_up\_L()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+L (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00659}{659}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}\label{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_R@{r\_up\_R}}
+\index{r\_up\_R@{r\_up\_R}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_R()}{r\_up\_R()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+R (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00687}{687}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00575}{r\+\_\+right\+\_\+\+U()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}\label{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_U@{r\_up\_U}}
+\index{r\_up\_U@{r\_up\_U}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{r\_up\_U()}{r\_up\_U()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{void}} oomph\+::\+Eighth\+Sphere\+Domain\+::r\+\_\+up\+\_\+U (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{const}} \mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1TetgenMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{709}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00742}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00770}{r\+\_\+up\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00659}{r\+\_\+up\+\_\+\+L()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1EighthSphereDomain_a9ef9d21c2c9ed0ea28652011b1756419}\label{classoomph_1_1EighthSphereDomain_a9ef9d21c2c9ed0ea28652011b1756419} 
+\index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!Radius@{Radius}}
+\index{Radius@{Radius}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
+\doxysubsubsection{\texorpdfstring{Radius}{Radius}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TetgenMesh}{double}} oomph\+::\+Eighth\+Sphere\+Domain\+::\+Radius\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00270}{270}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00477}{r\+\_\+centr\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00451}{r\+\_\+centr\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00490}{r\+\_\+centr\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00425}{r\+\_\+centr\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00438}{r\+\_\+centr\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00464}{r\+\_\+centr\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00840}{r\+\_\+front\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00890}{r\+\_\+front\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00798}{r\+\_\+front\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00603}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00547}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00631}{r\+\_\+right\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00514}{r\+\_\+right\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00575}{r\+\_\+right\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00742}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00770}{r\+\_\+up\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00659}{r\+\_\+up\+\_\+\+L()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00709}{r\+\_\+up\+\_\+\+U()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{eighth__sphere__domain_8h}{eighth\+\_\+sphere\+\_\+domain.\+h}}\end{DoxyCompactItemize}

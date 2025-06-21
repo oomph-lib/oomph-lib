@@ -1,0 +1,162 @@
+\doxysection{oomph\+::Axisymmetric\+Volume\+Constraint\+Bounding\+Element Class Reference}
+\hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement}{}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement}\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+
+
+Axisymmetric (one-\/dimensional) interface elements that allow the application of a volume constraint on the region bounded by these elements. The volume is computed by integrating x.\+n around the boundary of the domain and then dividing by three. The sign is chosen so that the volume will be positive when the elements surround a fluid domain.  
+
+
+
+
+{\ttfamily \#include $<$constrained\+\_\+volume\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.477876cm]{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a716ae91b7c11f6d71c474bec6f6d6d24}{Axisymmetric\+Volume\+Constraint\+Bounding\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty Contructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_ac7b98a2915cef69c7e4825e1f5730bc5}{\texorpdfstring{$\sim$}{\string~}\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2d54cd3bce11538b066c8626b241d2c9}{contribution\+\_\+to\+\_\+enclosed\+\_\+volume}} ()
+\begin{DoxyCompactList}\small\item\em Return this element\textquotesingle{}s contribution to the total volume enclosed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a746f88f325d61610e10e97465fd2ca09}{contribution\+\_\+to\+\_\+volume\+\_\+flux}} ()
+\begin{DoxyCompactList}\small\item\em Return this element\textquotesingle{}s contribution to the volume flux over the boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement}{oomph\+::\+Volume\+Constraint\+Bounding\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a423139995a5543fda59d36cf230edb44}{Volume\+Constraint\+Bounding\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor initialise the boolean flag We expect the traded pressure data to be stored externally. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a6a54150611ce06f05ea47ba99cf9e132}{\texorpdfstring{$\sim$}{\string~}\+Volume\+Constraint\+Bounding\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a0ae62125450a5d203bc6d26b0d24be22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a310fbaeb9a024406e4f769886e9f902a}{set\+\_\+volume\+\_\+constraint\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{vol\+\_\+constraint\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{check\+\_\+nodal\+\_\+data}}=\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{true}})
+\begin{DoxyCompactList}\small\item\em Set the "{}master"{} volume constraint element The setup here is a bit more complicated than one might expect because if an internal pressure on a boundary is hijacked in Taylor\+Hood elements then that the "{}traded"{} value may already be stored as nodal data in this element. This causes no problems apart from when running with PARANOID in which case the resulting repeated local equation numbers are spotted and an error is thrown. The check is a finite amount of work and so can be avoided if the boolean flag check\+\_\+nodal\+\_\+data is set to false. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2a3f3b86079f27d52679f357f5276d91}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{residuals}})
+\begin{DoxyCompactList}\small\item\em Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated \doxylink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}). This is specific for 1D line elements that bound 2D cartesian fluid elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement}{oomph\+::\+Volume\+Constraint\+Bounding\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{int}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_ae5262edeb9cd3bcbc1ae4265b08c7f07}{ptraded\+\_\+local\+\_\+eqn}} ()
+\begin{DoxyCompactList}\small\item\em The local eqn number for the traded pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement}{oomph\+::\+Volume\+Constraint\+Bounding\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_afd35462188f27b6851416ab49ec5df5a}{Data\+\_\+number\+\_\+of\+\_\+traded\+\_\+pressure}}
+\begin{DoxyCompactList}\small\item\em The Data that contains the traded pressure is usually stored as external Data for this element, but may also be nodal Data Which Data item is it? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a40f5ebebeaf633515951a2d08060ec15}{Index\+\_\+of\+\_\+traded\+\_\+pressure\+\_\+value}}
+\begin{DoxyCompactList}\small\item\em Index of the value in traded pressure data that corresponds to the traded pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{bool}} \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a8f9aa94f106fd443fa690851a0268720}{Traded\+\_\+pressure\+\_\+stored\+\_\+at\+\_\+node}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether the traded pressure is stored externally or at a node (this can happen in Taylor-\/\+Hood elements) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Axisymmetric (one-\/dimensional) interface elements that allow the application of a volume constraint on the region bounded by these elements. The volume is computed by integrating x.\+n around the boundary of the domain and then dividing by three. The sign is chosen so that the volume will be positive when the elements surround a fluid domain. 
+
+These elements must be used together with the associated \doxylink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}, which stores the value of the target volume. 
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00481}{481}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a716ae91b7c11f6d71c474bec6f6d6d24}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a716ae91b7c11f6d71c474bec6f6d6d24} 
+\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!AxisymmetricVolumeConstraintBoundingElement@{AxisymmetricVolumeConstraintBoundingElement}}
+\index{AxisymmetricVolumeConstraintBoundingElement@{AxisymmetricVolumeConstraintBoundingElement}!oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+\doxysubsubsection{\texorpdfstring{AxisymmetricVolumeConstraintBoundingElement()}{AxisymmetricVolumeConstraintBoundingElement()}}
+{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Contructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00494}{494}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_ac7b98a2915cef69c7e4825e1f5730bc5}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_ac7b98a2915cef69c7e4825e1f5730bc5} 
+\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!````~AxisymmetricVolumeConstraintBoundingElement@{\texorpdfstring{$\sim$}{\string~}AxisymmetricVolumeConstraintBoundingElement}}
+\index{````~AxisymmetricVolumeConstraintBoundingElement@{\texorpdfstring{$\sim$}{\string~}AxisymmetricVolumeConstraintBoundingElement}!oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AxisymmetricVolumeConstraintBoundingElement()}{\string~AxisymmetricVolumeConstraintBoundingElement()}}
+{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::\texorpdfstring{$\sim$}{\string~}\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00500}{500}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2d54cd3bce11538b066c8626b241d2c9}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2d54cd3bce11538b066c8626b241d2c9} 
+\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!contribution\_to\_enclosed\_volume@{contribution\_to\_enclosed\_volume}}
+\index{contribution\_to\_enclosed\_volume@{contribution\_to\_enclosed\_volume}!oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+\doxysubsubsection{\texorpdfstring{contribution\_to\_enclosed\_volume()}{contribution\_to\_enclosed\_volume()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+enclosed\+\_\+volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return this element\textquotesingle{}s contribution to the total volume enclosed. 
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00266}{266}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
+
+\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a746f88f325d61610e10e97465fd2ca09}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a746f88f325d61610e10e97465fd2ca09} 
+\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!contribution\_to\_volume\_flux@{contribution\_to\_volume\_flux}}
+\index{contribution\_to\_volume\_flux@{contribution\_to\_volume\_flux}!oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+\doxysubsubsection{\texorpdfstring{contribution\_to\_volume\_flux()}{contribution\_to\_volume\_flux()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::contribution\+\_\+to\+\_\+volume\+\_\+flux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return this element\textquotesingle{}s contribution to the volume flux over the boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00507}{507}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2a3f3b86079f27d52679f357f5276d91}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2a3f3b86079f27d52679f357f5276d91} 
+\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!fill\_in\_generic\_residual\_contribution\_volume\_constraint@{fill\_in\_generic\_residual\_contribution\_volume\_constraint}}
+\index{fill\_in\_generic\_residual\_contribution\_volume\_constraint@{fill\_in\_generic\_residual\_contribution\_volume\_constraint}!oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
+\doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_volume\_constraint()}{fill\_in\_generic\_residual\_contribution\_volume\_constraint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} oomph\+::\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated \doxylink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}). This is specific for 1D line elements that bound 2D cartesian fluid elements. 
+
+Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated \doxylink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}). This is specific for axisymmetric line elements that bound 2D axisymmetric fluid elements. The only difference from the 1D case is the addition of the weighting factor in the integrand and division of the dot product by three. 
+
+Implements \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a717f1085709bd8820b8043ff94ecb0c5}{oomph\+::\+Volume\+Constraint\+Bounding\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00351}{351}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00213}{oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::ptraded\+\_\+local\+\_\+eqn()}}.
+
+
+
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00621}{oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00676}{oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{constrained__volume__elements_8h}{constrained\+\_\+volume\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{constrained__volume__elements_8cc}{constrained\+\_\+volume\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

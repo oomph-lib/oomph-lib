@@ -1,0 +1,57 @@
+\doxysection{unstructured\+\_\+two\+\_\+d\+\_\+mesh\+\_\+geometry\+\_\+base.\+h File Reference}
+\hypertarget{unstructured__two__d__mesh__geometry__base_8h}{}\label{unstructured__two__d__mesh__geometry__base_8h}\index{unstructured\_two\_d\_mesh\_geometry\_base.h@{unstructured\_two\_d\_mesh\_geometry\_base.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structoomph_1_1TriangulateIO}{oomph\+::\+Triangulate\+IO}}
+\begin{DoxyCompactList}\small\item\em The Triangle data structure, modified from the triangle.\+h header supplied with triangle 1.\+6. by J. R. Schewchuk. We need to define this here separately because we can\textquotesingle{}t include a c header directly into C++ code! \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshCurveSection}{oomph\+::\+Triangle\+Mesh\+Curve\+Section}}
+\begin{DoxyCompactList}\small\item\em Base class for defining a triangle mesh boundary, this class has the methods that allow to connect the initial and final ends to other triangle mesh boundaries. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshCurviLine}{oomph\+::\+Triangle\+Mesh\+Curvi\+Line}}
+\begin{DoxyCompactList}\small\item\em Class definining a curvilinear triangle mesh boundary in terms of a \doxylink{classoomph_1_1GeomObject}{Geom\+Object}. Curvlinear equivalent of Poly\+Line. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshPolyLine}{oomph\+::\+Triangle\+Mesh\+Poly\+Line}}
+\begin{DoxyCompactList}\small\item\em Class defining a polyline for use in Triangle \doxylink{classoomph_1_1Mesh}{Mesh} generation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshCurve}{oomph\+::\+Triangle\+Mesh\+Curve}}
+\begin{DoxyCompactList}\small\item\em closed curves and open curves. All Triangle\+Mesh\+Curves are composed of a \doxylink{classoomph_1_1Vector}{Vector} of Triangle\+Mesh\+Curve\+Sections \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshClosedCurve}{oomph\+::\+Triangle\+Mesh\+Closed\+Curve}}
+\begin{DoxyCompactList}\small\item\em Base class defining a closed curve for the Triangle mesh generation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshPolygon}{oomph\+::\+Triangle\+Mesh\+Polygon}}
+\begin{DoxyCompactList}\small\item\em Class defining a closed polygon for the Triangle mesh generation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1TriangleMeshOpenCurve}{oomph\+::\+Triangle\+Mesh\+Open\+Curve}}
+\begin{DoxyCompactList}\small\item\em Base class defining an open curve for the Triangle mesh generation Basically used to define internal boundaries on the mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1UnstructuredTwoDMeshGeometryBase}{oomph\+::\+Unstructured\+Two\+DMesh\+Geometry\+Base}}
+\begin{DoxyCompactList}\small\item\em Contains functions which define the geometry of the mesh, i.\+e. regions, boundaries, etc. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{oomph\+::\+Unstructured\+Two\+DMesh\+Geometry\+Base\+::vertex\+\_\+connection\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Data}{Data} structure filled when the connection matrix is created, for each polyline, there are two \doxylink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1vertex__connection__info}{vertex\+\_\+connection\+\_\+info} structures, one for each end. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1UnstructuredTwoDMeshGeometryBase_1_1base__vertex__info}{oomph\+::\+Unstructured\+Two\+DMesh\+Geometry\+Base\+::base\+\_\+vertex\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Data}{Data} structure to store the base vertex info, initial or final vertex in the polylines have an associated base vertex. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structoomph_1_1TriangleBoundaryHelper_1_1BCInfo}{oomph\+::\+Triangle\+Boundary\+Helper\+::\+BCInfo}}
+\begin{DoxyCompactList}\small\item\em Structure for Boundary Informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper}{oomph\+::\+Triangle\+Helper}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for triangle meshes. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1ToleranceForVertexMismatchInPolygons}{oomph\+::\+Tolerance\+For\+Vertex\+Mismatch\+In\+Polygons}}
+\begin{DoxyCompactList}\small\item\em Namespace that allows the specification of a tolerance between vertices at the ends of polylines that are supposed to be at the same position. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1TriangleBoundaryHelper}{oomph\+::\+Triangle\+Boundary\+Helper}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for \doxylink{structoomph_1_1TriangleBoundaryHelper_1_1BCInfo}{BCInfo} object used in the identification of boundary elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_adb064d7ba88f96c699c26d21b42bca7a}{oomph\+::\+Triangle\+Helper\+::clear\+\_\+triangulateio}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangulate\+\_\+io}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{clear\+\_\+hole\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Clear \doxylink{structoomph_1_1TriangulateIO}{Triangulate\+IO} structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_a884345fd8d03dda0fa3499d2c63a4f5c}{oomph\+::\+Triangle\+Helper\+::initialise\+\_\+triangulateio}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}})
+\begin{DoxyCompactList}\small\item\em Initialise \doxylink{structoomph_1_1TriangulateIO}{Triangulate\+IO} structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_aebd618de1bc6e9f00c05e6bdd0169d8a}{oomph\+::\+Triangle\+Helper\+::deep\+\_\+copy\+\_\+of\+\_\+triangulateio\+\_\+representation}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{quiet}})
+\begin{DoxyCompactList}\small\item\em Make (partial) deep copy of \doxylink{structoomph_1_1TriangulateIO}{Triangulate\+IO} object. We only copy those items we need within oomph-\/lib\textquotesingle{}s adaptation procedures. Warnings are issued if triangulate\+\_\+io contains data that is not not copied, unless quiet=true;. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_aac66d74842d8c3600be11d2845f4e4a5}{oomph\+::\+Triangle\+Helper\+::write\+\_\+triangulateio\+\_\+to\+\_\+polyfile}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{poly\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Write the triangulateio data to disk as a poly file, mainly used for debugging. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_a5eb84bc982fe19b2f5fab0ea7a26cd78}{oomph\+::\+Triangle\+Helper\+::create\+\_\+triangulateio\+\_\+from\+\_\+polyfiles}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{element\+\_\+file\+\_\+name}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{poly\+\_\+file\+\_\+name}}, \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+attributes}})
+\begin{DoxyCompactList}\small\item\em Create a triangulateio data file from ele node and poly files. This is used if the mesh is generated by using Triangle externally. The triangulateio structure is required to dump the mesh topology for restarts. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_a86bf54d4c238d866b9cbec1377e868bd}{oomph\+::\+Triangle\+Helper\+::dump\+\_\+triangulateio}} (\mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}}, std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dump\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Write all the triangulateio data to disk in a dump file that can then be used to restart simulations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1TriangleHelper_a9b95d3b41c921cd6d8804250a366f715}{oomph\+::\+Triangle\+Helper\+::read\+\_\+triangulateio}} (std\+::istream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{restart\+\_\+file}}, \mbox{\hyperlink{structoomph_1_1TriangulateIO}{Triangulate\+IO}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{triangle\+\_\+io}})
+\begin{DoxyCompactList}\small\item\em Read the triangulateio data from a dump file on disk, which can then be used to restart simulations. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,14 @@
+\doxysection{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h File Reference}
+\hypertarget{general__purpose__space__time__subsidiary__block__preconditioner_8h}{}\label{general__purpose__space__time__subsidiary__block__preconditioner_8h}\index{general\_purpose\_space\_time\_subsidiary\_block\_preconditioner.h@{general\_purpose\_space\_time\_subsidiary\_block\_preconditioner.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}}
+\begin{DoxyCompactList}\small\item\em General purpose block triangular preconditioner. By default this is Upper triangular. Also, by default Exact\+Preconditioner is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{oomph\+::\+GMRESBlock\+Preconditioner}}
+\begin{DoxyCompactList}\small\item\em The block preconditioner form of \doxylink{classoomph_1_1GMRES}{GMRES}. This version extracts the blocks from the global systems and assembles the system by concatenating all the matrices together. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,1143 @@
+\doxysection{oomph\+::Cylinder\+With\+Flag\+Domain Class Reference}
+\hypertarget{classoomph_1_1CylinderWithFlagDomain}{}\label{classoomph_1_1CylinderWithFlagDomain}\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+
+
+Domain for cylinder with flag as in Turek benchmark.  
+
+
+
+
+{\ttfamily \#include $<$cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Cylinder\+With\+Flag\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1CylinderWithFlagDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aa393d14243edaf8b8eaa02c9a01bd869}{Cylinder\+With\+Flag\+Domain}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a5772d8e13053e9043d8d298b9c0e447b}{cylinder\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ac753e635493fc26d8a56b66ce94c8d28}{top\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a7f64146703ebdc0ce221f982139247da}{bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a58487b3057e16e1c474126d9b12e764c}{tip\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{length}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{height}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{flag\+\_\+length}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{flag\+\_\+height}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{centre\+\_\+x}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{centre\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{a}})
+\begin{DoxyCompactList}\small\item\em Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a726928362d0d681f0420d1f088776e80}{\texorpdfstring{$\sim$}{\string~}\+Cylinder\+With\+Flag\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Emtpy because clean up happens in base class as a service to the user! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a40bca9a30f1f874c043e68621b28de74}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{time}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{m}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{direction}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{s}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specfied discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a5772d8e13053e9043d8d298b9c0e447b}{cylinder\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access fct to Geom\+Object (of type Circle) that represents the cylinder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a7f64146703ebdc0ce221f982139247da}{bottom\+\_\+flag\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access fct to Geom\+Objects for top, bottom and tip. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ac753e635493fc26d8a56b66ce94c8d28}{top\+\_\+flag\+\_\+pt}} ()
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a58487b3057e16e1c474126d9b12e764c}{tip\+\_\+flag\+\_\+pt}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aa0f0db0fdf2b271a6dde42ef36e9d40d}{linear\+\_\+interpolate}} (\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{left}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{right}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{s}}, \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Helper function to interpolate linearly between the "{}right"{} and "{}left"{} points; $ s \in [-1,1] $. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a22098b556345f035ddacbdf9ea1f7076}{p1}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a518fb98d53857ffd86d1cac4c23db0d9}{p2}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a6327976b3d8e582cfc232be01c45d975}{p3}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a060890ea588f8e5833d518fa707fe774}{p4}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ad4f4179e51afb966f11b999ef9ddd0a9}{p5}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a8af35f3606195d1bab1da58102b7fa15}{p6}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ae0aaa23dad312e7ea308e98b59015a51}{p7}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a20743a18902498e2537f557da2fec123}{p8}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a8ff949c600451d8cc9e53fc9b204dd79}{p9}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_af9fe7cd9299c2fe162804d60455609c6}{p10}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_af209469424b0b515eedb4587901453b6}{p11}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a8cd9138a4f584d439da6264e5aa65d2e}{p12}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_af96f841048a399c0d5b7cd4519c22d72}{p13}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ac07282a9f587fc6f10b81506c59a2001}{p14}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a3ddcf9eca20ac5f31358b9711fef5a09}{p15}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a633feb876937a1b58c013209defbad7e}{p16}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a38c6ea86f1d6218dccce7482dd6daf48}{p17}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a0076ec3ac4fbd0213719a2d2679ab1db}{p18}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a0a3ba355180e34fc7372fef35a6accb7}{p19}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a5c13c0e741670b57b0b8ac2e50e4f157}{p20}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_afb18b71be9144eb6ea2b36d113531b7e}{p21}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a69b821d40d982324df13380bb05db70b}{p22}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ad0ce5ac87bc9e4b455a99fc3a6cf5b9c}{p23}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a1e0ffc29a35d430c6ab123f8bc9a5d37}{p24}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_abbcbd7a97f86134091e3750f04a3fdfd}{p25}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a85707f0839cd70631c82d9254ed8c5d0}{p26}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a4f485315dc6bb184e298d8bba550866e}{p27}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a56fdcc4a8538bdc4c10e2c11355163f0}{p28}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a5eb61c2f311296d0ce91ec428a5d5329}{p29}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_af35a25c3f63e71f2bff61b1da3384630}{p30}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a73977bbf7e952fd71a465884e526c4db}{p31}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a600f1d0f8f3168e95b9f20931cdd5a26}{p32}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a2c3ddad128b8d2ca54bb015171637809}{p33}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a44aa94c4106c3f2d7c7575a50a56a98c}{p34}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_afba63042c55f44d17628aaa0623e97b8}{p35}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a8366e523946d218b27c998aca522742e}{p36}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aa239d71da15390053e4418e4902c8608}{p37}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a986aabc271029813cb541ae8555d1696}{p38}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a0b6726667f09eeabad0885858e684ff0}{p39}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a9a6150121807b24c30f1a57e23c899ca}{p40}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ad40423594322c7cea0161a39501535a3}{p41}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a49f3169b5cd06322394e808f3fb8dc91}{p42}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a4cf79435459ac5399f94f6e0686e5a0a}{p43}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a4288652a4436b747a86ff94346c61ebc}{p44}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a6988e0912e925fe62d6cad22195e8c5d}{p45}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a5dedb150b33c1260e09a5e73924c6861}{p46}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a34928d206b87289667344fc94a307509}{p47}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ae02eac305b33b85a2e87df1764e4b8d8}{p48}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aa5418e036166408fb5df662d93479a84}{p49}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a0b46b0c29925ba405a04fda8b3ab9c06}{p50}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_afb13bdcd16005bc0505908bb3c844f33}{Cylinder\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the central cylinder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a92ae4556f99335233c1c653e15fa1f48}{Top\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the top of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_ae4bfb961e03aab16d01fc4662c0214e3}{Bottom\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the bottom of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a2926eb3a4c171fbc924115f7dfd211a4}{Tip\+\_\+flag\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the tip of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aba284322fcd3d9b9a4231ec71ea6d96b}{Lx}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a733fc387ee7d25811edb6b99c796b242}{Ly}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_a9473fc0eb249a20c8a3456c708c8ba6f}{Centre\+\_\+x}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_aee096a172eec5ffc3719b625c52beb26}{Centre\+\_\+y}}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1CylinderWithFlagDomain_afdb4b1beb7e574e1bcfc7fbb8a6df700}{A}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Domain for cylinder with flag as in Turek benchmark. 
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00039}{39}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aa393d14243edaf8b8eaa02c9a01bd869}\label{classoomph_1_1CylinderWithFlagDomain_aa393d14243edaf8b8eaa02c9a01bd869} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!CylinderWithFlagDomain@{CylinderWithFlagDomain}}
+\index{CylinderWithFlagDomain@{CylinderWithFlagDomain}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{CylinderWithFlagDomain()}{CylinderWithFlagDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Cylinder\+With\+Flag\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}} \texorpdfstring{$\ast$}{*}}]{cylinder\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{top\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{bottom\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{tip\+\_\+flag\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{height,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{flag\+\_\+length,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{flag\+\_\+height,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{centre\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{centre\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. 
+
+Constructor, Pass the pointers to the Geom\+Objects that parametrise the cylinder, the three edges of the flag, the length and height of the domain, the length and height of the flag, the coordinates of the centre of the cylinder and its radius. 
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{196}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00186}{A}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00180}{Centre\+\_\+x}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00183}{Centre\+\_\+y}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00110}{p1}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00119}{p10}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00120}{p11}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00121}{p12}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00122}{p13}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00123}{p14}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00124}{p15}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00125}{p16}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00127}{p18}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00111}{p2}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00130}{p21}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00131}{p22}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00132}{p23}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00133}{p24}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00134}{p25}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00136}{p27}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00137}{p28}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00138}{p29}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00112}{p3}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00139}{p30}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00140}{p31}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00142}{p33}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00144}{p35}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00145}{p36}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00146}{p37}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00147}{p38}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00148}{p39}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00113}{p4}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00149}{p40}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00150}{p41}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00151}{p42}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00152}{p43}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00153}{p44}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00154}{p45}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00155}{p46}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00156}{p47}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00157}{p48}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00158}{p49}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00114}{p5}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00159}{p50}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00115}{p6}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00116}{p7}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00117}{p8}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00118}{p9}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a726928362d0d681f0420d1f088776e80}\label{classoomph_1_1CylinderWithFlagDomain_a726928362d0d681f0420d1f088776e80} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!````~CylinderWithFlagDomain@{\texorpdfstring{$\sim$}{\string~}CylinderWithFlagDomain}}
+\index{````~CylinderWithFlagDomain@{\texorpdfstring{$\sim$}{\string~}CylinderWithFlagDomain}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CylinderWithFlagDomain()}{\string~CylinderWithFlagDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Cylinder\+With\+Flag\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Emtpy because clean up happens in base class as a service to the user! 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00061}{61}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a7f64146703ebdc0ce221f982139247da}\label{classoomph_1_1CylinderWithFlagDomain_a7f64146703ebdc0ce221f982139247da} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!bottom\_flag\_pt@{bottom\_flag\_pt}}
+\index{bottom\_flag\_pt@{bottom\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{bottom\_flag\_pt()}{bottom\_flag\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Cylinder\+With\+Flag\+Domain\+::bottom\+\_\+flag\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access fct to Geom\+Objects for top, bottom and tip. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00082}{82}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00168}{Bottom\+\_\+flag\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source_l00215}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::set\+\_\+bottom\+\_\+flag\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a5772d8e13053e9043d8d298b9c0e447b}\label{classoomph_1_1CylinderWithFlagDomain_a5772d8e13053e9043d8d298b9c0e447b} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!cylinder\_pt@{cylinder\_pt}}
+\index{cylinder\_pt@{cylinder\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{cylinder\_pt()}{cylinder\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}} \texorpdfstring{$\ast$}{*} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::cylinder\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access fct to Geom\+Object (of type Circle) that represents the cylinder. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00076}{76}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00162}{Cylinder\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aa0f0db0fdf2b271a6dde42ef36e9d40d}\label{classoomph_1_1CylinderWithFlagDomain_aa0f0db0fdf2b271a6dde42ef36e9d40d} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!linear\_interpolate@{linear\_interpolate}}
+\index{linear\_interpolate@{linear\_interpolate}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{linear\_interpolate()}{linear\_interpolate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::linear\+\_\+interpolate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{left,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{right,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Helper function to interpolate linearly between the "{}right"{} and "{}left"{} points; $ s \in [-1,1] $. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00098}{98}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a40bca9a30f1f874c043e68621b28de74}\label{classoomph_1_1CylinderWithFlagDomain_a40bca9a30f1f874c043e68621b28de74} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{void}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{m,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{unsigned}} \&}]{direction,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parametrisation of macro element boundaries\+: f(s) is the position vector to macro-\/element m\textquotesingle{}s boundary in the specified direction \mbox{[}N/\+S/\+E/W\mbox{]} at the specfied discrete time level (time=0\+: present; time\texorpdfstring{$>$}{>}0\+: previous) 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{385}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00186}{A}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00168}{Bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00162}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00098}{linear\+\_\+interpolate()}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00174}{Lx}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00177}{Ly}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00110}{p1}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00119}{p10}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00120}{p11}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00121}{p12}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00122}{p13}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00123}{p14}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00124}{p15}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00125}{p16}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00127}{p18}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00111}{p2}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00130}{p21}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00131}{p22}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00132}{p23}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00133}{p24}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00134}{p25}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00136}{p27}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00137}{p28}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00138}{p29}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00112}{p3}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00139}{p30}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00140}{p31}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00142}{p33}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00144}{p35}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00145}{p36}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00146}{p37}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00147}{p38}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00148}{p39}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00113}{p4}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00149}{p40}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00150}{p41}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00151}{p42}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00152}{p43}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00153}{p44}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00154}{p45}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00155}{p46}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00156}{p47}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00157}{p48}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00158}{p49}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00114}{p5}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00159}{p50}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00115}{p6}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00116}{p7}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00117}{p8}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00118}{p9}}, \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00171}{Tip\+\_\+flag\+\_\+pt}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00165}{Top\+\_\+flag\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a58487b3057e16e1c474126d9b12e764c}\label{classoomph_1_1CylinderWithFlagDomain_a58487b3057e16e1c474126d9b12e764c} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!tip\_flag\_pt@{tip\_flag\_pt}}
+\index{tip\_flag\_pt@{tip\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{tip\_flag\_pt()}{tip\_flag\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Cylinder\+With\+Flag\+Domain\+::tip\+\_\+flag\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00090}{90}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00171}{Tip\+\_\+flag\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source_l00233}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::set\+\_\+tip\+\_\+flag\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ac753e635493fc26d8a56b66ce94c8d28}\label{classoomph_1_1CylinderWithFlagDomain_ac753e635493fc26d8a56b66ce94c8d28} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!top\_flag\_pt@{top\_flag\_pt}}
+\index{top\_flag\_pt@{top\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{top\_flag\_pt()}{top\_flag\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Cylinder\+With\+Flag\+Domain\+::top\+\_\+flag\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00086}{86}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00165}{Top\+\_\+flag\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__mesh_8h_source_l00224}{oomph\+::\+Algebraic\+Cylinder\+With\+Flag\+Mesh$<$ ELEMENT $>$\+::set\+\_\+top\+\_\+flag\+\_\+pt()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_afdb4b1beb7e574e1bcfc7fbb8a6df700}\label{classoomph_1_1CylinderWithFlagDomain_afdb4b1beb7e574e1bcfc7fbb8a6df700} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!A@{A}}
+\index{A@{A}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::A\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00186}{186}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ae4bfb961e03aab16d01fc4662c0214e3}\label{classoomph_1_1CylinderWithFlagDomain_ae4bfb961e03aab16d01fc4662c0214e3} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Bottom\_flag\_pt@{Bottom\_flag\_pt}}
+\index{Bottom\_flag\_pt@{Bottom\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Bottom\_flag\_pt}{Bottom\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Bottom\+\_\+flag\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the bottom of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00168}{168}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00082}{bottom\+\_\+flag\+\_\+pt()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a9473fc0eb249a20c8a3456c708c8ba6f}\label{classoomph_1_1CylinderWithFlagDomain_a9473fc0eb249a20c8a3456c708c8ba6f} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Centre\_x@{Centre\_x}}
+\index{Centre\_x@{Centre\_x}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Centre\_x}{Centre\_x}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Centre\+\_\+x\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00180}{180}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aee096a172eec5ffc3719b625c52beb26}\label{classoomph_1_1CylinderWithFlagDomain_aee096a172eec5ffc3719b625c52beb26} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Centre\_y@{Centre\_y}}
+\index{Centre\_y@{Centre\_y}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Centre\_y}{Centre\_y}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Centre\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00183}{183}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_afb13bdcd16005bc0505908bb3c844f33}\label{classoomph_1_1CylinderWithFlagDomain_afb13bdcd16005bc0505908bb3c844f33} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Cylinder\_pt@{Cylinder\_pt}}
+\index{Cylinder\_pt@{Cylinder\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Cylinder\_pt}{Cylinder\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Circle}}\texorpdfstring{$\ast$}{*} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Cylinder\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the central cylinder. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00162}{162}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00076}{cylinder\+\_\+pt()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aba284322fcd3d9b9a4231ec71ea6d96b}\label{classoomph_1_1CylinderWithFlagDomain_aba284322fcd3d9b9a4231ec71ea6d96b} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Lx@{Lx}}
+\index{Lx@{Lx}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Lx}{Lx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Lx\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00174}{174}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a733fc387ee7d25811edb6b99c796b242}\label{classoomph_1_1CylinderWithFlagDomain_a733fc387ee7d25811edb6b99c796b242} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Ly@{Ly}}
+\index{Ly@{Ly}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Ly}{Ly}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Ly\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00177}{177}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a22098b556345f035ddacbdf9ea1f7076}\label{classoomph_1_1CylinderWithFlagDomain_a22098b556345f035ddacbdf9ea1f7076} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p1@{p1}}
+\index{p1@{p1}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p1}{p1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00110}{110}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_af9fe7cd9299c2fe162804d60455609c6}\label{classoomph_1_1CylinderWithFlagDomain_af9fe7cd9299c2fe162804d60455609c6} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p10@{p10}}
+\index{p10@{p10}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p10}{p10}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p10\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00119}{119}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_af209469424b0b515eedb4587901453b6}\label{classoomph_1_1CylinderWithFlagDomain_af209469424b0b515eedb4587901453b6} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p11@{p11}}
+\index{p11@{p11}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p11}{p11}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p11\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00120}{120}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a8cd9138a4f584d439da6264e5aa65d2e}\label{classoomph_1_1CylinderWithFlagDomain_a8cd9138a4f584d439da6264e5aa65d2e} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p12@{p12}}
+\index{p12@{p12}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p12}{p12}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p12\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00121}{121}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_af96f841048a399c0d5b7cd4519c22d72}\label{classoomph_1_1CylinderWithFlagDomain_af96f841048a399c0d5b7cd4519c22d72} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p13@{p13}}
+\index{p13@{p13}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p13}{p13}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p13\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00122}{122}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ac07282a9f587fc6f10b81506c59a2001}\label{classoomph_1_1CylinderWithFlagDomain_ac07282a9f587fc6f10b81506c59a2001} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p14@{p14}}
+\index{p14@{p14}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p14}{p14}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p14\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00123}{123}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a3ddcf9eca20ac5f31358b9711fef5a09}\label{classoomph_1_1CylinderWithFlagDomain_a3ddcf9eca20ac5f31358b9711fef5a09} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p15@{p15}}
+\index{p15@{p15}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p15}{p15}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p15\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00124}{124}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a633feb876937a1b58c013209defbad7e}\label{classoomph_1_1CylinderWithFlagDomain_a633feb876937a1b58c013209defbad7e} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p16@{p16}}
+\index{p16@{p16}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p16}{p16}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p16\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00125}{125}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a38c6ea86f1d6218dccce7482dd6daf48}\label{classoomph_1_1CylinderWithFlagDomain_a38c6ea86f1d6218dccce7482dd6daf48} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p17@{p17}}
+\index{p17@{p17}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p17}{p17}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p17\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00126}{126}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a0076ec3ac4fbd0213719a2d2679ab1db}\label{classoomph_1_1CylinderWithFlagDomain_a0076ec3ac4fbd0213719a2d2679ab1db} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p18@{p18}}
+\index{p18@{p18}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p18}{p18}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p18\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00127}{127}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a0a3ba355180e34fc7372fef35a6accb7}\label{classoomph_1_1CylinderWithFlagDomain_a0a3ba355180e34fc7372fef35a6accb7} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p19@{p19}}
+\index{p19@{p19}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p19}{p19}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p19\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00128}{128}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a518fb98d53857ffd86d1cac4c23db0d9}\label{classoomph_1_1CylinderWithFlagDomain_a518fb98d53857ffd86d1cac4c23db0d9} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p2@{p2}}
+\index{p2@{p2}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p2}{p2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00111}{111}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a5c13c0e741670b57b0b8ac2e50e4f157}\label{classoomph_1_1CylinderWithFlagDomain_a5c13c0e741670b57b0b8ac2e50e4f157} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p20@{p20}}
+\index{p20@{p20}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p20}{p20}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p20\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00129}{129}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_afb18b71be9144eb6ea2b36d113531b7e}\label{classoomph_1_1CylinderWithFlagDomain_afb18b71be9144eb6ea2b36d113531b7e} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p21@{p21}}
+\index{p21@{p21}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p21}{p21}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p21\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00130}{130}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a69b821d40d982324df13380bb05db70b}\label{classoomph_1_1CylinderWithFlagDomain_a69b821d40d982324df13380bb05db70b} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p22@{p22}}
+\index{p22@{p22}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p22}{p22}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p22\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00131}{131}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ad0ce5ac87bc9e4b455a99fc3a6cf5b9c}\label{classoomph_1_1CylinderWithFlagDomain_ad0ce5ac87bc9e4b455a99fc3a6cf5b9c} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p23@{p23}}
+\index{p23@{p23}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p23}{p23}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p23\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00132}{132}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a1e0ffc29a35d430c6ab123f8bc9a5d37}\label{classoomph_1_1CylinderWithFlagDomain_a1e0ffc29a35d430c6ab123f8bc9a5d37} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p24@{p24}}
+\index{p24@{p24}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p24}{p24}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p24\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00133}{133}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_abbcbd7a97f86134091e3750f04a3fdfd}\label{classoomph_1_1CylinderWithFlagDomain_abbcbd7a97f86134091e3750f04a3fdfd} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p25@{p25}}
+\index{p25@{p25}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p25}{p25}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p25\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00134}{134}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a85707f0839cd70631c82d9254ed8c5d0}\label{classoomph_1_1CylinderWithFlagDomain_a85707f0839cd70631c82d9254ed8c5d0} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p26@{p26}}
+\index{p26@{p26}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p26}{p26}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p26\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00135}{135}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a4f485315dc6bb184e298d8bba550866e}\label{classoomph_1_1CylinderWithFlagDomain_a4f485315dc6bb184e298d8bba550866e} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p27@{p27}}
+\index{p27@{p27}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p27}{p27}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p27\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00136}{136}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a56fdcc4a8538bdc4c10e2c11355163f0}\label{classoomph_1_1CylinderWithFlagDomain_a56fdcc4a8538bdc4c10e2c11355163f0} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p28@{p28}}
+\index{p28@{p28}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p28}{p28}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p28\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00137}{137}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a5eb61c2f311296d0ce91ec428a5d5329}\label{classoomph_1_1CylinderWithFlagDomain_a5eb61c2f311296d0ce91ec428a5d5329} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p29@{p29}}
+\index{p29@{p29}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p29}{p29}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p29\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00138}{138}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a6327976b3d8e582cfc232be01c45d975}\label{classoomph_1_1CylinderWithFlagDomain_a6327976b3d8e582cfc232be01c45d975} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p3@{p3}}
+\index{p3@{p3}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p3}{p3}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p3\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00112}{112}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_af35a25c3f63e71f2bff61b1da3384630}\label{classoomph_1_1CylinderWithFlagDomain_af35a25c3f63e71f2bff61b1da3384630} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p30@{p30}}
+\index{p30@{p30}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p30}{p30}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p30\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00139}{139}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a73977bbf7e952fd71a465884e526c4db}\label{classoomph_1_1CylinderWithFlagDomain_a73977bbf7e952fd71a465884e526c4db} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p31@{p31}}
+\index{p31@{p31}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p31}{p31}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p31\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00140}{140}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a600f1d0f8f3168e95b9f20931cdd5a26}\label{classoomph_1_1CylinderWithFlagDomain_a600f1d0f8f3168e95b9f20931cdd5a26} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p32@{p32}}
+\index{p32@{p32}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p32}{p32}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p32\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00141}{141}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a2c3ddad128b8d2ca54bb015171637809}\label{classoomph_1_1CylinderWithFlagDomain_a2c3ddad128b8d2ca54bb015171637809} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p33@{p33}}
+\index{p33@{p33}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p33}{p33}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p33\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00142}{142}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a44aa94c4106c3f2d7c7575a50a56a98c}\label{classoomph_1_1CylinderWithFlagDomain_a44aa94c4106c3f2d7c7575a50a56a98c} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p34@{p34}}
+\index{p34@{p34}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p34}{p34}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p34\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00143}{143}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_afba63042c55f44d17628aaa0623e97b8}\label{classoomph_1_1CylinderWithFlagDomain_afba63042c55f44d17628aaa0623e97b8} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p35@{p35}}
+\index{p35@{p35}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p35}{p35}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p35\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00144}{144}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a8366e523946d218b27c998aca522742e}\label{classoomph_1_1CylinderWithFlagDomain_a8366e523946d218b27c998aca522742e} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p36@{p36}}
+\index{p36@{p36}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p36}{p36}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p36\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00145}{145}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aa239d71da15390053e4418e4902c8608}\label{classoomph_1_1CylinderWithFlagDomain_aa239d71da15390053e4418e4902c8608} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p37@{p37}}
+\index{p37@{p37}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p37}{p37}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p37\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00146}{146}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a986aabc271029813cb541ae8555d1696}\label{classoomph_1_1CylinderWithFlagDomain_a986aabc271029813cb541ae8555d1696} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p38@{p38}}
+\index{p38@{p38}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p38}{p38}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p38\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00147}{147}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a0b6726667f09eeabad0885858e684ff0}\label{classoomph_1_1CylinderWithFlagDomain_a0b6726667f09eeabad0885858e684ff0} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p39@{p39}}
+\index{p39@{p39}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p39}{p39}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p39\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00148}{148}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a060890ea588f8e5833d518fa707fe774}\label{classoomph_1_1CylinderWithFlagDomain_a060890ea588f8e5833d518fa707fe774} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p4@{p4}}
+\index{p4@{p4}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p4}{p4}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p4\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00113}{113}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a9a6150121807b24c30f1a57e23c899ca}\label{classoomph_1_1CylinderWithFlagDomain_a9a6150121807b24c30f1a57e23c899ca} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p40@{p40}}
+\index{p40@{p40}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p40}{p40}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p40\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00149}{149}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ad40423594322c7cea0161a39501535a3}\label{classoomph_1_1CylinderWithFlagDomain_ad40423594322c7cea0161a39501535a3} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p41@{p41}}
+\index{p41@{p41}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p41}{p41}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p41\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00150}{150}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a49f3169b5cd06322394e808f3fb8dc91}\label{classoomph_1_1CylinderWithFlagDomain_a49f3169b5cd06322394e808f3fb8dc91} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p42@{p42}}
+\index{p42@{p42}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p42}{p42}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p42\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00151}{151}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a4cf79435459ac5399f94f6e0686e5a0a}\label{classoomph_1_1CylinderWithFlagDomain_a4cf79435459ac5399f94f6e0686e5a0a} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p43@{p43}}
+\index{p43@{p43}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p43}{p43}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p43\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00152}{152}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a4288652a4436b747a86ff94346c61ebc}\label{classoomph_1_1CylinderWithFlagDomain_a4288652a4436b747a86ff94346c61ebc} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p44@{p44}}
+\index{p44@{p44}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p44}{p44}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p44\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00153}{153}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a6988e0912e925fe62d6cad22195e8c5d}\label{classoomph_1_1CylinderWithFlagDomain_a6988e0912e925fe62d6cad22195e8c5d} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p45@{p45}}
+\index{p45@{p45}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p45}{p45}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p45\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00154}{154}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a5dedb150b33c1260e09a5e73924c6861}\label{classoomph_1_1CylinderWithFlagDomain_a5dedb150b33c1260e09a5e73924c6861} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p46@{p46}}
+\index{p46@{p46}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p46}{p46}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p46\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00155}{155}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a34928d206b87289667344fc94a307509}\label{classoomph_1_1CylinderWithFlagDomain_a34928d206b87289667344fc94a307509} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p47@{p47}}
+\index{p47@{p47}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p47}{p47}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p47\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00156}{156}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ae02eac305b33b85a2e87df1764e4b8d8}\label{classoomph_1_1CylinderWithFlagDomain_ae02eac305b33b85a2e87df1764e4b8d8} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p48@{p48}}
+\index{p48@{p48}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p48}{p48}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p48\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00157}{157}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_aa5418e036166408fb5df662d93479a84}\label{classoomph_1_1CylinderWithFlagDomain_aa5418e036166408fb5df662d93479a84} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p49@{p49}}
+\index{p49@{p49}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p49}{p49}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p49\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00158}{158}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ad4f4179e51afb966f11b999ef9ddd0a9}\label{classoomph_1_1CylinderWithFlagDomain_ad4f4179e51afb966f11b999ef9ddd0a9} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p5@{p5}}
+\index{p5@{p5}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p5}{p5}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p5\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00114}{114}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a0b46b0c29925ba405a04fda8b3ab9c06}\label{classoomph_1_1CylinderWithFlagDomain_a0b46b0c29925ba405a04fda8b3ab9c06} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p50@{p50}}
+\index{p50@{p50}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p50}{p50}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p50\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00159}{159}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a8af35f3606195d1bab1da58102b7fa15}\label{classoomph_1_1CylinderWithFlagDomain_a8af35f3606195d1bab1da58102b7fa15} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p6@{p6}}
+\index{p6@{p6}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p6}{p6}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p6\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00115}{115}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_ae0aaa23dad312e7ea308e98b59015a51}\label{classoomph_1_1CylinderWithFlagDomain_ae0aaa23dad312e7ea308e98b59015a51} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p7@{p7}}
+\index{p7@{p7}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p7}{p7}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p7\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00116}{116}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a20743a18902498e2537f557da2fec123}\label{classoomph_1_1CylinderWithFlagDomain_a20743a18902498e2537f557da2fec123} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p8@{p8}}
+\index{p8@{p8}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p8}{p8}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p8\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00117}{117}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a8ff949c600451d8cc9e53fc9b204dd79}\label{classoomph_1_1CylinderWithFlagDomain_a8ff949c600451d8cc9e53fc9b204dd79} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!p9@{p9}}
+\index{p9@{p9}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{p9}{p9}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{double}}$>$ oomph\+::\+Cylinder\+With\+Flag\+Domain\+::p9\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00118}{118}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00196}{Cylinder\+With\+Flag\+Domain()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a2926eb3a4c171fbc924115f7dfd211a4}\label{classoomph_1_1CylinderWithFlagDomain_a2926eb3a4c171fbc924115f7dfd211a4} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Tip\_flag\_pt@{Tip\_flag\_pt}}
+\index{Tip\_flag\_pt@{Tip\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Tip\_flag\_pt}{Tip\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Tip\+\_\+flag\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the tip of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00171}{171}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00090}{tip\+\_\+flag\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1CylinderWithFlagDomain_a92ae4556f99335233c1c653e15fa1f48}\label{classoomph_1_1CylinderWithFlagDomain_a92ae4556f99335233c1c653e15fa1f48} 
+\index{oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}!Top\_flag\_pt@{Top\_flag\_pt}}
+\index{Top\_flag\_pt@{Top\_flag\_pt}!oomph::CylinderWithFlagDomain@{oomph::CylinderWithFlagDomain}}
+\doxysubsubsection{\texorpdfstring{Top\_flag\_pt}{Top\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Cylinder\+With\+Flag\+Domain\+::\+Top\+\_\+flag\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the top of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00165}{165}} of file \mbox{\hyperlink{cylinder__with__flag__domain_8h_source}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00385}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{cylinder__with__flag__domain_8h_source_l00086}{top\+\_\+flag\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{cylinder__with__flag__domain_8h}{cylinder\+\_\+with\+\_\+flag\+\_\+domain.\+h}}\end{DoxyCompactItemize}

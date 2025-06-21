@@ -1,0 +1,53 @@
+\doxysection{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc File Reference}
+\hypertarget{two__d__poisson__flux__bc__adapt_8cc}{}\label{two__d__poisson__flux__bc__adapt_8cc}\index{two\_d\_poisson\_flux\_bc\_adapt.cc@{two\_d\_poisson\_flux\_bc\_adapt.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Simple\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable equivalent of the Simple\+Rectangular\+Quad\+Mesh. Refinement is performed by the Quad\+Tree-\/based procedures implemented in the Refineable\+Quad\+Mesh base class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{Refineable\+Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with "{}sharp step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{Tanh\+Soln\+For\+Poisson\+::get\+\_\+exact\+\_\+u}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{x}}, \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{u}})
+\begin{DoxyCompactList}\small\item\em Exact solution as a Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{Tanh\+Soln\+For\+Poisson\+::source\+\_\+function}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{x}}, \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{source}})
+\begin{DoxyCompactList}\small\item\em Source function required to make the solution above an exact solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{void}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a0e99ccf27df36f28f091de6d57484172}{Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary}} (\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{const}} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Vector}}$<$ \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} $>$ \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{x}}, \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \&\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{flux}})
+\begin{DoxyCompactList}\small\item\em Flux required by the exact solution on a boundary on which x is fixed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{int}} \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem with flux boundary conditions, using two meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of "{}step"{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{double}} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Parameter for angle Phi of "{}step"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{two__d__poisson__flux__bc__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{two__d__poisson__flux__bc__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{two\_d\_poisson\_flux\_bc\_adapt.cc@{two\_d\_poisson\_flux\_bc\_adapt.cc}!main@{main}}
+\index{main@{main}!two\_d\_poisson\_flux\_bc\_adapt.cc@{two\_d\_poisson\_flux\_bc\_adapt.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{int}} main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve 2D Poisson problem with flux boundary conditions, using two meshes. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00528}{528}} of file \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00098}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}}, \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00110}{Tanh\+Soln\+For\+Poisson\+::source\+\_\+function()}}, and \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00101}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}}.
+

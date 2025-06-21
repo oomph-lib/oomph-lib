@@ -1,0 +1,95 @@
+\doxysection{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc File Reference}
+\hypertarget{fsi__channel__with__leaflet__precond_8cc}{}\label{fsi__channel__with__leaflet__precond_8cc}\index{fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Pseudo-\/\+Elastic Solid element class to overload the Block Preconditioner methods \doxylink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()} and \doxylink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()} to differentiate between DOFs subject to Lagrange multiplier and those that are not. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object\+: Undeformed straight, vertical leaflet. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em FSI leaflet in channel. Mesh update with pseudo-\/elasticity and solved with pseudo-\/elastic fsi preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\item 
+namespace \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper}}
+\begin{DoxyCompactList}\small\item\em Namespace for Navier Stokes LSC Preconditioner. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Preconditioner \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Create instance of Hypre preconditioner with settings that are appropriate for serial solution of Navier-\/\+Stokes momentum block. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\+\_\+\+Parameters\+::flux}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Flux\+: Pulsatile flow. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a84d27a1abb5d90476de43a9920dc347f}{Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+x0}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em x-\/position of root of leaflet \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a58c392f43a98de12e513c4bc50169fa6}{Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+height}} =0.\+5
+\begin{DoxyCompactList}\small\item\em height of leaflet \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_aced7b712f2e8390ceef273157690001b}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+left}} =1.\+0
+\begin{DoxyCompactList}\small\item\em length of fluid mesh to left of leaflet \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a0a2d2dfd5a51de4b4fcd3937c029010f}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+right}} =3.\+0
+\begin{DoxyCompactList}\small\item\em length of fluid mesh to right of leaflet \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ae1aaf6e9438d5ff7715fe6ceaeaf4fbc}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+height}} =1.\+0
+\begin{DoxyCompactList}\small\item\em height of fluid mesh \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a899325ce0b7ede8237bd52d8f0fd44e2}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nleft}} =4
+\begin{DoxyCompactList}\small\item\em Num elements to left of leaflet in coarse mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a83ca6bb6240a3f5ef2199a8646607dcf}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nright}} =12
+\begin{DoxyCompactList}\small\item\em Num elements to right of leaflet in coarse mesh. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a77f2f492d44897203cceb4cbadef7aba}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny1}} =2
+\begin{DoxyCompactList}\small\item\em Num elements in fluid mesh in y dirn adjacent to leaflet. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_ab0c1b5c0070b43a56ef64b106b6e2930}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny2}} =2
+\begin{DoxyCompactList}\small\item\em Num elements in fluid mesh in y dirn above leaflet. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\+\_\+\+Parameters\+::\+Re}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\+\_\+\+Parameters\+::\+Re\+St}} =50.\+0
+\begin{DoxyCompactList}\small\item\em Womersley number\+: Product of Reynolds and Strouhal numbers. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ab360628e7830e43e355ce5768f6d6a6c}{Global\+\_\+\+Parameters\+::H}} =0.\+05
+\begin{DoxyCompactList}\small\item\em Non-\/dimensional wall thickness. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\+\_\+\+Parameters\+::Q}} =2.\+0e-\/7
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_aeb964d25d190afd43c8317d4217f31b4}{Global\+\_\+\+Parameters\+::T}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Period for fluctuations in flux. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a6c27745997f9e118f0a99bf0390dbf4b}{Global\+\_\+\+Parameters\+::\+U\+\_\+base}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Min. flux. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ac04d493b5af4d1c99a9574489cf4dda0}{Global\+\_\+\+Parameters\+::\+U\+\_\+perturbation}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Max. flux. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a3e3428638f89f970fcf2148b0bab1465}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid mass density. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_af35d88426851c22dd07a69aa66de959a}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq\+\_\+beam}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Beam mass density. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_ab29c9f716872de235c78e62bce2c4109}{Global\+\_\+\+Parameters\+::\+Dt}} = \mbox{\hyperlink{namespaceGlobal__Parameters_aeb964d25d190afd43c8317d4217f31b4}{T}}/40.\+0
+\begin{DoxyCompactList}\small\item\em Timestep for simulation\+: 40 steps per period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}!main@{main}}
+\index{main@{main}!fsi\_channel\_with\_leaflet\_precond.cc@{fsi\_channel\_with\_leaflet\_precond.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver code. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l01068}{1068}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00259}{Global\+\_\+\+Parameters\+::\+Dt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00222}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00225}{Global\+\_\+\+Parameters\+::\+Re\+St}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00235}{Global\+\_\+\+Parameters\+::T}}.
+

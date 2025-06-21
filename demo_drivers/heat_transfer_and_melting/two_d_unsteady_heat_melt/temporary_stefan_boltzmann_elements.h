@@ -1,0 +1,2929 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
+// Header file for elements that are used to impose Stefan Boltzmann radiation
+// on the surface of unsteady heat elements
+
+#ifndef OOMPH_hierher_HEAT_TRANSFER_AND_MELT_ELEMENTS_HEADER
+#define OOMPH_hierher_HEAT_TRANSFER_AND_MELT_ELEMENTS_HEADER
+
+// Config header 
+#ifdef HAVE_CONFIG_H
+  #include <oomph-lib-config.h>
+#endif
+
+//Standard libray headers
+#include <cmath>
+
+// oomph-lib includes
+#include "generic.h" // ../generic/Qelements.h"
+
+
+namespace oomph
+{
+
+//=======start_namespace==========================================
+/// Namespace for intersection checker
+//================================================================
+namespace IntersectionChecker
+{
+
+ /// Check if finite-length line segments specified by end points
+ /// intersect (true) or not (false). From
+ /// http://paulbourke.net/geometry/lineline2d/
+ /// C++ contribution by Damian Coventry.
+ bool intersects(const Vector<Vector<double> >& first_segment_vertex,
+                 const Vector<Vector<double> >& second_segment_vertex,
+                 const double& epsilon_parallel=1.0e-15)
+ {
+  
+  double denom = ((first_segment_vertex[1][1] - first_segment_vertex[0][1])*
+                  (second_segment_vertex[1][0] - second_segment_vertex[0][0])) -
+   ((first_segment_vertex[1][0] - first_segment_vertex[0][0])*
+    (second_segment_vertex[1][1] - second_segment_vertex[0][1]));
+  
+  double nume_a = ((first_segment_vertex[1][0] - first_segment_vertex[0][0])*
+                   (second_segment_vertex[0][1] - first_segment_vertex[0][1])) -
+   ((first_segment_vertex[1][1] - first_segment_vertex[0][1])*
+    (second_segment_vertex[0][0] - first_segment_vertex[0][0]));
+  
+  double nume_b = ((second_segment_vertex[1][0] - second_segment_vertex[0][0])*
+                   (second_segment_vertex[0][1] - first_segment_vertex[0][1])) -
+   ((second_segment_vertex[1][1] - second_segment_vertex[0][1])*
+    (second_segment_vertex[0][0] - first_segment_vertex[0][0]));
+  
+  if(std::fabs(denom) < epsilon_parallel)
+   {
+    if( (std::fabs(nume_a) < epsilon_parallel) &&
+        (std::fabs(nume_b) < epsilon_parallel) )
+     {
+      return false; //COINCIDENT;
+     }
+    return false; //PARALLEL;
+   }
+  
+  double ua = nume_a / denom;
+  double ub = nume_b / denom;
+  
+  if( (ua >= 0.0) && (ua <= 1.0) && (ub >= 0.0) && (ub <= 1.0) )
+   {
+    /* // Get the intersection point. */
+    /* intersection[0] = second_segment_vertex[0][0] +  */
+    /*  ua*(second_segment_vertex[1][0] - second_segment_vertex[0][0]); */
+    /* intersection[1] = second_segment_vertex[0][1] +  */
+    /*  ua*(second_segment_vertex[1][1] - second_segment_vertex[0][1]); */
+    
+    return true; //INTERESECTING;
+   }
+  
+  return false; //NOT_INTERESECTING;
+ }
+
+}
+
+
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Namespace containing default function that provides zero
+/// atmospheric radiation
+//=======================================================================
+namespace SolarRadiationHelper
+ {
+
+
+
+  //=======================================================================
+  /// Default atmospheric radiation function in terms of time
+  //=======================================================================
+  void Zero_atmospheric_radiation_fct(const double& time,
+                                      double& solar_flux_magnitude,
+                                      Vector<double> &solar_flux_unit_vector,
+                                      double& total_diffuse_radiation)
+  {
+   solar_flux_magnitude=0.0;
+   solar_flux_unit_vector[0]= 0.0;
+   solar_flux_unit_vector[1]=-1.0;
+   total_diffuse_radiation=0.0;
+  }
+  
+}
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Template-free base class for elements that are illuminated by 
+/// solar radiation
+//======================================================================
+class SolarRadiationBase : public virtual FiniteElement,
+ public virtual FaceElement,
+ public virtual TemplateFreeUnsteadyHeatBaseFaceElement
+
+{
+ 
+public:
+
+ /// Constructor
+ SolarRadiationBase()
+  {
+   // Don't use tanh profile to smooth solar shadows
+   Smoothed_sun_shadow=false;
+   
+   // Factor for tanh profile to smooth solar shadows
+   Alpha_tanh_smooth_sun_shadow=100.0;
+   
+   // Assign default zero atmospheric radiation fct...
+   Atmospheric_radiation_fct_pt=
+    &SolarRadiationHelper::Zero_atmospheric_radiation_fct;
+   
+   // Make space for limiting angles for diffuse radiation
+   unsigned n_intpt = integral_pt()->nweight();
+   Diffuse_limit_angles.resize(n_intpt);
+   for (unsigned i=0;i<n_intpt;i++)
+    {
+     Diffuse_limit_angles[i].first=0.0;
+     Diffuse_limit_angles[i].second=MathematicalConstants::Pi;
+    }
+  }
+ 
+ 
+ /// Enable smoothing of shadow; optional argument provides
+ /// value for tanh smoothing factor (defaults to 100)
+ void enable_smoothed_sun_shadow(const double& alpha_tanh_smooth_sun_shadow=
+                                 100.0)
+ {
+  Smoothed_sun_shadow=true;
+  Alpha_tanh_smooth_sun_shadow=alpha_tanh_smooth_sun_shadow;
+ }
+ 
+ /// Disable smoothing of shadow
+ void disable_smoothed_sun_shadow()
+ {
+  Smoothed_sun_shadow=false;
+ }
+
+ /// Disable smoothing of shadow
+ bool smoothed_sun_shadow_is_enabled()
+ {
+  return Smoothed_sun_shadow;
+ }
+
+
+ /// Value for tanh smoothing factor (read only -- set with enable... fct;
+ /// only used if enabled!)
+ double alpha_tanh_smooth_sun_shadow()
+ {
+  return Alpha_tanh_smooth_sun_shadow;
+ }
+
+
+ /// Reference to the atmospheric radiation function pointer
+ void (* &atmospheric_radiation_fct_pt())(const double& time,
+                                          double &solar_flux_magnitude,
+                                          Vector<double>&
+                                          solar_flux_unit_vector,
+                                          double& total_diffuse_radiation)
+  {return Atmospheric_radiation_fct_pt;}
+
+  
+ /// Update limiting angles for diffuse radiation, given the
+ /// pointers to nodes that make up the "upper boundary"
+ /// that can potentially shield the integration points from diffuse
+ /// radiation
+ void update_limiting_angles(const Vector<Node*>&
+                             shielding_node_pt);
+
+
+ /// Get the atmospheric radiation as fct of integration point
+ /// index, time, Eulerian coordinate and outer unit normal. Virtual
+ /// so it can be overloaded in multiphysics problems
+ virtual double atmospheric_radiation(const unsigned& intpt,
+                                      const double& time,
+                                      const Vector<double>& x,
+                                      const Vector<double>& n);
+
+
+
+ /// Output cone of diffuse radiation for all integration points
+ void output_diffuse_radiation_cone(std::ostream &outfile,
+                                    const double& radius);
+ 
+
+/// Output min angle of cone of diffuse radiation for 
+/// all integration points
+void output_diffuse_radiation_cone_min_angle(std::ostream &outfile,
+                                             const double& radius);
+
+/// Output max angle of cone of diffuse radiation for 
+/// all integration points
+void output_diffuse_radiation_cone_max_angle(std::ostream &outfile,
+                                             const double& radius);
+
+
+/// Output illumination angles for all integration points
+void output_limiting_angles(std::ostream &outfile);
+
+
+/// Output diffuse and direct radiation
+void output_atmospheric_radiation(std::ostream &outfile);
+ 
+protected:
+
+ /// Use tanh profile to smooth solar shadows
+ bool Smoothed_sun_shadow;
+
+ /// Factor for tanh profile to smooth solar shadows
+ double Alpha_tanh_smooth_sun_shadow;
+
+  /// Vector of pairs storing max. and minimum angle for exposure
+ /// to diffuse atmospheric radiation for each integration point.
+ /// Initialised to 0 and pi (full radiation from semicircle above
+ /// integration point)
+ Vector<std::pair<double,double> > Diffuse_limit_angles;
+
+ /// Pointer to function that specifies atmospheric
+ /// radiation in terms of directional solar flux (unit vector and magnitude)
+ /// and total diffusive radiation (which is later weighted by diffuse limiting
+ /// angles). Input argument: time.
+ void (*Atmospheric_radiation_fct_pt)(const double& time,
+                                      double& solar_flux_magnitude,
+                                      Vector<double> &solar_flux_unit_vector,
+                                      double& total_diffuse_radiation);
+
+  private:
+
+ /// Private helper function to check if the straight line
+ /// connecting (x_prev,y_prev) and (x_next,y_next) jumps
+ /// quadrants (in which case crossing_quadrants is returned as true)
+ /// and what increment to the winding number this results in.
+ /// Error (indicated by no_problem being false) occurs if
+ /// the line crosses the origin exactly in which case we're
+ /// stuffed. Diagnostics are returned in error string.
+ void check_quadrant_jump(const double& x_prev,
+                          const double& y_prev,
+                          const double& x_next,
+                          const double& y_next,
+                          bool& crossing_quadrants,
+                          int& n_winding_increment,
+                          std::string& error_string,
+                          bool& no_problem);
+ 
+};
+
+
+
+
+//=====================================================================
+/// Get the atmospheric radiation as fct of integration point
+/// index, time, Eulerian coordinate and outer unit normal. Virtual
+/// so it can be overloaded in multiphysics problems
+//=====================================================================
+double SolarRadiationBase::atmospheric_radiation(const unsigned& intpt,
+                                                 const double& time,
+                                                 const Vector<double>& x,
+                                                 const Vector<double>& n)
+{
+ double radiation=0.0;
+ unsigned n_dim = this->nodal_dimension();
+ double solar_flux_magnitude=0.0;
+ Vector<double> solar_flux_unit_vector(n_dim);
+ double total_diffuse_radiation=0.0;
+ Atmospheric_radiation_fct_pt(time,solar_flux_magnitude,
+                              solar_flux_unit_vector,
+                              total_diffuse_radiation);
+ 
+ // Diffuse radiation from opening angle
+ //-------------------------------------
+ double phi_exposed=Diffuse_limit_angles[intpt].second-
+  Diffuse_limit_angles[intpt].first;
+ if (phi_exposed>0.0)
+  {
+   radiation+=total_diffuse_radiation*phi_exposed/
+    MathematicalConstants::Pi;
+   
+#ifdef PARANOID 
+   double tol=1.0e-5;
+   if (phi_exposed-MathematicalConstants::Pi>tol)
+    {
+     std::stringstream error_message;
+     error_message << "Exposure angle " << phi_exposed
+                   << " greater than 180^o at ( "
+                   << x[0] << " , " << x[1] << " )\n"
+                   << "Actual difference is: " 
+                   << phi_exposed-MathematicalConstants::Pi
+                   << " which exceeds tolerance " << tol << std::endl;
+     //throw 
+      OomphLibError(error_message.str(),
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+  }
+ 
+ // Direct radiation (with directional cosine and ignore
+ //-----------------------------------------------------
+ // shielded bits)
+ //---------------
+ 
+ 
+ // Cos of angle between outer unit normal and direct solar flux
+ double cos_angle=-(n[0]*solar_flux_unit_vector[0]+
+                    n[1]*solar_flux_unit_vector[1]);
+ 
+ // No further contributions if we're pointing away from the sun
+ if (cos_angle>0.0)
+  {
+   // Angle that the incoming solar radiation makes
+   // with the horizontal
+   double theta=atan2(solar_flux_unit_vector[0],-solar_flux_unit_vector[1]);
+   double phi=0.5*MathematicalConstants::Pi+theta;
+   
+   
+   // Bounding angles of visibility
+   double phi_min=Diffuse_limit_angles[intpt].first;
+   double phi_max=Diffuse_limit_angles[intpt].second;
+   
+   // Is the sun visible?
+   if (Smoothed_sun_shadow)
+    {
+     // Smooth shadow
+     double tanh_factor=
+      0.5*(-tanh(Alpha_tanh_smooth_sun_shadow*(phi-phi_max))
+           -tanh(Alpha_tanh_smooth_sun_shadow*(phi_min-phi)));
+     radiation+=cos_angle*solar_flux_magnitude*tanh_factor;
+    }
+   else
+    {
+     // Hard shadow
+     if (phi>phi_min)
+      {
+       if (phi<phi_max)
+        {
+         radiation+=cos_angle*solar_flux_magnitude;
+        }
+      }
+    }
+  }
+ 
+ return radiation;
+}
+
+
+//====================================================================
+/// Private helper function to check if the straight line
+/// connecting (x_prev,y_prev) and (x_next,y_next) jumps
+/// quadrants (in which case crossing_quadrants is returned as true)
+/// and what increment to the winding number this results in.
+/// Error (indicated by no_problem being false) occurs if
+/// the line crosses the origin exactly in which case we're
+/// stuffed. Diagnostics are returned in error string.
+//====================================================================
+void SolarRadiationBase::check_quadrant_jump(const double& x_prev,
+                                             const double& y_prev,
+                                             const double& x_next,
+                                             const double& y_next,
+                                             bool& crossing_quadrants,
+                                             int& n_winding_increment,
+                                             std::string& error_string,
+                                             bool& no_problem)
+{
+ // Sanity check: We have to keep track of winding numbers
+ // but we're stuffed if we our discrete increments in coordinates
+ // jump diagonally across quadrants...
+ std::stringstream error_message;
+ no_problem=true;
+ crossing_quadrants=false;
+ 
+ // y coordinate of intersection with x axis
+ double y_intersect=0.0;
+ double denom=x_next-x_prev;
+ 
+ // If denominator is zero then we're intersection exactly
+ // at the sample point and we're absolutely screwed. This
+ // really shouldn't happen.
+ if (denom!=0.0)
+  {
+   y_intersect=y_prev-(y_next-y_prev)*x_prev/denom;
+  }
+ if ((x_prev>0.0)&&(y_prev>0.0)&&(x_next<0.0)&&(y_next<0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from upper right quadrant to lower left one\n";
+   oomph_info    << "Jumped from upper right quadrant to lower left one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from above: increase winding number
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=1;
+    }
+  }
+ else if ((x_prev<0.0)&&(y_prev<0.0)&&(x_next>0.0)&&(y_next>0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from lower left quadrant to upper right one\n";
+   oomph_info    << "Jumped from lower left quadrant to upper right one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from below: reduce winding number
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=-1;
+    }
+  }
+ else if ((x_prev<0.0)&&(y_prev>0.0)&&(x_next>0.0)&&(y_next<0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from upper left quadrant to lower right one\n";
+   oomph_info    << "Jumped from upper left quadrant to lower right one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from above: increase winding number
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=1;
+    }
+  }
+ else if ((x_prev>0.0)&&(y_prev<0.0)&&(x_next<0.0)&&(y_next>0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from lower right quadrant to upper left one\n";
+   oomph_info    << "Jumped from lower right quadrant to upper left one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from below: decrease winding number
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=-1;
+    }
+  }
+}
+
+//=====================================================================
+/// Update limiting angles for diffuse radiation, given the
+/// Vector of pointers to nodes that make up the "upper boundary"
+/// that can potentially shield the integration points from diffuse
+/// radiation
+//=====================================================================
+ void SolarRadiationBase::update_limiting_angles(const Vector<Node*>&
+                                                 shielding_node_pt)
+{
+
+ // Search through all shielding nodes and find the
+ // bounding ones for this element
+ Node* first_vertex_node_pt=node_pt(0);
+ unsigned nnod_el=nnode();
+ Node* second_vertex_node_pt=node_pt(nnod_el-1);
+
+ // Find left and rightmost node of element in shielding_node_pt vector:
+ unsigned j_left=0;
+ bool found=false;
+ unsigned nnod=shielding_node_pt.size();
+ for (unsigned j=0;j<nnod;j++)
+  {
+   // We come from the left so we're definitely meeting the leftmost
+   // node
+   if ((shielding_node_pt[j]==first_vertex_node_pt)||
+       (shielding_node_pt[j]==second_vertex_node_pt))
+    {
+     j_left=j;
+     found=true;
+     break;
+    }
+  }
+ unsigned j_right=j_left+1;
+
+ // Did we succeed?
+ if (!found)
+  {
+   throw OomphLibError("Failed to find leftmost node in shielding_node_pt",
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+
+   oomph_info << "Integration point: " <<  x[0] << " " << x[1] << std::endl;
+    
+   // Loop over all potential shielding nodes to the left to find
+   // minimum angle
+   int n_winding=0;
+
+   // Initial point
+   Node* nod_pt=shielding_node_pt[0];
+
+   // Coordinate relative to sampling point
+   double x_prev=nod_pt->x(0)-x[0];
+   double y_prev=nod_pt->x(1)-x[1];
+
+#ifdef PARANOID
+   // Check that initial point is to the left of current point
+   // for calibration purposes...
+   if (x_prev>0.0)
+    {
+     throw OomphLibError(
+      "Leftmost point in shielding nodes is not to the left of current int pt",
+      OOMPH_CURRENT_FUNCTION,      
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Angle against x-axis relative to sampling point
+   double phi_prev=atan2(y_prev,x_prev);
+
+   oomph_info << "Vertex point " <<  0 << " : " 
+              <<  nod_pt->x(0) << " " << nod_pt->x(1) 
+              << " phi_raw: " << phi_prev;
+   oomph_info << " wind1 " << n_winding << " ";
+
+   // Want a positive angle!
+   if (phi_prev<0.0)
+    {
+     n_winding+=1;
+     phi_prev+=2.0*MathematicalConstants::Pi;
+    }
+
+   oomph_info << " wind2 " << n_winding << " ";
+   oomph_info << " phi_adj: " << phi_prev << std::endl;
+
+
+   // Current best guess for minimum angle to the left
+   double phi_left=phi_prev;
+
+
+
+   // Loop over all other nodes
+   for (unsigned j=1;j<=j_left;j++)
+    {
+     Node* nod_pt=shielding_node_pt[j];
+     double x_next=nod_pt->x(0)-x[0];
+     double y_next=nod_pt->x(1)-x[1];
+     double phi_next=atan2(y_next,x_next);
+     
+     oomph_info << "Vertex point " << j << " : " 
+                <<  nod_pt->x(0) << " " << nod_pt->x(1) 
+                << " phi_raw: " << phi_next;
+     
+     // Sanity check: We have to keep track of winding numbers
+     // but we're stuffed if we our discrete increments in coordinates
+     // jump diagonally across quadrants...
+     std::string error_string;
+     bool no_problem=true;
+     bool crossing_quadrants=false;
+     int n_winding_increment=0;
+
+     // Check if we've crossed quadrants
+     check_quadrant_jump(x_prev,
+                         y_prev,
+                         x_next,
+                         y_next,
+                         crossing_quadrants,
+                         n_winding_increment,
+                         error_string,
+                         no_problem);
+
+     // Success?
+     if (no_problem)
+      {
+       n_winding+=n_winding_increment;
+      }
+     // Complain bitterly
+     else
+      {
+       std::stringstream error_message;
+       error_message << error_string;
+       error_message << "\n x/y_prev, x/y_next:"
+                     << x_prev << " "
+                     << y_prev << " "
+                     << x_next << " "
+                     << y_next << " "<< std::endl;
+       error_message << "for point at "
+                     << x[0] << " " << x[1] << std::endl;
+       error_message << "chain of shielding nodes on left:\n";
+       for (unsigned jj=1;jj<=j_left;jj++)
+        {
+         Node* nnod_pt=shielding_node_pt[jj];
+         error_message << nnod_pt->x(0) << " "
+                       << nnod_pt->x(1) << "\n";
+        }
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+
+     oomph_info << " wind1 " << n_winding << " ";
+
+     // If we're crossing the x axis to the left of the origin
+     // without jumping across quadrants we
+     // have to adjust the winding number
+     if (!crossing_quadrants)
+      {
+       if ((x_prev<0.0)&&(x_next<0.0))
+        {
+         if ((y_prev>=0.0)&&(y_next<0.0))
+          {
+           n_winding+=1;
+          }
+         else if ((y_prev<0.0)&&(y_next>=0.0))
+          {
+           n_winding-=1;
+          }
+        }
+      }
+
+     
+     // Correct angle by winding
+     phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi;
+      
+     oomph_info << " wind2 " << n_winding << " ";
+     oomph_info << " phi_adj: " << phi_next << std::endl;
+
+     // Is it smaller?
+     if (phi_next<phi_left)
+      {
+       phi_left=phi_next;
+      }
+     
+     // Bump up
+     x_prev=x_next;
+     y_prev=y_next;
+     phi_prev=phi_next;
+    }
+
+
+   // Loop over all potential shielding nodes to the right to find
+   // maximum angle
+   n_winding=0;
+
+   // Initial point
+   nod_pt=shielding_node_pt[nnod-1];
+
+   // Coordinate relative to sampling point
+   x_prev=nod_pt->x(0)-x[0];
+   y_prev=nod_pt->x(1)-x[1];
+
+#ifdef PARANOID
+   // Check that initial point is to the right of current point
+   // for calibration purposes...
+   if (x_prev<0.0)
+    {
+     throw OomphLibError(
+      "Rightmost point in shielding nodes is not to the right of current int pt",
+      OOMPH_CURRENT_FUNCTION,      
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Angle against x-axis relative to sampling point
+   phi_prev=atan2(y_prev,x_prev);
+
+   // Current best guess for maximum angle to the right
+   double phi_right=phi_prev;
+   
+   // Loop over all other nodes
+   //for (unsigned j=j_right+1;j<nnod;j++)
+   for (unsigned j=nnod-2;j>=j_right;j--)
+    {
+     Node* nod_pt=shielding_node_pt[j];
+     double x_next=nod_pt->x(0)-x[0];
+     double y_next=nod_pt->x(1)-x[1];
+     double phi_next=atan2(y_next,x_next);
+
+     // Sanity check: We have to keep track of winding numbers
+     // but we're stuffed if we our discrete increments in coordinates
+     // jump diagonally across quadrants...
+     std::string error_string;
+     bool no_problem=true;
+     bool crossing_quadrants=false;
+     int n_winding_increment=0;
+
+     // Check if we've crossed quadrants
+     check_quadrant_jump(x_prev,
+                         y_prev,
+                         x_next,
+                         y_next,
+                         crossing_quadrants,
+                         n_winding_increment,
+                         error_string,
+                         no_problem);
+
+     // Success?
+     if (no_problem)
+      {
+       n_winding+=n_winding_increment;
+      }
+     // Complain bitterly
+     else
+      {
+       std::stringstream error_message;
+       error_message << error_string;
+       error_message << "\n x/y_prev, x/y_next:"
+                     << x_prev << " "
+                     << y_prev << " "
+                     << x_next << " "
+                     << y_next << " "<< std::endl;
+       error_message << "for point at "
+                     << x[0] << " " << x[1] << std::endl;
+       error_message << "chain of shielding nodes on right:\n";
+       for (unsigned jj=j_right;jj<nnod;jj++)
+        {
+         Node* nnod_pt=shielding_node_pt[jj];
+         error_message << nnod_pt->x(0) << " "
+                       << nnod_pt->x(1) << "\n";
+        }
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     
+     // If we're crossing the x axis to the left of the origin
+     // without jumping across quadrants we
+     // have to adjust the winding number
+     if (!crossing_quadrants)
+      {
+       if ((x_prev<0.0)&&(x_next<0.0))
+        {
+         if ((y_prev>=0.0)&&(y_next<0.0))
+          {
+           n_winding+=1;
+          }
+         else if ((y_prev<0.0)&&(y_next>=0.0))
+          {
+           n_winding-=1;
+          }
+        }
+      }
+     
+     // Correct angle by winding
+     phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi;
+
+     // Is it bigger?
+     if (phi_next>phi_right)
+      {
+       phi_right=phi_next;
+      }
+     
+     // Bump up
+     x_prev=x_next;
+     y_prev=y_next;
+     phi_prev=phi_next;
+    }
+
+//---
+
+   Diffuse_limit_angles[ipt].first=phi_right;
+   Diffuse_limit_angles[ipt].second=phi_left;
+  }
+}
+
+
+
+//=====================================================================
+/// Output cone of diffuse radiation for all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_min=Diffuse_limit_angles[ipt].first;
+   double phi_max=Diffuse_limit_angles[ipt].second;
+   
+   if (phi_max>phi_min)
+    {
+     outfile << x[0]+radius*cos(phi_min) << " "
+             << x[1]+radius*sin(phi_min) << "\n"
+             << x[0] << " "
+             << x[1] << "\n"
+             << x[0]+radius*cos(phi_max) << " "
+             << x[1]+radius*sin(phi_max) << "\n";
+    }
+   else
+    {
+     outfile << x[0] << " "
+             << x[1] << "\n"
+             << x[0] << " "
+             << x[1] << "\n"
+             << x[0] << " "
+             << x[1] << "\n";
+    }
+  }
+}
+
+
+//=====================================================================
+/// Output max angle of cone of diffuse radiation for 
+/// all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone_max_angle(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_max=Diffuse_limit_angles[ipt].second;
+
+   unsigned nplot=100;
+   double fract=0.1;
+   for (unsigned j=0;j<nplot;j++)
+    {
+     double phi=phi_max*double(j)/double(nplot-1);
+
+     outfile
+      << x[0]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*cos(phi) << " "
+      << x[1]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*sin(phi) << "\n";
+    }
+   outfile << x[0] << " "
+           << x[1] << "\n"
+           << x[0]+radius*cos(phi_max) << " "
+           << x[1]+radius*sin(phi_max) << "\n";
+
+  }
+}
+//=====================================================================
+/// Output min angle of cone of diffuse radiation for 
+/// all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone_min_angle(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_min=Diffuse_limit_angles[ipt].first;
+
+   unsigned nplot=100;
+   double fract=0.13;
+   for (unsigned j=0;j<nplot;j++)
+    {
+     double phi=phi_min*double(j)/double(nplot-1);
+     
+     outfile 
+      << x[0]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*cos(phi) << " "
+      << x[1]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*sin(phi) << "\n";
+    }
+   outfile << x[0] << " "
+           << x[1] << "\n"
+           << x[0]+radius*cos(phi_min) << " "
+           << x[1]+radius*sin(phi_min) << "\n";
+
+  }
+}
+
+
+
+//=====================================================================
+/// Output illumination angles for all integration points
+//=====================================================================
+void SolarRadiationBase::output_limiting_angles(std::ostream &outfile)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+ Vector<double> normal(n_dim);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   // Get outer unit normal
+   this->outer_unit_normal(s,normal);
+
+   double phi_min=Diffuse_limit_angles[ipt].first;
+   double phi_max=Diffuse_limit_angles[ipt].second;
+   
+   outfile << x[0] << " "
+           << x[1] << " "
+           << normal[0] << " "
+           << normal[1] << " "
+           << phi_min << " "
+           << phi_max << "\n";
+    
+  }
+}
+
+
+
+
+//=====================================================================
+/// Output illumination angles for all integration points
+//=====================================================================
+void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile)
+{
+
+ // Get time from first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+ Vector<double> normal(n_dim);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   // Get outer unit normal
+   this->outer_unit_normal(s,normal);
+
+   // Get radiation
+   double radiation=atmospheric_radiation(ipt,
+                                          time,
+                                          x,
+                                          normal);
+   // output
+   outfile << x[0] << " "
+           << x[1] << " "
+           << radiation << " "
+           << normal[0] << " "
+           << normal[1] << "\n";
+    
+  }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Template-free base class for elements that are illuminated 
+/// by (and illuminate) other Stefan Boltzmann elements
+//======================================================================
+class StefanBoltzmannRadiationBase :
+public virtual FiniteElement,
+ public virtual FaceElement,
+ public virtual TemplateFreeUnsteadyHeatBaseFaceElement
+{
+ 
+public:
+
+ /// Constructor
+ StefanBoltzmannRadiationBase()
+  {
+   // Pointer to non-dim Stefan Boltzmann constant
+   Sigma_pt=0;
+   
+   // Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
+   Theta_0_pt=0;
+   
+   // Make space for Stefan Boltzmann illumination info
+   unsigned n_intpt = integral_pt()->nweight();
+   Stefan_boltzmann_illumination_info.resize(n_intpt);
+  }
+ 
+ /// Pointer to non-dim Stefan Boltzmann constant
+ double*& sigma_pt(){return Sigma_pt;}
+ 
+ /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
+ double*& theta_0_pt(){return Theta_0_pt;}
+
+ /// Non-dim Stefan Boltzmann constant (switched off by default)
+ double sigma()
+  {
+   if (Sigma_pt==0)
+    {
+     return 0.0;
+    }
+   else
+    {
+     return *Sigma_pt;
+    }
+  }
+
+ /// Non-dim zero centrigrade offset in Stefan Boltzmann law
+ /// (must be set if effect is enabled i.e. if non-default
+ /// non-dim Stefan Boltzmann constant has been set)
+ double theta_0()
+  {
+   if (Sigma_pt==0)
+    {
+     return 0.0;
+    }
+   else
+    {
+     if (Theta_0_pt==0)
+      {
+       throw OomphLibError("Non-dim zero-centrigrade offset not set",
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+     else
+      {
+       return *Theta_0_pt;
+      }
+    }
+  }
+
+
+ /// Compute the element's contribution to Stefan Boltzmann
+ /// radiation onto point at r_illuminated with local outer unit
+ /// normal n_illuminated,
+ /// using the integration points (in current element) contained
+ /// in visible_intpts_in_current_element.
+ double contribution_to_stefan_boltzmann_radiation(
+  const Vector<double>& r_illuminated,
+  const Vector<double>& n_illuminated,
+  const Vector<unsigned>& visible_intpts_in_current_element)
+  {
+   // Dummy file
+   std::ofstream outfile;
+   return contribution_to_stefan_boltzmann_radiation(
+    r_illuminated,
+    n_illuminated,
+    visible_intpts_in_current_element,
+    outfile);
+  }
+
+ /// Compute the element's contribution to Stefan Boltzmann
+ /// radiation onto point at r_illuminated with local outer unit
+ /// normal n_illuminated,
+ /// using the integration points (in current element) contained
+ /// in visible_intpts_in_current_element; output in outfile
+ double contribution_to_stefan_boltzmann_radiation(
+  const Vector<double>& r_illuminated,
+  const Vector<double>& n_illuminated,
+  const Vector<unsigned>& visible_intpts_in_current_element,
+  std::ofstream& outfile);
+   
+ /// Wipe illumination info
+ void wipe_stefan_boltzmann_illumination_info()
+ {
+  unsigned nint=Stefan_boltzmann_illumination_info.size();
+  for (unsigned ipt=0;ipt<nint;ipt++)
+   {
+    Stefan_boltzmann_illumination_info[ipt].clear();
+   }
+ }
+       
+ /// Set illumination info: For integration point, ipt,
+ /// we store all pairs identifying illuminating elements
+ /// (via pointer to element and indices of illuminating
+ /// integration points):
+ /// Stefan_boltzmann_illumination_info[ipt].size() = number of illuminating
+ ///       elements
+ /// Stefan_boltzmann_illumination_info[ipt][e].first = pointer to e-th
+ ///       illuminating element
+ /// Stefan_boltzmann_illumination_info[ipt][e].second = vector containing
+ ///       indices of integration points in e-th illuminating element
+ ///       that are visible from current element's ipt'th integration point.
+ /// Optional boolean  add_solid_position_data (default: true) adds 
+ /// nodal position data if the nodes are solid nodes.
+ void add_stefan_boltzmann_illumination_info(
+  const unsigned& ipt,
+  StefanBoltzmannRadiationBase* illuminating_el_pt,
+  Vector<unsigned>& illuminating_integration_point_index,
+  const bool& add_solid_position_data=true)
+  {
+#ifdef PARANOID
+   unsigned n=Stefan_boltzmann_illumination_info[ipt].size();
+   for (unsigned e=0;e<n;e++)
+    {
+     if (Stefan_boltzmann_illumination_info[ipt][e].first==illuminating_el_pt)
+      {
+       throw OomphLibError(
+        "Element has already been added!",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+
+   Stefan_boltzmann_illumination_info[ipt].push_back(
+    std::make_pair(illuminating_el_pt,illuminating_integration_point_index));
+
+   // Add nodal Data of illuminating elements as external data
+   unsigned nnod=illuminating_el_pt->nnode();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     Node* ext_node_pt=illuminating_el_pt->node_pt(j);
+     bool own=false;
+     for (unsigned jj=0;jj<nnod;jj++)
+      {
+       if (node_pt(jj)==ext_node_pt)
+        {
+         own=true;
+         break;
+        }
+      }
+     if (!own)
+      {
+       add_external_data(ext_node_pt);
+       if (add_solid_position_data)
+        {
+         SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_node_pt);
+         if (solid_node_pt!=0)
+          {
+           add_external_data(solid_node_pt->variable_position_pt());
+          }
+        }
+      }
+    }
+
+  }
+
+ /// Output Stefan Boltzmann radiation: x,y,in,out,n_x,n_y
+ void output_stefan_boltzmann_radiation(std::ostream &outfile);
+
+ /// Output Stefan Boltzmann radiation: Plots rays from illuminated
+ /// integration point to illuminating ones (and back).
+ void output_stefan_boltzmann_radiation_rays(
+  std::ostream &outfile, 
+  const unsigned& integration_point=UINT_MAX); 
+
+
+ /// Compute the incoming Stefan Boltzmann radiation
+ /// onto integration point ipt -- input externally pre-computed
+ /// Eulerian coordinate of illuminated integration point, r_illuminated,
+ /// and outer unit normal to that point, n_illuminated.
+ double incoming_stefan_boltzmann_radiation(const unsigned& ipt,
+                                            const Vector<double>& r_illuminated,
+                                            const Vector<double>& n_illuminated)
+ {
+  // Initialise flux
+  double flux=0.0;
+
+  /// Number of contributing (illuminating) elements
+  unsigned n_contrib=Stefan_boltzmann_illumination_info[ipt].size();
+  for (unsigned e=0;e<n_contrib;e++)
+   {
+    // Pointer to contributing (illuminating) element
+    StefanBoltzmannRadiationBase* el_pt=
+     Stefan_boltzmann_illumination_info[ipt][e].first;
+    
+    // Indices of illuminating integration points that contribute
+    Vector<unsigned> visible_integration_points=
+     Stefan_boltzmann_illumination_info[ipt][e].second;
+    
+    // Add contribution
+    flux+=el_pt->contribution_to_stefan_boltzmann_radiation
+     (r_illuminated,n_illuminated,visible_integration_points);
+   }
+  
+  return flux;
+ }
+
+  protected:
+
+ /// Pointer to non-dim Stefan Boltzmann constant
+ double* Sigma_pt;
+
+ /// Pointer to non-dim zero centrigrade offset in Stefan Boltzmann law
+ double* Theta_0_pt;
+
+ /// Illumination info: For each integration point, ipt,
+ /// we store all pairs identifying illuminating elements
+ /// (via pointer to element and illumnating integration points):
+ ///
+ /// Stefan_boltzmann_illumination_info[ipt].size() = number of illuminating
+ ///       elements
+ /// Stefan_boltzmann_illumination_info[ipt][e].first = pointer to e-th
+ ///       illuminating element
+ /// Stefan_boltzmann_illumination_info[ipt][e].second = vector containing
+ ///       index of integration points in e-th illuminating element that are
+ ///       visible from current element's ipt'th integration point.
+ Vector<Vector<std::pair<StefanBoltzmannRadiationBase*,Vector<unsigned> > > >
+ Stefan_boltzmann_illumination_info;
+
+
+};
+
+
+
+//=====================================================================
+/// Compute the element's contribution to Stefan Boltzmann radiation
+/// onto point at r_illuminated with local outer unit normal n_illuminated,
+/// using the integration points (in current element) contained
+/// in visible_intpts_in_current_element.
+//=====================================================================
+double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
+ const Vector<double>& r_illuminated,
+ const Vector<double>& n_illuminated,
+ const Vector<unsigned>& visible_intpts_in_current_element,
+ std::ofstream &outfile)
+{
+
+ if (outfile.is_open())
+  {
+   outfile << "ZONE\n";
+   outfile  << r_illuminated[0] << " "
+            << r_illuminated[1] << "0 0\n";
+  }
+
+ // Initialise
+ double contribution=0.0;
+ 
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+
+ //Set up memory for the shape functions
+ Shape psi(n_node);
+ DShape dpsids(n_node,1);
+ 
+ // Loop over contributing integration points
+ unsigned nint=visible_intpts_in_current_element.size();
+ for (unsigned ii=0;ii<nint;ii++)
+  {
+   // Get integration point
+   unsigned ipt=visible_intpts_in_current_element[ii];
+   
+   //Only need to call the local derivatives
+   dshape_local_at_knot(ipt,psi,dpsids);
+   
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Calculate the coords and tangent vector
+   Vector<double> r_illuminating(2,0.0);
+   Vector<double> interpolated_dxds(2,0.0);
+   double interpolated_u=0;
+   
+   //Loop over nodes
+   for(unsigned l=0;l<n_node;l++)
+    {
+     // Add to temperature
+     interpolated_u+=
+      node_pt(l)->value(U_index_ust_heat)*psi[l];
+     
+     //Loop over directions
+     for(unsigned i=0;i<2;i++)
+      {
+       //ALH: Commented out because this is the memory error
+       //s[i]=this->integral_pt()->knot(ipt,i);
+       r_illuminating[i] += nodal_position(l,i)*psi(l);
+       interpolated_dxds[i] += nodal_position(l,i)*dpsids(l,0);
+      }
+    }
+   
+   // Vector from illuminated to illuminated point
+   Vector<double> ray(2);
+   ray[0]=r_illuminating[0]-r_illuminated[0];
+   ray[1]=r_illuminating[1]-r_illuminated[1];
+   
+
+   // Get inverse length
+   double inv_length=1.0/sqrt(ray[0]*ray[0]+ray[1]*ray[1]);
+   
+   // e_phi (phi measured in mathematically negative sense
+   // from vertically above illuminated point -- 'cos that's
+   // what it is in my sketch..
+   Vector<double> e_phi(2);
+   e_phi[0]= inv_length*ray[1];
+   e_phi[1]=-inv_length*ray[0];
+   
+   // Angles
+   double cos_phi=inv_length*(n_illuminated[0]*ray[0]+
+                              n_illuminated[1]*ray[1]);
+   
+   // INTEGRAL IS:
+   // \int sigma T^4 1/2 \cos \varphi d \varphi =
+   // where
+   // d\varphi=1/|{\bf R}| \partial {\bf R}/\partial s \cdot {\bf e}_\varphi ds
+   
+   double integrand=
+    this->sigma()*pow((interpolated_u+this->theta_0()),4)*
+    0.5*cos_phi*std::fabs(inv_length*(interpolated_dxds[0]*e_phi[0]+
+                                      interpolated_dxds[1]*e_phi[1]));
+   
+
+   // Add it in...
+   contribution+=integrand*w;
+   
+   if (outfile.is_open())
+    {
+     outfile << r_illuminating[0] << " "
+             << r_illuminating[1] << " "
+             << cos_phi << " "
+             << integrand << " "
+             << "\n";
+    }
+  }
+ 
+ return contribution;
+}
+
+
+
+
+//=====================================================================
+/// Output Stefan Boltzmann radiation. Plots rays from illuminated
+/// integration point to illuminating ones (and back).
+//=====================================================================
+void StefanBoltzmannRadiationBase::output_stefan_boltzmann_radiation_rays(
+ std::ostream &outfile, const unsigned& integration_point)
+{
+
+ // Vector to illuminated/ing Gauss points
+ Vector<double> r_illuminated(2);
+ Vector<double> s_illuminated(1);
+ Vector<double> unit_normal_illuminated(2);
+ Vector<double> r_illuminating(2);
+ Vector<double> s_illuminating(1);
+ Vector<double> unit_normal_illuminating(2);
+ 
+ unsigned ipt_lo=0;
+ unsigned ipt_hi=this->integral_pt()->nweight()-1;
+ if (integration_point!=UINT_MAX)
+  {
+   ipt_lo=integration_point;
+   ipt_hi=integration_point;
+  }
+
+ // Loop over integration points
+ for (unsigned ipt=ipt_lo;ipt<=ipt_hi;ipt++)
+  {
+   // Local coordinate of integration point
+   s_illuminated[0]=this->integral_pt()->knot(ipt,0);
+   
+   // Get coordinate of illuminated integration point
+   this->interpolated_x(s_illuminated,r_illuminated);
+      
+   // Plot illuminted point
+   outfile << "ZONE\n";
+   outfile << r_illuminated[0] << " " << r_illuminated[1] << "\n";
+   
+   // Number of illuminating elements
+   unsigned n_illuminating=Stefan_boltzmann_illumination_info[ipt].size();
+   for (unsigned i2=0;i2<n_illuminating;i2++)
+    {
+     // Get pointer to illuminating element
+     FiniteElement* el_pt=
+      (//dynamic_cast<FiniteElement*>(
+       Stefan_boltzmann_illumination_info[ipt][i2].first);
+     
+     // Illuminating Gauss points in illuminating element
+     unsigned n_pts=(Stefan_boltzmann_illumination_info[ipt][i2].second).size();
+     for (unsigned ipt2=0;ipt2<n_pts;ipt2++)
+      {
+       // Illuminating integration point
+       unsigned ipt_illum=
+        (Stefan_boltzmann_illumination_info[ipt][i2].second)[ipt2];
+       
+       // Get local coordinate of that integration point
+       s_illuminating[0]=el_pt->integral_pt()->knot(ipt_illum,0);
+       
+       // Get coordinate of illuminating integration point
+       el_pt->interpolated_x(s_illuminating,r_illuminating);
+       
+       // Plot ray to illuminting point and back
+       outfile << r_illuminating[0] << " " << r_illuminating[1] << "\n";
+       outfile << r_illuminated[0] << " " << r_illuminated[1] << "\n";
+      }
+    }
+  }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of (mutual)
+/// Stefan Boltzmann heat flux on the boundaries of UnsteadyHeat elements.
+/// The element geometry is obtained from the  FaceGeometry<ELEMENT>
+/// policy class.
+//======================================================================
+template <class ELEMENT>
+class StefanBoltzmannUnsteadyHeatFluxElement :
+public virtual FaceGeometry<ELEMENT>,
+ public virtual FaceElement,
+ public virtual StefanBoltzmannRadiationBase, 
+ public virtual SolarRadiationBase, 
+ public virtual UnsteadyHeatBaseFaceElement<ELEMENT>
+{
+ 
+public:
+
+ /// Constructor, takes the pointer to the "bulk" element and the
+ /// index of the face to be created
+ StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
+                              const int &face_index);
+ 
+ /// Broken copy constructor
+ StefanBoltzmannUnsteadyHeatFluxElement(
+  const StefanBoltzmannUnsteadyHeatFluxElement& dummy)
+  {
+   BrokenCopy::broken_copy("StefanBoltzmannUnsteadyHeatFluxElement");
+  }
+ 
+ /// Change integration scheme (overloads underlying version and
+ /// and resizes lookup schemes introduced in this class.
+ void set_integration_scheme(Integral* const &integral_pt)
+ {
+  FiniteElement::set_integration_scheme(integral_pt);
+  unsigned n_intpt = integral_pt->nweight();
+  Stefan_boltzmann_illumination_info.resize(n_intpt);
+ }
+
+ /// Specify the value of nodal zeta from the face geometry:
+ /// The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default (needed to break
+ /// indeterminacy if bulk element is SolidElement)
+ double zeta_nodal(const unsigned &n, const unsigned &k,
+                   const unsigned &i) const
+ {return FaceElement::zeta_nodal(n,k,i);}
+ 
+ 
+ /// Generalised output function to include stefan boltzmann information:
+ /// temperature, total incoming flux, incoming s.b. flux, outgoing s.b. flux, 
+ /// outer unit normal. Note that total incoming flux is simply given
+ /// by difference between incoming and outgoing radiation since we don't
+ /// allow any user-specified additional flux (the get_flux(...) function
+ /// has been overloaded.
+ void output_stefan_boltzmann_radiation(std::ostream &outfile)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
+  
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
+    
+    // Outer unit normal
+    outer_unit_normal(s,unit_normal);
+        
+    // Outgoing Stefan Boltzmann radiation
+    double outgoing_sb_radiation=
+     this->sigma()*pow((interpolated_u+this->theta_0()),4);
+    
+    // Incoming Stefan Boltzmann radiation
+    double incoming_sb_radiation=incoming_stefan_boltzmann_radiation
+     (ipt,x,unit_normal);
+
+    // Get the net incoming flux (should be the difference between
+    // the two previous ones!
+    double flux=0.0;
+    get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
+
+
+// hierher paranoidify
+//#ifdef PARANOID    
+     if (fabs(flux-(incoming_sb_radiation-outgoing_sb_radiation)))
+     {
+      std::stringstream error_message;
+      error_message 
+       << "Difference between incoming ( " << incoming_sb_radiation 
+       << " ) and outgoing ( " << outgoing_sb_radiation << " ) is "
+       << (incoming_sb_radiation-outgoing_sb_radiation)
+       << " but total flux is " << flux << " so difference is "
+       << fabs(flux-(incoming_sb_radiation-outgoing_sb_radiation));
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+//#endif
+
+
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    
+    // Temperature
+    outfile << interpolated_u << " ";
+    
+    // Total incoming flux (may include additional contributions)
+    outfile << flux << " ";
+    
+    // Incoming sb flux
+    outfile << incoming_sb_radiation << " ";
+    
+    // Outgoing sb flux
+    outfile << outgoing_sb_radiation << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << unit_normal[i] << " ";
+     }
+    outfile << std::endl;
+   }
+ }
+ 
+
+ 
+  protected:
+ 
+
+ /// Overload the function that determines the prescribed flux 
+ /// at a given spatial
+ /// position, x, the outer unit normal, n, and the continuous time. 
+ /// We also allow an explicit dependendence on the integration point, ipt,
+ /// and the actual local "temperature", u -- just what is needed for
+ /// this case we have here, where the net flux is determined by the
+ /// balance between incoming and outgoing Stefan Boltzmann radiation. 
+ /// The dependence on u makes the problem highly nonlinear -- Jacobian 
+ /// is currently worked out by finite differencing.
+ virtual void get_flux(const unsigned& ipt,
+                       const double& time, 
+                       const Vector<double>& x, 
+                       const Vector<double>& n,
+                       const double& u,  
+                       double& flux)
+ {
+
+#ifdef PARANOID
+  // We shouldn't really have an externally imposed flux (cos it's ignored)
+  if (Flux_fct_pt != 0)
+   {
+    //Issue a warning
+    OomphLibWarning("Flux_fct_pt is ignored in this element\n",
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Outgoing Stefan Boltzmann radiation in terms of pre-computed
+  // local temperature
+  double outgoing_sb_radiation=this->sigma()*pow((u+this->theta_0()),4);
+  
+  // Incoming Stefan Boltzmann radiation
+  double incoming_sb_radiation=incoming_stefan_boltzmann_radiation(ipt,x,n);
+  
+  // Atmospheric radiation
+  double incoming_atmospheric=atmospheric_radiation(ipt,time,x,n);
+
+  // Net flux
+  flux=incoming_sb_radiation-outgoing_sb_radiation+incoming_atmospheric;
+
+
+ }
+
+
+ 
+};
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//===========================================================================
+/// Constructor, takes the pointer to the "bulk" element and the
+/// index of the face to be created.
+//===========================================================================
+template<class ELEMENT>
+StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>::
+StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
+                                       const int &face_index) :  
+UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt,face_index)
+{
+
+#ifdef PARANOID
+    {
+     //Check that the element is not a refineable 3d element
+     if(bulk_el_pt->dim()==3)
+      {
+       //Is it refineable
+       if(dynamic_cast<RefineableElement*>(bulk_el_pt))
+        {
+         //Issue a warning
+         std::string error_string=
+          "This face element will not work correctly if nodes are hanging.\n";
+         error_string+="Use the refineable version instead. ";
+         OomphLibWarning(error_string,
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+ 
+#ifdef PARANOID
+ // Check spatial dimension
+ if (Dim!=2)
+  {
+   //Issue a warning
+   throw OomphLibError(
+    "This element will almost certainly not work in non-2D problems, though it should be easy enough to upgrade... Volunteers?\n",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+}
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Namespace containing helper functions for Stefan Boltzmann radiation
+//=======================================================================
+namespace StefanBoltzmannHelper
+{
+ 
+ /// Bin to store pointers to finite elements in
+ Vector<Vector<std::set<FiniteElement*> > > Element_in_bin;
+ 
+ /// Max bin coords
+ Vector<double> Max_coord(2,-DBL_MAX);
+
+ /// Min bin coords
+ Vector<double> Min_coord(2, DBL_MAX);
+ 
+ /// Increments in bin
+ Vector<double> Dx(2,0.0);
+ 
+ /// Number of bins in x direction
+ unsigned Nx_bin=1000;
+ 
+ /// Number of bins in y direction
+ unsigned Ny_bin=1000;
+ 
+ /// Number of sampling points in element to form segments with which
+ /// we check intersection with ray
+ unsigned Nsample=10;
+ 
+ 
+ //======================================================================
+ /// Helper function to setup or use bin that is used to
+ /// locate intersections of rays with boundaries.
+ ///
+ /// Args:  -- Two vectors, ray_vertex[0] and ray_vertex[1] which define
+ ///           the end points of a ray.
+ ///        -- Boolean populate_bin:
+ //            If true:  populate the bin structure represented by
+ ///                     Element_in_bin by associating all bins
+ ///                     that are intersected by the ray with the element
+ ///                     pointed to by el_pt.
+ ///           If false: Return vector of bin indices that are intersected
+ ///                     by the ray (retrived from previously set up bin
+ ///                     structure)
+ ///        -- Output stream outfile; if open, we write the intersected bins
+ ///           to that file but only if populate_bin=false. Only used for
+ ///           debugging...
+ //======================================================================
+ void bin_helper(const Vector<Vector<double> >& ray_vertex,
+                 const bool& populate_bin,
+                 Vector<std::pair<unsigned,unsigned> >& intersected_bin,
+                 FiniteElement* el_pt,
+                 std::ofstream& outfile)
+ {
+  
+  // Actually plot
+  bool plot_it=false;
+  if (outfile.is_open())
+   {
+    if (populate_bin)
+     {
+      //Issue a warning
+      OomphLibWarning(
+       "Not outputting while bin is being populated...\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+    else
+     {
+      plot_it=true;
+     }
+   }
+  
+  // Step along ray in increasing y direction
+  Vector<double> lower_ray_vertex=ray_vertex[0];
+  Vector<double> upper_ray_vertex=ray_vertex[1];
+  if (ray_vertex[1][1]<ray_vertex[0][1])
+   {
+    lower_ray_vertex=ray_vertex[1];
+    upper_ray_vertex=ray_vertex[0];
+   }
+  
+  // Output
+  if (plot_it)
+   {
+    outfile
+     << "ZONE T=\"ray\"\n"
+     <<ray_vertex[0][0] << " " << ray_vertex[0][1] << "\n"
+     <<ray_vertex[1][0] << " " << ray_vertex[1][1] << "\n";
+   }
+  
+  // Add bin that contains the start point of the ray
+  unsigned ix_start=unsigned((lower_ray_vertex[0]-Min_coord[0])/
+                             (Max_coord[0]-Min_coord[0])*
+                             double(Nx_bin));
+  unsigned iy_start=unsigned((lower_ray_vertex[1]-Min_coord[1])/
+                             (Max_coord[1]-Min_coord[1])*
+                             double(Ny_bin));
+  if (populate_bin)
+   {
+    Element_in_bin[ix_start][iy_start].insert(el_pt);
+   }
+  else
+   {
+    intersected_bin.push_back(std::make_pair(ix_start,iy_start));
+   }
+  
+  // Vertical ray?
+  if (lower_ray_vertex[0]==upper_ray_vertex[0])
+   {
+    // Add all the bins above the initial one until end point
+    unsigned iy_end=unsigned((upper_ray_vertex[1]-Min_coord[1])/
+                             (Max_coord[1]-Min_coord[1])*
+                             double(Ny_bin));
+    for (unsigned i=iy_start+1;i<=iy_end;i++)
+     {
+      if (populate_bin)
+       {
+        Element_in_bin[ix_start][i].insert(el_pt);
+       }
+      else
+       {
+        intersected_bin.push_back(std::make_pair(ix_start,i));
+       }
+     }
+   }
+  // Non-vertical ray
+  else
+   {
+    // Get the (finite) slope
+    double slope=
+     (upper_ray_vertex[1]-lower_ray_vertex[1])/
+     (upper_ray_vertex[0]-lower_ray_vertex[0]);
+    
+    // Current bin level
+    unsigned iy=iy_start;
+    
+    // Upper and lower bounds of current bin level
+    double y_this_bin_min=Min_coord[1]+double(iy  )*Dx[1];
+    double y_this_bin_max=Min_coord[1]+double(iy+1)*Dx[1];
+    
+    // Keep going until we've moved through all the
+    // bins beyond the y-level of the ray's end point
+    int unit_offset=1;
+    while (y_this_bin_min<upper_ray_vertex[1])
+     {
+      // Work out x-coordinate of intersection of ray with
+      // other boundary of its current y-bin level
+      double x_intersect=Max_coord[0];
+      if (lower_ray_vertex[0]>upper_ray_vertex[0])
+       {
+        x_intersect=Min_coord[0];
+       }
+      if (slope!=0.0)
+       {
+        x_intersect=lower_ray_vertex[0]+
+         (y_this_bin_max-lower_ray_vertex[1])/slope;
+       }
+      
+      // Cut it off if it goes outside the bin structure
+      if (x_intersect>Max_coord[0]) x_intersect=Max_coord[0] ;
+      if (x_intersect<Min_coord[0]) x_intersect=Min_coord[0] ;
+      
+      // What's the x-bin index of that point
+      unsigned ix_intersect=unsigned((x_intersect-Min_coord[0])/
+                                     (Max_coord[0]-Min_coord[0])*
+                                     double(Nx_bin));
+
+      // limits for x bins:
+      unsigned i_lo=ix_start;
+      unsigned i_hi=ix_intersect;
+
+      // Swap if going to the left and apply 
+      // unit offset. Equal to one initially because the first
+      // bin has already been filled; in subsequent rows of
+      // bins, we add all of them.
+      if (i_lo>i_hi)
+       {
+        i_lo=ix_intersect;
+        i_hi=ix_start-unit_offset;
+       }
+      else
+       {
+        i_lo+=unit_offset;
+       }
+      unit_offset=0;      
+
+      // ...but don't fall off the end... 
+      if (i_hi==Nx_bin) i_hi-=1;
+
+      // Now add all the bins at this y-level
+      for (unsigned i=i_lo;i<=i_hi;i++)
+       {
+        // .. but don't go beyond the end of the ray
+        bool add_it=true;
+        if (slope>0.0)
+         {
+          double x_left_end_bin =Min_coord[0]+double(i  )*Dx[0];
+          if (x_left_end_bin>upper_ray_vertex[0])
+           {
+            add_it=false;
+           }
+         }
+        else if (slope<0.0)
+         {
+          double x_right_end_bin=Min_coord[0]+double(i+1)*Dx[0];
+          if (x_right_end_bin<upper_ray_vertex[0])
+           {
+            add_it=false;
+           }
+         }
+        else
+         {
+          double x_left_end_bin =Min_coord[0]+double(i  )*Dx[0];
+          double x_right_end_bin=Min_coord[0]+double(i+1)*Dx[0];
+          if (x_left_end_bin>std::max(upper_ray_vertex[0],lower_ray_vertex[0]))
+           {
+            add_it=false;
+           }
+          else if (x_right_end_bin<std::min(upper_ray_vertex[0],
+                                            lower_ray_vertex[0]))
+           {
+            add_it=false;
+           }
+         }
+
+        if (add_it)
+         {
+          if (populate_bin)
+           {
+            Element_in_bin[i][iy].insert(el_pt);
+           }
+          else
+           {
+            intersected_bin.push_back(std::make_pair(i,iy));
+           }
+         }
+       }
+        
+      // Now update the counters: x bin level starts at the
+      // point of intersection with the next level...
+      ix_start=ix_intersect;
+        
+      // ...upper and lower boundary moves one level up
+      y_this_bin_min+=Dx[1];
+      y_this_bin_max+=Dx[1];
+        
+      // ...and bump up the level itself
+      iy++;
+     }
+   }
+    
+  // Plot the intersected bins?
+  if (plot_it)
+   {
+    unsigned nbin=intersected_bin.size();
+    for (unsigned i=0;i<nbin;i++)
+     {
+      unsigned ix=intersected_bin[i].first;
+      unsigned iy=intersected_bin[i].second;
+        
+      double x_lo=Min_coord[0]+double(ix)*Dx[0];
+      double x_hi=x_lo+Dx[0];
+      double y_lo=Min_coord[1]+double(iy)*Dx[1];
+      double y_hi=y_lo+Dx[1];
+        
+      outfile << "ZONE\n"
+              << x_lo << " " << y_lo << "\n"
+              << x_hi << " " << y_lo << "\n"
+              << x_hi << " " << y_hi << "\n"
+              << x_lo << " " << y_hi << "\n"
+              << x_lo << " " << y_lo << "\n";
+     }
+   }
+ }
+ 
+ 
+ //=================================================================
+ // Doc populated bins
+ //=================================================================
+ void doc_bins(std::ofstream& bin_file)
+ {
+  // Loop over bins
+  for (unsigned ix=0;ix<Nx_bin;ix++)
+   {
+    for (unsigned iy=0;iy<Ny_bin;iy++)
+     {
+      // Anybody at home?
+      if (Element_in_bin[ix][iy].size()!=0)
+       {
+        double x_lo=Min_coord[0]+double(ix)*Dx[0];
+        double x_hi=x_lo+Dx[0];
+        double y_lo=Min_coord[1]+double(iy)*Dx[1];
+        double y_hi=y_lo+Dx[1];
+          
+        bin_file << "ZONE I=2, J=2\n"
+                 << x_lo << " " << y_lo << "\n"
+                 << x_hi << " " << y_lo << "\n"
+                 << x_lo << " " << y_hi << "\n"
+                 << x_hi << " " << y_hi << "\n";
+
+       }
+     }
+   }
+ }
+
+
+
+ //=================================================================
+ // Doc sample points of Stefan Boltzmann elements
+ //=================================================================
+ void doc_sample_points(std::ofstream& outfile, 
+                        const Vector<FiniteElement*>& sb_face_element_pt)
+ {    
+  // Vector for  coordinates of sample point
+  Vector<double> sample_point(2);
+  Vector<double> s(1);
+
+  // Loop over all face elements
+  unsigned nel=sb_face_element_pt.size();
+  for (unsigned e=0;e<nel;e++)
+   {
+    StefanBoltzmannRadiationBase* el_pt=
+     dynamic_cast<StefanBoltzmannRadiationBase*>(
+      sb_face_element_pt[e]);
+#ifdef PARANOID 
+    if (el_pt==0)
+     {
+      std::stringstream error_message;
+      error_message << "Failed to cast possible intersecting element "
+                    << e
+                    << " to  StefanBoltzmannRadiationBase";
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+      
+    // Loop over sampling points
+    for (unsigned j_sample=0;j_sample<Nsample;j_sample++)
+     {
+      // Get vector of local coordinates of plot point j
+      // as second vertex
+      el_pt->get_s_plot(j_sample,Nsample,s);
+        
+      // Get coordinate of vertex
+      el_pt->interpolated_x(s,sample_point);
+        
+      outfile << sample_point[0] << " " << sample_point[1] << "\n";
+     }
+   }
+ }
+
+
+ //=======================================================================
+ /// Setup mutual visibility for Stefan Boltzmann radiation for all
+ /// face elements (derived from StefanBoltzmannRadiationBase)
+ /// contained in vector.
+ //=======================================================================
+ void setup_stefan_boltzmann_visibility(const Vector<FiniteElement*>&
+                                        sb_face_element_pt)
+ {
+  // Output file for debugging
+  const bool plot_it=false;
+  std::ofstream some_file;
+  char filename[100];
+
+  // Loop over all face elements to wipe previous information
+  unsigned nel=sb_face_element_pt.size();
+  for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++)
+   {
+    StefanBoltzmannRadiationBase* illuminated_el_pt=
+     dynamic_cast<StefanBoltzmannRadiationBase*>(
+      sb_face_element_pt[e_illuminated]);
+#ifdef PARANOID
+    if (illuminated_el_pt==0)
+     {
+      std::stringstream error_message;
+      error_message << "Failed to cast illuminated element "
+                    << e_illuminated
+                    << " to  StefanBoltzmannRadiationBase";
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+     
+    // Forget any previous information
+    illuminated_el_pt->wipe_stefan_boltzmann_illumination_info();
+   }
+
+
+  double t_start=TimingHelpers::timer();
+
+  // Vector to illuminated/ing Gauss points
+  Vector<double> r_illuminated(2);
+  Vector<double> s_illuminated(1);
+  Vector<double> unit_normal_illuminated(2);
+  Vector<double> r_illuminating(2);
+  Vector<double> s_illuminating(1);
+  Vector<double> unit_normal_illuminating(2);
+
+  // Setup bin structure
+  const bool use_bins=true;
+  if (use_bins)
+   {
+    double t_start_bin=TimingHelpers::timer();
+
+    // Each bin stores FiniteElements that have any sample point in it
+    Element_in_bin.clear();
+    Element_in_bin.resize(Nx_bin);
+    for (unsigned i=0;i<Nx_bin;i++)
+     {
+      Element_in_bin[i].resize(Ny_bin);
+     }
+     
+
+    // Reset max/min coords
+    Max_coord.clear();
+    Max_coord.resize(2,-DBL_MAX);
+    Min_coord.clear();
+    Min_coord.resize(2, DBL_MAX);
+
+    // Initial sweep: Get max/min coords
+    //----------------------------------
+
+    // Loop over all face elements
+    unsigned nel=sb_face_element_pt.size();
+    for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++)
+     {
+      StefanBoltzmannRadiationBase* illuminated_el_pt=
+       dynamic_cast<StefanBoltzmannRadiationBase*>(
+        sb_face_element_pt[e_illuminated]);
+#ifdef PARANOID
+      if (illuminated_el_pt==0)
+       {
+        std::stringstream error_message;
+        error_message << "Failed to cast illuminated element "
+                      << e_illuminated
+                      << " to  StefanBoltzmannRadiationBase";
+        throw OomphLibError(
+         error_message.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+       
+      // Loop over iluminated integration points
+      unsigned nint=illuminated_el_pt->integral_pt()->nweight();
+      for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++)
+       {
+        // Local coordinate of integration point
+        s_illuminated[0]=
+         illuminated_el_pt->integral_pt()->knot(ipt_illuminated,0);
+         
+        // No recycling of shape fcts -- may as well call interpolated_x
+        // directly
+        illuminated_el_pt->interpolated_x(s_illuminated,r_illuminated);
+         
+        for (unsigned i=0;i<2;i++)
+         {
+          if (r_illuminated[i]>Max_coord[i]) Max_coord[i]=r_illuminated[i];
+          if (r_illuminated[i]<Min_coord[i]) Min_coord[i]=r_illuminated[i];
+         }
+       }
+     }
+
+    // Allow for offset
+    double percentage_offset=5.0;
+    for (unsigned i=0;i<2;i++)
+     {
+      double dx=Max_coord[i]-Min_coord[i];
+      Max_coord[i]=Max_coord[i]+percentage_offset/100.0*dx;
+      Min_coord[i]=Min_coord[i]-percentage_offset/100.0*dx;
+     }
+
+    // Update increments
+    Dx[0]=(Max_coord[0]-Min_coord[0])/double(Nx_bin);
+    Dx[1]=(Max_coord[1]-Min_coord[1])/double(Ny_bin);
+     
+
+    const bool test_horizontal_and_vertical_rays=false;
+    if (test_horizontal_and_vertical_rays)
+     {
+      
+      // Test for left to right horizontal ray
+      {
+       // Populate bin by associating all bins intersected by
+       // ray from one to the other sample vertex with the
+       // element (note that the ray can span multiple bins!)
+       Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
+       bool populate_bin=true;
+       std::ofstream dummy_file;
+       Vector<Vector<double> > sample_vertex(2);
+       sample_vertex[0].resize(2);
+       sample_vertex[1].resize(2);
+       sample_vertex[0][0]=-0.9;
+       sample_vertex[0][1]=0.9;
+       sample_vertex[1][0]=0.9;
+       sample_vertex[1][1]=0.9;
+       
+       StefanBoltzmannRadiationBase* el_pt=
+        dynamic_cast<StefanBoltzmannRadiationBase*>(
+         sb_face_element_pt[0]);
+       
+       bin_helper(sample_vertex,
+                  populate_bin,
+                  dummy_intersected_bin,
+                  el_pt,
+                  dummy_file);
+      }
+      
+      
+      
+      
+      // Test for right to left horizontal ray
+      {
+       // Populate bin by associating all bins intersected by
+       // ray from one to the other sample vertex with the
+       // element (note that the ray can span multiple bins!)
+       Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
+       bool populate_bin=true;
+       std::ofstream dummy_file;
+       Vector<Vector<double> > sample_vertex(2);
+       sample_vertex[0].resize(2);
+       sample_vertex[1].resize(2);
+       sample_vertex[0][0]= 0.9;
+       sample_vertex[0][1]=-0.9;
+       sample_vertex[1][0]=-0.9;
+       sample_vertex[1][1]=-0.9;
+       
+       StefanBoltzmannRadiationBase* el_pt=
+        dynamic_cast<StefanBoltzmannRadiationBase*>(
+         sb_face_element_pt[0]);
+       
+       bin_helper(sample_vertex,
+                  populate_bin,
+                  dummy_intersected_bin,
+                  el_pt,
+                  dummy_file);
+      }
+      
+      
+      // Test for bottom to top vertical ray
+      {
+       // Populate bin by associating all bins intersected by
+       // ray from one to the other sample vertex with the
+       // element (note that the ray can span multiple bins!)
+       Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
+       bool populate_bin=true;
+       std::ofstream dummy_file;
+       Vector<Vector<double> > sample_vertex(2);
+       sample_vertex[0].resize(2);
+       sample_vertex[1].resize(2);
+       sample_vertex[0][0]=-0.7;
+       sample_vertex[0][1]=-0.9;
+       sample_vertex[1][0]=-0.7;
+       sample_vertex[1][1]= 0.9;
+       
+       StefanBoltzmannRadiationBase* el_pt=
+        dynamic_cast<StefanBoltzmannRadiationBase*>(
+         sb_face_element_pt[0]);
+       
+       bin_helper(sample_vertex,
+                  populate_bin,
+                  dummy_intersected_bin,
+                  el_pt,
+                  dummy_file);
+      }
+      
+      
+      // Test for to to bottom vertical ray
+      {
+       // Populate bin by associating all bins intersected by
+       // ray from one to the other sample vertex with the
+       // element (note that the ray can span multiple bins!)
+       Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
+       bool populate_bin=true;
+       std::ofstream dummy_file;
+       Vector<Vector<double> > sample_vertex(2);
+       sample_vertex[0].resize(2);
+       sample_vertex[1].resize(2);
+       sample_vertex[0][0]= 0.7;
+       sample_vertex[0][1]= 0.9;
+       sample_vertex[1][0]= 0.7;
+       sample_vertex[1][1]=-0.9;
+       
+       StefanBoltzmannRadiationBase* el_pt=
+        dynamic_cast<StefanBoltzmannRadiationBase*>(
+         sb_face_element_pt[0]);
+       
+       bin_helper(sample_vertex,
+                  populate_bin,
+                  dummy_intersected_bin,
+                  el_pt,
+                  dummy_file);
+      }
+      
+     } // end of test for horizontal and vertical rays
+
+    // Setup bin for checking intersections with rays
+    //-----------------------------------------------
+     
+    // Loop over all face elements
+    nel=sb_face_element_pt.size();
+    for (unsigned e=0;e<nel;e++)
+     {
+      StefanBoltzmannRadiationBase* el_pt=
+       dynamic_cast<StefanBoltzmannRadiationBase*>(
+        sb_face_element_pt[e]);
+#ifdef PARANOID
+      if (el_pt==0)
+       {
+        std::stringstream error_message;
+        error_message << "Failed to cast possible intersecting element "
+                      << e
+                      << " to  StefanBoltzmannRadiationBase";
+        throw OomphLibError(
+         error_message.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+
+      // Loop over ALL sampling points along element
+      Vector<Vector<double> > sample_vertex(2);
+      sample_vertex[0].resize(2);
+      sample_vertex[1].resize(2);
+       
+      // Get vector of local coordinates of plot point j
+      // as first vertex
+      Vector<double> s(1);
+      unsigned j_sample=0;
+      el_pt->get_s_plot(j_sample,Nsample,s);
+       
+      // Get coordinate of first vertex
+      el_pt->interpolated_x(s,sample_vertex[0]);
+       
+      // Loop over remaining sampling points
+      for (unsigned j_sample=1;j_sample<Nsample;j_sample++)
+       {
+        // Get vector of local coordinates of plot point j
+        // as second vertex
+        el_pt->get_s_plot(j_sample,Nsample,s);
+         
+        // Get coordinate of vertex
+        el_pt->interpolated_x(s,sample_vertex[1]);
+        
+        // Populate bin by associating all bins intersected by
+        // ray from one to the other sample vertex with the
+        // element (note that the ray can span multiple bins!)
+        Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
+        bool populate_bin=true;
+        std::ofstream dummy_file;
+        bin_helper(sample_vertex,
+                   populate_bin,
+                   dummy_intersected_bin,
+                   el_pt,
+                   dummy_file);
+         
+        // Shift along
+        sample_vertex[0]=sample_vertex[1];
+       }
+     }
+     
+    double t_end_bin=TimingHelpers::timer();
+    oomph_info << "Time for setting up bin: "
+               << t_end_bin-t_start_bin << std::endl;
+   
+    // Number of elements
+    nel=sb_face_element_pt.size();
+
+    // Assume all elements have the same number of integration points
+    unsigned nintpt_all=sb_face_element_pt[0]->integral_pt()->nweight();
+
+    // Exploit symmetry during setup
+    const bool exploit_symmetry=true;
+
+    // Helper lookup scheme to exploit symmetry of interaction:
+    // If integration point i_ed in element e_ed is illuminatED by
+    // integration point i_ing in element e_ing (which is the
+    // illuminatING one!) then the reverse is true too
+    Vector<Vector<Vector<Vector<unsigned> > > > aux;
+    if (exploit_symmetry)
+     {
+      nintpt_all=sb_face_element_pt[0]->integral_pt()->nweight();
+      aux.resize(nel);
+      for (unsigned e=0;e<nel;e++)
+       {
+        aux[e].resize(nintpt_all);
+        for (unsigned ipt=0;ipt<nintpt_all;ipt++)
+         {
+          aux[e][ipt].resize(nel);
+         }
+       }
+     }
+  
+    // Loop over all face elements -- viewed as illuminated ones
+    for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++)
+     {
+      StefanBoltzmannRadiationBase* illuminated_el_pt=
+       dynamic_cast<StefanBoltzmannRadiationBase*>(
+        sb_face_element_pt[e_illuminated]);
+
+#ifdef PARANOID
+      if (illuminated_el_pt==0)
+       {
+        std::stringstream error_message;
+        error_message << "Failed to cast illuminated element "
+                      << e_illuminated
+                      << " to  StefanBoltzmannRadiationBase";
+        throw OomphLibError(
+         error_message.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+     
+      // Recast to FaceElement
+      FaceElement* illuminated_face_el_pt=
+       dynamic_cast<FaceElement*>(illuminated_el_pt);
+     
+      // Loop over iluminated integration points
+      unsigned nint=illuminated_el_pt->integral_pt()->nweight();
+      for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++)
+       {
+        // Local coordinate of integration point
+        s_illuminated[0]=
+         illuminated_el_pt->integral_pt()->knot(ipt_illuminated,0);
+       
+        // No recycling of shape fcts -- may as well call interpolated_x
+        // directly
+        illuminated_el_pt->interpolated_x(s_illuminated,r_illuminated);
+       
+        // Get outer unit normal
+        illuminated_face_el_pt->outer_unit_normal(s_illuminated,
+                                                  unit_normal_illuminated);
+       
+        // Now loop over all other elements (the iluminating ones)
+        // Note: this includes the current one because its integration
+        // points may illuminate each other!
+        unsigned e_lo=0;
+        if (exploit_symmetry) e_lo=e_illuminated;
+        for (unsigned e_illuminating=e_lo;e_illuminating<nel;e_illuminating++)
+         {
+          StefanBoltzmannRadiationBase* illuminating_el_pt=
+           dynamic_cast<StefanBoltzmannRadiationBase*>(
+            sb_face_element_pt[e_illuminating]);
+
+#ifdef PARANOID
+          if (illuminating_el_pt==0)
+           {
+            std::stringstream error_message;
+            error_message << "Failed to cast illuminating element "
+                          << e_illuminating
+                          << " to  StefanBoltzmannRadiationBase";
+            throw OomphLibError(
+             error_message.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
+#endif
+         
+          // Recast to FaceElement
+          FaceElement* illuminating_face_el_pt=
+           dynamic_cast<FaceElement*>(illuminating_el_pt);
+         
+          // Storage to accumulate indices of integration points in
+          // illuminating face element that is visible from
+          // current integration point
+          Vector<unsigned> illuminating_integration_point_index;
+         
+          // Loop over iluminating integration points
+          unsigned nint=illuminating_el_pt->integral_pt()->nweight();
+          for (unsigned ipt_illuminating=0;ipt_illuminating<nint;
+               ipt_illuminating++)
+           {
+            // Local coordinate of integration point
+            s_illuminating[0]=
+             illuminating_el_pt->integral_pt()->knot(ipt_illuminating,0);
+           
+            // No recycling of shape fcts -- may as well call interpolated_x
+            // directly
+            illuminating_el_pt->interpolated_x(s_illuminating,r_illuminating);
+           
+            // Get outer unit normal
+            illuminating_face_el_pt->
+             outer_unit_normal(s_illuminating,
+                               unit_normal_illuminating);
+            
+            // Get vector from illuminating point to illuminated point
+            Vector<double> ray(2);
+            ray[0]=r_illuminated[0]-r_illuminating[0];
+            ray[1]=r_illuminated[1]-r_illuminating[1];
+           
+
+            Vector<Vector<double> > ray_vertex(2);
+            ray_vertex[0].resize(2);
+            ray_vertex[1].resize(2);
+            ray_vertex[0][0]=r_illuminated[0];
+            ray_vertex[0][1]=r_illuminated[1];
+            ray_vertex[1][0]=r_illuminating[0];
+            ray_vertex[1][1]=r_illuminating[1];
+
+            // Do we radiate away from the positive face of the
+            // illuminating point?
+            double dot_illuminating=
+             (unit_normal_illuminating[0]*ray[0]+
+              unit_normal_illuminating[1]*ray[1]);
+            if (dot_illuminating>0.0)
+             {
+             
+              // Do we radiate onto from the positive face of the
+              // illuminated point?
+              double dot_illuminated=
+               (unit_normal_illuminated[0]*ray[0]+
+                unit_normal_illuminated[1]*ray[1]);
+              if (dot_illuminated<0.0)
+               {
+
+                // Does the ray (a finite-length segment) from
+                // radiating to radiated point intersect any other elements?
+                              
+                // Vector of pairs of bin coordinates that
+                // intersect ray
+                Vector<std::pair<unsigned,unsigned> > intersected_bin;
+                if (use_bins)
+                 {
+                  if (plot_it)
+                   {
+                    snprintf(filename, sizeof(filename), "RESLT/latest_ray.dat");
+                    some_file.open(filename);
+                   }
+
+                  // Find bins that are intersected by ray
+                  Vector<std::pair<unsigned,unsigned> > intersected_bin;
+                  bool populate_bin=false;
+                  FiniteElement* dummy_el_pt=0;
+                  bin_helper(ray_vertex,
+                             populate_bin,
+                             intersected_bin,
+                             dummy_el_pt,
+                             some_file);
+                 
+                  // End plot
+                  if (plot_it)
+                   {
+                    some_file.close();
+                    pause("done latest ray");
+                   }
+
+                  // Storage for vertices of possible intersection with ray
+                  Vector<Vector<double> > segment_vertex(2);
+                  segment_vertex[0].resize(2);
+                  segment_vertex[1].resize(2);
+
+                  // Search through all elements in bins along ray
+                  bool have_intersection=false;
+                  unsigned nbin=intersected_bin.size();
+                  for (unsigned b=0;b<nbin;b++)
+                   {
+                    // Get bin indices
+                    unsigned i=intersected_bin[b].first;
+                    unsigned j=intersected_bin[b].second;
+
+                    // Loop over elements in that bin
+                    for (std::set<FiniteElement*>::iterator it=
+                          Element_in_bin[i][j].begin();
+                         it!=Element_in_bin[i][j].end();it++)
+                     {
+                      // Get possibly blocking element
+                      StefanBoltzmannRadiationBase* el_pt=
+                       dynamic_cast<StefanBoltzmannRadiationBase*>(*it);
+                     
+#ifdef PARANOID
+                      if (illuminated_el_pt==0)
+                       {
+                        std::stringstream error_message;
+                        error_message
+                         << "Failed to cast possibly blocking element "
+                         << " to  StefanBoltzmannRadiationBase";
+                        throw OomphLibError(
+                         error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+                       }
+#endif
+                      // Skip intersections with illuming/illuminated element
+                      if ((el_pt!=illuminated_el_pt)&&
+                          (el_pt!=illuminating_el_pt))
+                       {
+                        // Loop over sampling points along element, only
+                        // up to Nsample-1 because we're forming segment
+                        // with current and next sampling point.
+                        for (unsigned j_sample=0;j_sample<Nsample-1;j_sample++)
+                         {
+                          // Get cector of local coordinates of plot point j
+                          // as first vertex
+                          Vector<double> s(1);
+                          el_pt->get_s_plot(j_sample,Nsample,s);
+                         
+                          // Get coordinate of first vertex
+                          el_pt->interpolated_x(s,segment_vertex[0]);
+                         
+                          // Get cector of local coordinates of plot point j+1
+                          // as second vertex
+                          el_pt->get_s_plot(j_sample+1,Nsample,s);
+                         
+                          // Get coordinate of second vertex
+                          el_pt->interpolated_x(s,segment_vertex[1]);
+                         
+                          // Check intersection
+                          bool intersection=IntersectionChecker::intersects(
+                           segment_vertex,ray_vertex);
+                         
+                          // Bail out
+                          if (intersection)
+                           {
+                            have_intersection=true;
+                            break;
+                           }
+                         } // end of loop over sampling points
+                       } // endif for self-intersection
+                      if (have_intersection) break;
+                     } // end of loop over elements in bin
+                    if (have_intersection) break;
+                   }// End of loop over bins that contain ray
+                 
+                 
+                  // No intersection
+                  if (!have_intersection)
+                   {
+                    // Visible, so add integration point
+                    illuminating_integration_point_index.
+                     push_back(ipt_illuminating);
+                   }
+                 }
+                // No bins: Brute force search loop
+                else
+                 {
+                  // Intersection for star-shaped (non-convex) polygon
+                  // can only be detected in O(n^2) operations.
+                  Vector<Vector<double> > segment_vertex(2);
+                  segment_vertex[0].resize(2);
+                  segment_vertex[1].resize(2);
+                 
+                  // Loop over all segments to test for intersection
+                  bool have_intersection=false;
+                  for (unsigned e_intersect=0;e_intersect<nel;
+                       e_intersect++)
+                   {
+                   
+                    // Skip intersection with illuminating/ed elements
+                    if (! ( (e_intersect==e_illuminated) ||
+                            (e_intersect==e_illuminating) ) )
+                     {
+                     
+                      // Loop over sampling points along element
+                      for (unsigned j=0;j<Nsample-1;j++)
+                       {
+                        // Get cector of local coordinates of plot point j
+                        // as first vertex
+                        Vector<double> s(1);
+                        sb_face_element_pt[e_intersect]->
+                         get_s_plot(j,Nsample,s);
+                       
+                        // Get coordinate of first vertex
+                        sb_face_element_pt[e_intersect]->
+                         interpolated_x(s,segment_vertex[0]);
+                       
+                        // Get cector of local coordinates of plot point j+1
+                        // as second vertex
+                        sb_face_element_pt[e_intersect]->
+                         get_s_plot(j+1,Nsample,s);
+                       
+                        // Get coordinate of second vertex
+                        sb_face_element_pt[e_intersect]->
+                         interpolated_x(s,segment_vertex[1]);
+                       
+                        // Check intersection
+                        bool intersection=IntersectionChecker::intersects(
+                         segment_vertex,ray_vertex);
+                       
+                        if (intersection)
+                         {
+                          have_intersection=true;
+                          break;
+                         }
+                       }
+                     }
+                    if (have_intersection)
+                     {
+                      break;
+                     }
+                   }
+                 
+                  // No intersection
+                  if (!have_intersection)
+                   {
+                    // Visible, so add integration point
+                    illuminating_integration_point_index.
+                     push_back(ipt_illuminating);
+                   }
+
+                 } // end if for brute force (rather than bin-based) search loop
+
+               }
+             }
+           }
+         
+          // Done all possibly illuminating integration points in
+          // current possibly illuminating element
+          unsigned npt=illuminating_integration_point_index.size();
+          if (npt>0)
+           {
+            // Add info
+            illuminated_el_pt->add_stefan_boltzmann_illumination_info(
+             ipt_illuminated,illuminating_el_pt,
+             illuminating_integration_point_index);
+
+            // Set up reverse scheme
+            if (exploit_symmetry)
+             {
+              for (unsigned i_ing=0;i_ing<npt;i_ing++)
+               {
+                aux[e_illuminating]
+                 [illuminating_integration_point_index[i_ing]]
+                 [e_illuminated].push_back(ipt_illuminated);
+               }
+             }
+           }
+         }
+       }
+     }
+
+
+    // Now do other half of dependencies
+    //----------------------------------
+    if (exploit_symmetry)
+     {
+      // Loop over all face elements -- viewed as illuminated ones
+      for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++)
+       {
+        StefanBoltzmannRadiationBase* illuminated_el_pt=
+         dynamic_cast<StefanBoltzmannRadiationBase*>(
+          sb_face_element_pt[e_illuminated]);
+
+#ifdef PARANOID
+        if (illuminated_el_pt==0)
+         {
+          std::stringstream error_message;
+          error_message << "Failed to cast illuminated element "
+                        << e_illuminated
+                        << " to  StefanBoltzmannRadiationBase";
+          throw OomphLibError(
+           error_message.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+         }
+#endif
+
+        // Loop over iluminated integration points
+        unsigned nint=illuminated_el_pt->integral_pt()->nweight();
+        for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++)
+         {
+          // Now loop over all other elements (the iluminating ones)
+          for (unsigned e_illuminating=0;
+               e_illuminating<e_illuminated;e_illuminating++)
+           {
+            StefanBoltzmannRadiationBase* illuminating_el_pt=
+             dynamic_cast<StefanBoltzmannRadiationBase*>(
+              sb_face_element_pt[e_illuminating]);
+           
+#ifdef PARANOID
+            if (illuminating_el_pt==0)
+             {
+              std::stringstream error_message;
+              error_message << "Failed to cast illuminating element "
+                            << e_illuminating
+                            << " to  StefanBoltzmannRadiationBase";
+              throw OomphLibError(
+               error_message.str(),
+               OOMPH_CURRENT_FUNCTION,
+               OOMPH_EXCEPTION_LOCATION);
+             }
+#endif
+            // Get illuminating integration points
+            Vector<unsigned> illuminating_integration_point_index=
+             aux[e_illuminated][ipt_illuminated][e_illuminating];
+            unsigned npt=illuminating_integration_point_index.size();
+            if (npt>0)
+             {
+              // Add info
+              illuminated_el_pt->add_stefan_boltzmann_illumination_info(
+               ipt_illuminated,illuminating_el_pt,
+               illuminating_integration_point_index);
+             }
+           }
+         }
+       }
+     }
+
+    double t_end=TimingHelpers::timer();
+    oomph_info << "Time for setting up mutual Stefan Boltzmann radiation: "
+               << t_end-t_start << std::endl;
+   }
+
+ }
+
+}
+}
+
+
+
+#endif

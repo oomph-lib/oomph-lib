@@ -1,0 +1,309 @@
+\mainpage The Least-Squares Commutator (LSC) Navier-Stokes preconditioner
+
+The purpose of this tutorial is to show how to use
+\c oomph-lib's  Least Squares Commutator (LSC) Navier-Stokes
+preconditioner.
+
+
+
+<HR>
+<HR>
+
+\section theory Theory
+
+\c oomph-lib currently provides two types of (LBB-stable)
+Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouzeix-Raviart
+(Q2Q-1) elements. These contain two distinct types of degrees of freedom,
+namely the velocities and pressures. 
+
+The least-squares commutator (LSC; formerly BFBT) Navier-Stokes 
+preconditioner employs \c oomph-lib's <a href="../../../mpi/block_preconditioners/html/index.html">block-preconditioning framework</a>
+to (formally) re-order the linear system to be solved during the
+Newton iteration into 2x2 blocks, corresponding to the velocity 
+and pressure unknowns. We note that all velocity components are 
+treated as a single block of unknowns. The linear system
+therefore has the following block structure
+\f[
+\left( 
+\begin{array}{cc}
+{\bf F} & {\bf G} \\ {\bf D} & {\bf 0} 
+\end{array} 
+\right)
+\left( 
+\begin{array}{c}
+{\bf z}_u \\ {\bf z}_p
+\end{array} 
+\right) =
+\left( 
+\begin{array}{c}
+{\bf r}_u \\ {\bf r}_p
+\end{array} 
+\right).
+\f]
+Here \f$ {\bf F}\f$ is the momentum block,  \f$ {\bf G} \f$ the
+discrete gradient operator, and \f$ {\bf D}\f$ the discrete
+divergence operator. (For unstabilised elements, we have 
+\f$ {\bf D} = {\bf G}^T \f$ and in much of the literature
+the divergence matrix is denoted by \f$ {\bf B} \f$ .)
+
+An "exact" preconditioner would solve this system exactly and thus
+ensure the convergence of any iterative linear solver in a single 
+iteration. However, the application of such a preconditioner
+would, of course, be exactly as expensive as a direct solve.
+The LSC/BFBT preconditioner replaces the exact Jacobian by 
+a block-triangular approximation
+\f[
+\left( 
+\begin{array}{cc}
+{\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s 
+\end{array} 
+\right) 
+\left( 
+\begin{array}{c}
+{\bf z}_u \\ {\bf z}_p
+\end{array} 
+\right) =
+\left( 
+\begin{array}{c}
+{\bf r}_u \\ {\bf r}_p
+\end{array} 
+\right),
+\f]
+where \f${\bf M}_s\f$ is an approximation to the pressure 
+Schur-complement \f$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. \f$
+This system can be solved in two steps:
+-# Solve the second row for \f$ {\bf z}_p\f$ via
+   \f[ 
+   {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
+   \f]
+-# Given \f$ {\bf z}_p \f$ , solve the first row for \f$ {\bf z}_u\f$ via
+   \f[ 
+   {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big)
+   \f]
+.
+In the LSC/BFBT preconditioner, the action of the inverse pressure
+Schur complement 
+\f[
+{\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p
+\f]
+is approximated by
+\f[
+{\bf z}_p = - 
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) 
+\big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1}
+{\bf r}_p,
+\f]
+where  \f$ \widehat{\bf Q} \f$ is the diagonal of the velocity
+mass matrix. The evaluation of this expression involves
+two linear solves involving the matrix
+\f[
+{\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)
+\f]
+which has the character of a matrix arising from the discretisation 
+of a Poisson problem on the pressure space. We also have
+to evaluate matrix-vector products with the matrix 
+\f[
+{\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G}
+\f]
+Details of the theory can be found in "Finite Elements and 
+Fast Iterative Solvers with Applications in Incompressible Fluid 
+Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,
+published by Oxford University Press, 2006.
+\n\n
+
+In our implementation of the preconditioner, the linear systems
+can either be solved "exactly", using \c SuperLU (in its incarnation
+as an exact preconditioner; this is the default) or by any 
+other \c Preconditioner (interpreted as an "inexact solver") 
+specified via the access functions
+\code
+NavierStokesSchurComplementPreconditioner::set_f_preconditioner(...)
+\endcode
+or 
+\code
+NavierStokesSchurComplementPreconditioner::set_p_preconditioner(...)
+\endcode
+
+<HR>
+<HR>
+
+\section example An example
+
+To demonstrate how to use the preconditioner, here are
+the relevant extracts from the driver code
+<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
+driven_cavity.cc</A> -- a straightforward
+modification of the code for
+<a href="../../../navier_stokes/driven_cavity/html/index.html">
+driven-cavity problem discussed elsewhere.</a> 
+As explained in the 
+<a href="../../../linear_solvers/html/index.html">Linear
+Solvers Tutorial</A> switching to an iterative linear solver
+is typically performed in the \c Problem constructor and involves
+a few straightforward steps:
+
+-# <b>Create an instance of the IterativeLinearSolver and pass it to the
+   Problem</b> \n\n
+   In our problem, we choose \c GMRES as the linear solver: \n\n
+   \dontinclude driven_cavity.cc
+   \skipline Create oomph-lib
+   \until Solver_pt;
+   \n\n
+-# <b>Create an instance of the Preconditioner and pass it to the
+   IterativeLinearSolver</b> \n\n
+   \skipline Set preconditioner
+   \until Solver_pt->preconditioner_pt()=Prec_pt;
+   \n\n
+-# <b>Customise the Preconditioner (if required)</b> \n\n
+   The behaviour of many preconditioners can be fine-tuned
+   for specific applications. The \c NavierStokesLSCPreconditioner
+   provides the option to perform the linear solves involving
+   the \f$ {\bf P} \f$ and  \f$ {\bf F} \f$ matrices with
+   inexact solvers (i.e. other preconditioners), rather than
+   with the "exact preconditioner" \c SuperLUPreconditioner. 
+   Since the matrix \f$ {\bf P} \f$
+   has the character of a pressure Poisson matrix, it may be
+   solved efficiently with algebraic multigrid (AMG) -- at least
+   for elements that employ a continuous pressure approximation;
+   see \ref comm_ex. In these cases an efficient
+   inexact solver is obtained by performing just a single
+   multigrid cycle. 
+   \n\n
+   Assuming that 
+   <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
+   <code>Hypre</code></a> is available, we therefore provide the
+   option to use the \c Hypre
+   AMG solver to solve the linear systems involving the  \f$ {\bf P}
+   \f$ matrix. 
+   \n\n
+   \dontinclude driven_cavity.cc
+   \skipline OOMPH_HAS_HYPRE
+   \until new HyprePreconditioner;
+   \n 
+   We set the various solver flags to values that are appropriate
+   for 2D Poisson problems. This is most easily done by calling a helper
+   function, defined in the namespace \c Hypre_default_settings:
+   \n\n
+   \skipline Set parameters
+   \until  static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
+   \n
+   Next we specify the \c Preconditioner as the inexact solver
+   for the  \f$ {\bf P}
+   \f$ matrix,
+   \n\n
+   \until set_p_preconditioner
+   \n
+   and suppress the on-screen output from Hypre.
+   \n\n
+   \until }
+   \n
+   For modest Reynolds numbers, performing a single multigrid cycle also
+   provides a good approximate solver for linear systems involving
+   the momentum block, \f$ {\bf F}, \f$ so we repeat the steps
+   just listed, using the solver flags assigned in another
+   helper function in the namespace  \c Hypre_default_settings:
+   \n\n
+   \skipline F_matrix_preconditioner_pt = new HyprePreconditioner;
+   \until Prec_pt->set_f_preconditioner
+
+   The driver code contains various other preconditioning options which you
+   should explore yourself.
+.
+
+<HR>
+<HR> 
+
+\section comm_ex Further comments and exercises
+
+Use the driver code 
+<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
+demo_drivers/linear_solvers/driven_cavity.cc</a> to explore the
+behaviour of the preconditioner for the driven cavity problem.
+The driver code uses command line flags to specify various
+solver/preconditioner combinations. 
+
+-# Show that for Taylor-Hood (Q2Q1) elements, the preconditioner
+   performs extremely well, i.e. the solve time increases
+   approximately linearly with the number of degrees of freedom.
+   \n\n
+-# Show that for Crouzeix-Raviart (Q2Q-1) elements, the use
+   of the AMG solver for the pressure Schur complement block
+   leads to a very poor performance. 
+   \n\n
+-# Examine iteration numbers and CPU times for various problem sizes
+   and show that for Taylor-Hood (Q2Q1) elements, the preconditioner
+   leads to near-optimal behaviour in the sense that the CPU times
+   increase approximately linearly with the number of unknowns.
+   Determine the "break-even" point in the CPU times for 
+   the solution by direct and iterative solvers. \b Hint: You may 
+   wish to use the shell script 
+   <A HREF="../../../../demo_drivers/linear_solvers/time_driven_cavity.bash">
+   time_driven_cavity.bash</a> to perform the parameter studies.
+   \n\n
+</A>
+.
+
+
+
+For your reference, here are a few timings (total time in seconds for
+the Newton solver) obtained from runs at a Reynolds number of
+\f$ Re=100 \f$ on various uniformly refined meshes. The first column in 
+the tables shows the total number of degrees of freedom; the
+subsequent columns show the solve times for different
+solver/preconditioner combinations. For instance, 
+GMRES [SuperLU,AMG] means that the linear systems were solved
+using the LSC preconditioner with an exact solve for the momentum
+block and an approximate AMG solve (a single multigrid cycle)
+for the pressure Schur complement block. All runs were performed 
+with full optimisation (-O6) on an Intel Xeon 3.6GHz processor.
+
+<b><center>Taylor Hood</center></b>
+
+<table border=1>
+<tr><th># of dofs</th><th>SuperLU</th><th>GMRES [SuperLU,SuperLU]</th><th>GMRES [SuperLU,AMG]</th><th>GMRES [AMG,SuperLU]</th><th>GMRES [AMG,AMG]</th></tr>
+<tr><td>842</td><td> 0.38 </td><td> 0.51 </td><td> 0.52 </td><td> 0.93 </td><td> 0.91</td></tr>
+<tr><td>3482</td><td> 2.32 </td><td> 2.56 </td><td> 2.28 </td><td> 3.15 </td><td> 3.04</td></tr>
+<tr><td>7922</td><td> 9.24 </td><td> 6.34 </td><td> 6.3 </td><td> 7.54 </td><td> 7.41</td></tr>
+<tr><td>14162</td><td> 15.71 </td><td> 18.06 </td><td> 17.84 </td><td> 13.8 </td><td> 13.46</td></tr>
+<tr><td>22202</td><td> 36.88 </td><td> 28.46 </td><td> 27.21 </td><td> 23.26 </td><td> 23.29</td></tr>
+<tr><td>32042</td><td> 62.29 </td><td> 37.27 </td><td> 36.26 </td><td> 29.38 </td><td> 25.84</td></tr>
+<tr><td>43682</td><td> 108.97 </td><td> 66.26 </td><td> 57.7 </td><td> 41.71 </td><td> 37.6</td></tr>
+</table>
+
+
+<b><center>Crouzeix Raviart</center></b>
+
+
+<table border=1>
+<tr><th># of dofs</th><th>SuperLU</th><th>GMRES [SuperLU,SuperLU]</th><th>GMRES [SuperLU,AMG]</th><th>GMRES [AMG,SuperLU]</th><th>GMRES [AMG,AMG]</th></tr>
+<tr><td>1021 </td><td> 0.29 </td><td> 0.51 </td><td> 0.72 </td><td> 0.72 </td><td> 0.99</td></tr>
+<tr><td>4241 </td><td> 1.82 </td><td> 2.79 </td><td> 4.83 </td><td> 3.62 </td><td> 7.03</td></tr>
+<tr><td>9661 </td><td> 7.06 </td><td> 8.06 </td><td> 20.43 </td><td> 9.64 </td><td> 27.33</td></tr>
+<tr><td>17281 </td><td> 20.79 </td><td> 19.62 </td><td> 67.62 </td><td> 20.15 </td><td> 87.39</td></tr>
+<tr><td>27101 </td><td> 55.43 </td><td> 44.34 </td><td> 169.8 </td><td> 46.04 </td><td> 227.11</td></tr>
+<tr><td>39121 </td><td> 93.75 </td><td> 64.02 </td><td> 277.29 </td><td> 39.73 </td><td> 314.25</td></tr>
+<tr><td>53341 </td><td> 108.96 </td><td> 78.27 </td><td> 521.00 </td><td>60.02 </td><td> 596.27</td></tr>
+</table>
+
+
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_solvers/">
+demo_drivers/linear_solvers/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/linear_solvers/driven_cavity.cc">
+demo_drivers/linear_solvers/driven_cavity.cc
+</A>
+</CENTER>
+

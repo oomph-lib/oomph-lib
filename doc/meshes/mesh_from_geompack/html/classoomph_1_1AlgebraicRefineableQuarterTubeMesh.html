@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">AlgebraicRefineableQuarterTubeMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>AlgebraicMesh version of <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>.  
+ <a href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.png" usemap="#oomph::AlgebraicRefineableQuarterTubeMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::AlgebraicRefineableQuarterTubeMesh_3C_20ELEMENT_20_3E_map" name="oomph::AlgebraicRefineableQuarterTubeMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i..." alt="oomph::RefineableQuarterTubeMesh&lt; ELEMENT &gt;" shape="rect" coords="365,112,720,136"/>
+<area href="classoomph_1_1QuarterTubeMesh.html" title="3D quarter tube mesh class. The domain is specified by the GeomObject that identifies boundary 3...." alt="oomph::QuarterTubeMesh&lt; ELEMENT &gt;" shape="rect" coords="182,56,537,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad8ff9f32d4d180d815da65ddc3c4b90a" id="r_ad8ff9f32d4d180d815da65ddc3c4b90a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#ad8ff9f32d4d180d815da65ddc3c4b90a">AlgebraicRefineableQuarterTubeMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1QuarterTubeMesh.html#a1a8c0a74513d5d2a4f0772ac39b2d024">wall_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_lo</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">fract_mid</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_hi</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">nlayer</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">centre_box_size</a>=1.0, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:ad8ff9f32d4d180d815da65ddc3c4b90a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object, start and end coordinates of the geometric object and the fraction along the 2nd Lagrangian coordinate at which the dividing line between region 1 and region 2 is to be placed, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Sets up the refineable mesh (by calling the constructor for the underlying <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>).  <br /></td></tr>
+<tr class="separator:ad8ff9f32d4d180d815da65ddc3c4b90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ad71be8274f4073b7e18cb53d574f10" id="r_a1ad71be8274f4073b7e18cb53d574f10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a1ad71be8274f4073b7e18cb53d574f10">self_test</a> ()</td></tr>
+<tr class="memdesc:a1ad71be8274f4073b7e18cb53d574f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run self-test for algebraic mesh &ndash; return 0/1 for OK/failure.  <br /></td></tr>
+<tr class="separator:a1ad71be8274f4073b7e18cb53d574f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66b6f6855d25e272a2730f28d2108a40" id="r_a66b6f6855d25e272a2730f28d2108a40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterTubeDomain.html#ae347af42a5dcb9b3b82c2247975b01db">QuarterTubeDomain::AxialSpacingFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a66b6f6855d25e272a2730f28d2108a40">axial_spacing_fct_pt</a> ()</td></tr>
+<tr class="memdesc:a66b6f6855d25e272a2730f28d2108a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken version of the <a class="el" href="classoomph_1_1QuarterTubeDomain.html" title="Quarter tube as domain. Domain is bounded by curved boundary which is represented by a GeomObject....">QuarterTubeDomain</a> function Function is broken because axial spacing isn't implemented yet for the Algebraic version of the <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>. Note: this function must be used BEFORE algebraic_node_update(...) is called.  <br /></td></tr>
+<tr class="separator:a66b6f6855d25e272a2730f28d2108a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af521c0a76cf0bd14692979bd7747507d" id="r_af521c0a76cf0bd14692979bd7747507d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#af521c0a76cf0bd14692979bd7747507d">node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">update_all_solid_nodes</a>=<a class="el" href="classoomph_1_1GeompackQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:af521c0a76cf0bd14692979bd7747507d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve mesh update: Update current nodal positions via algebraic node update. [Doesn't make sense to use this mesh with SolidElements anyway, so we buffer the case if update_all_solid_nodes is set to true.].  <br /></td></tr>
+<tr class="separator:af521c0a76cf0bd14692979bd7747507d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af98a0aaff29c54ffa35f72f7dcf6b8c7" id="r_af98a0aaff29c54ffa35f72f7dcf6b8c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#af98a0aaff29c54ffa35f72f7dcf6b8c7">algebraic_node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:af98a0aaff29c54ffa35f72f7dcf6b8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the algebraic node update function for a node at time level t (t=0: present; t&gt;0: previous): Update with the node's first (default) update function.  <br /></td></tr>
+<tr class="separator:af98a0aaff29c54ffa35f72f7dcf6b8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ed9f4ce0442a6f962a1561318542a67" id="r_a7ed9f4ce0442a6f962a1561318542a67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a7ed9f4ce0442a6f962a1561318542a67">update_node_update</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a7ed9f4ce0442a6f962a1561318542a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the node update info for specified algebraic node following any spatial mesh adaptation.  <br /></td></tr>
+<tr class="separator:a7ed9f4ce0442a6f962a1561318542a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1RefineableQuarterTubeMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1RefineableQuarterTubeMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html">oomph::RefineableQuarterTubeMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a8aaace5bc465614ace0a9117b3ee169c inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh" id="r_a8aaace5bc465614ace0a9117b3ee169c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html#a8aaace5bc465614ace0a9117b3ee169c">RefineableQuarterTubeMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1QuarterTubeMesh.html#a1a8c0a74513d5d2a4f0772ac39b2d024">wall_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_lo</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">fract_mid</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_hi</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">nlayer</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a8aaace5bc465614ace0a9117b3ee169c inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for adaptive deformable quarter tube mesh class. The domain is specified by the GeomObject that identifies boundary 3. Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Steady dummy timestepper.  <br /></td></tr>
+<tr class="separator:a8aaace5bc465614ace0a9117b3ee169c inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229ad0335ba60176c578897b558790eb inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh" id="r_a229ad0335ba60176c578897b558790eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html#a229ad0335ba60176c578897b558790eb">~RefineableQuarterTubeMesh</a> ()</td></tr>
+<tr class="memdesc:a229ad0335ba60176c578897b558790eb inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <br /></td></tr>
+<tr class="separator:a229ad0335ba60176c578897b558790eb inherit pub_methods_classoomph_1_1RefineableQuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1QuarterTubeMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1QuarterTubeMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1QuarterTubeMesh.html">oomph::QuarterTubeMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a4dfb9a85b3c07d8bafa0f916c445c18a inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_a4dfb9a85b3c07d8bafa0f916c445c18a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a4dfb9a85b3c07d8bafa0f916c445c18a">QuarterTubeMesh</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *<a class="el" href="classoomph_1_1QuarterTubeMesh.html#a1a8c0a74513d5d2a4f0772ac39b2d024">wall_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_lo</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">fract_mid</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">xi_hi</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">nlayer</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1GeompackQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper)</td></tr>
+<tr class="memdesc:a4dfb9a85b3c07d8bafa0f916c445c18a inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Steady dummy timestepper.  <br /></td></tr>
+<tr class="separator:a4dfb9a85b3c07d8bafa0f916c445c18a inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6ec7337a9e1666ebc6c942e788bab7 inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_aeb6ec7337a9e1666ebc6c942e788bab7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#aeb6ec7337a9e1666ebc6c942e788bab7">~QuarterTubeMesh</a> ()</td></tr>
+<tr class="memdesc:aeb6ec7337a9e1666ebc6c942e788bab7 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: empty.  <br /></td></tr>
+<tr class="separator:aeb6ec7337a9e1666ebc6c942e788bab7 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a8c0a74513d5d2a4f0772ac39b2d024 inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_a1a8c0a74513d5d2a4f0772ac39b2d024"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a1a8c0a74513d5d2a4f0772ac39b2d024">wall_pt</a> ()</td></tr>
+<tr class="memdesc:a1a8c0a74513d5d2a4f0772ac39b2d024 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to GeomObject representing wall.  <br /></td></tr>
+<tr class="separator:a1a8c0a74513d5d2a4f0772ac39b2d024 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9214139f27adc4cb6096ad9463c2c53 inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_ab9214139f27adc4cb6096ad9463c2c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterTubeDomain.html">QuarterTubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#ab9214139f27adc4cb6096ad9463c2c53">domain_pt</a> ()</td></tr>
+<tr class="memdesc:ab9214139f27adc4cb6096ad9463c2c53 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to domain.  <br /></td></tr>
+<tr class="separator:ab9214139f27adc4cb6096ad9463c2c53 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71d6fc73082531c0a4dd51795615372 inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_ac71d6fc73082531c0a4dd51795615372"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterTubeDomain.html#a3d8c15c17d9912d8c519c028437c0b2c">QuarterTubeDomain::BLSquashFctPt</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#ac71d6fc73082531c0a4dd51795615372">bl_squash_fct_pt</a> ()</td></tr>
+<tr class="memdesc:ac71d6fc73082531c0a4dd51795615372 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer for function that squashes the outer macro elements towards the wall by mapping the input value of the "radial" macro element coordinate to the return value (defined in the underlying Domain object)  <br /></td></tr>
+<tr class="separator:ac71d6fc73082531c0a4dd51795615372 inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a842435a25ef82c9d2cbac5bdcfcb857f inherit pub_methods_classoomph_1_1QuarterTubeMesh" id="r_a842435a25ef82c9d2cbac5bdcfcb857f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterTubeDomain.html">QuarterTubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a842435a25ef82c9d2cbac5bdcfcb857f">domain_pt</a> () <a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a></td></tr>
+<tr class="memdesc:a842435a25ef82c9d2cbac5bdcfcb857f inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to underlying domain.  <br /></td></tr>
+<tr class="separator:a842435a25ef82c9d2cbac5bdcfcb857f inherit pub_methods_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a0e907476508fe47206036f48848f5fc4" id="r_a0e907476508fe47206036f48848f5fc4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579">Central_region</a>
+, <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3">Lower_right_region</a>
+, <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab">Upper_left_region</a>
+ }</td></tr>
+<tr class="memdesc:a0e907476508fe47206036f48848f5fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remesh function ids.  <a href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a0e907476508fe47206036f48848f5fc4">More...</a><br /></td></tr>
+<tr class="separator:a0e907476508fe47206036f48848f5fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a064653020f5d2a0c7de789283dac305c" id="r_a064653020f5d2a0c7de789283dac305c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a064653020f5d2a0c7de789283dac305c">node_update_central_region</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a064653020f5d2a0c7de789283dac305c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algebraic update function for a node that is located in the central region.  <br /></td></tr>
+<tr class="separator:a064653020f5d2a0c7de789283dac305c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52fb1161ebff25b5c638ac35cb541817" id="r_a52fb1161ebff25b5c638ac35cb541817"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a52fb1161ebff25b5c638ac35cb541817">node_update_lower_right_region</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:a52fb1161ebff25b5c638ac35cb541817"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algebraic update function for a node that is located in the lower-right region.  <br /></td></tr>
+<tr class="separator:a52fb1161ebff25b5c638ac35cb541817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82a39ccaed8016a9b1e841d91658a75" id="r_ac82a39ccaed8016a9b1e841d91658a75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#ac82a39ccaed8016a9b1e841d91658a75">node_update_upper_left_region</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">t</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>)</td></tr>
+<tr class="memdesc:ac82a39ccaed8016a9b1e841d91658a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algebraic update function for a node that is located in the upper-left region.  <br /></td></tr>
+<tr class="separator:ac82a39ccaed8016a9b1e841d91658a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0312615834a2aec8d0d6d4e2c846ef" id="r_a2d0312615834a2aec8d0d6d4e2c846ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a2d0312615834a2aec8d0d6d4e2c846ef">setup_algebraic_node_update</a> ()</td></tr>
+<tr class="memdesc:a2d0312615834a2aec8d0d6d4e2c846ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup algebraic update operation for all nodes.  <br /></td></tr>
+<tr class="separator:a2d0312615834a2aec8d0d6d4e2c846ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2014e91ad7f5a226b35aa96964f4bf1" id="r_ae2014e91ad7f5a226b35aa96964f4bf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#ae2014e91ad7f5a226b35aa96964f4bf1">update_node_update_in_region</a> (<a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">node_pt</a>, <a class="el" href="classoomph_1_1GeompackQuadMesh.html">int</a> &amp;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">region_id</a>)</td></tr>
+<tr class="memdesc:ae2014e91ad7f5a226b35aa96964f4bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update algebraic node update function for nodes in the region defined by region_id.  <br /></td></tr>
+<tr class="separator:ae2014e91ad7f5a226b35aa96964f4bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a6006bcac5688f832ff2b6cbaae65102a" id="r_a6006bcac5688f832ff2b6cbaae65102a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a6006bcac5688f832ff2b6cbaae65102a">Centre_box_size</a></td></tr>
+<tr class="memdesc:a6006bcac5688f832ff2b6cbaae65102a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of centre box.  <br /></td></tr>
+<tr class="separator:a6006bcac5688f832ff2b6cbaae65102a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb15683ec46078f9e3ab6d9caba54cf" id="r_a5bb15683ec46078f9e3ab6d9caba54cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a5bb15683ec46078f9e3ab6d9caba54cf">Lambda_x</a></td></tr>
+<tr class="memdesc:a5bb15683ec46078f9e3ab6d9caba54cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fractional width of central region.  <br /></td></tr>
+<tr class="separator:a5bb15683ec46078f9e3ab6d9caba54cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3b05ebb0b69e3ca3cbedb39b5b8e47" id="r_a8e3b05ebb0b69e3ca3cbedb39b5b8e47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a8e3b05ebb0b69e3ca3cbedb39b5b8e47">Lambda_y</a></td></tr>
+<tr class="memdesc:a8e3b05ebb0b69e3ca3cbedb39b5b8e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fractional height of central region.  <br /></td></tr>
+<tr class="separator:a8e3b05ebb0b69e3ca3cbedb39b5b8e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1QuarterTubeMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1QuarterTubeMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1QuarterTubeMesh.html">oomph::QuarterTubeMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a250577dc1d699b4035a42ddabd84c121 inherit pro_attribs_classoomph_1_1QuarterTubeMesh" id="r_a250577dc1d699b4035a42ddabd84c121"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1QuarterTubeDomain.html">QuarterTubeDomain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a250577dc1d699b4035a42ddabd84c121">Domain_pt</a></td></tr>
+<tr class="memdesc:a250577dc1d699b4035a42ddabd84c121 inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to domain.  <br /></td></tr>
+<tr class="separator:a250577dc1d699b4035a42ddabd84c121 inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a961bf18652514913c6a63c4850088e8b inherit pro_attribs_classoomph_1_1QuarterTubeMesh" id="r_a961bf18652514913c6a63c4850088e8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a961bf18652514913c6a63c4850088e8b">Wall_pt</a></td></tr>
+<tr class="memdesc:a961bf18652514913c6a63c4850088e8b inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the geometric object that represents the curved wall.  <br /></td></tr>
+<tr class="separator:a961bf18652514913c6a63c4850088e8b inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a323243990ecc860e5083d205c1ab247c inherit pro_attribs_classoomph_1_1QuarterTubeMesh" id="r_a323243990ecc860e5083d205c1ab247c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#a323243990ecc860e5083d205c1ab247c">Xi_lo</a></td></tr>
+<tr class="memdesc:a323243990ecc860e5083d205c1ab247c inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower limits for the coordinates along the wall.  <br /></td></tr>
+<tr class="separator:a323243990ecc860e5083d205c1ab247c inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7422bd566e566fd901bbbc98d8cb3b7 inherit pro_attribs_classoomph_1_1QuarterTubeMesh" id="r_ac7422bd566e566fd901bbbc98d8cb3b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#ac7422bd566e566fd901bbbc98d8cb3b7">Fract_mid</a></td></tr>
+<tr class="memdesc:ac7422bd566e566fd901bbbc98d8cb3b7 inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fraction along wall where outer ring is to be divided.  <br /></td></tr>
+<tr class="separator:ac7422bd566e566fd901bbbc98d8cb3b7 inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb226a0b0208c579f426e58d944685c inherit pro_attribs_classoomph_1_1QuarterTubeMesh" id="r_aabb226a0b0208c579f426e58d944685c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1QuarterTubeMesh.html#aabb226a0b0208c579f426e58d944685c">Xi_hi</a></td></tr>
+<tr class="memdesc:aabb226a0b0208c579f426e58d944685c inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upper limits for the coordinates along the wall.  <br /></td></tr>
+<tr class="separator:aabb226a0b0208c579f426e58d944685c inherit pro_attribs_classoomph_1_1QuarterTubeMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a>&gt;<br />
+class oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;</div><p>AlgebraicMesh version of <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>. </p>
+<p>Algebraic 3D quarter tube mesh class.</p>
+<p>The mesh boundaries are numbered as follows:</p><ul>
+<li>Boundary 0: "Inflow" cross section; located along the line parametrised by <img class="formulaInl" alt="$ \xi_0 =  \xi_0^{lo} $" src="form_17.png" width="43" height="15"/> on the geometric object that specifies the wall.</li>
+<li>Boundary 1: Plane x=0</li>
+<li>Boundary 2: Plane y=0</li>
+<li>Boundary 3: The curved wall - specified by the GeomObject passed to the mesh constructor.</li>
+<li>Boundary 4: "Outflow" cross section; located along the line parametrised by <img class="formulaInl" alt="$ \xi_0 =  \xi_0^{hi} $" src="form_18.png" width="44" height="15"/> on the geometric object that specifies the wall. Algebraic version of <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a></li>
+</ul>
+<p>Cross section through mesh looking along tube......... </p><pre class="fragment">                 ---___
+                |      ---____
+                |              -   BOUNDARY 3
+                |                /
+                |  [Region 2]   /  |
+                |              /     |
+                | N           /        |
+                | |_ E       /          |
+  BOUNDARY 1    |------------            |
+                |            |            |
+                | [Region 0] | [Region 1] |  ^
+                |            |            | / \  direction of
+                | N          |    N       |  |   2nd Lagrangian
+                | |_ E       |    |_ E    |  |   coordinate
+                |____________|____________|  |   along wall GeomObject
+
+                      BOUNDARY 2
+</pre><p> The Domain is built of slices each consisting of three MacroElements as sketched. The local coordinates are such that the (E)astern direction coincides with the positive s_0 direction, while the (N)orther direction coincides with the positive s_1 direction. The positive s_2 direction points down the tube.</p>
+<p>Elements need to be derived from AlgebraicElementBase. In addition to the refinement procedures available for the <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a> which forms the basis for this mesh, three algebraic node update functions are implemented for the nodes in the three regions defined by the Domain MacroElements. Note: it is assumed the cross section down the tube is uniform when <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html#a2d0312615834a2aec8d0d6d4e2c846ef" title="Setup algebraic update operation for all nodes.">setup_algebraic_node_update()</a> is called. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00430">430</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a0e907476508fe47206036f48848f5fc4" name="a0e907476508fe47206036f48848f5fc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e907476508fe47206036f48848f5fc4">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">anonymous</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">enum</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remesh function ids. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579" name="a0e907476508fe47206036f48848f5fc4a516de7eb4676b7b88ebd50f5967a5579"></a>Central_region&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3" name="a0e907476508fe47206036f48848f5fc4a05c833cf7edf44c3bd94251628400da3"></a>Lower_right_region&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab" name="a0e907476508fe47206036f48848f5fc4a4e534010f6f42e81a575935509ace9ab"></a>Upper_left_region&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00608">608</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad8ff9f32d4d180d815da65ddc3c4b90a" name="ad8ff9f32d4d180d815da65ddc3c4b90a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ff9f32d4d180d815da65ddc3c4b90a">&#9670;&#160;</a></span>AlgebraicRefineableQuarterTubeMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::AlgebraicRefineableQuarterTubeMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">GeomObject</a> *&#160;</td>
+          <td class="paramname"><em>wall_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi_lo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>fract_mid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi_hi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>nlayer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a>&#160;</td>
+          <td class="paramname"><em>centre_box_size</em> = <code>1.0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass pointer to geometric object, start and end coordinates of the geometric object and the fraction along the 2nd Lagrangian coordinate at which the dividing line between region 1 and region 2 is to be placed, and timestepper (defaults to (Steady) default timestepper defined in Mesh). Sets up the refineable mesh (by calling the constructor for the underlying <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>). </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00442">442</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__tube__mesh_8h_source.html#l00519">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00649">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::setup_algebraic_node_update()</a>, and <a class="el" href="quarter__tube__mesh_8h_source.html#l00085">oomph::QuarterTubeMesh&lt; ELEMENT &gt;::wall_pt()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af98a0aaff29c54ffa35f72f7dcf6b8c7" name="af98a0aaff29c54ffa35f72f7dcf6b8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af98a0aaff29c54ffa35f72f7dcf6b8c7">&#9670;&#160;</a></span>algebraic_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::algebraic_node_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implement the algebraic node update function for a node at time level t (t=0: present; t&gt;0: previous): Update with the node's first (default) update function. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00545">545</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__tube__mesh_8h_source.html#l00610">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::Central_region</a>, <a class="el" href="quarter__tube__mesh_8h_source.html#l00611">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::Lower_right_region</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00950">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_central_region()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01039">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_lower_right_region()</a>, <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01156">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::node_update_upper_left_region()</a>, and <a class="el" href="quarter__tube__mesh_8h_source.html#l00612">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::Upper_left_region</a>.</p>
+
+</div>
+</div>
+<a id="a66b6f6855d25e272a2730f28d2108a40" name="a66b6f6855d25e272a2730f28d2108a40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66b6f6855d25e272a2730f28d2108a40">&#9670;&#160;</a></span>axial_spacing_fct_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1QuarterTubeDomain.html#ae347af42a5dcb9b3b82c2247975b01db">QuarterTubeDomain::AxialSpacingFctPt</a> &amp; <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::axial_spacing_fct_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken version of the <a class="el" href="classoomph_1_1QuarterTubeDomain.html" title="Quarter tube as domain. Domain is bounded by curved boundary which is represented by a GeomObject....">QuarterTubeDomain</a> function Function is broken because axial spacing isn't implemented yet for the Algebraic version of the <a class="el" href="classoomph_1_1RefineableQuarterTubeMesh.html" title="Adaptative version of the QuarterTubeMesh base mesh. The domain is specified by the GeomObject that i...">RefineableQuarterTubeMesh</a>. Note: this function must be used BEFORE algebraic_node_update(...) is called. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1QuarterTubeMesh.html#ab4c35233e74407691a0d22549034ecb9">oomph::QuarterTubeMesh&lt; ELEMENT &gt;</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00499">499</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__tube__domain_8h_source.html#l00116">oomph::QuarterTubeDomain::axial_spacing_fct_pt()</a>, and <a class="el" href="quarter__tube__mesh_8h_source.html#l00120">oomph::QuarterTubeMesh&lt; ELEMENT &gt;::Domain_pt</a>.</p>
+
+</div>
+</div>
+<a id="af521c0a76cf0bd14692979bd7747507d" name="af521c0a76cf0bd14692979bd7747507d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af521c0a76cf0bd14692979bd7747507d">&#9670;&#160;</a></span>node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::node_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>update_all_solid_nodes</em> = <code><a class="el" href="classoomph_1_1GeompackQuadMesh.html">false</a></code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resolve mesh update: Update current nodal positions via algebraic node update. [Doesn't make sense to use this mesh with SolidElements anyway, so we buffer the case if update_all_solid_nodes is set to true.]. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00519">519</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00442">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::AlgebraicRefineableQuarterTubeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a064653020f5d2a0c7de789283dac305c" name="a064653020f5d2a0c7de789283dac305c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a064653020f5d2a0c7de789283dac305c">&#9670;&#160;</a></span>node_update_central_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::node_update_central_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Algebraic update function for a node that is located in the central region. </p>
+<p>Algebraic update function: Update in central region according to wall shape at time level t (t=0: present; t&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00950">950</a> of file <a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00545">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::algebraic_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a52fb1161ebff25b5c638ac35cb541817" name="a52fb1161ebff25b5c638ac35cb541817"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fb1161ebff25b5c638ac35cb541817">&#9670;&#160;</a></span>node_update_lower_right_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::node_update_lower_right_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Algebraic update function for a node that is located in the lower-right region. </p>
+<p>Algebraic update function: Update in lower-right region according to wall shape at time level t (t=0: present; t&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01039">1039</a> of file <a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00545">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::algebraic_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="ac82a39ccaed8016a9b1e841d91658a75" name="ac82a39ccaed8016a9b1e841d91658a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82a39ccaed8016a9b1e841d91658a75">&#9670;&#160;</a></span>node_update_upper_left_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::node_update_upper_left_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">const</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Algebraic update function for a node that is located in the upper-left region. </p>
+<p>Algebraic update function: Update in upper left region according to wall shape at time level t (t=0: present; t&gt;0: previous) </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01156">1156</a> of file <a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00545">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::algebraic_node_update()</a>.</p>
+
+</div>
+</div>
+<a id="a1ad71be8274f4073b7e18cb53d574f10" name="a1ad71be8274f4073b7e18cb53d574f10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ad71be8274f4073b7e18cb53d574f10">&#9670;&#160;</a></span>self_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">unsigned</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::self_test </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Run self-test for algebraic mesh &ndash; return 0/1 for OK/failure. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00489">489</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d0312615834a2aec8d0d6d4e2c846ef" name="a2d0312615834a2aec8d0d6d4e2c846ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d0312615834a2aec8d0d6d4e2c846ef">&#9670;&#160;</a></span>setup_algebraic_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::setup_algebraic_node_update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup algebraic update operation for all nodes. </p>
+<p>Setup algebraic node update data, based on 3 regions, each undergoing a different node update strategy. These regions are defined by the three MacroElements in each of the nlayer slices of the <a class="el" href="classoomph_1_1QuarterTubeDomain.html" title="Quarter tube as domain. Domain is bounded by curved boundary which is represented by a GeomObject....">QuarterTubeDomain</a> used to build the mesh. The Mesh is suspended from the &lsquo;wall&rsquo; GeomObject pointed to by wall_pt. The lower right edge of the mesh is located at the wall's coordinate xi[1]==xi_lo[1], the upper left edge at xi[1]=xi_hi[1], i.e. a view looking down the tube length. The dividing line between the two outer regions is located at the fraction fract_mid between these two coordinates. Node updating strategy:</p>
+<ul>
+<li>the starting cross sectional shape along the tube length is assumed to be uniform</li>
+<li>the cross sectional shape of the central region remains rectangular; the position of its top right corner is located at a fixed fraction of the starting width and height of the domain measured at xi[1]==xi_lo[1] and xi[1]==xi_hi[1] respectively. Nodes in this region are located at fixed horizontal and vertical fractions of the region.</li>
+<li>Nodes in the two outer regions (bottom right and top left) are located on straight lines running from the edges of the central region to the outer wall. </li>
+</ul>
+<p>Pointer to first algebraic element in central region</p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l00649">649</a> of file <a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00442">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::AlgebraicRefineableQuarterTubeMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a7ed9f4ce0442a6f962a1561318542a67" name="a7ed9f4ce0442a6f962a1561318542a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ed9f4ce0442a6f962a1561318542a67">&#9670;&#160;</a></span>update_node_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::update_node_update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the node update info for specified algebraic node following any spatial mesh adaptation. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00589">589</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01275">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::update_node_update_in_region()</a>.</p>
+
+</div>
+</div>
+<a id="ae2014e91ad7f5a226b35aa96964f4bf1" name="ae2014e91ad7f5a226b35aa96964f4bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2014e91ad7f5a226b35aa96964f4bf1">&#9670;&#160;</a></span>update_node_update_in_region()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">void</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::update_node_update_in_region </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">AlgebraicNode</a> *&amp;&#160;</td>
+          <td class="paramname"><em>node_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>region_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update algebraic node update function for nodes in the region defined by region_id. </p>
+<p>Update algebraic update function for nodes in region defined by region_id. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8template_8cc_source.html#l01275">1275</a> of file <a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="quarter__tube__mesh_8h_source.html#l00589">oomph::AlgebraicRefineableQuarterTubeMesh&lt; ELEMENT &gt;::update_node_update()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6006bcac5688f832ff2b6cbaae65102a" name="a6006bcac5688f832ff2b6cbaae65102a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6006bcac5688f832ff2b6cbaae65102a">&#9670;&#160;</a></span>Centre_box_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::Centre_box_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Size of centre box. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00605">605</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bb15683ec46078f9e3ab6d9caba54cf" name="a5bb15683ec46078f9e3ab6d9caba54cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb15683ec46078f9e3ab6d9caba54cf">&#9670;&#160;</a></span>Lambda_x</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::Lambda_x</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fractional width of central region. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00616">616</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a8e3b05ebb0b69e3ca3cbedb39b5b8e47" name="a8e3b05ebb0b69e3ca3cbedb39b5b8e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3b05ebb0b69e3ca3cbedb39b5b8e47">&#9670;&#160;</a></span>Lambda_y</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1GeompackQuadMesh.html">class</a> <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1GeompackQuadMesh.html">double</a> <a class="el" href="classoomph_1_1AlgebraicRefineableQuarterTubeMesh.html">oomph::AlgebraicRefineableQuarterTubeMesh</a>&lt; <a class="el" href="classoomph_1_1GeompackQuadMesh.html">ELEMENT</a> &gt;::Lambda_y</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fractional height of central region. </p>
+
+<p class="definition">Definition at line <a class="el" href="quarter__tube__mesh_8h_source.html#l00619">619</a> of file <a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="quarter__tube__mesh_8h_source.html">quarter_tube_mesh.h</a></li>
+<li><a class="el" href="quarter__tube__mesh_8template_8cc_source.html">quarter_tube_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

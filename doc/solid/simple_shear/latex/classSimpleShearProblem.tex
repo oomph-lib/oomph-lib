@@ -1,0 +1,469 @@
+\doxysection{Simple\+Shear\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classSimpleShearProblem}{}\label{classSimpleShearProblem}\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+
+
+Boundary-\/driven elastic deformation of fish-\/shaped domain.  
+
+
+Inheritance diagram for Simple\+Shear\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSimpleShearProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}{Simple\+Shear\+Problem}} (const bool \&incompressible)
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}{run}} (const std\+::string \&dirname)
+\begin{DoxyCompactList}\small\item\em Run simulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRefineableElasticCubicMesh}{Refineable\+Elastic\+Cubic\+Mesh}}$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a17449af62f8025e2b03ddb922b47016d}{setup\+\_\+boundary\+\_\+conditions}} ()
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a9b493680096cdbccb0cfa18b35787165}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Need to pin the redundent solid pressures after adaptation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\+\_\+boundary\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Shear the top. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}{Simple\+Shear\+Problem}} (const bool \&incompressible)
+\begin{DoxyCompactList}\small\item\em Constructor\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}{run}} (const std\+::string \&dirname)
+\begin{DoxyCompactList}\small\item\em Run simulation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classElasticCubicMesh}{Elastic\+Cubic\+Mesh}}$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSimpleShearProblem_abda248bc2810d71948b14e8ed75ea2d5}{mesh\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for the mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update function (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}{apply\+\_\+boundary\+\_\+conditions}} ()
+\begin{DoxyCompactList}\small\item\em Shear the top. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\+\_\+incompressible}} (ELEMENT \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}{set\+\_\+incompressible}} (ELEMENT \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f}{set\+\_\+incompressible}} (QPVDElement\+With\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c}{set\+\_\+incompressible}} (QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a6f131d79d6fc55348f0657350b5a3d57}{set\+\_\+incompressible}} (QPVDElement$<$ 3, 3 $>$ \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f}{set\+\_\+incompressible}} (QPVDElement\+With\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\item 
+void \mbox{\hyperlink{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c}{set\+\_\+incompressible}} (QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}el\+\_\+pt, const bool \&incompressible)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}{Shear}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Simple\+Shear\+Problem$<$ ELEMENT $>$}
+Boundary-\/driven elastic deformation of fish-\/shaped domain. 
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00137}{137}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}\label{classSimpleShearProblem_ada0881781b3332f88362528be39613d2} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!SimpleShearProblem@{SimpleShearProblem}}
+\index{SimpleShearProblem@{SimpleShearProblem}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleShearProblem()}{SimpleShearProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classSimpleShearProblem}{\+::\+Simple\+Shear\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00240}{240}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00101}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00162}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+conditions()}}.
+
+\Hypertarget{classSimpleShearProblem_ada0881781b3332f88362528be39613d2}\label{classSimpleShearProblem_ada0881781b3332f88362528be39613d2} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!SimpleShearProblem@{SimpleShearProblem}}
+\index{SimpleShearProblem@{SimpleShearProblem}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleShearProblem()}{SimpleShearProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\mbox{\hyperlink{classSimpleShearProblem}{\+::\+Simple\+Shear\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSimpleShearProblem_a9b493680096cdbccb0cfa18b35787165}\label{classSimpleShearProblem_a9b493680096cdbccb0cfa18b35787165} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Need to pin the redundent solid pressures after adaptation. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00190}{190}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}\label{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00160}{160}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+\Hypertarget{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc}\label{classSimpleShearProblem_ab476064967687537e335dfd40d770dbc} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update function (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00150}{150}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+\Hypertarget{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}\label{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00212}{212}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00220}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510}\label{classSimpleShearProblem_a2c63e1a6c120da147b0c4ec9764e1510} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update before solve\+: We\textquotesingle{}re dealing with a static problem so the nodal positions before the next solve merely serve as initial conditions. For meshes that are very strongly refined near the boundary, the update of the displacement boundary conditions (which only moves the Solid\+Nodes {\itshape on} the boundary), can lead to strongly distorted meshes. This can cause the Newton method to fail -\/-\/\texorpdfstring{$>$}{>} the overall method is actually more robust if we use the nodal positions as determined by the Domain/\+Macro\+Element-\/ based mesh update as initial guesses. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00161}{161}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00220}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+\Hypertarget{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}\label{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!apply\_boundary\_conditions@{apply\_boundary\_conditions}}
+\index{apply\_boundary\_conditions@{apply\_boundary\_conditions}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_boundary\_conditions()}{apply\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shear the top. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00220}{220}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00139}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::\+Shear}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00212}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}.
+
+\Hypertarget{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902}\label{classSimpleShearProblem_a1069985934b36d269b4bc8cb3ba00902} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!apply\_boundary\_conditions@{apply\_boundary\_conditions}}
+\index{apply\_boundary\_conditions@{apply\_boundary\_conditions}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_boundary\_conditions()}{apply\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shear the top. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00169}{169}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00139}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::\+Shear}}.
+
+\Hypertarget{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}\label{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00281}{281}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+\Hypertarget{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e}\label{classSimpleShearProblem_a24c087d9ea194229930bcf9f889a048e} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3}\label{classSimpleShearProblem_a4939a469c0b494296c2d3adc21638fc3} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableElasticCubicMesh}{Refineable\+Elastic\+Cubic\+Mesh}}$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{152}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00190}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00212}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00220}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions()}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00162}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+conditions()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00240}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::\+Simple\+Shear\+Problem()}}.
+
+\Hypertarget{classSimpleShearProblem_abda248bc2810d71948b14e8ed75ea2d5}\label{classSimpleShearProblem_abda248bc2810d71948b14e8ed75ea2d5} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!mesh\_pt@{mesh\_pt}}
+\index{mesh\_pt@{mesh\_pt}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{mesh\_pt()}{mesh\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classElasticCubicMesh}{Elastic\+Cubic\+Mesh}}$<$ ELEMENT $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for the mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00143}{143}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+\Hypertarget{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}\label{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!run@{run}}
+\index{run@{run}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::run (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{dirname }\end{DoxyParamCaption})}
+
+
+
+Run simulation. 
+
+Run the problem. 
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00335}{335}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00113}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Gravity}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00407}{main()}}.
+
+\Hypertarget{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0}\label{classSimpleShearProblem_ac1746a2634e310571d40d70719d509c0} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!run@{run}}
+\index{run@{run}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::run (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{dirname }\end{DoxyParamCaption})}
+
+
+
+Run simulation. 
+
+\Hypertarget{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}\label{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{ELEMENT \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{379}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00396}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}, \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00387}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}, and \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00240}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::\+Simple\+Shear\+Problem()}}.
+
+\Hypertarget{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0}\label{classSimpleShearProblem_a3e5d5f57fc041531ee683f50395536f0} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{ELEMENT \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classSimpleShearProblem_a6f131d79d6fc55348f0657350b5a3d57}\label{classSimpleShearProblem_a6f131d79d6fc55348f0657350b5a3d57} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ QPVDElement$<$ 3, 3 $>$ $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{QPVDElement$<$ 3, 3 $>$ \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00337}{337}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+\Hypertarget{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c}\label{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00395}{395}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+
+\Hypertarget{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c}\label{classSimpleShearProblem_a0b45bea53f2021f5cee0bb94972bf10c} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{QPVDElement\+With\+Continuous\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00353}{353}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+
+\Hypertarget{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f}\label{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ QPVDElement\+With\+Pressure$<$ 3 $>$ $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{QPVDElement\+With\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00387}{387}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+
+\Hypertarget{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f}\label{classSimpleShearProblem_a40345e55adaf86780d551e51ec8f654f} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!set\_incompressible@{set\_incompressible}}
+\index{set\_incompressible@{set\_incompressible}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ QPVDElement\+With\+Pressure$<$ 3 $>$ $>$\+::set\+\_\+incompressible (\begin{DoxyParamCaption}\item[{QPVDElement\+With\+Pressure$<$ 3 $>$ \texorpdfstring{$\ast$}{*}}]{el\+\_\+pt,  }\item[{const bool \&}]{incompressible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{simple__shear_8cc_source_l00345}{345}} of file \mbox{\hyperlink{simple__shear_8cc_source}{simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00379}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+
+\Hypertarget{classSimpleShearProblem_a17449af62f8025e2b03ddb922b47016d}\label{classSimpleShearProblem_a17449af62f8025e2b03ddb922b47016d} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!setup\_boundary\_conditions@{setup\_boundary\_conditions}}
+\index{setup\_boundary\_conditions@{setup\_boundary\_conditions}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_boundary\_conditions()}{setup\_boundary\_conditions()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::setup\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00162}{162}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00152}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00240}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::\+Simple\+Shear\+Problem()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337}\label{classSimpleShearProblem_a3844145c334e84c6ed94d803aeb1a337} 
+\index{SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}!Shear@{Shear}}
+\index{Shear@{Shear}!SimpleShearProblem$<$ ELEMENT $>$@{SimpleShearProblem$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Shear}{Shear}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classSimpleShearProblem}{Simple\+Shear\+Problem}}$<$ ELEMENT $>$\+::\+Shear\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00139}{139}} of file \mbox{\hyperlink{refineable__simple__shear_8cc_source}{refineable\+\_\+simple\+\_\+shear.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__simple__shear_8cc_source_l00220}{Simple\+Shear\+Problem$<$ ELEMENT $>$\+::apply\+\_\+boundary\+\_\+conditions()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{refineable__simple__shear_8cc}{refineable\+\_\+simple\+\_\+shear.\+cc}}\item 
+\mbox{\hyperlink{simple__shear_8cc}{simple\+\_\+shear.\+cc}}\end{DoxyCompactItemize}

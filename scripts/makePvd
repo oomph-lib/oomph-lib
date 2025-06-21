@@ -1,0 +1,298 @@
+#!/bin/bash
+#
+# Copyright (C) 2007- Angelo Simone (TU Delft)
+# Licensed under the GNU LGPL Version 2.1
+#
+# Script for generating an XML file with a collection of vtu files.
+# This XML file can be used by Paraview to generate an animation.
+#
+#
+# Created on 20070905
+# Last revision by Jeremy CHU VAN on 20110708
+# 
+# Report bugs to a.simone@tudelft.nl
+#
+#############################################
+#
+
+# -- usage string and function
+usagestr="\n
+NAME\n
+\tmakePvd - generate a PVD XML file from a collection of VTU or VTP files\n
+\tto allow the files to be animated in paraview.\n
+\n
+\n
+SYNOPSIS\n
+\tmakePvd [NPROC] basename [STEP] output.pvd \n
+\n
+\n
+\tNPROC: number of processes in a parallel computation \n
+\tSTEP : single step number (if not specified we deal with all available ones)\n
+\n
+\n
+TYPICAL USAGE EXAMPLES\n
+\n
+\n
+\tAssuming that the oomph-lib output files (in tecplot format) have been \n
+\tconverted to vtu (or vtp) files (using the oomph-convert script),  pvd \n
+\tfiles can be created as follows: \n\n
+\n
+\tData from serial computations: \n
+\t------------------------------ \n
+\n
+\t   For data files from a serial computation where separate files\n
+\t   represent, e.g., results at different time steps, where the filenames\n
+\t   have the format such as \n\n
+\t \t   plot001.vtu \n
+\t \t   plot002.vtu \n
+\t \t   plot003.vtu \n
+\t \t \t     :       \n \n
+\t \t   plot009.vtu \n
+\t \t   plot010.vtu \n
+\t \t   plot011.vtu \n
+\t \t \t     :        \n \n
+\t   (i.e. a stem, (here \"plot\"), followed by a padded number \n
+\t   and the \".vtu\" suffix), the pvd file can be generated with \n\n
+\t \t makePvd [stem] myplot.pvd  \n\n 
+\t So for the files listed above we would use the command\n\n
+\t \t makePvd plot myplot.pvd  \n\n 
+\t   which generates the file myplot.pvd\n \v
+\tNote that the numbers do not have to be padded, so files whose names \n
+\thave the format\n\n
+\t \t   plot1.vtu \n
+\t \t   plot2.vtu \n
+\t \t   plot3.vtu \n
+\t \t \t     :        \n \n
+\t \t   plot9.vtu \n
+\t \t   plot10.vtu \n
+\t \t   plot11.vtu \n
+\t \t \t     :        \n \n
+\t can be processed using the same command as above. However, \n 
+\t the combined pvd file will then contain the data in lexicographic\n
+\t order (e.g.  plot1.vtu,  plot10.vtu,  plot11.vtu, ..., plot19.vtu,\n
+\t plot2.vtu, plot20.vtu , plot21.vtu, ...) which is likely to create\n
+\t an odd animation... To create vtu files with padded enumeration \n
+\t from non-padded data files, use the -z option in the oomph-convert \n
+\t script. \n
+\n
+\n
+\tData from parallel computations (multiple timesteps): \n
+\t-----------------------------------------------------\n
+\n
+\t oomph-lib typically outputs results from parallel (distributed) \n
+\t computations on a processor-by-processor basis, resulting in filenames \n
+\t of the form\n\n
+\t solid_soln_proc0_00000.vtu \t \t \ \n
+\t solid_soln_proc1_00000.vtu \t \t | \n
+\t \t : \t \t \t \t |  Data for timestep 0 \n
+\t solid_soln_proc[NPROC-1]_00000.vtu \t / \n
+\t \t \n \n
+\t solid_soln_proc0_00001.vtu  \t \t \ \n
+\t solid_soln_proc1_00001.vtu  \t \t | \n
+\t \t : \t \t \t \t |  Data for timestep 1 \n
+\t solid_soln_proc[NPROC-1]_00001.vtu,  \t /\n \n
+\t \t : \n \n
+\t where NPROC is the number of processors. An animation of such data \n
+\t obviously requires the output from different processors (but for the \n
+\t the same timestep) to be combined. Provided, the filenames have \n
+\t the pattern \n \n
+\t \t [stem]proc[processor_number]_[timestep_number].vtu \n\n
+\t (note the \"proc\" and \"_\", both of which are required), the pvd file \n
+\t can be generated with \n \n
+\t \t makePvd [NPROC] [stem] myplot.pvd  \n\n 
+\t So, for the files listed above, to produce a pvd file that \n
+\t contains data from a computation with four processors the command\n\n
+\t \t makePvd 4  solid_soln_ solid_soln.pvd  \n\n 
+\t would create the file solid_soln.pvd from which paraview \n
+\t can create an animation of the solution. \n
+\n
+\n
+\tData from parallel computations (single timestep/solution): \n
+\t-----------------------------------------------------------\n
+\t Finally, we offer the option to combine the parallel data files \n
+\t for a single timestep (or a single solution) into a single pvd file. \n
+\t Provided, the filenames have  the pattern \n \n
+\t \t [stem]proc[processor_number]_[timestep_number].vtu \n\n
+\t (note the \"proc\" and \"_\", both of which are required), the pvd file \n
+\t can be generated with \n \n
+\t \t makePvd [NPROC] [stem] [timestep] myplot.pvd  \n\n 
+\t So, for the files listed above, to produce a pvd file that \n
+\t contains data for timestep 00011 from a computation with \n
+\t four processors the command\n\n
+\t \t makePvd 4  solid_soln_ 00011 solid_soln.pvd  \n\n 
+\t would create the file solid_soln.pvd which can be displayed with paraview. \n
+\n\v"
+
+usage() {
+  echo -e $usagestr
+  exit 1
+}
+
+#--------------------------------------------------------
+# Function to extract the step number from a filename,
+# assuming that the step is the number immediately
+# in front of the dot, stripping out leading zeroes, so
+# the step number of file fluid19_soln_proc342_00222.vtu
+# is 222. 
+#--------------------------------------------------------
+function get_step_number
+{
+ echo $1 | awk 'BEGIN {found_dot=0}
+{
+ number=""
+ # look at each character, starting at end
+ for(i=length($0);i>=1;i--)
+  {
+   # get the character to be checked
+   char=substr($0,i,1)
+   
+   # Havent found the dot yet; keep looking
+   if (found_dot==0)
+    {
+     if (char==".")
+      {
+       found_dot=1
+      }
+    }
+   # Have passed the dot; now read out all numbers and collect them
+   # Bail out once we find the first letter.
+   else
+    {
+     # Is the next character a number?
+     if (match(char,"[0-9]"))
+      {
+       # If so, append it to record of number
+       number=char number
+      }
+     else
+      {
+       # Else weve reached a letter so bail out
+       break
+      }
+    }
+  }
+ 
+
+ # Now look at each character in number, starting at front,
+ # to strip out leading zeroes
+ output_number=""
+ found_first_non_zero=0
+ for(i=1;i<=length(number);i++)
+  {
+   # get the character to be checked
+   char=substr(number,i,1)
+
+   # Ignore leading zeroes
+   if (found_first_non_zero==0)
+    {
+     if (char!="0")
+      {
+       output_number=output_number char
+       found_first_non_zero=1
+      }
+    }
+   # Once were past any leading zeroes
+   # dump out everything
+   else
+    {
+     output_number=output_number char
+    }
+  }
+ if ( output_number=="")
+  {
+   output_number="0"
+  }
+ print output_number
+}'
+
+
+}
+
+
+
+
+
+
+
+
+# -- check for correct usage and assign variables
+if [ $# -eq 3 ]; then
+    nbproc=$1
+    basefile=$2
+    pvdfile=$3
+    
+    
+# -- create the PVD XML file
+    echo "<?xml version="'"1.0"'"?>"> $pvdfile
+    echo "<VTKFile type="'"Collection"'" version="'"0.1"'">">> $pvdfile
+    echo "<Collection>">> $pvdfile
+    
+    for ((jj=0;$jj<$nbproc;jj++))
+    do 
+	ii=1
+	for file in $basefile'proc'$jj'_'*.vt*
+	do 
+            number=`get_step_number $file`
+	    echo "<DataSet timestep= "'" '$number' "'" part="'" '$jj' "'" file="'"'$file'"'"/>" >> $pvdfile
+	    ii=$(($ii+1))
+	done
+    done
+    
+    
+elif [ $# -eq 2 ]; then
+    basefile=$1
+    pvdfile=$2
+    
+# -- create the PVD XML file
+    echo "<?xml version="'"1.0"'"?>"> $pvdfile
+    echo "<VTKFile type="'"Collection"'" version="'"0.1"'">">> $pvdfile
+    echo "<Collection>">> $pvdfile
+    
+    ii=1
+    for file in $basefile*.vt*
+    do 
+        number=`get_step_number $file`
+	echo "<DataSet timestep= "'" '$number' "'" part="'" '0' "'" file="'"'$file'"'"/>" >> $pvdfile
+	ii=$(($ii+1))
+    done
+    
+
+# -- check for correct usage and assign variables
+elif [ $# -eq 4 ]; then
+    nbproc=$1
+    basefile=$2
+    timestep=$3
+    pvdfile=$4
+    
+    
+# -- create the PVD XML file
+    echo "<?xml version="'"1.0"'"?>"> $pvdfile
+    echo "<VTKFile type="'"Collection"'" version="'"0.1"'">">> $pvdfile
+    echo "<Collection>">> $pvdfile
+    
+    for ((jj=0;$jj<$nbproc;jj++))
+    do 
+	ii=1
+	for file in $basefile'proc'$jj'_'$timestep.vt*
+	do 
+            number=`get_step_number $file`
+	    echo "<DataSet timestep= "'" '$number' "'" part="'" '$jj' "'" file="'"'$file'"'"/>" >> $pvdfile
+	    ii=$(($ii+1))
+	done
+    done
+
+
+else
+    usage
+
+fi
+
+echo "</Collection>">> $pvdfile
+echo "</VTKFile>">>    $pvdfile
+
+echo " "
+echo " --> File $pvdfile created"
+echo " "
+
+
+

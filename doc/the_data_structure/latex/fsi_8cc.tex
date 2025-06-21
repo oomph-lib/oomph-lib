@@ -1,0 +1,19 @@
+\doxysection{fsi.\+cc File Reference}
+\hypertarget{fsi_8cc}{}\label{fsi_8cc}\index{fsi.cc@{fsi.cc}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1FSI__functions}{oomph\+::\+FSI\+\_\+functions}}
+\begin{DoxyCompactList}\small\item\em Namespace for "{}global"{} FSI functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_ac1a95cf31d719f6aeceb72554ee75868}{oomph\+::\+FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Apply no-\/slip condition for N.\+St. on a moving wall node u = St d\+R/dt, where the Strouhal number St = a/(UT) is defined by \doxylink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip} and is initialised to 1.\+0. Note\+: This requires the x,y,\mbox{[}z\mbox{]} velocity components to be stored in nodal values 0,1,\mbox{[}2\mbox{]}. This is the default for all currently existing Navier-\/\+Stokes elements. If you use any others, use this function at your own risk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1FSI__functions_aa213854665524b0720b63a115ef57fd8}{oomph\+::\+FSI\+\_\+functions\+::\+Strouhal\+\_\+for\+\_\+no\+\_\+slip}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number St = a/(UT) for application of no slip condition. Initialised to 1.\+0. \end{DoxyCompactList}\end{DoxyCompactItemize}

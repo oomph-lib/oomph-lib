@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::Tree Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1Tree.html">Tree</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="classoomph_1_1Tree-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::Tree Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A generalised tree base class that abstracts the common functionality between the quad- and octrees used in mesh adaptation in two and three dimensions, respectively.  
+ <a href="classoomph_1_1Tree.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="tree_8h_source.html">tree.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::Tree:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1Tree.png" usemap="#oomph::Tree_map" alt=""/>
+  <map id="oomph::Tree_map" name="oomph::Tree_map">
+<area href="classoomph_1_1BinaryTree.html" title="BinaryTree class: Recursively defined, generalised binary tree." alt="oomph::BinaryTree" shape="rect" coords="0,56,143,80"/>
+<area href="classoomph_1_1OcTree.html" title="OcTree class: Recursively defined, generalised octree." alt="oomph::OcTree" shape="rect" coords="153,56,296,80"/>
+<area href="classoomph_1_1QuadTree.html" title="QuadTree class: Recursively defined, generalised quadtree." alt="oomph::QuadTree" shape="rect" coords="306,56,449,80"/>
+<area href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ..." alt="oomph::TreeRoot" shape="rect" coords="612,56,755,80"/>
+<area href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s..." alt="oomph::BinaryTreeRoot" shape="rect" coords="0,112,143,136"/>
+<area href="classoomph_1_1OcTreeRoot.html" title="OcTreeRoot is a OcTree that forms the root of a (recursive) octree. The &quot;root node&quot; is special as it ..." alt="oomph::OcTreeRoot" shape="rect" coords="153,112,296,136"/>
+<area href="classoomph_1_1QuadTreeRoot.html" title="QuadTreeRoot is a QuadTree that forms the root of a (recursive) quadtree. The &quot;root node&quot; is special ..." alt="oomph::QuadTreeRoot" shape="rect" coords="306,112,449,136"/>
+<area href="classoomph_1_1BinaryTreeRoot.html" title="BinaryTreeRoot is a BinaryTree that forms the root of a (recursive) binary tree. The &quot;root node&quot; is s..." alt="oomph::BinaryTreeRoot" shape="rect" coords="459,112,602,136"/>
+<area href="classoomph_1_1OcTreeRoot.html" title="OcTreeRoot is a OcTree that forms the root of a (recursive) octree. The &quot;root node&quot; is special as it ..." alt="oomph::OcTreeRoot" shape="rect" coords="612,112,755,136"/>
+<area href="classoomph_1_1QuadTreeRoot.html" title="QuadTreeRoot is a QuadTree that forms the root of a (recursive) quadtree. The &quot;root node&quot; is special ..." alt="oomph::QuadTreeRoot" shape="rect" coords="765,112,908,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6b8ef236d41f52c92973682ca83679d5" id="r_a6b8ef236d41f52c92973682ca83679d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>(Tree::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">VoidMemberFctPt</a>) ()</td></tr>
+<tr class="memdesc:a6b8ef236d41f52c92973682ca83679d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to argument-free void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function.  <br /></td></tr>
+<tr class="separator:a6b8ef236d41f52c92973682ca83679d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498ffc10556f4335e831a06fc885a27a" id="r_a498ffc10556f4335e831a06fc885a27a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>(Tree::*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a498ffc10556f4335e831a06fc885a27a">VoidMeshPtArgumentMemberFctPt</a>) (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:a498ffc10556f4335e831a06fc885a27a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function pointer to a void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as its argument.  <br /></td></tr>
+<tr class="separator:a498ffc10556f4335e831a06fc885a27a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ace0b4169cf94a040c280af8e14f6a283" id="r_ace0b4169cf94a040c280af8e14f6a283"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ace0b4169cf94a040c280af8e14f6a283">~Tree</a> ()</td></tr>
+<tr class="memdesc:ace0b4169cf94a040c280af8e14f6a283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. Note: Deleting a tree also deletes the objects associated with its non-leave nodes.  <br /></td></tr>
+<tr class="separator:ace0b4169cf94a040c280af8e14f6a283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50dce113a40c6ac422353ab149b2d4eb" id="r_a50dce113a40c6ac422353ab149b2d4eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a50dce113a40c6ac422353ab149b2d4eb">Tree</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dummy</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a50dce113a40c6ac422353ab149b2d4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a50dce113a40c6ac422353ab149b2d4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bce57d784f256d8d7b8d14432a7d77a" id="r_a6bce57d784f256d8d7b8d14432a7d77a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6bce57d784f256d8d7b8d14432a7d77a">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a6bce57d784f256d8d7b8d14432a7d77a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a6bce57d784f256d8d7b8d14432a7d77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d630dad19ef861ab6a5f37ad6ea67f4" id="r_a7d630dad19ef861ab6a5f37ad6ea67f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4">object_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7d630dad19ef861ab6a5f37ad6ea67f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the object (<a class="el" href="classoomph_1_1RefineableElement.html" title="RefineableElements are FiniteElements that may be subdivided into children to provide a better local ...">RefineableElement</a>) represented by the tree.  <br /></td></tr>
+<tr class="separator:a7d630dad19ef861ab6a5f37ad6ea67f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96a95bd9942e906fde87194845a1868c" id="r_a96a95bd9942e906fde87194845a1868c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a96a95bd9942e906fde87194845a1868c">flush_object</a> ()</td></tr>
+<tr class="memdesc:a96a95bd9942e906fde87194845a1868c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the object represented by the tree.  <br /></td></tr>
+<tr class="separator:a96a95bd9942e906fde87194845a1868c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9851a9dd06212b6891ce9a8bc832d4cf" id="r_a9851a9dd06212b6891ce9a8bc832d4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9851a9dd06212b6891ce9a8bc832d4cf">son_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">son_index</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9851a9dd06212b6891ce9a8bc832d4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here.  <br /></td></tr>
+<tr class="separator:a9851a9dd06212b6891ce9a8bc832d4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7026d14ead1a8d91ce417dfd0cd9478" id="r_ab7026d14ead1a8d91ce417dfd0cd9478"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ab7026d14ead1a8d91ce417dfd0cd9478">set_son_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;<a class="el" href="classoomph_1_1Tree.html#a9851a9dd06212b6891ce9a8bc832d4cf">son_pt</a>)</td></tr>
+<tr class="memdesc:ab7026d14ead1a8d91ce417dfd0cd9478"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here).  <br /></td></tr>
+<tr class="separator:ab7026d14ead1a8d91ce417dfd0cd9478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e4123b40f6fb52d180a154c9123e85" id="r_a31e4123b40f6fb52d180a154c9123e85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a31e4123b40f6fb52d180a154c9123e85">nsons</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a31e4123b40f6fb52d180a154c9123e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return number of sons (zero if it's a leaf node)  <br /></td></tr>
+<tr class="separator:a31e4123b40f6fb52d180a154c9123e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34df656d2f298dbbdf60e7890a3dff2f" id="r_a34df656d2f298dbbdf60e7890a3dff2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a34df656d2f298dbbdf60e7890a3dff2f">flush_sons</a> ()</td></tr>
+<tr class="memdesc:a34df656d2f298dbbdf60e7890a3dff2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the sons.  <br /></td></tr>
+<tr class="separator:a34df656d2f298dbbdf60e7890a3dff2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b9926754cddfaafd9869af3fe266e7" id="r_a33b9926754cddfaafd9869af3fe266e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a33b9926754cddfaafd9869af3fe266e7">root_pt</a> ()</td></tr>
+<tr class="memdesc:a33b9926754cddfaafd9869af3fe266e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to root of the tree.  <br /></td></tr>
+<tr class="separator:a33b9926754cddfaafd9869af3fe266e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4a6a5242b5969cfd8d7d37da68f3495" id="r_aa4a6a5242b5969cfd8d7d37da68f3495"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aa4a6a5242b5969cfd8d7d37da68f3495">root_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa4a6a5242b5969cfd8d7d37da68f3495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to root of the tree (const version)  <br /></td></tr>
+<tr class="separator:aa4a6a5242b5969cfd8d7d37da68f3495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a975ccfd63ffa14a04f14a37b3d2ff931" id="r_a975ccfd63ffa14a04f14a37b3d2ff931"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> ELEMENT &gt; </td></tr>
+<tr class="memitem:a975ccfd63ffa14a04f14a37b3d2ff931"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a975ccfd63ffa14a04f14a37b3d2ff931">split_if_required</a> ()</td></tr>
+<tr class="memdesc:a975ccfd63ffa14a04f14a37b3d2ff931"><td class="mdescLeft">&#160;</td><td class="mdescRight">If required, split the leaf and create its sons &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_refined() = true.  <br /></td></tr>
+<tr class="separator:a975ccfd63ffa14a04f14a37b3d2ff931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6502324233a86eeeadba7f46505656af" id="r_a6502324233a86eeeadba7f46505656af"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> ELEMENT &gt; </td></tr>
+<tr class="memitem:a6502324233a86eeeadba7f46505656af"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6502324233a86eeeadba7f46505656af">p_refine_if_required</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:a6502324233a86eeeadba7f46505656af"><td class="mdescLeft">&#160;</td><td class="mdescRight">If required, p-refine the leaf &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_p_refined() = true or bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_p_unrefined() = true.  <br /></td></tr>
+<tr class="separator:a6502324233a86eeeadba7f46505656af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4f977931ece6b719a9e616037bb2481" id="r_af4f977931ece6b719a9e616037bb2481"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#af4f977931ece6b719a9e616037bb2481">merge_sons_if_required</a> (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:af4f977931ece6b719a9e616037bb2481"><td class="mdescLeft">&#160;</td><td class="mdescRight">If required, merge the four sons for unrefinement &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; sons_to_be_unrefined() = true.  <br /></td></tr>
+<tr class="separator:af4f977931ece6b719a9e616037bb2481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea17489589a1872db51f2b142da4c1fb" id="r_aea17489589a1872db51f2b142da4c1fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aea17489589a1872db51f2b142da4c1fb">deactivate_object</a> ()</td></tr>
+<tr class="memdesc:aea17489589a1872db51f2b142da4c1fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the <a class="el" href="classoomph_1_1RefineableElement.html" title="RefineableElements are FiniteElements that may be subdivided into children to provide a better local ...">RefineableElement</a>'s deactivate_element() function.  <br /></td></tr>
+<tr class="separator:aea17489589a1872db51f2b142da4c1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca2fa14194f424583fd6425a8c4bbff2" id="r_aca2fa14194f424583fd6425a8c4bbff2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aca2fa14194f424583fd6425a8c4bbff2">construct_son</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#aa2918f6d84795c9f366adb178e287843">father_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)=0</td></tr>
+<tr class="memdesc:aca2fa14194f424583fd6425a8c4bbff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function that constructs a specific type of tree. This MUST be overloaded for each specific tree type. The use of such a function allows the generic implementation of <a class="el" href="classoomph_1_1Tree.html#a975ccfd63ffa14a04f14a37b3d2ff931" title="If required, split the leaf and create its sons – criterion: bool object_pt()-&gt; to_be_refined() = tru...">split_if_required()</a>.  <br /></td></tr>
+<tr class="separator:aca2fa14194f424583fd6425a8c4bbff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3caab39c8bee6fb65bbafed523aa6d3d" id="r_a3caab39c8bee6fb65bbafed523aa6d3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a3caab39c8bee6fb65bbafed523aa6d3d">traverse_all</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">member_function</a>)</td></tr>
+<tr class="memdesc:a3caab39c8bee6fb65bbafed523aa6d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() at all its "nodes".  <br /></td></tr>
+<tr class="separator:a3caab39c8bee6fb65bbafed523aa6d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c67186ca9c87eef9ce7eaa0af41057" id="r_af5c67186ca9c87eef9ce7eaa0af41057"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#af5c67186ca9c87eef9ce7eaa0af41057">traverse_all</a> (<a class="el" href="classoomph_1_1Tree.html#a498ffc10556f4335e831a06fc885a27a">Tree::VoidMeshPtArgumentMemberFctPt</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">member_function</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:af5c67186ca9c87eef9ce7eaa0af41057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and excute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as an argument.  <br /></td></tr>
+<tr class="separator:af5c67186ca9c87eef9ce7eaa0af41057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef175445b09edb47624c4b88c6d548bc" id="r_aef175445b09edb47624c4b88c6d548bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef175445b09edb47624c4b88c6d548bc">traverse_all_but_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">member_function</a>)</td></tr>
+<tr class="memdesc:aef175445b09edb47624c4b88c6d548bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() at all its "nodes" aparat from the leaves.  <br /></td></tr>
+<tr class="separator:aef175445b09edb47624c4b88c6d548bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e0e3695dd8986e439927b7657ff741" id="r_a22e0e3695dd8986e439927b7657ff741"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a22e0e3695dd8986e439927b7657ff741">traverse_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">member_function</a>)</td></tr>
+<tr class="memdesc:a22e0e3695dd8986e439927b7657ff741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() only at its leaves.  <br /></td></tr>
+<tr class="separator:a22e0e3695dd8986e439927b7657ff741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914e74ef473b7e82299ea9337d37830d" id="r_a914e74ef473b7e82299ea9337d37830d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a914e74ef473b7e82299ea9337d37830d">traverse_leaves</a> (<a class="el" href="classoomph_1_1Tree.html#a498ffc10556f4335e831a06fc885a27a">Tree::VoidMeshPtArgumentMemberFctPt</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">member_function</a>, <a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td></tr>
+<tr class="memdesc:a914e74ef473b7e82299ea9337d37830d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as an argument only at its leaves.  <br /></td></tr>
+<tr class="separator:a914e74ef473b7e82299ea9337d37830d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accfbeb9178ce92a8a51e3a15293a86d1" id="r_accfbeb9178ce92a8a51e3a15293a86d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#accfbeb9178ce92a8a51e3a15293a86d1">stick_leaves_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;)</td></tr>
+<tr class="memdesc:accfbeb9178ce92a8a51e3a15293a86d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse tree and stick pointers to leaf "nodes" (only) into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>.  <br /></td></tr>
+<tr class="separator:accfbeb9178ce92a8a51e3a15293a86d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c84b4e4700a825ef0a6ca533b9ae895" id="r_a2c84b4e4700a825ef0a6ca533b9ae895"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a2c84b4e4700a825ef0a6ca533b9ae895">stick_all_tree_nodes_into_vector</a> (<a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;)</td></tr>
+<tr class="memdesc:a2c84b4e4700a825ef0a6ca533b9ae895"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse and stick pointers to all "nodes" into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>.  <br /></td></tr>
+<tr class="separator:a2c84b4e4700a825ef0a6ca533b9ae895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7537f8fe7c896d2220eb2da03567b34d" id="r_a7537f8fe7c896d2220eb2da03567b34d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7537f8fe7c896d2220eb2da03567b34d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return son type.  <br /></td></tr>
+<tr class="separator:a7537f8fe7c896d2220eb2da03567b34d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72000456c76880e3f78f8f8fb43d49d8" id="r_a72000456c76880e3f78f8f8fb43d49d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a72000456c76880e3f78f8f8fb43d49d8">is_leaf</a> ()</td></tr>
+<tr class="memdesc:a72000456c76880e3f78f8f8fb43d49d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the tree is a leaf node.  <br /></td></tr>
+<tr class="separator:a72000456c76880e3f78f8f8fb43d49d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2918f6d84795c9f366adb178e287843" id="r_aa2918f6d84795c9f366adb178e287843"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aa2918f6d84795c9f366adb178e287843">father_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:aa2918f6d84795c9f366adb178e287843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to father: NULL if it's a root node.  <br /></td></tr>
+<tr class="separator:aa2918f6d84795c9f366adb178e287843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0cf27d3116db0f8d2f18b3faf09ec15" id="r_ac0cf27d3116db0f8d2f18b3faf09ec15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ac0cf27d3116db0f8d2f18b3faf09ec15">set_father_pt</a> (<a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#aa2918f6d84795c9f366adb178e287843">father_pt</a>)</td></tr>
+<tr class="memdesc:ac0cf27d3116db0f8d2f18b3faf09ec15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the father.  <br /></td></tr>
+<tr class="separator:ac0cf27d3116db0f8d2f18b3faf09ec15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3eba84432fcc595684ac7eb8331b8ee" id="r_ab3eba84432fcc595684ac7eb8331b8ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ab3eba84432fcc595684ac7eb8331b8ee">level</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab3eba84432fcc595684ac7eb8331b8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the level of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> (root=0)  <br /></td></tr>
+<tr class="separator:ab3eba84432fcc595684ac7eb8331b8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a939e2d66696d9d59b47cea8c8d05957c" id="r_a939e2d66696d9d59b47cea8c8d05957c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a939e2d66696d9d59b47cea8c8d05957c">max_neighbour_finding_tolerance</a> ()</td></tr>
+<tr class="memdesc:a939e2d66696d9d59b47cea8c8d05957c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements)  <br /></td></tr>
+<tr class="separator:a939e2d66696d9d59b47cea8c8d05957c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a9e532196340dcd859ff8207eea2ddbbc" id="r_a9e532196340dcd859ff8207eea2ddbbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9e532196340dcd859ff8207eea2ddbbc">OMEGA</a> = 26</td></tr>
+<tr class="memdesc:a9e532196340dcd859ff8207eea2ddbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for an unassigned neighbour.  <br /></td></tr>
+<tr class="separator:a9e532196340dcd859ff8207eea2ddbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ada92f1aa44ee6ef5b52ec5ad0af00359" id="r_ada92f1aa44ee6ef5b52ec5ad0af00359"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ada92f1aa44ee6ef5b52ec5ad0af00359">Tree</a> ()</td></tr>
+<tr class="memdesc:ada92f1aa44ee6ef5b52ec5ad0af00359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor (empty and broken)  <br /></td></tr>
+<tr class="separator:ada92f1aa44ee6ef5b52ec5ad0af00359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e78c3a130add917de182ab5f1674531" id="r_a6e78c3a130add917de182ab5f1674531"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a6e78c3a130add917de182ab5f1674531">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4">object_pt</a>)</td></tr>
+<tr class="memdesc:a6e78c3a130add917de182ab5f1674531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <br /></td></tr>
+<tr class="separator:a6e78c3a130add917de182ab5f1674531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d611dde1f429500330f28e56ee71883" id="r_a9d611dde1f429500330f28e56ee71883"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9d611dde1f429500330f28e56ee71883">Tree</a> (<a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4">object_pt</a>, <a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1Tree.html#aa2918f6d84795c9f366adb178e287843">father_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;<a class="el" href="classoomph_1_1Tree.html#a7537f8fe7c896d2220eb2da03567b34d">son_type</a>)</td></tr>
+<tr class="memdesc:a9d611dde1f429500330f28e56ee71883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally.  <br /></td></tr>
+<tr class="separator:a9d611dde1f429500330f28e56ee71883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a61782afd668561ad7ab324f658ffeb6a" id="r_a61782afd668561ad7ab324f658ffeb6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a61782afd668561ad7ab324f658ffeb6a">Root_pt</a></td></tr>
+<tr class="memdesc:a61782afd668561ad7ab324f658ffeb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the root of the tree.  <br /></td></tr>
+<tr class="separator:a61782afd668561ad7ab324f658ffeb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001ce5515a3d76cdad248695e149504b" id="r_a001ce5515a3d76cdad248695e149504b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a001ce5515a3d76cdad248695e149504b">Father_pt</a></td></tr>
+<tr class="memdesc:a001ce5515a3d76cdad248695e149504b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the Father of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>.  <br /></td></tr>
+<tr class="separator:a001ce5515a3d76cdad248695e149504b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b9069f345b296654421604c5569af6" id="r_ac6b9069f345b296654421604c5569af6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#ac6b9069f345b296654421604c5569af6">Son_pt</a></td></tr>
+<tr class="memdesc:ac6b9069f345b296654421604c5569af6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the sons of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>.  <br /></td></tr>
+<tr class="separator:ac6b9069f345b296654421604c5569af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac30decb7a63027906880620f8b98ee" id="r_a9ac30decb7a63027906880620f8b98ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a9ac30decb7a63027906880620f8b98ee">Level</a></td></tr>
+<tr class="memdesc:a9ac30decb7a63027906880620f8b98ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Level of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> (level 0 = root)  <br /></td></tr>
+<tr class="separator:a9ac30decb7a63027906880620f8b98ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83fe7895af25c9f60062c081fc51967c" id="r_a83fe7895af25c9f60062c081fc51967c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a83fe7895af25c9f60062c081fc51967c">Son_type</a></td></tr>
+<tr class="memdesc:a83fe7895af25c9f60062c081fc51967c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Son type (e.g. SW/SE/NW/NE in a quadtree)  <br /></td></tr>
+<tr class="separator:a83fe7895af25c9f60062c081fc51967c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ee20b575da510512d0e108cf7b06c6" id="r_a61ee20b575da510512d0e108cf7b06c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#a61ee20b575da510512d0e108cf7b06c6">Object_pt</a></td></tr>
+<tr class="memdesc:a61ee20b575da510512d0e108cf7b06c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the object represented by the tree.  <br /></td></tr>
+<tr class="separator:a61ee20b575da510512d0e108cf7b06c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:aef9abebc166fa3bf81ecb59ec0d5d6b2" id="r_aef9abebc166fa3bf81ecb59ec0d5d6b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Tree.html#aef9abebc166fa3bf81ecb59ec0d5d6b2">Max_neighbour_finding_tolerance</a> = 1.0e-14</td></tr>
+<tr class="memdesc:aef9abebc166fa3bf81ecb59ec0d5d6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements)  <br /></td></tr>
+<tr class="separator:aef9abebc166fa3bf81ecb59ec0d5d6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A generalised tree base class that abstracts the common functionality between the quad- and octrees used in mesh adaptation in two and three dimensions, respectively. </p>
+<p>The tree can also be part of a forest. If that is the case, the root of the tree will have pointers to the roots of neighbouring trees.</p>
+<p>The objects contained in the tree must be RefineableElements.</p>
+<p>The tree can be traversed and actions performed at all its "nodes" or only at the leaf "nodes" ("nodes" without sons).</p>
+<p>Finally, the leaf "nodes" can be split depending on a criteria defined by the object.</p>
+<p>Note that Trees are only generated by splitting existing Trees. Therefore, the constructors are protected. The only <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> that "Joe User" can create is the (derived) class <a class="el" href="classoomph_1_1TreeRoot.html" title="TreeRoot is a Tree that forms the root of a (recursive) tree. The &quot;root node&quot; is special as it holds ...">TreeRoot</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00073">73</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a6b8ef236d41f52c92973682ca83679d5" name="a6b8ef236d41f52c92973682ca83679d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b8ef236d41f52c92973682ca83679d5">&#9670;&#160;</a></span>VoidMemberFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>(Tree::* oomph::Tree::VoidMemberFctPt) ()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer to argument-free void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00178">178</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+</div>
+</div>
+<a id="a498ffc10556f4335e831a06fc885a27a" name="a498ffc10556f4335e831a06fc885a27a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498ffc10556f4335e831a06fc885a27a">&#9670;&#160;</a></span>VoidMeshPtArgumentMemberFctPt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typedef</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>(Tree::* oomph::Tree::VoidMeshPtArgumentMemberFctPt) (<a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;mesh_pt)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function pointer to a void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as its argument. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00182">182</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ace0b4169cf94a040c280af8e14f6a283" name="ace0b4169cf94a040c280af8e14f6a283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0b4169cf94a040c280af8e14f6a283">&#9670;&#160;</a></span>~Tree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Tree::~Tree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. Note: Deleting a tree also deletes the objects associated with its non-leave nodes. </p>
+<p>Destructor for <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>: Recursively kill all sons and the associated objects of the non-leaf nodes. However, the objects of the leaf nodes are not destroyed. Their destruction is handled by the <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00122">122</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="tree_8h_source.html#l00129">nsons()</a>, <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+</div>
+</div>
+<a id="a50dce113a40c6ac422353ab149b2d4eb" name="a50dce113a40c6ac422353ab149b2d4eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50dce113a40c6ac422353ab149b2d4eb">&#9670;&#160;</a></span>Tree() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Tree::Tree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> &amp;&#160;</td>
+          <td class="paramname"><em>dummy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="ada92f1aa44ee6ef5b52ec5ad0af00359" name="ada92f1aa44ee6ef5b52ec5ad0af00359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada92f1aa44ee6ef5b52ec5ad0af00359">&#9670;&#160;</a></span>Tree() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Tree::Tree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor (empty and broken) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00266">266</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+</div>
+</div>
+<a id="a6e78c3a130add917de182ab5f1674531" name="a6e78c3a130add917de182ab5f1674531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e78c3a130add917de182ab5f1674531">&#9670;&#160;</a></span>Tree() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Tree::Tree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>object_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor for empty (root) tree: no father, no sons; just pass a pointer to its object Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. </p>
+<p>Constructor for empty (root) <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>: No father, no sons. Pass pointer to the object that this tree (root) contains. Protected because Trees can only be created internally, during the split operation. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00063">63</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>, <a class="el" href="tree_8h_source.html#l00302">Level</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8h_source.html#l00262">OMEGA</a>, <a class="el" href="tree_8h_source.html#l00292">Root_pt</a>, <a class="el" href="refineable__elements_8h_source.html#l00217">oomph::RefineableElement::set_tree_pt()</a>, <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>, and <a class="el" href="tree_8h_source.html#l00305">Son_type</a>.</p>
+
+</div>
+</div>
+<a id="a9d611dde1f429500330f28e56ee71883" name="a9d611dde1f429500330f28e56ee71883"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d611dde1f429500330f28e56ee71883">&#9670;&#160;</a></span>Tree() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::Tree::Tree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>father_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>son_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for tree that has a father: Pass it the pointer to its object, the pointer to its father and tell it what type of son it is. Protected because Trees can only be created internally, during the split operation. Only TreeRoots can be created externally. </p>
+<p>Constructor for <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>: This one has a father and is a son of a certain type, but has no sons of its own (just yet), so it's a leaf node. Protected because Trees can only be created internally, during the split operation. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00092">92</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00235">father_pt()</a>, <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>, <a class="el" href="tree_8h_source.html#l00302">Level</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8h_source.html#l00292">Root_pt</a>, <a class="el" href="refineable__elements_8h_source.html#l00217">oomph::RefineableElement::set_tree_pt()</a>, <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>, <a class="el" href="tree_8h_source.html#l00214">son_type()</a>, and <a class="el" href="tree_8h_source.html#l00305">Son_type</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aca2fa14194f424583fd6425a8c4bbff2" name="aca2fa14194f424583fd6425a8c4bbff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2fa14194f424583fd6425a8c4bbff2">&#9670;&#160;</a></span>construct_son()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> * oomph::Tree::construct_son </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>object_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>father_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>son_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A function that constructs a specific type of tree. This MUST be overloaded for each specific tree type. The use of such a function allows the generic implementation of <a class="el" href="classoomph_1_1Tree.html#a975ccfd63ffa14a04f14a37b3d2ff931" title="If required, split the leaf and create its sons – criterion: bool object_pt()-&gt; to_be_refined() = tru...">split_if_required()</a>. </p>
+
+<p>Implemented in <a class="el" href="classoomph_1_1BinaryTree.html#a9a7e1fc260782f884cff07e7eb9db28f">oomph::BinaryTree</a>, <a class="el" href="classoomph_1_1OcTree.html#af820674d7413566c25e895cd49a5e8a2">oomph::OcTree</a>, and <a class="el" href="classoomph_1_1QuadTree.html#aa51e15861c9fd1dce7573f285529fc51">oomph::QuadTree</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>.</p>
+
+</div>
+</div>
+<a id="aea17489589a1872db51f2b142da4c1fb" name="aea17489589a1872db51f2b142da4c1fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea17489589a1872db51f2b142da4c1fb">&#9670;&#160;</a></span>deactivate_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::deactivate_object </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Call the <a class="el" href="classoomph_1_1RefineableElement.html" title="RefineableElements are FiniteElements that may be subdivided into children to provide a better local ...">RefineableElement</a>'s deactivate_element() function. </p>
+<p>Call the <a class="el" href="classoomph_1_1RefineableElement.html" title="RefineableElements are FiniteElements that may be subdivided into children to provide a better local ...">RefineableElement</a>'s deactivate_element() function that is used to perform any final changes to internal data storage of deactivated objects. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00341">341</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__elements_8cc_source.html#l00293">oomph::RefineableElement::deactivate_element()</a>, and <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l04435">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="aa2918f6d84795c9f366adb178e287843" name="aa2918f6d84795c9f366adb178e287843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2918f6d84795c9f366adb178e287843">&#9670;&#160;</a></span>father_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Tree.html">Tree</a> * oomph::Tree::father_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to father: NULL if it's a root node. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00235">235</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="binary__tree_8h_source.html#l00106">oomph::BinaryTree::construct_son()</a>, <a class="el" href="octree_8h_source.html#l00129">oomph::OcTree::construct_son()</a>, <a class="el" href="quadtree_8h_source.html#l00118">oomph::QuadTree::construct_son()</a>, <a class="el" href="refineable__elements_8h_source.html#l00539">oomph::RefineableElement::father_element_pt()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00984">oomph::RefineableAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00998">oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8h_source.html#l00471">oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8h_source.html#l00476">oomph::RefineableLinearisedQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l01018">oomph::RefineablePolarCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8h_source.html#l00784">oomph::RefineableQSphericalCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__elements_8h_source.html#l00564">oomph::RefineableElement::get_father_at_refinement_level()</a>, <a class="el" href="tree_8h_source.html#l00241">set_father_pt()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a96a95bd9942e906fde87194845a1868c" name="a96a95bd9942e906fde87194845a1868c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96a95bd9942e906fde87194845a1868c">&#9670;&#160;</a></span>flush_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::flush_object </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flush the object represented by the tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00094">94</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="mesh_8cc_source.html#l05621">oomph::Mesh::prune_halo_elements_and_nodes()</a>.</p>
+
+</div>
+</div>
+<a id="a34df656d2f298dbbdf60e7890a3dff2f" name="a34df656d2f298dbbdf60e7890a3dff2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34df656d2f298dbbdf60e7890a3dff2f">&#9670;&#160;</a></span>flush_sons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::flush_sons </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flush the sons. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00135">135</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, and <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>.</p>
+
+</div>
+</div>
+<a id="a72000456c76880e3f78f8f8fb43d49d8" name="a72000456c76880e3f78f8f8fb43d49d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72000456c76880e3f78f8f8fb43d49d8">&#9670;&#160;</a></span>is_leaf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::Tree::is_leaf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return true if the tree is a leaf node. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00220">220</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l01945">oomph::TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="ab3eba84432fcc595684ac7eb8331b8ee" name="ab3eba84432fcc595684ac7eb8331b8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3eba84432fcc595684ac7eb8331b8ee">&#9670;&#160;</a></span>level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::Tree::level </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the level of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> (root=0) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00247">247</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00302">Level</a>.</p>
+
+</div>
+</div>
+<a id="a939e2d66696d9d59b47cea8c8d05957c" name="a939e2d66696d9d59b47cea8c8d05957c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a939e2d66696d9d59b47cea8c8d05957c">&#9670;&#160;</a></span>max_neighbour_finding_tolerance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">static</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp; oomph::Tree::max_neighbour_finding_tolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00255">255</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00313">Max_neighbour_finding_tolerance</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="binary__tree_8cc_source.html#l00548">oomph::BinaryTreeForest::check_all_neighbours()</a>, <a class="el" href="octree_8cc_source.html#l05749">oomph::OcTreeForest::check_all_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l01245">oomph::QuadTreeForest::check_all_neighbours()</a>, <a class="el" href="binary__tree_8cc_source.html#l00624">oomph::BinaryTreeForest::self_test()</a>, <a class="el" href="octree_8cc_source.html#l05678">oomph::OcTreeForest::self_test()</a>, and <a class="el" href="quadtree_8cc_source.html#l01357">oomph::QuadTreeForest::self_test()</a>.</p>
+
+</div>
+</div>
+<a id="af4f977931ece6b719a9e616037bb2481" name="af4f977931ece6b719a9e616037bb2481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4f977931ece6b719a9e616037bb2481">&#9670;&#160;</a></span>merge_sons_if_required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::merge_sons_if_required </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If required, merge the four sons for unrefinement &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; sons_to_be_unrefined() = true. </p>
+<p>If required, kill the sons to perform unrefinement.</p>
+<p>Unrefinement is performed if </p><pre class="fragment"> object_pt()-&gt;sons_to_be_unrefined()
+</pre><p> returns true. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00302">302</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__elements_8h_source.html#l00339">oomph::RefineableElement::deselect_sons_for_unrefinement()</a>, <a class="el" href="tree_8h_source.html#l00129">nsons()</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>, <a class="el" href="classoomph_1_1RefineableElement.html#a33324be27833fa4b78279d17158215fa">oomph::RefineableElement::rebuild_from_sons()</a>, <a class="el" href="tree_8h_source.html#l00103">son_pt()</a>, <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>, <a class="el" href="refineable__elements_8h_source.html#l00351">oomph::RefineableElement::sons_to_be_unrefined()</a>, and <a class="el" href="refineable__elements_8h_source.html#l00362">oomph::RefineableElement::unbuild()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a31e4123b40f6fb52d180a154c9123e85" name="a31e4123b40f6fb52d180a154c9123e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31e4123b40f6fb52d180a154c9123e85">&#9670;&#160;</a></span>nsons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::Tree::nsons </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return number of sons (zero if it's a leaf node) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00129">129</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8cc_source.html#l00302">merge_sons_if_required()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01945">oomph::TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()</a>, <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>, <a class="el" href="tree_8cc_source.html#l00405">oomph::TreeForest::stick_all_tree_nodes_into_vector()</a>, <a class="el" href="tree_8cc_source.html#l00379">oomph::TreeForest::stick_leaves_into_vector()</a>, and <a class="el" href="tree_8cc_source.html#l00122">~Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a7d630dad19ef861ab6a5f37ad6ea67f4" name="a7d630dad19ef861ab6a5f37ad6ea67f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d630dad19ef861ab6a5f37ad6ea67f4">&#9670;&#160;</a></span>object_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a> * oomph::Tree::object_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the pointer to the object (<a class="el" href="classoomph_1_1RefineableElement.html" title="RefineableElements are FiniteElements that may be subdivided into children to provide a better local ...">RefineableElement</a>) represented by the tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00088">88</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00212">oomph::RefineableQElement&lt; 1 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00686">oomph::RefineableQElement&lt; 1 &gt;::check_integrity()</a>, <a class="el" href="binary__tree_8h_source.html#l00106">oomph::BinaryTree::construct_son()</a>, <a class="el" href="octree_8h_source.html#l00129">oomph::OcTree::construct_son()</a>, <a class="el" href="quadtree_8h_source.html#l00118">oomph::QuadTree::construct_son()</a>, <a class="el" href="tree_8cc_source.html#l00341">deactivate_object()</a>, <a class="el" href="refineable__elements_8h_source.html#l00539">oomph::RefineableElement::father_element_pt()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00984">oomph::RefineableAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00998">oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8h_source.html#l00471">oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8h_source.html#l00476">oomph::RefineableLinearisedQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l01018">oomph::RefineablePolarCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8h_source.html#l00784">oomph::RefineableQSphericalCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__elements_8h_source.html#l00564">oomph::RefineableElement::get_father_at_refinement_level()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00341">oomph::RefineablePolarTaylorHoodElement::get_interpolated_values()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00753">oomph::RefineablePolarCrouzeixRaviartElement::get_interpolated_values()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l00201">oomph::PRefineableQElement&lt; 1, INITIAL_NNODE_1D &gt;::initial_setup()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01667">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::initial_setup()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l05768">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::initial_setup()</a>, <a class="el" href="tree_8cc_source.html#l00302">merge_sons_if_required()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00091">oomph::RefineableQElement&lt; 1 &gt;::node_created_by_neighbour()</a>, <a class="el" href="tree_8template_8cc_source.html#l00148">p_refine_if_required()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01757">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::pre_build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l05860">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::pre_build()</a>, <a class="el" href="mesh_8cc_source.html#l05621">oomph::Mesh::prune_halo_elements_and_nodes()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00795">oomph::RefineableAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00807">oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8h_source.html#l00267">oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8h_source.html#l00277">oomph::RefineableLinearisedQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00908">oomph::RefineablePolarCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8h_source.html#l00598">oomph::RefineableQSphericalCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__elements_8h_source.html#l00524">oomph::RefineableElement::root_element_pt()</a>, <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a6bce57d784f256d8d7b8d14432a7d77a" name="a6bce57d784f256d8d7b8d14432a7d77a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bce57d784f256d8d7b8d14432a7d77a">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Tree.html">Tree</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a6502324233a86eeeadba7f46505656af" name="a6502324233a86eeeadba7f46505656af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6502324233a86eeeadba7f46505656af">&#9670;&#160;</a></span>p_refine_if_required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::p_refine_if_required </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If required, p-refine the leaf &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_p_refined() = true or bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_p_unrefined() = true. </p>
+<p>If required, p-refine/unrefine the leaf element.</p>
+<p>p-refinement is performed if </p><pre class="fragment"> object_pt()-&gt;to_be_p_refined()
+</pre><p> returns true. p-unrefinement is performed if </p><pre class="fragment"> object_pt()-&gt;to_be_p_unrefined()
+</pre><p> returns true.</p>
+<p>If this is the case, then we execute </p><pre class="fragment"> object_pt()-&gt;p_refine(+/-1,mesh_pt,clone_pt)
+</pre><p> to p-refine the element, where mesh_pt is a pointer to the mesh that the element lives in, and clone_pt is a pointer to a <a class="el" href="classoomph_1_1GeneralisedElement.html" title="A Generalised Element class.">GeneralisedElement</a> that has all the information that would be needed from the father element during h-refinement. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8template_8cc_source.html#l00148">148</a> of file <a class="el" href="tree_8template_8cc_source.html">tree.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+</div>
+</div>
+<a id="a33b9926754cddfaafd9869af3fe266e7" name="a33b9926754cddfaafd9869af3fe266e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33b9926754cddfaafd9869af3fe266e7">&#9670;&#160;</a></span>root_pt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> *&amp; oomph::Tree::root_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to root of the tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00141">141</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00292">Root_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00341">oomph::RefineablePolarTaylorHoodElement::get_interpolated_values()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00753">oomph::RefineablePolarCrouzeixRaviartElement::get_interpolated_values()</a>, <a class="el" href="refineable__elements_8h_source.html#l00524">oomph::RefineableElement::root_element_pt()</a>, <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, and <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>.</p>
+
+</div>
+</div>
+<a id="aa4a6a5242b5969cfd8d7d37da68f3495" name="aa4a6a5242b5969cfd8d7d37da68f3495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4a6a5242b5969cfd8d7d37da68f3495">&#9670;&#160;</a></span>root_pt() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a> * oomph::Tree::root_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to root of the tree (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00147">147</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00292">Root_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac0cf27d3116db0f8d2f18b3faf09ec15" name="ac0cf27d3116db0f8d2f18b3faf09ec15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0cf27d3116db0f8d2f18b3faf09ec15">&#9670;&#160;</a></span>set_father_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::set_father_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html">Tree</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>father_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the father. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00241">241</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00235">father_pt()</a>, and <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, and <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>.</p>
+
+</div>
+</div>
+<a id="ab7026d14ead1a8d91ce417dfd0cd9478" name="ab7026d14ead1a8d91ce417dfd0cd9478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7026d14ead1a8d91ce417dfd0cd9478">&#9670;&#160;</a></span>set_son_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::set_son_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>son_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set vector of pointers to sons, indexed by the appropriate enum that identies son types. (To aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here). </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00123">123</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00103">son_pt()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+</div>
+</div>
+<a id="a9851a9dd06212b6891ce9a8bc832d4cf" name="a9851a9dd06212b6891ce9a8bc832d4cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9851a9dd06212b6891ce9a8bc832d4cf">&#9670;&#160;</a></span>son_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Tree.html">Tree</a> * oomph::Tree::son_pt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>son_index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to the son for a given index. Note that to aid code readability specific enums have been defined for specific trees. However, these are simply aliases for ints and the general interface can be implemented once, here. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00103">103</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8cc_source.html#l00302">merge_sons_if_required()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00795">oomph::RefineableAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00807">oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8h_source.html#l00267">oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8h_source.html#l00277">oomph::RefineableLinearisedQCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l00908">oomph::RefineablePolarCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8h_source.html#l00598">oomph::RefineableQSphericalCrouzeixRaviartElement::rebuild_from_sons()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l01945">oomph::TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()</a>, <a class="el" href="tree_8h_source.html#l00123">set_son_pt()</a>, <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>, <a class="el" href="tree_8cc_source.html#l00405">oomph::TreeForest::stick_all_tree_nodes_into_vector()</a>, and <a class="el" href="tree_8cc_source.html#l00379">oomph::TreeForest::stick_leaves_into_vector()</a>.</p>
+
+</div>
+</div>
+<a id="a7537f8fe7c896d2220eb2da03567b34d" name="a7537f8fe7c896d2220eb2da03567b34d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7537f8fe7c896d2220eb2da03567b34d">&#9670;&#160;</a></span>son_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::Tree::son_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return son type. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00214">214</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00305">Son_type</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00305">oomph::TreeBasedRefineableMeshBase::adapt()</a>, <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00212">oomph::RefineableQElement&lt; 1 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="binary__tree_8h_source.html#l00106">oomph::BinaryTree::construct_son()</a>, <a class="el" href="octree_8h_source.html#l00129">oomph::OcTree::construct_son()</a>, <a class="el" href="quadtree_8h_source.html#l00118">oomph::QuadTree::construct_son()</a>, <a class="el" href="refineable__axisym__navier__stokes__elements_8h_source.html#l00984">oomph::RefineableAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source.html#l00998">oomph::RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__axisym__navier__stokes__elements_8h_source.html#l00471">oomph::RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__linearised__navier__stokes__elements_8h_source.html#l00476">oomph::RefineableLinearisedQCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__polar__navier__stokes__elements_8h_source.html#l01018">oomph::RefineablePolarCrouzeixRaviartElement::further_build()</a>, <a class="el" href="refineable__spherical__navier__stokes__elements_8h_source.html#l00784">oomph::RefineableQSphericalCrouzeixRaviartElement::further_build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01757">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::pre_build()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l05860">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::pre_build()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a975ccfd63ffa14a04f14a37b3d2ff931" name="a975ccfd63ffa14a04f14a37b3d2ff931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a975ccfd63ffa14a04f14a37b3d2ff931">&#9670;&#160;</a></span>split_if_required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">class</a> ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::split_if_required </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If required, split the leaf and create its sons &ndash; criterion: bool <a class="el" href="classoomph_1_1Tree.html#a7d630dad19ef861ab6a5f37ad6ea67f4" title="Return the pointer to the object (RefineableElement) represented by the tree.">object_pt()</a>-&gt; to_be_refined() = true. </p>
+<p>If required, split the leaf element and create its sons.</p>
+<p>Split is performed if </p><pre class="fragment"> object_pt()-&gt;to_be_refined()
+</pre><p> returns true.</p>
+<p>If this is the case, then we execute </p><pre class="fragment"> object_pt()-&gt;split(new_elements_pt)
+</pre><p> to create the sons. Pointers to the son objects are then inserted into the son pointers of the present element. This turns the present element into a "grey" (=non-leaf) node. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8template_8cc_source.html#l00060">60</a> of file <a class="el" href="tree_8template_8cc_source.html">tree.template.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="classoomph_1_1Tree.html#aca2fa14194f424583fd6425a8c4bbff2">construct_son()</a>, <a class="el" href="tree_8h_source.html#l00235">father_pt()</a>, <a class="el" href="tree_8h_source.html#l00296">Father_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="geom__objects_8h_source.html#l00177">oomph::GeomObject::ndim()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8h_source.html#l00308">Object_pt</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>, <a class="el" href="refineable__elements_8h_source.html#l00254">oomph::RefineableElement::split()</a>, and <a class="el" href="refineable__elements_8h_source.html#l00345">oomph::RefineableElement::to_be_refined()</a>.</p>
+
+</div>
+</div>
+<a id="a2c84b4e4700a825ef0a6ca533b9ae895" name="a2c84b4e4700a825ef0a6ca533b9ae895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c84b4e4700a825ef0a6ca533b9ae895">&#9670;&#160;</a></span>stick_all_tree_nodes_into_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::stick_all_tree_nodes_into_vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>all_tree_nodes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse and stick pointers to all "nodes" into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>. </p>
+<p>Traverse <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>: Preorder traverse and stick pointer to all nodes (incl. "grey"=non-leaf ones) into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00277">277</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="binary__tree_8cc_source.html#l00393">oomph::BinaryTree::self_test()</a>, <a class="el" href="octree_8cc_source.html#l04200">oomph::OcTree::self_test()</a>, <a class="el" href="quadtree_8cc_source.html#l00814">oomph::QuadTree::self_test()</a>, <a class="el" href="refineable__brick__mesh_8h_source.html#l00086">oomph::RefineableBrickMesh&lt; ELEMENT &gt;::setup_octree_forest()</a>, <a class="el" href="refineable__quad__mesh_8h_source.html#l00086">oomph::RefineableQuadMesh&lt; ELEMENT &gt;::setup_quadtree_forest()</a>, and <a class="el" href="tree_8cc_source.html#l00405">oomph::TreeForest::stick_all_tree_nodes_into_vector()</a>.</p>
+
+</div>
+</div>
+<a id="accfbeb9178ce92a8a51e3a15293a86d1" name="accfbeb9178ce92a8a51e3a15293a86d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accfbeb9178ce92a8a51e3a15293a86d1">&#9670;&#160;</a></span>stick_leaves_into_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::stick_leaves_into_vector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Tree.html">Tree</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>tree_nodes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse tree and stick pointers to leaf "nodes" (only) into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>. </p>
+<p>Traverse <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>: Preorder traverse and stick pointers to leaf nodes (only) into <a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00255">255</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8cc_source.html#l00379">oomph::TreeForest::stick_leaves_into_vector()</a>.</p>
+
+</div>
+</div>
+<a id="a3caab39c8bee6fb65bbafed523aa6d3d" name="a3caab39c8bee6fb65bbafed523aa6d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3caab39c8bee6fb65bbafed523aa6d3d">&#9670;&#160;</a></span>traverse_all() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::traverse_all </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a>&#160;</td>
+          <td class="paramname"><em>member_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() at all its "nodes". </p>
+<p>Preorder traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function at all nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00145">145</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l04435">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="af5c67186ca9c87eef9ce7eaa0af41057" name="af5c67186ca9c87eef9ce7eaa0af41057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c67186ca9c87eef9ce7eaa0af41057">&#9670;&#160;</a></span>traverse_all() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::traverse_all </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html#a498ffc10556f4335e831a06fc885a27a">Tree::VoidMeshPtArgumentMemberFctPt</a>&#160;</td>
+          <td class="paramname"><em>member_function</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse the tree and excute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as an argument. </p>
+<p>Preorder traverse the tree and execute a void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes one argument at all nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00164">164</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+</div>
+</div>
+<a id="aef175445b09edb47624c4b88c6d548bc" name="aef175445b09edb47624c4b88c6d548bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef175445b09edb47624c4b88c6d548bc">&#9670;&#160;</a></span>traverse_all_but_leaves()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::traverse_all_but_leaves </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a>&#160;</td>
+          <td class="paramname"><em>member_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() at all its "nodes" aparat from the leaves. </p>
+<p>Preorder traverse the tree and execute a void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function for all elements that are not leaf elements. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00184">184</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00924">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>.</p>
+
+</div>
+</div>
+<a id="a22e0e3695dd8986e439927b7657ff741" name="a22e0e3695dd8986e439927b7657ff741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e0e3695dd8986e439927b7657ff741">&#9670;&#160;</a></span>traverse_leaves() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::traverse_leaves </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html#a6b8ef236d41f52c92973682ca83679d5">Tree::VoidMemberFctPt</a>&#160;</td>
+          <td class="paramname"><em>member_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function member_function() only at its leaves. </p>
+<p>Preorder traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function at the leaves only (ignore "grey" = non-leaf nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00207">207</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8h_source.html#l00830">oomph::TreeBasedRefineableMesh&lt; ELEMENT &gt;::p_refine_elements_if_required()</a>, and <a class="el" href="refineable__mesh_8h_source.html#l00814">oomph::TreeBasedRefineableMesh&lt; ELEMENT &gt;::split_elements_if_required()</a>.</p>
+
+</div>
+</div>
+<a id="a914e74ef473b7e82299ea9337d37830d" name="a914e74ef473b7e82299ea9337d37830d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914e74ef473b7e82299ea9337d37830d">&#9670;&#160;</a></span>traverse_leaves() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Tree::traverse_leaves </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Tree.html#a498ffc10556f4335e831a06fc885a27a">Tree::VoidMeshPtArgumentMemberFctPt</a>&#160;</td>
+          <td class="paramname"><em>member_function</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1Mesh.html">Mesh</a> *&amp;&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes a pointer to a mesh as an argument only at its leaves. </p>
+<p>Preorder traverse the tree and execute void <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> member function that takes one argument at the leaves only (ignore "grey" = non-leaf nodes) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8cc_source.html#l00231">231</a> of file <a class="el" href="tree_8cc_source.html">tree.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="tree_8h_source.html#l00299">Son_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a001ce5515a3d76cdad248695e149504b" name="a001ce5515a3d76cdad248695e149504b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a001ce5515a3d76cdad248695e149504b">&#9670;&#160;</a></span>Father_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Tree.html">Tree</a>* oomph::Tree::Father_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the Father of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00296">296</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8h_source.html#l00235">father_pt()</a>, <a class="el" href="octree_8cc_source.html#l04015">oomph::OcTree::gteq_edge_neighbour()</a>, <a class="el" href="binary__tree_8cc_source.html#l00257">oomph::BinaryTree::gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8cc_source.html#l00601">oomph::QuadTree::gteq_edge_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03839">oomph::OcTree::gteq_face_neighbour()</a>, <a class="el" href="tree_8template_8cc_source.html#l00148">p_refine_if_required()</a>, <a class="el" href="tree_8h_source.html#l00241">set_father_pt()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a9ac30decb7a63027906880620f8b98ee" name="a9ac30decb7a63027906880620f8b98ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac30decb7a63027906880620f8b98ee">&#9670;&#160;</a></span>Level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::Tree::Level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Level of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a> (level 0 = root) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00302">302</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="binary__tree_8cc_source.html#l00172">oomph::BinaryTree::gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8cc_source.html#l00413">oomph::QuadTree::gteq_edge_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03373">oomph::OcTree::gteq_face_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03618">oomph::OcTree::gteq_true_edge_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00247">level()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<a id="aef9abebc166fa3bf81ecb59ec0d5d6b2" name="aef9abebc166fa3bf81ecb59ec0d5d6b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef9abebc166fa3bf81ecb59ec0d5d6b2">&#9670;&#160;</a></span>Max_neighbour_finding_tolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> oomph::Tree::Max_neighbour_finding_tolerance = 1.0e-14</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Max. allowed discrepancy in neighbour finding routine (distance between points when identified from two neighbouring elements) </p>
+<p>Maximum tolerance for neighbour finding (distance between points when identified from the two neighbours) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00313">313</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l04275">oomph::OcTree::doc_face_neighbours()</a>, <a class="el" href="octree_8cc_source.html#l04552">oomph::OcTree::doc_true_edge_neighbours()</a>, <a class="el" href="tree_8h_source.html#l00255">max_neighbour_finding_tolerance()</a>, <a class="el" href="binary__tree_8cc_source.html#l00393">oomph::BinaryTree::self_test()</a>, <a class="el" href="octree_8cc_source.html#l04200">oomph::OcTree::self_test()</a>, and <a class="el" href="quadtree_8cc_source.html#l00814">oomph::QuadTree::self_test()</a>.</p>
+
+</div>
+</div>
+<a id="a61ee20b575da510512d0e108cf7b06c6" name="a61ee20b575da510512d0e108cf7b06c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ee20b575da510512d0e108cf7b06c6">&#9670;&#160;</a></span>Object_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableElement.html">RefineableElement</a>* oomph::Tree::Object_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the object represented by the tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00308">308</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8h_source.html#l00094">flush_object()</a>, <a class="el" href="tree_8cc_source.html#l00302">merge_sons_if_required()</a>, <a class="el" href="tree_8h_source.html#l00088">object_pt()</a>, <a class="el" href="tree_8template_8cc_source.html#l00148">p_refine_if_required()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>, and <a class="el" href="tree_8cc_source.html#l00122">~Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a9e532196340dcd859ff8207eea2ddbbc" name="a9e532196340dcd859ff8207eea2ddbbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e532196340dcd859ff8207eea2ddbbc">&#9670;&#160;</a></span>OMEGA</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::Tree::OMEGA = 26</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for an unassigned neighbour. </p>
+<p>Static value used to represent unassigned quantities. This has to remain consistent with the enumerations in the Octree and Quadtree namespaces! </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00262">262</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8cc_source.html#l01293">oomph::RefineableQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00642">oomph::RefineableQElement&lt; 2 &gt;::build()</a>, <a class="el" href="octree_8cc_source.html#l05255">oomph::OcTreeForest::construct_up_right_equivalents()</a>, <a class="el" href="binary__tree_8h_source.html#l00262">oomph::BinaryTreeRoot::direction_of_neighbour()</a>, <a class="el" href="quadtree_8h_source.html#l00377">oomph::QuadTreeRoot::direction_of_neighbour()</a>, <a class="el" href="octree_8h_source.html#l00814">oomph::OcTreeRoot::direction_of_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l04275">oomph::OcTree::doc_face_neighbours()</a>, <a class="el" href="binary__tree_8cc_source.html#l00668">oomph::BinaryTree::doc_neighbours()</a>, <a class="el" href="quadtree_8cc_source.html#l01402">oomph::QuadTree::doc_neighbours()</a>, <a class="el" href="octree_8cc_source.html#l04552">oomph::OcTree::doc_true_edge_neighbours()</a>, <a class="el" href="octree_8cc_source.html#l04015">oomph::OcTree::gteq_edge_neighbour()</a>, <a class="el" href="geometric__multigrid_8cc_source.html#l00037">oomph::MGSolver&lt; DIM &gt;::level_up_local_coord_of_node()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l03441">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::level_up_local_coord_of_node()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l01990">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l06104">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::p_refine()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l03207">oomph::PRefineableQElement&lt; 2, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="hp__refineable__elements_8cc_source.html#l07633">oomph::PRefineableQElement&lt; 3, INITIAL_NNODE_1D &gt;::rebuild_from_sons()</a>, <a class="el" href="refineable__brick__spectral__element_8h_source.html#l00079">oomph::RefineableQSpectralElement&lt; 3 &gt;::rebuild_from_sons()</a>, <a class="el" href="refineable__quad__spectral__element_8h_source.html#l00079">oomph::RefineableQSpectralElement&lt; 2 &gt;::rebuild_from_sons()</a>, <a class="el" href="octree_8h_source.html#l00790">oomph::OcTreeRoot::right_equivalent()</a>, <a class="el" href="refineable__brick__element_8cc_source.html#l00126">oomph::RefineableQElement&lt; 3 &gt;::setup_father_bounds()</a>, <a class="el" href="refineable__line__element_8cc_source.html#l00048">oomph::RefineableQElement&lt; 1 &gt;::setup_father_bounds()</a>, <a class="el" href="refineable__quad__element_8cc_source.html#l00046">oomph::RefineableQElement&lt; 2 &gt;::setup_father_bounds()</a>, <a class="el" href="geometric__multigrid_8h_source.html#l01505">oomph::MGSolver&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="helmholtz__geometric__multigrid_8h_source.html#l02744">oomph::HelmholtzMGPreconditioner&lt; DIM &gt;::setup_interpolation_matrices()</a>, <a class="el" href="binary__tree_8cc_source.html#l00086">oomph::BinaryTree::setup_static_data()</a>, <a class="el" href="octree_8cc_source.html#l01040">oomph::OcTree::setup_static_data()</a>, <a class="el" href="quadtree_8cc_source.html#l00120">oomph::QuadTree::setup_static_data()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, and <a class="el" href="octree_8h_source.html#l00757">oomph::OcTreeRoot::up_equivalent()</a>.</p>
+
+</div>
+</div>
+<a id="a61782afd668561ad7ab324f658ffeb6a" name="a61782afd668561ad7ab324f658ffeb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61782afd668561ad7ab324f658ffeb6a">&#9670;&#160;</a></span>Root_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TreeRoot.html">TreeRoot</a>* oomph::Tree::Root_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the root of the tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00292">292</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l04015">oomph::OcTree::gteq_edge_neighbour()</a>, <a class="el" href="binary__tree_8cc_source.html#l00257">oomph::BinaryTree::gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8cc_source.html#l00601">oomph::QuadTree::gteq_edge_neighbour()</a>, <a class="el" href="binary__tree_8cc_source.html#l00172">oomph::BinaryTree::gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8cc_source.html#l00413">oomph::QuadTree::gteq_edge_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03839">oomph::OcTree::gteq_face_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03373">oomph::OcTree::gteq_face_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03618">oomph::OcTree::gteq_true_edge_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00141">root_pt()</a>, <a class="el" href="tree_8h_source.html#l00147">root_pt()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>, and <a class="el" href="tree_8h_source.html#l00342">oomph::TreeRoot::TreeRoot()</a>.</p>
+
+</div>
+</div>
+<a id="ac6b9069f345b296654421604c5569af6" name="ac6b9069f345b296654421604c5569af6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b9069f345b296654421604c5569af6">&#9670;&#160;</a></span>Son_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1Tree.html">Tree</a>*&gt; oomph::Tree::Son_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to the sons of the <a class="el" href="classoomph_1_1Tree.html" title="A generalised tree base class that abstracts the common functionality between the quad- and octrees u...">Tree</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00299">299</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tree_8h_source.html#l00135">flush_sons()</a>, <a class="el" href="tree_8h_source.html#l00220">is_leaf()</a>, <a class="el" href="tree_8cc_source.html#l00302">merge_sons_if_required()</a>, <a class="el" href="tree_8h_source.html#l00129">nsons()</a>, <a class="el" href="tree_8template_8cc_source.html#l00148">p_refine_if_required()</a>, <a class="el" href="tree_8h_source.html#l00123">set_son_pt()</a>, <a class="el" href="tree_8h_source.html#l00103">son_pt()</a>, <a class="el" href="tree_8template_8cc_source.html#l00060">split_if_required()</a>, <a class="el" href="tree_8cc_source.html#l00277">stick_all_tree_nodes_into_vector()</a>, <a class="el" href="tree_8cc_source.html#l00255">stick_leaves_into_vector()</a>, <a class="el" href="quadtree_8cc_source.html#l00751">oomph::QuadTree::stick_neighbouring_leaves_into_vector()</a>, <a class="el" href="tree_8cc_source.html#l00145">traverse_all()</a>, <a class="el" href="tree_8cc_source.html#l00164">traverse_all()</a>, <a class="el" href="tree_8cc_source.html#l00184">traverse_all_but_leaves()</a>, <a class="el" href="tree_8cc_source.html#l00207">traverse_leaves()</a>, <a class="el" href="tree_8cc_source.html#l00231">traverse_leaves()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>, and <a class="el" href="tree_8cc_source.html#l00122">~Tree()</a>.</p>
+
+</div>
+</div>
+<a id="a83fe7895af25c9f60062c081fc51967c" name="a83fe7895af25c9f60062c081fc51967c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83fe7895af25c9f60062c081fc51967c">&#9670;&#160;</a></span>Son_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> oomph::Tree::Son_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Son type (e.g. SW/SE/NW/NE in a quadtree) </p>
+
+<p class="definition">Definition at line <a class="el" href="tree_8h_source.html#l00305">305</a> of file <a class="el" href="tree_8h_source.html">tree.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="octree_8cc_source.html#l04015">oomph::OcTree::gteq_edge_neighbour()</a>, <a class="el" href="binary__tree_8cc_source.html#l00257">oomph::BinaryTree::gteq_edge_neighbour()</a>, <a class="el" href="quadtree_8cc_source.html#l00601">oomph::QuadTree::gteq_edge_neighbour()</a>, <a class="el" href="octree_8cc_source.html#l03839">oomph::OcTree::gteq_face_neighbour()</a>, <a class="el" href="tree_8h_source.html#l00214">son_type()</a>, <a class="el" href="tree_8cc_source.html#l00063">Tree()</a>, and <a class="el" href="tree_8cc_source.html#l00092">Tree()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="tree_8h_source.html">tree.h</a></li>
+<li><a class="el" href="tree_8cc_source.html">tree.cc</a></li>
+<li><a class="el" href="tree_8template_8cc_source.html">tree.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:18:08
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

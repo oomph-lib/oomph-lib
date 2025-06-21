@@ -1,0 +1,205 @@
+\doxysection{Quarter\+Circle\+Driven\+Cavity\+Problem2\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classQuarterCircleDrivenCavityProblem2}{}\label{classQuarterCircleDrivenCavityProblem2}\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+
+
+Driven cavity problem in quarter circle domain, templated by element type.  
+
+
+Inheritance diagram for Quarter\+Circle\+Driven\+Cavity\+Problem2\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classQuarterCircleDrivenCavityProblem2}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_a301f6d2c50e2d266126a80956397d78d}{Quarter\+Circle\+Driven\+Cavity\+Problem2}} (Navier\+Stokes\+Equations$<$ 2 $>$\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt body\+\_\+force\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_afaedf67201056ed5466b139d2bb58d61}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Driven\+Cavity\+Problem2}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_a1417ca3cc4a838d407c8bf85372dfc8f}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_aed64247640938ca570da33238e9696ac}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before solve. (Re-\/)set velocity boundary conditions just to be on the safe side... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_a51d108d18f50d81bad0da998741254a9}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em After adaptation\+: Unpin pressure and pin redudant pressure dofs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_a506c1a77cc9a11f586f5cc1b4a252798}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_ae5ce524af511e8399cd5f261afe9331f}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Navier\+Stokes\+Equations$<$ 2 $>$\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2_ad2b3c4fdc4136aebc331f44cbe13421b}{Body\+\_\+force\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to body force function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$}
+Driven cavity problem in quarter circle domain, templated by element type. 
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00084}{84}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_a301f6d2c50e2d266126a80956397d78d}\label{classQuarterCircleDrivenCavityProblem2_a301f6d2c50e2d266126a80956397d78d} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!QuarterCircleDrivenCavityProblem2@{QuarterCircleDrivenCavityProblem2}}
+\index{QuarterCircleDrivenCavityProblem2@{QuarterCircleDrivenCavityProblem2}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuarterCircleDrivenCavityProblem2()}{QuarterCircleDrivenCavityProblem2()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{\+::\+Quarter\+Circle\+Driven\+Cavity\+Problem2}} (\begin{DoxyParamCaption}\item[{Navier\+Stokes\+Equations$<$ 2 $>$\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt}]{body\+\_\+force\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for driven cavity problem in quarter circle domain. 
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00185}{185}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00166}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00169}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables2_a791b0372240b8d3c94f4e14f565c0737}{Global\+\_\+\+Physical\+\_\+\+Variables2\+::\+Gravity()}}, \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00049}{Global\+\_\+\+Physical\+\_\+\+Variables2\+::\+Re}}, and \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables2\+::\+Re\+\_\+inv\+Fr}}.
+
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_afaedf67201056ed5466b139d2bb58d61}\label{classQuarterCircleDrivenCavityProblem2_afaedf67201056ed5466b139d2bb58d61} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!````~QuarterCircleDrivenCavityProblem2@{\texorpdfstring{$\sim$}{\string~}QuarterCircleDrivenCavityProblem2}}
+\index{````~QuarterCircleDrivenCavityProblem2@{\texorpdfstring{$\sim$}{\string~}QuarterCircleDrivenCavityProblem2}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QuarterCircleDrivenCavityProblem2()}{\string~QuarterCircleDrivenCavityProblem2()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00094}{94}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_a51d108d18f50d81bad0da998741254a9}\label{classQuarterCircleDrivenCavityProblem2_a51d108d18f50d81bad0da998741254a9} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+After adaptation\+: Unpin pressure and pin redudant pressure dofs. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00146}{146}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00169}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_a1417ca3cc4a838d407c8bf85372dfc8f}\label{classQuarterCircleDrivenCavityProblem2_a1417ca3cc4a838d407c8bf85372dfc8f} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00097}{97}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_aed64247640938ca570da33238e9696ac}\label{classQuarterCircleDrivenCavityProblem2_aed64247640938ca570da33238e9696ac} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before solve. (Re-\/)set velocity boundary conditions just to be on the safe side... 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00101}{101}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_a506c1a77cc9a11f586f5cc1b4a252798}\label{classQuarterCircleDrivenCavityProblem2_a506c1a77cc9a11f586f5cc1b4a252798} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00276}{276}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00301}{main()}}.
+
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_ae5ce524af511e8399cd5f261afe9331f}\label{classQuarterCircleDrivenCavityProblem2_ae5ce524af511e8399cd5f261afe9331f} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00169}{169}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+References \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00169}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00146}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00169}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00185}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Driven\+Cavity\+Problem2()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classQuarterCircleDrivenCavityProblem2_ad2b3c4fdc4136aebc331f44cbe13421b}\label{classQuarterCircleDrivenCavityProblem2_ad2b3c4fdc4136aebc331f44cbe13421b} 
+\index{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}!Body\_force\_fct\_pt@{Body\_force\_fct\_pt}}
+\index{Body\_force\_fct\_pt@{Body\_force\_fct\_pt}!QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$@{QuarterCircleDrivenCavityProblem2$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Body\_force\_fct\_pt}{Body\_force\_fct\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Navier\+Stokes\+Equations$<$2$>$\+::\+Navier\+Stokes\+Body\+Force\+Fct\+Pt \mbox{\hyperlink{classQuarterCircleDrivenCavityProblem2}{Quarter\+Circle\+Driven\+Cavity\+Problem2}}$<$ ELEMENT $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to body force function. 
+
+
+
+Definition at line \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00166}{166}} of file \mbox{\hyperlink{circular__driven__cavity2_8cc_source}{circular\+\_\+driven\+\_\+cavity2.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{circular__driven__cavity2_8cc_source_l00185}{Quarter\+Circle\+Driven\+Cavity\+Problem2$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Driven\+Cavity\+Problem2()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{circular__driven__cavity2_8cc}{circular\+\_\+driven\+\_\+cavity2.\+cc}}\end{DoxyCompactItemize}

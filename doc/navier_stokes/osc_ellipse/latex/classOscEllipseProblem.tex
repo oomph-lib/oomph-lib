@@ -1,0 +1,294 @@
+\doxysection{Osc\+Ellipse\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classOscEllipseProblem}{}\label{classOscEllipseProblem}\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+
+
+Navier-\/\+Stokes problem in an oscillating ellipse domain.  
+
+
+Inheritance diagram for Osc\+Ellipse\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classOscEllipseProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOscEllipseProblem_aaa836937ec963921243fcb990f6fe538}{Osc\+Ellipse\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOscEllipseProblem_a48a38acb7db1b394f7bfcd02e779b795}{\texorpdfstring{$\sim$}{\string~}\+Osc\+Ellipse\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a268e14b24e3ac922e7362bbb37ccde1f}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a18bbd70aa8c140637637053a5f839c11}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
+\begin{DoxyCompactList}\small\item\em Update problem specs before solve (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a97c1b0056acbb9a6ec6157b6e7ad258a}{actions\+\_\+before\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions before adapt (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a6044661f75986848484df2c04bfe7aab}{actions\+\_\+after\+\_\+adapt}} ()
+\begin{DoxyCompactList}\small\item\em Actions after adaptation, pin relevant pressures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a7b12b4fdfcb46c3f00885f0a1f9965b3}{actions\+\_\+before\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs before next timestep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a80b50009a6aba4b6920c11b86b06f0f9}{actions\+\_\+after\+\_\+implicit\+\_\+timestep}} ()
+\begin{DoxyCompactList}\small\item\em Update the problem specs after timestep (empty) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_afca2cc3e3e64ac764323f232cacc7e3b}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}{unsteady\+\_\+run}} (Doc\+Info \&doc\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Timestepping loop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classOscEllipseProblem_ae638f238a7b0e0acb5d6087b7363fe01}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial condition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classOscEllipseProblem_a8b70831d1c25a40c814d5d92e77a1085}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
+\begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classOscEllipseProblem_a7d33f6345bf94cfe5165c4b9f2064ee6}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that specifies the domain bondary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
+class Osc\+Ellipse\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Navier-\/\+Stokes problem in an oscillating ellipse domain. 
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00178}{178}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classOscEllipseProblem_aaa836937ec963921243fcb990f6fe538}\label{classOscEllipseProblem_aaa836937ec963921243fcb990f6fe538} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!OscEllipseProblem@{OscEllipseProblem}}
+\index{OscEllipseProblem@{OscEllipseProblem}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{OscEllipseProblem()}{OscEllipseProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\mbox{\hyperlink{classOscEllipseProblem}{\+::\+Osc\+Ellipse\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Constructor for Navier-\/\+Stokes problem on an oscillating ellipse domain. 
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00269}{269}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00126}{Global\+\_\+\+Physical\+\_\+\+Variables\+::A}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00129}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+A\+\_\+hat}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00120}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00123}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00132}{Global\+\_\+\+Physical\+\_\+\+Variables\+::T}}.
+
+\Hypertarget{classOscEllipseProblem_a48a38acb7db1b394f7bfcd02e779b795}\label{classOscEllipseProblem_a48a38acb7db1b394f7bfcd02e779b795} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~OscEllipseProblem@{\texorpdfstring{$\sim$}{\string~}OscEllipseProblem}}
+\index{````~OscEllipseProblem@{\texorpdfstring{$\sim$}{\string~}OscEllipseProblem}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}OscEllipseProblem()}{\string~OscEllipseProblem()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00187}{187}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classOscEllipseProblem_a6044661f75986848484df2c04bfe7aab}\label{classOscEllipseProblem_a6044661f75986848484df2c04bfe7aab} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
+\index{actions\_after\_adapt@{actions\_after\_adapt}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions after adaptation, pin relevant pressures. 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00199}{199}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00250}{Osc\+Ellipse\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classOscEllipseProblem_a80b50009a6aba4b6920c11b86b06f0f9}\label{classOscEllipseProblem_a80b50009a6aba4b6920c11b86b06f0f9} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}}
+\index{actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_implicit\_timestep()}{actions\_after\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after timestep (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00236}{236}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+\Hypertarget{classOscEllipseProblem_a268e14b24e3ac922e7362bbb37ccde1f}\label{classOscEllipseProblem_a268e14b24e3ac922e7362bbb37ccde1f} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs after solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00190}{190}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+\Hypertarget{classOscEllipseProblem_a97c1b0056acbb9a6ec6157b6e7ad258a}\label{classOscEllipseProblem_a97c1b0056acbb9a6ec6157b6e7ad258a} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
+\index{actions\_before\_adapt@{actions\_before\_adapt}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actions before adapt (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00196}{196}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+\Hypertarget{classOscEllipseProblem_a7b12b4fdfcb46c3f00885f0a1f9965b3}\label{classOscEllipseProblem_a7b12b4fdfcb46c3f00885f0a1f9965b3} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
+\index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the problem specs before next timestep. 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00216}{216}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+\Hypertarget{classOscEllipseProblem_a18bbd70aa8c140637637053a5f839c11}\label{classOscEllipseProblem_a18bbd70aa8c140637637053a5f839c11} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
+\index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update problem specs before solve (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00193}{193}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+\Hypertarget{classOscEllipseProblem_afca2cc3e3e64ac764323f232cacc7e3b}\label{classOscEllipseProblem_afca2cc3e3e64ac764323f232cacc7e3b} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00466}{466}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00135}{Global\+\_\+\+Physical\+\_\+\+Variables\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classOscEllipseProblem_a8b70831d1c25a40c814d5d92e77a1085}\label{classOscEllipseProblem_a8b70831d1c25a40c814d5d92e77a1085} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!fix\_pressure@{fix\_pressure}}
+\index{fix\_pressure@{fix\_pressure}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fix pressure in element e at pressure dof pdof and set to pvalue. 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00250}{250}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00250}{Osc\+Ellipse\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+
+
+Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00199}{Osc\+Ellipse\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00250}{Osc\+Ellipse\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+\Hypertarget{classOscEllipseProblem_ae638f238a7b0e0acb5d6087b7363fe01}\label{classOscEllipseProblem_ae638f238a7b0e0acb5d6087b7363fe01} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial condition. 
+
+Set initial condition\+: Assign previous and current values from exact solution. 
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00392}{392}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00135}{Global\+\_\+\+Physical\+\_\+\+Variables\+::get\+\_\+exact\+\_\+u()}}.
+
+\Hypertarget{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}\label{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Timestepping loop. 
+
+Unsteady run. 
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00558}{558}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00624}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classOscEllipseProblem_a7d33f6345bf94cfe5165c4b9f2064ee6}\label{classOscEllipseProblem_a7d33f6345bf94cfe5165c4b9f2064ee6} 
+\index{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}!Wall\_pt@{Wall\_pt}}
+\index{Wall\_pt@{Wall\_pt}!OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$@{OscEllipseProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classOscEllipseProblem}{Osc\+Ellipse\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\+Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to Geom\+Object that specifies the domain bondary. 
+
+
+
+Definition at line \mbox{\hyperlink{osc__quarter__ellipse_8cc_source_l00259}{259}} of file \mbox{\hyperlink{osc__quarter__ellipse_8cc_source}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{osc__quarter__ellipse_8cc}{osc\+\_\+quarter\+\_\+ellipse.\+cc}}\end{DoxyCompactItemize}

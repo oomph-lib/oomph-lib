@@ -1,0 +1,347 @@
+\doxysection{Flag\+\_\+definition Namespace Reference}
+\hypertarget{namespaceFlag__definition}{}\label{namespaceFlag__definition}\index{Flag\_definition@{Flag\_definition}}
+
+
+Namespace for definition of flag boundaries.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFlag__definition_1_1BottomOfFlag}{Bottom\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the lower boundary of the flag. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFlag__definition_1_1TipOfFlag}{Tip\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the tip of the flag. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFlag__definition_1_1TopOfFlag}{Top\+Of\+Flag}}
+\begin{DoxyCompactList}\small\item\em Geom\+Object that defines the upper boundary of the flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}{upper\+\_\+tip}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Time-\/dependent vector to upper tip of the "{}flag"{}. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceFlag__definition_a15bf130714676a0df743a4eba50cb4b5}{lower\+\_\+tip}} (const double \&t)
+\begin{DoxyCompactList}\small\item\em Time-\/dependent vector to bottom tip of the "{}flag"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}{setup}} (Time \texorpdfstring{$\ast$}{*}time\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Create all Geom\+Objects needed to define the cylinder and the flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285}{Period}} =10.\+0
+\begin{DoxyCompactList}\small\item\em Period of prescribed flag oscillation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}} =0.\+2
+\begin{DoxyCompactList}\small\item\em Height of flag. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a94553533bee82260731a466182369a9d}{L}} =3.\+5
+\begin{DoxyCompactList}\small\item\em Length of flag. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}{Centre\+\_\+x}} =2.\+0
+\begin{DoxyCompactList}\small\item\em x position of centre of cylinder \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}{Centre\+\_\+y}} =2.\+0
+\begin{DoxyCompactList}\small\item\em y position of centre of cylinder \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}{Radius}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Radius of cylinder. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}{Amplitude}} =0.\+33
+\begin{DoxyCompactList}\small\item\em Amplitude of tip deflection. \end{DoxyCompactList}\item 
+Time \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to the global time object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1TopOfFlag}{Top\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}{Top\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the upper edge of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1BottomOfFlag}{Bottom\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}{Bottom\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the bottom edge of the flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFlag__definition_1_1TipOfFlag}{Tip\+Of\+Flag}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}{Tip\+\_\+flag\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object that bounds the tip edge of the flag. \end{DoxyCompactList}\item 
+Circle \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Cylinder\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object of type Circle that defines the central cylinder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for definition of flag boundaries. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceFlag__definition_a15bf130714676a0df743a4eba50cb4b5}\label{namespaceFlag__definition_a15bf130714676a0df743a4eba50cb4b5} 
+\index{Flag\_definition@{Flag\_definition}!lower\_tip@{lower\_tip}}
+\index{lower\_tip@{lower\_tip}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{lower\_tip()}{lower\_tip()}}
+{\footnotesize\ttfamily Vector$<$ double $>$ Flag\+\_\+definition\+::lower\+\_\+tip (\begin{DoxyParamCaption}\item[{const double \&}]{t }\end{DoxyParamCaption})}
+
+
+
+Time-\/dependent vector to bottom tip of the "{}flag"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{108}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00088}{Amplitude}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00079}{Centre\+\_\+x}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00082}{Centre\+\_\+y}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00073}{H}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00076}{L}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00070}{Period}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00085}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00241}{Flag\+\_\+definition\+::\+Tip\+Of\+Flag\+::position()}}.
+
+\Hypertarget{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}\label{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89} 
+\index{Flag\_definition@{Flag\_definition}!setup@{setup}}
+\index{setup@{setup}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void Flag\+\_\+definition\+::setup (\begin{DoxyParamCaption}\item[{Time \texorpdfstring{$\ast$}{*}}]{time\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Create all Geom\+Objects needed to define the cylinder and the flag. 
+
+Create Geom\+Object that bounds the upper edge of the flag
+
+Create Geom\+Object that bounds the bottom edge of the flag
+
+Create Geom\+Object that bounds the tip edge of the flag
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{277}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00267}{Bottom\+\_\+flag\+\_\+pt}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00079}{Centre\+\_\+x}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00082}{Centre\+\_\+y}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00274}{Cylinder\+\_\+pt}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00085}{Radius}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00091}{Time\+\_\+pt}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00270}{Tip\+\_\+flag\+\_\+pt}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00264}{Top\+\_\+flag\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+\Hypertarget{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1}\label{namespaceFlag__definition_a5835e439658bdcbcf2eec0c5d494cfa1} 
+\index{Flag\_definition@{Flag\_definition}!upper\_tip@{upper\_tip}}
+\index{upper\_tip@{upper\_tip}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{upper\_tip()}{upper\_tip()}}
+{\footnotesize\ttfamily Vector$<$ double $>$ Flag\+\_\+definition\+::upper\+\_\+tip (\begin{DoxyParamCaption}\item[{const double \&}]{t }\end{DoxyParamCaption})}
+
+
+
+Time-\/dependent vector to upper tip of the "{}flag"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{96}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00088}{Amplitude}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00079}{Centre\+\_\+x}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00082}{Centre\+\_\+y}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00073}{H}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00076}{L}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00070}{Period}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00085}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00241}{Flag\+\_\+definition\+::\+Tip\+Of\+Flag\+::position()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b}\label{namespaceFlag__definition_ad0eb269ec983b485aa24a6f2c25d2f5b} 
+\index{Flag\_definition@{Flag\_definition}!Amplitude@{Amplitude}}
+\index{Amplitude@{Amplitude}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Amplitude}{Amplitude}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::\+Amplitude =0.\+33}
+
+
+
+Amplitude of tip deflection. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00088}{88}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e}\label{namespaceFlag__definition_adde5e58da47e90ef46e1183188281f2e} 
+\index{Flag\_definition@{Flag\_definition}!Bottom\_flag\_pt@{Bottom\_flag\_pt}}
+\index{Bottom\_flag\_pt@{Bottom\_flag\_pt}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Bottom\_flag\_pt}{Bottom\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFlag__definition_1_1BottomOfFlag}{Bottom\+Of\+Flag}}\texorpdfstring{$\ast$}{*} Flag\+\_\+definition\+::\+Bottom\+\_\+flag\+\_\+pt =0}
+
+
+
+Pointer to Geom\+Object that bounds the bottom edge of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00267}{267}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+\Hypertarget{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa}\label{namespaceFlag__definition_a60f30c718c6c67504b05dca7832be8aa} 
+\index{Flag\_definition@{Flag\_definition}!Centre\_x@{Centre\_x}}
+\index{Centre\_x@{Centre\_x}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Centre\_x}{Centre\_x}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::\+Centre\+\_\+x =2.\+0}
+
+
+
+x position of centre of cylinder 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00079}{79}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7}\label{namespaceFlag__definition_a0024007edc2ad0ef647939aa6b06bde7} 
+\index{Flag\_definition@{Flag\_definition}!Centre\_y@{Centre\_y}}
+\index{Centre\_y@{Centre\_y}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Centre\_y}{Centre\_y}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::\+Centre\+\_\+y =2.\+0}
+
+
+
+y position of centre of cylinder 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00082}{82}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}\label{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189} 
+\index{Flag\_definition@{Flag\_definition}!Cylinder\_pt@{Cylinder\_pt}}
+\index{Cylinder\_pt@{Cylinder\_pt}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Cylinder\_pt}{Cylinder\_pt}}
+{\footnotesize\ttfamily Circle\texorpdfstring{$\ast$}{*} Flag\+\_\+definition\+::\+Cylinder\+\_\+pt =0}
+
+
+
+Pointer to Geom\+Object of type Circle that defines the central cylinder. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00274}{274}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+\Hypertarget{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}\label{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7} 
+\index{Flag\_definition@{Flag\_definition}!H@{H}}
+\index{H@{H}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::H =0.\+2}
+
+
+
+Height of flag. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00073}{73}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00241}{Flag\+\_\+definition\+::\+Tip\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_a94553533bee82260731a466182369a9d}\label{namespaceFlag__definition_a94553533bee82260731a466182369a9d} 
+\index{Flag\_definition@{Flag\_definition}!L@{L}}
+\index{L@{L}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::L =3.\+5}
+
+
+
+Length of flag. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00076}{76}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285}\label{namespaceFlag__definition_a47976a19abd58b9c31671f074ca57285} 
+\index{Flag\_definition@{Flag\_definition}!Period@{Period}}
+\index{Period@{Period}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Period}{Period}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::\+Period =10.\+0}
+
+
+
+Period of prescribed flag oscillation. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00070}{70}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00576}{main()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb}\label{namespaceFlag__definition_a921d8bd82b7b267651dea625a548dfcb} 
+\index{Flag\_definition@{Flag\_definition}!Radius@{Radius}}
+\index{Radius@{Radius}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Radius}{Radius}}
+{\footnotesize\ttfamily double Flag\+\_\+definition\+::\+Radius =0.\+5}
+
+
+
+Radius of cylinder. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00085}{85}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00108}{lower\+\_\+tip()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00096}{upper\+\_\+tip()}}.
+
+\Hypertarget{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}\label{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f} 
+\index{Flag\_definition@{Flag\_definition}!Time\_pt@{Time\_pt}}
+\index{Time\_pt@{Time\_pt}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Time\_pt}{Time\_pt}}
+{\footnotesize\ttfamily Time\texorpdfstring{$\ast$}{*} Flag\+\_\+definition\+::\+Time\+\_\+pt =0}
+
+
+
+Pointer to the global time object. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00091}{91}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00139}{Flag\+\_\+definition\+::\+Top\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00190}{Flag\+\_\+definition\+::\+Bottom\+Of\+Flag\+::position()}}, \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00241}{Flag\+\_\+definition\+::\+Tip\+Of\+Flag\+::position()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}.
+
+\Hypertarget{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef}\label{namespaceFlag__definition_a17de6efd8447ee9c2bb5a1767084ecef} 
+\index{Flag\_definition@{Flag\_definition}!Tip\_flag\_pt@{Tip\_flag\_pt}}
+\index{Tip\_flag\_pt@{Tip\_flag\_pt}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Tip\_flag\_pt}{Tip\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFlag__definition_1_1TipOfFlag}{Tip\+Of\+Flag}}\texorpdfstring{$\ast$}{*} Flag\+\_\+definition\+::\+Tip\+\_\+flag\+\_\+pt =0}
+
+
+
+Pointer to Geom\+Object that bounds the tip edge of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00270}{270}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+
+\Hypertarget{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842}\label{namespaceFlag__definition_af602ebeb0c40d05d00961af07bf3e842} 
+\index{Flag\_definition@{Flag\_definition}!Top\_flag\_pt@{Top\_flag\_pt}}
+\index{Top\_flag\_pt@{Top\_flag\_pt}!Flag\_definition@{Flag\_definition}}
+\doxysubsubsection{\texorpdfstring{Top\_flag\_pt}{Top\_flag\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFlag__definition_1_1TopOfFlag}{Top\+Of\+Flag}}\texorpdfstring{$\ast$}{*} Flag\+\_\+definition\+::\+Top\+\_\+flag\+\_\+pt =0}
+
+
+
+Pointer to Geom\+Object that bounds the upper edge of the flag. 
+
+
+
+Definition at line \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00264}{264}} of file \mbox{\hyperlink{turek__flag__non__fsi_8cc_source}{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00277}{setup()}}, and \mbox{\hyperlink{turek__flag__non__fsi_8cc_source_l00371}{Turek\+Non\+FSIProblem$<$ ELEMENT $>$\+::\+Turek\+Non\+FSIProblem()}}.
+

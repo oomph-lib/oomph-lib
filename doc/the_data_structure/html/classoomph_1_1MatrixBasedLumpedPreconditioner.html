@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">MatrixBasedLumpedPreconditioner</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1MatrixBasedLumpedPreconditioner-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Matrix-based lumped preconditioner.  
+ <a href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1MatrixBasedLumpedPreconditioner.png" usemap="#oomph::MatrixBasedLumpedPreconditioner_3C_20MATRIX_20_3E_map" alt=""/>
+  <map id="oomph::MatrixBasedLumpedPreconditioner_3C_20MATRIX_20_3E_map" name="oomph::MatrixBasedLumpedPreconditioner_3C_20MATRIX_20_3E_map">
+<area href="classoomph_1_1Preconditioner.html" title="Preconditioner base class. Gives an interface to call all other preconditioners through and stores th..." alt="oomph::Preconditioner" shape="rect" coords="0,56,323,80"/>
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,323,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:acb1391dde15de1c6fc82b6462d1a027f" id="r_acb1391dde15de1c6fc82b6462d1a027f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#acb1391dde15de1c6fc82b6462d1a027f">MatrixBasedLumpedPreconditioner</a> ()</td></tr>
+<tr class="memdesc:acb1391dde15de1c6fc82b6462d1a027f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:acb1391dde15de1c6fc82b6462d1a027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db36c78089a01b009fa5f26cf84d8a4" id="r_a1db36c78089a01b009fa5f26cf84d8a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a1db36c78089a01b009fa5f26cf84d8a4">~MatrixBasedLumpedPreconditioner</a> ()</td></tr>
+<tr class="memdesc:a1db36c78089a01b009fa5f26cf84d8a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a1db36c78089a01b009fa5f26cf84d8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcc7c54d67e916e8f5c689053289a58" id="r_a1fcc7c54d67e916e8f5c689053289a58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a1fcc7c54d67e916e8f5c689053289a58">MatrixBasedLumpedPreconditioner</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixBasedDiagPreconditioner.html">MatrixBasedDiagPreconditioner</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a1fcc7c54d67e916e8f5c689053289a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a1fcc7c54d67e916e8f5c689053289a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf128ece4018169b5699d81454dc60ba" id="r_aaf128ece4018169b5699d81454dc60ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#aaf128ece4018169b5699d81454dc60ba">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">MatrixBasedLumpedPreconditioner</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:aaf128ece4018169b5699d81454dc60ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:aaf128ece4018169b5699d81454dc60ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a9cbf7b1a6afbe60b050de87ec8047" id="r_a48a9cbf7b1a6afbe60b050de87ec8047"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a48a9cbf7b1a6afbe60b050de87ec8047">preconditioner_solve</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;z)</td></tr>
+<tr class="memdesc:a48a9cbf7b1a6afbe60b050de87ec8047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply preconditioner to z, i.e. z=D^-1.  <br /></td></tr>
+<tr class="separator:a48a9cbf7b1a6afbe60b050de87ec8047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fc9e4c0ef357cbbc421a5fb37076edb" id="r_a7fc9e4c0ef357cbbc421a5fb37076edb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a7fc9e4c0ef357cbbc421a5fb37076edb">setup</a> ()</td></tr>
+<tr class="memdesc:a7fc9e4c0ef357cbbc421a5fb37076edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the preconditioner (store diagonal) from the fully assembled matrix. <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> pointer is ignored.  <br /></td></tr>
+<tr class="separator:a7fc9e4c0ef357cbbc421a5fb37076edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43eed9c6a5622d62b2261e83c01d04ec" id="r_a43eed9c6a5622d62b2261e83c01d04ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a43eed9c6a5622d62b2261e83c01d04ec">positive_matrix</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a43eed9c6a5622d62b2261e83c01d04ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the Positive_matrix which indicates whether lumped matrix was positive.  <br /></td></tr>
+<tr class="separator:a43eed9c6a5622d62b2261e83c01d04ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64c24bfb89ed6e9c6567a6a7afee9c28" id="r_a64c24bfb89ed6e9c6567a6a7afee9c28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a64c24bfb89ed6e9c6567a6a7afee9c28">inverse_lumped_vector_pt</a> ()</td></tr>
+<tr class="memdesc:a64c24bfb89ed6e9c6567a6a7afee9c28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the inverse of the lumped vector assembled in the preconditioner setup routine.  <br /></td></tr>
+<tr class="separator:a64c24bfb89ed6e9c6567a6a7afee9c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8522cfc6f11560318201aab5169cfd3c" id="r_a8522cfc6f11560318201aab5169cfd3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a8522cfc6f11560318201aab5169cfd3c">nrow</a> ()</td></tr>
+<tr class="memdesc:a8522cfc6f11560318201aab5169cfd3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to number of rows for this preconditioner.  <br /></td></tr>
+<tr class="separator:a8522cfc6f11560318201aab5169cfd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17703845dc37066eb6851e12b1f182cb" id="r_a17703845dc37066eb6851e12b1f182cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a17703845dc37066eb6851e12b1f182cb">clean_up_memory</a> ()</td></tr>
+<tr class="memdesc:a17703845dc37066eb6851e12b1f182cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">clean up memory - just delete the inverse lumped vector  <br /></td></tr>
+<tr class="separator:a17703845dc37066eb6851e12b1f182cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770efac3c2e74f377d84937a3ff3efb7" id="r_a770efac3c2e74f377d84937a3ff3efb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a770efac3c2e74f377d84937a3ff3efb7">setup</a> ()</td></tr>
+<tr class="memdesc:a770efac3c2e74f377d84937a3ff3efb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the lumped preconditioner. Specialisation for <a class="el" href="classoomph_1_1CCDoubleMatrix.html" title="A class for compressed column matrices that store doubles.">CCDoubleMatrix</a>.  <br /></td></tr>
+<tr class="separator:a770efac3c2e74f377d84937a3ff3efb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0942572dde419e2658226ebc6e0d5dfd" id="r_a0942572dde419e2658226ebc6e0d5dfd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a0942572dde419e2658226ebc6e0d5dfd">setup</a> ()</td></tr>
+<tr class="memdesc:a0942572dde419e2658226ebc6e0d5dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the lumped preconditioner. Specialisation for <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>.  <br /></td></tr>
+<tr class="separator:a0942572dde419e2658226ebc6e0d5dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2c0f7f39eccd814e72cc5813ec864e0" id="r_ac2c0f7f39eccd814e72cc5813ec864e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#ac2c0f7f39eccd814e72cc5813ec864e0">setup</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *<a class="el" href="classoomph_1_1Preconditioner.html#a08e0582b77c6cbfaf85b80a4ac5c11f3">matrix_pt</a>)</td></tr>
+<tr class="memdesc:ac2c0f7f39eccd814e72cc5813ec864e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">For some reason we need to remind the compiler that there is also a function named setup in the base class.  <br /></td></tr>
+<tr class="separator:ac2c0f7f39eccd814e72cc5813ec864e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783fae97e4b898f8de72b504a4f4bec6" id="r_a783fae97e4b898f8de72b504a4f4bec6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a783fae97e4b898f8de72b504a4f4bec6">setup</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt, <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *<a class="el" href="classoomph_1_1Preconditioner.html#a08e0582b77c6cbfaf85b80a4ac5c11f3">matrix_pt</a>)</td></tr>
+<tr class="memdesc:a783fae97e4b898f8de72b504a4f4bec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">For some reason we need to remind the compiler that there is also a function named setup in the base class.  <br /></td></tr>
+<tr class="separator:a783fae97e4b898f8de72b504a4f4bec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4886f4efe510e5c9b0eb19422943588" id="r_af4886f4efe510e5c9b0eb19422943588"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#af4886f4efe510e5c9b0eb19422943588">setup</a> ()=0</td></tr>
+<tr class="memdesc:af4886f4efe510e5c9b0eb19422943588"><td class="mdescLeft">&#160;</td><td class="mdescRight">For some reason we need to remind the compiler that there is also a function named setup in the base class.  <br /></td></tr>
+<tr class="separator:af4886f4efe510e5c9b0eb19422943588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1Preconditioner"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1Preconditioner')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1Preconditioner.html">oomph::Preconditioner</a></td></tr>
+<tr class="memitem:a7bd8801e4395ccb88fe1f4296e77e9ab inherit pub_methods_classoomph_1_1Preconditioner" id="r_a7bd8801e4395ccb88fe1f4296e77e9ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a7bd8801e4395ccb88fe1f4296e77e9ab">Preconditioner</a> ()</td></tr>
+<tr class="memdesc:a7bd8801e4395ccb88fe1f4296e77e9ab inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a7bd8801e4395ccb88fe1f4296e77e9ab inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6e58c82c3cc4f4e44434a7d92d8e776 inherit pub_methods_classoomph_1_1Preconditioner" id="r_ab6e58c82c3cc4f4e44434a7d92d8e776"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#ab6e58c82c3cc4f4e44434a7d92d8e776">Preconditioner</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ab6e58c82c3cc4f4e44434a7d92d8e776 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ab6e58c82c3cc4f4e44434a7d92d8e776 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63fefcfb21ae1c2a3b4232d2dfbb6340 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a63fefcfb21ae1c2a3b4232d2dfbb6340"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a63fefcfb21ae1c2a3b4232d2dfbb6340">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Preconditioner.html">Preconditioner</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a63fefcfb21ae1c2a3b4232d2dfbb6340 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:a63fefcfb21ae1c2a3b4232d2dfbb6340 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab60952a82cc1b6b91fff5924eaa62c0e inherit pub_methods_classoomph_1_1Preconditioner" id="r_ab60952a82cc1b6b91fff5924eaa62c0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#ab60952a82cc1b6b91fff5924eaa62c0e">~Preconditioner</a> ()</td></tr>
+<tr class="memdesc:ab60952a82cc1b6b91fff5924eaa62c0e inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:ab60952a82cc1b6b91fff5924eaa62c0e inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e469ffc87f31f6f2eebbe5ccf03d78b inherit pub_methods_classoomph_1_1Preconditioner" id="r_a1e469ffc87f31f6f2eebbe5ccf03d78b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a1e469ffc87f31f6f2eebbe5ccf03d78b">preconditioner_solve_transpose</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">r</a>, <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;z)</td></tr>
+<tr class="memdesc:a1e469ffc87f31f6f2eebbe5ccf03d78b inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. (broken virtual)  <br /></td></tr>
+<tr class="separator:a1e469ffc87f31f6f2eebbe5ccf03d78b inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783fae97e4b898f8de72b504a4f4bec6 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a783fae97e4b898f8de72b504a4f4bec6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a783fae97e4b898f8de72b504a4f4bec6">setup</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Problem.html">Problem</a> *problem_pt, <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *<a class="el" href="classoomph_1_1Preconditioner.html#a08e0582b77c6cbfaf85b80a4ac5c11f3">matrix_pt</a>)</td></tr>
+<tr class="memdesc:a783fae97e4b898f8de72b504a4f4bec6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compatability layer for old preconditioners where problem pointers were needed. The problem pointer is only used to get a communicator pointer.  <br /></td></tr>
+<tr class="separator:a783fae97e4b898f8de72b504a4f4bec6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad84467ec9243138945c4d5bbca8fa6c inherit pub_methods_classoomph_1_1Preconditioner" id="r_aad84467ec9243138945c4d5bbca8fa6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#aad84467ec9243138945c4d5bbca8fa6c">enable_silent_preconditioner_setup</a> ()</td></tr>
+<tr class="memdesc:aad84467ec9243138945c4d5bbca8fa6c inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up the block preconditioner quietly!  <br /></td></tr>
+<tr class="separator:aad84467ec9243138945c4d5bbca8fa6c inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221f120f734fd3ca851db42b8defb53d inherit pub_methods_classoomph_1_1Preconditioner" id="r_a221f120f734fd3ca851db42b8defb53d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a221f120f734fd3ca851db42b8defb53d">disable_silent_preconditioner_setup</a> ()</td></tr>
+<tr class="memdesc:a221f120f734fd3ca851db42b8defb53d inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Be verbose in the block preconditioner setup.  <br /></td></tr>
+<tr class="separator:a221f120f734fd3ca851db42b8defb53d inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e0582b77c6cbfaf85b80a4ac5c11f3 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a08e0582b77c6cbfaf85b80a4ac5c11f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a08e0582b77c6cbfaf85b80a4ac5c11f3">matrix_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a08e0582b77c6cbfaf85b80a4ac5c11f3 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for matrix pointer.  <br /></td></tr>
+<tr class="separator:a08e0582b77c6cbfaf85b80a4ac5c11f3 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af459b7333c4c64435fd8fa933535901f inherit pub_methods_classoomph_1_1Preconditioner" id="r_af459b7333c4c64435fd8fa933535901f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#af459b7333c4c64435fd8fa933535901f">set_matrix_pt</a> (<a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *<a class="el" href="classoomph_1_1Preconditioner.html#a08e0582b77c6cbfaf85b80a4ac5c11f3">matrix_pt</a>)</td></tr>
+<tr class="memdesc:af459b7333c4c64435fd8fa933535901f inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the matrix pointer.  <br /></td></tr>
+<tr class="separator:af459b7333c4c64435fd8fa933535901f inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d799e18a605c3993c6fcac0a41d901 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a88d799e18a605c3993c6fcac0a41d901"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a88d799e18a605c3993c6fcac0a41d901">comm_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a88d799e18a605c3993c6fcac0a41d901 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get function for comm pointer.  <br /></td></tr>
+<tr class="separator:a88d799e18a605c3993c6fcac0a41d901 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306f5a52f493816fcfda2dc9b2ee1dbf inherit pub_methods_classoomph_1_1Preconditioner" id="r_a306f5a52f493816fcfda2dc9b2ee1dbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a306f5a52f493816fcfda2dc9b2ee1dbf">set_comm_pt</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Preconditioner.html#a88d799e18a605c3993c6fcac0a41d901">comm_pt</a>)</td></tr>
+<tr class="memdesc:a306f5a52f493816fcfda2dc9b2ee1dbf inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the communicator pointer.  <br /></td></tr>
+<tr class="separator:a306f5a52f493816fcfda2dc9b2ee1dbf inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9202e15534f063a8e21a8a60623eac9f inherit pub_methods_classoomph_1_1Preconditioner" id="r_a9202e15534f063a8e21a8a60623eac9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a9202e15534f063a8e21a8a60623eac9f">setup_time</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9202e15534f063a8e21a8a60623eac9f inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time to setup the preconditioner.  <br /></td></tr>
+<tr class="separator:a9202e15534f063a8e21a8a60623eac9f inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1183f65956ef8a5b332a1246f418e907 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a1183f65956ef8a5b332a1246f418e907"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a1183f65956ef8a5b332a1246f418e907">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">master_block_prec_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">doftype_in_master_preconditioner_coarse</a>)</td></tr>
+<tr class="memdesc:a1183f65956ef8a5b332a1246f418e907 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. There's an assumption here that the block preconditioner will be in CR form but since that assumption is hard coded all over <a class="el" href="classoomph_1_1BlockPreconditioner.html" title="Block Preconditioner base class. The block structure of the overall problem is determined from the Me...">BlockPreconditioner</a> we're safe.  <br /></td></tr>
+<tr class="separator:a1183f65956ef8a5b332a1246f418e907 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a462f4266c22050b4ab9ab441c77a6 inherit pub_methods_classoomph_1_1Preconditioner" id="r_a61a462f4266c22050b4ab9ab441c77a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a61a462f4266c22050b4ab9ab441c77a6">turn_into_subsidiary_block_preconditioner</a> (<a class="el" href="classoomph_1_1BlockPreconditioner.html">BlockPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt; *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">master_block_prec_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">doftype_in_master_preconditioner_coarse</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &gt; &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">doftype_coarsen_map_coarse</a>)</td></tr>
+<tr class="memdesc:a61a462f4266c22050b4ab9ab441c77a6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. Version for coarsening dof-types.  <br /></td></tr>
+<tr class="separator:a61a462f4266c22050b4ab9ab441c77a6 inherit pub_methods_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac9492d59cff9d9b0098712ae72989cd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7522391265c46e6c748fd660eae66f5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7522391265c46e6c748fd660eae66f5e">DistributableLinearAlgebraObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ada5f539f36451c06e69de79bb129521b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ada5f539f36451c06e69de79bb129521b">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4038de53b5737dc625411e7848d21dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_abfa9cf25494c796d62b15bad586fab47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#abfa9cf25494c796d62b15bad586fab47">distribution_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <br /></td></tr>
+<tr class="separator:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7569556f14fd68b28508920e89bd5eee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a9bd7e1d242c69a28da85a804a7717fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a21e966b025edec79067b41d7f1f25220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ab00a3919b8634c698749f14a4d92947d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a5505731e7e73d7e4251c67c7adec6bf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a8c35baa65e335043f62954c92c090a5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the communicator_pt is null then the distribution is not setup then false is returned, otherwise return true  <br /></td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac5340bac40b9559b0378037b57005203"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_adad20ac61a61d907f823da7694b50616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a67bbdb462159d3198d96e7beaa37e36f" id="r_a67bbdb462159d3198d96e7beaa37e36f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a67bbdb462159d3198d96e7beaa37e36f">Inv_lumped_diag_pt</a></td></tr>
+<tr class="memdesc:a67bbdb462159d3198d96e7beaa37e36f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of inverse diagonal entries.  <br /></td></tr>
+<tr class="separator:a67bbdb462159d3198d96e7beaa37e36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfbe26d10029d211744f2dd6ea1508ef" id="r_adfbe26d10029d211744f2dd6ea1508ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#adfbe26d10029d211744f2dd6ea1508ef">Positive_matrix</a></td></tr>
+<tr class="separator:adfbe26d10029d211744f2dd6ea1508ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa1a6b695761df04e32db3563b89272" id="r_a6aa1a6b695761df04e32db3563b89272"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html#a6aa1a6b695761df04e32db3563b89272">Nrow</a></td></tr>
+<tr class="separator:a6aa1a6b695761df04e32db3563b89272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a30742aa2ac9abcfa037179f2d28ff43a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1Preconditioner"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1Preconditioner')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1Preconditioner.html">oomph::Preconditioner</a></td></tr>
+<tr class="memitem:ad191d6be6caf8875700f54c939ec33e6 inherit pro_attribs_classoomph_1_1Preconditioner" id="r_ad191d6be6caf8875700f54c939ec33e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#ad191d6be6caf8875700f54c939ec33e6">Silent_preconditioner_setup</a></td></tr>
+<tr class="memdesc:ad191d6be6caf8875700f54c939ec33e6 inherit pro_attribs_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether or not the build should be done silently.  <br /></td></tr>
+<tr class="separator:ad191d6be6caf8875700f54c939ec33e6 inherit pro_attribs_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6b2f6cd34495167ea766b47f055a7d inherit pro_attribs_classoomph_1_1Preconditioner" id="r_a2a6b2f6cd34495167ea766b47f055a7d"><td class="memItemLeft" align="right" valign="top">std::ostream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Preconditioner.html#a2a6b2f6cd34495167ea766b47f055a7d">Stream_pt</a></td></tr>
+<tr class="memdesc:a2a6b2f6cd34495167ea766b47f055a7d inherit pro_attribs_classoomph_1_1Preconditioner"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the output stream &ndash; defaults to std::cout.  <br /></td></tr>
+<tr class="separator:a2a6b2f6cd34495167ea766b47f055a7d inherit pro_attribs_classoomph_1_1Preconditioner"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a>&gt;<br />
+class oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;</div><p>Matrix-based lumped preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00080">80</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="acb1391dde15de1c6fc82b6462d1a027f" name="acb1391dde15de1c6fc82b6462d1a027f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb1391dde15de1c6fc82b6462d1a027f">&#9670;&#160;</a></span>MatrixBasedLumpedPreconditioner() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::MatrixBasedLumpedPreconditioner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00084">84</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00166">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Inv_lumped_diag_pt</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00169">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Positive_matrix</a>.</p>
+
+</div>
+</div>
+<a id="a1db36c78089a01b009fa5f26cf84d8a4" name="a1db36c78089a01b009fa5f26cf84d8a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db36c78089a01b009fa5f26cf84d8a4">&#9670;&#160;</a></span>~MatrixBasedLumpedPreconditioner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::~<a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">MatrixBasedLumpedPreconditioner</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00094">94</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00159">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::clean_up_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a1fcc7c54d67e916e8f5c689053289a58" name="a1fcc7c54d67e916e8f5c689053289a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fcc7c54d67e916e8f5c689053289a58">&#9670;&#160;</a></span>MatrixBasedLumpedPreconditioner() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::MatrixBasedLumpedPreconditioner </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixBasedDiagPreconditioner.html">MatrixBasedDiagPreconditioner</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a17703845dc37066eb6851e12b1f182cb" name="a17703845dc37066eb6851e12b1f182cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17703845dc37066eb6851e12b1f182cb">&#9670;&#160;</a></span>clean_up_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::clean_up_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>clean up memory - just delete the inverse lumped vector </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#a46c31c416829bedcd9db238431262027">oomph::Preconditioner</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00159">159</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00166">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Inv_lumped_diag_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00094">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::~MatrixBasedLumpedPreconditioner()</a>.</p>
+
+</div>
+</div>
+<a id="a64c24bfb89ed6e9c6567a6a7afee9c28" name="a64c24bfb89ed6e9c6567a6a7afee9c28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64c24bfb89ed6e9c6567a6a7afee9c28">&#9670;&#160;</a></span>inverse_lumped_vector_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> * <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::inverse_lumped_vector_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to the inverse of the lumped vector assembled in the preconditioner setup routine. </p>
+<p>paranoid check that vector has been created</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00136">136</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00166">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Inv_lumped_diag_pt</a>.</p>
+
+</div>
+</div>
+<a id="a8522cfc6f11560318201aab5169cfd3c" name="a8522cfc6f11560318201aab5169cfd3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8522cfc6f11560318201aab5169cfd3c">&#9670;&#160;</a></span>nrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp; <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::nrow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to number of rows for this preconditioner. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00153">153</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00172">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Nrow</a>.</p>
+
+</div>
+</div>
+<a id="aaf128ece4018169b5699d81454dc60ba" name="aaf128ece4018169b5699d81454dc60ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf128ece4018169b5699d81454dc60ba">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="a43eed9c6a5622d62b2261e83c01d04ec" name="a43eed9c6a5622d62b2261e83c01d04ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43eed9c6a5622d62b2261e83c01d04ec">&#9670;&#160;</a></span>positive_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::positive_matrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access function to the Positive_matrix which indicates whether lumped matrix was positive. </p>
+<p>paranoid check that preconditioner has been setup</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00119">119</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">References <a class="el" href="general__purpose__preconditioners_8h_source.html#l00166">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Inv_lumped_diag_pt</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00169">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::Positive_matrix</a>.</p>
+
+</div>
+</div>
+<a id="a48a9cbf7b1a6afbe60b050de87ec8047" name="a48a9cbf7b1a6afbe60b050de87ec8047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48a9cbf7b1a6afbe60b050de87ec8047">&#9670;&#160;</a></span>preconditioner_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::preconditioner_solve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply preconditioner to z, i.e. z=D^-1. </p>
+<p>Apply preconditioner: Multiply r by the inverse of the lumped matrix. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#ace1199369e4465cd2b9a34884bb64ec8">oomph::Preconditioner</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00280">280</a> of file <a class="el" href="general__purpose__preconditioners_8cc_source.html">general_purpose_preconditioners.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="double__vector_8cc_source.html#l00035">oomph::DoubleVector::build()</a>, <a class="el" href="double__vector_8h_source.html#l00154">oomph::DoubleVector::built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="Tadvection__diffusion__reaction__elements_8h_source.html#l00070">oomph::TAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;::TAdvectionDiffusionReactionElement()</a>.</p>
+
+</div>
+</div>
+<a id="a770efac3c2e74f377d84937a3ff3efb7" name="a770efac3c2e74f377d84937a3ff3efb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770efac3c2e74f377d84937a3ff3efb7">&#9670;&#160;</a></span>setup() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CCDoubleMatrix.html">CCDoubleMatrix</a> &gt;::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the lumped preconditioner. Specialisation for <a class="el" href="classoomph_1_1CCDoubleMatrix.html" title="A class for compressed column matrices that store doubles.">CCDoubleMatrix</a>. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00167">167</a> of file <a class="el" href="general__purpose__preconditioners_8cc_source.html">general_purpose_preconditioners.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="Tadvection__diffusion__reaction__elements_8h_source.html#l00070">oomph::TAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;::TAdvectionDiffusionReactionElement()</a>.</p>
+
+</div>
+</div>
+<a id="a0942572dde419e2658226ebc6e0d5dfd" name="a0942572dde419e2658226ebc6e0d5dfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0942572dde419e2658226ebc6e0d5dfd">&#9670;&#160;</a></span>setup() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1CRDoubleMatrix.html">CRDoubleMatrix</a> &gt;::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the lumped preconditioner. Specialisation for <a class="el" href="classoomph_1_1CRDoubleMatrix.html" title="A class for compressed row matrices. This is a distributable object.">CRDoubleMatrix</a>. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8cc_source.html#l00224">224</a> of file <a class="el" href="general__purpose__preconditioners_8cc_source.html">general_purpose_preconditioners.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="Tadvection__diffusion__reaction__elements_8h_source.html#l00070">oomph::TAdvectionDiffusionReactionElement&lt; NREAGENT, DIM, NNODE_1D &gt;::TAdvectionDiffusionReactionElement()</a>.</p>
+
+</div>
+</div>
+<a id="a7fc9e4c0ef357cbbc421a5fb37076edb" name="a7fc9e4c0ef357cbbc421a5fb37076edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fc9e4c0ef357cbbc421a5fb37076edb">&#9670;&#160;</a></span>setup() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the preconditioner (store diagonal) from the fully assembled matrix. <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> pointer is ignored. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="af4886f4efe510e5c9b0eb19422943588" name="af4886f4efe510e5c9b0eb19422943588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4886f4efe510e5c9b0eb19422943588">&#9670;&#160;</a></span>setup() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Preconditioner::setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
+
+<p>Implements <a class="el" href="classoomph_1_1Preconditioner.html#af4886f4efe510e5c9b0eb19422943588">oomph::Preconditioner</a>.</p>
+
+</div>
+</div>
+<a id="a783fae97e4b898f8de72b504a4f4bec6" name="a783fae97e4b898f8de72b504a4f4bec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783fae97e4b898f8de72b504a4f4bec6">&#9670;&#160;</a></span>setup() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Preconditioner::setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1Problem.html">Problem</a> *&#160;</td>
+          <td class="paramname"><em>problem_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *&#160;</td>
+          <td class="paramname"><em>matrix_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00120">120</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+
+</div>
+</div>
+<a id="ac2c0f7f39eccd814e72cc5813ec864e0" name="ac2c0f7f39eccd814e72cc5813ec864e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2c0f7f39eccd814e72cc5813ec864e0">&#9670;&#160;</a></span>setup() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::Preconditioner::setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMatrixBase.html">DoubleMatrixBase</a> *&#160;</td>
+          <td class="paramname"><em>matrix_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>For some reason we need to remind the compiler that there is also a function named setup in the base class. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1Preconditioner.html#ac2c0f7f39eccd814e72cc5813ec864e0">oomph::Preconditioner</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="preconditioner_8h_source.html#l00094">94</a> of file <a class="el" href="preconditioner_8h_source.html">preconditioner.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a67bbdb462159d3198d96e7beaa37e36f" name="a67bbdb462159d3198d96e7beaa37e36f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67bbdb462159d3198d96e7beaa37e36f">&#9670;&#160;</a></span>Inv_lumped_diag_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>* <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::Inv_lumped_diag_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of inverse diagonal entries. </p>
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00166">166</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00159">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::clean_up_memory()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00136">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::inverse_lumped_vector_pt()</a>, <a class="el" href="general__purpose__preconditioners_8h_source.html#l00084">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::MatrixBasedLumpedPreconditioner()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00119">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::positive_matrix()</a>.</p>
+
+</div>
+</div>
+<a id="a6aa1a6b695761df04e32db3563b89272" name="a6aa1a6b695761df04e32db3563b89272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa1a6b695761df04e32db3563b89272">&#9670;&#160;</a></span>Nrow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::Nrow</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00172">172</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00153">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::nrow()</a>.</p>
+
+</div>
+</div>
+<a id="adfbe26d10029d211744f2dd6ea1508ef" name="adfbe26d10029d211744f2dd6ea1508ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfbe26d10029d211744f2dd6ea1508ef">&#9670;&#160;</a></span>Positive_matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">typename</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> <a class="el" href="classoomph_1_1MatrixBasedLumpedPreconditioner.html">oomph::MatrixBasedLumpedPreconditioner</a>&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">MATRIX</a> &gt;::Positive_matrix</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="general__purpose__preconditioners_8h_source.html#l00169">169</a> of file <a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="general__purpose__preconditioners_8h_source.html#l00084">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::MatrixBasedLumpedPreconditioner()</a>, and <a class="el" href="general__purpose__preconditioners_8h_source.html#l00119">oomph::MatrixBasedLumpedPreconditioner&lt; MATRIX &gt;::positive_matrix()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="general__purpose__preconditioners_8h_source.html">general_purpose_preconditioners.h</a></li>
+<li><a class="el" href="general__purpose__preconditioners_8cc_source.html">general_purpose_preconditioners.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:54
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

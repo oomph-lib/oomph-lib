@@ -1,0 +1,54 @@
+\doxysection{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classElasticRefineableQuarterCircleSectorMesh}{}\label{classElasticRefineableQuarterCircleSectorMesh}\index{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+
+
+Elastic quarter circle sector mesh\+: We "{}upgrade"{} the Refineable\+Quarter\+Circle\+Sector\+Mesh to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration.  
+
+
+Inheritance diagram for Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.623188cm]{classElasticRefineableQuarterCircleSectorMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (Geom\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{wall\+\_\+pt}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+Elastic quarter circle sector mesh\+: We "{}upgrade"{} the Refineable\+Quarter\+Circle\+Sector\+Mesh to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. 
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00359}{359}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd}\label{classElasticRefineableQuarterCircleSectorMesh_a123699deecd2a908a7a882a9d2a9f4dd} 
+\index{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!ElasticRefineableQuarterCircleSectorMesh@{ElasticRefineableQuarterCircleSectorMesh}}
+\index{ElasticRefineableQuarterCircleSectorMesh@{ElasticRefineableQuarterCircleSectorMesh}!ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ElasticRefineableQuarterCircleSectorMesh()}{ElasticRefineableQuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{class}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ELEMENT}} $>$\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{\+::\+Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{const}} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{double}} \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that the initial configuration is the stress-\/free one. 
+
+Check that the element type is derived from the Solid\+Finite\+Element
+
+Definition at line \mbox{\hyperlink{disk__oscillation_8cc_source_l00161}{161}} of file \mbox{\hyperlink{disk__oscillation_8cc_source}{disk\+\_\+oscillation.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{disk__oscillation_8cc_source_l00815}{main()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{disk__oscillation_8cc}{disk\+\_\+oscillation.\+cc}}\end{DoxyCompactItemize}

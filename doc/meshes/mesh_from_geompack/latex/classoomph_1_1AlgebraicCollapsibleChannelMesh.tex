@@ -1,0 +1,274 @@
+\doxysection{oomph\+::Algebraic\+Collapsible\+Channel\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh}{}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh}\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+
+
+Collapsible channel mesh with algebraic node update.  
+
+
+
+
+{\ttfamily \#include $<$collapsible\+\_\+channel\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Algebraic\+Collapsible\+Channel\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.500000cm]{classoomph_1_1AlgebraicCollapsibleChannelMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567}{Algebraic\+Collapsible\+Channel\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&nup, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ncollapsible, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ndown, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed}{\texorpdfstring{$\sim$}{\string~}\+Algebraic\+Collapsible\+Channel\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}{Algebraic\+Collapsible\+Channel\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&nup, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ncollapsible, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ndown, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bl\+\_\+squash\+\_\+function\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac994da2ea0b8583a8ae6db5bab8de113}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \doxylink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}. Broken function that overloads the version in the \doxylink{classoomph_1_1CollapsibleChannelMesh}{Collapsible\+Channel\+Mesh}. It does not make sense to specify the function pointer after the mesh has been set up! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_adc2baba06d2b00242352a7a4a16dd890}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that redistributes nodes axially. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \doxylink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}. Broken function that overloads the version in the \doxylink{classoomph_1_1CollapsibleChannelMesh}{Collapsible\+Channel\+Mesh}. It does not make sense to specify the function pointer after the mesh has been set up! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870}{algebraic\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{t}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}{update\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{node\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Update the node-\/udate data after mesh adaptation. Empty -- no update of node update required as this is non-\/refineable mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a4e0b14ef4b4531f043b588150ca3c0f1}{Collapsible\+Channel\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&nup, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ncollapsible, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&ndown, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lup}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lcollapsible}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ldown}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a1c9b2ab27f1fb2f764ae2dc6f9f7a429}{\texorpdfstring{$\sim$}{\string~}\+Collapsible\+Channel\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a7d8275963fae8f740fd5b22ec60955a3}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2e5edd6f2407c49eab1dd6f0a0646457}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a5c073c93cce7e6b6e9de86f36cb1e965}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \doxylink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}. Const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a317472dab112beac771ecf6442a465f5}{Collapsible\+Channel\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a8da4460f59f6d9a78dde1d4b94cc7672}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Function pointer for function that redistributes the elements in the axial direction. Const version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh}{oomph\+::\+Simple\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a8224b55f7d99a36debacb3f4cc293407}{Simple\+Rectangular\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&Nx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&Ny, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&Lx, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&Ly, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the horizontal and vertical directions, and the corresponding dimensions. Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030}{setup\+\_\+algebraic\+\_\+node\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em Function to setup the algebraic node update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}{Dummy\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Dummy function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_ae7b9e4a110dded8399a6daf6f48a9e23}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aafd1c6d21bb891f1188ba6eed1705a45}{Nup}}
+\begin{DoxyCompactList}\small\item\em Number of element columns in upstream part. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_aa59ff7af47247b2e17b13c45f83fcf86}{Ncollapsible}}
+\begin{DoxyCompactList}\small\item\em Number of element columns in collapsible part. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_acd1b5ea7597a079b4321d3658f2e03f4}{Ndown}}
+\begin{DoxyCompactList}\small\item\em Number of element columns in downstream part. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_afa8d1dceef1cafeb166794d9275a30a3}{Ny}}
+\begin{DoxyCompactList}\small\item\em Number of element rows across channel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a2457ac1492c962b0a3d962b13b51ea6e}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the moving wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}
+Collapsible channel mesh with algebraic node update. 
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00418}{418}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac2e77539dfed482cc3d8b7c9e17a9567} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!AlgebraicCollapsibleChannelMesh@{AlgebraicCollapsibleChannelMesh}}
+\index{AlgebraicCollapsibleChannelMesh@{AlgebraicCollapsibleChannelMesh}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicCollapsibleChannelMesh()}{AlgebraicCollapsibleChannelMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Algebraic\+Collapsible\+Channel\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nup,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ncollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ndown,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lup,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lcollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ldown,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00428}{428}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00324}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00090}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab921ed3dbc5678fc5d39626fdf32c4ed} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!````~AlgebraicCollapsibleChannelMesh@{\texorpdfstring{$\sim$}{\string~}AlgebraicCollapsibleChannelMesh}}
+\index{````~AlgebraicCollapsibleChannelMesh@{\texorpdfstring{$\sim$}{\string~}AlgebraicCollapsibleChannelMesh}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AlgebraicCollapsibleChannelMesh()}{\string~AlgebraicCollapsibleChannelMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{Algebraic\+Collapsible\+Channel\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00458}{458}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_a3c19524e69a9408c79047d130b79d6b3} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!AlgebraicCollapsibleChannelMesh@{AlgebraicCollapsibleChannelMesh}}
+\index{AlgebraicCollapsibleChannelMesh@{AlgebraicCollapsibleChannelMesh}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{AlgebraicCollapsibleChannelMesh()}{AlgebraicCollapsibleChannelMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Algebraic\+Collapsible\+Channel\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nup,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ncollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ndown,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lup,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lcollapsible,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ldown,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}}}]{bl\+\_\+squash\+\_\+function\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in upstream/collapsible/ downstream segment and across the channel; lengths of upstream/ collapsible/downstream segments and width of channel, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00466}{466}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{collapsible__channel__domain_8h_source_l00163}{oomph\+::\+Collapsible\+Channel\+Domain\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00145}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00324}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00090}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_ae1ea6d9baa12e2ca87d21d4370f41870} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!algebraic\_node\_update@{algebraic\_node\_update}}
+\index{algebraic\_node\_update@{algebraic\_node\_update}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{algebraic\_node\_update()}{algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Update nodal position at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Perform algebraic mesh update at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous) 
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00243}{243}} of file \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source}{collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_adc2baba06d2b00242352a7a4a16dd890}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_adc2baba06d2b00242352a7a4a16dd890} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
+\index{axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{axial\_spacing\_fct\_pt()}{axial\_spacing\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function pointer for function that redistributes nodes axially. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \doxylink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}. Broken function that overloads the version in the \doxylink{classoomph_1_1CollapsibleChannelMesh}{Collapsible\+Channel\+Mesh}. It does not make sense to specify the function pointer after the mesh has been set up! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a0ff4dd0f691151b62f05d83d05e87368}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00534}{534}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00566}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac994da2ea0b8583a8ae6db5bab8de113}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_ac994da2ea0b8583a8ae6db5bab8de113} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}}
+\index{bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{bl\_squash\_fct\_pt()}{bl\_squash\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Function pointer for function that squashes the mesh near the walls. Default trivial mapping (the identity) leaves vertical nodal positions unchanged. Mapping is used in underlying \doxylink{classoomph_1_1CollapsibleChannelDomain}{Collapsible\+Channel\+Domain}. Broken function that overloads the version in the \doxylink{classoomph_1_1CollapsibleChannelMesh}{Collapsible\+Channel\+Mesh}. It does not make sense to specify the function pointer after the mesh has been set up! 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1CollapsibleChannelMesh_a4d6a58ac75f5949e2df55b737fc87876}{oomph\+::\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00509}{509}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00566}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Dummy\+\_\+fct\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_a54e93316a561cd77a68c0774d2772030} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}}
+\index{setup\_algebraic\_node\_update@{setup\_algebraic\_node\_update}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{setup\_algebraic\_node\_update()}{setup\_algebraic\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Function to setup the algebraic node update. 
+
+Setup algebraic mesh update -- assumes that mesh has initially been set up with a flush upper wall. 
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source_l00324}{324}} of file \mbox{\hyperlink{collapsible__channel__mesh_8template_8cc_source}{collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00466}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Collapsible\+Channel\+Mesh()}}, and \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00428}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Collapsible\+Channel\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_abad38fb50d067a126af1161a3a603972} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
+\index{update\_node\_update@{update\_node\_update}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Algebraic\+Node}} \texorpdfstring{$\ast$}{*}\&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the node-\/udate data after mesh adaptation. Empty -- no update of node update required as this is non-\/refineable mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00559}{559}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18}\label{classoomph_1_1AlgebraicCollapsibleChannelMesh_ab3848ae5c357f45addf4bcfeca1a9d18} 
+\index{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}!Dummy\_fct\_pt@{Dummy\_fct\_pt}}
+\index{Dummy\_fct\_pt@{Dummy\_fct\_pt}!oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$@{oomph::AlgebraicCollapsibleChannelMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Dummy\_fct\_pt}{Dummy\_fct\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1CollapsibleChannelDomain_a2bf1d7943bfac134a5c27a54c7e1faed}{Collapsible\+Channel\+Domain\+::\+BLSquash\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1AlgebraicCollapsibleChannelMesh}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Dummy\+\_\+fct\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Dummy function pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00566}{566}} of file \mbox{\hyperlink{collapsible__channel__mesh_8h_source}{collapsible\+\_\+channel\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00534}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{collapsible__channel__mesh_8h_source_l00509}{oomph\+::\+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{collapsible__channel__mesh_8h}{collapsible\+\_\+channel\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{collapsible__channel__mesh_8template_8cc}{collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

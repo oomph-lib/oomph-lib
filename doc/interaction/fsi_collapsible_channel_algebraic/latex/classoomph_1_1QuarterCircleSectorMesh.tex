@@ -1,0 +1,291 @@
+\doxysection{oomph\+::Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1QuarterCircleSectorMesh}{}\label{classoomph_1_1QuarterCircleSectorMesh}\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+
+
+2D quarter ring mesh class. The domain is specified by the Geom\+Object that identifies boundary 1.  
+
+
+
+
+{\ttfamily \#include $<$quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.235529cm]{classoomph_1_1QuarterCircleSectorMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a3fbcc7dd28aefc3dddda607785695afc}{Quarter\+Circle\+Sector\+Mesh}} (Geom\+Object \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi\+\_\+lo}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{fract\+\_\+mid}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{xi\+\_\+hi}}, \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_af3aec899bd005cacb011c13bcb6e5f22}{\texorpdfstring{$\sim$}{\string~}\+Quarter\+Circle\+Sector\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}{wall\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a7c04179cca1d5eeb0a175ce30312ddbd}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{Quarter\+Circle\+Sector\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_aed627369317c12fc9fe380cd22bb8663}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value (defined in the underlying Domain object) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a49e72c17a9409ec4a2b7a1ebf98fb4a1}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Domain. \end{DoxyCompactList}\item 
+Geom\+Object \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a2cbdec5f0ee2f370c38f1fdc4e2904f8}{Wall\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the geometric object that represents the curved wall (mesh boundary 1) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_ab5c1e4484c69eb78bd3323321605a93c}{Xi\+\_\+lo}}
+\begin{DoxyCompactList}\small\item\em Lower limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a149224b002f785eb357553f8210ad5d3}{Fract\+\_\+mid}}
+\begin{DoxyCompactList}\small\item\em Fraction along wall where outer ring is to be divided. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh_a1fa3bfeddd4467e9fe0ec45fbfac0740}{Xi\+\_\+hi}}
+\begin{DoxyCompactList}\small\item\em Upper limit for the (1D) coordinates along the wall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+2D quarter ring mesh class. The domain is specified by the Geom\+Object that identifies boundary 1. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/-\/\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ -\/-\/-\/\_\_\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \ \ BOUNDARY\ 1}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ /}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ [2]\ \ \ \ \ \ /\ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ \ \ /\ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ \ /\ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ BOUNDARY\ 2\ \ \ \ \ |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ [1]\ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ [0]\ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ \ \string^}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ |\ /\ \(\backslash\)\ \ direction\ of}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ N\ \ \ \ \ \ \ \ |\ \ \ \ N\ \ \ \ \ \ |\ \ |\ \ \ Lagrangian}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\ E\ \ \ \ \ |\ \ \ \ |\_\ E\ \ \ |\ \ |\ \ \ coordinate}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|\ \ |\ \ \ along\ wall\ GeomObject}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BOUNDARY\ 0}
+\DoxyCodeLine{}
+\DoxyCodeLine{Within\ the\ elements\ (MacroElements),\ the\ local\ coordinates}
+\DoxyCodeLine{are\ such\ that\ the\ (E)astern\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_0\ direction,\ \ \textcolor{keywordflow}{while}\ the\ (N)orther\ direction\ coincides\ with\ the\ positive}
+\DoxyCodeLine{s\_1\ direction.}
+
+\end{DoxyCode}
+
+
+Domain is parametrised by three macro elements as sketched. Nodal positions are determined via macro-\/element-\/based representation of the Domain (as a \doxylink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}). 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00083}{83}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a3fbcc7dd28aefc3dddda607785695afc}\label{classoomph_1_1QuarterCircleSectorMesh_a3fbcc7dd28aefc3dddda607785695afc} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!QuarterCircleSectorMesh@{QuarterCircleSectorMesh}}
+\index{QuarterCircleSectorMesh@{QuarterCircleSectorMesh}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{QuarterCircleSectorMesh()}{QuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Quarter\+Circle\+Sector\+Mesh (\begin{DoxyParamCaption}\item[{Geom\+Object \texorpdfstring{$\ast$}{*}}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{xi\+\_\+lo,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{fract\+\_\+mid,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{const}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \&}]{xi\+\_\+hi,  }\item[{\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh) 
+
+Constructor for deformable 2D Ring mesh class. Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper (defaults to (Steady) default timestepper defined in Mesh). Nodal positions are determined via macro-\/element-\/based representation of the Domain (as a \doxylink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}). 
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{45}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00124}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00134}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Fract\+\_\+mid}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00102}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00137}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00131}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Xi\+\_\+lo}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_af3aec899bd005cacb011c13bcb6e5f22}\label{classoomph_1_1QuarterCircleSectorMesh_af3aec899bd005cacb011c13bcb6e5f22} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!````~QuarterCircleSectorMesh@{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorMesh}}
+\index{````~QuarterCircleSectorMesh@{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorMesh}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}QuarterCircleSectorMesh()}{\string~QuarterCircleSectorMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00099}{99}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_aed627369317c12fc9fe380cd22bb8663}\label{classoomph_1_1QuarterCircleSectorMesh_aed627369317c12fc9fe380cd22bb8663} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}}
+\index{bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{bl\_squash\_fct\_pt()}{bl\_squash\_fct\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain_a6cffab57f87c9f4ab01744647240bb1e}{Quarter\+Circle\+Sector\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function pointer for function that squashes the outer two macro elements towards the wall by mapping the input value of the "{}radial"{} macro element coordinate to the return value (defined in the underlying Domain object) 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00117}{117}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__domain_8h_source_l00089}{oomph\+::\+Quarter\+Circle\+Sector\+Domain\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00124}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a7c04179cca1d5eeb0a175ce30312ddbd}\label{classoomph_1_1QuarterCircleSectorMesh_a7c04179cca1d5eeb0a175ce30312ddbd} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
+\index{domain\_pt@{domain\_pt}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to domain. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00108}{108}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00124}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00339}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025}\label{classoomph_1_1QuarterCircleSectorMesh_a1ebdc75ae69205b3863c0433f8d25025} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!wall\_pt@{wall\_pt}}
+\index{wall\_pt@{wall\_pt}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{wall\_pt()}{wall\_pt()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+Geom\+Object \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Geom\+Object representing wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00102}{102}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00128}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Wall\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00445}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a49e72c17a9409ec4a2b7a1ebf98fb4a1}\label{classoomph_1_1QuarterCircleSectorMesh_a49e72c17a9409ec4a2b7a1ebf98fb4a1} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
+\index{Domain\_pt@{Domain\_pt}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterCircleSectorDomain}{Quarter\+Circle\+Sector\+Domain}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to Domain. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00124}{124}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00117}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00108}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a149224b002f785eb357553f8210ad5d3}\label{classoomph_1_1QuarterCircleSectorMesh_a149224b002f785eb357553f8210ad5d3} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!Fract\_mid@{Fract\_mid}}
+\index{Fract\_mid@{Fract\_mid}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Fract\_mid}{Fract\_mid}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Fract\+\_\+mid\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fraction along wall where outer ring is to be divided. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00134}{134}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a2cbdec5f0ee2f370c38f1fdc4e2904f8}\label{classoomph_1_1QuarterCircleSectorMesh_a2cbdec5f0ee2f370c38f1fdc4e2904f8} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
+\index{Wall\_pt@{Wall\_pt}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+Geom\+Object\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to the geometric object that represents the curved wall (mesh boundary 1) 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00128}{128}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00339}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00102}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_a1fa3bfeddd4467e9fe0ec45fbfac0740}\label{classoomph_1_1QuarterCircleSectorMesh_a1fa3bfeddd4467e9fe0ec45fbfac0740} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!Xi\_hi@{Xi\_hi}}
+\index{Xi\_hi@{Xi\_hi}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xi\_hi}{Xi\_hi}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Xi\+\_\+hi\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Upper limit for the (1D) coordinates along the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00137}{137}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1QuarterCircleSectorMesh_ab5c1e4484c69eb78bd3323321605a93c}\label{classoomph_1_1QuarterCircleSectorMesh_ab5c1e4484c69eb78bd3323321605a93c} 
+\index{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}!Xi\_lo@{Xi\_lo}}
+\index{Xi\_lo@{Xi\_lo}!oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$@{oomph::QuarterCircleSectorMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xi\_lo}{Xi\_lo}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{class}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{double}} \mbox{\hyperlink{classoomph_1_1QuarterCircleSectorMesh}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateCollapsibleChannelMesh}{ELEMENT}} $>$\+::\+Xi\+\_\+lo\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lower limit for the (1D) coordinates along the wall. 
+
+
+
+Definition at line \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source_l00131}{131}} of file \mbox{\hyperlink{quarter__circle__sector__mesh_8h_source}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc_source_l00045}{oomph\+::\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Circle\+Sector\+Mesh()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8h}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{quarter__circle__sector__mesh_8template_8cc}{quarter\+\_\+circle\+\_\+sector\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

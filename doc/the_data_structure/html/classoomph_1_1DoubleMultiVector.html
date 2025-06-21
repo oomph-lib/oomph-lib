@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::DoubleMultiVector Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1DoubleMultiVector-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::DoubleMultiVector Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>A multi vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this multi vector can be distributed - its distribution is described by the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object at Distribution_pt. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is stored in a C-style pointer vector (double*)  
+ <a href="classoomph_1_1DoubleMultiVector.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::DoubleMultiVector:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1DoubleMultiVector.png" usemap="#oomph::DoubleMultiVector_map" alt=""/>
+  <map id="oomph::DoubleMultiVector_map" name="oomph::DoubleMultiVector_map">
+<area href="classoomph_1_1DistributableLinearAlgebraObject.html" title="Base class for any linear algebra object that is distributable. Just contains storage for the LinearA..." alt="oomph::DistributableLinearAlgebraObject" shape="rect" coords="0,0,243,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3949a54e110bb672981bf4b9d353f2d2" id="r_a3949a54e110bb672981bf4b9d353f2d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a3949a54e110bb672981bf4b9d353f2d2">DoubleMultiVector</a> ()</td></tr>
+<tr class="memdesc:a3949a54e110bb672981bf4b9d353f2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for an uninitialized <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a>.  <br /></td></tr>
+<tr class="separator:a3949a54e110bb672981bf4b9d353f2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a24f514e2589235589de6edadf5c058" id="r_a1a24f514e2589235589de6edadf5c058"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a1a24f514e2589235589de6edadf5c058">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">v</a>=0.0)</td></tr>
+<tr class="memdesc:a1a24f514e2589235589de6edadf5c058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> consisting of n_vector vectors, each with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <br /></td></tr>
+<tr class="separator:a1a24f514e2589235589de6edadf5c058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05fb9669ba09de5a9c375a5f27859200" id="r_a05fb9669ba09de5a9c375a5f27859200"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a05fb9669ba09de5a9c375a5f27859200">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">v</a>=0.0)</td></tr>
+<tr class="memdesc:a05fb9669ba09de5a9c375a5f27859200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> consisting of n_vector vectors, each with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0).  <br /></td></tr>
+<tr class="separator:a05fb9669ba09de5a9c375a5f27859200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31b889c87de57fa9a9e994e8e138b8c4" id="r_a31b889c87de57fa9a9e994e8e138b8c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a31b889c87de57fa9a9e994e8e138b8c4">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>=0.0)</td></tr>
+<tr class="memdesc:a31b889c87de57fa9a9e994e8e138b8c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Build a multivector using the same distribution of the input vector with n_vector columns and initialised to the value v.  <br /></td></tr>
+<tr class="separator:a31b889c87de57fa9a9e994e8e138b8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d29d498100228299b29f1dc46b4251" id="r_a38d29d498100228299b29f1dc46b4251"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a38d29d498100228299b29f1dc46b4251">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;index, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;deep_copy=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>)</td></tr>
+<tr class="memdesc:a38d29d498100228299b29f1dc46b4251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that builds a multivector from selected columns of the input multivector. The boolean controls whether it is a shallow or deep copy (default deep)  <br /></td></tr>
+<tr class="separator:a38d29d498100228299b29f1dc46b4251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dec1c0b074c260ee22207cdfed20eca" id="r_a7dec1c0b074c260ee22207cdfed20eca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a7dec1c0b074c260ee22207cdfed20eca">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> Teuchos::Range1D &amp;index, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;deep_copy=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a>)</td></tr>
+<tr class="memdesc:a7dec1c0b074c260ee22207cdfed20eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that builds a multivector from selected columns of the input multivector and the provided range. The optional boolean specifies whether it is a shallow or deep copy. The default is that it is a deep copy.  <br /></td></tr>
+<tr class="separator:a7dec1c0b074c260ee22207cdfed20eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9eb30b7fa130f8d6211b8f63c962e68" id="r_af9eb30b7fa130f8d6211b8f63c962e68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#af9eb30b7fa130f8d6211b8f63c962e68">DoubleMultiVector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">new_vector</a>)</td></tr>
+<tr class="memdesc:af9eb30b7fa130f8d6211b8f63c962e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
+<tr class="separator:af9eb30b7fa130f8d6211b8f63c962e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551268cff3ee84866a102db6fb1fd6b0" id="r_a551268cff3ee84866a102db6fb1fd6b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a551268cff3ee84866a102db6fb1fd6b0">~DoubleMultiVector</a> ()</td></tr>
+<tr class="memdesc:a551268cff3ee84866a102db6fb1fd6b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor - just calls this-&gt;<a class="el" href="classoomph_1_1DoubleMultiVector.html#a6e4ab708964cd1dce2d47ea2c0fc91df" title="initialise the vector with coefficient from the vector v. Note: The vector v must be of length">clear()</a> to delete the distribution and data.  <br /></td></tr>
+<tr class="separator:a551268cff3ee84866a102db6fb1fd6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f48a5a0d0330bd6ee2f9b0ac1c5fa08" id="r_a7f48a5a0d0330bd6ee2f9b0ac1c5fa08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a7f48a5a0d0330bd6ee2f9b0ac1c5fa08">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>)</td></tr>
+<tr class="memdesc:a7f48a5a0d0330bd6ee2f9b0ac1c5fa08"><td class="mdescLeft">&#160;</td><td class="mdescRight">assignment operator (deep copy)  <br /></td></tr>
+<tr class="separator:a7f48a5a0d0330bd6ee2f9b0ac1c5fa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5d4d50a01bb6537701921e0d1a1cdff" id="r_ae5d4d50a01bb6537701921e0d1a1cdff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ae5d4d50a01bb6537701921e0d1a1cdff">nvector</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ae5d4d50a01bb6537701921e0d1a1cdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of vectors.  <br /></td></tr>
+<tr class="separator:ae5d4d50a01bb6537701921e0d1a1cdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a414941fb00967f670a1700bc87af7e" id="r_a9a414941fb00967f670a1700bc87af7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a9a414941fb00967f670a1700bc87af7e">shallow_build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>)</td></tr>
+<tr class="memdesc:a9a414941fb00967f670a1700bc87af7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a (shallow) copy of the old vector.  <br /></td></tr>
+<tr class="separator:a9a414941fb00967f670a1700bc87af7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e870d0ff926823ec177b2c5bd1cdd0b" id="r_a2e870d0ff926823ec177b2c5bd1cdd0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a2e870d0ff926823ec177b2c5bd1cdd0b">shallow_build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>)</td></tr>
+<tr class="memdesc:a2e870d0ff926823ec177b2c5bd1cdd0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the storage for pointers to vectors with a given distribution, but do not populate the pointers.  <br /></td></tr>
+<tr class="separator:a2e870d0ff926823ec177b2c5bd1cdd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1ee1d155838e203a95fc70cdc1552c" id="r_acd1ee1d155838e203a95fc70cdc1552c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#acd1ee1d155838e203a95fc70cdc1552c">shallow_build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:acd1ee1d155838e203a95fc70cdc1552c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the storage for pointers to vectors with a given distribution, but do not populate the pointers.  <br /></td></tr>
+<tr class="separator:acd1ee1d155838e203a95fc70cdc1552c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff18cf0f4bf61f034b99a1542b60414b" id="r_aff18cf0f4bf61f034b99a1542b60414b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#aff18cf0f4bf61f034b99a1542b60414b">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">old_vector</a>)</td></tr>
+<tr class="memdesc:aff18cf0f4bf61f034b99a1542b60414b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a (deep) copy of the old_vector.  <br /></td></tr>
+<tr class="separator:aff18cf0f4bf61f034b99a1542b60414b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d4b7b0d647f08995f6197843608fc2" id="r_a77d4b7b0d647f08995f6197843608fc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a77d4b7b0d647f08995f6197843608fc2">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>=0.0)</td></tr>
+<tr class="memdesc:a77d4b7b0d647f08995f6197843608fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> with n_vector vectors, a distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0.  <br /></td></tr>
+<tr class="separator:a77d4b7b0d647f08995f6197843608fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38714b8e2c119a373b34eb8b616a1c09" id="r_a38714b8e2c119a373b34eb8b616a1c09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a38714b8e2c119a373b34eb8b616a1c09">build</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">n_vector</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>=0.0)</td></tr>
+<tr class="memdesc:a38714b8e2c119a373b34eb8b616a1c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> with n_vector vectors, each with a distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0.  <br /></td></tr>
+<tr class="separator:a38714b8e2c119a373b34eb8b616a1c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f75b786cd1b2b45922075f1fa39de7" id="r_a69f75b786cd1b2b45922075f1fa39de7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a69f75b786cd1b2b45922075f1fa39de7">initialise</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">initial_value</a>)</td></tr>
+<tr class="memdesc:a69f75b786cd1b2b45922075f1fa39de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise the whole vector with value v  <br /></td></tr>
+<tr class="separator:a69f75b786cd1b2b45922075f1fa39de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e4ab708964cd1dce2d47ea2c0fc91df" id="r_a6e4ab708964cd1dce2d47ea2c0fc91df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a6e4ab708964cd1dce2d47ea2c0fc91df">clear</a> ()</td></tr>
+<tr class="memdesc:a6e4ab708964cd1dce2d47ea2c0fc91df"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise the vector with coefficient from the vector v. Note: The vector v must be of length  <br /></td></tr>
+<tr class="separator:a6e4ab708964cd1dce2d47ea2c0fc91df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7ba248dc49b6bda0b49c28c677a82e7" id="r_ad7ba248dc49b6bda0b49c28c677a82e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ad7ba248dc49b6bda0b49c28c677a82e7">built</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="separator:ad7ba248dc49b6bda0b49c28c677a82e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a7f714e738c77e1938304c5911e09bf" id="r_a1a7f714e738c77e1938304c5911e09bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a1a7f714e738c77e1938304c5911e09bf">redistribute</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:a1a7f714e738c77e1938304c5911e09bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows are external data to be used by this vector. WARNING: The size of the external data must correspond to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> dist_pt argument.  <br /></td></tr>
+<tr class="separator:a1a7f714e738c77e1938304c5911e09bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909469237e8d3cf140e782766d61b8ac" id="r_a909469237e8d3cf140e782766d61b8ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a909469237e8d3cf140e782766d61b8ac">operator()</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">v</a>, <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> <a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a909469237e8d3cf140e782766d61b8ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">[] access function to the (local) values of the v-th vector  <br /></td></tr>
+<tr class="separator:a909469237e8d3cf140e782766d61b8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06d289ff582170e19500861e8bd7e90" id="r_ab06d289ff582170e19500861e8bd7e90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ab06d289ff582170e19500861e8bd7e90">operator==</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">vec</a>)</td></tr>
+<tr class="memdesc:ab06d289ff582170e19500861e8bd7e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">== operator  <br /></td></tr>
+<tr class="separator:ab06d289ff582170e19500861e8bd7e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dad0557a1a0a62a4155aa6809de948" id="r_ac5dad0557a1a0a62a4155aa6809de948"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ac5dad0557a1a0a62a4155aa6809de948">operator+=</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">vec</a>)</td></tr>
+<tr class="memdesc:ac5dad0557a1a0a62a4155aa6809de948"><td class="mdescLeft">&#160;</td><td class="mdescRight">+= operator  <br /></td></tr>
+<tr class="separator:ac5dad0557a1a0a62a4155aa6809de948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d6d470f442410ee4df68e008d5ec7f" id="r_ab9d6d470f442410ee4df68e008d5ec7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ab9d6d470f442410ee4df68e008d5ec7f">operator-=</a> (<a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">vec</a>)</td></tr>
+<tr class="memdesc:ab9d6d470f442410ee4df68e008d5ec7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">-= operator  <br /></td></tr>
+<tr class="separator:ab9d6d470f442410ee4df68e008d5ec7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4edb706ef2c1e5861a7f7310b5059f03" id="r_a4edb706ef2c1e5861a7f7310b5059f03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a4edb706ef2c1e5861a7f7310b5059f03">operator*=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">scalar_value</a>)</td></tr>
+<tr class="memdesc:a4edb706ef2c1e5861a7f7310b5059f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply by a scalar.  <br /></td></tr>
+<tr class="separator:a4edb706ef2c1e5861a7f7310b5059f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4efcbd36f9205c8b3eeaf735f6e2ff4d" id="r_a4efcbd36f9205c8b3eeaf735f6e2ff4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a4efcbd36f9205c8b3eeaf735f6e2ff4d">values</a> ()</td></tr>
+<tr class="memdesc:a4efcbd36f9205c8b3eeaf735f6e2ff4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the underlying values  <br /></td></tr>
+<tr class="separator:a4efcbd36f9205c8b3eeaf735f6e2ff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab319ef072bdf91377bdbb3d9ebca7e72" id="r_ab319ef072bdf91377bdbb3d9ebca7e72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ab319ef072bdf91377bdbb3d9ebca7e72">values</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab319ef072bdf91377bdbb3d9ebca7e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the underlying values (const version)  <br /></td></tr>
+<tr class="separator:ab319ef072bdf91377bdbb3d9ebca7e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae707e90f0ccfb85fe9493c4e5c35e4ff" id="r_ae707e90f0ccfb85fe9493c4e5c35e4ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ae707e90f0ccfb85fe9493c4e5c35e4ff">values</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:ae707e90f0ccfb85fe9493c4e5c35e4ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the i-th vector's data  <br /></td></tr>
+<tr class="separator:ae707e90f0ccfb85fe9493c4e5c35e4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169073705b89c67d5d28ee267629a57f" id="r_a169073705b89c67d5d28ee267629a57f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a169073705b89c67d5d28ee267629a57f">values</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a169073705b89c67d5d28ee267629a57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the i-th vector's data (const version)  <br /></td></tr>
+<tr class="separator:a169073705b89c67d5d28ee267629a57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afea423fd8f76d3831ae13e9d05ec21a3" id="r_afea423fd8f76d3831ae13e9d05ec21a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#afea423fd8f76d3831ae13e9d05ec21a3">doublevector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>)</td></tr>
+<tr class="memdesc:afea423fd8f76d3831ae13e9d05ec21a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> representatoin  <br /></td></tr>
+<tr class="separator:afea423fd8f76d3831ae13e9d05ec21a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c71db2f4bfb57e64922d19e2f5c250" id="r_a09c71db2f4bfb57e64922d19e2f5c250"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a09c71db2f4bfb57e64922d19e2f5c250">doublevector</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a09c71db2f4bfb57e64922d19e2f5c250"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> representation (const version)  <br /></td></tr>
+<tr class="separator:a09c71db2f4bfb57e64922d19e2f5c250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dbfe401ddb32b128f01fd3bb4755c4f" id="r_a0dbfe401ddb32b128f01fd3bb4755c4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a0dbfe401ddb32b128f01fd3bb4755c4f">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">outfile</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a0dbfe401ddb32b128f01fd3bb4755c4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the contents of the vector  <br /></td></tr>
+<tr class="separator:a0dbfe401ddb32b128f01fd3bb4755c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae465b1dd1100941eb39e7604cab5175d" id="r_ae465b1dd1100941eb39e7604cab5175d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#ae465b1dd1100941eb39e7604cab5175d">output</a> (std::string <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">filename</a>)</td></tr>
+<tr class="memdesc:ae465b1dd1100941eb39e7604cab5175d"><td class="mdescLeft">&#160;</td><td class="mdescRight">output the contents of the vector  <br /></td></tr>
+<tr class="separator:ae465b1dd1100941eb39e7604cab5175d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873f053a08f9d52537c5cb6077bfef7d" id="r_a873f053a08f9d52537c5cb6077bfef7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a873f053a08f9d52537c5cb6077bfef7d">dot</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">vec</a>, std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">result</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a873f053a08f9d52537c5cb6077bfef7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the 2 norm of this vector  <br /></td></tr>
+<tr class="separator:a873f053a08f9d52537c5cb6077bfef7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886c01ce65486490e3b3d38389182566" id="r_a886c01ce65486490e3b3d38389182566"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a886c01ce65486490e3b3d38389182566">norm</a> (std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">result</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a886c01ce65486490e3b3d38389182566"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the 2 norm of this vector  <br /></td></tr>
+<tr class="separator:a886c01ce65486490e3b3d38389182566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac9492d59cff9d9b0098712ae72989cd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac9492d59cff9d9b0098712ae72989cd3">DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor - create a distribution.  <br /></td></tr>
+<tr class="separator:ac9492d59cff9d9b0098712ae72989cd3 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7522391265c46e6c748fd660eae66f5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7522391265c46e6c748fd660eae66f5e">DistributableLinearAlgebraObject</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">matrix</a>)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a7522391265c46e6c748fd660eae66f5e inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ada5f539f36451c06e69de79bb129521b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ada5f539f36451c06e69de79bb129521b">operator=</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">DistributableLinearAlgebraObject</a> &amp;)=<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">delete</a></td></tr>
+<tr class="memdesc:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:ada5f539f36451c06e69de79bb129521b inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4038de53b5737dc625411e7848d21dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4038de53b5737dc625411e7848d21dad">~DistributableLinearAlgebraObject</a> ()</td></tr>
+<tr class="memdesc:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a4038de53b5737dc625411e7848d21dad inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_abfa9cf25494c796d62b15bad586fab47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#abfa9cf25494c796d62b15bad586fab47">distribution_pt</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a>  <br /></td></tr>
+<tr class="separator:abfa9cf25494c796d62b15bad586fab47 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a7569556f14fd68b28508920e89bd5eee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a7569556f14fd68b28508920e89bd5eee">nrow</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function to the number of global rows.  <br /></td></tr>
+<tr class="separator:a7569556f14fd68b28508920e89bd5eee inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a9bd7e1d242c69a28da85a804a7717fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a9bd7e1d242c69a28da85a804a7717fce">nrow_local</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a9bd7e1d242c69a28da85a804a7717fce inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a21e966b025edec79067b41d7f1f25220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a21e966b025edec79067b41d7f1f25220">nrow_local</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the num of local rows on this processor.  <br /></td></tr>
+<tr class="separator:a21e966b025edec79067b41d7f1f25220 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ab00a3919b8634c698749f14a4d92947d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ab00a3919b8634c698749f14a4d92947d">first_row</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:ab00a3919b8634c698749f14a4d92947d inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a4266c1d18d8e102bad3f4aec26c9b7cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a4266c1d18d8e102bad3f4aec26c9b7cf">first_row</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">p</a>) <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">access function for the first row on this processor  <br /></td></tr>
+<tr class="separator:a4266c1d18d8e102bad3f4aec26c9b7cf inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a5505731e7e73d7e4251c67c7adec6bf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a5505731e7e73d7e4251c67c7adec6bf5">distributed</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">distribution is serial or distributed  <br /></td></tr>
+<tr class="separator:a5505731e7e73d7e4251c67c7adec6bf5 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a8c35baa65e335043f62954c92c090a5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a8c35baa65e335043f62954c92c090a5a">distribution_built</a> () <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a></td></tr>
+<tr class="memdesc:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">if the communicator_pt is null then the distribution is not setup then false is returned, otherwise return true  <br /></td></tr>
+<tr class="separator:a8c35baa65e335043f62954c92c090a5a inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_ac5340bac40b9559b0378037b57005203"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#ac5340bac40b9559b0378037b57005203">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist_pt</a>)</td></tr>
+<tr class="memdesc:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:ac5340bac40b9559b0378037b57005203 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_adad20ac61a61d907f823da7694b50616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#adad20ac61a61d907f823da7694b50616">build_distribution</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">dist</a>)</td></tr>
+<tr class="memdesc:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:adad20ac61a61d907f823da7694b50616 inherit pub_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a09b97b4d4c7d0945178e8bf190813cdd" id="r_a09b97b4d4c7d0945178e8bf190813cdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a09b97b4d4c7d0945178e8bf190813cdd">setup_doublevector_representation</a> ()</td></tr>
+<tr class="memdesc:a09b97b4d4c7d0945178e8bf190813cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">compute the A-norm using the matrix at matrix_pt  <br /></td></tr>
+<tr class="separator:a09b97b4d4c7d0945178e8bf190813cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a562d13abfae53ad5b3e3c6020b4da0e5" id="r_a562d13abfae53ad5b3e3c6020b4da0e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a562d13abfae53ad5b3e3c6020b4da0e5">Values</a></td></tr>
+<tr class="memdesc:a562d13abfae53ad5b3e3c6020b4da0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">the local data, need a pointer to a pointer so that the individual vectors can be extracted  <br /></td></tr>
+<tr class="separator:a562d13abfae53ad5b3e3c6020b4da0e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21446924694c708c6a82cc908bf7846a" id="r_a21446924694c708c6a82cc908bf7846a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a21446924694c708c6a82cc908bf7846a">Nvector</a></td></tr>
+<tr class="memdesc:a21446924694c708c6a82cc908bf7846a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of vectors.  <br /></td></tr>
+<tr class="separator:a21446924694c708c6a82cc908bf7846a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8fe4053c07e949f8e9cbea9e29e6e6" id="r_adf8fe4053c07e949f8e9cbea9e29e6e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#adf8fe4053c07e949f8e9cbea9e29e6e6">Internal_values</a></td></tr>
+<tr class="memdesc:adf8fe4053c07e949f8e9cbea9e29e6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate whether the vector's data (values_pt) is owned by this vector.  <br /></td></tr>
+<tr class="separator:adf8fe4053c07e949f8e9cbea9e29e6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86924834b6045e4824a6088e97e35cc8" id="r_a86924834b6045e4824a6088e97e35cc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a86924834b6045e4824a6088e97e35cc8">Built</a></td></tr>
+<tr class="memdesc:a86924834b6045e4824a6088e97e35cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">indicates that the vector has been built and is usable  <br /></td></tr>
+<tr class="separator:a86924834b6045e4824a6088e97e35cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668c57e389403b0d0c8bafdfa3f66b82" id="r_a668c57e389403b0d0c8bafdfa3f66b82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DoubleMultiVector.html#a668c57e389403b0d0c8bafdfa3f66b82">Internal_doublevector</a></td></tr>
+<tr class="memdesc:a668c57e389403b0d0c8bafdfa3f66b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Need a vector of DoubleVectors to interface with our linear solvers.  <br /></td></tr>
+<tr class="separator:a668c57e389403b0d0c8bafdfa3f66b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1DistributableLinearAlgebraObject')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html">oomph::DistributableLinearAlgebraObject</a></td></tr>
+<tr class="memitem:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject" id="r_a30742aa2ac9abcfa037179f2d28ff43a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1DistributableLinearAlgebraObject.html#a30742aa2ac9abcfa037179f2d28ff43a">clear_distribution</a> ()</td></tr>
+<tr class="memdesc:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the distribution of this distributable linear algebra object  <br /></td></tr>
+<tr class="separator:a30742aa2ac9abcfa037179f2d28ff43a inherit pro_methods_classoomph_1_1DistributableLinearAlgebraObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A multi vector in the mathematical sense, initially developed for linear algebra type applications. If MPI then this multi vector can be distributed - its distribution is described by the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> object at Distribution_pt. <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> is stored in a C-style pointer vector (double*) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00055">55</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3949a54e110bb672981bf4b9d353f2d2" name="a3949a54e110bb672981bf4b9d353f2d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3949a54e110bb672981bf4b9d353f2d2">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor for an uninitialized <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00059">59</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+</div>
+</div>
+<a id="a1a24f514e2589235589de6edadf5c058" name="a1a24f514e2589235589de6edadf5c058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a24f514e2589235589de6edadf5c058">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> consisting of n_vector vectors, each with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0). </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00068">68</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="a05fb9669ba09de5a9c375a5f27859200" name="a05fb9669ba09de5a9c375a5f27859200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05fb9669ba09de5a9c375a5f27859200">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> consisting of n_vector vectors, each with a prescribed distribution. Additionally every entry can be set (with argument v - defaults to 0). </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00081">81</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="a31b889c87de57fa9a9e994e8e138b8c4" name="a31b889c87de57fa9a9e994e8e138b8c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31b889c87de57fa9a9e994e8e138b8c4">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. Build a multivector using the same distribution of the input vector with n_vector columns and initialised to the value v. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00093">93</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="a38d29d498100228299b29f1dc46b4251" name="a38d29d498100228299b29f1dc46b4251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d29d498100228299b29f1dc46b4251">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>deep_copy</em> = <code><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor that builds a multivector from selected columns of the input multivector. The boolean controls whether it is a shallow or deep copy (default deep) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00105">105</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a7dec1c0b074c260ee22207cdfed20eca" name="a7dec1c0b074c260ee22207cdfed20eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dec1c0b074c260ee22207cdfed20eca">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> Teuchos::Range1D &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>deep_copy</em> = <code><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">true</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor that builds a multivector from selected columns of the input multivector and the provided range. The optional boolean specifies whether it is a shallow or deep copy. The default is that it is a deep copy. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00144">144</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, <a class="el" href="elements_8cc_source.html#l04320">oomph::FiniteElement::size()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="af9eb30b7fa130f8d6211b8f63c962e68" name="af9eb30b7fa130f8d6211b8f63c962e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9eb30b7fa130f8d6211b8f63c962e68">&#9670;&#160;</a></span>DoubleMultiVector() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>new_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00184">184</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="a551268cff3ee84866a102db6fb1fd6b0" name="a551268cff3ee84866a102db6fb1fd6b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551268cff3ee84866a102db6fb1fd6b0">&#9670;&#160;</a></span>~DoubleMultiVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::DoubleMultiVector::~DoubleMultiVector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor - just calls this-&gt;<a class="el" href="classoomph_1_1DoubleMultiVector.html#a6e4ab708964cd1dce2d47ea2c0fc91df" title="initialise the vector with coefficient from the vector v. Note: The vector v must be of length">clear()</a> to delete the distribution and data. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00198">198</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aff18cf0f4bf61f034b99a1542b60414b" name="aff18cf0f4bf61f034b99a1542b60414b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff18cf0f4bf61f034b99a1542b60414b">&#9670;&#160;</a></span>build() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provides a (deep) copy of the old_vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00281">281</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00500">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00313">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00184">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00105">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00144">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00093">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00081">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00068">DoubleMultiVector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00204">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="a77d4b7b0d647f08995f6197843608fc2" name="a77d4b7b0d647f08995f6197843608fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77d4b7b0d647f08995f6197843608fc2">&#9670;&#160;</a></span>build() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> with n_vector vectors, a distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00313">313</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>.</p>
+
+</div>
+</div>
+<a id="a38714b8e2c119a373b34eb8b616a1c09" name="a38714b8e2c119a373b34eb8b616a1c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38714b8e2c119a373b34eb8b616a1c09">&#9670;&#160;</a></span>build() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em> = <code>0.0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Assembles a <a class="el" href="classoomph_1_1DoubleMultiVector.html" title="A multi vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleMultiVector</a> with n_vector vectors, each with a distribution dist, if v is specified each element is set to v, otherwise each element is set to 0.0. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00323">323</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01012">Built</a>, <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, <a class="el" href="double__multi__vector_8h_source.html#l00668">values()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="ad7ba248dc49b6bda0b49c28c677a82e7" name="ad7ba248dc49b6bda0b49c28c677a82e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ba248dc49b6bda0b49c28c677a82e7">&#9670;&#160;</a></span>built()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::DoubleMultiVector::built </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00413">413</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01012">Built</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00809">dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00889">norm()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00549">operator+=()</a>.</p>
+
+</div>
+</div>
+<a id="a6e4ab708964cd1dce2d47ea2c0fc91df" name="a6e4ab708964cd1dce2d47ea2c0fc91df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e4ab708964cd1dce2d47ea2c0fc91df">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>initialise the vector with coefficient from the vector v. Note: The vector v must be of length </p>
+<p>wipes the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00387">387</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01012">Built</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00522">oomph::DistributableLinearAlgebraObject::clear_distribution()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00252">shallow_build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00198">~DoubleMultiVector()</a>.</p>
+
+</div>
+</div>
+<a id="a873f053a08f9d52537c5cb6077bfef7d" name="a873f053a08f9d52537c5cb6077bfef7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a873f053a08f9d52537c5cb6077bfef7d">&#9670;&#160;</a></span>dot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::dot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compute the 2 norm of this vector </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00809">809</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00413">built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00310">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvDot()</a>.</p>
+
+</div>
+</div>
+<a id="afea423fd8f76d3831ae13e9d05ec21a3" name="afea423fd8f76d3831ae13e9d05ec21a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afea423fd8f76d3831ae13e9d05ec21a3">&#9670;&#160;</a></span>doublevector() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp; oomph::DoubleMultiVector::doublevector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access to the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> representatoin </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00692">692</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01015">Internal_doublevector</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00550">oomph::ProblemBasedShiftInvertOperator::apply()</a>, and <a class="el" href="trilinos__eigen__solver_8h_source.html#l00644">oomph::AdjointProblemBasedShiftInvertOperator::apply()</a>.</p>
+
+</div>
+</div>
+<a id="a09c71db2f4bfb57e64922d19e2f5c250" name="a09c71db2f4bfb57e64922d19e2f5c250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c71db2f4bfb57e64922d19e2f5c250">&#9670;&#160;</a></span>doublevector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &amp; oomph::DoubleMultiVector::doublevector </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access to the <a class="el" href="classoomph_1_1DoubleVector.html" title="A vector in the mathematical sense, initially developed for linear algebra type applications....">DoubleVector</a> representation (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00698">698</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01015">Internal_doublevector</a>.</p>
+
+</div>
+</div>
+<a id="a69f75b786cd1b2b45922075f1fa39de7" name="a69f75b786cd1b2b45922075f1fa39de7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f75b786cd1b2b45922075f1fa39de7">&#9670;&#160;</a></span>initialise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::initialise </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>initial_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>initialise the whole vector with value v </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00364">364</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01012">Built</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00419">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvInit()</a>.</p>
+
+</div>
+</div>
+<a id="a886c01ce65486490e3b3d38389182566" name="a886c01ce65486490e3b3d38389182566"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a886c01ce65486490e3b3d38389182566">&#9670;&#160;</a></span>norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::norm </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compute the 2 norm of this vector </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00889">889</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00413">built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00322">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvNorm()</a>.</p>
+
+</div>
+</div>
+<a id="ae5d4d50a01bb6537701921e0d1a1cdff" name="ae5d4d50a01bb6537701921e0d1a1cdff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5d4d50a01bb6537701921e0d1a1cdff">&#9670;&#160;</a></span>nvector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::DoubleMultiVector::nvector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the number of vectors. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00211">211</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00550">oomph::ProblemBasedShiftInvertOperator::apply()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00644">oomph::AdjointProblemBasedShiftInvertOperator::apply()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00809">dot()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00156">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::GetNumberVecs()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00197">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvAddMv()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00404">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvRandom()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00224">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvScale()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00162">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTimesMatAddMv()</a>, <a class="el" href="trilinos__eigen__solver_8h_source.html#l00241">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvTransMv()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00889">norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00642">operator*=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00549">operator+=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00596">operator-=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00514">operator==()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00704">output()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="a909469237e8d3cf140e782766d61b8ac" name="a909469237e8d3cf140e782766d61b8ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a909469237e8d3cf140e782766d61b8ac">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp; oomph::DoubleMultiVector::operator() </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">int</a>&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>[] access function to the (local) values of the v-th vector </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00484">484</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a4edb706ef2c1e5861a7f7310b5059f03" name="a4edb706ef2c1e5861a7f7310b5059f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4edb706ef2c1e5861a7f7310b5059f03">&#9670;&#160;</a></span>operator*=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::operator*= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>scalar_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply by a scalar. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00642">642</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00500">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="ac5dad0557a1a0a62a4155aa6809de948" name="ac5dad0557a1a0a62a4155aa6809de948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5dad0557a1a0a62a4155aa6809de948">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a>&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>+= operator </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00549">549</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00413">built()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="ab9d6d470f442410ee4df68e008d5ec7f" name="ab9d6d470f442410ee4df68e008d5ec7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d6d470f442410ee4df68e008d5ec7f">&#9670;&#160;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::operator-= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a>&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>-= operator </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00596">596</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00500">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a7f48a5a0d0330bd6ee2f9b0ac1c5fa08" name="a7f48a5a0d0330bd6ee2f9b0ac1c5fa08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f48a5a0d0330bd6ee2f9b0ac1c5fa08">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>assignment operator (deep copy) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00204">204</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="ab06d289ff582170e19500861e8bd7e90" name="ab06d289ff582170e19500861e8bd7e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab06d289ff582170e19500861e8bd7e90">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::DoubleMultiVector::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>== operator </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00514">514</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a0dbfe401ddb32b128f01fd3bb4755c4f" name="a0dbfe401ddb32b128f01fd3bb4755c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dbfe401ddb32b128f01fd3bb4755c4f">&#9670;&#160;</a></span>output() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>output the contents of the vector </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00704">704</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00481">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trilinos__eigen__solver_8h_source.html#l00433">Anasazi::MultiVecTraits&lt; double, oomph::DoubleMultiVector &gt;::MvPrint()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00798">output()</a>.</p>
+
+</div>
+</div>
+<a id="ae465b1dd1100941eb39e7604cab5175d" name="ae465b1dd1100941eb39e7604cab5175d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae465b1dd1100941eb39e7604cab5175d">&#9670;&#160;</a></span>output() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::output </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>output the contents of the vector </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00798">798</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00704">output()</a>.</p>
+
+</div>
+</div>
+<a id="a1a7f714e738c77e1938304c5911e09bf" name="a1a7f714e738c77e1938304c5911e09bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7f714e738c77e1938304c5911e09bf">&#9670;&#160;</a></span>redistribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::redistribute </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allows are external data to be used by this vector. WARNING: The size of the external data must correspond to the <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html" title="Describes the distribution of a distributable linear algebra type object. Typically this is a contain...">LinearAlgebraDistribution</a> dist_pt argument. </p>
+<p>The contents of the vector are redistributed to match the new distribution. In a non-MPI rebuild this method works, but does nothing. <b>NOTE</b> 1: The current distribution and the new distribution must have the same number of global rows. <b>NOTE</b> 2: The current distribution and the new distribution must have the same Communicator.</p>
+<ol type="1">
+<li>When a rebuild method is called new internal values are created.</li>
+<li>It is not possible to redistribute(...) a vector with external values .</li>
+<li>External values are only deleted by this vector if delete_external_values = true. Allows are external data to be used by this vector. WARNING: The size of the external data must correspond to the distribution of this vector.</li>
+</ol>
+<ol type="1">
+<li>When a rebuild method is called new internal values are created.</li>
+<li>It is not possible to redistribute(...) a vector with external values .</li>
+<li>External values are only deleted by this vector if delete_external_values = true. The contents of the vector are redistributed to match the new distribution. In a non-MPI rebuild this method works, but does nothing. <b>NOTE</b> 1: The current distribution and the new distribution must have the same number of global rows. <b>NOTE</b> 2: The current distribution and the new distribution must have the same Communicator. </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8cc_source.html#l00037">37</a> of file <a class="el" href="double__multi__vector_8cc_source.html">double_multi_vector.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00335">oomph::LinearAlgebraDistribution::communicator_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00329">oomph::LinearAlgebraDistribution::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00493">oomph::DistributableLinearAlgebraObject::distributed()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00481">oomph::DistributableLinearAlgebraObject::first_row()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00463">oomph::DistributableLinearAlgebraObject::nrow()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00469">oomph::DistributableLinearAlgebraObject::nrow_local()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00668">values()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a09b97b4d4c7d0945178e8bf190813cdd" name="a09b97b4d4c7d0945178e8bf190813cdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b97b4d4c7d0945178e8bf190813cdd">&#9670;&#160;</a></span>setup_doublevector_representation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::setup_doublevector_representation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compute the A-norm using the matrix at matrix_pt </p>
+<p>Setup the doublevector representation </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00988">988</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01015">Internal_doublevector</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00668">values()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00184">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00105">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00144">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00093">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00081">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00068">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00204">operator=()</a>, and <a class="el" href="double__multi__vector_8cc_source.html#l00037">redistribute()</a>.</p>
+
+</div>
+</div>
+<a id="a9a414941fb00967f670a1700bc87af7e" name="a9a414941fb00967f670a1700bc87af7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a414941fb00967f670a1700bc87af7e">&#9670;&#160;</a></span>shallow_build() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::shallow_build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1DoubleMultiVector.html">DoubleMultiVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Provide a (shallow) copy of the old vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00217">217</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00500">oomph::DistributableLinearAlgebraObject::distribution_built()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00105">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00144">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00243">shallow_build()</a>.</p>
+
+</div>
+</div>
+<a id="a2e870d0ff926823ec177b2c5bd1cdd0b" name="a2e870d0ff926823ec177b2c5bd1cdd0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e870d0ff926823ec177b2c5bd1cdd0b">&#9670;&#160;</a></span>shallow_build() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::shallow_build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build the storage for pointers to vectors with a given distribution, but do not populate the pointers. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00243">243</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>.</p>
+
+</div>
+</div>
+<a id="acd1ee1d155838e203a95fc70cdc1552c" name="acd1ee1d155838e203a95fc70cdc1552c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1ee1d155838e203a95fc70cdc1552c">&#9670;&#160;</a></span>shallow_build() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::DoubleMultiVector::shallow_build </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1LinearAlgebraDistribution.html">LinearAlgebraDistribution</a> *<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>dist_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build the storage for pointers to vectors with a given distribution, but do not populate the pointers. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00252">252</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01012">Built</a>, <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>, <a class="el" href="double__multi__vector_8h_source.html#l01009">Internal_values</a>, <a class="el" href="double__multi__vector_8h_source.html#l01005">Nvector</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a4efcbd36f9205c8b3eeaf735f6e2ff4d" name="a4efcbd36f9205c8b3eeaf735f6e2ff4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4efcbd36f9205c8b3eeaf735f6e2ff4d">&#9670;&#160;</a></span>values() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> ** oomph::DoubleMultiVector::values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function to the underlying values </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00668">668</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">redistribute()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="ab319ef072bdf91377bdbb3d9ebca7e72" name="ab319ef072bdf91377bdbb3d9ebca7e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab319ef072bdf91377bdbb3d9ebca7e72">&#9670;&#160;</a></span>values() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> ** oomph::DoubleMultiVector::values </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function to the underlying values (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00674">674</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="ae707e90f0ccfb85fe9493c4e5c35e4ff" name="ae707e90f0ccfb85fe9493c4e5c35e4ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae707e90f0ccfb85fe9493c4e5c35e4ff">&#9670;&#160;</a></span>values() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> * oomph::DoubleMultiVector::values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function to the i-th vector's data </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00680">680</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<a id="a169073705b89c67d5d28ee267629a57f" name="a169073705b89c67d5d28ee267629a57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a169073705b89c67d5d28ee267629a57f">&#9670;&#160;</a></span>values() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a> * oomph::DoubleMultiVector::values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>access function to the i-th vector's data (const version) </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l00686">686</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="double__multi__vector_8h_source.html#l01002">Values</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a86924834b6045e4824a6088e97e35cc8" name="a86924834b6045e4824a6088e97e35cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86924834b6045e4824a6088e97e35cc8">&#9670;&#160;</a></span>Built</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::DoubleMultiVector::Built</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>indicates that the vector has been built and is usable </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l01012">1012</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00413">built()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00364">initialise()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00252">shallow_build()</a>.</p>
+
+</div>
+</div>
+<a id="a668c57e389403b0d0c8bafdfa3f66b82" name="a668c57e389403b0d0c8bafdfa3f66b82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668c57e389403b0d0c8bafdfa3f66b82">&#9670;&#160;</a></span>Internal_doublevector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt;<a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a>&gt; oomph::DoubleMultiVector::Internal_doublevector</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Need a vector of DoubleVectors to interface with our linear solvers. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l01015">1015</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00692">doublevector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00698">doublevector()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00988">setup_doublevector_representation()</a>.</p>
+
+</div>
+</div>
+<a id="adf8fe4053c07e949f8e9cbea9e29e6e6" name="adf8fe4053c07e949f8e9cbea9e29e6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf8fe4053c07e949f8e9cbea9e29e6e6">&#9670;&#160;</a></span>Internal_values</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::DoubleMultiVector::Internal_values</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean flag to indicate whether the vector's data (values_pt) is owned by this vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l01009">1009</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">redistribute()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00252">shallow_build()</a>.</p>
+
+</div>
+</div>
+<a id="a21446924694c708c6a82cc908bf7846a" name="a21446924694c708c6a82cc908bf7846a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21446924694c708c6a82cc908bf7846a">&#9670;&#160;</a></span>Nvector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::DoubleMultiVector::Nvector</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of vectors. </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l01005">1005</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00364">initialise()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00211">nvector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00484">operator()()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">redistribute()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00252">shallow_build()</a>.</p>
+
+</div>
+</div>
+<a id="a562d13abfae53ad5b3e3c6020b4da0e5" name="a562d13abfae53ad5b3e3c6020b4da0e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a562d13abfae53ad5b3e3c6020b4da0e5">&#9670;&#160;</a></span>Values</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">double</a>** oomph::DoubleMultiVector::Values</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the local data, need a pointer to a pointer so that the individual vectors can be extracted </p>
+
+<p class="definition">Definition at line <a class="el" href="double__multi__vector_8h_source.html#l01002">1002</a> of file <a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="double__multi__vector_8h_source.html#l00281">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00323">build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00387">clear()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00809">dot()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00105">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00144">DoubleMultiVector()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00364">initialise()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00889">norm()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00484">operator()()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00642">operator*=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00549">operator+=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00596">operator-=()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00514">operator==()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00704">output()</a>, <a class="el" href="double__multi__vector_8cc_source.html#l00037">redistribute()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00217">shallow_build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00252">shallow_build()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00668">values()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00674">values()</a>, <a class="el" href="double__multi__vector_8h_source.html#l00680">values()</a>, and <a class="el" href="double__multi__vector_8h_source.html#l00686">values()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="double__multi__vector_8h_source.html">double_multi_vector.h</a></li>
+<li><a class="el" href="double__multi__vector_8cc_source.html">double_multi_vector.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:56
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

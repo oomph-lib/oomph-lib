@@ -1,0 +1,14 @@
+\doxysection{solid\+\_\+preconditioners.\+h File Reference}
+\hypertarget{solid__preconditioners_8h}{}\label{solid__preconditioners_8h}\index{solid\_preconditioners.h@{solid\_preconditioners.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner}}
+\begin{DoxyCompactList}\small\item\em The least-\/squares commutator (LSC; formerly BFBT) preconditioner. It uses blocks corresponding to the displacement/position and pressure unknowns, i.\+e. there are a total of 2x2 blocks, and all displacement/position components are treated as a single block of unknowns. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PressureBasedSolidExactPreconditioner}{oomph\+::\+Pressure\+Based\+Solid\+Exact\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em The exact solid preconditioner. This extracts 2x2 blocks (corresponding to the displacement/position and pressure unknowns) and uses these to build a single preconditioner matrix for testing purposes. Iterative solvers should converge in a single step if this is used. If it doesn\textquotesingle{}t something is wrong in the setup of the block matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

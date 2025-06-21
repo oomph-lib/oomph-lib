@@ -1,0 +1,69 @@
+\chapter{Example problem\+: Adaptive solution of the 2D advection diffusion equation with flux boundary conditions}
+\hypertarget{index}{}\label{index}\index{Example problem: Adaptive solution of the 2D advection diffusion equation with flux boundary conditions@{Example problem: Adaptive solution of the 2D advection diffusion equation with flux boundary conditions}}
+In this problem we will discuss the 2D advection-\/diffusion problem with Neumann (flux) boundary conditions, using {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation routines.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Two-\/dimensional advection-\/diffusion problem in a rectangular domain}} \end{center}  Solve  \[
+\mbox{Pe}\ \sum_{i=1}^2 w_i \left(x_1,x_2 \right) \frac{\partial u}{\partial
+x_i} = \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} + f(x_1,x_2), 
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the rectangular domain $D =\left\{ (x_1,x_2) \in 
+[0,1] \times [0,2]\right\}$. We split the domain boundary $
+\partial D $ into two parts so that $ \partial D = \partial D_{Neumann} \cup \partial D_{Dirichlet} $, where $ \partial D_{Neumann} 
+= \left\{ (x_1,x_2) | x_1=1, \ x_2\in [0,2] \right\} $. On $ \partial D_{Dirichlet}$ we apply the Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D_{Dirichlet}}=u_0,
+\ \ \ \ \ \ \ \ \ \ (2)
+\] where the function $ u_0 $ is given. On $ \partial D_{Neumann}$ we apply the Neumann conditions  \[
+\left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}} = 
+\left. \frac{\partial u}{\partial x_1}\right|_{\partial D_{Neumann}}
+=g_0,
+\ \ \ \ \ \ \ \ \ \ (3)
+\] where the function $ g_0 $ is given.   \\\cline{1-1}
+\end{longtabu}
+~\newline
+ \end{center} 
+
+As always, we validate the code by choosing the boundary data and the source functions such that  \[
+u(x_1,x_2) = \tanh(1-\alpha(x_1 \tan\Phi - x_2)),
+\ \ \ \ \ \ \ \ \  (4)
+\] is the exact solution of the problem. The plot below shows the numerical solution for $\Phi=45^\circ $, a Peclet number of $\mbox{Pe}= 200 $, and four different values of the "{}steepness parameter"{}, $ \alpha =  0.2,\ 5,\ 10 $ and $ 15 $.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{step_soln}
+\doxyfigcaption{Animation of the adaptive solution for various values of the \`{}steepness parameter\textquotesingle{}. }
+\end{DoxyImage}
+
+
+As in the \href{../../two_d_adv_diff_adapt/html/index.html}{\texttt{ example with Dirichlet boundary conditions}}, the unforced case is a lot more interesting. The plot below shows the result for a zero source function $ f \equiv 0 $, Dirichlet boundary conditions determined from the "{}exact solution"{} of the forced problem for $ \alpha = 15$, and a prescribed flux of $ g_0 = -1 $ on $ \partial D_{Neumann}$.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{no_source}
+\doxyfigcaption{Plot of the adaptive solution of the unforced problem. }
+\end{DoxyImage}
+
+
+Along $ \partial D_{Dirichlet}$, the value of $ u $ is enforced by the Dirichlet boundary condition (2) and, as in the \href{../../two_d_adv_diff_adapt/html/index.html}{\texttt{ previous example}}, the "{}wind"{} either sweeps this value into the interior of the domain or creates a sharp boundary layer within which the solution that is "{}swept"{} along from the interior adjusts itself to the prescribed boundary value. Along $ \partial D_{Neumann}$, the flux boundary condition (3) imposes the normal derivative of the solution. This boundary condition is much "{}softer"{} than the Dirichlet condition and does not create boundary layers that are as sharp as the ones that develop on $ \partial D_{Dirichlet}$.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_code}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_code}
+The \href{../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/two_d_adv_diff_flux_bc.cc}{\texttt{ driver code}} for this problem is so similar to the \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ corresponding Poisson problem}} that we do not list it here. The modifications are the same as those discussed in the \href{../../two_d_adv_diff_adapt/html/index.html}{\texttt{ advection diffusion problem with Dirichlet boundary conditions\+:}} We have to specify the wind function and the Peclet number.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/advection_diffusion/two_d_adv_diff_flux_bc/two_d_adv_diff_flux_bc.cc}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

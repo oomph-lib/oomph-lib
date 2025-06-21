@@ -1,0 +1,193 @@
+\doxysection{oomph\+::Womersley\+Outflow\+Impedance\+Tube\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube}{}\label{classoomph_1_1WomersleyOutflowImpedanceTube}\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
+
+
+Womersley\+Impedance\+Tube that attaches itself to the outflow of a Navier-\/\+Stokes mesh.  
+
+
+
+
+{\ttfamily \#include $<$womersley\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Womersley\+Outflow\+Impedance\+Tube\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1WomersleyOutflowImpedanceTube}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_a43c6028b6a11ae3c73b26271f0176c58}{Womersley\+Outflow\+Impedance\+Tube}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{fixed\+\_\+coordinate}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{w\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass length and mesh of face elements that are attached to the outflow cross-\/section of the Navier Stokes mesh to constructor of underlying base class. Also specify the coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is constant in the outflow cross-\/section and the velocity component (in terms of the nodal index) that represents the outflow component -- the latter is used to automatically apply the boundary conditions for the Womersley problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175}{build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Implement pure virtual fct (defined in the base class \doxylink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}) that builds the mesh of Womersley elements (of the type specified by the template argument), using the specified timestepper. Also applies the boundary condition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a552fa003624cfb4e31da70f800f0669c}{Womersley\+Impedance\+Tube\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}, \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a329107c12ef8f97c5afd4e0ae5d67b70}{Prescribed\+Volume\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{prescribed\+\_\+volume\+\_\+flux\+\_\+fct\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify length of tube and pointer to function that specifies the prescribed volume flux. Outlet pressure is set to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a79e8b7fb0c3edb3956aef7cf7c8bf719}{Womersley\+Impedance\+Tube\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{length}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Specify length of tube and the pointer to the mesh of either Navier\+Stokes\+Impedance\+Traction\+Elements or Navier\+Stokes\+Flux\+Control\+Elements that are attached to the outflow cross-\/section of a (higher-\/dimensional) Navier Stokes mesh and provide the inflow into the Impedance\+Tube. Outlet pressure is set to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a645079067ae201f93c24a5fde55faaef}{p\+\_\+out}} ()
+\begin{DoxyCompactList}\small\item\em Access fct to outlet pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a8524aff02e221d6fd8d9cfe58c2ef596}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Set up the Womersley tubes so that a subsequent call to get\+\_\+response(...) computes the inlet pressure for the currently prescribed instantaneous flow rate. \doxylink{classoomph_1_1Steady}{Steady} version! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a912ef51e8ac9c44e80566126da7d591f}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}re\+\_\+st\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{q\+\_\+initial}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}time\+\_\+stepper\+\_\+pt=0)
+\begin{DoxyCompactList}\small\item\em Set up the Womersley tubes so that a subsequent call to get\+\_\+response(...) computes the inlet pressure for the currently prescribed instantaneous flow rate, assuming that at all previous times the tube conveyed steady, fully-\/developed flow with flowrate q\+\_\+initial. dt specifies the timestep for the subsequent time integration. Specify\+: Womersley number, (constant) timestep, the initial volume flux (from which the subsequent impulsive start is performed) and, optionally the pointer to the timestepper to be used in the Womersley elements (defaults to BDF$<$2$>$). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyProblem}{Womersley\+Problem}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a9f5fef3c305f7d04f63422d435e05b91}{womersley\+\_\+problem\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access to underlying Womersley problem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_ad5796e64a6f25944dc9be6489149f513}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&dt)
+\begin{DoxyCompactList}\small\item\em Shift history values to allow coputation of next timestep. Note\+: When used with a full Navier-\/\+Stokes problem this function must be called in actions\+\_\+before\+\_\+implicit\+\_\+timestep() \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_aa321d54eb9f818975854f8f3cc568256}{total\+\_\+volume\+\_\+flux\+\_\+into\+\_\+impedance\+\_\+tube}} ()
+\begin{DoxyCompactList}\small\item\em Compute total current volume flux into the "{}impedance tube"{} that provides the flow resistance (flux is either obtained from the function that specifies it externally or by by adding up the flux through all Navier\+Stokes\+Impedance\+Traction\+Elements in the mesh pointed to by the Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a62628115802f53da76c5e4f29de628c7}{get\+\_\+response}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p\+\_\+in}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dp\+\_\+in\+\_\+dq}})
+\begin{DoxyCompactList}\small\item\em Compute inlet pressure, p\+\_\+in, required to achieve the currently imposed, instantaneous volume flux q prescribed by \doxylink{classoomph_1_1WomersleyImpedanceTubeBase_aa321d54eb9f818975854f8f3cc568256}{total\+\_\+volume\+\_\+flux\+\_\+into\+\_\+impedance\+\_\+tube()}, and its derivative, dp\+\_\+in/dq. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase}{oomph\+::\+Template\+Free\+Womersley\+Impedance\+Tube\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase_a52044dbd661e704066760426547fc3e8}{Template\+Free\+Womersley\+Impedance\+Tube\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase_a534a6daaac837e88cdb05961c90d636b}{\texorpdfstring{$\sim$}{\string~}\+Template\+Free\+Womersley\+Impedance\+Tube\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_aaed332bd590c1d300cd796a799ae9db8}{Fixed\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em The coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is constant in the outflow cross-\/section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df8342d00c65a16d79af35c49ad1}{W\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em The velocity component (in terms of the nodal index) that represents the outflow component -- the latter is used to automatically apply the boundary conditions for the Womersley problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{typedef}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a329107c12ef8f97c5afd4e0ae5d67b70}{Prescribed\+Volume\+Flux\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&time)
+\begin{DoxyCompactList}\small\item\em Function pointer to fct that prescribes volume flux q=fct(t) -- mainly used for validation purposes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase}{oomph\+::\+Template\+Free\+Womersley\+Impedance\+Tube\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TemplateFreeWomersleyImpedanceTubeBase_a37b438da1f862ccadbdb80cf8258a781}{Zero}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Zero! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a64f2f3eeb09a5637b32661baab3ac1e4}{precompute\+\_\+aux\+\_\+integrals}} ()
+\begin{DoxyCompactList}\small\item\em Precompute auxiliary integrals required for the computation of the Jacobian in the \doxylink{classoomph_1_1NavierStokesImpedanceTractionElement}{Navier\+Stokes\+Impedance\+Traction\+Element}. Also pass the pointer to the pre-\/computed integrals to the elements in the Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt so they can refer to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a3be3a17477e68ee912699b1cc8749ee7}{Length}}
+\begin{DoxyCompactList}\small\item\em Length of the tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a4f6f0c9043ea66a5b0c3a623cf1e7354}{Dp\+\_\+in\+\_\+dq}}
+\begin{DoxyCompactList}\small\item\em Derivative of inflow pressure w.\+r.\+t. instantaenous volume flux (Note\+: Can be pre-\/computed) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a7363d921cd306353eae884b9cfe5c8e9}{Current\+\_\+volume\+\_\+flux\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to double that specifies the currently imposed instantaneous volume flux into the impedance tube. This is used to communicate with the Womersley elements which require access to the flux via a pointer to a double. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyProblem}{Womersley\+Problem}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_aaecc70e3f205dc58f59c6f9a7ddda0ac}{Womersley\+\_\+problem\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to Womersley problem that determines the pressure gradient along the tube. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_afa4f6e203c33d02e82a92986b1aeee0d}{P\+\_\+out}}
+\begin{DoxyCompactList}\small\item\em Outlet pressure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a329107c12ef8f97c5afd4e0ae5d67b70}{Prescribed\+Volume\+Flux\+Fct\+Pt}} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_ae7d57d4ab999bc30db552a265fbadf92}{Prescribed\+\_\+volume\+\_\+flux\+\_\+fct\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to function that specifies the prescribed volume flux. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a59b41acf37d7bfce3c1a8676304915d7}{Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the mesh of Navier\+Stokes\+Impedance\+Traction\+Elements that are attached to the outflow cross-\/section of the higher-\/dimensional Navier Stokes mesh and provide the inflow into the Impedance tube. \end{DoxyCompactList}\item 
+std\+::map$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_abf66368875ede8bcb714250328bfc080}{Aux\+\_\+integral\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to auxiliary integral, containing the derivative of the total volume flux through the outflow boundary of the (higher-\/dimensional) Navier-\/\+Stokes mesh w.\+r.\+t. to the discrete (global) (velocity) degrees of freedom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$\newline
+class oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$}
+Womersley\+Impedance\+Tube that attaches itself to the outflow of a Navier-\/\+Stokes mesh. 
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01826}{1826}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_a43c6028b6a11ae3c73b26271f0176c58}\label{classoomph_1_1WomersleyOutflowImpedanceTube_a43c6028b6a11ae3c73b26271f0176c58} 
+\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!WomersleyOutflowImpedanceTube@{WomersleyOutflowImpedanceTube}}
+\index{WomersleyOutflowImpedanceTube@{WomersleyOutflowImpedanceTube}!oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
+\doxysubsubsection{\texorpdfstring{WomersleyOutflowImpedanceTube()}{WomersleyOutflowImpedanceTube()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Womersley\+Outflow\+Impedance\+Tube (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{length,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}}]{navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{fixed\+\_\+coordinate,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{w\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass length and mesh of face elements that are attached to the outflow cross-\/section of the Navier Stokes mesh to constructor of underlying base class. Also specify the coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is constant in the outflow cross-\/section and the velocity component (in terms of the nodal index) that represents the outflow component -- the latter is used to automatically apply the boundary conditions for the Womersley problem. 
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01839}{1839}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175}\label{classoomph_1_1WomersleyOutflowImpedanceTube_a1f6e2872ee8b1cb161ffe3f8a04cf175} 
+\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!build\_mesh\_and\_apply\_boundary\_conditions@{build\_mesh\_and\_apply\_boundary\_conditions}}
+\index{build\_mesh\_and\_apply\_boundary\_conditions@{build\_mesh\_and\_apply\_boundary\_conditions}!oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh\_and\_apply\_boundary\_conditions()}{build\_mesh\_and\_apply\_boundary\_conditions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implement pure virtual fct (defined in the base class \doxylink{classoomph_1_1WomersleyImpedanceTubeBase}{Womersley\+Impedance\+Tube\+Base}) that builds the mesh of Womersley elements (of the type specified by the template argument), using the specified timestepper. Also applies the boundary condition. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1WomersleyImpedanceTubeBase_a746f8fe8de207bff29af109dc486e828}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01854}{1854}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{womersley__elements_8h_source_l01871}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+Fixed\+\_\+coordinate}}, \mbox{\hyperlink{womersley__elements_8h_source_l01456}{oomph\+::\+Womersley\+Impedance\+Tube\+Base$<$ ELEMENT, DIM $>$\+::\+Navier\+\_\+stokes\+\_\+outflow\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{womersley__elements_8h_source_l01877}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::\+W\+\_\+index}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_aaed332bd590c1d300cd796a799ae9db8}\label{classoomph_1_1WomersleyOutflowImpedanceTube_aaed332bd590c1d300cd796a799ae9db8} 
+\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!Fixed\_coordinate@{Fixed\_coordinate}}
+\index{Fixed\_coordinate@{Fixed\_coordinate}!oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
+\doxysubsubsection{\texorpdfstring{Fixed\_coordinate}{Fixed\_coordinate}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+Fixed\+\_\+coordinate\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The coordinate (in the higher-\/dimensional Navier-\/\+Stokes mesh) that is constant in the outflow cross-\/section. 
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01871}{1871}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l01854}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions()}}.
+
+\Hypertarget{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df8342d00c65a16d79af35c49ad1}\label{classoomph_1_1WomersleyOutflowImpedanceTube_ab695df8342d00c65a16d79af35c49ad1} 
+\index{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}!W\_index@{W\_index}}
+\index{W\_index@{W\_index}!oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$@{oomph::WomersleyOutflowImpedanceTube$<$ ELEMENT, DIM $>$}}
+\doxysubsubsection{\texorpdfstring{W\_index}{W\_index}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} ELEMENT , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1WomersleyOutflowImpedanceTube}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube}}$<$ ELEMENT, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{DIM}} $>$\+::\+W\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The velocity component (in terms of the nodal index) that represents the outflow component -- the latter is used to automatically apply the boundary conditions for the Womersley problem. 
+
+
+
+Definition at line \mbox{\hyperlink{womersley__elements_8h_source_l01877}{1877}} of file \mbox{\hyperlink{womersley__elements_8h_source}{womersley\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{womersley__elements_8h_source_l01854}{oomph\+::\+Womersley\+Outflow\+Impedance\+Tube$<$ ELEMENT, DIM $>$\+::build\+\_\+mesh\+\_\+and\+\_\+apply\+\_\+boundary\+\_\+conditions()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{womersley__elements_8h}{womersley\+\_\+elements.\+h}}\end{DoxyCompactItemize}

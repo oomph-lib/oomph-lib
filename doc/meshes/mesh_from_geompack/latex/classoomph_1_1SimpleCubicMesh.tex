@@ -1,0 +1,349 @@
+\doxysection{oomph\+::Simple\+Cubic\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1SimpleCubicMesh}{}\label{classoomph_1_1SimpleCubicMesh}\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+
+
+Simple cubic 3D Brick mesh class.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+cubic\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Simple\+Cubic\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.046783cm]{classoomph_1_1SimpleCubicMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a6732b9fc1cd2e98929158fc300b5b0c7}{Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ly}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{lz}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a22d32a0d85ab3ec9ac3e52cad0bb81d7}{Simple\+Cubic\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{xmax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ymax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zmin}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{zmax}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}{nx}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in x directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}{ny}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}} () \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for number of elements in y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aea141bf600aaed7c7c9ccfa3f4f1edfc}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aad51fb31a4f31f2681740793a07594e9}{Nx}}
+\begin{DoxyCompactList}\small\item\em Number of elements in x direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a084445d7cbea1c3d1d67739934bbd6ec}{Ny}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a370e4597208fa51bca60750ae1e5acd4}{Nz}}
+\begin{DoxyCompactList}\small\item\em Number of elements in y direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_ad04c180e97b51e795d79759916006d0f}{Xmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_afdfcb28e93c910a57b9c6ab116f5fd2f}{Xmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of x coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a7a004fc52edde081924073c49b0dd853}{Ymin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a7933aa6e3d1755d6a5fbcc2a16af79a7}{Ymax}}
+\begin{DoxyCompactList}\small\item\em Minimum value of y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_af01c08e1e33360eaa2102d0bebb11bcd}{Zmin}}
+\begin{DoxyCompactList}\small\item\em Minimum value of z coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_aec11ab3ae84b1ba658024d833b7eafbf}{Zmax}}
+\begin{DoxyCompactList}\small\item\em Maximum value of z coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$}
+Simple cubic 3D Brick mesh class. 
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00046}{46}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a6732b9fc1cd2e98929158fc300b5b0c7}\label{classoomph_1_1SimpleCubicMesh_a6732b9fc1cd2e98929158fc300b5b0c7} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!SimpleCubicMesh@{SimpleCubicMesh}}
+\index{SimpleCubicMesh@{SimpleCubicMesh}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleCubicMesh()}{SimpleCubicMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Simple\+Cubic\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{lz,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass number of elements in the x, y, and z directions, and the corresponding dimensions. Assume that the back lower left corner is located at (0,0,0) Timestepper defaults to Steady. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00052}{52}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__cubic__mesh_8template_8cc_source_l00043}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a22d32a0d85ab3ec9ac3e52cad0bb81d7}\label{classoomph_1_1SimpleCubicMesh_a22d32a0d85ab3ec9ac3e52cad0bb81d7} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!SimpleCubicMesh@{SimpleCubicMesh}}
+\index{SimpleCubicMesh@{SimpleCubicMesh}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{SimpleCubicMesh()}{SimpleCubicMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Simple\+Cubic\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nx,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{ny,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \&}]{nz,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{xmin,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{xmax,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ymin,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{ymax,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zmin,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \&}]{zmax,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass the number of elements in the x,y and z directions and the correspoding minimum and maximum values of the coordinates in each direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00079}{79}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__cubic__mesh_8template_8cc_source_l00043}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1SimpleCubicMesh_aea141bf600aaed7c7c9ccfa3f4f1edfc}\label{classoomph_1_1SimpleCubicMesh_aea141bf600aaed7c7c9ccfa3f4f1edfc} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
+\index{build\_mesh@{build\_mesh}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Generic mesh construction function\+: contains all the hard work. 
+
+Generic mesh construction. This function contains all the details of the mesh generation process, including all the tedious loops, counting spacing and boundary functions. 
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8template_8cc_source_l00043}{43}} of file \mbox{\hyperlink{simple__cubic__mesh_8template_8cc_source}{simple\+\_\+cubic\+\_\+mesh.\+template.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00052}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Simple\+Cubic\+Mesh()}}, and \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00079}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Simple\+Cubic\+Mesh()}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95}\label{classoomph_1_1SimpleCubicMesh_a1a147873325b08e1715828d500cd4d95} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!nx@{nx}}
+\index{nx@{nx}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nx()}{nx()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in x directions. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00107}{107}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00126}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Nx}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20}\label{classoomph_1_1SimpleCubicMesh_a860fc1de52fdb189cbc64b0ca13efc20} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!ny@{ny}}
+\index{ny@{ny}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{ny()}{ny()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::ny (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in y directions. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00113}{113}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00129}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Ny}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}\label{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!nz@{nz}}
+\index{nz@{nz}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{nz()}{nz()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::nz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function for number of elements in y directions. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00119}{119}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00132}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::\+Nz}}.
+
+
+
+Referenced by \mbox{\hyperlink{quarter__pipe__mesh_8h_source_l00211}{oomph\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Quarter\+Pipe\+Mesh()}}, \mbox{\hyperlink{quarter__pipe__mesh_8template_8cc_source_l00040}{oomph\+::\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Pipe\+Mesh()}}, and \mbox{\hyperlink{quarter__pipe__mesh_8h_source_l00120}{oomph\+::\+Refineable\+Quarter\+Pipe\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Pipe\+Mesh()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1SimpleCubicMesh_aad51fb31a4f31f2681740793a07594e9}\label{classoomph_1_1SimpleCubicMesh_aad51fb31a4f31f2681740793a07594e9} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Nx@{Nx}}
+\index{Nx@{Nx}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nx}{Nx}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Nx\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in x direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00126}{126}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00107}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::nx()}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a084445d7cbea1c3d1d67739934bbd6ec}\label{classoomph_1_1SimpleCubicMesh_a084445d7cbea1c3d1d67739934bbd6ec} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Ny@{Ny}}
+\index{Ny@{Ny}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ny}{Ny}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Ny\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in y direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00129}{129}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00113}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::ny()}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a370e4597208fa51bca60750ae1e5acd4}\label{classoomph_1_1SimpleCubicMesh_a370e4597208fa51bca60750ae1e5acd4} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Nz@{Nz}}
+\index{Nz@{Nz}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Nz}{Nz}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Nz\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of elements in y direction. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00132}{132}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00119}{oomph\+::\+Simple\+Cubic\+Mesh$<$ ELEMENT $>$\+::nz()}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_afdfcb28e93c910a57b9c6ab116f5fd2f}\label{classoomph_1_1SimpleCubicMesh_afdfcb28e93c910a57b9c6ab116f5fd2f} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Xmax@{Xmax}}
+\index{Xmax@{Xmax}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xmax}{Xmax}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Xmax\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum value of x coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00138}{138}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_ad04c180e97b51e795d79759916006d0f}\label{classoomph_1_1SimpleCubicMesh_ad04c180e97b51e795d79759916006d0f} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Xmin@{Xmin}}
+\index{Xmin@{Xmin}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Xmin}{Xmin}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Xmin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum value of x coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00135}{135}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a7933aa6e3d1755d6a5fbcc2a16af79a7}\label{classoomph_1_1SimpleCubicMesh_a7933aa6e3d1755d6a5fbcc2a16af79a7} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Ymax@{Ymax}}
+\index{Ymax@{Ymax}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ymax}{Ymax}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Ymax\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum value of y coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00144}{144}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_a7a004fc52edde081924073c49b0dd853}\label{classoomph_1_1SimpleCubicMesh_a7a004fc52edde081924073c49b0dd853} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Ymin@{Ymin}}
+\index{Ymin@{Ymin}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Ymin}{Ymin}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Ymin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum value of y coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00141}{141}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_aec11ab3ae84b1ba658024d833b7eafbf}\label{classoomph_1_1SimpleCubicMesh_aec11ab3ae84b1ba658024d833b7eafbf} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Zmax@{Zmax}}
+\index{Zmax@{Zmax}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zmax}{Zmax}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Zmax\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Maximum value of z coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00150}{150}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+\Hypertarget{classoomph_1_1SimpleCubicMesh_af01c08e1e33360eaa2102d0bebb11bcd}\label{classoomph_1_1SimpleCubicMesh_af01c08e1e33360eaa2102d0bebb11bcd} 
+\index{oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}!Zmin@{Zmin}}
+\index{Zmin@{Zmin}!oomph::SimpleCubicMesh$<$ ELEMENT $>$@{oomph::SimpleCubicMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{Zmin}{Zmin}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{double}} \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{oomph\+::\+Simple\+Cubic\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Zmin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Minimum value of z coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{simple__cubic__mesh_8h_source_l00147}{147}} of file \mbox{\hyperlink{simple__cubic__mesh_8h_source}{simple\+\_\+cubic\+\_\+mesh.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{single__layer__cubic__spine__mesh_8h_source_l00066}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{simple__cubic__mesh_8h}{simple\+\_\+cubic\+\_\+mesh.\+h}}\item 
+\mbox{\hyperlink{simple__cubic__mesh_8template_8cc}{simple\+\_\+cubic\+\_\+mesh.\+template.\+cc}}\end{DoxyCompactItemize}

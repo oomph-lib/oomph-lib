@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: Example problem: The deformation of an elastic strip by a periodic traction</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Example problem: The deformation of an elastic strip by a periodic traction </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>This is our first linear elasticity example problem. We discuss the non-dimensionalisation of the governing equations and their implementation in <code>oomph-lib</code>, and then demonstrate the solution of a 2D problem: the deformation of an elastic strip by a periodic traction.</p>
+<center> <table border="1," width="500px">
+<tr>
+<td bgcolor="cornsilk"><center> <b>Acknowledgement:</b> This tutorial and the associated driver code was developed jointly with David Rutter. </center>   </td></tr>
+</table>
+</center><hr  />
+ <hr  />
+<p> <br  />
+</p>
+<h1><a class="anchor" id="equation"></a>
+The governing equations</h1>
+<p>The figure below shows a sketch of a general elasticity problem. A linearly elastic solid body occupies the domain <img class="formulaInl" alt="$ V $" src="form_0.png"/> and is loaded by a body force <img class="formulaInl" alt="$ {\bf F}^* $" src="form_1.png"/> and by a surface traction <img class="formulaInl" alt="$ {\bf t}^* $" src="form_2.png"/> which is applied along part of its boundary, <img class="formulaInl" alt="$ A_{\rm tract} $" src="form_3.png"/>. The displacement is prescribed along the remainder of the boundary, <img class="formulaInl" alt="$ A_{\rm displ} $" src="form_4.png"/>, where <img class="formulaInl" alt="$ \partial V = A_{\rm tract} \cup  A_{\rm displ} $" src="form_5.png"/>.</p>
+<div class="image">
+<img src="Solid_boundary_conds.gif" alt=""/>
+<div class="caption">
+Sketch of a general elasticity problem: A linearly elastic body is loaded by a body force and is exposed to a prescribed traction along part of its boundary while the displacement is prescribed along the remainder of the boundary. </div></div>
+ <p>We adopt an Eulerian approach and describe the deformation in terms of the displacement field <img class="formulaInl" alt="$ {\bf u}^*\left( x_i^*,t^* \right) $" src="form_6.png"/> where <img class="formulaInl" alt="$ x_i^* $" src="form_7.png"/> and <img class="formulaInl" alt="$ t^* $" src="form_8.png"/> are the spatial coordinates and time, respectively. Throughout this document we will use index notation and the summation convention, and use asterisks to distinguish dimensional quantities from their non-dimensional counterparts. <br  />
+ Denoting the density of the body by <img class="formulaInl" alt="$ \rho $" src="form_9.png"/>, the deformation is governed by the Cauchy equations, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \tau_{ij}^*}{\partial x_j^*} + \rho F_i^*
+=
+\rho \frac{\partial^2 u_i^*}{\partial t^{2*}},
+\]" src="form_10.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ \tau_{ij}^* $" src="form_11.png"/> is the Cauchy stress tensor which, for a linearly elastic solid, is given by </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^* = E_{ijkl}^* \ e_{kl},
+\]" src="form_12.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ e_{kl} $" src="form_13.png"/> is the strain tensor, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+e_{ij} = \frac{1}{2} 
+\left( \frac{\partial u_i^*}{\partial x_j^*}+
+       \frac{\partial u_j^*}{\partial x_i^*}\right).
+\]" src="form_14.png"/>
+</p>
+ </center><p> <img class="formulaInl" alt="$ E_{ijkl} $" src="form_15.png"/> is the 4th order elasticity tensor, which for a homogeneous and isotropic solid is </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+E_{ijkl}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \delta_{ij}
+ \delta_{kl} + \delta_{ik} \delta_{jl} \right),
+\]" src="form_16.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ E $" src="form_17.png"/> is Young's modulus, <img class="formulaInl" alt="$ \nu $" src="form_18.png"/> is the Poisson ratio and <img class="formulaInl" alt="$ \delta_{ij} $" src="form_19.png"/> is the Kronecker delta. Thus the Cauchy stress is given in terms of the displacement derivatives by </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^* = \frac{E}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k^*}{\partial x_k^*} + 
+\frac{1}{2}\left(\frac{\partial u_i^*}{\partial x_j^*}+
+\frac{\partial u_j^*}{\partial x_i^*} \right) \right).
+\]" src="form_20.png"/>
+</p>
+ </center><p>We non-dimensionalise the equations, using a problem specific reference length, <img class="formulaInl" alt="$ {\cal L} $" src="form_21.png"/>, and a timescale <img class="formulaInl" alt="$ {\cal T} $" src="form_22.png"/>, and use Young's modulus to non-dimensionalise the body force and the stress, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij}^* = E \, \tau_{ij}, \qquad
+x_i^* = {\cal L}\, x_i, \qquad
+u_i^* = {\cal L}\, u_i,
+\]" src="form_23.png"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+t^* = {\cal T}\, t, \qquad
+F_i^* = \frac{E}{\rho \cal L} \, F_i. \qquad
+\]" src="form_24.png"/>
+</p>
+ </center><p>The non-dimensional form of the Cauchy equations is then given by </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i
+=
+\Lambda^2  \frac{\partial^2 u_i}{\partial t^2},
+\ \ \ \ \ \ \ \ \ \ (1)
+\]" src="form_25.png"/>
+</p>
+ </center><p> where </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\tau_{ij} = \frac{1}{1+\nu} \left(\frac{\nu}{1-2\nu} \ 
+\delta_{ij} \ \frac{\partial u_k}{\partial x_k} + 
+\frac{1}{2} \left(\frac{\partial u_i}{\partial x_j}+
+\frac{\partial u_j}{\partial x_i} \right) \right).
+\ \ \ \ \ \ \ \ \ \ (2)
+\]" src="form_26.png"/>
+</p>
+ </center><p> The parameter </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\Lambda = \frac{{\cal L} \sqrt{\frac{\rho}{E}} }{\cal T},
+\]" src="form_27.png"/>
+</p>
+ </center><p> is the ratio of the elastic body's intrinsic timescale, <img class="formulaInl" alt="$ {\cal L} \sqrt{\frac{\rho}{E}} $" src="form_28.png"/>, to the problem-specific timescale, <img class="formulaInl" alt="$ {\cal T} $" src="form_22.png"/>, that we used to non-dimensionalise time.</p>
+<p>The displacement constraints provide a Dirichlet condition for the displacements,  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_i = u_i^{[\rm prescribed]} \ \ \ \ \ \ \mbox{on $A_{\mathrm{displ}}$},
+
+\]" src="form_29.png"/>
+</p>
+<p> while the traction boundary conditions require that  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+t_i = \tau_{ij} n_j \ \ \ \ \ \ \mbox{on $A_{\mathrm{tract}},$}
+\]" src="form_30.png"/>
+</p>
+<p> where the <img class="formulaInl" alt="$ n_j $" src="form_31.png"/> are the components of the outer unit normal to the boundary.</p>
+<p>In this tutorial we only consider steady problems for which the equations reduce to </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i = 0.
+\]" src="form_32.png"/>
+</p>
+ </center><hr  />
+ <hr  />
+<h1><a class="anchor" id="element_types"></a>
+Implementation</h1>
+<hr  />
+<h2><a class="anchor" id="el"></a>
+The elements</h2>
+<p>Within <code>oomph-lib</code>, the non-dimensional version of the <code>DIM</code>-dimensional Cauchy equations (1) with the constitutive equations (2) are implemented in the <code>LinearElasticityEquations&lt;DIM&gt;</code> equations class. Following our usual approach, discussed in the <a href="../../../quick_guide/html/index.html">(Not-So-)Quick Guide,</a> this equation class is then combined with a geometric finite element to form a fully-functional finite element. For instance, the combination of the <code>LinearElasticityEquations&lt;2&gt;</code> class with the geometric finite element <code>QElement&lt;2,3&gt;</code> yields a nine-node quadrilateral linear elasticity element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2\quad [\mbox{and }3],
+\]" src="form_33.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$ N^{(E)} $" src="form_34.png"/> is the number of nodes in the element, <img class="formulaInl" alt="$ X^{(E)}_{ij} $" src="form_35.png"/> is the <img class="formulaInl" alt="$ i $" src="form_36.png"/>-th global (Eulerian) coordinate of the <img class="formulaInl" alt="$ j $" src="form_37.png"/>-th <code>Node</code> in the element, and the <img class="formulaInl" alt="$ \psi_j $" src="form_38.png"/> are the element's shape functions, defined in the geometric finite element.</p>
+<p>The cartesian displacement components <img class="formulaInl" alt="$ u_1, $" src="form_39.png"/> <img class="formulaInl" alt="$ u_2, $" src="form_40.png"/> <br  />
+ [and <img class="formulaInl" alt="$ u_3 $" src="form_41.png"/>] are stored as nodal values, and the shape functions are used to interpolate the displacements as </p><center>  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,2\quad [\mbox{and }3],
+\]" src="form_42.png"/>
+</p>
+ </center><p> where <img class="formulaInl" alt="$  U^{(E)}_{ij} $" src="form_43.png"/> is the <img class="formulaInl" alt="$ i $" src="form_36.png"/>-th displacement component at the <img class="formulaInl" alt="$ j $" src="form_37.png"/>-th <code>Node</code> in the element. Nodal values of the displacement components are accessible via the access function</p>
+<div class="fragment"><div class="line">LinearElasticityEquations&lt;DIM&gt;::u(i,j)</div>
+</div><!-- fragment --><p>which returns the <img class="formulaInl" alt="$ i $" src="form_36.png"/>-th displacement component stored at the element's <img class="formulaInl" alt="$ j $" src="form_37.png"/>-th <code>Node</code>.</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="example"></a>
+The example problem</h1>
+<p>To illustrate the solution of the steady equations of linear elasticity, we consider the 2D problem shown in the sketch below.</p>
+<center> <table class="doxtable">
+<tr>
+<td><center> <b>The problem.</b> </center> <div class="image">
+<img src="attempt3.gif" alt=""/>
+<div class="caption">
+Infinitely long strip loaded by a periodic traction. </div></div>
+  Solve  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
+ \ \ \ \ \ \ \ \ \ \ (3)
+\]" src="form_44.png"/>
+</p>
+ in the domain <img class="formulaInl" alt="$ D = \{x_1 \in [-\infty,+\infty], x_2 \in [0,L_y]\} $" src="form_45.png"/>, subject to the Dirichlet boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{u}\right|_{x_2 = 0}=(0,0),
+\ \ \ \ \ \ \ \ \ \ (4)
+\]" src="form_46.png"/>
+</p>
+ on the bottom boundary, the Neumann (traction) boundary conditions  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. \mathbf{t}\right|_{x_2 = L_y}=\left(-A \cos{\left(\frac{2 \pi x_1}{L_x}\right)}, -A \sin{\left(\frac{2 \pi x_1}{L_x}\right)}\right),
+\ \ \ \ \ \ \ \ \ \ (5)
+\]" src="form_47.png"/>
+</p>
+ on the top boundary, and symmetry conditions at <img class="formulaInl" alt="$ x_1 = 0 $" src="form_48.png"/> and <img class="formulaInl" alt="$ x_1 = L_x $" src="form_49.png"/>,  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+\left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
+\]" src="form_50.png"/>
+</p>
+   </td></tr>
+</table>
+<br  />
+ </center><p>We note that for <img class="formulaInl" alt="$ L_y \to \infty $" src="form_51.png"/> the problem converges to the analytical solution.  </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_1^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\cos{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]" src="form_52.png"/>
+</p>
+  <p class="formulaDsp">
+<img class="formulaDsp" alt="\[
+u_2^{[exact]} = -\frac{A(1+\nu)}{2 \pi} 
+\sin{\left(\frac{2 \pi x_1}{L_x}\right)} \exp{\left(2 \pi (x_2-L_y)\right)},
+\]" src="form_53.png"/>
+</p>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="results"></a>
+Results</h1>
+<p>The figure below shows a vector plot of the displacement field near the upper domain boundary for <img class="formulaInl" alt="$ L_x = 1 $" src="form_54.png"/> and <img class="formulaInl" alt="$ L_y=2 $" src="form_55.png"/>. <br  />
+ Note that we only discretised the infinite strip over one period of the applied, spatially-periodic surface traction, and imposed symmetry conditions on the left and right mesh boundaries.</p>
+<p>The plot shows that the displacements decay rapidly with distance from the loaded surface &ndash; as suggested by the analytical solution for the infinite depth case. This suggests that the computation could greatly benefit from the use of spatial adaptivity. This is indeed the case and is explored in <a href="../../refineable_periodic_load/html/index.html">another tutorial.</a></p>
+<div class="image">
+<img src="displ.gif" alt=""/>
+<div class="caption">
+Plot of the displacement field. </div></div>
+ <hr  />
+ <hr  />
+<h1><a class="anchor" id="namespace"></a>
+Global parameters and functions</h1>
+<p>As usual, we define all non-dimensional parameters in a namespace.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_namespace=================================================</span></div>
+<div class="line"><span class="comment">/// Namespace for global parameters</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceGlobal__Parameters.html">Global_Parameters</a></div>
+<div class="line">{<span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Amplitude of traction applied</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Amplitude</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Specify problem to be solved (boundary conditons for finite or</span></div>
+<div class="line"><span class="comment"> /// infinite domain).</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a3a5d4759509036a2650d5efde8e15d56">Finite</a>=<span class="keyword">false</span>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Define Poisson coefficient Nu</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a> = 0.3;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in x direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Lx</a> = 1.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Length of domain in y direction</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">double</span> <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Ly</a> = 2.0;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The elasticity tensor</span></div>
+<div class="line"><span class="comment"></span> IsotropicElasticityTensor <a class="code hl_function" href="namespaceGlobal__Parameters.html#a397f48e074d2589259ed5c6e4d89f948">E</a>(<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The exact solution for infinite depth case</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Parameters.html#a6e53a9e4370e8719e9091eff6b6a0c01">exact_solution</a>(<span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                     Vector&lt;double&gt; &amp;u)</div>
+<div class="line"> {</div>
+<div class="line">  u[0] = -<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Amplitude</a>*cos(2.0*MathematicalConstants::Pi*x[0]/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Lx</a>)*</div>
+<div class="line">        exp(2.0*MathematicalConstants::Pi*(x[1]-<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Ly</a>))/</div>
+<div class="line">        (2.0/(1.0+<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)*MathematicalConstants::Pi);</div>
+<div class="line">  u[1] = -<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Amplitude</a>*sin(2.0*MathematicalConstants::Pi*x[0]/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Lx</a>)*</div>
+<div class="line">        exp(2.0*MathematicalConstants::Pi*(x[1]-<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Ly</a>))/</div>
+<div class="line">        (2.0/(1.0+<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Nu</a>)*MathematicalConstants::Pi);</div>
+<div class="line"> }</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// The traction function</span></div>
+<div class="line"><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceGlobal__Parameters.html#a003c4c942a4c8b88b417f139fc5c637c">periodic_traction</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;time,</div>
+<div class="line">                       <span class="keyword">const</span> Vector&lt;double&gt; &amp;x,</div>
+<div class="line">                       <span class="keyword">const</span> Vector&lt;double&gt; &amp;n,</div>
+<div class="line">                       Vector&lt;double&gt; &amp;result)</div>
+<div class="line"> {</div>
+<div class="line">  result[0] = -<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Amplitude</a>*cos(2.0*MathematicalConstants::Pi*x[0]/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Lx</a>);</div>
+<div class="line">  result[1] = -<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Amplitude</a>*sin(2.0*MathematicalConstants::Pi*x[0]/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Lx</a>);</div>
+<div class="line"> }</div>
+<div class="line">} <span class="comment">// end_of_namespace</span></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html"><div class="ttname"><a href="namespaceGlobal__Parameters.html">Global_Parameters</a></div><div class="ttdoc">Namespace for global parameters.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00042">periodic_load.cc:43</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a003c4c942a4c8b88b417f139fc5c637c"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a003c4c942a4c8b88b417f139fc5c637c">Global_Parameters::periodic_traction</a></div><div class="ttdeci">void periodic_traction(const double &amp;time, const Vector&lt; double &gt; &amp;x, const Vector&lt; double &gt; &amp;n, Vector&lt; double &gt; &amp;result)</div><div class="ttdoc">The traction function.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00076">periodic_load.cc:76</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a184a9ddf15137a1b11ccf7dc790d697d"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a184a9ddf15137a1b11ccf7dc790d697d">Global_Parameters::Amplitude</a></div><div class="ttdeci">double Amplitude</div><div class="ttdoc">Amplitude of traction applied.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00045">periodic_load.cc:45</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a20fccdcfa2c15ad8b951b9ada3bb1661"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a20fccdcfa2c15ad8b951b9ada3bb1661">Global_Parameters::Nu</a></div><div class="ttdeci">double Nu</div><div class="ttdoc">Define Poisson coefficient Nu.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00052">periodic_load.cc:52</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a25a31b2de3f05ac457b62fc9fa999872"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Global_Parameters::Ly</a></div><div class="ttdeci">double Ly</div><div class="ttdoc">Length of domain in y direction.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00058">periodic_load.cc:58</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a397f48e074d2589259ed5c6e4d89f948"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a397f48e074d2589259ed5c6e4d89f948">Global_Parameters::E</a></div><div class="ttdeci">IsotropicElasticityTensor E(Nu)</div><div class="ttdoc">The elasticity tensor.</div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a3a5d4759509036a2650d5efde8e15d56"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a3a5d4759509036a2650d5efde8e15d56">Global_Parameters::Finite</a></div><div class="ttdeci">bool Finite</div><div class="ttdoc">Specify problem to be solved (boundary conditons for finite or infinite domain).</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00049">periodic_load.cc:49</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a6e53a9e4370e8719e9091eff6b6a0c01"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a6e53a9e4370e8719e9091eff6b6a0c01">Global_Parameters::exact_solution</a></div><div class="ttdeci">void exact_solution(const Vector&lt; double &gt; &amp;x, Vector&lt; double &gt; &amp;u)</div><div class="ttdoc">The exact solution for infinite depth case.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00064">periodic_load.cc:64</a></div></div>
+<div class="ttc" id="anamespaceGlobal__Parameters_html_a8a81b077f0a29b3468c576f56ecb1348"><div class="ttname"><a href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Global_Parameters::Lx</a></div><div class="ttdeci">double Lx</div><div class="ttdoc">Length of domain in x direction.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00055">periodic_load.cc:55</a></div></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="main"></a>
+The driver code</h1>
+<p>We start by setting the number of elements in each of the two coordinate directions before creating a <code>DocInfo</code> object to store the output directory.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_main======================================================</span></div>
+<div class="line"><span class="comment">/// Driver code for PeriodicLoad linearly elastic problem</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="periodic__load_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) </div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">// Number of elements in x-direction</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> nx=5;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of elements in y-direction (for (approximately) square elements)</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ny=unsigned(<span class="keywordtype">double</span>(nx)*<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Global_Parameters::Ly</a>/<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Global_Parameters::Lx</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set up doc info</span></div>
+<div class="line"> DocInfo doc_info;</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set output directory</span></div>
+<div class="line"> doc_info.set_directory(<span class="stringliteral">&quot;RESLT&quot;</span>);</div>
+<div class="ttc" id="aperiodic__load_8cc_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="periodic__load_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Driver code for PeriodicLoad linearly elastic problem.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00290">periodic_load.cc:290</a></div></div>
+</div><!-- fragment --><p> We build the problem using two-dimensional <code>QLinearElasticityElements</code>, solve using the <code>Problem::newton_solve()</code> function, and document the results.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Set up problem</span></div>
+<div class="line"> <a class="code hl_class" href="classPeriodicLoadProblem.html">PeriodicLoadProblem&lt;QLinearElasticityElement&lt;2,3&gt;</a> &gt; </div>
+<div class="line">  problem(nx,ny,<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a8a81b077f0a29b3468c576f56ecb1348">Global_Parameters::Lx</a>, <a class="code hl_variable" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872">Global_Parameters::Ly</a>);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Solve</span></div>
+<div class="line"> problem.newton_solve();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output the solution</span></div>
+<div class="line"> problem.doc_solution(doc_info);</div>
+<div class="line">  </div>
+<div class="line">} <span class="comment">// end_of_main</span></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html"><div class="ttname"><a href="classPeriodicLoadProblem.html">PeriodicLoadProblem</a></div><div class="ttdoc">Periodic loading problem.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00091">periodic_load.cc:92</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="problem"></a>
+The problem class</h1>
+<p>The <code>Problem</code> class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the "bulk" elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function <code>assign_traction_elements()</code>.</p>
+ <div class="fragment"><div class="line"><span class="comment">//===start_of_problem_class=============================================</span></div>
+<div class="line"><span class="comment">/// Periodic loading problem</span></div>
+<div class="line"><span class="comment">//======================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classPeriodicLoadProblem.html">PeriodicLoadProblem</a> : <span class="keyword">public</span> Problem</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Constructor: Pass number of elements in x and y directions </span></div>
+<div class="line"><span class="comment"> /// and lengths</span></div>
+<div class="line"><span class="comment"></span> <a class="code hl_class" href="classPeriodicLoadProblem.html">PeriodicLoadProblem</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny, </div>
+<div class="line">                     <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ly);</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update before solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#aad83601d810e4cc135f83c1308a0449b">actions_before_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Update after solve is empty</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#aad99d153549e1ec0b5504e486039ef5e">actions_after_newton_solve</a>() {}</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Doc the solution</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#ad414cf9a0b4a61de439e459f10e762c7">doc_solution</a>(DocInfo&amp; doc_info);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Allocate traction elements on the top surface</span></div>
+<div class="line"><span class="comment"></span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#ad850863c61c0055e230e6319d67905e2">assign_traction_elements</a>();</div>
+<div class="line"> <span class="comment"></span></div>
+<div class="line"><span class="comment"> /// Pointer to the bulk mesh</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classPeriodicLoadProblem.html#a120027bff23e2cd1f17f560c852533b6">Bulk_mesh_pt</a>;</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment"> /// Pointer to the mesh of traction elements</span></div>
+<div class="line"><span class="comment"></span> Mesh* <a class="code hl_variable" href="classPeriodicLoadProblem.html#a39b0b15487ae9aafc3d9e70b0e017325">Surface_mesh_pt</a>;</div>
+<div class="line"> </div>
+<div class="line">}; <span class="comment">// end_of_problem_class</span></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_a120027bff23e2cd1f17f560c852533b6"><div class="ttname"><a href="classPeriodicLoadProblem.html#a120027bff23e2cd1f17f560c852533b6">PeriodicLoadProblem::Bulk_mesh_pt</a></div><div class="ttdeci">Mesh * Bulk_mesh_pt</div><div class="ttdoc">Pointer to the bulk mesh.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00115">periodic_load.cc:115</a></div></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_a39b0b15487ae9aafc3d9e70b0e017325"><div class="ttname"><a href="classPeriodicLoadProblem.html#a39b0b15487ae9aafc3d9e70b0e017325">PeriodicLoadProblem::Surface_mesh_pt</a></div><div class="ttdeci">Mesh * Surface_mesh_pt</div><div class="ttdoc">Pointer to the mesh of traction elements.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00118">periodic_load.cc:118</a></div></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_aad83601d810e4cc135f83c1308a0449b"><div class="ttname"><a href="classPeriodicLoadProblem.html#aad83601d810e4cc135f83c1308a0449b">PeriodicLoadProblem::actions_before_newton_solve</a></div><div class="ttdeci">void actions_before_newton_solve()</div><div class="ttdoc">Update before solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00101">periodic_load.cc:101</a></div></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_aad99d153549e1ec0b5504e486039ef5e"><div class="ttname"><a href="classPeriodicLoadProblem.html#aad99d153549e1ec0b5504e486039ef5e">PeriodicLoadProblem::actions_after_newton_solve</a></div><div class="ttdeci">void actions_after_newton_solve()</div><div class="ttdoc">Update after solve is empty.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00104">periodic_load.cc:104</a></div></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_ad414cf9a0b4a61de439e459f10e762c7"><div class="ttname"><a href="classPeriodicLoadProblem.html#ad414cf9a0b4a61de439e459f10e762c7">PeriodicLoadProblem::doc_solution</a></div><div class="ttdeci">void doc_solution(DocInfo &amp;doc_info)</div><div class="ttdoc">Doc the solution.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00247">periodic_load.cc:247</a></div></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_ad850863c61c0055e230e6319d67905e2"><div class="ttname"><a href="classPeriodicLoadProblem.html#ad850863c61c0055e230e6319d67905e2">PeriodicLoadProblem::assign_traction_elements</a></div><div class="ttdeci">void assign_traction_elements()</div><div class="ttdoc">Allocate traction elements on the top surface.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00221">periodic_load.cc:221</a></div></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="constructor"></a>
+The problem constructor</h1>
+<p>Since this is a steady problem, the constructor is quite simple. We begin by building the meshes and pin the displacements on the appropriate boundaries. We then assign the boundary values for the displacements along the bottom boundary. We either set the displacements to zero or assign their values from the exact solution for the infinite depth case.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_constructor=============================================</span></div>
+<div class="line"><span class="comment">/// Problem constructor: Pass number of elements in coordinate</span><span class="comment"></span></div>
+<div class="line"><span class="comment">/// directions and size of domain.</span></div>
+<div class="line"><span class="comment"></span><span class="comment">//====================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><a class="code hl_function" href="classPeriodicLoadProblem.html#a66bf36608f2068374c09c73d9256edda">PeriodicLoadProblem&lt;ELEMENT&gt;::PeriodicLoadProblem</a></div>
+<div class="line">(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;nx, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;ny,</div>
+<div class="line"> <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;lx, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; ly)</div>
+<div class="line">{</div>
+<div class="line"> <span class="comment">//Now create the mesh with periodic boundary conditions in x direction</span></div>
+<div class="line"> <span class="keywordtype">bool</span> periodic_in_x=<span class="keyword">true</span>;</div>
+<div class="line"> Bulk_mesh_pt = </div>
+<div class="line">  <span class="keyword">new</span> RectangularQuadMesh&lt;ELEMENT&gt;(nx,ny,lx,ly,periodic_in_x);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">//Create the surface mesh of traction elements</span></div>
+<div class="line"> Surface_mesh_pt=<span class="keyword">new</span> Mesh;</div>
+<div class="line"> assign_traction_elements();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Set the boundary conditions for this problem: All nodes are</span></div>
+<div class="line"> <span class="comment">// free by default -- just pin &amp; set the ones that have Dirichlet </span></div>
+<div class="line"> <span class="comment">// conditions here</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> ibound=0;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> num_nod=Bulk_mesh_pt-&gt;nboundary_node(ibound);</div>
+<div class="line"> <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> inod=0;inod&lt;num_nod;inod++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Get pointer to node</span></div>
+<div class="line">   Node* nod_pt=Bulk_mesh_pt-&gt;boundary_node_pt(ibound,inod);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Pinned in x &amp; y at the bottom and set value</span></div>
+<div class="line">   nod_pt-&gt;pin(0);</div>
+<div class="line">   nod_pt-&gt;pin(1);</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Check which boundary conditions to set and set them</span></div>
+<div class="line">   <span class="keywordflow">if</span> (<a class="code hl_variable" href="namespaceGlobal__Parameters.html#a3a5d4759509036a2650d5efde8e15d56">Global_Parameters::Finite</a>)</div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Set the displacements to zero</span></div>
+<div class="line">      nod_pt-&gt;set_value(0,0);</div>
+<div class="line">      nod_pt-&gt;set_value(1,0);</div>
+<div class="line">     }</div>
+<div class="line">   <span class="keywordflow">else</span></div>
+<div class="line">     {</div>
+<div class="line">      <span class="comment">// Extract nodal coordinates from node:</span></div>
+<div class="line">      Vector&lt;double&gt; x(2);</div>
+<div class="line">      x[0]=nod_pt-&gt;x(0);</div>
+<div class="line">      x[1]=nod_pt-&gt;x(1);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Compute the value of the exact solution at the nodal point</span></div>
+<div class="line">      Vector&lt;double&gt; u(2);</div>
+<div class="line">      <a class="code hl_function" href="namespaceGlobal__Parameters.html#a6e53a9e4370e8719e9091eff6b6a0c01">Global_Parameters::exact_solution</a>(x,u);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Assign these values to the nodal values at this node</span></div>
+<div class="line">      nod_pt-&gt;set_value(0,u[0]);</div>
+<div class="line">      nod_pt-&gt;set_value(1,u[1]);</div>
+<div class="line">     };</div>
+<div class="line">  } <span class="comment">// end_loop_over_boundary_nodes</span></div>
+<div class="ttc" id="aclassPeriodicLoadProblem_html_a66bf36608f2068374c09c73d9256edda"><div class="ttname"><a href="classPeriodicLoadProblem.html#a66bf36608f2068374c09c73d9256edda">PeriodicLoadProblem::PeriodicLoadProblem</a></div><div class="ttdeci">PeriodicLoadProblem(const unsigned &amp;nx, const unsigned &amp;ny, const double &amp;lx, const double &amp;ly)</div><div class="ttdoc">Constructor: Pass number of elements in x and y directions and lengths.</div><div class="ttdef"><b>Definition</b> <a href="periodic__load_8cc_source.html#l00128">periodic_load.cc:129</a></div></div>
+</div><!-- fragment --><p> Next we pass a pointer to the elasticity tensor (stored in <code>Global_Physical_Variables::E</code>) to all elements.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Complete the problem setup to make the elements fully functional</span></div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Loop over the elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_el = Bulk_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_el;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a bulk element</span></div>
+<div class="line">   ELEMENT *el_pt = <span class="keyword">dynamic_cast&lt;</span>ELEMENT*<span class="keyword">&gt;</span>(Bulk_mesh_pt-&gt;element_pt(e));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Set the elasticity tensor</span></div>
+<div class="line">   el_pt-&gt;elasticity_tensor_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a397f48e074d2589259ed5c6e4d89f948">Global_Parameters::E</a>;</div>
+<div class="line">  }<span class="comment">// end loop over elements</span></div>
+</div><!-- fragment --><p> We loop over the traction elements and specify the applied traction.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Loop over the traction elements</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_traction =  Surface_mesh_pt-&gt;nelement();</div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> e=0;e&lt;n_traction;e++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Cast to a surface element</span></div>
+<div class="line">   LinearElasticityTractionElement&lt;ELEMENT&gt; *el_pt = </div>
+<div class="line">    <span class="keyword">dynamic_cast&lt;</span>LinearElasticityTractionElement&lt;ELEMENT&gt;* <span class="keyword">&gt;</span></div>
+<div class="line">    (Surface_mesh_pt-&gt;element_pt(e));</div>
+<div class="line">   </div>
+<div class="line">   <span class="comment">// Set the applied traction</span></div>
+<div class="line">   el_pt-&gt;traction_fct_pt() = &amp;<a class="code hl_function" href="namespaceGlobal__Parameters.html#a003c4c942a4c8b88b417f139fc5c637c">Global_Parameters::periodic_traction</a>;</div>
+<div class="line">  }<span class="comment">// end loop over traction elements</span></div>
+</div><!-- fragment --><p> The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function <code>assign_eqn_numbers()</code>.</p>
+<div class="fragment"><div class="line"> <span class="comment">// Add the submeshes to the problem</span></div>
+<div class="line"> add_sub_mesh(Bulk_mesh_pt);</div>
+<div class="line"> add_sub_mesh(Surface_mesh_pt);</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now build the global mesh</span></div>
+<div class="line"> build_global_mesh();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Assign equation numbers</span></div>
+<div class="line"> cout &lt;&lt; assign_eqn_numbers() &lt;&lt; <span class="stringliteral">&quot; equations assigned&quot;</span> &lt;&lt; std::endl; </div>
+<div class="line">} <span class="comment">// end of constructor</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="traction_elements"></a>
+The traction elements</h1>
+<p>In anticipation of the extension of this code to its <a href="../../refineable_periodic_load/html/index.html">adaptive counterpart</a>, we create the face elements that apply the traction to the upper boundary in a separate function.</p>
+<div class="fragment"><div class="line"><span class="comment">//===start_of_traction===============================================</span></div>
+<div class="line"><span class="comment">/// Make traction elements along the top boundary of the bulk mesh</span></div>
+<div class="line"><span class="comment">//===================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#ad850863c61c0055e230e6319d67905e2">PeriodicLoadProblem&lt;ELEMENT&gt;::assign_traction_elements</a>()</div>
+<div class="line">{</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// How many bulk elements are next to boundary 2 (the top boundary)?</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> bound=2;</div>
+<div class="line"> <span class="keywordtype">unsigned</span> n_neigh = Bulk_mesh_pt-&gt;nboundary_element(bound); </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Now loop over bulk elements and create the face elements</span></div>
+<div class="line"> <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> n=0;n&lt;n_neigh;n++)</div>
+<div class="line">  {</div>
+<div class="line">   <span class="comment">// Create the face element</span></div>
+<div class="line">   FiniteElement *traction_element_pt </div>
+<div class="line">    = <span class="keyword">new</span> LinearElasticityTractionElement&lt;ELEMENT&gt;</div>
+<div class="line">    (Bulk_mesh_pt-&gt;boundary_element_pt(bound,n),</div>
+<div class="line">     Bulk_mesh_pt-&gt;face_index_at_boundary(bound,n));</div>
+<div class="line"> </div>
+<div class="line">   <span class="comment">// Add to mesh</span></div>
+<div class="line">   Surface_mesh_pt-&gt;add_element_pt(traction_element_pt);</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end of assign_traction_elements</span></div>
+</div><!-- fragment --><hr  />
+ <hr  />
+<h1><a class="anchor" id="doc"></a>
+Post-processing</h1>
+<p>As expected, this member function documents the computed solution.</p>
+<div class="fragment"><div class="line"><span class="comment">//==start_of_doc_solution=================================================</span></div>
+<div class="line"><span class="comment">/// Doc the solution</span></div>
+<div class="line"><span class="comment">//========================================================================</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> ELEMENT&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="classPeriodicLoadProblem.html#ad414cf9a0b4a61de439e459f10e762c7">PeriodicLoadProblem&lt;ELEMENT&gt;::doc_solution</a>(DocInfo&amp; doc_info)</div>
+<div class="line">{ </div>
+<div class="line"> ofstream some_file;</div>
+<div class="line"> <span class="keywordtype">char</span> filename[100];</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Number of plot points</span></div>
+<div class="line"> <span class="keywordtype">unsigned</span> npts=5; </div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/soln.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output(some_file,npts);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Output exact solution </span></div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/exact_soln.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;output_fct(some_file,npts,</div>
+<div class="line">                          <a class="code hl_function" href="namespaceGlobal__Parameters.html#a6e53a9e4370e8719e9091eff6b6a0c01">Global_Parameters::exact_solution</a>); </div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">// Doc error</span></div>
+<div class="line"> <span class="keywordtype">double</span> error=0.0;</div>
+<div class="line"> <span class="keywordtype">double</span> norm=0.0;</div>
+<div class="line"> snprintf(filename, <span class="keyword">sizeof</span>(filename), <span class="stringliteral">&quot;%s/error.dat&quot;</span>,doc_info.directory().c_str());</div>
+<div class="line"> some_file.open(filename);</div>
+<div class="line"> Bulk_mesh_pt-&gt;compute_error(some_file,</div>
+<div class="line">                             <a class="code hl_function" href="namespaceGlobal__Parameters.html#a6e53a9e4370e8719e9091eff6b6a0c01">Global_Parameters::exact_solution</a>, </div>
+<div class="line">                             error,norm);</div>
+<div class="line"> some_file.close();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Doc error norm:</span></div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;\nNorm of error    &quot;</span> &lt;&lt; sqrt(error) &lt;&lt; std::endl; </div>
+<div class="line"> cout &lt;&lt; <span class="stringliteral">&quot;Norm of solution : &quot;</span> &lt;&lt; sqrt(norm) &lt;&lt; std::endl &lt;&lt; std::endl;</div>
+<div class="line"> cout &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// end_of_doc_solution   </span></div>
+</div><!-- fragment --> <hr  />
+ <hr  />
+<h1><a class="anchor" id="comments"></a>
+Comments and Exercises</h1>
+<h2><a class="anchor" id="nondim"></a>
+Comments</h2>
+<p>As discussed in the introduction, the non-dimensional version of the steady Cauchy equations only contains a single non-dimensional parameter, the Poisson ratio <img class="formulaInl" alt="$ \nu $" src="form_18.png"/> which is passed to the constructor of the <code>IsotropicElasticityTensor</code>. If you inspect the relevant source code <a href="../../../../src/linear_elasticity/elasticity_tensor.h">src/linear_elasticity/elasticity_tensor.h</a> you will find that this constructor has a second argument which defaults to one. This argument plays the role of Young's modulus and is best interpreted as the ratio of the material's actual Young's modulus to the (nominal) Young's modulus used in the non-dimensionalisation of the equations. The ability to provide this ratio is important if different regions of the body contain materials with different material properties.</p>
+<h2><a class="anchor" id="exercises"></a>
+Exercises</h2>
+<ol type="1">
+<li>Fix the size of the domain and set the displacements along the bottom boundary to the exact solution for the infinite depth case, i.e. <img class="formulaInl" alt="$ {\bf u} = {\bf u}^{[\mathrm{exact}]} $" src="form_56.png"/>, using the <code><a class="el" href="namespaceGlobal__Parameters.html#a3a5d4759509036a2650d5efde8e15d56" title="Specify problem to be solved (boundary conditons for finite or infinite domain).">Global_Parameters::Finite</a></code> flag. Then investigate how the solution converges to the exact solution for increasing numbers of elements.</li>
+<li>Try varying the depth of the domain by changing <code><a class="el" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872" title="Length of domain in y direction.">Global_Parameters::Ly</a></code> while maintaining a constant spatial resolution (i.e. increasing the number of elements &ndash; this is already done in the driver code where we compute <code>ny</code> in terms of <code><a class="el" href="namespaceGlobal__Parameters.html#a25a31b2de3f05ac457b62fc9fa999872" title="Length of domain in y direction.">Global_Parameters::Ly</a></code> ) and compare how the solution converges to the exact solution of the infinite depth case.</li>
+</ol>
+<hr  />
+ <hr  />
+<h1><a class="anchor" id="sources"></a>
+Source files for this tutorial</h1>
+<ul>
+<li>The source files for this tutorial are located in the directory: <center> <a href="../../../../demo_drivers/linear_elasticity/periodic_load/">demo_drivers/linear_elasticity/periodic_load/ </a> </center></li>
+<li>The driver code is: <center> <a href="../../../../demo_drivers/linear_elasticity/periodic_load/periodic_load.cc">demo_drivers/linear_elasticity/periodic_load/periodic_load.cc </a> </center></li>
+</ul>
+<hr  />
+ <hr  />
+ <h1><a class="anchor" id="pdf"></a>
+PDF file</h1>
+<p>A <a href="../latex/refman.pdf">pdf version</a> of this document is available. \ </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:00
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

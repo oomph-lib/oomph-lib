@@ -1,0 +1,384 @@
+\doxysection{oomph\+::Straight\+Line Class Reference}
+\hypertarget{classoomph_1_1StraightLine}{}\label{classoomph_1_1StraightLine}\index{oomph::StraightLine@{oomph::StraightLine}}
+
+
+\doxylink{classoomph_1_1Steady}{Steady}, straight 1D line in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$geom\+\_\+objects.\+h$>$}
+
+Inheritance diagram for oomph\+::Straight\+Line\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1StraightLine}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1StraightLine_a5bdd098a76671d71eb9a89cef57e17ff}{Straight\+Line}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2}{geom\+\_\+data\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: One item of geometric data\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StraightLine_a90eb98ffdfc4fcfae90f49230bcd0603}{Straight\+Line}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&height)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass height (pinned by default) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StraightLine_a54dba203009b10ee30ba94681b7b311d}{Straight\+Line}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1StraightLine}{Straight\+Line}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_ad53f05562c29bbaa8944d0f39195b3c6}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1StraightLine}{Straight\+Line}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1StraightLine_a767d33f859268e751729e69f18a559a9}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Clean up if necessary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Position \doxylink{classoomph_1_1Vector}{Vector} at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1}{dposition}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_ad4a437deb740dcc4c55b69e52e98d2d5}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em 2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64}{d2position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdzeta}}, \mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ddrdzeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca}{ngeom\+\_\+data}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2}{geom\+\_\+data\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_aff5bdabab387795b74ea1df0ab4ef1a6}{Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a56cd9cb7bb39ff2c30fb56039be83d31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass dimension of geometric object (\# of Eulerian coords = \# of Lagrangian coords; no time history available/needed) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_ae3fcf14b1bf5d2bc26f64156baecb7da}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates. No time history available/needed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_a75a091c285c27b4efc14c5afed4d3b31}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}}, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: pass \# of Eulerian and Lagrangian coordinates and pointer to time-\/stepper which is used to handle the position at previous timesteps and allows the evaluation of veloc/acceleration etc. in cases where the Geom\+Data varies with time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeomObject_afcff7382d77b6c995d2b43f14392047e}{Geom\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dummy}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a561d2439cbab0ca9ec8c15b3d4cda00d}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1GeomObject_ab784d34d63bd852ee30fc03684717410}{\texorpdfstring{$\sim$}{\string~}\+Geom\+Object}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_ae8974ee138b0f879c459340a9f05e06c}{nlagrangian}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Lagrangian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a0305c3102fa6f5042461afb600a082df}{ndim}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to \# of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a375ecd197d0aff695825ad33a35e0d7e}{set\+\_\+nlagrangian\+\_\+and\+\_\+ndim}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+lagrangian}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+dim}})
+\begin{DoxyCompactList}\small\item\em Set \# of Lagrangian and Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1GeomObject_a0fc851a3b50103b6c9f68efe86e709de}{time\+\_\+stepper\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a8ca52ab6f4609144b7057961bd318fdc}{time\+\_\+stepper\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function for pointer to time stepper\+: Null if object is not time-\/dependent. Const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_af5736db11f3a40daa1a9b3d4859ca061}{position}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at the continuous time value, t. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_aa46469e491d25eda8dbe213f07152974}{dposition\+\_\+dt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drdt}})
+\begin{DoxyCompactList}\small\item\em j-\/th time-\/derivative on object at current time\+: $ \frac{d^{j} r(\zeta)}{dt^j} $. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a78ee9f98bcfd0c5e1f07a459777663d3}{locate\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{sub\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+coordinate\+\_\+as\+\_\+initial\+\_\+guess}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em A geometric object may be composed of may sub-\/objects (e.\+g. a finite-\/element representation of a boundary). In order to implement sparse update functions, it is necessary to know the sub-\/object and local coordinate within that sub-\/object at a given intrinsic coordinate, zeta. Note that only one sub-\/object can "{}cover"{} any given intrinsic position. If the position is at an "{}interface"{} between sub-\/objects, either one can be returned. The default implementation merely returns, the pointer to the "{}entire"{} \doxylink{classoomph_1_1GeomObject}{Geom\+Object} and the coordinate, zeta The optional boolean flag only applies if a Newton method is used to find the value of zeta, and if true the value of the coordinate s is used as the initial guess for the method. If the flag is false (the default) a value of s=0 is used as the initial guess. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1GeomObject_a1c5530baea63e377937920d2dcf0d583}{interpolated\+\_\+zeta}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{zeta}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em A geometric object may be composed of many sub-\/objects each with their own local coordinate. This function returns the "{}global"{} intrinsic coordinate zeta (within the compound object), at a given local coordinate s (i.\+e. the intrinsic coordinate of the sub-\/\+Geom\+Object. In simple (non-\/compound) Geom\+Objects, the local intrinsic coordinate is the global intrinsic coordinate and so the function merely returns s. To make it less likely that the default implementation is called in error (because it is not overloaded in a derived \doxylink{classoomph_1_1GeomObject}{Geom\+Object} where the default is not appropriate, we do at least check that s and zeta have the same size if called in PARANOID mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classoomph_1_1StraightLine_a7a9fcb055a7c56ac9944bf100349be5c}{Geom\+\_\+data\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of pointers to \doxylink{classoomph_1_1Data}{Data} items that affects the object\textquotesingle{}s shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1StraightLine_a945d35820dd54e51d2e7aa1086fe686f}{Must\+\_\+clean\+\_\+up}}
+\begin{DoxyCompactList}\small\item\em Do I need to clean up? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1GeomObject}{oomph\+::\+Geom\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a11d8ac51be65ee822a6c782c5e079a2c}{NLagrangian}}
+\begin{DoxyCompactList}\small\item\em Number of Lagrangian (intrinsic) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1GeomObject_a6351e2d8fbd54ff23498eb6f77c905cc}{Ndim}}
+\begin{DoxyCompactList}\small\item\em Number of Eulerian coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1GeomObject_a158a36e0dbcaf236ffc351b76faaed53}{Geom\+\_\+object\+\_\+time\+\_\+stepper\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Timestepper (used to handle access to geometry at previous timesteps) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1Steady}{Steady}, straight 1D line in 2D space. 
+
+\[ x = \zeta \] \[ y = H \] 
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00451}{451}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1StraightLine_a5bdd098a76671d71eb9a89cef57e17ff}\label{classoomph_1_1StraightLine_a5bdd098a76671d71eb9a89cef57e17ff} 
+\index{oomph::StraightLine@{oomph::StraightLine}!StraightLine@{StraightLine}}
+\index{StraightLine@{StraightLine}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{StraightLine()}{StraightLine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+Straight\+Line\+::\+Straight\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} $>$ \&}]{geom\+\_\+data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: One item of geometric data\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1StraightLine_a7a9fcb055a7c56ac9944bf100349be5c}{Geom\_data\_pt}}[0]-\/>value(0)\ =\ height}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00458}{458}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00617}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a90eb98ffdfc4fcfae90f49230bcd0603}\label{classoomph_1_1StraightLine_a90eb98ffdfc4fcfae90f49230bcd0603} 
+\index{oomph::StraightLine@{oomph::StraightLine}!StraightLine@{StraightLine}}
+\index{StraightLine@{StraightLine}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{StraightLine()}{StraightLine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+Straight\+Line\+::\+Straight\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass height (pinned by default) 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00486}{486}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a54dba203009b10ee30ba94681b7b311d}\label{classoomph_1_1StraightLine_a54dba203009b10ee30ba94681b7b311d} 
+\index{oomph::StraightLine@{oomph::StraightLine}!StraightLine@{StraightLine}}
+\index{StraightLine@{StraightLine}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{StraightLine()}{StraightLine()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+Straight\+Line\+::\+Straight\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1StraightLine}{Straight\+Line}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1StraightLine_a767d33f859268e751729e69f18a559a9}\label{classoomph_1_1StraightLine_a767d33f859268e751729e69f18a559a9} 
+\index{oomph::StraightLine@{oomph::StraightLine}!````~StraightLine@{\texorpdfstring{$\sim$}{\string~}StraightLine}}
+\index{````~StraightLine@{\texorpdfstring{$\sim$}{\string~}StraightLine}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StraightLine()}{\string~StraightLine()}}
+{\footnotesize\ttfamily oomph\+::\+Straight\+Line\+::\texorpdfstring{$\sim$}{\string~}\+Straight\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Clean up if necessary. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00513}{513}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{geom__objects_8h_source_l00627}{Must\+\_\+clean\+\_\+up}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1StraightLine_ad4a437deb740dcc4c55b69e52e98d2d5}\label{classoomph_1_1StraightLine_ad4a437deb740dcc4c55b69e52e98d2d5} 
+\index{oomph::StraightLine@{oomph::StraightLine}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+2nd derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a08472dbe196123490ea109762cefd00c}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00575}{575}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64}\label{classoomph_1_1StraightLine_aa7469f6d75ced06789bb094eef5a9c64} 
+\index{oomph::StraightLine@{oomph::StraightLine}!d2position@{d2position}}
+\index{d2position@{d2position}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::d2position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdzeta,  }\item[{\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn \doxylink{classoomph_1_1Vector}{Vector} and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a4fdbd372e26d4486026c06dcfdaafe81}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00590}{590}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1}\label{classoomph_1_1StraightLine_a306df01816b5d015d18208c1a9ce1af1} 
+\index{oomph::StraightLine@{oomph::StraightLine}!dposition@{dposition}}
+\index{dposition@{dposition}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{dposition()}{dposition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::dposition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{drdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Derivative of position \doxylink{classoomph_1_1Vector}{Vector} w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). Evaluated at current time. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a91cd59efcb15971a293914b7b9bd7f75}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00563}{563}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2}\label{classoomph_1_1StraightLine_a15de05e466111a2031579d2ecbeb32e2} 
+\index{oomph::StraightLine@{oomph::StraightLine}!geom\_data\_pt@{geom\_data\_pt}}
+\index{geom\_data\_pt@{geom\_data\_pt}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{geom\_data\_pt()}{geom\_data\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Data}{Data}} \texorpdfstring{$\ast$}{*} oomph\+::\+Straight\+Line\+::geom\+\_\+data\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return pointer to the j-\/th \doxylink{classoomph_1_1Data}{Data} item that the object\textquotesingle{}s shape depends on. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a512b6e559414821452836a387cb34132}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00617}{617}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}.
+
+\Hypertarget{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca}\label{classoomph_1_1StraightLine_abcc547cb889a1447cac0827698d5c8ca} 
+\index{oomph::StraightLine@{oomph::StraightLine}!ngeom\_data@{ngeom\_data}}
+\index{ngeom\_data@{ngeom\_data}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{ngeom\_data()}{ngeom\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Straight\+Line\+::ngeom\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+How many items of \doxylink{classoomph_1_1Data}{Data} does the shape of the object depend on? 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_a19d325347e19964e127fe124df56f251}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00610}{610}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{classoomph_1_1StraightLine_ad53f05562c29bbaa8944d0f39195b3c6}\label{classoomph_1_1StraightLine_ad53f05562c29bbaa8944d0f39195b3c6} 
+\index{oomph::StraightLine@{oomph::StraightLine}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1StraightLine}{Straight\+Line}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f}\label{classoomph_1_1StraightLine_adfa84ac4d8342089f0f69eb2efe1108f} 
+\index{oomph::StraightLine@{oomph::StraightLine}!position@{position}}
+\index{position@{position}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af163a7d80b5c4dfa}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00536}{536}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf8131664c1}{oomph\+::\+Time\+Stepper\+::nprev\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884}\label{classoomph_1_1StraightLine_a96aedd167e5529eb7db60a63efad5884} 
+\index{oomph::StraightLine@{oomph::StraightLine}!position@{position}}
+\index{position@{position}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{position()}{position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Straight\+Line\+::position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{zeta,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Position \doxylink{classoomph_1_1Vector}{Vector} at Lagrangian coordinate zeta. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object}}.
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00525}{525}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+References \mbox{\hyperlink{geom__objects_8h_source_l00624}{Geom\+\_\+data\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1StraightLine_a7a9fcb055a7c56ac9944bf100349be5c}\label{classoomph_1_1StraightLine_a7a9fcb055a7c56ac9944bf100349be5c} 
+\index{oomph::StraightLine@{oomph::StraightLine}!Geom\_data\_pt@{Geom\_data\_pt}}
+\index{Geom\_data\_pt@{Geom\_data\_pt}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{Geom\_data\_pt}{Geom\_data\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1Data}{Data}}\texorpdfstring{$\ast$}{*}$>$ oomph\+::\+Straight\+Line\+::\+Geom\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of pointers to \doxylink{classoomph_1_1Data}{Data} items that affects the object\textquotesingle{}s shape. 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00624}{624}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00590}{d2position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00617}{geom\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00610}{ngeom\+\_\+data()}}, \mbox{\hyperlink{geom__objects_8h_source_l00536}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00525}{position()}}, \mbox{\hyperlink{geom__objects_8h_source_l00486}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00513}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
+
+\Hypertarget{classoomph_1_1StraightLine_a945d35820dd54e51d2e7aa1086fe686f}\label{classoomph_1_1StraightLine_a945d35820dd54e51d2e7aa1086fe686f} 
+\index{oomph::StraightLine@{oomph::StraightLine}!Must\_clean\_up@{Must\_clean\_up}}
+\index{Must\_clean\_up@{Must\_clean\_up}!oomph::StraightLine@{oomph::StraightLine}}
+\doxysubsubsection{\texorpdfstring{Must\_clean\_up}{Must\_clean\_up}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Straight\+Line\+::\+Must\+\_\+clean\+\_\+up\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Do I need to clean up? 
+
+
+
+Definition at line \mbox{\hyperlink{geom__objects_8h_source_l00627}{627}} of file \mbox{\hyperlink{geom__objects_8h_source}{geom\+\_\+objects.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{geom__objects_8h_source_l00486}{Straight\+Line()}}, \mbox{\hyperlink{geom__objects_8h_source_l00458}{Straight\+Line()}}, and \mbox{\hyperlink{geom__objects_8h_source_l00513}{\texorpdfstring{$\sim$}{\string~}\+Straight\+Line()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{geom__objects_8h}{geom\+\_\+objects.\+h}}\end{DoxyCompactItemize}

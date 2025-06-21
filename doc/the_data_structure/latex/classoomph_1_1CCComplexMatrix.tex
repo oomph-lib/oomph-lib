@@ -1,0 +1,583 @@
+\doxysection{oomph\+::CCComplex\+Matrix Class Reference}
+\hypertarget{classoomph_1_1CCComplexMatrix}{}\label{classoomph_1_1CCComplexMatrix}\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+
+
+A class for compressed column matrices that store doubles.  
+
+
+
+
+{\ttfamily \#include $<$complex\+\_\+matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::CCComplex\+Matrix\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.204725cm]{classoomph_1_1CCComplexMatrix}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a5978332570ff5adabc1e185edc240398}{CCComplex\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a3b354aedafe10d75bda23ce1e34e2971}{CCComplex\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CCMatrix_ae72bd1ac1b78c2433197587b499a0d62}{row\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1CCMatrix_a9cf931b97d5e6f57ae6dd7d03727dbdd}{column\+\_\+start}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ac1bd84a8a2040c515ccc940c4a04d3af}{CCComplex\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix}{CCComplex\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a99e17a8f99ea541cc7e9fdfce6ed803a}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix}{CCComplex\+Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a061e34b3b777e15df53071c25a8bb895}{\texorpdfstring{$\sim$}{\string~}\+CCComplex\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill the LU factors if they have been setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_afccd0ba0992ac02b062d8051bcd0d34e}{enable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em Set flag to indicate that stats are to be displayed during solution of linear system with Super\+LU. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ad5b2b64350d3335d136a8e96ffca267f}{disable\+\_\+doc\+\_\+stats}} ()
+\begin{DoxyCompactList}\small\item\em the solve \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a52c78210ebe95b72ead8d938f5c7a9bb}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a62540288d116687aa4bd201787845b4d}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_af0bfe652aeb72a3b0fee8d38b75c559f}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Overload the round-\/bracket access operator to provide read-\/only (const) access to the data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a7076d4dc153b80fe4adbedbfb916b395}{ludecompose}} ()
+\begin{DoxyCompactList}\small\item\em LU decomposition using Super\+LU. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade5d51dc8e2a44b6c011184366ce052c}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em LU back solve for given RHS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a8697d57e2ed92d56ee6f6e819482fdc3}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em LU clean up (perhaps this should happen in the destructor) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}{residual}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&residual)
+\begin{DoxyCompactList}\small\item\em Find the residulal to x of Ax=b, ie r=b-\/\+Ax. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7}{multiply\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A\texorpdfstring{$^\wedge$}{\string^}T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase}{oomph\+::\+Complex\+Matrix\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aecfeaf77e3e03743b0b87f677470c56d}{Complex\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_afef97b50ab313dab3856f0f2c57189c2}{Complex\+Matrix\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase}{Complex\+Matrix\+Base}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a9e79b343642010a1a6ba3ce90fdd52fa}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase}{Complex\+Matrix\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a5b6bb3011ea7b08dead73e943fd74b15}{\texorpdfstring{$\sim$}{\string~}\+Complex\+Matrix\+Base}} ()
+\begin{DoxyCompactList}\small\item\em virtual (empty) destructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a131e601fd0e82e811b26a3c11a455d0e}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a223cef84c48a2aa9fb387ed4ffaaf48a}{solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{soln}})
+\begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_ab5ad285a4cb503c9c962ff7e8d89857f}{max\+\_\+residual}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&x, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{rhs}})
+\begin{DoxyCompactList}\small\item\em Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined "{}on the fly"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1CCMatrix}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1CCMatrix_a16be0ba4cd8d9d5422de26513bab3b41}{CCMatrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCMatrix_a4d8bf86e2cb87a710fb5485ac5904274}{CCMatrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&value, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{row\+\_\+index\+\_\+}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{column\+\_\+start\+\_\+}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CCMatrix_a815c8a3473ce3b8fe70c682e7591a33d}{CCMatrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCMatrix}{CCMatrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_aa1c3f775aeac6b548370e14dbe875d6a}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCMatrix}{CCMatrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1CCMatrix_a5f6e403c6f6478abe752ca515d3120d9}{\texorpdfstring{$\sim$}{\string~}\+CCMatrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, delete any allocated memory. \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1CCMatrix_a9b40b8a395a94be77939308cc413828a}{get\+\_\+entry}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function that will be called by the read-\/only round-\/bracket operator (const) \end{DoxyCompactList}\item 
+std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \& \mbox{\hyperlink{classoomph_1_1CCMatrix_a30fb5552543c8d2f0626578ee2f9a5ae}{entry}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Read-\/write access is not permitted for these matrices and is deliberately broken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_a9cf931b97d5e6f57ae6dd7d03727dbdd}{column\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style column\+\_\+start array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_ae8fc61adedf5d658d6efa374ff3a4530}{column\+\_\+start}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style column\+\_\+start array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_ae72bd1ac1b78c2433197587b499a0d62}{row\+\_\+index}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style row index array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_ad16551df5f9bb8469ea096acf56ba3b7}{row\+\_\+index}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style row index array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_af3f7a40493a8576558e211c681b1ca3c}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em Wipe matrix data and set all values to 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_aa08192365e3c87357d1f7ca8131f03de}{build}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&value, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&row\+\_\+index, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&column\+\_\+start, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Build matrix from compressed representation. Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1CCMatrix_a57eddb79a6a3af698a1c92196482335a}{build\+\_\+without\+\_\+copy}} (std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \texorpdfstring{$\ast$}{*}value, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}row\+\_\+index, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*}column\+\_\+start, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&nnz, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}})
+\begin{DoxyCompactList}\small\item\em Function to build matrix from pointers to arrays which hold the column starts, row indices and non-\/zero values. The final parameters specifies the number of rows and columns. Note that, as the name suggests, this function does not make a copy of the data pointed to by the first three arguments! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SparseMatrix}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SparseMatrix_a9aff0ae09aadbc704580726a53fe51c5}{Sparse\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1SparseMatrix_a9e4062d0e4f877537d195aada71d854d}{Sparse\+Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1SparseMatrix}{Sparse\+Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{source\+\_\+matrix}})
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8646d89594b246a394c89d4be134c423}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1SparseMatrix}{Sparse\+Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_aa938bb1200e49f080b980fe7248f589e}{\texorpdfstring{$\sim$}{\string~}\+Sparse\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, delete the memory associated with the values. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}} ()
+\begin{DoxyCompactList}\small\item\em Access to C-\/style value array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SparseMatrix_af3284bc630be1707c08c81aa25d9a836}{value}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access to C-\/style value array (const version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8b8010edcc0869283621e72a9bbc51e3}{nnz}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of nonzero entries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837}{Matrix}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361}{Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11}{\texorpdfstring{$\sim$}{\string~}\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Virtual (empty) destructor. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX\+\_\+\+TYPE template parameter to call the get\+\_\+entry() function which must be defined in all derived classes that are to be fully instantiated. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a8b3cb444d689a80fc8eab064bde4a7fb}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}
+\begin{DoxyCompactList}\small\item\em Flag to indicate if stats are to be displayed during solution of linear system with Super\+LU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1CCMatrix}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_a7dba85934f3059d0163dda06f94ddf9b}{Row\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Row index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCMatrix_a6a38ae2bd1a69905375585d5b24c6136}{Column\+\_\+start}}
+\begin{DoxyCompactList}\small\item\em Start index for column. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SparseMatrix}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a55b53c70fe3906a65d0f84c429e963b1}{Value}}
+\begin{DoxyCompactList}\small\item\em Internal representation of the matrix values, a pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a8f15f962605f52fc75e8679efc6c8677}{N}}
+\begin{DoxyCompactList}\small\item\em Number of rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_ae558ff039363bd2aa163525442090508}{M}}
+\begin{DoxyCompactList}\small\item\em Number of columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1SparseMatrix_a1459cbaeec275fe95ba45f7d843b26a5}{Nnz}}
+\begin{DoxyCompactList}\small\item\em Number of non-\/zero values (i.\+e. size of Value array) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_ac97a80e97db7930912a519ba06ef2e98}{F\+\_\+factors}}
+\begin{DoxyCompactList}\small\item\em Storage for the LU factors as required by Super\+LU. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a2f306917c87df84224f9f78e96d3a100}{Info}}
+\begin{DoxyCompactList}\small\item\em Info flag for the Super\+LU solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1SparseMatrix}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} T \mbox{\hyperlink{classoomph_1_1SparseMatrix_a71a5ae159c26f93c314c839f4db6eaaf}{Zero}} = T(0)
+\begin{DoxyCompactList}\small\item\em Dummy zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for compressed column matrices that store doubles. 
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00444}{444}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1CCComplexMatrix_a5978332570ff5adabc1e185edc240398}\label{classoomph_1_1CCComplexMatrix_a5978332570ff5adabc1e185edc240398} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!CCComplexMatrix@{CCComplexMatrix}}
+\index{CCComplexMatrix@{CCComplexMatrix}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{CCComplexMatrix()}{CCComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily oomph\+::\+CCComplex\+Matrix\+::\+CCComplex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00461}{461}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a3b354aedafe10d75bda23ce1e34e2971}\label{classoomph_1_1CCComplexMatrix_a3b354aedafe10d75bda23ce1e34e2971} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!CCComplexMatrix@{CCComplexMatrix}}
+\index{CCComplexMatrix@{CCComplexMatrix}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{CCComplexMatrix()}{CCComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily oomph\+::\+CCComplex\+Matrix\+::\+CCComplex\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{row\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \&}]{column\+\_\+start,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass vector of values, vector of row indices, vector of column starts and number of rows (can be suppressed for square matrices). Number of nonzero entries is read off from value, so make sure the vector has been shrunk to its correct length. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00472}{472}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_ac1bd84a8a2040c515ccc940c4a04d3af}\label{classoomph_1_1CCComplexMatrix_ac1bd84a8a2040c515ccc940c4a04d3af} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!CCComplexMatrix@{CCComplexMatrix}}
+\index{CCComplexMatrix@{CCComplexMatrix}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{CCComplexMatrix()}{CCComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily oomph\+::\+CCComplex\+Matrix\+::\+CCComplex\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix}{CCComplex\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a061e34b3b777e15df53071c25a8bb895}\label{classoomph_1_1CCComplexMatrix_a061e34b3b777e15df53071c25a8bb895} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!````~CCComplexMatrix@{\texorpdfstring{$\sim$}{\string~}CCComplexMatrix}}
+\index{````~CCComplexMatrix@{\texorpdfstring{$\sim$}{\string~}CCComplexMatrix}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CCComplexMatrix()}{\string~CCComplexMatrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+CCComplex\+Matrix\+::\texorpdfstring{$\sim$}{\string~}\+CCComplex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: Kill the LU factors if they have been setup. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00492}{492}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8cc_source_l01283}{clean\+\_\+up\+\_\+memory()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1CCComplexMatrix_a8697d57e2ed92d56ee6f6e819482fdc3}\label{classoomph_1_1CCComplexMatrix_a8697d57e2ed92d56ee6f6e819482fdc3} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+LU clean up (perhaps this should happen in the destructor) 
+
+Cleanup storage. 
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01283}{1283}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00449}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00452}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00492}{\texorpdfstring{$\sim$}{\string~}\+CCComplex\+Matrix()}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_ad5b2b64350d3335d136a8e96ffca267f}\label{classoomph_1_1CCComplexMatrix_ad5b2b64350d3335d136a8e96ffca267f} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!disable\_doc\_stats@{disable\_doc\_stats}}
+\index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+the solve 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00506}{506}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_afccd0ba0992ac02b062d8051bcd0d34e}\label{classoomph_1_1CCComplexMatrix_afccd0ba0992ac02b062d8051bcd0d34e} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!enable\_doc\_stats@{enable\_doc\_stats}}
+\index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set flag to indicate that stats are to be displayed during solution of linear system with Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00499}{499}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_ade5d51dc8e2a44b6c011184366ce052c}\label{classoomph_1_1CCComplexMatrix_ade5d51dc8e2a44b6c011184366ce052c} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!lubksub@{lubksub}}
+\index{lubksub@{lubksub}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU back solve for given RHS. 
+
+Do the backsubstitution. RHS vector
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01201}{1201}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00449}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00452}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a7076d4dc153b80fe4adbedbfb916b395}\label{classoomph_1_1CCComplexMatrix_a7076d4dc153b80fe4adbedbfb916b395} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!ludecompose@{ludecompose}}
+\index{ludecompose@{ludecompose}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{ludecompose()}{ludecompose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+CCComplex\+Matrix\+::ludecompose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+LU decomposition using Super\+LU. 
+
+Perform LU decomposition. Return the sign of the determinant. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a11e1beeb7767e9bc5e511c17f80f097f}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01147}{1147}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{complex__matrices_8h_source_l00457}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00449}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00452}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261}\label{classoomph_1_1CCComplexMatrix_a6c7ba50bf29c2e9f40a68a073534f261} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the matrix by the vector x\+: soln=Ax. 
+
+Multiply the matrix by the vector x. 
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01388}{1388}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7}\label{classoomph_1_1CCComplexMatrix_a85c89a6e460b6eb0a1ab704b6272c4d7} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!multiply\_transpose@{multiply\_transpose}}
+\index{multiply\_transpose@{multiply\_transpose}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Multiply the transposed matrix by the vector x\+: soln=A\texorpdfstring{$^\wedge$}{\string^}T x. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01431}{1431}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a62540288d116687aa4bd201787845b4d}\label{classoomph_1_1CCComplexMatrix_a62540288d116687aa4bd201787845b4d} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+CCComplex\+Matrix\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a849b63e50dad36ca8b20b7bdefd34b8d}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00518}{518}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00518}{ncol()}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00518}{ncol()}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a52c78210ebe95b72ead8d938f5c7a9bb}\label{classoomph_1_1CCComplexMatrix_a52c78210ebe95b72ead8d938f5c7a9bb} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} oomph\+::\+CCComplex\+Matrix\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_adcbdf19bc82c61c0a4fbfd8c8de97b3b}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00512}{512}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00512}{nrow()}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00512}{nrow()}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_af0bfe652aeb72a3b0fee8d38b75c559f}\label{classoomph_1_1CCComplexMatrix_af0bfe652aeb72a3b0fee8d38b75c559f} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+CCComplex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Overload the round-\/bracket access operator to provide read-\/only (const) access to the data. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a2140730b879cfc6ea58bba5a34e6c197}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00525}{525}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02654}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::get\+\_\+entry()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a99e17a8f99ea541cc7e9fdfce6ed803a}\label{classoomph_1_1CCComplexMatrix_a99e17a8f99ea541cc7e9fdfce6ed803a} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1CCComplexMatrix}{CCComplex\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90}\label{classoomph_1_1CCComplexMatrix_ade719948640907a8f338f83ee1587a90} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!residual@{residual}}
+\index{residual@{residual}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{residual()}{residual()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+CCComplex\+Matrix\+::residual (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Find the residulal to x of Ax=b, ie r=b-\/\+Ax. 
+
+Work out residual vector r = b-\/\+Ax for candidate solution x. 
+
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}{oomph\+::\+Complex\+Matrix\+Base}}.
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01324}{1324}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l02779}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+start}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01324}{residual()}}, \mbox{\hyperlink{matrices_8h_source_l02776}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+index}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01324}{residual()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1CCComplexMatrix_a8b3cb444d689a80fc8eab064bde4a7fb}\label{classoomph_1_1CCComplexMatrix_a8b3cb444d689a80fc8eab064bde4a7fb} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!Doc\_stats\_during\_solve@{Doc\_stats\_during\_solve}}
+\index{Doc\_stats\_during\_solve@{Doc\_stats\_during\_solve}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats\_during\_solve}{Doc\_stats\_during\_solve}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+CCComplex\+Matrix\+::\+Doc\+\_\+stats\+\_\+during\+\_\+solve\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flag to indicate if stats are to be displayed during solution of linear system with Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00457}{457}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00461}{CCComplex\+Matrix()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00472}{CCComplex\+Matrix()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01283}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00506}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00499}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01201}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l01147}{ludecompose()}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_ac97a80e97db7930912a519ba06ef2e98}\label{classoomph_1_1CCComplexMatrix_ac97a80e97db7930912a519ba06ef2e98} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!F\_factors@{F\_factors}}
+\index{F\_factors@{F\_factors}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{F\_factors}{F\_factors}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}}\texorpdfstring{$\ast$}{*} oomph\+::\+CCComplex\+Matrix\+::\+F\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the LU factors as required by Super\+LU. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00449}{449}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01283}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01201}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l01147}{ludecompose()}}.
+
+\Hypertarget{classoomph_1_1CCComplexMatrix_a2f306917c87df84224f9f78e96d3a100}\label{classoomph_1_1CCComplexMatrix_a2f306917c87df84224f9f78e96d3a100} 
+\index{oomph::CCComplexMatrix@{oomph::CCComplexMatrix}!Info@{Info}}
+\index{Info@{Info}!oomph::CCComplexMatrix@{oomph::CCComplexMatrix}}
+\doxysubsubsection{\texorpdfstring{Info}{Info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+CCComplex\+Matrix\+::\+Info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Info flag for the Super\+LU solver. 
+
+
+
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00452}{452}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01283}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01201}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l01147}{ludecompose()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{complex__matrices_8h}{complex\+\_\+matrices.\+h}}\item 
+\mbox{\hyperlink{complex__matrices_8cc}{complex\+\_\+matrices.\+cc}}\end{DoxyCompactItemize}

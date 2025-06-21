@@ -1,0 +1,178 @@
+\doxysection{Problem\+\_\+\+Parameter Namespace Reference}
+\hypertarget{namespaceProblem__Parameter}{}\label{namespaceProblem__Parameter}\index{Problem\_Parameter@{Problem\_Parameter}}
+
+
+Namespace for Problem Parameters.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}{Re}} =1.\+0
+\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30}{St}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Strouhal number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a7fcb9a415485247d626190923235be2a}{Density\+\_\+ratio}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Density ratio (Solid density / Fluid density) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a23071148de0fea3597c2a7eb848320b6}{A}} = 0.\+25
+\begin{DoxyCompactList}\small\item\em Initial axis of the elliptical solid in x-\/direction. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}{B}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Initial axis of the elliptical solid in y-\/direction (N.\+B. 2B = 1 is the reference length scale) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid (mesh) Poisson ratio. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12}{Lambda\+\_\+sq}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid (mesh) "{}density"{} Set to zero because we don\textquotesingle{}t want inertia in the node update! \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Constitutive law used to determine the mesh deformation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for Problem Parameters. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceProblem__Parameter_a23071148de0fea3597c2a7eb848320b6}\label{namespaceProblem__Parameter_a23071148de0fea3597c2a7eb848320b6} 
+\index{Problem\_Parameter@{Problem\_Parameter}!A@{A}}
+\index{A@{A}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::A = 0.\+25}
+
+
+
+Initial axis of the elliptical solid in x-\/direction. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00068}{68}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00120}{Jeffery\+\_\+\+Solution\+::acceleration()}}, \mbox{\hyperlink{jeffery__orbit_8cc_source_l00098}{Jeffery\+\_\+\+Solution\+::angle()}}, \mbox{\hyperlink{jeffery__orbit_8cc_source_l00306}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Immersed\+Ellipse\+Problem()}}, and \mbox{\hyperlink{jeffery__orbit_8cc_source_l00107}{Jeffery\+\_\+\+Solution\+::velocity()}}.
+
+\Hypertarget{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}\label{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e} 
+\index{Problem\_Parameter@{Problem\_Parameter}!B@{B}}
+\index{B@{B}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::B = 0.\+5}
+
+
+
+Initial axis of the elliptical solid in y-\/direction (N.\+B. 2B = 1 is the reference length scale) 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00072}{72}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00098}{Jeffery\+\_\+\+Solution\+::angle()}}, \mbox{\hyperlink{jeffery__orbit_8cc_source_l00306}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Immersed\+Ellipse\+Problem()}}, and \mbox{\hyperlink{jeffery__orbit_8cc_source_l00107}{Jeffery\+\_\+\+Solution\+::velocity()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}\label{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily Constitutive\+Law\texorpdfstring{$\ast$}{*} Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{new}\ GeneralisedHookean(\&\mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Problem\_Parameter::Nu}})}
+
+\end{DoxyCode}
+
+
+Constitutive law used to determine the mesh deformation. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00082}{82}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00654}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{jeffery__orbit_8cc_source_l00553}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\texorpdfstring{$\sim$}{\string~}\+Unstructured\+Immersed\+Ellipse\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a7fcb9a415485247d626190923235be2a}\label{namespaceProblem__Parameter_a7fcb9a415485247d626190923235be2a} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Density\_ratio@{Density\_ratio}}
+\index{Density\_ratio@{Density\_ratio}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Density\_ratio}{Density\_ratio}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Density\+\_\+ratio = 1.\+0}
+
+
+
+Density ratio (Solid density / Fluid density) 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00065}{65}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00306}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Immersed\+Ellipse\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12}\label{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Lambda\_sq@{Lambda\_sq}}
+\index{Lambda\_sq@{Lambda\_sq}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Lambda\_sq}{Lambda\_sq}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Lambda\+\_\+sq =0.\+0}
+
+
+
+Pseudo-\/solid (mesh) "{}density"{} Set to zero because we don\textquotesingle{}t want inertia in the node update! 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00079}{79}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00654}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}.
+
+\Hypertarget{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}\label{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Nu@{Nu}}
+\index{Nu@{Nu}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Nu}{Nu}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Nu =0.\+3}
+
+
+
+Pseudo-\/solid (mesh) Poisson ratio. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00075}{75}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+\Hypertarget{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f}\label{namespaceProblem__Parameter_acc656299287d4d9a8374c2c501750b4f} 
+\index{Problem\_Parameter@{Problem\_Parameter}!Re@{Re}}
+\index{Re@{Re}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{Re}{Re}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+Re =1.\+0}
+
+
+
+Reynolds number. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00059}{59}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00654}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::complete\+\_\+problem\+\_\+setup()}}, and \mbox{\hyperlink{jeffery__orbit_8cc_source_l00306}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Immersed\+Ellipse\+Problem()}}.
+
+\Hypertarget{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30}\label{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30} 
+\index{Problem\_Parameter@{Problem\_Parameter}!St@{St}}
+\index{St@{St}!Problem\_Parameter@{Problem\_Parameter}}
+\doxysubsubsection{\texorpdfstring{St}{St}}
+{\footnotesize\ttfamily double Problem\+\_\+\+Parameter\+::\+St = 1.\+0}
+
+
+
+Strouhal number. 
+
+
+
+Definition at line \mbox{\hyperlink{jeffery__orbit_8cc_source_l00062}{62}} of file \mbox{\hyperlink{jeffery__orbit_8cc_source}{jeffery\+\_\+orbit.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{jeffery__orbit_8cc_source_l00306}{Unstructured\+Immersed\+Ellipse\+Problem$<$ ELEMENT $>$\+::\+Unstructured\+Immersed\+Ellipse\+Problem()}}.
+

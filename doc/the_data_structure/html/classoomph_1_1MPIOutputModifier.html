@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::MPIOutputModifier Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1MPIOutputModifier.html">MPIOutputModifier</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1MPIOutputModifier-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::MPIOutputModifier Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MPI output modifier: Precedes every output by specification of the processor ID. Output can be restricted to a single processor.  
+ <a href="classoomph_1_1MPIOutputModifier.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for oomph::MPIOutputModifier:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classoomph_1_1MPIOutputModifier.png" usemap="#oomph::MPIOutputModifier_map" alt=""/>
+  <map id="oomph::MPIOutputModifier_map" name="oomph::MPIOutputModifier_map">
+<area href="classoomph_1_1OutputModifier.html" title="A base class that contains a single virtual member function: The () operator that may be used to modi..." alt="oomph::OutputModifier" shape="rect" coords="0,0,161,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a3f9c2bd12d8f68daa52c7eb3e5d0ac00" id="r_a3f9c2bd12d8f68daa52c7eb3e5d0ac00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a3f9c2bd12d8f68daa52c7eb3e5d0ac00">MPIOutputModifier</a> ()</td></tr>
+<tr class="memdesc:a3f9c2bd12d8f68daa52c7eb3e5d0ac00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor &ndash; initialise flags for output from all processors.  <br /></td></tr>
+<tr class="separator:a3f9c2bd12d8f68daa52c7eb3e5d0ac00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5969aeb173e3f0aafda56fab954806cc" id="r_a5969aeb173e3f0aafda56fab954806cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a5969aeb173e3f0aafda56fab954806cc">communicator_pt</a> ()</td></tr>
+<tr class="memdesc:a5969aeb173e3f0aafda56fab954806cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to communicator.  <br /></td></tr>
+<tr class="separator:a5969aeb173e3f0aafda56fab954806cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a982af85269a497f384cdff7baf9487a1" id="r_a982af85269a497f384cdff7baf9487a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a982af85269a497f384cdff7baf9487a1">operator()</a> (std::ostream &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">stream</a>)</td></tr>
+<tr class="memdesc:a982af85269a497f384cdff7baf9487a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Precede the output by the processor ID but output everything.  <br /></td></tr>
+<tr class="separator:a982af85269a497f384cdff7baf9487a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5822d5ea7cd02753e5706ec790f2ff6e" id="r_a5822d5ea7cd02753e5706ec790f2ff6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a5822d5ea7cd02753e5706ec790f2ff6e">restrict_output_to_single_processor</a> (<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">output_rank</a>=0)</td></tr>
+<tr class="memdesc:a5822d5ea7cd02753e5706ec790f2ff6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch to ensure output is only produced from a single processor (default: Master node, i.e. rank 0)  <br /></td></tr>
+<tr class="separator:a5822d5ea7cd02753e5706ec790f2ff6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b8be91b5f6eb8be549f2926047aa14" id="r_af4b8be91b5f6eb8be549f2926047aa14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#af4b8be91b5f6eb8be549f2926047aa14">allow_output_from_all_processors</a> ()</td></tr>
+<tr class="memdesc:af4b8be91b5f6eb8be549f2926047aa14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch to ensure output is only produced from a single processor (default: Master node, i.e. rank 0)  <br /></td></tr>
+<tr class="separator:af4b8be91b5f6eb8be549f2926047aa14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1OutputModifier"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1OutputModifier')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1OutputModifier.html">oomph::OutputModifier</a></td></tr>
+<tr class="memitem:ab7e4b4d9e455cc93204160e70e2d50f6 inherit pub_methods_classoomph_1_1OutputModifier" id="r_ab7e4b4d9e455cc93204160e70e2d50f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OutputModifier.html#ab7e4b4d9e455cc93204160e70e2d50f6">OutputModifier</a> ()</td></tr>
+<tr class="memdesc:ab7e4b4d9e455cc93204160e70e2d50f6 inherit pub_methods_classoomph_1_1OutputModifier"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:ab7e4b4d9e455cc93204160e70e2d50f6 inherit pub_methods_classoomph_1_1OutputModifier"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a586ce54aeae7d1d0d5a075dd5b172 inherit pub_methods_classoomph_1_1OutputModifier" id="r_aa8a586ce54aeae7d1d0d5a075dd5b172"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1OutputModifier.html#aa8a586ce54aeae7d1d0d5a075dd5b172">~OutputModifier</a> ()</td></tr>
+<tr class="memdesc:aa8a586ce54aeae7d1d0d5a075dd5b172 inherit pub_methods_classoomph_1_1OutputModifier"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty virtual destructor.  <br /></td></tr>
+<tr class="separator:aa8a586ce54aeae7d1d0d5a075dd5b172 inherit pub_methods_classoomph_1_1OutputModifier"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ad255e5084d5a8df94597711a096d3863" id="r_ad255e5084d5a8df94597711a096d3863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#ad255e5084d5a8df94597711a096d3863">Output_rank</a></td></tr>
+<tr class="memdesc:ad255e5084d5a8df94597711a096d3863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rank of single processor that produces output (only used if Output_from_single_processor=true.  <br /></td></tr>
+<tr class="separator:ad255e5084d5a8df94597711a096d3863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fbc25a8b8187f1669fcbfefa47dacd0" id="r_a9fbc25a8b8187f1669fcbfefa47dacd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a9fbc25a8b8187f1669fcbfefa47dacd0">Output_from_single_processor</a></td></tr>
+<tr class="memdesc:a9fbc25a8b8187f1669fcbfefa47dacd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to control if output is performed only on a single processor (default: false)  <br /></td></tr>
+<tr class="separator:a9fbc25a8b8187f1669fcbfefa47dacd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93306d57a0a753eb7a7735c78f7e4360" id="r_a93306d57a0a753eb7a7735c78f7e4360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1MPIOutputModifier.html#a93306d57a0a753eb7a7735c78f7e4360">Communicator_pt</a></td></tr>
+<tr class="memdesc:a93306d57a0a753eb7a7735c78f7e4360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communicator.  <br /></td></tr>
+<tr class="separator:a93306d57a0a753eb7a7735c78f7e4360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>MPI output modifier: Precedes every output by specification of the processor ID. Output can be restricted to a single processor. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00773">773</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3f9c2bd12d8f68daa52c7eb3e5d0ac00" name="a3f9c2bd12d8f68daa52c7eb3e5d0ac00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9c2bd12d8f68daa52c7eb3e5d0ac00">&#9670;&#160;</a></span>MPIOutputModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">oomph::MPIOutputModifier::MPIOutputModifier </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor &ndash; initialise flags for output from all processors. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00789">789</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af4b8be91b5f6eb8be549f2926047aa14" name="af4b8be91b5f6eb8be549f2926047aa14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4b8be91b5f6eb8be549f2926047aa14">&#9670;&#160;</a></span>allow_output_from_all_processors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MPIOutputModifier::allow_output_from_all_processors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Switch to ensure output is only produced from a single processor (default: Master node, i.e. rank 0) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00811">811</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00782">Output_from_single_processor</a>.</p>
+
+</div>
+</div>
+<a id="a5969aeb173e3f0aafda56fab954806cc" name="a5969aeb173e3f0aafda56fab954806cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5969aeb173e3f0aafda56fab954806cc">&#9670;&#160;</a></span>communicator_pt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a> *&amp; oomph::MPIOutputModifier::communicator_pt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to communicator. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00792">792</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00785">Communicator_pt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00991">oomph::MPI_Helpers::init()</a>.</p>
+
+</div>
+</div>
+<a id="a982af85269a497f384cdff7baf9487a1" name="a982af85269a497f384cdff7baf9487a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a982af85269a497f384cdff7baf9487a1">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MPIOutputModifier::operator() </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Precede the output by the processor ID but output everything. </p>
+
+<p>Reimplemented from <a class="el" href="classoomph_1_1OutputModifier.html#ae2d5a2d19865858377b5113ca84aa423">oomph::OutputModifier</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8cc_source.html#l00960">960</a> of file <a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00785">Communicator_pt</a>, <a class="el" href="oomph__utilities_8h_source.html#l00782">Output_from_single_processor</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00778">Output_rank</a>.</p>
+
+</div>
+</div>
+<a id="a5822d5ea7cd02753e5706ec790f2ff6e" name="a5822d5ea7cd02753e5706ec790f2ff6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5822d5ea7cd02753e5706ec790f2ff6e">&#9670;&#160;</a></span>restrict_output_to_single_processor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">void</a> oomph::MPIOutputModifier::restrict_output_to_single_processor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">const</a> <a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>output_rank</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Switch to ensure output is only produced from a single processor (default: Master node, i.e. rank 0) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00802">802</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00782">Output_from_single_processor</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00778">Output_rank</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a93306d57a0a753eb7a7735c78f7e4360" name="a93306d57a0a753eb7a7735c78f7e4360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93306d57a0a753eb7a7735c78f7e4360">&#9670;&#160;</a></span>Communicator_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1OomphCommunicator.html">OomphCommunicator</a>* oomph::MPIOutputModifier::Communicator_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Communicator. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00785">785</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8h_source.html#l00792">communicator_pt()</a>, and <a class="el" href="oomph__utilities_8cc_source.html#l00960">operator()()</a>.</p>
+
+</div>
+</div>
+<a id="a9fbc25a8b8187f1669fcbfefa47dacd0" name="a9fbc25a8b8187f1669fcbfefa47dacd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fbc25a8b8187f1669fcbfefa47dacd0">&#9670;&#160;</a></span>Output_from_single_processor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">bool</a> oomph::MPIOutputModifier::Output_from_single_processor</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Boolean to control if output is performed only on a single processor (default: false) </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00782">782</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8h_source.html#l00811">allow_output_from_all_processors()</a>, <a class="el" href="oomph__utilities_8cc_source.html#l00960">operator()()</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00802">restrict_output_to_single_processor()</a>.</p>
+
+</div>
+</div>
+<a id="ad255e5084d5a8df94597711a096d3863" name="ad255e5084d5a8df94597711a096d3863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad255e5084d5a8df94597711a096d3863">&#9670;&#160;</a></span>Output_rank</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1TAdvectionDiffusionReactionElement.html">unsigned</a> oomph::MPIOutputModifier::Output_rank</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rank of single processor that produces output (only used if Output_from_single_processor=true. </p>
+
+<p class="definition">Definition at line <a class="el" href="oomph__utilities_8h_source.html#l00778">778</a> of file <a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="oomph__utilities_8cc_source.html#l00960">operator()()</a>, and <a class="el" href="oomph__utilities_8h_source.html#l00802">restrict_output_to_single_processor()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="oomph__utilities_8h_source.html">oomph_utilities.h</a></li>
+<li><a class="el" href="oomph__utilities_8cc_source.html">oomph_utilities.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:57
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

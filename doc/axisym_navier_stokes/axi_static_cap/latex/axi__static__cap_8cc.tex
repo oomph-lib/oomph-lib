@@ -1,0 +1,49 @@
+\doxysection{axi\+\_\+static\+\_\+cap.\+cc File Reference}
+\hypertarget{axi__static__cap_8cc}{}\label{axi__static__cap_8cc}\index{axi\_static\_cap.cc@{axi\_static\_cap.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCapProblem}{Cap\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A Problem class that solves the Navier--Stokes equations + free surface in an axisymmetric geometry using a spine-\/based node update. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPseudoSolidCapProblem}{Pseudo\+Solid\+Cap\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class that solves the Navier--Stokes equations to compute the shape of a static interface in a rectangular container with imposed contact angle at the boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+fct}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&normal)
+\begin{DoxyCompactList}\small\item\em Function that specifies the wall unit normal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{axi__static__cap_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main driver\+: Build problem and initiate parameter study. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+1
+\begin{DoxyCompactList}\small\item\em Pseudo-\/solid Poisson ratio. \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Wall\+\_\+normal}}
+\begin{DoxyCompactList}\small\item\em Direction of the wall normal vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{axi__static__cap_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{axi__static__cap_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{axi\_static\_cap.cc@{axi\_static\_cap.cc}!main@{main}}
+\index{main@{main}!axi\_static\_cap.cc@{axi\_static\_cap.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main driver\+: Build problem and initiate parameter study. 
+
+
+
+Definition at line \mbox{\hyperlink{axi__static__cap_8cc_source_l01023}{1023}} of file \mbox{\hyperlink{axi__static__cap_8cc_source}{axi\+\_\+static\+\_\+cap.\+cc}}.
+
+
+
+References \mbox{\hyperlink{axi__static__cap_8cc_source_l00421}{Cap\+Problem$<$ ELEMENT $>$\+::parameter\+\_\+study()}}.
+

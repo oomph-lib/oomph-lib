@@ -1,0 +1,113 @@
+\doxysection{oomph\+::String\+Conversion Namespace Reference}
+\hypertarget{namespaceoomph_1_1StringConversion}{}\label{namespaceoomph_1_1StringConversion}\index{oomph::StringConversion@{oomph::StringConversion}}
+
+
+Conversion functions for easily making strings (e.\+g. for filenames -\/ to avoid stack smashing problems with cstrings and long filenames).  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1StringConversion_aab6637703088959640bd73844a597728}{to\+\_\+lower}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{input}})
+\begin{DoxyCompactList}\small\item\em Convert a string to lower case (outputs a copy). \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespaceoomph_1_1StringConversion_afdee5876392b9daa3563484f63a9b55f}{to\+\_\+upper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{input}})
+\begin{DoxyCompactList}\small\item\em Convert a string to upper case (outputs a copy). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1StringConversion_a1fe241d2c1aab5ce0a8a6bcdf7c92a4e}{split\+\_\+string}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delim}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elems}})
+\begin{DoxyCompactList}\small\item\em Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that mutliple delimiters in a row will give empty strings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_1_1StringConversion_a15f87a508bc9515945d8c8891e7134a9}{split\+\_\+string}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delim}})
+\begin{DoxyCompactList}\small\item\em Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that mutliple delimiters in a row will give empty strings. Return by value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ }\\std\+::string \mbox{\hyperlink{namespaceoomph_1_1StringConversion_a9d30fabdc1a0694bdb91dddd2833bbd6}{to\+\_\+string}} (T \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{object}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{float\+\_\+precision}}=8)
+\begin{DoxyCompactList}\small\item\em Conversion function that should work for anything with operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} defined (at least all basic types). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Conversion functions for easily making strings (e.\+g. for filenames -\/ to avoid stack smashing problems with cstrings and long filenames). 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1StringConversion_a15f87a508bc9515945d8c8891e7134a9}\label{namespaceoomph_1_1StringConversion_a15f87a508bc9515945d8c8891e7134a9} 
+\index{oomph::StringConversion@{oomph::StringConversion}!split\_string@{split\_string}}
+\index{split\_string@{split\_string}!oomph::StringConversion@{oomph::StringConversion}}
+\doxysubsubsection{\texorpdfstring{split\_string()}{split\_string()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+String\+Conversion\+::split\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}}}]{delim }\end{DoxyParamCaption})}
+
+
+
+Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that mutliple delimiters in a row will give empty strings. Return by value. 
+
+Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that multiple delimiters in a row will give empty strings. Return by value. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00398}{398}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00381}{split\+\_\+string()}}.
+
+\Hypertarget{namespaceoomph_1_1StringConversion_a1fe241d2c1aab5ce0a8a6bcdf7c92a4e}\label{namespaceoomph_1_1StringConversion_a1fe241d2c1aab5ce0a8a6bcdf7c92a4e} 
+\index{oomph::StringConversion@{oomph::StringConversion}!split\_string@{split\_string}}
+\index{split\_string@{split\_string}!oomph::StringConversion@{oomph::StringConversion}}
+\doxysubsubsection{\texorpdfstring{split\_string()}{split\_string()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+String\+Conversion\+::split\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{char}}}]{delim,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \&}]{elems }\end{DoxyParamCaption})}
+
+
+
+Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that mutliple delimiters in a row will give empty strings. 
+
+Split a string, s, into a vector of strings where ever there is an instance of delimiter (i.\+e. is delimiter is "{} "{} will give a list of words). Note that multiple delimiters in a row will give empty strings. 
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00381}{381}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
+
+
+
+Referenced by \mbox{\hyperlink{oomph__utilities_8cc_source_l00398}{split\+\_\+string()}}.
+
+\Hypertarget{namespaceoomph_1_1StringConversion_aab6637703088959640bd73844a597728}\label{namespaceoomph_1_1StringConversion_aab6637703088959640bd73844a597728} 
+\index{oomph::StringConversion@{oomph::StringConversion}!to\_lower@{to\_lower}}
+\index{to\_lower@{to\_lower}!oomph::StringConversion@{oomph::StringConversion}}
+\doxysubsubsection{\texorpdfstring{to\_lower()}{to\_lower()}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+String\+Conversion\+::to\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{input }\end{DoxyParamCaption})}
+
+
+
+Convert a string to lower case (outputs a copy). 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00353}{353}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1StringConversion_a9d30fabdc1a0694bdb91dddd2833bbd6}\label{namespaceoomph_1_1StringConversion_a9d30fabdc1a0694bdb91dddd2833bbd6} 
+\index{oomph::StringConversion@{oomph::StringConversion}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!oomph::StringConversion@{oomph::StringConversion}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T $>$ \\
+std\+::string oomph\+::\+String\+Conversion\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{T}]{object,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}}}]{float\+\_\+precision = {\ttfamily 8} }\end{DoxyParamCaption})}
+
+
+
+Conversion function that should work for anything with operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} defined (at least all basic types). 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{199}} of file \mbox{\hyperlink{oomph__utilities_8h_source}{oomph\+\_\+utilities.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00204}{oomph\+::\+IMRBy\+BDF\+::actions\+\_\+after\+\_\+timestep()}}, \mbox{\hyperlink{gmsh__tet__mesh_8template_8cc_source_l00040}{oomph\+::\+Refineable\+Gmsh\+Tet\+Mesh$<$ ELEMENT $>$\+::adapt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix()}}, \mbox{\hyperlink{problem_8cc_source_l11732}{oomph\+::\+Problem\+::calculate\+\_\+predictions()}}, \mbox{\hyperlink{gmsh__tet__mesh_8h_source_l00433}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::create\+\_\+mesh\+\_\+from\+\_\+msh\+\_\+file()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00256}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00236}{oomph\+::\+Type\+Names\+::get\+\_\+type\+\_\+name()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00073}{oomph\+::\+Added\+Main\+Numbering\+Lookup\+::main\+\_\+to\+\_\+added()}}, \mbox{\hyperlink{mesh_8h_source_l02926}{oomph\+::\+Node\+Ordering\+::node\+\_\+global\+\_\+position\+\_\+comparison()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00576}{oomph\+::\+Doc\+Info\+::number\+\_\+as\+\_\+string()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02095}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::output\+\_\+blocks\+\_\+to\+\_\+files()}}, \mbox{\hyperlink{advection__diffusion__elements_8h_source_l00199}{oomph\+::\+Advection\+Diffusion\+Equations$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{axisym__advection__diffusion__elements_8h_source_l00209}{oomph\+::\+Axisym\+Advection\+Diffusion\+Equations\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{axisym__fluid__traction__elements_8h_source_l00282}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Traction\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l00667}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l00741}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{generalised__newtonian__navier__stokes__elements_8h_source_l00809}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{elements_8h_source_l03047}{oomph\+::\+Finite\+Element\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00160}{oomph\+::\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{boussinesq__elements_8h_source_l00892}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{navier__stokes__elements_8h_source_l01127}{oomph\+::\+Navier\+Stokes\+Equations$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{vorticity__smoother_8h_source_l01064}{oomph\+::\+Vorticity\+Smoother\+Element$<$ ELEMENT $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__navier__stokes__elements_8h_source_l01463}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ DIM $>$\+::scalar\+\_\+name\+\_\+paraview()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01078}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{timesteppers_8h_source_l00150}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{explicit__timesteppers_8cc_source_l00427}{oomph\+::\+EBDF3\+::timestep()}}.
+
+\Hypertarget{namespaceoomph_1_1StringConversion_afdee5876392b9daa3563484f63a9b55f}\label{namespaceoomph_1_1StringConversion_afdee5876392b9daa3563484f63a9b55f} 
+\index{oomph::StringConversion@{oomph::StringConversion}!to\_upper@{to\_upper}}
+\index{to\_upper@{to\_upper}!oomph::StringConversion@{oomph::StringConversion}}
+\doxysubsubsection{\texorpdfstring{to\_upper()}{to\_upper()}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+String\+Conversion\+::to\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::string \&}]{input }\end{DoxyParamCaption})}
+
+
+
+Convert a string to upper case (outputs a copy). 
+
+
+
+Definition at line \mbox{\hyperlink{oomph__utilities_8cc_source_l00366}{366}} of file \mbox{\hyperlink{oomph__utilities_8cc_source}{oomph\+\_\+utilities.\+cc}}.
+

@@ -1,0 +1,322 @@
+\chapter{Propagation of a droplet in a channel -\/ mesh generation and adaptation for free surface problems}
+\hypertarget{index}{}\label{index}\index{Propagation of a droplet in a channel -\/ mesh generation and adaptation for free surface problems@{Propagation of a droplet in a channel -\/ mesh generation and adaptation for free surface problems}}
+In this tutorial we demonstrate another adaptive solution of free surface problems on unstructured meshes, using the example of a droplet propagating along a straight channel. The problem is extremely similar to \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ the propagation of a bubble in a channel tutorial }}. Thus, we shall only discuss the differences from that tutorial. The key physical difference is that instead of the uniform pressure state in an inviscid bubble, the droplet consists of a viscous fluid that can support internal stress variations.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example}
+We illustrate the solution of the unsteady 2D Navier-\/\+Stokes equations by considering the propagation of a single droplet along a straight channel as shown in the sketch below. The non-\/dimensionalisation is the same as in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial, }} and we choose the viscosity and density of the surrounding liquid to be the reference values.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.9\textwidth]{problem}
+\doxyfigcaption{The problem setup. }
+\end{DoxyImage}
+
+
+The governing equations and boundary conditions are the same as those in the ~\newline
+ \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial. }} The only difference is that the Navier--Stokes equations must also be solved within the droplet. In fact, this is a two-\/fluid problem, a class of problems that is first introduced in \href{../../two_layer_interface/html/index.html}{\texttt{ another tutorial. }}
+
+\DoxyHorRuler{0}
+
+
+The constraint that the droplet volume remains constant must be enforced explicitly in the static case, as in the bubble problem. In the time-\/simulations, however, a constant drop volume is implicitly enforced by the continuity equation. For the bubble, the continuity equation is not solved within the interior, which is why the volume constraint must always be explicitly enforced in that case.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_implementation}{}\doxysection{\texorpdfstring{Implementation}{Implementation}}\label{index_implementation}
+We use the same method as in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble problem, }} an ALE-\/based finite-\/element method with \href{../../single_layer_free_surface/html/index.html\#kinematic_condition_implementation}{\texttt{ a pseudo-\/elastic node-\/update procedure}}. In this case, there is a pressure jump across the interface between the fluids, which means that we use triangular Crouzeix--Raviart elements rather than the continuous-\/pressure Taylor--Hood elements. Again, we impose the kinematic and dynamic boundary conditions with {\ttfamily Face\+Elements}. The volume constraint for the static problem is also imposed in a similar way\+: we attach {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} to the droplet surface and create an additional {\ttfamily Volume\+Constraint\+Element}. Here, a pressure degree of freedom within the droplet is hijacked, see \href{../../static_two_layer/html/index.html}{\texttt{ another tutorial, }} to be used as the unknown associated with the volume constraint. Once the static initial problem has been solved, the "{}volume constraint"{} elements are deleted and the pressure degree of freedom is unhijacked.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_results}{}\doxysection{\texorpdfstring{Results}{Results}}\label{index_results}
+We perform the simulation in a two-\/stage procedure. We start by performing a steady solve with the inflow switched off. This deforms the droplet into its steady state (approximately) circular configuration with the required volume. The actual time-\/dependent simulation is then performed with an impulsive start from this configuration.
+
+The figure below shows the location of the droplet and mesh (upper figure) and a contour plot of the pressure distribution with overlaid velocity vectors of the difference between the background Poiseuille flow and the velocity field (lower figure). The figure is a snapshot for the parameters $ Re = ReSt =
+0.0 $, $ Ca = 10.0 $ and a droplet that is ten times as viscous as the surrounding liquid.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.7\textwidth]{drop_snapshot}
+\doxyfigcaption{Snapshot of the flow field (velocity vectors and pressure contours) for a propagating droplet. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_parameters}{}\doxysection{\texorpdfstring{Global parameters}{Global parameters}}\label{index_parameters}
+The namespace containing the dimensionless parameters contains an additional viscosity ratio parameter, compared to that in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble problem }}.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ \ ///\ Viscosity\ ratio\ of\ the\ droplet\ to\ the\ surrounding\ fluid}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}{Viscosity\_ratio}}\ =\ 10.0;}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+The first difference from the bubble problem is that the steady solver does not converge when $ Ca = 10 $. Instead, we start with $
+Ca = 1 $, solve the steady problem, set $ Ca=10$ and then resolve.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ problem.steady\_newton\_solve(1);\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Set\ the\ Capillary\ number\ to\ 10\ and\ resolve}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}{Problem\_Parameter::Ca}}\ =\ 10.0;}
+\DoxyCodeLine{\ problem.steady\_newton\_solve();}
+
+\end{DoxyCodeInclude}
+ After documenting the solution, we remove the (explicit) volume constraint and then the remainder of the code is identical to that in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial. }}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Switch\ off\ volume\ constraint}}
+\DoxyCodeLine{\ problem.remove\_volume\_constraint();}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+Other than trivial name changes from "{}bubble"{} to "{}drop"{}, there are a few significant changes between this problem and that in the ~\newline
+ \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial. }} There is an additional boolean {\ttfamily Use\+\_\+volume\+\_\+constraint} and an additional function {\ttfamily remove\+\_\+volume\+\_\+constraint()}, which are used to manage the switch from the explicit enforcement of the volume constraint in the static case to the implicit enforcement in the time simulations. The other key difference is that we use {\ttfamily Triangle\textquotesingle{}s} \href{../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html\#def_extra_regions}{\texttt{ region attributes }} to distinguish the elements inside the droplet from those outside. The default behaviour is that all elements are in region 0, but we label those element within the drop as region 1.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The construction of the mesh proceeds in exactly the same way as in \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial, }} except that we add a region tag "{}1"{} to label the elements within the droplet (so we specify a coordinate within the drop) and we must tell {\ttfamily Triangle} to use the assigned attributes.  
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Define\ the\ region}}
+\DoxyCodeLine{\ triangle\_mesh\_parameters.add\_region\_coordinates(1,\ drop\_center);}
+
+\end{DoxyCodeInclude}
+ The remainder of the constructor is the same as the other tutorial.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem_setup}{}\doxysection{\texorpdfstring{Problem setup}{Problem setup}}\label{index_problem_setup}
+When the bulk elements are made fully functional, we add the pointer to the viscosity ratio to all elements in the drop (region 1).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//For\ the\ elements\ within\ the\ droplet\ (region\ 1),}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//set\ the\ viscosity\ ratio}}
+\DoxyCodeLine{\ \ \ n\_element\ =\ Fluid\_mesh\_pt-\/>nregion\_element(1);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ \ \ ELEMENT*\ el\_pt\ =\ }
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Fluid\_mesh\_pt-\/>region\_element\_pt(1,e));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>viscosity\_ratio\_pt()\ =\ \&\mbox{\hyperlink{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}{Problem\_Parameter::Viscosity\_ratio}};}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_face_elements}{}\doxysection{\texorpdfstring{Generation of face elements}{Generation of face elements}}\label{index_face_elements}
+As usual we impose the kinematic and dynamic boundary condition at the interface by attaching {\ttfamily Face\+Elements} to the relevant boundaries of the bulk elements. However, we must be careful to add only a {\bfseries{single}} layer of elements. If we use the standard "{}boundary element"{} functions then we will be creating face elements on both sides of the internal boundary. Instead, we use the elements adjacent to the boundary within region 0, which ensures that only a single layer of interface elements are added.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_free\_surface\_elements===============}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ elements\ that\ impose\ the\ kinematic\ and\ dynamic\ bcs}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ for\ the\ pseudo-\/solid\ fluid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDropInChannelProblem_a73b989e3bedbd3630f576b0dba0f724f}{DropInChannelProblem<ELEMENT>::create\_free\_surface\_elements}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ free\ surface\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nb=Fluid\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=First\_drop\_boundary\_id;b<nb;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Note:\ region\ is\ important}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ bulk\ fluid\ elements\ are\ adjacent\ to\ boundary\ b\ in\ region\ 0?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Fluid\_mesh\_pt-\/>nboundary\_element\_in\_region(b,0);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ fluid\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ fluid\ element\ that\ is\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ adjacent\ to\ boundary\ b\ in\ region\ 0}}
+\DoxyCodeLine{\ \ \ \ \ ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ Fluid\_mesh\_pt-\/>boundary\_element\_in\_region\_pt(b,0,e));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b\ in\ region\ 0}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ Fluid\_mesh\_pt-\/>face\_index\_at\_boundary\_in\_region(b,0,e);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element}}
+\DoxyCodeLine{\ \ \ \ \ ElasticLineFluidInterfaceElement<ELEMENT>*\ el\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ ElasticLineFluidInterfaceElement<ELEMENT>(}
+\DoxyCodeLine{\ \ \ \ \ \ \ bulk\_elem\_pt,face\_index);\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Free\_surface\_mesh\_pt-\/>add\_element\_pt(el\_pt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Add\ the\ appropriate\ boundary\ number}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>set\_boundary\_number\_in\_bulk\_mesh(b);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Specify\ the\ capillary\ number}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>ca\_pt()\ =\ \&\mbox{\hyperlink{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}{Problem\_Parameter::Ca}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//\ end\ of\ create\_free\_surface\_elements}}
+
+\end{DoxyCodeInclude}
+ The volume constraint elements are only created if the boolean flag {\ttfamily Use\+\_\+volume\+\_\+constraint} is true (the default on construction of the problem). We hijack the pressure degree of freedom associated with the first element in region 1 and then the construction of the elements again uses the regions to ensure that a single layer of elements is created.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements=================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Create\ elements\ that\ impose\ volume\ constraint\ on\ the\ drop}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDropInChannelProblem_a53b96cd50b4e6c9bee294b8fb7dd51bd}{DropInChannelProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Do\ we\ need\ it?}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (!Use\_volume\_constraint)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ pointer\ to\ element\ whose\ pressure\ we're\ trading/hi-\/jacking:}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Element\ 0\ in\ region\ 1}}
+\DoxyCodeLine{\ Hijacked\_element\_pt=\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ Fluid\_mesh\_pt-\/>region\_element\_pt(1,0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ global\ pressure\ data\ by\ hijacking\ one\ of\ the\ pressure\ values}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ from\ inside\ the\ droplet}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ index\_of\_traded\_pressure=0;}
+\DoxyCodeLine{\ Drop\_pressure\_data\_pt=Hijacked\_element\_pt-\/>}
+\DoxyCodeLine{\ \ hijack\_internal\_value(0,index\_of\_traded\_pressure);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ volume\ constraint\ element\ -\/-\/\ pass\ traded\ pressure\ to\ it}}
+\DoxyCodeLine{\ Vol\_constraint\_el\_pt=\ }
+\DoxyCodeLine{\ \ \textcolor{keyword}{new}\ VolumeConstraintElement(\&\mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Problem\_Parameter::Volume}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Drop\_pressure\_data\_pt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index\_of\_traded\_pressure);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//Provide\ a\ reasonable\ initial\ guess\ for\ drop\ pressure\ (hydrostatics):}}
+\DoxyCodeLine{\ Drop\_pressure\_data\_pt-\/>set\_value(index\_of\_traded\_pressure,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Initial\_value\_for\_drop\_pressure);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Add\ volume\ constraint\ element\ to\ the\ mesh}}
+\DoxyCodeLine{\ Volume\_constraint\_mesh\_pt-\/>add\_element\_pt(Vol\_constraint\_el\_pt);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ free\ surface\ boundaries}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nb=Fluid\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ b=First\_drop\_boundary\_id;b<nb;b++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Note\ region\ is\ important}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ How\ many\ bulk\ fluid\ elements\ are\ adjacent\ to\ boundary\ b\ in\ region\ 0?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ n\_element\ =\ Fluid\_mesh\_pt-\/>nboundary\_element\_in\_region(b,0);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ bulk\ fluid\ elements\ adjacent\ to\ boundary\ b?}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ e=0;e<n\_element;e++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ pointer\ to\ the\ bulk\ fluid\ element\ that\ is\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ adjacent\ to\ boundary\ b\ in\ region\ 0?}}
+\DoxyCodeLine{\ \ \ \ \ ELEMENT*\ bulk\_elem\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ \ \ Fluid\_mesh\_pt-\/>boundary\_element\_in\_region\_pt(b,0,e));}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Find\ the\ index\ of\ the\ face\ of\ element\ e\ along\ boundary\ b\ in\ region\ 0}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{int}\ face\_index\ =\ Fluid\_mesh\_pt-\/>face\_index\_at\_boundary\_in\_region(b,0,e);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Create\ new\ element}}
+\DoxyCodeLine{\ \ \ \ \ ElasticLineVolumeConstraintBoundingElement<ELEMENT>*\ el\_pt\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keyword}{new}\ ElasticLineVolumeConstraintBoundingElement<ELEMENT>(}
+\DoxyCodeLine{\ \ \ \ \ \ \ bulk\_elem\_pt,face\_index);\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//Set\ the\ "{}master"{}\ volume\ constraint\ element}}
+\DoxyCodeLine{\ \ \ \ \ el\_pt-\/>set\_volume\_constraint\_element(Vol\_constraint\_el\_pt);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Add\ it\ to\ the\ mesh}}
+\DoxyCodeLine{\ \ \ \ \ Volume\_constraint\_mesh\_pt-\/>add\_element\_pt(el\_pt);\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \}\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//\ end\ of\ create\_volume\_constraint\_elements}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_remove}{}\doxysection{\texorpdfstring{Removal of the volume constraint}{Removal of the volume constraint}}\label{index_remove}
+The function {\ttfamily remove\+\_\+volume\+\_\+constraint()}, resets the boolean flag to false, clears the hijacked data, deletes the volume constraint elements and mesh and then removes the volume constraint mesh from the problem\textquotesingle{}s list of sub meshes, before reassigning the equation numbers.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Change\ the\ boundary\ conditions\ to\ remove\ the\ volume\ constraint}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ remove\_volume\_constraint()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Ignore\ all\ volume\ constraint\ stuff\ from\ here\ onwards}}
+\DoxyCodeLine{\ \ \ Use\_volume\_constraint=\textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Unhijack\ the\ data\ in\ the\ internal\ element}}
+\DoxyCodeLine{\ \ \ Hijacked\_element\_pt-\/>unhijack\_all\_data();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Delete\ the\ volume\ constraint\ elements}}
+\DoxyCodeLine{\ \ \ delete\_volume\_constraint\_elements();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Internal\ pressure\ is\ gone\ -\/-\/\ null\ it\ out}}
+\DoxyCodeLine{\ \ \ Drop\_pressure\_data\_pt=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Kill\ the\ mesh\ too}}
+\DoxyCodeLine{\ \ \ \textcolor{keyword}{delete}\ Volume\_constraint\_mesh\_pt;}
+\DoxyCodeLine{\ \ \ Volume\_constraint\_mesh\_pt=0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Remove\ the\ sub\ meshes}}
+\DoxyCodeLine{\ \ \ this-\/>flush\_sub\_meshes();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Add\ Fluid\_mesh\_pt\ sub\ meshes}}
+\DoxyCodeLine{\ \ \ this-\/>add\_sub\_mesh(Fluid\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Add\ Free\_surface\ sub\ meshes}}
+\DoxyCodeLine{\ \ \ this-\/>add\_sub\_mesh(this-\/>Free\_surface\_mesh\_pt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Rebuild\ the\ global\ mesh}}
+\DoxyCodeLine{\ \ \ this-\/>rebuild\_global\_mesh();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Renumber\ the\ equations}}
+\DoxyCodeLine{\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Removed\ volume\ constraint\ to\ obtain\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ <<\ this-\/>assign\_eqn\_numbers()\ <<\ \textcolor{stringliteral}{"{}\ new\ equation\ numbers\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+The computation of the initial static solution means that we must still include the calls to the {\ttfamily create\+\_\+volume\+\_\+constraint\+\_\+elements()} and {\ttfamily delete\+\_\+volume\+\_\+constraint\+\_\+elements()} in {\ttfamily actions\+\_\+before\+\_\+adapt()} and {\ttfamily actions\+\_\+after\+\_\+adapt()}. We have chosen to have the functions return immediately if the volume constraint is not being enforced, rather than using {\ttfamily if} blocks within the {\ttfamily actions\+\_\+before/after\+\_\+adapt}() functions.
+
+\DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysubsection{\texorpdfstring{Exercises}{Exercises}}\label{index_exercises}
+
+\begin{DoxyEnumerate}
+\item Explore what happens as the viscosity ratio is varied. Are the results as you expect? Does the solution tend to a steadily propagating state? Does the solution approach the bubble solution as this viscosity ratio tends to zero? (Is this a sensible limit to take?) ~\newline
+~\newline
+
+\item How could you modify the code to compute the steadily-\/propagating solutions directly, rather than using time simulation? ~\newline
+~\newline
+
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/unstructured\+\_\+adaptive\+\_\+fs/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+ \begin{center} \href{../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_drop_in_channel.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/unstructured\+\_\+adaptive\+\_\+fs/adaptive\+\_\+drop\+\_\+in\+\_\+channel.\+cc}} \end{center}  .
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

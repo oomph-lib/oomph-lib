@@ -1,0 +1,654 @@
+\doxysection{Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classInterfaceProblem}{}\label{classInterfaceProblem}\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+
+
+Single fluid interface problem including transport of an insoluble surfactant.  
+
+
+Inheritance diagram for Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.282932cm]{classInterfaceProblem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInterfaceProblem_a2ecc265740dba1626344fc090fad5fa6}{Interface\+Problem}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+r}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+theta}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{r\+\_\+min}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{r\+\_\+max}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{l\+\_\+y}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{theta\+\_\+max}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x and y directions. Also lengths of the domain in x-\/ and y-\/directions and the height of the layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5}{unsteady\+\_\+run}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{nstep}})
+\begin{DoxyCompactList}\small\item\em Run an unsteady simulation with specified number of steps. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{compute\+\_\+total\+\_\+mass}} ()
+\begin{DoxyCompactList}\small\item\em Compute the total mass. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}{Interface\+Problem}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+r}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+z}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{l\+\_\+z}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{\texorpdfstring{$\sim$}{\string~}\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
+\begin{DoxyCompactList}\small\item\em Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}{global\+\_\+temporal\+\_\+error\+\_\+norm}} ()
+\begin{DoxyCompactList}\small\item\em The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{t\+\_\+max}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dt}})
+\begin{DoxyCompactList}\small\item\em Do unsteady run up to maximum time t\+\_\+max with given timestep dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{compute\+\_\+total\+\_\+mass}} ()
+\begin{DoxyCompactList}\small\item\em Compute the total mass of the insoluble surfactant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}{Interface\+Problem}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+r}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{n\+\_\+z}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{l\+\_\+z}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{\texorpdfstring{$\sim$}{\string~}\+Interface\+Problem}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
+\begin{DoxyCompactList}\small\item\em Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}{global\+\_\+temporal\+\_\+error\+\_\+norm}} ()
+\begin{DoxyCompactList}\small\item\em The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{doc\+\_\+info}})
+\begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{t\+\_\+max}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{dt}})
+\begin{DoxyCompactList}\small\item\em Do unsteady run up to maximum time t\+\_\+max with given timestep dt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{compute\+\_\+total\+\_\+mass}} ()
+\begin{DoxyCompactList}\small\item\em Compute the total mass of the insoluble surfactant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac}{Interface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Mesh for the free surface (interface) elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Elastic\+Rectangular\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}{Constitutive\+\_\+law\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the constitutive law. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}{deform\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{epsilon}})
+\begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}{deform\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{epsilon}})
+\begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ofstream}} \mbox{\hyperlink{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}{Trace\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_a9367afe223abf813838405a7d377767c}{R\+\_\+max}}
+\begin{DoxyCompactList}\small\item\em Axial lengths of domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d}{L\+\_\+y}}
+\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a444b33e2ccb3eacdc619abda73575a50}{Bulk\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to bulk mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb}{Surface\+\_\+mesh\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the surface mes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem_a852833a405566b7f08b852e7174cfdeb}{Document\+\_\+node\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a node for documentation purposes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}}$>$\newline
+class Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Single fluid interface problem including transport of an insoluble surfactant. 
+
+Single axisymmetric fluid interface problem including the transport of an soluble surfactant.
+
+Single axisymmetric fluid interface problem including the transport of an insoluble surfactant. 
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00196}{196}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classInterfaceProblem_a2ecc265740dba1626344fc090fad5fa6}\label{classInterfaceProblem_a2ecc265740dba1626344fc090fad5fa6} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
+\index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\mbox{\hyperlink{classInterfaceProblem}{\+::\+Interface\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+r,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+theta,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{r\+\_\+min,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{r\+\_\+max,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{l\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{theta\+\_\+max }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass number of elements in x and y directions. Also lengths of the domain in x-\/ and y-\/directions and the height of the layer. 
+
+Problem constructor. 
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00270}{270}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00261}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Document\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00081}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00084}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00060}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}\label{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
+\index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\mbox{\hyperlink{classInterfaceProblem}{\+::\+Interface\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+r,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+z,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{l\+\_\+z }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) 
+
+Constructor for single fluid interface problem. 
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00915}{915}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00074}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00081}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00084}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00060}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}.
+
+\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}}
+\index{````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}InterfaceProblem()}{\string~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00761}{761}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}\label{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
+\index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\mbox{\hyperlink{classInterfaceProblem}{\+::\+Interface\+Problem}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+r,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{n\+\_\+z,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{l\+\_\+z }\end{DoxyParamCaption})}
+
+
+
+Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) 
+
+\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}}
+\index{````~InterfaceProblem@{\texorpdfstring{$\sim$}{\string~}InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}InterfaceProblem()}{\string~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00424}{424}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}\label{classInterfaceProblem_ab4193771472aefce4cd67261491cc344} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00213}{213}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}\label{classInterfaceProblem_ab4193771472aefce4cd67261491cc344} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
+\index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00767}{767}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
+\index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the total mass. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00222}{222}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00358}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
+\index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the total mass of the insoluble surfactant. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00855}{855}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
+\index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the total mass of the insoluble surfactant. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00517}{517}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}\label{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
+\index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Deform the mesh/free surface to a prescribed function. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00880}{880}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
+
+\Hypertarget{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}\label{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
+\index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Deform the mesh/free surface to a prescribed function. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00542}{542}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
+
+\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00443}{443}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
+
+\Hypertarget{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}\label{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!global\_temporal\_error\_norm@{global\_temporal\_error\_norm}}
+\index{global\_temporal\_error\_norm@{global\_temporal\_error\_norm}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{global\_temporal\_error\_norm()}{global\_temporal\_error\_norm()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00801}{801}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}\label{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!global\_temporal\_error\_norm@{global\_temporal\_error\_norm}}
+\index{global\_temporal\_error\_norm@{global\_temporal\_error\_norm}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{global\_temporal\_error\_norm()}{global\_temporal\_error\_norm()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00457}{457}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00775}{775}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00429}{429}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
+
+\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
+
+Perform run up to specified time t\+\_\+max with given timestep dt. 
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l01165}{1165}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00075}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00097}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pvd\+\_\+file}}.
+
+\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
+
+\Hypertarget{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5}\label{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{void}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{const}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{unsigned}} \&}]{nstep }\end{DoxyParamCaption})}
+
+
+
+Run an unsteady simulation with specified number of steps. 
+
+Unsteady run with specified number of steps. 
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00484}{484}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00075}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classInterfaceProblem_a444b33e2ccb3eacdc619abda73575a50}\label{classInterfaceProblem_a444b33e2ccb3eacdc619abda73575a50} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{255}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00213}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00880}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00801}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00775}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition()}}.
+
+\Hypertarget{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}\label{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00843}{843}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}\label{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Elastic\+Rectangular\+Quad\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00499}{499}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}\label{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
+\index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Constitutive\+Law}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Constitutive\+\_\+law\+\_\+pt}
+
+
+
+Pointer to the constitutive law. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00505}{505}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a852833a405566b7f08b852e7174cfdeb}\label{classInterfaceProblem_a852833a405566b7f08b852e7174cfdeb} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Document\_node\_pt@{Document\_node\_pt}}
+\index{Document\_node\_pt@{Document\_node\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Document\_node\_pt}{Document\_node\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Document\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to a node for documentation purposes. 
+
+Node for documentatin. 
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00261}{261}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac}\label{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Interface\_mesh\_pt@{Interface\_mesh\_pt}}
+\index{Interface\_mesh\_pt@{Interface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Interface\_mesh\_pt}{Interface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Mesh}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Interface\+\_\+mesh\+\_\+pt}
+
+
+
+Mesh for the free surface (interface) elements. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{846}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00855}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass()}}.
+
+\Hypertarget{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d}\label{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!L\_y@{L\_y}}
+\index{L\_y@{L\_y}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{L\_y}{L\_y}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+L\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00252}{252}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a9367afe223abf813838405a7d377767c}\label{classInterfaceProblem_a9367afe223abf813838405a7d377767c} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!R\_max@{R\_max}}
+\index{R\_max@{R\_max}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{R\_max}{R\_max}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{double}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+R\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Axial lengths of domain. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00250}{250}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+\Hypertarget{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb}\label{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
+\index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Mesh}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the surface mes. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{258}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00222}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\Hypertarget{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}\label{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
+\index{Trace\_file@{Trace\_file}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}} , \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{class}} \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ofstream}} \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{ELEMENT}}, \mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{TIMESTEPPER}} $>$\+::\+Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Trace file. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00247}{247}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}\item 
+\mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}\item 
+\mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}\end{DoxyCompactItemize}

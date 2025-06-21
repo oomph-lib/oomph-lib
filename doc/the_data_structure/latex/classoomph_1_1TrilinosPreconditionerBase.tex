@@ -1,0 +1,399 @@
+\doxysection{oomph\+::Trilinos\+Preconditioner\+Base Class Reference}
+\hypertarget{classoomph_1_1TrilinosPreconditionerBase}{}\label{classoomph_1_1TrilinosPreconditionerBase}\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+
+
+Base class for Trilinos preconditioners as oomph-\/lib preconditioner.  
+
+
+
+
+{\ttfamily \#include $<$trilinos\+\_\+preconditioners.\+h$>$}
+
+Inheritance diagram for oomph\+::Trilinos\+Preconditioner\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1TrilinosPreconditionerBase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aebe14e80ad9c0323ea4faf568743b204}{Trilinos\+Preconditioner\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a5d82e0cefa29fee69f80fb376763e584}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Preconditioner\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a6cc1da6ffb61bec844ccd33f6e5e8807}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em deletes the preconditioner, matrices and maps \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_af05902afe208340ad217e7ec5944b48c}{Trilinos\+Preconditioner\+Base}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aaef80c74c1d94a42420e3362194efce9}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a5548dff11ca795d13386ca64956a2c73}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{epetra\+\_\+matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Function to setup a preconditioner for the linear system defined by the oomph-\/lib oomph\+\_\+matrix\+\_\+pt and Epetra epetra\+\_\+matrix\+\_\+pt matrices. This method is called by Trilinos solvers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a12ec6cf14b8d27ed9ef810dcad5e1182}{preconditioner\+\_\+solve}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em applies the preconditioner \end{DoxyCompactList}\item 
+Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a09692adba8eda41a2bc86a4de33ca5e3}{epetra\+\_\+operator\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Epetra\+\_\+preconditioner\+\_\+pt. For use with {\ttfamily \doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}}. \end{DoxyCompactList}\item 
+Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_adc97eef4dcb8acbca2ef7432e2bde226}{epetra\+\_\+operator\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to Epetra\+\_\+preconditioner\+\_\+pt (const version) For use with {\ttfamily \doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_a7bd8801e4395ccb88fe1f4296e77e9ab}{Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Preconditioner_ab6e58c82c3cc4f4e44434a7d92d8e776}{Preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a63fefcfb21ae1c2a3b4232d2dfbb6340}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ab60952a82cc1b6b91fff5924eaa62c0e}{\texorpdfstring{$\sim$}{\string~}\+Preconditioner}} ()
+\begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1e469ffc87f31f6f2eebbe5ccf03d78b}{preconditioner\+\_\+solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{r}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
+\begin{DoxyCompactList}\small\item\em Apply the preconditioner. Pure virtual generic interface function. This method should apply the preconditioner operator to the vector r and return the vector z. (broken virtual) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ac2c0f7f39eccd814e72cc5813ec864e0}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Setup the preconditioner\+: store the matrix pointer and the communicator pointer then call preconditioner specific \doxylink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Compatability layer for old preconditioners where problem pointers were needed. The problem pointer is only used to get a communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_aad84467ec9243138945c4d5bbca8fa6c}{enable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Set up the block preconditioner quietly! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a221f120f734fd3ca851db42b8defb53d}{disable\+\_\+silent\+\_\+preconditioner\+\_\+setup}} ()
+\begin{DoxyCompactList}\small\item\em Be verbose in the block preconditioner setup. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get function for matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_af459b7333c4c64435fd8fa933535901f}{set\+\_\+matrix\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1Preconditioner_a08e0582b77c6cbfaf85b80a4ac5c11f3}{matrix\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the matrix pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Get function for comm pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a306f5a52f493816fcfda2dc9b2ee1dbf}{set\+\_\+comm\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a88d799e18a605c3993c6fcac0a41d901}{comm\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Set the communicator pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a9202e15534f063a8e21a8a60623eac9f}{setup\+\_\+time}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the time to setup the preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a1183f65956ef8a5b332a1246f418e907}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. There\textquotesingle{}s an assumption here that the block preconditioner will be in CR form but since that assumption is hard coded all over \doxylink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner} we\textquotesingle{}re safe. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Preconditioner_a61a462f4266c22050b4ab9ab441c77a6}{turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1BlockPreconditioner}{Block\+Preconditioner}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+block\+\_\+prec\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+in\+\_\+master\+\_\+preconditioner\+\_\+coarse}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{doftype\+\_\+coarsen\+\_\+map\+\_\+coarse}})
+\begin{DoxyCompactList}\small\item\em Virtual interface function for making a preconditioner a subsidiary of a block preconditioner. By default nothing is needed, but if this preconditioner is also a block preconditioner then things need to happen. Version for coarsening dof-\/types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a6fefea3562e20d9b446dbe72ce88d506}{Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62}{setup\+\_\+trilinos\+\_\+preconditioner}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{epetra\+\_\+matrix\+\_\+pt}})=0
+\begin{DoxyCompactList}\small\item\em Function to set up a specific Trilinos preconditioner. This is called by setup(...). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a082fb118f5c9cb80daffba53d85a74d8}{Epetra\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The preconditioner which will be set up using function setup\+\_\+trilinos\+\_\+preconditioner(...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_a515a6df2a535337d520cfe98bdcd38f4}{Epetra\+\_\+matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer used to store the epetra matrix -\/ only used when this preconditioner is setup using the oomph-\/lib interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1Preconditioner}{oomph\+::\+Preconditioner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1Preconditioner_ad191d6be6caf8875700f54c939ec33e6}{Silent\+\_\+preconditioner\+\_\+setup}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether or not the build should be done silently. \end{DoxyCompactList}\item 
+std\+::ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1Preconditioner_a2a6b2f6cd34495167ea766b47f055a7d}{Stream\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to the output stream -- defaults to std\+::cout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for Trilinos preconditioners as oomph-\/lib preconditioner. 
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00055}{55}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_aebe14e80ad9c0323ea4faf568743b204}\label{classoomph_1_1TrilinosPreconditionerBase_aebe14e80ad9c0323ea4faf568743b204} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!TrilinosPreconditionerBase@{TrilinosPreconditionerBase}}
+\index{TrilinosPreconditionerBase@{TrilinosPreconditionerBase}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{TrilinosPreconditionerBase()}{TrilinosPreconditionerBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Trilinos\+Preconditioner\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00059}{59}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00142}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{Epetra\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a5d82e0cefa29fee69f80fb376763e584}\label{classoomph_1_1TrilinosPreconditionerBase_a5d82e0cefa29fee69f80fb376763e584} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!````~TrilinosPreconditionerBase@{\texorpdfstring{$\sim$}{\string~}TrilinosPreconditionerBase}}
+\index{````~TrilinosPreconditionerBase@{\texorpdfstring{$\sim$}{\string~}TrilinosPreconditionerBase}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrilinosPreconditionerBase()}{\string~TrilinosPreconditionerBase()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Preconditioner\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00067}{67}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{clean\+\_\+up\+\_\+memory()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_af05902afe208340ad217e7ec5944b48c}\label{classoomph_1_1TrilinosPreconditionerBase_af05902afe208340ad217e7ec5944b48c} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!TrilinosPreconditionerBase@{TrilinosPreconditionerBase}}
+\index{TrilinosPreconditionerBase@{TrilinosPreconditionerBase}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{TrilinosPreconditionerBase()}{TrilinosPreconditionerBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Trilinos\+Preconditioner\+Base (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase}{Trilinos\+Preconditioner\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a6cc1da6ffb61bec844ccd33f6e5e8807}\label{classoomph_1_1TrilinosPreconditionerBase_a6cc1da6ffb61bec844ccd33f6e5e8807} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+deletes the preconditioner, matrices and maps 
+
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829bedcd9db238431262027}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{78}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00142}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{Epetra\+\_\+preconditioner\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00100}{setup()}}, and \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00067}{\texorpdfstring{$\sim$}{\string~}\+Trilinos\+Preconditioner\+Base()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a09692adba8eda41a2bc86a4de33ca5e3}\label{classoomph_1_1TrilinosPreconditionerBase_a09692adba8eda41a2bc86a4de33ca5e3} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!epetra\_operator\_pt@{epetra\_operator\_pt}}
+\index{epetra\_operator\_pt@{epetra\_operator\_pt}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{epetra\_operator\_pt()}{epetra\_operator\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*}\& oomph\+::\+Trilinos\+Preconditioner\+Base\+::epetra\+\_\+operator\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Epetra\+\_\+preconditioner\+\_\+pt. For use with {\ttfamily \doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00118}{118}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{Epetra\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_adc97eef4dcb8acbca2ef7432e2bde226}\label{classoomph_1_1TrilinosPreconditionerBase_adc97eef4dcb8acbca2ef7432e2bde226} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!epetra\_operator\_pt@{epetra\_operator\_pt}}
+\index{epetra\_operator\_pt@{epetra\_operator\_pt}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{epetra\_operator\_pt()}{epetra\_operator\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Epetra\+\_\+\+Operator \texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Preconditioner\+Base\+::epetra\+\_\+operator\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Epetra\+\_\+preconditioner\+\_\+pt (const version) For use with {\ttfamily \doxylink{classoomph_1_1TrilinosAztecOOSolver}{Trilinos\+Aztec\+OOSolver}}. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00125}{125}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{Epetra\+\_\+preconditioner\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a12ec6cf14b8d27ed9ef810dcad5e1182}\label{classoomph_1_1TrilinosPreconditionerBase_a12ec6cf14b8d27ed9ef810dcad5e1182} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!preconditioner\_solve@{preconditioner\_solve}}
+\index{preconditioner\_solve@{preconditioner\_solve}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+applies the preconditioner 
+
+preconditioner\+\_\+solve -\/ applies the preconditioner to the vector r taking distributed oomph-\/lib vectors (Distributed\+Vector$<$double$>$) as arguments. 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{126}} of file \mbox{\hyperlink{trilinos__preconditioners_8cc_source}{trilinos\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00075}{Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{Epetra\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_aaef80c74c1d94a42420e3362194efce9}\label{classoomph_1_1TrilinosPreconditionerBase_aaef80c74c1d94a42420e3362194efce9} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!setup@{setup}}
+\index{setup@{setup}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Broken assignment operator. 
+
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. {\bfseries{NOTE}} 1. matrix\+\_\+pt must point to an object of class \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix This method should be called by oomph-\/lib solvers and preconditioners.
+
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. {\bfseries{NOTE}} 1. matrix\+\_\+pt must point to an object of class \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} or Distributed\+CRDouble\+Matrix This method should be called by oomph-\/lib solvers and preconditioners 
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{53}} of file \mbox{\hyperlink{trilinos__preconditioners_8cc_source}{trilinos\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00142}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, and \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62}{setup\+\_\+trilinos\+\_\+preconditioner()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a5548dff11ca795d13386ca64956a2c73}\label{classoomph_1_1TrilinosPreconditionerBase_a5548dff11ca795d13386ca64956a2c73} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!setup@{setup}}
+\index{setup@{setup}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*}}]{epetra\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Function to setup a preconditioner for the linear system defined by the oomph-\/lib oomph\+\_\+matrix\+\_\+pt and Epetra epetra\+\_\+matrix\+\_\+pt matrices. This method is called by Trilinos solvers. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00100}{100}} of file \mbox{\hyperlink{trilinos__preconditioners_8cc_source}{trilinos\+\_\+preconditioners.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62}{setup\+\_\+trilinos\+\_\+preconditioner()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62}\label{classoomph_1_1TrilinosPreconditionerBase_aeb2b1cee61617fd68a8beb911ddc4a62} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!setup\_trilinos\_preconditioner@{setup\_trilinos\_preconditioner}}
+\index{setup\_trilinos\_preconditioner@{setup\_trilinos\_preconditioner}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{setup\_trilinos\_preconditioner()}{setup\_trilinos\_preconditioner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup\+\_\+trilinos\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*}}]{epetra\+\_\+matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Function to set up a specific Trilinos preconditioner. This is called by setup(...). 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1TrilinosMLPreconditioner_af3042313db1f0a5565bcd33ef36d2c6a}{oomph\+::\+Trilinos\+MLPreconditioner}}, and \mbox{\hyperlink{classoomph_1_1TrilinosIFPACKPreconditioner_a947df99c1dd6afa6a3149d045f9452a4}{oomph\+::\+Trilinos\+IFPACKPreconditioner}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{setup()}}, and \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00100}{setup()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a6fefea3562e20d9b446dbe72ce88d506}\label{classoomph_1_1TrilinosPreconditionerBase_a6fefea3562e20d9b446dbe72ce88d506} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}}
+\index{Cumulative\_preconditioner\_solve\_time@{Cumulative\_preconditioner\_solve\_time}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{Cumulative\_preconditioner\_solve\_time}{Cumulative\_preconditioner\_solve\_time}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Cumulative\+\_\+preconditioner\+\_\+solve\+\_\+time = 0.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static double that accumulates the preconditioner solve time of all instantiations of this class. Reset it manually, e.\+g. after every Newton solve. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00075}{75}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a515a6df2a535337d520cfe98bdcd38f4}\label{classoomph_1_1TrilinosPreconditionerBase_a515a6df2a535337d520cfe98bdcd38f4} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!Epetra\_matrix\_pt@{Epetra\_matrix\_pt}}
+\index{Epetra\_matrix\_pt@{Epetra\_matrix\_pt}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{Epetra\_matrix\_pt}{Epetra\_matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}}\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Epetra\+\_\+matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer used to store the epetra matrix -\/ only used when this preconditioner is setup using the oomph-\/lib interface. 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00142}{142}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{setup()}}, and \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00059}{Trilinos\+Preconditioner\+Base()}}.
+
+\Hypertarget{classoomph_1_1TrilinosPreconditionerBase_a082fb118f5c9cb80daffba53d85a74d8}\label{classoomph_1_1TrilinosPreconditionerBase_a082fb118f5c9cb80daffba53d85a74d8} 
+\index{oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}!Epetra\_preconditioner\_pt@{Epetra\_preconditioner\_pt}}
+\index{Epetra\_preconditioner\_pt@{Epetra\_preconditioner\_pt}!oomph::TrilinosPreconditionerBase@{oomph::TrilinosPreconditionerBase}}
+\doxysubsubsection{\texorpdfstring{Epetra\_preconditioner\_pt}{Epetra\_preconditioner\_pt}}
+{\footnotesize\ttfamily Epetra\+\_\+\+Operator\texorpdfstring{$\ast$}{*} oomph\+::\+Trilinos\+Preconditioner\+Base\+::\+Epetra\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The preconditioner which will be set up using function setup\+\_\+trilinos\+\_\+preconditioner(...) 
+
+
+
+Definition at line \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00138}{138}} of file \mbox{\hyperlink{trilinos__preconditioners_8h_source}{trilinos\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00078}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00118}{epetra\+\_\+operator\+\_\+pt()}}, \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00125}{epetra\+\_\+operator\+\_\+pt()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00126}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00196}{oomph\+::\+Trilinos\+MLPreconditioner\+::setup\+\_\+trilinos\+\_\+preconditioner()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00237}{oomph\+::\+Trilinos\+IFPACKPreconditioner\+::setup\+\_\+trilinos\+\_\+preconditioner()}}, and \mbox{\hyperlink{trilinos__preconditioners_8h_source_l00059}{Trilinos\+Preconditioner\+Base()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trilinos__preconditioners_8h}{trilinos\+\_\+preconditioners.\+h}}\item 
+\mbox{\hyperlink{trilinos__preconditioners_8cc}{trilinos\+\_\+preconditioners.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,56 @@
+\doxysection{oomph\+::QElement2\+Bulk\+Coordinate\+Derivatives Namespace Reference}
+\hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives}{}\label{namespaceoomph_1_1QElement2BulkCoordinateDerivatives}\index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
+
+
+Namespace for helper functions that calculate derivatives of the local coordinates in the bulk elements wrt the local coordinates in the face element.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a94c0ba8cb61bc07bdf826604637d0a3b}{faces0}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dsbulk\+\_\+dsface}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interior\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Function for the east and west faces, along which s0 is fixed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}{faces1}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dsbulk\+\_\+dsface}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interior\+\_\+direction}})
+\begin{DoxyCompactList}\small\item\em Function for the north and south faces, along which s1 is fixed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for helper functions that calculate derivatives of the local coordinates in the bulk elements wrt the local coordinates in the face element. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a94c0ba8cb61bc07bdf826604637d0a3b}\label{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a94c0ba8cb61bc07bdf826604637d0a3b} 
+\index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}!faces0@{faces0}}
+\index{faces0@{faces0}!oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
+\doxysubsubsection{\texorpdfstring{faces0()}{faces0()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+Function for the east and west faces, along which s0 is fixed. 
+
+
+
+Definition at line \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00116}{116}} of file \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source}{Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__elements_8cc_source_l00913}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00305}{oomph\+::\+QSpectral\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{Qelements_8h_source_l01201}{oomph\+::\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}.
+
+\Hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}\label{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458} 
+\index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}!faces1@{faces1}}
+\index{faces1@{faces1}!oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
+\doxysubsubsection{\texorpdfstring{faces1()}{faces1()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+Function for the north and south faces, along which s1 is fixed. 
+
+
+
+Definition at line \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00131}{131}} of file \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source}{Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hermite__elements_8cc_source_l00913}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00305}{oomph\+::\+QSpectral\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{Qelements_8h_source_l01201}{oomph\+::\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}.
+

@@ -1,0 +1,94 @@
+\doxysection{oomph\+::PMLMapping\+And\+Transformed\+Coordinate Class Reference}
+\hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate}{}\label{classoomph_1_1PMLMappingAndTransformedCoordinate}\index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
+
+
+Class to hold the mapping function for the PML.  
+
+
+
+
+{\ttfamily \#include $<$pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::PMLMapping\+And\+Transformed\+Coordinate\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1PMLMappingAndTransformedCoordinate}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a48dcef4398f40ea5fea58153d5de74f0}{PMLMapping\+And\+Transformed\+Coordinate}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}{gamma}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nu\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+width\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&k\+\_\+squared)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual to return PML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}{transformed\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nu\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+width\+\_\+i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{pml\+\_\+inner\+\_\+boundary}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&k\+\_\+squared)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual to return PML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to hold the mapping function for the PML. 
+
+Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00079}{79}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a48dcef4398f40ea5fea58153d5de74f0}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a48dcef4398f40ea5fea58153d5de74f0} 
+\index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!PMLMappingAndTransformedCoordinate@{PMLMappingAndTransformedCoordinate}}
+\index{PMLMappingAndTransformedCoordinate@{PMLMappingAndTransformedCoordinate}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
+\doxysubsubsection{\texorpdfstring{PMLMappingAndTransformedCoordinate()}{PMLMappingAndTransformedCoordinate()}}
+{\footnotesize\ttfamily oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::\+PMLMapping\+And\+Transformed\+Coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor (empty) 
+
+
+
+Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00083}{83}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac} 
+\index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!gamma@{gamma}}
+\index{gamma@{gamma}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
+\doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::gamma (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{pml\+\_\+width\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual to return PML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a55856d2c1fb1793830a170570228d9f6}{oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00502}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+pml\+\_\+coefficients()}}.
+
+\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473} 
+\index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!transformed\_coordinate@{transformed\_coordinate}}
+\index{transformed\_coordinate@{transformed\_coordinate}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
+\doxysubsubsection{\texorpdfstring{transformed\_coordinate()}{transformed\_coordinate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{nu\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{pml\+\_\+width\+\_\+i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{pml\+\_\+inner\+\_\+boundary,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pure virtual to return PML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3664f16b314b4d72a82d5c0acc8a36de}{oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}}.
+
+
+
+Referenced by \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00570}{oomph\+::\+PMLFourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+complex\+\_\+r()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}\end{DoxyCompactItemize}

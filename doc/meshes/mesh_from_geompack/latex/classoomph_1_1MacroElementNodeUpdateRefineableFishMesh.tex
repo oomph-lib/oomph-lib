@@ -1,0 +1,146 @@
+\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{}\label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}\index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
+
+
+Refineable fish shaped mesh with Macro\+Element-\/based node update. The fish\textquotesingle{}s back is represented by a specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base.  
+
+
+
+
+{\ttfamily \#include $<$fish\+\_\+mesh.\+h$>$}
+
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.821138cm]{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a7adcb19be3d66c63d88bf87d4822dacc}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{back\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper (defaults to (Steady) default timestepper defined in Mesh). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4}{\texorpdfstring{$\sim$}{\string~}\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a1008dd9faa50699dcef68c8c35d6979c}{node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{update\+\_\+all\+\_\+solid\+\_\+nodes}}=\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}})
+\begin{DoxyCompactList}\small\item\em Resolve mesh update\+: Node\+Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RefineableFishMesh}{oomph\+::\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableFishMesh_a7f31e65306286e83a5d17459bae9163d}{Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to timestepper -- defaults to (Steady) default timestepper defined in the Mesh base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableFishMesh_a82bc04aea6deaf2faa7306aa047e12ef}{Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{back\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper (defaults to (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1RefineableFishMesh_a8304d093e015001a6d56faebdd2d4636}{\texorpdfstring{$\sim$}{\string~}\+Refineable\+Fish\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty -- all cleanup gets handled in the base classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1FishMesh}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1FishMesh_a492c0535a4a0bf97729dfdff3754d211}{Fish\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to timestepper (defaults to the (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FishMesh_ac0b931509ec02c03f8ee5676355f196b}{Fish\+Mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{back\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}}=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper (defaults to the (Steady) default timestepper defined in Mesh) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1FishMesh_a3763b9be54c74d15a8c5b2129e0f4fae}{\texorpdfstring{$\sim$}{\string~}\+Fish\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Kill the geom object that represents the fish\textquotesingle{}s back (if necessary) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1FishMesh_ab803f4a1cdc70beae6849a0d106847f7}{fish\+\_\+back\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to geom object that represents the fish\textquotesingle{}s back. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1FishMesh_a8be5a49d33256e48c8d221ed6d667402}{domain\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Access function to \doxylink{classoomph_1_1FishDomain}{Fish\+Domain}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Types inherited from \mbox{\hyperlink{classoomph_1_1FishMesh}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classoomph_1_1FishMesh_a4a4137c4add890a283e51651c5c47f62a3d3771209da5e9d30eedf957678f24fb}{Lower\+\_\+body}}
+, \mbox{\hyperlink{classoomph_1_1FishMesh_a4a4137c4add890a283e51651c5c47f62aee1779e3610fcc506554edb97df12b81}{Upper\+\_\+body}}
+, \mbox{\hyperlink{classoomph_1_1FishMesh_a4a4137c4add890a283e51651c5c47f62a616ba7504cd0d8970e1e275579f5606d}{Lower\+\_\+fin}}
+, \mbox{\hyperlink{classoomph_1_1FishMesh_a4a4137c4add890a283e51651c5c47f62a773d3896b889d4f05ed5902482650da1}{Upper\+\_\+fin}}
+ \}
+\begin{DoxyCompactList}\small\item\em Remesh function ids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1RefineableFishMesh}{oomph\+::\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1RefineableFishMesh_a1fb10f94f78c7a4e37113fbf4c72f00c}{setup\+\_\+adaptivity}} ()
+\begin{DoxyCompactList}\small\item\em Setup all the information that\textquotesingle{}s required for spatial adaptivity\+: Set pointers to macro elements and build quadtree forest. (contained in separate function as this functionality is common to both constructors),. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1FishMesh}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1FishMesh_aabde81364817d938f0924997bf4f63cc}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{time\+\_\+stepper\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Build the mesh, using the geometric object identified by Back\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classoomph_1_1FishMesh}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FishMesh_a26e8eb98c11d6b45cc3b5c5a8e45b530}{Back\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to fish back. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FishDomain}{Fish\+Domain}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1FishMesh_ae18c3154ad99054c073840c6b134c49b}{Domain\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \mbox{\hyperlink{classoomph_1_1FishMesh_ad1dd5a431f711d3ac14498cc6ab4d856}{Must\+\_\+kill\+\_\+fish\+\_\+back}}
+\begin{DoxyCompactList}\small\item\em Do I need to kill the fish back geom object? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}}$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}
+Refineable fish shaped mesh with Macro\+Element-\/based node update. The fish\textquotesingle{}s back is represented by a specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base. 
+
+Definition at line \mbox{\hyperlink{fish__mesh_8h_source_l00192}{192}} of file \mbox{\hyperlink{fish__mesh_8h_source}{fish\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a7adcb19be3d66c63d88bf87d4822dacc}\label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a7adcb19be3d66c63d88bf87d4822dacc} 
+\index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateRefineableFishMesh@{MacroElementNodeUpdateRefineableFishMesh}}
+\index{MacroElementNodeUpdateRefineableFishMesh@{MacroElementNodeUpdateRefineableFishMesh}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateRefineableFishMesh()}{MacroElementNodeUpdateRefineableFishMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{back\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{Time\+Stepper}} \texorpdfstring{$\ast$}{*}}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper (defaults to (Steady) default timestepper defined in Mesh). 
+
+
+
+Definition at line \mbox{\hyperlink{fish__mesh_8h_source_l00200}{200}} of file \mbox{\hyperlink{fish__mesh_8h_source}{fish\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{fish__mesh_8h_source_l00103}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Back\+\_\+pt}}, and \mbox{\hyperlink{fish__mesh_8h_source_l00084}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}.
+
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4}\label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4} 
+\index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateRefineableFishMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableFishMesh}}
+\index{````~MacroElementNodeUpdateRefineableFishMesh@{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableFishMesh}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MacroElementNodeUpdateRefineableFishMesh()}{\string~MacroElementNodeUpdateRefineableFishMesh()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{virtual}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor\+: empty. 
+
+
+
+Definition at line \mbox{\hyperlink{fish__mesh_8h_source_l00278}{278}} of file \mbox{\hyperlink{fish__mesh_8h_source}{fish\+\_\+mesh.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a1008dd9faa50699dcef68c8c35d6979c}\label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a1008dd9faa50699dcef68c8c35d6979c} 
+\index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
+\index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
+\doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{class}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{void}} \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{ELEMENT}} $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{const}} \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{bool}} \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily \mbox{\hyperlink{classoomph_1_1GeompackQuadMesh}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resolve mesh update\+: Node\+Update current nodal positions via sparse Macro\+Element-\/based update. \mbox{[}Doesn\textquotesingle{}t make sense to use this mesh with Solid\+Elements anyway, so we buffer the case if update\+\_\+all\+\_\+solid\+\_\+nodes is set to true.\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{fish__mesh_8h_source_l00285}{285}} of file \mbox{\hyperlink{fish__mesh_8h_source}{fish\+\_\+mesh.\+h}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fish__mesh_8h}{fish\+\_\+mesh.\+h}}\end{DoxyCompactItemize}

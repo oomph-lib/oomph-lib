@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: BinArray Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../figures/manifest.json">
+<link rel="mask-icon" href="../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../html/index.html"><img alt="oomph-lib" src="../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classBinArray-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">BinArray Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Base class for all bin arrays.  
+ <a href="classBinArray.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for BinArray:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="classBinArray.png" usemap="#BinArray_map" alt=""/>
+  <map id="BinArray_map" name="BinArray_map">
+<area href="classSamplePointContainer.html" title="Base class for all sample point containers." alt="SamplePointContainer" shape="rect" coords="78,0,224,24"/>
+<area href="classNonRefineableBinArray.html" title="NonRefineableBinArray class." alt="NonRefineableBinArray" shape="rect" coords="0,112,146,136"/>
+<area href="classRefineableBinArray.html" title="RefineableBinArray class." alt="RefineableBinArray" shape="rect" coords="156,112,302,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae441b5dcc0d0276f4661a09ff735b581" id="r_ae441b5dcc0d0276f4661a09ff735b581"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#ae441b5dcc0d0276f4661a09ff735b581">BinArray</a> (Mesh *<a class="el" href="classSamplePointContainer.html#aa638ec17fc518066a473e49ad148b122">mesh_pt</a>, const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;<a class="el" href="classSamplePointContainer.html#aac031f93652a7fcd21b5917a780d3022">min_and_max_coordinates</a>, const Vector&lt; unsigned &gt; &amp;<a class="el" href="classBinArray.html#a55a09b07aea56637d29ba63e28f21f1b">dimensions_of_bin_array</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a6b6b42a9e6bd8f116af8699e03a78d44">use_eulerian_coordinates_during_setup</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a399d246c1afdfd993ceb80e6f2de1400">ignore_halo_elements_during_locate_zeta_search</a>, const unsigned &amp;<a class="el" href="classSamplePointContainer.html#a816528cf500a37fa9ecabe6381b31852">nsample_points_generated_per_element</a>)</td></tr>
+<tr class="memdesc:ae441b5dcc0d0276f4661a09ff735b581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:ae441b5dcc0d0276f4661a09ff735b581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1bd440bc2eb6436158d306e26309eba" id="r_ae1bd440bc2eb6436158d306e26309eba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#ae1bd440bc2eb6436158d306e26309eba">BinArray</a> ()</td></tr>
+<tr class="memdesc:ae1bd440bc2eb6436158d306e26309eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken default constructor; needed for broken copy constructors. Don't call. It will die.  <br /></td></tr>
+<tr class="separator:ae1bd440bc2eb6436158d306e26309eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad60dd2a93b57b4fb7dae54cc342e9173" id="r_ad60dd2a93b57b4fb7dae54cc342e9173"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#ad60dd2a93b57b4fb7dae54cc342e9173">BinArray</a> (const <a class="el" href="classBinArray.html">BinArray</a> &amp;data)=delete</td></tr>
+<tr class="memdesc:ad60dd2a93b57b4fb7dae54cc342e9173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:ad60dd2a93b57b4fb7dae54cc342e9173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8cb652301eb452d7a908407134d36d1" id="r_af8cb652301eb452d7a908407134d36d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#af8cb652301eb452d7a908407134d36d1">operator=</a> (const <a class="el" href="classBinArray.html">BinArray</a> &amp;)=delete</td></tr>
+<tr class="memdesc:af8cb652301eb452d7a908407134d36d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:af8cb652301eb452d7a908407134d36d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab29e48e0bc2242673fac09b245714d4e" id="r_ab29e48e0bc2242673fac09b245714d4e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#ab29e48e0bc2242673fac09b245714d4e">~BinArray</a> ()</td></tr>
+<tr class="memdesc:ab29e48e0bc2242673fac09b245714d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:ab29e48e0bc2242673fac09b245714d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704060ec54de24dd65c73af63a25d2b2" id="r_a704060ec54de24dd65c73af63a25d2b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a704060ec54de24dd65c73af63a25d2b2">get_neighbouring_bins_helper</a> (const unsigned &amp;bin_index, const unsigned &amp;radius, Vector&lt; unsigned &gt; &amp;neighbouring_bin_index, const bool &amp;use_old_version=true)</td></tr>
+<tr class="memdesc:a704060ec54de24dd65c73af63a25d2b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function for computing the bin indices of neighbouring bins at a given "radius" of the specified bin. Final, optional boolean (default: true) chooses to use the old version which appears to be faster than Louis' new one after all (in the few cases where this functionality is still used &ndash; not all if we have cgal!)  <br /></td></tr>
+<tr class="separator:a704060ec54de24dd65c73af63a25d2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a223b6a244b75d4c1e358a95aa57f1" id="r_af2a223b6a244b75d4c1e358a95aa57f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#af2a223b6a244b75d4c1e358a95aa57f1">profile_get_neighbouring_bins_helper</a> ()</td></tr>
+<tr class="memdesc:af2a223b6a244b75d4c1e358a95aa57f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Profiling function to compare performance of two different versions of the get_neighbouring_bins_helper(...) function.  <br /></td></tr>
+<tr class="separator:af2a223b6a244b75d4c1e358a95aa57f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57a55f73048b7c209fdff93725c4049" id="r_ae57a55f73048b7c209fdff93725c4049"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#ae57a55f73048b7c209fdff93725c4049">coords_to_bin_index</a> (const Vector&lt; double &gt; &amp;zeta)</td></tr>
+<tr class="memdesc:ae57a55f73048b7c209fdff93725c4049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get (linearly enumerated) bin index of bin that contains specified zeta.  <br /></td></tr>
+<tr class="separator:ae57a55f73048b7c209fdff93725c4049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc41ba4569c25acdf56000a6a82e7859" id="r_afc41ba4569c25acdf56000a6a82e7859"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#afc41ba4569c25acdf56000a6a82e7859">coords_to_vectorial_bin_index</a> (const Vector&lt; double &gt; &amp;zeta, Vector&lt; unsigned &gt; &amp;bin_index)</td></tr>
+<tr class="memdesc:afc41ba4569c25acdf56000a6a82e7859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get "coordinates" of bin that contains specified zeta.  <br /></td></tr>
+<tr class="separator:afc41ba4569c25acdf56000a6a82e7859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fe7e379a53e3fee81ead7ef4045b40" id="r_a66fe7e379a53e3fee81ead7ef4045b40"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a66fe7e379a53e3fee81ead7ef4045b40">output_bins</a> (std::ofstream &amp;outfile)=0</td></tr>
+<tr class="memdesc:a66fe7e379a53e3fee81ead7ef4045b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output bins (boundaries and number of sample points in them)  <br /></td></tr>
+<tr class="separator:a66fe7e379a53e3fee81ead7ef4045b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc595a05f2ab19e1bb973c5a076b1432" id="r_afc595a05f2ab19e1bb973c5a076b1432"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#afc595a05f2ab19e1bb973c5a076b1432">output_bin_vertices</a> (std::ofstream &amp;outfile)=0</td></tr>
+<tr class="memdesc:afc595a05f2ab19e1bb973c5a076b1432"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output bin vertices (allowing display of bin boundaries as zones).  <br /></td></tr>
+<tr class="separator:afc595a05f2ab19e1bb973c5a076b1432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad085bf99d78162120c419f7504d256b" id="r_aad085bf99d78162120c419f7504d256b"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#aad085bf99d78162120c419f7504d256b">nbin</a> () const =0</td></tr>
+<tr class="memdesc:aad085bf99d78162120c419f7504d256b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins (not taking recursion into account for refineable versions)  <br /></td></tr>
+<tr class="separator:aad085bf99d78162120c419f7504d256b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bd867e26195feb7ae95a8e77acadca8" id="r_a1bd867e26195feb7ae95a8e77acadca8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a1bd867e26195feb7ae95a8e77acadca8">max_bin_dimension</a> () const</td></tr>
+<tr class="memdesc:a1bd867e26195feb7ae95a8e77acadca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max. bin dimension (number of bins in coordinate directions)  <br /></td></tr>
+<tr class="separator:a1bd867e26195feb7ae95a8e77acadca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e0c4a67385d7dcc714de95ce9965f34" id="r_a8e0c4a67385d7dcc714de95ce9965f34"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a8e0c4a67385d7dcc714de95ce9965f34">ndim_zeta</a> () const</td></tr>
+<tr class="memdesc:a8e0c4a67385d7dcc714de95ce9965f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimension of the zeta ( = dim of local coordinate of elements)  <br /></td></tr>
+<tr class="separator:a8e0c4a67385d7dcc714de95ce9965f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0148631c80ef91ad21b985986ae24394" id="r_a0148631c80ef91ad21b985986ae24394"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a0148631c80ef91ad21b985986ae24394">dimension_of_bin_array</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a0148631c80ef91ad21b985986ae24394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in coordinate direction i.  <br /></td></tr>
+<tr class="separator:a0148631c80ef91ad21b985986ae24394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a09b07aea56637d29ba63e28f21f1b" id="r_a55a09b07aea56637d29ba63e28f21f1b"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a55a09b07aea56637d29ba63e28f21f1b">dimensions_of_bin_array</a> () const</td></tr>
+<tr class="memdesc:a55a09b07aea56637d29ba63e28f21f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in coordinate directions. Const vector-based version.  <br /></td></tr>
+<tr class="separator:a55a09b07aea56637d29ba63e28f21f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7814241e3fa3da0f5449a85a6d0d2ee1" id="r_a7814241e3fa3da0f5449a85a6d0d2ee1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#a7814241e3fa3da0f5449a85a6d0d2ee1">dimensions_of_bin_array</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:a7814241e3fa3da0f5449a85a6d0d2ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in specified coordinate direction.  <br /></td></tr>
+<tr class="separator:a7814241e3fa3da0f5449a85a6d0d2ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classSamplePointContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSamplePointContainer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a></td></tr>
+<tr class="memitem:a68326e89f80f01690d8c2d03effb8508 inherit pub_methods_classSamplePointContainer" id="r_a68326e89f80f01690d8c2d03effb8508"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a68326e89f80f01690d8c2d03effb8508">SamplePointContainer</a> (Mesh *<a class="el" href="classSamplePointContainer.html#aa638ec17fc518066a473e49ad148b122">mesh_pt</a>, const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;<a class="el" href="classSamplePointContainer.html#aac031f93652a7fcd21b5917a780d3022">min_and_max_coordinates</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a6b6b42a9e6bd8f116af8699e03a78d44">use_eulerian_coordinates_during_setup</a>, const bool &amp;<a class="el" href="classSamplePointContainer.html#a399d246c1afdfd993ceb80e6f2de1400">ignore_halo_elements_during_locate_zeta_search</a>, const unsigned &amp;<a class="el" href="classSamplePointContainer.html#a816528cf500a37fa9ecabe6381b31852">nsample_points_generated_per_element</a>)</td></tr>
+<tr class="memdesc:a68326e89f80f01690d8c2d03effb8508 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a68326e89f80f01690d8c2d03effb8508 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6801f78c9d6b55a69f7e60a372dc9bf2 inherit pub_methods_classSamplePointContainer" id="r_a6801f78c9d6b55a69f7e60a372dc9bf2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a6801f78c9d6b55a69f7e60a372dc9bf2">SamplePointContainer</a> ()</td></tr>
+<tr class="memdesc:a6801f78c9d6b55a69f7e60a372dc9bf2 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken default constructor; needed for broken copy constructors. Don't call. It will die.  <br /></td></tr>
+<tr class="separator:a6801f78c9d6b55a69f7e60a372dc9bf2 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa9329fb09b49f9db769e167edd21ba inherit pub_methods_classSamplePointContainer" id="r_a6fa9329fb09b49f9db769e167edd21ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a6fa9329fb09b49f9db769e167edd21ba">SamplePointContainer</a> (const <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a> &amp;data)=delete</td></tr>
+<tr class="memdesc:a6fa9329fb09b49f9db769e167edd21ba inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken copy constructor.  <br /></td></tr>
+<tr class="separator:a6fa9329fb09b49f9db769e167edd21ba inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec11fe761eb5769d975ab4874f1ae332 inherit pub_methods_classSamplePointContainer" id="r_aec11fe761eb5769d975ab4874f1ae332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#aec11fe761eb5769d975ab4874f1ae332">operator=</a> (const <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a> &amp;)=delete</td></tr>
+<tr class="memdesc:aec11fe761eb5769d975ab4874f1ae332 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broken assignment operator.  <br /></td></tr>
+<tr class="separator:aec11fe761eb5769d975ab4874f1ae332 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753a58798c528e01d384a4f444368db3 inherit pub_methods_classSamplePointContainer" id="r_a753a58798c528e01d384a4f444368db3"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a753a58798c528e01d384a4f444368db3">~SamplePointContainer</a> ()</td></tr>
+<tr class="memdesc:a753a58798c528e01d384a4f444368db3 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a753a58798c528e01d384a4f444368db3 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca8dbae8346d6c8924b1f815aa5f049 inherit pub_methods_classSamplePointContainer" id="r_acca8dbae8346d6c8924b1f815aa5f049"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#acca8dbae8346d6c8924b1f815aa5f049">locate_zeta</a> (const Vector&lt; double &gt; &amp;zeta, GeomObject *&amp;sub_geom_object_pt, Vector&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>)=0</td></tr>
+<tr class="memdesc:acca8dbae8346d6c8924b1f815aa5f049 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find sub-GeomObject (finite element) and the local coordinate s within it that contains point with global coordinate zeta. sub_geom_object_pt=0 if point can't be found.  <br /></td></tr>
+<tr class="separator:acca8dbae8346d6c8924b1f815aa5f049 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ac5bc68c5f0e161e65bbc4799b5ec4 inherit pub_methods_classSamplePointContainer" id="r_a16ac5bc68c5f0e161e65bbc4799b5ec4"><td class="memItemLeft" align="right" valign="top">virtual unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a16ac5bc68c5f0e161e65bbc4799b5ec4">total_number_of_sample_points_visited_during_locate_zeta_from_top_level</a> ()</td></tr>
+<tr class="memdesc:a16ac5bc68c5f0e161e65bbc4799b5ec4 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter to keep track of how many sample points we've visited during top level call to locate_zeta. Virtual so it can be overloaded for different versions.  <br /></td></tr>
+<tr class="separator:a16ac5bc68c5f0e161e65bbc4799b5ec4 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7bf51a6987a9180c7715d6211fdbb46 inherit pub_methods_classSamplePointContainer" id="r_ac7bf51a6987a9180c7715d6211fdbb46"><td class="memItemLeft" align="right" valign="top">virtual unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ac7bf51a6987a9180c7715d6211fdbb46">total_number_of_sample_points_computed_recursively</a> () const =0</td></tr>
+<tr class="memdesc:ac7bf51a6987a9180c7715d6211fdbb46 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of sample points in sample point container, possibly computed recursively.  <br /></td></tr>
+<tr class="separator:ac7bf51a6987a9180c7715d6211fdbb46 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa638ec17fc518066a473e49ad148b122 inherit pub_methods_classSamplePointContainer" id="r_aa638ec17fc518066a473e49ad148b122"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#aa638ec17fc518066a473e49ad148b122">mesh_pt</a> () const</td></tr>
+<tr class="memdesc:aa638ec17fc518066a473e49ad148b122 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh from whose FiniteElements sample points are created.  <br /></td></tr>
+<tr class="separator:aa638ec17fc518066a473e49ad148b122 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac031f93652a7fcd21b5917a780d3022 inherit pub_methods_classSamplePointContainer" id="r_aac031f93652a7fcd21b5917a780d3022"><td class="memItemLeft" align="right" valign="top">const std::pair&lt; double, double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#aac031f93652a7fcd21b5917a780d3022">min_and_max_coordinates</a> (const unsigned &amp;<a class="el" href="cfortran_8h.html#adb50e893b86b3e55e751a42eab3cba82">i</a>) const</td></tr>
+<tr class="memdesc:aac031f93652a7fcd21b5917a780d3022 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pair of doubles for min and maximum coordinates in i-th direction: min (first) and max. (second) coordinates.  <br /></td></tr>
+<tr class="separator:aac031f93652a7fcd21b5917a780d3022 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0d2d5baaf1b124a1eac77cd4f6d5005 inherit pub_methods_classSamplePointContainer" id="r_aa0d2d5baaf1b124a1eac77cd4f6d5005"><td class="memItemLeft" align="right" valign="top">const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#aa0d2d5baaf1b124a1eac77cd4f6d5005">min_and_max_coordinates</a> () const</td></tr>
+<tr class="memdesc:aa0d2d5baaf1b124a1eac77cd4f6d5005 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pair of doubles for min and maximum coordinates. min (first) and max. (second) coordinates.  <br /></td></tr>
+<tr class="separator:aa0d2d5baaf1b124a1eac77cd4f6d5005 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a399d246c1afdfd993ceb80e6f2de1400 inherit pub_methods_classSamplePointContainer" id="r_a399d246c1afdfd993ceb80e6f2de1400"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a399d246c1afdfd993ceb80e6f2de1400">ignore_halo_elements_during_locate_zeta_search</a> () const</td></tr>
+<tr class="memdesc:a399d246c1afdfd993ceb80e6f2de1400 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ignore halo elements?  <br /></td></tr>
+<tr class="separator:a399d246c1afdfd993ceb80e6f2de1400 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6b42a9e6bd8f116af8699e03a78d44 inherit pub_methods_classSamplePointContainer" id="r_a6b6b42a9e6bd8f116af8699e03a78d44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a6b6b42a9e6bd8f116af8699e03a78d44">use_eulerian_coordinates_during_setup</a> () const</td></tr>
+<tr class="memdesc:a6b6b42a9e6bd8f116af8699e03a78d44 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Eulerian coordinates (i.e. interpolated_x) rather than zeta itself (i.e. interpolated_zeta) to identify point.  <br /></td></tr>
+<tr class="separator:a6b6b42a9e6bd8f116af8699e03a78d44 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a816528cf500a37fa9ecabe6381b31852 inherit pub_methods_classSamplePointContainer" id="r_a816528cf500a37fa9ecabe6381b31852"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a816528cf500a37fa9ecabe6381b31852">nsample_points_generated_per_element</a> ()</td></tr>
+<tr class="memdesc:a816528cf500a37fa9ecabe6381b31852 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Measure of" number of sample points generated in each element  <br /></td></tr>
+<tr class="separator:a816528cf500a37fa9ecabe6381b31852 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac69b644e4974dfdf9c9d3b31f5f75e72 inherit pub_methods_classSamplePointContainer" id="r_ac69b644e4974dfdf9c9d3b31f5f75e72"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ac69b644e4974dfdf9c9d3b31f5f75e72">max_search_radius</a> ()</td></tr>
+<tr class="memdesc:ac69b644e4974dfdf9c9d3b31f5f75e72 inherit pub_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set maximum search radius for locate zeta. This is initialised do DBL_MAX so we brutally search through the entire bin structure, no matter how big it is until we've found the required point (or failed to do so. This can be VERY costly with fine meshes. Here the user takes full responsibility and states that we have no chance in hell to find the required point in a bin whose closest vertex is further than the specified max search radius.  <br /></td></tr>
+<tr class="separator:ac69b644e4974dfdf9c9d3b31f5f75e72 inherit pub_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aaab4005f8563e42df5fc8e7ac626fedc" id="r_aaab4005f8563e42df5fc8e7ac626fedc"><td class="memItemLeft" align="right" valign="top">Vector&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinArray.html#aaab4005f8563e42df5fc8e7ac626fedc">Dimensions_of_bin_array</a></td></tr>
+<tr class="memdesc:aaab4005f8563e42df5fc8e7ac626fedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bins in each coordinate direction.  <br /></td></tr>
+<tr class="separator:aaab4005f8563e42df5fc8e7ac626fedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classSamplePointContainer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classSamplePointContainer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a></td></tr>
+<tr class="memitem:a9f044cf51ea29b0a1a85e029defd81d5 inherit pro_attribs_classSamplePointContainer" id="r_a9f044cf51ea29b0a1a85e029defd81d5"><td class="memItemLeft" align="right" valign="top">Mesh *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a9f044cf51ea29b0a1a85e029defd81d5">Mesh_pt</a></td></tr>
+<tr class="memdesc:a9f044cf51ea29b0a1a85e029defd81d5 inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to mesh from whose FiniteElements sample points are created.  <br /></td></tr>
+<tr class="separator:a9f044cf51ea29b0a1a85e029defd81d5 inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1607ff8abb3f3b6364bc169a6ea4a79c inherit pro_attribs_classSamplePointContainer" id="r_a1607ff8abb3f3b6364bc169a6ea4a79c"><td class="memItemLeft" align="right" valign="top">Vector&lt; std::pair&lt; double, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1607ff8abb3f3b6364bc169a6ea4a79c">Min_and_max_coordinates</a></td></tr>
+<tr class="memdesc:a1607ff8abb3f3b6364bc169a6ea4a79c inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pairs of doubles for min and maximum coordinates. Call: Min_and_max_coordinates[j] gives me the pair of min (first) and max. (second) coordinates in the j-th coordinate direction.  <br /></td></tr>
+<tr class="separator:a1607ff8abb3f3b6364bc169a6ea4a79c inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d7215f8363d751343efe60a1b051e6a inherit pro_attribs_classSamplePointContainer" id="r_a8d7215f8363d751343efe60a1b051e6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a8d7215f8363d751343efe60a1b051e6a">Use_eulerian_coordinates_during_setup</a></td></tr>
+<tr class="memdesc:a8d7215f8363d751343efe60a1b051e6a inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use Eulerian coordinates (i.e. interpolated_x) rather than zeta itself (i.e. interpolated_zeta) to identify point.  <br /></td></tr>
+<tr class="separator:a8d7215f8363d751343efe60a1b051e6a inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1f32943385600039df3a76b13a216b inherit pro_attribs_classSamplePointContainer" id="r_a5b1f32943385600039df3a76b13a216b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a5b1f32943385600039df3a76b13a216b">Ignore_halo_elements_during_locate_zeta_search</a></td></tr>
+<tr class="memdesc:a5b1f32943385600039df3a76b13a216b inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ignore halo elements?  <br /></td></tr>
+<tr class="separator:a5b1f32943385600039df3a76b13a216b inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a849e85891df1b33c5cbe65c8a1f3b4f7 inherit pro_attribs_classSamplePointContainer" id="r_a849e85891df1b33c5cbe65c8a1f3b4f7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a849e85891df1b33c5cbe65c8a1f3b4f7">Nsample_points_generated_per_element</a></td></tr>
+<tr class="memdesc:a849e85891df1b33c5cbe65c8a1f3b4f7 inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Measure of" number of sample points generated in each element  <br /></td></tr>
+<tr class="separator:a849e85891df1b33c5cbe65c8a1f3b4f7 inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a2db41f731f23e430bb751e6ea17723 inherit pro_attribs_classSamplePointContainer" id="r_a8a2db41f731f23e430bb751e6ea17723"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a8a2db41f731f23e430bb751e6ea17723">Total_number_of_sample_points_visited_during_locate_zeta_from_top_level</a></td></tr>
+<tr class="memdesc:a8a2db41f731f23e430bb751e6ea17723 inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter to keep track of how many sample points we've visited during top level call to locate_zeta.  <br /></td></tr>
+<tr class="separator:a8a2db41f731f23e430bb751e6ea17723 inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae6e7df15b2dbbdf18467716da817f22 inherit pro_attribs_classSamplePointContainer" id="r_aae6e7df15b2dbbdf18467716da817f22"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#aae6e7df15b2dbbdf18467716da817f22">Max_search_radius</a></td></tr>
+<tr class="memdesc:aae6e7df15b2dbbdf18467716da817f22 inherit pro_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max radius beyond which we stop searching the bin. Initialised to DBL_MAX so keep going until the point is found or until we've searched every single bin. Overwriting this means we won't search in bins whose closest vertex is at a distance greater than Max_search_radius from the point to be located.  <br /></td></tr>
+<tr class="separator:aae6e7df15b2dbbdf18467716da817f22 inherit pro_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_attribs_classSamplePointContainer"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classSamplePointContainer')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a></td></tr>
+<tr class="memitem:ad08a1cb658b3783bcf7d8491e90965f3 inherit pub_static_attribs_classSamplePointContainer" id="r_ad08a1cb658b3783bcf7d8491e90965f3"><td class="memItemLeft" align="right" valign="top">static std::ofstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#ad08a1cb658b3783bcf7d8491e90965f3">Visited_sample_points_file</a></td></tr>
+<tr class="memdesc:ad08a1cb658b3783bcf7d8491e90965f3 inherit pub_static_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to record sequence of visited sample points in. Used for debugging/ illustration of search procedures.  <br /></td></tr>
+<tr class="separator:ad08a1cb658b3783bcf7d8491e90965f3 inherit pub_static_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1098cdf602fabc6ceec41bb7ea73805f inherit pub_static_attribs_classSamplePointContainer" id="r_a1098cdf602fabc6ceec41bb7ea73805f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1098cdf602fabc6ceec41bb7ea73805f">Always_fail_elemental_locate_zeta</a> = false</td></tr>
+<tr class="memdesc:a1098cdf602fabc6ceec41bb7ea73805f inherit pub_static_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to make to make locate zeta fail. Used for debugging/ illustration of search procedures.  <br /></td></tr>
+<tr class="separator:a1098cdf602fabc6ceec41bb7ea73805f inherit pub_static_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affcd582fab41aa86bfe46e1bf92fafd1 inherit pub_static_attribs_classSamplePointContainer" id="r_affcd582fab41aa86bfe46e1bf92fafd1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#affcd582fab41aa86bfe46e1bf92fafd1">Use_equally_spaced_interior_sample_points</a> = true</td></tr>
+<tr class="memdesc:affcd582fab41aa86bfe46e1bf92fafd1 inherit pub_static_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use equally spaced sample points? (otherwise vertices are sampled repeatedly.  <br /></td></tr>
+<tr class="separator:affcd582fab41aa86bfe46e1bf92fafd1 inherit pub_static_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1755d4419776cc87ab27e845d03449de inherit pub_static_attribs_classSamplePointContainer" id="r_a1755d4419776cc87ab27e845d03449de"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a1755d4419776cc87ab27e845d03449de">Enable_timing_of_setup</a> = false</td></tr>
+<tr class="memdesc:a1755d4419776cc87ab27e845d03449de inherit pub_static_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time setup?  <br /></td></tr>
+<tr class="separator:a1755d4419776cc87ab27e845d03449de inherit pub_static_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13035786055416a2da9ae7eec515bccd inherit pub_static_attribs_classSamplePointContainer" id="r_a13035786055416a2da9ae7eec515bccd"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#a13035786055416a2da9ae7eec515bccd">Percentage_offset</a> = 5.0</td></tr>
+<tr class="memdesc:a13035786055416a2da9ae7eec515bccd inherit pub_static_attribs_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset of sample point container boundaries beyond max/min coords.  <br /></td></tr>
+<tr class="separator:a13035786055416a2da9ae7eec515bccd inherit pub_static_attribs_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classSamplePointContainer"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classSamplePointContainer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classSamplePointContainer.html">SamplePointContainer</a></td></tr>
+<tr class="memitem:af69785a39545f46473ccf0d10f61e08b inherit pro_methods_classSamplePointContainer" id="r_af69785a39545f46473ccf0d10f61e08b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSamplePointContainer.html#af69785a39545f46473ccf0d10f61e08b">setup_min_and_max_coordinates</a> ()</td></tr>
+<tr class="memdesc:af69785a39545f46473ccf0d10f61e08b inherit pro_methods_classSamplePointContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to compute the min and max coordinates for the mesh, in each dimension.  <br /></td></tr>
+<tr class="separator:af69785a39545f46473ccf0d10f61e08b inherit pro_methods_classSamplePointContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for all bin arrays. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00401">401</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae441b5dcc0d0276f4661a09ff735b581" name="ae441b5dcc0d0276f4661a09ff735b581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae441b5dcc0d0276f4661a09ff735b581">&#9670;&#160;</a></span>BinArray() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">BinArray::BinArray </td>
+          <td>(</td>
+          <td class="paramtype">Mesh *&#160;</td>
+          <td class="paramname"><em>mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>min_and_max_coordinates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dimensions_of_bin_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_eulerian_coordinates_during_setup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>ignore_halo_elements_during_locate_zeta_search</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>nsample_points_generated_per_element</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00405">405</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<a id="ae1bd440bc2eb6436158d306e26309eba" name="ae1bd440bc2eb6436158d306e26309eba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1bd440bc2eb6436158d306e26309eba">&#9670;&#160;</a></span>BinArray() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">BinArray::BinArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken default constructor; needed for broken copy constructors. Don't call. It will die. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00425">425</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<a id="ad60dd2a93b57b4fb7dae54cc342e9173" name="ad60dd2a93b57b4fb7dae54cc342e9173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60dd2a93b57b4fb7dae54cc342e9173">&#9670;&#160;</a></span>BinArray() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">BinArray::BinArray </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBinArray.html">BinArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken copy constructor. </p>
+
+</div>
+</div>
+<a id="ab29e48e0bc2242673fac09b245714d4e" name="ab29e48e0bc2242673fac09b245714d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab29e48e0bc2242673fac09b245714d4e">&#9670;&#160;</a></span>~BinArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual BinArray::~BinArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00440">440</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae57a55f73048b7c209fdff93725c4049" name="ae57a55f73048b7c209fdff93725c4049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae57a55f73048b7c209fdff93725c4049">&#9670;&#160;</a></span>coords_to_bin_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned BinArray::coords_to_bin_index </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get (linearly enumerated) bin index of bin that contains specified zeta. </p>
+<p>Update the coef and the bin index</p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l01840">1840</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00494">dimensions_of_bin_array()</a>, <a class="el" href="sample__point__container_8h_source.html#l00363">SamplePointContainer::Min_and_max_coordinates</a>, and <a class="el" href="sample__point__container_8h_source.html#l00480">ndim_zeta()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00612">RefineableBinArray::add_sample_point()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l01227">profile_get_neighbouring_bins_helper()</a>.</p>
+
+</div>
+</div>
+<a id="afc41ba4569c25acdf56000a6a82e7859" name="afc41ba4569c25acdf56000a6a82e7859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc41ba4569c25acdf56000a6a82e7859">&#9670;&#160;</a></span>coords_to_vectorial_bin_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinArray::coords_to_vectorial_bin_index </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>zeta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>bin_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get "coordinates" of bin that contains specified zeta. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l01969">1969</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00494">dimensions_of_bin_array()</a>, <a class="el" href="sample__point__container_8h_source.html#l00363">SamplePointContainer::Min_and_max_coordinates</a>, and <a class="el" href="sample__point__container_8h_source.html#l00480">ndim_zeta()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l01227">profile_get_neighbouring_bins_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a0148631c80ef91ad21b985986ae24394" name="a0148631c80ef91ad21b985986ae24394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0148631c80ef91ad21b985986ae24394">&#9670;&#160;</a></span>dimension_of_bin_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned BinArray::dimension_of_bin_array </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of bins in coordinate direction i. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00486">486</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l00995">RefineableBinArray::get_bin_boundaries()</a>.</p>
+
+</div>
+</div>
+<a id="a55a09b07aea56637d29ba63e28f21f1b" name="a55a09b07aea56637d29ba63e28f21f1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a09b07aea56637d29ba63e28f21f1b">&#9670;&#160;</a></span>dimensions_of_bin_array() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt; unsigned &gt; BinArray::dimensions_of_bin_array </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of bins in coordinate directions. Const vector-based version. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00494">494</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01840">coords_to_bin_index()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l01969">coords_to_vectorial_bin_index()</a>.</p>
+
+</div>
+</div>
+<a id="a7814241e3fa3da0f5449a85a6d0d2ee1" name="a7814241e3fa3da0f5449a85a6d0d2ee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7814241e3fa3da0f5449a85a6d0d2ee1">&#9670;&#160;</a></span>dimensions_of_bin_array() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned BinArray::dimensions_of_bin_array </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of bins in specified coordinate direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00501">501</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+
+</div>
+</div>
+<a id="a704060ec54de24dd65c73af63a25d2b2" name="a704060ec54de24dd65c73af63a25d2b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a704060ec54de24dd65c73af63a25d2b2">&#9670;&#160;</a></span>get_neighbouring_bins_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinArray::get_neighbouring_bins_helper </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>bin_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; unsigned &gt; &amp;&#160;</td>
+          <td class="paramname"><em>neighbouring_bin_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>use_old_version</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function for computing the bin indices of neighbouring bins at a given "radius" of the specified bin. Final, optional boolean (default: true) chooses to use the old version which appears to be faster than Louis' new one after all (in the few cases where this functionality is still used &ndash; not all if we have cgal!) </p>
+<p>Helper function for computing the bin indices of neighbouring bins at a given "radius" of the specified bin. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l01350">1350</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="sample__point__container_8h_source.html#l00480">ndim_zeta()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02667">NonRefineableBinArray::fill_bin_by_diffusion()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01044">RefineableBinArray::output_neighbouring_bins()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l01227">profile_get_neighbouring_bins_helper()</a>.</p>
+
+</div>
+</div>
+<a id="a1bd867e26195feb7ae95a8e77acadca8" name="a1bd867e26195feb7ae95a8e77acadca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bd867e26195feb7ae95a8e77acadca8">&#9670;&#160;</a></span>max_bin_dimension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned BinArray::max_bin_dimension </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Max. bin dimension (number of bins in coordinate directions) </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l00659">659</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>.</p>
+
+</div>
+</div>
+<a id="aad085bf99d78162120c419f7504d256b" name="aad085bf99d78162120c419f7504d256b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad085bf99d78162120c419f7504d256b">&#9670;&#160;</a></span>nbin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned BinArray::nbin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of bins (not taking recursion into account for refineable versions) </p>
+
+<p>Implemented in <a class="el" href="classRefineableBinArray.html#a5975657726af982a4d67ff6470abb9d1">RefineableBinArray</a>, and <a class="el" href="classNonRefineableBinArray.html#af591a06dbe5bbf379c5a52d7a2f1d611">NonRefineableBinArray</a>.</p>
+
+</div>
+</div>
+<a id="a8e0c4a67385d7dcc714de95ce9965f34" name="a8e0c4a67385d7dcc714de95ce9965f34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e0c4a67385d7dcc714de95ce9965f34">&#9670;&#160;</a></span>ndim_zeta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned BinArray::ndim_zeta </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dimension of the zeta ( = dim of local coordinate of elements) </p>
+
+<p>Implements <a class="el" href="classSamplePointContainer.html#af2cfee8a92a28addb59a5533dfd138e7">SamplePointContainer</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00480">480</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8cc_source.html#l01840">coords_to_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01969">coords_to_vectorial_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01882">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8h_source.html#l00574">RefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02794">NonRefineableBinArray::get_bin()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00995">RefineableBinArray::get_bin_boundaries()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02912">NonRefineableBinArray::get_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01350">get_neighbouring_bins_helper()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03057">NonRefineableBinArray::min_distance()</a>, <a class="el" href="sample__point__container_8h_source.html#l00845">NonRefineableBinArray::nbin()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02357">NonRefineableBinArray::output_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02308">NonRefineableBinArray::output_bins()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01044">RefineableBinArray::output_neighbouring_bins()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l01227">profile_get_neighbouring_bins_helper()</a>.</p>
+
+</div>
+</div>
+<a id="af8cb652301eb452d7a908407134d36d1" name="af8cb652301eb452d7a908407134d36d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8cb652301eb452d7a908407134d36d1">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinArray::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classBinArray.html">BinArray</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broken assignment operator. </p>
+
+</div>
+</div>
+<a id="afc595a05f2ab19e1bb973c5a076b1432" name="afc595a05f2ab19e1bb973c5a076b1432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc595a05f2ab19e1bb973c5a076b1432">&#9670;&#160;</a></span>output_bin_vertices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BinArray::output_bin_vertices </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output bin vertices (allowing display of bin boundaries as zones). </p>
+
+<p>Implemented in <a class="el" href="classRefineableBinArray.html#a982851086eb3973d4f17d5a5364d8faa">RefineableBinArray</a>, and <a class="el" href="classNonRefineableBinArray.html#a9db5392fc81650a23251f1f5de52f0af">NonRefineableBinArray</a>.</p>
+
+</div>
+</div>
+<a id="a66fe7e379a53e3fee81ead7ef4045b40" name="a66fe7e379a53e3fee81ead7ef4045b40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fe7e379a53e3fee81ead7ef4045b40">&#9670;&#160;</a></span>output_bins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BinArray::output_bins </td>
+          <td>(</td>
+          <td class="paramtype">std::ofstream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output bins (boundaries and number of sample points in them) </p>
+
+<p>Implemented in <a class="el" href="classRefineableBinArray.html#ab92ef5225b96b684b58f3a0905aacf75">RefineableBinArray</a>, and <a class="el" href="classNonRefineableBinArray.html#aace5835e23625cc491a2fe084823ac3a">NonRefineableBinArray</a>.</p>
+
+</div>
+</div>
+<a id="af2a223b6a244b75d4c1e358a95aa57f1" name="af2a223b6a244b75d4c1e358a95aa57f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a223b6a244b75d4c1e358a95aa57f1">&#9670;&#160;</a></span>profile_get_neighbouring_bins_helper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BinArray::profile_get_neighbouring_bins_helper </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Profiling function to compare performance of two different versions of the get_neighbouring_bins_helper(...) function. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8cc_source.html#l01227">1227</a> of file <a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="sample__point__container_8cc_source.html#l01840">coords_to_bin_index()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01969">coords_to_vectorial_bin_index()</a>, <a class="el" href="sample__point__container_8h_source.html#l00508">Dimensions_of_bin_array</a>, <a class="el" href="sample__point__container_8cc_source.html#l01350">get_neighbouring_bins_helper()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="sample__point__container_8h_source.html#l00363">SamplePointContainer::Min_and_max_coordinates</a>, and <a class="el" href="sample__point__container_8h_source.html#l00480">ndim_zeta()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaab4005f8563e42df5fc8e7ac626fedc" name="aaab4005f8563e42df5fc8e7ac626fedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab4005f8563e42df5fc8e7ac626fedc">&#9670;&#160;</a></span>Dimensions_of_bin_array</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector&lt;unsigned&gt; BinArray::Dimensions_of_bin_array</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of bins in each coordinate direction. </p>
+
+<p class="definition">Definition at line <a class="el" href="sample__point__container_8h_source.html#l00508">508</a> of file <a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sample__point__container_8h_source.html#l00486">dimension_of_bin_array()</a>, <a class="el" href="sample__point__container_8h_source.html#l00494">dimensions_of_bin_array()</a>, <a class="el" href="sample__point__container_8h_source.html#l00501">dimensions_of_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02402">NonRefineableBinArray::fill_bin_array()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02794">NonRefineableBinArray::get_bin()</a>, <a class="el" href="sample__point__container_8cc_source.html#l00995">RefineableBinArray::get_bin_boundaries()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02912">NonRefineableBinArray::get_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01350">get_neighbouring_bins_helper()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02002">RefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l03088">NonRefineableBinArray::locate_zeta()</a>, <a class="el" href="sample__point__container_8h_source.html#l00845">NonRefineableBinArray::nbin()</a>, <a class="el" href="sample__point__container_8h_source.html#l00480">ndim_zeta()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02169">NonRefineableBinArray::NonRefineableBinArray()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02357">NonRefineableBinArray::output_bin_vertices()</a>, <a class="el" href="sample__point__container_8cc_source.html#l02308">NonRefineableBinArray::output_bins()</a>, <a class="el" href="sample__point__container_8cc_source.html#l01227">profile_get_neighbouring_bins_helper()</a>, and <a class="el" href="sample__point__container_8cc_source.html#l00841">RefineableBinArray::RefineableBinArray()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="sample__point__container_8h_source.html">sample_point_container.h</a></li>
+<li><a class="el" href="sample__point__container_8cc_source.html">sample_point_container.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:11:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

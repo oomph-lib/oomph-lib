@@ -1,0 +1,279 @@
+\doxysection{circle\+\_\+as\+\_\+generalised\+\_\+element.\+h}
+\hypertarget{circle__as__generalised__element_8h_source}{}\label{circle__as__generalised__element_8h_source}\index{circle\_as\_generalised\_element.h@{circle\_as\_generalised\_element.h}}
+\mbox{\hyperlink{circle__as__generalised__element_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00001}00001\ \textcolor{comment}{//LIC//\ ====================================================================}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00002}00002\ \textcolor{comment}{//LIC//\ This\ file\ forms\ part\ of\ oomph-\/lib,\ the\ object-\/oriented,\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00003}00003\ \textcolor{comment}{//LIC//\ multi-\/physics\ finite-\/element\ library,\ available\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00004}00004\ \textcolor{comment}{//LIC//\ at\ http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00005}00005\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00006}00006\ \textcolor{comment}{//LIC//\ Copyright\ (C)\ 2006-\/2025\ Matthias\ Heil\ and\ Andrew\ Hazel}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00007}00007\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00008}00008\ \textcolor{comment}{//LIC//\ This\ library\ is\ free\ software;\ you\ can\ redistribute\ it\ and/or}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00009}00009\ \textcolor{comment}{//LIC//\ modify\ it\ under\ the\ terms\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00010}00010\ \textcolor{comment}{//LIC//\ License\ as\ published\ by\ the\ Free\ Software\ Foundation;\ either}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00011}00011\ \textcolor{comment}{//LIC//\ version\ 2.1\ of\ the\ License,\ or\ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00012}00012\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00013}00013\ \textcolor{comment}{//LIC//\ This\ library\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00014}00014\ \textcolor{comment}{//LIC//\ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00015}00015\ \textcolor{comment}{//LIC//\ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the\ GNU}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00016}00016\ \textcolor{comment}{//LIC//\ Lesser\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00017}00017\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00018}00018\ \textcolor{comment}{//LIC//\ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ Lesser\ General\ Public}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00019}00019\ \textcolor{comment}{//LIC//\ License\ along\ with\ this\ library;\ if\ not,\ write\ to\ the\ Free\ Software}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00020}00020\ \textcolor{comment}{//LIC//\ Foundation,\ Inc.,\ 51\ Franklin\ Street,\ Fifth\ Floor,\ Boston,\ MA}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00021}00021\ \textcolor{comment}{//LIC//\ 02110-\/1301\ \ USA.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00022}00022\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00023}00023\ \textcolor{comment}{//LIC//\ The\ authors\ may\ be\ contacted\ at\ oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00024}00024\ \textcolor{comment}{//LIC//\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00025}00025\ \textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ CIRCLE\_AS\_GEN\_ELEMENT\_HEADER}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00027}00027\ \textcolor{preprocessor}{\#define\ CIRCLE\_AS\_GEN\_ELEMENT\_HEADER}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{circle_8h}{circle.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00032}00032\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00034}00034\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00035}00035\ \textcolor{comment}{//////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00036}00036\ \textcolor{comment}{//////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00037}00037\ \textcolor{comment}{//////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00038}00038\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00040}00040\ \textcolor{comment}{//===========start\_of\_general\_circle=========================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00041}00041\ \textcolor{comment}{///\ GeneralCircle\ "{}upgraded"{}\ to\ a\ GeneralisedElement:\ Circular\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00042}00042\ \textcolor{comment}{///\ ring\ whose\ position\ is\ given\ by}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00043}00043\ \textcolor{comment}{///\ \(\backslash\)f[\ x\ =\ X\_c\ +\ R\ \(\backslash\)cos(\(\backslash\)zeta)\ \ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00044}00044\ \textcolor{comment}{///\ \(\backslash\)f[\ y\ =\ Y\_c\ +\ R\ \(\backslash\)sin(\(\backslash\)zeta)\ \ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00045}00045\ \textcolor{comment}{///\ The\ ring's\ vertical\ position\ \(\backslash\)f\$\ Y\_c\ \(\backslash\)f\$\ is}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00046}00046\ \textcolor{comment}{///\ determined\ by\ "{}pseudo\ elasticity"{}:}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00047}00047\ \textcolor{comment}{///\ \(\backslash\)f[\ 0\ =\ f\_\{load\}\ -\/\ Y\_c\ \(\backslash\)\ k\_\{stiff\}\ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00048}00048\ \textcolor{comment}{///\ This\ simulates\ the\ case\ where\ the\ centre\ of\ the\ ring\ is\ mounted\ on\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00049}00049\ \textcolor{comment}{///\ an\ elastic\ spring\ of\ stiffness\ \(\backslash\)f\$\ k\_\{stiff\}\ \(\backslash\)f\$\ and\ loaded\ by\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00050}00050\ \textcolor{comment}{///\ the\ force\ \(\backslash\)f\$\ f\_\{load\}.\ \(\backslash\)f\$\ The\ "{}load"{}\ is\ specified\ by\ the\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00051}00051\ \textcolor{comment}{///\ Data\ object\ \(\backslash\)c\ load\_pt().\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00052}00052\ \textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00053}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement}{00053}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement}{ElasticallySupportedRingElement}}\ :\ \textcolor{keyword}{public}\ GeneralisedElement,\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classoomph_1_1GeneralCircle}{GeneralCircle}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00055}00055\ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00057}00057\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00058}00058\ \ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00059}00059\ \textcolor{comment}{\ ///\ Constructor:\ Build\ \ ring\ from\ doubles\ that\ describe\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00060}00060\ \textcolor{comment}{\ ///\ the\ geometry:\ x\ and\ y\ positions\ of\ centre\ and\ the\ radius.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00061}00061\ \textcolor{comment}{\ ///\ Initialise\ stiffness\ to\ 1.0.\ By\ default,\ no\ load\ is\ set.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00062}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a7e68f18d76acb6297405ca2a38b64898}{00062}}\ \textcolor{comment}{}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a7e68f18d76acb6297405ca2a38b64898}{ElasticallySupportedRingElement}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\_c}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\_c}},\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}})\ :\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00064}00064\ \ \ \mbox{\hyperlink{classoomph_1_1GeneralCircle}{GeneralCircle}}(\mbox{\hyperlink{classoomph_1_1GeneralCircle_a7149f657c7770fa6312179d3f10da5a9}{x\_c}},\mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\_c}},\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{r}}),\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\_stiff}}(1.0),\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{Load\_data\_has\_been\_set}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{false}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00065}00065\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00066}00066\ \ \ \ \textcolor{comment}{//\ The\ geometric\ data\ is\ internal\ to\ the\ element\ -\/-\/\ we\ copy\ the\ pointers}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00067}00067\ \ \ \ \textcolor{comment}{//\ to\ the\ GeomObject's\ geometric\ data\ to\ the\ element's\ internal\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00068}00068\ \ \ \ \textcolor{comment}{//\ data\ to\ ensure\ that\ any\ unknown\ values\ of\ geometric\ data\ are\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00069}00069\ \ \ \ \textcolor{comment}{//\ given\ global\ equation\ numbers.\ The\ add\_internal\_data(...)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00070}00070\ \ \ \ \textcolor{comment}{//\ function\ returns\ the\ index\ by\ which\ the\ added\ Data\ item}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00071}00071\ \ \ \ \textcolor{comment}{//\ is\ accessible\ from\ internal\_data\_pt(...).\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00072}00072\ \ \ \ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}}=\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{add\_internal\_data}}(\mbox{\hyperlink{classoomph_1_1GeneralCircle_a4a707f37b32d447dbe965177e442aa76}{Geom\_data\_pt}}[0]);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00074}00074\ \ \ \ \textcolor{comment}{//\ Geometric\ Data\ for\ the\ GeomObject\ has\ been\ set\ up\ (and\ pinned)\ in}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00075}00075\ \ \ \ \textcolor{comment}{//\ constructor\ for\ geometric\ object.\ Now\ free\ the\ y-\/position\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00076}00076\ \ \ \ \textcolor{comment}{//\ of\ the\ centre\ because\ we\ want\ to\ determine\ it\ as\ an\ unknown}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00077}00077\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{internal\_data\_pt}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}})-\/>unpin(1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00078}00078\ \ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00079}00079\ \ \ \ \textcolor{comment}{//\ Change\ cleanup\ responsibilities:\ The\ GeomData\ will\ now\ be\ killed}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00080}00080\ \ \ \ \textcolor{comment}{//\ by\ the\ GeneralisedElement\ when\ it\ wipes\ its\ internal\ Data}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00081}00081\ \ \ \ \mbox{\hyperlink{classoomph_1_1GeneralCircle_a6772cb425079b3afd2479663ddb0cb81}{Must\_clean\_up}}=\textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00082}00082\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00083}00083\ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00084}00084\ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00085}00085\ \textcolor{comment}{\ ///\ Destructor:\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00086}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2b3fd2a41155a9d34ab0f43aa8a5deab}{00086}}\ \textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2b3fd2a41155a9d34ab0f43aa8a5deab}{\string~ElasticallySupportedRingElement}}()}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00087}00087\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00088}00088\ \ \ \ \textcolor{comment}{//\ The\ GeomObject's\ GeomData\ is\ mirrored\ in\ the\ element's}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00089}00089\ \ \ \ \textcolor{comment}{//\ Internal\ Data\ and\ therefore\ gets\ wiped\ in\ the}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00090}00090\ \ \ \ \textcolor{comment}{//\ destructor\ of\ GeneralisedElement\ -\/-\/>\ No\ need\ to\ kill\ it\ here}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00091}00091\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00093}00093\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00094}00094\ \textcolor{comment}{\ ///\ Set\ pointer\ to\ Data\ object\ that\ specifies\ the\ "{}load"{}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00095}00095\ \textcolor{comment}{\ ///\ on\ the\ ElasticallySupportedRingElement}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00096}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ac1c967080f2a4e6143bcffdcdbc1d735}{00096}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ac1c967080f2a4e6143bcffdcdbc1d735}{set\_load\_pt}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Data}}*\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\_pt}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00097}00097\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00098}00098\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00099}00099\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\_pt}}-\/>nvalue()!=1)}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00101}00101\ \ \ \ \ \ std::ostringstream\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{error\_stream}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00102}00102\ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{error\_stream}}\ <<\ \textcolor{stringliteral}{"{}The\ data\ object\ that\ stores\ the\ load\ on\ the\ "{}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}ElasticallySupportedRingElement\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}should\ only\ contain\ a\ single\ data\ value\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}This\ one\ contains\ "{}}\ <<\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\_pt}}-\/>nvalue()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00107}00107\ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OomphLibError}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{error\_stream}}.str(),}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00111}00111\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00113}00113\ \ \ \ \textcolor{comment}{//\ Add\ load\ to\ the\ element's\ external\ data\ and\ store}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00114}00114\ \ \ \ \textcolor{comment}{//\ its\ index\ within\ that\ storage\ scheme:\ Following\ this\ assignment,\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00115}00115\ \ \ \ \textcolor{comment}{//\ the\ load\ Data\ is\ accessible\ from}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00116}00116\ \ \ \ \textcolor{comment}{//\ GeneralisedElement::external\_data\_pt(External\_load\_index)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00117}00117\ \ \ \ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{External\_load\_index}}\ =\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{add\_external\_data}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{load\_pt}});}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00119}00119\ \ \ \ \textcolor{comment}{//\ Load\ has\ now\ been\ set}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00120}00120\ \ \ \ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{Load\_data\_has\_been\_set}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00122}00122\ \ \ \}\ \textcolor{comment}{//\ end\ of\ set\_load\_pt(...)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00123}00123\ \ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00124}00124\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00125}00125\ \textcolor{comment}{\ ///\ "{}Load"{}\ acting\ on\ the\ ring}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00126}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f}{00126}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f}{load}}()}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00127}00127\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00128}00128\ \ \ \ \textcolor{comment}{//\ Return\ the\ load\ if\ it\ has\ been\ set}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00129}00129\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{Load\_data\_has\_been\_set}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00131}00131\ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{external\_data\_pt}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{External\_load\_index}})-\/>value(0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00133}00133\ \ \ \ \textcolor{comment}{//\ ...otherwise\ return\ zero\ load}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00134}00134\ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00135}00135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00136}00136\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00138}00138\ \ \ \}\ \textcolor{comment}{//\ end\ of\ load()}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00139}00139\ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00140}00140\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00141}00141\ \textcolor{comment}{\ ///\ Access\ function\ for\ the\ spring\ stiffness}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00142}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_af78beb926542b46abbdd3345af8f2e9a}{00142}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_af78beb926542b46abbdd3345af8f2e9a}{k\_stiff}}()\ \{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\_stiff}};\}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00144}00144\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00145}00145\ \textcolor{comment}{\ ///\ Pin\ the\ vertical\ displacement}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00146}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_acddd4ff64f173aa2d6c4e651c1c9c319}{00146}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_acddd4ff64f173aa2d6c4e651c1c9c319}{pin\_yc}}()}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00147}00147\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00148}00148\ \ \ \ \textcolor{comment}{//\ Vertical\ position\ of\ centre\ is\ stored\ as\ value\ 1\ in\ the}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00149}00149\ \ \ \ \textcolor{comment}{//\ element's\ one\ and\ only\ internal\ Data\ object.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00150}00150\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{internal\_data\_pt}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}})-\/>pin(1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00151}00151\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00153}00153\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00154}00154\ \textcolor{comment}{\ ///\ Unpin\ the\ vertical\ displacement}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00155}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad70712dca329430d09d1a905c1362478}{00155}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad70712dca329430d09d1a905c1362478}{unpin\_yc}}()}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00156}00156\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00157}00157\ \ \ \ \textcolor{comment}{//\ Vertical\ position\ of\ centre\ is\ stored\ as\ value\ 1\ in\ the}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00158}00158\ \ \ \ \textcolor{comment}{//\ element's\ one\ and\ only\ internal\ Data\ object.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00159}00159\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{internal\_data\_pt}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}})-\/>unpin(1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00161}00161\ \ \ \}\ \textcolor{comment}{//\ end\ of\ unpin\_yc()}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00163}00163\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00164}00164\ \textcolor{comment}{\ ///\ Compute\ element\ residual\ vector\ (wrapper)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00165}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad8bf518168d68e8b016e474e76037a49}{00165}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ad8bf518168d68e8b016e474e76037a49}{get\_residuals}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector<double>}}\ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00166}00166\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00167}00167\ \ \ \ \textcolor{comment}{//Initialise\ residuals\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00168}00168\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}.initialise(0.0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00169}00169\ \ \ \ \textcolor{comment}{//Create\ a\ dummy\ matrix}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00170}00170\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{DenseMatrix<double>}}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{dummy}}(1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00171}00171\ \ \ \ \textcolor{comment}{//Call\ the\ generic\ residuals\ function\ with\ flag\ set\ to\ 0}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00172}00172\ \ \ \ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}{fill\_in\_generic\_residual\_contribution}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}},\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{dummy}},0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00173}00173\ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00175}00175\ \ \ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00176}00176\ \textcolor{comment}{\ ///\ Compute\ element\ residual\ Vector\ and\ element\ Jacobian\ matrix\ (wrapper)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00177}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2418f706f5b17a64a5b01b72ccb3b95d}{00177}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a2418f706f5b17a64a5b01b72ccb3b95d}{get\_jacobian}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector<double>}}\ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{DenseMatrix<double>}}\ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00179}00179\ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00180}00180\ \ \ \ \textcolor{comment}{//Initialise\ residuals\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00181}00181\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}.initialise(0.0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00182}00182\ \ \ \ \textcolor{comment}{//Initialise\ the\ jacobian\ matrix\ to\ zero}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00183}00183\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}}.initialise(0.0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00184}00184\ \ \ \ \textcolor{comment}{//Call\ the\ generic\ routine\ with\ the\ flag\ set\ to\ 1}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00185}00185\ \ \ \ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}{fill\_in\_generic\_residual\_contribution}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}},\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}},1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00187}00187\ \ \ \}\ \textcolor{comment}{//\ end\ of\ get\_jacobian(...)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00190}00190\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00192}00192\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00193}00193\ \textcolor{comment}{\ ///\ Compute\ element\ residual\ Vector\ (only\ if\ flag=0)\ and\ also}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00194}00194\ \textcolor{comment}{\ ///\ the\ element\ Jacobian\ matrix\ (if\ flag=1)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00195}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}{00195}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6d763f2ce0c930e7a2201e995290f169}{fill\_in\_generic\_residual\_contribution}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{Vector<double>}}\ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{DenseMatrix<double>}}\ \&\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{flag}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00198}00198\ \ \ \{\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00199}00199\ \ \ \ \textcolor{comment}{//Find\ out\ how\ may\ dofs\ there\ are\ in\ the\ element}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00200}00200\ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{n\_dof}}\ =\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{ndof}}();}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00201}00201\ \ \ \ \textcolor{comment}{//If\ everything\ is\ pinned\ return\ straight\ away}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00202}00202\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{n\_dof}}==0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00203}00203\ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00204}00204\ \ \ \ \textcolor{comment}{//\ Pseudo-\/elastic\ force\ balance\ to\ determine\ the\ position\ of\ the}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00205}00205\ \ \ \ \textcolor{comment}{//\ ring's\ centre\ for\ a\ given\ load.}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00207}00207\ \ \ \ \textcolor{comment}{//\ What's\ the\ local\ equation\ number\ of\ the\ force\ balance\ equation}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00208}00208\ \ \ \ \textcolor{comment}{//\ [It's\ the\ equation\ that\ "{}determines"{}\ the\ value\ of\ the\ internal}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00209}00209\ \ \ \ \textcolor{comment}{//\ dof,\ y\_c,\ which\ is\ stored\ as\ the\ second\ value\ of\ the\ one-\/and-\/only}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00210}00210\ \ \ \ \textcolor{comment}{//\ internal\ data\ object\ in\ this\ element]}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00211}00211\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_yc}}\ =\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00212}00212\ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{internal\_local\_eqn}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}},1);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00214}00214\ \ \ \ \textcolor{comment}{//\ Add\ residual\ to\ appropriate\ entry\ in\ the\ element's\ residual}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00215}00215\ \ \ \ \textcolor{comment}{//\ vector:}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00216}00216\ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{residuals}}[\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_yc}}]=\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a636b98cd51286298efff1e89cd2c1c4f}{load}}()-\/\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\_stiff}}*\mbox{\hyperlink{classoomph_1_1GeneralCircle_ae7a8968f7a75a9c9f01df387382db953}{y\_c}}();}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00218}00218\ \ \ \ \textcolor{comment}{//\ Work\ out\ Jacobian:\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00219}00219\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{flag}})}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00220}00220\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00221}00221\ \ \ \ \ \ \textcolor{comment}{//\ Derivative\ of\ residual\ w.r.t.\ the\ internal\ dof,\ i.e.\ the\ vertical}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00222}00222\ \ \ \ \ \ \textcolor{comment}{//\ position\ of\ the\ ring's\ centre:\ d\ residual[0]/d\ y\_c}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00223}00223\ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_yc}},\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_yc}})\ =\ -\/\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\_stiff}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00224}00224\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00225}00225\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00226}00226\ \ \ \ \ \ \textcolor{comment}{//\ Derivative\ with\ respect\ to\ external\ dof,\ i.e.\ the\ applied\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00227}00227\ \ \ \ \ \ \textcolor{comment}{//\ load:\ d\ residual[0]/d\ load\ -\/-\/\ but\ only\ if\ the\ load\ is\ an\ unknown}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00228}00228\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{n\_dof}}==2)}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00229}00229\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00230}00230\ \ \ \ \ \ \ \ \textcolor{comment}{//\ What's\ the\ local\ equation\ number\ of\ the\ load\ parameter?}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00231}00231\ \ \ \ \ \ \ \ \textcolor{comment}{//\ It's\ stored\ as\ the\ 0th\ value\ in\ the\ the\ element's}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00232}00232\ \ \ \ \ \ \ \ \textcolor{comment}{//\ one-\/and-\/only\ external\ data\ item:}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00233}00233\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_load}}\ =\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00234}00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{external\_local\_eqn}}(\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{External\_load\_index}},0);}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00236}00236\ \textcolor{preprocessor}{\#ifdef\ PARANOID}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00237}00237\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_load}}<0)}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00238}00238\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Load\ is\ pinned\ and\ yet\ n\_dof=2?\(\backslash\)n\ This\ is\ very\ fishy!\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OOMPH\_CURRENT\_FUNCTION}},}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{OOMPH\_EXCEPTION\_LOCATION}});}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00243}00243\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00244}00244\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00245}00245\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00246}00246\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ entry\ into\ element\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00247}00247\ \ \ \ \ \ \ \ \mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{jacobian}}(\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_yc}},\mbox{\hyperlink{algebraic__free__boundary__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{local\_eqn\_number\_for\_load}})\ =\ 1.0;}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00248}00248\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00250}00250\ \ \ \}\ \textcolor{comment}{//\ end\ of\ get\_residuals\_generic(...)}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00253}00253\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00254}00254\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00255}00255\ \textcolor{comment}{\ ///\ Stiffness\ of\ the\ ring's\ "{}elastic"{}\ support}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00256}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{00256}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_ab6036a4f4e1434a2d068f6584f7c46e6}{K\_stiff}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00257}00257\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00258}00258\ \textcolor{comment}{\ ///\ Index\ of\ the\ location\ of\ the\ load\ Data\ in\ the\ element's\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00259}00259\ \textcolor{comment}{\ ///\ array\ of\ external\ data}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00260}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{00260}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a800f0a57477dc63df13aaea5c99a5f30}{External\_load\_index}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00261}00261\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00262}00262\ \textcolor{comment}{\ ///\ Index\ of\ the\ location\ of\ the\ geometric\ Data\ in\ the\ element's\ }}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00263}00263\ \textcolor{comment}{\ ///\ array\ of\ internal\ data}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00264}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{00264}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a6804e3aa5b62db4848416b2b69e89fe7}{Internal\_geometric\_data\_index}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00265}00265\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00266}00266\ \textcolor{comment}{\ ///\ Flag\ to\ indicate\ that\ load\ data\ has\ been\ set}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00267}\mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{00267}}\ \textcolor{comment}{}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classoomph_1_1ElasticallySupportedRingElement_a98151ae912af71c1a78ddae80c4fbb04}{Load\_data\_has\_been\_set}};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00269}00269\ \};}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00271}00271\ \}}
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{circle__as__generalised__element_8h_source_l00273}00273\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

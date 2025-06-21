@@ -1,0 +1,44 @@
+\doxysection{Qelements.\+h File Reference}
+\hypertarget{Qelements_8h}{}\label{Qelements_8h}\index{Qelements.h@{Qelements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1QElementGeometricBase}{oomph\+::\+QElement\+Geometric\+Base}}
+\begin{DoxyCompactList}\small\item\em Empty base class for Qelements (created so that we can use dynamic\+\_\+cast$<$$>$() to figure out if a an element is a Qelement (from a purely geometric point of view). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QElementBase}{oomph\+::\+QElement\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for Qelements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QSolidElementBase}{oomph\+::\+QSolid\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for Solid Qelements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QElement}{oomph\+::\+QElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1QElement}{QElement} class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1LineElementBase}{oomph\+::\+Line\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for all line elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QElement_3_011_00_01NNODE__1D_01_4}{oomph\+::\+QElement$<$ 1, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1QElement}{QElement} class specialised to one spatial dimension. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QuadElementBase}{oomph\+::\+Quad\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for all quad elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QElement_3_012_00_01NNODE__1D_01_4}{oomph\+::\+QElement$<$ 2, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1QElement}{QElement} class specialised to two spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BrickElementBase}{oomph\+::\+Brick\+Element\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for all brick elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QElement_3_013_00_01NNODE__1D_01_4}{oomph\+::\+QElement$<$ 3, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em General \doxylink{classoomph_1_1QElement}{QElement} class specialised to three spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidQElement}{oomph\+::\+Solid\+QElement$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidQElement}{Solid\+QElement} elements are quadrilateral elements whose derivatives also include those based upon the lagrangian positions of the nodes. They are the basis for solid mechanics elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidQElement_3_011_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+QElement$<$ 1, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidQElement}{Solid\+QElement} elements, specialised to one spatial dimension. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidQElement_3_012_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+QElement$<$ 2, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidQElement}{Solid\+QElement} elements, specialised to two spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SolidQElement_3_013_00_01NNODE__1D_01_4}{oomph\+::\+Solid\+QElement$<$ 3, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1SolidQElement}{Solid\+QElement} elements, specialised to three spatial dimensions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableQElement}{oomph\+::\+Refineable\+QElement$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class that is used to template the refineable Q elements by dimension. It\textquotesingle{}s really nothing more than a policy class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PRefineableQElement}{oomph\+::\+PRefineable\+QElement$<$ DIM, INITIAL\+\_\+\+NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em A class that is used to template the p-\/refineable Q elements by dimension. It\textquotesingle{}s really nothing more than a policy class. The default template parameter ensures that these elements inherit from the \doxylink{classoomph_1_1QElement}{QElement} of the correct type if they start with a p-\/order higher than linear (e.\+g. Navier-\/\+Stokes Elements). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement}{oomph\+::\+Refineable\+Solid\+QElement$<$ DIM $>$}}
+\begin{DoxyCompactList}\small\item\em A class that is used to template the solid refineable Q elements by dimension. It\textquotesingle{}s really nothing more than a policy class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

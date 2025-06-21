@@ -1,0 +1,229 @@
+\doxysection{oomph\+::Hypre\+Helpers Namespace Reference}
+\hypertarget{namespaceoomph_1_1HypreHelpers}{}\label{namespaceoomph_1_1HypreHelpers}\index{oomph::HypreHelpers@{oomph::HypreHelpers}}
+
+
+Helper functions for use with the Hypre library.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096}{check\+\_\+\+HYPRE\+\_\+error\+\_\+flag}} (std\+::ostringstream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{message}})
+\begin{DoxyCompactList}\small\item\em Helper function to check the Hypre error flag, return the message associated with any error, and reset the global error flag to zero. This function also returns the error value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f}{create\+\_\+\+HYPRE\+\_\+\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+vec}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa56349b171f8dc464f527ab54a8b219a}{create\+\_\+\+HYPRE\+\_\+\+Vector}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+vector}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+vector}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734}{create\+\_\+\+HYPRE\+\_\+\+Matrix}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{oomph\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJMatrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+ij\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+CSRMatrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hypre\+\_\+par\+\_\+matrix}}, \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function to create a serial HYPRE\+\_\+\+IJMatrix and HYPRE\+\_\+\+Par\+CSRMatrix from a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} NOTE\+: dist\+\_\+pt is rebuilt to match the distribution of the hypre solver which is not necassarily the same as the oomph lib matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7}{euclid\+\_\+settings\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+block\+\_\+jacobi}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+row\+\_\+scaling}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{use\+\_\+ilut}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&level, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{drop\+\_\+tol}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{print\+\_\+level}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{euclid\+\_\+object}})
+\begin{DoxyCompactList}\small\item\em Helper function to set Euclid options using a command line like array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a6bfb56c0c255b2b6a82625afe91c6b70}{Number\+\_\+of\+\_\+active\+\_\+hypre\+\_\+solvers}} = 0
+\begin{DoxyCompactList}\small\item\em Number of active Hypre solvers (smart pointer like behaviuor to make sure that the initialise/finalize functions are only called the required number of times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}{AMG\+\_\+strength}} = 0.\+25
+\begin{DoxyCompactList}\small\item\em Default for AMG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/0.\+75, say) for 3D. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}{AMG\+\_\+coarsening}} = 6
+\begin{DoxyCompactList}\small\item\em Default AMG coarsening strategy. Coarsening types include\+: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}{AMG\+\_\+truncation}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em AMG interpolation truncation factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper functions for use with the Hypre library. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096}\label{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!check\_HYPRE\_error\_flag@{check\_HYPRE\_error\_flag}}
+\index{check\_HYPRE\_error\_flag@{check\_HYPRE\_error\_flag}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{check\_HYPRE\_error\_flag()}{check\_HYPRE\_error\_flag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag (\begin{DoxyParamCaption}\item[{std\+::ostringstream \&}]{message }\end{DoxyParamCaption})}
+
+
+
+Helper function to check the Hypre error flag, return the message associated with any error, and reset the global error flag to zero. This function also returns the error value. 
+
+Helper function to check the Hypre error flag, return the message associated with any error, and reset the error flag to zero. 
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00155}{155}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{hypre__solver_8h_a3f159862f67e03500e947e98e0938171}{hypre\+\_\+\+\_\+global\+\_\+error}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01364}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734}\label{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!create\_HYPRE\_Matrix@{create\_HYPRE\_Matrix}}
+\index{create\_HYPRE\_Matrix@{create\_HYPRE\_Matrix}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_HYPRE\_Matrix()}{create\_HYPRE\_Matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{oomph\+\_\+matrix,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJMatrix}} \&}]{hypre\+\_\+ij\+\_\+matrix,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+CSRMatrix}} \&}]{hypre\+\_\+par\+\_\+matrix,  }\item[{\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{dist\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function to create a serial HYPRE\+\_\+\+IJMatrix and HYPRE\+\_\+\+Par\+CSRMatrix from a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} NOTE\+: dist\+\_\+pt is rebuilt to match the distribution of the hypre solver which is not necassarily the same as the oomph lib matrix. 
+
+Helper function to create a serial HYPRE\+\_\+\+IJMatrix and HYPRE\+\_\+\+Par\+CSRMatrix from a \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}. 
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00278}{278}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{fpdiff_8cc_source_l00123}{oomph\+::lower()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00548}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+matrix\+\_\+setup()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f}\label{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!create\_HYPRE\_Vector@{create\_HYPRE\_Vector}}
+\index{create\_HYPRE\_Vector@{create\_HYPRE\_Vector}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_HYPRE\_Vector()}{create\_HYPRE\_Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{oomph\+\_\+vec,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&}]{hypre\+\_\+ij\+\_\+vector,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&}]{hypre\+\_\+par\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. 
+
+
+\begin{DoxyItemize}
+\item If no MPI then serial vectors are created
+\item If MPI and serial input vector then distributed hypre vectors are created
+\item If MPI and distributed input vector the distributed output vectors are created. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00186}{186}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{fpdiff_8cc_source_l00123}{oomph\+::lower()}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l01149}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solve()}}, and \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_aa56349b171f8dc464f527ab54a8b219a}\label{namespaceoomph_1_1HypreHelpers_aa56349b171f8dc464f527ab54a8b219a} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!create\_HYPRE\_Vector@{create\_HYPRE\_Vector}}
+\index{create\_HYPRE\_Vector@{create\_HYPRE\_Vector}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{create\_HYPRE\_Vector()}{create\_HYPRE\_Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{dist\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+IJVector}} \&}]{hypre\+\_\+ij\+\_\+vector,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Par\+Vector}} \&}]{hypre\+\_\+par\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. 
+
+Helper function to create an empty HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector.
+
+
+\begin{DoxyItemize}
+\item If no MPI then serial vectors are created
+\item If MPI and serial input vector then distributed hypre vectors are created
+\item If MPI and distributed input vector the distributed output vectors are created.
+\item If no MPI then serial vectors are created
+\item If MPI and serial distribution then distributed hypre vectors are created
+\item If MPI and distributed input distribution the distributed output vectors are created. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00248}{248}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fpdiff_8cc_source_l00123}{oomph\+::lower()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7}\label{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!euclid\_settings\_helper@{euclid\_settings\_helper}}
+\index{euclid\_settings\_helper@{euclid\_settings\_helper}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{euclid\_settings\_helper()}{euclid\_settings\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+block\+\_\+jacobi,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+row\+\_\+scaling,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{use\+\_\+ilut,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{level,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{drop\+\_\+tol,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{print\+\_\+level,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{HYPRE\+\_\+\+Solver}} \&}]{euclid\+\_\+object }\end{DoxyParamCaption})}
+
+
+
+Helper function to set Euclid options using a command line like array. 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00444}{444}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8cc_source_l00592}{oomph\+::\+Hypre\+Interface\+::hypre\+\_\+solver\+\_\+setup()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}\label{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_coarsening@{AMG\_coarsening}}
+\index{AMG\_coarsening@{AMG\_coarsening}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{AMG\_coarsening}{AMG\_coarsening}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+coarsening = 6}
+
+
+
+Default AMG coarsening strategy. Coarsening types include\+: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00142}{142}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}\label{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_strength@{AMG\_strength}}
+\index{AMG\_strength@{AMG\_strength}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{AMG\_strength}{AMG\_strength}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+strength = 0.\+25}
+
+
+
+Default for AMG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/0.\+75, say) for 3D. 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00126}{126}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}\label{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!AMG\_truncation@{AMG\_truncation}}
+\index{AMG\_truncation@{AMG\_truncation}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{AMG\_truncation}{AMG\_truncation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+truncation = 0.\+0}
+
+
+
+AMG interpolation truncation factor. 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00148}{148}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}.
+
+\Hypertarget{namespaceoomph_1_1HypreHelpers_a6bfb56c0c255b2b6a82625afe91c6b70}\label{namespaceoomph_1_1HypreHelpers_a6bfb56c0c255b2b6a82625afe91c6b70} 
+\index{oomph::HypreHelpers@{oomph::HypreHelpers}!Number\_of\_active\_hypre\_solvers@{Number\_of\_active\_hypre\_solvers}}
+\index{Number\_of\_active\_hypre\_solvers@{Number\_of\_active\_hypre\_solvers}!oomph::HypreHelpers@{oomph::HypreHelpers}}
+\doxysubsubsection{\texorpdfstring{Number\_of\_active\_hypre\_solvers}{Number\_of\_active\_hypre\_solvers}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Hypre\+Helpers\+::\+Number\+\_\+of\+\_\+active\+\_\+hypre\+\_\+solvers = 0}
+
+
+
+Number of active Hypre solvers (smart pointer like behaviuor to make sure that the initialise/finalize functions are only called the required number of times. 
+
+
+
+Definition at line \mbox{\hyperlink{hypre__solver_8cc_source_l00120}{120}} of file \mbox{\hyperlink{hypre__solver_8cc_source}{hypre\+\_\+solver.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{hypre__solver_8h_source_l00142}{oomph\+::\+Hypre\+Interface\+::\+Hypre\+Interface()}}, and \mbox{\hyperlink{hypre__solver_8h_source_l00238}{oomph\+::\+Hypre\+Interface\+::\texorpdfstring{$\sim$}{\string~}\+Hypre\+Interface()}}.
+

@@ -1,0 +1,325 @@
+\doxysection{oomph\+::Matrix\texorpdfstring{$<$}{<} T, MATRIX\+\_\+\+TYPE \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classoomph_1_1Matrix}{}\label{classoomph_1_1Matrix}\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+
+
+Abstract base class for matrices, templated by the type of object that is stored in them and the type of matrix. The MATRIX\+\_\+\+TYPE template argument is used as part of the Curiously Recurring Template Pattern, see \href{http://en.wikipedia.org/wiki/Curiously_Recurring_Template_Pattern}{\texttt{ http\+://en.\+wikipedia.\+org/wiki/\+Curiously\+\_\+\+Recurring\+\_\+\+Template\+\_\+\+Pattern}} The pattern is used to force the inlining of the round bracket access functions by ensuring that they are NOT virtual functions.  
+
+
+
+
+{\ttfamily \#include $<$matrices.\+h$>$}
+
+Inheritance diagram for oomph\+::Matrix\texorpdfstring{$<$}{<} T, MATRIX\+\_\+\+TYPE \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.370079cm]{classoomph_1_1Matrix}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837}{Matrix}} ()
+\begin{DoxyCompactList}\small\item\em (Empty) constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361}{Matrix}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11}{\texorpdfstring{$\sim$}{\string~}\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Virtual (empty) destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX\+\_\+\+TYPE template parameter to call the get\+\_\+entry() function which must be defined in all derived classes that are to be fully instantiated. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9}{operator()}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}})
+\begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}{output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Output function to print a matrix row-\/by-\/row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248}{output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). This functionality was moved from the function sparse\+\_\+indexed\+\_\+output(...) because at the moment, generalisation of this functionality does not work in parallel. \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} has an \doxylink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{nrow()} function but it should it should use nrow\+\_\+local() -\/ which is the N variable in the underlaying \doxylink{classoomph_1_1CRMatrix}{CRMatrix}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}{sparse\+\_\+indexed\+\_\+output\+\_\+helper}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} =0
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}{sparse\+\_\+indexed\+\_\+output}} (std\+::ostream \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{outfile}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}{sparse\+\_\+indexed\+\_\+output}} (std\+::string \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{filename}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{precision}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{output\+\_\+bottom\+\_\+right\+\_\+zero}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f}{range\+\_\+check}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{j}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}}$>$\newline
+class oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}
+Abstract base class for matrices, templated by the type of object that is stored in them and the type of matrix. The MATRIX\+\_\+\+TYPE template argument is used as part of the Curiously Recurring Template Pattern, see \href{http://en.wikipedia.org/wiki/Curiously_Recurring_Template_Pattern}{\texttt{ http\+://en.\+wikipedia.\+org/wiki/\+Curiously\+\_\+\+Recurring\+\_\+\+Template\+\_\+\+Pattern}} The pattern is used to force the inlining of the round bracket access functions by ensuring that they are NOT virtual functions. 
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00073}{73}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837}\label{classoomph_1_1Matrix_ab414a0bf8e2658fc30d2c516f3bf4837} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Empty) constructor 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00105}{105}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+\Hypertarget{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361}\label{classoomph_1_1Matrix_ac40b846daa81698ea61aba9dfb1ae361} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11}\label{classoomph_1_1Matrix_a3bc2eeb0940268de5252a9234d126f11} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!````~Matrix@{\texorpdfstring{$\sim$}{\string~}Matrix}}
+\index{````~Matrix@{\texorpdfstring{$\sim$}{\string~}Matrix}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Matrix()}{\string~Matrix()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Virtual (empty) destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00114}{114}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}\label{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return the number of columns of the matrix. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_a4101f581e470c940bf7daf12ec1b234f}{oomph\+::\+Dense\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a4151bc429f2da548cee234e147003bfa}{oomph\+::\+CRComplex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a62540288d116687aa4bd201787845b4d}{oomph\+::\+CCComplex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ bool $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ double \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ int \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ int $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+CRDouble\+Matrix \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a9937181f1cb4cfaed7aaf3b483c42456}{oomph\+::\+Dense\+Matrix$<$ unsigned $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ double, CCMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ double, CRMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CCMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CRMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ T, CCMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4db71b6d794cfcee1624c15c09d62d7f}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02823}{oomph\+::\+CCDouble\+Matrix\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::range\+\_\+check()}}, and \mbox{\hyperlink{matrices_8h_source_l00182}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+\Hypertarget{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}\label{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!nrow@{nrow}}
+\index{nrow@{nrow}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return the number of rows of the matrix. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DenseComplexMatrix_aea9edba37ef5fd679d17f22eaeb85369}{oomph\+::\+Dense\+Complex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a08280a10665278ab233777ca7f510345}{oomph\+::\+CRComplex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCComplexMatrix_a52c78210ebe95b72ead8d938f5c7a9bb}{oomph\+::\+CCComplex\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ bool $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ double \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ int \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ int $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+CRDouble\+Matrix \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a1b425094510d833ffe91920747a0a962}{oomph\+::\+Dense\+Matrix$<$ unsigned $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ double, CCMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ double, CRMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CCMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CRMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ T, CCMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a21e22f93a942583ca83cea18c23bdd11}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l02817}{oomph\+::\+CCDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l00078}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::range\+\_\+check()}}, and \mbox{\hyperlink{matrices_8h_source_l00182}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+\Hypertarget{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9}\label{classoomph_1_1Matrix_a0f6a65782771830fd4fa1a16284c6bc9} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+T \& \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Round brackets to give access as a(i,j) for read-\/write access. The function uses the MATRIX\+\_\+\+TYPE template parameter to call the entry() function which must be defined in all derived classes that are to be fully instantiated. If the particular \doxylink{classoomph_1_1Matrix}{Matrix} does not allow write access, the function should break with an error message. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00140}{140}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28}\label{classoomph_1_1Matrix_a26f23d2b331cb7f533fd8585f1ef8d28} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+T \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) The function uses the MATRIX\+\_\+\+TYPE template parameter to call the get\+\_\+entry() function which must be defined in all derived classes that are to be fully instantiated. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00128}{128}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00811}{oomph\+::\+CRMatrix$<$ T $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{matrices_8h_source_l02718}{oomph\+::\+CCMatrix$<$ T $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4}\label{classoomph_1_1Matrix_a81c8f71e6eae8ebf79aa206666e666b4} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Matrix}{Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6}\label{classoomph_1_1Matrix_ace9b59cbe514c77f0b3816b144c740f6} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!output@{output}}
+\index{output@{output}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Output function to print a matrix row-\/by-\/row, in the form a(0,0) a(0,1) ... a(1,0) a(1,1) ... ... to the stream outfile. Broken virtual since it might not be sensible to implement this for some sparse matrices. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ bool $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ double \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ int \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ int $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+CRDouble\+Matrix \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$}}, and \mbox{\hyperlink{classoomph_1_1DenseMatrix_a03e20626e889a1ab4582614f55784165}{oomph\+::\+Dense\+Matrix$<$ unsigned $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00152}{152}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+\Hypertarget{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248}\label{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}}
+\index{output\_bottom\_right\_zero\_helper@{output\_bottom\_right\_zero\_helper}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{output\_bottom\_right\_zero\_helper()}{output\_bottom\_right\_zero\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). This functionality was moved from the function sparse\+\_\+indexed\+\_\+output(...) because at the moment, generalisation of this functionality does not work in parallel. \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} has an \doxylink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{nrow()} function but it should it should use nrow\+\_\+local() -\/ which is the N variable in the underlaying \doxylink{classoomph_1_1CRMatrix}{CRMatrix}. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ bool $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ double \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ int \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ int $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+CRDouble\+Matrix \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_aa02dc7c9b2f4e1cc1204cc8281f030f9}{oomph\+::\+Dense\+Matrix$<$ unsigned $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ double, CCMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ double, CRMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CCMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CRMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ T, CCMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a4c638f36db786e159565e1f890402ed2}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}{oomph\+::\+CRMatrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}{oomph\+::\+CRMatrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_abf764862746afbbe2655a41bdf726327}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_ab0887b5420752c47bfc14777006bcc1e}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}{oomph\+::\+CCMatrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}{oomph\+::\+CCMatrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_ac3b138b2ed470866999f2a92f3e1f239}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a13408a013cf37a9455b9813b7a19fb0e}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00182}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+\Hypertarget{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f}\label{classoomph_1_1Matrix_a2fed2ea1840638eb0ddaa2d4ab1da82f} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!range\_check@{range\_check}}
+\index{range\_check@{range\_check}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{range\_check()}{range\_check()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::range\+\_\+check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Range check to catch when an index is out of bounds, if so, it issues a warning message and dies by throwing an {\ttfamily \doxylink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}}. 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00078}{78}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::ncol()}}, and \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nrow()}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ T $>$\+::get\+\_\+entry()}}, and \mbox{\hyperlink{matrices_8h_source_l02654}{oomph\+::\+CCMatrix$<$ T $>$\+::get\+\_\+entry()}}.
+
+\Hypertarget{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8}\label{classoomph_1_1Matrix_a4f97fa3c94e6fd664e46acb8873a80f8} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!sparse\_indexed\_output@{sparse\_indexed\_output}}
+\index{sparse\_indexed\_output@{sparse\_indexed\_output}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output()}{sparse\_indexed\_output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::sparse\+\_\+indexed\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{precision = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{output\+\_\+bottom\+\_\+right\+\_\+zero = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if precision=0 then nothing is changed). If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00182}{182}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1Matrix_ad1af46b34096c348272b0dfacb5ce6a9}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::ncol()}}, \mbox{\hyperlink{classoomph_1_1Matrix_ac366ca5324d3e00e23d9800f3d5f4d5f}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1Matrix_a10ee338f4d3893010291a692aea04248}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::output\+\_\+bottom\+\_\+right\+\_\+zero\+\_\+helper()}}, and \mbox{\hyperlink{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper()}}.
+
+
+
+Referenced by \mbox{\hyperlink{black__box__newton__solver_8cc_source_l00067}{oomph\+::\+Black\+Box\+FDNewton\+Solver\+::black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{matrices_8h_source_l00226}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+\Hypertarget{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a}\label{classoomph_1_1Matrix_ac7473fb07d4db925b4cf3a22131b561a} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!sparse\_indexed\_output@{sparse\_indexed\_output}}
+\index{sparse\_indexed\_output@{sparse\_indexed\_output}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output()}{sparse\_indexed\_output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::sparse\+\_\+indexed\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{precision = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{output\+\_\+bottom\+\_\+right\+\_\+zero = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Indexed output function to print a matrix to the file named filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If optional boolean flag is set to true we also output the "{}bottom right"{} entry regardless of it being zero or not (this allows automatic detection of matrix size in e.\+g. matlab, python). 
+
+
+
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00226}{226}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00182}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+\Hypertarget{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8}\label{classoomph_1_1Matrix_a7a5b44e7688ce2c2f7552da104e615c8} 
+\index{oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}!sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}}
+\index{sparse\_indexed\_output\_helper@{sparse\_indexed\_output\_helper}!oomph::Matrix$<$ T, MATRIX\_TYPE $>$@{oomph::Matrix$<$ T, MATRIX\_TYPE $>$}}
+\doxysubsubsection{\texorpdfstring{sparse\_indexed\_output\_helper()}{sparse\_indexed\_output\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} T , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1Matrix}{oomph\+::\+Matrix}}$<$ T, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{MATRIX\+\_\+\+TYPE}} $>$\+::sparse\+\_\+indexed\+\_\+output\+\_\+helper (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Indexed output function to print a matrix to the stream outfile as i,j,a(i,j) for a(i,j)!=0 only. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ bool $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ double \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ int \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ int $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+CRDouble\+Matrix \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ oomph\+::\+Matrix\+Vector\+Product \texorpdfstring{$\ast$}{*} $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix_a6e9084acc11e036d4c5f7e5322d12034}{oomph\+::\+Dense\+Matrix$<$ unsigned $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ double, CCMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ double, CRMatrix$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CCMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, CRMatrix$<$ std\+::complex$<$ double $>$ $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ T, CCMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1SparseMatrix_a84a08f7e77be50af6a5655cbe0609619}{oomph\+::\+Sparse\+Matrix$<$ T, CRMatrix$<$ T $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}{oomph\+::\+CRMatrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}{oomph\+::\+CRMatrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1CRMatrix_af34167172020d60e5fa382e4bd5d6466}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a468055aa2e36ff270a769a74c9ac2856}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}{oomph\+::\+CCMatrix$<$ T $>$}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}{oomph\+::\+CCMatrix$<$ double $>$}}, \mbox{\hyperlink{classoomph_1_1CCMatrix_a1f6e451f0688c392e45bc03bf20fdda7}{oomph\+::\+CCMatrix$<$ std\+::complex$<$ double $>$ $>$}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_af93e5663c282ab73bc01c8dff58d0e82}{oomph\+::\+Sum\+Of\+Matrices}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00182}{oomph\+::\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::sparse\+\_\+indexed\+\_\+output()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrices_8h}{matrices.\+h}}\end{DoxyCompactItemize}

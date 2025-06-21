@@ -1,0 +1,228 @@
+\doxysection{Tanh\+Soln\+For\+Linear\+Wave Namespace Reference}
+\hypertarget{namespaceTanhSolnForLinearWave}{}\label{namespaceTanhSolnForLinearWave}\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+
+
+Namespace for exact solution for Linear\+Wave equation with sharp step.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{exact\+\_\+u}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Exact solution. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{exact\+\_\+dudt}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em 1st time-\/deriv of exact solution \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{exact\+\_\+d2udt2}} (const double \&time, const Vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em 2nd time-\/deriv of exact solution \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9}{get\+\_\+exact\+\_\+u}} (const double \&time, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+\begin{DoxyCompactList}\small\item\em Exact solution as a vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805}{get\+\_\+source}} (const double \&time, const Vector$<$ double $>$ \&x, double \&source)
+\begin{DoxyCompactList}\small\item\em Source function to make it an exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_af4c104781fc753f17614bcd8ac4fddc8}{get\+\_\+exact\+\_\+gradient}} (const double \&time, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&dudx)
+\begin{DoxyCompactList}\small\item\em Gradient of exact solution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5a56ef7a715cb0b6e709f928d0f10592}{prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary}} (const double \&time, const Vector$<$ double $>$ \&x, double \&flux)
+\begin{DoxyCompactList}\small\item\em Prescribed flux on a fixed y max boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}
+\begin{DoxyCompactList}\small\item\em Parameter for steepness of step. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}}
+\begin{DoxyCompactList}\small\item\em Orientation of step wave. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for exact solution for Linear\+Wave equation with sharp step. 
+
+Namespace for travelling wave solution for Linear\+Wave equation with sharp step. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}\label{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!exact\_d2udt2@{exact\_d2udt2}}
+\index{exact\_d2udt2@{exact\_d2udt2}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{exact\_d2udt2()}{exact\_d2udt2()}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Linear\+Wave\+::exact\+\_\+d2udt2 (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+2nd time-\/deriv of exact solution 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00073}{73}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00052}{Alpha}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00055}{Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00134}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00289}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}\label{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!exact\_dudt@{exact\_dudt}}
+\index{exact\_dudt@{exact\_dudt}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{exact\_dudt()}{exact\_dudt()}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Linear\+Wave\+::exact\+\_\+dudt (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+1st time-\/deriv of exact solution 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00065}{65}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00052}{Alpha}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00055}{Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00134}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00289}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}\label{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!exact\_u@{exact\_u}}
+\index{exact\_u@{exact\_u}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{exact\_u()}{exact\_u()}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Linear\+Wave\+::exact\+\_\+u (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00058}{58}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00052}{Alpha}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00055}{Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00134}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00082}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00289}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_af4c104781fc753f17614bcd8ac4fddc8}\label{namespaceTanhSolnForLinearWave_af4c104781fc753f17614bcd8ac4fddc8} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!get\_exact\_gradient@{get\_exact\_gradient}}
+\index{get\_exact\_gradient@{get\_exact\_gradient}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_gradient()}{get\_exact\_gradient()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Linear\+Wave\+::get\+\_\+exact\+\_\+gradient (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{dudx }\end{DoxyParamCaption})}
+
+
+
+Gradient of exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00096}{96}} of file \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00052}{Alpha}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00055}{Phi}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00108}{prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9}\label{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!get\_exact\_u@{get\_exact\_u}}
+\index{get\_exact\_u@{get\_exact\_u}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{get\_exact\_u()}{get\_exact\_u()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Linear\+Wave\+::get\+\_\+exact\+\_\+u (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{Vector$<$ double $>$ \&}]{u }\end{DoxyParamCaption})}
+
+
+
+Exact solution as a vector. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00082}{82}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00073}{exact\+\_\+d2udt2()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00065}{exact\+\_\+dudt()}}, and \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00058}{exact\+\_\+u()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00404}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805}\label{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!get\_source@{get\_source}}
+\index{get\_source@{get\_source}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{get\_source()}{get\_source()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Linear\+Wave\+::get\+\_\+source (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{source }\end{DoxyParamCaption})}
+
+
+
+Source function to make it an exact solution. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00091}{91}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00553}{main()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_a5a56ef7a715cb0b6e709f928d0f10592}\label{namespaceTanhSolnForLinearWave_a5a56ef7a715cb0b6e709f928d0f10592} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!prescribed\_flux\_on\_fixed\_y\_boundary@{prescribed\_flux\_on\_fixed\_y\_boundary}}
+\index{prescribed\_flux\_on\_fixed\_y\_boundary@{prescribed\_flux\_on\_fixed\_y\_boundary}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{prescribed\_flux\_on\_fixed\_y\_boundary()}{prescribed\_flux\_on\_fixed\_y\_boundary()}}
+{\footnotesize\ttfamily void Tanh\+Soln\+For\+Linear\+Wave\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+y\+\_\+boundary (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{double \&}]{flux }\end{DoxyParamCaption})}
+
+
+
+Prescribed flux on a fixed y max boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00108}{108}} of file \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc}}.
+
+
+
+References \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00096}{get\+\_\+exact\+\_\+gradient()}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00257}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Linear\+Wave\+Problem()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}\label{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!Alpha@{Alpha}}
+\index{Alpha@{Alpha}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{Alpha}{Alpha}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Linear\+Wave\+::\+Alpha}
+
+
+
+Parameter for steepness of step. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00052}{52}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00073}{exact\+\_\+d2udt2()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00065}{exact\+\_\+dudt()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00058}{exact\+\_\+u()}}, \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00096}{get\+\_\+exact\+\_\+gradient()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00212}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Linear\+Wave\+Problem()}}, and \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00257}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Linear\+Wave\+Problem()}}.
+
+\Hypertarget{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}\label{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6} 
+\index{TanhSolnForLinearWave@{TanhSolnForLinearWave}!Phi@{Phi}}
+\index{Phi@{Phi}!TanhSolnForLinearWave@{TanhSolnForLinearWave}}
+\doxysubsubsection{\texorpdfstring{Phi}{Phi}}
+{\footnotesize\ttfamily double Tanh\+Soln\+For\+Linear\+Wave\+::\+Phi}
+
+
+
+Orientation of step wave. 
+
+
+
+Definition at line \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00055}{55}} of file \mbox{\hyperlink{two__d__linear__wave_8cc_source}{two\+\_\+d\+\_\+linear\+\_\+wave.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00073}{exact\+\_\+d2udt2()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00065}{exact\+\_\+dudt()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00058}{exact\+\_\+u()}}, \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00096}{get\+\_\+exact\+\_\+gradient()}}, \mbox{\hyperlink{two__d__linear__wave_8cc_source_l00212}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Linear\+Wave\+Problem()}}, and \mbox{\hyperlink{two__d__linear__wave__flux_8cc_source_l00257}{Linear\+Wave\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Linear\+Wave\+Problem()}}.
+

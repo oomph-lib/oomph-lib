@@ -1,0 +1,60 @@
+\doxysection{oomph\+::Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem Namespace Reference}
+\hypertarget{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem}{}\label{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem}\index{oomph::Hankel\_functions\_for\_helmholtz\_problem@{oomph::Hankel\_functions\_for\_helmholtz\_problem}}
+
+
+Namespace to provide Hankel function of the first kind and various orders -- needed for Helmholtz computations.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f}{Hankel\+\_\+first}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&h, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hp}})
+\begin{DoxyCompactList}\small\item\em Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a}{CHankel\+\_\+first}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&h, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hp}})
+\begin{DoxyCompactList}\small\item\em Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative (complex version). This functionality is only required in the computation of the solution for the complex-\/ shifted Laplacian preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace to provide Hankel function of the first kind and various orders -- needed for Helmholtz computations. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a}\label{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a} 
+\index{oomph::Hankel\_functions\_for\_helmholtz\_problem@{oomph::Hankel\_functions\_for\_helmholtz\_problem}!CHankel\_first@{CHankel\_first}}
+\index{CHankel\_first@{CHankel\_first}!oomph::Hankel\_functions\_for\_helmholtz\_problem@{oomph::Hankel\_functions\_for\_helmholtz\_problem}}
+\doxysubsubsection{\texorpdfstring{CHankel\_first()}{CHankel\_first()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem\+::\+CHankel\+\_\+first (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{hp }\end{DoxyParamCaption})}
+
+
+
+Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative (complex version). This functionality is only required in the computation of the solution for the complex-\/ shifted Laplacian preconditioner. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00095}{95}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+\Hypertarget{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f}\label{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f} 
+\index{oomph::Hankel\_functions\_for\_helmholtz\_problem@{oomph::Hankel\_functions\_for\_helmholtz\_problem}!Hankel\_first@{Hankel\_first}}
+\index{Hankel\_first@{Hankel\_first}!oomph::Hankel\_functions\_for\_helmholtz\_problem@{oomph::Hankel\_functions\_for\_helmholtz\_problem}}
+\doxysubsubsection{\texorpdfstring{Hankel\_first()}{Hankel\_first()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem\+::\+Hankel\+\_\+first (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{hp }\end{DoxyParamCaption})}
+
+
+
+Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative. 
+
+
+
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00062}{62}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
+
+
+
+Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01674}{oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma()}}.
+

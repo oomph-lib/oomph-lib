@@ -1,0 +1,24 @@
+\doxysection{general\+\_\+purpose\+\_\+preconditioners.\+h File Reference}
+\hypertarget{general__purpose__preconditioners_8h}{}\label{general__purpose__preconditioners_8h}\index{general\_purpose\_preconditioners.h@{general\_purpose\_preconditioners.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1MatrixBasedDiagPreconditioner}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner}}
+\begin{DoxyCompactList}\small\item\em Matrix-\/based diagonal preconditioner. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MatrixBasedLumpedPreconditioner}{oomph\+::\+Matrix\+Based\+Lumped\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Matrix-\/based lumped preconditioner. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1CompressedMatrixCoefficient}{oomph\+::\+Compressed\+Matrix\+Coefficient}}
+\begin{DoxyCompactList}\small\item\em Class for a compressed-\/matrix coefficent (for either CC or CR matrices). Contains the (row or column) index and value of a coefficient in a compressed row or column. Currently only used in ILU(0) for CCDouble\+Matrices to allow the coefficients in each compressed column \mbox{[}row\mbox{]} to be sorted by their row \mbox{[}column\mbox{]} index. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ILUZeroPreconditioner}{oomph\+::\+ILUZero\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em ILU(0) \doxylink{classoomph_1_1Preconditioner}{Preconditioner}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ILUZeroPreconditioner_3_01CCDoubleMatrix_01_4}{oomph\+::\+ILUZero\+Preconditioner$<$ CCDouble\+Matrix $>$}}
+\begin{DoxyCompactList}\small\item\em ILU(0) \doxylink{classoomph_1_1Preconditioner}{Preconditioner} for matrices of \doxylink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix} Format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ILUZeroPreconditioner_3_01CRDoubleMatrix_01_4}{oomph\+::\+ILUZero\+Preconditioner$<$ CRDouble\+Matrix $>$}}
+\begin{DoxyCompactList}\small\item\em ILU(0) \doxylink{classoomph_1_1Preconditioner}{Preconditioner} for matrices of \doxylink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix} Format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1InnerIterationPreconditioner}{oomph\+::\+Inner\+Iteration\+Preconditioner$<$ SOLVER, PRECONDITIONER $>$}}
+\begin{DoxyCompactList}\small\item\em A preconditioner for performing inner iteration preconditioner solves. The template argument SOLVER specifies the inner iteration solver (which must be derived from \doxylink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}) and the template argument PRECONDITIONER specifies the preconditioner for the inner iteration iterative solver. Note\+: For no preconditioning use the \doxylink{classoomph_1_1IdentityPreconditioner}{Identity\+Preconditioner}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

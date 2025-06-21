@@ -1,0 +1,756 @@
+\chapter{Demo problem\+: Solution of the 2D linear wave equation}
+\hypertarget{index}{}\label{index}\index{Demo problem: Solution of the 2D linear wave equation@{Demo problem: Solution of the 2D linear wave equation}}
+In this example we demonstrate the solution of the 2D linear wave equation -- a hyperbolic PDE that involves second time-\/derivatives. Timestepping of such problems may be performed with timesteppers from the {\ttfamily Newmark} family. We demonstrate their use and illustrate how to assign the initial conditions.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_example_problem}{}\doxysection{\texorpdfstring{The example problem}{The example problem}}\label{index_example_problem}
+We shall illustrate the timestepping procedures for hyperbolic problems by considering the solution of the 2D linear wave equation in a rectangular domain\+:
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{The two-\/dimensional linear wave equation in a rectangular domain.}} \end{center}  Solve  \[
+\sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2}
+= \frac{\partial^2 u}{\partial t^2} + f\left(x_1,x_2,t\right),
+ \ \ \ \ \ \ \ \ \ \ (1)
+\] in the rectangular domain $ D = 
+\left\{ (x_1,x_2) \ \bigg| \ x_1 \in [0,1],\ x_2 \in [0,2] \right\} $, subject to the Dirichlet boundary conditions  \[
+\left. u\right|_{\partial D}=g_0
+\ \ \ \ \ \ \ \ \ \ (2)
+\] and the initial conditions  \[
+u(x_1,x_2,t=0)=h_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ (3)
+\] and  \[
+\left. \frac{\partial u}{\partial t}\right|_{t=0}=k_0(x_1,x_2),
+\ \ \ \ \ \ \ \ \ \ (4)
+\] where the functions $ g_0, h_0$ and $ k_0 $ are given.   \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+Here we consider the unforced case, $ f=0 $, and choose boundary and initial conditions that are consistent with the exact, travelling-\/wave solution  \[
+u_0(x_1,x_2,t) = \tanh\left(1-\alpha\left(\zeta-t\right)\right),
+ \ \ \ \ \ \ \ \ \ \ (5)
+\] where  \[
+\zeta=\cos\left(\phi\right)x_1+\sin\left(\phi\right)x_2,
+ \ \ \ \ \ \ \ \ \ \ (6)
+\] is the travelling-\/wave coordinate. The solution represents a tanh step profile that propagates with unit speed through the domain. The parameter $ \alpha $ controls the steepness of the step while $ \phi $ controls the orientation of the step in the $ (x_1,x_2) $ -\/ plane.
+
+The figure below shows a plot of computed and exact solutions at time $ t = 0.25 $, for a steepness parameter $ \alpha=4 $, and an angle $ \phi=\pi/6 $ . The plot is a snapshot, taken from the \href{../figures/wave_sol.avi}{\texttt{ animation of the solution}}.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{wave_sol}
+\doxyfigcaption{Snapshot of the exact and computed solutions. }
+\end{DoxyImage}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_namespace}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_namespace}
+As usual, we store the problem parameters in a namespace. Note that we define not only the exact solution but also its first and second time-\/derivatives, as both are needed to assign the initial conditions for the Newmark timestepper; see \doxysectlink{index_IC}{Setting the initial conditions for Newmark timesteppers}{1} for details.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==start\_of\_tanh\_solution============================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Namespace\ for\ exact\ solution\ for\ LinearWave\ equation\ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ with\ sharp\ step\ }}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceTanhSolnForLinearWave}{TanhSolnForLinearWave}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Parameter\ for\ steepness\ of\ step}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Orientation\ of\ step\ wave}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{exact\_u}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ zeta=cos(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[0]+sin(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[1];}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ tanh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 1st\ time-\/deriv\ of\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{exact\_dudt}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ zeta=cos(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[0]+sin(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[1];}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}/(cosh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time))*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ cosh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time)));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ 2nd\ time-\/deriv\ of\ exact\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{exact\_d2udt2}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{double}\ zeta=cos(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[0]+sin(\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{Phi}})*x[1];}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ -\/2.0*\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*tanh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time))/}
+\DoxyCodeLine{\ \ \ (cosh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time))*cosh(1.0-\/\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{Alpha}}*(zeta-\/time)));}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Exact\ solution\ as\ a\ vector}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9}{get\_exact\_u}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Vector<double>\&\ u)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ u[0]=\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{exact\_u}}(time,x);}
+\DoxyCodeLine{\ \ u[1]=\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{exact\_dudt}}(time,x);}
+\DoxyCodeLine{\ \ u[2]=\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{exact\_d2udt2}}(time,x);}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Source\ function\ to\ make\ it\ an\ exact\ solution\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805}{get\_source}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ time,\ \textcolor{keyword}{const}\ Vector<double>\&\ x,\ \textcolor{keywordtype}{double}\&\ source)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ source=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ tanh\ solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+As in most previous time-\/dependent example codes, we use the command line arguments as flags that indicate if the code is run in validation mode -- if command line arguments are specified, the code will only perform a small number of timesteps.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_main========================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Demonstrate\ how\ to\ solve\ LinearWave\ problem.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{two__d__linear__wave_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Store\ command\ line\ arguments:\ If\ a\ command\ line\ argument\ is\ specied}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ we\ regard\ this\ as\ validation\ run.}}
+\DoxyCodeLine{\ CommandLineArgs::setup(argc,argv);}
+
+\end{DoxyCodeInclude}
+ We build the problem with 2D bi-\/quadratic {\ttfamily QLinear\+Wave\+Elements} and a {\ttfamily Newmark$<$1$>$} timestepper (see \doxysectlink{index_IC}{Setting the initial conditions for Newmark timesteppers}{1} for an explanation of the template argument), passing the number of elements, and the pointer to the source function to the constructor, and run the time time-\/dependent simulation. We solve the problem twice, once with an impulsive start and once a with "{}smooth"{} start from the travelling-\/wave solution (5).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ x\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_x=10;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ elements\ in\ y\ direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ n\_y=20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Impulsive\ start?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ impulsive\_start;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Run\ with\ impulsive\ start}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ impulsive\_start=\textcolor{keyword}{true};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classLinearWaveProblem}{LinearWaveProblem<QLinearWaveElement<2,3>}},\ Newmark<1>\ >}
+\DoxyCodeLine{\ \ \ problem(n\_x,n\_y,impulsive\_start,\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805}{TanhSolnForLinearWave::get\_source}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ problem.unsteady\_run();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Run\ with\ "{}smooth"{}\ start}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ impulsive\_start=\textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Build\ problem}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classLinearWaveProblem}{LinearWaveProblem<QLinearWaveElement<2,3>}},\ Newmark<1>\ >}
+\DoxyCodeLine{\ \ \ problem(n\_x,n\_y,impulsive\_start,\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a3bc9643b40e62283dc09f405ed17c805}{TanhSolnForLinearWave::get\_source}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Run\ it}}
+\DoxyCodeLine{\ \ problem.unsteady\_run();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ main}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_problem}
+The problem class is practically identical to that used for \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ the corresponding unsteady heat problem}}. No actions are required before or after the solve but the time-\/dependent boundary conditions must be updated before every timestep.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ LinearWave\ problem\ in\ rectanglular\ domain}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classLinearWaveProblem}{LinearWaveProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ pass\ number\ of\ elements\ in\ x\ and\ y\ directions,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ bool\ indicating\ impulsive\ or\ "{}smooth"{}\ start,}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ and\ pointer\ to\ source\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classLinearWaveProblem}{LinearWaveProblem}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ny,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ impulsive\_start,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LinearWaveEquations<2>::LinearWaveSourceFctPt\ source\_fct\_pt);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Destructor\ (empty)\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classLinearWaveProblem_af1f3879114813b0acdfd2567c5c7b1e9}{\string~LinearWaveProblem}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a5b45c619af141b19162f990a95490e80}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a66e87510f6fa8af693cede514cb7a62e}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ after\ solve\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a521290f43f9aac37c9604e744fa71075}{actions\_after\_implicit\_timestep}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ the\ problem\ specs\ before\ next\ timestep:\ }}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Set\ time-\/dependent\ Dirchlet\ boundary\ from\ exact\ solution.}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a39cfcb8ce06463ace1ac09fa43afa00a}{actions\_before\_implicit\_timestep}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>\ }
+\DoxyCodeLine{\ \ \ \ initial\_value\_fct(1);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>}
+\DoxyCodeLine{\ \ \ \ initial\_veloc\_fct(1);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>\ }
+\DoxyCodeLine{\ \ \ \ initial\_accel\_fct(1);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Assign\ values\ for\ analytical\ value,\ veloc\ and\ accel:}}
+\DoxyCodeLine{\ \ \ initial\_value\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{TanhSolnForLinearWave::exact\_u}};}
+\DoxyCodeLine{\ \ \ initial\_veloc\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{TanhSolnForLinearWave::exact\_dudt}};}
+\DoxyCodeLine{\ \ \ initial\_accel\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{TanhSolnForLinearWave::exact\_d2udt2}};}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ boundaries}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_bound=mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Loop\ over\ boundary\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ the\ boundary\ condition\ from\ the\ exact\ solution}}
+\DoxyCodeLine{\ \ \ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ use\_direct\_assignment=\textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (use\_direct\_assignment)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ nodal\ coordinates\ for\ evaluation\ of\ BC:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ exact\ solution\ at\ current\ time}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ nod\_pt-\/>set\_value(0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{TanhSolnForLinearWave::exact\_u}}(time\_pt()-\/>time(),x));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ timestepper}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ TIMESTEPPER*\ timestepper\_pt=\textcolor{keyword}{dynamic\_cast<}TIMESTEPPER*\textcolor{keyword}{>}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ (time\_stepper\_pt());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ history\ values}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ timestepper\_pt-\/>assign\_initial\_data\_values(nod\_pt,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_value\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_veloc\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_accel\_fct);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ of\ actions\ before\ timestep}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ \ Set\ initial\ condition\ (incl\ history\ values)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_afb5d327791d8289a8a0a565afc8aee37}{set\_initial\_condition}}();}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a6d9396a693be0479ece9ac1f14f9233a}{doc\_solution}}(DocInfo\&\ doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Do\ unsteady\ run\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a9993365201bfffcc04dd2034f0d3d391}{unsteady\_run}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Trace\ file}}
+\DoxyCodeLine{\ ofstream\ \mbox{\hyperlink{classLinearWaveProblem_ac75d13211cfb08c7cfba0ea129711a09}{Trace\_file}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Impulsive\ start?}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classLinearWaveProblem_a296c67402f065a1a3776064492003670}{Impulsive\_start}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};\ \textcolor{comment}{//\ end\ of\ problem\ class}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+The problem constructor is also fairly standard\+: We start by creating the timestepper (of the type specified by the template argument), pass it to the Problem\textquotesingle{}s collection of timesteppers, and initialise the parameters for the exact solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor\ for\ LinearWave\ problem\ }}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\mbox{\hyperlink{classLinearWaveProblem_a459a58b7afd588cfa78a5e1e98c3c41e}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::LinearWaveProblem}}(}
+\DoxyCodeLine{\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ nx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ ny,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ impulsive\_start,\ }
+\DoxyCodeLine{\ LinearWaveEquations<2>::LinearWaveSourceFctPt\ source\_fct\_pt)\ :}
+\DoxyCodeLine{\ Impulsive\_start(impulsive\_start)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Allocate\ the\ timestepper\ -\/-\/\ this\ constructs\ the\ time\ object\ as\ well}}
+\DoxyCodeLine{\ add\_time\_stepper\_pt(\textcolor{keyword}{new}\ TIMESTEPPER());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ parameters\ for\ exact\ solution}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Steepness\ of\ tanh\ profile}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a48021142056bdea20e6432e360fd0314}{TanhSolnForLinearWave::Alpha}}=4.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Orientation\ of\ step\ wave}}
+\DoxyCodeLine{\ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a5242d421b567b803323bc127081351a6}{TanhSolnForLinearWave::Phi}}=MathematicalConstants::Pi/180.0*30.0;}
+
+\end{DoxyCodeInclude}
+ Next, we build the mesh and pin the nodal values on the Dirichlet boundaries (i.\+e. at all boundary nodes). \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ Recall}} that the pointer to the timestepper must be passed the mesh constructor to allow the creation of {\ttfamily Nodes} that provide sufficient storage for the "{}history values"{} required by the timestepper.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ up\ mesh}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ Nx=nx;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ elements\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ Ny=ny;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ x-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ Lx=1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Domain\ length\ in\ y-\/direction}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ Ly=2.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Build\ and\ assign\ mesh}}
+\DoxyCodeLine{\ Problem::mesh\_pt()=\textcolor{keyword}{new}\ RectangularQuadMesh<ELEMENT>(}
+\DoxyCodeLine{\ \ Nx,Ny,Lx,Ly,time\_stepper\_pt());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ the\ boundary\ conditions\ for\ this\ problem:\ All\ nodes\ are}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ free\ by\ default\ -\/-\/\ just\ pin\ the\ ones\ that\ have\ Dirichlet\ conditions}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ here.\ }}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ num\_bound\ =\ mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ ibound=0;ibound<num\_bound;ibound++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=\ mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ inod=0;inod<num\_nod;inod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0);\ }
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//end\ of\ boundary\ conditions}}
+
+\end{DoxyCodeInclude}
+
+
+Finally, we complete the build of the elements by passing the pointer to the source function to the elements, and set up the equation numbering scheme.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ build\ of\ elements}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Loop\ over\ the\ elements\ to\ set\ up\ element-\/specific\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//\ things\ that\ cannot\ be\ handled\ by\ constructor\ }}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ n\_element\ =\ mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ i=0;i<n\_element;i++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Upcast\ from\ GeneralisedElement\ to\ the\ present\ element}}
+\DoxyCodeLine{\ \ \ ELEMENT\ *el\_pt\ =\ \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ the\ source\ function\ pointer}}
+\DoxyCodeLine{\ \ \ el\_pt-\/>source\_fct\_pt()\ =\ source\_fct\_pt;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ equation\ numbering\ scheme}}
+\DoxyCodeLine{\ cout\ <<\textcolor{stringliteral}{"{}Number\ of\ equations:\ "{}}\ <<\ assign\_eqn\_numbers()\ <<\ std::endl;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_IC}{}\doxysection{\texorpdfstring{Setting the initial conditions for Newmark timesteppers}{Setting the initial conditions for Newmark timesteppers}}\label{index_IC}
+Most of the code discussed so far was (and most of what follows is) practically identical to that in \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ the corresponding unsteady heat example}}. The main difference between the two example codes is the way in which the initial conditions are applied. This is closely related to the different role of the "{}history values"{} in {\ttfamily BDF} and {\ttfamily Newmark} timestepping schemes\+:
+
+\DoxyHorRuler{0}
+\hypertarget{index_BDFvsNewmark}{}\doxysubsection{\texorpdfstring{The interpretation of history values in BDF and Newmark timesteppers}{The interpretation of history values in BDF and Newmark timesteppers}}\label{index_BDFvsNewmark}
+In problems in which first time-\/derivatives are discretised by {\ttfamily BDF} timesteppers, the "{}history values"{} represent the values of the solution at previous timesteps, i.\+e. for a {\ttfamily Data} object that is associated with a timestepper from the {\ttfamily BDF} family, {\ttfamily Data\+::value(t,i)} returns the i-\/th value stored in the {\ttfamily Data} object, at the t-\/th previous timestep. We recall that when assigning initial conditions for computations with higher-\/order timesteppers from the {\ttfamily BDF} family, the number of (mathematical) initial conditions (the solution at the intial time, $ t=t_0 $ , say) is {\itshape smaller} than the number of "{}history values"{} required by the timestepper. For instance, a computation with a {\ttfamily BDF$<$2$>$} timestepper and a timestep {\ttfamily dt} not only requires the solution at $ t=t_0
+$ but also the solution at $ t=t_0- {\tt dt} $ . In most of our examples, this did not cause any problems. We either started the simulation with an "{}impulsive start"{} by setting {\itshape all} history values to the solution at $ t=t_0 $ , or we assigned the history values from an explicitly-\/given function (usually an exact solution of the governing equations), in which case the evaluation of the history values at previous timesteps was trivial.
+
+Timesteppers from the {\ttfamily Newmark} family compute second-\/order accurate approximations for the first and second time-\/derivatives of the values stored in an associated {\ttfamily Data} object. {\ttfamily Newmark} timesteppers are implicit, single-\/step schemes since the approximation of the time-\/derivatives only involves quantities evaluated at the current time (where the solution is unknown) and at a single previous timestep. To facilitate their application in multiphysics problems where parts of a {\ttfamily Problem} might be discretised by timesteppers from the {\ttfamily BDF} family, say, {\ttfamily Newmark} timesteppers can allocate additional storage for the solution at the previous {\ttfamily NSTEPS} timesteps. These history values are stored in the {\ttfamily Data} objects and are updated by the timestepper when the solution is advanced to the next time level, but they are not used in the computation of the time-\/derivatives.
+
+For a {\ttfamily Data} object that is associated with a {\ttfamily Newmark$<$\+NSTEPS$>$} timestepper, the history value obtained from {\ttfamily Data\+::value(t,i)} may be interpreted as follows\+:
+\begin{DoxyItemize}
+\item t=0\+: The i-\/th value at at present time, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()} 
+\item t=1\+: The i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt} 
+\item ...
+\item t=NSTEPS\+: The i-\/th value at the NSTEPS-\/th previous timestep, i.\+e. at {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/NSTEPS\texorpdfstring{$\ast$}{*}dt} if the timestep dt was kept constant.
+\item t=NSTEPS+1\+: The 1st time derivative (= "{}the velocity"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt} 
+\item t=NSTEPS+2\+: The 2nd time derivative (= "{}the acceleration"{}) of the i-\/th value at the previous timestep, {\ttfamily Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()-\/dt}.
+\end{DoxyItemize}The {\ttfamily Newmark$<$1$>$} timestepper is equivalent to the classical Newmark scheme.
+
+\DoxyHorRuler{0}
+\hypertarget{index_ic_for_newmark}{}\doxysubsection{\texorpdfstring{Assigning the history values for Newmark timesteppers}{Assigning the history values for Newmark timesteppers}}\label{index_ic_for_newmark}
+The {\ttfamily Newmark} timestepper provides a number of helper functions that facilitate the assignment of "{}history values"{}.
+\begin{DoxyEnumerate}
+\item {\bfseries{Impulsive starts\+: }} ~\newline
+~\newline
+ Given a pointer, {\ttfamily data\+\_\+pt}, to a {\ttfamily Data} object, the function {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(data\+\_\+pt)} assigns history values that are consistent with an impulsive start from the {\ttfamily Data} object\textquotesingle{}s current values.
+\item {\bfseries{"{}\+Smooth"{} starts from explicitly given time-\/histories\+: }} ~\newline
+~\newline
+ If the solution $ u $ and its first {\itshape and} second time-\/derivatives are available analytically for $ t \le t_0$, the function {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(...)} may be used to assign history values that are consistent ~\newline
+ with this time history. Note that, as in the case of the higher-\/order {\ttfamily BDF} timesteppers, we require more information than is provided by the (mathematical) initial conditions which only provide the value and the first time-\/derivative of the unknown function at the initial time.
+\end{DoxyEnumerate}\DoxyHorRuler{0}
+\hypertarget{index_implement_ic}{}\doxysubsection{\texorpdfstring{Implementation in the demo code}{Implementation in the demo code}}\label{index_implement_ic}
+The function {\ttfamily set\+\_\+initial\+\_\+condition()} demonstrates the use of these functions in our example problem. The assignment of the "{}history values"{} for the nodal {\ttfamily Data} is handled by the timestepper, a pointer to which can be obtained from the {\ttfamily Problem\+:} 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_set\_initial\_condition=======================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Set\ initial\ condition.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_afb5d327791d8289a8a0a565afc8aee37}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Get\ timestepper}}
+\DoxyCodeLine{\ TIMESTEPPER*\ timestepper\_pt=\textcolor{keyword}{dynamic\_cast<}TIMESTEPPER*\textcolor{keyword}{>}(time\_stepper\_pt());}
+
+\end{DoxyCodeInclude}
+ To start the simulation with an impulsive start from the travelling-\/wave solution, defined in the namespace {\ttfamily \doxylink{namespaceTanhSolnForLinearWave}{Tanh\+Soln\+For\+Linear\+Wave}}, we loop over all nodes and determine their positions. We then compute the value of the exact solution at that point and assign it to the current nodal value. "{}\+History values"{} that correspond to an impulsive start from this value are then assigned by calling {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive(...)}.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Impulsive\ start}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (Impulsive\_start)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes\ to\ set\ initial\ conditions\ everywhere}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ jnod=0;jnod<num\_nod;jnod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>node\_pt(jnod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ nodal\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ initial\ value\ from\ exact\ solution}}
+\DoxyCodeLine{\ \ \ \ \ nod\_pt-\/>set\_value(0,\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{TanhSolnForLinearWave::exact\_u}}(time\_pt()-\/>time(),x));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ history\ values\ so\ that\ they\ are\ consistent\ with\ an\ impulsive}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ start\ from\ this\ value}}
+\DoxyCodeLine{\ \ \ \ \ timestepper\_pt-\/>assign\_initial\_values\_impulsive(nod\_pt);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ impulsive\ start}}
+
+\end{DoxyCodeInclude}
+ To start the simulation with a "{}smooth"{} start from the travelling-\/wave solution we have to pass function pointers to the functions that specify the function and its first and second time-\/derivatives to {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(...)}. As usual, the required form of the function pointer is defined as a public {\ttfamily typedef} in the Newmark class. Since {\ttfamily Data} objects can store multiple values, each of which will generally have a different time-\/history, {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(...)} expects a vector of function pointers. In the current example where each node only stores a single value, these vectors only have a single entry.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ "{}Smooth"{}\ start\ from\ analytical\ time\ history}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Vector\ of\ function\ pointers\ to\ functions\ that\ specify\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ value,\ and\ the\ first\ and\ second\ time-\/derivatives\ of\ the}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ function\ used\ as\ the\ initial\ condition}}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>\ }
+\DoxyCodeLine{\ \ \ \ initial\_value\_fct(1);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>}
+\DoxyCodeLine{\ \ \ \ initial\_veloc\_fct(1);}
+\DoxyCodeLine{\ \ \ Vector<typename\ TIMESTEPPER::NodeInitialConditionFctPt>\ }
+\DoxyCodeLine{\ \ \ \ initial\_accel\_fct(1);}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Assign\ values\ for\ analytical\ value,\ veloc\ and\ accel:}}
+\DoxyCodeLine{\ \ \ initial\_value\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{TanhSolnForLinearWave::exact\_u}};}
+\DoxyCodeLine{\ \ \ initial\_veloc\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{TanhSolnForLinearWave::exact\_dudt}};}
+\DoxyCodeLine{\ \ \ initial\_accel\_fct[0]=\&\mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{TanhSolnForLinearWave::exact\_d2udt2}};}
+
+\end{DoxyCodeInclude}
+ Now we loop over all nodes and pass the vectors of function pointers ~\newline
+ to {\ttfamily Newmark$<$\+NSTEPS$>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(...)} to assign the required history values.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Assign\ Newmark\ history\ values\ so\ that\ Newmark\ approximations}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ for\ velocity\ and\ accel\ are\ correct\ at\ initial\ time:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Loop\ over\ the\ nodes\ to\ set\ initial\ conditions\ everywhere}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ num\_nod=mesh\_pt()-\/>nnode();}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ jnod=0;jnod<num\_nod;jnod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>node\_pt(jnod);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Assign\ the\ history\ values}}
+\DoxyCodeLine{\ \ \ \ \ timestepper\_pt-\/>assign\_initial\_data\_values(nod\_pt,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_value\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_veloc\_fct,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ initial\_accel\_fct);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{comment}{//\ end\ of\ smooth\ start}}
+
+\end{DoxyCodeInclude}
+ To check/demonstrate that the assignment of the initial condition was successful, we compare the Newmark approximation for the zero-\/th, first and second time-\/derivatives of the nodal values against the exact solution and document the maximum discrepancy.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Paranoia:\ Check\ that\ the\ initial\ values\ were\ assigned\ correctly}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ err\_max=0.0;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ jnod=0;jnod<num\_nod;jnod++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ node}}
+\DoxyCodeLine{\ \ \ \ \ Node*\ nod\_pt=mesh\_pt()-\/>node\_pt(jnod);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ nodal\ coordinates}}
+\DoxyCodeLine{\ \ \ \ \ Vector<double>\ x(2);}
+\DoxyCodeLine{\ \ \ \ \ x[0]=nod\_pt-\/>x(0);}
+\DoxyCodeLine{\ \ \ \ \ x[1]=nod\_pt-\/>x(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ exact\ value\ and\ first\ and\ second\ time-\/derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ u\_exact=}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aceea2935b2d3815ce72aae8c9de2b468}{TanhSolnForLinearWave::exact\_u}}(time\_pt()-\/>time(),x);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ dudt\_exact=}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_aa2081bd3d3d518a38497f664b0e498bc}{TanhSolnForLinearWave::exact\_dudt}}(time\_pt()-\/>time(),x);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ d2udt2\_exact=}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a63b7a0f5fd5d06cc2c0a43322a81fe43}{TanhSolnForLinearWave::exact\_d2udt2}}(time\_pt()-\/>time(),x);}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Get\ Newmark\ approximations\ for\ zero-\/th,\ first\ and\ second\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ time-\/derivatives\ of\ the\ nodal\ values.\ }}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ u\_fe=timestepper\_pt-\/>time\_derivative(0,nod\_pt,0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ dudt\_fe=timestepper\_pt-\/>time\_derivative(1,nod\_pt,0);}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ d2udt2\_fe=timestepper\_pt-\/>time\_derivative(2,nod\_pt,0);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Error}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{double}\ error=sqrt(pow(u\_exact-\/u\_fe,2)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pow(dudt\_exact-\/dudt\_fe,2)+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pow(d2udt2\_exact-\/d2udt2\_fe,2));}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}\ (error>err\_max)\ err\_max=error;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Max.\ error\ in\ assignment\ of\ initial\ condition\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <<\ err\_max\ <<\ std::endl;\ \ \ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ set\ initial\ condition}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post processing}{Post processing}}\label{index_doc}
+The post-\/processing routine is practically identical to that in the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ corresponding unsteady heat example}}. We output the solution, and compare the computed and exact solutions.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_doc\_solution================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a6d9396a693be0479ece9ac1f14f9233a}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo\&\ doc\_info)}
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ ofstream\ some\_file;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ npts;}
+\DoxyCodeLine{\ npts=5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ cout\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}================================================="{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}Docing\ solution\ for\ t="{}}\ <<\ time\_pt()-\/>time()\ <<\ std::endl;}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}================================================="{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(some\_file,npts);}
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}TEXT\ X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"{}time\ =\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ <<\ time\_pt()-\/>time()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}GEOMETRY\ X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}1"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}2"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file\ <<\ \textcolor{stringliteral}{"{}\ 0\ 0"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file\ <<\ time\_pt()-\/>time()*20.0\ <<\ \textcolor{stringliteral}{"{}\ 0"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ exact\ solution\ }}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ oomph\_info\ <<\ \textcolor{stringliteral}{"{}\ FILENAME:\ "{}}\ <<\ filename\ <<\ std::endl;}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>output\_fct(some\_file,npts,time\_pt()-\/>time(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9}{TanhSolnForLinearWave::get\_exact\_u}});\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Doc\ error}}
+\DoxyCodeLine{\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ error,norm;}
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ doc\_info.number());}
+\DoxyCodeLine{\ some\_file.open(filename);}
+\DoxyCodeLine{\ mesh\_pt()-\/>compute\_error(some\_file,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceTanhSolnForLinearWave_a7dd7e9f155d19f871ba87d3fe41fd8e9}{TanhSolnForLinearWave::get\_exact\_u}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_pt()-\/>time(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error,norm);\ }
+\DoxyCodeLine{\ some\_file.close();}
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}error:\ "{}}\ <<\ error\ <<\ std::endl;\ }
+\DoxyCodeLine{\ cout\ <<\ \textcolor{stringliteral}{"{}norm\ :\ "{}}\ <<\ norm\ <<\ std::endl\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ trace\ file}}
+\DoxyCodeLine{\ Trace\_file\ <<\ time\_pt()-\/>time()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ time\_pt()-\/>dt()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ mesh\_pt()-\/>nelement()\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ <<\ error\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ norm\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ doc\ solution}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_unsteady_run}{}\doxysection{\texorpdfstring{The timestepping loop}{The timestepping loop}}\label{index_unsteady_run}
+Timestepping the linear wave equation involves exactly the same steps as in the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ unsteady heat example\+:}} We start by creating a {\ttfamily Doc\+Info} object to specify the output directories and open the trace file in which we record the time-\/evolution of the error.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Unsteady\ run.}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT,\ \textcolor{keyword}{class}\ TIMESTEPPER>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLinearWaveProblem_a9993365201bfffcc04dd2034f0d3d391}{LinearWaveProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Setup\ labels\ for\ output}}
+\DoxyCodeLine{\ DocInfo\ doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ directory}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (Impulsive\_start)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_impulsive"{}});\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_smooth"{}});\ }
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Open\ trace\ file}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ filename[100];\ \ \ }
+\DoxyCodeLine{\ snprintf(filename,\ \textcolor{keyword}{sizeof}(filename),\ \textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
+\DoxyCodeLine{\ Trace\_file.open(filename);}
+
+\end{DoxyCodeInclude}
+ We then initialise the time, set the initial condition and output the initial solution.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Initialise\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ time0=0.0;}
+\DoxyCodeLine{\ time\_pt()-\/>time()=time0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ initial\ timestep}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ dt=0.005;}
+\DoxyCodeLine{\ time\_pt()-\/>initialise\_dt(dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ IC}}
+\DoxyCodeLine{\ set\_initial\_condition();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Output\ initial\ condition}}
+\DoxyCodeLine{\ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ doc\_info.number()++;}
+
+\end{DoxyCodeInclude}
+ Next we set up the number of timesteps to be performed. If the code is run in validation mode, indicated by a non-\/zero number of command line arguments, we only perform two timesteps. ~\newline
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Maximum\ time}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ t\_max=4.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ steps}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ nstep=unsigned(t\_max/dt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ validation\ run\ only\ do\ 2\ timesteps}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (CommandLineArgs::Argc>1)}
+\DoxyCodeLine{\ \ \{\ }
+\DoxyCodeLine{\ \ \ nstep=2;\ }
+\DoxyCodeLine{\ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Validation\ run\ -\/-\/\ only\ doing\ two\ timesteps."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ Finally, we loop over the timesteps, solve the equations at each time level and document the results.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Timestepping\ loop}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ istep=0;istep<nstep;istep++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Take\ fixed\ timestep\ without\ spatial\ adaptivity}}
+\DoxyCodeLine{\ \ \ unsteady\_newton\_solve(dt);}
+\DoxyCodeLine{\ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Output\ solution}}
+\DoxyCodeLine{\ \ \ doc\_solution(doc\_info);}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Increment\ counter\ for\ solutions\ }}
+\DoxyCodeLine{\ \ \ doc\_info.number()++;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Close\ trace\ file}}
+\DoxyCodeLine{\ Trace\_file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ end\ of\ unsteady\ run}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comments}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comments}
+\hypertarget{index_default}{}\doxysubsection{\texorpdfstring{Default parameters for the linear wave equations}{Default parameters for the linear wave equations}}\label{index_default}
+The linear wave equation does not contain any parameters, therefore the {\ttfamily Problem} constructor only passed the pointer to the pointer to the source function to the elements. Passing the pointer to the source function is optional -- if no source function pointer is specified, the linear-\/wave elements will use the default $ f(x_1,x_2,t)=0 $ , so that the unforced linear wave equation is solved. You should confirm this by commenting out the assignment of the source function pointer in the Problem constructor -- the code should (and does!) still compute the correct results. This is because the travelling-\/wave solution (5) is in fact a solution of the {\itshape unforced} wave equation -- the source function defined in the namespace {\ttfamily \doxylink{namespaceTanhSolnForLinearWave}{Tanh\+Soln\+For\+Linear\+Wave}} implements $ f(x_1,x_2,t)=0 $ .\hypertarget{index_imp_soln}{}\doxysubsection{\texorpdfstring{The errors induced by an impulsive start}{The errors induced by an impulsive start}}\label{index_imp_soln}
+
+\begin{DoxyEnumerate}
+\item View \href{../figures/impulsive_wave_solution.avi}{\texttt{ the animation of the results obtained from the simulation that was started impulsively }} and explain how the differences to the exact solution arise.
+\item Does the error induced by the impulsive start decay with time? Contrast this with the behaviour in the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ unsteady heat example. }}
+\end{DoxyEnumerate}\hypertarget{index_flux}{}\doxysubsection{\texorpdfstring{The use of Neumann boundary conditions.}{The use of Neumann boundary conditions.}}\label{index_flux}
+Neumann ("{}flux"{}) boundary conditions for the linear wave equation can be applied by attaching elements of type {\ttfamily Linear\+Wave\+Flux\+Element$<$\+BULK\+\_\+\+LINEAR\+\_\+\+WAVE\+\_\+\+ELEMENT$>$} to the boundary in exactly the same way as in the \href{../../../poisson/two_d_poisson_flux_bc2/html/index.html}{\texttt{ Poisson }} and \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ unsteady heat }} examples. We will therefore not discuss this case in detail but simply refer to the listing of the (well-\/documented) \href{../../../../demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave_flux.cc}{\texttt{ driver code two\+\_\+d\+\_\+linear\+\_\+wave\+\_\+flux.\+cc}}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/linear_wave/two_d_linear_wave/}{\texttt{ demo\+\_\+drivers/linear\+\_\+wave/two\+\_\+d\+\_\+linear\+\_\+wave/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/linear_wave/two_d_linear_wave/two_d_linear_wave.cc}{\texttt{ demo\+\_\+drivers/linear\+\_\+wave/two\+\_\+d\+\_\+linear\+\_\+wave/two\+\_\+d\+\_\+linear\+\_\+wave.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

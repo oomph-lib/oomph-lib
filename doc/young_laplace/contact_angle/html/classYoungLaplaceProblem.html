@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: YoungLaplaceProblem&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classYoungLaplaceProblem-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">YoungLaplaceProblem&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>2D YoungLaplace problem on rectangular domain, discretised with 2D QYoungLaplace elements. The specific type of element is specified via the template parameter.  
+ <a href="classYoungLaplaceProblem.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for YoungLaplaceProblem&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classYoungLaplaceProblem.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4ea552f351994849e9ab597ef2da797a" id="r_a4ea552f351994849e9ab597ef2da797a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a4ea552f351994849e9ab597ef2da797a">YoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a4ea552f351994849e9ab597ef2da797a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <br /></td></tr>
+<tr class="separator:a4ea552f351994849e9ab597ef2da797a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3482606bfd86a3db9d2dec86ba75f14" id="r_aa3482606bfd86a3db9d2dec86ba75f14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#aa3482606bfd86a3db9d2dec86ba75f14">~YoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:aa3482606bfd86a3db9d2dec86ba75f14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:aa3482606bfd86a3db9d2dec86ba75f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93dd45313d28c3b9b0b51e34d14ebd24" id="r_a93dd45313d28c3b9b0b51e34d14ebd24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a93dd45313d28c3b9b0b51e34d14ebd24">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a93dd45313d28c3b9b0b51e34d14ebd24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem before solve.  <br /></td></tr>
+<tr class="separator:a93dd45313d28c3b9b0b51e34d14ebd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eed49ad1c6247cc293a584ab9262efc" id="r_a8eed49ad1c6247cc293a584ab9262efc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a8eed49ad1c6247cc293a584ab9262efc">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a8eed49ad1c6247cc293a584ab9262efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve: Empty.  <br /></td></tr>
+<tr class="separator:a8eed49ad1c6247cc293a584ab9262efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f10e66457718eca76d1335dbed8f12" id="r_a16f10e66457718eca76d1335dbed8f12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a16f10e66457718eca76d1335dbed8f12">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a16f10e66457718eca76d1335dbed8f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file.  <br /></td></tr>
+<tr class="separator:a16f10e66457718eca76d1335dbed8f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea552f351994849e9ab597ef2da797a" id="r_a4ea552f351994849e9ab597ef2da797a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a4ea552f351994849e9ab597ef2da797a">YoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:a4ea552f351994849e9ab597ef2da797a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor:  <br /></td></tr>
+<tr class="separator:a4ea552f351994849e9ab597ef2da797a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3482606bfd86a3db9d2dec86ba75f14" id="r_aa3482606bfd86a3db9d2dec86ba75f14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#aa3482606bfd86a3db9d2dec86ba75f14">~YoungLaplaceProblem</a> ()</td></tr>
+<tr class="memdesc:aa3482606bfd86a3db9d2dec86ba75f14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (empty)  <br /></td></tr>
+<tr class="separator:aa3482606bfd86a3db9d2dec86ba75f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93dd45313d28c3b9b0b51e34d14ebd24" id="r_a93dd45313d28c3b9b0b51e34d14ebd24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a93dd45313d28c3b9b0b51e34d14ebd24">actions_before_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a93dd45313d28c3b9b0b51e34d14ebd24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem specs before solve.  <br /></td></tr>
+<tr class="separator:a93dd45313d28c3b9b0b51e34d14ebd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eed49ad1c6247cc293a584ab9262efc" id="r_a8eed49ad1c6247cc293a584ab9262efc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a8eed49ad1c6247cc293a584ab9262efc">actions_after_newton_solve</a> ()</td></tr>
+<tr class="memdesc:a8eed49ad1c6247cc293a584ab9262efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the problem after solve: Empty.  <br /></td></tr>
+<tr class="separator:a8eed49ad1c6247cc293a584ab9262efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f10e66457718eca76d1335dbed8f12" id="r_a16f10e66457718eca76d1335dbed8f12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a16f10e66457718eca76d1335dbed8f12">doc_solution</a> (DocInfo &amp;doc_info, ofstream &amp;trace_file)</td></tr>
+<tr class="memdesc:a16f10e66457718eca76d1335dbed8f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file.  <br /></td></tr>
+<tr class="separator:a16f10e66457718eca76d1335dbed8f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a3ebbc17f9f27480e720f0bd87a036a12" id="r_a3ebbc17f9f27480e720f0bd87a036a12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a3ebbc17f9f27480e720f0bd87a036a12">create_contact_angle_elements</a> (const unsigned &amp;b)</td></tr>
+<tr class="memdesc:a3ebbc17f9f27480e720f0bd87a036a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create YoungLaplace contact angle elements on the b-th boundary of the problem's mesh and add them to mesh.  <br /></td></tr>
+<tr class="separator:a3ebbc17f9f27480e720f0bd87a036a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1d659f1b2d73140a5d52889f9581d12f" id="r_a1d659f1b2d73140a5d52889f9581d12f"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a1d659f1b2d73140a5d52889f9581d12f">Control_node_pt</a></td></tr>
+<tr class="memdesc:a1d659f1b2d73140a5d52889f9581d12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node at which the height (displacement along spine) is controlled/doced.  <br /></td></tr>
+<tr class="separator:a1d659f1b2d73140a5d52889f9581d12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78d1ae3b73777674003b2c9794ea9b43" id="r_a78d1ae3b73777674003b2c9794ea9b43"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a78d1ae3b73777674003b2c9794ea9b43">Kappa_pt</a></td></tr>
+<tr class="memdesc:a78d1ae3b73777674003b2c9794ea9b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to Data object that stores the prescribed curvature.  <br /></td></tr>
+<tr class="separator:a78d1ae3b73777674003b2c9794ea9b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc49a3807638823ac2157d67e8fed4a" id="r_a4dc49a3807638823ac2157d67e8fed4a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a4dc49a3807638823ac2157d67e8fed4a">N_bulk_elements</a></td></tr>
+<tr class="memdesc:a4dc49a3807638823ac2157d67e8fed4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of YoungLaplace "bulk" elements (We're attaching the <br  />
+ contact angle elements to the bulk mesh --&gt; only the first N_bulk_elements elements in the mesh are bulk elements!)  <br /></td></tr>
+<tr class="separator:a4dc49a3807638823ac2157d67e8fed4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30b767547f8b93461b56653dd007063a" id="r_a30b767547f8b93461b56653dd007063a"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a30b767547f8b93461b56653dd007063a">Last_element_on_boundary1</a></td></tr>
+<tr class="memdesc:a30b767547f8b93461b56653dd007063a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of last FaceElement on boundary 1.  <br /></td></tr>
+<tr class="separator:a30b767547f8b93461b56653dd007063a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c9ac739e14a03c0dd36ff7407382814" id="r_a5c9ac739e14a03c0dd36ff7407382814"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classYoungLaplaceProblem.html#a5c9ac739e14a03c0dd36ff7407382814">Last_element_on_boundary3</a></td></tr>
+<tr class="memdesc:a5c9ac739e14a03c0dd36ff7407382814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of last FaceElement on boundary 3.  <br /></td></tr>
+<tr class="separator:a5c9ac739e14a03c0dd36ff7407382814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ELEMENT&gt;<br />
+class YoungLaplaceProblem&lt; ELEMENT &gt;</div><p>2D YoungLaplace problem on rectangular domain, discretised with 2D QYoungLaplace elements. The specific type of element is specified via the template parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00139">139</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4ea552f351994849e9ab597ef2da797a" name="a4ea552f351994849e9ab597ef2da797a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea552f351994849e9ab597ef2da797a">&#9670;&#160;</a></span>YoungLaplaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;<a class="el" href="classYoungLaplaceProblem.html">::YoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+<p>Constructor for YoungLaplace problem. </p>
+<p>Add height control element to mesh at the very end</p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00180">180</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00051">GlobalParameters::Controlled_height</a>, <a class="el" href="barrel_8cc_source.html#l00072">GlobalParameters::spine_base_function()</a>, and <a class="el" href="barrel_8cc_source.html#l00104">GlobalParameters::spine_function()</a>.</p>
+
+</div>
+</div>
+<a id="aa3482606bfd86a3db9d2dec86ba75f14" name="aa3482606bfd86a3db9d2dec86ba75f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3482606bfd86a3db9d2dec86ba75f14">&#9670;&#160;</a></span>~YoungLaplaceProblem() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00148">148</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4ea552f351994849e9ab597ef2da797a" name="a4ea552f351994849e9ab597ef2da797a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea552f351994849e9ab597ef2da797a">&#9670;&#160;</a></span>YoungLaplaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;<a class="el" href="classYoungLaplaceProblem.html">::YoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: </p>
+
+</div>
+</div>
+<a id="aa3482606bfd86a3db9d2dec86ba75f14" name="aa3482606bfd86a3db9d2dec86ba75f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3482606bfd86a3db9d2dec86ba75f14">&#9670;&#160;</a></span>~YoungLaplaceProblem() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::~<a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor (empty) </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00062">62</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8eed49ad1c6247cc293a584ab9262efc" name="a8eed49ad1c6247cc293a584ab9262efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eed49ad1c6247cc293a584ab9262efc">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00159">159</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a8eed49ad1c6247cc293a584ab9262efc" name="a8eed49ad1c6247cc293a584ab9262efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eed49ad1c6247cc293a584ab9262efc">&#9670;&#160;</a></span>actions_after_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_after_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem after solve: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00068">68</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a93dd45313d28c3b9b0b51e34d14ebd24" name="a93dd45313d28c3b9b0b51e34d14ebd24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93dd45313d28c3b9b0b51e34d14ebd24">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the problem before solve. </p>
+<p>Update the problem specs before solve: (Re-)set boundary conditions to the values from the exact solution. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00151">151</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00171">YoungLaplaceProblem&lt; ELEMENT &gt;::Kappa_pt</a>.</p>
+
+</div>
+</div>
+<a id="a93dd45313d28c3b9b0b51e34d14ebd24" name="a93dd45313d28c3b9b0b51e34d14ebd24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93dd45313d28c3b9b0b51e34d14ebd24">&#9670;&#160;</a></span>actions_before_newton_solve() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::actions_before_newton_solve </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the problem specs before solve. </p>
+
+</div>
+</div>
+<a id="a3ebbc17f9f27480e720f0bd87a036a12" name="a3ebbc17f9f27480e720f0bd87a036a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ebbc17f9f27480e720f0bd87a036a12">&#9670;&#160;</a></span>create_contact_angle_elements()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::create_contact_angle_elements </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create YoungLaplace contact angle elements on the b-th boundary of the problem's mesh and add them to mesh. </p>
+<p>Create YoungLaplace contact angle elements on the b-th boundary of the Mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00279">279</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a16f10e66457718eca76d1335dbed8f12" name="a16f10e66457718eca76d1335dbed8f12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f10e66457718eca76d1335dbed8f12">&#9670;&#160;</a></span>doc_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file. </p>
+<p>Doc the solution: doc_info contains labels/output directory etc. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00291">291</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="barrel_8cc_source.html#l00054">GlobalParameters::get_exact_kappa()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="barrel_8cc_source.html#l00321">main()</a>, and <a class="el" href="young__laplace_8cc_source.html#l00478">run_it()</a>.</p>
+
+</div>
+</div>
+<a id="a16f10e66457718eca76d1335dbed8f12" name="a16f10e66457718eca76d1335dbed8f12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16f10e66457718eca76d1335dbed8f12">&#9670;&#160;</a></span>doc_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::doc_solution </td>
+          <td>(</td>
+          <td class="paramtype">DocInfo &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>trace_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Doc the solution. DocInfo object stores flags/labels for where the output gets written to and the trace file. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1d659f1b2d73140a5d52889f9581d12f" name="a1d659f1b2d73140a5d52889f9581d12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d659f1b2d73140a5d52889f9581d12f">&#9670;&#160;</a></span>Control_node_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node * <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::Control_node_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Node at which the height (displacement along spine) is controlled/doced. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00168">168</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+</div>
+</div>
+<a id="a78d1ae3b73777674003b2c9794ea9b43" name="a78d1ae3b73777674003b2c9794ea9b43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d1ae3b73777674003b2c9794ea9b43">&#9670;&#160;</a></span>Kappa_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Data* <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::Kappa_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to Data object that stores the prescribed curvature. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrel_8cc_source.html#l00171">171</a> of file <a class="el" href="barrel_8cc_source.html">barrel.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="barrel_8cc_source.html#l00151">YoungLaplaceProblem&lt; ELEMENT &gt;::actions_before_newton_solve()</a>.</p>
+
+</div>
+</div>
+<a id="a30b767547f8b93461b56653dd007063a" name="a30b767547f8b93461b56653dd007063a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30b767547f8b93461b56653dd007063a">&#9670;&#160;</a></span>Last_element_on_boundary1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::Last_element_on_boundary1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of last FaceElement on boundary 1. </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00086">86</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a5c9ac739e14a03c0dd36ff7407382814" name="a5c9ac739e14a03c0dd36ff7407382814"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9ac739e14a03c0dd36ff7407382814">&#9670;&#160;</a></span>Last_element_on_boundary3</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::Last_element_on_boundary3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of last FaceElement on boundary 3. </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00089">89</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<a id="a4dc49a3807638823ac2157d67e8fed4a" name="a4dc49a3807638823ac2157d67e8fed4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc49a3807638823ac2157d67e8fed4a">&#9670;&#160;</a></span>N_bulk_elements</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ELEMENT &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classYoungLaplaceProblem.html">YoungLaplaceProblem</a>&lt; ELEMENT &gt;::N_bulk_elements</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of YoungLaplace "bulk" elements (We're attaching the <br  />
+ contact angle elements to the bulk mesh --&gt; only the first N_bulk_elements elements in the mesh are bulk elements!) </p>
+
+<p class="definition">Definition at line <a class="el" href="young__laplace_8cc_source.html#l00083">83</a> of file <a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="barrel_8cc_source.html">barrel.cc</a></li>
+<li><a class="el" href="young__laplace_8cc_source.html">young_laplace.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:21:01
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

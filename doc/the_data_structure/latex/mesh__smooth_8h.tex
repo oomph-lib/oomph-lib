@@ -1,0 +1,38 @@
+\doxysection{mesh\+\_\+smooth.\+h File Reference}
+\hypertarget{mesh__smooth_8h}{}\label{mesh__smooth_8h}\index{mesh\_smooth.h@{mesh\_smooth.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1NonLinearElasticitySmoothMesh}{oomph\+::\+Non\+Linear\+Elasticity\+Smooth\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Auxiliary \doxylink{classoomph_1_1Problem}{Problem} to smooth a \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} by adjusting the internal nodal positions via the solution of a nonlinear solid mechanics problem. The mesh will typically have been created with an unstructured mesh generator that uses a low-\/order (simplex) representation of the element geometry; some of the nodes, typically non-\/vertex nodes on the domain\textquotesingle{}s curvilinear boundaries, were then moved to their new position to provide a more accurate representation of the geometry. This class should be used to deal with elements that may have become inverted during the node motion. ~\newline
+{\bfseries{Important}} {\bfseries{assumption\+:}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1LinearElasticitySmoothMesh}{oomph\+::\+Linear\+Elasticity\+Smooth\+Mesh$<$ LINEAR\+\_\+\+ELASTICITY\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Auxiliary \doxylink{classoomph_1_1Problem}{Problem} to smooth a \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} by adjusting the internal nodal positions by solving a LINEAR solid mechanics problem for the nodal displacements between the specified displacements of certain pinned nodes (usually located on boundaries). The template parameter specifies the linear elasticity element that must have the same shape (geometric element type) as the elements contained in the mesh that\textquotesingle{}s to be smoothed. So, e.\+g. for the ten-\/noded three-\/dimensional tetrahedral TTaylor\+Hood\+Element$<$3$>$, it would be a TLinear\+Elasticity\+Element$<$3,3$>$, etc. {\bfseries{Important}} {\bfseries{assumptions\+:}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1PoissonSmoothMesh}{oomph\+::\+Poisson\+Smooth\+Mesh$<$ POISSON\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Functor to smooth a \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} by adjusting the internal nodal positions by solving a Poisson problem for the nodal displacements in the interior. The displacements of the specified pinned nodes (usually located on boundaries) remain fixed (their displacements are computed from the difference between their Lagrangian and Eulerian coordinates). The assumptions is that the Lagrangian coordinates in the \doxylink{classoomph_1_1SolidMesh}{Solid\+Mesh} still reflect the original nodal positions before the boundary nodes were moved. ~\newline
+The template parameter specifies the Poisson element that must have the same shape (geometric element type) as the elements contained in the mesh that\textquotesingle{}s to be smoothed. So, e.\+g. for the ten-\/noded three-\/dimensional tetrahedral TTaylor\+Hood\+Element$<$3$>$, it would be a TPoisson\+Element$<$3,3$>$, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing}}
+\begin{DoxyCompactList}\small\item\em Helper namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1IsotropicElasticityTensor}{Isotropic\+Elasticity\+Tensor}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_abfbf54a4e1228fd633c57ada920d28cc}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Isotropic\+\_\+elasticity\+\_\+tensor}} (\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}})
+\begin{DoxyCompactList}\small\item\em The elasticity tensor (for smoothing by linear elasticity) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Nu}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio (for smoothing by linear or nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::E}} = 1.\+0
+\begin{DoxyCompactList}\small\item\em Young\textquotesingle{}s modulus (for smoothing by linear or nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a16460050187c2bd5edb4e5ae24578f0f}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new}} \mbox{\hyperlink{classoomph_1_1GeneralisedHookean}{Generalised\+Hookean}}(\&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a27eabf4a5c7ca88b62dcb3e87462587e}{Nu}}, \&\mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a898d8e0f8dc2e672397917061d06fe03}{E}})
+\begin{DoxyCompactList}\small\item\em Create constitutive law (for smoothing by nonlinear elasticity) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_a1becf6969521c3750d1267dd619a2d41}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Scale for displacement of quadratic boundary (0.\+0\+: simplex; 1.\+0\+: quadratic) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1Helper__namespace__for__mesh__smoothing_aba8998d13da8e9dc69ad0a2e2d59f215}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Scale\+\_\+increment}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Increment for scale factor for displacement of quadratic boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}

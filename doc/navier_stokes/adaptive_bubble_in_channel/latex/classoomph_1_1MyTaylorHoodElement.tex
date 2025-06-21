@@ -1,0 +1,152 @@
+\doxysection{oomph\+::My\+Taylor\+Hood\+Element Class Reference}
+\hypertarget{classoomph_1_1MyTaylorHoodElement}{}\label{classoomph_1_1MyTaylorHoodElement}\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+
+
+Overload Taylor\+Hood element to modify output.  
+
+
+Inheritance diagram for oomph\+::My\+Taylor\+Hood\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MyTaylorHoodElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_a936bd6421ba42e5b73f983f5141b37c2}{My\+Taylor\+Hood\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor initialise error. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_ae4f6eea59b7bcf6e737d829b37c47fe9}{set\+\_\+error}} (const double \&error)
+\begin{DoxyCompactList}\small\item\em Set error value for post-\/processing. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_a429987090e76cd39a657b3a8eefbbbe9}{variable\+\_\+identifier}} ()
+\begin{DoxyCompactList}\small\item\em Return variable identifier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_a5505717f2d16c2b231e7c347cb0c49b1}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+\begin{DoxyCompactList}\small\item\em Overload output function. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_ad9efcab0ef22434e6fc5f2eb4b84643d}{square\+\_\+of\+\_\+l2\+\_\+norm}} ()
+\begin{DoxyCompactList}\small\item\em Get square of L2 norm of velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classoomph_1_1MyTaylorHoodElement_a381cf2cdb628fb7aacfd6dd59dc2996b}{Error}}
+\begin{DoxyCompactList}\small\item\em Storage for elemental error estimate -- used for post-\/processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Overload Taylor\+Hood element to modify output. 
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00051}{51}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_a936bd6421ba42e5b73f983f5141b37c2}\label{classoomph_1_1MyTaylorHoodElement_a936bd6421ba42e5b73f983f5141b37c2} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!MyTaylorHoodElement@{MyTaylorHoodElement}}
+\index{MyTaylorHoodElement@{MyTaylorHoodElement}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{MyTaylorHoodElement()}{MyTaylorHoodElement()}}
+{\footnotesize\ttfamily oomph\+::\+My\+Taylor\+Hood\+Element\+::\+My\+Taylor\+Hood\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor initialise error. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00064}{64}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00059}{Error}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_a5505717f2d16c2b231e7c347cb0c49b1}\label{classoomph_1_1MyTaylorHoodElement_a5505717f2d16c2b231e7c347cb0c49b1} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!output@{output}}
+\index{output@{output}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{output()}{output()}}
+{\footnotesize\ttfamily void oomph\+::\+My\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload output function. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00105}{105}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00059}{Error}}.
+
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_ae4f6eea59b7bcf6e737d829b37c47fe9}\label{classoomph_1_1MyTaylorHoodElement_ae4f6eea59b7bcf6e737d829b37c47fe9} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!set\_error@{set\_error}}
+\index{set\_error@{set\_error}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{set\_error()}{set\_error()}}
+{\footnotesize\ttfamily void oomph\+::\+My\+Taylor\+Hood\+Element\+::set\+\_\+error (\begin{DoxyParamCaption}\item[{const double \&}]{error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set error value for post-\/processing. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00070}{70}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+References \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00059}{Error}}.
+
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_ad9efcab0ef22434e6fc5f2eb4b84643d}\label{classoomph_1_1MyTaylorHoodElement_ad9efcab0ef22434e6fc5f2eb4b84643d} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!square\_of\_l2\_norm@{square\_of\_l2\_norm}}
+\index{square\_of\_l2\_norm@{square\_of\_l2\_norm}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{square\_of\_l2\_norm()}{square\_of\_l2\_norm()}}
+{\footnotesize\ttfamily double oomph\+::\+My\+Taylor\+Hood\+Element\+::square\+\_\+of\+\_\+l2\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get square of L2 norm of velocity. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00260}{260}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_a429987090e76cd39a657b3a8eefbbbe9}\label{classoomph_1_1MyTaylorHoodElement_a429987090e76cd39a657b3a8eefbbbe9} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!variable\_identifier@{variable\_identifier}}
+\index{variable\_identifier@{variable\_identifier}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{variable\_identifier()}{variable\_identifier()}}
+{\footnotesize\ttfamily std\+::string oomph\+::\+My\+Taylor\+Hood\+Element\+::variable\+\_\+identifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return variable identifier. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00073}{73}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MyTaylorHoodElement_a381cf2cdb628fb7aacfd6dd59dc2996b}\label{classoomph_1_1MyTaylorHoodElement_a381cf2cdb628fb7aacfd6dd59dc2996b} 
+\index{oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}!Error@{Error}}
+\index{Error@{Error}!oomph::MyTaylorHoodElement@{oomph::MyTaylorHoodElement}}
+\doxysubsubsection{\texorpdfstring{Error}{Error}}
+{\footnotesize\ttfamily double oomph\+::\+My\+Taylor\+Hood\+Element\+::\+Error\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for elemental error estimate -- used for post-\/processing. 
+
+
+
+Definition at line \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00059}{59}} of file \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00064}{My\+Taylor\+Hood\+Element()}}, \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00105}{output()}}, and \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_source_l00070}{set\+\_\+error()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{adaptive__bubble__in__channel_8cc}{adaptive\+\_\+bubble\+\_\+in\+\_\+channel.\+cc}}\end{DoxyCompactItemize}

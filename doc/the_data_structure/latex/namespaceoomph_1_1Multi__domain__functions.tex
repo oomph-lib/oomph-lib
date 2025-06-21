@@ -1,0 +1,1120 @@
+\doxysection{oomph\+::Multi\+\_\+domain\+\_\+functions Namespace Reference}
+\hypertarget{namespaceoomph_1_1Multi__domain__functions}{}\label{namespaceoomph_1_1Multi__domain__functions}\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8a4effe7dd231a015f6e120c3f2d4fdd55}{New}}
+, \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8ae79558bf4c6d5520127c346350aa1ecd}{Exists}}
+, \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8abf3c04eff4fec3f0659fac92a035aed9}{Not\+\_\+found}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumerators for element status in location procedure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Send the zeta coordinates from the current process to the next process; receive from the previous process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Send location information from current process; Received location information from (current process + iproc) modulo (nproc) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed nodes, including any masters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Recursively add any master nodes (and their master nodes etc) of external nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Helper to add external haloed node that is not a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Helper function to add external haloed node that is a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper functiono to add external halo node that is not a master. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mesh\+\_\+geom\+\_\+obj\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Locate zeta for current set of missing coordinates; vector-\/based version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{mesh\+\_\+geom\+\_\+obj\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em locate zeta for current set of "{}local"{} coordinates vector-\/based version \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}{get\+\_\+dim\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same). Stores result in Dim. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}{clean\+\_\+up}} ()
+\begin{DoxyCompactList}\small\item\em Helper function that clears all the information used during the external storage creation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}{first\+\_\+closer\+\_\+than\+\_\+second}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&p1, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&p2)
+\begin{DoxyCompactList}\small\item\em Comparison function for sorting entries in bin\+: Returns true if point identified by p1 (comprising pointer to finite element and vector of local coordinates within that element) is closer to Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison than p2. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{BULK\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+in\+\_\+bulk\+\_\+mesh}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction}}=0)
+\begin{DoxyCompactList}\small\item\em Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} base class and the adjacent bulk elements are stored as their external elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{BULK\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_adcfac96ed755990c71f35b722bacbde7}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{boundary\+\_\+in\+\_\+bulk\+\_\+mesh}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{face\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction}}=0)
+\begin{DoxyCompactList}\small\item\em Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} base class and the adjacent bulk elements are stored as their external elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ELEMENT\+\_\+0}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ELEMENT\+\_\+1}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}{setup\+\_\+multi\+\_\+domain\+\_\+interactions}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{first\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{first\+\_\+interaction}}=0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{second\+\_\+interaction}}=0)
+\begin{DoxyCompactList}\small\item\em Set up the two-\/way multi-\/domain interactions for the problem pointed to by {\ttfamily problem\+\_\+pt}. Use this for cases where first\+\_\+mesh\+\_\+pt and second\+\_\+mesh\+\_\+pt occupy the same physical space and are populated by ELEMENT\+\_\+0 and ELEMENT\+\_\+1 respectively, and are combined to solve a single problem. The elements in two meshes interact both ways the elements in each mesh act as "{}external elements"{} for the elements in the "{}other"{} mesh. The interaction indices allow the specification of which interaction we\textquotesingle{}re setting up in the two meshes. They default to zero, which is appropriate if there\textquotesingle{}s only a single interaction. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}}=0)
+\begin{DoxyCompactList}\small\item\em Function to set up the one-\/way multi-\/domain interaction for problems where the meshes pointed to by {\ttfamily mesh\+\_\+pt} and {\ttfamily external\+\_\+mesh\+\_\+pt} occupy the same physical space, and the elements in {\ttfamily external\+\_\+mesh\+\_\+pt} act as "{}external elements"{} for the {\ttfamily Element\+With\+External\+Elements} in {\ttfamily mesh\+\_\+pt} (but not vice versa)\+: \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5fb45ad7165cc546b5e34e01a53478d8}{setup\+\_\+multi\+\_\+domain\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+face\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}}=0)
+\begin{DoxyCompactList}\small\item\em Function to set up the one-\/way multi-\/domain interaction for FSI-\/like problems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ae7dbd6a7da9a8988ea4c58163da52883}{setup\+\_\+multi\+\_\+domain\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+face\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}}=0)
+\begin{DoxyCompactList}\small\item\em Function to set up the one-\/way multi-\/domain interaction for FSI-\/like problems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{GEOM\+\_\+\+OBJECT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+face\+\_\+mesh\+\_\+pt}}=0)
+\begin{DoxyCompactList}\small\item\em Auxiliary helper function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{GEOM\+\_\+\+OBJECT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af84f07f5b4632433203f4c4abf57da5f}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+face\+\_\+mesh\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Auxiliary helper function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa653ac4cf76e54d98ab9f10a499523d1}{create\+\_\+external\+\_\+halo\+\_\+elements}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{iproc}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{interaction\+\_\+index}})
+\begin{DoxyCompactList}\small\item\em Create external (halo) elements on the loop process based on the information received from each locate\+\_\+zeta call on other processes This is the vector-\/based function which operates simultaneously on the meshes contained in the vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo nodes, including any masters, based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{node\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+el\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ab0ce0182a95a673dfcef1abe31e76017}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n\+\_\+cont\+\_\+inter\+\_\+values}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function to add external halo node that is a master. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ }\\\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{new\+\_\+master\+\_\+nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nod\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{loc\+\_\+p}}, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{external\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}problem\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function which constructs a new external halo master node with the information sent from the haloed process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ofstream \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449}{Doc\+\_\+boundary\+\_\+coordinate\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em Output file to document the boundary coordinate along the mesh boundary of the bulk mesh during call to setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_af4e0a3d3191c370209c6a7830a0dc368}{Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate that failure in setup multi domain functions is acceptable; defaults to false. If set to true external element pointers are set to null for those elements for which external elements couldn\textquotesingle{}t be located. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}{Dim}}
+\begin{DoxyCompactList}\small\item\em Dimension of zeta tuples (set by get\+\_\+dim\+\_\+helper) -- needed because we store the scalar coordinates in flat-\/packed form. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2325d66c90ff388dfd6b2649a48e9827}{External\+\_\+element\+\_\+located}}
+\begin{DoxyCompactList}\small\item\em Lookup scheme for whether a local element\textquotesingle{}s integration point has had an external element assigned to it -- essentially boolean. External\+\_\+element\+\_\+located\mbox{[}e\mbox{]}\mbox{[}ipt\mbox{]} = \{0,1\} if external element for ipt-\/th integration in local element e \{has not, has\} been found. Used locally to ensure that we\textquotesingle{}re not searching for the same elements over and over again when we go around the spirals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a880374b0f685eeddca0c70b5a5d40a85}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed zeta coordinates for which the external element could not be found during current local search. These will be sent to the next processor in the ring-\/like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa5bb8d568feb34660caf8f88928f3be7}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed zeta coordinates for which the external element could not be found on another processor and for which we\textquotesingle{}re currently searching here. Whatever can\textquotesingle{}t be found here, gets written into Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally and then passed on to the next processor during the ring-\/like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a05cf6413be5c69ff7535ebf0b8a153e3}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}
+\begin{DoxyCompactList}\small\item\em Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element\mbox{[}i\mbox{]} contains the processor id (plus one) of the processor on which the i-\/th zeta coordinate tuple received from elsewhere (in the order in which these are stored in Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found) was located; it\textquotesingle{}s zero if it wasn\textquotesingle{}t found during the current stage of the ring-\/like parallel search. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_ae6f22430d0d0df252be95eeda5c03151}{Located\+\_\+element\+\_\+status}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} to indicate (to another processor) whether a located element (that will have to represented as an external halo element on that processor) should be newly created on that processor (2), already exists on that processor (1), or is not on the current processor either (0). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a095771257db01cdebaaf92facc3057a3}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed local coordinates for zeta tuples that have been located. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}{Flat\+\_\+packed\+\_\+doubles}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed doubles to be communicated with other processors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}
+\begin{DoxyCompactList}\small\item\em Counter used when processing vector of flat-\/packed doubles -- this is really "{}private"{} data, declared here to avoid having to pass it (and the associated array) between the various helper functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}{Flat\+\_\+packed\+\_\+unsigneds}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed unsigneds to be communicated with other processors -- this is really "{}private"{} data, declared here to avoid having to pass the array between the various helper functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}
+\begin{DoxyCompactList}\small\item\em Counter used when processing vector of flat-\/packed unsigneds -- this is really "{}private"{} data, declared here to avoid having to pass it (and the associated array) between the various helper functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate when to use the bulk element as the external element. Defaults to false, you must have set up Face\+Elements properly first in order for it to work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate if we\textquotesingle{}re allowed to use halo elements as external elements. Can drastically reduce the number of external halo elements -- currently not aware of any problems therefore set to true by default but retention of this flag allows easy return to previous implementation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}}
+\begin{DoxyCompactList}\small\item\em Indicate whether we are allowed to use halo elements as external elements for projection, possibly only required in parallel unstructured mesh generation during the projection stage. Default set to true. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}{Doc\+\_\+timings}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to doc timings or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}{Doc\+\_\+stats}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output basic info during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}{Doc\+\_\+full\+\_\+stats}} = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}
+\begin{DoxyCompactList}\small\item\em Boolean to indicate whether to output further info during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \mbox{\hyperlink{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0}{Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Vector}{Vector} of zeta coordinates that we\textquotesingle{}re currently trying to locate; used in sorting of bin entries in further\+\_\+away() comparison function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8}\label{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{anonymous}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{enum}}}
+
+
+
+Enumerators for element status in location procedure. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{New@{New}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!New@{New}}}\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8a4effe7dd231a015f6e120c3f2d4fdd55}\label{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8a4effe7dd231a015f6e120c3f2d4fdd55} 
+New&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Exists@{Exists}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Exists@{Exists}}}\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8ae79558bf4c6d5520127c346350aa1ecd}\label{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8ae79558bf4c6d5520127c346350aa1ecd} 
+Exists&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Not\_found@{Not\_found}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Not\_found@{Not\_found}}}\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8abf3c04eff4fec3f0659fac92a035aed9}\label{namespaceoomph_1_1Multi__domain__functions_a82a287ab8a3bad9e68edc3437d9dbfb8abf3c04eff4fec3f0659fac92a035aed9} 
+Not\+\_\+found&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8h_source_l00147}{147}} of file \mbox{\hyperlink{multi__domain_8h_source}{multi\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ab0ce0182a95a673dfcef1abe31e76017}\label{namespaceoomph_1_1Multi__domain__functions_ab0ce0182a95a673dfcef1abe31e76017} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}}
+\index{add\_external\_halo\_master\_node\_helper@{add\_external\_halo\_master\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_master\_node\_helper()}{add\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo node that is a master. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l02037}{2037}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247}\label{namespaceoomph_1_1Multi__domain__functions_abbec3c28e0cdbe77c6ce3c9021528247} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}}
+\index{add\_external\_halo\_node\_helper@{add\_external\_halo\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_helper()}{add\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper functiono to add external halo node that is not a master. 
+
+Helper function to add external halo node that is not a master. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01403}{1403}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l01451}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7}\label{namespaceoomph_1_1Multi__domain__functions_a6415c5c0119c75e162418a0c9b59b4f7} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}}
+\index{add\_external\_halo\_node\_to\_storage@{add\_external\_halo\_node\_to\_storage}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_halo\_node\_to\_storage()}{add\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external halo nodes, including any masters, based on information received from the haloed process. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01934}{1934}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48}\label{namespaceoomph_1_1Multi__domain__functions_a7116b75de2083297cc1ab4e4b1ca2e48} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}}
+\index{add\_external\_haloed\_master\_node\_helper@{add\_external\_haloed\_master\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_master\_node\_helper()}{add\_external\_haloed\_master\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed node that is a master. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00698}{698}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, and \mbox{\hyperlink{multi__domain_8cc_source_l01009}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560}\label{namespaceoomph_1_1Multi__domain__functions_aac4036d305c98081e778e16d568ae560} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}}
+\index{add\_external\_haloed\_node\_helper@{add\_external\_haloed\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_helper()}{add\_external\_haloed\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Helper to add external haloed node that is not a master. 
+
+Helper function to add external haloed node that is not a master. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00642}{642}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00753}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00556}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7}\label{namespaceoomph_1_1Multi__domain__functions_aea9c2b1984158b8f560c6fff7c0adea7} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}}
+\index{add\_external\_haloed\_node\_to\_storage@{add\_external\_haloed\_node\_to\_storage}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{add\_external\_haloed\_node\_to\_storage()}{add\_external\_haloed\_node\_to\_storage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Helper function to add external haloed nodes, including any masters. 
+
+Helper function to add external haloed nodes, inc. masters of external haloed nodes. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00556}{556}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00642}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l01009}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af84f07f5b4632433203f4c4abf57da5f}\label{namespaceoomph_1_1Multi__domain__functions_af84f07f5b4632433203f4c4abf57da5f} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}}
+\index{aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{aux\_setup\_multi\_domain\_interaction()}{aux\_setup\_multi\_domain\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{GEOM\+\_\+\+OBJECT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{external\+\_\+face\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Auxiliary helper function. 
+
+This routine calls the locate\+\_\+zeta routine (simultaneously on each processor for each individual processor\textquotesingle{}s element set if necessary) and sets up the external (halo) element and node storage as necessary. The locate\+\_\+zeta procedure here works for all multi-\/domain problems where either two meshes occupy the same physical space but have differing element types (e.\+g. a Boussinesq convection problem where Advection\+Diffusion elements interact with Navier-\/\+Stokes type elements) or two meshes interact along some boundary of the external mesh, represented by a "{}face mesh"{}, such as an FSI problem.
+
+Vector-\/based version operates simultaneously on the meshes contained in the vectors. If it\textquotesingle{}s is now zero then break out of the spirals loop
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{531}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00055}{Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction}}, \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{multi__domain_8cc_source_l00067}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{multi__domain_8cc_source_l00073}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01967}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l03992}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{nodes_8h_source_l01054}{oomph\+::\+Node\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{Tadvection__diffusion__reaction__elements_8h_source_l00096}{oomph\+::\+TAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{problem_8h_source_l02283}{oomph\+::\+Problem\+::problem\+\_\+has\+\_\+been\+\_\+distributed()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00176}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00045}{oomph\+::\+Use\+CGALSample\+Point\+Container}}, \mbox{\hyperlink{sample__point__parameters_8h_source_l00042}{oomph\+::\+Use\+Non\+Refineable\+Bin\+Array}}, and \mbox{\hyperlink{sample__point__parameters_8h_source_l00041}{oomph\+::\+Use\+Refineable\+Bin\+Array}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d}\label{namespaceoomph_1_1Multi__domain__functions_ae63441bb68e6512082f1248c65f6208d} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}}
+\index{aux\_setup\_multi\_domain\_interaction@{aux\_setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{aux\_setup\_multi\_domain\_interaction()}{aux\_setup\_multi\_domain\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{GEOM\+\_\+\+OBJECT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+face\+\_\+mesh\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Auxiliary helper function. 
+
+This routine calls the locate\+\_\+zeta routine (simultaneously on each processor for each individual processor\textquotesingle{}s element set if necessary) and sets up the external (halo) element and node storage as necessary. The locate\+\_\+zeta procedure here works for all multi-\/domain problems where either two meshes occupy the same physical space but have differing element types (e.\+g. a Boussinesq convection problem where Advection\+Diffusion elements interact with Navier-\/\+Stokes type elements) or two meshes interact along some boundary of the external mesh, represented by a "{}face mesh"{}, such as an FSI problem. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00492}{492}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2}\label{namespaceoomph_1_1Multi__domain__functions_a45a7960bff85287284bea3939dcda5c2} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!clean\_up@{clean\_up}}
+\index{clean\_up@{clean\_up}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{clean\_up()}{clean\_up()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::clean\+\_\+up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Helper function that clears all the information used during the external storage creation. 
+
+Helper function that clears all the intermediate information used during the external storage creation at the end of the procedure. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02412}{2412}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00067}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00101}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00073}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{multi__domain_8cc_source_l00097}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{multi__domain_8cc_source_l00090}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00081}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b}\label{namespaceoomph_1_1Multi__domain__functions_aa50dde1349bfc2809a8fb5c1bb971b0b} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}}
+\index{construct\_new\_external\_halo\_master\_node\_helper@{construct\_new\_external\_halo\_master\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_master\_node\_helper()}{construct\_new\_external\_halo\_master\_node\_helper()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo master node with the information sent from the haloed process. 
+
+Helper function which constructs a new external halo master node with the required information sent from the haloed process. The first entry of All\+\_\+unsigned\+\_\+values is the default node update id
+
+... so for the specified update\+\_\+id, call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{2078}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00111}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01846}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{elements_8h_source_l01876}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{problem_8h_source_l01544}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191}\label{namespaceoomph_1_1Multi__domain__functions_aa0a1707ca80a12f948616e016a1ed191} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}}
+\index{construct\_new\_external\_halo\_node\_helper@{construct\_new\_external\_halo\_node\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{construct\_new\_external\_halo\_node\_helper()}{construct\_new\_external\_halo\_node\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function which constructs a new external halo node (on new element) with the required information sent from the haloed process. 
+
+Helper function which constructs a new external halo node (on an element) with the information sent from the haloed process. The first entry of All\+\_\+alg\+\_\+nodal\+\_\+info contains the default node update id e.\+g. for the quarter circle there are "{}\+Upper\+\_\+left\+\_\+box"{}, "{}\+Lower right box"{} etc...
+
+again we need the size of this vector as it varies between meshes; we also need some indication as to which geometric object should be used...
+
+For the received update\+\_\+id, ref\+\_\+value, geom\+\_\+object call add\+\_\+node\+\_\+update\+\_\+info
+
+Now call update\+\_\+node\+\_\+update
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01451}{1451}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l02542}{oomph\+::\+Finite\+Element\+::construct\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{elements_8h_source_l02513}{oomph\+::\+Finite\+Element\+::construct\+\_\+node()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00111}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01846}{oomph\+::\+Finite\+Element\+::local\+\_\+coordinate\+\_\+of\+\_\+node()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{problem_8h_source_l01544}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l01403}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa653ac4cf76e54d98ab9f10a499523d1}\label{namespaceoomph_1_1Multi__domain__functions_aa653ac4cf76e54d98ab9f10a499523d1} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!create\_external\_halo\_elements@{create\_external\_halo\_elements}}
+\index{create\_external\_halo\_elements@{create\_external\_halo\_elements}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{create\_external\_halo\_elements()}{create\_external\_halo\_elements()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Create external (halo) elements on the loop process based on the information received from each locate\+\_\+zeta call on other processes This is the vector-\/based function which operates simultaneously on the meshes contained in the vectors. 
+
+Creates external (halo) elements on the loop process based on the information received from each locate\+\_\+zeta call on other processes. vector based version. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{1687}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00111}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{multi__domain_8cc_source_l00067}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00101}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01967}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00097}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{multi__domain_8h_source_l00149}{New}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{multi__domain_8cc_source_l00090}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, \mbox{\hyperlink{elements_8h_source_l01876}{oomph\+::\+Finite\+Element\+::set\+\_\+macro\+\_\+elem\+\_\+pt()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2}\label{namespaceoomph_1_1Multi__domain__functions_aee712f5dc126a26cd46b6f717aa1d6c2} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!first\_closer\_than\_second@{first\_closer\_than\_second}}
+\index{first\_closer\_than\_second@{first\_closer\_than\_second}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{first\_closer\_than\_second()}{first\_closer\_than\_second()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::first\+\_\+closer\+\_\+than\+\_\+second (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{p1,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Comparison function for sorting entries in bin\+: Returns true if point identified by p1 (comprising pointer to finite element and vector of local coordinates within that element) is closer to Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison than p2. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02432}{2432}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04705}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{multi__domain_8cc_source_l02426}{Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898}\label{namespaceoomph_1_1Multi__domain__functions_a81f7a581bfb6abfcce009546b80b9898} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_dim\_helper@{get\_dim\_helper}}
+\index{get\_dim\_helper@{get\_dim\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_dim\_helper()}{get\_dim\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+dim\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same). Stores result in Dim. 
+
+Helper function that computes the dimension of the elements within each of the specified meshes (and checks they are the same) Stores result in Dim. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02342}{2342}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{mesh_8h_source_l00452}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l00598}{oomph\+::\+Mesh\+::nelement()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00407}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00287}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00343}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee}\label{namespaceoomph_1_1Multi__domain__functions_a3b08cda68388e72b4159bbc0fa0826ee} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}}
+\index{get\_required\_master\_nodal\_information\_helper@{get\_required\_master\_nodal\_information\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_master\_nodal\_information\_helper()}{get\_required\_master\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{master\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving process. 
+
+Helper function to get the required master nodal information from an external haloed master node so that a fully-\/functional external halo master node (and possible element) can be created on the receiving proc. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01009}{1009}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00556}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01882}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{geom__objects_8h_source_l00171}{oomph\+::\+Geom\+Object\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01710}{oomph\+::\+Problem\+::ntime\+\_\+stepper()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{problem_8h_source_l01544}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00698}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390}\label{namespaceoomph_1_1Multi__domain__functions_aaf7f6048aab50adfe33d24f8ff9f8390} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}}
+\index{get\_required\_nodal\_information\_helper@{get\_required\_nodal\_information\_helper}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{get\_required\_nodal\_information\_helper()}{get\_required\_nodal\_information\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Helper function to get the required nodal information from an external haloed node so that a fully-\/functional external halo node (and therefore element) can be created on the receiving process. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00753}{753}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, \mbox{\hyperlink{problem_8h_source_l01710}{oomph\+::\+Problem\+::ntime\+\_\+stepper()}}, \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, and \mbox{\hyperlink{problem_8h_source_l01544}{oomph\+::\+Problem\+::time\+\_\+stepper\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00642}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c}\label{namespaceoomph_1_1Multi__domain__functions_a969b893c0f6f013c78076e4013c0f34c} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!locate\_zeta\_for\_local\_coordinates@{locate\_zeta\_for\_local\_coordinates}}
+\index{locate\_zeta\_for\_local\_coordinates@{locate\_zeta\_for\_local\_coordinates}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{locate\_zeta\_for\_local\_coordinates()}{locate\_zeta\_for\_local\_coordinates()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+geom\+\_\+obj\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+locate zeta for current set of "{}local"{} coordinates vector-\/based version 
+
+Helper function to locate "{}local"{} zeta coordinates This is the vector-\/based version which operates simultaenously on the meshes contained in the Vectors. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02152}{2152}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00148}{Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{multi__domain_8cc_source_l00067}{External\+\_\+element\+\_\+located}}, \mbox{\hyperlink{multi__domain_8cc_source_l00073}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01967}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l04705}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral\+::knot()}}, \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral\+::nweight()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9}\label{namespaceoomph_1_1Multi__domain__functions_af094851b9ae730f6e8a37a793be05bc9} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!locate\_zeta\_for\_missing\_coordinates@{locate\_zeta\_for\_missing\_coordinates}}
+\index{locate\_zeta\_for\_missing\_coordinates@{locate\_zeta\_for\_missing\_coordinates}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{locate\_zeta\_for\_missing\_coordinates()}{locate\_zeta\_for\_missing\_coordinates()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1MeshAsGeomObject}{Mesh\+As\+Geom\+Object}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+geom\+\_\+obj\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Locate zeta for current set of missing coordinates; vector-\/based version. 
+
+Helper function to locate these "{}missing"{} zeta coordinates. This is the vector-\/based function which operates simultaneously on the meshes contained in the vectors. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l01796}{1796}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00556}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l02615}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{multi__domain_8h_source_l00150}{Exists}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00101}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{multi__domain_8cc_source_l00073}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01150}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{elements_8cc_source_l04764}{oomph\+::\+Finite\+Element\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00097}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{elements_8h_source_l01882}{oomph\+::\+Finite\+Element\+::macro\+\_\+elem\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8h_source_l00149}{New}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8h_source_l00151}{Not\+\_\+found}}, \mbox{\hyperlink{multi__domain_8cc_source_l00090}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, \mbox{\hyperlink{multi__domain_8cc_source_l00081}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd}\label{namespaceoomph_1_1Multi__domain__functions_a8eeb905c3ef62453b87a512e4c3eafdd} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}}
+\index{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage@{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}{recursively\_add\_masters\_of\_external\_halo\_node\_to\_storage()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\&}]{new\+\_\+nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{loc\+\_\+p,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{node\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{new\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Recursively add masters of external halo nodes (and their masters, etc) based on information received from the haloed process. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l01969}{1969}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00111}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00133}{Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf}\label{namespaceoomph_1_1Multi__domain__functions_abaafd14a3e78c1965c294797913b44bf} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}}
+\index{recursively\_add\_masters\_of\_external\_haloed\_node@{recursively\_add\_masters\_of\_external\_haloed\_node}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{recursively\_add\_masters\_of\_external\_haloed\_node()}{recursively\_add\_masters\_of\_external\_haloed\_node()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nod\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{n\+\_\+cont\+\_\+inter\+\_\+values }\end{DoxyParamCaption})}
+
+
+
+Recursively add any master nodes (and their master nodes etc) of external nodes. 
+
+Recursively add any master nodes (and their master nodes etc) of external haloed nodes. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00576}{576}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00698}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00556}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+to\+\_\+storage()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8}\label{namespaceoomph_1_1Multi__domain__functions_a131c53d0a1557066df4719d24796b3a8} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!send\_and\_receive\_located\_info@{send\_and\_receive\_located\_info}}
+\index{send\_and\_receive\_located\_info@{send\_and\_receive\_located\_info}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{send\_and\_receive\_located\_info()}{send\_and\_receive\_located\_info()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} \&}]{iproc,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Send location information from current process; Received location information from (current process + iproc) modulo (nproc) 
+
+Helper function to send back any located information. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00263}{263}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l00105}{Flat\+\_\+packed\+\_\+doubles}}, \mbox{\hyperlink{multi__domain_8cc_source_l00101}{Flat\+\_\+packed\+\_\+located\+\_\+coordinates}}, \mbox{\hyperlink{multi__domain_8cc_source_l00117}{Flat\+\_\+packed\+\_\+unsigneds}}, \mbox{\hyperlink{multi__domain_8cc_source_l00124}{Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{multi__domain_8cc_source_l00097}{Located\+\_\+element\+\_\+status}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{multi__domain_8cc_source_l00090}{Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00081}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785}\label{namespaceoomph_1_1Multi__domain__functions_a2fb1a620c45f362039bef826b32b6785} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!send\_and\_receive\_missing\_zetas@{send\_and\_receive\_missing\_zetas}}
+\index{send\_and\_receive\_missing\_zetas@{send\_and\_receive\_missing\_zetas}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{send\_and\_receive\_missing\_zetas()}{send\_and\_receive\_missing\_zetas()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt }\end{DoxyParamCaption})}
+
+
+
+Send the zeta coordinates from the current process to the next process; receive from the previous process. 
+
+Helper function to send any "{}missing"{} zeta coordinates to the next process and receive any coordinates from previous process. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00176}{176}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01266}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00073}{Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00081}{Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_adcfac96ed755990c71f35b722bacbde7}\label{namespaceoomph_1_1Multi__domain__functions_adcfac96ed755990c71f35b722bacbde7} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}}
+\index{setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_bulk\_elements\_adjacent\_to\_face\_mesh()}{setup\_bulk\_elements\_adjacent\_to\_face\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{BULK\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{boundary\+\_\+in\+\_\+bulk\+\_\+mesh,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{face\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} base class and the adjacent bulk elements are stored as their external elements. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00214}{214}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60}\label{namespaceoomph_1_1Multi__domain__functions_a35d48459a5261d565afbc106cb61fe60} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}}
+\index{setup\_bulk\_elements\_adjacent\_to\_face\_mesh@{setup\_bulk\_elements\_adjacent\_to\_face\_mesh}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_bulk\_elements\_adjacent\_to\_face\_mesh()}{setup\_bulk\_elements\_adjacent\_to\_face\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{BULK\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ \&}]{boundary\+\_\+in\+\_\+bulk\+\_\+mesh,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{face\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Identify the {\ttfamily Face\+Elements} (stored in the mesh pointed to by {\ttfamily face\+\_\+mesh\+\_\+pt}) that are adjacent to the bulk elements next to the {\ttfamily boundary\+\_\+in\+\_\+bulk\+\_\+mesh} -\/th boundary of the mesh pointed to by {\ttfamily bulk\+\_\+mesh\+\_\+pt}. The {\ttfamily Face\+Elements} must be derived from the {\ttfamily \doxylink{classoomph_1_1ElementWithExternalElement}{Element\+With\+External\+Element}} base class and the adjacent bulk elements are stored as their external elements. 
+
+This is the vector-\/based version which deals with multiple bulk mesh boundaries at the same time. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{79}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00046}{Doc\+\_\+boundary\+\_\+coordinate\+\_\+file}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8h_source_l03152}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l03992}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l04705}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+zeta()}}, \mbox{\hyperlink{elements_8h_source_l03190}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00287}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, \mbox{\hyperlink{elements_8h_source_l03165}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03178}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi_8h_source_l00632}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements()}}, \mbox{\hyperlink{fsi_8h_source_l00601}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements()}}, \mbox{\hyperlink{fsi_8h_source_l00692}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc()}}, and \mbox{\hyperlink{fsi_8h_source_l00665}{oomph\+::\+FSI\+\_\+functions\+::setup\+\_\+solid\+\_\+elements\+\_\+for\+\_\+displacement\+\_\+bc()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae7dbd6a7da9a8988ea4c58163da52883}\label{namespaceoomph_1_1Multi__domain__functions_ae7dbd6a7da9a8988ea4c58163da52883} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
+\index{setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_multi\_domain\_interaction()}{setup\_multi\_domain\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*} $>$ \&}]{external\+\_\+face\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Function to set up the one-\/way multi-\/domain interaction for FSI-\/like problems. 
+
+
+\begin{DoxyItemize}
+\item {\ttfamily mesh\+\_\+pt} points to the mesh of {\ttfamily Elemen\+With\+External\+Elements} for which the interaction is set up. In an FSI example, this mesh would contain the {\ttfamily FSIWall\+Elements} (either beam/shell elements or the {\ttfamily FSISolid\+Traction\+Elements} that apply the traction to a "{}bulk"{} solid mesh that is loaded by the fluid.)
+\item {\ttfamily external\+\_\+mesh\+\_\+pt} points to the mesh that contains the elements of type EXT\+\_\+\+ELEMENT that provide the "{}source"{} for the {\ttfamily Element\+With\+External\+Elements}. In an FSI example, this mesh would contain the "{}bulk"{} fluid elements.
+\item {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} points to the mesh of {\ttfamily Face\+Elements} attached to the {\ttfamily external\+\_\+mesh\+\_\+pt}. The mesh pointed to by {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} has the same dimension as {\ttfamily mesh\+\_\+pt}. The elements contained in {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} are of type FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT. In an FSI example, these elements are usually the {\ttfamily Face\+Element\+As\+Geom\+Objects} (templated by the type of the "{}bulk"{} fluid elements to which they are attached) that define the FSI boundary of the fluid domain.
+\item The interaction\+\_\+index parameter defaults to zero and must otherwise be set by the user if there is more than one mesh that provides "{}external   elements"{} for the \doxylink{classoomph_1_1Mesh}{Mesh} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.)
+\end{DoxyItemize}This is the vector-\/based version which operates simultaneously on the meshes contained in the \doxylink{classoomph_1_1Vector}{Vector} arguments.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily mesh\+\_\+pt} points to the mesh of {\ttfamily Elemen\+With\+External\+Elements} for which the interaction is set up. In an FSI example, this mesh would contain the {\ttfamily FSIWall\+Elements} (either beam/shell elements or the {\ttfamily FSISolid\+Traction\+Elements} that apply the traction to a "{}bulk"{} solid mesh that is loaded by the fluid.)
+\item {\ttfamily external\+\_\+mesh\+\_\+pt} points to the mesh that contains the elements of type EXT\+\_\+\+ELEMENT that provide the "{}source"{} for the {\ttfamily Element\+With\+External\+Elements}. In an FSI example, this mesh would contain the "{}bulk"{} fluid elements.
+\item {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} points to the mesh of {\ttfamily Face\+Elements} attached to the {\ttfamily external\+\_\+mesh\+\_\+pt}. The mesh pointed to by {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} has the same dimension as {\ttfamily mesh\+\_\+pt}. The elements contained in {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} are of type FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT. In an FSI example, these elements are usually the {\ttfamily Face\+Element\+As\+Geom\+Objects} (templated by the type of the "{}bulk"{} fluid elements to which they are attached) that define the FSI boundary of the fluid domain.
+\item The interaction\+\_\+index parameter defaults to zero and must otherwise be set by the user if there is more than one mesh that provides "{}external   elements"{} for the \doxylink{classoomph_1_1Mesh}{Mesh} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.)
+\end{DoxyItemize}Vector-\/based version operates simultaneously on the meshes contained in the vectors. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00407}{407}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02342}{get\+\_\+dim\+\_\+helper()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}\label{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
+\index{setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_multi\_domain\_interaction()}{setup\_multi\_domain\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Function to set up the one-\/way multi-\/domain interaction for problems where the meshes pointed to by {\ttfamily mesh\+\_\+pt} and {\ttfamily external\+\_\+mesh\+\_\+pt} occupy the same physical space, and the elements in {\ttfamily external\+\_\+mesh\+\_\+pt} act as "{}external elements"{} for the {\ttfamily Element\+With\+External\+Elements} in {\ttfamily mesh\+\_\+pt} (but not vice versa)\+: 
+
+
+\begin{DoxyItemize}
+\item {\ttfamily mesh\+\_\+pt} points to the mesh of Elemen\+With\+External\+Elements for which the interaction is set up.
+\item {\ttfamily external\+\_\+mesh\+\_\+pt} points to the mesh that contains the elements of type EXT\+\_\+\+ELEMENT that act as "{}external elements"{} for the {\ttfamily Element\+With\+External\+Elements} in \textbackslash{} mesh\+\_\+pt.
+\item The interaction\+\_\+index parameter defaults to zero and must be otherwise set by the user if there is more than one mesh that provides sources for the \doxylink{classoomph_1_1Mesh}{Mesh} pointed to by mesh\+\_\+pt.
+\item {\ttfamily mesh\+\_\+pt} points to the mesh of Elemen\+With\+External\+Elements for which the interaction is set up.
+\item {\ttfamily external\+\_\+mesh\+\_\+pt} points to the mesh that contains the elements of type EXT\+\_\+\+ELEMENT that act as "{}external elements"{} for the {\ttfamily Element\+With\+External\+Elements} in {\ttfamily mesh\+\_\+pt}.
+\item The interaction\+\_\+index parameter defaults to zero and must be otherwise set by the user if there is more than one mesh that provides sources for the \doxylink{classoomph_1_1Mesh}{Mesh} pointed to by mesh\+\_\+pt. 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00287}{287}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02342}{get\+\_\+dim\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+
+
+
+Referenced by \mbox{\hyperlink{projection_8h_source_l00748}{oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5fb45ad7165cc546b5e34e01a53478d8}\label{namespaceoomph_1_1Multi__domain__functions_a5fb45ad7165cc546b5e34e01a53478d8} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}}
+\index{setup\_multi\_domain\_interaction@{setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_multi\_domain\_interaction()}{setup\_multi\_domain\_interaction()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{EXT\+\_\+\+ELEMENT}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{external\+\_\+face\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{interaction\+\_\+index = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Function to set up the one-\/way multi-\/domain interaction for FSI-\/like problems. 
+
+
+\begin{DoxyItemize}
+\item {\ttfamily mesh\+\_\+pt} points to the mesh of {\ttfamily Elemen\+With\+External\+Elements} for which the interaction is set up. In an FSI example, this mesh would contain the {\ttfamily FSIWall\+Elements} (either beam/shell elements or the {\ttfamily FSISolid\+Traction\+Elements} that apply the traction to a "{}bulk"{} solid mesh that is loaded by the fluid.)
+\item {\ttfamily external\+\_\+mesh\+\_\+pt} points to the mesh that contains the elements of type EXT\+\_\+\+ELEMENT that provide the "{}source"{} for the {\ttfamily Element\+With\+External\+Elements}. In an FSI example, this mesh would contain the "{}bulk"{} fluid elements.
+\item {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} points to the mesh of {\ttfamily Face\+Elements} attached to the {\ttfamily external\+\_\+mesh\+\_\+pt}. The mesh pointed to by {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} has the same dimension as {\ttfamily mesh\+\_\+pt}. The elements contained in {\ttfamily external\+\_\+face\+\_\+mesh\+\_\+pt} are of type FACE\+\_\+\+ELEMENT\+\_\+\+GEOM\+\_\+\+OBJECT. In an FSI example, these elements are usually the {\ttfamily Face\+Element\+As\+Geom\+Objects} (templated by the type of the "{}bulk"{} fluid elements to which they are attached) that define the FSI boundary of the fluid domain.
+\item The interaction\+\_\+index parameter defaults to zero and must otherwise be set by the user if there is more than one mesh that provides "{}external   elements"{} for the \doxylink{classoomph_1_1Mesh}{Mesh} pointed to by mesh\+\_\+pt (e.\+g. in the case when a beam or shell structure is loaded by fluid from both sides.) 
+\end{DoxyItemize}
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00343}{343}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{multi__domain_8cc_source_l00059}{Dim}}, \mbox{\hyperlink{multi__domain_8cc_source_l02342}{get\+\_\+dim\+\_\+helper()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00141}{Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2}\label{namespaceoomph_1_1Multi__domain__functions_a4a7ac2c45985582b30ed3ecb5d2623d2} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!setup\_multi\_domain\_interactions@{setup\_multi\_domain\_interactions}}
+\index{setup\_multi\_domain\_interactions@{setup\_multi\_domain\_interactions}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{setup\_multi\_domain\_interactions()}{setup\_multi\_domain\_interactions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ELEMENT\+\_\+0}} , \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{class}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{ELEMENT\+\_\+1}} $>$ \\
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interactions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} \texorpdfstring{$\ast$}{*}}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{first\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{second\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{first\+\_\+interaction = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{second\+\_\+interaction = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Set up the two-\/way multi-\/domain interactions for the problem pointed to by {\ttfamily problem\+\_\+pt}. Use this for cases where first\+\_\+mesh\+\_\+pt and second\+\_\+mesh\+\_\+pt occupy the same physical space and are populated by ELEMENT\+\_\+0 and ELEMENT\+\_\+1 respectively, and are combined to solve a single problem. The elements in two meshes interact both ways the elements in each mesh act as "{}external elements"{} for the elements in the "{}other"{} mesh. The interaction indices allow the specification of which interaction we\textquotesingle{}re setting up in the two meshes. They default to zero, which is appropriate if there\textquotesingle{}s only a single interaction. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8template_8cc_source_l00251}{251}} of file \mbox{\hyperlink{multi__domain_8template_8cc_source}{multi\+\_\+domain.\+template.\+cc}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_af4e0a3d3191c370209c6a7830a0dc368}\label{namespaceoomph_1_1Multi__domain__functions_af4e0a3d3191c370209c6a7830a0dc368} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction@{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}}
+\index{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction@{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}{Accept\_failed\_locate\_zeta\_in\_setup\_multi\_domain\_interaction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Accept\+\_\+failed\+\_\+locate\+\_\+zeta\+\_\+in\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate that failure in setup multi domain functions is acceptable; defaults to false. If set to true external element pointers are set to null for those elements for which external elements couldn\textquotesingle{}t be located. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00055}{55}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c}\label{namespaceoomph_1_1Multi__domain__functions_aa3b57b233a416885018e8993db0b291c} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements@{Allow\_use\_of\_halo\_elements\_as\_external\_elements}}
+\index{Allow\_use\_of\_halo\_elements\_as\_external\_elements@{Allow\_use\_of\_halo\_elements\_as\_external\_elements}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Allow\_use\_of\_halo\_elements\_as\_external\_elements}{Allow\_use\_of\_halo\_elements\_as\_external\_elements}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}}}
+
+
+
+Boolean to indicate if we\textquotesingle{}re allowed to use halo elements as external elements. Can drastically reduce the number of external halo elements -- currently not aware of any problems therefore set to true by default but retention of this flag allows easy return to previous implementation. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00148}{148}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c}\label{namespaceoomph_1_1Multi__domain__functions_aa45f040b8ffc6448777fae76190d308c} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection@{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}}
+\index{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection@{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}{Allow\_use\_of\_halo\_elements\_as\_external\_elements\_for\_projection}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Allow\+\_\+use\+\_\+of\+\_\+halo\+\_\+elements\+\_\+as\+\_\+external\+\_\+elements\+\_\+for\+\_\+projection = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{true}}}
+
+
+
+Indicate whether we are allowed to use halo elements as external elements for projection, possibly only required in parallel unstructured mesh generation during the projection stage. Default set to true. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00154}{154}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13}\label{namespaceoomph_1_1Multi__domain__functions_aeb7431547acc61e750fcc456a25ffc13} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Counter\_for\_flat\_packed\_doubles@{Counter\_for\_flat\_packed\_doubles}}
+\index{Counter\_for\_flat\_packed\_doubles@{Counter\_for\_flat\_packed\_doubles}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Counter\_for\_flat\_packed\_doubles}{Counter\_for\_flat\_packed\_doubles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+doubles}
+
+
+
+Counter used when processing vector of flat-\/packed doubles -- this is really "{}private"{} data, declared here to avoid having to pass it (and the associated array) between the various helper functions. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00111}{111}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01451}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l01970}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7}\label{namespaceoomph_1_1Multi__domain__functions_a20f6de2e1bd15cb40c461d2ca3940bd7} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Counter\_for\_flat\_packed\_unsigneds@{Counter\_for\_flat\_packed\_unsigneds}}
+\index{Counter\_for\_flat\_packed\_unsigneds@{Counter\_for\_flat\_packed\_unsigneds}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Counter\_for\_flat\_packed\_unsigneds}{Counter\_for\_flat\_packed\_unsigneds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Counter\+\_\+for\+\_\+flat\+\_\+packed\+\_\+unsigneds}
+
+
+
+Counter used when processing vector of flat-\/packed unsigneds -- this is really "{}private"{} data, declared here to avoid having to pass it (and the associated array) between the various helper functions. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00133}{133}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02037}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01403}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01451}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l01970}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58}\label{namespaceoomph_1_1Multi__domain__functions_a27cbb5ec7f6fea2f237c11659ffeef58} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Dim@{Dim}}
+\index{Dim@{Dim}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Dim}{Dim}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}
+
+
+
+Dimension of zeta tuples (set by get\+\_\+dim\+\_\+helper) -- needed because we store the scalar coordinates in flat-\/packed form. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00059}{59}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02432}{first\+\_\+closer\+\_\+than\+\_\+second()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02342}{get\+\_\+dim\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00407}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00287}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00343}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449}\label{namespaceoomph_1_1Multi__domain__functions_a87a54c04fcc68b716adf10ca29a1f449} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_boundary\_coordinate\_file@{Doc\_boundary\_coordinate\_file}}
+\index{Doc\_boundary\_coordinate\_file@{Doc\_boundary\_coordinate\_file}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_boundary\_coordinate\_file}{Doc\_boundary\_coordinate\_file}}
+{\footnotesize\ttfamily std\+::ofstream oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+boundary\+\_\+coordinate\+\_\+file}
+
+
+
+Output file to document the boundary coordinate along the mesh boundary of the bulk mesh during call to setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(...) 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00046}{46}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00079}{setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203}\label{namespaceoomph_1_1Multi__domain__functions_aa5969c7c730e13e9d5a2c268f3045203} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_full\_stats@{Doc\_full\_stats}}
+\index{Doc\_full\_stats@{Doc\_full\_stats}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_full\_stats}{Doc\_full\_stats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+full\+\_\+stats = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to output further info during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. 
+
+Boolean to indicate whether to document further info (to screen) during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00165}{165}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29597}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718}\label{namespaceoomph_1_1Multi__domain__functions_aa490ae6349c68dc3c5b40f6a4a40e718} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_stats@{Doc\_stats}}
+\index{Doc\_stats@{Doc\_stats}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+stats = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to output basic info during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. 
+
+Boolean to indicate whether to document basic info (to screen) during \doxylink{namespaceoomph_1_1Multi__domain__functions_ac64183e03f173c69ed6ed6f493a1a67e}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()} routines. 
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00161}{161}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29597}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423}\label{namespaceoomph_1_1Multi__domain__functions_a64dc4667540a9a2591b00635dea88423} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Doc\_timings@{Doc\_timings}}
+\index{Doc\_timings@{Doc\_timings}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Doc\_timings}{Doc\_timings}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+timings = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate whether to doc timings or not. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00157}{157}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{triangle__mesh_8template_8cc_source_l29597}{oomph\+::\+Refineable\+Triangle\+Mesh$<$ ELEMENT $>$\+::adapt()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2325d66c90ff388dfd6b2649a48e9827}\label{namespaceoomph_1_1Multi__domain__functions_a2325d66c90ff388dfd6b2649a48e9827} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!External\_element\_located@{External\_element\_located}}
+\index{External\_element\_located@{External\_element\_located}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{External\_element\_located}{External\_element\_located}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+External\+\_\+element\+\_\+located}
+
+
+
+Lookup scheme for whether a local element\textquotesingle{}s integration point has had an external element assigned to it -- essentially boolean. External\+\_\+element\+\_\+located\mbox{[}e\mbox{]}\mbox{[}ipt\mbox{]} = \{0,1\} if external element for ipt-\/th integration in local element e \{has not, has\} been found. Used locally to ensure that we\textquotesingle{}re not searching for the same elements over and over again when we go around the spirals. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00067}{67}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3}\label{namespaceoomph_1_1Multi__domain__functions_a2fa0a4a4e31700e161441b19f88c4bf3} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_doubles@{Flat\_packed\_doubles}}
+\index{Flat\_packed\_doubles@{Flat\_packed\_doubles}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_doubles}{Flat\_packed\_doubles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+doubles}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed doubles to be communicated with other processors. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00105}{105}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01451}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00753}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01970}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a095771257db01cdebaaf92facc3057a3}\label{namespaceoomph_1_1Multi__domain__functions_a095771257db01cdebaaf92facc3057a3} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_located\_coordinates@{Flat\_packed\_located\_coordinates}}
+\index{Flat\_packed\_located\_coordinates@{Flat\_packed\_located\_coordinates}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_located\_coordinates}{Flat\_packed\_located\_coordinates}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+located\+\_\+coordinates}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed local coordinates for zeta tuples that have been located. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00101}{101}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3}\label{namespaceoomph_1_1Multi__domain__functions_a5748b2389912d36f8f05cb175105c0a3} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_unsigneds@{Flat\_packed\_unsigneds}}
+\index{Flat\_packed\_unsigneds@{Flat\_packed\_unsigneds}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_unsigneds}{Flat\_packed\_unsigneds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+unsigneds}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed unsigneds to be communicated with other processors -- this is really "{}private"{} data, declared here to avoid having to pass the array between the various helper functions. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00117}{117}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l02037}{add\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01403}{add\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00698}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00642}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l02078}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01451}{construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00753}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01970}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+halo\+\_\+node\+\_\+to\+\_\+storage()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151}\label{namespaceoomph_1_1Multi__domain__functions_a910c65c750d007e76f9175993179d151} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}}
+\index{Flat\_packed\_unsigneds\_string@{Flat\_packed\_unsigneds\_string}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_unsigneds\_string}{Flat\_packed\_unsigneds\_string}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::string $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+unsigneds\+\_\+string}
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00124}{124}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l00698}{add\+\_\+external\+\_\+haloed\+\_\+master\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00642}{add\+\_\+external\+\_\+haloed\+\_\+node\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01009}{get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00753}{get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00576}{recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a880374b0f685eeddca0c70b5a5d40a85}\label{namespaceoomph_1_1Multi__domain__functions_a880374b0f685eeddca0c70b5a5d40a85} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Flat\_packed\_zetas\_not\_found\_locally@{Flat\_packed\_zetas\_not\_found\_locally}}
+\index{Flat\_packed\_zetas\_not\_found\_locally@{Flat\_packed\_zetas\_not\_found\_locally}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Flat\_packed\_zetas\_not\_found\_locally}{Flat\_packed\_zetas\_not\_found\_locally}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed zeta coordinates for which the external element could not be found during current local search. These will be sent to the next processor in the ring-\/like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00073}{73}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00176}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_ae6f22430d0d0df252be95eeda5c03151}\label{namespaceoomph_1_1Multi__domain__functions_ae6f22430d0d0df252be95eeda5c03151} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Located\_element\_status@{Located\_element\_status}}
+\index{Located\_element\_status@{Located\_element\_status}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Located\_element\_status}{Located\_element\_status}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Located\+\_\+element\+\_\+status}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} to indicate (to another processor) whether a located element (that will have to represented as an external halo element on that processor) should be newly created on that processor (2), already exists on that processor (1), or is not on the current processor either (0). 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00097}{97}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a05cf6413be5c69ff7535ebf0b8a153e3}\label{namespaceoomph_1_1Multi__domain__functions_a05cf6413be5c69ff7535ebf0b8a153e3} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Proc\_id\_plus\_one\_of\_external\_element@{Proc\_id\_plus\_one\_of\_external\_element}}
+\index{Proc\_id\_plus\_one\_of\_external\_element@{Proc\_id\_plus\_one\_of\_external\_element}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Proc\_id\_plus\_one\_of\_external\_element}{Proc\_id\_plus\_one\_of\_external\_element}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element}
+
+
+
+Proc\+\_\+id\+\_\+plus\+\_\+one\+\_\+of\+\_\+external\+\_\+element\mbox{[}i\mbox{]} contains the processor id (plus one) of the processor on which the i-\/th zeta coordinate tuple received from elsewhere (in the order in which these are stored in Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found) was located; it\textquotesingle{}s zero if it wasn\textquotesingle{}t found during the current stage of the ring-\/like parallel search. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00090}{90}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l01687}{create\+\_\+external\+\_\+halo\+\_\+elements()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_aa5bb8d568feb34660caf8f88928f3be7}\label{namespaceoomph_1_1Multi__domain__functions_aa5bb8d568feb34660caf8f88928f3be7} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Received\_flat\_packed\_zetas\_to\_be\_found@{Received\_flat\_packed\_zetas\_to\_be\_found}}
+\index{Received\_flat\_packed\_zetas\_to\_be\_found@{Received\_flat\_packed\_zetas\_to\_be\_found}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Received\_flat\_packed\_zetas\_to\_be\_found}{Received\_flat\_packed\_zetas\_to\_be\_found}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Received\+\_\+flat\+\_\+packed\+\_\+zetas\+\_\+to\+\_\+be\+\_\+found}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of flat-\/packed zeta coordinates for which the external element could not be found on another processor and for which we\textquotesingle{}re currently searching here. Whatever can\textquotesingle{}t be found here, gets written into Flat\+\_\+packed\+\_\+zetas\+\_\+not\+\_\+found\+\_\+locally and then passed on to the next processor during the ring-\/like parallel search. The zeta coordinates come in groups of Dim (scalar) coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00081}{81}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02412}{clean\+\_\+up()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l00263}{send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info()}}, and \mbox{\hyperlink{multi__domain_8cc_source_l00176}{send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378}\label{namespaceoomph_1_1Multi__domain__functions_abc1119753cf68493ba6ea43c2a8bc378} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Use\_bulk\_element\_as\_external@{Use\_bulk\_element\_as\_external}}
+\index{Use\_bulk\_element\_as\_external@{Use\_bulk\_element\_as\_external}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Use\_bulk\_element\_as\_external}{Use\_bulk\_element\_as\_external}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Use\+\_\+bulk\+\_\+element\+\_\+as\+\_\+external = \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}}
+
+
+
+Boolean to indicate when to use the bulk element as the external element. Defaults to false, you must have set up Face\+Elements properly first in order for it to work. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l00141}{141}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8template_8cc_source_l00531}{aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8cc_source_l02152}{locate\+\_\+zeta\+\_\+for\+\_\+local\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8cc_source_l01796}{locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00407}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, \mbox{\hyperlink{multi__domain_8template_8cc_source_l00287}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}, and \mbox{\hyperlink{multi__domain_8template_8cc_source_l00343}{setup\+\_\+multi\+\_\+domain\+\_\+interaction()}}.
+
+\Hypertarget{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0}\label{namespaceoomph_1_1Multi__domain__functions_a5f14db731fddbd057f4099fbdba95cc0} 
+\index{oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}!Zeta\_coords\_for\_further\_away\_comparison@{Zeta\_coords\_for\_further\_away\_comparison}}
+\index{Zeta\_coords\_for\_further\_away\_comparison@{Zeta\_coords\_for\_further\_away\_comparison}!oomph::Multi\_domain\_functions@{oomph::Multi\_domain\_functions}}
+\doxysubsubsection{\texorpdfstring{Zeta\_coords\_for\_further\_away\_comparison}{Zeta\_coords\_for\_further\_away\_comparison}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}$>$ oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Zeta\+\_\+coords\+\_\+for\+\_\+further\+\_\+away\+\_\+comparison}
+
+
+
+\doxylink{classoomph_1_1Vector}{Vector} of zeta coordinates that we\textquotesingle{}re currently trying to locate; used in sorting of bin entries in further\+\_\+away() comparison function. 
+
+
+
+Definition at line \mbox{\hyperlink{multi__domain_8cc_source_l02426}{2426}} of file \mbox{\hyperlink{multi__domain_8cc_source}{multi\+\_\+domain.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{multi__domain_8cc_source_l02432}{first\+\_\+closer\+\_\+than\+\_\+second()}}.
+

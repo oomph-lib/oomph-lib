@@ -1,0 +1,34 @@
+\doxysection{helmholtz\+\_\+bc\+\_\+elements.\+h File Reference}
+\hypertarget{helmholtz__bc__elements_8h}{}\label{helmholtz__bc__elements_8h}\index{helmholtz\_bc\_elements.h@{helmholtz\_bc\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzBCElementBase}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A class for elements that allow the approximation of the Sommerfeld radiation BC. The element geometry is obtained from the Face\+Geometry$<$\+ELEMENT$>$ policy class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em ================================================================= \doxylink{classoomph_1_1Mesh}{Mesh} for DtN boundary condition elements -- provides functionality to apply Sommerfeld radiation condtion \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzAbsorbingBCElement}{oomph\+::\+Helmholtz\+Absorbing\+BCElement$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Absorbing BC element for approximation imposition of Sommerfeld radiation condition. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1FaceElement}{Face\+Element} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem}{oomph\+::\+Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem}}
+\begin{DoxyCompactList}\small\item\em Namespace to provide Hankel function of the first kind and various orders -- needed for Helmholtz computations. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1ToleranceForHelmholtzOuterBoundary}{oomph\+::\+Tolerance\+For\+Helmholtz\+Outer\+Boundary}}
+\begin{DoxyCompactList}\small\item\em Namespace for checking radius of nodes on (assumed to be circular) DtN boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a89d572e5352a2da98d19260165385f6f}{oomph\+::\+Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem\+::\+Hankel\+\_\+first}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&h, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hp}})
+\begin{DoxyCompactList}\small\item\em Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{namespaceoomph_1_1Hankel__functions__for__helmholtz__problem_a051f9376947b679c4c117f024fd7528a}{oomph\+::\+Hankel\+\_\+functions\+\_\+for\+\_\+helmholtz\+\_\+problem\+::\+CHankel\+\_\+first}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{n}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&h, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{hp}})
+\begin{DoxyCompactList}\small\item\em Compute Hankel function of the first kind of orders 0...n and its derivates at coordinate x. The function returns the vector then its derivative (complex version). This functionality is only required in the computation of the solution for the complex-\/ shifted Laplacian preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{namespaceoomph_1_1ToleranceForHelmholtzOuterBoundary_a8b38c8071a0bd44ff94783e3ebb6c70b}{oomph\+::\+Tolerance\+For\+Helmholtz\+Outer\+Boundary\+::\+Tol}} = 1.\+0e-\/3
+\begin{DoxyCompactList}\small\item\em Relative tolerance to within radius of points on DtN boundary are allowed to deviate from specified value. \end{DoxyCompactList}\end{DoxyCompactItemize}

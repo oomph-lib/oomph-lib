@@ -1,0 +1,248 @@
+\doxysection{oomph\+::Tube\+Domain Class Reference}
+\hypertarget{classoomph_1_1TubeDomain}{}\label{classoomph_1_1TubeDomain}\index{oomph::TubeDomain@{oomph::TubeDomain}}
+
+
+Tube as a domain. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the coordinate along the centreline, zeta\mbox{[}1\mbox{]} is the theta coordinate around the tube wall and zeta\mbox{[}2\mbox{]} is the radial coordinate. The outer boundary must lie at zeta\mbox{[}2\mbox{]} = 1.  
+
+
+
+
+{\ttfamily \#include $<$tube\+\_\+domain.\+h$>$}
+
+Inheritance diagram for oomph\+::Tube\+Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1TubeDomain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e}{Tube\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{volume\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{centreline\+\_\+limits}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{theta\+\_\+positions}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{radius\+\_\+box}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{nlayer}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass geometric object; start and end limit of the centreline coordinate; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; the corresponding fractions of the radius at which the central box is to be placed; and the number of layers in the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_a4289916ff42a7ad4189cf060cb35bfbb}{Tube\+Domain}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842}{operator=}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&)=\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}{\texorpdfstring{$\sim$}{\string~}\+Tube\+Domain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}{macro\+\_\+element\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{t}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+macro}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{i\+\_\+direct}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} \mbox{\hyperlink{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}{lin\+\_\+interpolate}} (\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{low}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{high}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{s}}, \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{f}})
+\begin{DoxyCompactList}\small\item\em A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s which is assumed to run from -\/1 to 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff}{Centreline\+\_\+limits}}
+\begin{DoxyCompactList}\small\item\em Storage for the limits of the centreline coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182}{Theta\+\_\+positions}}
+\begin{DoxyCompactList}\small\item\em Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \mbox{\hyperlink{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4}{Radius\+\_\+box}}
+\begin{DoxyCompactList}\small\item\em Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \mbox{\hyperlink{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114}{Nlayer}}
+\begin{DoxyCompactList}\small\item\em Number of axial layers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a}{Volume\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tube as a domain. The entire domain must be defined by a Geom\+Object with the following convention\+: zeta\mbox{[}0\mbox{]} is the coordinate along the centreline, zeta\mbox{[}1\mbox{]} is the theta coordinate around the tube wall and zeta\mbox{[}2\mbox{]} is the radial coordinate. The outer boundary must lie at zeta\mbox{[}2\mbox{]} = 1. 
+
+The domain is parametrised by five macro elements (a central box surrounded by four curved elements) in each of the nlayer slices. The labelling of the macro elements is as follows with the zeta\mbox{[}0\mbox{]} coordinate coming out of the page.
+
+\DoxyHorRuler{0}
+ \texorpdfstring{$\vert$}{|}\textbackslash{} /\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \textbackslash{} Macro / \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 3 Element 3 2 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \textbackslash{} / \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---/ \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 4 \texorpdfstring{$\vert$}{|} Macro \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} Element 0 \texorpdfstring{$\vert$}{|} 2 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/--- \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / \textbackslash{} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} 0 Macro 1 \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / Element 1 \textbackslash{} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} / $|$ \texorpdfstring{$\vert$}{|}/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|} 
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00069}{69}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e}\label{classoomph_1_1TubeDomain_a025d462a0676026e5902d07ffbb3510e} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!TubeDomain@{TubeDomain}}
+\index{TubeDomain@{TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{TubeDomain()}{TubeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::\+Tube\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}} \texorpdfstring{$\ast$}{*}}]{volume\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{centreline\+\_\+limits,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{theta\+\_\+positions,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{radius\+\_\+box,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{nlayer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor\+: Pass geometric object; start and end limit of the centreline coordinate; the theta locations marking the division between the elements of the outer ring, labelled from the lower left to the upper left in order, theta should be in the range $-\pi$ to $\pi$; the corresponding fractions of the radius at which the central box is to be placed; and the number of layers in the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00079}{79}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a4289916ff42a7ad4189cf060cb35bfbb}\label{classoomph_1_1TubeDomain_a4289916ff42a7ad4189cf060cb35bfbb} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!TubeDomain@{TubeDomain}}
+\index{TubeDomain@{TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{TubeDomain()}{TubeDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::\+Tube\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4}\label{classoomph_1_1TubeDomain_ad836e9ab146d2317ed55ee199d54b3e4} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!````~TubeDomain@{\texorpdfstring{$\sim$}{\string~}TubeDomain}}
+\index{````~TubeDomain@{\texorpdfstring{$\sim$}{\string~}TubeDomain}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TubeDomain()}{\string~TubeDomain()}}
+{\footnotesize\ttfamily oomph\+::\+Tube\+Domain\+::\texorpdfstring{$\sim$}{\string~}\+Tube\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor\+: Empty; cleanup done in base class. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00108}{108}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f}\label{classoomph_1_1TubeDomain_a4e893ffe544f30d0160c41b2aff75d7f} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!lin\_interpolate@{lin\_interpolate}}
+\index{lin\_interpolate@{lin\_interpolate}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{lin\_interpolate()}{lin\_interpolate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Tube\+Domain\+::lin\+\_\+interpolate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{low,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{high,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+A very little linear interpolation helper. Interpolate from the low point to the high point using the coordinate s which is assumed to run from -\/1 to 1. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00143}{143}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0}\label{classoomph_1_1TubeDomain_a1f16dde7ad082e2557dff9c737dae6c0} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!macro\_element\_boundary@{macro\_element\_boundary}}
+\index{macro\_element\_boundary@{macro\_element\_boundary}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{macro\_element\_boundary()}{macro\_element\_boundary()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Tube\+Domain\+::macro\+\_\+element\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+macro,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} \&}]{i\+\_\+direct,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}} $>$ \&}]{f }\end{DoxyParamCaption})}
+
+
+
+Vector representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
+
+Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s) 
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00166}{166}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+References \mbox{\hyperlink{tube__domain_8h_source_l00122}{Centreline\+\_\+limits}}, \mbox{\hyperlink{tube__domain_8h_source_l00143}{lin\+\_\+interpolate()}}, \mbox{\hyperlink{tube__domain_8h_source_l00134}{Nlayer}}, \mbox{\hyperlink{tube__domain_8h_source_l00131}{Radius\+\_\+box}}, \mbox{\hyperlink{tube__domain_8h_source_l00127}{Theta\+\_\+positions}}, and \mbox{\hyperlink{tube__domain_8h_source_l00137}{Volume\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842}\label{classoomph_1_1TubeDomain_a4dc5523d0b9493e333b0e0afc904c842} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{void}} oomph\+::\+Tube\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{const}} \mbox{\hyperlink{classoomph_1_1TubeDomain}{Tube\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff}\label{classoomph_1_1TubeDomain_a472cea9a87841cc70a3b8a65e87f6aff} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Centreline\_limits@{Centreline\_limits}}
+\index{Centreline\_limits@{Centreline\_limits}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Centreline\_limits}{Centreline\_limits}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}}$>$ oomph\+::\+Tube\+Domain\+::\+Centreline\+\_\+limits\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the limits of the centreline coordinate. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00122}{122}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114}\label{classoomph_1_1TubeDomain_a76d77b0dde9979a92e88d3d0143bf114} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Nlayer@{Nlayer}}
+\index{Nlayer@{Nlayer}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Nlayer}{Nlayer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{unsigned}} oomph\+::\+Tube\+Domain\+::\+Nlayer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of axial layers. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00134}{134}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4}\label{classoomph_1_1TubeDomain_ad70a97648fd496d9f5322e122ef907e4} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Radius\_box@{Radius\_box}}
+\index{Radius\_box@{Radius\_box}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Radius\_box}{Radius\_box}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}}$>$ oomph\+::\+Tube\+Domain\+::\+Radius\+\_\+box\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the fraction of the radius at which the central box should be located corresponding to the chosen values of theta. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00131}{131}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182}\label{classoomph_1_1TubeDomain_a893b7c0f20f3971948bf4ab04d3fe182} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Theta\_positions@{Theta\_positions}}
+\index{Theta\_positions@{Theta\_positions}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Theta\_positions}{Theta\_positions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{double}}$>$ oomph\+::\+Tube\+Domain\+::\+Theta\+\_\+positions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Storage for the dividing lines on the boundary starting from the lower left and proceeding anticlockwise to the upper left. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00127}{127}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+\Hypertarget{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a}\label{classoomph_1_1TubeDomain_a6dd70d59e8cd65e44444f78fbfa1f97a} 
+\index{oomph::TubeDomain@{oomph::TubeDomain}!Volume\_pt@{Volume\_pt}}
+\index{Volume\_pt@{Volume\_pt}!oomph::TubeDomain@{oomph::TubeDomain}}
+\doxysubsubsection{\texorpdfstring{Volume\_pt}{Volume\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableTriangleMesh}{Geom\+Object}}\texorpdfstring{$\ast$}{*} oomph\+::\+Tube\+Domain\+::\+Volume\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to geometric object that represents the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{tube__domain_8h_source_l00137}{137}} of file \mbox{\hyperlink{tube__domain_8h_source}{tube\+\_\+domain.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{tube__domain_8h_source_l00166}{macro\+\_\+element\+\_\+boundary()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{tube__domain_8h}{tube\+\_\+domain.\+h}}\end{DoxyCompactItemize}

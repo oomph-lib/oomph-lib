@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: MyEllipse Class Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classMyEllipse-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MyEllipse Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Oscillating ellipse.  
+ <a href="classMyEllipse.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for MyEllipse:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMyEllipse.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aaa00984813af171e611e420eb3433653" id="r_aaa00984813af171e611e420eb3433653"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#aaa00984813af171e611e420eb3433653">MyEllipse</a> (const double &amp;a, const double &amp;b, const double &amp;a_hat, const double &amp;b_hat, const double &amp;period, Time *time_pt)</td></tr>
+<tr class="memdesc:aaa00984813af171e611e420eb3433653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Pass half axes, amplitudes of their variation, period of oscillation and pointer to time object.  <br /></td></tr>
+<tr class="separator:aaa00984813af171e611e420eb3433653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f2d3fb269c57fb26b4db6d9a0c7c05" id="r_ac2f2d3fb269c57fb26b4db6d9a0c7c05"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#ac2f2d3fb269c57fb26b4db6d9a0c7c05">~MyEllipse</a> ()</td></tr>
+<tr class="memdesc:ac2f2d3fb269c57fb26b4db6d9a0c7c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor: Empty.  <br /></td></tr>
+<tr class="separator:ac2f2d3fb269c57fb26b4db6d9a0c7c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b139a2f4564005773c83325f2414e3e" id="r_a7b139a2f4564005773c83325f2414e3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#a7b139a2f4564005773c83325f2414e3e">position</a> (const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a7b139a2f4564005773c83325f2414e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current position vector to material point at Lagrangian coordinate xi.  <br /></td></tr>
+<tr class="separator:a7b139a2f4564005773c83325f2414e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f75bf33969037e35d779738a8493f5" id="r_a93f75bf33969037e35d779738a8493f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#a93f75bf33969037e35d779738a8493f5">position</a> (const unsigned &amp;t, const Vector&lt; double &gt; &amp;xi, Vector&lt; double &gt; &amp;r) const</td></tr>
+<tr class="memdesc:a93f75bf33969037e35d779738a8493f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parametrised position on object: r(xi). Evaluated at previous time level. t=0: current time; t&gt;0: previous time level.  <br /></td></tr>
+<tr class="separator:a93f75bf33969037e35d779738a8493f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aa2a0efd0a39f9d4fc307a6ff011682ed" id="r_aa2a0efd0a39f9d4fc307a6ff011682ed"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#aa2a0efd0a39f9d4fc307a6ff011682ed">A</a></td></tr>
+<tr class="memdesc:aa2a0efd0a39f9d4fc307a6ff011682ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">x-half axis  <br /></td></tr>
+<tr class="separator:aa2a0efd0a39f9d4fc307a6ff011682ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f991996b9040fe94b942eab7e51f0af" id="r_a8f991996b9040fe94b942eab7e51f0af"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#a8f991996b9040fe94b942eab7e51f0af">B</a></td></tr>
+<tr class="memdesc:a8f991996b9040fe94b942eab7e51f0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">y-half axis  <br /></td></tr>
+<tr class="separator:a8f991996b9040fe94b942eab7e51f0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653e71cf296cdc86cc595d16f18004dd" id="r_a653e71cf296cdc86cc595d16f18004dd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#a653e71cf296cdc86cc595d16f18004dd">A_hat</a></td></tr>
+<tr class="memdesc:a653e71cf296cdc86cc595d16f18004dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Amplitude of variation in x-half axis.  <br /></td></tr>
+<tr class="separator:a653e71cf296cdc86cc595d16f18004dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d06488447d80f16b80ed8915edf3e3" id="r_a39d06488447d80f16b80ed8915edf3e3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#a39d06488447d80f16b80ed8915edf3e3">B_hat</a></td></tr>
+<tr class="memdesc:a39d06488447d80f16b80ed8915edf3e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Amplitude of variation in y-half axis.  <br /></td></tr>
+<tr class="separator:a39d06488447d80f16b80ed8915edf3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab098069ab23bbbd8f30b0da3523dc87f" id="r_ab098069ab23bbbd8f30b0da3523dc87f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#ab098069ab23bbbd8f30b0da3523dc87f">T</a></td></tr>
+<tr class="memdesc:ab098069ab23bbbd8f30b0da3523dc87f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Period of oscillation.  <br /></td></tr>
+<tr class="separator:ab098069ab23bbbd8f30b0da3523dc87f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1c4c863a599ce87bdff1abb9971953" id="r_abc1c4c863a599ce87bdff1abb9971953"><td class="memItemLeft" align="right" valign="top">Time *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyEllipse.html#abc1c4c863a599ce87bdff1abb9971953">Time_pt</a></td></tr>
+<tr class="memdesc:abc1c4c863a599ce87bdff1abb9971953"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to time object.  <br /></td></tr>
+<tr class="separator:abc1c4c863a599ce87bdff1abb9971953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Oscillating ellipse. </p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi)  \]" src="form_24.png" width="159" height="14"/>
+</p>
+ <p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi)  \]" src="form_25.png" width="154" height="18"/>
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00049">49</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaa00984813af171e611e420eb3433653" name="aaa00984813af171e611e420eb3433653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa00984813af171e611e420eb3433653">&#9670;&#160;</a></span>MyEllipse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MyEllipse::MyEllipse </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>a_hat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>b_hat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>period</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Time *&#160;</td>
+          <td class="paramname"><em>time_pt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor: Pass half axes, amplitudes of their variation, period of oscillation and pointer to time object. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00056">56</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+</div>
+</div>
+<a id="ac2f2d3fb269c57fb26b4db6d9a0c7c05" name="ac2f2d3fb269c57fb26b4db6d9a0c7c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f2d3fb269c57fb26b4db6d9a0c7c05">&#9670;&#160;</a></span>~MyEllipse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual MyEllipse::~MyEllipse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor: Empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00063">63</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a93f75bf33969037e35d779738a8493f5" name="a93f75bf33969037e35d779738a8493f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f75bf33969037e35d779738a8493f5">&#9670;&#160;</a></span>position() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MyEllipse::position </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parametrised position on object: r(xi). Evaluated at previous time level. t=0: current time; t&gt;0: previous time level. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">83</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00099">A</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00105">A_hat</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00102">B</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00108">B_hat</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00111">T</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00114">Time_pt</a>.</p>
+
+</div>
+</div>
+<a id="a7b139a2f4564005773c83325f2414e3e" name="a7b139a2f4564005773c83325f2414e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b139a2f4564005773c83325f2414e3e">&#9670;&#160;</a></span>position() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MyEllipse::position </td>
+          <td>(</td>
+          <td class="paramtype">const Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Current position vector to material point at Lagrangian coordinate xi. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">67</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00099">A</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00105">A_hat</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00102">B</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00108">B_hat</a>, <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00111">T</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00114">Time_pt</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa2a0efd0a39f9d4fc307a6ff011682ed" name="aa2a0efd0a39f9d4fc307a6ff011682ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2a0efd0a39f9d4fc307a6ff011682ed">&#9670;&#160;</a></span>A</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double MyEllipse::A</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>x-half axis </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00099">99</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<a id="a653e71cf296cdc86cc595d16f18004dd" name="a653e71cf296cdc86cc595d16f18004dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a653e71cf296cdc86cc595d16f18004dd">&#9670;&#160;</a></span>A_hat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double MyEllipse::A_hat</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Amplitude of variation in x-half axis. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00105">105</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<a id="a8f991996b9040fe94b942eab7e51f0af" name="a8f991996b9040fe94b942eab7e51f0af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f991996b9040fe94b942eab7e51f0af">&#9670;&#160;</a></span>B</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double MyEllipse::B</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>y-half axis </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00102">102</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<a id="a39d06488447d80f16b80ed8915edf3e3" name="a39d06488447d80f16b80ed8915edf3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d06488447d80f16b80ed8915edf3e3">&#9670;&#160;</a></span>B_hat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double MyEllipse::B_hat</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Amplitude of variation in y-half axis. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00108">108</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<a id="ab098069ab23bbbd8f30b0da3523dc87f" name="ab098069ab23bbbd8f30b0da3523dc87f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab098069ab23bbbd8f30b0da3523dc87f">&#9670;&#160;</a></span>T</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double MyEllipse::T</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Period of oscillation. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00111">111</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<a id="abc1c4c863a599ce87bdff1abb9971953" name="abc1c4c863a599ce87bdff1abb9971953"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1c4c863a599ce87bdff1abb9971953">&#9670;&#160;</a></span>Time_pt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Time* MyEllipse::Time_pt</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to time object. </p>
+
+<p class="definition">Definition at line <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00114">114</a> of file <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00083">position()</a>, and <a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html#l00067">position()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="two__d__unsteady__heat__2adapt_8cc_source.html">two_d_unsteady_heat_2adapt.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:20:15
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

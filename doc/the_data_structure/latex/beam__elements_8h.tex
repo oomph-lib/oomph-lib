@@ -1,0 +1,20 @@
+\doxysection{beam\+\_\+elements.\+h File Reference}
+\hypertarget{beam__elements_8h}{}\label{beam__elements_8h}\index{beam\_elements.h@{beam\_elements.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of Kirchhoff-\/\+Love large-\/displacement (but linearly-\/elastic) thin-\/beam theory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1HermiteBeamElement}{oomph\+::\+Hermite\+Beam\+Element}}
+\begin{DoxyCompactList}\small\item\em Hermite Kirchhoff Love beam. Implements \doxylink{classoomph_1_1KirchhoffLoveBeamEquations}{Kirchhoff\+Love\+Beam\+Equations} using 2-\/node Hermite elements as the underlying geometrical elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement}{oomph\+::\+FSIHermite\+Beam\+Element}}
+\begin{DoxyCompactList}\small\item\em Hermite Kirchhoff Love beam "{}upgraded"{} to a \doxylink{classoomph_1_1FSIWallElement}{FSIWall\+Element} (and thus, by inheritance, a \doxylink{classoomph_1_1GeomObject}{Geom\+Object}), so it can be used in FSI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01HermiteBeamElement_01_4}{oomph\+::\+Face\+Geometry$<$ Hermite\+Beam\+Element $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for the Hermite\+Beam elements\+: Solid point element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ClampedSlidingHermiteBeamBoundaryConditionElement}{oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element}}
+\begin{DoxyCompactList}\small\item\em Element that allows the imposition of boundary conditions for a beam that is clamped but can slide along a line which is specified by a position vector to that line and the normal vector to it. The endpoint of the beam is forced to stay on that line and meet it at a right angle. This is achieved with Lagrange multipliers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

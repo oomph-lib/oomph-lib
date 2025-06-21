@@ -1,0 +1,32 @@
+\doxysection{oomph\+::Node\+Ordering Namespace Reference}
+\hypertarget{namespaceoomph_1_1NodeOrdering}{}\label{namespaceoomph_1_1NodeOrdering}\index{oomph::NodeOrdering@{oomph::NodeOrdering}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{namespaceoomph_1_1NodeOrdering_ab4b56433bc36410fa77a0038a0996ecb}{node\+\_\+global\+\_\+position\+\_\+comparison}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nd1\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{nd2\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Function for ordering nodes. Return true if first node\textquotesingle{}s position is "{}before"{} second nodes. Dimension 0 checked first, then... until they are different (by more than tol=1e-\/10). If they are both in exactly the same place an error is thrown. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceoomph_1_1NodeOrdering_ab4b56433bc36410fa77a0038a0996ecb}\label{namespaceoomph_1_1NodeOrdering_ab4b56433bc36410fa77a0038a0996ecb} 
+\index{oomph::NodeOrdering@{oomph::NodeOrdering}!node\_global\_position\_comparison@{node\_global\_position\_comparison}}
+\index{node\_global\_position\_comparison@{node\_global\_position\_comparison}!oomph::NodeOrdering@{oomph::NodeOrdering}}
+\doxysubsubsection{\texorpdfstring{node\_global\_position\_comparison()}{node\_global\_position\_comparison()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Node\+Ordering\+::node\+\_\+global\+\_\+position\+\_\+comparison (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nd1\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}}]{nd2\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Function for ordering nodes. Return true if first node\textquotesingle{}s position is "{}before"{} second nodes. Dimension 0 checked first, then... until they are different (by more than tol=1e-\/10). If they are both in exactly the same place an error is thrown. 
+
+
+
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02926}{2926}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{geom__objects_8h_source_l00177}{oomph\+::\+Geom\+Object\+::ndim()}}, and \mbox{\hyperlink{oomph__utilities_8h_source_l00199}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}.
+
+
+
+Referenced by \mbox{\hyperlink{mesh_8cc_source_l00532}{oomph\+::\+Mesh\+::get\+\_\+node\+\_\+reordering()}}.
+

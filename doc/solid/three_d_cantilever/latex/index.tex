@@ -1,0 +1,425 @@
+\chapter{Demo problem\+: Bending of a 3D non-\/symmetric cantilever beam made of incompressible material}
+\hypertarget{index}{}\label{index}\index{Demo problem: Bending of a 3D non-\/symmetric cantilever beam made of incompressible material@{Demo problem: Bending of a 3D non-\/symmetric cantilever beam made of incompressible material}}
+In this tutorial we demonstrate the solution of a 3D solid mechanics problem\+: the large-\/amplitude bending deformation of a non-\/symmetric cantilever beam made of incompressible Mooney-\/\+Rivlin material.
+
+Here is an animation of the beam\textquotesingle{}s deformation. In its undeformed configuration, the beam is straight and its cross-\/section is given by a quarter circle. The beam is loaded by an increasing gravitational body force, acting in the negative $ y$-\/direction, while its left end (at $ z=0 $) is held fixed. Because of its non-\/symmetric cross-\/section, the beam\textquotesingle{}s downward bending deformation is accompanied by a sideways deflection.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{cantilever}
+\doxyfigcaption{Animation of the beam\textquotesingle{}s bending deformation. }
+\end{DoxyImage}
+
+
+Note how the automatic mesh adaptation refines the mesh in the region of strongest bending.
+
+\DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_mesh}{}\doxysection{\texorpdfstring{The mesh}{The mesh}}\label{index_mesh}
+We use multiple inheritance to upgrade the already-\/existing refineable "{}quarter tube mesh"{} to a solid mesh. Following a call to the constructor of the underlying meshes, we set the nodes\textquotesingle{} Lagrangian coordinates to their current Eulerian positions to make the initial configuration stress-\/free.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//======================start\_mesh=========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Simple\ quarter\ tube\ mesh\ upgraded\ to\ become\ a\ solid\ mesh}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh}}\ :\ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ RefineableQuarterTubeMesh<ELEMENT>,\ }
+\DoxyCodeLine{\ \textcolor{keyword}{public}\ \textcolor{keyword}{virtual}\ SolidMesh\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh}}(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{GeomObject}}*\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{wall\_pt}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{fract\_mid}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\&\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\&\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nlayer}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{TimeStepper}}*\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{time\_stepper\_pt}}=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh_a97c25a8845b2d8ab2a4aef1c0407bacd}{Mesh::Default\_TimeStepper}})\ :}
+\DoxyCodeLine{\ \ QuarterTubeMesh<\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ELEMENT}}>(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{wall\_pt}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{fract\_mid}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nlayer}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{time\_stepper\_pt}}),}
+\DoxyCodeLine{\ \ RefineableQuarterTubeMesh<\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ELEMENT}}>(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{wall\_pt}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{fract\_mid}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nlayer}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{time\_stepper\_pt}})\ }
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Assign\ the\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{set\_lagrangian\_nodal\_coordinates}}();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Empty\ Destructor}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh_a157397dff3fb4ab8b1daea787bc9f97c}{\string~RefineableElasticQuarterTubeMesh}}()\ \{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ ~\newline
+ \DoxyHorRuler{0}
+\hypertarget{index_global}{}\doxysection{\texorpdfstring{Global parameters and functions}{Global parameters and functions}}\label{index_global}
+As usual, we define a namespace, {\ttfamily \doxylink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}, to define the problem parameters\+: the length of the cantilever beam, $ L $, a (pointer to) a strain energy function, the constitutive parameters $ C_1 $ and $ C_2 $ for the Mooney-\/\+Rivlin strain energy function, and a (pointer to) a constitutive equation. Finally, we define the gravitational body force which acts in the negative $ y$-\/direction.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Global\ variables}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Length\ of\ beam}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{L}}=10.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ strain\ energy\ function}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{StrainEnergyFunction}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Strain\_energy\_function\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ First\ "{}Mooney\ Rivlin"{}\ coefficient\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Second\ "{}Mooney\ Rivlin"{}\ coefficient\ }}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{C2}}=1.3;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Pointer\ to\ constitutive\ law}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ConstitutiveLaw}}*\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}=0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dim\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Non-\/dimensional\ gravity\ as\ body\ force}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{gravity}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{time}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\ \&\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}})}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}}[0]=0.0;}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}}[1]=-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Gravity}};}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}}[2]=0.0;}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ namespace}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_main}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_main}
+If the code is executed without command line arguments we perform a single simulation. We start by creating the strain energy function and pass it to the constructor of the strain-\/energy-\/based constitutive equation. We then build the problem object, using {\ttfamily oomph-\/lib\textquotesingle{}s} large-\/displacement Taylor-\/\+Hood solid mechanics elements which are based on a continuous-\/pressure/displacement formulation.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Driver\ for\ 3D\ cantilever\ beam\ loaded\ by\ gravity}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{argc}},\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{argv}}[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Run\ main\ demo\ code\ if\ no\ command\ line\ arguments\ are\ specified}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{argc}}==1)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ incompressible\ Mooney\ Rivlin\ strain\ energy\ function}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{MooneyRivlin}}(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{Global\_Physical\_Variables::C2}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Define\ a\ constitutive\ law\ (based\ on\ strain\ energy\ function)}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{IsotropicStrainEnergyFunctionConstitutiveLaw}}(}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Set\ up\ the\ problem\ with\ continous\ pressure/displacement}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{CantileverProblem<RefineableQPVDElementWithContinuousPressure<3>}}\ >\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{problem}};}
+
+\end{DoxyCodeInclude}
+ We document the initial configuration before starting a parameter study in which the magnitude of the gravitational body force is increased in small steps\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{problem}}.doc\_solution();}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Initial\ values\ for\ parameter\ values}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}=0.0;}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//Parameter\ incrementation}}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nstep}}=10;\ }
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{g\_increment}}=5.0e-\/4;\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}=0;\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}<\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nstep}};\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}++)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Increment\ load}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}+=\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{g\_increment}};}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Solve\ the\ problem\ with\ Newton's\ method,\ allowing}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ up\ to\ max\_adapt\ mesh\ adaptations\ after\ every\ solve.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{max\_adapt}}=1;\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{problem}}.newton\_solve(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{max\_adapt}});}
+\DoxyCodeLine{\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Doc\ solution}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{problem}}.doc\_solution();\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ end\ main\ demo\ code}}
+
+\end{DoxyCodeInclude}
+ If the code is executed with a non-\/zero number of command line arguments, it performs a large number of additional self tests that we will not discuss here. See the driver code \href{../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc}{\texttt{ three\+\_\+d\+\_\+cantilever.\+cc}} for details.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_class}{}\doxysection{\texorpdfstring{The problem class}{The problem class}}\label{index_class}
+The problem class contains the usual member functions. No action is required before the mesh adaptation; we overload the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} to pin the redundant solid pressure degrees of freedom afterwards.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Problem\ class\ for\ the\ 3D\ cantilever\ "{}beam"{}\ structure.}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{classCantileverProblem}{CantileverProblem}}\ :\ \textcolor{keyword}{public}\ Problem}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Constructor:}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem}}();\ }
+\DoxyCodeLine{\ \textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a4a70a4328d287aaa15c7811562122013}{actions\_after\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Update\ function\ (empty)}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a293902b825898ce043ffce3f0691f5a5}{actions\_before\_newton\_solve}}()\ \{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ before\ adapt.\ Empty}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a50f8964219c507562945655e0ed5fc23}{actions\_before\_adapt}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Actions\ after\ adapt}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_af4d135ace3eac657b38de362e1644c75}{actions\_after\_adapt}}()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh_a97c25a8845b2d8ab2a4aef1c0407bacd}{PVDEquationsBase<3>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classCantileverProblem_afae2bac330172d85ab316bb94a27c822}{mesh\_pt}}()-\/>\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{element\_pt}}());}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();}
+
+\end{DoxyCodeInclude}
+ We overload the {\ttfamily Problem\+::mesh\+\_\+pt()} function to return a pointer to the specific mesh used in this problem\+:
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ Access\ function\ for\ the\ mesh}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}*\ mesh\_pt()}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ \ \ Problem::mesh\_pt());}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCodeInclude}
+ The private member data stores a {\ttfamily Doc\+Info} object in which we will store the name of the output directory.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ ///\ DocInfo\ object\ for\ output}}
+\DoxyCodeLine{\textcolor{comment}{}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{DocInfo}}\ Doc\_info;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_constructor}{}\doxysection{\texorpdfstring{The problem constructor}{The problem constructor}}\label{index_constructor}
+We start by creating the {\ttfamily Geom\+Object} that defines the curvilinear boundary of the beam\+: a circular cylinder of unit radius.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=======================================\ }}
+\DoxyCodeLine{\textcolor{comment}{///\ Constructor:\ }}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================\ }}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem<ELEMENT>::CantileverProblem}}()\ }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ geometric\ object\ that\ defines\ curvilinear\ boundary\ of}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ beam:\ Elliptical\ tube\ with\ half\ axes\ =\ radius\ =\ 1.0}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{radius}}=1.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{GeomObject}}*\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{wall\_pt}}=\textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{EllipticalTube}}(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{radius}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{radius}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Bounding\ Lagrangian\ coordinates}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}}(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}}[0]=0.0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}}[1]=0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Vector<double>}}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}}(2);}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}}[0]=\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1b8bfc451f6b7ac89eca18f04338f47f}{Global\_Physical\_Variables::L}};}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}}[1]=2.0*\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{atan}}(1.0);}
+
+\end{DoxyCodeInclude}
+ We build the mesh, using six axial layers of elements, before creating an error estimator and specifying the error targets for the adaptive mesh refinement.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ \#\ of\ layers}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nlayer}}=6;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Radial\ divider\ is\ located\ half-\/way\ along\ the\ circumference}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{frac\_mid}}=0.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Now\ create\ the\ mesh\ }}
+\DoxyCodeLine{\ Problem::mesh\_pt()\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}}
+\DoxyCodeLine{\ \ (\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{wall\_pt}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_lo}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{frac\_mid}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{xi\_hi}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{nlayer}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Set\ error\ estimator}}
+\DoxyCodeLine{\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}*\ \textcolor{keyword}{>}(}
+\DoxyCodeLine{\ \ mesh\_pt())-\/>\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{spatial\_error\_estimator\_pt}}()=\textcolor{keyword}{new}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{Z2ErrorEstimator}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Error\ targets\ for\ adaptive\ refinement}}
+\DoxyCodeLine{\ mesh\_pt()-\/>max\_permitted\_error()=0.05;}
+\DoxyCodeLine{\ mesh\_pt()-\/>min\_permitted\_error()=0.005;}
+
+\end{DoxyCodeInclude}
+ We complete the build of the elements by specifying the constitutive equation and the body force. We check that the element is based on a pressure/displacement formulation, and, if so, select an incompressible formulation. (This check is only required because the self-\/tests not shown here also include cases in which the problem is solved using a displacement-\/based formulation with compressible elasticity; see also the section \doxysectlink{index_incompr}{How to enforce incompressibility}{2} below).
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Complete\ build\ of\ elements}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_element}}=mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}=0;\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}<\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_element}};\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Cast\ to\ a\ solid\ element}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ELEMENT}}\ *\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{el\_pt}}\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ELEMENT}}*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}));}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ constitutive\ law}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{el\_pt}}-\/>constitutive\_law\_pt()\ =}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Set\ the\ body\ force}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{el\_pt}}-\/>body\_force\_fct\_pt()\ =\ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0777aef63372db7f91ad894c38159681}{Global\_Physical\_Variables::gravity}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Material\ is\ incompressble:\ Use\ incompressible\ displacement/pressure}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ formulation\ (if\ the\ element\ is\ pressure\ based,\ that\ is!)}}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{PVDEquationsWithPressure<3>}}*\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{cast\_el\_pt}}\ =\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{PVDEquationsWithPressure<3>}}*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}));}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{cast\_el\_pt}}!=0)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{cast\_el\_pt}}-\/>set\_incompressible();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \}\ \textcolor{comment}{//\ done\ build\ of\ elements}}
+
+\end{DoxyCodeInclude}
+ We fix the position of all nodes at the left end of the beam (on boundary 0) and pin any redundant solid pressures.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ left\ boundary\ (boundary\ 0)\ in\ all\ directions}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}}=0;\ }
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_side}}\ =\ mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}});}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \textcolor{comment}{//Loop\ over\ the\ nodes}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}=0;\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}<\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_side}};\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}}++)}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}})-\/>pin\_position(0);}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}})-\/>pin\_position(1);}
+\DoxyCodeLine{\ \ \ mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{b}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{i}})-\/>pin\_position(2);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Pin\ the\ redundant\ solid\ pressures\ (if\ any)}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh_a97c25a8845b2d8ab2a4aef1c0407bacd}{PVDEquationsBase<3>::pin\_redundant\_nodal\_solid\_pressures}}(}
+\DoxyCodeLine{\ \ mesh\_pt()-\/>\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{element\_pt}}());}
+
+\end{DoxyCodeInclude}
+ Finally, we assign the equation numbers and define the output directory.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//Assign\ equation\ numbers}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{assign\_eqn\_numbers}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Prepare\ output\ directory}}
+\DoxyCodeLine{\ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ of\ constructor}}
+
+\end{DoxyCodeInclude}
+ \DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_doc}{}\doxysection{\texorpdfstring{Post-\/processing}{Post-processing}}\label{index_doc}
+The post-\/processing function {\ttfamily doc\+\_\+solution()} simply outputs the shape of the deformed beam.
+
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
+\DoxyCodeLine{\textcolor{comment}{///\ Doc\ the\ solution}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class}\ ELEMENT>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{CantileverProblem<ELEMENT>::doc\_solution}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{ofstream}}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{some\_file}};}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{filename}}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Number\ of\ plot\ points}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_plot}}\ =\ 5;\ }
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Output\ shape\ of\ deformed\ body}}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{snprintf}}(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{filename}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{filename}}),\ \textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ Doc\_info.number());}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{some\_file}}.open(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{filename}});}
+\DoxyCodeLine{\ mesh\_pt()-\/>output(\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{some\_file}},\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{n\_plot}});}
+\DoxyCodeLine{\ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{some\_file}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Increment\ label\ for\ output\ files}}
+\DoxyCodeLine{\ Doc\_info.number()++;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//end\ doc}}
+
+\end{DoxyCodeInclude}
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_exercises}{}\doxysection{\texorpdfstring{Comments and exercises}{Comments and exercises}}\label{index_exercises}
+\hypertarget{index_incompr}{}\doxysubsection{\texorpdfstring{How to enforce incompressibility}{How to enforce incompressibility}}\label{index_incompr}
+We stress that the imposition of incompressibility must be requested explicitly via the element\textquotesingle{}s member function {\ttfamily incompressible()}. Mathematically, incompressibility is enforced via a Lagrange multiplier which manifests itself physically as the pressure. Incompressibility can therefore only be enforced for elements that employ the pressure-\/displacement formulation of the principle of virtual displacements. This is why we the {\ttfamily Problem} constructor checked if the element is derived from the {\ttfamily PVDEquations\+With\+Pressure} class before setting the element\textquotesingle{}s {\ttfamily incompressible} flag to {\ttfamily true}.
+
+As usual, {\ttfamily oomph-\/lib} provides self-\/tests that assess if the enforcement incompressibility (or the lack thereof) is consistent\+:
+\begin{DoxyItemize}
+\item The compiler will not allow the user to enforce incompressibility on elements that are based on the displacement form of the principle of virtual displacements. ~\newline
+~\newline
+
+\item Certain constitutive laws, such as the Mooney-\/\+Rivlin law used in the present example require an incompressible formulation. If {\ttfamily oomph-\/lib} is compiled with the {\ttfamily PARANOID} flag, an error is thrown if such a constitutive law is used by an element for which incompressibility has not been requested. ~\newline
+~\newline
+ \begin{center} {\bfseries{Recall that the default setting is not to enforce incompressibility!}} \end{center}  ~\newline
+ If the library is compiled without the {\ttfamily PARANOID} flag no warning will be issued but the results will be "{}wrong"{} at least in the sense that the material does not behave like an incompressible Mooney-\/\+Rivlin solid. In fact, it is likely that the Newton solver will diverge. Anyway, as we keep saying, without the {\ttfamily PARANOID} flag, you\textquotesingle{}re on your own! ~\newline
+~\newline
+
+\item Some constitutive laws can be used for compressible and incompressible behaviour. In this case it is important to set the {\ttfamily incompressible()} flag to the correct value. This issue is discussed in more detail in \href{../../compressed_square/html/index.html}{\texttt{ another tutorial.}}
+\end{DoxyItemize}You should experiment with different combinations of constitutive laws and element types to familiarise yourself with these.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+:~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/three_d_cantilever/}{\texttt{ demo\+\_\+drivers/solid/three\+\_\+d\+\_\+cantilever/ }} \end{center} ~\newline
+
+\item The driver code is\+: ~\newline
+~\newline
+\begin{center} \href{../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc}{\texttt{ demo\+\_\+drivers/solid/three\+\_\+d\+\_\+cantilever/three\+\_\+d\+\_\+cantilever.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

@@ -1,0 +1,279 @@
+\doxysection{oomph\+::Hijacked\+Element\+Base Class Reference}
+\hypertarget{classoomph_1_1HijackedElementBase}{}\label{classoomph_1_1HijackedElementBase}\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+
+
+Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided.  
+
+
+
+
+{\ttfamily \#include $<$hijacked\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Hijacked\+Element\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.191489cm]{classoomph_1_1HijackedElementBase}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}{Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, initialise the pointer to the equation numbers for the storage to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}{\texorpdfstring{$\sim$}{\string~}\+Hijacked\+Element\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, destroy the storage for the equation numbers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}{unhijack\+\_\+all\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Reset the hijacked data pt, so that none of the equations in the element are hijacked. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}{residual\+\_\+multiplier}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Return the value of the residual multiplier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}{residual\+\_\+multiplier\+\_\+pt}} ()
+\begin{DoxyCompactList}\small\item\em Return the pointer to the residual multiplier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}{hijack\+\_\+global\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+eqn\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}{unhijack\+\_\+global\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{global\+\_\+eqn\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::set$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a Set of pointers to the equation numbers that will be hijacked by this element. Note that these MUST be pointers because hijacking information is set BEFORE global equation numbers have been assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}{Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}{Residual\+\_\+multiplier\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{static}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}{Default\+\_\+residual\+\_\+multiplier}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Static default value for the double that multiplies the original residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hijacked\+Element base class that provides storage and access funcitons for pointers to the global equation numbers that are hijacked by the Hijacked\+Element. A default residuals multiplier is also provided. 
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00044}{44}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e}\label{classoomph_1_1HijackedElementBase_ad062d9c27f6fd3d613a86b32980fa71e} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!HijackedElementBase@{HijackedElementBase}}
+\index{HijackedElementBase@{HijackedElementBase}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{HijackedElementBase()}{HijackedElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, initialise the pointer to the equation numbers for the storage to zero. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00102}{Default\+\_\+residual\+\_\+multiplier}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040}\label{classoomph_1_1HijackedElementBase_af3393a98fc80a2f7761046920b4a3040} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!````~HijackedElementBase@{\texorpdfstring{$\sim$}{\string~}HijackedElementBase}}
+\index{````~HijackedElementBase@{\texorpdfstring{$\sim$}{\string~}HijackedElementBase}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HijackedElementBase()}{\string~HijackedElementBase()}}
+{\footnotesize\ttfamily oomph\+::\+Hijacked\+Element\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Hijacked\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor, destroy the storage for the equation numbers. 
+
+Destructor that cleans up any memory allocated by the class. 
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{41}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5}\label{classoomph_1_1HijackedElementBase_ac518df71f978c2b80cd25a1283353ab5} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!hijack\_global\_eqn@{hijack\_global\_eqn}}
+\index{hijack\_global\_eqn@{hijack\_global\_eqn}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{hijack\_global\_eqn()}{hijack\_global\_eqn()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hijacked\+Element\+Base\+::hijack\+\_\+global\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{global\+\_\+eqn\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mark the global equation, addressed by global\+\_\+eqn\+\_\+pt, as hijacked by this element. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{62}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00188}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+external\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00160}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+internal\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00240}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+position\+\_\+value()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00279}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+spine\+\_\+value()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value()}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748}\label{classoomph_1_1HijackedElementBase_aca8fb139dcd8632391ba601c87692748} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier@{residual\_multiplier}}
+\index{residual\_multiplier@{residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{residual\_multiplier()}{residual\_multiplier()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the value of the residual multiplier. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00395}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00377}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals()}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d}\label{classoomph_1_1HijackedElementBase_a8fb2d61b46a5b1d79890ec50e80d593d} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!residual\_multiplier\_pt@{residual\_multiplier\_pt}}
+\index{residual\_multiplier\_pt@{residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{residual\_multiplier\_pt()}{residual\_multiplier\_pt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \texorpdfstring{$\ast$}{*}\& oomph\+::\+Hijacked\+Element\+Base\+::residual\+\_\+multiplier\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the pointer to the residual multiplier. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00076}{76}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{Residual\+\_\+multiplier\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad}\label{classoomph_1_1HijackedElementBase_a0a373a87d121205b9cc0fd54ea41f4ad} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_all\_data@{unhijack\_all\_data}}
+\index{unhijack\_all\_data@{unhijack\_all\_data}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{unhijack\_all\_data()}{unhijack\_all\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hijacked\+Element\+Base\+::unhijack\+\_\+all\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset the hijacked data pt, so that none of the equations in the element are hijacked. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00064}{64}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f}\label{classoomph_1_1HijackedElementBase_aa94e2c93374151302879645f4c354c3f} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!unhijack\_global\_eqn@{unhijack\_global\_eqn}}
+\index{unhijack\_global\_eqn@{unhijack\_global\_eqn}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{unhijack\_global\_eqn()}{unhijack\_global\_eqn()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Hijacked\+Element\+Base\+::unhijack\+\_\+global\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \&}]{global\+\_\+eqn\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The global equation, addressed by global\+\_\+eqn\+\_\+pt, is no longer hijacked by this element. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8cc_source_l00079}{79}} of file \mbox{\hyperlink{hijacked__elements_8cc_source}{hijacked\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a}\label{classoomph_1_1HijackedElementBase_afd87cc7c33c2b846c5f7a373c352f13a} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Default\_residual\_multiplier@{Default\_residual\_multiplier}}
+\index{Default\_residual\_multiplier@{Default\_residual\_multiplier}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Default\_residual\_multiplier}{Default\_residual\_multiplier}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Hijacked\+Element\+Base\+::\+Default\+\_\+residual\+\_\+multiplier = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Static default value for the double that multiplies the original residuals. 
+
+Static default value of the multiplier for the original residuals The contribution to the total residuals is the product of the multiplier and the original value of the residuals. 
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{Hijacked\+Element\+Base()}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5}\label{classoomph_1_1HijackedElementBase_a9c3a9a4e39ee5e3af0f5594c31f532c5} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_global\_eqn\_number\_pt@{Hijacked\_global\_eqn\_number\_pt}}
+\index{Hijacked\_global\_eqn\_number\_pt@{Hijacked\_global\_eqn\_number\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Hijacked\_global\_eqn\_number\_pt}{Hijacked\_global\_eqn\_number\_pt}}
+{\footnotesize\ttfamily std\+::set$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{long}}\texorpdfstring{$\ast$}{*}$>$\texorpdfstring{$\ast$}{*} oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+global\+\_\+eqn\+\_\+number\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to a Set of pointers to the equation numbers that will be hijacked by this element. Note that these MUST be pointers because hijacking information is set BEFORE global equation numbers have been assigned. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00086}{86}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00318}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00062}{hijack\+\_\+global\+\_\+eqn()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00064}{unhijack\+\_\+all\+\_\+data()}}, \mbox{\hyperlink{hijacked__elements_8cc_source_l00079}{unhijack\+\_\+global\+\_\+eqn()}}, and \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{\texorpdfstring{$\sim$}{\string~}\+Hijacked\+Element\+Base()}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c}\label{classoomph_1_1HijackedElementBase_ae604da2f744f328f3866a2cefa3aa80c} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Hijacked\_local\_eqn\_number\_pt@{Hijacked\_local\_eqn\_number\_pt}}
+\index{Hijacked\_local\_eqn\_number\_pt@{Hijacked\_local\_eqn\_number\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Hijacked\_local\_eqn\_number\_pt}{Hijacked\_local\_eqn\_number\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{int}}$>$\texorpdfstring{$\ast$}{*} oomph\+::\+Hijacked\+Element\+Base\+::\+Hijacked\+\_\+local\+\_\+eqn\+\_\+number\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to a vector of integers containing the local equation numbers of any hijacked variables in the element. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00318}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00395}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00377}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::get\+\_\+residuals()}}, and \mbox{\hyperlink{hijacked__elements_8cc_source_l00041}{\texorpdfstring{$\sim$}{\string~}\+Hijacked\+Element\+Base()}}.
+
+\Hypertarget{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16}\label{classoomph_1_1HijackedElementBase_a283509b7af09479e7a1cb8c0e05a8c16} 
+\index{oomph::HijackedElementBase@{oomph::HijackedElementBase}!Residual\_multiplier\_pt@{Residual\_multiplier\_pt}}
+\index{Residual\_multiplier\_pt@{Residual\_multiplier\_pt}!oomph::HijackedElementBase@{oomph::HijackedElementBase}}
+\doxysubsubsection{\texorpdfstring{Residual\_multiplier\_pt}{Residual\_multiplier\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}}\texorpdfstring{$\ast$}{*} oomph\+::\+Hijacked\+Element\+Base\+::\+Residual\+\_\+multiplier\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Pointer to a double that multiplies the contribution to the residuals from the original element. This is usually used as a homotopy parameter to permit a smooth transition between different types of boundary conditions, rather than switching them on or off abruptly. 
+
+
+
+Definition at line \mbox{\hyperlink{hijacked__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{hijacked__elements_8h_source}{hijacked\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{hijacked__elements_8h_source_l00049}{Hijacked\+Element\+Base()}}, \mbox{\hyperlink{hijacked__elements_8h_source_l00070}{residual\+\_\+multiplier()}}, and \mbox{\hyperlink{hijacked__elements_8h_source_l00076}{residual\+\_\+multiplier\+\_\+pt()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{hijacked__elements_8h}{hijacked\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{hijacked__elements_8cc}{hijacked\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

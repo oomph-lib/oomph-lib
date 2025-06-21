@@ -1,0 +1,409 @@
+\doxysection{oomph\+::Matrix\+Vector\+Product Class Reference}
+\hypertarget{classoomph_1_1MatrixVectorProduct}{}\label{classoomph_1_1MatrixVectorProduct}\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+
+
+\doxylink{classoomph_1_1Matrix}{Matrix} vector product helper class -\/ primarily a wrapper to Trilinos\textquotesingle{}s Epetra matrix vector product methods. This allows the epetra matrix to be assembled once and the matrix vector product to be performed many times.  
+
+
+
+
+{\ttfamily \#include $<$matrix\+\_\+vector\+\_\+product.\+h$>$}
+
+Inheritance diagram for oomph\+::Matrix\+Vector\+Product\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MatrixVectorProduct}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_af0c48ee8ae2ae94b5f3f38a8071c22f9}{Matrix\+Vector\+Product}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b93b64514a6902bfd490299bd8587a0}{Matrix\+Vector\+Product}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_afc8c0a45a060c3c6a4a5ca40a306a319}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_add19a8ea5d1901423e334587446f55db}{\texorpdfstring{$\sim$}{\string~}\+Matrix\+Vector\+Product}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2f61122d228e81ccff144b1298ccbd36}{clean\+\_\+up\+\_\+memory}} ()
+\begin{DoxyCompactList}\small\item\em clear the memory \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_aec74f9bdb65ee7ce86590e26a705f3e9}{setup}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{col\+\_\+dist\+\_\+pt}}=0)
+\begin{DoxyCompactList}\small\item\em Setup the matrix vector product operator. WARNING\+: This class is wrapper to Trilinos Epetra matrix vector multiply methods, if Trilinos is not installed then this class will function as expected, but there will be no computational speed gain. By default the Epetra\+\_\+\+Crs\+Matrix\+::multiply(...) are employed. The optional argument col\+\_\+dist\+\_\+pt is the distribution of\+: x if using multiply(...) or y if using multiply\+\_\+transpose(...) where this is A x = y. By default, this is assumed to the uniformly distributed based on matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}{ncol()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}{multiply}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Apply the operator to the vector x and return the result in the vector y. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}{multiply\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Apply the transpose of the operator to the vector x and return the result in the vector y. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}{ncol}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Access function to the number of columns. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac9492d59cff9d9b0098712ae72989cd3}{Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ create a distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7522391265c46e6c748fd660eae66f5e}{Distributable\+Linear\+Algebra\+Object}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{matrix}})=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ada5f539f36451c06e69de79bb129521b}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{Distributable\+Linear\+Algebra\+Object}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4038de53b5737dc625411e7848d21dad}{\texorpdfstring{$\sim$}{\string~}\+Distributable\+Linear\+Algebra\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_abfa9cf25494c796d62b15bad586fab47}{distribution\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access to the \doxylink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a7569556f14fd68b28508920e89bd5eee}{nrow}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function to the number of global rows. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a9bd7e1d242c69a28da85a804a7717fce}{nrow\+\_\+local}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a21e966b025edec79067b41d7f1f25220}{nrow\+\_\+local}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the num of local rows on this processor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ab00a3919b8634c698749f14a4d92947d}{first\+\_\+row}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a4266c1d18d8e102bad3f4aec26c9b7cf}{first\+\_\+row}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{p}}) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em access function for the first row on this processor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a5505731e7e73d7e4251c67c7adec6bf5}{distributed}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em distribution is serial or distributed \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a8c35baa65e335043f62954c92c090a5a}{distribution\+\_\+built}} () \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em if the communicator\+\_\+pt is null then the distribution is not setup then false is returned, otherwise return true \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_ac5340bac40b9559b0378037b57005203}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_adad20ac61a61d907f823da7694b50616}{build\+\_\+distribution}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{dist}})
+\begin{DoxyCompactList}\small\item\em setup the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}{trilinos\+\_\+multiply\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper function for multiply(...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&y) \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}}
+\begin{DoxyCompactList}\small\item\em Helper function for multiply\+\_\+transpose(...) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a14264b497811bc0d959be7f3022cd4d2}{Epetra\+\_\+matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The Epetra version of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ad912d5eeef011117feef7af1cabeb631}{Using\+\_\+trilinos}}
+\begin{DoxyCompactList}\small\item\em boolean indicating whether we are using trilinos to perform matvec \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}{Oomph\+\_\+matrix\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em an oomph-\/lib matrix \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_a986b1f7596b96329644f082b3303e28a}{Column\+\_\+distribution\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em The distribution of\+: x if using multiply(...) or y if using multiply\+\_\+transpose(...) where this is A x = y. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct_ade21a9a8255e6adab4ff367d3716f851}{Ncol}}
+\begin{DoxyCompactList}\small\item\em number of columns of the matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject_a30742aa2ac9abcfa037179f2d28ff43a}{clear\+\_\+distribution}} ()
+\begin{DoxyCompactList}\small\item\em clear the distribution of this distributable linear algebra object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classoomph_1_1Matrix}{Matrix} vector product helper class -\/ primarily a wrapper to Trilinos\textquotesingle{}s Epetra matrix vector product methods. This allows the epetra matrix to be assembled once and the matrix vector product to be performed many times. 
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00049}{49}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MatrixVectorProduct_af0c48ee8ae2ae94b5f3f38a8071c22f9}\label{classoomph_1_1MatrixVectorProduct_af0c48ee8ae2ae94b5f3f38a8071c22f9} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!MatrixVectorProduct@{MatrixVectorProduct}}
+\index{MatrixVectorProduct@{MatrixVectorProduct}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{MatrixVectorProduct()}{MatrixVectorProduct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Vector\+Product\+::\+Matrix\+Vector\+Product (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00053}{53}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{Oomph\+\_\+matrix\+\_\+pt}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a2b93b64514a6902bfd490299bd8587a0}\label{classoomph_1_1MatrixVectorProduct_a2b93b64514a6902bfd490299bd8587a0} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!MatrixVectorProduct@{MatrixVectorProduct}}
+\index{MatrixVectorProduct@{MatrixVectorProduct}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{MatrixVectorProduct()}{MatrixVectorProduct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Vector\+Product\+::\+Matrix\+Vector\+Product (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_add19a8ea5d1901423e334587446f55db}\label{classoomph_1_1MatrixVectorProduct_add19a8ea5d1901423e334587446f55db} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!````~MatrixVectorProduct@{\texorpdfstring{$\sim$}{\string~}MatrixVectorProduct}}
+\index{````~MatrixVectorProduct@{\texorpdfstring{$\sim$}{\string~}MatrixVectorProduct}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MatrixVectorProduct()}{\string~MatrixVectorProduct()}}
+{\footnotesize\ttfamily oomph\+::\+Matrix\+Vector\+Product\+::\texorpdfstring{$\sim$}{\string~}\+Matrix\+Vector\+Product (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00070}{70}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{clean\+\_\+up\+\_\+memory()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a2f61122d228e81ccff144b1298ccbd36}\label{classoomph_1_1MatrixVectorProduct_a2f61122d228e81ccff144b1298ccbd36} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!clean\_up\_memory@{clean\_up\_memory}}
+\index{clean\_up\_memory@{clean\_up\_memory}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+clear the memory 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{76}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{Epetra\+\_\+matrix\+\_\+pt}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{Oomph\+\_\+matrix\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00070}{\texorpdfstring{$\sim$}{\string~}\+Matrix\+Vector\+Product()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee}\label{classoomph_1_1MatrixVectorProduct_ac29ba50f1a77bf0e316c3417bcff71ee} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!multiply@{multiply}}
+\index{multiply@{multiply}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{y }\end{DoxyParamCaption}) const}
+
+
+
+Apply the operator to the vector x and return the result in the vector y. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{108}} of file \mbox{\hyperlink{matrix__vector__product_8cc_source}{matrix\+\_\+vector\+\_\+product.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01782}{oomph\+::\+CRDouble\+Matrix\+::multiply()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{trilinos\+\_\+multiply\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00129}{Using\+\_\+trilinos}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00374}{oomph\+::\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00495}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00402}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5}\label{classoomph_1_1MatrixVectorProduct_a2b7670797fe289ea814968f2f9469fd5} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!multiply\_transpose@{multiply\_transpose}}
+\index{multiply\_transpose@{multiply\_transpose}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{y }\end{DoxyParamCaption}) const}
+
+
+
+Apply the transpose of the operator to the vector x and return the result in the vector y. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{177}} of file \mbox{\hyperlink{matrix__vector__product_8cc_source}{matrix\+\_\+vector\+\_\+product.\+cc}}.
+
+
+
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00129}{Using\+\_\+trilinos}}.
+
+
+
+Referenced by \mbox{\hyperlink{navier__stokes__preconditioners_8cc_source_l00660}{oomph\+::\+Navier\+Stokes\+Schur\+Complement\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{solid__preconditioners_8cc_source_l00495}{oomph\+::\+Pressure\+Based\+Solid\+LSCPreconditioner\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00402}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}\label{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!ncol@{ncol}}
+\index{ncol@{ncol}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \& oomph\+::\+Matrix\+Vector\+Product\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the number of columns. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00109}{109}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+References \mbox{\hyperlink{matrix__vector__product_8h_source_l00139}{Ncol}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_afc8c0a45a060c3c6a4a5ca40a306a319}\label{classoomph_1_1MatrixVectorProduct_afc8c0a45a060c3c6a4a5ca40a306a319} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1MatrixVectorProduct}{Matrix\+Vector\+Product}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_aec74f9bdb65ee7ce86590e26a705f3e9}\label{classoomph_1_1MatrixVectorProduct_aec74f9bdb65ee7ce86590e26a705f3e9} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!setup@{setup}}
+\index{setup@{setup}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} \texorpdfstring{$\ast$}{*}}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} \texorpdfstring{$\ast$}{*}}]{col\+\_\+dist\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Setup the matrix vector product operator. WARNING\+: This class is wrapper to Trilinos Epetra matrix vector multiply methods, if Trilinos is not installed then this class will function as expected, but there will be no computational speed gain. By default the Epetra\+\_\+\+Crs\+Matrix\+::multiply(...) are employed. The optional argument col\+\_\+dist\+\_\+pt is the distribution of\+: x if using multiply(...) or y if using multiply\+\_\+transpose(...) where this is A x = y. By default, this is assumed to the uniformly distributed based on matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\doxylink{classoomph_1_1MatrixVectorProduct_ab11a0763e2cc2ed4e74b06eea664b60e}{ncol()}. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{41}} of file \mbox{\hyperlink{matrix__vector__product_8cc_source}{matrix\+\_\+vector\+\_\+product.\+cc}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{Column\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00289}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+matrix()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{Epetra\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00861}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}, \mbox{\hyperlink{matrices_8h_source_l01008}{oomph\+::\+CRDouble\+Matrix\+::ncol()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00139}{Ncol}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00326}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{Oomph\+\_\+matrix\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01303}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00129}{Using\+\_\+trilinos}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408}\label{classoomph_1_1MatrixVectorProduct_a431b4a1aec80593b729aef89d26dd408} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!trilinos\_multiply\_helper@{trilinos\_multiply\_helper}}
+\index{trilinos\_multiply\_helper@{trilinos\_multiply\_helper}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{trilinos\_multiply\_helper()}{trilinos\_multiply\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper function for multiply(...) 
+
+Apply the operator to the vector x and return the result in the vector y (helper function) 
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{242}} of file \mbox{\hyperlink{matrix__vector__product_8cc_source}{matrix\+\_\+vector\+\_\+product.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{Epetra\+\_\+matrix\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{multiply()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064}\label{classoomph_1_1MatrixVectorProduct_a192d6aba55af4354c22bc44ab9c9b064} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!trilinos\_multiply\_transpose\_helper@{trilinos\_multiply\_transpose\_helper}}
+\index{trilinos\_multiply\_transpose\_helper@{trilinos\_multiply\_transpose\_helper}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{trilinos\_multiply\_transpose\_helper()}{trilinos\_multiply\_transpose\_helper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Matrix\+Vector\+Product\+::trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper function for multiply\+\_\+transpose(...) 
+
+Apply the transpose of the operator to the vector x and return the result in the vector y (helper function) 
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{287}} of file \mbox{\hyperlink{matrix__vector__product_8cc_source}{matrix\+\_\+vector\+\_\+product.\+cc}}.
+
+
+
+References \mbox{\hyperlink{trilinos__helpers_8cc_source_l00180}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::copy\+\_\+to\+\_\+oomphlib\+\_\+vector()}}, \mbox{\hyperlink{trilinos__helpers_8cc_source_l00041}{oomph\+::\+Trilinos\+Epetra\+Helpers\+::create\+\_\+distributed\+\_\+epetra\+\_\+vector()}}, and \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{Epetra\+\_\+matrix\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{multiply\+\_\+transpose()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a986b1f7596b96329644f082b3303e28a}\label{classoomph_1_1MatrixVectorProduct_a986b1f7596b96329644f082b3303e28a} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!Column\_distribution\_pt@{Column\_distribution\_pt}}
+\index{Column\_distribution\_pt@{Column\_distribution\_pt}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{Column\_distribution\_pt}{Column\_distribution\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}\texorpdfstring{$\ast$}{*} oomph\+::\+Matrix\+Vector\+Product\+::\+Column\+\_\+distribution\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The distribution of\+: x if using multiply(...) or y if using multiply\+\_\+transpose(...) where this is A x = y. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00136}{136}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00053}{Matrix\+Vector\+Product()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{multiply\+\_\+transpose()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a14264b497811bc0d959be7f3022cd4d2}\label{classoomph_1_1MatrixVectorProduct_a14264b497811bc0d959be7f3022cd4d2} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!Epetra\_matrix\_pt@{Epetra\_matrix\_pt}}
+\index{Epetra\_matrix\_pt@{Epetra\_matrix\_pt}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{Epetra\_matrix\_pt}{Epetra\_matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{Epetra\+\_\+\+Crs\+Matrix}}\texorpdfstring{$\ast$}{*} oomph\+::\+Matrix\+Vector\+Product\+::\+Epetra\+\_\+matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The Epetra version of the matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00124}{124}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00053}{Matrix\+Vector\+Product()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00242}{trilinos\+\_\+multiply\+\_\+helper()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00287}{trilinos\+\_\+multiply\+\_\+transpose\+\_\+helper()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_ade21a9a8255e6adab4ff367d3716f851}\label{classoomph_1_1MatrixVectorProduct_ade21a9a8255e6adab4ff367d3716f851} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!Ncol@{Ncol}}
+\index{Ncol@{Ncol}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{Ncol}{Ncol}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} oomph\+::\+Matrix\+Vector\+Product\+::\+Ncol\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+number of columns of the matrix 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00139}{139}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8h_source_l00109}{ncol()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a}\label{classoomph_1_1MatrixVectorProduct_a3932cd524581a670528ee807bf28ff1a} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!Oomph\_matrix\_pt@{Oomph\_matrix\_pt}}
+\index{Oomph\_matrix\_pt@{Oomph\_matrix\_pt}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{Oomph\_matrix\_pt}{Oomph\_matrix\_pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}}\texorpdfstring{$\ast$}{*} oomph\+::\+Matrix\+Vector\+Product\+::\+Oomph\+\_\+matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+an oomph-\/lib matrix 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00132}{132}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8h_source_l00076}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrix__vector__product_8h_source_l00053}{Matrix\+Vector\+Product()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{multiply\+\_\+transpose()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}.
+
+\Hypertarget{classoomph_1_1MatrixVectorProduct_ad912d5eeef011117feef7af1cabeb631}\label{classoomph_1_1MatrixVectorProduct_ad912d5eeef011117feef7af1cabeb631} 
+\index{oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}!Using\_trilinos@{Using\_trilinos}}
+\index{Using\_trilinos@{Using\_trilinos}!oomph::MatrixVectorProduct@{oomph::MatrixVectorProduct}}
+\doxysubsubsection{\texorpdfstring{Using\_trilinos}{Using\_trilinos}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Matrix\+Vector\+Product\+::\+Using\+\_\+trilinos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+boolean indicating whether we are using trilinos to perform matvec 
+
+
+
+Definition at line \mbox{\hyperlink{matrix__vector__product_8h_source_l00129}{129}} of file \mbox{\hyperlink{matrix__vector__product_8h_source}{matrix\+\_\+vector\+\_\+product.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{matrix__vector__product_8cc_source_l00108}{multiply()}}, \mbox{\hyperlink{matrix__vector__product_8cc_source_l00177}{multiply\+\_\+transpose()}}, and \mbox{\hyperlink{matrix__vector__product_8cc_source_l00041}{setup()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{matrix__vector__product_8h}{matrix\+\_\+vector\+\_\+product.\+h}}\item 
+\mbox{\hyperlink{matrix__vector__product_8cc}{matrix\+\_\+vector\+\_\+product.\+cc}}\end{DoxyCompactItemize}

@@ -1,0 +1,55 @@
+\chapter{Demo problem\+: Inflation of a blood vessel}
+\hypertarget{index}{}\label{index}\index{Demo problem: Inflation of a blood vessel@{Demo problem: Inflation of a blood vessel}}
+The purpose of this tutorial is to demonstrate the simulation of cardiovascular solid mechanics problems with {\ttfamily oomph-\/lib}. We showed in \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ another tutorial}} how to use \href{http://www.vmtk.org}{\texttt{ VMTK}} together with {\ttfamily oomph-\/lib\textquotesingle{}s} conversion code \begin{center} \href{../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+vmtk/create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh.\+cc}} \end{center}  to generate unstructured fluid and solid meshes for the simulation of physiological fluid-\/structure interaction problems based on data from medical images. Here we show how to study the deformation of the vessel wall (which was assumed to have a constant thickness when the solid mesh was generated from the imaging data) when subjected to a pressure loading. The problem serves as a "{}warm-\/up problem"{} for the \href{../../../interaction/vmtk_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} in which the elastic vessel conveys (and is loaded by) a viscous fluid.
+
+We stress that the tutorial focuses on the implementation aspects, not the actual physics. Since the driver code discussed here is also used in the library\textquotesingle{}s self-\/tests we deliberately use a very coarse mesh and apply very simplistic boundary conditions. The results shown below are therefore unlikely to bear much resemblance to the actual deformation of a blood vessel {\itshape in} {\itshape vivo}. The section \doxysectlink{index_comm_ex}{Comments and Exercises}{1} at the end of this tutorial provides several suggestions on how to make the simulation more realistic.
+
+\begin{center} \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\begin{center} {\bfseries{Acknowledgement\+:}} \end{center}  This tutorial and the associated driver codes were developed jointly with Amine Massit (ENSTA, Paris).   \\\cline{1-1}
+\end{longtabu}
+\end{center} 
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_problem}{}\doxysection{\texorpdfstring{The problem (and results)}{The problem (and results)}}\label{index_problem}
+Here is an animation of the problem\+: An elastic blood vessel is loaded by an internal pressure while its "{}ends"{} are held in a fixed position. As the magnitude of the pressure load is increased the vessel inflates\+:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=0.75\textwidth]{inflating_iliac}
+\doxyfigcaption{An elastic blood vessel, loaded by an internal pressure. }
+\end{DoxyImage}
+
+
+The blue frame surrounding the vessel is drawn to clarify its spatial orientation. The yellow edges show the boundaries of the internal faces via which the pressure loading is applied, and the red arrows indicate the direction and magnitude of the pressure loading.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_driver}{}\doxysection{\texorpdfstring{The driver code}{The driver code}}\label{index_driver}
+The driver code is practically identical to the one discussed in \href{../../unstructured_three_d_solid/html/index.html}{\texttt{ another tutorial.}} In fact, the two codes only differ in the specification of the names of the tetgen files that describe the unstructured fluid mesh, and the enumeration of the boundaries. We also disabled the gravitational body force. Therefore, we will not discuss the driver code in detail.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_comm_ex}{}\doxysection{\texorpdfstring{Comments and Exercises}{Comments and Exercises}}\label{index_comm_ex}
+\hypertarget{index_finer}{}\doxysubsection{\texorpdfstring{Generating finer meshes}{Generating finer meshes}}\label{index_finer}
+As acknowledged at the beginning of the tutorial, the solid mesh is far too coarse for the simulation results to be accurate. As an exercise, follow the instructions in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ VMTK tutorial}} to generate a finer mesh. We are hoping to make the image files used in this tutorial available soon. Please \href{../../../contact/html/index.html}{\texttt{ contact us}} if you can\textquotesingle{}t wait. Remember that you will have to update the enumeration of the domain boundaries if you change the mesh.
+
+\DoxyHorRuler{0}
+\hypertarget{index_bc}{}\doxysubsection{\texorpdfstring{Making the boundary conditions more "{}realistic"{}}{Making the boundary conditions more "realistic"}}\label{index_bc}
+In the example shown above we applied boundary conditions that held the "{}ends"{} of the bifurcation in a fixed position. These boundary conditions are obviously rather artificial as no such constraints exist in the human body. Unfortunately, it is not entirely clear how to come up with boundary conditions that are genuinely "{}more  realistic"{}. One way to ensure that the (inevitably artificial) boundary conditions have a weak(er) effect on the deformation of the "{}region of interest"{} would be to attach "{}flow extensions"{} to the in-\/ and outflow cross-\/sections, using the technique described in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html\#add_extensions}{\texttt{ VMTK tutorial.}} Alternatively, we could constrain the displacement of a much smaller number of material points -- rigid body motions can be suppressed by pinning the position of just three nodes. We encourage you to explore these options yourself.
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+\hypertarget{index_sources}{}\doxysection{\texorpdfstring{Source files for this tutorial}{Source files for this tutorial}}\label{index_sources}
+
+\begin{DoxyItemize}
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/solid/vmtk_solid/}{\texttt{ demo\+\_\+drivers/solid/vmtk\+\_\+solid/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/solid/vmtk_solid/vmtk_solid.cc}{\texttt{ demo\+\_\+drivers/solid/vmtk\+\_\+solid/vmtk\+\_\+solid.\+cc }} \end{center} 
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+ \hypertarget{index_pdf}{}\doxysection{\texorpdfstring{PDF file}{PDF file}}\label{index_pdf}
+A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \textbackslash{} \end{document}

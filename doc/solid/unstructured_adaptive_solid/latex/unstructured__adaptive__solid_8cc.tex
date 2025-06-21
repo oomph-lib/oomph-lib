@@ -1,0 +1,49 @@
+\doxysection{unstructured\+\_\+adaptive\+\_\+solid.\+cc File Reference}
+\hypertarget{unstructured__adaptive__solid_8cc}{}\label{unstructured__adaptive__solid_8cc}\index{unstructured\_adaptive\_solid.cc@{unstructured\_adaptive\_solid.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classUnstructuredSolidProblem}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a19f4e20a92e7d216b4d2b00308f96917}{Global\+\_\+\+Physical\+\_\+\+Variables\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Constant pressure load. The arguments to this function are imposed on us by the Solid\+Traction\+Elements which allow the traction to depend on the Lagrangian and Eulerian coordinates x and xi, and on the outer unit normal to the surface. Here we only need the outer unit normal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__adaptive__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve an unstructured solid problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}} =0.\+3
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
+Constitutive\+Law \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}} =0
+\begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__adaptive__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__adaptive__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{unstructured\_adaptive\_solid.cc@{unstructured\_adaptive\_solid.cc}!main@{main}}
+\index{main@{main}!unstructured\_adaptive\_solid.cc@{unstructured\_adaptive\_solid.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Demonstrate how to solve an unstructured solid problem. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00419}{419}} of file \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source}{unstructured\+\_\+adaptive\+\_\+solid.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00270}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00309}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::get\+\_\+strain\+\_\+energy()}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00060}{Global\+\_\+\+Physical\+\_\+\+Variables\+::P}}, and \mbox{\hyperlink{unstructured__adaptive__solid_8cc_source_l00097}{Unstructured\+Solid\+Problem$<$ ELEMENT $>$\+::set\+\_\+incompressible()}}.
+

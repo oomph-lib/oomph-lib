@@ -1,0 +1,59 @@
+\doxysection{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc File Reference}
+\hypertarget{unstructured__fourier__decomposed__acoustic__fsi_8cc}{}\label{unstructured__fourier__decomposed__acoustic__fsi_8cc}\index{unstructured\_fourier\_decomposed\_acoustic\_fsi.cc@{unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMyStraightLine}{My\+Straight\+Line}}
+\begin{DoxyCompactList}\small\item\em Straight 1D line in 2D space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Coated sphere FSI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\+\_\+\+Parameters\+::\+Nu}} (std\+::complex$<$ double $>$(0.\+3, 0.\+0))
+\begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
+Vector$<$ std\+::complex$<$ double $>$ $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\+\_\+\+Parameters\+::E}} (2, std\+::complex$<$ double $>$(1.\+0, 0.\+0))
+\begin{DoxyCompactList}\small\item\em Define the non-\/dimensional Young\textquotesingle{}s modulus. \end{DoxyCompactList}\item 
+Vector$<$ std\+::complex$<$ double $>$ $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a01cdda0a8eaaff9cb269be13b6042425}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (2, std\+::complex$<$ double $>$(100.\+0, 0.\+0))
+\begin{DoxyCompactList}\small\item\em Non-\/dim square of frequency for solid -- dependent variable! \end{DoxyCompactList}\item 
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_acfa569c0fb37b6c95423ba9c0803f737}{Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio}} (2, 1.\+0)
+\begin{DoxyCompactList}\small\item\em Density ratio\+: solid to fluid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Function to update dependent parameter values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a0ddb3a77481b907fbb34f2e8d0a6eb9f}{Global\+\_\+\+Parameters\+::pressure\+\_\+load}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&traction)
+\begin{DoxyCompactList}\small\item\em Pressure load (real and imag part) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Driver for coated sphere loaded by lineared fluid loading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\+\_\+\+Parameters\+::P}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceGlobal__Parameters_afbe27ad463a1fb23cb99d029a9fac731}{Global\+\_\+\+Parameters\+::\+Alpha}} =0.\+0
+\begin{DoxyCompactList}\small\item\em Peakiness parameter for pressure load. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unstructured__fourier__decomposed__acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}\label{unstructured__fourier__decomposed__acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{unstructured\_fourier\_decomposed\_acoustic\_fsi.cc@{unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}!main@{main}}
+\index{main@{main}!unstructured\_fourier\_decomposed\_acoustic\_fsi.cc@{unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Driver for coated sphere loaded by lineared fluid loading. 
+
+
+
+Definition at line \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l01350}{1350}} of file \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source}{unstructured\+\_\+fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
+
+
+
+References \mbox{\hyperlink{unstructured__fourier__decomposed__acoustic__fsi_8cc_source_l00152}{Global\+\_\+\+Parameters\+::\+Alpha}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00085}{Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00113}{Global\+\_\+\+Parameters\+::\+Directory}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00593}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a6ca3f639e01df7af855729cd128a6d69}{Global\+\_\+\+Parameters\+::\+E()}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00070}{Global\+\_\+\+Parameters\+::Q}}, and \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00088}{Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values()}}.
+

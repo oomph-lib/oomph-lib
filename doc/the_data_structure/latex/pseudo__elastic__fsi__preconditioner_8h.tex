@@ -1,0 +1,12 @@
+\doxysection{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h File Reference}
+\hypertarget{pseudo__elastic__fsi__preconditioner_8h}{}\label{pseudo__elastic__fsi__preconditioner_8h}\index{pseudo\_elastic\_fsi\_preconditioner.h@{pseudo\_elastic\_fsi\_preconditioner.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner}{oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classoomph_1_1Preconditioner}{Preconditioner} for FSI problems with pseudo-\/elastic fluid node updates. Note\+: \doxylink{classoomph_1_1NavierStokesSchurComplementPreconditioner}{Navier\+Stokes\+Schur\+Complement\+Preconditioner} is applied to the Navier Stokes subsidiary system. Default solid preconditioner is Exact\+Preconditioner. {\bfseries{Enumeration}} of Elastic DOF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 DOF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 3 -\/ x displacement (with lagr mult traction) 4 -\/ y displacement (with lagr mult traction) 5 -\/ z displacement (with lagr mult traction) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em DRAIG\+: Change all instances of (SPATIAL\+\_\+\+DIM) to (DIM-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}

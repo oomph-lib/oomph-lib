@@ -1,0 +1,134 @@
+\doxysection{oomph\+::Error\+Estimator Class Reference}
+\hypertarget{classoomph_1_1ErrorEstimator}{}\label{classoomph_1_1ErrorEstimator}\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+
+
+Base class for spatial error estimators.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+estimator.\+h$>$}
+
+Inheritance diagram for oomph\+::Error\+Estimator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1ErrorEstimator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1ErrorEstimator_a43b3800b6695fe3fd13241b0530a0d0c}{Error\+Estimator}} ()
+\begin{DoxyCompactList}\small\item\em Default empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1ErrorEstimator_a643d7d4ec8782a158577feb1ff2b47cb}{Error\+Estimator}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator}{Error\+Estimator}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator_afce4303c8d969e87ee38133dd98bc381}{operator=}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator}{Error\+Estimator}} \&)=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{delete}}
+\begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a57ddd866184d95a75f024353ca936b5b}{\texorpdfstring{$\sim$}{\string~}\+Error\+Estimator}} ()
+\begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a3b12c5d2579360a08b6b6298cea8b142}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elemental\+\_\+error}})
+\begin{DoxyCompactList}\small\item\em Compute the elemental error-\/measures for a given mesh and store them in a vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca71e98b7afff}{get\+\_\+element\+\_\+errors}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{elemental\+\_\+error}}, \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info)=0
+\begin{DoxyCompactList}\small\item\em Compute the elemental error measures for a given mesh and store them in a vector. Doc errors etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for spatial error estimators. 
+
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00039}{39}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1ErrorEstimator_a43b3800b6695fe3fd13241b0530a0d0c}\label{classoomph_1_1ErrorEstimator_a43b3800b6695fe3fd13241b0530a0d0c} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!ErrorEstimator@{ErrorEstimator}}
+\index{ErrorEstimator@{ErrorEstimator}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{ErrorEstimator()}{ErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily oomph\+::\+Error\+Estimator\+::\+Error\+Estimator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default empty constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00043}{43}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+
+\Hypertarget{classoomph_1_1ErrorEstimator_a643d7d4ec8782a158577feb1ff2b47cb}\label{classoomph_1_1ErrorEstimator_a643d7d4ec8782a158577feb1ff2b47cb} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!ErrorEstimator@{ErrorEstimator}}
+\index{ErrorEstimator@{ErrorEstimator}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{ErrorEstimator()}{ErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily oomph\+::\+Error\+Estimator\+::\+Error\+Estimator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator}{Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken copy constructor. 
+
+\Hypertarget{classoomph_1_1ErrorEstimator_a57ddd866184d95a75f024353ca936b5b}\label{classoomph_1_1ErrorEstimator_a57ddd866184d95a75f024353ca936b5b} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!````~ErrorEstimator@{\texorpdfstring{$\sim$}{\string~}ErrorEstimator}}
+\index{````~ErrorEstimator@{\texorpdfstring{$\sim$}{\string~}ErrorEstimator}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ErrorEstimator()}{\string~ErrorEstimator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Error\+Estimator\+::\texorpdfstring{$\sim$}{\string~}\+Error\+Estimator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty virtual destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00052}{52}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1ErrorEstimator_a3b12c5d2579360a08b6b6298cea8b142}\label{classoomph_1_1ErrorEstimator_a3b12c5d2579360a08b6b6298cea8b142} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!get\_element\_errors@{get\_element\_errors}}
+\index{get\_element\_errors@{get\_element\_errors}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{get\_element\_errors()}{get\_element\_errors()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{elemental\+\_\+error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute the elemental error-\/measures for a given mesh and store them in a vector. 
+
+
+
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00056}{56}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
+
+
+
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00552}{oomph\+::\+Doc\+Info\+::disable\+\_\+doc()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00056}{get\+\_\+element\+\_\+errors()}}.
+
+
+
+Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00056}{get\+\_\+element\+\_\+errors()}}.
+
+\Hypertarget{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca71e98b7afff}\label{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca71e98b7afff} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!get\_element\_errors@{get\_element\_errors}}
+\index{get\_element\_errors@{get\_element\_errors}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{get\_element\_errors()}{get\_element\_errors()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} \texorpdfstring{$\ast$}{*}\&}]{mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{elemental\+\_\+error,  }\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Compute the elemental error measures for a given mesh and store them in a vector. Doc errors etc. 
+
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1Z2ErrorEstimator_ae0fd03123c518ed340bb534c2f6b8cc4}{oomph\+::\+Z2\+Error\+Estimator}}, and \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a471038816556f1af7602cadbbb21d8fb}{oomph\+::\+Dummy\+Error\+Estimator}}.
+
+\Hypertarget{classoomph_1_1ErrorEstimator_afce4303c8d969e87ee38133dd98bc381}\label{classoomph_1_1ErrorEstimator_afce4303c8d969e87ee38133dd98bc381} 
+\index{oomph::ErrorEstimator@{oomph::ErrorEstimator}!operator=@{operator=}}
+\index{operator=@{operator=}!oomph::ErrorEstimator@{oomph::ErrorEstimator}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Error\+Estimator\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1ErrorEstimator}{Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Broken assignment operator. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{error__estimator_8h}{error\+\_\+estimator.\+h}}\end{DoxyCompactItemize}

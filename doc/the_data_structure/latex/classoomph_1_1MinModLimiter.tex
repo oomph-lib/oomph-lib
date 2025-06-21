@@ -1,0 +1,191 @@
+\doxysection{oomph\+::Min\+Mod\+Limiter Class Reference}
+\hypertarget{classoomph_1_1MinModLimiter}{}\label{classoomph_1_1MinModLimiter}\index{oomph::MinModLimiter@{oomph::MinModLimiter}}
+
+
+{\ttfamily \#include $<$dg\+\_\+elements.\+h$>$}
+
+Inheritance diagram for oomph\+::Min\+Mod\+Limiter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classoomph_1_1MinModLimiter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1MinModLimiter_a77bf95978408ce37d0da72d6c096a762}{Min\+Mod\+Limiter}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{m}}=0.\+0, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{muscl}}=\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}})
+\begin{DoxyCompactList}\small\item\em Constructor takes a value for the modification parameter M (default to zero --- classic min mod) and a flag to indicate whether we use MUSCL limiting or not --- default false. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_aac8ae978f42ceddf1486702d84cf5b88}{\texorpdfstring{$\sim$}{\string~}\+Min\+Mod\+Limiter}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_a0c33f8903b7b06e79266e29a5c9cb087}{minmod}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{args}})
+\begin{DoxyCompactList}\small\item\em The basic minmod function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_a5ae4780f5da176b517c1380e29f74e0b}{minmodB}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{args}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&h)
+\begin{DoxyCompactList}\small\item\em The modified minmod function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_ab9de991513fa84721b544df3c4d91e63}{limit}} (\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{required\+\_\+element\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em The limit function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classoomph_1_1SlopeLimiter}{oomph\+::\+Slope\+Limiter}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1SlopeLimiter_a9ea7a03f4b5992b7c4a3d324c01fa257}{Slope\+Limiter}} ()
+\begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} \mbox{\hyperlink{classoomph_1_1SlopeLimiter_a40f42cee7a9bdfa71f200d230dc66008}{\texorpdfstring{$\sim$}{\string~}\+Slope\+Limiter}} ()
+\begin{DoxyCompactList}\small\item\em virtual destructor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_afd69a0c54eda8f4489c578faf51156bc}{M}}
+\begin{DoxyCompactList}\small\item\em Constant that is used in the modified min-\/mod function to provide better properties at extrema. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \mbox{\hyperlink{classoomph_1_1MinModLimiter_a44288d5262b23de81e093bdb62b1a889}{MUSCL}}
+\begin{DoxyCompactList}\small\item\em Boolean flag to indicate a MUSCL or straight min-\/mod limiter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00543}{543}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classoomph_1_1MinModLimiter_a77bf95978408ce37d0da72d6c096a762}\label{classoomph_1_1MinModLimiter_a77bf95978408ce37d0da72d6c096a762} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!MinModLimiter@{MinModLimiter}}
+\index{MinModLimiter@{MinModLimiter}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{MinModLimiter()}{MinModLimiter()}}
+{\footnotesize\ttfamily oomph\+::\+Min\+Mod\+Limiter\+::\+Min\+Mod\+Limiter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{m = {\ttfamily 0.0},  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} \&}]{muscl = {\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor takes a value for the modification parameter M (default to zero --- classic min mod) and a flag to indicate whether we use MUSCL limiting or not --- default false. 
+
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00556}{556}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+
+\Hypertarget{classoomph_1_1MinModLimiter_aac8ae978f42ceddf1486702d84cf5b88}\label{classoomph_1_1MinModLimiter_aac8ae978f42ceddf1486702d84cf5b88} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!````~MinModLimiter@{\texorpdfstring{$\sim$}{\string~}MinModLimiter}}
+\index{````~MinModLimiter@{\texorpdfstring{$\sim$}{\string~}MinModLimiter}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MinModLimiter()}{\string~MinModLimiter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{virtual}} oomph\+::\+Min\+Mod\+Limiter\+::\texorpdfstring{$\sim$}{\string~}\+Min\+Mod\+Limiter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00562}{562}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classoomph_1_1MinModLimiter_ab9de991513fa84721b544df3c4d91e63}\label{classoomph_1_1MinModLimiter_ab9de991513fa84721b544df3c4d91e63} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!limit@{limit}}
+\index{limit@{limit}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{limit()}{limit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{void}} oomph\+::\+Min\+Mod\+Limiter\+::limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{unsigned}} \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DGElement}{DGElement}} \texorpdfstring{$\ast$}{*} $>$ \&}]{required\+\_\+element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+The limit function. 
+
+Implement the limiter function for the basic Min\+Modlimiter. 
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SlopeLimiter_ad4b8b9e82d496322a565db4294d776c6}{oomph\+::\+Slope\+Limiter}}.
+
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00822}{822}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{dg__elements_8cc_source_l00740}{minmod()}}, \mbox{\hyperlink{dg__elements_8cc_source_l00800}{minmod\+B()}}, \mbox{\hyperlink{dg__elements_8h_source_l00550}{MUSCL}}, \mbox{\hyperlink{elements_8h_source_l02214}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02179}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{nodes_8cc_source_l02408}{oomph\+::\+Node\+::value()}}, and \mbox{\hyperlink{nodes_8h_source_l01060}{oomph\+::\+Node\+::x()}}.
+
+\Hypertarget{classoomph_1_1MinModLimiter_a0c33f8903b7b06e79266e29a5c9cb087}\label{classoomph_1_1MinModLimiter_a0c33f8903b7b06e79266e29a5c9cb087} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!minmod@{minmod}}
+\index{minmod@{minmod}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{minmod()}{minmod()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Min\+Mod\+Limiter\+::minmod (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{args }\end{DoxyParamCaption})}
+
+
+
+The basic minmod function. 
+
+Helper minmod function. 
+
+Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00740}{740}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00822}{limit()}}, and \mbox{\hyperlink{dg__elements_8cc_source_l00800}{minmod\+B()}}.
+
+\Hypertarget{classoomph_1_1MinModLimiter_a5ae4780f5da176b517c1380e29f74e0b}\label{classoomph_1_1MinModLimiter_a5ae4780f5da176b517c1380e29f74e0b} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!minmodB@{minmodB}}
+\index{minmodB@{minmodB}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{minmodB()}{minmodB()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Min\+Mod\+Limiter\+::minmodB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} $>$ \&}]{args,  }\item[{\mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{const}} \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} \&}]{h }\end{DoxyParamCaption})}
+
+
+
+The modified minmod function. 
+
+Modified minmod limiter to fix behaviour in smooth regions. 
+
+Definition at line \mbox{\hyperlink{dg__elements_8cc_source_l00800}{800}} of file \mbox{\hyperlink{dg__elements_8cc_source}{dg\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{dg__elements_8h_source_l00547}{M}}, \mbox{\hyperlink{dg__elements_8cc_source_l00740}{minmod()}}, and \mbox{\hyperlink{elements_8cc_source_l04320}{oomph\+::\+Finite\+Element\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00822}{limit()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classoomph_1_1MinModLimiter_afd69a0c54eda8f4489c578faf51156bc}\label{classoomph_1_1MinModLimiter_afd69a0c54eda8f4489c578faf51156bc} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!M@{M}}
+\index{M@{M}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{M}{M}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{double}} oomph\+::\+Min\+Mod\+Limiter\+::M\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Constant that is used in the modified min-\/mod function to provide better properties at extrema. 
+
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00547}{547}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00800}{minmod\+B()}}.
+
+\Hypertarget{classoomph_1_1MinModLimiter_a44288d5262b23de81e093bdb62b1a889}\label{classoomph_1_1MinModLimiter_a44288d5262b23de81e093bdb62b1a889} 
+\index{oomph::MinModLimiter@{oomph::MinModLimiter}!MUSCL@{MUSCL}}
+\index{MUSCL@{MUSCL}!oomph::MinModLimiter@{oomph::MinModLimiter}}
+\doxysubsubsection{\texorpdfstring{MUSCL}{MUSCL}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TAdvectionDiffusionReactionElement}{bool}} oomph\+::\+Min\+Mod\+Limiter\+::\+MUSCL\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boolean flag to indicate a MUSCL or straight min-\/mod limiter. 
+
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00550}{550}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00822}{limit()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dg__elements_8h}{dg\+\_\+elements.\+h}}\item 
+\mbox{\hyperlink{dg__elements_8cc}{dg\+\_\+elements.\+cc}}\end{DoxyCompactItemize}

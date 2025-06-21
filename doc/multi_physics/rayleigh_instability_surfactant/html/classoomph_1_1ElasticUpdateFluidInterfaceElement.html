@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">ElasticUpdateFluidInterfaceElement</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classoomph_1_1ElasticUpdateFluidInterfaceElement-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates.  
+ <a href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1ElasticUpdateFluidInterfaceElement.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5e5d81d8ba6c7b6567ec6d1dd42c1c96" id="r_a5e5d81d8ba6c7b6567ec6d1dd42c1c96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a5e5d81d8ba6c7b6567ec6d1dd42c1c96">ElasticUpdateFluidInterfaceElement</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">FiniteElement</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">element_pt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">face_index</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">id</a>=0)</td></tr>
+<tr class="memdesc:a5e5d81d8ba6c7b6567ec6d1dd42c1c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other FaceElements.  <br /></td></tr>
+<tr class="separator:a5e5d81d8ba6c7b6567ec6d1dd42c1c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41706192ce4de3c4c51a70086199d8fa" id="r_a41706192ce4de3c4c51a70086199d8fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a41706192ce4de3c4c51a70086199d8fa">zeta_nodal</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;k, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">i</a>) <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a></td></tr>
+<tr class="memdesc:a41706192ce4de3c4c51a70086199d8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The "global" intrinsic coordinate of the element when viewed as part of a geometric object should be given by the FaceElement representation, by default.  <br /></td></tr>
+<tr class="separator:a41706192ce4de3c4c51a70086199d8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9340c15f4463fad5bca019829f5998cf" id="r_a9340c15f4463fad5bca019829f5998cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a9340c15f4463fad5bca019829f5998cf">lagrange</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n</a>)</td></tr>
+<tr class="memdesc:a9340c15f4463fad5bca019829f5998cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the lagrange multiplier at local node n.  <br /></td></tr>
+<tr class="separator:a9340c15f4463fad5bca019829f5998cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1d5bb57e5664b86a9a76a4cfb8259f" id="r_acc1d5bb57e5664b86a9a76a4cfb8259f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#acc1d5bb57e5664b86a9a76a4cfb8259f">fill_in_contribution_to_jacobian</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>)</td></tr>
+<tr class="memdesc:acc1d5bb57e5664b86a9a76a4cfb8259f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in contribution to residuals and Jacobian.  <br /></td></tr>
+<tr class="separator:acc1d5bb57e5664b86a9a76a4cfb8259f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46b22d178b248355083a3564e4e92eb0" id="r_a46b22d178b248355083a3564e4e92eb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a46b22d178b248355083a3564e4e92eb0">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>)</td></tr>
+<tr class="memdesc:a46b22d178b248355083a3564e4e92eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the output function.  <br /></td></tr>
+<tr class="separator:a46b22d178b248355083a3564e4e92eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac193aa64a8223a96e4148a5af456fb64" id="r_ac193aa64a8223a96e4148a5af456fb64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#ac193aa64a8223a96e4148a5af456fb64">output</a> (std::ostream &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">outfile</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n_plot</a>)</td></tr>
+<tr class="memdesc:ac193aa64a8223a96e4148a5af456fb64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output the element.  <br /></td></tr>
+<tr class="separator:ac193aa64a8223a96e4148a5af456fb64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8baae14bdede6a659e948942d7a08cb5" id="r_a8baae14bdede6a659e948942d7a08cb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a8baae14bdede6a659e948942d7a08cb5">output</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">file_pt</a>)</td></tr>
+<tr class="memdesc:a8baae14bdede6a659e948942d7a08cb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the C-style output function.  <br /></td></tr>
+<tr class="separator:a8baae14bdede6a659e948942d7a08cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10b64a463b5ff98475e727b06d95b0ac" id="r_a10b64a463b5ff98475e727b06d95b0ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a10b64a463b5ff98475e727b06d95b0ac">output</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">file_pt</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n_plot</a>)</td></tr>
+<tr class="memdesc:a10b64a463b5ff98475e727b06d95b0ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">C-style Output function.  <br /></td></tr>
+<tr class="separator:a10b64a463b5ff98475e727b06d95b0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c3d2912325ace17676366c1469121f" id="r_a15c3d2912325ace17676366c1469121f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a15c3d2912325ace17676366c1469121f">add_additional_residual_contributions_interface</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">residuals</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">jacobian</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">flag</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Shape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">psif</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">dpsifds</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">dpsifdS</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">dpsifdS_div</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">s</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">interpolated_x</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">interpolated_n</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">W</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">J</a>)</td></tr>
+<tr class="memdesc:a15c3d2912325ace17676366c1469121f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations.  <br /></td></tr>
+<tr class="separator:a15c3d2912325ace17676366c1469121f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d35a42eb1b3abb4adba9ca79787d2e" id="r_a88d35a42eb1b3abb4adba9ca79787d2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">virtual</a> <a class="el" href="classoomph_1_1FluidInterfaceBoundingElement.html">FluidInterfaceBoundingElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a88d35a42eb1b3abb4adba9ca79787d2e">make_bounding_element</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">face_index</a>)</td></tr>
+<tr class="memdesc:a88d35a42eb1b3abb4adba9ca79787d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an "bounding" element (here actually a 2D line element of type ElasticLineFluidInterfaceBoundingElement&lt;ELEMENT&gt; that allows the application of a contact angle boundary condition on the the specified face.  <br /></td></tr>
+<tr class="separator:a88d35a42eb1b3abb4adba9ca79787d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae9df6c11ccb63dc04c0d5ca655fe1482" id="r_ae9df6c11ccb63dc04c0d5ca655fe1482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#ae9df6c11ccb63dc04c0d5ca655fe1482">compute_surface_derivatives</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Shape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">psi</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">dpsids</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">interpolated_t</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">interpolated_x</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">surface_gradient</a>, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">surface_divergence</a>)</td></tr>
+<tr class="memdesc:ae9df6c11ccb63dc04c0d5ca655fe1482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class.  <br /></td></tr>
+<tr class="separator:ae9df6c11ccb63dc04c0d5ca655fe1482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a2eb4fbe50ac4ff1e9b26e0e1d8ff3186" id="r_a2eb4fbe50ac4ff1e9b26e0e1d8ff3186"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a2eb4fbe50ac4ff1e9b26e0e1d8ff3186">lagrange_index</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n</a>)</td></tr>
+<tr class="memdesc:a2eb4fbe50ac4ff1e9b26e0e1d8ff3186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the index at which the lagrange multiplier is stored at the n-th node.  <br /></td></tr>
+<tr class="separator:a2eb4fbe50ac4ff1e9b26e0e1d8ff3186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a940840693906b7b8d619ff97f521c811" id="r_a940840693906b7b8d619ff97f521c811"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a940840693906b7b8d619ff97f521c811">kinematic_local_eqn</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">n</a>)</td></tr>
+<tr class="memdesc:a940840693906b7b8d619ff97f521c811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier)  <br /></td></tr>
+<tr class="separator:a940840693906b7b8d619ff97f521c811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae82f486496a0647d905ab6ee857de0d0" id="r_ae82f486496a0647d905ab6ee857de0d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#ae82f486496a0647d905ab6ee857de0d0">hijack_kinematic_conditions</a> (<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &gt; &amp;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">bulk_node_number</a>)</td></tr>
+<tr class="memdesc:ae82f486496a0647d905ab6ee857de0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element.  <br /></td></tr>
+<tr class="separator:ae82f486496a0647d905ab6ee857de0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a7852050a89e3aac51ed3693814be9018" id="r_a7852050a89e3aac51ed3693814be9018"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html#a7852050a89e3aac51ed3693814be9018">Lagrange_index</a></td></tr>
+<tr class="memdesc:a7852050a89e3aac51ed3693814be9018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end)  <br /></td></tr>
+<tr class="separator:a7852050a89e3aac51ed3693814be9018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a>&gt;<br />
+class oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;</div><p>Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00672">672</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5e5d81d8ba6c7b6567ec6d1dd42c1c96" name="a5e5d81d8ba6c7b6567ec6d1dd42c1c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e5d81d8ba6c7b6567ec6d1dd42c1c96">&#9670;&#160;</a></span>ElasticUpdateFluidInterfaceElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::ElasticUpdateFluidInterfaceElement </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">FiniteElement</a> *<a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>element_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor, pass a pointer to the bulk element and the face index of the bulk element to which the element is to be attached to. The optional identifier can be used to distinguish the additional nodal value (Lagr mult) created by this element from those created by other FaceElements. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00739">739</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00681">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::Lagrange_index</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a15c3d2912325ace17676366c1469121f" name="a15c3d2912325ace17676366c1469121f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c3d2912325ace17676366c1469121f">&#9670;&#160;</a></span>add_additional_residual_contributions_interface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::add_additional_residual_contributions_interface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Shape</a> &amp;&#160;</td>
+          <td class="paramname"><em>psif</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>dpsifds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>dpsifdS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>dpsifdS_div</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>interpolated_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>interpolated_n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>W</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>J</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to calculate the additional contributions to be added at each integration point. This deals with Lagrange multiplier contribution, as well as any additional contributions by the other equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00877">877</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00692">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::kinematic_local_eqn()</a>, and <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00830">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::lagrange()</a>.</p>
+
+</div>
+</div>
+<a id="ae9df6c11ccb63dc04c0d5ca655fe1482" name="ae9df6c11ccb63dc04c0d5ca655fe1482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9df6c11ccb63dc04c0d5ca655fe1482">&#9670;&#160;</a></span>compute_surface_derivatives()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::compute_surface_derivatives </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Shape</a> &amp;&#160;</td>
+          <td class="paramname"><em>psi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>dpsids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>interpolated_t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>interpolated_x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>surface_gradient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DShape</a> &amp;&#160;</td>
+          <td class="paramname"><em>surface_divergence</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in the specific surface derivative calculations by calling the appropriate function from the derivative class. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00716">716</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="acc1d5bb57e5664b86a9a76a4cfb8259f" name="acc1d5bb57e5664b86a9a76a4cfb8259f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1d5bb57e5664b86a9a76a4cfb8259f">&#9670;&#160;</a></span>fill_in_contribution_to_jacobian()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::fill_in_contribution_to_jacobian </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>residuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">DenseMatrix</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>jacobian</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fill in contribution to residuals and Jacobian. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00837">837</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ae82f486496a0647d905ab6ee857de0d0" name="ae82f486496a0647d905ab6ee857de0d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae82f486496a0647d905ab6ee857de0d0">&#9670;&#160;</a></span>hijack_kinematic_conditions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::hijack_kinematic_conditions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>bulk_node_number</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hijacking the kinematic condition corresponds to hijacking the variables associated with the Lagrange multipliers that are assigned on construction of this element. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00701">701</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00685">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::lagrange_index()</a>.</p>
+
+</div>
+</div>
+<a id="a940840693906b7b8d619ff97f521c811" name="a940840693906b7b8d619ff97f521c811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a940840693906b7b8d619ff97f521c811">&#9670;&#160;</a></span>kinematic_local_eqn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::kinematic_local_eqn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Equation number of the kinematic BC associated with node j. (This is the equation for the Lagrange multiplier) </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00692">692</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00685">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::lagrange_index()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00877">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::add_additional_residual_contributions_interface()</a>.</p>
+
+</div>
+</div>
+<a id="a9340c15f4463fad5bca019829f5998cf" name="a9340c15f4463fad5bca019829f5998cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9340c15f4463fad5bca019829f5998cf">&#9670;&#160;</a></span>lagrange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> &amp; <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::lagrange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the lagrange multiplier at local node n. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00830">830</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">References <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00685">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::lagrange_index()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00877">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::add_additional_residual_contributions_interface()</a>.</p>
+
+</div>
+</div>
+<a id="a2eb4fbe50ac4ff1e9b26e0e1d8ff3186" name="a2eb4fbe50ac4ff1e9b26e0e1d8ff3186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb4fbe50ac4ff1e9b26e0e1d8ff3186">&#9670;&#160;</a></span>lagrange_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::lagrange_index </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return the index at which the lagrange multiplier is stored at the n-th node. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00685">685</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00701">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::hijack_kinematic_conditions()</a>, <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00692">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::kinematic_local_eqn()</a>, and <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00830">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::lagrange()</a>.</p>
+
+</div>
+</div>
+<a id="a88d35a42eb1b3abb4adba9ca79787d2e" name="a88d35a42eb1b3abb4adba9ca79787d2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d35a42eb1b3abb4adba9ca79787d2e">&#9670;&#160;</a></span>make_bounding_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">virtual</a> <a class="el" href="classoomph_1_1FluidInterfaceBoundingElement.html">FluidInterfaceBoundingElement</a> * <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::make_bounding_element </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">int</a> &amp;&#160;</td>
+          <td class="paramname"><em>face_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create an "bounding" element (here actually a 2D line element of type ElasticLineFluidInterfaceBoundingElement&lt;ELEMENT&gt; that allows the application of a contact angle boundary condition on the the specified face. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00960">960</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a8baae14bdede6a659e948942d7a08cb5" name="a8baae14bdede6a659e948942d7a08cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8baae14bdede6a659e948942d7a08cb5">&#9670;&#160;</a></span>output() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *&#160;</td>
+          <td class="paramname"><em>file_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the C-style output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00861">861</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a10b64a463b5ff98475e727b06d95b0ac" name="a10b64a463b5ff98475e727b06d95b0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10b64a463b5ff98475e727b06d95b0ac">&#9670;&#160;</a></span>output() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">FILE</a> *&#160;</td>
+          <td class="paramname"><em>file_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>C-style Output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00867">867</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a46b22d178b248355083a3564e4e92eb0" name="a46b22d178b248355083a3564e4e92eb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46b22d178b248355083a3564e4e92eb0">&#9670;&#160;</a></span>output() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overload the output function. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00849">849</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="ac193aa64a8223a96e4148a5af456fb64" name="ac193aa64a8223a96e4148a5af456fb64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac193aa64a8223a96e4148a5af456fb64">&#9670;&#160;</a></span>output() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">void</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::output </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n_plot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Output the element. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00855">855</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<a id="a41706192ce4de3c4c51a70086199d8fa" name="a41706192ce4de3c4c51a70086199d8fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41706192ce4de3c4c51a70086199d8fa">&#9670;&#160;</a></span>zeta_nodal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">double</a> <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::zeta_nodal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">const</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The "global" intrinsic coordinate of the element when viewed as part of a geometric object should be given by the FaceElement representation, by default. </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00822">822</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7852050a89e3aac51ed3693814be9018" name="a7852050a89e3aac51ed3693814be9018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7852050a89e3aac51ed3693814be9018">&#9670;&#160;</a></span>Lagrange_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> EQUATION_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> DERIVATIVE_CLASS , <a class="el" href="classoomph_1_1AnnularSpineMesh.html">class</a> <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1AnnularSpineMesh.html">Vector</a>&lt;<a class="el" href="classoomph_1_1AnnularSpineMesh.html">unsigned</a>&gt; <a class="el" href="classoomph_1_1ElasticUpdateFluidInterfaceElement.html">oomph::ElasticUpdateFluidInterfaceElement</a>&lt; EQUATION_CLASS, DERIVATIVE_CLASS, <a class="el" href="classoomph_1_1AnnularSpineMesh.html">ELEMENT</a> &gt;::Lagrange_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Storage for the location of the Lagrange multiplier (If other additional values have been added we need to add the Lagrange multiplier at the end) </p>
+
+<p class="definition">Definition at line <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00681">681</a> of file <a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="specific__node__update__interface__elements_8h_source.html#l00739">oomph::ElasticUpdateFluidInterfaceElement&lt; EQUATION_CLASS, DERIVATIVE_CLASS, ELEMENT &gt;::ElasticUpdateFluidInterfaceElement()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="specific__node__update__interface__elements_8h_source.html">specific_node_update_interface_elements.h</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:14:05
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,612 @@
+\mainpage Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation
+
+
+In this document we discuss the finite-element-based solution of the 
+Helmholtz equation in cylindrical polar coordinates, using a
+Fourier-decomposition of the solution in the azimuthal direction. 
+This is useful for solving time-harmonic wave problems in 3D
+axisymmetric domains, e.g. the scattering of acoustic sound field
+from a sphere, the example we consider below.
+
+
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+<B>Acknowledgement:</B>
+This implementation of the equations and the 
+documentation were developed jointly
+with Ahmed Wassfi (EnstaParisTech, Paris).
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+<HR>
+<HR>
+
+\section theory Theory: The Fourier-decomposed Helmholtz equation
+
+The Helmholtz equation governs time-harmonic solutions of problems
+governed by the linear wave equation
+\f[
+\nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[lin_wave]@
+\f]
+where \f$ c \f$ is the wavespeed. Assuming that \f$ U(x,y,z,t) \f$
+is time-harmonic, with frequency \f$ \omega \f$, we write the real
+function \f$ U(x,y,z,t) \f$ as
+\f[
+U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t})
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[time_decomp]@
+\f]
+where \f$ {\tt U}(x,y,z) \f$ is complex-valued. This transforms 
+(@R[lin_wave]@) into the Helmholtz equation
+\f[
+\nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[helmholtz]@
+\f]
+where 
+\f[
+k = \frac{\omega}{c}
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[wavenumber]@
+\f]
+is the wave number. Like other elliptic PDEs the Helmholtz equation
+admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+
+If the equation is solved in an infinite domain (e.g. in scattering
+problems) the solution must satisfy the so-called
+<a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">
+Sommerfeld radiation condition</a> which in 3D has the form
+\f[
+\lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U}
+\right) =0. 
+\f]
+Mathematically, this conditions is required to ensure the uniqueness
+of the solution (and hence the well-posedness of the problem).
+In a physical context, such as a scattering problem, the condition 
+ensures that scattering of an incoming wave only produces outgoing not 
+incoming waves from infinity.
+
+  These equations can be solved using \c oomph-lib's cartesian
+Helmholtz elements, described in  
+<a href="../../../helmholtz/scattering/html/index.html">another
+tutorial.</a> Here we consider an alternative approach in which we
+solve the equations in cylindrical polar coordinates \f$ (r,\varphi,z)
+\f$, related to the cartesian coordinates \f$ (x,y,z) \f$ via
+\f[
+x =  r \cos(\varphi),
+\f]
+\f[
+y =  r \sin(\varphi),
+\f]
+\f[
+z = z.
+\f]
+We then decompose the solution into its Fourier components by writing
+\f[
+{\tt U}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} u_N(r,z) \exp({\rm i}
+N \varphi).
+\f]
+Since the governing equations are linear we can compute each Fourier
+component \f$ u_N(r,z) \f$ individually by solving
+\f[
+\nabla^2 {u_{N}}(r,z) + \left(k^2-\frac{N^2}{r^2}\right) u_N(r,z) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[fourier_helmholtz]@
+\f]
+while specifying the Fourier wavenumber \f$ N \f$ as a parameter.
+
+<HR>
+<HR>
+
+\section discr Discretisation by finite elements
+The discretisation of the Fourier-decomposed Helmholtz equation itself 
+only requires a trivial modification of its 
+<a href="../../../helmholtz/scattering/html/index.html">cartesian
+counterpart</a>. Since most practical applications
+of the Helmholtz equation involve complex-valued solutions, we provide 
+separate storage for the real and imaginary parts of the solution -- 
+each \c Node therefore stores two unknowns values. By default,
+the real and imaginary parts are stored as values 0 and 1,
+respectively; see the section \ref numbering for details.
+
+The application of Dirichlet and Neumann boundary conditions is 
+straightforward and follows the pattern employed for the solution
+of the Poisson equation: 
+- Dirichlet conditions are imposed by pinning the relevant nodal
+  values and setting them to the appropriate prescribed values. 
+- Neumann (flux) boundary conditions are imposed via 
+  \c FaceElements (here the \c FourierDecomposedHelmholtzFluxElements). 
+   <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+  As usual</a> we attach these to the faces of the "bulk" elements
+  that are subject to the Neumann boundary conditions.
+.
+
+The imposition of the Sommerfeld radiation condition for problems in
+infinite domains is slightly more complicated. In the following 
+discussion we will assume that the infinite domain is truncated at 
+a spherical artificial boundary \f$ \Gamma \f$ of radius \f$ R. \f$ 
+[The methodology can easily be modified to deal with other geometries but this 
+has not been done yet -- any volunteers?]. All methods exploit the 
+fact that the relevant solution of the Helmholtz equation can 
+be written in spherical polar coordinates \f$ (\rho,\varphi,\theta) \f$ as
+\f[
+{\tt U}(\rho,\theta,\varphi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l}
+\left(
+a_{ln} \ h_{l}^{(1)}(k\rho)+
+b_{ln} \ h_{l}^{(2)}(k\rho)
+\right)P_{l}^{n}
+(\cos\theta)\exp({\rm i} n \varphi).
+ \ \ \ \ \ \ \ @E[gen_polar_hh]@
+\f]
+where the \f$a_{ln}, b_{ln} \f$ are arbitrary coefficients and the functions
+\f[
+h_{l}^{(1)}(x)=j_{l}(x)+{\rm i} y_{l}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+h_{l}^{(2)}(x)=j_{l}(x)-{\rm i} y_{l}(x) 
+\f]
+are the spherical Hankel functions of first and second kind,
+respectively, expressed in terms the spherical Bessel functions
+\f[
+j_{l}(x)=\sqrt{\frac{\pi}{2x}}J_{l+1/2}(x) \mbox{ \ \ \ \ and \ \ \ \ }
+y_{l}(x)=\sqrt{\frac{\pi}{2x}}Y_{l+1/2}(x).
+\f]
+The functions
+\f[
+P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
+\f]
+are the associated Legendre functions, expressed in terms of the
+Legendre polynomials
+\f[
+P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
+\f]
+This definition shows that \f$ P_{l}^{m}(x)=0 \f$ for \f$ m>l \f$
+which explains the limited range of summation indices in the second
+sum in (@R[gen_polar_hh]@).
+
+
+
+The relation between the cylindrical polar coordinates \f$
+(r,\varphi,z)\f$ and spherical polar coordinates \f$
+(\rho,\theta,\varphi) \f$
+is given by 
+\f[
+\rho = \sqrt{r^2 + z^2},
+\f]
+\f[
+\theta = \arctan(r/z),
+\f]
+\f[
+\varphi = \varphi,
+\f]
+so \f$\varphi \in [0,2\pi] \f$ remains unchanged, and   
+\f$\theta \in [0,\pi] \f$ sweeps from the north pole 
+(\f$ \theta = 0 \f$), via the equator (\f$ \theta = \pi/2 \f$ )
+to the south pole (\f$ \theta = \pi \f$).
+
+
+\subsection DtN The Dirichlet-to-Neumann mapping (DtN)
+Assuming that the artificial outer boundary \f$ \Gamma \f$is sufficiently far
+from the region of interest, so that any near field effects 
+associated with the scatterer have decayed,
+we have to ensure that the solution on \f$ \Gamma \f$ contains only
+outgoing waves. For our choice of the time-dependence in
+(@R[time_decomp]@), such waves are represented by
+the terms involving the spherical Hankel functions of the first kind,
+\f$ h_l^{(1)} \f$, in (@R[gen_polar_hh]@).
+
+The solution on (and near) \f$ \Gamma \f$  is therefore given by
+\f[
+{\tt U}(\rho,\theta,\phi)=
+\sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho)
+\ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi).
+\f]
+Restricting ourselves to the single azimuthal Fourier mode \f$ n=N \f$
+to be determined by (@R[fourier_helmholtz]@), we have
+\f[
+u_N(\rho,\theta)=\sum_{l=N}^{+\infty}
+a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta).
+ \ \ \ \ \ \ \ @E[outgoing_single_mode_hh]@
+\f]
+We multiply this equation by \f$ P_{n}^{N}(\cos\theta)
+\sin(\theta)\f$, integrate over \f$ \theta \f$, and exploit the 
+orthogonality of the Legendre functions, to show that
+\f[
+a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)}
+\frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta)
+\ \sin(\theta) \ d\theta.
+\f]
+Using these coefficients, we can differentiate
+(@R[outgoing_single_mode_hh]@) to obtain the normal derivative of the
+solution on the (spherical) artificial outer boundary \f$ \Gamma \f$ in terms
+of the solution itself:
+\f[
+\left. \frac{\partial u}{\partial n} \right|_{\rho=R} = 
+\left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = 
+k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)'}(kR)\ P_{n}^{N}(\cos \theta)
+\f]
+i.e.
+\f[
+\gamma(u(R,\theta))=
+k \sum_{n=N}^{\infty} h_{n}^{(1)'}(kR) \ 
+P_{n}^{N}(\cos \theta) \
+\frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!}
+\int_{0}^{\pi} u(R,\overline{\theta}) \
+P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \;
+d\overline{\theta},
+\ \ \ \ \ \ \ \ \ \  @E[gamma_bc]@
+\f]
+a Dirichlet-to-Neumann mapping.
+
+
+Equation (@R[gamma_bc]@) provides a condition on the
+normal derivative of the solution along the artificial boundary 
+and is implemented in the \c FourierDecomposedHelmholtzDtNBoundaryElement class.
+Since \f$ \gamma \f$ depends on the solution everywhere 
+along the artificial boundary, the application of the Sommerfeld 
+radiation condition via (@R[gamma_bc]@) introduces a non-local coupling
+between all the degrees of freedom located on that boundary.
+This is handled by classifying the unknowns that affect \f$ \gamma \f$ 
+but are not associated with an element's own nodes as its external \c Data. 
+
+To facilitate the setup of the interaction between the 
+\c FourierDecomposedHelmholtzDtNBoundaryElements, \c oomph-lib provides the
+class \c FourierDecomposedHelmholtzDtNMesh which provides storage for 
+(the pointers to) the  \c FourierDecomposedHelmholtzDtNBoundaryElements 
+that discretise the artificial boundary. The 
+member function 
+\c FourierDecomposedHelmholtzDtNMesh::setup_gamma() pre-computes the 
+\f$ \gamma \f$ values required for the imposition of equation (@R[gamma_bc]@).
+The radius \f$ R \f$ of the artificial boundary and the (finite) upper limit
+for the sum in (@R[gamma_bc]@) are specified
+as arguments to the constructor of the \c FourierDecomposedHelmholtzDtNMesh.
+
+<b>NOTE:</b> Since \f$ \gamma \f$  depends on the solution, 
+it must be recomputed whenever the unknowns are updated during
+the Newton iteration. This is best done by adding a call to
+\c FourierDecomposedHelmholtzDtNMesh::setup_gamma() to 
+\c Problem::actions_before_newton_convergence_check().
+[If Helmholtz's equation is solved in isolation (or within
+a coupled, but linear problem), Newton's method will converge 
+in one iteration. In such cases the unnecessary recomputation of 
+\f$ \gamma \f$ after the one-and-only Newton iteration can be 
+suppressed by setting \c Problem::Problem_is_nonlinear to 
+\c false.]
+
+
+
+<HR>
+<HR>
+
+\section scattering A specific example
+We will now demonstrate the methodology for a specific example
+for which the exact solution of (@R[fourier_helmholtz]@) is given by
+\f[
+u_N(r,z)=u_N^{[exact]}(r,z)=\sum_{l=N}^{N_{\rm terms}} 
+h_{l}^{(1)}(k\sqrt{r^2+z^2}) \ P_{l}^{N}\left(\frac{z}{\sqrt{r^2+z^2}}\right).
+\f]
+This solution corresponds to the superposition of several outgoing 
+waves of the form  (@R[outgoing_single_mode_hh]@) with 
+coefficients \f$ a_l = 1 \f$.  We solve the Helmholtz
+equation in the infinite region surrounding the unit sphere
+on whose surface we impose flux boundary conditions 
+consistent with the derivative of the exact solution. 
+
+To solve this problem numerically, we discretise the annular
+domain \f$ 1 < \sqrt{r^2 + z^2} < 3 \f$ with finite elements and
+apply the Sommerfeld radiation condition using a Dirichlet-to-Neumann 
+mapping on the artificial
+outer boundary \f$ \Gamma \f$ located  at \f$ \sqrt{r^2 + z^2}
+= R = 3\f$.
+
+The two plots below show a comparison between the exact and computed
+solutions for \f$ N_{\rm terms}=6 \f$ , a Fourier wavenumber 
+of \f$ N=3 \f$ , and a (squared) Helmholtz wavenumber of \f$ k^2 = 10 \f$.
+
+@I w 0.6\textwidth real "Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=3 and a wavenumber of k^2 = 10. "
+
+
+@I w 0.6\textwidth imag "Plot of the exact (green) and computed (red) imaginary parts of the solution of the Fourier-decomposed Helmholtz equation for N=3 and a wavenumber of k^2 = 10. "
+
+
+
+
+
+<HR>
+<HR>
+
+\section num_soln The numerical solution
+
+\subsection namespace The global namespace
+
+As usual, we define the problem parameters in a global namespace.
+The main parameter are the (square of the) Helmholtz wave number,
+\f$ k^2 \f$, and the Fourier wavenumber, \f$ N \f$. 
+The parameter \c Nterms_for_DtN determines how many terms are to be
+used in the computation of the \f$ \gamma  \f$ integral in the
+Dirichlet-to-Neumann mapping (@R[gamma_bc]@); see \ref acc.
+
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_namespace===
+\until Nterms_for_DtN
+
+Next we define the coefficients
+
+\until I(0.0,1.0) 
+
+required for the specification of the exact solution
+
+\skipline Exact solution
+\until void get_exact_u
+
+and its derivative,
+
+\skipline Get -du/dr (spherical r) 
+\until void exact_minus_dudr
+
+whose listings we omit here.
+
+<HR>
+<HR>  
+
+\subsection main The driver code
+The driver code is very straightforward. We create the problem object,
+discretising the domain with 3x3-noded \c QFourierDecomposedHelmholtzElements 
+and set up the output directory.
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_main
+\until {
+\skipline Create the problem
+\until RESLT
+
+We solve the problem for a range of Fourier wavenumbers
+and document the results.
+
+\until } //end of main
+
+ 
+<HR>
+<HR>
+
+\subsection class The problem class
+
+The problem class is very similar to that employed for 
+the <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
+solution of the 2D Poisson equation with flux boundary
+conditions</a> or, of course, the 2D cartesian Helmholtz problem
+discussed in <a href="../../../helmholtz/scattering/html/index.html">another
+tutorial.</a>
+
+
+ We provide two separate meshes of \c FaceElements: one for the 
+inner boundary where the \c FourierDecomposedHelmholtzFluxElements apply the
+Neumann condition, and one for 
+the outer boundary where we apply the (approximate) Sommerfeld 
+radiation condition. As discussed in section \ref DtN , we use the function
+\c actions_before_newton_convergence_check() to recompute the
+\f$ \gamma \f$ integral whenever the unknowns are updated
+during the Newton iteration.
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_problem_class
+\until }; // end of problem class
+
+
+<HR>
+<HR>
+
+\subsection constr The problem constructor
+
+We start by building the bulk mesh, using the \c TwoDAnnularMesh.
+
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_constructo
+\until AnnularQuadMesh
+
+Next we create and populate the mesh of elements containing the
+DtN boundary elements on the artificial outer boundary,
+
+\until create_outer_bc_elements()
+
+and attach flux elements to the inner boundary:
+
+\until create_flux_elements_on_inner
+
+We combine the various meshes to a global mesh,
+
+\until build_global_mesh()
+
+pass the problem parameters to the bulk elements,
+
+\until }
+
+and set up the equation numbering scheme:
+
+\until end of constructor
+
+The problem is now ready to be solved.
+
+<HR>
+<HR>
+
+
+\subsection create_flux Creating the face elements
+The functions \c create_flux_elements(...) and 
+\c create_outer_bc_elements(...) create the \c FaceElements
+required to apply the boundary conditions on the inner and
+outer boundaries of the annular computational domain.
+They both loop over the bulk elements that are adjacent to the appropriate
+mesh boundary and attach the required \c FaceElements to their
+faces. The newly created \c FaceElements are then added
+to the appropriate mesh.
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_create_outer
+\until } // end of create_outer
+
+(We omit the listing of the function \c create_flux_elements(...) because
+it is very similar.  Feel free to inspect in the 
+<A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
+source code.</A>)
+
+
+<HR>
+<HR>
+
+
+\subsection doc Post-processing
+The post-processing function \c doc_solution(...) 
+plots the computed and exact solutions (real and complex parts)
+and assesses the error in the computed solution.
+
+\dontinclude sphere_scattering.cc
+\skipline start_of_doc
+\until Norm of solution
+
+The function \c check_gamma(...) is used to check the computation of
+the \f$ \gamma \f$ integral. If computed correctly, its values
+(pre-computed at the Gauss points of the 
+\c FourierDecomposedHelmholtzFluxElement) ought to agree (well) with the
+derivative of the exact solution. They do; see \ref acc.
+
+\until check_gamma
+
+Finally, we output the time-averaged power radiated over the
+outer boundary of the domain, defined as
+\f[
+\overline{\cal P }_N =  \pi R^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} -
+       Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} 
+\bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.
+\f]
+We refer to 
+<a href="../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix">another
+tutorial</a> for the derivation which shows (in the context of
+an acoustic fluid-structure interaction problem) why this is a sensible
+definition of the radiated power. 
+
+\until } // end of doc
+
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+\subsection numbering The enumeration of the unknowns
+As discussed in the introduction, most practically relevant
+solutions of the Helmholtz equation are complex valued. Since \c oomph-lib's 
+solvers only deal with real (double precision) unknowns, the equations
+are separated into their real and imaginary parts.
+In the implementation of the Helmholtz elements, we store the real
+and imaginary parts of the solution as two separate values at each 
+node. By default, the real and imaginary parts are accessible via 
+\c Node::value(0) and \c Node::value(1). However, to facilitate the 
+use of the elements
+in multi-physics problems we avoid accessing the unknowns
+directly in this manner but provide the virtual function
+\code
+std::complex<unsigned> FourierDecomposedHelmholtzEquations<DIM>::u_index_fourier_decomposed_helmholtz()
+\endcode
+which returns a complex number made of the two unsigneds that indicate
+which nodal value represents the real and imaginary parts of the solution.
+This function may be overloaded in combined multi-physics elements
+in which a Helmholtz element is combined (by multiple inheritance) 
+with another element, using the strategy described in 
+<a href="../../../multi_physics/b_convection/html/index.html">
+the Boussinesq convection tutorial</a>.
+
+\subsubsection acc The accuracy of the boundary condition elements
+As discussed above, the Dirichlet-to-Neumann mapping allows an
+"exact" implementation of the Sommerfeld radiation condition,
+provided the artificial outer boundary is sufficiently far from the
+scatterer that any near field effects have decayed. The actual
+accuracy of the computational results depends on various factors: 
+- The number of \c FourierDecomposedHelmholtzDtNBoundaryElement
+  along the artificial domain boundary. Since these elements are
+  attached to the "bulk" \c FourierDecomposedHelmholtzElements
+  it is important that the bulk mesh is sufficiently fine to resolve the
+  relevant features of the solution throughout the domain.
+- The number of terms included in the sum  (@R[gamma_bc]@) --
+  specified in the call to the constructor of the 
+  \c FourierDecomposedHelmholtzDtNMesh.
+- The accuracy of the integration scheme used to evaluate the 
+  integral in (@R[gamma_bc]@).
+.
+
+<HR>
+
+\subsection ex Exercises
+
+\subsubsection lin Exploiting linearity
+Confirm that the (costly) re-computation of the 
+\f$ \gamma \f$ integral in 
+\c actions_before_newton_convergence_check() after the
+first (and only) linear solve in the Newton iteration can be 
+avoided by declaring the problem to be linear.
+
+
+
+\subsubsection acc_ex The accuracy of the boundary condition elements
+- Explore the accuracy (and computational cost) of the application of
+  the DtN boundary condition by varying the number of terms included 
+  in the sum  (@R[gamma_bc]@). Specifically, confirm that 
+  an obviously wrong result is obtained if we choose 
+  \c  ProblemParameters::Nterms_for_DtN  < 
+  \c  ProblemParameters::Nterms.  
+- Explore the function \c check_gamma() and confirm that 
+  the computed value for the \f$ \gamma \f$ integral provides
+  a good approximation to the derivative of the exact solution.
+  Here is a representative comparison obtained with the parameters used in the
+  driver code listed above:
+.
+ 
+@I w 0.6\textwidth compare_gamma "Plot of the exact (dashed) and computed (solid) gamma integral for N=3 and a wavenumber of k^2 = 10. "
+
+\subsubsection sphere Scattering of a planar acoustic wave off a sound-hard sphere
+
+Modify the driver code to compute the sound field created when a
+planar acoustic wave, propagating along the \f$ z \f$-axis, impinges
+on a sound-hard sphere.  The relevant theory is described in
+<a href="../../../helmholtz/scattering/html/index.html#scattering">another
+tutorial</a>; you can use the fact that in spherical polar
+coordinates a planar wave of the form
+\f[
+{\tt U}(x,y,z) = \exp({\rm i}kz)
+\f]
+can be written as
+\f[
+{\tt U}(\rho,\theta) = \sum_{l=0}^{\infty}
+(2l+1) \ {\rm i}^l \ j_l(kr) \  P_l(\cos\theta),
+\f]
+i.e. the wave comprises a single azimuthal Fourier component with \f$
+N=0\f$. Note that the  
+<A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">driver
+code</a> already contains a namespace \c PlanarWave with several
+(but not all!) functions required for this task.
+
+  </A>
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/
+  </A>
+  </CENTER>
+- The driver code is: 
+  <CENTER>
+  <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
+  demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc
+  </A>
+  </CENTER>
+.
+

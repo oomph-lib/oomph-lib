@@ -1,0 +1,1529 @@
+// LIC// ====================================================================
+// LIC// This file forms part of oomph-lib, the object-oriented,
+// LIC// multi-physics finite-element library, available
+// LIC// at http://www.oomph-lib.org.
+// LIC//
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
+// LIC//
+// LIC// This library is free software; you can redistribute it and/or
+// LIC// modify it under the terms of the GNU Lesser General Public
+// LIC// License as published by the Free Software Foundation; either
+// LIC// version 2.1 of the License, or (at your option) any later version.
+// LIC//
+// LIC// This library is distributed in the hope that it will be useful,
+// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// LIC// Lesser General Public License for more details.
+// LIC//
+// LIC// You should have received a copy of the GNU Lesser General Public
+// LIC// License along with this library; if not, write to the Free Software
+// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// LIC// 02110-1301  USA.
+// LIC//
+// LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+// LIC//
+// LIC//====================================================================
+// Header file for SpaceTimeUnsteadyHeatMixedOrder elements
+#ifndef OOMPH_DISCONTINUOUS_GALERKIN_SPACE_TIME_UNSTEADY_HEAT_MIXED_ORDER_ELEMENTS_HEADER
+#define OOMPH_DISCONTINUOUS_GALERKIN_SPACE_TIME_UNSTEADY_HEAT_MIXED_ORDER_ELEMENTS_HEADER
+
+// Config header
+#ifdef HAVE_CONFIG_H
+#include <oomph-lib-config.h>
+#endif
+
+// Oomph-lib headers
+#include "generic/Qelements.h"
+#include "generic/shape.h"
+#include "generic/projection.h"
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+namespace oomph
+{
+  //============================================================================
+  /// Base class so that we don't need to know the dimension just to
+  /// set the source function!
+  //============================================================================
+  class SpaceTimeUnsteadyHeatEquationsBase : public virtual FiniteElement
+  {
+  public:
+    /// Function pointer to source function fct(t,x,f(x,t)) -- x
+    /// is a Vector!
+    typedef void (*SpaceTimeUnsteadyHeatSourceFctPt)(const double& time,
+                                                     const Vector<double>& x,
+                                                     double& u);
+
+    /// Access function: Pointer to source function
+    virtual SpaceTimeUnsteadyHeatSourceFctPt& source_fct_pt() = 0;
+  };
+
+  //============================================================================
+  /// A class for all isoparametric elements that solve the
+  /// SpaceTimeUnsteadyHeatMixedOrder equations.
+  /// \f[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \f]
+  /// This contains the generic maths. Shape functions, geometric
+  /// mapping etc. must get implemented in derived class.
+  /// Note that this class assumes an isoparametric formulation, i.e. that
+  /// the scalar unknown is interpolated using the same shape funcitons
+  /// as the position.
+  //============================================================================
+  template<unsigned SPATIAL_DIM>
+  class SpaceTimeUnsteadyHeatMixedOrderEquations
+    : public virtual SpaceTimeUnsteadyHeatEquationsBase
+  {
+  public:
+    /// Constructor: Initialises the Source_fct_pt to null and sets
+    /// flag to use ALE formulation of the equations. Also, set Alpha (thermal
+    /// inertia) and Beta (thermal conductivity) parameters to defaults (both
+    /// one for natural scaling).
+    SpaceTimeUnsteadyHeatMixedOrderEquations()
+      : Source_fct_pt(0), ALE_is_disabled(false)
+    {
+      // Set Alpha parameter to default (one for natural scaling)
+      Alpha_pt = &Default_alpha_parameter;
+
+      // Set Beta parameter to default (one for natural scaling)
+      Beta_pt = &Default_beta_parameter;
+    } // End of SpaceTimeUnsteadyHeatMixedOrderEquations
+
+
+    /// Broken copy constructor
+    SpaceTimeUnsteadyHeatMixedOrderEquations(
+      const SpaceTimeUnsteadyHeatMixedOrderEquations& dummy) = delete;
+
+    /// Disable ALE, i.e. assert the mesh is not moving -- you do this
+    /// at your own risk!
+    void disable_ALE()
+    {
+      // Set the flag to true
+      ALE_is_disabled = true;
+    } // End of disable_ALE
+
+
+    /// (Re-)enable ALE, i.e. take possible mesh motion into account
+    /// when evaluating the time-derivative. Note: By default, ALE is
+    /// enabled, at the expense of possibly creating unnecessary work
+    /// in problems where the mesh is, in fact, stationary.
+    void enable_ALE()
+    {
+      // Set the flag to false
+      ALE_is_disabled = false;
+    } // End of enable_ALE
+
+
+    /// Compute norm of FE solution
+    void compute_norm(double& norm);
+
+
+    /// Output with default number of plot points
+    void output(std::ostream& outfile)
+    {
+      // Number of plot points
+      unsigned nplot = 5;
+
+      // Output the solution
+      output(outfile, nplot);
+    } // End of output
+
+
+    /// Output FE representation of soln: x,y,u or x,y,z,u at
+    /// nplot^SPATIAL_DIM plot points
+    void output(std::ostream& outfile, const unsigned& nplot);
+
+
+    /// C_style output with default number of plot points
+    void output(FILE* file_pt)
+    {
+      // Number of plot points
+      unsigned nplot = 5;
+
+      // Output the solution
+      output(file_pt, nplot);
+    } // End of output
+
+
+    /// C-style output FE representation of soln: x,y,u or x,y,z,u at
+    /// nplot^SPATIAL_DIM plot points
+    void output(FILE* file_pt, const unsigned& nplot);
+
+
+    /// Output exact soln: x,y,u_exact or x,y,z,u_exact at nplot^SPATIAL_DIM
+    /// plot points
+    void output_fct(std::ostream& outfile,
+                    const unsigned& nplot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+
+    /// Output exact soln: x,y,u_exact or x,y,z,u_exact at
+    /// nplot^SPATIAL_DIM plot points (time-dependent version)
+    virtual void output_fct(
+      std::ostream& outfile,
+      const unsigned& nplot,
+      const double& time,
+      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
+
+
+    /// Get error and norm against exact solution
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                       double& error,
+                       double& norm);
+
+
+    /// Get error and norm against exact solution
+    void compute_error(std::ostream& outfile,
+                       FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                       const double& time,
+                       double& error,
+                       double& norm);
+
+
+    /// C-style output FE representation of soln: x,y,u or x,y,z,u at
+    /// nplot^SPATIAL_DIM plot points
+    void output_element_paraview(std::ofstream& outfile, const unsigned& nplot);
+
+
+    /// Number of scalars/fields output by this element. Reimplements
+    /// broken virtual function in base class.
+    unsigned nscalar_paraview() const
+    {
+      // Only one field to output
+      return 1;
+    } // End of nscalar_paraview
+
+
+    /// Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_paraview(std::ofstream& file_out,
+                               const unsigned& i,
+                               const unsigned& nplot) const
+    {
+#ifdef PARANOID
+      if (i != 0)
+      {
+        std::stringstream error_stream;
+        error_stream << "Space-time unsteady heat elements only store a single "
+                     << "field so i must be 0 rather than " << i << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get the number of plot points
+      unsigned local_loop = this->nplot_points_paraview(nplot);
+
+      // Loop over the plot points
+      for (unsigned j = 0; j < local_loop; j++)
+      {
+        // Storage for the local coordinates
+        Vector<double> s(SPATIAL_DIM + 1);
+
+        // Get the local coordinate of the required plot point
+        this->get_s_plot(j, nplot, s);
+
+        // Output the interpolated solution value
+        file_out << this->interpolated_u_ust_heat(s) << std::endl;
+      }
+    } // End of scalar_value_paraview
+
+
+    /// Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_fct_paraview(
+      std::ofstream& file_out,
+      const unsigned& i,
+      const unsigned& nplot,
+      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt) const
+    {
+#ifdef PARANOID
+      if (i != 0)
+      {
+        std::stringstream error_stream;
+        error_stream << "Space-time unsteady heat elements only store a single "
+                     << "field so i must be 0 rather than " << i << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get the number of plot points
+      unsigned local_loop = this->nplot_points_paraview(nplot);
+
+      // Loop over the plot points
+      for (unsigned j = 0; j < local_loop; j++)
+      {
+        // Storage for the local coordinates
+        Vector<double> s(SPATIAL_DIM + 1);
+
+        // Storage for the global coordinates
+        Vector<double> spatial_coordinates(SPATIAL_DIM);
+
+        // Get the local coordinate of the required plot point
+        this->get_s_plot(j, nplot, s);
+
+        // Loop over the spatial coordinates
+        for (unsigned i = 0; i < SPATIAL_DIM; i++)
+        {
+          // Assign the i-th spatial coordinate
+          spatial_coordinates[i] = interpolated_x(s, i);
+        }
+
+        // Exact solution vector (here it's simply a scalar)
+        Vector<double> exact_soln(1, 0.0);
+
+        // Get the exact solution at this point
+        (*exact_soln_pt)(spatial_coordinates, exact_soln);
+
+        // Output the interpolated solution value
+        file_out << exact_soln[0] << std::endl;
+      } // for (unsigned j=0;j<local_loop;j++)
+    } // End of scalar_value_fct_paraview
+
+
+    /// Write values of the i-th scalar field at the plot points. Needs
+    /// to be implemented for each new specific element type.
+    void scalar_value_fct_paraview(
+      std::ofstream& file_out,
+      const unsigned& i,
+      const unsigned& nplot,
+      const double& time,
+      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt) const
+    {
+#ifdef PARANOID
+      if (i != 0)
+      {
+        std::stringstream error_stream;
+        error_stream << "Space-time unsteady heat elements only store a single "
+                     << "field so i must be 0 rather than " << i << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get the number of plot points
+      unsigned local_loop = this->nplot_points_paraview(nplot);
+
+      // Loop over the plot points
+      for (unsigned j = 0; j < local_loop; j++)
+      {
+        // Storage for the local coordinates
+        Vector<double> s(SPATIAL_DIM + 1);
+
+        // Storage for the time value
+        double interpolated_t = 0.0;
+
+        // Storage for the global coordinates
+        Vector<double> spatial_coordinates(SPATIAL_DIM);
+
+        // Get the local coordinate of the required plot point
+        this->get_s_plot(j, nplot, s);
+
+        // Loop over the spatial coordinates
+        for (unsigned i = 0; i < SPATIAL_DIM; i++)
+        {
+          // Assign the i-th spatial coordinate
+          spatial_coordinates[i] = interpolated_x(s, i);
+        }
+
+        // Get the time value
+        interpolated_t = interpolated_x(s, SPATIAL_DIM);
+
+        // Exact solution vector (here it's simply a scalar)
+        Vector<double> exact_soln(1, 0.0);
+
+        // Get the exact solution at this point
+        (*exact_soln_pt)(interpolated_t, spatial_coordinates, exact_soln);
+
+        // Output the interpolated solution value
+        file_out << exact_soln[0] << std::endl;
+      } // for (unsigned j=0;j<local_loop;j++)
+    } // End of scalar_value_fct_paraview
+
+
+    /// Name of the i-th scalar field. Default implementation
+    /// returns V1 for the first one, V2 for the second etc.
+    std::string scalar_name_paraview(const unsigned& i) const
+    {
+      // If we're outputting the solution
+      if (i == 0)
+      {
+        // There's only one field to output
+        return "U";
+      }
+      // Never get here
+      else
+      {
+        std::stringstream error_stream;
+        error_stream << "These unsteady heat elements only store 1 field, \n"
+                     << "but i is currently  " << i << std::endl;
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+
+        // Dummy return
+        return " ";
+      }
+    } // End of scalar_name_paraview
+
+
+    /// Access function: Pointer to source function
+    SpaceTimeUnsteadyHeatSourceFctPt& source_fct_pt()
+    {
+      // Return the source function pointer
+      return Source_fct_pt;
+    } // End of source_fct_pt
+
+
+    /// Access function: Pointer to source function. Const version
+    SpaceTimeUnsteadyHeatSourceFctPt source_fct_pt() const
+    {
+      // Return the source function pointer
+      return Source_fct_pt;
+    }
+
+
+    /// Get source term at continous time t and (Eulerian) position x.
+    /// Virtual so it can be overloaded in derived multi-physics elements.
+    virtual inline void get_source_ust_heat(const double& t,
+                                            const unsigned& ipt,
+                                            const Vector<double>& x,
+                                            double& source) const
+    {
+      // If no source function has been set, return zero
+      if (Source_fct_pt == 0)
+      {
+        // Set the source term value to zero
+        source = 0.0;
+      }
+      // Otherwise return the appropriate value
+      else
+      {
+        // Get source strength
+        (*Source_fct_pt)(t, x, source);
+      }
+    } // End of get_source_ust_heat
+
+
+    /// Alpha parameter (thermal inertia)
+    const double& alpha() const
+    {
+      // Return the value of Alpha
+      return *Alpha_pt;
+    } // End of alpha
+
+
+    /// Pointer to Alpha parameter (thermal inertia)
+    double*& alpha_pt()
+    {
+      // Return the pointer to Alpha
+      return Alpha_pt;
+    } // End of alpha_pt
+
+
+    /// Beta parameter (thermal conductivity)
+    const double& beta() const
+    {
+      // Return the pointer to Beta
+      return *Beta_pt;
+    } // End of beta
+
+
+    /// Pointer to Beta parameter (thermal conductivity)
+    double*& beta_pt()
+    {
+      // Return the pointer to Beta
+      return Beta_pt;
+    } // End of beta_pt
+
+
+    /// Get flux: flux[i]=du/dx_i
+    void get_flux(const Vector<double>& s, Vector<double>& flux) const
+    {
+      // Find out how many nodes there are in the element
+      unsigned n_node = nnode();
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = u_index_ust_heat();
+
+      // Set up memory for the shape and test functions
+      Shape psi(n_node);
+
+      // Set up memory for the derivatives of the shape functions
+      DShape dpsidx(n_node, SPATIAL_DIM + 1);
+
+      //------------dshape_eulerian(s,psi,dpsidx)----------------------------
+      // Find the element dimension
+      const unsigned el_dim = this->dim();
+
+      // Get the values of the shape functions and their local derivatives;
+      // temporarily stored in dpsi
+      dshape_local_ust_heat(s, psi, dpsidx);
+
+      // Allocate memory for the inverse jacobian
+      DenseMatrix<double> inverse_jacobian(el_dim);
+
+      // Now calculate the inverse jacobian
+      local_to_eulerian_mapping(dpsidx, inverse_jacobian);
+
+      // Now set the values of the derivatives to be dpsidx
+      transform_derivatives(inverse_jacobian, dpsidx);
+      //------------dshape_eulerian(s,psi,dpsidx)----------------------------
+
+      // Loop over the entries of the flux vector
+      for (unsigned j = 0; j < SPATIAL_DIM; j++)
+      {
+        // Initialise j-th flux entry to zero
+        flux[j] = 0.0;
+      }
+
+      // Loop over nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Loop over derivative directions
+        for (unsigned j = 0; j < SPATIAL_DIM; j++)
+        {
+          // Update the flux value
+          flux[j] += nodal_value(l, u_nodal_index) * dpsidx(l, j);
+        }
+      } // for (unsigned l=0;l<n_node;l++)
+    } // End of get_flux
+
+
+    /// Compute element residual Vector (wrapper)
+    void fill_in_contribution_to_residuals(Vector<double>& residuals)
+    {
+      // Call the generic residuals function with flag set to 0
+      // using a dummy matrix argument
+      fill_in_generic_residual_contribution_ust_heat(
+        residuals, GeneralisedElement::Dummy_matrix, 0);
+    } // End of fill_in_contribution_to_residuals
+
+
+    /// Compute element residual Vector and element Jacobian matrix (wrapper)
+    void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                          DenseMatrix<double>& jacobian)
+    {
+      // Call the generic routine with the flag set to 1
+      fill_in_generic_residual_contribution_ust_heat(residuals, jacobian, 1);
+    } // End of fill_in_contribution_to_jacobian
+
+
+    /// Return FE representation of function value u(s) at local coordinate s
+    inline double interpolated_u_ust_heat(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = u_index_ust_heat();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of the shape functions at local coordinate s
+      shape_ust_heat(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the interpolated u value
+        interpolated_u += nodal_value(l, u_nodal_index) * psi[l];
+      }
+
+      // Return the interpolated u value
+      return interpolated_u;
+    } // End of interpolated_u_ust_heat
+
+
+    /// Return the index at which the unknown value
+    /// is stored. The default value, 0, is appropriate for single-physics
+    /// problems, when there is only one variable, the value that satisfies the
+    /// unsteady heat equation.
+    /// In derived multi-physics elements, this function should be overloaded
+    /// to reflect the chosen storage scheme. Note that these equations require
+    /// that the unknown is always stored at the same index at each node.
+    virtual inline unsigned u_index_ust_heat() const
+    {
+      // Return the default value
+      return 0;
+    } // End of u_index_ust_heat
+
+
+    /// Return FE representation of function value u(s) at local
+    /// coordinate s at previous time t (t=0: present)
+    /// DRAIG: This needs to be broken; doesn't make sense in space-time
+    /// elements!
+    inline double interpolated_u_ust_heat(const unsigned& t,
+                                          const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = u_index_ust_heat();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      shape_ust_heat(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the interpolated u value
+        interpolated_u += nodal_value(t, l, u_nodal_index) * psi[l];
+      }
+
+      // Return the interpolated u value
+      return interpolated_u;
+    } // End of interpolated_u_ust_heat
+
+
+    /// Calculate du/dt at the n-th local node. Uses suitably
+    /// interpolated value for hanging nodes.
+    double du_dt_ust_heat(const unsigned& n) const
+    {
+      // Storage for the local coordinates
+      Vector<double> s(SPATIAL_DIM + 1, 0.0);
+
+      // Get the local coordinate at the n-th node
+      local_coordinate_of_node(n, s);
+
+      // Return the interpolated du/dt value
+      return interpolated_du_dt_ust_heat(s);
+    } // End of du_dt_ust_heat
+
+
+    /// Return FE representation of function value du/dt(s) at local coordinate
+    /// s
+    inline double interpolated_du_dt_ust_heat(const Vector<double>& s) const
+    {
+      // Find number of nodes
+      unsigned n_node = nnode();
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = u_index_ust_heat();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Allocate space for the derivatives of the shape functions
+      DShape dpsidx(n_node, SPATIAL_DIM + 1);
+
+      //------------dshape_eulerian(s,psi,dpsidx)----------------------------
+      // Find the element dimension
+      const unsigned el_dim = this->dim();
+
+      // Get the values of the shape functions and their local derivatives;
+      // temporarily stored in dpsi
+      dshape_local_ust_heat(s, psi, dpsidx);
+
+      // Allocate memory for the inverse jacobian
+      DenseMatrix<double> inverse_jacobian(el_dim);
+
+      // Now calculate the inverse jacobian
+      local_to_eulerian_mapping(dpsidx, inverse_jacobian);
+
+      // Now set the values of the derivatives to be dpsidx
+      transform_derivatives(inverse_jacobian, dpsidx);
+      //------------dshape_eulerian(s,psi,dpsidx)----------------------------
+
+      // Initialise value of du/dt
+      double interpolated_dudt = 0.0;
+
+      // Loop over the local nodes and sum
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the interpolated du/dt value
+        interpolated_dudt +=
+          nodal_value(l, u_nodal_index) * dpsidx(l, SPATIAL_DIM);
+      }
+
+      // Return the interpolated du/dt value
+      return interpolated_dudt;
+    } // End of interpolated_du_dt_ust_heat
+
+
+    /// Self-test: Return 0 for OK
+    unsigned self_test();
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// local coordinate s; return Jacobian of mapping
+    virtual double dshape_and_dtest_eulerian_ust_heat(
+      const Vector<double>& s,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return  Jacobian of mapping
+    virtual double dshape_and_dtest_eulerian_at_knot_ust_heat(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const = 0;
+
+  protected:
+    /// Shape functions w.r.t. to local coords
+    virtual void shape_ust_heat(const Vector<double>& s, Shape& psi) const = 0;
+
+
+    /// Shape functions & derivs. w.r.t. to local coords
+    virtual void dshape_local_ust_heat(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsidx) const = 0;
+
+
+    /// Test functions & derivs. w.r.t. to local coords
+    virtual void dtest_local_ust_heat(const Vector<double>& s,
+                                      Shape& test,
+                                      DShape& dtestdx) const = 0;
+
+
+    /// Compute element residual Vector only (if flag=and/or element
+    /// Jacobian matrix
+    virtual void fill_in_generic_residual_contribution_ust_heat(
+      Vector<double>& residuals,
+      DenseMatrix<double>& jacobian,
+      const unsigned& flag);
+
+    /// Pointer to source function:
+    SpaceTimeUnsteadyHeatSourceFctPt Source_fct_pt;
+
+    /// Boolean flag to indicate if ALE formulation is disabled when
+    /// time-derivatives are computed. Only set to true if you're sure that
+    /// the mesh is stationary.
+    bool ALE_is_disabled;
+
+    /// Pointer to Alpha parameter (thermal inertia)
+    double* Alpha_pt;
+
+    /// Pointer to Beta parameter (thermal conductivity)
+    double* Beta_pt;
+
+  private:
+    /// Static default value for the Alpha parameter (thermal inertia):
+    /// One for natural scaling
+    static double Default_alpha_parameter;
+
+    /// Static default value for the Beta parameter (thermal
+    /// conductivity): One for natural scaling
+    static double Default_beta_parameter;
+  };
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  //=========================================================================
+  /// QUnsteadyHeatMixedOrderSpaceTimeElement elements are quadrilateral/brick-
+  /// shaped UnsteadyHeatMixedOrder elements with isoparametric interpolation
+  /// for the function.
+  //=========================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  class QUnsteadyHeatMixedOrderSpaceTimeElement
+    : public virtual QElement<SPATIAL_DIM + 1, NNODE_1D>,
+      public virtual SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>
+  {
+  public:
+    /// Constructor: Call constructors for QElement and
+    /// SpaceTimeUnsteadyHeatMixedOrder equations
+    QUnsteadyHeatMixedOrderSpaceTimeElement()
+      : QElement<SPATIAL_DIM + 1, NNODE_1D>(),
+        SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>()
+    {
+    }
+
+    /// Broken copy constructor
+    QUnsteadyHeatMixedOrderSpaceTimeElement(
+      const QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>&
+        dummy) = delete;
+
+    /// Required number of 'values' (pinned or dofs) at node n
+    inline unsigned required_nvalue(const unsigned& n) const
+    {
+      // Return the appropriate value
+      return Initial_Nvalue;
+    } // End of required_nvalue
+
+
+    /// Output function:
+    /// x,t,u   or   x,y,t,u
+    void output(std::ostream& outfile)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output(outfile);
+    } // End of output
+
+
+    /// Output function:
+    /// x,t,u   or   x,y,t,u at n_plot^(SPATIAL_DIM+1) plot points
+    void output(std::ostream& outfile, const unsigned& n_plot)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output(outfile,
+                                                                    n_plot);
+    } // End of output
+
+
+    /// C-style output function:
+    /// x,t,u   or   x,y,t,u
+    void output(FILE* file_pt)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output(file_pt);
+    } // End of output
+
+
+    /// C-style output function:
+    /// x,t,u   or   x,y,t,u at n_plot^(SPATIAL_DIM+1) plot points
+    void output(FILE* file_pt, const unsigned& n_plot)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output(file_pt,
+                                                                    n_plot);
+    } // End of output
+
+
+    /// Output function for an exact solution:
+    /// x,t,u_exact   or   x,y,t,u_exact at n_plot^(SPATIAL_DIM+1) plot points
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output_fct(
+        outfile, n_plot, exact_soln_pt);
+    } // End of output_fct
+
+
+    /// Output function for a time-dependent exact solution.
+    ///  x,t,u_exact   or    x,y,t,u_exact at n_plot^(SPATIAL_DIM+1) plot points
+    /// (Calls the unsteady version)
+    void output_fct(std::ostream& outfile,
+                    const unsigned& n_plot,
+                    const double& time,
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+    {
+      // Call the function in the base class
+      SpaceTimeUnsteadyHeatMixedOrderEquations<SPATIAL_DIM>::output_fct(
+        outfile, n_plot, time, exact_soln_pt);
+    } // End of output_fct
+
+
+    /// Shape/test functions & derivs. w.r.t. to global coords. Return Jacobian.
+    inline double dshape_and_dtest_eulerian_ust_heat(const Vector<double>& s,
+                                                     Shape& psi,
+                                                     DShape& dpsidx,
+                                                     Shape& test,
+                                                     DShape& dtestdx) const;
+
+    /// Shape/test functions and derivs w.r.t. to global coords at
+    /// integration point ipt; return Jacobian of mapping
+    inline double dshape_and_dtest_eulerian_at_knot_ust_heat(
+      const unsigned& ipt,
+      Shape& psi,
+      DShape& dpsidx,
+      Shape& test,
+      DShape& dtestdx) const;
+
+  protected:
+    /// Shape functions w.r.t. to local coords
+    inline void shape_ust_heat(const Vector<double>& s, Shape& psi) const;
+
+
+    /// Shape functions & derivs. w.r.t. to local coords
+    inline void dshape_local_ust_heat(const Vector<double>& s,
+                                      Shape& psi,
+                                      DShape& dpsidx) const;
+
+
+    /// Test functions & derivs. w.r.t. to local coords
+    inline void dtest_local_ust_heat(const Vector<double>& s,
+                                     Shape& test,
+                                     DShape& dtestdx) const;
+
+
+  private:
+    /// Static array of ints to hold number of variables at nodes:
+    /// Initial_Nvalue[n]
+    static const unsigned Initial_Nvalue;
+  };
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. local coordinates
+  ///
+  /// Galerkin: Test functions=shape functions
+  //======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  inline void QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>::
+    shape_ust_heat(const Vector<double>& s, Shape& psi) const
+  {
+    // Local storage (for 3D = 2D space + 1D time)
+    double psi_values[3][NNODE_1D];
+
+    // Index of the total shape function
+    unsigned index = 0;
+
+    // Call the 1D shape functions and derivatives
+    OneDimLagrange::shape<NNODE_1D>(s[0], psi_values[0]);
+    OneDimLagrange::shape<NNODE_1D>(s[1], psi_values[1]);
+
+    // Set the time discretisation
+    OneDimDiscontinuousGalerkinMixedOrderBasis::shape<NNODE_1D>(s[2],
+                                                                psi_values[2]);
+
+    // Loop over the nodes in the third local coordinate direction
+    for (unsigned k = 0; k < NNODE_1D; k++)
+    {
+      // Loop over the nodes in the second local coordinate direction
+      for (unsigned j = 0; j < NNODE_1D; j++)
+      {
+        // Loop over the nodes in the first local coordinate direction
+        for (unsigned i = 0; i < NNODE_1D; i++)
+        {
+          // Calculate the index-th entry of psi
+          psi[index] = psi_values[0][i] * psi_values[1][j] * psi_values[2][k];
+
+          // Increment the index
+          index++;
+        }
+      } // for (unsigned j=0;j<NNODE_1D;j++)
+    } // for (unsigned k=0;k<NNODE_1D;k++)
+  } // End of shape_ust_heat
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. local coordinates
+  ///
+  /// Galerkin: Test functions=shape functions
+  //======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  inline void QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>::
+    dshape_local_ust_heat(const Vector<double>& s,
+                          Shape& psi,
+                          DShape& dpsidx) const
+  {
+    // Local storage (for 3D = 2D space + 1D time)
+    double psi_values[3][NNODE_1D];
+    double dpsi_values[3][NNODE_1D];
+
+    // Index of the total shape function
+    unsigned index = 0;
+
+    // Call the 1D shape functions and derivatives
+    OneDimLagrange::shape<NNODE_1D>(s[0], psi_values[0]);
+    OneDimLagrange::shape<NNODE_1D>(s[1], psi_values[1]);
+    OneDimLagrange::dshape<NNODE_1D>(s[0], dpsi_values[0]);
+    OneDimLagrange::dshape<NNODE_1D>(s[1], dpsi_values[1]);
+
+    // Set the time discretisation
+    OneDimDiscontinuousGalerkinMixedOrderBasis::shape<NNODE_1D>(s[2],
+                                                                psi_values[2]);
+    OneDimDiscontinuousGalerkinMixedOrderBasis::dshape<NNODE_1D>(
+      s[2], dpsi_values[2]);
+
+    // Loop over the nodes in the third local coordinate direction
+    for (unsigned k = 0; k < NNODE_1D; k++)
+    {
+      // Loop over the nodes in the second local coordinate direction
+      for (unsigned j = 0; j < NNODE_1D; j++)
+      {
+        // Loop over the nodes in the first local coordinate direction
+        for (unsigned i = 0; i < NNODE_1D; i++)
+        {
+          // Calculate dpsi/ds_0
+          dpsidx(index, 0) =
+            dpsi_values[0][i] * psi_values[1][j] * psi_values[2][k];
+
+          // Calculate dpsi/ds_1
+          dpsidx(index, 1) =
+            psi_values[0][i] * dpsi_values[1][j] * psi_values[2][k];
+
+          // Calculate dpsi/ds_2
+          dpsidx(index, 2) =
+            psi_values[0][i] * psi_values[1][j] * dpsi_values[2][k];
+
+          // Calculate the index-th entry of psi
+          psi[index] = psi_values[0][i] * psi_values[1][j] * psi_values[2][k];
+
+          // Increment the index
+          index++;
+        }
+      } // for (unsigned j=0;j<NNODE_1D;j++)
+    } // for (unsigned k=0;k<NNODE_1D;k++)
+  } // End of dshape_local_ust_heat
+
+
+  //======================================================================
+  /// Define the test functions and derivatives w.r.t. local coordinates
+  //======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  inline void QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>::
+    dtest_local_ust_heat(const Vector<double>& s,
+                         Shape& test,
+                         DShape& dtestdx) const
+  {
+    // Local storage (for 3D = 2D space + 1D time)
+    double test_values[3][NNODE_1D];
+    double dtest_values[3][NNODE_1D];
+
+    // Index of the total shape function
+    unsigned index = 0;
+
+    // Call the 1D shape functions and derivatives
+    OneDimLagrange::shape<NNODE_1D>(s[0], test_values[0]);
+    OneDimLagrange::shape<NNODE_1D>(s[1], test_values[1]);
+    OneDimLagrange::dshape<NNODE_1D>(s[0], dtest_values[0]);
+    OneDimLagrange::dshape<NNODE_1D>(s[1], dtest_values[1]);
+
+    // Set the time discretisation
+    OneDimDiscontinuousGalerkinMixedOrderTest::shape<NNODE_1D>(s[2],
+                                                               test_values[2]);
+    OneDimDiscontinuousGalerkinMixedOrderTest::dshape<NNODE_1D>(
+      s[2], dtest_values[2]);
+
+    // Loop over the nodes in the third local coordinate direction
+    for (unsigned k = 0; k < NNODE_1D; k++)
+    {
+      // Loop over the nodes in the second local coordinate direction
+      for (unsigned j = 0; j < NNODE_1D; j++)
+      {
+        // Loop over the nodes in the first local coordinate direction
+        for (unsigned i = 0; i < NNODE_1D; i++)
+        {
+          // Calculate dtest/ds_0
+          dtestdx(index, 0) =
+            dtest_values[0][i] * test_values[1][j] * test_values[2][k];
+
+          // Calculate dtest/ds_1
+          dtestdx(index, 1) =
+            test_values[0][i] * dtest_values[1][j] * test_values[2][k];
+
+          // Calculate dtest/ds_2
+          dtestdx(index, 2) =
+            test_values[0][i] * test_values[1][j] * dtest_values[2][k];
+
+          // Calculate the index-th entry of test
+          test[index] =
+            test_values[0][i] * test_values[1][j] * test_values[2][k];
+
+          // Increment the index
+          index++;
+        }
+      } // for (unsigned j=0;j<NNODE_1D;j++)
+    } // for (unsigned k=0;k<NNODE_1D;k++)
+  } // End of dtest_local_ust_heat
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. global coordinates and return Jacobian of mapping.
+  ///
+  /// Galerkin: Test functions=shape functions
+  //======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  inline double QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>::
+    dshape_and_dtest_eulerian_ust_heat(const Vector<double>& s,
+                                       Shape& psi,
+                                       DShape& dpsidx,
+                                       Shape& test,
+                                       DShape& dtestdx) const
+  {
+    //--------------------------
+    // Call the shape functions:
+    //--------------------------
+    // Find the element dimension
+    const unsigned el_dim = this->dim();
+
+    // Make sure we're using 3D space-time elements
+    if (el_dim != 3)
+    {
+      // Create an output stream
+      std::ostringstream error_message_stream;
+
+      // Create an error message
+      error_message_stream << "Need 3D space-time elements for this to work!"
+                           << std::endl;
+
+      // Throw the error message
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Compute the geometric shape functions and also first derivatives
+    // w.r.t. local coordinates at local coordinate s
+    dshape_local_ust_heat(s, psi, dpsidx);
+
+    // Allocate memory for the inverse jacobian
+    DenseMatrix<double> inverse_jacobian(el_dim);
+
+    // Now calculate the inverse jacobian
+    const double det =
+      this->local_to_eulerian_mapping(dpsidx, inverse_jacobian);
+
+    // Now set the values of the derivatives to be dpsidx
+    this->transform_derivatives(inverse_jacobian, dpsidx);
+
+    //-------------------------
+    // Call the test functions:
+    //-------------------------
+    // Compute the geometric test functions and also first derivatives
+    // w.r.t. local coordinates at local coordinate s
+    dtest_local_ust_heat(s, test, dtestdx);
+
+    // Transform derivatives from dtest/ds to dtest/dx
+    this->transform_derivatives(inverse_jacobian, dtestdx);
+
+    // Return the determinant value
+    return det;
+  } // End of dshape_and_dtest_eulerian_ust_heat
+
+
+  //======================================================================
+  /// Define the shape functions and test functions and derivatives
+  /// w.r.t. global coordinates and return Jacobian of mapping.
+  ///
+  /// Galerkin: Test functions=shape functions
+  //======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  inline double QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>::
+    dshape_and_dtest_eulerian_at_knot_ust_heat(const unsigned& ipt,
+                                               Shape& psi,
+                                               DShape& dpsidx,
+                                               Shape& test,
+                                               DShape& dtestdx) const
+  {
+    // Find the element dimension
+    const unsigned el_dim = SPATIAL_DIM + 1;
+
+    // Storage for the local coordinates of the integration point
+    Vector<double> s(el_dim, 0.0);
+
+    // Set the local coordinate
+    for (unsigned i = 0; i < el_dim; i++)
+    {
+      // Calculate the i-th local coordinate at the ipt-th knot point
+      s[i] = this->integral_pt()->knot(ipt, i);
+    }
+
+    // Return the Jacobian of the geometrical shape functions and derivatives
+    return dshape_and_dtest_eulerian_ust_heat(s, psi, dpsidx, test, dtestdx);
+  } // End of dshape_and_dtest_eulerian_at_knot_ust_heat
+
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+
+  //=======================================================================
+  /// Face geometry for the QUnsteadyHeatMixedOrderSpaceTimeElement elements:
+  /// The spatial dimension of the face elements is one lower than that of the
+  /// bulk element but they have the same number of points along their 1D edges.
+  //=======================================================================
+  template<unsigned SPATIAL_DIM, unsigned NNODE_1D>
+  class FaceGeometry<
+    QUnsteadyHeatMixedOrderSpaceTimeElement<SPATIAL_DIM, NNODE_1D>>
+    : public virtual QElement<SPATIAL_DIM, NNODE_1D>
+  {
+  public:
+    /// Constructor: Call the constructor for the appropriate
+    /// lower-dimensional QElement
+    FaceGeometry() : QElement<SPATIAL_DIM, NNODE_1D>() {}
+  };
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+  //=======================================================================
+  /// Face geometry for the 1D QUnsteadyHeatMixedOrderSpaceTimeElement
+  /// elements: Point elements
+  //=======================================================================
+  template<unsigned NNODE_1D>
+  class FaceGeometry<QUnsteadyHeatMixedOrderSpaceTimeElement<1, NNODE_1D>>
+    : public virtual PointElement
+  {
+  public:
+    /// Constructor: Call the constructor for the appropriate
+    /// lower-dimensional QElement
+    FaceGeometry() : PointElement() {}
+  };
+
+
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+
+
+  //==========================================================
+  /// SpaceTimeUnsteadyHeatMixedOrder upgraded to become projectable
+  //==========================================================
+  template<class UNSTEADY_HEAT_ELEMENT>
+  class ProjectableUnsteadyHeatMixedOrderSpaceTimeElement
+    : public virtual ProjectableElement<UNSTEADY_HEAT_ELEMENT>
+  {
+  public:
+    /// Constructor [this was only required explicitly
+    /// from gcc 4.5.2 onwards...]
+    ProjectableUnsteadyHeatMixedOrderSpaceTimeElement() {}
+
+
+    /// Specify the values associated with field fld. The information
+    /// is returned in a vector of pairs which comprise the Data object and
+    /// the value within it, that correspond to field fld.
+    Vector<std::pair<Data*, unsigned>> data_values_of_field(const unsigned& fld)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream
+          << "SpaceTimeUnsteadyHeatMixedOrder elements only store a single "
+          << "field so fld must be 0 rather than " << fld << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // The number of nodes in this element
+      unsigned nnod = this->nnode();
+
+      // Storage for the pairs
+      Vector<std::pair<Data*, unsigned>> data_values(nnod);
+
+      // Loop over all nodes
+      for (unsigned j = 0; j < nnod; j++)
+      {
+        // Add the data value and associated field: The node itself
+        data_values[j] = std::make_pair(this->node_pt(j), fld);
+      }
+
+      // Return the vector
+      return data_values;
+    } // End of data_values_of_field
+
+
+    /// Number of fields to be projected: Just one
+    unsigned nfields_for_projection()
+    {
+      // Return the appropriate value
+      return 1;
+    } // End of nfields_for_projection
+
+
+    /// Number of history values to be stored for fld-th field.
+    /// (Note: count includes current value!)
+    unsigned nhistory_values_for_projection(const unsigned& fld)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream
+          << "SpaceTimeUnsteadyHeatMixedOrder elements only store a single "
+          << "field so fld must be 0 rather than " << fld << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Return the number of stored values
+      return this->node_pt(0)->ntstorage();
+    } // End of nhistory_values_for_projection
+
+
+    /// Number of positional history values (Note: count includes
+    /// current value!)
+    unsigned nhistory_values_for_coordinate_projection()
+    {
+      // Return the number of history values stored by the position timestepper
+      return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+    } // End of nhistory_values_for_coordinate_projection
+
+
+    /// Return Jacobian of mapping and shape functions of field fld
+    /// at local coordinate s
+    double jacobian_and_shape_of_field(const unsigned& fld,
+                                       const Vector<double>& s,
+                                       Shape& psi)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream
+          << "SpaceTimeUnsteadyHeatMixedOrder elements only store a single "
+          << "field so fld must be 0 rather than " << fld << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get the number of dimensions in the element
+      unsigned n_dim = this->dim();
+
+      // Get the number of nodes in the element
+      unsigned n_node = this->nnode();
+
+      // Allocate space for the test functions
+      Shape test(n_node);
+
+      // Allocate space for the derivatives of the shape functions
+      DShape dpsidx(n_node, n_dim);
+
+      // Allocate space for the derivatives of the test functions
+      DShape dtestdx(n_node, n_dim);
+
+      // Calculate the shape functions and their derivatives at the local
+      // coordinate s (and the same for the test functions). On top of this
+      // calculate the determinant of the Jacobian
+      double J =
+        this->dshape_and_dtest_eulerian_ust_heat(s, psi, dpsidx, test, dtestdx);
+
+      // Return the determinant of the Jacobian
+      return J;
+    } // End of jacobian_and_shape_of_field
+
+
+    /// Return interpolated field fld at local coordinate s, at time
+    /// level t (t=0: present; t>0: history values)
+    double get_field(const unsigned& t,
+                     const unsigned& fld,
+                     const Vector<double>& s)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream
+          << "SpaceTimeUnsteadyHeatMixedOrder elements only store a single "
+          << "field so fld must be 0 rather than " << fld << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Find the index at which the variable is stored
+      unsigned u_nodal_index = this->u_index_ust_heat();
+
+      // Get the number of nodes in the element
+      unsigned n_node = this->nnode();
+
+      // Local shape function
+      Shape psi(n_node);
+
+      // Find values of shape function
+      this->shape(s, psi);
+
+      // Initialise value of u
+      double interpolated_u = 0.0;
+
+      // Loop over the local nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Update the interpolated solution value
+        interpolated_u += this->nodal_value(t, l, u_nodal_index) * psi[l];
+      }
+
+      // Return the interpolated solution value
+      return interpolated_u;
+    } // End of get_field
+
+
+    /// Return number of values in field fld: One per node
+    unsigned nvalue_of_field(const unsigned& fld)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream
+          << "SpaceTimeUnsteadyHeatMixedOrder elements only store a single "
+          << "field so fld must be 0 rather than " << fld << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Return the number of nodes in the element
+      return this->nnode();
+    } // End of nvalue_of_field
+
+
+    /// Return local equation number of value j in field fld.
+    int local_equation(const unsigned& fld, const unsigned& j)
+    {
+#ifdef PARANOID
+      // If we're not dealing with the first field
+      if (fld != 0)
+      {
+        // Create a stringstream object to create an error message
+        std::stringstream error_stream;
+
+        // Create the error string
+        error_stream << "SpaceTimeUnsteadyHeatMixedOrder elements only store a "
+                     << "single field so fld must be 0 rather than " << fld
+                     << std::endl;
+
+        // Throw an error
+        throw OomphLibError(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // Get the nodal index of the unknown
+      const unsigned u_nodal_index = this->u_index_ust_heat();
+
+      // Output the local equation number
+      return this->nodal_local_eqn(j, u_nodal_index);
+    } // End of local_equation
+
+
+    /// Output FE representation of soln: x,t,u or x,y,t,u
+    /// at n_plot^(SPATIAL_DIM+1) plot points
+    void output(std::ostream& outfile, const unsigned& nplot)
+    {
+      // Get the dimension of the element
+      unsigned el_dim = this->dim();
+
+      // Vector of local coordinates
+      Vector<double> s(el_dim, 0.0);
+
+      // Tecplot header info
+      outfile << this->tecplot_zone_string(nplot);
+
+      // Get the number of plot points
+      unsigned num_plot_points = this->nplot_points(nplot);
+
+      // Loop over plot points
+      for (unsigned iplot = 0; iplot < num_plot_points; iplot++)
+      {
+        // Get local coordinates of plot point
+        this->get_s_plot(iplot, nplot, s);
+
+        // Loop over the coordinate directions
+        for (unsigned i = 0; i < el_dim; i++)
+        {
+          // Output the interpolated coordinates
+          outfile << this->interpolated_x(s, i) << " ";
+        }
+
+        // Output the interpolated value of u(s)
+        outfile << this->interpolated_u_ust_heat(s) << " ";
+
+        // Output the interpolated value of du/dt(s)
+        outfile << this->interpolated_du_dt_ust_heat(s) << " ";
+
+        // History values of coordinates
+        unsigned n_prev =
+          this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+
+        // Loop over the previous timesteps
+        for (unsigned t = 1; t < n_prev; t++)
+        {
+          // Loop over the coordinate directions
+          for (unsigned i = 0; i < el_dim; i++)
+          {
+            // Output the coordinates
+            outfile << this->interpolated_x(t, s, i) << " ";
+          }
+        } // for (unsigned t=1;t<n_prev;t++)
+
+        // Number of history values of velocities
+        n_prev = this->node_pt(0)->time_stepper_pt()->ntstorage();
+
+        // Loop over the previous timesteps
+        for (unsigned t = 1; t < n_prev; t++)
+        {
+          // Output the solution
+          outfile << this->interpolated_u_ust_heat(t, s) << " ";
+        }
+
+        // Finish the line
+        outfile << std::endl;
+      } // for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+
+      // Write tecplot footer (e.g. FE connectivity lists)
+      this->write_tecplot_zone_footer(outfile, nplot);
+    } // End of output
+  };
+
+
+  //=======================================================================
+  /// Face geometry for element is the same as that for the underlying
+  /// wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<ProjectableUnsteadyHeatMixedOrderSpaceTimeElement<ELEMENT>>
+    : public virtual FaceGeometry<ELEMENT>
+  {
+  public:
+    FaceGeometry() : FaceGeometry<ELEMENT>() {}
+  };
+
+
+  //=======================================================================
+  /// Face geometry of the Face Geometry for element is the same as
+  /// that for the underlying wrapped element
+  //=======================================================================
+  template<class ELEMENT>
+  class FaceGeometry<
+    FaceGeometry<ProjectableUnsteadyHeatMixedOrderSpaceTimeElement<ELEMENT>>>
+    : public virtual FaceGeometry<FaceGeometry<ELEMENT>>
+  {
+  public:
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT>>() {}
+  };
+} // End of namespace oomph
+
+#endif

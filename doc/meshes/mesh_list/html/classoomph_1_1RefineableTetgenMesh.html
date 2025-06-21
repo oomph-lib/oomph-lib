@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>oomph-lib: oomph::RefineableTetgenMesh&lt; ELEMENT &gt; Class Template Reference</title>
+<link rel="apple-touch-icon" sizes="57x57" href="../../../figures/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="../../../figures/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../../../figures/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="../../../figures/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../../../figures/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="../../../figures/apple-touch-icon-120x120.png">
+<link rel="icon" type="image/png" href="../../../figures/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../figures/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="../../../figures/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="../../../figures/manifest.json">
+<link rel="mask-icon" href="../../../figures/safari-pinned-tab.svg" color="#008000">
+<link rel="shortcut icon" href="../../../figures/favicon.ico">
+<meta name="msapplication-TileColor" content="#00a300">
+<meta name="msapplication-config" content="../../../figures/browserconfig.xml">
+<meta name="theme-color" content="#008000">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+<!-- Doxygen css-->
+<!-- <link rel="stylesheet" type="text/css" href="doxygen.css"> -->
+<!-- Bootstrap -->
+<link href="../../../css/bootstrap.css" rel="stylesheet">
+<!-- oomph-lib specific overrides -->
+<link rel="stylesheet" type="text/css" href="../../../css/oomph_header.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+<div class="container">
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="../../../html/index.html"><img alt="oomph-lib" src="../../../figures/oomph_logo.png"></a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">          
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header">Big picture</li>
+          <li><a href="../../../../doc/intro/html/index.html">The finite element method</a></li>
+          <li><a href="../../../../doc/the_data_structure/html/index.html">The data structure</a></li>
+          <li><a href="../../../../doc/quick_guide/html/index.html">Not-so-quick guide</a></li>
+          <li><a href="../../../../doc/optimisation/html/index.html">Optimisation</a></li>
+          <li><a href="../../../../doc/order_of_action_functions/html/index.html">Order of action functions</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Example codes and tutorials</li>
+          <li><a href="../../../../doc/example_code_list/html/index.html">List of example codes and tutorials</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#meshes">Meshing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#solvers">Solvers</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#parallel">MPI parallel processing</a></li>
+          <li><a href="../../../../doc/example_code_list/html/index.html#visualisation">Post-processing/visualisation</a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header">Other</li>
+          <li><a href="../../../../doc/change_log/html/index.html">Change log</a></li>
+          <li><a href="../../../../doc/creating_doc/html/index.html">Creating documentation</a></li>
+          <li><a href="../../../../doc/coding_conventions/html/index.html">Coding conventions</a></li>
+          <li><a href="../../../../doc/index/html/index.html">Index</a></li>
+          <li><a href="../../../../doc/FAQ/html/index.html">FAQ</a></li>
+        </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../../../../doc/people/html/index.html">People</a></li>            
+            <li><a href="../../../../doc/contact/html/index.html">Contact/Get involved</a></li>
+            <li><a href="../../../../doc/publications/html/index.html">Publications</a></li>
+            <li><a href="../../../../doc/acknowledgements/html/index.html">Acknowledgements</a></li>
+            <li><a href="../../../../doc/copyright/html/index.html">Copyright</a></li>
+            <li><a href="../../../../doc/picture_show/index.html">Picture show</a></li>
+          </ul>
+        </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar-search">
+      <form class="navbar-form" role="search" action="../../../../doc/search_results/html/index.html">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="q">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go</button>
+          </span>
+        </div><!-- /input-group -->
+       <!--<div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>-->
+      </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</div>
+</nav>
+<!-- Generated by Doxygen 1.9.8 -->
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespaceoomph.html">oomph</a></li><li class="navelem"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html">RefineableTetgenMesh</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="classoomph_1_1RefineableTetgenMesh-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">oomph::RefineableTetgenMesh&lt; ELEMENT &gt; Class Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::RefineableTetgenMesh&lt; ELEMENT &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1RefineableTetgenMesh.png" usemap="#oomph::RefineableTetgenMesh_3C_20ELEMENT_20_3E_map" alt=""/>
+  <map id="oomph::RefineableTetgenMesh_3C_20ELEMENT_20_3E_map" name="oomph::RefineableTetgenMesh_3C_20ELEMENT_20_3E_map">
+<area href="classoomph_1_1TetgenMesh.html" title="Unstructured tet mesh based on output from Tetgen: http://wias-berlin.de/software/tetgen/." alt="oomph::TetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="0,56,294,80"/>
+<area href="classoomph_1_1RefineableSolidTetgenMesh.html" alt="oomph::RefineableSolidTetgenMesh&lt; ELEMENT &gt;" shape="rect" coords="152,168,446,192"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:abb04c6b7cd68bd23907886dd8d880e5f" id="r_abb04c6b7cd68bd23907886dd8d880e5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#abb04c6b7cd68bd23907886dd8d880e5f">RefineableTetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedClosedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;outer_boundary_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">internal_closed_surface_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;element_volume, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">split_corner_elements</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">target_element_volume_in_region_pt</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">nullptr</a>)</td></tr>
+<tr class="memdesc:abb04c6b7cd68bd23907886dd8d880e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetMeshFacetedClosedSurface that specifies the outer boundary of the domain and any number of internal closed curves, specified by TetMeshFacetedSurfaces. Also specify target volume for uniform element size.  <br /></td></tr>
+<tr class="separator:abb04c6b7cd68bd23907886dd8d880e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ac6c6961647d0f332a6742f52dd27d" id="r_ac2ac6c6961647d0f332a6742f52dd27d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">virtual</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ac2ac6c6961647d0f332a6742f52dd27d">~RefineableTetgenMesh</a> ()</td></tr>
+<tr class="memdesc:ac2ac6c6961647d0f332a6742f52dd27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor.  <br /></td></tr>
+<tr class="separator:ac2ac6c6961647d0f332a6742f52dd27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ddc94b2545c82bfb2795583f9b98db2" id="r_a5ddc94b2545c82bfb2795583f9b98db2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a5ddc94b2545c82bfb2795583f9b98db2">refine_uniformly</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">DocInfo</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">doc_info</a>)</td></tr>
+<tr class="memdesc:a5ddc94b2545c82bfb2795583f9b98db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refine mesh uniformly and doc process.  <br /></td></tr>
+<tr class="separator:a5ddc94b2545c82bfb2795583f9b98db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add609c3184ffa1786e183f4c6dc24a57" id="r_add609c3184ffa1786e183f4c6dc24a57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#add609c3184ffa1786e183f4c6dc24a57">unrefine_uniformly</a> ()</td></tr>
+<tr class="memdesc:add609c3184ffa1786e183f4c6dc24a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unrefine mesh uniformly: Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level)  <br /></td></tr>
+<tr class="separator:add609c3184ffa1786e183f4c6dc24a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75ff5f1e088e611311c3f6a30feea5b" id="r_ad75ff5f1e088e611311c3f6a30feea5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ad75ff5f1e088e611311c3f6a30feea5b">adapt</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">elem_error</a>)</td></tr>
+<tr class="memdesc:ad75ff5f1e088e611311c3f6a30feea5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapt mesh, based on elemental error provided.  <br /></td></tr>
+<tr class="separator:ad75ff5f1e088e611311c3f6a30feea5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c2bb21844f02403fa687fefc55ba5ad" id="r_a3c2bb21844f02403fa687fefc55ba5ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a3c2bb21844f02403fa687fefc55ba5ad">projection_is_disabled</a> ()</td></tr>
+<tr class="memdesc:a3c2bb21844f02403fa687fefc55ba5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is projection of old solution onto new mesh disabled?  <br /></td></tr>
+<tr class="separator:a3c2bb21844f02403fa687fefc55ba5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5342732d4a4e715a443688a53801c00" id="r_af5342732d4a4e715a443688a53801c00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#af5342732d4a4e715a443688a53801c00">disable_projection</a> ()</td></tr>
+<tr class="memdesc:af5342732d4a4e715a443688a53801c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <br /></td></tr>
+<tr class="separator:af5342732d4a4e715a443688a53801c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fabe6ae591918c313213fd0528e21d1" id="r_a7fabe6ae591918c313213fd0528e21d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a7fabe6ae591918c313213fd0528e21d1">enable_projection</a> ()</td></tr>
+<tr class="memdesc:a7fabe6ae591918c313213fd0528e21d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of old solution onto new mesh.  <br /></td></tr>
+<tr class="separator:a7fabe6ae591918c313213fd0528e21d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a2d2c7796e578f9fed1faf17569893531"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a2d2c7796e578f9fed1faf17569893531">TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
+<tr class="separator:a2d2c7796e578f9fed1faf17569893531 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a10976b817c361f04da4ce996bd019c02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a10976b817c361f04da4ce996bd019c02">TetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">node_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">element_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">face_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files.  <br /></td></tr>
+<tr class="separator:a10976b817c361f04da4ce996bd019c02 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh" id="r_ace863f736d0dfa0a059b28959fced51d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ace863f736d0dfa0a059b28959fced51d">TetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgen_data</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgenio data structure.  <br /></td></tr>
+<tr class="separator:ace863f736d0dfa0a059b28959fced51d inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a867b3f70bd0f5063901720d04f28e95e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a867b3f70bd0f5063901720d04f28e95e">TetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">node_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">element_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> std::string &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">face_file_name</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">split_corner_elements</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with the input files. Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution.  <br /></td></tr>
+<tr class="separator:a867b3f70bd0f5063901720d04f28e95e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a0fa783641ea515a942941425c468df01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a0fa783641ea515a942941425c468df01">TetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgen_data</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">split_corner_elements</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with tetgen data structure Setting the boolean flag to true splits "corner" elements, i.e. elements that that have at least three faces on a domain boundary. The relevant elements are split without introducing hanging nodes so the sons have a "worse" shape than their fathers. However, this step avoids otherwise-hard-to-diagnose problems in fluids problems where the application of boundary conditions at such "corner" elements can overconstrain the solution.  <br /></td></tr>
+<tr class="separator:a0fa783641ea515a942941425c468df01 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb8cf6353e81ff354a91f5622dece25 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a5bb8cf6353e81ff354a91f5622dece25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a5bb8cf6353e81ff354a91f5622dece25">TetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedClosedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;outer_boundary_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;internal_surface_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;element_volume, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">split_corner_elements</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">target_element_volume_in_region_pt</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">nullptr</a>)</td></tr>
+<tr class="memdesc:a5bb8cf6353e81ff354a91f5622dece25 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh, based on a TetgenMeshFactedClosedSurface that specifies the outer boundary of the domain and any number of internal boundaries, specified by TetMeshFacetedSurfaces. Also specify target size for uniform element size. Optionally specify the target element volume in each region.  <br /></td></tr>
+<tr class="separator:a5bb8cf6353e81ff354a91f5622dece25 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08c5b23d5b384729a3674d78f9f63bf inherit pub_methods_classoomph_1_1TetgenMesh" id="r_ab08c5b23d5b384729a3674d78f9f63bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab08c5b23d5b384729a3674d78f9f63bf">build_tetgenio</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;outer_boundary_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;internal_surface_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">target_element_volume_in_region_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgen_io</a>)</td></tr>
+<tr class="memdesc:ab08c5b23d5b384729a3674d78f9f63bf inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build tetgenio object from the TetMeshFacetedSurfaces.  <br /></td></tr>
+<tr class="separator:ab08c5b23d5b384729a3674d78f9f63bf inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a9a83c64b6481463161f6eb87f347ee9e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9a83c64b6481463161f6eb87f347ee9e">~TetgenMesh</a> ()</td></tr>
+<tr class="memdesc:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty destructor.  <br /></td></tr>
+<tr class="separator:a9a83c64b6481463161f6eb87f347ee9e inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a9c0441ea7404e7ea404979955ffbb5dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a9c0441ea7404e7ea404979955ffbb5dd">set_mesh_level_time_stepper</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">preserve_existing_data</a>)</td></tr>
+<tr class="memdesc:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload set_mesh_level_time_stepper so that the stored time stepper now corresponds to the new timestepper.  <br /></td></tr>
+<tr class="separator:a9c0441ea7404e7ea404979955ffbb5dd inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh" id="r_aeab19209f141e65511a52f195d89d6ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#aeab19209f141e65511a52f195d89d6ac">tetgenio_exists</a> () <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a></td></tr>
+<tr class="memdesc:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolen defining whether tetgenio object has been built or not.  <br /></td></tr>
+<tr class="separator:aeab19209f141e65511a52f195d89d6ac inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f80936c6c66947f304286605b2046ba inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a4f80936c6c66947f304286605b2046ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a4f80936c6c66947f304286605b2046ba">tetgenio_pt</a> ()</td></tr>
+<tr class="memdesc:a4f80936c6c66947f304286605b2046ba inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the triangulateio representation of the mesh.  <br /></td></tr>
+<tr class="separator:a4f80936c6c66947f304286605b2046ba inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a8758320eb646d20b578414c35145f0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a8758320eb646d20b578414c35145f0d7">set_deep_copy_tetgenio_pt</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1TetgenMesh.html#a4f80936c6c66947f304286605b2046ba">tetgenio_pt</a>)</td></tr>
+<tr class="memdesc:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tetgen pointer by a deep copy.  <br /></td></tr>
+<tr class="separator:a8758320eb646d20b578414c35145f0d7 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e764a63a21a93d4a2548058eb1a7c4 inherit pub_methods_classoomph_1_1TetgenMesh" id="r_a93e764a63a21a93d4a2548058eb1a7c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a93e764a63a21a93d4a2548058eb1a7c4">deep_copy_of_tetgenio</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">input_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *&amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">output_pt</a>)</td></tr>
+<tr class="memdesc:a93e764a63a21a93d4a2548058eb1a7c4 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer tetgenio data from the input to the output The output is assumed to have been constructed and "empty".  <br /></td></tr>
+<tr class="separator:a93e764a63a21a93d4a2548058eb1a7c4 inherit pub_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae1cdeb38e28b0840cc3b53d76f353e89" id="r_ae1cdeb38e28b0840cc3b53d76f353e89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#ae1cdeb38e28b0840cc3b53d76f353e89">RefineableTetgenMesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">target_volume</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgen_io_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedClosedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;outer_boundary_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;internal_surface_pt, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>=&amp;Mesh::Default_TimeStepper, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>=<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a>)</td></tr>
+<tr class="memdesc:ae1cdeb38e28b0840cc3b53d76f353e89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialised constructor used during adaptation only. Element sizes are specified by vector tetgen_io is passed in from previous mesh (is then modified to build new mesh) Ditto with use_attributes, which comes from the previous mesh.  <br /></td></tr>
+<tr class="separator:ae1cdeb38e28b0840cc3b53d76f353e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ed78a656617d294c73118eda904253" id="r_a78ed78a656617d294c73118eda904253"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a78ed78a656617d294c73118eda904253">initialise_adaptation_data</a> ()</td></tr>
+<tr class="memdesc:a78ed78a656617d294c73118eda904253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to initialise data associated with adaptation.  <br /></td></tr>
+<tr class="separator:a78ed78a656617d294c73118eda904253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48331c4310ecbad71e98b482d0d3ea0c" id="r_a48331c4310ecbad71e98b482d0d3ea0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a48331c4310ecbad71e98b482d0d3ea0c">update_faceted_surface_using_face_mesh</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> *&amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">faceted_surface_pt</a>)</td></tr>
+<tr class="memdesc:a48331c4310ecbad71e98b482d0d3ea0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function that updates the input faceted surface by using the flattened elements from FaceMesh(es) that are constructed for the boundaries associated with the segments of the polygon.  <br /></td></tr>
+<tr class="separator:a48331c4310ecbad71e98b482d0d3ea0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001c3ff513cabdfbd67c65bd97ebb768" id="r_a001c3ff513cabdfbd67c65bd97ebb768"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a001c3ff513cabdfbd67c65bd97ebb768">surface_remesh_for_inner_hole_boundaries</a> ()</td></tr>
+<tr class="memdesc:a001c3ff513cabdfbd67c65bd97ebb768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new faceted representation of the inner hole boundaries.  <br /></td></tr>
+<tr class="separator:a001c3ff513cabdfbd67c65bd97ebb768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9eea5998765dc36b96a2050db3e1e3" id="r_acf9eea5998765dc36b96a2050db3e1e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#acf9eea5998765dc36b96a2050db3e1e3">snap_nodes_onto_boundary</a> (<a class="el" href="classoomph_1_1RefineableTetgenMesh.html">RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; *&amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">new_mesh_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">b</a>)</td></tr>
+<tr class="memdesc:acf9eea5998765dc36b96a2050db3e1e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Snap the boundary nodes onto any curvilinear boundaries.  <br /></td></tr>
+<tr class="separator:acf9eea5998765dc36b96a2050db3e1e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh" id="r_a3b0d214cb14243f7ecc2c82e6641930b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a3b0d214cb14243f7ecc2c82e6641930b">build_from_scaffold</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">time_stepper_pt</a>, <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">use_attributes</a>)</td></tr>
+<tr class="memdesc:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build mesh from scaffold.  <br /></td></tr>
+<tr class="separator:a3b0d214cb14243f7ecc2c82e6641930b inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh" id="r_a685e57d2adeb2a378ffc7e244e38c910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a685e57d2adeb2a378ffc7e244e38c910">setup_reverse_lookup_schemes_for_faceted_surface</a> (<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">faceted_surface_pt</a>)</td></tr>
+<tr class="memdesc:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to setup the reverse look-up schemes.  <br /></td></tr>
+<tr class="separator:a685e57d2adeb2a378ffc7e244e38c910 inherit pro_methods_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a274ebedf983f3b34620fa2bbb1980fcd" id="r_a274ebedf983f3b34620fa2bbb1980fcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a274ebedf983f3b34620fa2bbb1980fcd">Projection_is_disabled</a></td></tr>
+<tr class="memdesc:a274ebedf983f3b34620fa2bbb1980fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable projection of solution onto new mesh during adaptation.  <br /></td></tr>
+<tr class="separator:a274ebedf983f3b34620fa2bbb1980fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b505d4bfd018471ef1543e18ae5fce" id="r_a72b505d4bfd018471ef1543e18ae5fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html#a72b505d4bfd018471ef1543e18ae5fce">Corner_elements_must_be_split</a></td></tr>
+<tr class="memdesc:a72b505d4bfd018471ef1543e18ae5fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Corner elements which have all of their nodes on the outer boundary are to be split into elements which have some non-boundary nodes.  <br /></td></tr>
+<tr class="separator:a72b505d4bfd018471ef1543e18ae5fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classoomph_1_1TetgenMesh"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classoomph_1_1TetgenMesh')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classoomph_1_1TetgenMesh.html">oomph::TetgenMesh&lt; ELEMENT &gt;</a></td></tr>
+<tr class="memitem:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh" id="r_ac11e90fcf927bbf8317800db7723bad2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetgenScaffoldMesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ac11e90fcf927bbf8317800db7723bad2">Tmp_mesh_pt</a></td></tr>
+<tr class="memdesc:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary scaffold mesh.  <br /></td></tr>
+<tr class="separator:ac11e90fcf927bbf8317800db7723bad2 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh" id="r_ab9aa31216620790d084d133b8781be37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#ab9aa31216620790d084d133b8781be37">Tetgenio_exists</a></td></tr>
+<tr class="memdesc:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean to indicate whether a tetgenio representation of the mesh exists.  <br /></td></tr>
+<tr class="separator:ab9aa31216620790d084d133b8781be37 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh" id="r_a508672e33aa773da58c834a526cb5c59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a508672e33aa773da58c834a526cb5c59">Tetgenio_pt</a></td></tr>
+<tr class="memdesc:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tetgen representation of mesh.  <br /></td></tr>
+<tr class="separator:a508672e33aa773da58c834a526cb5c59 inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh" id="r_a94c4ac3940ecfdd87679167d300ce75d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetgenMesh.html#a94c4ac3940ecfdd87679167d300ce75d">Use_attributes</a></td></tr>
+<tr class="memdesc:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean flag to indicate whether to use attributes or not (required for multidomain meshes)  <br /></td></tr>
+<tr class="separator:a94c4ac3940ecfdd87679167d300ce75d inherit pro_attribs_classoomph_1_1TetgenMesh"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a>&gt;<br />
+class oomph::RefineableTetgenMesh&lt; ELEMENT &gt;</div>
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00046">46</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abb04c6b7cd68bd23907886dd8d880e5f" name="abb04c6b7cd68bd23907886dd8d880e5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb04c6b7cd68bd23907886dd8d880e5f">&#9670;&#160;</a></span>RefineableTetgenMesh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::RefineableTetgenMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedClosedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_closed_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &amp;&#160;</td>
+          <td class="paramname"><em>element_volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>split_corner_elements</em> = <code><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>target_element_volume_in_region_pt</em> = <code><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">nullptr</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Build mesh, based on a TetMeshFacetedClosedSurface that specifies the outer boundary of the domain and any number of internal closed curves, specified by TetMeshFacetedSurfaces. Also specify target volume for uniform element size. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00054">54</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00275">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>.</p>
+
+</div>
+</div>
+<a id="ae1cdeb38e28b0840cc3b53d76f353e89" name="ae1cdeb38e28b0840cc3b53d76f353e89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1cdeb38e28b0840cc3b53d76f353e89">&#9670;&#160;</a></span>RefineableTetgenMesh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::RefineableTetgenMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>target_volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">tetgenio</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>tetgen_io_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedClosedSurface</a> *<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>outer_boundary_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>internal_surface_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TimeStepper</a> *&#160;</td>
+          <td class="paramname"><em>time_stepper_pt</em> = <code>&amp;Mesh::Default_TimeStepper</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> &amp;&#160;</td>
+          <td class="paramname"><em>use_attributes</em> = <code><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">false</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specialised constructor used during adaptation only. Element sizes are specified by vector tetgen_io is passed in from previous mesh (is then modified to build new mesh) Ditto with use_attributes, which comes from the previous mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00081">81</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00048">oomph::TetgenMesh&lt; ELEMENT &gt;::build_from_scaffold()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00854">oomph::TetgenMesh&lt; ELEMENT &gt;::deep_copy_of_tetgenio()</a>, <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00275">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>, <a class="el" href="tetgen__mesh_8h_source.html#l00749">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_exists</a>, <a class="el" href="tetgen__mesh_8h_source.html#l00752">oomph::TetgenMesh&lt; ELEMENT &gt;::Tetgenio_pt</a>, and <a class="el" href="tetgen__mesh_8h_source.html#l00745">oomph::TetgenMesh&lt; ELEMENT &gt;::Tmp_mesh_pt</a>.</p>
+
+</div>
+</div>
+<a id="ac2ac6c6961647d0f332a6742f52dd27d" name="ac2ac6c6961647d0f332a6742f52dd27d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ac6c6961647d0f332a6742f52dd27d">&#9670;&#160;</a></span>~RefineableTetgenMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">virtual</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::~<a class="el" href="classoomph_1_1RefineableTetgenMesh.html">RefineableTetgenMesh</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Empty Destructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00228">228</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad75ff5f1e088e611311c3f6a30feea5b" name="ad75ff5f1e088e611311c3f6a30feea5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad75ff5f1e088e611311c3f6a30feea5b">&#9670;&#160;</a></span>adapt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::adapt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">Vector</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">double</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>elem_error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adapt mesh, based on elemental error provided. </p>
+<p>Adapt problem based on specified elemental error estimates. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00453">453</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html">refineable_tetgen_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="af5342732d4a4e715a443688a53801c00" name="af5342732d4a4e715a443688a53801c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5342732d4a4e715a443688a53801c00">&#9670;&#160;</a></span>disable_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::disable_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable projection of old solution onto new mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00262">262</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00298">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="a7fabe6ae591918c313213fd0528e21d1" name="a7fabe6ae591918c313213fd0528e21d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fabe6ae591918c313213fd0528e21d1">&#9670;&#160;</a></span>enable_projection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::enable_projection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable projection of old solution onto new mesh. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00268">268</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00298">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="a78ed78a656617d294c73118eda904253" name="a78ed78a656617d294c73118eda904253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78ed78a656617d294c73118eda904253">&#9670;&#160;</a></span>initialise_adaptation_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::initialise_adaptation_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function to initialise data associated with adaptation. </p>
+<p>By default we project solution onto new mesh during adaptation</p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00275">275</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00298">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::Projection_is_disabled</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00081">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>, and <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00054">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::RefineableTetgenMesh()</a>.</p>
+
+</div>
+</div>
+<a id="a3c2bb21844f02403fa687fefc55ba5ad" name="a3c2bb21844f02403fa687fefc55ba5ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c2bb21844f02403fa687fefc55ba5ad">&#9670;&#160;</a></span>projection_is_disabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::projection_is_disabled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is projection of old solution onto new mesh disabled? </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00256">256</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00298">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::Projection_is_disabled</a>.</p>
+
+</div>
+</div>
+<a id="a5ddc94b2545c82bfb2795583f9b98db2" name="a5ddc94b2545c82bfb2795583f9b98db2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ddc94b2545c82bfb2795583f9b98db2">&#9670;&#160;</a></span>refine_uniformly()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::refine_uniformly </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">DocInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>doc_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refine mesh uniformly and doc process. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00231">231</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="acf9eea5998765dc36b96a2050db3e1e3" name="acf9eea5998765dc36b96a2050db3e1e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf9eea5998765dc36b96a2050db3e1e3">&#9670;&#160;</a></span>snap_nodes_onto_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::snap_nodes_onto_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1RefineableTetgenMesh.html">RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; *&amp;&#160;</td>
+          <td class="paramname"><em>new_mesh_pt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">const</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Snap the boundary nodes onto any curvilinear boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00249">249</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html">refineable_tetgen_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="a001c3ff513cabdfbd67c65bd97ebb768" name="a001c3ff513cabdfbd67c65bd97ebb768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a001c3ff513cabdfbd67c65bd97ebb768">&#9670;&#160;</a></span>surface_remesh_for_inner_hole_boundaries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::surface_remesh_for_inner_hole_boundaries </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a new faceted representation of the inner hole boundaries. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00230">230</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html">refineable_tetgen_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<a id="add609c3184ffa1786e183f4c6dc24a57" name="add609c3184ffa1786e183f4c6dc24a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add609c3184ffa1786e183f4c6dc24a57">&#9670;&#160;</a></span>unrefine_uniformly()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">unsigned</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::unrefine_uniformly </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unrefine mesh uniformly: Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level) </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00242">242</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a48331c4310ecbad71e98b482d0d3ea0c" name="a48331c4310ecbad71e98b482d0d3ea0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48331c4310ecbad71e98b482d0d3ea0c">&#9670;&#160;</a></span>update_faceted_surface_using_face_mesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">void</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::update_faceted_surface_using_face_mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">TetMeshFacetedSurface</a> *&amp;&#160;</td>
+          <td class="paramname"><em>faceted_surface_pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper function that updates the input faceted surface by using the flattened elements from FaceMesh(es) that are constructed for the boundaries associated with the segments of the polygon. </p>
+<p>List of vertex nodes</p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00052">52</a> of file <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html">refineable_tetgen_mesh.template.cc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a72b505d4bfd018471ef1543e18ae5fce" name="a72b505d4bfd018471ef1543e18ae5fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72b505d4bfd018471ef1543e18ae5fce">&#9670;&#160;</a></span>Corner_elements_must_be_split</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::Corner_elements_must_be_split</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Corner elements which have all of their nodes on the outer boundary are to be split into elements which have some non-boundary nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00303">303</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+</div>
+</div>
+<a id="a274ebedf983f3b34620fa2bbb1980fcd" name="a274ebedf983f3b34620fa2bbb1980fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274ebedf983f3b34620fa2bbb1980fcd">&#9670;&#160;</a></span>Projection_is_disabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">class</a> <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">bool</a> <a class="el" href="classoomph_1_1RefineableTetgenMesh.html">oomph::RefineableTetgenMesh</a>&lt; <a class="el" href="classoomph_1_1SimpleRectangularQuadMesh.html">ELEMENT</a> &gt;::Projection_is_disabled</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disable projection of solution onto new mesh during adaptation. </p>
+
+<p class="definition">Definition at line <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00298">298</a> of file <a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00262">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::disable_projection()</a>, <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00268">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::enable_projection()</a>, <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00275">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::initialise_adaptation_data()</a>, and <a class="el" href="refineable__tetgen__mesh_8h_source.html#l00256">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::projection_is_disabled()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="refineable__tetgen__mesh_8h_source.html">refineable_tetgen_mesh.h</a></li>
+<li><a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html">refineable_tetgen_mesh.template.cc</a></li>
+</ul>
+</div><!-- contents -->
+
+    <!-- jQuery for Bootstrap and Doxygen -->
+    <script src="../../../js/jquery-1.12.0.min.js"></script>
+    <!-- Minified boostrap plugins-->
+    <script src="../../../js/bootstrap.js"></script>
+    <!-- Doxygen dependency to add powertips to source code-->
+    <script src="../../../js/jquery.powertip.min.js"></script>
+    <!-- The  following script is generated by doxygen and hides/shows levels in 
+         the data structure lists and adds powertips to source code-->
+    <script src="../../../js/dynsections.js" ></script>
+    <!-- add to Doxygen's class names so bootstrap css and js recognises them-->
+    <script type="text/javascript">
+    $(".contents").addClass("container");
+    $(".header").addClass("container");
+    $(".navpath").addClass("container");
+    $("#navrow3").addClass("container");
+    $("#navrow4").addClass("container");
+    $(".mlabel").addClass("label");
+    $(".mlabel").addClass("label-default");
+    $(".memitem").addClass("panel");
+    $(".memitem").addClass("panel-info");
+    $(".memproto").addClass("panel-heading");
+    $(".memdoc").addClass("panel-body");
+    </script>
+    <footer>
+      <div class="container">
+        <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Sat Jun 21 2025 10:10:50
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
